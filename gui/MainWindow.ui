@@ -759,11 +759,22 @@
     <property name="title">
      <string>View</string>
     </property>
+    <widget class="QMenu" name="menuStyle">
+     <property name="title">
+      <string>Style</string>
+     </property>
+     <addaction name="actionStylePlastique"/>
+     <addaction name="actionStyleCleanlooks"/>
+     <addaction name="actionStyleWindows"/>
+     <addaction name="actionStyleClassic"/>
+    </widget>
     <addaction name="actionSourceFiles"/>
     <addaction name="actionOutputDirectory"/>
     <addaction name="actionCompression"/>
     <addaction name="actionMetaData"/>
     <addaction name="actionAdvancedOptions"/>
+    <addaction name="separator"/>
+    <addaction name="menuStyle"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -842,7 +853,7 @@
      <normaloff>:/icons/world.png</normaloff>:/icons/world.png</iconset>
    </property>
    <property name="text">
-    <string>Visit Official Homepage</string>
+    <string>Visit Official Web-Site</string>
    </property>
    <property name="toolTip">
     <string>Visit Official Web-Site</string>
@@ -875,9 +886,46 @@
     <string>Clear All</string>
    </property>
   </action>
+  <action name="actionStylePlastique">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Plastique</string>
+   </property>
+  </action>
+  <action name="actionStyleCleanlooks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Cleanlooks</string>
+   </property>
+  </action>
+  <action name="actionStyleWindows">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Windows</string>
+   </property>
+  </action>
+  <action name="actionStyleClassic">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Classic</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

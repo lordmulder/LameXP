@@ -48,6 +48,7 @@ private slots:
 	void editMetaButtonClicked(void);
 	void tabPageChanged(int idx);
 	void tabActionActivated(QAction *action);
+	void styleActionActivated(QAction *action);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void makeFolderButtonClicked(void);
 	void gotoHomeFolderButtonClicked(void);
@@ -61,5 +62,6 @@ private:
 	FileListModel *m_fileListModel;
 	QFileSystemModel *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;
+	QActionGroup *m_styleActionGroup;
 	WorkingBanner *m_banner;
 };

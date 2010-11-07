@@ -38,6 +38,10 @@
 #include <QFileSystemModel>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QPlastiqueStyle>
+#include <QCleanlooksStyle>
+#include <QWindowsVistaStyle>
+#include <QWindowsStyle>
 
 //Win32 includes
 #include <Windows.h>
@@ -115,6 +119,15 @@ MainWindow::MainWindow(QWidget *parent)
 	actionSourceFiles->setChecked(true);
 	connect(m_tabActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabActionActivated(QAction*)));
 
+	//Activate style menu actions
+	m_styleActionGroup = new QActionGroup(this);
+	m_styleActionGroup->addAction(actionStylePlastique);
+	m_styleActionGroup->addAction(actionStyleCleanlooks);
+	m_styleActionGroup->addAction(actionStyleWindows);
+	m_styleActionGroup->addAction(actionStyleClassic);
+	actionStylePlastique->setChecked(true);
+	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
+
 	//Activate help menu actions
 	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
 	connect(actionVisitHomepage, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
@@ -136,6 +149,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow(void)
 {
 	LAMEXP_DELETE(m_tabActionGroup);
+	LAMEXP_DELETE(m_styleActionGroup);
 	LAMEXP_DELETE(m_fileListModel);
 	LAMEXP_DELETE(m_banner);
 	LAMEXP_DELETE(m_fileSystemModel);
@@ -282,6 +296,7 @@ void MainWindow::addFilesButtonClicked(void)
  */
 void MainWindow::openFolderActionActivated(void)
 {
+	tabWidget->setCurrentIndex(0);
 	QString selectedFolder = QFileDialog::getExistingDirectory(this, "Add folder", QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
 	
 	if(!selectedFolder.isEmpty())
@@ -428,6 +443,17 @@ void MainWindow::tabActionActivated(QAction *action)
 	{
 		tabWidget->setCurrentIndex(idx);
 	}
+}
+
+/*
+ * Style action triggered
+ */
+void MainWindow::styleActionActivated(QAction *action)
+{
+	if(action == actionStylePlastique) QApplication::setStyle(new QPlastiqueStyle());
+	else if(action == actionStyleCleanlooks) QApplication::setStyle(new QCleanlooksStyle());
+	else if(action == actionStyleWindows) QApplication::setStyle(new QWindowsVistaStyle());
+	else if(action == actionStyleClassic) QApplication::setStyle(new QWindowsStyle());
 }
 
 /*

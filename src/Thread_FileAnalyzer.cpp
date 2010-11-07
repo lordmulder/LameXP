@@ -64,7 +64,7 @@ void FileAnalyzer::run()
 		qDebug("Analyzing: %s", currentFile.toUtf8().constData());
 		emit fileSelected(QFileInfo(currentFile).fileName());
 		AudioFileModel file = analyzeFile(currentFile);
-		if(file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
+		if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
 		{
 			qDebug("Skipped: %s", file.filePath().toUtf8().constData());
 			continue;
@@ -85,6 +85,17 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 	AudioFileModel audioFile(filePath);
 	m_currentSection = sectionOther;
 
+	QFile readTest(filePath);
+	if(!readTest.open(QIODevice::ReadOnly))
+	{
+		qWarning("Cannot access file for reading, skipping!");
+		return audioFile;
+	}
+	else
+	{
+		readTest.close();
+	}
+
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
@@ -93,7 +104,17 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		process.waitForReadyRead(1000);
+		if(!process.waitForReadyRead())
+		{
+			if(process.state() == QProcess::Running)
+			{
+				qWarning("MediaInfo time out. Killing process and skipping file!");
+				process.kill();
+				process.waitForFinished(-1);
+				return audioFile;
+			}
+		}
+
 		QByteArray data = process.readLine().constData();
 		while(data.size() > 0)
 		{
@@ -139,7 +160,7 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 
 		audioFile.setFileName(baseName);
 	}
-
+	
 	return audioFile;
 }
 
