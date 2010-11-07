@@ -38,6 +38,10 @@
 //LameXP includes
 #include "LockedFile.h"
 
+//Debug only includes
+#ifdef _DEBUG
+#include <Psapi.h>
+#endif //_DEBUG
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
@@ -278,18 +282,19 @@ bool lamexp_clean_folder(const QString folderPath)
 }
 
 /*
- * Finalization function (Clean-up)
+ * Finalization function (final clean-up)
  */
 void lamexp_finalization(void)
 {
 	//Free all tools
-	while(!g_lamexp_tool_registry.isEmpty())
+	if(!g_lamexp_tool_registry.isEmpty())
 	{
 		QStringList keys = g_lamexp_tool_registry.keys();
 		for(int i = 0; i < keys.count(); i++)
 		{
-			delete g_lamexp_tool_registry.take(keys.at(i));
+			LAMEXP_DELETE(g_lamexp_tool_registry[keys.at(i)]);
 		}
+		g_lamexp_tool_registry.clear();
 	}
 	
 	//Delete temporary files
@@ -304,10 +309,11 @@ void lamexp_finalization(void)
 	}
 
 	//Destroy Qt application object
-	QCoreApplication *application = QApplication::instance();
+	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
 	LAMEXP_DELETE(application);
 
 	//Detach from shared memory
+	if(g_lamexp_sharedmem_ptr) g_lamexp_sharedmem_ptr->detach();
 	LAMEXP_DELETE(g_lamexp_sharedmem_ptr);
 }
 
@@ -337,4 +343,19 @@ const QString lamexp_lookup_tool(const QString &toolName)
 	{
 		return QString();
 	}
+}
+
+/*
+ * Get number private bytes [debug only]
+ */
+SIZE_T lamexp_dbg_private_bytes(void)
+{
+#ifdef _DEBUG
+	PROCESS_MEMORY_COUNTERS_EX memoryCounters;
+	memoryCounters.cb = sizeof(PROCESS_MEMORY_COUNTERS_EX);
+	GetProcessMemoryInfo(GetCurrentProcess(), (PPROCESS_MEMORY_COUNTERS) &memoryCounters, sizeof(PROCESS_MEMORY_COUNTERS_EX));
+	return memoryCounters.PrivateUsage;
+#else
+	throw "Cannot call this function in a non-debug build!";
+#endif //_DEBUG
 }

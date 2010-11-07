@@ -142,8 +142,9 @@ int main(int argc, char* argv[])
 {
 	try
 	{
+		int iResult;
 		qInstallMsgHandler(lamexp_message_handler);
-		int iResult = lamexp_main(argc, argv);
+		LAMEXP_MEMORY_CHECK(iResult = lamexp_main(argc, argv));
 		lamexp_finalization();
 		return iResult;
 	}

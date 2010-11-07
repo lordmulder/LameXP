@@ -55,6 +55,9 @@ const QString &lamexp_temp_folder(void);
 //Auxiliary functions
 bool lamexp_clean_folder(const QString folderPath);
 
+//Debug-only functions
+SIZE_T lamexp_dbg_private_bytes(void);
+
 //Helper macros
 #define LAMEXP_DELETE(PTR) if(PTR) { delete PTR; PTR = NULL; }
 #define LAMEXP_CLOSE(HANDLE) if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; }
@@ -72,4 +75,19 @@ bool lamexp_clean_folder(const QString folderPath);
 	if(IsDebuggerPresent())	{ \
 	FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!"); \
 	TerminateProcess(GetCurrentProcess, -1); }
+#endif
+
+//Memory check
+#if defined(_DEBUG)
+#define LAMEXP_MEMORY_CHECK(CMD) \
+{ \
+	SIZE_T _privateBytesBefore = lamexp_dbg_private_bytes(); \
+	CMD; \
+	SIZE_T _privateBytesLeak = (lamexp_dbg_private_bytes() - _privateBytesBefore) / 1024; \
+	if(_privateBytesLeak > 10) { \
+		qWarning("Memory leak: Lost %u KiloBytes.", _privateBytesLeak); \
+	} \
+}
+#else
+#define LAMEXP_MEMORY_CHECK(CMD) CMD
 #endif

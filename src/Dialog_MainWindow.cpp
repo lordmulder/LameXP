@@ -136,6 +136,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_tabActionGroup);
 	LAMEXP_DELETE(m_fileListModel);
 	LAMEXP_DELETE(m_banner);
+	LAMEXP_DELETE(m_fileSystemModel);
 }
 
 ////////////////////////////////////////////////////////////
