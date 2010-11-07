@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)out\$(ConfigurationName)"
-			IntermediateDirectory="$(SolutionDir)out\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)obj\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
 			>
@@ -69,7 +69,7 @@
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -96,8 +96,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)out\$(ConfigurationName)"
-			IntermediateDirectory="$(SolutionDir)out\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)obj\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
 			>
@@ -156,7 +156,7 @@
 				GenerateDebugInformation="false"
 				AssemblyDebug="0"
 				MapExports="false"
-				SubSystem="1"
+				SubSystem="2"
 				LinkTimeCodeGeneration="1"
 				TargetMachine="1"
 			/>

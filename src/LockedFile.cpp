@@ -45,7 +45,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 		{
 			QFile::remove(QFileInfo(outFile).absoluteFilePath());
 			char error_msg[256];
-			strcpy_s(error_msg, 256, QString("File '%1' could not be written!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
+			strcpy_s(error_msg, 256, QString("File '%1' could not be written!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
 			throw error_msg;
 		}
 		outFile.close();
@@ -53,7 +53,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	else
 	{
 		char error_msg[256];
-		strcpy_s(error_msg, 256, QString("File '%1' could not be created!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
+		strcpy_s(error_msg, 256, QString("File '%1' could not be created!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
 		throw error_msg;
 	}
 

@@ -42,6 +42,8 @@
 //Win32 includes
 #include <Windows.h>
 
+#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -156,11 +158,13 @@ void MainWindow::aboutButtonClicked(void)
 {
 	QString aboutText;
 	
-	aboutText += "<b><font size=\"+1\">LameXP - Audio Encoder Front-end</font></b><br>";
-	aboutText += "Copyright (C) 2004-2010 LoRd_MuldeR <a href=\"mailto:mulder2@gmx.de\">&lt;MuldeR2@GMX.de&gt;</a><br>";
-	aboutText += QString().sprintf("Version %d.%02d %s, Build %d [%s]<br><br>", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
-	aboutText += "Please visit <a href=\"http://mulder.dummwiedeutsch.de/\">http://mulder.dummwiedeutsch.de/</a> for news and updates!<br><hr><br>";
-	aboutText += "This program is free software; you can redistribute it and/or<br>";
+	aboutText += "<h2>LameXP - Audio Encoder Front-end</h2>";
+	aboutText += QString("<b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b><br>").arg(max(lamexp_version_date().year(),QDate::currentDate().year()));
+	aboutText += QString().sprintf("<b>Version %d.%02d %s, Build %d [%s]</b><br><br>", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
+	aboutText += "<nobr>Please visit the official web-site at ";
+	aboutText += LINK("http://mulder.dummwiedeutsch.de/") += " for news and updates!</nobr><br>";
+	aboutText += "<hr><br>";
+	aboutText += "<nobr><tt>This program is free software; you can redistribute it and/or<br>";
 	aboutText += "modify it under the terms of the GNU General Public License<br>";
 	aboutText += "as published by the Free Software Foundation; either version 2<br>";
 	aboutText += "of the License, or (at your option) any later version.<br><br>";
@@ -170,26 +174,64 @@ void MainWindow::aboutButtonClicked(void)
 	aboutText += "GNU General Public License for more details.<br><br>";
 	aboutText += "You should have received a copy of the GNU General Public License<br>";
 	aboutText += "along with this program; if not, write to the Free Software<br>";
-	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<br><hr><br>";
-	aboutText += "This software uses the 'slick' icon set by <a href=\"http://www.famfamfam.com/lab/icons/silk/\">http://www.famfamfam.com/</a>.<br>";
+	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</tt></nobr><br>";
+	aboutText += "<hr><br>";
+	aboutText += "This software uses the 'slick' icon set by Mark James &ndash; <a href=\"http://www.famfamfam.com/lab/icons/silk/\">http://www.famfamfam.com/</a>.<br>";
 	aboutText += "Released under the Creative Commons Attribution 2.5 License.<br>";
 	
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
-	QApplication::restoreOverrideCursor();
+	QMessageBox *aboutBox = new QMessageBox(this);
+	aboutBox->setText(aboutText);
+	aboutBox->setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
+	aboutBox->setWindowTitle("About LameXP");
+	
+	QPushButton *firstButton = aboutBox->addButton("More About...", QMessageBox::AcceptRole);
+	firstButton->setIcon(QIcon(":/icons/information.png"));
+	firstButton->setMinimumWidth(120);
+
+	QPushButton *secondButton = aboutBox->addButton("About Qt...", QMessageBox::AcceptRole);
+	secondButton->setIcon(QIcon(":/images/Qt.svg"));
+	secondButton->setMinimumWidth(120);
+
+	QPushButton *thirdButton = aboutBox->addButton("Discard", QMessageBox::AcceptRole);
+	thirdButton->setIcon(QIcon(":/icons/cross.png"));
+	thirdButton->setMinimumWidth(90);
+
+	PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 
 	while(1)
 	{
-		switch(QMessageBox::information(this, "About LameXP", aboutText, " More about... ", " About Qt... ", " Discard "))
+		switch(aboutBox->exec())
 		{
 		case 0:
 			{
+				const QString li("<li style=\"margin-left:-25px\">");
 				QString moreAboutText;
-				moreAboutText += "The following third-party software is used in LameXP:<br><br>";
-				moreAboutText += "<b>LAME - OpenSource mp3 Encoder</b><br>Released under the terms of the GNU Leser General Public License.<br><a href=\"http://lame.sourceforge.net/\">http://lame.sourceforge.net/</a><br><br>";
-				moreAboutText += "<b>OggEnc - Ogg Vorbis Encoder</b><br>Completely open and patent-free audio encoding technology.<br><a href=\"http://www.vorbis.com/\">http://www.vorbis.com/</a><br><br>";
-				moreAboutText += "<b>Nero AAC reference MPEG-4 Encoder</b><br>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.<br><a href=\"http://www.nero.com/eng/technologies-aac-codec.html\">http://www.nero.com/eng/technologies-aac-codec.html</a><br>";
-				QMessageBox::information(this, "About third-party tools", moreAboutText, "Discard");
+				moreAboutText += "<h3>The following third-party software is used in LameXP:</h3>";
+				moreAboutText += "<ul>";
+				moreAboutText += li + "<b>LAME - OpenSource mp3 Encoder</b><br>";
+				moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
+				moreAboutText += LINK("http://lame.sourceforge.net/");
+				moreAboutText += "<br>";
+				moreAboutText += li + "<b>OggEnc - Ogg Vorbis Encoder</b>";
+				moreAboutText += "<br>Completely open and patent-free audio encoding technology.<br>";
+				moreAboutText += LINK("http://www.vorbis.com/");
+				moreAboutText += "<br>";
+				moreAboutText += li + "<b>Nero AAC reference MPEG-4 Encoder</b><br>";
+				moreAboutText += "Freeware state-of-the-art HE-AAC encoder with 2-Pass support.<br>";
+				moreAboutText += LINK("http://www.nero.com/eng/technologies-aac-codec.html/");
+				moreAboutText += "<br>";
+				moreAboutText += li + "<b>MediaInfo - Media File Analysis Tool</b><br>";
+				moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
+				moreAboutText += LINK("http://mediainfo.sourceforge.net/");
+				moreAboutText += "<br></ul>";
+
+				QMessageBox *moreAboutBox = new QMessageBox(this);
+				moreAboutBox->setText(moreAboutText);
+				moreAboutBox->setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
+				moreAboutBox->setWindowTitle("About Third-party Software");
+				moreAboutBox->exec();
+				
+				LAMEXP_DELETE(moreAboutBox);
 				break;
 			}
 		case 1:
@@ -199,6 +241,8 @@ void MainWindow::aboutButtonClicked(void)
 			return;
 		}
 	}
+
+	LAMEXP_DELETE(aboutBox);
 }
 
 /*

@@ -2,6 +2,7 @@
 <RCC version="1.0">
 	<qresource>
     <file>MainIcon.ico</file>
+    <file>MainIcon.png</file>
     <file>icons/add.png</file>
 		<file>icons/application_view_list.png</file>
 		<file>icons/arrow_down.png</file>
@@ -42,7 +43,7 @@
     <file>icons/star.png</file>
     <file>icons/table_edit.png</file>
     <file>icons/timeline_marker.png</file>
-    <file>icons/transmit.png</file>
+    <file>icons/transmit_blue.png</file>
     <file>icons/user.png</file>
     <file>icons/world.png</file>
   </qresource>

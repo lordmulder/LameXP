@@ -49,15 +49,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_ICON1               ICON                    "res\\MainIcon.ico"
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // WAVE
 //
 
@@ -69,8 +60,8 @@ IDR_WAVE_ABOUT          WAVE                    "res\\sounds\\uuaarrgh.wav"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 4,0,0,0
- PRODUCTVERSION 4,0,0,0
+ FILEVERSION VER_LAMEXP_MAJOR,VER_LAMEXP_MINOR_HI,VER_LAMEXP_MINOR_LO,VER_LAMEXP_BUILD
+ PRODUCTVERSION VER_LAMEXP_MAJOR,VER_LAMEXP_MINOR_HI,VER_LAMEXP_MINOR_LO,VER_LAMEXP_BUILD
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x3L
@@ -88,13 +79,13 @@ BEGIN
             VALUE "Comments", "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY"
             VALUE "CompanyName", "Free Software Foundation"
             VALUE "FileDescription", "LameXP - Audio Encoder Front-End"
-            VALUE "FileVersion", "4.0.0.0"
+			VALUE "FileVersion", VER_LAMEXP_STR
             VALUE "InternalName", "LameXP Qt"
             VALUE "LegalCopyright", "Copyright (C) 2004-2010 LoRd_MuldeR <MuldeR2@GMX.de>"
             VALUE "LegalTrademarks", "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License <http://www.gnu.org/>"
             VALUE "OriginalFilename", "LameXP.exe"
             VALUE "ProductName", "LameXP - Audio Encoder Front-End"
-            VALUE "ProductVersion", "v4.00 Pre-Alpha"
+            VALUE "ProductVersion", VER_LAMEXP_STR
         END
     END
     BLOCK "VarFileInfo"
@@ -103,6 +94,15 @@ BEGIN
     END
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "res\\MainIcon.ico"
 #endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 

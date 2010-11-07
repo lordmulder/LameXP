@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>LameXP - Audio Encoder Front-end</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../res/Icons.qrc">
-    <normaloff>:/MainIcon.ico</normaloff>:/MainIcon.ico</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
@@ -848,11 +844,14 @@
    <property name="text">
     <string>Visit Official Homepage</string>
    </property>
+   <property name="toolTip">
+    <string>Visit Official Web-Site</string>
+   </property>
   </action>
   <action name="actionCheckUpdates">
    <property name="icon">
     <iconset resource="../res/Icons.qrc">
-     <normaloff>:/icons/transmit.png</normaloff>:/icons/transmit.png</iconset>
+     <normaloff>:/icons/transmit_blue.png</normaloff>:/icons/transmit_blue.png</iconset>
    </property>
    <property name="text">
     <string>Check for Updates</string>
@@ -879,6 +878,7 @@
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

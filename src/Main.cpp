@@ -36,11 +36,13 @@
 
 int lamexp_main(int argc, char* argv[])
 {
+	//Init console
+	lamexp_init_console(argc, argv);
+	
 	//Print version info
-	SetConsoleTitle(L"LameXP - Audio Encoder Front-End | DO NOT CLOSE CONSOLE !!!");
-	qDebug("\nLameXP - Audio Encoder Front-End");
+	qDebug("LameXP - Audio Encoder Front-End");
 	qDebug("Version %d.%02d %s, Build %d [%s], MSVC compiler v%02d.%02d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), _MSC_VER / 100, _MSC_VER % 100);
-	qDebug("Copyright (C) 2004-2010 LoRd_MuldeR <MuldeR2@GMX.de>\n");
+	qDebug("Copyright (C) 2004-%04d LoRd_MuldeR <MuldeR2@GMX.de>\n", max(lamexp_version_date().year(),QDate::currentDate().year()));
 	
 	//print license info
 	qDebug("This program is free software: you can redistribute it and/or modify");
@@ -60,7 +62,8 @@ int lamexp_main(int argc, char* argv[])
 		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(expireDate.toString(Qt::ISODate)).toLatin1().constData());
 		if(QDate::currentDate() >= expireDate)
 		{
-			QMessageBox::warning(NULL, "LameXP - Expired", QString("This demo (pre-release) version of LameXP has expired at %1.").arg(expireDate.toString()), "Exit Program");
+			qWarning("Expired !!!");
+			QMessageBox::warning(NULL, "LameXP - Expired", QString("This demo (pre-release) version of LameXP has expired at %1.\nLameXP is free software and release versions won't expire.").arg(expireDate.toString()), "Exit Program");
 			return 0;
 		}
 	}

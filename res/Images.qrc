@@ -9,5 +9,6 @@
 		<file>images/Splash.png</file>
 		<file>images/Thumb.png</file>
     <file>images/Construction.gif</file>
-	</qresource>
+    <file>images/Qt.svg</file>
+  </qresource>
 </RCC>
