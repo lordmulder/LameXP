@@ -258,13 +258,13 @@ bool lamexp_init_qt(int argc, char* argv[])
 }
 
 /*
- * Check for running instances of LameXP
+ * Initialize IPC
  */
-bool lamexp_check_instances(void)
+int lamexp_init_ipc(void)
 {
 	if(g_lamexp_sharedmem_ptr && g_lamexp_semaphore_read_ptr && g_lamexp_semaphore_write_ptr)
 	{
-		return true;
+		return 0;
 	}
 	
 	g_lamexp_semaphore_read_ptr = new QSystemSemaphore(g_lamexp_semaphore_read_uuid, 0);
@@ -276,7 +276,7 @@ bool lamexp_check_instances(void)
 		LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
 		LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
 		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
-		return false;
+		return -1;
 	}
 	if(g_lamexp_semaphore_write_ptr->error() != QSystemSemaphore::NoError)
 	{
@@ -284,7 +284,7 @@ bool lamexp_check_instances(void)
 		LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
 		LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
 		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
-		return false;
+		return -1;
 	}
 
 	g_lamexp_sharedmem_ptr = new QSharedMemory(g_lamexp_sharedmem_uuid, NULL);
@@ -296,30 +296,27 @@ bool lamexp_check_instances(void)
 			g_lamexp_sharedmem_ptr->attach();
 			if(g_lamexp_sharedmem_ptr->error() == QSharedMemory::NoError)
 			{
-				lamexp_ipc_send(42, "Wurst schmeckt uns!");
+				return 1;
 			}
 			else
 			{
-				qWarning("Failed to attach to the existing shared memory!");
+				QString errorMessage = g_lamexp_sharedmem_ptr->errorString();
+				qFatal("Failed to attach to shared memory: %s", errorMessage.toUtf8().constData());
+				return -1;
 			}
-			qWarning("Another instance of LameXP is already running on this computer!");
-			QMessageBox::warning(NULL, "LameXP", "LameXP is already running. Please use the running instance!");
 		}
 		else
 		{
 			QString errorMessage = g_lamexp_sharedmem_ptr->errorString();
 			qFatal("Failed to create shared memory: %s", errorMessage.toUtf8().constData());
+			return -1;
 		}
-		LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
-		LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
-		LAMEXP_DELETE(g_lamexp_sharedmem_ptr);
-		return false;
 	}
 
 	memset(g_lamexp_sharedmem_ptr->data(), 0, sizeof(lamexp_ipc_t));
 	g_lamexp_semaphore_write_ptr->release();
 
-	return true;
+	return 0;
 }
 
 /*
@@ -337,9 +334,12 @@ void lamexp_ipc_send(unsigned int command, const char* message)
 	lamexp_ipc->command = command;
 	strcpy_s(lamexp_ipc->parameter, 4096, message);
 
-	g_lamexp_semaphore_write_ptr->acquire();
-	memcpy(g_lamexp_sharedmem_ptr->data(), lamexp_ipc, sizeof(lamexp_ipc_t));
-	g_lamexp_semaphore_read_ptr->release();
+	if(g_lamexp_semaphore_write_ptr->acquire())
+	{
+		memcpy(g_lamexp_sharedmem_ptr->data(), lamexp_ipc, sizeof(lamexp_ipc_t));
+		g_lamexp_semaphore_read_ptr->release();
+	}
+
 	LAMEXP_DELETE(lamexp_ipc);
 }
 
@@ -359,21 +359,46 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 	lamexp_ipc_t *lamexp_ipc = new lamexp_ipc_t;
 	memset(lamexp_ipc, 0, sizeof(lamexp_ipc_t));
 
-	g_lamexp_semaphore_read_ptr->acquire();
-	memcpy(lamexp_ipc, g_lamexp_sharedmem_ptr->data(), sizeof(lamexp_ipc_t));
-	g_lamexp_semaphore_write_ptr->release();
-	
-	if(!(lamexp_ipc->reserved_1 || lamexp_ipc->reserved_2))
+	if(g_lamexp_semaphore_read_ptr->acquire())
 	{
-		*command = lamexp_ipc->command;
-		strcpy_s(message, buffSize, lamexp_ipc->parameter);
-	}
-	else
-	{
-		qWarning("Malformed IPC message, will be ignored");
+		memcpy(lamexp_ipc, g_lamexp_sharedmem_ptr->data(), sizeof(lamexp_ipc_t));
+		g_lamexp_semaphore_write_ptr->release();
+
+		if(!(lamexp_ipc->reserved_1 || lamexp_ipc->reserved_2))
+		{
+			*command = lamexp_ipc->command;
+			strcpy_s(message, buffSize, lamexp_ipc->parameter);
+		}
+		else
+		{
+			qWarning("Malformed IPC message, will be ignored");
+		}
 	}
 
 	LAMEXP_DELETE(lamexp_ipc);
+}
+
+/*
+ * Communicate with running instance
+ */
+void lamexp_handle_multiple_instanced(void)
+{
+	QStringList arguments = QApplication::arguments();
+	bool bSentFiles = false;
+
+	for(int i = 0; i < arguments.count() - 1; i++)
+	{
+		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
+		{
+			lamexp_ipc_send(1, arguments[++i].toUtf8().constData());
+			bSentFiles = true;
+		}
+	}
+
+	if(!bSentFiles)
+	{
+		lamexp_ipc_send(UINT_MAX, "Use running instance!");
+	}
 }
 
 /*

@@ -124,8 +124,9 @@ MainWindow::MainWindow(QWidget *parent)
 	m_styleActionGroup = new QActionGroup(this);
 	m_styleActionGroup->addAction(actionStylePlastique);
 	m_styleActionGroup->addAction(actionStyleCleanlooks);
-	m_styleActionGroup->addAction(actionStyleWindows);
-	m_styleActionGroup->addAction(actionStyleClassic);
+	m_styleActionGroup->addAction(actionStyleWindowsVista);
+	m_styleActionGroup->addAction(actionStyleWindowsXP);
+	m_styleActionGroup->addAction(actionStyleWindowsClassic);
 	actionStylePlastique->setChecked(true);
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 
@@ -144,6 +145,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 	//Create message handler thread
 	m_messageHandler = new MessageHandlerThread();
+	m_delayedFileList = new QStringList();
+	m_delayedFileTimer = new QTimer();
+	connect(m_messageHandler, SIGNAL(otherInstanceDetected()), this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
+	connect(m_messageHandler, SIGNAL(fileReceived(QString)), this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
+	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
 }
 
@@ -153,11 +159,20 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(void)
 {
+	while(m_messageHandler->isRunning())
+	{
+		m_messageHandler->stop();
+		m_messageHandler->wait();
+	}
+
 	LAMEXP_DELETE(m_tabActionGroup);
 	LAMEXP_DELETE(m_styleActionGroup);
 	LAMEXP_DELETE(m_fileListModel);
 	LAMEXP_DELETE(m_banner);
 	LAMEXP_DELETE(m_fileSystemModel);
+	LAMEXP_DELETE(m_messageHandler);
+	LAMEXP_DELETE(m_delayedFileList);
+	LAMEXP_DELETE(m_delayedFileTimer);
 }
 
 ////////////////////////////////////////////////////////////
@@ -184,9 +199,7 @@ void MainWindow::showEvent(QShowEvent *event)
  */
 void MainWindow::windowShown(void)
 {
-	QStringList fileList;
 	QStringList arguments = QApplication::arguments();
-	qDebug("Main window is showing");
 
 	for(int i = 0; i < arguments.count() - 1; i++)
 	{
@@ -196,7 +209,7 @@ void MainWindow::windowShown(void)
 			qDebug("Adding file from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
 			if(currentFile.exists())
 			{
-				fileList << currentFile.absoluteFilePath();
+				m_delayedFileList->append(currentFile.absoluteFilePath());
 			}
 			else
 			{
@@ -205,17 +218,9 @@ void MainWindow::windowShown(void)
 		}
 	}
 
-	if(fileList.count() > 0)
+	if(!m_delayedFileList->isEmpty() && !m_delayedFileTimer->isActive())
 	{
-		FileAnalyzer *analyzer = new FileAnalyzer(fileList);
-		connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
-		connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-
-		m_banner->show("Adding file(s), please wait...", analyzer);
-		LAMEXP_DELETE(analyzer);
-	
-		sourceFileView->scrollToBottom();
-		m_banner->close();
+		m_delayedFileTimer->start(5000);
 	}
 }
 
@@ -318,6 +323,13 @@ void MainWindow::aboutButtonClicked(void)
  */
 void MainWindow::encodeButtonClicked(void)
 {
+	if(m_delayedFileTimer->isActive())
+	{
+		
+		MessageBeep(MB_ICONERROR);
+		return;
+	}
+
 	QMessageBox::warning(this, "LameXP", "Not implemented yet, please try again with a later version!");
 }
 
@@ -505,8 +517,9 @@ void MainWindow::styleActionActivated(QAction *action)
 {
 	if(action == actionStylePlastique) QApplication::setStyle(new QPlastiqueStyle());
 	else if(action == actionStyleCleanlooks) QApplication::setStyle(new QCleanlooksStyle());
-	else if(action == actionStyleWindows) QApplication::setStyle(new QWindowsVistaStyle());
-	else if(action == actionStyleClassic) QApplication::setStyle(new QWindowsStyle());
+	else if(action == actionStyleWindowsVista) QApplication::setStyle(new QWindowsVistaStyle());
+	else if(action == actionStyleWindowsXP) QApplication::setStyle(new QWindowsXPStyle());
+	else if(action == actionStyleWindowsClassic) QApplication::setStyle(new QWindowsStyle());
 }
 
 /*
@@ -518,7 +531,6 @@ void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 	if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
 	outputFolderLabel->setText(selectedDir);
 }
-
 
 /*
  * Goto desktop button
@@ -622,3 +634,59 @@ void MainWindow::checkUpdatesActionActivated(void)
 	QMessageBox::information(this, "Update Check", "Your version of LameXP is still up-to-date. There are no updates available.\nPlease remember to check for updates at regular intervals!");
 }
 
+/*
+ * Other instance detected
+ */
+void MainWindow::notifyOtherInstance(void)
+{
+	if(!m_banner->isVisible())
+	{
+		QMessageBox msgBox(QMessageBox::Warning, "Already running", "LameXP is already running, please use the running instance!", QMessageBox::NoButton, this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
+		msgBox.exec();
+	}
+}
+
+/*
+ * Add file from another instance
+ */
+void MainWindow::addFileDelayed(const QString &filePath)
+{
+	m_delayedFileTimer->stop();
+	qDebug("Received file: %s", filePath.toUtf8().constData());
+	m_delayedFileList->append(filePath);
+	m_delayedFileTimer->start(5000);
+}
+
+/*
+ * Add all pending files
+ */
+void MainWindow::handleDelayedFiles(void)
+{
+	if(m_banner->isVisible())
+	{
+		return;
+	}
+	
+	m_delayedFileTimer->stop();
+	
+	if(m_delayedFileList->isEmpty())
+	{
+		return;
+	}
+
+	QStringList selectedFiles;
+	while(!m_delayedFileList->isEmpty())
+	{
+		selectedFiles << QFileInfo(m_delayedFileList->takeFirst()).absoluteFilePath();
+	}
+
+	FileAnalyzer *analyzer = new FileAnalyzer(selectedFiles);
+	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
+	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+
+	m_banner->show("Adding file(s), please wait...", analyzer);
+	LAMEXP_DELETE(analyzer);
+	
+	sourceFileView->scrollToBottom();
+	m_banner->close();
+}

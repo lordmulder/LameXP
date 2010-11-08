@@ -382,6 +382,9 @@
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="1" column="1">
              <widget class="QLabel" name="label_2">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -769,8 +772,9 @@
      </property>
      <addaction name="actionStylePlastique"/>
      <addaction name="actionStyleCleanlooks"/>
-     <addaction name="actionStyleWindows"/>
-     <addaction name="actionStyleClassic"/>
+     <addaction name="actionStyleWindowsVista"/>
+     <addaction name="actionStyleWindowsXP"/>
+     <addaction name="actionStyleWindowsClassic"/>
     </widget>
     <addaction name="actionSourceFiles"/>
     <addaction name="actionOutputDirectory"/>
@@ -909,25 +913,37 @@
     <string>Cleanlooks</string>
    </property>
   </action>
-  <action name="actionStyleWindows">
+  <action name="actionStyleWindowsVista">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Windows</string>
+    <string>Windows Vista (&quot;Aero&quot;)</string>
    </property>
   </action>
-  <action name="actionStyleClassic">
+  <action name="actionStyleWindowsClassic">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Classic</string>
+    <string>Windows Classic</string>
+   </property>
+  </action>
+  <action name="actionStyleWindowsXP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Windows XP (&quot;Luna&quot;)</string>
    </property>
   </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

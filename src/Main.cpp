@@ -68,8 +68,18 @@ int lamexp_main(int argc, char* argv[])
 		}
 	}
 
-	//Check for multiple instances
-	if(!lamexp_check_instances()) return 0;
+	//Check for multiple instances of LameXP
+	int iResult = lamexp_init_ipc();
+	if(iResult > 0)
+	{
+		qDebug("LameXP is already running, connecting to running instance...");
+		lamexp_handle_multiple_instanced();
+		return 0;
+	}
+	else if(iResult < 0)
+	{
+		return -1;
+	}
 	
 	//Show splash screen
 	InitializationThread *poInitializationThread = new InitializationThread();
@@ -79,7 +89,7 @@ int lamexp_main(int argc, char* argv[])
 	//Show main window
 	MainWindow *poMainWindow = new MainWindow();
 	poMainWindow->show();
-	int iResult = QApplication::instance()->exec();
+	iResult = QApplication::instance()->exec();
 	LAMEXP_DELETE(poMainWindow);
 	
 	//Final clean-up

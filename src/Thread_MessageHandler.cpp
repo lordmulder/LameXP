@@ -25,6 +25,9 @@
 
 #include <QSharedMemory>
 #include <QSystemSemaphore>
+#include <QMessageBox>
+
+#include <limits.h>
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -32,21 +35,49 @@
 
 MessageHandlerThread::MessageHandlerThread(void)
 {
+	m_aborted = false;
+	m_parameter = new char[4096];
+}
+
+MessageHandlerThread::~MessageHandlerThread(void)
+{
+	delete [] m_parameter;
 }
 
 void MessageHandlerThread::run()
 {
-	unsigned int command = 0;
-	char *parameter = new char[4096];
-	
-	while(true)
+	m_aborted = false;
+	setTerminationEnabled(true);
+
+	while(!m_aborted)
 	{
-		qDebug("MessageHandlerThread: Waiting...");
-		lamexp_ipc_read(&command, parameter, 4096);
-		qDebug("MessageHandlerThread: command=%u, parameter='%s'", command, parameter);
+		unsigned int command = 0;
+		lamexp_ipc_read(&command, m_parameter, 4096);
+		if(!command) continue;
+
+		switch(command)
+		{
+		case 1:
+			emit fileReceived(QString::fromUtf8(m_parameter));
+			break;
+		case UINT_MAX:
+			emit otherInstanceDetected();
+			break;
+		default:
+			qWarning("Received an unknown IPC message! (command=%u)", command);
+			break;
+		}
+	}
+}
+
+void MessageHandlerThread::stop(void)
+{
+	if(!m_aborted)
+	{
+		m_aborted = true;
+		lamexp_ipc_send(0, "");
 	}
 
-	delete [] parameter;
 }
 
 ////////////////////////////////////////////////////////////

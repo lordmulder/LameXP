@@ -59,6 +59,9 @@ private slots:
 	void checkUpdatesActionActivated(void);
 	void visitHomepageActionActivated(void);
 	void openFolderActionActivated(void);
+	void notifyOtherInstance(void);
+	void addFileDelayed(const QString &filePath);
+	void handleDelayedFiles(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -70,4 +73,6 @@ private:
 	QActionGroup *m_styleActionGroup;
 	WorkingBanner *m_banner;
 	MessageHandlerThread *m_messageHandler;
+	QStringList *m_delayedFileList;
+	QTimer *m_delayedFileTimer;
 };
