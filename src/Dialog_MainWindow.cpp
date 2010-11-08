@@ -391,9 +391,8 @@ void MainWindow::editMetaButtonClicked(void)
 			sourceFileView->selectRow(index.row());
 		}
 
-		AudioFileModel file = m_fileListModel->getFile(index);
+		AudioFileModel &file = (*m_fileListModel)[index];
 		iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
-		m_fileListModel->setFile(index, file);
 
 		if(!iResult) break;
 	}

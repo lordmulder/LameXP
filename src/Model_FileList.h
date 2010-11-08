@@ -46,6 +46,7 @@ public:
 	bool moveFile(const QModelIndex &index, int delta);
 	AudioFileModel getFile(const QModelIndex &index);
 	bool setFile(const QModelIndex &index, const AudioFileModel &audioFile);
+	AudioFileModel &operator[] (const QModelIndex &index);
 
 public slots:
 	void addFile(const QString &filePath);

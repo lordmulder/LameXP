@@ -204,6 +204,11 @@ AudioFileModel FileListModel::getFile(const QModelIndex &index)
 	}
 }
 
+AudioFileModel &FileListModel::operator[] (const QModelIndex &index)
+{
+	return m_fileList[index.row()];
+}
+
 bool FileListModel::setFile(const QModelIndex &index, const AudioFileModel &audioFile)
 {
 	if(index.row() >= 0 && index.row() < m_fileList.count())
