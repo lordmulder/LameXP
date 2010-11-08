@@ -8,7 +8,7 @@
 		<file>tools/lame.exe</file>
 		<file>tools/MAC.exe</file>
 		<file>tools/mediainfo_icl11.exe</file>
-		<file>tools/mediainfo_msvc9.exe</file>
+<!--<file>tools/mediainfo_msvc9.exe</file>-->
 		<file>tools/mpcdec.exe</file>
 		<file>tools/mpg123.exe</file>
 		<file>tools/oggdec.exe</file>

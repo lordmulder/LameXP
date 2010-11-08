@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>LameXP - Audio Encoder Front-end</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/Icons.qrc">
+    <normaloff>:/icons/sound.png</normaloff>:/icons/sound.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
@@ -924,6 +928,7 @@
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
