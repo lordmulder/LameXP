@@ -208,6 +208,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Genres.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Global.cpp"
 				>
 			</File>
@@ -237,6 +241,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Thread_Initialization.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Thread_MessageHandler.cpp"
 				>
 			</File>
 		</Filter>
@@ -461,6 +469,30 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\src\Thread_MessageHandler.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -497,6 +529,10 @@
 			</File>
 			<File
 				RelativePath=".\tmp\MOC_Thread_Initialization.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tmp\MOC_Thread_MessageHandler.cpp"
 				>
 			</File>
 			<File

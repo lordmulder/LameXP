@@ -28,6 +28,7 @@
 //Class declarations
 class QFileSystemModel;
 class WorkingBanner;
+class MessageHandlerThread;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -38,6 +39,7 @@ public:
 	~MainWindow(void);
 
 private slots:
+	void windowShown(void);
 	void aboutButtonClicked(void);
 	void encodeButtonClicked(void);
 	void addFilesButtonClicked(void);
@@ -58,10 +60,14 @@ private slots:
 	void visitHomepageActionActivated(void);
 	void openFolderActionActivated(void);
 
+protected:
+	void showEvent(QShowEvent *event);
+
 private:
 	FileListModel *m_fileListModel;
 	QFileSystemModel *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;
 	QActionGroup *m_styleActionGroup;
 	WorkingBanner *m_banner;
+	MessageHandlerThread *m_messageHandler;
 };

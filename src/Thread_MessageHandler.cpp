@@ -19,4 +19,38 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-extern const char *g_lamexp_generes[];
+#include "Thread_MessageHandler.h"
+
+#include "Global.h"
+
+#include <QSharedMemory>
+#include <QSystemSemaphore>
+
+////////////////////////////////////////////////////////////
+// Constructor
+////////////////////////////////////////////////////////////
+
+MessageHandlerThread::MessageHandlerThread(void)
+{
+}
+
+void MessageHandlerThread::run()
+{
+	unsigned int command = 0;
+	char *parameter = new char[4096];
+	
+	while(true)
+	{
+		qDebug("MessageHandlerThread: Waiting...");
+		lamexp_ipc_read(&command, parameter, 4096);
+		qDebug("MessageHandlerThread: command=%u, parameter='%s'", command, parameter);
+	}
+
+	delete [] parameter;
+}
+
+////////////////////////////////////////////////////////////
+// EVENTS
+////////////////////////////////////////////////////////////
+
+/*NONE*/

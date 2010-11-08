@@ -27,6 +27,7 @@
 #include "Dialog_WorkingBanner.h"
 #include "Dialog_MetaInfo.h"
 #include "Thread_FileAnalyzer.h"
+#include "Thread_MessageHandler.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -140,6 +141,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 	//Create banner
 	m_banner = new WorkingBanner(this);
+
+	//Create message handler thread
+	m_messageHandler = new MessageHandlerThread();
+	m_messageHandler->start();
 }
 
 ////////////////////////////////////////////////////////////
@@ -162,8 +167,57 @@ MainWindow::~MainWindow(void)
 /*NONE*/
 
 ////////////////////////////////////////////////////////////
+// EVENTS
+////////////////////////////////////////////////////////////
+
+void MainWindow::showEvent(QShowEvent *event)
+{
+	QTimer::singleShot(0, this, SLOT(windowShown()));
+}
+
+////////////////////////////////////////////////////////////
 // Slots
 ////////////////////////////////////////////////////////////
+
+/*
+ * Window shown
+ */
+void MainWindow::windowShown(void)
+{
+	QStringList fileList;
+	QStringList arguments = QApplication::arguments();
+	qDebug("Main window is showing");
+
+	for(int i = 0; i < arguments.count() - 1; i++)
+	{
+		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
+		{
+			QFileInfo currentFile(arguments[++i].trimmed());
+			qDebug("Adding file from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			if(currentFile.exists())
+			{
+				fileList << currentFile.absoluteFilePath();
+			}
+			else
+			{
+				qWarning("File doesn't exist: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			}
+		}
+	}
+
+	if(fileList.count() > 0)
+	{
+		FileAnalyzer *analyzer = new FileAnalyzer(fileList);
+		connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
+		connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+
+		m_banner->show("Adding file(s), please wait...", analyzer);
+		LAMEXP_DELETE(analyzer);
+	
+		sourceFileView->scrollToBottom();
+		m_banner->close();
+	}
+}
 
 /*
  * About button

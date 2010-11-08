@@ -19,4 +19,15 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-extern const char *g_lamexp_generes[];
+#pragma once
+
+#include <QThread>
+
+class MessageHandlerThread: public QThread
+{
+	Q_OBJECT
+
+public:
+	MessageHandlerThread(void);
+	void run();
+};

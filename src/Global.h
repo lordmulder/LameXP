@@ -52,6 +52,8 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file);
 const QString lamexp_lookup_tool(const QString &toolName);
 void lamexp_finalization(void);
 const QString &lamexp_temp_folder(void);
+void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
+void lamexp_ipc_send(unsigned int command, const char* message);
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString folderPath);
