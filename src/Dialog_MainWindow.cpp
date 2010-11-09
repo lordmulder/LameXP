@@ -487,10 +487,10 @@ void MainWindow::tabPageChanged(int idx)
 		actionOutputDirectory->setChecked(true);
 		break;
 	case 2:
-		actionCompression->setChecked(true);
+		actionMetaData->setChecked(true);
 		break;
 	case 3:
-		actionMetaData->setChecked(true);
+		actionCompression->setChecked(true);
 		break;
 	case 4:
 		actionAdvancedOptions->setChecked(true);
@@ -507,8 +507,8 @@ void MainWindow::tabActionActivated(QAction *action)
 
 	if(actionSourceFiles == action) idx = 0;
 	else if(actionOutputDirectory == action) idx = 1;
-	else if(actionCompression == action) idx = 2;
-	else if(actionMetaData == action) idx = 3;
+	else if(actionMetaData == action) idx = 2;
+	else if(actionCompression == action) idx = 3;
 	else if(actionAdvancedOptions == action) idx = 4;
 
 	if(idx >= 0)
@@ -675,13 +675,14 @@ void MainWindow::handleDelayedFiles(void)
 	}
 	
 	m_delayedFileTimer->stop();
-	
 	if(m_delayedFileList->isEmpty())
 	{
 		return;
 	}
 
 	QStringList selectedFiles;
+	tabWidget->setCurrentIndex(0);
+
 	while(!m_delayedFileList->isEmpty())
 	{
 		selectedFiles << QFileInfo(m_delayedFileList->takeFirst()).absoluteFilePath();
