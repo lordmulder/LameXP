@@ -332,7 +332,10 @@ void lamexp_ipc_send(unsigned int command, const char* message)
 	lamexp_ipc_t *lamexp_ipc = new lamexp_ipc_t;
 	memset(lamexp_ipc, 0, sizeof(lamexp_ipc_t));
 	lamexp_ipc->command = command;
-	strcpy_s(lamexp_ipc->parameter, 4096, message);
+	if(message)
+	{
+		strcpy_s(lamexp_ipc->parameter, 4096, message);
+	}
 
 	if(g_lamexp_semaphore_write_ptr->acquire())
 	{
@@ -383,22 +386,7 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
  */
 void lamexp_handle_multiple_instanced(void)
 {
-	QStringList arguments = QApplication::arguments();
-	bool bSentFiles = false;
 
-	for(int i = 0; i < arguments.count() - 1; i++)
-	{
-		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
-		{
-			lamexp_ipc_send(1, arguments[++i].toUtf8().constData());
-			bSentFiles = true;
-		}
-	}
-
-	if(!bSentFiles)
-	{
-		lamexp_ipc_send(UINT_MAX, "Use running instance!");
-	}
 }
 
 /*

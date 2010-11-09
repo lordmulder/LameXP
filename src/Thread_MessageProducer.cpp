@@ -19,13 +19,12 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Thread_MessageHandler.h"
+#include "Thread_MessageProducer.h"
 
 #include "Global.h"
 
-#include <QSharedMemory>
-#include <QSystemSemaphore>
-#include <QMessageBox>
+#include <QStringList>
+#include <QApplication>
 
 #include <limits.h>
 
@@ -33,59 +32,46 @@
 // Constructor
 ////////////////////////////////////////////////////////////
 
-MessageHandlerThread::MessageHandlerThread(void)
+MessageProducerThread::MessageProducerThread(void)
 {
-	m_aborted = false;
-	m_parameter = new char[4096];
 }
 
-MessageHandlerThread::~MessageHandlerThread(void)
+MessageProducerThread::~MessageProducerThread(void)
 {
-	delete [] m_parameter;
 }
 
-void MessageHandlerThread::run()
+void MessageProducerThread::run()
 {
-	m_aborted = false;
 	setTerminationEnabled(true);
+	bool bSentFiles = false;
+	QStringList arguments = QApplication::arguments();
 
-	while(!m_aborted)
+	for(int i = 0; i < arguments.count(); i++)
 	{
-		unsigned int command = 0;
-		lamexp_ipc_read(&command, m_parameter, 4096);
-		if(!command) continue;
-
-		switch(command)
+		if(!arguments[i].compare("--kill", Qt::CaseInsensitive))
 		{
-		case 1:
-			emit fileReceived(QString::fromUtf8(m_parameter));
-			break;
-		case 666:
-			if(!_stricmp(m_parameter, "Force!"))
-			{
-				ExitProcess(-2);
-			}
-			else
-			{
-				emit killSignalReceived();
-			}
-			break;
-		case UINT_MAX:
-			emit otherInstanceDetected();
-			break;
-		default:
-			qWarning("Received an unknown IPC message! (command=%u)", command);
-			break;
+			lamexp_ipc_send(666, NULL);
+			return;
+		}
+		if(!arguments[i].compare("--force-kill", Qt::CaseInsensitive))
+		{
+			lamexp_ipc_send(666, "Force!");
+			return;
 		}
 	}
-}
 
-void MessageHandlerThread::stop(void)
-{
-	if(!m_aborted)
+	for(int i = 0; i < arguments.count() - 1; i++)
 	{
-		m_aborted = true;
-		lamexp_ipc_send(0, "");
+		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
+		{
+			lamexp_ipc_send(1, arguments[++i].toUtf8().constData());
+			bSentFiles = true;
+		}
+	}
+
+	if(!bSentFiles)
+	{
+		lamexp_ipc_send(UINT_MAX, "Use running instance!");
 	}
 }
 

@@ -28,8 +28,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="copy &quot;$(QTDIR)\plugins\imageformats\q???d4.dll&quot; &quot;$(TargetDir)\imageformats&quot;&#x0D;&#x0A;"
-				Outputs="&quot;$(TargetDir)\imageformats\qgifd4.dll&quot;"
+				CommandLine=""
+				Outputs=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -92,6 +92,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Copy plugin DLL&apos;s"
+				CommandLine="copy &quot;$(QTDIR)\plugins\imageformats\q???d4.dll&quot; &quot;$(TargetDir)\imageformats&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -106,8 +108,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="copy &quot;$(QTDIR)\plugins\imageformats\q???4.dll&quot; &quot;$(TargetDir)\imageformats&quot;&#x0D;&#x0A;"
-				Outputs="&quot;$(TargetDir)\imageformats\qgif4.dll&quot;"
+				CommandLine=""
+				Outputs=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -180,6 +182,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Copy plugin DLL&apos;s"
+				CommandLine="copy &quot;$(QTDIR)\plugins\imageformats\q???4.dll&quot; &quot;$(TargetDir)\imageformats&quot;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -245,6 +249,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Thread_MessageHandler.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Thread_MessageProducer.cpp"
 				>
 			</File>
 		</Filter>
@@ -478,6 +486,30 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\src\Thread_MessageProducer.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
@@ -533,6 +565,10 @@
 			</File>
 			<File
 				RelativePath=".\tmp\MOC_Thread_MessageHandler.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tmp\MOC_Thread_MessageProducer.cpp"
 				>
 			</File>
 			<File

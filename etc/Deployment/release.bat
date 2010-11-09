@@ -16,7 +16,7 @@ if exist "%OUT_FILE%" (
 REM ------------------------------------------
 call _build.bat "..\..\LameXP.sln" Release
 REM ------------------------------------------
-if not exist "%OUT_PATH%\LameXP.exe" (
+if not "%LAMEXP_BUILD_SUCCESS%"=="YES" (
 	echo.
 	echo BUILD HAS FAILED !!!
 	echo.
@@ -36,10 +36,10 @@ copy "%QTDIR%\bin\QtSvg4.dll" "%TEMP_DIR%"
 copy "%QTDIR%\plugins\imageformats\q???4.dll" "%TEMP_DIR%\imageformats"
 REM ------------------------------------------
 for %%f in ("%TEMP_DIR%\*.exe") do (
-	"%PATH_MPRESS%" -s "%%f"
+	"%PATH_UPXBIN%" --best --lzma "%%f"
 )
 for %%f in ("%TEMP_DIR%\*.dll") do (
-	"%PATH_MPRESS%" -s "%%f"
+	"%PATH_UPXBIN%" --best --lzma "%%f"
 )
 REM ------------------------------------------
 copy "..\Redist\*.*" "%TEMP_DIR%"

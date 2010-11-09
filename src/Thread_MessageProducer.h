@@ -23,22 +23,12 @@
 
 #include <QThread>
 
-class MessageHandlerThread: public QThread
+class MessageProducerThread: public QThread
 {
 	Q_OBJECT
 
 public:
-	MessageHandlerThread(void);
-	~MessageHandlerThread(void);
+	MessageProducerThread(void);
+	~MessageProducerThread(void);
 	void run();
-	void stop(void);
-
-private:
-	char *m_parameter;
-	bool m_aborted;
-
-signals:
-	void otherInstanceDetected(void);
-	void fileReceived(const QString &filePath);
-	void killSignalReceived(void);
 };

@@ -149,6 +149,7 @@ MainWindow::MainWindow(QWidget *parent)
 	m_delayedFileTimer = new QTimer();
 	connect(m_messageHandler, SIGNAL(otherInstanceDetected()), this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(fileReceived(QString)), this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
+	connect(m_messageHandler, SIGNAL(killSignalReceived()), this, SLOT(close()), Qt::QueuedConnection);
 	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
 }
@@ -159,12 +160,18 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(void)
 {
-	while(m_messageHandler->isRunning())
+	//Stop message handler thread
+	if(m_messageHandler && m_messageHandler->isRunning())
 	{
 		m_messageHandler->stop();
-		m_messageHandler->wait();
+		if(!m_messageHandler->wait(10000))
+		{
+			m_messageHandler->terminate();
+			m_messageHandler->wait();
+		}
 	}
 
+	//Free memory
 	LAMEXP_DELETE(m_tabActionGroup);
 	LAMEXP_DELETE(m_styleActionGroup);
 	LAMEXP_DELETE(m_fileListModel);
