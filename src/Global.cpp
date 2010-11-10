@@ -50,6 +50,11 @@
 #include <Psapi.h>
 #endif //_DEBUG
 
+//Disable nasty warning
+#ifndef QT_DLL
+#pragma warning(disable:4101)
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // TYPES
 ///////////////////////////////////////////////////////////////////////////////
@@ -241,9 +246,15 @@ bool lamexp_init_qt(int argc, char* argv[])
 	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
 	qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
 
+	//Initialize static Qt plugins
+	#ifndef QT_DLL
+		Q_IMPORT_PLUGIN(qsvg);
+		Q_IMPORT_PLUGIN(qico);
+	#endif
+
 	//Check for supported image formats
 	QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
-	if(!(supportedFormats.contains("png") && supportedFormats.contains("gif")  && supportedFormats.contains("ico") && supportedFormats.contains("svg")))
+	if(!(supportedFormats.contains("png") && supportedFormats.contains("gif") && supportedFormats.contains("ico") && supportedFormats.contains("svg")))
 	{
 		qFatal("Qt initialization error: At least one image format plugin is missing!");
 		return false;

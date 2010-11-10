@@ -1,3 +1,3 @@
 @echo off
-call _build.bat "..\..\LameXP.sln" Debug
-pause
+set "LAMEXP_CONFIG=Debug"
+call _deploy.bat

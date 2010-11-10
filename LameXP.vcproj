@@ -102,6 +102,7 @@
 			IntermediateDirectory="$(SolutionDir)obj\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -157,6 +158,7 @@
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;"
 				GenerateDebugInformation="false"
 				AssemblyDebug="0"
+				GenerateMapFile="false"
 				MapExports="false"
 				SubSystem="2"
 				LinkTimeCodeGeneration="1"
@@ -184,6 +186,97 @@
 				Name="VCPostBuildEventTool"
 				Description="Copy plugin DLL&apos;s"
 				CommandLine="mkdir &quot;$(TargetDir)imageformats&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q???4.dll&quot; &quot;$(TargetDir)imageformats\&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release Static|Win32"
+			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)obj\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+				CommandLine=""
+				Outputs=""
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="3"
+				InlineFunctionExpansion="2"
+				EnableIntrinsicFunctions="true"
+				FavorSizeOrSpeed="1"
+				OmitFramePointers="true"
+				WholeProgramOptimization="true"
+				AdditionalIncludeDirectories="&quot;$(QTDIR_STATIC)\include&quot;;&quot;$(QTDIR_STATIC)\include\QtCore&quot;;&quot;$(QTDIR_STATIC)\include\QtGui&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG"
+				MinimalRebuild="false"
+				BasicRuntimeChecks="0"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				EnableEnhancedInstructionSet="0"
+				FloatingPointModel="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
+				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(QTDIR_STATIC)\lib&quot;;&quot;$(QTDIR_STATIC)\plugins\imageformats&quot;"
+				IgnoreDefaultLibraryNames=""
+				GenerateDebugInformation="false"
+				AssemblyDebug="0"
+				MapExports="false"
+				SubSystem="2"
+				LinkTimeCodeGeneration="1"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -288,6 +381,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\Dialog_MetaInfo.h"
@@ -304,6 +407,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -336,6 +449,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\Dialog_WorkingBanner.h"
@@ -352,6 +475,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -400,6 +533,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\Model_MetaInfo.h"
@@ -416,6 +559,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -456,6 +609,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\Thread_Initialization.h"
@@ -472,6 +635,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -504,6 +677,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\Thread_MessageProducer.h"
@@ -520,6 +703,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -614,6 +807,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\res\Images.qrc"
@@ -630,6 +833,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -670,6 +883,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\res\sounds\uuaarrgh.wav"
@@ -702,6 +925,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\gui\MetaInfo.ui"
@@ -718,6 +951,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -750,6 +993,16 @@
 						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\gui\WorkingBanner.ui"
@@ -766,6 +1019,16 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
