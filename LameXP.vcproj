@@ -93,7 +93,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Copy plugin DLL&apos;s"
-				CommandLine="mkdir &quot;$(TargetDir)\imageformats&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q???d4.dll&quot; &quot;$(TargetDir)\imageformats\&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir &quot;$(TargetDir)imageformats&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q???d4.dll&quot; &quot;$(TargetDir)imageformats\&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -183,7 +183,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Copy plugin DLL&apos;s"
-				CommandLine="mkdir &quot;$(TargetDir)\imageformats&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q???4.dll&quot; &quot;$(TargetDir)\imageformats\&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir &quot;$(TargetDir)imageformats&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q???4.dll&quot; &quot;$(TargetDir)imageformats\&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -261,6 +261,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\src\Config.h"
+				>
+			</File>
 			<File
 				RelativePath=".\src\Dialog_MainWindow.h"
 				>

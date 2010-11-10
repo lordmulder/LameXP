@@ -31,7 +31,7 @@ class MetaInfoModel : public QAbstractTableModel
 	Q_OBJECT
 
 public:
-	MetaInfoModel(AudioFileModel *file);
+	MetaInfoModel(AudioFileModel *file, unsigned int offset = 0);
 	~MetaInfoModel(void);
 
 	//Model functions
@@ -41,7 +41,9 @@ public:
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 	Qt::ItemFlags flags(const QModelIndex &index) const;
 	void editItem(const QModelIndex &index, QWidget *parent);
+	void clearData(void);
 
 private:
 	AudioFileModel* m_audioFile;
+	unsigned int m_offset;
 };

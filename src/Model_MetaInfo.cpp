@@ -25,8 +25,10 @@
 #include <QMessageBox>
 #include <QInputDialog>
 
-#define CHECK1(STR) (STR.isEmpty() ? "(Unknown)" : STR)
-#define CHECK2(VAL) ((VAL > 0) ? QString::number(VAL) : "(Unknown)")
+#define MODEL_ROW_COUNT 12
+
+#define CHECK1(STR) (STR.isEmpty() ? (m_offset ? "(Not Specified)" : "(Unknown)") : STR)
+#define CHECK2(VAL) ((VAL > 0) ? QString::number(VAL) : (m_offset ? "(Not Specified)" : "(Unknown)"))
 #define CHECK3(STR) (STR.isEmpty() ? Qt::darkGray : QVariant())
 #define CHECK4(VAL) ((VAL == 0) ? Qt::darkGray : QVariant())
 
@@ -34,9 +36,15 @@
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
-MetaInfoModel::MetaInfoModel(AudioFileModel *file)
+MetaInfoModel::MetaInfoModel(AudioFileModel *file, unsigned int offset)
 {
+	if(offset >= MODEL_ROW_COUNT)
+	{
+		throw "Offset is out of range!";
+	}
+
 	m_audioFile = file;
+	m_offset = offset;
 }
 
 MetaInfoModel::~MetaInfoModel(void)
@@ -54,14 +62,14 @@ int MetaInfoModel::columnCount(const QModelIndex &parent) const
 
 int MetaInfoModel::rowCount(const QModelIndex &parent) const
 {
-	return 12;
+	return MODEL_ROW_COUNT - m_offset;
 }
 
 QVariant MetaInfoModel::data(const QModelIndex &index, int role) const
 {
 	if(role == Qt::DisplayRole)
 	{
-		switch(index.row())
+		switch(index.row() + m_offset)
 		{
 		case 0:
 			return (!index.column()) ? "Full Path" : CHECK1(m_audioFile->filePath());
@@ -94,7 +102,7 @@ QVariant MetaInfoModel::data(const QModelIndex &index, int role) const
 			return (!index.column()) ? "Year" : CHECK2(m_audioFile->fileYear());
 			break;
 		case 10:
-			return (!index.column()) ? "Position" : CHECK2(m_audioFile->filePosition());
+			return (!index.column()) ? "Position" : ((m_audioFile->filePosition() == UINT_MAX) ? "Generate from list position" : CHECK2(m_audioFile->filePosition()));
 			break;
 		case 11:
 			return (!index.column()) ? "Comment" : CHECK1(m_audioFile->fileComment());
@@ -106,7 +114,7 @@ QVariant MetaInfoModel::data(const QModelIndex &index, int role) const
 	}
 	else if(role == Qt::DecorationRole && index.column() == 0)
 	{
-		switch(index.row())
+		switch(index.row() + m_offset)
 		{
 		case 0:
 			return QIcon(":/icons/folder_page.png");
@@ -151,7 +159,7 @@ QVariant MetaInfoModel::data(const QModelIndex &index, int role) const
 	}
 	else if(role == Qt::TextColorRole && index.column() == 1)
 	{
-		switch(index.row())
+		switch(index.row() + m_offset)
 		{
 		case 0:
 			return CHECK3(m_audioFile->filePath());
@@ -237,7 +245,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	QStringList generes("(Unspecified)");
 	QString temp;
 	
-	switch(index.row())
+	switch(index.row() + m_offset)
 	{
 	case 5:
 		temp = QInputDialog::getText(parent, "Edit Title", "Please enter the title for this file:", QLineEdit::Normal, m_audioFile->fileName(), &ok).simplified();
@@ -286,12 +294,28 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		}
 		break;
 	case 10:
-		val = QInputDialog::getInt(parent, "Edit Position", "Please enter the position (track no.) for this file:", (m_audioFile->filePosition() ? m_audioFile->filePosition() : 1), 0, 99, 1, &ok);
-		if(ok)
+		if(!m_offset)
 		{
-			beginResetModel();
-			m_audioFile->setFilePosition(val);
-			endResetModel();
+			val = QInputDialog::getInt(parent, "Edit Position", "Please enter the position (track no.) for this file:", (m_audioFile->filePosition() ? m_audioFile->filePosition() : 1), 0, 99, 1, &ok);
+			if(ok)
+			{
+				beginResetModel();
+				m_audioFile->setFilePosition(val);
+				endResetModel();
+			}
+		}
+		else
+		{
+			QStringList options;
+			options << "Unspecified (copy from source file)";
+			options << "Generate from list position";
+			temp = QInputDialog::getItem(parent, "Edit Position", "Please enter the position (track no.) for this file:", options, ((m_audioFile->filePosition() == UINT_MAX) ? 1 : 0), false, &ok);
+			if(ok)
+			{
+				beginResetModel();
+				m_audioFile->setFilePosition((options.indexOf(temp) == 1) ? UINT_MAX : 0);
+				endResetModel();
+			}
 		}
 		break;
 	case 11:
@@ -307,6 +331,31 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		QMessageBox::warning(parent, "Not editable", "Sorry, this property of the source file cannot be edited!");
 		break;
 	}
+}
+
+void MetaInfoModel::clearData(void)
+{
+	beginResetModel();
+
+	m_audioFile->setFilePath(QString());
+	m_audioFile->setFileName(QString());
+	m_audioFile->setFileArtist(QString());
+	m_audioFile->setFileAlbum(QString());
+	m_audioFile->setFileGenre(QString());
+	m_audioFile->setFileComment("Encoded with LameXP");
+	m_audioFile->setFileYear(0);
+	m_audioFile->setFilePosition(UINT_MAX);
+	m_audioFile->setFileDuration(0);
+	m_audioFile->setFormatContainerType(QString());
+	m_audioFile->setFormatContainerProfile(QString());
+	m_audioFile->setFormatAudioType(QString());
+	m_audioFile->setFormatAudioProfile(QString());
+	m_audioFile->setFormatAudioVersion(QString());
+	m_audioFile->setFormatAudioSamplerate(0);
+	m_audioFile->setFormatAudioChannels(0);
+	m_audioFile->setFormatAudioBitdepth(0);
+
+	endResetModel();
 }
 
 Qt::ItemFlags MetaInfoModel::flags(const QModelIndex &index) const

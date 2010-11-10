@@ -28,6 +28,7 @@
 #include "Dialog_MetaInfo.h"
 #include "Thread_FileAnalyzer.h"
 #include "Thread_MessageHandler.h"
+#include "Model_MetaInfo.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -47,7 +48,14 @@
 //Win32 includes
 #include <Windows.h>
 
+//Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
+#define ABORT_IF_BUSY \
+if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
+{ \
+	MessageBeep(MB_ICONEXCLAMATION); \
+	return; \
+} \
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -86,7 +94,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(buttonClearFiles, SIGNAL(clicked()), this, SLOT(clearFilesButtonClicked()));
 	connect(buttonFileUp, SIGNAL(clicked()), this, SLOT(fileUpButtonClicked()));
 	connect(buttonFileDown, SIGNAL(clicked()), this, SLOT(fileDownButtonClicked()));
-	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
+	connect(buttonShowDetails, SIGNAL(clicked()), this, SLOT(showDetailsButtonClicked()));
 	
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModel();
@@ -106,6 +114,17 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
 	connect(buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
 	connect(buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
+	
+	//Setup "Meta Data" tab
+	m_metaData = new AudioFileModel();
+	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
+	m_metaInfoModel->clearData();
+	metaDataView->setModel(m_metaInfoModel);
+	metaDataView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	metaDataView->verticalHeader()->hide();
+	metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
+	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
 	
 	//Activate file menu actions
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
@@ -171,6 +190,10 @@ MainWindow::~MainWindow(void)
 		}
 	}
 
+	//Unset models
+	sourceFileView->setModel(NULL);
+	metaDataView->setModel(NULL);
+	
 	//Free memory
 	LAMEXP_DELETE(m_tabActionGroup);
 	LAMEXP_DELETE(m_styleActionGroup);
@@ -180,6 +203,8 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_messageHandler);
 	LAMEXP_DELETE(m_delayedFileList);
 	LAMEXP_DELETE(m_delayedFileTimer);
+	LAMEXP_DELETE(m_metaData);
+	LAMEXP_DELETE(m_metaInfoModel);
 }
 
 ////////////////////////////////////////////////////////////
@@ -236,8 +261,9 @@ void MainWindow::windowShown(void)
  */
 void MainWindow::aboutButtonClicked(void)
 {
-	QString aboutText;
+	ABORT_IF_BUSY;
 	
+	QString aboutText;
 	aboutText += "<h2>LameXP - Audio Encoder Front-end</h2>";
 	aboutText += QString("<b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b><br>").arg(max(lamexp_version_date().year(),QDate::currentDate().year()));
 	aboutText += QString().sprintf("<b>Version %d.%02d %s, Build %d [%s]</b><br><br>", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
@@ -330,13 +356,7 @@ void MainWindow::aboutButtonClicked(void)
  */
 void MainWindow::encodeButtonClicked(void)
 {
-	if(m_delayedFileTimer->isActive())
-	{
-		
-		MessageBeep(MB_ICONERROR);
-		return;
-	}
-
+	ABORT_IF_BUSY;
 	QMessageBox::warning(this, "LameXP", "Not implemented yet, please try again with a later version!");
 }
 
@@ -345,6 +365,8 @@ void MainWindow::encodeButtonClicked(void)
  */
 void MainWindow::addFilesButtonClicked(void)
 {
+	ABORT_IF_BUSY;
+
 	tabWidget->setCurrentIndex(0);
 	QStringList selectedFiles = QFileDialog::getOpenFileNames(this, "Add file(s)", QString(), "All supported files (*.*)");
 	
@@ -369,6 +391,8 @@ void MainWindow::addFilesButtonClicked(void)
  */
 void MainWindow::openFolderActionActivated(void)
 {
+	ABORT_IF_BUSY;
+
 	tabWidget->setCurrentIndex(0);
 	QString selectedFolder = QFileDialog::getExistingDirectory(this, "Add folder", QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
 	
@@ -443,10 +467,12 @@ void MainWindow::fileDownButtonClicked(void)
 }
 
 /*
- * Edit meta button
+ * Show details button
  */
-void MainWindow::editMetaButtonClicked(void)
+void MainWindow::showDetailsButtonClicked(void)
 {
+	ABORT_IF_BUSY;
+
 	int iResult = 0;
 	MetaInfoDialog *metaInfoDialog = new MetaInfoDialog(this);
 	QModelIndex index = sourceFileView->currentIndex();
@@ -574,6 +600,8 @@ void MainWindow::gotoMusicFolderButtonClicked(void)
  */
 void MainWindow::makeFolderButtonClicked(void)
 {
+	ABORT_IF_BUSY;
+
 	QDir basePath(m_fileSystemModel->filePath(outputFolderView->currentIndex()));
 	
 	bool bApplied = true;
@@ -614,6 +642,23 @@ void MainWindow::makeFolderButtonClicked(void)
 	}
 }
 
+/*
+ * Edit meta button clicked
+ */
+void MainWindow::editMetaButtonClicked(void)
+{
+	ABORT_IF_BUSY;
+	m_metaInfoModel->editItem(metaDataView->currentIndex(), this);
+}
+
+/*
+ * Reset meta button clicked
+ */
+void MainWindow::clearMetaButtonClicked(void)
+{
+	ABORT_IF_BUSY;
+	m_metaInfoModel->clearData();
+}
 
 /*
  * Visit homepage action
@@ -628,6 +673,8 @@ void MainWindow::visitHomepageActionActivated(void)
  */
 void MainWindow::checkUpdatesActionActivated(void)
 {
+	ABORT_IF_BUSY;
+
 	m_banner->show("Checking for updates, please be patient...");
 	
 	for(int i = 0; i < 300; i++)
