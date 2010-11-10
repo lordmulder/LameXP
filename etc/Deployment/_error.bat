@@ -1,5 +1,5 @@
 @echo off
 echo.
-echo %~n1%~x1 !!!
+echo %~1 !!!
 echo.
 pause

@@ -7,12 +7,12 @@ set "VER_LAMEXP_MINOR_LO="
 set "VER_LAMEXP_BUILD="
 set "VER_LAMEXP_SUFFIX="
 REM ------------------------------------------
-FOR /F "tokens=2,3" %%s IN (..\..\src\Resource.h) DO (
-	if "%%s"=="VER_LAMEXP_MAJOR" set "VER_LAMEXP_MAJOR=%%t"
-	if "%%s"=="VER_LAMEXP_MINOR_HI" set "VER_LAMEXP_MINOR_HI=%%t"
-	if "%%s"=="VER_LAMEXP_MINOR_LO" set "VER_LAMEXP_MINOR_LO=%%t"
-	if "%%s"=="VER_LAMEXP_BUILD" set "VER_LAMEXP_BUILD=%%t"
-	if "%%s"=="VER_LAMEXP_SUFFIX" set "VER_LAMEXP_SUFFIX=%%t"
+for /f "tokens=2,*" %%s in (..\..\src\Config.h) do (
+	if "%%s"=="VER_LAMEXP_MAJOR" set "VER_LAMEXP_MAJOR=%%~t"
+	if "%%s"=="VER_LAMEXP_MINOR_HI" set "VER_LAMEXP_MINOR_HI=%%~t"
+	if "%%s"=="VER_LAMEXP_MINOR_LO" set "VER_LAMEXP_MINOR_LO=%%~t"
+	if "%%s"=="VER_LAMEXP_BUILD" set "VER_LAMEXP_BUILD=%%~t"
+	if "%%s"=="VER_LAMEXP_SUFFIX" set "VER_LAMEXP_SUFFIX=%%~t"
 )
 REM ------------------------------------------
 set "LAMEXP_ERROR=1"
