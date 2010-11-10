@@ -11,11 +11,14 @@ REM ------------------------------------------
 if "%LAMEXP_CONFIG%"=="" (
 	set "LAMEXP_CONFIG=Release"
 )
+if not "%LAMEXP_REDIST%"=="0" (
+	set "LAMEXP_REDIST=1"
+)
 REM ------------------------------------------
 set "OUT_PATH=..\..\bin\%LAMEXP_CONFIG%"
 set "OUT_DATE=%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%"
 set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG%"
-set "TMP_PATH=%TEMP%\~LameXP.%OUT_DATE%.tmp"
+set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
 REM ------------------------------------------
 REM :: READ VERSION INFO ::
 REM ------------------------------------------
@@ -51,13 +54,15 @@ REM ------------------------------------------
 rd /S /Q "%TMP_PATH%"
 mkdir "%TMP_PATH%"
 mkdir "%TMP_PATH%\imageformats"
-REM ------------------------------------------
 copy "%OUT_PATH%\*.exe" "%TMP_PATH%"
-copy "%QTDIR%\bin\QtCore4.dll" "%TMP_PATH%"
-copy "%QTDIR%\bin\QtGui4.dll" "%TMP_PATH%"
-copy "%QTDIR%\bin\QtXml4.dll" "%TMP_PATH%"
-copy "%QTDIR%\bin\QtSvg4.dll" "%TMP_PATH%"
-copy "%QTDIR%\plugins\imageformats\q???4.dll" "%TMP_PATH%\imageformats"
+REM ------------------------------------------
+if "%LAMEXP_REDIST%"=="1" (
+	copy "%QTDIR%\bin\QtCore4.dll" "%TMP_PATH%"
+	copy "%QTDIR%\bin\QtGui4.dll" "%TMP_PATH%"
+	copy "%QTDIR%\bin\QtXml4.dll" "%TMP_PATH%"
+	copy "%QTDIR%\bin\QtSvg4.dll" "%TMP_PATH%"
+	copy "%QTDIR%\plugins\imageformats\q???4.dll" "%TMP_PATH%\imageformats"
+)
 REM ------------------------------------------
 for %%f in ("%TMP_PATH%\*.exe") do (
 	"%PATH_UPXBIN%\upx.exe" --best --lzma "%%f"
@@ -70,7 +75,9 @@ if exist _postproc.bat (
 	call _postproc.bat "%TMP_PATH%"
 )
 REM ------------------------------------------
-copy "..\Redist\*.*" "%TMP_PATH%"
+if "%LAMEXP_REDIST%"=="1" (
+	copy "..\Redist\*.*" "%TMP_PATH%"
+)
 copy "..\..\License.txt" "%TMP_PATH%"
 REM ------------------------------------------
 REM :: CREATE PACKAGES ::
