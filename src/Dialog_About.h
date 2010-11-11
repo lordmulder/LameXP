@@ -30,6 +30,7 @@ public:
 
 public slots:
 	int exec();
+	static const char *neroAacUrl;
 
 private:
 	void AboutDialog::showMoreAbout();

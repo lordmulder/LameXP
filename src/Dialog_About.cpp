@@ -36,6 +36,13 @@
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 
+//Constants
+const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
+
+////////////////////////////////////////////////////////////
+// Constructor
+////////////////////////////////////////////////////////////
+
 AboutDialog::AboutDialog(QWidget *parent)
 	: QMessageBox(parent)
 {
@@ -83,6 +90,10 @@ AboutDialog::~AboutDialog(void)
 {
 }
 
+////////////////////////////////////////////////////////////
+// Public Functions
+////////////////////////////////////////////////////////////
+
 int AboutDialog::exec()
 {
 	PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
@@ -105,30 +116,32 @@ int AboutDialog::exec()
 	return 0;
 }
 
+////////////////////////////////////////////////////////////
+// Private Functions
+////////////////////////////////////////////////////////////
+
 void AboutDialog::showMoreAbout()
 {
-	const QString li("<li style=\"margin-left:-25px\">");
-	
 	QString moreAboutText;
 	moreAboutText += "<h3>The following third-party software is used in LameXP:</h3>";
-	moreAboutText += "<ul>";
-	moreAboutText += li + "<b>LAME - OpenSource mp3 Encoder</b><br>";
+	moreAboutText += "<div  style=\"margin-left:-25px\"><ul>";
+	moreAboutText += "<li><b>LAME - OpenSource mp3 Encoder</b><br>";
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://lame.sourceforge.net/");
 	moreAboutText += "<br>";
-	moreAboutText += li + "<b>OggEnc - Ogg Vorbis Encoder</b>";
+	moreAboutText += "<li><b>OggEnc - Ogg Vorbis Encoder</b>";
 	moreAboutText += "<br>Completely open and patent-free audio encoding technology.<br>";
 	moreAboutText += LINK("http://www.vorbis.com/");
 	moreAboutText += "<br>";
-	moreAboutText += li + "<b>Nero AAC reference MPEG-4 Encoder</b><br>";
+	moreAboutText += "<li><b>Nero AAC reference MPEG-4 Encoder</b><br>";
 	moreAboutText += "Freeware state-of-the-art HE-AAC encoder with 2-Pass support.<br>";
 	moreAboutText += "(Available from vendor web-site as free download)<br>";
-	moreAboutText += LINK("http://www.nero.com/eng/technologies-aac-codec.html/");
+	moreAboutText += LINK(neroAacUrl);
 	moreAboutText += "<br>";
-	moreAboutText += li + "<b>MediaInfo - Media File Analysis Tool</b><br>";
+	moreAboutText += "<li><b>MediaInfo - Media File Analysis Tool</b><br>";
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
-	moreAboutText += "<br></ul>";
+	moreAboutText += "<br></ul></div>";
 
 	QMessageBox *moreAboutBox = new QMessageBox(dynamic_cast<QWidget*>(this->parent()));
 	moreAboutBox->setText(moreAboutText);

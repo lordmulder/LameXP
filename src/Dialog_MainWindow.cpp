@@ -56,9 +56,8 @@ if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
 { \
 	MessageBeep(MB_ICONEXCLAMATION); \
 	return; \
-} \
-
-#define LINK(X) ""
+}
+#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -129,6 +128,11 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
 	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
 	
+	//Setup "Compression" tab
+	sliderBitrate->setValue(24);
+	connect(sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
+	updateBitrate(sliderBitrate->value());
+
 	//Activate file menu actions
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
 
@@ -265,6 +269,23 @@ void MainWindow::windowShown(void)
 {
 	QStringList arguments = QApplication::arguments();
 
+	//Check for AAC support
+	if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
+	{
+		radioButtonEncoderAAC->setEnabled(true);
+	}
+	else
+	{
+		QString messageText;
+		messageText += "<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>";
+		messageText += "Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>";
+		messageText += "You can download the Nero AAC encoder for free from the official Nero web-site at:<br>";
+		messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
+		QMessageBox::information(this, "AAC Support Disabled", messageText);
+		radioButtonEncoderAAC->setEnabled(false);
+	}
+	
+	//Add files from the command-line
 	for(int i = 0; i < arguments.count() - 1; i++)
 	{
 		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
@@ -658,4 +679,12 @@ void MainWindow::handleDelayedFiles(void)
 	}
 	
 	addFiles(selectedFiles);
+}
+
+/*
+ * Update bitrate
+ */
+void MainWindow::updateBitrate(int value)
+{
+	labelBitrate->setText(QString("%1 kbps").arg(value * 8));
 }

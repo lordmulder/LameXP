@@ -285,8 +285,10 @@ int lamexp_init_ipc(void)
 		return 0;
 	}
 	
-	g_lamexp_semaphore_read_ptr = new QSystemSemaphore(g_lamexp_semaphore_read_uuid, 0);
-	g_lamexp_semaphore_write_ptr = new QSystemSemaphore(g_lamexp_semaphore_write_uuid, 0);
+	const QString versionTag = QString().sprintf("@%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build());
+
+	g_lamexp_semaphore_read_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_read_uuid).append(versionTag), 0);
+	g_lamexp_semaphore_write_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_write_uuid).append(versionTag), 0);
 
 	if(g_lamexp_semaphore_read_ptr->error() != QSystemSemaphore::NoError)
 	{
@@ -305,7 +307,7 @@ int lamexp_init_ipc(void)
 		return -1;
 	}
 
-	g_lamexp_sharedmem_ptr = new QSharedMemory(g_lamexp_sharedmem_uuid, NULL);
+	g_lamexp_sharedmem_ptr = new QSharedMemory(QString(g_lamexp_sharedmem_uuid).append(versionTag), NULL);
 	
 	if(!g_lamexp_sharedmem_ptr->create(sizeof(lamexp_ipc_t)))
 	{
@@ -495,20 +497,28 @@ void lamexp_finalization(void)
  */
 void lamexp_register_tool(const QString &toolName, LockedFile *file)
 {
-	if(g_lamexp_tool_registry.contains(toolName))
+	if(g_lamexp_tool_registry.contains(toolName.toLower()))
 	{
 		throw "lamexp_register_tool: Tool is already registered!";
 	}
 
-	g_lamexp_tool_registry.insert(toolName, file);
+	g_lamexp_tool_registry.insert(toolName.toLower(), file);
 }
 
 /*
- * Register tool
+ * Check for tool
+ */
+bool lamexp_check_tool(const QString &toolName)
+{
+	return g_lamexp_tool_registry.contains(toolName.toLower());
+}
+
+/*
+ * Lookup tool
  */
 const QString lamexp_lookup_tool(const QString &toolName)
 {
-	if(g_lamexp_tool_registry.contains(toolName))
+	if(g_lamexp_tool_registry.contains(toolName.toLower()))
 	{
 		return g_lamexp_tool_registry.value(toolName)->filePath();
 	}

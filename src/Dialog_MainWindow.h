@@ -66,6 +66,7 @@ private slots:
 	void handleDelayedFiles(void);
 	void editMetaButtonClicked(void);
 	void clearMetaButtonClicked(void);
+	void updateBitrate(int value);
 
 protected:
 	void showEvent(QShowEvent *event);

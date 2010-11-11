@@ -24,6 +24,9 @@
 #include "Global.h"
 #include "LockedFile.h"
 
+#include <QFileInfo>
+#include <QCoreApplication>
+
 ////////////////////////////////////////////////////////////
 // TOOLS
 ////////////////////////////////////////////////////////////
@@ -43,7 +46,6 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"e613a1b56a2187edb4cdf3628a5a3e60de2e8cbc", "lame.exe"},
 	{"775b260b3f64101beaeb317b74746f9bccdab842", "MAC.exe"},
 	{"e770eaa5f2449d0fd6b3f3c02a1f574fc4370b5e", "mediainfo_icl11.exe"},
-//	{"6f57f93b597f143453c6a30ee0bc9d161afe2e4b", "mediainfo_msvc9.exe"},
 	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe"},
 	{"8bbf4a3fffe2ff143eb5ba2cf82ca16d676e865d", "mpg123.exe"},
 	{"437a1b193727c3dbdd557b9a58659d1ce7fbec51", "oggdec.exe"},
@@ -114,6 +116,37 @@ void InitializationThread::run()
 	}
 	
 	qDebug("All extracted.\n");
+
+	//Look for Nero encoder
+	QFileInfo neroFileInfo[3];
+	neroFileInfo[0] = QFileInfo(QString("%1/neroAacEnc.exe").arg(QCoreApplication::applicationDirPath()));
+	neroFileInfo[1] = QFileInfo(QString("%1/neroAacDec.exe").arg(QCoreApplication::applicationDirPath()));
+	neroFileInfo[2] = QFileInfo(QString("%1/neroAacTag.exe").arg(QCoreApplication::applicationDirPath()));
+	
+	bool neroFilesFound = true;
+	for(int i = 0; i < 3; i++)	{ if(!neroFileInfo[i].exists()) neroFilesFound = false; }
+
+	//Lock the Nero binaries
+	if(neroFilesFound)
+	{
+		qDebug("Found Nero AAC encoder binary:\n%s\n", neroFileInfo[0].absoluteFilePath().toUtf8().constData());
+		LockedFile *neroBin[3];
+		for(int i = 0; i < 3; i++) neroBin[i] = NULL;
+		try
+		{
+			for(int i = 0; i < 3; i++) { neroBin[i] = new LockedFile(neroFileInfo[i].absoluteFilePath()); }
+			for(int i = 0; i < 3; i++) { lamexp_register_tool(neroFileInfo[i].fileName(), neroBin[i]); }
+		}
+		catch(...)
+		{
+			for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
+			qWarning("Failed to lock Nero encoder binary -> AAC encoding support will be disabled!");
+		}
+	}
+	else
+	{
+		qDebug("Nero encoder binaries not found -> AAC encoding support will be disabled!\n");
+	}
 	
 	delay();
 	m_bSuccess = true;

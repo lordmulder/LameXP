@@ -3,12 +3,13 @@
 	<qresource>
     <file>images/Busy.gif</file>
     <file>images/HeaderIcon_MetaInfo.png</file>
-		<file>images/Label.png</file>
-		<file>images/Loading.gif</file>
-		<file>images/Logo.png</file>
-		<file>images/Splash.png</file>
-		<file>images/Thumb.png</file>
+    <file>images/Label.png</file>
+    <file>images/Loading.gif</file>
+    <file>images/Logo.png</file>
+    <file>images/Splash.png</file>
+    <file>images/Thumb.png</file>
     <file>images/Construction.gif</file>
+    <file>images/Cogwheels.png</file>
     <file>images/Qt.svg</file>
   </qresource>
 </RCC>
