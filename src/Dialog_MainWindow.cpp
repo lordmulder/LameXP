@@ -26,6 +26,7 @@
 #include "Resource.h"
 #include "Dialog_WorkingBanner.h"
 #include "Dialog_MetaInfo.h"
+#include "Dialog_About.h"
 #include "Thread_FileAnalyzer.h"
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
@@ -44,18 +45,20 @@
 #include <QCleanlooksStyle>
 #include <QWindowsVistaStyle>
 #include <QWindowsStyle>
+#include <QSysInfo>
 
 //Win32 includes
 #include <Windows.h>
 
 //Helper macros
-#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 #define ABORT_IF_BUSY \
 if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
 { \
 	MessageBeep(MB_ICONEXCLAMATION); \
 	return; \
 } \
+
+#define LINK(X) ""
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -147,6 +150,8 @@ MainWindow::MainWindow(QWidget *parent)
 	m_styleActionGroup->addAction(actionStyleWindowsXP);
 	m_styleActionGroup->addAction(actionStyleWindowsClassic);
 	actionStylePlastique->setChecked(true);
+	actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP);
+	actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA);
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 
 	//Activate help menu actions
@@ -208,10 +213,37 @@ MainWindow::~MainWindow(void)
 }
 
 ////////////////////////////////////////////////////////////
-// PUBLIC FUNCTIONS
+// PRIVATE FUNCTIONS
 ////////////////////////////////////////////////////////////
 
-/*NONE*/
+void MainWindow::addFiles(const QStringList &files)
+{
+	if(files.isEmpty())
+	{
+		return;
+	}
+
+	tabWidget->setCurrentIndex(0);
+
+	FileAnalyzer *analyzer = new FileAnalyzer(files);
+	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
+	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+
+	m_banner->show("Adding file(s), please wait...", analyzer);
+
+	if(analyzer->filesDenied())
+	{
+		QMessageBox::warning(this, "Access Denied", QString("<nobr>%1 file(s) have been rejected, because read access was not granted!<br>This usually means the file is locked by another process.</nobr>").arg(analyzer->filesDenied()));
+	}
+	if(analyzer->filesRejected())
+	{
+		QMessageBox::warning(this, "Files Rejected", QString("<nobr>%1 file(s) have been rejected, because the file format could not be recognized!<br>This usually means the file is damaged or the file format is not supported.</nobr>").arg(analyzer->filesRejected()));
+	}
+
+	LAMEXP_DELETE(analyzer);
+	sourceFileView->scrollToBottom();
+	m_banner->close();
+}
 
 ////////////////////////////////////////////////////////////
 // EVENTS
@@ -262,92 +294,8 @@ void MainWindow::windowShown(void)
 void MainWindow::aboutButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-	
-	QString aboutText;
-	aboutText += "<h2>LameXP - Audio Encoder Front-end</h2>";
-	aboutText += QString("<b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b><br>").arg(max(lamexp_version_date().year(),QDate::currentDate().year()));
-	aboutText += QString().sprintf("<b>Version %d.%02d %s, Build %d [%s]</b><br><br>", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
-	aboutText += "<nobr>Please visit the official web-site at ";
-	aboutText += LINK("http://mulder.dummwiedeutsch.de/") += " for news and updates!</nobr><br>";
-	aboutText += "<hr><br>";
-	aboutText += "<nobr><tt>This program is free software; you can redistribute it and/or<br>";
-	aboutText += "modify it under the terms of the GNU General Public License<br>";
-	aboutText += "as published by the Free Software Foundation; either version 2<br>";
-	aboutText += "of the License, or (at your option) any later version.<br><br>";
-	aboutText += "This program is distributed in the hope that it will be useful,<br>";
-	aboutText += "but WITHOUT ANY WARRANTY; without even the implied warranty of<br>";
-	aboutText += "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>";
-	aboutText += "GNU General Public License for more details.<br><br>";
-	aboutText += "You should have received a copy of the GNU General Public License<br>";
-	aboutText += "along with this program; if not, write to the Free Software<br>";
-	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</tt></nobr><br>";
-	aboutText += "<hr><br>";
-	aboutText += "This software uses the 'slick' icon set by Mark James &ndash; <a href=\"http://www.famfamfam.com/lab/icons/silk/\">http://www.famfamfam.com/</a>.<br>";
-	aboutText += "Released under the Creative Commons Attribution 2.5 License.<br>";
-	
-	QMessageBox *aboutBox = new QMessageBox(this);
-	aboutBox->setText(aboutText);
-	aboutBox->setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
-	aboutBox->setWindowTitle("About LameXP");
-	
-	QPushButton *firstButton = aboutBox->addButton("More About...", QMessageBox::AcceptRole);
-	firstButton->setIcon(QIcon(":/icons/information.png"));
-	firstButton->setMinimumWidth(120);
-
-	QPushButton *secondButton = aboutBox->addButton("About Qt...", QMessageBox::AcceptRole);
-	secondButton->setIcon(QIcon(":/images/Qt.svg"));
-	secondButton->setMinimumWidth(120);
-
-	QPushButton *thirdButton = aboutBox->addButton("Discard", QMessageBox::AcceptRole);
-	thirdButton->setIcon(QIcon(":/icons/cross.png"));
-	thirdButton->setMinimumWidth(90);
-
-	PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
-
-	while(1)
-	{
-		switch(aboutBox->exec())
-		{
-		case 0:
-			{
-				const QString li("<li style=\"margin-left:-25px\">");
-				QString moreAboutText;
-				moreAboutText += "<h3>The following third-party software is used in LameXP:</h3>";
-				moreAboutText += "<ul>";
-				moreAboutText += li + "<b>LAME - OpenSource mp3 Encoder</b><br>";
-				moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
-				moreAboutText += LINK("http://lame.sourceforge.net/");
-				moreAboutText += "<br>";
-				moreAboutText += li + "<b>OggEnc - Ogg Vorbis Encoder</b>";
-				moreAboutText += "<br>Completely open and patent-free audio encoding technology.<br>";
-				moreAboutText += LINK("http://www.vorbis.com/");
-				moreAboutText += "<br>";
-				moreAboutText += li + "<b>Nero AAC reference MPEG-4 Encoder</b><br>";
-				moreAboutText += "Freeware state-of-the-art HE-AAC encoder with 2-Pass support.<br>";
-				moreAboutText += LINK("http://www.nero.com/eng/technologies-aac-codec.html/");
-				moreAboutText += "<br>";
-				moreAboutText += li + "<b>MediaInfo - Media File Analysis Tool</b><br>";
-				moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
-				moreAboutText += LINK("http://mediainfo.sourceforge.net/");
-				moreAboutText += "<br></ul>";
-
-				QMessageBox *moreAboutBox = new QMessageBox(this);
-				moreAboutBox->setText(moreAboutText);
-				moreAboutBox->setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
-				moreAboutBox->setWindowTitle("About Third-party Software");
-				moreAboutBox->exec();
-				
-				LAMEXP_DELETE(moreAboutBox);
-				break;
-			}
-		case 1:
-			QMessageBox::aboutQt(this);
-			break;
-		default:
-			return;
-		}
-	}
-
+	AboutDialog *aboutBox = new AboutDialog(this);
+	aboutBox->exec();
 	LAMEXP_DELETE(aboutBox);
 }
 
@@ -366,24 +314,8 @@ void MainWindow::encodeButtonClicked(void)
 void MainWindow::addFilesButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-
-	tabWidget->setCurrentIndex(0);
 	QStringList selectedFiles = QFileDialog::getOpenFileNames(this, "Add file(s)", QString(), "All supported files (*.*)");
-	
-	if(selectedFiles.isEmpty())
-	{
-		return;
-	}
-
-	FileAnalyzer *analyzer = new FileAnalyzer(selectedFiles);
-	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
-	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-
-	m_banner->show("Adding file(s), please wait...", analyzer);
-	LAMEXP_DELETE(analyzer);
-	
-	sourceFileView->scrollToBottom();
-	m_banner->close();
+	addFiles(selectedFiles);
 }
 
 /*
@@ -392,8 +324,6 @@ void MainWindow::addFilesButtonClicked(void)
 void MainWindow::openFolderActionActivated(void)
 {
 	ABORT_IF_BUSY;
-
-	tabWidget->setCurrentIndex(0);
 	QString selectedFolder = QFileDialog::getExistingDirectory(this, "Add folder", QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
 	
 	if(!selectedFolder.isEmpty())
@@ -406,16 +336,8 @@ void MainWindow::openFolderActionActivated(void)
 		{
 			fileList << fileInfoList.takeFirst().absoluteFilePath();
 		}
-		
-		FileAnalyzer *analyzer = new FileAnalyzer(fileList);
-		connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
-		connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
 
-		m_banner->show("Adding folder, please wait...", analyzer);
-		LAMEXP_DELETE(analyzer);
-	
-		sourceFileView->scrollToBottom();
-		m_banner->close();
+		addFiles(fileList);
 	}
 }
 
@@ -734,14 +656,6 @@ void MainWindow::handleDelayedFiles(void)
 	{
 		selectedFiles << QFileInfo(m_delayedFileList->takeFirst()).absoluteFilePath();
 	}
-
-	FileAnalyzer *analyzer = new FileAnalyzer(selectedFiles);
-	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
-	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-
-	m_banner->show("Adding file(s), please wait...", analyzer);
-	LAMEXP_DELETE(analyzer);
 	
-	sourceFileView->scrollToBottom();
-	m_banner->close();
+	addFiles(selectedFiles);
 }

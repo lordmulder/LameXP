@@ -40,6 +40,9 @@ public:
 	FileAnalyzer(const QStringList &inputFiles);
 	void run();
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
+	unsigned int filesAccepted(void);
+	unsigned int filesRejected(void);
+	unsigned int filesDenied(void);
 
 signals:
 	void fileSelected(const QString &fileName);
@@ -62,5 +65,8 @@ private:
 	QStringList m_inputFiles;
 	QString m_mediaInfoBin;
 	section_t m_currentSection;
+	unsigned int m_filesAccepted;
+	unsigned int m_filesRejected;
+	unsigned int m_filesDenied;
 	bool m_bSuccess;
 };

@@ -71,6 +71,8 @@ protected:
 	void showEvent(QShowEvent *event);
 
 private:
+	void addFiles(const QStringList &files);
+
 	FileListModel *m_fileListModel;
 	QFileSystemModel *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;

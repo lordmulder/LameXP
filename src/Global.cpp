@@ -50,6 +50,14 @@
 #include <Psapi.h>
 #endif //_DEBUG
 
+//Static build only macros
+#ifdef QT_NODLL
+#pragma warning(disable:4101)
+#define LAMEXP_INIT_QT_STATIC_PLUGIN(X) Q_IMPORT_PLUGIN(X)
+#else
+#define LAMEXP_INIT_QT_STATIC_PLUGIN(X)
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // TYPES
 ///////////////////////////////////////////////////////////////////////////////
@@ -90,6 +98,9 @@ static const char *g_lamexp_semaphore_read_uuid = "{7A605549-F58C-4d78-B4E5-06EF
 static QSystemSemaphore *g_lamexp_semaphore_read_ptr = NULL;
 static const char *g_lamexp_semaphore_write_uuid = "{60AA8D04-F6B8-497d-81EB-0F600F4A65B5}";
 static QSystemSemaphore *g_lamexp_semaphore_write_ptr = NULL;
+
+//Image formats
+static const char *g_lamexp_imageformats[] = {"png", "gif", "ico", "svg", NULL};
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
@@ -189,12 +200,6 @@ void lamexp_init_console(int argc, char* argv[])
 	}
 }
 
-/* Disable nasty warning */
-#if !defined(QT_DLL) || defined(QT_NODLL)
-#pragma warning(push)
-#pragma warning(disable:4101)
-#endif
-
 /*
  * Initialize Qt framework
  */
@@ -213,7 +218,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	QT_REQUIRE_VERSION(argc, argv, QT_VERSION_STR);
 	
 	//Check the Windows version
-	switch(QSysInfo::WindowsVersion)
+	switch(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based)
 	{
 	case QSysInfo::WV_2000:
 		qDebug("Running on Windows 2000 (not offically supported!).\n");
@@ -247,18 +252,19 @@ bool lamexp_init_qt(int argc, char* argv[])
 	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
 	qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
 
-	//Initialize static Qt plugins
-	#ifndef QT_DLL
-		Q_IMPORT_PLUGIN(qsvg);
-		Q_IMPORT_PLUGIN(qico);
-	#endif
+	//Init static Qt plugins
+	LAMEXP_INIT_QT_STATIC_PLUGIN(qico);
+	LAMEXP_INIT_QT_STATIC_PLUGIN(qsvg);
 
 	//Check for supported image formats
 	QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
-	if(!(supportedFormats.contains("png") && supportedFormats.contains("gif") && supportedFormats.contains("ico") && supportedFormats.contains("svg")))
+	for(int i = 0; g_lamexp_imageformats[i]; i++)
 	{
-		qFatal("Qt initialization error: At least one image format plugin is missing!");
-		return false;
+		if(!supportedFormats.contains(g_lamexp_imageformats[i]))
+		{
+			qFatal("Qt initialization error: At least one image format plugin is missing! (%s)", g_lamexp_imageformats[i]);
+			return false;
+		}
 	}
 
 	//Change application look
@@ -268,11 +274,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 	qt_initialized = true;
 	return true;
 }
-
-/* Re-enable the warning */
-#if !defined(QT_DLL) || defined(QT_NODLL)
-#pragma warning(pop)
-#endif
 
 /*
  * Initialize IPC

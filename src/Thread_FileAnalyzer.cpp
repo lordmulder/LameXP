@@ -47,6 +47,10 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 	{
 		qFatal("Invalid path to MediaInfo binary. Tool not initialized properly.");
 	}
+
+	m_filesAccepted = 0;
+	m_filesRejected = 0;
+	m_filesDenied = 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -56,6 +60,11 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 void FileAnalyzer::run()
 {
 	m_bSuccess = false;
+
+	m_filesAccepted = 0;
+	m_filesRejected = 0;
+	m_filesDenied = 0;
+
 	m_inputFiles.sort();
 
 	while(!m_inputFiles.isEmpty())
@@ -66,9 +75,11 @@ void FileAnalyzer::run()
 		AudioFileModel file = analyzeFile(currentFile);
 		if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
 		{
+			m_filesRejected++;
 			qDebug("Skipped: %s", file.filePath().toUtf8().constData());
 			continue;
 		}
+		m_filesAccepted++;
 		emit fileAnalyzed(file);
 	}
 
@@ -89,6 +100,7 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 	if(!readTest.open(QIODevice::ReadOnly))
 	{
 		qWarning("Cannot access file for reading, skipping!");
+		m_filesDenied++;
 		return audioFile;
 	}
 	else
@@ -323,6 +335,20 @@ unsigned int FileAnalyzer::parseDuration(const QString &str)
 	return 0;
 }
 
+unsigned int FileAnalyzer::filesAccepted(void)
+{
+	return m_filesAccepted;
+}
+
+unsigned int FileAnalyzer::filesRejected(void)
+{
+	return m_filesRejected - m_filesDenied;
+}
+
+unsigned int FileAnalyzer::filesDenied(void)
+{
+	return m_filesDenied;
+}
 
 ////////////////////////////////////////////////////////////
 // EVENTS
