@@ -1,0 +1,1 @@
+In order to make static builds you must put the static Qt libs here!

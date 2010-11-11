@@ -189,7 +189,7 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release Static|Win32"
+			Name="Release_Static|Win32"
 			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
 			IntermediateDirectory="$(SolutionDir)obj\$(ConfigurationName)"
 			ConfigurationType="1"
@@ -221,8 +221,8 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="&quot;$(QTDIR_STATIC)\include&quot;;&quot;$(QTDIR_STATIC)\include\QtCore&quot;;&quot;$(QTDIR_STATIC)\include\QtGui&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG;QT_NODLL"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="0"
@@ -246,8 +246,9 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
 				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib"
+				Version=""
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(QTDIR_STATIC)\lib&quot;;&quot;$(QTDIR_STATIC)\plugins\imageformats&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\lib&quot;;&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="false"
 				AssemblyDebug="0"
@@ -382,7 +383,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -416,7 +417,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -450,7 +451,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -484,7 +485,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -534,7 +535,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -568,7 +569,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -610,7 +611,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -644,7 +645,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -678,7 +679,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -712,7 +713,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -808,7 +809,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -842,7 +843,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -884,7 +885,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -926,7 +927,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -960,7 +961,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -994,7 +995,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
@@ -1028,7 +1029,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release Static|Win32"
+					Name="Release_Static|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"

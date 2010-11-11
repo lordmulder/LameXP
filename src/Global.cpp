@@ -50,11 +50,6 @@
 #include <Psapi.h>
 #endif //_DEBUG
 
-//Disable nasty warning
-#ifndef QT_DLL
-#pragma warning(disable:4101)
-#endif
-
 ///////////////////////////////////////////////////////////////////////////////
 // TYPES
 ///////////////////////////////////////////////////////////////////////////////
@@ -194,6 +189,12 @@ void lamexp_init_console(int argc, char* argv[])
 	}
 }
 
+/* Disable nasty warning */
+#if !defined(QT_DLL) || defined(QT_NODLL)
+#pragma warning(push)
+#pragma warning(disable:4101)
+#endif
+
 /*
  * Initialize Qt framework
  */
@@ -267,6 +268,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 	qt_initialized = true;
 	return true;
 }
+
+/* Re-enable the warning */
+#if !defined(QT_DLL) || defined(QT_NODLL)
+#pragma warning(pop)
+#endif
 
 /*
  * Initialize IPC
@@ -390,14 +396,6 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 	}
 
 	LAMEXP_DELETE(lamexp_ipc);
-}
-
-/*
- * Communicate with running instance
- */
-void lamexp_handle_multiple_instanced(void)
-{
-
 }
 
 /*

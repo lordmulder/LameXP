@@ -17,7 +17,7 @@ if not "%LAMEXP_REDIST%"=="0" (
 REM ------------------------------------------
 set "OUT_PATH=..\..\bin\%LAMEXP_CONFIG%"
 set "OUT_DATE=%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%"
-set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG%"
+set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%"
 set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
 REM ------------------------------------------
 REM :: READ VERSION INFO ::
@@ -53,7 +53,6 @@ REM :: POST BUILD ::
 REM ------------------------------------------
 rd /S /Q "%TMP_PATH%"
 mkdir "%TMP_PATH%"
-mkdir "%TMP_PATH%\imageformats"
 copy "%OUT_PATH%\*.exe" "%TMP_PATH%"
 REM ------------------------------------------
 if "%LAMEXP_REDIST%"=="1" (
@@ -61,6 +60,7 @@ if "%LAMEXP_REDIST%"=="1" (
 	copy "%QTDIR%\bin\QtGui4.dll" "%TMP_PATH%"
 	copy "%QTDIR%\bin\QtXml4.dll" "%TMP_PATH%"
 	copy "%QTDIR%\bin\QtSvg4.dll" "%TMP_PATH%"
+	mkdir "%TMP_PATH%\imageformats"
 	copy "%QTDIR%\plugins\imageformats\q???4.dll" "%TMP_PATH%\imageformats"
 )
 REM ------------------------------------------
