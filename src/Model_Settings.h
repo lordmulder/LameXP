@@ -20,28 +20,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <QMessageBox>
 
-class AboutDialog : public QMessageBox
+class QSettings;
+
+class SettingsModel
 {
-	Q_OBJECT
-
 public:
-	AboutDialog(QWidget *parent = 0, bool firstStart = false);
-	~AboutDialog(void);
+	SettingsModel(void);
+	~SettingsModel(void);
 
-	static const char *neroAacUrl;
+	//Getters
+	int licenseAccepted(void);
 
-public slots:
-	int exec();
-	void enableButtons(void);
-	void openLicenseText(void);
-	void showMoreAbout(void);
-	void showAboutQt(void);
-
-protected:
-	void showEvent(QShowEvent *e);
+	//Setters
+	void setLicenseAccepted(int value);
 
 private:
-	bool m_firstShow;
+	QSettings *m_settings;
 };

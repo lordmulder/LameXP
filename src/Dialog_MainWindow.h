@@ -31,6 +31,7 @@ class WorkingBanner;
 class MessageHandlerThread;
 class AudioFileModel;
 class MetaInfoModel;
+class SettingsModel;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -84,4 +85,5 @@ private:
 	QTimer *m_delayedFileTimer;
 	AudioFileModel *m_metaData;
 	MetaInfoModel *m_metaInfoModel;
+	SettingsModel *m_settings;
 };

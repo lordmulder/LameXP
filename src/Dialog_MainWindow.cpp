@@ -30,6 +30,7 @@
 #include "Thread_FileAnalyzer.h"
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
+#include "Model_Settings.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -77,6 +78,9 @@ MainWindow::MainWindow(QWidget *parent)
 	{
 		setWindowTitle(windowTitle().append(" [DEMO VERSION]"));
 	}
+
+	//Load configuration
+	m_settings = new SettingsModel();
 
 	//Enabled main buttons
 	connect(buttonAbout, SIGNAL(clicked()), this, SLOT(aboutButtonClicked()));
@@ -214,6 +218,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_delayedFileTimer);
 	LAMEXP_DELETE(m_metaData);
 	LAMEXP_DELETE(m_metaInfoModel);
+	LAMEXP_DELETE(m_settings);
 }
 
 ////////////////////////////////////////////////////////////
@@ -269,14 +274,26 @@ void MainWindow::windowShown(void)
 {
 	QStringList arguments = QApplication::arguments();
 
-	AboutDialog *about = new AboutDialog(this, true);
-	int iAccepted = about->exec();
-	LAMEXP_DELETE(about);
-
-	if(iAccepted <= 0)
+	if(m_settings->licenseAccepted() <= 0)
 	{
-		QApplication::quit();
-		return;
+		int iAccepted = -1;
+
+		if(m_settings->licenseAccepted() == 0)
+		{
+			AboutDialog *about = new AboutDialog(this, true);
+			iAccepted = about->exec();
+			LAMEXP_DELETE(about);
+		}
+
+		if(iAccepted <= 0)
+		{
+			m_settings->setLicenseAccepted(-1);
+			QMessageBox::critical(this, "License Declined", "You have declined the license. Consequently the application will exit now!");
+			QApplication::quit();
+			return;
+		}
+
+		m_settings->setLicenseAccepted(1);
 	}
 	
 	//Check for AAC support

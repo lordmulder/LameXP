@@ -31,6 +31,7 @@
 #include <QPushButton>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QTimer>
 
 //Win32 includes
 #include <Windows.h>
@@ -80,6 +81,8 @@ AboutDialog::AboutDialog(QWidget *parent, bool firstStart)
 		QPushButton *firstButton = addButton("Show License Text", QMessageBox::AcceptRole);
 		firstButton->setIcon(QIcon(":/icons/script_edit.png"));
 		firstButton->setMinimumWidth(135);
+		firstButton->disconnect();
+		connect(firstButton, SIGNAL(clicked()), this, SLOT(openLicenseText()));
 
 		QPushButton *secondButton = addButton("Accept License", QMessageBox::AcceptRole);
 		secondButton->setIcon(QIcon(":/icons/accept.png"));
@@ -88,16 +91,21 @@ AboutDialog::AboutDialog(QWidget *parent, bool firstStart)
 		QPushButton *thirdButton = addButton("Decline License", QMessageBox::AcceptRole);
 		thirdButton->setIcon(QIcon(":/icons/delete.png"));
 		thirdButton->setMinimumWidth(120);
+		thirdButton->setEnabled(false);
 	}
 	else
 	{
 		QPushButton *firstButton = addButton("More About...", QMessageBox::AcceptRole);
 		firstButton->setIcon(QIcon(":/icons/information.png"));
 		firstButton->setMinimumWidth(120);
+		firstButton->disconnect();
+		connect(firstButton, SIGNAL(clicked()), this, SLOT(showMoreAbout()));
 
 		QPushButton *secondButton = addButton("About Qt...", QMessageBox::AcceptRole);
 		secondButton->setIcon(QIcon(":/images/Qt.svg"));
 		secondButton->setMinimumWidth(120);
+		secondButton->disconnect();
+		connect(secondButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
 
 		QPushButton *thirdButton = addButton("Discard", QMessageBox::AcceptRole);
 		thirdButton->setIcon(QIcon(":/icons/cross.png"));
@@ -119,49 +127,47 @@ int AboutDialog::exec()
 {
 	PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 	
-	if(m_firstShow)
+	switch(QMessageBox::exec())
 	{
-		while(1)
-		{
-			switch(QMessageBox::exec())
-			{
-			case 0:
-				QDesktopServices::openUrl(QUrl("http://www.gnu.org/licenses/gpl-2.0.txt"));
-				break;
-			case 1:
-				return 1;
-				break;
-			default:
-				return -1;
-			}
-		}
+	case 1:
+		return 1;
+		break;
+	case 2:
+		return -1;
+		break;
+	default:
+		return 0;
+		break;
 	}
-	else
-	{
-		while(1)
-		{
-			switch(QMessageBox::exec())
-			{
-			case 0:
-				showMoreAbout();
-				break;
-			case 1:
-				QMessageBox::aboutQt(dynamic_cast<QWidget*>(this->parent()));
-				break;
-			default:
-				return 0;
-			}
-		}
-	}
-
-	return 0;
 }
 
 ////////////////////////////////////////////////////////////
-// Private Functions
+// Slots
 ////////////////////////////////////////////////////////////
 
-void AboutDialog::showMoreAbout()
+void AboutDialog::enableButtons(void)
+{
+	const QList<QAbstractButton*> buttonList = buttons();
+	
+	for(int i = 0; i < buttonList.count(); i++)
+	{
+		buttonList.at(i)->setEnabled(true);
+	}
+
+	setCursor(QCursor(Qt::ArrowCursor));
+}
+
+void AboutDialog::openLicenseText(void)
+{
+	QDesktopServices::openUrl(QUrl("http://www.gnu.org/licenses/gpl-2.0.txt"));
+}
+
+void AboutDialog::showAboutQt(void)
+{
+	QMessageBox::aboutQt(this);
+}
+
+void AboutDialog::showMoreAbout(void)
 {
 	QString moreAboutText;
 	moreAboutText += "<h3>The following third-party software is used in LameXP:</h3>";
@@ -184,7 +190,7 @@ void AboutDialog::showMoreAbout()
 	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
 	moreAboutText += "<br></ul></div>";
 
-	QMessageBox *moreAboutBox = new QMessageBox(dynamic_cast<QWidget*>(this->parent()));
+	QMessageBox *moreAboutBox = new QMessageBox(this);
 	moreAboutBox->setText(moreAboutText);
 	moreAboutBox->setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
 
@@ -197,3 +203,28 @@ void AboutDialog::showMoreAbout()
 				
 	LAMEXP_DELETE(moreAboutBox);
 }
+
+////////////////////////////////////////////////////////////
+// Protected Functions
+////////////////////////////////////////////////////////////
+
+void AboutDialog::showEvent(QShowEvent *e)
+{
+	QDialog::showEvent(e);
+	if(m_firstShow)
+	{
+		const QList<QAbstractButton*> buttonList = buttons();
+
+		for(int i = 1; i < buttonList.count(); i++)
+		{
+			buttonList.at(i)->setEnabled(false);
+		}
+
+		QTimer::singleShot(5000, this, SLOT(enableButtons()));
+		setCursor(QCursor(Qt::WaitCursor));
+	}
+}
+
+////////////////////////////////////////////////////////////
+// Private Functions
+////////////////////////////////////////////////////////////
