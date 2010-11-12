@@ -12,11 +12,10 @@ call "%PATH_QTMSVC%\bin\qtvars.bat"
 REM -----------------------------------------------------------------
 set "LAMEXP_ERROR=1"
 msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Clean /verbosity:detailed %1
-if exist "%~d1%~p1bin\%~n2\*.exe" GOTO:EOF
-if exist "%~d1%~p1obj\%~n2\*.obj" GOTO:EOF
+if not "%ERRORLEVEL%"=="0" GOTO:EOF
 echo ----------------------------------------------------------------
+set "LAMEXP_ERROR=1"
 msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Rebuild /verbosity:detailed %1
+if not "%ERRORLEVEL%"=="0" GOTO:EOF
 echo ----------------------------------------------------------------
-if not exist "%~d1%~p1bin\%~n2\%~n1.exe" GOTO:EOF
-REM -----------------------------------------------------------------
 set "LAMEXP_ERROR=0"

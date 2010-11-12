@@ -29,6 +29,7 @@
 
 static const char *g_settingsVersionNumber = "VersionNumber";
 static const char *g_settingsLicenseAccepted = "LicenseAccepted";
+static const char *g_settingsInterfaceStyle = "InterfaceStyle";
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -36,8 +37,8 @@ static const char *g_settingsLicenseAccepted = "LicenseAccepted";
 
 SettingsModel::SettingsModel(void)
 {
-	qDebug(QDesktopServices::storageLocation(QDesktopServices::DataLocation).toUtf8().constData());
-	m_settings = new QSettings(QDesktopServices::storageLocation(QDesktopServices::DataLocation).append("/config.ini"), QSettings::IniFormat);
+	QString appPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+	m_settings = new QSettings(appPath.append("/config.ini"), QSettings::IniFormat);
 	m_settings->beginGroup(QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build()));
 	m_settings->setValue(g_settingsVersionNumber, QApplication::applicationVersion());
 	m_settings->sync();
@@ -58,3 +59,6 @@ SettingsModel::~SettingsModel(void)
 
 int SettingsModel::licenseAccepted(void) { return m_settings->value(g_settingsLicenseAccepted, 0).toInt(); }
 void SettingsModel::setLicenseAccepted(int value) { m_settings->setValue(g_settingsLicenseAccepted, value); }
+
+int SettingsModel::interfaceStyle(void) { return m_settings->value(g_settingsInterfaceStyle, 0).toInt(); }
+void SettingsModel::setInterfaceStyle(int value) { m_settings->setValue(g_settingsInterfaceStyle, value); }

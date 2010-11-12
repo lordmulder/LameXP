@@ -31,9 +31,11 @@ public:
 
 	//Getters
 	int licenseAccepted(void);
+	int interfaceStyle(void);
 
 	//Setters
 	void setLicenseAccepted(int value);
+	void setInterfaceStyle(int value);
 
 private:
 	QSettings *m_settings;

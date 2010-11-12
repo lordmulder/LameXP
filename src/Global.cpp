@@ -272,9 +272,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 
-	//Change application look
-	QApplication::setStyle(new QPlastiqueStyle());
-
 	//Done
 	qt_initialized = true;
 	return true;
@@ -289,11 +286,9 @@ int lamexp_init_ipc(void)
 	{
 		return 0;
 	}
-	
-	const QString versionTag = QString().sprintf("@%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build());
 
-	g_lamexp_semaphore_read_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_read_uuid).append(versionTag), 0);
-	g_lamexp_semaphore_write_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_write_uuid).append(versionTag), 0);
+	g_lamexp_semaphore_read_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_read_uuid), 0);
+	g_lamexp_semaphore_write_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_write_uuid), 0);
 
 	if(g_lamexp_semaphore_read_ptr->error() != QSystemSemaphore::NoError)
 	{
@@ -312,7 +307,7 @@ int lamexp_init_ipc(void)
 		return -1;
 	}
 
-	g_lamexp_sharedmem_ptr = new QSharedMemory(QString(g_lamexp_sharedmem_uuid).append(versionTag), NULL);
+	g_lamexp_sharedmem_ptr = new QSharedMemory(QString(g_lamexp_sharedmem_uuid), NULL);
 	
 	if(!g_lamexp_sharedmem_ptr->create(sizeof(lamexp_ipc_t)))
 	{

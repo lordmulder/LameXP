@@ -19,6 +19,8 @@ set "OUT_PATH=..\..\bin\%LAMEXP_CONFIG%"
 set "OUT_DATE=%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%"
 set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%"
 set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
+set "OBJ_PATH=..\..\obj\%LAMEXP_CONFIG%"
+set "MOC_PATH=..\..\tmp"
 REM ------------------------------------------
 REM :: READ VERSION INFO ::
 REM ------------------------------------------
@@ -30,8 +32,17 @@ if not "%LAMEXP_ERROR%"=="0" (
 REM ------------------------------------------
 REM :: CLEAN UP ::
 REM ------------------------------------------
+del /Q "%OUT_PATH%\*.exe"
+del /Q "%OUT_PATH%\*.dll"
+del /Q "%OBJ_PATH%\*.obj"
+del /Q "%OBJ_PATH%\*.res"
+del /Q "%OBJ_PATH%\*.bat"
+del /Q "%OBJ_PATH%\*.idb"
+del /Q "%MOC_PATH%\*.cpp"
+del /Q "%MOC_PATH%\*.h"
 del "%OUT_FILE%.exe"
 del "%OUT_FILE%.zip"
+REM ------------------------------------------
 if exist "%OUT_FILE%.exe" (
 	call _error.bat	"FAILD TO DELET EXISTING FILE"
 	GOTO:EOF

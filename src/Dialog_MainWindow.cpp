@@ -60,6 +60,16 @@ if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
 }
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 
+//Helper class
+class Index: public QObjectUserData
+{
+public:
+	Index(int index) { m_index = index; }
+	int value(void) { return m_index; }
+private:
+	int m_index;
+};
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -147,6 +157,11 @@ MainWindow::MainWindow(QWidget *parent)
 	m_tabActionGroup->addAction(actionCompression);
 	m_tabActionGroup->addAction(actionMetaData);
 	m_tabActionGroup->addAction(actionAdvancedOptions);
+	actionSourceFiles->setUserData(0, new Index(0));
+	actionOutputDirectory->setUserData(0, new Index(1));
+	actionMetaData->setUserData(0, new Index(2));
+	actionCompression->setUserData(0, new Index(3));
+	actionAdvancedOptions->setUserData(0, new Index(4));
 	actionSourceFiles->setChecked(true);
 	connect(m_tabActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabActionActivated(QAction*)));
 
@@ -157,10 +172,16 @@ MainWindow::MainWindow(QWidget *parent)
 	m_styleActionGroup->addAction(actionStyleWindowsVista);
 	m_styleActionGroup->addAction(actionStyleWindowsXP);
 	m_styleActionGroup->addAction(actionStyleWindowsClassic);
+	actionStylePlastique->setUserData(0, new Index(0));
+	actionStyleCleanlooks->setUserData(0, new Index(1));
+	actionStyleWindowsVista->setUserData(0, new Index(2));
+	actionStyleWindowsXP->setUserData(0, new Index(3));
+	actionStyleWindowsClassic->setUserData(0, new Index(4));
 	actionStylePlastique->setChecked(true);
 	actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP);
 	actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA);
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
+	styleActionActivated(NULL);
 
 	//Activate help menu actions
 	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
@@ -483,23 +504,13 @@ void MainWindow::showDetailsButtonClicked(void)
  */
 void MainWindow::tabPageChanged(int idx)
 {
-	switch(idx)
+	QList<QAction*> actions = m_tabActionGroup->actions();
+	for(int i = 0; i < actions.count(); i++)
 	{
-	case 0:
-		actionSourceFiles->setChecked(true);
-		break;
-	case 1:
-		actionOutputDirectory->setChecked(true);
-		break;
-	case 2:
-		actionMetaData->setChecked(true);
-		break;
-	case 3:
-		actionCompression->setChecked(true);
-		break;
-	case 4:
-		actionAdvancedOptions->setChecked(true);
-		break;
+		if(actions.at(i)->userData(0) && dynamic_cast<Index*>(actions.at(i)->userData(0))->value() == idx)
+		{
+			actions.at(i)->setChecked(true);
+		}
 	}
 }
 
@@ -508,17 +519,10 @@ void MainWindow::tabPageChanged(int idx)
  */
 void MainWindow::tabActionActivated(QAction *action)
 {
-	int idx = -1;
-
-	if(actionSourceFiles == action) idx = 0;
-	else if(actionOutputDirectory == action) idx = 1;
-	else if(actionMetaData == action) idx = 2;
-	else if(actionCompression == action) idx = 3;
-	else if(actionAdvancedOptions == action) idx = 4;
-
-	if(idx >= 0)
+	if(action && action->userData(0))
 	{
-		tabWidget->setCurrentIndex(idx);
+		int index = dynamic_cast<Index*>(action->userData(0))->value();
+		tabWidget->setCurrentIndex(index);
 	}
 }
 
@@ -527,11 +531,34 @@ void MainWindow::tabActionActivated(QAction *action)
  */
 void MainWindow::styleActionActivated(QAction *action)
 {
-	if(action == actionStylePlastique) QApplication::setStyle(new QPlastiqueStyle());
-	else if(action == actionStyleCleanlooks) QApplication::setStyle(new QCleanlooksStyle());
-	else if(action == actionStyleWindowsVista) QApplication::setStyle(new QWindowsVistaStyle());
-	else if(action == actionStyleWindowsXP) QApplication::setStyle(new QWindowsXPStyle());
-	else if(action == actionStyleWindowsClassic) QApplication::setStyle(new QWindowsStyle());
+	if(action && action->userData(0))
+	{
+		m_settings->setInterfaceStyle(dynamic_cast<Index*>(action->userData(0))->value());
+	}
+
+	switch(m_settings->interfaceStyle())
+	{
+	case 1:
+		actionStyleCleanlooks->setChecked(true);
+		QApplication::setStyle(new QCleanlooksStyle());
+		break;
+	case 2:
+		actionStyleWindowsVista->setChecked(true);
+		QApplication::setStyle(new QWindowsVistaStyle());
+		break;
+	case 3:
+		actionStyleWindowsXP->setChecked(true);
+		QApplication::setStyle(new QWindowsXPStyle());
+		break;
+	case 4:
+		actionStyleWindowsClassic->setChecked(true);
+		QApplication::setStyle(new QWindowsStyle());
+		break;
+	default:
+		actionStylePlastique->setChecked(true);
+		QApplication::setStyle(new QPlastiqueStyle());
+		break;
+	}
 }
 
 /*

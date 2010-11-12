@@ -25,6 +25,7 @@
 #include "Dialog_MainWindow.h"
 #include "Thread_Initialization.h"
 #include "Thread_MessageProducer.h"
+#include "Model_Settings.h"
 
 //Qt includes
 #include <QApplication>
@@ -65,7 +66,7 @@ int lamexp_main(int argc, char* argv[])
 		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(expireDate.toString(Qt::ISODate)).toLatin1().constData());
 		if(QDate::currentDate() >= expireDate)
 		{
-			qWarning("Expired !!!");
+			qWarning("Binary has expired !!!");
 			QMessageBox::warning(NULL, "LameXP - Expired", QString("This demo (pre-release) version of LameXP has expired at %1.\nLameXP is free software and release versions won't expire.").arg(expireDate.toString()), "Exit Program");
 			return 0;
 		}
@@ -115,7 +116,7 @@ int lamexp_main(int argc, char* argv[])
 	
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");
-	
+
 	//Terminate
 	return iResult;
 }
