@@ -38,5 +38,7 @@ public:
 
 private:
 	void delay(void);
+	void initNeroAac(void);
+
 	bool m_bSuccess;
 };

@@ -85,11 +85,15 @@ static QDate g_lamexp_version_date;
 static const char *g_lamexp_months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 static const char *g_lamexp_version_raw_date = __DATE__;
 
+//Tool versions (expected)
+static const unsigned int g_lamexp_toolver_neroaac = VER_LAMEXP_TOOL_NEROAAC;
+
 //Special folders
 static QString g_lamexp_temp_folder;
 
 //Tools
 static QMap<QString, LockedFile*> g_lamexp_tool_registry;
+static QMap<QString, unsigned int> g_lamexp_tool_versions;
 
 //Shared memory
 static const char *g_lamexp_sharedmem_uuid = "{21A68A42-6923-43bb-9CF6-64BF151942EE}";
@@ -113,6 +117,7 @@ unsigned int lamexp_version_major(void) { return g_lamexp_version_major; }
 unsigned int lamexp_version_minor(void) { return g_lamexp_version_minor; }
 unsigned int lamexp_version_build(void) { return g_lamexp_version_build; }
 const char *lamexp_version_release(void) { return g_lamexp_version_release; }
+unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
 
 bool lamexp_version_demo(void)
 { 
@@ -468,6 +473,7 @@ void lamexp_finalization(void)
 			LAMEXP_DELETE(g_lamexp_tool_registry[keys.at(i)]);
 		}
 		g_lamexp_tool_registry.clear();
+		g_lamexp_tool_versions.clear();
 	}
 	
 	//Delete temporary files
@@ -495,7 +501,7 @@ void lamexp_finalization(void)
 /*
  * Register tool
  */
-void lamexp_register_tool(const QString &toolName, LockedFile *file)
+void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version)
 {
 	if(g_lamexp_tool_registry.contains(toolName.toLower()))
 	{
@@ -503,6 +509,7 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file)
 	}
 
 	g_lamexp_tool_registry.insert(toolName.toLower(), file);
+	g_lamexp_tool_versions.insert(toolName.toLower(), version);
 }
 
 /*
@@ -520,13 +527,55 @@ const QString lamexp_lookup_tool(const QString &toolName)
 {
 	if(g_lamexp_tool_registry.contains(toolName.toLower()))
 	{
-		return g_lamexp_tool_registry.value(toolName)->filePath();
+		return g_lamexp_tool_registry.value(toolName.toLower())->filePath();
 	}
 	else
 	{
 		return QString();
 	}
 }
+
+/*
+ * Lookup tool
+ */
+unsigned int lamexp_tool_version(const QString &toolName)
+{
+	if(g_lamexp_tool_versions.contains(toolName.toLower()))
+	{
+		return g_lamexp_tool_versions.value(toolName.toLower());
+	}
+	else
+	{
+		return UINT_MAX;
+	}
+}
+
+/*
+ * Version number to human-readable string
+ */
+const QString lamexp_version2string(const QString &pattern, unsigned int version)
+{
+	QString result = pattern;
+	int digits = result.count("?", Qt::CaseInsensitive);
+	
+	if(digits < 1)
+	{
+		return result;
+	}
+	
+	int pos = 0;
+	QString versionStr = QString().sprintf(QString().sprintf("%%0%du", digits).toLatin1().constData(), version);
+	int index = result.indexOf("?", Qt::CaseInsensitive);
+	
+	while(index >= 0 && pos < versionStr.length())
+	{
+		result[index] = versionStr[pos++];
+		index = result.indexOf("?", Qt::CaseInsensitive);
+	}
+
+	return result;
+}
+
 
 /*
  * Get number private bytes [debug only]

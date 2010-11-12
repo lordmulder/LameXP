@@ -29,6 +29,8 @@
 #include <QApplication>
 #include <QIcon>
 #include <QPushButton>
+#include <QDesktopServices>
+#include <QUrl>
 
 //Win32 includes
 #include <Windows.h>
@@ -43,7 +45,7 @@ const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-
 // Constructor
 ////////////////////////////////////////////////////////////
 
-AboutDialog::AboutDialog(QWidget *parent)
+AboutDialog::AboutDialog(QWidget *parent, bool firstStart)
 	: QMessageBox(parent)
 {
 	QString aboutText;
@@ -73,17 +75,36 @@ AboutDialog::AboutDialog(QWidget *parent)
 	setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
 	setWindowTitle("About LameXP");
 	
-	QPushButton *firstButton = addButton("More About...", QMessageBox::AcceptRole);
-	firstButton->setIcon(QIcon(":/icons/information.png"));
-	firstButton->setMinimumWidth(120);
+	if(firstStart)
+	{
+		QPushButton *firstButton = addButton("Show License Text", QMessageBox::AcceptRole);
+		firstButton->setIcon(QIcon(":/icons/script_edit.png"));
+		firstButton->setMinimumWidth(135);
 
-	QPushButton *secondButton = addButton("About Qt...", QMessageBox::AcceptRole);
-	secondButton->setIcon(QIcon(":/images/Qt.svg"));
-	secondButton->setMinimumWidth(120);
+		QPushButton *secondButton = addButton("Accept License", QMessageBox::AcceptRole);
+		secondButton->setIcon(QIcon(":/icons/accept.png"));
+		secondButton->setMinimumWidth(120);
 
-	QPushButton *thirdButton = addButton("Discard", QMessageBox::AcceptRole);
-	thirdButton->setIcon(QIcon(":/icons/cross.png"));
-	thirdButton->setMinimumWidth(90);
+		QPushButton *thirdButton = addButton("Decline License", QMessageBox::AcceptRole);
+		thirdButton->setIcon(QIcon(":/icons/delete.png"));
+		thirdButton->setMinimumWidth(120);
+	}
+	else
+	{
+		QPushButton *firstButton = addButton("More About...", QMessageBox::AcceptRole);
+		firstButton->setIcon(QIcon(":/icons/information.png"));
+		firstButton->setMinimumWidth(120);
+
+		QPushButton *secondButton = addButton("About Qt...", QMessageBox::AcceptRole);
+		secondButton->setIcon(QIcon(":/images/Qt.svg"));
+		secondButton->setMinimumWidth(120);
+
+		QPushButton *thirdButton = addButton("Discard", QMessageBox::AcceptRole);
+		thirdButton->setIcon(QIcon(":/icons/cross.png"));
+		thirdButton->setMinimumWidth(90);
+	}
+
+	m_firstShow = firstStart;
 }
 
 AboutDialog::~AboutDialog(void)
@@ -98,18 +119,38 @@ int AboutDialog::exec()
 {
 	PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 	
-	while(1)
+	if(m_firstShow)
 	{
-		switch(QMessageBox::exec())
+		while(1)
 		{
-		case 0:
-			showMoreAbout();
-			break;
-		case 1:
-			QMessageBox::aboutQt(dynamic_cast<QWidget*>(this->parent()));
-			break;
-		default:
-			return 0;
+			switch(QMessageBox::exec())
+			{
+			case 0:
+				QDesktopServices::openUrl(QUrl("http://www.gnu.org/licenses/gpl-2.0.txt"));
+				break;
+			case 1:
+				return 1;
+				break;
+			default:
+				return -1;
+			}
+		}
+	}
+	else
+	{
+		while(1)
+		{
+			switch(QMessageBox::exec())
+			{
+			case 0:
+				showMoreAbout();
+				break;
+			case 1:
+				QMessageBox::aboutQt(dynamic_cast<QWidget*>(this->parent()));
+				break;
+			default:
+				return 0;
+			}
 		}
 	}
 

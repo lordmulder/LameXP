@@ -25,7 +25,7 @@
 class AboutDialog : public QMessageBox
 {
 public:
-	AboutDialog(QWidget *parent = 0);
+	AboutDialog(QWidget *parent = 0, bool firstStart = false);
 	~AboutDialog(void);
 
 public slots:
@@ -34,4 +34,5 @@ public slots:
 
 private:
 	void AboutDialog::showMoreAbout();
+	bool m_firstShow;
 };

@@ -29,6 +29,11 @@
 #define VER_LAMEXP_SUFFIX				TechPreview
 
 /*
+ * Tools versions
+ */
+#define VER_LAMEXP_TOOL_NEROAAC			1540
+
+/*
  * Helper macros (aka: having fun with the C pre-processor)
  */
 #define VER_LAMEXP_STR_HLP1(X)			#X

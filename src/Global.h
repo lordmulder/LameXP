@@ -43,14 +43,16 @@ unsigned int lamexp_version_build(void);
 const QDate &lamexp_version_date(void);
 const char *lamexp_version_release(void);
 bool lamexp_version_demo(void);
+unsigned int lamexp_toolver_neroaac(void);
 
 //Public functions
 void lamexp_init_console(int argc, char* argv[]);
 bool lamexp_init_qt(int argc, char* argv[]);
 int lamexp_init_ipc(void);
-void lamexp_register_tool(const QString &toolName, LockedFile *file);
+void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0);
 bool lamexp_check_tool(const QString &toolName);
 const QString lamexp_lookup_tool(const QString &toolName);
+unsigned int lamexp_tool_version(const QString &toolName);
 void lamexp_finalization(void);
 const QString &lamexp_temp_folder(void);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
@@ -58,6 +60,7 @@ void lamexp_ipc_send(unsigned int command, const char* message);
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString folderPath);
+const QString lamexp_version2string(const QString &pattern, unsigned int version);
 
 //Debug-only functions
 SIZE_T lamexp_dbg_private_bytes(void);

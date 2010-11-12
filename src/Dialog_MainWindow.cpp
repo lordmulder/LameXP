@@ -269,9 +269,28 @@ void MainWindow::windowShown(void)
 {
 	QStringList arguments = QApplication::arguments();
 
+	AboutDialog *about = new AboutDialog(this, true);
+	int iAccepted = about->exec();
+	LAMEXP_DELETE(about);
+
+	if(iAccepted <= 0)
+	{
+		QApplication::quit();
+		return;
+	}
+	
 	//Check for AAC support
 	if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
 	{
+		if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
+		{
+			QString messageText;
+			messageText += "<nobr>LameXP detected that your version of the Nero AAC encoder is outdated!<br>";
+			messageText += "The current version available is " + lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac()) + " (or later), but you still have version " + lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe")) + " installed.<br><br>";
+			messageText += "You can download the latest version of the Nero AAC encoder from the Nero website at:<br>";
+			messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
+			QMessageBox::information(this, "AAC Encoder Outdated", messageText);
+		}
 		radioButtonEncoderAAC->setEnabled(true);
 	}
 	else
@@ -279,7 +298,7 @@ void MainWindow::windowShown(void)
 		QString messageText;
 		messageText += "<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>";
 		messageText += "Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>";
-		messageText += "You can download the Nero AAC encoder for free from the official Nero web-site at:<br>";
+		messageText += "You can download the Nero AAC encoder for free from the official Nero website at:<br>";
 		messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 		QMessageBox::information(this, "AAC Support Disabled", messageText);
 		radioButtonEncoderAAC->setEnabled(false);

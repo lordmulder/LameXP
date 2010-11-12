@@ -112,7 +112,14 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
 	process.start(m_mediaInfoBin, QStringList() << QDir::toNativeSeparators(filePath));
-	process.waitForStarted();
+	
+	if(!process.waitForStarted())
+	{
+		qWarning("MediaInfo process failed to create!");
+		process.kill();
+		process.waitForFinished(-1);
+		return audioFile;
+	}
 
 	while(process.state() != QProcess::NotRunning)
 	{
