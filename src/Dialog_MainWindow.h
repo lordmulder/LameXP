@@ -71,6 +71,8 @@ private slots:
 
 protected:
 	void showEvent(QShowEvent *event);
+	void dragEnterEvent(QDragEnterEvent *event);
+	void dropEvent(QDropEvent *event);
 
 private:
 	void addFiles(const QStringList &files);

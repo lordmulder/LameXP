@@ -47,6 +47,8 @@
 #include <QWindowsVistaStyle>
 #include <QWindowsStyle>
 #include <QSysInfo>
+#include <QDragEnterEvent>
+#include <QWindowsMime>
 
 //Win32 includes
 #include <Windows.h>
@@ -205,6 +207,9 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(m_messageHandler, SIGNAL(killSignalReceived()), this, SLOT(close()), Qt::QueuedConnection);
 	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
+
+	//Enable Drag & Drop
+	this->setAcceptDrops(true);
 }
 
 ////////////////////////////////////////////////////////////
@@ -282,6 +287,34 @@ void MainWindow::addFiles(const QStringList &files)
 void MainWindow::showEvent(QShowEvent *event)
 {
 	QTimer::singleShot(0, this, SLOT(windowShown()));
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+	QStringList formats = event->mimeData()->formats();
+	
+	for(int i = 0; i < formats.count(); i++)
+	{
+		if(formats[i].indexOf("FileNameW") >= 0)
+		{
+			event->acceptProposedAction();
+		}
+	}
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+	ABORT_IF_BUSY;
+
+	QStringList droppedFiles;
+	const QList<QUrl> urls = event->mimeData()->urls();
+
+	for(int i = 0; i < urls.count(); i++)
+	{
+		droppedFiles << QFileInfo(urls.at(i).toLocalFile()).absoluteFilePath();
+	}
+	
+	addFiles(droppedFiles);
 }
 
 ////////////////////////////////////////////////////////////
