@@ -52,7 +52,7 @@ int lamexp_main(int argc, char* argv[])
 	qDebug("This program is free software: you can redistribute it and/or modify");
 	qDebug("it under the terms of the GNU General Public License <http://www.gnu.org/>.");
 	qDebug("This program comes with ABSOLUTELY NO WARRANTY.\n");
-	
+
 	//Print warning, if this is a "debug" build
 	LAMEXP_CHECK_DEBUG_BUILD;
 	

@@ -98,3 +98,8 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #else
 #define LAMEXP_MEMORY_CHECK(CMD) CMD
 #endif
+
+//Check for CPU-compatibility options
+#if _M_IX86_FP != 0
+#error We should not enabled SSE or SSE2 in release builds!
+#endif

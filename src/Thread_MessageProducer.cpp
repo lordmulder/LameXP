@@ -25,6 +25,7 @@
 
 #include <QStringList>
 #include <QApplication>
+#include <QFileInfo>
 
 #include <limits.h>
 
@@ -64,7 +65,7 @@ void MessageProducerThread::run()
 	{
 		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
 		{
-			lamexp_ipc_send(1, arguments[++i].toUtf8().constData());
+			lamexp_ipc_send(1, QFileInfo(arguments[++i]).canonicalFilePath().toUtf8().constData());
 			bSentFiles = true;
 		}
 	}

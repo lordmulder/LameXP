@@ -293,12 +293,9 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
 	QStringList formats = event->mimeData()->formats();
 	
-	for(int i = 0; i < formats.count(); i++)
+	if(formats.contains("application/x-qt-windows-mime;value=\"FileNameW\"", Qt::CaseInsensitive) && formats.contains("text/uri-list", Qt::CaseInsensitive))
 	{
-		if(formats[i].indexOf("FileNameW") >= 0)
-		{
-			event->acceptProposedAction();
-		}
+		event->acceptProposedAction();
 	}
 }
 
@@ -311,7 +308,24 @@ void MainWindow::dropEvent(QDropEvent *event)
 
 	for(int i = 0; i < urls.count(); i++)
 	{
-		droppedFiles << QFileInfo(urls.at(i).toLocalFile()).absoluteFilePath();
+		QFileInfo file(urls.at(i).toLocalFile());
+		if(!file.exists())
+		{
+			continue;
+		}
+		if(file.isFile())
+		{
+			droppedFiles << file.canonicalFilePath();
+			continue;
+		}
+		if(file.isDir())
+		{
+			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files);
+			for(int j = 0; j < list.count(); j++)
+			{
+				droppedFiles << list.at(j).absoluteFilePath();
+			}
+		}
 	}
 	
 	addFiles(droppedFiles);
@@ -381,15 +395,8 @@ void MainWindow::windowShown(void)
 		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding file from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
-			if(currentFile.exists())
-			{
-				m_delayedFileList->append(currentFile.absoluteFilePath());
-			}
-			else
-			{
-				qWarning("File doesn't exist: %s", currentFile.absoluteFilePath().toUtf8().constData());
-			}
+			qDebug("Adding file from CLI: %s", currentFile.canonicalFilePath().toUtf8().constData());
+			m_delayedFileList->append(currentFile.canonicalFilePath());
 		}
 	}
 
@@ -445,7 +452,7 @@ void MainWindow::openFolderActionActivated(void)
 
 		while(!fileInfoList.isEmpty())
 		{
-			fileList << fileInfoList.takeFirst().absoluteFilePath();
+			fileList << fileInfoList.takeFirst().canonicalFilePath();
 		}
 
 		addFiles(fileList);
@@ -771,7 +778,24 @@ void MainWindow::handleDelayedFiles(void)
 
 	while(!m_delayedFileList->isEmpty())
 	{
-		selectedFiles << QFileInfo(m_delayedFileList->takeFirst()).absoluteFilePath();
+		QFileInfo currentFile = QFileInfo(m_delayedFileList->takeFirst());
+		if(!currentFile.exists())
+		{
+			continue;
+		}
+		if(currentFile.isFile())
+		{
+			selectedFiles << currentFile.canonicalFilePath();
+			continue;
+		}
+		if(currentFile.isDir())
+		{
+			QList<QFileInfo> list = QDir(currentFile.canonicalFilePath()).entryInfoList(QDir::Files);
+			for(int j = 0; j < list.count(); j++)
+			{
+				selectedFiles << list.at(j).absoluteFilePath();
+			}
+		}
 	}
 	
 	addFiles(selectedFiles);

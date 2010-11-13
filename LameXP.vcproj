@@ -128,7 +128,6 @@
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
-				WholeProgramOptimization="true"
 				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG"
 				MinimalRebuild="false"
@@ -161,7 +160,6 @@
 				GenerateMapFile="false"
 				MapExports="false"
 				SubSystem="2"
-				LinkTimeCodeGeneration="1"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -376,7 +374,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -386,7 +384,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -396,7 +394,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
