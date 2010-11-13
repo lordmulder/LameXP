@@ -106,6 +106,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="&quot;$(ProjectDir)\etc\Utilities\AutoInc.exe&quot; &quot;VER_LAMEXP_BUILD&quot; &quot;$(ProjectDir)\src\Config.h&quot;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -196,6 +197,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="&quot;$(ProjectDir)\etc\Utilities\AutoInc.exe&quot; &quot;VER_LAMEXP_BUILD&quot; &quot;$(ProjectDir)\src\Config.h&quot;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -275,7 +277,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
+				CommandLine="&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

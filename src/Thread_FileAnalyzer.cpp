@@ -321,22 +321,28 @@ unsigned int FileAnalyzer::parseDuration(const QString &str)
 {
 	QTime time;
 
+	time = QTime::fromString(str, "z'ms'");
+	if(time.isValid())
+	{
+		return max(1, (time.hour() * 60 * 60) + (time.minute() * 60) + time.second());
+	}
+
 	time = QTime::fromString(str, "s's 'z'ms'");
 	if(time.isValid())
 	{
-		return (time.hour() * 60 * 60) + (time.minute() * 60) + time.second();
+		return max(1, (time.hour() * 60 * 60) + (time.minute() * 60) + time.second());
 	}
 
 	time = QTime::fromString(str, "m'mn 's's'");
 	if(time.isValid())
 	{
-		return (time.hour() * 60 * 60) + (time.minute() * 60) + time.second();
+		return max(1, (time.hour() * 60 * 60) + (time.minute() * 60) + time.second());
 	}
 
 	time = QTime::fromString(str, "h'h 'm'mn'");
 	if(time.isValid())
 	{
-		return (time.hour() * 60 * 60) + (time.minute() * 60) + time.second();
+		return max(1, (time.hour() * 60 * 60) + (time.minute() * 60) + time.second());
 	}
 
 	return 0;
