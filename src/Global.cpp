@@ -44,6 +44,7 @@
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
+#include <intrin.h>
 
 //Debug only includes
 #ifdef _DEBUG
@@ -121,7 +122,8 @@ unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
 
 bool lamexp_version_demo(void)
 { 
-	return !(strstr(g_lamexp_version_release, "Final") || strstr(g_lamexp_version_release, "Hotfix"));
+
+	return LAMEXP_DEBUG || !(strstr(g_lamexp_version_release, "Final") || strstr(g_lamexp_version_release, "Hotfix"));
 }
 
 /*
@@ -204,6 +206,66 @@ void lamexp_init_console(int argc, char* argv[])
 		}
 	}
 }
+
+/*
+ * Detect CPU features
+ */
+lamexp_cpu_t lamexp_detect_cpu_features(void)
+{
+	lamexp_cpu_t features;
+	memset(&features, 0, sizeof(lamexp_cpu_t));
+
+	int CPUInfo[4] = {-1};
+	
+	__cpuid(CPUInfo, 0);
+	if(CPUInfo[0] >= 1)
+	{
+		__cpuid(CPUInfo, 1);
+		features.mmx = (CPUInfo[3] & 0x800000) || false;
+		features.sse = (CPUInfo[3] & 0x2000000) || false;
+		features.sse2 = (CPUInfo[3] & 0x4000000) || false;
+		features.ssse3 = (CPUInfo[2] & 0x200) || false;
+		features.sse3 = (CPUInfo[2] & 0x1) || false;
+		features.ssse3 = (CPUInfo[2] & 0x200) || false;
+		features.stepping = CPUInfo[0] & 0xf;
+		features.model = ((CPUInfo[0] >> 4) & 0xf) + (((CPUInfo[0] >> 16) & 0xf) << 4);
+		features.family = ((CPUInfo[0] >> 8) & 0xf) + ((CPUInfo[0] >> 20) & 0xff);
+	}
+
+	char CPUBrandString[0x40];
+	memset(CPUBrandString, 0, sizeof(CPUBrandString));
+	__cpuid(CPUInfo, 0x80000000);
+	int nExIds = CPUInfo[0];
+
+	for(int i = 0x80000000; i <= nExIds; ++i)
+	{
+		__cpuid(CPUInfo, i);
+		if(i == 0x80000002) memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo));
+		else if(i == 0x80000003) memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo));
+		else if(i == 0x80000004) memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo));
+	}
+
+	strcpy_s(features.brand, 0x40, CPUBrandString);
+	return features;
+}
+
+/*
+ * Check for debugger
+ */
+void WINAPI debugThreadProc(__in  LPVOID lpParameter)
+{
+	BOOL remoteDebuggerPresent = FALSE;
+	CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
+
+	while(!IsDebuggerPresent() && !remoteDebuggerPresent)
+	{
+		Sleep(333);
+		CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
+	}
+	
+	TerminateProcess(GetCurrentProcess(), -1);
+}
+
 
 /*
  * Initialize Qt framework

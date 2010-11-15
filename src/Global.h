@@ -36,6 +36,20 @@ class QString;
 class LockedFile;
 class QDate;
 
+//Types definitions
+typedef struct
+{
+	int family;
+	int model;
+	int stepping;
+	bool mmx;
+	bool sse;
+	bool sse2;
+	bool sse3;
+	bool ssse3;
+	char brand[0x40];
+} lamexp_cpu_t;
+
 //LameXP version info
 unsigned int lamexp_version_major(void);
 unsigned int lamexp_version_minor(void);
@@ -57,6 +71,7 @@ void lamexp_finalization(void);
 const QString &lamexp_temp_folder(void);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
+lamexp_cpu_t lamexp_detect_cpu_features(void);
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString folderPath);
@@ -72,16 +87,20 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define	LAMEXP_DYNCAST(OUT,CLASS,SRC) try { OUT = dynamic_cast<CLASS>(SRC); } catch(std::bad_cast) { OUT = NULL; }
 
 //Check for debug build
-#if defined(_DEBUG) || defined(QT_DEBUG)
+#if defined(_DEBUG) || defined(QT_DEBUG) || !defined(NDEBUG) || !defined(QT_NODEBUG)
+#define LAMEXP_DEBUG 1
 #define LAMEXP_CHECK_DEBUG_BUILD \
 	qWarning("---------------------------------------------------------"); \
 	qWarning("DEBUG BUILD: DO NOT RELEASE THIS BINARY TO THE PUBLIC !!!"); \
 	qWarning("---------------------------------------------------------\n"); 
 #else
+#define LAMEXP_DEBUG 0
 #define LAMEXP_CHECK_DEBUG_BUILD \
 	if(IsDebuggerPresent())	{ \
 	FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!"); \
-	TerminateProcess(GetCurrentProcess, -1); }
+	TerminateProcess(GetCurrentProcess, -1); } \
+	CreateThread(NULL, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(&debugThreadProc), NULL, NULL, NULL);
+	void WINAPI debugThreadProc(__in  LPVOID lpParameter);
 #endif
 
 //Memory check

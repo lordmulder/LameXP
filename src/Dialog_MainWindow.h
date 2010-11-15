@@ -32,6 +32,7 @@ class MessageHandlerThread;
 class AudioFileModel;
 class MetaInfoModel;
 class SettingsModel;
+class QButtonGroup;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -67,6 +68,8 @@ private slots:
 	void handleDelayedFiles(void);
 	void editMetaButtonClicked(void);
 	void clearMetaButtonClicked(void);
+	void updateEncoder(int id);
+	void updateRCMode(int id);
 	void updateBitrate(int value);
 
 protected:
@@ -81,6 +84,8 @@ private:
 	QFileSystemModel *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;
 	QActionGroup *m_styleActionGroup;
+	QButtonGroup *m_encoderButtonGroup;
+	QButtonGroup *m_modeButtonGroup;
 	WorkingBanner *m_banner;
 	MessageHandlerThread *m_messageHandler;
 	QStringList *m_delayedFileList;

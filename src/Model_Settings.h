@@ -23,20 +23,51 @@
 
 class QSettings;
 
+#define MAKE_GETTER_DEC(OPT) int OPT(void)
+#define MAKE_SETTER_DEC(OPT) void OPT(int value)
+
 class SettingsModel
 {
 public:
 	SettingsModel(void);
 	~SettingsModel(void);
 
+	//Enums
+	enum Encoder
+	{
+		MP3Encoder = 0,
+		VorbisEncoder = 1,
+		AACEncoder = 2,
+		FLACEncoder = 3,
+		PCMEncoder = 4
+	};
+	enum RCMode
+	{
+		VBRMode = 0,
+		ABRMode = 1,
+		CBRMode = 2
+	};
+	
 	//Getters
-	int licenseAccepted(void);
-	int interfaceStyle(void);
+	MAKE_GETTER_DEC(licenseAccepted);
+	MAKE_GETTER_DEC(interfaceStyle);
+	MAKE_GETTER_DEC(compressionEncoder);
+	MAKE_GETTER_DEC(compressionRCMode);
+	MAKE_GETTER_DEC(compressionBitrate);
+
 
 	//Setters
-	void setLicenseAccepted(int value);
-	void setInterfaceStyle(int value);
+	MAKE_SETTER_DEC(licenseAccepted);
+	MAKE_SETTER_DEC(interfaceStyle);
+	MAKE_SETTER_DEC(compressionBitrate);
+	MAKE_SETTER_DEC(compressionRCMode);
+	MAKE_SETTER_DEC(compressionEncoder);
+
+	void validate(void);
 
 private:
 	QSettings *m_settings;
 };
+
+#undef MAKE_GETTER_DEC
+#undef MAKE_SETTER_DEC

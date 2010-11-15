@@ -49,6 +49,8 @@
 #include <QSysInfo>
 #include <QDragEnterEvent>
 #include <QWindowsMime>
+#include <QResource>
+#include <QTextStream>
 
 //Win32 includes
 #include <Windows.h>
@@ -81,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
+	setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
 	
 	//Register meta types
 	qRegisterMetaType<AudioFileModel>("AudioFileModel");
@@ -93,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 	//Load configuration
 	m_settings = new SettingsModel();
+	m_settings->validate();
 
 	//Enabled main buttons
 	connect(buttonAbout, SIGNAL(clicked()), this, SLOT(aboutButtonClicked()));
@@ -145,9 +149,29 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
 	
 	//Setup "Compression" tab
-	sliderBitrate->setValue(24);
+	m_encoderButtonGroup = new QButtonGroup(this);
+	m_encoderButtonGroup->addButton(radioButtonEncoderMP3, SettingsModel::MP3Encoder);
+	m_encoderButtonGroup->addButton(radioButtonEncoderVorbis, SettingsModel::VorbisEncoder);
+	m_encoderButtonGroup->addButton(radioButtonEncoderAAC, SettingsModel::AACEncoder);
+	m_encoderButtonGroup->addButton(radioButtonEncoderFLAC, SettingsModel::FLACEncoder);
+	m_encoderButtonGroup->addButton(radioButtonEncoderPCM, SettingsModel::PCMEncoder);
+	m_modeButtonGroup = new QButtonGroup(this);
+	m_modeButtonGroup->addButton(radioButtonModeQuality, SettingsModel::VBRMode);
+	m_modeButtonGroup->addButton(radioButtonModeAverageBitrate, SettingsModel::ABRMode);
+	m_modeButtonGroup->addButton(radioButtonConstBitrate, SettingsModel::CBRMode);
+	radioButtonEncoderMP3->setChecked(m_settings->compressionEncoder() == SettingsModel::MP3Encoder);
+	radioButtonEncoderVorbis->setChecked(m_settings->compressionEncoder() == SettingsModel::VorbisEncoder);
+	radioButtonEncoderAAC->setChecked(m_settings->compressionEncoder() == SettingsModel::AACEncoder);
+	radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
+	radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
+	radioButtonModeQuality->setChecked(m_settings->compressionRCMode() == SettingsModel::VBRMode);
+	radioButtonModeAverageBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::ABRMode);
+	radioButtonConstBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::CBRMode);
+	sliderBitrate->setValue(m_settings->compressionBitrate());
+	connect(m_encoderButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateEncoder(int)));
+	connect(m_modeButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateRCMode(int)));
 	connect(sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
-	updateBitrate(sliderBitrate->value());
+	updateEncoder(m_encoderButtonGroup->checkedId());
 
 	//Activate file menu actions
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
@@ -245,6 +269,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_metaData);
 	LAMEXP_DELETE(m_metaInfoModel);
 	LAMEXP_DELETE(m_settings);
+	LAMEXP_DELETE(m_encoderButtonGroup);
 }
 
 ////////////////////////////////////////////////////////////
@@ -355,17 +380,17 @@ void MainWindow::windowShown(void)
 
 		if(iAccepted <= 0)
 		{
-			m_settings->setLicenseAccepted(-1);
+			m_settings->licenseAccepted(-1);
 			QMessageBox::critical(this, "License Declined", "You have declined the license. Consequently the application will exit now!");
 			QApplication::quit();
 			return;
 		}
 
-		m_settings->setLicenseAccepted(1);
+		m_settings->licenseAccepted(1);
 	}
 	
 	//Check for AAC support
-	if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
+	if(radioButtonEncoderAAC->isEnabled())
 	{
 		if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
 		{
@@ -376,7 +401,6 @@ void MainWindow::windowShown(void)
 			messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 			QMessageBox::information(this, "AAC Encoder Outdated", messageText);
 		}
-		radioButtonEncoderAAC->setEnabled(true);
 	}
 	else
 	{
@@ -386,7 +410,6 @@ void MainWindow::windowShown(void)
 		messageText += "You can download the Nero AAC encoder for free from the official Nero website at:<br>";
 		messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 		QMessageBox::information(this, "AAC Support Disabled", messageText);
-		radioButtonEncoderAAC->setEnabled(false);
 	}
 	
 	//Add files from the command-line
@@ -573,7 +596,7 @@ void MainWindow::styleActionActivated(QAction *action)
 {
 	if(action && action->userData(0))
 	{
-		m_settings->setInterfaceStyle(dynamic_cast<Index*>(action->userData(0))->value());
+		m_settings->interfaceStyle(dynamic_cast<Index*>(action->userData(0))->value());
 	}
 
 	switch(m_settings->interfaceStyle())
@@ -802,9 +825,177 @@ void MainWindow::handleDelayedFiles(void)
 }
 
 /*
+ * Update encoder
+ */
+void MainWindow::updateEncoder(int id)
+{
+	m_settings->compressionEncoder(id);
+
+	switch(m_settings->compressionEncoder())
+	{
+	case SettingsModel::VorbisEncoder:
+		radioButtonModeQuality->setEnabled(true);
+		radioButtonModeAverageBitrate->setEnabled(true);
+		radioButtonConstBitrate->setEnabled(false);
+		if(radioButtonConstBitrate->isChecked()) radioButtonModeQuality->setChecked(true);
+		sliderBitrate->setEnabled(true);
+		break;
+	case SettingsModel::FLACEncoder:
+		radioButtonModeQuality->setEnabled(false);
+		radioButtonModeQuality->setChecked(true);
+		radioButtonModeAverageBitrate->setEnabled(false);
+		radioButtonConstBitrate->setEnabled(false);
+		sliderBitrate->setEnabled(true);
+		break;
+	case SettingsModel::PCMEncoder:
+		radioButtonModeQuality->setEnabled(false);
+		radioButtonModeQuality->setChecked(true);
+		radioButtonModeAverageBitrate->setEnabled(false);
+		radioButtonConstBitrate->setEnabled(false);
+		sliderBitrate->setEnabled(false);
+		break;
+	default:
+		radioButtonModeQuality->setEnabled(true);
+		radioButtonModeAverageBitrate->setEnabled(true);
+		radioButtonConstBitrate->setEnabled(true);
+		sliderBitrate->setEnabled(true);
+		break;
+	}
+
+	updateRCMode(m_modeButtonGroup->checkedId());
+}
+
+/*
+ * Update rate-control mode
+ */
+void MainWindow::updateRCMode(int id)
+{
+	m_settings->compressionRCMode(id);
+
+	switch(m_settings->compressionEncoder())
+	{
+	case SettingsModel::MP3Encoder:
+		switch(m_settings->compressionRCMode())
+		{
+		case SettingsModel::VBRMode:
+			sliderBitrate->setMinimum(0);
+			sliderBitrate->setMaximum(9);
+			break;
+		default:
+			sliderBitrate->setMinimum(2);
+			sliderBitrate->setMaximum(20);
+			break;
+		}
+		break;
+	case SettingsModel::VorbisEncoder:
+		switch(m_settings->compressionRCMode())
+		{
+		case SettingsModel::VBRMode:
+			sliderBitrate->setMinimum(-2);
+			sliderBitrate->setMaximum(10);
+			break;
+		default:
+			sliderBitrate->setMinimum(4);
+			sliderBitrate->setMaximum(63);
+			break;
+		}
+		break;
+	case SettingsModel::AACEncoder:
+		switch(m_settings->compressionRCMode())
+		{
+		case SettingsModel::VBRMode:
+			sliderBitrate->setMinimum(0);
+			sliderBitrate->setMaximum(20);
+			break;
+		default:
+			sliderBitrate->setMinimum(4);
+			sliderBitrate->setMaximum(63);
+			break;
+		}
+		break;
+	case SettingsModel::FLACEncoder:
+		sliderBitrate->setMinimum(0);
+		sliderBitrate->setMaximum(8);
+		break;
+	case SettingsModel::PCMEncoder:
+		sliderBitrate->setMinimum(0);
+		sliderBitrate->setMaximum(2);
+		sliderBitrate->setValue(1);
+		break;
+	default:
+		sliderBitrate->setMinimum(0);
+		sliderBitrate->setMaximum(0);
+		break;
+	}
+
+	updateBitrate(sliderBitrate->value());
+}
+
+/*
  * Update bitrate
  */
 void MainWindow::updateBitrate(int value)
 {
-	labelBitrate->setText(QString("%1 kbps").arg(value * 8));
+	m_settings->compressionBitrate(value);
+	
+	switch(m_settings->compressionRCMode())
+	{
+	case SettingsModel::VBRMode:
+		switch(m_settings->compressionEncoder())
+		{
+		case SettingsModel::MP3Encoder:
+			labelBitrate->setText(QString("Quality Level %1").arg(9 - value));
+			break;
+		case SettingsModel::VorbisEncoder:
+			labelBitrate->setText(QString("Quality Level %1").arg(value));
+			break;
+		case SettingsModel::AACEncoder:
+			labelBitrate->setText(QString("Quality Level %1").arg(QString().sprintf("%.2f", static_cast<double>(value * 5) / 100.0)));
+			break;
+		case SettingsModel::FLACEncoder:
+			labelBitrate->setText(QString("Compression %1").arg(value));
+			break;
+		case SettingsModel::PCMEncoder:
+			labelBitrate->setText("Uncompressed");
+			break;
+		default:
+			labelBitrate->setText(QString::number(value));
+			break;
+		}
+		break;
+	case SettingsModel::ABRMode:
+		switch(m_settings->compressionEncoder())
+		{
+		case SettingsModel::MP3Encoder:
+			labelBitrate->setText(QString("&asymp; %1 kbps").arg(value * 16));
+			break;
+		case SettingsModel::FLACEncoder:
+			labelBitrate->setText(QString("Compression %1").arg(value));
+			break;
+		case SettingsModel::PCMEncoder:
+			labelBitrate->setText("Uncompressed");
+			break;
+		default:
+			labelBitrate->setText(QString("&asymp; %1 kbps").arg(min(500, value * 8)));
+			break;
+		}
+		break;
+	default:
+		switch(m_settings->compressionEncoder())
+		{
+		case SettingsModel::MP3Encoder:
+			labelBitrate->setText(QString("%1 kbps").arg(value * 16));
+			break;
+		case SettingsModel::FLACEncoder:
+			labelBitrate->setText(QString("Compression %1").arg(value));
+			break;
+		case SettingsModel::PCMEncoder:
+			labelBitrate->setText("Uncompressed");
+			break;
+		default:
+			labelBitrate->setText(QString("%1 kbps").arg(min(500, value * 8)));
+			break;
+		}
+		break;
+	}
 }

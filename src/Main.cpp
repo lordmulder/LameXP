@@ -56,6 +56,12 @@ int lamexp_main(int argc, char* argv[])
 	//Print warning, if this is a "debug" build
 	LAMEXP_CHECK_DEBUG_BUILD;
 	
+	//Detect CPU capabilities
+	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
+	qDebug("CPU brand string:  %s", cpuFeatures.brand);
+	qDebug("CPU signature:     Family: %d, Model: %d, Stepping: %d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
+	qDebug("CPU capabilities:  MMX: %s, SSE: %s, SSE2: %s, SSE3: %s, SSSE3: %s\n", (cpuFeatures.mmx ? "Yes" : "No"), (cpuFeatures.sse ? "Yes" : "No"), (cpuFeatures.sse2 ? "Yes" : "No"), (cpuFeatures.sse3 ? "Yes" : "No"), (cpuFeatures.ssse3 ? "Yes" : "No"));
+	
 	//Initialize Qt
 	lamexp_init_qt(argc, argv);
 	

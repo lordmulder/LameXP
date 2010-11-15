@@ -27,9 +27,15 @@
 #include <QDesktopServices>
 #include <QApplication>
 
-static const char *g_settingsVersionNumber = "VersionNumber";
-static const char *g_settingsLicenseAccepted = "LicenseAccepted";
-static const char *g_settingsInterfaceStyle = "InterfaceStyle";
+static const char *g_settingsId_versionNumber = "VersionNumber";
+static const char *g_settingsId_licenseAccepted = "LicenseAccepted";
+static const char *g_settingsId_interfaceStyle = "InterfaceStyle";
+static const char *g_settingsId_compressionEncoder = "Compression/Encoder";
+static const char *g_settingsId_compressionRCMode = "Compression/RCMode";
+static const char *g_settingsId_compressionBitrate = "Compression/Bitrate";
+
+#define MAKE_GETTER(OPT,DEF) int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); }
+#define MAKE_SETTER(OPT) void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); }
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -40,7 +46,7 @@ SettingsModel::SettingsModel(void)
 	QString appPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	m_settings = new QSettings(appPath.append("/config.ini"), QSettings::IniFormat);
 	m_settings->beginGroup(QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build()));
-	m_settings->setValue(g_settingsVersionNumber, QApplication::applicationVersion());
+	m_settings->setValue(g_settingsId_versionNumber, QApplication::applicationVersion());
 	m_settings->sync();
 }
 
@@ -57,8 +63,37 @@ SettingsModel::~SettingsModel(void)
 // Public Functions
 ////////////////////////////////////////////////////////////
 
-int SettingsModel::licenseAccepted(void) { return m_settings->value(g_settingsLicenseAccepted, 0).toInt(); }
-void SettingsModel::setLicenseAccepted(int value) { m_settings->setValue(g_settingsLicenseAccepted, value); }
+void SettingsModel::validate(void)
+{
+	if(this->compressionEncoder() < SettingsModel::MP3Encoder || this->compressionEncoder() > SettingsModel::PCMEncoder)
+	{
+		this->compressionEncoder(SettingsModel::MP3Encoder);
+	}
+	if(this->compressionRCMode() < SettingsModel::VBRMode || this->compressionRCMode() > SettingsModel::CBRMode)
+	{
+		this->compressionEncoder(SettingsModel::VBRMode);
+	}
+	if(!(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")))
+	{
+		if(this->compressionEncoder() == SettingsModel::AACEncoder) this->compressionEncoder(SettingsModel::MP3Encoder);
+	}
+}
 
-int SettingsModel::interfaceStyle(void) { return m_settings->value(g_settingsInterfaceStyle, 0).toInt(); }
-void SettingsModel::setInterfaceStyle(int value) { m_settings->setValue(g_settingsInterfaceStyle, value); }
+////////////////////////////////////////////////////////////
+// Getter and Setter
+////////////////////////////////////////////////////////////
+
+MAKE_GETTER(licenseAccepted, 0)
+MAKE_SETTER(licenseAccepted)
+
+MAKE_GETTER(interfaceStyle, 0)
+MAKE_SETTER(interfaceStyle)
+
+MAKE_GETTER(compressionEncoder, 0)
+MAKE_SETTER(compressionEncoder)
+
+MAKE_GETTER(compressionRCMode, 0)
+MAKE_SETTER(compressionRCMode)
+
+MAKE_GETTER(compressionBitrate, 0)
+MAKE_SETTER(compressionBitrate)
