@@ -246,6 +246,22 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 	}
 
 	strcpy_s(features.brand, 0x40, CPUBrandString);
+
+#if defined(_M_X64 ) || defined(_M_IA64)
+	features.x64 = true;
+#else
+	BOOL x64 = FALSE;
+	if(IsWow64Process(GetCurrentProcess(), &x64))
+	{
+		features.x64 = x64;
+	}
+#endif
+
+	SYSTEM_INFO systemInfo;
+	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
+	GetNativeSystemInfo(&systemInfo);
+	features.count = systemInfo.dwNumberOfProcessors;
+
 	return features;
 }
 

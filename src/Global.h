@@ -42,6 +42,8 @@ typedef struct
 	int family;
 	int model;
 	int stepping;
+	int count;
+	bool x64;
 	bool mmx;
 	bool sse;
 	bool sse2;
@@ -85,6 +87,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define LAMEXP_CLOSE(HANDLE) if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; }
 #define QWCHAR(STR) reinterpret_cast<const wchar_t*>(STR.utf16())
 #define	LAMEXP_DYNCAST(OUT,CLASS,SRC) try { OUT = dynamic_cast<CLASS>(SRC); } catch(std::bad_cast) { OUT = NULL; }
+#define LAMEXP_BOOL(X) (X ? "1" : "0")
 
 //Check for debug build
 #if defined(_DEBUG) || defined(QT_DEBUG) || !defined(NDEBUG) || !defined(QT_NODEBUG)
