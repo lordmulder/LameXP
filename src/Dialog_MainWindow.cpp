@@ -348,7 +348,7 @@ void MainWindow::dropEvent(QDropEvent *event)
 			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files);
 			for(int j = 0; j < list.count(); j++)
 			{
-				droppedFiles << list.at(j).absoluteFilePath();
+				droppedFiles << list.at(j).canonicalFilePath();
 			}
 		}
 	}
@@ -390,7 +390,7 @@ void MainWindow::windowShown(void)
 	}
 	
 	//Check for AAC support
-	if(radioButtonEncoderAAC->isEnabled())
+	if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
 	{
 		if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
 		{
@@ -404,6 +404,7 @@ void MainWindow::windowShown(void)
 	}
 	else
 	{
+		radioButtonEncoderAAC->setEnabled(false);
 		QString messageText;
 		messageText += "<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>";
 		messageText += "Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>";
@@ -808,7 +809,7 @@ void MainWindow::makeFolderButtonClicked(void)
 			QDir createdDir = basePath;
 			if(createdDir.cd(newFolder))
 			{
-				outputFolderView->setCurrentIndex(m_fileSystemModel->index(createdDir.absolutePath()));
+				outputFolderView->setCurrentIndex(m_fileSystemModel->index(createdDir.canonicalPath()));
 				outputFolderViewClicked(outputFolderView->currentIndex());
 				outputFolderView->setFocus();
 			}
@@ -925,7 +926,7 @@ void MainWindow::handleDelayedFiles(void)
 			QList<QFileInfo> list = QDir(currentFile.canonicalFilePath()).entryInfoList(QDir::Files);
 			for(int j = 0; j < list.count(); j++)
 			{
-				selectedFiles << list.at(j).absoluteFilePath();
+				selectedFiles << list.at(j).canonicalFilePath();
 			}
 		}
 	}

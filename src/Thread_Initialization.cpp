@@ -150,7 +150,7 @@ void InitializationThread::initNeroAac(void)
 		return;
 	}
 
-	qDebug("Found Nero AAC encoder binary:\n%s\n", neroFileInfo[0].absoluteFilePath().toUtf8().constData());
+	qDebug("Found Nero AAC encoder binary:\n%s\n", neroFileInfo[0].canonicalFilePath().toUtf8().constData());
 
 	LockedFile *neroBin[3];
 	for(int i = 0; i < 3; i++) neroBin[i] = NULL;
@@ -159,7 +159,7 @@ void InitializationThread::initNeroAac(void)
 	{
 		for(int i = 0; i < 3; i++)
 		{
-			neroBin[i] = new LockedFile(neroFileInfo[i].absoluteFilePath());
+			neroBin[i] = new LockedFile(neroFileInfo[i].canonicalFilePath());
 		}
 	}
 	catch(...)
@@ -172,7 +172,7 @@ void InitializationThread::initNeroAac(void)
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
-	process.start(neroFileInfo[0].absoluteFilePath());
+	process.start(neroFileInfo[0].canonicalFilePath());
 
 	if(!process.waitForStarted())
 	{

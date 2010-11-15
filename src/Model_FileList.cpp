@@ -129,14 +129,14 @@ void FileListModel::addFile(const QString &filePath)
 
 	for(int i = 0; i < m_fileList.count(); i++)
 	{
-		if(m_fileList.at(i).filePath().compare(fileInfo.absoluteFilePath(), Qt::CaseInsensitive) == 0)
+		if(m_fileList.at(i).filePath().compare(fileInfo.canonicalFilePath(), Qt::CaseInsensitive) == 0)
 		{
 			return;
 		}
 	}
 	
 	beginResetModel();
-	m_fileList.append(AudioFileModel(fileInfo.absoluteFilePath(), fileInfo.baseName()));
+	m_fileList.append(AudioFileModel(fileInfo.canonicalFilePath(), fileInfo.baseName()));
 	endResetModel();
 }
 

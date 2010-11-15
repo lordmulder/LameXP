@@ -492,7 +492,7 @@ const QString &lamexp_temp_folder(void)
 		
 		if(tempFolder.cd(uuid))
 		{
-			g_lamexp_temp_folder = tempFolder.absolutePath();
+			g_lamexp_temp_folder = tempFolder.canonicalPath();
 		}
 		else
 		{
@@ -520,11 +520,11 @@ bool lamexp_clean_folder(const QString folderPath)
 		
 		if(entryList.at(i).isDir())
 		{
-			lamexp_clean_folder(entryList.at(i).absoluteFilePath());
+			lamexp_clean_folder(entryList.at(i).canonicalFilePath());
 		}
 		else
 		{
-			QFile::remove(entryList.at(i).absoluteFilePath());
+			QFile::remove(entryList.at(i).canonicalFilePath());
 		}
 	}
 	
