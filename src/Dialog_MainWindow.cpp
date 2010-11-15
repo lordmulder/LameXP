@@ -49,8 +49,8 @@
 #include <QSysInfo>
 #include <QDragEnterEvent>
 #include <QWindowsMime>
-#include <QResource>
-#include <QTextStream>
+#include <QProcess>
+#include <QRegExp>
 
 //Win32 includes
 #include <Windows.h>
@@ -440,13 +440,122 @@ void MainWindow::aboutButtonClicked(void)
 	LAMEXP_DELETE(aboutBox);
 }
 
+#define IF_UNICODE(STR) if(_stricmp(STR.toUtf8().constData(),QString::fromLocal8Bit(STR.toLocal8Bit()).toUtf8().constData()))
+
 /*
  * Encode button
  */
 void MainWindow::encodeButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-	QMessageBox::warning(this, "LameXP", "Not implemented yet, please try again with a later version!");
+	
+	if(m_settings->compressionEncoder() != SettingsModel::MP3Encoder)
+	{
+		QMessageBox::warning(this, "LameXP", "Sorry, only Lame MP3 is supported at the moment!");
+		tabWidget->setCurrentIndex(3);
+		return;
+	}
+		
+	QProcess process;
+	process.setProcessChannelMode(QProcess::MergedChannels);
+	process.setReadChannel(QProcess::StandardOutput);
+
+	m_banner->show("Encoding files, please wait...");
+
+	for(int i = 0; i < m_fileListModel->rowCount(); i++)
+	{
+		AudioFileModel file = m_fileListModel->getFile(m_fileListModel->index(i,0));
+		QString outFolder = m_fileSystemModel->filePath(this->outputFolderView->currentIndex());
+		
+		QString baseName = QFileInfo(file.filePath()).fileName();
+		int pos = baseName.lastIndexOf(".");
+		if(pos >= 1) baseName = baseName.left(pos);
+
+		QStringList args = QStringList() << "--nohist" << "-h";
+		
+		switch(m_settings->compressionRCMode())
+		{
+		case SettingsModel::VBRMode:
+			args << "-V" << QString::number(9 - m_settings->compressionBitrate());
+			break;
+		case SettingsModel::ABRMode:
+			args << "--abr" << QString::number(SettingsModel::mp3Bitrates[m_settings->compressionBitrate()]);
+			break;
+		case SettingsModel::CBRMode:
+			args << "--cbr";
+			args << "-b" << QString::number(SettingsModel::mp3Bitrates[m_settings->compressionBitrate()]);
+			break;
+		}
+				
+		int n = 1;
+		QString outFileName = QString(outFolder).append("/").append(baseName).append(".mp3");
+		
+		while(QFileInfo(outFileName).exists())
+		{
+			outFileName = QString(outFolder).append("/").append(baseName).append(" (").append(QString::number(++n)).append(").mp3");
+		}
+
+		IF_UNICODE(file.fileName())
+		{
+			args << "--uTitle" << file.fileName();
+		}
+		else
+		{
+			args << "--lTitle" << file.fileName();
+		}
+		
+		args << QDir::toNativeSeparators(file.filePath());
+		args << QDir::toNativeSeparators(outFileName);
+
+		m_banner->setText(QString("Encoding: %1").arg(QFileInfo(file.filePath()).fileName()));
+		
+		process.start(lamexp_lookup_tool("lame.exe"), args);
+		if(!process.waitForStarted())
+		{
+			QMessageBox::warning(this, "LAME", "Failed to create process!");
+			m_banner->close();
+			return;
+		}
+
+		QRegExp regExp("\\(.*(\\d+)%\\)\\|");
+
+		while(process.state() != QProcess::NotRunning)
+		{
+			process.waitForReadyRead();
+			QByteArray line = process.readLine();
+			if(line.isEmpty())
+			{
+				break;
+			}
+			while(line.size() > 0)
+			{
+				qDebug("%s", line.constData());
+				QString text = QString::fromLocal8Bit(line.constData()).simplified();
+				if(regExp.lastIndexIn(line) >= 0)
+				{
+					m_banner->setText(QString("Encoding: %1 (%2%)").arg(QFileInfo(file.filePath()).fileName(),regExp.cap(1)));
+				}
+				line = process.readLine();
+				QApplication::processEvents();
+			}
+		}
+
+		process.waitForFinished();
+		
+		if(process.state() != QProcess::NotRunning)
+		{
+			process.kill();
+			process.waitForFinished(-1);
+		}
+
+		if(process.exitStatus() != QProcess::NormalExit)
+		{
+			QMessageBox::critical(this, "Error", QString("Ahrg, encoding has failed with error code %1.").arg(QString::number(process.exitCode())));
+		}
+	}
+
+	m_banner->close();
+	QMessageBox::information(this, "Done", "Encoding process completed.");
 }
 
 /*
@@ -882,8 +991,8 @@ void MainWindow::updateRCMode(int id)
 			sliderBitrate->setMaximum(9);
 			break;
 		default:
-			sliderBitrate->setMinimum(2);
-			sliderBitrate->setMaximum(20);
+			sliderBitrate->setMinimum(0);
+			sliderBitrate->setMaximum(13);
 			break;
 		}
 		break;
@@ -967,7 +1076,7 @@ void MainWindow::updateBitrate(int value)
 		switch(m_settings->compressionEncoder())
 		{
 		case SettingsModel::MP3Encoder:
-			labelBitrate->setText(QString("&asymp; %1 kbps").arg(value * 16));
+			labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::mp3Bitrates[value]));
 			break;
 		case SettingsModel::FLACEncoder:
 			labelBitrate->setText(QString("Compression %1").arg(value));
@@ -984,7 +1093,7 @@ void MainWindow::updateBitrate(int value)
 		switch(m_settings->compressionEncoder())
 		{
 		case SettingsModel::MP3Encoder:
-			labelBitrate->setText(QString("%1 kbps").arg(value * 16));
+			labelBitrate->setText(QString("%1 kbps").arg(SettingsModel::mp3Bitrates[value]));
 			break;
 		case SettingsModel::FLACEncoder:
 			labelBitrate->setText(QString("Compression %1").arg(value));

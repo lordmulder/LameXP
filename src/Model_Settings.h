@@ -48,6 +48,9 @@ public:
 		CBRMode = 2
 	};
 	
+	//Consts
+	static const int mp3Bitrates[15];
+
 	//Getters
 	MAKE_GETTER_DEC(licenseAccepted);
 	MAKE_GETTER_DEC(interfaceStyle);

@@ -90,7 +90,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define LAMEXP_BOOL(X) (X ? "1" : "0")
 
 //Check for debug build
-#if defined(_DEBUG) || defined(QT_DEBUG) || !defined(NDEBUG) || !defined(QT_NODEBUG)
+#if defined(_DEBUG) || defined(QT_DEBUG) || !defined(NDEBUG) || !defined(QT_NO_DEBUG)
 #define LAMEXP_DEBUG 1
 #define LAMEXP_CHECK_DEBUG_BUILD \
 	qWarning("---------------------------------------------------------"); \
