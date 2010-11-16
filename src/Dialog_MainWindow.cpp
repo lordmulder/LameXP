@@ -31,6 +31,7 @@
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
 #include "Model_Settings.h"
+#include "Encoder_MP3.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -457,11 +458,11 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 		
-	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
-
 	m_banner->show("Encoding files, please wait...");
+	QApplication::processEvents();
+
+	MP3Encoder *mp3Encoder = new MP3Encoder();
+	connect(mp3Encoder, SIGNAL(statusUpdated(QString)), m_banner, SLOT(setText(QString)));
 
 	for(int i = 0; i < m_fileListModel->rowCount(); i++)
 	{
@@ -472,22 +473,6 @@ void MainWindow::encodeButtonClicked(void)
 		int pos = baseName.lastIndexOf(".");
 		if(pos >= 1) baseName = baseName.left(pos);
 
-		QStringList args = QStringList() << "--nohist" << "-h";
-		
-		switch(m_settings->compressionRCMode())
-		{
-		case SettingsModel::VBRMode:
-			args << "-V" << QString::number(9 - m_settings->compressionBitrate());
-			break;
-		case SettingsModel::ABRMode:
-			args << "--abr" << QString::number(SettingsModel::mp3Bitrates[m_settings->compressionBitrate()]);
-			break;
-		case SettingsModel::CBRMode:
-			args << "--cbr";
-			args << "-b" << QString::number(SettingsModel::mp3Bitrates[m_settings->compressionBitrate()]);
-			break;
-		}
-				
 		int n = 1;
 		QString outFileName = QString(outFolder).append("/").append(baseName).append(".mp3");
 		
@@ -495,67 +480,13 @@ void MainWindow::encodeButtonClicked(void)
 		{
 			outFileName = QString(outFolder).append("/").append(baseName).append(" (").append(QString::number(++n)).append(").mp3");
 		}
-
-		IF_UNICODE(file.fileName())
-		{
-			args << "--uTitle" << file.fileName();
-		}
-		else
-		{
-			args << "--lTitle" << file.fileName();
-		}
 		
-		args << QDir::toNativeSeparators(file.filePath());
-		args << QDir::toNativeSeparators(outFileName);
-
-		m_banner->setText(QString("Encoding: %1").arg(QFileInfo(file.filePath()).fileName()));
-		
-		process.start(lamexp_lookup_tool("lame.exe"), args);
-		if(!process.waitForStarted())
-		{
-			QMessageBox::warning(this, "LAME", "Failed to create process!");
-			m_banner->close();
-			return;
-		}
-
-		QRegExp regExp("\\(.*(\\d+)%\\)\\|");
-
-		while(process.state() != QProcess::NotRunning)
-		{
-			process.waitForReadyRead();
-			QByteArray line = process.readLine();
-			if(line.isEmpty())
-			{
-				break;
-			}
-			while(line.size() > 0)
-			{
-				qDebug("%s", line.constData());
-				QString text = QString::fromLocal8Bit(line.constData()).simplified();
-				if(regExp.lastIndexIn(line) >= 0)
-				{
-					m_banner->setText(QString("Encoding: %1 (%2%)").arg(QFileInfo(file.filePath()).fileName(),regExp.cap(1)));
-				}
-				line = process.readLine();
-				QApplication::processEvents();
-			}
-		}
-
-		process.waitForFinished();
-		
-		if(process.state() != QProcess::NotRunning)
-		{
-			process.kill();
-			process.waitForFinished(-1);
-		}
-
-		if(process.exitStatus() != QProcess::NormalExit)
-		{
-			QMessageBox::critical(this, "Error", QString("Ahrg, encoding has failed with error code %1.").arg(QString::number(process.exitCode())));
-		}
+		mp3Encoder->encode(file, outFileName);
 	}
 
+	LAMEXP_DELETE(mp3Encoder);
 	m_banner->close();
+		
 	QMessageBox::information(this, "Done", "Encoding process completed.");
 }
 

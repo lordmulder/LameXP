@@ -142,4 +142,8 @@ void WorkingBanner::setText(const QString &text)
 		}
 		labelStatus->setText(choppedText);
 	}
+	if(this->isVisible())
+	{
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	}
 }
