@@ -30,6 +30,8 @@
 
 class ProgressModel : public QAbstractTableModel
 {
+	Q_OBJECT
+
 public:
 	ProgressModel(void);
 	~ProgressModel(void);

@@ -21,35 +21,23 @@
 
 #pragma once
 
-#include "../tmp/UIC_ProcessingDialog.h"
+#include <QThread>
 
-class QMovie;
-class ProgressModel;
-class ProcessThread;
-
-class ProcessingDialog : public QDialog, private Ui::ProcessingDialog
+class ProcessThread: public QThread
 {
 	Q_OBJECT
 
 public:
-	ProcessingDialog(void);
-	~ProcessingDialog(void);
+	ProcessThread(void);
+	~ProcessThread(void);
+	void run();
+	void abort() { m_aborted = true; }
 
-private slots:
-	void initEncoding(void);
-	void doneEncoding(void);
-	void abortEncoding(void);
-
-protected:
-	void showEvent(QShowEvent *event);
-	void closeEvent(QCloseEvent *event);
-	bool eventFilter(QObject *obj, QEvent *event);
+signals:
+	void processStateInitialized(const QString &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
+	void processStateChanged(const QString &jobId, const QString &newStatus, int newState);
 
 private:
-	void setCloseButtonEnabled(bool enabled);
-	
-	int m_pendingJobs;
-	QMovie *m_progressIndicator;
-	ProgressModel *m_progressModel;
-	ProcessThread *m_thread[4];
+	const QString m_jobId;
+	volatile bool m_aborted;
 };

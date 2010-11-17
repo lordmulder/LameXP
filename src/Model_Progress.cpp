@@ -22,9 +22,9 @@
 #include "Model_Progress.h"
 
 ProgressModel::ProgressModel(void) :
-	m_iconRunning(":/icons/resultset_next.png"),
+	m_iconRunning(":/icons/media_play.png"),
 	m_iconPaused(":/icons/control_pause_blue.png"),
-	m_iconComplete(":/icons/accept.png"),
+	m_iconComplete(":/icons/tick.png"),
 	m_iconFailed(":/icons/exclamation.png")
 {
 }
@@ -67,12 +67,16 @@ QVariant ProgressModel::data(const QModelIndex &index, int role) const
 			switch(m_jobState.value(m_jobList.at(index.row())))
 			{
 			case JobRunning:
+				return m_iconRunning;
 				break;
 			case JobPaused:
+				return m_iconPaused;
 				break;
 			case JobComplete:
+				return m_iconComplete;
 				break;
 			default:
+				return m_iconFailed;
 				break;
 			}
 		}

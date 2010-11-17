@@ -36,6 +36,7 @@
     <file>icons/folder_page.png</file>
     <file>icons/house.png</file>
     <file>icons/information.png</file>
+    <file>icons/media_play.png</file>
     <file>icons/monitor.png</file>
     <file>icons/music.png</file>
     <file>icons/package.png</file>
@@ -47,6 +48,7 @@
     <file>icons/sound.png</file>
     <file>icons/star.png</file>
     <file>icons/table_edit.png</file>
+    <file>icons/tick.png</file>
     <file>icons/timeline_marker.png</file>
     <file>icons/transmit_blue.png</file>
     <file>icons/user.png</file>

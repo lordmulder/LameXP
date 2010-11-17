@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>663</width>
-    <height>458</height>
+    <height>454</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,13 +30,13 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>72</height>
+         <height>64</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>72</height>
+         <height>64</height>
         </size>
        </property>
        <property name="palette">
@@ -138,14 +138,14 @@
            <widget class="QLabel" name="label_headerIcon">
             <property name="minimumSize">
              <size>
-              <width>60</width>
-              <height>56</height>
+              <width>48</width>
+              <height>45</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>60</width>
-              <height>56</height>
+              <width>48</width>
+              <height>45</height>
              </size>
             </property>
             <property name="text">
@@ -283,6 +283,18 @@
            <bold>false</bold>
           </font>
          </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <attribute name="horizontalHeaderHighlightSections">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderHighlightSections">
+          <bool>false</bool>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -334,6 +346,9 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
             <string>(VERSION_TAG)</string>
@@ -405,6 +420,14 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -415,22 +438,6 @@
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>422</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>331</x>
-     <y>228</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>button_AbortProcess</sender>
-   <signal>clicked()</signal>
-   <receiver>ProcessingDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>453</x>
      <y>422</y>
     </hint>
     <hint type="destinationlabel">
