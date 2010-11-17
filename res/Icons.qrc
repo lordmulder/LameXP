@@ -22,11 +22,13 @@
     <file>icons/compress.png</file>
     <file>icons/computer.png</file>
     <file>icons/controller.png</file>
+    <file>icons/control_pause_blue.png</file>
     <file>icons/cross.png</file>
     <file>icons/date.png</file>
     <file>icons/delete.png</file>
     <file>icons/door_out.png</file>
     <file>icons/drive_cd.png</file>
+    <file>icons/exclamation.png</file>
     <file>icons/feed.png</file>
     <file>icons/folder_add.png</file>
     <file>icons/folder_go.png</file>
@@ -40,6 +42,7 @@
     <file>icons/page_white_add.png</file>
     <file>icons/page_white_cd.png</file>
     <file>icons/play.png</file>
+    <file>icons/resultset_next.png</file>
     <file>icons/script_edit.png</file>
     <file>icons/sound.png</file>
     <file>icons/star.png</file>

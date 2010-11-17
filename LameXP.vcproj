@@ -351,6 +351,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Model_Progress.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Model_Settings.cpp"
 				>
 			</File>
@@ -705,6 +709,10 @@
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\src\Model_Progress.h"
+				>
 			</File>
 			<File
 				RelativePath=".\src\Model_Settings.h"

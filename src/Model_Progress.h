@@ -1,0 +1,66 @@
+///////////////////////////////////////////////////////////////////////////////
+// LameXP - Audio Encoder Front-End
+// Copyright (C) 2004-2010 LoRd_MuldeR <MuldeR2@GMX.de>
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+// http://www.gnu.org/licenses/gpl-2.0.txt
+///////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include <QAbstractTableModel>
+
+#include <QString>
+#include <QStringList>
+#include <QMap>
+#include <QIcon>
+
+class ProgressModel : public QAbstractTableModel
+{
+public:
+	ProgressModel(void);
+	~ProgressModel(void);
+
+	//Enums
+	enum JobState
+	{
+		JobRunning = 0,
+		JobPaused = 1,
+		JobComplete = 2,
+		JobFailed = 3
+	};
+
+	//Model functions
+	int columnCount(const QModelIndex &parent = QModelIndex()) const;
+	int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+
+public slots:
+	void addJob(const QString &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);
+	void updateJob(const QString &jobId, const QString &newStatus, int newState);
+
+private:
+	QStringList m_jobList;
+	QMap<QString, QString> m_jobName;
+	QMap<QString, QString> m_jobStatus;
+	QMap<QString, int> m_jobState;
+
+	const QIcon m_iconRunning;
+	const QIcon m_iconPaused;
+	const QIcon m_iconComplete;
+	const QIcon m_iconFailed;
+};
