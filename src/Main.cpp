@@ -23,6 +23,7 @@
 #include "Global.h"
 #include "Dialog_SplashScreen.h"
 #include "Dialog_MainWindow.h"
+#include "Dialog_Processing.h"
 #include "Thread_Initialization.h"
 #include "Thread_MessageProducer.h"
 #include "Model_Settings.h"
@@ -120,6 +121,11 @@ int lamexp_main(int argc, char* argv[])
 	poMainWindow->show();
 	iResult = QApplication::instance()->exec();
 	LAMEXP_DELETE(poMainWindow);
+	
+	//Show processing dialog
+	ProcessingDialog *processingDialog = new ProcessingDialog();
+	processingDialog->exec();
+	LAMEXP_DELETE(processingDialog);
 	
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");
