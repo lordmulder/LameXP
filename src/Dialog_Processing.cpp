@@ -45,8 +45,13 @@ ProcessingDialog::ProcessingDialog(void)
 	//Init the dialog, from the .ui file
 	setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
+	
+	//Setup version info
 	label_versionInfo->setText(QString().sprintf("v%d.%02d %s (Build %d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build()));
 	label_versionInfo->installEventFilter(this);
+
+	//Register meta type
+	qRegisterMetaType<QUuid>("QUuid");
 
 	//Center window in screen
 	QRect desktopRect = QApplication::desktop()->screenGeometry();
@@ -102,7 +107,7 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 
 void ProcessingDialog::closeEvent(QCloseEvent *event)
 {
-	if(!button_closeDialog->isEnabled() || m_thread) event->ignore();
+	if(!button_closeDialog->isEnabled()) event->ignore();
 }
 
 bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
@@ -149,8 +154,8 @@ void ProcessingDialog::initEncoding(void)
 	{
 		m_thread[i] = new ProcessThread();
 		connect(m_thread[i], SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
-		connect(m_thread[i], SIGNAL(processStateInitialized(QString,QString,QString,int)), m_progressModel, SLOT(addJob(QString,QString,QString,int)), Qt::QueuedConnection);
-		connect(m_thread[i], SIGNAL(processStateChanged(QString,QString,int)), m_progressModel, SLOT(updateJob(QString,QString,int)), Qt::QueuedConnection);
+		connect(m_thread[i], SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
+		connect(m_thread[i], SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
 		m_thread[i]->start();
 	}
 

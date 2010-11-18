@@ -22,6 +22,7 @@
 #pragma once
 
 #include <QThread>
+#include <QUuid>
 
 class ProcessThread: public QThread
 {
@@ -34,10 +35,10 @@ public:
 	void abort() { m_aborted = true; }
 
 signals:
-	void processStateInitialized(const QString &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
-	void processStateChanged(const QString &jobId, const QString &newStatus, int newState);
+	void processStateInitialized(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
+	void processStateChanged(const QUuid &jobId, const QString &newStatus, int newState);
 
 private:
-	const QString m_jobId;
+	const QUuid m_jobId;
 	volatile bool m_aborted;
 };

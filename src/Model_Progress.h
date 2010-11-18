@@ -27,6 +27,7 @@
 #include <QStringList>
 #include <QMap>
 #include <QIcon>
+#include <QUuid>
 
 class ProgressModel : public QAbstractTableModel
 {
@@ -52,14 +53,14 @@ public:
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 public slots:
-	void addJob(const QString &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);
-	void updateJob(const QString &jobId, const QString &newStatus, int newState);
+	void addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);
+	void updateJob(const QUuid &jobId, const QString &newStatus, int newState);
 
 private:
-	QStringList m_jobList;
-	QMap<QString, QString> m_jobName;
-	QMap<QString, QString> m_jobStatus;
-	QMap<QString, int> m_jobState;
+	QList<QUuid> m_jobList;
+	QMap<QUuid, QString> m_jobName;
+	QMap<QUuid, QString> m_jobStatus;
+	QMap<QUuid, int> m_jobState;
 
 	const QIcon m_iconRunning;
 	const QIcon m_iconPaused;

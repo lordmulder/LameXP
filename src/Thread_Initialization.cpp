@@ -177,6 +177,7 @@ void InitializationThread::initNeroAac(void)
 	if(!process.waitForStarted())
 	{
 		qWarning("Nero process failed to create!");
+		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
 		process.kill();
 		process.waitForFinished(-1);
 		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
@@ -199,10 +200,9 @@ void InitializationThread::initNeroAac(void)
 			}
 		}
 
-		QByteArray data = process.readLine();
-		while(!data.isEmpty())
+		while(process.canReadLine())
 		{
-			QString line = QString::fromUtf8(data.constData()).simplified();
+			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
 			QStringList tokens = line.split(" ", QString::SkipEmptyParts, Qt::CaseInsensitive);
 			int index1 = tokens.indexOf("Package");
 			int index2 = tokens.indexOf("version:");
@@ -218,7 +218,6 @@ void InitializationThread::initNeroAac(void)
 					neroVersion += versionTokens.at(0).toInt() * 1000;
 				}
 			}
-			data = process.readLine();
 		}
 	}
 

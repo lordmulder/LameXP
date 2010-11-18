@@ -33,7 +33,7 @@
 ////////////////////////////////////////////////////////////
 
 ProcessThread::ProcessThread(void)
-	: m_jobId(QUuid::createUuid().toString()), m_aborted(false)
+	: m_jobId(QUuid::createUuid()), m_aborted(false)
 {
 }
 
@@ -45,11 +45,11 @@ void ProcessThread::run()
 {
 	m_aborted = false;
 
-	qDebug("Process thread %s has started.", m_jobId.toLatin1().constData());
+	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
 	emit processStateInitialized(m_jobId, "Slime - Der Tod Ist Ein Meister Aus Deutschland.mp3", "Starting...", ProgressModel::JobRunning);
 	
 	QUuid uuid = QUuid::createUuid();
-	qsrand(uuid.data1 * uuid.data2 * uuid.data3);
+	qsrand(uuid.data1 * uuid.data2 * uuid.data3 * uuid.data4[0] * uuid.data4[1] * uuid.data4[2] * uuid.data4[3] * uuid.data4[4] * uuid.data4[5] * uuid.data4[6] * uuid.data4[7]);
 	unsigned long delay = 250 + (qrand() % 500);
 
 
@@ -63,11 +63,10 @@ void ProcessThread::run()
 
 		QThread::msleep(delay);
 		emit processStateChanged(m_jobId, QString("Encoding (%1%)").arg(i), ProgressModel::JobRunning);
-		qDebug("Process thread is alive.");
 	}
 
 	emit processStateChanged(m_jobId, "Done (100%)", ProgressModel::JobComplete);
-	qDebug("Process thread is about to die...");
+	qDebug("Process thread is done.");
 }
 
 ////////////////////////////////////////////////////////////

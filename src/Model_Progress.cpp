@@ -21,6 +21,8 @@
 
 #include "Model_Progress.h"
 
+#include <QUuid>
+
 ProgressModel::ProgressModel(void) :
 	m_iconRunning(":/icons/media_play.png"),
 	m_iconPaused(":/icons/control_pause_blue.png"),
@@ -113,34 +115,30 @@ QVariant ProgressModel::headerData(int section, Qt::Orientation orientation, int
 	return QVariant();
 }
 
-void ProgressModel::addJob(const QString &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState)
+void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState)
 {
-	if(m_jobList.contains(jobId, Qt::CaseInsensitive))
+	if(m_jobList.contains(jobId))
 	{
 		return;
 	}
 
-	QString id = jobId.toLower();
-
 	beginResetModel();
-	m_jobList.append(id);
-	m_jobName.insert(id, jobName);
-	m_jobStatus.insert(id, jobInitialStatus);
-	m_jobState.insert(id, jobInitialState);
+	m_jobList.append(jobId);
+	m_jobName.insert(jobId, jobName);
+	m_jobStatus.insert(jobId, jobInitialStatus);
+	m_jobState.insert(jobId, jobInitialState);
 	endResetModel();
 }
 
-void ProgressModel::updateJob(const QString &jobId, const QString &newStatus, int newState)
+void ProgressModel::updateJob(const QUuid &jobId, const QString &newStatus, int newState)
 {
-	if(!m_jobList.contains(jobId, Qt::CaseInsensitive))
+	if(!m_jobList.contains(jobId))
 	{
 		return;
 	}
-	
-	QString id = jobId.toLower();
-	
+
 	beginResetModel();
-	if(!newStatus.isEmpty()) m_jobStatus.insert(id, newStatus);
-	if(newState >= 0) m_jobState.insert(id, newState);
+	if(!newStatus.isEmpty()) m_jobStatus.insert(jobId, newStatus);
+	if(newState >= 0) m_jobState.insert(jobId, newState);
 	endResetModel();
 }
