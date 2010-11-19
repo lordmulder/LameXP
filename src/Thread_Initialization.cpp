@@ -178,6 +178,7 @@ void InitializationThread::initNeroAac(void)
 	{
 		qWarning("Nero process failed to create!");
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
+		qDebug("File '%s' does exist?\n%s\n!", neroFileInfo[0].canonicalFilePath().toUtf8().constData(), (neroFileInfo[0].exists() ? "Yes, it still exists" : "Nope, it disappeared"));
 		process.kill();
 		process.waitForFinished(-1);
 		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
@@ -223,7 +224,7 @@ void InitializationThread::initNeroAac(void)
 
 	if(!(neroVersion > 0))
 	{
-		qWarning("Nero AAC version could not be determined!", neroVersion);
+		qWarning("Nero AAC version could not be determined -> AAC encoding support will be disabled!", neroVersion);
 		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
 		return;
 	}

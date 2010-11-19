@@ -35,6 +35,7 @@
 #include <QSysInfo>
 #include <QStringList>
 #include <QSystemSemaphore>
+#include <QMutex>
 
 //LameXP includes
 #include "Resource.h"
@@ -107,6 +108,9 @@ static QSystemSemaphore *g_lamexp_semaphore_write_ptr = NULL;
 //Image formats
 static const char *g_lamexp_imageformats[] = {"png", "gif", "ico", "svg", NULL};
 
+//Global locks
+static QMutex g_lamexp_message_mutex;
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -171,6 +175,54 @@ const QDate &lamexp_version_date(void)
 
 	return g_lamexp_version_date;
 }
+
+/*
+ * Qt message handler
+ */
+void lamexp_message_handler(QtMsgType type, const char *msg)
+{
+	static HANDLE hConsole = NULL;
+	QMutexLocker lock(&g_lamexp_message_mutex);
+
+	if(!hConsole)
+	{
+		hConsole = CreateFile(L"CONOUT$", GENERIC_WRITE, FILE_SHARE_WRITE | FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+		if(hConsole == INVALID_HANDLE_VALUE) hConsole = NULL;
+	}
+
+	CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+	GetConsoleScreenBufferInfo(hConsole, &bufferInfo);
+
+	switch(type)
+	{
+	case QtCriticalMsg:
+	case QtFatalMsg:
+		fflush(stdout);
+		fflush(stderr);
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+		fprintf(stderr, "\nCRITICAL ERROR !!!\n%s\n\n", msg);
+		MessageBoxA(NULL, msg, "LameXP - CRITICAL ERROR", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
+		break;
+	case QtWarningMsg:
+		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+		fprintf(stderr, "%s\n", msg);
+		fflush(stderr);
+		break;
+	default:
+		SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+		fprintf(stderr, "%s\n", msg);
+		fflush(stderr);
+		break;
+	}
+
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+
+	if(type == QtCriticalMsg || type == QtFatalMsg)
+	{
+		FatalAppExit(0, L"The application has encountered a critical error and will exit now!");
+		TerminateProcess(GetCurrentProcess(), -1);
+	}
+ }
 
 /*
  * Initialize the console

@@ -31,10 +31,11 @@
 //Win32
 #include <Windows.h>
 
-//Class declarations
+//Declarations
 class QString;
 class LockedFile;
 class QDate;
+enum QtMsgType;
 
 //Types definitions
 typedef struct
@@ -65,6 +66,7 @@ unsigned int lamexp_toolver_neroaac(void);
 void lamexp_init_console(int argc, char* argv[]);
 bool lamexp_init_qt(int argc, char* argv[]);
 int lamexp_init_ipc(void);
+void lamexp_message_handler(QtMsgType type, const char *msg);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0);
 bool lamexp_check_tool(const QString &toolName);
 const QString lamexp_lookup_tool(const QString &toolName);

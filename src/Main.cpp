@@ -32,6 +32,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QDate>
+#include <QMutex>
 
 ///////////////////////////////////////////////////////////////////////////////
 // Main function
@@ -133,54 +134,6 @@ int lamexp_main(int argc, char* argv[])
 	//Terminate
 	return iResult;
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// Message Handler
-///////////////////////////////////////////////////////////////////////////////
-
-static void lamexp_message_handler(QtMsgType type, const char *msg)
-{
-	static HANDLE hConsole = NULL;
-	
-	if(!hConsole)
-	{
-		hConsole = CreateFile(L"CONOUT$", GENERIC_WRITE, FILE_SHARE_WRITE | FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-	}
-
-	CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
-	GetConsoleScreenBufferInfo(hConsole, &bufferInfo);
-
-	switch(type)
-	{
-	case QtCriticalMsg:
-	case QtFatalMsg:
-		fflush(stdout);
-		fflush(stderr);
-		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fprintf(stderr, "\nCRITICAL ERROR !!!\n%s\n\n", msg);
-		MessageBoxA(NULL, msg, "LameXP - CRITICAL ERROR", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
-		break;
-	case QtWarningMsg:
-		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fprintf(stderr, "%s\n", msg);
-		fflush(stderr);
-		break;
-	default:
-		SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fprintf(stderr, "%s\n", msg);
-		fflush(stderr);
-		break;
-	}
-
-	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-
-	if(type == QtCriticalMsg || type == QtFatalMsg)
-	{
-		FatalAppExit(0, L"The application has encountered a critical error and will exit now!");
-		TerminateProcess(GetCurrentProcess(), -1);
-	}
- }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Applicaton entry point
