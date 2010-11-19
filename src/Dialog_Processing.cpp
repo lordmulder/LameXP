@@ -22,6 +22,7 @@
 #include "Dialog_Processing.h"
 
 #include "Global.h"
+#include "Model_FileList.h"
 #include "Model_Progress.h"
 #include "Thread_Process.h"
 
@@ -40,7 +41,7 @@
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessingDialog::ProcessingDialog(void)
+ProcessingDialog::ProcessingDialog(FileListModel *fileListModel)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -65,7 +66,6 @@ ProcessingDialog::ProcessingDialog(void)
 	//Init progress indicator
 	m_progressIndicator = new QMovie(":/images/Working.gif");
 	label_headerWorking->setMovie(m_progressIndicator);
-	progressBar->setRange(0, 4);
 	progressBar->setValue(0);
 
 	//Init progress model
@@ -76,8 +76,18 @@ ProcessingDialog::ProcessingDialog(void)
 	view_log->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	view_log->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
 
-	//Init member vars
-	for(int i = 0; i < 4; i++) m_thread[i] = NULL;
+	//Enque jobs
+	if(fileListModel)
+	{
+		for(int i = 0; i < fileListModel->rowCount(); i++)
+		{
+			m_pendingJobs.append(fileListModel->getFile(fileListModel->index(i,0)));
+		}
+	}
+
+	//Init other vars
+	m_runningThreads = 0;
+	m_userAborted = false;
 }
 
 ////////////////////////////////////////////////////////////
@@ -90,6 +100,11 @@ ProcessingDialog::~ProcessingDialog(void)
 	if(m_progressIndicator) m_progressIndicator->stop();
 	LAMEXP_DELETE(m_progressIndicator);
 	LAMEXP_DELETE(m_progressModel);
+
+	while(!m_threadList.isEmpty())
+	{
+		delete m_threadList.takeFirst();
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -145,62 +160,59 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 
 void ProcessingDialog::initEncoding(void)
 {
+	m_runningThreads = 0;
+	m_userAborted = false;
+	
 	label_progress->setText("Encoding files, please wait...");
 	m_progressIndicator->start();
 	
-	m_pendingJobs = 4;
-
-	for(int i = 0; i < 4; i++)
-	{
-		m_thread[i] = new ProcessThread();
-		connect(m_thread[i], SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
-		connect(m_thread[i], SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
-		connect(m_thread[i], SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
-		m_thread[i]->start();
-	}
-
 	button_closeDialog->setEnabled(false);
 	button_AbortProcess->setEnabled(true);
+	progressBar->setRange(0, m_pendingJobs.count());
+
+	startNextJob();
+	startNextJob();
 }
 
 void ProcessingDialog::abortEncoding(void)
 {
+	m_userAborted = true;
 	button_AbortProcess->setEnabled(false);
 	
-	for(int i = 0; i < 4; i++)
+	for(int i = 0; i < m_threadList.count(); i++)
 	{
-		if(m_thread[i])
-		{
-			m_thread[i]->abort();
-		}
+		m_threadList.at(i)->abort();
 	}
 }
 
 void ProcessingDialog::doneEncoding(void)
 {
+	m_runningThreads--;
+
 	progressBar->setValue(progressBar->value() + 1);
+	label_progress->setText(QString("%1 files out of %2 completed, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
 	
-	if(--m_pendingJobs > 0)
+	if(!m_pendingJobs.isEmpty() && !m_userAborted)
 	{
+		startNextJob();
+		qDebug("Running jobs: %u", m_runningThreads);
 		return;
 	}
 	
-	label_progress->setText("Completed.");
+	if(m_runningThreads > 0)
+	{
+		qDebug("Running jobs: %u", m_runningThreads);
+		return;
+	}
+
+	qDebug("Running jobs: %u", m_runningThreads);
+
+	label_progress->setText(m_userAborted ? "Process aborted by user." : "Alle files completed.");
 	m_progressIndicator->stop();
 
 	setCloseButtonEnabled(true);
 	button_closeDialog->setEnabled(true);
 	button_AbortProcess->setEnabled(false);
-
-	for(int i = 0; i < 4; i++)
-	{
-		if(m_thread[i])
-		{
-			m_thread[i]->terminate();
-			m_thread[i]->wait();
-			LAMEXP_DELETE(m_thread[i]);
-		}
-	}
 
 	progressBar->setValue(100);
 }
@@ -208,6 +220,22 @@ void ProcessingDialog::doneEncoding(void)
 ////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
+
+void ProcessingDialog::startNextJob(void)
+{
+	if(m_pendingJobs.isEmpty())
+	{
+		return;
+	}
+
+	ProcessThread *thread = new ProcessThread(m_pendingJobs.takeFirst());
+	m_threadList.append(thread);
+	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
+	m_runningThreads++;
+	thread->start();
+}
 
 void ProcessingDialog::setCloseButtonEnabled(bool enabled)
 {

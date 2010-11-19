@@ -24,15 +24,18 @@
 #include <QThread>
 #include <QUuid>
 
+#include "Model_AudioFile.h"
+
 class ProcessThread: public QThread
 {
 	Q_OBJECT
 
 public:
-	ProcessThread(void);
+	ProcessThread(AudioFileModel audioFile);
 	~ProcessThread(void);
 	void run();
 	void abort() { m_aborted = true; }
+	QUuid getId() { return m_jobId; }
 
 signals:
 	void processStateInitialized(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
@@ -40,5 +43,6 @@ signals:
 
 private:
 	const QUuid m_jobId;
+	AudioFileModel m_audioFile;
 	volatile bool m_aborted;
 };

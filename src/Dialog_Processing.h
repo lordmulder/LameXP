@@ -26,13 +26,15 @@
 class QMovie;
 class ProgressModel;
 class ProcessThread;
+class FileListModel;
+class AudioFileModel;
 
 class ProcessingDialog : public QDialog, private Ui::ProcessingDialog
 {
 	Q_OBJECT
 
 public:
-	ProcessingDialog(void);
+	ProcessingDialog(FileListModel *fileListModel = NULL);
 	~ProcessingDialog(void);
 
 private slots:
@@ -47,9 +49,12 @@ protected:
 
 private:
 	void setCloseButtonEnabled(bool enabled);
+	void ProcessingDialog::startNextJob(void);
 	
-	int m_pendingJobs;
+	QList<AudioFileModel> m_pendingJobs;
+	QList<ProcessThread*> m_threadList;
 	QMovie *m_progressIndicator;
 	ProgressModel *m_progressModel;
-	ProcessThread *m_thread[4];
+	unsigned int m_runningThreads;
+	bool m_userAborted;
 };

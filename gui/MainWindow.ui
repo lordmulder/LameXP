@@ -1344,24 +1344,10 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>buttonQuit</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>483</x>
-     <y>422</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>276</x>
-     <y>222</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>actionAbout</sender>
    <signal>triggered()</signal>

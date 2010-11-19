@@ -31,6 +31,7 @@
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
 #include "Model_Settings.h"
+#include "Model_FileList.h"
 #include "Encoder_MP3.h"
 
 //Qt includes
@@ -79,8 +80,13 @@ private:
 // Constructor
 ////////////////////////////////////////////////////////////
 
-MainWindow::MainWindow(QWidget *parent)
-: QMainWindow(parent)
+MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settingsModel, QWidget *parent)
+:
+	QMainWindow(parent),
+	m_fileListModel(fileListModel),
+	m_metaData(metaInfo),
+	m_settings(settingsModel),
+	m_accepted(false)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -95,20 +101,16 @@ MainWindow::MainWindow(QWidget *parent)
 		setWindowTitle(windowTitle().append(" [DEMO VERSION]"));
 	}
 
-	//Load configuration
-	m_settings = new SettingsModel();
-	m_settings->validate();
-
 	//Enabled main buttons
 	connect(buttonAbout, SIGNAL(clicked()), this, SLOT(aboutButtonClicked()));
 	connect(buttonStart, SIGNAL(clicked()), this, SLOT(encodeButtonClicked()));
+	connect(buttonQuit, SIGNAL(clicked()), this, SLOT(closeButtonClicked()));
 
 	//Setup tab widget
 	tabWidget->setCurrentIndex(0);
 	connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabPageChanged(int)));
 
 	//Setup "Source" tab
-	m_fileListModel = new FileListModel();
 	sourceFileView->setModel(m_fileListModel);
 	sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
@@ -139,7 +141,6 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
 	
 	//Setup "Meta Data" tab
-	m_metaData = new AudioFileModel();
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
 	m_metaInfoModel->clearData();
 	metaDataView->setModel(m_metaInfoModel);
@@ -261,15 +262,12 @@ MainWindow::~MainWindow(void)
 	//Free memory
 	LAMEXP_DELETE(m_tabActionGroup);
 	LAMEXP_DELETE(m_styleActionGroup);
-	LAMEXP_DELETE(m_fileListModel);
 	LAMEXP_DELETE(m_banner);
 	LAMEXP_DELETE(m_fileSystemModel);
 	LAMEXP_DELETE(m_messageHandler);
 	LAMEXP_DELETE(m_delayedFileList);
 	LAMEXP_DELETE(m_delayedFileTimer);
-	LAMEXP_DELETE(m_metaData);
 	LAMEXP_DELETE(m_metaInfoModel);
-	LAMEXP_DELETE(m_settings);
 	LAMEXP_DELETE(m_encoderButtonGroup);
 }
 
@@ -313,6 +311,7 @@ void MainWindow::addFiles(const QStringList &files)
 void MainWindow::showEvent(QShowEvent *event)
 {
 	QTimer::singleShot(0, this, SLOT(windowShown()));
+	m_accepted = false;
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
@@ -355,6 +354,15 @@ void MainWindow::dropEvent(QDropEvent *event)
 	}
 	
 	addFiles(droppedFiles);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+	if(m_banner->isVisible() || m_delayedFileTimer->isActive())
+	{
+		MessageBeep(MB_ICONEXCLAMATION);
+		event->ignore();
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -458,36 +466,48 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 		
-	m_banner->show("Encoding files, please wait...");
-	QApplication::processEvents();
+	m_accepted = true;
+	close();
+	
+	//m_banner->show("Encoding files, please wait...");
+	//QApplication::processEvents();
 
-	MP3Encoder *mp3Encoder = new MP3Encoder();
-	connect(mp3Encoder, SIGNAL(statusUpdated(QString)), m_banner, SLOT(setText(QString)));
+	//MP3Encoder *mp3Encoder = new MP3Encoder();
+	//connect(mp3Encoder, SIGNAL(statusUpdated(QString)), m_banner, SLOT(setText(QString)));
 
-	for(int i = 0; i < m_fileListModel->rowCount(); i++)
-	{
-		AudioFileModel file = m_fileListModel->getFile(m_fileListModel->index(i,0));
-		QString outFolder = m_fileSystemModel->filePath(this->outputFolderView->currentIndex());
-		
-		QString baseName = QFileInfo(file.filePath()).fileName();
-		int pos = baseName.lastIndexOf(".");
-		if(pos >= 1) baseName = baseName.left(pos);
+	//for(int i = 0; i < m_fileListModel->rowCount(); i++)
+	//{
+	//	AudioFileModel file = m_fileListModel->getFile(m_fileListModel->index(i,0));
+	//	QString outFolder = m_fileSystemModel->filePath(this->outputFolderView->currentIndex());
+	//	
+	//	QString baseName = QFileInfo(file.filePath()).fileName();
+	//	int pos = baseName.lastIndexOf(".");
+	//	if(pos >= 1) baseName = baseName.left(pos);
 
-		int n = 1;
-		QString outFileName = QString(outFolder).append("/").append(baseName).append(".mp3");
-		
-		while(QFileInfo(outFileName).exists())
-		{
-			outFileName = QString(outFolder).append("/").append(baseName).append(" (").append(QString::number(++n)).append(").mp3");
-		}
-		
-		mp3Encoder->encode(file, outFileName);
-	}
+	//	int n = 1;
+	//	QString outFileName = QString(outFolder).append("/").append(baseName).append(".mp3");
+	//	
+	//	while(QFileInfo(outFileName).exists())
+	//	{
+	//		outFileName = QString(outFolder).append("/").append(baseName).append(" (").append(QString::number(++n)).append(").mp3");
+	//	}
+	//	
+	//	mp3Encoder->encode(file, outFileName);
+	//}
 
-	LAMEXP_DELETE(mp3Encoder);
-	m_banner->close();
-		
-	QMessageBox::information(this, "Done", "Encoding process completed.");
+	//LAMEXP_DELETE(mp3Encoder);
+	//m_banner->close();
+	//	
+	//QMessageBox::information(this, "Done", "Encoding process completed.");
+}
+
+/*
+ * Close button
+ */
+void MainWindow::closeButtonClicked(void)
+{
+	ABORT_IF_BUSY;
+	close();
 }
 
 /*

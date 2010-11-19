@@ -213,10 +213,10 @@ void InitializationThread::initNeroAac(void)
 				if(versionTokens.count() == 4)
 				{
 					neroVersion = 0;
-					neroVersion += versionTokens.at(3).toInt();
-					neroVersion += versionTokens.at(2).toInt() * 10;
-					neroVersion += versionTokens.at(1).toInt() * 100;
-					neroVersion += versionTokens.at(0).toInt() * 1000;
+					neroVersion += min(9, max(0, versionTokens.at(3).toInt()));
+					neroVersion += min(9, max(0, versionTokens.at(2).toInt())) * 10;
+					neroVersion += min(9, max(0, versionTokens.at(1).toInt())) * 100;
+					neroVersion += min(9, max(0, versionTokens.at(0).toInt())) * 1000;
 				}
 			}
 		}

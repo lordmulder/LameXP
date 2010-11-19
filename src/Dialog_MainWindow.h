@@ -23,7 +23,7 @@
 
 #include "../tmp/UIC_MainWindow.h"
 
-#include "Model_FileList.h"
+//#include "Model_FileList.h"
 
 //Class declarations
 class QFileSystemModel;
@@ -33,19 +33,23 @@ class AudioFileModel;
 class MetaInfoModel;
 class SettingsModel;
 class QButtonGroup;
+class FileListModel;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = 0);
+	MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settingsModel, QWidget *parent = 0);
 	~MainWindow(void);
+
+	bool isAccepted() { return m_accepted; }
 
 private slots:
 	void windowShown(void);
 	void aboutButtonClicked(void);
 	void encodeButtonClicked(void);
+	void closeButtonClicked(void);
 	void addFilesButtonClicked(void);
 	void clearFilesButtonClicked(void);
 	void removeFileButtonClicked(void);
@@ -76,10 +80,12 @@ protected:
 	void showEvent(QShowEvent *event);
 	void dragEnterEvent(QDragEnterEvent *event);
 	void dropEvent(QDropEvent *event);
+	void closeEvent(QCloseEvent *event);
 
 private:
 	void addFiles(const QStringList &files);
 
+	bool m_accepted;
 	FileListModel *m_fileListModel;
 	QFileSystemModel *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;

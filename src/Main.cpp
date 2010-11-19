@@ -27,6 +27,8 @@
 #include "Thread_Initialization.h"
 #include "Thread_MessageProducer.h"
 #include "Model_Settings.h"
+#include "Model_FileList.h"
+#include "Model_AudioFile.h"
 
 //Qt includes
 #include <QApplication>
@@ -41,6 +43,7 @@
 int lamexp_main(int argc, char* argv[])
 {
 	int iResult = -1;
+	bool bAccepted = true;
 	
 	//Init console
 	lamexp_init_console(argc, argv);
@@ -112,21 +115,39 @@ int lamexp_main(int argc, char* argv[])
 		}
 	}
 	
+	//Create models
+	FileListModel *fileListModel = new FileListModel();
+	AudioFileModel *metaInfo = new AudioFileModel();
+	SettingsModel *settingsModel = new SettingsModel();
+	settingsModel->validate();
+	
 	//Show splash screen
 	InitializationThread *poInitializationThread = new InitializationThread();
 	SplashScreen::showSplash(poInitializationThread);
 	LAMEXP_DELETE(poInitializationThread);
 
 	//Show main window
-	MainWindow *poMainWindow = new MainWindow();
-	poMainWindow->show();
-	iResult = QApplication::instance()->exec();
-	LAMEXP_DELETE(poMainWindow);
+	while(bAccepted)
+	{
+		MainWindow *poMainWindow = new MainWindow(fileListModel, metaInfo, settingsModel);
+		poMainWindow->show();
+		iResult = QApplication::instance()->exec();
+		bAccepted = poMainWindow->isAccepted();
+		LAMEXP_DELETE(poMainWindow);
+
+		//Show processing dialog
+		if(bAccepted && fileListModel->rowCount() > 0)
+		{
+			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel);
+			processingDialog->exec();
+			LAMEXP_DELETE(processingDialog);
+		}
+	}
 	
-	//Show processing dialog
-	ProcessingDialog *processingDialog = new ProcessingDialog();
-	processingDialog->exec();
-	LAMEXP_DELETE(processingDialog);
+	//Free models
+	LAMEXP_DELETE(fileListModel);
+	LAMEXP_DELETE(metaInfo);
+	LAMEXP_DELETE(settingsModel);
 	
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");

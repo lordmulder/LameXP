@@ -22,9 +22,12 @@
 #include "Thread_Process.h"
 
 #include "Global.h"
+#include "Model_AudioFile.h"
 #include "Model_Progress.h"
 
-#include <QUuid.h>
+#include <QUuid>
+#include <QFileInfo>
+
 #include <limits.h>
 #include <time.h>
 
@@ -32,8 +35,11 @@
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessThread::ProcessThread(void)
-	: m_jobId(QUuid::createUuid()), m_aborted(false)
+ProcessThread::ProcessThread(AudioFileModel audioFile)
+:
+	m_audioFile(audioFile),
+	m_jobId(QUuid::createUuid()),
+	m_aborted(false)
 {
 }
 
@@ -46,12 +52,11 @@ void ProcessThread::run()
 	m_aborted = false;
 
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
-	emit processStateInitialized(m_jobId, "Slime - Der Tod Ist Ein Meister Aus Deutschland.mp3", "Starting...", ProgressModel::JobRunning);
+	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), "Starting...", ProgressModel::JobRunning);
 	
 	QUuid uuid = QUuid::createUuid();
 	qsrand(uuid.data1 * uuid.data2 * uuid.data3 * uuid.data4[0] * uuid.data4[1] * uuid.data4[2] * uuid.data4[3] * uuid.data4[4] * uuid.data4[5] * uuid.data4[6] * uuid.data4[7]);
-	unsigned long delay = 250 + (qrand() % 500);
-
+	unsigned long delay = 100 + (qrand() % 150);
 
 	for(int i = 1; i <= 100; i++)
 	{
