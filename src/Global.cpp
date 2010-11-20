@@ -201,7 +201,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		fflush(stderr);
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
 		fprintf(stderr, "\nCRITICAL ERROR !!!\n%s\n\n", msg);
-		MessageBoxA(NULL, msg, "LameXP - CRITICAL ERROR", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
+		MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - CRITICAL ERROR", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
 		break;
 	case QtWarningMsg:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
@@ -219,6 +219,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 
 	if(type == QtCriticalMsg || type == QtFatalMsg)
 	{
+		lock.unlock();
 		FatalAppExit(0, L"The application has encountered a critical error and will exit now!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
@@ -538,18 +539,41 @@ const QString &lamexp_temp_folder(void)
 {
 	if(g_lamexp_temp_folder.isEmpty())
 	{
-		QDir tempFolder(QDir::tempPath());
+		QDir temp = QDir::temp();
+
+		if(!temp.exists())
+		{
+			temp.mkpath(".");
+			if(!temp.exists())
+			{
+				qFatal("The system's temporary directory does not exist:\n%s", temp.canonicalPath().toUtf8().constData());
+				return g_lamexp_temp_folder;
+			}
+		}
+
 		QString uuid = QUuid::createUuid().toString();
-		tempFolder.mkdir(uuid);
+		if(!temp.mkdir(uuid))
+		{
+			qFatal("Temporary directory could not be created:\n%s", QString("%1/%2").arg(temp.canonicalPath(), uuid).toUtf8().constData());
+			return g_lamexp_temp_folder;
+		}
+		if(!temp.cd(uuid))
+		{
+			qFatal("Temporary directory could not be entered:\n%s", QString("%1/%2").arg(temp.canonicalPath(), uuid).toUtf8().constData());
+			return g_lamexp_temp_folder;
+		}
 		
-		if(tempFolder.cd(uuid))
+		QFile testFile(QString("%1/~test.txt").arg(temp.canonicalPath()));
+		if(!testFile.open(QIODevice::ReadWrite) || testFile.write("LAMEXP_TEST\n") < 12)
 		{
-			g_lamexp_temp_folder = tempFolder.canonicalPath();
+			qFatal("Write access to temporary directory has been denied:\n%s", temp.canonicalPath().toUtf8().constData());
+			return g_lamexp_temp_folder;
 		}
-		else
-		{
-			g_lamexp_temp_folder = QDir::tempPath();
-		}
+
+		testFile.close();
+		QFile::remove(testFile.fileName());
+		
+		g_lamexp_temp_folder = temp.canonicalPath();
 	}
 	
 	return g_lamexp_temp_folder;
