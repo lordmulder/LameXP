@@ -114,12 +114,18 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	sourceFileView->setModel(m_fileListModel);
 	sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	m_dropNoteLabel = new QLabel(sourceFileView);
+	m_dropNoteLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+	m_dropNoteLabel->setText("» You can drop in audio files here! «");
 	connect(buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
 	connect(buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
 	connect(buttonClearFiles, SIGNAL(clicked()), this, SLOT(clearFilesButtonClicked()));
 	connect(buttonFileUp, SIGNAL(clicked()), this, SLOT(fileUpButtonClicked()));
 	connect(buttonFileDown, SIGNAL(clicked()), this, SLOT(fileDownButtonClicked()));
 	connect(buttonShowDetails, SIGNAL(clicked()), this, SLOT(showDetailsButtonClicked()));
+	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsChanged(QModelIndex,int,int)));
+	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(rowsChanged(QModelIndex,int,int)));
+	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(modelReset()));
 	
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModel();
@@ -133,7 +139,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setHeaderHidden(true);
 	outputFolderView->setAnimated(true);
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	outputFolderView->setCurrentIndex(m_fileSystemModel->index(QDesktopServices::storageLocation(QDesktopServices::MusicLocation)));
+	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
 	outputFolderViewClicked(outputFolderView->currentIndex());
 	connect(buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
 	connect(buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
@@ -269,6 +275,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_delayedFileTimer);
 	LAMEXP_DELETE(m_metaInfoModel);
 	LAMEXP_DELETE(m_encoderButtonGroup);
+	LAMEXP_DELETE(m_encoderButtonGroup);
 }
 
 ////////////////////////////////////////////////////////////
@@ -310,8 +317,10 @@ void MainWindow::addFiles(const QStringList &files)
 
 void MainWindow::showEvent(QShowEvent *event)
 {
-	QTimer::singleShot(0, this, SLOT(windowShown()));
 	m_accepted = false;
+	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+	modelReset();
+	QTimer::singleShot(0, this, SLOT(windowShown()));
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
@@ -363,6 +372,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
 		MessageBeep(MB_ICONEXCLAMATION);
 		event->ignore();
 	}
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+	QMainWindow::resizeEvent(event);
+	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
 }
 
 ////////////////////////////////////////////////////////////
@@ -450,8 +465,6 @@ void MainWindow::aboutButtonClicked(void)
 	LAMEXP_DELETE(aboutBox);
 }
 
-#define IF_UNICODE(STR) if(_stricmp(STR.toUtf8().constData(),QString::fromLocal8Bit(STR.toLocal8Bit()).toUtf8().constData()))
-
 /*
  * Encode button
  */
@@ -459,46 +472,22 @@ void MainWindow::encodeButtonClicked(void)
 {
 	ABORT_IF_BUSY;
 	
+	if(m_fileListModel->rowCount() < 1)
+	{
+		QMessageBox::warning(this, "LameXP", "You must add at least one file to the list before proceeding!");
+		tabWidget->setCurrentIndex(0);
+		return;
+	}
+	
 	if(m_settings->compressionEncoder() != SettingsModel::MP3Encoder)
 	{
-		QMessageBox::warning(this, "LameXP", "Sorry, only Lame MP3 is supported at the moment!");
+		QMessageBox::warning(this, "LameXP", "Sorry, only Lame MP3 encoding is supported at the moment!");
 		tabWidget->setCurrentIndex(3);
 		return;
 	}
 		
 	m_accepted = true;
 	close();
-	
-	//m_banner->show("Encoding files, please wait...");
-	//QApplication::processEvents();
-
-	//MP3Encoder *mp3Encoder = new MP3Encoder();
-	//connect(mp3Encoder, SIGNAL(statusUpdated(QString)), m_banner, SLOT(setText(QString)));
-
-	//for(int i = 0; i < m_fileListModel->rowCount(); i++)
-	//{
-	//	AudioFileModel file = m_fileListModel->getFile(m_fileListModel->index(i,0));
-	//	QString outFolder = m_fileSystemModel->filePath(this->outputFolderView->currentIndex());
-	//	
-	//	QString baseName = QFileInfo(file.filePath()).fileName();
-	//	int pos = baseName.lastIndexOf(".");
-	//	if(pos >= 1) baseName = baseName.left(pos);
-
-	//	int n = 1;
-	//	QString outFileName = QString(outFolder).append("/").append(baseName).append(".mp3");
-	//	
-	//	while(QFileInfo(outFileName).exists())
-	//	{
-	//		outFileName = QString(outFolder).append("/").append(baseName).append(" (").append(QString::number(++n)).append(").mp3");
-	//	}
-	//	
-	//	mp3Encoder->encode(file, outFileName);
-	//}
-
-	//LAMEXP_DELETE(mp3Encoder);
-	//m_banner->close();
-	//	
-	//QMessageBox::information(this, "Done", "Encoding process completed.");
 }
 
 /*
@@ -693,6 +682,7 @@ void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 	QString selectedDir = m_fileSystemModel->filePath(index);
 	if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
 	outputFolderLabel->setText(selectedDir);
+	m_settings->outputDir(selectedDir);
 }
 
 /*
@@ -1059,4 +1049,20 @@ void MainWindow::updateBitrate(int value)
 		}
 		break;
 	}
+}
+
+/*
+ * Rows changed
+ */
+void MainWindow::rowsChanged(const QModelIndex &parent, int start, int end)
+{
+	m_dropNoteLabel->setVisible(m_fileListModel->rowCount() <= 0);
+}
+
+/*
+ * Model reset
+ */
+void MainWindow::modelReset(void)
+{
+	m_dropNoteLabel->setVisible(m_fileListModel->rowCount() <= 0);
 }

@@ -29,12 +29,14 @@
 #include "Model_Settings.h"
 #include "Model_FileList.h"
 #include "Model_AudioFile.h"
+#include "Encoder_Abstract.h"
 
 //Qt includes
 #include <QApplication>
 #include <QMessageBox>
 #include <QDate>
 #include <QMutex>
+#include <QDir>
 
 ///////////////////////////////////////////////////////////////////////////////
 // Main function
@@ -138,7 +140,7 @@ int lamexp_main(int argc, char* argv[])
 		//Show processing dialog
 		if(bAccepted && fileListModel->rowCount() > 0)
 		{
-			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel);
+			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, settingsModel);
 			processingDialog->exec();
 			LAMEXP_DELETE(processingDialog);
 		}

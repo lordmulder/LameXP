@@ -82,6 +82,10 @@ QVariant ProgressModel::data(const QModelIndex &index, int role) const
 				break;
 			}
 		}
+		else if(role == Qt::TextAlignmentRole)
+		{
+			return (index.column() == 1) ? QVariant(Qt::AlignHCenter | Qt::AlignVCenter) : QVariant();
+		}
 	}
 	
 	return QVariant();

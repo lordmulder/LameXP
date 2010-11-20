@@ -25,24 +25,32 @@
 #include <QUuid>
 
 #include "Model_AudioFile.h"
+#include "Encoder_Abstract.h"
 
 class ProcessThread: public QThread
 {
 	Q_OBJECT
 
 public:
-	ProcessThread(AudioFileModel audioFile);
+	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, AbstractEncoder *encoder);
 	~ProcessThread(void);
 	void run();
 	void abort() { m_aborted = true; }
 	QUuid getId() { return m_jobId; }
+
+private slots:
+	void handleUpdate(int progress);
 
 signals:
 	void processStateInitialized(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
 	void processStateChanged(const QUuid &jobId, const QString &newStatus, int newState);
 
 private:
+	QString generateOutFileName(void);
+	
 	const QUuid m_jobId;
 	AudioFileModel m_audioFile;
+	AbstractEncoder *m_encoder;
+	const QString m_outputDirectory;
 	volatile bool m_aborted;
 };

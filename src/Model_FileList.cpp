@@ -28,9 +28,9 @@
 ////////////////////////////////////////////////////////////
 
 FileListModel::FileListModel(void)
-	: m_fileIcon(":/icons/page_white_cd.png")
+:
+	m_fileIcon(":/icons/page_white_cd.png")
 {
-	m_fileList.append(AudioFileModel("C:/Music/Buckethead - Crime Slunk Scene/The Fairy and the Devil.ogg", "The Fairy and the Devil"));
 }
 
 FileListModel::~FileListModel(void)

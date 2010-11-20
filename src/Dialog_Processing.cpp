@@ -24,7 +24,9 @@
 #include "Global.h"
 #include "Model_FileList.h"
 #include "Model_Progress.h"
+#include "Model_Settings.h"
 #include "Thread_Process.h"
+#include "Encoder_MP3.h"
 
 #include <QApplication>
 #include <QRect>
@@ -41,7 +43,9 @@
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessingDialog::ProcessingDialog(FileListModel *fileListModel)
+ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, SettingsModel *settings)
+:
+	m_settings(settings)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -103,7 +107,10 @@ ProcessingDialog::~ProcessingDialog(void)
 
 	while(!m_threadList.isEmpty())
 	{
-		delete m_threadList.takeFirst();
+		ProcessThread *thread = m_threadList.takeFirst();
+		thread->terminate();
+		thread->wait(15000);
+		delete thread;
 	}
 }
 
@@ -190,8 +197,14 @@ void ProcessingDialog::doneEncoding(void)
 	m_runningThreads--;
 
 	progressBar->setValue(progressBar->value() + 1);
-	label_progress->setText(QString("%1 files out of %2 completed, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
+	label_progress->setText(QString("Encoding: %1 files of %2 completed so far, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
 	
+	int index = m_threadList.indexOf(dynamic_cast<ProcessThread*>(QWidget::sender()));
+	if(index >= 0)
+	{
+		m_threadList.takeAt(index)->deleteLater();
+	}
+
 	if(!m_pendingJobs.isEmpty() && !m_userAborted)
 	{
 		startNextJob();
@@ -207,7 +220,7 @@ void ProcessingDialog::doneEncoding(void)
 
 	qDebug("Running jobs: %u", m_runningThreads);
 
-	label_progress->setText(m_userAborted ? "Process aborted by user." : "Alle files completed.");
+	label_progress->setText(m_userAborted ? "Process was aborted by the user!" : "Alle files completed successfully.");
 	m_progressIndicator->stop();
 
 	setCloseButtonEnabled(true);
@@ -228,7 +241,23 @@ void ProcessingDialog::startNextJob(void)
 		return;
 	}
 
-	ProcessThread *thread = new ProcessThread(m_pendingJobs.takeFirst());
+	AbstractEncoder *encoder = NULL;
+	
+	switch(m_settings->compressionEncoder())
+	{
+	case SettingsModel::MP3Encoder:
+		{
+			MP3Encoder *mp3Encoder = new MP3Encoder();
+			mp3Encoder->setBitrate(m_settings->compressionBitrate());
+			mp3Encoder->setRCMode(m_settings->compressionRCMode());
+			encoder = mp3Encoder;
+		}
+		break;
+	default:
+		throw "Unsupported encoder!";
+	}
+	
+	ProcessThread *thread = new ProcessThread(m_pendingJobs.takeFirst(), m_settings->outputDir(), encoder);
 	m_threadList.append(thread);
 	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);

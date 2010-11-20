@@ -34,6 +34,7 @@ class MetaInfoModel;
 class SettingsModel;
 class QButtonGroup;
 class FileListModel;
+class AbstractEncoder;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -75,12 +76,15 @@ private slots:
 	void updateEncoder(int id);
 	void updateRCMode(int id);
 	void updateBitrate(int value);
+	void rowsChanged(const QModelIndex &parent, int start, int end);
+	void modelReset(void);
 
 protected:
 	void showEvent(QShowEvent *event);
 	void dragEnterEvent(QDragEnterEvent *event);
 	void dropEvent(QDropEvent *event);
 	void closeEvent(QCloseEvent *event);
+	void resizeEvent(QResizeEvent *event);
 
 private:
 	void addFiles(const QStringList &files);
@@ -99,4 +103,5 @@ private:
 	AudioFileModel *m_metaData;
 	MetaInfoModel *m_metaInfoModel;
 	SettingsModel *m_settings;
+	QLabel *m_dropNoteLabel;
 };

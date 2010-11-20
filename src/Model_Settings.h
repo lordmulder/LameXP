@@ -22,9 +22,12 @@
 #pragma once
 
 class QSettings;
+class QString;
 
 #define MAKE_GETTER_DEC(OPT) int OPT(void)
 #define MAKE_SETTER_DEC(OPT) void OPT(int value)
+#define MAKE_GETTER_DEC2(OPT) QString OPT(void)
+#define MAKE_SETTER_DEC2(OPT) void OPT(const QString &value)
 
 class SettingsModel
 {
@@ -57,6 +60,7 @@ public:
 	MAKE_GETTER_DEC(compressionEncoder);
 	MAKE_GETTER_DEC(compressionRCMode);
 	MAKE_GETTER_DEC(compressionBitrate);
+	MAKE_GETTER_DEC2(outputDir);
 
 
 	//Setters
@@ -65,6 +69,7 @@ public:
 	MAKE_SETTER_DEC(compressionBitrate);
 	MAKE_SETTER_DEC(compressionRCMode);
 	MAKE_SETTER_DEC(compressionEncoder);
+	MAKE_SETTER_DEC2(outputDir);
 
 	void validate(void);
 
@@ -74,3 +79,5 @@ private:
 
 #undef MAKE_GETTER_DEC
 #undef MAKE_SETTER_DEC
+#undef MAKE_GETTER_DEC2
+#undef MAKE_SETTER_DEC2

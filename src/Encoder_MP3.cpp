@@ -43,10 +43,10 @@ MP3Encoder::~MP3Encoder(void)
 {
 }
 
-bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputFile)
+bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
 	const QString baseName = QFileInfo(outputFile).fileName();
-	emit statusUpdated(baseName);
+	emit statusUpdated(0);
 	
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
@@ -87,35 +87,60 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 		return false;
 	}
 
+	bool bTimeout = false;
+	bool bAborted = false;
+
 	QRegExp regExp("\\(.*(\\d+)%\\)\\|");
 
 	while(process.state() != QProcess::NotRunning)
 	{
+		if(*abortFlag)
+		{
+			process.kill();
+			bAborted = true;
+			break;
+		}
 		process.waitForReadyRead();
+		if(!process.bytesAvailable() && process.state() == QProcess::Running)
+		{
+			process.kill();
+			qWarning("LAME process timed out <-- killing!");
+			bTimeout = true;
+			break;
+		}
 		while(process.bytesAvailable() > 0)
 		{
 			QByteArray line = process.readLine();
-			qDebug("%s", line.constData());
-			QString text = QString::fromLocal8Bit(line.constData()).simplified();
-			if(regExp.lastIndexIn(line) >= 0)
+			QString text = QString::fromUtf8(line.constData()).simplified();
+			if(regExp.lastIndexIn(text) >= 0)
 			{
-				emit statusUpdated(QString("%1 [%2%]").arg(baseName, regExp.cap(1)));
+				bool ok = false;
+				int progress = regExp.cap(1).toInt(&ok);
+				if(ok) emit statusUpdated(progress);
+			}
+			else if(!text.isEmpty())
+			{
+				qDebug("%s", text.toUtf8().constData());
 			}
 		}
 	}
 
 	process.waitForFinished();
-	
 	if(process.state() != QProcess::NotRunning)
 	{
 		process.kill();
 		process.waitForFinished(-1);
 	}
 
-	if(process.exitStatus() != QProcess::NormalExit)
+	if(bTimeout || bAborted || process.exitStatus() != QProcess::NormalExit)
 	{
 		return false;
 	}
 	
 	return true;
+}
+
+QString MP3Encoder::extension(void)
+{
+	return "mp3";
 }

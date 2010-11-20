@@ -23,15 +23,18 @@
 
 #include "Model_AudioFile.h"
 
-#include <QString>
+#include <QObject>
 
-class AbstractEncoder
+class AbstractEncoder : public QObject
 {
+	Q_OBJECT
+
 public:
 	AbstractEncoder(void);
 	~AbstractEncoder(void);
 
-	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile) = 0;
+	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag) = 0;
+	virtual QString extension(void) = 0;
 
 	void setBitrate(int bitrate);
 	void setRCMode(int mode);

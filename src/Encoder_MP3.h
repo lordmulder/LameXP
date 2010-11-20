@@ -25,7 +25,7 @@
 
 #include <QObject>
 
-class MP3Encoder : public QObject, public AbstractEncoder
+class MP3Encoder : public AbstractEncoder
 {
 	Q_OBJECT
 
@@ -33,10 +33,11 @@ public:
 	MP3Encoder(void);
 	~MP3Encoder(void);
 
-	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile);
+	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	virtual QString extension(void);
 
 signals:
-	void statusUpdated(const QString &text);
+	void statusUpdated(int progress);
 
 private:
 	const QString m_binary;
