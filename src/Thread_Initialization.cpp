@@ -172,13 +172,13 @@ void InitializationThread::initNeroAac(void)
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
-	process.start(neroFileInfo[0].canonicalFilePath());
+	process.start(neroFileInfo[0].canonicalFilePath(), QStringList() << "-help");
 
 	if(!process.waitForStarted())
 	{
 		qWarning("Nero process failed to create!");
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
-		qDebug("File '%s' does exist?\n%s\n!", neroFileInfo[0].canonicalFilePath().toUtf8().constData(), (neroFileInfo[0].exists() ? "Yes, it still exists" : "Nope, it disappeared"));
+		qDebug("File '%s' does exist?\n%s!\n", neroFileInfo[0].canonicalFilePath().toUtf8().constData(), (neroFileInfo[0].exists() ? "Yes, it still exists" : "Nope, it disappeared"));
 		process.kill();
 		process.waitForFinished(-1);
 		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);

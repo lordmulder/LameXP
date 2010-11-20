@@ -546,7 +546,7 @@ const QString &lamexp_temp_folder(void)
 			temp.mkpath(".");
 			if(!temp.exists())
 			{
-				qFatal("The system's temporary directory does not exist:\n%s", temp.canonicalPath().toUtf8().constData());
+				qFatal("The system's temporary directory does not exist:\n%s", temp.absolutePath().toUtf8().constData());
 				return g_lamexp_temp_folder;
 			}
 		}
