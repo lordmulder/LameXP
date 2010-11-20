@@ -37,6 +37,9 @@
 #include <QCloseEvent>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QUuid>
+#include <QFileInfo>
+
 #include <Windows.h>
 
 ////////////////////////////////////////////////////////////
@@ -173,6 +176,7 @@ void ProcessingDialog::initEncoding(void)
 	m_runningThreads = 0;
 	m_currentFile = 0;
 	m_userAborted = false;
+	m_playList.clear();
 	
 	label_progress->setText("Encoding files, please wait...");
 	m_progressIndicator->start();
@@ -224,6 +228,13 @@ void ProcessingDialog::doneEncoding(void)
 
 	qDebug("Running jobs: %u", m_runningThreads);
 
+	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputDir().isEmpty())
+	{
+		label_progress->setText("Creatig the play list, please wait...");
+		QApplication::processEvents();
+		writePlayList();
+	}
+	
 	label_progress->setText(m_userAborted ? "Process was aborted by the user!" : "Alle files completed successfully.");
 	m_progressIndicator->stop();
 
@@ -232,6 +243,14 @@ void ProcessingDialog::doneEncoding(void)
 	button_AbortProcess->setEnabled(false);
 
 	progressBar->setValue(100);
+}
+
+void ProcessingDialog::processFinished(const QUuid &jobId, const QString &outFileName, bool success)
+{
+	if(success)
+	{
+		m_playList.append(outFileName);
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -268,8 +287,41 @@ void ProcessingDialog::startNextJob(void)
 	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateFinished(QUuid,QString,bool)), this, SLOT(processFinished(QUuid,QString,bool)), Qt::QueuedConnection);
 	m_runningThreads++;
 	thread->start();
+}
+
+void ProcessingDialog::writePlayList(void)
+{
+	QString playListName = (m_metaInfo->fileAlbum().isEmpty() ? "Playlist" : m_metaInfo->fileAlbum());
+
+	const static char *invalidChars = "\\/:*?\"<>|";
+	for(int i = 0; invalidChars[i]; i++)
+	{
+		playListName.replace(invalidChars[i], ' ');
+		playListName = playListName.simplified();
+	}
+	
+	QString playListFile = QString("%1/%2.m3u").arg(m_settings->outputDir(), playListName);
+
+	int counter = 1;
+	while(QFileInfo(playListFile).exists())
+	{
+		playListFile = QString("%1/%2 (%3).m3u").arg(m_settings->outputDir(), playListName, QString::number(++counter));
+	}
+	
+	QFile playList(playListFile);
+	if(playList.open(QIODevice::WriteOnly))
+	{
+		playList.write("#EXTM3U\r\n");
+		for(int i = 0; i < m_playList.count(); i++)
+		{
+			playList.write(QFileInfo(m_playList.at(i)).fileName().toUtf8().constData());
+			playList.write("\r\n");
+		}
+		playList.close();
+	}
 }
 
 AudioFileModel ProcessingDialog::updateMetaInfo(const AudioFileModel &audioFile)

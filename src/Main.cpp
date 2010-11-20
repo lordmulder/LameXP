@@ -52,7 +52,7 @@ int lamexp_main(int argc, char* argv[])
 	
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End");
-	qDebug("Version %d.%02d %s, Build %d [%s], MSVC compiler v%02d.%02d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), _MSC_VER / 100, _MSC_VER % 100);
+	qDebug("Version %d.%02d %s, Build %d [%s], compiled with %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_compiler());
 	qDebug("Copyright (C) 2004-%04d LoRd_MuldeR <MuldeR2@GMX.de>\n", max(lamexp_version_date().year(),QDate::currentDate().year()));
 	
 	//print license info
@@ -65,10 +65,10 @@ int lamexp_main(int argc, char* argv[])
 	
 	//Detect CPU capabilities
 	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-	qDebug("CPU brand string:  %s", cpuFeatures.brand);
-	qDebug("CPU signature:     Family: %d, Model: %d, Stepping: %d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
-	qDebug("CPU capabilities:  MMX: %s, SSE: %s, SSE2: %s, SSE3: %s, SSSE3: %s, x64: %s", LAMEXP_BOOL(cpuFeatures.mmx), LAMEXP_BOOL(cpuFeatures.sse), LAMEXP_BOOL(cpuFeatures.sse2), LAMEXP_BOOL(cpuFeatures.sse3), LAMEXP_BOOL(cpuFeatures.ssse3), LAMEXP_BOOL(cpuFeatures.x64));
-	qDebug("CPU no. of cores:  %d\n", cpuFeatures.count);
+	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
+	qDebug("   CPU signature  :  Family: %d, Model: %d, Stepping: %d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
+	qDebug("CPU capabilities  :  MMX: %s, SSE: %s, SSE2: %s, SSE3: %s, SSSE3: %s, x64: %s", LAMEXP_BOOL(cpuFeatures.mmx), LAMEXP_BOOL(cpuFeatures.sse), LAMEXP_BOOL(cpuFeatures.sse2), LAMEXP_BOOL(cpuFeatures.sse3), LAMEXP_BOOL(cpuFeatures.ssse3), LAMEXP_BOOL(cpuFeatures.x64));
+	qDebug("CPU no. of cores  :  %d\n", cpuFeatures.count);
 	
 	//Initialize Qt
 	lamexp_init_qt(argc, argv);
@@ -128,14 +128,16 @@ int lamexp_main(int argc, char* argv[])
 	SplashScreen::showSplash(poInitializationThread);
 	LAMEXP_DELETE(poInitializationThread);
 
-	//Show main window
+	//Create main window
+	MainWindow *poMainWindow = new MainWindow(fileListModel, metaInfo, settingsModel);
+	
+	//Main application loop
 	while(bAccepted)
 	{
-		MainWindow *poMainWindow = new MainWindow(fileListModel, metaInfo, settingsModel);
+		//Show main window
 		poMainWindow->show();
 		iResult = QApplication::instance()->exec();
 		bAccepted = poMainWindow->isAccepted();
-		LAMEXP_DELETE(poMainWindow);
 
 		//Show processing dialog
 		if(bAccepted && fileListModel->rowCount() > 0)
@@ -147,6 +149,7 @@ int lamexp_main(int argc, char* argv[])
 	}
 	
 	//Free models
+	LAMEXP_DELETE(poMainWindow);
 	LAMEXP_DELETE(fileListModel);
 	LAMEXP_DELETE(metaInfo);
 	LAMEXP_DELETE(settingsModel);

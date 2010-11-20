@@ -58,13 +58,11 @@
 #include <Windows.h>
 
 //Helper macros
-#define ABORT_IF_BUSY \
-if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
-{ \
-	MessageBeep(MB_ICONEXCLAMATION); \
-	return; \
-}
+#define ABORT_IF_BUSY if(m_banner->isVisible() || m_delayedFileTimer->isActive()) { MessageBeep(MB_ICONEXCLAMATION); return; }
+#define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, COLOR); WIDGET->setPalette(_palette); }
+#define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
+
 
 //Helper class
 class Index: public QObjectUserData
@@ -86,7 +84,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_fileListModel(fileListModel),
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
-	m_accepted(false)
+	m_accepted(false),
+	m_firstTimeShown(true)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -117,6 +116,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_dropNoteLabel = new QLabel(sourceFileView);
 	m_dropNoteLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	m_dropNoteLabel->setText("» You can drop in audio files here! «");
+	SET_FONT_BOLD(m_dropNoteLabel, true);
+	SET_TEXT_COLOR(m_dropNoteLabel, Qt::darkGray);
 	connect(buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
 	connect(buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
 	connect(buttonClearFiles, SIGNAL(clicked()), this, SLOT(clearFilesButtonClicked()));
@@ -154,10 +155,12 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	metaDataView->verticalHeader()->hide();
 	metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	while(writeMetaDataCheckBox->isChecked() != m_settings->writeMetaTags()) writeMetaDataCheckBox->click();
+	while(generatePlaylistCheckBox->isChecked() != m_settings->createPlaylist()) generatePlaylistCheckBox->click();
 	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
 	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
 	connect(writeMetaDataCheckBox, SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
-	
+	connect(generatePlaylistCheckBox, SIGNAL(clicked()), this, SLOT(playlistEnabledChanged()));
+
 	//Setup "Compression" tab
 	m_encoderButtonGroup = new QButtonGroup(this);
 	m_encoderButtonGroup->addButton(radioButtonEncoderMP3, SettingsModel::MP3Encoder);
@@ -322,7 +325,13 @@ void MainWindow::showEvent(QShowEvent *event)
 	m_accepted = false;
 	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
 	modelReset();
-	QTimer::singleShot(0, this, SLOT(windowShown()));
+	tabWidget->setCurrentIndex(0);
+
+	if(m_firstTimeShown)
+	{
+		m_firstTimeShown = false;
+		QTimer::singleShot(0, this, SLOT(windowShown()));
+	}
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
@@ -1075,4 +1084,12 @@ void MainWindow::modelReset(void)
 void MainWindow::metaTagsEnabledChanged(void)
 {
 	m_settings->writeMetaTags(writeMetaDataCheckBox->isChecked());
+}
+
+/*
+ * Playlist enabled changed
+ */
+void MainWindow::playlistEnabledChanged(void)
+{
+	m_settings->createPlaylist(generatePlaylistCheckBox->isChecked());
 }

@@ -64,6 +64,7 @@ public:
 	MAKE_GETTER_DEC1(compressionBitrate);
 	MAKE_GETTER_DEC2(outputDir);
 	MAKE_GETTER_DEC3(writeMetaTags);
+	MAKE_GETTER_DEC3(createPlaylist);
 
 	//Setters
 	MAKE_SETTER_DEC1(licenseAccepted);
@@ -73,6 +74,7 @@ public:
 	MAKE_SETTER_DEC1(compressionEncoder);
 	MAKE_SETTER_DEC2(outputDir);
 	MAKE_SETTER_DEC3(writeMetaTags);
+	MAKE_SETTER_DEC3(createPlaylist);
 
 	void validate(void);
 

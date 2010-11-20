@@ -23,6 +23,8 @@
 
 #include "../tmp/UIC_ProcessingDialog.h"
 
+#include <QUuid>
+
 class QMovie;
 class ProgressModel;
 class ProcessThread;
@@ -42,6 +44,7 @@ private slots:
 	void initEncoding(void);
 	void doneEncoding(void);
 	void abortEncoding(void);
+	void processFinished(const QUuid &jobId, const QString &outFileName, bool success);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -52,7 +55,7 @@ private:
 	void setCloseButtonEnabled(bool enabled);
 	void startNextJob(void);
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
-
+	void writePlayList(void);
 	
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;
@@ -60,6 +63,7 @@ private:
 	QList<ProcessThread*> m_threadList;
 	QMovie *m_progressIndicator;
 	ProgressModel *m_progressModel;
+	QStringList m_playList;
 	unsigned int m_runningThreads;
 	unsigned int m_currentFile;
 	bool m_userAborted;

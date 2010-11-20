@@ -27,6 +27,8 @@
 #include "Model_AudioFile.h"
 #include "Encoder_Abstract.h"
 
+class QMutex;
+
 class ProcessThread: public QThread
 {
 	Q_OBJECT
@@ -44,6 +46,7 @@ private slots:
 signals:
 	void processStateInitialized(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
 	void processStateChanged(const QUuid &jobId, const QString &newStatus, int newState);
+	void processStateFinished(const QUuid &jobId, const QString &outFileName, bool success);
 
 private:
 	QString generateOutFileName(void);
@@ -53,4 +56,6 @@ private:
 	AbstractEncoder *m_encoder;
 	const QString m_outputDirectory;
 	volatile bool m_aborted;
+	
+	static QMutex *m_mutex_genFileName;
 };

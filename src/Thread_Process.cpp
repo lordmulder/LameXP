@@ -31,9 +31,13 @@
 #include <QUuid>
 #include <QFileInfo>
 #include <QDir>
+#include <QMutex>
+#include <QMutexLocker>
 
 #include <limits.h>
 #include <time.h>
+
+QMutex *ProcessThread::m_mutex_genFileName = NULL;
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -47,6 +51,11 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_jobId(QUuid::createUuid()),
 	m_aborted(false)
 {
+	if(m_mutex_genFileName)
+	{
+		m_mutex_genFileName = new QMutex;
+	}
+
 	connect(m_encoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 }
 
@@ -73,10 +82,13 @@ void ProcessThread::run()
 
 	if(bSuccess)
 	{
-		bSuccess = QFileInfo(outFileName).exists();
+		QFileInfo fileInfo(outFileName);
+		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
 	}
 
 	emit processStateChanged(m_jobId, (bSuccess ? "Done." : (m_aborted ? "Aborted!" : "Failed!")), (bSuccess ? ProgressModel::JobComplete : ProgressModel::JobFailed));
+	emit processStateFinished(m_jobId, outFileName, bSuccess);
+
 	qDebug("Process thread is done.");
 }
 
@@ -95,6 +107,8 @@ void ProcessThread::handleUpdate(int progress)
 
 QString ProcessThread::generateOutFileName(void)
 {
+	QMutexLocker lock(m_mutex_genFileName);
+	
 	int n = 1;
 
 	QString baseName = QFileInfo(m_audioFile.filePath()).completeBaseName();
@@ -105,6 +119,12 @@ QString ProcessThread::generateOutFileName(void)
 	while(QFileInfo(outFileName).exists())
 	{
 		outFileName = QString("%1/%2 (%3).%4").arg(targetDir, baseName, QString::number(++n), m_encoder->extension());
+	}
+
+	QFile placeholder(outFileName);
+	if(placeholder.open(QIODevice::WriteOnly))
+	{
+		placeholder.close();
 	}
 
 	return outFileName;

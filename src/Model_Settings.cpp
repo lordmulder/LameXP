@@ -37,6 +37,7 @@ static const char *g_settingsId_compressionRCMode = "Compression/RCMode";
 static const char *g_settingsId_compressionBitrate = "Compression/Bitrate";
 static const char *g_settingsId_outputDir = "OutputDirectory";
 static const char *g_settingsId_writeMetaTags = "WriteMetaTags";
+static const char *g_settingsId_createPlaylist = "AutoCreatePlaylist";
 
 #define MAKE_GETTER1(OPT,DEF) int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); }
 #define MAKE_SETTER1(OPT) void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); }
@@ -109,7 +110,7 @@ MAKE_SETTER1(compressionEncoder)
 MAKE_GETTER1(compressionRCMode, 0)
 MAKE_SETTER1(compressionRCMode)
 
-MAKE_GETTER1(compressionBitrate, 0)
+MAKE_GETTER1(compressionBitrate, 7)
 MAKE_SETTER1(compressionBitrate)
 
 MAKE_GETTER2(outputDir, QString())
@@ -117,3 +118,6 @@ MAKE_SETTER2(outputDir)
 
 MAKE_GETTER3(writeMetaTags, true)
 MAKE_SETTER3(writeMetaTags)
+
+MAKE_GETTER3(createPlaylist, true)
+MAKE_SETTER3(createPlaylist)

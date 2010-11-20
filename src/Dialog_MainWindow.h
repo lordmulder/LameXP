@@ -79,6 +79,7 @@ private slots:
 	void rowsChanged(const QModelIndex &parent, int start, int end);
 	void modelReset(void);
 	void metaTagsEnabledChanged(void);
+	void playlistEnabledChanged(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -91,6 +92,7 @@ private:
 	void addFiles(const QStringList &files);
 
 	bool m_accepted;
+	bool m_firstTimeShown;
 	FileListModel *m_fileListModel;
 	QFileSystemModel *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;
