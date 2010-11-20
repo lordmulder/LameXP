@@ -140,7 +140,7 @@ int lamexp_main(int argc, char* argv[])
 		//Show processing dialog
 		if(bAccepted && fileListModel->rowCount() > 0)
 		{
-			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, settingsModel);
+			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, metaInfo, settingsModel);
 			processingDialog->exec();
 			LAMEXP_DELETE(processingDialog);
 		}

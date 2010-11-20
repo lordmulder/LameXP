@@ -78,6 +78,7 @@ private slots:
 	void updateBitrate(int value);
 	void rowsChanged(const QModelIndex &parent, int start, int end);
 	void modelReset(void);
+	void metaTagsEnabledChanged(void);
 
 protected:
 	void showEvent(QShowEvent *event);

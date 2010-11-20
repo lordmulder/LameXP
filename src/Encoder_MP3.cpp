@@ -75,13 +75,18 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 
 	if(!sourceFile.fileName().isEmpty()) args << (IS_UNICODE(sourceFile.fileName()) ? "--uTitle" : "--lTitle") << sourceFile.fileName();
 	if(!sourceFile.fileArtist().isEmpty()) args << (IS_UNICODE(sourceFile.fileArtist()) ? "--uArtist" : "--lArtist") << sourceFile.fileArtist();
+	if(!sourceFile.fileAlbum().isEmpty()) args << (IS_UNICODE(sourceFile.fileAlbum()) ? "--uAlbum" : "--lAlbum") << sourceFile.fileAlbum();
 	if(!sourceFile.fileGenre().isEmpty()) args << (IS_UNICODE(sourceFile.fileGenre()) ? "--uGenre" : "--lGenre") << sourceFile.fileGenre();
 	if(!sourceFile.fileComment().isEmpty()) args << (IS_UNICODE(sourceFile.fileComment()) ? "--uComment" : "--lComment") << sourceFile.fileComment();
+	if(sourceFile.fileYear()) args << "--ty" << QString::number(sourceFile.fileYear());
+	if(sourceFile.filePosition()) args << "--tn" << QString::number(sourceFile.filePosition());
+	
+	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 
 	args << QDir::toNativeSeparators(sourceFile.filePath());
 	args << QDir::toNativeSeparators(outputFile);
 
-	process.start(lamexp_lookup_tool("lame.exe"), args);
+	process.start(m_binary, args);
 	if(!process.waitForStarted())
 	{
 		return false;

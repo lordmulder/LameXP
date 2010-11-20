@@ -165,7 +165,7 @@ void InitializationThread::initNeroAac(void)
 	catch(...)
 	{
 		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
-		qWarning("Failed to lock Nero encoder binary -> AAC encoding support will be disabled!");
+		qWarning("Failed to get excluive lock to Nero encoder binary -> AAC encoding support will be disabled!");
 		return;
 	}
 
@@ -178,7 +178,6 @@ void InitializationThread::initNeroAac(void)
 	{
 		qWarning("Nero process failed to create!");
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
-		qDebug("File '%s' does exist?\n%s!\n", neroFileInfo[0].canonicalFilePath().toUtf8().constData(), (neroFileInfo[0].exists() ? "Yes, it still exists" : "Nope, it disappeared"));
 		process.kill();
 		process.waitForFinished(-1);
 		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);

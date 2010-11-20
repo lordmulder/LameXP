@@ -24,6 +24,7 @@
 
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QFileInfo>
 
 #define MODEL_ROW_COUNT 12
 
@@ -251,6 +252,13 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		temp = QInputDialog::getText(parent, "Edit Title", "Please enter the title for this file:", QLineEdit::Normal, m_audioFile->fileName(), &ok).simplified();
 		if(ok)
 		{
+			if(temp.isEmpty())
+			{
+				QMessageBox::warning(parent, "Edit Title", "The title must not be empty. Generating title from file name!");
+				temp = QFileInfo(m_audioFile->filePath()).completeBaseName().replace("_", " ").simplified();
+				int index = temp.lastIndexOf(" - ");
+				if(index >= 0) temp = temp.mid(index + 3).trimmed();
+			}
 			beginResetModel();
 			m_audioFile->setFileName(temp.isEmpty() ? QString() : temp);
 			endResetModel();

@@ -24,10 +24,12 @@
 class QSettings;
 class QString;
 
-#define MAKE_GETTER_DEC(OPT) int OPT(void)
-#define MAKE_SETTER_DEC(OPT) void OPT(int value)
+#define MAKE_GETTER_DEC1(OPT) int OPT(void)
+#define MAKE_SETTER_DEC1(OPT) void OPT(int value)
 #define MAKE_GETTER_DEC2(OPT) QString OPT(void)
 #define MAKE_SETTER_DEC2(OPT) void OPT(const QString &value)
+#define MAKE_GETTER_DEC3(OPT) bool OPT(void)
+#define MAKE_SETTER_DEC3(OPT) void OPT(bool value)
 
 class SettingsModel
 {
@@ -55,21 +57,22 @@ public:
 	static const int mp3Bitrates[15];
 
 	//Getters
-	MAKE_GETTER_DEC(licenseAccepted);
-	MAKE_GETTER_DEC(interfaceStyle);
-	MAKE_GETTER_DEC(compressionEncoder);
-	MAKE_GETTER_DEC(compressionRCMode);
-	MAKE_GETTER_DEC(compressionBitrate);
+	MAKE_GETTER_DEC1(licenseAccepted);
+	MAKE_GETTER_DEC1(interfaceStyle);
+	MAKE_GETTER_DEC1(compressionEncoder);
+	MAKE_GETTER_DEC1(compressionRCMode);
+	MAKE_GETTER_DEC1(compressionBitrate);
 	MAKE_GETTER_DEC2(outputDir);
-
+	MAKE_GETTER_DEC3(writeMetaTags);
 
 	//Setters
-	MAKE_SETTER_DEC(licenseAccepted);
-	MAKE_SETTER_DEC(interfaceStyle);
-	MAKE_SETTER_DEC(compressionBitrate);
-	MAKE_SETTER_DEC(compressionRCMode);
-	MAKE_SETTER_DEC(compressionEncoder);
+	MAKE_SETTER_DEC1(licenseAccepted);
+	MAKE_SETTER_DEC1(interfaceStyle);
+	MAKE_SETTER_DEC1(compressionBitrate);
+	MAKE_SETTER_DEC1(compressionRCMode);
+	MAKE_SETTER_DEC1(compressionEncoder);
 	MAKE_SETTER_DEC2(outputDir);
+	MAKE_SETTER_DEC3(writeMetaTags);
 
 	void validate(void);
 
@@ -77,7 +80,9 @@ private:
 	QSettings *m_settings;
 };
 
-#undef MAKE_GETTER_DEC
-#undef MAKE_SETTER_DEC
+#undef MAKE_GETTER_DEC1
+#undef MAKE_SETTER_DEC1
 #undef MAKE_GETTER_DEC2
 #undef MAKE_SETTER_DEC2
+#undef MAKE_GETTER_DEC3
+#undef MAKE_SETTER_DEC3

@@ -35,7 +35,7 @@ class ProcessingDialog : public QDialog, private Ui::ProcessingDialog
 	Q_OBJECT
 
 public:
-	ProcessingDialog(FileListModel *fileListModel, SettingsModel *settings);
+	ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent = 0);
 	~ProcessingDialog(void);
 
 private slots:
@@ -50,13 +50,17 @@ protected:
 
 private:
 	void setCloseButtonEnabled(bool enabled);
-	void ProcessingDialog::startNextJob(void);
+	void startNextJob(void);
+	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
+
 	
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;
+	AudioFileModel *m_metaInfo;
 	QList<ProcessThread*> m_threadList;
 	QMovie *m_progressIndicator;
 	ProgressModel *m_progressModel;
 	unsigned int m_runningThreads;
+	unsigned int m_currentFile;
 	bool m_userAborted;
 };

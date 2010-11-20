@@ -153,8 +153,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	metaDataView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	metaDataView->verticalHeader()->hide();
 	metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	while(writeMetaDataCheckBox->isChecked() != m_settings->writeMetaTags()) writeMetaDataCheckBox->click();
 	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
 	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
+	connect(writeMetaDataCheckBox, SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
 	
 	//Setup "Compression" tab
 	m_encoderButtonGroup = new QButtonGroup(this);
@@ -1065,4 +1067,12 @@ void MainWindow::rowsChanged(const QModelIndex &parent, int start, int end)
 void MainWindow::modelReset(void)
 {
 	m_dropNoteLabel->setVisible(m_fileListModel->rowCount() <= 0);
+}
+
+/*
+ * Meta tags enabled changed
+ */
+void MainWindow::metaTagsEnabledChanged(void)
+{
+	m_settings->writeMetaTags(writeMetaDataCheckBox->isChecked());
 }

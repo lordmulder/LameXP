@@ -43,9 +43,11 @@
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, SettingsModel *settings)
+ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent)
 :
-	m_settings(settings)
+	QDialog(parent),
+	m_settings(settings),
+	m_metaInfo(metaInfo)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -91,6 +93,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, SettingsModel *
 
 	//Init other vars
 	m_runningThreads = 0;
+	m_currentFile = 0;
 	m_userAborted = false;
 }
 
@@ -168,6 +171,7 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 void ProcessingDialog::initEncoding(void)
 {
 	m_runningThreads = 0;
+	m_currentFile = 0;
 	m_userAborted = false;
 	
 	label_progress->setText("Encoding files, please wait...");
@@ -177,7 +181,7 @@ void ProcessingDialog::initEncoding(void)
 	button_AbortProcess->setEnabled(true);
 	progressBar->setRange(0, m_pendingJobs.count());
 
-	startNextJob();
+	startNextJob(); //TODO: Start as many jobs in parallel as processors available
 	startNextJob();
 }
 
@@ -240,7 +244,9 @@ void ProcessingDialog::startNextJob(void)
 	{
 		return;
 	}
-
+	
+	m_currentFile++;
+	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
 	AbstractEncoder *encoder = NULL;
 	
 	switch(m_settings->compressionEncoder())
@@ -257,13 +263,32 @@ void ProcessingDialog::startNextJob(void)
 		throw "Unsupported encoder!";
 	}
 	
-	ProcessThread *thread = new ProcessThread(m_pendingJobs.takeFirst(), m_settings->outputDir(), encoder);
+	ProcessThread *thread = new ProcessThread(currentFile, m_settings->outputDir(), encoder);
 	m_threadList.append(thread);
 	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
 	m_runningThreads++;
 	thread->start();
+}
+
+AudioFileModel ProcessingDialog::updateMetaInfo(const AudioFileModel &audioFile)
+{
+	if(!m_settings->writeMetaTags())
+	{
+		return AudioFileModel(audioFile.filePath());
+	}
+	
+	AudioFileModel result = audioFile;
+
+	if(!m_metaInfo->fileArtist().isEmpty()) result.setFileArtist(m_metaInfo->fileArtist());
+	if(!m_metaInfo->fileAlbum().isEmpty()) result.setFileAlbum(m_metaInfo->fileAlbum());
+	if(!m_metaInfo->fileGenre().isEmpty()) result.setFileGenre(m_metaInfo->fileGenre());
+	if(m_metaInfo->fileYear()) result.setFileYear(m_metaInfo->fileYear());
+	if(m_metaInfo->filePosition()) result.setFileYear(m_metaInfo->filePosition() != UINT_MAX ? m_metaInfo->filePosition() : m_currentFile);
+	if(!m_metaInfo->fileComment().isEmpty()) result.setFileComment(m_metaInfo->fileComment());
+
+	return result;
 }
 
 void ProcessingDialog::setCloseButtonEnabled(bool enabled)

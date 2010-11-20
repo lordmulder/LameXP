@@ -36,11 +36,14 @@ static const char *g_settingsId_compressionEncoder = "Compression/Encoder";
 static const char *g_settingsId_compressionRCMode = "Compression/RCMode";
 static const char *g_settingsId_compressionBitrate = "Compression/Bitrate";
 static const char *g_settingsId_outputDir = "OutputDirectory";
+static const char *g_settingsId_writeMetaTags = "WriteMetaTags";
 
-#define MAKE_GETTER(OPT,DEF) int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); }
-#define MAKE_SETTER(OPT) void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); }
+#define MAKE_GETTER1(OPT,DEF) int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); }
+#define MAKE_SETTER1(OPT) void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); }
 #define MAKE_GETTER2(OPT,DEF) QString SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toString().trimmed(); }
 #define MAKE_SETTER2(OPT) void SettingsModel::OPT(const QString &value) { m_settings->setValue(g_settingsId_##OPT, value); }
+#define MAKE_GETTER3(OPT,DEF) bool SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toBool(); }
+#define MAKE_SETTER3(OPT) void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, value); }
 
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
 
@@ -94,21 +97,23 @@ void SettingsModel::validate(void)
 // Getter and Setter
 ////////////////////////////////////////////////////////////
 
-MAKE_GETTER(licenseAccepted, 0)
-MAKE_SETTER(licenseAccepted)
+MAKE_GETTER1(licenseAccepted, 0)
+MAKE_SETTER1(licenseAccepted)
 
-MAKE_GETTER(interfaceStyle, 0)
-MAKE_SETTER(interfaceStyle)
+MAKE_GETTER1(interfaceStyle, 0)
+MAKE_SETTER1(interfaceStyle)
 
-MAKE_GETTER(compressionEncoder, 0)
-MAKE_SETTER(compressionEncoder)
+MAKE_GETTER1(compressionEncoder, 0)
+MAKE_SETTER1(compressionEncoder)
 
-MAKE_GETTER(compressionRCMode, 0)
-MAKE_SETTER(compressionRCMode)
+MAKE_GETTER1(compressionRCMode, 0)
+MAKE_SETTER1(compressionRCMode)
 
-MAKE_GETTER(compressionBitrate, 0)
-MAKE_SETTER(compressionBitrate)
+MAKE_GETTER1(compressionBitrate, 0)
+MAKE_SETTER1(compressionBitrate)
 
 MAKE_GETTER2(outputDir, QString())
 MAKE_SETTER2(outputDir)
 
+MAKE_GETTER3(writeMetaTags, true)
+MAKE_SETTER3(writeMetaTags)
