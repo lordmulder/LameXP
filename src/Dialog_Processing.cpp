@@ -39,6 +39,7 @@
 #include <QUrl>
 #include <QUuid>
 #include <QFileInfo>
+#include <QDir>
 
 #include <Windows.h>
 
@@ -84,6 +85,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	view_log->verticalHeader()->hide();
 	view_log->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	view_log->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
+	connect(m_progressModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
+	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
 
 	//Enque jobs
 	if(fileListModel)
@@ -97,6 +100,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	//Init other vars
 	m_runningThreads = 0;
 	m_currentFile = 0;
+	m_succeededFiles = 0;
+	m_failedFiles = 0;
 	m_userAborted = false;
 }
 
@@ -175,6 +180,8 @@ void ProcessingDialog::initEncoding(void)
 {
 	m_runningThreads = 0;
 	m_currentFile = 0;
+	m_succeededFiles = 0;
+	m_failedFiles = 0;
 	m_userAborted = false;
 	m_playList.clear();
 	
@@ -228,20 +235,34 @@ void ProcessingDialog::doneEncoding(void)
 
 	qDebug("Running jobs: %u", m_runningThreads);
 
-	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputDir().isEmpty())
+	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir())
 	{
-		label_progress->setText("Creatig the play list, please wait...");
+		label_progress->setText("Creatig the playlist file, please wait...");
 		QApplication::processEvents();
 		writePlayList();
 	}
 	
-	label_progress->setText(m_userAborted ? "Process was aborted by the user!" : "Alle files completed successfully.");
-	m_progressIndicator->stop();
-
+	if(m_userAborted)
+	{
+		label_progress->setText("Process was aborted by the user!");
+	}
+	else
+	{
+		if(m_failedFiles)
+		{
+			label_progress->setText(QString("Error: %1 of %2 files failed. See the log for details!").arg(QString::number(m_failedFiles), QString::number(m_failedFiles + m_succeededFiles)));
+		}
+		else
+		{
+			label_progress->setText("Alle files completed successfully.");
+		}
+	}
+	
 	setCloseButtonEnabled(true);
 	button_closeDialog->setEnabled(true);
 	button_AbortProcess->setEnabled(false);
 
+	m_progressIndicator->stop();
 	progressBar->setValue(100);
 }
 
@@ -249,8 +270,18 @@ void ProcessingDialog::processFinished(const QUuid &jobId, const QString &outFil
 {
 	if(success)
 	{
+		m_succeededFiles++;
 		m_playList.append(outFileName);
 	}
+	else
+	{
+		m_failedFiles++;
+	}
+}
+
+void ProcessingDialog::progressModelChanged(void)
+{
+	view_log->scrollToBottom();
 }
 
 ////////////////////////////////////////////////////////////
@@ -281,8 +312,8 @@ void ProcessingDialog::startNextJob(void)
 	default:
 		throw "Unsupported encoder!";
 	}
-	
-	ProcessThread *thread = new ProcessThread(currentFile, m_settings->outputDir(), encoder);
+
+	ProcessThread *thread = new ProcessThread(currentFile, (m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath(): m_settings->outputDir()), encoder);
 	m_threadList.append(thread);
 	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
@@ -321,6 +352,10 @@ void ProcessingDialog::writePlayList(void)
 			playList.write("\r\n");
 		}
 		playList.close();
+	}
+	else
+	{
+		QMessageBox::warning(this, "Playlist creation failed", QString("The playlist file could not be created:<br><nobr>%1</nobr>").arg(playListFile));
 	}
 }
 

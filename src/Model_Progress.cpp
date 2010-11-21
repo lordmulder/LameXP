@@ -136,13 +136,14 @@ void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QSt
 
 void ProgressModel::updateJob(const QUuid &jobId, const QString &newStatus, int newState)
 {
-	if(!m_jobList.contains(jobId))
+	int row = m_jobList.indexOf(jobId);
+
+	if(row < 0)
 	{
 		return;
 	}
 
-	beginResetModel();
 	if(!newStatus.isEmpty()) m_jobStatus.insert(jobId, newStatus);
 	if(newState >= 0) m_jobState.insert(jobId, newState);
-	endResetModel();
+	emit dataChanged(index(row, 0), index(row, 1));
 }

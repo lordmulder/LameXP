@@ -45,6 +45,7 @@ private slots:
 	void doneEncoding(void);
 	void abortEncoding(void);
 	void processFinished(const QUuid &jobId, const QString &outFileName, bool success);
+	void progressModelChanged(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -66,5 +67,7 @@ private:
 	QStringList m_playList;
 	unsigned int m_runningThreads;
 	unsigned int m_currentFile;
+	unsigned int m_succeededFiles;
+	unsigned int m_failedFiles;
 	bool m_userAborted;
 };

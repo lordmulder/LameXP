@@ -71,13 +71,13 @@ void ProcessThread::run()
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
 	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), "Starting...", ProgressModel::JobRunning);
 
-	if(!QFileInfo(m_audioFile.filePath()).isFile())
+	QString outFileName = generateOutFileName();
+	if(outFileName.isEmpty())
 	{
 		emit processStateChanged(m_jobId, "Not found!", ProgressModel::JobFailed);
 		return;
 	}
 
-	QString outFileName = generateOutFileName();
 	bool bSuccess = m_encoder->encode(m_audioFile, outFileName, &m_aborted);
 
 	if(bSuccess)
@@ -111,14 +111,28 @@ QString ProcessThread::generateOutFileName(void)
 	
 	int n = 1;
 
-	QString baseName = QFileInfo(m_audioFile.filePath()).completeBaseName();
-	QString targetDir = m_outputDirectory.isEmpty() ? QFileInfo(m_audioFile.filePath()).canonicalPath() : m_outputDirectory;
-	QDir(targetDir).mkpath(".");
-	QString outFileName = QString("%1/%2.%3").arg(targetDir, baseName, "mp3");
+	QFileInfo sourceFile(m_audioFile.filePath());
+	if(!sourceFile.exists() || !sourceFile.isFile())
+	{
+		return QString();
+	}
 
+	QString baseName = sourceFile.completeBaseName();
+	QDir targetDir(m_outputDirectory.isEmpty() ? sourceFile.canonicalPath() : m_outputDirectory);
+	
+	if(!targetDir.exists())
+	{
+		targetDir.mkpath(".");
+		if(!targetDir.exists())
+		{
+			return QString();
+		}
+	}
+	
+	QString outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), baseName, "mp3");
 	while(QFileInfo(outFileName).exists())
 	{
-		outFileName = QString("%1/%2 (%3).%4").arg(targetDir, baseName, QString::number(++n), m_encoder->extension());
+		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), baseName, QString::number(++n), m_encoder->extension());
 	}
 
 	QFile placeholder(outFileName);

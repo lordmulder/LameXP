@@ -1346,6 +1346,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1617,6 +1619,22 @@
     <hint type="destinationlabel">
      <x>500</x>
      <y>404</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveToSourceFolderCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>generatePlaylistCheckBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>79</y>
     </hint>
    </hints>
   </connection>

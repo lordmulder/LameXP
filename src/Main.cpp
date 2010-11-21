@@ -37,6 +37,7 @@
 #include <QDate>
 #include <QMutex>
 #include <QDir>
+#include <QInputDialog>
 
 ///////////////////////////////////////////////////////////////////////////////
 // Main function
@@ -72,7 +73,7 @@ int lamexp_main(int argc, char* argv[])
 	
 	//Initialize Qt
 	lamexp_init_qt(argc, argv);
-	
+
 	//Check for expiration
 	if(lamexp_version_demo())
 	{

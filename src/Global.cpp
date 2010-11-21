@@ -208,6 +208,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 
 	CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
 	GetConsoleScreenBufferInfo(hConsole, &bufferInfo);
+	SetConsoleOutputCP(CP_UTF8);
 
 	switch(type)
 	{
@@ -216,17 +217,18 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		fflush(stdout);
 		fflush(stderr);
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fprintf(stderr, "\nCRITICAL ERROR !!!\n%s\n\n", msg);
+		fwprintf(stderr, L"\nCRITICAL ERROR !!!\n%S\n\n", msg);
 		MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - CRITICAL ERROR", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
 		break;
 	case QtWarningMsg:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fprintf(stderr, "%s\n", msg);
+		fwprintf(stderr, L"%S\n", msg);
 		fflush(stderr);
+		//MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), NULL, MB_TOPMOST | MB_ICONWARNING);
 		break;
 	default:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fprintf(stderr, "%s\n", msg);
+		fwprintf(stderr, L"%S\n", msg);
 		fflush(stderr);
 		break;
 	}
