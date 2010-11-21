@@ -1,6 +1,7 @@
 @echo off
+setlocal ENABLEDELAYEDEXPANSION
 REM ------------------------------------------
-REM :: SETUP PATHS ::
+REM :: SETUP ENVIRONMENT ::
 REM ------------------------------------------
 call _paths.bat
 if not "%LAMEXP_ERROR%"=="0" (
@@ -15,20 +16,13 @@ if not "%LAMEXP_REDIST%"=="0" (
 	set "LAMEXP_REDIST=1"
 )
 REM ------------------------------------------
+REM :: SETUP PATHS ::
+REM ------------------------------------------
 set "OUT_PATH=..\..\bin\%LAMEXP_CONFIG%"
 set "OUT_DATE=%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%"
-set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%"
 set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
 set "OBJ_PATH=..\..\obj\%LAMEXP_CONFIG%"
 set "MOC_PATH=..\..\tmp"
-REM ------------------------------------------
-REM :: READ VERSION INFO ::
-REM ------------------------------------------
-call _version.bat
-if not "%LAMEXP_ERROR%"=="0" (
-	call _error.bat	"FAILD TO READ VERSION INFO!"
-	GOTO:EOF
-)
 REM ------------------------------------------
 REM :: CLEAN UP ::
 REM ------------------------------------------
@@ -40,6 +34,31 @@ del /Q "%OBJ_PATH%\*.bat"
 del /Q "%OBJ_PATH%\*.idb"
 del /Q "%MOC_PATH%\*.cpp"
 del /Q "%MOC_PATH%\*.h"
+REM ------------------------------------------
+REM :: BUILD BINARIES ::
+REM ------------------------------------------
+call _build.bat "..\..\LameXP.sln" "%LAMEXP_CONFIG%"
+if not "%LAMEXP_ERROR%"=="0" (
+	call _error.bat	"BUILD HAS FAILED"
+	GOTO:EOF
+)
+REM ------------------------------------------
+REM :: READ VERSION INFO ::
+REM ------------------------------------------
+call _version.bat
+if not "%LAMEXP_ERROR%"=="0" (
+	call _error.bat	"FAILD TO READ VERSION INFO!"
+	GOTO:EOF
+)
+REM ------------------------------------------
+set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%"
+for /L %%n in (1, 1, 99) do (
+	if exist "!OUT_FILE!.exe" set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	if exist "!OUT_FILE!.zip" set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+)
+REM ------------------------------------------
+REM :: DELETE OLD OUTPUT FILE ::
+REM ------------------------------------------
 del "%OUT_FILE%.exe"
 del "%OUT_FILE%.zip"
 REM ------------------------------------------
@@ -49,14 +68,6 @@ if exist "%OUT_FILE%.exe" (
 )
 if exist "%OUT_FILE%.zip" (
 	call _error.bat	"FAILD TO DELET EXISTING FILE"
-	GOTO:EOF
-)
-REM ------------------------------------------
-REM :: BUILD BINARIES ::
-REM ------------------------------------------
-call _build.bat "..\..\LameXP.sln" "%LAMEXP_CONFIG%"
-if not "%LAMEXP_ERROR%"=="0" (
-	call _error.bat	"BUILD HAS FAILED"
 	GOTO:EOF
 )
 REM ------------------------------------------
@@ -105,6 +116,9 @@ if not exist "%OUT_FILE%.exe" (
 	call _error.bat	"PACKAGING HAS FAILED"
 	GOTO:EOF
 )
+REM ------------------------------------------
+attrib +R "%OUT_FILE%.zip"
+attrib +R "%OUT_FILE%.exe"
 REM ------------------------------------------
 echo.
 echo BUIDL COMPLETED SUCCESSFULLY :-)
