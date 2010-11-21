@@ -52,7 +52,7 @@
 #include <QDragEnterEvent>
 #include <QWindowsMime>
 #include <QProcess>
-#include <QRegExp>
+#include <QUuid>
 
 //Win32 includes
 #include <Windows.h>
@@ -124,9 +124,9 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(buttonFileUp, SIGNAL(clicked()), this, SLOT(fileUpButtonClicked()));
 	connect(buttonFileDown, SIGNAL(clicked()), this, SLOT(fileDownButtonClicked()));
 	connect(buttonShowDetails, SIGNAL(clicked()), this, SLOT(showDetailsButtonClicked()));
-	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsChanged(QModelIndex,int,int)));
-	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(rowsChanged(QModelIndex,int,int)));
-	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(modelReset()));
+	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
+	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
+	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(sourceModelChanged()));
 	
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModel();
@@ -139,6 +139,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->header()->hideSection(3);
 	outputFolderView->setHeaderHidden(true);
 	outputFolderView->setAnimated(true);
+	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
 	outputFolderViewClicked(outputFolderView->currentIndex());
@@ -146,6 +147,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
 	connect(buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
 	connect(buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
+	connect(saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
 	
 	//Setup "Meta Data" tab
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
@@ -155,7 +157,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	metaDataView->verticalHeader()->hide();
 	metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	while(writeMetaDataCheckBox->isChecked() != m_settings->writeMetaTags()) writeMetaDataCheckBox->click();
-	while(generatePlaylistCheckBox->isChecked() != m_settings->createPlaylist()) generatePlaylistCheckBox->click();
+	generatePlaylistCheckBox->setChecked(m_settings->createPlaylist());
 	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
 	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
 	connect(writeMetaDataCheckBox, SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
@@ -324,7 +326,7 @@ void MainWindow::showEvent(QShowEvent *event)
 {
 	m_accepted = false;
 	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
-	modelReset();
+	sourceModelChanged();
 	tabWidget->setCurrentIndex(0);
 
 	if(m_firstTimeShown)
@@ -495,6 +497,22 @@ void MainWindow::encodeButtonClicked(void)
 		QMessageBox::warning(this, "LameXP", "Sorry, only Lame MP3 encoding is supported at the moment!");
 		tabWidget->setCurrentIndex(3);
 		return;
+	}
+
+	if(!m_settings->outputToSourceDir())
+	{
+		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), QUuid::createUuid().toString()));
+		if(!writeTest.open(QIODevice::ReadWrite))
+		{
+			QMessageBox::warning(this, "LameXP", QString("Cannot write to the selected output directory.<br><nobr>%1</nobr><br><br>Please choose a different directory!").arg(m_settings->outputDir()));
+			tabWidget->setCurrentIndex(1);
+			return;
+		}
+		else
+		{
+			writeTest.close();
+			writeTest.remove();
+		}
 	}
 		
 	m_accepted = true;
@@ -1063,17 +1081,9 @@ void MainWindow::updateBitrate(int value)
 }
 
 /*
- * Rows changed
- */
-void MainWindow::rowsChanged(const QModelIndex &parent, int start, int end)
-{
-	m_dropNoteLabel->setVisible(m_fileListModel->rowCount() <= 0);
-}
-
-/*
  * Model reset
  */
-void MainWindow::modelReset(void)
+void MainWindow::sourceModelChanged(void)
 {
 	m_dropNoteLabel->setVisible(m_fileListModel->rowCount() <= 0);
 }
@@ -1092,4 +1102,12 @@ void MainWindow::metaTagsEnabledChanged(void)
 void MainWindow::playlistEnabledChanged(void)
 {
 	m_settings->createPlaylist(generatePlaylistCheckBox->isChecked());
+}
+
+/*
+ * Output to source dir changed
+ */
+void MainWindow::saveToSourceFolderChanged(void)
+{
+	m_settings->outputToSourceDir(saveToSourceFolderCheckBox->isChecked());
 }

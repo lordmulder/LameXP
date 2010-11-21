@@ -76,10 +76,10 @@ private slots:
 	void updateEncoder(int id);
 	void updateRCMode(int id);
 	void updateBitrate(int value);
-	void rowsChanged(const QModelIndex &parent, int start, int end);
-	void modelReset(void);
+	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);
 	void playlistEnabledChanged(void);
+	void saveToSourceFolderChanged(void);
 
 protected:
 	void showEvent(QShowEvent *event);
