@@ -295,6 +295,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Dialog_LogView.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Dialog_MainWindow.cpp"
 				>
 			</File>
@@ -418,6 +422,20 @@
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\src\Dialog_LogView.h"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -971,6 +989,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\tmp\MOC_Dialog_LogView.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\tmp\MOC_Dialog_MainWindow.cpp"
 				>
 			</File>
@@ -1164,6 +1186,20 @@
 		<Filter
 			Name="Dialogs"
 			>
+			<File
+				RelativePath=".\gui\LogViewDialog.ui"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
+			</File>
 			<File
 				RelativePath=".\gui\MainWindow.ui"
 				>

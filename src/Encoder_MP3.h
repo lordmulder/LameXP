@@ -38,6 +38,7 @@ public:
 
 signals:
 	void statusUpdated(int progress);
+	void messageLogged(const QString &line);
 
 private:
 	const QString m_binary;

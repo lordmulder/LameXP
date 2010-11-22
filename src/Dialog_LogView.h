@@ -21,43 +21,24 @@
 
 #pragma once
 
-#include <QThread>
-#include <QUuid>
+#include "..\tmp\UIC_LogViewDialog.h"
 
-#include "Model_AudioFile.h"
-#include "Encoder_Abstract.h"
+#include <QDialog>
 
-class QMutex;
-
-class ProcessThread: public QThread
+class LogViewDialog : public QDialog, private Ui::LogViewDialog
 {
 	Q_OBJECT
 
 public:
-	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, AbstractEncoder *encoder);
-	~ProcessThread(void);
-	void run();
-	void abort() { m_aborted = true; }
-	QUuid getId() { return m_jobId; }
+	LogViewDialog(QWidget *parent = 0);
+	~LogViewDialog(void);
 
-private slots:
-	void handleUpdate(int progress);
-	void handleMessage(const QString &line);
+	int exec(const QStringList &logData);
 
-signals:
-	void processStateInitialized(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
-	void processStateChanged(const QUuid &jobId, const QString &newStatus, int newState);
-	void processStateFinished(const QUuid &jobId, const QString &outFileName, bool success);
-	void processMessageLogged(const QUuid &jobId, const QString &line);
+public slots:
+	void copyButtonClicked(void);
+	void saveButtonClicked(void);
 
 private:
-	QString generateOutFileName(void);
-	
-	const QUuid m_jobId;
-	AudioFileModel m_audioFile;
-	AbstractEncoder *m_encoder;
-	const QString m_outputDirectory;
-	volatile bool m_aborted;
-	
-	static QMutex *m_mutex_genFileName;
+	bool m_clipboardUsed;
 };

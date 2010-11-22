@@ -36,6 +36,7 @@
 #include <QStringList>
 #include <QSystemSemaphore>
 #include <QMutex>
+#include <QTextCodec>
 
 //LameXP includes
 #include "Resource.h"
@@ -222,9 +223,9 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		break;
 	case QtWarningMsg:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+		//MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - CRITICAL ERROR", MB_ICONWARNING | MB_TOPMOST | MB_TASKMODAL);
 		fwprintf(stderr, L"%S\n", msg);
 		fflush(stderr);
-		//MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), NULL, MB_TOPMOST | MB_ICONWARNING);
 		break;
 	default:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
@@ -420,7 +421,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 			return false;
 		}
 	}
-
+	
 	//Done
 	qt_initialized = true;
 	return true;

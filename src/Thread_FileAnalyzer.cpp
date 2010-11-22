@@ -30,6 +30,7 @@
 #include <QProcess>
 #include <QDate>
 #include <QTime>
+#include <QDebug>
 
 #include <math.h>
 

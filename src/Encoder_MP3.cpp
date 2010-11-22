@@ -86,6 +86,9 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 	args << QDir::toNativeSeparators(sourceFile.filePath());
 	args << QDir::toNativeSeparators(outputFile);
 
+	emit messageLogged(commandline2string(m_binary, args));
+	emit messageLogged(QString());
+
 	process.start(m_binary, args);
 	if(!process.waitForStarted())
 	{
@@ -125,7 +128,7 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 			}
 			else if(!text.isEmpty())
 			{
-				qDebug("%s", text.toUtf8().constData());
+				emit messageLogged(text); //qDebug("%s", text.toUtf8().constData());
 			}
 		}
 	}

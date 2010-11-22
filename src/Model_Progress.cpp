@@ -131,6 +131,7 @@ void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QSt
 	m_jobName.insert(jobId, jobName);
 	m_jobStatus.insert(jobId, jobInitialStatus);
 	m_jobState.insert(jobId, jobInitialState);
+	m_jobLogFile.insert(jobId, QStringList());
 	endResetModel();
 }
 
@@ -145,5 +146,25 @@ void ProgressModel::updateJob(const QUuid &jobId, const QString &newStatus, int 
 
 	if(!newStatus.isEmpty()) m_jobStatus.insert(jobId, newStatus);
 	if(newState >= 0) m_jobState.insert(jobId, newState);
+	
 	emit dataChanged(index(row, 0), index(row, 1));
+}
+
+void ProgressModel::appendToLog(const QUuid &jobId, const QString &line)
+{
+	if(m_jobList.contains(jobId))
+	{
+		m_jobLogFile[jobId].append(line);
+	}
+}
+
+const QStringList &ProgressModel::getLogFile(const QModelIndex &index)
+{
+	if(index.row() < m_jobList.count())
+	{
+		QUuid id = m_jobList.at(index.row());
+		return m_jobLogFile[id];
+	}
+
+	return *(reinterpret_cast<QStringList*>(NULL));
 }

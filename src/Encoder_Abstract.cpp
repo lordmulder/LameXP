@@ -21,6 +21,8 @@
 
 #include "Encoder_Abstract.h"
 
+#include <QStringList>
+
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
@@ -37,3 +39,15 @@ AbstractEncoder::~AbstractEncoder(void)
 //Setters
 void AbstractEncoder::setBitrate(int bitrate) { m_configBitrate = max(0, bitrate); }
 void AbstractEncoder::setRCMode(int mode) { m_configRCMode = max(0, mode); }
+
+QString AbstractEncoder::commandline2string(const QString &program, const QStringList &arguments)
+{
+	QString commandline = (program.contains(' ') ? QString("\"%1\"").arg(program) : program);
+	
+	for(int i = 0; i < arguments.count(); i++)
+	{
+		commandline += (arguments.at(i).contains(' ') ? QString(" \"%1\"").arg(arguments.at(i)) : QString(" %1").arg(arguments.at(i)));
+	}
+
+	return commandline;
+}

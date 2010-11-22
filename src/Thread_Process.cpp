@@ -57,6 +57,7 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	}
 
 	connect(m_encoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
+	connect(m_encoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 }
 
 ProcessThread::~ProcessThread(void)
@@ -99,6 +100,11 @@ void ProcessThread::run()
 void ProcessThread::handleUpdate(int progress)
 {
 	emit processStateChanged(m_jobId, QString("Encoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+}
+
+void ProcessThread::handleMessage(const QString &line)
+{
+	emit processMessageLogged(m_jobId, line);
 }
 
 ////////////////////////////////////////////////////////////

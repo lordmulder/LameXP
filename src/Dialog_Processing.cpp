@@ -27,6 +27,7 @@
 #include "Model_Settings.h"
 #include "Thread_Process.h"
 #include "Encoder_MP3.h"
+#include "Dialog_LogView.h"
 
 #include <QApplication>
 #include <QRect>
@@ -87,6 +88,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	view_log->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
 	connect(m_progressModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
 	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
+	connect(view_log, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
 
 	//Enque jobs
 	if(fileListModel)
@@ -284,6 +286,17 @@ void ProcessingDialog::progressModelChanged(void)
 	view_log->scrollToBottom();
 }
 
+void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
+{
+	if(m_runningThreads == 0)
+	{
+		const QStringList &logFile = m_progressModel->getLogFile(index);
+		LogViewDialog *logView = new LogViewDialog(this);
+		logView->exec(logFile);
+		LAMEXP_DELETE(logView);
+	}
+}
+
 ////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
@@ -319,6 +332,7 @@ void ProcessingDialog::startNextJob(void)
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateFinished(QUuid,QString,bool)), this, SLOT(processFinished(QUuid,QString,bool)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
 	m_runningThreads++;
 	thread->start();
 }

@@ -39,6 +39,8 @@ public:
 	void setBitrate(int bitrate);
 	void setRCMode(int mode);
 
+	static QString commandline2string(const QString &program, const QStringList &arguments);
+
 protected:
 	int m_configBitrate;
 	int m_configRCMode;

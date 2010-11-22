@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LogViewDialog</class>
+ <widget class="QDialog" name="LogViewDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>512</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>512</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Log View</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res/Icons.qrc">
+    <normaloff>:/icons/application_xp_terminal.png</normaloff>:/icons/application_xp_terminal.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0" colspan="4">
+      <widget class="QPlainTextEdit" name="textEdit">
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="Text">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>170</red>
+             <green>255</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>31</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="Text">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>170</red>
+             <green>255</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>31</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="Text">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>120</red>
+             <green>120</green>
+             <blue>120</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="font">
+        <font>
+         <family>Lucida Console</family>
+        </font>
+       </property>
+       <property name="plainText">
+        <string>C:\DOS
+C:\DOS\RUN
+RUN\DOS\RUN
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QPushButton" name="buttonDiscard">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Discard</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/Icons.qrc">
+         <normaloff>:/icons/cross.png</normaloff>:/icons/cross.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="buttonSave">
+       <property name="minimumSize">
+        <size>
+         <width>130</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Save to File...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/Icons.qrc">
+         <normaloff>:/icons/disk.png</normaloff>:/icons/disk.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="buttonCopy">
+       <property name="minimumSize">
+        <size>
+         <width>130</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Copy to Clipboard</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/Icons.qrc">
+         <normaloff>:/icons/paste_plain.png</normaloff>:/icons/paste_plain.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../res/Icons.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonDiscard</sender>
+   <signal>clicked()</signal>
+   <receiver>LogViewDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>255</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

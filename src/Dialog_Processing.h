@@ -46,6 +46,7 @@ private slots:
 	void abortEncoding(void);
 	void processFinished(const QUuid &jobId, const QString &outFileName, bool success);
 	void progressModelChanged(void);
+	void logViewDoubleClicked(const QModelIndex &index);
 
 protected:
 	void showEvent(QShowEvent *event);

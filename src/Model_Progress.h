@@ -52,15 +52,20 @@ public:
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
+	//Public functions
+	const QStringList &getLogFile(const QModelIndex &index);
+
 public slots:
 	void addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);
 	void updateJob(const QUuid &jobId, const QString &newStatus, int newState);
+	void appendToLog(const QUuid &jobId, const QString &line);
 
 private:
 	QList<QUuid> m_jobList;
 	QMap<QUuid, QString> m_jobName;
 	QMap<QUuid, QString> m_jobStatus;
 	QMap<QUuid, int> m_jobState;
+	QMap<QUuid, QStringList> m_jobLogFile;
 
 	const QIcon m_iconRunning;
 	const QIcon m_iconPaused;
