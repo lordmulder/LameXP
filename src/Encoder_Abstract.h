@@ -25,6 +25,10 @@
 
 #include <QObject>
 
+class QProcess;
+class QStringList;
+class QMutex;
+
 class AbstractEncoder : public QObject
 {
 	Q_OBJECT
@@ -39,10 +43,18 @@ public:
 	void setBitrate(int bitrate);
 	void setRCMode(int mode);
 
+	bool startProcess(QProcess &process, const QString &program, const QStringList &args);
 	static QString commandline2string(const QString &program, const QStringList &arguments);
+
+signals:
+	void statusUpdated(int progress);
+	void messageLogged(const QString &line);
 
 protected:
 	int m_configBitrate;
 	int m_configRCMode;
 
+private:
+	static QMutex *m_mutex_startProcess;
+	static void *m_handle_jobObject;
 };

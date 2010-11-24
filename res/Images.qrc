@@ -3,6 +3,7 @@
 	<qresource>
     <file>images/Busy.gif</file>
     <file>images/HeaderIcon_MetaInfo.png</file>
+    <file>images/HeaderIcon_LogFile.png</file>
     <file>images/Label.png</file>
     <file>images/Loading.gif</file>
     <file>images/Logo.png</file>

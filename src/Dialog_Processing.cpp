@@ -41,6 +41,7 @@
 #include <QUuid>
 #include <QFileInfo>
 #include <QDir>
+#include <QMenu>
 
 #include <Windows.h>
 
@@ -90,6 +91,13 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
 	connect(view_log, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
 
+	//Create context menu
+	m_contextMenu = new QMenu();
+	QAction *contextMenuAction = m_contextMenu->addAction(QIcon(":/icons/zoom.png"), "Show details for selected job");
+	view_log->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(view_log, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
+	connect(contextMenuAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuActionTriggered()));
+	
 	//Enque jobs
 	if(fileListModel)
 	{
@@ -117,6 +125,7 @@ ProcessingDialog::~ProcessingDialog(void)
 	if(m_progressIndicator) m_progressIndicator->stop();
 	LAMEXP_DELETE(m_progressIndicator);
 	LAMEXP_DELETE(m_progressModel);
+	LAMEXP_DELETE(m_contextMenu);
 
 	while(!m_threadList.isEmpty())
 	{
@@ -194,8 +203,12 @@ void ProcessingDialog::initEncoding(void)
 	button_AbortProcess->setEnabled(true);
 	progressBar->setRange(0, m_pendingJobs.count());
 
-	startNextJob(); //TODO: Start as many jobs in parallel as processors available
-	startNextJob();
+	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
+
+	for(int i = 0; i < min(max(cpuFeatures.count, 1), 4); i++)
+	{
+		startNextJob();
+	}
 }
 
 void ProcessingDialog::abortEncoding(void)
@@ -292,9 +305,25 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 	{
 		const QStringList &logFile = m_progressModel->getLogFile(index);
 		LogViewDialog *logView = new LogViewDialog(this);
+		logView->setWindowTitle(QString("LameXP - %1").arg(m_progressModel->data(index, Qt::DisplayRole).toString()));
 		logView->exec(logFile);
 		LAMEXP_DELETE(logView);
 	}
+	else
+	{
+		MessageBeep(MB_ICONWARNING);
+	}
+}
+
+void ProcessingDialog::contextMenuTriggered(const QPoint &pos)
+{
+	m_contextMenu->popup(view_log->mapToGlobal(pos));
+}
+
+void ProcessingDialog::contextMenuActionTriggered(void)
+{
+	QModelIndex index = view_log->indexAt(view_log->mapFromGlobal(m_contextMenu->pos()));
+	logViewDoubleClicked(index.isValid() ? index : view_log->currentIndex());
 }
 
 ////////////////////////////////////////////////////////////

@@ -132,6 +132,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_fileSystemModel = new QFileSystemModel();
 	m_fileSystemModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
 	m_fileSystemModel->setRootPath(m_fileSystemModel->rootPath());
+	m_fileSystemModel->installEventFilter(this);
 	outputFolderView->setModel(m_fileSystemModel);
 	outputFolderView->header()->setStretchLastSection(true);
 	outputFolderView->header()->hideSection(1);
@@ -391,6 +392,17 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
 	QMainWindow::resizeEvent(event);
 	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+	if(obj == m_fileSystemModel)
+	{
+		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+		QTimer::singleShot(0, this, SLOT(restoreCursor()));
+	}
+
+	return false;
 }
 
 ////////////////////////////////////////////////////////////
@@ -1110,4 +1122,12 @@ void MainWindow::playlistEnabledChanged(void)
 void MainWindow::saveToSourceFolderChanged(void)
 {
 	m_settings->outputToSourceDir(saveToSourceFolderCheckBox->isChecked());
+}
+
+/*
+ * Restore the override cursor
+ */
+void MainWindow::restoreCursor(void)
+{
+	QApplication::restoreOverrideCursor();
 }

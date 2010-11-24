@@ -36,10 +36,6 @@ public:
 	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag);
 	virtual QString extension(void);
 
-signals:
-	void statusUpdated(int progress);
-	void messageLogged(const QString &line);
-
 private:
 	const QString m_binary;
 };

@@ -26,6 +26,7 @@
 #include <QUuid>
 
 class QMovie;
+class QMenu;
 class ProgressModel;
 class ProcessThread;
 class FileListModel;
@@ -47,6 +48,8 @@ private slots:
 	void processFinished(const QUuid &jobId, const QString &outFileName, bool success);
 	void progressModelChanged(void);
 	void logViewDoubleClicked(const QModelIndex &index);
+	void contextMenuTriggered(const QPoint &pos);
+	void contextMenuActionTriggered(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -66,6 +69,7 @@ private:
 	QMovie *m_progressIndicator;
 	ProgressModel *m_progressModel;
 	QStringList m_playList;
+	QMenu *m_contextMenu;
 	unsigned int m_runningThreads;
 	unsigned int m_currentFile;
 	unsigned int m_succeededFiles;

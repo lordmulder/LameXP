@@ -80,6 +80,7 @@ private slots:
 	void metaTagsEnabledChanged(void);
 	void playlistEnabledChanged(void);
 	void saveToSourceFolderChanged(void);
+	void restoreCursor(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -87,6 +88,7 @@ protected:
 	void dropEvent(QDropEvent *event);
 	void closeEvent(QCloseEvent *event);
 	void resizeEvent(QResizeEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event);
 
 private:
 	void addFiles(const QStringList &files);

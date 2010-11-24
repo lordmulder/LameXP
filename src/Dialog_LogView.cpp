@@ -23,6 +23,7 @@
 
 #include <QClipboard>
 #include <QFileDialog>
+#include <Windows.h>
 
 LogViewDialog::LogViewDialog(QWidget *parent)
 :
@@ -64,6 +65,7 @@ void LogViewDialog::copyButtonClicked(void)
 	mime->setData("text/plain", textEdit->toPlainText().toUtf8().constData());
 	QApplication::clipboard()->setMimeData(mime);
 	m_clipboardUsed = true;
+	MessageBeep(MB_ICONINFORMATION);
 }
 
 void LogViewDialog::saveButtonClicked(void)

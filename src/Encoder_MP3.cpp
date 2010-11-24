@@ -45,14 +45,10 @@ MP3Encoder::~MP3Encoder(void)
 
 bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
-	const QString baseName = QFileInfo(outputFile).fileName();
-	emit statusUpdated(0);
-	
 	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
-
+	const QString baseName = QFileInfo(outputFile).fileName();
 	QStringList args;
+
 	args << "--nohist";
 	args << "-h";
 		
@@ -86,11 +82,7 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 	args << QDir::toNativeSeparators(sourceFile.filePath());
 	args << QDir::toNativeSeparators(outputFile);
 
-	emit messageLogged(commandline2string(m_binary, args));
-	emit messageLogged(QString());
-
-	process.start(m_binary, args);
-	if(!process.waitForStarted())
+	if(!startProcess(process, m_binary, args))
 	{
 		return false;
 	}
@@ -106,6 +98,7 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 		{
 			process.kill();
 			bAborted = true;
+			emit messageLogged("ABORTED BY USER !!!");
 			break;
 		}
 		process.waitForReadyRead();
@@ -128,7 +121,7 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 			}
 			else if(!text.isEmpty())
 			{
-				emit messageLogged(text); //qDebug("%s", text.toUtf8().constData());
+				emit messageLogged(text);
 			}
 		}
 	}
@@ -139,6 +132,8 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 		process.kill();
 		process.waitForFinished(-1);
 	}
+	
+	emit messageLogged(QString().sprintf("\n--> Exited with code: 0x%08x", process.exitCode()));
 
 	if(bTimeout || bAborted || process.exitStatus() != QProcess::NormalExit)
 	{
