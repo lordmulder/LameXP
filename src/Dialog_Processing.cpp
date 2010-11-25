@@ -22,13 +22,14 @@
 #include "Dialog_Processing.h"
 
 #include "Global.h"
+#include "Resource.h"
 #include "Model_FileList.h"
 #include "Model_Progress.h"
 #include "Model_Settings.h"
 #include "Thread_Process.h"
-#include "Encoder_MP3.h"
 #include "Dialog_LogView.h"
-#include "Resource.h"
+#include "Encoder_MP3.h"
+#include "Encoder_Vorbis.h"
 
 #include <QApplication>
 #include <QRect>
@@ -90,7 +91,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	view_log->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
 	connect(m_progressModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
 	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
-	connect(view_log, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
+	connect(view_log, SIGNAL(activated(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
 
 	//Create context menu
 	m_contextMenu = new QMenu();
@@ -266,7 +267,7 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(m_userAborted)
 	{
-		label_progress->setText(QString("Process was aborted by the user after %1 files!").arg(QString::number(m_succeededFiles)));
+		label_progress->setText((m_succeededFiles > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededFiles)) : "Process was aborted prematurely by the user!");
 		QApplication::processEvents();
 		PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 	}
@@ -367,17 +368,27 @@ void ProcessingDialog::startNextJob(void)
 			encoder = mp3Encoder;
 		}
 		break;
+	case SettingsModel::VorbisEncoder:
+		{
+			VorbisEncoder *vorbisEncoder = new VorbisEncoder();
+			vorbisEncoder->setBitrate(m_settings->compressionBitrate());
+			vorbisEncoder->setRCMode(m_settings->compressionRCMode());
+			encoder = vorbisEncoder;
+		}
+		break;
 	default:
 		throw "Unsupported encoder!";
 	}
 
 	ProcessThread *thread = new ProcessThread(currentFile, (m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath(): m_settings->outputDir()), encoder);
 	m_threadList.append(thread);
+	
 	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateFinished(QUuid,QString,bool)), this, SLOT(processFinished(QUuid,QString,bool)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
+	
 	m_runningThreads++;
 	thread->start();
 }

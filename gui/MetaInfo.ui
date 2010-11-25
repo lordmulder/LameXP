@@ -316,6 +316,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -336,7 +338,7 @@
   </connection>
   <connection>
    <sender>tableView</sender>
-   <signal>doubleClicked(QModelIndex)</signal>
+   <signal>activated(QModelIndex)</signal>
    <receiver>editButton</receiver>
    <slot>click()</slot>
    <hints>

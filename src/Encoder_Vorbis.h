@@ -21,46 +21,24 @@
 
 #pragma once
 
-#include <QThread>
-#include <QUuid>
-
-#include "Model_AudioFile.h"
 #include "Encoder_Abstract.h"
 
-class QMutex;
+#include <QObject>
 
-class ProcessThread: public QThread
+class VorbisEncoder : public AbstractEncoder
 {
 	Q_OBJECT
 
 public:
-	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, AbstractEncoder *encoder);
-	~ProcessThread(void);
-	
-	void run();
-	
-	void abort() { m_aborted = true; }
-	QUuid getId() { return m_jobId; }
+	VorbisEncoder(void);
+	~VorbisEncoder(void);
 
-private slots:
-	void handleUpdate(int progress);
-	void handleMessage(const QString &line);
-
-signals:
-	void processStateInitialized(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
-	void processStateChanged(const QUuid &jobId, const QString &newStatus, int newState);
-	void processStateFinished(const QUuid &jobId, const QString &outFileName, bool success);
-	void processMessageLogged(const QUuid &jobId, const QString &line);
+	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
+	virtual QString extension(void);
 
 private:
-	void processFile();
-	QString generateOutFileName(void);
-	
-	const QUuid m_jobId;
-	AudioFileModel m_audioFile;
-	AbstractEncoder *m_encoder;
-	const QString m_outputDirectory;
-	volatile bool m_aborted;
-	
-	static QMutex *m_mutex_genFileName;
+	const QString m_binary_i386;
+	const QString m_binary_sse2;
+	const QString m_binary_x64;
 };

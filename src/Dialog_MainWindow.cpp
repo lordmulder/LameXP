@@ -522,9 +522,9 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 	
-	if(m_settings->compressionEncoder() != SettingsModel::MP3Encoder)
+	if(m_settings->compressionEncoder() != SettingsModel::MP3Encoder && m_settings->compressionEncoder() != SettingsModel::VorbisEncoder)
 	{
-		QMessageBox::warning(this, "LameXP", "Sorry, only Lame MP3 encoding is supported at the moment!");
+		QMessageBox::warning(this, "LameXP", "Sorry, only Lame MP3 and Ogg Vorbis encoding is supported at the moment.<br>Support for more encoders in later versions!");
 		tabWidget->setCurrentIndex(3);
 		return;
 	}
@@ -1163,11 +1163,45 @@ void MainWindow::sourceFilesContextMenu(const QPoint &pos)
  */
 void MainWindow::previewContextActionTriggered(void)
 {
+	const static char *appNames[3] = {"smplayer_portable.exe", "smplayer.exe", "mplayer.exe"};
+	const static wchar_t *registryKey = L"SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{DB9E4EAB-2717-499F-8D56-4CC8A644AB60}";
+	
 	QModelIndex index = sourceFileView->currentIndex();
-	if(index.isValid())
+	if(!index.isValid())
 	{
-		QDesktopServices::openUrl(QString("file:///").append(m_fileListModel->getFile(index).filePath()));
+		return;
 	}
+
+	QString mplayerPath;
+	HKEY registryKeyHandle;
+
+	if(RegOpenKeyExW(HKEY_LOCAL_MACHINE, registryKey, 0, KEY_READ, &registryKeyHandle) == ERROR_SUCCESS)
+	{
+		wchar_t Buffer[4096];
+		DWORD BuffSize = sizeof(wchar_t*) * 4096;
+		if(RegQueryValueExW(registryKeyHandle, L"InstallLocation", 0, 0, reinterpret_cast<BYTE*>(Buffer), &BuffSize) == ERROR_SUCCESS)
+		{
+			mplayerPath = QString::fromUtf16(reinterpret_cast<const unsigned short*>(Buffer));
+		}
+	}
+
+	if(!mplayerPath.isEmpty())
+	{
+		QDir mplayerDir(mplayerPath);
+		if(mplayerDir.exists())
+		{
+			for(int i = 0; i < 3; i++)
+			{
+				if(mplayerDir.exists(appNames[i]))
+				{
+					QProcess::startDetached(mplayerDir.absoluteFilePath(appNames[i]), QStringList() << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
+					return;
+				}
+			}
+		}
+	}
+	
+	QDesktopServices::openUrl(QString("file:///").append(m_fileListModel->getFile(index).filePath()));
 }
 
 /*

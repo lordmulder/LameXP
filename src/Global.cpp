@@ -294,13 +294,21 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 	lamexp_cpu_t features;
 	SYSTEM_INFO systemInfo;
 	int CPUInfo[4] = {-1};
+	char CPUIdentificationString[0x40];
 	char CPUBrandString[0x40];
 	
 	memset(&features, 0, sizeof(lamexp_cpu_t));
 	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
+	memset(CPUIdentificationString, 0, sizeof(CPUIdentificationString));
 	memset(CPUBrandString, 0, sizeof(CPUBrandString));
 	
 	__cpuid(CPUInfo, 0);
+	memcpy(CPUIdentificationString, &CPUInfo[1], sizeof(int));
+	memcpy(CPUIdentificationString + 4, &CPUInfo[3], sizeof(int));
+	memcpy(CPUIdentificationString + 8, &CPUInfo[2], sizeof(int));
+	features.intel = (_stricmp(CPUIdentificationString, "GenuineIntel") == 0);
+	strcpy_s(features.vendor, 0x40, CPUIdentificationString);
+
 	if(CPUInfo[0] >= 1)
 	{
 		__cpuid(CPUInfo, 1);

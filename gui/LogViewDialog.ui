@@ -209,7 +209,7 @@
         <number>10</number>
        </property>
        <property name="spacing">
-        <number>6</number>
+        <number>8</number>
        </property>
        <item row="0" column="0" colspan="4">
         <widget class="QPlainTextEdit" name="textEdit">
@@ -281,6 +281,9 @@
           <font>
            <family>Lucida Console</family>
           </font>
+         </property>
+         <property name="cursor" stdset="0">
+          <cursorShape>ArrowCursor</cursorShape>
          </property>
          <property name="plainText">
           <string>C:\DOS
@@ -365,6 +368,8 @@ RUN\DOS\RUN
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
  </resources>

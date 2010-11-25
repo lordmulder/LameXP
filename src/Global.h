@@ -50,8 +50,11 @@ typedef struct
 	bool sse2;
 	bool sse3;
 	bool ssse3;
+	char vendor[0x40];
 	char brand[0x40];
-} lamexp_cpu_t;
+	bool intel;
+}
+lamexp_cpu_t;
 
 //LameXP version info
 unsigned int lamexp_version_major(void);

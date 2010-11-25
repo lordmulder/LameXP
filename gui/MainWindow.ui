@@ -1355,6 +1355,12 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1407,7 +1413,7 @@
   </connection>
   <connection>
    <sender>sourceFileView</sender>
-   <signal>doubleClicked(QModelIndex)</signal>
+   <signal>activated(QModelIndex)</signal>
    <receiver>buttonShowDetails</receiver>
    <slot>click()</slot>
    <hints>
@@ -1598,22 +1604,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>metaDataView</sender>
-   <signal>doubleClicked(QModelIndex)</signal>
-   <receiver>buttonEditMeta</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>336</x>
-     <y>237</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>596</x>
-     <y>404</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>writeMetaDataCheckBox</sender>
    <signal>clicked(bool)</signal>
    <receiver>buttonClearMeta</receiver>
@@ -1641,6 +1631,22 @@
     </hint>
     <hint type="destinationlabel">
      <x>70</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metaDataView</sender>
+   <signal>activated(QModelIndex)</signal>
+   <receiver>buttonEditMeta</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>65</x>
      <y>79</y>
     </hint>
    </hints>

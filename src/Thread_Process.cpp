@@ -67,6 +67,22 @@ ProcessThread::~ProcessThread(void)
 
 void ProcessThread::run()
 {
+	try
+	{
+		processFile();
+	}
+	catch(...)
+	{
+		fflush(stdout);
+		fflush(stderr);
+		fprintf(stderr, "\nEXCEPTION ERROR !!!\n");
+		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+		TerminateProcess(GetCurrentProcess(), -1);
+	}
+}
+
+void ProcessThread::processFile()
+{
 	m_aborted = false;
 
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
@@ -169,7 +185,7 @@ QString ProcessThread::generateOutFileName(void)
 		writeTest.remove();
 	}
 
-	QString outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), baseName, "mp3");
+	QString outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), baseName, m_encoder->extension());
 	while(QFileInfo(outFileName).exists())
 	{
 		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), baseName, QString::number(++n), m_encoder->extension());

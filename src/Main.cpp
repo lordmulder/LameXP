@@ -66,6 +66,7 @@ int lamexp_main(int argc, char* argv[])
 	
 	//Detect CPU capabilities
 	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
+	qDebug("   CPU vendor id  :  %s (Intel: %d)", cpuFeatures.vendor, (cpuFeatures.intel ? 1 : 0));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
 	qDebug("   CPU signature  :  Family: %d, Model: %d, Stepping: %d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
 	qDebug("CPU capabilities  :  MMX: %s, SSE: %s, SSE2: %s, SSE3: %s, SSSE3: %s, x64: %s", LAMEXP_BOOL(cpuFeatures.mmx), LAMEXP_BOOL(cpuFeatures.sse), LAMEXP_BOOL(cpuFeatures.sse2), LAMEXP_BOOL(cpuFeatures.sse3), LAMEXP_BOOL(cpuFeatures.ssse3), LAMEXP_BOOL(cpuFeatures.x64));
