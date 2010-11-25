@@ -37,6 +37,7 @@
 #include <QSystemSemaphore>
 #include <QMutex>
 #include <QTextCodec>
+#include <QLibrary>
 
 //LameXP includes
 #include "Resource.h"
@@ -284,10 +285,20 @@ void lamexp_init_console(int argc, char* argv[])
  */
 lamexp_cpu_t lamexp_detect_cpu_features(void)
 {
-	lamexp_cpu_t features;
-	memset(&features, 0, sizeof(lamexp_cpu_t));
+	typedef BOOL (WINAPI *IsWow64ProcessFun)(__in HANDLE hProcess, __out PBOOL Wow64Process);
+	typedef VOID (WINAPI *GetNativeSystemInfoFun)(__out LPSYSTEM_INFO lpSystemInfo);
+	
+	static IsWow64ProcessFun IsWow64ProcessPtr = NULL;
+	static GetNativeSystemInfoFun GetNativeSystemInfoPtr = NULL;
 
+	lamexp_cpu_t features;
+	SYSTEM_INFO systemInfo;
 	int CPUInfo[4] = {-1};
+	char CPUBrandString[0x40];
+	
+	memset(&features, 0, sizeof(lamexp_cpu_t));
+	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
+	memset(CPUBrandString, 0, sizeof(CPUBrandString));
 	
 	__cpuid(CPUInfo, 0);
 	if(CPUInfo[0] >= 1)
@@ -304,8 +315,6 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 		features.family = ((CPUInfo[0] >> 8) & 0xf) + ((CPUInfo[0] >> 20) & 0xff);
 	}
 
-	char CPUBrandString[0x40];
-	memset(CPUBrandString, 0, sizeof(CPUBrandString));
 	__cpuid(CPUInfo, 0x80000000);
 	int nExIds = CPUInfo[0];
 
@@ -319,20 +328,35 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 
 	strcpy_s(features.brand, 0x40, CPUBrandString);
 
-#if defined(_M_X64 ) || defined(_M_IA64)
-	features.x64 = true;
-#else
-	BOOL x64 = FALSE;
-	if(IsWow64Process(GetCurrentProcess(), &x64))
+#if !defined(_M_X64 ) && !defined(_M_IA64)
+	if(!IsWow64ProcessPtr || !GetNativeSystemInfoPtr)
 	{
-		features.x64 = x64;
+		QLibrary Kernel32Lib("kernel32.dll");
+		IsWow64ProcessPtr = (IsWow64ProcessFun) Kernel32Lib.resolve("IsWow64Process");
+		GetNativeSystemInfoPtr = (GetNativeSystemInfoFun) Kernel32Lib.resolve("GetNativeSystemInfo");
 	}
-#endif
-
-	SYSTEM_INFO systemInfo;
-	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
+	if(IsWow64ProcessPtr)
+	{
+		BOOL x64 = FALSE;
+		if(IsWow64ProcessPtr(GetCurrentProcess(), &x64))
+		{
+			features.x64 = x64;
+		}
+	}
+	if(GetNativeSystemInfoPtr)
+	{
+		GetNativeSystemInfoPtr(&systemInfo);
+	}
+	else
+	{
+		GetSystemInfo(&systemInfo);
+	}
+	features.count = systemInfo.dwNumberOfProcessors;
+#else
 	GetNativeSystemInfo(&systemInfo);
 	features.count = systemInfo.dwNumberOfProcessors;
+	features.x64 = true;
+#endif
 
 	return features;
 }
@@ -340,15 +364,15 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 /*
  * Check for debugger
  */
-void WINAPI debugThreadProc(__in  LPVOID lpParameter)
+void WINAPI debugThreadProc(__in LPVOID lpParameter)
 {
 	BOOL remoteDebuggerPresent = FALSE;
-	CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
+	//CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
 
 	while(!IsDebuggerPresent() && !remoteDebuggerPresent)
 	{
 		Sleep(333);
-		CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
+		//CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
 	}
 	
 	TerminateProcess(GetCurrentProcess(), -1);

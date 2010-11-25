@@ -25,6 +25,7 @@
 #include <QProcess>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QLibrary>
 #include <Windows.h>
 
 #define max(a,b) (((a) > (b)) ? (a) : (b))
@@ -35,6 +36,12 @@ HANDLE AbstractEncoder::m_handle_jobObject = NULL;
 
 AbstractEncoder::AbstractEncoder(void)
 {
+	typedef HANDLE (WINAPI *CreateJobObjectFun)(__in_opt LPSECURITY_ATTRIBUTES lpJobAttributes, __in_opt LPCSTR lpName);
+	typedef BOOL (WINAPI *SetInformationJobObjectFun)(__in HANDLE hJob, __in JOBOBJECTINFOCLASS JobObjectInformationClass, __in_bcount(cbJobObjectInformationLength) LPVOID lpJobObjectInformation, __in DWORD cbJobObjectInformationLength);
+
+	static CreateJobObjectFun CreateJobObjectPtr = NULL;
+	static SetInformationJobObjectFun SetInformationJobObjectPtr = NULL;
+
 	if(!m_mutex_startProcess)
 	{
 		m_mutex_startProcess = new QMutex();
@@ -42,13 +49,26 @@ AbstractEncoder::AbstractEncoder(void)
 
 	if(!m_handle_jobObject)
 	{
-		m_handle_jobObject = CreateJobObject(NULL, NULL);
-		if(m_handle_jobObject)
+		if(!CreateJobObjectPtr || !SetInformationJobObjectPtr)
 		{
-			JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobExtendedLimitInfo;
-			memset(&jobExtendedLimitInfo, 0, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
-			jobExtendedLimitInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE | JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
-			SetInformationJobObject(m_handle_jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
+			QLibrary Kernel32Lib("kernel32.dll");
+			CreateJobObjectPtr = (CreateJobObjectFun) Kernel32Lib.resolve("CreateJobObjectA");
+			SetInformationJobObjectPtr = (SetInformationJobObjectFun) Kernel32Lib.resolve("SetInformationJobObject");
+		}
+		if(CreateJobObjectPtr && SetInformationJobObjectPtr)
+		{
+			m_handle_jobObject = CreateJobObjectPtr(NULL, NULL);
+			if(m_handle_jobObject == INVALID_HANDLE_VALUE)
+			{
+				m_handle_jobObject = NULL;
+			}
+			if(m_handle_jobObject)
+			{
+				JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobExtendedLimitInfo;
+				memset(&jobExtendedLimitInfo, 0, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
+				jobExtendedLimitInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE | JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
+				SetInformationJobObjectPtr(m_handle_jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
+			}
 		}
 	}
 
@@ -73,10 +93,19 @@ void AbstractEncoder::setRCMode(int mode) { m_configRCMode = max(0, mode); }
 
 bool AbstractEncoder::startProcess(QProcess &process, const QString &program, const QStringList &args)
 {
+	typedef BOOL (WINAPI *AssignProcessToJobObjectFun)(__in HANDLE hJob, __in HANDLE hProcess);
+	static AssignProcessToJobObjectFun AssignProcessToJobObjectPtr = NULL;
+	
 	QMutexLocker lock(m_mutex_startProcess);
 	
 	emit messageLogged(commandline2string(program, args) + "\n");
 
+	if(!AssignProcessToJobObjectPtr)
+	{
+		QLibrary Kernel32Lib("kernel32.dll");
+		AssignProcessToJobObjectPtr = (AssignProcessToJobObjectFun) Kernel32Lib.resolve("AssignProcessToJobObject");
+	}
+	
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
 	process.start(program, args);
@@ -84,8 +113,14 @@ bool AbstractEncoder::startProcess(QProcess &process, const QString &program, co
 	if(process.waitForStarted())
 	{
 		
-		AssignProcessToJobObject(m_handle_jobObject, process.pid()->hProcess);
-		SetPriorityClass(process.pid()->hProcess, BELOW_NORMAL_PRIORITY_CLASS);
+		if(AssignProcessToJobObjectPtr)
+		{
+			AssignProcessToJobObjectPtr(m_handle_jobObject, process.pid()->hProcess);
+		}
+		if(!SetPriorityClass(process.pid()->hProcess, BELOW_NORMAL_PRIORITY_CLASS))
+		{
+			SetPriorityClass(process.pid()->hProcess, IDLE_PRIORITY_CLASS);
+		}
 		lock.unlock();
 		emit statusUpdated(0);
 		return true;

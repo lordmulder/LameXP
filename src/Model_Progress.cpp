@@ -154,7 +154,7 @@ void ProgressModel::appendToLog(const QUuid &jobId, const QString &line)
 {
 	if(m_jobList.contains(jobId))
 	{
-		m_jobLogFile[jobId].append(line);
+		m_jobLogFile[jobId].append(line.split('\n'));
 	}
 }
 

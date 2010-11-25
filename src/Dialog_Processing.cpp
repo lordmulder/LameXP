@@ -146,6 +146,11 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 	button_closeDialog->setEnabled(false);
 	button_AbortProcess->setEnabled(false);
 
+	if(!SetPriorityClass(GetCurrentProcess(), ABOVE_NORMAL_PRIORITY_CLASS))
+	{
+		SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
+	}
+
 	QTimer::singleShot(1000, this, SLOT(initEncoding()));
 }
 
@@ -305,7 +310,7 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 	{
 		const QStringList &logFile = m_progressModel->getLogFile(index);
 		LogViewDialog *logView = new LogViewDialog(this);
-		logView->setWindowTitle(QString("LameXP - %1").arg(m_progressModel->data(index, Qt::DisplayRole).toString()));
+		logView->setWindowTitle(QString("LameXP - [%1]").arg(m_progressModel->data(index, Qt::DisplayRole).toString()));
 		logView->exec(logFile);
 		LAMEXP_DELETE(logView);
 	}

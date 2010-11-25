@@ -98,7 +98,7 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("ABORTED BY USER !!!");
+			emit messageLogged("\nABORTED BY USER !!!");
 			break;
 		}
 		process.waitForReadyRead();
@@ -133,7 +133,7 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 		process.waitForFinished(-1);
 	}
 	
-	emit messageLogged(QString().sprintf("\n--> Exited with code: 0x%08x", process.exitCode()));
+	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
 
 	if(bTimeout || bAborted || process.exitStatus() != QProcess::NormalExit)
 	{
