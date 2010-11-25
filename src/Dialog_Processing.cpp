@@ -28,6 +28,7 @@
 #include "Thread_Process.h"
 #include "Encoder_MP3.h"
 #include "Dialog_LogView.h"
+#include "Resource.h"
 
 #include <QApplication>
 #include <QRect>
@@ -265,16 +266,22 @@ void ProcessingDialog::doneEncoding(void)
 	if(m_userAborted)
 	{
 		label_progress->setText(QString("Process was aborted by the user after %1 files!").arg(QString::number(m_succeededFiles)));
+		QApplication::processEvents();
+		PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 	}
 	else
 	{
 		if(m_failedFiles)
 		{
 			label_progress->setText(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedFiles), QString::number(m_failedFiles + m_succeededFiles)));
+			QApplication::processEvents();
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
 		else
 		{
 			label_progress->setText("Alle files completed successfully.");
+			QApplication::processEvents();
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_SUCCESS), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
 	}
 	

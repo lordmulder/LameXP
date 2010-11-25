@@ -26,6 +26,9 @@
  */
 #define IDI_ICON1                       106
 #define IDR_WAVE_ABOUT                  666
+#define IDR_WAVE_SUCCESS                667
+#define IDR_WAVE_ERROR                  668
+#define IDR_WAVE_ABORTED                669
 
 /*
  * Next default values for new objects
