@@ -23,10 +23,8 @@
 
 #include "../tmp/UIC_MainWindow.h"
 
-//#include "Model_FileList.h"
-
 //Class declarations
-class QFileSystemModel;
+class QFileSystemModelEx;
 class WorkingBanner;
 class MessageHandlerThread;
 class AudioFileModel;
@@ -96,7 +94,7 @@ private:
 	bool m_accepted;
 	bool m_firstTimeShown;
 	FileListModel *m_fileListModel;
-	QFileSystemModel *m_fileSystemModel;
+	QFileSystemModelEx *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;
 	QActionGroup *m_styleActionGroup;
 	QButtonGroup *m_encoderButtonGroup;

@@ -32,6 +32,7 @@
 #include "Model_MetaInfo.h"
 #include "Model_Settings.h"
 #include "Model_FileList.h"
+#include "Model_FileSystem.h"
 #include "Encoder_MP3.h"
 
 //Qt includes
@@ -129,8 +130,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(sourceModelChanged()));
 	
 	//Setup "Output" tab
-	m_fileSystemModel = new QFileSystemModel();
-	m_fileSystemModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+	m_fileSystemModel = new QFileSystemModelEx();
 	m_fileSystemModel->setRootPath(m_fileSystemModel->rootPath());
 	m_fileSystemModel->installEventFilter(this);
 	outputFolderView->setModel(m_fileSystemModel);
@@ -396,10 +396,10 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-	if(obj == m_fileSystemModel)
+	if(obj == m_fileSystemModel && QApplication::overrideCursor() == NULL)
 	{
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-		QTimer::singleShot(0, this, SLOT(restoreCursor()));
+		QTimer::singleShot(250, this, SLOT(restoreCursor()));
 	}
 
 	return false;
@@ -763,7 +763,7 @@ void MainWindow::makeFolderButtonClicked(void)
 {
 	ABORT_IF_BUSY;
 
-	QDir basePath(m_fileSystemModel->filePath(outputFolderView->currentIndex()));
+	QDir basePath(m_fileSystemModel->fileInfo(outputFolderView->currentIndex()).absoluteFilePath());
 	
 	bool bApplied = true;
 	QString folderName = QInputDialog::getText(this, "New Folder", "Enter the name of the new folder:", QLineEdit::Normal, "New folder", &bApplied, Qt::WindowStaysOnTopHint).simplified();
@@ -798,7 +798,7 @@ void MainWindow::makeFolderButtonClicked(void)
 		}
 		else
 		{
-			QMessageBox::warning(this, "Failed to create folder", QString("The folder '%1' could not be created!").arg(newFolder));
+			QMessageBox::warning(this, "Failed to create folder", QString("The new folder could not be created:<br><nobr>%1</nobr><br><br>Drive is read-only or insufficient access rights!").arg(basePath.absoluteFilePath(newFolder)));
 		}
 	}
 }

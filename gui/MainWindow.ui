@@ -361,7 +361,7 @@
             <item>
              <widget class="QCheckBox" name="saveToSourceFolderCheckBox">
               <property name="text">
-               <string>Save output files to the same location where the input file is loacated</string>
+               <string>Save output files to the same location where the input file is located</string>
               </property>
              </widget>
             </item>
@@ -1315,6 +1315,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

@@ -182,7 +182,7 @@
           <item>
            <widget class="QLabel" name="label_headerStatus">
             <property name="text">
-             <string>&lt;b&gt;Encoding Files&lt;/b&gt;&lt;br&gt;Your files are being encoded, please be pateint...</string>
+             <string>&lt;b&gt;Encoding Files&lt;/b&gt;&lt;br&gt;Your files are being encoded, please be patient...</string>
             </property>
            </widget>
           </item>
@@ -418,6 +418,8 @@
   </layout>
  </widget>
  <resources>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
