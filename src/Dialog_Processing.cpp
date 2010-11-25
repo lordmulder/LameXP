@@ -264,13 +264,13 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(m_userAborted)
 	{
-		label_progress->setText("Process was aborted by the user!");
+		label_progress->setText(QString("Process was aborted by the user after %1 files!").arg(QString::number(m_succeededFiles)));
 	}
 	else
 	{
 		if(m_failedFiles)
 		{
-			label_progress->setText(QString("Error: %1 of %2 files failed. See the log for details!").arg(QString::number(m_failedFiles), QString::number(m_failedFiles + m_succeededFiles)));
+			label_progress->setText(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedFiles), QString::number(m_failedFiles + m_succeededFiles)));
 		}
 		else
 		{
@@ -282,6 +282,7 @@ void ProcessingDialog::doneEncoding(void)
 	button_closeDialog->setEnabled(true);
 	button_AbortProcess->setEnabled(false);
 
+	view_log->scrollToBottom();
 	m_progressIndicator->stop();
 	progressBar->setValue(100);
 }

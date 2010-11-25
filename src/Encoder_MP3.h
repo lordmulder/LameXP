@@ -34,6 +34,7 @@ public:
 	~MP3Encoder(void);
 
 	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual QString extension(void);
 
 private:

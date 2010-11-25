@@ -76,6 +76,15 @@ void ProcessThread::run()
 	if(outFileName.isEmpty())
 	{
 		emit processStateChanged(m_jobId, "Not found!", ProgressModel::JobFailed);
+		emit processStateFinished(m_jobId, outFileName, false);
+		return;
+	}
+
+	if(!m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
+	{
+		handleMessage(QString("The format of this file is NOT supported:\n%1\n\nContainer Format:\t%2\nAudio Format:\t%3").arg(m_audioFile.filePath(), m_audioFile.formatContainerInfo(), m_audioFile.formatAudioCompressInfo()));
+		emit processStateChanged(m_jobId, "Unsupported!", ProgressModel::JobFailed);
+		emit processStateFinished(m_jobId, outFileName, false);
 		return;
 	}
 
@@ -120,7 +129,19 @@ QString ProcessThread::generateOutFileName(void)
 	QFileInfo sourceFile(m_audioFile.filePath());
 	if(!sourceFile.exists() || !sourceFile.isFile())
 	{
+		handleMessage(QString("The source audio file could not be found:\n%1").arg(sourceFile.absoluteFilePath()));
 		return QString();
+	}
+
+	QFile readTest(sourceFile.canonicalFilePath());
+	if(!readTest.open(QIODevice::ReadOnly))
+	{
+		handleMessage(QString("The source audio file could not be opened for reading:\n%1").arg(readTest.fileName()));
+		return QString();
+	}
+	else
+	{
+		readTest.close();
 	}
 
 	QString baseName = sourceFile.completeBaseName();
@@ -131,10 +152,23 @@ QString ProcessThread::generateOutFileName(void)
 		targetDir.mkpath(".");
 		if(!targetDir.exists())
 		{
+			handleMessage(QString("The target output directory doesn't exist and could NOT be created:\n%1").arg(targetDir.absolutePath()));
 			return QString();
 		}
 	}
 	
+	QFile writeTest(QString("%1/%2").arg(targetDir.canonicalPath(), QUuid::createUuid().toString()));
+	if(!writeTest.open(QIODevice::ReadWrite))
+	{
+		handleMessage(QString("The target output directory is NOT writable:\n%1").arg(targetDir.absolutePath()));
+		return QString();
+	}
+	else
+	{
+		writeTest.close();
+		writeTest.remove();
+	}
+
 	QString outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), baseName, "mp3");
 	while(QFileInfo(outFileName).exists())
 	{

@@ -147,3 +147,29 @@ QString MP3Encoder::extension(void)
 {
 	return "mp3";
 }
+
+bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+{
+	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	{
+		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		{
+			return true;
+		}
+	}
+	else if(containerType.compare("MPEG Audio", Qt::CaseInsensitive) == 0)
+	{
+		if(formatType.compare("MPEG Audio", Qt::CaseInsensitive) == 0)
+		{
+			if(formatProfile.compare("Layer 3", Qt::CaseInsensitive) == 0 || formatProfile.compare("Layer 2", Qt::CaseInsensitive) == 0)
+			{
+				if(formatVersion.compare("Version 1", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0)
+				{
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}

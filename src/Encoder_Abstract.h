@@ -37,12 +37,16 @@ public:
 	AbstractEncoder(void);
 	~AbstractEncoder(void);
 
+	//Internal encoder API
 	virtual bool encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag) = 0;
+	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion) = 0;
 	virtual QString extension(void) = 0;
 
+	//Common setter methods
 	void setBitrate(int bitrate);
 	void setRCMode(int mode);
 
+	//Auxiliary functions
 	bool startProcess(QProcess &process, const QString &program, const QStringList &args);
 	static QString commandline2string(const QString &program, const QStringList &arguments);
 
