@@ -33,6 +33,7 @@ class SettingsModel;
 class QButtonGroup;
 class FileListModel;
 class AbstractEncoder;
+class QMenu;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -79,6 +80,9 @@ private slots:
 	void playlistEnabledChanged(void);
 	void saveToSourceFolderChanged(void);
 	void restoreCursor(void);
+	void sourceFilesContextMenu(const QPoint &pos);
+	void previewContextActionTriggered(void);
+	void findFileContextActionTriggered(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -107,4 +111,5 @@ private:
 	MetaInfoModel *m_metaInfoModel;
 	SettingsModel *m_settings;
 	QLabel *m_dropNoteLabel;
+	QMenu *m_sourceFilesContextMenu;
 };

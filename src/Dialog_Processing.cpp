@@ -254,6 +254,7 @@ void ProcessingDialog::doneEncoding(void)
 		return;
 	}
 
+	QApplication::setOverrideCursor(Qt::WaitCursor);
 	qDebug("Running jobs: %u", m_runningThreads);
 
 	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir())
@@ -292,6 +293,8 @@ void ProcessingDialog::doneEncoding(void)
 	view_log->scrollToBottom();
 	m_progressIndicator->stop();
 	progressBar->setValue(100);
+
+	QApplication::restoreOverrideCursor();
 }
 
 void ProcessingDialog::processFinished(const QUuid &jobId, const QString &outFileName, bool success)

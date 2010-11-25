@@ -252,6 +252,9 @@
             </item>
             <item>
              <widget class="QTreeView" name="outputFolderView">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
               <property name="alternatingRowColors">
                <bool>true</bool>
               </property>
@@ -1315,6 +1318,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

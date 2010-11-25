@@ -54,6 +54,7 @@
 #include <QWindowsMime>
 #include <QProcess>
 #include <QUuid>
+#include <QProcessEnvironment>
 
 //Win32 includes
 #include <Windows.h>
@@ -63,7 +64,6 @@
 #define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, COLOR); WIDGET->setPalette(_palette); }
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
-
 
 //Helper class
 class Index: public QObjectUserData
@@ -114,11 +114,17 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	sourceFileView->setModel(m_fileListModel);
 	sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	sourceFileView->setContextMenuPolicy(Qt::CustomContextMenu);
 	m_dropNoteLabel = new QLabel(sourceFileView);
 	m_dropNoteLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	m_dropNoteLabel->setText("» You can drop in audio files here! «");
 	SET_FONT_BOLD(m_dropNoteLabel, true);
 	SET_TEXT_COLOR(m_dropNoteLabel, Qt::darkGray);
+	m_sourceFilesContextMenu = new QMenu();
+	QAction *showDetailsContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/zoom.png"), "Show Details");
+	QAction *previewContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/sound.png"), "Open File in External Application");
+	QAction *findFileContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_go.png"), "Browse File Location");
+	SET_FONT_BOLD(showDetailsContextAction, true);
 	connect(buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
 	connect(buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
 	connect(buttonClearFiles, SIGNAL(clicked()), this, SLOT(clearFilesButtonClicked()));
@@ -128,7 +134,11 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
 	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
 	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(sourceModelChanged()));
-	
+	connect(sourceFileView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(sourceFilesContextMenu(QPoint)));
+	connect(showDetailsContextAction, SIGNAL(triggered(bool)), this, SLOT(showDetailsButtonClicked()));
+	connect(previewContextAction, SIGNAL(triggered(bool)), this, SLOT(previewContextActionTriggered()));
+	connect(findFileContextAction, SIGNAL(triggered(bool)), this, SLOT(findFileContextActionTriggered()));
+
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModelEx();
 	m_fileSystemModel->setRootPath(m_fileSystemModel->rootPath());
@@ -140,8 +150,12 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->header()->hideSection(3);
 	outputFolderView->setHeaderHidden(true);
 	outputFolderView->setAnimated(true);
+	outputFolderView->installEventFilter(this);
+	outputFolderView->setMouseTracking(false);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
 	outputFolderViewClicked(outputFolderView->currentIndex());
 	connect(buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
@@ -284,6 +298,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_metaInfoModel);
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_encoderButtonGroup);
+	LAMEXP_DELETE(m_sourceFilesContextMenu);
 }
 
 ////////////////////////////////////////////////////////////
@@ -401,7 +416,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 		QTimer::singleShot(250, this, SLOT(restoreCursor()));
 	}
-
+	else if(obj == outputFolderView && (event->type() == QEvent::KeyRelease || event->type() == QEvent::KeyPress))
+	{
+		outputFolderViewClicked(outputFolderView->currentIndex());
+	}
 	return false;
 }
 
@@ -1130,4 +1148,48 @@ void MainWindow::saveToSourceFolderChanged(void)
 void MainWindow::restoreCursor(void)
 {
 	QApplication::restoreOverrideCursor();
+}
+
+/*
+ * Show context menu for source files
+ */
+void MainWindow::sourceFilesContextMenu(const QPoint &pos)
+{
+	m_sourceFilesContextMenu->popup(sourceFileView->mapToGlobal(pos));
+}
+
+/*
+ * Open selected file in external player
+ */
+void MainWindow::previewContextActionTriggered(void)
+{
+	QModelIndex index = sourceFileView->currentIndex();
+	if(index.isValid())
+	{
+		QDesktopServices::openUrl(QString("file:///").append(m_fileListModel->getFile(index).filePath()));
+	}
+}
+
+/*
+ * Find selected file in explorer
+ */
+void MainWindow::findFileContextActionTriggered(void)
+{
+	QModelIndex index = sourceFileView->currentIndex();
+	if(index.isValid())
+	{
+		QProcessEnvironment procEnv = QProcessEnvironment::systemEnvironment();
+		QString systemRootPath = procEnv.value("SystemRoot", procEnv.value("windir"));
+		if(!systemRootPath.isEmpty())
+		{
+			QFileInfo explorer(QString("%1/explorer.exe").arg(systemRootPath));
+			if(explorer.exists() && explorer.isFile())
+			{
+				QProcess::execute(explorer.canonicalFilePath(), QStringList() << "/select," << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
+				return;
+			}
+		}
+		qWarning("SystemRoot directory could not be detected!");
+		QProcess::execute("explorer.exe", QStringList() << "/select," << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
+	}
 }
