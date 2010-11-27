@@ -13,5 +13,6 @@
     <file>images/Cogwheels.png</file>
     <file>images/Qt.svg</file>
     <file>images/Working.gif</file>
+    <file>images/Wizard.png</file>
   </qresource>
 </RCC>

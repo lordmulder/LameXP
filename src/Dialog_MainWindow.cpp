@@ -27,6 +27,7 @@
 #include "Dialog_WorkingBanner.h"
 #include "Dialog_MetaInfo.h"
 #include "Dialog_About.h"
+#include "Dialog_Update.h"
 #include "Thread_FileAnalyzer.h"
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
@@ -854,17 +855,36 @@ void MainWindow::checkUpdatesActionActivated(void)
 {
 	ABORT_IF_BUSY;
 
-	m_banner->show("Checking for updates, please be patient...");
-	
-	for(int i = 0; i < 300; i++)
-	{
-		QApplication::processEvents();
-		Sleep(5);
-	}
-	
-	m_banner->close();
-	
-	QMessageBox::information(this, "Update Check", "Your version of LameXP is still up-to-date. There are no updates available.\nPlease remember to check for updates at regular intervals!");
+	UpdateDialog *updateDialog = new UpdateDialog(this);
+	updateDialog->exec();
+	LAMEXP_DELETE(updateDialog);
+
+	//m_banner->show("Checking for updates, please be patient...");
+	//
+	//for(int i = 0; i < 300; i++)
+	//{
+	//	QApplication::processEvents();
+	//	Sleep(5);
+	//}
+	//
+	//QNetworkAccessManager networkMgr;
+	//QNetworkReply *reply = networkMgr.get(QNetworkRequest(QUrl( "http://mulder.dummwiedeutsch.de/update.ver")));
+
+	//QEventLoop loop;
+	//connect(reply, SIGNAL(readyRead()), &loop, SLOT(quit()));
+	//connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop, SLOT(quit()));
+	//connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+
+	//while(!reply->isFinished())
+	//{
+	//	loop.exec(QEventLoop::ExcludeUserInputEvents);
+	//	QByteArray buffer = reply->readAll();
+	//	qDebug("%s", buffer.constData());
+	//}
+
+	//m_banner->close();
+	//
+	//QMessageBox::information(this, "Update Check", "Your version of LameXP is still up-to-date. There are no updates available.\nPlease remember to check for updates at regular intervals!");
 }
 
 /*

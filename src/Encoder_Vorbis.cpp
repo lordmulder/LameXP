@@ -156,6 +156,13 @@ bool VorbisEncoder::isFormatSupported(const QString &containerType, const QStrin
 			return true;
 		}
 	}
+	else if(containerType.compare("FLAC", Qt::CaseInsensitive) == 0)
+	{
+		if(formatType.compare("FLAC", Qt::CaseInsensitive) == 0)
+		{
+			return true;
+		}
+	}
 
 	return false;
 }
