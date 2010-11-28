@@ -25,6 +25,8 @@
 
 #include <QDialog>
 
+class UpdateInfo;
+
 class UpdateDialog : public QDialog, private Ui::UpdateDialog
 {
 	Q_OBJECT
@@ -34,12 +36,25 @@ public:
 	~UpdateDialog(void);
 
 private slots:
-	void updateCompleted(void);
+	void updateInit(void);
+	void checkForUpdates(void);
+	void linkActivated(const QString &link);
+	void applyUpdate(void);
 
 protected:
 	void showEvent(QShowEvent *event);
-
+	void closeEvent(QCloseEvent *event);
 
 private:
-	bool m_clipboardUsed;
+	bool tryUpdateMirror(UpdateInfo *updateInfo, const QString &url);
+	bool getFile(const QString &url, const QString &outFile);
+	bool checkSignature(const QString &file, const QString &signature);
+	bool parseVersionInfo(const QString &file, UpdateInfo *updateInfo);
+
+	UpdateInfo *m_updateInfo;
+	
+	const QString m_binaryWGet;
+	const QString m_binaryGnuPG;
+	const QString m_binaryUpdater;
+	const QString m_binaryKeys;
 };

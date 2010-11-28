@@ -5,6 +5,7 @@
     <file>tools/faad.exe</file>
     <file>tools/flac.exe</file>
     <file>tools/gpgv.exe</file>
+    <file>tools/gpgv.gpg</file>
     <file>tools/lame.exe</file>
     <file>tools/MAC.exe</file>
     <file>tools/mediainfo_icl11.exe</file>
