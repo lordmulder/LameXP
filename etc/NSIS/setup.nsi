@@ -35,6 +35,18 @@ ShowInstDetails show
 !define MUI_HEADERIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Header\orange.bmp"
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 
+VIAddVersionKey /LANG=${LANG_ENGLISH} "Author" "LoRd_MuldeR <mulder2@gmx.de>"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Free Software Foundation"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${LAMEXP_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright 2004-2010 LoRd_MuldeR"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" "GNU"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "LameXP - Audio Encoder Frontend"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "${LAMEXP_VERSION}, Build #${LAMEXP_BUILD} (${LAMEXP_DATE})"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "Website" "http://mulder.at.gg/"
+
 !include `UAC.nsh`
 !include `parameters.nsh`
 !include `${NSISDIR}\Contrib\zip2exe\Base.nsh`
@@ -63,7 +75,7 @@ Function .onInit
 FunctionEnd
 
 Function .onInstSuccess
-	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\LameXP.exe" "" "$INSTDIR" SW_SHOWNORMAL 
+	!insertmacro UAC_AsUser_Call Function LaunchApplication ${UAC_SYNCINSTDIR}
 FunctionEnd
 
 !insertmacro SECTION_BEGIN
@@ -85,4 +97,9 @@ Function CheckForUpdate
 
 	GetDlgItem $R1 $HWNDPARENT 1
 	SendMessage $R1 ${WM_SETTEXT} 0 "STR:Update"
+FunctionEnd
+
+Function LaunchApplication
+	ExecShell "explore" "$INSTDIR"
+	Exec '"$INSTDIR\LameXP.exe"'
 FunctionEnd
