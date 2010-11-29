@@ -120,6 +120,11 @@ REM ------------------------------------------
 attrib +R "%OUT_FILE%.zip"
 attrib +R "%OUT_FILE%.exe"
 REM ------------------------------------------
+REM :: CREATE SIGNATURE ::
+REM ------------------------------------------
+"%PATH_GNUPG1%\gpg.exe" --detach-sign "%OUT_FILE%.exe"
+attrib +R "%OUT_FILE%.exe.sig"
+REM ------------------------------------------
 echo.
 echo BUIDL COMPLETED SUCCESSFULLY :-)
 echo.

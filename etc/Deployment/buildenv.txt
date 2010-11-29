@@ -4,3 +4,4 @@
 #define PATH_MKNSIS "E:\NSIS"
 #define PATH_MSVC90 "D:\Microsoft Visual Studio 9.0"
 #define PATH_QTMSVC "E:\Qt\MSVC\4.7.1"
+#define PATH_GNUPG1 "E:\GnuPG"

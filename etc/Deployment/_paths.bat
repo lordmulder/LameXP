@@ -7,6 +7,7 @@ set "PATH_UPXBIN="
 set "PATH_MKNSIS="
 set "PATH_MSVC90="
 set "PATH_QTMSVC="
+set "PATH_GNUPG1="
 REM ------------------------------------------
 for /f "tokens=2,*" %%s in (buildenv.txt) do (
 	if "%%s"=="PATH_SEVENZ" set "PATH_SEVENZ=%%~t"
@@ -15,6 +16,7 @@ for /f "tokens=2,*" %%s in (buildenv.txt) do (
 	if "%%s"=="PATH_MKNSIS" set "PATH_MKNSIS=%%~t"
 	if "%%s"=="PATH_MSVC90" set "PATH_MSVC90=%%~t"
 	if "%%s"=="PATH_QTMSVC" set "PATH_QTMSVC=%%~t"
+	if "%%s"=="PATH_GNUPG1" set "PATH_GNUPG1=%%~t"
 )
 REM ------------------------------------------
 :: echo PATH_SEVENZ=%PATH_SEVENZ%
@@ -36,5 +38,6 @@ if not exist "%PATH_QTMSVC%\bin\qtvars.bat" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\uic.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\moc.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\rcc.exe" GOTO:EOF
+if not exist "%PATH_GNUPG1%\gpg.exe" GOTO:EOF
 REM ------------------------------------------
 set "LAMEXP_ERROR=0"
