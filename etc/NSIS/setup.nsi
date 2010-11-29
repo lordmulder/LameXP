@@ -35,17 +35,20 @@ ShowInstDetails show
 !define MUI_HEADERIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Header\orange.bmp"
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 
-VIAddVersionKey /LANG=${LANG_ENGLISH} "Author" "LoRd_MuldeR <mulder2@gmx.de>"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
-VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Free Software Foundation"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${LAMEXP_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright 2004-2010 LoRd_MuldeR"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" "GNU"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "LameXP - Audio Encoder Frontend"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "${LAMEXP_VERSION}, Build #${LAMEXP_BUILD} (${LAMEXP_DATE})"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "Website" "http://mulder.at.gg/"
+!searchreplace PRODUCT_VERSION_DATE "${LAMEXP_DATE}" "-" "."
+VIProductVersion "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD}"
+
+VIAddVersionKey "Author" "LoRd_MuldeR <mulder2@gmx.de>"
+VIAddVersionKey "Comments" "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+VIAddVersionKey "CompanyName" "Free Software Foundation"
+VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]"
+VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
+VIAddVersionKey "LegalCopyright" "Copyright 2004-2010 LoRd_MuldeR"
+VIAddVersionKey "LegalTrademarks" "GNU"
+VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
+VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"
+VIAddVersionKey "ProductVersion" "${LAMEXP_VERSION}, Build #${LAMEXP_BUILD} (${LAMEXP_DATE})"
+VIAddVersionKey "Website" "http://mulder.at.gg/"
 
 !include `UAC.nsh`
 !include `parameters.nsh`
