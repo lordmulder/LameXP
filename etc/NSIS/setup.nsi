@@ -1,3 +1,4 @@
+RequestExecutionLevel admin
 !define ZIP2EXE_NAME `LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]`
 !define ZIP2EXE_OUTFILE `${LAMEXP_OUTPUT_FILE}`
 !define ZIP2EXE_COMPRESSOR_LZMA
