@@ -80,12 +80,6 @@ int lamexp_main(int argc, char* argv[])
 	{
 		QDate expireDate = lamexp_version_date().addDays(14);
 		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(expireDate.toString(Qt::ISODate)).toLatin1().constData());
-		if(QDate::currentDate() >= expireDate)
-		{
-			qWarning("Binary has expired !!!");
-			QMessageBox::warning(NULL, "LameXP - Expired", QString("This demo (pre-release) version of LameXP has expired at %1.\nLameXP is free software and release versions won't expire.").arg(expireDate.toString()), "Exit Program");
-			return 0;
-		}
 	}
 
 	//Check for multiple instances of LameXP

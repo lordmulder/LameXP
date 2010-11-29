@@ -23,6 +23,8 @@
 
 #include "Global.h"
 #include "Resource.h"
+#include "Dialog_LogView.h"
+#include "Model_Settings.h"
 
 #include <QClipboard>
 #include <QFileDialog>
@@ -79,14 +81,17 @@ public:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-UpdateDialog::UpdateDialog(QWidget *parent)
+UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 :
 	QDialog(parent),
 	m_binaryWGet(lamexp_lookup_tool("wget.exe")),
 	m_binaryGnuPG(lamexp_lookup_tool("gpgv.exe")),
 	m_binaryUpdater(lamexp_lookup_tool("wupdate.exe")),
 	m_binaryKeys(lamexp_lookup_tool("gpgv.gpg")),
-	m_updateInfo(NULL)
+	m_updateInfo(NULL),
+	m_settings(settings),
+	m_logFile(new QStringList()),
+	m_success(false)
 {
 	if(m_binaryWGet.isEmpty() || m_binaryGnuPG.isEmpty() || m_binaryUpdater.isEmpty() || m_binaryKeys.isEmpty())
 	{
@@ -105,11 +110,13 @@ UpdateDialog::UpdateDialog(QWidget *parent)
 	connect(retryButton, SIGNAL(clicked()), this, SLOT(checkForUpdates()));
 	connect(installButton, SIGNAL(clicked()), this, SLOT(applyUpdate()));
 	connect(infoLabel, SIGNAL(linkActivated(QString)), this, SLOT(linkActivated(QString)));
+	connect(logButton, SIGNAL(clicked()), this, SLOT(logButtonClicked()));
 }
 
 UpdateDialog::~UpdateDialog(void)
 {
 	LAMEXP_DELETE(m_updateInfo);
+	LAMEXP_DELETE(m_logFile);
 }
 
 void UpdateDialog::showEvent(QShowEvent *event)
@@ -124,7 +131,9 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	installButton->setEnabled(false);
 	closeButton->setEnabled(false);
 	retryButton->setEnabled(false);
+	logButton->setEnabled(false);
 	retryButton->hide();
+	logButton->hide();
 	infoLabel->hide();
 	
 	for(int i = 0; mirrors[i]; i++)
@@ -157,11 +166,15 @@ void UpdateDialog::checkForUpdates(void)
 	installButton->setEnabled(false);
 	closeButton->setEnabled(false);
 	retryButton->setEnabled(false);
+	logButton->setEnabled(false);
 	if(infoLabel->isVisible()) infoLabel->hide();
 
 	QApplication::processEvents();
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
+	m_logFile->clear();
+	m_logFile->append("Checking for updates online...");
+	
 	for(int i = 0; mirrors[i]; i++)
 	{
 		progressBar->setValue(i+1);
@@ -177,15 +190,17 @@ void UpdateDialog::checkForUpdates(void)
 	if(!success)
 	{
 		if(!retryButton->isVisible()) retryButton->show();
+		if(!logButton->isVisible()) logButton->show();
 		closeButton->setEnabled(true);
 		retryButton->setEnabled(true);
-		statusLabel->setText("Failed to fetch update information. Check internet connection!");
+		logButton->setEnabled(true);
+		statusLabel->setText("Failed to fetch update information. Check your internet connection!");
 		progressBar->setValue(progressBar->maximum());
 		LAMEXP_DELETE(m_updateInfo);
-		PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		return;
 	}
-	
+
 	labelVersionLatest->setText(QString("Build %1 (%2)").arg(QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
 	infoLabel->show();
 	infoLabel->setText(QString("More information available at:<br><a href=\"%1\">%1</a>").arg(m_updateInfo->m_downloadSite));
@@ -210,39 +225,43 @@ void UpdateDialog::checkForUpdates(void)
 
 	closeButton->setEnabled(true);
 	if(retryButton->isVisible()) retryButton->hide();
+	if(logButton->isVisible()) logButton->hide();
 	progressBar->setValue(progressBar->maximum());
+
+	m_success = true;
 }
 
 bool UpdateDialog::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)
 {
 	bool success = false;
+	m_logFile->append(QStringList() << "" << "Trying mirror:" << url);
 	
 	QUuid uuid = QUuid::createUuid();
 	QString outFileVersionInfo = QString("%1/%2.ver").arg(QDir::tempPath(), uuid.toString());
 	QString outFileSignature = QString("%1/%2.sig").arg(QDir::tempPath(), uuid.toString());
 
-	qDebug("\nDownloading update info:");
+	m_logFile->append(QStringList() << "" << "Downloading update info:");
 	bool ok1 = getFile(QString("%1%2").arg(url,mirror_url_postfix), outFileVersionInfo);
 
-	qDebug("\nDownloading signature file:");
+	m_logFile->append(QStringList() << "" << "Downloading signature:");
 	bool ok2 = getFile(QString("%1%2.sig").arg(url,mirror_url_postfix), outFileSignature);
 
 	if(ok1 && ok2)
 	{
-		qDebug("\nDownload okay, checking signature:");
+		m_logFile->append(QStringList() << "" << "Download okay, checking signature:");
 		if(checkSignature(outFileVersionInfo, outFileSignature))
 		{
-			qDebug("\nSignature okay, parsing info:");
+			m_logFile->append(QStringList() << "" << "Signature okay, parsing info:");
 			success = parseVersionInfo(outFileVersionInfo, updateInfo);
 		}
 		else
 		{
-			qDebug("\nBad signature, take care!");
+			m_logFile->append(QStringList() << "" << "Bad signature, take care!");
 		}
 	}
 	else
 	{
-		qDebug("\nDownload has failed!");
+		m_logFile->append(QStringList() << "" << "Download has failed!");
 	}
 
 	QFile::remove(outFileVersionInfo);
@@ -286,11 +305,11 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile)
 		loop.exec();
 		while(process.canReadLine())
 		{
-			qDebug("WGet: %s", QString::fromLatin1(process.readLine()).simplified().toLatin1().constData());
+			m_logFile->append(QString::fromLatin1(process.readLine()).simplified());
 		}
 	}
 	
-	qDebug("WGet: Exited with code %d", process.exitCode());
+	m_logFile->append(QString().sprintf("Exited with code %d", process.exitCode()));
 	return (process.exitCode() == 0) && output.exists() && output.isFile();
 }
 
@@ -317,11 +336,11 @@ bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 		loop.exec();
 		while(process.canReadLine())
 		{
-			qDebug("GnuPG: %s", QString::fromLatin1(process.readLine()).simplified().toLatin1().constData());
+			m_logFile->append(QString::fromLatin1(process.readLine()).simplified());
 		}
 	}
 	
-	qDebug("GnuPG: Exited with code %d", process.exitCode());
+	m_logFile->append(QString().sprintf("Exited with code %d", process.exitCode()));
 	return (process.exitCode() == 0);
 }
 
@@ -345,13 +364,13 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 		QString line = QString::fromLatin1(data.readLine()).trimmed();
 		if(section.indexIn(line) >= 0)
 		{
-			qDebug("Section: '%s'", section.cap(1).toLatin1().constData());
+			m_logFile->append(QString("[%1]").arg(section.cap(1)));
 			inSection = (section.cap(1).compare(section_id, Qt::CaseInsensitive) == 0);
 			continue;
 		}
 		if(inSection && value.indexIn(line) >= 0)
 		{
-			qDebug("Value: '%s' ==> '%s'", value.cap(1).toLatin1().constData(), value.cap(2).toLatin1().constData());
+			m_logFile->append(QString("'%1' ==> '%2").arg(value.cap(1), value.cap(2)));
 			if(value.cap(1).compare("BuildNo", Qt::CaseInsensitive) == 0)
 			{
 				bool ok = false;
@@ -432,6 +451,7 @@ void UpdateDialog::applyUpdate(void)
 		{
 			statusLabel->setText("Update ready to install. Applicaion will quit...");
 			QApplication::quit();
+			accept();
 		}
 		else
 		{
@@ -441,4 +461,11 @@ void UpdateDialog::applyUpdate(void)
 
 	installButton->setEnabled(true);
 	closeButton->setEnabled(true);
+}
+
+void UpdateDialog::logButtonClicked(void)
+{
+	LogViewDialog *logView = new LogViewDialog(this);
+	logView->exec(*m_logFile);
+	LAMEXP_DELETE(logView);
 }

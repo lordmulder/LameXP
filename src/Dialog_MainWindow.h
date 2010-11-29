@@ -83,6 +83,8 @@ private slots:
 	void sourceFilesContextMenu(const QPoint &pos);
 	void previewContextActionTriggered(void);
 	void findFileContextActionTriggered(void);
+	void disableUpdateReminderActionTriggered(bool checked);
+	void disableSoundsActionTriggered(bool checked);
 
 protected:
 	void showEvent(QShowEvent *event);

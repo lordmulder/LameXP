@@ -1,13 +1,38 @@
+; ///////////////////////////////////////////////////////////////////////////////
+; // LameXP - Audio Encoder Front-End
+; // Copyright (C) 2004-2010 LoRd_MuldeR <MuldeR2@GMX.de>
+; //
+; // This program is free software; you can redistribute it and/or modify
+; // it under the terms of the GNU General Public License as published by
+; // the Free Software Foundation; either version 2 of the License, or
+; // (at your option) any later version.
+; //
+; // This program is distributed in the hope that it will be useful,
+; // but WITHOUT ANY WARRANTY; without even the implied warranty of
+; // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; // GNU General Public License for more details.
+; //
+; // You should have received a copy of the GNU General Public License along
+; // with this program; if not, write to the Free Software Foundation, Inc.,
+; // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+; //
+; // http://www.gnu.org/licenses/gpl-2.0.txt
+; ///////////////////////////////////////////////////////////////////////////////
+
+RequestExecutionLevel user
+BrandingText `Date created: ${LAMEXP_DATE}`
+ShowInstDetails show
+
 !define ZIP2EXE_NAME `LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]`
 !define ZIP2EXE_OUTFILE `${LAMEXP_OUTPUT_FILE}`
 !define ZIP2EXE_COMPRESSOR_LZMA
 !define ZIP2EXE_COMPRESSOR_SOLID
 !define ZIP2EXE_INSTALLDIR `$PROGRAMFILES\${ZIP2EXE_NAME}`
 
-RequestExecutionLevel user
-BrandingText `Date created: ${LAMEXP_DATE}`
-ShowInstDetails show
-
+!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Header\orange.bmp"
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 
 !include `UAC.nsh`
@@ -23,10 +48,10 @@ Function .onInit
 		${IfThen} $1 = 1 ${|} Quit ${|}
 		${IfThen} $3 <> 0 ${|} ${Break} ${|}
 		${If} $1 = 3
-			MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND "This installer requires admin access, please try again!" /SD IDNO IDOK UAC_TryAgain IDNO 0
+			MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND|MB_OKCANCEL "This installer requires admin access, please try again!" /SD IDCANCEL IDOK UAC_TryAgain
 		${EndIf}
 	${Case} 1223
-		MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND "This installer requires admin privileges, please try again!" /SD IDNO IDOK UAC_TryAgain IDNO 0
+		MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND|MB_OKCANCEL "This installer requires admin privileges, please try again!" /SD IDCANCEL IDOK UAC_TryAgain
 		Quit
 	${Case} 1062
 		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Logon service not running, aborting!"

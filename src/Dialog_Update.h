@@ -26,20 +26,24 @@
 #include <QDialog>
 
 class UpdateInfo;
+class SettingsModel;
 
 class UpdateDialog : public QDialog, private Ui::UpdateDialog
 {
 	Q_OBJECT
 
 public:
-	UpdateDialog(QWidget *parent = 0);
+	UpdateDialog(SettingsModel *settings, QWidget *parent = 0);
 	~UpdateDialog(void);
+
+	bool getSuccess(void) { return m_success; }
 
 private slots:
 	void updateInit(void);
 	void checkForUpdates(void);
 	void linkActivated(const QString &link);
 	void applyUpdate(void);
+	void logButtonClicked(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -52,9 +56,13 @@ private:
 	bool parseVersionInfo(const QString &file, UpdateInfo *updateInfo);
 
 	UpdateInfo *m_updateInfo;
+	QStringList *m_logFile;
+	SettingsModel *m_settings;
 	
 	const QString m_binaryWGet;
 	const QString m_binaryGnuPG;
 	const QString m_binaryUpdater;
 	const QString m_binaryKeys;
+
+	bool m_success;
 };

@@ -240,6 +240,12 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 	styleActionActivated(NULL);
 
+	//Activate tools menu actions
+	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
+	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
+	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
+	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
+		
 	//Activate help menu actions
 	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
 	connect(actionVisitHomepage, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
@@ -435,13 +441,14 @@ void MainWindow::windowShown(void)
 {
 	QStringList arguments = QApplication::arguments();
 
+	//Check license
 	if(m_settings->licenseAccepted() <= 0)
 	{
 		int iAccepted = -1;
 
 		if(m_settings->licenseAccepted() == 0)
 		{
-			AboutDialog *about = new AboutDialog(this, true);
+			AboutDialog *about = new AboutDialog(m_settings, this, true);
 			iAccepted = about->exec();
 			LAMEXP_DELETE(about);
 		}
@@ -457,6 +464,48 @@ void MainWindow::windowShown(void)
 		m_settings->licenseAccepted(1);
 	}
 	
+	//Check for expiration
+	if(lamexp_version_demo())
+	{
+		QDate expireDate = lamexp_version_date().addDays(14);
+		if(QDate::currentDate() >= expireDate)
+		{
+			qWarning("Binary has expired !!!");
+			if(QMessageBox::warning(this, "LameXP - Expired", QString("This demo (pre-release) version of LameXP has expired at %1.\nLameXP is free software and release versions won't expire.").arg(expireDate.toString(Qt::ISODate)), "Check for Updates", "Exit Program") == 0)
+			{
+				checkUpdatesActionActivated();
+			}
+			QApplication::quit();
+			return;
+		}
+	}
+
+	//Update reminder
+	if(QDate::currentDate() >= lamexp_version_date().addYears(1))
+	{
+		qWarning("Binary is more than a year old, time to update!");
+		if(QMessageBox::warning(this, "Urgent Update", "Your version of LameXP is more than a year old. Time for an update!", "Check for Updates", "Exit Program") == 0)
+		{
+			checkUpdatesActionActivated();
+		}
+		else
+		{
+			QApplication::quit();
+			return;
+		}
+	}
+	else if(m_settings->autoUpdateEnabled())
+	{
+		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
+		if(!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14))
+		{
+			if(QMessageBox::information(this, "Update Reminer", "Your last update check was more than 14 days ago. Check for updates now?", "Check for Updates", "Defer") == 0)
+			{
+				checkUpdatesActionActivated();
+			}
+		}
+	}
+
 	//Check for AAC support
 	if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
 	{
@@ -504,7 +553,7 @@ void MainWindow::windowShown(void)
 void MainWindow::aboutButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-	AboutDialog *aboutBox = new AboutDialog(this);
+	AboutDialog *aboutBox = new AboutDialog(m_settings, this);
 	aboutBox->exec();
 	LAMEXP_DELETE(aboutBox);
 }
@@ -855,36 +904,15 @@ void MainWindow::checkUpdatesActionActivated(void)
 {
 	ABORT_IF_BUSY;
 
-	UpdateDialog *updateDialog = new UpdateDialog(this);
+	UpdateDialog *updateDialog = new UpdateDialog(m_settings, this);
+
 	updateDialog->exec();
+	if(updateDialog->getSuccess())
+	{
+		m_settings->autoUpdateLastCheck(QDate::currentDate().toString(Qt::ISODate));
+	}
+
 	LAMEXP_DELETE(updateDialog);
-
-	//m_banner->show("Checking for updates, please be patient...");
-	//
-	//for(int i = 0; i < 300; i++)
-	//{
-	//	QApplication::processEvents();
-	//	Sleep(5);
-	//}
-	//
-	//QNetworkAccessManager networkMgr;
-	//QNetworkReply *reply = networkMgr.get(QNetworkRequest(QUrl( "http://mulder.dummwiedeutsch.de/update.ver")));
-
-	//QEventLoop loop;
-	//connect(reply, SIGNAL(readyRead()), &loop, SLOT(quit()));
-	//connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop, SLOT(quit()));
-	//connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-
-	//while(!reply->isFinished())
-	//{
-	//	loop.exec(QEventLoop::ExcludeUserInputEvents);
-	//	QByteArray buffer = reply->readAll();
-	//	qDebug("%s", buffer.constData());
-	//}
-
-	//m_banner->close();
-	//
-	//QMessageBox::information(this, "Update Check", "Your version of LameXP is still up-to-date. There are no updates available.\nPlease remember to check for updates at regular intervals!");
 }
 
 /*
@@ -1246,4 +1274,56 @@ void MainWindow::findFileContextActionTriggered(void)
 		qWarning("SystemRoot directory could not be detected!");
 		QProcess::execute("explorer.exe", QStringList() << "/select," << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
 	}
+}
+
+/*
+ * Disable update reminder action
+ */
+void MainWindow::disableUpdateReminderActionTriggered(bool checked)
+{
+	if(checked)
+	{
+		if(QMessageBox::Yes == QMessageBox::question(this, "Disable Update Reminder", "Do you really want to disable the update reminder?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		{
+			QMessageBox::information(this, "Update Reminder", "The update reminder has been disabled.<br>Please remember to check for updates at regular intervals!");
+			m_settings->autoUpdateEnabled(false);
+		}
+		else
+		{
+			m_settings->autoUpdateEnabled(true);
+		}
+	}
+	else
+	{
+			QMessageBox::information(this, "Update Reminder", "The update reminder has been re-enabled.");
+			m_settings->autoUpdateEnabled(true);
+	}
+
+	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
+}
+
+/*
+ * Disable sound effects action
+ */
+void MainWindow::disableSoundsActionTriggered(bool checked)
+{
+	if(checked)
+	{
+		if(QMessageBox::Yes == QMessageBox::question(this, "Disable Sound Effects", "Do you really want to disable all sound effects?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		{
+			QMessageBox::information(this, "Sound Effects", "All sound effects have been disabled.");
+			m_settings->soundsEnabled(false);
+		}
+		else
+		{
+			m_settings->soundsEnabled(true);
+		}
+	}
+	else
+	{
+			QMessageBox::information(this, "Sound Effects", "The sound effects have been re-enabled.");
+			m_settings->soundsEnabled(true);
+	}
+
+	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
 }

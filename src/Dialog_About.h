@@ -20,14 +20,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
+
 #include <QMessageBox>
+
+class SettingsModel;
 
 class AboutDialog : public QMessageBox
 {
 	Q_OBJECT
 
 public:
-	AboutDialog(QWidget *parent = 0, bool firstStart = false);
+	AboutDialog(SettingsModel *settings, QWidget *parent = 0, bool firstStart = false);
 	~AboutDialog(void);
 
 	static const char *neroAacUrl;
@@ -44,4 +47,5 @@ protected:
 
 private:
 	bool m_firstShow;
+	SettingsModel *m_settings;
 };

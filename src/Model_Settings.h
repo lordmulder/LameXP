@@ -71,6 +71,9 @@ public:
 	MAKE_OPTION_DEC3(outputToSourceDir);
 	MAKE_OPTION_DEC3(writeMetaTags);
 	MAKE_OPTION_DEC3(createPlaylist);
+	MAKE_OPTION_DEC2(autoUpdateLastCheck);
+	MAKE_OPTION_DEC3(autoUpdateEnabled);
+	MAKE_OPTION_DEC3(soundsEnabled);
 
 	//Misc
 	void validate(void);

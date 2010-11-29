@@ -23,6 +23,7 @@
 
 #include "Global.h"
 #include "Resource.h"
+#include "Model_Settings.h"
 
 //Qt includes
 #include <QDate>
@@ -46,8 +47,10 @@ const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-
 // Constructor
 ////////////////////////////////////////////////////////////
 
-AboutDialog::AboutDialog(QWidget *parent, bool firstStart)
-	: QMessageBox(parent)
+AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstStart)
+:
+	QMessageBox(parent),
+	m_settings(settings)
 {
 	QString aboutText;
 
@@ -125,7 +128,10 @@ AboutDialog::~AboutDialog(void)
 
 int AboutDialog::exec()
 {
-	PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+	if(m_settings->soundsEnabled())
+	{
+		PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+	}
 	
 	switch(QMessageBox::exec())
 	{
