@@ -25,7 +25,8 @@
 #include "Model_AudioFile.h"
 #include "Model_Progress.h"
 #include "Encoder_Abstract.h"
-
+#include "Decoder_Abstract.h"
+#include "Registry_Decoder.h"
 #include "Model_Settings.h"
 
 #include <QUuid>
@@ -58,10 +59,17 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 
 	connect(m_encoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 	connect(m_encoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
+
+	m_currentStep = UnknownStep;
 }
 
 ProcessThread::~ProcessThread(void)
 {
+	while(!m_tempFiles.isEmpty())
+	{
+		QFile::remove(m_tempFiles.takeFirst());
+	}
+
 	LAMEXP_DELETE(m_encoder);
 }
 
@@ -84,10 +92,12 @@ void ProcessThread::run()
 void ProcessThread::processFile()
 {
 	m_aborted = false;
+	bool bSuccess = true;
 
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
 	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), "Starting...", ProgressModel::JobRunning);
 
+	//Generate output file name
 	QString outFileName = generateOutFileName();
 	if(outFileName.isEmpty())
 	{
@@ -96,22 +106,53 @@ void ProcessThread::processFile()
 		return;
 	}
 
+	QString sourceFile = m_audioFile.filePath();
+
+	//Decode source file
 	if(!m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
 	{
-		handleMessage(QString("The format of this file is NOT supported:\n%1\n\nContainer Format:\t%2\nAudio Format:\t%3").arg(m_audioFile.filePath(), m_audioFile.formatContainerInfo(), m_audioFile.formatAudioCompressInfo()));
-		emit processStateChanged(m_jobId, "Unsupported!", ProgressModel::JobFailed);
-		emit processStateFinished(m_jobId, outFileName, false);
-		return;
+		m_currentStep = DecodingStep;
+		AbstractDecoder *decoder = DecoderRegistry::lookup(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion());
+		
+		if(decoder)
+		{
+			QString tempFile = generateTempFileName();
+
+			connect(decoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
+			connect(decoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
+
+			bSuccess = decoder->decode(sourceFile, tempFile, &m_aborted);
+
+			if(bSuccess)
+			{
+				sourceFile = tempFile;
+				handleMessage("\n-------------------------------\n");
+			}
+		}
+		else
+		{
+			handleMessage(QString("The format of this file is NOT supported:\n%1\n\nContainer Format:\t%2\nAudio Format:\t%3").arg(m_audioFile.filePath(), m_audioFile.formatContainerInfo(), m_audioFile.formatAudioCompressInfo()));
+			emit processStateChanged(m_jobId, "Unsupported!", ProgressModel::JobFailed);
+			emit processStateFinished(m_jobId, outFileName, false);
+			return;
+		}
 	}
 
-	bool bSuccess = m_encoder->encode(m_audioFile, outFileName, &m_aborted);
+	//Encode audio file
+	if(bSuccess)
+	{
+		m_currentStep = EncodingStep;
+		bSuccess = m_encoder->encode(sourceFile, m_audioFile, outFileName, &m_aborted);
+	}
 
+	//Make sure output file exists
 	if(bSuccess)
 	{
 		QFileInfo fileInfo(outFileName);
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
 	}
 
+	//Report result
 	emit processStateChanged(m_jobId, (bSuccess ? "Done." : (m_aborted ? "Aborted!" : "Failed!")), (bSuccess ? ProgressModel::JobComplete : ProgressModel::JobFailed));
 	emit processStateFinished(m_jobId, outFileName, bSuccess);
 
@@ -124,7 +165,15 @@ void ProcessThread::processFile()
 
 void ProcessThread::handleUpdate(int progress)
 {
-	emit processStateChanged(m_jobId, QString("Encoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+	switch(m_currentStep)
+	{
+	case EncodingStep:
+		emit processStateChanged(m_jobId, QString("Encoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+		break;
+	case DecodingStep:
+		emit processStateChanged(m_jobId, QString("Decoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+		break;
+	}
 }
 
 void ProcessThread::handleMessage(const QString &line)
@@ -198,6 +247,26 @@ QString ProcessThread::generateOutFileName(void)
 	}
 
 	return outFileName;
+}
+
+QString ProcessThread::generateTempFileName(void)
+{
+	QMutexLocker lock(m_mutex_genFileName);
+	QString tempFileName = QString("%1/%2.wav").arg(QDir::tempPath(), QUuid::createUuid().toString());
+
+	while(QFileInfo(tempFileName).exists())
+	{
+		tempFileName = QString("%1/%2.wav").arg(QDir::tempPath(), QUuid::createUuid().toString());
+	}
+
+	QFile file(tempFileName);
+	if(file.open(QFile::ReadWrite))
+	{
+		file.close();
+	}
+
+	m_tempFiles << tempFileName;
+	return tempFileName;
 }
 
 ////////////////////////////////////////////////////////////

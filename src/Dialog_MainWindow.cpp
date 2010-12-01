@@ -34,7 +34,6 @@
 #include "Model_Settings.h"
 #include "Model_FileList.h"
 #include "Model_FileSystem.h"
-#include "Encoder_MP3.h"
 
 //Qt includes
 #include <QMessageBox>

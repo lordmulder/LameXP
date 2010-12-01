@@ -27,11 +27,11 @@
 #include <QProcess>
 #include <QDir>
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
 #define IS_UNICODE(STR) (qstricmp(STR.toUtf8().constData(), QString::fromLocal8Bit(STR.toLocal8Bit()).toUtf8().constData()))
 
-MP3Encoder::MP3Encoder(void) : m_binary(lamexp_lookup_tool("lame.exe"))
+MP3Encoder::MP3Encoder(void)
+:
+	m_binary(lamexp_lookup_tool("lame.exe"))
 {
 	if(m_binary.isEmpty())
 	{
@@ -43,10 +43,9 @@ MP3Encoder::~MP3Encoder(void)
 {
 }
 
-bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
-	const QString baseName = QFileInfo(outputFile).fileName();
 	QStringList args;
 
 	args << "--nohist";
@@ -69,17 +68,17 @@ bool MP3Encoder::encode(const AudioFileModel &sourceFile, const QString &outputF
 		break;
 	}
 
-	if(!sourceFile.fileName().isEmpty()) args << (IS_UNICODE(sourceFile.fileName()) ? "--uTitle" : "--lTitle") << sourceFile.fileName();
-	if(!sourceFile.fileArtist().isEmpty()) args << (IS_UNICODE(sourceFile.fileArtist()) ? "--uArtist" : "--lArtist") << sourceFile.fileArtist();
-	if(!sourceFile.fileAlbum().isEmpty()) args << (IS_UNICODE(sourceFile.fileAlbum()) ? "--uAlbum" : "--lAlbum") << sourceFile.fileAlbum();
-	if(!sourceFile.fileGenre().isEmpty()) args << (IS_UNICODE(sourceFile.fileGenre()) ? "--uGenre" : "--lGenre") << sourceFile.fileGenre();
-	if(!sourceFile.fileComment().isEmpty()) args << (IS_UNICODE(sourceFile.fileComment()) ? "--uComment" : "--lComment") << sourceFile.fileComment();
-	if(sourceFile.fileYear()) args << "--ty" << QString::number(sourceFile.fileYear());
-	if(sourceFile.filePosition()) args << "--tn" << QString::number(sourceFile.filePosition());
+	if(!metaInfo.fileName().isEmpty()) args << (IS_UNICODE(metaInfo.fileName()) ? "--uTitle" : "--lTitle") << metaInfo.fileName();
+	if(!metaInfo.fileArtist().isEmpty()) args << (IS_UNICODE(metaInfo.fileArtist()) ? "--uArtist" : "--lArtist") << metaInfo.fileArtist();
+	if(!metaInfo.fileAlbum().isEmpty()) args << (IS_UNICODE(metaInfo.fileAlbum()) ? "--uAlbum" : "--lAlbum") << metaInfo.fileAlbum();
+	if(!metaInfo.fileGenre().isEmpty()) args << (IS_UNICODE(metaInfo.fileGenre()) ? "--uGenre" : "--lGenre") << metaInfo.fileGenre();
+	if(!metaInfo.fileComment().isEmpty()) args << (IS_UNICODE(metaInfo.fileComment()) ? "--uComment" : "--lComment") << metaInfo.fileComment();
+	if(metaInfo.fileYear()) args << "--ty" << QString::number(metaInfo.fileYear());
+	if(metaInfo.filePosition()) args << "--tn" << QString::number(metaInfo.filePosition());
 	
 	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 
-	args << QDir::toNativeSeparators(sourceFile.filePath());
+	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 
 	if(!startProcess(process, m_binary, args))

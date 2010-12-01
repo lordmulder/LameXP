@@ -23,6 +23,7 @@
 
 #include <QThread>
 #include <QUuid>
+#include <QStringList>
 
 #include "Model_AudioFile.h"
 #include "Encoder_Abstract.h"
@@ -53,14 +54,25 @@ signals:
 	void processMessageLogged(const QUuid &jobId, const QString &line);
 
 private:
+	enum ProcessStep
+	{
+		DecodingStep = 0,
+		FilteringStep = 1,
+		EncodingStep = 2,
+		UnknownStep = 3
+	};
+	
 	void processFile();
 	QString generateOutFileName(void);
+	QString generateTempFileName(void);
 	
 	const QUuid m_jobId;
 	AudioFileModel m_audioFile;
 	AbstractEncoder *m_encoder;
 	const QString m_outputDirectory;
 	volatile bool m_aborted;
+	ProcessStep m_currentStep;
+	QStringList m_tempFiles;
 	
 	static QMutex *m_mutex_genFileName;
 };

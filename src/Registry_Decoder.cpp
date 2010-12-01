@@ -19,24 +19,20 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include "Registry_Decoder.h"
 
-#include "Encoder_Abstract.h"
+#include "Decoder_Abstract.h"
+#include "Decoder_MP3.h"
+#include "Decoder_Vorbis.h"
 
-#include <QObject>
+#include <QString>
 
-class MP3Encoder : public AbstractEncoder
+#define PROBE_DECODER(DEC) if(DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
+
+AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	Q_OBJECT
+	PROBE_DECODER(MP3Decoder);
+	PROBE_DECODER(VorbisDecoder);
+	return NULL;
+}
 
-public:
-	MP3Encoder(void);
-	~MP3Encoder(void);
-
-	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	virtual QString extension(void);
-
-private:
-	const QString m_binary;
-};

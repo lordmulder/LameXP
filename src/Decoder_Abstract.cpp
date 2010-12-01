@@ -19,24 +19,21 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include "Decoder_Abstract.h"
 
-#include "Encoder_Abstract.h"
-
-#include <QObject>
-
-class MP3Encoder : public AbstractEncoder
+AbstractDecoder::AbstractDecoder(void)
 {
-	Q_OBJECT
+}
 
-public:
-	MP3Encoder(void);
-	~MP3Encoder(void);
+AbstractDecoder::~AbstractDecoder(void)
+{
+}
 
-	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	virtual QString extension(void);
+/*
+ * Default implementation
+ */
 
-private:
-	const QString m_binary;
-};
+bool AbstractDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+{
+	return false;
+}

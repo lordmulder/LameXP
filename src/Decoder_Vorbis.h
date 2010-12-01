@@ -21,21 +21,16 @@
 
 #pragma once
 
-#include "Encoder_Abstract.h"
+#include "Decoder_Abstract.h"
 
-#include <QObject>
-
-class MP3Encoder : public AbstractEncoder
+class VorbisDecoder : public AbstractDecoder
 {
-	Q_OBJECT
-
 public:
-	MP3Encoder(void);
-	~MP3Encoder(void);
+	VorbisDecoder(void);
+	~VorbisDecoder(void);
 
-	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	virtual QString extension(void);
+	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 
 private:
 	const QString m_binary;

@@ -47,7 +47,7 @@ VorbisEncoder::~VorbisEncoder(void)
 {
 }
 
-bool VorbisEncoder::encode(const AudioFileModel &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -68,18 +68,18 @@ bool VorbisEncoder::encode(const AudioFileModel &sourceFile, const QString &outp
 		break;
 	}
 
-	if(!sourceFile.fileName().isEmpty()) args << "-t" << sourceFile.fileName();
-	if(!sourceFile.fileArtist().isEmpty()) args << "-a" << sourceFile.fileArtist();
-	if(!sourceFile.fileAlbum().isEmpty()) args << "-l" << sourceFile.fileAlbum();
-	if(!sourceFile.fileGenre().isEmpty()) args << "-G" << sourceFile.fileGenre();
-	if(!sourceFile.fileComment().isEmpty()) args << "-c" << QString("comment=%1").arg(sourceFile.fileComment());
-	if(sourceFile.fileYear()) args << "-d" << QString::number(sourceFile.fileYear());
-	if(sourceFile.filePosition()) args << "-N" << QString::number(sourceFile.filePosition());
+	if(!metaInfo.fileName().isEmpty()) args << "-t" << metaInfo.fileName();
+	if(!metaInfo.fileArtist().isEmpty()) args << "-a" << metaInfo.fileArtist();
+	if(!metaInfo.fileAlbum().isEmpty()) args << "-l" << metaInfo.fileAlbum();
+	if(!metaInfo.fileGenre().isEmpty()) args << "-G" << metaInfo.fileGenre();
+	if(!metaInfo.fileComment().isEmpty()) args << "-c" << QString("comment=%1").arg(metaInfo.fileComment());
+	if(metaInfo.fileYear()) args << "-d" << QString::number(metaInfo.fileYear());
+	if(metaInfo.filePosition()) args << "-N" << QString::number(metaInfo.filePosition());
 	
 	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 
 	args << "-o" << QDir::toNativeSeparators(outputFile);
-	args << QDir::toNativeSeparators(sourceFile.filePath());
+	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, binary, args))
 	{

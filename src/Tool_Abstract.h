@@ -21,22 +21,28 @@
 
 #pragma once
 
-#include "Encoder_Abstract.h"
-
 #include <QObject>
 
-class MP3Encoder : public AbstractEncoder
+class QMutex;
+class QProcess;
+
+class AbstractTool : public QObject
 {
 	Q_OBJECT
 
 public:
-	MP3Encoder(void);
-	~MP3Encoder(void);
+	AbstractTool(void);
+	~AbstractTool(void);
+	
+	bool startProcess(QProcess &process, const QString &program, const QStringList &args);
+	static QString commandline2string(const QString &program, const QStringList &arguments);
+	static QString AbstractTool::pathToShort(const QString &longPath);
 
-	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	virtual QString extension(void);
+signals:
+	void statusUpdated(int progress);
+	void messageLogged(const QString &line);
 
 private:
-	const QString m_binary;
+	static QMutex *m_mutex_startProcess;
+	static void *m_handle_jobObject;
 };
