@@ -100,6 +100,6 @@ FunctionEnd
 
 Function .onInstSuccess
 	StrCpy $R0 "$INSTDIR"
-	UAC_AsUser_ExecShell "explore" "$R0" "" "" SW_SHOWNORMAL
-	UAC_AsUser_ExecShell "open" "$R0\LameXP.exe" "" "$OUTDIR" SW_SHOWNORMAL
+	!insertmacro UAC_AsUser_ExecShell "explore" "$R0" "" "" SW_SHOWNORMAL
+	!insertmacro UAC_AsUser_ExecShell "open" "$R0\LameXP.exe" "" "$OUTDIR" SW_SHOWNORMAL
 FunctionEnd

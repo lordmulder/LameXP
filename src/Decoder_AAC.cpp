@@ -46,8 +46,8 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	QProcess process;
 	QStringList args;
 
-	args << "-o" << QDir::toNativeSeparators(outputFile);
-	args << QDir::toNativeSeparators(sourceFile);
+	args << "-o" << pathToShort(QDir::toNativeSeparators(outputFile));
+	args << pathToShort(QDir::toNativeSeparators(sourceFile));
 
 	if(!startProcess(process, m_binary, args))
 	{
