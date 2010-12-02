@@ -19,21 +19,19 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Registry_Decoder.h"
+#pragma once
 
-#include "Decoder_AAC.h"
-#include "Decoder_MP3.h"
-#include "Decoder_Vorbis.h"
+#include "Decoder_Abstract.h"
 
-#include <QString>
-
-#define PROBE_DECODER(DEC) if(DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
-
-AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+class AACDecoder : public AbstractDecoder
 {
-	PROBE_DECODER(MP3Decoder);
-	PROBE_DECODER(VorbisDecoder);
-	PROBE_DECODER(AACDecoder);
-	return NULL;
-}
+public:
+	AACDecoder(void);
+	~AACDecoder(void);
 
+	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
+
+private:
+	const QString m_binary;
+};

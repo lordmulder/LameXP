@@ -47,6 +47,13 @@
 
 #include <Windows.h>
 
+#define CHANGE_BACKGROUND_COLOR(WIDGET, COLOR) \
+{ \
+	QPalette palette = WIDGET->palette(); \
+	palette.setColor(QPalette::Background, COLOR); \
+	WIDGET->setPalette(palette); \
+}
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -203,6 +210,7 @@ void ProcessingDialog::initEncoding(void)
 	m_userAborted = false;
 	m_playList.clear();
 	
+	CHANGE_BACKGROUND_COLOR(frame_header, QColor(Qt::white));
 	label_progress->setText("Encoding files, please wait...");
 	m_progressIndicator->start();
 	
@@ -223,6 +231,8 @@ void ProcessingDialog::abortEncoding(void)
 	m_userAborted = true;
 	button_AbortProcess->setEnabled(false);
 	
+	label_progress->setText("Aborted! Waiting for running jobs to terminate...");
+
 	for(int i = 0; i < m_threadList.count(); i++)
 	{
 		m_threadList.at(i)->abort();
@@ -232,9 +242,12 @@ void ProcessingDialog::abortEncoding(void)
 void ProcessingDialog::doneEncoding(void)
 {
 	m_runningThreads--;
-
 	progressBar->setValue(progressBar->value() + 1);
-	label_progress->setText(QString("Encoding: %1 files of %2 completed so far, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
+	
+	if(!m_userAborted)
+	{
+		label_progress->setText(QString("Encoding: %1 files of %2 completed so far, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
+	}
 	
 	int index = m_threadList.indexOf(dynamic_cast<ProcessThread*>(QWidget::sender()));
 	if(index >= 0)
@@ -267,6 +280,7 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(m_userAborted)
 	{
+		CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFF3BA"));
 		label_progress->setText((m_succeededFiles > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededFiles)) : "Process was aborted prematurely by the user!");
 		QApplication::processEvents();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
@@ -275,12 +289,14 @@ void ProcessingDialog::doneEncoding(void)
 	{
 		if(m_failedFiles)
 		{
+			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFBABA"));
 			label_progress->setText(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedFiles), QString::number(m_failedFiles + m_succeededFiles)));
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
 		else
 		{
+			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#D1FFD5"));
 			label_progress->setText("Alle files completed successfully.");
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_SUCCESS), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);

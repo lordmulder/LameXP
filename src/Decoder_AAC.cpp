@@ -19,7 +19,7 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Decoder_Vorbis.h"
+#include "Decoder_AAC.h"
 
 #include "Global.h"
 
@@ -27,26 +27,26 @@
 #include <QProcess>
 #include <QRegExp>
 
-VorbisDecoder::VorbisDecoder(void)
+AACDecoder::AACDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("oggdec.exe"))
+	m_binary(lamexp_lookup_tool("faad.exe"))
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing Vorbis decoder. Tool 'oggdec.exe' is not registred!";
+		throw "Error initializing AAC decoder. Tool 'faad.exe' is not registred!";
 	}
 }
 
-VorbisDecoder::~VorbisDecoder(void)
+AACDecoder::~AACDecoder(void)
 {
 }
 
-bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
 
-	args << "-w" << QDir::toNativeSeparators(outputFile);
+	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args))
@@ -57,7 +57,7 @@ bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile,
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	QRegExp regExp(" (\\d+)% decoded.");
+	QRegExp regExp("[^\\w](\\d+)%\\s+decoding\\s+");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -72,7 +72,7 @@ bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile,
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();
-			qWarning("OggDec process timed out <-- killing!");
+			qWarning("FAAD process timed out <-- killing!");
 			bTimeout = true;
 			break;
 		}
@@ -111,13 +111,19 @@ bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile,
 	return true;
 }
 
-bool VorbisDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool AACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("OGG", Qt::CaseInsensitive) == 0)
+	if(containerType.compare("ADTS", Qt::CaseInsensitive) == 0 || containerType.compare("MPEG-4", Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("Vorbis", Qt::CaseInsensitive) == 0)
+		if(formatType.compare("AAC", Qt::CaseInsensitive) == 0)
 		{
-			return true;
+			if(formatProfile.compare("LC", Qt::CaseInsensitive) == 0 || formatProfile.compare("HE", Qt::CaseInsensitive) == 0)
+			{
+				if(formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 4", Qt::CaseInsensitive) == 0)
+				{
+					return true;
+				}
+			}
 		}
 	}
 

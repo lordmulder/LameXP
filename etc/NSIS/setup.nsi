@@ -77,10 +77,6 @@ Function .onInit
 	${EndSwitch}
 FunctionEnd
 
-Function .onInstSuccess
-	!insertmacro UAC_AsUser_Call Function LaunchApplication ${UAC_SYNCINSTDIR}
-FunctionEnd
-
 !insertmacro SECTION_BEGIN
 	File /r `${LAMEXP_SOURCE_PATH}\*.*`
 !insertmacro SECTION_END
@@ -102,7 +98,8 @@ Function CheckForUpdate
 	SendMessage $R1 ${WM_SETTEXT} 0 "STR:Update"
 FunctionEnd
 
-Function LaunchApplication
-	ExecShell "explore" "$INSTDIR"
-	Exec '"$INSTDIR\LameXP.exe"'
+Function .onInstSuccess
+	StrCpy $R0 "$INSTDIR"
+	UAC_AsUser_ExecShell "explore" "$R0" "" "" SW_SHOWNORMAL
+	UAC_AsUser_ExecShell "open" "$R0\LameXP.exe" "" "$OUTDIR" SW_SHOWNORMAL
 FunctionEnd

@@ -41,7 +41,7 @@ struct lamexp_tool_t
 static const struct lamexp_tool_t g_lamexp_tools[] =
 {
 	{"153f4274702f3629093b561a31dbf50e2c146305", "alac.exe"},
-	{"09e5a07555a24b8c9d6af880b81eb8ed75be16fd", "faad.exe"},
+	{"fb4fc54913672d8167fed367280bc5d39cf16a27", "faad.exe"},
 	{"070bf98f78e572a97e4703ef5720c682567a6a56", "flac.exe"},
 	{"cf379081035ae6bfb6f7bc22f13bfb7ac6302ac5", "gpgv.exe"},
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg"},
@@ -50,7 +50,7 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"e8719fbfd7b690b3e518489f7aae3915305711c2", "mediainfo_icl11.exe"},
 	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe"},
 	{"8bbf4a3fffe2ff143eb5ba2cf82ca16d676e865d", "mpg123.exe"},
-	{"437a1b193727c3dbdd557b9a58659d1ce7fbec51", "oggdec.exe"},
+	{"380c734e3c3948a844b9fae213d53a93ab20beba", "oggdec.exe"},
 	{"ecd15abe103184aca96e406f5f1c82c6fb2e665d", "oggenc2_i386.exe"},
 	{"ffe0fbd73352396dc3752ac9d484dbfc754a226d", "oggenc2_sse2.exe"},
 	{"a8c50872e544a55495a824426e9378984f2ae01d", "oggenc2_x64.exe"},
