@@ -46,8 +46,8 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	QProcess process;
 	QStringList args;
 
-	args << "-o" << pathToShort(QDir::toNativeSeparators(outputFile));
-	args << pathToShort(QDir::toNativeSeparators(sourceFile));
+	args << "-o" << QDir::toNativeSeparators(outputFile);
+	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args))
 	{
@@ -57,7 +57,7 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	QRegExp regExp("[^\\w](\\d+)%\\s+decoding\\s+");
+	QRegExp regExp("\\[(\\d+)%\\]\\s+decoding\\s+");
 
 	while(process.state() != QProcess::NotRunning)
 	{
