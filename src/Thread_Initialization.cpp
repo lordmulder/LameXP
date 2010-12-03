@@ -41,7 +41,7 @@ struct lamexp_tool_t
 static const struct lamexp_tool_t g_lamexp_tools[] =
 {
 	{"153f4274702f3629093b561a31dbf50e2c146305", "alac.exe"},
-	{"610bd36eb882666f89e3939ec4d928d13b60b63f", "faad.exe"},
+	{"097dd004f44dbda57dbaeb5f15b34a220724ad60", "faad.exe"},
 	{"070bf98f78e572a97e4703ef5720c682567a6a56", "flac.exe"},
 	{"cf379081035ae6bfb6f7bc22f13bfb7ac6302ac5", "gpgv.exe"},
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg"},

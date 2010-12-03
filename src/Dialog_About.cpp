@@ -74,6 +74,8 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += "<hr><br>";
 	aboutText += "This software uses the 'slick' icon set by Mark James &ndash; <a href=\"http://www.famfamfam.com/lab/icons/silk/\">http://www.famfamfam.com/</a>.<br>";
 	aboutText += "Released under the Creative Commons Attribution 2.5 License.<br>";
+	aboutText += "<br>";
+	aboutText += QString("Special thanks go out to \"John33\" from %1 for continuous support.<br>").arg(LINK("http://www.RareWares.org/"));
 	
 	setText(aboutText);
 	setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
