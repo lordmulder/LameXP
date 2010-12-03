@@ -39,6 +39,7 @@
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
+#define CONTRIBUTOR(LANG, CNTR, ICON) QString("<tr><td valign=\"middle\"><img src=\"%1\"></td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%3</td></tr>").arg(ICON, LANG, CNTR);
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
@@ -75,7 +76,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += "This software uses the 'slick' icon set by Mark James &ndash; <a href=\"http://www.famfamfam.com/lab/icons/silk/\">http://www.famfamfam.com/</a>.<br>";
 	aboutText += "Released under the Creative Commons Attribution 2.5 License.<br>";
 	aboutText += "<br>";
-	aboutText += QString("Special thanks go out to \"John33\" from %1 for continuous support.<br>").arg(LINK("http://www.RareWares.org/"));
+	aboutText += QString("Special thanks go out to \"John33\" from %1 for his continuous support.<br>").arg(LINK("http://www.RareWares.org/"));
 	
 	setText(aboutText);
 	setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
@@ -100,21 +101,27 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	}
 	else
 	{
-		QPushButton *firstButton = addButton("More About...", QMessageBox::AcceptRole);
-		firstButton->setIcon(QIcon(":/icons/information.png"));
+		QPushButton *firstButton = addButton("3rd Party S/W", QMessageBox::AcceptRole);
+		firstButton->setIcon(QIcon(":/icons/page_white_cplusplus.png"));
 		firstButton->setMinimumWidth(120);
 		firstButton->disconnect();
 		connect(firstButton, SIGNAL(clicked()), this, SLOT(showMoreAbout()));
 
-		QPushButton *secondButton = addButton("About Qt...", QMessageBox::AcceptRole);
-		secondButton->setIcon(QIcon(":/images/Qt.svg"));
+		QPushButton *secondButton = addButton("Contributors", QMessageBox::AcceptRole);
+		secondButton->setIcon(QIcon(":icons/user_suit.png"));
 		secondButton->setMinimumWidth(120);
 		secondButton->disconnect();
-		connect(secondButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
+		connect(secondButton, SIGNAL(clicked()), this, SLOT(showAboutContributors()));
 
-		QPushButton *thirdButton = addButton("Discard", QMessageBox::AcceptRole);
-		thirdButton->setIcon(QIcon(":/icons/cross.png"));
-		thirdButton->setMinimumWidth(90);
+		QPushButton *thirdButton = addButton("About Qt4", QMessageBox::AcceptRole);
+		thirdButton->setIcon(QIcon(":/images/Qt.svg"));
+		thirdButton->setMinimumWidth(120);
+		thirdButton->disconnect();
+		connect(thirdButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
+
+		QPushButton *fourthButton = addButton("Discard", QMessageBox::AcceptRole);
+		fourthButton->setIcon(QIcon(":/icons/cross.png"));
+		fourthButton->setMinimumWidth(90);
 	}
 
 	m_firstShow = firstStart;
@@ -175,6 +182,31 @@ void AboutDialog::showAboutQt(void)
 	QMessageBox::aboutQt(this);
 }
 
+void AboutDialog::showAboutContributors(void)
+{
+	QString contributorsAboutText;
+	contributorsAboutText += "<h3>People who have contributed to LameXP:</h3>";
+	contributorsAboutText += "<b>Translators:</b>";
+	contributorsAboutText += "<table>";
+	contributorsAboutText += CONTRIBUTOR("Englisch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/gb.png");
+	contributorsAboutText += CONTRIBUTOR("Deutsch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/de.png");
+	contributorsAboutText += "</table><br>";
+
+	QMessageBox *contributorsAboutBox = new QMessageBox(this);
+	contributorsAboutBox->setText(contributorsAboutText);
+	contributorsAboutBox->setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
+
+	QPushButton *closeButton = contributorsAboutBox->addButton("Discard", QMessageBox::AcceptRole);
+	closeButton->setIcon(QIcon(":/icons/cross.png"));
+	closeButton->setMinimumWidth(90);
+
+	contributorsAboutBox->setWindowTitle("About Contributors");
+	contributorsAboutBox->setWindowIcon(QIcon(":/icons/user_suit.png"));
+	contributorsAboutBox->exec();
+				
+	LAMEXP_DELETE(contributorsAboutBox);
+}
+
 void AboutDialog::showMoreAbout(void)
 {
 	QString moreAboutText;
@@ -207,6 +239,7 @@ void AboutDialog::showMoreAbout(void)
 	closeButton->setMinimumWidth(90);
 
 	moreAboutBox->setWindowTitle("About Third-party Software");
+	moreAboutBox->setWindowIcon(QIcon(":/icons/page_white_cplusplus.png"));
 	moreAboutBox->exec();
 				
 	LAMEXP_DELETE(moreAboutBox);

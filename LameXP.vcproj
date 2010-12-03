@@ -1281,6 +1281,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\tmp\RCC_Flags.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\tmp\RCC_Icons.cpp"
 				>
 			</File>
@@ -1296,6 +1300,40 @@
 		<Filter
 			Name="Resources"
 			>
+			<File
+				RelativePath=".\res\Flags.qrc"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release_Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
 			<File
 				RelativePath=".\res\Icons.qrc"
 				>

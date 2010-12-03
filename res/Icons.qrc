@@ -43,6 +43,7 @@
     <file>icons/monitor.png</file>
     <file>icons/music.png</file>
     <file>icons/package.png</file>
+    <file>icons/page_white_cplusplus.png</file>
     <file>icons/page_white_add.png</file>
     <file>icons/page_white_cd.png</file>
     <file>icons/paste_plain.png</file>
@@ -56,6 +57,7 @@
     <file>icons/timeline_marker.png</file>
     <file>icons/transmit_blue.png</file>
     <file>icons/user.png</file>
+    <file>icons/user_suit.png</file>
     <file>icons/world.png</file>
     <file>icons/zoom.png</file>
   </qresource>

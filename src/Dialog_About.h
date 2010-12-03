@@ -41,6 +41,7 @@ public slots:
 	void openLicenseText(void);
 	void showMoreAbout(void);
 	void showAboutQt(void);
+	void showAboutContributors(void);
 
 protected:
 	void showEvent(QShowEvent *e);
