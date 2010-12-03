@@ -98,7 +98,11 @@ void SettingsModel::validate(void)
 	}
 	if(!(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")))
 	{
-		if(this->compressionEncoder() == SettingsModel::AACEncoder) this->compressionEncoder(SettingsModel::MP3Encoder);
+		if(this->compressionEncoder() == SettingsModel::AACEncoder)
+		{
+			qWarning("Nero encoder selected, but not available any more. Reverting to MP3!");
+			this->compressionEncoder(SettingsModel::MP3Encoder);
+		}
 	}
 	if(this->outputDir().isEmpty() || !QFileInfo(this->outputDir()).isDir())
 	{

@@ -498,7 +498,7 @@ void MainWindow::windowShown(void)
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
 		if(!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14))
 		{
-			if(QMessageBox::information(this, "Update Reminer", "Your last update check was more than 14 days ago. Check for updates now?", "Check for Updates", "Defer") == 0)
+			if(QMessageBox::information(this, "Update Reminer", (lastUpdateCheck.isValid() ? "Your last update check was more than 14 days ago. Check for updates now?" :  "Your did not check for LameXP updates yet. Check for updates now?"), "Check for Updates", "Defer") == 0)
 			{
 				checkUpdatesActionActivated();
 			}
@@ -571,9 +571,9 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 	
-	if(m_settings->compressionEncoder() != SettingsModel::MP3Encoder && m_settings->compressionEncoder() != SettingsModel::VorbisEncoder)
+	if(m_settings->compressionEncoder() != SettingsModel::MP3Encoder && m_settings->compressionEncoder() != SettingsModel::VorbisEncoder && m_settings->compressionEncoder() != SettingsModel::AACEncoder)
 	{
-		QMessageBox::warning(this, "LameXP", "Sorry, only Lame MP3 and Ogg Vorbis encoding is supported at the moment.<br>Support for more encoders in later versions!");
+		QMessageBox::warning(this, "LameXP", "Sorry, only MP3, Vorbis and AAC encoding is supported at the moment.<br>Support for more encoders to be added in later versions!");
 		tabWidget->setCurrentIndex(3);
 		return;
 	}

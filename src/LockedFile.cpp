@@ -100,6 +100,9 @@ LockedFile::LockedFile(const QString &filePath)
 		throw error_msg;
 	}
 	
+	//Remember file path
+	m_filePath = existingFile.canonicalFilePath();
+
 	//Now lock the file
 	m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
 

@@ -30,6 +30,7 @@
 #include "Dialog_LogView.h"
 #include "Encoder_MP3.h"
 #include "Encoder_Vorbis.h"
+#include "Encoder_AAC.h"
 
 #include <QApplication>
 #include <QRect>
@@ -390,6 +391,14 @@ void ProcessingDialog::startNextJob(void)
 			vorbisEncoder->setBitrate(m_settings->compressionBitrate());
 			vorbisEncoder->setRCMode(m_settings->compressionRCMode());
 			encoder = vorbisEncoder;
+		}
+		break;
+	case SettingsModel::AACEncoder:
+		{
+			AACEncoder *aacEncoder = new AACEncoder();
+			aacEncoder->setBitrate(m_settings->compressionBitrate());
+			aacEncoder->setRCMode(m_settings->compressionRCMode());
+			encoder = aacEncoder;
 		}
 		break;
 	default:

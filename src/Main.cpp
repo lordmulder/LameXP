@@ -117,12 +117,14 @@ int lamexp_main(int argc, char* argv[])
 	FileListModel *fileListModel = new FileListModel();
 	AudioFileModel *metaInfo = new AudioFileModel();
 	SettingsModel *settingsModel = new SettingsModel();
-	settingsModel->validate();
 	
 	//Show splash screen
 	InitializationThread *poInitializationThread = new InitializationThread();
 	SplashScreen::showSplash(poInitializationThread);
 	LAMEXP_DELETE(poInitializationThread);
+
+	//Validate settings
+	settingsModel->validate();
 
 	//Create main window
 	MainWindow *poMainWindow = new MainWindow(fileListModel, metaInfo, settingsModel);
@@ -163,11 +165,18 @@ int lamexp_main(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+#ifdef _DEBUG
+	int iResult;
+	qInstallMsgHandler(lamexp_message_handler);
+	LAMEXP_MEMORY_CHECK(iResult = lamexp_main(argc, argv));
+	lamexp_finalization();
+	return iResult;
+#else
 	try
 	{
 		int iResult;
 		qInstallMsgHandler(lamexp_message_handler);
-		LAMEXP_MEMORY_CHECK(iResult = lamexp_main(argc, argv));
+		iResult = lamexp_main(argc, argv);
 		lamexp_finalization();
 		return iResult;
 	}
@@ -195,4 +204,5 @@ int main(int argc, char* argv[])
 		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
+#endif
 }
