@@ -85,6 +85,8 @@ private slots:
 	void findFileContextActionTriggered(void);
 	void disableUpdateReminderActionTriggered(bool checked);
 	void disableSoundsActionTriggered(bool checked);
+	void outputFolderContextMenu(const QPoint &pos);
+	void showFolderContextActionTriggered(void);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -114,4 +116,5 @@ private:
 	SettingsModel *m_settings;
 	QLabel *m_dropNoteLabel;
 	QMenu *m_sourceFilesContextMenu;
+	QMenu *m_outputFolderContextMenu;
 };

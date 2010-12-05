@@ -114,7 +114,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>Frame</string>
+   <string>LameXP is launching...</string>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -258,6 +258,7 @@
   <zorder>labelLoading</zorder>
  </widget>
  <resources>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

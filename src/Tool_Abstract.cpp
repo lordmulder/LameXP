@@ -77,6 +77,8 @@ AbstractTool::AbstractTool(void)
 			}
 		}
 	}
+
+	m_firstLaunch = true;
 }
 
 /*
@@ -118,8 +120,15 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 		{
 			SetPriorityClass(process.pid()->hProcess, IDLE_PRIORITY_CLASS);
 		}
+		
 		lock.unlock();
-		emit statusUpdated(0);
+		
+		if(m_firstLaunch)
+		{
+			emit statusUpdated(0);
+			m_firstLaunch = false;
+		}
+		
 		return true;
 	}
 

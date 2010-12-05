@@ -45,4 +45,5 @@ signals:
 private:
 	static QMutex *m_mutex_startProcess;
 	static void *m_handle_jobObject;
+	bool m_firstLaunch;
 };

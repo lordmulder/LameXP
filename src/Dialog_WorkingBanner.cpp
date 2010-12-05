@@ -22,6 +22,7 @@
 #include "Dialog_WorkingBanner.h"
 
 #include "Global.h"
+#include "WinSevenTaskbar.h"
 
 #include <QThread>
 #include <QMovie>
@@ -36,7 +37,8 @@
 ////////////////////////////////////////////////////////////
 
 WorkingBanner::WorkingBanner(QWidget *parent)
-: QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint)
+:
+	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -49,6 +51,9 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 
 	//Set wait cursor
 	setCursor(Qt::WaitCursor);
+
+	//Init taskbar
+	WinSevenTaskbar::initTaskbar();
 }
 
 ////////////////////////////////////////////////////////////
@@ -91,11 +96,19 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	//Start the thread
 	thread->start();
 
+	//Set taskbar state
+	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), &QIcon(":/icons/hourglass.png"));
+	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+
 	//Loop while thread is running
 	while(thread->isRunning())
 	{
 		QApplication::processEvents(QEventLoop::AllEvents | QEventLoop::WaitForMoreEvents);
 	}
+
+	//Set taskbar state
+	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
+	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), NULL);
 
 	//Hide splash
 	this->close();

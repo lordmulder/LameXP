@@ -34,6 +34,7 @@
 #include "Model_Settings.h"
 #include "Model_FileList.h"
 #include "Model_FileSystem.h"
+#include "WinSevenTaskbar.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -152,6 +153,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setAnimated(true);
 	outputFolderView->installEventFilter(this);
 	outputFolderView->setMouseTracking(false);
+	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
@@ -163,6 +165,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
 	connect(buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
 	connect(saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
+	m_outputFolderContextMenu = new QMenu();
+	QAction *showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "Browse Selected Folder");
+	connect(outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
+	connect(showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
 	
 	//Setup "Meta Data" tab
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
@@ -1273,6 +1279,22 @@ void MainWindow::findFileContextActionTriggered(void)
 		qWarning("SystemRoot directory could not be detected!");
 		QProcess::execute("explorer.exe", QStringList() << "/select," << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
 	}
+}
+
+/*
+ * Show context menu for output folder
+ */
+void MainWindow::outputFolderContextMenu(const QPoint &pos)
+{
+	m_outputFolderContextMenu->popup(outputFolderView->mapToGlobal(pos));
+}
+
+/*
+ * Show selected folder in explorer
+ */
+void MainWindow::showFolderContextActionTriggered(void)
+{
+	QDesktopServices::openUrl(QUrl::fromLocalFile(m_fileSystemModel->filePath(outputFolderView->currentIndex())));
 }
 
 /*

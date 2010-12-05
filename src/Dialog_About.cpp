@@ -190,7 +190,9 @@ void AboutDialog::showAboutContributors(void)
 	contributorsAboutText += "<table style=\"margin-top:5px\">";
 	contributorsAboutText += CONTRIBUTOR("Englisch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/gb.png");
 	contributorsAboutText += CONTRIBUTOR("Deutsch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/de.png");
-	contributorsAboutText += "</table><br>";
+	contributorsAboutText += "</table>";
+	contributorsAboutText += "<br><br>";
+	contributorsAboutText += "<i>If you are willing to contribute a LameXP translation, feel free to contact us!</i><br>";
 
 	QMessageBox *contributorsAboutBox = new QMessageBox(this);
 	contributorsAboutBox->setText(contributorsAboutText);
@@ -201,6 +203,7 @@ void AboutDialog::showAboutContributors(void)
 	closeButton->setMinimumWidth(90);
 
 	contributorsAboutBox->setWindowTitle("About Contributors");
+	contributorsAboutBox->setIconPixmap(QIcon(":/images/Logo_Contributors.png").pixmap(QSize(64,74)));
 	contributorsAboutBox->setWindowIcon(QIcon(":/icons/user_suit.png"));
 	contributorsAboutBox->exec();
 				
@@ -239,6 +242,7 @@ void AboutDialog::showMoreAbout(void)
 	closeButton->setMinimumWidth(90);
 
 	moreAboutBox->setWindowTitle("About Third-party Software");
+	moreAboutBox->setIconPixmap(QIcon(":/images/Logo_Software.png").pixmap(QSize(64,71)));
 	moreAboutBox->setWindowIcon(QIcon(":/icons/page_white_cplusplus.png"));
 	moreAboutBox->exec();
 				

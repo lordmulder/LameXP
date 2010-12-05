@@ -31,6 +31,7 @@
 #include "Encoder_MP3.h"
 #include "Encoder_Vorbis.h"
 #include "Encoder_AAC.h"
+#include "WinSevenTaskbar.h"
 
 #include <QApplication>
 #include <QRect>
@@ -137,6 +138,9 @@ ProcessingDialog::~ProcessingDialog(void)
 	LAMEXP_DELETE(m_progressModel);
 	LAMEXP_DELETE(m_contextMenu);
 
+	WinSevenTaskbar::setOverlayIcon(this, NULL);
+	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
+
 	while(!m_threadList.isEmpty())
 	{
 		ProcessThread *thread = m_threadList.takeFirst();
@@ -219,6 +223,11 @@ void ProcessingDialog::initEncoding(void)
 	button_AbortProcess->setEnabled(true);
 	progressBar->setRange(0, m_pendingJobs.count());
 
+	WinSevenTaskbar::initTaskbar();
+	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
+	WinSevenTaskbar::setTaskbarProgress(this, 0, m_pendingJobs.count());
+	WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/control_play_blue.png"));
+
 	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
 
 	for(int i = 0; i < min(max(cpuFeatures.count, 1), 4); i++)
@@ -248,6 +257,7 @@ void ProcessingDialog::doneEncoding(void)
 	if(!m_userAborted)
 	{
 		label_progress->setText(QString("Encoding: %1 files of %2 completed so far, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
+		WinSevenTaskbar::setTaskbarProgress(this, progressBar->value(), progressBar->maximum());
 	}
 	
 	int index = m_threadList.indexOf(dynamic_cast<ProcessThread*>(QWidget::sender()));
@@ -282,6 +292,8 @@ void ProcessingDialog::doneEncoding(void)
 	if(m_userAborted)
 	{
 		CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFF3BA"));
+		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
+		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
 		label_progress->setText((m_succeededFiles > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededFiles)) : "Process was aborted prematurely by the user!");
 		QApplication::processEvents();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
@@ -291,6 +303,8 @@ void ProcessingDialog::doneEncoding(void)
 		if(m_failedFiles)
 		{
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFBABA"));
+			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
+			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
 			label_progress->setText(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedFiles), QString::number(m_failedFiles + m_succeededFiles)));
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
@@ -298,6 +312,8 @@ void ProcessingDialog::doneEncoding(void)
 		else
 		{
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#D1FFD5"));
+			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
+			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
 			label_progress->setText("Alle files completed successfully.");
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_SUCCESS), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
@@ -310,7 +326,8 @@ void ProcessingDialog::doneEncoding(void)
 
 	view_log->scrollToBottom();
 	m_progressIndicator->stop();
-	progressBar->setValue(100);
+	progressBar->setValue(progressBar->maximum());
+	WinSevenTaskbar::setTaskbarProgress(this, progressBar->value(), progressBar->maximum());
 
 	QApplication::restoreOverrideCursor();
 }
