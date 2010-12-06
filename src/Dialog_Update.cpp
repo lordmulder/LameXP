@@ -339,13 +339,14 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile)
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
+	process.setWorkingDirectory(output.absolutePath());
 
 	QEventLoop loop;
 	connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
 	connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
 	connect(&process, SIGNAL(readyRead()), &loop, SLOT(quit()));
 
-	process.start(m_binaryWGet, QStringList() << "-U" << USER_AGENT_STR << "-O" << output.absoluteFilePath() << url);
+	process.start(m_binaryWGet, QStringList() << "-U" << USER_AGENT_STR << "-O" << output.fileName() << url);
 	
 	if(!process.waitForStarted())
 	{
@@ -367,19 +368,35 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile)
 
 bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 {
+	if(QFileInfo(file).absolutePath().compare(QFileInfo(signature).absolutePath(), Qt::CaseInsensitive) != 0)
+	{
+		qWarning("CheckSignature: File and signature should be in same folder!");
+		return false;
+	}
+	
+	QString keyring = QString("%1/%2.gpg").arg(QFileInfo(file).absolutePath(), QUuid::createUuid().toString());
+
+	if(!QFile::copy(m_binaryKeys, keyring))
+	{
+		qWarning("CheckSignature: Failed to copy keyring file to destination folder!");
+		return false;
+	}
+	
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
+	process.setWorkingDirectory(QFileInfo(file).absolutePath());
 
 	QEventLoop loop;
 	connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
 	connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
 	connect(&process, SIGNAL(readyRead()), &loop, SLOT(quit()));
 	
-	process.start(m_binaryGnuPG, QStringList() << "--homedir" << lamexp_temp_folder() << "--keyring" << QDir::toNativeSeparators(m_binaryKeys) << QDir::toNativeSeparators(signature) << QDir::toNativeSeparators(file));
+	process.start(m_binaryGnuPG, QStringList() << "--homedir" << "." << "--keyring" << QFileInfo(keyring).fileName() << QFileInfo(signature).fileName() << QFileInfo(file).fileName());
 
 	if(!process.waitForStarted())
 	{
+		QFile::remove(keyring);
 		return false;
 	}
 
@@ -391,6 +408,8 @@ bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 			m_logFile->append(QString::fromLatin1(process.readLine()).simplified());
 		}
 	}
+
+	QFile::remove(keyring);
 	
 	m_logFile->append(QString().sprintf("Exited with code %d", process.exitCode()));
 	return (process.exitCode() == 0);
