@@ -45,7 +45,7 @@ static const char *section_id = "LameXP";
 
 static const char *mirror_url_postfix = "update_beta.ver";
 
-static const char *mirrors[] =
+static const char *update_mirrors[] =
 {
 	"http://mulder.dummwiedeutsch.de/",
 	"http://mulder.brhack.net/",
@@ -54,6 +54,19 @@ static const char *mirrors[] =
 	"http://www.tricksoft.de/",
 	NULL
 };
+
+static const char *known_hosts[] =
+{
+	"http://www.example.com/",
+	"http://www.google.com/",
+	"http://www.wikipedia.org/",
+	"http://www.msn.com/",
+	"http://www.yahoo.com/",
+	NULL
+};
+
+static const int MIN_CONNSCORE = 2;
+static char *USER_AGENT_STR = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101101 IceCat/3.6.12 (like Firefox/3.6.12)";
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -123,7 +136,6 @@ void UpdateDialog::showEvent(QShowEvent *event)
 {
 	QDialog::showEvent(event);
 	
-	statusLabel->setText("Checking for new updates online, please wait...");
 	labelVersionInstalled->setText(QString("Build %1 (%2)").arg(QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
 	labelVersionLatest->setText("(Unknown)");
 
@@ -136,11 +148,11 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	logButton->hide();
 	infoLabel->hide();
 	
-	for(int i = 0; mirrors[i]; i++)
-	{
-		progressBar->setMaximum(i+2);
-	}
+	int counter = 2;
+	for(int i = 0; known_hosts[i]; i++) counter++;
+	for(int i = 0; update_mirrors[i]; i++) counter++;
 
+	progressBar->setMaximum(counter);
 	progressBar->setValue(0);
 }
 
@@ -160,6 +172,8 @@ void UpdateDialog::updateInit(void)
 void UpdateDialog::checkForUpdates(void)
 {
 	bool success = false;
+	int connectionScore = 0;
+
 	m_updateInfo = new UpdateInfo;
 
 	progressBar->setValue(0);
@@ -172,20 +186,59 @@ void UpdateDialog::checkForUpdates(void)
 	QApplication::processEvents();
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
+	statusLabel->setText("Testing your internet connection, please wait...");
+
 	m_logFile->clear();
+	m_logFile->append("Checking internet connection...");
+
+	for(int i = 0; known_hosts[i]; i++)
+	{
+		progressBar->setValue(progressBar->value() + 1);
+		if(connectionScore < MIN_CONNSCORE)
+		{
+			m_logFile->append(QStringList() << "" << "Testing host:" << known_hosts[i] << "");
+			QString outFile = QString("%1/%2.htm").arg(QDir::tempPath(), QUuid::createUuid().toString());
+			if(getFile(known_hosts[i], outFile))
+			{
+				connectionScore++;
+			}
+			QFile::remove(outFile);
+		}
+	}
+
+	if(connectionScore < MIN_CONNSCORE)
+	{
+		if(!retryButton->isVisible()) retryButton->show();
+		if(!logButton->isVisible()) logButton->show();
+		closeButton->setEnabled(true);
+		retryButton->setEnabled(true);
+		logButton->setEnabled(true);
+		statusLabel->setText("Connectivity test faild. Please check your internet connection!");
+		progressBar->setValue(progressBar->maximum());
+		LAMEXP_DELETE(m_updateInfo);
+		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+		QApplication::restoreOverrideCursor();
+		progressBar->setValue(progressBar->maximum());
+		return;
+	}
+
+	statusLabel->setText("Checking for new updates online, please wait...");
 	m_logFile->append("Checking for updates online...");
 	
-	for(int i = 0; mirrors[i]; i++)
+	for(int i = 0; update_mirrors[i]; i++)
 	{
-		progressBar->setValue(i+1);
-		if(tryUpdateMirror(m_updateInfo, mirrors[i]))
+		progressBar->setValue(progressBar->value() + 1);
+		if(!success)
 		{
-			success = true;
-			break;
+			if(tryUpdateMirror(m_updateInfo, update_mirrors[i]))
+			{
+				success = true;
+			}
 		}
 	}
 	
 	QApplication::restoreOverrideCursor();
+	progressBar->setValue(progressBar->maximum());
 
 	if(!success)
 	{
@@ -194,7 +247,7 @@ void UpdateDialog::checkForUpdates(void)
 		closeButton->setEnabled(true);
 		retryButton->setEnabled(true);
 		logButton->setEnabled(true);
-		statusLabel->setText("Failed to fetch update information. Check your internet connection!");
+		statusLabel->setText("Failed to fetch update information from server. Try again later!");
 		progressBar->setValue(progressBar->maximum());
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
@@ -226,7 +279,6 @@ void UpdateDialog::checkForUpdates(void)
 	closeButton->setEnabled(true);
 	if(retryButton->isVisible()) retryButton->hide();
 	if(logButton->isVisible()) logButton->hide();
-	progressBar->setValue(progressBar->maximum());
 
 	m_success = true;
 }
@@ -293,7 +345,7 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile)
 	connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
 	connect(&process, SIGNAL(readyRead()), &loop, SLOT(quit()));
 
-	process.start(m_binaryWGet, QStringList() << "-O" << output.absoluteFilePath() << url);
+	process.start(m_binaryWGet, QStringList() << "-U" << USER_AGENT_STR << "-O" << output.absoluteFilePath() << url);
 	
 	if(!process.waitForStarted())
 	{

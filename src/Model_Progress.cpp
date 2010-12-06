@@ -126,13 +126,16 @@ void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QSt
 		return;
 	}
 
-	beginResetModel();
+	int newIndex = m_jobList.count();
+	beginInsertRows(QModelIndex(), newIndex, newIndex);
+
 	m_jobList.append(jobId);
 	m_jobName.insert(jobId, jobName);
 	m_jobStatus.insert(jobId, jobInitialStatus);
 	m_jobState.insert(jobId, jobInitialState);
 	m_jobLogFile.insert(jobId, QStringList());
-	endResetModel();
+	
+	endInsertRows();
 }
 
 void ProgressModel::updateJob(const QUuid &jobId, const QString &newStatus, int newState)
