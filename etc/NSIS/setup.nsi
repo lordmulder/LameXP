@@ -20,6 +20,7 @@
 ; ///////////////////////////////////////////////////////////////////////////////
 
 RequestExecutionLevel user
+;TargetMinimalOS 5.0
 BrandingText `Date created: ${LAMEXP_DATE}`
 ShowInstDetails show
 
@@ -99,7 +100,6 @@ Function CheckForUpdate
 FunctionEnd
 
 Function .onInstSuccess
-	StrCpy $R0 "$INSTDIR"
-	!insertmacro UAC_AsUser_ExecShell "explore" "$R0" "" "" SW_SHOWNORMAL
-	!insertmacro UAC_AsUser_ExecShell "open" "$R0\LameXP.exe" "" "$OUTDIR" SW_SHOWNORMAL
+	!insertmacro UAC_AsUser_ExecShell "explore" "$INSTDIR" "" "" SW_SHOWNORMAL
+	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\LameXP.exe" "" "$INSTDIR" SW_SHOWNORMAL
 FunctionEnd

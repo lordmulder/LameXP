@@ -1,7 +1,7 @@
 #define PATH_SEVENZ "E:\7-Zip"
 #define PATH_MPRESS "E:\MPress"
 #define PATH_UPXBIN "E:\MPUI\installer"
-#define PATH_MKNSIS "E:\NSIS"
+#define PATH_MKNSIS "e:\NSIS\_Unicode"
 #define PATH_MSVC90 "D:\Microsoft Visual Studio 9.0"
 #define PATH_QTMSVC "E:\Qt\MSVC\4.7.1"
 #define PATH_GNUPG1 "E:\GnuPG"
