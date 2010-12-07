@@ -51,6 +51,8 @@ int lamexp_main(int argc, char* argv[])
 	//Init console
 	lamexp_init_console(argc, argv);
 
+	lamexp_rand_str();
+
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End");
 	qDebug("Version %d.%02d %s, Build %d [%s], compiled with %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_compiler());

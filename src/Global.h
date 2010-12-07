@@ -76,6 +76,7 @@ bool lamexp_check_tool(const QString &toolName);
 const QString lamexp_lookup_tool(const QString &toolName);
 unsigned int lamexp_tool_version(const QString &toolName);
 void lamexp_finalization(void);
+QString lamexp_rand_str(void);
 const QString &lamexp_temp_folder(void);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);

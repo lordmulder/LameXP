@@ -30,7 +30,6 @@
 #include <QFileDialog>
 #include <QTimer>
 #include <QProcess>
-#include <QUuid>
 #include <QDate>
 #include <QRegExp>
 #include <QDesktopServices>
@@ -197,7 +196,7 @@ void UpdateDialog::checkForUpdates(void)
 		if(connectionScore < MIN_CONNSCORE)
 		{
 			m_logFile->append(QStringList() << "" << "Testing host:" << known_hosts[i] << "");
-			QString outFile = QString("%1/%2.htm").arg(QDir::tempPath(), QUuid::createUuid().toString());
+			QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder(), lamexp_rand_str());
 			if(getFile(known_hosts[i], outFile))
 			{
 				connectionScore++;
@@ -288,9 +287,9 @@ bool UpdateDialog::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)
 	bool success = false;
 	m_logFile->append(QStringList() << "" << "Trying mirror:" << url);
 	
-	QUuid uuid = QUuid::createUuid();
-	QString outFileVersionInfo = QString("%1/%2.ver").arg(QDir::tempPath(), uuid.toString());
-	QString outFileSignature = QString("%1/%2.sig").arg(QDir::tempPath(), uuid.toString());
+	QString randPart = lamexp_rand_str();
+	QString outFileVersionInfo = QString("%1/%2.ver").arg(lamexp_temp_folder(), randPart);
+	QString outFileSignature = QString("%1/%2.sig").arg(lamexp_temp_folder(), randPart);
 
 	m_logFile->append(QStringList() << "" << "Downloading update info:");
 	bool ok1 = getFile(QString("%1%2").arg(url,mirror_url_postfix), outFileVersionInfo);
@@ -373,15 +372,12 @@ bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 		qWarning("CheckSignature: File and signature should be in same folder!");
 		return false;
 	}
-	
-	QString keyring = QString("%1/%2.gpg").arg(QFileInfo(file).absolutePath(), QUuid::createUuid().toString());
-
-	if(!QFile::copy(m_binaryKeys, keyring))
+	if(QFileInfo(file).absolutePath().compare(QFileInfo(m_binaryKeys).absolutePath(), Qt::CaseInsensitive) != 0)
 	{
-		qWarning("CheckSignature: Failed to copy keyring file to destination folder!");
+		qWarning("CheckSignature: File and keyring should be in same folder!");
 		return false;
 	}
-	
+
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
@@ -392,11 +388,10 @@ bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 	connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
 	connect(&process, SIGNAL(readyRead()), &loop, SLOT(quit()));
 	
-	process.start(m_binaryGnuPG, QStringList() << "--homedir" << "." << "--keyring" << QFileInfo(keyring).fileName() << QFileInfo(signature).fileName() << QFileInfo(file).fileName());
+	process.start(m_binaryGnuPG, QStringList() << "--homedir" << "." << "--keyring" << QFileInfo(m_binaryKeys).fileName() << QFileInfo(signature).fileName() << QFileInfo(file).fileName());
 
 	if(!process.waitForStarted())
 	{
-		QFile::remove(keyring);
 		return false;
 	}
 
@@ -408,8 +403,6 @@ bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 			m_logFile->append(QString::fromLatin1(process.readLine()).simplified());
 		}
 	}
-
-	QFile::remove(keyring);
 	
 	m_logFile->append(QString().sprintf("Exited with code %d", process.exitCode()));
 	return (process.exitCode() == 0);

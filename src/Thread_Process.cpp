@@ -222,7 +222,7 @@ QString ProcessThread::generateOutFileName(void)
 		}
 	}
 	
-	QFile writeTest(QString("%1/%2").arg(targetDir.canonicalPath(), QUuid::createUuid().toString()));
+	QFile writeTest(QString("%1/.%2").arg(targetDir.canonicalPath(), lamexp_rand_str()));
 	if(!writeTest.open(QIODevice::ReadWrite))
 	{
 		handleMessage(QString("The target output directory is NOT writable:\n%1").arg(targetDir.absolutePath()));
@@ -252,11 +252,11 @@ QString ProcessThread::generateOutFileName(void)
 QString ProcessThread::generateTempFileName(void)
 {
 	QMutexLocker lock(m_mutex_genFileName);
-	QString tempFileName = QString("%1/%2.wav").arg(QDir::tempPath(), QUuid::createUuid().toString());
+	QString tempFileName = QString("%1/%2.wav").arg(lamexp_temp_folder(), lamexp_rand_str());
 
 	while(QFileInfo(tempFileName).exists())
 	{
-		tempFileName = QString("%1/%2.wav").arg(QDir::tempPath(), QUuid::createUuid().toString());
+		tempFileName = QString("%1/%2.wav").arg(lamexp_temp_folder(), lamexp_rand_str());
 	}
 
 	QFile file(tempFileName);

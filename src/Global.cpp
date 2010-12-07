@@ -38,10 +38,14 @@
 #include <QMutex>
 #include <QTextCodec>
 #include <QLibrary>
+#include <QRegExp>
 
 //LameXP includes
 #include "Resource.h"
 #include "LockedFile.h"
+
+//Windows includes
+#include <Windows.h>
 
 //CRT includes
 #include <stdio.h>
@@ -584,13 +588,56 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 }
 
 /*
+ * Get a random string
+ */
+QString lamexp_rand_str(void)
+{
+	QRegExp regExp("\\{(\\w+)-(\\w+)-(\\w+)-(\\w+)-(\\w+)\\}");
+	QString uuid = QUuid::createUuid().toString();
+
+	if(regExp.indexIn(uuid) >= 0)
+	{
+		return QString().append(regExp.cap(1)).append(regExp.cap(2)).append(regExp.cap(3)).append(regExp.cap(4)).append(regExp.cap(5));
+	}
+
+	throw "The RegExp didn't match on the UUID string. This shouldn't happen ;-)";
+}
+
+/*
  * Get LameXP temp folder
  */
 const QString &lamexp_temp_folder(void)
 {
+	const GUID LocalAppDataLowID={0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
+	typedef HANDLE (WINAPI *SHGetKnownFolderPathFun)(__in const GUID &rfid, __in DWORD dwFlags, __in HANDLE hToken, __out PWSTR *ppszPath);
+
 	if(g_lamexp_temp_folder.isEmpty())
 	{
 		QDir temp = QDir::temp();
+
+		QLibrary Kernel32Lib("shell32.dll");
+		SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) Kernel32Lib.resolve("SHGetKnownFolderPath");
+
+		if(SHGetKnownFolderPathPtr)
+		{
+			WCHAR *localAppDataLowPath = NULL;
+			if(SHGetKnownFolderPathPtr(LocalAppDataLowID, 0x00008000, NULL, &localAppDataLowPath) == S_OK)
+			{
+				QDir localAppDataLow = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(localAppDataLowPath))));
+				if(localAppDataLow.exists())
+				{
+					if(!localAppDataLow.entryList(QDir::AllDirs).contains("Temp"))
+					{
+						localAppDataLow.mkdir("Temp");
+					}
+					if(localAppDataLow.cd("Temp"))
+					{
+						temp.setPath(localAppDataLow.canonicalPath());
+					}
+				}
+				CoTaskMemFree(localAppDataLowPath);
+			}
+		}
 
 		if(!temp.exists())
 		{
@@ -602,19 +649,19 @@ const QString &lamexp_temp_folder(void)
 			}
 		}
 
-		QString uuid = QUuid::createUuid().toString();
-		if(!temp.mkdir(uuid))
+		QString subDir = QString("%1.tmp").arg(lamexp_rand_str());
+		if(!temp.mkdir(subDir))
 		{
-			qFatal("Temporary directory could not be created:\n%s", QString("%1/%2").arg(temp.canonicalPath(), uuid).toUtf8().constData());
+			qFatal("Temporary directory could not be created:\n%s", QString("%1/%2").arg(temp.canonicalPath(), subDir).toUtf8().constData());
 			return g_lamexp_temp_folder;
 		}
-		if(!temp.cd(uuid))
+		if(!temp.cd(subDir))
 		{
-			qFatal("Temporary directory could not be entered:\n%s", QString("%1/%2").arg(temp.canonicalPath(), uuid).toUtf8().constData());
+			qFatal("Temporary directory could not be entered:\n%s", QString("%1/%2").arg(temp.canonicalPath(), subDir).toUtf8().constData());
 			return g_lamexp_temp_folder;
 		}
 		
-		QFile testFile(QString("%1/~test.txt").arg(temp.canonicalPath()));
+		QFile testFile(QString("%1/.%2").arg(temp.canonicalPath(), lamexp_rand_str()));
 		if(!testFile.open(QIODevice::ReadWrite) || testFile.write("LAMEXP_TEST\n") < 12)
 		{
 			qFatal("Write access to temporary directory has been denied:\n%s", temp.canonicalPath().toUtf8().constData());
