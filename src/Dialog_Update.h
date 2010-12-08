@@ -48,6 +48,7 @@ private slots:
 protected:
 	void showEvent(QShowEvent *event);
 	void closeEvent(QCloseEvent *event);
+	void keyPressEvent(QKeyEvent *e);
 
 private:
 	bool tryUpdateMirror(UpdateInfo *updateInfo, const QString &url);

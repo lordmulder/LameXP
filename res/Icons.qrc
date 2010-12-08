@@ -10,8 +10,10 @@
     <file>icons/arrow_down.png</file>
     <file>icons/arrow_up.png</file>
     <file>icons/arrow_refresh.png</file>
+    <file>icons/bell.png</file>
     <file>icons/bin.png</file>
     <file>icons/bomb.png</file>
+    <file>icons/bug.png</file>
     <file>icons/calendar.png</file>
     <file>icons/cancel.png</file>
     <file>icons/cd.png</file>
@@ -53,6 +55,7 @@
     <file>icons/play.png</file>
     <file>icons/resultset_next.png</file>
     <file>icons/script_edit.png</file>
+    <file>icons/server_error.png</file>
     <file>icons/sound.png</file>
     <file>icons/star.png</file>
     <file>icons/table_edit.png</file>

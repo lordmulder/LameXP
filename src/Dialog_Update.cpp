@@ -146,6 +146,8 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	retryButton->hide();
 	logButton->hide();
 	infoLabel->hide();
+	hintLabel->hide();
+	hintIcon->hide();
 	
 	int counter = 2;
 	for(int i = 0; known_hosts[i]; i++) counter++;
@@ -158,6 +160,18 @@ void UpdateDialog::showEvent(QShowEvent *event)
 void UpdateDialog::closeEvent(QCloseEvent *event)
 {
 	if(!closeButton->isEnabled()) event->ignore();
+}
+
+void UpdateDialog::keyPressEvent(QKeyEvent *e)
+{
+	if(e->key() == Qt::Key_F11)
+	{
+		if(closeButton->isEnabled()) logButtonClicked();
+	}
+	else
+	{
+		QDialog::keyPressEvent(e);
+	}
 }
 
 void UpdateDialog::updateInit(void)
@@ -181,6 +195,8 @@ void UpdateDialog::checkForUpdates(void)
 	retryButton->setEnabled(false);
 	logButton->setEnabled(false);
 	if(infoLabel->isVisible()) infoLabel->hide();
+	if(hintLabel->isVisible()) hintLabel->hide();
+	if(hintIcon->isVisible()) hintIcon->hide();
 
 	QApplication::processEvents();
 	QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -212,8 +228,12 @@ void UpdateDialog::checkForUpdates(void)
 		closeButton->setEnabled(true);
 		retryButton->setEnabled(true);
 		logButton->setEnabled(true);
-		statusLabel->setText("Connectivity test faild. Please check your internet connection!");
+		statusLabel->setText("Network connectivity test has faild!");
 		progressBar->setValue(progressBar->maximum());
+		hintIcon->setPixmap(QIcon(":/icons/error.png").pixmap(16,16));
+		hintLabel->setText("Please make sure your internet connection is working properly and try again.");
+		hintIcon->show();
+		hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		QApplication::restoreOverrideCursor();
@@ -246,8 +266,12 @@ void UpdateDialog::checkForUpdates(void)
 		closeButton->setEnabled(true);
 		retryButton->setEnabled(true);
 		logButton->setEnabled(true);
-		statusLabel->setText("Failed to fetch update information from server. Try again later!");
+		statusLabel->setText("Failed to fetch update information from server!");
 		progressBar->setValue(progressBar->maximum());
+		hintIcon->setPixmap(QIcon(":/icons/server_error.png").pixmap(16,16));
+		hintLabel->setText("Sorry, the update server might be busy at this time. Plase try again later.");
+		hintIcon->show();
+		hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		return;
@@ -261,17 +285,29 @@ void UpdateDialog::checkForUpdates(void)
 	if(m_updateInfo->m_buildNo > lamexp_version_build())
 	{
 		installButton->setEnabled(true);
-		statusLabel->setText("A new version of LameXP is available. Update highly recommended!");
+		statusLabel->setText("A new version of LameXP is available!");
+		hintIcon->setPixmap(QIcon(":/icons/bell.png").pixmap(16,16));
+		hintLabel->setText("We highly recommend all users to install this update as soon as possible.");
+		hintIcon->show();
+		hintLabel->show();
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else if(m_updateInfo->m_buildNo == lamexp_version_build())
 	{
-		statusLabel->setText("No new updates avialbale. Your version of LameXP is up-to-date.");
+		statusLabel->setText("No new updates avialbale at this time.");
+		hintIcon->setPixmap(QIcon(":/icons/information.png").pixmap(16,16));
+		hintLabel->setText("Your version of LameXP is still up-to-date. Please check for updates regularly!");
+		hintIcon->show();
+		hintLabel->show();
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else
 	{
 		statusLabel->setText("Your version appears to be newer than the latest release.");
+		hintIcon->setPixmap(QIcon(":/icons/bug.png").pixmap(16,16));
+		hintLabel->setText("This usually indicates your are currently using a pre-release version of LameXP.");
+		hintIcon->show();
+		hintLabel->show();
 		MessageBeep(MB_ICONEXCLAMATION);
 	}
 
