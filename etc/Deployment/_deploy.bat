@@ -24,6 +24,8 @@ set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
 set "OBJ_PATH=..\..\obj\%LAMEXP_CONFIG%"
 set "MOC_PATH=..\..\tmp"
 REM ------------------------------------------
+REM goto SkipBuildThisTime
+REM ------------------------------------------
 REM :: CLEAN UP ::
 REM ------------------------------------------
 del /Q "%OUT_PATH%\*.exe"
@@ -42,6 +44,8 @@ if not "%LAMEXP_ERROR%"=="0" (
 	call _error.bat	"BUILD HAS FAILED"
 	GOTO:EOF
 )
+REM ------------------------------------------
+REM :SkipBuildThisTime
 REM ------------------------------------------
 REM :: READ VERSION INFO ::
 REM ------------------------------------------

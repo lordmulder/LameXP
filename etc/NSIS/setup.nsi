@@ -35,6 +35,7 @@ ShowInstDetails show
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Header\orange.bmp"
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
+!define MUI_CUSTOMFUNCTION_GUIINIT myUacInit
 
 !searchreplace PRODUCT_VERSION_DATE "${LAMEXP_DATE}" "-" "."
 VIProductVersion "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD}"
@@ -56,7 +57,7 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 !include `${NSISDIR}\Contrib\zip2exe\Base.nsh`
 !include `${NSISDIR}\Contrib\zip2exe\Modern.nsh`
 
-Function .onInit
+Function myUacInit
 	UAC_TryAgain:
 	!insertmacro UAC_RunElevated
 	${Switch} $0
