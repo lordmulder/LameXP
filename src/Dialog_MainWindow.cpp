@@ -530,6 +530,8 @@ void MainWindow::windowShown(void)
 		QString messageText;
 		messageText += "<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>";
 		messageText += "Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>";
+		messageText += "Your LameXP directory is as follows:<br>";
+		messageText += "<i><nobr>" + QDir::toNativeSeparators(QCoreApplication::applicationDirPath()) + "</nobr></i><br><br>";
 		messageText += "You can download the Nero AAC encoder for free from the official Nero website at:<br>";
 		messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 		QMessageBox::information(this, "AAC Support Disabled", messageText);

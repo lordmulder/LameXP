@@ -608,7 +608,9 @@ QString lamexp_rand_str(void)
  */
 const QString &lamexp_temp_folder(void)
 {
+	const GUID LocalAppDataID={0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
 	const GUID LocalAppDataLowID={0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
+	
 	typedef HANDLE (WINAPI *SHGetKnownFolderPathFun)(__in const GUID &rfid, __in DWORD dwFlags, __in HANDLE hToken, __out PWSTR *ppszPath);
 
 	if(g_lamexp_temp_folder.isEmpty())
@@ -620,22 +622,23 @@ const QString &lamexp_temp_folder(void)
 
 		if(SHGetKnownFolderPathPtr)
 		{
-			WCHAR *localAppDataLowPath = NULL;
-			if(SHGetKnownFolderPathPtr(LocalAppDataLowID, 0x00008000, NULL, &localAppDataLowPath) == S_OK)
+			WCHAR *localAppDataPath = NULL;
+			if(SHGetKnownFolderPathPtr(LocalAppDataID, 0x00008000, NULL, &localAppDataPath) == S_OK)
 			{
-				QDir localAppDataLow = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(localAppDataLowPath))));
-				if(localAppDataLow.exists())
+				MessageBoxW(NULL, localAppDataPath, L"LocalAppData", MB_TOPMOST);
+				QDir localAppData = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(localAppDataPath))));
+				if(localAppData.exists())
 				{
-					if(!localAppDataLow.entryList(QDir::AllDirs).contains("Temp"))
+					if(!localAppData.entryList(QDir::AllDirs).contains("Temp"))
 					{
-						localAppDataLow.mkdir("Temp");
+						localAppData.mkdir("Temp");
 					}
-					if(localAppDataLow.cd("Temp"))
+					if(localAppData.cd("Temp"))
 					{
-						temp.setPath(localAppDataLow.canonicalPath());
+						temp.setPath(localAppData.canonicalPath());
 					}
 				}
-				CoTaskMemFree(localAppDataLowPath);
+				CoTaskMemFree(localAppDataPath);
 			}
 		}
 
