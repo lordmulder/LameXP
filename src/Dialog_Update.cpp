@@ -294,7 +294,7 @@ void UpdateDialog::checkForUpdates(void)
 	}
 	else if(m_updateInfo->m_buildNo == lamexp_version_build())
 	{
-		statusLabel->setText("No new updates avialbale at this time.");
+		statusLabel->setText("No new updates available at this time.");
 		hintIcon->setPixmap(QIcon(":/icons/information.png").pixmap(16,16));
 		hintLabel->setText("Your version of LameXP is still up-to-date. Please check for updates regularly!");
 		hintIcon->show();
