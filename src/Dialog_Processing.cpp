@@ -46,6 +46,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QMenu>
+#include <QSystemTrayIcon>
 
 #include <Windows.h>
 
@@ -56,6 +57,12 @@
 	WIDGET->setPalette(palette); \
 }
 
+#define SET_PROGRESS_TEXT(TXT) \
+{ \
+	label_progress->setText(TXT); \
+	m_systemTray->setToolTip(QString().sprintf("LameXP v%d.%02d\n%ls", lamexp_version_major(), lamexp_version_minor(), QString(TXT).utf16())); \
+}
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -63,6 +70,7 @@
 ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent)
 :
 	QDialog(parent),
+	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo)
 {
@@ -118,6 +126,9 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 		}
 	}
 
+	//Enable system tray icon
+	connect(m_systemTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(systemTrayActivated(QSystemTrayIcon::ActivationReason)));
+
 	//Init other vars
 	m_runningThreads = 0;
 	m_currentFile = 0;
@@ -138,6 +149,7 @@ ProcessingDialog::~ProcessingDialog(void)
 	LAMEXP_DELETE(m_progressIndicator);
 	LAMEXP_DELETE(m_progressModel);
 	LAMEXP_DELETE(m_contextMenu);
+	LAMEXP_DELETE(m_systemTray);
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -160,7 +172,8 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 	setCloseButtonEnabled(false);
 	button_closeDialog->setEnabled(false);
 	button_AbortProcess->setEnabled(false);
-
+	m_systemTray->setVisible(true);
+	
 	if(!SetPriorityClass(GetCurrentProcess(), ABOVE_NORMAL_PRIORITY_CLASS))
 	{
 		SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
@@ -171,7 +184,14 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 
 void ProcessingDialog::closeEvent(QCloseEvent *event)
 {
-	if(!button_closeDialog->isEnabled()) event->ignore();
+	if(!button_closeDialog->isEnabled())
+	{
+		event->ignore();
+	}
+	else
+	{
+		m_systemTray->setVisible(false);
+	}
 }
 
 bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
@@ -218,7 +238,7 @@ void ProcessingDialog::initEncoding(void)
 	m_playList.clear();
 	
 	CHANGE_BACKGROUND_COLOR(frame_header, QColor(Qt::white));
-	label_progress->setText("Encoding files, please wait...");
+	SET_PROGRESS_TEXT("Encoding files, please wait...");
 	m_progressIndicator->start();
 	
 	button_closeDialog->setEnabled(false);
@@ -243,7 +263,7 @@ void ProcessingDialog::abortEncoding(void)
 	m_userAborted = true;
 	button_AbortProcess->setEnabled(false);
 	
-	label_progress->setText("Aborted! Waiting for running jobs to terminate...");
+	SET_PROGRESS_TEXT("Aborted! Waiting for running jobs to terminate...");
 
 	for(int i = 0; i < m_threadList.count(); i++)
 	{
@@ -258,7 +278,7 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(!m_userAborted)
 	{
-		label_progress->setText(QString("Encoding: %1 files of %2 completed so far, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
+		SET_PROGRESS_TEXT(QString("Encoding: %1 files of %2 completed so far, please wait...").arg(QString::number(progressBar->value()), QString::number(progressBar->maximum())));
 		WinSevenTaskbar::setTaskbarProgress(this, progressBar->value(), progressBar->maximum());
 	}
 	
@@ -286,7 +306,7 @@ void ProcessingDialog::doneEncoding(void)
 
 	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir())
 	{
-		label_progress->setText("Creatig the playlist file, please wait...");
+		SET_PROGRESS_TEXT("Creatig the playlist file, please wait...");
 		QApplication::processEvents();
 		writePlayList();
 	}
@@ -296,7 +316,8 @@ void ProcessingDialog::doneEncoding(void)
 		CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFF3BA"));
 		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
-		label_progress->setText((m_succeededJobs.count() > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededJobs.count())) : "Process was aborted prematurely by the user!");
+		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededJobs.count())) : "Process was aborted prematurely by the user!");
+		m_systemTray->showMessage("LameXP - Aborted", "Process was aborted by the user.", QSystemTrayIcon::Warning);
 		QApplication::processEvents();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 	}
@@ -307,7 +328,8 @@ void ProcessingDialog::doneEncoding(void)
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFBABA"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
-			label_progress->setText(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count())));
+			SET_PROGRESS_TEXT(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count())));
+			m_systemTray->showMessage("LameXP - Error", "At least one file has failed!", QSystemTrayIcon::Critical	);
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
@@ -316,7 +338,8 @@ void ProcessingDialog::doneEncoding(void)
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#D1FFD5"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
-			label_progress->setText("Alle files completed successfully.");
+			SET_PROGRESS_TEXT("Alle files completed successfully.");
+			m_systemTray->showMessage("LameXP - Done", "All files completed successfully.", QSystemTrayIcon::Information);
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_SUCCESS), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
@@ -506,4 +529,12 @@ void ProcessingDialog::setCloseButtonEnabled(bool enabled)
 {
 	HMENU hMenu = GetSystemMenu((HWND) winId(), FALSE);
 	EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | (enabled ? MF_ENABLED : MF_GRAYED));
+}
+
+void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason reason)
+{
+	if(reason == QSystemTrayIcon::DoubleClick)
+	{
+		SetForegroundWindow(this->winId());
+	}
 }

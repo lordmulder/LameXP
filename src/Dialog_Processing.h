@@ -24,6 +24,7 @@
 #include "../tmp/UIC_ProcessingDialog.h"
 
 #include <QUuid>
+#include <QSystemTrayIcon>
 
 class QMovie;
 class QMenu;
@@ -50,6 +51,7 @@ private slots:
 	void logViewDoubleClicked(const QModelIndex &index);
 	void contextMenuTriggered(const QPoint &pos);
 	void contextMenuActionTriggered(void);
+	void systemTrayActivated(QSystemTrayIcon::ActivationReason reason);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -76,4 +78,5 @@ private:
 	QList<QUuid> m_succeededJobs;
 	QList<QUuid> m_failedJobs;
 	bool m_userAborted;
+	QSystemTrayIcon *m_systemTray;
 };
