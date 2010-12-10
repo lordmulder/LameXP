@@ -33,6 +33,8 @@
 #define CHECK3(STR) (STR.isEmpty() ? Qt::darkGray : QVariant())
 #define CHECK4(VAL) ((VAL == 0) ? Qt::darkGray : QVariant())
 
+#define EXPAND(STR) QString(STR).leftJustified(96, ' ')
+
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
@@ -249,7 +251,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	switch(index.row() + m_offset)
 	{
 	case 5:
-		temp = QInputDialog::getText(parent, "Edit Title", "Please enter the title for this file:", QLineEdit::Normal, m_audioFile->fileName(), &ok).simplified();
+		temp = QInputDialog::getText(parent, "Edit Title", EXPAND("Please enter the title for this file:"), QLineEdit::Normal, m_audioFile->fileName(), &ok).simplified();
 		if(ok)
 		{
 			if(temp.isEmpty())
@@ -265,7 +267,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		}
 		break;
 	case 6:
-		temp = QInputDialog::getText(parent, "Edit Artist", "Please enter the artist for this file:", QLineEdit::Normal, m_audioFile->fileArtist(), &ok).simplified();
+		temp = QInputDialog::getText(parent, "Edit Artist", EXPAND("Please enter the artist for this file:"), QLineEdit::Normal, m_audioFile->fileArtist(), &ok).simplified();
 		if(ok)
 		{
 			beginResetModel();
@@ -274,7 +276,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		}
 		break;
 	case 7:
-		temp = QInputDialog::getText(parent, "Edit Album", "Please enter the album for this file:", QLineEdit::Normal, m_audioFile->fileAlbum(), &ok).simplified();
+		temp = QInputDialog::getText(parent, "Edit Album", EXPAND("Please enter the album for this file:"), QLineEdit::Normal, m_audioFile->fileAlbum(), &ok).simplified();
 		if(ok)
 		{
 			beginResetModel();
@@ -284,7 +286,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		break;
 	case 8:
 		for(int i = 0; g_lamexp_generes[i]; i++) generes << g_lamexp_generes[i];
-		temp = QInputDialog::getItem(parent, "Edit Genre", "Please enter the genre for this file:", generes, (m_audioFile->fileGenre().isEmpty() ? 1 : generes.indexOf(m_audioFile->fileGenre())), false, &ok);
+		temp = QInputDialog::getItem(parent, "Edit Genre", EXPAND("Please enter the genre for this file:"), generes, (m_audioFile->fileGenre().isEmpty() ? 1 : generes.indexOf(m_audioFile->fileGenre())), false, &ok);
 		if(ok)
 		{
 			beginResetModel();
@@ -293,7 +295,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		}
 		break;
 	case 9:
-		val = QInputDialog::getInt(parent, "Edit Year", "Please enter the year for this file:", (m_audioFile->fileYear() ? m_audioFile->fileYear() : 1900), 0, 2100, 1, &ok);
+		val = QInputDialog::getInt(parent, "Edit Year", EXPAND("Please enter the year for this file:"), (m_audioFile->fileYear() ? m_audioFile->fileYear() : 1900), 0, 2100, 1, &ok);
 		if(ok)
 		{
 			beginResetModel();
@@ -304,7 +306,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	case 10:
 		if(!m_offset)
 		{
-			val = QInputDialog::getInt(parent, "Edit Position", "Please enter the position (track no.) for this file:", (m_audioFile->filePosition() ? m_audioFile->filePosition() : 1), 0, 99, 1, &ok);
+			val = QInputDialog::getInt(parent, "Edit Position", EXPAND("Please enter the position (track no.) for this file:"), (m_audioFile->filePosition() ? m_audioFile->filePosition() : 1), 0, 99, 1, &ok);
 			if(ok)
 			{
 				beginResetModel();
@@ -317,7 +319,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 			QStringList options;
 			options << "Unspecified (copy from source file)";
 			options << "Generate from list position";
-			temp = QInputDialog::getItem(parent, "Edit Position", "Please enter the position (track no.) for this file:", options, ((m_audioFile->filePosition() == UINT_MAX) ? 1 : 0), false, &ok);
+			temp = QInputDialog::getItem(parent, "Edit Position", EXPAND("Please enter the position (track no.) for this file:"), options, ((m_audioFile->filePosition() == UINT_MAX) ? 1 : 0), false, &ok);
 			if(ok)
 			{
 				beginResetModel();
@@ -327,7 +329,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		}
 		break;
 	case 11:
-		temp = QInputDialog::getText(parent, "Edit Comment", "Please enter the comment for this file:", QLineEdit::Normal, (m_audioFile->fileComment().isEmpty() ? "Encoded with LameXP" : m_audioFile->fileComment()), &ok).simplified();
+		temp = QInputDialog::getText(parent, "Edit Comment", EXPAND("Please enter the comment for this file:"), QLineEdit::Normal, (m_audioFile->fileComment().isEmpty() ? "Encoded with LameXP" : m_audioFile->fileComment()), &ok).simplified();
 		if(ok)
 		{
 			beginResetModel();

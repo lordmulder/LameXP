@@ -839,42 +839,91 @@ void MainWindow::makeFolderButtonClicked(void)
 	ABORT_IF_BUSY;
 
 	QDir basePath(m_fileSystemModel->fileInfo(outputFolderView->currentIndex()).absoluteFilePath());
-	
-	bool bApplied = true;
-	QString folderName = QInputDialog::getText(this, "New Folder", "Enter the name of the new folder:", QLineEdit::Normal, "New folder", &bApplied, Qt::WindowStaysOnTopHint).simplified();
+	QString suggestedName = "New Folder";
 
-	if(bApplied)
+	if(!m_metaData->fileArtist().isEmpty() && !m_metaData->fileAlbum().isEmpty())
 	{
-		folderName.remove(":", Qt::CaseInsensitive);
-		folderName.remove("/", Qt::CaseInsensitive);
-		folderName.remove("\\", Qt::CaseInsensitive);
-		folderName.remove("?", Qt::CaseInsensitive);
-		folderName.remove("*", Qt::CaseInsensitive);
-		folderName.remove("<", Qt::CaseInsensitive);
-		folderName.remove(">", Qt::CaseInsensitive);
-		
-		int i = 1;
-		QString newFolder = folderName;
-
-		while(basePath.exists(newFolder))
+		suggestedName = QString("%1 - %2").arg(m_metaData->fileArtist(), m_metaData->fileAlbum());
+	}
+	else if(!m_metaData->fileArtist().isEmpty())
+	{
+		suggestedName = m_metaData->fileArtist();
+	}
+	else if(!m_metaData->fileAlbum().isEmpty())
+	{
+		suggestedName = m_metaData->fileAlbum();
+	}
+	else
+	{
+		for(int i = 0; i < m_fileListModel->rowCount(); i++)
 		{
-			newFolder = QString(folderName).append(QString().sprintf(" (%d)", ++i));
-		}
-		
-		if(basePath.mkdir(newFolder))
-		{
-			QDir createdDir = basePath;
-			if(createdDir.cd(newFolder))
+			AudioFileModel audioFile = m_fileListModel->getFile(m_fileListModel->index(i, 0));
+			if(!audioFile.fileAlbum().isEmpty() || !audioFile.fileArtist().isEmpty())
 			{
-				outputFolderView->setCurrentIndex(m_fileSystemModel->index(createdDir.canonicalPath()));
-				outputFolderViewClicked(outputFolderView->currentIndex());
-				outputFolderView->setFocus();
+				if(!audioFile.fileArtist().isEmpty() && !audioFile.fileAlbum().isEmpty())
+				{
+					suggestedName = QString("%1 - %2").arg(audioFile.fileArtist(), audioFile.fileAlbum());
+				}
+				else if(!audioFile.fileArtist().isEmpty())
+				{
+					suggestedName = audioFile.fileArtist();
+				}
+				else if(!audioFile.fileAlbum().isEmpty())
+				{
+					suggestedName = audioFile.fileAlbum();
+				}
+				break;
 			}
 		}
-		else
+	}
+	
+	while(true)
+	{
+		bool bApplied = false;
+		QString folderName = QInputDialog::getText(this, "New Folder", QString("Enter the name of the new folder:").leftJustified(96, ' '), QLineEdit::Normal, suggestedName, &bApplied, Qt::WindowStaysOnTopHint).simplified();
+
+		if(bApplied)
 		{
-			QMessageBox::warning(this, "Failed to create folder", QString("The new folder could not be created:<br><nobr>%1</nobr><br><br>Drive is read-only or insufficient access rights!").arg(basePath.absoluteFilePath(newFolder)));
+			folderName.remove(":", Qt::CaseInsensitive);
+			folderName.remove("/", Qt::CaseInsensitive);
+			folderName.remove("\\", Qt::CaseInsensitive);
+			folderName.remove("?", Qt::CaseInsensitive);
+			folderName.remove("*", Qt::CaseInsensitive);
+			folderName.remove("<", Qt::CaseInsensitive);
+			folderName.remove(">", Qt::CaseInsensitive);
+			
+			folderName = folderName.simplified();
+
+			if(folderName.isEmpty())
+			{
+				MessageBeep(MB_ICONERROR);
+				continue;
+			}
+
+			int i = 1;
+			QString newFolder = folderName;
+
+			while(basePath.exists(newFolder))
+			{
+				newFolder = QString(folderName).append(QString().sprintf(" (%d)", ++i));
+			}
+			
+			if(basePath.mkdir(newFolder))
+			{
+				QDir createdDir = basePath;
+				if(createdDir.cd(newFolder))
+				{
+					outputFolderView->setCurrentIndex(m_fileSystemModel->index(createdDir.canonicalPath()));
+					outputFolderViewClicked(outputFolderView->currentIndex());
+					outputFolderView->setFocus();
+				}
+			}
+			else
+			{
+				QMessageBox::warning(this, "Failed to create folder", QString("The new folder could not be created:<br><nobr>%1</nobr><br><br>Drive is read-only or insufficient access rights!").arg(basePath.absoluteFilePath(newFolder)));
+			}
 		}
+		break;
 	}
 }
 
