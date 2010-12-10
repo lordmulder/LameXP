@@ -121,8 +121,9 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	//Init other vars
 	m_runningThreads = 0;
 	m_currentFile = 0;
-	m_succeededFiles = 0;
-	m_failedFiles = 0;
+	m_allJobs.clear();
+	m_succeededJobs.clear();
+	m_failedJobs.clear();
 	m_userAborted = false;
 }
 
@@ -210,8 +211,9 @@ void ProcessingDialog::initEncoding(void)
 {
 	m_runningThreads = 0;
 	m_currentFile = 0;
-	m_succeededFiles = 0;
-	m_failedFiles = 0;
+	m_allJobs.clear();
+	m_succeededJobs.clear();
+	m_failedJobs.clear();
 	m_userAborted = false;
 	m_playList.clear();
 	
@@ -294,18 +296,18 @@ void ProcessingDialog::doneEncoding(void)
 		CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFF3BA"));
 		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
-		label_progress->setText((m_succeededFiles > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededFiles)) : "Process was aborted prematurely by the user!");
+		label_progress->setText((m_succeededJobs.count() > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededJobs.count())) : "Process was aborted prematurely by the user!");
 		QApplication::processEvents();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 	}
 	else
 	{
-		if(m_failedFiles)
+		if(m_failedJobs.count() > 0)
 		{
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFBABA"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
-			label_progress->setText(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedFiles), QString::number(m_failedFiles + m_succeededFiles)));
+			label_progress->setText(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count())));
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
@@ -336,12 +338,12 @@ void ProcessingDialog::processFinished(const QUuid &jobId, const QString &outFil
 {
 	if(success)
 	{
-		m_succeededFiles++;
-		m_playList.append(outFileName);
+		m_playList.insert(jobId, outFileName);
+		m_succeededJobs.append(jobId);
 	}
 	else
 	{
-		m_failedFiles++;
+		m_failedJobs.append(jobId);
 	}
 }
 
@@ -423,7 +425,9 @@ void ProcessingDialog::startNextJob(void)
 	}
 
 	ProcessThread *thread = new ProcessThread(currentFile, (m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath(): m_settings->outputDir()), encoder);
+	
 	m_threadList.append(thread);
+	m_allJobs.append(thread->getId());
 	
 	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
@@ -437,6 +441,12 @@ void ProcessingDialog::startNextJob(void)
 
 void ProcessingDialog::writePlayList(void)
 {
+	if(m_succeededJobs.count() <= 0 || m_allJobs.count() <= 0)
+	{
+		qWarning("WritePlayList: Nothing to do!");
+		return;
+	}
+	
 	QString playListName = (m_metaInfo->fileAlbum().isEmpty() ? "Playlist" : m_metaInfo->fileAlbum());
 
 	const static char *invalidChars = "\\/:*?\"<>|";
@@ -453,14 +463,16 @@ void ProcessingDialog::writePlayList(void)
 	{
 		playListFile = QString("%1/%2 (%3).m3u").arg(m_settings->outputDir(), playListName, QString::number(++counter));
 	}
-	
+
 	QFile playList(playListFile);
 	if(playList.open(QIODevice::WriteOnly))
 	{
 		playList.write("#EXTM3U\r\n");
-		for(int i = 0; i < m_playList.count(); i++)
+		for(int i = 0; i < m_allJobs.count(); i++)
 		{
-			playList.write(QFileInfo(m_playList.at(i)).fileName().toUtf8().constData());
+			
+			if(!m_succeededJobs.contains(m_allJobs.at(i))) continue;
+			playList.write(QFileInfo(m_playList.value(m_allJobs.at(i), "N/A")).fileName().toUtf8().constData());
 			playList.write("\r\n");
 		}
 		playList.close();
