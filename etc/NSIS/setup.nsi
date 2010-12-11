@@ -142,13 +142,15 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 ;MUI2 Pages
 ;--------------------------------
 
+;Installer
 !insertmacro MUI_PAGE_WELCOME
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
-  
+
+;Uninstaller
 !insertmacro MUI_UNPAGE_WELCOME
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
@@ -160,28 +162,50 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 ;--------------------------------
  
 !insertmacro MUI_LANGUAGE "English" ;first language is the default language
-!insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "German"
-!insertmacro MUI_LANGUAGE "Spanish"
-!insertmacro MUI_LANGUAGE "SpanishInternational"
-!insertmacro MUI_LANGUAGE "SimpChinese"
-!insertmacro MUI_LANGUAGE "TradChinese"
-!insertmacro MUI_LANGUAGE "Japanese"
-!insertmacro MUI_LANGUAGE "Italian"
-!insertmacro MUI_LANGUAGE "Dutch"
-!insertmacro MUI_LANGUAGE "Greek"
-!insertmacro MUI_LANGUAGE "Russian"
-!insertmacro MUI_LANGUAGE "Polish"
-!insertmacro MUI_LANGUAGE "Ukrainian"
-!insertmacro MUI_LANGUAGE "Hungarian"
-!insertmacro MUI_LANGUAGE "Romanian"
-!insertmacro MUI_LANGUAGE "Serbian"
-!insertmacro MUI_LANGUAGE "SerbianLatin"
-!insertmacro MUI_LANGUAGE "Arabic"
-!insertmacro MUI_LANGUAGE "Portuguese"
-!insertmacro MUI_LANGUAGE "Afrikaans"
-!insertmacro MUI_LANGUAGE "Malay"
-!insertmacro MUI_LANGUAGE "Indonesian"
+
+; !insertmacro MUI_LANGUAGE "French"
+; !insertmacro MUI_LANGUAGE "Spanish"
+; !insertmacro MUI_LANGUAGE "SpanishInternational"
+; !insertmacro MUI_LANGUAGE "SimpChinese"
+; !insertmacro MUI_LANGUAGE "TradChinese"
+; !insertmacro MUI_LANGUAGE "Japanese"
+; !insertmacro MUI_LANGUAGE "Italian"
+; !insertmacro MUI_LANGUAGE "Dutch"
+; !insertmacro MUI_LANGUAGE "Greek"
+; !insertmacro MUI_LANGUAGE "Russian"
+; !insertmacro MUI_LANGUAGE "Polish"
+; !insertmacro MUI_LANGUAGE "Ukrainian"
+; !insertmacro MUI_LANGUAGE "Hungarian"
+; !insertmacro MUI_LANGUAGE "Romanian"
+; !insertmacro MUI_LANGUAGE "Serbian"
+; !insertmacro MUI_LANGUAGE "SerbianLatin"
+; !insertmacro MUI_LANGUAGE "Arabic"
+; !insertmacro MUI_LANGUAGE "Portuguese"
+; !insertmacro MUI_LANGUAGE "Afrikaans"
+; !insertmacro MUI_LANGUAGE "Malay"
+; !insertmacro MUI_LANGUAGE "Indonesian"
+
+
+;--------------------------------
+;Translation
+;--------------------------------
+
+;English
+LangString LAMEXP_LANG_STATUS_CLOSING    ${LANG_ENGLISH} "Closing running instance, please wait..."
+LangString LAMEXP_LANG_STATUS_INSTFILES  ${LANG_ENGLISH} "Installing program files, please wait..."
+LangString LAMEXP_LANG_STATUS_MAKEUNINST ${LANG_ENGLISH} "Creating the uninstaller, please wait..."
+LangString LAMEXP_LANG_STATUS_SHORTCUTS  ${LANG_ENGLISH} "Creating shortcuts, please wait..."
+LangString LAMEXP_LANG_STATUS_REGISTRY   ${LANG_ENGLISH} "Updating the registry, please wait..."
+LangString LAMEXP_LANG_STATUS_UNINSTALL  ${LANG_ENGLISH} "Uninstalling program, please wait..."
+
+;German
+LangString LAMEXP_LANG_STATUS_CLOSING    ${LANG_GERMAN} "Schließe laufende Instanz, bitte warten..."
+LangString LAMEXP_LANG_STATUS_INSTFILES  ${LANG_GERMAN} "Installiere Programm-Dateien, bitte warten..."
+LangString LAMEXP_LANG_STATUS_MAKEUNINST ${LANG_GERMAN} "Erzeuge Uninstaller, bitte warten..."
+LangString LAMEXP_LANG_STATUS_SHORTCUTS  ${LANG_GERMAN} "Erzeuge Verknüpfungen, bitte warten..."
+LangString LAMEXP_LANG_STATUS_REGISTRY   ${LANG_GERMAN} "Registrierung wird aktualisiert, bitte warten..."
+LangString LAMEXP_LANG_STATUS_UNINSTALL  ${LANG_GERMAN} "Programm wird deinstalliert, bitte warten..."
 
 
 ;--------------------------------
@@ -261,37 +285,77 @@ FunctionEnd
   Sleep 1000
 !macroend
 
+!macro CreateWebLink ShortcutFile TargetURL
+  Push $0
+  Push $1
+  StrCpy $0 "${ShortcutFile}"
+  StrCpy $1 "${TargetURL}"
+  Call _CreateWebLink
+  Pop $1
+  Pop $0
+!macroend
+
+Function _CreateWebLink
+  FlushINI "$0"
+  SetFileAttributes "$0" FILE_ATTRIBUTE_NORMAL
+  DeleteINISec "$0" "DEFAULT"
+  DeleteINISec "$0" "InternetShortcut"
+  WriteINIStr "$0" "DEFAULT" "BASEURL" "$1"
+  WriteINIStr "$0" "InternetShortcut" "ORIGURL" "$1"
+  WriteINIStr "$0" "InternetShortcut" "URL" "$1"
+  WriteINIStr "$0" "InternetShortcut" "IconFile" "$SYSDIR\SHELL32.dll"
+  WriteINIStr "$0" "InternetShortcut" "IconIndex" "150"
+  FlushINI "$0"
+  SetFileAttributes "$0" FILE_ATTRIBUTE_READONLY
+FunctionEnd
+
 
 ;--------------------------------
 ;Install Files
 ;--------------------------------
 
-Section "!Install Files"
-	!insertmacro PrintProgress "Installing program files, please wait..."
+Section "-Prepare"
 	SetOutPath "$INSTDIR"
+SectionEnd
+
+Section "-Terminate"
+	IfFileExists "$INSTDIR\LameXP.exe" 0 NotInstalled
+		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_CLOSING)"
+		!insertmacro UAC_AsUser_Call Function CloseRunningInstance UAC_SYNCOUTDIR
+	NotInstalled:
+SectionEnd
+
+Section "!Install Files"
+	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_INSTFILES)"
 	File /r `${LAMEXP_SOURCE_PATH}\*.*`
 SectionEnd
 
 Section "-Write Uinstaller"
-	!insertmacro PrintProgress "Creating the uninstaller, please wait..."
+	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_MAKEUNINST)"
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd
 
 Section "-Create Shortcuts"
 	!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-		!insertmacro PrintProgress "Creating shortcuts, please wait..."
+		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_SHORTCUTS)"
 		CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
+		
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.lnk"
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.pif"
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.url"
+		
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" "$INSTDIR\LameXP.exe" "" "$INSTDIR\LameXP.exe" 0
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\License.lnk" "$INSTDIR\License.txt"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
+		
+		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\Official LameXP Homepage.url" "http://mulder.dummwiedeutsch.de/"
+		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\RareWares.org.url" "http://rarewares.org/"
+		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\Hydrogenaudio Forums.url" "http://www.hydrogenaudio.org/"
 	!insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
 Section "-Update Registry"
-	!insertmacro PrintProgress "Updating the registry, please wait..."
+	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_REGISTRY)"
 	WriteRegStr HKLM "${MyRegPath}" "InstallLocation" "$INSTDIR"
 	WriteRegStr HKLM "${MyRegPath}" "UninstallString" '"$INSTDIR\Uninstall.exe"'
 	WriteRegStr HKLM "${MyRegPath}" "DisplayName" "LameXP"
@@ -307,7 +371,7 @@ SectionEnd
 ;--------------------------------
 
 Section "Uninstall"
-	!insertmacro PrintProgress "Uninstalling program, please wait..."
+	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_UNINSTALL)"
 
 	Delete /REBOOTOK "$INSTDIR\*.exe"
 	Delete /REBOOTOK "$INSTDIR\*.txt"
@@ -351,9 +415,6 @@ Function CheckForUpdate
 	EnableWindow $R1 0
 FunctionEnd
 
-;GetDlgItem $R1 $HWNDPARENT 1
-;SendMessage $R1 ${WM_SETTEXT} 0 "STR:Update"
-
 
 ;--------------------------------
 ;Install Success
@@ -366,4 +427,13 @@ FunctionEnd
 
 Function ShowReadmeFunction
 	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\License.txt" "" "" SW_SHOWNORMAL
+FunctionEnd
+
+
+;--------------------------------
+;Close Running Instance
+;--------------------------------
+
+Function CloseRunningInstance
+	nsExec::Exec /TIMEOUT=30000 '"$OUTDIR\LameXP.exe" --force-kill'
 FunctionEnd
