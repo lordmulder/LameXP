@@ -83,6 +83,17 @@ SetCompressorDictSize 64
 
 
 ;--------------------------------
+;Reserved Files
+;--------------------------------
+
+ReserveFile "${NSISDIR}\Plugins\UAC.dll"
+ReserveFile "${NSISDIR}\Plugins\System.dll"
+ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
+ReserveFile "${NSISDIR}\Plugins\StartMenu.dll"
+ReserveFile "${NSISDIR}\Plugins\LockedList.dll"
+
+
+;--------------------------------
 ;Variables
 ;--------------------------------
 
@@ -114,7 +125,6 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 ;--------------------------------
 
 !define MUI_ABORTWARNING
-!define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${MyRegPath}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "StartmenuFolder"
@@ -124,7 +134,6 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "LameXP v${LAMEXP_VERSION}"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
-!define MUI_FINISHPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_RUN
 !define MUI_FINISHPAGE_RUN_FUNCTION RunAppFunction
 !define MUI_FINISHPAGE_SHOWREADME
@@ -146,16 +155,22 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 ;--------------------------------
 
 ;Installer
+!define MUI_WELCOMEPAGE_TITLE_3LINES
+!define MUI_FINISHPAGE_TITLE_3LINES
 !insertmacro MUI_PAGE_WELCOME
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
+Page Custom LockedListShow
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 
 ;Uninstaller
+!define MUI_WELCOMEPAGE_TITLE_3LINES
+!define MUI_FINISHPAGE_TITLE_3LINES
 !insertmacro MUI_UNPAGE_WELCOME
 !insertmacro MUI_UNPAGE_CONFIRM
+UninstPage Custom un.LockedListShow
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_UNPAGE_FINISH
 
@@ -195,20 +210,34 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 ;--------------------------------
 
 ;English
-LangString LAMEXP_LANG_STATUS_CLOSING    ${LANG_ENGLISH} "Closing running instance, please wait..."
-LangString LAMEXP_LANG_STATUS_INSTFILES  ${LANG_ENGLISH} "Installing program files, please wait..."
-LangString LAMEXP_LANG_STATUS_MAKEUNINST ${LANG_ENGLISH} "Creating the uninstaller, please wait..."
-LangString LAMEXP_LANG_STATUS_SHORTCUTS  ${LANG_ENGLISH} "Creating shortcuts, please wait..."
-LangString LAMEXP_LANG_STATUS_REGISTRY   ${LANG_ENGLISH} "Updating the registry, please wait..."
-LangString LAMEXP_LANG_STATUS_UNINSTALL  ${LANG_ENGLISH} "Uninstalling program, please wait..."
+LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_ENGLISH} "Closing running instance, please wait..."
+LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_ENGLISH} "Installing program files, please wait..."
+LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_ENGLISH} "Creating the uninstaller, please wait..."
+LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_ENGLISH} "Creating shortcuts, please wait..."
+LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_ENGLISH} "Updating the registry, please wait..."
+LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_ENGLISH} "Uninstalling program, please wait..."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_ENGLISH} "Running Instances"
+LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_ENGLISH} "Checking for running instances of LameXP."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_ENGLISH} "Please close the following programs before continuing with setup..."
+LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_ENGLISH} "No programs that have to be closed are running."
+LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_ENGLISH} "Searching, please wait..."
+LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_ENGLISH} "Application"
+LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_ENGLISH} "Process"
 
 ;German
-LangString LAMEXP_LANG_STATUS_CLOSING    ${LANG_GERMAN} "Schließe laufende Instanz, bitte warten..."
-LangString LAMEXP_LANG_STATUS_INSTFILES  ${LANG_GERMAN} "Installiere Programm-Dateien, bitte warten..."
-LangString LAMEXP_LANG_STATUS_MAKEUNINST ${LANG_GERMAN} "Erzeuge Uninstaller, bitte warten..."
-LangString LAMEXP_LANG_STATUS_SHORTCUTS  ${LANG_GERMAN} "Erzeuge Verknüpfungen, bitte warten..."
-LangString LAMEXP_LANG_STATUS_REGISTRY   ${LANG_GERMAN} "Registrierung wird aktualisiert, bitte warten..."
-LangString LAMEXP_LANG_STATUS_UNINSTALL  ${LANG_GERMAN} "Programm wird deinstalliert, bitte warten..."
+LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_GERMAN} "Schließe laufende Instanz, bitte warten..."
+LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_GERMAN} "Installiere Programm-Dateien, bitte warten..."
+LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_GERMAN} "Erzeuge Uninstaller, bitte warten..."
+LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_GERMAN} "Erzeuge Verknüpfungen, bitte warten..."
+LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_GERMAN} "Registrierung wird aktualisiert, bitte warten..."
+LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_GERMAN} "Programm wird deinstalliert, bitte warten..."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_GERMAN} "Laufende Instanzen"
+LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_GERMAN} "Suche nach laufenden Instanzen von LameXP."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_GERMAN} "Bitte schließen Sie die folgenden Programme um fortfahren zu können..."
+LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_GERMAN} "Es müssen keine Programme geschlossen werden."
+LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_GERMAN} "Suche, bitte warten..."
+LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_GERMAN} "Anwendung"
+LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_GERMAN} "Prozess"
 
 
 ;--------------------------------
@@ -321,13 +350,6 @@ Section "-Prepare"
 	SetOutPath "$INSTDIR"
 SectionEnd
 
-Section "-Terminate"
-	IfFileExists "$INSTDIR\LameXP.exe" 0 NotInstalled
-		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_CLOSING)"
-		!insertmacro UAC_AsUser_Call Function CloseRunningInstance UAC_SYNCOUTDIR
-	NotInstalled:
-SectionEnd
-
 Section "!Install Files"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_INSTFILES)"
 	File /r `${LAMEXP_SOURCE_PATH}\*.*`
@@ -374,12 +396,8 @@ SectionEnd
 ;--------------------------------
 
 Section "Uninstall"
+	SetOutPath "$INSTDIR"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_UNINSTALL)"
-
-	IfFileExists "$INSTDIR\LameXP.exe" 0 UnNotInstalled
-		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_CLOSING)"
-		!insertmacro UAC_AsUser_Call Function un.CloseRunningInstance UAC_SYNCOUTDIR
-	UnNotInstalled:
 
 	Delete /REBOOTOK "$INSTDIR\*.exe"
 	Delete /REBOOTOK "$INSTDIR\*.txt"
@@ -427,6 +445,28 @@ FunctionEnd
 
 
 ;--------------------------------
+;Locked List
+;--------------------------------
+
+Function LockedListShow
+  !insertmacro MUI_HEADER_TEXT "$(LAMEXP_LANG_LOCKEDLIST_HEADER)" "$(LAMEXP_LANG_LOCKEDLIST_TEXT)"
+  LockedList::AddModule "\LameXP.exe"
+  LockedList::AddModule "\Uninstall.exe"
+  LockedList::AddModule "\Au_.exe"
+  LockedList::Dialog /heading "$(LAMEXP_LANG_LOCKEDLIST_HEADING)" /noprograms "$(LAMEXP_LANG_LOCKEDLIST_NOPROG)" /searching  "$(LAMEXP_LANG_LOCKEDLIST_SEARCH)" /colheadings "$(LAMEXP_LANG_LOCKEDLIST_COLHDR1)" "$(LAMEXP_LANG_LOCKEDLIST_COLHDR2)"
+  Pop $R0
+FunctionEnd
+
+Function un.LockedListShow
+  !insertmacro MUI_HEADER_TEXT "$(LAMEXP_LANG_LOCKEDLIST_HEADER)" "$(LAMEXP_LANG_LOCKEDLIST_TEXT)"
+  LockedList::AddModule "\LameXP.exe"
+  LockedList::AddModule "\Uninstall.exe"
+  LockedList::Dialog /heading "$(LAMEXP_LANG_LOCKEDLIST_HEADING)" /noprograms "$(LAMEXP_LANG_LOCKEDLIST_NOPROG)" /searching  "$(LAMEXP_LANG_LOCKEDLIST_SEARCH)" /colheadings "$(LAMEXP_LANG_LOCKEDLIST_COLHDR1)" "$(LAMEXP_LANG_LOCKEDLIST_COLHDR2)"
+  Pop $R0
+FunctionEnd
+
+
+;--------------------------------
 ;Install Success
 ;--------------------------------
 
@@ -437,18 +477,5 @@ FunctionEnd
 
 Function ShowReadmeFunction
 	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\License.txt" "" "" SW_SHOWNORMAL
-FunctionEnd
-
-
-;--------------------------------
-;Close Running Instance
-;--------------------------------
-
-Function CloseRunningInstance
-	nsExec::Exec /TIMEOUT=30000 '"$OUTDIR\LameXP.exe" --force-kill'
-FunctionEnd
-
-Function un.CloseRunningInstance
-	nsExec::Exec /TIMEOUT=30000 '"$OUTDIR\LameXP.exe" --force-kill'
 FunctionEnd
 
