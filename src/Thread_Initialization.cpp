@@ -29,6 +29,9 @@
 #include <QProcess>
 #include <QMap>
 #include <QDir>
+#include <QLibrary>
+
+#include <Windows.h>
 
 ////////////////////////////////////////////////////////////
 // TOOLS
@@ -137,6 +140,9 @@ void InitializationThread::run()
 	//Look for Nero encoder
 	initNeroAac();
 	
+	//Look for WMA File decoder
+	initWmaDec();
+
 	delay();
 	m_bSuccess = true;
 }
@@ -257,6 +263,54 @@ void InitializationThread::initNeroAac(void)
 	for(int i = 0; i < 3; i++)
 	{
 		lamexp_register_tool(neroFileInfo[i].fileName(), neroBin[i], neroVersion);
+	}
+}
+
+
+void InitializationThread::initWmaDec(void)
+{
+	typedef HRESULT (WINAPI *SHGetFolderPathFun)(__in HWND hwndOwner, __in int nFolder, __in HANDLE hToken, __in DWORD dwFlags, __out LPWSTR pszPath);
+	static const char* wmaDecoderComponentPath = "NCH Software/Components/wmawav/wmawav.exe";
+	static const int CSIDL_PROGRAM_FILES = 0x0026;
+
+	QLibrary Kernel32Lib("shell32.dll");
+	SHGetFolderPathFun SHGetFolderPathPtr = (SHGetFolderPathFun) Kernel32Lib.resolve("SHGetFolderPathW");
+	QDir programFilesDir = QDir::temp();
+
+	if(SHGetFolderPathPtr)
+	{
+		WCHAR *programFilesPath = new WCHAR[4096];
+		if(SHGetFolderPathPtr(NULL, CSIDL_PROGRAM_FILES, NULL, NULL, programFilesPath) == S_OK)
+		{
+			programFilesDir.setPath(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(programFilesPath))));
+		}
+	}
+
+	LockedFile *wmaFileBin = NULL;
+	QFileInfo wmaFileInfo = QFileInfo(QString("%1/%2").arg(programFilesDir.absolutePath(), wmaDecoderComponentPath));
+
+	//Lock the WMA Decoder binaries
+	if(!wmaFileInfo.exists())
+	{
+		qDebug("WMA File Decoder not found -> WMA decoding support will be disabled!\n");
+		return;
+	}
+
+	qDebug("Found WMA File Decoder binary:\n%s\n", wmaFileInfo.canonicalFilePath().toUtf8().constData());
+
+	try
+	{
+		wmaFileBin = new LockedFile(wmaFileInfo.canonicalFilePath());
+	}
+	catch(...)
+	{
+		qWarning("Failed to get excluive lock to WMA File Decoder binary -> WMA decoding support will be disabled!");
+		return;
+	}
+
+	if(wmaFileBin)
+	{
+		lamexp_register_tool(wmaFileInfo.fileName(), wmaFileBin);
 	}
 }
 

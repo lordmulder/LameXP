@@ -39,6 +39,7 @@ public:
 private:
 	void delay(void);
 	void initNeroAac(void);
+	void initWmaDec(void);
 
 	bool m_bSuccess;
 };

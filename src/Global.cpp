@@ -611,10 +611,10 @@ const QString &lamexp_temp_folder(void)
 	typedef HRESULT (WINAPI *SHGetKnownFolderPathFun)(__in const GUID &rfid, __in DWORD dwFlags, __in HANDLE hToken, __out PWSTR *ppszPath);
 	typedef HRESULT (WINAPI *SHGetFolderPathFun)(__in HWND hwndOwner, __in int nFolder, __in HANDLE hToken, __in DWORD dwFlags, __out LPWSTR pszPath);
 
-	const char *TEMP_STR = "Temp";
-	const int CSIDL_LOCAL_APPDATA = 0x001c;
-	const GUID LocalAppDataID={0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
-	const GUID LocalAppDataLowID={0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
+	static const char *TEMP_STR = "Temp";
+	static const int CSIDL_LOCAL_APPDATA = 0x001c;
+	static const GUID LocalAppDataID={0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
+	static const GUID LocalAppDataLowID={0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
 
 	if(g_lamexp_temp_folder.isEmpty())
 	{
