@@ -1481,7 +1481,10 @@ void MainWindow::installWMADecoderActionTriggered(bool checked)
 		QFile::remove(setupFile);
 		QApplication::restoreOverrideCursor();
 
-		QMessageBox::information(this, "WMA Decoder", "The WMA File Decoder has been installed. Please restart LameXP now!");
+		if(QMessageBox::information(this, "WMA Decoder", "The WMA File Decoder has been installed. Please restart LameXP now!", "Quit LameXP", "Ignore") == 0)
+		{
+			QApplication::quit();
+		}
 		break;
 	}
 }

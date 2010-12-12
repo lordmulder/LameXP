@@ -307,6 +307,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Decoder_WMA.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Dialog_About.cpp"
 				>
 			</File>
@@ -480,6 +484,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Decoder_Vorbis.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Decoder_WMA.h"
 				>
 			</File>
 			<File

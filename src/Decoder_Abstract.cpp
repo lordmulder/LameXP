@@ -37,3 +37,8 @@ bool AbstractDecoder::isFormatSupported(const QString &containerType, const QStr
 {
 	return false;
 }
+
+bool AbstractDecoder::isDecoderAvailable(void)
+{
+	return true;
+}

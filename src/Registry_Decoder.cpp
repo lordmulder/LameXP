@@ -24,16 +24,18 @@
 #include "Decoder_AAC.h"
 #include "Decoder_MP3.h"
 #include "Decoder_Vorbis.h"
+#include "Decoder_WMA.h"
 
 #include <QString>
 
-#define PROBE_DECODER(DEC) if(DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
+#define PROBE_DECODER(DEC) if(DEC::isDecoderAvailable() && DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
 
 AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
 	PROBE_DECODER(MP3Decoder);
 	PROBE_DECODER(VorbisDecoder);
 	PROBE_DECODER(AACDecoder);
+	PROBE_DECODER(WMADecoder);
 	return NULL;
 }
 

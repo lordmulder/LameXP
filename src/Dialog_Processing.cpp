@@ -70,7 +70,7 @@
 ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent)
 :
 	QDialog(parent),
-	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd.png"), this)),
+	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo)
 {
@@ -318,6 +318,7 @@ void ProcessingDialog::doneEncoding(void)
 		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
 		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? QString("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededJobs.count())) : "Process was aborted prematurely by the user!");
 		m_systemTray->showMessage("LameXP - Aborted", "Process was aborted by the user.", QSystemTrayIcon::Warning);
+		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 		QApplication::processEvents();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 	}
@@ -329,7 +330,8 @@ void ProcessingDialog::doneEncoding(void)
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
 			SET_PROGRESS_TEXT(QString("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count())));
-			m_systemTray->showMessage("LameXP - Error", "At least one file has failed!", QSystemTrayIcon::Critical	);
+			m_systemTray->showMessage("LameXP - Error", "At least one file has failed!", QSystemTrayIcon::Critical);
+			m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
@@ -340,6 +342,7 @@ void ProcessingDialog::doneEncoding(void)
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
 			SET_PROGRESS_TEXT("Alle files completed successfully.");
 			m_systemTray->showMessage("LameXP - Done", "All files completed successfully.", QSystemTrayIcon::Information);
+			m_systemTray->setIcon(QIcon(":/icons/cd_add.png"));
 			QApplication::processEvents();
 			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_SUCCESS), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}

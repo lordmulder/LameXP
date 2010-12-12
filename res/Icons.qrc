@@ -17,7 +17,9 @@
     <file>icons/calendar.png</file>
     <file>icons/cancel.png</file>
     <file>icons/cd.png</file>
+    <file>icons/cd_add.png</file>
     <file>icons/cd_burn.png</file>
+    <file>icons/cd_delete.png</file>
     <file>icons/cd_edit.png</file>
     <file>icons/cd_go.png</file>
     <file>icons/clock_play.png</file>

@@ -118,6 +118,9 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${MyRegPath}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "StartmenuFolder"
+!define MUI_LANGDLL_REGISTRY_ROOT HKLM
+!define MUI_LANGDLL_REGISTRY_KEY "${MyRegPath}"
+!define MUI_LANGDLL_REGISTRY_VALUENAME "SetupLanguage"
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "LameXP v${LAMEXP_VERSION}"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
@@ -373,11 +376,17 @@ SectionEnd
 Section "Uninstall"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_UNINSTALL)"
 
+	IfFileExists "$INSTDIR\LameXP.exe" 0 UnNotInstalled
+		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_CLOSING)"
+		!insertmacro UAC_AsUser_Call Function un.CloseRunningInstance UAC_SYNCOUTDIR
+	UnNotInstalled:
+
 	Delete /REBOOTOK "$INSTDIR\*.exe"
 	Delete /REBOOTOK "$INSTDIR\*.txt"
 	RMDir "$INSTDIR"
 
 	!insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
+	StrCmp "$StartMenuFolder" "" NoStartmenuFolder
 	IfFileExists "$SMPROGRAMS\$StartMenuFolder\*.*" 0 NoStartmenuFolder
 	Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.lnk"
 	Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.url"
@@ -389,6 +398,7 @@ Section "Uninstall"
 	DeleteRegValue HKLM "${MyRegPath}" "UninstallString"
 	DeleteRegValue HKLM "${MyRegPath}" "DisplayName"
 	DeleteRegValue HKLM "${MyRegPath}" "StartmenuFolder"
+	DeleteRegValue HKLM "${MyRegPath}" "SetupLanguage"
 	
 	!insertmacro PrintProgress "$(MUI_UNTEXT_FINISH_TITLE)."
 SectionEnd
@@ -437,3 +447,8 @@ FunctionEnd
 Function CloseRunningInstance
 	nsExec::Exec /TIMEOUT=30000 '"$OUTDIR\LameXP.exe" --force-kill'
 FunctionEnd
+
+Function un.CloseRunningInstance
+	nsExec::Exec /TIMEOUT=30000 '"$OUTDIR\LameXP.exe" --force-kill'
+FunctionEnd
+

@@ -21,19 +21,21 @@
 
 #pragma once
 
-#include "Tool_Abstract.h"
+#include "Decoder_Abstract.h"
 
-class AbstractDecoder : public AbstractTool
+class QSystemSemaphore;
+
+class WMADecoder : public AbstractDecoder
 {
-	Q_OBJECT
-
 public:
-	AbstractDecoder(void);
-	~AbstractDecoder(void);
+	WMADecoder(void);
+	~WMADecoder(void);
 
-	//Internal decoder API
-	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag) = 0;
+	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
 	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	static bool isDecoderAvailable(void);
-};
 
+private:
+	const QString m_binary;
+	QSystemSemaphore *m_semaphore;
+};
