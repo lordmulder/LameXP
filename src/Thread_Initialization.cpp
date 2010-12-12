@@ -27,6 +27,8 @@
 #include <QFileInfo>
 #include <QCoreApplication>
 #include <QProcess>
+#include <QMap>
+#include <QDir>
 
 ////////////////////////////////////////////////////////////
 // TOOLS
@@ -41,6 +43,7 @@ struct lamexp_tool_t
 static const struct lamexp_tool_t g_lamexp_tools[] =
 {
 	{"153f4274702f3629093b561a31dbf50e2c146305", "alac.exe"},
+	{"4ecc017a66fe43092110f11494f384e57d99280d", "elevator.exe"},
 	{"097dd004f44dbda57dbaeb5f15b34a220724ad60", "faad.exe"},
 	{"070bf98f78e572a97e4703ef5720c682567a6a56", "flac.exe"},
 	{"cf379081035ae6bfb6f7bc22f13bfb7ac6302ac5", "gpgv.exe"},
@@ -85,19 +88,34 @@ void InitializationThread::run()
 	m_bSuccess = false;
 	delay();
 	
-	//Extract all files
+	QMap<QString,QString> checksum;
+
+	//Init checksums
 	for(int i = 0; i < INT_MAX; i++)
 	{
-		if(!g_lamexp_tools[i].pcName || !g_lamexp_tools[i].pcHash)
+		if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash)
 		{
-			break;
+			checksum.insert(QString::fromLatin1(g_lamexp_tools[i].pcName), QString::fromLatin1(g_lamexp_tools[i].pcHash));
+			continue;
 		}
+		break;
+	}
 
+	QDir toolsDir(":/tools/");
+	QList<QFileInfo> toolsList = toolsDir.entryInfoList(QStringList("*.*"), QDir::Files, QDir::Name);
+
+	//Extract all files
+	for(int i = 0; i < toolsList.count(); i++)
+	{
 		try
 		{
 			qDebug("Extracting file: %s", g_lamexp_tools[i].pcName);
-			QString toolName = QString::fromLatin1(g_lamexp_tools[i].pcName);
-			QByteArray toolHash = QString::fromLatin1(g_lamexp_tools[i].pcHash).toLatin1();
+			QString toolName = toolsList.at(i).fileName();
+			QByteArray toolHash = checksum.take(toolName).toLatin1();
+			if(toolHash.size() != 40)
+			{
+				throw "The required checksum is missing, take care!";
+			}
 			LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString(lamexp_temp_folder()).append(QString("/tool_%1").arg(toolName)), toolHash);
 			lamexp_register_tool(toolName, lockedFile);
 		}
@@ -106,6 +124,12 @@ void InitializationThread::run()
 			qFatal("At least one required tool could not be extracted:\n%s", errorMsg);
 			return;
 		}
+	}
+	
+	if(!checksum.isEmpty())
+	{
+		qFatal("At least one required tool could not be found:\n%s", toolsDir.filePath(checksum.keys().first()).toLatin1().constData());
+		return;
 	}
 	
 	qDebug("All extracted.\n");

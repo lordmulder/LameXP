@@ -250,6 +250,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
 	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
 	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
+	connect(actionInstallWMADecoder, SIGNAL(triggered(bool)), this, SLOT(installWMADecoderActionTriggered(bool)));
 		
 	//Activate help menu actions
 	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
@@ -1399,3 +1400,49 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
 }
+
+void MainWindow::installWMADecoderActionTriggered(bool checked)
+{
+	static const char *download_url = "http://www.nch.com.au/components/wmawav.exe";
+	
+	if(QMessageBox::question(this, "Install WMA Decoder", "Do you want to download and install the WMA File Deocder now?", "Download && Install", "Cancel") != 0)
+	{
+		return;
+	}
+
+	QString binaryWGet = lamexp_lookup_tool("wget.exe");
+	QString binaryElevator = lamexp_lookup_tool("elevator.exe");
+	
+	if(binaryWGet.isEmpty() || binaryElevator.isEmpty())
+	{
+		throw "Required binary is not available!";
+	}
+
+	QString setupFile = QString("%1/%2.exe").arg(lamexp_temp_folder(), lamexp_rand_str());
+
+	QProcess process;
+	process.setWorkingDirectory(QFileInfo(setupFile).absolutePath());
+
+	QEventLoop loop;
+	connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
+	connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), &loop, SLOT(quit()));
+	
+	process.start(binaryWGet, QStringList() << "-O" << QFileInfo(setupFile).fileName() << download_url);
+	m_banner->show("Downloading WMA Decoder Setup, please wait...", &loop);
+
+	if(process.exitCode() != 0 || QFileInfo(setupFile).size() < 10240)
+	{
+		QFile::remove(setupFile);
+		QMessageBox::critical(this, "Download Failed", "Failed to download the WMA Decoder. Check your internet connection!");
+		return;
+	}
+
+	QApplication::setOverrideCursor(Qt::WaitCursor);
+	process.start(binaryElevator, QStringList() << QString("/exec=%1").arg(setupFile));
+	loop.exec(QEventLoop::ExcludeUserInputEvents);
+	QFile::remove(setupFile);
+	QApplication::restoreOverrideCursor();
+
+	QMessageBox::information(this, "WMA Decoder", "The WMA Decoder has been installed. Please restart LameXP now!");
+}
+

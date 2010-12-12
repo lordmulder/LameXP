@@ -64,7 +64,9 @@
     <file>icons/transmit_blue.png</file>
     <file>icons/user.png</file>
     <file>icons/user_suit.png</file>
+    <file>icons/wma.png</file>
     <file>icons/world.png</file>
+    <file>icons/wrench.png</file>
     <file>icons/zoom.png</file>
   </qresource>
 </RCC>

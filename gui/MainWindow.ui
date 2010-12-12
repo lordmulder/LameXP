@@ -1159,8 +1159,19 @@
     <property name="title">
      <string>Tools</string>
     </property>
-    <addaction name="actionDisableUpdateReminder"/>
-    <addaction name="actionDisableSounds"/>
+    <widget class="QMenu" name="menuConfiguration">
+     <property name="title">
+      <string>Configuration</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../res/Icons.qrc">
+       <normaloff>:/icons/wrench.png</normaloff>:/icons/wrench.png</iconset>
+     </property>
+     <addaction name="actionDisableSounds"/>
+     <addaction name="actionDisableUpdateReminder"/>
+    </widget>
+    <addaction name="menuConfiguration"/>
+    <addaction name="actionInstallWMADecoder"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -1332,6 +1343,15 @@
     <string>Disable Sound Effects</string>
    </property>
   </action>
+  <action name="actionInstallWMADecoder">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/wma.png</normaloff>:/icons/wma.png</iconset>
+   </property>
+   <property name="text">
+    <string>Install WMA Decoder</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -1364,6 +1384,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

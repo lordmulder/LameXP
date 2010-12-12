@@ -37,6 +37,7 @@ public:
 	
 	void show(const QString &text);
 	void show(const QString &text, QThread *thread);
+	void show(const QString &text, QEventLoop *loop);
 	void close(void);
 
 private:

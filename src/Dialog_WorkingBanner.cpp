@@ -114,6 +114,26 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	this->close();
 }
 
+void WorkingBanner::show(const QString &text, QEventLoop *loop)
+{
+	//Show splash
+	this->show(text);
+
+	//Set taskbar state
+	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), &QIcon(":/icons/hourglass.png"));
+	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+
+	//Loop while thread is running
+	loop->exec(QEventLoop::ExcludeUserInputEvents);
+
+	//Set taskbar state
+	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
+	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), NULL);
+
+	//Hide splash
+	this->close();
+}
+
 ////////////////////////////////////////////////////////////
 // EVENTS
 ////////////////////////////////////////////////////////////

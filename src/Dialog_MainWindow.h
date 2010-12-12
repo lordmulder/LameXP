@@ -87,6 +87,7 @@ private slots:
 	void disableSoundsActionTriggered(bool checked);
 	void outputFolderContextMenu(const QPoint &pos);
 	void showFolderContextActionTriggered(void);
+	void installWMADecoderActionTriggered(bool checked);
 
 protected:
 	void showEvent(QShowEvent *event);
