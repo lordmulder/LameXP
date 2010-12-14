@@ -247,12 +247,24 @@ LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_GERMAN} "Prozess"
 Function .onInit
 	${If} ${UAC_IsInnerInstance}
 		!insertmacro MUI_LANGDLL_DISPLAY
+	${Else}
+		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
+		Pop $0
+		StrCmp $0 0 +3
+		MessageBox MB_ICONSTOP|MB_TOPMOST "Sorry, the installer is already running!"
+		Quit
 	${EndIf}  
 FunctionEnd
 
 Function un.onInit
 	${If} ${UAC_IsInnerInstance}
 		!insertmacro MUI_LANGDLL_DISPLAY
+	${Else}
+		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
+		Pop $0
+		StrCmp $0 0 +3
+		MessageBox MB_ICONSTOP|MB_TOPMOST "Sorry, the un-installer is already running!"
+		Quit
 	${EndIf}  
 FunctionEnd
 
