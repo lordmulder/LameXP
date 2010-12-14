@@ -450,7 +450,13 @@ void ProcessingDialog::startNextJob(void)
 		throw "Unsupported encoder!";
 	}
 
-	ProcessThread *thread = new ProcessThread(currentFile, (m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath(): m_settings->outputDir()), encoder);
+	ProcessThread *thread = new ProcessThread
+	(
+		currentFile,
+		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath(): m_settings->outputDir()),
+		encoder,
+		m_settings->prependRelativeSourcePath()
+	);
 	
 	m_threadList.append(thread);
 	m_allJobs.append(thread->getId());
@@ -498,7 +504,7 @@ void ProcessingDialog::writePlayList(void)
 		{
 			
 			if(!m_succeededJobs.contains(m_allJobs.at(i))) continue;
-			playList.write(QFileInfo(m_playList.value(m_allJobs.at(i), "N/A")).fileName().toUtf8().constData());
+			playList.write(QDir::toNativeSeparators(QDir(m_settings->outputDir()).relativeFilePath(m_playList.value(m_allJobs.at(i), "N/A"))).toUtf8().constData());
 			playList.write("\r\n");
 		}
 		playList.close();

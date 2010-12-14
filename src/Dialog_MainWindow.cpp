@@ -156,6 +156,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
+	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
@@ -166,6 +167,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
 	connect(buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
 	connect(saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
+	connect(prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
 	m_outputFolderContextMenu = new QMenu();
 	QAction *showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "Browse Selected Folder");
 	connect(outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
@@ -1257,6 +1259,15 @@ void MainWindow::saveToSourceFolderChanged(void)
 {
 	m_settings->outputToSourceDir(saveToSourceFolderCheckBox->isChecked());
 }
+
+/*
+ * Prepend relative source file path to output file name changed
+ */
+void MainWindow::prependRelativePathChanged(void)
+{
+	m_settings->prependRelativeSourcePath(prependRelativePathCheckBox->isChecked());
+}
+
 
 /*
  * Restore the override cursor

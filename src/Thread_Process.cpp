@@ -44,12 +44,13 @@ QMutex *ProcessThread::m_mutex_genFileName = NULL;
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, AbstractEncoder *encoder)
+ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath)
 :
 	m_audioFile(audioFile),
 	m_outputDirectory(outputDirectory),
 	m_encoder(encoder),
 	m_jobId(QUuid::createUuid()),
+	m_prependRelativeSourcePath(prependRelativeSourcePath),
 	m_aborted(false)
 {
 	if(m_mutex_genFileName)
@@ -211,6 +212,16 @@ QString ProcessThread::generateOutFileName(void)
 
 	QString baseName = sourceFile.completeBaseName();
 	QDir targetDir(m_outputDirectory.isEmpty() ? sourceFile.canonicalPath() : m_outputDirectory);
+
+	if(m_prependRelativeSourcePath && !m_outputDirectory.isEmpty())
+	{
+		QDir rootDir = sourceFile.dir();
+		while(!rootDir.isRoot())
+		{
+			if(!rootDir.cdUp()) break;
+		}
+		targetDir.setPath(QString("%1/%2").arg(targetDir.absolutePath(), QFileInfo(rootDir.relativeFilePath(sourceFile.canonicalFilePath())).path()));
+	}
 	
 	if(!targetDir.exists())
 	{

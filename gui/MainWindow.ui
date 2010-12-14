@@ -362,11 +362,38 @@
              </spacer>
             </item>
             <item>
-             <widget class="QCheckBox" name="saveToSourceFolderCheckBox">
-              <property name="text">
-               <string>Save output files to the same location where the input file is located</string>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QCheckBox" name="saveToSourceFolderCheckBox">
+                <property name="text">
+                 <string>Save output files to the same location where the input file is located</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>15</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="prependRelativePathCheckBox">
+                <property name="text">
+                 <string>Prepend relative source file path to output file</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
@@ -1443,6 +1470,14 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1729,6 +1764,22 @@
     </hint>
     <hint type="destinationlabel">
      <x>65</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveToSourceFolderCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>prependRelativePathCheckBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
      <y>79</y>
     </hint>
    </hints>

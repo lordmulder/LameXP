@@ -69,6 +69,7 @@ public:
 	MAKE_OPTION_DEC1(compressionBitrate);
 	MAKE_OPTION_DEC2(outputDir);
 	MAKE_OPTION_DEC3(outputToSourceDir);
+	MAKE_OPTION_DEC3(prependRelativeSourcePath);
 	MAKE_OPTION_DEC3(writeMetaTags);
 	MAKE_OPTION_DEC3(createPlaylist);
 	MAKE_OPTION_DEC2(autoUpdateLastCheck);

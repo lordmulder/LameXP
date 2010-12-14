@@ -255,7 +255,7 @@ void InitializationThread::initNeroAac(void)
 
 	if(!(neroVersion > 0))
 	{
-		qWarning("Nero AAC version could not be determined -> AAC encoding support will be disabled!", neroVersion);
+		qWarning("Nero AAC version could not be determined -> AAC encoding support will be disabled!");
 		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
 		return;
 	}
@@ -289,14 +289,11 @@ void InitializationThread::initWmaDec(void)
 	LockedFile *wmaFileBin = NULL;
 	QFileInfo wmaFileInfo = QFileInfo(QString("%1/%2").arg(programFilesDir.absolutePath(), wmaDecoderComponentPath));
 
-	//Lock the WMA Decoder binaries
 	if(!wmaFileInfo.exists())
 	{
 		qDebug("WMA File Decoder not found -> WMA decoding support will be disabled!\n");
 		return;
 	}
-
-	qDebug("Found WMA File Decoder binary:\n%s\n", wmaFileInfo.canonicalFilePath().toUtf8().constData());
 
 	try
 	{
@@ -307,6 +304,53 @@ void InitializationThread::initWmaDec(void)
 		qWarning("Failed to get excluive lock to WMA File Decoder binary -> WMA decoding support will be disabled!");
 		return;
 	}
+
+	QProcess process;
+	process.setProcessChannelMode(QProcess::MergedChannels);
+	process.setReadChannel(QProcess::StandardOutput);
+	process.start(wmaFileInfo.canonicalFilePath(), QStringList());
+
+	if(!process.waitForStarted())
+	{
+		qWarning("WmaWav process failed to create!");
+		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
+		process.kill();
+		process.waitForFinished(-1);
+		return;
+	}
+
+	bool b_wmaWavFound = false;
+
+	while(process.state() != QProcess::NotRunning)
+	{
+		if(!process.waitForReadyRead())
+		{
+			if(process.state() == QProcess::Running)
+			{
+				qWarning("WmaWav process time out -> killing!");
+				process.kill();
+				process.waitForFinished(-1);
+				return;
+			}
+		}
+		while(process.canReadLine())
+		{
+			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
+			if(line.contains("Usage: wmatowav.exe WMAFileSpec WAVFileSpec", Qt::CaseInsensitive))
+			{
+				b_wmaWavFound = true;
+			}
+		}
+	}
+
+	if(!b_wmaWavFound)
+	{
+		qWarning("WmaWav could not be identified -> WMA decoding support will be disabled!\n");
+		LAMEXP_DELETE(wmaFileBin);
+		return;
+	}
+
+	qDebug("Found WMA File Decoder binary:\n%s\n", wmaFileInfo.canonicalFilePath().toUtf8().constData());
 
 	if(wmaFileBin)
 	{

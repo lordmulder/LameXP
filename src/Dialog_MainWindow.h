@@ -79,6 +79,7 @@ private slots:
 	void metaTagsEnabledChanged(void);
 	void playlistEnabledChanged(void);
 	void saveToSourceFolderChanged(void);
+	void prependRelativePathChanged(void);
 	void restoreCursor(void);
 	void sourceFilesContextMenu(const QPoint &pos);
 	void previewContextActionTriggered(void);
