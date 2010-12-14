@@ -31,6 +31,7 @@
 #include "Encoder_MP3.h"
 #include "Encoder_Vorbis.h"
 #include "Encoder_AAC.h"
+#include "Encoder_FLAC.h"
 #include "WinSevenTaskbar.h"
 
 #include <QApplication>
@@ -419,7 +420,7 @@ void ProcessingDialog::startNextJob(void)
 	m_currentFile++;
 	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
 	AbstractEncoder *encoder = NULL;
-	
+
 	switch(m_settings->compressionEncoder())
 	{
 	case SettingsModel::MP3Encoder:
@@ -444,6 +445,14 @@ void ProcessingDialog::startNextJob(void)
 			aacEncoder->setBitrate(m_settings->compressionBitrate());
 			aacEncoder->setRCMode(m_settings->compressionRCMode());
 			encoder = aacEncoder;
+		}
+		break;
+	case SettingsModel::FLACEncoder:
+		{
+			FLACEncoder *flacEncoder = new FLACEncoder();
+			flacEncoder->setBitrate(m_settings->compressionBitrate());
+			flacEncoder->setRCMode(m_settings->compressionRCMode());
+			encoder = flacEncoder;
 		}
 		break;
 	default:
@@ -528,7 +537,7 @@ AudioFileModel ProcessingDialog::updateMetaInfo(const AudioFileModel &audioFile)
 	if(!m_metaInfo->fileAlbum().isEmpty()) result.setFileAlbum(m_metaInfo->fileAlbum());
 	if(!m_metaInfo->fileGenre().isEmpty()) result.setFileGenre(m_metaInfo->fileGenre());
 	if(m_metaInfo->fileYear()) result.setFileYear(m_metaInfo->fileYear());
-	if(m_metaInfo->filePosition()) result.setFileYear(m_metaInfo->filePosition() != UINT_MAX ? m_metaInfo->filePosition() : m_currentFile);
+	if(m_metaInfo->filePosition() == UINT_MAX) result.setFilePosition(m_currentFile);
 	if(!m_metaInfo->fileComment().isEmpty()) result.setFileComment(m_metaInfo->fileComment());
 
 	return result;

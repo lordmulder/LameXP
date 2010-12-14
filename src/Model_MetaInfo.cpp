@@ -317,8 +317,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		else
 		{
 			QStringList options;
-			options << "Unspecified (copy from source file)";
-			options << "Generate from list position";
+			options << "Unspecified (copy from source file)" << "Generate from list position";
 			temp = QInputDialog::getItem(parent, "Edit Position", EXPAND("Please enter the position (track no.) for this file:"), options, ((m_audioFile->filePosition() == UINT_MAX) ? 1 : 0), false, &ok);
 			if(ok)
 			{

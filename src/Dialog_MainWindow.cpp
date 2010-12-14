@@ -593,9 +593,15 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 	
-	if(m_settings->compressionEncoder() != SettingsModel::MP3Encoder && m_settings->compressionEncoder() != SettingsModel::VorbisEncoder && m_settings->compressionEncoder() != SettingsModel::AACEncoder)
+	switch(m_settings->compressionEncoder())
 	{
-		QMessageBox::warning(this, "LameXP", "Sorry, only MP3, Vorbis and AAC encoding is supported at the moment.<br>Support for more encoders to be added in later versions!");
+	case SettingsModel::MP3Encoder:
+	case SettingsModel::VorbisEncoder:
+	case SettingsModel::AACEncoder:
+	case SettingsModel::FLACEncoder:
+		break;
+	default:
+		QMessageBox::warning(this, "LameXP", "Sorry, only MP3, Vorbis, AAC and FLAC encoding is supported at the moment.<br>Support for more encoders to be added in later versions!");
 		tabWidget->setCurrentIndex(3);
 		return;
 	}
