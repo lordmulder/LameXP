@@ -831,14 +831,15 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 	static const GUID GUID_LOCAL_APPDATA_LOW = {0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
 	static const GUID GUID_PROGRAM_FILES = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
 
+	static QLibrary *Kernel32Lib = NULL;
 	static SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = NULL;
 	static SHGetFolderPathFun SHGetFolderPathPtr = NULL;
 
 	if((!SHGetKnownFolderPathPtr) && (!SHGetFolderPathPtr))
 	{
-		QLibrary Kernel32Lib("shell32.dll");
-		SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) Kernel32Lib.resolve("SHGetKnownFolderPath");
-		SHGetFolderPathPtr = (SHGetFolderPathFun) Kernel32Lib.resolve("SHGetFolderPathW");
+		if(!Kernel32Lib) Kernel32Lib = new QLibrary("shell32.dll");
+		SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) Kernel32Lib->resolve("SHGetKnownFolderPath");
+		SHGetFolderPathPtr = (SHGetFolderPathFun) Kernel32Lib->resolve("SHGetFolderPathW");
 	}
 
 	int folderCSIDL = -1;
@@ -866,7 +867,7 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 		WCHAR *path = NULL;
 		if(SHGetKnownFolderPathPtr(folderGUID, 0x00008000, NULL, &path) == S_OK)
 		{
-			MessageBoxW(0, path, L"SHGetKnownFolderPathPtr", MB_TOPMOST);
+			//MessageBoxW(0, path, L"SHGetKnownFolderPath", MB_TOPMOST);
 			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
 			if(!folderTemp.exists())
 			{
@@ -884,7 +885,7 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 		WCHAR *path = new WCHAR[4096];
 		if(SHGetFolderPathPtr(NULL, folderCSIDL, NULL, NULL, path) == S_OK)
 		{
-			MessageBoxW(0, path, L"SHGetFolderPathPtr", MB_TOPMOST);
+			//MessageBoxW(0, path, L"SHGetFolderPathW", MB_TOPMOST);
 			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
 			if(!folderTemp.exists())
 			{

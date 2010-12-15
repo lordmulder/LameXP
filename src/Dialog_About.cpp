@@ -225,8 +225,12 @@ void AboutDialog::showMoreAbout(void)
 	moreAboutText += "<br>";
 	moreAboutText += "<li><b>Nero AAC reference MPEG-4 Encoder</b><br>";
 	moreAboutText += "Freeware state-of-the-art HE-AAC encoder with 2-Pass support.<br>";
-	moreAboutText += "(Available from vendor web-site as free download)<br>";
+	moreAboutText += "<i>Available from vendor web-site as free download:</i><br>";
 	moreAboutText += LINK(neroAacUrl);
+	moreAboutText += "<br>";
+	moreAboutText += "<li><b>FLAC - Free Lossless Audio Codec</b>";
+	moreAboutText += "<br>Open and patent-free lossless audio compression.<br>";
+	moreAboutText += LINK("http://flac.sourceforge.net/");
 	moreAboutText += "<br>";
 	moreAboutText += "<li><b>MediaInfo - Media File Analysis Tool</b><br>";
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
