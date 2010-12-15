@@ -41,36 +41,37 @@ struct lamexp_tool_t
 {
 	char *pcHash;
 	char *pcName;
+	unsigned int uiVersion;
 };
 
 static const struct lamexp_tool_t g_lamexp_tools[] =
 {
-	{"153f4274702f3629093b561a31dbf50e2c146305", "alac.exe"},
-	{"4ecc017a66fe43092110f11494f384e57d99280d", "elevator.exe"},
-	{"097dd004f44dbda57dbaeb5f15b34a220724ad60", "faad.exe"},
-	{"133171ac21f083d565ee9c33ef9cd92fc966811e", "flac.exe"},
-	{"cf379081035ae6bfb6f7bc22f13bfb7ac6302ac5", "gpgv.exe"},
-	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg"},
-	{"143fc001a2f6c56fe1b9e6f8a2eb2b53b9e1e504", "lame.exe"},
-	{"775b260b3f64101beaeb317b74746f9bccdab842", "MAC.exe"},
-	{"e8719fbfd7b690b3e518489f7aae3915305711c2", "mediainfo_icl11.exe"},
-	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe"},
-	{"8bbf4a3fffe2ff143eb5ba2cf82ca16d676e865d", "mpg123.exe"},
-	{"380c734e3c3948a844b9fae213d53a93ab20beba", "oggdec.exe"},
-	{"ecd15abe103184aca96e406f5f1c82c6fb2e665d", "oggenc2_i386.exe"},
-	{"ffe0fbd73352396dc3752ac9d484dbfc754a226d", "oggenc2_sse2.exe"},
-	{"a8c50872e544a55495a824426e9378984f2ae01d", "oggenc2_x64.exe"},
-	{"cd95369051f96b9ca3a997658771c5ea52bc874d", "selfdelete.exe"},
-	{"ffeaa70bd6321185eafcb067ab2dc441650038bf", "shorten.exe"},
-	{"346ce516281c97e92e1b8957ddeca52edcf2d056", "speexdec.exe"},
-	{"8a74b767cfe88bf88c068fdae0de02d65589d25e", "takc.exe"},
-	{"1c5cedb56358a0e8c4590a863a97c94d7d7e98b2", "ttaenc.exe"},
-	{"7dcf6517aa90ed15737ee8ea50ea00a6dece2d27", "valdec.exe"},
-	{"8159f4e824b3e343ece95ba6dbb5e16da9c4866e", "volumax.exe"},
-	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe"},
-	{"a17011961aa8696bc935e097b3242d33c38a9842", "wupdate.exe"},
-	{"4d018ac7f6a42abd53faacfae5055c2a3c176430", "wvunpack.exe"},
-	{NULL, NULL}
+	{"153f4274702f3629093b561a31dbf50e2c146305", "alac.exe", UINT_MAX},
+	{"4ecc017a66fe43092110f11494f384e57d99280d", "elevator.exe", UINT_MAX},
+	{"097dd004f44dbda57dbaeb5f15b34a220724ad60", "faad.exe", UINT_MAX},
+	{"133171ac21f083d565ee9c33ef9cd92fc966811e", "flac.exe", 121},
+	{"cf379081035ae6bfb6f7bc22f13bfb7ac6302ac5", "gpgv.exe", UINT_MAX},
+	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg", UINT_MAX},
+	{"143fc001a2f6c56fe1b9e6f8a2eb2b53b9e1e504", "lame.exe", 39910},
+	{"775b260b3f64101beaeb317b74746f9bccdab842", "MAC.exe", UINT_MAX},
+	{"e8719fbfd7b690b3e518489f7aae3915305711c2", "mediainfo_icl11.exe", 737},
+	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe", UINT_MAX},
+	{"8bbf4a3fffe2ff143eb5ba2cf82ca16d676e865d", "mpg123.exe", UINT_MAX},
+	{"380c734e3c3948a844b9fae213d53a93ab20beba", "oggdec.exe", UINT_MAX},
+	{"ecd15abe103184aca96e406f5f1c82c6fb2e665d", "oggenc2_i386.exe", 287},
+	{"ffe0fbd73352396dc3752ac9d484dbfc754a226d", "oggenc2_sse2.exe", 287},
+	{"a8c50872e544a55495a824426e9378984f2ae01d", "oggenc2_x64.exe", 287},
+	{"cd95369051f96b9ca3a997658771c5ea52bc874d", "selfdelete.exe", UINT_MAX},
+	{"ffeaa70bd6321185eafcb067ab2dc441650038bf", "shorten.exe", UINT_MAX},
+	{"346ce516281c97e92e1b8957ddeca52edcf2d056", "speexdec.exe", UINT_MAX},
+	{"8a74b767cfe88bf88c068fdae0de02d65589d25e", "takc.exe", UINT_MAX},
+	{"1c5cedb56358a0e8c4590a863a97c94d7d7e98b2", "ttaenc.exe", UINT_MAX},
+	{"7dcf6517aa90ed15737ee8ea50ea00a6dece2d27", "valdec.exe", UINT_MAX},
+	{"8159f4e824b3e343ece95ba6dbb5e16da9c4866e", "volumax.exe", UINT_MAX},
+	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", UINT_MAX},
+	{"a17011961aa8696bc935e097b3242d33c38a9842", "wupdate.exe", UINT_MAX},
+	{"4d018ac7f6a42abd53faacfae5055c2a3c176430", "wvunpack.exe", UINT_MAX},
+	{NULL, NULL, NULL}
 };
 
 ////////////////////////////////////////////////////////////
@@ -91,14 +92,17 @@ void InitializationThread::run()
 	m_bSuccess = false;
 	delay();
 	
-	QMap<QString,QString> checksum;
+	QMap<QString, QString> checksum;
+	QMap<QString, unsigned int> version;
 
 	//Init checksums
 	for(int i = 0; i < INT_MAX; i++)
 	{
 		if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash)
 		{
-			checksum.insert(QString::fromLatin1(g_lamexp_tools[i].pcName), QString::fromLatin1(g_lamexp_tools[i].pcHash));
+			const QString currentTool = QString::fromLatin1(g_lamexp_tools[i].pcName);
+			checksum.insert(currentTool, QString::fromLatin1(g_lamexp_tools[i].pcHash));
+			version.insert(currentTool, g_lamexp_tools[i].uiVersion);
 			continue;
 		}
 		break;
@@ -115,12 +119,13 @@ void InitializationThread::run()
 			qDebug("Extracting file: %s", g_lamexp_tools[i].pcName);
 			QString toolName = toolsList.at(i).fileName();
 			QByteArray toolHash = checksum.take(toolName).toLatin1();
+			unsigned int toolVersion = version.take(toolName);
 			if(toolHash.size() != 40)
 			{
 				throw "The required checksum is missing, take care!";
 			}
 			LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString(lamexp_temp_folder()).append(QString("/tool_%1").arg(toolName)), toolHash);
-			lamexp_register_tool(toolName, lockedFile);
+			lamexp_register_tool(toolName, lockedFile, toolVersion);
 		}
 		catch(char *errorMsg)
 		{

@@ -762,7 +762,7 @@ bool lamexp_check_tool(const QString &toolName)
 }
 
 /*
- * Lookup tool
+ * Lookup tool path
  */
 const QString lamexp_lookup_tool(const QString &toolName)
 {
@@ -777,7 +777,7 @@ const QString lamexp_lookup_tool(const QString &toolName)
 }
 
 /*
- * Lookup tool
+ * Lookup tool version
  */
 unsigned int lamexp_tool_version(const QString &toolName)
 {
@@ -796,6 +796,11 @@ unsigned int lamexp_tool_version(const QString &toolName)
  */
 const QString lamexp_version2string(const QString &pattern, unsigned int version)
 {
+	if(version == UINT_MAX)
+	{
+		return "n/a";
+	}
+	
 	QString result = pattern;
 	int digits = result.count("?", Qt::CaseInsensitive);
 	

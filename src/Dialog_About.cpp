@@ -40,6 +40,7 @@
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 #define CONTRIBUTOR(LANG, CNTR, ICON) QString("<tr><td valign=\"middle\"><img src=\"%1\"></td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%3</td></tr>").arg(ICON, LANG, CNTR);
+#define VSTR(BASE,TOOL,FORMAT) QString(BASE).arg(lamexp_version2string(FORMAT, lamexp_tool_version(TOOL)))
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
@@ -215,24 +216,29 @@ void AboutDialog::showMoreAbout(void)
 	QString moreAboutText;
 	moreAboutText += "<h3>The following third-party software is used in LameXP:</h3>";
 	moreAboutText += "<div  style=\"margin-left:-25px\"><ul>";
-	moreAboutText += "<li><b>LAME - OpenSource mp3 Encoder</b><br>";
+	
+	moreAboutText += VSTR( "<li><b>LAME - OpenSource mp3 Encoder (%1)</b><br>", "lame.exe", "v?.?? a??");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://lame.sourceforge.net/");
 	moreAboutText += "<br>";
-	moreAboutText += "<li><b>OggEnc - Ogg Vorbis Encoder</b>";
+	
+	moreAboutText += VSTR("<li><b>OggEnc - Ogg Vorbis Encoder (%1)</b>", "oggenc2_i386.exe", "v?.??");
 	moreAboutText += "<br>Completely open and patent-free audio encoding technology.<br>";
 	moreAboutText += LINK("http://www.vorbis.com/");
 	moreAboutText += "<br>";
-	moreAboutText += "<li><b>Nero AAC reference MPEG-4 Encoder</b><br>";
+	
+	moreAboutText += VSTR("<li><b>Nero AAC reference MPEG-4 Encoder (%1)</b><br>", "neroAacEnc.exe", "v?.?.?.?");
 	moreAboutText += "Freeware state-of-the-art HE-AAC encoder with 2-Pass support.<br>";
 	moreAboutText += "<i>Available from vendor web-site as free download:</i><br>";
 	moreAboutText += LINK(neroAacUrl);
 	moreAboutText += "<br>";
-	moreAboutText += "<li><b>FLAC - Free Lossless Audio Codec</b>";
-	moreAboutText += "<br>Open and patent-free lossless audio compression.<br>";
+	
+	moreAboutText += VSTR("<li><b>FLAC - Free Lossless Audio Codec (%1)</b><br>", "flac.exe", "v?.?.?");
+	moreAboutText += "Open and patent-free lossless audio compression technology.<br>";
 	moreAboutText += LINK("http://flac.sourceforge.net/");
 	moreAboutText += "<br>";
-	moreAboutText += "<li><b>MediaInfo - Media File Analysis Tool</b><br>";
+	
+	moreAboutText += VSTR("<li><b>MediaInfo - Media File Analysis Tool (%1)</b><br>", "mediainfo_icl11.exe", "v?.?.??");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
 	moreAboutText += "<br></ul></div>";
