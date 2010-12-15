@@ -269,25 +269,10 @@ void InitializationThread::initNeroAac(void)
 
 void InitializationThread::initWmaDec(void)
 {
-	typedef HRESULT (WINAPI *SHGetFolderPathFun)(__in HWND hwndOwner, __in int nFolder, __in HANDLE hToken, __in DWORD dwFlags, __out LPWSTR pszPath);
 	static const char* wmaDecoderComponentPath = "NCH Software/Components/wmawav/wmawav.exe";
-	static const int CSIDL_PROGRAM_FILES = 0x0026;
-
-	QLibrary Kernel32Lib("shell32.dll");
-	SHGetFolderPathFun SHGetFolderPathPtr = (SHGetFolderPathFun) Kernel32Lib.resolve("SHGetFolderPathW");
-	QDir programFilesDir = QDir::temp();
-
-	if(SHGetFolderPathPtr)
-	{
-		WCHAR *programFilesPath = new WCHAR[4096];
-		if(SHGetFolderPathPtr(NULL, CSIDL_PROGRAM_FILES, NULL, NULL, programFilesPath) == S_OK)
-		{
-			programFilesDir.setPath(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(programFilesPath))));
-		}
-	}
 
 	LockedFile *wmaFileBin = NULL;
-	QFileInfo wmaFileInfo = QFileInfo(QString("%1/%2").arg(programFilesDir.absolutePath(), wmaDecoderComponentPath));
+	QFileInfo wmaFileInfo = QFileInfo(QString("%1/%2").arg(lamexp_known_folder(lamexp_folder_programfiles), wmaDecoderComponentPath));
 
 	if(!wmaFileInfo.exists())
 	{

@@ -619,50 +619,18 @@ const QString &lamexp_temp_folder(void)
 	if(g_lamexp_temp_folder.isEmpty())
 	{
 		QDir temp = QDir::temp();
+		QDir localAppData = QDir(lamexp_known_folder(lamexp_folder_localappdata));
 
-		QLibrary Kernel32Lib("shell32.dll");
-		SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) Kernel32Lib.resolve("SHGetKnownFolderPath");
-		SHGetFolderPathFun SHGetFolderPathPtr = (SHGetFolderPathFun) Kernel32Lib.resolve("SHGetFolderPathW");
-
-		if(SHGetKnownFolderPathPtr)
+		if(!localAppData.path().isEmpty() && localAppData.exists())
 		{
-			WCHAR *localAppDataPath = NULL;
-			if(SHGetKnownFolderPathPtr(LocalAppDataID, 0x00008000, NULL, &localAppDataPath) == S_OK)
+			if(!localAppData.entryList(QDir::AllDirs).contains(TEMP_STR, Qt::CaseInsensitive))
 			{
-				QDir localAppData = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(localAppDataPath))));
-				if(localAppData.exists())
-				{
-					if(!localAppData.entryList(QDir::AllDirs).contains(TEMP_STR))
-					{
-						localAppData.mkdir(TEMP_STR);
-					}
-					if(localAppData.cd(TEMP_STR))
-					{
-						temp.setPath(localAppData.canonicalPath());
-					}
-				}
-				CoTaskMemFree(localAppDataPath);
+				localAppData.mkdir(TEMP_STR);
 			}
-		}
-		else if(SHGetFolderPathPtr)
-		{
-			WCHAR *localAppDataPath = new WCHAR[4096];
-			if(SHGetFolderPathPtr(NULL, CSIDL_LOCAL_APPDATA, NULL, NULL, localAppDataPath) == S_OK)
+			if(localAppData.cd(TEMP_STR))
 			{
-				QDir localAppData = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(localAppDataPath))));
-				if(localAppData.exists())
-				{
-					if(!localAppData.entryList(QDir::AllDirs).contains(TEMP_STR))
-					{
-						localAppData.mkdir(TEMP_STR);
-					}
-					if(localAppData.cd(TEMP_STR))
-					{
-						temp.setPath(localAppData.canonicalPath());
-					}
-				}
+				temp.setPath(localAppData.absolutePath());
 			}
-			delete [] localAppDataPath;
 		}
 
 		if(!temp.exists())
@@ -849,6 +817,89 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 	return result;
 }
 
+/*
+ * Locate known folder on local system
+ */
+QString lamexp_known_folder(lamexp_known_folder_t folder_id)
+{
+	typedef HRESULT (WINAPI *SHGetKnownFolderPathFun)(__in const GUID &rfid, __in DWORD dwFlags, __in HANDLE hToken, __out PWSTR *ppszPath);
+	typedef HRESULT (WINAPI *SHGetFolderPathFun)(__in HWND hwndOwner, __in int nFolder, __in HANDLE hToken, __in DWORD dwFlags, __out LPWSTR pszPath);
+
+	static const int CSIDL_LOCAL_APPDATA = 0x001c;
+	static const int CSIDL_PROGRAM_FILES = 0x0026;
+	static const GUID GUID_LOCAL_APPDATA = {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
+	static const GUID GUID_LOCAL_APPDATA_LOW = {0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
+	static const GUID GUID_PROGRAM_FILES = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
+
+	static SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = NULL;
+	static SHGetFolderPathFun SHGetFolderPathPtr = NULL;
+
+	if((!SHGetKnownFolderPathPtr) && (!SHGetFolderPathPtr))
+	{
+		QLibrary Kernel32Lib("shell32.dll");
+		SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) Kernel32Lib.resolve("SHGetKnownFolderPath");
+		SHGetFolderPathPtr = (SHGetFolderPathFun) Kernel32Lib.resolve("SHGetFolderPathW");
+	}
+
+	int folderCSIDL = -1;
+	GUID folderGUID = {0x0000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}};
+
+	switch(folder_id)
+	{
+	case lamexp_folder_localappdata:
+		folderCSIDL = CSIDL_LOCAL_APPDATA;
+		folderGUID = GUID_LOCAL_APPDATA;
+		break;
+	case lamexp_folder_programfiles:
+		folderCSIDL = CSIDL_PROGRAM_FILES;
+		folderGUID = GUID_PROGRAM_FILES;
+		break;
+	default:
+		return QString();
+		break;
+	}
+
+	QString folder;
+
+	if(SHGetKnownFolderPathPtr)
+	{
+		WCHAR *path = NULL;
+		if(SHGetKnownFolderPathPtr(folderGUID, 0x00008000, NULL, &path) == S_OK)
+		{
+			MessageBoxW(0, path, L"SHGetKnownFolderPathPtr", MB_TOPMOST);
+			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
+			if(!folderTemp.exists())
+			{
+				folderTemp.mkpath(".");
+			}
+			if(folderTemp.exists())
+			{
+				folder = folderTemp.canonicalPath();
+			}
+			CoTaskMemFree(path);
+		}
+	}
+	else if(SHGetFolderPathPtr)
+	{
+		WCHAR *path = new WCHAR[4096];
+		if(SHGetFolderPathPtr(NULL, folderCSIDL, NULL, NULL, path) == S_OK)
+		{
+			MessageBoxW(0, path, L"SHGetFolderPathPtr", MB_TOPMOST);
+			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
+			if(!folderTemp.exists())
+			{
+				folderTemp.mkpath(".");
+			}
+			if(folderTemp.exists())
+			{
+				folder = folderTemp.canonicalPath();
+			}
+		}
+		delete [] path;
+	}
+
+	return folder;
+}
 
 /*
  * Get number private bytes [debug only]
