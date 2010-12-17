@@ -599,9 +599,10 @@ void MainWindow::encodeButtonClicked(void)
 	case SettingsModel::VorbisEncoder:
 	case SettingsModel::AACEncoder:
 	case SettingsModel::FLACEncoder:
+	case SettingsModel::PCMEncoder:
 		break;
 	default:
-		QMessageBox::warning(this, "LameXP", "Sorry, only MP3, Vorbis, AAC and FLAC encoding is supported at the moment.<br>Support for more encoders to be added in later versions!");
+		QMessageBox::warning(this, "LameXP", "Sorry, an unsupported encoder has been chosen!");
 		tabWidget->setCurrentIndex(3);
 		return;
 	}
@@ -815,6 +816,10 @@ void MainWindow::styleActionActivated(QAction *action)
  */
 void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 {
+	if(outputFolderView->currentIndex() != index)
+	{
+		outputFolderView->setCurrentIndex(index);
+	}
 	QString selectedDir = m_fileSystemModel->filePath(index);
 	if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
 	outputFolderLabel->setText(selectedDir);
@@ -1288,7 +1293,10 @@ void MainWindow::restoreCursor(void)
  */
 void MainWindow::sourceFilesContextMenu(const QPoint &pos)
 {
-	m_sourceFilesContextMenu->popup(sourceFileView->mapToGlobal(pos));
+	if(pos.x() <= sourceFileView->width() && pos.y() <= sourceFileView->height() && pos.x() >= 0 && pos.y() >= 0)
+	{
+		m_sourceFilesContextMenu->popup(sourceFileView->mapToGlobal(pos));
+	}
 }
 
 /*
@@ -1366,7 +1374,11 @@ void MainWindow::findFileContextActionTriggered(void)
  */
 void MainWindow::outputFolderContextMenu(const QPoint &pos)
 {
-	m_outputFolderContextMenu->popup(outputFolderView->mapToGlobal(pos));
+	
+	if(pos.x() <= outputFolderView->width() && pos.y() <= outputFolderView->height() && pos.x() >= 0 && pos.y() >= 0)
+	{
+		m_outputFolderContextMenu->popup(outputFolderView->mapToGlobal(pos));
+	}
 }
 
 /*

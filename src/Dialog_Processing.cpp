@@ -32,6 +32,7 @@
 #include "Encoder_Vorbis.h"
 #include "Encoder_AAC.h"
 #include "Encoder_FLAC.h"
+#include "Encoder_Wave.h"
 #include "WinSevenTaskbar.h"
 
 #include <QApplication>
@@ -453,6 +454,14 @@ void ProcessingDialog::startNextJob(void)
 			flacEncoder->setBitrate(m_settings->compressionBitrate());
 			flacEncoder->setRCMode(m_settings->compressionRCMode());
 			encoder = flacEncoder;
+		}
+		break;
+	case SettingsModel::PCMEncoder:
+		{
+			WaveEncoder *waveEncoder = new WaveEncoder();
+			waveEncoder->setBitrate(m_settings->compressionBitrate());
+			waveEncoder->setRCMode(m_settings->compressionRCMode());
+			encoder = waveEncoder;
 		}
 		break;
 	default:
