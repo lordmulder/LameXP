@@ -21,32 +21,14 @@
 
 #pragma once
 
-#include "Tool_Abstract.h"
-#include "Model_AudioFile.h"
+#include "Decoder_Abstract.h"
 
-class QProcess;
-class QStringList;
-class QMutex;
-
-class AbstractEncoder : public AbstractTool
+class WaveDecoder : public AbstractDecoder
 {
-	Q_OBJECT
-
 public:
-	AbstractEncoder(void);
-	~AbstractEncoder(void);
+	WaveDecoder(void);
+	~WaveDecoder(void);
 
-	//Internal encoder API
-	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag) = 0;
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion) = 0;
-	virtual QString extension(void) = 0;
-	virtual bool requiresDownmix(void);
-
-	//Common setter methods
-	void setBitrate(int bitrate);
-	void setRCMode(int mode);
-
-protected:
-	int m_configBitrate;
-	int m_configRCMode;
+	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 };

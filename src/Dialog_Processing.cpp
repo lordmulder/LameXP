@@ -339,7 +339,7 @@ void ProcessingDialog::doneEncoding(void)
 		}
 		else
 		{
-			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#D1FFD5"));
+			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#E0FFE2"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
 			SET_PROGRESS_TEXT("Alle files completed successfully.");

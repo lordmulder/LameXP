@@ -39,3 +39,11 @@ AbstractEncoder::~AbstractEncoder(void)
 
 void AbstractEncoder::setBitrate(int bitrate) { m_configBitrate = max(0, bitrate); }
 void AbstractEncoder::setRCMode(int mode) { m_configRCMode = max(0, mode); }
+
+/*
+ * Default implementation
+ */
+bool AbstractEncoder::requiresDownmix(void)
+{
+	return false;
+}

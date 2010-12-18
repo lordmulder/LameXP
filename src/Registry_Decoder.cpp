@@ -26,6 +26,7 @@
 #include "Decoder_Vorbis.h"
 #include "Decoder_FLAC.h"
 #include "Decoder_WMA.h"
+#include "Decoder_Wave.h"
 
 #include <QString>
 
@@ -38,6 +39,7 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	PROBE_DECODER(AACDecoder);
 	PROBE_DECODER(FLACDecoder);
 	PROBE_DECODER(WMADecoder);
+	PROBE_DECODER(WaveDecoder);
 	return NULL;
 }
 

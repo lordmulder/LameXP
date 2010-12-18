@@ -907,6 +907,23 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 	return folder;
 }
 
+
+/*
+ * Get number private bytes [debug only]
+ */
+__int64 lamexp_free_diskspace(const QString &path)
+{
+	ULARGE_INTEGER freeBytesAvailable, totalNumberOfBytes, totalNumberOfFreeBytes;
+	if(GetDiskFreeSpaceExW(reinterpret_cast<const wchar_t*>(QDir::toNativeSeparators(path).utf16()), &freeBytesAvailable, &totalNumberOfBytes, &totalNumberOfFreeBytes))
+	{
+		return freeBytesAvailable.QuadPart;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 /*
  * Get number private bytes [debug only]
  */

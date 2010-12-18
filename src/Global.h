@@ -94,6 +94,7 @@ lamexp_cpu_t lamexp_detect_cpu_features(void);
 bool lamexp_clean_folder(const QString folderPath);
 const QString lamexp_version2string(const QString &pattern, unsigned int version);
 QString lamexp_known_folder(lamexp_known_folder_t folder_id);
+__int64 lamexp_free_diskspace(const QString &path);
 
 //Debug-only functions
 SIZE_T lamexp_dbg_private_bytes(void);

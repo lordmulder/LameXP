@@ -584,6 +584,9 @@ void MainWindow::aboutButtonClicked(void)
  */
 void MainWindow::encodeButtonClicked(void)
 {
+	static const __int64 oneGigabyte = 1073741824; 
+	static const __int64 minimumFreeDiskspaceMultiplier = 222;
+	
 	ABORT_IF_BUSY;
 	
 	if(m_fileListModel->rowCount() < 1)
@@ -593,6 +596,16 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 	
+	if(lamexp_free_diskspace(lamexp_temp_folder()) < (oneGigabyte * minimumFreeDiskspaceMultiplier))
+	{
+		QDir tempFolder(lamexp_temp_folder());
+		tempFolder.cdUp();
+		if(QMessageBox::warning(this, "Low Diskspace Warning", QString("<nobr>Warning: There are less than %1 GB of free diskspace available on your system's TEMP folder!</nobr><br><br>Your TEMP folder is located at:<br><i>%2</i>").arg(QString::number(minimumFreeDiskspaceMultiplier), tempFolder.path()), "Abort Process (Recommended)", "Ignore") != 1)
+		{
+			return;
+		}
+	}
+
 	switch(m_settings->compressionEncoder())
 	{
 	case SettingsModel::MP3Encoder:

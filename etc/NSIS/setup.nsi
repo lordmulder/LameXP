@@ -54,6 +54,7 @@
 ;--------------------------------
 
 !include `MUI2.nsh`
+!include `WinVer.nsh`
 !include `UAC.nsh`
 !include `parameters.nsh`
 
@@ -223,6 +224,7 @@ LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_ENGLISH} "No programs that hav
 LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_ENGLISH} "Searching, please wait..."
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_ENGLISH} "Application"
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_ENGLISH} "Process"
+LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_ENGLISH} "Do you want your personal settings to be deleted too?"
 
 ;German
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_GERMAN} "Schließe laufende Instanz, bitte warten..."
@@ -238,6 +240,7 @@ LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_GERMAN} "Es müssen keine Progr
 LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_GERMAN} "Suche, bitte warten..."
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_GERMAN} "Anwendung"
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_GERMAN} "Prozess"
+LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_GERMAN} "Sollen Ihre persönlichen Einstellungen ebenfalls gelöscht werden?"
 
 
 ;--------------------------------
@@ -254,6 +257,19 @@ Function .onInit
 		MessageBox MB_ICONSTOP|MB_TOPMOST "Sorry, the installer is already running!"
 		Quit
 	${EndIf}  
+
+	${If} ${IsNT}
+		Goto OS_Windows_NT
+	${Else}
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, the Windows 9x series (including ME) is not supported by this application!"
+		Quit
+	${EndIf}
+  
+	OS_Windows_NT:
+	${If} ${AtMostWinNT4}
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, Windows NT 4.0 (and older) is not supported by this application!"
+		Quit
+	${EndIf}
 FunctionEnd
 
 Function un.onInit
@@ -430,6 +446,9 @@ Section "Uninstall"
 	DeleteRegValue HKLM "${MyRegPath}" "StartmenuFolder"
 	DeleteRegValue HKLM "${MyRegPath}" "SetupLanguage"
 	
+	MessageBox MB_YESNO|MB_TOPMOST "$(LAMEXP_LANG_UNINST_PERSONAL)" IDNO +2
+	Delete "$LOCALAPPDATA\LoRd_MuldeR\LameXP - Audio Encoder Front-End\config.ini"
+
 	!insertmacro PrintProgress "$(MUI_UNTEXT_FINISH_TITLE)."
 SectionEnd
 

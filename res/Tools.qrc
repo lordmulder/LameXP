@@ -19,6 +19,7 @@
     <file>tools/oggenc2_x64.exe</file>
     <file>tools/selfdelete.exe</file>
     <file>tools/shorten.exe</file>
+    <file>tools/sox.exe</file>
     <file>tools/speexdec.exe</file>
     <file>tools/takc.exe</file>
     <file>tools/ttaenc.exe</file>

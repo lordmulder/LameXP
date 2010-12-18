@@ -26,6 +26,8 @@
 #include "Model_Progress.h"
 #include "Encoder_Abstract.h"
 #include "Decoder_Abstract.h"
+#include "Filter_Abstract.h"
+#include "Filter_Downmix.h"
 #include "Registry_Decoder.h"
 #include "Model_Settings.h"
 
@@ -94,7 +96,7 @@ void ProcessThread::processFile()
 {
 	m_aborted = false;
 	bool bSuccess = true;
-
+		
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
 	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), "Starting...", ProgressModel::JobRunning);
 
@@ -107,10 +109,18 @@ void ProcessThread::processFile()
 		return;
 	}
 
+	QList<AbstractFilter*> filters;
+	
+	//Do we need Stereo downmix?
+	if(m_audioFile.formatAudioChannels() > 2 && m_encoder->requiresDownmix())
+	{
+		filters.prepend(new DownmixFilter());
+	}
+
 	QString sourceFile = m_audioFile.filePath();
 
 	//Decode source file
-	if(!m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
+	if(!filters.isEmpty() || !m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
 	{
 		m_currentStep = DecodingStep;
 		AbstractDecoder *decoder = DecoderRegistry::lookup(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion());
@@ -137,6 +147,30 @@ void ProcessThread::processFile()
 			emit processStateFinished(m_jobId, outFileName, false);
 			return;
 		}
+	}
+
+	//Apply all filters
+	while(!filters.isEmpty())
+	{
+		QString tempFile = generateTempFileName();
+		AbstractFilter *poFilter = filters.takeFirst();
+
+		if(bSuccess)
+		{
+			connect(poFilter, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
+			connect(poFilter, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
+
+			m_currentStep = FilteringStep;
+			bSuccess = poFilter->apply(sourceFile, tempFile, &m_aborted);
+
+			if(bSuccess)
+			{
+				sourceFile = tempFile;
+				handleMessage("\n-------------------------------\n");
+			}
+		}
+
+		delete poFilter;
 	}
 
 	//Encode audio file
@@ -170,6 +204,9 @@ void ProcessThread::handleUpdate(int progress)
 	{
 	case EncodingStep:
 		emit processStateChanged(m_jobId, QString("Encoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+		break;
+	case FilteringStep:
+		emit processStateChanged(m_jobId, QString("Filtering (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
 		break;
 	case DecodingStep:
 		emit processStateChanged(m_jobId, QString("Decoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);

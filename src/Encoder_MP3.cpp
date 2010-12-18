@@ -173,3 +173,8 @@ bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &
 
 	return false;
 }
+
+bool MP3Encoder::requiresDownmix(void)
+{
+	return true;
+}
