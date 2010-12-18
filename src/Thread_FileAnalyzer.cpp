@@ -39,12 +39,14 @@
 ////////////////////////////////////////////////////////////
 
 FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
-	: m_inputFiles(inputFiles)
+:
+	m_inputFiles(inputFiles),
+	m_mediaInfoBin_x86(lamexp_lookup_tool("mediainfo_i386.exe")),
+	m_mediaInfoBin_x64(lamexp_lookup_tool("mediainfo_x64.exe"))
 {
 	m_bSuccess = false;
-	m_mediaInfoBin = lamexp_lookup_tool("mediainfo_icl11.exe");
 	
-	if(m_mediaInfoBin.isEmpty())
+	if(m_mediaInfoBin_x86.isEmpty() || m_mediaInfoBin_x64.isEmpty())
 	{
 		qFatal("Invalid path to MediaInfo binary. Tool not initialized properly.");
 	}
@@ -94,6 +96,9 @@ void FileAnalyzer::run()
 
 const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 {
+	lamexp_cpu_t cpuInfo = lamexp_detect_cpu_features();
+	const QString mediaInfoBin = cpuInfo.x64 ? m_mediaInfoBin_x64 : m_mediaInfoBin_x86;
+	
 	AudioFileModel audioFile(filePath);
 	m_currentSection = sectionOther;
 
@@ -112,7 +117,7 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
-	process.start(m_mediaInfoBin, QStringList() << QDir::toNativeSeparators(filePath));
+	process.start(mediaInfoBin, QStringList() << QDir::toNativeSeparators(filePath));
 	
 	if(!process.waitForStarted())
 	{

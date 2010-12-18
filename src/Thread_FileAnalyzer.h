@@ -63,7 +63,8 @@ private:
 	unsigned int parseDuration(const QString &str);
 
 	QStringList m_inputFiles;
-	QString m_mediaInfoBin;
+	const QString m_mediaInfoBin_x86;
+	const QString m_mediaInfoBin_x64;
 	section_t m_currentSection;
 	unsigned int m_filesAccepted;
 	unsigned int m_filesRejected;

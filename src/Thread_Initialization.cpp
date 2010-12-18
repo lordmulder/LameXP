@@ -54,7 +54,8 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg", UINT_MAX},
 	{"143fc001a2f6c56fe1b9e6f8a2eb2b53b9e1e504", "lame.exe", 39910},
 	{"775b260b3f64101beaeb317b74746f9bccdab842", "MAC.exe", UINT_MAX},
-	{"e8719fbfd7b690b3e518489f7aae3915305711c2", "mediainfo_icl11.exe", 737},
+	{"c7aa8ca8e05a5083d0ef961c1224ac3037718d4f", "mediainfo_i386.exe", 738},
+	{"74ca0c218eab75393a45fa8f3b53b7f2852fd28f", "mediainfo_x64.exe", 738},
 	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe", UINT_MAX},
 	{"8bbf4a3fffe2ff143eb5ba2cf82ca16d676e865d", "mpg123.exe", UINT_MAX},
 	{"380c734e3c3948a844b9fae213d53a93ab20beba", "oggdec.exe", UINT_MAX},
@@ -98,14 +99,20 @@ void InitializationThread::run()
 	//Init checksums
 	for(int i = 0; i < INT_MAX; i++)
 	{
-		if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash)
+		if(!g_lamexp_tools[i].pcName && !g_lamexp_tools[i].pcHash && !g_lamexp_tools[i].uiVersion)
+		{
+			break;
+		}
+		else if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash && g_lamexp_tools[i].uiVersion)
 		{
 			const QString currentTool = QString::fromLatin1(g_lamexp_tools[i].pcName);
 			checksum.insert(currentTool, QString::fromLatin1(g_lamexp_tools[i].pcHash));
 			version.insert(currentTool, g_lamexp_tools[i].uiVersion);
-			continue;
 		}
-		break;
+		else
+		{
+			qFatal("Inconsistent checksum data detected. Take care!");
+		}
 	}
 
 	QDir toolsDir(":/tools/");

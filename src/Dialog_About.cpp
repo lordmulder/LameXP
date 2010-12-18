@@ -238,7 +238,7 @@ void AboutDialog::showMoreAbout(void)
 	moreAboutText += LINK("http://flac.sourceforge.net/");
 	moreAboutText += "<br>";
 	
-	moreAboutText += VSTR("<li><b>MediaInfo - Media File Analysis Tool (%1)</b><br>", "mediainfo_icl11.exe", "v?.?.??");
+	moreAboutText += VSTR("<li><b>MediaInfo - Media File Analysis Tool (%1)</b><br>", "mediainfo_i386.exe", "v?.?.??");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
 	moreAboutText += "<br></ul></div>";
