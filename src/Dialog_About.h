@@ -49,4 +49,6 @@ protected:
 private:
 	bool m_firstShow;
 	SettingsModel *m_settings;
+
+	bool playResoureSound(const QString &library, const unsigned long soundId, const bool async);
 };

@@ -33,6 +33,8 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QTimer>
+#include <QFileInfo>
+#include <QDir>
 
 //Win32 includes
 #include <Windows.h>
@@ -73,10 +75,11 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += "You should have received a copy of the GNU General Public License<br>";
 	aboutText += "along with this program; if not, write to the Free Software<br>";
 	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</tt></nobr><br>";
+	if(!firstStart)
+	{
+		aboutText += QString("<br>Please see %1 for details!</br><br>").arg(LINK("http://www.gnu.org/licenses/gpl-2.0.txt"));
+	}
 	aboutText += "<hr><br>";
-	aboutText += "This software uses the 'slick' icon set by Mark James &ndash; <a href=\"http://www.famfamfam.com/lab/icons/silk/\">http://www.famfamfam.com/</a>.<br>";
-	aboutText += "Released under the Creative Commons Attribution 2.5 License.<br>";
-	aboutText += "<br>";
 	aboutText += QString("Special thanks go out to \"John33\" from %1 for his continuous support.<br>").arg(LINK("http://www.rarewares.org/"));
 	
 	setText(aboutText);
@@ -86,7 +89,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	if(firstStart)
 	{
 		QPushButton *firstButton = addButton("Show License Text", QMessageBox::AcceptRole);
-		firstButton->setIcon(QIcon(":/icons/script_edit.png"));
+		firstButton->setIcon(QIcon(":/icons/script.png"));
 		firstButton->setMinimumWidth(135);
 		firstButton->disconnect();
 		connect(firstButton, SIGNAL(clicked()), this, SLOT(openLicenseText()));
@@ -140,7 +143,10 @@ int AboutDialog::exec()
 {
 	if(m_settings->soundsEnabled())
 	{
-		PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+		if(!m_firstShow || !playResoureSound("imageres.dll", 5080, true))
+		{
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+		}
 	}
 	
 	switch(QMessageBox::exec())
@@ -241,6 +247,11 @@ void AboutDialog::showMoreAbout(void)
 	moreAboutText += VSTR("<li><b>MediaInfo - Media File Analysis Tool (%1)</b><br>", "mediainfo_i386.exe", "v?.?.??");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
+	moreAboutText += "<br>";
+
+	moreAboutText += "<li><b>Silk Icons - Over 700  icons in PNG format (v1.3)</b><br>";
+	moreAboutText += "<nobr>By Mark James, released under the Creative Commons 'by' License.</nobr><br>";
+	moreAboutText += LINK("http://www.famfamfam.com/lab/icons/silk/");
 	moreAboutText += "<br></ul></div>";
 
 	QMessageBox *moreAboutBox = new QMessageBox(this);
@@ -283,3 +294,42 @@ void AboutDialog::showEvent(QShowEvent *e)
 ////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
+
+bool AboutDialog::playResoureSound(const QString &library, const unsigned long soundId, const bool async)
+{
+	HMODULE module = 0;
+	DWORD flags = SND_RESOURCE;
+	bool result = false;
+
+	QFileInfo libraryFile(library);
+	if(!libraryFile.isAbsolute())
+	{
+		unsigned int buffSize = GetSystemDirectoryW(NULL, NULL) + 1;
+		wchar_t *buffer = (wchar_t*) _malloca(buffSize * sizeof(wchar_t));
+		unsigned int result = GetSystemDirectory(buffer, buffSize);
+		if(result > 0 && result < buffSize)
+		{
+			libraryFile.setFile(QString("%1/%2").arg(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(buffer))), library));
+		}
+		_freea(buffer);
+	}
+
+	if(async)
+	{
+		flags |= SND_ASYNC;
+	}
+	else
+	{
+		flags |= SND_SYNC;
+	}
+
+	module = LoadLibraryW(reinterpret_cast<const wchar_t*>(QDir::toNativeSeparators(libraryFile.absoluteFilePath()).utf16()));
+
+	if(module)
+	{
+		result = PlaySound((LPCTSTR) soundId, module, flags);
+		FreeLibrary(module);
+	}
+
+	return result;
+}
