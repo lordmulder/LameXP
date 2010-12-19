@@ -19,29 +19,19 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Registry_Decoder.h"
+#pragma once
 
-#include "Decoder_AAC.h"
-#include "Decoder_MP3.h"
-#include "Decoder_Vorbis.h"
-#include "Decoder_FLAC.h"
-#include "Decoder_AC3.h"
-#include "Decoder_WMA.h"
-#include "Decoder_Wave.h"
+#include "Decoder_Abstract.h"
 
-#include <QString>
-
-#define PROBE_DECODER(DEC) if(DEC::isDecoderAvailable() && DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
-
-AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+class AC3Decoder : public AbstractDecoder
 {
-	PROBE_DECODER(MP3Decoder);
-	PROBE_DECODER(VorbisDecoder);
-	PROBE_DECODER(AACDecoder);
-	PROBE_DECODER(AC3Decoder);
-	PROBE_DECODER(FLACDecoder);
-	PROBE_DECODER(WMADecoder);
-	PROBE_DECODER(WaveDecoder);
-	return NULL;
-}
+public:
+	AC3Decoder(void);
+	~AC3Decoder(void);
 
+	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
+
+private:
+	const QString m_binary;
+};
