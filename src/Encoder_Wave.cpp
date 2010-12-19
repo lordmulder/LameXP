@@ -42,13 +42,23 @@ WaveEncoder::~WaveEncoder(void)
 
 bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
 {
-	emit messageLogged(QString("Moving file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
-	
 	SHFILEOPSTRUCTW fileOperation;
 	memset(&fileOperation, 0, sizeof(SHFILEOPSTRUCTW));
-	fileOperation.wFunc = FO_MOVE;
 	fileOperation.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI | FOF_FILESONLY;
 
+	if(lamexp_temp_folder().compare(QFileInfo(sourceFile).canonicalPath(), Qt::CaseInsensitive) == 0)
+	{
+		//If the source is in the TEMP folder take shortcut and move the file
+		emit messageLogged(QString("Moving file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
+		fileOperation.wFunc = FO_MOVE;
+	}
+	else
+	{
+		//...otherwise we actually copy the file in order to keep the source
+		emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
+		fileOperation.wFunc = FO_COPY;
+	}
+	
 	size_t srcLen = wcslen(reinterpret_cast<const wchar_t*>(sourceFile.utf16())) + 3;
 	wchar_t *srcBuffer = new wchar_t[srcLen];
 	memset(srcBuffer, 0, srcLen * sizeof(wchar_t));

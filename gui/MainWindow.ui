@@ -1196,6 +1196,8 @@
      </property>
      <addaction name="actionDisableSounds"/>
      <addaction name="actionDisableUpdateReminder"/>
+     <addaction name="actionDisableWmaDecoderNotifications"/>
+     <addaction name="actionDisableNeroAacNotifications"/>
     </widget>
     <addaction name="menuConfiguration"/>
     <addaction name="actionInstallWMADecoder"/>
@@ -1379,6 +1381,22 @@
     <string>Install WMA Decoder</string>
    </property>
   </action>
+  <action name="actionDisableNeroAacNotifications">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Disable Nero AAC Notifications</string>
+   </property>
+  </action>
+  <action name="actionDisableWmaDecoderNotifications">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Disable WMA Decoder Notifications</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -1411,6 +1429,10 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

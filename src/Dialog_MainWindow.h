@@ -89,6 +89,8 @@ private slots:
 	void outputFolderContextMenu(const QPoint &pos);
 	void showFolderContextActionTriggered(void);
 	void installWMADecoderActionTriggered(bool checked);
+	void disableNeroAacNotificationsActionTriggered(bool checked);
+	void disableWmaDecoderNotificationsActionTriggered(bool checked);
 
 protected:
 	void showEvent(QShowEvent *event);

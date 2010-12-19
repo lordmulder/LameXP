@@ -251,9 +251,13 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//Activate tools menu actions
 	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
+	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
+	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
 	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
 	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
 	connect(actionInstallWMADecoder, SIGNAL(triggered(bool)), this, SLOT(installWMADecoderActionTriggered(bool)));
+	connect(actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
+	connect(actionDisableWmaDecoderNotifications, SIGNAL(triggered(bool)), this, SLOT(disableWmaDecoderNotificationsActionTriggered(bool)));
 		
 	//Activate help menu actions
 	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
@@ -516,39 +520,45 @@ void MainWindow::windowShown(void)
 	}
 
 	//Check for AAC support
-	if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
+	if(m_settings->neroAacNotificationsEnabled())
 	{
-		if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
+		if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
 		{
-			QString messageText;
-			messageText += "<nobr>LameXP detected that your version of the Nero AAC encoder is outdated!<br>";
-			messageText += "The current version available is " + lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac()) + " (or later), but you still have version " + lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe")) + " installed.<br><br>";
-			messageText += "You can download the latest version of the Nero AAC encoder from the Nero website at:<br>";
-			messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
-			QMessageBox::information(this, "AAC Encoder Outdated", messageText);
+			if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
+			{
+				QString messageText;
+				messageText += "<nobr>LameXP detected that your version of the Nero AAC encoder is outdated!<br>";
+				messageText += "The current version available is " + lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac()) + " (or later), but you still have version " + lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe")) + " installed.<br><br>";
+				messageText += "You can download the latest version of the Nero AAC encoder from the Nero website at:<br>";
+				messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
+				QMessageBox::information(this, "AAC Encoder Outdated", messageText);
+			}
 		}
-	}
-	else
-	{
-		radioButtonEncoderAAC->setEnabled(false);
-		QString messageText;
-		messageText += "<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>";
-		messageText += "Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>";
-		messageText += "Your LameXP directory is as follows:<br>";
-		messageText += "<i><nobr>" + QDir::toNativeSeparators(QCoreApplication::applicationDirPath()) + "</nobr></i><br><br>";
-		messageText += "You can download the Nero AAC encoder for free from the official Nero website at:<br>";
-		messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
-		QMessageBox::information(this, "AAC Support Disabled", messageText);
+		else
+		{
+			radioButtonEncoderAAC->setEnabled(false);
+			QString messageText;
+			messageText += "<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>";
+			messageText += "Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>";
+			messageText += "Your LameXP directory is as follows:<br>";
+			messageText += "<i><nobr>" + QDir::toNativeSeparators(QCoreApplication::applicationDirPath()) + "</nobr></i><br><br>";
+			messageText += "You can download the Nero AAC encoder for free from the official Nero website at:<br>";
+			messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
+			QMessageBox::information(this, "AAC Support Disabled", messageText);
+		}
 	}
 	
 	//Check for WMA support
-	if(!lamexp_check_tool("wmawav.exe"))
+	if(m_settings->wmaDecoderNotificationsEnabled())
 	{
-		QString messageText;
-		messageText += "<nobr>LameXP has detected that the WMA File Decoder component is not currently installed on your system.<br>";
-		messageText += "You won't be able to process WMA files as input unless the WMA File Decoder component is installed!</nobr>";
-		QMessageBox::information(this, "WMA Decoder Missing", messageText);
-		installWMADecoderActionTriggered(rand() % 2);
+		if(!lamexp_check_tool("wmawav.exe"))
+		{
+			QString messageText;
+			messageText += "<nobr>LameXP has detected that the WMA File Decoder component is not currently installed on your system.<br>";
+			messageText += "You won't be able to process WMA files as input unless the WMA File Decoder component is installed!</nobr>";
+			QMessageBox::information(this, "WMA Decoder Missing", messageText);
+			installWMADecoderActionTriggered(rand() % 2);
+		}
 	}
 
 	//Add files from the command-line
@@ -585,7 +595,7 @@ void MainWindow::aboutButtonClicked(void)
 void MainWindow::encodeButtonClicked(void)
 {
 	static const __int64 oneGigabyte = 1073741824; 
-	static const __int64 minimumFreeDiskspaceMultiplier = 222;
+	static const __int64 minimumFreeDiskspaceMultiplier = 2;
 	
 	ABORT_IF_BUSY;
 	
@@ -596,13 +606,22 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 	
-	if(lamexp_free_diskspace(lamexp_temp_folder()) < (oneGigabyte * minimumFreeDiskspaceMultiplier))
+	__int64 currentFreeDiskspace = lamexp_free_diskspace(lamexp_temp_folder());
+
+	if(currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier))
 	{
-		QDir tempFolder(lamexp_temp_folder());
-		tempFolder.cdUp();
-		if(QMessageBox::warning(this, "Low Diskspace Warning", QString("<nobr>Warning: There are less than %1 GB of free diskspace available on your system's TEMP folder!</nobr><br><br>Your TEMP folder is located at:<br><i>%2</i>").arg(QString::number(minimumFreeDiskspaceMultiplier), tempFolder.path()), "Abort Process (Recommended)", "Ignore") != 1)
+		QStringList tempFolderParts = lamexp_temp_folder().split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
+		tempFolderParts.takeLast();
+		switch(QMessageBox::warning(this, "Low Diskspace Warning", QString("<nobr>There are less than %1 GB of free diskspace available on your system's TEMP folder.</nobr><br><nobr>It is highly recommend to free up more diskspace before proceeding with the encode!.</nobr><br><br>Your TEMP folder is located at:<br><nobr><i><a href=\"file:///%3\">%3</a></i></nobr><br>").arg(QString::number(minimumFreeDiskspaceMultiplier), tempFolderParts.join("\\")), "Abort Encoding Process", "Clean Disk Now", "Ignore"))
 		{
+		case 1:
+			QProcess::startDetached(QString("%1/cleanmgr.exe").arg(lamexp_known_folder(lamexp_folder_systemfolder)), QStringList() << "/D" << tempFolderParts.first());
+		case 0:
 			return;
+			break;
+		default:
+			QMessageBox::warning(this, "Low Diskspace", "You are proceeding with low diskspace. Problems might occur!");
+			break;
 		}
 	}
 
@@ -1454,6 +1473,61 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
 }
 
+/*
+ * Disable Nero AAC encoder action
+ */
+void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
+{
+	if(checked)
+	{
+		if(QMessageBox::Yes == QMessageBox::question(this, "Nero AAC Notifications", "Do you really want to disable all Nero AAC Encoder notifications?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		{
+			QMessageBox::information(this, "Nero AAC Notifications", "All Nero AAC Encoder notifications have been disabled.");
+			m_settings->neroAacNotificationsEnabled(false);
+		}
+		else
+		{
+			m_settings->neroAacNotificationsEnabled(true);
+		}
+	}
+	else
+	{
+			QMessageBox::information(this, "Nero AAC Notifications", "The Nero AAC Encoder notifications have been re-enabled.");
+			m_settings->neroAacNotificationsEnabled(true);
+	}
+
+	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
+}
+
+/*
+ * Disable WMA Decoder component action
+ */
+void MainWindow::disableWmaDecoderNotificationsActionTriggered(bool checked)
+{
+	if(checked)
+	{
+		if(QMessageBox::Yes == QMessageBox::question(this, "WMA Decoder Notifications", "Do you really want to disable all WMA Decoder notifications?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		{
+			QMessageBox::information(this, "WMA Decoder Notifications", "All WMA Decoder notifications have been disabled.");
+			m_settings->wmaDecoderNotificationsEnabled(false);
+		}
+		else
+		{
+			m_settings->wmaDecoderNotificationsEnabled(true);
+		}
+	}
+	else
+	{
+			QMessageBox::information(this, "WMA Decoder Notifications", "The WMA Decoder notifications have been re-enabled.");
+			m_settings->wmaDecoderNotificationsEnabled(true);
+	}
+
+	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
+}
+
+/*
+ * Download and install WMA Decoder component
+ */
 void MainWindow::installWMADecoderActionTriggered(bool checked)
 {
 	static const char *download_url = "http://www.nch.com.au/components/wmawav.exe";

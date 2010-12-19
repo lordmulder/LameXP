@@ -60,7 +60,8 @@ lamexp_cpu_t;
 typedef enum
 {
 	lamexp_folder_localappdata = 0,
-	lamexp_folder_programfiles = 1
+	lamexp_folder_programfiles = 2,
+	lamexp_folder_systemfolder = 3
 }
 lamexp_known_folder_t;
 

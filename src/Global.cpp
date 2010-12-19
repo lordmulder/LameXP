@@ -832,9 +832,11 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 
 	static const int CSIDL_LOCAL_APPDATA = 0x001c;
 	static const int CSIDL_PROGRAM_FILES = 0x0026;
+	static const int CSIDL_SYSTEM_FOLDER = 0x0025;
 	static const GUID GUID_LOCAL_APPDATA = {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
 	static const GUID GUID_LOCAL_APPDATA_LOW = {0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
 	static const GUID GUID_PROGRAM_FILES = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
+	static const GUID GUID_SYSTEM_FOLDER = {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}};
 
 	static QLibrary *Kernel32Lib = NULL;
 	static SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = NULL;
@@ -859,6 +861,10 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 	case lamexp_folder_programfiles:
 		folderCSIDL = CSIDL_PROGRAM_FILES;
 		folderGUID = GUID_PROGRAM_FILES;
+		break;
+	case lamexp_folder_systemfolder:
+		folderCSIDL = CSIDL_SYSTEM_FOLDER;
+		folderGUID = GUID_SYSTEM_FOLDER;
 		break;
 	default:
 		return QString();

@@ -44,6 +44,8 @@ static const char *g_settingsId_createPlaylist = "Flags/AutoCreatePlaylist";
 static const char *g_settingsId_autoUpdateLastCheck = "AutoUpdate/LastCheck";
 static const char *g_settingsId_autoUpdateEnabled = "AutoUpdate/Enabled";
 static const char *g_settingsId_soundsEnabled = "Flags/EnableSounds";
+static const char *g_settingsId_neroAacNotificationsEnabled = "Flags/EnableNeroAacNotifications";
+static const char *g_settingsId_wmaDecoderNotificationsEnabled = "Flags/EnableWmaDecoderNotifications";
 
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
@@ -128,3 +130,5 @@ MAKE_OPTION3(createPlaylist, true)
 MAKE_OPTION2(autoUpdateLastCheck, "Never")
 MAKE_OPTION3(autoUpdateEnabled, true)
 MAKE_OPTION3(soundsEnabled, true)
+MAKE_OPTION3(neroAacNotificationsEnabled, true)
+MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)

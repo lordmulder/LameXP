@@ -75,6 +75,8 @@ public:
 	MAKE_OPTION_DEC2(autoUpdateLastCheck);
 	MAKE_OPTION_DEC3(autoUpdateEnabled);
 	MAKE_OPTION_DEC3(soundsEnabled);
+	MAKE_OPTION_DEC3(neroAacNotificationsEnabled)
+	MAKE_OPTION_DEC3(wmaDecoderNotificationsEnabled)
 
 	//Misc
 	void validate(void);
