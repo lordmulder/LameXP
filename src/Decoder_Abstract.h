@@ -35,5 +35,6 @@ public:
 	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag) = 0;
 	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	static bool isDecoderAvailable(void);
+	static QStringList supportedTypes(void);
 };
 

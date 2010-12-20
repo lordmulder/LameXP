@@ -35,6 +35,7 @@
 #include "Model_FileList.h"
 #include "Model_FileSystem.h"
 #include "WinSevenTaskbar.h"
+#include "Registry_Decoder.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -469,6 +470,7 @@ void MainWindow::windowShown(void)
 		if(iAccepted <= 0)
 		{
 			m_settings->licenseAccepted(-1);
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 			QMessageBox::critical(this, "License Declined", "You have declined the license. Consequently the application will exit now!");
 			QApplication::quit();
 			return;
@@ -484,6 +486,7 @@ void MainWindow::windowShown(void)
 		if(QDate::currentDate() >= expireDate)
 		{
 			qWarning("Binary has expired !!!");
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 			if(QMessageBox::warning(this, "LameXP - Expired", QString("This demo (pre-release) version of LameXP has expired at %1.\nLameXP is free software and release versions won't expire.").arg(expireDate.toString(Qt::ISODate)), "Check for Updates", "Exit Program") == 0)
 			{
 				checkUpdatesActionActivated();
@@ -540,8 +543,8 @@ void MainWindow::windowShown(void)
 			QString messageText;
 			messageText += "<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>";
 			messageText += "Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>";
-			messageText += "Your LameXP directory is as follows:<br>";
-			messageText += "<i><nobr>" + QDir::toNativeSeparators(QCoreApplication::applicationDirPath()) + "</nobr></i><br><br>";
+			messageText += "Your LameXP directory is located here:<br>";
+			messageText += QString("<i><nobr><a href=\"file:///%1\">%1</a></nobr></i><br><br>").arg(QDir::toNativeSeparators(QCoreApplication::applicationDirPath()));
 			messageText += "You can download the Nero AAC encoder for free from the official Nero website at:<br>";
 			messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 			QMessageBox::information(this, "AAC Support Disabled", messageText);
@@ -612,6 +615,7 @@ void MainWindow::encodeButtonClicked(void)
 	{
 		QStringList tempFolderParts = lamexp_temp_folder().split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
 		tempFolderParts.takeLast();
+		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		switch(QMessageBox::warning(this, "Low Diskspace Warning", QString("<nobr>There are less than %1 GB of free diskspace available on your system's TEMP folder.</nobr><br><nobr>It is highly recommend to free up more diskspace before proceeding with the encode!.</nobr><br><br>Your TEMP folder is located at:<br><nobr><i><a href=\"file:///%3\">%3</a></i></nobr><br>").arg(QString::number(minimumFreeDiskspaceMultiplier), tempFolderParts.join("\\")), "Abort Encoding Process", "Clean Disk Now", "Ignore"))
 		{
 		case 1:
@@ -674,7 +678,8 @@ void MainWindow::closeButtonClicked(void)
 void MainWindow::addFilesButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-	QStringList selectedFiles = QFileDialog::getOpenFileNames(this, "Add file(s)", QString(), "All supported files (*.*)");
+	QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
+	QStringList selectedFiles = QFileDialog::getOpenFileNames(this, "Add file(s)", QString(), fileTypeFilters.join(";;"));
 	addFiles(selectedFiles);
 }
 

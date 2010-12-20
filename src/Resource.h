@@ -29,6 +29,7 @@
 #define IDR_WAVE_SUCCESS                667
 #define IDR_WAVE_ERROR                  668
 #define IDR_WAVE_ABORTED                669
+#define IDR_WAVE_WHAMMY                 670
 
 /*
  * Next default values for new objects

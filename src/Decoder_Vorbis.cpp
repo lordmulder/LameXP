@@ -124,3 +124,7 @@ bool VorbisDecoder::isFormatSupported(const QString &containerType, const QStrin
 	return false;
 }
 
+QStringList VorbisDecoder::supportedTypes(void)
+{
+	return QStringList() << "Ogg Vorbis (*.ogg *.ogm)";
+}

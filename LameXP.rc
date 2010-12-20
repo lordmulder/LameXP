@@ -109,6 +109,7 @@ IDR_WAVE_ABOUT          WAVE                    "res\\sounds\\uuaarrgh.wav"
 IDR_WAVE_SUCCESS        WAVE                    "res\\sounds\\success.wav"
 IDR_WAVE_ERROR          WAVE                    "res\\sounds\\error.wav"
 IDR_WAVE_ABORTED        WAVE                    "res\\sounds\\aborted.wav"
+IDR_WAVE_WHAMMY         WAVE                    "res\\sounds\\whammy.wav"
 
 /////////////////////////////////////////////////////////////////////////////
 //

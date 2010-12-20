@@ -138,3 +138,8 @@ bool AC3Decoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
+QStringList AC3Decoder::supportedTypes(void)
+{
+	return QStringList() << "AC-3 aka ATSC A/52 (*.ac3)" << "Digital Theater System (*.dts)";
+}
+

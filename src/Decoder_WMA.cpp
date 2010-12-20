@@ -137,3 +137,8 @@ bool WMADecoder::isDecoderAvailable(void)
 {
 	return lamexp_check_tool("wmawav.exe");
 }
+
+QStringList WMADecoder::supportedTypes(void)
+{
+	return QStringList() << "Windows Media Audio (*.wma)";
+}

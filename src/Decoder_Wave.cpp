@@ -86,3 +86,7 @@ bool WaveDecoder::isFormatSupported(const QString &containerType, const QString 
 	return false;
 }
 
+QStringList WaveDecoder::supportedTypes(void)
+{
+	return QStringList() << "Waveform Audio File (*.wav)";
+}

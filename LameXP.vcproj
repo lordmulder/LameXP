@@ -1660,10 +1660,6 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<File
-				RelativePath=".\res\sounds\uuaarrgh.wav"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Dialogs"

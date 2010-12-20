@@ -30,8 +30,11 @@
 #include "Decoder_Wave.h"
 
 #include <QString>
+#include <QStringList>
+#include <QRegExp>
 
 #define PROBE_DECODER(DEC) if(DEC::isDecoderAvailable() && DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
+#define GET_FILETYPES(DEC) (DEC::isDecoderAvailable() ? DEC::supportedTypes() : QStringList())
 
 AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
@@ -45,3 +48,36 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	return NULL;
 }
 
+QStringList DecoderRegistry::getSupportedTypes(void)
+{
+	QStringList types;
+
+	types << GET_FILETYPES(WaveDecoder);
+	types << GET_FILETYPES(MP3Decoder);
+	types << GET_FILETYPES(VorbisDecoder);
+	types << GET_FILETYPES(AACDecoder);
+	types << GET_FILETYPES(AC3Decoder);
+	types << GET_FILETYPES(FLACDecoder);
+	types << GET_FILETYPES(WMADecoder);
+
+	QStringList extensions;
+	QRegExp regExp("\\((.+)\\)", Qt::CaseInsensitive);
+
+	for(int i = 0; i < types.count(); i++)
+	{
+		if(regExp.lastIndexIn(types.at(i)) >= 0)
+		{
+			extensions << regExp.cap(1).split(" ", QString::SkipEmptyParts);
+		}
+	}
+	
+	if(!extensions.empty())
+	{
+		extensions.removeDuplicates();
+		extensions.sort();
+		types.prepend(QString("All supported types (%1)").arg(extensions.join(" ")));
+	}
+	
+	types << "All files (*.*)";
+	return types;
+}

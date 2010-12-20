@@ -117,9 +117,10 @@ bool AACDecoder::isFormatSupported(const QString &containerType, const QString &
 	{
 		if(formatType.compare("AAC", Qt::CaseInsensitive) == 0)
 		{
-			if(formatProfile.compare("LC", Qt::CaseInsensitive) == 0 || formatProfile.compare("HE", Qt::CaseInsensitive) == 0)
+			QStringList profileParts = formatProfile.split(" ", QString::SkipEmptyParts);
+			if(profileParts.contains("LC", Qt::CaseInsensitive) || profileParts.contains("HE-AAC", Qt::CaseInsensitive) || profileParts.contains("HE-AACv2", Qt::CaseInsensitive))
 			{
-				if(formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 4", Qt::CaseInsensitive) == 0)
+				if(formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 4", Qt::CaseInsensitive) == 0 || formatVersion.isEmpty())
 				{
 					return true;
 				}
@@ -130,3 +131,7 @@ bool AACDecoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
+QStringList AACDecoder::supportedTypes(void)
+{
+	return QStringList() << "Advanced Audio Coding (*.aac *.mp4)";
+}

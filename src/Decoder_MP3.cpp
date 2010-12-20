@@ -140,3 +140,8 @@ bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
+QStringList MP3Decoder::supportedTypes(void)
+{
+	return QStringList() << "MPEG Audio Layer III (*.mp3 *.mpa)" << "MPEG Audio Layer II (*.mp2 *.mpa)" << "MPEG Audio Layer I ( *.mp1 *.mpa)";
+}
+

@@ -114,7 +114,7 @@ bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 
 bool FLACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("FLAC", Qt::CaseInsensitive) == 0)
+	if(containerType.compare("FLAC", Qt::CaseInsensitive) == 0 || containerType.compare("OGG", Qt::CaseInsensitive) == 0)
 	{
 		if(formatType.compare("FLAC", Qt::CaseInsensitive) == 0)
 		{
@@ -125,3 +125,7 @@ bool FLACDecoder::isFormatSupported(const QString &containerType, const QString 
 	return false;
 }
 
+QStringList FLACDecoder::supportedTypes(void)
+{
+	return QStringList() << "Free Lossless Audio Codec (*.flac *.fla)";
+}
