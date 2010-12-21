@@ -70,7 +70,7 @@ ProcessThread::~ProcessThread(void)
 {
 	while(!m_tempFiles.isEmpty())
 	{
-		QFile::remove(m_tempFiles.takeFirst());
+		lamexp_remove_file(m_tempFiles.takeFirst());
 	}
 
 	LAMEXP_DELETE(m_encoder);

@@ -677,22 +677,23 @@ const QString &lamexp_temp_folder(void)
 bool lamexp_clean_folder(const QString folderPath)
 {
 	QDir tempFolder(folderPath);
-	QFileInfoList entryList = tempFolder.entryInfoList();
-	
+	QFileInfoList entryList = tempFolder.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
+
 	for(int i = 0; i < entryList.count(); i++)
 	{
-		if(entryList.at(i).fileName().compare(".") == 0 || entryList.at(i).fileName().compare("..") == 0)
-		{
-			continue;
-		}
-		
 		if(entryList.at(i).isDir())
 		{
 			lamexp_clean_folder(entryList.at(i).canonicalFilePath());
 		}
 		else
 		{
-			QFile::remove(entryList.at(i).canonicalFilePath());
+			for(int j = 0; j < 3; j++)
+			{
+				if(lamexp_remove_file(entryList.at(i).canonicalFilePath()))
+				{
+					break;
+				}
+			}
 		}
 	}
 	
@@ -722,7 +723,10 @@ void lamexp_finalization(void)
 	{
 		for(int i = 0; i < 100; i++)
 		{
-			if(lamexp_clean_folder(g_lamexp_temp_folder)) break;
+			if(lamexp_clean_folder(g_lamexp_temp_folder))
+			{
+				break;
+			}
 			Sleep(125);
 		}
 		g_lamexp_temp_folder.clear();
@@ -913,6 +917,37 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 	return folder;
 }
 
+/*
+ * Safely remove a file
+ */
+bool lamexp_remove_file(const QString &filename)
+{
+	if(!QFileInfo(filename).exists() || !QFileInfo(filename).isFile())
+	{
+		return true;
+	}
+	else
+	{
+		if(!QFile::remove(filename))
+		{
+			DWORD attributes = GetFileAttributesW(reinterpret_cast<const wchar_t*>(filename.utf16()));
+			SetFileAttributesW(reinterpret_cast<const wchar_t*>(filename.utf16()), (attributes & (~FILE_ATTRIBUTE_READONLY)));
+			if(!QFile::remove(filename))
+			{
+				qWarning("Could not delete \"%s\"", filename.toLatin1().constData());
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+}
 
 /*
  * Get number private bytes [debug only]
