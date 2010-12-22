@@ -40,7 +40,7 @@
 #include <Windows.h>
 
 //Helper macros
-#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
+#define LINK(URL) QString("<a href=\"%1\">&#8627;%2</a>").arg(URL).arg(URL)
 #define CONTRIBUTOR(LANG, CNTR, ICON) QString("<tr><td valign=\"middle\"><img src=\"%1\"></td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%3</td></tr>").arg(ICON, LANG, CNTR);
 #define VSTR(BASE,TOOL,FORMAT) QString(BASE).arg(lamexp_version2string(FORMAT, lamexp_tool_version(TOOL)))
 
@@ -221,48 +221,48 @@ void AboutDialog::showMoreAbout(void)
 {
 	QString moreAboutText;
 	moreAboutText += "<h3>The following third-party software is used in LameXP:</h3>";
-	moreAboutText += "<div  style=\"margin-left:-25px;font-size:8pt\"><ul>";
+	moreAboutText += "<div style=\"margin-left:-25px;font-size:8pt\"><ul>";
 	
 	moreAboutText += VSTR( "<li><b>LAME - OpenSource mp3 Encoder (%1)</b><br>", "lame.exe", "v?.?? a??");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://lame.sourceforge.net/");
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 	
 	moreAboutText += VSTR("<li><b>OggEnc - Ogg Vorbis Encoder (%1)</b>", "oggenc2_i386.exe", "v?.??");
 	moreAboutText += "<br>Completely open and patent-free audio encoding technology.<br>";
 	moreAboutText += LINK("http://www.vorbis.com/");
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 	
 	moreAboutText += VSTR("<li><b>Nero AAC reference MPEG-4 Encoder (%1)</b><br>", "neroAacEnc.exe", "v?.?.?.?");
 	moreAboutText += "Freeware state-of-the-art HE-AAC encoder with 2-Pass support.<br>";
 	moreAboutText += "<i>Available from vendor web-site as free download:</i><br>";
 	moreAboutText += LINK(neroAacUrl);
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 	
 	moreAboutText += VSTR("<li><b>FLAC - Free Lossless Audio Codec (%1)</b><br>", "flac.exe", "v?.?.?");
 	moreAboutText += "Open and patent-free lossless audio compression technology.<br>";
 	moreAboutText += LINK("http://flac.sourceforge.net/");
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 
 	moreAboutText += VSTR("<li><b>AC3Filter Tools - AC3/DTS Decoder (%1)</b><br>", "valdec.exe", "v?.??");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://www.ac3filter.net/projects/tools");
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 
 	moreAboutText += VSTR("<li><b>MediaInfo - Media File Analysis Tool (%1)</b><br>", "mediainfo_i386.exe", "v?.?.?");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 
 	moreAboutText += VSTR("<li><b>SoX - Sound eXchange (%1)</b><br>", "sox.exe", "v??.?.?");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://sox.sourceforge.net/");
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 	
 	moreAboutText += VSTR("<li><b>GnuPG - The GNU Privacy Guard (%1)</b><br>", "gpgv.exe", "v?.?.??");
 	moreAboutText += "Released under the terms of the GNU Leser General Public License.<br>";
 	moreAboutText += LINK("http://www.gnupg.org/");
-	moreAboutText += "<br>";
+	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 
 	moreAboutText += "<li><b>Silk Icons - Over 700  icons in PNG format (v1.3)</b><br>";
 	moreAboutText += "<nobr>By Mark James, released under the Creative Commons 'by' License.</nobr><br>";

@@ -49,6 +49,7 @@ private:
 	QLabel m_counterLabel;
 	QAbstractItemModel *m_model;
 	SettingsModel *m_settings;
+	bool m_moving;
 	bool m_firstShow;
 
 protected:
@@ -62,4 +63,5 @@ protected:
 
 public slots:
 	void modelChanged(void);
+	void showToolTip(void);
 };

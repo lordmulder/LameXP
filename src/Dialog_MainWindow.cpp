@@ -67,6 +67,7 @@
 #define ABORT_IF_BUSY if(m_banner->isVisible() || m_delayedFileTimer->isActive()) { MessageBeep(MB_ICONEXCLAMATION); return; }
 #define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, COLOR); WIDGET->setPalette(_palette); }
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
+#define FLASH_WINDOW(WND) { FLASHWINFO flashInfo; memset(&flashInfo, 0, sizeof(FLASHWINFO)); flashInfo.cbSize = sizeof(FLASHWINFO); flashInfo.dwFlags = FLASHW_ALL; flashInfo.uCount = 12; flashInfo.dwTimeout = 125; flashInfo.hwnd = WND->winId(); FlashWindowEx(&flashInfo); }
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 
 //Helper class
@@ -380,10 +381,12 @@ void MainWindow::showEvent(QShowEvent *event)
 		m_firstTimeShown = false;
 		QTimer::singleShot(0, this, SLOT(windowShown()));
 	}
-
-	if(m_settings->dropBoxWidgetEnabled())
+	else
 	{
-		m_dropBox->setVisible(true);
+		if(m_settings->dropBoxWidgetEnabled())
+		{
+			m_dropBox->setVisible(true);
+		}
 	}
 }
 
@@ -600,6 +603,12 @@ void MainWindow::windowShown(void)
 	if(!m_delayedFileList->isEmpty() && !m_delayedFileTimer->isActive())
 	{
 		m_delayedFileTimer->start(5000);
+	}
+
+	//Make DropBox visible
+	if(m_settings->dropBoxWidgetEnabled())
+	{
+		m_dropBox->setVisible(true);
 	}
 }
 
@@ -1644,13 +1653,6 @@ void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
 	{
 		m_dropBox->show();
 	}
-
-	FLASHWINFO flashInfo;
-	memset(&flashInfo, 0, sizeof(FLASHWINFO));
-	flashInfo.cbSize = sizeof(FLASHWINFO);
-	flashInfo.dwFlags = FLASHW_ALL;
-	flashInfo.uCount = 12;
-	flashInfo.dwTimeout = 125;
-	flashInfo.hwnd = m_dropBox->winId();
-	FlashWindowEx(&flashInfo);
+	
+	FLASH_WINDOW(m_dropBox);
 }

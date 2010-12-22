@@ -28,6 +28,8 @@
 #include <QMovie>
 #include <QKeyEvent>
 #include <QDesktopWidget>
+#include <QToolTip>
+#include <QTimer>
 #include <Windows.h>
 
 #define EPS (1.0E-5)
@@ -43,6 +45,7 @@ DropBox::DropBox(QWidget *parent, QAbstractItemModel *model, SettingsModel *sett
 	m_counterLabel(this),
 	m_model(model),
 	m_settings(settings),
+	m_moving(false),
 	m_firstShow(true)
 {
 	//Init the dialog, from the .ui file
@@ -100,7 +103,10 @@ void DropBox::showEvent(QShowEvent *event)
 		int max_x = screenGeometry.width() - frameGeometry().width();
 		int max_y = screenGeometry.height() - frameGeometry().height();
 		move(max_x, max_y);
+		QTimer::singleShot(333, this, SLOT(showToolTip()));
 	}
+
+	m_moving = false;
 }
 
 void DropBox::keyPressEvent(QKeyEvent *event)
@@ -120,6 +126,12 @@ void DropBox::closeEvent(QCloseEvent *event)
 
 void DropBox::mousePressEvent(QMouseEvent *event)
 {
+	if(m_moving)
+	{
+		event->ignore();
+		return;
+	}
+	
 	if(event->button() == Qt::RightButton)
 	{
 		hide();
@@ -128,17 +140,28 @@ void DropBox::mousePressEvent(QMouseEvent *event)
 	}
 
 	QApplication::setOverrideCursor(Qt::SizeAllCursor);
+	m_moving = true;
 	m_windowReferencePoint = this->pos();
 	m_mouseReferencePoint = event->globalPos();
 }
 
 void DropBox::mouseReleaseEvent(QMouseEvent *event)
 {
-	QApplication::restoreOverrideCursor();
+	if(m_moving && event->button() != Qt::RightButton)
+	{
+		QApplication::restoreOverrideCursor();
+		m_moving = false;
+	}
 }
 
 void DropBox::mouseMoveEvent(QMouseEvent *event)
 {
+	if(!m_moving)
+	{
+		return;
+	}
+	
+	static const int magnetic = 22;
 	QRect screenGeometry = QApplication::desktop()->availableGeometry();
 	
 	int delta_x = m_mouseReferencePoint.x() - event->globalX();
@@ -150,5 +173,28 @@ void DropBox::mouseMoveEvent(QMouseEvent *event)
 	int new_x = min(max_x, max(0, m_windowReferencePoint.x() - delta_x));
 	int new_y = min(max_y, max(0, m_windowReferencePoint.y() - delta_y));
 
+	if(new_x < magnetic)
+	{
+		new_x = 0;
+	}
+	else if(max_x - new_x < magnetic)
+	{
+		new_x = max_x;
+	}
+
+	if(new_y < magnetic)
+	{
+		new_y = 0;
+	}
+	else if(max_y - new_y < magnetic)
+	{
+		new_y = max_y;
+	}
+
 	move(new_x, new_y);
+}
+
+void DropBox::showToolTip(void)
+{
+	QToolTip::showText(dropBoxLabel->mapToGlobal(dropBoxLabel->pos()), dropBoxLabel->toolTip());
 }
