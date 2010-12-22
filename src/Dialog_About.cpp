@@ -40,7 +40,7 @@
 #include <Windows.h>
 
 //Helper macros
-#define LINK(URL) QString("<a href=\"%1\">&#8627;%2</a>").arg(URL).arg(URL)
+#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 #define CONTRIBUTOR(LANG, CNTR, ICON) QString("<tr><td valign=\"middle\"><img src=\"%1\"></td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%3</td></tr>").arg(ICON, LANG, CNTR);
 #define VSTR(BASE,TOOL,FORMAT) QString(BASE).arg(lamexp_version2string(FORMAT, lamexp_tool_version(TOOL)))
 

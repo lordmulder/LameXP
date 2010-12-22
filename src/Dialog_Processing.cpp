@@ -398,7 +398,10 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 
 void ProcessingDialog::contextMenuTriggered(const QPoint &pos)
 {
-	m_contextMenu->popup(view_log->mapToGlobal(pos));
+	if(pos.x() <= view_log->width() && pos.y() <= view_log->height() && pos.x() >= 0 && pos.y() >= 0)
+	{
+		m_contextMenu->popup(view_log->mapToGlobal(pos));
+	}
 }
 
 void ProcessingDialog::contextMenuActionTriggered(void)
