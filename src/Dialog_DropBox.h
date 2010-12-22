@@ -19,27 +19,47 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Config.h"
+#pragma once
 
-/*
- * Resource ID's
- */
-#define IDI_ICON1                       106
-#define IDR_WAVE_ABOUT                  666
-#define IDR_WAVE_SUCCESS                667
-#define IDR_WAVE_ERROR                  668
-#define IDR_WAVE_ABORTED                669
-#define IDR_WAVE_WHAMMY                 670
-#define IDR_WAVE_WOOHOO                 671
+#include "../tmp/UIC_DropBox.h"
 
-/*
- * Next default values for new objects
- */
-#ifdef APSTUDIO_INVOKED
-#ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        107
-#define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1001
-#define _APS_NEXT_SYMED_VALUE           101
-#endif
-#endif
+#include <QPoint>
+
+class QDragEnterEvent;
+class QMouseEvent;
+class QAbstractItemModel;
+class SettingsModel;
+
+////////////////////////////////////////////////////////////
+// Splash Frame
+////////////////////////////////////////////////////////////
+
+class DropBox: public QDialog, private Ui::DropBox
+{
+	Q_OBJECT
+
+public:
+	DropBox(QWidget *parent = 0, QAbstractItemModel *model = 0, SettingsModel *settings = 0);
+	~DropBox(void);
+	
+private:
+	bool m_canClose;
+	QPoint m_mouseReferencePoint;
+	QPoint m_windowReferencePoint;
+	QLabel m_counterLabel;
+	QAbstractItemModel *m_model;
+	SettingsModel *m_settings;
+	bool m_firstShow;
+
+protected:
+	void keyPressEvent(QKeyEvent *event);
+	void keyReleaseEvent(QKeyEvent *event);
+	void closeEvent(QCloseEvent *event);
+	void showEvent(QShowEvent *event);
+	void mousePressEvent(QMouseEvent *event);
+	void mouseMoveEvent(QMouseEvent *event);
+	void mouseReleaseEvent(QMouseEvent *event);
+
+public slots:
+	void modelChanged(void);
+};

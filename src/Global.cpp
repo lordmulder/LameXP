@@ -223,12 +223,12 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		fflush(stdout);
 		fflush(stderr);
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fwprintf(stderr, L"\nCRITICAL ERROR !!!\n%S\n\n", msg);
-		MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - CRITICAL ERROR", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
+		fwprintf(stderr, L"\nGURU MEDITATION !!!\n%S\n\n", msg);
+		MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
 		break;
 	case QtWarningMsg:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-		//MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - CRITICAL ERROR", MB_ICONWARNING | MB_TOPMOST | MB_TASKMODAL);
+		//MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - GURU MEDITATION", MB_ICONWARNING | MB_TOPMOST | MB_TASKMODAL);
 		fwprintf(stderr, L"%S\n", msg);
 		fflush(stderr);
 		break;

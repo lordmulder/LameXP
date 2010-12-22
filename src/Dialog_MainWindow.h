@@ -34,6 +34,7 @@ class QButtonGroup;
 class FileListModel;
 class AbstractEncoder;
 class QMenu;
+class DropBox;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -91,6 +92,7 @@ private slots:
 	void installWMADecoderActionTriggered(bool checked);
 	void disableNeroAacNotificationsActionTriggered(bool checked);
 	void disableWmaDecoderNotificationsActionTriggered(bool checked);
+	void showDropBoxWidgetActionTriggered(bool checked);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -121,4 +123,5 @@ private:
 	QLabel *m_dropNoteLabel;
 	QMenu *m_sourceFilesContextMenu;
 	QMenu *m_outputFolderContextMenu;
+	DropBox *m_dropBox;
 };

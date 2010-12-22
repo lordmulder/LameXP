@@ -2,19 +2,20 @@
 <RCC version="1.0">
 	<qresource>
     <file>images/Busy.gif</file>
-    <file>images/HeaderIcon_MetaInfo.png</file>
+    <file>images/Cogwheels.png</file>
+    <file>images/Construction.gif</file>
+    <file>images/DropBox.png</file>
     <file>images/HeaderIcon_LogFile.png</file>
+    <file>images/HeaderIcon_MetaInfo.png</file>
     <file>images/Label.png</file>
     <file>images/Loading.gif</file>
     <file>images/Logo.png</file>
     <file>images/Logo_Contributors.png</file>
     <file>images/Logo_Software.png</file>
+    <file>images/Qt.svg</file>
     <file>images/Splash.png</file>
     <file>images/Thumb.png</file>
-    <file>images/Construction.gif</file>
-    <file>images/Cogwheels.png</file>
-    <file>images/Qt.svg</file>
-    <file>images/Working.gif</file>
     <file>images/Wizard.png</file>
+    <file>images/Working.gif</file>
   </qresource>
 </RCC>

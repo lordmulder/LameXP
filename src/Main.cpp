@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
 	{
 		fflush(stdout);
 		fflush(stderr);
-		fprintf(stderr, "\nEXCEPTION ERROR: %s\n", error);
+		fprintf(stderr, "\nGURU MEDITATION: %s\n", error);
 		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
 	{
 		fflush(stdout);
 		fflush(stderr);
-		fprintf(stderr, "\nEXCEPTION ERROR: Error code 0x%X\n", error);
+		fprintf(stderr, "\nGURU MEDITATION: Error code 0x%X\n", error);
 		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
@@ -202,7 +202,7 @@ int main(int argc, char* argv[])
 	{
 		fflush(stdout);
 		fflush(stderr);
-		fprintf(stderr, "\nEXCEPTION ERROR !!!\n");
+		fprintf(stderr, "\nGURU MEDITATION !!!\n");
 		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}

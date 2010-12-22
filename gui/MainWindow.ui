@@ -1201,6 +1201,7 @@
     </widget>
     <addaction name="menuConfiguration"/>
     <addaction name="actionInstallWMADecoder"/>
+    <addaction name="actionShowDropBoxWidget"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -1397,6 +1398,15 @@
     <string>Disable WMA Decoder Notifications</string>
    </property>
   </action>
+  <action name="actionShowDropBoxWidget">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/package.png</normaloff>:/icons/package.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show DropBox</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -1429,6 +1439,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

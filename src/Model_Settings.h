@@ -77,6 +77,7 @@ public:
 	MAKE_OPTION_DEC3(soundsEnabled);
 	MAKE_OPTION_DEC3(neroAacNotificationsEnabled)
 	MAKE_OPTION_DEC3(wmaDecoderNotificationsEnabled)
+	MAKE_OPTION_DEC3(dropBoxWidgetEnabled)
 
 	//Misc
 	void validate(void);

@@ -46,6 +46,7 @@ static const char *g_settingsId_autoUpdateEnabled = "AutoUpdate/Enabled";
 static const char *g_settingsId_soundsEnabled = "Flags/EnableSounds";
 static const char *g_settingsId_neroAacNotificationsEnabled = "Flags/EnableNeroAacNotifications";
 static const char *g_settingsId_wmaDecoderNotificationsEnabled = "Flags/EnableWmaDecoderNotifications";
+static const char *g_settingsId_dropBoxWidgetEnabled = "Flags/EnableDropBoxWidget";
 
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
@@ -132,3 +133,4 @@ MAKE_OPTION3(autoUpdateEnabled, true)
 MAKE_OPTION3(soundsEnabled, true)
 MAKE_OPTION3(neroAacNotificationsEnabled, true)
 MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
+MAKE_OPTION3(dropBoxWidgetEnabled, true)

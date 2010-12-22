@@ -28,6 +28,7 @@
 #include "Dialog_MetaInfo.h"
 #include "Dialog_About.h"
 #include "Dialog_Update.h"
+#include "Dialog_DropBox.h"
 #include "Thread_FileAnalyzer.h"
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
@@ -259,6 +260,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(actionInstallWMADecoder, SIGNAL(triggered(bool)), this, SLOT(installWMADecoderActionTriggered(bool)));
 	connect(actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
 	connect(actionDisableWmaDecoderNotifications, SIGNAL(triggered(bool)), this, SLOT(disableWmaDecoderNotificationsActionTriggered(bool)));
+	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
 		
 	//Activate help menu actions
 	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
@@ -273,6 +275,12 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//Create banner
 	m_banner = new WorkingBanner(this);
 
+	//Create DropBox widget
+	m_dropBox = new DropBox(this, m_fileListModel, m_settings);
+	connect(m_fileListModel, SIGNAL(modelReset()), m_dropBox, SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), m_dropBox, SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), m_dropBox, SLOT(modelChanged()));
+		
 	//Create message handler thread
 	m_messageHandler = new MessageHandlerThread();
 	m_delayedFileList = new QStringList();
@@ -320,6 +328,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_sourceFilesContextMenu);
+	LAMEXP_DELETE(m_dropBox);
 }
 
 ////////////////////////////////////////////////////////////
@@ -370,6 +379,11 @@ void MainWindow::showEvent(QShowEvent *event)
 	{
 		m_firstTimeShown = false;
 		QTimer::singleShot(0, this, SLOT(windowShown()));
+	}
+
+	if(m_settings->dropBoxWidgetEnabled())
+	{
+		m_dropBox->setVisible(true);
 	}
 }
 
@@ -422,6 +436,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 		MessageBeep(MB_ICONEXCLAMATION);
 		event->ignore();
 	}
+	
+	if(m_dropBox)
+	{
+		m_dropBox->hide();
+	}
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -470,12 +489,14 @@ void MainWindow::windowShown(void)
 		if(iAccepted <= 0)
 		{
 			m_settings->licenseAccepted(-1);
+			QApplication::processEvents();
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 			QMessageBox::critical(this, "License Declined", "You have declined the license. Consequently the application will exit now!");
 			QApplication::quit();
 			return;
 		}
-
+		
+		PlaySound(MAKEINTRESOURCE(IDR_WAVE_WOOHOO), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		m_settings->licenseAccepted(1);
 	}
 	
@@ -575,6 +596,7 @@ void MainWindow::windowShown(void)
 		}
 	}
 
+	//Start delayed files timer
 	if(!m_delayedFileList->isEmpty() && !m_delayedFileTimer->isActive())
 	{
 		m_delayedFileTimer->start(5000);
@@ -587,9 +609,11 @@ void MainWindow::windowShown(void)
 void MainWindow::aboutButtonClicked(void)
 {
 	ABORT_IF_BUSY;
+	if(m_dropBox->isVisible()) m_dropBox->hide();
 	AboutDialog *aboutBox = new AboutDialog(m_settings, this);
 	aboutBox->exec();
 	LAMEXP_DELETE(aboutBox);
+	if(m_settings->dropBoxWidgetEnabled()) m_dropBox->show();
 }
 
 /*
@@ -1021,7 +1045,8 @@ void MainWindow::visitHomepageActionActivated(void)
 void MainWindow::checkUpdatesActionActivated(void)
 {
 	ABORT_IF_BUSY;
-
+	
+	if(m_dropBox->isVisible()) m_dropBox->hide();
 	UpdateDialog *updateDialog = new UpdateDialog(m_settings, this);
 
 	updateDialog->exec();
@@ -1031,6 +1056,7 @@ void MainWindow::checkUpdatesActionActivated(void)
 	}
 
 	LAMEXP_DELETE(updateDialog);
+	if(m_settings->dropBoxWidgetEnabled()) m_dropBox->show();
 }
 
 /*
@@ -1610,3 +1636,21 @@ void MainWindow::installWMADecoderActionTriggered(bool checked)
 	}
 }
 
+void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
+{
+	m_settings->dropBoxWidgetEnabled(true);
+	
+	if(!m_dropBox->isVisible())
+	{
+		m_dropBox->show();
+	}
+
+	FLASHWINFO flashInfo;
+	memset(&flashInfo, 0, sizeof(FLASHWINFO));
+	flashInfo.cbSize = sizeof(FLASHWINFO);
+	flashInfo.dwFlags = FLASHW_ALL;
+	flashInfo.uCount = 12;
+	flashInfo.dwTimeout = 125;
+	flashInfo.hwnd = m_dropBox->winId();
+	FlashWindowEx(&flashInfo);
+}
