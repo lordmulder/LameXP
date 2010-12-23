@@ -66,6 +66,8 @@
 #define LAMEXP_INIT_QT_STATIC_PLUGIN(X)
 #endif
 
+#define X ULONG_MAX
+
 ///////////////////////////////////////////////////////////////////////////////
 // TYPES
 ///////////////////////////////////////////////////////////////////////////////
@@ -77,6 +79,23 @@ typedef struct
 	unsigned int reserved_2;
 	char parameter[4096];
 } lamexp_ipc_t;
+
+struct lamexp_oscomp_t
+{
+	DWORD verMajor;
+	DWORD verMinor;
+	char *pcExport;
+};
+
+static const struct lamexp_oscomp_t g_lamexp_oscomp[] =
+{
+	{4, X, "OpenThread"},            // Windows NT 4.0
+	{5, 0, "GetNativeSystemInfo"},   // Windows 2000
+	{5, 1, "GetLargePageMinimum"},   // Windows XP
+	{5, 2, "GetLocaleInfoEx"},       // Windows Server 2003
+	{6, 0, "CreateRemoteThreadEx"},  // Windows Vista
+	{0, 0, NULL}                     // EOL
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
@@ -390,6 +409,34 @@ void WINAPI debugThreadProc(__in LPVOID lpParameter)
 	TerminateProcess(GetCurrentProcess(), -1);
 }
 
+/*
+ * Check for compatibility mode
+ */
+static bool lamexp_check_compatibility_mode(void)
+{
+	QLibrary kernel32("kernel32.dll");
+
+	OSVERSIONINFOW versionInfo;
+	memset(&versionInfo, 0, sizeof(OSVERSIONINFOW));
+	versionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
+	
+	if(GetVersionEx(&versionInfo))
+	{
+		for(int i = 0; g_lamexp_oscomp[i].pcExport; i++)
+		{
+			if((g_lamexp_oscomp[i].verMajor == X || g_lamexp_oscomp[i].verMajor == versionInfo.dwMajorVersion) && (g_lamexp_oscomp[i].verMinor == X || g_lamexp_oscomp[i].verMinor == versionInfo.dwMinorVersion))
+			{
+				if(kernel32.resolve(g_lamexp_oscomp[i].pcExport) != NULL)
+				{
+					qFatal("Windows NT %u.%u compatibility mode detected. Aborting!", versionInfo.dwMajorVersion, versionInfo.dwMinorVersion);
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
 
 /*
  * Initialize Qt framework
@@ -431,6 +478,9 @@ bool lamexp_init_qt(int argc, char* argv[])
 		break;
 	}
 	
+	//Check if "compatibility mode" is enabled
+	lamexp_check_compatibility_mode();
+
 	//Create Qt application instance and setup version info
 	QApplication *application = new QApplication(argc, argv);
 	application->setApplicationName("LameXP - Audio Encoder Front-End");
