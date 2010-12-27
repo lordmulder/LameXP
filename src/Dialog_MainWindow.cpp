@@ -155,14 +155,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->header()->hideSection(3);
 	outputFolderView->setHeaderHidden(true);
 	outputFolderView->setAnimated(true);
-	outputFolderView->installEventFilter(this);
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
 	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	connect(outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(outputFolderView, SIGNAL(pressed(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewMoved(QModelIndex)));
 	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
 	outputFolderViewClicked(outputFolderView->currentIndex());
 	connect(buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
@@ -458,10 +458,6 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 	{
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 		QTimer::singleShot(250, this, SLOT(restoreCursor()));
-	}
-	else if(obj == outputFolderView && (event->type() == QEvent::KeyRelease || event->type() == QEvent::KeyPress))
-	{
-		outputFolderViewClicked(outputFolderView->currentIndex());
 	}
 	return false;
 }
@@ -882,7 +878,7 @@ void MainWindow::styleActionActivated(QAction *action)
 }
 
 /*
- * Output folder changed
+ * Output folder changed (mouse clicked)
  */
 void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 {
@@ -894,6 +890,17 @@ void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 	if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
 	outputFolderLabel->setText(selectedDir);
 	m_settings->outputDir(selectedDir);
+}
+
+/*
+ * Output folder changed (mouse moved)
+ */
+void MainWindow::outputFolderViewMoved(const QModelIndex &index)
+{
+	if(QApplication::mouseButtons() & Qt::LeftButton)
+	{
+		outputFolderViewClicked(index);
+	}
 }
 
 /*
