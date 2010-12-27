@@ -46,7 +46,10 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	QProcess process;
 	QStringList args;
 
+	process.setWorkingDirectory(lamexp_temp_folder());
+
 	args << "-V3";
+	args << "--norm" << "--temp" << ".";
 	args << QDir::toNativeSeparators(sourceFile);
 	args << "-c2";
 	args << QDir::toNativeSeparators(outputFile);
