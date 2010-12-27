@@ -58,7 +58,7 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"74ca0c218eab75393a45fa8f3b53b7f2852fd28f", "mediainfo_x64.exe", 738},
 	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe", UINT_MAX},
 	{"8bbf4a3fffe2ff143eb5ba2cf82ca16d676e865d", "mpg123.exe", UINT_MAX},
-	{"380c734e3c3948a844b9fae213d53a93ab20beba", "oggdec.exe", UINT_MAX},
+	{"8dd7138714c3bcb39f5a3213413addba13d06f1e", "oggdec.exe", UINT_MAX},
 	{"ecd15abe103184aca96e406f5f1c82c6fb2e665d", "oggenc2_i386.exe", 287},
 	{"ffe0fbd73352396dc3752ac9d484dbfc754a226d", "oggenc2_sse2.exe", 287},
 	{"a8c50872e544a55495a824426e9378984f2ae01d", "oggenc2_x64.exe", 287},

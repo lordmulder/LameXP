@@ -25,7 +25,7 @@
 #define VER_LAMEXP_MAJOR				4
 #define VER_LAMEXP_MINOR_HI				0
 #define VER_LAMEXP_MINOR_LO				0
-#define VER_LAMEXP_BUILD				187
+#define VER_LAMEXP_BUILD				188
 #define VER_LAMEXP_SUFFIX				TechPreview
 
 /*
