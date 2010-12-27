@@ -66,8 +66,6 @@
 #define LAMEXP_INIT_QT_STATIC_PLUGIN(X)
 #endif
 
-#define X ULONG_MAX
-
 ///////////////////////////////////////////////////////////////////////////////
 // TYPES
 ///////////////////////////////////////////////////////////////////////////////
@@ -79,23 +77,6 @@ typedef struct
 	unsigned int reserved_2;
 	char parameter[4096];
 } lamexp_ipc_t;
-
-struct lamexp_oscomp_t
-{
-	DWORD verMajor;
-	DWORD verMinor;
-	char *pcExport;
-};
-
-static const struct lamexp_oscomp_t g_lamexp_oscomp[] =
-{
-	{4, X, "OpenThread"},            // Windows NT 4.0
-	{5, 0, "GetNativeSystemInfo"},   // Windows 2000
-	{5, 1, "GetLargePageMinimum"},   // Windows XP
-	{5, 2, "GetLocaleInfoEx"},       // Windows Server 2003
-	{6, 0, "CreateRemoteThreadEx"},  // Windows Vista
-	{0, 0, NULL}                     // EOL
-};
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
@@ -412,30 +393,53 @@ void WINAPI debugThreadProc(__in LPVOID lpParameter)
 /*
  * Check for compatibility mode
  */
-static bool lamexp_check_compatibility_mode(void)
+static bool lamexp_check_compatibility_mode(const char *exportName)
 {
 	QLibrary kernel32("kernel32.dll");
 
-	OSVERSIONINFOW versionInfo;
-	memset(&versionInfo, 0, sizeof(OSVERSIONINFOW));
-	versionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
-	
-	if(GetVersionEx(&versionInfo))
+	if(exportName != NULL)
 	{
-		for(int i = 0; g_lamexp_oscomp[i].pcExport; i++)
+		if(kernel32.resolve(exportName) != NULL)
 		{
-			if((g_lamexp_oscomp[i].verMajor == X || g_lamexp_oscomp[i].verMajor == versionInfo.dwMajorVersion) && (g_lamexp_oscomp[i].verMinor == X || g_lamexp_oscomp[i].verMinor == versionInfo.dwMinorVersion))
-			{
-				if(kernel32.resolve(g_lamexp_oscomp[i].pcExport) != NULL)
-				{
-					qFatal("Windows NT %u.%u compatibility mode detected. Aborting!", versionInfo.dwMajorVersion, versionInfo.dwMinorVersion);
-					return false;
-				}
-			}
+			qFatal("Windows compatibility mode detected. Program will exit!");
+			return false;
 		}
 	}
 
 	return true;
+}
+
+/*
+ * Check for process elevation
+ */
+static bool lamexp_check_elevation(void)
+{
+	typedef enum { lamexp_token_elevation_class = 20 };
+	typedef struct { DWORD TokenIsElevated; } LAMEXP_TOKEN_ELEVATION;
+
+	HANDLE hToken = NULL;
+	bool bIsProcessElevated = false;
+	
+	if(OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
+	{
+		LAMEXP_TOKEN_ELEVATION tokenElevation;
+		DWORD returnLength;
+		if(GetTokenInformation(hToken, (TOKEN_INFORMATION_CLASS) lamexp_token_elevation_class, &tokenElevation, sizeof(LAMEXP_TOKEN_ELEVATION), &returnLength))
+		{
+			if(returnLength == sizeof(LAMEXP_TOKEN_ELEVATION) && tokenElevation.TokenIsElevated != 0)
+			{
+				qWarning("Process token is elevated -> potential security risk!\n");
+				bIsProcessElevated = true;
+			}
+		}
+		CloseHandle(hToken);
+	}
+	else
+	{
+		qWarning("Failed to open process token!");
+	}
+
+	return !bIsProcessElevated;
 }
 
 /*
@@ -460,26 +464,28 @@ bool lamexp_init_qt(int argc, char* argv[])
 	{
 	case QSysInfo::WV_2000:
 		qDebug("Running on Windows 2000 (not offically supported!).\n");
+		lamexp_check_compatibility_mode("GetNativeSystemInfo");
 		break;
 	case QSysInfo::WV_XP:
-		qDebug("Running on Windows XP.\n\n");
+		qDebug("Running on Windows XP.\n");
+		lamexp_check_compatibility_mode("GetLargePageMinimum");
 		break;
 	case QSysInfo::WV_2003:
-		qDebug("Running on Windows Server 2003 or Windows XP Professional x64 Edition.\n");
+		qDebug("Running on Windows Server 2003 or Windows XP x64-Edition.\n");
+		lamexp_check_compatibility_mode("GetLocaleInfoEx");
 		break;
 	case QSysInfo::WV_VISTA:
-		qDebug("Running on Windows Vista or Windows Server 200.8\n");
+		qDebug("Running on Windows Vista or Windows Server 2008.\n");
+		lamexp_check_compatibility_mode("CreateRemoteThreadEx");
 		break;
 	case QSysInfo::WV_WINDOWS7:
 		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
+		lamexp_check_compatibility_mode(NULL);
 		break;
 	default:
 		qFatal("Unsupported OS, only Windows 2000 or later is supported!");
 		break;
 	}
-	
-	//Check if "compatibility mode" is enabled
-	lamexp_check_compatibility_mode();
 
 	//Create Qt application instance and setup version info
 	QApplication *application = new QApplication(argc, argv);
@@ -508,6 +514,15 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 	
+	//Check for process elevation
+	if(!lamexp_check_elevation())
+	{
+		if(QMessageBox::warning(NULL, "LameXP", "<nobr>LameXP was started with elevated rights. This is a potential security risk!</nobr>", "Quit Program (Recommended)", "Ignore") == 0)
+		{
+			return false;
+		}
+	}
+
 	//Done
 	qt_initialized = true;
 	return true;
