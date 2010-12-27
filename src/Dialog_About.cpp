@@ -75,11 +75,10 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += "You should have received a copy of the GNU General Public License<br>";
 	aboutText += "along with this program; if not, write to the Free Software<br>";
 	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</tt></nobr><br>";
-	if(!firstStart)
-	{
-		aboutText += QString("<br>Please see %1 for details!</br><br>").arg(LINK("http://www.gnu.org/licenses/gpl-2.0.txt"));
-	}
-	aboutText += "<hr><br>";
+	aboutText += "<hr><table><tr>";
+	aboutText += "<td valign=\"middle\"><img src=\":/icons/error_big.png\"</td><td>&nbsp;</td>";
+	aboutText += "<td><font color=\"darkred\">Note: LameXP is free software. Do <b>not</b> pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should <b>not</b> respond to the offer !!!</font></td>";
+	aboutText += "</tr></table><hr><br>";
 	aboutText += QString("Special thanks go out to \"John33\" from %1 for his continuous support.<br>").arg(LINK("http://www.rarewares.org/"));
 	
 	setText(aboutText);

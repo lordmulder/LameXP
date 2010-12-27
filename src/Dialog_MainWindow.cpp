@@ -490,7 +490,8 @@ void MainWindow::windowShown(void)
 			m_settings->licenseAccepted(-1);
 			QApplication::processEvents();
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
-			QMessageBox::critical(this, "License Declined", "You have declined the license. Consequently the application will exit now!");
+			QMessageBox::critical(this, "License Declined", "You have declined the license. Consequently the application will exit now!", "Goodbye!");
+			QProcess::startDetached(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()), QStringList());
 			QApplication::quit();
 			return;
 		}
