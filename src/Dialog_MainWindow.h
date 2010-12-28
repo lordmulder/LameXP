@@ -35,6 +35,7 @@ class FileListModel;
 class AbstractEncoder;
 class QMenu;
 class DropBox;
+class QTranslator;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -60,6 +61,7 @@ private slots:
 	void tabPageChanged(int idx);
 	void tabActionActivated(QAction *action);
 	void styleActionActivated(QAction *action);
+	void languageActionActivated(QAction *action);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void outputFolderViewMoved(const QModelIndex &index);
 	void makeFolderButtonClicked(void);
@@ -112,6 +114,7 @@ private:
 	QFileSystemModelEx *m_fileSystemModel;
 	QActionGroup *m_tabActionGroup;
 	QActionGroup *m_styleActionGroup;
+	QActionGroup *m_languageActionGroup;
 	QButtonGroup *m_encoderButtonGroup;
 	QButtonGroup *m_modeButtonGroup;
 	WorkingBanner *m_banner;
@@ -125,4 +128,5 @@ private:
 	QMenu *m_sourceFilesContextMenu;
 	QMenu *m_outputFolderContextMenu;
 	DropBox *m_dropBox;
+	QTranslator *m_currentTranslator;
 };

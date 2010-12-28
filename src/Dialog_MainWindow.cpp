@@ -59,6 +59,8 @@
 #include <QUuid>
 #include <QProcessEnvironment>
 #include <QCryptographicHash>
+#include <QTranslator>
+#include <QResource>
 
 //Win32 includes
 #include <Windows.h>
@@ -80,6 +82,16 @@ private:
 	int m_index;
 };
 
+//Helper class
+class Tag: public QObjectUserData
+{
+public:
+	Tag(const QString &text) : m_text(text) {}
+	QString text(void) { return m_text; }
+private:
+	const QString m_text;
+};
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -88,6 +100,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 :
 	QMainWindow(parent),
 	m_fileListModel(fileListModel),
+	m_currentTranslator(new QTranslator),
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
 	m_accepted(false),
@@ -175,6 +188,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	QAction *showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "Browse Selected Folder");
 	connect(outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
 	connect(showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
+	outputFolderLabel->installEventFilter(this);
 	
 	//Setup "Meta Data" tab
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
@@ -251,6 +265,22 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 	styleActionActivated(NULL);
 
+	//Populate the language menu
+	m_languageActionGroup = new QActionGroup(this);
+	m_languageActionGroup->addAction(actionLanguageEnglish);
+	QStringList translations = QDir(":/localization").entryList(QStringList() << "*.qm", QDir::Files, QDir::Name);
+	for(int i = 0; i < translations.count(); i++)
+	{
+		QAction *currentLanguage = new QAction(this);
+		currentLanguage->setCheckable(true);
+		currentLanguage->setText(QString::fromUtf8(reinterpret_cast<const char*>(QResource(QString(":/localization/%1.txt").arg(translations.at(i))).data())));
+		currentLanguage->setUserData(0, new Tag(translations.at(i)));
+		m_languageActionGroup->addAction(currentLanguage);
+		menuLanguage->addAction(currentLanguage);
+	}
+	connect(m_languageActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
+	actionLanguageEnglish->setChecked(true);
+
 	//Activate tools menu actions
 	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
@@ -317,9 +347,13 @@ MainWindow::~MainWindow(void)
 	sourceFileView->setModel(NULL);
 	metaDataView->setModel(NULL);
 	
+	//Uninstall translator
+	QApplication::removeTranslator(m_currentTranslator);
+
 	//Free memory
 	LAMEXP_DELETE(m_tabActionGroup);
 	LAMEXP_DELETE(m_styleActionGroup);
+	LAMEXP_DELETE(m_languageActionGroup);
 	LAMEXP_DELETE(m_banner);
 	LAMEXP_DELETE(m_fileSystemModel);
 	LAMEXP_DELETE(m_messageHandler);
@@ -330,12 +364,16 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_sourceFilesContextMenu);
 	LAMEXP_DELETE(m_dropBox);
+	LAMEXP_DELETE(m_currentTranslator);
 }
 
 ////////////////////////////////////////////////////////////
 // PRIVATE FUNCTIONS
 ////////////////////////////////////////////////////////////
 
+/*
+ * Add file to source list
+ */
 void MainWindow::addFiles(const QStringList &files)
 {
 	if(files.isEmpty())
@@ -369,6 +407,9 @@ void MainWindow::addFiles(const QStringList &files)
 // EVENTS
 ////////////////////////////////////////////////////////////
 
+/*
+ * Window is about to be shown
+ */
 void MainWindow::showEvent(QShowEvent *event)
 {
 	m_accepted = false;
@@ -390,6 +431,9 @@ void MainWindow::showEvent(QShowEvent *event)
 	}
 }
 
+/*
+ * File dragged over window
+ */
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
 	QStringList formats = event->mimeData()->formats();
@@ -400,6 +444,9 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 	}
 }
 
+/*
+ * File dropped onto window
+ */
 void MainWindow::dropEvent(QDropEvent *event)
 {
 	ABORT_IF_BUSY;
@@ -432,6 +479,9 @@ void MainWindow::dropEvent(QDropEvent *event)
 	addFiles(droppedFiles);
 }
 
+/*
+ * Window tries to close
+ */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
 	if(m_banner->isVisible() || m_delayedFileTimer->isActive())
@@ -446,18 +496,44 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	}
 }
 
+/*
+ * Window was resized
+ */
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
 	QMainWindow::resizeEvent(event);
 	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
 }
 
+/*
+ * Event filter
+ */
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
 	if(obj == m_fileSystemModel && QApplication::overrideCursor() == NULL)
 	{
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 		QTimer::singleShot(250, this, SLOT(restoreCursor()));
+	}
+	else if(obj == outputFolderLabel)
+	{
+		switch(event->type())
+		{
+		case QEvent::MouseButtonPress:
+			if(dynamic_cast<QMouseEvent*>(event)->button() == Qt::LeftButton)
+			{
+				QDesktopServices::openUrl(QString("file:///%1").arg(outputFolderLabel->text()));
+			}
+			break;
+		case QEvent::Enter:
+			qDebug("QEvent::HoverEnter");
+			outputFolderLabel->setForegroundRole(QPalette::Link);
+			break;
+		case QEvent::Leave:
+			qDebug("QEvent::HoverLeave");
+			outputFolderLabel->setForegroundRole(QPalette::WindowText);
+			break;
+		}
 	}
 	return false;
 }
@@ -536,7 +612,7 @@ void MainWindow::windowShown(void)
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
 		if(!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14))
 		{
-			if(QMessageBox::information(this, "Update Reminer", (lastUpdateCheck.isValid() ? "Your last update check was more than 14 days ago. Check for updates now?" :  "Your did not check for LameXP updates yet. Check for updates now?"), "Check for Updates", "Defer") == 0)
+			if(QMessageBox::information(this, "Update Reminer", (lastUpdateCheck.isValid() ? "Your last update check was more than 14 days ago. Check for updates now?" :  "Your did not check for LameXP updates yet. Check for updates now?"), "Check for Updates", "Postpone") == 0)
 			{
 				checkUpdatesActionActivated();
 			}
@@ -631,7 +707,7 @@ void MainWindow::encodeButtonClicked(void)
 	static const __int64 minimumFreeDiskspaceMultiplier = 2;
 	
 	ABORT_IF_BUSY;
-	
+
 	if(m_fileListModel->rowCount() < 1)
 	{
 		QMessageBox::warning(this, "LameXP", "You must add at least one file to the list before proceeding!");
@@ -879,6 +955,22 @@ void MainWindow::styleActionActivated(QAction *action)
 }
 
 /*
+ * Language action triggered
+ */
+void MainWindow::languageActionActivated(QAction *action)
+{
+	QApplication::removeTranslator(m_currentTranslator);
+	if(action->userData(0))
+	{
+		if(m_currentTranslator->load(QString(":/localization/%1").arg(dynamic_cast<Tag*>(action->userData(0))->text())))
+		{
+			QApplication::installTranslator(m_currentTranslator);
+		}
+	}
+	retranslateUi(this);
+}
+
+/*
  * Output folder changed (mouse clicked)
  */
 void MainWindow::outputFolderViewClicked(const QModelIndex &index)
@@ -889,7 +981,7 @@ void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 	}
 	QString selectedDir = m_fileSystemModel->filePath(index);
 	if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
-	outputFolderLabel->setText(selectedDir);
+	outputFolderLabel->setText(QDir::toNativeSeparators(selectedDir));
 	m_settings->outputDir(selectedDir);
 }
 
@@ -909,9 +1001,18 @@ void MainWindow::outputFolderViewMoved(const QModelIndex &index)
  */
 void MainWindow::gotoDesktopButtonClicked(void)
 {
-	outputFolderView->setCurrentIndex(m_fileSystemModel->index(QDesktopServices::storageLocation(QDesktopServices::DesktopLocation)));
-	outputFolderViewClicked(outputFolderView->currentIndex());
-	outputFolderView->setFocus();
+	QString desktopPath = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+	
+	if(!desktopPath.isEmpty() && QDir(desktopPath).exists())
+	{
+		outputFolderView->setCurrentIndex(m_fileSystemModel->index(desktopPath));
+		outputFolderViewClicked(outputFolderView->currentIndex());
+		outputFolderView->setFocus();
+	}
+	else
+	{
+		buttonGotoDesktop->setEnabled(false);
+	}
 }
 
 /*
@@ -919,9 +1020,18 @@ void MainWindow::gotoDesktopButtonClicked(void)
  */
 void MainWindow::gotoHomeFolderButtonClicked(void)
 {
-	outputFolderView->setCurrentIndex(m_fileSystemModel->index(QDesktopServices::storageLocation(QDesktopServices::HomeLocation)));
-	outputFolderViewClicked(outputFolderView->currentIndex());
-	outputFolderView->setFocus();
+	QString homePath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+	
+	if(!homePath.isEmpty() && QDir(homePath).exists())
+	{
+		outputFolderView->setCurrentIndex(m_fileSystemModel->index(homePath));
+		outputFolderViewClicked(outputFolderView->currentIndex());
+		outputFolderView->setFocus();
+	}
+	else
+	{
+		buttonGotoHome->setEnabled(false);
+	}
 }
 
 /*
@@ -929,9 +1039,18 @@ void MainWindow::gotoHomeFolderButtonClicked(void)
  */
 void MainWindow::gotoMusicFolderButtonClicked(void)
 {
-	outputFolderView->setCurrentIndex(m_fileSystemModel->index(QDesktopServices::storageLocation(QDesktopServices::MusicLocation)));
-	outputFolderViewClicked(outputFolderView->currentIndex());
-	outputFolderView->setFocus();
+	QString musicPath = QDesktopServices::storageLocation(QDesktopServices::MusicLocation);
+	
+	if(!musicPath.isEmpty() && QDir(musicPath).exists())
+	{
+		outputFolderView->setCurrentIndex(m_fileSystemModel->index(musicPath));
+		outputFolderViewClicked(outputFolderView->currentIndex());
+		outputFolderView->setFocus();
+	}
+	else
+	{
+		buttonGotoMusic->setEnabled(false);
+	}
 }
 
 /*
@@ -1645,7 +1764,7 @@ void MainWindow::installWMADecoderActionTriggered(bool checked)
 		QFile::remove(setupFile);
 		QApplication::restoreOverrideCursor();
 
-		if(QMessageBox::information(this, "WMA Decoder", "The WMA File Decoder has been installed. Please restart LameXP now!", "Quit LameXP", "Ignore") == 0)
+		if(QMessageBox::information(this, "WMA Decoder", "The WMA File Decoder has been installed. Please restart LameXP now!", "Quit LameXP", "Postpone") == 0)
 		{
 			QApplication::quit();
 		}

@@ -523,6 +523,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 
+	//Load translation
+	//QTranslator *translator = new QTranslator();
+	//translator->load(":/localization/LameXP_DE.qm");
+	//application->installTranslator(translator);
+
 	//Done
 	qt_initialized = true;
 	return true;
