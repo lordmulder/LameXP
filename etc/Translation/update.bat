@@ -19,7 +19,7 @@ for %%f in (..\..\src\*.cpp) do (
 )
 REM ---------------------------
 for %%f in (*.ts) do (
-	lupdate.exe @update.lst -ts %%f
+	lupdate.exe @update.lst -no-obsolete -ts %%f
 )
 REM ---------------------------
 pause

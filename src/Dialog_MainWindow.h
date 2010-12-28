@@ -35,7 +35,6 @@ class FileListModel;
 class AbstractEncoder;
 class QMenu;
 class DropBox;
-class QTranslator;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -104,6 +103,7 @@ protected:
 	void closeEvent(QCloseEvent *event);
 	void resizeEvent(QResizeEvent *event);
 	bool eventFilter(QObject *obj, QEvent *event);
+	void retranslateUi(QMainWindow *MainWindow);
 
 private:
 	void addFiles(const QStringList &files);
@@ -117,6 +117,10 @@ private:
 	QActionGroup *m_languageActionGroup;
 	QButtonGroup *m_encoderButtonGroup;
 	QButtonGroup *m_modeButtonGroup;
+	QAction *m_showDetailsContextAction;
+	QAction *m_previewContextAction;
+	QAction *m_findFileContextAction;
+	QAction *m_showFolderContextAction;
 	WorkingBanner *m_banner;
 	MessageHandlerThread *m_messageHandler;
 	QStringList *m_delayedFileList;
@@ -128,5 +132,4 @@ private:
 	QMenu *m_sourceFilesContextMenu;
 	QMenu *m_outputFolderContextMenu;
 	DropBox *m_dropBox;
-	QTranslator *m_currentTranslator;
 };

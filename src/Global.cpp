@@ -39,6 +39,8 @@
 #include <QTextCodec>
 #include <QLibrary>
 #include <QRegExp>
+#include <QResource>
+#include <QTranslator>
 
 //LameXP includes
 #include "Resource.h"
@@ -117,6 +119,10 @@ static QString g_lamexp_temp_folder;
 //Tools
 static QMap<QString, LockedFile*> g_lamexp_tool_registry;
 static QMap<QString, unsigned int> g_lamexp_tool_versions;
+
+//Languages
+static QMap<QString, QString> g_lamexp_translations;
+static QTranslator *g_lamexp_currentTranslator = NULL;
 
 //Shared memory
 static const char *g_lamexp_sharedmem_uuid = "{21A68A42-6923-43bb-9CF6-64BF151942EE}";
@@ -514,6 +520,17 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 	
+	//Init available translations
+	QStringList qmFiles = QDir(":/localization").entryList(QStringList() << "*.qm", QDir::Files, QDir::Name);
+	for(int i = 0; i < qmFiles.count(); i++)
+	{
+		QResource langName = (QString(":/localization/%1.txt").arg(qmFiles.at(i)));
+		if(langName.isValid() && langName.size() > 0)
+		{
+			g_lamexp_translations.insert(QString::fromUtf8(reinterpret_cast<const char*>(langName.data()), langName.size()), qmFiles.at(i));
+		}
+	}
+
 	//Check for process elevation
 	if(!lamexp_check_elevation())
 	{
@@ -522,11 +539,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 			return false;
 		}
 	}
-
-	//Load translation
-	//QTranslator *translator = new QTranslator();
-	//translator->load(":/localization/LameXP_DE.qm");
-	//application->installTranslator(translator);
 
 	//Done
 	qt_initialized = true;
@@ -772,48 +784,6 @@ bool lamexp_clean_folder(const QString folderPath)
 }
 
 /*
- * Finalization function (final clean-up)
- */
-void lamexp_finalization(void)
-{
-	//Free all tools
-	if(!g_lamexp_tool_registry.isEmpty())
-	{
-		QStringList keys = g_lamexp_tool_registry.keys();
-		for(int i = 0; i < keys.count(); i++)
-		{
-			LAMEXP_DELETE(g_lamexp_tool_registry[keys.at(i)]);
-		}
-		g_lamexp_tool_registry.clear();
-		g_lamexp_tool_versions.clear();
-	}
-	
-	//Delete temporary files
-	if(!g_lamexp_temp_folder.isEmpty())
-	{
-		for(int i = 0; i < 100; i++)
-		{
-			if(lamexp_clean_folder(g_lamexp_temp_folder))
-			{
-				break;
-			}
-			Sleep(125);
-		}
-		g_lamexp_temp_folder.clear();
-	}
-
-	//Destroy Qt application object
-	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
-	LAMEXP_DELETE(application);
-
-	//Detach from shared memory
-	if(g_lamexp_sharedmem_ptr) g_lamexp_sharedmem_ptr->detach();
-	LAMEXP_DELETE(g_lamexp_sharedmem_ptr);
-	LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
-	LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
-}
-
-/*
  * Register tool
  */
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version)
@@ -894,6 +864,49 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 	}
 
 	return result;
+}
+
+/*
+ * Get list of translations
+ */
+QStringList lamexp_query_translations(void)
+{
+	return g_lamexp_translations.keys();
+}
+
+/*
+ * Install a new translator
+ */
+bool lamexp_install_translator(const QString &language)
+{
+	bool success = false;
+
+	if(!g_lamexp_currentTranslator)
+	{
+		g_lamexp_currentTranslator = new QTranslator();
+	}
+
+	if(language.isEmpty())
+	{
+		QApplication::removeTranslator(g_lamexp_currentTranslator);
+		success = true;
+	}
+	else
+	{
+		QString qmFile = g_lamexp_translations.value(language, QString());
+		if(!qmFile.isEmpty())
+		{
+			QApplication::removeTranslator(g_lamexp_currentTranslator);
+			success = g_lamexp_currentTranslator->load(QString(":/localization/%1").arg(qmFile));
+			QApplication::installTranslator(g_lamexp_currentTranslator);
+		}
+		else
+		{
+			qWarning("Translation '%s' not available!", language.toLatin1().constData());
+		}
+	}
+
+	return success;
 }
 
 /*
@@ -1020,7 +1033,7 @@ bool lamexp_remove_file(const QString &filename)
 }
 
 /*
- * Get number private bytes [debug only]
+ * Get number of free bytes on disk
  */
 __int64 lamexp_free_diskspace(const QString &path)
 {
@@ -1033,6 +1046,53 @@ __int64 lamexp_free_diskspace(const QString &path)
 	{
 		return 0;
 	}
+}
+
+/*
+ * Finalization function (final clean-up)
+ */
+void lamexp_finalization(void)
+{
+	//Free all tools
+	if(!g_lamexp_tool_registry.isEmpty())
+	{
+		QStringList keys = g_lamexp_tool_registry.keys();
+		for(int i = 0; i < keys.count(); i++)
+		{
+			LAMEXP_DELETE(g_lamexp_tool_registry[keys.at(i)]);
+		}
+		g_lamexp_tool_registry.clear();
+		g_lamexp_tool_versions.clear();
+	}
+	
+	//Delete temporary files
+	if(!g_lamexp_temp_folder.isEmpty())
+	{
+		for(int i = 0; i < 100; i++)
+		{
+			if(lamexp_clean_folder(g_lamexp_temp_folder))
+			{
+				break;
+			}
+			Sleep(125);
+		}
+		g_lamexp_temp_folder.clear();
+	}
+
+	//Clear languages
+	lamexp_install_translator(QString());
+	LAMEXP_DELETE(g_lamexp_currentTranslator);
+	g_lamexp_translations.clear();
+
+	//Destroy Qt application object
+	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
+	LAMEXP_DELETE(application);
+
+	//Detach from shared memory
+	if(g_lamexp_sharedmem_ptr) g_lamexp_sharedmem_ptr->detach();
+	LAMEXP_DELETE(g_lamexp_sharedmem_ptr);
+	LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
+	LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
 }
 
 /*

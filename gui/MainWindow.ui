@@ -286,7 +286,7 @@
                <enum>QFrame::Plain</enum>
               </property>
               <property name="text">
-               <string>($OUTDIR)</string>
+               <string notr="true">($OUTDIR)</string>
               </property>
              </widget>
             </item>
@@ -877,7 +877,7 @@
                     </font>
                    </property>
                    <property name="text">
-                    <string>(VALUE)</string>
+                    <string notr="true">(VALUE)</string>
                    </property>
                    <property name="textFormat">
                     <enum>Qt::RichText</enum>
@@ -1459,7 +1459,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>English</string>
+    <string notr="true">English</string>
    </property>
   </action>
  </widget>
@@ -1494,6 +1494,12 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

@@ -33,8 +33,9 @@
 
 //Declarations
 class QString;
-class LockedFile;
+class QStringList;
 class QDate;
+class LockedFile;
 enum QtMsgType;
 
 //Types definitions
@@ -90,6 +91,8 @@ const QString &lamexp_temp_folder(void);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
 lamexp_cpu_t lamexp_detect_cpu_features(void);
+QStringList lamexp_query_translations(void);
+bool lamexp_install_translator(const QString &language);
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString folderPath);

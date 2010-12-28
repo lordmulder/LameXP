@@ -3,9 +3,11 @@
 	<qresource>
     <file>localization/LameXP_DE.qm</file>
     <file>localization/LameXP_DE.qm.txt</file>
-    <file>localization/LameXP_FR.qm</file>
-    <file>localization/LameXP_FR.qm.txt</file>
-    <file>localization/LameXP_IT.qm</file>
-    <file>localization/LameXP_IT.qm.txt</file>
+    <!--
+      <file>localization/LameXP_FR.qm</file>
+      <file>localization/LameXP_FR.qm.txt</file>
+      <file>localization/LameXP_IT.qm</file>
+      <file>localization/LameXP_IT.qm.txt</file>
+    -->
   </qresource>
 </RCC>
