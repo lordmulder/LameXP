@@ -25,9 +25,6 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
       <widget class="QLabel" name="dropBoxLabel">
-       <property name="toolTip">
-        <string>&lt;b&gt;LameXP DropBox&lt;/b&gt;&lt;br&gt;&lt;nobr&gt;You can add files to LameXP via Drag&amp;amp;Drop here!&lt;/nobr&gt;&lt;br&gt;&lt;nobr&gt;(Right-click to close the DropBox)&lt;/nobr&gt;</string>
-       </property>
        <property name="lineWidth">
         <number>0</number>
        </property>
@@ -49,6 +46,7 @@
  <resources>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

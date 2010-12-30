@@ -293,7 +293,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_fileListModel, SIGNAL(modelReset()), m_dropBox, SLOT(modelChanged()));
 	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), m_dropBox, SLOT(modelChanged()));
 	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), m_dropBox, SLOT(modelChanged()));
-		
+
 	//Create message handler thread
 	m_messageHandler = new MessageHandlerThread();
 	m_delayedFileList = new QStringList();
@@ -304,10 +304,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
 
-	//Enable Drag & Drop
-	this->setAcceptDrops(true);
-
-	//Load translation & re-translate
+	//Load translation & re-translate UI
 	QList<QAction*> languageActions = m_languageActionGroup->actions();
 	while(!languageActions.isEmpty())
 	{
@@ -318,6 +315,15 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 			languageActionActivated(currentLanguage);
 		}
 	}
+	if(m_languageActionGroup->checkedAction() == NULL)
+	{
+		qWarning("No langauge is currently selected, going to select FIRST one!");
+		m_languageActionGroup->actions().first()->setChecked(true);
+		languageActionActivated(m_languageActionGroup->actions().first());
+	}
+
+	//Enable Drag & Drop
+	this->setAcceptDrops(true);
 }
 
 ////////////////////////////////////////////////////////////
@@ -363,25 +369,6 @@ MainWindow::~MainWindow(void)
 ////////////////////////////////////////////////////////////
 
 /*
- * Re-translate the UI
- */
-void MainWindow::retranslateUi(QMainWindow *MainWindow)
-{
-	Ui::MainWindow::retranslateUi(MainWindow);
-
-	if(lamexp_version_demo())
-	{
-		setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
-	}
-	
-	m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
-	m_showDetailsContextAction->setText(tr("Show Details"));
-	m_previewContextAction->setText(tr("Open File in External Application"));
-	m_findFileContextAction->setText(tr("Browse File Location"));
-	m_showFolderContextAction->setText(tr("Browse Selected Folder"));
-}
-
-/*
  * Add file to source list
  */
 void MainWindow::addFiles(const QStringList &files)
@@ -401,11 +388,11 @@ void MainWindow::addFiles(const QStringList &files)
 
 	if(analyzer->filesDenied())
 	{
-		QMessageBox::warning(this, tr("Access Denied"), tr("<nobr>%1 file(s) have been rejected, because read access was not granted!<br>This usually means the file is locked by another process.</nobr>").arg(analyzer->filesDenied()));
+		QMessageBox::warning(this, tr("Access Denied"), QString("<nobr>%1<br>%2</nobr>").arg(tr("%1 file(s) have been rejected, because read access was not granted!").arg(analyzer->filesDenied()), tr("This usually means the file is locked by another process.")));
 	}
 	if(analyzer->filesRejected())
 	{
-		QMessageBox::warning(this, tr("Files Rejected"), tr("<nobr>%1 file(s) have been rejected, because the file format could not be recognized!<br>This usually means the file is damaged or the file format is not supported.</nobr>").arg(analyzer->filesRejected()));
+		QMessageBox::warning(this, tr("Files Rejected"), QString("<nobr>%1<br>%2</nobr>").arg(tr("%1 file(s) have been rejected, because the file format could not be recognized!").arg(analyzer->filesRejected()), tr("This usually means the file is damaged or the file format is not supported.")));
 	}
 
 	LAMEXP_DELETE(analyzer);
@@ -438,6 +425,28 @@ void MainWindow::showEvent(QShowEvent *event)
 		{
 			m_dropBox->setVisible(true);
 		}
+	}
+}
+
+/*
+ * Re-translate the UI
+ */
+void MainWindow::changeEvent(QEvent *e)
+{
+	if(e->type() == QEvent::LanguageChange)
+	{
+		Ui::MainWindow::retranslateUi(this);
+
+		if(lamexp_version_demo())
+		{
+			setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
+		}
+	
+		m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
+		m_showDetailsContextAction->setText(tr("Show Details"));
+		m_previewContextAction->setText(tr("Open File in External Application"));
+		m_findFileContextAction->setText(tr("Browse File Location"));
+		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
 	}
 }
 
@@ -730,7 +739,7 @@ void MainWindow::encodeButtonClicked(void)
 		QStringList tempFolderParts = lamexp_temp_folder().split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
 		tempFolderParts.takeLast();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
-		switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), tr("<nobr>There are less than %1 GB of free diskspace available on your system's TEMP folder.</nobr><br><nobr>It is highly recommend to free up more diskspace before proceeding with the encode!</nobr><br><br>Your TEMP folder is located at:").append("<br><nobr><i><a href=\"file:///%3\">%3</a></i></nobr><br>").arg(QString::number(minimumFreeDiskspaceMultiplier), tempFolderParts.join("\\")), tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
+		switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br>%3").arg(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier)), tr("It is highly recommend to free up more diskspace before proceeding with the encode!"), tr("Your TEMP folder is located at:")).append("<br><nobr><i><a href=\"file:///%3\">%3</a></i></nobr><br>").arg(tempFolderParts.join("\\")), tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
 		{
 		case 1:
 			QProcess::startDetached(QString("%1/cleanmgr.exe").arg(lamexp_known_folder(lamexp_folder_systemfolder)), QStringList() << "/D" << tempFolderParts.first());
@@ -762,7 +771,7 @@ void MainWindow::encodeButtonClicked(void)
 		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), QUuid::createUuid().toString()));
 		if(!writeTest.open(QIODevice::ReadWrite))
 		{
-			QMessageBox::warning(this, tr("LameXP"), tr("Cannot write to the selected output directory.<br><nobr>%1</nobr><br><br>Please choose a different directory!").arg(m_settings->outputDir()));
+			QMessageBox::warning(this, tr("LameXP"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("Cannot write to the selected output directory."), m_settings->outputDir(), tr("Please choose a different directory!")));
 			tabWidget->setCurrentIndex(1);
 			return;
 		}
@@ -973,8 +982,6 @@ void MainWindow::languageActionActivated(QAction *action)
 	{
 		m_settings->currentLanguage(langId);
 	}
-
-	retranslateUi(this);
 }
 
 /*
@@ -1149,7 +1156,7 @@ void MainWindow::makeFolderButtonClicked(void)
 			}
 			else
 			{
-				QMessageBox::warning(this, tr("Failed to create folder"), tr("The new folder could not be created:<br><nobr>%1</nobr><br><br>Drive is read-only or insufficient access rights!").arg(basePath.absoluteFilePath(newFolder)));
+				QMessageBox::warning(this, tr("Failed to create folder"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("The new folder could not be created:"), basePath.absoluteFilePath(newFolder), tr("Drive is read-only or insufficient access rights!")));
 			}
 		}
 		break;
@@ -1604,7 +1611,7 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 	{
 		if(QMessageBox::Yes == QMessageBox::question(this, tr("Disable Update Reminder"), tr("Do you really want to disable the update reminder?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
 		{
-			QMessageBox::information(this, tr("Update Reminder"), tr("The update reminder has been disabled.<br>Please remember to check for updates at regular intervals!"));
+			QMessageBox::information(this, tr("Update Reminder"), QString("%1<br>%2").arg(tr("The update reminder has been disabled."), tr("Please remember to check for updates at regular intervals!")));
 			m_settings->autoUpdateEnabled(false);
 		}
 		else

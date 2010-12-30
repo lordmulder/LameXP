@@ -103,7 +103,7 @@ protected:
 	void closeEvent(QCloseEvent *event);
 	void resizeEvent(QResizeEvent *event);
 	bool eventFilter(QObject *obj, QEvent *event);
-	void retranslateUi(QMainWindow *MainWindow);
+	void changeEvent(QEvent *e);
 
 private:
 	void addFiles(const QStringList &files);

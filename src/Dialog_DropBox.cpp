@@ -62,6 +62,9 @@ DropBox::DropBox(QWidget *parent, QAbstractItemModel *model, SettingsModel *sett
 
 	//Make transparent
 	setWindowOpacity(0.8);
+	
+	//Translate UI
+	retranslateUi(this);
 }
 
 ////////////////////////////////////////////////////////////
@@ -76,6 +79,11 @@ DropBox::~DropBox(void)
 // PUBLIC SLOTS
 ////////////////////////////////////////////////////////////
 
+void DropBox::doRetranslate(void)
+{
+	retranslateUi(this);
+}
+
 void DropBox::modelChanged(void)
 {
 	if(m_model)
@@ -87,6 +95,19 @@ void DropBox::modelChanged(void)
 ////////////////////////////////////////////////////////////
 // EVENTS
 ////////////////////////////////////////////////////////////
+
+/*
+ * Re-translate the UI
+ */
+void DropBox::changeEvent(QEvent *e)
+{
+	if(e->type() == QEvent::LanguageChange)
+	{
+		Ui::DropBox::retranslateUi(this);
+		dropBoxLabel->setToolTip(QString("<b>%1</b><br><nobr>%2</nobr><br><nobr>%3</nobr>").arg(tr("LameXP DropBox"), tr("You can add files to LameXP via Drag&amp;Drop here!"), tr("(Right-click to close the DropBox)")));
+	}
+}
+
 
 void DropBox::showEvent(QShowEvent *event)
 {

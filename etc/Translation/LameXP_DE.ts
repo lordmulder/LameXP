@@ -8,8 +8,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;LameXP DropBox&lt;/b&gt;&lt;br&gt;&lt;nobr&gt;You can add files to LameXP via Drag&amp;amp;Drop here!&lt;/nobr&gt;&lt;br&gt;&lt;nobr&gt;(Right-click to close the DropBox)&lt;/nobr&gt;</source>
+        <source>LameXP DropBox</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
+        <translation type="unfinished">Sie könner hier Dateien per Drag&amp;amp;Drop hinzufügen!</translation>
+    </message>
+    <message>
+        <source>(Right-click to close the DropBox)</source>
+        <translation type="unfinished">(Rechts-klicken um die DropBox zu schließen)</translation>
     </message>
 </context>
 <context>
@@ -306,7 +314,7 @@ RUN\DOS\RUN
     </message>
     <message>
         <source>You can drop in audio files here!</source>
-        <translation type="unfinished">Sie können hier Audio-Dateien per Drag&amp;Drop einfügen!</translation>
+        <translation type="unfinished">Sie können hier Audio-Dateien hinein ziehen!</translation>
     </message>
     <message>
         <source>Open File in External Application</source>
@@ -370,47 +378,11 @@ LameXP is free software and release versions won&apos;t expire.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;nobr&gt;LameXP detected that your version of the Nero AAC encoder is outdated!&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The current version available is %1 (or later), but you still have version %2 installed.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You can download the latest version of the Nero AAC encoder from the Nero website at:&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>AAC Encoder Outdated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;nobr&gt;The Nero AAC encoder could not be found. AAC encoding support will be disabled.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your LameXP directory is located here:&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You can download the Nero AAC encoder for free from the official Nero website at:&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>AAC Support Disabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;nobr&gt;LameXP has detected that the WMA File Decoder component is not currently installed on your system.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!&lt;/nobr&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -427,10 +399,6 @@ LameXP is free software and release versions won&apos;t expire.</source>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;nobr&gt;There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.&lt;/nobr&gt;&lt;br&gt;&lt;nobr&gt;It is highly recommend to free up more diskspace before proceeding with the encode!&lt;/nobr&gt;&lt;br&gt;&lt;br&gt;Your TEMP folder is located at:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -458,10 +426,6 @@ LameXP is free software and release versions won&apos;t expire.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot write to the selected output directory.&lt;br&gt;&lt;nobr&gt;%1&lt;/nobr&gt;&lt;br&gt;&lt;br&gt;Please choose a different directory!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add file(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -479,10 +443,6 @@ LameXP is free software and release versions won&apos;t expire.</source>
     </message>
     <message>
         <source>Failed to create folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The new folder could not be created:&lt;br&gt;&lt;nobr&gt;%1&lt;/nobr&gt;&lt;br&gt;&lt;br&gt;Drive is read-only or insufficient access rights!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -511,10 +471,6 @@ LameXP is free software and release versions won&apos;t expire.</source>
     </message>
     <message>
         <source>Update Reminder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The update reminder has been disabled.&lt;br&gt;Please remember to check for updates at regular intervals!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -622,15 +578,95 @@ LameXP is free software and release versions won&apos;t expire.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;nobr&gt;%1 file(s) have been rejected, because read access was not granted!&lt;br&gt;This usually means the file is locked by another process.&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Files Rejected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;nobr&gt;%1 file(s) have been rejected, because the file format could not be recognized!&lt;br&gt;This usually means the file is damaged or the file format is not supported.&lt;/nobr&gt;</source>
+        <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your LameXP directory is located here:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot write to the selected output directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please choose a different directory!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The new folder could not be created:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drive is read-only or insufficient access rights!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your TEMP folder is located at:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 file(s) have been rejected, because read access was not granted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This usually means the file is locked by another process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This usually means the file is damaged or the file format is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The update reminder has been disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please remember to check for updates at regular intervals!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
