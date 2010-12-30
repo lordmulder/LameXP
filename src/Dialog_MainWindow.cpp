@@ -249,24 +249,20 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 
 	//Populate the language menu
 	m_languageActionGroup = new QActionGroup(this);
-	m_languageActionGroup->addAction(actionLanguageEnglish);
-	actionLanguageEnglish->setChecked(true);
 	connect(m_languageActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
 	QStringList translations = lamexp_query_translations();
-	while(translations.count() > 0)
+	while(!translations.isEmpty())
 	{
+		QString langId = translations.takeFirst();
 		QAction *currentLanguage = new QAction(this);
+		currentLanguage->setData(langId);
+		currentLanguage->setText(lamexp_translation_name(langId));
+		currentLanguage->setIcon(QIcon(QString(":/flags/%1.png").arg(langId)));
 		currentLanguage->setCheckable(true);
-		currentLanguage->setText(translations.takeFirst());
 		m_languageActionGroup->addAction(currentLanguage);
 		menuLanguage->addAction(currentLanguage);
-		if(currentLanguage->text().compare(m_settings->currentLanguage(), Qt::CaseInsensitive) == 0)
-		{
-			currentLanguage->setChecked(true);
-			languageActionActivated(currentLanguage);
-		}
 	}
-	
+
 	//Activate tools menu actions
 	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
@@ -311,8 +307,17 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//Enable Drag & Drop
 	this->setAcceptDrops(true);
 
-	//Finally re-translate the UI
-	retranslateUi(this);
+	//Load translation & re-translate
+	QList<QAction*> languageActions = m_languageActionGroup->actions();
+	while(!languageActions.isEmpty())
+	{
+		QAction *currentLanguage = languageActions.takeFirst();
+		if(currentLanguage->data().toString().compare(m_settings->currentLanguage(), Qt::CaseInsensitive) == 0)
+		{
+			currentLanguage->setChecked(true);
+			languageActionActivated(currentLanguage);
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -630,9 +635,9 @@ void MainWindow::windowShown(void)
 			if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
 			{
 				QString messageText;
-				messageText += tr("<nobr>LameXP detected that your version of the Nero AAC encoder is outdated!<br>");
-				messageText += tr("The current version available is %1 (or later), but you still have version %2 installed.<br><br>").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac()), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe")));
-				messageText += tr("You can download the latest version of the Nero AAC encoder from the Nero website at:<br>");
+				messageText += QString("<nobr>%1<br>").arg(tr("LameXP detected that your version of the Nero AAC encoder is outdated!"));
+				messageText += QString("%1<br><br>").arg(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac()), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe"))));
+				messageText += QString("%1<br>").arg(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:"));
 				messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 				QMessageBox::information(this, tr("AAC Encoder Outdated"), messageText);
 			}
@@ -641,11 +646,11 @@ void MainWindow::windowShown(void)
 		{
 			radioButtonEncoderAAC->setEnabled(false);
 			QString messageText;
-			messageText += tr("<nobr>The Nero AAC encoder could not be found. AAC encoding support will be disabled.<br>");
-			messageText += tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!<br><br>");
-			messageText += tr("Your LameXP directory is located here:<br>");
+			messageText += QString("<nobr>%1<br>").arg(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled."));
+			messageText += QString("%1<br><br>").arg(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!"));
+			messageText += QString("%1<br>").arg(tr("Your LameXP directory is located here:"));
 			messageText += QString("<i><nobr><a href=\"file:///%1\">%1</a></nobr></i><br><br>").arg(QDir::toNativeSeparators(QCoreApplication::applicationDirPath()));
-			messageText += tr("You can download the Nero AAC encoder for free from the official Nero website at:<br>");
+			messageText += QString("%1<br>").arg(tr("You can download the Nero AAC encoder for free from the official Nero website at:"));
 			messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 			QMessageBox::information(this, tr("AAC Support Disabled"), messageText);
 		}
@@ -657,8 +662,8 @@ void MainWindow::windowShown(void)
 		if(!lamexp_check_tool("wmawav.exe"))
 		{
 			QString messageText;
-			messageText += tr("<nobr>LameXP has detected that the WMA File Decoder component is not currently installed on your system.<br>");
-			messageText += tr("You won't be able to process WMA files as input unless the WMA File Decoder component is installed!</nobr>");
+			messageText += QString("<nobr>%1<br>").arg(tr("LameXP has detected that the WMA File Decoder component is not currently installed on your system."));
+			messageText += QString("%1</nobr>").arg(tr("You won't be able to process WMA files as input unless the WMA File Decoder component is installed!"));
 			QMessageBox::information(this, tr("WMA Decoder Missing"), messageText);
 			installWMADecoderActionTriggered(rand() % 2);
 		}
@@ -962,19 +967,11 @@ void MainWindow::styleActionActivated(QAction *action)
  */
 void MainWindow::languageActionActivated(QAction *action)
 {
-	if(action != actionLanguageEnglish)
+	QString langId = action->data().toString();
+
+	if(lamexp_install_translator(langId))
 	{
-		if(lamexp_install_translator(action->text()))
-		{
-			m_settings->currentLanguage(action->text());
-		}
-	}
-	else
-	{
-		if(lamexp_install_translator(QString()))
-		{
-			m_settings->currentLanguage(action->text());
-		}
+		m_settings->currentLanguage(langId);
 	}
 
 	retranslateUi(this);

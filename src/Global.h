@@ -91,8 +91,12 @@ const QString &lamexp_temp_folder(void);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
 lamexp_cpu_t lamexp_detect_cpu_features(void);
+
+//Translation support
 QStringList lamexp_query_translations(void);
+QString lamexp_translation_name(const QString &language);
 bool lamexp_install_translator(const QString &language);
+static const char* LAMEXP_DEFAULT_LANGID = "gb";
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString folderPath);

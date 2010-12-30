@@ -28,6 +28,7 @@
 #include <QApplication>
 #include <QString>
 #include <QFileInfo>
+#include <QStringList>
 
 //Constants
 static const char *g_settingsId_versionNumber = "VersionNumber";
@@ -96,10 +97,12 @@ void SettingsModel::validate(void)
 	{
 		this->compressionEncoder(SettingsModel::MP3Encoder);
 	}
+	
 	if(this->compressionRCMode() < SettingsModel::VBRMode || this->compressionRCMode() > SettingsModel::CBRMode)
 	{
 		this->compressionEncoder(SettingsModel::VBRMode);
 	}
+	
 	if(!(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")))
 	{
 		if(this->compressionEncoder() == SettingsModel::AACEncoder)
@@ -108,9 +111,16 @@ void SettingsModel::validate(void)
 			this->compressionEncoder(SettingsModel::MP3Encoder);
 		}
 	}
+	
 	if(this->outputDir().isEmpty() || !QFileInfo(this->outputDir()).isDir())
 	{
 		this->outputDir(QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
+	}
+
+	if(!lamexp_query_translations().contains(this->currentLanguage(), Qt::CaseInsensitive))
+	{
+			qWarning("Current language is unknown, reverting to default language!");
+			this->currentLanguage(LAMEXP_DEFAULT_LANGID);
 	}
 }
 
@@ -134,4 +144,4 @@ MAKE_OPTION3(soundsEnabled, true)
 MAKE_OPTION3(neroAacNotificationsEnabled, true)
 MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
 MAKE_OPTION3(dropBoxWidgetEnabled, true)
-MAKE_OPTION2(currentLanguage, QString());
+MAKE_OPTION2(currentLanguage, LAMEXP_DEFAULT_LANGID);

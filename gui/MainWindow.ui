@@ -1208,6 +1208,10 @@
      <property name="title">
       <string>Style</string>
      </property>
+     <property name="icon">
+      <iconset resource="../res/Icons.qrc">
+       <normaloff>:/icons/palette.png</normaloff>:/icons/palette.png</iconset>
+     </property>
      <addaction name="actionStylePlastique"/>
      <addaction name="actionStyleCleanlooks"/>
      <addaction name="actionStyleWindowsVista"/>
@@ -1218,7 +1222,10 @@
      <property name="title">
       <string>Language</string>
      </property>
-     <addaction name="actionLanguageEnglish"/>
+     <property name="icon">
+      <iconset resource="../res/Icons.qrc">
+       <normaloff>:/icons/font.png</normaloff>:/icons/font.png</iconset>
+     </property>
     </widget>
     <addaction name="actionSourceFiles"/>
     <addaction name="actionOutputDirectory"/>
@@ -1458,6 +1465,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../res/Flags.qrc">
+     <normaloff>:/flags/gb.png</normaloff>:/flags/gb.png</iconset>
+   </property>
    <property name="text">
     <string notr="true">English</string>
    </property>
@@ -1465,113 +1476,7 @@
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
-  <include location="../res/Images.qrc"/>
-  <include location="../res/Icons.qrc"/>
+  <include location="../res/Flags.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
