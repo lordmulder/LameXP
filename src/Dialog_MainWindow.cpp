@@ -304,7 +304,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
 
-	//Load translation & re-translate UI
+	//Load translation file
 	QList<QAction*> languageActions = m_languageActionGroup->actions();
 	while(!languageActions.isEmpty())
 	{
@@ -314,12 +314,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 			currentLanguage->setChecked(true);
 			languageActionActivated(currentLanguage);
 		}
-	}
-	if(m_languageActionGroup->checkedAction() == NULL)
-	{
-		qWarning("No langauge is currently selected, going to select FIRST one!");
-		m_languageActionGroup->actions().first()->setChecked(true);
-		languageActionActivated(m_languageActionGroup->actions().first());
 	}
 
 	//Enable Drag & Drop
