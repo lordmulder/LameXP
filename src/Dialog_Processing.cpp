@@ -128,6 +128,9 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 		}
 	}
 
+	//Translate
+	label_headerStatus->setText(QString("<b>%1</b><br>%2").arg(tr("Encoding Files"), tr("Your files are being encoded, please be patient...")));
+	
 	//Enable system tray icon
 	connect(m_systemTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(systemTrayActivated(QSystemTrayIcon::ActivationReason)));
 

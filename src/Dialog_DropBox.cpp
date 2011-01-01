@@ -64,7 +64,8 @@ DropBox::DropBox(QWidget *parent, QAbstractItemModel *model, SettingsModel *sett
 	setWindowOpacity(0.8);
 	
 	//Translate UI
-	retranslateUi(this);
+	QEvent languageChangeEvent(QEvent::LanguageChange);
+	changeEvent(&languageChangeEvent);
 }
 
 ////////////////////////////////////////////////////////////
@@ -78,11 +79,6 @@ DropBox::~DropBox(void)
 ////////////////////////////////////////////////////////////
 // PUBLIC SLOTS
 ////////////////////////////////////////////////////////////
-
-void DropBox::doRetranslate(void)
-{
-	retranslateUi(this);
-}
 
 void DropBox::modelChanged(void)
 {

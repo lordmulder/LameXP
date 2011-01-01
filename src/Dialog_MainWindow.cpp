@@ -316,6 +316,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		}
 	}
 
+	//Re-translate (make sure we translate once)
+	QEvent languageChangeEvent(QEvent::LanguageChange);
+	changeEvent(&languageChangeEvent);
+
 	//Enable Drag & Drop
 	this->setAcceptDrops(true);
 }
@@ -1560,8 +1564,14 @@ void MainWindow::findFileContextActionTriggered(void)
 	QModelIndex index = sourceFileView->currentIndex();
 	if(index.isValid())
 	{
-		QProcessEnvironment procEnv = QProcessEnvironment::systemEnvironment();
-		QString systemRootPath = procEnv.value("SystemRoot", procEnv.value("windir"));
+		QString systemRootPath;
+
+		QDir systemRoot(lamexp_known_folder(lamexp_folder_systemfolder));
+		if(systemRoot.exists() && systemRoot.cdUp())
+		{
+			systemRootPath = systemRoot.canonicalPath();
+		}
+
 		if(!systemRootPath.isEmpty())
 		{
 			QFileInfo explorer(QString("%1/explorer.exe").arg(systemRootPath));
@@ -1571,8 +1581,10 @@ void MainWindow::findFileContextActionTriggered(void)
 				return;
 			}
 		}
-		qWarning("SystemRoot directory could not be detected!");
-		QProcess::execute("explorer.exe", QStringList() << "/select," << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
+		else
+		{
+			qWarning("SystemRoot directory could not be detected!");
+		}
 	}
 }
 

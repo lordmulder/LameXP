@@ -135,8 +135,8 @@ void UpdateDialog::showEvent(QShowEvent *event)
 {
 	QDialog::showEvent(event);
 	
-	labelVersionInstalled->setText(QString("Build %1 (%2)").arg(QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
-	labelVersionLatest->setText("(Unknown)");
+	labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
+	labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
 
 	QTimer::singleShot(0, this, SLOT(updateInit()));
 	installButton->setEnabled(false);
@@ -201,7 +201,7 @@ void UpdateDialog::checkForUpdates(void)
 	QApplication::processEvents();
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
-	statusLabel->setText("Testing your internet connection, please wait...");
+	statusLabel->setText(tr("Testing your internet connection, please wait..."));
 
 	m_logFile->clear();
 	m_logFile->append("Checking internet connection...");
@@ -228,10 +228,10 @@ void UpdateDialog::checkForUpdates(void)
 		closeButton->setEnabled(true);
 		retryButton->setEnabled(true);
 		logButton->setEnabled(true);
-		statusLabel->setText("Network connectivity test has faild!");
+		statusLabel->setText(tr("Network connectivity test has faild!"));
 		progressBar->setValue(progressBar->maximum());
 		hintIcon->setPixmap(QIcon(":/icons/error.png").pixmap(16,16));
-		hintLabel->setText("Please make sure your internet connection is working properly and try again.");
+		hintLabel->setText(tr("Please make sure your internet connection is working properly and try again."));
 		hintIcon->show();
 		hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
@@ -241,7 +241,7 @@ void UpdateDialog::checkForUpdates(void)
 		return;
 	}
 
-	statusLabel->setText("Checking for new updates online, please wait...");
+	statusLabel->setText(tr("Checking for new updates online, please wait..."));
 	m_logFile->append("Checking for updates online...");
 	
 	for(int i = 0; update_mirrors[i]; i++)
@@ -266,10 +266,10 @@ void UpdateDialog::checkForUpdates(void)
 		closeButton->setEnabled(true);
 		retryButton->setEnabled(true);
 		logButton->setEnabled(true);
-		statusLabel->setText("Failed to fetch update information from server!");
+		statusLabel->setText(tr("Failed to fetch update information from server!"));
 		progressBar->setValue(progressBar->maximum());
 		hintIcon->setPixmap(QIcon(":/icons/server_error.png").pixmap(16,16));
-		hintLabel->setText("Sorry, the update server might be busy at this time. Plase try again later.");
+		hintLabel->setText(tr("Sorry, the update server might be busy at this time. Plase try again later."));
 		hintIcon->show();
 		hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
@@ -277,35 +277,35 @@ void UpdateDialog::checkForUpdates(void)
 		return;
 	}
 
-	labelVersionLatest->setText(QString("Build %1 (%2)").arg(QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
+	labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
 	infoLabel->show();
-	infoLabel->setText(QString("More information available at:<br><a href=\"%1\">%1</a>").arg(m_updateInfo->m_downloadSite));
+	infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), m_updateInfo->m_downloadSite));
 	QApplication::processEvents();
 	
 	if(m_updateInfo->m_buildNo > lamexp_version_build())
 	{
 		installButton->setEnabled(true);
-		statusLabel->setText("A new version of LameXP is available!");
+		statusLabel->setText(tr("A new version of LameXP is available!"));
 		hintIcon->setPixmap(QIcon(":/icons/bell.png").pixmap(16,16));
-		hintLabel->setText("We highly recommend all users to install this update as soon as possible.");
+		hintLabel->setText(tr("We highly recommend all users to install this update as soon as possible."));
 		hintIcon->show();
 		hintLabel->show();
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else if(m_updateInfo->m_buildNo == lamexp_version_build())
 	{
-		statusLabel->setText("No new updates available at this time.");
+		statusLabel->setText(tr("No new updates available at this time."));
 		hintIcon->setPixmap(QIcon(":/icons/information.png").pixmap(16,16));
-		hintLabel->setText("Your version of LameXP is still up-to-date. Please check for updates regularly!");
+		hintLabel->setText(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"));
 		hintIcon->show();
 		hintLabel->show();
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else
 	{
-		statusLabel->setText("Your version appears to be newer than the latest release.");
+		statusLabel->setText(tr("Your version appears to be newer than the latest release."));
 		hintIcon->setPixmap(QIcon(":/icons/bug.png").pixmap(16,16));
-		hintLabel->setText("This usually indicates your are currently using a pre-release version of LameXP.");
+		hintLabel->setText(tr("This usually indicates your are currently using a pre-release version of LameXP."));
 		hintIcon->show();
 		hintLabel->show();
 		MessageBeep(MB_ICONEXCLAMATION);

@@ -182,7 +182,7 @@
           <item>
            <widget class="QLabel" name="label_headerStatus">
             <property name="text">
-             <string>&lt;b&gt;Encoding Files&lt;/b&gt;&lt;br&gt;Your files are being encoded, please be patient...</string>
+             <string notr="true">&lt;b&gt;Header&lt;/b&gt;&lt;br&gt;(more status details)</string>
             </property>
            </widget>
           </item>
@@ -355,7 +355,7 @@
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
-            <string>(VERSION_TAG)</string>
+            <string notr="true">(VERSION_TAG)</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -418,6 +418,8 @@
   </layout>
  </widget>
  <resources>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>

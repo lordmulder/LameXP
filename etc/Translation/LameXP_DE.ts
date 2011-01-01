@@ -2,6 +2,141 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="de" sourcelanguage="en">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <source>LameXP - Audio Encoder Front-end</source>
+        <translation type="unfinished">LameXP - Audio Kodierer Oberfläche</translation>
+    </message>
+    <message>
+        <source>Please visit %1 for news and updates!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About LameXP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show License Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decline License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3rd Party S/W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The following people have contributed to LameXP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translators:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Contributors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The following third-party software is used in LameXP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LAME - OpenSource mp3 Encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Released under the terms of the GNU Leser General Public License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completely open and patent-free audio encoding technology.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nero AAC reference MPEG-4 Encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available from vendor web-site as free download:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FLAC - Free Lossless Audio Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open and patent-free lossless audio compression technology.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MediaInfo - Media File Analysis Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoX - Sound eXchange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GnuPG - The GNU Privacy Guard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Third-party Software</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DropBox</name>
     <message>
         <source>LameXP - DropBox</source>
@@ -27,17 +162,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Log File&lt;/b&gt;&lt;br&gt;The log file shows detailed information about the selected job.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C:\DOS
-C:\DOS\RUN
-RUN\DOS\RUN
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,6 +171,14 @@ RUN\DOS\RUN
     </message>
     <message>
         <source>Copy to Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The log file shows detailed information about the selected job.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -531,7 +663,7 @@ LameXP is free software and release versions won&apos;t expire.</source>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Herunterladen &amp;&amp; Installieren</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -674,11 +806,7 @@ LameXP is free software and release versions won&apos;t expire.</source>
     <name>MetaInfo</name>
     <message>
         <source>Meta Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Meta Information&lt;/b&gt;&lt;br&gt;The following meta information have been extracted from the original file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Meta Informationen</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -686,7 +814,161 @@ LameXP is free software and release versions won&apos;t expire.</source>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schießen</translation>
+    </message>
+</context>
+<context>
+    <name>MetaInfoDialog</name>
+    <message>
+        <source>Meta Information</source>
+        <translation type="unfinished">Meta Informationen</translation>
+    </message>
+    <message>
+        <source>The following meta information have been extracted from the original file.</source>
+        <translation type="unfinished">Die folgenden Meta-Informationen wurden aus der Original-Datei extrahiert.</translation>
+    </message>
+</context>
+<context>
+    <name>MetaInfoModel</name>
+    <message>
+        <source>Container</source>
+        <translation type="unfinished">Container</translation>
+    </message>
+    <message>
+        <source>Compression</source>
+        <translation type="unfinished">Kompression</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Dauer</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">Titel</translation>
+    </message>
+    <message>
+        <source>Artist</source>
+        <translation type="unfinished">Künstler</translation>
+    </message>
+    <message>
+        <source>Album</source>
+        <translation type="unfinished">Album</translation>
+    </message>
+    <message>
+        <source>Genre</source>
+        <translation type="unfinished">Genre</translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="unfinished">Jahr</translation>
+    </message>
+    <message>
+        <source>Position</source>
+        <translation type="unfinished">Position</translation>
+    </message>
+    <message>
+        <source>Generate from list position</source>
+        <translation type="unfinished">Aus Playlisten-Position erzeugen</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished">Kommentar</translation>
+    </message>
+    <message>
+        <source>Property</source>
+        <translation type="unfinished">Eigenschaft</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Edit Title</source>
+        <translation type="unfinished">Titel bearbeiten</translation>
+    </message>
+    <message>
+        <source>Please enter the title for this file:</source>
+        <translation type="unfinished">Bitte geben Sie den Titel für diese Datei ein:</translation>
+    </message>
+    <message>
+        <source>The title must not be empty. Generating title from file name!</source>
+        <translation type="unfinished">Der Titel kann nicht leer sein. Titel wird aus Dateiname generiert!</translation>
+    </message>
+    <message>
+        <source>Edit Artist</source>
+        <translation type="unfinished">Künstler Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Please enter the artist for this file:</source>
+        <translation type="unfinished">Bitte geben Sie den Künstler für diese Datei ein:</translation>
+    </message>
+    <message>
+        <source>Edit Album</source>
+        <translation type="unfinished">Album Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Please enter the album for this file:</source>
+        <translation type="unfinished">Bitte geben Sie das Album für diese Datei ein:</translation>
+    </message>
+    <message>
+        <source>Edit Genre</source>
+        <translation type="unfinished">Genre Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Please enter the genre for this file:</source>
+        <translation type="unfinished">Bitte geben Sie das Genre für diese Datei ein:</translation>
+    </message>
+    <message>
+        <source>Edit Year</source>
+        <translation type="unfinished">Jahr Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Please enter the year for this file:</source>
+        <translation type="unfinished">Bitte geben Sie das Jahr für diese Datei ein:</translation>
+    </message>
+    <message>
+        <source>Edit Position</source>
+        <translation type="unfinished">Position Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Please enter the position (track no.) for this file:</source>
+        <translation type="unfinished">Bitte geben Sie die Position (Track Nr.) für diese Datei ein:</translation>
+    </message>
+    <message>
+        <source>Unspecified (copy from source file)</source>
+        <translation type="unfinished">Keine Angabe (aus Quelle kopieren)</translation>
+    </message>
+    <message>
+        <source>Edit Comment</source>
+        <translation type="unfinished">Kommentar Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Please enter the comment for this file:</source>
+        <translation type="unfinished">Bitte geben Sie den Kommentar für diese Datei ein:</translation>
+    </message>
+    <message>
+        <source>Encoded with LameXP</source>
+        <translation type="unfinished">Enkodiert mit LameXP</translation>
+    </message>
+    <message>
+        <source>Not editable</source>
+        <translation type="unfinished">Nicht Editierbar</translation>
+    </message>
+    <message>
+        <source>Sorry, this property of the source file cannot be edited!</source>
+        <translation type="unfinished">Diese Eigenschaft der Datei kann nicht bearbeitet werden!</translation>
+    </message>
+    <message>
+        <source>Full Path</source>
+        <translation type="unfinished">Datei Pfad</translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation type="unfinished">Format</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation type="unfinished">Keine Angabe</translation>
     </message>
 </context>
 <context>
@@ -696,15 +978,7 @@ LameXP is free software and release versions won&apos;t expire.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Encoding Files&lt;/b&gt;&lt;br&gt;Your files are being encoded, please be patient...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(VERSION_TAG)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -713,6 +987,14 @@ LameXP is free software and release versions won&apos;t expire.</source>
     </message>
     <message>
         <source>Close</source>
+        <translation type="unfinished">Schießen</translation>
+    </message>
+    <message>
+        <source>Encoding Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -720,7 +1002,7 @@ LameXP is free software and release versions won&apos;t expire.</source>
     <name>SplashScreen</name>
     <message>
         <source>LameXP is launching...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP wird gestartet...</translation>
     </message>
 </context>
 <context>
@@ -731,54 +1013,91 @@ LameXP is free software and release versions won&apos;t expire.</source>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>$(HINT_TEXT)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bitte warten...</translation>
     </message>
     <message>
         <source>Latest version available:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(Unknown)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Neuste verfügbare Version:</translation>
     </message>
     <message>
         <source>Currently installed version:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>$(INFORMATION)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Derzeit installierte Version:</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wiederholen</translation>
     </message>
     <message>
         <source>Show Log</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lag Anzeigen</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Herunterladen &amp;&amp; Installieren</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WorkingBanner</name>
-    <message>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schießen</translation>
     </message>
     <message>
-        <source>$(Status)</source>
+        <source>Build</source>
+        <translation type="unfinished">Buildnummer</translation>
+    </message>
+    <message>
+        <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network connectivity test has faild!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please make sure your internet connection is working properly and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Checking for new updates online, please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to fetch update information from server!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More information available at:</source>
+        <translation type="unfinished">Weitere Informationen verfügbar unter:</translation>
+    </message>
+    <message>
+        <source>A new version of LameXP is available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We highly recommend all users to install this update as soon as possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No new updates available at this time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your version appears to be newer than the latest release.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Unbekannt</translation>
     </message>
 </context>
 </TS>

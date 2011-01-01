@@ -87,7 +87,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>Frame</string>
+   <string notr="true">Working</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -123,7 +123,7 @@
         </font>
        </property>
        <property name="text">
-        <string>$(Status)</string>
+        <string notr="true">$(Status)</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -135,6 +135,7 @@
   </layout>
  </widget>
  <resources>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

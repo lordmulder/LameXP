@@ -17,6 +17,9 @@ for %%f in (..\..\gui\*.ui) do (
 for %%f in (..\..\src\*.cpp) do (
 	echo %%f >> update.lst
 )
+for %%f in (..\..\src\*.h) do (
+	echo %%f >> update.lst
+)
 REM ---------------------------
 for %%f in (*.ts) do (
 	lupdate.exe @update.lst -no-obsolete -ts %%f

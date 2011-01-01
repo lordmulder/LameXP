@@ -172,7 +172,7 @@
           <item>
            <widget class="QLabel" name="headerText">
             <property name="text">
-             <string>&lt;b&gt;Log File&lt;/b&gt;&lt;br&gt;The log file shows detailed information about the selected job.</string>
+             <string notr="true">&lt;b&gt;HEADER&lt;/b&gt;&lt;br&gt;(more header text)</string>
             </property>
            </widget>
           </item>
@@ -286,7 +286,7 @@
           <cursorShape>ArrowCursor</cursorShape>
          </property>
          <property name="plainText">
-          <string>C:\DOS
+          <string notr="true">C:\DOS
 C:\DOS\RUN
 RUN\DOS\RUN
 </string>
@@ -368,6 +368,7 @@ RUN\DOS\RUN
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

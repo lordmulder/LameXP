@@ -212,7 +212,7 @@
               <item>
                <widget class="QLabel" name="hintLabel">
                 <property name="text">
-                 <string>$(HINT_TEXT)</string>
+                 <string notr="true">$(HINT_TEXT)</string>
                 </property>
                </widget>
               </item>
@@ -246,7 +246,7 @@
               <item row="1" column="2">
                <widget class="QLabel" name="labelVersionLatest">
                 <property name="text">
-                 <string>(Unknown)</string>
+                 <string notr="true">(Unknown)</string>
                 </property>
                </widget>
               </item>
@@ -260,7 +260,7 @@
               <item row="0" column="2">
                <widget class="QLabel" name="labelVersionInstalled">
                 <property name="text">
-                 <string>(Unknown)</string>
+                 <string notr="true">(Unknown)</string>
                 </property>
                </widget>
               </item>
@@ -340,7 +340,7 @@
             <item>
              <widget class="QLabel" name="infoLabel">
               <property name="text">
-               <string>$(INFORMATION)</string>
+               <string notr="true">$(INFORMATION)</string>
               </property>
              </widget>
             </item>
@@ -544,6 +544,10 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

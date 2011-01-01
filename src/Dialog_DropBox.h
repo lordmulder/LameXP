@@ -64,6 +64,5 @@ protected:
 
 public slots:
 	void modelChanged(void);
-	void doRetranslate(void);
 	void showToolTip(void);
 };

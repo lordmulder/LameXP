@@ -137,7 +137,7 @@
              </font>
             </property>
             <property name="text">
-             <string>&lt;b&gt;Meta Information&lt;/b&gt;&lt;br&gt;The following meta information have been extracted from the original file.</string>
+             <string notr="true">&lt;b&gt;HEADER&lt;/b&gt;&lt;br&gt;(more header text)</string>
             </property>
            </widget>
           </item>
@@ -305,6 +305,7 @@
  </tabstops>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

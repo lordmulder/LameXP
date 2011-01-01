@@ -48,6 +48,9 @@ MetaInfoDialog::MetaInfoDialog(QWidget *parent)
 	connect(upButton, SIGNAL(clicked()), this, SLOT(upButtonClicked()));
 	connect(downButton, SIGNAL(clicked()), this, SLOT(downButtonClicked()));
 	connect(editButton, SIGNAL(clicked()), this, SLOT(editButtonClicked()));
+
+	//Translate
+	labelHeaderText->setText(QString("<b>%1</b><br>%2").arg(tr("Meta Information"), tr("The following meta information have been extracted from the original file.")));
 }
 
 MetaInfoDialog::~MetaInfoDialog(void)

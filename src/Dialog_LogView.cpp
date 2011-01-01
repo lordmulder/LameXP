@@ -32,7 +32,9 @@ LogViewDialog::LogViewDialog(QWidget *parent)
 	//Init the dialog, from the .ui file
 	setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
-	//setWindowFlags(windowFlags() & (~Qt::WindowMaximizeButtonHint));
+	
+	//Translate
+	headerText->setText(QString("<b>%1</b><br>%2").arg(tr("Log File"), tr("The log file shows detailed information about the selected job.")));
 
 	//Clear
 	textEdit->clear();
