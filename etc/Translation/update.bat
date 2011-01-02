@@ -10,6 +10,7 @@ if exist update.lst (
 	pause
 	exit
 )
+echo ^<TS version="2.0" sourcelanguage="en"^>^</TS^> > Blank.ts
 REM ---------------------------
 for %%f in (..\..\gui\*.ui) do (
 	echo %%f >> update.lst
