@@ -577,7 +577,7 @@
     </message>
     <message>
         <source>Add folder</source>
-        <translation>Ordner Erstellen</translation>
+        <translation>Ordner Hinzufügen</translation>
     </message>
     <message>
         <source>New Folder</source>
