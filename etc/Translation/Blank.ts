@@ -167,6 +167,17 @@
     </message>
 </context>
 <context>
+    <name>FileListModel</name>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LogViewDialog</name>
     <message>
         <source>Log View</source>
@@ -705,6 +716,14 @@
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -87,10 +87,10 @@ QVariant FileListModel::headerData(int section, Qt::Orientation orientation, int
 			switch(section)
 			{
 			case 0:
-				return QVariant("Title");
+				return QVariant(tr("Title"));
 				break;
 			case 1:
-				return QVariant("Full Path");
+				return QVariant(tr("Full Path"));
 				break;
 			default:
 				return QVariant();

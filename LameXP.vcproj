@@ -1711,7 +1711,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(ProjectDir)\res\localization\LameXP_DE.qm&quot;"
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>
@@ -1722,7 +1722,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						AdditionalDependencies=""
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>
@@ -1733,7 +1733,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(ProjectDir)\res\localization\LameXP_DE.qm&quot;"
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>

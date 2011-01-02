@@ -167,6 +167,18 @@
     </message>
 </context>
 <context>
+    <name>FileListModel</name>
+    <message>
+        <source>Title</source>
+        <translatorcomment>Titel</translatorcomment>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>Full Path</source>
+        <translation>Datei Pfad</translation>
+    </message>
+</context>
+<context>
     <name>LogViewDialog</name>
     <message>
         <source>Log View</source>
@@ -810,6 +822,14 @@
     <message>
         <source>Already Running</source>
         <translation>Wird Bereits Ausgeführt</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nein</translation>
     </message>
 </context>
 <context>

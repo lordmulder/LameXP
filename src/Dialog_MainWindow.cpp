@@ -242,8 +242,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	actionStyleWindowsXP->setUserData(0, new Index(3));
 	actionStyleWindowsClassic->setUserData(0, new Index(4));
 	actionStylePlastique->setChecked(true);
-	actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP);
-	actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA);
+	actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP && lamexp_themes_enabled());
+	actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA && lamexp_themes_enabled());
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 	styleActionActivated(NULL);
 
@@ -947,21 +947,33 @@ void MainWindow::styleActionActivated(QAction *action)
 	switch(m_settings->interfaceStyle())
 	{
 	case 1:
-		actionStyleCleanlooks->setChecked(true);
-		QApplication::setStyle(new QCleanlooksStyle());
-		break;
+		if(actionStyleCleanlooks->isEnabled())
+		{
+			actionStyleCleanlooks->setChecked(true);
+			QApplication::setStyle(new QCleanlooksStyle());
+			break;
+		}
 	case 2:
-		actionStyleWindowsVista->setChecked(true);
-		QApplication::setStyle(new QWindowsVistaStyle());
-		break;
+		if(actionStyleWindowsVista->isEnabled())
+		{
+			actionStyleWindowsVista->setChecked(true);
+			QApplication::setStyle(new QWindowsVistaStyle());
+			break;
+		}
 	case 3:
-		actionStyleWindowsXP->setChecked(true);
-		QApplication::setStyle(new QWindowsXPStyle());
-		break;
+		if(actionStyleWindowsXP->isEnabled())
+		{
+			actionStyleWindowsXP->setChecked(true);
+			QApplication::setStyle(new QWindowsXPStyle());
+			break;
+		}
 	case 4:
-		actionStyleWindowsClassic->setChecked(true);
-		QApplication::setStyle(new QWindowsStyle());
-		break;
+		if(actionStyleWindowsClassic->isEnabled())
+		{
+			actionStyleWindowsClassic->setChecked(true);
+			QApplication::setStyle(new QWindowsStyle());
+			break;
+		}
 	default:
 		actionStylePlastique->setChecked(true);
 		QApplication::setStyle(new QPlastiqueStyle());
@@ -1615,7 +1627,7 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(QMessageBox::Yes == QMessageBox::question(this, tr("Disable Update Reminder"), tr("Do you really want to disable the update reminder?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		if(0 == QMessageBox::question(this, tr("Disable Update Reminder"), tr("Do you really want to disable the update reminder?"), tr("Yes"), tr("No"), QString(), 1))
 		{
 			QMessageBox::information(this, tr("Update Reminder"), QString("%1<br>%2").arg(tr("The update reminder has been disabled."), tr("Please remember to check for updates at regular intervals!")));
 			m_settings->autoUpdateEnabled(false);
@@ -1641,7 +1653,7 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(QMessageBox::Yes == QMessageBox::question(this, tr("Disable Sound Effects"), tr("Do you really want to disable all sound effects?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		if(0 == QMessageBox::question(this, tr("Disable Sound Effects"), tr("Do you really want to disable all sound effects?"), tr("Yes"), tr("No"), QString(), 1))
 		{
 			QMessageBox::information(this, tr("Sound Effects"), tr("All sound effects have been disabled."));
 			m_settings->soundsEnabled(false);
@@ -1667,7 +1679,7 @@ void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(QMessageBox::Yes == QMessageBox::question(this, tr("Nero AAC Notifications"), tr("Do you really want to disable all Nero AAC Encoder notifications?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		if(0 == QMessageBox::question(this, tr("Nero AAC Notifications"), tr("Do you really want to disable all Nero AAC Encoder notifications?"), tr("Yes"), tr("No"), QString(), 1))
 		{
 			QMessageBox::information(this, tr("Nero AAC Notifications"), tr("All Nero AAC Encoder notifications have been disabled."));
 			m_settings->neroAacNotificationsEnabled(false);
@@ -1693,7 +1705,7 @@ void MainWindow::disableWmaDecoderNotificationsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(QMessageBox::Yes == QMessageBox::question(this, tr("WMA Decoder Notifications"), tr("Do you really want to disable all WMA Decoder notifications?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+		if(0 == QMessageBox::question(this, tr("WMA Decoder Notifications"), tr("Do you really want to disable all WMA Decoder notifications?"), tr("Yes"), tr("No"), QString(), 1))
 		{
 			QMessageBox::information(this, tr("WMA Decoder Notifications"), tr("All WMA Decoder notifications have been disabled."));
 			m_settings->wmaDecoderNotificationsEnabled(false);

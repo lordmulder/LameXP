@@ -29,6 +29,7 @@
 #include <QString>
 #include <QFileInfo>
 #include <QStringList>
+#include <QLocale>
 
 //Constants
 static const char *g_settingsId_versionNumber = "VersionNumber";
@@ -122,7 +123,7 @@ void SettingsModel::validate(void)
 
 	if(!lamexp_query_translations().contains(this->currentLanguage(), Qt::CaseInsensitive))
 	{
-			qWarning("Current language is unknown, reverting to default language!");
+		qWarning("Current language \"%s\" is unknown, reverting to default language!", this->currentLanguage().toLatin1().constData());
 			this->currentLanguage(defaultLanguage());
 	}
 }
@@ -139,8 +140,8 @@ QString SettingsModel::defaultLanguage(void)
 	}
 	
 	//Check if we can use the default translation
-	WORD systemLangId = PRIMARYLANGID(GetUserDefaultLangID());
-	if(systemLangId == LANG_ENGLISH)
+	QLocale systemLanguage= QLocale::system();
+	if(systemLanguage.language() == QLocale::English || systemLanguage.language() == QLocale::C)
 	{
 		m_defaultLanguage = new QString(LAMEXP_DEFAULT_LANGID);
 		return LAMEXP_DEFAULT_LANGID;
@@ -151,7 +152,7 @@ QString SettingsModel::defaultLanguage(void)
 	while(!languages.isEmpty())
 	{
 		QString currentLangId = languages.takeFirst();
-		if(lamexp_translation_sysid(currentLangId) == systemLangId)
+		if(lamexp_translation_sysid(currentLangId) == systemLanguage.language())
 		{
 			m_defaultLanguage = new QString(currentLangId);
 			return currentLangId;

@@ -1082,6 +1082,29 @@ bool lamexp_remove_file(const QString &filename)
 }
 
 /*
+ * Check if visual themes are enabled (WinXP and later)
+ */
+bool lamexp_themes_enabled(void)
+{
+	typedef int (WINAPI *IsAppThemedFun)(void);
+	
+	bool isAppThemed = false;
+	QLibrary uxTheme(QString("%1/UxTheme.dll").arg(lamexp_known_folder(lamexp_folder_systemfolder)));
+	IsAppThemedFun IsAppThemedPtr = (IsAppThemedFun) uxTheme.resolve("IsAppThemed");
+
+	if(IsAppThemedPtr)
+	{
+		isAppThemed = IsAppThemedPtr();
+		if(!isAppThemed)
+		{
+			qWarning("Theme support is disabled for this process!");
+		}
+	}
+
+	return isAppThemed;
+}
+
+/*
  * Get number of free bytes on disk
  */
 __int64 lamexp_free_diskspace(const QString &path)
