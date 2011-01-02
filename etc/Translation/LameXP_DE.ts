@@ -5,1099 +5,1251 @@
     <name>AboutDialog</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP - Audio Kodierer Oberfläche</translation>
+        <translation>LameXP - Audio Kodierer Oberfläche</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte besuchen Sie %1 für aktuelle Informationen!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinweis: LameXP ist freie Software. Zahlen Sie &lt;b&gt;kein&lt;/b&gt; Geld um LameXP zu erhalten oder zu verwenden! Gehen Sie insbesondere &lt;b&gt;nicht&lt;/b&gt; auf kostenpflichtige Download-Angebote ein !!!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation type="unfinished"></translation>
+        <translation>Besonderen Dank an &quot;John33&quot; von %1 für seine langjährige Unterstützung.</translation>
     </message>
     <message>
         <source>About LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation>Über LameXP</translation>
     </message>
     <message>
         <source>Show License Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenztext Anzeigen</translation>
     </message>
     <message>
         <source>Accept License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenz Annehmen</translation>
     </message>
     <message>
         <source>Decline License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenz Ablehnen</translation>
     </message>
     <message>
         <source>3rd Party S/W</source>
-        <translation type="unfinished"></translation>
+        <translation>Drittsoftware</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitwirkende</translation>
     </message>
     <message>
         <source>About Qt4</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Qt4</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>The following people have contributed to LameXP:</source>
-        <translation type="unfinished"></translation>
+        <translation>Die folgenden Personen haben an LameXP mitgewirkt:</translation>
     </message>
     <message>
         <source>Translators:</source>
-        <translation type="unfinished"></translation>
+        <translation>Übersetzer:</translation>
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie LameXP in Ihre Sprache übersetzen möchten, melden Sie sich bitte bei uns!</translation>
     </message>
     <message>
         <source>About Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Mitwirkende</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
-        <translation type="unfinished"></translation>
+        <translation>Die folgende Drittsoftware wird in LameXP eingesetzt:</translation>
     </message>
     <message>
         <source>LAME - OpenSource mp3 Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Leser General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veröffentlicht unter den Bestimmungen der  GNU Leser General Public License.</translation>
     </message>
     <message>
         <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation type="unfinished"></translation>
+        <translation>Komplett offene und patentfreie Technologie zur Audio-Kompression.</translation>
     </message>
     <message>
         <source>Nero AAC reference MPEG-4 Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation type="unfinished"></translation>
+        <translation>Freeware HE-AAC Kodierer auf dem neuesten Stand der Technik.</translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
-        <translation type="unfinished"></translation>
+        <translation>Als kostenloser Download auf der Herstellerseite verfügbar:</translation>
     </message>
     <message>
         <source>FLAC - Free Lossless Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation type="unfinished"></translation>
+        <translation>Offene und patentfreie Technlogie zur verlustfreien Audio-Kompression.</translation>
     </message>
     <message>
         <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>AC3Filter Tools - AC3/DTS Dekodierer</translation>
     </message>
     <message>
         <source>MediaInfo - Media File Analysis Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>MediaInfo - Multimedia Analyse Werkzeug</translation>
     </message>
     <message>
         <source>SoX - Sound eXchange</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>GnuPG - The GNU Privacy Guard</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - mehr als 700 Symbole im PNG Format</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Von Mark James, veröffentlicht unter der Creative Commons &apos;by&apos; Lizenz.</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Drittsoftware</translation>
+    </message>
+</context>
+<context>
+    <name>DecoderRegistry</name>
+    <message>
+        <source>All supported types</source>
+        <translation>Alle unterstützten Dateitypen</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
     <name>DropBox</name>
     <message>
         <source>LameXP - DropBox</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>LameXP DropBox</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation type="unfinished">Sie könner hier Dateien per Drag&amp;amp;Drop hinzufügen!</translation>
+        <translation>Sie könner hier Dateien per Drag&amp;amp;Drop hinzufügen!</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation type="unfinished">(Rechts-klicken um die DropBox zu schließen)</translation>
+        <translation>(Rechts-klicken um die DropBox zu schließen)</translation>
     </message>
 </context>
 <context>
     <name>LogViewDialog</name>
     <message>
         <source>Log View</source>
-        <translation type="unfinished"></translation>
+        <translation>Logdatei Anzeige</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Save to File...</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern Unter...</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>In die Zwischenablage Kopieren</translation>
     </message>
     <message>
         <source>Log File</source>
-        <translation type="unfinished"></translation>
+        <translation>Logdatei</translation>
     </message>
     <message>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Logdatei  enthält detaillierte Informationen über den ausgewählten Job.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP - Audio Kodierer Oberfläche</translation>
+        <translation>LameXP - Audio Kodierer Oberfläche</translation>
     </message>
     <message>
         <source>Source Files</source>
-        <translation type="unfinished">Quell Dateien</translation>
+        <translation>Quell Dateien</translation>
     </message>
     <message>
         <source>Add File(s)</source>
-        <translation type="unfinished">Hinzufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Show Details</source>
-        <translation type="unfinished">Details Anzeigen</translation>
+        <translation>Details Anzeigen</translation>
     </message>
     <message>
         <source>Output Directory</source>
-        <translation type="unfinished">Ziel Verzeichnis</translation>
+        <translation>Ziel Verzeichnis</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
-        <translation type="unfinished">Gehe zu Profil</translation>
+        <translation>Gehe zu Profil</translation>
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation type="unfinished">Gehe zu Musik</translation>
+        <translation>Gehe zu Musik</translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
-        <translation type="unfinished">Gehe zu Desktop</translation>
+        <translation>Gehe zu Desktop</translation>
     </message>
     <message>
         <source>Make New Folder</source>
-        <translation type="unfinished">Neuer Ordner</translation>
+        <translation>Neuer Ordner</translation>
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziel-Dateien im selben Verzeichnis wie die Quelle speichern</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation type="unfinished"></translation>
+        <translation>Relativer Pfad zur Quelle dem Ziel-Pfad voranstellen</translation>
     </message>
     <message>
         <source>Meta Data</source>
-        <translation type="unfinished">Meta Daten</translation>
+        <translation>Meta Daten</translation>
     </message>
     <message>
         <source> Meta Information </source>
-        <translation type="unfinished">Meta Informationen</translation>
+        <translation>Meta Informationen</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Bearbeiten</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtung: Metadaten, die Sie hier angeben, &lt;u&gt;ersetzen&lt;/u&gt; die Daten aus der Quelle!</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished">Zurücksetzen</translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <source> Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>Automatically generate playlist file (.m3u)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch eine Wiedergabeliste erstellen (.m3u)</translation>
     </message>
     <message>
         <source>Write meta information to encoded files</source>
-        <translation type="unfinished"></translation>
+        <translation>Meta-Informationen in Ausgabe-Dateien schreiben</translation>
     </message>
     <message>
         <source>Compression</source>
-        <translation type="unfinished">Kompression</translation>
+        <translation>Kompression</translation>
     </message>
     <message>
         <source> Encoder / Format </source>
-        <translation type="unfinished">Kodierer / Format</translation>
+        <translation>Kodierer / Format</translation>
     </message>
     <message>
         <source>Lame MP3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Nero AAC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Wave (PCM)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>FLAC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> Rate Control Method </source>
-        <translation type="unfinished">Bitraten Steuerungsmethode</translation>
+        <translation>Bitraten Steuerungsmethode</translation>
     </message>
     <message>
         <source>Quality-based (VBR)</source>
-        <translation type="unfinished">Qualitäts-basiert (VBR)</translation>
+        <translation>Qualitäts-basiert (VBR)</translation>
     </message>
     <message>
         <source>Average Bitrate (ABR)</source>
-        <translation type="unfinished">Mittlere Bitrate (ABR)</translation>
+        <translation>Mittlere Bitrate (ABR)</translation>
     </message>
     <message>
         <source>Constant Bitrate (CBR)</source>
-        <translation type="unfinished">Konstante Bitrate (CBR)</translation>
+        <translation>Konstante Bitrate (CBR)</translation>
     </message>
     <message>
         <source> Quality / Bitrate </source>
-        <translation type="unfinished">Qualität / Bitrate</translation>
+        <translation>Qualität / Bitrate</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation type="unfinished">Minimum</translation>
+        <translation>Minimum</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation type="unfinished">Maximum</translation>
+        <translation>Maximum</translation>
     </message>
     <message>
         <source>Advanced Options</source>
-        <translation type="unfinished">Erweiterte Optionen</translation>
+        <translation>Erweiterte Optionen</translation>
     </message>
     <message>
         <source>More options will be added in a later version, stay tuned!</source>
-        <translation type="unfinished"></translation>
+        <translation>Weitere Optionen werden in einer späteren Version zur Verfügung stehen!</translation>
     </message>
     <message>
         <source> Encode Now!</source>
-        <translation type="unfinished">Jetzt Kodieren!</translation>
+        <translation>Jetzt Kodieren!</translation>
     </message>
     <message>
         <source>About...</source>
-        <translation type="unfinished">Über...</translation>
+        <translation>Über...</translation>
     </message>
     <message>
         <source> Exit Program</source>
-        <translation type="unfinished">Programm Ende</translation>
+        <translation>Programm Ende</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Datei</translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Ansicht</translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Design</translation>
+        <translation>Design</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished">Extras</translation>
+        <translation>Extras</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Konfiguration</translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished">Beenden</translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <source>Open File(s)...</source>
-        <translation type="unfinished">Datei(en) Öffnen...</translation>
+        <translation>Datei(en) Öffnen...</translation>
     </message>
     <message>
         <source>Visit Official Web-Site</source>
-        <translation type="unfinished">Offizielle Web-Seite</translation>
+        <translation>Offizielle Web-Seite</translation>
     </message>
     <message>
         <source>Check for Updates</source>
-        <translation type="unfinished">Nach Updates Suchen</translation>
+        <translation>Nach Updates Suchen</translation>
     </message>
     <message>
         <source>Open Folder...</source>
-        <translation type="unfinished">Verzeichnis Öffnen...</translation>
+        <translation>Verzeichnis Öffnen...</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation type="unfinished">Alle Löschen</translation>
+        <translation>Alle Löschen</translation>
     </message>
     <message>
         <source>Plastique</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Cleanlooks</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Windows Vista (&quot;Aero&quot;)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Windows Classic</source>
-        <translation type="unfinished">Windows Klassisch</translation>
+        <translation>Windows Klassisch</translation>
     </message>
     <message>
         <source>Windows XP (&quot;Luna&quot;)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Disable Update Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Update-Erinnerung Deaktivieren</translation>
     </message>
     <message>
         <source>Disable Sound Effects</source>
-        <translation type="unfinished"></translation>
+        <translation>Sound-Effecte Deaktivieren</translation>
     </message>
     <message>
         <source>Install WMA Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>WMA Dekodierer Installieren</translation>
     </message>
     <message>
         <source>Disable Nero AAC Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero AAC Meldungen Deaktivieren</translation>
     </message>
     <message>
         <source>Disable WMA Decoder Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>WMA Dekodierer Meldungen Deaktivieren</translation>
     </message>
     <message>
         <source>Show DropBox</source>
-        <translation type="unfinished"></translation>
+        <translation>DropBox Anzeigen</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Sprache</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation>DEMO VERSION</translation>
     </message>
     <message>
         <source>You can drop in audio files here!</source>
-        <translation type="unfinished">Sie können hier Audio-Dateien hinein ziehen!</translation>
+        <translation>Sie können hier Audio-Dateien hinein ziehen!</translation>
     </message>
     <message>
         <source>Open File in External Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei in Externer Anwendung Öffnen</translation>
     </message>
     <message>
         <source>Browse File Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziel Suchen</translation>
     </message>
     <message>
         <source>Browse Selected Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewähltes Verzeichnis Durchsuchen</translation>
     </message>
     <message>
         <source>License Declined</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenz Abgelehnt</translation>
     </message>
     <message>
         <source>You have declined the license. Consequently the application will exit now!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben die Lizenz abgelehnt. Daher wird die Anwendung jetzt beendet!</translation>
     </message>
     <message>
         <source>Goodbye!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tschüss!</translation>
     </message>
     <message>
         <source>LameXP - Expired</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This demo (pre-release) version of LameXP has expired at %1.
-LameXP is free software and release versions won&apos;t expire.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Abgelaufen</translation>
     </message>
     <message>
         <source>Exit Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm Beenden</translation>
     </message>
     <message>
         <source>Urgent Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Dringendes Update</translation>
     </message>
     <message>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update Reminer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Version von LameXP ist älter als ein Jahr. Es ist Zeit für ein Update!</translation>
     </message>
     <message>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre letzte Update-Prüfung liegt mehr als 14 Tage zurück. Möchten Sie jetzt nach Updates suchen?</translation>
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben noch nicht nach LameXP Updates gesucht. Jetzt nach Updates suchen?</translation>
     </message>
     <message>
         <source>Postpone</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufschieben</translation>
     </message>
     <message>
         <source>AAC Encoder Outdated</source>
-        <translation type="unfinished"></translation>
+        <translation>AAC Kodierer Veraltet</translation>
     </message>
     <message>
         <source>AAC Support Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>AAC Unterstützung Deaktiviert</translation>
     </message>
     <message>
         <source>WMA Decoder Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>WMA Dekodierer Fehlt</translation>
     </message>
     <message>
         <source>LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP</translation>
     </message>
     <message>
         <source>You must add at least one file to the list before proceeding!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie müssen mindestens eine Datei hinzufügen, bevor Sie den Kodierungsvorgang starten!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung: Freier Speicherplatz Niedrig</translation>
     </message>
     <message>
         <source>Abort Encoding Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodierungsvorgang Abbrechen</translation>
     </message>
     <message>
         <source>Clean Disk Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenträgerbereinigung</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <source>Low Diskspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Freier Speicherplatz Niedrig</translation>
     </message>
     <message>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie fahren mit wenig freiem Speicherstand fort. Es können Probleme auftreten!</translation>
     </message>
     <message>
         <source>Sorry, an unsupported encoder has been chosen!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein nicht-unterstützter Kodierer wurde ausgewählt!</translation>
     </message>
     <message>
         <source>Add file(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei(en) Hinzufügen</translation>
     </message>
     <message>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner Erstellen</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuer Ordner</translation>
     </message>
     <message>
         <source>Enter the name of the new folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie den Namen des neuen Ordners ein:</translation>
     </message>
     <message>
         <source>Failed to create folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Already running</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis konnte nicht erstellt werden</translation>
     </message>
     <message>
         <source>LameXP is already running, please use the running instance!</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP wird bereits ausgeführt. Bitte benutzen Sie die laufende Instanz!</translation>
     </message>
     <message>
         <source>Quality Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualitätslevel %1</translation>
     </message>
     <message>
         <source>Compression %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompression %1</translation>
     </message>
     <message>
         <source>Uncompressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Unkomprimiert</translation>
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie die Update Erinnerung wirklich deaktivieren?</translation>
     </message>
     <message>
         <source>Update Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Update Erinnerung</translation>
     </message>
     <message>
         <source>The update reminder has been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Update Erinnerung wurde wieder eingeschaltet.</translation>
     </message>
     <message>
         <source>Do you really want to disable all sound effects?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie wirklich alle Sound-Effekte deaktivieren?</translation>
     </message>
     <message>
         <source>Sound Effects</source>
-        <translation type="unfinished"></translation>
+        <translation>Sound Effekte</translation>
     </message>
     <message>
         <source>All sound effects have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Sound-Effekte wurden deaktiviert.</translation>
     </message>
     <message>
         <source>The sound effects have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Sound-Effkete wurden wieder eingeschaltet.</translation>
     </message>
     <message>
         <source>Nero AAC Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero AAC Meldungen</translation>
     </message>
     <message>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich alle Nero AAC Kodierer Meldungen deaktivieren?</translation>
     </message>
     <message>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Nero AAC Kodierer Meldungen wurden deaktiviert.</translation>
     </message>
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Nero AAC Kodierer Meldungen wurden wieder eingeschaltet.</translation>
     </message>
     <message>
         <source>WMA Decoder Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>WMA Dekodierer Meldungen</translation>
     </message>
     <message>
         <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich alle WMA Dekodierer Meldungen deaktivieren?</translation>
     </message>
     <message>
         <source>All WMA Decoder notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle WMA Dekodierer Meldungen wurden deaktiviert.</translation>
     </message>
     <message>
         <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die WMA Dekodierer Meldungen wurden wieder aktiviert.</translation>
     </message>
     <message>
         <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie jetzt den WMA Dekodierer herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished">Herunterladen &amp;&amp; Installieren</translation>
+        <translation>Herunterladen &amp;&amp; Installieren</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>WMA Dekodierer Setup wird heruntergeladen, bitte warten...</translation>
     </message>
     <message>
         <source>Download Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Download Fehlgeschlagen</translation>
     </message>
     <message>
         <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das WMA Dekodierer Setup-Programm konnte nicht heruntergeladen werden. Bitte überprüfen Sie Ihre Internetverbindung!</translation>
     </message>
     <message>
         <source>Try Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederholen</translation>
     </message>
     <message>
         <source>The download seems to be corrupted. Please try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Download ist fehlerhaft. Bitte versuchen Sie es noch einmal!</translation>
     </message>
     <message>
         <source>WMA Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>WMA Dekodierer</translation>
     </message>
     <message>
         <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der WMA Dekodierer wurde installiert. Bitte starten Sie LameXP jetzt neu!</translation>
     </message>
     <message>
         <source>Quit LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP Beenden</translation>
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei(en) werden hinzugefügt, bitte warten...</translation>
     </message>
     <message>
         <source>Access Denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugriff verweigert</translation>
     </message>
     <message>
         <source>Files Rejected</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien Abgelehnt</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP hat festgestellt, dass Ihre Version des Nero AAC Kodieres veraltet ist!</translation>
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die neuste verfügbare Version ist %1 (oder später), Sie verwenden derzeit jedoch noch Version %2.</translation>
     </message>
     <message>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können die aktuelle Version des Nero AAC Kodierers auf der Nero Web-Seite herunterladen:</translation>
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Nero AAC Kodierer wurde nicht gefunden. Die AAC-Ausgabe wird daher deaktiviert.</translation>
     </message>
     <message>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte legen Sie &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; und &apos;neroAacTag.exe&apos; im LameXP Verzeichnis ab!</translation>
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihr LameXP Verzeichnis befindet sich hier:</translation>
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Nero AAC Kodierer kann kostenlos auf der offziellen Web-Seite heruntergeladen werden:</translation>
     </message>
     <message>
         <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP hat festgestellt, dass der WMA Dekodierer derzeit nicht auf ihrem System installiert ist.</translation>
     </message>
     <message>
         <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation type="unfinished"></translation>
+        <translation>WMA Dateien können nicht als Quelle verarbeitet werden, solange der WMA Dekodierer nicht installiert ist!</translation>
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>In das ausgewählte Ziel-Verzeichnis kann nicht geschrieben werden.</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wählen Sie ein anderes Verzeichnis!</translation>
     </message>
     <message>
         <source>The new folder could not be created:</source>
-        <translation type="unfinished"></translation>
+        <translation>Der neue Ordner konnte nicht erstellt werden:</translation>
     </message>
     <message>
         <source>Drive is read-only or insufficient access rights!</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufwerk ist schreibgeschützt oder unzureichende Zugriffsrechte!</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es sind weniger als %1 GB freier Speicherplatz in ihrem TEMP Verzeichnis verfügbar.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
-        <translation type="unfinished"></translation>
+        <translation>Es wird dringend empfohlen mehr Speicherplatz freizugeben, bevor Sie fortfahren!</translation>
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihr TEMP Verzeichnis befindet sich hier:</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Datei(en) wurden abgewiesen, weil die Datei nicht geöffnet werden konnte!</translation>
     </message>
     <message>
         <source>This usually means the file is locked by another process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datei wird möglicherweise von einem anderen Prozess benutzt.</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Datei(en) wurden abgewiesen, weil das Dateiformat nicht erkannt werden konnte!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Möglicherweise ist die Datei beschädigt oder das Dateiformat wird nicht unterstützt.</translation>
     </message>
     <message>
         <source>The update reminder has been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Update Erinnerung wurde deaktiviert.</translation>
     </message>
     <message>
         <source>Please remember to check for updates at regular intervals!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte denken Sie daran, regelmäßig nach Updates zu suchen!</translation>
+    </message>
+    <message>
+        <source>LameXP is free software and release versions won&apos;t expire.</source>
+        <translation>LameXP ist freie Software. Die fertige Version wird nicht ablaufen.</translation>
+    </message>
+    <message>
+        <source>This demo (pre-release) version of LameXP has expired at %1.</source>
+        <translation>Diese Demo (Test) Version von LameXP ist am %1. abgelaufen.</translation>
+    </message>
+    <message>
+        <source>Already Running</source>
+        <translation>Wird Bereits Ausgeführt</translation>
     </message>
 </context>
 <context>
     <name>MetaInfo</name>
     <message>
         <source>Meta Information</source>
-        <translation type="unfinished">Meta Informationen</translation>
+        <translation>Meta Informationen</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Bearbeiten</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schießen</translation>
+        <translation>Schießen</translation>
     </message>
 </context>
 <context>
     <name>MetaInfoDialog</name>
     <message>
         <source>Meta Information</source>
-        <translation type="unfinished">Meta Informationen</translation>
+        <translation>Meta Informationen</translation>
     </message>
     <message>
         <source>The following meta information have been extracted from the original file.</source>
-        <translation type="unfinished">Die folgenden Meta-Informationen wurden aus der Original-Datei extrahiert.</translation>
+        <translation>Die folgenden Meta-Informationen wurden aus der Original-Datei extrahiert.</translation>
     </message>
 </context>
 <context>
     <name>MetaInfoModel</name>
     <message>
         <source>Container</source>
-        <translation type="unfinished">Container</translation>
+        <translation>Container</translation>
     </message>
     <message>
         <source>Compression</source>
-        <translation type="unfinished">Kompression</translation>
+        <translation>Kompression</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Dauer</translation>
+        <translation>Dauer</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Titel</translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished">Künstler</translation>
+        <translation>Künstler</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished">Album</translation>
+        <translation>Album</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished">Genre</translation>
+        <translation>Genre</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">Jahr</translation>
+        <translation>Jahr</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation type="unfinished">Position</translation>
+        <translation>Position</translation>
     </message>
     <message>
         <source>Generate from list position</source>
-        <translation type="unfinished">Aus Playlisten-Position erzeugen</translation>
+        <translation>Aus Playlisten-Position erzeugen</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Kommentar</translation>
+        <translation>Kommentar</translation>
     </message>
     <message>
         <source>Property</source>
-        <translation type="unfinished">Eigenschaft</translation>
+        <translation>Eigenschaft</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <source>Edit Title</source>
-        <translation type="unfinished">Titel bearbeiten</translation>
+        <translation>Titel bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the title for this file:</source>
-        <translation type="unfinished">Bitte geben Sie den Titel für diese Datei ein:</translation>
+        <translation>Bitte geben Sie den Titel für diese Datei ein:</translation>
     </message>
     <message>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation type="unfinished">Der Titel kann nicht leer sein. Titel wird aus Dateiname generiert!</translation>
+        <translation>Der Titel kann nicht leer sein. Titel wird aus Dateiname generiert!</translation>
     </message>
     <message>
         <source>Edit Artist</source>
-        <translation type="unfinished">Künstler Bearbeiten</translation>
+        <translation>Künstler Bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the artist for this file:</source>
-        <translation type="unfinished">Bitte geben Sie den Künstler für diese Datei ein:</translation>
+        <translation>Bitte geben Sie den Künstler für diese Datei ein:</translation>
     </message>
     <message>
         <source>Edit Album</source>
-        <translation type="unfinished">Album Bearbeiten</translation>
+        <translation>Album Bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the album for this file:</source>
-        <translation type="unfinished">Bitte geben Sie das Album für diese Datei ein:</translation>
+        <translation>Bitte geben Sie das Album für diese Datei ein:</translation>
     </message>
     <message>
         <source>Edit Genre</source>
-        <translation type="unfinished">Genre Bearbeiten</translation>
+        <translation>Genre Bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the genre for this file:</source>
-        <translation type="unfinished">Bitte geben Sie das Genre für diese Datei ein:</translation>
+        <translation>Bitte geben Sie das Genre für diese Datei ein:</translation>
     </message>
     <message>
         <source>Edit Year</source>
-        <translation type="unfinished">Jahr Bearbeiten</translation>
+        <translation>Jahr Bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the year for this file:</source>
-        <translation type="unfinished">Bitte geben Sie das Jahr für diese Datei ein:</translation>
+        <translation>Bitte geben Sie das Jahr für diese Datei ein:</translation>
     </message>
     <message>
         <source>Edit Position</source>
-        <translation type="unfinished">Position Bearbeiten</translation>
+        <translation>Position Bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the position (track no.) for this file:</source>
-        <translation type="unfinished">Bitte geben Sie die Position (Track Nr.) für diese Datei ein:</translation>
+        <translation>Bitte geben Sie die Position (Track Nr.) für diese Datei ein:</translation>
     </message>
     <message>
         <source>Unspecified (copy from source file)</source>
-        <translation type="unfinished">Keine Angabe (aus Quelle kopieren)</translation>
+        <translation>Keine Angabe (aus Quelle kopieren)</translation>
     </message>
     <message>
         <source>Edit Comment</source>
-        <translation type="unfinished">Kommentar Bearbeiten</translation>
+        <translation>Kommentar Bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the comment for this file:</source>
-        <translation type="unfinished">Bitte geben Sie den Kommentar für diese Datei ein:</translation>
+        <translation>Bitte geben Sie den Kommentar für diese Datei ein:</translation>
     </message>
     <message>
         <source>Encoded with LameXP</source>
-        <translation type="unfinished">Enkodiert mit LameXP</translation>
+        <translation>Enkodiert mit LameXP</translation>
     </message>
     <message>
         <source>Not editable</source>
-        <translation type="unfinished">Nicht Editierbar</translation>
+        <translation>Nicht Editierbar</translation>
     </message>
     <message>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation type="unfinished">Diese Eigenschaft der Datei kann nicht bearbeitet werden!</translation>
+        <translation>Diese Eigenschaft der Datei kann nicht bearbeitet werden!</translation>
     </message>
     <message>
         <source>Full Path</source>
-        <translation type="unfinished">Datei Pfad</translation>
+        <translation>Datei Pfad</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished">Format</translation>
+        <translation>Format</translation>
     </message>
     <message>
         <source>Unspecified</source>
-        <translation type="unfinished">Keine Angabe</translation>
+        <translation>Keine Angabe</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessThread</name>
+    <message>
+        <source>Starting...</source>
+        <translation>Starte...</translation>
+    </message>
+    <message>
+        <source>Not found!</source>
+        <translation>Nicht gefunden!</translation>
+    </message>
+    <message>
+        <source>The format of this file is NOT supported:</source>
+        <translation>Das Format dieser Datei wird nicht unterstützt:</translation>
+    </message>
+    <message>
+        <source>Container Format:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Audio Format:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Unsupported!</source>
+        <translation>Nicht unterstützt!</translation>
+    </message>
+    <message>
+        <source>Done.</source>
+        <translation>Fertig.</translation>
+    </message>
+    <message>
+        <source>Aborted!</source>
+        <translation>Abgebrochen!</translation>
+    </message>
+    <message>
+        <source>Failed!</source>
+        <translation>Fehler!</translation>
+    </message>
+    <message>
+        <source>Encoding</source>
+        <translation>Kodiere</translation>
+    </message>
+    <message>
+        <source>Filtering</source>
+        <translation>Filtere</translation>
+    </message>
+    <message>
+        <source>Decoding</source>
+        <translation>Dekodiere</translation>
+    </message>
+    <message>
+        <source>The source audio file could not be found:</source>
+        <translation>Die Quell-Audiodatei konnte nicht gefunden werden:</translation>
+    </message>
+    <message>
+        <source>The source audio file could not be opened for reading:</source>
+        <translation>Die Quell-Audiodatei konnte nicht zum Lesen geöffnet werden:</translation>
+    </message>
+    <message>
+        <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
+        <translation>Das Ziel-Verzeichnis existiert nicht und konnte nicht erstellt werden:</translation>
+    </message>
+    <message>
+        <source>The target output directory is NOT writable:</source>
+        <translation>In das Ziel-Verzeichnis kann nicht geschrieben werden:</translation>
     </message>
 </context>
 <context>
     <name>ProcessingDialog</name>
     <message>
         <source>LameXP - Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Verarbeitung</translation>
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisiere, bitte warten...</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schießen</translation>
+        <translation>Schießen</translation>
     </message>
     <message>
         <source>Encoding Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodiere Dateien</translation>
     </message>
     <message>
         <source>Your files are being encoded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Dateien werden kodiert, bitte warten...</translation>
+    </message>
+    <message>
+        <source>Show details for selected job</source>
+        <translation>Zeige Details für den ausgewählten Job</translation>
+    </message>
+    <message>
+        <source>Encoding files, please wait...</source>
+        <translation>Dateien werden kodiert, bitte warten...</translation>
+    </message>
+    <message>
+        <source>Aborted! Waiting for running jobs to terminate...</source>
+        <translation>Abbruch! Laufende Jobs werden beendet...</translation>
+    </message>
+    <message>
+        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
+        <translation>Kodiere: %1 von %2 Dateien abgeschlossen, bitte warten...</translation>
+    </message>
+    <message>
+        <source>Creatig the playlist file, please wait...</source>
+        <translation>Erzeuge Wiedergabeliste, bitte warten...</translation>
+    </message>
+    <message>
+        <source>Process was aborted by the user after %1 file(s)!</source>
+        <translation>Der Vorgang wurde vom Benutzter nach %1 Datei(en) abgebrochen!</translation>
+    </message>
+    <message>
+        <source>LameXP - Aborted</source>
+        <translation>LameXP - Abgebrochen</translation>
+    </message>
+    <message>
+        <source>Process was aborted by the user.</source>
+        <translation>Der Vorgang wurde vom Benutzer abgebrochen.</translation>
+    </message>
+    <message>
+        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
+        <translation>Fehler: %1 von %2 Dateien sind fehlgeschlagen. Doppelklicken um detaillierte Informationen anzuzeigen!</translation>
+    </message>
+    <message>
+        <source>LameXP - Error</source>
+        <translation>LameXP - Fehler</translation>
+    </message>
+    <message>
+        <source>At least one file has failed!</source>
+        <translation>Mindestens eine Datei ist fehlgeschlagen!</translation>
+    </message>
+    <message>
+        <source>Alle files completed successfully.</source>
+        <translation>Alle Dateien wurden erfolgreich abgeschlossen.</translation>
+    </message>
+    <message>
+        <source>LameXP - Done</source>
+        <translation>LameXP - Fertig</translation>
+    </message>
+    <message>
+        <source>All files completed successfully.</source>
+        <translation>Alle Dateien wurden erfolgreich abgeschlossen.</translation>
+    </message>
+    <message>
+        <source>Playlist creation failed</source>
+        <translation>Wiedergabeliste konnte nicht erstellt werden</translation>
+    </message>
+    <message>
+        <source>The playlist file could not be created:</source>
+        <translation>Die Wiedergabeliste konnte nicht erstellt werden:</translation>
+    </message>
+</context>
+<context>
+    <name>ProgressModel</name>
+    <message>
+        <source>Job</source>
+        <translation>Job</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Status</translation>
     </message>
 </context>
 <context>
     <name>SplashScreen</name>
     <message>
         <source>LameXP is launching...</source>
-        <translation type="unfinished">LameXP wird gestartet...</translation>
+        <translation>LameXP wird gestartet...</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
         <source>LameXP Update Manager</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished">Bitte warten...</translation>
+        <translation>Bitte warten...</translation>
     </message>
     <message>
         <source>Latest version available:</source>
-        <translation type="unfinished">Neuste verfügbare Version:</translation>
+        <translation>Neuste verfügbare Version:</translation>
     </message>
     <message>
         <source>Currently installed version:</source>
-        <translation type="unfinished">Derzeit installierte Version:</translation>
+        <translation>Derzeit installierte Version:</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished">Wiederholen</translation>
+        <translation>Wiederholen</translation>
     </message>
     <message>
         <source>Show Log</source>
-        <translation type="unfinished">Lag Anzeigen</translation>
+        <translation>Lag Anzeigen</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished">Herunterladen &amp;&amp; Installieren</translation>
+        <translation>Herunterladen &amp;&amp; Installieren</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schießen</translation>
+        <translation>Schießen</translation>
     </message>
     <message>
         <source>Build</source>
-        <translation type="unfinished">Buildnummer</translation>
+        <translation>Buildnummer</translation>
     </message>
     <message>
         <source>Testing your internet connection, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Überprüfe Internetverbindung, bitte warten...</translation>
     </message>
     <message>
         <source>Network connectivity test has faild!</source>
-        <translation type="unfinished"></translation>
+        <translation>Test der Netzwerk Konnektivität fehlgeschlagen!</translation>
     </message>
     <message>
         <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es dann noch einmal.</translation>
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche online nach neuen Updates, bitte warten...</translation>
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Holen der Update Informationen vom Server!</translation>
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Update Server ist möglicherweise überlastet. Versuchen Sie es später noch einmal.</translation>
     </message>
     <message>
         <source>More information available at:</source>
-        <translation type="unfinished">Weitere Informationen verfügbar unter:</translation>
+        <translation>Weitere Informationen verfügbar unter:</translation>
     </message>
     <message>
         <source>A new version of LameXP is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine neue Version von LameXP ist verfügbar!</translation>
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es wird dringend empfohlen das Update schnellstmöglich zu installieren.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu diesem Zeitpunkt sind keine Updates verfügabr.</translation>
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Version von LameXP ist noch aktuell. Bitte suchen Sie regelmäßig nach Updates!</translation>
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Version ist neuer als die letzte veröffentlichte Version.</translation>
     </message>
     <message>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie verwenden derzeit höchstwahrscheinlich eine Vorabversion von LameXP.</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Unbekannt</translation>
+        <translation>Unbekannt</translation>
     </message>
 </context>
 </TS>
