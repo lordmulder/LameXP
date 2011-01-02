@@ -818,6 +818,7 @@ void MainWindow::addFilesButtonClicked(void)
 		{
 			QFileDialog dialog(this, tr("Add file(s)"));
 			QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
+			dialog.setFileMode(QFileDialog::ExistingFiles);
 			dialog.setNameFilter(fileTypeFilters.join(";;"));
 			if(dialog.exec())
 			{
