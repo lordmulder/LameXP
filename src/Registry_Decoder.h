@@ -21,12 +21,16 @@
 
 #pragma once
 
+#include <QObject>
+
 class QString;
 class QStringList;
 class AbstractDecoder;
 
-class DecoderRegistry
+class DecoderRegistry : public QObject
 {
+	Q_OBJECT
+
 public:
 	static AbstractDecoder *lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	static QStringList DecoderRegistry::getSupportedTypes(void);

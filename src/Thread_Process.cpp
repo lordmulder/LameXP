@@ -98,13 +98,13 @@ void ProcessThread::processFile()
 	bool bSuccess = true;
 		
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
-	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), "Starting...", ProgressModel::JobRunning);
+	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
 
 	//Generate output file name
 	QString outFileName = generateOutFileName();
 	if(outFileName.isEmpty())
 	{
-		emit processStateChanged(m_jobId, "Not found!", ProgressModel::JobFailed);
+		emit processStateChanged(m_jobId, tr("Not found!"), ProgressModel::JobFailed);
 		emit processStateFinished(m_jobId, outFileName, false);
 		return;
 	}
@@ -142,8 +142,8 @@ void ProcessThread::processFile()
 		}
 		else
 		{
-			handleMessage(QString("The format of this file is NOT supported:\n%1\n\nContainer Format:\t%2\nAudio Format:\t%3").arg(m_audioFile.filePath(), m_audioFile.formatContainerInfo(), m_audioFile.formatAudioCompressInfo()));
-			emit processStateChanged(m_jobId, "Unsupported!", ProgressModel::JobFailed);
+			handleMessage(QString("%1\n%2\n\n%3\t%4\n%5\t%6").arg(tr("The format of this file is NOT supported:"), m_audioFile.filePath(), tr("Container Format:"), m_audioFile.formatContainerInfo(), tr("Audio Format:"), m_audioFile.formatAudioCompressInfo()));
+			emit processStateChanged(m_jobId, tr("Unsupported!"), ProgressModel::JobFailed);
 			emit processStateFinished(m_jobId, outFileName, false);
 			return;
 		}
@@ -188,7 +188,7 @@ void ProcessThread::processFile()
 	}
 
 	//Report result
-	emit processStateChanged(m_jobId, (bSuccess ? "Done." : (m_aborted ? "Aborted!" : "Failed!")), (bSuccess ? ProgressModel::JobComplete : ProgressModel::JobFailed));
+	emit processStateChanged(m_jobId, (bSuccess ? tr("Done.") : (m_aborted ? tr("Aborted!") : tr("Failed!"))), (bSuccess ? ProgressModel::JobComplete : ProgressModel::JobFailed));
 	emit processStateFinished(m_jobId, outFileName, bSuccess);
 
 	qDebug("Process thread is done.");
@@ -203,13 +203,13 @@ void ProcessThread::handleUpdate(int progress)
 	switch(m_currentStep)
 	{
 	case EncodingStep:
-		emit processStateChanged(m_jobId, QString("Encoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+		emit processStateChanged(m_jobId, QString("%1 (%2%)").arg(tr("Encoding"), QString::number(progress)), ProgressModel::JobRunning);
 		break;
 	case FilteringStep:
-		emit processStateChanged(m_jobId, QString("Filtering (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+		emit processStateChanged(m_jobId, QString("%1 (%2%)").arg(tr("Filtering"), QString::number(progress)), ProgressModel::JobRunning);
 		break;
 	case DecodingStep:
-		emit processStateChanged(m_jobId, QString("Decoding (%1%)").arg(QString::number(progress)), ProgressModel::JobRunning);
+		emit processStateChanged(m_jobId, QString("%1 (%2%)").arg(tr("Decoding"), QString::number(progress)), ProgressModel::JobRunning);
 		break;
 	}
 }
@@ -232,14 +232,14 @@ QString ProcessThread::generateOutFileName(void)
 	QFileInfo sourceFile(m_audioFile.filePath());
 	if(!sourceFile.exists() || !sourceFile.isFile())
 	{
-		handleMessage(QString("The source audio file could not be found:\n%1").arg(sourceFile.absoluteFilePath()));
+		handleMessage(QString("%1\n%2").arg(tr("The source audio file could not be found:"), sourceFile.absoluteFilePath()));
 		return QString();
 	}
 
 	QFile readTest(sourceFile.canonicalFilePath());
 	if(!readTest.open(QIODevice::ReadOnly))
 	{
-		handleMessage(QString("The source audio file could not be opened for reading:\n%1").arg(readTest.fileName()));
+		handleMessage(QString("%1\n%2").arg(tr("The source audio file could not be opened for reading:"), readTest.fileName()));
 		return QString();
 	}
 	else
@@ -265,7 +265,7 @@ QString ProcessThread::generateOutFileName(void)
 		targetDir.mkpath(".");
 		if(!targetDir.exists())
 		{
-			handleMessage(QString("The target output directory doesn't exist and could NOT be created:\n%1").arg(targetDir.absolutePath()));
+			handleMessage(QString("%1\n%2").arg(tr("The target output directory doesn't exist and could NOT be created:"), targetDir.absolutePath()));
 			return QString();
 		}
 	}
@@ -273,7 +273,7 @@ QString ProcessThread::generateOutFileName(void)
 	QFile writeTest(QString("%1/.%2").arg(targetDir.canonicalPath(), lamexp_rand_str()));
 	if(!writeTest.open(QIODevice::ReadWrite))
 	{
-		handleMessage(QString("The target output directory is NOT writable:\n%1").arg(targetDir.absolutePath()));
+		handleMessage(QString("%1\n%2").arg(tr("The target output directory is NOT writable:"), targetDir.absolutePath()));
 		return QString();
 	}
 	else

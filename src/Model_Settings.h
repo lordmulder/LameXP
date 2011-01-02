@@ -85,6 +85,8 @@ public:
 
 private:
 	QSettings *m_settings;
+	QString *m_defaultLanguage;
+	QString defaultLanguage(void);
 };
 
 #undef MAKE_OPTION_DEC1

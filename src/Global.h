@@ -95,8 +95,9 @@ lamexp_cpu_t lamexp_detect_cpu_features(void);
 //Translation support
 QStringList lamexp_query_translations(void);
 QString lamexp_translation_name(const QString &language);
+WORD lamexp_translation_sysid(const QString &langId);
 bool lamexp_install_translator(const QString &language);
-static const char* LAMEXP_DEFAULT_LANGID = "gb";
+static const char* LAMEXP_DEFAULT_LANGID = "en";
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString folderPath);

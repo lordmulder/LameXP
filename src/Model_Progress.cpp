@@ -100,10 +100,10 @@ QVariant ProgressModel::headerData(int section, Qt::Orientation orientation, int
 			switch(section)
 			{
 			case 0:
-				return "Job";
+				return tr("Job");
 				break;
 			case 1:
-				return "Status";
+				return tr("Status");
 				break;
 			default:
 				return QVariant();

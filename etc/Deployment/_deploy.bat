@@ -37,6 +37,12 @@ del /Q "%OBJ_PATH%\*.idb"
 del /Q "%MOC_PATH%\*.cpp"
 del /Q "%MOC_PATH%\*.h"
 REM ------------------------------------------
+REM :: BUILD LANGUAGE FILES ::
+REM ------------------------------------------
+for %%f in (..\Translation\*.ts) do (
+	lrelease.exe %%f -qm ..\..\res\localization\%%~nf.qm
+)
+REM ------------------------------------------
 REM :: BUILD BINARIES ::
 REM ------------------------------------------
 call _build.bat "..\..\LameXP.sln" "%LAMEXP_CONFIG%"

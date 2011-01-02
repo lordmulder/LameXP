@@ -70,6 +70,8 @@ const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128
 ////////////////////////////////////////////////////////////
 
 SettingsModel::SettingsModel(void)
+:
+	m_defaultLanguage(NULL)
 {
 	QString appPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 	m_settings = new QSettings(appPath.append("/config.ini"), QSettings::IniFormat);
@@ -85,6 +87,7 @@ SettingsModel::SettingsModel(void)
 SettingsModel::~SettingsModel(void)
 {
 	LAMEXP_DELETE(m_settings);
+	LAMEXP_DELETE(m_defaultLanguage);
 }
 
 ////////////////////////////////////////////////////////////
@@ -120,8 +123,44 @@ void SettingsModel::validate(void)
 	if(!lamexp_query_translations().contains(this->currentLanguage(), Qt::CaseInsensitive))
 	{
 			qWarning("Current language is unknown, reverting to default language!");
-			this->currentLanguage(LAMEXP_DEFAULT_LANGID);
+			this->currentLanguage(defaultLanguage());
 	}
+}
+
+////////////////////////////////////////////////////////////
+// Private Functions
+////////////////////////////////////////////////////////////
+
+QString SettingsModel::defaultLanguage(void)
+{
+	if(m_defaultLanguage)
+	{
+		return *m_defaultLanguage;
+	}
+	
+	//Check if we can use the default translation
+	WORD systemLangId = PRIMARYLANGID(GetUserDefaultLangID());
+	if(systemLangId == LANG_ENGLISH)
+	{
+		m_defaultLanguage = new QString(LAMEXP_DEFAULT_LANGID);
+		return LAMEXP_DEFAULT_LANGID;
+	}
+
+	//Try to find a suitable translation for the user's system language
+	QStringList languages = lamexp_query_translations();
+	while(!languages.isEmpty())
+	{
+		QString currentLangId = languages.takeFirst();
+		if(lamexp_translation_sysid(currentLangId) == systemLangId)
+		{
+			m_defaultLanguage = new QString(currentLangId);
+			return currentLangId;
+		}
+	}
+
+	//Fall back to the default translation
+	m_defaultLanguage = new QString(LAMEXP_DEFAULT_LANGID);
+	return LAMEXP_DEFAULT_LANGID;
 }
 
 ////////////////////////////////////////////////////////////
@@ -144,4 +183,4 @@ MAKE_OPTION3(soundsEnabled, true)
 MAKE_OPTION3(neroAacNotificationsEnabled, true)
 MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
 MAKE_OPTION3(dropBoxWidgetEnabled, true)
-MAKE_OPTION2(currentLanguage, LAMEXP_DEFAULT_LANGID);
+MAKE_OPTION2(currentLanguage, defaultLanguage());

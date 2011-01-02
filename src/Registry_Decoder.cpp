@@ -75,9 +75,9 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	{
 		extensions.removeDuplicates();
 		extensions.sort();
-		types.prepend(QString("All supported types (%1)").arg(extensions.join(" ")));
+		types.prepend(QString("%1 (%2)").arg(tr("All supported types"), extensions.join(" ")));
 	}
 	
-	types << "All files (*.*)";
+	types << QString("%1 (*.*)").arg(tr("All files"));
 	return types;
 }

@@ -190,14 +190,14 @@ void AboutDialog::showAboutQt(void)
 void AboutDialog::showAboutContributors(void)
 {
 	QString contributorsAboutText;
-	contributorsAboutText += QString("<h3>%1</h3>").arg(tr("The following people have contributed to LameXP:"));
+	contributorsAboutText += QString("<h3><nobr>%1</nobr></h3>").arg(tr("The following people have contributed to LameXP:"));
 	contributorsAboutText += QString("<b>%1</b>").arg(tr("Translators:"));
 	contributorsAboutText += "<table style=\"margin-top:5px\">";
-	contributorsAboutText += CONTRIBUTOR("Englisch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/gb.png");
+	contributorsAboutText += CONTRIBUTOR("Englisch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/en.png");
 	contributorsAboutText += CONTRIBUTOR("Deutsch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/de.png");
 	contributorsAboutText += "</table>";
 	contributorsAboutText += "<br><br>";
-	contributorsAboutText += QString("<i>%1</i><br>").arg(tr("If you are willing to contribute a LameXP translation, feel free to contact us!"));
+	contributorsAboutText += QString("<nobr><i>%1</i></nobr><br>").arg(tr("If you are willing to contribute a LameXP translation, feel free to contact us!"));
 
 	QMessageBox *contributorsAboutBox = new QMessageBox(this);
 	contributorsAboutBox->setText(contributorsAboutText);
