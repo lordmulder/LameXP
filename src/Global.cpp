@@ -422,22 +422,33 @@ static bool lamexp_check_compatibility_mode(const char *exportName)
  */
 static bool lamexp_check_elevation(void)
 {
-	typedef enum { lamexp_token_elevation_class = 20 };
-	typedef struct { DWORD TokenIsElevated; } LAMEXP_TOKEN_ELEVATION;
+	typedef enum { lamexp_token_elevationType_class = 18, lamexp_token_elevation_class = 20 } LAMEXP_TOKEN_INFORMATION_CLASS;
+	typedef enum { lamexp_elevationType_default = 1, lamexp_elevationType_full, lamexp_elevationType_limited } LAMEXP_TOKEN_ELEVATION_TYPE;
 
 	HANDLE hToken = NULL;
 	bool bIsProcessElevated = false;
 	
 	if(OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
 	{
-		LAMEXP_TOKEN_ELEVATION tokenElevation;
+		LAMEXP_TOKEN_ELEVATION_TYPE tokenElevationType;
 		DWORD returnLength;
-		if(GetTokenInformation(hToken, (TOKEN_INFORMATION_CLASS) lamexp_token_elevation_class, &tokenElevation, sizeof(LAMEXP_TOKEN_ELEVATION), &returnLength))
+		if(GetTokenInformation(hToken, (TOKEN_INFORMATION_CLASS) lamexp_token_elevationType_class, &tokenElevationType, sizeof(LAMEXP_TOKEN_ELEVATION_TYPE), &returnLength))
 		{
-			if(returnLength == sizeof(LAMEXP_TOKEN_ELEVATION) && tokenElevation.TokenIsElevated != 0)
+			if(returnLength == sizeof(LAMEXP_TOKEN_ELEVATION_TYPE))
 			{
-				qWarning("Process token is elevated -> potential security risk!\n");
-				bIsProcessElevated = true;
+				switch(tokenElevationType)
+				{
+				case lamexp_elevationType_default:
+					qDebug("Process token elevation type: Default -> UAC is disabled.\n");
+					break;
+				case lamexp_elevationType_full:
+					qWarning("Process token elevation type: Full -> potential security risk!\n");
+					bIsProcessElevated = true;
+					break;
+				case lamexp_elevationType_limited:
+					qDebug("Process token elevation type: Limited -> not elevated.\n");
+					break;
+				}
 			}
 		}
 		CloseHandle(hToken);

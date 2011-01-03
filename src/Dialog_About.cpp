@@ -247,7 +247,7 @@ void AboutDialog::showMoreAbout(void)
 	moreAboutText += LINK("http://www.ac3filter.net/projects/tools");
 	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
 
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("MediaInfo - Media File Analysis Tool")), "mediainfo_i386.exe", "v?.?.?");
+	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("MediaInfo - Media File Analysis Tool")), "mediainfo_i386.exe", "v?.?.??");
 	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Released under the terms of the GNU Leser General Public License."));
 	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
 	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";

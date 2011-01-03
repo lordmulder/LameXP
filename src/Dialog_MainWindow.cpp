@@ -74,14 +74,14 @@
 #define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); CMD; if(__dropBoxVisible) m_dropBox->show(); }
 
 //Helper class
-class Index: public QObjectUserData
-{
-public:
-	Index(int index) { m_index = index; }
-	int value(void) { return m_index; }
-private:
-	int m_index;
-};
+//class Index: public QObjectUserData
+//{
+//public:
+//	Index(int index) { m_index = index; }
+//	int value(void) { return m_index; }
+//private:
+//	int m_index;
+//};
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -222,11 +222,11 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_tabActionGroup->addAction(actionCompression);
 	m_tabActionGroup->addAction(actionMetaData);
 	m_tabActionGroup->addAction(actionAdvancedOptions);
-	actionSourceFiles->setUserData(0, new Index(0));
-	actionOutputDirectory->setUserData(0, new Index(1));
-	actionMetaData->setUserData(0, new Index(2));
-	actionCompression->setUserData(0, new Index(3));
-	actionAdvancedOptions->setUserData(0, new Index(4));
+	actionSourceFiles->setData(0);
+	actionOutputDirectory->setData(1);
+	actionMetaData->setData(2);
+	actionCompression->setData(3);
+	actionAdvancedOptions->setData(4);
 	actionSourceFiles->setChecked(true);
 	connect(m_tabActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabActionActivated(QAction*)));
 
@@ -237,11 +237,11 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_styleActionGroup->addAction(actionStyleWindowsVista);
 	m_styleActionGroup->addAction(actionStyleWindowsXP);
 	m_styleActionGroup->addAction(actionStyleWindowsClassic);
-	actionStylePlastique->setUserData(0, new Index(0));
-	actionStyleCleanlooks->setUserData(0, new Index(1));
-	actionStyleWindowsVista->setUserData(0, new Index(2));
-	actionStyleWindowsXP->setUserData(0, new Index(3));
-	actionStyleWindowsClassic->setUserData(0, new Index(4));
+	actionStylePlastique->setData(0);
+	actionStyleCleanlooks->setData(1);
+	actionStyleWindowsVista->setData(2);
+	actionStyleWindowsXP->setData(3);
+	actionStyleWindowsClassic->setData(4);
 	actionStylePlastique->setChecked(true);
 	actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP && lamexp_themes_enabled());
 	actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA && lamexp_themes_enabled());
@@ -728,7 +728,7 @@ void MainWindow::encodeButtonClicked(void)
 
 	if(m_fileListModel->rowCount() < 1)
 	{
-		QMessageBox::warning(this, tr("LameXP"), tr("You must add at least one file to the list before proceeding!"));
+		QMessageBox::warning(this, tr("LameXP"), QString("<nobr>%1</nobr>").arg(tr("You must add at least one file to the list before proceeding!")));
 		tabWidget->setCurrentIndex(0);
 		return;
 	}
@@ -958,7 +958,9 @@ void MainWindow::tabPageChanged(int idx)
 	QList<QAction*> actions = m_tabActionGroup->actions();
 	for(int i = 0; i < actions.count(); i++)
 	{
-		if(actions.at(i)->userData(0) && dynamic_cast<Index*>(actions.at(i)->userData(0))->value() == idx)
+		bool ok = false;
+		int actionIndex = actions.at(i)->data().toInt(&ok);
+		if(ok && actionIndex == idx)
 		{
 			actions.at(i)->setChecked(true);
 		}
@@ -970,10 +972,14 @@ void MainWindow::tabPageChanged(int idx)
  */
 void MainWindow::tabActionActivated(QAction *action)
 {
-	if(action && action->userData(0))
+	if(action && action->data().isValid())
 	{
-		int index = dynamic_cast<Index*>(action->userData(0))->value();
-		tabWidget->setCurrentIndex(index);
+		bool ok = false;
+		int index = action->data().toInt(&ok);
+		if(ok)
+		{
+			tabWidget->setCurrentIndex(index);
+		}
 	}
 }
 
@@ -982,9 +988,11 @@ void MainWindow::tabActionActivated(QAction *action)
  */
 void MainWindow::styleActionActivated(QAction *action)
 {
-	if(action && action->userData(0))
+	if(action && action->data().isValid())
 	{
-		m_settings->interfaceStyle(dynamic_cast<Index*>(action->userData(0))->value());
+		bool ok = false;
+		int actionIndex = action->data().toInt(&ok);
+		m_settings->interfaceStyle(actionIndex);
 	}
 
 	switch(m_settings->interfaceStyle())

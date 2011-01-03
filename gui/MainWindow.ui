@@ -386,20 +386,23 @@
              </layout>
             </item>
             <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
+             <widget class="QFrame" name="frame_2">
+              <property name="maximumSize">
                <size>
-                <width>20</width>
-                <height>3</height>
+                <width>16777215</width>
+                <height>2</height>
                </size>
               </property>
-             </spacer>
+              <property name="frameShape">
+               <enum>QFrame::HLine</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
+              </property>
+              <property name="lineWidth">
+               <number>1</number>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -1160,7 +1163,7 @@
         </property>
         <property name="icon">
          <iconset resource="../res/Icons.qrc">
-          <normaloff>:/icons/door_out.png</normaloff>:/icons/door_out.png</iconset>
+          <normaloff>:/icons/door_in.png</normaloff>:/icons/door_in.png</iconset>
         </property>
        </widget>
       </item>
@@ -1466,7 +1469,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../res/Flags.qrc">
+    <iconset>
      <normaloff>:/flags/gb.png</normaloff>:/flags/gb.png</iconset>
    </property>
    <property name="text">
@@ -1477,6 +1480,10 @@
  <resources>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Flags.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
