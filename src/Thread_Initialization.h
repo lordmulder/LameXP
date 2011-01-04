@@ -38,6 +38,7 @@ public:
 
 private:
 	void delay(void);
+	void initTranslations(void);
 	void initNeroAac(void);
 	void initWmaDec(void);
 

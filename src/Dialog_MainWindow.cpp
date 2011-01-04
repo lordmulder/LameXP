@@ -446,6 +446,8 @@ void MainWindow::changeEvent(QEvent *e)
 		m_previewContextAction->setText(tr("Open File in External Application"));
 		m_findFileContextAction->setText(tr("Browse File Location"));
 		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
+
+		m_metaInfoModel->clearData();
 	}
 }
 

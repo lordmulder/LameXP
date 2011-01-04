@@ -123,7 +123,7 @@ static QMap<QString, unsigned int> g_lamexp_tool_versions;
 //Languages
 static QMap<QString, QString> g_lamexp_translation_files;
 static QMap<QString, QString> g_lamexp_translation_names;
-static QMap<QString, WORD> g_lamexp_translation_sysid;
+static QMap<QString, unsigned int> g_lamexp_translation_sysid;
 static QTranslator *g_lamexp_currentTranslator = NULL;
 
 //Shared memory
@@ -462,51 +462,6 @@ static bool lamexp_check_elevation(void)
 }
 
 /*
- * Initialize translation files
- */
-static void lamexp_init_translations(void)
-{
-	//Add default translations
-	g_lamexp_translation_files.insert(LAMEXP_DEFAULT_LANGID, "");
-	g_lamexp_translation_names.insert(LAMEXP_DEFAULT_LANGID, "English");
-	
-	//Search for language files
-	QStringList qmFiles = QDir(":/localization").entryList(QStringList() << "LameXP_??.qm", QDir::Files, QDir::Name);
-
-	//Add all available translations
-	while(!qmFiles.isEmpty())
-	{
-		QString langId, langName;
-		WORD systemId = 0;
-		QString qmFile = qmFiles.takeFirst();
-		
-		QRegExp langIdExp("LameXP_(\\w\\w)\\.qm", Qt::CaseInsensitive);
-		if(langIdExp.indexIn(qmFile) >= 0)
-		{
-			langId = langIdExp.cap(1).toLower();
-		}
-
-		QResource langRes = (QString(":/localization/%1.txt").arg(qmFile));
-		if(langRes.isValid() && langRes.size() > 0)
-		{
-			QStringList langInfo = QString::fromUtf8(reinterpret_cast<const char*>(langRes.data()), langRes.size()).simplified().split(",", QString::SkipEmptyParts);
-			if(langInfo.count() == 2)
-			{
-				systemId = langInfo.at(0).toUInt();
-				langName = langInfo.at(1);
-			}
-		}
-		
-		if(!langId.isEmpty() && systemId > 0 && !langName.isEmpty())
-		{
-			g_lamexp_translation_files.insert(langId, qmFile);
-			g_lamexp_translation_names.insert(langId, langName);
-			g_lamexp_translation_sysid.insert(langId, systemId);
-		}
-	}
-}
-
-/*
  * Initialize Qt framework
  */
 bool lamexp_init_qt(int argc, char* argv[])
@@ -578,8 +533,12 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 
+	//Add default translations
+	g_lamexp_translation_files.insert(LAMEXP_DEFAULT_LANGID, "");
+	g_lamexp_translation_names.insert(LAMEXP_DEFAULT_LANGID, "English");
+
 	//Init language files
-	lamexp_init_translations();
+	//lamexp_init_translations();
 
 	//Check for process elevation
 	if(!lamexp_check_elevation())
@@ -911,6 +870,23 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 }
 
 /*
+ * Register a new translation
+ */
+bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId)
+{
+	if(qmFile.isEmpty() || langName.isEmpty() || systemId < 1)
+	{
+		return false;
+	}
+
+	g_lamexp_translation_files.insert(langId, qmFile);
+	g_lamexp_translation_names.insert(langId, langName);
+	g_lamexp_translation_sysid.insert(langId, systemId);
+
+	return true;
+}
+
+/*
  * Get list of all translations
  */
 QStringList lamexp_query_translations(void)
@@ -929,7 +905,7 @@ QString lamexp_translation_name(const QString &langId)
 /*
  * Get translation system id
  */
-WORD lamexp_translation_sysid(const QString &langId)
+unsigned int lamexp_translation_sysid(const QString &langId)
 {
 	return g_lamexp_translation_sysid.value(langId.toLower(), 0);
 }

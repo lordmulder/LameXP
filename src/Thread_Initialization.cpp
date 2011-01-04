@@ -30,6 +30,7 @@
 #include <QMap>
 #include <QDir>
 #include <QLibrary>
+#include <QResource>
 
 #include <Windows.h>
 
@@ -54,8 +55,8 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg", UINT_MAX},
 	{"143fc001a2f6c56fe1b9e6f8a2eb2b53b9e1e504", "lame.exe", 39910},
 	{"775b260b3f64101beaeb317b74746f9bccdab842", "MAC.exe", UINT_MAX},
-	{"7ea28a2ff8aa6ec2f0a8d59600519b696e915946", "mediainfo_i386.exe", 739},
-	{"91d3247fa75be2efb532a0711966057684532235", "mediainfo_x64.exe", 739},
+	{"61d584ffaf428e9afb0ed9bd32706a954af492b0", "mediainfo_i386.exe", 739},
+	{"81fb728cbc6057906fa1b637738e6aefe5dccf54", "mediainfo_x64.exe", 739},
 	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe", UINT_MAX},
 	{"8bbf4a3fffe2ff143eb5ba2cf82ca16d676e865d", "mpg123.exe", UINT_MAX},
 	{"8dd7138714c3bcb39f5a3213413addba13d06f1e", "oggdec.exe", UINT_MAX},
@@ -150,6 +151,9 @@ void InitializationThread::run()
 	
 	qDebug("All extracted.\n");
 
+	//Register all translations
+	initTranslations();
+
 	//Look for Nero encoder
 	initNeroAac();
 	
@@ -176,6 +180,55 @@ void InitializationThread::delay(void)
 	}
 
 	printf("Done\n\n");
+}
+
+void InitializationThread::initTranslations(void)
+{
+	//Search for language files
+	QStringList qmFiles = QDir(":/localization").entryList(QStringList() << "LameXP_??.qm", QDir::Files, QDir::Name);
+
+	//Make sure we found at least one translation
+	if(qmFiles.count() < 1)
+	{
+		qFatal("Could not find any translation files!");
+		return;
+	}
+
+	//Add all available translations
+	while(!qmFiles.isEmpty())
+	{
+		QString langId, langName;
+		unsigned int systemId = 0;
+		QString qmFile = qmFiles.takeFirst();
+		
+		QRegExp langIdExp("LameXP_(\\w\\w)\\.qm", Qt::CaseInsensitive);
+		if(langIdExp.indexIn(qmFile) >= 0)
+		{
+			langId = langIdExp.cap(1).toLower();
+		}
+
+		QResource langRes = (QString(":/localization/%1.txt").arg(qmFile));
+		if(langRes.isValid() && langRes.size() > 0)
+		{
+			QStringList langInfo = QString::fromUtf8(reinterpret_cast<const char*>(langRes.data()), langRes.size()).simplified().split(",", QString::SkipEmptyParts);
+			if(langInfo.count() == 2)
+			{
+				systemId = langInfo.at(0).toUInt();
+				langName = langInfo.at(1);
+			}
+		}
+		
+		if(lamexp_translation_register(langId, qmFile, langName, systemId))
+		{
+			qDebug("Registering translation: %s = %s (%u)", qmFile.toLatin1().constData(), langName.toLatin1().constData(), systemId);
+		}
+		else
+		{
+			qWarning("Failed to register: %s", qmFile.toLatin1().constData());
+		}
+	}
+
+	qDebug("All registered.\n");
 }
 
 void InitializationThread::initNeroAac(void)
