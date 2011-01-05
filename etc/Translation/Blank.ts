@@ -463,6 +463,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>From File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -672,6 +676,14 @@
     </message>
     <message>
         <source>Add folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translation Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

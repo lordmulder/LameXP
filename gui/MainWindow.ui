@@ -1229,6 +1229,7 @@
       <iconset resource="../res/Icons.qrc">
        <normaloff>:/icons/font.png</normaloff>:/icons/font.png</iconset>
      </property>
+     <addaction name="actionLoadTranslationFromFile"/>
     </widget>
     <addaction name="actionSourceFiles"/>
     <addaction name="actionOutputDirectory"/>
@@ -1476,10 +1477,23 @@
     <string notr="true">English</string>
    </property>
   </action>
+  <action name="actionLoadTranslationFromFile">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/folder_page.png</normaloff>:/icons/folder_page.png</iconset>
+   </property>
+   <property name="text">
+    <string>From File...</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Flags.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

@@ -917,29 +917,53 @@ bool lamexp_install_translator(const QString &langId)
 {
 	bool success = false;
 
-	if(!g_lamexp_currentTranslator)
-	{
-		g_lamexp_currentTranslator = new QTranslator();
-	}
-
 	if(langId.isEmpty() || langId.toLower().compare(LAMEXP_DEFAULT_LANGID) == 0)
 	{
-		QApplication::removeTranslator(g_lamexp_currentTranslator);
-		success = true;
+		success = lamexp_install_translator_from_file(QString());
 	}
 	else
 	{
 		QString qmFile = g_lamexp_translation_files.value(langId.toLower(), QString());
 		if(!qmFile.isEmpty())
 		{
-			QApplication::removeTranslator(g_lamexp_currentTranslator);
-			success = g_lamexp_currentTranslator->load(QString(":/localization/%1").arg(qmFile));
-			QApplication::installTranslator(g_lamexp_currentTranslator);
+			success = lamexp_install_translator_from_file(QString(":/localization/%1").arg(qmFile));
 		}
 		else
 		{
 			qWarning("Translation '%s' not available!", langId.toLatin1().constData());
 		}
+	}
+
+	return success;
+}
+
+/*
+ * Install a new translator from file
+ */
+bool lamexp_install_translator_from_file(const QString &qmFile)
+{
+	bool success = false;
+
+	if(!g_lamexp_currentTranslator)
+	{
+		g_lamexp_currentTranslator = new QTranslator();
+	}
+
+	if(!qmFile.isEmpty())
+	{
+		QString qmPath = QFileInfo(qmFile).canonicalFilePath();
+		QApplication::removeTranslator(g_lamexp_currentTranslator);
+		success = g_lamexp_currentTranslator->load(qmPath);
+		QApplication::installTranslator(g_lamexp_currentTranslator);
+		if(!success)
+		{
+			qWarning("Failed to load translation:\n\"%s\"", qmPath.toLatin1().constData());
+		}
+	}
+	else
+	{
+		QApplication::removeTranslator(g_lamexp_currentTranslator);
+		success = true;
 	}
 
 	return success;

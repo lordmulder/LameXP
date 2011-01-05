@@ -250,19 +250,21 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 
 	//Populate the language menu
 	m_languageActionGroup = new QActionGroup(this);
-	connect(m_languageActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
 	QStringList translations = lamexp_query_translations();
 	while(!translations.isEmpty())
 	{
-		QString langId = translations.takeFirst();
+		QString langId = translations.takeLast();
 		QAction *currentLanguage = new QAction(this);
 		currentLanguage->setData(langId);
 		currentLanguage->setText(lamexp_translation_name(langId));
 		currentLanguage->setIcon(QIcon(QString(":/flags/%1.png").arg(langId)));
 		currentLanguage->setCheckable(true);
 		m_languageActionGroup->addAction(currentLanguage);
-		menuLanguage->addAction(currentLanguage);
+		menuLanguage->insertAction(actionLoadTranslationFromFile, currentLanguage);
 	}
+	menuLanguage->insertSeparator(actionLoadTranslationFromFile);
+	connect(actionLoadTranslationFromFile, SIGNAL(triggered(bool)), this, SLOT(languageFromFileActionActivated(bool)));
+	connect(m_languageActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
 
 	//Activate tools menu actions
 	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
@@ -1039,11 +1041,42 @@ void MainWindow::styleActionActivated(QAction *action)
  */
 void MainWindow::languageActionActivated(QAction *action)
 {
-	QString langId = action->data().toString();
-
-	if(lamexp_install_translator(langId))
+	if(action->data().type() == QVariant::String)
 	{
-		m_settings->currentLanguage(langId);
+		QString langId = action->data().toString();
+
+		if(lamexp_install_translator(langId))
+		{
+			action->setChecked(true);
+			m_settings->currentLanguage(langId);
+		}
+	}
+}
+
+/*
+ * Load language from file action triggered
+ */
+void MainWindow::languageFromFileActionActivated(bool checked)
+{
+	QFileDialog dialog(this, tr("Load Translation"));
+	dialog.setFileMode(QFileDialog::ExistingFile);
+	dialog.setNameFilter(QString("%1 (*.qm)").arg(tr("Translation Files")));
+
+	if(dialog.exec())
+	{
+		QStringList selectedFiles = dialog.selectedFiles();
+		if(lamexp_install_translator_from_file(selectedFiles.first()))
+		{
+			QList<QAction*> actions = m_languageActionGroup->actions();
+			while(!actions.isEmpty())
+			{
+				actions.takeFirst()->setChecked(false);
+			}
+		}
+		else
+		{
+			languageActionActivated(m_languageActionGroup->actions().first());
+		}
 	}
 }
 

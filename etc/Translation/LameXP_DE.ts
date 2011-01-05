@@ -831,6 +831,18 @@
         <source>No</source>
         <translation>Nein</translation>
     </message>
+    <message>
+        <source>From File...</source>
+        <translation>Von Datei...</translation>
+    </message>
+    <message>
+        <source>Load Translation</source>
+        <translation>Übersetzung Laden</translation>
+    </message>
+    <message>
+        <source>Translation Files</source>
+        <translation>Übersetzungsdateien</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

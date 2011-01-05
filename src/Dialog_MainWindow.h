@@ -61,6 +61,7 @@ private slots:
 	void tabActionActivated(QAction *action);
 	void styleActionActivated(QAction *action);
 	void languageActionActivated(QAction *action);
+	void languageFromFileActionActivated(bool checked);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void outputFolderViewMoved(const QModelIndex &index);
 	void makeFolderButtonClicked(void);
