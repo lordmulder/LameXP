@@ -50,5 +50,6 @@ private:
 	bool m_firstShow;
 	SettingsModel *m_settings;
 
+	QString makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo = QString());
 	bool playResoureSound(const QString &library, const unsigned long soundId, const bool async);
 };

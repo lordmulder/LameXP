@@ -41,11 +41,27 @@
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
-#define CONTRIBUTOR(LANG, CNTR, ICON) QString("<tr><td valign=\"middle\"><img src=\"%1\"></td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td><td valign=\"middle\">%3</td></tr>").arg(ICON, LANG, CNTR);
-#define VSTR(BASE,TOOL,FORMAT) BASE.arg(lamexp_version2string(FORMAT, lamexp_tool_version(TOOL)))
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
+
+//Typedef
+struct lamexp_contrib_t
+{
+	char *pcFlag;
+	char *pcLanguage;
+	char *pcName;
+	char *pcMail;
+};
+
+//Contributors
+static const struct lamexp_contrib_t g_lamexp_contributors[] =
+{
+	{"en", "Englisch",  "LoRd_MuldeR",         "MuldeR2@GMX.de"},
+	{"de", "Deutsch",   "LoRd_MuldeR",         "MuldeR2@GMX.de"},
+	{"fr", "Française", "Dodich Informatique", "Dodich@live.fr"},
+	{NULL, NULL, NULL, NULL}
+};
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -190,11 +206,16 @@ void AboutDialog::showAboutQt(void)
 void AboutDialog::showAboutContributors(void)
 {
 	QString contributorsAboutText;
+
 	contributorsAboutText += QString("<h3><nobr>%1</nobr></h3>").arg(tr("The following people have contributed to LameXP:"));
 	contributorsAboutText += QString("<b>%1</b>").arg(tr("Translators:"));
 	contributorsAboutText += "<table style=\"margin-top:5px\">";
-	contributorsAboutText += CONTRIBUTOR("Englisch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/en.png");
-	contributorsAboutText += CONTRIBUTOR("Deutsch", "LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;", ":/flags/de.png");
+	for(int i = 0; g_lamexp_contributors[i].pcName; i++)
+	{
+		contributorsAboutText += QString("<tr><td valign=\"middle\"><img src=\":/flags/%1.png\"></td><td>&nbsp;&nbsp;</td>").arg(g_lamexp_contributors[i].pcFlag);
+		contributorsAboutText += QString("<td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td>").arg(g_lamexp_contributors[i].pcLanguage);
+		contributorsAboutText += QString("<td valign=\"middle\">%3</td><td>&nbsp;&nbsp;</td><td>&lt;%4&gt;</td></tr>").arg(g_lamexp_contributors[i].pcName, g_lamexp_contributors[i].pcMail);
+	}
 	contributorsAboutText += "</table>";
 	contributorsAboutText += "<br><br>";
 	contributorsAboutText += QString("<nobr><i>%1</i></nobr><br>").arg(tr("If you are willing to contribute a LameXP translation, feel free to contact us!"));
@@ -218,54 +239,74 @@ void AboutDialog::showAboutContributors(void)
 void AboutDialog::showMoreAbout(void)
 {
 	QString moreAboutText;
+
 	moreAboutText += QString("<h3>%1</h3>").arg(tr("The following third-party software is used in LameXP:"));
 	moreAboutText += "<div style=\"margin-left:-25px;font-size:8pt\"><ul>";
 	
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("LAME - OpenSource mp3 Encoder")), "lame.exe", "v?.?? a??");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Released under the terms of the GNU Leser General Public License."));
-	moreAboutText += LINK("http://lame.sourceforge.net/");
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-	
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("OggEnc - Ogg Vorbis Encoder")), "oggenc2_i386.exe", "v?.??");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Completely open and patent-free audio encoding technology."));
-	moreAboutText += LINK("http://www.vorbis.com/");
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-	
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("Nero AAC reference MPEG-4 Encoder")), "neroAacEnc.exe", "v?.?.?.?");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Freeware state-of-the-art HE-AAC encoder with 2-Pass support."));
-	moreAboutText += QString("<nobr><i>%1</i></nobr><br>").arg(tr("Available from vendor web-site as free download:"));
-	moreAboutText += LINK(neroAacUrl);
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-	
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("FLAC - Free Lossless Audio Codec")), "flac.exe", "v?.?.?");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Open and patent-free lossless audio compression technology."));
-	moreAboutText += LINK("http://flac.sourceforge.net/");
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("AC3Filter Tools - AC3/DTS Decoder")), "valdec.exe", "v?.??");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Released under the terms of the GNU Leser General Public License."));
-	moreAboutText += LINK("http://www.ac3filter.net/projects/tools");
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("MediaInfo - Media File Analysis Tool")), "mediainfo_i386.exe", "v?.?.??");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Released under the terms of the GNU Leser General Public License."));
-	moreAboutText += LINK("http://mediainfo.sourceforge.net/");
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("SoX - Sound eXchange")), "sox.exe", "v??.?.?");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Released under the terms of the GNU Leser General Public License."));
-	moreAboutText += LINK("http://sox.sourceforge.net/");
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-	
-	moreAboutText += VSTR(QString("<li><b>%1 (%2)</b><br>").arg(tr("GnuPG - The GNU Privacy Guard")), "gpgv.exe", "v?.?.??");
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("Released under the terms of the GNU Leser General Public License."));
-	moreAboutText += LINK("http://www.gnupg.org/");
-	moreAboutText += "<div style=\"font-size:1pt\"><br></div>";
-
-	moreAboutText += QString("<li><b>%1 (v1.3)</b><br>").arg(tr("Silk Icons - Over 700  icons in PNG format"));
-	moreAboutText += QString("<nobr>%1</nobr><br>").arg(tr("By Mark James, released under the Creative Commons 'by' License."));
-	moreAboutText += LINK("http://www.famfamfam.com/lab/icons/silk/");
-	moreAboutText += "<br></ul></div>";
+	moreAboutText += makeToolText
+	(
+		tr("LAME - OpenSource mp3 Encoder"),
+		"lame.exe", "v?.?? a??",
+		tr("Released under the terms of the GNU Leser General Public License."),
+		"http://lame.sourceforge.net/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("OggEnc - Ogg Vorbis Encoder"),
+		"oggenc2_i386.exe", "v?.??",
+		tr("Completely open and patent-free audio encoding technology."),
+		"http://www.vorbis.com/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("Nero AAC reference MPEG-4 Encoder"),
+		"neroAacEnc.exe", "v?.?.?.?",
+		tr("Freeware state-of-the-art HE-AAC encoder with 2-Pass support."),
+		neroAacUrl,
+		tr("Available from vendor web-site as free download:")
+	);
+	moreAboutText += makeToolText
+	(
+		tr("FLAC - Free Lossless Audio Codec"),
+		"flac.exe", "v?.?.?",
+		tr("Open and patent-free lossless audio compression technology."),
+		"http://flac.sourceforge.net/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("AC3Filter Tools - AC3/DTS Decoder"),
+		"valdec.exe", "v?.??",
+		tr("Released under the terms of the GNU Leser General Public License."),
+		"http://www.ac3filter.net/projects/tools"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("MediaInfo - Media File Analysis Tool"),
+		"mediainfo_i386.exe", "v?.?.??",
+		tr("Released under the terms of the GNU Leser General Public License."),
+		"http://mediainfo.sourceforge.net/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("SoX - Sound eXchange"),
+		"sox.exe", "v??.?.?",
+		tr("Released under the terms of the GNU Leser General Public License."),
+		"http://sox.sourceforge.net/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("GnuPG - The GNU Privacy Guard"),
+		"gpgv.exe", "v?.?.??",
+		tr("Released under the terms of the GNU Leser General Public License."),
+		"http://www.gnupg.org/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("Silk Icons - Over 700  icons in PNG format"),
+		QString(), "v1.3",
+		tr("By Mark James, released under the Creative Commons 'by' License."),
+		"http://www.famfamfam.com/lab/icons/silk/"
+	);
 
 	QMessageBox *moreAboutBox = new QMessageBox(this);
 	moreAboutBox->setText(moreAboutText);
@@ -307,6 +348,25 @@ void AboutDialog::showEvent(QShowEvent *e)
 ////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
+
+QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo)
+{
+	QString toolText, verStr(toolVerFmt);
+
+	if(!toolBin.isEmpty())
+	{
+		verStr = lamexp_version2string(toolVerFmt, lamexp_tool_version(toolBin));
+	}
+
+	toolText += QString("<li><b>%1 (%2)</b><br>").arg(toolName, verStr);
+	toolText += QString("<nobr>%1</nobr><br>").arg(toolLicense);
+	if(!extraInfo.isEmpty()) toolText += QString("<nobr><i>%1</i></nobr><br>").arg(extraInfo);
+	toolText += QString("<a href=\"%1\">%1</a>").arg(toolWebsite);
+	toolText += QString("<div style=\"font-size:1pt\"><br></div>");
+
+	return toolText;
+}
+
 
 bool AboutDialog::playResoureSound(const QString &library, const unsigned long soundId, const bool async)
 {
