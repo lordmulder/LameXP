@@ -14,7 +14,7 @@
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Remarque : LameXP est un logiciel libre. Ne payez &lt;b&gt;pas&lt;/b&gt; pour obtenir ou utiliser LameXP ! Si certains site Web tiers tente de vous faire payer pour le téléchargement de LameXP, vous ne devez &lt;b&gt;pas&lt;/b&gt; répondre à l&apos;offre  !!!</translation>
+        <translation>Remarque: LameXP est un logiciel libre. Ne payez &lt;b&gt;pas&lt;/b&gt; pour obtenir ou utiliser LameXP! Si certains site Web tiers tente de vous faire payer pour le téléchargement de LameXP, vous ne devez &lt;b&gt;pas&lt;/b&gt; répondre à l&apos;offre !!!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation>Note : Les méta-informations que vous entrez ici &lt;u&gt;remplaceront&lt;/u&gt; les données à la source!</translation>
+        <translation>Note: Les méta-informations que vous entrez ici &lt;u&gt;remplaceront&lt;/u&gt; les données à la source!</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -1120,11 +1120,11 @@ Votre dossier TEMP est situé ici:</translation>
     </message>
     <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation>Abandonné ! En attente pour la fin de l&apos;exécution des travaux...</translation>
+        <translation>Abandonné! En attente pour la fin de l&apos;exécution des travaux...</translation>
     </message>
     <message>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Encodage : %1 fichier(s) sur %2 terminé(s), patientez...</translation>
+        <translation>Encodage: %1 fichier(s) sur %2 terminé(s), patientez...</translation>
     </message>
     <message>
         <source>Creatig the playlist file, please wait...</source>
@@ -1144,7 +1144,7 @@ Votre dossier TEMP est situé ici:</translation>
     </message>
     <message>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>Erreur : %1 de %2 fichier(s) a échoué. Double-cliquez sur les éléments défectueux pour les informations détaillées!</translation>
+        <translation>Erreur: %1 de %2 fichier(s) a échoué. Double-cliquez sur les éléments défectueux pour les informations détaillées!</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
