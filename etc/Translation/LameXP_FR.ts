@@ -14,7 +14,7 @@
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Remarque: LameXP est un logiciel libre. Ne payez &lt;b&gt;pas&lt;/b&gt; pour obtenir ou utiliser LameXP! Si certains site Web tiers tente de vous faire payer pour le téléchargement de LameXP, vous ne devez &lt;b&gt;pas&lt;/b&gt; répondre à l&apos;offre !!!</translation>
+        <translation>Remarque : LameXP est un logiciel gratuit. Ne payez &lt;b&gt;pas&lt;/b&gt; pour l&apos;obtenir ou l&apos;utiliser ! Si un site web tente de vous faire payer pour son téléchargement, ne répondez &lt;b&gt;pas&lt;/b&gt; à l&apos;offre  !!!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <source>Source Files</source>
-        <translation>Fichiers source</translation>
+        <translation>Fichiers</translation>
     </message>
     <message>
         <source>Add File(s)</source>
@@ -236,31 +236,31 @@
     </message>
     <message>
         <source>Output Directory</source>
-        <translation>Répertoire de sortie</translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
-        <translation>Aller au dossier d&apos;acceuil</translation>
+        <translation>Dossier d&apos;acceuil</translation>
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation>Aller au dossier musique</translation>
+        <translation>Dossier musique</translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
-        <translation>Aller sur le bureau</translation>
+        <translation>Dossier bureau</translation>
     </message>
     <message>
         <source>Make New Folder</source>
-        <translation>Faire un nouveau dossier</translation>
+        <translation>Nouveau dossier</translation>
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation>Enregistrer les fichiers de sortie au même emplacement que les fichiers d&apos;entrée</translation>
+        <translation>Enregistrer les fichiers au même emplacement que les fichiers sources</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation>Faire précéder le chemin du fichier source relatif au fichier de sortie</translation>
+        <translation>Faire précéder le chemin du fichier au fichier de sortie</translation>
     </message>
     <message>
         <source>Meta Data</source>
@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation>Note: Les méta-informations que vous entrez ici &lt;u&gt;remplaceront&lt;/u&gt; les données à la source!</translation>
+        <translation>Note : Les méta-informations que vous entrez ici &lt;u&gt;remplaceront&lt;/u&gt; les données à la source!</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -352,7 +352,7 @@
     </message>
     <message>
         <source>Advanced Options</source>
-        <translation>Options avancées</translation>
+        <translation>Avancées</translation>
     </message>
     <message>
         <source>More options will be added in a later version, stay tuned!</source>
@@ -1120,11 +1120,11 @@ Votre dossier TEMP est situé ici:</translation>
     </message>
     <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation>Abandonné! En attente pour la fin de l&apos;exécution des travaux...</translation>
+        <translation>Abandonné ! En attente pour la fin de l&apos;exécution des travaux...</translation>
     </message>
     <message>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Encodage: %1 fichier(s) sur %2 terminé(s), patientez...</translation>
+        <translation>Encodage : %1 fichier(s) sur %2 terminé(s), patientez...</translation>
     </message>
     <message>
         <source>Creatig the playlist file, please wait...</source>
@@ -1144,7 +1144,7 @@ Votre dossier TEMP est situé ici:</translation>
     </message>
     <message>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>Erreur: %1 de %2 fichier(s) a échoué. Double-cliquez sur les éléments défectueux pour les informations détaillées!</translation>
+        <translation>Erreur : %1 de %2 fichier(s) a échoué. Double-cliquez sur les éléments défectueux pour les informations détaillées!</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
