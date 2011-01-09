@@ -303,6 +303,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Decoder_ADPCM.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Decoder_FLAC.cpp"
 				>
 			</File>
@@ -512,6 +516,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Decoder_AC3.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Decoder_ADPCM.h"
 				>
 			</File>
 			<File

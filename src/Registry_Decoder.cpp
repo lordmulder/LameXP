@@ -22,6 +22,7 @@
 #include "Registry_Decoder.h"
 
 #include "Decoder_AAC.h"
+#include "Decoder_ADPCM.h"
 #include "Decoder_MP3.h"
 #include "Decoder_Vorbis.h"
 #include "Decoder_FLAC.h"
@@ -44,6 +45,7 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	PROBE_DECODER(AC3Decoder);
 	PROBE_DECODER(FLACDecoder);
 	PROBE_DECODER(WMADecoder);
+	PROBE_DECODER(ADPCMDecoder);
 	PROBE_DECODER(WaveDecoder);
 	return NULL;
 }
@@ -59,6 +61,7 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	types << GET_FILETYPES(AC3Decoder);
 	types << GET_FILETYPES(FLACDecoder);
 	types << GET_FILETYPES(WMADecoder);
+	types << GET_FILETYPES(ADPCMDecoder);
 
 	QStringList extensions;
 	QRegExp regExp("\\((.+)\\)", Qt::CaseInsensitive);
