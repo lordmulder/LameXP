@@ -57,9 +57,10 @@ struct lamexp_contrib_t
 //Contributors
 static const struct lamexp_contrib_t g_lamexp_contributors[] =
 {
-	{"en", "Englisch",  "LoRd_MuldeR",         "MuldeR2@GMX.de"},
-	{"de", "Deutsch",   "LoRd_MuldeR",         "MuldeR2@GMX.de"},
-	{"fr", "Française", "Dodich Informatique", "Dodich@live.fr"},
+	{"en", "Englisch",  "LoRd_MuldeR",         "MuldeR2@GMX.de"       },
+	{"de", "Deutsch",   "LoRd_MuldeR",         "MuldeR2@GMX.de"       },
+	{"fr", "Française", "Dodich Informatique", "Dodich@live.fr"       },
+	{"it", "Italiano",  "Roberto",             "Gulliver_69@libero.it"},
 	{NULL, NULL, NULL, NULL}
 };
 

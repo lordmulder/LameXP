@@ -1227,7 +1227,7 @@
      </property>
      <property name="icon">
       <iconset resource="../res/Icons.qrc">
-       <normaloff>:/icons/font.png</normaloff>:/icons/font.png</iconset>
+       <normaloff>:/icons/user_comment.png</normaloff>:/icons/user_comment.png</iconset>
      </property>
      <addaction name="actionLoadTranslationFromFile"/>
     </widget>
@@ -1490,6 +1490,8 @@
  <resources>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Flags.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
