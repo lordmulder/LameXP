@@ -228,7 +228,7 @@ void UpdateDialog::checkForUpdates(void)
 		closeButton->setEnabled(true);
 		retryButton->setEnabled(true);
 		logButton->setEnabled(true);
-		statusLabel->setText(tr("Network connectivity test has faild!"));
+		statusLabel->setText(tr("Network connectivity test has failed!"));
 		progressBar->setValue(progressBar->maximum());
 		hintIcon->setPixmap(QIcon(":/icons/error.png").pixmap(16,16));
 		hintLabel->setText(tr("Please make sure your internet connection is working properly and try again."));

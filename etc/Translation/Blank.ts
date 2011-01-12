@@ -1235,7 +1235,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Network connectivity test has faild!</source>
+        <source>Network connectivity test has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

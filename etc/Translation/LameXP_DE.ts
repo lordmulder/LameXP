@@ -1232,7 +1232,7 @@
         <translation>Überprüfe Internetverbindung, bitte warten...</translation>
     </message>
     <message>
-        <source>Network connectivity test has faild!</source>
+        <source>Network connectivity test has failed!</source>
         <translation>Test der Netzwerk Konnektivität fehlgeschlagen!</translation>
     </message>
     <message>

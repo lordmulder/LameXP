@@ -1240,7 +1240,7 @@ Votre dossier TEMP est situé ici:</translation>
         <translation>Test de votre connexion internet, patientez...</translation>
     </message>
     <message>
-        <source>Network connectivity test has faild!</source>
+        <source>Network connectivity test has failed!</source>
         <translation>Le test de connectivité réseau a échoué!</translation>
     </message>
     <message>
