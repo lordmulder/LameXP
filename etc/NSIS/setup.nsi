@@ -211,36 +211,10 @@ UninstPage Custom un.LockedListShow
 ;--------------------------------
 
 ;English
-LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_ENGLISH} "Closing running instance, please wait..."
-LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_ENGLISH} "Installing program files, please wait..."
-LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_ENGLISH} "Creating the uninstaller, please wait..."
-LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_ENGLISH} "Creating shortcuts, please wait..."
-LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_ENGLISH} "Updating the registry, please wait..."
-LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_ENGLISH} "Uninstalling program, please wait..."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_ENGLISH} "Running Instances"
-LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_ENGLISH} "Checking for running instances of LameXP."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_ENGLISH} "Please close the following programs before continuing with setup..."
-LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_ENGLISH} "No programs that have to be closed are running."
-LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_ENGLISH} "Searching, please wait..."
-LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_ENGLISH} "Application"
-LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_ENGLISH} "Process"
-LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_ENGLISH} "Do you want your personal settings to be deleted too?"
+!include "..\Translation\Blank.nsh"
 
 ;German
-LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_GERMAN} "Schließe laufende Instanz, bitte warten..."
-LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_GERMAN} "Installiere Programm-Dateien, bitte warten..."
-LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_GERMAN} "Erzeuge Uninstaller, bitte warten..."
-LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_GERMAN} "Erzeuge Verknüpfungen, bitte warten..."
-LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_GERMAN} "Registrierung wird aktualisiert, bitte warten..."
-LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_GERMAN} "Programm wird deinstalliert, bitte warten..."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_GERMAN} "Laufende Instanzen"
-LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_GERMAN} "Suche nach laufenden Instanzen von LameXP."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_GERMAN} "Bitte schließen Sie die folgenden Programme um fortfahren zu können..."
-LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_GERMAN} "Es müssen keine Programme geschlossen werden."
-LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_GERMAN} "Suche, bitte warten..."
-LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_GERMAN} "Anwendung"
-LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_GERMAN} "Prozess"
-LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_GERMAN} "Sollen Ihre persönlichen Einstellungen ebenfalls gelöscht werden?"
+!include "..\Translation\LameXP_DE.nsh"
 
 
 ;--------------------------------
