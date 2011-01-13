@@ -7,5 +7,7 @@
     <file>localization/LameXP_FR.qm.txt</file>
     <file>localization/LameXP_IT.qm</file>
     <file>localization/LameXP_IT.qm.txt</file>
+    <file>localization/LameXP_ES.qm</file>
+    <file>localization/LameXP_ES.qm.txt</file>
   </qresource>
 </RCC>

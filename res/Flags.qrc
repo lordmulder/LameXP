@@ -3,6 +3,7 @@
 	<qresource>
     <file>flags/de.png</file>
     <file>flags/en.png</file>
+    <file>flags/es.png</file>
     <file>flags/fr.png</file>
     <file>flags/it.png</file>
    </qresource>
