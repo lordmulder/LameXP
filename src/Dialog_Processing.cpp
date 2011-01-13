@@ -311,7 +311,7 @@ void ProcessingDialog::doneEncoding(void)
 
 	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir())
 	{
-		SET_PROGRESS_TEXT(tr("Creatig the playlist file, please wait..."));
+		SET_PROGRESS_TEXT(tr("Creating the playlist file, please wait..."));
 		QApplication::processEvents();
 		writePlayList();
 	}

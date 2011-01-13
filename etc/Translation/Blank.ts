@@ -76,7 +76,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Released under the terms of the GNU Leser General Public License.</source>
+        <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1122,7 +1122,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Creatig the playlist file, please wait...</source>
+        <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

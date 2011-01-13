@@ -78,7 +78,7 @@
         <translation></translation>
     </message>
     <message>
-        <source>Released under the terms of the GNU Leser General Public License.</source>
+        <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Distribué sous les termes de la licence publique générale GNU Leser.</translation>
     </message>
     <message>
@@ -1127,7 +1127,7 @@ Votre dossier TEMP est situé ici:</translation>
         <translation>Encodage : %1 fichier(s) sur %2 terminé(s), patientez...</translation>
     </message>
     <message>
-        <source>Creatig the playlist file, please wait...</source>
+        <source>Creating the playlist file, please wait...</source>
         <translation>Création de la liste de lecture, patientez...</translation>
     </message>
     <message>

@@ -76,7 +76,7 @@
         <translation>LAME - Encoder mp3 OpenSource</translation>
     </message>
     <message>
-        <source>Released under the terms of the GNU Leser General Public License.</source>
+        <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Rilasciato sotto i termini della GNU Leser General Public License.</translation>
     </message>
     <message>
@@ -1163,7 +1163,7 @@
         <translation>Il file di playlist non può essere creato:</translation>
     </message>
     <message>
-        <source>Creatig the playlist file, please wait...</source>
+        <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

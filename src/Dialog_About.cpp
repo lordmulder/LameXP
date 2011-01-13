@@ -61,6 +61,7 @@ static const struct lamexp_contrib_t g_lamexp_contributors[] =
 	{"de", "Deutsch",   "LoRd_MuldeR",         "MuldeR2@GMX.de"       },
 	{"fr", "Française", "Dodich Informatique", "Dodich@live.fr"       },
 	{"it", "Italiano",  "Roberto",             "Gulliver_69@libero.it"},
+	{"es", "Español",   "Rub3n CT",            "Rub3nct@gmail.com"    },
 	{NULL, NULL, NULL, NULL}
 };
 
@@ -248,7 +249,7 @@ void AboutDialog::showMoreAbout(void)
 	(
 		tr("LAME - OpenSource mp3 Encoder"),
 		"lame.exe", "v?.?? a??",
-		tr("Released under the terms of the GNU Leser General Public License."),
+		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://lame.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
@@ -277,28 +278,28 @@ void AboutDialog::showMoreAbout(void)
 	(
 		tr("AC3Filter Tools - AC3/DTS Decoder"),
 		"valdec.exe", "v?.??",
-		tr("Released under the terms of the GNU Leser General Public License."),
+		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.ac3filter.net/projects/tools"
 	);
 	moreAboutText += makeToolText
 	(
 		tr("MediaInfo - Media File Analysis Tool"),
 		"mediainfo_i386.exe", "v?.?.??",
-		tr("Released under the terms of the GNU Leser General Public License."),
+		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://mediainfo.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
 		tr("SoX - Sound eXchange"),
 		"sox.exe", "v??.?.?",
-		tr("Released under the terms of the GNU Leser General Public License."),
+		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://sox.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
 		tr("GnuPG - The GNU Privacy Guard"),
 		"gpgv.exe", "v?.?.??",
-		tr("Released under the terms of the GNU Leser General Public License."),
+		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.gnupg.org/"
 	);
 	moreAboutText += makeToolText

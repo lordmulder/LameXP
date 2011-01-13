@@ -76,7 +76,7 @@
         <translation></translation>
     </message>
     <message>
-        <source>Released under the terms of the GNU Leser General Public License.</source>
+        <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Veröffentlicht unter den Bestimmungen der  GNU Leser General Public License.</translation>
     </message>
     <message>
@@ -1123,7 +1123,7 @@
         <translation>Kodiere: %1 von %2 Dateien abgeschlossen, bitte warten...</translation>
     </message>
     <message>
-        <source>Creatig the playlist file, please wait...</source>
+        <source>Creating the playlist file, please wait...</source>
         <translation>Erzeuge Wiedergabeliste, bitte warten...</translation>
     </message>
     <message>
