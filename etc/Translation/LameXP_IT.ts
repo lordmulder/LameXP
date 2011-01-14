@@ -1012,6 +1012,22 @@
         <source>Unspecified</source>
         <translation>Non specificato</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancella</translation>
+    </message>
+    <message>
+        <source>Not Specified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Sconosciuto</translation>
+    </message>
 </context>
 <context>
     <name>ProcessThread</name>
@@ -1168,6 +1184,10 @@
     </message>
     <message>
         <source>Alle files completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

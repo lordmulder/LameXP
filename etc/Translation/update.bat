@@ -23,6 +23,8 @@ for %%f in (..\..\src\*.h) do (
 )
 REM ---------------------------
 for %%f in (*.ts) do (
+	del %%f.bak 2> NUL
+	copy %%f %%f.bak
 	lupdate.exe @update.lst -no-obsolete -ts %%f
 )
 REM ---------------------------

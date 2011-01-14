@@ -321,7 +321,7 @@ void ProcessingDialog::doneEncoding(void)
 		CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFF3BA"));
 		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
-		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededJobs.count())) : "Process was aborted prematurely by the user!");
+		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededJobs.count())) : tr("Process was aborted prematurely by the user!"));
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 		QApplication::processEvents();

@@ -1012,6 +1012,22 @@
         <source>Unspecified</source>
         <translation>Keine Angabe</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Not Specified</source>
+        <translation>Keine Angabe</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Unbekannt</translation>
+    </message>
 </context>
 <context>
     <name>ProcessThread</name>
@@ -1169,6 +1185,10 @@
     <message>
         <source>The playlist file could not be created:</source>
         <translation>Die Wiedergabeliste konnte nicht erstellt werden:</translation>
+    </message>
+    <message>
+        <source>Process was aborted prematurely by the user!</source>
+        <translation>Der Vorgang wurde vom Benutzer abgebrochen!</translation>
     </message>
 </context>
 <context>

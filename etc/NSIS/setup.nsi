@@ -434,6 +434,13 @@ SectionEnd
 Function CheckForUpdate
 	!insertmacro GetCommandlineParameter "Update" "error" $R0
 	StrCmp $R0 "error" 0 EnableUpdateMode
+
+	StrCmp "$INSTDIR" "" 0 +2
+	Return
+
+	IfFileExists "$INSTDIR\*.*" +2
+	Return
+
 	IfFileExists "$INSTDIR\LameXP.exe" EnableUpdateMode
 	Return
 

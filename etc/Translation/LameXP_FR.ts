@@ -1016,6 +1016,22 @@ Votre dossier TEMP est situé ici:</translation>
         <source>Sorry, this property of the source file cannot be edited!</source>
         <translation>Désolé, cette propriété du fichier source ne peut pas être modifiée!</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>Not Specified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Inconnu</translation>
+    </message>
 </context>
 <context>
     <name>ProcessThread</name>
@@ -1173,6 +1189,10 @@ Votre dossier TEMP est situé ici:</translation>
     <message>
         <source>The playlist file could not be created:</source>
         <translation>La liste de lecture n&apos;a pas pu être créée:</translation>
+    </message>
+    <message>
+        <source>Process was aborted prematurely by the user!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

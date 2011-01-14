@@ -872,6 +872,14 @@
 <context>
     <name>MetaInfoModel</name>
     <message>
+        <source>Not Specified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Full Path</source>
         <translation type="unfinished"></translation>
     </message>
@@ -933,6 +941,14 @@
     </message>
     <message>
         <source>Unspecified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1127,6 +1143,10 @@
     </message>
     <message>
         <source>Process was aborted by the user after %1 file(s)!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

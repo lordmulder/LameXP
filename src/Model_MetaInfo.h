@@ -46,4 +46,6 @@ public:
 private:
 	AudioFileModel* m_audioFile;
 	unsigned int m_offset;
+	QString m_textNotSpecified;
+	QString m_textUnknown;
 };

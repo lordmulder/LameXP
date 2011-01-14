@@ -28,8 +28,8 @@
 
 #define MODEL_ROW_COUNT 12
 
-#define CHECK1(STR) (STR.isEmpty() ? (m_offset ? "(Not Specified)" : "(Unknown)") : STR)
-#define CHECK2(VAL) ((VAL > 0) ? QString::number(VAL) : (m_offset ? "(Not Specified)" : "(Unknown)"))
+#define CHECK1(STR) (STR.isEmpty() ? (m_offset ? m_textNotSpecified : m_textUnknown) : STR)
+#define CHECK2(VAL) ((VAL > 0) ? QString::number(VAL) : (m_offset ? m_textNotSpecified : m_textUnknown))
 #define CHECK3(STR) (STR.isEmpty() ? Qt::darkGray : QVariant())
 #define CHECK4(VAL) ((VAL == 0) ? Qt::darkGray : QVariant())
 
@@ -45,6 +45,9 @@ MetaInfoModel::MetaInfoModel(AudioFileModel *file, unsigned int offset)
 	{
 		throw "Offset is out of range!";
 	}
+
+	m_textUnknown = QString("(%1)").arg(tr("Unknown"));
+	m_textNotSpecified = QString("(%1)").arg(tr("Not Specified"));
 
 	m_audioFile = file;
 	m_offset = offset;
@@ -247,13 +250,21 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	int val = -1;
 	QStringList generes(QString("(%1)").arg(tr("Unspecified")));
 	QString temp;
-	
+
+	QInputDialog input(parent);
+	input.setOkButtonText(tr("OK"));
+	input.setCancelButtonText(tr("Cancel"));
+	input.setTextEchoMode(QLineEdit::Normal);
+
 	switch(index.row() + m_offset)
 	{
 	case 5:
-		temp = QInputDialog::getText(parent, tr("Edit Title"), EXPAND(tr("Please enter the title for this file:")), QLineEdit::Normal, m_audioFile->fileName(), &ok).simplified();
-		if(ok)
+		input.setWindowTitle(tr("Edit Title"));
+		input.setLabelText(EXPAND(tr("Please enter the title for this file:")));
+		input.setTextValue(m_audioFile->fileName());
+		if(input.exec() != 0)
 		{
+			temp = input.textValue().simplified();
 			if(temp.isEmpty())
 			{
 				QMessageBox::warning(parent, tr("Edit Title"), tr("The title must not be empty. Generating title from file name!"));
@@ -267,37 +278,52 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		}
 		break;
 	case 6:
-		temp = QInputDialog::getText(parent, tr("Edit Artist"), EXPAND(tr("Please enter the artist for this file:")), QLineEdit::Normal, m_audioFile->fileArtist(), &ok).simplified();
-		if(ok)
+		input.setWindowTitle(tr("Edit Artist"));
+		input.setLabelText(EXPAND(tr("Please enter the artist for this file:")));
+		input.setTextValue(m_audioFile->fileArtist());
+		if(input.exec() != 0)
 		{
+			temp = input.textValue().simplified();
 			beginResetModel();
 			m_audioFile->setFileArtist(temp.isEmpty() ? QString() : temp);
 			endResetModel();
 		}
 		break;
 	case 7:
-		temp = QInputDialog::getText(parent, tr("Edit Album"), EXPAND(tr("Please enter the album for this file:")), QLineEdit::Normal, m_audioFile->fileAlbum(), &ok).simplified();
-		if(ok)
+		input.setWindowTitle(tr("Edit Album"));
+		input.setLabelText(EXPAND(tr("Please enter the album for this file:")));
+		input.setTextValue(m_audioFile->fileAlbum());
+		if(input.exec() != 0)
 		{
+			temp = input.textValue().simplified();
 			beginResetModel();
 			m_audioFile->setFileAlbum(temp.isEmpty() ? QString() : temp);
 			endResetModel();
 		}
 		break;
 	case 8:
+		input.setWindowTitle(tr("Edit Genre"));
+		input.setLabelText(EXPAND(tr("Please enter the genre for this file:")));
 		for(int i = 0; g_lamexp_generes[i]; i++) generes << g_lamexp_generes[i];
-		temp = QInputDialog::getItem(parent, tr("Edit Genre"), EXPAND(tr("Please enter the genre for this file:")), generes, (m_audioFile->fileGenre().isEmpty() ? 1 : generes.indexOf(m_audioFile->fileGenre())), false, &ok);
-		if(ok)
+		input.setComboBoxItems(generes);
+		input.setTextValue(m_audioFile->fileGenre());
+		if(input.exec() != 0)
 		{
+			temp = input.textValue().simplified();
 			beginResetModel();
 			m_audioFile->setFileGenre((temp.isEmpty() || !temp.compare(generes.at(0), Qt::CaseInsensitive)) ? QString() : temp);
 			endResetModel();
 		}
 		break;
 	case 9:
-		val = QInputDialog::getInt(parent, tr("Edit Year"), EXPAND(tr("Please enter the year for this file:")), (m_audioFile->fileYear() ? m_audioFile->fileYear() : 1900), 0, 2100, 1, &ok);
-		if(ok)
+		input.setWindowTitle(tr("Edit Year"));
+		input.setLabelText(EXPAND(tr("Please enter the year for this file:")));
+		input.setIntRange(0, 2100);
+		input.setIntValue((m_audioFile->fileYear() ? m_audioFile->fileYear() : 1900));
+		input.setIntStep(1);
+		if(input.exec() != 0)
 		{
+			val = input.intValue();
 			beginResetModel();
 			m_audioFile->setFileYear(val);
 			endResetModel();
@@ -306,9 +332,14 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	case 10:
 		if(!m_offset)
 		{
-			val = QInputDialog::getInt(parent, tr("Edit Position"), EXPAND(tr("Please enter the position (track no.) for this file:")), (m_audioFile->filePosition() ? m_audioFile->filePosition() : 1), 0, 99, 1, &ok);
-			if(ok)
+			input.setWindowTitle(tr("Edit Position"));
+			input.setLabelText(EXPAND(tr("Please enter the position (track no.) for this file:")));
+			input.setIntRange(0, 99);
+			input.setIntValue((m_audioFile->filePosition() ? m_audioFile->filePosition() : 1));
+			input.setIntStep(1);
+			if(input.exec() != 0)
 			{
+				val = input.intValue();
 				beginResetModel();
 				m_audioFile->setFilePosition(val);
 				endResetModel();
@@ -318,9 +349,13 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		{
 			QStringList options;
 			options << tr("Unspecified (copy from source file)") << tr("Generate from list position");
-			temp = QInputDialog::getItem(parent, tr("Edit Position"), EXPAND(tr("Please enter the position (track no.) for this file:")), options, ((m_audioFile->filePosition() == UINT_MAX) ? 1 : 0), false, &ok);
-			if(ok)
+			input.setWindowTitle(tr("Edit Position"));
+			input.setLabelText(EXPAND(tr("Please enter the position (track no.) for this file:")));
+			input.setComboBoxItems(options);
+			input.setTextValue(options.value((m_audioFile->filePosition() == UINT_MAX) ? 1 : 0));
+			if(input.exec() != 0)
 			{
+				temp = input.textValue().simplified();
 				beginResetModel();
 				m_audioFile->setFilePosition((options.indexOf(temp) == 1) ? UINT_MAX : 0);
 				endResetModel();
@@ -328,9 +363,12 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		}
 		break;
 	case 11:
-		temp = QInputDialog::getText(parent, tr("Edit Comment"), EXPAND(tr("Please enter the comment for this file:")), QLineEdit::Normal, (m_audioFile->fileComment().isEmpty() ? tr("Encoded with LameXP") : m_audioFile->fileComment()), &ok).simplified();
-		if(ok)
+		input.setWindowTitle(tr("Edit Comment"));
+		input.setLabelText(EXPAND(tr("Please enter the comment for this file:")));
+		input.setTextValue((m_audioFile->fileComment().isEmpty() ? tr("Encoded with LameXP") : m_audioFile->fileComment()));
+		if(input.exec() != 0)
 		{
+			temp = input.textValue().simplified();
 			beginResetModel();
 			m_audioFile->setFileComment(temp.isEmpty() ? QString() : temp);
 			endResetModel();
@@ -345,6 +383,9 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 void MetaInfoModel::clearData(void)
 {
 	beginResetModel();
+
+	m_textUnknown = QString("(%1)").arg(tr("Unknown"));
+	m_textNotSpecified = QString("(%1)").arg(tr("Not Specified"));
 
 	m_audioFile->setFilePath(QString());
 	m_audioFile->setFileName(QString());
