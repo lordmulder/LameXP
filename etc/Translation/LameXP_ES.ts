@@ -138,22 +138,22 @@
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/d</translation>
     </message>
 </context>
 <context>
     <name>AudioFileModel</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil</translation>
     </message>
     <message>
         <source>Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Canales</translation>
     </message>
     <message>
         <source>Samplerate</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de muestreo</translation>
     </message>
     <message>
         <source>Bitdepth</source>
@@ -161,11 +161,11 @@
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión</translation>
     </message>
 </context>
 <context>
@@ -876,7 +876,7 @@
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/d</translation>
     </message>
 </context>
 <context>
