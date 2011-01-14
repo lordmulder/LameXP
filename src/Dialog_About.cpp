@@ -61,7 +61,7 @@ static const struct lamexp_contrib_t g_lamexp_contributors[] =
 	{"de", "Deutsch",   "LoRd_MuldeR",         "MuldeR2@GMX.de"       },
 	{"fr", "Française", "Dodich Informatique", "Dodich@live.fr"       },
 	{"it", "Italiano",  "Roberto",             "Gulliver_69@libero.it"},
-	{"es", "Español",   "Rub3n CT",            "Rub3nct@gmail.com"    },
+	{"es", "Español",   "Rub3nCT",             "Rub3nCT@gmail.com"    },
 	{NULL, NULL, NULL, NULL}
 };
 
