@@ -872,11 +872,11 @@
 <context>
     <name>MetaInfoModel</name>
     <message>
-        <source>Not Specified</source>
+        <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown</source>
+        <source>Not Specified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -1014,19 +1014,19 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Not Specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin especificar</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Desconocida</translation>
+        <translation>Desconocido</translation>
     </message>
 </context>
 <context>
@@ -1188,7 +1188,7 @@
     </message>
     <message>
         <source>Process was aborted prematurely by the user!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El proceso fue cancelado prematuramente por el usuario!</translation>
     </message>
 </context>
 <context>
