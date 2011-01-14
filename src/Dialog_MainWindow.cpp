@@ -450,6 +450,7 @@ void MainWindow::changeEvent(QEvent *e)
 		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
 
 		m_metaInfoModel->clearData();
+		updateEncoder(m_settings->compressionEncoder());
 	}
 }
 
@@ -648,7 +649,7 @@ void MainWindow::windowShown(void)
 			{
 				QString messageText;
 				messageText += QString("<nobr>%1<br>").arg(tr("LameXP detected that your version of the Nero AAC encoder is outdated!"));
-				messageText += QString("%1<br><br>").arg(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac()), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe"))));
+				messageText += QString("%1<br><br>").arg(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe"), tr("n/a"))));
 				messageText += QString("%1<br>").arg(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:"));
 				messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
 				QMessageBox::information(this, tr("AAC Encoder Outdated"), messageText);

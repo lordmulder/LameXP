@@ -841,11 +841,11 @@ unsigned int lamexp_tool_version(const QString &toolName)
 /*
  * Version number to human-readable string
  */
-const QString lamexp_version2string(const QString &pattern, unsigned int version)
+const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText)
 {
 	if(version == UINT_MAX)
 	{
-		return "n/a";
+		return defaultText;
 	}
 	
 	QString result = pattern;

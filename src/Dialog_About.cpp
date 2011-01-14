@@ -357,7 +357,7 @@ QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBi
 
 	if(!toolBin.isEmpty())
 	{
-		verStr = lamexp_version2string(toolVerFmt, lamexp_tool_version(toolBin));
+		verStr = lamexp_version2string(toolVerFmt, lamexp_tool_version(toolBin), tr("n/a"));
 	}
 
 	toolText += QString("<li><b>%1 (%2)</b><br>").arg(toolName, verStr);

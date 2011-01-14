@@ -135,6 +135,37 @@
         <source>About Third-party Software</source>
         <translation>Über Drittsoftware</translation>
     </message>
+    <message>
+        <source>n/a</source>
+        <translation>n/v</translation>
+    </message>
+</context>
+<context>
+    <name>AudioFileModel</name>
+    <message>
+        <source>Profile</source>
+        <translation>Profil</translation>
+    </message>
+    <message>
+        <source>Channels</source>
+        <translation>Kanäle</translation>
+    </message>
+    <message>
+        <source>Samplerate</source>
+        <translation>Abtastrate</translation>
+    </message>
+    <message>
+        <source>Bitdepth</source>
+        <translation>Bittiefe</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
 </context>
 <context>
     <name>DecoderRegistry</name>
@@ -842,6 +873,10 @@
     <message>
         <source>Translation Files</source>
         <translation>Übersetzungsdateien</translation>
+    </message>
+    <message>
+        <source>n/a</source>
+        <translation>n/v</translation>
     </message>
 </context>
 <context>

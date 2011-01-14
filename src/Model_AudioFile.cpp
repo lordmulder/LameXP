@@ -22,6 +22,7 @@
 #include "Model_AudioFile.h"
 
 #include <QTime>
+#include <QObject>
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
@@ -37,6 +38,52 @@ AudioFileModel::AudioFileModel(const QString &path, const QString &name)
 	m_formatAudioSamplerate = 0;
 	m_formatAudioChannels = 0;
 	m_formatAudioBitdepth = 0;
+}
+
+AudioFileModel::AudioFileModel(const AudioFileModel &model)
+{
+	setFilePath(model.m_filePath);
+	setFileName(model.m_fileName);
+	setFileArtist(model.m_fileArtist);
+	setFileAlbum(model.m_fileAlbum);
+	setFileGenre(model.m_fileGenre);
+	setFileComment(model.m_fileComment);
+	setFileYear(model.m_fileYear);
+	setFilePosition(model.m_filePosition);
+	setFileDuration(model.m_fileDuration);
+
+	setFormatContainerType(model.m_formatContainerType);
+	setFormatContainerProfile(model.m_formatContainerProfile);
+	setFormatAudioType(model.m_formatAudioType);
+	setFormatAudioProfile(model.m_formatAudioProfile);
+	setFormatAudioVersion(model.m_formatAudioVersion);
+	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
+	setFormatAudioChannels(model.m_formatAudioChannels);
+	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
+}
+
+AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
+{
+	setFilePath(model.m_filePath);
+	setFileName(model.m_fileName);
+	setFileArtist(model.m_fileArtist);
+	setFileAlbum(model.m_fileAlbum);
+	setFileGenre(model.m_fileGenre);
+	setFileComment(model.m_fileComment);
+	setFileYear(model.m_fileYear);
+	setFilePosition(model.m_filePosition);
+	setFileDuration(model.m_fileDuration);
+
+	setFormatContainerType(model.m_formatContainerType);
+	setFormatContainerProfile(model.m_formatContainerProfile);
+	setFormatAudioType(model.m_formatAudioType);
+	setFormatAudioProfile(model.m_formatAudioProfile);
+	setFormatAudioVersion(model.m_formatAudioVersion);
+	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
+	setFormatAudioChannels(model.m_formatAudioChannels);
+	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
+
+	return (*this);
 }
 
 AudioFileModel::~AudioFileModel(void)
@@ -154,7 +201,7 @@ const QString AudioFileModel::formatContainerInfo(void) const
 	if(!m_formatContainerType.isEmpty())
 	{
 		QString info = m_formatContainerType;
-		if(!m_formatContainerProfile.isEmpty()) info.append(" (Profile: ").append(m_formatContainerProfile).append(")");
+		if(!m_formatContainerProfile.isEmpty()) info.append(QString(" (%1: %2)").arg(tr("Profile"), m_formatContainerProfile));
 		return info;
 	}
 	else
@@ -171,17 +218,17 @@ const QString AudioFileModel::formatAudioBaseInfo(void) const
 		if(m_formatAudioChannels)
 		{
 			if(!info.isEmpty()) info.append(", ");
-			info.append("Channels: ").append(QString::number(m_formatAudioChannels));
+			info.append(QString("%1: %2").arg(tr("Channels"), QString::number(m_formatAudioChannels)));
 		}
 		if(m_formatAudioSamplerate)
 		{
 			if(!info.isEmpty()) info.append(", ");
-			info.append("Samplerate: ").append(QString::number(m_formatAudioSamplerate)).append(" Hz");
+			info.append(QString("%1: %2 Hz").arg(tr("Samplerate"), QString::number(m_formatAudioSamplerate)));
 		}
 		if(m_formatAudioBitdepth)
 		{
 			if(!info.isEmpty()) info.append(", ");
-			info.append("Bitdepth: ").append(QString::number(m_formatAudioBitdepth)).append(" Bit");
+			info.append(QString("%1: %2 Bit").arg(tr("Bitdepth"), QString::number(m_formatAudioBitdepth)));
 		}
 		return info;
 	}
@@ -198,16 +245,16 @@ const QString AudioFileModel::formatAudioCompressInfo(void) const
 		QString info;
 		if(!m_formatAudioProfile.isEmpty() || !m_formatAudioVersion.isEmpty())
 		{
-			info.append("Type: ");
+			info.append(QString("%1: ").arg(tr("Type")));
 		}
 		info.append(m_formatAudioType);
 		if(!m_formatAudioProfile.isEmpty())
 		{
-			info.append(", Profile: ").append(m_formatAudioProfile);
+			info.append(QString(", %1: %2").arg(tr("Profile"), m_formatAudioProfile));
 		}
 		if(!m_formatAudioVersion.isEmpty())
 		{
-			info.append(", Version: ").append(m_formatAudioVersion);
+			info.append(QString(", %1: %2").arg(tr("Version"), m_formatAudioVersion));
 		}
 		return info;
 	}

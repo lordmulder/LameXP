@@ -21,13 +21,17 @@
 
 #pragma once
 
+#include <QObject>
 #include <QString>
 
-class AudioFileModel
+class AudioFileModel : public QObject
 {
+	Q_OBJECT
 
 public:
 	AudioFileModel(const QString &path = QString(), const QString &name = QString());
+	AudioFileModel(const AudioFileModel &model);
+	AudioFileModel &operator=(const AudioFileModel &model);
 	~AudioFileModel(void);
 
 	//-----------------------
