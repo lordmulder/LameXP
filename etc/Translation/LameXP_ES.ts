@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation>¡Si estás dispuesto a traducir LameXP, contáctanos sin dudarlo!</translation>
+        <translation>¡Si está dispuesto a traducir LameXP, contáctenos sin dudarlo!</translation>
     </message>
     <message>
         <source>About Contributors</source>
@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>Nero AAC reference MPEG-4 Encoder</source>
-        <translation>Codificador Nero ACC MPEG-4</translation>
+        <translation>Codificador Nero AAC MPEG-4</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>Por Mark James, distribuido bajo la Licencia Creative Commons.</translation>
+        <translation>Por Mark James, distribuido bajo Licencia Creative Commons.</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>Bitdepth</source>
-        <translation type="unfinished"></translation>
+        <translation>Profundidad de bits</translation>
     </message>
     <message>
         <source>Type</source>
@@ -217,7 +217,7 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation>Rechazar</translation>
+        <translation>Cerrar</translation>
     </message>
     <message>
         <source>Save to File...</source>
@@ -340,7 +340,7 @@
     </message>
     <message>
         <source>Nero AAC</source>
-        <translation>Nero ACC</translation>
+        <translation>Nero AAC</translation>
     </message>
     <message>
         <source>Wave (PCM)</source>
@@ -484,11 +484,11 @@
     </message>
     <message>
         <source>Disable Nero AAC Notifications</source>
-        <translation>Deshabilitar notificaciones de Nero ACC</translation>
+        <translation>Deshabilitar notificaciones de Nero AAC</translation>
     </message>
     <message>
         <source>Disable WMA Decoder Notifications</source>
-        <translation>Deshabilitar notificaciones del Decodificador WMA</translation>
+        <translation>Deshabilitar notificaciones del decodificador WMA</translation>
     </message>
     <message>
         <source>Show DropBox</source>
@@ -604,11 +604,11 @@
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation>La última versión disponibles es %1 (o posterior), pero todavía está instalada la versión %2.</translation>
+        <translation>La última versión disponible es %1 (o posterior), pero todavía está instalada la versión %2.</translation>
     </message>
     <message>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation>Puede descargar la última versión del codificador Nero AAC  desde la web de Nero:</translation>
+        <translation>Puede descargar la última versión del codificador Nero AAC desde la web de Nero:</translation>
     </message>
     <message>
         <source>AAC Encoder Outdated</source>
@@ -624,11 +624,11 @@
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
-        <translation>Su directorio de LameXP está en:</translation>
+        <translation>La carpeta de LameXP está en:</translation>
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation>Puede descargar el codificador Nero AAA gratuitamente desde la web de Nero:</translation>
+        <translation>Puede descargar el codificador Nero AAC gratuitamente desde la web de Nero:</translation>
     </message>
     <message>
         <source>AAC Support Disabled</source>
@@ -640,7 +640,7 @@
     </message>
     <message>
         <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation>¡No podrá procesar archivos WMA hasta que el decodificador se haya instalado!</translation>
+        <translation>¡No podrá procesar archivos WMA hasta que no instale el decodificador!</translation>
     </message>
     <message>
         <source>WMA Decoder Missing</source>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <source>Enter the name of the new folder:</source>
-        <translation>Intruduzca el nombre de la nueva carpeta:</translation>
+        <translation>Intrudozca el nombre de la nueva carpeta:</translation>
     </message>
     <message>
         <source>Failed to create folder</source>
@@ -1045,7 +1045,7 @@
     </message>
     <message>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation>Disculpe, ¡ésta propiedad del archivo no se puede editar!</translation>
+        <translation>Disculpe, ¡esta propiedad del archivo no se puede editar!</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1124,7 +1124,7 @@
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation>La carpeta de salida no existe y NO puede ser creado:</translation>
+        <translation>La carpeta de salida no existe y NO puede ser creada:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
@@ -1268,7 +1268,7 @@
     </message>
     <message>
         <source>Show Log</source>
-        <translation>Mostar log</translation>
+        <translation>Mostar archivo de registro</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>

@@ -182,9 +182,9 @@ UninstPage Custom un.LockedListShow
  
 !insertmacro MUI_LANGUAGE "English" ;first language is the default language
 !insertmacro MUI_LANGUAGE "German"
+!insertmacro MUI_LANGUAGE "Spanish"
 
 ; !insertmacro MUI_LANGUAGE "French"
-; !insertmacro MUI_LANGUAGE "Spanish"
 ; !insertmacro MUI_LANGUAGE "SpanishInternational"
 ; !insertmacro MUI_LANGUAGE "SimpChinese"
 ; !insertmacro MUI_LANGUAGE "TradChinese"
@@ -215,6 +215,9 @@ UninstPage Custom un.LockedListShow
 
 ;German
 !include "..\Translation\LameXP_DE.nsh"
+
+;Spanish
+!include "..\Translation\LameXP_ES.nsh"
 
 
 ;--------------------------------
