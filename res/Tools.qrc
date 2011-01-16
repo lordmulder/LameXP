@@ -8,7 +8,7 @@
     <file>tools/gpgv.exe</file>
     <file>tools/gpgv.gpg</file>
     <file>tools/lame.exe</file>
-    <file>tools/MAC.exe</file>
+    <file>tools/mac.exe</file>
     <file>tools/mediainfo_i386.exe</file>
     <file>tools/mediainfo_x64.exe</file>
     <file>tools/mpcdec.exe</file>

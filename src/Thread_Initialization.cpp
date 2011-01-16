@@ -54,7 +54,7 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"cf379081035ae6bfb6f7bc22f13bfb7ac6302ac5", "gpgv.exe", 1410},
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg", UINT_MAX},
 	{"143fc001a2f6c56fe1b9e6f8a2eb2b53b9e1e504", "lame.exe", 39910},
-	{"775b260b3f64101beaeb317b74746f9bccdab842", "MAC.exe", UINT_MAX},
+	{"a4e929cfaa42fa2e61a3d0c6434c77a06d45aef3", "mac.exe", 406},
 	{"61d584ffaf428e9afb0ed9bd32706a954af492b0", "mediainfo_i386.exe", 739},
 	{"81fb728cbc6057906fa1b637738e6aefe5dccf54", "mediainfo_x64.exe", 739},
 	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe", UINT_MAX},
@@ -125,8 +125,8 @@ void InitializationThread::run()
 	{
 		try
 		{
-			qDebug("Extracting file: %s", g_lamexp_tools[i].pcName);
-			QString toolName = toolsList.at(i).fileName();
+			QString toolName = toolsList.at(i).fileName().toLower();
+			qDebug("Extracting file: %s", toolName.toLatin1().constData());
 			QByteArray toolHash = checksum.take(toolName).toLatin1();
 			unsigned int toolVersion = version.take(toolName);
 			if(toolHash.size() != 40)
