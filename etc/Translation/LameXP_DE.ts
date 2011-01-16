@@ -139,6 +139,14 @@
         <source>n/a</source>
         <translation>n/v</translation>
     </message>
+    <message>
+        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
+        <translation>Frei verfügbarer Quellcode, einfaches SDK und nicht-restriktive Lizenz.</translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
