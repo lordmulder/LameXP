@@ -15,6 +15,7 @@
 ..\..\src\Decoder_MP3.cpp 
 ..\..\src\Decoder_Vorbis.cpp 
 ..\..\src\Decoder_Wave.cpp 
+..\..\src\Decoder_WavPack.cpp 
 ..\..\src\Decoder_WMA.cpp 
 ..\..\src\Dialog_About.cpp 
 ..\..\src\Dialog_DropBox.cpp 
@@ -61,6 +62,7 @@
 ..\..\src\Decoder_MP3.h 
 ..\..\src\Decoder_Vorbis.h 
 ..\..\src\Decoder_Wave.h 
+..\..\src\Decoder_WavPack.h 
 ..\..\src\Decoder_WMA.h 
 ..\..\src\Dialog_About.h 
 ..\..\src\Dialog_DropBox.h 

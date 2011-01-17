@@ -30,6 +30,7 @@
 #include "Decoder_AC3.h"
 #include "Decoder_WMA.h"
 #include "Decoder_Wave.h"
+#include "Decoder_WavPack.h"
 
 #include <QString>
 #include <QStringList>
@@ -45,10 +46,12 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	PROBE_DECODER(AACDecoder);
 	PROBE_DECODER(AC3Decoder);
 	PROBE_DECODER(FLACDecoder);
+	PROBE_DECODER(WavPackDecoder);
 	PROBE_DECODER(MACDecoder);
 	PROBE_DECODER(WMADecoder);
 	PROBE_DECODER(ADPCMDecoder);
 	PROBE_DECODER(WaveDecoder);
+	
 	return NULL;
 }
 
@@ -62,6 +65,7 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	types << GET_FILETYPES(AACDecoder);
 	types << GET_FILETYPES(AC3Decoder);
 	types << GET_FILETYPES(FLACDecoder);
+	types << GET_FILETYPES(WavPackDecoder);
 	types << GET_FILETYPES(MACDecoder);
 	types << GET_FILETYPES(WMADecoder);
 	types << GET_FILETYPES(ADPCMDecoder);

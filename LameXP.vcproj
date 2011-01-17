@@ -327,6 +327,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Decoder_WavPack.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Decoder_WMA.cpp"
 				>
 			</File>
@@ -544,6 +548,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Decoder_Wave.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Decoder_WavPack.h"
 				>
 			</File>
 			<File

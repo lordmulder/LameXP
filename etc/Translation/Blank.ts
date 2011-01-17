@@ -112,6 +112,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>WavPack - Hybrid Lossless Compression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completely open audio compression format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
         <translation type="unfinished"></translation>
     </message>

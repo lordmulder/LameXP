@@ -73,7 +73,7 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"8159f4e824b3e343ece95ba6dbb5e16da9c4866e", "volumax.exe", UINT_MAX},
 	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", UINT_MAX},
 	{"a17011961aa8696bc935e097b3242d33c38a9842", "wupdate.exe", UINT_MAX},
-	{"4d018ac7f6a42abd53faacfae5055c2a3c176430", "wvunpack.exe", UINT_MAX},
+	{"b7d14b3540d24df13119a55d97623a61412de6e3", "wvunpack.exe", 4601},
 	{NULL, NULL, NULL}
 };
 
