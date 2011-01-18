@@ -319,6 +319,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Decoder_TTA.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Decoder_Vorbis.cpp"
 				>
 			</File>
@@ -540,6 +544,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Decoder_MP3.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Decoder_TTA.h"
 				>
 			</File>
 			<File

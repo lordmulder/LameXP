@@ -297,6 +297,13 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("The True Audio - Lossless Audio Codec"),
+		"ttaenc.exe", "v?.?.?",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"http://tta.sourceforge.net/"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("MediaInfo - Media File Analysis Tool"),
 		"mediainfo_i386.exe", "v?.?.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),

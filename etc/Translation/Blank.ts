@@ -128,6 +128,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>The True Audio - Lossless Audio Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>MediaInfo - Media File Analysis Tool</source>
         <translation type="unfinished"></translation>
     </message>

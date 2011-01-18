@@ -156,6 +156,10 @@
         <source>Completely open audio compression format.</source>
         <translation>Formato de comresión de audio completamente abierto.</translation>
     </message>
+    <message>
+        <source>The True Audio - Lossless Audio Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

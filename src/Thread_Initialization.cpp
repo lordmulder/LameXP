@@ -68,7 +68,7 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"2d08c3586f9cf99f2e4c89ac54eeb595f63aef61", "sox.exe", 1431},
 	{"346ce516281c97e92e1b8957ddeca52edcf2d056", "speexdec.exe", UINT_MAX},
 	{"8a74b767cfe88bf88c068fdae0de02d65589d25e", "takc.exe", UINT_MAX},
-	{"1c5cedb56358a0e8c4590a863a97c94d7d7e98b2", "ttaenc.exe", UINT_MAX},
+	{"d6e0de1e7a2d9dee10d06ae0b6b4f93b63205920", "ttaenc.exe", 341},
 	{"8c842eef65248b46fa6cb9a9e5714f575672d999", "valdec.exe", 31},
 	{"8159f4e824b3e343ece95ba6dbb5e16da9c4866e", "volumax.exe", UINT_MAX},
 	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", UINT_MAX},
