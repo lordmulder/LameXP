@@ -133,5 +133,5 @@ bool AACDecoder::isFormatSupported(const QString &containerType, const QString &
 
 QStringList AACDecoder::supportedTypes(void)
 {
-	return QStringList() << "Advanced Audio Coding (*.aac *.mp4)";
+	return QStringList() << "Advanced Audio Coding (*.aac *.mp4 *.m4a)";
 }
