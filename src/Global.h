@@ -74,6 +74,7 @@ const QDate &lamexp_version_date(void);
 const char *lamexp_version_release(void);
 bool lamexp_version_demo(void);
 const char *lamexp_version_compiler(void);
+QDate lamexp_version_expires(void);
 unsigned int lamexp_toolver_neroaac(void);
 
 //Public functions

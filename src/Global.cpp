@@ -160,6 +160,11 @@ bool lamexp_version_demo(void)
 	return LAMEXP_DEBUG || !(strstr(g_lamexp_version_release, "Final") || strstr(g_lamexp_version_release, "Hotfix"));
 }
 
+QDate lamexp_version_expires(void)
+{
+	return lamexp_version_date().addDays(30);
+}
+
 /*
  * Get build date date
  */

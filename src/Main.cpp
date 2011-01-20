@@ -81,8 +81,7 @@ int lamexp_main(int argc, char* argv[])
 	//Check for expiration
 	if(lamexp_version_demo())
 	{
-		QDate expireDate = lamexp_version_date().addDays(14);
-		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(expireDate.toString(Qt::ISODate)).toLatin1().constData());
+		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(lamexp_version_expires().toString(Qt::ISODate)).toLatin1().constData());
 	}
 
 	//Check for multiple instances of LameXP
