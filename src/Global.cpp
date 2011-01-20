@@ -85,10 +85,20 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 
 //Build version
-static const unsigned int g_lamexp_version_major = VER_LAMEXP_MAJOR;
-static const unsigned int g_lamexp_version_minor = VER_LAMEXP_MINOR;
-static const unsigned int g_lamexp_version_build = VER_LAMEXP_BUILD;
-static const char *g_lamexp_version_release = VER_LAMEXP_SUFFIX_STR;
+static const struct
+{
+	unsigned int ver_major;
+	unsigned int ver_minor;
+	unsigned int ver_build;
+	char *ver_release_name;
+}
+g_lamexp_version =
+{
+	VER_LAMEXP_MAJOR,
+	VER_LAMEXP_MINOR,
+	VER_LAMEXP_BUILD,
+	VER_LAMEXP_RNAME
+};
 
 //Build date
 static QDate g_lamexp_version_date;
@@ -127,12 +137,28 @@ static QMap<QString, unsigned int> g_lamexp_translation_sysid;
 static QTranslator *g_lamexp_currentTranslator = NULL;
 
 //Shared memory
-static const char *g_lamexp_sharedmem_uuid = "{21A68A42-6923-43bb-9CF6-64BF151942EE}";
-static QSharedMemory *g_lamexp_sharedmem_ptr = NULL;
-static const char *g_lamexp_semaphore_read_uuid = "{7A605549-F58C-4d78-B4E5-06EFC34F405B}";
-static QSystemSemaphore *g_lamexp_semaphore_read_ptr = NULL;
-static const char *g_lamexp_semaphore_write_uuid = "{60AA8D04-F6B8-497d-81EB-0F600F4A65B5}";
-static QSystemSemaphore *g_lamexp_semaphore_write_ptr = NULL;
+static const struct
+{
+	char *sharedmem;
+	char *semaphore_read;
+	char *semaphore_write;
+}
+g_lamexp_ipc_uuid =
+{
+	"{21A68A42-6923-43bb-9CF6-64BF151942EE}",
+	"{7A605549-F58C-4d78-B4E5-06EFC34F405B}",
+	"{60AA8D04-F6B8-497d-81EB-0F600F4A65B5}"
+};
+static struct
+{
+	QSharedMemory *sharedmem;
+	QSystemSemaphore *semaphore_read;
+	QSystemSemaphore *semaphore_write;
+}
+g_lamexp_ipc_ptr =
+{
+	NULL, NULL, NULL
+};
 
 //Image formats
 static const char *g_lamexp_imageformats[] = {"png", "gif", "ico", "svg", NULL};
@@ -147,17 +173,17 @@ static QMutex g_lamexp_message_mutex;
 /*
  * Version getters
  */
-unsigned int lamexp_version_major(void) { return g_lamexp_version_major; }
-unsigned int lamexp_version_minor(void) { return g_lamexp_version_minor; }
-unsigned int lamexp_version_build(void) { return g_lamexp_version_build; }
-const char *lamexp_version_release(void) { return g_lamexp_version_release; }
+unsigned int lamexp_version_major(void) { return g_lamexp_version.ver_major; }
+unsigned int lamexp_version_minor(void) { return g_lamexp_version.ver_minor; }
+unsigned int lamexp_version_build(void) { return g_lamexp_version.ver_build; }
+const char *lamexp_version_release(void) { return g_lamexp_version.ver_release_name; }
 const char *lamexp_version_compiler(void) {return g_lamexp_version_compiler; }
 unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
 
 bool lamexp_version_demo(void)
 { 
 
-	return LAMEXP_DEBUG || !(strstr(g_lamexp_version_release, "Final") || strstr(g_lamexp_version_release, "Hotfix"));
+	return LAMEXP_DEBUG || !(strstr(g_lamexp_version.ver_release_name, "Final") || strstr(g_lamexp_version.ver_release_name, "Hotfix"));
 }
 
 QDate lamexp_version_expires(void)
@@ -564,59 +590,59 @@ bool lamexp_init_qt(int argc, char* argv[])
  */
 int lamexp_init_ipc(void)
 {
-	if(g_lamexp_sharedmem_ptr && g_lamexp_semaphore_read_ptr && g_lamexp_semaphore_write_ptr)
+	if(g_lamexp_ipc_ptr.sharedmem && g_lamexp_ipc_ptr.semaphore_read && g_lamexp_ipc_ptr.semaphore_write)
 	{
 		return 0;
 	}
 
-	g_lamexp_semaphore_read_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_read_uuid), 0);
-	g_lamexp_semaphore_write_ptr = new QSystemSemaphore(QString(g_lamexp_semaphore_write_uuid), 0);
+	g_lamexp_ipc_ptr.semaphore_read = new QSystemSemaphore(QString(g_lamexp_ipc_uuid.semaphore_read), 0);
+	g_lamexp_ipc_ptr.semaphore_write = new QSystemSemaphore(QString(g_lamexp_ipc_uuid.semaphore_write), 0);
 
-	if(g_lamexp_semaphore_read_ptr->error() != QSystemSemaphore::NoError)
+	if(g_lamexp_ipc_ptr.semaphore_read->error() != QSystemSemaphore::NoError)
 	{
-		QString errorMessage = g_lamexp_semaphore_read_ptr->errorString();
-		LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
-		LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
+		QString errorMessage = g_lamexp_ipc_ptr.semaphore_read->errorString();
+		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
 		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
 		return -1;
 	}
-	if(g_lamexp_semaphore_write_ptr->error() != QSystemSemaphore::NoError)
+	if(g_lamexp_ipc_ptr.semaphore_write->error() != QSystemSemaphore::NoError)
 	{
-		QString errorMessage = g_lamexp_semaphore_write_ptr->errorString();
-		LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
-		LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
+		QString errorMessage = g_lamexp_ipc_ptr.semaphore_write->errorString();
+		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
 		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
 		return -1;
 	}
 
-	g_lamexp_sharedmem_ptr = new QSharedMemory(QString(g_lamexp_sharedmem_uuid), NULL);
+	g_lamexp_ipc_ptr.sharedmem = new QSharedMemory(QString(g_lamexp_ipc_uuid.sharedmem), NULL);
 	
-	if(!g_lamexp_sharedmem_ptr->create(sizeof(lamexp_ipc_t)))
+	if(!g_lamexp_ipc_ptr.sharedmem->create(sizeof(lamexp_ipc_t)))
 	{
-		if(g_lamexp_sharedmem_ptr->error() == QSharedMemory::AlreadyExists)
+		if(g_lamexp_ipc_ptr.sharedmem->error() == QSharedMemory::AlreadyExists)
 		{
-			g_lamexp_sharedmem_ptr->attach();
-			if(g_lamexp_sharedmem_ptr->error() == QSharedMemory::NoError)
+			g_lamexp_ipc_ptr.sharedmem->attach();
+			if(g_lamexp_ipc_ptr.sharedmem->error() == QSharedMemory::NoError)
 			{
 				return 1;
 			}
 			else
 			{
-				QString errorMessage = g_lamexp_sharedmem_ptr->errorString();
+				QString errorMessage = g_lamexp_ipc_ptr.sharedmem->errorString();
 				qFatal("Failed to attach to shared memory: %s", errorMessage.toUtf8().constData());
 				return -1;
 			}
 		}
 		else
 		{
-			QString errorMessage = g_lamexp_sharedmem_ptr->errorString();
+			QString errorMessage = g_lamexp_ipc_ptr.sharedmem->errorString();
 			qFatal("Failed to create shared memory: %s", errorMessage.toUtf8().constData());
 			return -1;
 		}
 	}
 
-	memset(g_lamexp_sharedmem_ptr->data(), 0, sizeof(lamexp_ipc_t));
-	g_lamexp_semaphore_write_ptr->release();
+	memset(g_lamexp_ipc_ptr.sharedmem->data(), 0, sizeof(lamexp_ipc_t));
+	g_lamexp_ipc_ptr.semaphore_write->release();
 
 	return 0;
 }
@@ -626,7 +652,7 @@ int lamexp_init_ipc(void)
  */
 void lamexp_ipc_send(unsigned int command, const char* message)
 {
-	if(!g_lamexp_sharedmem_ptr || !g_lamexp_semaphore_read_ptr || !g_lamexp_semaphore_write_ptr)
+	if(!g_lamexp_ipc_ptr.sharedmem || !g_lamexp_ipc_ptr.semaphore_read || !g_lamexp_ipc_ptr.semaphore_write)
 	{
 		throw "Shared memory for IPC not initialized yet.";
 	}
@@ -639,10 +665,10 @@ void lamexp_ipc_send(unsigned int command, const char* message)
 		strcpy_s(lamexp_ipc->parameter, 4096, message);
 	}
 
-	if(g_lamexp_semaphore_write_ptr->acquire())
+	if(g_lamexp_ipc_ptr.semaphore_write->acquire())
 	{
-		memcpy(g_lamexp_sharedmem_ptr->data(), lamexp_ipc, sizeof(lamexp_ipc_t));
-		g_lamexp_semaphore_read_ptr->release();
+		memcpy(g_lamexp_ipc_ptr.sharedmem->data(), lamexp_ipc, sizeof(lamexp_ipc_t));
+		g_lamexp_ipc_ptr.semaphore_read->release();
 	}
 
 	LAMEXP_DELETE(lamexp_ipc);
@@ -656,7 +682,7 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 	*command = 0;
 	message[0] = '\0';
 	
-	if(!g_lamexp_sharedmem_ptr || !g_lamexp_semaphore_read_ptr || !g_lamexp_semaphore_write_ptr)
+	if(!g_lamexp_ipc_ptr.sharedmem || !g_lamexp_ipc_ptr.semaphore_read || !g_lamexp_ipc_ptr.semaphore_write)
 	{
 		throw "Shared memory for IPC not initialized yet.";
 	}
@@ -664,10 +690,10 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 	lamexp_ipc_t *lamexp_ipc = new lamexp_ipc_t;
 	memset(lamexp_ipc, 0, sizeof(lamexp_ipc_t));
 
-	if(g_lamexp_semaphore_read_ptr->acquire())
+	if(g_lamexp_ipc_ptr.semaphore_read->acquire())
 	{
-		memcpy(lamexp_ipc, g_lamexp_sharedmem_ptr->data(), sizeof(lamexp_ipc_t));
-		g_lamexp_semaphore_write_ptr->release();
+		memcpy(lamexp_ipc, g_lamexp_ipc_ptr.sharedmem->data(), sizeof(lamexp_ipc_t));
+		g_lamexp_ipc_ptr.semaphore_write->release();
 
 		if(!(lamexp_ipc->reserved_1 || lamexp_ipc->reserved_2))
 		{
@@ -1181,10 +1207,10 @@ void lamexp_finalization(void)
 	LAMEXP_DELETE(application);
 
 	//Detach from shared memory
-	if(g_lamexp_sharedmem_ptr) g_lamexp_sharedmem_ptr->detach();
-	LAMEXP_DELETE(g_lamexp_sharedmem_ptr);
-	LAMEXP_DELETE(g_lamexp_semaphore_read_ptr);
-	LAMEXP_DELETE(g_lamexp_semaphore_write_ptr);
+	if(g_lamexp_ipc_ptr.sharedmem) g_lamexp_ipc_ptr.sharedmem->detach();
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
 }
 
 /*
