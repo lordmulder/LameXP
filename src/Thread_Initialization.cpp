@@ -51,7 +51,7 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"4ecc017a66fe43092110f11494f384e57d99280d", "elevator.exe", UINT_MAX},
 	{"3c647950bccfcc75d0746c0772e7115684be4dc5", "faad.exe", UINT_MAX},
 	{"d33cd86f04bd4067e244d2804466583c7b90a4e2", "flac.exe", 121},
-	{"cf379081035ae6bfb6f7bc22f13bfb7ac6302ac5", "gpgv.exe", 1410},
+	{"9328a50e89b54ec065637496d9681a7e3eebf915", "gpgv.exe", 1411},
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg", UINT_MAX},
 	{"143fc001a2f6c56fe1b9e6f8a2eb2b53b9e1e504", "lame.exe", 39910},
 	{"a4e929cfaa42fa2e61a3d0c6434c77a06d45aef3", "mac.exe", 406},
