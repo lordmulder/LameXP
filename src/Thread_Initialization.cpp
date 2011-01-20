@@ -48,7 +48,7 @@ struct lamexp_tool_t
 static const struct lamexp_tool_t g_lamexp_tools[] =
 {
 	{"153f4274702f3629093b561a31dbf50e2c146305", "alac.exe", UINT_MAX},
-	{"4ecc017a66fe43092110f11494f384e57d99280d", "elevator.exe", UINT_MAX},
+	{"fb74ac8b73ad8cba2c3b4e6e61f23401d630dc22", "elevator.exe", UINT_MAX},
 	{"3c647950bccfcc75d0746c0772e7115684be4dc5", "faad.exe", UINT_MAX},
 	{"d33cd86f04bd4067e244d2804466583c7b90a4e2", "flac.exe", 121},
 	{"9328a50e89b54ec065637496d9681a7e3eebf915", "gpgv.exe", 1411},
@@ -72,7 +72,7 @@ static const struct lamexp_tool_t g_lamexp_tools[] =
 	{"8c842eef65248b46fa6cb9a9e5714f575672d999", "valdec.exe", 31},
 	{"8159f4e824b3e343ece95ba6dbb5e16da9c4866e", "volumax.exe", UINT_MAX},
 	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", UINT_MAX},
-	{"a17011961aa8696bc935e097b3242d33c38a9842", "wupdate.exe", UINT_MAX},
+	{"7380cb661ae7fbda82f3e8ecea6a2776101c9444", "wupdate.exe", UINT_MAX},
 	{"b7d14b3540d24df13119a55d97623a61412de6e3", "wvunpack.exe", 4601},
 	{NULL, NULL, NULL}
 };

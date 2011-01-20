@@ -149,6 +149,7 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 !define MUI_LANGDLL_ALLLANGUAGES
 !define MUI_CUSTOMFUNCTION_GUIINIT MyUacInit
 !define MUI_CUSTOMFUNCTION_UNGUIINIT un.MyUacInit
+!define MUI_LANGDLL_ALWAYSSHOW
 
 
 ;--------------------------------
