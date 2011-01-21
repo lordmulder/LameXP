@@ -51,6 +51,9 @@ static const char *g_settingsId_wmaDecoderNotificationsEnabled = "Flags/EnableWm
 static const char *g_settingsId_dropBoxWidgetEnabled = "Flags/EnableDropBoxWidget";
 static const char *g_settingsId_currentLanguage = "Localization/Language";
 static const char *g_settingsId_lameAlgoQuality = "AdvancedOptions/LAME/AlgorithmQuality";
+static const char *g_settingsId_bitrateManagementEnabled = "AdvancedOptions/BitrateManagement/Enabled";
+static const char *g_settingsId_bitrateManagementMinRate = "AdvancedOptions/BitrateManagement/MinRate";
+static const char *g_settingsId_bitrateManagementMaxRate = "AdvancedOptions/BitrateManagement/MaxRate";
 
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
@@ -188,3 +191,6 @@ MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
 MAKE_OPTION3(dropBoxWidgetEnabled, true)
 MAKE_OPTION2(currentLanguage, defaultLanguage());
 MAKE_OPTION1(lameAlgoQuality, 3)
+MAKE_OPTION3(bitrateManagementEnabled, false)
+MAKE_OPTION1(bitrateManagementMinRate, 32)
+MAKE_OPTION1(bitrateManagementMaxRate, 500)

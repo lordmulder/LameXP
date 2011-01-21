@@ -214,7 +214,13 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 
 	//Setup "Advanced Options" tab
 	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
+	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
+	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
+	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabled()) checkBoxBitrateManagement->click();
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
+	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
+	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
+	connect(spinBoxBitrateManagementMax, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMaxChanged(int)));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	
 	//Activate file menu actions
@@ -1586,6 +1592,47 @@ void MainWindow::updateLameAlgoQuality(int value)
 		labelLameAlgoQuality->setText(text);
 	}
 }
+
+/*
+ * Bitrate management endabled/disabled
+ */
+void MainWindow::bitrateManagementEnabledChanged(bool checked)
+{
+	m_settings->bitrateManagementEnabled(checked);
+}
+
+/*
+ * Minimum bitrate has changed
+ */
+void MainWindow::bitrateManagementMinChanged(int value)
+{
+	if(value > spinBoxBitrateManagementMax->value())
+	{
+		spinBoxBitrateManagementMin->setValue(spinBoxBitrateManagementMax->value());
+		m_settings->bitrateManagementMinRate(spinBoxBitrateManagementMax->value());
+	}
+	else
+	{
+		m_settings->bitrateManagementMinRate(value);
+	}
+}
+
+/*
+ * Maximum bitrate has changed
+ */
+void MainWindow::bitrateManagementMaxChanged(int value)
+{
+	if(value < spinBoxBitrateManagementMin->value())
+	{
+		spinBoxBitrateManagementMax->setValue(spinBoxBitrateManagementMin->value());
+		m_settings->bitrateManagementMaxRate(spinBoxBitrateManagementMin->value());
+	}
+	else
+	{
+		m_settings->bitrateManagementMaxRate(value);
+	}
+}
+
 
 /*
  * Model reset
