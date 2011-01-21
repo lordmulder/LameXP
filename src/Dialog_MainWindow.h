@@ -79,6 +79,7 @@ private slots:
 	void updateEncoder(int id);
 	void updateRCMode(int id);
 	void updateBitrate(int value);
+	void updateLameAlgoQuality(int value);
 	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);
 	void playlistEnabledChanged(void);

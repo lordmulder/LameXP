@@ -26,8 +26,11 @@
 
 #include <QProcess>
 #include <QDir>
+#include <limits.h>
 
 #define IS_UNICODE(STR) (qstricmp(STR.toUtf8().constData(), QString::fromLocal8Bit(STR.toLocal8Bit()).toUtf8().constData()))
+
+static const int g_lameAgorithmQualityLUT[] = {9, 7, 5, 2, 0, INT_MAX};
 
 MP3Encoder::MP3Encoder(void)
 :
@@ -37,6 +40,8 @@ MP3Encoder::MP3Encoder(void)
 	{
 		throw "Error initializing MP3 encoder. Tool 'lame.exe' is not registred!";
 	}
+	
+	m_algorithmQuality = 3;
 }
 
 MP3Encoder::~MP3Encoder(void)
@@ -49,7 +54,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	QStringList args;
 
 	args << "--nohist";
-	args << "-h";
+	args << "-q" << QString::number(g_lameAgorithmQualityLUT[m_algorithmQuality]);
 		
 	switch(m_configRCMode)
 	{
@@ -177,4 +182,9 @@ bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &
 bool MP3Encoder::requiresDownmix(void)
 {
 	return true;
+}
+
+void MP3Encoder::setAlgoQuality(int value)
+{
+	m_algorithmQuality = value;
 }

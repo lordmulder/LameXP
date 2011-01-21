@@ -2,8 +2,6 @@
 <RCC version="1.0">
 	<qresource>
     <file>images/Busy.gif</file>
-    <file>images/Cogwheels.png</file>
-    <file>images/Construction.gif</file>
     <file>images/DropBox.png</file>
     <file>images/HeaderIcon_LogFile.png</file>
     <file>images/HeaderIcon_MetaInfo.png</file>

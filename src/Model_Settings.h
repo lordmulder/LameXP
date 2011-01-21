@@ -79,6 +79,7 @@ public:
 	MAKE_OPTION_DEC3(wmaDecoderNotificationsEnabled)
 	MAKE_OPTION_DEC3(dropBoxWidgetEnabled)
 	MAKE_OPTION_DEC2(currentLanguage);
+	MAKE_OPTION_DEC1(lameAlgoQuality);
 
 	//Misc
 	void validate(void);

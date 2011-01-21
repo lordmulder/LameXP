@@ -50,6 +50,8 @@ static const char *g_settingsId_neroAacNotificationsEnabled = "Flags/EnableNeroA
 static const char *g_settingsId_wmaDecoderNotificationsEnabled = "Flags/EnableWmaDecoderNotifications";
 static const char *g_settingsId_dropBoxWidgetEnabled = "Flags/EnableDropBoxWidget";
 static const char *g_settingsId_currentLanguage = "Localization/Language";
+static const char *g_settingsId_lameAlgoQuality = "AdvancedOptions/LAME/AlgorithmQuality";
+
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
 int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); } \
@@ -185,3 +187,4 @@ MAKE_OPTION3(neroAacNotificationsEnabled, true)
 MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
 MAKE_OPTION3(dropBoxWidgetEnabled, true)
 MAKE_OPTION2(currentLanguage, defaultLanguage());
+MAKE_OPTION1(lameAlgoQuality, 3)

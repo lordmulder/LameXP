@@ -402,7 +402,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More options will be added in a later version, stay tuned!</source>
+        <source> LAME Algorithm Quality </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Faster Processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Better quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -779,6 +787,26 @@
     </message>
     <message>
         <source>Uncompressed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Best Quality (Very Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Quality (Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Quality (Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low Quality (Fast)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

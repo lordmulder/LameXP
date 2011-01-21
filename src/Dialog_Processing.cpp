@@ -435,6 +435,7 @@ void ProcessingDialog::startNextJob(void)
 			MP3Encoder *mp3Encoder = new MP3Encoder();
 			mp3Encoder->setBitrate(m_settings->compressionBitrate());
 			mp3Encoder->setRCMode(m_settings->compressionRCMode());
+			mp3Encoder->setAlgoQuality(m_settings->lameAlgoQuality());
 			encoder = mp3Encoder;
 		}
 		break;

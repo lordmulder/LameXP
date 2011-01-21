@@ -403,10 +403,6 @@
         <translation>Opzioni Avanzate</translation>
     </message>
     <message>
-        <source>More options will be added in a later version, stay tuned!</source>
-        <translation>Maggiori opzioni verranno aggiunte nella prossima versione, resta sintonizzato!</translation>
-    </message>
-    <message>
         <source> Encode Now!</source>
         <translation>Codifica Ora!</translation>
     </message>
@@ -896,6 +892,38 @@
     </message>
     <message>
         <source>n/a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> LAME Algorithm Quality </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Faster Processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Better quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Best Quality (Very Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Quality (Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Quality (Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low Quality (Fast)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

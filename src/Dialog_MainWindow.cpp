@@ -212,6 +212,11 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
 	updateEncoder(m_encoderButtonGroup->checkedId());
 
+	//Setup "Advanced Options" tab
+	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
+	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
+	updateLameAlgoQuality(sliderLameAlgoQuality->value());
+	
 	//Activate file menu actions
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
 
@@ -451,6 +456,7 @@ void MainWindow::changeEvent(QEvent *e)
 
 		m_metaInfoModel->clearData();
 		updateEncoder(m_settings->compressionEncoder());
+		updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	}
 }
 
@@ -1544,6 +1550,40 @@ void MainWindow::updateBitrate(int value)
 			break;
 		}
 		break;
+	}
+}
+
+
+/*
+ * Lame algorithm quality changed
+ */
+void MainWindow::updateLameAlgoQuality(int value)
+{
+	QString text;
+
+	switch(value)
+	{
+	case 4:
+		text = tr("Best Quality (Very Slow)");
+		break;
+	case 3:
+		text = tr("High Quality (Recommended)");
+		break;
+	case 2:
+		text = tr("Average Quality (Default)");
+		break;
+	case 1:
+		text = tr("Low Quality (Fast)");
+		break;
+	case 0:
+		text = tr("Poor Quality (Very Fast)");
+		break;
+	}
+
+	if(!text.isEmpty())
+	{
+		m_settings->lameAlgoQuality(value);
+		labelLameAlgoQuality->setText(text);
 	}
 }
 
