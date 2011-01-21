@@ -36,9 +36,13 @@ public:
 	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual QString extension(void);
+	virtual void setBitrateLimits(int minimumBitrate, int maximumBitrate);
 
 private:
 	const QString m_binary_i386;
 	const QString m_binary_sse2;
 	const QString m_binary_x64;
+	int m_configBitrateMaximum;
+	int m_configBitrateMinimum;
+
 };

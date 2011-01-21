@@ -930,6 +930,22 @@ Votre dossier TEMP est situé ici:</translation>
         <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> Bitrate Management (LAME and OggEnc2) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Bitrate Management</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum (kbps):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum (kbps):</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

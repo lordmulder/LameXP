@@ -414,6 +414,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source> Bitrate Management (LAME and OggEnc2) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Bitrate Management</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum (kbps):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum (kbps):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source> Encode Now!</source>
         <translation type="unfinished"></translation>
     </message>

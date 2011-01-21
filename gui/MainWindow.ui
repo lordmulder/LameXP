@@ -1120,7 +1120,7 @@
              </font>
             </property>
             <property name="title">
-             <string> Bitrate Management </string>
+             <string> Bitrate Management (LAME and OggEnc2) </string>
             </property>
             <layout class="QGridLayout" name="gridLayout_19">
              <item row="0" column="0">
@@ -1697,6 +1697,7 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

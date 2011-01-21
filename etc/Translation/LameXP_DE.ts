@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>The True Audio - Lossless Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -896,35 +896,51 @@
     </message>
     <message>
         <source> LAME Algorithm Quality </source>
-        <translation type="unfinished"></translation>
+        <translation>LAME Algorithmus Qualität</translation>
     </message>
     <message>
         <source>Faster Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnellere Verarbeitung</translation>
     </message>
     <message>
         <source>Better quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Bessere Qualität</translation>
     </message>
     <message>
         <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Beste Qualität (Sehr Langsam)</translation>
     </message>
     <message>
         <source>High Quality (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Höhere Qualität (Empfohlen)</translation>
     </message>
     <message>
         <source>Average Quality (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittlere Qualität (Standard)</translation>
     </message>
     <message>
         <source>Low Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrige Qualität (Schnell)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Miese Qualität (Sehr Schnell)</translation>
+    </message>
+    <message>
+        <source> Bitrate Management (LAME and OggEnc2) </source>
+        <translation>Bitraten Verwaltung (LAME und OggEnc2)</translation>
+    </message>
+    <message>
+        <source>Enable Bitrate Management</source>
+        <translation>Bitraten Verwaltung Aktivieren</translation>
+    </message>
+    <message>
+        <source>Minimum (kbps):</source>
+        <translation>Minimum (kbps):</translation>
+    </message>
+    <message>
+        <source>Maximum (kbps):</source>
+        <translation>Maximum (kbps):</translation>
     </message>
 </context>
 <context>

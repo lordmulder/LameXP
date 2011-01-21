@@ -40,8 +40,14 @@ public:
 	
 	//Advanced options
 	virtual void setAlgoQuality(int value);
+	virtual void setBitrateLimits(int minimumBitrate, int maximumBitrate);
+
 
 private:
 	const QString m_binary;
 	int m_algorithmQuality;
+	int m_configBitrateMaximum;
+	int m_configBitrateMinimum;
+
+	int clipBitrate(int bitrate);
 };

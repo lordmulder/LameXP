@@ -41,6 +41,9 @@ VorbisEncoder::VorbisEncoder(void)
 	{
 		throw "Error initializing Vorbis encoder. Tool 'oggenc2.exe' is not registred!";
 	}
+
+	m_configBitrateMaximum = 0;
+	m_configBitrateMinimum = 0;
 }
 
 VorbisEncoder::~VorbisEncoder(void)
@@ -66,6 +69,12 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	default:
 		throw "Bad rate-control mode!";
 		break;
+	}
+
+	if((m_configBitrateMaximum > 0) && (m_configBitrateMinimum > 0) && (m_configBitrateMinimum <= m_configBitrateMaximum))
+	{
+		args << "--min-bitrate" << QString::number(min(max(m_configBitrateMinimum, 32), 500));
+		args << "--max-bitrate" << QString::number(min(max(m_configBitrateMaximum, 32), 500));
 	}
 
 	if(!metaInfo.fileName().isEmpty()) args << "-t" << metaInfo.fileName();
@@ -166,4 +175,10 @@ bool VorbisEncoder::isFormatSupported(const QString &containerType, const QStrin
 	}
 
 	return false;
+}
+
+void VorbisEncoder::setBitrateLimits(int minimumBitrate, int maximumBitrate)
+{
+	m_configBitrateMinimum = minimumBitrate;
+	m_configBitrateMaximum = maximumBitrate;
 }
