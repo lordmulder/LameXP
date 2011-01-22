@@ -445,7 +445,10 @@ Function CheckForUpdate
 	IfFileExists "$INSTDIR\*.*" +2
 	Return
 
-	IfFileExists "$INSTDIR\LameXP.exe" EnableUpdateMode
+	StrCmp "$EXEDIR" "$INSTDIR" 0 +2
+	Return
+
+	IfFileExists "$INSTDIR\LameXP.exe" +2
 	Return
 
 	EnableUpdateMode:

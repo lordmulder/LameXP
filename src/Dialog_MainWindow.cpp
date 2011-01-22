@@ -216,11 +216,19 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
 	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
 	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
+	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelMode());
+	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRate());
+	comboBoxNeroAACProfile->setCurrentIndex(m_settings->neroAACProfile());
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabled()) checkBoxBitrateManagement->click();
+	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2Pass()) checkBoxNeroAAC2PassMode->click();
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
 	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
 	connect(spinBoxBitrateManagementMax, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMaxChanged(int)));
+	connect(comboBoxMP3ChannelMode, SIGNAL(currentIndexChanged(int)), this, SLOT(channelModeChanged(int)));
+	connect(comboBoxSamplingRate, SIGNAL(currentIndexChanged(int)), this, SLOT(samplingRateChanged(int)));
+	connect(checkBoxNeroAAC2PassMode, SIGNAL(clicked(bool)), this, SLOT(neroAAC2PassChanged(bool)));
+	connect(comboBoxNeroAACProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(neroAACProfileChanged(int)));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	
 	//Activate file menu actions
@@ -447,19 +455,34 @@ void MainWindow::changeEvent(QEvent *e)
 {
 	if(e->type() == QEvent::LanguageChange)
 	{
+		int comboBoxIndex[3];
+		
+		//Backup combobox indices
+		comboBoxIndex[0] = comboBoxMP3ChannelMode->currentIndex();
+		comboBoxIndex[1] = comboBoxSamplingRate->currentIndex();
+		comboBoxIndex[2] = comboBoxNeroAACProfile->currentIndex();
+		
+		//Re.translate from UIC
 		Ui::MainWindow::retranslateUi(this);
+
+		//Restore combobox indices
+		comboBoxMP3ChannelMode->setCurrentIndex(comboBoxIndex[0]);
+		comboBoxSamplingRate->setCurrentIndex(comboBoxIndex[1]);
+		comboBoxNeroAACProfile->setCurrentIndex(comboBoxIndex[2]);
 
 		if(lamexp_version_demo())
 		{
 			setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
 		}
 	
+		//Manual re-translate
 		m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
 		m_showDetailsContextAction->setText(tr("Show Details"));
 		m_previewContextAction->setText(tr("Open File in External Application"));
 		m_findFileContextAction->setText(tr("Browse File Location"));
 		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
 
+		//Force GUI update
 		m_metaInfoModel->clearData();
 		updateEncoder(m_settings->compressionEncoder());
 		updateLameAlgoQuality(sliderLameAlgoQuality->value());
@@ -1633,6 +1656,37 @@ void MainWindow::bitrateManagementMaxChanged(int value)
 	}
 }
 
+/*
+ * Channel mode has changed
+ */
+void MainWindow::channelModeChanged(int value)
+{
+	if(value >= 0) m_settings->lameChannelMode(value);
+}
+
+/*
+ * Sampling rate has changed
+ */
+void MainWindow::samplingRateChanged(int value)
+{
+	if(value >= 0) m_settings->samplingRate(value);
+}
+
+/*
+ * Nero AAC 2-Pass mode changed
+ */
+void MainWindow::neroAAC2PassChanged(bool checked)
+{
+	m_settings->neroAACEnable2Pass(checked);
+}
+
+/*
+ * Nero AAC profile mode changed
+ */
+void MainWindow::neroAACProfileChanged(int value)
+{
+	if(value >= 0) m_settings->neroAACProfile(value);
+}
 
 /*
  * Model reset

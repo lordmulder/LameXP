@@ -83,6 +83,10 @@ private slots:
 	void bitrateManagementEnabledChanged(bool checked);
 	void bitrateManagementMinChanged(int value);
 	void bitrateManagementMaxChanged(int value);
+	void samplingRateChanged(int value);
+	void channelModeChanged(int value);
+	void neroAACProfileChanged(int value);
+	void neroAAC2PassChanged(bool checked);
 	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);
 	void playlistEnabledChanged(void);

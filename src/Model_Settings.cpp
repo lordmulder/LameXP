@@ -51,9 +51,13 @@ static const char *g_settingsId_wmaDecoderNotificationsEnabled = "Flags/EnableWm
 static const char *g_settingsId_dropBoxWidgetEnabled = "Flags/EnableDropBoxWidget";
 static const char *g_settingsId_currentLanguage = "Localization/Language";
 static const char *g_settingsId_lameAlgoQuality = "AdvancedOptions/LAME/AlgorithmQuality";
+static const char *g_settingsId_lameChannelMode = "AdvancedOptions/LAME/ChannelMode";
 static const char *g_settingsId_bitrateManagementEnabled = "AdvancedOptions/BitrateManagement/Enabled";
 static const char *g_settingsId_bitrateManagementMinRate = "AdvancedOptions/BitrateManagement/MinRate";
 static const char *g_settingsId_bitrateManagementMaxRate = "AdvancedOptions/BitrateManagement/MaxRate";
+static const char *g_settingsId_samplingRate = "AdvancedOptions/Common/Resampling";
+static const char *g_settingsId_neroAACEnable2Pass = "AdvancedOptions/NeroAAC/Enable2Pass";
+static const char *g_settingsId_neroAACProfile = "AdvancedOptions/NeroAAC/ForceProfile";
 
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
@@ -70,6 +74,7 @@ void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, v
 
 //LUT
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
+const int SettingsModel::samplingRates[7] = {16000, 22050, 24000, 32000, 44100, 48000, -1};
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -191,6 +196,10 @@ MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
 MAKE_OPTION3(dropBoxWidgetEnabled, true)
 MAKE_OPTION2(currentLanguage, defaultLanguage());
 MAKE_OPTION1(lameAlgoQuality, 3)
+MAKE_OPTION1(lameChannelMode, 0);
 MAKE_OPTION3(bitrateManagementEnabled, false)
 MAKE_OPTION1(bitrateManagementMinRate, 32)
 MAKE_OPTION1(bitrateManagementMaxRate, 500)
+MAKE_OPTION1(samplingRate, 0)
+MAKE_OPTION3(neroAACEnable2Pass, true)
+MAKE_OPTION1(neroAACProfile, 0)

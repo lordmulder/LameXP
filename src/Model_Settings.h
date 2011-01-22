@@ -60,6 +60,7 @@ public:
 	
 	//Consts
 	static const int mp3Bitrates[15];
+	static const int samplingRates[7];
 
 	//Getters & setters
 	MAKE_OPTION_DEC1(licenseAccepted);
@@ -80,10 +81,13 @@ public:
 	MAKE_OPTION_DEC3(dropBoxWidgetEnabled)
 	MAKE_OPTION_DEC2(currentLanguage);
 	MAKE_OPTION_DEC1(lameAlgoQuality);
+	MAKE_OPTION_DEC1(lameChannelMode);
 	MAKE_OPTION_DEC3(bitrateManagementEnabled);
 	MAKE_OPTION_DEC1(bitrateManagementMinRate);
 	MAKE_OPTION_DEC1(bitrateManagementMaxRate);
-
+	MAKE_OPTION_DEC1(samplingRate)
+	MAKE_OPTION_DEC3(neroAACEnable2Pass)
+	MAKE_OPTION_DEC1(neroAACProfile)
 
 	//Misc
 	void validate(void);
