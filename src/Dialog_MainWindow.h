@@ -87,6 +87,7 @@ private slots:
 	void channelModeChanged(int value);
 	void neroAACProfileChanged(int value);
 	void neroAAC2PassChanged(bool checked);
+	void resetAdvancedOptionsButtonClicked();
 	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);
 	void playlistEnabledChanged(void);

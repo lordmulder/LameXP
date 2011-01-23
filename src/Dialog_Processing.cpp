@@ -454,6 +454,7 @@ void ProcessingDialog::startNextJob(void)
 			{
 				vorbisEncoder->setBitrateLimits(m_settings->bitrateManagementMinRate(), m_settings->bitrateManagementMaxRate());
 			}
+			vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
 			encoder = vorbisEncoder;
 		}
 		break;

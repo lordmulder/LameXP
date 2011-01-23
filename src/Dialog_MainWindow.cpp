@@ -229,6 +229,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(comboBoxSamplingRate, SIGNAL(currentIndexChanged(int)), this, SLOT(samplingRateChanged(int)));
 	connect(checkBoxNeroAAC2PassMode, SIGNAL(clicked(bool)), this, SLOT(neroAAC2PassChanged(bool)));
 	connect(comboBoxNeroAACProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(neroAACProfileChanged(int)));
+	connect(buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	
 	//Activate file menu actions
@@ -1686,6 +1687,21 @@ void MainWindow::neroAAC2PassChanged(bool checked)
 void MainWindow::neroAACProfileChanged(int value)
 {
 	if(value >= 0) m_settings->neroAACProfile(value);
+}
+
+/*
+ * Reset all advanced options to their defaults
+ */
+void MainWindow::resetAdvancedOptionsButtonClicked()
+{
+	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());
+	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());
+	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRateDefault());
+	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelModeDefault());
+	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRateDefault());
+	comboBoxNeroAACProfile->setCurrentIndex(m_settings->neroAACProfileDefault());
+	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabledDefault()) checkBoxBitrateManagement->click();
+	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2PassDefault()) checkBoxNeroAAC2PassMode->click();
 }
 
 /*

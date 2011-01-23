@@ -37,6 +37,7 @@ public:
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual QString extension(void);
 	virtual void setBitrateLimits(int minimumBitrate, int maximumBitrate);
+	virtual void setSamplingRate(int value);
 
 private:
 	const QString m_binary_i386;
@@ -44,5 +45,5 @@ private:
 	const QString m_binary_x64;
 	int m_configBitrateMaximum;
 	int m_configBitrateMinimum;
-
+	int m_configSamplingRate;
 };

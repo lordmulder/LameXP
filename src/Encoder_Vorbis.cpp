@@ -44,6 +44,7 @@ VorbisEncoder::VorbisEncoder(void)
 
 	m_configBitrateMaximum = 0;
 	m_configBitrateMinimum = 0;
+	m_configSamplingRate = 0;
 }
 
 VorbisEncoder::~VorbisEncoder(void)
@@ -75,6 +76,11 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	{
 		args << "--min-bitrate" << QString::number(min(max(m_configBitrateMinimum, 32), 500));
 		args << "--max-bitrate" << QString::number(min(max(m_configBitrateMaximum, 32), 500));
+	}
+
+	if(m_configSamplingRate > 0)
+	{
+		args << "--resample" << QString::number(m_configSamplingRate) << "--converter" << QString::number(0);
 	}
 
 	if(!metaInfo.fileName().isEmpty()) args << "-t" << metaInfo.fileName();
@@ -181,4 +187,9 @@ void VorbisEncoder::setBitrateLimits(int minimumBitrate, int maximumBitrate)
 {
 	m_configBitrateMinimum = minimumBitrate;
 	m_configBitrateMaximum = maximumBitrate;
+}
+
+void VorbisEncoder::setSamplingRate(int value)
+{
+	m_configSamplingRate = value;
 }
