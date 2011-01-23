@@ -28,6 +28,7 @@
 #include <QApplication>
 #include <QString>
 #include <QFileInfo>
+#include <QDir>
 #include <QStringList>
 #include <QLocale>
 
@@ -87,8 +88,24 @@ SettingsModel::SettingsModel(void)
 :
 	m_defaultLanguage(NULL)
 {
-	QString appPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-	m_settings = new QSettings(appPath.append("/config.ini"), QSettings::IniFormat);
+	QString configPath;
+	
+	if(!lamexp_portable_mode())
+	{
+		QString dataPath = QDir(QDesktopServices::storageLocation(QDesktopServices::DataLocation)).canonicalPath();
+		if(dataPath.isEmpty()) dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+		QDir(dataPath).mkpath(".");
+		configPath = QString("%1/config.ini").arg(dataPath);
+	}
+	else
+	{
+		qDebug("LameXP is running in \"portable\" mode -> config in application dir!\n");
+		QString appPath = QFileInfo(QApplication::applicationFilePath()).canonicalFilePath();
+		if(appPath.isEmpty()) appPath = QApplication::applicationFilePath();
+		configPath = QString("%1/%2.ini").arg(QFileInfo(appPath).absolutePath(), QFileInfo(appPath).completeBaseName());
+	}
+
+	m_settings = new QSettings(configPath, QSettings::IniFormat);
 	m_settings->beginGroup(QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build()));
 	m_settings->setValue(g_settingsId_versionNumber, QApplication::applicationVersion());
 	m_settings->sync();

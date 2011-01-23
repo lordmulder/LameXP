@@ -92,6 +92,7 @@ const QString &lamexp_temp_folder(void);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
 lamexp_cpu_t lamexp_detect_cpu_features(void);
+bool lamexp_portable_mode(void);
 
 //Translation support
 QStringList lamexp_query_translations(void);

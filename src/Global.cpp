@@ -716,6 +716,15 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 }
 
 /*
+ * Check for LameXP "portable" mode
+ */
+bool lamexp_portable_mode(void)
+{
+	QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
+	return baseName.contains("lamexp", Qt::CaseInsensitive) && baseName.contains("portable", Qt::CaseInsensitive);
+}
+
+/*
  * Get a random string
  */
 QString lamexp_rand_str(void)
