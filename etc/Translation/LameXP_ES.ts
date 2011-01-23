@@ -1015,10 +1015,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Auto (Recommended)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enforce LC-AAC</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1027,7 +1023,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enforce HE-AAC v2 (AAC +SBR + PS)</source>
+        <source>Auto Select (Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

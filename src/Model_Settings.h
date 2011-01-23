@@ -26,15 +26,18 @@ class QString;
 
 #define MAKE_OPTION_DEC1(OPT) \
 int OPT(void); \
-void OPT(int value);
+void OPT(int value); \
+int OPT##Default(void);
 
 #define MAKE_OPTION_DEC2(OPT) \
 QString OPT(void); \
-void OPT(const QString &value);
+void OPT(const QString &value); \
+QString OPT##Default(void);
 
 #define MAKE_OPTION_DEC3(OPT) \
 bool OPT(void); \
-void OPT(bool value);
+void OPT(bool value); \
+bool OPT##Default(void);
 
 class SettingsModel
 {
@@ -60,7 +63,7 @@ public:
 	
 	//Consts
 	static const int mp3Bitrates[15];
-	static const int samplingRates[7];
+	static const int samplingRates[8];
 
 	//Getters & setters
 	MAKE_OPTION_DEC1(licenseAccepted);

@@ -62,19 +62,22 @@ static const char *g_settingsId_neroAACProfile = "AdvancedOptions/NeroAAC/ForceP
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
 int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); } \
-void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); }
+void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
+int SettingsModel::OPT##Default(void) { return DEF; }
 
 #define MAKE_OPTION2(OPT,DEF) \
 QString SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toString().trimmed(); } \
-void SettingsModel::OPT(const QString &value) { m_settings->setValue(g_settingsId_##OPT, value); }
+void SettingsModel::OPT(const QString &value) { m_settings->setValue(g_settingsId_##OPT, value); } \
+QString SettingsModel::OPT##Default(void) { return DEF; }
 
 #define MAKE_OPTION3(OPT,DEF) \
 bool SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toBool(); } \
-void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, value); }
+void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, value); } \
+bool SettingsModel::OPT##Default(void) { return DEF; }
 
 //LUT
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
-const int SettingsModel::samplingRates[7] = {16000, 22050, 24000, 32000, 44100, 48000, -1};
+const int SettingsModel::samplingRates[8] = {0, 16000, 22050, 24000, 32000, 44100, 48000, -1};
 
 ////////////////////////////////////////////////////////////
 // Constructor

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>667</width>
-    <height>407</height>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1269,6 +1269,9 @@
                     <layout class="QGridLayout" name="gridLayout_23">
                      <item row="1" column="2">
                       <widget class="QComboBox" name="comboBoxMP3ChannelMode">
+                       <property name="sizeAdjustPolicy">
+                        <enum>QComboBox::AdjustToContents</enum>
+                       </property>
                        <item>
                         <property name="text">
                          <string>Auto Select (Default)</string>
@@ -1406,6 +1409,9 @@
                      </item>
                      <item row="1" column="7">
                       <widget class="QComboBox" name="comboBoxSamplingRate">
+                       <property name="sizeAdjustPolicy">
+                        <enum>QComboBox::AdjustToContents</enum>
+                       </property>
                        <item>
                         <property name="text">
                          <string>Auto Select (Default)</string>
@@ -1520,9 +1526,12 @@
                      </item>
                      <item row="1" column="4">
                       <widget class="QComboBox" name="comboBoxNeroAACProfile">
+                       <property name="sizeAdjustPolicy">
+                        <enum>QComboBox::AdjustToContents</enum>
+                       </property>
                        <item>
                         <property name="text">
-                         <string>Auto (Recommended)</string>
+                         <string>Auto Select (Recommended)</string>
                         </property>
                        </item>
                        <item>
@@ -1537,7 +1546,7 @@
                        </item>
                        <item>
                         <property name="text">
-                         <string>Enforce HE-AAC v2 (AAC +SBR + PS)</string>
+                         <string>Enforce HE-AAC v2 (AAC + SBR + PS)</string>
                         </property>
                        </item>
                       </widget>
@@ -2071,6 +2080,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

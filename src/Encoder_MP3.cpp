@@ -44,6 +44,8 @@ MP3Encoder::MP3Encoder(void)
 	m_algorithmQuality = 3;
 	m_configBitrateMaximum = 0;
 	m_configBitrateMinimum = 0;
+	m_configSamplingRate = 0;
+	m_configChannelMode = 0;
 }
 
 MP3Encoder::~MP3Encoder(void)
@@ -82,6 +84,30 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 			args << "-b" << QString::number(clipBitrate(m_configBitrateMinimum));
 			args << "-B" << QString::number(clipBitrate(m_configBitrateMaximum));
 		}
+	}
+
+	if(m_configSamplingRate > 0)
+	{
+		args << "--resample" << QString::number(m_configSamplingRate);
+	}
+
+	switch(m_configChannelMode)
+	{
+	case 1:
+		args << "-m" << "j";
+		break;
+	case 2:
+		args << "-m" << "f";
+		break;
+	case 3:
+		args << "-m" << "s";
+		break;
+	case 4:
+		args << "-m" << "d";
+		break;
+	case 5:
+		args << "-m" << "m";
+		break;
 	}
 
 	if(!metaInfo.fileName().isEmpty()) args << (IS_UNICODE(metaInfo.fileName()) ? "--uTitle" : "--lTitle") << metaInfo.fileName();
@@ -206,6 +232,16 @@ void MP3Encoder::setBitrateLimits(int minimumBitrate, int maximumBitrate)
 	m_configBitrateMaximum = maximumBitrate;
 }
 
+void MP3Encoder::setSamplingRate(int value)
+{
+	m_configSamplingRate = value;
+}
+
+void MP3Encoder::setChannelMode(int value)
+{
+	m_configChannelMode = value;
+}
+
 int MP3Encoder::clipBitrate(int bitrate)
 {
 	int targetBitrate = min(max(bitrate, 32), 320);
@@ -230,4 +266,3 @@ int MP3Encoder::clipBitrate(int bitrate)
 
 	return targetBitrate;
 }
-

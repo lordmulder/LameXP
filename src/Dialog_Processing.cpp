@@ -440,6 +440,8 @@ void ProcessingDialog::startNextJob(void)
 			{
 				mp3Encoder->setBitrateLimits(m_settings->bitrateManagementMinRate(), m_settings->bitrateManagementMaxRate());
 			}
+			mp3Encoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
+			mp3Encoder->setChannelMode(m_settings->lameChannelMode());
 			encoder = mp3Encoder;
 		}
 		break;
@@ -460,6 +462,8 @@ void ProcessingDialog::startNextJob(void)
 			AACEncoder *aacEncoder = new AACEncoder();
 			aacEncoder->setBitrate(m_settings->compressionBitrate());
 			aacEncoder->setRCMode(m_settings->compressionRCMode());
+			aacEncoder->setEnable2Pass(m_settings->neroAACEnable2Pass());
+			aacEncoder->setProfile(m_settings->neroAACProfile());
 			encoder = aacEncoder;
 		}
 		break;

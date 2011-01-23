@@ -40,6 +40,9 @@ AACEncoder::AACEncoder(void)
 	{
 		throw "Error initializing AAC encoder. Tool 'neroAacEnc.exe' is not registred!";
 	}
+
+	m_configProfile = 0;
+	m_configEnable2Pass = true;
 }
 
 AACEncoder::~AACEncoder(void)
@@ -58,13 +61,31 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		args << "-q" << QString().sprintf("%.2f", min(1.0, max(0.0, static_cast<double>(m_configBitrate * 5) / 100.0)));
 		break;
 	case SettingsModel::ABRMode:
-		args << "-br" << QString::number(max(32, min(500, (m_configBitrate * 8))) * 1000) << "-2pass";
+		args << "-br" << QString::number(max(32, min(500, (m_configBitrate * 8))) * 1000);
 		break;
 	case SettingsModel::CBRMode:
 		args << "-cbr" << QString::number(max(32, min(500, (m_configBitrate * 8))) * 1000) << "-2pass";
 		break;
 	default:
 		throw "Bad rate-control mode!";
+		break;
+	}
+
+	if(m_configEnable2Pass && (m_configRCMode == SettingsModel::ABRMode))
+	{
+		args << "-2pass";
+	}
+	
+	switch(m_configProfile)
+	{
+	case 1:
+		args << "-lc"; //Forces use of LC AAC profile
+		break;
+	case 2:
+		args << "-he"; //Forces use of HE AAC profile
+		break;
+	case 3:
+		args << "-hev2"; //Forces use of HEv2 AAC profile
 		break;
 	}
 
@@ -234,4 +255,15 @@ bool AACEncoder::isFormatSupported(const QString &containerType, const QString &
 	}
 
 	return false;
+}
+
+
+void AACEncoder::setProfile(int profile)
+{
+	m_configProfile = profile;
+}
+
+void AACEncoder::setEnable2Pass(bool enabled)
+{
+	m_configEnable2Pass = enabled;
 }

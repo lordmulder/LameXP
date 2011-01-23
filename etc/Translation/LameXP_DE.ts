@@ -944,91 +944,91 @@
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanal Modus / Abtastrate</translation>
     </message>
     <message>
         <source>Auto Select (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch (Standard)</translation>
     </message>
     <message>
         <source>Joint Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Forced Joint Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Joint Stereo Erzwingen</translation>
     </message>
     <message>
         <source>Simple</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfach</translation>
     </message>
     <message>
         <source>Dual Mono</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppel Mono</translation>
     </message>
     <message>
         <source>Mono</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>MP3 Kanal Modus:</translation>
     </message>
     <message>
         <source>16.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>22.050</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>24.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>32.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>44.100</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>48.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Sampling Rate (Hz):</source>
-        <translation type="unfinished"></translation>
+        <translation>Abtastrate (Hz):</translation>
     </message>
     <message>
         <source>Nero AAC Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero AAC Optionen</translation>
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>2 Durchläufe Verwenden (ABR Modus)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>AAC Profil Auswahl:</translation>
     </message>
     <message>
         <source>Enforce LC-AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwinge LC-AAC</translation>
     </message>
     <message>
         <source>Enforce HE-AAC (AAC + SBR)</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwinge HE-AAC (AAC + SBR)</translation>
     </message>
     <message>
-        <source>Enforce HE-AAC v2 (AAC +SBR + PS)</source>
-        <translation type="unfinished"></translation>
+        <source>Auto Select (Recommended)</source>
+        <translation>Automatisch (Empfohlen)</translation>
+    </message>
+    <message>
+        <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
+        <translation>Erzwinge HE-AAC v2 (AAC + SBR + PS)</translation>
     </message>
 </context>
 <context>

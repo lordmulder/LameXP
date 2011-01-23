@@ -36,8 +36,14 @@ public:
 	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual QString extension(void);
+	
+	//Advanced options
+	virtual void setProfile(int profile);
+	virtual void setEnable2Pass(bool enabled);
 
 private:
 	const QString m_binary_enc;
 	const QString m_binary_tag;
+	int m_configProfile;
+	bool m_configEnable2Pass;
 };

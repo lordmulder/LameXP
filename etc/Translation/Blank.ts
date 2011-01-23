@@ -502,7 +502,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Auto (Recommended)</source>
+        <source>Auto Select (Recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -514,7 +514,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enforce HE-AAC v2 (AAC +SBR + PS)</source>
+        <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
