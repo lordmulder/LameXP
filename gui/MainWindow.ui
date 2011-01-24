@@ -985,7 +985,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
+               <width>602</width>
                <height>520</height>
               </rect>
              </property>
@@ -1951,6 +1951,8 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionEncodeNow"/>
+    <addaction name="separator"/>
     <addaction name="actionOpen"/>
     <addaction name="actionOpenFolder"/>
     <addaction name="actionClearAll"/>
@@ -2250,6 +2252,15 @@
     <string>From File...</string>
    </property>
   </action>
+  <action name="actionEncodeNow">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/play.png</normaloff>:/icons/play.png</iconset>
+   </property>
+   <property name="text">
+    <string>Encode!</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -2271,6 +2282,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
@@ -2668,6 +2681,22 @@
     <hint type="destinationlabel">
      <x>447</x>
      <y>502</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionEncodeNow</sender>
+   <signal>triggered()</signal>
+   <receiver>buttonStart</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>423</y>
     </hint>
    </hints>
   </connection>

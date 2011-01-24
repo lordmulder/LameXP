@@ -22,6 +22,7 @@
 #include "Model_FileList.h"
 
 #include <QFileInfo>
+#include <QDir>
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
@@ -61,7 +62,7 @@ QVariant FileListModel::data(const QModelIndex &index, int role) const
 			return m_fileList.at(index.row()).fileName();
 			break;
 		case 1:
-			return m_fileList.at(index.row()).filePath();
+			return QDir::toNativeSeparators(m_fileList.at(index.row()).filePath());
 			break;
 		default:
 			return QVariant();

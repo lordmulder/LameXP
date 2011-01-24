@@ -646,6 +646,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Encode!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>

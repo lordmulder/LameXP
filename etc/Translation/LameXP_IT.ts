@@ -1046,6 +1046,10 @@
         <source>Reset Advanced Options </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Encode!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

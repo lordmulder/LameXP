@@ -1046,6 +1046,10 @@
         <source>Reset Advanced Options </source>
         <translation>Erweiterte Optionen Zurücksetzen</translation>
     </message>
+    <message>
+        <source>Encode!</source>
+        <translation>Kodieren!</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
