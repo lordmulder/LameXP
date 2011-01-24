@@ -539,7 +539,8 @@ void UpdateDialog::applyUpdate(void)
 		args << QString("/Location=%1").arg(m_updateInfo->m_downloadAddress);
 		args << QString("/Filename=%1").arg(m_updateInfo->m_downloadFilename);
 		args << QString("/TicketID=%1").arg(m_updateInfo->m_downloadFilecode);
-		args << QString("/ToFolder=%1").arg(QDir::toNativeSeparators(QApplication::applicationDirPath()));
+		args << QString("/ToFolder=%1").arg(QDir::toNativeSeparators(QDir(QApplication::applicationDirPath()).canonicalPath())); 
+		args << QString("/ToExFile=%1.exe").arg(QFileInfo(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath()).completeBaseName());
 		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(m_updateInfo->m_buildNo));
 
 		QApplication::setOverrideCursor(Qt::WaitCursor);

@@ -104,7 +104,9 @@ REM ------------------------------------------
 if "%LAMEXP_REDIST%"=="1" (
 	copy "..\Redist\*.*" "%TMP_PATH%"
 )
+copy "..\..\ReadMe.txt" "%TMP_PATH%"
 copy "..\..\License.txt" "%TMP_PATH%"
+copy "..\..\doc\Translate.html" "%TMP_PATH%"
 REM ------------------------------------------
 REM :: CREATE PACKAGES ::
 REM ------------------------------------------

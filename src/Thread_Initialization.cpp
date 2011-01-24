@@ -71,7 +71,7 @@ g_lamexp_tools[] =
 	{"8c842eef65248b46fa6cb9a9e5714f575672d999", "valdec.exe", 31},
 	{"8159f4e824b3e343ece95ba6dbb5e16da9c4866e", "volumax.exe", UINT_MAX},
 	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", UINT_MAX},
-	{"7380cb661ae7fbda82f3e8ecea6a2776101c9444", "wupdate.exe", UINT_MAX},
+	{"f8293dcf0d21dcca2798afaa8e0d1b93b8ced720", "wupdate.exe", UINT_MAX},
 	{"b7d14b3540d24df13119a55d97623a61412de6e3", "wvunpack.exe", 4601},
 	{NULL, NULL, NULL}
 };
