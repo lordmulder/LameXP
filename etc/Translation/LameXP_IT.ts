@@ -1030,6 +1030,22 @@
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> Volume Normalization </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Normalization Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak Volume (dB):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset Advanced Options </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

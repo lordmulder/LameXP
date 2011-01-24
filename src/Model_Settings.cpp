@@ -59,6 +59,8 @@ static const char *g_settingsId_bitrateManagementMaxRate = "AdvancedOptions/Bitr
 static const char *g_settingsId_samplingRate = "AdvancedOptions/Common/Resampling";
 static const char *g_settingsId_neroAACEnable2Pass = "AdvancedOptions/NeroAAC/Enable2Pass";
 static const char *g_settingsId_neroAACProfile = "AdvancedOptions/NeroAAC/ForceProfile";
+static const char *g_settingsId_normalizationFilterEnabled = "AdvancedOptions/VolumeNormalization/Enabled";
+static const char *g_settingsId_normalizationFilterMaxVolume = "AdvancedOptions/VolumeNormalization/MaxVolume";
 
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
@@ -223,3 +225,5 @@ MAKE_OPTION1(bitrateManagementMaxRate, 500)
 MAKE_OPTION1(samplingRate, 0)
 MAKE_OPTION3(neroAACEnable2Pass, true)
 MAKE_OPTION1(neroAACProfile, 0)
+MAKE_OPTION3(normalizationFilterEnabled, false)
+MAKE_OPTION1(normalizationFilterMaxVolume, -50)

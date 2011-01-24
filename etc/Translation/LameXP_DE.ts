@@ -316,7 +316,7 @@
     </message>
     <message>
         <source> Meta Information </source>
-        <translation>Meta Informationen</translation>
+        <translation> Meta Informationen </translation>
     </message>
     <message>
         <source>Edit</source>
@@ -332,7 +332,7 @@
     </message>
     <message>
         <source> Options </source>
-        <translation>Optionen</translation>
+        <translation> Optionen </translation>
     </message>
     <message>
         <source>Automatically generate playlist file (.m3u)</source>
@@ -348,7 +348,7 @@
     </message>
     <message>
         <source> Encoder / Format </source>
-        <translation>Kodierer / Format</translation>
+        <translation> Kodierer / Format </translation>
     </message>
     <message>
         <source>Lame MP3</source>
@@ -372,7 +372,7 @@
     </message>
     <message>
         <source> Rate Control Method </source>
-        <translation>Bitraten Steuerungsmethode</translation>
+        <translation> Bitraten Steuerungsmethode </translation>
     </message>
     <message>
         <source>Quality-based (VBR)</source>
@@ -388,7 +388,7 @@
     </message>
     <message>
         <source> Quality / Bitrate </source>
-        <translation>Qualität / Bitrate</translation>
+        <translation> Qualität / Bitrate </translation>
     </message>
     <message>
         <source>Minimum</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source> Encode Now!</source>
-        <translation>Jetzt Kodieren!</translation>
+        <translation> Jetzt Kodieren!</translation>
     </message>
     <message>
         <source>About...</source>
@@ -412,7 +412,7 @@
     </message>
     <message>
         <source> Exit Program</source>
-        <translation>Programm Ende</translation>
+        <translation> Programm Ende</translation>
     </message>
     <message>
         <source>File</source>
@@ -896,7 +896,7 @@
     </message>
     <message>
         <source> LAME Algorithm Quality </source>
-        <translation>LAME Algorithmus Qualität</translation>
+        <translation> LAME Algorithmus Qualität </translation>
     </message>
     <message>
         <source>Faster Processing</source>
@@ -928,7 +928,7 @@
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation>Bitraten Verwaltung (LAME und OggEnc2)</translation>
+        <translation> Bitraten Verwaltung (LAME und OggEnc2) </translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
@@ -1029,6 +1029,22 @@
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
         <translation>Erzwinge HE-AAC v2 (AAC + SBR + PS)</translation>
+    </message>
+    <message>
+        <source> Volume Normalization </source>
+        <translation> Lautstärke Normalisieren </translation>
+    </message>
+    <message>
+        <source>Enable Normalization Filter</source>
+        <translation>Normalisierungsfilter Aktivieren</translation>
+    </message>
+    <message>
+        <source>Peak Volume (dB):</source>
+        <translation>Max. Lautstärke (dB):</translation>
+    </message>
+    <message>
+        <source>Reset Advanced Options </source>
+        <translation>Erweiterte Optionen Zurücksetzen</translation>
     </message>
 </context>
 <context>

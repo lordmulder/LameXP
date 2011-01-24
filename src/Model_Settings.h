@@ -91,6 +91,8 @@ public:
 	MAKE_OPTION_DEC1(samplingRate)
 	MAKE_OPTION_DEC3(neroAACEnable2Pass)
 	MAKE_OPTION_DEC1(neroAACProfile)
+	MAKE_OPTION_DEC3(normalizationFilterEnabled)
+	MAKE_OPTION_DEC1(normalizationFilterMaxVolume)
 
 	//Misc
 	void validate(void);

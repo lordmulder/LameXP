@@ -518,6 +518,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source> Volume Normalization </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Normalization Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak Volume (dB):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset Advanced Options </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source> Encode Now!</source>
         <translation type="unfinished"></translation>
     </message>
