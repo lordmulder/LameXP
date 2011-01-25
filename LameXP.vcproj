@@ -411,6 +411,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Filter_Normalize.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Genres.cpp"
 				>
 			</File>
@@ -1120,6 +1124,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Filter_Downmix.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Filter_Normalize.h"
 				>
 			</File>
 			<File

@@ -985,7 +985,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
+               <width>604</width>
                <height>520</height>
               </rect>
              </property>
@@ -1688,10 +1688,10 @@
                         </size>
                        </property>
                        <property name="minimum">
-                        <double>-12.000000000000000</double>
+                        <double>-32.000000000000000</double>
                        </property>
                        <property name="maximum">
-                        <double>0.000000000000000</double>
+                        <double>-0.500000000000000</double>
                        </property>
                        <property name="singleStep">
                         <double>0.500000000000000</double>
@@ -2282,6 +2282,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

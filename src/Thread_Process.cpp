@@ -73,6 +73,11 @@ ProcessThread::~ProcessThread(void)
 		lamexp_remove_file(m_tempFiles.takeFirst());
 	}
 
+	while(!m_filters.isEmpty())
+	{
+		delete m_filters.takeFirst();
+	}
+
 	LAMEXP_DELETE(m_encoder);
 }
 
@@ -108,19 +113,17 @@ void ProcessThread::processFile()
 		emit processStateFinished(m_jobId, outFileName, false);
 		return;
 	}
-
-	QList<AbstractFilter*> filters;
 	
 	//Do we need Stereo downmix?
 	if(m_audioFile.formatAudioChannels() > 2 && m_encoder->requiresDownmix())
 	{
-		filters.prepend(new DownmixFilter());
+		m_filters.prepend(new DownmixFilter());
 	}
 
 	QString sourceFile = m_audioFile.filePath();
 
 	//Decode source file
-	if(!filters.isEmpty() || !m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
+	if(!m_filters.isEmpty() || !m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
 	{
 		m_currentStep = DecodingStep;
 		AbstractDecoder *decoder = DecoderRegistry::lookup(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion());
@@ -150,10 +153,10 @@ void ProcessThread::processFile()
 	}
 
 	//Apply all filters
-	while(!filters.isEmpty())
+	while(!m_filters.isEmpty())
 	{
 		QString tempFile = generateTempFileName();
-		AbstractFilter *poFilter = filters.takeFirst();
+		AbstractFilter *poFilter = m_filters.takeFirst();
 
 		if(bSuccess)
 		{
@@ -315,6 +318,11 @@ QString ProcessThread::generateTempFileName(void)
 
 	m_tempFiles << tempFileName;
 	return tempFileName;
+}
+
+void ProcessThread::addFilter(AbstractFilter *filter)
+{
+	m_filters.append(filter);
 }
 
 ////////////////////////////////////////////////////////////

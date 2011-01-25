@@ -19,7 +19,7 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Filter_Downmix.h"
+#include "Filter_Normalize.h"
 
 #include "Global.h"
 
@@ -27,7 +27,7 @@
 #include <QProcess>
 #include <QRegExp>
 
-DownmixFilter::DownmixFilter(void)
+NormalizeFilter::NormalizeFilter(int peakVolume)
 :
 	m_binary(lamexp_lookup_tool("sox.exe"))
 {
@@ -35,13 +35,15 @@ DownmixFilter::DownmixFilter(void)
 	{
 		throw "Error initializing SoX filter. Tool 'sox.exe' is not registred!";
 	}
+
+	m_peakVolume = min(-50, max(-3200, peakVolume));
 }
 
-DownmixFilter::~DownmixFilter(void)
+NormalizeFilter::~NormalizeFilter(void)
 {
 }
 
-bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -49,10 +51,11 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	process.setWorkingDirectory(lamexp_temp_folder());
 
 	args << "-V3";
-	args << "--guard" << "--temp" << ".";
+	args << "--temp" << ".";
 	args << QDir::toNativeSeparators(sourceFile);
-	args << "-c2";
 	args << QDir::toNativeSeparators(outputFile);
+	args << "gain";
+	args << "-n" << QString().sprintf("%.2f", static_cast<double>(m_peakVolume) / 100.0);
 
 	if(!startProcess(process, m_binary, args))
 	{

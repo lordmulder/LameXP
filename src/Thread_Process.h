@@ -29,6 +29,7 @@
 #include "Encoder_Abstract.h"
 
 class QMutex;
+class AbstractFilter;
 
 class ProcessThread: public QThread
 {
@@ -42,6 +43,7 @@ public:
 	
 	void abort() { m_aborted = true; }
 	QUuid getId() { return m_jobId; }
+	void addFilter(AbstractFilter *filter);
 
 private slots:
 	void handleUpdate(int progress);
@@ -74,6 +76,7 @@ private:
 	ProcessStep m_currentStep;
 	QStringList m_tempFiles;
 	const bool m_prependRelativeSourcePath;
+	QList<AbstractFilter*> m_filters;
 	
 	static QMutex *m_mutex_genFileName;
 };

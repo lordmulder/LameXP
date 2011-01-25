@@ -33,6 +33,7 @@
 #include "Encoder_AAC.h"
 #include "Encoder_FLAC.h"
 #include "Encoder_Wave.h"
+#include "Filter_Normalize.h"
 #include "WinSevenTaskbar.h"
 
 #include <QApplication>
@@ -495,7 +496,12 @@ void ProcessingDialog::startNextJob(void)
 		encoder,
 		m_settings->prependRelativeSourcePath()
 	);
-	
+
+	if(m_settings->normalizationFilterEnabled())
+	{
+		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume()));
+	}
+
 	m_threadList.append(thread);
 	m_allJobs.append(thread->getId());
 	
