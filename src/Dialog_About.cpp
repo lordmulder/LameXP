@@ -274,6 +274,13 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("mpg123 - Fast Console MPEG Audio Player/Decoder"),
+		"mpg123.exe", "v?.??.?",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"http://www.mpg123.de/"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("AC3Filter Tools - AC3/DTS Decoder"),
 		"valdec.exe", "v?.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
