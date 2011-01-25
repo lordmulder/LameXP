@@ -31,6 +31,7 @@
 #include <QDir>
 #include <QLibrary>
 #include <QResource>
+#include <QTime>
 
 #include <Windows.h>
 
@@ -118,6 +119,9 @@ void InitializationThread::run()
 
 	QDir toolsDir(":/tools/");
 	QList<QFileInfo> toolsList = toolsDir.entryInfoList(QStringList("*.*"), QDir::Files, QDir::Name);
+	
+	QTime timer;
+	timer.start();
 
 	//Extract all files
 	for(int i = 0; i < toolsList.count(); i++)
@@ -150,6 +154,14 @@ void InitializationThread::run()
 	
 	qDebug("All extracted.\n");
 
+	//Check delay
+	double delayExtract = static_cast<double>(timer.elapsed()) / 1000.0;
+	if(delayExtract > 8.0)
+	{
+		qWarning("Extracting tools took %.3f seconds -> probably slow realtime virus scanner.", delayExtract);
+		qWarning("Please report performance problems to your anti-virus developer !!!\n");
+	}
+
 	//Register all translations
 	initTranslations();
 
@@ -175,7 +187,7 @@ void InitializationThread::delay(void)
 	for(int i = 0; i < 20; i++)
 	{
 		printf("%c\b", temp[i%4]);
-		msleep(100);
+		msleep(25);
 	}
 
 	printf("Done\n\n");

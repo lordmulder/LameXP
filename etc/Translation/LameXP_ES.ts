@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>The True Audio - Lossless Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>True audio - Códec de audio sin pérdida</translation>
     </message>
 </context>
 <context>
@@ -896,155 +896,155 @@
     </message>
     <message>
         <source> LAME Algorithm Quality </source>
-        <translation type="unfinished"></translation>
+        <translation>Algoritmo de calidad LAME</translation>
     </message>
     <message>
         <source>Faster Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Mayor velocidad</translation>
     </message>
     <message>
         <source>Better quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Mayor calidad</translation>
     </message>
     <message>
         <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad muy alta (muy lento)</translation>
     </message>
     <message>
         <source>High Quality (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad alta (recomendado)</translation>
     </message>
     <message>
         <source>Average Quality (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad media (predeterminado)</translation>
     </message>
     <message>
         <source>Low Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad baja (rápido)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad muy baja (muy rápido)</translation>
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation type="unfinished"></translation>
+        <translation>Administración de tasa de bits (LAME y OggEnc2) </translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar administración de tasa de bits</translation>
     </message>
     <message>
         <source>Minimum (kbps):</source>
-        <translation type="unfinished"></translation>
+        <translation>Mínima (kbps):</translation>
     </message>
     <message>
         <source>Maximum (kbps):</source>
-        <translation type="unfinished"></translation>
+        <translation>Máxima (kbps):</translation>
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de canal / Frecuencia de muestreo</translation>
     </message>
     <message>
         <source>Auto Select (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoseleccionar (predeterminado)</translation>
     </message>
     <message>
         <source>Joint Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Estéreo conjunto</translation>
     </message>
     <message>
         <source>Forced Joint Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Estéreo conjunto forzado</translation>
     </message>
     <message>
         <source>Simple</source>
-        <translation type="unfinished"></translation>
+        <translation>Simple</translation>
     </message>
     <message>
         <source>Dual Mono</source>
-        <translation type="unfinished"></translation>
+        <translation>Mono dual</translation>
     </message>
     <message>
         <source>Mono</source>
-        <translation type="unfinished"></translation>
+        <translation>Mono</translation>
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de canal MP3:</translation>
     </message>
     <message>
         <source>16.000</source>
-        <translation type="unfinished"></translation>
+        <translation>16.000</translation>
     </message>
     <message>
         <source>22.050</source>
-        <translation type="unfinished"></translation>
+        <translation>22.050</translation>
     </message>
     <message>
         <source>24.000</source>
-        <translation type="unfinished"></translation>
+        <translation>24.000</translation>
     </message>
     <message>
         <source>32.000</source>
-        <translation type="unfinished"></translation>
+        <translation>32.000</translation>
     </message>
     <message>
         <source>44.100</source>
-        <translation type="unfinished"></translation>
+        <translation>44.100</translation>
     </message>
     <message>
         <source>48.000</source>
-        <translation type="unfinished"></translation>
+        <translation>48.000</translation>
     </message>
     <message>
         <source>Sampling Rate (Hz):</source>
-        <translation type="unfinished"></translation>
+        <translation>Frecuencia de muestreo (Hz):</translation>
     </message>
     <message>
         <source>Nero AAC Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de Nero AAC</translation>
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar procesamiento en 2-Pasos (Modo ABR)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar perfil AAC:</translation>
     </message>
     <message>
         <source>Enforce LC-AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar LC-AAC</translation>
     </message>
     <message>
         <source>Enforce HE-AAC (AAC + SBR)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar HE-AAC (AAC + SBR)</translation>
     </message>
     <message>
         <source>Auto Select (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-seleccionar (Recomendado)</translation>
     </message>
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar HE-AAC v2 (AAC + SBR + PS)</translation>
     </message>
     <message>
         <source> Volume Normalization </source>
-        <translation type="unfinished"></translation>
+        <translation>Normalización del volumen</translation>
     </message>
     <message>
         <source>Enable Normalization Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar filtro de normalización</translation>
     </message>
     <message>
         <source>Peak Volume (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation>Pico de volumen (dB):</translation>
     </message>
     <message>
         <source>Reset Advanced Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Resetear opciones avanzadas </translation>
     </message>
     <message>
         <source>Encode!</source>
