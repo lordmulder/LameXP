@@ -61,6 +61,8 @@ static const char *g_settingsId_neroAACEnable2Pass = "AdvancedOptions/NeroAAC/En
 static const char *g_settingsId_neroAACProfile = "AdvancedOptions/NeroAAC/ForceProfile";
 static const char *g_settingsId_normalizationFilterEnabled = "AdvancedOptions/VolumeNormalization/Enabled";
 static const char *g_settingsId_normalizationFilterMaxVolume = "AdvancedOptions/VolumeNormalization/MaxVolume";
+static const char *g_settingsId_toneAdjustBass = "AdvancedOptions/ToneAdjustment/Bass";
+static const char *g_settingsId_toneAdjustTreble = "AdvancedOptions/ToneAdjustment/Treble";
 
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
@@ -227,3 +229,5 @@ MAKE_OPTION3(neroAACEnable2Pass, true)
 MAKE_OPTION1(neroAACProfile, 0)
 MAKE_OPTION3(normalizationFilterEnabled, false)
 MAKE_OPTION1(normalizationFilterMaxVolume, -50)
+MAKE_OPTION1(toneAdjustBass, 0)
+MAKE_OPTION1(toneAdjustTreble, 0)

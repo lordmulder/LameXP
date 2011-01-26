@@ -162,6 +162,22 @@
         <source>The True Audio - Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Released under the terms of the GNU General Public License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -1052,6 +1068,18 @@ Votre dossier TEMP est situé ici:</translation>
     </message>
     <message>
         <source>Encode!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Tone Adjustment </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust Treble (dB):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust Bass (dB):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

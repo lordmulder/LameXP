@@ -108,6 +108,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Released under the terms of the GNU General Public License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>AC3Filter Tools - AC3/DTS Decoder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -149,6 +161,10 @@
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -462,6 +478,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Sampling Rate (Hz):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>16.000</source>
         <translation type="unfinished"></translation>
     </message>
@@ -483,10 +503,6 @@
     </message>
     <message>
         <source>48.000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sampling Rate (Hz):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -527,6 +543,18 @@
     </message>
     <message>
         <source>Peak Volume (dB):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Tone Adjustment </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust Treble (dB):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust Bass (dB):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

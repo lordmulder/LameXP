@@ -34,6 +34,8 @@
 #include "Encoder_FLAC.h"
 #include "Encoder_Wave.h"
 #include "Filter_Normalize.h"
+#include "Filter_Resample.h"
+#include "Filter_ToneAdjust.h"
 #include "WinSevenTaskbar.h"
 
 #include <QApplication>
@@ -428,6 +430,7 @@ void ProcessingDialog::startNextJob(void)
 	m_currentFile++;
 	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
 	AbstractEncoder *encoder = NULL;
+	bool nativeResampling = false;
 
 	switch(m_settings->compressionEncoder())
 	{
@@ -441,7 +444,11 @@ void ProcessingDialog::startNextJob(void)
 			{
 				mp3Encoder->setBitrateLimits(m_settings->bitrateManagementMinRate(), m_settings->bitrateManagementMaxRate());
 			}
-			mp3Encoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
+			if(m_settings->samplingRate() > 0)
+			{
+				mp3Encoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
+				nativeResampling = true;
+			}
 			mp3Encoder->setChannelMode(m_settings->lameChannelMode());
 			encoder = mp3Encoder;
 		}
@@ -455,7 +462,11 @@ void ProcessingDialog::startNextJob(void)
 			{
 				vorbisEncoder->setBitrateLimits(m_settings->bitrateManagementMinRate(), m_settings->bitrateManagementMaxRate());
 			}
-			vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
+			if(m_settings->samplingRate() > 0)
+			{
+				vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
+				nativeResampling = true;
+			}
 			encoder = vorbisEncoder;
 		}
 		break;
@@ -497,6 +508,14 @@ void ProcessingDialog::startNextJob(void)
 		m_settings->prependRelativeSourcePath()
 	);
 
+	if((m_settings->samplingRate() > 0) && !nativeResampling)
+	{
+		thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
+	}
+	if((m_settings->toneAdjustBass() != 0) || (m_settings->toneAdjustTreble() != 0))
+	{
+		thread->addFilter(new ToneAdjustFilter(m_settings->toneAdjustBass(), m_settings->toneAdjustTreble()));
+	}
 	if(m_settings->normalizationFilterEnabled())
 	{
 		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume()));

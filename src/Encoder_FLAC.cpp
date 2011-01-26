@@ -51,7 +51,6 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	QStringList args;
 
 	args << QString("-%1").arg(QString::number(max(0, min(8, m_configBitrate))));
-	qWarning("Year: %u", metaInfo.fileYear());
 
 	if(!metaInfo.fileName().isEmpty()) args << "-T" << QString("title=%1").arg(metaInfo.fileName());
 	if(!metaInfo.fileArtist().isEmpty()) args << "-T" << QString("artist=%1").arg(metaInfo.fileArtist());

@@ -36,6 +36,9 @@
 ..\..\src\Encoder_Wave.cpp 
 ..\..\src\Filter_Abstract.cpp 
 ..\..\src\Filter_Downmix.cpp 
+..\..\src\Filter_Normalize.cpp 
+..\..\src\Filter_Resample.cpp 
+..\..\src\Filter_ToneAdjust.cpp 
 ..\..\src\Genres.cpp 
 ..\..\src\Global.cpp 
 ..\..\src\LockedFile.cpp 
@@ -85,6 +88,9 @@
 ..\..\src\Encoder_Wave.h 
 ..\..\src\Filter_Abstract.h 
 ..\..\src\Filter_Downmix.h 
+..\..\src\Filter_Normalize.h 
+..\..\src\Filter_Resample.h 
+..\..\src\Filter_ToneAdjust.h 
 ..\..\src\Genres.h 
 ..\..\src\Global.h 
 ..\..\src\LockedFile.h 

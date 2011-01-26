@@ -415,6 +415,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Filter_Resample.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Filter_ToneAdjust.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Genres.cpp"
 				>
 			</File>
@@ -1128,6 +1136,14 @@
 			</File>
 			<File
 				RelativePath=".\src\Filter_Normalize.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Filter_Resample.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Filter_ToneAdjust.h"
 				>
 			</File>
 			<File

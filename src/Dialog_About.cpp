@@ -241,7 +241,7 @@ void AboutDialog::showMoreAbout(void)
 	QString moreAboutText;
 
 	moreAboutText += QString("<h3>%1</h3>").arg(tr("The following third-party software is used in LameXP:"));
-	moreAboutText += "<div style=\"margin-left:-25px;font-size:8pt\"><ul>";
+	moreAboutText += "<div style=\"margin-left:-25px;font-size:8pt\"><table><tr><td><ul>";
 	
 	moreAboutText += makeToolText
 	(
@@ -281,10 +281,21 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder"),
+		"faad.exe", "v?.?",
+		tr("Released under the terms of the GNU General Public License."),
+		"http://www.audiocoding.com/"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("AC3Filter Tools - AC3/DTS Decoder"),
 		"valdec.exe", "v?.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.ac3filter.net/projects/tools"
+	);
+	moreAboutText += QString
+	(
+		"</ul></td><td><ul>"
 	);
 	moreAboutText += makeToolText
 		(
@@ -334,6 +345,10 @@ void AboutDialog::showMoreAbout(void)
 		QString(), "v1.3",
 		tr("By Mark James, released under the Creative Commons 'by' License."),
 		"http://www.famfamfam.com/lab/icons/silk/"
+	);
+	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><i>%1</i><br>").arg
+	(
+		tr("LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.")
 	);
 
 	QMessageBox *moreAboutBox = new QMessageBox(this);

@@ -159,6 +159,22 @@
         <source>The True Audio - Lossless Audio Codec</source>
         <translation></translation>
     </message>
+    <message>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Released under the terms of the GNU General Public License.</source>
+        <translation>Veröffentlicht unter den Bestimmungen der  GNU General Public License.</translation>
+    </message>
+    <message>
+        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
+        <translation>Das Urheberrecht an LameXP liegt beit LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Authoren.</translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -1049,6 +1065,18 @@
     <message>
         <source>Encode!</source>
         <translation>Kodieren!</translation>
+    </message>
+    <message>
+        <source> Tone Adjustment </source>
+        <translation> Klangregelung </translation>
+    </message>
+    <message>
+        <source>Adjust Treble (dB):</source>
+        <translation>Höhen-Regler (dB):</translation>
+    </message>
+    <message>
+        <source>Adjust Bass (dB):</source>
+        <translation>Bass-Regler (dB):</translation>
     </message>
 </context>
 <context>

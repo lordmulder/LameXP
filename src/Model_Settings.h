@@ -93,6 +93,8 @@ public:
 	MAKE_OPTION_DEC1(neroAACProfile)
 	MAKE_OPTION_DEC3(normalizationFilterEnabled)
 	MAKE_OPTION_DEC1(normalizationFilterMaxVolume)
+	MAKE_OPTION_DEC1(toneAdjustBass)
+	MAKE_OPTION_DEC1(toneAdjustTreble)
 
 	//Misc
 	void validate(void);

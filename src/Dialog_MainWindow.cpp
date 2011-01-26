@@ -218,6 +218,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
 	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
 	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
+	spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBass()) / 100.0);
+	spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTreble()) / 100.0);
 	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelMode());
 	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRate());
 	comboBoxNeroAACProfile->setCurrentIndex(m_settings->neroAACProfile());
@@ -234,8 +236,13 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(comboBoxNeroAACProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(neroAACProfileChanged(int)));
 	connect(checkBoxNormalizationFilter, SIGNAL(clicked(bool)), this, SLOT(normalizationEnabledChanged(bool)));
 	connect(spinBoxNormalizationFilter, SIGNAL(valueChanged(double)), this, SLOT(normalizationMaxVolumeChanged(double)));
+	connect(spinBoxToneAdjustBass, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustBassChanged(double)));
+	connect(spinBoxToneAdjustTreble, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustTrebleChanged(double)));
+	connect(buttonToneAdjustReset, SIGNAL(clicked()), this, SLOT(toneAdjustTrebleReset()));
 	connect(buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
+	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
+	toneAdjustBassChanged(spinBoxToneAdjustBass->value());
 	
 	//Activate file menu actions
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
@@ -1713,6 +1720,35 @@ void MainWindow::normalizationMaxVolumeChanged(double value)
 }
 
 /*
+ * Tone adjustment has changed (Bass)
+ */
+void MainWindow::toneAdjustBassChanged(double value)
+{
+	m_settings->toneAdjustBass(static_cast<int>(value * 100.0));
+	spinBoxToneAdjustBass->setPrefix((value > 0) ? "+" : QString());
+}
+
+/*
+ * Tone adjustment has changed (Treble)
+ */
+void MainWindow::toneAdjustTrebleChanged(double value)
+{
+	m_settings->toneAdjustTreble(static_cast<int>(value * 100.0));
+	spinBoxToneAdjustTreble->setPrefix((value > 0) ? "+" : QString());
+}
+
+/*
+ * Tone adjustment has been reset
+ */
+void MainWindow::toneAdjustTrebleReset()
+{
+	spinBoxToneAdjustBass->setValue(m_settings->toneAdjustBassDefault());
+	spinBoxToneAdjustTreble->setValue(m_settings->toneAdjustTrebleDefault());
+	toneAdjustBassChanged(spinBoxToneAdjustBass->value());
+	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
+}
+
+/*
  * Reset all advanced options to their defaults
  */
 void MainWindow::resetAdvancedOptionsButtonClicked()
@@ -1721,6 +1757,8 @@ void MainWindow::resetAdvancedOptionsButtonClicked()
 	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());
 	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRateDefault());
 	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolumeDefault()) / 100.0);
+	spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBassDefault()) / 100.0);
+	spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTrebleDefault()) / 100.0);
 	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelModeDefault());
 	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRateDefault());
 	comboBoxNeroAACProfile->setCurrentIndex(m_settings->neroAACProfileDefault());

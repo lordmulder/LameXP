@@ -89,6 +89,9 @@ private slots:
 	void neroAAC2PassChanged(bool checked);
 	void normalizationEnabledChanged(bool checked);
 	void normalizationMaxVolumeChanged(double volume);
+	void toneAdjustBassChanged(double value);
+	void toneAdjustTrebleChanged(double value);
+	void toneAdjustTrebleReset();
 	void resetAdvancedOptionsButtonClicked();
 	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);
