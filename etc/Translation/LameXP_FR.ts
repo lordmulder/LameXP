@@ -1440,6 +1440,17 @@ Votre dossier TEMP est situé ici:</translation>
     </message>
 </context>
 <context>
+    <name>ShellIntegration</name>
+    <message>
+        <source>Audio File supported by LameXP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert this file with LameXP v4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SplashScreen</name>
     <message>
         <source>LameXP is launching...</source>

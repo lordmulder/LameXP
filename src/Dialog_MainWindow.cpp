@@ -37,6 +37,7 @@
 #include "Model_FileSystem.h"
 #include "WinSevenTaskbar.h"
 #include "Registry_Decoder.h"
+#include "ShellIntegration.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -730,6 +731,10 @@ void MainWindow::windowShown(void)
 			installWMADecoderActionTriggered(rand() % 2);
 		}
 	}
+
+	// !!! -- TEST -- !!!
+	ShellIntegration::install();
+	// !!! -- TEST -- !!!
 
 	//Add files from the command-line
 	for(int i = 0; i < arguments.count() - 1; i++)

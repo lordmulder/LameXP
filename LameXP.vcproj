@@ -66,7 +66,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib Winmm.lib psapi.lib"
+				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib Winmm.lib Shlwapi.lib psapi.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;"
 				GenerateDebugInformation="true"
@@ -154,7 +154,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib"
+				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib Shlwapi.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;"
 				GenerateDebugInformation="false"
@@ -246,7 +246,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib"
+				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib Shlwapi.lib"
 				Version=""
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\lib&quot;;&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats&quot;"
@@ -1347,6 +1347,36 @@
 			<File
 				RelativePath=".\src\ShellIntegration.h"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="PerfMOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;orming Custom Build Step"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="PerfMOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;orming Custom Build Step"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release_Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="PerfMOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;orming Custom Build Step"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\Targetver.h"
@@ -1652,6 +1682,10 @@
 			</File>
 			<File
 				RelativePath=".\tmp\MOC_Registry_Decoder.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tmp\MOC_ShellIntegration.cpp"
 				>
 			</File>
 			<File
