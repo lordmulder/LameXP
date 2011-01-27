@@ -74,7 +74,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 {
 	QString aboutText;
 
-	aboutText += QString("<h2>%1</h2>").arg(tr("LameXP - Audio Encoder Front-end"));
+	aboutText += QString("<h2>%1</h2>").arg(tr("LameXP &minus; Audio Encoder Front-end"));
 	aboutText += QString("<b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b><br>").arg(max(lamexp_version_date().year(),QDate::currentDate().year()));
 	aboutText += QString().sprintf("<b>Version %d.%02d %s, Build %d [%s]</b><br><br>", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
 	aboutText += QString("<nobr>%1</nobr><br>").arg(tr("Please visit %1 for news and updates!").arg(LINK("http://forum.doom9.org/showthread.php?t=157726")));
@@ -241,25 +241,25 @@ void AboutDialog::showMoreAbout(void)
 	QString moreAboutText;
 
 	moreAboutText += QString("<h3>%1</h3>").arg(tr("The following third-party software is used in LameXP:"));
-	moreAboutText += "<div style=\"margin-left:-25px;font-size:8pt\"><table><tr><td><ul>";
+	moreAboutText += "<div style=\"margin-left:-25px;font-size:8pt;white-space:nowrap\"><table><tr><td><ul>";
 	
 	moreAboutText += makeToolText
 	(
-		tr("LAME - OpenSource mp3 Encoder"),
+		tr("LAME &minus; OpenSource mp3 Encoder"),
 		"lame.exe", "v?.?? a??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://lame.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("OggEnc - Ogg Vorbis Encoder"),
+		tr("OggEnc &minus; Ogg Vorbis Encoder"),
 		"oggenc2_i386.exe", "v?.??",
 		tr("Completely open and patent-free audio encoding technology."),
 		"http://www.vorbis.com/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("Nero AAC reference MPEG-4 Encoder"),
+		tr("Nero AAC Reference MPEG-4 Encoder"),
 		"neroAacEnc.exe", "v?.?.?.?",
 		tr("Freeware state-of-the-art HE-AAC encoder with 2-Pass support."),
 		neroAacUrl,
@@ -267,28 +267,28 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 	(
-		tr("FLAC - Free Lossless Audio Codec"),
+		tr("FLAC &minus; Free Lossless Audio Codec"),
 		"flac.exe", "v?.?.?",
 		tr("Open and patent-free lossless audio compression technology."),
 		"http://flac.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("mpg123 - Fast Console MPEG Audio Player/Decoder"),
+		tr("mpg123 &minus; Fast Console MPEG Audio Player/Decoder"),
 		"mpg123.exe", "v?.??.?",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.mpg123.de/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder"),
+		tr("FAAD &minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder"),
 		"faad.exe", "v?.?",
 		tr("Released under the terms of the GNU General Public License."),
 		"http://www.audiocoding.com/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("AC3Filter Tools - AC3/DTS Decoder"),
+		tr("AC3Filter Tools &minus; AC3/DTS Decoder"),
 		"valdec.exe", "v?.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.ac3filter.net/projects/tools"
@@ -299,49 +299,49 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 		(
-		tr("WavPack - Hybrid Lossless Compression"),
+		tr("WavPack &minus; Hybrid Lossless Compression"),
 		"wvunpack.exe", "v?.??.?",
 		tr("Completely open audio compression format."),
 		"http://www.wavpack.com/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("Monkey's Audio - Lossless Audio Compressor"),
+		tr("Monkey's Audio &minus; Lossless Audio Compressor"),
 		"mac.exe", "v?.??",
 		tr("Freely available source code, simple SDK and non-restrictive licensing."),
 		"http://www.monkeysaudio.com/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("The True Audio - Lossless Audio Codec"),
+		tr("The True Audio &minus; Lossless Audio Codec"),
 		"ttaenc.exe", "v?.?.?",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://tta.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("MediaInfo - Media File Analysis Tool"),
+		tr("MediaInfo &minus; Media File Analysis Tool"),
 		"mediainfo_i386.exe", "v?.?.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://mediainfo.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("SoX - Sound eXchange"),
+		tr("SoX &minus; Sound eXchange"),
 		"sox.exe", "v??.?.?",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://sox.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("GnuPG - The GNU Privacy Guard"),
+		tr("GnuPG &minus; The GNU Privacy Guard"),
 		"gpgv.exe", "v?.?.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.gnupg.org/"
 	);
 	moreAboutText += makeToolText
 	(
-		tr("Silk Icons - Over 700  icons in PNG format"),
+		tr("Silk Icons &minus; Over 700  icons in PNG format"),
 		QString(), "v1.3",
 		tr("By Mark James, released under the Creative Commons 'by' License."),
 		"http://www.famfamfam.com/lab/icons/silk/"
@@ -401,7 +401,7 @@ QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBi
 		verStr = lamexp_version2string(toolVerFmt, lamexp_tool_version(toolBin), tr("n/a"));
 	}
 
-	toolText += QString("<li><b>%1 (%2)</b><br>").arg(toolName, verStr);
+	toolText += QString("<li><nobr><b>%1 (%2)</b></nobr><br>").arg(toolName, verStr);
 	toolText += QString("<nobr>%1</nobr><br>").arg(toolLicense);
 	if(!extraInfo.isEmpty()) toolText += QString("<nobr><i>%1</i></nobr><br>").arg(extraInfo);
 	toolText += QString("<a href=\"%1\">%1</a>").arg(toolWebsite);

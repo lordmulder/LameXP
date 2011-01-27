@@ -4,10 +4,6 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>LameXP - Audio Encoder Front-end</source>
-        <translation>LameXP - Audio Kodierer Oberfläche</translation>
-    </message>
-    <message>
         <source>Please visit %1 for news and updates!</source>
         <translation>Bitte besuchen Sie %1 für aktuelle Informationen!</translation>
     </message>
@@ -72,24 +68,12 @@
         <translation>Die folgende Drittsoftware wird in LameXP eingesetzt:</translation>
     </message>
     <message>
-        <source>LAME - OpenSource mp3 Encoder</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Veröffentlicht unter den Bestimmungen der  GNU Leser General Public License.</translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation>Komplett offene und patentfreie Technologie zur Audio-Kompression.</translation>
-    </message>
-    <message>
-        <source>Nero AAC reference MPEG-4 Encoder</source>
-        <translation></translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
@@ -100,32 +84,8 @@
         <translation>Als kostenloser Download auf der Herstellerseite verfügbar:</translation>
     </message>
     <message>
-        <source>FLAC - Free Lossless Audio Codec</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation>Offene und patentfreie Technlogie zur verlustfreien Audio-Kompression.</translation>
-    </message>
-    <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools - AC3/DTS Dekodierer</translation>
-    </message>
-    <message>
-        <source>MediaInfo - Media File Analysis Tool</source>
-        <translation>MediaInfo - Multimedia Analyse Werkzeug</translation>
-    </message>
-    <message>
-        <source>SoX - Sound eXchange</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>GnuPG - The GNU Privacy Guard</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation>Silk Icons - mehr als 700 Symbole im PNG Format</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
@@ -140,32 +100,12 @@
         <translation>n/v</translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation>Frei verfügbarer Quellcode, einfaches SDK und nicht-restriktive Lizenz.</translation>
     </message>
     <message>
-        <source>WavPack - Hybrid Lossless Compression</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Completely open audio compression format.</source>
-        <translation>Komplett offenes Audio Kompressionsformat.</translation>
-    </message>
-    <message>
-        <source>The True Audio - Lossless Audio Codec</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation></translation>
+        <translation>Komplett offengelegtes Audio Kompressionsformat.</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
@@ -174,6 +114,66 @@
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
         <translation>Das Urheberrecht an LameXP liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Authoren.</translation>
+    </message>
+    <message>
+        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
+        <translation>LameXP &amp;minus; Audio Kodierer Oberfläche</translation>
+    </message>
+    <message>
+        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
+        <translation>LAME &amp;minus; Quelloffener mp3 Kodierer</translation>
+    </message>
+    <message>
+        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
+        <translation>OggEnc &amp;minus; Ogg Vorbis Kodierer</translation>
+    </message>
+    <message>
+        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
+        <translation>mpg123 &amp;minus; Schneller MPEG Audio Konsolen Dekodierer</translation>
+    </message>
+    <message>
+        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation>FAAD &amp;minus; Quelloffener MPEG-4 und MPEG-2 AAC Dekodierer</translation>
+    </message>
+    <message>
+        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
+        <translation>AC3Filter Tools &amp;minus; AC3/DTS Dekodierer</translation>
+    </message>
+    <message>
+        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
+        <translation>WavPack &amp;minus; Hybride Verlustfreie Kompression</translation>
+    </message>
+    <message>
+        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
+        <translation>Monkey&apos;s Audio &amp;minus; Verlustfreie Audio Kompression</translation>
+    </message>
+    <message>
+        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
+        <translation>The True Audio &amp;minus; Verlustfreier Audio Codec</translation>
+    </message>
+    <message>
+        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
+        <translation>MediaInfo &amp;minus; Multimedia Analyse Werkzeug</translation>
+    </message>
+    <message>
+        <source>SoX &amp;minus; Sound eXchange</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
+        <translation>Silk Icons &amp;minus; Über 700 Symbole im PNG Format</translation>
+    </message>
+    <message>
+        <source>Nero AAC Reference MPEG-4 Encoder</source>
+        <translation>Nero AAC Referenz MPEG-4 Kodierer</translation>
     </message>
 </context>
 <context>

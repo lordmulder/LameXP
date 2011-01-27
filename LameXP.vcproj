@@ -467,6 +467,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\ShellIntegration.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Thread_FileAnalyzer.cpp"
 				>
 			</File>
@@ -1338,6 +1342,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ShellIntegration.h"
 				>
 			</File>
 			<File

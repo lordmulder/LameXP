@@ -4,7 +4,7 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>LameXP - Audio Encoder Front-end</source>
+        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -72,7 +72,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>LAME - OpenSource mp3 Encoder</source>
+        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -80,7 +80,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -88,7 +88,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nero AAC reference MPEG-4 Encoder</source>
+        <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -100,7 +100,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FLAC - Free Lossless Audio Codec</source>
+        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -108,11 +108,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -120,11 +120,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
+        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>WavPack - Hybrid Lossless Compression</source>
+        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -132,7 +132,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
+        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -140,23 +140,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The True Audio - Lossless Audio Codec</source>
+        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MediaInfo - Media File Analysis Tool</source>
+        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SoX - Sound eXchange</source>
+        <source>SoX &amp;minus; Sound eXchange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GnuPG - The GNU Privacy Guard</source>
+        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

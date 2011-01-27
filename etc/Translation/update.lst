@@ -50,6 +50,7 @@
 ..\..\src\Model_Progress.cpp 
 ..\..\src\Model_Settings.cpp 
 ..\..\src\Registry_Decoder.cpp 
+..\..\src\ShellIntegration.cpp 
 ..\..\src\Thread_FileAnalyzer.cpp 
 ..\..\src\Thread_Initialization.cpp 
 ..\..\src\Thread_MessageHandler.cpp 
@@ -102,6 +103,7 @@
 ..\..\src\Model_Settings.h 
 ..\..\src\Registry_Decoder.h 
 ..\..\src\Resource.h 
+..\..\src\ShellIntegration.h 
 ..\..\src\Targetver.h 
 ..\..\src\Thread_FileAnalyzer.h 
 ..\..\src\Thread_Initialization.h 
