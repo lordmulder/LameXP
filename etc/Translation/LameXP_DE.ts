@@ -672,7 +672,7 @@
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
-        <translation>Wollen Sie die Update Erinnerung wirklich deaktivieren?</translation>
+        <translation>Sind Sie sicher, dass Sie die Update-Erinnerung jetzt deaktivieren möchten?</translation>
     </message>
     <message>
         <source>Update Reminder</source>
@@ -684,7 +684,7 @@
     </message>
     <message>
         <source>Do you really want to disable all sound effects?</source>
-        <translation>Wollen Sie wirklich alle Sound-Effekte deaktivieren?</translation>
+        <translation>Sind Sie sicher, dass Sie alle Sound-Effekte deaktivieren möchten?</translation>
     </message>
     <message>
         <source>Sound Effects</source>
@@ -720,7 +720,7 @@
     </message>
     <message>
         <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation>Möchten Sie wirklich alle WMA Dekodierer Meldungen deaktivieren?</translation>
+        <translation>Sind Sie sicher, dass Sie alle WMA Dekodierer Meldungen deaktivieren möchten?</translation>
     </message>
     <message>
         <source>All WMA Decoder notifications have been disabled.</source>
@@ -1077,6 +1077,26 @@
     <message>
         <source>Adjust Bass (dB):</source>
         <translation>Bass-Regler (dB):</translation>
+    </message>
+    <message>
+        <source>Disable Shell Integration</source>
+        <translation>Shell-Integration Deaktivieren</translation>
+    </message>
+    <message>
+        <source>Shell Integration</source>
+        <translation>Shell-Integration</translation>
+    </message>
+    <message>
+        <source>Do you really want to disable the LameXP shell integration?</source>
+        <translation>Sind Sie sicher, dass Sie die LameXP Shell-Integration jetzt deaktivieren möchten?</translation>
+    </message>
+    <message>
+        <source>The LameXP shell integration has been disabled.</source>
+        <translation>Die LameXP Shell-Integration wurde deaktiviert.</translation>
+    </message>
+    <message>
+        <source>The LameXP shell integration has been re-enabled.</source>
+        <translation>Die LameXP Shell-Integration wurde wieder aktiviert.</translation>
     </message>
 </context>
 <context>
@@ -1444,8 +1464,8 @@
         <translation>LameXP Audio-Datei</translation>
     </message>
     <message>
-        <source>Convert this file with LameXP v4</source>
-        <translation>Diese Datei mit LameXP v4 umwandeln</translation>
+        <source>Convert this file with LameXP v%1</source>
+        <translation>Datei mit LameXP v%1 umwandeln</translation>
     </message>
 </context>
 <context>

@@ -1080,6 +1080,26 @@ Votre dossier TEMP est situé ici:</translation>
         <source>Adjust Bass (dB):</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable Shell Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shell Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to disable the LameXP shell integration?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The LameXP shell integration has been disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The LameXP shell integration has been re-enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
@@ -1446,7 +1466,7 @@ Votre dossier TEMP est situé ici:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Convert this file with LameXP v4</source>
+        <source>Convert this file with LameXP v%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

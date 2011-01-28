@@ -678,6 +678,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Disable Shell Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -703,6 +707,46 @@
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloading WMA Decoder Setup, please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The download seems to be corrupted. Please try again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WMA Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit LameXP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postpone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -774,10 +818,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Postpone</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -826,7 +866,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Do you want to download and install the WMA File Decoder component now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>WMA Decoder Missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download &amp;&amp; Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1034,47 +1082,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to download and install the WMA File Decoder component now?</source>
+        <source>Shell Integration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download &amp;&amp; Install</source>
+        <source>Do you really want to disable the LameXP shell integration?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel</source>
+        <source>The LameXP shell integration has been disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Download Failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Try Again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The download seems to be corrupted. Please try again!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WMA Decoder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quit LameXP</source>
+        <source>The LameXP shell integration has been re-enabled.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1443,7 +1463,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Convert this file with LameXP v4</source>
+        <source>Convert this file with LameXP v%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

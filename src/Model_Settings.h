@@ -79,22 +79,23 @@ public:
 	MAKE_OPTION_DEC2(autoUpdateLastCheck);
 	MAKE_OPTION_DEC3(autoUpdateEnabled);
 	MAKE_OPTION_DEC3(soundsEnabled);
-	MAKE_OPTION_DEC3(neroAacNotificationsEnabled)
-	MAKE_OPTION_DEC3(wmaDecoderNotificationsEnabled)
-	MAKE_OPTION_DEC3(dropBoxWidgetEnabled)
+	MAKE_OPTION_DEC3(neroAacNotificationsEnabled);
+	MAKE_OPTION_DEC3(wmaDecoderNotificationsEnabled);
+	MAKE_OPTION_DEC3(dropBoxWidgetEnabled);
+	MAKE_OPTION_DEC3(shellIntegrationEnabled);
 	MAKE_OPTION_DEC2(currentLanguage);
 	MAKE_OPTION_DEC1(lameAlgoQuality);
 	MAKE_OPTION_DEC1(lameChannelMode);
 	MAKE_OPTION_DEC3(bitrateManagementEnabled);
 	MAKE_OPTION_DEC1(bitrateManagementMinRate);
 	MAKE_OPTION_DEC1(bitrateManagementMaxRate);
-	MAKE_OPTION_DEC1(samplingRate)
-	MAKE_OPTION_DEC3(neroAACEnable2Pass)
-	MAKE_OPTION_DEC1(neroAACProfile)
-	MAKE_OPTION_DEC3(normalizationFilterEnabled)
-	MAKE_OPTION_DEC1(normalizationFilterMaxVolume)
-	MAKE_OPTION_DEC1(toneAdjustBass)
-	MAKE_OPTION_DEC1(toneAdjustTreble)
+	MAKE_OPTION_DEC1(samplingRate);
+	MAKE_OPTION_DEC3(neroAACEnable2Pass);
+	MAKE_OPTION_DEC1(neroAACProfile);
+	MAKE_OPTION_DEC3(normalizationFilterEnabled);
+	MAKE_OPTION_DEC1(normalizationFilterMaxVolume);
+	MAKE_OPTION_DEC1(toneAdjustBass);
+	MAKE_OPTION_DEC1(toneAdjustTreble);
 
 	//Misc
 	void validate(void);

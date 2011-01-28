@@ -985,7 +985,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
+               <width>602</width>
                <height>609</height>
               </rect>
              </property>
@@ -2200,6 +2200,7 @@
      <addaction name="actionDisableUpdateReminder"/>
      <addaction name="actionDisableWmaDecoderNotifications"/>
      <addaction name="actionDisableNeroAacNotifications"/>
+     <addaction name="actionDisableShellIntegration"/>
     </widget>
     <addaction name="menuConfiguration"/>
     <addaction name="actionInstallWMADecoder"/>
@@ -2439,6 +2440,14 @@
     <string>Encode!</string>
    </property>
   </action>
+  <action name="actionDisableShellIntegration">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Disable Shell Integration</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -2460,6 +2469,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

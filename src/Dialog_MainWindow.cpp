@@ -75,16 +75,6 @@
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 #define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); CMD; if(__dropBoxVisible) m_dropBox->show(); }
 
-//Helper class
-//class Index: public QObjectUserData
-//{
-//public:
-//	Index(int index) { m_index = index; }
-//	int value(void) { return m_index; }
-//private:
-//	int m_index;
-//};
-
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -304,11 +294,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
 	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
+	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
+	actionDisableShellIntegration->setVisible(!lamexp_portable_mode());
 	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
 	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
 	connect(actionInstallWMADecoder, SIGNAL(triggered(bool)), this, SLOT(installWMADecoderActionTriggered(bool)));
 	connect(actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
 	connect(actionDisableWmaDecoderNotifications, SIGNAL(triggered(bool)), this, SLOT(disableWmaDecoderNotificationsActionTriggered(bool)));
+	connect(actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
 	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
 		
 	//Activate help menu actions
@@ -395,7 +388,6 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_sourceFilesContextMenu);
 	LAMEXP_DELETE(m_dropBox);
-
 }
 
 ////////////////////////////////////////////////////////////
@@ -432,6 +424,81 @@ void MainWindow::addFiles(const QStringList &files)
 	LAMEXP_DELETE(analyzer);
 	sourceFileView->scrollToBottom();
 	m_banner->close();
+}
+
+/*
+ * Download and install WMA Decoder component
+ */
+void MainWindow::installWMADecoder(void)
+{
+	static const char *download_url = "http://www.nch.com.au/components/wmawav.exe";
+	static const char *download_hash = "52a3b0e6690faf3f830c336d3c0eadfb7a4e9bc6";
+	
+	QString binaryWGet = lamexp_lookup_tool("wget.exe");
+	QString binaryElevator = lamexp_lookup_tool("elevator.exe");
+	
+	if(binaryWGet.isEmpty() || binaryElevator.isEmpty())
+	{
+		throw "Required binary is not available!";
+	}
+
+	while(true)
+	{
+		QString setupFile = QString("%1/%2.exe").arg(lamexp_temp_folder(), lamexp_rand_str());
+
+		QProcess process;
+		process.setWorkingDirectory(QFileInfo(setupFile).absolutePath());
+
+		QEventLoop loop;
+		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
+		connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), &loop, SLOT(quit()));
+		
+		process.start(binaryWGet, QStringList() << "-O" << QFileInfo(setupFile).fileName() << download_url);
+		m_banner->show(tr("Downloading WMA Decoder Setup, please wait..."), &loop);
+
+		if(process.exitCode() != 0 || QFileInfo(setupFile).size() < 10240)
+		{
+			QFile::remove(setupFile);
+			if(QMessageBox::critical(this, tr("Download Failed"), tr("Failed to download the WMA Decoder setup. Check your internet connection!"), tr("Try Again"), tr("Cancel")) == 0)
+			{
+				continue;
+			}
+			return;
+		}
+
+		QFile setupFileContent(setupFile);
+		QCryptographicHash setupFileHash(QCryptographicHash::Sha1);
+		
+		setupFileContent.open(QIODevice::ReadOnly);
+		if(setupFileContent.isOpen() && setupFileContent.isReadable())
+		{
+			setupFileHash.addData(setupFileContent.readAll());
+			setupFileContent.close();
+		}
+
+		if(_stricmp(setupFileHash.result().toHex().constData(), download_hash))
+		{
+			qWarning("Hash miscompare:\n  Expected %s\n  Detected %s\n", download_hash, setupFileHash.result().toHex().constData());
+			QFile::remove(setupFile);
+			if(QMessageBox::critical(this, tr("Download Failed"), tr("The download seems to be corrupted. Please try again!"), tr("Try Again"), tr("Cancel")) == 0)
+			{
+				continue;
+			}
+			return;
+		}
+
+		QApplication::setOverrideCursor(Qt::WaitCursor);
+		process.start(binaryElevator, QStringList() << QString("/exec=%1").arg(setupFile));
+		loop.exec(QEventLoop::ExcludeUserInputEvents);
+		QFile::remove(setupFile);
+		QApplication::restoreOverrideCursor();
+
+		if(QMessageBox::information(this, tr("WMA Decoder"), tr("The WMA File Decoder has been installed. Please restart LameXP now!"), tr("Quit LameXP"), tr("Postpone")) == 0)
+		{
+			QApplication::quit();
+		}
+		break;
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -500,6 +567,11 @@ void MainWindow::changeEvent(QEvent *e)
 		m_metaInfoModel->clearData();
 		updateEncoder(m_settings->compressionEncoder());
 		updateLameAlgoQuality(sliderLameAlgoQuality->value());
+
+		if(m_settings->shellIntegrationEnabled())
+		{
+			ShellIntegration::install();
+		}
 	}
 }
 
@@ -726,15 +798,14 @@ void MainWindow::windowShown(void)
 		{
 			QString messageText;
 			messageText += QString("<nobr>%1<br>").arg(tr("LameXP has detected that the WMA File Decoder component is not currently installed on your system."));
-			messageText += QString("%1</nobr>").arg(tr("You won't be able to process WMA files as input unless the WMA File Decoder component is installed!"));
-			QMessageBox::information(this, tr("WMA Decoder Missing"), messageText);
-			installWMADecoderActionTriggered(rand() % 2);
+			messageText += QString("%1<br><br>").arg(tr("You won't be able to process WMA files as input unless the WMA File Decoder component is installed!"));
+			messageText += QString("%1</nobr>").arg(tr("Do you want to download and install the WMA File Decoder component now?"));
+			if(QMessageBox::information(this, tr("WMA Decoder Missing"), messageText, tr("Download && Install"), tr("Postpone")) == 0)
+			{
+				installWMADecoder();
+			}
 		}
 	}
-
-	// !!! -- TEST -- !!!
-	ShellIntegration::install();
-	// !!! -- TEST -- !!!
 
 	//Add files from the command-line
 	for(int i = 0; i < arguments.count() - 1; i++)
@@ -751,6 +822,12 @@ void MainWindow::windowShown(void)
 	if(!m_delayedFileList->isEmpty() && !m_delayedFileTimer->isActive())
 	{
 		m_delayedFileTimer->start(5000);
+	}
+
+	//Enable shell integration
+	if(m_settings->shellIntegrationEnabled())
+	{
+		ShellIntegration::install();
 	}
 
 	//Make DropBox visible
@@ -2040,81 +2117,15 @@ void MainWindow::disableWmaDecoderNotificationsActionTriggered(bool checked)
  */
 void MainWindow::installWMADecoderActionTriggered(bool checked)
 {
-	static const char *download_url = "http://www.nch.com.au/components/wmawav.exe";
-	static const char *download_hash = "52a3b0e6690faf3f830c336d3c0eadfb7a4e9bc6";
-	
-	if(QMessageBox::question(this, tr("Install WMA Decoder"), tr("Do you want to download and install the WMA File Decoder component now?"), tr("Download && Install"), tr("Cancel")) != 0)
+	if(QMessageBox::question(this, tr("Install WMA Decoder"), tr("Do you want to download and install the WMA File Decoder component now?"), tr("Download && Install"), tr("Cancel")) == 0)
 	{
-		return;
-	}
-
-	QString binaryWGet = lamexp_lookup_tool("wget.exe");
-	QString binaryElevator = lamexp_lookup_tool("elevator.exe");
-	
-	if(binaryWGet.isEmpty() || binaryElevator.isEmpty())
-	{
-		throw "Required binary is not available!";
-	}
-
-	while(true)
-	{
-		QString setupFile = QString("%1/%2.exe").arg(lamexp_temp_folder(), lamexp_rand_str());
-
-		QProcess process;
-		process.setWorkingDirectory(QFileInfo(setupFile).absolutePath());
-
-		QEventLoop loop;
-		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
-		connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), &loop, SLOT(quit()));
-		
-		process.start(binaryWGet, QStringList() << "-O" << QFileInfo(setupFile).fileName() << download_url);
-		m_banner->show(tr("Downloading WMA Decoder Setup, please wait..."), &loop);
-
-		if(process.exitCode() != 0 || QFileInfo(setupFile).size() < 10240)
-		{
-			QFile::remove(setupFile);
-			if(QMessageBox::critical(this, tr("Download Failed"), tr("Failed to download the WMA Decoder setup. Check your internet connection!"), tr("Try Again"), tr("Cancel")) == 0)
-			{
-				continue;
-			}
-			return;
-		}
-
-		QFile setupFileContent(setupFile);
-		QCryptographicHash setupFileHash(QCryptographicHash::Sha1);
-		
-		setupFileContent.open(QIODevice::ReadOnly);
-		if(setupFileContent.isOpen() && setupFileContent.isReadable())
-		{
-			setupFileHash.addData(setupFileContent.readAll());
-			setupFileContent.close();
-		}
-
-		if(_stricmp(setupFileHash.result().toHex().constData(), download_hash))
-		{
-			qWarning("Hash miscompare:\n  Expected %s\n  Detected %s\n", download_hash, setupFileHash.result().toHex().constData());
-			QFile::remove(setupFile);
-			if(QMessageBox::critical(this, tr("Download Failed"), tr("The download seems to be corrupted. Please try again!"), tr("Try Again"), tr("Cancel")) == 0)
-			{
-				continue;
-			}
-			return;
-		}
-
-		QApplication::setOverrideCursor(Qt::WaitCursor);
-		process.start(binaryElevator, QStringList() << QString("/exec=%1").arg(setupFile));
-		loop.exec(QEventLoop::ExcludeUserInputEvents);
-		QFile::remove(setupFile);
-		QApplication::restoreOverrideCursor();
-
-		if(QMessageBox::information(this, tr("WMA Decoder"), tr("The WMA File Decoder has been installed. Please restart LameXP now!"), tr("Quit LameXP"), tr("Postpone")) == 0)
-		{
-			QApplication::quit();
-		}
-		break;
+		installWMADecoder();
 	}
 }
 
+/*
+ * Show the "drop box" widget
+ */
 void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
 {
 	m_settings->dropBoxWidgetEnabled(true);
@@ -2125,4 +2136,32 @@ void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
 	}
 	
 	FLASH_WINDOW(m_dropBox);
+}
+
+/*
+ * Disable shell integration action
+ */
+void MainWindow::disableShellIntegrationActionTriggered(bool checked)
+{
+	if(checked)
+	{
+		if(0 == QMessageBox::question(this, tr("Shell Integration"), tr("Do you really want to disable the LameXP shell integration?"), tr("Yes"), tr("No"), QString(), 1))
+		{
+			ShellIntegration::remove();
+			QMessageBox::information(this, tr("Shell Integration"), tr("The LameXP shell integration has been disabled."));
+			m_settings->shellIntegrationEnabled(false);
+		}
+		else
+		{
+			m_settings->shellIntegrationEnabled(true);
+		}
+	}
+	else
+	{
+			ShellIntegration::install();
+			QMessageBox::information(this, tr("Shell Integration"), tr("The LameXP shell integration has been re-enabled."));
+			m_settings->shellIntegrationEnabled(true);
+	}
+
+	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
 }

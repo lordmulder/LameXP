@@ -110,6 +110,7 @@ private slots:
 	void disableNeroAacNotificationsActionTriggered(bool checked);
 	void disableWmaDecoderNotificationsActionTriggered(bool checked);
 	void showDropBoxWidgetActionTriggered(bool checked);
+	void disableShellIntegrationActionTriggered(bool);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -122,6 +123,7 @@ protected:
 
 private:
 	void addFiles(const QStringList &files);
+	void installWMADecoder(void);
 
 	bool m_accepted;
 	bool m_firstTimeShown;

@@ -50,6 +50,7 @@ static const char *g_settingsId_soundsEnabled = "Flags/EnableSounds";
 static const char *g_settingsId_neroAacNotificationsEnabled = "Flags/EnableNeroAacNotifications";
 static const char *g_settingsId_wmaDecoderNotificationsEnabled = "Flags/EnableWmaDecoderNotifications";
 static const char *g_settingsId_dropBoxWidgetEnabled = "Flags/EnableDropBoxWidget";
+static const char *g_settingsId_shellIntegrationEnabled = "Flags/EnableShellIntegration";
 static const char *g_settingsId_currentLanguage = "Localization/Language";
 static const char *g_settingsId_lameAlgoQuality = "AdvancedOptions/LAME/AlgorithmQuality";
 static const char *g_settingsId_lameChannelMode = "AdvancedOptions/LAME/ChannelMode";
@@ -218,7 +219,8 @@ MAKE_OPTION3(soundsEnabled, true)
 MAKE_OPTION3(neroAacNotificationsEnabled, true)
 MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
 MAKE_OPTION3(dropBoxWidgetEnabled, true)
-MAKE_OPTION2(currentLanguage, defaultLanguage());
+MAKE_OPTION3(shellIntegrationEnabled, !lamexp_portable_mode())
+MAKE_OPTION2(currentLanguage, defaultLanguage())
 MAKE_OPTION1(lameAlgoQuality, 3)
 MAKE_OPTION1(lameChannelMode, 0);
 MAKE_OPTION3(bitrateManagementEnabled, false)

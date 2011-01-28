@@ -21,19 +21,32 @@
 
 #pragma once
 
-#include <QObject>
+#include <QThread>
+#include <QMutex>
 
 class QString;
 class QStringList;
 
-class ShellIntegration : public QObject
+class ShellIntegration : public QThread
 {
 	Q_OBJECT
 
 public:
-	static void install(void);
-	static void remove(void);
+	static void install(bool async = true);
+	static void remove(bool async = true);
+
+protected:
+	void run()
+	{
+		if(m_install) install(false); else remove(false);
+	}
 
 private:
+	ShellIntegration(bool install = true);
+	 ~ShellIntegration(void);
+
 	static QStringList *detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction);
+	static QMutex m_mutex;
+
+	bool m_install;
 };
