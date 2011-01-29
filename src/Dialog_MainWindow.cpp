@@ -295,7 +295,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
 	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
-	actionDisableShellIntegration->setVisible(!lamexp_portable_mode());
+	actionDisableShellIntegration->setDisabled(lamexp_portable_mode() && actionDisableShellIntegration->isChecked());
 	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
 	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
 	connect(actionInstallWMADecoder, SIGNAL(triggered(bool)), this, SLOT(installWMADecoderActionTriggered(bool)));
@@ -2164,4 +2164,9 @@ void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 	}
 
 	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
+	
+	if(lamexp_portable_mode() && actionDisableShellIntegration->isChecked())
+	{
+		actionDisableShellIntegration->setEnabled(false);
+	}
 }

@@ -157,7 +157,14 @@ int AboutDialog::exec()
 {
 	if(m_settings->soundsEnabled())
 	{
-		if(!m_firstShow || !playResoureSound("imageres.dll", 5080, true))
+		if(m_firstShow)
+		{
+			if(!playResoureSound("imageres.dll", 5080, true))
+			{
+				PlaySound(TEXT("SystemStart"), NULL, SND_ALIAS | SND_ASYNC);
+			}
+		}
+		else
 		{
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABOUT), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		}

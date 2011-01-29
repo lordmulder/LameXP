@@ -44,7 +44,7 @@ static const char *g_lamexpFileType = "LameXP.SupportedAudioFile";
 QMutex ShellIntegration::m_mutex;
 
 //Macros
-#define REG_WRITE_STRING(KEY, STR) RegSetKeyValue(key, NULL, NULL, REG_SZ, QWCHAR(STR), (STR.size() + 1) * sizeof(wchar_t))
+#define REG_WRITE_STRING(KEY, STR) RegSetValueEx(key, NULL, NULL, REG_SZ, reinterpret_cast<const BYTE*>(STR.utf16()), (STR.size() + 1) * sizeof(wchar_t))
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -247,7 +247,7 @@ QStringList *ShellIntegration::detectTypes(const QString &lamexpFileType, const 
 		{
 			if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1").arg(currentExt)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 			{
-				RegSetKeyValue(key, NULL, NULL, REG_SZ, QWCHAR(lamexpFileType), (lamexpFileType.size() + 1) * sizeof(wchar_t));
+				REG_WRITE_STRING(key, lamexpFileType);
 				RegCloseKey(key);
 			}
 		}
