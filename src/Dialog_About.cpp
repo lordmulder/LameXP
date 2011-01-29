@@ -300,16 +300,23 @@ void AboutDialog::showMoreAbout(void)
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.ac3filter.net/projects/tools"
 	);
-	moreAboutText += QString
-	(
-		"</ul></td><td><ul>"
-	);
 	moreAboutText += makeToolText
 		(
 		tr("WavPack &minus; Hybrid Lossless Compression"),
 		"wvunpack.exe", "v?.??.?",
 		tr("Completely open audio compression format."),
 		"http://www.wavpack.com/"
+	);
+	moreAboutText += QString
+	(
+		"</ul></td><td><ul>"
+	);
+	moreAboutText += makeToolText
+		(
+		tr("Musepack &minus; Living Audio Compression"),
+		"mpcdec.exe", "r???",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"http://www.musepack.net/"
 	);
 	moreAboutText += makeToolText
 	(

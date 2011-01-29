@@ -132,6 +132,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Musepack &amp;minus; Living Audio Compression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
         <translation type="unfinished"></translation>
     </message>

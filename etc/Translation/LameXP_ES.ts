@@ -176,6 +176,10 @@
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Musepack &amp;minus; Living Audio Compression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

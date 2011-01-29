@@ -57,7 +57,7 @@ g_lamexp_tools[] =
 	{"a4e929cfaa42fa2e61a3d0c6434c77a06d45aef3", "mac.exe", 406},
 	{"ec235c6404caa31e7975e9bbf9ba59599258ae1d", "mediainfo_i386.exe", 741},
 	{"72d7efdcafc2dee3b534f27ab6e01916d02ba470", "mediainfo_x64.exe", 741},
-	{"55c293a80475f7aeccf449ac9487a4626e5139cb", "mpcdec.exe", UINT_MAX},
+	{"aa89763a5ba4d1a5986549b9ee53e005c51940c1", "mpcdec.exe", 435},
 	{"6b6913a54cac08b22d5b468aaed83550fc9ae5b4", "mpg123.exe", 1131},
 	{"8dd7138714c3bcb39f5a3213413addba13d06f1e", "oggdec.exe", UINT_MAX},
 	{"ecd15abe103184aca96e406f5f1c82c6fb2e665d", "oggenc2_i386.exe", 287},

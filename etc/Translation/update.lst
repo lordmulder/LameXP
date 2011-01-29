@@ -14,6 +14,7 @@
 ..\..\src\Decoder_FLAC.cpp 
 ..\..\src\Decoder_MAC.cpp 
 ..\..\src\Decoder_MP3.cpp 
+..\..\src\Decoder_Musepack.cpp 
 ..\..\src\Decoder_TTA.cpp 
 ..\..\src\Decoder_Vorbis.cpp 
 ..\..\src\Decoder_Wave.cpp 
@@ -67,6 +68,7 @@
 ..\..\src\Decoder_FLAC.h 
 ..\..\src\Decoder_MAC.h 
 ..\..\src\Decoder_MP3.h 
+..\..\src\Decoder_Musepack.h 
 ..\..\src\Decoder_TTA.h 
 ..\..\src\Decoder_Vorbis.h 
 ..\..\src\Decoder_Wave.h 

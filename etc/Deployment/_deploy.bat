@@ -91,10 +91,10 @@ if "%LAMEXP_REDIST%"=="1" (
 )
 REM ------------------------------------------
 for %%f in ("%TMP_PATH%\*.exe") do (
-	"%PATH_UPXBIN%\upx.exe" --best --lzma "%%f"
+	"%PATH_UPXBIN%\upx.exe" --best "%%f"
 )
 for %%f in ("%TMP_PATH%\*.dll") do (
-	"%PATH_UPXBIN%\upx.exe" --best --lzma "%%f"
+	"%PATH_UPXBIN%\upx.exe" --best "%%f"
 )
 REM ------------------------------------------
 if exist _postproc.bat (
