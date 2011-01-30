@@ -218,6 +218,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Playlists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>

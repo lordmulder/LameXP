@@ -222,6 +222,10 @@
         <source>All files</source>
         <translation>Todos los archivos</translation>
     </message>
+    <message>
+        <source>Playlists</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DropBox</name>

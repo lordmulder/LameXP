@@ -40,6 +40,8 @@
 #include <QStringList>
 #include <QRegExp>
 
+static const char *g_playlistExt = "*.m3u *.m3u8 *.pls *.asx *.wpl";
+
 #define PROBE_DECODER(DEC) if(DEC::isDecoderAvailable() && DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
 #define GET_FILETYPES(DEC) (DEC::isDecoderAvailable() ? DEC::supportedTypes() : QStringList())
 
@@ -83,6 +85,7 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	types << GET_FILETYPES(ADPCMDecoder);
 
 	QStringList extensions;
+	extensions << QString(g_playlistExt).split(" ", QString::SkipEmptyParts);
 	QRegExp regExp("\\((.+)\\)", Qt::CaseInsensitive);
 
 	for(int i = 0; i < types.count(); i++)
@@ -92,7 +95,7 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 			extensions << regExp.cap(1).split(" ", QString::SkipEmptyParts);
 		}
 	}
-	
+
 	if(!extensions.empty())
 	{
 		extensions.removeDuplicates();
@@ -100,6 +103,8 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 		types.prepend(QString("%1 (%2)").arg(tr("All supported types"), extensions.join(" ")));
 	}
 	
+	types << QString("%1 (%2)").arg(tr("Playlists"), g_playlistExt);
 	types << QString("%1 (*.*)").arg(tr("All files"));
+
 	return types;
 }
