@@ -327,6 +327,13 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("Shorten &minus; Lossless Audio Compressor"),
+		"shorten.exe", "v?.?.?",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"http://etree.org/shnutils/shorten/"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("The True Audio &minus; Lossless Audio Codec"),
 		"ttaenc.exe", "v?.?.?",
 		tr("Released under the terms of the GNU Lesser General Public License."),

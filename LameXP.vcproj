@@ -327,6 +327,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Decoder_Shorten.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Decoder_TTA.cpp"
 				>
 			</File>
@@ -576,6 +580,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Decoder_Musepack.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Decoder_Shorten.h"
 				>
 			</File>
 			<File

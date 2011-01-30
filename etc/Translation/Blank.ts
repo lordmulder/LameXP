@@ -144,6 +144,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The True Audio &amp;minus; Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>

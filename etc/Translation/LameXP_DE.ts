@@ -179,6 +179,10 @@
         <source>Musepack &amp;minus; Living Audio Compression</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
+        <translation>Shorten &amp;minus; Verlustfreie Audio Kompression</translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
