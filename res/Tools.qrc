@@ -20,7 +20,6 @@
     <file>tools/shorten.exe</file>
     <file>tools/sox.exe</file>
     <file>tools/speexdec.exe</file>
-    <file>tools/takc.exe</file>
     <file>tools/ttaenc.exe</file>
     <file>tools/valdec.exe</file>
     <file>tools/wget.exe</file>
