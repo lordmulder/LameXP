@@ -31,8 +31,12 @@
 #include <QDate>
 #include <QTime>
 #include <QDebug>
+#include <QMessageBox>
 
 #include <math.h>
+
+//Un-escape XML characters
+#define XML_DECODE replace("&amp;", "&").replace("&apos;", "'").replace("&nbsp;", " ").replace("&quot;", "\"").replace("&lt;", "<").replace("&gt;", ">")
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -499,49 +503,37 @@ bool FileAnalyzer::parsePlaylist_pls(QFile &data, QStringList &fileList, const Q
 
 bool FileAnalyzer::parsePlaylist_wpl(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir)
 {
+	QRegExp skipData("<!--(.+)-->", Qt::CaseInsensitive);
 	QRegExp wplEntry("<(media|ref)[^<>]*(src|href)=\"([^\"]+)\"[^<>]*>", Qt::CaseInsensitive);
-	QByteArray line = data.readLine();
 	
-	while(line.size() > 0)
+	skipData.setMinimal(true);
+
+	QByteArray buffer = data.readAll();
+	QString line = QString::fromUtf8(buffer.constData(), buffer.size()).simplified();
+	buffer.clear();
+
+	int index = 0;
+
+	while((index = skipData.indexIn(line)) >= 0)
 	{
-		bool flag = false;
-		
-		QString temp1(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
-		QString temp2(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
+		line.remove(index, skipData.matchedLength());
+	}
 
-		if(!flag && wplEntry.indexIn(temp1) >= 0)
+	int offset = 0;
+
+	while((offset = wplEntry.indexIn(line, offset) + 1) > 0)
+	{
+		QFileInfo filename(QDir::fromNativeSeparators(wplEntry.cap(3).XML_DECODE.trimmed()));
+		filename.setCaching(false);
+		fixFilePath(filename, baseDir, rootDir);
+
+		if(filename.exists())
 		{
-			QFileInfo filename(QDir::fromNativeSeparators(wplEntry.cap(3)).trimmed());
-			filename.setCaching(false);
-			fixFilePath(filename, baseDir, rootDir);
-
-			if(filename.exists())
+			if(isPlaylist(filename.canonicalFilePath()) == noPlaylist)
 			{
-				if(isPlaylist(filename.canonicalFilePath()) == noPlaylist)
-				{
-					fileList << filename.canonicalFilePath();
-					flag = true;
-				}
+				fileList << filename.canonicalFilePath();
 			}
 		}
-		
-		if(!flag && wplEntry.indexIn(temp2) >= 0)
-		{
-			QFileInfo filename(QDir::fromNativeSeparators(wplEntry.cap(3)).trimmed());
-			filename.setCaching(false);
-			fixFilePath(filename, baseDir, rootDir);
-
-			if(filename.exists())
-			{
-				if(isPlaylist(filename.canonicalFilePath()) == noPlaylist)
-				{
-					fileList << filename.canonicalFilePath();
-					flag = true;
-				}
-			}
-		}
-
-		line = data.readLine();
 	}
 
 	return true;
