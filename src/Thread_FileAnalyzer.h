@@ -58,27 +58,12 @@ private:
 		sectionAudio,
 		sectionOther
 	};
-	
-	enum playlist_t
-	{
-		noPlaylist,
-		m3uPlaylist,
-		plsPlaylist,
-		wplPlaylist
-	};
 
 	const AudioFileModel analyzeFile(const QString &filePath);
 	void updateInfo(AudioFileModel &audioFile, const QString &key, const QString &value);
 	void updateSection(const QString &section);
 	unsigned int parseYear(const QString &str);
 	unsigned int parseDuration(const QString &str);
-	bool importPlaylist(QStringList &fileList, const QString &playlistFile);
-	bool parsePlaylist_m3u(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir);
-	bool parsePlaylist_pls(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir);
-	bool parsePlaylist_wpl(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir);
-	playlist_t isPlaylist(const QString &fileName);
-	void fixFilePath(QFileInfo &filename, const QDir &baseDir, const QDir &rootDir);
-
 
 	QStringList m_inputFiles;
 	const QString m_mediaInfoBin_x86;

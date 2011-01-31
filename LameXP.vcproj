@@ -471,6 +471,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\PlaylistImporter.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Registry_Decoder.cpp"
 				>
 			</File>
@@ -1320,6 +1324,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Model_Settings.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\PlaylistImporter.h"
 				>
 			</File>
 			<File
