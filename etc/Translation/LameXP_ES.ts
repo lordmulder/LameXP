@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation>Especial agradecimiento a&quot;John33&quot; de %1 por su apoyo continuo.</translation>
+        <translation>Especial agradecimiento a &quot;John33&quot; de %1 por su apoyo continuo.</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -110,91 +110,91 @@
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Distribuido bajo los términos de la Licencia Pública General GNU.</translation>
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP como conjunto tiene copyright de LoRd_MuldeR. El copyright del software de terceros usado en LameXP pertenece a sus autores individuales.</translation>
     </message>
     <message>
         <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP &amp;minus; Interfaz de codificación de audio</translation>
     </message>
     <message>
         <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP &amp;minus; Codificadormp3 de código abierto</translation>
     </message>
     <message>
         <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc &amp;minus; Codificador Ogg Vorbis</translation>
     </message>
     <message>
         <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>FLAC &amp;minus; Códec de audio libre sin pérdidas</translation>
     </message>
     <message>
         <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>mpg123 &amp;minus; Consola de Reproducción/Codificación de audio MPEG</translation>
     </message>
     <message>
         <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>FAAD &amp;minus; Decodificador MPEG-4 y MPEG-2 AAC de código abierto</translation>
     </message>
     <message>
         <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>AC3Filter Tools &amp;minus; Decodificador AC3/DTS</translation>
     </message>
     <message>
         <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>WavPack &amp;minus; Compresión híbrida sin pérdida</translation>
     </message>
     <message>
         <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
-        <translation type="unfinished"></translation>
+        <translation>Monkey&apos;s Audio &amp;minus; Compresor de audio sin pérdida</translation>
     </message>
     <message>
         <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>The True Audio &amp;minus; Códec de audio sin pérdida</translation>
     </message>
     <message>
         <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>MediaInfo &amp;minus; Herramienta de análisis de archivos multimedia</translation>
     </message>
     <message>
         <source>SoX &amp;minus; Sound eXchange</source>
-        <translation type="unfinished"></translation>
+        <translation>SoX &amp;minus; Sound eXchange</translation>
     </message>
     <message>
         <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
-        <translation type="unfinished"></translation>
+        <translation>GnuPG &amp;minus; Guardián de privacidad GNU</translation>
     </message>
     <message>
         <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons &amp;minus; Más de 700 iconos en formato PNG</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificador MPEG-4 Nero AAC</translation>
     </message>
     <message>
         <source>Musepack &amp;minus; Living Audio Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Musepack &amp;minus; Compresór de audio con pérdida</translation>
     </message>
     <message>
         <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation type="unfinished"></translation>
+        <translation>Shorten &amp;minus; Compresór de audio con pérdida</translation>
     </message>
     <message>
         <source>Speex &amp;minus; Free Codec For Free Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Speex &amp;minus; Códec libre para libre expresión</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation type="unfinished"></translation>
+        <translation>Patente de formato de audio de código abierto diseñado para expresión.</translation>
     </message>
     <message>
         <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
-        <translation type="unfinished"></translation>
+        <translation>GNU Wget &amp;minus; Software para descarga de archivos mediante HTTP</translation>
     </message>
 </context>
 <context>
@@ -236,7 +236,7 @@
     </message>
     <message>
         <source>Playlists</source>
-        <translation type="unfinished"></translation>
+        <translation>Listas de reproducción</translation>
     </message>
 </context>
 <context>
@@ -1088,39 +1088,39 @@
     </message>
     <message>
         <source>Encode!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Codificar!</translation>
     </message>
     <message>
         <source> Tone Adjustment </source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuste de tono</translation>
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar agudos (dB):</translation>
     </message>
     <message>
         <source>Adjust Bass (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar graves (dB):</translation>
     </message>
     <message>
         <source>Disable Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar Menú contextual</translation>
     </message>
     <message>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú contextual</translation>
     </message>
     <message>
         <source>Do you really want to disable the LameXP shell integration?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguroque desea deshabilitar el menú contextual de LameXP?</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú contextual de LameXP deshabilitado.</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú contextual de LameXP habilitado.</translation>
     </message>
 </context>
 <context>
@@ -1485,11 +1485,11 @@
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo de audio soportado por LameXP</translation>
     </message>
     <message>
         <source>Convert this file with LameXP v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir este archivo con LameXP v%1</translation>
     </message>
 </context>
 <context>
