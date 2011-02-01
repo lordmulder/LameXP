@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation>LameXP &amp;minus; Codificadormp3 de código abierto</translation>
+        <translation>LameXP &amp;minus; Codificador mp3 de código abierto</translation>
     </message>
     <message>
         <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 &amp;minus; Consola de Reproducción/Codificación de audio MPEG</translation>
+        <translation>mpg123 &amp;minus; Consola de Reproducción/Decodificación de audio MPEG</translation>
     </message>
     <message>
         <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
@@ -1092,7 +1092,7 @@
     </message>
     <message>
         <source> Tone Adjustment </source>
-        <translation>Ajuste de tono</translation>
+        <translation> Ajuste de tono </translation>
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
