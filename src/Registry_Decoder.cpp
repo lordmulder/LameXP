@@ -30,17 +30,17 @@
 #include "Decoder_MP3.h"
 #include "Decoder_Musepack.h"
 #include "Decoder_Shorten.h"
+#include "Decoder_Speex.h"
 #include "Decoder_TTA.h"
 #include "Decoder_Vorbis.h"
 #include "Decoder_Wave.h"
 #include "Decoder_WavPack.h"
 #include "Decoder_WMA.h"
+#include "PlaylistImporter.h"
 
 #include <QString>
 #include <QStringList>
 #include <QRegExp>
-
-static const char *g_playlistExt = "*.m3u *.m3u8 *.pls *.asx *.wpl";
 
 #define PROBE_DECODER(DEC) if(DEC::isDecoderAvailable() && DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
 #define GET_FILETYPES(DEC) (DEC::isDecoderAvailable() ? DEC::supportedTypes() : QStringList())
@@ -57,6 +57,7 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	PROBE_DECODER(ShortenDecoder);
 	PROBE_DECODER(MACDecoder);
 	PROBE_DECODER(TTADecoder);
+	PROBE_DECODER(SpeexDecoder);
 	PROBE_DECODER(ALACDecoder);
 	PROBE_DECODER(WMADecoder);
 	PROBE_DECODER(ADPCMDecoder);
@@ -80,12 +81,13 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	types << GET_FILETYPES(ShortenDecoder);
 	types << GET_FILETYPES(MACDecoder);
 	types << GET_FILETYPES(TTADecoder);
+	types << GET_FILETYPES(SpeexDecoder);
 	types << GET_FILETYPES(ALACDecoder);
 	types << GET_FILETYPES(WMADecoder);
 	types << GET_FILETYPES(ADPCMDecoder);
 
 	QStringList extensions;
-	extensions << QString(g_playlistExt).split(" ", QString::SkipEmptyParts);
+	extensions << QString(PlaylistImporter::supportedExtensions).split(" ", QString::SkipEmptyParts);
 	QRegExp regExp("\\((.+)\\)", Qt::CaseInsensitive);
 
 	for(int i = 0; i < types.count(); i++)
@@ -103,7 +105,7 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 		types.prepend(QString("%1 (%2)").arg(tr("All supported types"), extensions.join(" ")));
 	}
 	
-	types << QString("%1 (%2)").arg(tr("Playlists"), g_playlistExt);
+	types << QString("%1 (%2)").arg(tr("Playlists"), PlaylistImporter::supportedExtensions);
 	types << QString("%1 (*.*)").arg(tr("All files"));
 
 	return types;

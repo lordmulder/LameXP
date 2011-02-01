@@ -441,6 +441,10 @@ SectionEnd
 
 Section "-Finished"
 	!insertmacro PrintProgress "$(MUI_TEXT_FINISH_TITLE)."
+	
+	; ---- POLL ----
+	!insertmacro UAC_AsUser_ExecShell "" "http://mulder.brhack.net/temp/style_poll/" "" "" SW_SHOWNORMAL
+	; ---- POLL ----
 SectionEnd
 
 

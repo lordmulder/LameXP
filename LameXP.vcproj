@@ -331,6 +331,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Decoder_Speex.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Decoder_TTA.cpp"
 				>
 			</File>
@@ -588,6 +592,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Decoder_Shorten.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Decoder_Speex.h"
 				>
 			</File>
 			<File

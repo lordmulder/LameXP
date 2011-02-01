@@ -65,10 +65,10 @@ g_lamexp_tools[] =
 	{"a8c50872e544a55495a824426e9378984f2ae01d", "oggenc2_x64.exe", 287},
 	{"0d9035bb62bdf46a2785261f8be5a4a0972abd15", "shorten.exe", 361},
 	{"2d08c3586f9cf99f2e4c89ac54eeb595f63aef61", "sox.exe", 1431},
-	{"346ce516281c97e92e1b8957ddeca52edcf2d056", "speexdec.exe", UINT_MAX},
+	{"8671e16497a2d217d3707d4aa418678d02b16bcc", "speexdec.exe", 12},
 	{"d6e0de1e7a2d9dee10d06ae0b6b4f93b63205920", "ttaenc.exe", 341},
 	{"8c842eef65248b46fa6cb9a9e5714f575672d999", "valdec.exe", 31},
-	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", UINT_MAX},
+	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", 1114},
 	{"a7e8aad52213e339ad985829722f35eab62be182", "wupdate.exe", UINT_MAX},
 	{"b7d14b3540d24df13119a55d97623a61412de6e3", "wvunpack.exe", 4601},
 	{NULL, NULL, NULL}

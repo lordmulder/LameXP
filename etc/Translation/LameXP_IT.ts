@@ -183,6 +183,18 @@
         <source>Shorten &amp;minus; Lossless Audio Compressor</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Speex &amp;minus; Free Codec For Free Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Source patent-free audio format designed for speech.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

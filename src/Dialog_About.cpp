@@ -307,16 +307,16 @@ void AboutDialog::showMoreAbout(void)
 		tr("Completely open audio compression format."),
 		"http://www.wavpack.com/"
 	);
-	moreAboutText += QString
-	(
-		"</ul></td><td><ul>"
-	);
 	moreAboutText += makeToolText
 		(
 		tr("Musepack &minus; Living Audio Compression"),
 		"mpcdec.exe", "r???",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.musepack.net/"
+	);
+	moreAboutText += QString
+	(
+		"</ul></td><td><ul>"
 	);
 	moreAboutText += makeToolText
 	(
@@ -331,6 +331,13 @@ void AboutDialog::showMoreAbout(void)
 		"shorten.exe", "v?.?.?",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://etree.org/shnutils/shorten/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("Speex &minus; Free Codec For Free Speech"),
+		"speexdec.exe", "v?.?",
+		tr("Open Source patent-free audio format designed for speech."),
+		"http://www.speex.org/"
 	);
 	moreAboutText += makeToolText
 	(
@@ -360,6 +367,17 @@ void AboutDialog::showMoreAbout(void)
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.gnupg.org/"
 	);
+
+
+	moreAboutText += makeToolText
+	(
+		tr("GNU Wget &minus; Software for retrieving files using HTTP"),
+		"wget.exe", "v?.??.?",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"http://www.gnu.org/software/wget/"
+	);
+
+
 	moreAboutText += makeToolText
 	(
 		tr("Silk Icons &minus; Over 700  icons in PNG format"),

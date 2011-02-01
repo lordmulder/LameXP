@@ -16,6 +16,7 @@
 ..\..\src\Decoder_MP3.cpp 
 ..\..\src\Decoder_Musepack.cpp 
 ..\..\src\Decoder_Shorten.cpp 
+..\..\src\Decoder_Speex.cpp 
 ..\..\src\Decoder_TTA.cpp 
 ..\..\src\Decoder_Vorbis.cpp 
 ..\..\src\Decoder_Wave.cpp 
@@ -51,6 +52,7 @@
 ..\..\src\Model_MetaInfo.cpp 
 ..\..\src\Model_Progress.cpp 
 ..\..\src\Model_Settings.cpp 
+..\..\src\PlaylistImporter.cpp 
 ..\..\src\Registry_Decoder.cpp 
 ..\..\src\ShellIntegration.cpp 
 ..\..\src\Thread_FileAnalyzer.cpp 
@@ -71,6 +73,7 @@
 ..\..\src\Decoder_MP3.h 
 ..\..\src\Decoder_Musepack.h 
 ..\..\src\Decoder_Shorten.h 
+..\..\src\Decoder_Speex.h 
 ..\..\src\Decoder_TTA.h 
 ..\..\src\Decoder_Vorbis.h 
 ..\..\src\Decoder_Wave.h 
@@ -105,6 +108,7 @@
 ..\..\src\Model_MetaInfo.h 
 ..\..\src\Model_Progress.h 
 ..\..\src\Model_Settings.h 
+..\..\src\PlaylistImporter.h 
 ..\..\src\Registry_Decoder.h 
 ..\..\src\Resource.h 
 ..\..\src\ShellIntegration.h 

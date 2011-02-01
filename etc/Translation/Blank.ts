@@ -148,6 +148,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Speex &amp;minus; Free Codec For Free Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Source patent-free audio format designed for speech.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The True Audio &amp;minus; Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>
@@ -161,6 +169,10 @@
     </message>
     <message>
         <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

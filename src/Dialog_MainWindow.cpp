@@ -771,7 +771,7 @@ void MainWindow::windowShown(void)
 				messageText += QString("<nobr>%1<br>").arg(tr("LameXP detected that your version of the Nero AAC encoder is outdated!"));
 				messageText += QString("%1<br><br>").arg(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe"), tr("n/a"))));
 				messageText += QString("%1<br>").arg(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:"));
-				messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
+				messageText += "<tt>" + LINK(AboutDialog::neroAacUrl) + "</tt><br></nobr>";
 				QMessageBox::information(this, tr("AAC Encoder Outdated"), messageText);
 			}
 		}
@@ -786,7 +786,7 @@ void MainWindow::windowShown(void)
 			messageText += QString("%1<br>").arg(tr("Your LameXP directory is located here:"));
 			messageText += QString("<i><nobr><a href=\"file:///%1\">%1</a></nobr></i><br><br>").arg(QDir::toNativeSeparators(appPath));
 			messageText += QString("%1<br>").arg(tr("You can download the Nero AAC encoder for free from the official Nero website at:"));
-			messageText += "<b>" + LINK(AboutDialog::neroAacUrl) + "</b><br></nobr>";
+			messageText += "<tt>" + LINK(AboutDialog::neroAacUrl) + "</tt><br></nobr>";
 			QMessageBox::information(this, tr("AAC Support Disabled"), messageText);
 		}
 	}
