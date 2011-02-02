@@ -48,6 +48,7 @@ static const char *update_mirrors[] =
 {
 	"http://mulder.dummwiedeutsch.de/",
 	"http://mulder.brhack.net/",
+	"http://lamexp.sourceforge.net/",
 	"http://free.pages.at/borschdfresser/",
 	"http://mplayer.savedonthe.net/",
 	"http://www.tricksoft.de/",
@@ -61,6 +62,7 @@ static const char *known_hosts[] =
 	"http://www.wikipedia.org/",
 	"http://www.msn.com/",
 	"http://www.yahoo.com/",
+	"http://sourceforge.net/",
 	NULL
 };
 
