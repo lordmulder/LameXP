@@ -259,8 +259,14 @@ void ProcessingDialog::initEncoding(void)
 	WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/control_play_blue.png"));
 
 	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
+	int parallelThreadCount = max(min(min(cpuFeatures.count, m_pendingJobs.count()), 4), 1);
 
-	for(int i = 0; i < min(max(cpuFeatures.count, 1), 4); i++)
+	if(parallelThreadCount > 1)
+	{
+		m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(parallelThreadCount)));
+	}
+
+	for(int i = 0; i < parallelThreadCount; i++)
 	{
 		startNextJob();
 	}
@@ -391,10 +397,18 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 	if(m_runningThreads == 0)
 	{
 		const QStringList &logFile = m_progressModel->getLogFile(index);
-		LogViewDialog *logView = new LogViewDialog(this);
-		logView->setWindowTitle(QString("LameXP - [%1]").arg(m_progressModel->data(index, Qt::DisplayRole).toString()));
-		logView->exec(logFile);
-		LAMEXP_DELETE(logView);
+		
+		if(!logFile.isEmpty())
+		{
+			LogViewDialog *logView = new LogViewDialog(this);
+			logView->setWindowTitle(QString("LameXP - [%1]").arg(m_progressModel->data(index, Qt::DisplayRole).toString()));
+			logView->exec(logFile);
+			LAMEXP_DELETE(logView);
+		}
+		else
+		{
+			MessageBeep(MB_ICONWARNING);
+		}
 	}
 	else
 	{

@@ -23,11 +23,13 @@
 
 #include <QUuid>
 
-ProgressModel::ProgressModel(void) :
+ProgressModel::ProgressModel(void)
+:
 	m_iconRunning(":/icons/media_play.png"),
 	m_iconPaused(":/icons/control_pause_blue.png"),
 	m_iconComplete(":/icons/tick.png"),
-	m_iconFailed(":/icons/exclamation.png")
+	m_iconFailed(":/icons/exclamation.png"),
+	m_iconSystem(":/icons/computer.png")
 {
 }
 
@@ -76,6 +78,9 @@ QVariant ProgressModel::data(const QModelIndex &index, int role) const
 				break;
 			case JobComplete:
 				return m_iconComplete;
+				break;
+			case JobSystem:
+				return m_iconSystem;
 				break;
 			default:
 				return m_iconFailed;
@@ -170,4 +175,25 @@ const QStringList &ProgressModel::getLogFile(const QModelIndex &index)
 	}
 
 	return *(reinterpret_cast<QStringList*>(NULL));
+}
+
+void ProgressModel::addSystemMessage(const QString &text)
+{
+	const QUuid &jobId = QUuid::createUuid();
+
+	if(m_jobList.contains(jobId))
+	{
+		return;
+	}
+
+	int newIndex = m_jobList.count();
+	beginInsertRows(QModelIndex(), newIndex, newIndex);
+
+	m_jobList.append(jobId);
+	m_jobName.insert(jobId, text);
+	m_jobStatus.insert(jobId, QString());
+	m_jobState.insert(jobId, JobSystem);
+	m_jobLogFile.insert(jobId, QStringList());
+	
+	endInsertRows();
 }

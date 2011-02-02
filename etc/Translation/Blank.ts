@@ -1409,6 +1409,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Multi-threading enabled: Running %1 instances in parallel!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished"></translation>
     </message>

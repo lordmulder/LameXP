@@ -1469,6 +1469,10 @@
         <source>Process was aborted prematurely by the user!</source>
         <translation>Der Vorgang wurde vom Benutzer abgebrochen!</translation>
     </message>
+    <message>
+        <source>Multi-threading enabled: Running %1 instances in parallel!</source>
+        <translation>Multithreading aktiviert: Führe %1 Instanzen parallel aus!</translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>
