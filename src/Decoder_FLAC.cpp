@@ -33,7 +33,7 @@ FLACDecoder::FLACDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing Vorbis decoder. Tool 'flac.exe' is not registred!";
+		throw "Error initializing FLAC decoder. Tool 'flac.exe' is not registred!";
 	}
 }
 

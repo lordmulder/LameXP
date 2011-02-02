@@ -34,7 +34,7 @@ ShortenDecoder::ShortenDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing WavPack decoder. Tool 'shorten.exe' is not registred!";
+		throw "Error initializing Shorten decoder. Tool 'shorten.exe' is not registred!";
 	}
 }
 
@@ -75,7 +75,7 @@ bool ShortenDecoder::decode(const QString &sourceFile, const QString &outputFile
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();
-			qWarning("MpcDec process timed out <-- killing!");
+			qWarning("Shorten process timed out <-- killing!");
 			bTimeout = true;
 			break;
 		}

@@ -33,7 +33,7 @@ MP3Decoder::MP3Decoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing MPG123 decoder. Tool 'oggdec.exe' is not registred!";
+		throw "Error initializing MPG123 decoder. Tool 'mpg123.exe' is not registred!";
 	}
 }
 

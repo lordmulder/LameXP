@@ -34,7 +34,7 @@ MusepackDecoder::MusepackDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing WavPack decoder. Tool 'mpcdec.exe' is not registred!";
+		throw "Error initializing Musepack decoder. Tool 'mpcdec.exe' is not registred!";
 	}
 }
 
