@@ -30,24 +30,15 @@
 
 AudioFileModel::AudioFileModel(const QString &path, const QString &name)
 {
+	resetAll();
+
 	m_filePath = path;
 	m_fileName = name;
-	m_fileYear = 0;
-	m_filePosition = 0;
-	m_fileDuration = 0;
-	m_formatAudioSamplerate = 0;
-	m_formatAudioChannels = 0;
-	m_formatAudioBitdepth = 0;
 }
 
 AudioFileModel::AudioFileModel(const AudioFileModel &model, bool copyMetaInfo)
 {
-	m_fileYear = 0;
-	m_filePosition = 0;
-	m_fileDuration = 0;
-	m_formatAudioSamplerate = 0;
-	m_formatAudioChannels = 0;
-	m_formatAudioBitdepth = 0;
+	resetAll();
 
 	setFilePath(model.m_filePath);
 	setFormatContainerType(model.m_formatContainerType);
@@ -98,6 +89,34 @@ AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 
 AudioFileModel::~AudioFileModel(void)
 {
+}
+
+////////////////////////////////////////////////////////////
+// Private Functions
+////////////////////////////////////////////////////////////
+
+void AudioFileModel::resetAll(void)
+{
+	m_filePath.clear();
+	m_fileName.clear();
+	m_fileArtist.clear();
+	m_fileAlbum.clear();
+	m_fileGenre.clear();
+	m_fileComment.clear();
+	
+	m_fileYear = 0;
+	m_filePosition = 0;
+	m_fileDuration = 0;
+
+	m_formatContainerType.clear();
+	m_formatContainerProfile.clear();
+	m_formatAudioType.clear();
+	m_formatAudioProfile.clear();
+	m_formatAudioVersion.clear();
+	
+	m_formatAudioSamplerate = 0;
+	m_formatAudioChannels = 0;
+	m_formatAudioBitdepth = 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -361,4 +380,13 @@ void AudioFileModel::setFormatAudioChannels(unsigned int channels)
 void AudioFileModel::setFormatAudioBitdepth(unsigned int bitdepth)
 {
 	m_formatAudioBitdepth = bitdepth;
+}
+
+void AudioFileModel::updateMetaInfo(const AudioFileModel &model)
+{
+	if(!model.fileArtist().isEmpty()) setFileArtist(model.fileArtist());
+	if(!model.fileAlbum().isEmpty()) setFileAlbum(model.fileAlbum());
+	if(!model.fileGenre().isEmpty()) setFileGenre(model.fileGenre());
+	if(!model.fileComment().isEmpty()) setFileComment(model.fileComment());
+	if(model.fileYear()) setFileYear(model.fileYear());
 }

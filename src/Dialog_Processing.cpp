@@ -596,18 +596,16 @@ AudioFileModel ProcessingDialog::updateMetaInfo(const AudioFileModel &audioFile)
 {
 	if(!m_settings->writeMetaTags())
 	{
-		AudioFileModel result(audioFile, false);
-		return result;
+		return AudioFileModel(audioFile, false);
 	}
 	
 	AudioFileModel result = audioFile;
-
-	if(!m_metaInfo->fileArtist().isEmpty()) result.setFileArtist(m_metaInfo->fileArtist());
-	if(!m_metaInfo->fileAlbum().isEmpty()) result.setFileAlbum(m_metaInfo->fileAlbum());
-	if(!m_metaInfo->fileGenre().isEmpty()) result.setFileGenre(m_metaInfo->fileGenre());
-	if(m_metaInfo->fileYear()) result.setFileYear(m_metaInfo->fileYear());
-	if(m_metaInfo->filePosition() == UINT_MAX) result.setFilePosition(m_currentFile);
-	if(!m_metaInfo->fileComment().isEmpty()) result.setFileComment(m_metaInfo->fileComment());
+	result.updateMetaInfo(*m_metaInfo);
+	
+	if(m_metaInfo->filePosition() == UINT_MAX)
+	{
+		result.setFilePosition(m_currentFile);
+	}
 
 	return result;
 }

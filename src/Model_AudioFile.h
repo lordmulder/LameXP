@@ -85,6 +85,8 @@ public:
 	void setFormatAudioChannels(unsigned int channels);
 	void setFormatAudioBitdepth(unsigned int bitdepth);
 
+	void updateMetaInfo(const AudioFileModel &model);
+
 private:
 	QString m_filePath;
 	QString m_fileName;
@@ -104,4 +106,6 @@ private:
 	unsigned int m_formatAudioSamplerate;
 	unsigned int m_formatAudioChannels;
 	unsigned int m_formatAudioBitdepth;
+
+	void resetAll(void);
 };
