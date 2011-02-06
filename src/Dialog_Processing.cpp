@@ -596,7 +596,8 @@ AudioFileModel ProcessingDialog::updateMetaInfo(const AudioFileModel &audioFile)
 {
 	if(!m_settings->writeMetaTags())
 	{
-		return AudioFileModel(audioFile.filePath());
+		AudioFileModel result(audioFile, false);
+		return result;
 	}
 	
 	AudioFileModel result = audioFile;

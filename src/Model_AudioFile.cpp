@@ -40,18 +40,16 @@ AudioFileModel::AudioFileModel(const QString &path, const QString &name)
 	m_formatAudioBitdepth = 0;
 }
 
-AudioFileModel::AudioFileModel(const AudioFileModel &model)
+AudioFileModel::AudioFileModel(const AudioFileModel &model, bool copyMetaInfo)
 {
-	setFilePath(model.m_filePath);
-	setFileName(model.m_fileName);
-	setFileArtist(model.m_fileArtist);
-	setFileAlbum(model.m_fileAlbum);
-	setFileGenre(model.m_fileGenre);
-	setFileComment(model.m_fileComment);
-	setFileYear(model.m_fileYear);
-	setFilePosition(model.m_filePosition);
-	setFileDuration(model.m_fileDuration);
+	m_fileYear = 0;
+	m_filePosition = 0;
+	m_fileDuration = 0;
+	m_formatAudioSamplerate = 0;
+	m_formatAudioChannels = 0;
+	m_formatAudioBitdepth = 0;
 
+	setFilePath(model.m_filePath);
 	setFormatContainerType(model.m_formatContainerType);
 	setFormatContainerProfile(model.m_formatContainerProfile);
 	setFormatAudioType(model.m_formatAudioType);
@@ -60,6 +58,18 @@ AudioFileModel::AudioFileModel(const AudioFileModel &model)
 	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
 	setFormatAudioChannels(model.m_formatAudioChannels);
 	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
+	setFileDuration(model.m_fileDuration);
+
+	if(copyMetaInfo)
+	{
+		setFileName(model.m_fileName);
+		setFileArtist(model.m_fileArtist);
+		setFileAlbum(model.m_fileAlbum);
+		setFileGenre(model.m_fileGenre);
+		setFileComment(model.m_fileComment);
+		setFileYear(model.m_fileYear);
+		setFilePosition(model.m_filePosition);
+	}
 }
 
 AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)

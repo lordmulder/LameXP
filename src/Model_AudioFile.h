@@ -30,7 +30,7 @@ class AudioFileModel : public QObject
 
 public:
 	AudioFileModel(const QString &path = QString(), const QString &name = QString());
-	AudioFileModel(const AudioFileModel &model);
+	AudioFileModel(const AudioFileModel &model, bool copyMetaInfo = true);
 	AudioFileModel &operator=(const AudioFileModel &model);
 	~AudioFileModel(void);
 
