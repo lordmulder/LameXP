@@ -517,22 +517,18 @@ FunctionEnd
 
 Function LockedListShow
 	!insertmacro MUI_HEADER_TEXT "$(LAMEXP_LANG_LOCKEDLIST_HEADER)" "$(LAMEXP_LANG_LOCKEDLIST_TEXT)"
-	${If} ${AtLeastWinXP}
-		!insertmacro GetExecutableName $R0
-		LockedList::AddModule "\$R0"
-		LockedList::AddModule "\Uninstall.exe"
-		LockedList::AddModule "\Au_.exe"
-	${EndIf}
+	!insertmacro GetExecutableName $R0
+	LockedList::AddModule "\$R0"
+	LockedList::AddModule "\Uninstall.exe"
+	LockedList::AddModule "\Au_.exe"
 	LockedList::Dialog /autonext /heading "$(LAMEXP_LANG_LOCKEDLIST_HEADING)" /noprograms "$(LAMEXP_LANG_LOCKEDLIST_NOPROG)" /searching  "$(LAMEXP_LANG_LOCKEDLIST_SEARCH)" /colheadings "$(LAMEXP_LANG_LOCKEDLIST_COLHDR1)" "$(LAMEXP_LANG_LOCKEDLIST_COLHDR2)"
 	Pop $R0
 FunctionEnd
 
 Function un.LockedListShow
 	!insertmacro MUI_HEADER_TEXT "$(LAMEXP_LANG_LOCKEDLIST_HEADER)" "$(LAMEXP_LANG_LOCKEDLIST_TEXT)"
-	${If} ${AtLeastWinXP}
-		LockedList::AddModule "\LameXP.exe"
-		LockedList::AddModule "\Uninstall.exe"
-	${EndIf}
+	LockedList::AddModule "\LameXP.exe"
+	LockedList::AddModule "\Uninstall.exe"
 	LockedList::Dialog /autonext /heading "$(LAMEXP_LANG_LOCKEDLIST_HEADING)" /noprograms "$(LAMEXP_LANG_LOCKEDLIST_NOPROG)" /searching  "$(LAMEXP_LANG_LOCKEDLIST_SEARCH)" /colheadings "$(LAMEXP_LANG_LOCKEDLIST_COLHDR1)" "$(LAMEXP_LANG_LOCKEDLIST_COLHDR2)"
 	Pop $R0
 FunctionEnd
