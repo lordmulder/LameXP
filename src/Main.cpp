@@ -153,7 +153,7 @@ int lamexp_main(int argc, char* argv[])
 	LAMEXP_DELETE(fileListModel);
 	LAMEXP_DELETE(metaInfo);
 	LAMEXP_DELETE(settingsModel);
-	
+
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");
 

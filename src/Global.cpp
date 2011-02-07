@@ -345,7 +345,7 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 	int CPUInfo[4] = {-1};
 	char CPUIdentificationString[0x40];
 	char CPUBrandString[0x40];
-	
+
 	memset(&features, 0, sizeof(lamexp_cpu_t));
 	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
 	memset(CPUIdentificationString, 0, sizeof(CPUIdentificationString));
@@ -373,17 +373,29 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 	}
 
 	__cpuid(CPUInfo, 0x80000000);
-	int nExIds = CPUInfo[0];
+	int nExIds = max(min(CPUInfo[0], 0x80000004), 0x80000000);
 
-	for(int i = 0x80000000; i <= nExIds; ++i)
+	for(int i = 0x80000002; i <= nExIds; ++i)
 	{
 		__cpuid(CPUInfo, i);
-		if(i == 0x80000002) memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo));
-		else if(i == 0x80000003) memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo));
-		else if(i == 0x80000004) memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo));
+		switch(i)
+		{
+		case 0x80000002:
+			memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo));
+			break;
+		case 0x80000003:
+			memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo));
+			break;
+		case 0x80000004:
+			memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo));
+			break;
+		}
 	}
 
 	strcpy_s(features.brand, 0x40, CPUBrandString);
+
+	if(strlen(features.brand) < 1) strcpy_s(features.brand, 0x40, "Unknown");
+	if(strlen(features.vendor) < 1) strcpy_s(features.vendor, 0x40, "Unknown");
 
 #if !defined(_M_X64 ) && !defined(_M_IA64)
 	if(!IsWow64ProcessPtr || !GetNativeSystemInfoPtr)
