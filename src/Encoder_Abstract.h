@@ -45,8 +45,10 @@ public:
 	//Common setter methods
 	void setBitrate(int bitrate);
 	void setRCMode(int mode);
+	void setCustomParams(const QString &customParams);
 
 protected:
 	int m_configBitrate;
 	int m_configRCMode;
+	QString m_configCustomParams;
 };

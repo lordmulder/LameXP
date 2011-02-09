@@ -91,8 +91,9 @@ private slots:
 	void normalizationMaxVolumeChanged(double volume);
 	void toneAdjustBassChanged(double value);
 	void toneAdjustTrebleChanged(double value);
-	void toneAdjustTrebleReset();
-	void resetAdvancedOptionsButtonClicked();
+	void toneAdjustTrebleReset(void);
+	void customParamsChanged(void);
+	void resetAdvancedOptionsButtonClicked(void);
 	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);
 	void playlistEnabledChanged(void);

@@ -64,6 +64,10 @@ static const char *g_settingsId_normalizationFilterEnabled = "AdvancedOptions/Vo
 static const char *g_settingsId_normalizationFilterMaxVolume = "AdvancedOptions/VolumeNormalization/MaxVolume";
 static const char *g_settingsId_toneAdjustBass = "AdvancedOptions/ToneAdjustment/Bass";
 static const char *g_settingsId_toneAdjustTreble = "AdvancedOptions/ToneAdjustment/Treble";
+static const char *g_settingsId_customParametersLAME = "AdvancedOptions/CustomParameters/LAME";
+static const char *g_settingsId_customParametersOggEnc = "AdvancedOptions/CustomParameters/OggEnc";
+static const char *g_settingsId_customParametersNeroAAC = "AdvancedOptions/CustomParameters/NeroAAC";
+static const char *g_settingsId_customParametersFLAC = "AdvancedOptions/CustomParameters/FLAC";
 
 //Macros
 #define MAKE_OPTION1(OPT,DEF) \
@@ -233,3 +237,7 @@ MAKE_OPTION3(normalizationFilterEnabled, false)
 MAKE_OPTION1(normalizationFilterMaxVolume, -50)
 MAKE_OPTION1(toneAdjustBass, 0)
 MAKE_OPTION1(toneAdjustTreble, 0)
+MAKE_OPTION2(customParametersLAME, QString());
+MAKE_OPTION2(customParametersOggEnc, QString());
+MAKE_OPTION2(customParametersNeroAAC, QString());
+MAKE_OPTION2(customParametersFLAC, QString());

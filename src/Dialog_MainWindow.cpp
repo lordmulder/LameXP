@@ -217,6 +217,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabled()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2Pass()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabled()) checkBoxNormalizationFilter->click();
+	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
+	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
+	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAAC());
+	lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
 	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
@@ -230,10 +234,15 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(spinBoxToneAdjustBass, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustBassChanged(double)));
 	connect(spinBoxToneAdjustTreble, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustTrebleChanged(double)));
 	connect(buttonToneAdjustReset, SIGNAL(clicked()), this, SLOT(toneAdjustTrebleReset()));
+	connect(lineEditCustomParamLAME, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(lineEditCustomParamOggEnc, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(lineEditCustomParamNeroAAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
 	toneAdjustBassChanged(spinBoxToneAdjustBass->value());
+	customParamsChanged();
 	
 	//Activate file menu actions
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
@@ -1822,7 +1831,7 @@ void MainWindow::toneAdjustTrebleChanged(double value)
 /*
  * Tone adjustment has been reset
  */
-void MainWindow::toneAdjustTrebleReset()
+void MainWindow::toneAdjustTrebleReset(void)
 {
 	spinBoxToneAdjustBass->setValue(m_settings->toneAdjustBassDefault());
 	spinBoxToneAdjustTreble->setValue(m_settings->toneAdjustTrebleDefault());
@@ -1831,9 +1840,35 @@ void MainWindow::toneAdjustTrebleReset()
 }
 
 /*
+ * Custom encoder parameters changed
+ */
+void MainWindow::customParamsChanged(void)
+{
+	lineEditCustomParamLAME->setText(lineEditCustomParamLAME->text().simplified());
+	lineEditCustomParamOggEnc->setText(lineEditCustomParamOggEnc->text().simplified());
+	lineEditCustomParamNeroAAC->setText(lineEditCustomParamNeroAAC->text().simplified());
+	lineEditCustomParamFLAC->setText(lineEditCustomParamFLAC->text().simplified());
+
+	bool customParamsUsed = false;
+	if(!lineEditCustomParamLAME->text().isEmpty()) customParamsUsed = true;
+	if(!lineEditCustomParamOggEnc->text().isEmpty()) customParamsUsed = true;
+	if(!lineEditCustomParamNeroAAC->text().isEmpty()) customParamsUsed = true;
+	if(!lineEditCustomParamFLAC->text().isEmpty()) customParamsUsed = true;
+
+	labelCustomParamsIcon->setVisible(customParamsUsed);
+	labelCustomParamsText->setVisible(customParamsUsed);
+	labelCustomParamsSpacer->setVisible(customParamsUsed);
+
+	m_settings->customParametersLAME(lineEditCustomParamLAME->text());
+	m_settings->customParametersOggEnc(lineEditCustomParamOggEnc->text());
+	m_settings->customParametersNeroAAC(lineEditCustomParamNeroAAC->text());
+	m_settings->customParametersFLAC(lineEditCustomParamFLAC->text());
+}
+
+/*
  * Reset all advanced options to their defaults
  */
-void MainWindow::resetAdvancedOptionsButtonClicked()
+void MainWindow::resetAdvancedOptionsButtonClicked(void)
 {
 	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());
 	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());
@@ -1847,6 +1882,11 @@ void MainWindow::resetAdvancedOptionsButtonClicked()
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabledDefault()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2PassDefault()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabledDefault()) checkBoxNormalizationFilter->click();
+	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
+	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
+	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAACDefault());
+	lineEditCustomParamFLAC->setText(m_settings->customParametersFLACDefault());
+	customParamsChanged();
 	scrollArea->verticalScrollBar()->setValue(0);
 }
 

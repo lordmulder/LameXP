@@ -1122,6 +1122,30 @@
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation>Die LameXP Shell-Integration wurde wieder aktiviert.</translation>
     </message>
+    <message>
+        <source> Custom Encoder Parameters </source>
+        <translation> Benutzerdefinierte Parameter </translation>
+    </message>
+    <message>
+        <source>LAME:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>OggEnc2:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Nero AAC:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>FLAC:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
+        <translation>Achtung: Benutzerdefinierte Parameter werden nicht überprüft. Benutzung auf eigene Gefahr !!!</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

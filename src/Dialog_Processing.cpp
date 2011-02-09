@@ -464,6 +464,7 @@ void ProcessingDialog::startNextJob(void)
 				nativeResampling = true;
 			}
 			mp3Encoder->setChannelMode(m_settings->lameChannelMode());
+			mp3Encoder->setCustomParams(m_settings->customParametersLAME());
 			encoder = mp3Encoder;
 		}
 		break;
@@ -481,6 +482,7 @@ void ProcessingDialog::startNextJob(void)
 				vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
 				nativeResampling = true;
 			}
+			vorbisEncoder->setCustomParams(m_settings->customParametersOggEnc());
 			encoder = vorbisEncoder;
 		}
 		break;
@@ -491,6 +493,7 @@ void ProcessingDialog::startNextJob(void)
 			aacEncoder->setRCMode(m_settings->compressionRCMode());
 			aacEncoder->setEnable2Pass(m_settings->neroAACEnable2Pass());
 			aacEncoder->setProfile(m_settings->neroAACProfile());
+			aacEncoder->setCustomParams(m_settings->customParametersNeroAAC());
 			encoder = aacEncoder;
 		}
 		break;
@@ -499,6 +502,7 @@ void ProcessingDialog::startNextJob(void)
 			FLACEncoder *flacEncoder = new FLACEncoder();
 			flacEncoder->setBitrate(m_settings->compressionBitrate());
 			flacEncoder->setRCMode(m_settings->compressionRCMode());
+			flacEncoder->setCustomParams(m_settings->customParametersFLAC());
 			encoder = flacEncoder;
 		}
 		break;

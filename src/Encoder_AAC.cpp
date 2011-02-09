@@ -89,6 +89,8 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		break;
 	}
 
+	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
+
 	args << "-if" << QDir::toNativeSeparators(sourceFile);
 	args << "-of" << QDir::toNativeSeparators(outputFile);
 

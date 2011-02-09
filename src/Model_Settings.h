@@ -96,6 +96,10 @@ public:
 	MAKE_OPTION_DEC1(normalizationFilterMaxVolume);
 	MAKE_OPTION_DEC1(toneAdjustBass);
 	MAKE_OPTION_DEC1(toneAdjustTreble);
+	MAKE_OPTION_DEC2(customParametersLAME);
+	MAKE_OPTION_DEC2(customParametersOggEnc);
+	MAKE_OPTION_DEC2(customParametersNeroAAC);
+	MAKE_OPTION_DEC2(customParametersFLAC);
 
 	//Misc
 	void validate(void);

@@ -1124,6 +1124,30 @@ Votre dossier TEMP est situé ici:</translation>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> Custom Encoder Parameters </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LAME:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OggEnc2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nero AAC:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FLAC:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

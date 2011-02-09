@@ -94,6 +94,12 @@
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
                 </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
                </widget>
               </item>
               <item>
@@ -111,6 +117,12 @@
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
                 </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
                </widget>
               </item>
               <item>
@@ -127,6 +139,12 @@
                 <property name="icon">
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/bin.png</normaloff>:/icons/bin.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -155,6 +173,12 @@
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/arrow_up.png</normaloff>:/icons/arrow_up.png</iconset>
                 </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
                </widget>
               </item>
               <item>
@@ -165,6 +189,12 @@
                 <property name="icon">
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/arrow_down.png</normaloff>:/icons/arrow_down.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -211,6 +241,12 @@
                 <property name="icon">
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/zoom.png</normaloff>:/icons/zoom.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -317,6 +353,12 @@
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/house.png</normaloff>:/icons/house.png</iconset>
                 </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
                </widget>
               </item>
               <item>
@@ -334,6 +376,12 @@
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/music.png</normaloff>:/icons/music.png</iconset>
                 </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
                </widget>
               </item>
               <item>
@@ -350,6 +398,12 @@
                 <property name="icon">
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/monitor.png</normaloff>:/icons/monitor.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -380,6 +434,12 @@
                 <property name="icon">
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/folder_add.png</normaloff>:/icons/folder_add.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -502,6 +562,12 @@
                   <iconset resource="../res/Icons.qrc">
                    <normaloff>:/icons/table_edit.png</normaloff>:/icons/table_edit.png</iconset>
                  </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
+                 </property>
                 </widget>
                </item>
                <item row="3" column="1">
@@ -547,6 +613,12 @@
                  <property name="icon">
                   <iconset resource="../res/Icons.qrc">
                    <normaloff>:/icons/bomb.png</normaloff>:/icons/bomb.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
                  </property>
                 </widget>
                </item>
@@ -985,8 +1057,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
-               <height>609</height>
+               <width>604</width>
+               <height>812</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -1894,18 +1966,18 @@
                      </item>
                      <item row="1" column="7">
                       <widget class="QPushButton" name="buttonToneAdjustReset">
-                       <property name="maximumSize">
-                        <size>
-                         <width>20</width>
-                         <height>20</height>
-                        </size>
-                       </property>
                        <property name="text">
                         <string/>
                        </property>
                        <property name="icon">
                         <iconset resource="../res/Icons.qrc">
                          <normaloff>:/icons/cross.png</normaloff>:/icons/cross.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>16</width>
+                         <height>16</height>
+                        </size>
                        </property>
                       </widget>
                      </item>
@@ -1940,6 +2012,199 @@
                         </size>
                        </property>
                       </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QGroupBox" name="groupBox_11">
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="title">
+                   <string> Custom Encoder Parameters </string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_30">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="gridLayout_29">
+                     <item row="1" column="2">
+                      <widget class="QLineEdit" name="lineEditCustomParamLAME">
+                       <property name="font">
+                        <font>
+                         <family>Lucida Console</family>
+                        </font>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="2">
+                      <widget class="QLineEdit" name="lineEditCustomParamOggEnc">
+                       <property name="font">
+                        <font>
+                         <family>Lucida Console</family>
+                        </font>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="4" column="2">
+                      <widget class="QLineEdit" name="lineEditCustomParamFLAC">
+                       <property name="font">
+                        <font>
+                         <family>Lucida Console</family>
+                        </font>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="2">
+                      <widget class="QLineEdit" name="lineEditCustomParamNeroAAC">
+                       <property name="font">
+                        <font>
+                         <family>Lucida Console</family>
+                        </font>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QLabel" name="label_9">
+                       <property name="text">
+                        <string>LAME:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QLabel" name="label_10">
+                       <property name="text">
+                        <string>OggEnc2:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="1">
+                      <widget class="QLabel" name="label_11">
+                       <property name="text">
+                        <string>Nero AAC:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="4" column="1">
+                      <widget class="QLabel" name="label_12">
+                       <property name="text">
+                        <string>FLAC:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0" rowspan="4">
+                      <spacer name="horizontalSpacer_33">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="3" rowspan="4">
+                      <spacer name="horizontalSpacer_34">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1" colspan="2">
+                      <spacer name="verticalSpacer_15">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="7" column="1" colspan="2">
+                      <spacer name="verticalSpacer_16">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="6" column="1" colspan="2">
+                      <layout class="QHBoxLayout" name="horizontalLayout_6">
+                       <item>
+                        <widget class="QLabel" name="labelCustomParamsIcon">
+                         <property name="maximumSize">
+                          <size>
+                           <width>18</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="../res/Icons.qrc">:/icons/error.png</pixmap>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="labelCustomParamsText">
+                         <property name="text">
+                          <string>Warning: Custom parameters won't be checked at all. Use them at your own risk !!!</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="5" column="1" colspan="2">
+                      <widget class="QLabel" name="labelCustomParamsSpacer">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>2</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>2</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -1986,6 +2251,12 @@
                   <property name="icon">
                    <iconset resource="../res/Icons.qrc">
                     <normaloff>:/icons/bomb.png</normaloff>:/icons/bomb.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
                   </property>
                  </widget>
                 </item>
@@ -2047,6 +2318,12 @@
          <iconset resource="../res/Icons.qrc">
           <normaloff>:/icons/play.png</normaloff>:/icons/play.png</iconset>
         </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
        </widget>
       </item>
       <item>
@@ -2077,6 +2354,12 @@
          <iconset resource="../res/Icons.qrc">
           <normaloff>:/icons/information.png</normaloff>:/icons/information.png</iconset>
         </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
        </widget>
       </item>
       <item>
@@ -2106,6 +2389,12 @@
         <property name="icon">
          <iconset resource="../res/Icons.qrc">
           <normaloff>:/icons/door_in.png</normaloff>:/icons/door_in.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -2469,6 +2758,14 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

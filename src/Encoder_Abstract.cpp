@@ -27,6 +27,7 @@ AbstractEncoder::AbstractEncoder(void)
 {
 	m_configBitrate = 0;
 	m_configRCMode = 0;
+	m_configCustomParams.clear();
 }
 
 AbstractEncoder::~AbstractEncoder(void)
@@ -39,6 +40,7 @@ AbstractEncoder::~AbstractEncoder(void)
 
 void AbstractEncoder::setBitrate(int bitrate) { m_configBitrate = max(0, bitrate); }
 void AbstractEncoder::setRCMode(int mode) { m_configRCMode = max(0, mode); }
+void AbstractEncoder::setCustomParams(const QString &customParams) { m_configCustomParams = customParams; }
 
 /*
  * Default implementation
