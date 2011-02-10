@@ -390,6 +390,12 @@
             <iconset resource="../res/Icons.qrc">
              <normaloff>:/icons/cancel.png</normaloff>:/icons/cancel.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
           </widget>
          </item>
          <item>
@@ -407,6 +413,12 @@
             <iconset resource="../res/Icons.qrc">
              <normaloff>:/icons/accept.png</normaloff>:/icons/accept.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
           </widget>
          </item>
         </layout>
@@ -418,6 +430,8 @@
   </layout>
  </widget>
  <resources>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>

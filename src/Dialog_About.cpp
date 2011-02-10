@@ -104,16 +104,19 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	{
 		QPushButton *firstButton = addButton(tr("Show License Text"), QMessageBox::AcceptRole);
 		firstButton->setIcon(QIcon(":/icons/script.png"));
+		firstButton->setIconSize(QSize(16, 16));
 		firstButton->setMinimumWidth(135);
 		firstButton->disconnect();
 		connect(firstButton, SIGNAL(clicked()), this, SLOT(openLicenseText()));
 
 		QPushButton *secondButton = addButton(tr("Accept License"), QMessageBox::AcceptRole);
 		secondButton->setIcon(QIcon(":/icons/accept.png"));
+		secondButton->setIconSize(QSize(16, 16));
 		secondButton->setMinimumWidth(120);
 
 		QPushButton *thirdButton = addButton(tr("Decline License"), QMessageBox::AcceptRole);
 		thirdButton->setIcon(QIcon(":/icons/delete.png"));
+		thirdButton->setIconSize(QSize(16, 16));
 		thirdButton->setMinimumWidth(120);
 		thirdButton->setEnabled(false);
 	}
@@ -121,24 +124,28 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	{
 		QPushButton *firstButton = addButton(tr("3rd Party S/W"), QMessageBox::AcceptRole);
 		firstButton->setIcon(QIcon(":/icons/page_white_cplusplus.png"));
+		firstButton->setIconSize(QSize(16, 16));
 		firstButton->setMinimumWidth(120);
 		firstButton->disconnect();
 		connect(firstButton, SIGNAL(clicked()), this, SLOT(showMoreAbout()));
 
 		QPushButton *secondButton = addButton(tr("Contributors"), QMessageBox::AcceptRole);
 		secondButton->setIcon(QIcon(":icons/user_suit.png"));
+		secondButton->setIconSize(QSize(16, 16));
 		secondButton->setMinimumWidth(120);
 		secondButton->disconnect();
 		connect(secondButton, SIGNAL(clicked()), this, SLOT(showAboutContributors()));
 
 		QPushButton *thirdButton = addButton(tr("About Qt4"), QMessageBox::AcceptRole);
 		thirdButton->setIcon(QIcon(":/images/Qt.svg"));
+		thirdButton->setIconSize(QSize(16, 16));
 		thirdButton->setMinimumWidth(120);
 		thirdButton->disconnect();
 		connect(thirdButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
 
 		QPushButton *fourthButton = addButton(tr("Discard"), QMessageBox::AcceptRole);
 		fourthButton->setIcon(QIcon(":/icons/cross.png"));
+		fourthButton->setIconSize(QSize(16, 16));
 		fourthButton->setMinimumWidth(90);
 	}
 

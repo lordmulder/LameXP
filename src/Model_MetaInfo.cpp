@@ -244,6 +244,56 @@ QVariant MetaInfoModel::headerData(int section, Qt::Orientation orientation, int
 	}
 }
 
+bool MetaInfoModel::setData (const QModelIndex &index, const QVariant &value, int role)
+{
+	if((role != Qt::EditRole) || (index.column() != 1) || !value.isValid())
+	{
+		return false;
+	}
+
+	switch(index.row() + m_offset)
+	{
+	case 0:
+		m_audioFile->setFilePath(value.toString());
+		break;
+	case 1:
+	case 2:
+	case 3:
+		return false;
+		break;
+	case 4:
+		m_audioFile->setFileDuration(value.toUInt());
+		break;
+	case 5:
+		m_audioFile->setFileName(value.toString());
+		break;
+	case 6:
+		m_audioFile->setFileArtist(value.toString());
+		break;
+	case 7:
+		m_audioFile->setFileAlbum(value.toString());
+		break;
+	case 8:
+		m_audioFile->setFileGenre(value.toString());
+		break;
+	case 9:
+		m_audioFile->setFileYear(value.toUInt());
+		break;
+	case 10:
+		m_audioFile->setFilePosition(value.toUInt());
+		break;
+	case 11:
+		m_audioFile->setFileComment(value.toString());
+		break;
+	default:
+		return false;
+		break;
+	}
+
+	emit dataChanged(index, index);
+	return true;
+}
+
 void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 {
 	bool ok = false;

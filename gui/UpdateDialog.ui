@@ -374,6 +374,12 @@
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/arrow_refresh.png</normaloff>:/icons/arrow_refresh.png</iconset>
                 </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
                </widget>
               </item>
               <item>
@@ -390,6 +396,12 @@
                 <property name="icon">
                  <iconset resource="../res/Icons.qrc">
                   <normaloff>:/icons/application_view_list.png</normaloff>:/icons/application_view_list.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -473,6 +485,12 @@
           <iconset resource="../res/Icons.qrc">
            <normaloff>:/icons/accept.png</normaloff>:/icons/accept.png</iconset>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -489,6 +507,12 @@
          <property name="icon">
           <iconset resource="../res/Icons.qrc">
            <normaloff>:/icons/cross.png</normaloff>:/icons/cross.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -544,6 +568,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

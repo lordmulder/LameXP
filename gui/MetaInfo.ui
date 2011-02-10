@@ -213,6 +213,12 @@
             <iconset resource="../res/Icons.qrc">
              <normaloff>:/icons/arrow_up.png</normaloff>:/icons/arrow_up.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -226,6 +232,12 @@
            <property name="icon">
             <iconset resource="../res/Icons.qrc">
              <normaloff>:/icons/arrow_down.png</normaloff>:/icons/arrow_down.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -263,6 +275,12 @@
             <iconset resource="../res/Icons.qrc">
              <normaloff>:/icons/table_edit.png</normaloff>:/icons/table_edit.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -282,6 +300,12 @@
            <property name="icon">
             <iconset resource="../res/Icons.qrc">
              <normaloff>:/icons/cross.png</normaloff>:/icons/cross.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -305,6 +329,7 @@
  </tabstops>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

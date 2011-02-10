@@ -32,44 +32,11 @@
 #include <QStringList>
 #include <QLocale>
 
-//Constants
-static const char *g_settingsId_versionNumber = "VersionNumber";
-static const char *g_settingsId_licenseAccepted = "LicenseAccepted";
-static const char *g_settingsId_interfaceStyle = "InterfaceStyle";
-static const char *g_settingsId_compressionEncoder = "Compression/Encoder";
-static const char *g_settingsId_compressionRCMode = "Compression/RCMode";
-static const char *g_settingsId_compressionBitrate = "Compression/Bitrate";
-static const char *g_settingsId_outputDir = "OutputDirectory/SelectedPath";
-static const char *g_settingsId_outputToSourceDir = "OutputDirectory/OutputToSourceFolder";
-static const char *g_settingsId_prependRelativeSourcePath = "OutputDirectory/PrependRelativeSourcePath";
-static const char *g_settingsId_writeMetaTags = "Flags/WriteMetaTags";
-static const char *g_settingsId_createPlaylist = "Flags/AutoCreatePlaylist";
-static const char *g_settingsId_autoUpdateLastCheck = "AutoUpdate/LastCheck";
-static const char *g_settingsId_autoUpdateEnabled = "AutoUpdate/Enabled";
-static const char *g_settingsId_soundsEnabled = "Flags/EnableSounds";
-static const char *g_settingsId_neroAacNotificationsEnabled = "Flags/EnableNeroAacNotifications";
-static const char *g_settingsId_wmaDecoderNotificationsEnabled = "Flags/EnableWmaDecoderNotifications";
-static const char *g_settingsId_dropBoxWidgetEnabled = "Flags/EnableDropBoxWidget";
-static const char *g_settingsId_shellIntegrationEnabled = "Flags/EnableShellIntegration";
-static const char *g_settingsId_currentLanguage = "Localization/Language";
-static const char *g_settingsId_lameAlgoQuality = "AdvancedOptions/LAME/AlgorithmQuality";
-static const char *g_settingsId_lameChannelMode = "AdvancedOptions/LAME/ChannelMode";
-static const char *g_settingsId_bitrateManagementEnabled = "AdvancedOptions/BitrateManagement/Enabled";
-static const char *g_settingsId_bitrateManagementMinRate = "AdvancedOptions/BitrateManagement/MinRate";
-static const char *g_settingsId_bitrateManagementMaxRate = "AdvancedOptions/BitrateManagement/MaxRate";
-static const char *g_settingsId_samplingRate = "AdvancedOptions/Common/Resampling";
-static const char *g_settingsId_neroAACEnable2Pass = "AdvancedOptions/NeroAAC/Enable2Pass";
-static const char *g_settingsId_neroAACProfile = "AdvancedOptions/NeroAAC/ForceProfile";
-static const char *g_settingsId_normalizationFilterEnabled = "AdvancedOptions/VolumeNormalization/Enabled";
-static const char *g_settingsId_normalizationFilterMaxVolume = "AdvancedOptions/VolumeNormalization/MaxVolume";
-static const char *g_settingsId_toneAdjustBass = "AdvancedOptions/ToneAdjustment/Bass";
-static const char *g_settingsId_toneAdjustTreble = "AdvancedOptions/ToneAdjustment/Treble";
-static const char *g_settingsId_customParametersLAME = "AdvancedOptions/CustomParameters/LAME";
-static const char *g_settingsId_customParametersOggEnc = "AdvancedOptions/CustomParameters/OggEnc";
-static const char *g_settingsId_customParametersNeroAAC = "AdvancedOptions/CustomParameters/NeroAAC";
-static const char *g_settingsId_customParametersFLAC = "AdvancedOptions/CustomParameters/FLAC";
 
+////////////////////////////////////////////////////////////
 //Macros
+////////////////////////////////////////////////////////////
+
 #define MAKE_OPTION1(OPT,DEF) \
 int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); } \
 void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
@@ -84,6 +51,55 @@ QString SettingsModel::OPT##Default(void) { return DEF; }
 bool SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toBool(); } \
 void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 bool SettingsModel::OPT##Default(void) { return DEF; }
+
+#define MAKE_OPTION4(OPT,DEF) \
+unsigned int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toUInt(); } \
+void SettingsModel::OPT(unsigned int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
+unsigned int SettingsModel::OPT##Default(void) { return DEF; }
+
+#define MAKE_ID(DEC,STR) static const char *g_settingsId_##DEC = STR
+
+////////////////////////////////////////////////////////////
+//Constants
+////////////////////////////////////////////////////////////
+
+//Setting ID's
+MAKE_ID(versionNumber, "VersionNumber");
+MAKE_ID(licenseAccepted, "LicenseAccepted");
+MAKE_ID(interfaceStyle, "InterfaceStyle");
+MAKE_ID(compressionEncoder, "Compression/Encoder");
+MAKE_ID(compressionRCMode, "Compression/RCMode");
+MAKE_ID(compressionBitrate, "Compression/Bitrate");
+MAKE_ID(outputDir, "OutputDirectory/SelectedPath");
+MAKE_ID(outputToSourceDir, "OutputDirectory/OutputToSourceFolder");
+MAKE_ID(prependRelativeSourcePath, "OutputDirectory/PrependRelativeSourcePath");
+MAKE_ID(writeMetaTags, "Flags/WriteMetaTags");
+MAKE_ID(createPlaylist, "Flags/AutoCreatePlaylist");
+MAKE_ID(autoUpdateLastCheck, "AutoUpdate/LastCheck");
+MAKE_ID(autoUpdateEnabled, "AutoUpdate/Enabled");
+MAKE_ID(soundsEnabled, "Flags/EnableSounds");
+MAKE_ID(neroAacNotificationsEnabled, "Flags/EnableNeroAacNotifications");
+MAKE_ID(wmaDecoderNotificationsEnabled, "Flags/EnableWmaDecoderNotifications");
+MAKE_ID(dropBoxWidgetEnabled, "Flags/EnableDropBoxWidget");
+MAKE_ID(shellIntegrationEnabled, "Flags/EnableShellIntegration");
+MAKE_ID(currentLanguage, "Localization/Language");
+MAKE_ID(lameAlgoQuality, "AdvancedOptions/LAME/AlgorithmQuality");
+MAKE_ID(lameChannelMode, "AdvancedOptions/LAME/ChannelMode");
+MAKE_ID(bitrateManagementEnabled, "AdvancedOptions/BitrateManagement/Enabled");
+MAKE_ID(bitrateManagementMinRate, "AdvancedOptions/BitrateManagement/MinRate");
+MAKE_ID(bitrateManagementMaxRate, "AdvancedOptions/BitrateManagement/MaxRate");
+MAKE_ID(samplingRate, "AdvancedOptions/Common/Resampling");
+MAKE_ID(neroAACEnable2Pass, "AdvancedOptions/NeroAAC/Enable2Pass");
+MAKE_ID(neroAACProfile, "AdvancedOptions/NeroAAC/ForceProfile");
+MAKE_ID(normalizationFilterEnabled, "AdvancedOptions/VolumeNormalization/Enabled");
+MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
+MAKE_ID(toneAdjustBass, "AdvancedOptions/ToneAdjustment/Bass");
+MAKE_ID(toneAdjustTreble, "AdvancedOptions/ToneAdjustment/Treble");
+MAKE_ID(customParametersLAME, "AdvancedOptions/CustomParameters/LAME");
+MAKE_ID(customParametersOggEnc, "AdvancedOptions/CustomParameters/OggEnc");
+MAKE_ID(customParametersNeroAAC, "AdvancedOptions/CustomParameters/NeroAAC");
+MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
+MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
 
 //LUT
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
@@ -241,3 +257,4 @@ MAKE_OPTION2(customParametersLAME, QString());
 MAKE_OPTION2(customParametersOggEnc, QString());
 MAKE_OPTION2(customParametersNeroAAC, QString());
 MAKE_OPTION2(customParametersFLAC, QString());
+MAKE_OPTION4(metaInfoPosition, UINT_MAX);

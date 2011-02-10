@@ -24,6 +24,8 @@
 class QSettings;
 class QString;
 
+///////////////////////////////////////////////////////////////////////////////
+
 #define MAKE_OPTION_DEC1(OPT) \
 int OPT(void); \
 void OPT(int value); \
@@ -38,6 +40,13 @@ QString OPT##Default(void);
 bool OPT(void); \
 void OPT(bool value); \
 bool OPT##Default(void);
+
+#define MAKE_OPTION_DEC4(OPT) \
+unsigned int OPT(void); \
+void OPT(unsigned int value); \
+unsigned int OPT##Default(void);
+
+///////////////////////////////////////////////////////////////////////////////
 
 class SettingsModel
 {
@@ -100,6 +109,7 @@ public:
 	MAKE_OPTION_DEC2(customParametersOggEnc);
 	MAKE_OPTION_DEC2(customParametersNeroAAC);
 	MAKE_OPTION_DEC2(customParametersFLAC);
+	MAKE_OPTION_DEC4(metaInfoPosition);
 
 	//Misc
 	void validate(void);
@@ -110,6 +120,9 @@ private:
 	QString defaultLanguage(void);
 };
 
+///////////////////////////////////////////////////////////////////////////////
+
 #undef MAKE_OPTION_DEC1
 #undef MAKE_OPTION_DEC2
 #undef MAKE_OPTION_DEC3
+#undef MAKE_OPTION_DEC4

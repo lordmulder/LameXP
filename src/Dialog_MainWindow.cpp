@@ -168,6 +168,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//Setup "Meta Data" tab
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
 	m_metaInfoModel->clearData();
+	m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
 	metaDataView->setModel(m_metaInfoModel);
 	metaDataView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	metaDataView->verticalHeader()->hide();
@@ -574,6 +575,7 @@ void MainWindow::changeEvent(QEvent *e)
 
 		//Force GUI update
 		m_metaInfoModel->clearData();
+		m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
 		updateEncoder(m_settings->compressionEncoder());
 		updateLameAlgoQuality(sliderLameAlgoQuality->value());
 
@@ -1406,7 +1408,14 @@ void MainWindow::makeFolderButtonClicked(void)
 void MainWindow::editMetaButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-	m_metaInfoModel->editItem(metaDataView->currentIndex(), this);
+	
+	const QModelIndex index = metaDataView->currentIndex();
+	m_metaInfoModel->editItem(index, this);
+	
+	if(index.row() == 4)
+	{
+		m_settings->metaInfoPosition(m_metaData->filePosition());
+	}
 }
 
 /*

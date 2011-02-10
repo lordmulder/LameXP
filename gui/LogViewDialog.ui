@@ -311,6 +311,12 @@ RUN\DOS\RUN
           <iconset resource="../res/Icons.qrc">
            <normaloff>:/icons/cross.png</normaloff>:/icons/cross.png</iconset>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item row="1" column="2">
@@ -327,6 +333,12 @@ RUN\DOS\RUN
          <property name="icon">
           <iconset resource="../res/Icons.qrc">
            <normaloff>:/icons/disk.png</normaloff>:/icons/disk.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -358,6 +370,12 @@ RUN\DOS\RUN
           <iconset resource="../res/Icons.qrc">
            <normaloff>:/icons/paste_plain.png</normaloff>:/icons/paste_plain.png</iconset>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
@@ -368,6 +386,7 @@ RUN\DOS\RUN
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
