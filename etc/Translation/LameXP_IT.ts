@@ -1497,6 +1497,10 @@
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Browse Output File Location</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

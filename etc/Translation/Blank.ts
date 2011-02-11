@@ -1421,6 +1421,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Browse Output File Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Encoding Files</source>
         <translation type="unfinished"></translation>
     </message>

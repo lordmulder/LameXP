@@ -55,6 +55,7 @@ public:
 
 	//Public functions
 	const QStringList &getLogFile(const QModelIndex &index);
+	const QUuid &getJobId(const QModelIndex &index);
 
 public slots:
 	void addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);

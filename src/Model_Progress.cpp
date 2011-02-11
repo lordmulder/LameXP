@@ -177,6 +177,16 @@ const QStringList &ProgressModel::getLogFile(const QModelIndex &index)
 	return *(reinterpret_cast<QStringList*>(NULL));
 }
 
+const QUuid &ProgressModel::getJobId(const QModelIndex &index)
+{
+	if(index.row() < m_jobList.count())
+	{
+		return m_jobList.at(index.row());
+	}
+
+	return *(reinterpret_cast<QUuid*>(NULL));
+}
+
 void ProgressModel::addSystemMessage(const QString &text)
 {
 	const QUuid &jobId = QUuid::createUuid();

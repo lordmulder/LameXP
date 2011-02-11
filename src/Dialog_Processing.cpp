@@ -52,6 +52,7 @@
 #include <QDir>
 #include <QMenu>
 #include <QSystemTrayIcon>
+#include <QProcess>
 
 #include <Windows.h>
 
@@ -117,10 +118,13 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 
 	//Create context menu
 	m_contextMenu = new QMenu();
-	QAction *contextMenuAction = m_contextMenu->addAction(QIcon(":/icons/zoom.png"), tr("Show details for selected job"));
+	QAction *contextMenuDetailsAction = m_contextMenu->addAction(QIcon(":/icons/zoom.png"), tr("Show details for selected job"));
+	QAction *contextMenuShowFileAction = m_contextMenu->addAction(QIcon(":/icons/folder_go.png"), tr("Browse Output File Location"));
+
 	view_log->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(view_log, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
-	connect(contextMenuAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuActionTriggered()));
+	connect(contextMenuDetailsAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuDetailsActionTriggered()));
+	connect(contextMenuShowFileAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuShowFileActionTriggered()));
 	
 	//Enque jobs
 	if(fileListModel)
@@ -424,10 +428,53 @@ void ProcessingDialog::contextMenuTriggered(const QPoint &pos)
 	}
 }
 
-void ProcessingDialog::contextMenuActionTriggered(void)
+void ProcessingDialog::contextMenuDetailsActionTriggered(void)
 {
 	QModelIndex index = view_log->indexAt(view_log->mapFromGlobal(m_contextMenu->pos()));
 	logViewDoubleClicked(index.isValid() ? index : view_log->currentIndex());
+}
+
+void ProcessingDialog::contextMenuShowFileActionTriggered(void)
+{
+	QModelIndex index = view_log->indexAt(view_log->mapFromGlobal(m_contextMenu->pos()));
+	const QUuid &jobId = m_progressModel->getJobId(index.isValid() ? index : view_log->currentIndex());
+	QString filePath = m_playList.value(jobId, QString());
+
+	if(filePath.isEmpty())
+	{
+		MessageBeep(MB_ICONWARNING);
+		return;
+	}
+
+	if(QFileInfo(filePath).exists())
+	{
+		QString systemRootPath;
+
+		QDir systemRoot(lamexp_known_folder(lamexp_folder_systemfolder));
+		if(systemRoot.exists() && systemRoot.cdUp())
+		{
+			systemRootPath = systemRoot.canonicalPath();
+		}
+
+		if(!systemRootPath.isEmpty())
+		{
+			QFileInfo explorer(QString("%1/explorer.exe").arg(systemRootPath));
+			if(explorer.exists() && explorer.isFile())
+			{
+				QProcess::execute(explorer.canonicalFilePath(), QStringList() << "/select," << QDir::toNativeSeparators(QFileInfo(filePath).canonicalFilePath()));
+				return;
+			}
+		}
+		else
+		{
+			qWarning("SystemRoot directory could not be detected!");
+		}
+	}
+	else
+	{
+		qWarning("File not found: %s", filePath.toLatin1().constData());
+		MessageBeep(MB_ICONERROR);
+	}
 }
 
 ////////////////////////////////////////////////////////////

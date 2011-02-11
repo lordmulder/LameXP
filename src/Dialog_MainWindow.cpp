@@ -548,12 +548,12 @@ void MainWindow::changeEvent(QEvent *e)
 	{
 		int comboBoxIndex[3];
 		
-		//Backup combobox indices
+		//Backup combobox indices, as retranslateUi() resets
 		comboBoxIndex[0] = comboBoxMP3ChannelMode->currentIndex();
 		comboBoxIndex[1] = comboBoxSamplingRate->currentIndex();
 		comboBoxIndex[2] = comboBoxNeroAACProfile->currentIndex();
 		
-		//Re.translate from UIC
+		//Re-translate from UIC
 		Ui::MainWindow::retranslateUi(this);
 
 		//Restore combobox indices
@@ -566,7 +566,7 @@ void MainWindow::changeEvent(QEvent *e)
 			setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
 		}
 	
-		//Manual re-translate
+		//Manually re-translate widgets that UIC doesn't handle
 		m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
 		m_showDetailsContextAction->setText(tr("Show Details"));
 		m_previewContextAction->setText(tr("Open File in External Application"));
@@ -579,6 +579,7 @@ void MainWindow::changeEvent(QEvent *e)
 		updateEncoder(m_settings->compressionEncoder());
 		updateLameAlgoQuality(sliderLameAlgoQuality->value());
 
+		//Re-install shell integration
 		if(m_settings->shellIntegrationEnabled())
 		{
 			ShellIntegration::install();
@@ -1135,13 +1136,18 @@ void MainWindow::tabActionActivated(QAction *action)
  */
 void MainWindow::styleActionActivated(QAction *action)
 {
+	//Change style setting
 	if(action && action->data().isValid())
 	{
 		bool ok = false;
 		int actionIndex = action->data().toInt(&ok);
-		m_settings->interfaceStyle(actionIndex);
+		if(ok)
+		{
+			m_settings->interfaceStyle(actionIndex);
+		}
 	}
 
+	//Set up the new style
 	switch(m_settings->interfaceStyle())
 	{
 	case 1:
@@ -1177,6 +1183,9 @@ void MainWindow::styleActionActivated(QAction *action)
 		QApplication::setStyle(new QPlastiqueStyle());
 		break;
 	}
+
+	//Force re-translate after style change
+	changeEvent(new QEvent(QEvent::LanguageChange));
 }
 
 /*

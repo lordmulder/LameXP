@@ -1496,6 +1496,10 @@
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Ejecución multi-hilo habilitada: ¡Ejecutando %1 instancias en paralelo!</translation>
     </message>
+    <message>
+        <source>Browse Output File Location</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

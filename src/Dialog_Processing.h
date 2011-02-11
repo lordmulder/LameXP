@@ -50,7 +50,8 @@ private slots:
 	void progressModelChanged(void);
 	void logViewDoubleClicked(const QModelIndex &index);
 	void contextMenuTriggered(const QPoint &pos);
-	void contextMenuActionTriggered(void);
+	void contextMenuDetailsActionTriggered(void);
+	void contextMenuShowFileActionTriggered(void);
 	void systemTrayActivated(QSystemTrayIcon::ActivationReason reason);
 
 protected:

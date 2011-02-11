@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation>Das Urheberrecht an LameXP liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Authoren.</translation>
+        <translation>Das Urheberrecht an LameXP liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Autoren.</translation>
     </message>
     <message>
         <source>LameXP &amp;minus; Audio Encoder Front-end</source>
@@ -1496,6 +1496,10 @@
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Multithreading aktiviert: Führe %1 Instanzen parallel aus!</translation>
+    </message>
+    <message>
+        <source>Browse Output File Location</source>
+        <translation>Ausgabe-Datei Suchen</translation>
     </message>
 </context>
 <context>
