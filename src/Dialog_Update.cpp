@@ -42,7 +42,12 @@
 
 static const char *section_id = "LameXP";
 
-static const char *mirror_url_postfix = "update_beta.ver";
+static const char *mirror_url_postfix[] = 
+{
+	"update.ver",
+	"update_beta.ver",
+	NULL
+};
 
 static const char *update_mirrors[] =
 {
@@ -74,17 +79,18 @@ static char *USER_AGENT_STR = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.
 class UpdateInfo
 {
 public:
-	UpdateInfo(void)
-	:
-		m_buildNo(0),
-		m_buildDate(1900, 1, 1),
-		m_downloadSite(""),
-		m_downloadAddress(""),
-		m_downloadFilename(""),
-		m_downloadFilecode("")
-	{
-	}
+	UpdateInfo(void) { resetInfo(); }
 	
+	void resetInfo(void)
+	{
+		m_buildNo = 0;
+		m_buildDate.setDate(1900, 1, 1);
+		m_downloadSite.clear();
+		m_downloadAddress.clear();
+		m_downloadFilename.clear();
+		m_downloadFilecode.clear();
+	}
+
 	unsigned int m_buildNo;
 	QDate m_buildDate;
 	QString m_downloadSite;
@@ -330,10 +336,10 @@ bool UpdateDialog::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)
 	QString outFileSignature = QString("%1/%2.sig").arg(lamexp_temp_folder(), randPart);
 
 	m_logFile->append(QStringList() << "" << "Downloading update info:");
-	bool ok1 = getFile(QString("%1%2").arg(url,mirror_url_postfix), outFileVersionInfo);
+	bool ok1 = getFile(QString("%1%2").arg(url, mirror_url_postfix[lamexp_version_demo() ? 1 : 0]), outFileVersionInfo);
 
 	m_logFile->append(QStringList() << "" << "Downloading signature:");
-	bool ok2 = getFile(QString("%1%2.sig").arg(url,mirror_url_postfix), outFileSignature);
+	bool ok2 = getFile(QString("%1%2.sig").arg(url, mirror_url_postfix[lamexp_version_demo() ? 1 : 0]), outFileSignature);
 
 	if(ok1 && ok2)
 	{
@@ -448,9 +454,10 @@ bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 
 bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 {
-	
 	QRegExp value("^(\\w+)=(.+)$");
 	QRegExp section("^\\[(.+)\\]$");
+
+	updateInfo->resetInfo();
 
 	QFile data(file);
 	if(!data.open(QIODevice::ReadOnly))
@@ -466,13 +473,13 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 		QString line = QString::fromLatin1(data.readLine()).trimmed();
 		if(section.indexIn(line) >= 0)
 		{
-			m_logFile->append(QString("[%1]").arg(section.cap(1)));
+			m_logFile->append(QString("Sec: [%1]").arg(section.cap(1)));
 			inSection = (section.cap(1).compare(section_id, Qt::CaseInsensitive) == 0);
 			continue;
 		}
 		if(inSection && value.indexIn(line) >= 0)
 		{
-			m_logFile->append(QString("'%1' ==> '%2").arg(value.cap(1), value.cap(2)));
+			m_logFile->append(QString("Val: '%1' ==> '%2").arg(value.cap(1), value.cap(2)));
 			if(value.cap(1).compare("BuildNo", Qt::CaseInsensitive) == 0)
 			{
 				bool ok = false;
@@ -511,6 +518,11 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 	if(updateInfo->m_downloadAddress.isEmpty()) complete = false;
 	if(updateInfo->m_downloadFilename.isEmpty()) complete = false;
 	if(updateInfo->m_downloadFilecode.isEmpty()) complete = false;
+	
+	if(!complete)
+	{
+		m_logFile->append("WARNING: Version info is incomplete!");
+	}
 
 	return complete;
 }

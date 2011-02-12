@@ -187,8 +187,7 @@ const char *lamexp_version_compiler(void) {return g_lamexp_version_compiler; }
 unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
 
 bool lamexp_version_demo(void)
-{ 
-
+{
 	return LAMEXP_DEBUG || !(strstr(g_lamexp_version.ver_release_name, "Final") || strstr(g_lamexp_version.ver_release_name, "Hotfix"));
 }
 
