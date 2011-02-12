@@ -1555,7 +1555,7 @@
     </message>
     <message>
         <source>Show Log</source>
-        <translation>Lag Anzeigen</translation>
+        <translation>Log Anzeigen</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
@@ -1591,7 +1591,7 @@
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation>Der Update Server ist möglicherweise überlastet. Versuchen Sie es später noch einmal.</translation>
+        <translation>Der Server ist möglicherweise überlastet. Versuchen Sie es später noch einmal.</translation>
     </message>
     <message>
         <source>More information available at:</source>
