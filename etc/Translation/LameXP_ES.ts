@@ -343,7 +343,7 @@
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation>Guardar archivos de salida en la carpeta del archivo de entrada</translation>
+        <translation>Guardar archivos de salida en carpeta de entrada</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
@@ -355,7 +355,7 @@
     </message>
     <message>
         <source> Meta Information </source>
-        <translation>Metainformación</translation>
+        <translation>Metadatos</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -411,7 +411,7 @@
     </message>
     <message>
         <source> Rate Control Method </source>
-        <translation>Método de control de tasa</translation>
+        <translation>Método de control de tasa de bits</translation>
     </message>
     <message>
         <source>Quality-based (VBR)</source>
@@ -971,7 +971,7 @@
     </message>
     <message>
         <source>Enable Bitrate Management</source>
-        <translation>Habilitar administración de tasa de bits</translation>
+        <translation>Modificar de tasa de bits</translation>
     </message>
     <message>
         <source>Minimum (kbps):</source>
@@ -987,7 +987,7 @@
     </message>
     <message>
         <source>Auto Select (Default)</source>
-        <translation>Autoseleccionar (predeterminado)</translation>
+        <translation>Auto-seleccionar</translation>
     </message>
     <message>
         <source>Joint Stereo</source>
@@ -1011,7 +1011,7 @@
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation>Modo de canal MP3:</translation>
+        <translation>Canales MP3:</translation>
     </message>
     <message>
         <source>16.000</source>
@@ -1047,7 +1047,7 @@
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation>Habilitar procesamiento en 2-Pasos (Modo ABR)</translation>
+        <translation>Procesamiento en 2-Pasos (Modo ABR)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
@@ -1063,7 +1063,7 @@
     </message>
     <message>
         <source>Auto Select (Recommended)</source>
-        <translation>Auto-seleccionar (Recomendado)</translation>
+        <translation>Auto-seleccionar</translation>
     </message>
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
@@ -1220,7 +1220,7 @@
     </message>
     <message>
         <source>Generate from list position</source>
-        <translation>Generar desde posición en la lista</translation>
+        <translation>Generar a partir de la posición en la lista</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -1244,7 +1244,7 @@
     </message>
     <message>
         <source>Please enter the title for this file:</source>
-        <translation>Por favor, introduzca el título de este archivo:</translation>
+        <translation>Introduzca el título de este archivo:</translation>
     </message>
     <message>
         <source>The title must not be empty. Generating title from file name!</source>
@@ -1256,7 +1256,7 @@
     </message>
     <message>
         <source>Please enter the artist for this file:</source>
-        <translation>Por favor, introduzca el artista de este archivo:</translation>
+        <translation>Introduzca el artista de este archivo:</translation>
     </message>
     <message>
         <source>Edit Album</source>
@@ -1264,7 +1264,7 @@
     </message>
     <message>
         <source>Please enter the album for this file:</source>
-        <translation>Por favor, introduzca el álbum de este archivo:</translation>
+        <translation>Introduzca el álbum de este archivo:</translation>
     </message>
     <message>
         <source>Edit Genre</source>
@@ -1272,7 +1272,7 @@
     </message>
     <message>
         <source>Please enter the genre for this file:</source>
-        <translation>Por favor, introduzca el género de este archivo:</translation>
+        <translation>Introduzca el género de este archivo:</translation>
     </message>
     <message>
         <source>Edit Year</source>
@@ -1280,7 +1280,7 @@
     </message>
     <message>
         <source>Please enter the year for this file:</source>
-        <translation>Por favor, introduzca el año de este archivo:</translation>
+        <translation>Introduzca el año de este archivo:</translation>
     </message>
     <message>
         <source>Edit Position</source>
@@ -1288,7 +1288,7 @@
     </message>
     <message>
         <source>Please enter the position (track no.) for this file:</source>
-        <translation>Por favor, introduzca el nº de pista de este archivo:</translation>
+        <translation>Introduzca el Nº de pista de este archivo:</translation>
     </message>
     <message>
         <source>Unspecified (copy from source file)</source>
@@ -1498,7 +1498,7 @@
     </message>
     <message>
         <source>Browse Output File Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegar hasta la ubicación del archivo de salida</translation>
     </message>
 </context>
 <context>
