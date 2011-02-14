@@ -56,6 +56,8 @@
 
 #include <Windows.h>
 
+////////////////////////////////////////////////////////////
+
 #define CHANGE_BACKGROUND_COLOR(WIDGET, COLOR) \
 { \
 	QPalette palette = WIDGET->palette(); \
@@ -68,6 +70,8 @@
 	label_progress->setText(TXT); \
 	m_systemTray->setToolTip(QString().sprintf("LameXP v%d.%02d\n%ls", lamexp_version_major(), lamexp_version_minor(), QString(TXT).utf16())); \
 }
+
+#define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -125,7 +129,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	connect(view_log, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
 	connect(contextMenuDetailsAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuDetailsActionTriggered()));
 	connect(contextMenuShowFileAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuShowFileActionTriggered()));
-	
+	SET_FONT_BOLD(contextMenuDetailsAction, true);
+
 	//Enque jobs
 	if(fileListModel)
 	{
@@ -422,9 +427,12 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 
 void ProcessingDialog::contextMenuTriggered(const QPoint &pos)
 {
-	if(pos.x() <= view_log->width() && pos.y() <= view_log->height() && pos.x() >= 0 && pos.y() >= 0)
+	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(QObject::sender());
+	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());	
+
+	if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0)
 	{
-		m_contextMenu->popup(view_log->mapToGlobal(pos));
+		m_contextMenu->popup(sender->mapToGlobal(pos));
 	}
 }
 

@@ -1962,9 +1962,15 @@ void MainWindow::restoreCursor(void)
  */
 void MainWindow::sourceFilesContextMenu(const QPoint &pos)
 {
-	if(pos.x() <= sourceFileView->width() && pos.y() <= sourceFileView->height() && pos.x() >= 0 && pos.y() >= 0)
+	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(QObject::sender());
+	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());	
+
+	if(sender)
 	{
-		m_sourceFilesContextMenu->popup(sourceFileView->mapToGlobal(pos));
+		if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0)
+		{
+			m_sourceFilesContextMenu->popup(sender->mapToGlobal(pos));
+		}
 	}
 }
 
@@ -2051,10 +2057,12 @@ void MainWindow::findFileContextActionTriggered(void)
  */
 void MainWindow::outputFolderContextMenu(const QPoint &pos)
 {
-	
-	if(pos.x() <= outputFolderView->width() && pos.y() <= outputFolderView->height() && pos.x() >= 0 && pos.y() >= 0)
+	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(QObject::sender());
+	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());	
+
+	if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0)
 	{
-		m_outputFolderContextMenu->popup(outputFolderView->mapToGlobal(pos));
+		m_outputFolderContextMenu->popup(sender->mapToGlobal(pos));
 	}
 }
 
