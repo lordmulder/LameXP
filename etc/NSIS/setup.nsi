@@ -396,10 +396,13 @@ FunctionEnd
 ;Install Files
 ;--------------------------------
 
+Section "-PreInit"
+	SetOutPath "$INSTDIR"
+SectionEnd
+
 Section "!Install Files"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_INSTFILES)"
 
-	SetOutPath "$INSTDIR"
 	Delete "$INSTDIR\Changelog.htm"
 	Delete "$INSTDIR\Changelog.html"
 	Delete "$INSTDIR\Contributors.txt"
@@ -560,6 +563,6 @@ Function RunAppFunction
 FunctionEnd
 
 Function ShowReadmeFunction
-	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\License.txt" "" "" SW_SHOWNORMAL
+	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\FAQ.html" "" "" SW_SHOWNORMAL
 FunctionEnd
 

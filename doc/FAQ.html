@@ -72,7 +72,7 @@ Currently the follwing input formats are supported by LameXP:<br><ul>
 
 <br><br>
 
-<b>My anti-virus software detected a potential threat in LameXP. Why is that?</b><br>
+<b>My anti-virus program raises an alarm when I try to download/install/launch LameXP. Why is that?</b><br>
 <br>
 Occasionally your anti-virus program may mistakenly detect "malware"  (virus, trojan, worm, etc.) in some of<br>
 the files here. This is called a "false-positive" and the files are actually innocent/clean. It's an error in<br>
@@ -109,6 +109,52 @@ Please see the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank
 
 <br><br>
 
+<b>How can I use LameXP as a "portable" application?</b><br>
+<br>
+LameXP always is "portable", in the sense that the application works out of the box: LameXP does NOT require<br>
+any additional software, such as codecs, encoders, decoders or runtime libraries, and it will NOT install<br>
+anything of that kind on your local computer! All the third-party tools used by LameXP are already built-in.<br>
+There currently are two notable exceptions: The Nero AAC encoder and the WMA decoder cannot be redistributed<br>
+along with LameXP for legal reasons. Therefore these tools have to be obtained as separate downloads.<br>
+<br>
+Having said that, LameXP stores its configuration file in the %LOCALAPPDATA% folder on the local computer.<br>
+That's because on a modern multi-user operating this is the only "correct" folder to store user-specific<br>
+configuration files. Also it's one of the few folders where an application is guaranteed to get write-access,<br>
+even when the application was launched by a "normal" (non-admin) user and did not request elevated rights.<br>
+Storing the configuration file in the "install" folder is antiquated and highly error-prone.<br>
+<br>
+Still some users may want to store the configuration file in the same folder as the LameXP execuatble file,<br>
+e.g. when launching LameXP directly from their USB stick on different computers. For this purpose LameXP now<br>
+offers a "true" portable mode. You can enable that mode simply by renaming the LameXP executable file to<br>
+"LameXP-Portable.exe". But be aware: When running LameXP in the "portable" mode, the user(!) must ensure that<br>
+write-access is granted to the directory where the LameXP exectable is located.<br><br>
+
+<br><br>
+
+<b>The LameXP startup (splash screen) takes very long on my system. What can I do?</b><br>
+<br>
+Starting up LameXP shouldn't take longer than approximately 10 seconds. However it was brought to our<br>
+attention that badly optimized anti-virus software can slow down the startup procedure a lot! On our test<br>
+system (Windows 7 running on an Intel Core2 Q6600 with 4 GB of RAM) starting up LameXP takes about 3 seconds<br>
+without an anti-virus software and about 6 seconds with the "real-time protection" of Micorosft Security<br>
+Essentials enabled. With other anti-virus software the startup was delayed up to 20 seconds and more!<br>
+<br>
+So if you think that LameXP is starting up too slow on your system, you should temporarily(!) disable or<br>
+uninstall your current anti-virus program and try again. Usually it should be sufficient to disable only the<br>
+"real-time protection", "file system protection" or "guard" feature of your anti-virus software. If it turns<br>
+out that the startup is signficanntly(!) faster WITHOUT the anti-virus software, please report the problem to<br>
+the developer of the anti-virus software. And, if they don't fix the problem, switch to a better product!<br><br>
+
+<br><br>
+
+<b>How can I translate LameXP to my language or improve an existing translation?</b><br>
+<br>
+Please see the guide for translators at:<br><ul>
+<li><a href="http://mulder.brhack.net/public/doc/lamexp_translate.html" target="_blank">http://mulder.brhack.net/public/doc/lamexp_translate.html</a></ul>
+
+<br><br>
+
+
 <b>Where can I download the latest version of LameXP?</b><br>
 <br>
 The latest "official" release of LameXP can be found on the following mirrors:<br><ul>
@@ -127,7 +173,7 @@ The preferred place to report bugs or request new features is the LameXP thread 
 
 <b>Where can I find the LameXP source code?</b><br>
 <br>
-LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a> revision control system. The LameXP Git repository is mirrored here:<br><ul>
+LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a> revision control system. The LameXP Git repository is mirrored at:<br><ul>
 <li><a href="git://github.com/lordmulder/LameXP.git" target="_blank">git://github.com/lordmulder/LameXP.git</a>
 <li><a href="git://lamexp.git.sourceforge.net/gitroot/lamexp/lamexp" target="_blank">git://lamexp.git.sourceforge.net/gitroot/lamexp/lamexp</a>
 <li><a href="git://gitorious.org/lamexp/lamexp.git" target="_blank">git://gitorious.org/lamexp/lamexp.git</a></ul>
