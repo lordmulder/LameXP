@@ -396,12 +396,22 @@ FunctionEnd
 ;Install Files
 ;--------------------------------
 
-Section "-Prepare"
-	SetOutPath "$INSTDIR"
-SectionEnd
-
 Section "!Install Files"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_INSTFILES)"
+
+	SetOutPath "$INSTDIR"
+	Delete "$INSTDIR\Changelog.htm"
+	Delete "$INSTDIR\Changelog.html"
+	Delete "$INSTDIR\Contributors.txt"
+	Delete "$INSTDIR\FAQ.html"
+	Delete "$INSTDIR\Howto.html"
+	Delete "$INSTDIR\LameXP.exe"
+	Delete "$INSTDIR\LameXP.exe.sig"
+	Delete "$INSTDIR\License.txt"
+	Delete "$INSTDIR\ReadMe.txt"
+	Delete "$INSTDIR\Translate.html"
+	Delete "$INSTDIR\Uninstall.exe"
+
 	!insertmacro GetExecutableName $R0
 	File `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
 	File `${LAMEXP_SOURCE_PATH}\*.txt`
