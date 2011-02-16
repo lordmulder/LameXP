@@ -563,6 +563,8 @@ Function RunAppFunction
 FunctionEnd
 
 Function ShowReadmeFunction
+	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\Changelog.html" "" "" SW_SHOWNORMAL
 	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\FAQ.html" "" "" SW_SHOWNORMAL
+	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\Translate.html" "" "" SW_SHOWNORMAL
 FunctionEnd
 
