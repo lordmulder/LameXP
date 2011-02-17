@@ -111,7 +111,8 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	m_updateInfo(NULL),
 	m_settings(settings),
 	m_logFile(new QStringList()),
-	m_success(false)
+	m_success(false),
+	m_updateReadyToInstall(false)
 {
 	if(m_binaryWGet.isEmpty() || m_binaryGnuPG.isEmpty() || m_binaryUpdater.isEmpty() || m_binaryKeys.isEmpty())
 	{
@@ -565,7 +566,7 @@ void UpdateDialog::applyUpdate(void)
 		if(process.exitCode() == 0)
 		{
 			statusLabel->setText("Update ready to install. Applicaion will quit...");
-			QApplication::quit();
+			m_updateReadyToInstall = true;
 			accept();
 		}
 		else

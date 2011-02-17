@@ -443,19 +443,26 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 /*
  * Check for debugger
  */
-void WINAPI debugThreadProc(__in LPVOID lpParameter)
+#if !defined(_DEBUG) || defined(NDEBUG)
+void WINAPI lamexp_debug_thread_proc(__in LPVOID lpParameter)
 {
-	BOOL remoteDebuggerPresent = FALSE;
-	//CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
-
-	while(!IsDebuggerPresent() && !remoteDebuggerPresent)
+	while(!IsDebuggerPresent())
 	{
 		Sleep(333);
-		//CheckRemoteDebuggerPresent(GetCurrentProcess, &remoteDebuggerPresent);
 	}
-	
 	TerminateProcess(GetCurrentProcess(), -1);
 }
+HANDLE lamexp_debug_thread_init(void)
+{
+	if(IsDebuggerPresent())
+	{
+		FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
+		TerminateProcess(GetCurrentProcess(), -1);
+	}
+	return CreateThread(NULL, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(&lamexp_debug_thread_proc), NULL, NULL, NULL);
+}
+static const HANDLE g_debug_thread = lamexp_debug_thread_init();
+#endif
 
 /*
  * Check for compatibility mode

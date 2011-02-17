@@ -439,11 +439,13 @@ void MainWindow::addFiles(const QStringList &files)
 /*
  * Download and install WMA Decoder component
  */
-void MainWindow::installWMADecoder(void)
+bool MainWindow::installWMADecoder(void)
 {
 	static const char *download_url = "http://www.nch.com.au/components/wmawav.exe";
 	static const char *download_hash = "52a3b0e6690faf3f830c336d3c0eadfb7a4e9bc6";
 	
+	bool bResult = false;
+
 	QString binaryWGet = lamexp_lookup_tool("wget.exe");
 	QString binaryElevator = lamexp_lookup_tool("elevator.exe");
 	
@@ -473,7 +475,7 @@ void MainWindow::installWMADecoder(void)
 			{
 				continue;
 			}
-			return;
+			break;
 		}
 
 		QFile setupFileContent(setupFile);
@@ -494,7 +496,7 @@ void MainWindow::installWMADecoder(void)
 			{
 				continue;
 			}
-			return;
+			break;
 		}
 
 		QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -505,10 +507,32 @@ void MainWindow::installWMADecoder(void)
 
 		if(QMessageBox::information(this, tr("WMA Decoder"), tr("The WMA File Decoder has been installed. Please restart LameXP now!"), tr("Quit LameXP"), tr("Postpone")) == 0)
 		{
-			QApplication::quit();
+			bResult = true;
 		}
 		break;
 	}
+
+	return bResult;
+}
+
+/*
+ * Check for updates
+ */
+bool MainWindow::checkForUpdates(void)
+{
+	bool bReadyToInstall = false;
+	
+	UpdateDialog *updateDialog = new UpdateDialog(m_settings, this);
+	updateDialog->exec();
+
+	if(updateDialog->getSuccess())
+	{
+		m_settings->autoUpdateLastCheck(QDate::currentDate().toString(Qt::ISODate));
+		bReadyToInstall = updateDialog->updateReadyToInstall();
+	}
+
+	LAMEXP_DELETE(updateDialog);
+	return bReadyToInstall;
 }
 
 ////////////////////////////////////////////////////////////
@@ -739,7 +763,7 @@ void MainWindow::windowShown(void)
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 			if(QMessageBox::warning(this, tr("LameXP - Expired"), QString("<nobr>%1<br>%2</nobr>").arg(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate)), tr("LameXP is free software and release versions won't expire.")), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
-				checkUpdatesActionActivated();
+				checkForUpdates();
 			}
 			QApplication::quit();
 			return;
@@ -752,7 +776,11 @@ void MainWindow::windowShown(void)
 		qWarning("Binary is more than a year old, time to update!");
 		if(QMessageBox::warning(this, tr("Urgent Update"), QString("<nobr>%1</nobr>").arg(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program")) == 0)
 		{
-			checkUpdatesActionActivated();
+			if(checkForUpdates())
+			{
+				QApplication::quit();
+				return;
+			}
 		}
 		else
 		{
@@ -767,7 +795,11 @@ void MainWindow::windowShown(void)
 		{
 			if(QMessageBox::information(this, tr("Update Reminder"), QString("<nobr>%1</nobr>").arg(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
 			{
-				checkUpdatesActionActivated();
+				if(checkForUpdates())
+				{
+					QApplication::quit();
+					return;
+				}
 			}
 		}
 	}
@@ -814,7 +846,11 @@ void MainWindow::windowShown(void)
 			messageText += QString("%1</nobr>").arg(tr("Do you want to download and install the WMA File Decoder component now?"));
 			if(QMessageBox::information(this, tr("WMA Decoder Missing"), messageText, tr("Download && Install"), tr("Postpone")) == 0)
 			{
-				installWMADecoder();
+				if(installWMADecoder())
+				{
+					QApplication::quit();
+					return;
+				}
 			}
 		}
 	}
@@ -1453,13 +1489,10 @@ void MainWindow::checkUpdatesActionActivated(void)
 	
 	TEMP_HIDE_DROPBOX
 	(
-		UpdateDialog *updateDialog = new UpdateDialog(m_settings, this);
-		updateDialog->exec();
-		if(updateDialog->getSuccess())
+		if(checkForUpdates())
 		{
-			m_settings->autoUpdateLastCheck(QDate::currentDate().toString(Qt::ISODate));
+			QApplication::quit();
 		}
-		LAMEXP_DELETE(updateDialog);
 	)
 }
 
@@ -2185,7 +2218,11 @@ void MainWindow::installWMADecoderActionTriggered(bool checked)
 {
 	if(QMessageBox::question(this, tr("Install WMA Decoder"), tr("Do you want to download and install the WMA File Decoder component now?"), tr("Download && Install"), tr("Cancel")) == 0)
 	{
-		installWMADecoder();
+		if(installWMADecoder())
+		{
+			QApplication::quit();
+			return;
+		}
 	}
 }
 

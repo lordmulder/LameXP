@@ -124,7 +124,8 @@ protected:
 
 private:
 	void addFiles(const QStringList &files);
-	void installWMADecoder(void);
+	bool installWMADecoder(void);
+	bool checkForUpdates(void);
 
 	bool m_accepted;
 	bool m_firstTimeShown;

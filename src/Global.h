@@ -130,12 +130,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 	qWarning("---------------------------------------------------------\n"); 
 #else
 #define LAMEXP_DEBUG 0
-#define LAMEXP_CHECK_DEBUG_BUILD \
-	if(IsDebuggerPresent())	{ \
-	FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!"); \
-	TerminateProcess(GetCurrentProcess, -1); } \
-	CreateThread(NULL, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(&debugThreadProc), NULL, NULL, NULL);
-	void WINAPI debugThreadProc(__in  LPVOID lpParameter);
+#define LAMEXP_CHECK_DEBUG_BUILD
 #endif
 
 //Memory check

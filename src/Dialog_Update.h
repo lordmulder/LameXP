@@ -37,6 +37,7 @@ public:
 	~UpdateDialog(void);
 
 	bool getSuccess(void) { return m_success; }
+	bool updateReadyToInstall(void) { return m_updateReadyToInstall; }
 
 private slots:
 	void updateInit(void);
@@ -66,4 +67,5 @@ private:
 	const QString m_binaryKeys;
 
 	bool m_success;
+	bool m_updateReadyToInstall;
 };
