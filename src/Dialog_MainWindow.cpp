@@ -1486,14 +1486,17 @@ void MainWindow::visitHomepageActionActivated(void)
 void MainWindow::checkUpdatesActionActivated(void)
 {
 	ABORT_IF_BUSY;
-	
+	bool bFlag = false;
+
 	TEMP_HIDE_DROPBOX
 	(
-		if(checkForUpdates())
-		{
-			QApplication::quit();
-		}
+		bFlag = checkForUpdates();
 	)
+	
+	if(bFlag)
+	{
+		QApplication::quit();
+	}
 }
 
 /*

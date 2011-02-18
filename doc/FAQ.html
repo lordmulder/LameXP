@@ -109,6 +109,67 @@ Please see the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank
 
 <br><br>
 
+<b>Do I have to pay for LameXP? / How can I donate to the authors of LameXP?</b><br>
+<br>
+LameXP is <a href="http://en.wikipedia.org/wiki/Free_software" target="_blank">free software</a>, so may use it for free and for any purpose. Moreover the authors of LameXP currently<br>
+do NOT accept any donations. Therefore you should NOT pay or donate any money in order to obtain LameXP!<br>
+However it was brought to our attention that some dubious thrid-party web-sites offer "payed" downloads of<br>
+LameXP and/or include Adware into the LameXP download. We do NOT cooperate with any of these sites. So if you<br>
+pay for the LameXP download, the authors of LameXP will not get a single cent! Instead you should save your<br>
+money download LameXP from one of the "official" mirrors (see below), which is 100% free.<br>
+<br>
+If you want to support the development of LameXP, you can do so by contributing translations and/or code :-)<br><br>
+
+<br><br>
+
+<b>How do I enable AAC/MP4/M4A output (encoding) in LameXP?</b><br>
+<br>
+LameXP uses the Nero AAC Encoder for creating AAC/MP4/M4A files. The Nero AAC Encoder is available as a free<br>
+download. However the license doesn't allow redistribution! Therefore we can NOT ship the Nero encoder along<br>
+with LameXP. Instead you will have to obtain the Nero encoder as a separate download from the official "Nero<br>
+Digital" web-site. Currently you'll find the latest Nero AAC Encoder version at this location:<br><ul>
+<li><a href="http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php" target="_blank">http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php</a></ul>
+<br>
+After you have downloaded the Nero AAC Encoder as a ZIP file, you must "install" the encoder binaires, so<br>
+LameXP can use them. Simply unzip the files 'neroAacEnc.exe', 'neroAacDec.exe' as well as 'neroAacTag.exe' to<br>
+the same directory where your LameXP executable ('LameXP.exe') is located. For unzipping the ZIP file you can<br>
+use any suitable archiver, such as <a href="http://rarlabs.com/download.htm" target="_blank">WinRAR</a> or <a href="http://sevenzip.sourceforge.net/" target="_blank">7-Zip</a>. Once the required Nero encoder binaries are located in<br>
+the LameXP directory, the AAC encoding option should be "enabled" on the next startup of LameXP.<br><br>
+
+<br><br>
+
+<b>Is there a way to output ".aac" or ".m4a" files with LameXP?</b><br>
+<br>
+LameXP uses the Nero AAC Encoder for AAC encoding. And the Nero encoder always puts the AAC streams into an<br>
+MP4 (MPEG-4 Part 14) container - in almost any case that is exactly what you want/need! The one and only<br>
+"correct" file extension for MP4 files is '.mp4'. However sometimes the "incorrect" file extension '.m4a' is<br>
+used to indicate "audio-only" MP4 files. Even worse: There are some buggy (hardware) players that will<br>
+recognize MP4 audio file only with the "incorrect" .m4a extension, but NOT with the "correct" .mp4 extension.<br>
+Of course LameXP will save your MP4 files with the "correct" .mp4 extension. But if you need your MP4 files<br>
+with an .m4a extension for some reason, you can simply rename(!) these files. This isn't more or less<br>
+"incorrect" than saving the files with an .m4a directly. After all, an MP4 file remains an MP4 file.<br>
+<br>
+Having said that, you should NOT rename any .mp4 or .m4a files to .aac, because these are MP4 files and NOT<br>
+"raw" AAC streams. The Nero AAC encoder has NO option to output "raw" AAC streams and usually you don't need<br>
+such streams. Still, if you want to extract the "raw" AAC stream from an MP4 file you can use <a href="http://www.videohelp.com/tools/mp4box" target="_blank">MP4Box</a>.<br><br>
+
+<br><br>
+
+<b>How do I enable WMA input (decoding) in LameXP?</b><br>
+<br>
+WMA input requires the WMA decoder component to be installed on your local computer. Usually LameXP will show<br>
+a warning on startup, if the WMA decoder component could not be found. In that case you can simply choose<br>
+"Download &amp; Install" in order to install the WMA decoder component on your system. Alternatively you can<br>
+also install the WMA decoder component manually by choosing "Install WMA Decoder" from the "Tools" menu. In<br>
+any case you must restart LameXP after the WMA decoder component has been installed.<br>
+<br>
+It has to be noted that the WMA decoder component relies on the Windows Media Format Runtime. All supported<br>
+versions of Microsoft Windows should have the Windows Media Format Runtime installed out of the box. However<br>
+Wine does not! In case you encounter problems with the WMA decoder component, try downloading and installing<br>
+the <a href="http://www.free-codecs.com/download/Windows_Media_Format_11.htm" target="_blank">Windows Media Format 11 Runtime</a> manually. This should also work under Linux/Wine.<br><br>
+
+<br><br>
+
 <b>How can I use LameXP as a "portable" application?</b><br>
 <br>
 LameXP always is "portable", in the sense that the application works out of the box: LameXP does NOT require<br>
