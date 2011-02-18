@@ -220,6 +220,8 @@ UninstPage Custom un.LockedListShow
 ;Spanish
 !include "..\Translation\LameXP_ES.nsh"
 
+;Russian
+!include "..\Translation\LameXP_RU.nsh"
 
 ;--------------------------------
 ;Installer initialization

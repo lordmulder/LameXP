@@ -118,6 +118,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define LAMEXP_DELETE(PTR) if(PTR) { delete PTR; PTR = NULL; }
 #define LAMEXP_CLOSE(HANDLE) if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; }
 #define QWCHAR(STR) reinterpret_cast<const wchar_t*>(STR.utf16())
+#define WCHAR2QSTR(STR) QString::fromUtf16(reinterpret_cast<const unsigned short*>(STR))
 #define	LAMEXP_DYNCAST(OUT,CLASS,SRC) try { OUT = dynamic_cast<CLASS>(SRC); } catch(std::bad_cast) { OUT = NULL; }
 #define LAMEXP_BOOL(X) (X ? "1" : "0")
 

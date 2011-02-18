@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
 // Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
 //
@@ -49,17 +49,18 @@ const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-
 static const struct 
 {
 	char *pcFlag;
-	char *pcLanguage;
-	char *pcName;
+	wchar_t *pcLanguage;
+	wchar_t *pcName;
 	char *pcMail;
 }
 g_lamexp_contributors[] =
 {
-	{"en", "Englisch",  "LoRd_MuldeR",         "MuldeR2@GMX.de"       },
-	{"de", "Deutsch",   "LoRd_MuldeR",         "MuldeR2@GMX.de"       },
-	{"fr", "Fran�aise", "Dodich Informatique", "Dodich@live.fr"       },
-	{"it", "Italiano",  "Roberto",             "Gulliver_69@libero.it"},
-	{"es", "Espa�ol",   "Rub3nCT",             "Rub3nCT@gmail.com"    },
+	{"en", L"Englisch",  L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
+	{"de", L"Deutsch",   L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
+	{"fr", L"Française", L"Dodich Informatique", "Dodich@live.fr"       },
+	{"it", L"Italiano",  L"Roberto",             "Gulliver_69@libero.it"},
+	{"es", L"Español",   L"Rub3nCT",             "Rub3nCT@gmail.com"    },
+	{"ru", L"русский",   L"Neonailol",           "Neonailol@gmail.com"  },
 	{NULL, NULL, NULL, NULL}
 };
 
@@ -227,8 +228,8 @@ void AboutDialog::showAboutContributors(void)
 	for(int i = 0; g_lamexp_contributors[i].pcName; i++)
 	{
 		contributorsAboutText += QString("<tr><td valign=\"middle\"><img src=\":/flags/%1.png\"></td><td>&nbsp;&nbsp;</td>").arg(g_lamexp_contributors[i].pcFlag);
-		contributorsAboutText += QString("<td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td>").arg(g_lamexp_contributors[i].pcLanguage);
-		contributorsAboutText += QString("<td valign=\"middle\">%3</td><td>&nbsp;&nbsp;</td><td>&lt;%4&gt;</td></tr>").arg(g_lamexp_contributors[i].pcName, g_lamexp_contributors[i].pcMail);
+		contributorsAboutText += QString("<td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcLanguage));
+		contributorsAboutText += QString("<td valign=\"middle\">%3</td><td>&nbsp;&nbsp;</td><td>&lt;%4&gt;</td></tr>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcName), g_lamexp_contributors[i].pcMail);
 	}
 	contributorsAboutText += "</table>";
 	contributorsAboutText += "<br><br>";
