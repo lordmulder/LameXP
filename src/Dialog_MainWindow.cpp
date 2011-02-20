@@ -585,11 +585,16 @@ void MainWindow::changeEvent(QEvent *e)
 		comboBoxSamplingRate->setCurrentIndex(comboBoxIndex[1]);
 		comboBoxNeroAACProfile->setCurrentIndex(comboBoxIndex[2]);
 
+		//Update the window title
+#if !defined(_DEBUG) && !defined(QT_DEBUG) && defined(NDEBUG) && defined(QT_NO_DEBUG)
 		if(lamexp_version_demo())
 		{
 			setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
 		}
-	
+#else
+		setWindowTitle(QString("%1 [!!! DEBUG BUILD !!!]").arg(windowTitle()));
+#endif
+
 		//Manually re-translate widgets that UIC doesn't handle
 		m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
 		m_showDetailsContextAction->setText(tr("Show Details"));

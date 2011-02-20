@@ -57,6 +57,13 @@
 
 //Debug only includes
 #ifdef _DEBUG
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0501
+#endif
+#if(_WIN32_WINNT < 0x0501)
+#undef _WIN32_WINNT
+#define _WIN32_WINNT 0x0501
+#endif
 #include <Psapi.h>
 #endif //_DEBUG
 
