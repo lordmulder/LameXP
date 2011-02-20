@@ -28,8 +28,6 @@
 #include <QDir>
 #include <limits.h>
 
-#define IS_UNICODE(STR) (qstricmp(STR.toUtf8().constData(), QString::fromLocal8Bit(STR.toLocal8Bit()).toUtf8().constData()))
-
 static const int g_lameAgorithmQualityLUT[] = {9, 7, 5, 2, 0, INT_MAX};
 
 MP3Encoder::MP3Encoder(void)
@@ -110,11 +108,11 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		break;
 	}
 
-	if(!metaInfo.fileName().isEmpty()) args << (IS_UNICODE(metaInfo.fileName()) ? "--uTitle" : "--lTitle") << metaInfo.fileName();
-	if(!metaInfo.fileArtist().isEmpty()) args << (IS_UNICODE(metaInfo.fileArtist()) ? "--uArtist" : "--lArtist") << metaInfo.fileArtist();
-	if(!metaInfo.fileAlbum().isEmpty()) args << (IS_UNICODE(metaInfo.fileAlbum()) ? "--uAlbum" : "--lAlbum") << metaInfo.fileAlbum();
-	if(!metaInfo.fileGenre().isEmpty()) args << (IS_UNICODE(metaInfo.fileGenre()) ? "--uGenre" : "--lGenre") << metaInfo.fileGenre();
-	if(!metaInfo.fileComment().isEmpty()) args << (IS_UNICODE(metaInfo.fileComment()) ? "--uComment" : "--lComment") << metaInfo.fileComment();
+	if(!metaInfo.fileName().isEmpty()) args << (isUnicode(metaInfo.fileName()) ? "--uTitle" : "--lTitle") << metaInfo.fileName();
+	if(!metaInfo.fileArtist().isEmpty()) args << (isUnicode(metaInfo.fileArtist()) ? "--uArtist" : "--lArtist") << metaInfo.fileArtist();
+	if(!metaInfo.fileAlbum().isEmpty()) args << (isUnicode(metaInfo.fileAlbum()) ? "--uAlbum" : "--lAlbum") << metaInfo.fileAlbum();
+	if(!metaInfo.fileGenre().isEmpty()) args << (isUnicode(metaInfo.fileGenre()) ? "--uGenre" : "--lGenre") << metaInfo.fileGenre();
+	if(!metaInfo.fileComment().isEmpty()) args << (isUnicode(metaInfo.fileComment()) ? "--uComment" : "--lComment") << metaInfo.fileComment();
 	if(metaInfo.fileYear()) args << "--ty" << QString::number(metaInfo.fileYear());
 	if(metaInfo.filePosition()) args << "--tn" << QString::number(metaInfo.filePosition());
 	

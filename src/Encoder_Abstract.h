@@ -51,4 +51,7 @@ protected:
 	int m_configBitrate;
 	int m_configRCMode;
 	QString m_configCustomParams;
+
+	//Helper functions
+	bool isUnicode(const QString &text);
 };

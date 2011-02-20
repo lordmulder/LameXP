@@ -21,6 +21,7 @@
 
 #include "Encoder_Abstract.h"
 
+#include "Global.h"
 #include <Windows.h>
 
 AbstractEncoder::AbstractEncoder(void)
@@ -48,4 +49,13 @@ void AbstractEncoder::setCustomParams(const QString &customParams) { m_configCus
 bool AbstractEncoder::requiresDownmix(void)
 {
 	return false;
+}
+
+/*
+ * Helper functions
+ */
+bool AbstractEncoder::isUnicode(const QString &original)
+{
+	QString asLatin1 = QString::fromLatin1(original.toLatin1().constData());
+	return (wcscmp(QWCHAR(original), QWCHAR(asLatin1)) != 0);
 }
