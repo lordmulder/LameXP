@@ -583,7 +583,10 @@ void ProcessingDialog::startNextJob(void)
 
 	if((m_settings->samplingRate() > 0) && !nativeResampling)
 	{
-		thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
+		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.formatAudioSamplerate() || currentFile.formatAudioSamplerate() == 0)
+		{
+			thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
+		}
 	}
 	if((m_settings->toneAdjustBass() != 0) || (m_settings->toneAdjustTreble() != 0))
 	{
