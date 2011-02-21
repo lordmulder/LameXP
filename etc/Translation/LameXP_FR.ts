@@ -1478,16 +1478,12 @@ Sélection automatique (par défaut)</translation>
         <translation>Au moins un fichier n&apos;a pas réussi!</translation>
     </message>
     <message>
-        <source>Alle files completed successfully.</source>
+        <source>All files completed successfully.</source>
         <translation>Tous les fichiers terminés avec succès.</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
         <translation>LameXP - -Fait</translation>
-    </message>
-    <message>
-        <source>All files completed successfully.</source>
-        <translation>Tous les fichiers terminées avec succès.</translation>
     </message>
     <message>
         <source>Playlist creation failed</source>

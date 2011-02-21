@@ -363,7 +363,7 @@ void ProcessingDialog::doneEncoding(void)
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#E0FFE2"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
-			SET_PROGRESS_TEXT(tr("Alle files completed successfully."));
+			SET_PROGRESS_TEXT(tr("All files completed successfully."));
 			m_systemTray->showMessage(tr("LameXP - Done"), tr("All files completed successfully."), QSystemTrayIcon::Information);
 			m_systemTray->setIcon(QIcon(":/icons/cd_add.png"));
 			QApplication::processEvents();

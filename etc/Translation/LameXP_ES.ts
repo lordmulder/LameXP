@@ -1469,16 +1469,12 @@
         <translation>¡Se ha producido al menos un error!</translation>
     </message>
     <message>
-        <source>Alle files completed successfully.</source>
+        <source>All files completed successfully.</source>
         <translation>Todos los archivos han sido codificados correctamente.</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
         <translation>LameXP - Finalizado</translation>
-    </message>
-    <message>
-        <source>All files completed successfully.</source>
-        <translation>Todos los archivos se han completado correctamente.</translation>
     </message>
     <message>
         <source>Playlist creation failed</source>

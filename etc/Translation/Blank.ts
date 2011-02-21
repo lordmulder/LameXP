@@ -1481,15 +1481,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alle files completed successfully.</source>
+        <source>All files completed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>LameXP - Done</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All files completed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

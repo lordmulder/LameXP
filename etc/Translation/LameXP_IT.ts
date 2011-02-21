@@ -1486,10 +1486,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alle files completed successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished"></translation>
     </message>

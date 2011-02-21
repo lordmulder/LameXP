@@ -1470,16 +1470,12 @@
         <translation>Mindestens eine Datei ist fehlgeschlagen!</translation>
     </message>
     <message>
-        <source>Alle files completed successfully.</source>
+        <source>All files completed successfully.</source>
         <translation>Alle Dateien wurden erfolgreich abgeschlossen.</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
         <translation>LameXP - Fertig</translation>
-    </message>
-    <message>
-        <source>All files completed successfully.</source>
-        <translation>Alle Dateien wurden erfolgreich abgeschlossen.</translation>
     </message>
     <message>
         <source>Playlist creation failed</source>
