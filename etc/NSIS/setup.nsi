@@ -68,7 +68,7 @@ ShowInstDetails show
 ShowUninstDetails show
 Name "LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]"
 OutFile "${LAMEXP_OUTPUT_FILE}"
-BrandingText "Date created: ${LAMEXP_DATE}"
+BrandingText "Date created: ${LAMEXP_DATE} [Build #${LAMEXP_BUILD}]"
 InstallDir "$PROGRAMFILES\MuldeR\LameXP v${LAMEXP_VERSION}"
 InstallDirRegKey HKLM "${MyRegPath}" "InstallLocation"
 
@@ -113,7 +113,7 @@ VIAddVersionKey "Comments" "This program is free software; you can redistribute 
 VIAddVersionKey "CompanyName" "Free Software Foundation"
 VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
-VIAddVersionKey "LegalCopyright" "Copyright 2004-2010 LoRd_MuldeR"
+VIAddVersionKey "LegalCopyright" "Copyright 2004-2011 LoRd_MuldeR"
 VIAddVersionKey "LegalTrademarks" "GNU"
 VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
 VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"
