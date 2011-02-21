@@ -28,7 +28,7 @@ LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_RUSSIAN} "Деинсталля
 LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_RUSSIAN} "Работающие копии программы"
 LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_RUSSIAN} "Проверка на наличие работающих копий программы LameXP."
 LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_RUSSIAN} "Пожалуйста, закройте следующие программы, для продолжения установки..."
-LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_RUSSIAN} "No programs that have to be closed are running."
+LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_RUSSIAN} "Никакие программы, которые должны быть закрыты, не запущены."
 LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_RUSSIAN} "Поиск, пожалуйста, подождите..."
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_RUSSIAN} "Приложение"
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_RUSSIAN} "Выполняю"

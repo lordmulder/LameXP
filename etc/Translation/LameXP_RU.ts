@@ -11,7 +11,7 @@
     <message>
         <location line="+3"/>
         <source>Please visit %1 for news and updates!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Пожайлуйста посетите %1 за новостями и обновлениями!</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -41,7 +41,7 @@
     <message>
         <location line="+5"/>
         <source>Decline License</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отменить лицензию</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -78,7 +78,7 @@
     <message>
         <location line="+10"/>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Если Вы готовы внести преобразование в LameXP, не стесняйтесь связываться с нами!</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -117,7 +117,7 @@
     <message>
         <location line="+2"/>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Абсолютно открытая и patent-free технология аудиокодирования.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -132,7 +132,7 @@
     <message>
         <location line="+2"/>
         <source>Available from vendor web-site as free download:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Доступно для загрузки с сайта создателя бесплатно:</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -172,7 +172,7 @@
     <message>
         <location line="+2"/>
         <source>Completely open audio compression format.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Полностью открытый формат сжатия аудио.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -261,32 +261,33 @@
         <location filename="../../src/Model_AudioFile.cpp" line="+233"/>
         <location line="+49"/>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Профиль</translation>
     </message>
     <message>
         <location line="-32"/>
         <source>Channels</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Каналы</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Samplerate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Частота выборки</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Bitdepth</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>втф</translatorcomment>
+        <translation type="unfinished">Глубина битов</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Тип</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Версия</translation>
     </message>
 </context>
 <context>
@@ -335,12 +336,12 @@
     <message>
         <location filename="../../src/Model_FileList.cpp" line="+91"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Заголовок</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Full Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Полный путь</translation>
     </message>
 </context>
 <context>
@@ -348,7 +349,7 @@
     <message>
         <location filename="../../gui/LogViewDialog.ui" line="+23"/>
         <source>Log View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Просмотр журнала</translation>
     </message>
     <message>
         <location line="+285"/>
@@ -358,22 +359,22 @@
     <message>
         <location line="+23"/>
         <source>Save to File...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сохранить в файл...</translation>
     </message>
     <message>
         <location line="+36"/>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Копироват в буфер обмена</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_LogView.cpp" line="+37"/>
         <source>Log File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл журнала</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл журнала показывает подробную информацию о выбранном задании.</translation>
     </message>
 </context>
 <context>
@@ -381,18 +382,18 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="+14"/>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP - Audio Encoder Front-end</translation>
     </message>
     <message>
         <location line="+33"/>
         <location line="+2479"/>
         <source>Source Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исходные Файлы</translation>
     </message>
     <message>
         <location line="-2435"/>
         <source>Add File(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добавть файлы</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -406,7 +407,7 @@
     </message>
     <message>
         <location line="+102"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="+595"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="+600"/>
         <source>Show Details</source>
         <translation>Показать детали</translation>
     </message>
@@ -414,7 +415,7 @@
         <location line="+32"/>
         <location line="+2263"/>
         <source>Output Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выходная папка</translation>
     </message>
     <message>
         <location line="-2184"/>
@@ -450,12 +451,12 @@
         <location line="+16"/>
         <location line="+2039"/>
         <source>Meta Data</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Метаданные</translation>
     </message>
     <message>
         <location line="-2025"/>
         <source> Meta Information </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Метаинформация</translation>
     </message>
     <message>
         <location line="+34"/>
@@ -470,17 +471,17 @@
     <message>
         <location line="+35"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сбросить</translation>
     </message>
     <message>
         <location line="+26"/>
         <source> Options </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Параметры</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Automatically generate playlist file (.m3u)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Автоматически генерировать файл плэйлиста (.m3u)</translation>
     </message>
     <message>
         <location line="+16"/>
@@ -491,7 +492,7 @@
         <location line="+22"/>
         <location line="+1853"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сжатие</translation>
     </message>
     <message>
         <location line="-1833"/>
@@ -536,33 +537,33 @@
     <message>
         <location line="+10"/>
         <source>Average Bitrate (ABR)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Средний битрейт (ABR)</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Constant Bitrate (CBR)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Постоянный битрейт (CBR)</translation>
     </message>
     <message>
         <location line="+40"/>
         <source> Quality / Bitrate </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Качество / Битрейт</translation>
     </message>
     <message>
         <location line="+39"/>
         <source>Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Минимум</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Максимум</translation>
     </message>
     <message>
         <location line="+139"/>
         <location line="+1517"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Расширенные опции</translation>
     </message>
     <message>
         <location line="-1482"/>
@@ -577,12 +578,12 @@
     <message>
         <location line="+71"/>
         <source>Minimum (kbps):</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Минимум (kbps):</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Maximum (kbps):</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Максимум (kbps):</translation>
     </message>
     <message>
         <location line="+21"/>
@@ -597,7 +598,7 @@
     <message>
         <location line="+23"/>
         <source>Better quality</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Лучшее качество</translation>
     </message>
     <message>
         <location line="+59"/>
@@ -608,7 +609,7 @@
         <location line="+12"/>
         <location line="+57"/>
         <source>Auto Select (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Автоматический Выбор (Значение по умолчанию)</translation>
     </message>
     <message>
         <location line="-52"/>
@@ -623,7 +624,7 @@
     <message>
         <location line="+5"/>
         <source>Simple</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Просто</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -633,7 +634,7 @@
     <message>
         <location line="+5"/>
         <source>Mono</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Моно</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -693,7 +694,7 @@
     <message>
         <location line="+14"/>
         <source>Auto Select (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Автоматический Выбор (Рекомендуемый)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -713,7 +714,7 @@
     <message>
         <location line="+80"/>
         <source> Volume Normalization </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">нормализация громкости</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -733,12 +734,12 @@
     <message>
         <location line="+98"/>
         <source>Adjust Treble (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скорректироват Treble (дБ):</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Adjust Bass (dB):</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скорректировать Бас (dB):</translation>
     </message>
     <message>
         <location line="+70"/>
@@ -773,28 +774,28 @@
     <message>
         <location line="+65"/>
         <source>Reset Advanced Options </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сбросить расширенные опции</translation>
     </message>
     <message>
         <location line="+66"/>
         <source> Encode Now!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодировать сейчас!</translation>
     </message>
     <message>
         <location line="+36"/>
         <location line="+158"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">О программе...</translation>
     </message>
     <message>
         <location line="-122"/>
         <source> Exit Program</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выйти из программы</translation>
     </message>
     <message>
         <location line="+32"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -804,43 +805,43 @@
     <message>
         <location line="+9"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вид</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Стиль</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Язык</translation>
     </message>
     <message>
         <location line="+19"/>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Инструменты</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Конфигурация</translation>
     </message>
     <message>
         <location line="+36"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выход</translation>
     </message>
     <message>
         <location line="+49"/>
         <source>Open File(s)...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открыть файлы...</translation>
     </message>
     <message>
         <location line="+9"/>
         <location line="+3"/>
         <source>Visit Official Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Посетить официальный сайт</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -848,17 +849,17 @@
         <location line="+13"/>
         <location line="+19"/>
         <source>Check for Updates</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Проверить обновления</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Open Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открыть папку...</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Clear All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Очистить всё</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -921,27 +922,27 @@
     <message>
         <location line="+21"/>
         <source>From File...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Из файла...</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Encode!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодировать!</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Disable Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отключить интеграцию в контекстное меню</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="-1799"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="-1804"/>
         <source>Adding file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добавляю файлы, пожалуйста ожидайте...</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Access Denied</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Доступ запрещён</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -956,7 +957,7 @@
     <message>
         <location line="+4"/>
         <source>Files Rejected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отклоненные файлы</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -977,7 +978,7 @@
         <location line="+5"/>
         <location line="+21"/>
         <source>Download Failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скачивание прервано</translation>
     </message>
     <message>
         <location line="-21"/>
@@ -988,17 +989,17 @@
         <location line="+0"/>
         <location line="+21"/>
         <source>Try Again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Попробовать снова</translation>
     </message>
     <message>
         <location line="-21"/>
         <location line="+21"/>
-        <location line="+1727"/>
+        <location line="+1732"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
-        <location line="-1727"/>
+        <location line="-1732"/>
         <source>The download seems to be corrupted. Please try again!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1015,29 +1016,29 @@
     <message>
         <location line="+0"/>
         <source>Quit LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выйти из LameXP</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+288"/>
+        <location line="+293"/>
         <location line="+51"/>
         <source>Postpone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отложить</translation>
     </message>
     <message>
-        <location line="-257"/>
+        <location line="-260"/>
         <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ДЕМО ВЕРСИЯ</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+7"/>
         <source>You can drop in audio files here!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Open File in External Application</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открыть файл в другой программе</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1052,7 +1053,7 @@
     <message>
         <location line="+149"/>
         <source>License Declined</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Лицензия отклонена</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1062,7 +1063,7 @@
     <message>
         <location line="+0"/>
         <source>Goodbye!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Пока!</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -1083,12 +1084,12 @@
         <location line="+0"/>
         <location line="+13"/>
         <source>Exit Program</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выйти из программы</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Urgent Update</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Срочное Обновление</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1100,7 +1101,7 @@
         <location line="+1326"/>
         <location line="+10"/>
         <source>Update Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Напоминание о обновлении</translation>
     </message>
     <message>
         <location line="-1336"/>
@@ -1204,7 +1205,7 @@
     <message>
         <location line="+12"/>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Мало места</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1224,22 +1225,22 @@
     <message>
         <location line="+0"/>
         <source>Abort Encoding Process</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Прервать процесс кодирования</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Clean Disk Now</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Очистить диск сейчас</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Игнорировать</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Low Diskspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Свободное место на диске заканчивается</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1254,40 +1255,40 @@
     <message>
         <location line="+10"/>
         <source>Cannot write to the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Немогу записать в выбранню папку.</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Please choose a different directory!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выберите другую директорию!</translation>
     </message>
     <message>
         <location line="+36"/>
         <location line="+8"/>
         <source>Add file(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добавить файлы</translation>
     </message>
     <message>
         <location line="+25"/>
         <location line="+4"/>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добавить папки</translation>
     </message>
     <message>
         <location line="+217"/>
         <source>Load Translation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Загрузить первод</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Translation Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файлы локализаций</translation>
     </message>
     <message>
         <location line="+111"/>
         <location line="+41"/>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Новая папка</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1297,7 +1298,7 @@
     <message>
         <location line="+40"/>
         <source>Failed to create folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Немогу создать папку</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1312,7 +1313,7 @@
     <message>
         <location line="+66"/>
         <source>Already Running</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Уже запущено</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1324,46 +1325,46 @@
         <location line="+3"/>
         <location line="+3"/>
         <source>Quality Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Уровень качества %1</translation>
     </message>
     <message>
         <location line="+3"/>
         <location line="+17"/>
         <location line="+17"/>
         <source>Compression %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сжатие %1</translation>
     </message>
     <message>
         <location line="-31"/>
         <location line="+17"/>
         <location line="+17"/>
         <source>Uncompressed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Несжатый</translation>
     </message>
     <message>
         <location line="+21"/>
         <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Лучшее качество (очень медленно)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>High Quality (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Высокое качество (рекомендуется)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Average Quality (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Среднее качество (по умаолчанию)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Low Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Плохое качество (быстро)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Низкое качество (Очень быстро)</translation>
     </message>
     <message>
         <location line="+352"/>
@@ -1377,7 +1378,7 @@
         <location line="+26"/>
         <location line="+56"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Да</translation>
     </message>
     <message>
         <location line="-134"/>
@@ -1386,7 +1387,7 @@
         <location line="+26"/>
         <location line="+56"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нет</translation>
     </message>
     <message>
         <location line="-132"/>
@@ -1473,7 +1474,7 @@
         <location line="+3"/>
         <location line="+11"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Интеграция в контексное меню</translation>
     </message>
     <message>
         <location line="-14"/>
@@ -1496,17 +1497,17 @@
     <message>
         <location filename="../../gui/MetaInfo.ui" line="+14"/>
         <source>Meta Information</source>
-        <translation type="unfinished">Мета Информация</translation>
+        <translation>Метаинформация</translation>
     </message>
     <message>
         <location line="+258"/>
         <source>Edit</source>
-        <translation type="unfinished">Изменить</translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <location line="+26"/>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
@@ -1514,12 +1515,12 @@
     <message>
         <location filename="../../src/Dialog_MetaInfo.cpp" line="+53"/>
         <source>Meta Information</source>
-        <translation type="unfinished">Мета Информация</translation>
+        <translation>Метаинформация</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>The following meta information have been extracted from the original file.</source>
-        <translation type="unfinished">Эта мета информация была получена из исходного файла.</translation>
+        <translation>Эта метаинформация была получена из исходного файла.</translation>
     </message>
 </context>
 <context>
@@ -1528,203 +1529,203 @@
         <location filename="../../src/Model_MetaInfo.cpp" line="+49"/>
         <location line="+388"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестно</translation>
     </message>
     <message>
         <location line="-387"/>
         <location line="+388"/>
         <source>Not Specified</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не задано</translation>
     </message>
     <message>
         <location line="-357"/>
         <source>Full Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Полный путь</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Формат</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Container</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Контейнер</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сжатие</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Длителность</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Заголовок</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исполнитель</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Альбом</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Жанр</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Год</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Позиция</translation>
     </message>
     <message>
         <location line="+0"/>
         <location line="+290"/>
         <source>Generate from list position</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Генерировать из позиции в списке</translation>
     </message>
     <message>
         <location line="-287"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Комментарий</translation>
     </message>
     <message>
         <location line="+112"/>
         <source>Property</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Свойство</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Значение</translation>
     </message>
     <message>
         <location line="+72"/>
         <source>Unspecified</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Незадано</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ОК</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отмена</translation>
     </message>
     <message>
         <location line="+6"/>
         <location line="+8"/>
         <source>Edit Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить Заголовок</translation>
     </message>
     <message>
         <location line="-7"/>
         <source>Please enter the title for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите заголовок для этого файла:</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Заголовок не должен быть пустым. Генерирование заголовка из имени файла!</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Edit Artist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить  Исполнителя</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Please enter the artist for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите исполнителя для этого файла:</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Edit Album</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить Альбом</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Please enter the album for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите альбом для этого файла:</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Edit Genre</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить Жанр</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Please enter the genre for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите жанр для этого файла:</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Edit Year</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить Год</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Please enter the year for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите год для этого файла:</translation>
     </message>
     <message>
         <location line="+15"/>
         <location line="+17"/>
         <source>Edit Position</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить Позицию</translation>
     </message>
     <message>
         <location line="-16"/>
         <location line="+17"/>
         <source>Please enter the position (track no.) for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите позицию (номер трека) для этого файла:</translation>
     </message>
     <message>
         <location line="-2"/>
         <source>Unspecified (copy from source file)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Незадано (копировать из исходного файла)</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Edit Comment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить Комментарий</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Please enter the comment for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите комментарий для этого файла:</translation>
     </message>
     <message>
         <location line="+1"/>
         <location line="+27"/>
         <source>Encoded with LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодировано с помощью LameXP</translation>
     </message>
     <message>
         <location line="-17"/>
         <source>Not editable</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Невозможно изменит</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Жаль, это свойство исходного файла не может быть отредактировано!</translation>
     </message>
 </context>
 <context>
@@ -1732,82 +1733,82 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="+106"/>
         <source>Starting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Начинаю...</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Not found!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ненайдено!</translation>
     </message>
     <message>
         <location line="+36"/>
         <source>The format of this file is NOT supported:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Этот тип файлов неподдерживается:</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Container Format:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Формат Контейнера:</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Audio Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат Аудио:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Unsupported!</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдерживается!</translation>
     </message>
     <message>
         <location line="+45"/>
         <source>Done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово.</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Прервано!</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ошибка!</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодирование</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтрация</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Decoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Декодирование</translation>
     </message>
     <message>
         <location line="+23"/>
         <source>The source audio file could not be found:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исходный аудио файл не может быть найден:</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>The source audio file could not be opened for reading:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исходный аудио файл не может быть открыт:</translation>
     </message>
     <message>
         <location line="+26"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Папка для кодированных файлов не существует и неможет быть создана:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>The target output directory is NOT writable:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Папка для выходных файлов недоступна для записи:</translation>
     </message>
 </context>
 <context>
@@ -1815,17 +1816,17 @@
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="+14"/>
         <source>LameXP - Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Обработка</translation>
     </message>
     <message>
         <location line="+238"/>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Инициализация, пожалуйста, подождите...</translation>
     </message>
     <message>
         <location line="+135"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отмена</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -1835,107 +1836,108 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="+125"/>
         <source>Show details for selected job</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показать детали задания</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Browse Output File Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открыть папку с преобразованным файлом</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Encoding Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Преобразование Файлов</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Your files are being encoded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ваши файлы кодируются, пожалуйста проявите терпение...</translation>
     </message>
     <message>
         <location line="+114"/>
         <source>Encoding files, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодируя файлы, пожалуйста, подождите...</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Многопоточность включена: Выполняется %1 экземпляра(ов) параллельно!</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отменено! Ожидание завершения запущенных заданий...</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодирование: %1 файл из %2 завершен, пожалуйста ожидайте...</translation>
     </message>
     <message>
         <location line="+28"/>
         <source>Creating the playlist file, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Создаю плэйлист, пожалуйста, подождите...</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Процесс отменён пользователем после %1 файла(ов)!</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Process was aborted prematurely by the user!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Процесс был прерван преждевременно пользователем!</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>LameXP - Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Отменено</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Process was aborted by the user.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Процесс был прерван пользователем.</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>бред -_-</translatorcomment>
+        <translation type="unfinished">Ошибка: %1 из %2 файлов перестали работать. Дважды щелкните по отказавшим элементам для получения дальнейшей информации!</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>LameXP - Error</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Ошибка</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>At least one file has failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">По крайней мере один файл перестал работать!</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Alle files completed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Все файлы завершились успешно.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>LameXP - Done</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Завершено</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>All files completed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Все файлы завершились успешно.</translation>
     </message>
     <message>
-        <location line="+283"/>
+        <location line="+286"/>
         <source>Playlist creation failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Немогу создать плэйлист</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>The playlist file could not be created:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Плэйлист неможет быть создан:</translation>
     </message>
 </context>
 <context>
@@ -2018,47 +2020,47 @@
         <location filename="../../src/Dialog_Update.cpp" line="+147"/>
         <location line="+142"/>
         <source>Build</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сборка</translation>
     </message>
     <message>
         <location line="-141"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестно</translation>
     </message>
     <message>
         <location line="+65"/>
         <source>Testing your internet connection, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Проверяю соединение с сетью, пожалуйста, подождите...</translation>
     </message>
     <message>
         <location line="+27"/>
         <source>Network connectivity test has failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нет соединения с сетью!</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Проверьте доступность интернет соединения и попробуйте снова.</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Проверяю обновлений, пожалйста, подождите...</translation>
     </message>
     <message>
         <location line="+25"/>
         <source>Failed to fetch update information from server!</source>
-        <translation>Немогу получить информацию об обновлении с сервера!</translation>
+        <translation type="unfinished">Немогу получить информацию об обновлениях с сервера!</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Извините, сервер обновлений сейчас недоступен. Пожалуйста попробуйте позднее.</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>More information available at:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Больше информации доступно здесь:</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -2068,27 +2070,27 @@
     <message>
         <location line="+2"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Мы очень рекомендуем установить это обновлений как можо скорее.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>No new updates available at this time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нет обновлений.</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вы используете самую новую версию LameXP. Проверяйте обновления регулярно!</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Установленная версия новее чем последний релиз.</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Это обычно показывает, что вы используете бета версию LameXP.</translation>
     </message>
 </context>
 </TS>

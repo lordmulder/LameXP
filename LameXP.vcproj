@@ -162,6 +162,8 @@
 				GenerateMapFile="false"
 				MapExports="false"
 				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -255,6 +257,8 @@
 				AssemblyDebug="0"
 				MapExports="false"
 				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
 				LinkTimeCodeGeneration="1"
 				TargetMachine="1"
 			/>
