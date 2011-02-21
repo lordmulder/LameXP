@@ -7,5 +7,6 @@
     <file>flags/fr.png</file>
     <file>flags/it.png</file>
     <file>flags/ru.png</file>
+    <file>flags/uk.png</file>
   </qresource>
 </RCC>
