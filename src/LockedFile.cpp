@@ -77,6 +77,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 		outFile.close();
 	}
 
+	//Compare hashes
 	if(_stricmp(fileHash.result().toHex().constData(), expectedHash.constData()))
 	{
 		qWarning("\nFile checksum error:\n Expected = %040s\n Detected = %040s\n", expectedHash.constData(), fileHash.result().toHex().constData());
@@ -92,7 +93,9 @@ LockedFile::LockedFile(const QString &filePath)
 {
 	m_fileHandle = NULL;
 	QFileInfo existingFile(filePath);
+	existingFile.setCaching(false);
 	
+	//Make sure the file exists, before we try to lock it
 	if(!existingFile.exists())
 	{
 		char error_msg[256];
@@ -104,9 +107,15 @@ LockedFile::LockedFile(const QString &filePath)
 	m_filePath = existingFile.canonicalFilePath();
 
 	//Now lock the file
-	m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+	for(int i = 0; i < 10; i++)
+	{
+		m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+		if((m_fileHandle != NULL) && (m_fileHandle != INVALID_HANDLE_VALUE)) break;
+		Sleep(100);
+	}
 
-	if(m_fileHandle == INVALID_HANDLE_VALUE)
+	//Locked successfully?
+	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
 	{
 		char error_msg[256];
 		strcpy_s(error_msg, 256, QString("File '%1' could not be locked!").arg(existingFile.fileName()).toLatin1().constData());
