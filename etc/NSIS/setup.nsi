@@ -475,18 +475,18 @@ Section "Uninstall"
 	SetOutPath "$INSTDIR"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_UNINSTALL)"
 
-	Delete /REBOOTOK "$INSTDIR\LameXP.exe
-	Delete /REBOOTOK "$INSTDIR\LameXP-Portable.exe
+	Delete /REBOOTOK "$INSTDIR\LameXP.exe"
+	Delete /REBOOTOK "$INSTDIR\LameXP-Portable.exe"
 	Delete /REBOOTOK "$INSTDIR\LameXP.exe.sig"
-	Delete /REBOOTOK "$INSTDIR\Uninstall.exe
+	Delete /REBOOTOK "$INSTDIR\Uninstall.exe"
 	Delete /REBOOTOK "$INSTDIR\Changelog.htm"
-	Delete /REBOOTOK "$INSTDIR\Changelog.html
-	Delete /REBOOTOK "$INSTDIR\Translate.html
-	Delete /REBOOTOK "$INSTDIR\FAQ.html
+	Delete /REBOOTOK "$INSTDIR\Changelog.html"
+	Delete /REBOOTOK "$INSTDIR\Translate.html"
+	Delete /REBOOTOK "$INSTDIR\FAQ.html"
 	Delete /REBOOTOK "$INSTDIR\Howto.html"
-	Delete /REBOOTOK "$INSTDIR\License.txt
+	Delete /REBOOTOK "$INSTDIR\License.txt"
 	Delete /REBOOTOK "$INSTDIR\Contributors.txt"
-	Delete /REBOOTOK "$INSTDIR\ReadMe.txt
+	Delete /REBOOTOK "$INSTDIR\ReadMe.txt"
 
 	RMDir "$INSTDIR"
 
