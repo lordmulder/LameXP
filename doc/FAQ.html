@@ -208,13 +208,34 @@ the developer of the anti-virus software. And, if they don't fix the problem, sw
 
 <br><br>
 
+<b>Why does application 'xyz' not open the Wave files created by LameXP?</b><br>
+<br>
+Some of the decoders used in LameXP will insert an additional 'JUNK' chunk into the Wave/RIFF file, right<br>
+before the 'fmt' chunk ("Wave header"). There are technical reasons why this 'JUNK' chunk (placeholder) might<br>
+be needed at the beginning of the file. The 'JUNK' type is a standard RIFF type and, by definition of the<br>
+RIFF file format specification, any reading application must ignore/skip all 'JUNK' chunks it may encounter!<br>
+Evidently most reading applications do so and thus will correctly open the Wave file. Unfortunately it was<br>
+brought to our attention that there are a few broken(!) applications, which reject Wave/RIFF files with an<br>
+additional 'JUNK' chunk in front of the 'fmt' chunk. It seems that these applications make false assumptions<br>
+and expect the 'fmt' chunk to be located at a fixed postion, rather than actually parsing the RIFF structure.<br>
+<br>
+While it is evident that applications, which reject the Wave/RIFF file because of the extra 'JUNK' chunk, are<br>
+broken with respect to the RIFF specification and should be fixed by the respective author, there is an easy<br>
+workaround: Re-saving the Wave/RIFF file with SoX creates a file that even the broken applications seem to<br>
+accept, as SoX apparently doesn't insert any 'JUNK' chunks (although it would be free to do so!) Re-saving<br>
+your Wave file with SoX does NOT change the actual content at all, as long as no additional filters are used.<br>
+<br>
+You can use a command-line like this:<br>
+<dir>sox.exe "c:\some path\input.wav" "c:\some path\output.wav"</dir>
+
+<br><br>
+
 <b>How can I translate LameXP to my language or improve an existing translation?</b><br>
 <br>
 Please see the guide for translators at:<br><ul>
 <li><a href="http://mulder.brhack.net/public/doc/lamexp_translate.html" target="_blank">http://mulder.brhack.net/public/doc/lamexp_translate.html</a></ul>
 
 <br><br>
-
 
 <b>Where can I download the latest version of LameXP?</b><br>
 <br>
