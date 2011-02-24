@@ -262,14 +262,14 @@ void AboutDialog::showMoreAbout(void)
 	moreAboutText += makeToolText
 	(
 		tr("LAME &minus; OpenSource mp3 Encoder"),
-		"lame.exe", "v?.?? a??",
+		"lame.exe", "v?.??, Alpha-??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://lame.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
 		tr("OggEnc &minus; Ogg Vorbis Encoder"),
-		"oggenc2_i386.exe", "v?.??",
+		"oggenc2_i386.exe", "v?.??, aoTuV Beta-?.??",
 		tr("Completely open and patent-free audio encoding technology."),
 		"http://www.vorbis.com/"
 	);
