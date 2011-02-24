@@ -1146,6 +1146,26 @@
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
         <translation>Achtung: Benutzerdefinierte Parameter werden nicht überprüft. Benutzung auf eigene Gefahr !!!</translation>
     </message>
+    <message>
+        <source> Multi-Threading </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
+        <translation>Anzahl der parallelen Instanzen entsprechend der Anzahl der CPU Kerne festlegen (Empfohlen)</translation>
+    </message>
+    <message>
+        <source>Fewer Instances</source>
+        <translation>Weniger Instanzen</translation>
+    </message>
+    <message>
+        <source>More Instances</source>
+        <translation>Mehr Instanzen</translation>
+    </message>
+    <message>
+        <source>%1 Instance(s)</source>
+        <translation>%1 Instanz(en)</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

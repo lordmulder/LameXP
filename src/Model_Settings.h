@@ -110,6 +110,7 @@ public:
 	MAKE_OPTION_DEC2(customParametersNeroAAC);
 	MAKE_OPTION_DEC2(customParametersFLAC);
 	MAKE_OPTION_DEC4(metaInfoPosition);
+	MAKE_OPTION_DEC4(maximumInstances);
 
 	//Misc
 	void validate(void);

@@ -1154,6 +1154,26 @@ Sélection automatique (par défaut)</translation>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
         <translation>Avertissement : Les paramètres personnalisés ne peuvent pas être entièrement vérifiés. Vous les utilisez à votre propre risque !!!</translation>
     </message>
+    <message>
+        <source> Multi-Threading </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fewer Instances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More Instances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Instance(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

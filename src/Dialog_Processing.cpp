@@ -267,9 +267,14 @@ void ProcessingDialog::initEncoding(void)
 	WinSevenTaskbar::setTaskbarProgress(this, 0, m_pendingJobs.count());
 	WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/control_play_blue.png"));
 
-	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-	int parallelThreadCount = max(min(min(cpuFeatures.count, m_pendingJobs.count()), 4), 1);
+	int maximumInstances = max(min(m_settings->maximumInstances(), 16), 0);
+	if(maximumInstances < 1)
+	{
+		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
+		maximumInstances = max(min(cpuFeatures.count, 4), 1);
+	}
 
+	int parallelThreadCount = max(min(maximumInstances, m_pendingJobs.count()), 1);
 	if(parallelThreadCount > 1)
 	{
 		m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(parallelThreadCount)));

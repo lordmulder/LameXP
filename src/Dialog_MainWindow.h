@@ -93,6 +93,8 @@ private slots:
 	void toneAdjustTrebleChanged(double value);
 	void toneAdjustTrebleReset(void);
 	void customParamsChanged(void);
+	void updateMaximumInstances(int value);
+	void autoDetectInstancesChanged(bool checked);
 	void resetAdvancedOptionsButtonClicked(void);
 	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);

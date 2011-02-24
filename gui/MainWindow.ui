@@ -1058,7 +1058,7 @@
                <x>0</x>
                <y>0</y>
                <width>604</width>
-               <height>812</height>
+               <height>965</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -1223,7 +1223,7 @@
                   <layout class="QGridLayout" name="gridLayout_17">
                    <item row="0" column="1">
                     <layout class="QGridLayout" name="gridLayout_16">
-                     <item row="7" column="0">
+                     <item row="1" column="0">
                       <spacer name="horizontalSpacer_12">
                        <property name="orientation">
                         <enum>Qt::Horizontal</enum>
@@ -1239,7 +1239,7 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="7" column="4">
+                     <item row="1" column="4">
                       <spacer name="horizontalSpacer_13">
                        <property name="orientation">
                         <enum>Qt::Horizontal</enum>
@@ -1255,14 +1255,14 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="8" column="1">
+                     <item row="2" column="1">
                       <widget class="QLabel" name="label">
                        <property name="text">
                         <string>Faster Processing</string>
                        </property>
                       </widget>
                      </item>
-                     <item row="8" column="2">
+                     <item row="2" column="2">
                       <widget class="QLabel" name="labelLameAlgoQuality">
                        <property name="font">
                         <font>
@@ -1278,7 +1278,7 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="8" column="3">
+                     <item row="2" column="3">
                       <widget class="QLabel" name="label_3">
                        <property name="text">
                         <string>Better quality</string>
@@ -1288,7 +1288,7 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="6" column="1" colspan="3">
+                     <item row="0" column="1" colspan="3">
                       <spacer name="verticalSpacer_4">
                        <property name="orientation">
                         <enum>Qt::Vertical</enum>
@@ -1304,7 +1304,7 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="7" column="1" colspan="3">
+                     <item row="1" column="1" colspan="3">
                       <widget class="QSlider" name="sliderLameAlgoQuality">
                        <property name="maximum">
                         <number>4</number>
@@ -2211,6 +2211,170 @@
                   </layout>
                  </widget>
                 </item>
+                <item row="7" column="0">
+                 <widget class="QGroupBox" name="groupBox_12">
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="title">
+                   <string> Multi-Threading </string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_32">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="gridLayout_31">
+                     <item row="1" column="1" colspan="3">
+                      <widget class="QSlider" name="sliderMaxInstances">
+                       <property name="minimum">
+                        <number>1</number>
+                       </property>
+                       <property name="maximum">
+                        <number>16</number>
+                       </property>
+                       <property name="pageStep">
+                        <number>1</number>
+                       </property>
+                       <property name="sliderPosition">
+                        <number>4</number>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="tickPosition">
+                        <enum>QSlider::TicksBelow</enum>
+                       </property>
+                       <property name="tickInterval">
+                        <number>1</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <spacer name="horizontalSpacer_35">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="4">
+                      <spacer name="horizontalSpacer_36">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1" colspan="3">
+                      <spacer name="verticalSpacer_17">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>8</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="5" column="1" colspan="3">
+                      <spacer name="verticalSpacer_18">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="4" column="1" colspan="3">
+                      <widget class="QCheckBox" name="checkBoxAutoDetectInstances">
+                       <property name="text">
+                        <string>Choose the number of parallel instances based on the number of CPU cores (Recommended)</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QLabel" name="labelMaxInstancesFewer">
+                       <property name="text">
+                        <string>Fewer Instances</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="2">
+                      <widget class="QLabel" name="labelMaxInstances">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string notr="true">(VALUE)</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="3">
+                      <widget class="QLabel" name="labelMaxInstancesMore">
+                       <property name="text">
+                        <string>More Instances</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="1" colspan="3">
+                      <spacer name="verticalSpacer_19">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>12</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
                </layout>
               </item>
               <item row="6" column="0">
@@ -2790,6 +2954,12 @@
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -2835,8 +3005,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>67</x>
-     <y>460</y>
+     <x>81</x>
+     <y>382</y>
     </hint>
    </hints>
   </connection>
@@ -2851,8 +3021,8 @@
      <y>253</y>
     </hint>
     <hint type="destinationlabel">
-     <x>587</x>
-     <y>460</y>
+     <x>641</x>
+     <y>382</y>
     </hint>
    </hints>
   </connection>
@@ -2863,8 +3033,8 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>327</x>
-     <y>465</y>
+     <x>341</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
      <x>327</x>
@@ -2879,8 +3049,8 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>327</x>
-     <y>465</y>
+     <x>341</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
      <x>327</x>
@@ -2895,12 +3065,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>344</x>
-     <y>465</y>
+     <x>358</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
-     <x>215</x>
-     <y>430</y>
+     <x>408</x>
+     <y>346</y>
     </hint>
    </hints>
   </connection>
@@ -2911,12 +3081,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>344</x>
-     <y>465</y>
+     <x>358</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
-     <x>84</x>
-     <y>430</y>
+     <x>98</x>
+     <y>346</y>
     </hint>
    </hints>
   </connection>
@@ -2927,12 +3097,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>344</x>
-     <y>465</y>
+     <x>358</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
-     <x>603</x>
-     <y>430</y>
+     <x>641</x>
+     <y>346</y>
     </hint>
    </hints>
   </connection>
@@ -2943,12 +3113,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>344</x>
-     <y>465</y>
+     <x>358</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
-     <x>214</x>
-     <y>430</y>
+     <x>276</x>
+     <y>346</y>
     </hint>
    </hints>
   </connection>
@@ -2963,8 +3133,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>255</x>
-     <y>460</y>
+     <x>300</x>
+     <y>382</y>
     </hint>
    </hints>
   </connection>
@@ -2975,8 +3145,8 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>177</x>
-     <y>285</y>
+     <x>201</x>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
      <x>336</x>
@@ -2991,12 +3161,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>183</x>
-     <y>465</y>
+     <x>207</x>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
-     <x>596</x>
-     <y>404</y>
+     <x>632</x>
+     <y>315</y>
     </hint>
    </hints>
   </connection>
@@ -3007,12 +3177,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>183</x>
-     <y>465</y>
+     <x>207</x>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
-     <x>299</x>
-     <y>404</y>
+     <x>344</x>
+     <y>315</y>
     </hint>
    </hints>
   </connection>
@@ -3023,12 +3193,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>183</x>
-     <y>465</y>
+     <x>207</x>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
-     <x>39</x>
-     <y>404</y>
+     <x>47</x>
+     <y>315</y>
     </hint>
    </hints>
   </connection>
@@ -3039,12 +3209,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>183</x>
-     <y>465</y>
+     <x>207</x>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
-     <x>500</x>
-     <y>404</y>
+     <x>536</x>
+     <y>315</y>
     </hint>
    </hints>
   </connection>
@@ -3055,12 +3225,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>70</x>
-     <y>79</y>
+     <x>84</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
-     <x>70</x>
-     <y>79</y>
+     <x>397</x>
+     <y>372</y>
     </hint>
    </hints>
   </connection>
@@ -3071,12 +3241,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>70</x>
-     <y>79</y>
+     <x>93</x>
+     <y>159</y>
     </hint>
     <hint type="destinationlabel">
-     <x>65</x>
-     <y>79</y>
+     <x>599</x>
+     <y>315</y>
     </hint>
    </hints>
   </connection>
@@ -3087,12 +3257,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>70</x>
-     <y>79</y>
+     <x>84</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
-     <x>70</x>
-     <y>79</y>
+     <x>459</x>
+     <y>380</y>
     </hint>
    </hints>
   </connection>
@@ -3103,8 +3273,8 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>214</y>
+     <x>163</x>
+     <y>231</y>
     </hint>
     <hint type="destinationlabel">
      <x>256</x>
@@ -3119,8 +3289,8 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>214</y>
+     <x>163</x>
+     <y>231</y>
     </hint>
     <hint type="destinationlabel">
      <x>465</x>
@@ -3135,8 +3305,8 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>214</y>
+     <x>163</x>
+     <y>231</y>
     </hint>
     <hint type="destinationlabel">
      <x>360</x>
@@ -3151,8 +3321,8 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>214</y>
+     <x>163</x>
+     <y>231</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
@@ -3189,6 +3359,70 @@
     <hint type="destinationlabel">
      <x>69</x>
      <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxAutoDetectInstances</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>sliderMaxInstances</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>953</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>363</x>
+     <y>897</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxAutoDetectInstances</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>labelMaxInstances</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>953</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>409</x>
+     <y>916</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxAutoDetectInstances</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>labelMaxInstancesFewer</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>953</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>185</x>
+     <y>916</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxAutoDetectInstances</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>labelMaxInstancesMore</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>953</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>588</x>
+     <y>916</y>
     </hint>
    </hints>
   </connection>

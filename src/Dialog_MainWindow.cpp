@@ -207,6 +207,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 
 	//Setup "Advanced Options" tab
 	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
+	if(m_settings->maximumInstances() > 0) sliderMaxInstances->setValue(m_settings->maximumInstances());
 	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
 	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
 	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
@@ -218,6 +219,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabled()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2Pass()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabled()) checkBoxNormalizationFilter->click();
+	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstances() < 1)) checkBoxAutoDetectInstances->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAAC());
@@ -239,8 +241,11 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(lineEditCustomParamOggEnc, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(lineEditCustomParamNeroAAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(sliderMaxInstances, SIGNAL(valueChanged(int)), this, SLOT(updateMaximumInstances(int)));
+	connect(checkBoxAutoDetectInstances, SIGNAL(clicked(bool)), this, SLOT(autoDetectInstancesChanged(bool)));
 	connect(buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
+	updateMaximumInstances(sliderMaxInstances->value());
 	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
 	toneAdjustBassChanged(spinBoxToneAdjustBass->value());
 	customParamsChanged();
@@ -607,6 +612,7 @@ void MainWindow::changeEvent(QEvent *e)
 		m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
 		updateEncoder(m_settings->compressionEncoder());
 		updateLameAlgoQuality(sliderLameAlgoQuality->value());
+		updateMaximumInstances(sliderMaxInstances->value());
 
 		//Re-install shell integration
 		if(m_settings->shellIntegrationEnabled())
@@ -1925,6 +1931,23 @@ void MainWindow::customParamsChanged(void)
 }
 
 /*
+ * Maximum number of instances changed
+ */
+void MainWindow::updateMaximumInstances(int value)
+{
+	labelMaxInstances->setText(tr("%1 Instance(s)").arg(QString::number(value)));
+	m_settings->maximumInstances(checkBoxAutoDetectInstances->isChecked() ? NULL : value);
+}
+
+/*
+ * Auto-detect number of instances
+ */
+void MainWindow::autoDetectInstancesChanged(bool checked)
+{
+	m_settings->maximumInstances(checked ? NULL : sliderMaxInstances->value());
+}
+
+/*
  * Reset all advanced options to their defaults
  */
 void MainWindow::resetAdvancedOptionsButtonClicked(void)
@@ -1941,6 +1964,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabledDefault()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2PassDefault()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabledDefault()) checkBoxNormalizationFilter->click();
+	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstancesDefault() < 1)) checkBoxAutoDetectInstances->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAACDefault());
