@@ -46,10 +46,11 @@ QMutex *ProcessThread::m_mutex_genFileName = NULL;
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath)
+ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, const QString &tempDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath)
 :
 	m_audioFile(audioFile),
 	m_outputDirectory(outputDirectory),
+	m_tempDirectory(tempDirectory),
 	m_encoder(encoder),
 	m_jobId(QUuid::createUuid()),
 	m_prependRelativeSourcePath(prependRelativeSourcePath),
@@ -303,11 +304,11 @@ QString ProcessThread::generateOutFileName(void)
 QString ProcessThread::generateTempFileName(void)
 {
 	QMutexLocker lock(m_mutex_genFileName);
-	QString tempFileName = QString("%1/%2.wav").arg(lamexp_temp_folder(), lamexp_rand_str());
+	QString tempFileName = QString("%1/%2.wav").arg(m_tempDirectory, lamexp_rand_str());
 
 	while(QFileInfo(tempFileName).exists())
 	{
-		tempFileName = QString("%1/%2.wav").arg(lamexp_temp_folder(), lamexp_rand_str());
+		tempFileName = QString("%1/%2.wav").arg(m_tempDirectory, lamexp_rand_str());
 	}
 
 	QFile file(tempFileName);

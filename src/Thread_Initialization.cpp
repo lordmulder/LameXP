@@ -133,7 +133,7 @@ void InitializationThread::run()
 			{
 				throw "The required checksum is missing, take care!";
 			}
-			LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString(lamexp_temp_folder()).append(QString("/tool_%1").arg(toolName)), toolHash);
+			LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString(lamexp_temp_folder2()).append(QString("/tool_%1").arg(toolName)), toolHash);
 			lamexp_register_tool(toolName, lockedFile, toolVersion);
 		}
 		catch(char *errorMsg)

@@ -581,7 +581,8 @@ void ProcessingDialog::startNextJob(void)
 	ProcessThread *thread = new ProcessThread
 	(
 		currentFile,
-		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath(): m_settings->outputDir()),
+		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
+		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2()),
 		encoder,
 		m_settings->prependRelativeSourcePath()
 	);

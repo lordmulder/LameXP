@@ -95,6 +95,9 @@ private slots:
 	void customParamsChanged(void);
 	void updateMaximumInstances(int value);
 	void autoDetectInstancesChanged(bool checked);
+	void browseCustomTempFolderButtonClicked(void);
+	void customTempFolderChanged(const QString &text);
+	void useCustomTempFolderChanged(bool checked);
 	void resetAdvancedOptionsButtonClicked(void);
 	void sourceModelChanged(void);
 	void metaTagsEnabledChanged(void);

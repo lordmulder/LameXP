@@ -1166,6 +1166,34 @@
         <source>%1 Instance(s)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> Temp Directory </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your currently selected TEMP folder does not exist anymore:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot write to the selected directory. Please choose another directory!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

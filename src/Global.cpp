@@ -779,7 +779,7 @@ QString lamexp_rand_str(void)
 /*
  * Get LameXP temp folder
  */
-const QString &lamexp_temp_folder(void)
+const QString &lamexp_temp_folder2(void)
 {
 	static const char *TEMP_STR = "Temp";
 
@@ -1155,8 +1155,8 @@ bool lamexp_remove_file(const QString &filename)
 	{
 		if(!QFile::remove(filename))
 		{
-			DWORD attributes = GetFileAttributesW(reinterpret_cast<const wchar_t*>(filename.utf16()));
-			SetFileAttributesW(reinterpret_cast<const wchar_t*>(filename.utf16()), (attributes & (~FILE_ATTRIBUTE_READONLY)));
+			DWORD attributes = GetFileAttributesW(QWCHAR(filename));
+			SetFileAttributesW(QWCHAR(filename), (attributes & (~FILE_ATTRIBUTE_READONLY)));
 			if(!QFile::remove(filename))
 			{
 				qWarning("Could not delete \"%s\"", filename.toLatin1().constData());

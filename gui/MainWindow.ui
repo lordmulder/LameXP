@@ -1058,7 +1058,7 @@
                <x>0</x>
                <y>0</y>
                <width>604</width>
-               <height>965</height>
+               <height>1091</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -2375,6 +2375,136 @@
                   </layout>
                  </widget>
                 </item>
+                <item row="8" column="0">
+                 <widget class="QGroupBox" name="groupBox_13">
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="title">
+                   <string> Temp Directory </string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_34">
+                   <item row="0" column="1">
+                    <layout class="QGridLayout" name="gridLayout_33">
+                     <item row="1" column="1">
+                      <widget class="QLineEdit" name="lineEditCustomTempFolder">
+                       <property name="readOnly">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="2">
+                      <widget class="QPushButton" name="buttonBrowseCustomTempFolder">
+                       <property name="text">
+                        <string>Browse...</string>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="../res/Icons.qrc">
+                         <normaloff>:/icons/folder_explore.png</normaloff>:/icons/folder_explore.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>16</width>
+                         <height>16</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="1" colspan="2">
+                      <widget class="QCheckBox" name="checkBoxUseSystemTempFolder">
+                       <property name="text">
+                        <string>Store temporary files in your system's default TEMP directory (Recommended)</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1" colspan="2">
+                      <spacer name="verticalSpacer_20">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="4" column="1" colspan="2">
+                      <spacer name="verticalSpacer_21">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="0">
+                      <spacer name="horizontalSpacer_37">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="3">
+                      <spacer name="horizontalSpacer_38">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="2" column="1" colspan="2">
+                      <spacer name="verticalSpacer_22">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>4</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
                </layout>
               </item>
               <item row="6" column="0">
@@ -2960,6 +3090,10 @@
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -3423,6 +3557,38 @@
     <hint type="destinationlabel">
      <x>588</x>
      <y>916</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxUseSystemTempFolder</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>lineEditCustomTempFolder</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>302</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>283</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxUseSystemTempFolder</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>buttonBrowseCustomTempFolder</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>302</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>265</y>
     </hint>
    </hints>
   </connection>

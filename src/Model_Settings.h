@@ -111,6 +111,8 @@ public:
 	MAKE_OPTION_DEC2(customParametersFLAC);
 	MAKE_OPTION_DEC4(metaInfoPosition);
 	MAKE_OPTION_DEC4(maximumInstances);
+	MAKE_OPTION_DEC2(customTempPath);
+	MAKE_OPTION_DEC3(customTempPathEnabled);
 
 	//Misc
 	void validate(void);

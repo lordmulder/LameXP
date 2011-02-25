@@ -36,7 +36,7 @@ class ProcessThread: public QThread
 	Q_OBJECT
 
 public:
-	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath);
+	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, const QString &tempDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath);
 	~ProcessThread(void);
 	
 	void run();
@@ -72,6 +72,7 @@ private:
 	AudioFileModel m_audioFile;
 	AbstractEncoder *m_encoder;
 	const QString m_outputDirectory;
+	const QString m_tempDirectory;
 	volatile bool m_aborted;
 	ProcessStep m_currentStep;
 	QStringList m_tempFiles;

@@ -1166,6 +1166,34 @@
         <source>%1 Instance(s)</source>
         <translation>%1 Instanz(en)</translation>
     </message>
+    <message>
+        <source> Temp Directory </source>
+        <translation> Temp Verzeichnis </translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation>Durchsuchen...</translation>
+    </message>
+    <message>
+        <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
+        <translation>Temporäre Dateien im standard TEMP Verzeichnis des Systems speichern (Empfohlen)</translation>
+    </message>
+    <message>
+        <source>Not Found</source>
+        <translation>Nicht Gefunden</translation>
+    </message>
+    <message>
+        <source>Your currently selected TEMP folder does not exist anymore:</source>
+        <translation>Das derzeit ausgewählte TEMP Verzeichnis existiert nicht mehr:</translation>
+    </message>
+    <message>
+        <source>Restore Default</source>
+        <translation>Standard Wiederherstellen</translation>
+    </message>
+    <message>
+        <source>Cannot write to the selected directory. Please choose another directory!</source>
+        <translation>In das ausgewählte Verzeichnis kann nicht geschrieben werden. Bitte ein anderes Verzeichnis auswählen!</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

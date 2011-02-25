@@ -101,6 +101,8 @@ MAKE_ID(customParametersNeroAAC, "AdvancedOptions/CustomParameters/NeroAAC");
 MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
 MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
 MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
+MAKE_ID(customTempPath, "AdvancedOptions/TempDirectory/CustomPath");
+MAKE_ID(customTempPathEnabled, "AdvancedOptions/TempDirectory/UseCustomPath");
 
 //LUT
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
@@ -260,3 +262,5 @@ MAKE_OPTION2(customParametersNeroAAC, QString());
 MAKE_OPTION2(customParametersFLAC, QString());
 MAKE_OPTION4(metaInfoPosition, UINT_MAX);
 MAKE_OPTION4(maximumInstances, 0);
+MAKE_OPTION2(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation));
+MAKE_OPTION3(customTempPathEnabled, false);

@@ -26,6 +26,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
+#include <QFileInfo>
 
 ToneAdjustFilter::ToneAdjustFilter(int bass, int treble)
 :
@@ -49,7 +50,7 @@ bool ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFil
 	QProcess process;
 	QStringList args;
 
-	process.setWorkingDirectory(lamexp_temp_folder());
+	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
 
 	args << "-V3";
 	args << "--guard" << "--temp" << ".";

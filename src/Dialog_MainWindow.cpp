@@ -220,10 +220,12 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2Pass()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabled()) checkBoxNormalizationFilter->click();
 	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstances() < 1)) checkBoxAutoDetectInstances->click();
+	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabled()) checkBoxUseSystemTempFolder->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAAC());
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
+	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
 	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
@@ -243,6 +245,9 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(sliderMaxInstances, SIGNAL(valueChanged(int)), this, SLOT(updateMaximumInstances(int)));
 	connect(checkBoxAutoDetectInstances, SIGNAL(clicked(bool)), this, SLOT(autoDetectInstancesChanged(bool)));
+	connect(buttonBrowseCustomTempFolder, SIGNAL(clicked()), this, SLOT(browseCustomTempFolderButtonClicked()));
+	connect(lineEditCustomTempFolder, SIGNAL(textChanged(QString)), this, SLOT(customTempFolderChanged(QString)));
+	connect(checkBoxUseSystemTempFolder, SIGNAL(clicked(bool)), this, SLOT(useCustomTempFolderChanged(bool)));
 	connect(buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	updateMaximumInstances(sliderMaxInstances->value());
@@ -461,7 +466,7 @@ bool MainWindow::installWMADecoder(void)
 
 	while(true)
 	{
-		QString setupFile = QString("%1/%2.exe").arg(lamexp_temp_folder(), lamexp_rand_str());
+		QString setupFile = QString("%1/%2.exe").arg(lamexp_temp_folder2(), lamexp_rand_str());
 
 		QProcess process;
 		process.setWorkingDirectory(QFileInfo(setupFile).absolutePath());
@@ -931,11 +936,20 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 	
-	__int64 currentFreeDiskspace = lamexp_free_diskspace(lamexp_temp_folder());
+	QString tempFolder = m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2();
+	if(!QFileInfo(tempFolder).exists() || !QFileInfo(tempFolder).isDir())
+	{
+		if(QMessageBox::warning(this, tr("Not Found"), QString("<nobr>%1</nobr><br><nobr>%2</nobr>").arg(tr("Your currently selected TEMP folder does not exist anymore:"), QDir::toNativeSeparators(tempFolder)), tr("Restore Default"), tr("Cancel")) == 0)
+		{
+			while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
+		}
+		return;
+	}
 
+	qint64 currentFreeDiskspace = lamexp_free_diskspace(tempFolder);
 	if(currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier))
 	{
-		QStringList tempFolderParts = lamexp_temp_folder().split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
+		QStringList tempFolderParts = tempFolder.split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
 		tempFolderParts.takeLast();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br>%3").arg(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier)), tr("It is highly recommend to free up more diskspace before proceeding with the encode!"), tr("Your TEMP folder is located at:")).append("<br><nobr><i><a href=\"file:///%3\">%3</a></i></nobr><br>").arg(tempFolderParts.join("\\")), tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
@@ -1951,6 +1965,44 @@ void MainWindow::autoDetectInstancesChanged(bool checked)
 }
 
 /*
+ * Browse for custom TEMP folder button clicked
+ */
+void MainWindow::browseCustomTempFolderButtonClicked(void)
+{
+	QString newTempFolder = QFileDialog::getExistingDirectory(this);
+
+	if(!newTempFolder.isEmpty())
+	{
+		QFile writeTest(QString("%1/~%2.tmp").arg(newTempFolder, lamexp_rand_str()));
+		if(writeTest.open(QIODevice::ReadWrite))
+		{
+			writeTest.remove();
+			lineEditCustomTempFolder->setText(QDir::toNativeSeparators(newTempFolder));
+		}
+		else
+		{
+			QMessageBox::warning(this, tr("Access Denied"), tr("Cannot write to the selected directory. Please choose another directory!"));
+		}
+	}
+}
+
+/*
+ * Custom TEMP folder changed
+ */
+void MainWindow::customTempFolderChanged(const QString &text)
+{
+	m_settings->customTempPath(QDir::fromNativeSeparators(text));
+}
+
+/*
+ * Use custom TEMP folder option changed
+ */
+void MainWindow::useCustomTempFolderChanged(bool checked)
+{
+	m_settings->customTempPathEnabled(!checked);
+}
+
+/*
  * Reset all advanced options to their defaults
  */
 void MainWindow::resetAdvancedOptionsButtonClicked(void)
@@ -1968,10 +2020,12 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2PassDefault()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabledDefault()) checkBoxNormalizationFilter->click();
 	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstancesDefault() < 1)) checkBoxAutoDetectInstances->click();
+	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAACDefault());
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLACDefault());
+	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
 	customParamsChanged();
 	scrollArea->verticalScrollBar()->setValue(0);
 }

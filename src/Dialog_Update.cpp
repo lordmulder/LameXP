@@ -238,7 +238,7 @@ void UpdateDialog::checkForUpdates(void)
 		if(connectionScore < MIN_CONNSCORE)
 		{
 			m_logFile->append(QStringList() << "" << "Testing host:" << known_hosts[i] << "");
-			QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder(), lamexp_rand_str());
+			QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
 			if(getFile(known_hosts[i], outFile))
 			{
 				connectionScore++;
@@ -357,8 +357,8 @@ bool UpdateDialog::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)
 	m_logFile->append(QStringList() << "" << "Trying mirror:" << url);
 	
 	QString randPart = lamexp_rand_str();
-	QString outFileVersionInfo = QString("%1/%2.ver").arg(lamexp_temp_folder(), randPart);
-	QString outFileSignature = QString("%1/%2.sig").arg(lamexp_temp_folder(), randPart);
+	QString outFileVersionInfo = QString("%1/%2.ver").arg(lamexp_temp_folder2(), randPart);
+	QString outFileSignature = QString("%1/%2.sig").arg(lamexp_temp_folder2(), randPart);
 
 	m_logFile->append(QStringList() << "" << "Downloading update info:");
 	bool ok1 = getFile(QString("%1%2").arg(url, mirror_url_postfix[lamexp_version_demo() ? 1 : 0]), outFileVersionInfo);
