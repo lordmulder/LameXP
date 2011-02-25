@@ -45,6 +45,7 @@ private slots:
 	void linkActivated(const QString &link);
 	void applyUpdate(void);
 	void logButtonClicked(void);
+	void progressBarValueChanged(int value);
 
 protected:
 	void showEvent(QShowEvent *event);

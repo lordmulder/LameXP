@@ -25,6 +25,7 @@
 #include "Resource.h"
 #include "Dialog_LogView.h"
 #include "Model_Settings.h"
+#include "WinSevenTaskbar.h"
 
 #include <QClipboard>
 #include <QFileDialog>
@@ -132,12 +133,18 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	connect(installButton, SIGNAL(clicked()), this, SLOT(applyUpdate()));
 	connect(infoLabel, SIGNAL(linkActivated(QString)), this, SLOT(linkActivated(QString)));
 	connect(logButton, SIGNAL(clicked()), this, SLOT(logButtonClicked()));
+
+	//Enable progress bar
+	connect(progressBar, SIGNAL(valueChanged(int)), this, SLOT(progressBarValueChanged(int)));
 }
 
 UpdateDialog::~UpdateDialog(void)
 {
 	LAMEXP_DELETE(m_updateInfo);
 	LAMEXP_DELETE(m_logFile);
+
+	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
+	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
 }
 
 void UpdateDialog::showEvent(QShowEvent *event)
@@ -168,7 +175,15 @@ void UpdateDialog::showEvent(QShowEvent *event)
 
 void UpdateDialog::closeEvent(QCloseEvent *event)
 {
-	if(!closeButton->isEnabled()) event->ignore();
+	if(!closeButton->isEnabled())
+	{
+		event->ignore();
+	}
+	else
+	{
+		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
+	}
 }
 
 void UpdateDialog::keyPressEvent(QKeyEvent *e)
@@ -199,6 +214,8 @@ void UpdateDialog::checkForUpdates(void)
 	m_updateInfo = new UpdateInfo;
 
 	progressBar->setValue(0);
+	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNormalState);
+	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
 	installButton->setEnabled(false);
 	closeButton->setEnabled(false);
 	retryButton->setEnabled(false);
@@ -247,6 +264,8 @@ void UpdateDialog::checkForUpdates(void)
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		QApplication::restoreOverrideCursor();
 		progressBar->setValue(progressBar->maximum());
+		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 		return;
 	}
 
@@ -267,7 +286,7 @@ void UpdateDialog::checkForUpdates(void)
 	
 	QApplication::restoreOverrideCursor();
 	progressBar->setValue(progressBar->maximum());
-
+	
 	if(!success)
 	{
 		if(!retryButton->isVisible()) retryButton->show();
@@ -277,6 +296,8 @@ void UpdateDialog::checkForUpdates(void)
 		logButton->setEnabled(true);
 		statusLabel->setText(tr("Failed to fetch update information from server!"));
 		progressBar->setValue(progressBar->maximum());
+		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 		hintIcon->setPixmap(QIcon(":/icons/server_error.png").pixmap(16,16));
 		hintLabel->setText(tr("Sorry, the update server might be busy at this time. Plase try again later."));
 		hintIcon->show();
@@ -299,6 +320,7 @@ void UpdateDialog::checkForUpdates(void)
 		hintLabel->setText(tr("We highly recommend all users to install this update as soon as possible."));
 		hintIcon->show();
 		hintLabel->show();
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/bell.png"));
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else if(m_updateInfo->m_buildNo == lamexp_version_build())
@@ -308,6 +330,7 @@ void UpdateDialog::checkForUpdates(void)
 		hintLabel->setText(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"));
 		hintIcon->show();
 		hintLabel->show();
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/information.png"));
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else
@@ -317,6 +340,7 @@ void UpdateDialog::checkForUpdates(void)
 		hintLabel->setText(tr("This usually indicates your are currently using a pre-release version of LameXP."));
 		hintIcon->show();
 		hintLabel->show();
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/bug.png"));
 		MessageBeep(MB_ICONEXCLAMATION);
 	}
 
@@ -559,19 +583,27 @@ void UpdateDialog::applyUpdate(void)
 		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(m_updateInfo->m_buildNo));
 
 		QApplication::setOverrideCursor(Qt::WaitCursor);
+		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
+
 		process.start(m_binaryUpdater, args);
 		loop.exec();
 		QApplication::restoreOverrideCursor();
-		
+
 		if(process.exitCode() == 0)
 		{
 			statusLabel->setText("Update ready to install. Applicaion will quit...");
 			m_updateReadyToInstall = true;
+			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
+			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
 			accept();
 		}
 		else
 		{
 			statusLabel->setText("Update failed. Please try again or download manually!");
+			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
+			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
+			WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), 100, 100);
 		}
 	}
 
@@ -584,4 +616,9 @@ void UpdateDialog::logButtonClicked(void)
 	LogViewDialog *logView = new LogViewDialog(this);
 	logView->exec(*m_logFile);
 	LAMEXP_DELETE(logView);
+}
+
+void UpdateDialog::progressBarValueChanged(int value)
+{
+	WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), value, progressBar->maximum());
 }
