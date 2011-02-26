@@ -48,6 +48,8 @@
 ;UUID
 !define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
 
+;Web-Site
+!define MyWebSite "http://mulder.dummwiedeutsch.de/"
 
 ;--------------------------------
 ;Includes
@@ -139,6 +141,8 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 !define MUI_FINISHPAGE_RUN_FUNCTION RunAppFunction
 !define MUI_FINISHPAGE_SHOWREADME
 !define MUI_FINISHPAGE_SHOWREADME_FUNCTION ShowReadmeFunction
+!define MUI_FINISHPAGE_LINK ${MyWebSite}
+!define MUI_FINISHPAGE_LINK_LOCATION ${MyWebSite}
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
@@ -160,6 +164,7 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_TITLE_3LINES
 !insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "license.rtf"
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
