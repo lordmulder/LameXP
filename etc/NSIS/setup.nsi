@@ -51,6 +51,22 @@
 ;Web-Site
 !define MyWebSite "http://mulder.dummwiedeutsch.de/"
 
+
+;--------------------------------
+;Check for Pre-Release
+;--------------------------------
+
+!define LAMEXP_IS_PRERELEASE
+!searchparse '${LAMEXP_SUFFIX}' '' LAMEXP_INSTTYPE '-' LAMEXP_IGNORE
+
+!if '${LAMEXP_INSTTYPE}' == 'Final'
+  !undef LAMEXP_IS_PRERELEASE
+!endif
+!if '${LAMEXP_INSTTYPE}' == 'Hotfix'
+  !undef LAMEXP_IS_PRERELEASE
+!endif
+
+
 ;--------------------------------
 ;Includes
 ;--------------------------------
@@ -294,6 +310,13 @@ Function MyUacInit
 		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Unable to elevate installer! (Error code: $0)"
 		Quit
 	${EndSwitch}
+	
+	!ifdef LAMEXP_IS_PRERELEASE
+		!insertmacro GetCommandlineParameter "Update" "?" $R0
+		StrCmp $R0 "?" 0 +3
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
+		Abort
+	!endif
 FunctionEnd
 
 Function un.MyUacInit
@@ -581,8 +604,6 @@ Function RunAppFunction
 FunctionEnd
 
 Function ShowReadmeFunction
-	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\Changelog.html" "" "" SW_SHOWNORMAL
 	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\FAQ.html" "" "" SW_SHOWNORMAL
-	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\Translate.html" "" "" SW_SHOWNORMAL
 FunctionEnd
 

@@ -38,3 +38,4 @@ LangString LAMEXP_LANG_LINK_CHANGELOG      ${LANG_SPANISH} "Historial de version
 LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_SPANISH} "Guía de traducción"
 LangString LAMEXP_LANG_LINK_UNINSTALL      ${LANG_SPANISH} "Desinstalar"
 LangString LAMEXP_LANG_LINK_FAQ            ${LANG_SPANISH} "Preguntas frecuentes"
+LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_SPANISH} "You are about to install a Demo (pre-release) version of LameXP!"

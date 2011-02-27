@@ -38,3 +38,4 @@ LangString LAMEXP_LANG_LINK_CHANGELOG      ${LANG_RUSSIAN} "История ве�
 LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_RUSSIAN} "Руководство Переводчика"
 LangString LAMEXP_LANG_LINK_UNINSTALL      ${LANG_RUSSIAN} "Деинсталляция"
 LangString LAMEXP_LANG_LINK_FAQ            ${LANG_RUSSIAN} "Часто Задаваемые Вопросы"
+LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_RUSSIAN} "You are about to install a Demo (pre-release) version of LameXP!"
