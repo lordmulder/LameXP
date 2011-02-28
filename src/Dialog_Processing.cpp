@@ -58,6 +58,14 @@
 
 ////////////////////////////////////////////////////////////
 
+//Maximum number of parallel instances
+#define MAX_INSTANCES 16
+
+//Maximum number of CPU cores for auto-detection
+#define MAX_CPU_COUNT 4
+
+////////////////////////////////////////////////////////////
+
 #define CHANGE_BACKGROUND_COLOR(WIDGET, COLOR) \
 { \
 	QPalette palette = WIDGET->palette(); \
@@ -232,7 +240,7 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 		}
 		else if(event->type() == QEvent::MouseButtonPress)
 		{
-			QUrl url("http://mulder.dummwiedeutsch.de/");
+			QUrl url(lamexp_website_url());
 			QDesktopServices::openUrl(url);
 		}
 	}
@@ -267,11 +275,11 @@ void ProcessingDialog::initEncoding(void)
 	WinSevenTaskbar::setTaskbarProgress(this, 0, m_pendingJobs.count());
 	WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/control_play_blue.png"));
 
-	int maximumInstances = max(min(m_settings->maximumInstances(), 16), 0);
+	int maximumInstances = max(min(m_settings->maximumInstances(), MAX_INSTANCES), 0);
 	if(maximumInstances < 1)
 	{
 		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-		maximumInstances = max(min(cpuFeatures.count, 4), 1);
+		maximumInstances = max(min(cpuFeatures.count, MAX_CPU_COUNT), 1);
 	}
 
 	int parallelThreadCount = max(min(maximumInstances, m_pendingJobs.count()), 1);

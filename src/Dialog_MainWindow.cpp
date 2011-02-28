@@ -1505,7 +1505,7 @@ void MainWindow::clearMetaButtonClicked(void)
  */
 void MainWindow::visitHomepageActionActivated(void)
 {
-	QDesktopServices::openUrl(QUrl("http://mulder.dummwiedeutsch.de/"));
+	QDesktopServices::openUrl(QUrl(lamexp_website_url()));
 }
 
 /*

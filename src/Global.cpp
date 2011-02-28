@@ -127,6 +127,9 @@ static const char *g_lamexp_version_raw_date = __DATE__;
 	#endif
 #endif
 
+//Official web-site URL
+static const char *g_lamexp_website_url = "http://mulder.dummwiedeutsch.de/";
+
 //Tool versions (expected)
 static const unsigned int g_lamexp_toolver_neroaac = VER_LAMEXP_TOOL_NEROAAC;
 
@@ -192,6 +195,7 @@ unsigned int lamexp_version_build(void) { return g_lamexp_version.ver_build; }
 const char *lamexp_version_release(void) { return g_lamexp_version.ver_release_name; }
 const char *lamexp_version_compiler(void) {return g_lamexp_version_compiler; }
 unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
+const char *lamexp_website_url(void) { return g_lamexp_website_url; }
 
 bool lamexp_version_demo(void)
 {
