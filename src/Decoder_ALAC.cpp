@@ -75,6 +75,7 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		{
 			process.kill();
 			qWarning("TTAEnc process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

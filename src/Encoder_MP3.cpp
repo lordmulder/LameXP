@@ -147,6 +147,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		{
 			process.kill();
 			qWarning("LAME process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

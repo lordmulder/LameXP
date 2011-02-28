@@ -74,6 +74,7 @@ bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		{
 			process.kill();
 			qWarning("FLAC process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

@@ -88,6 +88,7 @@ bool ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFil
 		{
 			process.kill();
 			qWarning("SoX process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

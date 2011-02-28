@@ -75,6 +75,7 @@ bool MusepackDecoder::decode(const QString &sourceFile, const QString &outputFil
 		{
 			process.kill();
 			qWarning("MpcDec process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

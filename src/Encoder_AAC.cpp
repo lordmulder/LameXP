@@ -119,6 +119,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		{
 			process.kill();
 			qWarning("NeroAacEnc process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}
@@ -209,6 +210,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		{
 			process.kill();
 			qWarning("NeroAacTag process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

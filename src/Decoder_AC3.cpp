@@ -73,6 +73,7 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 		{
 			process.kill();
 			qWarning("Valdec process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

@@ -73,6 +73,7 @@ bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile,
 		{
 			process.kill();
 			qWarning("OggDec process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

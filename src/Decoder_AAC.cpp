@@ -73,6 +73,7 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 		{
 			process.kill();
 			qWarning("FAAD process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

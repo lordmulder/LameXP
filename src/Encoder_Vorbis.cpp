@@ -121,6 +121,7 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 		{
 			process.kill();
 			qWarning("OggEnc process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

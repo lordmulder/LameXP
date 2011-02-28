@@ -74,6 +74,7 @@ bool SpeexDecoder::decode(const QString &sourceFile, const QString &outputFile, 
 		{
 			process.kill();
 			qWarning("SpeexDec process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}

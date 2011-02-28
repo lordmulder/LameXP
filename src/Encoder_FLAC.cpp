@@ -90,6 +90,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		{
 			process.kill();
 			qWarning("FLAC process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
 		}
