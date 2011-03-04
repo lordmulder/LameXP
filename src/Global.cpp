@@ -112,6 +112,9 @@ static QDate g_lamexp_version_date;
 static const char *g_lamexp_months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 static const char *g_lamexp_version_raw_date = __DATE__;
 
+//Console attached flag
+static bool g_lamexp_console_attached = false;
+
 //Compiler version
 #if _MSC_VER == 1400
 	static const char *g_lamexp_version_compiler = "MSVC 8.0";
@@ -263,38 +266,63 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 
 	if(!hConsole)
 	{
-		hConsole = CreateFile(L"CONOUT$", GENERIC_WRITE, FILE_SHARE_WRITE | FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if(hConsole == INVALID_HANDLE_VALUE) hConsole = NULL;
+		if(g_lamexp_console_attached)
+		{
+			hConsole = CreateFile(L"CONOUT$", GENERIC_WRITE, FILE_SHARE_WRITE | FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+			if(hConsole == INVALID_HANDLE_VALUE) hConsole = NULL;
+		}
 	}
 
-	CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
-	GetConsoleScreenBufferInfo(hConsole, &bufferInfo);
-	SetConsoleOutputCP(CP_UTF8);
-
-	switch(type)
+	if(hConsole)
 	{
-	case QtCriticalMsg:
-	case QtFatalMsg:
-		fflush(stdout);
-		fflush(stderr);
-		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fwprintf(stderr, L"\nGURU MEDITATION !!!\n%S\n\n", msg);
-		MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
-		break;
-	case QtWarningMsg:
-		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-		//MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - GURU MEDITATION", MB_ICONWARNING | MB_TOPMOST | MB_TASKMODAL);
-		fwprintf(stderr, L"%S\n", msg);
-		fflush(stderr);
-		break;
-	default:
-		SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-		fwprintf(stderr, L"%S\n", msg);
-		fflush(stderr);
-		break;
-	}
+		CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+		GetConsoleScreenBufferInfo(hConsole, &bufferInfo);
+		SetConsoleOutputCP(CP_UTF8);
 
-	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+		switch(type)
+		{
+		case QtCriticalMsg:
+		case QtFatalMsg:
+			fflush(stdout);
+			fflush(stderr);
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+			fwprintf(stderr, L"\nGURU MEDITATION !!!\n%S\n\n", msg);
+			MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
+			break;
+		case QtWarningMsg:
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+			fwprintf(stderr, L"%S\n", msg);
+			fflush(stderr);
+			break;
+		default:
+			SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+			fwprintf(stderr, L"%S\n", msg);
+			fflush(stderr);
+			break;
+		}
+	
+		SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+	}
+	else
+	{
+		char temp_buffer[1024];
+
+		switch(type)
+		{
+		case QtCriticalMsg:
+		case QtFatalMsg:
+			sprintf_s(temp_buffer, 1024, "[LameXP][C] %s", msg);
+			break;
+		case QtWarningMsg:
+			sprintf_s(temp_buffer, 1024, "[LameXP][W] %s", msg);
+			break;
+		default:
+			sprintf_s(temp_buffer, 1024, "[LameXP][I] %s", msg);
+			break;
+		}
+
+		OutputDebugStringA(temp_buffer);
+	}
 
 	if(type == QtCriticalMsg || type == QtFatalMsg)
 	{
@@ -325,7 +353,12 @@ void lamexp_init_console(int argc, char* argv[])
 
 	if(enableConsole)
 	{
-		if(AllocConsole())
+		if(!g_lamexp_console_attached)
+		{
+			g_lamexp_console_attached = AllocConsole();
+		}
+		
+		if(g_lamexp_console_attached)
 		{
 			//-------------------------------------------------------------------
 			//See: http://support.microsoft.com/default.aspx?scid=kb;en-us;105305
@@ -340,13 +373,19 @@ void lamexp_init_console(int argc, char* argv[])
 			setvbuf(stderr, NULL, _IONBF, 0);
 		}
 
-		HMENU hMenu = GetSystemMenu(GetConsoleWindow(), 0);
-		EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-		RemoveMenu(hMenu, SC_CLOSE, MF_BYCOMMAND);
+		if(HWND hwndConsole = GetConsoleWindow())
+		{
+			HMENU hMenu = GetSystemMenu(hwndConsole, 0);
+			EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+			RemoveMenu(hMenu, SC_CLOSE, MF_BYCOMMAND);
 
-		SetConsoleCtrlHandler(NULL, TRUE);
-		SetConsoleTitle(L"LameXP - Audio Encoder Front-End | Debug Console");
-		SetConsoleOutputCP(CP_UTF8);
+			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MAXIMIZEBOX));
+			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MINIMIZEBOX));
+			
+			SetConsoleCtrlHandler(NULL, TRUE);
+			SetConsoleTitle(L"LameXP - Audio Encoder Front-End | Debug Console");
+			SetConsoleOutputCP(CP_UTF8);
+		}
 	}
 }
 
