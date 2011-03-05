@@ -213,7 +213,7 @@ extern "C"
 {
 	void __declspec(dllexport) __stdcall Test(HWND hwnd, HINSTANCE hinst, LPSTR lpszCmdLine, int nCmdShow)
 	{
-		OutputDebugStringA("Hello cruel world!");
-		MessageBoxA(0, lpszCmdLine, "LameXP v9.0", MB_ICONINFORMATION);
+		OutputDebugStringA(lpszCmdLine);
+		MessageBoxA(0, lpszCmdLine, "LameXP is here!", MB_ICONINFORMATION);
 	}
 }
