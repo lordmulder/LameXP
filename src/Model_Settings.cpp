@@ -31,6 +31,7 @@
 #include <QDir>
 #include <QStringList>
 #include <QLocale>
+#include <QRegExp>
 
 
 ////////////////////////////////////////////////////////////
@@ -58,6 +59,7 @@ void SettingsModel::OPT(unsigned int value) { m_settings->setValue(g_settingsId_
 unsigned int SettingsModel::OPT##Default(void) { return DEF; }
 
 #define MAKE_ID(DEC,STR) static const char *g_settingsId_##DEC = STR
+#define REMOVE_GROUP(OBJ,ID) OBJ->beginGroup(ID); OBJ->remove(""); OBJ->endGroup();
 
 ////////////////////////////////////////////////////////////
 //Constants
@@ -134,7 +136,27 @@ SettingsModel::SettingsModel(void)
 	}
 
 	m_settings = new QSettings(configPath, QSettings::IniFormat);
-	m_settings->beginGroup(QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build()));
+	const QString groupKey = QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build());
+	QStringList childGroups = m_settings->childGroups();
+
+	while(!childGroups.isEmpty())
+	{
+		QString current = childGroups.takeFirst();
+		QRegExp filter("^LameXP_(\\d+)(\\d\\d)(\\d\\d\\d\\d\\d)$");
+		if(filter.indexIn(current) >= 0)
+		{
+			bool ok = false;
+			unsigned int temp = filter.cap(3).toUInt(&ok) + 10;
+			if(ok && (temp >= lamexp_version_build()))
+			{
+				continue;
+			}
+		}
+		qWarning("Deleting obsolete group from config: %s", current.toUtf8().constData());
+		REMOVE_GROUP(m_settings, current);
+	}
+
+	m_settings->beginGroup(groupKey);
 	m_settings->setValue(g_settingsId_versionNumber, QApplication::applicationVersion());
 	m_settings->sync();
 }
