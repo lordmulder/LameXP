@@ -1566,6 +1566,21 @@ Sélection automatique (par défaut)</translation>
     </message>
 </context>
 <context>
+    <name>QApplication</name>
+    <message>
+        <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>

@@ -911,66 +911,9 @@ const QString &lamexp_temp_folder2(void)
 	}
 
 	//Failed to create TEMP folder!
-	qFatal("Temporary directory could not be initialized!\n\nFirst attempt:%s\n\nSecond attempt:\n%s", temp.canonicalPath().toUtf8().constData(), localAppData.canonicalPath().toUtf8().constData());
+	qFatal("Temporary directory could not be initialized!\n\nFirst attempt:\n%s\n\nSecond attempt:\n%s", temp.canonicalPath().toUtf8().constData(), localAppData.canonicalPath().toUtf8().constData());
 	return g_lamexp_temp_folder;
 }
-
-/*
-	if(g_lamexp_temp_folder.isEmpty())
-	{
-		QDir temp = QDir::temp();
-		QDir localAppData = QDir(lamexp_known_folder(lamexp_folder_localappdata));
-
-		if(!localAppData.path().isEmpty() && localAppData.exists())
-		{
-			if(!localAppData.entryList(QDir::AllDirs).contains(TEMP_STR, Qt::CaseInsensitive))
-			{
-				localAppData.mkdir(TEMP_STR);
-			}
-			if(localAppData.cd(TEMP_STR))
-			{
-				temp.setPath(localAppData.absolutePath());
-			}
-		}
-
-		if(!temp.exists())
-		{
-			temp.mkpath(".");
-			if(!temp.exists())
-			{
-				qFatal("The system's temporary directory does not exist:\n%s", temp.absolutePath().toUtf8().constData());
-				return g_lamexp_temp_folder;
-			}
-		}
-
-		QString subDir = QString("%1.tmp").arg(lamexp_rand_str());
-		if(!temp.mkdir(subDir))
-		{
-			qFatal("Temporary directory could not be created:\n%s", QString("%1/%2").arg(temp.canonicalPath(), subDir).toUtf8().constData());
-			return g_lamexp_temp_folder;
-		}
-		if(!temp.cd(subDir))
-		{
-			qFatal("Temporary directory could not be entered:\n%s", QString("%1/%2").arg(temp.canonicalPath(), subDir).toUtf8().constData());
-			return g_lamexp_temp_folder;
-		}
-		
-		QFile testFile(QString("%1/.%2").arg(temp.canonicalPath(), lamexp_rand_str()));
-		if(!testFile.open(QIODevice::ReadWrite) || testFile.write("LAMEXP_TEST\n") < 12)
-		{
-			qFatal("Write access to temporary directory has been denied:\n%s", temp.canonicalPath().toUtf8().constData());
-			return g_lamexp_temp_folder;
-		}
-
-		testFile.close();
-		QFile::remove(testFile.fileName());
-		
-		g_lamexp_temp_folder = temp.canonicalPath();
-	}
-	
-	return g_lamexp_temp_folder;
-}
-*/
 
 /*
  * Clean folder

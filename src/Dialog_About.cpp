@@ -57,6 +57,7 @@ g_lamexp_contributors[] =
 {
 	{"en", L"Englisch",   L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
 	{"de", L"Deutsch",    L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
+	{"",   L"",           L"Bodo Thevissen",      "Bodo@thevissen.de"    },
 	{"fr", L"Française",  L"Dodich Informatique", "Dodich@live.fr"       },
 	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it"},
 	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"    },
@@ -228,7 +229,8 @@ void AboutDialog::showAboutContributors(void)
 	contributorsAboutText += "<table style=\"margin-top:5px\">";
 	for(int i = 0; g_lamexp_contributors[i].pcName; i++)
 	{
-		contributorsAboutText += QString("<tr><td valign=\"middle\"><img src=\":/flags/%1.png\"></td><td>&nbsp;&nbsp;</td>").arg(g_lamexp_contributors[i].pcFlag);
+		QString flagIcon = (strlen(g_lamexp_contributors[i].pcFlag) > 0) ? QString("<img src=\":/flags/%1.png\">").arg(g_lamexp_contributors[i].pcFlag) : QString();
+		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td>").arg(flagIcon);
 		contributorsAboutText += QString("<td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcLanguage));
 		contributorsAboutText += QString("<td valign=\"middle\">%3</td><td>&nbsp;&nbsp;</td><td>&lt;%4&gt;</td></tr>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcName), g_lamexp_contributors[i].pcMail);
 	}

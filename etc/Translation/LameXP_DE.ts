@@ -21,15 +21,15 @@
     </message>
     <message>
         <source>Show License Text</source>
-        <translation>Lizenztext Anzeigen</translation>
+        <translation>Lizenztext anzeigen</translation>
     </message>
     <message>
         <source>Accept License</source>
-        <translation>Lizenz Annehmen</translation>
+        <translation>Lizenz annehmen</translation>
     </message>
     <message>
         <source>Decline License</source>
-        <translation>Lizenz Ablehnen</translation>
+        <translation>Lizenz ablehnen</translation>
     </message>
     <message>
         <source>3rd Party S/W</source>
@@ -69,11 +69,11 @@
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation>Veröffentlicht unter den Bestimmungen der  GNU Leser General Public License.</translation>
+        <translation>Veröffentlicht unter den Bestimmungen der GNU Lesser General Public License.</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation>Komplett offene und patentfreie Technologie zur Audio-Kompression.</translation>
+        <translation>Komplett offene und patentfreie Technologie zur Audiokompression.</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation>Offene und patentfreie Technlogie zur verlustfreien Audio-Kompression.</translation>
+        <translation>Offene und patentfreie Technlogie zur verlustfreien Audiokompression.</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
@@ -105,11 +105,11 @@
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation>Komplett offengelegtes Audio Kompressionsformat.</translation>
+        <translation>Komplett offengelegtes Audiokompressionsformat.</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation>Veröffentlicht unter den Bestimmungen der  GNU General Public License.</translation>
+        <translation>Veröffentlicht unter den Bestimmungen der GNU General Public License.</translation>
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
@@ -117,23 +117,23 @@
     </message>
     <message>
         <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation>LameXP &amp;minus; Audio Kodierer Oberfläche</translation>
+        <translation>LameXP &amp;minus; Audiokodierer-Oberfläche</translation>
     </message>
     <message>
         <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation>LAME &amp;minus; Quelloffener mp3 Kodierer</translation>
+        <translation>LAME &amp;minus; Quelloffener mp3-Kodierer</translation>
     </message>
     <message>
         <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation>OggEnc &amp;minus; Ogg Vorbis Kodierer</translation>
+        <translation>OggEnc &amp;minus; Ogg Vorbis-Kodierer</translation>
     </message>
     <message>
         <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation></translation>
+        <translation>FLAC &amp;minus; Verlustfreier Audio-Codec</translation>
     </message>
     <message>
         <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 &amp;minus; Schneller MPEG Audio Konsolen Dekodierer</translation>
+        <translation>mpg123 &amp;minus; Schneller MPEG Audio Konsolen-Dekodierer</translation>
     </message>
     <message>
         <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation>WavPack &amp;minus; Hybride Verlustfreie Kompression</translation>
+        <translation>WavPack &amp;minus; Hybride verlustfreie Kompression</translation>
     </message>
     <message>
         <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
@@ -153,11 +153,11 @@
     </message>
     <message>
         <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation>The True Audio &amp;minus; Verlustfreier Audio Codec</translation>
+        <translation>The True Audio &amp;minus; Verlustfreier Audio-Codec</translation>
     </message>
     <message>
         <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation>MediaInfo &amp;minus; Multimedia Analyse Werkzeug</translation>
+        <translation>MediaInfo &amp;minus; Multimedia Analysewerkzeug</translation>
     </message>
     <message>
         <source>SoX &amp;minus; Sound eXchange</source>
@@ -166,10 +166,6 @@
     <message>
         <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation>Silk Icons &amp;minus; Über 700 Symbole im PNG Format</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
@@ -181,7 +177,7 @@
     </message>
     <message>
         <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation>Shorten &amp;minus; Verlustfreie Audio Kompression</translation>
+        <translation>Shorten &amp;minus; Verlustfreie Audiokompression</translation>
     </message>
     <message>
         <source>Speex &amp;minus; Free Codec For Free Speech</source>
@@ -194,6 +190,10 @@
     <message>
         <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
         <translation>GNU Wget &amp;minus; Software für den Datei-Download über HTTP</translation>
+    </message>
+    <message>
+        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
+        <translation>Silk Icons &amp;minus; Über 700 Symbole im PNG Format</translation>
     </message>
 </context>
 <context>
@@ -254,7 +254,7 @@
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Rechts-klicken um die DropBox zu schließen)</translation>
+        <translation>(Rechtsklicken, um die DropBox zu schließen)</translation>
     </message>
 </context>
 <context>
@@ -266,14 +266,14 @@
     </message>
     <message>
         <source>Full Path</source>
-        <translation>Datei Pfad</translation>
+        <translation>Dateipfad</translation>
     </message>
 </context>
 <context>
     <name>LogViewDialog</name>
     <message>
         <source>Log View</source>
-        <translation>Logdatei Anzeige</translation>
+        <translation>Logdatei-Anzeige</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -281,11 +281,11 @@
     </message>
     <message>
         <source>Save to File...</source>
-        <translation>Speichern Unter...</translation>
+        <translation>Speichern unter...</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation>In die Zwischenablage Kopieren</translation>
+        <translation>In die Zwischenablage kopieren</translation>
     </message>
     <message>
         <source>Log File</source>
@@ -293,18 +293,18 @@
     </message>
     <message>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation>Die Logdatei  enthält detaillierte Informationen über den ausgewählten Job.</translation>
+        <translation>Die Logdatei enthält detaillierte Informationen über den ausgewählten Job.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation>LameXP - Audio Kodierer Oberfläche</translation>
+        <translation>LameXP - Audio Kodiereroberfläche</translation>
     </message>
     <message>
         <source>Source Files</source>
-        <translation>Quell Dateien</translation>
+        <translation>Quelldateien</translation>
     </message>
     <message>
         <source>Add File(s)</source>
@@ -320,11 +320,11 @@
     </message>
     <message>
         <source>Show Details</source>
-        <translation>Details Anzeigen</translation>
+        <translation>Details anzeigen</translation>
     </message>
     <message>
         <source>Output Directory</source>
-        <translation>Ziel Verzeichnis</translation>
+        <translation>Zielverzeichnis</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
@@ -344,19 +344,19 @@
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation>Ziel-Dateien im selben Verzeichnis wie die Quelle speichern</translation>
+        <translation>Zieldateien im selben Verzeichnis wie die Quelle speichern</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation>Relativer Pfad zur Quelle dem Ziel-Pfad voranstellen</translation>
+        <translation>Relativer Pfad zur Quelle dem Zielpfad voranstellen</translation>
     </message>
     <message>
         <source>Meta Data</source>
-        <translation>Meta Daten</translation>
+        <translation>Metadaten</translation>
     </message>
     <message>
         <source> Meta Information </source>
-        <translation> Meta Informationen </translation>
+        <translation> Meta-Informationen </translation>
     </message>
     <message>
         <source>Edit</source>
@@ -380,7 +380,7 @@
     </message>
     <message>
         <source>Write meta information to encoded files</source>
-        <translation>Meta-Informationen in Ausgabe-Dateien schreiben</translation>
+        <translation>Meta-Informationen in Ausgabedateien schreiben</translation>
     </message>
     <message>
         <source>Compression</source>
@@ -416,7 +416,7 @@
     </message>
     <message>
         <source>Quality-based (VBR)</source>
-        <translation>Qualitäts-basiert (VBR)</translation>
+        <translation>Qualitätsbasiert (VBR)</translation>
     </message>
     <message>
         <source>Average Bitrate (ABR)</source>
@@ -432,11 +432,11 @@
     </message>
     <message>
         <source>Minimum</source>
-        <translation>Minimum</translation>
+        <translation>Minimal</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation>Maximum</translation>
+        <translation>Maximal</translation>
     </message>
     <message>
         <source>Advanced Options</source>
@@ -444,7 +444,7 @@
     </message>
     <message>
         <source> Encode Now!</source>
-        <translation> Jetzt Kodieren!</translation>
+        <translation> Jetzt kodieren!</translation>
     </message>
     <message>
         <source>About...</source>
@@ -452,7 +452,7 @@
     </message>
     <message>
         <source> Exit Program</source>
-        <translation> Programm Ende</translation>
+        <translation> Programmende</translation>
     </message>
     <message>
         <source>File</source>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>Open File(s)...</source>
-        <translation>Datei(en) Öffnen...</translation>
+        <translation>Datei(en) öffnen...</translation>
     </message>
     <message>
         <source>Visit Official Web-Site</source>
@@ -492,15 +492,15 @@
     </message>
     <message>
         <source>Check for Updates</source>
-        <translation>Nach Updates Suchen</translation>
+        <translation>Nach Updates suchen</translation>
     </message>
     <message>
         <source>Open Folder...</source>
-        <translation>Verzeichnis Öffnen...</translation>
+        <translation>Verzeichnis öffnen...</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation>Alle Löschen</translation>
+        <translation>Alle löschen</translation>
     </message>
     <message>
         <source>Plastique</source>
@@ -516,7 +516,7 @@
     </message>
     <message>
         <source>Windows Classic</source>
-        <translation>Windows Klassisch</translation>
+        <translation>Windows klassisch</translation>
     </message>
     <message>
         <source>Windows XP (&quot;Luna&quot;)</source>
@@ -524,27 +524,27 @@
     </message>
     <message>
         <source>Disable Update Reminder</source>
-        <translation>Update-Erinnerung Deaktivieren</translation>
+        <translation>Updateerinnerung deaktivieren</translation>
     </message>
     <message>
         <source>Disable Sound Effects</source>
-        <translation>Sound-Effecte Deaktivieren</translation>
+        <translation>Soundeffekte deaktivieren</translation>
     </message>
     <message>
         <source>Install WMA Decoder</source>
-        <translation>WMA Dekodierer Installieren</translation>
+        <translation>WMA-Dekodierer installieren</translation>
     </message>
     <message>
         <source>Disable Nero AAC Notifications</source>
-        <translation>Nero AAC Meldungen Deaktivieren</translation>
+        <translation>Nero AAC-Meldungen deaktivieren</translation>
     </message>
     <message>
         <source>Disable WMA Decoder Notifications</source>
-        <translation>WMA Dekodierer Meldungen Deaktivieren</translation>
+        <translation>WMA-Dekodierermeldungen deaktivieren</translation>
     </message>
     <message>
         <source>Show DropBox</source>
-        <translation>DropBox Anzeigen</translation>
+        <translation>DropBox anzeigen</translation>
     </message>
     <message>
         <source>Language</source>
@@ -556,23 +556,23 @@
     </message>
     <message>
         <source>You can drop in audio files here!</source>
-        <translation>Sie können hier Audio-Dateien hinein ziehen!</translation>
+        <translation>Sie können Audio-Dateien hier hinein ziehen!</translation>
     </message>
     <message>
         <source>Open File in External Application</source>
-        <translation>Datei in Externer Anwendung Öffnen</translation>
+        <translation>Datei in externer Anwendung öffnen</translation>
     </message>
     <message>
         <source>Browse File Location</source>
-        <translation>Ziel Suchen</translation>
+        <translation>Ziel suchen</translation>
     </message>
     <message>
         <source>Browse Selected Folder</source>
-        <translation>Ausgewähltes Verzeichnis Durchsuchen</translation>
+        <translation>Ausgewähltes Verzeichnis durchsuchen</translation>
     </message>
     <message>
         <source>License Declined</source>
-        <translation>Lizenz Abgelehnt</translation>
+        <translation>Lizenz abgelehnt</translation>
     </message>
     <message>
         <source>You have declined the license. Consequently the application will exit now!</source>
@@ -588,7 +588,7 @@
     </message>
     <message>
         <source>Exit Program</source>
-        <translation>Programm Beenden</translation>
+        <translation>Programm beenden</translation>
     </message>
     <message>
         <source>Urgent Update</source>
@@ -604,7 +604,7 @@
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation>Sie haben noch nicht nach LameXP Updates gesucht. Jetzt nach Updates suchen?</translation>
+        <translation>Sie haben noch nicht nach LameXP-Updates gesucht. Jetzt nach Updates suchen?</translation>
     </message>
     <message>
         <source>Postpone</source>
@@ -612,15 +612,15 @@
     </message>
     <message>
         <source>AAC Encoder Outdated</source>
-        <translation>AAC Kodierer Veraltet</translation>
+        <translation>AAC-Kodierer veraltet</translation>
     </message>
     <message>
         <source>AAC Support Disabled</source>
-        <translation>AAC Unterstützung Deaktiviert</translation>
+        <translation>AAC-Unterstützung deaktiviert</translation>
     </message>
     <message>
         <source>WMA Decoder Missing</source>
-        <translation>WMA Dekodierer Fehlt</translation>
+        <translation>WMA-Dekodierer fehlt</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -628,15 +628,15 @@
     </message>
     <message>
         <source>You must add at least one file to the list before proceeding!</source>
-        <translation>Sie müssen mindestens eine Datei hinzufügen, bevor Sie den Kodierungsvorgang starten!</translation>
+        <translation>Sie müssen mindestens eine Datei hinzufügen, bevor Sie den Kodiervorgang starten!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation>Warnung: Freier Speicherplatz Niedrig</translation>
+        <translation>Warnung: Wenig freier Festplattenspeicher</translation>
     </message>
     <message>
         <source>Abort Encoding Process</source>
-        <translation>Kodierungsvorgang Abbrechen</translation>
+        <translation>Kodiervorgang abbrechen</translation>
     </message>
     <message>
         <source>Clean Disk Now</source>
@@ -648,11 +648,11 @@
     </message>
     <message>
         <source>Low Diskspace</source>
-        <translation>Freier Speicherplatz Niedrig</translation>
+        <translation>Wenig freier Festplattenspeicher</translation>
     </message>
     <message>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
-        <translation>Sie fahren mit wenig freiem Speicherstand fort. Es können Probleme auftreten!</translation>
+        <translation>Sie fahren mit wenig freiem Festplattenspeicher fort. Es könnten Probleme auftreten!</translation>
     </message>
     <message>
         <source>Sorry, an unsupported encoder has been chosen!</source>
@@ -660,11 +660,11 @@
     </message>
     <message>
         <source>Add file(s)</source>
-        <translation>Datei(en) Hinzufügen</translation>
+        <translation>Datei(en) hinzufügen</translation>
     </message>
     <message>
         <source>Add folder</source>
-        <translation>Ordner Hinzufügen</translation>
+        <translation>Ordner hinzufügen</translation>
     </message>
     <message>
         <source>New Folder</source>
@@ -700,67 +700,67 @@
     </message>
     <message>
         <source>Update Reminder</source>
-        <translation>Update Erinnerung</translation>
+        <translation>Update-Erinnerung</translation>
     </message>
     <message>
         <source>The update reminder has been re-enabled.</source>
-        <translation>Die Update Erinnerung wurde wieder eingeschaltet.</translation>
+        <translation>Die Update-Erinnerung wurde wieder eingeschaltet.</translation>
     </message>
     <message>
         <source>Do you really want to disable all sound effects?</source>
-        <translation>Sind Sie sicher, dass Sie alle Sound-Effekte deaktivieren möchten?</translation>
+        <translation>Sind Sie sicher, dass Sie alle Soundeffekte deaktivieren möchten?</translation>
     </message>
     <message>
         <source>Sound Effects</source>
-        <translation>Sound Effekte</translation>
+        <translation>Soundeffekte</translation>
     </message>
     <message>
         <source>All sound effects have been disabled.</source>
-        <translation>Alle Sound-Effekte wurden deaktiviert.</translation>
+        <translation>Alle Soundeffekte wurden deaktiviert.</translation>
     </message>
     <message>
         <source>The sound effects have been re-enabled.</source>
-        <translation>Alle Sound-Effkete wurden wieder eingeschaltet.</translation>
+        <translation>Alle Soundeffekte wurden wieder eingeschaltet.</translation>
     </message>
     <message>
         <source>Nero AAC Notifications</source>
-        <translation>Nero AAC Meldungen</translation>
+        <translation>Nero AAC-Meldungen</translation>
     </message>
     <message>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
-        <translation>Möchten Sie wirklich alle Nero AAC Kodierer Meldungen deaktivieren?</translation>
+        <translation>Möchten Sie wirklich alle Nero AAC-Kodierermeldungen deaktivieren?</translation>
     </message>
     <message>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
-        <translation>Alle Nero AAC Kodierer Meldungen wurden deaktiviert.</translation>
+        <translation>Alle Nero AAC-Kodierermeldungen wurden deaktiviert.</translation>
     </message>
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation>Die Nero AAC Kodierer Meldungen wurden wieder eingeschaltet.</translation>
+        <translation>Die Nero AAC-Kodierermeldungen wurden wieder eingeschaltet.</translation>
     </message>
     <message>
         <source>WMA Decoder Notifications</source>
-        <translation>WMA Dekodierer Meldungen</translation>
+        <translation>WMA-Dekodierermeldungen</translation>
     </message>
     <message>
         <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation>Sind Sie sicher, dass Sie alle WMA Dekodierer Meldungen deaktivieren möchten?</translation>
+        <translation>Sind Sie sicher, dass Sie alle WMA-Dekodierermeldungen deaktivieren möchten?</translation>
     </message>
     <message>
         <source>All WMA Decoder notifications have been disabled.</source>
-        <translation>Alle WMA Dekodierer Meldungen wurden deaktiviert.</translation>
+        <translation>Alle WMA-Dekodierermeldungen wurden deaktiviert.</translation>
     </message>
     <message>
         <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation>Die WMA Dekodierer Meldungen wurden wieder aktiviert.</translation>
+        <translation>Die WMA-Dekodierermeldungen wurden wieder aktiviert.</translation>
     </message>
     <message>
         <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation>Möchten Sie jetzt den WMA Dekodierer herunterladen und installieren?</translation>
+        <translation>Möchten Sie jetzt den WMA-Dekodierer herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation>Herunterladen &amp;&amp; Installieren</translation>
+        <translation>Herunterladen &amp;&amp; installieren</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -768,15 +768,15 @@
     </message>
     <message>
         <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation>WMA Dekodierer Setup wird heruntergeladen, bitte warten...</translation>
+        <translation>WMA-Dekodierer-Setup wird heruntergeladen, bitte warten...</translation>
     </message>
     <message>
         <source>Download Failed</source>
-        <translation>Download Fehlgeschlagen</translation>
+        <translation>Download fehlgeschlagen</translation>
     </message>
     <message>
         <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation>Das WMA Dekodierer Setup-Programm konnte nicht heruntergeladen werden. Bitte überprüfen Sie Ihre Internetverbindung!</translation>
+        <translation>Das WMA-Dekodierer-Setup konnte nicht heruntergeladen werden. Bitte überprüfen Sie Ihre Internetverbindung!</translation>
     </message>
     <message>
         <source>Try Again</source>
@@ -788,7 +788,7 @@
     </message>
     <message>
         <source>WMA Decoder</source>
-        <translation>WMA Dekodierer</translation>
+        <translation>WMA-Dekodierer</translation>
     </message>
     <message>
         <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
@@ -796,7 +796,7 @@
     </message>
     <message>
         <source>Quit LameXP</source>
-        <translation>LameXP Beenden</translation>
+        <translation>LameXP beenden</translation>
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
@@ -808,19 +808,19 @@
     </message>
     <message>
         <source>Files Rejected</source>
-        <translation>Dateien Abgelehnt</translation>
+        <translation>Dateien abgelehnt</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
-        <translation>LameXP hat festgestellt, dass Ihre Version des Nero AAC Kodieres veraltet ist!</translation>
+        <translation>LameXP hat festgestellt, dass Ihre Version des Nero AAC-Kodieres veraltet ist!</translation>
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation>Die neuste verfügbare Version ist %1 (oder später), Sie verwenden derzeit jedoch noch Version %2.</translation>
+        <translation>Die neueste verfügbare Version ist %1 (oder neuer), Sie verwenden derzeit jedoch noch Version %2.</translation>
     </message>
     <message>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation>Sie können die aktuelle Version des Nero AAC Kodierers auf der Nero Web-Seite herunterladen:</translation>
+        <translation>Sie können die aktuelle Version des Nero AAC-Kodierers auf der Nero Web-Seite herunterladen:</translation>
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
@@ -836,19 +836,19 @@
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation>Der Nero AAC Kodierer kann kostenlos auf der offziellen Web-Seite heruntergeladen werden:</translation>
+        <translation>Der Nero AAC-Kodierer kann kostenlos auf der offziellen Web-Seite heruntergeladen werden:</translation>
     </message>
     <message>
         <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation>LameXP hat festgestellt, dass der WMA Dekodierer derzeit nicht auf ihrem System installiert ist.</translation>
+        <translation>LameXP hat festgestellt, dass der WMA-Dekodierer derzeit nicht auf Ihrem System installiert ist.</translation>
     </message>
     <message>
         <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation>WMA Dateien können nicht als Quelle verarbeitet werden, solange der WMA Dekodierer nicht installiert ist!</translation>
+        <translation>WMA Dateien können nicht als Quelle verarbeitet werden, solange der WMA-Dekodierer nicht installiert ist!</translation>
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation>In das ausgewählte Ziel-Verzeichnis kann nicht geschrieben werden.</translation>
+        <translation>In das ausgewählte Zielverzeichnis kann nicht geschrieben werden.</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
-        <translation>Es wird dringend empfohlen mehr Speicherplatz freizugeben, bevor Sie fortfahren!</translation>
+        <translation>Es wird dringend empfohlen, vor dem Fortfahren mehr Speicherplatz freizugeben!</translation>
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
@@ -892,7 +892,7 @@
     </message>
     <message>
         <source>The update reminder has been disabled.</source>
-        <translation>Die Update Erinnerung wurde deaktiviert.</translation>
+        <translation>Die Update-Erinnerung wurde deaktiviert.</translation>
     </message>
     <message>
         <source>Please remember to check for updates at regular intervals!</source>
@@ -908,7 +908,7 @@
     </message>
     <message>
         <source>Already Running</source>
-        <translation>Wird Bereits Ausgeführt</translation>
+        <translation>Wird bereits ausgeführt</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -924,7 +924,7 @@
     </message>
     <message>
         <source>Load Translation</source>
-        <translation>Übersetzung Laden</translation>
+        <translation>Übersetzung laden</translation>
     </message>
     <message>
         <source>Translation Files</source>
@@ -936,7 +936,7 @@
     </message>
     <message>
         <source> LAME Algorithm Quality </source>
-        <translation> LAME Algorithmus Qualität </translation>
+        <translation> LAME Algorithmus-Qualität </translation>
     </message>
     <message>
         <source>Faster Processing</source>
@@ -948,11 +948,11 @@
     </message>
     <message>
         <source>Best Quality (Very Slow)</source>
-        <translation>Beste Qualität (Sehr Langsam)</translation>
+        <translation>Beste Qualität (sehr langsam)</translation>
     </message>
     <message>
         <source>High Quality (Recommended)</source>
-        <translation>Höhere Qualität (Empfohlen)</translation>
+        <translation>Höhere Qualität (empfohlen)</translation>
     </message>
     <message>
         <source>Average Quality (Default)</source>
@@ -960,31 +960,31 @@
     </message>
     <message>
         <source>Low Quality (Fast)</source>
-        <translation>Niedrige Qualität (Schnell)</translation>
+        <translation>Niedrige Qualität (schnell)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
-        <translation>Miese Qualität (Sehr Schnell)</translation>
+        <translation>Miese Qualität (sehr schnell)</translation>
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation> Bitraten Verwaltung (LAME und OggEnc2) </translation>
+        <translation> Bitratenverwaltung (LAME und OggEnc2) </translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
-        <translation>Bitraten Verwaltung Aktivieren</translation>
+        <translation>Bitratenverwaltung aktivieren</translation>
     </message>
     <message>
         <source>Minimum (kbps):</source>
-        <translation>Minimum (kbps):</translation>
+        <translation>Minimal (kbps):</translation>
     </message>
     <message>
         <source>Maximum (kbps):</source>
-        <translation>Maximum (kbps):</translation>
+        <translation>Maximal (kbps):</translation>
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
-        <translation>Kanal Modus / Abtastrate</translation>
+        <translation>Kanalmodus / Abtastrate</translation>
     </message>
     <message>
         <source>Auto Select (Default)</source>
@@ -996,7 +996,7 @@
     </message>
     <message>
         <source>Forced Joint Stereo</source>
-        <translation>Joint Stereo Erzwingen</translation>
+        <translation>Joint Stereo erzwingen</translation>
     </message>
     <message>
         <source>Simple</source>
@@ -1012,7 +1012,7 @@
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation>MP3 Kanal Modus:</translation>
+        <translation>MP3 Kanalmodus:</translation>
     </message>
     <message>
         <source>16.000</source>
@@ -1044,15 +1044,15 @@
     </message>
     <message>
         <source>Nero AAC Options</source>
-        <translation>Nero AAC Optionen</translation>
+        <translation>Nero AAC-Optionen</translation>
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation>2 Durchläufe Verwenden (ABR Modus)</translation>
+        <translation>2 Durchläufe verwenden (ABR Modus)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
-        <translation>AAC Profil Auswahl:</translation>
+        <translation>AAC Profil-Auswahl:</translation>
     </message>
     <message>
         <source>Enforce LC-AAC</source>
@@ -1064,7 +1064,7 @@
     </message>
     <message>
         <source>Auto Select (Recommended)</source>
-        <translation>Automatisch (Empfohlen)</translation>
+        <translation>Automatisch (empfohlen)</translation>
     </message>
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
@@ -1072,11 +1072,11 @@
     </message>
     <message>
         <source> Volume Normalization </source>
-        <translation> Lautstärke Normalisieren </translation>
+        <translation> Lautstärke normalisieren </translation>
     </message>
     <message>
         <source>Enable Normalization Filter</source>
-        <translation>Normalisierungsfilter Aktivieren</translation>
+        <translation>Normalisierungsfilter aktivieren</translation>
     </message>
     <message>
         <source>Peak Volume (dB):</source>
@@ -1084,7 +1084,7 @@
     </message>
     <message>
         <source>Reset Advanced Options </source>
-        <translation>Erweiterte Optionen Zurücksetzen</translation>
+        <translation>Erweiterte Optionen zurücksetzen</translation>
     </message>
     <message>
         <source>Encode!</source>
@@ -1096,15 +1096,15 @@
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
-        <translation>Höhen-Regler (dB):</translation>
+        <translation>Höhenregler (dB):</translation>
     </message>
     <message>
         <source>Adjust Bass (dB):</source>
-        <translation>Bass-Regler (dB):</translation>
+        <translation>Bassregler (dB):</translation>
     </message>
     <message>
         <source>Disable Shell Integration</source>
-        <translation>Shell-Integration Deaktivieren</translation>
+        <translation>Shell-Integration deaktivieren</translation>
     </message>
     <message>
         <source>Shell Integration</source>
@@ -1168,7 +1168,7 @@
     </message>
     <message>
         <source> Temp Directory </source>
-        <translation> Temp Verzeichnis </translation>
+        <translation> Temp-Verzeichnis </translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -1176,19 +1176,19 @@
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation>Temporäre Dateien im standard TEMP Verzeichnis des Systems speichern (Empfohlen)</translation>
+        <translation>Temporäre Dateien im standard TEMP Verzeichnis des Systems speichern (empfohlen)</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation>Nicht Gefunden</translation>
+        <translation>Nicht gefunden</translation>
     </message>
     <message>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation>Das derzeit ausgewählte TEMP Verzeichnis existiert nicht mehr:</translation>
+        <translation>Das derzeit ausgewählte TEMP-Verzeichnis existiert nicht mehr:</translation>
     </message>
     <message>
         <source>Restore Default</source>
-        <translation>Standard Wiederherstellen</translation>
+        <translation>Standard wiederherstellen</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
@@ -1199,7 +1199,7 @@
     <name>MetaInfo</name>
     <message>
         <source>Meta Information</source>
-        <translation>Meta Informationen</translation>
+        <translation>Meta-Informationen</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -1214,11 +1214,11 @@
     <name>MetaInfoDialog</name>
     <message>
         <source>Meta Information</source>
-        <translation>Meta Informationen</translation>
+        <translation>Meta-Informationen</translation>
     </message>
     <message>
         <source>The following meta information have been extracted from the original file.</source>
-        <translation>Die folgenden Meta-Informationen wurden aus der Original-Datei extrahiert.</translation>
+        <translation>Die folgenden Meta-Informationen wurden aus der Originaldatei extrahiert.</translation>
     </message>
 </context>
 <context>
@@ -1285,11 +1285,11 @@
     </message>
     <message>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation>Der Titel kann nicht leer sein. Titel wird aus Dateiname generiert!</translation>
+        <translation>Der Titel kann nicht leer sein. Titel werden aus Dateinamen generiert!</translation>
     </message>
     <message>
         <source>Edit Artist</source>
-        <translation>Künstler Bearbeiten</translation>
+        <translation>Künstler bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the artist for this file:</source>
@@ -1305,7 +1305,7 @@
     </message>
     <message>
         <source>Edit Genre</source>
-        <translation>Genre Bearbeiten</translation>
+        <translation>Genre bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the genre for this file:</source>
@@ -1313,7 +1313,7 @@
     </message>
     <message>
         <source>Edit Year</source>
-        <translation>Jahr Bearbeiten</translation>
+        <translation>Jahr bearbeiten</translation>
     </message>
     <message>
         <source>Please enter the year for this file:</source>
@@ -1341,11 +1341,11 @@
     </message>
     <message>
         <source>Encoded with LameXP</source>
-        <translation>Enkodiert mit LameXP</translation>
+        <translation>Kodiert mit LameXP</translation>
     </message>
     <message>
         <source>Not editable</source>
-        <translation>Nicht Editierbar</translation>
+        <translation>Nicht veränderbar</translation>
     </message>
     <message>
         <source>Sorry, this property of the source file cannot be edited!</source>
@@ -1353,7 +1353,7 @@
     </message>
     <message>
         <source>Full Path</source>
-        <translation>Datei Pfad</translation>
+        <translation>Dateipfad</translation>
     </message>
     <message>
         <source>Format</source>
@@ -1400,7 +1400,7 @@
     </message>
     <message>
         <source>Audio Format:</source>
-        <translation></translation>
+        <translation>Audioformat:</translation>
     </message>
     <message>
         <source>Unsupported!</source>
@@ -1440,11 +1440,11 @@
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation>Das Ziel-Verzeichnis existiert nicht und konnte nicht erstellt werden:</translation>
+        <translation>Das Zielverzeichnis existiert nicht und konnte nicht erstellt werden:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
-        <translation>In das Ziel-Verzeichnis kann nicht geschrieben werden:</translation>
+        <translation>In das Zielverzeichnis kann nicht geschrieben werden:</translation>
     </message>
 </context>
 <context>
@@ -1543,7 +1543,7 @@
     </message>
     <message>
         <source>Browse Output File Location</source>
-        <translation>Ausgabe-Datei Suchen</translation>
+        <translation>Ausgabedatei suchen</translation>
     </message>
 </context>
 <context>
@@ -1558,10 +1558,25 @@
     </message>
 </context>
 <context>
+    <name>QApplication</name>
+    <message>
+        <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
+        <translation>Programm &apos;%1&apos; unterstützt den Windows Kompatibilitätsmodus nicht.</translation>
+    </message>
+    <message>
+        <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
+        <translation>Programm &apos;%1&apos; benötigt Qt v%2, aber Qt v%3 wurde gefunden.</translation>
+    </message>
+    <message>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation>Programm &apos;%1&apos; benötigt Windows 2000 oder neuer.</translation>
+    </message>
+</context>
+<context>
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>
-        <translation>LameXP Audio-Datei</translation>
+        <translation>LameXP Audiodatei</translation>
     </message>
     <message>
         <source>Convert this file with LameXP v%1</source>
@@ -1587,7 +1602,7 @@
     </message>
     <message>
         <source>Latest version available:</source>
-        <translation>Neuste verfügbare Version:</translation>
+        <translation>Neueste verfügbare Version:</translation>
     </message>
     <message>
         <source>Currently installed version:</source>
@@ -1599,11 +1614,11 @@
     </message>
     <message>
         <source>Show Log</source>
-        <translation>Log Anzeigen</translation>
+        <translation>Log anzeigen</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation>Herunterladen &amp;&amp; Installieren</translation>
+        <translation>Herunterladen &amp;&amp; installieren</translation>
     </message>
     <message>
         <source>Close</source>
@@ -1611,7 +1626,7 @@
     </message>
     <message>
         <source>Build</source>
-        <translation>Buildnummer</translation>
+        <translation>Build-Nummer</translation>
     </message>
     <message>
         <source>Testing your internet connection, please wait...</source>
@@ -1619,7 +1634,7 @@
     </message>
     <message>
         <source>Network connectivity test has failed!</source>
-        <translation>Test der Netzwerk Konnektivität fehlgeschlagen!</translation>
+        <translation>Test der Netzwerkverbindung fehlgeschlagen!</translation>
     </message>
     <message>
         <source>Please make sure your internet connection is working properly and try again.</source>
@@ -1631,7 +1646,7 @@
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
-        <translation>Fehler beim Holen der Update Informationen vom Server!</translation>
+        <translation>Fehler beim Holen der Update-Informationen vom Server!</translation>
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
@@ -1647,7 +1662,7 @@
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation>Es wird dringend empfohlen das Update schnellstmöglich zu installieren.</translation>
+        <translation>Es wird dringend empfohlen, das Update schnellstmöglich zu installieren.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>

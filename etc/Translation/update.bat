@@ -1,6 +1,6 @@
 @echo off
 REM ---------------------------
-set "QTVARS=E:\Qt\MSVC\4.7.1\bin\qtvars.bat"
+set "QTVARS=E:\Qt\4.7.2\bin\qtvars.bat"
 REM ---------------------------
 call "%QTVARS%"
 del update.lst > NUL
