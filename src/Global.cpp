@@ -517,7 +517,7 @@ static const HANDLE g_debug_thread = lamexp_debug_thread_init();
 /*
  * Check for compatibility mode
  */
-static bool lamexp_check_compatibility_mode(const char *exportName)
+static bool lamexp_check_compatibility_mode(const char *exportName, const char *executableName)
 {
 	QLibrary kernel32("kernel32.dll");
 
@@ -525,7 +525,8 @@ static bool lamexp_check_compatibility_mode(const char *exportName)
 	{
 		if(kernel32.resolve(exportName) != NULL)
 		{
-			qFatal("Windows compatibility mode detected. Program will exit!");
+			qWarning("Function '%s' exported from 'kernel32.dll' -> Windows compatibility mode!", exportName);
+			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
 			return false;
 		}
 	}
@@ -590,35 +591,46 @@ bool lamexp_init_qt(int argc, char* argv[])
 		return true;
 	}
 	
+	//Extract executable name from argv[] array
+	char *executableName = argv[0];
+	while(char *temp = strpbrk(executableName, "\\/:?"))
+	{
+		executableName = temp + 1;
+	}
+
 	//Check Qt version
-	qDebug("Using Qt Framework v%s, compiled with Qt v%s", qVersion(), QT_VERSION_STR);
-	QT_REQUIRE_VERSION(argc, argv, QT_VERSION_STR);
-	
+	qDebug("Using Qt Framework v%s, compiled with Qt v%s [%s]", qVersion(), QT_VERSION_STR, QT_PACKAGEDATE_STR);
+	if(_stricmp(qVersion(), QT_VERSION_STR))
+	{
+		qFatal("%s", QApplication::tr("Executable '%1' requires Qt v%2, but found Qt v%3.").arg(QString::fromLatin1(executableName), QString::fromLatin1(QT_VERSION_STR), QString::fromLatin1(qVersion())).toLatin1().constData());
+		return false;
+	}
+
 	//Check the Windows version
 	switch(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based)
 	{
 	case QSysInfo::WV_2000:
 		qDebug("Running on Windows 2000 (not offically supported!).\n");
-		lamexp_check_compatibility_mode("GetNativeSystemInfo");
+		lamexp_check_compatibility_mode("GetNativeSystemInfo", executableName);
 		break;
 	case QSysInfo::WV_XP:
 		qDebug("Running on Windows XP.\n");
-		lamexp_check_compatibility_mode("GetLargePageMinimum");
+		lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
 		break;
 	case QSysInfo::WV_2003:
 		qDebug("Running on Windows Server 2003 or Windows XP x64-Edition.\n");
-		lamexp_check_compatibility_mode("GetLocaleInfoEx");
+		lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
 		break;
 	case QSysInfo::WV_VISTA:
 		qDebug("Running on Windows Vista or Windows Server 2008.\n");
-		lamexp_check_compatibility_mode("CreateRemoteThreadEx");
+		lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName);
 		break;
 	case QSysInfo::WV_WINDOWS7:
 		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
-		lamexp_check_compatibility_mode(NULL);
+		lamexp_check_compatibility_mode(NULL, executableName);
 		break;
 	default:
-		qFatal("Unsupported OS, only Windows 2000 or later is supported!");
+		qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
 		break;
 	}
 
@@ -644,7 +656,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	{
 		if(!supportedFormats.contains(g_lamexp_imageformats[i]))
 		{
-			qFatal("Qt initialization error: At least one image format plugin is missing! (%s)", g_lamexp_imageformats[i]);
+			qFatal("Qt initialization error: QImageIOHandler for '%s' missing!", g_lamexp_imageformats[i]);
 			return false;
 		}
 	}
@@ -652,9 +664,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Add default translations
 	g_lamexp_translation.files.insert(LAMEXP_DEFAULT_LANGID, "");
 	g_lamexp_translation.names.insert(LAMEXP_DEFAULT_LANGID, "English");
-
-	//Init language files
-	//lamexp_init_translations();
 
 	//Check for process elevation
 	if(!lamexp_check_elevation())
@@ -825,7 +834,88 @@ QString lamexp_rand_str(void)
 const QString &lamexp_temp_folder2(void)
 {
 	static const char *TEMP_STR = "Temp";
+	const QString WRITE_TEST_DATA = lamexp_rand_str();
+	const QString SUB_FOLDER = lamexp_rand_str();
 
+	//Already initialized?
+	if(!g_lamexp_temp_folder.isEmpty())
+	{
+		if(QDir(g_lamexp_temp_folder).exists())
+		{
+			return g_lamexp_temp_folder;
+		}
+		else
+		{
+			g_lamexp_temp_folder.clear();
+		}
+	}
+	
+	//Try the %TMP% or %TEMP% directory first
+	QDir temp = QDir::temp();
+	if(temp.exists())
+	{
+		temp.mkdir(SUB_FOLDER);
+		if(temp.cd(SUB_FOLDER) && temp.exists())
+		{
+			QFile testFile(QString("%1/~%2.tmp").arg(temp.canonicalPath(), lamexp_rand_str()));
+			if(testFile.open(QIODevice::ReadWrite))
+			{
+				if(testFile.write(WRITE_TEST_DATA.toLatin1().constData()) >= strlen(WRITE_TEST_DATA.toLatin1().constData()))
+				{
+					g_lamexp_temp_folder = temp.canonicalPath();
+				}
+				testFile.remove();
+			}
+		}
+		if(!g_lamexp_temp_folder.isEmpty())
+		{
+			return g_lamexp_temp_folder;
+		}
+	}
+
+	//Create TEMP folder in %LOCALAPPDATA%
+	QDir localAppData = QDir(lamexp_known_folder(lamexp_folder_localappdata));
+	if(!localAppData.path().isEmpty())
+	{
+		if(!localAppData.exists())
+		{
+			localAppData.mkpath(".");
+		}
+		if(localAppData.exists())
+		{
+			if(!localAppData.entryList(QDir::AllDirs).contains(TEMP_STR, Qt::CaseInsensitive))
+			{
+				localAppData.mkdir(TEMP_STR);
+			}
+			if(localAppData.cd(TEMP_STR) && localAppData.exists())
+			{
+				localAppData.mkdir(SUB_FOLDER);
+				if(localAppData.cd(SUB_FOLDER) && localAppData.exists())
+				{
+					QFile testFile(QString("%1/~%2.tmp").arg(localAppData.canonicalPath(), lamexp_rand_str()));
+					if(testFile.open(QIODevice::ReadWrite))
+					{
+						if(testFile.write(WRITE_TEST_DATA.toLatin1().constData()) >= strlen(WRITE_TEST_DATA.toLatin1().constData()))
+						{
+							g_lamexp_temp_folder = localAppData.canonicalPath();
+						}
+						testFile.remove();
+					}
+				}
+			}
+		}
+		if(!g_lamexp_temp_folder.isEmpty())
+		{
+			return g_lamexp_temp_folder;
+		}
+	}
+
+	//Failed to create TEMP folder!
+	qFatal("Temporary directory could not be initialized!\n\nFirst attempt:%s\n\nSecond attempt:\n%s", temp.canonicalPath().toUtf8().constData(), localAppData.canonicalPath().toUtf8().constData());
+	return g_lamexp_temp_folder;
+}
+
+/*
 	if(g_lamexp_temp_folder.isEmpty())
 	{
 		QDir temp = QDir::temp();
@@ -880,6 +970,7 @@ const QString &lamexp_temp_folder2(void)
 	
 	return g_lamexp_temp_folder;
 }
+*/
 
 /*
  * Clean folder

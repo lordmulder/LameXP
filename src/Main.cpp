@@ -168,7 +168,7 @@ int lamexp_main(int argc, char* argv[])
 int main(int argc, char* argv[])
 {
 #ifdef _DEBUG
-	int iResult;
+	int iResult = -1;
 	qInstallMsgHandler(lamexp_message_handler);
 	LAMEXP_MEMORY_CHECK(iResult = lamexp_main(argc, argv));
 	lamexp_finalization();
@@ -176,7 +176,7 @@ int main(int argc, char* argv[])
 #else
 	try
 	{
-		int iResult;
+		int iResult = -1;
 		qInstallMsgHandler(lamexp_message_handler);
 		iResult = lamexp_main(argc, argv);
 		lamexp_finalization();
