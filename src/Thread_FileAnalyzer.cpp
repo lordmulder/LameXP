@@ -74,7 +74,7 @@ void FileAnalyzer::run()
 	while(!m_inputFiles.isEmpty())
 	{
 		QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
-		qDebug("Analyzing: %s", currentFile.toUtf8().constData());
+		qDebug("@BASE64@%s", QString("Analyzing: %1").arg(currentFile).toUtf8().toBase64().constData());
 		emit fileSelected(QFileInfo(currentFile).fileName());
 		AudioFileModel file = analyzeFile(currentFile);
 		if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
@@ -82,7 +82,7 @@ void FileAnalyzer::run()
 			if(!PlaylistImporter::importPlaylist(m_inputFiles, currentFile))
 			{
 				m_filesRejected++;
-				qDebug("Skipped: %s", file.filePath().toUtf8().constData());
+				qDebug("@BASE64@%s", QString("Skipped: %1").arg(file.filePath()).toUtf8().toBase64().constData());
 			}
 			continue;
 		}

@@ -263,6 +263,14 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 {
 	static HANDLE hConsole = NULL;
 	QMutexLocker lock(&g_lamexp_message_mutex);
+	const char *buffer = NULL, *text = msg;
+	char temp[1024];
+
+	if(!strncmp(msg, "@BASE64@", 8))
+	{
+		buffer = _strdup(QByteArray::fromBase64(msg + 8).constData());
+		if(buffer) text = buffer;
+	}
 
 	if(!hConsole)
 	{
@@ -275,6 +283,8 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 
 	if(hConsole)
 	{
+		int len = sprintf_s(temp, 1024, "%s\n", text);
+		
 		CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
 		GetConsoleScreenBufferInfo(hConsole, &bufferInfo);
 		SetConsoleOutputCP(CP_UTF8);
@@ -286,18 +296,18 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 			fflush(stdout);
 			fflush(stderr);
 			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fwprintf(stderr, L"\nGURU MEDITATION !!!\n%S\n\n", msg);
-			MessageBoxW(NULL, (wchar_t*) QString::fromUtf8(msg).utf16(), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
+			WriteFile(hConsole, temp, len, NULL, NULL);
+			FlushFileBuffers(hConsole);
 			break;
 		case QtWarningMsg:
 			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fwprintf(stderr, L"%S\n", msg);
-			fflush(stderr);
+			WriteFile(hConsole, temp, len, NULL, NULL);
+			FlushFileBuffers(hConsole);
 			break;
 		default:
 			SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fwprintf(stderr, L"%S\n", msg);
-			fflush(stderr);
+			WriteFile(hConsole, temp, len, NULL, NULL);
+			FlushFileBuffers(hConsole);
 			break;
 		}
 	
@@ -305,32 +315,35 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 	}
 	else
 	{
-		char temp_buffer[1024];
-
 		switch(type)
 		{
 		case QtCriticalMsg:
 		case QtFatalMsg:
-			sprintf_s(temp_buffer, 1024, "[LameXP][C] %s", msg);
+			sprintf_s(temp, 1024, "[LameXP][C] %s", text);
 			break;
 		case QtWarningMsg:
-			sprintf_s(temp_buffer, 1024, "[LameXP][W] %s", msg);
+			sprintf_s(temp, 1024, "[LameXP][W] %s", text);
 			break;
 		default:
-			sprintf_s(temp_buffer, 1024, "[LameXP][I] %s", msg);
+			sprintf_s(temp, 1024, "[LameXP][I] %s", text);
 			break;
 		}
 
-		OutputDebugStringA(temp_buffer);
+		while(char *ptr = strchr(temp, '\n')) *ptr = '\t';
+		strcat_s(temp, 1024, "\n");
+		OutputDebugStringA(temp);
 	}
 
 	if(type == QtCriticalMsg || type == QtFatalMsg)
 	{
 		lock.unlock();
+		MessageBoxW(NULL, QWCHAR(QString::fromUtf8(text)), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
 		FatalAppExit(0, L"The application has encountered a critical error and will exit now!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
- }
+
+	if(buffer) free((void*) buffer);
+}
 
 /*
  * Initialize the console
