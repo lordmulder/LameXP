@@ -25,6 +25,7 @@
  * Resource ID's
  */
 #define IDI_ICON1                       106
+#define IDI_ICON2                       107
 #define IDR_WAVE_ABOUT                  666
 #define IDR_WAVE_SUCCESS                667
 #define IDR_WAVE_ERROR                  668

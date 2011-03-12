@@ -120,6 +120,7 @@ IDR_WAVE_WOOHOO         WAVE                    "res\\sounds\\woohoo.wav"
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "res\\MainIcon.ico"
+IDI_ICON2               ICON                    "res\\FolderIcon.ico"
 #endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 

@@ -262,9 +262,11 @@ const QDate &lamexp_version_date(void)
 void lamexp_message_handler(QtMsgType type, const char *msg)
 {
 	static HANDLE hConsole = NULL;
-	QMutexLocker lock(&g_lamexp_message_mutex);
+	static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
 	const char *buffer = NULL, *text = msg;
 	char temp[1024];
+	
+	QMutexLocker lock(&g_lamexp_message_mutex);
 
 	if(!strncmp(msg, "@BASE64@", 8))
 	{
@@ -296,6 +298,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 			fflush(stdout);
 			fflush(stderr);
 			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+			WriteFile(hConsole, GURU_MEDITATION, strlen(GURU_MEDITATION), NULL, NULL);
 			WriteFile(hConsole, temp, len, NULL, NULL);
 			FlushFileBuffers(hConsole);
 			break;
