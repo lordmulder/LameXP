@@ -228,7 +228,7 @@ void InitializationThread::initTranslations(void)
 		
 		if(lamexp_translation_register(langId, qmFile, langName, systemId))
 		{
-			qDebug("@BASE64@%s", QString("Registering translation: %1 = %2 (%3)").arg(qmFile, langName, QString::number(systemId)).toUtf8().toBase64().constData());
+			qDebug64("Registering translation: %1 = %2 (%3)", qmFile, langName, QString::number(systemId));
 		}
 		else
 		{

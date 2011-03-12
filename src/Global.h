@@ -123,6 +123,11 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define	LAMEXP_DYNCAST(OUT,CLASS,SRC) try { OUT = dynamic_cast<CLASS>(SRC); } catch(std::bad_cast) { OUT = NULL; }
 #define LAMEXP_BOOL(X) (X ? "1" : "0")
 
+//Output Qt debug message (Unicode-safe versions)
+#define qDebug64(FORMAT, ...) qDebug("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
+#define qWarning64(FORMAT, ...) qWarning("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
+#define qFatal64(FORMAT, ...) qFatal("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
+
 //Check for debug build
 #if defined(_DEBUG) || defined(QT_DEBUG) || !defined(NDEBUG) || !defined(QT_NO_DEBUG)
 #define LAMEXP_DEBUG 1

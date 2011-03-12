@@ -207,7 +207,7 @@ bool lamexp_version_demo(void)
 
 QDate lamexp_version_expires(void)
 {
-	return lamexp_version_date().addDays(30);
+	return lamexp_version_date().addDays(LAMEXP_DEBUG ? 2 : 30);
 }
 
 /*
@@ -354,7 +354,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 void lamexp_init_console(int argc, char* argv[])
 {
 	bool enableConsole = lamexp_version_demo();
-	
+
 	for(int i = 0; i < argc; i++)
 	{
 		if(!_stricmp(argv[i], "--console"))
