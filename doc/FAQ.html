@@ -254,7 +254,7 @@ RIFF file format specification, any reading application must ignore/skip all 'JU
 Evidently most reading applications do so and thus will correctly open the Wave file. Unfortunately it was<br>
 brought to our attention that there are a few broken(!) applications, which reject Wave/RIFF files with an<br>
 additional 'JUNK' chunk in front of the 'fmt' chunk. It seems that these applications make false assumptions<br>
-and expect the 'fmt' chunk to be located at a fixed position, rather than actually parsing the RIFF structure.<br>
+and expect the 'fmt' chunk to be located at a fixed position, rather than parsing the RIFF structure.<br>
 <br>
 While it is evident that applications, which reject the Wave/RIFF file because of the extra 'JUNK' chunk, are<br>
 broken with respect to the RIFF specification and should be fixed by the respective author, there is an easy<br>
@@ -290,8 +290,8 @@ thus a single encoder instance may create several threads - LameXP has no contro
 
 <a name="e7c9ae2b"><b>Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</b></a><br>
 <br>
-LameXP was desigend to run on all supported platforms natively (except for Linux/Wine). If you see this error<br>
-message, that's probably because your system is configured to run LameXP in 'compatibbility mode', i.e. your<br>
+LameXP was designed to run on all supported platforms natively (except for Linux/Wine). If you see this error<br>
+message, that's probably because your system is configured to run LameXP in 'compatibility mode', i.e. your<br>
 system will pretend an older OS version than is actually running. In Windows Explorer you can disable(!) the<br>
 compatibility mode by right-clicking on the 'LameXP.exe' file, choosing 'Properties' from the context menu,<br>
 switching to the 'Compatibility' tab and un-checking the 'Run this program in compatibility mode' option.<br><br>
@@ -301,7 +301,7 @@ switching to the 'Compatibility' tab and un-checking the 'Run this program in co
 <a name="328b0a18"><b>Why do I get the error 'Executable requires Windows 2000 or later' on startup?</b></a><br>
 <br>
 You are trying to run LameXP on a platform that is NOT supported, such as Windows 95, Windows 98, Windows<br>
-Millenium Edition or Windows NT 4.0. There is nothing you can do about that, except for updating to a less<br>
+Millennium Edition or Windows NT 4.0. There is nothing you can do about that, except for updating to a less<br>
 antiquated OS. Running an outdated/unsupported OS is a severe security risk anyway!<br>
 <br>
 Note: This error can also occur, if your system has been configured to run LameXP in <a href="#e7c9ae2b">compatibility mode</a>.<br><br>
@@ -310,8 +310,11 @@ Note: This error can also occur, if your system has been configured to run LameX
 
 <a name="491aaad9"><b>Why do I get the error 'A device attached to the system is not functioning' on startup?</b></a><br>
 <br>
-You are trying to run LameXP on a platform that is NOT supported, such as Windows 95, Windows 98, Windows<br>
-Millenium Edition or Windows NT 4.0. There is nothing you can do about that, except for updating to a less<br>
+This error message from the Windows operating system is somewhat misleading. It often appears together with<br>
+a second error message and it means that Windows was unable to load/execute the program file. There are<br>
+various reasons why this error might occur, but usually it indicates that you are trying to run LameXP or the<br>
+LameXP setup/update program on a platform that is NOT supported, such as Windows 95, Windows 98, Windows<br>
+Millennium Edition or Windows NT 4.0. There is nothing you can do about that, except for updating to a less<br>
 antiquated OS. Running an outdated/unsupported OS is a severe security risk anyway!<br><br>
 
 <br><br>
