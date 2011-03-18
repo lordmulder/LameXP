@@ -162,7 +162,7 @@ int lamexp_main(int argc, char* argv[])
 	//Shotdown computer
 	if(bShutdown)
 	{
-		if(!lamexp_shutdown_computer("LameXP planned computer shutdown!", 12))
+		if(!lamexp_shutdown_computer(QApplication::applicationFilePath(), 12))
 		{
 			QMessageBox messageBox(QMessageBox::Critical, "LameXP", "Sorry, LameXP was unable to shutdown your computer!", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
 		}

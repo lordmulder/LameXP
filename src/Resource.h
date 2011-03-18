@@ -33,6 +33,8 @@
 #define IDR_WAVE_WHAMMY                 670
 #define IDR_WAVE_WOOHOO                 671
 #define IDR_WAVE_SHUTDOWN               672
+#define IDR_WAVE_BEEP                   673
+#define IDR_WAVE_BEEP_LONG              674
 
 /*
  * Next default values for new objects

@@ -66,7 +66,7 @@ private:
 	void startNextJob(void);
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
 	void writePlayList(void);
-	void shutdownComputer(void);
+	bool shutdownComputer(void);
 	
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;

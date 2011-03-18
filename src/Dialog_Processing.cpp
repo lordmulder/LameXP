@@ -402,8 +402,11 @@ void ProcessingDialog::doneEncoding(void)
 
 	if(!m_userAborted && checkBox_shutdownComputer->isChecked())
 	{
-		qWarning("Initiating shutdown sequence!");
-		shutdownComputer();
+		if(shutdownComputer())
+		{
+			m_shutdownFlag = true;
+			accept();
+		}
 	}
 }
 
@@ -711,11 +714,13 @@ void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason rea
 	}
 }
 
-void ProcessingDialog::shutdownComputer(void)
+bool ProcessingDialog::shutdownComputer(void)
 {
 	const int iTimeout = 30;
 	const Qt::WindowFlags flags = Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint;
 	const QString text = QString("%1%2%1").arg(QString().fill(' ', 18), tr("Warning: Computer will shutdown in %1 seconds..."));
+	
+	qWarning("Initiating shutdown sequence!");
 	
 	QProgressDialog progressDialog(text.arg(iTimeout), tr("Cancel Shutdown"), 0, iTimeout + 1, this, flags);
 	progressDialog.setModal(true);
@@ -728,7 +733,9 @@ void ProcessingDialog::shutdownComputer(void)
 
 	if(m_settings->soundsEnabled())
 	{
+		QApplication::setOverrideCursor(Qt::WaitCursor);
 		PlaySound(MAKEINTRESOURCE(IDR_WAVE_SHUTDOWN), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+		QApplication::restoreOverrideCursor();
 	}
 
 	QTimer timer;
@@ -742,19 +749,18 @@ void ProcessingDialog::shutdownComputer(void)
 	for(int i = 1; i <= iTimeout; i++)
 	{
 		eventLoop.exec();
-		if(progressDialog.wasCanceled()) break;
+		if(progressDialog.wasCanceled())
+		{
+			progressDialog.close();
+			return false;
+		}
 		progressDialog.setValue(i+1);
 		progressDialog.setLabelText(text.arg(iTimeout-i));
 		if(iTimeout-i == 3) progressDialog.setCancelButtonText(QString());
 		QApplication::processEvents();
-		Beep(4000, (i < iTimeout) ? 100 : 1000);
+		PlaySound(MAKEINTRESOURCE((i < iTimeout) ? IDR_WAVE_BEEP : IDR_WAVE_BEEP_LONG), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 	}
 	
-	if(!progressDialog.wasCanceled())
-	{
-		m_shutdownFlag = true;
-		accept();
-	}
-
 	progressDialog.close();
+	return true;
 }
