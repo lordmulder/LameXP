@@ -41,6 +41,8 @@ class ProcessingDialog : public QDialog, private Ui::ProcessingDialog
 public:
 	ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent = 0);
 	~ProcessingDialog(void);
+	
+	bool getShutdownFlag(void) { return m_shutdownFlag; }
 
 private slots:
 	void initEncoding(void);
@@ -64,6 +66,7 @@ private:
 	void startNextJob(void);
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
 	void writePlayList(void);
+	void shutdownComputer(void);
 	
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;
@@ -80,4 +83,5 @@ private:
 	QList<QUuid> m_failedJobs;
 	bool m_userAborted;
 	QSystemTrayIcon *m_systemTray;
+	bool m_shutdownFlag;
 };

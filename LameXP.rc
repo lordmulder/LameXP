@@ -111,6 +111,7 @@ IDR_WAVE_ERROR          WAVE                    "res\\sounds\\error.wav"
 IDR_WAVE_ABORTED        WAVE                    "res\\sounds\\aborted.wav"
 IDR_WAVE_WHAMMY         WAVE                    "res\\sounds\\whammy.wav"
 IDR_WAVE_WOOHOO         WAVE                    "res\\sounds\\woohoo.wav"
+IDR_WAVE_SHUTDOWN       WAVE                    "res\\sounds\\shutdown.wav"
 
 /////////////////////////////////////////////////////////////////////////////
 //

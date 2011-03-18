@@ -94,6 +94,7 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
 lamexp_cpu_t lamexp_detect_cpu_features(void);
 bool lamexp_portable_mode(void);
+bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true);
 
 //Translation support
 QStringList lamexp_query_translations(void);

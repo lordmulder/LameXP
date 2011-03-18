@@ -32,6 +32,7 @@
 #define IDR_WAVE_ABORTED                669
 #define IDR_WAVE_WHAMMY                 670
 #define IDR_WAVE_WOOHOO                 671
+#define IDR_WAVE_SHUTDOWN               672
 
 /*
  * Next default values for new objects

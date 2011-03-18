@@ -302,6 +302,23 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBox_shutdownComputer">
+         <property name="text">
+          <string>Shutdown the computer as soon as all files have been converted</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::HLine</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="layout_horizontal">
          <item>
           <widget class="QLabel" name="label_versionInfo">
@@ -430,6 +447,10 @@
   </layout>
  </widget>
  <resources>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>

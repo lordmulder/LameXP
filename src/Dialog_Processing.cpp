@@ -53,6 +53,7 @@
 #include <QMenu>
 #include <QSystemTrayIcon>
 #include <QProcess>
+#include <QProgressDialog>
 
 #include <Windows.h>
 
@@ -90,7 +91,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	QDialog(parent),
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
-	m_metaInfo(metaInfo)
+	m_metaInfo(metaInfo),
+	m_shutdownFlag(false)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -269,6 +271,8 @@ void ProcessingDialog::initEncoding(void)
 	button_closeDialog->setEnabled(false);
 	button_AbortProcess->setEnabled(true);
 	progressBar->setRange(0, m_pendingJobs.count());
+	checkBox_shutdownComputer->setEnabled(true);
+	checkBox_shutdownComputer->setChecked(false);
 
 	WinSevenTaskbar::initTaskbar();
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
@@ -387,6 +391,7 @@ void ProcessingDialog::doneEncoding(void)
 	setCloseButtonEnabled(true);
 	button_closeDialog->setEnabled(true);
 	button_AbortProcess->setEnabled(false);
+	checkBox_shutdownComputer->setEnabled(false);
 
 	view_log->scrollToBottom();
 	m_progressIndicator->stop();
@@ -394,6 +399,12 @@ void ProcessingDialog::doneEncoding(void)
 	WinSevenTaskbar::setTaskbarProgress(this, progressBar->value(), progressBar->maximum());
 
 	QApplication::restoreOverrideCursor();
+
+	if(!m_userAborted && checkBox_shutdownComputer->isChecked())
+	{
+		qWarning("Initiating shutdown sequence!");
+		shutdownComputer();
+	}
 }
 
 void ProcessingDialog::processFinished(const QUuid &jobId, const QString &outFileName, bool success)
@@ -698,4 +709,52 @@ void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason rea
 	{
 		SetForegroundWindow(this->winId());
 	}
+}
+
+void ProcessingDialog::shutdownComputer(void)
+{
+	const int iTimeout = 30;
+	const Qt::WindowFlags flags = Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint;
+	const QString text = QString("%1%2%1").arg(QString().fill(' ', 18), tr("Warning: Computer will shutdown in %1 seconds..."));
+	
+	QProgressDialog progressDialog(text.arg(iTimeout), tr("Cancel Shutdown"), 0, iTimeout + 1, this, flags);
+	progressDialog.setModal(true);
+	progressDialog.setAutoClose(false);
+	progressDialog.setAutoReset(false);
+	progressDialog.setWindowIcon(QIcon(":/icons/lightning.png"));
+	progressDialog.show();
+	
+	QApplication::processEvents();
+
+	if(m_settings->soundsEnabled())
+	{
+		PlaySound(MAKEINTRESOURCE(IDR_WAVE_SHUTDOWN), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+	}
+
+	QTimer timer;
+	timer.setInterval(1000);
+	timer.start();
+
+	QEventLoop eventLoop(this);
+	connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
+	connect(&progressDialog, SIGNAL(canceled()), &eventLoop, SLOT(quit()));
+
+	for(int i = 1; i <= iTimeout; i++)
+	{
+		eventLoop.exec();
+		if(progressDialog.wasCanceled()) break;
+		progressDialog.setValue(i+1);
+		progressDialog.setLabelText(text.arg(iTimeout-i));
+		if(iTimeout-i == 3) progressDialog.setCancelButtonText(QString());
+		QApplication::processEvents();
+		Beep(4000, (i < iTimeout) ? 100 : 1000);
+	}
+	
+	if(!progressDialog.wasCanceled())
+	{
+		m_shutdownFlag = true;
+		accept();
+	}
+
+	progressDialog.close();
 }

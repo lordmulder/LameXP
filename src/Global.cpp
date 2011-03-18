@@ -690,6 +690,18 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 
+	//Update console icon, if a console is attached
+	if(g_lamexp_console_attached)
+	{
+		typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
+		QLibrary kernel32("kernel32.dll");
+		SetConsoleIconFun SetConsoleIconPtr = (SetConsoleIconFun) kernel32.resolve("SetConsoleIcon");
+		if(SetConsoleIconPtr)
+		{
+			SetConsoleIconPtr(QIcon(":/icons/sound.png").pixmap(16, 16).toWinHICON());
+		}
+	}
+
 	//Done
 	qt_initialized = true;
 	return true;
@@ -1304,6 +1316,30 @@ __int64 lamexp_free_diskspace(const QString &path)
 	{
 		return 0;
 	}
+}
+
+bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout, const bool forceShutdown)
+{
+	HANDLE hToken = NULL;
+
+	if(OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
+	{
+		TOKEN_PRIVILEGES privileges;
+		memset(&privileges, 0, sizeof(TOKEN_PRIVILEGES));
+		privileges.PrivilegeCount = 1;
+		privileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+		
+		if(LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME, &privileges.Privileges[0].Luid))
+		{
+			if(AdjustTokenPrivileges(hToken, FALSE, &privileges, NULL, NULL, NULL))
+			{
+				const DWORD reason = SHTDN_REASON_MAJOR_APPLICATION | SHTDN_REASON_FLAG_PLANNED;
+				return InitiateSystemShutdownEx(NULL, const_cast<wchar_t*>(QWCHAR(message)), timeout, forceShutdown, FALSE, reason);
+			}
+		}
+	}
+	
+	return false;
 }
 
 /*

@@ -1545,6 +1545,18 @@
         <source>Browse Output File Location</source>
         <translation>Ausgabedatei suchen</translation>
     </message>
+    <message>
+        <source>Shutdown the computer as soon as all files have been converted</source>
+        <translation>Computer herunterfahren sobald alle Dateien fertiggestellt sind</translation>
+    </message>
+    <message>
+        <source>Warning: Computer will shutdown in %1 seconds...</source>
+        <translation>Achtung: Computer wird in %1 Sekunden heruntergefahren...</translation>
+    </message>
+    <message>
+        <source>Cancel Shutdown</source>
+        <translation>Herunterfahren abbrechen</translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>
