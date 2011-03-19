@@ -30,7 +30,7 @@
 
 TTADecoder::TTADecoder(void)
 :
-	m_binary(lamexp_lookup_tool("ttaenc.exe"))
+	m_binary(lamexp_lookup_tool("tta.exe"))
 {
 	if(m_binary.isEmpty())
 	{
@@ -48,8 +48,8 @@ bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	QStringList args;
 
 	args << "-d";
-	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
+	args << QDir::toNativeSeparators(outputFile);
 
 	if(!startProcess(process, m_binary, args))
 	{
@@ -59,8 +59,7 @@ bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	//The TTA Decoder doesn't actually send any status updates :-[
-	emit statusUpdated(20 + (QUuid::createUuid().data1 % 80));
+	QRegExp regExp("Progress: (\\d+)%");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -84,7 +83,13 @@ bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 		{
 			QByteArray line = process.readLine();
 			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(!text.isEmpty())
+			if(regExp.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				int progress = regExp.cap(1).toInt(&ok);
+				if(ok) emit statusUpdated(progress);
+			}
+			else if(!text.isEmpty())
 			{
 				emit messageLogged(text);
 			}

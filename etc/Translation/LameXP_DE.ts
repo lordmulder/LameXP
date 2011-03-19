@@ -1210,6 +1210,18 @@
         <source>We recommend using %1 for that purpose.</source>
         <translation>Es wird empfohlen %1 für diesen Zweck zu verwenden.</translation>
     </message>
+    <message>
+        <source>Frequently Asked Questions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changelog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translator&apos;s Guide</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
