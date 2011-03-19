@@ -25,6 +25,7 @@
 <li><a href="#9b0a5c32">Why does application 'xyz' not open the Wave files created by LameXP?</a>
 <li><a href="#89cbd3d0">Why does LameXP run only 'n' parallel instances/threads on my computer?</a>
 <li><a href="#12d077d5">How can I force LameXP to create ID3 version 2 (ID3v2) tags?</a>
+<li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
 <li><a href="#e7c9ae2b">Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</a>
 <li><a href="#328b0a18">Why do I get the error 'Executable requires Windows 2000 or later' on startup?</a>
 <li><a href="#491aaad9">Why do I get the error 'A device attached to the system is not functioning' on startup?</a>
@@ -298,8 +299,24 @@ is advisable, because devices that support ID3v2 tags should also be able to rea
 doesn't apply the other way around! Moreover embedding an ID3v1 and an ID3v2 tag at the same time, although<br>
 the information would have fit into a single ID3v1 tag, means an unnecessary redundancy!<br>
 <br>
-If however you need to enforce the creation of an ID3v2 tag for some reason, you can use the "--add-id3v2"<br>
+If, however, you need to enforce the creation of an ID3v2 tag for some reason, you can use the "--add-id3v2"<br>
 parameter for that purpose. Simply add the parameter to the "Custom Encoder Parameters" for LAME.<br><br>
+
+<br><br>
+
+<a name="4213adbc"><b>Can LameXP be used to convert/extract tracks from an Audio CD?</b></a><br>
+<br>
+LameXP can be used to convert audio files that have been extracted from an Audio CD, but it can NOT extract<br>
+or read the audio tracks from the Audio CD directly (yet). Consequently you will have to extract ("rip") the<br>
+audio tracks first, before you can convert them with LameXP. We recommend using the <a href="http://www.exactaudiocopy.de/" target="_blank">Exact Audio Copy</a> software<br>
+for that purpose. When ripping tracks from an Audio CD you should always save the tracks as uncompressed Wave<br>
+files or as lossless FLAC files! This will avoid a quality loss during the extraction/ripping process.<br>
+<br>
+Warning: The Windows operating system will show CDA files (such as "Track01.cda") on an Audio CD. These are<br>
+dummy/fake files! Actually an Audio CD does NOT contain a file system and thus there are NO files. There only<br>
+are audio tracks on an Audio CD. These audio tracks can be extracted as files (e.g. Wave Audio files) using a<br>
+ripping software and then the extracted files can be converted. At the same time any attempt to copy/convert<br>
+the '.cda' files directly is destined to fail (as the '.cda' files do NOT actually contain any audio data).<br><br>
 
 <br><br>
 
