@@ -1755,6 +1755,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\tmp\RCC_Documents.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\tmp\RCC_Flags.cpp"
 				>
 			</File>
@@ -1778,6 +1782,20 @@
 		<Filter
 			Name="Resources"
 			>
+			<File
+				RelativePath=".\res\Documents.qrc"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
 			<File
 				RelativePath=".\res\Flags.qrc"
 				>

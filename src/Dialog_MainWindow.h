@@ -70,6 +70,7 @@ private slots:
 	void gotoMusicFolderButtonClicked(void);
 	void checkUpdatesActionActivated(void);
 	void visitHomepageActionActivated(void);
+	void documentActionActivated(void);
 	void openFolderActionActivated(void);
 	void notifyOtherInstance(void);
 	void addFileDelayed(const QString &filePath);

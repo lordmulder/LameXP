@@ -2728,6 +2728,10 @@
     <addaction name="actionCheckUpdates"/>
     <addaction name="actionVisitHomepage"/>
     <addaction name="separator"/>
+    <addaction name="actionDocumentFAQ"/>
+    <addaction name="actionDocumentChangelog"/>
+    <addaction name="actionDocumentTranslate"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -3031,6 +3035,33 @@
     <string>Disable Shell Integration</string>
    </property>
   </action>
+  <action name="actionDocumentFAQ">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/report.png</normaloff>:/icons/report.png</iconset>
+   </property>
+   <property name="text">
+    <string>Frequently Asked Questions</string>
+   </property>
+  </action>
+  <action name="actionDocumentChangelog">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/report.png</normaloff>:/icons/report.png</iconset>
+   </property>
+   <property name="text">
+    <string>Changelog</string>
+   </property>
+  </action>
+  <action name="actionDocumentTranslate">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/report.png</normaloff>:/icons/report.png</iconset>
+   </property>
+   <property name="text">
+    <string>Translator's Guide</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -3052,6 +3083,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
