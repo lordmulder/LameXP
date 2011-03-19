@@ -1196,6 +1196,22 @@
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>CDA Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We recommend using %1 for that purpose.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

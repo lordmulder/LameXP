@@ -46,6 +46,7 @@ public:
 	unsigned int filesAccepted(void);
 	unsigned int filesRejected(void);
 	unsigned int filesDenied(void);
+	unsigned int filesDummyCDDA(void);
 
 signals:
 	void fileSelected(const QString &fileName);
@@ -64,6 +65,7 @@ private:
 	void updateSection(const QString &section);
 	unsigned int parseYear(const QString &str);
 	unsigned int parseDuration(const QString &str);
+	bool checkFile_CDDA(QFile &file);
 
 	QStringList m_inputFiles;
 	const QString m_mediaInfoBin_x86;
@@ -72,5 +74,6 @@ private:
 	unsigned int m_filesAccepted;
 	unsigned int m_filesRejected;
 	unsigned int m_filesDenied;
+	unsigned int m_filesDummyCDDA;
 	bool m_bSuccess;
 };

@@ -55,6 +55,7 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 	m_filesAccepted = 0;
 	m_filesRejected = 0;
 	m_filesDenied = 0;
+	m_filesDummyCDDA = 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -68,6 +69,7 @@ void FileAnalyzer::run()
 	m_filesAccepted = 0;
 	m_filesRejected = 0;
 	m_filesDenied = 0;
+	m_filesDummyCDDA = 0;
 
 	m_inputFiles.sort();
 
@@ -113,10 +115,15 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 		m_filesDenied++;
 		return audioFile;
 	}
-	else
+	
+	if(checkFile_CDDA(readTest))
 	{
-		readTest.close();
+		qWarning("Dummy CDDA file detected, skipping!");
+		m_filesDummyCDDA ++;
+		return audioFile;
 	}
+	
+	readTest.close();
 
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
@@ -359,6 +366,18 @@ unsigned int FileAnalyzer::parseDuration(const QString &str)
 	return 0;
 }
 
+bool FileAnalyzer::checkFile_CDDA(QFile &file)
+{
+	file.reset();
+	QByteArray data = file.read(128);
+	
+	int i = data.indexOf("RIFF");
+	int j = data.indexOf("CDDA");
+	int k = data.indexOf("fmt ");
+
+	return ((i >= 0) && (j >= 0) && (k >= 0) && (k > j) && (j > i));
+}
+
 ////////////////////////////////////////////////////////////
 // Public Functions
 ////////////////////////////////////////////////////////////
@@ -370,12 +389,17 @@ unsigned int FileAnalyzer::filesAccepted(void)
 
 unsigned int FileAnalyzer::filesRejected(void)
 {
-	return m_filesRejected - m_filesDenied;
+	return max(m_filesRejected - (m_filesDenied + m_filesDummyCDDA), 0);
 }
 
 unsigned int FileAnalyzer::filesDenied(void)
 {
 	return m_filesDenied;
+}
+
+unsigned int FileAnalyzer::filesDummyCDDA(void)
+{
+	return m_filesDummyCDDA;
 }
 
 ////////////////////////////////////////////////////////////
