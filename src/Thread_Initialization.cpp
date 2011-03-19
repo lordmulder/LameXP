@@ -64,7 +64,7 @@ g_lamexp_tools[] =
 	{"36f8d93ef3df6a420a73a9b5cf02dafdaf4321f0", "oggenc2_sse2.exe", 287602},
 	{"87ad1af73e9b9db3da3db645e5c2253cb0c2a2ea", "oggenc2_x64.exe", 287602},
 	{"0d9035bb62bdf46a2785261f8be5a4a0972abd15", "shorten.exe", 361},
-	{"2d08c3586f9cf99f2e4c89ac54eeb595f63aef61", "sox.exe", 1431},
+	{"50ead3b852cbfc067a402e6c2d0d0d8879663dec", "sox.exe", 1432},
 	{"8671e16497a2d217d3707d4aa418678d02b16bcc", "speexdec.exe", 12},
 	{"093bfdec22872ca99e40183937c88785468be989", "tta.exe", 21},
 	{"8c842eef65248b46fa6cb9a9e5714f575672d999", "valdec.exe", 31},
