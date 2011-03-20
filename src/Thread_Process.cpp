@@ -36,6 +36,7 @@
 #include <QDir>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QDate>
 
 #include <limits.h>
 #include <time.h>
@@ -105,6 +106,8 @@ void ProcessThread::processFile()
 		
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
 	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
+	handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData()));
+	handleMessage("\n-------------------------------\n");
 
 	//Generate output file name
 	QString outFileName = generateOutFileName();

@@ -23,6 +23,10 @@
 
 #include <QObject>
 #include <QString>
+#include <QMap>
+#include <QMutex>
+
+class QFile;
 
 class AudioFileModel : public QObject
 {
@@ -44,6 +48,7 @@ public:
 	const QString &fileAlbum(void) const;
 	const QString &fileGenre(void) const;
 	const QString &fileComment(void) const;
+	const QString &fileCover(void) const;
 	unsigned int fileYear(void) const;
 	unsigned int filePosition(void) const;
 	unsigned int fileDuration(void) const;
@@ -72,6 +77,7 @@ public:
 	void setFileAlbum(const QString &album);
 	void setFileGenre(const QString &genre);
 	void setFileComment(const QString &comment);
+	void setFileCover(const QString &coverFile);
 	void setFileYear(unsigned int year);
 	void setFilePosition(unsigned int position);
 	void setFileDuration(unsigned int duration);
@@ -94,6 +100,7 @@ private:
 	QString m_fileAlbum;
 	QString m_fileGenre;
 	QString m_fileComment;
+	QString m_fileCover;
 	unsigned int m_fileYear;
 	unsigned int m_filePosition;
 	unsigned int m_fileDuration;
@@ -106,6 +113,10 @@ private:
 	unsigned int m_formatAudioSamplerate;
 	unsigned int m_formatAudioChannels;
 	unsigned int m_formatAudioBitdepth;
+
+	static QMutex m_mutexCovers;
+	static QMap<QString, unsigned int> m_counterCovers;
+	static QMap<QString, QFile*> m_locksCovers;
 
 	void resetAll(void);
 };

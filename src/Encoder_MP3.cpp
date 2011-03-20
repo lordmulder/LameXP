@@ -115,6 +115,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	if(!metaInfo.fileComment().isEmpty()) args << (isUnicode(metaInfo.fileComment()) ? "--uComment" : "--lComment") << metaInfo.fileComment();
 	if(metaInfo.fileYear()) args << "--ty" << QString::number(metaInfo.fileYear());
 	if(metaInfo.filePosition()) args << "--tn" << QString::number(metaInfo.filePosition());
+	if(!metaInfo.fileCover().isEmpty()) args << "--ti" << QDir::toNativeSeparators(metaInfo.fileCover());
 	
 	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 

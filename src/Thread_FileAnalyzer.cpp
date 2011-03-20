@@ -107,6 +107,7 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 	
 	AudioFileModel audioFile(filePath);
 	m_currentSection = sectionOther;
+	m_currentCover = coverNone;
 
 	QFile readTest(filePath);
 	if(!readTest.open(QIODevice::ReadOnly))
@@ -198,6 +199,11 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 		audioFile.setFileName(baseName);
 	}
 	
+	if(m_currentCover != coverNone)
+	{
+		retrieveCover(audioFile, filePath, mediaInfoBin);
+	}
+
 	return audioFile;
 }
 
@@ -266,6 +272,22 @@ void FileAnalyzer::updateInfo(AudioFileModel &audioFile, const QString &key, con
 		else if(!key.compare("Format Profile", Qt::CaseInsensitive))
 		{
 			if(audioFile.formatContainerProfile().isEmpty()) audioFile.setFormatContainerProfile(value);
+		}
+		else if(!key.compare("Cover MIME", Qt::CaseInsensitive))
+		{
+			QString temp = value.split(" ", QString::SkipEmptyParts, Qt::CaseInsensitive).first();
+			if(!temp.compare("image/jpeg", Qt::CaseInsensitive))
+			{
+				m_currentCover = coverJpeg;
+			}
+			else if(!temp.compare("image/png", Qt::CaseInsensitive))
+			{
+				m_currentCover = coverPng;
+			}
+			else if(!temp.compare("image/gif", Qt::CaseInsensitive))
+			{
+				m_currentCover = coverGif;
+			}
 		}
 		break;
 
@@ -376,6 +398,86 @@ bool FileAnalyzer::checkFile_CDDA(QFile &file)
 	int k = data.indexOf("fmt ");
 
 	return ((i >= 0) && (j >= 0) && (k >= 0) && (k > j) && (j > i));
+}
+
+void FileAnalyzer::retrieveCover(AudioFileModel &audioFile, const QString &filePath, const QString &mediaInfoBin)
+{
+	qDebug64("Retrieving cover from: %1", filePath);
+	QString extension;
+
+	switch(m_currentCover)
+	{
+	case coverPng:
+		extension = QString::fromLatin1("png");
+		break;
+	case coverGif:
+		extension = QString::fromLatin1("gif");
+		break;
+	default:
+		extension = QString::fromLatin1("jpg");
+		break;
+	}
+	
+	QProcess process;
+	process.setProcessChannelMode(QProcess::MergedChannels);
+	process.setReadChannel(QProcess::StandardOutput);
+	process.start(mediaInfoBin, QStringList() << "-f" << QDir::toNativeSeparators(filePath));
+	
+	if(!process.waitForStarted())
+	{
+		qWarning("MediaInfo process failed to create!");
+		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
+		process.kill();
+		process.waitForFinished(-1);
+		return;
+	}
+
+	while(process.state() != QProcess::NotRunning)
+	{
+		if(!process.waitForReadyRead())
+		{
+			if(process.state() == QProcess::Running)
+			{
+				qWarning("MediaInfo time out. Killing process and skipping file!");
+				process.kill();
+				process.waitForFinished(-1);
+				return;
+			}
+		}
+
+		while(process.canReadLine())
+		{
+			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
+			if(!line.isEmpty())
+			{
+				int index = line.indexOf(':');
+				if(index > 0)
+				{
+					QString key = line.left(index-1).trimmed();
+					QString val = line.mid(index+1).trimmed();
+					if(!key.isEmpty() && !val.isEmpty())
+					{
+						if(!key.compare("Cover_Data", Qt::CaseInsensitive))
+						{
+							if(val.indexOf(" ") > 0)
+							{
+								val = val.split(" ", QString::SkipEmptyParts, Qt::CaseInsensitive).first();
+							}
+							QByteArray coverData = QByteArray::fromBase64(val.toLatin1());
+							QFile coverFile(QString("%1/%2.%3").arg(lamexp_temp_folder2(), lamexp_rand_str(), extension));
+							if(coverFile.open(QIODevice::WriteOnly))
+							{
+								coverFile.write(coverData);
+								coverFile.close();
+								audioFile.setFileCover(coverFile.fileName());
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////

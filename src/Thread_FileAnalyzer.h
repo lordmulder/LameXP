@@ -59,6 +59,13 @@ private:
 		sectionAudio,
 		sectionOther
 	};
+	enum cover_t
+	{
+		coverNone,
+		coverJpeg,
+		coverPng,
+		coverGif
+	};
 
 	const AudioFileModel analyzeFile(const QString &filePath);
 	void updateInfo(AudioFileModel &audioFile, const QString &key, const QString &value);
@@ -66,11 +73,13 @@ private:
 	unsigned int parseYear(const QString &str);
 	unsigned int parseDuration(const QString &str);
 	bool checkFile_CDDA(QFile &file);
+	void retrieveCover(AudioFileModel &audioFile, const QString &filePath, const QString &mediaInfoBin);
 
 	QStringList m_inputFiles;
 	const QString m_mediaInfoBin_x86;
 	const QString m_mediaInfoBin_x64;
 	section_t m_currentSection;
+	cover_t m_currentCover;
 	unsigned int m_filesAccepted;
 	unsigned int m_filesRejected;
 	unsigned int m_filesDenied;
