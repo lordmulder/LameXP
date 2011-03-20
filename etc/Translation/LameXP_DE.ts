@@ -1212,15 +1212,19 @@
     </message>
     <message>
         <source>Frequently Asked Questions</source>
-        <translation type="unfinished"></translation>
+        <translation>Häufig gestellte Fragen</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>Versionshistorie</translation>
     </message>
     <message>
         <source>Translator&apos;s Guide</source>
-        <translation type="unfinished"></translation>
+        <translation>Leitfaden für Übersetzer</translation>
+    </message>
+    <message>
+        <source>Help &amp;&amp; Support</source>
+        <translation>Hilfe und Support</translation>
     </message>
 </context>
 <context>

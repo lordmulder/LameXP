@@ -325,11 +325,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
 		
 	//Activate help menu actions
+	actionVisitHomepage->setData(QString::fromLatin1(lamexp_website_url()));
+	actionVisitSupport->setData(QString::fromLatin1(lamexp_support_url()));
 	actionDocumentFAQ->setData(QString("%1/FAQ.html").arg(QApplication::applicationDirPath()));
 	actionDocumentChangelog->setData(QString("%1/Changelog.html").arg(QApplication::applicationDirPath()));
 	actionDocumentTranslate->setData(QString("%1/Translate.html").arg(QApplication::applicationDirPath()));
 	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
 	connect(actionVisitHomepage, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(actionVisitSupport, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
 	connect(actionDocumentFAQ, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(actionDocumentChangelog, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(actionDocumentTranslate, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
@@ -1515,7 +1518,13 @@ void MainWindow::clearMetaButtonClicked(void)
  */
 void MainWindow::visitHomepageActionActivated(void)
 {
-	QDesktopServices::openUrl(QUrl(lamexp_website_url()));
+	if(QAction *action = dynamic_cast<QAction*>(QObject::sender()))
+	{
+		if(action->data().isValid() && (action->data().type() == QVariant::String))
+		{
+			QDesktopServices::openUrl(QUrl(action->data().toString()));
+		}
+	}
 }
 
 /*
@@ -1531,7 +1540,7 @@ void MainWindow::documentActionActivated(void)
 			QFileInfo resource(QString(":/doc/%1.html").arg(document.baseName()));
 			if(document.exists() && document.isFile() && (document.size() == resource.size()))
 			{
-				QDesktopServices::openUrl(QUrl(QString("file:///%1").arg(document.canonicalFilePath())));
+				QDesktopServices::openUrl(QUrl::fromLocalFile(document.canonicalFilePath()));
 			}
 			else
 			{
@@ -1543,7 +1552,7 @@ void MainWindow::documentActionActivated(void)
 					action->setData(output.fileName());
 					source.close();
 					output.close();
-					QDesktopServices::openUrl(QUrl(QString("file:///%1").arg(output.fileName())));
+					QDesktopServices::openUrl(QUrl::fromLocalFile(output.fileName()));
 				}
 			}
 		}

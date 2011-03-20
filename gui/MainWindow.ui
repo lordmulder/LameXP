@@ -1057,8 +1057,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
-               <height>1091</height>
+               <width>602</width>
+               <height>1088</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -2726,6 +2726,7 @@
      <string>?</string>
     </property>
     <addaction name="actionCheckUpdates"/>
+    <addaction name="actionVisitSupport"/>
     <addaction name="actionVisitHomepage"/>
     <addaction name="separator"/>
     <addaction name="actionDocumentFAQ"/>
@@ -3062,6 +3063,15 @@
     <string>Translator's Guide</string>
    </property>
   </action>
+  <action name="actionVisitSupport">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/group.png</normaloff>:/icons/group.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help &amp;&amp; Support</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -3083,6 +3093,7 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

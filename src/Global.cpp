@@ -132,6 +132,7 @@ static bool g_lamexp_console_attached = false;
 
 //Official web-site URL
 static const char *g_lamexp_website_url = "http://mulder.dummwiedeutsch.de/";
+static const char *g_lamexp_support_url = "http://forum.doom9.org/showthread.php?t=157726";
 
 //Tool versions (expected)
 static const unsigned int g_lamexp_toolver_neroaac = VER_LAMEXP_TOOL_NEROAAC;
@@ -198,13 +199,24 @@ unsigned int lamexp_version_build(void) { return g_lamexp_version.ver_build; }
 const char *lamexp_version_release(void) { return g_lamexp_version.ver_release_name; }
 const char *lamexp_version_compiler(void) {return g_lamexp_version_compiler; }
 unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
-const char *lamexp_website_url(void) { return g_lamexp_website_url; }
 
+/*
+ * URL getters
+ */
+const char *lamexp_website_url(void) { return g_lamexp_website_url; }
+const char *lamexp_support_url(void) { return g_lamexp_support_url; }
+
+/*
+ * Check for Demo (pre-release) version
+ */
 bool lamexp_version_demo(void)
 {
 	return LAMEXP_DEBUG || !(strstr(g_lamexp_version.ver_release_name, "Final") || strstr(g_lamexp_version.ver_release_name, "Hotfix"));
 }
 
+/*
+ * Calculate expiration date
+ */
 QDate lamexp_version_expires(void)
 {
 	return lamexp_version_date().addDays(LAMEXP_DEBUG ? 2 : 30);

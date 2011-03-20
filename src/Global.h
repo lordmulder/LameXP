@@ -77,6 +77,7 @@ const char *lamexp_version_compiler(void);
 QDate lamexp_version_expires(void);
 unsigned int lamexp_toolver_neroaac(void);
 const char *lamexp_website_url(void);
+const char *lamexp_support_url(void);
 
 //Public functions
 void lamexp_init_console(int argc, char* argv[]);

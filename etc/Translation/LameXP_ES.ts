@@ -1221,6 +1221,10 @@
         <source>Translator&apos;s Guide</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Help &amp;&amp; Support</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

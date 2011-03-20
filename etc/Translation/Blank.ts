@@ -758,6 +758,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Frequently Asked Questions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changelog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translator&apos;s Guide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help &amp;&amp; Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1207,18 +1223,6 @@
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frequently Asked Questions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Changelog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Translator&apos;s Guide</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
