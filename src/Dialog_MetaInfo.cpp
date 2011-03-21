@@ -33,6 +33,9 @@ MetaInfoDialog::MetaInfoDialog(QWidget *parent)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
+	
+	//Hide artwork
+	frameArtwork->hide();
 
 	//Fix size
 	setMinimumSize(this->size());
@@ -61,9 +64,32 @@ int MetaInfoDialog::exec(AudioFileModel &audioFile, bool allowUp, bool allowDown
 {
 	MetaInfoModel *model = new MetaInfoModel(&audioFile);
 	tableView->setModel(model);
+	tableView->show();
+	frameArtwork->hide();
 	setWindowTitle(QString("Meta Information: %1").arg(QFileInfo(audioFile.filePath()).fileName()));
+	editButton->setEnabled(true);
 	upButton->setEnabled(allowUp);
 	downButton->setEnabled(allowDown);
+	buttonArtwork->setChecked(false);
+	buttonArtwork->setEnabled(false);
+
+	if(!audioFile.fileCover().isEmpty())
+	{
+		QImage artwork;
+		if(artwork.load(audioFile.fileCover()))
+		{
+			if((artwork.width() > 320) || (artwork.height() > 240))
+			{
+				artwork = artwork.scaled(320, 240, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			}
+			labelArtwork->setPixmap(QPixmap::fromImage(artwork));
+			buttonArtwork->setEnabled(true);
+		}
+		else
+		{
+			qWarning("Error: Failed to load cover art!");
+		}
+	}
 
 	int iResult = QDialog::exec();
 	

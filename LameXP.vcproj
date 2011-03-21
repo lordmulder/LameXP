@@ -192,7 +192,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Copy plugin DLL&apos;s"
-				CommandLine="mkdir &quot;$(TargetDir)imageformats&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q???4.dll&quot; &quot;$(TargetDir)imageformats\&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir &quot;$(TargetDir)imageformats&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q???4.dll&quot; &quot;$(TargetDir)imageformats\&quot;&#x0D;&#x0A;copy &quot;$(QTDIR)\plugins\imageformats\q????4.dll&quot; &quot;$(TargetDir)imageformats\&quot;&#x0D;&#x0A;del &quot;$(TargetDir)imageformats\q???d4.dll&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -1791,7 +1791,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1801,7 +1801,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1811,7 +1811,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>

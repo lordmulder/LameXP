@@ -1241,6 +1241,10 @@
         <source>Close</source>
         <translation>Schießen</translation>
     </message>
+    <message>
+        <source>Artwork</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfoDialog</name>

@@ -181,7 +181,7 @@ g_lamexp_ipc_ptr =
 };
 
 //Image formats
-static const char *g_lamexp_imageformats[] = {"png", "gif", "ico", "svg", NULL};
+static const char *g_lamexp_imageformats[] = {"png", "jpg", "gif", "ico", "svg", NULL};
 
 //Global locks
 static QMutex g_lamexp_message_mutex;
