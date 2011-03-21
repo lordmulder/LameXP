@@ -273,6 +273,10 @@ void FileAnalyzer::updateInfo(AudioFileModel &audioFile, const QString &key, con
 		{
 			if(audioFile.formatContainerProfile().isEmpty()) audioFile.setFormatContainerProfile(value);
 		}
+		else if(!key.compare("Cover", Qt::CaseInsensitive) || !key.compare("Cover type", Qt::CaseInsensitive))
+		{
+			if(m_currentCover == coverNone) m_currentCover = coverJpeg;
+		}
 		else if(!key.compare("Cover MIME", Qt::CaseInsensitive))
 		{
 			QString temp = value.split(" ", QString::SkipEmptyParts, Qt::CaseInsensitive).first();

@@ -21,12 +21,12 @@
 
 #pragma once
 
+#include "Model_Artwork.h"
+
 #include <QObject>
 #include <QString>
 #include <QMap>
 #include <QMutex>
-
-class QFile;
 
 class AudioFileModel : public QObject
 {
@@ -100,7 +100,7 @@ private:
 	QString m_fileAlbum;
 	QString m_fileGenre;
 	QString m_fileComment;
-	QString m_fileCover;
+	ArtworkModel m_fileCover;
 	unsigned int m_fileYear;
 	unsigned int m_filePosition;
 	unsigned int m_fileDuration;
@@ -113,10 +113,6 @@ private:
 	unsigned int m_formatAudioSamplerate;
 	unsigned int m_formatAudioChannels;
 	unsigned int m_formatAudioBitdepth;
-
-	static QMutex m_mutexCovers;
-	static QMap<QString, unsigned int> m_counterCovers;
-	static QMap<QString, QFile*> m_locksCovers;
 
 	void resetAll(void);
 };

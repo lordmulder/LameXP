@@ -461,6 +461,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Model_Artwork.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Model_AudioFile.cpp"
 				>
 			</File>
@@ -1198,6 +1202,10 @@
 			</File>
 			<File
 				RelativePath=".\src\LockedFile.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Model_Artwork.h"
 				>
 			</File>
 			<File

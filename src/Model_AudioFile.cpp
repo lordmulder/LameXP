@@ -26,10 +26,6 @@
 #include <QMutexLocker>
 #include <QFile>
 
-QMutex AudioFileModel::m_mutexCovers;
-QMap<QString, unsigned int> AudioFileModel::m_counterCovers;
-QMap<QString, QFile*> AudioFileModel::m_locksCovers;
-
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
@@ -64,7 +60,7 @@ AudioFileModel::AudioFileModel(const AudioFileModel &model, bool copyMetaInfo)
 		setFileAlbum(model.m_fileAlbum);
 		setFileGenre(model.m_fileGenre);
 		setFileComment(model.m_fileComment);
-		setFileCover(model.m_fileCover);
+		setFileCover(model.m_fileCover.filePath());
 		setFileYear(model.m_fileYear);
 		setFilePosition(model.m_filePosition);
 	}
@@ -78,7 +74,7 @@ AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 	setFileAlbum(model.m_fileAlbum);
 	setFileGenre(model.m_fileGenre);
 	setFileComment(model.m_fileComment);
-	setFileCover(model.m_fileCover);
+	setFileCover(model.m_fileCover.filePath());
 	setFileYear(model.m_fileYear);
 	setFilePosition(model.m_filePosition);
 	setFileDuration(model.m_fileDuration);
@@ -97,10 +93,6 @@ AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 
 AudioFileModel::~AudioFileModel(void)
 {
-	if(!m_fileCover.isEmpty())
-	{
-		setFileCover(QString());
-	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -172,7 +164,7 @@ const QString &AudioFileModel::fileComment(void) const
 
 const QString &AudioFileModel::fileCover(void) const
 {
-	return m_fileCover;
+	return m_fileCover.filePath();
 }
 
 unsigned int AudioFileModel::fileYear(void) const
@@ -347,35 +339,7 @@ void AudioFileModel::setFileComment(const QString &comment)
 
 void AudioFileModel::setFileCover(const QString &coverFile)
 {
-	QMutexLocker lock(&m_mutexCovers);
-	if(m_fileCover.isEmpty() || coverFile.isEmpty() || (m_fileCover.compare(coverFile, Qt::CaseInsensitive) != 0))
-	{
-		if(!m_fileCover.isEmpty() && m_counterCovers.contains(m_fileCover))
-		{
-			if(--m_counterCovers[m_fileCover] < 1)
-			{
-				m_counterCovers.remove(m_fileCover);
-				if(m_locksCovers.contains(m_fileCover))
-				{
-					delete m_locksCovers[m_fileCover];
-					m_locksCovers.remove(m_fileCover);
-				}
-				QFile::remove(m_fileCover);
-			}
-		}
-		if(!coverFile.isEmpty())
-		{
-			if(!m_counterCovers.contains(coverFile))
-			{
-				m_counterCovers.insert(coverFile, 0);
-				m_locksCovers.insert(coverFile, new QFile(coverFile));
-				m_locksCovers[coverFile]->open(QIODevice::ReadOnly);
-			}
-			m_counterCovers[coverFile]++;
-		}
-	}
-
-	m_fileCover = coverFile;
+	m_fileCover = ArtworkModel(coverFile);
 }
 
 void AudioFileModel::setFileYear(unsigned int year)
