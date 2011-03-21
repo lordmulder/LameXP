@@ -91,7 +91,7 @@ void InitializationThread::run()
 {
 	m_bSuccess = false;
 	delay();
-	
+
 	QMap<QString, QString> checksum;
 	QMap<QString, unsigned int> version;
 

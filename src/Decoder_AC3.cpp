@@ -57,7 +57,7 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	QRegExp regExp("\\[(\\d+)\\.(\\d+)%\\]");
+	QRegExp regExp("\\[(\\s*)(\\d+)\\.(\\d+)%\\]");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -84,7 +84,7 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 			if(regExp.lastIndexIn(text) >= 0)
 			{
 				bool ok = false;
-				int progress = regExp.cap(1).toInt(&ok);
+				int progress = regExp.cap(2).toInt(&ok);
 				if(ok) emit statusUpdated(progress);
 			}
 			else if(!text.isEmpty())

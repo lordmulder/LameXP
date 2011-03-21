@@ -958,7 +958,7 @@ const QString &lamexp_temp_folder2(void)
 /*
  * Clean folder
  */
-bool lamexp_clean_folder(const QString folderPath)
+bool lamexp_clean_folder(const QString &folderPath)
 {
 	QDir tempFolder(folderPath);
 	QFileInfoList entryList = tempFolder.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
