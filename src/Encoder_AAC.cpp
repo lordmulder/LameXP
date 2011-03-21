@@ -188,6 +188,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	if(!metaInfo.fileComment().isEmpty()) args << QString("-meta:comment=%1").arg(metaInfo.fileComment());
 	if(metaInfo.fileYear()) args << QString("-meta:year=%1").arg(QString::number(metaInfo.fileYear()));
 	if(metaInfo.filePosition()) args << QString("-meta:track=%1").arg(QString::number(metaInfo.filePosition()));
+	if(!metaInfo.fileCover().isEmpty()) args << QString("-add-cover:%1:%2").arg("front", metaInfo.fileCover());
 	
 	if(!startProcess(process, m_binary_tag, args))
 	{
