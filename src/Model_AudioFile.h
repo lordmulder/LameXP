@@ -77,7 +77,8 @@ public:
 	void setFileAlbum(const QString &album);
 	void setFileGenre(const QString &genre);
 	void setFileComment(const QString &comment);
-	void setFileCover(const QString &coverFile);
+	void setFileCover(const QString &coverFile, bool owner);
+	void setFileCover(const ArtworkModel &model);
 	void setFileYear(unsigned int year);
 	void setFilePosition(unsigned int position);
 	void setFileDuration(unsigned int duration);

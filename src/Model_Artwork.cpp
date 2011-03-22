@@ -38,21 +38,24 @@ QMap<QString, QFile*> ArtworkModel::m_fileHandle;
 
 ArtworkModel::ArtworkModel(void)
 {
+	m_isOwner = false;
 }
 
-ArtworkModel::ArtworkModel(const QString &fileName)
+ArtworkModel::ArtworkModel(const QString &fileName, bool isOwner)
 {
-	setFilePath(fileName);
+	m_isOwner = false;
+	setFilePath(fileName, isOwner);
 }
 
 ArtworkModel::ArtworkModel(const ArtworkModel &model)
 {
-	setFilePath(model.m_filePath);
+	m_isOwner = false;
+	setFilePath(model.m_filePath, model.m_isOwner);
 }
 
 ArtworkModel &ArtworkModel::operator=(const ArtworkModel &model)
 {
-	setFilePath(model.m_filePath);
+	setFilePath(model.m_filePath, model.m_isOwner);
 	return (*this);
 }
 
@@ -71,7 +74,12 @@ const QString &ArtworkModel::filePath(void) const
 	return m_filePath;
 }
 
-void ArtworkModel::setFilePath(const QString &newPath)
+bool ArtworkModel::isOwner(void) const
+{
+	return m_isOwner;
+}
+
+void ArtworkModel::setFilePath(const QString &newPath, bool isOwner)
 {
 	if(newPath.isEmpty() || m_filePath.isEmpty() || QString::compare(m_filePath, newPath,Qt::CaseInsensitive))
 	{
@@ -92,6 +100,7 @@ void ArtworkModel::setFilePath(const QString &newPath)
 		}
 
 		m_filePath = newPath;
+		m_isOwner = isOwner;
 	}
 }
 
@@ -111,15 +120,25 @@ void ArtworkModel:: clear(void)
 				{
 					if(QFile *fileHandle = m_fileHandle.take(m_filePath))
 					{
-						fileHandle->remove();
+						if(m_isOwner)
+						{
+							fileHandle->remove();
+						}
+						else
+						{
+							fileHandle->close();
+						}
 						LAMEXP_DELETE(fileHandle);
 					}
 				}
 
-				QFile::remove(m_filePath);
+				if(m_isOwner)
+				{
+					QFile::remove(m_filePath);
+				}
 			}
 		}
-		
+
 		m_filePath.clear();
 	}
 }

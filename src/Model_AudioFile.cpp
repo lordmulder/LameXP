@@ -60,7 +60,7 @@ AudioFileModel::AudioFileModel(const AudioFileModel &model, bool copyMetaInfo)
 		setFileAlbum(model.m_fileAlbum);
 		setFileGenre(model.m_fileGenre);
 		setFileComment(model.m_fileComment);
-		setFileCover(model.m_fileCover.filePath());
+		setFileCover(model.m_fileCover);
 		setFileYear(model.m_fileYear);
 		setFilePosition(model.m_filePosition);
 	}
@@ -74,7 +74,7 @@ AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 	setFileAlbum(model.m_fileAlbum);
 	setFileGenre(model.m_fileGenre);
 	setFileComment(model.m_fileComment);
-	setFileCover(model.m_fileCover.filePath());
+	setFileCover(model.m_fileCover);
 	setFileYear(model.m_fileYear);
 	setFilePosition(model.m_filePosition);
 	setFileDuration(model.m_fileDuration);
@@ -337,9 +337,14 @@ void AudioFileModel::setFileComment(const QString &comment)
 	m_fileComment = comment;
 }
 
-void AudioFileModel::setFileCover(const QString &coverFile)
+void AudioFileModel::setFileCover(const QString &coverFile, bool owner)
 {
-	m_fileCover = ArtworkModel(coverFile);
+	m_fileCover.setFilePath(coverFile, owner);
+}
+
+void AudioFileModel::setFileCover(const ArtworkModel &model)
+{
+	m_fileCover = model;
 }
 
 void AudioFileModel::setFileYear(unsigned int year)

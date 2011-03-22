@@ -46,6 +46,7 @@
 ..\..\src\Global.cpp 
 ..\..\src\LockedFile.cpp 
 ..\..\src\Main.cpp 
+..\..\src\Model_Artwork.cpp 
 ..\..\src\Model_AudioFile.cpp 
 ..\..\src\Model_FileList.cpp 
 ..\..\src\Model_FileSystem.cpp 
@@ -102,6 +103,7 @@
 ..\..\src\Genres.h 
 ..\..\src\Global.h 
 ..\..\src\LockedFile.h 
+..\..\src\Model_Artwork.h 
 ..\..\src\Model_AudioFile.h 
 ..\..\src\Model_FileList.h 
 ..\..\src\Model_FileSystem.h 

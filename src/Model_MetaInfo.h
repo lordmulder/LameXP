@@ -42,6 +42,7 @@ public:
 	bool setData (const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 	Qt::ItemFlags flags(const QModelIndex &index) const;
 	void editItem(const QModelIndex &index, QWidget *parent);
+	void editArtwork(const QString &imagePath);
 	void clearData(void);
 
 private:

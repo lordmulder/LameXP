@@ -27,9 +27,18 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QTimer>
+#include <QFileDialog>
+#include <QMenu>
+
+#define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
+
+////////////////////////////////////////////////////////////
+// Constructor & Destructor
+////////////////////////////////////////////////////////////
 
 MetaInfoDialog::MetaInfoDialog(QWidget *parent)
-	: QDialog(parent)
+:
+	QDialog(parent)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -52,13 +61,28 @@ MetaInfoDialog::MetaInfoDialog(QWidget *parent)
 	connect(downButton, SIGNAL(clicked()), this, SLOT(downButtonClicked()));
 	connect(editButton, SIGNAL(clicked()), this, SLOT(editButtonClicked()));
 
+	//Create context menu
+	m_contextMenu = new QMenu();
+	QAction *loadArtworkAction = m_contextMenu->addAction(QIcon(":/icons/folder_image.png"), tr("Load Artwork From File"));
+	QAction *clearArtworkAction = m_contextMenu->addAction(QIcon(":/icons/bin.png"), tr("Clear Artwork"));
+	SET_FONT_BOLD(loadArtworkAction, true);
+	connect(labelArtwork, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequested(QPoint)));
+	connect(frameArtwork, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequested(QPoint)));
+	connect(loadArtworkAction, SIGNAL(triggered(bool)), this, SLOT(editButtonClicked()));
+	connect(clearArtworkAction, SIGNAL(triggered(bool)), this, SLOT(clearArtworkActionTriggered()));
+
 	//Translate
 	labelHeaderText->setText(QString("<b>%1</b><br>%2").arg(tr("Meta Information"), tr("The following meta information have been extracted from the original file.")));
 }
 
 MetaInfoDialog::~MetaInfoDialog(void)
 {
+	LAMEXP_DELETE(m_contextMenu);
 }
+
+////////////////////////////////////////////////////////////
+// Slots
+////////////////////////////////////////////////////////////
 
 int MetaInfoDialog::exec(AudioFileModel &audioFile, bool allowUp, bool allowDown)
 {
@@ -71,24 +95,27 @@ int MetaInfoDialog::exec(AudioFileModel &audioFile, bool allowUp, bool allowDown
 	upButton->setEnabled(allowUp);
 	downButton->setEnabled(allowDown);
 	buttonArtwork->setChecked(false);
-	buttonArtwork->setEnabled(false);
 
 	if(!audioFile.fileCover().isEmpty())
 	{
 		QImage artwork;
 		if(artwork.load(audioFile.fileCover()))
 		{
-			if((artwork.width() > 320) || (artwork.height() > 240))
+			if((artwork.width() > 256) || (artwork.height() > 256))
 			{
-				artwork = artwork.scaled(320, 240, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+				artwork = artwork.scaled(256, 256, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 			}
 			labelArtwork->setPixmap(QPixmap::fromImage(artwork));
-			buttonArtwork->setEnabled(true);
 		}
 		else
 		{
 			qWarning("Error: Failed to load cover art!");
+			labelArtwork->setPixmap(QPixmap::fromImage(QImage(":/images/CD.png")));
 		}
+	}
+	else
+	{
+		labelArtwork->setPixmap(QPixmap::fromImage(QImage(":/images/CD.png")));
 	}
 
 	int iResult = QDialog::exec();
@@ -111,5 +138,50 @@ void MetaInfoDialog::downButtonClicked(void)
 
 void MetaInfoDialog::editButtonClicked(void)
 {
-	dynamic_cast<MetaInfoModel*>(tableView->model())->editItem(tableView->currentIndex(), this);
+	if(!buttonArtwork->isChecked())
+	{
+		dynamic_cast<MetaInfoModel*>(tableView->model())->editItem(tableView->currentIndex(), this);
+		return;
+	}
+
+	QString fileName = QFileDialog::getOpenFileName(this, tr("Load Artwork"), QString(), QString::fromLatin1("JPEG (*.jpg);;PNG (*.png);;GIF (*.gif)"));
+	if(!fileName.isEmpty())
+	{
+		QImage artwork;
+		if(artwork.load(fileName))
+		{
+			if((artwork.width() > 256) || (artwork.height() > 256))
+			{
+				artwork = artwork.scaled(256, 256, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			}
+			dynamic_cast<MetaInfoModel*>(tableView->model())->editArtwork(fileName);
+			labelArtwork->setPixmap(QPixmap::fromImage(artwork));
+		}
+		else
+		{
+			qWarning("Error: Failed to load cover art!");
+			QMessageBox::warning(this, tr("Artwork Error"), QString("<nobr>%1</nobr><br><br><nobr>%2</nobr>").arg(tr("Sorry, failed to load artwork from selected file!"), QDir::toNativeSeparators(fileName)));
+		}
+	}
+}
+
+
+void MetaInfoDialog::contextMenuRequested(const QPoint &pos)
+{
+	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(QObject::sender());
+	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());
+
+	if(sender)
+	{
+		if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0)
+		{
+			m_contextMenu->popup(sender->mapToGlobal(pos));
+		}
+	}
+}
+
+void MetaInfoDialog::clearArtworkActionTriggered(void)
+{
+	labelArtwork->setPixmap(QPixmap::fromImage(QImage(":/images/CD.png")));
+	dynamic_cast<MetaInfoModel*>(tableView->model())->editArtwork(QString());
 }

@@ -1256,6 +1256,26 @@
         <source>The following meta information have been extracted from the original file.</source>
         <translation>Die folgenden Meta-Informationen wurden aus der Originaldatei extrahiert.</translation>
     </message>
+    <message>
+        <source>Load Artwork From File</source>
+        <translation>Artwork aus Datei laden</translation>
+    </message>
+    <message>
+        <source>Clear Artwork</source>
+        <translation>Artwork löschen</translation>
+    </message>
+    <message>
+        <source>Load Artwork</source>
+        <translation>Artwork laden</translation>
+    </message>
+    <message>
+        <source>Artwork Error</source>
+        <translation>Artwork Fehler</translation>
+    </message>
+    <message>
+        <source>Sorry, failed to load artwork from selected file!</source>
+        <translation>Artwork konnte nicht aus der Ausgewählten Datei geladen werden!</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfoModel</name>

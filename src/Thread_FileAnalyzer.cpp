@@ -473,7 +473,7 @@ void FileAnalyzer::retrieveCover(AudioFileModel &audioFile, const QString &fileP
 							{
 								coverFile.write(coverData);
 								coverFile.close();
-								audioFile.setFileCover(coverFile.fileName());
+								audioFile.setFileCover(coverFile.fileName(), true);
 							}
 							break;
 						}

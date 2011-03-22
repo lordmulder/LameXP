@@ -1258,6 +1258,26 @@
         <source>The following meta information have been extracted from the original file.</source>
         <translation>Эта метаинформация была получена из исходного файла.</translation>
     </message>
+    <message>
+        <source>Load Artwork From File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Artwork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Artwork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Artwork Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, failed to load artwork from selected file!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfoModel</name>

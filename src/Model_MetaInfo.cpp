@@ -430,6 +430,11 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	}
 }
 
+void MetaInfoModel::editArtwork(const QString &imagePath)
+{
+	m_audioFile->setFileCover(imagePath, false);
+}
+
 void MetaInfoModel::clearData(void)
 {
 	beginResetModel();
@@ -443,6 +448,7 @@ void MetaInfoModel::clearData(void)
 	m_audioFile->setFileAlbum(QString());
 	m_audioFile->setFileGenre(QString());
 	m_audioFile->setFileComment(tr("Encoded with LameXP"));
+	m_audioFile->setFileCover(QString(), false);
 	m_audioFile->setFileYear(0);
 	m_audioFile->setFilePosition(UINT_MAX);
 	m_audioFile->setFileDuration(0);

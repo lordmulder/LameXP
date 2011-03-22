@@ -31,17 +31,19 @@ class ArtworkModel
 {
 public:
 	ArtworkModel(void);
-	ArtworkModel(const QString &fileName);
+	ArtworkModel(const QString &fileName, bool isOwner = true);
 	ArtworkModel(const ArtworkModel &model);
 	ArtworkModel &operator=(const ArtworkModel &model);
 	~ArtworkModel(void);
 
 	const QString &filePath(void) const;
-	void setFilePath(const QString &newPath);
+	bool isOwner(void) const;
+	void setFilePath(const QString &newPath, bool isOwner = true);
 	void clear(void);
 
 private:
 	QString m_filePath;
+	bool m_isOwner;
 
 	static QMutex m_mutex;
 	static QMap<QString, unsigned int> m_refCount;

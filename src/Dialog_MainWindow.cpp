@@ -2136,7 +2136,7 @@ void MainWindow::restoreCursor(void)
 void MainWindow::sourceFilesContextMenu(const QPoint &pos)
 {
 	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(QObject::sender());
-	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());	
+	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());
 
 	if(sender)
 	{

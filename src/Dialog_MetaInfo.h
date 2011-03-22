@@ -40,5 +40,9 @@ private slots:
 	void upButtonClicked(void);
 	void downButtonClicked(void);
 	void editButtonClicked(void);
+	void contextMenuRequested(const QPoint &pos);
+	void clearArtworkActionTriggered(void);
 
+private:
+	QMenu *m_contextMenu;
 };
