@@ -1167,7 +1167,10 @@ void MainWindow::showDetailsButtonClicked(void)
 		}
 
 		AudioFileModel &file = (*m_fileListModel)[index];
-		iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
+		TEMP_HIDE_DROPBOX
+		(
+			iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
+		)
 
 		if(!iResult) break;
 	}
