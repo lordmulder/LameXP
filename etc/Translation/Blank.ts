@@ -774,6 +774,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Open Folder Recursively...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -815,6 +819,10 @@
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scanning folder(s) for files, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1058,7 +1066,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add folder</source>
+        <source>Add Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

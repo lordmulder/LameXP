@@ -256,7 +256,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	customParamsChanged();
 	
 	//Activate file menu actions
+	actionOpenFolder->setData(QVariant::fromValue<bool>(false));
+	actionOpenFolderRecursively->setData(QVariant::fromValue<bool>(true));
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
+	connect(actionOpenFolderRecursively, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
 
 	//Activate view menu actions
 	m_tabActionGroup = new QActionGroup(this);
@@ -457,6 +460,46 @@ void MainWindow::addFiles(const QStringList &files)
 	LAMEXP_DELETE(analyzer);
 	sourceFileView->scrollToBottom();
 	m_banner->close();
+}
+
+/*
+ * Add folder to source list
+ */
+void MainWindow::addFolder(const QString &path, bool recursive)
+{
+	QFileInfoList folderInfoList;
+	folderInfoList << QFileInfo(path);
+	QStringList fileList;
+	
+	m_banner->show(tr("Scanning folder(s) for files, please wait..."));
+	QApplication::processEvents();
+
+	while(!folderInfoList.isEmpty())
+	{
+		QDir currentDir(folderInfoList.takeFirst().canonicalFilePath());
+		QFileInfoList fileInfoList = currentDir.entryInfoList(QDir::Files);
+
+		while(!fileInfoList.isEmpty())
+		{
+			fileList << fileInfoList.takeFirst().canonicalFilePath();
+		}
+
+		QApplication::processEvents();
+
+		if(recursive)
+		{
+			folderInfoList.append(currentDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks));
+			QApplication::processEvents();
+		}
+	}
+	
+	m_banner->close();
+	QApplication::processEvents();
+
+	if(!fileList.isEmpty())
+	{
+		addFiles(fileList);
+	}
 }
 
 /*
@@ -1062,37 +1105,31 @@ void MainWindow::openFolderActionActivated(void)
 	ABORT_IF_BUSY;
 	QString selectedFolder;
 	
-	TEMP_HIDE_DROPBOX
-	(
-		if(lamexp_themes_enabled())
-		{
-			selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add folder"), QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
-		}
-		else
-		{
-			QFileDialog dialog(this, tr("Add folder"));
-			dialog.setFileMode(QFileDialog::DirectoryOnly);
-			dialog.setDirectory(QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
-			if(dialog.exec())
+	if(QAction *action = dynamic_cast<QAction*>(QObject::sender()))
+	{
+		TEMP_HIDE_DROPBOX
+		(
+			if(lamexp_themes_enabled())
 			{
-				selectedFolder = dialog.selectedFiles().first();
+				selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add Folder"), QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
 			}
-		}
-		
-		if(!selectedFolder.isEmpty())
-		{
-			QDir sourceDir(selectedFolder);
-			QFileInfoList fileInfoList = sourceDir.entryInfoList(QDir::Files);
-			QStringList fileList;
-
-			while(!fileInfoList.isEmpty())
+			else
 			{
-				fileList << fileInfoList.takeFirst().canonicalFilePath();
+				QFileDialog dialog(this, tr("Add Folder"));
+				dialog.setFileMode(QFileDialog::DirectoryOnly);
+				dialog.setDirectory(QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
+				if(dialog.exec())
+				{
+					selectedFolder = dialog.selectedFiles().first();
+				}
 			}
-
-			addFiles(fileList);
-		}
-	)
+			
+			if(!selectedFolder.isEmpty())
+			{
+				addFolder(selectedFolder, action->data().toBool());
+			}
+		)
+	}
 }
 
 /*

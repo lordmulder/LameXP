@@ -663,10 +663,6 @@
         <translation>Aggiungi file(s)</translation>
     </message>
     <message>
-        <source>Add folder</source>
-        <translation>Aggiungi cartella</translation>
-    </message>
-    <message>
         <source>New Folder</source>
         <translation>Nuova Cartella</translation>
     </message>
@@ -1224,6 +1220,18 @@
     </message>
     <message>
         <source>Help &amp;&amp; Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Folder Recursively...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scanning folder(s) for files, please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

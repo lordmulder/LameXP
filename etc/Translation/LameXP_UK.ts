@@ -962,10 +962,6 @@
         <translation type="unfinished">Додати файл(и)</translation>
     </message>
     <message>
-        <source>Add folder</source>
-        <translation type="unfinished">Додати теку</translation>
-    </message>
-    <message>
         <source>Load Translation</source>
         <translation type="unfinished">Завантажити переклад</translation>
     </message>
@@ -1223,6 +1219,18 @@
     </message>
     <message>
         <source>Help &amp;&amp; Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Folder Recursively...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scanning folder(s) for files, please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

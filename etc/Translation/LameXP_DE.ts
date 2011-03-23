@@ -663,10 +663,6 @@
         <translation>Datei(en) hinzufügen</translation>
     </message>
     <message>
-        <source>Add folder</source>
-        <translation>Ordner hinzufügen</translation>
-    </message>
-    <message>
         <source>New Folder</source>
         <translation>Neuer Ordner</translation>
     </message>
@@ -1225,6 +1221,18 @@
     <message>
         <source>Help &amp;&amp; Support</source>
         <translation>Hilfe und Support</translation>
+    </message>
+    <message>
+        <source>Open Folder Recursively...</source>
+        <translation>Verzeichnis rekursiv öffnen...</translation>
+    </message>
+    <message>
+        <source>Scanning folder(s) for files, please wait...</source>
+        <translation>Durchsuche Verzeichnis(se) nach Dateien, bitte warten...</translation>
+    </message>
+    <message>
+        <source>Add Folder</source>
+        <translation>Verzeichnis hinzufügen</translation>
     </message>
 </context>
 <context>

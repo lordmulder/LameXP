@@ -1057,8 +1057,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
-               <height>1088</height>
+               <width>604</width>
+               <height>1091</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -2716,6 +2716,7 @@
     <addaction name="separator"/>
     <addaction name="actionOpen"/>
     <addaction name="actionOpenFolder"/>
+    <addaction name="actionOpenFolderRecursively"/>
     <addaction name="actionClearAll"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
@@ -3072,6 +3073,15 @@
     <string>Help &amp;&amp; Support</string>
    </property>
   </action>
+  <action name="actionOpenFolderRecursively">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/folder_explore.png</normaloff>:/icons/folder_explore.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Folder Recursively...</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -3093,6 +3103,7 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

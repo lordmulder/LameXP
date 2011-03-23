@@ -130,6 +130,7 @@ protected:
 
 private:
 	void addFiles(const QStringList &files);
+	void addFolder(const QString &path, bool recursive = false);
 	bool installWMADecoder(void);
 	bool checkForUpdates(void);
 

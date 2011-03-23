@@ -768,10 +768,6 @@ Votre dossier TEMP est situé ici:</translation>
         <translation>Ajouter fichier(s)</translation>
     </message>
     <message>
-        <source>Add folder</source>
-        <translation>Ajouter dossier</translation>
-    </message>
-    <message>
         <source>Load Translation</source>
         <translation>Charger la traduction</translation>
     </message>
@@ -1232,6 +1228,18 @@ Sélection automatique (par défaut)</translation>
     </message>
     <message>
         <source>Help &amp;&amp; Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Folder Recursively...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scanning folder(s) for files, please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
