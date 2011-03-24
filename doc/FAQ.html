@@ -25,6 +25,7 @@
 <li><a href="#9b0a5c32">Why does application 'xyz' not open the Wave files created by LameXP?</a>
 <li><a href="#89cbd3d0">Why does LameXP run only 'n' parallel instances/threads on my computer?</a>
 <li><a href="#12d077d5">How can I force LameXP to create ID3 version 2 (ID3v2) tags?</a>
+<li><a href="#d83ab3c6">Why does LameXP use LAME v3.99 rather than v3.98?</a><br>
 <li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
 <li><a href="#e7c9ae2b">Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</a>
 <li><a href="#328b0a18">Why do I get the error 'Executable requires Windows 2000 or later' on startup?</a>
@@ -301,6 +302,19 @@ the information would have fit into a single ID3v1 tag, means an unnecessary red
 <br>
 If, however, you need to enforce the creation of an ID3v2 tag for some reason, you can use the "--add-id3v2"<br>
 parameter for that purpose. Simply add the parameter to the "Custom Encoder Parameters" for LAME.<br><br>
+
+<br><br>
+
+<a name="d83ab3c6"><b>Why does LameXP use LAME v3.99 rather than v3.98?</b></a><br>
+<br>
+LAME v3.99 contains the latest improvements and bugfixes of the LAME mp3 encoder, but it's less tested than<br>
+the older 3.98 release series. The most important reason why LAME v3.99 is used in LameXP v4.xx is because<br>
+LameXP v4.xx focuses on proper Unicode support, but LAME v3.98 did NOT support Unicode filenames or Unicode<br>
+meta tags (through the CLI front-end, on the Windows platform). However LAME v3.99 finally does!<br>
+<br>
+So far we have not encountered any notworthy problems with LAME v3.99. If, however, you encounter a problem<br>
+with LAME v3.99, please report your finding to the <a href="http://lame.sourceforge.net/contact.php" target="_blank">LAME development team</a>. Do NOT submit any LAME-specific bug<br>
+reports to the LameXP developers, as we generally cannot analyze/fix probelms specific to the LAME encoder.<br><br>
 
 <br><br>
 
