@@ -483,7 +483,7 @@
          </property>
          <property name="icon">
           <iconset resource="../res/Icons.qrc">
-           <normaloff>:/icons/accept.png</normaloff>:/icons/accept.png</iconset>
+           <normaloff>:/icons/shield_admin.png</normaloff>:/icons/shield_admin.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -568,6 +568,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>

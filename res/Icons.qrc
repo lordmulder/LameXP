@@ -69,6 +69,9 @@
     <file>icons/script.png</file>
     <file>icons/script_edit.png</file>
     <file>icons/server_error.png</file>
+    <file>icons/shield_admin.png</file>
+    <file>icons/shield_exclamation.png</file>
+    <file>icons/shield_green.png</file>
     <file>icons/sound.png</file>
     <file>icons/star.png</file>
     <file>icons/table_edit.png</file>

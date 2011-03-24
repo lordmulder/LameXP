@@ -316,21 +316,21 @@ void UpdateDialog::checkForUpdates(void)
 	{
 		installButton->setEnabled(true);
 		statusLabel->setText(tr("A new version of LameXP is available!"));
-		hintIcon->setPixmap(QIcon(":/icons/bell.png").pixmap(16,16));
+		hintIcon->setPixmap(QIcon(":/icons/shield_exclamation.png").pixmap(16,16));
 		hintLabel->setText(tr("We highly recommend all users to install this update as soon as possible."));
 		hintIcon->show();
 		hintLabel->show();
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/bell.png"));
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_exclamation.png"));
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else if(m_updateInfo->m_buildNo == lamexp_version_build())
 	{
 		statusLabel->setText(tr("No new updates available at this time."));
-		hintIcon->setPixmap(QIcon(":/icons/information.png").pixmap(16,16));
+		hintIcon->setPixmap(QIcon(":/icons/shield_green.png").pixmap(16,16));
 		hintLabel->setText(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"));
 		hintIcon->show();
 		hintLabel->show();
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/information.png"));
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_green.png"));
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else

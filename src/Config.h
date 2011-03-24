@@ -26,7 +26,7 @@
 #define VER_LAMEXP_MINOR_HI				0
 #define VER_LAMEXP_MINOR_LO				1
 #define VER_LAMEXP_BUILD				400
-#define VER_LAMEXP_SUFFIX				Beta-12
+#define VER_LAMEXP_SUFFIX				Beta-13
 
 /*
  * Tools versions
