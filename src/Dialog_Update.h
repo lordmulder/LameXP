@@ -27,6 +27,7 @@
 
 class UpdateInfo;
 class SettingsModel;
+class QMovie;
 
 class UpdateDialog : public QDialog, private Ui::UpdateDialog
 {
@@ -61,6 +62,7 @@ private:
 	UpdateInfo *m_updateInfo;
 	QStringList *m_logFile;
 	SettingsModel *m_settings;
+	QMovie *m_animator;
 	
 	const QString m_binaryWGet;
 	const QString m_binaryGnuPG;

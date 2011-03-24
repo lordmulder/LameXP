@@ -1714,7 +1714,7 @@
     </message>
     <message>
         <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation>Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es dann noch einmal.</translation>
+        <translation>Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es dann noch einmal.</translation>
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
@@ -1742,7 +1742,7 @@
     </message>
     <message>
         <source>No new updates available at this time.</source>
-        <translation>Zu diesem Zeitpunkt sind keine Updates verfügabr.</translation>
+        <translation>Zu diesem Zeitpunkt sind keine Updates verfügbar.</translation>
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
