@@ -43,6 +43,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
+static const char *header_id = "!Update";
 static const char *section_id = "LameXP";
 
 static const char *mirror_url_postfix[] = 
@@ -80,6 +81,7 @@ static const char *known_hosts[] =
 };
 
 static const int MIN_CONNSCORE = 3;
+static const int VERSION_INFO_EXPIRES_MONTHS = 6;
 static char *USER_AGENT_STR = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101101 IceCat/3.6.12 (like Firefox/3.6.12)";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -544,6 +546,7 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 	QRegExp value("^(\\w+)=(.+)$");
 	QRegExp section("^\\[(.+)\\]$");
 
+	QDate updateInfoDate;
 	updateInfo->resetInfo();
 
 	QFile data(file);
@@ -553,6 +556,7 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 		return false;
 	}
 	
+	bool inHeader = false;
 	bool inSection = false;
 	
 	while(!data.atEnd())
@@ -562,9 +566,10 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 		{
 			m_logFile->append(QString("Sec: [%1]").arg(section.cap(1)));
 			inSection = (section.cap(1).compare(section_id, Qt::CaseInsensitive) == 0);
+			inHeader = (section.cap(1).compare(header_id, Qt::CaseInsensitive) == 0);
 			continue;
 		}
-		if(inSection && value.indexIn(line) >= 0)
+		if(inSection && (value.indexIn(line) >= 0))
 		{
 			m_logFile->append(QString("Val: '%1' ==> '%2").arg(value.cap(1), value.cap(2)));
 			if(value.cap(1).compare("BuildNo", Qt::CaseInsensitive) == 0)
@@ -595,8 +600,35 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 				updateInfo->m_downloadFilecode = value.cap(2).trimmed();
 			}
 		}
+		if(inHeader && (value.indexIn(line) >= 0))
+		{
+			m_logFile->append(QString("Val: '%1' ==> '%2").arg(value.cap(1), value.cap(2)));
+			if(value.cap(1).compare("TimestampCreated", Qt::CaseInsensitive) == 0)
+			{
+				QDate temp = QDate::fromString(value.cap(2).trimmed(), Qt::ISODate);
+				if(temp.isValid()) updateInfoDate = temp;
+			}
+		}
 	}
 	
+	if(!updateInfoDate.isValid())
+	{
+		updateInfo->resetInfo();
+		m_logFile->append("WARNING: Version info timestamp is missing!");
+		return false;
+	}
+	else if(updateInfoDate.addMonths(VERSION_INFO_EXPIRES_MONTHS) < QDate::currentDate())
+	{
+		updateInfo->resetInfo();
+		m_logFile->append(QString::fromLatin1("WARNING: This version info has expired at %1!").arg(updateInfoDate.addMonths(VERSION_INFO_EXPIRES_MONTHS).toString(Qt::ISODate)));
+		return false;
+	}
+	else if(QDate::currentDate() < updateInfoDate)
+	{
+		m_logFile->append("Version info is from the future, take care!");
+		qWarning("Version info is from the future, take care!");
+	}
+
 	bool complete = true;
 
 	if(!(updateInfo->m_buildNo > 0)) complete = false;
@@ -628,6 +660,12 @@ void UpdateDialog::applyUpdate(void)
 	if(m_updateInfo)
 	{
 		statusLabel->setText("Update is being downloaded, please be patient...");
+		frameAnimation->show();
+		if(hintLabel->isVisible()) hintLabel->hide();
+		if(hintIcon->isVisible()) hintIcon->hide();
+		int oldMax = progressBar->maximum();
+		int oldMin = progressBar->minimum();
+		progressBar->setMaximum(0);
 		QApplication::processEvents();
 		
 		QProcess process;
@@ -651,6 +689,12 @@ void UpdateDialog::applyUpdate(void)
 		process.start(m_binaryUpdater, args);
 		loop.exec();
 		QApplication::restoreOverrideCursor();
+
+		hintLabel->show();
+		hintIcon->show();
+		progressBar->setRange(oldMin, oldMax);
+		progressBar->setValue(oldMax);
+		frameAnimation->hide();
 
 		if(process.exitCode() == 0)
 		{
