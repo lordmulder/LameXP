@@ -124,6 +124,9 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define WCHAR2QSTR(STR) QString::fromUtf16(reinterpret_cast<const unsigned short*>(STR))
 #define	LAMEXP_DYNCAST(OUT,CLASS,SRC) try { OUT = dynamic_cast<CLASS>(SRC); } catch(std::bad_cast) { OUT = NULL; }
 #define LAMEXP_BOOL(X) (X ? "1" : "0")
+#define LAMEXP_MAKE_STRING_EX(X) #X
+#define LAMEXP_MAKE_STRING(X) LAMEXP_MAKE_STRING_EX(X)
+#define LAMEXP_COMPILER_WARNING(TXT) __pragma(message(__FILE__ "(" LAMEXP_MAKE_STRING(__LINE__) ") : warning: " TXT))
 
 //Output Qt debug message (Unicode-safe versions)
 #define qDebug64(FORMAT, ...) qDebug("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
@@ -132,13 +135,13 @@ SIZE_T lamexp_dbg_private_bytes(void);
 
 //Check for debug build
 #if defined(_DEBUG) || defined(QT_DEBUG) || !defined(NDEBUG) || !defined(QT_NO_DEBUG)
-#define LAMEXP_DEBUG 1
+#define LAMEXP_DEBUG (1)
 #define LAMEXP_CHECK_DEBUG_BUILD \
 	qWarning("---------------------------------------------------------"); \
 	qWarning("DEBUG BUILD: DO NOT RELEASE THIS BINARY TO THE PUBLIC !!!"); \
 	qWarning("---------------------------------------------------------\n"); 
 #else
-#define LAMEXP_DEBUG 0
+#define LAMEXP_DEBUG (0)
 #define LAMEXP_CHECK_DEBUG_BUILD
 #endif
 

@@ -367,15 +367,18 @@ void lamexp_init_console(int argc, char* argv[])
 {
 	bool enableConsole = lamexp_version_demo();
 
-	for(int i = 0; i < argc; i++)
+	if(!LAMEXP_DEBUG)
 	{
-		if(!_stricmp(argv[i], "--console"))
+		for(int i = 0; i < argc; i++)
 		{
-			enableConsole = true;
-		}
-		else if(!_stricmp(argv[i], "--no-console"))
-		{
-			enableConsole = false;
+			if(!_stricmp(argv[i], "--console"))
+			{
+				enableConsole = true;
+			}
+			else if(!_stricmp(argv[i], "--no-console"))
+			{
+				enableConsole = false;
+			}
 		}
 	}
 

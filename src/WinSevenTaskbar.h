@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "Global.h"
 #include <ShObjIdl.h>
 
 class QWidget;
@@ -56,7 +57,7 @@ private:
 
 #else //__ITaskbarList3_INTERFACE_DEFINED__
 
-#pragma message("WARNING: ITaskbarList3 not defined. Compiling *without* support for Win7 taskbar!")
+LAMEXP_COMPILER_WARNING("ITaskbarList3 not defined. Compiling *without* support for Win7 taskbar!")
 
 class WinSevenTaskbar
 {
