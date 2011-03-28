@@ -251,6 +251,8 @@ UninstPage Custom un.LockedListShow
 Function .onInit
 	${If} ${UAC_IsInnerInstance}
 		!insertmacro MUI_LANGDLL_DISPLAY
+	${ElseIf} ${UAC_IsAdmin}
+		!insertmacro MUI_LANGDLL_DISPLAY
 	${Else}
 		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
 		Pop $0
@@ -275,6 +277,8 @@ FunctionEnd
 
 Function un.onInit
 	${If} ${UAC_IsInnerInstance}
+		!insertmacro MUI_LANGDLL_DISPLAY
+	${ElseIf} ${UAC_IsAdmin}
 		!insertmacro MUI_LANGDLL_DISPLAY
 	${Else}
 		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
@@ -313,9 +317,10 @@ Function MyUacInit
 	
 	!ifdef LAMEXP_IS_PRERELEASE
 		!insertmacro GetCommandlineParameter "Update" "?" $R0
-		StrCmp $R0 "?" 0 +3
+		StrCmp $R0 "?" 0 SkipPrereleaseWarning
 		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
 		Abort
+		SkipPrereleaseWarning:
 	!endif
 FunctionEnd
 
