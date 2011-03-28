@@ -195,6 +195,10 @@
         <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>DEMO VERSION</source>
+        <translation>VERSIONE DEMO</translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -235,6 +239,13 @@
     </message>
     <message>
         <source>Playlists</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DiskObserverThread</name>
+    <message>
+        <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

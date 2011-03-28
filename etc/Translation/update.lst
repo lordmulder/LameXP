@@ -56,6 +56,7 @@
 ..\..\src\PlaylistImporter.cpp 
 ..\..\src\Registry_Decoder.cpp 
 ..\..\src\ShellIntegration.cpp 
+..\..\src\Thread_DiskObserver.cpp 
 ..\..\src\Thread_FileAnalyzer.cpp 
 ..\..\src\Thread_Initialization.cpp 
 ..\..\src\Thread_MessageHandler.cpp 
@@ -115,6 +116,7 @@
 ..\..\src\Resource.h 
 ..\..\src\ShellIntegration.h 
 ..\..\src\Targetver.h 
+..\..\src\Thread_DiskObserver.h 
 ..\..\src\Thread_FileAnalyzer.h 
 ..\..\src\Thread_Initialization.h 
 ..\..\src\Thread_MessageHandler.h 

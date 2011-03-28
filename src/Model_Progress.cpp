@@ -29,7 +29,8 @@ ProgressModel::ProgressModel(void)
 	m_iconPaused(":/icons/control_pause_blue.png"),
 	m_iconComplete(":/icons/tick.png"),
 	m_iconFailed(":/icons/exclamation.png"),
-	m_iconSystem(":/icons/computer.png")
+	m_iconSystem(":/icons/computer.png"),
+	m_iconWarning(":/icons/error.png")
 {
 }
 
@@ -81,6 +82,9 @@ QVariant ProgressModel::data(const QModelIndex &index, int role) const
 				break;
 			case JobSystem:
 				return m_iconSystem;
+				break;
+			case JobWarning:
+				return m_iconWarning;
 				break;
 			default:
 				return m_iconFailed;
@@ -187,7 +191,7 @@ const QUuid &ProgressModel::getJobId(const QModelIndex &index)
 	return *(reinterpret_cast<QUuid*>(NULL));
 }
 
-void ProgressModel::addSystemMessage(const QString &text)
+void ProgressModel::addSystemMessage(const QString &text, bool isWarning)
 {
 	const QUuid &jobId = QUuid::createUuid();
 
@@ -202,7 +206,7 @@ void ProgressModel::addSystemMessage(const QString &text)
 	m_jobList.append(jobId);
 	m_jobName.insert(jobId, text);
 	m_jobStatus.insert(jobId, QString());
-	m_jobState.insert(jobId, JobSystem);
+	m_jobState.insert(jobId, isWarning ? JobWarning : JobSystem);
 	m_jobLogFile.insert(jobId, QStringList());
 	
 	endInsertRows();

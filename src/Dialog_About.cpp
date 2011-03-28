@@ -75,11 +75,13 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	QMessageBox(parent),
 	m_settings(settings)
 {
+	const QString versionStr = QString().sprintf("Version %d.%02d %s, Build %d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
+
 	QString aboutText;
 
 	aboutText += QString("<h2>%1</h2>").arg(tr("LameXP &minus; Audio Encoder Front-end"));
 	aboutText += QString("<b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b><br>").arg(max(lamexp_version_date().year(),QDate::currentDate().year()));
-	aboutText += QString().sprintf("<b>Version %d.%02d %s, Build %d [%s]</b><br><br>", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
+	aboutText += lamexp_version_demo() ? QString("<b>%1, %2</b><br><br>").arg(versionStr, tr("DEMO VERSION")) : QString("<b>%1</b><br><br>").arg(versionStr);
 	aboutText += QString("<nobr>%1</nobr><br>").arg(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url())));
 	aboutText += "<hr><br>";
 	aboutText += "<nobr><tt>This program is free software; you can redistribute it and/or<br>";

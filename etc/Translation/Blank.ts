@@ -8,6 +8,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>DEMO VERSION</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please visit %1 for news and updates!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -235,6 +239,13 @@
     </message>
     <message>
         <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DiskObserverThread</name>
+    <message>
+        <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

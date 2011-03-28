@@ -33,6 +33,7 @@ class ProcessThread;
 class FileListModel;
 class AudioFileModel;
 class SettingsModel;
+class DiskObserverThread;
 
 class ProcessingDialog : public QDialog, private Ui::ProcessingDialog
 {
@@ -84,4 +85,5 @@ private:
 	bool m_userAborted;
 	QSystemTrayIcon *m_systemTray;
 	bool m_shutdownFlag;
+	DiskObserverThread *m_diskObserver;
 };

@@ -44,7 +44,8 @@ public:
 		JobPaused = 1,
 		JobComplete = 2,
 		JobFailed = 3,
-		JobSystem = 4
+		JobSystem = 4,
+		JobWarning = 5
 	};
 
 	//Model functions
@@ -61,7 +62,7 @@ public slots:
 	void addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);
 	void updateJob(const QUuid &jobId, const QString &newStatus, int newState);
 	void appendToLog(const QUuid &jobId, const QString &line);
-	void addSystemMessage(const QString &text);
+	void addSystemMessage(const QString &text, bool isWarning = false);
 
 private:
 	QList<QUuid> m_jobList;
@@ -75,4 +76,5 @@ private:
 	const QIcon m_iconComplete;
 	const QIcon m_iconFailed;
 	const QIcon m_iconSystem;
+	const QIcon m_iconWarning;
 };

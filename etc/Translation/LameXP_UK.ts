@@ -195,6 +195,10 @@
         <source>n/a</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>DEMO VERSION</source>
+        <translation type="unfinished">ДЕМО ВЕРСІЯ</translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -236,6 +240,13 @@
     <message>
         <source>All files</source>
         <translation type="unfinished">Всі файли</translation>
+    </message>
+</context>
+<context>
+    <name>DiskObserverThread</name>
+    <message>
+        <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

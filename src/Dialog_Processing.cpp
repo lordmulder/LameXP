@@ -27,6 +27,7 @@
 #include "Model_Progress.h"
 #include "Model_Settings.h"
 #include "Thread_Process.h"
+#include "Thread_DiskObserver.h"
 #include "Dialog_LogView.h"
 #include "Encoder_MP3.h"
 #include "Encoder_Vorbis.h"
@@ -92,7 +93,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
-	m_shutdownFlag(false)
+	m_shutdownFlag(false),
+	m_diskObserver(NULL)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -172,11 +174,23 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 ProcessingDialog::~ProcessingDialog(void)
 {
 	view_log->setModel(NULL);
-	if(m_progressIndicator) m_progressIndicator->stop();
+
+	if(m_progressIndicator)
+	{
+		m_progressIndicator->stop();
+	}
+
+	if(m_diskObserver)
+	{
+		m_diskObserver->stop();
+		m_diskObserver->wait(15000);
+	}
+
 	LAMEXP_DELETE(m_progressIndicator);
 	LAMEXP_DELETE(m_progressModel);
 	LAMEXP_DELETE(m_contextMenu);
 	LAMEXP_DELETE(m_systemTray);
+	LAMEXP_DELETE(m_diskObserver);
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -279,6 +293,13 @@ void ProcessingDialog::initEncoding(void)
 	WinSevenTaskbar::setTaskbarProgress(this, 0, m_pendingJobs.count());
 	WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/control_play_blue.png"));
 
+	if(!m_diskObserver)
+	{
+		m_diskObserver = new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2());
+		connect(m_diskObserver, SIGNAL(messageLogged(QString,bool)), m_progressModel, SLOT(addSystemMessage(QString,bool)), Qt::QueuedConnection);
+		m_diskObserver->start();
+	}
+	
 	int maximumInstances = max(min(m_settings->maximumInstances(), MAX_INSTANCES), 0);
 	if(maximumInstances < 1)
 	{

@@ -1230,6 +1230,11 @@ void MainWindow::tabPageChanged(int idx)
 			actions.at(i)->setChecked(true);
 		}
 	}
+	
+	if(idx == tabWidget->indexOf(tabSourceFiles))
+	{
+		m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+	}
 }
 
 /*

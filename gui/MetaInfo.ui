@@ -238,10 +238,10 @@
             <item row="1" column="1">
              <widget class="QFrame" name="frameArtworkInner">
               <property name="frameShape">
-               <enum>QFrame::Panel</enum>
+               <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
+               <enum>QFrame::Raised</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <property name="spacing">
@@ -473,6 +473,7 @@
  </tabstops>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>

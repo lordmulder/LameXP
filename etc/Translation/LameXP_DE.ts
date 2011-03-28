@@ -195,6 +195,10 @@
         <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
         <translation>Silk Icons &amp;minus; Über 700 Symbole im PNG Format</translation>
     </message>
+    <message>
+        <source>DEMO VERSION</source>
+        <translation>DEMO VERSION</translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -236,6 +240,13 @@
     <message>
         <source>Playlists</source>
         <translation>Wiedergabelisten</translation>
+    </message>
+</context>
+<context>
+    <name>DiskObserverThread</name>
+    <message>
+        <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
+        <translation>Wenig freier Speicher auf Laufwerk &apos;%1&apos; (nur noch %2 MB frei), Probleme können auftreten!</translation>
     </message>
 </context>
 <context>

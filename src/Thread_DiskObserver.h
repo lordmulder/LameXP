@@ -19,30 +19,30 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-/*
- * LameXP Version Info
- */
-#define VER_LAMEXP_MAJOR				4
-#define VER_LAMEXP_MINOR_HI				0
-#define VER_LAMEXP_MINOR_LO				1
-#define VER_LAMEXP_BUILD				412
-#define VER_LAMEXP_SUFFIX				Beta-15
+#pragma once
 
-/*
- * Tools versions
- */
-#define VER_LAMEXP_TOOL_NEROAAC			1540
+#include <QThread>
 
-/*
- * Helper macros (aka: having fun with the C pre-processor)
- */
-#define VER_LAMEXP_STR_HLP1(X)			#X
-#define VER_LAMEXP_STR_HLP2(V,W,X,Y,Z)	VER_LAMEXP_STR_HLP1(v##V.W##X Z [Build Y])
-#define VER_LAMEXP_STR_HLP3(V,W,X,Y,Z)	VER_LAMEXP_STR_HLP2(V,W,X,Y,Z)
-#define VER_LAMEXP_STR					VER_LAMEXP_STR_HLP3(VER_LAMEXP_MAJOR,VER_LAMEXP_MINOR_HI,VER_LAMEXP_MINOR_LO,VER_LAMEXP_BUILD,VER_LAMEXP_SUFFIX)
-#define VER_LAMEXP_RNAME_HLP1(X)		#X
-#define VER_LAMEXP_RNAME_HLP2(X)		VER_LAMEXP_RNAME_HLP1(X)
-#define VER_LAMEXP_RNAME				VER_LAMEXP_RNAME_HLP2(VER_LAMEXP_SUFFIX)
-#define VER_LAMEXP_MINOR_HLP1(X,Y)		X##Y
-#define VER_LAMEXP_MINOR_HLP2(X,Y)		VER_LAMEXP_MINOR_HLP1(X,Y)
-#define VER_LAMEXP_MINOR				VER_LAMEXP_MINOR_HLP2(VER_LAMEXP_MINOR_HI,VER_LAMEXP_MINOR_LO)
+class DiskObserverThread: public QThread
+{
+	Q_OBJECT
+
+public:
+	DiskObserverThread(const QString &path);
+	~DiskObserverThread(void);
+
+	void stop(void) { m_terminated = true; }
+	
+protected:
+	void run(void);
+	void observe(void);
+
+	static QString makeRootDir(const QString &baseDir);
+
+signals:
+	void messageLogged(const QString &text, bool isWarning);
+
+private:
+	volatile bool m_terminated;
+	const QString m_path;
+};
