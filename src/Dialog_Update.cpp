@@ -67,16 +67,18 @@ static const char *update_mirrors[] =
 
 static const char *known_hosts[] =
 {
-	"http://www.example.com/",
-	"http://www.google.com/",
-	"http://www.wikipedia.org/",
-	"http://www.msn.com/",
-	"http://www.yahoo.com/",
-	"http://sourceforge.net/",
-	"http://www.gitorious.org/",
-	"http://www.youtube.com/",
-	"http://www.ebay.com/",
 	"http://www.amazon.com/",
+	"http://www.aol.com/",
+	"http://www.ask.com/",
+	"http://www.ebay.com/",
+	"http://www.example.com/",
+	"http://www.gitorious.org/",
+	"http://www.google.com/",
+	"http://www.msn.com/",
+	"http://sourceforge.net/",
+	"http://www.wikipedia.org/",
+	"http://www.yahoo.com/",
+	"http://www.youtube.com/",
 	NULL
 };
 
@@ -284,7 +286,7 @@ void UpdateDialog::checkForUpdates(void)
 		if(frameAnimation->isVisible()) frameAnimation->hide();
 		statusLabel->setText(tr("Network connectivity test has failed!"));
 		progressBar->setValue(progressBar->maximum());
-		hintIcon->setPixmap(QIcon(":/icons/error.png").pixmap(16,16));
+		hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
 		hintLabel->setText(tr("Please make sure your internet connection is working properly and try again."));
 		hintIcon->show();
 		hintLabel->show();
@@ -380,12 +382,12 @@ void UpdateDialog::checkForUpdates(void)
 	else
 	{
 		statusLabel->setText(tr("Your version appears to be newer than the latest release."));
-		hintIcon->setPixmap(QIcon(":/icons/bug.png").pixmap(16,16));
+		hintIcon->setPixmap(QIcon(":/icons/shield_error.png").pixmap(16,16));
 		hintLabel->setText(tr("This usually indicates your are currently using a pre-release version of LameXP."));
 		if(frameAnimation->isVisible()) frameAnimation->hide();
 		hintIcon->show();
 		hintLabel->show();
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/bug.png"));
+		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_error.png"));
 		MessageBeep(MB_ICONEXCLAMATION);
 	}
 
@@ -665,7 +667,7 @@ void UpdateDialog::applyUpdate(void)
 		if(hintIcon->isVisible()) hintIcon->hide();
 		int oldMax = progressBar->maximum();
 		int oldMin = progressBar->minimum();
-		progressBar->setMaximum(0);
+		progressBar->setRange(0, 0);
 		QApplication::processEvents();
 		
 		QProcess process;
