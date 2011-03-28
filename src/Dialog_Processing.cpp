@@ -744,10 +744,13 @@ bool ProcessingDialog::shutdownComputer(void)
 	qWarning("Initiating shutdown sequence!");
 	
 	QProgressDialog progressDialog(text.arg(iTimeout), tr("Cancel Shutdown"), 0, iTimeout + 1, this, flags);
+	QPushButton *cancelButton = new QPushButton(tr("Cancel Shutdown"), &progressDialog);
+	cancelButton->setIcon(QIcon(":/icons/power_on.png"));
 	progressDialog.setModal(true);
 	progressDialog.setAutoClose(false);
 	progressDialog.setAutoReset(false);
-	progressDialog.setWindowIcon(QIcon(":/icons/lightning.png"));
+	progressDialog.setWindowIcon(QIcon(":/icons/power_off.png"));
+	progressDialog.setCancelButton(cancelButton);
 	progressDialog.show();
 	
 	QApplication::processEvents();
@@ -777,7 +780,7 @@ bool ProcessingDialog::shutdownComputer(void)
 		}
 		progressDialog.setValue(i+1);
 		progressDialog.setLabelText(text.arg(iTimeout-i));
-		if(iTimeout-i == 3) progressDialog.setCancelButtonText(QString());
+		if(iTimeout-i == 3) progressDialog.setCancelButton(NULL);
 		QApplication::processEvents();
 		PlaySound(MAKEINTRESOURCE((i < iTimeout) ? IDR_WAVE_BEEP : IDR_WAVE_BEEP_LONG), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 	}

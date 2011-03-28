@@ -66,6 +66,8 @@
     <file>icons/paste_plain.png</file>
     <file>icons/photo.png</file>
     <file>icons/play.png</file>
+    <file>icons/power_off.png</file>
+    <file>icons/power_on.png</file>
     <file>icons/report.png</file>
     <file>icons/resultset_next.png</file>
     <file>icons/script.png</file>
