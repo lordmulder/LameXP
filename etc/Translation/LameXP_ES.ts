@@ -246,7 +246,7 @@
     <name>DiskObserverThread</name>
     <message>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Queda poco espacio disponible en el disco &apos;%1&apos; (solo hay %2 MB disponibles), pueden ocurrir problemas!</translation>
     </message>
 </context>
 <context>
@@ -1154,95 +1154,95 @@
     </message>
     <message>
         <source> Multi-Threading </source>
-        <translation type="unfinished"></translation>
+        <translation>Multi-hilo</translation>
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Elija el número de instancias paralelas basadas en el números de núcleos de la CPU (Recomendado)</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Menos instancias</translation>
     </message>
     <message>
         <source>More Instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Más instancias</translation>
     </message>
     <message>
         <source>%1 Instance(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 instancia(s)</translation>
     </message>
     <message>
         <source> Temp Directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Carpeta temporal</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegar...</translation>
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar archivos temporales en la carpeta TEMP del sistema (Recomendado)</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>No encontrado</translation>
     </message>
     <message>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation type="unfinished"></translation>
+        <translation>La carpeta seleccionada como TEMP no existe:</translation>
     </message>
     <message>
         <source>Restore Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡No se puede escribir en la carpeta seleccionada. Por favor, seleccione otra!</translation>
     </message>
     <message>
         <source>CDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos CDA</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡%1 archivo(s) rechazado(s), ya que son archivos CDDA vacíos!</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es recomendable usar %1 para este proposito.</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation type="unfinished"></translation>
+        <translation>Disculpe, LameXP no puede extraer las pistas del CD&amp;minus;Audio.</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
-        <translation type="unfinished"></translation>
+        <translation>Preguntas Frecuentes</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambios</translation>
     </message>
     <message>
         <source>Translator&apos;s Guide</source>
-        <translation type="unfinished"></translation>
+        <translation>Guía de traducción</translation>
     </message>
     <message>
         <source>Help &amp;&amp; Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayuda &amp;&amp; Soporte</translation>
     </message>
     <message>
         <source>Open Folder Recursively...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir carpetas recursivamente...</translation>
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Escaneando carpeta(s) buscando archivos, espere por favor...</translation>
     </message>
     <message>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir carpeta</translation>
     </message>
 </context>
 <context>
@@ -1261,7 +1261,7 @@
     </message>
     <message>
         <source>Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Carátula</translation>
     </message>
 </context>
 <context>
@@ -1276,23 +1276,23 @@
     </message>
     <message>
         <source>Load Artwork From File</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar carátula desde archivo</translation>
     </message>
     <message>
         <source>Clear Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar carátula</translation>
     </message>
     <message>
         <source>Load Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Recargar carátula</translation>
     </message>
     <message>
         <source>Artwork Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en la carátula</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Lo sentimos, ha habido un error al cargar la carátula desde el archivo seleccionado!</translation>
     </message>
 </context>
 <context>
@@ -1621,15 +1621,15 @@
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar el ordenador cuando todos los archivos hayan sido convertidos</translation>
     </message>
     <message>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: El ordenador de apagará en %1 segundos...</translation>
     </message>
     <message>
         <source>Cancel Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar apagado</translation>
     </message>
 </context>
 <context>
@@ -1647,15 +1647,15 @@
     <name>QApplication</name>
     <message>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>El ejecutable &apos;%1&apos; no soporta el modo de compatibilidad de Windows.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation type="unfinished"></translation>
+        <translation>El ejecutable &apos;%1&apos;requiere Qt v%2, pero se ha encontrado v%3.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>El ejecutable &apos;%1&apos;requiere Windows 2000 o superior.</translation>
     </message>
 </context>
 <context>

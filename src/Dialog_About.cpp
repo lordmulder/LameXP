@@ -104,7 +104,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	setText(aboutText);
 	setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
 	setWindowTitle(tr("About LameXP"));
-	
+
 	if(firstStart)
 	{
 		QPushButton *firstButton = addButton(tr("Show License Text"), QMessageBox::AcceptRole);
