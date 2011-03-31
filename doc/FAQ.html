@@ -26,6 +26,7 @@ a:visited { color: #0000EE; }
 <li><a href="#fd53d98a">Who created LameXP?</a>
 <li><a href="#de1c5e44">What license is LameXP released under?</a>
 <li><a href="#303e5fa7">Do I have to pay for LameXP? / How can I donate to the authors of LameXP?</a>
+<li><a href="#054010d9">MP3, AAC or Vorbis - What is the best compressed audio format?</a>
 <li><a href="#411d1257">What is the difference between the CBR, VBR and ABR rate control modes?</a>
 <li><a href="#71a113b0">How do I enable AAC/MP4/M4A output (encoding) in LameXP?</a>
 <li><a href="#126abc5a">Is there a way to output ".m4a" or ".aac" files with LameXP?</a>
@@ -172,6 +173,25 @@ If you want to support the development of LameXP, you can do so by contributing 
 
 <br><br>
 
+<a name="054010d9"></a><b>MP3, AAC or Vorbis - What is the best compressed audio format?</b><br>
+<br>
+This question can NOT be answered in general. The best audio format is the format that works best for you!<br>
+<br>
+Having said that, there are a few things to consider. First of all: All output formats supported by LameXP,<br>
+except for FLAC and PCM/Wave, use a lossy(!) kind of compression. That applies to MP3 and AAC as well as<br>
+Vorbis. Consequently with these formats a certain quality loss is unavoidable when re-encoding/converting, no<br>
+matter what. This is called "generation loss". Nonetheless all three formats (MP3, AAC and Vorbis) are able<br>
+to retain an EXCELLENT audio quality, given that the chosen bitrate (quality level) is sufficient/reasonable.<br>
+<br>
+Secondly, the audio quality does not depend on the audio format and the chosen bitrate only. It also depends<br>
+greatly on the encoder software that is being used. LameXP uses the LAME MP3 encoder, probably the most<br>
+sophisticated MP3 encoder out there, the Nero AAC encoder, one of the best AAC encoders available, and the<br>
+aoTuV Vorbis encoder, an improved/tuned version of the reference Vorbis encoder. Consequently LameXP provides<br>
+you with state-of-the-art encoders, which ensures maximum encoding quality for ALL supported output formats.<br>
+<br>
+To be continued...<br><br>
+<br><br>
+
 <a name="411d1257"></a><b>What is the difference between the CBR, VBR and ABR rate control modes?</b><br>
 <br>
 CBR means "constant bitrate" and, as the name implies, CBR mode allocates the bits at a constant rate. This<br>
@@ -205,6 +225,15 @@ average bitrate *is* known beforehand. So if you need to hit a specific file siz
 Hint: The Nero AAC encoder supports a variant of the ABR mode, the so-called "2-Pass" mode. That mode scans<br>
 through the entire file once (first pass) before the actual encoding is performed (second pass). This way the<br>
 encoder is able to distribute the bits over the entire file and still hit the desired target average bitrate.<br>
+It should be obvious that the advantages of the "2-Pass" mode come at the cost of increased encoding time.<br>
+<br>
+Hint: A common mistake done by people comparing rate control modes is choosing a bitrate that is too high. Of<br>
+course only files of an identical (average) bitrate can be compared by quality. But if that bitrate is chosen<br>
+too high, you won't be able to draw any conclusions from the test. That's because at a certain bitrate even<br>
+the CBR mode will retain excellent quality. In that situation VBR mode or ABR mode can't give an even better<br>
+quality for obvious reasons. But drawing the conclusion that there is no difference between CBR mode and the<br>
+VBR/ABR modes would be very wrong! The differences will become significant when using a reasonable bitrate.<br>
+Another mistake is starting with a low-quality source file and concluding that all modes perform equally bad.<br>
 <br>
 Summary of rate control modes:<br><ul>
 <li>Need to hit a specific fixed file size and still want to retain decent quality? &rArr; ABR mode
@@ -219,7 +248,8 @@ LameXP uses the Nero AAC Encoder for creating AAC/MP4/M4A files. The Nero AAC En
 download. However the license doesn't allow redistribution! Therefore we can NOT ship the Nero encoder along<br>
 with LameXP. Instead you will have to obtain the Nero encoder as a separate download from the official "Nero<br>
 Digital" web-site. Currently you'll find the latest Nero AAC Encoder version at this location:<br><ul>
-<li><a href="http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php" target="_blank">http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php</a></ul>
+<li><a href="http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php" target="_blank">http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php</a>
+<li><a href="http://ftp6.nero.com/tools/" target="_blank">http://ftp6.nero.com/tools/</a></ul>
 <br>
 After you have downloaded the Nero AAC Encoder as a ZIP file, you must "install" the encoder binaries, so<br>
 LameXP can use them. Simply unzip the files 'neroAacEnc.exe', 'neroAacDec.exe' as well as 'neroAacTag.exe' to<br>

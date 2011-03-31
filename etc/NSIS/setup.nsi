@@ -161,11 +161,11 @@ VIAddVersionKey "Website" "http://mulder.at.gg/"
 !define MUI_FINISHPAGE_LINK_LOCATION ${MyWebSite}
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange-uninstall.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "wizard-un.bmp"
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Header\orange.bmp"
-!define MUI_HEADERIMAGE_UNBITMAP "${NSISDIR}\Contrib\Graphics\Header\orange-uninstall.bmp"
+!define MUI_HEADERIMAGE_BITMAP "header.bmp"
+!define MUI_HEADERIMAGE_UNBITMAP "header-un.bmp"
 !define MUI_LANGDLL_ALLLANGUAGES
 !define MUI_CUSTOMFUNCTION_GUIINIT MyUacInit
 !define MUI_CUSTOMFUNCTION_UNGUIINIT un.MyUacInit
