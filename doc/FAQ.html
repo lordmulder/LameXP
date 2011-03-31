@@ -6,7 +6,7 @@
 <style type="text/css">
 <!--
 body { font-family:Monospace; font-size:10pt; }
-a { text-decoration:none; color:#0000EE; }
+a { text-decoration:none; color:#0000EE; transition:color 0.5s ease; -moz-transition:background-color 0.5s ease; -o-transition:background-color 0.5s ease; -webkit-transition:background-color 0.5s ease; }
 a:hover { background-color: #CCCCCC; }
 a:active { color: #551A8B; }
 a:visited { color: #0000EE; }
@@ -26,6 +26,7 @@ a:visited { color: #0000EE; }
 <li><a href="#fd53d98a">Who created LameXP?</a>
 <li><a href="#de1c5e44">What license is LameXP released under?</a>
 <li><a href="#303e5fa7">Do I have to pay for LameXP? / How can I donate to the authors of LameXP?</a>
+<li><a href="#411d1257">What is the difference between the CBR, VBR and ABR rate control modes?</a>
 <li><a href="#71a113b0">How do I enable AAC/MP4/M4A output (encoding) in LameXP?</a>
 <li><a href="#126abc5a">Is there a way to output ".m4a" or ".aac" files with LameXP?</a>
 <li><a href="#ebf016ab">How do I enable WMA input (decoding) in LameXP?</a>
@@ -168,6 +169,47 @@ sites. So if you pay for the LameXP download, the authors of LameXP will not get
 should save your money and download LameXP from one of the official mirrors (see below), which is 100% free.<br>
 <br>
 If you want to support the development of LameXP, you can do so by contributing translations and/or code :-)<br><br>
+
+<br><br>
+
+<a name="411d1257"></a><b>What is the difference between the CBR, VBR and ABR rate control modes?</b><br>
+<br>
+CBR means "constant bitrate" and, as the name implies, CBR mode allocates the bits at a constant rate. This<br>
+means that each part of the audio will get the same amount of bits, regardless of its content. Obviously this<br>
+will waste bits in parts of the audio that are easy to compress. At the same time the quality of parts of the<br>
+audio that are hard to compress will be degraded. Consequently using CBR mode is NOT a very good idea, unless<br>
+you really have to for some reason. However CBR mode has the advantage that the final size of the compressed<br>
+file is perfectly predictable. The resulting file size is defined simply as "duration &times; fixed bitrate".<br>
+<br>
+VBR means "variable bitrate" and, in contrast to CBR mode, VBR mode allows the bitrate to vary/fluctuate.<br>
+Thus the VBR mode enables the encoder to adapt the bitrate with respect to the content of the audio. Parts of<br>
+the audio that are easy to compress will get a lower bitrate in order to safe bits. Parts of the audio that<br>
+are hard to compress will get a higher bitrate in order to avoid quality degradation. Or in other words: VBR<br>
+mode "moves" the bits to the locations where they are actually needed. Therefore the VBR mode achieves a much<br>
+better compression efficiency than the CBR mode, i.e. with VBR mode you can get a better quality at the same<br>
+file size, or the same quality at a smaller file size (compared to CBR mode). One disadvantage of the VBR<br>
+mode is, however, that the final size of the compressed file can NOT be predicted. The resulting file size is<br>
+defined as "duration &times; average bitrate", but the average bitrate can NOT be known beforehand. That's<br>
+because the average bitrate for a specific VBR quality level can vary greatly, depending solely on the<br>
+complexity of the individual audio. Nonetheless VBR mode generally should be the preferred encoding mode.<br>
+<br>
+ABR means "average bitrate". You can think of ABR mode as a compromise between the CBR and VBR mode. With ABR<br>
+mode the bitrate is allowed to vary/fluctuate, similar to VBR mode. However the ABR mode doesn't work with a<br>
+predefined/fixed quality level, as VBR mode does. Instead in ABR mode the encoder will continuously re-adjust<br>
+the quality level in order to hit the target average(!) bitrate. You can also think of ABR mode as a mode<br>
+that pre-allocates the bits in a CBR-like fashion and then redistributes the bits within a local neighborhood<br>
+as needed. Thus the ABR mode combines advantages of CBR mode (predictability) and VBR mode (good quality).<br>
+The final size of the encoded file is still defined as "duration &times; average bitrate", but with ABR mode the<br>
+average bitrate *is* known beforehand. So if you need to hit a specific file size, ABR mode is the solution.<br>
+<br>
+Hint: The Nero AAC encoder supports a variant of the ABR mode, the so-called "2-Pass" mode. That mode scans<br>
+through the entire file once (first pass) before the actual encoding is performed (second pass). This way the<br>
+encoder is able to distribute the bits over the entire file and still hit the desired target average bitrate.<br>
+<br>
+Summary of rate control modes:<br><ul>
+<li>Need to hit a specific fixed file size and still want to retain decent quality? &rArr; ABR mode
+<li>Want to retain a certain level of quality and the file size doesn't matter that much? &rArr; VBR mode
+<li>Avoid CBR mode by all means, unless there are crude restrictions that force you to use it!</ul>
 
 <br><br>
 
@@ -321,9 +363,9 @@ the older 3.98 release series. The most important reason why LAME v3.99 is used 
 LameXP v4.xx focuses on proper Unicode support, but LAME v3.98 did NOT support Unicode filenames or Unicode<br>
 meta tags (through the CLI front-end, on the Windows platform). However LAME v3.99 finally does!<br>
 <br>
-So far we have not encountered any notworthy problems with LAME v3.99. If, however, you encounter a problem<br>
+So far we have not encountered any noteworthy problems with LAME v3.99. If, however, you encounter a problem<br>
 with LAME v3.99, please report your finding to the <a href="http://lame.sourceforge.net/contact.php" target="_blank">LAME development team</a>. Do NOT submit any LAME-specific bug<br>
-reports to the LameXP developers, as we generally cannot analyze/fix probelms specific to the LAME encoder.<br><br>
+reports to the LameXP developers, as we generally cannot analyze/fix problems specific to the LAME encoder.<br><br>
 
 <br><br>
 
