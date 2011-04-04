@@ -108,16 +108,24 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		break;
 	}
 
-	if(!metaInfo.fileName().isEmpty()) args << (isUnicode(metaInfo.fileName()) ? "--uTitle" : "--lTitle") << metaInfo.fileName();
-	if(!metaInfo.fileArtist().isEmpty()) args << (isUnicode(metaInfo.fileArtist()) ? "--uArtist" : "--lArtist") << metaInfo.fileArtist();
-	if(!metaInfo.fileAlbum().isEmpty()) args << (isUnicode(metaInfo.fileAlbum()) ? "--uAlbum" : "--lAlbum") << metaInfo.fileAlbum();
-	if(!metaInfo.fileGenre().isEmpty()) args << (isUnicode(metaInfo.fileGenre()) ? "--uGenre" : "--lGenre") << metaInfo.fileGenre();
-	if(!metaInfo.fileComment().isEmpty()) args << (isUnicode(metaInfo.fileComment()) ? "--uComment" : "--lComment") << metaInfo.fileComment();
+	bool bUseUCS2 = false;
+
+	if(!metaInfo.fileName().isEmpty() && isUnicode(metaInfo.fileName())) bUseUCS2 = true;
+	if(!metaInfo.fileArtist().isEmpty() && isUnicode(metaInfo.fileArtist())) bUseUCS2 = true;
+	if(!metaInfo.fileAlbum().isEmpty() && isUnicode(metaInfo.fileAlbum())) bUseUCS2 = true;
+	if(!metaInfo.fileGenre().isEmpty() && isUnicode(metaInfo.fileGenre())) bUseUCS2 = true;
+	if(!metaInfo.fileComment().isEmpty() && isUnicode(metaInfo.fileComment())) bUseUCS2 = true;
+
+	if(bUseUCS2) args << "--id3v2-ucs2"; //Must specify this BEFORE "--tt" and friends!
+
+	if(!metaInfo.fileName().isEmpty()) args << "--tt" << metaInfo.fileName();
+	if(!metaInfo.fileArtist().isEmpty()) args << "--ta" << metaInfo.fileArtist();
+	if(!metaInfo.fileAlbum().isEmpty()) args << "--tl" << metaInfo.fileAlbum();
+	if(!metaInfo.fileGenre().isEmpty()) args << "--tg" << metaInfo.fileGenre();
+	if(!metaInfo.fileComment().isEmpty()) args << "--tc" << metaInfo.fileComment();
 	if(metaInfo.fileYear()) args << "--ty" << QString::number(metaInfo.fileYear());
 	if(metaInfo.filePosition()) args << "--tn" << QString::number(metaInfo.filePosition());
 	if(!metaInfo.fileCover().isEmpty()) args << "--ti" << QDir::toNativeSeparators(metaInfo.fileCover());
-	
-	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 

@@ -388,7 +388,13 @@ doesn't apply the other way around! Moreover embedding an ID3v1 and an ID3v2 tag
 the information would have fit into a single ID3v1 tag, means an unnecessary redundancy!<br>
 <br>
 If, however, you need to enforce the creation of an ID3v2 tag for some reason, you can use the "--add-id3v2"<br>
-parameter for that purpose. Simply add the parameter to the "Custom Encoder Parameters" for LAME.<br><br>
+parameter for that purpose. Simply add the parameter to the "Custom Encoder Parameters" for LAME.<br>
+<br>
+That's what the LAME help says about ID3 tags:<br>
+<blockquote>A version 2 tag will NOT be added unless one of the input fields<br>
+won't fit in a version 1 tag (e.g. the title string is longer than 30<br>
+characters), or the '--add-id3v2' or '--id3v2-only' options are used,<br>
+or output is redirected to stdout.</blockquote>
 
 <br><br>
 

@@ -666,12 +666,13 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Create Qt application instance and setup version info
+	QDate date = QDate::currentDate();
 	QApplication *application = new QApplication(argc, argv);
 	application->setApplicationName("LameXP - Audio Encoder Front-End");
 	application->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
 	application->setOrganizationName("LoRd_MuldeR");
 	application->setOrganizationDomain("mulder.dummwiedeutsch.de");
-	application->setWindowIcon(QIcon(":/MainIcon.png"));
+	application->setWindowIcon((date.month() == 12 && date.day() >= 24 && date.day() <= 26) ? QIcon(":/MainIcon2.png") : QIcon(":/MainIcon.png"));
 	
 	//Load plugins from application directory
 	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
