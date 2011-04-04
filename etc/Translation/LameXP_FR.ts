@@ -250,7 +250,7 @@
     <name>DiskObserverThread</name>
     <message>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
-        <translation type="unfinished"></translation>
+        <translation>Espace disque insuffisant détecté sur le lecteur &apos;%1&apos; (seulement %2 Mo sont libres), des problèmes peuvent survenir !</translation>
     </message>
 </context>
 <context>
@@ -1163,95 +1163,96 @@ Sélection automatique (par défaut)</translation>
     </message>
     <message>
         <source> Multi-Threading </source>
-        <translation type="unfinished"></translation>
+        <translation> Multi-Threading </translation>
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez le nombre d&apos;instances basé sur le nombre de cœurs du processeur (Recommandé)</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Moins d&apos;instances</translation>
     </message>
     <message>
         <source>More Instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus d&apos;instances</translation>
     </message>
     <message>
         <source>%1 Instance(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Instance(s)</translation>
     </message>
     <message>
         <source> Temp Directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire temporaire</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Explorer...</translation>
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Stocker les fichiers temporaires dans le répertoire TEMP par défaut (Recommandé)</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Non trouvé</translation>
     </message>
     <message>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre dossier TEMP actuellement sélectionné n&apos;existe plus :</translation>
     </message>
     <message>
         <source>Restore Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurer par défaut</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;écrire dans le répertoire sélectionné. Veuillez choisir un autre répertoire !</translation>
     </message>
     <message>
         <source>CDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers CDA</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 fichiers ont été rejetés parce qu&apos;ils sont des fichiers CDDA fictifs !</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nous vous recommandons d&apos;utiliser %1 à cette fin.</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, LameXP ne peut pas extraire les pistes d&apos;un CD&amp;minus;Audio à l&apos;heure actuelle.</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
-        <translation type="unfinished"></translation>
+        <translation>Foire Aux Questions</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>Journal des changements</translation>
     </message>
     <message>
         <source>Translator&apos;s Guide</source>
-        <translation type="unfinished"></translation>
+        <translation>Guide du traducteur</translation>
     </message>
     <message>
         <source>Help &amp;&amp; Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide &amp;&amp; support</translation>
     </message>
     <message>
         <source>Open Folder Recursively...</source>
-        <translation type="unfinished"></translation>
+        <translation>	
+Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Balayage des dossiers, veuillez patienter...</translation>
     </message>
     <message>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un dossier</translation>
     </message>
 </context>
 <context>
@@ -1270,7 +1271,7 @@ Sélection automatique (par défaut)</translation>
     </message>
     <message>
         <source>Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Oeuvre</translation>
     </message>
 </context>
 <context>
@@ -1285,23 +1286,23 @@ Sélection automatique (par défaut)</translation>
     </message>
     <message>
         <source>Load Artwork From File</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger l&apos;oeuvre depuis le fichier</translation>
     </message>
     <message>
         <source>Clear Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Nettoyer l&apos;oeuvre</translation>
     </message>
     <message>
         <source>Load Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger l&apos;oeuvre</translation>
     </message>
     <message>
         <source>Artwork Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;oeuvre</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de charger l&apos;oeuvre depuis le fichier sélectionné !</translation>
     </message>
 </context>
 <context>
@@ -1630,15 +1631,15 @@ Sélection automatique (par défaut)</translation>
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter l&apos;ordinateur dès que tous les fichiers ont été convertis</translation>
     </message>
     <message>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement : l&apos;ordinateur s&apos;éteindra dans %1 secondes...</translation>
     </message>
     <message>
         <source>Cancel Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler l&apos;extinction</translation>
     </message>
 </context>
 <context>
