@@ -32,6 +32,9 @@
         <property name="currentIndex">
          <number>0</number>
         </property>
+        <property name="usesScrollButtons">
+         <bool>false</bool>
+        </property>
         <widget class="QWidget" name="tabSourceFiles">
          <property name="font">
           <font>
@@ -1057,8 +1060,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
-               <height>1091</height>
+               <width>602</width>
+               <height>1088</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -3103,6 +3106,7 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

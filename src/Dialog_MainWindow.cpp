@@ -680,6 +680,9 @@ void MainWindow::changeEvent(QEvent *e)
 		{
 			ShellIntegration::install();
 		}
+
+		//Force resize, if needed
+		tabPageChanged(tabWidget->currentIndex());
 	}
 }
 
@@ -1230,10 +1233,42 @@ void MainWindow::tabPageChanged(int idx)
 			actions.at(i)->setChecked(true);
 		}
 	}
-	
-	if(idx == tabWidget->indexOf(tabSourceFiles))
+
+	int initialWidth = this->width();
+	int maximumWidth = QApplication::desktop()->width();
+
+	if(this->isVisible())
+	{
+		while(tabWidget->width() < tabWidget->sizeHint().width())
+		{
+			int previousWidth = this->width();
+			this->resize(this->width() + 1, this->height());
+			if(this->frameGeometry().width() >= maximumWidth) break;
+			if(this->width() <= previousWidth) break;
+		}
+	}
+
+	if(idx == tabWidget->indexOf(tabOptions) && scrollArea->widget() && this->isVisible())
+	{
+		QApplication::processEvents();
+		while(scrollArea->viewport()->width() < scrollArea->widget()->width())
+		{
+			int previousWidth = this->width();
+			this->resize(this->width() + 1, this->height());
+			if(this->frameGeometry().width() >= maximumWidth) break;
+			if(this->width() <= previousWidth) break;
+		}
+	}
+	else if(idx == tabWidget->indexOf(tabSourceFiles))
 	{
 		m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+	}
+
+	if(initialWidth < this->width())
+	{
+		QPoint prevPos = this->pos();
+		int delta = (this->width() - initialWidth) >> 2;
+		move(prevPos.x() - delta, prevPos.y());
 	}
 }
 
