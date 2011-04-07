@@ -115,19 +115,45 @@ static const char *g_lamexp_version_raw_date = __DATE__;
 //Console attached flag
 static bool g_lamexp_console_attached = false;
 
-//Compiler version
-#if _MSC_VER == 1400
-	static const char *g_lamexp_version_compiler = "MSVC 8.0";
-#else
-	#if _MSC_VER == 1500
-		static const char *g_lamexp_version_compiler = "MSVC 9.0";
+//Compiler detection
+//The following code was borrowed from MPC-HC project: http://mpc-hc.sf.net/
+#if defined(__INTEL_COMPILER)
+	#if (__INTEL_COMPILER >= 1200)
+		static const char *g_lamexp_version_compiler = "ICL 12.x";
+	#elif (__INTEL_COMPILER >= 1100)
+		static const char *g_lamexp_version_compiler = = "ICL 11.x";
+	#elif (__INTEL_COMPILER >= 1000)
+		static const char *g_lamexp_version_compiler = = "ICL 10.x";
 	#else
-		#if _MSC_VER == 1600
-			static const char *g_lamexp_version_compiler = "MSVC 10.0";
+		#error Compiler is not supported!
+	#endif
+#elif defined(_MSC_VER)
+	#if (_MSC_VER == 1600)
+		#if (_MSC_FULL_VER >= 160040219)
+			static const char *g_lamexp_version_compiler = "MSVC 2010-SP1";
 		#else
-			static const char *g_lamexp_version_compiler = "UNKNOWN";
+			static const char *g_lamexp_version_compiler = "MSVC 2010";
+		#endif
+	#elif (_MSC_VER == 1500)
+		#if (_MSC_FULL_VER >= 150030729)
+			static const char *g_lamexp_version_compiler = "MSVC 2008-SP1";
+		#else
+			static const char *g_lamexp_version_compiler = "MSVC 2008";
+		#endif
+	#else
+		#error Compiler is not supported!
+	#endif
+
+	// Note: /arch:SSE and /arch:SSE2 are only available for the x86 platform
+	#if !defined(_M_X64) && defined(_M_IX86_FP)
+		#if (_M_IX86_FP == 1)
+			LAMEXP_COMPILER_WARNING("SSE instruction set is enabled!")
+		#elif (_M_IX86_FP == 2)
+			LAMEXP_COMPILER_WARNING("SSE2 instruction set is enabled!")
 		#endif
 	#endif
+#else
+	#error Compiler is not supported!
 #endif
 
 //Official web-site URL
