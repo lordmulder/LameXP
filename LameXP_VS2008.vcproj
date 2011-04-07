@@ -1805,27 +1805,27 @@
 				>
 			</File>
 			<File
-				RelativePath=".\tmp\RCC_Documents.cpp"
+				RelativePath=".\tmp\QRC_Documents.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\tmp\RCC_Flags.cpp"
+				RelativePath=".\tmp\QRC_Flags.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\tmp\RCC_Icons.cpp"
+				RelativePath=".\tmp\QRC_Icons.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\tmp\RCC_Images.cpp"
+				RelativePath=".\tmp\QRC_Images.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\tmp\RCC_Localization.cpp"
+				RelativePath=".\tmp\QRC_Localization.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\tmp\RCC_Tools.cpp"
+				RelativePath=".\tmp\QRC_Tools.cpp"
 				>
 			</File>
 		</Filter>
@@ -1840,9 +1840,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1850,9 +1850,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1860,9 +1860,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1874,9 +1874,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1884,9 +1884,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1894,9 +1894,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1908,9 +1908,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1918,9 +1918,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1928,9 +1928,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1942,9 +1942,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1952,9 +1952,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1962,9 +1962,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1980,10 +1980,10 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(ProjectDir)\res\localization\LameXP_DE.qm&quot;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -1991,10 +1991,10 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						AdditionalDependencies=""
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -2002,10 +2002,10 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(ProjectDir)\res\localization\LameXP_DE.qm&quot;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2021,9 +2021,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -2031,9 +2031,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -2041,9 +2041,9 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="RCC &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						Outputs="&quot;$(SolutionDir)tmp\RCC_$(SafeInputName).cpp&quot;"
+						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>

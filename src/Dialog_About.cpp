@@ -58,9 +58,10 @@ g_lamexp_contributors[] =
 	{"en", L"Englisch",   L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
 	{"de", L"Deutsch",    L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
 	{"",   L"",           L"Bodo Thevissen",      "Bodo@thevissen.de"    },
+	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"    },
 	{"fr", L"Française",  L"Dodich Informatique", "Dodich@live.fr"       },
 	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it"},
-	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"    },
+	{"kr", L"한국말",     L"JaeHyung Lee",        "Kolanp@gmail.com"     },
 	{"ru", L"Русский",    L"Neonailol",           "Neonailol@gmail.com"  },
 	{"uk", L"Українська", L"Arestarh",            "Arestarh@ukr.net"     },
 	{NULL, NULL, NULL, NULL}

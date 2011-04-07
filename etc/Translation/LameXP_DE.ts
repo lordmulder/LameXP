@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinweis: Diese Demo (Test) Version von LameXP läuft am %1 ab.</translation>
     </message>
 </context>
 <context>
