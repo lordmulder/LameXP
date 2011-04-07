@@ -196,8 +196,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation type="unfinished">ДЕМО ВЕРСІЯ</translation>
+        <source>Note: This demo (pre-release) version of LameXP will expire at %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

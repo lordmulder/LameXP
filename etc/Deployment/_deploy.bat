@@ -40,7 +40,7 @@ REM ------------------------------------------
 REM :: BUILD BINARIES ::
 REM ------------------------------------------
 call _lupdate.bat
-call _build.bat "..\..\LameXP.sln" "%LAMEXP_CONFIG%"
+call _build.bat "%PATH_VCPROJ%" "%LAMEXP_CONFIG%"
 if not "%LAMEXP_ERROR%"=="0" (
 	call _error.bat	"BUILD HAS FAILED"
 	GOTO:EOF

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LameXP", "LameXP.vcproj", "{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LameXP", "LameXP_VS2008.vcproj", "{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

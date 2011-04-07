@@ -8,10 +8,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please visit %1 for news and updates!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -197,6 +193,10 @@
     </message>
     <message>
         <source>n/a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note: This demo (pre-release) version of LameXP will expire at %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

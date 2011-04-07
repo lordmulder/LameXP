@@ -200,8 +200,8 @@
         <translation>GNU Wget &amp;minus; Logiciel permettant de récupérer des fichiers à l&apos;aide du HTTP</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation>VERSION DE DEMO</translation>
+        <source>Note: This demo (pre-release) version of LameXP will expire at %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -196,8 +196,8 @@
         <translation>Silk Icons &amp;minus; Über 700 Symbole im PNG Format</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation>DEMO VERSION</translation>
+        <source>Note: This demo (pre-release) version of LameXP will expire at %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Schießen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Encoding Files</source>
