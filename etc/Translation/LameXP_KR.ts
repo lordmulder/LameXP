@@ -5,19 +5,19 @@
     <name>AboutDialog</name>
     <message>
         <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP &amp;minus; Audio Encoder 프론트-엔드</translation>
+        <translation type="unfinished">LameXP &amp;minus; 오디오 인코더 프론트-엔드</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation type="unfinished">새 소식과 업데이트를 위해 %1을 방문하시기 바랍니다!</translation>
+        <translation type="unfinished">새 소식과 업데이트를 위해 %1로 방문하십시오!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation type="unfinished">알림: LameXP는 무료 소프트웨어입니다. LameXP를 내려받거나 사용하기 위해서 돈을 &lt;b&gt;지불하지 마십시오&lt;/b&gt;. 일부 타 웹사이트에서 LameXP를 내려받기 위해서 지불을 요구한다면 &lt;b&gt;절대로&lt;/b&gt; 내려받지 마십시오!!!</translation>
+        <translation type="unfinished">알림: LameXP는 무료 소프트웨어입니다. LameXP를 내려받거나 사용하기 위해서 &lt;b&gt;돈을 지불하지 마십시오&lt;/b&gt;. 일부 타 웹사이트에서 LameXP를 내려받기 위해서 지불을 요구한다면 &lt;b&gt;절대로&lt;/b&gt; 내려받지 마십시오!!!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">지속적인 지원을 해주신 John33(%1)님께 특별히 감사드립니다.</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">기여자</translation>
     </message>
     <message>
         <source>About Qt4</source>
@@ -49,11 +49,11 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">버리기</translation>
+        <translation type="unfinished">닫기</translation>
     </message>
     <message>
         <source>The following people have contributed to LameXP:</source>
-        <translation type="unfinished">다음 분들이 LameXP에 도움을 주셨습니다:</translation>
+        <translation type="unfinished">다음 분들이 LameXP 번역에 도움을 주셨습니다:</translation>
     </message>
     <message>
         <source>Translators:</source>
@@ -61,11 +61,11 @@
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation type="unfinished">LameXP를 번역하길 원하시는 분들은 저희에게 연락 주시기 바랍니다!</translation>
+        <translation type="unfinished">LameXP 번역에 도움을 주실 분들은 연락주시기 바랍니다!</translation>
     </message>
     <message>
         <source>About Contributors</source>
-        <translation type="unfinished">기여자에 관해</translation>
+        <translation type="unfinished">도움 주신 분들</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
@@ -73,11 +73,11 @@
     </message>
     <message>
         <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation type="unfinished">LAME &amp;minus; OpenSource mp3 Encoder</translation>
+        <translation type="unfinished">LAME &amp;minus; 오픈소스 MP3 인코더</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation type="unfinished">GNU 약소 일반 공중 사용 허가서의 약관에 따라 출시되었습니다.</translation>
+        <translation type="unfinished">GNU 약소 일반 공중 사용 허가서의 약관 하에 출시됨.</translation>
     </message>
     <message>
         <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation type="unfinished">완전 오픈 및 전용-무료 오디오 인코딩 기술.</translation>
+        <translation type="unfinished">완전히 공개된, 특허받은 무료 오디오 인코딩 기술.</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
@@ -105,7 +105,7 @@
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation type="unfinished">공개 및 전용-무료 무손실 오디오 압축 기술.</translation>
+        <translation type="unfinished">공개 및 특허 받은-무료 무손실 오디오 압축 기술.</translation>
     </message>
     <message>
         <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation type="unfinished">GNU 일반 공중 사용 허가서의 약관에 따라 출시되었습니다.</translation>
+        <translation type="unfinished">GNU 일반 공중 사용 허가서의 약관 하에 줄시됨.</translation>
     </message>
     <message>
         <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation type="unfinished">완전 공개 오디오 압축 형식.</translation>
+        <translation type="unfinished">완전히 공개된 오디오 압축 형식.</translation>
     </message>
     <message>
         <source>Musepack &amp;minus; Living Audio Compression</source>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation type="unfinished">음성화를 위해 설계된 오픈 소스 전용-무료 오디오 형식.</translation>
+        <translation type="unfinished">음성화 제작을 위해 설계되어진 공개된 무료 오디오 형식.</translation>
     </message>
     <message>
         <source>The True Audio &amp;minus; Lossless Audio Codec</source>
@@ -261,7 +261,7 @@
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation type="unfinished">여기에서 드래그&amp;amp;드롭을 통해 LameXP로 파일들을 추가할 수 있습니다!</translation>
+        <translation type="unfinished">여기로 파일들을 드래그&amp;amp;드롭하여 LameXP에 추가할 수 있습니다!</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
@@ -287,7 +287,7 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">지우기</translation>
+        <translation type="unfinished">닫기</translation>
     </message>
     <message>
         <source>Save to File...</source>
@@ -310,7 +310,7 @@
     <name>MainWindow</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP - Audio Encoder 프론트-엔드</translation>
+        <translation type="unfinished">LameXP - 오디오 인코더 프론트-엔드</translation>
     </message>
     <message>
         <source>Source Files</source>
@@ -330,7 +330,7 @@
     </message>
     <message>
         <source>Show Details</source>
-        <translation type="unfinished">자세히 보기</translation>
+        <translation type="unfinished">메타 정보 보기</translation>
     </message>
     <message>
         <source>Output Directory</source>
@@ -338,15 +338,15 @@
     </message>
     <message>
         <source>Goto Home Folder</source>
-        <translation type="unfinished">홈 폴드로 이동</translation>
+        <translation type="unfinished">홈 폴드로 </translation>
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation type="unfinished">뮤직 폴드로 이동</translation>
+        <translation type="unfinished">뮤직 폴드로 </translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
-        <translation type="unfinished">데스크탑 폴드로 이동</translation>
+        <translation type="unfinished">바탕 화면 폴드로</translation>
     </message>
     <message>
         <source>Make New Folder</source>
@@ -354,11 +354,11 @@
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation type="unfinished">입력 파일과 동일한 위치에 출력 파일 저장</translation>
+        <translation type="unfinished">입력 파일과 동일 위치에 출력 파일 저장</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation type="unfinished">출력 파일에 원폰 파일 경로 첨부</translation>
+        <translation type="unfinished">출력 파일에 원본 파일 경로 첨부</translation>
     </message>
     <message>
         <source>Meta Data</source>
@@ -390,7 +390,7 @@
     </message>
     <message>
         <source>Write meta information to encoded files</source>
-        <translation type="unfinished">인코딩된 파일에 메타 정보를 작성합니다</translation>
+        <translation type="unfinished">인코딩된 파일에 메타 정보를 작성</translation>
     </message>
     <message>
         <source>Compression</source>
@@ -426,19 +426,19 @@
     </message>
     <message>
         <source>Quality-based (VBR)</source>
-        <translation type="unfinished">Quality-based (VBR)</translation>
+        <translation type="unfinished">품질-기반 (VBR)</translation>
     </message>
     <message>
         <source>Average Bitrate (ABR)</source>
-        <translation type="unfinished">Average Bitrate (ABR)</translation>
+        <translation type="unfinished">평균 비트레이트 (ABR)</translation>
     </message>
     <message>
         <source>Constant Bitrate (CBR)</source>
-        <translation type="unfinished">Constant Bitrate (CBR)</translation>
+        <translation type="unfinished">고정 비트레이트 (CBR)</translation>
     </message>
     <message>
         <source> Quality / Bitrate </source>
-        <translation type="unfinished"> 품질 / 전송률 </translation>
+        <translation type="unfinished"> 품질 / 비트레이트 </translation>
     </message>
     <message>
         <source>Minimum</source>
@@ -454,7 +454,7 @@
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation type="unfinished">전송률 관리 (LAME and OggEnc2) </translation>
+        <translation type="unfinished"> 전송률 관리 (LAME 및 OggEnc2) </translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
@@ -478,7 +478,7 @@
     </message>
     <message>
         <source>Better quality</source>
-        <translation type="unfinished">나은 품빌</translation>
+        <translation type="unfinished">좋은 품질</translation>
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
@@ -494,7 +494,7 @@
     </message>
     <message>
         <source>Forced Joint Stereo</source>
-        <translation type="unfinished">강제 조인트 스트레오</translation>
+        <translation type="unfinished">조인트 스트레오 강제</translation>
     </message>
     <message>
         <source>Simple</source>
@@ -510,7 +510,7 @@
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation type="unfinished">MP3 채널 모드:</translation>
+        <translation type="unfinished">MP3 채널 방식:</translation>
     </message>
     <message>
         <source>Sampling Rate (Hz):</source>
@@ -546,7 +546,7 @@
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation type="unfinished">2-Pass Processing (ABR 모드) 활성화</translation>
+        <translation type="unfinished">2-패스 처리 (ABR 모드) 활성화</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
@@ -558,15 +558,15 @@
     </message>
     <message>
         <source>Enforce LC-AAC</source>
-        <translation type="unfinished">LC-AAC 강제 실행</translation>
+        <translation type="unfinished">LC-AAC 강제 적용</translation>
     </message>
     <message>
         <source>Enforce HE-AAC (AAC + SBR)</source>
-        <translation type="unfinished">HE-AAC (AAC + SBR) 강제 실행</translation>
+        <translation type="unfinished">HE-AAC (AAC + SBR) 강제 적용</translation>
     </message>
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
-        <translation type="unfinished">HE-AAC v2 (AAC + SBR + PS) 강제 실행</translation>
+        <translation type="unfinished">HE-AAC v2 (AAC + SBR + PS) 강제 적용</translation>
     </message>
     <message>
         <source> Volume Normalization </source>
@@ -582,7 +582,7 @@
     </message>
     <message>
         <source> Tone Adjustment </source>
-        <translation type="unfinished">톤(음색) 조정</translation>
+        <translation type="unfinished">톤 조정</translation>
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
@@ -594,7 +594,7 @@
     </message>
     <message>
         <source> Custom Encoder Parameters </source>
-        <translation type="unfinished"> 사용자 인코더 매개 변수 </translation>
+        <translation type="unfinished"> 인코더 사용자 매개 변수 </translation>
     </message>
     <message>
         <source>LAME:</source>
@@ -614,23 +614,23 @@
     </message>
     <message>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
-        <translation type="unfinished">경고: 사용자 매개 변수는 전혀 확인되지 않습니다. 위험을 감수하고 사용하십시오!!!</translation>
+        <translation type="unfinished">경고: 사용자 매개 변수가 전혀 확인되지 않습니다. 위험을 감수하고 사용하십시오!!!</translation>
     </message>
     <message>
         <source> Multi-Threading </source>
-        <translation type="unfinished"> 멀티-스레딩 </translation>
+        <translation type="unfinished"> 멀티-쓰레딩 </translation>
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation type="unfinished">CPU 코어 갯수에 기반하여 병렬 인스턴스의 갯수 선택. (권장)</translation>
+        <translation type="unfinished">CPU 코어 수에 기반하여 병렬 인스턴스의 갯수를 선택합니다. (권장)</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
-        <translation type="unfinished">적은 인스턴스</translation>
+        <translation type="unfinished">인스턴스 감소</translation>
     </message>
     <message>
         <source>More Instances</source>
-        <translation type="unfinished">많은 인스턴스</translation>
+        <translation type="unfinished">인스턴스 증가</translation>
     </message>
     <message>
         <source> Temp Directory </source>
@@ -650,7 +650,7 @@
     </message>
     <message>
         <source> Encode Now!</source>
-        <translation type="unfinished">지금 인코딩!</translation>
+        <translation type="unfinished">인코딩 시작!</translation>
     </message>
     <message>
         <source>About...</source>
@@ -658,7 +658,7 @@
     </message>
     <message>
         <source> Exit Program</source>
-        <translation type="unfinished"> 프로그램 끝내기</translation>
+        <translation type="unfinished"> 끝내기</translation>
     </message>
     <message>
         <source>File</source>
@@ -686,7 +686,7 @@
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">구성</translation>
+        <translation type="unfinished">환경 설정</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -722,19 +722,19 @@
     </message>
     <message>
         <source>Windows Vista (&quot;Aero&quot;)</source>
-        <translation type="unfinished">Windows Vista (&quot;Aero&quot;)</translation>
+        <translation type="unfinished">윈도우 Vista (&quot;Aero&quot;)</translation>
     </message>
     <message>
         <source>Windows Classic</source>
-        <translation type="unfinished">Windows Classic</translation>
+        <translation type="unfinished">윈도우 클래식</translation>
     </message>
     <message>
         <source>Windows XP (&quot;Luna&quot;)</source>
-        <translation type="unfinished">Windows XP (&quot;Luna&quot;)</translation>
+        <translation type="unfinished">윈도우 XP (&quot;Luna&quot;)</translation>
     </message>
     <message>
         <source>Disable Update Reminder</source>
-        <translation type="unfinished">업데이트 기억 비활성화</translation>
+        <translation type="unfinished">업데이트 알림 비활성화</translation>
     </message>
     <message>
         <source>Disable Sound Effects</source>
@@ -742,7 +742,7 @@
     </message>
     <message>
         <source>Install WMA Decoder</source>
-        <translation type="unfinished">WMA 디코더 설치</translation>
+        <translation type="unfinished">WMA Decoder 설치</translation>
     </message>
     <message>
         <source>Disable Nero AAC Notifications</source>
@@ -794,63 +794,63 @@
     </message>
     <message>
         <source>Access Denied</source>
-        <translation type="unfinished">접근 거부됨</translation>
+        <translation type="unfinished">접근 거부</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 파일이 거부되었습니다. 읽기 권한이 부여되지 않았습니다!</translation>
     </message>
     <message>
         <source>This usually means the file is locked by another process.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">다른 프로세스에 의해 파일이 잠겨 있는 경우입니다.</translation>
     </message>
     <message>
         <source>CDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CDA 파일</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 파일이 거부되었습니다. 가짜 CDDA 파일입니다!</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">죄송하지만, 현재 LameXP가 Audio&amp;minus;CD에서 오디오 트랙을 추출할 수 없습니다.</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">그 목적을 위해 %1 사용을 권장합니다.</translation>
     </message>
     <message>
         <source>Files Rejected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일 거부</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 파일이 거부되었습니다. 파일 형식이 인식되지 않습니다!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일이 손상 또는 지원되지 않는 파일 형식일 경우입니다.</translation>
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">폴드에서 파일 검색중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA Decoder 내려받는 중, 잠시 기다려주십시오...</translation>
     </message>
     <message>
         <source>Download Failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">내려받기 실패</translation>
     </message>
     <message>
         <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA Decoder 설치 파일 내려받기 실패, 인터넷 연결을 확인하시기 바랍니다!</translation>
     </message>
     <message>
         <source>Try Again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">재시도</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -858,23 +858,23 @@
     </message>
     <message>
         <source>The download seems to be corrupted. Please try again!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">다운로드 파일이 손상된 듯합니다. 다시 시도하시기 바랍니다!</translation>
     </message>
     <message>
         <source>WMA Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA Decoder</translation>
     </message>
     <message>
         <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA File Decoder가 설치되었습니다. 지금 LameXP를 재시작하시기 바랍니다!</translation>
     </message>
     <message>
         <source>Quit LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP 끝내기</translation>
     </message>
     <message>
         <source>Postpone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">나중에</translation>
     </message>
     <message>
         <source>DEMO VERSION</source>
@@ -882,75 +882,75 @@
     </message>
     <message>
         <source>You can drop in audio files here!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">여기로 오디오 파일을 끌어다 놓으십시오!</translation>
     </message>
     <message>
         <source>Open File in External Application</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">외부 플레이어로 열기</translation>
     </message>
     <message>
         <source>Browse File Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일 위치 찾아보기</translation>
     </message>
     <message>
         <source>Browse Selected Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">선택 폴드 찾아보기</translation>
     </message>
     <message>
         <source>License Declined</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">라이센스 거절</translation>
     </message>
     <message>
         <source>You have declined the license. Consequently the application will exit now!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">귀하는 라이센스를 거절했습니다. 따라서 지금 프로그램이 종료됩니다!</translation>
     </message>
     <message>
         <source>Goodbye!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">안녕히!</translation>
     </message>
     <message>
         <source>LameXP - Expired</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP - 만료</translation>
     </message>
     <message>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP의 이 데모 (예비 출시) 버전은 %1 일자에 만료됩니다.</translation>
     </message>
     <message>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP는 무료 소프트웨어이며 출시 버전은 기한 만료되지 않습니다.</translation>
     </message>
     <message>
         <source>Exit Program</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> 끝내기</translation>
     </message>
     <message>
         <source>Urgent Update</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">긴급 업데이트</translation>
     </message>
     <message>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">사용자의 LameXP 버전이 일년 이상 지난 버전입니다. 업데이트 필요!</translation>
     </message>
     <message>
         <source>Update Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">업데이트 알림</translation>
     </message>
     <message>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">마지막 업데이트 점검이 14일 전입니다. 지금 업데이트를 점검하시겠습니까?</translation>
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">아직 LameXP 업데이트 점점을 하지 않았습니다. 지금 업데이트를 점검하시겠습니까?</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP가 Nero AAC encoder의 버전이 구버전임을 탐지했습니다!</translation>
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">사용 가능한 현재 버전은 %1 (또는 상위)이지만 설치된 버전은 아직도 %2 버전입니다.</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -958,47 +958,47 @@
     </message>
     <message>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mero 웹사이트에서 Nero AAC encoder 최신 버전을 내려받을 수 있습니다:</translation>
     </message>
     <message>
         <source>AAC Encoder Outdated</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AAC Encoder 구버전</translation>
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nero AAC encoder를 찾을 수 없습니다. AAC 인코딩 지원이 비활성화 됩니다.</translation>
     </message>
     <message>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP 디렉토리로 &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;와 &apos;neroAacTag.exe&apos; 파일들을 넣어주십시오!</translation>
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP 디렉토리 위치:</translation>
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nero 공식 웹사이트에서 Nero AAC encoder를 내려받을 수 있습니다:</translation>
     </message>
     <message>
         <source>AAC Support Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AAC 지원 비활성화</translation>
     </message>
     <message>
         <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP가 시스템에 WMA File Decoder 콤포넌트가 미설치되어 있음을 탐지했습니다.</translation>
     </message>
     <message>
         <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA File Decoder 콤포넌트를 설치하기 전까지 WMA 파일을 추가하여 처리할 수 없습니다!</translation>
     </message>
     <message>
         <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">지금 WMA File Decoder 콤포넌트를 내려받아 설치하시겠습니까?</translation>
     </message>
     <message>
         <source>WMA Decoder Missing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA Decoder 누락</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
@@ -1006,243 +1006,243 @@
     </message>
     <message>
         <source>LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP</translation>
     </message>
     <message>
         <source>You must add at least one file to the list before proceeding!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">인코딩 처리하기 전에 적어도 하나 이상의 파일을 추가해야 합니다!</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">찾을 수 없음</translation>
     </message>
     <message>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">현재 선택한 TEMP 폴드가 더 이상 존재하지 않습니다:</translation>
     </message>
     <message>
         <source>Restore Default</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">기본 복원</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">디스크 공간 부족 알림</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">시스템의 TEMP 폴드의 사용 가능한 여유 디스크 공간이 %1 GB보다 적습니다.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">인코딩 처리를 하기 전에 먼저 디스크의 여유 공간을 확보하시길 권장드립니다!</translation>
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">사용자 TEMP 폴드 위치:</translation>
     </message>
     <message>
         <source>Abort Encoding Process</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">인코딩 처리 취소</translation>
     </message>
     <message>
         <source>Clean Disk Now</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">지금 디스크 청소</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">무시</translation>
     </message>
     <message>
         <source>Low Diskspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">디스크 공간 부족</translation>
     </message>
     <message>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">디스크 여유 공간이 조금 남았습니다. 문제가 발생할 수 있습니다!</translation>
     </message>
     <message>
         <source>Sorry, an unsupported encoder has been chosen!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">죄송하지만 지원되지 않는 인코더를 선택하였습니다!</translation>
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">선택한 출력 디렉토리에 작성할 수 없습니다.</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">다른 디렉토리를 선택하십시오!</translation>
     </message>
     <message>
         <source>Add file(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일 추가</translation>
     </message>
     <message>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">폴드 추가</translation>
     </message>
     <message>
         <source>Load Translation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">번역 불러오기</translation>
     </message>
     <message>
         <source>Translation Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">번역 파일</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">새 폴드</translation>
     </message>
     <message>
         <source>Enter the name of the new folder:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">새 폴드 이름을 입력하십시오:</translation>
     </message>
     <message>
         <source>Failed to create folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">폴드 생성이 실패되었습니다</translation>
     </message>
     <message>
         <source>The new folder could not be created:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">새 폴드를 생성할 수 없음:</translation>
     </message>
     <message>
         <source>Drive is read-only or insufficient access rights!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">드라이버가 읽기-전용이거나 접근 권한이 없습니다!</translation>
     </message>
     <message>
         <source>Already Running</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">이미 실행중</translation>
     </message>
     <message>
         <source>LameXP is already running, please use the running instance!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP가 이미 실행중입니다. 실행중인 인스턴스를 사용하십시오!</translation>
     </message>
     <message>
         <source>Quality Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">품질 수준 %1</translation>
     </message>
     <message>
         <source>Compression %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">압축 %1</translation>
     </message>
     <message>
         <source>Uncompressed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">비압축</translation>
     </message>
     <message>
         <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">최고 품질 (매우 느림)</translation>
     </message>
     <message>
         <source>High Quality (Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">높은 품질 (권장)</translation>
     </message>
     <message>
         <source>Average Quality (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">평균 품질 (기본)</translation>
     </message>
     <message>
         <source>Low Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">낮은 품질 (빠름)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">최저 품질 (매우 빠름)</translation>
     </message>
     <message>
         <source>%1 Instance(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 인스턴스</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">선택한 디렉토리에 작성할 수 없습니다. 다른 디렉토리를 선택하여 주십시오!</translation>
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">정말로 업데이트 알림을 비활성화하시겠습니까?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">예</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">아니오</translation>
     </message>
     <message>
         <source>The update reminder has been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">업데이트 알림이 비활성화 되었습니다.</translation>
     </message>
     <message>
         <source>Please remember to check for updates at regular intervals!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">주기적으로 업데이트를 확인하시기 바랍니다!</translation>
     </message>
     <message>
         <source>The update reminder has been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">업데이트 알림이 재활성화 되었습니다.</translation>
     </message>
     <message>
         <source>Do you really want to disable all sound effects?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">정말로 모든 소리 효과를 비활성화하시겠습니까?</translation>
     </message>
     <message>
         <source>Sound Effects</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">사운드 효과</translation>
     </message>
     <message>
         <source>All sound effects have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">모든 소리 효과가 비활성화 되었습니다.</translation>
     </message>
     <message>
         <source>The sound effects have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">소리 효과가 재활성화 되었습니다.</translation>
     </message>
     <message>
         <source>Nero AAC Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nero AAC 알림</translation>
     </message>
     <message>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">정말로 모든 Nero AAC Encoder 알림을 비활성화하시겠습니까?</translation>
     </message>
     <message>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">모든 Nero AAC Encoder 알림이 비활성화 되었습니다.</translation>
     </message>
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nero AAC Encoder 알림이 재활성화 되었습니다.</translation>
     </message>
     <message>
         <source>WMA Decoder Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA Decoder 알림</translation>
     </message>
     <message>
         <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">정말로 모든 WMA Decoder 알림을 비활성화하시겠습니까?</translation>
     </message>
     <message>
         <source>All WMA Decoder notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">모든 WMA Decoder 알림이 비활성화 되었습니다.</translation>
     </message>
     <message>
         <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WMA Decoder 알림이 재활성화 되었습니다.</translation>
     </message>
     <message>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">쉘 통합</translation>
     </message>
     <message>
         <source>Do you really want to disable the LameXP shell integration?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">정말로 LameXP 쉘 통합을 비활성화하시겠습니까?</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP 쉘 통합이 비활성화 되었습니다.</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP 쉘 통합이 재활성화 되었습니다.</translation>
     </message>
 </context>
 <context>
@@ -1315,11 +1315,11 @@
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished">Container</translation>
+        <translation type="unfinished">컨테이너</translation>
     </message>
     <message>
         <source>Compression</source>
-        <translation type="unfinished">압축</translation>
+        <translation type="unfinished">압축 옵션</translation>
     </message>
     <message>
         <source>Duration</source>
@@ -1466,11 +1466,11 @@
     </message>
     <message>
         <source>The format of this file is NOT supported:</source>
-        <translation type="unfinished">지원되지 않는 파일 형식:</translation>
+        <translation type="unfinished">이 파일은 지원되지 않는 파일 형식입니다:</translation>
     </message>
     <message>
         <source>Container Format:</source>
-        <translation type="unfinished">Container 형식:</translation>
+        <translation type="unfinished">컨테이너 형식:</translation>
     </message>
     <message>
         <source>Audio Format:</source>
@@ -1514,7 +1514,7 @@
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation type="unfinished">대상 출력 디렉토리가 존재하지 않으며, 만들 수 없음:</translation>
+        <translation type="unfinished">대상 출력 디렉토리가 존재하지 않으며, 만들 수 없습니다:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
@@ -1565,7 +1565,7 @@
     </message>
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation type="unfinished">멀티-쓰레딩 활성화됨: 동시에 %1 인스턴스 실행중!</translation>
+        <translation type="unfinished">멀티-쓰레딩 활성화: %1 인스턴스 동시 실행!</translation>
     </message>
     <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
@@ -1688,11 +1688,11 @@
     </message>
     <message>
         <source>Latest version available:</source>
-        <translation type="unfinished">사용 가능한 최신 버전:</translation>
+        <translation type="unfinished">최신 출시 버전:</translation>
     </message>
     <message>
         <source>Currently installed version:</source>
-        <translation type="unfinished">현재 설치된 버전:</translation>
+        <translation type="unfinished">현재 설치 버전:</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -1744,7 +1744,7 @@
     </message>
     <message>
         <source>More information available at:</source>
-        <translation type="unfinished">이용 가능한 추가 정보:</translation>
+        <translation type="unfinished">추가 정보 링크:</translation>
     </message>
     <message>
         <source>A new version of LameXP is available!</source>
@@ -1764,11 +1764,11 @@
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation type="unfinished">사용자의 버전이 최신 출시버전 보다 최신인 것 같습니다.</translation>
+        <translation type="unfinished">현재 설치된 버전이 최신 출시 버전 보다 더 최신인 것 같습니다.</translation>
     </message>
     <message>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation type="unfinished">이런 경우는 일반적으로 LameXP의 시험판 버전을 사용하고 있는 것을 나타냅니다.</translation>
+        <translation type="unfinished">이런 경우는 LameXP의 시험판 사용을 의미합니다.</translation>
     </message>
 </context>
 </TS>

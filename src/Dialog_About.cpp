@@ -61,7 +61,7 @@ g_lamexp_contributors[] =
 	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"    },
 	{"fr", L"Française",  L"Dodich Informatique", "Dodich@live.fr"       },
 	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it"},
-	{"kr", L"한국말",     L"JaeHyung Lee",        "Kolanp@gmail.com"     },
+	{"kr", L"한국어",    L"JaeHyung Lee",        "Kolanp@gmail.com"     },
 	{"ru", L"Русский",    L"Neonailol",           "Neonailol@gmail.com"  },
 	{"uk", L"Українська", L"Arestarh",            "Arestarh@ukr.net"     },
 	{NULL, NULL, NULL, NULL}
@@ -97,7 +97,8 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	
 	if(lamexp_version_demo())
 	{
-		aboutText += QString("<hr><nobr><font color=\"crimson\">%1</font></nobr>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(QDate::currentDate().daysTo(lamexp_version_expires()))));
+		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
+		aboutText += QString("<hr><nobr><font color=\"crimson\">%1</font></nobr>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
 	}
 	
 	aboutText += "<hr><br>";
