@@ -196,8 +196,8 @@
         <translation>Silk Icons &amp;minus; Über 700 Symbole im PNG Format</translation>
     </message>
     <message>
-        <source>Note: This demo (pre-release) version of LameXP will expire at %1.</source>
-        <translation>Hinweis: Diese Demo (Test) Version von LameXP läuft am %1 ab.</translation>
+        <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
+        <translation>Hinweise: Diese Demo (Test) Version von LameXP läuft am %1 ab. Noch %2 Tage übrig.</translation>
     </message>
 </context>
 <context>

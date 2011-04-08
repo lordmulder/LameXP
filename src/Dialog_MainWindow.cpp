@@ -1250,13 +1250,16 @@ void MainWindow::tabPageChanged(int idx)
 
 	if(idx == tabWidget->indexOf(tabOptions) && scrollArea->widget() && this->isVisible())
 	{
-		QApplication::processEvents();
-		while(scrollArea->viewport()->width() < scrollArea->widget()->width())
+		for(int i = 0; i < 2; i++)
 		{
-			int previousWidth = this->width();
-			this->resize(this->width() + 1, this->height());
-			if(this->frameGeometry().width() >= maximumWidth) break;
-			if(this->width() <= previousWidth) break;
+			QApplication::processEvents();
+			while(scrollArea->viewport()->width() < scrollArea->widget()->width())
+			{
+				int previousWidth = this->width();
+				this->resize(this->width() + 1, this->height());
+				if(this->frameGeometry().width() >= maximumWidth) break;
+				if(this->width() <= previousWidth) break;
+			}
 		}
 	}
 	else if(idx == tabWidget->indexOf(tabSourceFiles))

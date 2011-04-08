@@ -12,7 +12,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note: This demo (pre-release) version of LameXP will expire at %1.</source>
+        <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

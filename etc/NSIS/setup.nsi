@@ -267,10 +267,16 @@ Function .onInit
 		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, the Windows 9x series (including ME) is not supported by this application!"
 		Quit
 	${EndIf}
-  
+
 	OS_Windows_NT:
-	${If} ${AtMostWinNT4}
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, Windows NT 4.0 (and older) is not supported by this application!"
+	${If} ${AtMostWin2000}
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, Windows 2000 (and older) is not supported by this application!"
+		Quit
+	${EndIf}
+
+	${If} ${IsWinXP}
+	${AndIf} ${AtMostServicePack} 1
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application requires at least Windows XP with Service-Pack 2!"
 		Quit
 	${EndIf}
 FunctionEnd
