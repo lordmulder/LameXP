@@ -666,10 +666,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Check the Windows version
 	switch(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based)
 	{
-	case QSysInfo::WV_2000:
-		qDebug("Running on Windows 2000 (not offically supported!).\n");
-		lamexp_check_compatibility_mode("GetNativeSystemInfo", executableName);
-		break;
 	case QSysInfo::WV_XP:
 		qDebug("Running on Windows XP.\n");
 		lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
@@ -687,7 +683,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 		lamexp_check_compatibility_mode(NULL, executableName);
 		break;
 	default:
-		qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
+		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
 		break;
 	}
 
