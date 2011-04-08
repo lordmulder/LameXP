@@ -276,7 +276,9 @@ Function .onInit
 
 	${If} ${IsWinXP}
 	${AndIf} ${AtMostServicePack} 1
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application requires at least Windows XP with Service-Pack 2!"
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application requires Windows XP with Service Pack 2 or newer!"
+		MessageBox MB_TOPMOST|MB_ICONINFORMATION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
+		ExecShell "open" "http://www.microsoft.com/downloads/en/details.aspx?FamilyID=5b33b5a8-5e76-401f-be08-1e1555d4f3d4"
 		Quit
 	${EndIf}
 FunctionEnd

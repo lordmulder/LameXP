@@ -1655,7 +1655,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
