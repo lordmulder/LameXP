@@ -10,7 +10,21 @@ set "PATH_QTMSVC="
 set "PATH_GNUPG1="
 set "PATH_VCPROJ="
 REM ------------------------------------------
-for /f "tokens=2,*" %%s in (buildenv.txt) do (
+set "BUILDENV_TXT=buildenv.txt"
+if not "%~1"=="" (
+	set "BUILDENV_TXT=%~1"
+)
+REM ------------------------------------------
+if not exist "%BUILDENV_TXT%" (
+	echo.
+	echo Could not find 'buildenv.txt' in current directory^!
+	echo Please create your 'buildenv.txt' file from 'buildenv.template.txt' first.
+	echo.
+	pause
+	exit
+)
+REM ------------------------------------------
+for /f "tokens=2,*" %%s in (%BUILDENV_TXT%) do (
 	if "%%s"=="PATH_SEVENZ" set "PATH_SEVENZ=%%~t"
 	if "%%s"=="PATH_MPRESS" set "PATH_MPRESS=%%~t"
 	if "%%s"=="PATH_UPXBIN" set "PATH_UPXBIN=%%~t"
@@ -20,6 +34,8 @@ for /f "tokens=2,*" %%s in (buildenv.txt) do (
 	if "%%s"=="PATH_GNUPG1" set "PATH_GNUPG1=%%~t"
 	if "%%s"=="PATH_VCPROJ" set "PATH_VCPROJ=%%~t"
 )
+REM ------------------------------------------
+set "BUILDENV_TXT="
 REM ------------------------------------------
 echo PATH_SEVENZ ="%PATH_SEVENZ%"
 echo PATH_MPRESS ="%PATH_MPRESS%"

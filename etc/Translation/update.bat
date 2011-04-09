@@ -1,8 +1,8 @@
 @echo off
 REM ---------------------------
-set "QTVARS=E:\Qt\4.7.2\bin\qtvars.bat"
+call "..\Deployment\_paths.bat" "..\Deployment\buildenv.txt"
+call "%PATH_QTMSVC%\bin\qtvars.bat"
 REM ---------------------------
-call "%QTVARS%"
 del update.lst > NUL
 REM ---------------------------
 if exist update.lst (
