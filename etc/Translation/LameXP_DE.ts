@@ -1656,7 +1656,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm &apos;%1&apos; benötigt Windows XP oder neuer.</translation>
     </message>
 </context>
 <context>
