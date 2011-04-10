@@ -1,6 +1,6 @@
 @echo off
 REM ---------------------------
-call "..\Deployment\_paths.bat" "..\Deployment\buildenv.txt"
+call "..\Deployment\_paths.bat"
 call "%PATH_QTMSVC%\bin\qtvars.bat"
 REM ---------------------------
 del update.lst > NUL
