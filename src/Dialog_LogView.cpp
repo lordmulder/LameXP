@@ -21,9 +21,10 @@
 
 #include "Dialog_LogView.h"
 
+#include "Global.h"
+
 #include <QClipboard>
 #include <QFileDialog>
-#include <Windows.h>
 
 LogViewDialog::LogViewDialog(QWidget *parent)
 :

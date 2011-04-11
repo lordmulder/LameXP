@@ -38,8 +38,8 @@
 #include <QCloseEvent>
 #include <QMovie>
 
-#include <Windows.h>
 #include <time.h>
+#include <MMSystem.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 

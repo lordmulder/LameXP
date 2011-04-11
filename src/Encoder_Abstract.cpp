@@ -22,7 +22,6 @@
 #include "Encoder_Abstract.h"
 
 #include "Global.h"
-#include <Windows.h>
 
 AbstractEncoder::AbstractEncoder(void)
 {

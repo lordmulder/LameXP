@@ -46,24 +46,16 @@
 #include "Resource.h"
 #include "LockedFile.h"
 
-//Windows includes
-#include <Windows.h>
-
 //CRT includes
-#include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
 #include <intrin.h>
 
+//COM includes
+#include <Objbase.h>
+
 //Debug only includes
 #ifdef _DEBUG
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0501
-#endif
-#if(_WIN32_WINNT < 0x0501)
-#undef _WIN32_WINNT
-#define _WIN32_WINNT 0x0501
-#endif
 #include <Psapi.h>
 #endif //_DEBUG
 

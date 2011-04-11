@@ -30,7 +30,6 @@
 #include <QDesktopWidget>
 #include <QToolTip>
 #include <QTimer>
-#include <Windows.h>
 
 #define EPS (1.0E-5)
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET.font(); _font.setBold(BOLD); WIDGET.setFont(_font); }

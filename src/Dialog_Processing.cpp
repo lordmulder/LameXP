@@ -56,7 +56,7 @@
 #include <QProcess>
 #include <QProgressDialog>
 
-#include <Windows.h>
+#include <MMSystem.h>
 
 ////////////////////////////////////////////////////////////
 

@@ -21,11 +21,12 @@
 
 #include "Tool_Abstract.h"
 
+#include "Global.h"
+
 #include <QProcess>
 #include <QMutex>
 #include <QMutexLocker>
 #include <QLibrary>
-#include <Windows.h>
 
 /*
  * Win32 API definitions

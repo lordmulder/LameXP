@@ -21,14 +21,15 @@
 
 #pragma once
 
-//MSVC
+//Target version
 #include "Targetver.h"
 
-//Stdlib
+//inlcude C standard library
 #include <stdio.h>
 #include <tchar.h>
 
-//Win32
+//Windows includes
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
 //Declarations

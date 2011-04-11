@@ -26,7 +26,6 @@
 #include <QThread>
 #include <QMovie>
 #include <QKeyEvent>
-#include <Windows.h>
 
 #define EPS (1.0E-5)
 

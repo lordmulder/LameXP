@@ -25,7 +25,6 @@
 #include "Resource.h"
 #include "Model_Settings.h"
 
-//Qt includes
 #include <QDate>
 #include <QApplication>
 #include <QIcon>
@@ -36,8 +35,7 @@
 #include <QFileInfo>
 #include <QDir>
 
-//Win32 includes
-#include <Windows.h>
+#include <MMSystem.h>
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
@@ -95,7 +93,12 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += QString("<b>%1</b><br><br>").arg(versionStr);
 	aboutText += QString("<nobr>%1</nobr><br>").arg(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url())));
 	
-	if(lamexp_version_demo())
+	if(LAMEXP_DEBUG)
+	{
+		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
+		aboutText += QString("<hr><nobr><font color=\"crimson\">!!! %3 DEBUG BUILD %3 Expires at: %1 %3 Days left: %2 %3 DEBUG BUILD %3 !!!</font></nobr>").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft), "&minus;&minus;&minus;");
+	}
+	else if(lamexp_version_demo())
 	{
 		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><nobr><font color=\"crimson\">%1</font></nobr>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));

@@ -29,7 +29,6 @@
 #include <QDir>
 #include <QMutexLocker>
 
-#include <Windows.h>
 #include <Shlobj.h>
 #include <Shlwapi.h>
 

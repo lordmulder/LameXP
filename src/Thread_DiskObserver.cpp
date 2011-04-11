@@ -24,7 +24,6 @@
 #include "Global.h"
 
 #include <QDir>
-#include <Windows.h>
 
 #define MIN_DISKSPACE 104857600LL //100 MB
 
