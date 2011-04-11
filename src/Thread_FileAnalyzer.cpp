@@ -69,15 +69,24 @@ void FileAnalyzer::run()
 	m_filesRejected = 0;
 	m_filesDenied = 0;
 	m_filesDummyCDDA = 0;
-
 	m_inputFiles.sort();
+
+	GetAsyncKeyState(VK_ESCAPE);
 
 	while(!m_inputFiles.isEmpty())
 	{
+		if(GetAsyncKeyState(VK_ESCAPE) & 0x0001)
+		{
+			MessageBeep(MB_ICONERROR);
+			qWarning("Operation cancelled by user!");
+			break;
+		}
+		
 		QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
 		qDebug64("Analyzing: %1", currentFile);
 		emit fileSelected(QFileInfo(currentFile).fileName());
 		AudioFileModel file = analyzeFile(currentFile);
+		
 		if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
 		{
 			if(!PlaylistImporter::importPlaylist(m_inputFiles, currentFile))
@@ -87,6 +96,7 @@ void FileAnalyzer::run()
 			}
 			continue;
 		}
+		
 		m_filesAccepted++;
 		emit fileAnalyzed(file);
 	}

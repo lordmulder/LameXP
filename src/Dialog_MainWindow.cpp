@@ -64,8 +64,8 @@
 #include <QResource>
 #include <QScrollBar>
 
-//Win32 includes
-#include <Windows.h>
+//System includes
+#include <MMSystem.h>
 
 //Helper macros
 #define ABORT_IF_BUSY if(m_banner->isVisible() || m_delayedFileTimer->isActive()) { MessageBeep(MB_ICONEXCLAMATION); return; }
@@ -472,10 +472,20 @@ void MainWindow::addFolder(const QString &path, bool recursive)
 	QStringList fileList;
 	
 	m_banner->show(tr("Scanning folder(s) for files, please wait..."));
+	
 	QApplication::processEvents();
+	GetAsyncKeyState(VK_ESCAPE);
 
 	while(!folderInfoList.isEmpty())
 	{
+		if(GetAsyncKeyState(VK_ESCAPE) & 0x0001)
+		{
+			MessageBeep(MB_ICONERROR);
+			qWarning("Operation cancelled by user!");
+			fileList.clear();
+			break;
+		}
+		
 		QDir currentDir(folderInfoList.takeFirst().canonicalFilePath());
 		QFileInfoList fileInfoList = currentDir.entryInfoList(QDir::Files);
 
@@ -652,14 +662,14 @@ void MainWindow::changeEvent(QEvent *e)
 		comboBoxNeroAACProfile->setCurrentIndex(comboBoxIndex[2]);
 
 		//Update the window title
-#if !defined(_DEBUG) && !defined(QT_DEBUG) && defined(NDEBUG) && defined(QT_NO_DEBUG)
-		if(lamexp_version_demo())
+		if(LAMEXP_DEBUG)
+		{
+			setWindowTitle(QString("%1 [!!! DEBUG BUILD !!!]").arg(windowTitle()));
+		}
+		else if(lamexp_version_demo())
 		{
 			setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
 		}
-#else
-		setWindowTitle(QString("%1 [!!! DEBUG BUILD !!!]").arg(windowTitle()));
-#endif
 
 		//Manually re-translate widgets that UIC doesn't handle
 		m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
