@@ -40,9 +40,7 @@ public:
 	virtual void setSamplingRate(int value);
 
 private:
-	const QString m_binary_i386;
-	const QString m_binary_sse2;
-	const QString m_binary_x64;
+	const QString m_binary;
 	int m_configBitrateMaximum;
 	int m_configBitrateMinimum;
 	int m_configSamplingRate;

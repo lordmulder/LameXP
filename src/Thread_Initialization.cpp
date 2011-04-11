@@ -21,7 +21,6 @@
 
 #include "Thread_Initialization.h"
 
-#include "Global.h"
 #include "LockedFile.h"
 
 #include <QFileInfo>
@@ -39,48 +38,62 @@
 // TOOLS
 ////////////////////////////////////////////////////////////
 
+#define CPU_TYPE_X86 0x000001 //x86-32
+#define CPU_TYPE_SSE 0x000002 //x86-32 + SSE2 (Intel only!)
+#define CPU_TYPE_X64 0x000004 //x86-64
+
+#define CPU_TYPE_GEN (CPU_TYPE_X86|CPU_TYPE_SSE)              //Generic: use for all x86-32 CPU's
+#define CPU_TYPE_ALL (CPU_TYPE_X86|CPU_TYPE_SSE|CPU_TYPE_X64) //All: use for all CPU's (x86-32 and x86-64)
+
 static const struct
 {
 	char *pcHash;
+	unsigned int uiCpuType;
 	char *pcName;
 	unsigned int uiVersion;
 }
 g_lamexp_tools[] =
 {
-	{"3b41f85dde8d4a5a0f4cd5f461099d0db24610ba", "alac.exe", UINT_MAX},
-	{"fb74ac8b73ad8cba2c3b4e6e61f23401d630dc22", "elevator.exe", UINT_MAX},
-	{"3c647950bccfcc75d0746c0772e7115684be4dc5", "faad.exe", 27},
-	{"d33cd86f04bd4067e244d2804466583c7b90a4e2", "flac.exe", 121},
-	{"9328a50e89b54ec065637496d9681a7e3eebf915", "gpgv.exe", 1411},
-	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", "gpgv.gpg", UINT_MAX},
-	{"b8800842893e2900eea7cda5c2556661333bc5db", "lame.exe", 39916},
-	{"a4e929cfaa42fa2e61a3d0c6434c77a06d45aef3", "mac.exe", 406},
-	{"9ee3074dc3232c61c0ffd6ae6755f65974695c51", "mediainfo_i386.exe", 743},
-	{"3691da33a4efd7625d1bd01cbf5ce6ffd8a12d19", "mediainfo_x64.exe", 743},
-	{"aa89763a5ba4d1a5986549b9ee53e005c51940c1", "mpcdec.exe", 435},
-	{"38f81efca6c1eeab0b9dc39d06c2ac750267217f", "mpg123.exe", 1132},
-	{"8dd7138714c3bcb39f5a3213413addba13d06f1e", "oggdec.exe", UINT_MAX},
-	{"14a99d3b1f0b166dbd68db45196da871e58e14ec", "oggenc2_i386.exe", 287602},
-	{"36f8d93ef3df6a420a73a9b5cf02dafdaf4321f0", "oggenc2_sse2.exe", 287602},
-	{"87ad1af73e9b9db3da3db645e5c2253cb0c2a2ea", "oggenc2_x64.exe", 287602},
-	{"0d9035bb62bdf46a2785261f8be5a4a0972abd15", "shorten.exe", 361},
-	{"50ead3b852cbfc067a402e6c2d0d0d8879663dec", "sox.exe", 1432},
-	{"8671e16497a2d217d3707d4aa418678d02b16bcc", "speexdec.exe", 12},
-	{"093bfdec22872ca99e40183937c88785468be989", "tta.exe", 21},
-	{"8c842eef65248b46fa6cb9a9e5714f575672d999", "valdec.exe", 31},
-	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", "wget.exe", 1114},
-	{"a7e8aad52213e339ad985829722f35eab62be182", "wupdate.exe", UINT_MAX},
-	{"b7d14b3540d24df13119a55d97623a61412de6e3", "wvunpack.exe", 4601},
-	{NULL, NULL, NULL}
+	{"3b41f85dde8d4a5a0f4cd5f461099d0db24610ba", CPU_TYPE_ALL, "alac.exe", UINT_MAX},
+	{"fb74ac8b73ad8cba2c3b4e6e61f23401d630dc22", CPU_TYPE_ALL, "elevator.exe", UINT_MAX},
+	{"3c647950bccfcc75d0746c0772e7115684be4dc5", CPU_TYPE_ALL, "faad.exe", 27},
+	{"d33cd86f04bd4067e244d2804466583c7b90a4e2", CPU_TYPE_ALL, "flac.exe", 121},
+	{"9328a50e89b54ec065637496d9681a7e3eebf915", CPU_TYPE_ALL, "gpgv.exe", 1411},
+	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", CPU_TYPE_ALL, "gpgv.gpg", UINT_MAX},
+	{"b8800842893e2900eea7cda5c2556661333bc5db", CPU_TYPE_ALL, "lame.exe", 39916},
+	{"a4e929cfaa42fa2e61a3d0c6434c77a06d45aef3", CPU_TYPE_ALL, "mac.exe", 406},
+	{"9ee3074dc3232c61c0ffd6ae6755f65974695c51", CPU_TYPE_GEN, "mediainfo.i386.exe", 743},
+	{"3691da33a4efd7625d1bd01cbf5ce6ffd8a12d19", CPU_TYPE_X64, "mediainfo.x64.exe", 743},
+	{"aa89763a5ba4d1a5986549b9ee53e005c51940c1", CPU_TYPE_ALL, "mpcdec.exe", 435},
+	{"38f81efca6c1eeab0b9dc39d06c2ac750267217f", CPU_TYPE_ALL, "mpg123.exe", 1132},
+	{"8dd7138714c3bcb39f5a3213413addba13d06f1e", CPU_TYPE_ALL, "oggdec.exe", UINT_MAX},
+	{"14a99d3b1f0b166dbd68db45196da871e58e14ec", CPU_TYPE_X86, "oggenc2.i386.exe", 287602},
+	{"36f8d93ef3df6a420a73a9b5cf02dafdaf4321f0", CPU_TYPE_SSE, "oggenc2.sse2.exe", 287602},
+	{"87ad1af73e9b9db3da3db645e5c2253cb0c2a2ea", CPU_TYPE_X64, "oggenc2.x64.exe", 287602},
+	{"0d9035bb62bdf46a2785261f8be5a4a0972abd15", CPU_TYPE_ALL, "shorten.exe", 361},
+	{"50ead3b852cbfc067a402e6c2d0d0d8879663dec", CPU_TYPE_ALL, "sox.exe", 1432},
+	{"8671e16497a2d217d3707d4aa418678d02b16bcc", CPU_TYPE_ALL, "speexdec.exe", 12},
+	{"093bfdec22872ca99e40183937c88785468be989", CPU_TYPE_ALL, "tta.exe", 21},
+	{"8c842eef65248b46fa6cb9a9e5714f575672d999", CPU_TYPE_ALL, "valdec.exe", 31},
+	{"62e2805d1b2eb2a4d86a5ca6e6ea58010d05d2a7", CPU_TYPE_ALL, "wget.exe", 1114},
+	{"a7e8aad52213e339ad985829722f35eab62be182", CPU_TYPE_ALL, "wupdate.exe", UINT_MAX},
+	{"b7d14b3540d24df13119a55d97623a61412de6e3", CPU_TYPE_ALL, "wvunpack.exe", 4601},
+	{NULL, NULL, NULL, NULL}
 };
 
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
-InitializationThread::InitializationThread(void)
+InitializationThread::InitializationThread(const lamexp_cpu_t *cpuFeatures)
 {
 	m_bSuccess = false;
+	memset(&m_cpuFeatures, 0, sizeof(lamexp_cpu_t));
+	
+	if(cpuFeatures)
+	{
+		memcpy(&m_cpuFeatures, cpuFeatures, sizeof(lamexp_cpu_t));
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -92,10 +105,15 @@ void InitializationThread::run()
 	m_bSuccess = false;
 	delay();
 
-	QMap<QString, QString> checksum;
-	QMap<QString, unsigned int> version;
+	//CPU type selection
+	unsigned int cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64 : ((m_cpuFeatures.intel && m_cpuFeatures.sse && m_cpuFeatures.sse2) ? CPU_TYPE_SSE : CPU_TYPE_X86);
+	
+	//Allocate maps
+	QMap<QString, QString> mapChecksum;
+	QMap<QString, unsigned int> mapVersion;
+	QMap<QString, unsigned int> mapCpuType;
 
-	//Init checksums
+	//Init properties
 	for(int i = 0; i < INT_MAX; i++)
 	{
 		if(!g_lamexp_tools[i].pcName && !g_lamexp_tools[i].pcHash && !g_lamexp_tools[i].uiVersion)
@@ -105,8 +123,9 @@ void InitializationThread::run()
 		else if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash && g_lamexp_tools[i].uiVersion)
 		{
 			const QString currentTool = QString::fromLatin1(g_lamexp_tools[i].pcName);
-			checksum.insert(currentTool, QString::fromLatin1(g_lamexp_tools[i].pcHash));
-			version.insert(currentTool, g_lamexp_tools[i].uiVersion);
+			mapChecksum.insert(currentTool, QString::fromLatin1(g_lamexp_tools[i].pcHash));
+			mapCpuType.insert(currentTool, g_lamexp_tools[i].uiCpuType);
+			mapVersion.insert(currentTool, g_lamexp_tools[i].uiVersion);
 		}
 		else
 		{
@@ -121,20 +140,29 @@ void InitializationThread::run()
 	timer.start();
 
 	//Extract all files
-	for(int i = 0; i < toolsList.count(); i++)
+	while(!toolsList.isEmpty())
 	{
 		try
 		{
-			QString toolName = toolsList.at(i).fileName().toLower();
-			qDebug("Extracting file: %s", toolName.toLatin1().constData());
-			QByteArray toolHash = checksum.take(toolName).toLatin1();
-			unsigned int toolVersion = version.take(toolName);
+			QFileInfo currentTool = toolsList.takeFirst();
+			QString toolName = currentTool.fileName().toLower();
+			QString toolShortName = QString("%1.%2").arg(currentTool.baseName().toLower(), currentTool.suffix().toLower());
+			
+			QByteArray toolHash = mapChecksum.take(toolName).toLatin1();
+			unsigned int toolCpuType = mapCpuType.take(toolName);
+			unsigned int toolVersion = mapVersion.take(toolName);
+			
 			if(toolHash.size() != 40)
 			{
 				throw "The required checksum is missing, take care!";
 			}
-			LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString(lamexp_temp_folder2()).append(QString("/tool_%1").arg(toolName)), toolHash);
-			lamexp_register_tool(toolName, lockedFile, toolVersion);
+			
+			if(toolCpuType & cpuSupport)
+			{
+				qDebug("Extracting file: %s -> %s", toolName.toLatin1().constData(),  toolShortName.toLatin1().constData());
+				LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString("%1/tool_%2").arg(lamexp_temp_folder2(), toolShortName), toolHash);
+				lamexp_register_tool(toolShortName, lockedFile, toolVersion);
+			}
 		}
 		catch(char *errorMsg)
 		{
@@ -143,12 +171,18 @@ void InitializationThread::run()
 		}
 	}
 	
-	if(!checksum.isEmpty())
+	//Make sure all files were extracted
+	if(!mapChecksum.isEmpty())
 	{
-		qFatal("At least one required tool could not be found:\n%s", toolsDir.filePath(checksum.keys().first()).toLatin1().constData());
+		qFatal("At least one required tool could not be found:\n%s", toolsDir.filePath(mapChecksum.keys().first()).toLatin1().constData());
 		return;
 	}
 	
+	//Clean-up
+	mapChecksum.clear();
+	mapVersion.clear();
+	mapCpuType.clear();
+
 	qDebug("All extracted.\n");
 
 	//Check delay

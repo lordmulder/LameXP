@@ -73,11 +73,10 @@ private:
 	unsigned int parseYear(const QString &str);
 	unsigned int parseDuration(const QString &str);
 	bool checkFile_CDDA(QFile &file);
-	void retrieveCover(AudioFileModel &audioFile, const QString &filePath, const QString &mediaInfoBin);
+	void retrieveCover(AudioFileModel &audioFile, const QString &filePath);
 
 	QStringList m_inputFiles;
-	const QString m_mediaInfoBin_x86;
-	const QString m_mediaInfoBin_x64;
+	const QString m_mediaInfoBin;
 	section_t m_currentSection;
 	cover_t m_currentCover;
 	unsigned int m_filesAccepted;

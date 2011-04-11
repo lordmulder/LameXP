@@ -122,7 +122,7 @@ int lamexp_main(int argc, char* argv[])
 	SettingsModel *settingsModel = new SettingsModel();
 	
 	//Show splash screen
-	InitializationThread *poInitializationThread = new InitializationThread();
+	InitializationThread *poInitializationThread = new InitializationThread(&cpuFeatures);
 	SplashScreen::showSplash(poInitializationThread);
 	LAMEXP_DELETE(poInitializationThread);
 

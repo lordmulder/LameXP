@@ -9,14 +9,14 @@
     <file>tools/gpgv.gpg</file>
     <file>tools/lame.exe</file>
     <file>tools/mac.exe</file>
-    <file>tools/mediainfo_i386.exe</file>
-    <file>tools/mediainfo_x64.exe</file>
+    <file>tools/mediainfo.i386.exe</file>
+    <file>tools/mediainfo.x64.exe</file>
     <file>tools/mpcdec.exe</file>
     <file>tools/mpg123.exe</file>
     <file>tools/oggdec.exe</file>
-    <file>tools/oggenc2_i386.exe</file>
-    <file>tools/oggenc2_sse2.exe</file>
-    <file>tools/oggenc2_x64.exe</file>
+    <file>tools/oggenc2.i386.exe</file>
+    <file>tools/oggenc2.sse2.exe</file>
+    <file>tools/oggenc2.x64.exe</file>
     <file>tools/shorten.exe</file>
     <file>tools/sox.exe</file>
     <file>tools/speexdec.exe</file>

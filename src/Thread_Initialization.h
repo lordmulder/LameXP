@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "Global.h"
 #include <QThread>
 
 ////////////////////////////////////////////////////////////
@@ -32,7 +33,7 @@ class InitializationThread: public QThread
 	Q_OBJECT
 
 public:
-	InitializationThread(void);
+	InitializationThread(const lamexp_cpu_t *cpuFeatures);
 	void run();
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 
@@ -42,5 +43,6 @@ private:
 	void initNeroAac(void);
 	void initWmaDec(void);
 
+	lamexp_cpu_t m_cpuFeatures;
 	bool m_bSuccess;
 };

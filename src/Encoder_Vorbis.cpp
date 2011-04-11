@@ -32,11 +32,9 @@
 
 VorbisEncoder::VorbisEncoder(void)
 :
-	m_binary_i386(lamexp_lookup_tool("oggenc2_i386.exe")),
-	m_binary_sse2(lamexp_lookup_tool("oggenc2_sse2.exe")),
-	m_binary_x64(lamexp_lookup_tool("oggenc2_x64.exe"))
+	m_binary(lamexp_lookup_tool("oggenc2.exe"))
 {
-	if(m_binary_i386.isEmpty() || m_binary_sse2.isEmpty() || m_binary_x64.isEmpty())
+	if(m_binary.isEmpty())
 	{
 		throw "Error initializing Vorbis encoder. Tool 'oggenc2.exe' is not registred!";
 	}
@@ -55,8 +53,6 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	QProcess process;
 	QStringList args;
 	const QString baseName = QFileInfo(outputFile).fileName();
-	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-	const QString &binary = (cpuFeatures.x64 ? m_binary_x64 : ((cpuFeatures.intel && cpuFeatures.sse && cpuFeatures.sse2) ? m_binary_sse2 : m_binary_i386));
 
 	switch(m_configRCMode)
 	{
@@ -97,7 +93,7 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
-	if(!startProcess(process, binary, args))
+	if(!startProcess(process, m_binary, args))
 	{
 		return false;
 	}
