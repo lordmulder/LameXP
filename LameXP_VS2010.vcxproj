@@ -62,6 +62,8 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)obj\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</LinkIncremental>
+    <EnableManagedIncrementalBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</EnableManagedIncrementalBuild>
+    <EnableManagedIncrementalBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</EnableManagedIncrementalBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PreBuildEvent>
@@ -131,6 +133,7 @@ copy "$(QTDIR)\plugins\imageformats\q????d4.dll" "$(TargetDir)imageformats\"
       <DebugInformationFormat>
       </DebugInformationFormat>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
@@ -190,6 +193,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <DebugInformationFormat>
       </DebugInformationFormat>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
@@ -312,6 +316,14 @@ del "$(TargetDir)imageformats\q???d4.dll"
   <ItemGroup>
     <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\Decoder_AAC.h" />
+    <ClInclude Include="tmp\UIC_DropBox.h" />
+    <ClInclude Include="tmp\UIC_LogViewDialog.h" />
+    <ClInclude Include="tmp\UIC_MainWindow.h" />
+    <ClInclude Include="tmp\UIC_MetaInfo.h" />
+    <ClInclude Include="tmp\UIC_ProcessingDialog.h" />
+    <ClInclude Include="tmp\UIC_SplashScreen.h" />
+    <ClInclude Include="tmp\UIC_UpdateDialog.h" />
+    <ClInclude Include="tmp\UIC_WorkingBanner.h" />
     <CustomBuild Include="src\Decoder_Abstract.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"
