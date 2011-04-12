@@ -261,23 +261,25 @@ Function .onInit
 		Quit
 	${EndIf}  
 
-	${If} ${IsNT}
-		Goto OS_Windows_NT
-	${Else}
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, the Windows 9x series (including ME) is not supported by this application!"
+	${IfNot} ${IsNT}
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does NOT support Windows 9x or Windows ME!"
 		Quit
 	${EndIf}
 
-	OS_Windows_NT:
 	${If} ${AtMostWin2000}
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, Windows 2000 (and older) is not supported by this application!"
+		!insertmacro GetCommandlineParameter "Update" "?" $R0
+		${If} $R0 == "?"
+			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Installation aborted!$\nThe minimum required platform is Windows XP (Service Pack 2)."
+		${Else}
+			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Update not possible!$\nThe minimum required platform is Windows XP (Service Pack 2)."
+		${EndIf}
 		Quit
 	${EndIf}
 
 	${If} ${IsWinXP}
 	${AndIf} ${AtMostServicePack} 1
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application requires Windows XP with Service Pack 2 or newer!"
-		MessageBox MB_TOPMOST|MB_ICONINFORMATION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 2 or newer!"
+		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
 		ExecShell "open" "http://www.microsoft.com/downloads/en/details.aspx?FamilyID=5b33b5a8-5e76-401f-be08-1e1555d4f3d4"
 		Quit
 	${EndIf}

@@ -40,8 +40,8 @@
 #define CPU_TYPE_SSE 0x000002 //x86-32 + SSE2 (Intel only!)
 #define CPU_TYPE_X64 0x000004 //x86-64
 
-#define CPU_TYPE_GEN (CPU_TYPE_X86|CPU_TYPE_SSE)              //Generic: use for all x86-32 CPU's
-#define CPU_TYPE_ALL (CPU_TYPE_X86|CPU_TYPE_SSE|CPU_TYPE_X64) //All: use for all CPU's (x86-32 and x86-64)
+#define CPU_TYPE_GEN (CPU_TYPE_X86|CPU_TYPE_SSE)              //Use for all CPU's, except for x86-64
+#define CPU_TYPE_ALL (CPU_TYPE_X86|CPU_TYPE_SSE|CPU_TYPE_X64) //Use for all CPU's, x86-32 and x86-64
 
 static const struct
 {
