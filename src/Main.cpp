@@ -63,7 +63,12 @@ int lamexp_main(int argc, char* argv[])
 	qDebug("This program comes with ABSOLUTELY NO WARRANTY.\n");
 
 	//Print warning, if this is a "debug" build
-	LAMEXP_CHECK_DEBUG_BUILD;
+	if(LAMEXP_DEBUG)
+	{
+		qWarning("---------------------------------------------------------");
+		qWarning("DEBUG BUILD: DO NOT RELEASE THIS BINARY TO THE PUBLIC !!!");
+		qWarning("---------------------------------------------------------\n"); 
+	}
 	
 	//Detect CPU capabilities
 	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();

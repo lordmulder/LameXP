@@ -135,15 +135,12 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define qFatal64(FORMAT, ...) qFatal("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
 
 //Check for debug build
-#if defined(_DEBUG) || defined(QT_DEBUG) || !defined(NDEBUG) || !defined(QT_NO_DEBUG)
-#define LAMEXP_DEBUG (1)
-#define LAMEXP_CHECK_DEBUG_BUILD \
-	qWarning("---------------------------------------------------------"); \
-	qWarning("DEBUG BUILD: DO NOT RELEASE THIS BINARY TO THE PUBLIC !!!"); \
-	qWarning("---------------------------------------------------------\n"); 
+#if defined(_DEBUG) && defined(QT_DEBUG) && !defined(NDEBUG) && !defined(QT_NO_DEBUG)
+	#define LAMEXP_DEBUG (1)
+#elif defined(NDEBUG) && defined(QT_NO_DEBUG) && !defined(_DEBUG) && !defined(QT_DEBUG)
+	#define LAMEXP_DEBUG (0)
 #else
-#define LAMEXP_DEBUG (0)
-#define LAMEXP_CHECK_DEBUG_BUILD
+	#error Inconsistent debug defines detected!
 #endif
 
 //Memory check
