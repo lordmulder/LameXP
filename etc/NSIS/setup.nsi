@@ -29,8 +29,11 @@
 !ifndef LAMEXP_BUILD
   !error "LAMEXP_BUILD is not defined !!!"
 !endif
-!ifndef LAMEXP_SUFFIX
-  !error "LAMEXP_SUFFIX is not defined !!!"
+!ifndef LAMEXP_INSTTYPE
+  !error "LAMEXP_INSTTYPE is not defined !!!"
+!endif
+!ifndef LAMEXP_PATCH
+  !error "LAMEXP_PATCH is not defined !!!"
 !endif
 !ifndef LAMEXP_DATE
   !error "LAMEXP_DATE is not defined !!!"
@@ -57,7 +60,6 @@
 ;--------------------------------
 
 !define LAMEXP_IS_PRERELEASE
-!searchparse '${LAMEXP_SUFFIX}' '' LAMEXP_INSTTYPE '-' LAMEXP_IGNORE
 
 !if '${LAMEXP_INSTTYPE}' == 'Final'
   !undef LAMEXP_IS_PRERELEASE
@@ -84,7 +86,7 @@
 RequestExecutionLevel user
 ShowInstDetails show
 ShowUninstDetails show
-Name "LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]"
+Name "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 OutFile "${LAMEXP_OUTPUT_FILE}"
 BrandingText "Date created: ${LAMEXP_DATE} [Build #${LAMEXP_BUILD}]"
 InstallDir "$PROGRAMFILES\MuldeR\LameXP v${LAMEXP_VERSION}"
@@ -129,7 +131,7 @@ VIProductVersion "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD}"
 VIAddVersionKey "Author" "LoRd_MuldeR <mulder2@gmx.de>"
 VIAddVersionKey "Comments" "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
 VIAddVersionKey "CompanyName" "Free Software Foundation"
-VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_SUFFIX} [Build #${LAMEXP_BUILD}]"
+VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
 VIAddVersionKey "LegalCopyright" "Copyright 2004-2011 LoRd_MuldeR"
 VIAddVersionKey "LegalTrademarks" "GNU"
