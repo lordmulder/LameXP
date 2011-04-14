@@ -1,0 +1,17 @@
+/LameXP_*.user
+/LameXP_*.opensdf
+/LameXP_*.sdf
+/LameXP_*.suo
+/bin
+etc/Deployment/*.exe
+etc/Deployment/_postproc.bat
+etc/Deployment/buildenv.txt
+etc/Prerequisites/qt4_static/lib
+etc/Prerequisites/qt4_static/plugins
+etc/Translation/*.ts.bak
+/ipch
+/obj
+/src/Config.h.bak
+/tmp/MOC_*.cpp
+/tmp/QRC_*.cpp
+/tmp/UIC_*.h
