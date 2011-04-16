@@ -689,6 +689,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 		break;
 	}
 
+	//Check for Wine
+	QLibrary ntdll("ntdll.dll");
+	bool isWine = (ntdll.resolve("wine_get_version") != NULL) || (ntdll.resolve("wine_nt_to_unix_file_name") != NULL);
+	if(isWine) qWarning("It appears we are running under Wine, unexpected things might happen!\n");
+
 	//Create Qt application instance and setup version info
 	QDate date = QDate::currentDate();
 	QApplication *application = new QApplication(argc, argv);
@@ -731,7 +736,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Update console icon, if a console is attached
-	if(g_lamexp_console_attached)
+	if(g_lamexp_console_attached && !isWine)
 	{
 		typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
 		QLibrary kernel32("kernel32.dll");
