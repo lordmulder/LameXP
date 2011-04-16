@@ -5,4 +5,4 @@
 #define PATH_MSVC90 "C:\Program Files\Microsoft Visual Studio 9.0"
 #define PATH_QTMSVC "C:\Qt\4.7.2"
 #define PATH_GNUPG1 "C:\Program Files\GNU\GnuPG"
-#define PATH_VCPROJ "..\..\LameXP_VS2008.sln"
+#define PATH_VCPROJ "LameXP_VS2008.sln"

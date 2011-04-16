@@ -62,6 +62,6 @@ if not exist "%PATH_QTMSVC%\bin\moc.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\rcc.exe" GOTO:EOF
 if not exist "%PATH_GNUPG1%\gpg.exe" GOTO:EOF
 if not exist "%PATH_GNUPG1%\gpg.exe" GOTO:EOF
-if not exist "%PATH_VCPROJ%" GOTO:EOF
+if not exist "%~d0%~p0\..\..\%PATH_VCPROJ%" GOTO:EOF
 REM ------------------------------------------
 set "LAMEXP_ERROR=0"

@@ -1,3 +1,3 @@
 @echo off
 set "LAMEXP_CONFIG=Release"
-call _deploy.bat
+call "%~d0%~p0\_deploy.bat"
