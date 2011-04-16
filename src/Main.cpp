@@ -183,46 +183,49 @@ int lamexp_main(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
-#ifdef _DEBUG
-	int iResult = -1;
-	qInstallMsgHandler(lamexp_message_handler);
-	LAMEXP_MEMORY_CHECK(iResult = lamexp_main(argc, argv));
-	lamexp_finalization();
-	return iResult;
-#else
-	try
+	if(LAMEXP_DEBUG)
 	{
 		int iResult = -1;
 		qInstallMsgHandler(lamexp_message_handler);
-		iResult = lamexp_main(argc, argv);
+		LAMEXP_MEMORY_CHECK(iResult = lamexp_main(argc, argv));
 		lamexp_finalization();
 		return iResult;
 	}
-	catch(char *error)
+	else
 	{
-		fflush(stdout);
-		fflush(stderr);
-		fprintf(stderr, "\nGURU MEDITATION: %s\n", error);
-		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
-		TerminateProcess(GetCurrentProcess(), -1);
+		try
+		{
+			int iResult = -1;
+			qInstallMsgHandler(lamexp_message_handler);
+			iResult = lamexp_main(argc, argv);
+			lamexp_finalization();
+			return iResult;
+		}
+		catch(char *error)
+		{
+			fflush(stdout);
+			fflush(stderr);
+			fprintf(stderr, "\nGURU MEDITATION: %s\n", error);
+			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			TerminateProcess(GetCurrentProcess(), -1);
+		}
+		catch(int error)
+		{
+			fflush(stdout);
+			fflush(stderr);
+			fprintf(stderr, "\nGURU MEDITATION: Error code 0x%X\n", error);
+			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			TerminateProcess(GetCurrentProcess(), -1);
+		}
+		catch(...)
+		{
+			fflush(stdout);
+			fflush(stderr);
+			fprintf(stderr, "\nGURU MEDITATION !!!\n");
+			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			TerminateProcess(GetCurrentProcess(), -1);
+		}
 	}
-	catch(int error)
-	{
-		fflush(stdout);
-		fflush(stderr);
-		fprintf(stderr, "\nGURU MEDITATION: Error code 0x%X\n", error);
-		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
-		TerminateProcess(GetCurrentProcess(), -1);
-	}
-	catch(...)
-	{
-		fflush(stdout);
-		fflush(stderr);
-		fprintf(stderr, "\nGURU MEDITATION !!!\n");
-		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
-		TerminateProcess(GetCurrentProcess(), -1);
-	}
-#endif
 }
 
 extern "C"

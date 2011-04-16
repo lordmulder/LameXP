@@ -58,7 +58,7 @@ g_lamexp_tools[] =
 	{"d33cd86f04bd4067e244d2804466583c7b90a4e2", CPU_TYPE_ALL, "flac.exe", 121},
 	{"9328a50e89b54ec065637496d9681a7e3eebf915", CPU_TYPE_ALL, "gpgv.exe", 1411},
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", CPU_TYPE_ALL, "gpgv.gpg", UINT_MAX},
-	{"b8800842893e2900eea7cda5c2556661333bc5db", CPU_TYPE_ALL, "lame.exe", 39916},
+	{"d5b3b80220d85a9fd2f486e37c1fb6511f3c2d72", CPU_TYPE_ALL, "lame.exe", 3990},
 	{"a4e929cfaa42fa2e61a3d0c6434c77a06d45aef3", CPU_TYPE_ALL, "mac.exe", 406},
 	{"9ee3074dc3232c61c0ffd6ae6755f65974695c51", CPU_TYPE_GEN, "mediainfo.i386.exe", 743},
 	{"3691da33a4efd7625d1bd01cbf5ce6ffd8a12d19", CPU_TYPE_X64, "mediainfo.x64.exe", 743},

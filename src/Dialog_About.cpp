@@ -287,7 +287,7 @@ void AboutDialog::showMoreAbout(void)
 	moreAboutText += makeToolText
 	(
 		tr("LAME &minus; OpenSource mp3 Encoder"),
-		"lame.exe", "v?.??, Alpha-??",
+		"lame.exe", "v?.??, Beta-?",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://lame.sourceforge.net/"
 	);

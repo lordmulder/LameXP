@@ -229,7 +229,17 @@ const char *lamexp_support_url(void) { return g_lamexp_support_url; }
  */
 bool lamexp_version_demo(void)
 {
-	return LAMEXP_DEBUG || !(strstr(g_lamexp_version.ver_release_name, "Final") || strstr(g_lamexp_version.ver_release_name, "Hotfix"));
+	char buffer[128];
+	bool releaseVersion = false;
+	if(!strcpy_s(buffer, 128, g_lamexp_version.ver_release_name))
+	{
+		char *context, *prefix = strtok_s(buffer, "-,; ", &context);
+		if(prefix)
+		{
+			releaseVersion = (!_stricmp(prefix, "Final")) || (!_stricmp(prefix, "Hotfix"));
+		}
+	}
+	return LAMEXP_DEBUG || (!releaseVersion);
 }
 
 /*
