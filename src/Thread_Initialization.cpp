@@ -101,6 +101,7 @@ InitializationThread::InitializationThread(const lamexp_cpu_t *cpuFeatures)
 void InitializationThread::run()
 {
 	m_bSuccess = false;
+	bool bCustom = false;
 	delay();
 
 	//CPU type selection
@@ -133,10 +134,11 @@ void InitializationThread::run()
 
 	QDir toolsDir(":/tools/");
 	QList<QFileInfo> toolsList = toolsDir.entryInfoList(QStringList("*.*"), QDir::Files, QDir::Name);
-	
+	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
+
 	QTime timer;
 	timer.start();
-
+	
 	//Extract all files
 	while(!toolsList.isEmpty())
 	{
@@ -157,14 +159,25 @@ void InitializationThread::run()
 			
 			if(toolCpuType & cpuSupport)
 			{
-				qDebug("Extracting file: %s -> %s", toolName.toLatin1().constData(),  toolShortName.toLatin1().constData());
-				LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString("%1/tool_%2").arg(lamexp_temp_folder2(), toolShortName), toolHash);
-				lamexp_register_tool(toolShortName, lockedFile, toolVersion);
+				QFileInfo customTool(QString("%1/tools/%2/%3").arg(appDir.canonicalPath(), QString::number(lamexp_version_build()), toolShortName));
+				if(customTool.exists() && customTool.isFile())
+				{
+					bCustom = true;
+					qDebug("Setting up file: %s <- %s", toolShortName.toLatin1().constData(), appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
+					LockedFile *lockedFile = new LockedFile(customTool.canonicalFilePath());
+					lamexp_register_tool(toolShortName, lockedFile, UINT_MAX);
+				}
+				else
+				{
+					qDebug("Extracting file: %s -> %s", toolName.toLatin1().constData(),  toolShortName.toLatin1().constData());
+					LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString("%1/tool_%2").arg(lamexp_temp_folder2(), toolShortName), toolHash);
+					lamexp_register_tool(toolShortName, lockedFile, toolVersion);
+				}
 			}
 		}
 		catch(char *errorMsg)
 		{
-			qFatal("At least one of the required tools could not be extracted:\n%s", errorMsg);
+			qFatal("At least one of the required tools could not be initialized:\n%s", errorMsg);
 			return;
 		}
 	}
@@ -176,12 +189,18 @@ void InitializationThread::run()
 		return;
 	}
 	
+	qDebug("All extracted.\n");
+
 	//Clean-up
 	mapChecksum.clear();
 	mapVersion.clear();
 	mapCpuType.clear();
-
-	qDebug("All extracted.\n");
+	
+	//Using any custom tools?
+	if(bCustom)
+	{
+		qWarning("Warning: Using custom tools, you might encounter unexpected problems!\n");
+	}
 
 	//Check delay
 	double delayExtract = static_cast<double>(timer.elapsed()) / 1000.0;
@@ -273,10 +292,12 @@ void InitializationThread::initTranslations(void)
 
 void InitializationThread::initNeroAac(void)
 {
+	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
+	
 	QFileInfo neroFileInfo[3];
-	neroFileInfo[0] = QFileInfo(QString("%1/neroAacEnc.exe").arg(QCoreApplication::applicationDirPath()));
-	neroFileInfo[1] = QFileInfo(QString("%1/neroAacDec.exe").arg(QCoreApplication::applicationDirPath()));
-	neroFileInfo[2] = QFileInfo(QString("%1/neroAacTag.exe").arg(QCoreApplication::applicationDirPath()));
+	neroFileInfo[0] = QFileInfo(QString("%1/neroAacEnc.exe").arg(appPath));
+	neroFileInfo[1] = QFileInfo(QString("%1/neroAacDec.exe").arg(appPath));
+	neroFileInfo[2] = QFileInfo(QString("%1/neroAacTag.exe").arg(appPath));
 	
 	bool neroFilesFound = true;
 	for(int i = 0; i < 3; i++)	{ if(!neroFileInfo[i].exists()) neroFilesFound = false; }
