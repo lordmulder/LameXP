@@ -301,7 +301,7 @@ const QDate &lamexp_version_date(void)
  */
 LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo)
 {
-	FatalAppExit(0, L"Unhandeled exception error3, application will exit!");
+	FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 	TerminateProcess(GetCurrentProcess(), -1);
 	return 0;
 }
