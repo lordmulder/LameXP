@@ -1083,7 +1083,7 @@ void MainWindow::closeButtonClicked(void)
 void MainWindow::addFilesButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-	
+
 	TEMP_HIDE_DROPBOX
 	(
 		if(lamexp_themes_enabled())

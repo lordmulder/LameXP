@@ -193,13 +193,13 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
+		int iResult = -1;
+		SetUnhandledExceptionFilter(lamexp_exception_handler);
 		try
 		{
-			int iResult = -1;
 			qInstallMsgHandler(lamexp_message_handler);
 			iResult = lamexp_main(argc, argv);
 			lamexp_finalization();
-			return iResult;
 		}
 		catch(char *error)
 		{
@@ -225,6 +225,7 @@ int main(int argc, char* argv[])
 			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
+		return iResult;
 	}
 }
 

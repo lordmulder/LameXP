@@ -297,6 +297,16 @@ const QDate &lamexp_version_date(void)
 }
 
 /*
+ * Global exception handler
+ */
+LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo)
+{
+	FatalAppExit(0, L"Unhandeled exception error3, application will exit!");
+	TerminateProcess(GetCurrentProcess(), -1);
+	return 0;
+}
+
+/*
  * Qt message handler
  */
 void lamexp_message_handler(QtMsgType type, const char *msg)

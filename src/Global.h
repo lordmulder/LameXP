@@ -84,6 +84,7 @@ const char *lamexp_support_url(void);
 void lamexp_init_console(int argc, char* argv[]);
 bool lamexp_init_qt(int argc, char* argv[]);
 int lamexp_init_ipc(void);
+LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo);
 void lamexp_message_handler(QtMsgType type, const char *msg);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0);
 bool lamexp_check_tool(const QString &toolName);
