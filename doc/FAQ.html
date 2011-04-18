@@ -32,6 +32,7 @@ a:visited { color: #0000EE; }
 <li><a href="#126abc5a">Is there a way to output ".m4a" or ".aac" files with LameXP?</a>
 <li><a href="#ebf016ab">How do I enable WMA input (decoding) in LameXP?</a>
 <li><a href="#9fd53558">How can I use LameXP as a "portable" application?</a>
+<li><a href="#3d6684e9">Is there a way to use custom tools (binaries) with LameXP instead of the "built-in" ones?</a>
 <li><a href="#df406578">The LameXP startup (splash screen) takes very long on my system. What can I do?</a>
 <li><a href="#9b0a5c32">Why does application 'xyz' not open the Wave files created by LameXP?</a>
 <li><a href="#89cbd3d0">Why does LameXP run only 'n' parallel instances/threads on my computer?</a>
@@ -332,6 +333,27 @@ e.g. when launching LameXP directly from their USB stick on different computers.
 offers a "true" portable mode. You can enable that mode simply by renaming the LameXP executable file to<br>
 "LameXP-Portable.exe". But be aware: When running LameXP in the "portable" mode, the user(!) must ensure that<br>
 write-access is granted to the directory where the LameXP executable is located.<br><br>
+
+<br><br>
+
+<a name="3d6684e9"></a><b>Is there a way to use custom tools (binaries) with LameXP instead of the "built-in" ones?</b><br>
+<br>
+LameXP uses a number third-party tools. All of these tools are already "built-in" (with a few exceptions) and<br>
+thus it is NOT required to provide separate binaries. Usually it will NOT be necessary to replace any of<br>
+the "built-in" tools with a custom (user-provided) binary. If, however, you need to replace/update/downgrade<br>
+one of the binaries for a good reason, the recommended method is re-building LameXP from the sources. If you<br>
+don't know how to build LameXP from the sources, then you probably shouldn't be trying to replace the binary.<br>
+<br>
+Having said that, there now is a more convenient method for using a custom tool version (binary) instead of<br>
+the "built-in" one. This method works WITHOUT re-building LameXP. However note that the following is intended<br>
+for testing and debugging purposes only! Also note that LameXP was specifically designed to work with the<br>
+"built-in" versions of the tools. It may not work properly or may not work at all with custom tool versions!<br>
+<br>
+In order to replace a "built-in" binary, simply put the user-provided binary to the following location:
+<blockquote>&lt;install_folder&gt;\tools\&lt;build_number&gt;\&lt;tool_name&gt;.exe</blockquote>
+If, for example, you want to replace 'lame.exe' in Build #666 of LameXP, you would put it to the this path:
+<blockquote>C:\Path to your LameXP install folder\tools\666\lame.exe</blockquote>
+(It is intended that the '&lt;build_number&gt;' part of the path has to be adjusted with every update of LameXP)<br><br>
 
 <br><br>
 
