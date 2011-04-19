@@ -55,16 +55,15 @@
 #include <Objbase.h>
 
 //Debug only includes
-#ifdef _DEBUG
+#if LAMEXP_DEBUG
 #include <Psapi.h>
-#endif //_DEBUG
+#endif
 
-//Static build only macros
+//Initialize static Qt plugins
 #ifdef QT_NODLL
-#pragma warning(disable:4101)
-#define LAMEXP_INIT_QT_STATIC_PLUGIN(X) Q_IMPORT_PLUGIN(X)
-#else
-#define LAMEXP_INIT_QT_STATIC_PLUGIN(X)
+Q_IMPORT_PLUGIN(qgif)
+Q_IMPORT_PLUGIN(qico)
+Q_IMPORT_PLUGIN(qsvg)
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -560,10 +559,9 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 }
 
 /*
- * Check for debugger
+ * Check for debugger (thread proc)
  */
-#if !defined(_DEBUG) || defined(NDEBUG)
-void WINAPI lamexp_debug_thread_proc(__in LPVOID lpParameter)
+static void WINAPI lamexp_debug_thread_proc(__in LPVOID lpParameter)
 {
 	while(!IsDebuggerPresent())
 	{
@@ -571,7 +569,11 @@ void WINAPI lamexp_debug_thread_proc(__in LPVOID lpParameter)
 	}
 	TerminateProcess(GetCurrentProcess(), -1);
 }
-HANDLE lamexp_debug_thread_init(void)
+
+/*
+ * Check for debugger (startup routine)
+ */
+static HANDLE lamexp_debug_thread_init(void)
 {
 	if(IsDebuggerPresent())
 	{
@@ -580,8 +582,6 @@ HANDLE lamexp_debug_thread_init(void)
 	}
 	return CreateThread(NULL, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(&lamexp_debug_thread_proc), NULL, NULL, NULL);
 }
-static const HANDLE g_debug_thread = lamexp_debug_thread_init();
-#endif
 
 /*
  * Check for compatibility mode
@@ -716,10 +716,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Load plugins from application directory
 	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
 	qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
-
-	//Init static Qt plugins
-	LAMEXP_INIT_QT_STATIC_PLUGIN(qico);
-	LAMEXP_INIT_QT_STATIC_PLUGIN(qsvg);
 
 	//Check for supported image formats
 	QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
@@ -1449,16 +1445,21 @@ void lamexp_finalization(void)
 }
 
 /*
+ * Initialize debug thread
+ */
+static const HANDLE g_debug_thread = LAMEXP_DEBUG ? NULL : lamexp_debug_thread_init();
+
+/*
  * Get number private bytes [debug only]
  */
 SIZE_T lamexp_dbg_private_bytes(void)
 {
-#ifdef _DEBUG
+#if LAMEXP_DEBUG
 	PROCESS_MEMORY_COUNTERS_EX memoryCounters;
 	memoryCounters.cb = sizeof(PROCESS_MEMORY_COUNTERS_EX);
 	GetProcessMemoryInfo(GetCurrentProcess(), (PPROCESS_MEMORY_COUNTERS) &memoryCounters, sizeof(PROCESS_MEMORY_COUNTERS_EX));
 	return memoryCounters.PrivateUsage;
 #else
 	throw "Cannot call this function in a non-debug build!";
-#endif //_DEBUG
+#endif //LAMEXP_DEBUG
 }
