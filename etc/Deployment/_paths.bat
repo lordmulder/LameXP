@@ -56,7 +56,7 @@ if not exist "%PATH_UPXBIN%\upx.exe" GOTO:EOF
 if not exist "%PATH_MKNSIS%\makensis.exe" GOTO:EOF
 if not exist "%PATH_MSVC90%\VC\vcvarsall.bat" GOTO:EOF
 if not exist "%PATH_MSVC90%\VC\bin\cl.exe" GOTO:EOF
-if not exist "%PATH_QTMSVC%\bin\qtvars.bat" GOTO:EOF
+if not exist "%PATH_QTMSVC%\bin\qtenv2.bat" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\uic.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\moc.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\rcc.exe" GOTO:EOF
