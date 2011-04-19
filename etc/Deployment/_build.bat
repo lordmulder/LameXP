@@ -4,7 +4,7 @@ echo ----------------------------------------------------------------
 echo Solution File: %1
 echo Configuration: %~2
 echo ----------------------------------------------------------------
-call "%~d0%~p0\_paths.bat"
+call "%~dp0\_paths.bat"
 if not "%LAMEXP_ERROR%"=="0" GOTO:EOF
 REM -----------------------------------------------------------------
 call "%PATH_MSVC90%\VC\bin\vcvars32.bat" x86

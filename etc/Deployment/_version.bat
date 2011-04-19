@@ -8,7 +8,7 @@ set "VER_LAMEXP_BUILD="
 set "VER_LAMEXP_TYPE="
 set "VER_LAMEXP_PATCH="
 REM ------------------------------------------
-for /f "tokens=2,*" %%s in (%~d0%~p0\..\..\src\Config.h) do (
+for /f "tokens=2,*" %%s in (%~dp0\..\..\src\Config.h) do (
 	if "%%s"=="VER_LAMEXP_MAJOR" set "VER_LAMEXP_MAJOR=%%~t"
 	if "%%s"=="VER_LAMEXP_MINOR_HI" set "VER_LAMEXP_MINOR_HI=%%~t"
 	if "%%s"=="VER_LAMEXP_MINOR_LO" set "VER_LAMEXP_MINOR_LO=%%~t"

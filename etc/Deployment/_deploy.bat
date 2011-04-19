@@ -3,9 +3,9 @@ setlocal ENABLEDELAYEDEXPANSION
 REM ------------------------------------------
 REM :: SETUP ENVIRONMENT ::
 REM ------------------------------------------
-call "%~d0%~p0\_paths.bat"
+call "%~dp0\_paths.bat"
 if not "%LAMEXP_ERROR%"=="0" (
-	call "%~d0%~p0\_error.bat" "FAILD TO SETUP PATHS. CHECK YOUR 'BUILDENV.TXT' FILE"
+	call "%~dp0\_error.bat" "FAILD TO SETUP PATHS. CHECK YOUR 'BUILDENV.TXT' FILE"
 	GOTO:EOF
 )
 REM ------------------------------------------
@@ -18,12 +18,12 @@ if not "%LAMEXP_REDIST%"=="0" (
 REM ------------------------------------------
 REM :: SETUP PATHS ::
 REM ------------------------------------------
-set "OUT_PATH=%~d0%~p0\..\..\bin\%LAMEXP_CONFIG%"
+set "OUT_PATH=%~dp0\..\..\bin\%LAMEXP_CONFIG%"
 set "OUT_DATE=%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%"
 set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
-set "OBJ_PATH=%~d0%~p0\..\..\obj\%LAMEXP_CONFIG%"
-set "MOC_PATH=%~d0%~p0\..\..\tmp"
-set "IPC_PATH=%~d0%~p0\..\..\ipch"
+set "OBJ_PATH=%~dp0\..\..\obj\%LAMEXP_CONFIG%"
+set "MOC_PATH=%~dp0\..\..\tmp"
+set "IPC_PATH=%~dp0\..\..\ipch"
 REM ------------------------------------------
 if "%LAMEXP_SKIP_BUILD%"=="YES" (
 	goto SkipBuildThisTime
@@ -48,10 +48,10 @@ del /Q /S "%IPC_PATH%\*.*"
 REM ------------------------------------------
 REM :: BUILD BINARIES ::
 REM ------------------------------------------
-call "%~d0%~p0\_lupdate.bat"
-call "%~d0%~p0\_build.bat" "%~d0%~p0\..\..\%PATH_VCPROJ%" "%LAMEXP_CONFIG%"
+call "%~dp0\_lupdate.bat"
+call "%~dp0\_build.bat" "%~dp0\..\..\%PATH_VCPROJ%" "%LAMEXP_CONFIG%"
 if not "%LAMEXP_ERROR%"=="0" (
-	call "%~d0%~p0\_error.bat" "BUILD HAS FAILED"
+	call "%~dp0\_error.bat" "BUILD HAS FAILED"
 	GOTO:EOF
 )
 REM ------------------------------------------
@@ -59,9 +59,9 @@ REM ------------------------------------------
 REM ------------------------------------------
 REM :: READ VERSION INFO ::
 REM ------------------------------------------
-call "%~d0%~p0\_version.bat"
+call "%~dp0\_version.bat"
 if not "%LAMEXP_ERROR%"=="0" (
-	call "%~d0%~p0\_error.bat" "FAILD TO READ VERSION INFO!"
+	call "%~dp0\_error.bat" "FAILD TO READ VERSION INFO!"
 	GOTO:EOF
 )
 REM ------------------------------------------
@@ -77,11 +77,11 @@ del "%OUT_FILE%.exe"
 del "%OUT_FILE%.zip"
 REM ------------------------------------------
 if exist "%OUT_FILE%.exe" (
-	call "%~d0%~p0\_error.bat" "FAILD TO DELET EXISTING FILE"
+	call "%~dp0\_error.bat" "FAILD TO DELET EXISTING FILE"
 	GOTO:EOF
 )
 if exist "%OUT_FILE%.zip" (
-	call "%~d0%~p0\_error.bat" "FAILD TO DELET EXISTING FILE"
+	call "%~dp0\_error.bat" "FAILD TO DELET EXISTING FILE"
 	GOTO:EOF
 )
 REM ------------------------------------------
@@ -107,31 +107,31 @@ for %%f in ("%TMP_PATH%\*.dll") do (
 	"%PATH_UPXBIN%\upx.exe" --best "%%f"
 )
 REM ------------------------------------------
-if exist "%~d0%~p0\_postproc.bat" (
-	call "%~d0%~p0\_postproc.bat" "%TMP_PATH%"
+if exist "%~dp0\_postproc.bat" (
+	call "%~dp0\_postproc.bat" "%TMP_PATH%"
 )
 REM ------------------------------------------
 if "%LAMEXP_REDIST%"=="1" (
 	copy "..\Redist\*.*" "%TMP_PATH%"
 )
-copy "%~d0%~p0\..\..\ReadMe.txt" "%TMP_PATH%"
-copy "%~d0%~p0\..\..\License.txt" "%TMP_PATH%"
-copy "%~d0%~p0\..\..\doc\Changelog.html" "%TMP_PATH%"
-copy "%~d0%~p0\..\..\doc\Translate.html" "%TMP_PATH%"
-copy "%~d0%~p0\..\..\doc\FAQ.html" "%TMP_PATH%"
+copy "%~dp0\..\..\ReadMe.txt" "%TMP_PATH%"
+copy "%~dp0\..\..\License.txt" "%TMP_PATH%"
+copy "%~dp0\..\..\doc\Changelog.html" "%TMP_PATH%"
+copy "%~dp0\..\..\doc\Translate.html" "%TMP_PATH%"
+copy "%~dp0\..\..\doc\FAQ.html" "%TMP_PATH%"
 REM ------------------------------------------
 REM :: CREATE PACKAGES ::
 REM ------------------------------------------
 "%PATH_SEVENZ%\7z.exe" a -tzip -r "%OUT_FILE%.zip" "%TMP_PATH%\*"
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%OUT_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "%~d0%~p0\..\NSIS\setup.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%OUT_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "%~dp0\..\NSIS\setup.nsi"
 rd /S /Q "%TMP_PATH%"
 REM ------------------------------------------
 if not exist "%OUT_FILE%.zip" (
-	call "%~d0%~p0\_error.bat" "PACKAGING HAS FAILED"
+	call "%~dp0\_error.bat" "PACKAGING HAS FAILED"
 	GOTO:EOF
 )
 if not exist "%OUT_FILE%.exe" (
-	call "%~d0%~p0\_error.bat" "PACKAGING HAS FAILED"
+	call "%~dp0\_error.bat" "PACKAGING HAS FAILED"
 	GOTO:EOF
 )
 REM ------------------------------------------

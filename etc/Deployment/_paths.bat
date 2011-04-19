@@ -10,7 +10,7 @@ set "PATH_QTMSVC="
 set "PATH_GNUPG1="
 set "PATH_VCPROJ="
 REM ------------------------------------------
-set "BUILDENV_TXT=%~d0%~p0\buildenv.txt"
+set "BUILDENV_TXT=%~dp0\buildenv.txt"
 if not "%~1"=="" (
 	set "BUILDENV_TXT=%~1"
 )
@@ -62,6 +62,6 @@ if not exist "%PATH_QTMSVC%\bin\moc.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\rcc.exe" GOTO:EOF
 if not exist "%PATH_GNUPG1%\gpg.exe" GOTO:EOF
 if not exist "%PATH_GNUPG1%\gpg.exe" GOTO:EOF
-if not exist "%~d0%~p0\..\..\%PATH_VCPROJ%" GOTO:EOF
+if not exist "%~dp0\..\..\%PATH_VCPROJ%" GOTO:EOF
 REM ------------------------------------------
 set "LAMEXP_ERROR=0"
