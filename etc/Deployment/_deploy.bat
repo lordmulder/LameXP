@@ -16,10 +16,14 @@ if not "%LAMEXP_REDIST%"=="0" (
 	set "LAMEXP_REDIST=1"
 )
 REM ------------------------------------------
+REM :: SETUP BUILD DATE ::
+REM ------------------------------------------
+call "%~dp0\_date.bat"
+echo BUILD DATE: %OUT_DATE%
+REM ------------------------------------------
 REM :: SETUP PATHS ::
 REM ------------------------------------------
 set "OUT_PATH=%~dp0\..\..\bin\%LAMEXP_CONFIG%"
-set "OUT_DATE=%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%"
 set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
 set "OBJ_PATH=%~dp0\..\..\obj\%LAMEXP_CONFIG%"
 set "MOC_PATH=%~dp0\..\..\tmp"
