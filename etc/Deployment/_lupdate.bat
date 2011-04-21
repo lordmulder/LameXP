@@ -5,12 +5,16 @@ echo Updating Translation files
 echo ----------------------------------------------------------------
 call "%~dp0\_paths.bat"
 if not "%LAMEXP_ERROR%"=="0" GOTO:EOF
+call "%~dp0\_date.bat"
+if not "%LAMEXP_ERROR%"=="0" GOTO:EOF
+REM -----------------------------------------------------------------
+set "LAMEXP_ERROR=1"
 REM -----------------------------------------------------------------
 call "%PATH_MSVC90%\VC\bin\vcvars32.bat" x86
 call "%PATH_QTMSVC%\bin\qtenv2.bat"
 REM -----------------------------------------------------------------
 set "LAMEXP_ERROR=1"
-set "LST_FILE=%TEMP%\~list.%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%.lst"
+set "LST_FILE=%TEMP%\~list.%ISO_DATE%.lst"
 echo %LST_FILE%
 REM -----------------------------------------------------------------
 del "%LST_FILE%" 2> NUL

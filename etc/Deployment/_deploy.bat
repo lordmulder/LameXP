@@ -19,12 +19,15 @@ REM ------------------------------------------
 REM :: SETUP BUILD DATE ::
 REM ------------------------------------------
 call "%~dp0\_date.bat"
-echo BUILD DATE: %OUT_DATE%
+if not "%LAMEXP_ERROR%"=="0" (
+	call "%~dp0\_error.bat" "FAILD TO SETUP BUILD-DATE"
+	GOTO:EOF
+)
 REM ------------------------------------------
 REM :: SETUP PATHS ::
 REM ------------------------------------------
 set "OUT_PATH=%~dp0\..\..\bin\%LAMEXP_CONFIG%"
-set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%OUT_DATE%.tmp"
+set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%ISO_DATE%.tmp"
 set "OBJ_PATH=%~dp0\..\..\obj\%LAMEXP_CONFIG%"
 set "MOC_PATH=%~dp0\..\..\tmp"
 set "IPC_PATH=%~dp0\..\..\ipch"
@@ -69,10 +72,10 @@ if not "%LAMEXP_ERROR%"=="0" (
 	GOTO:EOF
 )
 REM ------------------------------------------
-set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%"
+set "OUT_FILE=%OUT_PATH%\..\LameXP.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%"
 for /L %%n in (1, 1, 99) do (
-	if exist "!OUT_FILE!.exe" set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
-	if exist "!OUT_FILE!.zip" set "OUT_FILE=%OUT_PATH%\..\LameXP.%OUT_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	if exist "!OUT_FILE!.exe" set "OUT_FILE=%OUT_PATH%\..\LameXP.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	if exist "!OUT_FILE!.zip" set "OUT_FILE=%OUT_PATH%\..\LameXP.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
 )
 REM ------------------------------------------
 REM :: DELETE OLD OUTPUT FILE ::
@@ -127,7 +130,7 @@ REM ------------------------------------------
 REM :: CREATE PACKAGES ::
 REM ------------------------------------------
 "%PATH_SEVENZ%\7z.exe" a -tzip -r "%OUT_FILE%.zip" "%TMP_PATH%\*"
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%OUT_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "%~dp0\..\NSIS\setup.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "%~dp0\..\NSIS\setup.nsi"
 rd /S /Q "%TMP_PATH%"
 REM ------------------------------------------
 if not exist "%OUT_FILE%.zip" (
