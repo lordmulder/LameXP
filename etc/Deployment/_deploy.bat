@@ -27,7 +27,7 @@ REM ------------------------------------------
 REM :: SETUP PATHS ::
 REM ------------------------------------------
 set "OUT_PATH=%~dp0\..\..\bin\%LAMEXP_CONFIG%"
-set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%ISO_DATE%.tmp"
+set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%ISO_DATE%.%RANDOM%.tmp"
 set "OBJ_PATH=%~dp0\..\..\obj\%LAMEXP_CONFIG%"
 set "MOC_PATH=%~dp0\..\..\tmp"
 set "IPC_PATH=%~dp0\..\..\ipch"

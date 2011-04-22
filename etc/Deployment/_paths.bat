@@ -38,14 +38,14 @@ REM ------------------------------------------
 set "BUILDENV_TXT="
 REM ------------------------------------------
 echo === BEGIN PATHS ===
-echo PATH_SEVENZ ="%PATH_SEVENZ%"
-echo PATH_MPRESS ="%PATH_MPRESS%"
-echo PATH_UPXBIN ="%PATH_UPXBIN%"
-echo PATH_MKNSIS ="%PATH_MKNSIS%"
-echo PATH_MSVC90 ="%PATH_MSVC90%"
-echo PATH_QTMSVC ="%PATH_QTMSVC%"
-echo PATH_GNUPG1 ="%PATH_GNUPG1%"
-echo PATH_VCPROJ ="%PATH_VCPROJ%"
+echo PATH_SEVENZ = "%PATH_SEVENZ%"
+echo PATH_MPRESS = "%PATH_MPRESS%"
+echo PATH_UPXBIN = "%PATH_UPXBIN%"
+echo PATH_MKNSIS = "%PATH_MKNSIS%"
+echo PATH_MSVC90 = "%PATH_MSVC90%"
+echo PATH_QTMSVC = "%PATH_QTMSVC%"
+echo PATH_GNUPG1 = "%PATH_GNUPG1%"
+echo PATH_VCPROJ = "%PATH_VCPROJ%"
 echo === END PATHS ===
 REM ------------------------------------------
 set "LAMEXP_ERROR=1"
