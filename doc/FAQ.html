@@ -551,6 +551,28 @@ Also note the following hints:<br><ul>
 <li>In order to make a "fully static" build of LameXP, you need to compile Qt as 'static' libraries
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
+<br>
+Instructions to build Qt as 'static' libraries:<br><ul>
+<li>Make sure Visual Studio 2010 and Strawberry Perl for Windows are installed
+<li>Install the Qt SDK v1.1 and choose to install the Qt 4.7.3 Sources
+<li>Open a new command window (cmd.exe)
+<li>Add Strawberry Perl to your PATH (e.g. 'set PATH=C:\strawberry\perl\bin;%PATH%')
+<li>Now run 'vcvarsall.bat' form your Visual C++ 2010 install directory
+<li>Change the current directory to the Qt Sources path (e.g. 'C:\QtSDK\QtSources\4.7.3')
+<li>Finally run 'configure.exe -release -static -ltcg &lt;more options&gt;' and wait for completion
+<li>You can now open and build the solution files (e.g. 'src\corelib\QtCore.sln' in Visual Studio
+<li>Make sure you select the "Release" configuration for your builds
+<li>It is also recommended to change "C/C++ &gt; Code Generation &gt; Runtime Library" to "/MT"
+<li>Libraries you need to build for LameXP include the following:<ul>
+<li>lib\qtmain.lib
+<li>lib\QtCore.lib
+<li>lib\QtGui.lib
+<li>lib\QtSvg.lib
+<li>lib\QtXml.lib
+<li>plugins\imageformats\qgif.lib
+<li>plugins\imageformats\qico.lib
+<li>plugins\imageformats\qsvg.lib</ul>
+<li>Put everything into the 'LameXP\etc\Prerequisites\qt4_static\plugins' folder</ul>
 
 <br><br>
 
