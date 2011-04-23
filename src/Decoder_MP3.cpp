@@ -46,7 +46,7 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	QProcess process;
 	QStringList args;
 
-	args << "-v" << "-w" << QDir::toNativeSeparators(outputFile);
+	args << "-v" << "--utf8" << "-w" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args))

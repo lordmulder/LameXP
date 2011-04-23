@@ -541,15 +541,15 @@ LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(softwar
 <a name="a0c1e92b"></a><b>What are the prerequisites to build LameXP from the sources?</b><br>
 <br>
 LameXP is currently being developed using the following build environment:<br><ul>
-<li>Visual Studio 2010 with Service Pack 1
-<li>Qt SDK v1.1 RC, Qt libraries v4.7.3 for Windows (MSVC 2008)
-<li>Windows SDK for Windows 7 and .NET Framework 4 (v7.1)</ul>
+<li>Visual Studio 2010 with Service Pack 1, running on Windows 7 with Service Pack 1
+<li>Desktop Qt v4.7.3 (MSVC 2008), included in Qt SDK v1.1
+<li>Windows Platform SDK v7.1 (Windows SDK for Windows 7 and .NET Framework 4)</ul>
 <br>
 Also note the following hints:<br><ul>
-<li>You must launch Visual Studio using "qtvars.bat vsstart" in order to enable the Qt tools
-<li>The Microsoft Windows SDK v6.0A should work as well, with a few limitations
-<li>In order to make a fully "static" build of LameXP, you need to compile Qt as static libraries
+<li>Run "qtenv2.bat" before launching Visual Studio in order to set up the Qt environment
 <li>Visual Studio 2008 solution/project files are still provided for people targeting Windows 2000
+<li>In order to make a "fully static" build of LameXP, you need to compile Qt as 'static' libraries
+<li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
 
 <br><br>

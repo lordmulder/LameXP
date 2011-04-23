@@ -63,7 +63,7 @@ g_lamexp_tools[] =
 	{"3cbf0c5afba64378ca30f646b57741d877be520a", CPU_TYPE_GEN, "mediainfo.i386.exe", 744},
 	{"69f8733ad935d71d48cc3d907b4596adbabb2e81", CPU_TYPE_X64, "mediainfo.x64.exe", 744},
 	{"aa89763a5ba4d1a5986549b9ee53e005c51940c1", CPU_TYPE_ALL, "mpcdec.exe", 435},
-	{"38f81efca6c1eeab0b9dc39d06c2ac750267217f", CPU_TYPE_ALL, "mpg123.exe", 1132},
+	{"c327400fcee268f581d8c03e2a5cbbe8031abb6f", CPU_TYPE_ALL, "mpg123.exe", 1133},
 	{"8dd7138714c3bcb39f5a3213413addba13d06f1e", CPU_TYPE_ALL, "oggdec.exe", UINT_MAX},
 	{"14a99d3b1f0b166dbd68db45196da871e58e14ec", CPU_TYPE_X86, "oggenc2.i386.exe", 287602},
 	{"36f8d93ef3df6a420a73a9b5cf02dafdaf4321f0", CPU_TYPE_SSE, "oggenc2.sse2.exe", 287602},
