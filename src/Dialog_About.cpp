@@ -75,7 +75,9 @@ g_lamexp_contributors[] =
 AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstStart)
 :
 	QMessageBox(parent),
-	m_settings(settings)
+	m_settings(settings),
+	m_disque(NULL),
+	m_disqueTimer(NULL)
 {
 	const QString versionStr = QString().sprintf
 	(
@@ -475,32 +477,35 @@ void AboutDialog::moveDisque(void)
 {
 	static const int delta = 2;
 	
-	QPoint pos = m_disque->pos();
-	pos.setX(m_disqueFlags[0] ? pos.x() + delta : pos.x() - delta);
-	pos.setY(m_disqueFlags[1] ? pos.y() + delta : pos.y() - delta);
-	m_disque->move(pos);
+	if(m_disque)
+	{
+		QPoint pos = m_disque->pos();
+		pos.setX(m_disqueFlags[0] ? pos.x() + delta : pos.x() - delta);
+		pos.setY(m_disqueFlags[1] ? pos.y() + delta : pos.y() - delta);
+		m_disque->move(pos);
 
-	if(pos.x() <= 0)
-	{
-		m_disqueFlags[0] = true;
-	}
-	else if(pos.x() >= m_screenGeometry.width() - m_disque->width())
-	{
-		m_disqueFlags[0] = false;
-	}
+		if(pos.x() <= 0)
+		{
+			m_disqueFlags[0] = true;
+		}
+		else if(pos.x() >= m_screenGeometry.width() - m_disque->width())
+		{
+			m_disqueFlags[0] = false;
+		}
 
-	if(pos.y() <= 0)
-	{
-		m_disqueFlags[1] = true;
-	}
-	else if(pos.y() >= m_screenGeometry.height()- m_disque->height())
-	{
-		m_disqueFlags[1] = false;
-	}
+		if(pos.y() <= 0)
+		{
+			m_disqueFlags[1] = true;
+		}
+		else if(pos.y() >= m_screenGeometry.height()- m_disque->height())
+		{
+			m_disqueFlags[1] = false;
+		}
 
-	if(m_disque->windowOpacity() < 0.9)
-	{
-		m_disque->setWindowOpacity(m_disque->windowOpacity() + 0.01);
+		if(m_disque->windowOpacity() < 0.9)
+		{
+			m_disque->setWindowOpacity(m_disque->windowOpacity() + 0.01);
+		}
 	}
 }
 ////////////////////////////////////////////////////////////
