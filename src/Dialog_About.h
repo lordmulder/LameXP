@@ -33,7 +33,7 @@ public:
 	AboutDialog(SettingsModel *settings, QWidget *parent = 0, bool firstStart = false);
 	~AboutDialog(void);
 
-	static const char *neroAacUrl;
+	static const char *neroAacUrl, *disqueUrl;
 
 public slots:
 	int exec();
@@ -42,13 +42,19 @@ public slots:
 	void showMoreAbout(void);
 	void showAboutQt(void);
 	void showAboutContributors(void);
+	void moveDisque(void);
 
 protected:
 	void showEvent(QShowEvent *e);
+	bool eventFilter(QObject *obj, QEvent *event);
 
 private:
 	bool m_firstShow;
 	SettingsModel *m_settings;
+	QLabel *m_disque;
+	QTimer * m_disqueTimer;
+	bool m_disqueFlags[2];
+	QRect m_screenGeometry;
 
 	QString makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo = QString());
 	bool playResoureSound(const QString &library, const unsigned long soundId, const bool async);

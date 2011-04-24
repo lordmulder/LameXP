@@ -3,6 +3,7 @@
 	<qresource>
     <file>images/Busy.gif</file>
     <file>images/CD.png</file>
+    <file>images/Disque.png</file>
     <file>images/DropBox.png</file>
     <file>images/HeaderIcon_LogFile.png</file>
     <file>images/HeaderIcon_MetaInfo.png</file>

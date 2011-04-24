@@ -34,6 +34,8 @@
 #include <QTimer>
 #include <QFileInfo>
 #include <QDir>
+#include <QDesktopWidget>
+#include <QLabel>
 
 #include <MMSystem.h>
 
@@ -42,6 +44,7 @@
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
+const char *AboutDialog::disqueUrl = "http://www.youtube.com/watch?v=MEDB4xJsXVo"; /*http://www.youtube.com/watch?v=LjOM5YjMZ8w*/
 
 //Contributors
 static const struct 
@@ -173,13 +176,41 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		fourthButton->setIcon(QIcon(":/icons/cross.png"));
 		fourthButton->setIconSize(QSize(16, 16));
 		fourthButton->setMinimumWidth(90);
-	}
 
+		QPixmap disque(":/images/Disque.png");
+		m_screenGeometry = QApplication::desktop()->availableGeometry();
+		m_disque = new QLabel(this, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+		m_disque->installEventFilter(this);
+		m_disque->setStyleSheet("background:transparent;");
+		m_disque->setAttribute(Qt::WA_TranslucentBackground);
+		m_disque->setGeometry(qrand() % (m_screenGeometry.width() - disque.width()), qrand() % (m_screenGeometry.height() - disque.height()), disque.width(), disque.height());
+		m_disque->setPixmap(disque);
+		m_disque->setWindowOpacity(0.01);
+		m_disque->show();
+		m_disqueTimer = new QTimer;
+		connect(m_disqueTimer, SIGNAL(timeout()), this, SLOT(moveDisque()));
+		m_disqueTimer->setInterval(10);
+		m_disqueTimer->start();
+		m_disqueFlags[0] = true;
+		m_disqueFlags[1] = true;
+	}
+	
 	m_firstShow = firstStart;
 }
 
 AboutDialog::~AboutDialog(void)
 {
+	if(m_disque)
+	{
+		m_disque->close();
+		LAMEXP_DELETE(m_disque);
+	}
+	if(m_disqueTimer)
+	{
+		m_disqueTimer->stop();
+		LAMEXP_DELETE(m_disqueTimer);
+	}
+
 }
 
 ////////////////////////////////////////////////////////////
@@ -440,6 +471,38 @@ void AboutDialog::showMoreAbout(void)
 	LAMEXP_DELETE(moreAboutBox);
 }
 
+void AboutDialog::moveDisque(void)
+{
+	static const int delta = 2;
+	
+	QPoint pos = m_disque->pos();
+	pos.setX(m_disqueFlags[0] ? pos.x() + delta : pos.x() - delta);
+	pos.setY(m_disqueFlags[1] ? pos.y() + delta : pos.y() - delta);
+	m_disque->move(pos);
+
+	if(pos.x() <= 0)
+	{
+		m_disqueFlags[0] = true;
+	}
+	else if(pos.x() >= m_screenGeometry.width() - m_disque->width())
+	{
+		m_disqueFlags[0] = false;
+	}
+
+	if(pos.y() <= 0)
+	{
+		m_disqueFlags[1] = true;
+	}
+	else if(pos.y() >= m_screenGeometry.height()- m_disque->height())
+	{
+		m_disqueFlags[1] = false;
+	}
+
+	if(m_disque->windowOpacity() < 0.9)
+	{
+		m_disque->setWindowOpacity(m_disque->windowOpacity() + 0.01);
+	}
+}
 ////////////////////////////////////////////////////////////
 // Protected Functions
 ////////////////////////////////////////////////////////////
@@ -459,6 +522,17 @@ void AboutDialog::showEvent(QShowEvent *e)
 		QTimer::singleShot(5000, this, SLOT(enableButtons()));
 		setCursor(QCursor(Qt::WaitCursor));
 	}
+}
+
+bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
+{
+	if((obj == m_disque) && (event->type() == QEvent::MouseButtonPress))
+	{
+		m_disque->hide();
+		QDesktopServices::openUrl(QUrl(disqueUrl));
+	}
+
+	return false;
 }
 
 ////////////////////////////////////////////////////////////
