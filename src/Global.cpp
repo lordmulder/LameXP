@@ -203,6 +203,10 @@ static const char *g_lamexp_imageformats[] = {"png", "jpg", "gif", "ico", "svg",
 //Global locks
 static QMutex g_lamexp_message_mutex;
 
+//Main thread ID
+static const DWORD g_main_thread_id = GetCurrentThreadId();
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -300,9 +304,16 @@ const QDate &lamexp_version_date(void)
  */
 LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo)
 {
+	if(GetCurrentThreadId() != g_main_thread_id)
+	{
+		HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
+		if(mainThread) TerminateThread(mainThread, ULONG_MAX);
+		
+	}
+	
 	FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 	TerminateProcess(GetCurrentProcess(), -1);
-	return 0;
+	return LONG_MAX;
 }
 
 /*

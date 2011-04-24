@@ -54,7 +54,7 @@ g_lamexp_tools[] =
 {
 	{"3b41f85dde8d4a5a0f4cd5f461099d0db24610ba", CPU_TYPE_ALL, "alac.exe", UINT_MAX},
 	{"fb74ac8b73ad8cba2c3b4e6e61f23401d630dc22", CPU_TYPE_ALL, "elevator.exe", UINT_MAX},
-	{"3c647950bccfcc75d0746c0772e7115684be4dc5", CPU_TYPE_ALL, "faad.exe", 27},
+	{"80e372d8b20be24102c18284286fcdf5fa14bd86", CPU_TYPE_ALL, "faad.exe", 27},
 	{"d33cd86f04bd4067e244d2804466583c7b90a4e2", CPU_TYPE_ALL, "flac.exe", 121},
 	{"9328a50e89b54ec065637496d9681a7e3eebf915", CPU_TYPE_ALL, "gpgv.exe", 1411},
 	{"d837bf6ee4dab557d8b02d46c75a24e58980fffa", CPU_TYPE_ALL, "gpgv.gpg", UINT_MAX},
