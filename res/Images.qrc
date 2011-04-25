@@ -2,6 +2,7 @@
 <RCC version="1.0">
 	<qresource>
     <file>images/Busy.gif</file>
+    <file>images/Cartoon.png</file>
     <file>images/CD.png</file>
     <file>images/Disque.png</file>
     <file>images/DropBox.png</file>

@@ -77,7 +77,9 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	QMessageBox(parent),
 	m_settings(settings),
 	m_disque(NULL),
-	m_disqueTimer(NULL)
+	m_disqueTimer(NULL),
+	m_rotateNext(false),
+	m_disqueDelay(_I64_MAX)
 {
 	const QString versionStr = QString().sprintf
 	(
@@ -90,6 +92,11 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		lamexp_version_compiler(),
 		qVersion()
 	);
+
+	for(int i = 0; i < 4; i++)
+	{
+		m_cartoon[i] = NULL;
+	}
 
 	QString aboutText;
 
@@ -189,12 +196,12 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		m_disque->setPixmap(disque);
 		m_disque->setWindowOpacity(0.01);
 		m_disque->show();
+		m_disqueFlags[0] = (qrand() > (RAND_MAX/2));
+		m_disqueFlags[1] = (qrand() > (RAND_MAX/2));
 		m_disqueTimer = new QTimer;
 		connect(m_disqueTimer, SIGNAL(timeout()), this, SLOT(moveDisque()));
 		m_disqueTimer->setInterval(10);
 		m_disqueTimer->start();
-		m_disqueFlags[0] = true;
-		m_disqueFlags[1] = true;
 	}
 	
 	m_firstShow = firstStart;
@@ -211,6 +218,10 @@ AboutDialog::~AboutDialog(void)
 	{
 		m_disqueTimer->stop();
 		LAMEXP_DELETE(m_disqueTimer);
+	}
+	for(int i = 0; i < 4; i++)
+	{
+		LAMEXP_DELETE(m_cartoon[i]);
 	}
 
 }
@@ -475,31 +486,65 @@ void AboutDialog::showMoreAbout(void)
 
 void AboutDialog::moveDisque(void)
 {
-	static const int delta = 2;
-	
+	int delta = 2;
+	LARGE_INTEGER perfCount, perfFrequ;
+
+	if(QueryPerformanceFrequency(&perfFrequ) &&	QueryPerformanceCounter(&perfCount))
+	{
+		if(m_disqueDelay != _I64_MAX)
+		{
+			double delay = static_cast<double>(perfCount.QuadPart) - static_cast<double>(m_disqueDelay);
+			delta = max(1, min(128, static_cast<int>(ceil(delay / static_cast<double>(perfFrequ.QuadPart) / 0.00512))));
+		}
+		m_disqueDelay = perfCount.QuadPart;
+	}
+
 	if(m_disque)
 	{
 		QPoint pos = m_disque->pos();
 		pos.setX(m_disqueFlags[0] ? pos.x() + delta : pos.x() - delta);
 		pos.setY(m_disqueFlags[1] ? pos.y() + delta : pos.y() - delta);
-		m_disque->move(pos);
 
 		if(pos.x() <= 0)
 		{
 			m_disqueFlags[0] = true;
+			pos.setX(0);
+			m_rotateNext = true;
 		}
 		else if(pos.x() >= m_screenGeometry.width() - m_disque->width())
 		{
 			m_disqueFlags[0] = false;
+			pos.setX(m_screenGeometry.width() - m_disque->width());
+			m_rotateNext = true;
 		}
-
 		if(pos.y() <= 0)
 		{
 			m_disqueFlags[1] = true;
+			pos.setY(0);
+			m_rotateNext = true;
 		}
 		else if(pos.y() >= m_screenGeometry.height()- m_disque->height())
 		{
 			m_disqueFlags[1] = false;
+			pos.setY(m_screenGeometry.height() - m_disque->height());
+			m_rotateNext = true;
+		}
+
+		m_disque->move(pos);
+
+		if(m_rotateNext)
+		{
+			QPixmap *cartoon = NULL;
+			if(m_disqueFlags[0] == true && m_disqueFlags[1] != true) cartoon = m_cartoon[0];
+			if(m_disqueFlags[0] == true && m_disqueFlags[1] == true) cartoon = m_cartoon[1];
+			if(m_disqueFlags[0] != true && m_disqueFlags[1] == true) cartoon = m_cartoon[2];
+			if(m_disqueFlags[0] != true && m_disqueFlags[1] != true) cartoon = m_cartoon[3];
+			if(cartoon)
+			{
+				m_disque->setPixmap(*cartoon);
+				m_disque->resize(cartoon->size());
+			}
+			m_rotateNext = false;
 		}
 
 		if(m_disque->windowOpacity() < 0.9)
@@ -533,7 +578,15 @@ bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 {
 	if((obj == m_disque) && (event->type() == QEvent::MouseButtonPress))
 	{
-		m_disque->hide();
+		QPixmap cartoon(":/images/Cartoon.png");
+		for(int i = 0; i < 4; i++)
+		{
+			if(!m_cartoon[i])
+			{
+				m_cartoon[i] = new QPixmap(cartoon.transformed(QMatrix().rotate(static_cast<double>(i*90) + 45.0), Qt::SmoothTransformation));
+				m_rotateNext = true;
+			}
+		}
 		QDesktopServices::openUrl(QUrl(disqueUrl));
 	}
 

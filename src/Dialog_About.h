@@ -55,6 +55,9 @@ private:
 	QTimer * m_disqueTimer;
 	bool m_disqueFlags[2];
 	QRect m_screenGeometry;
+	QPixmap *m_cartoon[4];
+	bool m_rotateNext;
+	__int64 m_disqueDelay;
 
 	QString makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo = QString());
 	bool playResoureSound(const QString &library, const unsigned long soundId, const bool async);

@@ -83,5 +83,6 @@ private:
 	unsigned int m_filesRejected;
 	unsigned int m_filesDenied;
 	unsigned int m_filesDummyCDDA;
+	bool m_lineBreakBugWorkaround;
 	bool m_bSuccess;
 };
