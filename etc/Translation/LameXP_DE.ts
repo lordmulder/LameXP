@@ -1771,5 +1771,17 @@
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
+    <message>
+        <source>Update is being downloaded, please be patient...</source>
+        <translation>Update wird heruntergeladen, bitte gedulden Sie sich...</translation>
+    </message>
+    <message>
+        <source>Update ready to install. Applicaion will quit...</source>
+        <translation>Update ist bereit zur Installtion. Programm wird beendet...</translation>
+    </message>
+    <message>
+        <source>Update failed. Please try again or download manually!</source>
+        <translation>Update fehlgeschlagen. Bitte versuchen Sie es noch einmal!</translation>
+    </message>
 </context>
 </TS>

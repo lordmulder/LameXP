@@ -661,7 +661,7 @@ void UpdateDialog::applyUpdate(void)
 
 	if(m_updateInfo)
 	{
-		statusLabel->setText("Update is being downloaded, please be patient...");
+		statusLabel->setText(tr("Update is being downloaded, please be patient..."));
 		frameAnimation->show();
 		if(hintLabel->isVisible()) hintLabel->hide();
 		if(hintIcon->isVisible()) hintIcon->hide();
@@ -700,7 +700,7 @@ void UpdateDialog::applyUpdate(void)
 
 		if(process.exitCode() == 0)
 		{
-			statusLabel->setText("Update ready to install. Applicaion will quit...");
+			statusLabel->setText(tr("Update ready to install. Applicaion will quit..."));
 			m_updateReadyToInstall = true;
 			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
 			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
@@ -708,7 +708,7 @@ void UpdateDialog::applyUpdate(void)
 		}
 		else
 		{
-			statusLabel->setText("Update failed. Please try again or download manually!");
+			statusLabel->setText(tr("Update failed. Please try again or download manually!"));
 			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
 			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 			WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), 100, 100);

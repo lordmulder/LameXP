@@ -1770,5 +1770,17 @@
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Update is being downloaded, please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update ready to install. Applicaion will quit...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update failed. Please try again or download manually!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
