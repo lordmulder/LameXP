@@ -54,7 +54,6 @@ private:
 	QLabel *m_disque;
 	QTimer * m_disqueTimer;
 	bool m_disqueFlags[2];
-	QRect m_screenGeometry;
 	QPixmap *m_cartoon[4];
 	bool m_rotateNext;
 	__int64 m_disqueDelay;

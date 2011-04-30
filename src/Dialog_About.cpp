@@ -187,12 +187,12 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		fourthButton->setMinimumWidth(90);
 
 		QPixmap disque(":/images/Disque.png");
-		m_screenGeometry = QApplication::desktop()->availableGeometry();
+		QRect screenGeometry = QApplication::desktop()->availableGeometry();
 		m_disque = new QLabel(this, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 		m_disque->installEventFilter(this);
 		m_disque->setStyleSheet("background:transparent;");
 		m_disque->setAttribute(Qt::WA_TranslucentBackground);
-		m_disque->setGeometry(qrand() % (m_screenGeometry.width() - disque.width()), qrand() % (m_screenGeometry.height() - disque.height()), disque.width(), disque.height());
+		m_disque->setGeometry(qrand() % (screenGeometry.width() - disque.width()), qrand() % (screenGeometry.height() - disque.height()), disque.width(), disque.height());
 		m_disque->setPixmap(disque);
 		m_disque->setWindowOpacity(0.01);
 		m_disque->show();
@@ -493,7 +493,7 @@ void AboutDialog::moveDisque(void)
 	{
 		if(m_disqueDelay != _I64_MAX)
 		{
-			double delay = static_cast<double>(perfCount.QuadPart) - static_cast<double>(m_disqueDelay);
+			const double delay = static_cast<double>(perfCount.QuadPart) - static_cast<double>(m_disqueDelay);
 			delta = max(1, min(128, static_cast<int>(ceil(delay / static_cast<double>(perfFrequ.QuadPart) / 0.00512))));
 		}
 		m_disqueDelay = perfCount.QuadPart;
@@ -501,32 +501,38 @@ void AboutDialog::moveDisque(void)
 
 	if(m_disque)
 	{
+		QRect screenGeometry = QApplication::desktop()->availableGeometry();
+		const int minX = screenGeometry.left();
+		const int maxX = screenGeometry.width() - m_disque->width() + screenGeometry.left();
+		const int minY = screenGeometry.top();
+		const int maxY = screenGeometry.height() - m_disque->height() + screenGeometry.top();
+		
 		QPoint pos = m_disque->pos();
 		pos.setX(m_disqueFlags[0] ? pos.x() + delta : pos.x() - delta);
 		pos.setY(m_disqueFlags[1] ? pos.y() + delta : pos.y() - delta);
 
-		if(pos.x() <= 0)
+		if(pos.x() <= minX)
 		{
 			m_disqueFlags[0] = true;
-			pos.setX(0);
+			pos.setX(minX);
 			m_rotateNext = true;
 		}
-		else if(pos.x() >= m_screenGeometry.width() - m_disque->width())
+		else if(pos.x() >= maxX)
 		{
 			m_disqueFlags[0] = false;
-			pos.setX(m_screenGeometry.width() - m_disque->width());
+			pos.setX(maxX);
 			m_rotateNext = true;
 		}
-		if(pos.y() <= 0)
+		if(pos.y() <= minY)
 		{
 			m_disqueFlags[1] = true;
-			pos.setY(0);
+			pos.setY(minY);
 			m_rotateNext = true;
 		}
-		else if(pos.y() >= m_screenGeometry.height()- m_disque->height())
+		else if(pos.y() >= maxY)
 		{
 			m_disqueFlags[1] = false;
-			pos.setY(m_screenGeometry.height() - m_disque->height());
+			pos.setY(maxY);
 			m_rotateNext = true;
 		}
 
