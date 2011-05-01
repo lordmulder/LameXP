@@ -317,7 +317,7 @@ void AboutDialog::showAboutContributors(void)
 	contributorsAboutBox->setIconPixmap(QIcon(":/images/Logo_Contributors.png").pixmap(QSize(64,74)));
 	contributorsAboutBox->setWindowIcon(QIcon(":/icons/user_suit.png"));
 	contributorsAboutBox->exec();
-				
+
 	LAMEXP_DELETE(contributorsAboutBox);
 }
 

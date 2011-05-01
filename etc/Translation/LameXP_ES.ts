@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota: Esta es una versión demo (pre-final) de LameXP que expirará el %1. Quedan %2 días restantes.</translation>
     </message>
 </context>
 <context>
@@ -1655,7 +1655,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>El ejecutable &apos;%1&apos; requiere Windows XP o superior.</translation>
     </message>
 </context>
 <context>
@@ -1772,15 +1772,15 @@
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargando actualización, espere por favor...</translation>
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualización lista para instalar. La aplicación se cerrará...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualización fallida. ¡Por favor, vuelva a intentarlo o descárguelo manualmente!</translation>
     </message>
 </context>
 </TS>
