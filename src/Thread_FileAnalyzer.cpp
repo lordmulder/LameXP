@@ -114,7 +114,6 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 	AudioFileModel audioFile(filePath);
 	m_currentSection = sectionOther;
 	m_currentCover = coverNone;
-	m_lineBreakBugWorkaround = false;
 
 	QFile readTest(filePath);
 	if(!readTest.open(QIODevice::ReadOnly))
@@ -170,7 +169,6 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 				int index = line.indexOf(':');
 				if(index > 0)
 				{
-					m_lineBreakBugWorkaround = false;
 					QString key = line.left(index-1).trimmed();
 					QString val = line.mid(index+1).trimmed();
 					if(!key.isEmpty() && !val.isEmpty())
@@ -232,11 +230,8 @@ void FileAnalyzer::updateSection(const QString &section)
 	}
 	else
 	{
-		if(!m_lineBreakBugWorkaround)
-		{
-			m_currentSection = sectionOther;
-			qWarning("Unknown section: %s", section.toUtf8().constData());
-		}
+		m_currentSection = sectionOther;
+		qWarning("Unknown section: %s", section.toUtf8().constData());
 	}
 }
 
@@ -304,10 +299,6 @@ void FileAnalyzer::updateInfo(AudioFileModel &audioFile, const QString &key, con
 			{
 				m_currentCover = coverGif;
 			}
-		}
-		else if(!key.compare("Complete Name", Qt::CaseInsensitive))
-		{
-			m_lineBreakBugWorkaround = true;
 		}
 		break;
 
