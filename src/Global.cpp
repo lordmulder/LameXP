@@ -41,6 +41,8 @@
 #include <QRegExp>
 #include <QResource>
 #include <QTranslator>
+#include <QEventLoop>
+#include <QTimer>
 
 //LameXP includes
 #include "Resource.h"
@@ -1380,6 +1382,9 @@ __int64 lamexp_free_diskspace(const QString &path)
 	}
 }
 
+/*
+ * Shutdown the computer
+ */
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout, const bool forceShutdown)
 {
 	HANDLE hToken = NULL;
@@ -1402,6 +1407,57 @@ bool lamexp_shutdown_computer(const QString &message, const unsigned long timeou
 	}
 	
 	return false;
+}
+
+/*
+ * Make a window blink (to draw user's attention)
+ */
+void lamexp_blink_window(QWidget *poWindow, unsigned int count, unsigned int delay)
+{
+	static QMutex blinkMutex;
+
+	const double maxOpac = 1.0;
+	const double minOpac = 0.3;
+	const double delOpac = 0.1;
+
+	if(!blinkMutex.tryLock())
+	{
+		qWarning("Blinking is already in progress, skipping!");
+		return;
+	}
+	
+	try
+	{
+		const int steps = static_cast<int>(ceil(maxOpac - minOpac) / delOpac);
+		const int sleep = static_cast<int>(floor(static_cast<double>(delay) / static_cast<double>(steps)));
+		const double opacity = poWindow->windowOpacity();
+	
+		for(unsigned int i = 0; i < count; i++)
+		{
+			for(double x = maxOpac; x >= minOpac; x -= delOpac)
+			{
+				poWindow->setWindowOpacity(x);
+				QApplication::processEvents();
+				Sleep(sleep);
+			}
+
+			for(double x = minOpac; x <= maxOpac; x += delOpac)
+			{
+				poWindow->setWindowOpacity(x);
+				QApplication::processEvents();
+				Sleep(sleep);
+			}
+		}
+
+		poWindow->setWindowOpacity(opacity);
+		QApplication::processEvents();
+		blinkMutex.unlock();
+	}
+	catch (...)
+	{
+		blinkMutex.unlock();
+		qWarning("Exception error while blinking!");
+	}
 }
 
 /*

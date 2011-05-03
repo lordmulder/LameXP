@@ -61,6 +61,7 @@ protected:
 	void mouseMoveEvent(QMouseEvent *event);
 	void mouseReleaseEvent(QMouseEvent *event);
 	void changeEvent(QEvent *e);
+	bool event(QEvent *event);
 
 public slots:
 	void modelChanged(void);

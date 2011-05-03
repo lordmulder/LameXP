@@ -36,6 +36,7 @@
 class QString;
 class QStringList;
 class QDate;
+class QWidget;
 class LockedFile;
 enum QtMsgType;
 
@@ -115,6 +116,7 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id);
 __int64 lamexp_free_diskspace(const QString &path);
 bool lamexp_remove_file(const QString &filename);
 bool lamexp_themes_enabled(void);
+void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned int delay = 150);
 
 //Debug-only functions
 SIZE_T lamexp_dbg_private_bytes(void);

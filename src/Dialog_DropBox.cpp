@@ -103,7 +103,6 @@ void DropBox::changeEvent(QEvent *e)
 	}
 }
 
-
 void DropBox::showEvent(QShowEvent *event)
 {
 	QRect screenGeometry = QApplication::desktop()->availableGeometry();
@@ -122,7 +121,11 @@ void DropBox::showEvent(QShowEvent *event)
 		QTimer::singleShot(333, this, SLOT(showToolTip()));
 	}
 
-	m_moving = false;
+	if(m_moving)
+	{
+		QApplication::restoreOverrideCursor();
+		m_moving = false;
+	}
 }
 
 void DropBox::keyPressEvent(QKeyEvent *event)
@@ -212,4 +215,21 @@ void DropBox::mouseMoveEvent(QMouseEvent *event)
 void DropBox::showToolTip(void)
 {
 	QToolTip::showText(dropBoxLabel->mapToGlobal(dropBoxLabel->pos()), dropBoxLabel->toolTip());
+}
+
+bool DropBox::event(QEvent *event)
+{
+	switch(event->type())
+	{
+	case QEvent::Leave:
+	case QEvent::WindowDeactivate:
+		if(m_moving)
+		{
+			QApplication::restoreOverrideCursor();
+			m_moving = false;
+		}
+		break;
+	}
+
+	return QDialog::event(event);
 }
