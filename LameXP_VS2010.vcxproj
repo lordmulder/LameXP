@@ -254,6 +254,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Dialog_WorkingBanner.cpp" />
     <ClCompile Include="src\Encoder_AAC.cpp" />
     <ClCompile Include="src\Encoder_Abstract.cpp" />
+    <ClCompile Include="src\Encoder_AC3.cpp" />
     <ClCompile Include="src\Encoder_FLAC.cpp" />
     <ClCompile Include="src\Encoder_MP3.cpp" />
     <ClCompile Include="src\Encoder_Vorbis.cpp" />
@@ -297,6 +298,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="tmp\MOC_Dialog_WorkingBanner.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_AAC.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_Abstract.cpp" />
+    <ClCompile Include="tmp\MOC_Encoder_AC3.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_FLAC.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_MP3.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_Vorbis.cpp" />
@@ -325,6 +327,11 @@ del "$(TargetDir)imageformats\q???d4.dll"
   <ItemGroup>
     <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\Decoder_AAC.h" />
+    <CustomBuild Include="src\Encoder_AC3.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="tmp\UIC_DropBox.h" />
     <ClInclude Include="tmp\UIC_LogViewDialog.h" />
     <ClInclude Include="tmp\UIC_MainWindow.h" />

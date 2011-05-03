@@ -60,8 +60,9 @@ public:
 		MP3Encoder = 0,
 		VorbisEncoder = 1,
 		AACEncoder = 2,
-		FLACEncoder = 3,
-		PCMEncoder = 4
+		AC3Encoder = 3,
+		FLACEncoder = 4,
+		PCMEncoder = 5
 	};
 	enum RCMode
 	{

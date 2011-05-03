@@ -32,6 +32,7 @@
 #include "Encoder_MP3.h"
 #include "Encoder_Vorbis.h"
 #include "Encoder_AAC.h"
+#include "Encoder_AC3.h"
 #include "Encoder_FLAC.h"
 #include "Encoder_Wave.h"
 #include "Filter_Normalize.h"
@@ -598,6 +599,15 @@ void ProcessingDialog::startNextJob(void)
 			aacEncoder->setProfile(m_settings->neroAACProfile());
 			aacEncoder->setCustomParams(m_settings->customParametersNeroAAC());
 			encoder = aacEncoder;
+		}
+		break;
+	case SettingsModel::AC3Encoder:
+		{
+			AC3Encoder *ac3Encoder = new AC3Encoder();
+			ac3Encoder->setBitrate(m_settings->compressionBitrate());
+			ac3Encoder->setRCMode(m_settings->compressionRCMode());
+			ac3Encoder->setCustomParams(m_settings->customParametersNeroAAC());
+			encoder = ac3Encoder;
 		}
 		break;
 	case SettingsModel::FLACEncoder:

@@ -81,7 +81,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	m_rotateNext(false),
 	m_disqueDelay(_I64_MAX)
 {
-	const QString versionStr = QString().sprintf
+	QString versionStr = QString().sprintf
 	(
 		"Version %d.%02d %s, Build %d [%s], %s, Qt v%s",
 		lamexp_version_major(),
@@ -101,8 +101,8 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	QString aboutText;
 
 	aboutText += QString("<h2>%1</h2>").arg(tr("LameXP &minus; Audio Encoder Front-end"));
-	aboutText += QString("<b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b><br>").arg(max(lamexp_version_date().year(), QDate::currentDate().year()));
-	aboutText += QString("<b>%1</b><br><br>").arg(versionStr);
+	aboutText += QString("<nobr><b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b></nobr><br>").arg(max(lamexp_version_date().year(), QDate::currentDate().year())).replace("-", "&minus;");
+	aboutText += QString("<nobr><b>%1</b></nobr><br><br>").arg(versionStr).replace("-", "&minus;");
 	aboutText += QString("<nobr>%1</nobr><br>").arg(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url())));
 	
 	if(LAMEXP_DEBUG)
@@ -113,7 +113,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	else if(lamexp_version_demo())
 	{
 		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
-		aboutText += QString("<hr><nobr><font color=\"crimson\">%1</font></nobr>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
+		aboutText += QString("<hr><nobr><font color=\"crimson\">%1</font></nobr>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))).replace("-", "&minus;");
 	}
 	
 	aboutText += "<hr><br>";

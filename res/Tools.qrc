@@ -1,6 +1,9 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
+    <file>tools/aften.i386.exe</file>
+    <file>tools/aften.sse2.exe</file>
+    <file>tools/aften.x64.exe</file>
     <file>tools/alac.exe</file>
     <file>tools/elevator.exe</file>
     <file>tools/faad.exe</file>
