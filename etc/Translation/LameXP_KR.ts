@@ -1244,6 +1244,34 @@
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation type="unfinished">LameXP 쉘 통합이 재활성화 되었습니다.</translation>
     </message>
+    <message>
+        <source>Check for Beta Updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beta Updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP will check for Beta (pre-release) updates from now on.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished">닫기</translation>
+    </message>
+    <message>
+        <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

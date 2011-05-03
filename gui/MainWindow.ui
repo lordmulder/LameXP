@@ -2793,6 +2793,8 @@
      <addaction name="actionDisableWmaDecoderNotifications"/>
      <addaction name="actionDisableNeroAacNotifications"/>
      <addaction name="actionDisableShellIntegration"/>
+     <addaction name="separator"/>
+     <addaction name="actionCheckForBetaUpdates"/>
     </widget>
     <addaction name="menuConfiguration"/>
     <addaction name="actionInstallWMADecoder"/>
@@ -3085,6 +3087,14 @@
     <string>Open Folder Recursively...</string>
    </property>
   </action>
+  <action name="actionCheckForBetaUpdates">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Check for Beta Updates</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -3106,6 +3116,7 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

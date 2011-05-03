@@ -38,27 +38,27 @@
 //Macros
 ////////////////////////////////////////////////////////////
 
-#define MAKE_OPTION1(OPT,DEF) \
+#define LAMEXP_MAKE_OPTION_I(OPT,DEF) \
 int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); } \
 void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 int SettingsModel::OPT##Default(void) { return DEF; }
 
-#define MAKE_OPTION2(OPT,DEF) \
+#define LAMEXP_MAKE_OPTION_S(OPT,DEF) \
 QString SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toString().trimmed(); } \
 void SettingsModel::OPT(const QString &value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 QString SettingsModel::OPT##Default(void) { return DEF; }
 
-#define MAKE_OPTION3(OPT,DEF) \
+#define LAMEXP_MAKE_OPTION_B(OPT,DEF) \
 bool SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toBool(); } \
 void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 bool SettingsModel::OPT##Default(void) { return DEF; }
 
-#define MAKE_OPTION4(OPT,DEF) \
+#define LAMEXP_MAKE_OPTION_U(OPT,DEF) \
 unsigned int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toUInt(); } \
 void SettingsModel::OPT(unsigned int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 unsigned int SettingsModel::OPT##Default(void) { return DEF; }
 
-#define MAKE_ID(DEC,STR) static const char *g_settingsId_##DEC = STR
+#define LAMEXP_MAKE_ID(DEC,STR) static const char *g_settingsId_##DEC = STR
 #define REMOVE_GROUP(OBJ,ID) OBJ->beginGroup(ID); OBJ->remove(""); OBJ->endGroup();
 
 ////////////////////////////////////////////////////////////
@@ -66,45 +66,46 @@ unsigned int SettingsModel::OPT##Default(void) { return DEF; }
 ////////////////////////////////////////////////////////////
 
 //Setting ID's
-MAKE_ID(versionNumber, "VersionNumber");
-MAKE_ID(licenseAccepted, "LicenseAccepted");
-MAKE_ID(interfaceStyle, "InterfaceStyle");
-MAKE_ID(compressionEncoder, "Compression/Encoder");
-MAKE_ID(compressionRCMode, "Compression/RCMode");
-MAKE_ID(compressionBitrate, "Compression/Bitrate");
-MAKE_ID(outputDir, "OutputDirectory/SelectedPath");
-MAKE_ID(outputToSourceDir, "OutputDirectory/OutputToSourceFolder");
-MAKE_ID(prependRelativeSourcePath, "OutputDirectory/PrependRelativeSourcePath");
-MAKE_ID(writeMetaTags, "Flags/WriteMetaTags");
-MAKE_ID(createPlaylist, "Flags/AutoCreatePlaylist");
-MAKE_ID(autoUpdateLastCheck, "AutoUpdate/LastCheck");
-MAKE_ID(autoUpdateEnabled, "AutoUpdate/Enabled");
-MAKE_ID(soundsEnabled, "Flags/EnableSounds");
-MAKE_ID(neroAacNotificationsEnabled, "Flags/EnableNeroAacNotifications");
-MAKE_ID(wmaDecoderNotificationsEnabled, "Flags/EnableWmaDecoderNotifications");
-MAKE_ID(dropBoxWidgetEnabled, "Flags/EnableDropBoxWidget");
-MAKE_ID(shellIntegrationEnabled, "Flags/EnableShellIntegration");
-MAKE_ID(currentLanguage, "Localization/Language");
-MAKE_ID(lameAlgoQuality, "AdvancedOptions/LAME/AlgorithmQuality");
-MAKE_ID(lameChannelMode, "AdvancedOptions/LAME/ChannelMode");
-MAKE_ID(bitrateManagementEnabled, "AdvancedOptions/BitrateManagement/Enabled");
-MAKE_ID(bitrateManagementMinRate, "AdvancedOptions/BitrateManagement/MinRate");
-MAKE_ID(bitrateManagementMaxRate, "AdvancedOptions/BitrateManagement/MaxRate");
-MAKE_ID(samplingRate, "AdvancedOptions/Common/Resampling");
-MAKE_ID(neroAACEnable2Pass, "AdvancedOptions/NeroAAC/Enable2Pass");
-MAKE_ID(neroAACProfile, "AdvancedOptions/NeroAAC/ForceProfile");
-MAKE_ID(normalizationFilterEnabled, "AdvancedOptions/VolumeNormalization/Enabled");
-MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
-MAKE_ID(toneAdjustBass, "AdvancedOptions/ToneAdjustment/Bass");
-MAKE_ID(toneAdjustTreble, "AdvancedOptions/ToneAdjustment/Treble");
-MAKE_ID(customParametersLAME, "AdvancedOptions/CustomParameters/LAME");
-MAKE_ID(customParametersOggEnc, "AdvancedOptions/CustomParameters/OggEnc");
-MAKE_ID(customParametersNeroAAC, "AdvancedOptions/CustomParameters/NeroAAC");
-MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
-MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
-MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
-MAKE_ID(customTempPath, "AdvancedOptions/TempDirectory/CustomPath");
-MAKE_ID(customTempPathEnabled, "AdvancedOptions/TempDirectory/UseCustomPath");
+LAMEXP_MAKE_ID(versionNumber, "VersionNumber");
+LAMEXP_MAKE_ID(licenseAccepted, "LicenseAccepted");
+LAMEXP_MAKE_ID(interfaceStyle, "InterfaceStyle");
+LAMEXP_MAKE_ID(compressionEncoder, "Compression/Encoder");
+LAMEXP_MAKE_ID(compressionRCMode, "Compression/RCMode");
+LAMEXP_MAKE_ID(compressionBitrate, "Compression/Bitrate");
+LAMEXP_MAKE_ID(outputDir, "OutputDirectory/SelectedPath");
+LAMEXP_MAKE_ID(outputToSourceDir, "OutputDirectory/OutputToSourceFolder");
+LAMEXP_MAKE_ID(prependRelativeSourcePath, "OutputDirectory/PrependRelativeSourcePath");
+LAMEXP_MAKE_ID(writeMetaTags, "Flags/WriteMetaTags");
+LAMEXP_MAKE_ID(createPlaylist, "Flags/AutoCreatePlaylist");
+LAMEXP_MAKE_ID(autoUpdateLastCheck, "AutoUpdate/LastCheck");
+LAMEXP_MAKE_ID(autoUpdateEnabled, "AutoUpdate/Enabled");
+LAMEXP_MAKE_ID(autoUpdateCheckBeta, "AutoUpdate/CheckForBetaVersions");
+LAMEXP_MAKE_ID(soundsEnabled, "Flags/EnableSounds");
+LAMEXP_MAKE_ID(neroAacNotificationsEnabled, "Flags/EnableNeroAacNotifications");
+LAMEXP_MAKE_ID(wmaDecoderNotificationsEnabled, "Flags/EnableWmaDecoderNotifications");
+LAMEXP_MAKE_ID(dropBoxWidgetEnabled, "Flags/EnableDropBoxWidget");
+LAMEXP_MAKE_ID(shellIntegrationEnabled, "Flags/EnableShellIntegration");
+LAMEXP_MAKE_ID(currentLanguage, "Localization/Language");
+LAMEXP_MAKE_ID(lameAlgoQuality, "AdvancedOptions/LAME/AlgorithmQuality");
+LAMEXP_MAKE_ID(lameChannelMode, "AdvancedOptions/LAME/ChannelMode");
+LAMEXP_MAKE_ID(bitrateManagementEnabled, "AdvancedOptions/BitrateManagement/Enabled");
+LAMEXP_MAKE_ID(bitrateManagementMinRate, "AdvancedOptions/BitrateManagement/MinRate");
+LAMEXP_MAKE_ID(bitrateManagementMaxRate, "AdvancedOptions/BitrateManagement/MaxRate");
+LAMEXP_MAKE_ID(samplingRate, "AdvancedOptions/Common/Resampling");
+LAMEXP_MAKE_ID(neroAACEnable2Pass, "AdvancedOptions/NeroAAC/Enable2Pass");
+LAMEXP_MAKE_ID(neroAACProfile, "AdvancedOptions/NeroAAC/ForceProfile");
+LAMEXP_MAKE_ID(normalizationFilterEnabled, "AdvancedOptions/VolumeNormalization/Enabled");
+LAMEXP_MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
+LAMEXP_MAKE_ID(toneAdjustBass, "AdvancedOptions/ToneAdjustment/Bass");
+LAMEXP_MAKE_ID(toneAdjustTreble, "AdvancedOptions/ToneAdjustment/Treble");
+LAMEXP_MAKE_ID(customParametersLAME, "AdvancedOptions/CustomParameters/LAME");
+LAMEXP_MAKE_ID(customParametersOggEnc, "AdvancedOptions/CustomParameters/OggEnc");
+LAMEXP_MAKE_ID(customParametersNeroAAC, "AdvancedOptions/CustomParameters/NeroAAC");
+LAMEXP_MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
+LAMEXP_MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
+LAMEXP_MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
+LAMEXP_MAKE_ID(customTempPath, "AdvancedOptions/TempDirectory/CustomPath");
+LAMEXP_MAKE_ID(customTempPathEnabled, "AdvancedOptions/TempDirectory/UseCustomPath");
 
 //LUT
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
@@ -248,41 +249,42 @@ QString SettingsModel::defaultLanguage(void)
 // Getter and Setter
 ////////////////////////////////////////////////////////////
 
-MAKE_OPTION1(licenseAccepted, 0)
-MAKE_OPTION1(interfaceStyle, 0)
-MAKE_OPTION1(compressionEncoder, 0)
-MAKE_OPTION1(compressionRCMode, 0)
-MAKE_OPTION1(compressionBitrate, 7)
-MAKE_OPTION2(outputDir, QString())
-MAKE_OPTION3(outputToSourceDir, false)
-MAKE_OPTION3(prependRelativeSourcePath, false)
-MAKE_OPTION3(writeMetaTags, true)
-MAKE_OPTION3(createPlaylist, true)
-MAKE_OPTION2(autoUpdateLastCheck, "Never")
-MAKE_OPTION3(autoUpdateEnabled, true)
-MAKE_OPTION3(soundsEnabled, true)
-MAKE_OPTION3(neroAacNotificationsEnabled, true)
-MAKE_OPTION3(wmaDecoderNotificationsEnabled, true)
-MAKE_OPTION3(dropBoxWidgetEnabled, true)
-MAKE_OPTION3(shellIntegrationEnabled, !lamexp_portable_mode())
-MAKE_OPTION2(currentLanguage, defaultLanguage())
-MAKE_OPTION1(lameAlgoQuality, 3)
-MAKE_OPTION1(lameChannelMode, 0);
-MAKE_OPTION3(bitrateManagementEnabled, false)
-MAKE_OPTION1(bitrateManagementMinRate, 32)
-MAKE_OPTION1(bitrateManagementMaxRate, 500)
-MAKE_OPTION1(samplingRate, 0)
-MAKE_OPTION3(neroAACEnable2Pass, true)
-MAKE_OPTION1(neroAACProfile, 0)
-MAKE_OPTION3(normalizationFilterEnabled, false)
-MAKE_OPTION1(normalizationFilterMaxVolume, -50)
-MAKE_OPTION1(toneAdjustBass, 0)
-MAKE_OPTION1(toneAdjustTreble, 0)
-MAKE_OPTION2(customParametersLAME, QString());
-MAKE_OPTION2(customParametersOggEnc, QString());
-MAKE_OPTION2(customParametersNeroAAC, QString());
-MAKE_OPTION2(customParametersFLAC, QString());
-MAKE_OPTION4(metaInfoPosition, UINT_MAX);
-MAKE_OPTION4(maximumInstances, 0);
-MAKE_OPTION2(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation));
-MAKE_OPTION3(customTempPathEnabled, false);
+LAMEXP_MAKE_OPTION_I(licenseAccepted, 0)
+LAMEXP_MAKE_OPTION_I(interfaceStyle, 0)
+LAMEXP_MAKE_OPTION_I(compressionEncoder, 0)
+LAMEXP_MAKE_OPTION_I(compressionRCMode, 0)
+LAMEXP_MAKE_OPTION_I(compressionBitrate, 7)
+LAMEXP_MAKE_OPTION_S(outputDir, QString())
+LAMEXP_MAKE_OPTION_B(outputToSourceDir, false)
+LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath, false)
+LAMEXP_MAKE_OPTION_B(writeMetaTags, true)
+LAMEXP_MAKE_OPTION_B(createPlaylist, true)
+LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck, "Never")
+LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, true)
+LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta, false)
+LAMEXP_MAKE_OPTION_B(soundsEnabled, true)
+LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled, true)
+LAMEXP_MAKE_OPTION_B(wmaDecoderNotificationsEnabled, true)
+LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled, true)
+LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_portable_mode())
+LAMEXP_MAKE_OPTION_S(currentLanguage, defaultLanguage())
+LAMEXP_MAKE_OPTION_I(lameAlgoQuality, 3)
+LAMEXP_MAKE_OPTION_I(lameChannelMode, 0);
+LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled, false)
+LAMEXP_MAKE_OPTION_I(bitrateManagementMinRate, 32)
+LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate, 500)
+LAMEXP_MAKE_OPTION_I(samplingRate, 0)
+LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass, true)
+LAMEXP_MAKE_OPTION_I(neroAACProfile, 0)
+LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled, false)
+LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume, -50)
+LAMEXP_MAKE_OPTION_I(toneAdjustBass, 0)
+LAMEXP_MAKE_OPTION_I(toneAdjustTreble, 0)
+LAMEXP_MAKE_OPTION_S(customParametersLAME, QString());
+LAMEXP_MAKE_OPTION_S(customParametersOggEnc, QString());
+LAMEXP_MAKE_OPTION_S(customParametersNeroAAC, QString());
+LAMEXP_MAKE_OPTION_S(customParametersFLAC, QString());
+LAMEXP_MAKE_OPTION_U(metaInfoPosition, UINT_MAX);
+LAMEXP_MAKE_OPTION_U(maximumInstances, 0);
+LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation));
+LAMEXP_MAKE_OPTION_B(customTempPathEnabled, false);

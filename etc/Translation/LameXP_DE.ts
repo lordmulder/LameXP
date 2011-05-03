@@ -1245,6 +1245,34 @@
         <source>Add Folder</source>
         <translation>Verzeichnis hinzufügen</translation>
     </message>
+    <message>
+        <source>Check for Beta Updates</source>
+        <translation>Nach Beta-Updates suchen</translation>
+    </message>
+    <message>
+        <source>Beta Updates</source>
+        <translation>Beta Updates</translation>
+    </message>
+    <message>
+        <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
+        <translation>Möchten Sie wirklich, dass LameXP nach Beta (Entwickler) Updates sucht?</translation>
+    </message>
+    <message>
+        <source>LameXP will check for Beta (pre-release) updates from now on.</source>
+        <translation>LameXP wird fortan nach Beta (Entwickler) Updates suchen.</translation>
+    </message>
+    <message>
+        <source>Check Now</source>
+        <translation>Jetzt suchen</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation>Schließen</translation>
+    </message>
+    <message>
+        <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
+        <translation>LameXP wird fortan &lt;i&gt;nicht&lt;/i&gt; nach Beta (Entwickler) Updates suchen.</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

@@ -319,6 +319,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
 	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
 	actionDisableShellIntegration->setDisabled(lamexp_portable_mode() && actionDisableShellIntegration->isChecked());
+	actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
+	actionCheckForBetaUpdates->setEnabled(!lamexp_version_demo());
 	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
 	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
 	connect(actionInstallWMADecoder, SIGNAL(triggered(bool)), this, SLOT(installWMADecoderActionTriggered(bool)));
@@ -326,6 +328,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(actionDisableWmaDecoderNotifications, SIGNAL(triggered(bool)), this, SLOT(disableWmaDecoderNotificationsActionTriggered(bool)));
 	connect(actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
 	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
+	connect(actionCheckForBetaUpdates, SIGNAL(triggered(bool)), this, SLOT(checkForBetaUpdatesActionTriggered(bool)));
 		
 	//Activate help menu actions
 	actionVisitHomepage->setData(QString::fromLatin1(lamexp_website_url()));
@@ -2472,6 +2475,45 @@ void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
 	}
 	
 	FLASH_WINDOW(m_dropBox);
+}
+
+/*
+ * Check for beta (pre-release) updates
+ */
+void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
+{	
+	bool checkUpdatesNow = false;
+	
+	if(checked)
+	{
+		if(0 == QMessageBox::question(this, tr("Beta Updates"), tr("Do you really want LameXP to check for Beta (pre-release) updates?"), tr("Yes"), tr("No"), QString(), 1))
+		{
+			if(0 == QMessageBox::information(this, tr("Beta Updates"), tr("LameXP will check for Beta (pre-release) updates from now on."), tr("Check Now"), tr("Discard")))
+			{
+				checkUpdatesNow = true;
+			}
+			m_settings->autoUpdateCheckBeta(true);
+		}
+		else
+		{
+			m_settings->autoUpdateCheckBeta(false);
+		}
+	}
+	else
+	{
+			QMessageBox::information(this, tr("Beta Updates"), tr("LameXP will <i>not</i> check for Beta (pre-release) updates from now on."));
+			m_settings->autoUpdateCheckBeta(false);
+	}
+
+	actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta());
+
+	if(checkUpdatesNow)
+	{
+		if(checkForUpdates())
+		{
+			QApplication::quit();
+		}
+	}
 }
 
 /*

@@ -117,6 +117,7 @@ private slots:
 	void disableNeroAacNotificationsActionTriggered(bool checked);
 	void disableWmaDecoderNotificationsActionTriggered(bool checked);
 	void showDropBoxWidgetActionTriggered(bool checked);
+	void checkForBetaUpdatesActionTriggered(bool checked);
 	void disableShellIntegrationActionTriggered(bool);
 
 protected:

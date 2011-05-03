@@ -26,22 +26,22 @@ class QString;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#define MAKE_OPTION_DEC1(OPT) \
+#define LAMEXP_MAKE_OPTION_I(OPT) \
 int OPT(void); \
 void OPT(int value); \
 int OPT##Default(void);
 
-#define MAKE_OPTION_DEC2(OPT) \
+#define LAMEXP_MAKE_OPTION_S(OPT) \
 QString OPT(void); \
 void OPT(const QString &value); \
 QString OPT##Default(void);
 
-#define MAKE_OPTION_DEC3(OPT) \
+#define LAMEXP_MAKE_OPTION_B(OPT) \
 bool OPT(void); \
 void OPT(bool value); \
 bool OPT##Default(void);
 
-#define MAKE_OPTION_DEC4(OPT) \
+#define LAMEXP_MAKE_OPTION_U(OPT) \
 unsigned int OPT(void); \
 void OPT(unsigned int value); \
 unsigned int OPT##Default(void);
@@ -75,44 +75,45 @@ public:
 	static const int samplingRates[8];
 
 	//Getters & setters
-	MAKE_OPTION_DEC1(licenseAccepted);
-	MAKE_OPTION_DEC1(interfaceStyle);
-	MAKE_OPTION_DEC1(compressionEncoder);
-	MAKE_OPTION_DEC1(compressionRCMode);
-	MAKE_OPTION_DEC1(compressionBitrate);
-	MAKE_OPTION_DEC2(outputDir);
-	MAKE_OPTION_DEC3(outputToSourceDir);
-	MAKE_OPTION_DEC3(prependRelativeSourcePath);
-	MAKE_OPTION_DEC3(writeMetaTags);
-	MAKE_OPTION_DEC3(createPlaylist);
-	MAKE_OPTION_DEC2(autoUpdateLastCheck);
-	MAKE_OPTION_DEC3(autoUpdateEnabled);
-	MAKE_OPTION_DEC3(soundsEnabled);
-	MAKE_OPTION_DEC3(neroAacNotificationsEnabled);
-	MAKE_OPTION_DEC3(wmaDecoderNotificationsEnabled);
-	MAKE_OPTION_DEC3(dropBoxWidgetEnabled);
-	MAKE_OPTION_DEC3(shellIntegrationEnabled);
-	MAKE_OPTION_DEC2(currentLanguage);
-	MAKE_OPTION_DEC1(lameAlgoQuality);
-	MAKE_OPTION_DEC1(lameChannelMode);
-	MAKE_OPTION_DEC3(bitrateManagementEnabled);
-	MAKE_OPTION_DEC1(bitrateManagementMinRate);
-	MAKE_OPTION_DEC1(bitrateManagementMaxRate);
-	MAKE_OPTION_DEC1(samplingRate);
-	MAKE_OPTION_DEC3(neroAACEnable2Pass);
-	MAKE_OPTION_DEC1(neroAACProfile);
-	MAKE_OPTION_DEC3(normalizationFilterEnabled);
-	MAKE_OPTION_DEC1(normalizationFilterMaxVolume);
-	MAKE_OPTION_DEC1(toneAdjustBass);
-	MAKE_OPTION_DEC1(toneAdjustTreble);
-	MAKE_OPTION_DEC2(customParametersLAME);
-	MAKE_OPTION_DEC2(customParametersOggEnc);
-	MAKE_OPTION_DEC2(customParametersNeroAAC);
-	MAKE_OPTION_DEC2(customParametersFLAC);
-	MAKE_OPTION_DEC4(metaInfoPosition);
-	MAKE_OPTION_DEC4(maximumInstances);
-	MAKE_OPTION_DEC2(customTempPath);
-	MAKE_OPTION_DEC3(customTempPathEnabled);
+	LAMEXP_MAKE_OPTION_I(licenseAccepted);
+	LAMEXP_MAKE_OPTION_I(interfaceStyle);
+	LAMEXP_MAKE_OPTION_I(compressionEncoder);
+	LAMEXP_MAKE_OPTION_I(compressionRCMode);
+	LAMEXP_MAKE_OPTION_I(compressionBitrate);
+	LAMEXP_MAKE_OPTION_S(outputDir);
+	LAMEXP_MAKE_OPTION_B(outputToSourceDir);
+	LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath);
+	LAMEXP_MAKE_OPTION_B(writeMetaTags);
+	LAMEXP_MAKE_OPTION_B(createPlaylist);
+	LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck);
+	LAMEXP_MAKE_OPTION_B(autoUpdateEnabled);
+	LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta);
+	LAMEXP_MAKE_OPTION_B(soundsEnabled);
+	LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled);
+	LAMEXP_MAKE_OPTION_B(wmaDecoderNotificationsEnabled);
+	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled);
+	LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled);
+	LAMEXP_MAKE_OPTION_S(currentLanguage);
+	LAMEXP_MAKE_OPTION_I(lameAlgoQuality);
+	LAMEXP_MAKE_OPTION_I(lameChannelMode);
+	LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled);
+	LAMEXP_MAKE_OPTION_I(bitrateManagementMinRate);
+	LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate);
+	LAMEXP_MAKE_OPTION_I(samplingRate);
+	LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass);
+	LAMEXP_MAKE_OPTION_I(neroAACProfile);
+	LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled);
+	LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume);
+	LAMEXP_MAKE_OPTION_I(toneAdjustBass);
+	LAMEXP_MAKE_OPTION_I(toneAdjustTreble);
+	LAMEXP_MAKE_OPTION_S(customParametersLAME);
+	LAMEXP_MAKE_OPTION_S(customParametersOggEnc);
+	LAMEXP_MAKE_OPTION_S(customParametersNeroAAC);
+	LAMEXP_MAKE_OPTION_S(customParametersFLAC);
+	LAMEXP_MAKE_OPTION_U(metaInfoPosition);
+	LAMEXP_MAKE_OPTION_U(maximumInstances);
+	LAMEXP_MAKE_OPTION_S(customTempPath);
+	LAMEXP_MAKE_OPTION_B(customTempPathEnabled);
 
 	//Misc
 	void validate(void);
@@ -125,7 +126,7 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#undef MAKE_OPTION_DEC1
-#undef MAKE_OPTION_DEC2
-#undef MAKE_OPTION_DEC3
-#undef MAKE_OPTION_DEC4
+#undef LAMEXP_MAKE_OPTION_I
+#undef LAMEXP_MAKE_OPTION_S
+#undef LAMEXP_MAKE_OPTION_B
+#undef LAMEXP_MAKE_OPTION_U

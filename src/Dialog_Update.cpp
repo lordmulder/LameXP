@@ -123,6 +123,7 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	m_updateInfo(NULL),
 	m_settings(settings),
 	m_logFile(new QStringList()),
+	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_demo()) : lamexp_version_demo()),
 	m_success(false),
 	m_updateReadyToInstall(false)
 {
@@ -409,10 +410,10 @@ bool UpdateDialog::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)
 	QString outFileSignature = QString("%1/%2.sig").arg(lamexp_temp_folder2(), randPart);
 
 	m_logFile->append(QStringList() << "" << "Downloading update info:");
-	bool ok1 = getFile(QString("%1%2").arg(url, mirror_url_postfix[lamexp_version_demo() ? 1 : 0]), outFileVersionInfo);
+	bool ok1 = getFile(QString("%1%2").arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileVersionInfo);
 
 	m_logFile->append(QStringList() << "" << "Downloading signature:");
-	bool ok2 = getFile(QString("%1%2.sig").arg(url, mirror_url_postfix[lamexp_version_demo() ? 1 : 0]), outFileSignature);
+	bool ok2 = getFile(QString("%1%2.sig").arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileSignature);
 
 	if(ok1 && ok2)
 	{
