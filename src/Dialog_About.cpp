@@ -352,6 +352,13 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("Aften &minus; A/52 audio encoder"),
+		"aften.exe", "v?.?.?",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"http://aften.sourceforge.net/"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("FLAC &minus; Free Lossless Audio Codec"),
 		"flac.exe", "v?.?.?",
 		tr("Open and patent-free lossless audio compression technology."),
