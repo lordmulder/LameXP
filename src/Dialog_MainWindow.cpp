@@ -226,6 +226,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAAC());
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
+	lineEditCustomParamAften->setText(m_settings->customParametersAften());
 	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
@@ -244,6 +245,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(lineEditCustomParamOggEnc, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(lineEditCustomParamNeroAAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(lineEditCustomParamAften, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(sliderMaxInstances, SIGNAL(valueChanged(int)), this, SLOT(updateMaximumInstances(int)));
 	connect(checkBoxAutoDetectInstances, SIGNAL(clicked(bool)), this, SLOT(autoDetectInstancesChanged(bool)));
 	connect(buttonBrowseCustomTempFolder, SIGNAL(clicked()), this, SLOT(browseCustomTempFolderButtonClicked()));
@@ -1759,6 +1761,13 @@ void MainWindow::updateEncoder(int id)
 		if(radioButtonConstBitrate->isChecked()) radioButtonModeQuality->setChecked(true);
 		sliderBitrate->setEnabled(true);
 		break;
+	case SettingsModel::AC3Encoder:
+		radioButtonModeQuality->setEnabled(true);
+		radioButtonModeQuality->setChecked(true);
+		radioButtonModeAverageBitrate->setEnabled(false);
+		radioButtonConstBitrate->setEnabled(true);
+		sliderBitrate->setEnabled(true);
+		break;
 	case SettingsModel::FLACEncoder:
 		radioButtonModeQuality->setEnabled(false);
 		radioButtonModeQuality->setChecked(true);
@@ -1819,6 +1828,19 @@ void MainWindow::updateRCMode(int id)
 			break;
 		}
 		break;
+	case SettingsModel::AC3Encoder:
+		switch(m_settings->compressionRCMode())
+		{
+		case SettingsModel::VBRMode:
+			sliderBitrate->setMinimum(0);
+			sliderBitrate->setMaximum(16);
+			break;
+		default:
+			sliderBitrate->setMinimum(0);
+			sliderBitrate->setMaximum(18);
+			break;
+		}
+		break;
 	case SettingsModel::AACEncoder:
 		switch(m_settings->compressionRCMode())
 		{
@@ -1874,6 +1896,9 @@ void MainWindow::updateBitrate(int value)
 		case SettingsModel::FLACEncoder:
 			labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
+		case SettingsModel::AC3Encoder:
+			labelBitrate->setText(tr("Quality Level %1").arg(min(1023, max(0, value * 64))));
+			break;
 		case SettingsModel::PCMEncoder:
 			labelBitrate->setText(tr("Uncompressed"));
 			break;
@@ -1891,6 +1916,9 @@ void MainWindow::updateBitrate(int value)
 		case SettingsModel::FLACEncoder:
 			labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
+		case SettingsModel::AC3Encoder:
+			labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::ac3Bitrates[value]));
+			break;
 		case SettingsModel::PCMEncoder:
 			labelBitrate->setText(tr("Uncompressed"));
 			break;
@@ -1907,6 +1935,9 @@ void MainWindow::updateBitrate(int value)
 			break;
 		case SettingsModel::FLACEncoder:
 			labelBitrate->setText(tr("Compression %1").arg(value));
+			break;
+		case SettingsModel::AC3Encoder:
+			labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::ac3Bitrates[value]));
 			break;
 		case SettingsModel::PCMEncoder:
 			labelBitrate->setText(tr("Uncompressed"));
@@ -2079,12 +2110,14 @@ void MainWindow::customParamsChanged(void)
 	lineEditCustomParamOggEnc->setText(lineEditCustomParamOggEnc->text().simplified());
 	lineEditCustomParamNeroAAC->setText(lineEditCustomParamNeroAAC->text().simplified());
 	lineEditCustomParamFLAC->setText(lineEditCustomParamFLAC->text().simplified());
+	lineEditCustomParamAften->setText(lineEditCustomParamAften->text().simplified());
 
 	bool customParamsUsed = false;
 	if(!lineEditCustomParamLAME->text().isEmpty()) customParamsUsed = true;
 	if(!lineEditCustomParamOggEnc->text().isEmpty()) customParamsUsed = true;
 	if(!lineEditCustomParamNeroAAC->text().isEmpty()) customParamsUsed = true;
 	if(!lineEditCustomParamFLAC->text().isEmpty()) customParamsUsed = true;
+	if(!lineEditCustomParamAften->text().isEmpty()) customParamsUsed = true;
 
 	labelCustomParamsIcon->setVisible(customParamsUsed);
 	labelCustomParamsText->setVisible(customParamsUsed);
@@ -2094,6 +2127,7 @@ void MainWindow::customParamsChanged(void)
 	m_settings->customParametersOggEnc(lineEditCustomParamOggEnc->text());
 	m_settings->customParametersNeroAAC(lineEditCustomParamNeroAAC->text());
 	m_settings->customParametersFLAC(lineEditCustomParamFLAC->text());
+	m_settings->customParametersAften(lineEditCustomParamAften->text());
 }
 
 /*

@@ -73,6 +73,7 @@ public:
 	
 	//Consts
 	static const int mp3Bitrates[15];
+	static const int ac3Bitrates[20];
 	static const int samplingRates[8];
 
 	//Getters & setters
@@ -110,6 +111,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(customParametersLAME);
 	LAMEXP_MAKE_OPTION_S(customParametersOggEnc);
 	LAMEXP_MAKE_OPTION_S(customParametersNeroAAC);
+	LAMEXP_MAKE_OPTION_S(customParametersAften);
 	LAMEXP_MAKE_OPTION_S(customParametersFLAC);
 	LAMEXP_MAKE_OPTION_U(metaInfoPosition);
 	LAMEXP_MAKE_OPTION_U(maximumInstances);

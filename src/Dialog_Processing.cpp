@@ -606,7 +606,7 @@ void ProcessingDialog::startNextJob(void)
 			AC3Encoder *ac3Encoder = new AC3Encoder();
 			ac3Encoder->setBitrate(m_settings->compressionBitrate());
 			ac3Encoder->setRCMode(m_settings->compressionRCMode());
-			ac3Encoder->setCustomParams(m_settings->customParametersNeroAAC());
+			ac3Encoder->setCustomParams(m_settings->customParametersAften());
 			encoder = ac3Encoder;
 		}
 		break;

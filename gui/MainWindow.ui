@@ -30,7 +30,7 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <property name="usesScrollButtons">
          <bool>false</bool>
@@ -1067,8 +1067,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
-               <height>1088</height>
+               <width>604</width>
+               <height>1117</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -2081,7 +2081,7 @@
                      <item row="1" column="1">
                       <widget class="QLabel" name="label_9">
                        <property name="text">
-                        <string>LAME:</string>
+                        <string>Lame MP3:</string>
                        </property>
                       </widget>
                      </item>
@@ -2154,7 +2154,7 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="7" column="1" colspan="2">
+                     <item row="8" column="1" colspan="2">
                       <spacer name="verticalSpacer_16">
                        <property name="orientation">
                         <enum>Qt::Vertical</enum>
@@ -2170,7 +2170,7 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="6" column="1" colspan="2">
+                     <item row="7" column="1" colspan="2">
                       <layout class="QHBoxLayout" name="horizontalLayout_6">
                        <item>
                         <widget class="QLabel" name="labelCustomParamsIcon">
@@ -2197,7 +2197,7 @@
                        </item>
                       </layout>
                      </item>
-                     <item row="5" column="1" colspan="2">
+                     <item row="6" column="1" colspan="2">
                       <widget class="QLabel" name="labelCustomParamsSpacer">
                        <property name="minimumSize">
                         <size>
@@ -2213,6 +2213,22 @@
                        </property>
                        <property name="text">
                         <string/>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="5" column="2">
+                      <widget class="QLineEdit" name="lineEditCustomParamAften">
+                       <property name="font">
+                        <font>
+                         <family>Lucida Console</family>
+                        </font>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="5" column="1">
+                      <widget class="QLabel" name="label_13">
+                       <property name="text">
+                        <string>Aften A/52:</string>
                        </property>
                       </widget>
                      </item>
@@ -3123,6 +3139,9 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

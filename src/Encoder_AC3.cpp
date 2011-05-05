@@ -49,18 +49,20 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	QProcess process;
 	QStringList args;
 
-	//args << QString("-%1").arg(QString::number(max(0, min(8, m_configBitrate))));
+	switch(m_configRCMode)
+	{
+	case SettingsModel::VBRMode:
+		args << "-q" << QString::number(max(0, min(1023, m_configBitrate * 64)));
+		break;
+	case SettingsModel::CBRMode:
+		args << "-b" << QString::number(SettingsModel::ac3Bitrates[max(0, min(18, m_configBitrate))]);
+		break;
+	default:
+		throw "Bad rate-control mode!";
+		break;
+	}
 
-	//if(!metaInfo.fileName().isEmpty()) args << "-T" << QString("title=%1").arg(metaInfo.fileName());
-	//if(!metaInfo.fileArtist().isEmpty()) args << "-T" << QString("artist=%1").arg(metaInfo.fileArtist());
-	//if(!metaInfo.fileAlbum().isEmpty()) args << "-T" << QString("album=%1").arg(metaInfo.fileAlbum());
-	//if(!metaInfo.fileGenre().isEmpty()) args << "-T" << QString("genre=%1").arg(metaInfo.fileGenre());
-	//if(!metaInfo.fileComment().isEmpty()) args << "-T" << QString("comment=%1").arg(metaInfo.fileComment());
-	//if(metaInfo.fileYear()) args << "-T" << QString("date=%1").arg(QString::number(metaInfo.fileYear()));
-	//if(metaInfo.filePosition()) args << "-T" << QString("track=%1").arg(QString::number(metaInfo.filePosition()));
-	//if(!metaInfo.fileCover().isEmpty()) args << QString("--picture=%1").arg(metaInfo.fileCover());
-
-	//if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
+	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);

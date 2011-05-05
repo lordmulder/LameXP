@@ -101,6 +101,7 @@ LAMEXP_MAKE_ID(toneAdjustTreble, "AdvancedOptions/ToneAdjustment/Treble");
 LAMEXP_MAKE_ID(customParametersLAME, "AdvancedOptions/CustomParameters/LAME");
 LAMEXP_MAKE_ID(customParametersOggEnc, "AdvancedOptions/CustomParameters/OggEnc");
 LAMEXP_MAKE_ID(customParametersNeroAAC, "AdvancedOptions/CustomParameters/NeroAAC");
+LAMEXP_MAKE_ID(customParametersAften, "AdvancedOptions/CustomParameters/Aften");
 LAMEXP_MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
 LAMEXP_MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
 LAMEXP_MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
@@ -109,6 +110,7 @@ LAMEXP_MAKE_ID(customTempPathEnabled, "AdvancedOptions/TempDirectory/UseCustomPa
 
 //LUT
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
+const int SettingsModel::ac3Bitrates[20] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 448, 512, 576, 640, -1};
 const int SettingsModel::samplingRates[8] = {0, 16000, 22050, 24000, 32000, 44100, 48000, -1};
 
 ////////////////////////////////////////////////////////////
@@ -283,6 +285,7 @@ LAMEXP_MAKE_OPTION_I(toneAdjustTreble, 0)
 LAMEXP_MAKE_OPTION_S(customParametersLAME, QString());
 LAMEXP_MAKE_OPTION_S(customParametersOggEnc, QString());
 LAMEXP_MAKE_OPTION_S(customParametersNeroAAC, QString());
+LAMEXP_MAKE_OPTION_S(customParametersAften, QString());
 LAMEXP_MAKE_OPTION_S(customParametersFLAC, QString());
 LAMEXP_MAKE_OPTION_U(metaInfoPosition, UINT_MAX);
 LAMEXP_MAKE_OPTION_U(maximumInstances, 0);

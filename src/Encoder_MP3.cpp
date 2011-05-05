@@ -64,11 +64,11 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		args << "-V" << QString::number(9 - min(9, m_configBitrate));
 		break;
 	case SettingsModel::ABRMode:
-		args << "--abr" << QString::number(SettingsModel::mp3Bitrates[min(13, m_configBitrate)]);
+		args << "--abr" << QString::number(SettingsModel::mp3Bitrates[max(0, min(13, m_configBitrate))]);
 		break;
 	case SettingsModel::CBRMode:
 		args << "--cbr";
-		args << "-b" << QString::number(SettingsModel::mp3Bitrates[min(13, m_configBitrate)]);
+		args << "-b" << QString::number(SettingsModel::mp3Bitrates[max(0, min(13, m_configBitrate))]);
 		break;
 	default:
 		throw "Bad rate-control mode!";
