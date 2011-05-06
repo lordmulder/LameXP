@@ -88,6 +88,10 @@ private slots:
 	void channelModeChanged(int value);
 	void neroAACProfileChanged(int value);
 	void neroAAC2PassChanged(bool checked);
+	void aftenCodingModeChanged(int value);
+	void aftenDRCModeChanged(int value);
+	void aftenSearchSizeChanged(int value);
+	void aftenFastAllocationChanged(bool checked);
 	void normalizationEnabledChanged(bool checked);
 	void normalizationMaxVolumeChanged(double volume);
 	void toneAdjustBassChanged(double value);

@@ -214,11 +214,15 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
 	spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBass()) / 100.0);
 	spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTreble()) / 100.0);
+	spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSize());
 	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelMode());
 	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRate());
 	comboBoxNeroAACProfile->setCurrentIndex(m_settings->neroAACProfile());
+	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
+	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabled()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2Pass()) checkBoxNeroAAC2PassMode->click();
+	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocation()) checkBoxAftenFastAllocation->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabled()) checkBoxNormalizationFilter->click();
 	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstances() < 1)) checkBoxAutoDetectInstances->click();
 	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabled()) checkBoxUseSystemTempFolder->click();
@@ -237,6 +241,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(checkBoxNeroAAC2PassMode, SIGNAL(clicked(bool)), this, SLOT(neroAAC2PassChanged(bool)));
 	connect(comboBoxNeroAACProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(neroAACProfileChanged(int)));
 	connect(checkBoxNormalizationFilter, SIGNAL(clicked(bool)), this, SLOT(normalizationEnabledChanged(bool)));
+	connect(comboBoxAftenCodingMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenCodingModeChanged(int)));
+	connect(comboBoxAftenDRCMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenDRCModeChanged(int)));
+	connect(spinBoxAftenSearchSize, SIGNAL(valueChanged(int)), this, SLOT(aftenSearchSizeChanged(int)));
+	connect(checkBoxAftenFastAllocation, SIGNAL(clicked(bool)), this, SLOT(aftenFastAllocationChanged(bool)));
 	connect(spinBoxNormalizationFilter, SIGNAL(valueChanged(double)), this, SLOT(normalizationMaxVolumeChanged(double)));
 	connect(spinBoxToneAdjustBass, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustBassChanged(double)));
 	connect(spinBoxToneAdjustTreble, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustTrebleChanged(double)));
@@ -652,12 +660,14 @@ void MainWindow::changeEvent(QEvent *e)
 {
 	if(e->type() == QEvent::LanguageChange)
 	{
-		int comboBoxIndex[3];
+		int comboBoxIndex[5];
 		
 		//Backup combobox indices, as retranslateUi() resets
 		comboBoxIndex[0] = comboBoxMP3ChannelMode->currentIndex();
 		comboBoxIndex[1] = comboBoxSamplingRate->currentIndex();
 		comboBoxIndex[2] = comboBoxNeroAACProfile->currentIndex();
+		comboBoxIndex[3] = comboBoxAftenCodingMode->currentIndex();
+		comboBoxIndex[4] = comboBoxAftenDRCMode->currentIndex();
 		
 		//Re-translate from UIC
 		Ui::MainWindow::retranslateUi(this);
@@ -666,6 +676,8 @@ void MainWindow::changeEvent(QEvent *e)
 		comboBoxMP3ChannelMode->setCurrentIndex(comboBoxIndex[0]);
 		comboBoxSamplingRate->setCurrentIndex(comboBoxIndex[1]);
 		comboBoxNeroAACProfile->setCurrentIndex(comboBoxIndex[2]);
+		comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
+		comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
 
 		//Update the window title
 		if(LAMEXP_DEBUG)
@@ -1897,7 +1909,7 @@ void MainWindow::updateBitrate(int value)
 			labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
 		case SettingsModel::AC3Encoder:
-			labelBitrate->setText(tr("Quality Level %1").arg(min(1023, max(0, value * 64))));
+			labelBitrate->setText(tr("Quality Level %1").arg(min(1024, max(0, value * 64))));
 			break;
 		case SettingsModel::PCMEncoder:
 			labelBitrate->setText(tr("Uncompressed"));
@@ -1937,7 +1949,7 @@ void MainWindow::updateBitrate(int value)
 			labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
 		case SettingsModel::AC3Encoder:
-			labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::ac3Bitrates[value]));
+			labelBitrate->setText(QString("%1 kbps").arg(SettingsModel::ac3Bitrates[value]));
 			break;
 		case SettingsModel::PCMEncoder:
 			labelBitrate->setText(tr("Uncompressed"));
@@ -2054,6 +2066,38 @@ void MainWindow::neroAAC2PassChanged(bool checked)
 void MainWindow::neroAACProfileChanged(int value)
 {
 	if(value >= 0) m_settings->neroAACProfile(value);
+}
+
+/*
+ * Aften audio coding mode changed
+ */
+void MainWindow::aftenCodingModeChanged(int value)
+{
+	if(value >= 0) m_settings->aftenAudioCodingMode(value);
+}
+
+/*
+ * Aften DRC mode changed
+ */
+void MainWindow::aftenDRCModeChanged(int value)
+{
+	if(value >= 0) m_settings->aftenDynamicRangeCompression(value);
+}
+
+/*
+ * Aften exponent search size changed
+ */
+void MainWindow::aftenSearchSizeChanged(int value)
+{
+	if(value >= 0) m_settings->aftenExponentSearchSize(value);
+}
+
+/*
+ * Aften fast bit allocation changed
+ */
+void MainWindow::aftenFastAllocationChanged(bool checked)
+{
+	m_settings->aftenFastBitAllocation(checked);
 }
 
 /*
@@ -2196,14 +2240,18 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolumeDefault()) / 100.0);
 	spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBassDefault()) / 100.0);
 	spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTrebleDefault()) / 100.0);
+	spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSizeDefault());
 	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelModeDefault());
 	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRateDefault());
 	comboBoxNeroAACProfile->setCurrentIndex(m_settings->neroAACProfileDefault());
+	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
+	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabledDefault()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2PassDefault()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabledDefault()) checkBoxNormalizationFilter->click();
 	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstancesDefault() < 1)) checkBoxAutoDetectInstances->click();
 	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
+	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocationDefault()) checkBoxAftenFastAllocation->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAACDefault());

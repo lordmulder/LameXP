@@ -38,6 +38,16 @@ public:
 	virtual QString extension(void);
 	virtual const unsigned int *requiresDownsample(void);
 
+	//Advanced options
+	virtual void setAudioCodingMode(int value);
+	virtual void setDynamicRangeCompression(int value);
+	virtual void setExponentSearchSize(int value);
+	virtual void setFastBitAllocation(bool value);
+	
 private:
 	const QString m_binary;
+	int m_configAudioCodingMode;
+	int m_configDynamicRangeCompression;
+	int m_configExponentSearchSize;
+	bool m_configFastBitAllocation;
 };
