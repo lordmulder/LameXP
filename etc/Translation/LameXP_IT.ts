@@ -199,6 +199,10 @@
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Aften &amp;minus; A/52 audio encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -1134,10 +1138,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>LAME:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>OggEnc2:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1275,6 +1275,14 @@
     </message>
     <message>
         <source>Aften A/52</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lame MP3:</source>
+        <translation type="unfinished">Lame MP3:</translation>
+    </message>
+    <message>
+        <source>Aften A/52:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

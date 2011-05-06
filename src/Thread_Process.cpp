@@ -28,6 +28,7 @@
 #include "Decoder_Abstract.h"
 #include "Filter_Abstract.h"
 #include "Filter_Downmix.h"
+#include "Filter_Resample.h"
 #include "Registry_Decoder.h"
 #include "Model_Settings.h"
 
@@ -40,6 +41,9 @@
 
 #include <limits.h>
 #include <time.h>
+#include <stdlib.h>
+
+#define DIFF(X,Y) ((X > Y) ? (X-Y) : (Y-X))
 
 QMutex *ProcessThread::m_mutex_genFileName = NULL;
 
@@ -83,6 +87,10 @@ ProcessThread::~ProcessThread(void)
 	LAMEXP_DELETE(m_encoder);
 }
 
+////////////////////////////////////////////////////////////
+// Thread Entry Point
+////////////////////////////////////////////////////////////
+
 void ProcessThread::run()
 {
 	try
@@ -117,7 +125,13 @@ void ProcessThread::processFile()
 		emit processStateFinished(m_jobId, outFileName, false);
 		return;
 	}
-	
+
+	//Do we need to take of downsampling the input?
+	if(m_encoder->requiresDownsample())
+	{
+		insertDownsampleFilter();
+	}
+
 	//Do we need Stereo downmix?
 	if(m_audioFile.formatAudioChannels() > 2 && m_encoder->requiresDownmix())
 	{
@@ -323,6 +337,50 @@ QString ProcessThread::generateTempFileName(void)
 	m_tempFiles << tempFileName;
 	return tempFileName;
 }
+
+void ProcessThread::insertDownsampleFilter(void)
+{
+	bool applyDownsampling = true;
+		
+	//Check if downsampling filter is already in the chain
+	for(int i = 0; i < m_filters.count(); i++)
+	{
+		if(dynamic_cast<ResampleFilter*>(m_filters.at(i)))
+		{
+			qWarning("Encoder requires downsampling, but user has already set resamling filter!");
+			applyDownsampling = false;
+		}
+	}
+		
+	//Now add the downsampling filter, if needed
+	if(applyDownsampling)
+	{
+		const unsigned int *supportedRates = m_encoder->requiresDownsample();
+		const unsigned int inputRate = m_audioFile.formatAudioSamplerate();
+		unsigned int currentDiff = UINT_MAX, minimumDiff = UINT_MAX, bestRate = UINT_MAX;
+
+		//Find the most suitable supported sampling rate
+		for(int i = 0; supportedRates[i]; i++)
+		{
+			currentDiff = DIFF(inputRate, supportedRates[i]);
+			if(currentDiff < minimumDiff)
+			{
+				bestRate = supportedRates[i];
+				minimumDiff = currentDiff;
+				if(!(minimumDiff > 0)) break;
+			}
+		}
+		
+		if(bestRate != inputRate)
+		{
+			m_filters.prepend(new ResampleFilter((bestRate != UINT_MAX) ? bestRate : supportedRates[0]));
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////
+// PUBLIC FUNCTIONS
+////////////////////////////////////////////////////////////
 
 void ProcessThread::addFilter(AbstractFilter *filter)
 {

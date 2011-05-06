@@ -199,6 +199,10 @@
         <source>n/a</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Aften &amp;minus; A/52 audio encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -594,10 +598,6 @@
     </message>
     <message>
         <source> Custom Encoder Parameters </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LAME:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1274,6 +1274,14 @@
     </message>
     <message>
         <source>Aften A/52</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lame MP3:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aften A/52:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

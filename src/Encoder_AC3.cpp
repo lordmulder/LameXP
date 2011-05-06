@@ -135,6 +135,12 @@ QString AC3Encoder::extension(void)
 	return "ac3";
 }
 
+const unsigned int *AC3Encoder::requiresDownsample(void)
+{
+	static const unsigned int supportedRates[] = {48000, 44100, 32000, NULL};
+	return supportedRates;
+}
+
 bool AC3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
 	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
