@@ -1373,6 +1373,10 @@
         <source>Exponent Search Size:</source>
         <translation>Exponenten Such-Größe:</translation>
     </message>
+    <message>
+        <source>Don&apos;t Show Again</source>
+        <translation>Nicht mehr anzeigen</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

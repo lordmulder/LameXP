@@ -931,13 +931,17 @@ void MainWindow::windowShown(void)
 			QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 			if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
 			QString messageText;
-			messageText += QString("<nobr>%1<br>").arg(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled."));
-			messageText += QString("%1<br><br>").arg(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!"));
-			messageText += QString("%1<br>").arg(tr("Your LameXP directory is located here:"));
-			messageText += QString("<i><nobr><a href=\"file:///%1\">%1</a></nobr></i><br><br>").arg(QDir::toNativeSeparators(appPath));
-			messageText += QString("%1<br>").arg(tr("You can download the Nero AAC encoder for free from the official Nero website at:"));
+			messageText += QString("<nobr>%1</nobr><br>").arg(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.").replace("-", "&minus;"));
+			messageText += QString("<nobr>%1</nobr><br><br>").arg(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!").replace("-", "&minus;"));
+			messageText += QString("<nobr>%1</nobr><br>").arg(tr("Your LameXP directory is located here:").replace("-", "&minus;"));
+			messageText += QString("<nobr><i><a href=\"file:///%1\">%2</a></i></nobr><br><br>").arg(QDir::toNativeSeparators(appPath), QDir::toNativeSeparators(appPath).replace("-", "&minus;"));
+			messageText += QString("<nobr>%1</nobr><br>").arg(tr("You can download the Nero AAC encoder for free from the official Nero website at:").replace("-", "&minus;"));
 			messageText += "<tt>" + LINK(AboutDialog::neroAacUrl) + "</tt><br></nobr>";
-			QMessageBox::information(this, tr("AAC Support Disabled"), messageText);
+			if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
+			{
+				m_settings->neroAacNotificationsEnabled(false);
+				actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
+			}
 		}
 	}
 	
@@ -947,16 +951,22 @@ void MainWindow::windowShown(void)
 		if(!lamexp_check_tool("wmawav.exe"))
 		{
 			QString messageText;
-			messageText += QString("<nobr>%1<br>").arg(tr("LameXP has detected that the WMA File Decoder component is not currently installed on your system."));
-			messageText += QString("%1<br><br>").arg(tr("You won't be able to process WMA files as input unless the WMA File Decoder component is installed!"));
-			messageText += QString("%1</nobr>").arg(tr("Do you want to download and install the WMA File Decoder component now?"));
-			if(QMessageBox::information(this, tr("WMA Decoder Missing"), messageText, tr("Download && Install"), tr("Postpone")) == 0)
+			messageText += QString("<nobr>%1</nobr><br>").arg(tr("LameXP has detected that the WMA File Decoder component is not currently installed on your system.").replace("-", "&minus;"));
+			messageText += QString("<nobr>%1</nobr><br><br>").arg(tr("You won't be able to process WMA files as input unless the WMA File Decoder component is installed!").replace("-", "&minus;"));
+			messageText += QString("<nobr>%1</nobr>").arg(tr("Do you want to download and install the WMA File Decoder component now?").replace("-", "&minus;"));
+			int result = QMessageBox::information(this, tr("WMA Decoder Missing"), messageText, tr("Download && Install"), tr("Don't Show Again"), tr("Postpone"));
+			if(result == 0)
 			{
 				if(installWMADecoder())
 				{
 					QApplication::quit();
 					return;
 				}
+			}
+			else if(result == 1)
+			{
+				m_settings->wmaDecoderNotificationsEnabled(false);
+				actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
 			}
 		}
 	}

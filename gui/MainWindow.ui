@@ -3071,9 +3071,10 @@
      <addaction name="separator"/>
      <addaction name="actionCheckForBetaUpdates"/>
     </widget>
-    <addaction name="menuConfiguration"/>
     <addaction name="actionInstallWMADecoder"/>
     <addaction name="actionShowDropBoxWidget"/>
+    <addaction name="separator"/>
+    <addaction name="menuConfiguration"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -3391,6 +3392,7 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

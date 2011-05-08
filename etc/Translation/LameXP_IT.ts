@@ -1373,6 +1373,10 @@
         <source>Exponent Search Size:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Don&apos;t Show Again</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

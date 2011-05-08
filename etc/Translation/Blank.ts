@@ -1089,6 +1089,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Show Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1346,10 +1354,6 @@
     </message>
     <message>
         <source>Check Now</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

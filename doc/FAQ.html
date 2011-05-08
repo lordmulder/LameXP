@@ -34,6 +34,7 @@ a:visited { color: #0000EE; }
 <li><a href="#9fd53558">How can I use LameXP as a "portable" application?</a>
 <li><a href="#3d6684e9">Is there a way to use custom tools (binaries) with LameXP instead of the "built-in" ones?</a>
 <li><a href="#df406578">The LameXP startup (splash screen) takes very long on my system. What can I do?</a>
+<li><a href="#900a2a6c">Is there a way to hide/show the LameXP console ("DOS Box") window?</a>
 <li><a href="#9b0a5c32">Why does application 'xyz' not open the Wave files created by LameXP?</a>
 <li><a href="#89cbd3d0">Why does LameXP run only 'n' parallel instances/threads on my computer?</a>
 <li><a href="#12d077d5">How can I force LameXP to create ID3 version 2 (ID3v2) tags?</a>
@@ -375,6 +376,25 @@ the developer of the anti-virus software. And, if they don't fix the problem, sw
 
 <br><br>
 
+<a name="900a2a6c"></a><b>Is there a way to hide/show the LameXP console ("DOS Box") window?</b><br>
+<br>
+It is common for many people to run an alleged "DOS" programs inside Windows, using a so-called "DOS Box".<br>
+Everything works fine. But when you try to run such a program in DOS, you get an ugly message "This program<br>
+cannot be run in DOS mode". What's wrong? Well, the affected program is NOT a "DOS" one. It is a Windows<br>
+Console program. "DOS" is NOT a synonym of Console. And "Windows" is NOT a synonym of GUI (Graphical User<br>
+Interface). Both, DOS and Windows programs, can be either Console or GUI. Actually Windows programs can be<br>
+Console *and* GUI at the same time, i.e. a Windows GUI program can have a Console attached.<br>
+<br>
+LameXP is a GUI program for Windows. However it can have a "Debug" console attached. The purpose of this<br>
+console is providing users an insight into what's happening behind the scenes. While the console is mainly<br>
+intended for developers, it may be helpful for "regular" users too. Nonetheless you usually will NOT need the<br>
+console, unless something is going wrong. Therefore the LameXP console is disabled by default in all<br>
+"release" builds. You can enable the console by passing the "--console" command-line parameter, if required.<br>
+At the same time the console is enabled by default in all "beta" (pre-release) builds of LameXP. You can<br>
+still disable the console by passing the "--no-console" command-line parameter, if you don't like it.<br><br>
+
+<br><br>
+
 <a name="9b0a5c32"></a><b>Why does application 'xyz' not open the Wave files created by LameXP?</b><br>
 <br>
 Some of the decoders used in LameXP will insert an additional 'JUNK' chunk into the Wave/RIFF file, right<br>
@@ -494,7 +514,7 @@ a reconstructed analogue signal which exceeds(!) 0dBFS. And, as the analogue par
 generally are NOT prepared for +0dBFS voltages, this may cause problems, such as annoying distortions!<br>
 <br>
 The help document of a well-known audio editing software contains the following advice:<br>
-<blockquote>If you’re planning to put normalized audio on CD, you might want to normalize the waveforms to<br>
+<blockquote>If you're planning to put normalized audio on CD, you might want to normalize the waveforms to<br>
 no more than 96% [-0.36 dB] as some audio compact disc players have problems accurately reproducing<br>
 bits that have been processed to 100% (maximum) amplitude [0dBFS].</blockquote>
 For details please refer to the following article:<br><ul>
