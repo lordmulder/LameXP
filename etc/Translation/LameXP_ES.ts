@@ -199,6 +199,10 @@
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Nota: Esta es una versión demo (pre-final) de LameXP que expirará el %1. Quedan %2 días restantes.</translation>
     </message>
+    <message>
+        <source>Aften &amp;minus; A/52 audio encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
@@ -1133,10 +1137,6 @@
         <translation>Personalizar parámetros de codificación</translation>
     </message>
     <message>
-        <source>LAME:</source>
-        <translation>LAME:</translation>
-    </message>
-    <message>
         <source>OggEnc2:</source>
         <translation>QggEnc2:</translation>
     </message>
@@ -1274,6 +1274,14 @@
     </message>
     <message>
         <source>Aften A/52</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lame MP3:</source>
+        <translation type="unfinished">Lame MP3:</translation>
+    </message>
+    <message>
+        <source>Aften A/52:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
