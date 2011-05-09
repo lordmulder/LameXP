@@ -1915,5 +1915,13 @@
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>It appears that the computer currently is offline!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please make sure your computer is connected to the internet and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
