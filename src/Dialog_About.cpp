@@ -326,7 +326,7 @@ void AboutDialog::showMoreAbout(void)
 	QString moreAboutText;
 
 	moreAboutText += QString("<h3>%1</h3>").arg(tr("The following third-party software is used in LameXP:"));
-	moreAboutText += "<div style=\"margin-left:-25px;font-size:8pt;white-space:nowrap\"><table><tr><td><ul>";
+	moreAboutText += "<div style=\"margin-left:-25px;font-size:7pt;white-space:nowrap\"><table><tr><td><ul>";
 	
 	moreAboutText += makeToolText
 	(
