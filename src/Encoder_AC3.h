@@ -36,7 +36,18 @@ public:
 	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual QString extension(void);
+	virtual const unsigned int *requiresDownsample(void);
 
+	//Advanced options
+	virtual void setAudioCodingMode(int value);
+	virtual void setDynamicRangeCompression(int value);
+	virtual void setExponentSearchSize(int value);
+	virtual void setFastBitAllocation(bool value);
+	
 private:
 	const QString m_binary;
+	int m_configAudioCodingMode;
+	int m_configDynamicRangeCompression;
+	int m_configExponentSearchSize;
+	bool m_configFastBitAllocation;
 };

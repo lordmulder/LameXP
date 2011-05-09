@@ -33,6 +33,7 @@
 ..\..\src\Dialog_WorkingBanner.cpp 
 ..\..\src\Encoder_AAC.cpp 
 ..\..\src\Encoder_Abstract.cpp 
+..\..\src\Encoder_AC3.cpp 
 ..\..\src\Encoder_FLAC.cpp 
 ..\..\src\Encoder_MP3.cpp 
 ..\..\src\Encoder_Vorbis.cpp 
@@ -92,6 +93,7 @@
 ..\..\src\Dialog_WorkingBanner.h 
 ..\..\src\Encoder_AAC.h 
 ..\..\src\Encoder_Abstract.h 
+..\..\src\Encoder_AC3.h 
 ..\..\src\Encoder_FLAC.h 
 ..\..\src\Encoder_MP3.h 
 ..\..\src\Encoder_Vorbis.h 

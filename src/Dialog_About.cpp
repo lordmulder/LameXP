@@ -127,7 +127,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += "GNU General Public License for more details.<br><br>";
 	aboutText += "You should have received a copy of the GNU General Public License<br>";
 	aboutText += "along with this program; if not, write to the Free Software<br>";
-	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</tt></nobr><br>";
+	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110&minus;1301, USA.</tt></nobr><br>";
 	aboutText += "<hr><table><tr>";
 	aboutText += "<td valign=\"middle\"><img src=\":/icons/error_big.png\"</td><td>&nbsp;</td>";
 	aboutText += QString("<td><font color=\"darkred\">%1</font></td>").arg(tr("Note: LameXP is free software. Do <b>not</b> pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should <b>not</b> respond to the offer !!!"));
@@ -433,6 +433,13 @@ void AboutDialog::showMoreAbout(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("ALAC Decoder"),
+		"alac.exe", "v?.?.?",
+		tr("Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious."),
+		"http://craz.net/programs/itunes/alac.html"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("MediaInfo &minus; Media File Analysis Tool"),
 		"mediainfo.exe", "v?.?.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
@@ -452,8 +459,6 @@ void AboutDialog::showMoreAbout(void)
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.gnupg.org/"
 	);
-
-
 	moreAboutText += makeToolText
 	(
 		tr("GNU Wget &minus; Software for retrieving files using HTTP"),
@@ -461,8 +466,6 @@ void AboutDialog::showMoreAbout(void)
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.gnu.org/software/wget/"
 	);
-
-
 	moreAboutText += makeToolText
 	(
 		tr("Silk Icons &minus; Over 700  icons in PNG format"),
@@ -470,9 +473,9 @@ void AboutDialog::showMoreAbout(void)
 		tr("By Mark James, released under the Creative Commons 'by' License."),
 		"http://www.famfamfam.com/lab/icons/silk/"
 	);
-	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><i>%1</i><br>").arg
+	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><i><nobr>%1</nobr></i><br>").arg
 	(
-		tr("LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.")
+		tr("LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.").replace("-", "&minus;")
 	);
 
 	QMessageBox *moreAboutBox = new QMessageBox(this);

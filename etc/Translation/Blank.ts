@@ -104,6 +104,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Aften &amp;minus; A/52 audio encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>
@@ -164,6 +168,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>ALAC Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -197,10 +209,6 @@
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Aften &amp;minus; A/52 audio encoder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -425,6 +433,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Aften A/52</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source> Rate Control Method </source>
         <translation type="unfinished"></translation>
     </message>
@@ -601,6 +613,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Lame MP3:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>OggEnc2:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -614,6 +630,10 @@
     </message>
     <message>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aften A/52:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -642,6 +662,86 @@
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Aften A/52 Options </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Film Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Film Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Music Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Music Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None (Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1+1 (Ch1,Ch2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/0 (C)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2/0 (L,R)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3/0 (L,R,C)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2/1 (L,R,S)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3/1 (L,R,C,S)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2/2 (L,R,SL,SR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3/2 (L,R,C,SL,SR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio Coding Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dynamic Range Compression:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fast Bit Allocation (Less Accurate)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exponent Search Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -989,6 +1089,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Show Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1249,10 +1357,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Discard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1270,18 +1374,6 @@
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Aften A/52</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lame MP3:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Aften A/52:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

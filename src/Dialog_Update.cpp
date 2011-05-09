@@ -145,6 +145,12 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	labelAnimationCenter->setMovie(m_animator);
 	m_animator->start();
 
+	//Indicate beta updates
+	if(m_betaUpdates)
+	{
+		setWindowTitle(windowTitle().append(" [Beta]"));
+	}
+	
 	//Enable button
 	connect(retryButton, SIGNAL(clicked()), this, SLOT(checkForUpdates()));
 	connect(installButton, SIGNAL(clicked()), this, SLOT(applyUpdate()));

@@ -38,6 +38,11 @@ AC3Encoder::AC3Encoder(void)
 	{
 		throw "Error initializing FLAC encoder. Tool 'aften.exe' is not registred!";
 	}
+
+	m_configAudioCodingMode = 0;
+	m_configDynamicRangeCompression = 5;
+	m_configExponentSearchSize = 8;
+	m_configFastBitAllocation = false;
 }
 
 AC3Encoder::~AC3Encoder(void)
@@ -60,6 +65,23 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	default:
 		throw "Bad rate-control mode!";
 		break;
+	}
+
+	if(m_configAudioCodingMode >= 1)
+	{
+		args << "-acmod" << QString::number(m_configAudioCodingMode - 1);
+	}
+	if(m_configDynamicRangeCompression != 5)
+	{
+		args << "-dynrng" << QString::number(m_configDynamicRangeCompression);
+	}
+	if(m_configExponentSearchSize != 8)
+	{
+		args << "-exps" << QString::number(m_configExponentSearchSize);
+	}
+	if(m_configFastBitAllocation)
+	{
+		args << "-fba" << QString::number(1);
 	}
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
@@ -130,9 +152,35 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	return true;
 }
 
+void AC3Encoder::setAudioCodingMode(int value)
+{
+	m_configAudioCodingMode = min(8, max(0, value));
+}
+
+void AC3Encoder::setDynamicRangeCompression(int value)
+{
+	m_configDynamicRangeCompression = min(5, max(0, value));
+}
+
+void AC3Encoder::setExponentSearchSize(int value)
+{
+	m_configExponentSearchSize = min(32, max(1, value));
+}
+
+void AC3Encoder::setFastBitAllocation(bool value)
+{
+	m_configFastBitAllocation = value;
+}
+
 QString AC3Encoder::extension(void)
 {
 	return "ac3";
+}
+
+const unsigned int *AC3Encoder::requiresDownsample(void)
+{
+	static const unsigned int supportedRates[] = {48000, 44100, 32000, NULL};
+	return supportedRates;
 }
 
 bool AC3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

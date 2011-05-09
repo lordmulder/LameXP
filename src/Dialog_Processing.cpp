@@ -607,6 +607,10 @@ void ProcessingDialog::startNextJob(void)
 			ac3Encoder->setBitrate(m_settings->compressionBitrate());
 			ac3Encoder->setRCMode(m_settings->compressionRCMode());
 			ac3Encoder->setCustomParams(m_settings->customParametersAften());
+			ac3Encoder->setAudioCodingMode(m_settings->aftenAudioCodingMode());
+			ac3Encoder->setDynamicRangeCompression(m_settings->aftenDynamicRangeCompression());
+			ac3Encoder->setExponentSearchSize(m_settings->aftenExponentSearchSize());
+			ac3Encoder->setFastBitAllocation(m_settings->aftenFastBitAllocation());
 			encoder = ac3Encoder;
 		}
 		break;

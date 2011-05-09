@@ -201,7 +201,15 @@
     </message>
     <message>
         <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften &amp;minus; A/52 Audio-Kodierer</translation>
+    </message>
+    <message>
+        <source>ALAC Decoder</source>
+        <translation>ALAC Dekodierer</translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
+        <translation>Copyright (c) 2004 David Hammerton. Unter Mitwirkung von Cody Brocious.</translation>
     </message>
 </context>
 <context>
@@ -1275,15 +1283,99 @@
     </message>
     <message>
         <source>Aften A/52</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Lame MP3:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Aften A/52:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <source> Aften A/52 Options </source>
+        <translation> Aften A/52 Optionen </translation>
+    </message>
+    <message>
+        <source>Film Light</source>
+        <translation>Film (Gering)</translation>
+    </message>
+    <message>
+        <source>Film Standard</source>
+        <translation>Film (Normal)</translation>
+    </message>
+    <message>
+        <source>Music Light</source>
+        <translation>Musik (Gering)</translation>
+    </message>
+    <message>
+        <source>Music Standard</source>
+        <translation>Musik (Normal)</translation>
+    </message>
+    <message>
+        <source>Speech</source>
+        <translation>Sprache</translation>
+    </message>
+    <message>
+        <source>None (Default)</source>
+        <translation>Keine (Standard)</translation>
+    </message>
+    <message>
+        <source>Auto Select</source>
+        <translation>Automatisch</translation>
+    </message>
+    <message>
+        <source>1+1 (Ch1,Ch2)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>1/0 (C)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>2/0 (L,R)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>3/0 (L,R,C)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>2/1 (L,R,S)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>3/1 (L,R,C,S)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>2/2 (L,R,SL,SR)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>3/2 (L,R,C,SL,SR)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Audio Coding Mode:</source>
+        <translation>Ton-Kodierungsmodus:</translation>
+    </message>
+    <message>
+        <source>Dynamic Range Compression:</source>
+        <translation>Dynamik-Kompression:</translation>
+    </message>
+    <message>
+        <source>Fast Bit Allocation (Less Accurate)</source>
+        <translation>Schnelle Bit-Zuteilung (weniger genau)</translation>
+    </message>
+    <message>
+        <source>Exponent Search Size:</source>
+        <translation>Exponenten Such-Größe:</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Show Again</source>
+        <translation>Nicht mehr anzeigen</translation>
     </message>
 </context>
 <context>

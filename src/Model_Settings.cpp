@@ -91,6 +91,10 @@ LAMEXP_MAKE_ID(lameChannelMode, "AdvancedOptions/LAME/ChannelMode");
 LAMEXP_MAKE_ID(bitrateManagementEnabled, "AdvancedOptions/BitrateManagement/Enabled");
 LAMEXP_MAKE_ID(bitrateManagementMinRate, "AdvancedOptions/BitrateManagement/MinRate");
 LAMEXP_MAKE_ID(bitrateManagementMaxRate, "AdvancedOptions/BitrateManagement/MaxRate");
+LAMEXP_MAKE_ID(aftenAudioCodingMode, "AdvancedOptions/Aften/AudioCodingMode");
+LAMEXP_MAKE_ID(aftenDynamicRangeCompression, "AdvancedOptions/Aften/DynamicRangeCompression");
+LAMEXP_MAKE_ID(aftenFastBitAllocation, "AdvancedOptions/Aften/FastBitAllocation");
+LAMEXP_MAKE_ID(aftenExponentSearchSize, "AdvancedOptions/Aften/ExponentSearchSize");
 LAMEXP_MAKE_ID(samplingRate, "AdvancedOptions/Common/Resampling");
 LAMEXP_MAKE_ID(neroAACEnable2Pass, "AdvancedOptions/NeroAAC/Enable2Pass");
 LAMEXP_MAKE_ID(neroAACProfile, "AdvancedOptions/NeroAAC/ForceProfile");
@@ -278,6 +282,10 @@ LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate, 500)
 LAMEXP_MAKE_OPTION_I(samplingRate, 0)
 LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass, true)
 LAMEXP_MAKE_OPTION_I(neroAACProfile, 0)
+LAMEXP_MAKE_OPTION_I(aftenAudioCodingMode, 0);
+LAMEXP_MAKE_OPTION_I(aftenDynamicRangeCompression, 5);
+LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation, false);
+LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize, 8);
 LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled, false)
 LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume, -50)
 LAMEXP_MAKE_OPTION_I(toneAdjustBass, 0)

@@ -104,6 +104,10 @@ public:
 	LAMEXP_MAKE_OPTION_I(samplingRate);
 	LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass);
 	LAMEXP_MAKE_OPTION_I(neroAACProfile);
+	LAMEXP_MAKE_OPTION_I(aftenAudioCodingMode);
+	LAMEXP_MAKE_OPTION_I(aftenDynamicRangeCompression);
+	LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation);
+	LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize);
 	LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled);
 	LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume);
 	LAMEXP_MAKE_OPTION_I(toneAdjustBass);

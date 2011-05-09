@@ -34,11 +34,13 @@ a:visited { color: #0000EE; }
 <li><a href="#9fd53558">How can I use LameXP as a "portable" application?</a>
 <li><a href="#3d6684e9">Is there a way to use custom tools (binaries) with LameXP instead of the "built-in" ones?</a>
 <li><a href="#df406578">The LameXP startup (splash screen) takes very long on my system. What can I do?</a>
+<li><a href="#900a2a6c">Is there a way to hide/show the LameXP console ("DOS Box") window?</a>
 <li><a href="#9b0a5c32">Why does application 'xyz' not open the Wave files created by LameXP?</a>
 <li><a href="#89cbd3d0">Why does LameXP run only 'n' parallel instances/threads on my computer?</a>
 <li><a href="#12d077d5">How can I force LameXP to create ID3 version 2 (ID3v2) tags?</a>
 <li><a href="#d83ab3c6">Why does LameXP use LAME v3.99 rather than v3.98?</a><br>
 <li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
+<li><a href="#434f2578">Why is the maximum normalization level limited to -0.5 dB?</a>
 <li><a href="#e7c9ae2b">Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</a>
 <li><a href="#328b0a18">Why do I get the error 'Executable requires Windows XP or later' on startup?</a>
 <li><a href="#3ffe490e">Why do I get the error 'The procedure entry point De/EncodePointer could not be located' on startup?</a>
@@ -92,10 +94,11 @@ The following platforms are NOT supported any longer:<br><ul>
 <a name="29065b86"></a><b>What output formats (encoders) does LameXP support?</b><br>
 <br>
 Currently the following output formats are supported by LameXP:<br><ul>
-<li>MPEG Audio-Layer III (MP3), using the LAME encoder [built-in]
-<li>Ogg Vorbis, using the OggEnc2/libvorbis encoder [built-in]
-<li>Advanced Audio Coding (AAC), using Nero AAC encoder [available as separate download]
-<li>Free Lossless Audio Codec (FLAC) [built-in]
+<li>MPEG Audio-Layer III (MP3), using the <a href="http://lamexp.sourceforge.net/" target="_blank">LAME</a> encoder [built-in]
+<li>Ogg Vorbis, using the <a href="http://www.xiph.org/vorbis/" target="_blank">OggEnc2/libvorbis</a> encoder with <a href="http://www.geocities.jp/aoyoume/aotuv/" target="_blank">aoTuV</a> [built-in]
+<li>Advanced Audio Coding (AAC), using <a href="http://www.audiocoding.com/nero_aacenc.html" target="_blank">Nero AAC</a> encoder [separate download!]
+<li>ATSC A/52 (aka "AC-3"), using the <a href="http://aften.sourceforge.net/" target="_blank">Aften</a> encoder [built-in]
+<li>Free Lossless Audio Codec (<a href="http://flac.sourceforge.net/" target="_blank">FLAC</a>) [built-in]
 <li>Uncompressed PCM / Waveform Audio File (WAV/RIFF)</ul>
 
 <br><br>
@@ -373,6 +376,25 @@ the developer of the anti-virus software. And, if they don't fix the problem, sw
 
 <br><br>
 
+<a name="900a2a6c"></a><b>Is there a way to hide/show the LameXP console ("DOS Box") window?</b><br>
+<br>
+It is common for many people to run an alleged "DOS" program inside Windows, using a so-called "DOS Box".<br>
+Everything works fine. But when you try to run such a program in DOS, you get an ugly message "This program<br>
+cannot be run in DOS mode". What's wrong? Well, the affected program is NOT a "DOS" one. It is a Windows<br>
+Console program. "DOS" is NOT a synonym of Console. And "Windows" is NOT a synonym of GUI (Graphical User<br>
+Interface). Both, DOS and Windows programs, can be either Console or GUI. Actually Windows programs can be<br>
+Console *and* GUI at the same time, i.e. a Windows GUI program can have a Console attached.<br>
+<br>
+LameXP is a GUI program for Windows. However it can have a "Debug" console attached. The purpose of this<br>
+console is providing users an insight into what's happening behind the scenes. While the console is mainly<br>
+intended for developers, it may be helpful for "regular" users too. Nonetheless you usually will NOT need the<br>
+console, unless something is going wrong. Therefore the LameXP console is disabled by default in all<br>
+"release" builds. You can enable the console by passing the "--console" command-line parameter, if required.<br>
+At the same time the console is enabled by default in all "beta" (pre-release) builds of LameXP. You can<br>
+still disable the console by passing the "--no-console" command-line parameter, if you don't like it.<br><br>
+
+<br><br>
+
 <a name="9b0a5c32"></a><b>Why does application 'xyz' not open the Wave files created by LameXP?</b><br>
 <br>
 Some of the decoders used in LameXP will insert an additional 'JUNK' chunk into the Wave/RIFF file, right<br>
@@ -462,6 +484,41 @@ dummy/fake files! Actually an Audio CD does NOT contain a file system and thus t
 are audio tracks on an Audio CD. These audio tracks can be extracted as files (e.g. Wave Audio files) using a<br>
 ripping software and then the extracted files can be converted. At the same time any attempt to copy/convert<br>
 the '.cda' files directly is destined to fail (as the '.cda' files do NOT actually contain any audio data).<br><br>
+
+<br><br>
+
+<a name="434f2578"></a><b>Why is the maximum normalization level limited to -0.5 dB?</b><br>
+<br>
+
+When an analogue [audio] signal is converted to the digital domain, the signal is sampled at a fixed rate<br>
+(e.g. 44100 samples per second) and each "sample" value is stored with a fixed number of bits (e.g. 16 or 24<br>
+bits per sample). Consequently [uncompressed] digital audio is represented as a sequence of binary sample<br>
+values. The range of possible sample values is determined by the word size ("bits per sample"). For example<br>
+with a word size of 16 bit, the minimum value is &minus;32768 and the maximum value is 32767 - assuming the values<br>
+are signed. The range of the sample values corresponds to the voltage range of the electrical input signal.<br>
+The maximum digital sample value (i.e. 32767 at 16-Bit) often is referred to as 0dBFS (0dB "full scale").<br>
+<br>
+Performing a Normalization in the digital domain seems straightforward: We simply multiply all sample values<br>
+with the same factor. And we choose this factor in such a way that the highest sample value(s) in the track<br>
+will become exactly 0dBFS after the normalization has been performed. However one needs to be aware that when<br>
+playing back the digital audio track, it needs to be converted back to an analogue signal. The D/A converter<br>
+will convert each sample from its binary representation to the corresponding voltage. Then a "reconstruction"<br>
+filter will be applied in order to recover a continuous signal from these individual voltages. And for the<br>
+reconstructed analogue signal it is possible to have voltages that are higher than the highest digital sample<br>
+in the audio track! This is illustrated in the following image (samples are represented as tiny squares):<br>
+<br>
+<a target="_blank" href="http://img3.imageshack.us/img3/9153/sine0dbfs.png"><img src="http://img3.imageshack.us/img3/9153/sine0dbfs.th.png" border="0"></a><br>
+<br>
+Consequently normalizing the sample values to 0dBFS is NOT a very good idea, as this may very well result in<br>
+a reconstructed analogue signal which exceeds(!) 0dBFS. And, as the analogue parts of the playback equipment<br>
+generally are NOT prepared for +0dBFS voltages, this may cause problems, such as annoying distortions!<br>
+<br>
+The help document of a well-known audio editing software contains the following advice:<br>
+<blockquote>If you're planning to put normalized audio on CD, you might want to normalize the waveforms to<br>
+no more than 96% [-0.36 dB] as some audio compact disc players have problems accurately reproducing<br>
+bits that have been processed to 100% (maximum) amplitude [0dBFS].</blockquote>
+For details please refer to the following article:<br><ul>
+<li><a href="http://www.audioholics.com/education/audio-formats-technology/issues-with-0dbfs-levels-on-digital-audio-playback-systems" target="_blank">http://www.audioholics.com/...issues-with-0dbfs-levels-on-digital-audio-playback-systems</a></ul>
 
 <br><br>
 

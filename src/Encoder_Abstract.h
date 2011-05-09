@@ -41,6 +41,7 @@ public:
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion) = 0;
 	virtual QString extension(void) = 0;
 	virtual bool requiresDownmix(void);
+	virtual const unsigned int *requiresDownsample(void);
 
 	//Common setter methods
 	void setBitrate(int bitrate);

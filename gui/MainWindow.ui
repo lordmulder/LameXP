@@ -1068,7 +1068,7 @@
                <x>0</x>
                <y>0</y>
                <width>604</width>
-               <height>1117</height>
+               <height>1244</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -1705,7 +1705,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="4" column="0">
+                <item row="5" column="0">
                  <widget class="QGroupBox" name="groupBox_9">
                   <property name="font">
                    <font>
@@ -1850,7 +1850,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="5" column="0">
+                <item row="6" column="0">
                  <widget class="QGroupBox" name="groupBox_10">
                   <property name="font">
                    <font>
@@ -2028,7 +2028,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="6" column="0">
+                <item row="7" column="0">
                  <widget class="QGroupBox" name="groupBox_11">
                   <property name="font">
                    <font>
@@ -2237,7 +2237,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="7" column="0">
+                <item row="8" column="0">
                  <widget class="QGroupBox" name="groupBox_12">
                   <property name="font">
                    <font>
@@ -2401,7 +2401,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="8" column="0">
+                <item row="9" column="0">
                  <widget class="QGroupBox" name="groupBox_13">
                   <property name="font">
                    <font>
@@ -2525,6 +2525,258 @@
                         </size>
                        </property>
                       </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QGroupBox" name="groupBox_14">
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="title">
+                   <string> Aften A/52 Options </string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_36">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="gridLayout_35">
+                     <item row="1" column="5">
+                      <widget class="QComboBox" name="comboBoxAftenDRCMode">
+                       <property name="currentIndex">
+                        <number>5</number>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Film Light</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Film Standard</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Music Light</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Music Standard</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Speech</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>None (Default)</string>
+                        </property>
+                       </item>
+                      </widget>
+                     </item>
+                     <item row="1" column="2">
+                      <widget class="QComboBox" name="comboBoxAftenCodingMode">
+                       <item>
+                        <property name="text">
+                         <string>Auto Select</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>1+1 (Ch1,Ch2)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>1/0 (C)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>2/0 (L,R)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>3/0 (L,R,C)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>2/1 (L,R,S)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>3/1 (L,R,C,S)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>2/2 (L,R,SL,SR)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>3/2 (L,R,C,SL,SR)</string>
+                        </property>
+                       </item>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QLabel" name="label_14">
+                       <property name="text">
+                        <string>Audio Coding Mode:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="4">
+                      <widget class="QLabel" name="label_15">
+                       <property name="text">
+                        <string>Dynamic Range Compression:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="3">
+                      <spacer name="horizontalSpacer_39">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="0" rowspan="3">
+                      <spacer name="horizontalSpacer_40">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="7" rowspan="3">
+                      <spacer name="horizontalSpacer_41">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1" colspan="6">
+                      <spacer name="verticalSpacer_23">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="4" column="1" colspan="6">
+                      <spacer name="verticalSpacer_24">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>8</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="6">
+                      <spacer name="horizontalSpacer_42">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="2" column="1" colspan="6">
+                      <spacer name="verticalSpacer_25">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>6</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="3" column="1" colspan="2">
+                      <widget class="QCheckBox" name="checkBoxAftenFastAllocation">
+                       <property name="text">
+                        <string>Fast Bit Allocation (Less Accurate)</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="4">
+                      <widget class="QLabel" name="label_16">
+                       <property name="text">
+                        <string>Exponent Search Size:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="5">
+                      <widget class="QSpinBox" name="spinBoxAftenSearchSize">
+                       <property name="minimum">
+                        <number>1</number>
+                       </property>
+                       <property name="maximum">
+                        <number>32</number>
+                       </property>
+                       <property name="value">
+                        <number>8</number>
+                       </property>
+                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -2819,9 +3071,10 @@
      <addaction name="separator"/>
      <addaction name="actionCheckForBetaUpdates"/>
     </widget>
-    <addaction name="menuConfiguration"/>
     <addaction name="actionInstallWMADecoder"/>
     <addaction name="actionShowDropBoxWidget"/>
+    <addaction name="separator"/>
+    <addaction name="menuConfiguration"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -3139,6 +3392,10 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
