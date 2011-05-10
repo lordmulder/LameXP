@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Внимание: это демо (пре-релиз) версия LameXP прекратит работу %1. Осталось %2 дней.</translation>
     </message>
     <message>
         <source>Aften &amp;minus; A/52 audio encoder</source>
@@ -258,7 +258,7 @@
     <name>DiskObserverThread</name>
     <message>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Мало свободного места на диске &apos;%1&apos; (свободного всего %2 Мб), могут возникнуть проблемы!</translation>
     </message>
 </context>
 <context>
@@ -750,7 +750,7 @@
     </message>
     <message>
         <source>Open Folder Recursively...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открытие папок рекурсивно...</translation>
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
@@ -782,7 +782,7 @@
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Поиск файлов, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Downloading WMA Decoder Setup, please wait...</source>
@@ -1216,7 +1216,7 @@
     </message>
     <message>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добавить папку</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
@@ -1256,23 +1256,23 @@
     </message>
     <message>
         <source>Check for Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Поиск БЕТА версий</translation>
     </message>
     <message>
         <source>Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">БЕТА обновления</translation>
     </message>
     <message>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вы действительно хотите проверить наличие БЕТА (пред-релизных) обновлений?</translation>
     </message>
     <message>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP бует проверять наличие БЕТА (пред-релизных) обновлений.</translation>
     </message>
     <message>
         <source>Check Now</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Проверить сейчас</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -1280,7 +1280,7 @@
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP не бует &lt;i&gt;проверять&lt;/i&gt; наличие БЕТА (пред-релизных) обновлений.</translation>
     </message>
     <message>
         <source>Aften A/52</source>
@@ -1402,11 +1402,11 @@
     <name>MetaInfoDialog</name>
     <message>
         <source>Load Artwork From File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Загрузить картинку из файла</translation>
     </message>
     <message>
         <source>Clear Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Удалить картинку</translation>
     </message>
     <message>
         <source>Meta Information</source>
@@ -1418,15 +1418,16 @@
     </message>
     <message>
         <source>Load Artwork</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Загрузить картинку</translation>
     </message>
     <message>
         <source>Artwork Error</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>!!переделать!!</translatorcomment>
+        <translation type="unfinished">Ошибка с картинкой</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Извините, немогу загрузит картинку из выделенного файла!</translation>
     </message>
 </context>
 <context>
@@ -1790,7 +1791,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исполняемому файлу &apos;%1&apos; требуется как минимум WindowsXP.</translation>
     </message>
 </context>
 <context>
@@ -1907,15 +1908,16 @@
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скачиваю обновления, будте терпеливы...</translation>
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Обновление готово к инсталяции. Завершение приложения...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Фак май майнд</translatorcomment>
+        <translation type="unfinished">Немогу установит обновление.Пожалуйста попробуйте снова или установите обновление вручную!</translation>
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
