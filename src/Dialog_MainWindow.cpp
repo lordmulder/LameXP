@@ -29,6 +29,7 @@
 #include "Dialog_About.h"
 #include "Dialog_Update.h"
 #include "Dialog_DropBox.h"
+#include "Dialog_CueImport.h"
 #include "Thread_FileAnalyzer.h"
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
@@ -340,6 +341,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
 	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
 	connect(actionCheckForBetaUpdates, SIGNAL(triggered(bool)), this, SLOT(checkForBetaUpdatesActionTriggered(bool)));
+	connect(actionImportCueSheet, SIGNAL(triggered(bool)), this, SLOT(importCueSheetActionTriggered(bool)));
 		
 	//Activate help menu actions
 	actionVisitHomepage->setData(QString::fromLatin1(lamexp_website_url()));
@@ -2554,6 +2556,21 @@ void MainWindow::installWMADecoderActionTriggered(bool checked)
 			return;
 		}
 	}
+}
+
+/*
+ * Import a Cue Sheet file
+ */
+void MainWindow::importCueSheetActionTriggered(bool checked)
+{
+	ABORT_IF_BUSY;
+	
+	TEMP_HIDE_DROPBOX
+	(
+		CueImportDialog *cueImporter  = new CueImportDialog(this);
+		cueImporter->exec(QString());
+		LAMEXP_DELETE(cueImporter);
+	)
 }
 
 /*

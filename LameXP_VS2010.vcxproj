@@ -244,6 +244,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Decoder_WavPack.cpp" />
     <ClCompile Include="src\Decoder_WMA.cpp" />
     <ClCompile Include="src\Dialog_About.cpp" />
+    <ClCompile Include="src\Dialog_CueImport.cpp" />
     <ClCompile Include="src\Dialog_DropBox.cpp" />
     <ClCompile Include="src\Dialog_LogView.cpp" />
     <ClCompile Include="src\Dialog_MainWindow.cpp" />
@@ -270,6 +271,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Model_Artwork.cpp" />
     <ClCompile Include="src\Model_AudioFile.cpp" />
+    <ClCompile Include="src\Model_CueSheet.cpp" />
     <ClCompile Include="src\Model_FileList.cpp" />
     <ClCompile Include="src\Model_FileSystem.cpp" />
     <ClCompile Include="src\Model_MetaInfo.cpp" />
@@ -288,6 +290,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\WinSevenTaskbar.cpp" />
     <ClCompile Include="tmp\MOC_Decoder_Abstract.cpp" />
     <ClCompile Include="tmp\MOC_Dialog_About.cpp" />
+    <ClCompile Include="tmp\MOC_Dialog_CueImport.cpp" />
     <ClCompile Include="tmp\MOC_Dialog_DropBox.cpp" />
     <ClCompile Include="tmp\MOC_Dialog_LogView.cpp" />
     <ClCompile Include="tmp\MOC_Dialog_MainWindow.cpp" />
@@ -305,6 +308,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="tmp\MOC_Encoder_Wave.cpp" />
     <ClCompile Include="tmp\MOC_Filter_Abstract.cpp" />
     <ClCompile Include="tmp\MOC_Model_AudioFile.cpp" />
+    <ClCompile Include="tmp\MOC_Model_CueSheet.cpp" />
     <ClCompile Include="tmp\MOC_Model_FileList.cpp" />
     <ClCompile Include="tmp\MOC_Model_MetaInfo.cpp" />
     <ClCompile Include="tmp\MOC_Model_Progress.cpp" />
@@ -338,6 +342,29 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <CustomBuild Include="src\Dialog_CueImport.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="src\Model_CueSheet.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="tmp\UIC_CueSheetImport.h" />
     <ClInclude Include="tmp\UIC_DropBox.h" />
     <ClInclude Include="tmp\UIC_LogViewDialog.h" />
     <ClInclude Include="tmp\UIC_MainWindow.h" />
@@ -866,6 +893,18 @@ del "$(TargetDir)imageformats\q???d4.dll"
 </Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="gui\CueSheetImport.ui">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o "$(SolutionDir)tmp\UIC_%(Filename).h" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\uic.exe" -o "$(SolutionDir)tmp\UIC_%(Filename).h" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o "$(SolutionDir)tmp\UIC_%(Filename).h" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC "$(SolutionDir)tmp\UIC_%(Filename).h"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">UIC "$(SolutionDir)tmp\UIC_%(Filename).h"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC "$(SolutionDir)tmp\UIC_%(Filename).h"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\UIC_%(Filename).h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\UIC_%(Filename).h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\UIC_%(Filename).h;%(Outputs)</Outputs>
     </CustomBuild>
     <None Include="res\MainIcon.ico" />
     <CustomBuild Include="res\Tools.qrc">

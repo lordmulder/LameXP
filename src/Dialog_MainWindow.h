@@ -118,6 +118,7 @@ private slots:
 	void outputFolderContextMenu(const QPoint &pos);
 	void showFolderContextActionTriggered(void);
 	void installWMADecoderActionTriggered(bool checked);
+	void importCueSheetActionTriggered(bool checked);
 	void disableNeroAacNotificationsActionTriggered(bool checked);
 	void disableWmaDecoderNotificationsActionTriggered(bool checked);
 	void showDropBoxWidgetActionTriggered(bool checked);
