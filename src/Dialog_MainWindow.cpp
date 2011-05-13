@@ -2567,9 +2567,13 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 	
 	TEMP_HIDE_DROPBOX
 	(
-		CueImportDialog *cueImporter  = new CueImportDialog(this);
-		cueImporter->exec(QString());
-		LAMEXP_DELETE(cueImporter);
+		QString selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), QString(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
+		if(!selectedCueFile.isEmpty())
+		{
+			CueImportDialog *cueImporter  = new CueImportDialog(this);
+			cueImporter->exec(selectedCueFile);
+			LAMEXP_DELETE(cueImporter);
+		}
 	)
 }
 

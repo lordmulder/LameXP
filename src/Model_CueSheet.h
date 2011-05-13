@@ -44,6 +44,12 @@ public:
 	QModelIndex parent(const QModelIndex &child) const;
 	void clearData(void);
 
+	//Cue Sheet functions
+	int loadCueSheet(const QString &cueFile);
+
 private:
+	int parseCueFile(QFile &cueFile);
+	double parseTimeIndex(const QString &index);
+	QString indexToString(const double index) const;
 	QList<CueSheetFile*> m_files;
 };

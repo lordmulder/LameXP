@@ -49,6 +49,7 @@ CueImportDialog::CueImportDialog(QWidget *parent)
 
 	//Create model
 	m_model = new CueSheetModel();
+	connect(m_model, SIGNAL(modelReset()), this, SLOT(modelChanged()));
 	
 	//Setup table view
 	treeView->setModel(m_model);
@@ -57,10 +58,10 @@ CueImportDialog::CueImportDialog(QWidget *parent)
 	treeView->header()->setResizeMode(1, QHeaderView::Stretch);
 	treeView->header()->setMovable(false);
 	treeView->setItemsExpandable(false);
-	treeView->expandAll();
 
 	//Enable up/down button
 	connect(imprtButton, SIGNAL(clicked()), this, SLOT(importButtonClicked()));
+	connect(browseButton, SIGNAL(clicked()), this, SLOT(importButtonClicked()));
 
 	//Translate
 	labelHeaderText->setText(QString("<b>%1</b><br>%2").arg(tr("Import Cue Sheet"), tr("The following Cue Sheet will be split and imported into LameXP.")));
@@ -72,52 +73,51 @@ CueImportDialog::~CueImportDialog(void)
 }
 
 ////////////////////////////////////////////////////////////
+// EVENTS
+////////////////////////////////////////////////////////////
+
+void CueImportDialog::showEvent(QShowEvent *event)
+{
+	QDialog::showEvent(event);
+	modelChanged();
+}
+
+////////////////////////////////////////////////////////////
 // Slots
 ////////////////////////////////////////////////////////////
 
 int CueImportDialog::exec(const QString &cueFile)
 {
-	/*
-	MetaInfoModel *model = new MetaInfoModel(&audioFile);
-	tableView->setModel(model);
-	tableView->show();
-	frameArtwork->hide();
-	setWindowTitle(QString("Meta Information: %1").arg(QFileInfo(audioFile.filePath()).fileName()));
-	editButton->setEnabled(true);
-	upButton->setEnabled(allowUp);
-	downButton->setEnabled(allowDown);
-	buttonArtwork->setChecked(false);
-
-	if(!audioFile.fileCover().isEmpty())
+	int iResult = m_model->loadCueSheet(cueFile);
+	
+	if(iResult)
 	{
-		QImage artwork;
-		if(artwork.load(audioFile.fileCover()))
+		QString errorMsg = tr("An unknown error has occured!");
+		
+		switch(iResult)
 		{
-			if((artwork.width() > 256) || (artwork.height() > 256))
-			{
-				artwork = artwork.scaled(256, 256, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-			}
-			labelArtwork->setPixmap(QPixmap::fromImage(artwork));
+		case 1:
+			errorMsg = tr("The file could not be opened for reading!");
+			break;
+		case 2:
+			errorMsg = tr("The file does not look like a valid Cue Sheet file!");
+			break;
+		case 3:
+			errorMsg = tr("Could not find a supported audio track in the Cue Sheet!");
+			break;
 		}
-		else
-		{
-			qWarning("Error: Failed to load cover art!");
-			labelArtwork->setPixmap(QPixmap::fromImage(QImage(":/images/CD.png")));
-		}
-	}
-	else
-	{
-		labelArtwork->setPixmap(QPixmap::fromImage(QImage(":/images/CD.png")));
+		
+		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), cueFile, errorMsg).replace("-", "&minus;");
+		QMessageBox::warning(dynamic_cast<QWidget*>(parent()), tr("Cue Sheet Error"), text);
+		return iResult;
 	}
 
-	int iResult = QDialog::exec();
-	
-	tableView->setModel(NULL);
-	LAMEXP_DELETE(model);
-
-	return iResult;*/
-	
 	return QDialog::exec();
+}
+
+void CueImportDialog::modelChanged(void)
+{
+	treeView->expandAll();
 }
 
 void CueImportDialog::importButtonClicked(void)

@@ -38,8 +38,12 @@ public:
 
 	int exec(const QString &cueFile);
 
+protected:
+	void CueImportDialog::showEvent(QShowEvent *event);
+
 private slots:
 	void importButtonClicked(void);
+	void modelChanged(void);
 
 private:
 	CueSheetModel *m_model;

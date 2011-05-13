@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>621</width>
-    <height>478</height>
+    <width>700</width>
+    <height>463</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -286,7 +286,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Abort</string>
+            <string>Discard</string>
            </property>
            <property name="icon">
             <iconset resource="../res/Icons.qrc">
@@ -318,6 +318,8 @@
  </tabstops>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
