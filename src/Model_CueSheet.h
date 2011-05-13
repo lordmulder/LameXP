@@ -26,6 +26,7 @@
 #include <QIcon>
 
 class CueSheetFile;
+class QApplication;
 
 class CueSheetModel : public QAbstractItemModel
 {
@@ -45,10 +46,10 @@ public:
 	void clearData(void);
 
 	//Cue Sheet functions
-	int loadCueSheet(const QString &cueFile);
+	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL);
 
 private:
-	int parseCueFile(QFile &cueFile);
+	int parseCueFile(QFile &cueFile, QCoreApplication *application);
 	double parseTimeIndex(const QString &index);
 	QString indexToString(const double index) const;
 	QList<CueSheetFile*> m_files;

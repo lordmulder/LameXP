@@ -1023,8 +1023,8 @@ void MainWindow::aboutButtonClicked(void)
  */
 void MainWindow::encodeButtonClicked(void)
 {
-	static const __int64 oneGigabyte = 1073741824; 
-	static const __int64 minimumFreeDiskspaceMultiplier = 2;
+	static const __int64 oneGigabyte = 1073741824i64; 
+	static const __int64 minimumFreeDiskspaceMultiplier = 2i64;
 	
 	ABORT_IF_BUSY;
 

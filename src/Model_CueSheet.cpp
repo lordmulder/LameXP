@@ -23,6 +23,7 @@
 #include "Model_CueSheet.h"
 #include "Genres.h"
 
+#include <QApplication>
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QFileInfo>
@@ -262,7 +263,7 @@ void CueSheetModel::clearData(void)
 // Cue Sheet Parser
 ////////////////////////////////////////////////////////////
 
-int CueSheetModel::loadCueSheet(const QString &cueFileName)
+int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *application)
 {
 	QFile cueFile(cueFileName);
 	if(!cueFile.open(QIODevice::ReadOnly))
@@ -273,24 +274,29 @@ int CueSheetModel::loadCueSheet(const QString &cueFileName)
 	clearData();
 
 	beginResetModel();
-	int iResult = parseCueFile(cueFile);
+	int iResult = parseCueFile(cueFile, application);
 	endResetModel();
 
 	return iResult;
 }
 
-int CueSheetModel::parseCueFile(QFile &cueFile)
+int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 {
 	cueFile.seek(0);
+	qDebug("\n[Cue Sheet Import]");
 
-	//Check for UTF-8 BOM to guess encoding
-	bool bUTF8 = false;
-	QByteArray bomCheck = cueFile.peek(3);
-	if(bomCheck.size() == 3)
+	//Reject very large files, as parsing might take until forever
+	if(cueFile.size() >= 10485760i64)
 	{
-		bUTF8 = ((bomCheck.at(0) == '\xef') && (bomCheck.at(1) == '\xbb') && (bomCheck.at(2) == '\xbf'));
-		qDebug("Encoding is %s.", (bUTF8 ? "UTF-8" : "Local 8-Bit"));
+		qWarning("File is very big. Probably not a Cue Sheet. Rejecting...");
+		return 2;
 	}
+
+	//Check for UTF-8 BOM in order to guess encoding
+	QByteArray bomCheck = cueFile.peek(128);
+	bool bUTF8 = bomCheck.contains("\xef\xbb\xbf");
+	qDebug("Encoding is %s.", (bUTF8 ? "UTF-8" : "Local 8-Bit"));
+	bomCheck.clear();
 
 	QRegExp rxFile("^FILE\\s+\"([^\"]+)\"\\s+(\\w+)$", Qt::CaseInsensitive);
 	QRegExp rxTrack("^TRACK\\s+(\\d+)\\s(\\w+)$", Qt::CaseInsensitive);
@@ -298,11 +304,11 @@ int CueSheetModel::parseCueFile(QFile &cueFile)
 	QRegExp rxTitle("^TITLE\\s+\"([^\"]+)\"$", Qt::CaseInsensitive);
 	QRegExp rxPerformer("^PERFORMER\\s+\"([^\"]+)\"$", Qt::CaseInsensitive);
 	
-	CueSheetFile *currentFile = NULL;
-	CueSheetTrack *currentTrack = NULL;
-	
 	bool bPreamble = true;
 	bool bUnsupportedTrack = false;
+
+	CueSheetFile *currentFile = NULL;
+	CueSheetTrack *currentTrack = NULL;
 
 	QString albumTitle;
 	QString albumPerformer;
@@ -310,6 +316,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile)
 	//Loop over the Cue Sheet until all lines were processed
 	while(true)
 	{
+		if(application)
+		{
+			application->processEvents();
+			Sleep(25);
+		}
+		
 		QByteArray lineData = cueFile.readLine();
 		if(lineData.size() <= 0)
 		{
@@ -354,6 +366,10 @@ int CueSheetModel::parseCueFile(QFile &cueFile)
 				{
 					LAMEXP_DELETE(currentFile);
 				}
+			}
+			else
+			{
+				LAMEXP_DELETE(currentTrack);
 			}
 			if(!rxFile.cap(2).compare("WAVE", Qt::CaseInsensitive) || !rxFile.cap(2).compare("MP3", Qt::CaseInsensitive) || !rxFile.cap(2).compare("AIFF", Qt::CaseInsensitive))
 			{

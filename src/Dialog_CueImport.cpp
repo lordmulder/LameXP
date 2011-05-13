@@ -23,11 +23,13 @@
 
 #include "Global.h"
 #include "Model_CueSheet.h"
+#include "Dialog_WorkingBanner.h"
 
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QTimer>
 #include <QFileDialog>
+#include <QProgressDialog>
 #include <QMenu>
 
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
@@ -88,7 +90,11 @@ void CueImportDialog::showEvent(QShowEvent *event)
 
 int CueImportDialog::exec(const QString &cueFile)
 {
-	int iResult = m_model->loadCueSheet(cueFile);
+	WorkingBanner *progress = new WorkingBanner(dynamic_cast<QWidget*>(parent()));
+	progress->show(tr("Loading Cue Sheet file, please be patient..."));
+	int iResult = m_model->loadCueSheet(cueFile, QApplication::instance());
+	progress->close();
+	LAMEXP_DELETE(progress);
 	
 	if(iResult)
 	{
@@ -100,7 +106,7 @@ int CueImportDialog::exec(const QString &cueFile)
 			errorMsg = tr("The file could not be opened for reading!");
 			break;
 		case 2:
-			errorMsg = tr("The file does not look like a valid Cue Sheet file!");
+			errorMsg = tr("The file does not look like a valid Cue Sheet disc image file!");
 			break;
 		case 3:
 			errorMsg = tr("Could not find a supported audio track in the Cue Sheet!");
