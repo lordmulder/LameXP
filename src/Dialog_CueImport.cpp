@@ -23,7 +23,9 @@
 
 #include "Global.h"
 #include "Model_CueSheet.h"
+#include "Model_AudioFile.h"
 #include "Dialog_WorkingBanner.h"
+#include "Thread_FileAnalyzer.h"
 
 #include <QFileInfo>
 #include <QMessageBox>
@@ -96,6 +98,8 @@ int CueImportDialog::exec(const QString &cueFile)
 	QFileInfo cueFileInfo(cueFile);
 	m_outputDir = QFileInfo(cueFile).canonicalPath();
 
+	setWindowTitle(QString("%1: %2").arg(windowTitle().split(":", QString::SkipEmptyParts).first().trimmed(), cueFileInfo.fileName()));
+
 	if(!cueFileInfo.exists() || !cueFileInfo.isFile() || m_outputDir.isEmpty())
 	{
 		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(cueFile), tr("The specified file could not be found!")).replace("-", "&minus;");
@@ -156,5 +160,67 @@ void CueImportDialog::browseButtonClicked(void)
 
 void CueImportDialog::importButtonClicked(void)
 {
-	QMessageBox::information(this, "Not implemenred", "Sorry, not yet. Please try again in a later version!");
+	static const __int64 oneGigabyte = 1073741824i64; 
+	static const __int64 minimumFreeDiskspaceMultiplier = 2i64;
+	static const char *writeTestBuffer = "LAMEXP_WRITE_TEST";
+	
+	QFile writeTest(QString("%1/~%2.txt").arg(m_outputDir, lamexp_rand_str()));
+	if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
+	{
+		QMessageBox::warning(this, tr("LameXP"), QString("<nobr>%2</nobr>").arg(tr("Error: The selected output directory is not writable!")));
+		return;
+	}
+	else
+	{
+		writeTest.close();
+		writeTest.remove();
+	}
+
+	qint64 currentFreeDiskspace = lamexp_free_diskspace(m_outputDir);
+	if(currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier))
+	{
+		QMessageBox::warning(this, tr("Low Diskspace Warning"), QString("<nobr>%1</nobr><br><nobr>%2</nobr>").arg(tr("There are less than %1 GB of free diskspace available in the selected output directory.").arg(QString::number(minimumFreeDiskspaceMultiplier)), tr("It is highly recommend to free up more diskspace before proceeding with the import!")));
+		return;
+	}
+
+	importCueSheet();
+}
+
+void CueImportDialog::analyzedFile(const AudioFileModel &file)
+{
+	qWarning("Received results for: %s", file.filePath().toLatin1().constData());
+	m_fileInfo.insert(file.filePath(), file);
+}
+
+////////////////////////////////////////////////////////////
+// Private FUnctions
+////////////////////////////////////////////////////////////
+
+void CueImportDialog::importCueSheet(void)
+{
+	QStringList files;
+	int nFiles = m_model->getFileCount();
+
+	//Fetch all files that are referenced in the Cue Sheet
+	for(int i = 0; i < nFiles; i++)
+	{
+		files << m_model->getFileName(i);
+	}
+	
+	//Analyze all source files
+	analyzeFiles(files);
+}
+
+void CueImportDialog::analyzeFiles(QStringList &files)
+{
+	m_fileInfo.clear();
+
+	WorkingBanner *progress = new WorkingBanner(dynamic_cast<QWidget*>(parent()));
+	FileAnalyzer *analyzer = new FileAnalyzer(files);
+	connect(analyzer, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
+	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), this, SLOT(analyzedFile(AudioFileModel)), Qt::QueuedConnection);
+
+	progress->show(tr("Adding file(s), please wait..."), analyzer);
+	progress->close();
+	LAMEXP_DELETE(progress);
 }

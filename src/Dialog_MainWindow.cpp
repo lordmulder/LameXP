@@ -1025,6 +1025,7 @@ void MainWindow::encodeButtonClicked(void)
 {
 	static const __int64 oneGigabyte = 1073741824i64; 
 	static const __int64 minimumFreeDiskspaceMultiplier = 2i64;
+	static const char *writeTestBuffer = "LAMEXP_WRITE_TEST";
 	
 	ABORT_IF_BUSY;
 
@@ -1081,8 +1082,8 @@ void MainWindow::encodeButtonClicked(void)
 
 	if(!m_settings->outputToSourceDir())
 	{
-		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), QUuid::createUuid().toString()));
-		if(!writeTest.open(QIODevice::ReadWrite))
+		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), lamexp_rand_str()));
+		if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 		{
 			QMessageBox::warning(this, tr("LameXP"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("Cannot write to the selected output directory."), m_settings->outputDir(), tr("Please choose a different directory!")));
 			tabWidget->setCurrentIndex(1);

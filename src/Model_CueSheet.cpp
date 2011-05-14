@@ -260,6 +260,19 @@ QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 			}
 		}
 	}
+	else if(role == Qt::ToolTipRole)
+	{
+		CueSheetItem *item = reinterpret_cast<CueSheetItem*>(index.internalPointer());
+
+		if(CueSheetFile *filePtr = dynamic_cast<CueSheetFile*>(item))
+		{
+			return QDir::toNativeSeparators(filePtr->fileName());
+		}
+		else if(CueSheetTrack *trackPtr = dynamic_cast<CueSheetTrack*>(item))
+		{
+			return QDir::toNativeSeparators(trackPtr->parent()->fileName());
+		}
+	}
 	else if(role == Qt::FontRole)
 	{
 		QFont font("Monospace");
@@ -278,7 +291,7 @@ QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 			CueSheetItem *item = reinterpret_cast<CueSheetItem*>(index.internalPointer());
 			if(CueSheetFile *filePtr = dynamic_cast<CueSheetFile*>(item))
 			{
-				return QFileInfo(filePtr->fileName()).exists() ? QColor("mediumblue") : QColor("darkred");
+				return (QFileInfo(filePtr->fileName()).size() > 4) ? QColor("mediumblue") : QColor("darkred");
 			}
 		}
 		else if((index.column() == 3))
@@ -302,6 +315,52 @@ void CueSheetModel::clearData(void)
 	beginResetModel();
 	while(!m_files.isEmpty()) delete m_files.takeLast();
 	endResetModel();
+}
+
+////////////////////////////////////////////////////////////
+// External API
+////////////////////////////////////////////////////////////
+
+int CueSheetModel::getFileCount(void)
+{
+	return m_files.count();
+}
+
+QString CueSheetModel::getFileName(int fileIndex)
+{
+	if(fileIndex < 0 || fileIndex >= m_files.count())
+	{
+		return QString();
+	}
+
+	return m_files.at(fileIndex)->fileName();
+}
+
+int CueSheetModel::getTrackCount(int fileIndex)
+{
+	if(fileIndex < 0 || fileIndex >= m_files.count())
+	{
+		return -1;
+	}
+
+	return m_files.at(fileIndex)->trackCount();
+}
+
+void CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration)
+{
+	*startIndex = std::numeric_limits<double>::quiet_NaN();
+	*duration = std::numeric_limits<double>::quiet_NaN();
+
+	if(fileIndex >= 0 && fileIndex < m_files.count())
+	{
+		CueSheetFile *currentFile = m_files.at(fileIndex);
+		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
+		{
+			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
+			*startIndex = currentTrack->startIndex();
+			*duration = currentTrack->duration();
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -359,12 +418,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	QString albumPerformer;
 
 	//Loop over the Cue Sheet until all lines were processed
-	while(true)
+	for(int lines = 0; lines < INT_MAX; lines++)
 	{
 		if(application)
 		{
 			application->processEvents();
-			Sleep(10);
+			if(lines < 128) Sleep(10);
 		}
 		
 		QByteArray lineData = cueFile.readLine();
@@ -379,7 +438,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		/* --- FILE --- */
 		if(rxFile.indexIn(line) >= 0)
 		{
-			qDebug("File: <%s> <%s>", rxFile.cap(1).toUtf8().constData(), rxFile.cap(2).toUtf8().constData());
+			qDebug("%03d File: <%s> <%s>", lines, rxFile.cap(1).toUtf8().constData(), rxFile.cap(2).toUtf8().constData());
 			if(currentFile)
 			{
 				if(currentTrack)
@@ -413,12 +472,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			if(!rxFile.cap(2).compare("WAVE", Qt::CaseInsensitive) || !rxFile.cap(2).compare("MP3", Qt::CaseInsensitive) || !rxFile.cap(2).compare("AIFF", Qt::CaseInsensitive))
 			{
 				currentFile = new CueSheetFile(baseDir.absoluteFilePath(rxFile.cap(1)));
-				qDebug("File path: <%s>", currentFile->fileName().toUtf8().constData());
+				qDebug("%03d File path: <%s>", lines, currentFile->fileName().toUtf8().constData());
 			}
 			else
 			{
 				bUnsupportedTrack = true;
-				qWarning("Skipping unsupported file of type '%s'.", rxFile.cap(2).toUtf8().constData());
+				qWarning("%03d Skipping unsupported file of type '%s'.", lines, rxFile.cap(2).toUtf8().constData());
 				currentFile = NULL;
 			}
 			bPreamble = false;
@@ -431,7 +490,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(currentFile)
 			{
-				qDebug("  Track: <%s> <%s>", rxTrack.cap(1).toUtf8().constData(), rxTrack.cap(2).toUtf8().constData());
+				qDebug("%03d   Track: <%s> <%s>", lines, rxTrack.cap(1).toUtf8().constData(), rxTrack.cap(2).toUtf8().constData());
 				if(currentTrack)
 				{
 					if(currentTrack->isValid())
@@ -453,7 +512,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				else
 				{
 					bUnsupportedTrack = true;
-					qWarning("  Skipping unsupported track of type '%s'.", rxTrack.cap(2).toUtf8().constData());
+					qWarning("%03d   Skipping unsupported track of type '%s'.", lines, rxTrack.cap(2).toUtf8().constData());
 					currentTrack = NULL;
 				}
 			}
@@ -470,7 +529,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(currentFile && currentTrack)
 			{
-				qDebug("    Index: <%s> <%s>", rxIndex.cap(1).toUtf8().constData(), rxIndex.cap(2).toUtf8().constData());
+				qDebug("%03d     Index: <%s> <%s>", lines, rxIndex.cap(1).toUtf8().constData(), rxIndex.cap(2).toUtf8().constData());
 				if(rxIndex.cap(1).toInt() == 1)
 				{
 					currentTrack->setStartIndex(parseTimeIndex(rxIndex.cap(2)));
@@ -488,7 +547,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			}
 			else if(currentFile && currentTrack)
 			{
-				qDebug("    Title: <%s>", rxTitle.cap(1).toUtf8().constData());
+				qDebug("%03d     Title: <%s>", lines, rxTitle.cap(1).toUtf8().constData());
 				currentTrack->setTitle(rxTitle.cap(1));
 			}
 			continue;
@@ -503,7 +562,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			}
 			else if(currentFile && currentTrack)
 			{
-				qDebug("    Title: <%s>", rxPerformer.cap(1).toUtf8().constData());
+				qDebug("%03d     Title: <%s>", lines, rxPerformer.cap(1).toUtf8().constData());
 				currentTrack->setPerformer(rxPerformer.cap(1));
 			}
 			continue;

@@ -45,8 +45,13 @@ private slots:
 	void browseButtonClicked(void);
 	void importButtonClicked(void);
 	void modelChanged(void);
+	void analyzedFile(const AudioFileModel &file);
 
 private:
+	void importCueSheet(void);
+	void analyzeFiles(QStringList &files);
+
 	CueSheetModel *m_model;
+	QMap<QString, AudioFileModel> m_fileInfo;
 	QString m_outputDir;
 };

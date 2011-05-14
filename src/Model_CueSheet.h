@@ -57,6 +57,12 @@ public:
 	QModelIndex parent(const QModelIndex &child) const;
 	void clearData(void);
 
+	//External API
+	int CueSheetModel::getFileCount(void);
+	QString getFileName(int fileIndex);
+	int getTrackCount(int fileIndex);
+	void getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration);
+
 	//Cue Sheet functions
 	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL);
 
