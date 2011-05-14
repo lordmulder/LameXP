@@ -258,23 +258,67 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The file could not be opened for reading!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not find a supported audio track in the Cue Sheet!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Failed to load the Cue Sheet file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The specified file could not be found!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file could not be opened for reading. Make sure you have the required rights!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find any supported audio track in the Cue Sheet image!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Output Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP</source>
+        <translation type="unfinished">LameXP</translation>
+    </message>
+    <message>
+        <source>Error: The selected output directory is not writable!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low Diskspace Warning</source>
+        <translation type="unfinished">Warnung: Wenig freier Festplattenspeicher</translation>
+    </message>
+    <message>
+        <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Analyzing file(s), please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Splitting file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -295,6 +339,14 @@
     <message>
         <source>Discard</source>
         <translation type="unfinished">Schließen</translation>
+    </message>
+    <message>
+        <source>Existing Source File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing Source File (Tracks will be skipped!)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -326,6 +378,10 @@
     <message>
         <source>Unknown Title</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Dauer</translation>
     </message>
 </context>
 <context>

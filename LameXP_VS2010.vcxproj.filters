@@ -301,6 +301,12 @@
     <ClCompile Include="tmp\MOC_Model_CueSheet.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Thread_CueSplitter.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_CueSplitter.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -568,6 +574,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Model_CueSheet.h">
       <Filter>Header Files\Models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CueSplitter.h">
+      <Filter>Header Files\Threads</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

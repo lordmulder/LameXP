@@ -280,6 +280,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\PlaylistImporter.cpp" />
     <ClCompile Include="src\Registry_Decoder.cpp" />
     <ClCompile Include="src\ShellIntegration.cpp" />
+    <ClCompile Include="src\Thread_CueSplitter.cpp" />
     <ClCompile Include="src\Thread_DiskObserver.cpp" />
     <ClCompile Include="src\Thread_FileAnalyzer.cpp" />
     <ClCompile Include="src\Thread_Initialization.cpp" />
@@ -314,6 +315,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="tmp\MOC_Model_Progress.cpp" />
     <ClCompile Include="tmp\MOC_Registry_Decoder.cpp" />
     <ClCompile Include="tmp\MOC_ShellIntegration.cpp" />
+    <ClCompile Include="tmp\MOC_Thread_CueSplitter.cpp" />
     <ClCompile Include="tmp\MOC_Thread_DiskObserver.cpp" />
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer.cpp" />
     <ClCompile Include="tmp\MOC_Thread_Initialization.cpp" />
@@ -354,6 +356,17 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="src\Model_CueSheet.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CueSplitter.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>

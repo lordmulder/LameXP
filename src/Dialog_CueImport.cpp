@@ -24,8 +24,11 @@
 #include "Global.h"
 #include "Model_CueSheet.h"
 #include "Model_AudioFile.h"
+#include "Model_FileList.h"
 #include "Dialog_WorkingBanner.h"
 #include "Thread_FileAnalyzer.h"
+#include "Thread_CueSplitter.h"
+#include "LockedFile.h"
 
 #include <QFileInfo>
 #include <QMessageBox>
@@ -40,9 +43,11 @@
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
-CueImportDialog::CueImportDialog(QWidget *parent)
+CueImportDialog::CueImportDialog(QWidget *parent, FileListModel *fileList, const QString &cueFile)
 :
-	QDialog(parent)
+	QDialog(parent),
+	m_cueFileName(cueFile),
+	m_fileList(fileList)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -90,26 +95,33 @@ void CueImportDialog::showEvent(QShowEvent *event)
 // Slots
 ////////////////////////////////////////////////////////////
 
-int CueImportDialog::exec(const QString &cueFile)
+int CueImportDialog::exec(void)
 {
 	WorkingBanner *progress = new WorkingBanner(dynamic_cast<QWidget*>(parent()));
 	progress->show(tr("Loading Cue Sheet file, please be patient..."));
-	
-	QFileInfo cueFileInfo(cueFile);
-	m_outputDir = QFileInfo(cueFile).canonicalPath();
+
+	QFileInfo cueFileInfo(m_cueFileName);
+	QDir outputDir(cueFileInfo.canonicalPath());
+	m_outputDir = outputDir.canonicalPath();
 
 	setWindowTitle(QString("%1: %2").arg(windowTitle().split(":", QString::SkipEmptyParts).first().trimmed(), cueFileInfo.fileName()));
 
 	if(!cueFileInfo.exists() || !cueFileInfo.isFile() || m_outputDir.isEmpty())
 	{
-		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(cueFile), tr("The specified file could not be found!")).replace("-", "&minus;");
+		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(m_cueFileName), tr("The specified file could not be found!")).replace("-", "&minus;");
 		QMessageBox::warning(progress, tr("Cue Sheet Error"), text);
 		progress->close();
 		LAMEXP_DELETE(progress);
 		return CueSheetModel::ErrorIOFailure;
 	}
 
-	int iResult = m_model->loadCueSheet(cueFile, QApplication::instance());
+	outputDir.mkdir(cueFileInfo.completeBaseName());
+	if(outputDir.cd(cueFileInfo.completeBaseName()))
+	{
+		m_outputDir = outputDir.canonicalPath();
+	}
+
+	int iResult = m_model->loadCueSheet(m_cueFileName, QApplication::instance());
 	if(iResult != CueSheetModel::ErrorSuccess)
 	{
 		QString errorMsg = tr("An unknown error has occured!");
@@ -130,7 +142,7 @@ int CueImportDialog::exec(const QString &cueFile)
 			break;
 		}
 		
-		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(cueFile), errorMsg).replace("-", "&minus;");
+		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(m_cueFileName), errorMsg).replace("-", "&minus;");
 		QMessageBox::warning(progress, tr("Cue Sheet Error"), text);
 		progress->close();
 		LAMEXP_DELETE(progress);
@@ -184,31 +196,51 @@ void CueImportDialog::importButtonClicked(void)
 	}
 
 	importCueSheet();
+	accept();
 }
 
 void CueImportDialog::analyzedFile(const AudioFileModel &file)
 {
-	qWarning("Received results for: %s", file.filePath().toLatin1().constData());
-	m_fileInfo.insert(file.filePath(), file);
+	qDebug("Received result: <%s> <%s/%s>", file.filePath().toLatin1().constData(), file.formatContainerType().toLatin1().constData(), file.formatAudioType().toLatin1().constData());
+	m_fileInfo << file;
 }
 
 ////////////////////////////////////////////////////////////
-// Private FUnctions
+// Private Functions
 ////////////////////////////////////////////////////////////
 
 void CueImportDialog::importCueSheet(void)
 {
 	QStringList files;
-	int nFiles = m_model->getFileCount();
 
-	//Fetch all files that are referenced in the Cue Sheet
+	//Fetch all files that are referenced in the Cue Sheet and lock them
+	int nFiles = m_model->getFileCount();
 	for(int i = 0; i < nFiles; i++)
 	{
-		files << m_model->getFileName(i);
+		QString temp = m_model->getFileName(i);
+		try
+		{
+			m_locks << new LockedFile(temp);
+		}
+		catch(char *err)
+		{
+			qWarning("Failed to lock file: %s", err);
+			continue;
+		}
+		files << temp;
 	}
 	
 	//Analyze all source files
 	analyzeFiles(files);
+
+	//Now split files according to Cue Sheet
+	splitFiles();
+
+	//Release locks
+	while(!m_locks.isEmpty())
+	{
+		delete m_locks.takeFirst();
+	}
 }
 
 void CueImportDialog::analyzeFiles(QStringList &files)
@@ -217,10 +249,54 @@ void CueImportDialog::analyzeFiles(QStringList &files)
 
 	WorkingBanner *progress = new WorkingBanner(dynamic_cast<QWidget*>(parent()));
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
+	
 	connect(analyzer, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), this, SLOT(analyzedFile(AudioFileModel)), Qt::QueuedConnection);
 
-	progress->show(tr("Adding file(s), please wait..."), analyzer);
+	progress->show(tr("Analyzing file(s), please wait..."), analyzer);
 	progress->close();
+	LAMEXP_DELETE(progress);
+}
+
+void CueImportDialog::splitFiles(void)
+{
+	WorkingBanner *progress = new WorkingBanner(this);
+	CueSplitter *splitter  = new CueSplitter(m_outputDir, QFileInfo(m_cueFileName).completeBaseName().replace(".", " ").left(42).trimmed(), m_fileInfo);
+	
+	connect(splitter, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
+	connect(splitter, SIGNAL(fileSplit(AudioFileModel)), m_fileList, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+		
+	int nFiles = m_model->getFileCount();
+	for(int i = 0; i < nFiles; i++)
+	{
+		QString currentFileName = m_model->getFileName(i);
+		int nTracks = m_model->getTrackCount(i);
+		
+		for(int j = 0; j < nTracks; j++)
+		{
+			int trackNo = m_model->getTrackNo(i, j);
+			double startIndex = std::numeric_limits<double>::quiet_NaN();
+			double duration = std::numeric_limits<double>::quiet_NaN();
+			m_model->getTrackIndex(i, j, &startIndex, &duration);
+
+			AudioFileModel metaInfo(QString().sprintf("cue://File%02d/Track%02d", i, j));
+			metaInfo.setFileName(m_model->getTrackTitle(i, j));
+			metaInfo.setFileArtist(m_model->getTrackPerformer(i, j));
+			
+			try
+			{
+				splitter->addTrack(trackNo, currentFileName, startIndex, duration, metaInfo);
+			}
+			catch(char *err)
+			{
+				qWarning("Failed to add track #%02d: %s", trackNo, err);
+			}
+		}
+	}
+
+	progress->show(tr("Splitting file(s), please wait..."), splitter);
+	progress->close();
+
+	LAMEXP_DELETE(splitter);
 	LAMEXP_DELETE(progress);
 }

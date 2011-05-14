@@ -346,6 +346,20 @@ int CueSheetModel::getTrackCount(int fileIndex)
 	return m_files.at(fileIndex)->trackCount();
 }
 
+int CueSheetModel::getTrackNo(int fileIndex, int trackIndex)
+{
+	if(fileIndex >= 0 && fileIndex < m_files.count())
+	{
+		CueSheetFile *currentFile = m_files.at(fileIndex);
+		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
+		{
+			return currentFile->track(trackIndex)->trackNo();
+		}
+	}
+
+	return -1;
+}
+
 void CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration)
 {
 	*startIndex = std::numeric_limits<double>::quiet_NaN();
@@ -361,6 +375,34 @@ void CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIn
 			*duration = currentTrack->duration();
 		}
 	}
+}
+
+QString CueSheetModel::getTrackPerformer(int fileIndex, int trackIndex)
+{	
+	if(fileIndex >= 0 && fileIndex < m_files.count())
+	{
+		CueSheetFile *currentFile = m_files.at(fileIndex);
+		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
+		{
+			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
+			return currentTrack->performer();
+		}
+	}
+	return QString();
+}
+
+QString CueSheetModel::getTrackTitle(int fileIndex, int trackIndex)
+{
+	if(fileIndex >= 0 && fileIndex < m_files.count())
+	{
+		CueSheetFile *currentFile = m_files.at(fileIndex);
+		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
+		{
+			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
+			return currentTrack->title();
+		}
+	}
+	return QString();
 }
 
 ////////////////////////////////////////////////////////////
@@ -624,6 +666,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	//Sanity check of track numbers
 	if(nFiles > 0)
 	{
+		int previousTrackNo = -1;
 		bool trackNo[100];
 		for(int i = 0; i < 100; i++)
 		{
@@ -640,12 +683,17 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			int nTracks = currentFile->trackCount();
 			if(nTracks > 1)
 			{
-				for(int j = 1; j < nTracks; j++)
+				for(int j = 0; j < nTracks; j++)
 				{
 					int currentTrackNo = currentFile->track(j)->trackNo();
 					if(currentTrackNo > 99)
 					{
 						qWarning("Track #%02d is invalid (maximum is 99), Cue Sheet is inconsistent!", currentTrackNo);
+						return ErrorInconsistent;
+					}
+					if(currentTrackNo <= previousTrackNo)
+					{
+						qWarning("Non-increasing track numbers, Cue Sheet is inconsistent!", currentTrackNo);
 						return ErrorInconsistent;
 					}
 					if(trackNo[currentTrackNo])
@@ -654,6 +702,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 						return ErrorInconsistent;
 					}
 					trackNo[currentTrackNo] = true;
+					previousTrackNo = currentTrackNo;
 				}
 			}
 		}

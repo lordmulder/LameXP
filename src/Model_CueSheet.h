@@ -61,7 +61,10 @@ public:
 	int CueSheetModel::getFileCount(void);
 	QString getFileName(int fileIndex);
 	int getTrackCount(int fileIndex);
+	int getTrackNo(int fileIndex, int trackIndex);
 	void getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration);
+	QString getTrackPerformer(int fileIndex, int trackIndex);
+	QString getTrackTitle(int fileIndex, int trackIndex);
 
 	//Cue Sheet functions
 	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL);

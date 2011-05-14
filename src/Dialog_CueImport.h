@@ -27,16 +27,18 @@
 #include "Model_AudioFile.h"
 
 class CueSheetModel;
+class LockedFile;
+class FileListModel;
 
 class CueImportDialog : public QDialog, private Ui::CueSheetImport
 {
 	Q_OBJECT
 
 public:
-	CueImportDialog(QWidget *parent);
+	CueImportDialog(QWidget *parent, FileListModel *fileList, const QString &cueFile);
 	~CueImportDialog(void);
 
-	int exec(const QString &cueFile);
+	int exec(void);
 
 protected:
 	void CueImportDialog::showEvent(QShowEvent *event);
@@ -50,8 +52,13 @@ private slots:
 private:
 	void importCueSheet(void);
 	void analyzeFiles(QStringList &files);
+	void CueImportDialog::splitFiles(void);
 
 	CueSheetModel *m_model;
-	QMap<QString, AudioFileModel> m_fileInfo;
+	FileListModel *m_fileList;
+
+	QList<LockedFile*> m_locks;
+	QList<AudioFileModel> m_fileInfo;
+	QString m_cueFileName;
 	QString m_outputDir;
 };

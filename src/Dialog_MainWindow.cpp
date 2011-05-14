@@ -2571,8 +2571,8 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 		QString selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), QString(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
 		if(!selectedCueFile.isEmpty())
 		{
-			CueImportDialog *cueImporter  = new CueImportDialog(this);
-			cueImporter->exec(selectedCueFile);
+			CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile);
+			cueImporter->exec();
 			LAMEXP_DELETE(cueImporter);
 		}
 	)
