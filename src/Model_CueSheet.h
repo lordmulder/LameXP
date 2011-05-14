@@ -27,6 +27,7 @@
 
 class CueSheetFile;
 class QApplication;
+class QDir;
 
 class CueSheetModel : public QAbstractItemModel
 {
@@ -36,6 +37,17 @@ public:
 	CueSheetModel();
 	~CueSheetModel(void);
 
+	//Error codes
+	enum ErrorCode
+	{
+		ErrorSuccess = 0,
+		ErrorIOFailure = 1,
+		ErrorBadFile = 2,
+		ErrorUnsupported = 3,
+		ErrorInconsistent = 4,
+		ErrorUnknown = 9
+	};
+	
 	//Model functions
 	QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -49,7 +61,7 @@ public:
 	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL);
 
 private:
-	int parseCueFile(QFile &cueFile, QCoreApplication *application);
+	int parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application);
 	double parseTimeIndex(const QString &index);
 	QString indexToString(const double index) const;
 	QList<CueSheetFile*> m_files;

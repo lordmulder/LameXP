@@ -42,9 +42,11 @@ protected:
 	void CueImportDialog::showEvent(QShowEvent *event);
 
 private slots:
+	void browseButtonClicked(void);
 	void importButtonClicked(void);
 	void modelChanged(void);
 
 private:
 	CueSheetModel *m_model;
+	QString m_outputDir;
 };

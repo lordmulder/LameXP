@@ -63,7 +63,7 @@ CueImportDialog::CueImportDialog(QWidget *parent)
 
 	//Enable up/down button
 	connect(imprtButton, SIGNAL(clicked()), this, SLOT(importButtonClicked()));
-	connect(browseButton, SIGNAL(clicked()), this, SLOT(importButtonClicked()));
+	connect(browseButton, SIGNAL(clicked()), this, SLOT(browseButtonClicked()));
 
 	//Translate
 	labelHeaderText->setText(QString("<b>%1</b><br>%2").arg(tr("Import Cue Sheet"), tr("The following Cue Sheet will be split and imported into LameXP.")));
@@ -92,38 +92,66 @@ int CueImportDialog::exec(const QString &cueFile)
 {
 	WorkingBanner *progress = new WorkingBanner(dynamic_cast<QWidget*>(parent()));
 	progress->show(tr("Loading Cue Sheet file, please be patient..."));
-	int iResult = m_model->loadCueSheet(cueFile, QApplication::instance());
-	progress->close();
-	LAMEXP_DELETE(progress);
 	
-	if(iResult)
+	QFileInfo cueFileInfo(cueFile);
+	m_outputDir = QFileInfo(cueFile).canonicalPath();
+
+	if(!cueFileInfo.exists() || !cueFileInfo.isFile() || m_outputDir.isEmpty())
+	{
+		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(cueFile), tr("The specified file could not be found!")).replace("-", "&minus;");
+		QMessageBox::warning(progress, tr("Cue Sheet Error"), text);
+		progress->close();
+		LAMEXP_DELETE(progress);
+		return CueSheetModel::ErrorIOFailure;
+	}
+
+	int iResult = m_model->loadCueSheet(cueFile, QApplication::instance());
+	if(iResult != CueSheetModel::ErrorSuccess)
 	{
 		QString errorMsg = tr("An unknown error has occured!");
 		
 		switch(iResult)
 		{
-		case 1:
-			errorMsg = tr("The file could not be opened for reading!");
+		case CueSheetModel::ErrorIOFailure:
+			errorMsg = tr("The file could not be opened for reading. Make sure you have the required rights!");
 			break;
-		case 2:
-			errorMsg = tr("The file does not look like a valid Cue Sheet disc image file!");
+		case CueSheetModel::ErrorBadFile:
+			errorMsg = tr("The provided file does not look like a valid Cue Sheet disc image file!");
 			break;
-		case 3:
-			errorMsg = tr("Could not find a supported audio track in the Cue Sheet!");
+		case CueSheetModel::ErrorUnsupported:
+			errorMsg = QString("%1<br>%2").arg(tr("Could not find any supported audio track in the Cue Sheet image!"), tr("Note that LameXP can not handle \"binary\" Cue Sheet images."));
+			break;
+		case CueSheetModel::ErrorInconsistent:
+			errorMsg = tr("The selected Cue Sheet file contains inconsistent information. Take care!");
 			break;
 		}
 		
-		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), cueFile, errorMsg).replace("-", "&minus;");
-		QMessageBox::warning(dynamic_cast<QWidget*>(parent()), tr("Cue Sheet Error"), text);
+		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(cueFile), errorMsg).replace("-", "&minus;");
+		QMessageBox::warning(progress, tr("Cue Sheet Error"), text);
+		progress->close();
+		LAMEXP_DELETE(progress);
 		return iResult;
 	}
-
+	
+	progress->close();
+	LAMEXP_DELETE(progress);
 	return QDialog::exec();
 }
 
 void CueImportDialog::modelChanged(void)
 {
 	treeView->expandAll();
+	editOutputDir->setText(QDir::toNativeSeparators(m_outputDir));
+}
+
+void CueImportDialog::browseButtonClicked(void)
+{
+	QString newOutDir = QFileDialog::getExistingDirectory(this, tr("Choose Output Directory"));
+	if(!newOutDir.isEmpty())
+	{
+		m_outputDir = newOutDir;
+		modelChanged();
+	}
 }
 
 void CueImportDialog::importButtonClicked(void)

@@ -219,6 +219,9 @@
                <iconset resource="../res/Icons.qrc">
                 <normaloff>:/icons/folder_explore.png</normaloff>:/icons/folder_explore.png</iconset>
               </property>
+              <property name="autoDefault">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -272,9 +275,6 @@
              <height>16</height>
             </size>
            </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
           </widget>
          </item>
          <item>
@@ -312,12 +312,16 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>abortButton</tabstop>
   <tabstop>imprtButton</tabstop>
+  <tabstop>abortButton</tabstop>
+  <tabstop>editOutputDir</tabstop>
+  <tabstop>browseButton</tabstop>
   <tabstop>treeView</tabstop>
  </tabstops>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
@@ -356,8 +360,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>609</x>
-     <y>408</y>
+     <x>688</x>
+     <y>451</y>
     </hint>
     <hint type="destinationlabel">
      <x>310</x>

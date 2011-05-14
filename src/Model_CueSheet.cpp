@@ -24,9 +24,9 @@
 #include "Genres.h"
 
 #include <QApplication>
-#include <QMessageBox>
-#include <QInputDialog>
+#include <QDir>
 #include <QFileInfo>
+#include <QFont>
 
 #include <float.h>
 #include <limits>
@@ -39,6 +39,7 @@ class CueSheetItem
 {
 public:
 	virtual const char* type(void) = 0;
+	virtual bool isValid(void) { return false; }
 };
 
 class CueSheetTrack : public CueSheetItem
@@ -50,20 +51,24 @@ public:
 		m_trackNo(trackNo)
 	{
 		m_startIndex = std::numeric_limits<double>::quiet_NaN();
+		m_duration = std::numeric_limits<double>::infinity();
 	}
 	int trackNo(void) { return m_trackNo; }
 	double startIndex(void) { return m_startIndex; }
+	double duration(void) { return m_duration; }
 	QString title(void) { return m_title; }
 	QString performer(void) { return m_performer; }
 	CueSheetFile *parent(void) { return m_parent; }
 	void setStartIndex(double startIndex) { m_startIndex = startIndex; }
-	void setTitle(const QString &title) { m_title = title; }
-	void setPerformer(const QString &performer) { m_performer = performer; }
-	bool isValid(void) { return !(_isnan(m_startIndex) || (m_trackNo < 0)); }
+	void setDuration(double duration) { m_duration = duration; }
+	void setTitle(const QString &title, bool update = false) { if(!update || (m_title.isEmpty() && !title.isEmpty())) m_title = title; }
+	void setPerformer(const QString &performer, bool update = false) { if(!update || (m_performer.isEmpty() && !performer.isEmpty())) m_performer = performer; }
+	virtual bool isValid(void) { return !(_isnan(m_startIndex) || (m_trackNo < 0)); }
 	virtual const char* type(void) { return "CueSheetTrack"; }
 private:
 	int m_trackNo;
 	double m_startIndex;
+	double m_duration;
 	QString m_title;
 	QString m_performer;
 	CueSheetFile *m_parent;
@@ -79,6 +84,7 @@ public:
 	void clearTracks(void) { while(!m_tracks.isEmpty()) delete m_tracks.takeLast(); }
 	CueSheetTrack *track(int index) { return m_tracks.at(index); }
 	int trackCount(void) { return m_tracks.count(); }
+	virtual bool isValid(void) { return m_tracks.count() > 0; }
 	virtual const char* type(void) { return "CueSheetFile"; }
 private:
 	const QString m_fileName;
@@ -134,7 +140,7 @@ QModelIndex CueSheetModel::index(int row, int column, const QModelIndex &parent)
 
 int CueSheetModel::columnCount(const QModelIndex &parent) const
 {
-	return 3;
+	return 4;
 }
 
 int CueSheetModel::rowCount(const QModelIndex &parent) const
@@ -182,6 +188,9 @@ QVariant CueSheetModel::headerData (int section, Qt::Orientation orientation, in
 		case 2:
 			return tr("Index");
 			break;
+		case 3:
+			return tr("Duration");
+			break;
 		default:
 			return QVariant();
 			break;
@@ -207,7 +216,7 @@ QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 				return tr("File %1").arg(QString().sprintf("%02d", index.row() + 1)).append(" ");
 				break;
 			case 1:
-				return QString("[%1]").arg(QFileInfo(filePtr->fileName()).fileName());
+				return QFileInfo(filePtr->fileName()).fileName();
 				break;
 			default:
 				return QVariant();
@@ -242,9 +251,45 @@ QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 			case 2:
 				return indexToString(trackPtr->startIndex());
 				break;
+			case 3:
+				return indexToString(trackPtr->duration());
+				break;
 			default:
 				return QVariant();
 				break;
+			}
+		}
+	}
+	else if(role == Qt::FontRole)
+	{
+		QFont font("Monospace");
+		font.setStyleHint(QFont::TypeWriter);
+		if((index.column() == 1))
+		{
+			CueSheetItem *item = reinterpret_cast<CueSheetItem*>(index.internalPointer());
+			font.setBold(dynamic_cast<CueSheetFile*>(item) != NULL);
+		}
+		return font;
+	}
+	else if(role == Qt::ForegroundRole)
+	{
+		if((index.column() == 1))
+		{
+			CueSheetItem *item = reinterpret_cast<CueSheetItem*>(index.internalPointer());
+			if(CueSheetFile *filePtr = dynamic_cast<CueSheetFile*>(item))
+			{
+				return QFileInfo(filePtr->fileName()).exists() ? QColor("mediumblue") : QColor("darkred");
+			}
+		}
+		else if((index.column() == 3))
+		{
+			CueSheetItem *item = reinterpret_cast<CueSheetItem*>(index.internalPointer());
+			if(CueSheetTrack *trackPtr = dynamic_cast<CueSheetTrack*>(item))
+			{
+				if(trackPtr->duration() == std::numeric_limits<double>::infinity())
+				{
+					return QColor("dimgrey");
+				}
 			}
 		}
 	}
@@ -268,19 +313,19 @@ int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *ap
 	QFile cueFile(cueFileName);
 	if(!cueFile.open(QIODevice::ReadOnly))
 	{
-		return 1;
+		return ErrorIOFailure;
 	}
 
 	clearData();
 
 	beginResetModel();
-	int iResult = parseCueFile(cueFile, application);
+	int iResult = parseCueFile(cueFile, QDir(QFileInfo(cueFile).canonicalPath()), application);
 	endResetModel();
 
 	return iResult;
 }
 
-int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
+int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application)
 {
 	cueFile.seek(0);
 	qDebug("\n[Cue Sheet Import]");
@@ -319,7 +364,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 		if(application)
 		{
 			application->processEvents();
-			Sleep(25);
+			Sleep(10);
 		}
 		
 		QByteArray lineData = cueFile.readLine();
@@ -341,14 +386,8 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 				{
 					if(currentTrack->isValid())
 					{
-						if(currentTrack->title().isEmpty() && !albumTitle.isEmpty())
-						{
-							currentTrack->setTitle(albumTitle);
-						}
-						if(currentTrack->performer().isEmpty() && !albumPerformer.isEmpty())
-						{
-							currentTrack->setPerformer(albumPerformer);
-						}
+						currentTrack->setTitle(albumTitle, true);
+						currentTrack->setPerformer(albumPerformer, true);
 						currentFile->addTrack(currentTrack);
 						currentTrack = NULL;
 					}
@@ -357,7 +396,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 						LAMEXP_DELETE(currentTrack);
 					}
 				}
-				if(currentFile->trackCount() > 0)
+				if(currentFile->isValid())
 				{
 					m_files.append(currentFile);
 					currentFile = NULL;
@@ -373,7 +412,8 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 			}
 			if(!rxFile.cap(2).compare("WAVE", Qt::CaseInsensitive) || !rxFile.cap(2).compare("MP3", Qt::CaseInsensitive) || !rxFile.cap(2).compare("AIFF", Qt::CaseInsensitive))
 			{
-				currentFile = new CueSheetFile(rxFile.cap(1));
+				currentFile = new CueSheetFile(baseDir.absoluteFilePath(rxFile.cap(1)));
+				qDebug("File path: <%s>", currentFile->fileName().toUtf8().constData());
 			}
 			else
 			{
@@ -396,14 +436,8 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 				{
 					if(currentTrack->isValid())
 					{
-						if(currentTrack->title().isEmpty() && !albumTitle.isEmpty())
-						{
-							currentTrack->setTitle(albumTitle);
-						}
-						if(currentTrack->performer().isEmpty() && !albumPerformer.isEmpty())
-						{
-							currentTrack->setPerformer(albumPerformer);
-						}
+						currentTrack->setTitle(albumTitle, true);
+						currentTrack->setPerformer(albumPerformer, true);
 						currentFile->addTrack(currentTrack);
 						currentTrack = NULL;
 					}
@@ -476,21 +510,15 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 		}
 	}
 
-	//Finally append the very last track/file
+	//Append the very last track/file that is still pending
 	if(currentFile)
 	{
 		if(currentTrack)
 		{
 			if(currentTrack->isValid())
 			{
-				if(currentTrack->title().isEmpty() && !albumTitle.isEmpty())
-				{
-					currentTrack->setTitle(albumTitle);
-				}
-				if(currentTrack->performer().isEmpty() && !albumPerformer.isEmpty())
-				{
-					currentTrack->setPerformer(albumPerformer);
-				}
+				currentTrack->setTitle(albumTitle, true);
+				currentTrack->setPerformer(albumPerformer, true);
 				currentFile->addTrack(currentTrack);
 				currentTrack = NULL;
 			}
@@ -499,7 +527,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 				LAMEXP_DELETE(currentTrack);
 			}
 		}
-		if(currentFile->trackCount() > 0)
+		if(currentFile->isValid())
 		{
 			m_files.append(currentFile);
 			currentFile = NULL;
@@ -510,7 +538,72 @@ int CueSheetModel::parseCueFile(QFile &cueFile, QCoreApplication *application)
 		}
 	}
 
-	return (m_files.count() > 0) ? 0 : (bUnsupportedTrack ? 3 : 2);
+	//Finally calculate duration of each track
+	int nFiles = m_files.count();
+	for(int i = 0; i < nFiles; i++)
+	{
+		if(application)
+		{
+			application->processEvents();
+			Sleep(10);
+		}
+
+		CueSheetFile *currentFile = m_files.at(i);
+		int nTracks = currentFile->trackCount();
+		if(nTracks > 1)
+		{
+			for(int j = 1; j < nTracks; j++)
+			{
+				CueSheetTrack *currentTrack = currentFile->track(j);
+				CueSheetTrack *previousTrack = currentFile->track(j-1);
+				double duration = currentTrack->startIndex() - previousTrack->startIndex();
+				previousTrack->setDuration(max(0.0, duration));
+			}
+		}
+	}
+	
+	//Sanity check of track numbers
+	if(nFiles > 0)
+	{
+		bool trackNo[100];
+		for(int i = 0; i < 100; i++)
+		{
+			trackNo[i] = false;
+		}
+		for(int i = 0; i < nFiles; i++)
+		{
+			if(application)
+			{
+				application->processEvents();
+				Sleep(10);
+			}
+			CueSheetFile *currentFile = m_files.at(i);
+			int nTracks = currentFile->trackCount();
+			if(nTracks > 1)
+			{
+				for(int j = 1; j < nTracks; j++)
+				{
+					int currentTrackNo = currentFile->track(j)->trackNo();
+					if(currentTrackNo > 99)
+					{
+						qWarning("Track #%02d is invalid (maximum is 99), Cue Sheet is inconsistent!", currentTrackNo);
+						return ErrorInconsistent;
+					}
+					if(trackNo[currentTrackNo])
+					{
+						qWarning("Track #%02d exists multiple times, Cue Sheet is inconsistent!", currentTrackNo);
+						return ErrorInconsistent;
+					}
+					trackNo[currentTrackNo] = true;
+				}
+			}
+		}
+		return ErrorSuccess;
+	}
+	else
+	{
+		return bUnsupportedTrack ? ErrorUnsupported : ErrorBadFile;
+	}
 }
 
 double CueSheetModel::parseTimeIndex(const QString &index)
@@ -538,10 +631,21 @@ double CueSheetModel::parseTimeIndex(const QString &index)
 
 QString CueSheetModel::indexToString(const double index) const
 {
-	int temp = static_cast<int>(index * 100.0);
+	if(index == std::numeric_limits<double>::quiet_NaN())
+	{
+		return QString("<-NaN!->");
+	}
+	else if(index == std::numeric_limits<double>::infinity() || index < 0.0)
+	{
+		return QString("??:??.??");
+	}
+	else
+	{
+		int temp = static_cast<int>(index * 100.0);
 
-	int msec = temp % 100;
-	int secs = temp / 100;
+		int msec = temp % 100;
+		int secs = temp / 100;
 
-	return QString().sprintf("%02d:%02d.%02d", (secs / 60), (secs % 60), msec);
+		return QString().sprintf("%02d:%02d.%02d", min(99, secs / 60), min(99, secs % 60), min(99, msec));
+	}
 }
