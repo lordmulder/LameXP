@@ -243,145 +243,161 @@
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuehseet Assistent</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das folgende Cuesheet wird aufgeteilt und in LameXP importiert.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuesheet Datei wird geladen, bitte warten...</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten!</translation>
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Laden der Cuesheet Datei:</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuesheet Fehler</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Die angegebene Datei konnte nicht gefunden werden!</translation>
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei kann nicht geöffnet werden. Stellen Sie sicher, dass Sie über die notwendigen Rechte verfügen!</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Die angegebene Datei scheint keine gültige Cuesheet Datei zu sein!</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation type="unfinished"></translation>
+        <translation>Es konnte kein unterstützter Audio-Track im Cuesheet gefunden werden!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beachten Sie, dass LameXP keine &quot;binären&quot; Cuesheets unterstützt.</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Cuesheet enthält inkonsistente Informationen. Bitte geben Sie Acht!</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabe-Verzeichnis auswählen</translation>
     </message>
     <message>
         <source>LameXP</source>
-        <translation type="unfinished">LameXP</translation>
+        <translation>LameXP</translation>
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: Im Ausgabe-Verzeichnis kann nicht geschrieben werden!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished">Warnung: Wenig freier Festplattenspeicher</translation>
+        <translation>Warnung: Wenig freier Festplattenspeicher</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es sind weniger als %1 GB freier Speicherplatz im Ausgabe-Verzeichnis verfügbar.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation type="unfinished"></translation>
+        <translation>Es wird dringend empfohlen, vor dem Fortfahren mehr Speicherplatz freizugeben!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Analysiere Dateien, bitte warten...</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien werden aufgeteilt, bitte warten...</translation>
+    </message>
+    <message>
+        <source>Error: The selected output directory could not be created!</source>
+        <translation>Fehler: Das Ausgabe-Verzeichnis konnte nicht erstellt werden!</translation>
+    </message>
+    <message>
+        <source>An unexpected error has occured while splitting the Cue Sheet!</source>
+        <translation>Beim Aufteilen des Cuesheets is ein unerwarteter Fehler aufgetreten!</translation>
+    </message>
+    <message>
+        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
+        <translation>%1 Datei(ein) wurden aus dem Cuesheet importiert und %2 Datei(en) übersprungen.</translation>
+    </message>
+    <message>
+        <source>Cue Sheet Completed</source>
+        <translation>Cuesheet Abgeschlossen</translation>
     </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuesheet Importieren</translation>
     </message>
     <message>
         <source> Output Directory </source>
-        <translation type="unfinished"></translation>
+        <translation> Ausgabe-Verzeichnis </translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished">Durchsuchen...</translation>
+        <translation>Durchsuchen...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Existierende Quelldatei</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlende Quelldatei (Tracks werden übersprungen!)</translation>
     </message>
 </context>
 <context>
     <name>CueSheetModel</name>
     <message>
         <source>No.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nr.</translation>
     </message>
     <message>
         <source>File / Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei / Track</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Index</translation>
     </message>
     <message>
         <source>File %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei %1</translation>
     </message>
     <message>
         <source>Track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel %1</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Künstler</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Titel</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Dauer</translation>
+        <translation>Dauer</translation>
     </message>
 </context>
 <context>
@@ -1524,15 +1540,15 @@
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuesheet importieren</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuesheet öffnen</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuesheet Datei</translation>
     </message>
 </context>
 <context>

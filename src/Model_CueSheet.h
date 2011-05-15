@@ -65,6 +65,8 @@ public:
 	void getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration);
 	QString getTrackPerformer(int fileIndex, int trackIndex);
 	QString getTrackTitle(int fileIndex, int trackIndex);
+	QString getAlbumPerformer(void) { return m_albumPerformer; }
+	QString getAlbumTitle(void) { return m_albumTitle; }
 
 	//Cue Sheet functions
 	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL);
@@ -73,5 +75,11 @@ private:
 	int parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application);
 	double parseTimeIndex(const QString &index);
 	QString indexToString(const double index) const;
+	
 	QList<CueSheetFile*> m_files;
+	QString m_albumTitle;
+	QString m_albumPerformer;
+
+	const QIcon m_fileIcon;
+	const QIcon m_trackIcon;
 };

@@ -325,6 +325,22 @@
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error: The selected output directory could not be created!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unexpected error has occured while splitting the Cue Sheet!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cue Sheet Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

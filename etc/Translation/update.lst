@@ -1,3 +1,4 @@
+..\..\gui\CueSheetImport.ui 
 ..\..\gui\DropBox.ui 
 ..\..\gui\LogViewDialog.ui 
 ..\..\gui\MainWindow.ui 
@@ -23,6 +24,7 @@
 ..\..\src\Decoder_WavPack.cpp 
 ..\..\src\Decoder_WMA.cpp 
 ..\..\src\Dialog_About.cpp 
+..\..\src\Dialog_CueImport.cpp 
 ..\..\src\Dialog_DropBox.cpp 
 ..\..\src\Dialog_LogView.cpp 
 ..\..\src\Dialog_MainWindow.cpp 
@@ -49,6 +51,7 @@
 ..\..\src\Main.cpp 
 ..\..\src\Model_Artwork.cpp 
 ..\..\src\Model_AudioFile.cpp 
+..\..\src\Model_CueSheet.cpp 
 ..\..\src\Model_FileList.cpp 
 ..\..\src\Model_FileSystem.cpp 
 ..\..\src\Model_MetaInfo.cpp 
@@ -57,6 +60,7 @@
 ..\..\src\PlaylistImporter.cpp 
 ..\..\src\Registry_Decoder.cpp 
 ..\..\src\ShellIntegration.cpp 
+..\..\src\Thread_CueSplitter.cpp 
 ..\..\src\Thread_DiskObserver.cpp 
 ..\..\src\Thread_FileAnalyzer.cpp 
 ..\..\src\Thread_Initialization.cpp 
@@ -83,6 +87,7 @@
 ..\..\src\Decoder_WavPack.h 
 ..\..\src\Decoder_WMA.h 
 ..\..\src\Dialog_About.h 
+..\..\src\Dialog_CueImport.h 
 ..\..\src\Dialog_DropBox.h 
 ..\..\src\Dialog_LogView.h 
 ..\..\src\Dialog_MainWindow.h 
@@ -108,6 +113,7 @@
 ..\..\src\LockedFile.h 
 ..\..\src\Model_Artwork.h 
 ..\..\src\Model_AudioFile.h 
+..\..\src\Model_CueSheet.h 
 ..\..\src\Model_FileList.h 
 ..\..\src\Model_FileSystem.h 
 ..\..\src\Model_MetaInfo.h 
@@ -118,6 +124,7 @@
 ..\..\src\Resource.h 
 ..\..\src\ShellIntegration.h 
 ..\..\src\Targetver.h 
+..\..\src\Thread_CueSplitter.h 
 ..\..\src\Thread_DiskObserver.h 
 ..\..\src\Thread_FileAnalyzer.h 
 ..\..\src\Thread_Initialization.h 

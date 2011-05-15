@@ -96,6 +96,9 @@ private:
 ////////////////////////////////////////////////////////////
 
 CueSheetModel::CueSheetModel()
+:
+	m_fileIcon(":/icons/music.png"),
+	m_trackIcon(":/icons/control_play_blue.png")
 {
 	int trackNo = 0;
 	
@@ -271,6 +274,22 @@ QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 		else if(CueSheetTrack *trackPtr = dynamic_cast<CueSheetTrack*>(item))
 		{
 			return QDir::toNativeSeparators(trackPtr->parent()->fileName());
+		}
+	}
+	else if(role == Qt::DecorationRole)
+	{
+		if(index.column() == 0)
+		{
+			CueSheetItem *item = reinterpret_cast<CueSheetItem*>(index.internalPointer());
+
+			if(dynamic_cast<CueSheetFile*>(item))
+			{
+				return m_fileIcon;
+			}
+			else if(dynamic_cast<CueSheetTrack*>(item))
+			{
+				return m_trackIcon;
+			}
 		}
 	}
 	else if(role == Qt::FontRole)
@@ -456,8 +475,8 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	CueSheetFile *currentFile = NULL;
 	CueSheetTrack *currentTrack = NULL;
 
-	QString albumTitle;
-	QString albumPerformer;
+	m_albumTitle.clear();
+	m_albumPerformer.clear();
 
 	//Loop over the Cue Sheet until all lines were processed
 	for(int lines = 0; lines < INT_MAX; lines++)
@@ -487,8 +506,6 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				{
 					if(currentTrack->isValid())
 					{
-						currentTrack->setTitle(albumTitle, true);
-						currentTrack->setPerformer(albumPerformer, true);
 						currentFile->addTrack(currentTrack);
 						currentTrack = NULL;
 					}
@@ -537,8 +554,6 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				{
 					if(currentTrack->isValid())
 					{
-						currentTrack->setTitle(albumTitle, true);
-						currentTrack->setPerformer(albumPerformer, true);
 						currentFile->addTrack(currentTrack);
 						currentTrack = NULL;
 					}
@@ -585,7 +600,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(bPreamble)
 			{
-				albumTitle = rxTitle.cap(1);
+				m_albumTitle = rxTitle.cap(1).simplified();
 			}
 			else if(currentFile && currentTrack)
 			{
@@ -600,7 +615,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(bPreamble)
 			{
-				albumPerformer = rxPerformer.cap(1);
+				m_albumPerformer = rxPerformer.cap(1).simplified();
 			}
 			else if(currentFile && currentTrack)
 			{
@@ -618,8 +633,6 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(currentTrack->isValid())
 			{
-				currentTrack->setTitle(albumTitle, true);
-				currentTrack->setPerformer(albumPerformer, true);
 				currentFile->addTrack(currentTrack);
 				currentTrack = NULL;
 			}
@@ -749,7 +762,7 @@ QString CueSheetModel::indexToString(const double index) const
 	}
 	else
 	{
-		int temp = static_cast<int>(index * 100.0);
+		int temp = static_cast<int>(floor(0.5 + (index * 100.0)));
 
 		int msec = temp % 100;
 		int secs = temp / 100;

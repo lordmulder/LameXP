@@ -254,11 +254,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>An unknown error has occured!</source>
+        <source>Failed to load the Cue Sheet file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to load the Cue Sheet file:</source>
+        <source>The specified file could not be found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -266,7 +266,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The specified file could not be found!</source>
+        <source>An unknown error has occured!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -298,6 +298,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Error: The selected output directory could not be created!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Error: The selected output directory is not writable!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -321,11 +325,31 @@
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>An unexpected error has occured while splitting the Cue Sheet!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cue Sheet Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Existing Source File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing Source File (Tracks will be skipped!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -338,14 +362,6 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Existing Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Missing Source File (Tracks will be skipped!)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -364,6 +380,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>File %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -377,10 +397,6 @@
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1038,6 +1054,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Import Cue Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1486,6 +1506,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Open Cue Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cue Sheet File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Beta Updates</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1519,18 +1547,6 @@
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cue Sheet File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

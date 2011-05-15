@@ -101,12 +101,7 @@ int CueImportDialog::exec(void)
 	progress->show(tr("Loading Cue Sheet file, please be patient..."));
 
 	QFileInfo cueFileInfo(m_cueFileName);
-	QDir outputDir(cueFileInfo.canonicalPath());
-	m_outputDir = outputDir.canonicalPath();
-
-	setWindowTitle(QString("%1: %2").arg(windowTitle().split(":", QString::SkipEmptyParts).first().trimmed(), cueFileInfo.fileName()));
-
-	if(!cueFileInfo.exists() || !cueFileInfo.isFile() || m_outputDir.isEmpty())
+	if(!cueFileInfo.exists() || !cueFileInfo.isFile())
 	{
 		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(m_cueFileName), tr("The specified file could not be found!")).replace("-", "&minus;");
 		QMessageBox::warning(progress, tr("Cue Sheet Error"), text);
@@ -115,11 +110,8 @@ int CueImportDialog::exec(void)
 		return CueSheetModel::ErrorIOFailure;
 	}
 
-	outputDir.mkdir(cueFileInfo.completeBaseName());
-	if(outputDir.cd(cueFileInfo.completeBaseName()))
-	{
-		m_outputDir = outputDir.canonicalPath();
-	}
+	m_outputDir = QString("%1/%2").arg(cueFileInfo.canonicalPath(), cueFileInfo.completeBaseName());
+	setWindowTitle(QString("%1: %2").arg(windowTitle().split(":", QString::SkipEmptyParts).first().trimmed(), cueFileInfo.fileName()));
 
 	int iResult = m_model->loadCueSheet(m_cueFileName, QApplication::instance());
 	if(iResult != CueSheetModel::ErrorSuccess)
@@ -176,6 +168,14 @@ void CueImportDialog::importButtonClicked(void)
 	static const __int64 minimumFreeDiskspaceMultiplier = 2i64;
 	static const char *writeTestBuffer = "LAMEXP_WRITE_TEST";
 	
+	QDir outputDir(m_outputDir);
+	outputDir.mkpath(".");
+	if(!(outputDir.exists() && outputDir.isReadable()))
+	{
+		QMessageBox::warning(this, tr("LameXP"), QString("<nobr>%2</nobr>").arg(tr("Error: The selected output directory could not be created!")));
+		return;
+	}
+
 	QFile writeTest(QString("%1/~%2.txt").arg(m_outputDir, lamexp_rand_str()));
 	if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 	{
@@ -247,7 +247,7 @@ void CueImportDialog::analyzeFiles(QStringList &files)
 {
 	m_fileInfo.clear();
 
-	WorkingBanner *progress = new WorkingBanner(dynamic_cast<QWidget*>(parent()));
+	WorkingBanner *progress = new WorkingBanner(this);
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
 	
 	connect(analyzer, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
@@ -260,12 +260,15 @@ void CueImportDialog::analyzeFiles(QStringList &files)
 
 void CueImportDialog::splitFiles(void)
 {
+	int nTracksSkipped = 0;
+
 	WorkingBanner *progress = new WorkingBanner(this);
 	CueSplitter *splitter  = new CueSplitter(m_outputDir, QFileInfo(m_cueFileName).completeBaseName().replace(".", " ").left(42).trimmed(), m_fileInfo);
-	
+	splitter->setAlbumInfo(m_model->getAlbumPerformer(), m_model->getAlbumTitle());
+
 	connect(splitter, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(splitter, SIGNAL(fileSplit(AudioFileModel)), m_fileList, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-		
+
 	int nFiles = m_model->getFileCount();
 	for(int i = 0; i < nFiles; i++)
 	{
@@ -282,6 +285,7 @@ void CueImportDialog::splitFiles(void)
 			AudioFileModel metaInfo(QString().sprintf("cue://File%02d/Track%02d", i, j));
 			metaInfo.setFileName(m_model->getTrackTitle(i, j));
 			metaInfo.setFileArtist(m_model->getTrackPerformer(i, j));
+			metaInfo.setFilePosition(trackNo);
 			
 			try
 			{
@@ -290,12 +294,23 @@ void CueImportDialog::splitFiles(void)
 			catch(char *err)
 			{
 				qWarning("Failed to add track #%02d: %s", trackNo, err);
+				nTracksSkipped++;
 			}
 		}
 	}
 
 	progress->show(tr("Splitting file(s), please wait..."), splitter);
 	progress->close();
+
+	if(!splitter->getSuccess())
+	{
+		QMessageBox::warning(this, tr("Cue Sheet Error"), tr("An unexpected error has occured while splitting the Cue Sheet!"));
+	}
+	else
+	{
+		QString text = tr("Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).").arg(QString::number(splitter->getTracksSuccess()), QString::number(splitter->getTracksSkipped() + nTracksSkipped));
+		QMessageBox::information(this, tr("Cue Sheet Completed"), text);
+	}
 
 	LAMEXP_DELETE(splitter);
 	LAMEXP_DELETE(progress);

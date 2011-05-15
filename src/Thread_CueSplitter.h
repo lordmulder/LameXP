@@ -42,7 +42,10 @@ public:
 	CueSplitter(const QString &outputDir, const QString &baseName, const QList<AudioFileModel> &inputFiles);
 	void run();
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
+	unsigned int getTracksSuccess(void) { return m_nTracksSuccess; }
+	unsigned int getTracksSkipped(void) { return m_nTracksSkipped; }
 	void addTrack(const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo);
+	void setAlbumInfo(const QString &performer, const QString &title);
 
 signals:
 	void fileSelected(const QString &fileName);
@@ -55,9 +58,13 @@ private:
 	const QString m_soxBin;
 	const QString m_outputDir;
 	const QString m_baseName;
+	unsigned int m_nTracksSuccess;
+	unsigned int m_nTracksSkipped;
 	bool m_bSuccess;
 	volatile bool m_abortFlag;
 
+	QString m_albumTitle;
+	QString m_albumPerformer;
 	QMap<QString,AudioFileModel> m_inputFiles;
 	QList<QString> m_trackFile;
 	QList<int> m_trackNo;
