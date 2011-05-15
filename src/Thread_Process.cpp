@@ -154,6 +154,7 @@ void ProcessThread::processFile()
 			connect(decoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
 			bSuccess = decoder->decode(sourceFile, tempFile, &m_aborted);
+			LAMEXP_DELETE(decoder);
 
 			if(bSuccess)
 			{
