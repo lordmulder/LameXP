@@ -51,8 +51,8 @@ private slots:
 
 private:
 	void importCueSheet(void);
-	void analyzeFiles(QStringList &files);
-	void CueImportDialog::splitFiles(void);
+	bool analyzeFiles(QStringList &files);
+	void splitFiles(void);
 
 	CueSheetModel *m_model;
 	FileListModel *m_fileList;

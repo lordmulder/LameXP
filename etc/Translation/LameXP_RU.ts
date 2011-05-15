@@ -337,6 +337,22 @@
         <source>Cue Sheet Completed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Analysis Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: The format of some of the input files could not be determined!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue Anyway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

@@ -129,13 +129,13 @@ QModelIndex CueSheetModel::index(int row, int column, const QModelIndex &parent)
 {
 	if(!parent.isValid())
 	{
-		return createIndex(row, column, m_files.at(row));
+		return (row < m_files.count()) ? createIndex(row, column, m_files.at(row)) : QModelIndex();
 	}
 
 	CueSheetItem *parentItem = static_cast<CueSheetItem*>(parent.internalPointer());
 	if(CueSheetFile *filePtr = dynamic_cast<CueSheetFile*>(parentItem))
 	{
-		return createIndex(row, column, filePtr->track(row));
+		return (row < filePtr->trackCount()) ? createIndex(row, column, filePtr->track(row)) : QModelIndex();
 	}
 
 	return QModelIndex();

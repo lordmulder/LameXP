@@ -230,11 +230,13 @@ void CueImportDialog::importCueSheet(void)
 		files << temp;
 	}
 	
-	//Analyze all source files
-	analyzeFiles(files);
+	//Analyze all source files first
+	if(analyzeFiles(files))
+	{
+		//Now split files according to Cue Sheet
+		splitFiles();
+	}
 
-	//Now split files according to Cue Sheet
-	splitFiles();
 
 	//Release locks
 	while(!m_locks.isEmpty())
@@ -243,9 +245,10 @@ void CueImportDialog::importCueSheet(void)
 	}
 }
 
-void CueImportDialog::analyzeFiles(QStringList &files)
+bool CueImportDialog::analyzeFiles(QStringList &files)
 {
 	m_fileInfo.clear();
+	bool bSuccess = true;
 
 	WorkingBanner *progress = new WorkingBanner(this);
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
@@ -255,7 +258,19 @@ void CueImportDialog::analyzeFiles(QStringList &files)
 
 	progress->show(tr("Analyzing file(s), please wait..."), analyzer);
 	progress->close();
+
+	if(analyzer->filesAccepted() < files.count())
+	{
+		if(QMessageBox::warning(this, tr("Analysis Failed"), tr("Warning: The format of some of the input files could not be determined!"), tr("Continue Anyway"), tr("Abort")) == 1)
+		{
+			bSuccess = false;
+		}
+	}
+
 	LAMEXP_DELETE(progress);
+	LAMEXP_DELETE(analyzer);
+
+	return bSuccess;
 }
 
 void CueImportDialog::splitFiles(void)
@@ -308,7 +323,7 @@ void CueImportDialog::splitFiles(void)
 	}
 	else
 	{
-		QString text = tr("Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).").arg(QString::number(splitter->getTracksSuccess()), QString::number(splitter->getTracksSkipped() + nTracksSkipped));
+		QString text = QString("<nobr>%1</nobr>").arg(tr("Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).").arg(QString::number(splitter->getTracksSuccess()), QString::number(splitter->getTracksSkipped() + nTracksSkipped)));
 		QMessageBox::information(this, tr("Cue Sheet Completed"), text);
 	}
 

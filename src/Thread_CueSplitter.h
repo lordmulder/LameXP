@@ -40,6 +40,7 @@ class CueSplitter: public QThread
 
 public:
 	CueSplitter(const QString &outputDir, const QString &baseName, const QList<AudioFileModel> &inputFiles);
+	~CueSplitter(void);
 	void run();
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 	unsigned int getTracksSuccess(void) { return m_nTracksSuccess; }
@@ -50,6 +51,9 @@ public:
 signals:
 	void fileSelected(const QString &fileName);
 	void fileSplit(const AudioFileModel &file);
+
+private slots:
+	void handleUpdate(int progress);
 
 private:
 	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo);
@@ -65,7 +69,10 @@ private:
 
 	QString m_albumTitle;
 	QString m_albumPerformer;
+	QString m_activeFile;
 	QMap<QString,AudioFileModel> m_inputFiles;
+	QMap<QString,QString> m_decompressedFiles;
+	QStringList m_tempFiles;
 	QList<QString> m_trackFile;
 	QList<int> m_trackNo;
 	QList<double> m_trackOffset;

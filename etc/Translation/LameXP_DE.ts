@@ -331,11 +331,27 @@
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>%1 Datei(ein) wurden aus dem Cuesheet importiert und %2 Datei(en) übersprungen.</translation>
+        <translation>%1 Datei(ein) wurden aus dem Cuesheet importiert, %2 Datei(en) übersprungen.</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
         <translation>Cuesheet Abgeschlossen</translation>
+    </message>
+    <message>
+        <source>Analysis Failed</source>
+        <translation>Analyse fehlgeschlagen</translation>
+    </message>
+    <message>
+        <source>Warning: The format of some of the input files could not be determined!</source>
+        <translation>Achtung: Das Dateiformat einiger Dateien konnte nicht festgestellt werden!</translation>
+    </message>
+    <message>
+        <source>Continue Anyway</source>
+        <translation>Trotzdem fortfahren</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>

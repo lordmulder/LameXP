@@ -186,6 +186,15 @@
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
            </property>
+           <property name="uniformRowHeights">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+           <attribute name="headerStretchLastSection">
+            <bool>false</bool>
+           </attribute>
           </widget>
          </item>
          <item>
@@ -583,6 +592,7 @@
  </tabstops>
  <resources>
   <include location="../res/Icons.qrc"/>
+  <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
