@@ -52,6 +52,9 @@ signals:
 	void fileSelected(const QString &fileName);
 	void fileAnalyzed(const AudioFileModel &file);
 
+public slots:
+	void abortProcess(void) { m_abortFlag = true; }
+
 private:
 	enum section_t
 	{
@@ -83,5 +86,9 @@ private:
 	unsigned int m_filesRejected;
 	unsigned int m_filesDenied;
 	unsigned int m_filesDummyCDDA;
+	
+	volatile bool m_abortFlag;
+
+	bool m_bAborted;
 	bool m_bSuccess;
 };

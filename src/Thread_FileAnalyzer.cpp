@@ -42,10 +42,12 @@
 FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 :
 	m_inputFiles(inputFiles),
-	m_mediaInfoBin(lamexp_lookup_tool("mediainfo.exe"))
+	m_mediaInfoBin(lamexp_lookup_tool("mediainfo.exe")),
+	m_abortFlag(false)
 {
 	m_bSuccess = false;
-	
+	m_bAborted = false;
+		
 	if(m_mediaInfoBin.isEmpty())
 	{
 		qFatal("Invalid path to MediaInfo binary. Tool not initialized properly.");
@@ -64,6 +66,7 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 void FileAnalyzer::run()
 {
 	m_bSuccess = false;
+	m_bAborted = false;
 
 	m_filesAccepted = 0;
 	m_filesRejected = 0;
@@ -71,22 +74,23 @@ void FileAnalyzer::run()
 	m_filesDummyCDDA = 0;
 	m_inputFiles.sort();
 
-	GetAsyncKeyState(VK_ESCAPE);
+	m_abortFlag = false;
 
 	while(!m_inputFiles.isEmpty())
 	{
-		if(GetAsyncKeyState(VK_ESCAPE) & 0x0001)
-		{
-			MessageBeep(MB_ICONERROR);
-			qWarning("Operation cancelled by user!");
-			break;
-		}
-		
 		QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
 		qDebug64("Analyzing: %1", currentFile);
 		emit fileSelected(QFileInfo(currentFile).fileName());
 		AudioFileModel file = analyzeFile(currentFile);
 		
+		if(m_abortFlag)
+		{
+			MessageBeep(MB_ICONERROR);
+			m_bAborted = true;
+			qWarning("Operation cancelled by user!");
+			return;
+		}
+
 		if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
 		{
 			if(!PlaylistImporter::importPlaylist(m_inputFiles, currentFile))
@@ -148,6 +152,13 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 
 	while(process.state() != QProcess::NotRunning)
 	{
+		if(m_abortFlag)
+		{
+			process.kill();
+			qWarning("Process was aborted on user request!");
+			break;
+		}
+		
 		if(!process.waitForReadyRead())
 		{
 			if(process.state() == QProcess::Running)
@@ -445,6 +456,13 @@ void FileAnalyzer::retrieveCover(AudioFileModel &audioFile, const QString &fileP
 
 	while(process.state() != QProcess::NotRunning)
 	{
+		if(m_abortFlag)
+		{
+			process.kill();
+			qWarning("Process was aborted on user request!");
+			break;
+		}
+		
 		if(!process.waitForReadyRead())
 		{
 			if(process.state() == QProcess::Running)

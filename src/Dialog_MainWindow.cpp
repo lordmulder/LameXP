@@ -457,6 +457,7 @@ void MainWindow::addFiles(const QStringList &files)
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
 	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+	connect(m_banner, SIGNAL(userAbort()), analyzer, SLOT(abortProcess()), Qt::DirectConnection);
 
 	m_banner->show(tr("Adding file(s), please wait..."), analyzer);
 

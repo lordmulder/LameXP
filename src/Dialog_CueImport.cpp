@@ -260,6 +260,7 @@ bool CueImportDialog::analyzeFiles(QStringList &files)
 	
 	connect(analyzer, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), this, SLOT(analyzedFile(AudioFileModel)), Qt::QueuedConnection);
+	connect(progress, SIGNAL(userAbort()), analyzer, SLOT(abortProcess()), Qt::DirectConnection);
 
 	progress->show(tr("Analyzing file(s), please wait..."), analyzer);
 	progress->close();
@@ -286,8 +287,8 @@ void CueImportDialog::splitFiles(void)
 	CueSplitter *splitter  = new CueSplitter(m_outputDir, baseName, m_model, m_fileInfo);
 
 	connect(splitter, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
-	connect(progress, SIGNAL(userAbort()), splitter, SLOT(abortProcess()), Qt::DirectConnection);
 	connect(splitter, SIGNAL(fileSplit(AudioFileModel)), m_fileList, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+	connect(progress, SIGNAL(userAbort()), splitter, SLOT(abortProcess()), Qt::DirectConnection);
 
 	progress->show(tr("Splitting file(s), please wait..."), splitter);
 	progress->close();
