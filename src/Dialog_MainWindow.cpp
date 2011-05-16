@@ -467,7 +467,11 @@ void MainWindow::addFiles(const QStringList &files)
 	}
 	if(analyzer->filesDummyCDDA())
 	{
-		QMessageBox::warning(this, tr("CDA Files"), QString("<nobr>%1<br><br>%2<br>%3</nobr>").arg(tr("%1 file(s) have been rejected, because they are dummy CDDA files!").arg(analyzer->filesDummyCDDA()), tr("Sorry, LameXP cannot extract audio tracks from an Audio&minus;CD at present."), tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>")));
+		QMessageBox::warning(this, tr("CDDA Files"), QString("<nobr>%1<br><br>%2<br>%3</nobr>").arg(tr("%1 file(s) have been rejected, because they are dummy CDDA files!").arg(analyzer->filesDummyCDDA()), tr("Sorry, LameXP cannot extract audio tracks from an Audio&minus;CD at present."), tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>")));
+	}
+	if(analyzer->filesCueSheet())
+	{
+		QMessageBox::warning(this, tr("Cue Sheet"), QString("<nobr>%1<br>%2</nobr>").arg(tr("%1 file(s) have been rejected, because they appear to be Cue Sheet images!").arg(analyzer->filesCueSheet()), tr("Please use LameXP's Cue Sheet wizard for importing Cue Sheet files.")));
 	}
 	if(analyzer->filesRejected())
 	{

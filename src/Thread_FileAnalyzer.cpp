@@ -57,6 +57,7 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 	m_filesRejected = 0;
 	m_filesDenied = 0;
 	m_filesDummyCDDA = 0;
+	m_filesCueSheet = 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -72,16 +73,19 @@ void FileAnalyzer::run()
 	m_filesRejected = 0;
 	m_filesDenied = 0;
 	m_filesDummyCDDA = 0;
+	m_filesCueSheet = 0;
+
 	m_inputFiles.sort();
 
 	m_abortFlag = false;
 
 	while(!m_inputFiles.isEmpty())
 	{
+		int fileType = fileTypeNormal;
 		QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
 		qDebug64("Analyzing: %1", currentFile);
 		emit fileSelected(QFileInfo(currentFile).fileName());
-		AudioFileModel file = analyzeFile(currentFile);
+		AudioFileModel file = analyzeFile(currentFile, &fileType);
 		
 		if(m_abortFlag)
 		{
@@ -91,16 +95,38 @@ void FileAnalyzer::run()
 			return;
 		}
 
-		if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
+		if(fileType == fileTypeDenied)
 		{
-			if(!PlaylistImporter::importPlaylist(m_inputFiles, currentFile))
-			{
-				m_filesRejected++;
-				qDebug64("Skipped: %1", file.filePath());
-			}
+			m_filesDenied++;
+			qWarning("Cannot access file for reading, skipping!");
+			continue;
+		}
+		if(fileType == fileTypeCDDA)
+		{
+			m_filesDummyCDDA++;
+			qWarning("Dummy CDDA file detected, skipping!");
 			continue;
 		}
 		
+		if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
+		{
+			if(PlaylistImporter::importPlaylist(m_inputFiles, currentFile))
+			{
+				qDebug("Imported playlist file.");
+			}
+			else if(!QFileInfo(currentFile).suffix().compare("cue", Qt::CaseInsensitive))
+			{
+				qWarning("Cue Sheet file detected, skipping!");
+				m_filesCueSheet++;
+			}
+			else
+			{
+				qDebug64("Rejected file of unknown type: %1", file.filePath());
+				m_filesRejected++;
+			}
+			continue;
+		}
+
 		m_filesAccepted++;
 		emit fileAnalyzed(file);
 	}
@@ -113,8 +139,10 @@ void FileAnalyzer::run()
 // Privtae Functions
 ////////////////////////////////////////////////////////////
 
-const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
+const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath, int *type)
 {
+	*type = fileTypeNormal;
+	
 	AudioFileModel audioFile(filePath);
 	m_currentSection = sectionOther;
 	m_currentCover = coverNone;
@@ -122,15 +150,13 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath)
 	QFile readTest(filePath);
 	if(!readTest.open(QIODevice::ReadOnly))
 	{
-		qWarning("Cannot access file for reading, skipping!");
-		m_filesDenied++;
+		*type = fileTypeDenied;
 		return audioFile;
 	}
 	
 	if(checkFile_CDDA(readTest))
 	{
-		qWarning("Dummy CDDA file detected, skipping!");
-		m_filesDummyCDDA ++;
+		*type = fileTypeCDDA;
 		return audioFile;
 	}
 	
@@ -520,7 +546,7 @@ unsigned int FileAnalyzer::filesAccepted(void)
 
 unsigned int FileAnalyzer::filesRejected(void)
 {
-	return max(m_filesRejected - (m_filesDenied + m_filesDummyCDDA), 0);
+	return m_filesRejected;
 }
 
 unsigned int FileAnalyzer::filesDenied(void)
@@ -531,6 +557,11 @@ unsigned int FileAnalyzer::filesDenied(void)
 unsigned int FileAnalyzer::filesDummyCDDA(void)
 {
 	return m_filesDummyCDDA;
+}
+
+unsigned int FileAnalyzer::filesCueSheet(void)
+{
+	return m_filesCueSheet;
 }
 
 ////////////////////////////////////////////////////////////

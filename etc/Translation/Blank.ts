@@ -1094,7 +1094,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CDA Files</source>
+        <source>CDDA Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1107,6 +1107,18 @@
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cue Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

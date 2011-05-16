@@ -1391,10 +1391,6 @@
         <translation>In das ausgewählte Verzeichnis kann nicht geschrieben werden. Bitte ein anderes Verzeichnis auswählen!</translation>
     </message>
     <message>
-        <source>CDA Files</source>
-        <translation>CDA Dateien</translation>
-    </message>
-    <message>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
         <translation>%1 Datei(en) wurden abgewiesen, weil es sich um CDDA Platzhalter&amp;minus;Dateien handelt!</translation>
     </message>
@@ -1569,6 +1565,22 @@
     <message>
         <source>Cue Sheet File</source>
         <translation>Cuesheet Datei</translation>
+    </message>
+    <message>
+        <source>CDDA Files</source>
+        <translation>CDDA Dateien</translation>
+    </message>
+    <message>
+        <source>Cue Sheet</source>
+        <translation>Cuesheet</translation>
+    </message>
+    <message>
+        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation>%1 Datei(en) wurden abgewiesen, weil es sich um Cuesheet Image&amp;minus;Dateien handelt!</translation>
+    </message>
+    <message>
+        <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
+        <translation>Bitte benutzen Sie zum Importieren von Cuesheets den LameXP Cuesheet Assistenten.</translation>
     </message>
 </context>
 <context>
