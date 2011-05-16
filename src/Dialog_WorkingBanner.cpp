@@ -139,6 +139,11 @@ void WorkingBanner::show(const QString &text, QEventLoop *loop)
 
 void WorkingBanner::keyPressEvent(QKeyEvent *event)
 {
+	if(event->key() == Qt::Key_Escape)
+	{
+		emit userAbort();
+	}
+	
 	event->ignore();
 }
 

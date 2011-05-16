@@ -26,6 +26,7 @@
 #include <QMap>
 
 class AudioFileModel;
+class CueSheetModel;
 class QFile;
 class QDir;
 class QFileInfo;
@@ -39,14 +40,14 @@ class CueSplitter: public QThread
 	Q_OBJECT
 
 public:
-	CueSplitter(const QString &outputDir, const QString &baseName, const QList<AudioFileModel> &inputFiles);
+	CueSplitter(const QString &outputDir, const QString &baseName, CueSheetModel *model, const QList<AudioFileModel> &inputFilesInfo);
 	~CueSplitter(void);
+
 	void run();
-	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 	unsigned int getTracksSuccess(void) { return m_nTracksSuccess; }
 	unsigned int getTracksSkipped(void) { return m_nTracksSkipped; }
-	void addTrack(const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo);
-	void setAlbumInfo(const QString &performer, const QString &title);
+	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
+	bool getAborted(void) { return m_bAborted; }
 
 signals:
 	void fileSelected(const QString &fileName);
@@ -55,8 +56,11 @@ signals:
 private slots:
 	void handleUpdate(int progress);
 
+public slots:
+	void abortProcess(void) { m_abortFlag = true; }
+
 private:
-	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo);
+	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo, int &maxProgress);
 	QString indexToString(const double index) const;
 	
 	const QString m_soxBin;
@@ -64,18 +68,15 @@ private:
 	const QString m_baseName;
 	unsigned int m_nTracksSuccess;
 	unsigned int m_nTracksSkipped;
+	
+	bool m_bAborted;
 	bool m_bSuccess;
+	
 	volatile bool m_abortFlag;
 
-	QString m_albumTitle;
-	QString m_albumPerformer;
-	QString m_activeFile;
-	QMap<QString,AudioFileModel> m_inputFiles;
+	CueSheetModel *m_model;
+	QMap<QString,AudioFileModel> m_inputFilesInfo;
 	QMap<QString,QString> m_decompressedFiles;
 	QStringList m_tempFiles;
-	QList<QString> m_trackFile;
-	QList<int> m_trackNo;
-	QList<double> m_trackOffset;
-	QList<double> m_trackLength;
-	QList<AudioFileModel> m_trackMetaInfo;
+	QString m_activeFile;
 };

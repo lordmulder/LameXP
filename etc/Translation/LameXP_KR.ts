@@ -353,6 +353,10 @@
         <source>Abort</source>
         <translation type="unfinished">취소</translation>
     </message>
+    <message>
+        <source>Process was aborted by the user after %1 track(s)!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

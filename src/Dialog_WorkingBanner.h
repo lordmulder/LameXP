@@ -47,6 +47,9 @@ private:
 public slots:
 	void setText(const QString &text);
 
+signals:
+	void userAbort(void);
+
 protected:
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);

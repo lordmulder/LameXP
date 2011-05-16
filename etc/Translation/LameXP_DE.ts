@@ -353,6 +353,10 @@
         <source>Abort</source>
         <translation>Abbrechen</translation>
     </message>
+    <message>
+        <source>Process was aborted by the user after %1 track(s)!</source>
+        <translation>Der Vorgang wurde vom Benutzter nach %1 Track(s) abgebrochen!</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

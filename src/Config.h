@@ -28,9 +28,9 @@
 #define VER_LAMEXP_MAJOR					4
 #define VER_LAMEXP_MINOR_HI					0
 #define VER_LAMEXP_MINOR_LO					2
-#define VER_LAMEXP_TYPE						Alpha
-#define VER_LAMEXP_PATCH					15
-#define VER_LAMEXP_BUILD					526
+#define VER_LAMEXP_TYPE						Beta
+#define VER_LAMEXP_PATCH					1
+#define VER_LAMEXP_BUILD					528
 
 ///////////////////////////////////////////////////////////////////////////////
 // Tools versions

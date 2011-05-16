@@ -24,7 +24,7 @@
 #include "Global.h"
 #include "LockedFile.h"
 #include "Model_AudioFile.h"
-#include "PlaylistImporter.h"
+#include "Model_CueSheet.h"
 #include "Registry_Decoder.h"
 #include "Decoder_Abstract.h"
 
@@ -41,8 +41,9 @@
 // Constructor
 ////////////////////////////////////////////////////////////
 
-CueSplitter::CueSplitter(const QString &outputDir, const QString &baseName, const QList<AudioFileModel> &inputFiles)
+CueSplitter::CueSplitter(const QString &outputDir, const QString &baseName, CueSheetModel *model, const QList<AudioFileModel> &inputFilesInfo)
 :
+	m_model(model),
 	m_outputDir(outputDir),
 	m_baseName(baseName),
 	m_soxBin(lamexp_lookup_tool("sox.exe"))
@@ -52,18 +53,16 @@ CueSplitter::CueSplitter(const QString &outputDir, const QString &baseName, cons
 		qFatal("Invalid path to SoX binary. Tool not initialized properly.");
 	}
 
-	m_albumPerformer.clear();
-	m_albumTitle.clear();
 	m_decompressedFiles.clear();
 	m_tempFiles.clear();
 
 	qDebug("\n[CueSplitter::CueSplitter]");
 
-	int nInputFiles = inputFiles.count();
+	int nInputFiles = inputFilesInfo.count();
 	for(int i = 0; i < nInputFiles; i++)
 	{
-		m_inputFiles.insert(inputFiles[i].filePath(), inputFiles[i]);
-		qDebug("%02d <%s>", i, inputFiles[i].filePath().toUtf8().constData());
+		m_inputFilesInfo.insert(inputFilesInfo[i].filePath(), inputFilesInfo[i]);
+		qDebug("%02d <%s>", i, inputFilesInfo[i].filePath().toUtf8().constData());
 	}
 	
 	qDebug("All input files added.");
@@ -85,6 +84,7 @@ CueSplitter::~CueSplitter(void)
 void CueSplitter::run()
 {
 	m_bSuccess = false;
+	m_bAborted = false;
 	m_abortFlag = false;
 	m_nTracksSuccess = 0;
 	m_nTracksSkipped = 0;
@@ -97,13 +97,13 @@ void CueSplitter::run()
 		return;
 	}
 	
-	QStringList inputFileList = m_inputFiles.keys();
+	QStringList inputFileList = m_inputFilesInfo.keys();
 	int nInputFiles = inputFileList.count();
 	
 	//Decompress all input files
 	for(int i = 0; i < nInputFiles; i++)
 	{
-		AudioFileModel &inputFileInfo = m_inputFiles[inputFileList.at(i)];
+		AudioFileModel &inputFileInfo = m_inputFilesInfo[inputFileList.at(i)];
 		if(inputFileInfo.formatContainerType().compare("Wave", Qt::CaseInsensitive) || inputFileInfo.formatAudioType().compare("PCM", Qt::CaseInsensitive))
 		{
 			AbstractDecoder *decoder = DecoderRegistry::lookup(inputFileInfo.formatContainerType(), inputFileInfo.formatContainerProfile(), inputFileInfo.formatAudioType(), inputFileInfo.formatAudioProfile(), inputFileInfo.formatAudioVersion());
@@ -135,48 +135,76 @@ void CueSplitter::run()
 		{
 			m_decompressedFiles.insert(inputFileList.at(i), inputFileList.at(i));
 		}
+		if(m_abortFlag)
+		{
+			m_bAborted = true;
+			qWarning("The user has requested to abort the process!");
+			return;
+		}
 	}
 
-	int nTracks = min(min(min(m_trackFile.count(), m_trackNo.count()), min(m_trackOffset.count(), m_trackLength.count())), m_trackMetaInfo.count());
+	int nFiles = m_model->getFileCount();
+	QString albumPerformer = m_model->getAlbumPerformer();
+	QString albumTitle = m_model->getAlbumTitle();
 
 	//Now split all tracks
-	for(int i = 0; i < nTracks; i++)
+	for(int i = 0; i < nFiles; i++)
 	{
-		QString outputFile = QString("%1/%2 - Track %3.wav").arg(m_outputDir, m_baseName, QString().sprintf("%02d", m_trackNo.at(i)));
-		for(int n = 2; QFileInfo(outputFile).exists(); n++)
-		{
-			outputFile = QString("%1/%2 - Track %3 (%4).wav").arg(m_outputDir, m_baseName, QString().sprintf("%02d", m_trackNo.at(i)), QString::number(n));
-		}
+		int nTracks = m_model->getTrackCount(i);
+		QString trackFile = m_model->getFileName(i);
+		int maxProgress = 0;
 
-		emit fileSelected(QFileInfo(outputFile).fileName());
-		splitFile(outputFile,  m_trackNo.at(i), m_trackFile.at(i), m_trackOffset.at(i), m_trackLength.at(i), m_trackMetaInfo.at(i));
+		for(int j = 0; j < nTracks; j++)
+		{
+			int trackNo = m_model->getTrackNo(i, j);
+			double trackOffset = std::numeric_limits<double>::quiet_NaN();
+			double trackLength = std::numeric_limits<double>::quiet_NaN();
+			m_model->getTrackIndex(i, j, &trackOffset, &trackLength);
+			
+			if((trackNo < 0) || _isnan(trackOffset) || _isnan(trackLength))
+			{
+				qWarning("Failed to fetch information for track #%d of file #%d!", j, i);
+				continue;
+			}
+			
+			AudioFileModel trackMetaInfo(QString().sprintf("cue://File%02d/Track%02d", i, j));
+			trackMetaInfo.setFileName(m_model->getTrackTitle(i, j));
+			trackMetaInfo.setFileArtist(m_model->getTrackPerformer(i, j));
+			trackMetaInfo.setFilePosition(trackNo);
+
+			if(!albumTitle.isEmpty())
+			{
+				trackMetaInfo.setFileAlbum(albumTitle);
+			}
+			if(!albumPerformer.isEmpty() && trackMetaInfo.fileArtist().isEmpty())
+			{
+				trackMetaInfo.setFileArtist(albumPerformer);
+			}
+			if(_finite(trackLength))
+			{
+				trackMetaInfo.setFileDuration(static_cast<unsigned int>(abs(trackLength)));
+			}
+
+			QString outputFile = QString("%1/%2 - Track %3.wav").arg(m_outputDir, m_baseName, QString().sprintf("%02d", trackNo));
+			for(int n = 2; QFileInfo(outputFile).exists(); n++)
+			{
+				outputFile = QString("%1/%2 - Track %3 (%4).wav").arg(m_outputDir, m_baseName, QString().sprintf("%02d", trackNo), QString::number(n));
+			}
+
+			emit fileSelected(QFileInfo(outputFile).fileName());
+			splitFile(outputFile,  trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, maxProgress);
+
+			if(m_abortFlag)
+			{
+				m_bAborted = true;
+				qWarning("The user has requested to abort the process!");
+				return;
+			}
+		}
 	}
 
 	qDebug("All files were split.\n");
 	m_bSuccess = true;
-}
-
-void CueSplitter::addTrack(const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo)
-{
-	
-	if(m_inputFiles.contains(file))
-	{
-		m_trackFile << file;
-		m_trackNo << trackNo;
-		m_trackOffset << offset;
-		m_trackLength << length;
-		m_trackMetaInfo << metaInfo;
-	}
-	else
-	{
-		throw "The input file is unknown/missing!";
-	}
-}
-
-void CueSplitter::setAlbumInfo(const QString &performer, const QString &title)
-{
-	if(!performer.isEmpty()) m_albumPerformer = performer;
-	if(!title.isEmpty()) m_albumTitle = title;
 }
 
 ////////////////////////////////////////////////////////////
@@ -192,7 +220,7 @@ void CueSplitter::handleUpdate(int progress)
 // Privtae Functions
 ////////////////////////////////////////////////////////////
 
-void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo)
+void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo, int &maxProgress)
 {
 	qDebug("[Track %02d]", trackNo);
 	qDebug("File: <%s>", file.toUtf8().constData());
@@ -212,23 +240,12 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	QString decompressedInput = m_decompressedFiles[file];
 	qDebug("Input: <%s>", decompressedInput.toUtf8().constData());
 	
+	emit fileSelected(QString("%1 [%2%]").arg(baseName, QString::number(maxProgress)));
+
 	AudioFileModel outFileInfo(metaInfo);
 	outFileInfo.setFilePath(output);
 	outFileInfo.setFormatContainerType("Wave");
 	outFileInfo.setFormatAudioType("PCM");
-	
-	if(length != std::numeric_limits<double>::infinity())
-	{
-		outFileInfo.setFileDuration(static_cast<unsigned int>(abs(length)));
-	}
-	if(!m_albumTitle.isEmpty())
-	{
-		outFileInfo.setFileAlbum(m_albumTitle);
-	}
-	if(!m_albumPerformer.isEmpty() && outFileInfo.fileArtist().isEmpty())
-	{
-		outFileInfo.setFileArtist(m_albumPerformer);
-	}
 
 	QStringList args;
 	args << "-S" << "-V3";
@@ -237,12 +254,12 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	args << QDir::toNativeSeparators(output);
 	
 	//Add trim parameters, if needed
-	if(offset != 0.0 || length != std::numeric_limits<double>::infinity())
+	if(_finite(offset) || _finite(length))
 	{
 		args << "trim";
 		args << indexToString(offset);
 	
-		if((length != std::numeric_limits<double>::quiet_NaN()) && (length != std::numeric_limits<double>::infinity()))
+		if(_finite(length))
 		{
 			args << indexToString(length);
 		}
@@ -275,6 +292,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 		if(m_abortFlag)
 		{
 			process.kill();
+			qWarning("Process was aborted on user request!");
 			break;
 		}
 		process.waitForReadyRead();
@@ -294,7 +312,8 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 				int progress = rxProgress.cap(1).toInt(&ok);
 				if(ok)
 				{
-					emit fileSelected(QString("%1 [%2%]").arg(baseName, QString::number(progress)));
+					maxProgress = max(maxProgress, progress);
+					emit fileSelected(QString("%1 [%2%]").arg(baseName, QString::number(maxProgress)));
 				}
 			}
 			else if(rxChannels.lastIndexIn(text) >= 0)
@@ -361,7 +380,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 
 QString CueSplitter::indexToString(const double index) const
 {
-	if(index == std::numeric_limits<double>::quiet_NaN() || index == std::numeric_limits<double>::infinity() || index < 0.0)
+	if(!_finite(index) || (index < 0.0))
 	{
 		return QString();
 	}

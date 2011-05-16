@@ -111,6 +111,11 @@ int CueImportDialog::exec(void)
 	}
 
 	m_outputDir = QString("%1/%2").arg(cueFileInfo.canonicalPath(), cueFileInfo.completeBaseName());
+	for(int n = 2; QDir(m_outputDir).exists(); n++)
+	{
+		m_outputDir = QString("%1/%2 (%3)").arg(cueFileInfo.canonicalPath(), cueFileInfo.completeBaseName(), QString::number(n));
+	}
+
 	setWindowTitle(QString("%1: %2").arg(windowTitle().split(":", QString::SkipEmptyParts).first().trimmed(), cueFileInfo.fileName()));
 
 	int iResult = m_model->loadCueSheet(m_cueFileName, QApplication::instance());
@@ -259,7 +264,7 @@ bool CueImportDialog::analyzeFiles(QStringList &files)
 	progress->show(tr("Analyzing file(s), please wait..."), analyzer);
 	progress->close();
 
-	if(analyzer->filesAccepted() < files.count())
+	if(analyzer->filesAccepted() < static_cast<unsigned int>(files.count()))
 	{
 		if(QMessageBox::warning(this, tr("Analysis Failed"), tr("Warning: The format of some of the input files could not be determined!"), tr("Continue Anyway"), tr("Abort")) == 1)
 		{
@@ -275,55 +280,29 @@ bool CueImportDialog::analyzeFiles(QStringList &files)
 
 void CueImportDialog::splitFiles(void)
 {
-	int nTracksSkipped = 0;
+	QString baseName = QFileInfo(m_cueFileName).completeBaseName().replace(".", " ").left(42).trimmed();
 
 	WorkingBanner *progress = new WorkingBanner(this);
-	CueSplitter *splitter  = new CueSplitter(m_outputDir, QFileInfo(m_cueFileName).completeBaseName().replace(".", " ").left(42).trimmed(), m_fileInfo);
-	splitter->setAlbumInfo(m_model->getAlbumPerformer(), m_model->getAlbumTitle());
+	CueSplitter *splitter  = new CueSplitter(m_outputDir, baseName, m_model, m_fileInfo);
 
 	connect(splitter, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
+	connect(progress, SIGNAL(userAbort()), splitter, SLOT(abortProcess()), Qt::DirectConnection);
 	connect(splitter, SIGNAL(fileSplit(AudioFileModel)), m_fileList, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-
-	int nFiles = m_model->getFileCount();
-	for(int i = 0; i < nFiles; i++)
-	{
-		QString currentFileName = m_model->getFileName(i);
-		int nTracks = m_model->getTrackCount(i);
-		
-		for(int j = 0; j < nTracks; j++)
-		{
-			int trackNo = m_model->getTrackNo(i, j);
-			double startIndex = std::numeric_limits<double>::quiet_NaN();
-			double duration = std::numeric_limits<double>::quiet_NaN();
-			m_model->getTrackIndex(i, j, &startIndex, &duration);
-
-			AudioFileModel metaInfo(QString().sprintf("cue://File%02d/Track%02d", i, j));
-			metaInfo.setFileName(m_model->getTrackTitle(i, j));
-			metaInfo.setFileArtist(m_model->getTrackPerformer(i, j));
-			metaInfo.setFilePosition(trackNo);
-			
-			try
-			{
-				splitter->addTrack(trackNo, currentFileName, startIndex, duration, metaInfo);
-			}
-			catch(char *err)
-			{
-				qWarning("Failed to add track #%02d: %s", trackNo, err);
-				nTracksSkipped++;
-			}
-		}
-	}
 
 	progress->show(tr("Splitting file(s), please wait..."), splitter);
 	progress->close();
 
-	if(!splitter->getSuccess())
+	if(splitter->getAborted())	
+	{
+		QMessageBox::warning(this, tr("Cue Sheet Error"), tr("Process was aborted by the user after %1 track(s)!").arg(QString::number(splitter->getTracksSuccess())));
+	}
+	else if(!splitter->getSuccess())
 	{
 		QMessageBox::warning(this, tr("Cue Sheet Error"), tr("An unexpected error has occured while splitting the Cue Sheet!"));
 	}
 	else
 	{
-		QString text = QString("<nobr>%1</nobr>").arg(tr("Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).").arg(QString::number(splitter->getTracksSuccess()), QString::number(splitter->getTracksSkipped() + nTracksSkipped)));
+		QString text = QString("<nobr>%1</nobr>").arg(tr("Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).").arg(QString::number(splitter->getTracksSuccess()), QString::number(splitter->getTracksSkipped() /*+ nTracksSkipped*/)));
 		QMessageBox::information(this, tr("Cue Sheet Completed"), text);
 	}
 

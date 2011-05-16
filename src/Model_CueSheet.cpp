@@ -95,6 +95,8 @@ private:
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
+QMutex CueSheetModel::m_mutex(QMutex::Recursive);
+
 CueSheetModel::CueSheetModel()
 :
 	m_fileIcon(":/icons/music.png"),
@@ -127,6 +129,8 @@ CueSheetModel::~CueSheetModel(void)
 
 QModelIndex CueSheetModel::index(int row, int column, const QModelIndex &parent) const
 {
+	QMutexLocker lock(&m_mutex);
+	
 	if(!parent.isValid())
 	{
 		return (row < m_files.count()) ? createIndex(row, column, m_files.at(row)) : QModelIndex();
@@ -143,11 +147,14 @@ QModelIndex CueSheetModel::index(int row, int column, const QModelIndex &parent)
 
 int CueSheetModel::columnCount(const QModelIndex &parent) const
 {
+	QMutexLocker lock(&m_mutex);
 	return 4;
 }
 
 int CueSheetModel::rowCount(const QModelIndex &parent) const
 {
+	QMutexLocker lock(&m_mutex);
+
 	if(!parent.isValid())
 	{
 		return m_files.count();
@@ -164,6 +171,8 @@ int CueSheetModel::rowCount(const QModelIndex &parent) const
 
 QModelIndex CueSheetModel::parent(const QModelIndex &child) const
 {
+	QMutexLocker lock(&m_mutex);
+	
 	if(child.isValid())
 	{
 		CueSheetItem *childItem = static_cast<CueSheetItem*>(child.internalPointer());
@@ -178,6 +187,8 @@ QModelIndex CueSheetModel::parent(const QModelIndex &child) const
 
 QVariant CueSheetModel::headerData (int section, Qt::Orientation orientation, int role) const
 {
+	QMutexLocker lock(&m_mutex);
+	
 	if(role == Qt::DisplayRole)
 	{
 		switch(section)
@@ -207,6 +218,8 @@ QVariant CueSheetModel::headerData (int section, Qt::Orientation orientation, in
 
 QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 {
+	QMutexLocker lock(&m_mutex);
+
 	if(role == Qt::DisplayRole)
 	{
 		CueSheetItem *item = reinterpret_cast<CueSheetItem*>(index.internalPointer());
@@ -331,6 +344,8 @@ QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 
 void CueSheetModel::clearData(void)
 {
+	QMutexLocker lock(&m_mutex);
+	
 	beginResetModel();
 	while(!m_files.isEmpty()) delete m_files.takeLast();
 	endResetModel();
@@ -342,11 +357,14 @@ void CueSheetModel::clearData(void)
 
 int CueSheetModel::getFileCount(void)
 {
+	QMutexLocker lock(&m_mutex);
 	return m_files.count();
 }
 
 QString CueSheetModel::getFileName(int fileIndex)
 {
+	QMutexLocker lock(&m_mutex);
+	
 	if(fileIndex < 0 || fileIndex >= m_files.count())
 	{
 		return QString();
@@ -357,6 +375,8 @@ QString CueSheetModel::getFileName(int fileIndex)
 
 int CueSheetModel::getTrackCount(int fileIndex)
 {
+	QMutexLocker lock(&m_mutex);
+
 	if(fileIndex < 0 || fileIndex >= m_files.count())
 	{
 		return -1;
@@ -367,6 +387,8 @@ int CueSheetModel::getTrackCount(int fileIndex)
 
 int CueSheetModel::getTrackNo(int fileIndex, int trackIndex)
 {
+	QMutexLocker lock(&m_mutex);
+	
 	if(fileIndex >= 0 && fileIndex < m_files.count())
 	{
 		CueSheetFile *currentFile = m_files.at(fileIndex);
@@ -381,6 +403,8 @@ int CueSheetModel::getTrackNo(int fileIndex, int trackIndex)
 
 void CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration)
 {
+	QMutexLocker lock(&m_mutex);
+	
 	*startIndex = std::numeric_limits<double>::quiet_NaN();
 	*duration = std::numeric_limits<double>::quiet_NaN();
 
@@ -398,6 +422,8 @@ void CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIn
 
 QString CueSheetModel::getTrackPerformer(int fileIndex, int trackIndex)
 {	
+	QMutexLocker lock(&m_mutex);
+	
 	if(fileIndex >= 0 && fileIndex < m_files.count())
 	{
 		CueSheetFile *currentFile = m_files.at(fileIndex);
@@ -407,11 +433,14 @@ QString CueSheetModel::getTrackPerformer(int fileIndex, int trackIndex)
 			return currentTrack->performer();
 		}
 	}
+	
 	return QString();
 }
 
 QString CueSheetModel::getTrackTitle(int fileIndex, int trackIndex)
 {
+	QMutexLocker lock(&m_mutex);
+	
 	if(fileIndex >= 0 && fileIndex < m_files.count())
 	{
 		CueSheetFile *currentFile = m_files.at(fileIndex);
@@ -421,7 +450,20 @@ QString CueSheetModel::getTrackTitle(int fileIndex, int trackIndex)
 			return currentTrack->title();
 		}
 	}
+	
 	return QString();
+}
+
+QString CueSheetModel::getAlbumPerformer(void)
+{
+	QMutexLocker lock(&m_mutex);
+	return m_albumPerformer;
+}
+
+QString CueSheetModel::getAlbumTitle(void)
+{
+	QMutexLocker lock(&m_mutex);
+	return m_albumTitle;
 }
 
 ////////////////////////////////////////////////////////////
@@ -430,6 +472,8 @@ QString CueSheetModel::getTrackTitle(int fileIndex, int trackIndex)
 
 int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *application)
 {
+	QMutexLocker lock(&m_mutex);
+	
 	QFile cueFile(cueFileName);
 	if(!cueFile.open(QIODevice::ReadOnly))
 	{
