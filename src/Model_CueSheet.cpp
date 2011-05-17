@@ -786,7 +786,7 @@ double CueSheetModel::parseTimeIndex(const QString &index)
 
 		if(minOK && secOK && frmOK)
 		{
-			return static_cast<double>(60 * min) + static_cast<double>(sec) + ((1.0/75.0) * static_cast<double>(frm));
+			return static_cast<double>(60 * min) + static_cast<double>(sec) + (static_cast<double>(frm) / 75.0);
 		}
 	}
 
@@ -796,21 +796,25 @@ double CueSheetModel::parseTimeIndex(const QString &index)
 
 QString CueSheetModel::indexToString(const double index) const
 {
-	if(index == std::numeric_limits<double>::quiet_NaN())
+	if(!_finite(index) || (index < 0.0))
 	{
-		return QString("<-NaN!->");
+		return QString("??:??.???");
 	}
-	else if(index == std::numeric_limits<double>::infinity() || index < 0.0)
+		
+	unsigned int temp = static_cast<unsigned int>(floor(0.5 + (index * 1000.0)));
+
+	unsigned int msec = temp % 1000;
+	unsigned int secs = temp / 1000;
+	unsigned int mins = secs / 60;
+	
+	secs = secs % 60;
+
+	if(mins < 100)
 	{
-		return QString("??:??.??");
+		return QString().sprintf("%02u:%02u.%03u", mins, secs, msec);
 	}
 	else
 	{
-		int temp = static_cast<int>(floor(0.5 + (index * 100.0)));
-
-		int msec = temp % 100;
-		int secs = temp / 100;
-
-		return QString().sprintf("%02d:%02d.%02d", min(99, secs / 60), min(99, secs % 60), min(99, msec));
+		return QString("99:99.999");
 	}
 }

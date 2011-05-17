@@ -224,8 +224,8 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 {
 	qDebug("[Track %02d]", trackNo);
 	qDebug("File: <%s>", file.toUtf8().constData());
-	qDebug("Offset: %f", offset);
-	qDebug("Length: %f", length);
+	qDebug("Offset: <%f> <%s>", offset, indexToString(offset).toLatin1().constData());
+	qDebug("Length: <%f> <%s>", length, indexToString(length).toLatin1().constData());
 	qDebug("Artist: <%s>", metaInfo.fileArtist().toUtf8().constData());
 	qDebug("Title: <%s>", metaInfo.fileName().toUtf8().constData());
 	
@@ -254,11 +254,11 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	args << QDir::toNativeSeparators(output);
 	
 	//Add trim parameters, if needed
-	if(_finite(offset) || _finite(length))
+	if(_finite(offset))
 	{
 		args << "trim";
 		args << indexToString(offset);
-	
+		
 		if(_finite(length))
 		{
 			args << indexToString(length);
@@ -384,23 +384,28 @@ QString CueSplitter::indexToString(const double index) const
 	{
 		return QString();
 	}
+		
+	unsigned int temp = static_cast<unsigned int>(floor(0.5 + (index * 1000.0)));
 
-	int temp = static_cast<int>(floor(0.5 + (index * 1000.0)));
+	unsigned int msec = temp % 1000;
+	unsigned int secs = temp / 1000;
+	unsigned int mins = secs / 60;
+	unsigned int hour = mins / 60;
+	
+	secs = secs % 60;
+	mins = mins % 60;
 
-	int msec = temp % 1000;
-	int secs = temp / 1000;
-
-	if(secs >= 3600)
+	if(hour > 0)
 	{
-		return QString().sprintf("%d:%02d:%02d.%03d", min(99, secs / 3600), min(59, (secs % 3600) / 60), min(59, (secs % 3600) % 60), min(99, msec));
+		return QString().sprintf("%u:%02u:%02u.%03u", hour, mins, secs, msec);
 	}
-	else if(secs >= 60)
+	else if(mins > 0)
 	{
-		return QString().sprintf("%d:%02d.%03d", min(99, secs / 60), min(59, secs % 60), min(99, msec));
+		return QString().sprintf("%u:%02u.%03u", mins, secs, msec);
 	}
 	else
 	{
-		return QString().sprintf("%d.%03d", min(59, secs % 60), min(99, msec));
+		return QString().sprintf("%u.%03u", secs, msec);
 	}
 }
 
