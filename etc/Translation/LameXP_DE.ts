@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>%1 Datei(ein) wurden aus dem Cuesheet importiert, %2 Datei(en) übersprungen.</translation>
+        <translation>%1 Datei(ein) wurden aus dem Cuesheet importiert. %2 Datei(en) übersprungen.</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
@@ -1580,7 +1580,7 @@
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation>Bitte benutzen Sie zum Importieren von Cuesheets den LameXP Cuesheet Assistenten.</translation>
+        <translation>Bitte benutzen Sie zum Importieren von Cuesheets den Cuesheet Assistenten.</translation>
     </message>
 </context>
 <context>
