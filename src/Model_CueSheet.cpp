@@ -27,6 +27,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QFont>
+#include <QTime>
 
 #include <float.h>
 #include <limits>
@@ -796,22 +797,16 @@ double CueSheetModel::parseTimeIndex(const QString &index)
 
 QString CueSheetModel::indexToString(const double index) const
 {
-	if(!_finite(index) || (index < 0.0))
+	if(!_finite(index) || (index < 0.0) || (index > 86400.0))
 	{
 		return QString("??:??.???");
 	}
-		
-	unsigned int temp = static_cast<unsigned int>(floor(0.5 + (index * 1000.0)));
-
-	unsigned int msec = temp % 1000;
-	unsigned int secs = temp / 1000;
-	unsigned int mins = secs / 60;
 	
-	secs = secs % 60;
+	QTime time = QTime().addMSecs(static_cast<int>(floor(0.5 + (index * 1000.0))));
 
-	if(mins < 100)
+	if(time.minute() < 100)
 	{
-		return QString().sprintf("%02u:%02u.%03u", mins, secs, msec);
+		return time.toString("mm:ss.zzz");
 	}
 	else
 	{

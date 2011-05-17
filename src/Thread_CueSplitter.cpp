@@ -56,13 +56,13 @@ CueSplitter::CueSplitter(const QString &outputDir, const QString &baseName, CueS
 	m_decompressedFiles.clear();
 	m_tempFiles.clear();
 
-	qDebug("\n[CueSplitter::CueSplitter]");
+	qDebug("\n[CueSplitter]");
 
 	int nInputFiles = inputFilesInfo.count();
 	for(int i = 0; i < nInputFiles; i++)
 	{
 		m_inputFilesInfo.insert(inputFilesInfo[i].filePath(), inputFilesInfo[i]);
-		qDebug("%02d <%s>", i, inputFilesInfo[i].filePath().toUtf8().constData());
+		qDebug("File %02d: <%s>", i, inputFilesInfo[i].filePath().toUtf8().constData());
 	}
 	
 	qDebug("All input files added.");
@@ -380,33 +380,13 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 
 QString CueSplitter::indexToString(const double index) const
 {
-	if(!_finite(index) || (index < 0.0))
+	if(!_finite(index) || (index < 0.0) || (index > 86400.0))
 	{
 		return QString();
 	}
-		
-	unsigned int temp = static_cast<unsigned int>(floor(0.5 + (index * 1000.0)));
-
-	unsigned int msec = temp % 1000;
-	unsigned int secs = temp / 1000;
-	unsigned int mins = secs / 60;
-	unsigned int hour = mins / 60;
 	
-	secs = secs % 60;
-	mins = mins % 60;
-
-	if(hour > 0)
-	{
-		return QString().sprintf("%u:%02u:%02u.%03u", hour, mins, secs, msec);
-	}
-	else if(mins > 0)
-	{
-		return QString().sprintf("%u:%02u.%03u", mins, secs, msec);
-	}
-	else
-	{
-		return QString().sprintf("%u.%03u", secs, msec);
-	}
+	QTime time = QTime().addMSecs(static_cast<int>(floor(0.5 + (index * 1000.0))));
+	return time.toString(time.hour() ? "H:mm:ss.zzz" : "m:ss.zzz");
 }
 
 ////////////////////////////////////////////////////////////
