@@ -201,19 +201,19 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished"></translation>
+        <translation>Note : Cette version  de démonstration de LameXP expirera le %1. Encore %2 jour(s) restant(s).</translation>
     </message>
     <message>
         <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften &amp;minus; Encodeur audio A/52</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Décodeur ALAC</translation>
     </message>
     <message>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2004 David Hammerton. Contributions par Cody Brocious.</translation>
     </message>
 </context>
 <context>
@@ -247,99 +247,99 @@
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Importation CueSheet</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le Cue Sheet suivant est divisé et importé dans LameXP.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement du fichier Cue Sheet, veuillez patienter...</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur inconnue s&apos;est produite !</translation>
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de charger le fichier Cue Sheet :</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur Cue Sheet</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier spécifié n&apos;a pas été trouvé !</translation>
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;a pas pu être ouvert pour la lecture. Assurez-vous que vous disposez des droits requis !</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier fourni ne semble pas être un fichier d&apos;image disque Cue Sheet valide !</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de trouver des pistes audio pris en charge dans l&apos;image Cue Sheet !</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished"></translation>
+        <translation>Notez que LameXP ne peut pas gérer les images Cue Sheet « binaires ».</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier Cue Sheet sélectionné contient des informations incohérentes. Faites attention !</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le répertoire de sortie</translation>
     </message>
     <message>
         <source>LameXP</source>
-        <translation type="unfinished">LameXP</translation>
+        <translation>LameXP</translation>
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur : Le répertoire de sortie sélectionné n&apos;est pas accessible en écriture !</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished">Avertissement d&apos;espace disque faible</translation>
+        <translation>Avertissement d&apos;espace disque faible</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il y a moins de %1 Go d&apos;espace disque disponible dans le répertoire de sortie sélectionné.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation type="unfinished"></translation>
+        <translation>Il est vivement recommandé de libérer de l&apos;espace disque avant de procéder à l&apos;importation !</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyse des fichiers, veuillez patienter...</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fractionnement des fichiers, veuillez patienter...</translation>
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur : Le répertoire de sortie sélectionné ne peut pas être créé !</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur inattendue s&apos;est produite en divisant la Cue Sheet !</translation>
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 piste(s) importée(s) de la Cue Sheet et %2 piste(s) ignorée(s).</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cue Sheet terminé</translation>
     </message>
     <message>
         <source>Analysis Failed</source>
@@ -366,62 +366,62 @@
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer Cue Sheet</translation>
     </message>
     <message>
         <source> Output Directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire de sortie</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished">Explorer...</translation>
+        <translation>Explorer...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Abandonner</translation>
+        <translation>Abandonner</translation>
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source existant</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source manquant (les pistes seront ignorées !)</translation>
     </message>
 </context>
 <context>
     <name>CueSheetModel</name>
     <message>
         <source>No.</source>
-        <translation type="unfinished"></translation>
+        <translation>No.</translation>
     </message>
     <message>
         <source>File / Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier / Piste</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Index</translation>
     </message>
     <message>
         <source>File %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier %1</translation>
     </message>
     <message>
         <source>Track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Piste %1</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Artiste inconnu</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre inconnu</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Durée</translation>
+        <translation>Durée</translation>
     </message>
 </context>
 <context>
@@ -1441,139 +1441,139 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Check for Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier les mises à jour Beta</translation>
     </message>
     <message>
         <source>Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Mises à jour Beta</translation>
     </message>
     <message>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment que LameXP vérifie les mises à jour Beta ?</translation>
     </message>
     <message>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désormais LameXP vérifiera les mises à jour Beta.</translation>
     </message>
     <message>
         <source>Check Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier maintenant</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Abandonner</translation>
+        <translation>Abandonner</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désormais LameXP ne vérifiera &lt;i&gt;pas&lt;/i&gt; les mises à jour Beta.</translation>
     </message>
     <message>
         <source>Aften A/52</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften A/52</translation>
     </message>
     <message>
         <source>Lame MP3:</source>
-        <translation type="unfinished">Lame MP3:</translation>
+        <translation>Lame MP3 :</translation>
     </message>
     <message>
         <source>Aften A/52:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften A/52 :</translation>
     </message>
     <message>
         <source> Aften A/52 Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Options Aften A/52 </translation>
     </message>
     <message>
         <source>Film Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Film lumière</translation>
     </message>
     <message>
         <source>Film Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Film standard</translation>
     </message>
     <message>
         <source>Music Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Musique lumière</translation>
     </message>
     <message>
         <source>Music Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Musique standard</translation>
     </message>
     <message>
         <source>Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Discours</translation>
     </message>
     <message>
         <source>None (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun (par défaut)</translation>
     </message>
     <message>
         <source>Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection auto</translation>
     </message>
     <message>
         <source>1+1 (Ch1,Ch2)</source>
-        <translation type="unfinished"></translation>
+        <translation>1+1 (Ch1,Ch2)</translation>
     </message>
     <message>
         <source>1/0 (C)</source>
-        <translation type="unfinished"></translation>
+        <translation>1/0 (C)</translation>
     </message>
     <message>
         <source>2/0 (L,R)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/0 (L,R)</translation>
     </message>
     <message>
         <source>3/0 (L,R,C)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/0 (L,R,C)</translation>
     </message>
     <message>
         <source>2/1 (L,R,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/1 (L,R,S)</translation>
     </message>
     <message>
         <source>3/1 (L,R,C,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/1 (L,R,C,S)</translation>
     </message>
     <message>
         <source>2/2 (L,R,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/2 (L,R,SL,SR)</translation>
     </message>
     <message>
         <source>3/2 (L,R,C,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/2 (L,R,C,SL,SR)</translation>
     </message>
     <message>
         <source>Audio Coding Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode d&apos;encodage audio :</translation>
     </message>
     <message>
         <source>Dynamic Range Compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Compression gamme dynamique :</translation>
     </message>
     <message>
         <source>Fast Bit Allocation (Less Accurate)</source>
-        <translation type="unfinished"></translation>
+        <translation>Allocation octet rapide (moins précise)</translation>
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de recherche exponentielle :</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne plus afficher</translation>
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer Cue Sheet</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir Cue Sheet</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier Cue Sheet</translation>
     </message>
     <message>
         <source>CDDA Files</source>
@@ -1994,15 +1994,15 @@ Ouvrir le dossier récursivement...</translation>
     <name>QApplication</name>
     <message>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;éxécutable %1 ne supporte pas le mode de compatibilité Windows.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;éxécutable %1 nécessite Qt v%2, mais Qt v%3 trouvé.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;éxécutable %1 nécessite Windows XP ou supérieur.</translation>
     </message>
 </context>
 <context>
@@ -2119,23 +2119,23 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>La mise à jour est en cours de téléchargement, veuillez patienter...</translation>
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>La mise à jour est prête à être installée. L&apos;application doit se fermer...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
-        <translation type="unfinished"></translation>
+        <translation>La mise à jour a échoué. Veuillez essayer à nouveau ou télécharger manuellement !</translation>
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
-        <translation type="unfinished"></translation>
+        <translation>Il semble que l&apos;ordinateur est actuellement hors connexion !</translation>
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez vous assurer que votre ordinateur est connecté à internet et essayez à nouveau.</translation>
     </message>
 </context>
 </TS>
