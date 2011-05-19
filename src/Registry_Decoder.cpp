@@ -25,6 +25,7 @@
 #include "Decoder_AC3.h"
 #include "Decoder_ADPCM.h"
 #include "Decoder_ALAC.h"
+#include "Decoder_Avisynth.h"
 #include "Decoder_FLAC.h"
 #include "Decoder_MAC.h"
 #include "Decoder_MP3.h"
@@ -62,6 +63,7 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	PROBE_DECODER(WMADecoder);
 	PROBE_DECODER(ADPCMDecoder);
 	PROBE_DECODER(WaveDecoder);
+	PROBE_DECODER(AvisynthDecoder);
 	
 	return NULL;
 }
@@ -85,6 +87,7 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	types << GET_FILETYPES(ALACDecoder);
 	types << GET_FILETYPES(WMADecoder);
 	types << GET_FILETYPES(ADPCMDecoder);
+	types << GET_FILETYPES(AvisynthDecoder);
 
 	QStringList extensions;
 	extensions << QString(PlaylistImporter::supportedExtensions).split(" ", QString::SkipEmptyParts);

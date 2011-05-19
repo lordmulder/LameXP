@@ -232,6 +232,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Decoder_AC3.cpp" />
     <ClCompile Include="src\Decoder_ADPCM.cpp" />
     <ClCompile Include="src\Decoder_ALAC.cpp" />
+    <ClCompile Include="src\Decoder_Avisynth.cpp" />
     <ClCompile Include="src\Decoder_FLAC.cpp" />
     <ClCompile Include="src\Decoder_MAC.cpp" />
     <ClCompile Include="src\Decoder_MP3.cpp" />
@@ -377,6 +378,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="src\Decoder_Avisynth.h" />
     <ClInclude Include="tmp\UIC_CueSheetImport.h" />
     <ClInclude Include="tmp\UIC_DropBox.h" />
     <ClInclude Include="tmp\UIC_LogViewDialog.h" />

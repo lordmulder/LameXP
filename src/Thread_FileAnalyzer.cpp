@@ -119,6 +119,14 @@ void FileAnalyzer::run()
 				qWarning("Cue Sheet file detected, skipping!");
 				m_filesCueSheet++;
 			}
+			else if(!QFileInfo(currentFile).suffix().compare("avs", Qt::CaseInsensitive))
+			{
+				qWarning("Added an potential Avisynth script file!");
+				file.setFormatAudioType("Avisynth");
+				file.setFormatContainerType("Avisynth");
+				m_filesAccepted++;
+				emit fileAnalyzed(file);
+			}
 			else
 			{
 				qDebug64("Rejected file of unknown type: %1", file.filePath());
