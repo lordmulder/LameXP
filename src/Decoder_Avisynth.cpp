@@ -57,7 +57,7 @@ bool AvisynthDecoder::decode(const QString &sourceFile, const QString &outputFil
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	QRegExp regExp("please wait: (\\d+)/(\\d+) \\[(\\d+)%\\]");
+	QRegExp regExp("(\\d+)/(\\d+) \\[(\\d+)%\\]");
 
 	while(process.state() != QProcess::NotRunning)
 	{

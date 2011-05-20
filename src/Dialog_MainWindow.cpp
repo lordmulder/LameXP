@@ -1624,13 +1624,17 @@ void MainWindow::makeFolderButtonClicked(void)
 void MainWindow::editMetaButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-	
+
 	const QModelIndex index = metaDataView->currentIndex();
-	m_metaInfoModel->editItem(index, this);
-	
-	if(index.row() == 4)
+
+	if(index.isValid())
 	{
-		m_settings->metaInfoPosition(m_metaData->filePosition());
+		m_metaInfoModel->editItem(index, this);
+	
+		if(index.row() == 4)
+		{
+			m_settings->metaInfoPosition(m_metaData->filePosition());
+		}
 	}
 }
 
