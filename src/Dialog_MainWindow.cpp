@@ -918,9 +918,9 @@ void MainWindow::windowShown(void)
 	}
 
 	//Check for AAC support
-	if(m_settings->neroAacNotificationsEnabled())
+	if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
 	{
-		if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
+		if(m_settings->neroAacNotificationsEnabled())
 		{
 			if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
 			{
@@ -932,9 +932,12 @@ void MainWindow::windowShown(void)
 				QMessageBox::information(this, tr("AAC Encoder Outdated"), messageText);
 			}
 		}
-		else
+	}
+	else
+	{
+		radioButtonEncoderAAC->setEnabled(false);
+		if(m_settings->neroAacNotificationsEnabled())
 		{
-			radioButtonEncoderAAC->setEnabled(false);
 			QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 			if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
 			QString messageText;
