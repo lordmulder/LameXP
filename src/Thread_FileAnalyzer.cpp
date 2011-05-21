@@ -122,7 +122,7 @@ void FileAnalyzer::run()
 			}
 			else if(!QFileInfo(currentFile).suffix().compare("avs", Qt::CaseInsensitive))
 			{
-				qWarning("Added an potential Avisynth script file!");
+				qDebug("Found a potential Avisynth script, investigating...");
 				if(analyzeAvisynthFile(currentFile, file))
 				{
 					m_filesAccepted++;
@@ -561,8 +561,6 @@ void FileAnalyzer::retrieveCover(AudioFileModel &audioFile, const QString &fileP
 
 bool FileAnalyzer::analyzeAvisynthFile(const QString &filePath, AudioFileModel &info)
 {
-	bool bAudioInfoReceived = false;
-	
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
@@ -576,6 +574,8 @@ bool FileAnalyzer::analyzeAvisynthFile(const QString &filePath, AudioFileModel &
 		process.waitForFinished(-1);
 		return false;
 	}
+
+	bool bInfoHeaderFound = false;
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -610,7 +610,7 @@ bool FileAnalyzer::analyzeAvisynthFile(const QString &filePath, AudioFileModel &
 					QString key = line.left(index).trimmed();
 					QString val = line.mid(index+1).trimmed();
 
-					if(!key.isEmpty() && !val.isEmpty())
+					if(bInfoHeaderFound && !key.isEmpty() && !val.isEmpty())
 					{
 						if(key.compare("TotalSeconds", Qt::CaseInsensitive) == 0)
 						{
@@ -644,7 +644,7 @@ bool FileAnalyzer::analyzeAvisynthFile(const QString &filePath, AudioFileModel &
 					{
 						info.setFormatAudioType("Avisynth");
 						info.setFormatContainerType("Avisynth");
-						bAudioInfoReceived = true;
+						bInfoHeaderFound = true;
 					}
 				}
 			}
@@ -658,9 +658,23 @@ bool FileAnalyzer::analyzeAvisynthFile(const QString &filePath, AudioFileModel &
 		process.waitForFinished(-1);
 	}
 
-	return bAudioInfoReceived;
+	//Check exit code
+	switch(process.exitCode())
+	{
+	case 0:
+		qDebug("Avisynth script was analyzed successfully.");
+		return true;
+		break;
+	case -5:
+		qWarning("It appears that Avisynth is not installed on the system!");
+		return false;
+		break;
+	default:
+		qWarning("Failed to open the Avisynth script, bad AVS file?");
+		return false;
+		break;
+	}
 }
-
 
 ////////////////////////////////////////////////////////////
 // Public Functions
