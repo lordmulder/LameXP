@@ -84,7 +84,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 		LAMEXP_CLOSE(m_fileHandle);
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
 		char error_msg[512];
-		strcpy_s(error_msg, 512, QString("File '%1' is corruputed, take care!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
+		strcpy_s(error_msg, 512, QString("File '%1' is corruputed, take care!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toLatin1().constData());
 		throw error_msg;
 	}
 }

@@ -43,6 +43,7 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 :
 	m_inputFiles(inputFiles),
 	m_mediaInfoBin(lamexp_lookup_tool("mediainfo.exe")),
+	m_avs2wavBin(lamexp_lookup_tool("avs2wav.exe")),
 	m_abortFlag(false)
 {
 	m_bSuccess = false;
@@ -122,10 +123,11 @@ void FileAnalyzer::run()
 			else if(!QFileInfo(currentFile).suffix().compare("avs", Qt::CaseInsensitive))
 			{
 				qWarning("Added an potential Avisynth script file!");
-				file.setFormatAudioType("Avisynth");
-				file.setFormatContainerType("Avisynth");
-				m_filesAccepted++;
-				emit fileAnalyzed(file);
+				if(analyzeAvisynthFile(currentFile, file))
+				{
+					m_filesAccepted++;
+					emit fileAnalyzed(file);
+				}
 			}
 			else
 			{
@@ -250,6 +252,13 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath, int *typ
 		audioFile.setFileName(baseName);
 	}
 	
+	process.waitForFinished();
+	if(process.state() != QProcess::NotRunning)
+	{
+		process.kill();
+		process.waitForFinished(-1);
+	}
+
 	if(m_currentCover != coverNone)
 	{
 		retrieveCover(audioFile, filePath);
@@ -541,7 +550,117 @@ void FileAnalyzer::retrieveCover(AudioFileModel &audioFile, const QString &fileP
 			}
 		}
 	}
+
+	process.waitForFinished();
+	if(process.state() != QProcess::NotRunning)
+	{
+		process.kill();
+		process.waitForFinished(-1);
+	}
 }
+
+bool FileAnalyzer::analyzeAvisynthFile(const QString &filePath, AudioFileModel &info)
+{
+	bool bAudioInfoReceived = false;
+	
+	QProcess process;
+	process.setProcessChannelMode(QProcess::MergedChannels);
+	process.setReadChannel(QProcess::StandardOutput);
+	process.start(m_avs2wavBin, QStringList() << QDir::toNativeSeparators(filePath) << "?");
+
+	if(!process.waitForStarted())
+	{
+		qWarning("AVS2WAV process failed to create!");
+		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
+		process.kill();
+		process.waitForFinished(-1);
+		return false;
+	}
+
+	while(process.state() != QProcess::NotRunning)
+	{
+		if(m_abortFlag)
+		{
+			process.kill();
+			qWarning("Process was aborted on user request!");
+			break;
+		}
+		
+		if(!process.waitForReadyRead())
+		{
+			if(process.state() == QProcess::Running)
+			{
+				qWarning("AVS2WAV time out. Killing process and skipping file!");
+				process.kill();
+				process.waitForFinished(-1);
+				return false;
+			}
+		}
+
+		QByteArray data;
+
+		while(process.canReadLine())
+		{
+			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
+			if(!line.isEmpty())
+			{
+				int index = line.indexOf(':');
+				if(index > 0)
+				{
+					QString key = line.left(index).trimmed();
+					QString val = line.mid(index+1).trimmed();
+
+					if(!key.isEmpty() && !val.isEmpty())
+					{
+						if(key.compare("TotalSeconds", Qt::CaseInsensitive) == 0)
+						{
+							bool ok = false;
+							unsigned int duration = val.toUInt(&ok);
+							if(ok) info.setFileDuration(duration);
+						}
+						if(key.compare("SamplesPerSec", Qt::CaseInsensitive) == 0)
+						{
+							bool ok = false;
+							unsigned int samplerate = val.toUInt(&ok);
+							if(ok) info.setFormatAudioSamplerate (samplerate);
+						}
+						if(key.compare("Channels", Qt::CaseInsensitive) == 0)
+						{
+							bool ok = false;
+							unsigned int channels = val.toUInt(&ok);
+							if(ok) info.setFormatAudioChannels(channels);
+						}
+						if(key.compare("BitsPerSample", Qt::CaseInsensitive) == 0)
+						{
+							bool ok = false;
+							unsigned int bitdepth = val.toUInt(&ok);
+							if(ok) info.setFormatAudioBitdepth(bitdepth);
+						}					
+					}
+				}
+				else
+				{
+					if(line.contains("[Audio Info]", Qt::CaseInsensitive))
+					{
+						info.setFormatAudioType("Avisynth");
+						info.setFormatContainerType("Avisynth");
+						bAudioInfoReceived = true;
+					}
+				}
+			}
+		}
+	}
+	
+	process.waitForFinished();
+	if(process.state() != QProcess::NotRunning)
+	{
+		process.kill();
+		process.waitForFinished(-1);
+	}
+
+	return bAudioInfoReceived;
+}
+
 
 ////////////////////////////////////////////////////////////
 // Public Functions

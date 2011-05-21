@@ -84,9 +84,12 @@ private:
 	unsigned int parseDuration(const QString &str);
 	bool checkFile_CDDA(QFile &file);
 	void retrieveCover(AudioFileModel &audioFile, const QString &filePath);
+	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
+
+	const QString m_mediaInfoBin;
+	const QString m_avs2wavBin;
 
 	QStringList m_inputFiles;
-	const QString m_mediaInfoBin;
 	section_t m_currentSection;
 	cover_t m_currentCover;
 	unsigned int m_filesAccepted;
@@ -94,7 +97,6 @@ private:
 	unsigned int m_filesDenied;
 	unsigned int m_filesDummyCDDA;
 	unsigned int m_filesCueSheet;
-
 	
 	volatile bool m_abortFlag;
 
