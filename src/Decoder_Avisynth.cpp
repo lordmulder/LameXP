@@ -46,6 +46,8 @@ bool AvisynthDecoder::decode(const QString &sourceFile, const QString &outputFil
 	QProcess process;
 	QStringList args;
 
+	process.setWorkingDirectory(QFileInfo(outputFile).absolutePath());
+
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 
