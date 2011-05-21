@@ -201,15 +201,15 @@
     </message>
     <message>
         <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificador de audio Aften &amp;minus; A/52</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Decodificador ALAC</translation>
     </message>
     <message>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</translation>
     </message>
 </context>
 <context>
@@ -243,181 +243,181 @@
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Cue sheet</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>El siguiente Cue sheet será dividido e imporatdo en LameXP.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando Cue sheet, por favor espere...</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Ha ocurrido un error desconocido!</translation>
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al cargar Cue sheet:</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en el Cue sheet</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El archivo seleccionado no se encuentra!</translation>
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo no se puede abrir para su lectura. ¡Asegurese de tener los derechos necesarios!</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El archivo proporcionado no parece un archivo Cue sheet válido!</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡No se ha podido encontrar ninguna pista de audio soportada en la imagen Cue sheet!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP no soporta archivos Cue sheet &quot;binarios&quot;.</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo Cue sheet seleccionado contiene información inconsistente. ¡Tenga precaución!</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Elija la carpeta de destino</translation>
     </message>
     <message>
         <source>LameXP</source>
-        <translation type="unfinished">LameXP</translation>
+        <translation>LameXP</translation>
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Error: No se puede escribir en la carpeta de salida seleccionada!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished">Alerta de poco espacio en disco</translation>
+        <translation>Alerta de poco espacio en disco</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Queda menos de %1 GB de espacio disponible en la carpeta seleccionada.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Es muy recomendable liberar espacio de disco antes de comenzar la importanción!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Analizando archivo(s), por favor espere...</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dividiendo archivo(s), por favor espere...</translation>
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Error: No se puede crear la carpeta de salida!</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Ha ocurrido un error mientras se dividia el Cue sheet!</translation>
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Se ha(n) importado %1 pista(s) y se ha(n) saltado %2 del Cue sheet.</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cue sheet completado</translation>
     </message>
     <message>
         <source>Analysis Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Análisis fallido</translation>
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Aviso: El formato de algunos archivos de entrada no puede ser determinado!</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar de todas formas</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El proceso fue cancelado tras %1 pista(s)!</translation>
     </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Cue sheet</translation>
     </message>
     <message>
         <source> Output Directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Carpeta de destino</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished">Navegar...</translation>
+        <translation>Seleccionar...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo de origen existe</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo de origen no existe (¡Se saltarán pistas!)</translation>
     </message>
 </context>
 <context>
     <name>CueSheetModel</name>
     <message>
         <source>No.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nº.</translation>
     </message>
     <message>
         <source>File / Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo / Pista</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Índice</translation>
     </message>
     <message>
         <source>File %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo %1</translation>
     </message>
     <message>
         <source>Track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pista %1</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Artista desconocido</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título desconocido</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Duración</translation>
+        <translation>Duración</translation>
     </message>
 </context>
 <context>
@@ -1347,7 +1347,7 @@
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation>Elija el número de instancias paralelas basadas en el números de núcleos de la CPU (Recomendado)</translation>
+        <translation>Elegir el número de instancias paralelas basandose en el números de núcleos de la CPU (Recomendado)</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
@@ -1431,155 +1431,155 @@
     </message>
     <message>
         <source>Check for Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprobar actualizaciones Beta</translation>
     </message>
     <message>
         <source>Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizaciones Beta</translation>
     </message>
     <message>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere comprobar las actualizaciones Beta (pre-release)?</translation>
     </message>
     <message>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP comprobará en busca de versiones Beta (pre-release).</translation>
     </message>
     <message>
         <source>Check Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprobar ahora</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP &lt;i&gt;no&lt;/i&gt;comprobará en busca de versiones Beta (pre-release).</translation>
     </message>
     <message>
         <source>Aften A/52</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften A/52</translation>
     </message>
     <message>
         <source>Lame MP3:</source>
-        <translation type="unfinished">Lame MP3:</translation>
+        <translation>Lame MP3:</translation>
     </message>
     <message>
         <source>Aften A/52:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften A/52:</translation>
     </message>
     <message>
         <source> Aften A/52 Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones Aften A/52</translation>
     </message>
     <message>
         <source>Film Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Película suave</translation>
     </message>
     <message>
         <source>Film Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Película estándar</translation>
     </message>
     <message>
         <source>Music Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Musica suave</translation>
     </message>
     <message>
         <source>Music Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Música estándar</translation>
     </message>
     <message>
         <source>Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>None (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno (Predet.)</translation>
     </message>
     <message>
         <source>Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-seleccionar</translation>
     </message>
     <message>
         <source>1+1 (Ch1,Ch2)</source>
-        <translation type="unfinished"></translation>
+        <translation>1+1 (Ch1,Ch2)</translation>
     </message>
     <message>
         <source>1/0 (C)</source>
-        <translation type="unfinished"></translation>
+        <translation>1/0 (C)</translation>
     </message>
     <message>
         <source>2/0 (L,R)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/0 (L,R)</translation>
     </message>
     <message>
         <source>3/0 (L,R,C)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/0 (L,R,C)</translation>
     </message>
     <message>
         <source>2/1 (L,R,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/1 (L,R,S)</translation>
     </message>
     <message>
         <source>3/1 (L,R,C,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/1 (L,R,C,S)</translation>
     </message>
     <message>
         <source>2/2 (L,R,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/2 (L,R,SL,SR)</translation>
     </message>
     <message>
         <source>3/2 (L,R,C,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/2 (L,R,C,SL,SR)</translation>
     </message>
     <message>
         <source>Audio Coding Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de codificación de audio:</translation>
     </message>
     <message>
         <source>Dynamic Range Compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Compresión de rango dinámico:</translation>
     </message>
     <message>
         <source>Fast Bit Allocation (Less Accurate)</source>
-        <translation type="unfinished"></translation>
+        <translation>Localización de bits rápida (Menos preciso)</translation>
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Exponente de tamaño de búsqueda:</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished"></translation>
+        <translation>No mostrar de nuevo</translation>
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Cue sheet</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Cue sheet</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo Cue sheet</translation>
     </message>
     <message>
         <source>CDDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos CDDA</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cue sheet</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Se ha(n) rechazado %1 archivo(s), ya que parecen ser imágenes Cue sheet!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, use el asistente de imporatción de archivos Cue sheet de LameXP.</translation>
     </message>
 </context>
 <context>
@@ -2121,11 +2121,11 @@
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡No está conectado a Internet!</translation>
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, asegurese de que tiene conexión a internet y vuelva a intentarlo.</translation>
     </message>
 </context>
 </TS>
