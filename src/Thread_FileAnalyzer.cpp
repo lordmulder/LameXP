@@ -128,6 +128,11 @@ void FileAnalyzer::run()
 					m_filesAccepted++;
 					emit fileAnalyzed(file);
 				}
+				else
+				{
+					qDebug64("Rejected Avisynth file: %1", file.filePath());
+					m_filesRejected++;
+				}
 			}
 			else
 			{
