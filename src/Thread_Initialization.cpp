@@ -56,7 +56,7 @@ g_lamexp_tools[] =
 	{"22253052acba92a0088bbf0aa82a8c505c07b854", CPU_TYPE_SSE, "aften.sse2.exe", 8},
 	{"2996a48b01b65a2c1806482654beeea7ffcf1f80", CPU_TYPE_X64, "aften.x64.exe",  8},
 	{"3b41f85dde8d4a5a0f4cd5f461099d0db24610ba", CPU_TYPE_ALL, "alac.exe", 20},
-	{"70afb09fab00cdbc26fcb4c2fcf6d64323e698e0", CPU_TYPE_ALL, "avs2wav.exe", 12},
+	{"3e2cce2e090bab7c7d7d54c21c1fe96917698960", CPU_TYPE_ALL, "avs2wav.exe", 12},
 	{"fb74ac8b73ad8cba2c3b4e6e61f23401d630dc22", CPU_TYPE_ALL, "elevator.exe", UINT_MAX},
 	{"80e372d8b20be24102c18284286fcdf5fa14bd86", CPU_TYPE_ALL, "faad.exe", 27},
 	{"d33cd86f04bd4067e244d2804466583c7b90a4e2", CPU_TYPE_ALL, "flac.exe", 121},
