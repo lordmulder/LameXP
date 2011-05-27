@@ -1382,87 +1382,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add file(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Load Translation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Translation Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter the name of the new folder:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to create folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The new folder could not be created:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Drive is read-only or insufficient access rights!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Already Running</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LameXP is already running, please use the running instance!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quality Level %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Compression %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uncompressed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>High Quality (Recommended)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 Instance(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1579,6 +1503,82 @@
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add file(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the name of the new folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to create folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The new folder could not be created:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drive is read-only or insufficient access rights!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality Level %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compression %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uncompressed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Best Quality (Very Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Quality (Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average Quality (Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low Quality (Fast)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Poor Quality (Very Fast)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Instance(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot write to the selected directory. Please choose another directory!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Already Running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

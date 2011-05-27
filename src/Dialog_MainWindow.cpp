@@ -377,6 +377,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_messageHandler = new MessageHandlerThread();
 	m_delayedFileList = new QStringList();
 	m_delayedFileTimer = new QTimer();
+	m_delayedFileTimer->setSingleShot(true);
+	m_delayedFileTimer->setInterval(5000);
 	connect(m_messageHandler, SIGNAL(otherInstanceDetected()), this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(fileReceived(QString)), this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(killSignalReceived()), this, SLOT(close()), Qt::QueuedConnection);
@@ -768,7 +770,11 @@ void MainWindow::dropEvent(QDropEvent *event)
 		}
 	}
 	
-	addFiles(droppedFiles);
+	if(!droppedFiles.isEmpty())
+	{
+		m_delayedFileList->append(droppedFiles);
+		QTimer::singleShot(0, this, SLOT(handleDelayedFiles()));
+	}
 }
 
 /*

@@ -12,6 +12,7 @@
 ..\..\src\Decoder_AC3.cpp 
 ..\..\src\Decoder_ADPCM.cpp 
 ..\..\src\Decoder_ALAC.cpp 
+..\..\src\Decoder_Avisynth.cpp 
 ..\..\src\Decoder_FLAC.cpp 
 ..\..\src\Decoder_MAC.cpp 
 ..\..\src\Decoder_MP3.cpp 
@@ -75,6 +76,7 @@
 ..\..\src\Decoder_AC3.h 
 ..\..\src\Decoder_ADPCM.h 
 ..\..\src\Decoder_ALAC.h 
+..\..\src\Decoder_Avisynth.h 
 ..\..\src\Decoder_FLAC.h 
 ..\..\src\Decoder_MAC.h 
 ..\..\src\Decoder_MP3.h 
