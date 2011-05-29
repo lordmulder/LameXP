@@ -109,7 +109,7 @@ void CueSplitter::run()
 			AbstractDecoder *decoder = DecoderRegistry::lookup(inputFileInfo.formatContainerType(), inputFileInfo.formatContainerProfile(), inputFileInfo.formatAudioType(), inputFileInfo.formatAudioProfile(), inputFileInfo.formatAudioVersion());
 			if(decoder)
 			{
-				m_activeFile = QFileInfo(inputFileList.at(i)).fileName().left(54).trimmed();
+				m_activeFile = shortName(QFileInfo(inputFileList.at(i)).fileName());
 				emit fileSelected(m_activeFile);
 				QString tempFile = QString("%1/~%2.wav").arg(m_outputDir, lamexp_rand_str());
 				connect(decoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
@@ -147,13 +147,14 @@ void CueSplitter::run()
 	QString albumPerformer = m_model->getAlbumPerformer();
 	QString albumTitle = m_model->getAlbumTitle();
 
-	//Now split all tracks
+	//Now split all files
 	for(int i = 0; i < nFiles; i++)
 	{
 		int nTracks = m_model->getTrackCount(i);
 		QString trackFile = m_model->getFileName(i);
 		int maxProgress = 0;
 
+		//Process all tracks
 		for(int j = 0; j < nTracks; j++)
 		{
 			int trackNo = m_model->getTrackNo(i, j);
@@ -167,6 +168,7 @@ void CueSplitter::run()
 				continue;
 			}
 			
+			//Setup meta info
 			AudioFileModel trackMetaInfo(QString().sprintf("cue://File%02d/Track%02d", i, j));
 			trackMetaInfo.setFileName(m_model->getTrackTitle(i, j));
 			trackMetaInfo.setFileArtist(m_model->getTrackPerformer(i, j));
@@ -185,13 +187,16 @@ void CueSplitter::run()
 				trackMetaInfo.setFileDuration(static_cast<unsigned int>(abs(trackLength)));
 			}
 
-			QString outputFile = QString("%1/%2 - Track %3.wav").arg(m_outputDir, m_baseName, QString().sprintf("%02d", trackNo));
+			//Generate output file name
+			QString trackTitle = trackMetaInfo.fileName().isEmpty() ? QString().sprintf("Track %02d", trackNo) : trackMetaInfo.fileName();
+			QString outputFile = QString("%1/[%2] %3 - %4.wav").arg(m_outputDir, QString().sprintf("%02d", trackNo), m_baseName, trackTitle);
 			for(int n = 2; QFileInfo(outputFile).exists(); n++)
 			{
-				outputFile = QString("%1/%2 - Track %3 (%4).wav").arg(m_outputDir, m_baseName, QString().sprintf("%02d", trackNo), QString::number(n));
+				outputFile = QString("%1/[%2] %3 - %4 (%5).wav").arg(m_outputDir, QString().sprintf("%02d", trackNo), m_baseName, trackTitle, QString::number(n));
 			}
 
-			emit fileSelected(QFileInfo(outputFile).fileName());
+			//Call split function
+			emit fileSelected(shortName(QFileInfo(outputFile).fileName()));
 			splitFile(outputFile,  trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, maxProgress);
 
 			if(m_abortFlag)
@@ -236,7 +241,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 		return;
 	}
 
-	QString baseName = QFileInfo(output).fileName();
+	QString baseName = shortName(QFileInfo(output).fileName());
 	QString decompressedInput = m_decompressedFiles[file];
 	qDebug("Input: <%s>", decompressedInput.toUtf8().constData());
 	
@@ -387,6 +392,18 @@ QString CueSplitter::indexToString(const double index) const
 	
 	QTime time = QTime().addMSecs(static_cast<int>(floor(0.5 + (index * 1000.0))));
 	return time.toString(time.hour() ? "H:mm:ss.zzz" : "m:ss.zzz");
+}
+
+QString CueSplitter::shortName(const QString &longName) const
+{
+	static const int maxLen = 54;
+	
+	if(longName.length() > maxLen)
+	{
+		return QString("%1...%2").arg(longName.left(maxLen/2).trimmed(), longName.right(maxLen/2).trimmed());
+	}
+
+	return longName;
 }
 
 ////////////////////////////////////////////////////////////

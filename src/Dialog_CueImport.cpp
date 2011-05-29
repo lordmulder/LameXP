@@ -281,7 +281,7 @@ bool CueImportDialog::analyzeFiles(QStringList &files)
 
 void CueImportDialog::splitFiles(void)
 {
-	QString baseName = QFileInfo(m_cueFileName).completeBaseName().replace(".", " ").left(42).trimmed();
+	QString baseName = QFileInfo(m_cueFileName).completeBaseName().replace(".", " ").simplified();
 
 	WorkingBanner *progress = new WorkingBanner(this);
 	CueSplitter *splitter  = new CueSplitter(m_outputDir, baseName, m_model, m_fileInfo);

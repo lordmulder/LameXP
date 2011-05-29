@@ -62,6 +62,7 @@ public slots:
 private:
 	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo, int &maxProgress);
 	QString indexToString(const double index) const;
+	QString shortName(const QString &longName) const;
 	
 	const QString m_soxBin;
 	const QString m_outputDir;
