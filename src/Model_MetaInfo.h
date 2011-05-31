@@ -43,7 +43,8 @@ public:
 	Qt::ItemFlags flags(const QModelIndex &index) const;
 	void editItem(const QModelIndex &index, QWidget *parent);
 	void editArtwork(const QString &imagePath);
-	void clearData(void);
+	void assignInfoFrom(AudioFileModel &file);
+	void clearData(bool clearMetaOnly = false);
 
 private:
 	AudioFileModel* m_audioFile;

@@ -38,6 +38,13 @@ public:
 	AudioFileModel &operator=(const AudioFileModel &model);
 	~AudioFileModel(void);
 
+	enum BitrateMode
+	{
+		BitrateModeUndefined = 0,
+		BitrateModeConstant = 1,
+		BitrateModeVariable = 2,
+	};
+
 	//-----------------------
 	//Getters
 	//-----------------------
@@ -61,7 +68,9 @@ public:
 	unsigned int formatAudioSamplerate(void) const;
 	unsigned int formatAudioChannels(void) const;
 	unsigned int formatAudioBitdepth(void) const;
-
+	unsigned int formatAudioBitrate(void) const;
+	unsigned int formatAudioBitrateMode(void) const;
+	
 	const QString fileDurationInfo(void) const;
 	const QString formatContainerInfo(void) const;
 	const QString formatAudioBaseInfo(void) const;
@@ -91,6 +100,8 @@ public:
 	void setFormatAudioSamplerate(unsigned int samplerate);
 	void setFormatAudioChannels(unsigned int channels);
 	void setFormatAudioBitdepth(unsigned int bitdepth);
+	void setFormatAudioBitrate(unsigned int bitrate);
+	void setFormatAudioBitrateMode(unsigned int bitrateMode);
 
 	void updateMetaInfo(const AudioFileModel &model);
 
@@ -114,6 +125,8 @@ private:
 	unsigned int m_formatAudioSamplerate;
 	unsigned int m_formatAudioChannels;
 	unsigned int m_formatAudioBitdepth;
+	unsigned int m_formatAudioBitrate;
+	unsigned int m_formatAudioBitrateMode;
 
 	void resetAll(void);
 };

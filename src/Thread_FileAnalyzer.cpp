@@ -380,19 +380,49 @@ void FileAnalyzer::updateInfo(AudioFileModel &audioFile, const QString &key, con
 		}
 		else if(!key.compare("Channel(s)", Qt::CaseInsensitive))
 		{
-			if(!audioFile.formatAudioChannels()) audioFile.setFormatAudioChannels(value.split(" ", QString::SkipEmptyParts).first().toInt());
+			if(!audioFile.formatAudioChannels()) audioFile.setFormatAudioChannels(value.split(" ", QString::SkipEmptyParts).first().toUInt());
 		}
 		else if(!key.compare("Sampling rate", Qt::CaseInsensitive))
 		{
-			if(!audioFile.formatAudioSamplerate()) audioFile.setFormatAudioSamplerate(ceil(value.split(" ", QString::SkipEmptyParts).first().toFloat() * 1000.0f));
+			if(!audioFile.formatAudioSamplerate())
+			{
+				bool ok = false;
+				float fTemp = abs(value.split(" ", QString::SkipEmptyParts).first().toFloat(&ok));
+				if(ok) audioFile.setFormatAudioSamplerate(static_cast<unsigned int>(floor(fTemp * 1000.0f + 0.5f)));
+			}
 		}
 		else if(!key.compare("Bit depth", Qt::CaseInsensitive))
 		{
-			if(!audioFile.formatAudioBitdepth()) audioFile.setFormatAudioBitdepth(value.split(" ", QString::SkipEmptyParts).first().toInt());
+			if(!audioFile.formatAudioBitdepth()) audioFile.setFormatAudioBitdepth(value.split(" ", QString::SkipEmptyParts).first().toUInt());
 		}
 		else if(!key.compare("Duration", Qt::CaseInsensitive))
 		{
 			if(!audioFile.fileDuration()) audioFile.setFileDuration(parseDuration(value));
+		}
+		else if(!key.compare("Bit rate", Qt::CaseInsensitive))
+		{
+			if(!audioFile.formatAudioBitrate())
+			{
+				bool ok = false;
+				unsigned int uiTemp = value.split(" ", QString::SkipEmptyParts).first().toUInt(&ok);
+				if(ok)
+				{
+					audioFile.setFormatAudioBitrate(uiTemp);
+				}
+				else
+				{
+					float fTemp = abs(value.split(" ", QString::SkipEmptyParts).first().toFloat(&ok));
+					if(ok) audioFile.setFormatAudioBitrate(static_cast<unsigned int>(floor(fTemp + 0.5f)));
+				}
+			}
+		}
+		else if(!key.compare("Bit rate mode", Qt::CaseInsensitive))
+		{
+			if(audioFile.formatAudioBitrateMode() == AudioFileModel::BitrateModeUndefined)
+			{
+				if(!value.compare("Constant", Qt::CaseInsensitive)) audioFile.setFormatAudioBitrateMode(AudioFileModel::BitrateModeConstant);
+				if(!value.compare("Variable", Qt::CaseInsensitive)) audioFile.setFormatAudioBitrateMode(AudioFileModel::BitrateModeVariable);
+			}
 		}
 		break;
 	}

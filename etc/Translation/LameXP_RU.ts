@@ -238,6 +238,18 @@
         <source>Version</source>
         <translation>Версия</translation>
     </message>
+    <message>
+        <source>Bitrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Variable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueImportDialog</name>
@@ -1633,6 +1645,18 @@
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
         <translation type="unfinished">Извините, немогу загрузит картинку из выделенного файла!</translation>
+    </message>
+    <message>
+        <source>Edit this Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy everything to Meta Info tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all Meta Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

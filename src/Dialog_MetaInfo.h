@@ -40,9 +40,13 @@ private slots:
 	void upButtonClicked(void);
 	void downButtonClicked(void);
 	void editButtonClicked(void);
-	void contextMenuRequested(const QPoint &pos);
+	void infoContextMenuRequested(const QPoint &pos);
+	void artworkContextMenuRequested(const QPoint &pos);
+	void copyMetaInfoActionTriggered(void);
+	void clearMetaInfoActionTriggered(void);
 	void clearArtworkActionTriggered(void);
 
 private:
-	QMenu *m_contextMenu;
+	QMenu *m_contextMenuInfo;
+	QMenu *m_contextMenuArtwork;
 };

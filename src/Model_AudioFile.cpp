@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
 // Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
 //
@@ -26,6 +26,8 @@
 #include <QMutexLocker>
 #include <QFile>
 
+#define U16Str(X) QString::fromUtf16(reinterpret_cast<const unsigned short*>(L##X))
+
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
@@ -51,6 +53,8 @@ AudioFileModel::AudioFileModel(const AudioFileModel &model, bool copyMetaInfo)
 	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
 	setFormatAudioChannels(model.m_formatAudioChannels);
 	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
+	setFormatAudioBitrate(model.m_formatAudioBitrate);
+	setFormatAudioBitrateMode(model.m_formatAudioBitrateMode);
 	setFileDuration(model.m_fileDuration);
 
 	if(copyMetaInfo)
@@ -87,6 +91,8 @@ AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
 	setFormatAudioChannels(model.m_formatAudioChannels);
 	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
+	setFormatAudioBitrate(model.m_formatAudioBitrate);
+	setFormatAudioBitrateMode(model.m_formatAudioBitrateMode);
 
 	return (*this);
 }
@@ -122,6 +128,8 @@ void AudioFileModel::resetAll(void)
 	m_formatAudioSamplerate = 0;
 	m_formatAudioChannels = 0;
 	m_formatAudioBitdepth = 0;
+	m_formatAudioBitrate = 0;
+	m_formatAudioBitrateMode = BitrateModeUndefined;
 }
 
 ////////////////////////////////////////////////////////////
@@ -222,6 +230,16 @@ unsigned int AudioFileModel::formatAudioBitdepth(void) const
 	return m_formatAudioBitdepth;
 }
 
+unsigned int AudioFileModel::formatAudioBitrate(void) const
+{
+	return m_formatAudioBitrate;
+}
+
+unsigned int  AudioFileModel::formatAudioBitrateMode(void) const
+{
+	return m_formatAudioBitrateMode;
+}
+
 const QString AudioFileModel::fileDurationInfo(void) const
 {
 	if(m_fileDuration)
@@ -294,6 +312,21 @@ const QString AudioFileModel::formatAudioCompressInfo(void) const
 		if(!m_formatAudioVersion.isEmpty())
 		{
 			info.append(QString(", %1: %2").arg(tr("Version"), m_formatAudioVersion));
+		}
+		if(m_formatAudioBitrate > 0)
+		{
+			switch(m_formatAudioBitrateMode)
+			{
+			case BitrateModeConstant:
+				info.append(U16Str(", %1: %2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_formatAudioBitrate), tr("Constant")));
+				break;
+			case BitrateModeVariable:
+				info.append(U16Str(", %1: \u2248%2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_formatAudioBitrate), tr("Variable")));
+				break;
+			default:
+				info.append(U16Str(", %1: %2 kbps").arg(tr("Bitrate"), QString::number(m_formatAudioBitrate)));
+				break;
+			}
 		}
 		return info;
 	}
@@ -400,6 +433,16 @@ void AudioFileModel::setFormatAudioChannels(unsigned int channels)
 void AudioFileModel::setFormatAudioBitdepth(unsigned int bitdepth)
 {
 	m_formatAudioBitdepth = bitdepth;
+}
+
+void AudioFileModel::setFormatAudioBitrate(unsigned int bitrate)
+{
+	m_formatAudioBitrate = bitrate;
+}
+
+void AudioFileModel::setFormatAudioBitrateMode(unsigned int bitrateMode)
+{
+	m_formatAudioBitrateMode = bitrateMode;
 }
 
 void AudioFileModel::updateMetaInfo(const AudioFileModel &model)

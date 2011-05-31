@@ -242,6 +242,18 @@
         <source>Version</source>
         <translation>Version</translation>
     </message>
+    <message>
+        <source>Bitrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Constant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Variable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueImportDialog</name>
@@ -1640,6 +1652,18 @@ Ouvrir le dossier récursivement...</translation>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
         <translation>Impossible de charger l&apos;oeuvre depuis le fichier sélectionné !</translation>
+    </message>
+    <message>
+        <source>Edit this Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy everything to Meta Info tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all Meta Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

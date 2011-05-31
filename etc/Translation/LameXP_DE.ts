@@ -238,6 +238,18 @@
         <source>Version</source>
         <translation>Version</translation>
     </message>
+    <message>
+        <source>Bitrate</source>
+        <translation>Bitrate</translation>
+    </message>
+    <message>
+        <source>Constant</source>
+        <translation>konstant</translation>
+    </message>
+    <message>
+        <source>Variable</source>
+        <translation>variabel</translation>
+    </message>
 </context>
 <context>
     <name>CueImportDialog</name>
@@ -1631,6 +1643,18 @@
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
         <translation>Artwork konnte nicht aus der Ausgewählten Datei geladen werden!</translation>
+    </message>
+    <message>
+        <source>Edit this Information</source>
+        <translation>Diese Information bearbeiten</translation>
+    </message>
+    <message>
+        <source>Copy everything to Meta Info tab</source>
+        <translation>Alles in den Metadaten-Tab kopieren</translation>
+    </message>
+    <message>
+        <source>Clear all Meta Info</source>
+        <translation>Metainformationen löschen</translation>
     </message>
 </context>
 <context>

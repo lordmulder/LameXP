@@ -435,31 +435,41 @@ void MetaInfoModel::editArtwork(const QString &imagePath)
 	m_audioFile->setFileCover(imagePath, false);
 }
 
-void MetaInfoModel::clearData(void)
+void MetaInfoModel::clearData(bool clearMetaOnly)
 {
 	beginResetModel();
 
 	m_textUnknown = QString("(%1)").arg(tr("Unknown"));
 	m_textNotSpecified = QString("(%1)").arg(tr("Not Specified"));
 
-	m_audioFile->setFilePath(QString());
-	m_audioFile->setFileName(QString());
 	m_audioFile->setFileArtist(QString());
 	m_audioFile->setFileAlbum(QString());
 	m_audioFile->setFileGenre(QString());
 	m_audioFile->setFileComment(tr("Encoded with LameXP"));
 	m_audioFile->setFileCover(QString(), false);
 	m_audioFile->setFileYear(0);
-	m_audioFile->setFilePosition(UINT_MAX);
-	m_audioFile->setFileDuration(0);
-	m_audioFile->setFormatContainerType(QString());
-	m_audioFile->setFormatContainerProfile(QString());
-	m_audioFile->setFormatAudioType(QString());
-	m_audioFile->setFormatAudioProfile(QString());
-	m_audioFile->setFormatAudioVersion(QString());
-	m_audioFile->setFormatAudioSamplerate(0);
-	m_audioFile->setFormatAudioChannels(0);
-	m_audioFile->setFormatAudioBitdepth(0);
+	m_audioFile->setFilePosition(m_offset ? UINT_MAX : 0);
+
+	if(!clearMetaOnly)
+	{
+		m_audioFile->setFilePath(QString());
+		m_audioFile->setFileName(QString());
+		m_audioFile->setFileDuration(0);
+		m_audioFile->setFormatContainerType(QString());
+		m_audioFile->setFormatContainerProfile(QString());
+		m_audioFile->setFormatAudioType(QString());
+		m_audioFile->setFormatAudioProfile(QString());
+		m_audioFile->setFormatAudioVersion(QString());
+		m_audioFile->setFormatAudioSamplerate(0);
+		m_audioFile->setFormatAudioChannels(0);
+		m_audioFile->setFormatAudioBitdepth(0);
+	}
+	else
+	{
+		QString temp = QFileInfo(m_audioFile->filePath()).baseName();
+		temp = temp.split("-", QString::SkipEmptyParts).last().trimmed();
+		m_audioFile->setFileName(temp);
+	}
 
 	endResetModel();
 }
@@ -467,4 +477,11 @@ void MetaInfoModel::clearData(void)
 Qt::ItemFlags MetaInfoModel::flags(const QModelIndex &index) const
 {
 	return QAbstractTableModel::flags(index);
+}
+
+void MetaInfoModel::assignInfoFrom(AudioFileModel &file)
+{
+	beginResetModel();
+	m_audioFile->updateMetaInfo(file);
+	endResetModel();
 }

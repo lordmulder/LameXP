@@ -648,7 +648,11 @@ void MainWindow::showEvent(QShowEvent *event)
 	m_accepted = false;
 	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
 	sourceModelChanged();
-	tabWidget->setCurrentIndex(0);
+	
+	if(!event->spontaneous())
+	{
+		tabWidget->setCurrentIndex(0);
+	}
 
 	if(m_firstTimeShown)
 	{
@@ -1760,6 +1764,13 @@ void MainWindow::showDetailsButtonClicked(void)
 		(
 			iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
 		)
+		
+		if(iResult == INT_MAX)
+		{
+			m_metaInfoModel->assignInfoFrom(file);
+			tabWidget->setCurrentIndex(tabWidget->indexOf(tabMetaData));
+			break;
+		}
 
 		if(!iResult) break;
 	}

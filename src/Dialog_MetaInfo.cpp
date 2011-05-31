@@ -62,12 +62,21 @@ MetaInfoDialog::MetaInfoDialog(QWidget *parent)
 	connect(editButton, SIGNAL(clicked()), this, SLOT(editButtonClicked()));
 
 	//Create context menu
-	m_contextMenu = new QMenu();
-	QAction *loadArtworkAction = m_contextMenu->addAction(QIcon(":/icons/folder_image.png"), tr("Load Artwork From File"));
-	QAction *clearArtworkAction = m_contextMenu->addAction(QIcon(":/icons/bin.png"), tr("Clear Artwork"));
+	m_contextMenuInfo = new QMenu();
+	m_contextMenuArtwork = new QMenu();
+	QAction *editMetaInfoAction = m_contextMenuInfo->addAction(QIcon(":/icons/table_edit.png"), tr("Edit this Information"));
+	QAction *copyMetaInfoAction = m_contextMenuInfo->addAction(QIcon(":/icons/page_white_copy.png"), tr("Copy everything to Meta Info tab"));
+	QAction *clearMetaInfoAction = m_contextMenuInfo->addAction(QIcon(":/icons/bin.png"), tr("Clear all Meta Info"));
+	QAction *loadArtworkAction = m_contextMenuArtwork->addAction(QIcon(":/icons/folder_image.png"), tr("Load Artwork From File"));
+	QAction *clearArtworkAction = m_contextMenuArtwork->addAction(QIcon(":/icons/bin.png"), tr("Clear Artwork"));
+	SET_FONT_BOLD(editMetaInfoAction, true);
 	SET_FONT_BOLD(loadArtworkAction, true);
-	connect(labelArtwork, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequested(QPoint)));
-	connect(frameArtwork, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequested(QPoint)));
+	connect(tableView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(infoContextMenuRequested(QPoint)));
+	connect(labelArtwork, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(artworkContextMenuRequested(QPoint)));
+	connect(frameArtwork, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(artworkContextMenuRequested(QPoint)));
+	connect(editMetaInfoAction, SIGNAL(triggered(bool)), this, SLOT(editButtonClicked()));
+	connect(copyMetaInfoAction, SIGNAL(triggered(bool)), this, SLOT(copyMetaInfoActionTriggered()));
+	connect(clearMetaInfoAction, SIGNAL(triggered(bool)), this, SLOT(clearMetaInfoActionTriggered()));
 	connect(loadArtworkAction, SIGNAL(triggered(bool)), this, SLOT(editButtonClicked()));
 	connect(clearArtworkAction, SIGNAL(triggered(bool)), this, SLOT(clearArtworkActionTriggered()));
 
@@ -77,7 +86,8 @@ MetaInfoDialog::MetaInfoDialog(QWidget *parent)
 
 MetaInfoDialog::~MetaInfoDialog(void)
 {
-	LAMEXP_DELETE(m_contextMenu);
+	LAMEXP_DELETE(m_contextMenuInfo);
+	LAMEXP_DELETE(m_contextMenuArtwork);
 }
 
 ////////////////////////////////////////////////////////////
@@ -165,8 +175,7 @@ void MetaInfoDialog::editButtonClicked(void)
 	}
 }
 
-
-void MetaInfoDialog::contextMenuRequested(const QPoint &pos)
+void MetaInfoDialog::infoContextMenuRequested(const QPoint &pos)
 {
 	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(QObject::sender());
 	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());
@@ -175,8 +184,35 @@ void MetaInfoDialog::contextMenuRequested(const QPoint &pos)
 	{
 		if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0)
 		{
-			m_contextMenu->popup(sender->mapToGlobal(pos));
+			m_contextMenuInfo->popup(sender->mapToGlobal(pos));
 		}
+	}
+}
+
+void MetaInfoDialog::artworkContextMenuRequested(const QPoint &pos)
+{
+	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(QObject::sender());
+	QWidget *sender = scrollArea ? scrollArea->viewport() : dynamic_cast<QWidget*>(QObject::sender());
+
+	if(sender)
+	{
+		if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0)
+		{
+			m_contextMenuArtwork->popup(sender->mapToGlobal(pos));
+		}
+	}
+}
+
+void MetaInfoDialog::copyMetaInfoActionTriggered(void)
+{
+	done(INT_MAX);
+}
+
+void MetaInfoDialog::clearMetaInfoActionTriggered(void)
+{
+	if(MetaInfoModel *model = dynamic_cast<MetaInfoModel*>(tableView->model()))
+	{
+		model->clearData(true);
 	}
 }
 
