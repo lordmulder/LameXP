@@ -624,10 +624,13 @@ Also note the following hints:<br><ul>
 <br>
 In order to use the LameXP deployment scripts you need the following tools:<br><ul>
 <li><a href="http://www.7-zip.org/" target="_blank">7-Zip</a> - file archiver with a high compression ratio
-<li><a href="http://www.scratchpaper.com/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (Unicode Version)
-<li><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x
+<li><a href="http://www.scratchpaper.com/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (Unicode Version)<ul>
+<li><a href="http://nsis.sourceforge.net/UAC_plug-in" target="_blank">UAC plug-in</a>
+<li><a href="http://nsis.sourceforge.net/LockedList_plug-in" target="_blank">LockedList plug-in</a>
+<li><a href="http://nsis.sourceforge.net/Inetc_plug-in" target="_blank">Inetc plug-in</a></ul>
 <li><a href="http://upx.sourceforge.net/" target="_blank">UPX</a> - the Ultimate Packer for eXecutables
-<li><a href="http://www.matcode.com/mpress.htm" target="_blank">MPRESS</a> - high-performance executable packer for PE32/PE32+<div style="height:7px"></div>
+<li><a href="http://www.matcode.com/mpress.htm" target="_blank">MPRESS</a> - high-performance executable packer for PE32/PE32+
+<li><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x<div style="height:7px"></div>
 <li>Copy 'buildenv.template.txt' to 'buildenv.txt' and edit the paths as needed!</ul>
 <br>
 Instructions to build Qt as 'static' libraries:<br><ul>
@@ -635,12 +638,12 @@ Instructions to build Qt as 'static' libraries:<br><ul>
 <li>Install the Qt SDK v1.1 and choose to install the Qt 4.7.3 Sources
 <li>Open a new command window (cmd.exe)
 <li>Add Strawberry Perl to your PATH (e.g. 'set PATH=C:\strawberry\perl\bin;%PATH%')
-<li>Now run 'vcvarsall.bat' form your Visual C++ 2010 install directory
+<li>Now run 'vcvarsall.bat' form your Visual C++ install directory - within the same console!
 <li>Change the current directory to the Qt Sources path (e.g. 'C:\QtSDK\QtSources\4.7.3')
 <li>Finally run 'configure.exe -release -static -ltcg &lt;more options&gt;' and wait for completion
 <li>You can now open and build the solution files (e.g. 'src\corelib\QtCore.sln' in Visual Studio
-<li>Make sure you select the "Release" configuration for your builds
-<li>It is also recommended to change "C/C++ &rArr; Code Generation &rArr; Runtime Library" to "/MT"
+<li>Make sure you select the "Release" configuration for your builds!
+<li>It is also required to change "Code Generation &rArr; Runtime Library" to "/MT" for all projects!
 <li>Libraries you need to build for LameXP include the following:<ul>
 <li>lib\qtmain.lib
 <li>lib\QtCore.lib
@@ -650,8 +653,8 @@ Instructions to build Qt as 'static' libraries:<br><ul>
 <li>plugins\imageformats\qgif.lib
 <li>plugins\imageformats\qico.lib
 <li>plugins\imageformats\qsvg.lib</ul>
-<li>Put all the *.lib files into the 'LameXP\etc\Prerequisites\qt4_static' folder</ul>
-
+<li>Put the static *.lib files into the 'LameXP\etc\Prerequisites\qt4_static\lib' directory
+<li>ImageFormat plugins go to 'LameXP\etc\Prerequisites\qt4_static\plugins\imageformats'</ul>
 <br><br>
 
 eof</body></html>
