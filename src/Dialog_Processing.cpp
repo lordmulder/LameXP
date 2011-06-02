@@ -681,32 +681,61 @@ void ProcessingDialog::writePlayList(void)
 		return;
 	}
 	
-	QString playListName = (m_metaInfo->fileAlbum().isEmpty() ? "Playlist" : m_metaInfo->fileAlbum());
-
+	//Init local variables
 	const static char *invalidChars = "\\/:*?\"<>|";
+	QStringList list;
+	bool useUtf8 = false;
+	int counter = 1;
+
+	//Generate playlist name
+	QString playListName = (m_metaInfo->fileAlbum().isEmpty() ? "Playlist" : m_metaInfo->fileAlbum());
+	if(!m_metaInfo->fileArtist().isEmpty())
+	{
+		playListName = QString("%1 - %2").arg(m_metaInfo->fileArtist(), playListName);
+	}
+
+	//Clean playlist name
 	for(int i = 0; invalidChars[i]; i++)
 	{
-		playListName.replace(invalidChars[i], ' ');
-		playListName = playListName.simplified();
+		playListName = playListName.replace(invalidChars[i], ' ').simplified();
 	}
-	
-	QString playListFile = QString("%1/%2.m3u").arg(m_settings->outputDir(), playListName);
 
-	int counter = 1;
+	//Create list of audio files
+	for(int i = 0; i < m_allJobs.count(); i++)
+	{
+		if(!m_succeededJobs.contains(m_allJobs.at(i))) continue;
+		list << QDir::toNativeSeparators(QDir(m_settings->outputDir()).relativeFilePath(m_playList.value(m_allJobs.at(i), "N/A")));
+	}
+
+	//Do we need an UTF-8 playlist?
+	for(int i = 0; i < list.count(); i++)
+	{
+		if(wcscmp(QWCHAR(QString::fromLatin1(list.at(i).toLatin1().constData())), QWCHAR(list.at(i))))
+		{
+			useUtf8 = true;
+			break;
+		}
+	}
+
+	//Generate playlist output file
+	QString playListFile = QString("%1/%2.%3").arg(m_settings->outputDir(), playListName, (useUtf8 ? "m3u8" : "m3u"));
 	while(QFileInfo(playListFile).exists())
 	{
-		playListFile = QString("%1/%2 (%3).m3u").arg(m_settings->outputDir(), playListName, QString::number(++counter));
+		playListFile = QString("%1/%2 (%3).%4").arg(m_settings->outputDir(), playListName, QString::number(++counter), (useUtf8 ? "m3u8" : "m3u"));
 	}
 
+	//Now write playlist to output file
 	QFile playList(playListFile);
 	if(playList.open(QIODevice::WriteOnly))
 	{
-		playList.write("#EXTM3U\r\n");
-		for(int i = 0; i < m_allJobs.count(); i++)
+		if(useUtf8)
 		{
-			
-			if(!m_succeededJobs.contains(m_allJobs.at(i))) continue;
-			playList.write(QDir::toNativeSeparators(QDir(m_settings->outputDir()).relativeFilePath(m_playList.value(m_allJobs.at(i), "N/A"))).toUtf8().constData());
+			playList.write("\xef\xbb\xbf");
+		}
+		playList.write("#EXTM3U\r\n");
+		while(!list.isEmpty())
+		{
+			playList.write(useUtf8 ? list.takeFirst().toUtf8().constData() : list.takeFirst().toLatin1().constData());
 			playList.write("\r\n");
 		}
 		playList.close();

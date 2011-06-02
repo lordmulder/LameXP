@@ -49,6 +49,7 @@ a:visited { color: #0000EE; }
 <li><a href="#f35cfa24">How can I translate LameXP to my language or improve an existing translation?</a>
 <li><a href="#8dba381f">Where can I download the latest version of LameXP?</a>
 <li><a href="#9c2e273d">Where can I submit bug reports or feature requests?</a>
+<li><a href="#e5694e3e">What programming language is LameXP written in?</a><br>
 <li><a href="#982cf1c0">Where can I find the LameXP source code?</a>
 <li><a href="#a0c1e92b">What are the prerequisites to build LameXP from the sources?</a></ul>
 
@@ -589,6 +590,14 @@ The preferred place to report bugs or request new features is the LameXP thread 
 Please do NOT send me E-Mail unless you really have to! I receive a LOT of E-Mail and your mail can get lost!<br><br>
 <br><br>
 
+<a name="e5694e3e"></a><b>What programming language is LameXP written in?</b><br>
+<br>
+While LameXP v3.xx and all earlier versions were written in Delphi/Pascal, starting with version 4.xx the<br>
+software has been re-written in the C++ programming language. LameXP v4.xx is based on the Qt cross-platform<br>
+application framework and offers full Unicode support. For the time being LameXP is Windows-only.<br><br>
+
+<br><br>
+
 <a name="982cf1c0"></a><b>Where can I find the LameXP source code?</b><br>
 <br>
 LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a> revision control system. The LameXP Git repository is mirrored at:<br><ul>
@@ -601,9 +610,10 @@ LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(softwar
 <a name="a0c1e92b"></a><b>What are the prerequisites to build LameXP from the sources?</b><br>
 <br>
 LameXP is currently being developed using the following build environment:<br><ul>
-<li>Visual Studio 2010 with Service Pack 1, running on Windows 7 with Service Pack 1
-<li>Desktop Qt v4.7.3 (MSVC 2008), included in Qt SDK v1.1
-<li>Windows Platform SDK v7.1 (Windows SDK for Windows 7 and .NET Framework 4)</ul>
+<li><a href="http://www.microsoft.com/visualstudio/en-us" target="_blank">Visual Studio 2010</a> with Service Pack 1, running on Windows 7 with Service Pack 1
+<li>Desktop Qt v4.7.3 (MSVC 2008), included in <a href="http://qt.nokia.com/products/qt-sdk" target="_blank">Qt SDK v1.1</a>
+<li><a href="http://www.microsoft.com/downloads/en/details.aspx?FamilyID=35AEDA01-421D-4BA5-B44B-543DC8C33A20" target="_blank">Windows Platform SDK v7.1</a> (Windows SDK for Windows 7 and .NET Framework 4)
+<li>The minimum supported Windows version is Windows XP with Service Pack 2</ul>
 <br>
 Also note the following hints:<br><ul>
 <li>Run "qtenv2.bat" before launching Visual Studio in order to set up the Qt environment
@@ -611,6 +621,14 @@ Also note the following hints:<br><ul>
 <li>In order to make a "fully static" build of LameXP, you need to compile Qt as 'static' libraries
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
+<br>
+In order to use the LameXP deployment scripts you need the following tools:<br><ul>
+<li><a href="http://www.7-zip.org/" target="_blank">7-Zip</a> - file archiver with a high compression ratio
+<li><a href="http://www.scratchpaper.com/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (Unicode Version)
+<li><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x
+<li><a href="http://upx.sourceforge.net/" target="_blank">UPX</a> - the Ultimate Packer for eXecutables
+<li><a href="http://www.matcode.com/mpress.htm" target="_blank">MPRESS</a> - high-performance executable packer for PE32/PE32+<div style="height:7px"></div>
+<li>Copy 'buildenv.template.txt' to 'buildenv.txt' and edit the paths as needed!</ul>
 <br>
 Instructions to build Qt as 'static' libraries:<br><ul>
 <li>Make sure Visual Studio 2010 and Strawberry Perl for Windows are installed
@@ -622,7 +640,7 @@ Instructions to build Qt as 'static' libraries:<br><ul>
 <li>Finally run 'configure.exe -release -static -ltcg &lt;more options&gt;' and wait for completion
 <li>You can now open and build the solution files (e.g. 'src\corelib\QtCore.sln' in Visual Studio
 <li>Make sure you select the "Release" configuration for your builds
-<li>It is also recommended to change "C/C++ &gt; Code Generation &gt; Runtime Library" to "/MT"
+<li>It is also recommended to change "C/C++ &rArr; Code Generation &rArr; Runtime Library" to "/MT"
 <li>Libraries you need to build for LameXP include the following:<ul>
 <li>lib\qtmain.lib
 <li>lib\QtCore.lib
