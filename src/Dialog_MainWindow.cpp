@@ -87,7 +87,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_settings(settingsModel),
 	m_neroEncoderAvailable(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")),
 	m_accepted(false),
-	m_firstTimeShown(true)
+	m_firstTimeShown(true),
+	m_OutputFolderViewInitialized(false)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -135,7 +136,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModelEx();
-	m_fileSystemModel->setRootPath(m_fileSystemModel->rootPath());
 	m_fileSystemModel->installEventFilter(this);
 	outputFolderView->setModel(m_fileSystemModel);
 	outputFolderView->header()->setStretchLastSection(true);
@@ -143,7 +143,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->header()->hideSection(2);
 	outputFolderView->header()->hideSection(3);
 	outputFolderView->setHeaderHidden(true);
-	outputFolderView->setAnimated(true);
+	outputFolderView->setAnimated(false);
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
@@ -152,8 +152,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(pressed(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewMoved(QModelIndex)));
-	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
-	outputFolderViewClicked(outputFolderView->currentIndex());
 	connect(buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
 	connect(buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
 	connect(buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
@@ -165,6 +163,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
 	connect(m_showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
 	outputFolderLabel->installEventFilter(this);
+	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
+	outputFolderViewClicked(outputFolderView->currentIndex());
 	
 	//Setup "Meta Data" tab
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
@@ -1188,6 +1188,13 @@ void MainWindow::tabPageChanged(int idx)
 	{
 		m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
 	}
+	else if(idx == tabWidget->indexOf(tabOutputDir))
+	{
+		if(!m_OutputFolderViewInitialized)
+		{
+			QTimer::singleShot(0, this, SLOT(initOutputFolderModel()));
+		}
+	}
 
 	if(initialWidth < this->width())
 	{
@@ -2144,6 +2151,19 @@ void MainWindow::outputFolderContextMenu(const QPoint &pos)
 void MainWindow::showFolderContextActionTriggered(void)
 {
 	QDesktopServices::openUrl(QUrl::fromLocalFile(m_fileSystemModel->filePath(outputFolderView->currentIndex())));
+}
+
+/*
+ * Initialize file system model
+ */
+void MainWindow::initOutputFolderModel(void)
+{
+	QModelIndex previousIndex = outputFolderView->currentIndex();
+	m_fileSystemModel->setRootPath(m_fileSystemModel->rootPath());
+	QApplication::processEvents();
+	outputFolderView->reset();
+	outputFolderView->setCurrentIndex(previousIndex);
+	m_OutputFolderViewInitialized = true;
 }
 
 // =========================================================

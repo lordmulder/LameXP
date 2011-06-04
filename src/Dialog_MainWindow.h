@@ -83,6 +83,7 @@ private slots:
 	void gotoMusicFolderButtonClicked(void);
 	void handleDelayedFiles(void);
 	void importCueSheetActionTriggered(bool checked);
+	void initOutputFolderModel(void);
 	void installWMADecoderActionTriggered(bool checked);
 	void languageActionActivated(QAction *action);
 	void languageFromFileActionActivated(bool checked);
@@ -142,6 +143,7 @@ private:
 	
 	bool m_accepted;
 	bool m_firstTimeShown;
+	bool m_OutputFolderViewInitialized;
 
 	const bool m_neroEncoderAvailable;
 
