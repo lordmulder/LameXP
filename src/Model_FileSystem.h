@@ -23,9 +23,16 @@
 
 #include <QFileSystemModel>
 
+class QFileIconProviderEx;
+
 class QFileSystemModelEx : public QFileSystemModel
 {
 public:
 	QFileSystemModelEx();
+	~QFileSystemModelEx();
+
 	virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
+
+private:
+	QFileIconProviderEx *m_myIconProvider;
 };

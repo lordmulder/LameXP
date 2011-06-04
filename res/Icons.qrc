@@ -37,11 +37,16 @@
     <file>icons/disk.png</file>
     <file>icons/door_out.png</file>
     <file>icons/door_in.png</file>
+    <file>icons/drive.png</file>
     <file>icons/drive_cd.png</file>
+    <file>icons/drive_disk.png</file>
+    <file>icons/drive_link.png</file>
+    <file>icons/drive_network.png</file>
     <file>icons/exclamation.png</file>
     <file>icons/error.png</file>
     <file>icons/error_big.png</file>
     <file>icons/feed.png</file>
+    <file>icons/folder.png</file>
     <file>icons/folder_add.png</file>
     <file>icons/folder_go.png</file>
     <file>icons/folder_image.png</file>
