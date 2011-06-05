@@ -24,6 +24,7 @@
 
 #include <QApplication>
 #include <QFileIconProvider>
+#include <QDesktopServices>
 
 ///////////////////////////////////////////////////////////////////////////////
 // Dummy QFileIconProvider class
@@ -43,9 +44,19 @@ private:
 	const QIcon m_networkIcon;
 	const QIcon m_floppyIcon;
 	const QIcon m_folderIcon;
+	const QIcon m_homeIcon;
+	const QIcon m_desktopIcon;
+	const QIcon m_musicIcon;
+	const QIcon m_moviesIcon;
+	const QIcon m_picturesIcon;
 	const QIcon m_emptyIcon;
 	const QString m_folderType;
 	const QString m_emptyType;
+	const QString m_homeDir;
+	const QString m_desktopDir;
+	const QString m_musicDir;
+	const QString m_moviesDir;
+	const QString m_picturesDir;
 };
 
 QFileIconProviderEx::QFileIconProviderEx()
@@ -55,6 +66,16 @@ QFileIconProviderEx::QFileIconProviderEx()
 	m_cdromIcon(":/icons/drive_cd.png"),
 	m_networkIcon(":/icons/drive_link.png"),
 	m_floppyIcon(":/icons/drive_disk.png"),
+	m_homeIcon(":/icons/house.png"),
+	m_desktopIcon(":/icons/monitor.png"),
+	m_musicIcon(":/icons/music.png"),
+	m_moviesIcon(":/icons/film.png"),
+	m_picturesIcon(":/icons/picture.png"),
+	m_homeDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::HomeLocation))),
+	m_desktopDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::DesktopLocation))),
+	m_musicDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::MusicLocation))),
+	m_moviesDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::MoviesLocation))),
+	m_picturesDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::PicturesLocation))),
 	m_folderType("Folder")
 {
 	/* Nothing to do! */
@@ -62,7 +83,11 @@ QFileIconProviderEx::QFileIconProviderEx()
 
 QIcon QFileIconProviderEx::icon(const QFileInfo &info) const
 {
-	if(info.isRoot())
+	if(info.isFile())
+	{
+		return m_emptyIcon;
+	}
+	else if(info.isRoot())
 	{
 		switch(GetDriveType(QWCHAR(QDir::toNativeSeparators(info.absoluteFilePath()))))
 		{
@@ -80,8 +105,30 @@ QIcon QFileIconProviderEx::icon(const QFileInfo &info) const
 			break;
 		}
 	}
-	
-	return info.isFile() ? m_emptyIcon : m_folderIcon;
+	else if(!info.filePath().compare(m_homeDir, Qt::CaseInsensitive))
+	{
+		return m_homeIcon;
+	}
+	else if(!info.filePath().compare(m_desktopDir, Qt::CaseInsensitive))
+	{
+		return m_desktopIcon;
+	}
+	else if(!info.filePath().compare(m_musicDir, Qt::CaseInsensitive))
+	{
+		return m_musicIcon;
+	}
+	else if(!info.filePath().compare(m_moviesDir, Qt::CaseInsensitive))
+	{
+		return m_moviesIcon;
+	}
+	else if(!info.filePath().compare(m_picturesDir, Qt::CaseInsensitive))
+	{
+		return m_picturesIcon;
+	}
+	else
+	{
+		return  m_folderIcon;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
