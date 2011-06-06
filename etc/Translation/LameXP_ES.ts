@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation>Tecnología de codificación de audio completamente abierta y libre de patentes.</translation>
+        <translation>Tecnología de codificación de audio abierta y libre de patentes.</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation>Tecnología de codificación de audio sin pérdidas completamente abierta y libre de patentes.</translation>
+        <translation>Tecnología de codificación de audio sin pérdidas, abierta y libre de patentes.</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation>LameXP como conjunto tiene copyright de LoRd_MuldeR. El copyright del software de terceros usado en LameXP pertenece a sus autores individuales.</translation>
+        <translation>LameXP tiene copyright de LoRd_MuldeR. El copyright del software de terceros usado en LameXP pertenece a sus autores individuales.</translation>
     </message>
     <message>
         <source>LameXP &amp;minus; Audio Encoder Front-end</source>
@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation>Nota: Esta es una versión demo (pre-final) de LameXP que expirará el %1. Quedan %2 días restantes.</translation>
+        <translation>Nota: Esta es una versión demo (preliminar) de LameXP que expirará el %1. %2 días restantes.</translation>
     </message>
     <message>
         <source>Aften &amp;minus; A/52 audio encoder</source>
@@ -240,15 +240,15 @@
     </message>
     <message>
         <source>Bitrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa de bits</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation>Constante</translation>
     </message>
     <message>
         <source>Variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Variable</translation>
     </message>
 </context>
 <context>
@@ -799,7 +799,7 @@
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation>VERSIÓN DEMO</translation>
+        <translation>VERSIÓN PRELIMINAR</translation>
     </message>
     <message>
         <source>You can drop in audio files here!</source>
@@ -835,7 +835,7 @@
     </message>
     <message>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translation>Esta versión (pre-release) de LameXP caducó el %1.</translation>
+        <translation>Esta versión demo (preliminar) de LameXP caducó el %1.</translation>
     </message>
     <message>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
@@ -1645,15 +1645,15 @@
     </message>
     <message>
         <source>Edit this Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar esta información</translation>
     </message>
     <message>
         <source>Copy everything to Meta Info tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar todo a la pestaña Metadatos</translation>
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar todos los Metadatos</translation>
     </message>
 </context>
 <context>
