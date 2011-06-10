@@ -285,6 +285,10 @@ Function .onInit
 		ExecShell "open" "http://www.microsoft.com/downloads/en/details.aspx?FamilyID=5b33b5a8-5e76-401f-be08-1e1555d4f3d4"
 		Quit
 	${EndIf}
+	
+	InitPluginsDir
+	File "/oname=$PLUGINSDIR\checkproc.exe" "checkproc.exe"
+	nsExec::Exec /TIMEOUT=5000 '"$PLUGINSDIR\checkproc.exe" Softonic Brothersoft'
 FunctionEnd
 
 Function un.onInit
