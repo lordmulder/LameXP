@@ -381,6 +381,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_delayedFileTimer->setInterval(5000);
 	connect(m_messageHandler, SIGNAL(otherInstanceDetected()), this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(fileReceived(QString)), this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
+	connect(m_messageHandler, SIGNAL(folderReceived(QString, bool)), this, SLOT(addFolderDelayed(QString, bool)), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(killSignalReceived()), this, SLOT(close()), Qt::QueuedConnection);
 	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
@@ -490,7 +491,7 @@ void MainWindow::addFiles(const QStringList &files)
 /*
  * Add folder to source list
  */
-void MainWindow::addFolder(const QString &path, bool recursive)
+void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 {
 	QFileInfoList folderInfoList;
 	folderInfoList << QFileInfo(path);
@@ -533,7 +534,14 @@ void MainWindow::addFolder(const QString &path, bool recursive)
 
 	if(!fileList.isEmpty())
 	{
-		addFiles(fileList);
+		if(delayed)
+		{
+			addFilesDelayed(fileList);
+		}
+		else
+		{
+			addFiles(fileList);
+		}
 	}
 }
 
@@ -776,8 +784,7 @@ void MainWindow::dropEvent(QDropEvent *event)
 	
 	if(!droppedFiles.isEmpty())
 	{
-		m_delayedFileList->append(droppedFiles);
-		QTimer::singleShot(0, this, SLOT(handleDelayedFiles()));
+		addFilesDelayed(droppedFiles, true);
 	}
 }
 
@@ -999,18 +1006,34 @@ void MainWindow::windowShown(void)
 	//Add files from the command-line
 	for(int i = 0; i < arguments.count() - 1; i++)
 	{
+		QStringList addedFiles;
 		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding file from CLI: %s", currentFile.canonicalFilePath().toUtf8().constData());
-			m_delayedFileList->append(currentFile.canonicalFilePath());
+			qDebug("Adding file from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			addedFiles.append(currentFile.absoluteFilePath());
+		}
+		if(!addedFiles.isEmpty())
+		{
+			addFilesDelayed(addedFiles);
 		}
 	}
 
-	//Start delayed files timer
-	if(!m_delayedFileList->isEmpty() && !m_delayedFileTimer->isActive())
+	//Add folders from the command-line
+	for(int i = 0; i < arguments.count() - 1; i++)
 	{
-		m_delayedFileTimer->start(5000);
+		if(!arguments[i].compare("--add-folder", Qt::CaseInsensitive))
+		{
+			QFileInfo currentFile(arguments[++i].trimmed());
+			qDebug("Adding folder from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			addFolder(currentFile.absoluteFilePath(), false, true);
+		}
+		if(!arguments[i].compare("--add-recursive", Qt::CaseInsensitive))
+		{
+			QFileInfo currentFile(arguments[++i].trimmed());
+			qDebug("Adding folder recursively from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			addFolder(currentFile.absoluteFilePath(), true, true);
+		}
 	}
 
 	//Enable shell integration
@@ -1885,14 +1908,16 @@ void MainWindow::findFileContextActionTriggered(void)
  */
 void MainWindow::handleDelayedFiles(void)
 {
-	if(m_banner->isVisible())
+	m_delayedFileTimer->stop();
+
+	if(m_delayedFileList->isEmpty())
 	{
 		return;
 	}
-	
-	m_delayedFileTimer->stop();
-	if(m_delayedFileList->isEmpty())
+
+	if(m_banner->isVisible())
 	{
+		m_delayedFileTimer->start(5000);
 		return;
 	}
 
@@ -1902,23 +1927,11 @@ void MainWindow::handleDelayedFiles(void)
 	while(!m_delayedFileList->isEmpty())
 	{
 		QFileInfo currentFile = QFileInfo(m_delayedFileList->takeFirst());
-		if(!currentFile.exists())
+		if(!currentFile.exists() || !currentFile.isFile())
 		{
 			continue;
 		}
-		if(currentFile.isFile())
-		{
-			selectedFiles << currentFile.canonicalFilePath();
-			continue;
-		}
-		if(currentFile.isDir())
-		{
-			QList<QFileInfo> list = QDir(currentFile.canonicalFilePath()).entryInfoList(QDir::Files);
-			for(int j = 0; j < list.count(); j++)
-			{
-				selectedFiles << list.at(j).canonicalFilePath();
-			}
-		}
+		selectedFiles << currentFile.canonicalFilePath();
 	}
 	
 	addFiles(selectedFiles);
@@ -2745,12 +2758,48 @@ void MainWindow::notifyOtherInstance(void)
 /*
  * Add file from another instance
  */
-void MainWindow::addFileDelayed(const QString &filePath)
+void MainWindow::addFileDelayed(const QString &filePath, bool tryASAP)
 {
+	if(tryASAP && !m_delayedFileTimer->isActive())
+	{
+		qDebug("Received file: %s", filePath.toUtf8().constData());
+		m_delayedFileList->append(filePath);
+		QTimer::singleShot(0, this, SLOT(handleDelayedFiles()));
+	}
+	
 	m_delayedFileTimer->stop();
 	qDebug("Received file: %s", filePath.toUtf8().constData());
 	m_delayedFileList->append(filePath);
 	m_delayedFileTimer->start(5000);
+}
+
+/*
+ * Add files from another instance
+ */
+void MainWindow::addFilesDelayed(const QStringList &filePaths, bool tryASAP)
+{
+	if(tryASAP && !m_delayedFileTimer->isActive())
+	{
+		qDebug("Received %d files.", filePaths.count());
+		m_delayedFileList->append(filePaths);
+		QTimer::singleShot(0, this, SLOT(handleDelayedFiles()));
+	}
+
+	m_delayedFileTimer->stop();
+	qDebug("Received %d files.", filePaths.count());
+	m_delayedFileList->append(filePaths);
+	m_delayedFileTimer->start(5000);
+}
+
+/*
+ * Add folder from another instance
+ */
+void MainWindow::addFolderDelayed(const QString &folderPath, bool recursive)
+{
+	if(!m_banner->isVisible())
+	{
+		addFolder(folderPath, recursive, true);
+	}
 }
 
 // =========================================================

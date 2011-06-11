@@ -26,6 +26,7 @@
 #include <QStringList>
 #include <QApplication>
 #include <QFileInfo>
+#include <QDir>
 
 #include <limits.h>
 
@@ -65,7 +66,29 @@ void MessageProducerThread::run()
 	{
 		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
 		{
-			lamexp_ipc_send(1, QFileInfo(arguments[++i]).canonicalFilePath().toUtf8().constData());
+			QFileInfo file = QFileInfo(arguments[++i]);
+			if(file.exists() && file.isFile())
+			{
+				lamexp_ipc_send(1, file.canonicalFilePath().toUtf8().constData());
+			}
+			bSentFiles = true;
+		}
+		if(!arguments[i].compare("--add-folder", Qt::CaseInsensitive))
+		{
+			QDir dir = QDir(arguments[++i]);
+			if(dir.exists())
+			{
+				lamexp_ipc_send(2, dir.canonicalPath().toUtf8().constData());
+			}
+			bSentFiles = true;
+		}
+		if(!arguments[i].compare("--add-recursive", Qt::CaseInsensitive))
+		{
+			QDir dir = QDir(arguments[++i]);
+			if(dir.exists())
+			{
+				lamexp_ipc_send(3, dir.canonicalPath().toUtf8().constData());
+			}
 			bSentFiles = true;
 		}
 	}

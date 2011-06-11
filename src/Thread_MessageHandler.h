@@ -40,5 +40,6 @@ private:
 signals:
 	void otherInstanceDetected(void);
 	void fileReceived(const QString &filePath);
+	void folderReceived(const QString &filePath, bool recursive);
 	void killSignalReceived(void);
 };

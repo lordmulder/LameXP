@@ -48,8 +48,10 @@ public:
 
 private slots:
 	void aboutButtonClicked(void);
-	void addFileDelayed(const QString &filePath);
+	void addFileDelayed(const QString &filePath, bool tryASAP = false);
 	void addFilesButtonClicked(void);
+	void addFilesDelayed(const QStringList &filePaths, bool tryASAP = false);
+	void addFolderDelayed(const QString &folderPath, bool recursive);
 	void aftenCodingModeChanged(int value);
 	void aftenDRCModeChanged(int value);
 	void aftenFastAllocationChanged(bool checked);
@@ -137,7 +139,7 @@ protected:
 
 private:
 	void addFiles(const QStringList &files);
-	void addFolder(const QString &path, bool recursive = false);
+	void addFolder(const QString &path, bool recursive = false, bool delayed = false);
 	bool checkForUpdates(void);
 	bool installWMADecoder(void);
 	

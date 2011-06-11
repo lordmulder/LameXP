@@ -60,6 +60,12 @@ void MessageHandlerThread::run()
 		case 1:
 			emit fileReceived(QString::fromUtf8(m_parameter));
 			break;
+		case 2:
+			emit folderReceived(QString::fromUtf8(m_parameter), false);
+			break;
+		case 3:
+			emit folderReceived(QString::fromUtf8(m_parameter), true);
+			break;
 		case 666:
 			if(!_stricmp(m_parameter, "Force!"))
 			{
