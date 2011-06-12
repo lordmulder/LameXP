@@ -25,15 +25,15 @@
     </message>
     <message>
         <source>Show License Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати текст ліцензії</translation>
     </message>
     <message>
         <source>Accept License</source>
-        <translation type="unfinished"></translation>
+        <translation>Прийняти ліцензію</translation>
     </message>
     <message>
         <source>Decline License</source>
-        <translation type="unfinished"></translation>
+        <translation>Відхилити ліцензію</translation>
     </message>
     <message>
         <source>3rd Party S/W</source>
@@ -193,7 +193,7 @@
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished">не доступно</translation>
+        <translation>не доступно</translation>
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
@@ -201,11 +201,11 @@
     </message>
     <message>
         <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften &amp;minus; A/52 audio encoder</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>ALAC Decoder</translation>
     </message>
     <message>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
@@ -255,181 +255,181 @@
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпортувати список Cue</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Даний список Cue буде розділено і імпортовано до LameXP.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження файлу списку Cue, зачекайте...</translation>
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо завантажити файл списку Cue:</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Зазначений файл неможливо знайти!</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка списку Cue</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>Виникла невідома помилка!</translation>
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл неможливо відкрити для читання. Впевніться, що ви маєте відповідні права на цю операцію!</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Наданий файл не є корректним файлом образу диску списку Cue!</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можливо знайти жодної підтримуваної доріжки в образі списку Cue!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP не підтримує обробку &quot;двійкових&quot; образів списку Cue.</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибраний файл списку Cue містить несумісну інформацію. Будьте уважні!</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибір вихідної теки</translation>
     </message>
     <message>
         <source>LameXP</source>
-        <translation type="unfinished">LameXP</translation>
+        <translation>LameXP</translation>
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: Вибрана вихідна тека не може бути створена!</translation>
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: До вибраної вихідної теки неможливий запис інформації!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished">Попередження про те, що недостатньо місця на диску</translation>
+        <translation>Попередження про те, що недостатньо місця на диску</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Наявно менш ніж %1 ГБ вільного місця у вибраній вихідній теці.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation type="unfinished"></translation>
+        <translation>Рекомендовано звільнити більше місця на жорсткому диску перед продовженням імпортування!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Аналіз файлу(-ів), будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Analysis Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Збій під час аналізу</translation>
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: формат деяких вхідних файлів неможливо визначити!</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation>Все одно продовжувати</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Перервати</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Розділення файлу(-ів), будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес було перервано користувачем після %1 доріжки(-ок)!</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Виникла неочікувана помилка під час розділення списку Cue!</translation>
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпортовано %1 доріжку(-и, -ок) зі списку Cue і пропущено %2 доріжку(-и, -ок).</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Обробку списків Cue завершено</translation>
     </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпортувати список Cue</translation>
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Існуючий вхідний файл</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Втрачено вхідний файл (Доріжки буде пропущено!)</translation>
     </message>
     <message>
         <source> Output Directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Вихідна тека</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished">Обрати...</translation>
+        <translation>Обрати...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Відмінити</translation>
+        <translation>Відмінити</translation>
     </message>
 </context>
 <context>
     <name>CueSheetModel</name>
     <message>
         <source>No.</source>
-        <translation type="unfinished"></translation>
+        <translation>№.</translation>
     </message>
     <message>
         <source>File / Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл / Доріжка</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Індекс</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Тривалість</translation>
+        <translation>Тривалість</translation>
     </message>
     <message>
         <source>File %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл %1</translation>
     </message>
     <message>
         <source>Track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Доріжка %1</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомий виконавець</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомий заголовок</translation>
     </message>
 </context>
 <context>
@@ -1443,155 +1443,155 @@
     </message>
     <message>
         <source>Aften A/52</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften A/52</translation>
     </message>
     <message>
         <source>Lame MP3:</source>
-        <translation type="unfinished">Lame MP3:</translation>
+        <translation>Lame MP3:</translation>
     </message>
     <message>
         <source>Aften A/52:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aften A/52:</translation>
     </message>
     <message>
         <source> Aften A/52 Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування Aften A/52 </translation>
     </message>
     <message>
         <source>Film Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Film Light</translation>
     </message>
     <message>
         <source>Film Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Film Standard</translation>
     </message>
     <message>
         <source>Music Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Music Light</translation>
     </message>
     <message>
         <source>Music Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Music Standard</translation>
     </message>
     <message>
         <source>Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Speech</translation>
     </message>
     <message>
         <source>None (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не обрано (Типово)</translation>
     </message>
     <message>
         <source>Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Автовибір</translation>
     </message>
     <message>
         <source>1+1 (Ch1,Ch2)</source>
-        <translation type="unfinished"></translation>
+        <translation>1+1 (Кан1,Кан2)</translation>
     </message>
     <message>
         <source>1/0 (C)</source>
-        <translation type="unfinished"></translation>
+        <translation>1/0 (C)</translation>
     </message>
     <message>
         <source>2/0 (L,R)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/0 (L,R)</translation>
     </message>
     <message>
         <source>3/0 (L,R,C)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/0 (L,R,C)</translation>
     </message>
     <message>
         <source>2/1 (L,R,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/1 (L,R,S)</translation>
     </message>
     <message>
         <source>3/1 (L,R,C,S)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/1 (L,R,C,S)</translation>
     </message>
     <message>
         <source>2/2 (L,R,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>2/2 (L,R,SL,SR)</translation>
     </message>
     <message>
         <source>3/2 (L,R,C,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation>3/2 (L,R,C,SL,SR)</translation>
     </message>
     <message>
         <source>Audio Coding Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим кодування аудіо:</translation>
     </message>
     <message>
         <source>Dynamic Range Compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиснення динамічного діапазону:</translation>
     </message>
     <message>
         <source>Fast Bit Allocation (Less Accurate)</source>
-        <translation type="unfinished"></translation>
+        <translation>Швидкий перерозподіл бітів (Менш точний)</translation>
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмір пошуку експоненти:</translation>
     </message>
     <message>
         <source>Check for Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевіряти наявність оновлень бета-версій</translation>
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпортувати список Cue</translation>
     </message>
     <message>
         <source>CDDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файли CDDA</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Списки Cue</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 файл(и, ів) було пропущено, тому що вони скоріш за все є образами списків Cue!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, використовуйте майстер імпорту списків Cue самого LameXP для додавання файлів списків.</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Відмінити</translation>
+        <translation>Відмінити</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати знову</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити список Cue</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл списку Cue</translation>
     </message>
     <message>
         <source>Beta Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновлення бета-версій</translation>
     </message>
     <message>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете  щоб LameXP перевіряв наявність оновлень бета-версій?</translation>
     </message>
     <message>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Віднині LameXP буде перевіряти наявність оновлень бета-версій.</translation>
     </message>
     <message>
         <source>Check Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірити зараз</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Віднині LameXP &lt;i&gt;не&lt;/i&gt; буде перевіряти наявність оновлень бета-версій.</translation>
     </message>
 </context>
 <context>
@@ -1768,7 +1768,7 @@
     </message>
     <message>
         <source>Edit Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати жанр</translation>
     </message>
     <message>
         <source>Please enter the genre for this file:</source>
@@ -1776,7 +1776,7 @@
     </message>
     <message>
         <source>Edit Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати рік</translation>
     </message>
     <message>
         <source>Please enter the year for this file:</source>
@@ -1784,7 +1784,7 @@
     </message>
     <message>
         <source>Edit Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати позицію</translation>
     </message>
     <message>
         <source>Please enter the position (track no.) for this file:</source>
@@ -1823,7 +1823,7 @@
     </message>
     <message>
         <source>Not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не знайдено!</translation>
     </message>
     <message>
         <source>The format of this file is NOT supported:</source>
@@ -1839,19 +1839,19 @@
     </message>
     <message>
         <source>Unsupported!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не підтримується!</translation>
     </message>
     <message>
         <source>Done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконано.</translation>
     </message>
     <message>
         <source>Aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Перервано!</translation>
     </message>
     <message>
         <source>Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Збій!</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -1894,7 +1894,7 @@
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перервати</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2041,19 +2041,19 @@
     <name>UpdateDialog</name>
     <message>
         <source>LameXP Update Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Менеджер оновлень LameXP</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Latest version available:</source>
-        <translation type="unfinished"></translation>
+        <translation>Остання доступна версія:</translation>
     </message>
     <message>
         <source>Currently installed version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Поточна встановлена версія:</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -2065,7 +2065,7 @@
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished">Завантаження і Встановлення</translation>
+        <translation>Завантажити і Встановити</translation>
     </message>
     <message>
         <source>Close</source>
