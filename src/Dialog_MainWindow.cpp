@@ -836,6 +836,9 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 		case QEvent::Leave:
 		case QEvent::KeyPress:
 		case QEvent::KeyRelease:
+		case QEvent::FocusIn:
+		case QEvent::FocusOut:
+		case QEvent::TouchEnd:
 			outputFolderViewClicked(outputFolderView->currentIndex());
 			break;
 		}
