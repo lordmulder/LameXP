@@ -146,6 +146,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setAnimated(false);
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
+	outputFolderView->installEventFilter(this);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
 	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
@@ -819,10 +820,25 @@ void MainWindow::resizeEvent(QResizeEvent *event)
  */
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-	if(obj == m_fileSystemModel && QApplication::overrideCursor() == NULL)
+	if(obj == m_fileSystemModel)
 	{
-		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-		QTimer::singleShot(250, this, SLOT(restoreCursor()));
+		if(QApplication::overrideCursor() == NULL)
+		{
+			QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+			QTimer::singleShot(250, this, SLOT(restoreCursor()));
+		}
+	}
+	else if(obj == outputFolderView)
+	{
+		switch(event->type())
+		{
+		case QEvent::Enter:
+		case QEvent::Leave:
+		case QEvent::KeyPress:
+		case QEvent::KeyRelease:
+			outputFolderViewClicked(outputFolderView->currentIndex());
+			break;
+		}
 	}
 	else if(obj == outputFolderLabel)
 	{
