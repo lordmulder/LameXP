@@ -23,6 +23,8 @@
 
 #include <QUuid>
 
+#define MAX_DISPLAY_ITEMS 50
+
 ProgressModel::ProgressModel(void)
 :
 	m_iconRunning(":/icons/media_play.png"),
@@ -130,9 +132,16 @@ QVariant ProgressModel::headerData(int section, Qt::Orientation orientation, int
 
 void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState)
 {
-	if(m_jobList.contains(jobId))
+	if(m_jobList.contains(jobId) || m_jobListHidden.contains(jobId))
 	{
 		return;
+	}
+
+	while(m_jobList.count() >= MAX_DISPLAY_ITEMS)
+	{
+		beginRemoveRows(QModelIndex(), 0, 0);
+		m_jobListHidden.append(m_jobList.takeFirst());
+		endRemoveRows();
 	}
 
 	int newIndex = m_jobList.count();
@@ -153,6 +162,11 @@ void ProgressModel::updateJob(const QUuid &jobId, const QString &newStatus, int 
 
 	if(row < 0)
 	{
+		if(m_jobListHidden.indexOf(jobId) >= 0)
+		{
+			if(!newStatus.isEmpty()) m_jobStatus.insert(jobId, newStatus);
+			if(newState >= 0) m_jobState.insert(jobId, newState);
+		}
 		return;
 	}
 
@@ -200,6 +214,13 @@ void ProgressModel::addSystemMessage(const QString &text, bool isWarning)
 		return;
 	}
 
+	while(m_jobList.count() >= MAX_DISPLAY_ITEMS)
+	{
+		beginRemoveRows(QModelIndex(), 0, 0);
+		m_jobListHidden.append(m_jobList.takeFirst());
+		endRemoveRows();
+	}
+
 	int newIndex = m_jobList.count();
 	beginInsertRows(QModelIndex(), newIndex, newIndex);
 
@@ -210,4 +231,17 @@ void ProgressModel::addSystemMessage(const QString &text, bool isWarning)
 	m_jobLogFile.insert(jobId, QStringList());
 	
 	endInsertRows();
+}
+
+void ProgressModel::restoreHiddenItems(void)
+{
+	if(!m_jobListHidden.isEmpty())
+	{
+		beginResetModel();
+		while(!m_jobListHidden.isEmpty())
+		{
+			m_jobList.prepend(m_jobListHidden.takeLast());
+		}
+		endResetModel();
+	}
 }

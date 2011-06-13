@@ -57,6 +57,7 @@ public:
 	//Public functions
 	const QStringList &getLogFile(const QModelIndex &index);
 	const QUuid &getJobId(const QModelIndex &index);
+	void restoreHiddenItems(void);
 
 public slots:
 	void addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);
@@ -66,6 +67,7 @@ public slots:
 
 private:
 	QList<QUuid> m_jobList;
+	QList<QUuid> m_jobListHidden;
 	QMap<QUuid, QString> m_jobName;
 	QMap<QUuid, QString> m_jobStatus;
 	QMap<QUuid, int> m_jobState;

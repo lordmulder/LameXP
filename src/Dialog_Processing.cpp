@@ -415,6 +415,7 @@ void ProcessingDialog::doneEncoding(void)
 	button_AbortProcess->setEnabled(false);
 	checkBox_shutdownComputer->setEnabled(false);
 
+	m_progressModel->restoreHiddenItems();
 	view_log->scrollToBottom();
 	m_progressIndicator->stop();
 	progressBar->setValue(progressBar->maximum());
