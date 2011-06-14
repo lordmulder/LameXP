@@ -42,6 +42,9 @@ signals:
 	void statusUpdated(int progress);
 	void messageLogged(const QString &line);
 
+protected:
+	static const int m_processTimeoutInterval = 180000;
+
 private:
 	static QMutex *m_mutex_startProcess;
 	static void *m_handle_jobObject;

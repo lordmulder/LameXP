@@ -70,6 +70,8 @@ private:
 	unsigned int m_nTracksSuccess;
 	unsigned int m_nTracksSkipped;
 	
+	static const int m_processTimeoutInterval = 180000;
+
 	bool m_bAborted;
 	bool m_bSuccess;
 	

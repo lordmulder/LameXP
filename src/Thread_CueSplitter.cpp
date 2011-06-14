@@ -300,7 +300,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 			qWarning("Process was aborted on user request!");
 			break;
 		}
-		process.waitForReadyRead();
+		process.waitForReadyRead(m_processTimeoutInterval);
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();

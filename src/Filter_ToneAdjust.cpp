@@ -85,7 +85,7 @@ bool ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFil
 			emit messageLogged("\nABORTED BY USER !!!");
 			break;
 		}
-		process.waitForReadyRead();
+		process.waitForReadyRead(m_processTimeoutInterval);
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();

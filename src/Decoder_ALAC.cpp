@@ -70,11 +70,11 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 			emit messageLogged("\nABORTED BY USER !!!");
 			break;
 		}
-		process.waitForReadyRead(180000);
+		process.waitForReadyRead(m_processTimeoutInterval);
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();
-			qWarning("TTAEnc process timed out <-- killing!");
+			qWarning("ALAC process timed out <-- killing!");
 			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;

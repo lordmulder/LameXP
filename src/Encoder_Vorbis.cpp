@@ -112,7 +112,7 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 			emit messageLogged("\nABORTED BY USER !!!");
 			break;
 		}
-		process.waitForReadyRead();
+		process.waitForReadyRead(m_processTimeoutInterval);
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();

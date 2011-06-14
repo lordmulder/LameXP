@@ -71,7 +71,7 @@ bool ShortenDecoder::decode(const QString &sourceFile, const QString &outputFile
 			emit messageLogged("\nABORTED BY USER !!!");
 			break;
 		}
-		process.waitForReadyRead(180000);
+		process.waitForReadyRead(m_processTimeoutInterval);
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();
