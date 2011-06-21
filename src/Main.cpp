@@ -43,7 +43,7 @@
 // Main function
 ///////////////////////////////////////////////////////////////////////////////
 
-int lamexp_main(int argc, char* argv[])
+static int lamexp_main(int argc, char* argv[])
 {
 	int iResult = -1;
 	bool bAccepted = true;
@@ -181,7 +181,7 @@ int lamexp_main(int argc, char* argv[])
 // Applicaton entry point
 ///////////////////////////////////////////////////////////////////////////////
 
-int main(int argc, char* argv[])
+static int _main(int argc, char* argv[])
 {
 	if(LAMEXP_DEBUG)
 	{
@@ -194,7 +194,6 @@ int main(int argc, char* argv[])
 	else
 	{
 		int iResult = -1;
-		SetUnhandledExceptionFilter(lamexp_exception_handler);
 		try
 		{
 			qInstallMsgHandler(lamexp_message_handler);
@@ -229,11 +228,35 @@ int main(int argc, char* argv[])
 	}
 }
 
-extern "C"
+int main(int argc, char* argv[])
 {
-	void __declspec(dllexport) __stdcall Test(HWND hwnd, HINSTANCE hinst, LPSTR lpszCmdLine, int nCmdShow)
+	if(LAMEXP_DEBUG)
 	{
-		OutputDebugStringA(lpszCmdLine);
-		MessageBoxA(0, lpszCmdLine, "LameXP is here!", MB_ICONINFORMATION);
+		return _main(argc, argv);
+	}
+	else
+	{
+		__try
+		{
+			SetUnhandledExceptionFilter(lamexp_exception_handler);
+			return _main(argc, argv);
+		}
+		__except(1)
+		{
+			fflush(stdout);
+			fflush(stderr);
+			fprintf(stderr, "\nGURU MEDITATION !!!\n");
+			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			TerminateProcess(GetCurrentProcess(), -1);
+		}
 	}
 }
+
+//extern "C"
+//{
+//	void __declspec(dllexport) __stdcall Test(HWND hwnd, HINSTANCE hinst, LPSTR lpszCmdLine, int nCmdShow)
+//	{
+//		OutputDebugStringA(lpszCmdLine);
+//		MessageBoxA(0, lpszCmdLine, "LameXP is here!", MB_ICONINFORMATION);
+//	}
+//}
