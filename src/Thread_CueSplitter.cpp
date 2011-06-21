@@ -36,6 +36,8 @@
 #include <QDebug>
 
 #include <math.h>
+#include <float.h>
+#include <limits>
 
 ////////////////////////////////////////////////////////////
 // Constructor

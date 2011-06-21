@@ -38,6 +38,7 @@
 #include <QLabel>
 
 #include <MMSystem.h>
+#include <math.h>
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)

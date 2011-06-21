@@ -52,6 +52,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include <intrin.h>
+#include <math.h>
 
 //COM includes
 #include <Objbase.h>

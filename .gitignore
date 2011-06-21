@@ -2,6 +2,8 @@
 /LameXP_*.opensdf
 /LameXP_*.sdf
 /LameXP_*.suo
+/LameXP_*.ncb
+/LameXP_*.sln.docstates
 /bin
 etc/Deployment/*.exe
 etc/Deployment/_postproc.bat
