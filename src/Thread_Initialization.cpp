@@ -405,7 +405,11 @@ void InitializationThread::initWmaDec(void)
 	LockedFile *wmaFileBin = NULL;
 	QFileInfo wmaFileInfo = QFileInfo(QString("%1/%2").arg(lamexp_known_folder(lamexp_folder_programfiles), wmaDecoderComponentPath));
 
-	if(!wmaFileInfo.exists())
+	if(!(wmaFileInfo.exists() && wmaFileInfo.isFile()))
+	{
+		wmaFileInfo.setFile(QString("%1/%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), "wmawav.exe"));
+	}
+	if(!(wmaFileInfo.exists() && wmaFileInfo.isFile()))
 	{
 		qDebug("WMA File Decoder not found -> WMA decoding support will be disabled!\n");
 		return;
