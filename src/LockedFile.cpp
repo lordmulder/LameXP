@@ -57,10 +57,16 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 		throw error_msg;
 	}
 
-	//Now lock the file
-	m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-
-	if(m_fileHandle == INVALID_HANDLE_VALUE)
+	//Now lock the file!
+	for(int i = 0; i < 1000; i++)
+	{
+		if((m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL)) != INVALID_HANDLE_VALUE)
+		{
+			break;
+		}
+		Sleep(100);
+	}
+	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
 	{
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
 		char error_msg[512];
@@ -75,6 +81,13 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	{
 		fileHash.addData(outFile.readAll());
 		outFile.close();
+	}
+	else
+	{
+		QFile::remove(QFileInfo(outFile).canonicalFilePath());
+		char error_msg[512];
+		strcpy_s(error_msg, 512, QString("File '%1' could not be read!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
+		throw error_msg;
 	}
 
 	//Compare hashes
