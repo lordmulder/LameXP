@@ -28,33 +28,48 @@
 #include <QDir>
 #include <QCryptographicHash>
 
+#define THROW(STR)					\
+{									\
+	char error_msg[512];			\
+	strcpy_s(error_msg, 512, STR);	\
+	throw error_msg;				\
+}
+
 LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, const QByteArray &expectedHash)
 {
 	m_fileHandle = NULL;
-	
 	QResource resource(resourcePath);
-	QFile outFile(outPath);
 	
+	//Make sure the resource is valid
+	if(!resource.isValid())
+	{
+		THROW(QString("Resource '%1' is invalid!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toUtf8().constData());
+	}
+
+	QFile outFile(outPath);
 	m_filePath = QFileInfo(outFile).absoluteFilePath();
-	outFile.open(QIODevice::WriteOnly);
+	
+	//Open output file
+	for(int i = 0; i < 64; i++)
+	{
+		if(outFile.open(QIODevice::WriteOnly)) break;
+		if(!i) qWarning("Failed to open file on first attemp, retrying...");
+		Sleep(100);
+	}
 	
 	//Write data to file
-	if(outFile.isOpen() && outFile.isWritable() && resource.isValid())
+	if(outFile.isOpen() && outFile.isWritable())
 	{
 		if(outFile.write(reinterpret_cast<const char*>(resource.data()), resource.size()) != resource.size())
 		{
 			QFile::remove(QFileInfo(outFile).canonicalFilePath());
-			char error_msg[512];
-			strcpy_s(error_msg, 512, QString("File '%1' could not be written!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
-			throw error_msg;
+			THROW(QString("File '%1' could not be written!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
 		}
 		outFile.close();
 	}
 	else
 	{
-		char error_msg[512];
-		strcpy_s(error_msg, 512, QString("File '%1' could not be created!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
-		throw error_msg;
+		THROW(QString("File '%1' could not be created!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
 	}
 
 	//Now lock the file!
@@ -62,6 +77,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	{
 		m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
 		if((m_fileHandle != NULL) && (m_fileHandle != INVALID_HANDLE_VALUE)) break;
+		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
 		Sleep(100);
 	}
 	
@@ -85,9 +101,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	else
 	{
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
-		char error_msg[512];
-		strcpy_s(error_msg, 512, QString("File '%1' could not be read!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
-		throw error_msg;
+		THROW(QString("File '%1' could not be read!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
 	}
 
 	//Compare hashes
@@ -96,9 +110,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 		qWarning("\nFile checksum error:\n Expected = %040s\n Detected = %040s\n", expectedHash.constData(), fileHash.result().toHex().constData());
 		LAMEXP_CLOSE(m_fileHandle);
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
-		char error_msg[512];
-		strcpy_s(error_msg, 512, QString("File '%1' is corruputed, take care!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toLatin1().constData());
-		throw error_msg;
+		THROW(QString("File '%1' is corruputed, take care!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toLatin1().constData());
 	}
 }
 
@@ -124,15 +136,14 @@ LockedFile::LockedFile(const QString &filePath)
 	{
 		m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
 		if((m_fileHandle != NULL) && (m_fileHandle != INVALID_HANDLE_VALUE)) break;
+		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
 		Sleep(100);
 	}
 
 	//Locked successfully?
 	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
 	{
-		char error_msg[256];
-		strcpy_s(error_msg, 256, QString("File '%1' could not be locked!").arg(existingFile.fileName()).toLatin1().constData());
-		throw error_msg;
+		THROW(QString("File '%1' could not be locked!").arg(existingFile.fileName()).toLatin1().constData());
 	}
 }
 
