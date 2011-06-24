@@ -129,6 +129,7 @@ static int lamexp_main(int argc, char* argv[])
 	//Show splash screen
 	InitializationThread *poInitializationThread = new InitializationThread(&cpuFeatures);
 	SplashScreen::showSplash(poInitializationThread);
+	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
 	LAMEXP_DELETE(poInitializationThread);
 
 	//Validate settings

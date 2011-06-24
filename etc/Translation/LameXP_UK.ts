@@ -1593,6 +1593,18 @@
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation>Віднині LameXP &lt;i&gt;не&lt;/i&gt; буде перевіряти наявність оновлень бета-версій.</translation>
     </message>
+    <message>
+        <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please refer to the %1 document for details and solutions!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slow Startup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

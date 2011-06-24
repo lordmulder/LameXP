@@ -1238,6 +1238,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please refer to the %1 document for details and solutions!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slow Startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Show Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Urgent Update</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1295,14 +1315,6 @@
     </message>
     <message>
         <source>AAC Support Disabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t Show Again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

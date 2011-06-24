@@ -1603,6 +1603,18 @@ Ouvrir le dossier récursivement...</translation>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please refer to the %1 document for details and solutions!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slow Startup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

@@ -83,6 +83,7 @@ LAMEXP_MAKE_ID(autoUpdateCheckBeta, "AutoUpdate/CheckForBetaVersions");
 LAMEXP_MAKE_ID(soundsEnabled, "Flags/EnableSounds");
 LAMEXP_MAKE_ID(neroAacNotificationsEnabled, "Flags/EnableNeroAacNotifications");
 LAMEXP_MAKE_ID(wmaDecoderNotificationsEnabled, "Flags/EnableWmaDecoderNotifications");
+LAMEXP_MAKE_ID(antivirNotificationsEnabled, "Flags/EnableAntivirusNotifications");
 LAMEXP_MAKE_ID(dropBoxWidgetEnabled, "Flags/EnableDropBoxWidget");
 LAMEXP_MAKE_ID(shellIntegrationEnabled, "Flags/EnableShellIntegration");
 LAMEXP_MAKE_ID(currentLanguage, "Localization/Language");
@@ -111,6 +112,7 @@ LAMEXP_MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
 LAMEXP_MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
 LAMEXP_MAKE_ID(customTempPath, "AdvancedOptions/TempDirectory/CustomPath");
 LAMEXP_MAKE_ID(customTempPathEnabled, "AdvancedOptions/TempDirectory/UseCustomPath");
+LAMEXP_MAKE_ID(slowStartup, "Flags/SlowStartupDetected");
 
 //LUT
 const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
@@ -271,6 +273,7 @@ LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta, false)
 LAMEXP_MAKE_OPTION_B(soundsEnabled, true)
 LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(wmaDecoderNotificationsEnabled, true)
+LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled, true)
 LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_portable_mode())
 LAMEXP_MAKE_OPTION_S(currentLanguage, defaultLanguage())
@@ -299,3 +302,4 @@ LAMEXP_MAKE_OPTION_U(metaInfoPosition, UINT_MAX);
 LAMEXP_MAKE_OPTION_U(maximumInstances, 0);
 LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation));
 LAMEXP_MAKE_OPTION_B(customTempPathEnabled, false);
+LAMEXP_MAKE_OPTION_B(slowStartup, false);

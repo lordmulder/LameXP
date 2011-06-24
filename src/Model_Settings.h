@@ -93,6 +93,7 @@ public:
 	LAMEXP_MAKE_OPTION_B(soundsEnabled);
 	LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled);
 	LAMEXP_MAKE_OPTION_B(wmaDecoderNotificationsEnabled);
+	LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled);
 	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled);
 	LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled);
 	LAMEXP_MAKE_OPTION_S(currentLanguage);
@@ -121,6 +122,7 @@ public:
 	LAMEXP_MAKE_OPTION_U(maximumInstances);
 	LAMEXP_MAKE_OPTION_S(customTempPath);
 	LAMEXP_MAKE_OPTION_B(customTempPathEnabled);
+	LAMEXP_MAKE_OPTION_B(slowStartup);
 
 	//Misc
 	void validate(void);

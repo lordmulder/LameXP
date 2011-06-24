@@ -925,6 +925,18 @@ void MainWindow::windowShown(void)
 		}
 	}
 
+	//Slow startup indicator
+	if(m_settings->slowStartup() && m_settings->antivirNotificationsEnabled())
+	{
+		QString message;
+		message += QString("<nobr>%1</nobr><br>").arg(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP."));
+		message += QString("<nobr>%1</nobr><br>").arg(tr("Please refer to the %1 document for details and solutions!").arg("<a href=\"http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#df406578\">F.A.Q.</a>"));
+		if(QMessageBox::warning(this, tr("Slow Startup"), message, tr("Discard"), tr("Don't Show Again")) == 1)
+		{
+			m_settings->antivirNotificationsEnabled(false);
+		}
+	}
+
 	//Update reminder
 	if(QDate::currentDate() >= lamexp_version_date().addYears(1))
 	{

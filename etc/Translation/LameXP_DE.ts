@@ -1594,6 +1594,18 @@
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translation>Bitte benutzen Sie zum Importieren von Cuesheets den Cuesheet Assistenten.</translation>
     </message>
+    <message>
+        <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
+        <translation>Anscheinend wird der Programmstart von LameXP durch eine fehlerhafte Antiviren-Software verlangsamt.</translation>
+    </message>
+    <message>
+        <source>Please refer to the %1 document for details and solutions!</source>
+        <translation>Bitte beachten Sie die Hinweise und Lösungsvorschläge im %1 Dokument!</translation>
+    </message>
+    <message>
+        <source>Slow Startup</source>
+        <translation>Langsamer Programmstart</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

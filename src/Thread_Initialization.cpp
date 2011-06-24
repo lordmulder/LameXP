@@ -83,6 +83,8 @@ g_lamexp_tools[] =
 	{NULL, NULL, NULL, NULL}
 };
 
+static const double g_allowedExtractDelay = 10.0;
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -91,6 +93,7 @@ InitializationThread::InitializationThread(const lamexp_cpu_t *cpuFeatures)
 {
 	m_bSuccess = false;
 	memset(&m_cpuFeatures, 0, sizeof(lamexp_cpu_t));
+	m_slowIndicator = false;
 	
 	if(cpuFeatures)
 	{
@@ -208,8 +211,9 @@ void InitializationThread::run()
 
 	//Check delay
 	double delayExtract = static_cast<double>(timer.elapsed()) / 1000.0;
-	if(delayExtract > 8.0)
+	if(delayExtract > g_allowedExtractDelay)
 	{
+		m_slowIndicator = true;
 		qWarning("Extracting tools took %.3f seconds -> probably slow realtime virus scanner.", delayExtract);
 		qWarning("Please report performance problems to your anti-virus developer !!!\n");
 	}
