@@ -1606,6 +1606,26 @@
         <source>Slow Startup</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable Slow Startup Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slow Startup Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to disable the slow startup notifications?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The slow startup notifications have been disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The slow startup notifications have been re-enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

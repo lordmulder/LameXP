@@ -71,6 +71,7 @@ private slots:
 	void customTempFolderChanged(const QString &text);
 	void disableNeroAacNotificationsActionTriggered(bool checked);
 	void disableShellIntegrationActionTriggered(bool);
+	void disableSlowStartupNotificationsActionTriggered(bool checked);
 	void disableSoundsActionTriggered(bool checked);
 	void disableUpdateReminderActionTriggered(bool checked);
 	void disableWmaDecoderNotificationsActionTriggered(bool checked);

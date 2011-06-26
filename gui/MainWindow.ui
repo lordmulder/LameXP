@@ -1067,8 +1067,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
-               <height>1244</height>
+               <width>602</width>
+               <height>1241</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -3073,6 +3073,7 @@
      <addaction name="actionDisableUpdateReminder"/>
      <addaction name="actionDisableWmaDecoderNotifications"/>
      <addaction name="actionDisableNeroAacNotifications"/>
+     <addaction name="actionDisableSlowStartupNotifications"/>
      <addaction name="actionDisableShellIntegration"/>
      <addaction name="separator"/>
      <addaction name="actionCheckForBetaUpdates"/>
@@ -3387,6 +3388,14 @@
     <string>Import Cue Sheet</string>
    </property>
   </action>
+  <action name="actionDisableSlowStartupNotifications">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Disable Slow Startup Notifications</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../res/Icons.qrc"/>
@@ -3408,6 +3417,7 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

@@ -332,6 +332,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
 	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
+	actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
 	actionDisableShellIntegration->setDisabled(lamexp_portable_mode() && actionDisableShellIntegration->isChecked());
 	actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
@@ -341,6 +342,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(actionInstallWMADecoder, SIGNAL(triggered(bool)), this, SLOT(installWMADecoderActionTriggered(bool)));
 	connect(actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
 	connect(actionDisableWmaDecoderNotifications, SIGNAL(triggered(bool)), this, SLOT(disableWmaDecoderNotificationsActionTriggered(bool)));
+	connect(actionDisableSlowStartupNotifications, SIGNAL(triggered(bool)), this, SLOT(disableSlowStartupNotificationsActionTriggered(bool)));
 	connect(actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
 	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
 	connect(actionCheckForBetaUpdates, SIGNAL(triggered(bool)), this, SLOT(checkForBetaUpdatesActionTriggered(bool)));
@@ -929,11 +931,12 @@ void MainWindow::windowShown(void)
 	if(m_settings->slowStartup() && m_settings->antivirNotificationsEnabled())
 	{
 		QString message;
-		message += QString("<nobr>%1</nobr><br>").arg(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP."));
-		message += QString("<nobr>%1</nobr><br>").arg(tr("Please refer to the %1 document for details and solutions!").arg("<a href=\"http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#df406578\">F.A.Q.</a>"));
+		message += QString("<nobr>%1</nobr><br>").arg(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP.").replace("-", "&minus;"));
+		message += QString("<nobr>%1</nobr><br>").arg(tr("Please refer to the %1 document for details and solutions!").replace("-", "&minus;").arg("<a href=\"http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#df406578\">F.A.Q.</a>"));
 		if(QMessageBox::warning(this, tr("Slow Startup"), message, tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->antivirNotificationsEnabled(false);
+			actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 		}
 	}
 
@@ -1485,6 +1488,32 @@ void MainWindow::disableWmaDecoderNotificationsActionTriggered(bool checked)
 	}
 
 	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
+}
+
+/*
+ * Disable slow startup action
+ */
+void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
+{
+	if(checked)
+	{
+		if(0 == QMessageBox::question(this, tr("Slow Startup Notifications"), tr("Do you really want to disable the slow startup notifications?"), tr("Yes"), tr("No"), QString(), 1))
+		{
+			QMessageBox::information(this, tr("Slow Startup Notifications"), tr("The slow startup notifications have been disabled."));
+			m_settings->antivirNotificationsEnabled(false);
+		}
+		else
+		{
+			m_settings->antivirNotificationsEnabled(true);
+		}
+	}
+	else
+	{
+			QMessageBox::information(this, tr("Slow Startup Notifications"), tr("The slow startup notifications have been re-enabled."));
+			m_settings->antivirNotificationsEnabled(true);
+	}
+
+	actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 }
 
 /*
