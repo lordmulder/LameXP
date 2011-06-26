@@ -28,6 +28,12 @@
 #include <QDir>
 #include <QCryptographicHash>
 
+#include <stdio.h>
+#include <io.h>
+#include <fcntl.h>
+
+///////////////////////////////////////////////////////////////////////////////
+
 #define THROW(STR)					\
 {									\
 	char error_msg[512];			\
@@ -35,7 +41,16 @@
 	throw error_msg;				\
 }
 
-LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, const QByteArray &expectedHash)
+// WARNING: Passing file descriptors into Qt does NOT work with dynamically linked CRT!
+#ifdef QT_NODLL
+	static const bool g_useFileDescr = 1;
+#else
+	static const bool g_useFileDescr = 0;
+#endif
+
+///////////////////////////////////////////////////////////////////////////////
+
+	LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, const QByteArray &expectedHash)
 {
 	m_fileHandle = NULL;
 	QResource resource(resourcePath);
@@ -90,17 +105,32 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 		throw error_msg;
 	}
 
+	//Open file for reading
+	if(g_useFileDescr)
+	{
+		int fd = _open_osfhandle(reinterpret_cast<intptr_t>(m_fileHandle), _O_RDONLY | _O_BINARY);
+		if(fd >= 0) outFile.open(fd, QIODevice::ReadOnly);
+	}
+	else
+	{
+		for(int i = 0; i < 64; i++)
+		{
+			if(outFile.open(QIODevice::ReadOnly)) break;
+			if(!i) qWarning("Failed to re-open file on first attemp, retrying...");
+			Sleep(100);
+		}
+	}
+
 	//Verify file contents
-	outFile.open(QIODevice::ReadOnly);
 	QCryptographicHash fileHash(QCryptographicHash::Sha1);
-	if(outFile.isOpen() && outFile.isReadable())
+	if(outFile.isOpen() /*&& outFile.isReadable()*/)
 	{
 		fileHash.addData(outFile.readAll());
 		outFile.close();
 	}
 	else
 	{
-		QFile::remove(QFileInfo(outFile).canonicalFilePath());
+		QFile::remove(m_filePath);
 		THROW(QString("File '%1' could not be read!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
 	}
 
@@ -109,7 +139,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	{
 		qWarning("\nFile checksum error:\n Expected = %040s\n Detected = %040s\n", expectedHash.constData(), fileHash.result().toHex().constData());
 		LAMEXP_CLOSE(m_fileHandle);
-		QFile::remove(QFileInfo(outFile).canonicalFilePath());
+		QFile::remove(m_filePath);
 		THROW(QString("File '%1' is corruputed, take care!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toLatin1().constData());
 	}
 }
