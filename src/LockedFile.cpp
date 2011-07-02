@@ -50,7 +50,35 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-	LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, const QByteArray &expectedHash)
+static const char *g_seed = "bdf29c2e76473e307f07cff5dd866422f59ca921";
+static const char *g_salt = "f6f39c58271b985d1c67ee5604397c89dd9668b9";
+
+static QByteArray fileHash(QFile &file)
+{
+	QByteArray hash = QString(g_seed).toLatin1();
+	QByteArray salt = QString(g_salt).toLatin1();
+	
+	if(file.isOpen() && file.reset())
+	{
+		QByteArray data = file.readAll();
+		QCryptographicHash sha1(QCryptographicHash::Sha1);
+
+		for(int r = 0; r < 8; r++)
+		{
+			sha1.addData(hash);
+			sha1.addData(data);
+			sha1.addData(salt);
+			hash = sha1.result().toHex();
+			sha1.reset();
+		}
+	}
+
+	return hash;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, const QByteArray &expectedHash)
 {
 	m_fileHandle = NULL;
 	QResource resource(resourcePath);
@@ -122,10 +150,10 @@
 	}
 
 	//Verify file contents
-	QCryptographicHash fileHash(QCryptographicHash::Sha1);
-	if(outFile.isOpen() /*&& outFile.isReadable()*/)
+	QByteArray hash;
+	if(outFile.isOpen())
 	{
-		fileHash.addData(outFile.readAll());
+		hash = fileHash(outFile);
 		outFile.close();
 	}
 	else
@@ -135,9 +163,9 @@
 	}
 
 	//Compare hashes
-	if(_stricmp(fileHash.result().toHex().constData(), expectedHash.constData()))
+	if(hash.isNull() || _stricmp(hash.constData(), expectedHash.constData()))
 	{
-		qWarning("\nFile checksum error:\n Expected = %040s\n Detected = %040s\n", expectedHash.constData(), fileHash.result().toHex().constData());
+		qWarning("\nFile checksum error:\n Expected = %040s\n Detected = %040s\n", expectedHash.constData(), hash.constData());
 		LAMEXP_CLOSE(m_fileHandle);
 		QFile::remove(m_filePath);
 		THROW(QString("File '%1' is corruputed, take care!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toLatin1().constData());
