@@ -52,34 +52,34 @@ static const struct
 }
 g_lamexp_tools[] =
 {
-	{"3b4106d22e34df6327bef222622eb327ea067a40", CPU_TYPE_X86, "aften.i386.exe", 8},
-	{"f424e28296851d86a85b3863923009549efaf0f2", CPU_TYPE_SSE, "aften.sse2.exe", 8},
-	{"abd48661d8990c63178cd639451d6dfdbd1ef28a", CPU_TYPE_X64, "aften.x64.exe",  8},
-	{"30cc614bb576c91eb8439d47596e6dbdc088919c", CPU_TYPE_ALL, "alac.exe", 20},
-	{"6a7b9db0cc3e3fc3c87643aaafc8ddd9fef928d7", CPU_TYPE_ALL, "avs2wav.exe", 12},
-	{"f4c0a20fbcb6e848207c53e1e29c467d4dc70757", CPU_TYPE_ALL, "elevator.exe", UINT_MAX},
-	{"81f0ff6b9b1f906d7c0004cbbddf4dc539903591", CPU_TYPE_ALL, "faad.exe", 27},
-	{"a2c85f2d9368097207c2c0faf133152e846e7d4b", CPU_TYPE_ALL, "flac.exe", 121},
-	{"ee40b5026935126f596351fbaf1dfada8ef06591", CPU_TYPE_ALL, "gpgv.exe", 1411},
-	{"8a7d6de45f589588f9210d2cc988b3108a306b84", CPU_TYPE_ALL, "gpgv.gpg", UINT_MAX},
-	{"feba4ae2c50a540652b978aa862cf5c02f1da7c4", CPU_TYPE_ALL, "lame.exe", 3990},
-	{"70147c86858b5daea33fa7274f70753d6901b061", CPU_TYPE_ALL, "mac.exe", 406},
-	{"7f52d7e5f5136f1a24bec7a0664c6ade6f914a47", CPU_TYPE_GEN, "mediainfo.i386.exe", 745},
-	{"a532b2661bfecec44f3ad6354639e2e245beab4f", CPU_TYPE_X64, "mediainfo.x64.exe",  745},
-	{"e1d675ae5cdd8fff486a14d6a481b6d5a4fb90e7", CPU_TYPE_ALL, "mpcdec.exe", 435},
-	{"d444f2ef6bf94ab3a46ee854934b722bf3d4d16a", CPU_TYPE_ALL, "mpg123.exe", 1133},
-	{"1b51ad3b25e6d7bcec5491c948bfacec2b132204", CPU_TYPE_ALL, "oggdec.exe", UINT_MAX},
-	{"634cbe6ddb151a1803541664bb6a7089eb8c30ac", CPU_TYPE_X86, "oggenc2.i386.exe", 287603},
-	{"33ad609d0b1edf6d7726d85ea930b5c435a39d6a", CPU_TYPE_SSE, "oggenc2.sse2.exe", 287603},
-	{"6d50367552ad2a015133f5a83e307bb80b811c06", CPU_TYPE_X64, "oggenc2.x64.exe",  287603},
-	{"1f073cc23f7321beafcfc5a8f0ce775b2a01b943", CPU_TYPE_ALL, "shorten.exe", 361},
-	{"945a4b40743f4fd39a687986ec02a871d5a658db", CPU_TYPE_ALL, "sox.exe", 1432},
-	{"55b6e03238ed7da0b169ff5a4e957a8c0e193cec", CPU_TYPE_ALL, "speexdec.exe", 12},
-	{"8b587006515085574c5a9de1efc060018414d481", CPU_TYPE_ALL, "tta.exe", 21},
-	{"e8578f1ed9cf6cb636befae2bb3ca5b5fd71bc01", CPU_TYPE_ALL, "valdec.exe", 31},
-	{"9440b64b7772078d391a014d7e0cca8a7e58e8c7", CPU_TYPE_ALL, "wget.exe", 1114},
-	{"bb5f3f72c927fb26910b22676d68fc08960868dc", CPU_TYPE_ALL, "wupdate.exe", UINT_MAX},
-	{"972930436457f0b939223d4d3cc51d1535df6c3d", CPU_TYPE_ALL, "wvunpack.exe", 4601},
+	{"cd702b111e13e3b6ed71cb0b6e6e9fc6be994296c65ed367c22ba382ab1e147ba126b02b", CPU_TYPE_X86, "aften.i386.exe", 8},
+	{"aa81f531c7cf1be38bfce1656113cfd6d682106958ab269dae8dff70abbc3e00615fdf4e", CPU_TYPE_SSE, "aften.sse2.exe", 8},
+	{"29da0d3e810bc3e8d2cddb3db452325eefca0d0c1fff1379fa17806ad447752be1b88e2f", CPU_TYPE_X64, "aften.x64.exe",  8},
+	{"1cca303fabd889a18fc01c32a7fd861194cfcac60ba63740ea2d7c55d049dbf8f59259fa", CPU_TYPE_ALL, "alac.exe", 20},
+	{"72d7ef3ecb727d6eaf64a8cca8bda2b6cc91154178d7d1783144c4acf1a0c1c2547ca324", CPU_TYPE_ALL, "avs2wav.exe", 12},
+	{"c6f23fb7ba18a7972802e013b66ec6ce52088bf4fe783774eb1d33dd3401fa8aad76cc8b", CPU_TYPE_ALL, "elevator.exe", UINT_MAX},
+	{"b71736a34afbe3259304a5b5dda980dfdbc3bf4fbc06c62a98a3ee4742deda377020d691", CPU_TYPE_ALL, "faad.exe", 27},
+	{"446054f9a7f705f1aadc9053ca7b8a86a775499ef159978954ebdea92de056c34f8841f7", CPU_TYPE_ALL, "flac.exe", 121},
+	{"dd68d074c5e13a607580f3a24595c0f3882e37211d2ca628f46e6df20fabcc832dad488a", CPU_TYPE_ALL, "gpgv.exe", 1411},
+	{"b3fca757b3567dab75c042e62213c231de378ea0fdd7fe29b733417cd5d3d33558452f94", CPU_TYPE_ALL, "gpgv.gpg", UINT_MAX},
+	{"9c1c8024d5d75213edbc1dbad7aeaf2535000f57880b445c763ac45da365446b8cfd84c7", CPU_TYPE_ALL, "lame.exe", 3990},
+	{"67933924d68ce319795989648f29e7bd1abaac4ec09c26cbb0ff0d15a67a9df17e257933", CPU_TYPE_ALL, "mac.exe", 406},
+	{"7c5afaf883b7e2b4be47af2070a756470714af98741173a92d123eb4e0242f69321ccb61", CPU_TYPE_GEN, "mediainfo.i386.exe", 745},
+	{"38d1c95e42dcc180b0be2a401ab00f60e91a38342758f5c1927329f378921d75855a56a3", CPU_TYPE_X64, "mediainfo.x64.exe",  745},
+	{"a93ec86187025e66fb78026af35555bd3b4e30fe1a40e8d66f600cfd918f07f431f0b2f2", CPU_TYPE_ALL, "mpcdec.exe", 435},
+	{"5a89768010efb1ddfd88ccc378a89433ceaecb403a7b1f83f8716f6848d9a05b3d3c6d93", CPU_TYPE_ALL, "mpg123.exe", 1133},
+	{"0c781805dda931c529bd16069215f616a7a4c5e5c2dfb6b75fe85d52b20511830693e528", CPU_TYPE_ALL, "oggdec.exe", UINT_MAX},
+	{"0c019e13450dc664987e21f4e5489d182be7d6d0d81efbbaaf1c78693dfe3e38e0355b93", CPU_TYPE_X86, "oggenc2.i386.exe", 287603},
+	{"693dd6f779df70a047c15c2c79350855db38d5b0cd7e529b6877b7c821cfe6addfdd50a4", CPU_TYPE_SSE, "oggenc2.sse2.exe", 287603},
+	{"32cb0b2182488e5e9278ba6b9fc9141214c7546eec67ee02fa895810b0e56900368695be", CPU_TYPE_X64, "oggenc2.x64.exe",  287603},
+	{"58c2b8bcff8f27bfa8fab8172b80f5da731221d072c7dba4dd3a3d7d6423490a25dc6760", CPU_TYPE_ALL, "shorten.exe", 361},
+	{"abdf9b20a8031a09d0abca9cb10c31c8418f72403b5d1350fd69bfa34041591aca3060ab", CPU_TYPE_ALL, "sox.exe", 1432},
+	{"48e7f81c024cd17dac0eaeab253aad6b223e72dc80688f7576276b0563209514ff0bb9c8", CPU_TYPE_ALL, "speexdec.exe", 12},
+	{"9b50cf64747d4afbad5d8d9b5a0a2d41c5a58256f47ebdbd8cc920e7e576085dfe1b14ff", CPU_TYPE_ALL, "tta.exe", 21},
+	{"875871c942846f6ad163f9e4949bba2f4331bec678ca5aefe58c961b6825bd0d419a078b", CPU_TYPE_ALL, "valdec.exe", 31},
+	{"e657331e281840878a37eb4fb357cb79f33d528ddbd5f9b2e2f7d2194bed4720e1af8eaf", CPU_TYPE_ALL, "wget.exe", 1114},
+	{"229d677a34885bd4981f7dff9ec2ec71a8bcf207d7337151c6ec0f49a5dc0b14df1bdd11", CPU_TYPE_ALL, "wupdate.exe", UINT_MAX},
+	{"6b053b37d47a9c8659ebf2de43ad19dcba17b9cd868b26974b9cc8c27b6167e8bf07a5a2", CPU_TYPE_ALL, "wvunpack.exe", 4601},
 	{NULL, NULL, NULL, NULL}
 };
 
@@ -159,7 +159,7 @@ void InitializationThread::run()
 			unsigned int toolCpuType = mapCpuType.take(toolName);
 			unsigned int toolVersion = mapVersion.take(toolName);
 			
-			if(toolHash.size() != 40)
+			if(toolHash.size() != 72)
 			{
 				throw "The required checksum is missing, take care!";
 			}

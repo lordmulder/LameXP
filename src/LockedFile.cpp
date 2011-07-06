@@ -50,26 +50,27 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-static const char *g_seed = "bdf29c2e76473e307f07cff5dd866422f59ca921";
-static const char *g_salt = "f6f39c58271b985d1c67ee5604397c89dd9668b9";
+static const char *g_seed = "b14bf0ed8d5a62311b366907a6450ea2d52ad8bbc7d520b70400f1dd8ddfa9339011a473";
+static const char *g_salt = "80e0cce7af513880065488568071342e5889d6c5ee96190c303b7260e5c8356c350fbe44";
 
 static QByteArray fileHash(QFile &file)
 {
-	QByteArray hash = QString(g_seed).toLatin1();
-	QByteArray salt = QString(g_salt).toLatin1();
+	QByteArray hash = QByteArray::fromHex(g_seed);
+	QByteArray salt = QByteArray::fromHex(g_salt);
 	
 	if(file.isOpen() && file.reset())
 	{
 		QByteArray data = file.readAll();
-		QCryptographicHash sha1(QCryptographicHash::Sha1);
+		QCryptographicHash sha(QCryptographicHash::Sha1);
+		QCryptographicHash md5(QCryptographicHash::Md5);
 
 		for(int r = 0; r < 8; r++)
 		{
-			sha1.addData(hash);
-			sha1.addData(data);
-			sha1.addData(salt);
-			hash = sha1.result().toHex();
-			sha1.reset();
+			sha.reset(); md5.reset();
+			sha.addData(hash); md5.addData(hash);
+			sha.addData(data); md5.addData(data);
+			sha.addData(salt); md5.addData(salt);
+			hash = sha.result() + md5.result();
 		}
 	}
 
@@ -153,7 +154,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	QByteArray hash;
 	if(outFile.isOpen())
 	{
-		hash = fileHash(outFile);
+		hash = fileHash(outFile).toHex();
 		outFile.close();
 	}
 	else
@@ -165,7 +166,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	//Compare hashes
 	if(hash.isNull() || _stricmp(hash.constData(), expectedHash.constData()))
 	{
-		qWarning("\nFile checksum error:\n Expected = %040s\n Detected = %040s\n", expectedHash.constData(), hash.constData());
+		qWarning("\nFile checksum error:\n A = %s\n B = %s\n", expectedHash.constData(), hash.constData());
 		LAMEXP_CLOSE(m_fileHandle);
 		QFile::remove(m_filePath);
 		THROW(QString("File '%1' is corruputed, take care!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toLatin1().constData());

@@ -151,7 +151,7 @@ static bool g_lamexp_console_attached = false;
 #endif
 
 //Official web-site URL
-static const char *g_lamexp_website_url = "http://mulder.dummwiedeutsch.de/";
+static const char *g_lamexp_website_url = "http://lamexp.sourceforge.net/";
 static const char *g_lamexp_support_url = "http://forum.doom9.org/showthread.php?t=157726";
 
 //Tool versions (expected)
