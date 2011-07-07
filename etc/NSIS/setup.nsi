@@ -112,6 +112,7 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
 ReserveFile "${NSISDIR}\Plugins\StartMenu.dll"
 ReserveFile "${NSISDIR}\Plugins\LockedList.dll"
+ReserveFile "${NSISDIR}\Plugins\Aero.dll"
 
 
 ;--------------------------------
@@ -338,6 +339,8 @@ Function MyUacInit
 		Abort
 		SkipPrereleaseWarning:
 	!endif
+	
+	Aero::Apply
 FunctionEnd
 
 Function un.MyUacInit
@@ -360,6 +363,8 @@ Function un.MyUacInit
 		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Unable to elevate installer! (Error code: $0)"
 		Quit
 	${EndSwitch}
+	
+	Aero::Apply
 FunctionEnd
 
 
