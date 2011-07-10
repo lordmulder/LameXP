@@ -37,6 +37,7 @@
 #include <QUrl>
 #include <QCloseEvent>
 #include <QMovie>
+#include <QtConcurrentRun>
 
 #include <time.h>
 #include <MMSystem.h>
@@ -54,14 +55,20 @@ static const char *mirror_url_postfix[] =
 	NULL
 };
 
-static const char *update_mirrors[] =
+static const char *update_mirrors_prim[] =
 {
-	"http://mulder.dummwiedeutsch.de/",
 	"http://mulder.brhack.net/",
+	"http://mulder.bplaced.net/",
 	"http://lamexp.sourceforge.net/",
 	"http://free.pages.at/borschdfresser/",
+	NULL
+};
+
+static const char *update_mirrors_back[] =
+{
 	"http://mplayer.savedonthe.net/",
 	"http://www.tricksoft.de/",
+	"http://mulder.dummwiedeutsch.de/",
 	"http://mplayer.somestuff.org/",
 	NULL
 };
@@ -109,6 +116,13 @@ static const char *known_hosts[] =
 static const int MIN_CONNSCORE = 3;
 static const int VERSION_INFO_EXPIRES_MONTHS = 6;
 static char *USER_AGENT_STR = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101101 IceCat/3.6.12 (like Firefox/3.6.12)";
+
+static BOOL getInternetConnectedState(void)
+{
+	DWORD lpdwFlags = NULL;
+	BOOL result = InternetGetConnectedState(&lpdwFlags, NULL);
+	return result;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -218,7 +232,8 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	
 	int counter = 2;
 	for(int i = 0; known_hosts[i]; i++) counter++;
-	for(int i = 0; update_mirrors[i]; i++) counter++;
+	for(int i = 0; update_mirrors_prim[i]; i++) counter++;
+	for(int i = 0; update_mirrors_back[i]; i++) counter++;
 
 	progressBar->setMaximum(counter);
 	progressBar->setValue(0);
@@ -262,6 +277,8 @@ void UpdateDialog::checkForUpdates(void)
 	bool success = false;
 	int connectionScore = 0;
 
+	// ----- Initialization ----- //
+
 	m_updateInfo = new UpdateInfo;
 
 	progressBar->setValue(0);
@@ -279,13 +296,20 @@ void UpdateDialog::checkForUpdates(void)
 	QApplication::processEvents();
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
+	// ----- Test Internet Connection ----- //
+
 	statusLabel->setText(tr("Testing your internet connection, please wait..."));
 
 	m_logFile->clear();
 	m_logFile->append("Checking internet connection...");
+	
+	QFuture<BOOL> connectedState = QtConcurrent::run(getInternetConnectedState);
+	while(!connectedState.isFinished())
+	{
+		QApplication::processEvents(QEventLoop::WaitForMoreEvents);
+	}
 
-	DWORD inetFlags = NULL;
-	if(!InternetGetConnectedState(&inetFlags, NULL))
+	if(!connectedState.result())
 	{
 		m_logFile->append(QStringList() << "" << "Operating system reports that the computer is currently offline !!!");
 		if(!retryButton->isVisible()) retryButton->show();
@@ -309,6 +333,8 @@ void UpdateDialog::checkForUpdates(void)
 		return;
 	}
 	
+	// ----- Test Known Hosts Connectivity ----- //
+
 	QStringList hostList;
 	for(int i = 0; known_hosts[i]; i++)
 	{
@@ -360,20 +386,29 @@ void UpdateDialog::checkForUpdates(void)
 		return;
 	}
 
+	// ----- Build Mirror List ----- //
+
 	statusLabel->setText(tr("Checking for new updates online, please wait..."));
 	m_logFile->append(QStringList() << "" << "----" << "" << "Checking for updates online...");
 	
 	QStringList mirrorList;
-	for(int i = 0; update_mirrors[i]; i++)
+	for(int index = 0; update_mirrors_prim[index]; index++)
 	{
-		mirrorList << QString::fromLatin1(update_mirrors[i]);
+		mirrorList << QString::fromLatin1(update_mirrors_prim[index]);
 	}
 
 	qsrand(time(NULL));
-	for(int i = 0; i < 16; i++)
+	for(int i = 0; i < 64; i++)
 	{
-		mirrorList.swap(i % 4, qrand() % 4);
+		mirrorList.swap(i % mirrorList.count(), qrand() % mirrorList.count());
 	}
+
+	for(int index = 0; update_mirrors_back[index]; index++)
+	{
+		mirrorList << QString::fromLatin1(update_mirrors_back[index]);
+	}
+
+	// ----- Fetch Update Info From Server ----- //
 
 	while(!mirrorList.isEmpty())
 	{
@@ -417,6 +452,8 @@ void UpdateDialog::checkForUpdates(void)
 		return;
 	}
 
+	// ----- Download New Program Version ----- //
+	
 	labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
 	infoLabel->show();
 	infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), m_updateInfo->m_downloadSite));
