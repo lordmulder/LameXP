@@ -78,7 +78,7 @@ g_lamexp_tools[] =
 	{"9b50cf64747d4afbad5d8d9b5a0a2d41c5a58256f47ebdbd8cc920e7e576085dfe1b14ff", CPU_TYPE_ALL, "tta.exe", 21},
 	{"875871c942846f6ad163f9e4949bba2f4331bec678ca5aefe58c961b6825bd0d419a078b", CPU_TYPE_ALL, "valdec.exe", 31},
 	{"e657331e281840878a37eb4fb357cb79f33d528ddbd5f9b2e2f7d2194bed4720e1af8eaf", CPU_TYPE_ALL, "wget.exe", 1114},
-	{"229d677a34885bd4981f7dff9ec2ec71a8bcf207d7337151c6ec0f49a5dc0b14df1bdd11", CPU_TYPE_ALL, "wupdate.exe", UINT_MAX},
+	{"a258711f7a8a0c75528f3ed4d2c17513ff8598b7e0a9d7db13ca941a3140094ffc2ffb62", CPU_TYPE_ALL, "wupdate.exe", UINT_MAX},
 	{"6b053b37d47a9c8659ebf2de43ad19dcba17b9cd868b26974b9cc8c27b6167e8bf07a5a2", CPU_TYPE_ALL, "wvunpack.exe", 4601},
 	{NULL, NULL, NULL, NULL}
 };
