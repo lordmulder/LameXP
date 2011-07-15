@@ -28,6 +28,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QMutexLocker>
+#include <QtConcurrentRun>
 
 #include <Shlobj.h>
 #include <Shlwapi.h>
@@ -49,15 +50,9 @@ QMutex ShellIntegration::m_mutex;
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ShellIntegration::ShellIntegration(bool install)
-:
-	QThread(),
-	m_install(install)
+ShellIntegration::ShellIntegration(void)
 {
-}
-
-ShellIntegration::~ShellIntegration(void)
-{
+	throw "Cannot create instance of this class, sorry!";
 }
 
 ////////////////////////////////////////////////////////////
@@ -69,9 +64,7 @@ void ShellIntegration::install(bool async)
 	//Install asynchronously
 	if(async)
 	{
-		ShellIntegration *shellIntegration = new ShellIntegration(true);
-		connect(shellIntegration, SIGNAL(finished()), shellIntegration, SLOT(deleteLater()));
-		shellIntegration->start();
+		QFuture<void>(QtConcurrent::run(install, false));
 		return;
 	}
 	
@@ -143,9 +136,7 @@ void ShellIntegration::remove(bool async)
 	//Remove asynchronously
 	if(async)
 	{
-		ShellIntegration *shellIntegration = new ShellIntegration(false);
-		connect(shellIntegration, SIGNAL(finished()), shellIntegration, SLOT(deleteLater()));
-		shellIntegration->start();
+		QFuture<void>(QtConcurrent::run(remove, false));
 		return;
 	}
 
