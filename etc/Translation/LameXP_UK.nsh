@@ -1,4 +1,4 @@
-; ///////////////////////////////////////////////////////////////////////////////
+п»ї; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
 ; // Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
@@ -19,23 +19,23 @@
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
 
-LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_ENGLISH} "Закриття запущеної копії, будь ласка, зачекайте..."
-LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_ENGLISH} "Встановлення програмних файлів, будь ласка, зачекайте..."
-LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_ENGLISH} "Створення додатку видалення, будь ласка, зачекайте..."
-LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_ENGLISH} "Створення посилань, будь ласка, зачекайте..."
-LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_ENGLISH} "Оновлення реєстру, будь ласка, зачекайте..."
-LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_ENGLISH} "Видалення програми, будь ласка, зачекайте..."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_ENGLISH} "Запущені копії"
-LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_ENGLISH} "Перевірка запущених копій LameXP."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_ENGLISH} "Будь ласка, закрийте наступні програми перед продовженням встановлення..."
-LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_ENGLISH} "Програм, які мають бути закриті, не запущено."
-LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_ENGLISH} "Пошук, будь ласка, зачекайте..."
-LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_ENGLISH} "Додаток"
-LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_ENGLISH} "Процес"
-LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_ENGLISH} "Ви хочете видалити ваші персональні налаштування також?"
-LangString LAMEXP_LANG_LINK_LICENSE        ${LANG_ENGLISH} "Ліцензія"
-LangString LAMEXP_LANG_LINK_CHANGELOG      ${LANG_ENGLISH} "Історія Версій"
-LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_ENGLISH} "Допомога Перекладачу"
-LangString LAMEXP_LANG_LINK_UNINSTALL      ${LANG_ENGLISH} "Видалення"
-LangString LAMEXP_LANG_LINK_FAQ            ${LANG_ENGLISH} "Часті Питання"
-LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_ENGLISH} "Ви збираєтесь встановити Демо (тестову) версію LameXP!"
+LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_UKRAINIAN} "Р—Р°РєСЂРёС‚С‚СЏ Р·Р°РїСѓС‰РµРЅРѕС— РєРѕРїС–С—, Р±СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ..."
+LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_UKRAINIAN} "Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ РїСЂРѕРіСЂР°РјРЅРёС… С„Р°Р№Р»С–РІ, Р±СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ..."
+LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_UKRAINIAN} "РЎС‚РІРѕСЂРµРЅРЅСЏ РґРѕРґР°С‚РєСѓ РІРёРґР°Р»РµРЅРЅСЏ, Р±СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ..."
+LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_UKRAINIAN} "РЎС‚РІРѕСЂРµРЅРЅСЏ РїРѕСЃРёР»Р°РЅСЊ, Р±СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ..."
+LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_UKRAINIAN} "РћРЅРѕРІР»РµРЅРЅСЏ СЂРµС”СЃС‚СЂСѓ, Р±СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ..."
+LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_UKRAINIAN} "Р’РёРґР°Р»РµРЅРЅСЏ РїСЂРѕРіСЂР°РјРё, Р±СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ..."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_UKRAINIAN} "Р—Р°РїСѓС‰РµРЅС– РєРѕРїС–С—"
+LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_UKRAINIAN} "РџРµСЂРµРІС–СЂРєР° Р·Р°РїСѓС‰РµРЅРёС… РєРѕРїС–Р№ LameXP."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_UKRAINIAN} "Р‘СѓРґСЊ Р»Р°СЃРєР°, Р·Р°РєСЂРёР№С‚Рµ РЅР°СЃС‚СѓРїРЅС– РїСЂРѕРіСЂР°РјРё РїРµСЂРµРґ РїСЂРѕРґРѕРІР¶РµРЅРЅСЏРј РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ..."
+LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_UKRAINIAN} "РџСЂРѕРіСЂР°Рј, СЏРєС– РјР°СЋС‚СЊ Р±СѓС‚Рё Р·Р°РєСЂРёС‚С–, РЅРµ Р·Р°РїСѓС‰РµРЅРѕ."
+LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_UKRAINIAN} "РџРѕС€СѓРє, Р±СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ..."
+LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_UKRAINIAN} "Р”РѕРґР°С‚РѕРє"
+LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_UKRAINIAN} "РџСЂРѕС†РµСЃ"
+LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_UKRAINIAN} "Р’Рё С…РѕС‡РµС‚Рµ РІРёРґР°Р»РёС‚Рё РІР°С€С– РїРµСЂСЃРѕРЅР°Р»СЊРЅС– РЅР°Р»Р°С€С‚СѓРІР°РЅРЅСЏ С‚Р°РєРѕР¶?"
+LangString LAMEXP_LANG_LINK_LICENSE        ${LANG_UKRAINIAN} "Р›С–С†РµРЅР·С–СЏ"
+LangString LAMEXP_LANG_LINK_CHANGELOG      ${LANG_UKRAINIAN} "Р†СЃС‚РѕСЂС–СЏ Р’РµСЂСЃС–Р№"
+LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_UKRAINIAN} "Р”РѕРїРѕРјРѕРіР° РџРµСЂРµРєР»Р°РґР°С‡Сѓ"
+LangString LAMEXP_LANG_LINK_UNINSTALL      ${LANG_UKRAINIAN} "Р’РёРґР°Р»РµРЅРЅСЏ"
+LangString LAMEXP_LANG_LINK_FAQ            ${LANG_UKRAINIAN} "Р§Р°СЃС‚С– РџРёС‚Р°РЅРЅСЏ"
+LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_UKRAINIAN} "Р’Рё Р·Р±РёСЂР°С”С‚РµСЃСЊ РІСЃС‚Р°РЅРѕРІРёС‚Рё Р”РµРјРѕ (С‚РµСЃС‚РѕРІСѓ) РІРµСЂСЃС–СЋ LameXP!"
