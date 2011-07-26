@@ -31,12 +31,11 @@
 
 WMADecoder::WMADecoder(void)
 :
-	m_binary(lamexp_lookup_tool("wmawav.exe")),
-	m_semaphore(new QSystemSemaphore("{84BB780D-67D3-49DC-ADF0-97C795A55D5C}", 1))
+	m_binary(lamexp_lookup_tool("wma2wav.exe"))
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing WMA decoder. Tool 'wmawav.exe' is not registred!";
+		throw "Error initializing WMA decoder. Tool 'wma2wav.exe' is not registred!";
 	}
 }
 
@@ -49,26 +48,18 @@ bool WMADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	QProcess process;
 	QStringList args;
 
-	args << pathToShort(QDir::toNativeSeparators(sourceFile)); 
-	args << pathToShort(QDir::toNativeSeparators(outputFile));
-
-	if(!m_semaphore->acquire())
-	{
-		emit messageLogged("Failed to acquire the semaphore!");
-		return false;
-	}
+	args << "-i" << QDir::toNativeSeparators(sourceFile); 
+	args << "-o" << QDir::toNativeSeparators(outputFile) << "-f";
 
 	if(!startProcess(process, m_binary, args))
 	{
-		m_semaphore->release();
 		return false;
 	}
 
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	//The WMA Decoder doesn't actually send any status updates :-[
-	emit statusUpdated(20 + (QUuid::createUuid().data1 % 80));
+	QRegExp regExp("\\[(\\d+)\\.(\\d+)%\\]");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -83,7 +74,7 @@ bool WMADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();
-			qWarning("WmaWav process timed out <-- killing!");
+			qWarning("wma2wav process timed out <-- killing!");
 			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
@@ -92,7 +83,13 @@ bool WMADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 		{
 			QByteArray line = process.readLine();
 			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(!text.isEmpty())
+			if(regExp.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				int progress = regExp.cap(1).toInt(&ok);
+				if(ok) emit statusUpdated(progress);
+			}
+			else if(!text.isEmpty())
 			{
 				emit messageLogged(text);
 			}
@@ -108,7 +105,6 @@ bool WMADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	
 	emit statusUpdated(100);
 	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-	m_semaphore->release();
 
 	if(bTimeout || bAborted || process.exitStatus() != QProcess::NormalExit || QFileInfo(outputFile).size() == 0)
 	{
@@ -132,11 +128,6 @@ bool WMADecoder::isFormatSupported(const QString &containerType, const QString &
 	}
 
 	return false;
-}
-
-bool WMADecoder::isDecoderAvailable(void)
-{
-	return lamexp_check_tool("wmawav.exe");
 }
 
 QStringList WMADecoder::supportedTypes(void)

@@ -84,13 +84,14 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 {
 	QString versionStr = QString().sprintf
 	(
-		"Version %d.%02d %s, Build %d [%s], %s, Qt v%s",
+		"Version %d.%02d %s, Build %d [%s], %s %s, Qt v%s",
 		lamexp_version_major(),
 		lamexp_version_minor(),
 		lamexp_version_release(),
 		lamexp_version_build(),
 		lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(),
 		lamexp_version_compiler(),
+		lamexp_version_arch(),
 		qVersion()
 	);
 

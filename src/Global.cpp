@@ -105,6 +105,7 @@ g_lamexp_version =
 static QDate g_lamexp_version_date;
 static const char *g_lamexp_months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 static const char *g_lamexp_version_raw_date = __DATE__;
+static const char *g_lamexp_version_raw_time = __TIME__;
 
 //Console attached flag
 static bool g_lamexp_console_attached = false;
@@ -148,6 +149,15 @@ static bool g_lamexp_console_attached = false;
 	#endif
 #else
 	#error Compiler is not supported!
+#endif
+
+//Architecture detection
+#if defined(_M_X64)
+	static const char *g_lamexp_version_arch = "x64";
+#elif defined(_M_IX86)
+	static const char *g_lamexp_version_arch = "x86";
+#else
+	#error Architecture is not supported!
 #endif
 
 //Official web-site URL
@@ -221,7 +231,9 @@ unsigned int lamexp_version_major(void) { return g_lamexp_version.ver_major; }
 unsigned int lamexp_version_minor(void) { return g_lamexp_version.ver_minor; }
 unsigned int lamexp_version_build(void) { return g_lamexp_version.ver_build; }
 const char *lamexp_version_release(void) { return g_lamexp_version.ver_release_name; }
-const char *lamexp_version_compiler(void) {return g_lamexp_version_compiler; }
+const char *lamexp_version_time(void) { return g_lamexp_version_raw_time; }
+const char *lamexp_version_compiler(void) { return g_lamexp_version_compiler; }
+const char *lamexp_version_arch(void) { return g_lamexp_version_arch; }
 unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
 
 /*
@@ -317,6 +329,19 @@ LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionI
 	FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 	TerminateProcess(GetCurrentProcess(), -1);
 	return LONG_MAX;
+}
+
+void lamexp_invalid_param_handler(const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t)
+{
+	if(GetCurrentThreadId() != g_main_thread_id)
+	{
+		HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
+		if(mainThread) TerminateThread(mainThread, ULONG_MAX);
+		
+	}
+	
+	FatalAppExit(0, L"Invalid parameter handler invoked, application will exit!");
+	TerminateProcess(GetCurrentProcess(), -1);
 }
 
 /*
@@ -684,6 +709,7 @@ static bool lamexp_check_elevation(void)
 bool lamexp_init_qt(int argc, char* argv[])
 {
 	static bool qt_initialized = false;
+	typedef BOOL (WINAPI *SetDllDirectoryProc)(WCHAR *lpPathName);
 
 	//Don't initialized again, if done already
 	if(qt_initialized)
@@ -691,6 +717,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 		return true;
 	}
 	
+	//Secure DLL loading
+	QLibrary kernel32("kernel32.dll");
+	SetDllDirectoryProc pSetDllDirectory = static_cast<SetDllDirectoryProc>(kernel32.resolve("SetDllDirectoryW"));
+	if(pSetDllDirectory != NULL) pSetDllDirectory(L"");
+
 	//Extract executable name from argv[] array
 	char *executableName = argv[0];
 	while(char *temp = strpbrk(executableName, "\\/:?"))

@@ -42,7 +42,6 @@ private:
 	void delay(void);
 	void initTranslations(void);
 	void initNeroAac(void);
-	void initWmaDec(void);
 
 	bool m_bSuccess;
 	lamexp_cpu_t m_cpuFeatures;

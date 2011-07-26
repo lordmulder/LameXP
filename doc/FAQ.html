@@ -127,7 +127,7 @@ Currently the following input formats are supported by LameXP:<br><ul>
 <li>The True Audio (TTA)
 <li>Uncompressed PCM / Waveform Audio File (WAV/RIFF)
 <li>WavPack Hybrid Lossless Audio
-<li>Windows Media Audio (WMA), using NCH Software decoder [available as separate download]</ul>
+<li>Windows Media Audio (WMA), using wma2wav [built-in]</ul>
 
 <br><br>
 
@@ -310,16 +310,11 @@ such streams. Still, if you want to extract the "raw" AAC stream from an MP4 fil
 
 <a name="ebf016ab"></a><b>How do I enable WMA input (decoding) in LameXP?</b><br>
 <br>
-WMA input requires the WMA decoder component to be installed on your local computer. Usually LameXP will show<br>
-a warning on startup, if the WMA decoder component could not be found. In that case you can simply choose<br>
-"Download &amp; Install" in order to install the WMA decoder component on your system. Alternatively you can<br>
-also install the WMA decoder component manually by choosing "Install WMA Decoder" from the "Tools" menu. In<br>
-any case you must restart LameXP after the WMA decoder component has been installed.<br>
-<br>
-It has to be noted that the WMA decoder component relies on the Windows Media Format Runtime. All supported<br>
-versions of Microsoft Windows should have the Windows Media Format Runtime installed out of the box. However<br>
-Wine does not! In case you encounter problems with the WMA decoder component, try downloading and installing<br>
-the <a href="http://www.free-codecs.com/download/Windows_Media_Format_11.htm" target="_blank">Windows Media Format 11 Runtime</a> manually. This should also work under Linux/Wine.<br><br>
+LameXP now uses its "built-in" WMA decoder, thanks to 'wma2wav'. However it has to be noted that the WMA<br>
+decoder relies on the Windows Media Format Runtime. All supported versions of Microsoft Windows should have<br>
+the Windows Media Format Runtime installed as part of the Windows Media Player. But Wine does not! In case<br>
+you encounter problems with the WMA decoder, try installing the <a href="http://anonym.to/http://www.citizeninsomniac.com/WMV/wmfdist11.exe" target="_blank">Windows Media Format Runtime</a> manually. This<br>
+should also work under Wine. The 'N' or 'KN' editions of Windows 7 need the <a href="http://www.microsoft.com/download/en/details.aspx?id=16546" target="_blank">Windows Media Feature Pack</a>.<br><br>
 
 <br><br>
 

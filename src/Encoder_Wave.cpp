@@ -66,14 +66,14 @@ bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	size_t srcLen = wcslen(reinterpret_cast<const wchar_t*>(sourceFile.utf16())) + 3;
 	wchar_t *srcBuffer = new wchar_t[srcLen];
 	memset(srcBuffer, 0, srcLen * sizeof(wchar_t));
-	wcscpy_s(srcBuffer, srcLen, reinterpret_cast<const wchar_t*>(sourceFile.utf16()));
+	wcsncpy_s(srcBuffer, srcLen, reinterpret_cast<const wchar_t*>(sourceFile.utf16()), _TRUNCATE);
 	FIX_SEPARATORS (srcBuffer);
 	fileOperation.pFrom = srcBuffer;
 
 	size_t outLen = wcslen(reinterpret_cast<const wchar_t*>(outputFile.utf16())) + 3;
 	wchar_t *outBuffer = new wchar_t[outLen];
 	memset(outBuffer, 0, outLen * sizeof(wchar_t));
-	wcscpy_s(outBuffer, outLen, reinterpret_cast<const wchar_t*>(outputFile.utf16()));
+	wcsncpy_s(outBuffer, outLen, reinterpret_cast<const wchar_t*>(outputFile.utf16()), _TRUNCATE);
 	FIX_SEPARATORS (outBuffer);
 	fileOperation.pTo = outBuffer;
 

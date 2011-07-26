@@ -3071,7 +3071,6 @@
      </property>
      <addaction name="actionDisableSounds"/>
      <addaction name="actionDisableUpdateReminder"/>
-     <addaction name="actionDisableWmaDecoderNotifications"/>
      <addaction name="actionDisableNeroAacNotifications"/>
      <addaction name="actionDisableSlowStartupNotifications"/>
      <addaction name="actionDisableShellIntegration"/>
@@ -3079,7 +3078,6 @@
      <addaction name="actionCheckForBetaUpdates"/>
     </widget>
     <addaction name="actionImportCueSheet"/>
-    <addaction name="actionInstallWMADecoder"/>
     <addaction name="actionShowDropBoxWidget"/>
     <addaction name="separator"/>
     <addaction name="menuConfiguration"/>
@@ -3417,6 +3415,8 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

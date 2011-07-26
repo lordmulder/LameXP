@@ -27,6 +27,7 @@
     <file>tools/tta.exe</file>
     <file>tools/valdec.exe</file>
     <file>tools/wget.exe</file>
+    <file>tools/wma2wav.exe</file>
     <file>tools/wupdate.exe</file>
     <file>tools/wvunpack.exe</file>
   </qresource>

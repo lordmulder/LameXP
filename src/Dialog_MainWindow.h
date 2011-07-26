@@ -74,7 +74,6 @@ private slots:
 	void disableSlowStartupNotificationsActionTriggered(bool checked);
 	void disableSoundsActionTriggered(bool checked);
 	void disableUpdateReminderActionTriggered(bool checked);
-	void disableWmaDecoderNotificationsActionTriggered(bool checked);
 	void documentActionActivated(void);
 	void editMetaButtonClicked(void);
 	void encodeButtonClicked(void);
@@ -87,7 +86,6 @@ private slots:
 	void handleDelayedFiles(void);
 	void importCueSheetActionTriggered(bool checked);
 	void initOutputFolderModel(void);
-	void installWMADecoderActionTriggered(bool checked);
 	void languageActionActivated(QAction *action);
 	void languageFromFileActionActivated(bool checked);
 	void makeFolderButtonClicked(void);

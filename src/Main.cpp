@@ -53,14 +53,14 @@ static int lamexp_main(int argc, char* argv[])
 	lamexp_init_console(argc, argv);
 
 	//Print version info
-	qDebug("LameXP - Audio Encoder Front-End");
-	qDebug("Version %d.%02d %s, Build %d [%s], compiled with %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_compiler());
-	qDebug("Copyright (C) 2004-%04d LoRd_MuldeR <MuldeR2@GMX.de>\n", max(lamexp_version_date().year(),QDate::currentDate().year()));
+	qDebug("LameXP - Audio Encoder Front-End v%d.%02d %s (Build #%03d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build());
+	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", max(lamexp_version_date().year(),QDate::currentDate().year()));
+	qDebug("Built on %s at %s with %s for Win-%s.\n", lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time(), lamexp_version_compiler(), lamexp_version_arch());
 	
 	//print license info
 	qDebug("This program is free software: you can redistribute it and/or modify");
 	qDebug("it under the terms of the GNU General Public License <http://www.gnu.org/>.");
-	qDebug("This program comes with ABSOLUTELY NO WARRANTY.\n");
+	qDebug("Note that this program is distributed with ABSOLUTELY NO WARRANTY.\n");
 
 	//Print warning, if this is a "debug" build
 	if(LAMEXP_DEBUG)
@@ -240,6 +240,7 @@ int main(int argc, char* argv[])
 		__try
 		{
 			SetUnhandledExceptionFilter(lamexp_exception_handler);
+			_set_invalid_parameter_handler(lamexp_invalid_param_handler);
 			return _main(argc, argv);
 		}
 		__except(1)
