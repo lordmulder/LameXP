@@ -5,19 +5,19 @@
     <name>AboutDialog</name>
     <message>
         <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP &amp;minus; Audio Encoder Front-end</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, відвідайте %1, щоб дізнатись про оновлення і новини!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Примітка: LameXP є вільним ПЗ. &lt;b&gt;Не&lt;/b&gt; надавайте грошей за його отримання або використання! Якщо хтось хоче отримати гроші за завантаження LameXP, ви &lt;b&gt;не&lt;/b&gt; повинні відповідати на такий запит !!!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation type="unfinished"></translation>
+        <translation>Окрема подяка  &quot;John33&quot; з %1 за постійну підтримку.</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -37,11 +37,11 @@
     </message>
     <message>
         <source>3rd Party S/W</source>
-        <translation type="unfinished"></translation>
+        <translation>Стороннє ПЗ</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Доробники</translation>
     </message>
     <message>
         <source>About Qt4</source>
@@ -49,11 +49,11 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation>Відмінити</translation>
+        <translation>Вийти</translation>
     </message>
     <message>
         <source>The following people have contributed to LameXP:</source>
-        <translation type="unfinished"></translation>
+        <translation>Наступні люди допомогали перекладати LameXP:</translation>
     </message>
     <message>
         <source>Translators:</source>
@@ -61,15 +61,15 @@
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо ви хочете допомогти перекласти інтерфейс LameXP, можете вільно зв&apos;язатись з нами!</translation>
     </message>
     <message>
         <source>About Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Про Доробників</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
-        <translation type="unfinished"></translation>
+        <translation>Наступне стороннє ПЗ використовується в LameXP:</translation>
     </message>
     <message>
         <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
         <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation type="unfinished"></translation>
+        <translation>Повністю відкрита і вільна від патентних зборів технологія кодування аудіо.</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
@@ -93,11 +93,11 @@
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation type="unfinished"></translation>
+        <translation>Безкоштовний сучасний HE-AAC кодер з підтримкою обробки в 2 проходи.</translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступний на веб-сторінці вендора для безкоштовного завантаження:</translation>
     </message>
     <message>
         <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
@@ -105,7 +105,7 @@
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрита і вільна від патентних зборів технологія кодування аудіо без втрат.</translation>
     </message>
     <message>
         <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
         <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Повністю відкритий формат стиснення аудіо.</translation>
     </message>
     <message>
         <source>Musepack &amp;minus; Living Audio Compression</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкритий програмний код, простий SDK і ліцензія без обмежень.</translation>
     </message>
     <message>
         <source>Shorten &amp;minus; Lossless Audio Compressor</source>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкритий і вільний від патентних зборів формат аудіо, призначений для обробки розмовного звукового матеріалу.</translation>
     </message>
     <message>
         <source>The True Audio &amp;minus; Lossless Audio Codec</source>
@@ -177,19 +177,19 @@
     </message>
     <message>
         <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons &amp;minus; Більш ніж 700 іконок в форматі PNG</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Створено Mark James, випущено під ліцензією Creative Commons &apos;by&apos; License.</translation>
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стоороннє ПЗ, що використовується, в LameXP належить авторам цього ПЗ.</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
-        <translation type="unfinished"></translation>
+        <translation>Про стороннє ПЗ</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -197,10 +197,11 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примітка: Строк дії цієї демо (тестової) версії LameXP закінчиться %1. Ще %2 днів.</translation>
     </message>
     <message>
         <source>Aften &amp;minus; A/52 audio encoder</source>
+        <translatorcomment>Aften &amp;minus; A/52 audio encoder</translatorcomment>
         <translation>Aften &amp;minus; A/52 audio encoder</translation>
     </message>
     <message>
@@ -209,7 +210,7 @@
     </message>
     <message>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation type="unfinished"></translation>
+        <translation>Всі права належать 2004 David Hammerton. Підтримка зі сторони Cody Brocious.</translation>
     </message>
 </context>
 <context>
@@ -240,15 +241,15 @@
     </message>
     <message>
         <source>Bitrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Бітрейт</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation>Постійний</translation>
     </message>
     <message>
         <source>Variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінний</translation>
     </message>
 </context>
 <context>
@@ -855,7 +856,7 @@
     </message>
     <message>
         <source>Check for Updates</source>
-        <translation>Перевірити на наявність оновлень</translation>
+        <translation>Перевірити наявність оновлень</translation>
     </message>
     <message>
         <source>Open Folder...</source>
@@ -903,7 +904,7 @@
     </message>
     <message>
         <source>Disable WMA Decoder Notifications</source>
-        <translation>Заборонити нагадування  про декодер WMA</translation>
+        <translation>Заборонити нагадування про декодер WMA</translation>
     </message>
     <message>
         <source>Show DropBox</source>
@@ -950,40 +951,8 @@
         <translation>Це зазвичай означає, що файл пошкоджено або формат не підтримується.</translation>
     </message>
     <message>
-        <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation>Йде завантаження інсталятора декодера WMA, зачекайте будь ласка...</translation>
-    </message>
-    <message>
-        <source>Download Failed</source>
-        <translation>Завантаження перервано</translation>
-    </message>
-    <message>
-        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation>Неможливо завантажити інсталятор декодера WMA. Перевірте ваше інтернет з&apos;єднання!</translation>
-    </message>
-    <message>
-        <source>Try Again</source>
-        <translation>Спробувати ще раз</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Відмінити</translation>
-    </message>
-    <message>
-        <source>The download seems to be corrupted. Please try again!</source>
-        <translation>Схоже, що завантажені дані пошкоджено. Спробуйте провести завантаження ще раз!</translation>
-    </message>
-    <message>
-        <source>WMA Decoder</source>
-        <translation>декодер WMA</translation>
-    </message>
-    <message>
-        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation>Декодер WMA було встановлено. Будь ласка, повторно запустіть LameXP!</translation>
-    </message>
-    <message>
-        <source>Quit LameXP</source>
-        <translation>Вийти з LameXP</translation>
     </message>
     <message>
         <source>Postpone</source>
@@ -1055,7 +1024,7 @@
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation>Ви ще не перевярли оновлення LameXP. Перевірити оновлення зараз?</translation>
+        <translation>Ви ще не перевіряли оновлення LameXP. Перевірити оновлення зараз?</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
@@ -1096,26 +1065,6 @@
     <message>
         <source>AAC Support Disabled</source>
         <translation>Підтримку ААС заборонено</translation>
-    </message>
-    <message>
-        <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation>LameXP визначив, що компонент WMA File Decode не встановлено у вашій системі.</translation>
-    </message>
-    <message>
-        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation>Ви не зможете проводити обробку файлів WMA як вхідних допоки не буде встановлено WMA File Decoder!</translation>
-    </message>
-    <message>
-        <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation>Ви бажаєте завантажити і встановити WMA File Decoder зараз?</translation>
-    </message>
-    <message>
-        <source>WMA Decoder Missing</source>
-        <translation>Не знайдено декодера WMA</translation>
-    </message>
-    <message>
-        <source>Download &amp;&amp; Install</source>
-        <translation>Завантаження і Встановлення</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -1302,22 +1251,6 @@
         <translation>Нагадування  про кодер Nero AAC були дозволені.</translation>
     </message>
     <message>
-        <source>WMA Decoder Notifications</source>
-        <translation>Нагадування  про декодер WMA</translation>
-    </message>
-    <message>
-        <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation>Ви дійсно хочете заборонити нагадування  про декодер WMA?</translation>
-    </message>
-    <message>
-        <source>All WMA Decoder notifications have been disabled.</source>
-        <translation>Нагадування про декодер WMA були заборонені.</translation>
-    </message>
-    <message>
-        <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation>Нагадування про декодер WMA були дозволені.</translation>
-    </message>
-    <message>
         <source>Shell Integration</source>
         <translation>Інтеграція в системну оболонку</translation>
     </message>
@@ -1379,7 +1312,7 @@
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation>Зберігати тимчасові файли у відповідній системній теці (Реомендовано)</translation>
+        <translation>Зберігати тимчасові файли у відповідній системній теці (Рекомендовано)</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
@@ -1595,35 +1528,35 @@
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Здається, що антивірусне ПЗ уповільнює запуск LameXP.</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, зверніться до документа %1 за детальною інформацією і можливими рішеннями!</translation>
     </message>
     <message>
         <source>Slow Startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Уповільнений запуск</translation>
     </message>
     <message>
         <source>Disable Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити нагадування про уповільнений запуск</translation>
     </message>
     <message>
         <source>Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагадування про уповільнений запуск</translation>
     </message>
     <message>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете заборонити нагадування про уповільнений запуск?</translation>
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагадування про уповільнений запуск були заборонені.</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагадування про уповільнений запуск були дозволені.</translation>
     </message>
 </context>
 <context>
@@ -1649,11 +1582,11 @@
     <name>MetaInfoDialog</name>
     <message>
         <source>Meta Information</source>
-        <translation>Метаінформація</translation>
+        <translation>Метадані</translation>
     </message>
     <message>
         <source>The following meta information have been extracted from the original file.</source>
-        <translation>Дана метаінформація була витягнута з оригінального файла.</translation>
+        <translation>Наступні метадані були витягнуті з оригінального файла.</translation>
     </message>
     <message>
         <source>Load Artwork From File</source>
@@ -1677,22 +1610,22 @@
     </message>
     <message>
         <source>Edit this Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати метадані</translation>
     </message>
     <message>
         <source>Copy everything to Meta Info tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Копіювати всі метадані до відповідної закладки</translation>
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити всі метадані</translation>
     </message>
 </context>
 <context>
     <name>MetaInfoModel</name>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Не задано</translation>
     </message>
     <message>
         <source>Not Specified</source>
@@ -1720,7 +1653,7 @@
     </message>
     <message>
         <source>Title</source>
-        <translation>Назва</translation>
+        <translation>Заголовок</translation>
     </message>
     <message>
         <source>Artist</source>
@@ -1744,7 +1677,7 @@
     </message>
     <message>
         <source>Generate from list position</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати з позиції в списку</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -1752,7 +1685,7 @@
     </message>
     <message>
         <source>Property</source>
-        <translation type="unfinished"></translation>
+        <translation>Властивість</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1760,7 +1693,7 @@
     </message>
     <message>
         <source>Unspecified</source>
-        <translation type="unfinished"></translation>
+        <translation>Не задано</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1772,31 +1705,31 @@
     </message>
     <message>
         <source>Edit Title</source>
-        <translation>Редагувати назву</translation>
+        <translation>Редагувати заголовок</translation>
     </message>
     <message>
         <source>Please enter the title for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть заголовок для даного файла:</translation>
     </message>
     <message>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок не має бути порожнім. Заповнено з імені файла!</translation>
     </message>
     <message>
         <source>Edit Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати виконавця</translation>
     </message>
     <message>
         <source>Please enter the artist for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, зазначте виконавця для даного файла:</translation>
     </message>
     <message>
         <source>Edit Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати альбом</translation>
     </message>
     <message>
         <source>Please enter the album for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, вкажіть альбом для даного файла:</translation>
     </message>
     <message>
         <source>Edit Genre</source>
@@ -1804,7 +1737,7 @@
     </message>
     <message>
         <source>Please enter the genre for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, оберіть жанр для даного файла:</translation>
     </message>
     <message>
         <source>Edit Year</source>
@@ -1812,7 +1745,7 @@
     </message>
     <message>
         <source>Please enter the year for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть рік для даного файла:</translation>
     </message>
     <message>
         <source>Edit Position</source>
@@ -1820,38 +1753,38 @@
     </message>
     <message>
         <source>Please enter the position (track no.) for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть позицію (номер треку) для даного файла:</translation>
     </message>
     <message>
         <source>Unspecified (copy from source file)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не задано (копіюється з вхідного файла)</translation>
     </message>
     <message>
         <source>Edit Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати коментар</translation>
     </message>
     <message>
         <source>Please enter the comment for this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть коментар для даного файла:</translation>
     </message>
     <message>
         <source>Encoded with LameXP</source>
-        <translation type="unfinished"></translation>
+        <translation>Закодовано за допомогою LameXP</translation>
     </message>
     <message>
         <source>Not editable</source>
-        <translation type="unfinished"></translation>
+        <translation>Не редагується</translation>
     </message>
     <message>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибачте, але дана властивість вхідного файла не редагується!</translation>
     </message>
 </context>
 <context>
     <name>ProcessThread</name>
     <message>
         <source>Starting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Починається обробка...</translation>
     </message>
     <message>
         <source>Not found!</source>
@@ -1899,34 +1832,34 @@
     </message>
     <message>
         <source>The source audio file could not be found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо знайти вхідний файл аудіо:</translation>
     </message>
     <message>
         <source>The source audio file could not be opened for reading:</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо відкрити для читання вхідний файл аудіо:</translation>
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вихідної теки не існує і її неможливо створити:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
-        <translation type="unfinished"></translation>
+        <translation>До вихідної теки неможливо проводити запис:</translation>
     </message>
 </context>
 <context>
     <name>ProcessingDialog</name>
     <message>
         <source>LameXP - Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Йде обробка</translation>
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ініціалізація, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Перервати</translation>
+        <translation>Перервати</translation>
     </message>
     <message>
         <source>Close</source>
@@ -1934,95 +1867,95 @@
     </message>
     <message>
         <source>Show details for selected job</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати деталі поточного завдання</translation>
     </message>
     <message>
         <source>Encoding Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файли, що кодуються</translation>
     </message>
     <message>
         <source>Your files are being encoded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Йде кодування ваших файлів, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Encoding files, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Йде кодування файлів, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation type="unfinished"></translation>
+        <translation>Багатопотоковість увімкнено: Паралельно запущено %1 копій!</translation>
     </message>
     <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Перервано! Чекаємо на завершення запущених завдань...</translation>
     </message>
     <message>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодування: %1 файлів з %2 оброблено, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Creating the playlist file, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Йде створення списку відтворення, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес було перервано користувачем після %1 файла(-ів)!</translation>
     </message>
     <message>
         <source>Process was aborted prematurely by the user!</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес було перервано користувачем завчасно!</translation>
     </message>
     <message>
         <source>LameXP - Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Перервано</translation>
     </message>
     <message>
         <source>Process was aborted by the user.</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес було перервано користувачем.</translation>
     </message>
     <message>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка:збій при обробці %1 з %2 файлів. Подвійний клік мишею на записах зі збоєм для відображення детальної інформації!</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Помилка</translation>
     </message>
     <message>
         <source>At least one file has failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Стався збій при обробці щонайменше одного файла!</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP - Виконано</translation>
     </message>
     <message>
         <source>All files completed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обробка усіх файлів успішно завершена.</translation>
     </message>
     <message>
         <source>Playlist creation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Збій створення списка відтворення</translation>
     </message>
     <message>
         <source>The playlist file could not be created:</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо створити файл списка відтворення:</translation>
     </message>
     <message>
         <source>Browse Output File Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити теку з вихідними файлами</translation>
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути комп&apos;ютер після завершення конвертації усіх файлів</translation>
     </message>
     <message>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: Комп&apos;ютер буде вимкнено через %1 секунд...</translation>
     </message>
     <message>
         <source>Cancel Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінити Вимкнення</translation>
     </message>
 </context>
 <context>
@@ -2089,11 +2022,11 @@
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Спробувати ще раз</translation>
     </message>
     <message>
         <source>Show Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати журнал</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
@@ -2105,83 +2038,83 @@
     </message>
     <message>
         <source>Build</source>
-        <translation type="unfinished"></translation>
+        <translation>Збірка</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомо</translation>
     </message>
     <message>
         <source>Testing your internet connection, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Йде перевірка вашого інтернет-з&apos;єднання, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Network connectivity test has failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Збій перевірки мережевого з&apos;єднання!</translation>
     </message>
     <message>
         <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, впевніться, що ваше інтернет-з&apos;єднання працює коректно і спробуйте знову.</translation>
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Йде перевірка оновлень онлайн, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Збій отримання інформації про оновлення з серверу!</translation>
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибачте, але можливо сервер оновлень в даний час завантажений. Будь ласка, спробуйте знову пізніше.</translation>
     </message>
     <message>
         <source>More information available at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Більше інформації можна отримати:</translation>
     </message>
     <message>
         <source>A new version of LameXP is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступна нова версія LameXP!</translation>
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ми рекомендуємо всім користувачам встановити це оновлення якнайшвидше.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
-        <translation type="unfinished"></translation>
+        <translation>На даний час нових оновлень немає.</translation>
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation type="unfinished"></translation>
+        <translation>Версія LameXP, яку ви використовуєте, є актуальною. Будь ласка, перевіряйте наявність оновлень регулярно!</translation>
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation type="unfinished"></translation>
+        <translation>Версія LameXP, яку ви використовуєте, є новішою за останній реліз.</translation>
     </message>
     <message>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Це зазвичай означає, що зараз використовуєте перед-релізну (тестову) версію LameXP.</translation>
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ймовірно, що зараз комп&apos;ютер не в мережі!</translation>
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, впевніться, що ваш комп&apos;ютер під&apos;єднано до мережі інтернет і спробуйте знову.</translation>
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Йде завантаження оновлення, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновлення готове до встановлення. Буде здйснено закриття додатку...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
-        <translation type="unfinished"></translation>
+        <translation>Збій оновлення. Будь ласка, спробуйте ще раз або завантажте оновлення самостійно!</translation>
     </message>
 </context>
 </TS>

@@ -981,40 +981,8 @@
         <translation type="unfinished">Поиск файлов, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation type="unfinished">Скачиваю установщик WMA декодера, пожалуйста ожидайте...</translation>
-    </message>
-    <message>
-        <source>Download Failed</source>
-        <translation type="unfinished">Скачивание прервано</translation>
-    </message>
-    <message>
-        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation type="unfinished">Немогу загрузитьустановщик Декодера WMA. Проверьте свое интернет-соединение!</translation>
-    </message>
-    <message>
-        <source>Try Again</source>
-        <translation type="unfinished">Попробовать снова</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>The download seems to be corrupted. Please try again!</source>
-        <translation type="unfinished">Загруженный файл похоже повреждён. Попробуйте снова!</translation>
-    </message>
-    <message>
-        <source>WMA Decoder</source>
-        <translation type="unfinished">WMA Декодер</translation>
-    </message>
-    <message>
-        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation type="unfinished">WMA декодер был установлен. Пожалуйста, презапустите LameXP сейчас!</translation>
-    </message>
-    <message>
-        <source>Quit LameXP</source>
-        <translation type="unfinished">Выйти из LameXP</translation>
     </message>
     <message>
         <source>Postpone</source>
@@ -1128,26 +1096,6 @@
     <message>
         <source>AAC Support Disabled</source>
         <translation type="unfinished">Поддержка AAC отключена</translation>
-    </message>
-    <message>
-        <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation type="unfinished">LameXP обнаружил, что компонент Декодера Файлов WMA в настоящий момент не установлен на Вашей системе.</translation>
-    </message>
-    <message>
-        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation type="unfinished">Вы не будете в состоянии обработать файлы WMA как входной, если компонент Декодера Файлов WMA не будет установлен!</translation>
-    </message>
-    <message>
-        <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation type="unfinished">Вы хотите загрузить и установить компонент Декодера Файлов WMA сейчас?</translation>
-    </message>
-    <message>
-        <source>WMA Decoder Missing</source>
-        <translation type="unfinished">WMA Декодер недоступен</translation>
-    </message>
-    <message>
-        <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished">Скачать и Установить</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -1333,22 +1281,6 @@
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation type="unfinished">Все уведомления о кодере Nero AAC были включены.</translation>
-    </message>
-    <message>
-        <source>WMA Decoder Notifications</source>
-        <translation type="unfinished">Напоминания о декодере WMA</translation>
-    </message>
-    <message>
-        <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation type="unfinished">Вы действительно хотите отключить все уведомления о декодере WMA?</translation>
-    </message>
-    <message>
-        <source>All WMA Decoder notifications have been disabled.</source>
-        <translation type="unfinished">Все уведомления о декодере WMA были отключены.</translation>
-    </message>
-    <message>
-        <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation type="unfinished">Все уведомления о декодере WMA были включены.</translation>
     </message>
     <message>
         <source>Shell Integration</source>

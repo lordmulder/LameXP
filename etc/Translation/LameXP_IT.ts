@@ -835,10 +835,6 @@
         <translation>Supporto AAC Disabilitato</translation>
     </message>
     <message>
-        <source>WMA Decoder Missing</source>
-        <translation>Decoder WMA non trovato</translation>
-    </message>
-    <message>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
@@ -951,64 +947,8 @@
         <translation>Le notifiche dell&apos;Encoder Nero AAC sono state riabilitate.</translation>
     </message>
     <message>
-        <source>WMA Decoder Notifications</source>
-        <translation>Notifiche del Decoder WMA</translation>
-    </message>
-    <message>
-        <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation>Vuoi veramente disabilitare tutte le notifiche del Decoder WMA?</translation>
-    </message>
-    <message>
-        <source>All WMA Decoder notifications have been disabled.</source>
-        <translation>Tutte le notifiche del Decoder WMA sono state disabilitate.</translation>
-    </message>
-    <message>
-        <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation>Le notifiche del Decoder WMA sono state riabilitate.</translation>
-    </message>
-    <message>
-        <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation>Vuoi scaricare ed installare il componente WMA File Decoder ora?</translation>
-    </message>
-    <message>
-        <source>Download &amp;&amp; Install</source>
-        <translation>Scarica &amp;&amp; Installa</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Cancella</translation>
-    </message>
-    <message>
-        <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation>Sto scaricando il software WMA Decoder, attendere prego...</translation>
-    </message>
-    <message>
-        <source>Download Failed</source>
-        <translation>Download Fallito</translation>
-    </message>
-    <message>
-        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation>Il download del Decoder WMA non è andato a buon fine. Controlla la tua connessione Internet!</translation>
-    </message>
-    <message>
-        <source>Try Again</source>
-        <translation>Prova Ancora</translation>
-    </message>
-    <message>
-        <source>The download seems to be corrupted. Please try again!</source>
-        <translation>Il file sembra corrotto. Per favore prova di nuovo!</translation>
-    </message>
-    <message>
-        <source>WMA Decoder</source>
-        <translation>Decoder WMA</translation>
-    </message>
-    <message>
-        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation>Il WMA File Decoder è stato installato. Per favore riavvia LameXP ora!</translation>
-    </message>
-    <message>
-        <source>Quit LameXP</source>
-        <translation>Chiudi LameXP</translation>
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
@@ -1049,14 +989,6 @@
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
         <translation>Puoi scaricare l&apos;ultima versione dell&apos;encoder Nero AAC gratuitamente dal sito web ufficiale di Nero su:</translation>
-    </message>
-    <message>
-        <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation>LameXP ha determinato che il componente WMA File Decoder non è attualmente installato sul tuo sistema.</translation>
-    </message>
-    <message>
-        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation>Non puoi lavorare con files sorgenti WMA senza avere installato il componente WMA File Decoder!</translation>
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>

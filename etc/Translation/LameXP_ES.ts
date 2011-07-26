@@ -906,18 +906,6 @@
         <translation>Soporte AAC deshabilitado</translation>
     </message>
     <message>
-        <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation>LameXP ha detectado que el decodificador WMA no está instalado.</translation>
-    </message>
-    <message>
-        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation>¡No podrá procesar archivos WMA hasta que no instale el decodificador!</translation>
-    </message>
-    <message>
-        <source>WMA Decoder Missing</source>
-        <translation>Decodificador WMA no encontrado</translation>
-    </message>
-    <message>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
@@ -1082,64 +1070,8 @@
         <translation>Notificaciones del codificador Nero AAC habilitadas.</translation>
     </message>
     <message>
-        <source>WMA Decoder Notifications</source>
-        <translation>Notificaciones del decodificador WMA</translation>
-    </message>
-    <message>
-        <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation>¿Seguro que desea deshabilitar las notificaciones del decodificador WMA?</translation>
-    </message>
-    <message>
-        <source>All WMA Decoder notifications have been disabled.</source>
-        <translation>Notificaciones del decodificador WMA deshabilitadas.</translation>
-    </message>
-    <message>
-        <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation>Notificaciones del decodificador WMA habilitadas.</translation>
-    </message>
-    <message>
-        <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation>¿Desea descargar e instalar el decodificador WMA ahora?</translation>
-    </message>
-    <message>
-        <source>Download &amp;&amp; Install</source>
-        <translation>Descargar &amp;&amp; Instalar</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Cancelar</translation>
-    </message>
-    <message>
-        <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation>Descargando decodificador WMA, espere por favor...</translation>
-    </message>
-    <message>
-        <source>Download Failed</source>
-        <translation>Descarga fallida</translation>
-    </message>
-    <message>
-        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation>Error al descargar el decodificador WMA. ¡Compruebe su conexión a internet!</translation>
-    </message>
-    <message>
-        <source>Try Again</source>
-        <translation>Reintentar</translation>
-    </message>
-    <message>
-        <source>The download seems to be corrupted. Please try again!</source>
-        <translation>El archivo parece corrupto. ¡Vuelva a intentarlo!</translation>
-    </message>
-    <message>
-        <source>WMA Decoder</source>
-        <translation>Decodificador WMA</translation>
-    </message>
-    <message>
-        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation>Se ha instalado el decodificador WMA. ¡Reinicie LameXP por favor!</translation>
-    </message>
-    <message>
-        <source>Quit LameXP</source>
-        <translation>Salir de LameXP</translation>
     </message>
     <message>
         <source>n/a</source>

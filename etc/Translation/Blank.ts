@@ -1154,39 +1154,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Download Failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Try Again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The download seems to be corrupted. Please try again!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WMA Decoder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quit LameXP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1322,26 +1290,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WMA Decoder Missing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>LameXP</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1471,22 +1419,6 @@
     </message>
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WMA Decoder Notifications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All WMA Decoder notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The WMA Decoder notifications have been re-enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

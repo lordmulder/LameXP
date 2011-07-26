@@ -1034,40 +1034,8 @@
         <translation type="unfinished">폴드에서 파일 검색중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
-        <source>Downloading WMA Decoder Setup, please wait...</source>
-        <translation type="unfinished">WMA Decoder 내려받는 중, 잠시 기다려주십시오...</translation>
-    </message>
-    <message>
-        <source>Download Failed</source>
-        <translation type="unfinished">내려받기 실패</translation>
-    </message>
-    <message>
-        <source>Failed to download the WMA Decoder setup. Check your internet connection!</source>
-        <translation type="unfinished">WMA Decoder 설치 파일 내려받기 실패, 인터넷 연결을 확인하시기 바랍니다!</translation>
-    </message>
-    <message>
-        <source>Try Again</source>
-        <translation type="unfinished">재시도</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation type="unfinished">취소</translation>
-    </message>
-    <message>
-        <source>The download seems to be corrupted. Please try again!</source>
-        <translation type="unfinished">다운로드 파일이 손상된 듯합니다. 다시 시도하시기 바랍니다!</translation>
-    </message>
-    <message>
-        <source>WMA Decoder</source>
-        <translation type="unfinished">WMA Decoder</translation>
-    </message>
-    <message>
-        <source>The WMA File Decoder has been installed. Please restart LameXP now!</source>
-        <translation type="unfinished">WMA File Decoder가 설치되었습니다. 지금 LameXP를 재시작하시기 바랍니다!</translation>
-    </message>
-    <message>
-        <source>Quit LameXP</source>
-        <translation type="unfinished">LameXP 끝내기</translation>
     </message>
     <message>
         <source>Postpone</source>
@@ -1180,26 +1148,6 @@
     <message>
         <source>AAC Support Disabled</source>
         <translation type="unfinished">AAC 지원 비활성화</translation>
-    </message>
-    <message>
-        <source>LameXP has detected that the WMA File Decoder component is not currently installed on your system.</source>
-        <translation type="unfinished">LameXP가 시스템에 WMA File Decoder 콤포넌트가 미설치되어 있음을 탐지했습니다.</translation>
-    </message>
-    <message>
-        <source>You won&apos;t be able to process WMA files as input unless the WMA File Decoder component is installed!</source>
-        <translation type="unfinished">WMA File Decoder 콤포넌트를 설치하기 전까지 WMA 파일을 추가하여 처리할 수 없습니다!</translation>
-    </message>
-    <message>
-        <source>Do you want to download and install the WMA File Decoder component now?</source>
-        <translation type="unfinished">지금 WMA File Decoder 콤포넌트를 내려받아 설치하시겠습니까?</translation>
-    </message>
-    <message>
-        <source>WMA Decoder Missing</source>
-        <translation type="unfinished">WMA Decoder 누락</translation>
-    </message>
-    <message>
-        <source>Download &amp;&amp; Install</source>
-        <translation type="unfinished">다운로드 &amp;&amp; 설치</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -1408,22 +1356,6 @@
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation type="unfinished">Nero AAC Encoder 알림이 재활성화 되었습니다.</translation>
-    </message>
-    <message>
-        <source>WMA Decoder Notifications</source>
-        <translation type="unfinished">WMA Decoder 알림</translation>
-    </message>
-    <message>
-        <source>Do you really want to disable all WMA Decoder notifications?</source>
-        <translation type="unfinished">정말로 모든 WMA Decoder 알림을 비활성화하시겠습니까?</translation>
-    </message>
-    <message>
-        <source>All WMA Decoder notifications have been disabled.</source>
-        <translation type="unfinished">모든 WMA Decoder 알림이 비활성화 되었습니다.</translation>
-    </message>
-    <message>
-        <source>The WMA Decoder notifications have been re-enabled.</source>
-        <translation type="unfinished">WMA Decoder 알림이 재활성화 되었습니다.</translation>
     </message>
     <message>
         <source>Shell Integration</source>
