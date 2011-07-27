@@ -709,6 +709,7 @@ static bool lamexp_check_elevation(void)
 bool lamexp_init_qt(int argc, char* argv[])
 {
 	static bool qt_initialized = false;
+	bool isWine = false;
 	typedef BOOL (WINAPI *SetDllDirectoryProc)(WCHAR *lpPathName);
 
 	//Don't initialized again, if done already
@@ -719,8 +720,12 @@ bool lamexp_init_qt(int argc, char* argv[])
 	
 	//Secure DLL loading
 	QLibrary kernel32("kernel32.dll");
-	SetDllDirectoryProc pSetDllDirectory = static_cast<SetDllDirectoryProc>(kernel32.resolve("SetDllDirectoryW"));
-	if(pSetDllDirectory != NULL) pSetDllDirectory(L"");
+	if(kernel32.load())
+	{
+		SetDllDirectoryProc pSetDllDirectory = (SetDllDirectoryProc) kernel32.resolve("SetDllDirectoryW");
+		if(pSetDllDirectory != NULL) pSetDllDirectory(L"");
+		kernel32.unload();
+	}
 
 	//Extract executable name from argv[] array
 	char *executableName = argv[0];
@@ -763,8 +768,13 @@ bool lamexp_init_qt(int argc, char* argv[])
 
 	//Check for Wine
 	QLibrary ntdll("ntdll.dll");
-	bool isWine = (ntdll.resolve("wine_get_version") != NULL) || (ntdll.resolve("wine_nt_to_unix_file_name") != NULL);
-	if(isWine) qWarning("It appears we are running under Wine, unexpected things might happen!\n");
+	if(ntdll.load())
+	{
+		if(ntdll.resolve("wine_nt_to_unix_file_name") != NULL) isWine = true;
+		if(ntdll.resolve("wine_get_version") != NULL) isWine = true;
+		if(isWine) qWarning("It appears we are running under Wine, unexpected things might happen!\n");
+		ntdll.unload();
+	}
 
 	//Create Qt application instance and setup version info
 	QDate date = QDate::currentDate();
@@ -808,10 +818,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 	{
 		typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
 		QLibrary kernel32("kernel32.dll");
-		SetConsoleIconFun SetConsoleIconPtr = (SetConsoleIconFun) kernel32.resolve("SetConsoleIcon");
-		if(SetConsoleIconPtr)
+		if(kernel32.load())
 		{
-			SetConsoleIconPtr(QIcon(":/icons/sound.png").pixmap(16, 16).toWinHICON());
+			SetConsoleIconFun SetConsoleIconPtr = (SetConsoleIconFun) kernel32.resolve("SetConsoleIcon");
+			if(SetConsoleIconPtr != NULL) SetConsoleIconPtr(QIcon(":/icons/sound.png").pixmap(16, 16).toWinHICON());
+			kernel32.unload();
 		}
 	}
 
