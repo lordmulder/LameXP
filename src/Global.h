@@ -126,6 +126,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 
 //Helper macros
 #define LAMEXP_DELETE(PTR) if(PTR) { delete PTR; PTR = NULL; }
+#define LAMEXP_SAFE_FREE(PTR) if(PTR) { free((void*) PTR); PTR = NULL; }
 #define LAMEXP_CLOSE(HANDLE) if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; }
 #define QWCHAR(STR) reinterpret_cast<const wchar_t*>(STR.utf16())
 #define WCHAR2QSTR(STR) QString::fromUtf16(reinterpret_cast<const unsigned short*>(STR))
