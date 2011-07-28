@@ -77,7 +77,6 @@ void FileAnalyzer::run()
 	m_filesCueSheet = 0;
 
 	m_inputFiles.sort();
-
 	m_abortFlag = false;
 
 	while(!m_inputFiles.isEmpty())

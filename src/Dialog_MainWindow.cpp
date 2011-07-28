@@ -770,11 +770,13 @@ void MainWindow::dropEvent(QDropEvent *event)
 		}
 		if(file.isFile())
 		{
+			qDebug64("Dropped File: %1", file.canonicalFilePath());
 			droppedFiles << file.canonicalFilePath();
 			continue;
 		}
-		if(file.isDir())
+		else if(file.isDir())
 		{
+			qDebug64("Dropped Folder: %1", file.canonicalFilePath());
 			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files);
 			for(int j = 0; j < list.count(); j++)
 			{
@@ -2838,15 +2840,17 @@ void MainWindow::addFilesDelayed(const QStringList &filePaths, bool tryASAP)
 {
 	if(tryASAP && !m_delayedFileTimer->isActive())
 	{
-		qDebug("Received %d files.", filePaths.count());
+		qDebug("Received %d file(s).", filePaths.count());
 		m_delayedFileList->append(filePaths);
 		QTimer::singleShot(0, this, SLOT(handleDelayedFiles()));
 	}
-
-	m_delayedFileTimer->stop();
-	qDebug("Received %d files.", filePaths.count());
-	m_delayedFileList->append(filePaths);
-	m_delayedFileTimer->start(5000);
+	else
+	{
+		m_delayedFileTimer->stop();
+		qDebug("Received %d file(s).", filePaths.count());
+		m_delayedFileList->append(filePaths);
+		m_delayedFileTimer->start(5000);
+	}
 }
 
 /*
