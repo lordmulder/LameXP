@@ -903,10 +903,6 @@
         <translation>Заборонити нагадування  про Nero AAC</translation>
     </message>
     <message>
-        <source>Disable WMA Decoder Notifications</source>
-        <translation>Заборонити нагадування про декодер WMA</translation>
-    </message>
-    <message>
         <source>Show DropBox</source>
         <translation>Відображати DropBox</translation>
     </message>

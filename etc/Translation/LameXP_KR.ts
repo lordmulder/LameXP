@@ -950,10 +950,6 @@
         <translation type="unfinished">Nero AAC 알림 비활성화</translation>
     </message>
     <message>
-        <source>Disable WMA Decoder Notifications</source>
-        <translation type="unfinished">WMA 디코더 알림 비활성화</translation>
-    </message>
-    <message>
         <source>Show DropBox</source>
         <translation type="unfinished">드롭박스 표시</translation>
     </message>

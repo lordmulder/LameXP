@@ -925,10 +925,6 @@
         <translation type="unfinished">Отключить сообщения Nero AAC</translation>
     </message>
     <message>
-        <source>Disable WMA Decoder Notifications</source>
-        <translation type="unfinished">Отключить сообщения WMA Decoder</translation>
-    </message>
-    <message>
         <source>Show DropBox</source>
         <translation type="unfinished">Показать DropBox</translation>
     </message>

@@ -1042,10 +1042,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disable WMA Decoder Notifications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show DropBox</source>
         <translation type="unfinished"></translation>
     </message>

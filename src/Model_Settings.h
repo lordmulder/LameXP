@@ -92,7 +92,6 @@ public:
 	LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta);
 	LAMEXP_MAKE_OPTION_B(soundsEnabled);
 	LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled);
-	LAMEXP_MAKE_OPTION_B(wmaDecoderNotificationsEnabled);
 	LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled);
 	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled);
 	LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled);

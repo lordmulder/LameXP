@@ -379,7 +379,8 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 
 	if(g_lamexp_console_attached)
 	{
-		SetConsoleOutputCP(CP_UTF8);
+		UINT oldOutputCP = GetConsoleOutputCP();
+		if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(CP_UTF8);
 
 		switch(type)
 		{
@@ -405,6 +406,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		}
 	
 		lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+		if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(oldOutputCP);
 	}
 	else
 	{
@@ -474,6 +476,9 @@ void lamexp_init_console(int argc, char* argv[])
 		{
 			if(AllocConsole() != FALSE)
 			{
+				SetConsoleCtrlHandler(NULL, TRUE);
+				SetConsoleTitle(L"LameXP - Audio Encoder Front-End | Debug Console");
+				SetConsoleOutputCP(CP_UTF8);
 				g_lamexp_console_attached = true;
 			}
 		}
@@ -483,8 +488,9 @@ void lamexp_init_console(int argc, char* argv[])
 			//-------------------------------------------------------------------
 			//See: http://support.microsoft.com/default.aspx?scid=kb;en-us;105305
 			//-------------------------------------------------------------------
-			int hCrtStdOut = _open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), _O_BINARY);
-			int hCrtStdErr = _open_osfhandle((intptr_t) GetStdHandle(STD_ERROR_HANDLE), _O_BINARY);
+			const int flags = _O_WRONLY | _O_U8TEXT;
+			int hCrtStdOut = _open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), flags);
+			int hCrtStdErr = _open_osfhandle((intptr_t) GetStdHandle(STD_ERROR_HANDLE), flags);
 			FILE *hfStdOut = _fdopen(hCrtStdOut, "w");
 			FILE *hfStderr = _fdopen(hCrtStdErr, "w");
 			if(hfStdOut) *stdout = *hfStdOut;
@@ -501,10 +507,6 @@ void lamexp_init_console(int argc, char* argv[])
 
 			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MAXIMIZEBOX));
 			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MINIMIZEBOX));
-			
-			SetConsoleCtrlHandler(NULL, TRUE);
-			SetConsoleTitle(L"LameXP - Audio Encoder Front-End | Debug Console");
-			SetConsoleOutputCP(CP_UTF8);
 		}
 	}
 }

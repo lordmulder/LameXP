@@ -3269,14 +3269,6 @@
     <string>Disable Nero AAC Notifications</string>
    </property>
   </action>
-  <action name="actionDisableWmaDecoderNotifications">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Disable WMA Decoder Notifications</string>
-   </property>
-  </action>
   <action name="actionShowDropBoxWidget">
    <property name="icon">
     <iconset resource="../res/Icons.qrc">

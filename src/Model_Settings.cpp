@@ -82,7 +82,6 @@ LAMEXP_MAKE_ID(autoUpdateEnabled, "AutoUpdate/Enabled");
 LAMEXP_MAKE_ID(autoUpdateCheckBeta, "AutoUpdate/CheckForBetaVersions");
 LAMEXP_MAKE_ID(soundsEnabled, "Flags/EnableSounds");
 LAMEXP_MAKE_ID(neroAacNotificationsEnabled, "Flags/EnableNeroAacNotifications");
-LAMEXP_MAKE_ID(wmaDecoderNotificationsEnabled, "Flags/EnableWmaDecoderNotifications");
 LAMEXP_MAKE_ID(antivirNotificationsEnabled, "Flags/EnableAntivirusNotifications");
 LAMEXP_MAKE_ID(dropBoxWidgetEnabled, "Flags/EnableDropBoxWidget");
 LAMEXP_MAKE_ID(shellIntegrationEnabled, "Flags/EnableShellIntegration");
@@ -272,7 +271,6 @@ LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, true)
 LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta, false)
 LAMEXP_MAKE_OPTION_B(soundsEnabled, true)
 LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled, true)
-LAMEXP_MAKE_OPTION_B(wmaDecoderNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled, true)
 LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_portable_mode())

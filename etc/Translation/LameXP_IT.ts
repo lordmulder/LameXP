@@ -755,10 +755,6 @@
         <translation>Disabilita le notifiche di Nero AAC</translation>
     </message>
     <message>
-        <source>Disable WMA Decoder Notifications</source>
-        <translation>Disabilita le notifiche del decoder WMA</translation>
-    </message>
-    <message>
         <source>Show DropBox</source>
         <translation>Mostra la DropBox</translation>
     </message>
