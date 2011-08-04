@@ -660,6 +660,10 @@ void ProcessingDialog::startNextJob(void)
 	{
 		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume()));
 	}
+	if(m_settings->renameOutputFilesEnabled())
+	{
+		thread->setRenamePattern(m_settings->renameOutputFilesPattern());
+	}
 
 	m_threadList.append(thread);
 	m_allJobs.append(thread->getId());

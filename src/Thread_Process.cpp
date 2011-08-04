@@ -59,6 +59,7 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_encoder(encoder),
 	m_jobId(QUuid::createUuid()),
 	m_prependRelativeSourcePath(prependRelativeSourcePath),
+	m_renamePattern("<BaseName>"),
 	m_aborted(false)
 {
 	if(m_mutex_genFileName)
@@ -304,10 +305,20 @@ QString ProcessThread::generateOutFileName(void)
 		writeTest.remove();
 	}
 
-	QString outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), baseName, m_encoder->extension());
+	QString fileName = m_renamePattern;
+	fileName.replace("<BaseName>", baseName, Qt::CaseInsensitive);
+	fileName.replace("<TrackNo>", QString().sprintf("%02d", m_audioFile.filePosition()), Qt::CaseInsensitive);
+	fileName.replace("<Title>", m_audioFile.fileName() , Qt::CaseInsensitive);
+	fileName.replace("<Artist>", m_audioFile.fileArtist(), Qt::CaseInsensitive);
+	fileName.replace("<Album>", m_audioFile.fileAlbum(), Qt::CaseInsensitive);
+	fileName.replace("<Year>", QString().sprintf("%04d", m_audioFile.fileYear()), Qt::CaseInsensitive);
+	fileName.replace("<Comment>", m_audioFile.fileComment(), Qt::CaseInsensitive);
+	fileName = lamexp_clean_filename(fileName).simplified();
+
+	QString outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, m_encoder->extension());
 	while(QFileInfo(outFileName).exists())
 	{
-		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), baseName, QString::number(++n), m_encoder->extension());
+		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), fileName, QString::number(++n), m_encoder->extension());
 	}
 
 	QFile placeholder(outFileName);
@@ -386,6 +397,11 @@ void ProcessThread::insertDownsampleFilter(void)
 void ProcessThread::addFilter(AbstractFilter *filter)
 {
 	m_filters.append(filter);
+}
+
+void ProcessThread::setRenamePattern(const QString &pattern)
+{
+	m_renamePattern = pattern.simplified();
 }
 
 ////////////////////////////////////////////////////////////

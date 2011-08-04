@@ -70,7 +70,7 @@
 
 //Helper macros
 #define ABORT_IF_BUSY if(m_banner->isVisible() || m_delayedFileTimer->isActive()) { MessageBeep(MB_ICONEXCLAMATION); return; }
-#define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, COLOR); WIDGET->setPalette(_palette); }
+#define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, (COLOR)); _palette.setColor(QPalette::Text, (COLOR)); WIDGET->setPalette(_palette); }
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 #define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); CMD; if(__dropBoxVisible) m_dropBox->show(); }
@@ -236,6 +236,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
 	lineEditCustomParamAften->setText(m_settings->customParametersAften());
 	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
+	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabled()) checkBoxRenameOutput->click();
+	lineEditRenamePattern->setText(m_settings->renameOutputFilesPattern());
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
 	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
@@ -264,6 +266,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(lineEditCustomTempFolder, SIGNAL(textChanged(QString)), this, SLOT(customTempFolderChanged(QString)));
 	connect(checkBoxUseSystemTempFolder, SIGNAL(clicked(bool)), this, SLOT(useCustomTempFolderChanged(bool)));
 	connect(buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
+	connect(checkBoxRenameOutput, SIGNAL(clicked(bool)), this, SLOT(renameOutputEnabledChanged(bool)));
+	connect(lineEditRenamePattern, SIGNAL(editingFinished()), this, SLOT(renameOutputPatternChanged()));
+	connect(lineEditRenamePattern, SIGNAL(textChanged(QString)), this, SLOT(renameOutputPatternChanged(QString)));
+	connect(labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros()));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	updateMaximumInstances(sliderMaxInstances->value());
 	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
@@ -2711,6 +2717,77 @@ void MainWindow::customParamsChanged(void)
 	m_settings->customParametersAften(lineEditCustomParamAften->text());
 }
 
+
+/*
+ * Rename output files enabled changed
+ */
+void MainWindow::renameOutputEnabledChanged(bool checked)
+{
+	m_settings->renameOutputFilesEnabled(checked);
+}
+
+/*
+ * Rename output files patterm changed
+ */
+void MainWindow::renameOutputPatternChanged(void)
+{
+	lineEditRenamePattern->setText(lineEditRenamePattern->text().simplified());
+	m_settings->renameOutputFilesPattern(lineEditRenamePattern->text());
+}
+
+/*
+ * Rename output files patterm changed
+ */
+void MainWindow::renameOutputPatternChanged(const QString &text)
+{
+	QString pattern(text);
+	
+	pattern.remove("<BaseName>", Qt::CaseInsensitive);
+	pattern.remove("<TrackNo>", Qt::CaseInsensitive);
+	pattern.remove("<Title>", Qt::CaseInsensitive);
+	pattern.remove("<Artist>", Qt::CaseInsensitive);
+	pattern.remove("<Album>", Qt::CaseInsensitive);
+	pattern.remove("<Year>", Qt::CaseInsensitive);
+	pattern.remove("<Comment>", Qt::CaseInsensitive);
+
+	if(pattern.compare(lamexp_clean_filename(pattern)))
+	{
+		if(lineEditRenamePattern->palette().color(QPalette::Text) != Qt::red)
+		{
+			MessageBeep(MB_ICONERROR);
+			SET_TEXT_COLOR(lineEditRenamePattern, Qt::red);
+		}
+	}
+	else
+	{
+		if(lineEditRenamePattern->palette().color(QPalette::Text) != Qt::black)
+		{
+			MessageBeep(MB_ICONINFORMATION);
+			SET_TEXT_COLOR(lineEditRenamePattern, Qt::black);
+		}
+	}
+}
+
+/*
+ * Show list of rename macros
+ */
+void MainWindow::showRenameMacros(void)
+{
+	const QString format = QString("<tr><td><tt>&lt;%1&gt;</tt></td><td>&nbsp;&nbsp;</td><td>%2</td></tr>");
+
+	QString text = QString("<table>");
+	text += QString(format).arg("BaseName", tr("Original file name without extension"));
+	text += QString(format).arg("TrackNo", tr("Track number with leading zero"));
+	text += QString(format).arg("Title", tr("Track title"));
+	text += QString(format).arg("Artist", tr("Artist name"));
+	text += QString(format).arg("Album", tr("Album name"));
+	text += QString(format).arg("Year", tr("Year with (at least) four digits"));
+	text += QString(format).arg("Comment", tr("Comment"));
+	text += "</table><br>";
+	
+	QMessageBox::information(this, tr("Rename Macros"), text, tr("Discard"));
+}
+
 /*
  * Maximum number of instances changed
  */
@@ -2789,11 +2866,13 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstancesDefault() < 1)) checkBoxAutoDetectInstances->click();
 	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
 	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocationDefault()) checkBoxAftenFastAllocation->click();
+	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabledDefault()) checkBoxRenameOutput->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAACDefault());
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLACDefault());
 	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
+	lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
 	customParamsChanged();
 	scrollArea->verticalScrollBar()->setValue(0);
 }

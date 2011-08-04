@@ -117,6 +117,8 @@ public:
 	LAMEXP_MAKE_OPTION_S(customParametersNeroAAC);
 	LAMEXP_MAKE_OPTION_S(customParametersAften);
 	LAMEXP_MAKE_OPTION_S(customParametersFLAC);
+	LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled);
+	LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern);
 	LAMEXP_MAKE_OPTION_U(metaInfoPosition);
 	LAMEXP_MAKE_OPTION_U(maximumInstances);
 	LAMEXP_MAKE_OPTION_S(customTempPath);

@@ -103,6 +103,9 @@ private slots:
 	void prependRelativePathChanged(void);
 	void previewContextActionTriggered(void);
 	void removeFileButtonClicked(void);
+	void renameOutputEnabledChanged(bool checked);
+	void renameOutputPatternChanged(void);
+	void renameOutputPatternChanged(const QString &text);
 	void resetAdvancedOptionsButtonClicked(void);
 	void restoreCursor(void);
 	void samplingRateChanged(int value);
@@ -110,6 +113,7 @@ private slots:
 	void showDetailsButtonClicked(void);
 	void showDropBoxWidgetActionTriggered(bool checked);
 	void showFolderContextActionTriggered(void);
+	void showRenameMacros(void);
 	void sourceFilesContextMenu(const QPoint &pos);
 	void sourceModelChanged(void);
 	void styleActionActivated(QAction *action);

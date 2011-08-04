@@ -1554,6 +1554,54 @@
         <source>The slow startup notifications have been re-enabled.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> Rename Output Files </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename Output Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original file name without extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Track number with leading zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Track title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Artist name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Year with (at least) four digits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished">Commento</translation>
+    </message>
+    <message>
+        <source>Rename Macros</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

@@ -107,6 +107,8 @@ LAMEXP_MAKE_ID(customParametersOggEnc, "AdvancedOptions/CustomParameters/OggEnc"
 LAMEXP_MAKE_ID(customParametersNeroAAC, "AdvancedOptions/CustomParameters/NeroAAC");
 LAMEXP_MAKE_ID(customParametersAften, "AdvancedOptions/CustomParameters/Aften");
 LAMEXP_MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
+LAMEXP_MAKE_ID(renameOutputFilesEnabled, "AdvancedOptions/RenameOutputFiles/Enabled");
+LAMEXP_MAKE_ID(renameOutputFilesPattern, "AdvancedOptions/RenameOutputFiles/Pattern");
 LAMEXP_MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
 LAMEXP_MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
 LAMEXP_MAKE_ID(customTempPath, "AdvancedOptions/TempDirectory/CustomPath");
@@ -296,6 +298,8 @@ LAMEXP_MAKE_OPTION_S(customParametersOggEnc, QString());
 LAMEXP_MAKE_OPTION_S(customParametersNeroAAC, QString());
 LAMEXP_MAKE_OPTION_S(customParametersAften, QString());
 LAMEXP_MAKE_OPTION_S(customParametersFLAC, QString());
+LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled, false);
+LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern, "[<TrackNo>] <Artist> - <Title>");
 LAMEXP_MAKE_OPTION_U(metaInfoPosition, UINT_MAX);
 LAMEXP_MAKE_OPTION_U(maximumInstances, 0);
 LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation));

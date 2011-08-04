@@ -43,6 +43,7 @@ public:
 	
 	void abort() { m_aborted = true; }
 	QUuid getId() { return m_jobId; }
+	void setRenamePattern(const QString &pattern);
 	void addFilter(AbstractFilter *filter);
 
 private slots:
@@ -79,6 +80,7 @@ private:
 	QStringList m_tempFiles;
 	const bool m_prependRelativeSourcePath;
 	QList<AbstractFilter*> m_filters;
+	QString m_renamePattern;
 	
 	static QMutex *m_mutex_genFileName;
 };
