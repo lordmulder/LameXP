@@ -1536,6 +1536,39 @@ void lamexp_blink_window(QWidget *poWindow, unsigned int count, unsigned int del
 }
 
 /*
+ * Remove forbidden characters from a filename
+ */
+const QString lamexp_clean_filename(const QString &str)
+{
+	QString fixedStr(str);
+	fixedStr.replace("\\", "-");
+	fixedStr.replace(" / ", ", ");
+	fixedStr.replace("/", ",");
+	fixedStr.replace(":", "-");
+	fixedStr.replace("*", "x");
+	fixedStr.replace("?", "");
+	fixedStr.replace("<", "[");
+	fixedStr.replace(">", "]");
+	fixedStr.replace("|", "!");
+	return fixedStr;
+}
+
+/*
+ * Remove forbidden characters from a file path
+ */
+const QString lamexp_clean_filepath(const QString &str)
+{
+	QStringList parts = QString(str).replace("\\", "/").split("/");
+
+	for(int i = 0; i < parts.count(); i++)
+	{
+		parts[i] = lamexp_clean_filename(parts[i]);
+	}
+
+	return parts.join("/");
+}
+
+/*
  * Finalization function (final clean-up)
  */
 void lamexp_finalization(void)
