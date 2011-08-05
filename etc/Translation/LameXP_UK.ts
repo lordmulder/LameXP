@@ -1606,6 +1606,18 @@
         <source>File name without extension</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rename Pattern:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Example File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Characters forbidden in file names:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
@@ -1893,6 +1905,26 @@
     <message>
         <source>The target output directory is NOT writable:</source>
         <translation>До вихідної теки неможливо проводити запис:</translation>
+    </message>
+    <message>
+        <source>Unknown File Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown Title</source>
+        <translation type="unfinished">Невідомий заголовок</translation>
+    </message>
+    <message>
+        <source>Unknown Artist</source>
+        <translation type="unfinished">Невідомий виконавець</translation>
+    </message>
+    <message>
+        <source>Unknown Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown Comment</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

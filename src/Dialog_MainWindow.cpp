@@ -731,6 +731,7 @@ void MainWindow::changeEvent(QEvent *e)
 		updateEncoder(m_settings->compressionEncoder());
 		updateLameAlgoQuality(sliderLameAlgoQuality->value());
 		updateMaximumInstances(sliderMaxInstances->value());
+		renameOutputPatternChanged(lineEditRenamePattern->text());
 
 		//Re-install shell integration
 		if(m_settings->shellIntegrationEnabled())
@@ -2741,15 +2742,15 @@ void MainWindow::renameOutputPatternChanged(void)
  */
 void MainWindow::renameOutputPatternChanged(const QString &text)
 {
-	QString pattern(text);
+	QString pattern(text.simplified());
 	
-	pattern.remove("<BaseName>", Qt::CaseInsensitive);
-	pattern.remove("<TrackNo>", Qt::CaseInsensitive);
-	pattern.remove("<Title>", Qt::CaseInsensitive);
-	pattern.remove("<Artist>", Qt::CaseInsensitive);
-	pattern.remove("<Album>", Qt::CaseInsensitive);
-	pattern.remove("<Year>", Qt::CaseInsensitive);
-	pattern.remove("<Comment>", Qt::CaseInsensitive);
+	pattern.replace("<BaseName>", "The_White_Stripes_-_Fell_In_Love_With_A_Girl", Qt::CaseInsensitive);
+	pattern.replace("<TrackNo>", "04", Qt::CaseInsensitive);
+	pattern.replace("<Title>", "Fell In Love With A Girl", Qt::CaseInsensitive);
+	pattern.replace("<Artist>", "The White Stripes", Qt::CaseInsensitive);
+	pattern.replace("<Album>", "White Blood Cells", Qt::CaseInsensitive);
+	pattern.replace("<Year>", "2001", Qt::CaseInsensitive);
+	pattern.replace("<Comment>", "Encoded by LameXP", Qt::CaseInsensitive);
 
 	if(pattern.compare(lamexp_clean_filename(pattern)))
 	{
@@ -2767,6 +2768,8 @@ void MainWindow::renameOutputPatternChanged(const QString &text)
 			SET_TEXT_COLOR(lineEditRenamePattern, Qt::black);
 		}
 	}
+
+	labelRanameExample->setText(lamexp_clean_filename(pattern));
 }
 
 /*
@@ -2790,7 +2793,9 @@ void MainWindow::showRenameMacros(const QString &text)
 	message += QString(format).arg("Album", tr("Album name"));
 	message += QString(format).arg("Year", tr("Year with (at least) four digits"));
 	message += QString(format).arg("Comment", tr("Comment"));
-	message += "</table><br>";
+	message += "</table><br><br>";
+	message += QString("%1<br>").arg(tr("Characters forbidden in file names:"));
+	message += "<b><tt>\\ / : * ? &lt; &gt; |<br>";
 	
 	QMessageBox::information(this, tr("Rename Macros"), message, tr("Discard"));
 }

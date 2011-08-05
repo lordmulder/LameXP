@@ -44,6 +44,7 @@
 #include <stdlib.h>
 
 #define DIFF(X,Y) ((X > Y) ? (X-Y) : (Y-X))
+#define STRDEF(STR,DEF) ((!STR.isEmpty()) ? STR : DEF)
 
 QMutex *ProcessThread::m_mutex_genFileName = NULL;
 
@@ -306,13 +307,13 @@ QString ProcessThread::generateOutFileName(void)
 	}
 
 	QString fileName = m_renamePattern;
-	fileName.replace("<BaseName>", baseName, Qt::CaseInsensitive);
+	fileName.replace("<BaseName>", STRDEF(baseName, tr("Unknown File Name")), Qt::CaseInsensitive);
 	fileName.replace("<TrackNo>", QString().sprintf("%02d", m_audioFile.filePosition()), Qt::CaseInsensitive);
-	fileName.replace("<Title>", m_audioFile.fileName() , Qt::CaseInsensitive);
-	fileName.replace("<Artist>", m_audioFile.fileArtist(), Qt::CaseInsensitive);
-	fileName.replace("<Album>", m_audioFile.fileAlbum(), Qt::CaseInsensitive);
+	fileName.replace("<Title>", STRDEF(m_audioFile.fileName(), tr("Unknown Title")) , Qt::CaseInsensitive);
+	fileName.replace("<Artist>", STRDEF(m_audioFile.fileArtist(), tr("Unknown Artist")), Qt::CaseInsensitive);
+	fileName.replace("<Album>", STRDEF(m_audioFile.fileAlbum(), tr("Unknown Album")), Qt::CaseInsensitive);
 	fileName.replace("<Year>", QString().sprintf("%04d", m_audioFile.fileYear()), Qt::CaseInsensitive);
-	fileName.replace("<Comment>", m_audioFile.fileComment(), Qt::CaseInsensitive);
+	fileName.replace("<Comment>", STRDEF(m_audioFile.fileComment(), tr("Unknown Comment")), Qt::CaseInsensitive);
 	fileName = lamexp_clean_filename(fileName).simplified();
 
 	QString outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, m_encoder->extension());

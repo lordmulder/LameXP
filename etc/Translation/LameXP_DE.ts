@@ -1606,6 +1606,18 @@
         <source>File name without extension</source>
         <translation>Dateiname ohne Erweiterung</translation>
     </message>
+    <message>
+        <source>Rename Pattern:</source>
+        <translation>Umbenennungsschema:</translation>
+    </message>
+    <message>
+        <source>Example File Name:</source>
+        <translation>Beispiel Dateiname:</translation>
+    </message>
+    <message>
+        <source>Characters forbidden in file names:</source>
+        <translation>Verbotene Zeichen in Dateinamen:</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
@@ -1893,6 +1905,26 @@
     <message>
         <source>The target output directory is NOT writable:</source>
         <translation>In das Zielverzeichnis kann nicht geschrieben werden:</translation>
+    </message>
+    <message>
+        <source>Unknown File Name</source>
+        <translation>Unbekannter Dateiname</translation>
+    </message>
+    <message>
+        <source>Unknown Title</source>
+        <translation>Unbekannter Titel</translation>
+    </message>
+    <message>
+        <source>Unknown Artist</source>
+        <translation>Unbekannter Künstler</translation>
+    </message>
+    <message>
+        <source>Unknown Album</source>
+        <translation>Unbekanntes Album</translation>
+    </message>
+    <message>
+        <source>Unknown Comment</source>
+        <translation>Unbekannter Kommentar</translation>
     </message>
 </context>
 <context>
