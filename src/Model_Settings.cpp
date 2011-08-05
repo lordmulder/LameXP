@@ -88,6 +88,7 @@ LAMEXP_MAKE_ID(shellIntegrationEnabled, "Flags/EnableShellIntegration");
 LAMEXP_MAKE_ID(currentLanguage, "Localization/Language");
 LAMEXP_MAKE_ID(lameAlgoQuality, "AdvancedOptions/LAME/AlgorithmQuality");
 LAMEXP_MAKE_ID(lameChannelMode, "AdvancedOptions/LAME/ChannelMode");
+LAMEXP_MAKE_ID(forceStereoDownmix, "AdvancedOptions/StereoDownmix/Force");
 LAMEXP_MAKE_ID(bitrateManagementEnabled, "AdvancedOptions/BitrateManagement/Enabled");
 LAMEXP_MAKE_ID(bitrateManagementMinRate, "AdvancedOptions/BitrateManagement/MinRate");
 LAMEXP_MAKE_ID(bitrateManagementMaxRate, "AdvancedOptions/BitrateManagement/MaxRate");
@@ -278,7 +279,8 @@ LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled, true)
 LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_portable_mode())
 LAMEXP_MAKE_OPTION_S(currentLanguage, defaultLanguage())
 LAMEXP_MAKE_OPTION_I(lameAlgoQuality, 3)
-LAMEXP_MAKE_OPTION_I(lameChannelMode, 0);
+LAMEXP_MAKE_OPTION_I(lameChannelMode, 0)
+LAMEXP_MAKE_OPTION_B(forceStereoDownmix, false)
 LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled, false)
 LAMEXP_MAKE_OPTION_I(bitrateManagementMinRate, 32)
 LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate, 500)

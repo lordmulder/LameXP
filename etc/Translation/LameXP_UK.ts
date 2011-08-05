@@ -1618,6 +1618,10 @@
         <source>Characters forbidden in file names:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

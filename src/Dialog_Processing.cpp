@@ -35,6 +35,7 @@
 #include "Encoder_AC3.h"
 #include "Encoder_FLAC.h"
 #include "Encoder_Wave.h"
+#include "Filter_Downmix.h"
 #include "Filter_Normalize.h"
 #include "Filter_Resample.h"
 #include "Filter_ToneAdjust.h"
@@ -645,6 +646,10 @@ void ProcessingDialog::startNextJob(void)
 		m_settings->prependRelativeSourcePath()
 	);
 
+	if(m_settings->forceStereoDownmix() && !encoder->requiresDownmix())
+	{
+		thread->addFilter(new DownmixFilter());
+	}
 	if((m_settings->samplingRate() > 0) && !nativeResampling)
 	{
 		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.formatAudioSamplerate() || currentFile.formatAudioSamplerate() == 0)

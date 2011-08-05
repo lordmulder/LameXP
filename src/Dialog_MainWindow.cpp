@@ -230,13 +230,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabled()) checkBoxNormalizationFilter->click();
 	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstances() < 1)) checkBoxAutoDetectInstances->click();
 	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabled()) checkBoxUseSystemTempFolder->click();
+	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabled()) checkBoxRenameOutput->click();
+	while(checkBoxForceStereoDownmix->isChecked() != m_settings->forceStereoDownmix()) checkBoxForceStereoDownmix->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAAC());
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
 	lineEditCustomParamAften->setText(m_settings->customParametersAften());
 	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
-	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabled()) checkBoxRenameOutput->click();
 	lineEditRenamePattern->setText(m_settings->renameOutputFilesPattern());
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
@@ -270,6 +271,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(lineEditRenamePattern, SIGNAL(editingFinished()), this, SLOT(renameOutputPatternChanged()));
 	connect(lineEditRenamePattern, SIGNAL(textChanged(QString)), this, SLOT(renameOutputPatternChanged(QString)));
 	connect(labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros(QString)));
+	connect(checkBoxForceStereoDownmix, SIGNAL(clicked(bool)), this, SLOT(forceStereoDownmixEnabledChanged(bool)));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	updateMaximumInstances(sliderMaxInstances->value());
 	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
@@ -2800,6 +2802,11 @@ void MainWindow::showRenameMacros(const QString &text)
 	QMessageBox::information(this, tr("Rename Macros"), message, tr("Discard"));
 }
 
+void MainWindow::forceStereoDownmixEnabledChanged(bool checked)
+{
+	m_settings->forceStereoDownmix(checked);
+}
+
 /*
  * Maximum number of instances changed
  */
@@ -2879,6 +2886,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
 	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocationDefault()) checkBoxAftenFastAllocation->click();
 	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabledDefault()) checkBoxRenameOutput->click();
+	while(checkBoxForceStereoDownmix->isChecked() != m_settings->forceStereoDownmixDefault()) checkBoxForceStereoDownmix->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersNeroAACDefault());

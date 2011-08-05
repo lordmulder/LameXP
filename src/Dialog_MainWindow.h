@@ -80,6 +80,7 @@ private slots:
 	void fileDownButtonClicked(void);
 	void fileUpButtonClicked(void);
 	void findFileContextActionTriggered(void);
+	void forceStereoDownmixEnabledChanged(bool checked);
 	void gotoDesktopButtonClicked(void);
 	void gotoHomeFolderButtonClicked(void);
 	void gotoMusicFolderButtonClicked(void);

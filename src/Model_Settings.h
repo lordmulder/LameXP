@@ -98,6 +98,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(currentLanguage);
 	LAMEXP_MAKE_OPTION_I(lameAlgoQuality);
 	LAMEXP_MAKE_OPTION_I(lameChannelMode);
+	LAMEXP_MAKE_OPTION_B(forceStereoDownmix);
 	LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled);
 	LAMEXP_MAKE_OPTION_I(bitrateManagementMinRate);
 	LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate);
