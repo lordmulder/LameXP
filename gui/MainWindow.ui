@@ -2049,6 +2049,12 @@
                          <family>Lucida Console</family>
                         </font>
                        </property>
+                       <property name="text">
+                        <string notr="true"/>
+                       </property>
+                       <property name="placeholderText">
+                        <string>You can eneter custom parameters here!</string>
+                       </property>
                       </widget>
                      </item>
                      <item row="2" column="2">
@@ -2057,6 +2063,12 @@
                         <font>
                          <family>Lucida Console</family>
                         </font>
+                       </property>
+                       <property name="text">
+                        <string notr="true"/>
+                       </property>
+                       <property name="placeholderText">
+                        <string>You can eneter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2067,6 +2079,12 @@
                          <family>Lucida Console</family>
                         </font>
                        </property>
+                       <property name="text">
+                        <string notr="true"/>
+                       </property>
+                       <property name="placeholderText">
+                        <string>You can eneter custom parameters here!</string>
+                       </property>
                       </widget>
                      </item>
                      <item row="3" column="2">
@@ -2075,6 +2093,12 @@
                         <font>
                          <family>Lucida Console</family>
                         </font>
+                       </property>
+                       <property name="text">
+                        <string notr="true"/>
+                       </property>
+                       <property name="placeholderText">
+                        <string>You can eneter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2222,6 +2246,12 @@
                         <font>
                          <family>Lucida Console</family>
                         </font>
+                       </property>
+                       <property name="text">
+                        <string notr="true"/>
+                       </property>
+                       <property name="placeholderText">
+                        <string>You can eneter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2840,7 +2870,10 @@
                         </font>
                        </property>
                        <property name="text">
-                        <string>[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</string>
+                        <string notr="true">[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</string>
+                       </property>
+                       <property name="placeholderText">
+                        <string>Entere the pattern to rename the output files here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2907,11 +2940,8 @@
                      </item>
                      <item row="3" column="2">
                       <widget class="QLabel" name="labelShowRenameMacros">
-                       <property name="cursor">
-                        <cursorShape>PointingHandCursor</cursorShape>
-                       </property>
                        <property name="text">
-                        <string>&lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</string>
+                        <string>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</string>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -3547,6 +3577,10 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
+  <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>
   <include location="../res/Icons.qrc"/>

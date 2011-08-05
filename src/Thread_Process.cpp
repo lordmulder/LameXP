@@ -401,7 +401,8 @@ void ProcessThread::addFilter(AbstractFilter *filter)
 
 void ProcessThread::setRenamePattern(const QString &pattern)
 {
-	m_renamePattern = pattern.simplified();
+	QString newPattern = pattern.simplified();
+	if(!newPattern.isEmpty()) m_renamePattern = newPattern;
 }
 
 ////////////////////////////////////////////////////////////

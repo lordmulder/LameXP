@@ -1556,51 +1556,55 @@
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> Ausgabedateien umbenennen </translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Original file name without extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabedateien umbenennen</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Titelnummer mit führender Null</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation type="unfinished"></translation>
+        <translation>Künstlername</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation type="unfinished"></translation>
+        <translation>Albumname</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished"></translation>
+        <translation>Jahr mit mind. vier Stellen</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Kommentar</translation>
+        <translation>Kommentar</translation>
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished"></translation>
+        <translation>Platzhalter</translation>
+    </message>
+    <message>
+        <source>You can eneter custom parameters here!</source>
+        <translation>Sie können hier Parameter eingeben!</translation>
+    </message>
+    <message>
+        <source>Entere the pattern to rename the output files here!</source>
+        <translation>Schema zum Umbennen hier eingeben!</translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;reset&quot;&gt;Zurücksetzen&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Verfügbare Platzhalter anzeigen&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>File name without extension</source>
+        <translation>Dateiname ohne Erweiterung</translation>
     </message>
 </context>
 <context>

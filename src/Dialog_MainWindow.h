@@ -113,7 +113,7 @@ private slots:
 	void showDetailsButtonClicked(void);
 	void showDropBoxWidgetActionTriggered(bool checked);
 	void showFolderContextActionTriggered(void);
-	void showRenameMacros(void);
+	void showRenameMacros(const QString &text);
 	void sourceFilesContextMenu(const QPoint &pos);
 	void sourceModelChanged(void);
 	void styleActionActivated(QAction *action);

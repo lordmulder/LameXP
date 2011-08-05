@@ -1559,19 +1559,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Original file name without extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1600,6 +1588,22 @@
     </message>
     <message>
         <source>Rename Macros</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can eneter custom parameters here!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entere the pattern to rename the output files here!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File name without extension</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

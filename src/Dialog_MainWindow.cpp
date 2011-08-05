@@ -269,7 +269,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(checkBoxRenameOutput, SIGNAL(clicked(bool)), this, SLOT(renameOutputEnabledChanged(bool)));
 	connect(lineEditRenamePattern, SIGNAL(editingFinished()), this, SLOT(renameOutputPatternChanged()));
 	connect(lineEditRenamePattern, SIGNAL(textChanged(QString)), this, SLOT(renameOutputPatternChanged(QString)));
-	connect(labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros()));
+	connect(labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros(QString)));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	updateMaximumInstances(sliderMaxInstances->value());
 	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
@@ -2731,7 +2731,8 @@ void MainWindow::renameOutputEnabledChanged(bool checked)
  */
 void MainWindow::renameOutputPatternChanged(void)
 {
-	lineEditRenamePattern->setText(lineEditRenamePattern->text().simplified());
+	QString temp = lineEditRenamePattern->text().simplified();
+	lineEditRenamePattern->setText(temp.isEmpty() ? m_settings->renameOutputFilesPatternDefault() : temp);
 	m_settings->renameOutputFilesPattern(lineEditRenamePattern->text());
 }
 
@@ -2771,21 +2772,27 @@ void MainWindow::renameOutputPatternChanged(const QString &text)
 /*
  * Show list of rename macros
  */
-void MainWindow::showRenameMacros(void)
+void MainWindow::showRenameMacros(const QString &text)
 {
+	if(text.compare("reset", Qt::CaseInsensitive) == 0)
+	{
+		lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+		return;
+	}
+
 	const QString format = QString("<tr><td><tt>&lt;%1&gt;</tt></td><td>&nbsp;&nbsp;</td><td>%2</td></tr>");
 
-	QString text = QString("<table>");
-	text += QString(format).arg("BaseName", tr("Original file name without extension"));
-	text += QString(format).arg("TrackNo", tr("Track number with leading zero"));
-	text += QString(format).arg("Title", tr("Track title"));
-	text += QString(format).arg("Artist", tr("Artist name"));
-	text += QString(format).arg("Album", tr("Album name"));
-	text += QString(format).arg("Year", tr("Year with (at least) four digits"));
-	text += QString(format).arg("Comment", tr("Comment"));
-	text += "</table><br>";
+	QString message = QString("<table>");
+	message += QString(format).arg("BaseName", tr("File name without extension"));
+	message += QString(format).arg("TrackNo", tr("Track number with leading zero"));
+	message += QString(format).arg("Title", tr("Track title"));
+	message += QString(format).arg("Artist", tr("Artist name"));
+	message += QString(format).arg("Album", tr("Album name"));
+	message += QString(format).arg("Year", tr("Year with (at least) four digits"));
+	message += QString(format).arg("Comment", tr("Comment"));
+	message += "</table><br>";
 	
-	QMessageBox::information(this, tr("Rename Macros"), text, tr("Discard"));
+	QMessageBox::information(this, tr("Rename Macros"), message, tr("Discard"));
 }
 
 /*
