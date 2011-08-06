@@ -128,14 +128,14 @@ void ProcessThread::processFile()
 		return;
 	}
 
-	//Do we need to take of downsampling the input?
+	//Do we need to take care of downsampling the input?
 	if(m_encoder->requiresDownsample())
 	{
 		insertDownsampleFilter();
 	}
 
 	//Do we need Stereo downmix?
-	if(m_audioFile.formatAudioChannels() > 2 && m_encoder->requiresDownmix())
+	if(((m_audioFile.formatAudioChannels() > 2) || (m_audioFile.formatAudioChannels() == 0)) && m_encoder->requiresDownmix())
 	{
 		m_filters.prepend(new DownmixFilter());
 	}
