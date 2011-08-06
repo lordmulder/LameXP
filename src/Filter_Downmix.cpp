@@ -51,8 +51,8 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	args << "-V3" << "-S";
 	args << "--guard" << "--temp" << ".";
 	args << QDir::toNativeSeparators(sourceFile);
-	args << "-c2";
 	args << QDir::toNativeSeparators(outputFile);
+	args << "remix" << "1,3,4,5,7,9" << "2,3,4,6,8,9";
 
 	if(!startProcess(process, m_binary, args))
 	{
