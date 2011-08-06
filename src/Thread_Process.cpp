@@ -135,9 +135,9 @@ void ProcessThread::processFile()
 	}
 
 	//Do we need Stereo downmix?
-	if(((m_audioFile.formatAudioChannels() > 2) || (m_audioFile.formatAudioChannels() == 0)) && m_encoder->requiresDownmix())
+	if(m_encoder->requiresDownmix() && ((m_audioFile.formatAudioChannels() > 2) || (m_audioFile.formatAudioChannels() == 0)))
 	{
-		m_filters.prepend(new DownmixFilter());
+		insertDownmixFilter();
 	}
 
 	QString sourceFile = m_audioFile.filePath();
@@ -388,6 +388,27 @@ void ProcessThread::insertDownsampleFilter(void)
 		{
 			m_filters.prepend(new ResampleFilter((bestRate != UINT_MAX) ? bestRate : supportedRates[0]));
 		}
+	}
+}
+
+void ProcessThread::insertDownmixFilter(void)
+{
+	bool applyDownmixing = true;
+		
+	//Check if downmixing filter is already in the chain
+	for(int i = 0; i < m_filters.count(); i++)
+	{
+		if(dynamic_cast<DownmixFilter*>(m_filters.at(i)))
+		{
+			qWarning("Encoder requires Stereo downmix, but user has already forced downmix!");
+			applyDownmixing = false;
+		}
+	}
+		
+	//Now add the downmixing filter, if needed
+	if(applyDownmixing)
+	{
+		m_filters.prepend(new DownmixFilter());
 	}
 }
 

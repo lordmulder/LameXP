@@ -69,6 +69,7 @@ private:
 	QString generateOutFileName(void);
 	QString generateTempFileName(void);
 	void insertDownsampleFilter(void);
+	void insertDownmixFilter(void);
 	
 	const QUuid m_jobId;
 	AudioFileModel m_audioFile;

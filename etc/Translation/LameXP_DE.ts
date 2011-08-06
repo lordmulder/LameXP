@@ -1620,7 +1620,7 @@
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation>Surround (Mehrkanal-Ton) Quellen auf Stereo heruntermischen</translation>
+        <translation>Surround (Mehrkanal-Ton) Quellen immer auf Stereo heruntermischen</translation>
     </message>
 </context>
 <context>

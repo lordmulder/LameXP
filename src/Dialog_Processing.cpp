@@ -649,7 +649,7 @@ void ProcessingDialog::startNextJob(void)
 	);
 
 	//Add audio filters
-	if(m_settings->forceStereoDownmix() && (!encoder->requiresDownmix()) && ((currentFile.formatAudioChannels() > 2) || (currentFile.formatAudioChannels() == 0)))
+	if(m_settings->forceStereoDownmix() && ((currentFile.formatAudioChannels() > 2) || (currentFile.formatAudioChannels() == 0)))
 	{
 		thread->addFilter(new DownmixFilter());
 	}
