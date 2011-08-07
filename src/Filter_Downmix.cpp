@@ -66,21 +66,22 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	switch(channels)
 	{
 	case 3:
-		args << "remix" << "1,3" << "2,3";
+		args << "remix" << "1v0.66,3v0.34" << "2v0.66,3v0.34";
 		break;
 	case 4:
-		args << "remix" << "1,3,4" << "2,3,4";
+		args << "remix" << "1v0.5,3v0.25,4v0.25" << "2v0.5,3v0.25,4v0.25";
 		break;
 	case 6:
-		args << "remix" << "1,3,4,5" << "2,3,4,6";
+		args << "remix" << "1v0.4,3v0.2,4v0.2,5v0.2" << "2v0.4,3v0.2,4v0.2,6v0.2";
 		break;
 	case 8:
-		args << "remix" << "1,3,4,5,7" << "2,3,4,6,8";
+		args << "remix" << "1v0.36,3v0.16,4v0.16,5v0.16,7v0.16" << "2v0.36,3v0.16,4v0.16,6v0.16,8v0.16";
 		break;
 	case 9:
-		args << "remix" << "1,3,4,5,7,9" << "2,3,4,6,8,9";
+		args << "remix" << "1v0.308,3v0.154,4v0.154,5v0.154,7v0.154,9v0.076" << "2v0.308,3v0.154,4v0.154,6v0.154,8v0.154,9v0.076";
 		break;
 	default:
+		qWarning("Downmixer: Unknown channel configuration!");
 		args << "channels" << "2";
 		break;
 	}
