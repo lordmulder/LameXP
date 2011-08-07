@@ -43,6 +43,9 @@ DownmixFilter::~DownmixFilter(void)
 
 bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
+	unsigned int channels = detectChannels(sourceFile, abortFlag);
+	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
+
 	QProcess process;
 	QStringList args;
 
@@ -52,7 +55,28 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	args << "--guard" << "--temp" << ".";
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
-	args << "remix" << "1,3,4,5,7,9" << "2,3,4,6,8,9";
+
+	switch(channels)
+	{
+	case 3:
+		args << "remix" << "1,3" << "2,3";
+		break;
+	case 4:
+		args << "remix" << "1,3,4" << "2,3,4";
+		break;
+	case 6:
+		args << "remix" << "1,3,4,5" << "2,3,4,6";
+		break;
+	case 8:
+		args << "remix" << "1,3,4,5,7" << "2,3,4,6,8";
+		break;
+	case 9:
+		args << "remix" << "1,3,4,5,7,9" << "2,3,4,6,8,9";
+		break;
+	default:
+		args << "channels" << "2";
+		break;
+	}
 
 	if(!startProcess(process, m_binary, args))
 	{
@@ -115,4 +139,68 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	}
 	
 	return true;
+}
+
+unsigned int DownmixFilter::detectChannels(const QString &sourceFile, volatile bool *abortFlag)
+{
+	unsigned int channels = 0;
+	
+	QProcess process;
+	QStringList args;
+
+	args << "--i" << sourceFile;
+
+	if(!startProcess(process, m_binary, args))
+	{
+		return channels;
+	}
+
+	bool bTimeout = false;
+	bool bAborted = false;
+
+	QRegExp regExp("Channels\\s*:\\s*(\\d+)", Qt::CaseInsensitive);
+
+	while(process.state() != QProcess::NotRunning)
+	{
+		if(*abortFlag)
+		{
+			process.kill();
+			bAborted = true;
+			emit messageLogged("\nABORTED BY USER !!!");
+			break;
+		}
+		process.waitForReadyRead(m_processTimeoutInterval);
+		if(!process.bytesAvailable() && process.state() == QProcess::Running)
+		{
+			process.kill();
+			qWarning("SoX process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			bTimeout = true;
+			break;
+		}
+		while(process.bytesAvailable() > 0)
+		{
+			QByteArray line = process.readLine();
+			QString text = QString::fromUtf8(line.constData()).simplified();
+			if(regExp.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				unsigned int temp = regExp.cap(1).toUInt(&ok);
+				if(ok) channels = temp;
+			}
+			if(!text.isEmpty())
+			{
+				emit messageLogged(text);
+			}
+		}
+	}
+
+	process.waitForFinished();
+	if(process.state() != QProcess::NotRunning)
+	{
+		process.kill();
+		process.waitForFinished(-1);
+	}
+
+	return channels;
 }

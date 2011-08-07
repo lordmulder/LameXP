@@ -33,4 +33,5 @@ public:
 
 private:
 	const QString m_binary;
+	unsigned int detectChannels(const QString &sourceFile, volatile bool *abortFlag);
 };
