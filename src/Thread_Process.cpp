@@ -135,7 +135,7 @@ void ProcessThread::processFile()
 	}
 
 	//Do we need Stereo downmix?
-	if(m_encoder->requiresDownmix() && ((m_audioFile.formatAudioChannels() > 2) || (m_audioFile.formatAudioChannels() == 0)))
+	if(m_encoder->requiresDownmix())
 	{
 		insertDownmixFilter();
 	}
@@ -173,28 +173,26 @@ void ProcessThread::processFile()
 		}
 	}
 
-	//Apply all filters
-	while(!m_filters.isEmpty())
+	//Apply all audio filters
+	if(bSuccess)
 	{
-		QString tempFile = generateTempFileName();
-		AbstractFilter *poFilter = m_filters.takeFirst();
-
-		if(bSuccess)
+		while(!m_filters.isEmpty())
 		{
+			QString tempFile = generateTempFileName();
+			AbstractFilter *poFilter = m_filters.takeFirst();
+			m_currentStep = FilteringStep;
+
 			connect(poFilter, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 			connect(poFilter, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
-			m_currentStep = FilteringStep;
-			bSuccess = poFilter->apply(sourceFile, tempFile, &m_aborted);
-
-			if(bSuccess)
+			if(poFilter->apply(sourceFile, tempFile, &m_aborted))
 			{
 				sourceFile = tempFile;
-				handleMessage("\n-------------------------------\n");
 			}
-		}
 
-		delete poFilter;
+			handleMessage("\n-------------------------------\n");
+			delete poFilter;
+		}
 	}
 
 	//Encode audio file

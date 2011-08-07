@@ -46,6 +46,13 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	unsigned int channels = detectChannels(sourceFile, abortFlag);
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
 
+	if((channels == 1) || (channels == 2))
+	{
+		messageLogged("Skipping downmix!");
+		qDebug("Dowmmix not required for Mono or Stereo input, skipping!");
+		return false;
+	}
+
 	QProcess process;
 	QStringList args;
 
