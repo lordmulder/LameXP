@@ -1622,6 +1622,10 @@
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
         <translation>Surround (Mehrkanal-Ton) Quellen immer auf Stereo heruntermischen</translation>
     </message>
+    <message>
+        <source>Bookmark Current Output Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

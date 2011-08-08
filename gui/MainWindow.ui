@@ -277,57 +277,89 @@
           <item row="0" column="0">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QLabel" name="outputFolderLabel">
-              <property name="palette">
-               <palette>
-                <active>
-                 <colorrole role="Link">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>200</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </active>
-                <inactive>
-                 <colorrole role="Link">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>200</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </inactive>
-                <disabled>
-                 <colorrole role="Link">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>200</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </disabled>
-               </palette>
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <property name="spacing">
+               <number>3</number>
               </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
-              <property name="text">
-               <string notr="true">($OUTDIR)</string>
-              </property>
-             </widget>
+              <item>
+               <widget class="QLabel" name="outputFolderLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="palette">
+                 <palette>
+                  <active>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>200</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </active>
+                  <inactive>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>200</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </inactive>
+                  <disabled>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>200</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </disabled>
+                 </palette>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <property name="text">
+                 <string notr="true">($OUTDIR)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="outputFoldersFovoritesLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../res/Icons.qrc">:/icons/star.png</pixmap>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item>
              <widget class="QTreeView" name="outputFolderView">
@@ -1067,8 +1099,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
-               <height>1426</height>
+               <width>602</width>
+               <height>1423</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">

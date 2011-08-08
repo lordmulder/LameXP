@@ -75,6 +75,7 @@ LAMEXP_MAKE_ID(compressionBitrate, "Compression/Bitrate");
 LAMEXP_MAKE_ID(outputDir, "OutputDirectory/SelectedPath");
 LAMEXP_MAKE_ID(outputToSourceDir, "OutputDirectory/OutputToSourceFolder");
 LAMEXP_MAKE_ID(prependRelativeSourcePath, "OutputDirectory/PrependRelativeSourcePath");
+LAMEXP_MAKE_ID(favoriteOutputFolders, "OutputDirectory/Favorites");
 LAMEXP_MAKE_ID(writeMetaTags, "Flags/WriteMetaTags");
 LAMEXP_MAKE_ID(createPlaylist, "Flags/AutoCreatePlaylist");
 LAMEXP_MAKE_ID(autoUpdateLastCheck, "AutoUpdate/LastCheck");
@@ -267,6 +268,7 @@ LAMEXP_MAKE_OPTION_I(compressionBitrate, 7)
 LAMEXP_MAKE_OPTION_S(outputDir, QString())
 LAMEXP_MAKE_OPTION_B(outputToSourceDir, false)
 LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath, false)
+LAMEXP_MAKE_OPTION_S(favoriteOutputFolders, QString());
 LAMEXP_MAKE_OPTION_B(writeMetaTags, true)
 LAMEXP_MAKE_OPTION_B(createPlaylist, true)
 LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck, "Never")

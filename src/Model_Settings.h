@@ -85,6 +85,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(outputDir);
 	LAMEXP_MAKE_OPTION_B(outputToSourceDir);
 	LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath);
+	LAMEXP_MAKE_OPTION_S(favoriteOutputFolders);
 	LAMEXP_MAKE_OPTION_B(writeMetaTags);
 	LAMEXP_MAKE_OPTION_B(createPlaylist);
 	LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck);

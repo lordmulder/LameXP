@@ -147,6 +147,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	outputFolderView->installEventFilter(this);
+	outputFoldersFovoritesLabel->installEventFilter(this);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
 	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
@@ -161,11 +162,16 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
 	m_outputFolderContextMenu = new QMenu();
 	m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
+	m_outputFolderFavoritesMenu = new QMenu();
+	m_addFavoriteFolderAction = m_outputFolderFavoritesMenu->addAction(QIcon(":/icons/add.png"), "N/A");
+	m_outputFolderFavoritesMenu->insertSeparator(m_addFavoriteFolderAction);
 	connect(outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
 	connect(m_showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
+	connect(m_addFavoriteFolderAction, SIGNAL(triggered(bool)), this, SLOT(addFavoriteFolderActionTriggered()));
 	outputFolderLabel->installEventFilter(this);
 	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
 	outputFolderViewClicked(outputFolderView->currentIndex());
+	refreshFavorites();
 	
 	//Setup "Meta Data" tab
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
@@ -448,6 +454,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_sourceFilesContextMenu);
+	LAMEXP_DELETE(m_outputFolderFavoritesMenu);
 	LAMEXP_DELETE(m_dropBox);
 }
 
@@ -554,85 +561,6 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 }
 
 /*
- * Download and install WMA Decoder component
- */
-//bool MainWindow::installWMADecoder(void)
-//{
-//	static const char *download_url = "http://www.nch.com.au/components/wmawav.exe";
-//	static const char *download_hash = "52a3b0e6690faf3f830c336d3c0eadfb7a4e9bc6";
-//	
-//	bool bResult = false;
-//
-//	QString binaryWGet = lamexp_lookup_tool("wget.exe");
-//	QString binaryElevator = lamexp_lookup_tool("elevator.exe");
-//	
-//	if(binaryWGet.isEmpty() || binaryElevator.isEmpty())
-//	{
-//		throw "Required binary is not available!";
-//	}
-//
-//	while(true)
-//	{
-//		QString setupFile = QString("%1/%2.exe").arg(lamexp_temp_folder2(), lamexp_rand_str());
-//
-//		QProcess process;
-//		process.setWorkingDirectory(QFileInfo(setupFile).absolutePath());
-//
-//		QEventLoop loop;
-//		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
-//		connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), &loop, SLOT(quit()));
-//		
-//		process.start(binaryWGet, QStringList() << "-O" << QFileInfo(setupFile).fileName() << download_url);
-//		m_banner->show(tr("Downloading WMA Decoder Setup, please wait..."), &loop);
-//
-//		if(process.exitCode() != 0 || QFileInfo(setupFile).size() < 10240)
-//		{
-//			QFile::remove(setupFile);
-//			if(QMessageBox::critical(this, tr("Download Failed"), tr("Failed to download the WMA Decoder setup. Check your internet connection!"), tr("Try Again"), tr("Cancel")) == 0)
-//			{
-//				continue;
-//			}
-//			break;
-//		}
-//
-//		QFile setupFileContent(setupFile);
-//		QCryptographicHash setupFileHash(QCryptographicHash::Sha1);
-//		
-//		setupFileContent.open(QIODevice::ReadOnly);
-//		if(setupFileContent.isOpen() && setupFileContent.isReadable())
-//		{
-//			setupFileHash.addData(setupFileContent.readAll());
-//			setupFileContent.close();
-//		}
-//
-//		if(_stricmp(setupFileHash.result().toHex().constData(), download_hash))
-//		{
-//			qWarning("Hash miscompare:\n  Expected %s\n  Detected %s\n", download_hash, setupFileHash.result().toHex().constData());
-//			QFile::remove(setupFile);
-//			if(QMessageBox::critical(this, tr("Download Failed"), tr("The download seems to be corrupted. Please try again!"), tr("Try Again"), tr("Cancel")) == 0)
-//			{
-//				continue;
-//			}
-//			break;
-//		}
-//
-//		QApplication::setOverrideCursor(Qt::WaitCursor);
-//		process.start(binaryElevator, QStringList() << QString("/exec=%1").arg(setupFile));
-//		loop.exec(QEventLoop::ExcludeUserInputEvents);
-//		QFile::remove(setupFile);
-//		QApplication::restoreOverrideCursor();
-//
-//		if(QMessageBox::information(this, tr("WMA Decoder"), tr("The WMA File Decoder has been installed. Please restart LameXP now!"), tr("Quit LameXP"), tr("Postpone")) == 0)
-//		{
-//			bResult = true;
-//		}
-//		break;
-//	}
-//
-//	return bResult;
-//}
-
-/*
  * Check for updates
  */
 bool MainWindow::checkForUpdates(void)
@@ -650,6 +578,36 @@ bool MainWindow::checkForUpdates(void)
 
 	LAMEXP_DELETE(updateDialog);
 	return bReadyToInstall;
+}
+
+void MainWindow::refreshFavorites(void)
+{
+	QList<QAction*> folderList = m_outputFolderFavoritesMenu->actions();
+	QStringList favorites = m_settings->favoriteOutputFolders().split("|", QString::SkipEmptyParts);
+	while(favorites.count() > 6) favorites.removeFirst();
+
+	while(!folderList.isEmpty())
+	{
+		QAction *currentItem = folderList.takeFirst();
+		if(currentItem->isSeparator()) break;
+		m_outputFolderFavoritesMenu->removeAction(currentItem);
+		LAMEXP_DELETE(currentItem);
+	}
+
+	QAction *lastItem = m_outputFolderFavoritesMenu->actions().first();
+
+	while(!favorites.isEmpty())
+	{
+		QString path = favorites.takeLast();
+		if(QDir(path).exists())
+		{
+			QAction *action = new QAction(QIcon(":/icons/folder_go.png"), QDir::toNativeSeparators(path), this);
+			action->setData(path);
+			m_outputFolderFavoritesMenu->insertAction(lastItem, action);
+			connect(action, SIGNAL(triggered(bool)), this, SLOT(gotoFavoriteFolder()));
+			lastItem = action;
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -726,6 +684,7 @@ void MainWindow::changeEvent(QEvent *e)
 		m_previewContextAction->setText(tr("Open File in External Application"));
 		m_findFileContextAction->setText(tr("Browse File Location"));
 		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
+		m_addFavoriteFolderAction->setText(tr("Bookmark Current Output Folder"));
 
 		//Force GUI update
 		m_metaInfoModel->clearData();
@@ -868,6 +827,35 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 			break;
 		case QEvent::Leave:
 			outputFolderLabel->setForegroundRole(QPalette::WindowText);
+			break;
+		}
+	}
+	else if(obj == outputFoldersFovoritesLabel)
+	{
+		QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event);
+		QPoint pos = (mouseEvent != NULL) ? mouseEvent->pos() : QPoint();
+		QWidget *sender = dynamic_cast<QLabel*>(obj);
+
+		switch(event->type())
+		{
+		case QEvent::Enter:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
+			break;
+		case QEvent::MouseButtonPress:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Sunken);
+			break;
+		case QEvent::MouseButtonRelease:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
+			if(sender && mouseEvent)
+			{
+				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
+				{
+					m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
+				}
+			}
+			break;
+		case QEvent::Leave:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
 			break;
 		}
 	}
@@ -2101,6 +2089,31 @@ void MainWindow::gotoMusicFolderButtonClicked(void)
 }
 
 /*
+ * Goto music favorite output folder
+ */
+void MainWindow::gotoFavoriteFolder(void)
+{
+	QAction *item = dynamic_cast<QAction*>(QObject::sender());
+	
+	if(item)
+	{
+		QDir path(item->data().toString());
+		if(path.exists())
+		{
+			outputFolderView->setCurrentIndex(m_fileSystemModel->index(path.canonicalPath()));
+			outputFolderViewClicked(outputFolderView->currentIndex());
+			outputFolderView->setFocus();
+		}
+		else
+		{
+			MessageBeep(MB_ICONERROR);
+			m_outputFolderFavoritesMenu->removeAction(item);
+			item->deleteLater();
+		}
+	}
+}
+
+/*
  * Make folder button
  */
 void MainWindow::makeFolderButtonClicked(void)
@@ -2146,6 +2159,8 @@ void MainWindow::makeFolderButtonClicked(void)
 		}
 	}
 	
+	suggestedName = lamexp_clean_filename(suggestedName);
+
 	while(true)
 	{
 		bool bApplied = false;
@@ -2153,15 +2168,7 @@ void MainWindow::makeFolderButtonClicked(void)
 
 		if(bApplied)
 		{
-			folderName.remove(":", Qt::CaseInsensitive);
-			folderName.remove("/", Qt::CaseInsensitive);
-			folderName.remove("\\", Qt::CaseInsensitive);
-			folderName.remove("?", Qt::CaseInsensitive);
-			folderName.remove("*", Qt::CaseInsensitive);
-			folderName.remove("<", Qt::CaseInsensitive);
-			folderName.remove(">", Qt::CaseInsensitive);
-			
-			folderName = folderName.simplified();
+			folderName = lamexp_clean_filepath(folderName.simplified());
 
 			if(folderName.isEmpty())
 			{
@@ -2177,7 +2184,7 @@ void MainWindow::makeFolderButtonClicked(void)
 				newFolder = QString(folderName).append(QString().sprintf(" (%d)", ++i));
 			}
 			
-			if(basePath.mkdir(newFolder))
+			if(basePath.mkpath(newFolder))
 			{
 				QDir createdDir = basePath;
 				if(createdDir.cd(newFolder))
@@ -2232,6 +2239,28 @@ void MainWindow::outputFolderContextMenu(const QPoint &pos)
 void MainWindow::showFolderContextActionTriggered(void)
 {
 	QDesktopServices::openUrl(QUrl::fromLocalFile(m_fileSystemModel->filePath(outputFolderView->currentIndex())));
+}
+
+/*
+ * Add current folder to favorites
+ */
+void MainWindow::addFavoriteFolderActionTriggered(void)
+{
+	QString path = m_fileSystemModel->filePath(outputFolderView->currentIndex());
+	QStringList favorites = m_settings->favoriteOutputFolders().split("|", QString::SkipEmptyParts);
+
+	if(!favorites.contains(path, Qt::CaseInsensitive))
+	{
+		favorites.append(path);
+		while(favorites.count() > 6) favorites.removeFirst();
+	}
+	else
+	{
+		MessageBeep(MB_ICONWARNING);
+	}
+
+	m_settings->favoriteOutputFolders(favorites.join("|"));
+	refreshFavorites();
 }
 
 /*

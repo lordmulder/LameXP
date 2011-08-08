@@ -457,6 +457,7 @@ FunctionEnd
 ;--------------------------------
 
 Section "-PreInit"
+	SetShellVarContext all
 	SetOutPath "$INSTDIR"
 SectionEnd
 
@@ -491,10 +492,18 @@ Section "-Create Shortcuts"
 		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_SHORTCUTS)"
 		CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
 		
+		SetShellVarContext current
+		
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.lnk"
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.pif"
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.url"
 		
+		SetShellVarContext all
+		
+		Delete "$SMPROGRAMS\$StartMenuFolder\*.lnk"
+		Delete "$SMPROGRAMS\$StartMenuFolder\*.pif"
+		Delete "$SMPROGRAMS\$StartMenuFolder\*.url"
+
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" "$INSTDIR\LameXP.exe" "" "$INSTDIR\LameXP.exe" 0
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_LICENSE).lnk" "$INSTDIR\License.txt"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_CHANGELOG).lnk" "$INSTDIR\Changelog.html"
