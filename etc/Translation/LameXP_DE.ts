@@ -1624,7 +1624,7 @@
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen für aktuelles Verzeichnis hinzufügen</translation>
     </message>
 </context>
 <context>
