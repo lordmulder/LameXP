@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стоороннє ПЗ, що використовується, в LameXP належить авторам цього ПЗ.</translation>
+        <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стороннє ПЗ, що використовується в LameXP, належить авторам цього ПЗ.</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
@@ -1556,75 +1556,75 @@
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation type="unfinished"></translation>
+        <translation>Перейменовування вихідних файлів</translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейменовувати вихідні файли</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер доріжки з нулями в старших розрядах</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок доріжки</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я виконавця</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва альбому</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished"></translation>
+        <translation>Рік (з вказанням щонайменше чотирьох цифр)</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Коментар</translation>
+        <translation>Коментар</translation>
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished"></translation>
+        <translation>Макроси для перейменовування</translation>
     </message>
     <message>
         <source>You can eneter custom parameters here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Можна вводити користувацькі параметри тут!</translation>
     </message>
     <message>
         <source>Entere the pattern to rename the output files here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вводьте шаблони для перейменовування вихідних файлів тут!</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;reset&quot;&gt;Скидання&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Показати список макросів&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва файлу без розширення</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон перейменовування:</translation>
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Приклад назви файлу:</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished"></translation>
+        <translation>Символи, заборонені в назвах файлів:</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосовувати об’єднувальне стерео-мікшування до вхідних файлів з об&apos;ємним звучанням (багатоканальних)</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати поточну теку до закладок</translation>
     </message>
 </context>
 <context>
@@ -1916,23 +1916,23 @@
     </message>
     <message>
         <source>Unknown File Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідома назва файла</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished">Невідомий заголовок</translation>
+        <translation>Невідомий заголовок</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Невідомий виконавець</translation>
+        <translation>Невідомий виконавець</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомий альбом</translation>
     </message>
     <message>
         <source>Unknown Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомий коментар</translation>
     </message>
 </context>
 <context>
