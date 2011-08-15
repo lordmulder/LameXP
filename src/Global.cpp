@@ -323,7 +323,6 @@ LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionI
 	{
 		HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
 		if(mainThread) TerminateThread(mainThread, ULONG_MAX);
-		
 	}
 	
 	FatalAppExit(0, L"Unhandeled exception error, application will exit!");
@@ -760,6 +759,10 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Check the Windows version
 	switch(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based)
 	{
+	case QSysInfo::WV_2000:
+		qDebug("Running on Windows 2000 (not officially supported!).\n");
+		lamexp_check_compatibility_mode("GetNativeSystemInfo", executableName);
+		break;
 	case QSysInfo::WV_XP:
 		qDebug("Running on Windows XP.\n");
 		lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
@@ -777,7 +780,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 		lamexp_check_compatibility_mode(NULL, executableName);
 		break;
 	default:
-		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
+		qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
 		break;
 	}
 

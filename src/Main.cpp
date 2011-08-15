@@ -254,11 +254,16 @@ int main(int argc, char* argv[])
 	}
 }
 
-//extern "C"
-//{
-//	void __declspec(dllexport) __stdcall Test(HWND hwnd, HINSTANCE hinst, LPSTR lpszCmdLine, int nCmdShow)
-//	{
-//		OutputDebugStringA(lpszCmdLine);
-//		MessageBoxA(0, lpszCmdLine, "LameXP is here!", MB_ICONINFORMATION);
-//	}
-//}
+///////////////////////////////////////////////////////////////////////////////
+// CRT initialization
+///////////////////////////////////////////////////////////////////////////////
+
+extern "C"
+{
+	int WinMainCRTStartup(void);
+
+	int lamexp_crt_startup(void)
+	{
+		return WinMainCRTStartup();
+	}
+}
