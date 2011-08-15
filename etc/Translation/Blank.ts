@@ -2649,18 +2649,18 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="669"/>
+        <location filename="../../src/Global.cpp" line="668"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="756"/>
+        <location filename="../../src/Global.cpp" line="755"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="780"/>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
+        <location filename="../../src/Global.cpp" line="783"/>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

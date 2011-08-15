@@ -2077,8 +2077,8 @@ Ouvrir le dossier récursivement...</translation>
         <translation>L&apos;éxécutable %1 nécessite Qt v%2, mais Qt v%3 trouvé.</translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation>L&apos;éxécutable %1 nécessite Windows XP ou supérieur.</translation>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -2075,8 +2075,8 @@
         <translation type="unfinished">Исполняемому файлу  &apos;%1&apos; требуется версия Qt  v%2, но найдена версия  v%3.</translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished">Исполняемому файлу &apos;%1&apos; требуется как минимум WindowsXP.</translation>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

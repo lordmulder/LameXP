@@ -2067,8 +2067,8 @@
         <translation>El ejecutable &apos;%1&apos;requiere Qt v%2, pero se ha encontrado v%3.</translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation>El ejecutable &apos;%1&apos; requiere Windows XP o superior.</translation>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

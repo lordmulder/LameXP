@@ -2067,8 +2067,8 @@
         <translation type="unfinished">&apos;%1&apos;의 실행은 Qt v%2가 요구됩니다. 하지만 Qt v%3이 발견되었습니다.</translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished">&apos;%1&apos; 실행은 Windows XP 또는 상위 버전이 필요합니다.</translation>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

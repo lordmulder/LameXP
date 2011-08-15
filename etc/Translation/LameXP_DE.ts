@@ -2068,8 +2068,8 @@
         <translation>Programm &apos;%1&apos; benötigt Qt v%2, aber Qt v%3 wurde gefunden.</translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation>Programm &apos;%1&apos; benötigt Windows XP oder neuer.</translation>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

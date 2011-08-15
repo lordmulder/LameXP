@@ -2068,8 +2068,8 @@
         <translation>Додаток &apos;%1&apos; вимагає для роботи Qt v%2, але знайдено Qt v%3.</translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation>Додаток &apos;%1&apos; вимагає для роботи Windows XP або пізніші версії ОС.</translation>
+        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
