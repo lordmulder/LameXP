@@ -133,6 +133,12 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 		return true;
 	}
 
+	emit messageLogged("Process creation has failed :-(");
+	QString errorMsg= process.errorString().trimmed();
+	if(!errorMsg.isEmpty()) emit messageLogged(errorMsg);
+
+	process.kill();
+	process.waitForFinished(-1);
 	return false;
 }
 

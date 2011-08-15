@@ -139,11 +139,11 @@ copy "$(QTDIR)\plugins\imageformats\q????d4.dll" "$(TargetDir)imageformats\"
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <Version>
       </Version>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AssemblyDebug>
       </AssemblyDebug>

@@ -2069,7 +2069,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm &apos;%1&apos; benötigt Windows 2000 oder neuer.</translation>
     </message>
 </context>
 <context>

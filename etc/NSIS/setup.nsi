@@ -139,7 +139,7 @@ VIAddVersionKey "LegalTrademarks" "GNU"
 VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
 VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"
 VIAddVersionKey "ProductVersion" "${LAMEXP_VERSION}, Build #${LAMEXP_BUILD} (${LAMEXP_DATE})"
-VIAddVersionKey "Website" "http://mulder.at.gg/"
+VIAddVersionKey "Website" "${MyWebSite}"
 
 
 ;--------------------------------
@@ -266,7 +266,7 @@ Function .onInit
 		StrCmp $0 0 +3
 		MessageBox MB_ICONSTOP|MB_TOPMOST "Sorry, the installer is already running!"
 		Quit
-	${EndIf}  
+	${EndIf}
 
 	${IfNot} ${IsNT}
 		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does NOT support Windows 9x or Windows ME!"
@@ -283,11 +283,18 @@ Function .onInit
 		Quit
 	${EndIf}
 
+	${If} ${IsWin2000}
+	${AndIf} ${AtMostServicePack} 3
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application recommends Windows 2000 with Service Pack 4!"
+		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 4 for Windows 2000 now?" IDNO +2
+		ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=4127"
+	${EndIf}
+
 	${If} ${IsWinXP}
-	${AndIf} ${AtMostServicePack} 1
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "For this application Windows XP with Service Pack 2 or newer is recommended!"
+	${AndIf} ${AtMostServicePack} 2
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application recommends Windows XP with Service Pack 3!"
 		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
-		ExecShell "open" "http://www.microsoft.com/downloads/en/details.aspx?FamilyID=5b33b5a8-5e76-401f-be08-1e1555d4f3d4"
+		ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=24"
 	${EndIf}
 	
 	InitPluginsDir
