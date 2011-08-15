@@ -52,7 +52,7 @@
 !define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
 
 ;Web-Site
-!define MyWebSite "http://mulder.dummwiedeutsch.de/"
+!define MyWebSite "http://mulder.at.gg/"
 
 
 ;--------------------------------
@@ -273,22 +273,21 @@ Function .onInit
 		Quit
 	${EndIf}
 
-	${If} ${AtMostWin2000}
+	${If} ${AtMostWinNT4}
 		!insertmacro GetCommandlineParameter "Update" "?" $R0
 		${If} $R0 == "?"
-			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Installation aborted!$\nThe minimum required platform is Windows XP (Service Pack 2)."
+			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Installation aborted!$\nThe minimum required platform is Windows 2000."
 		${Else}
-			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Update not possible!$\nThe minimum required platform is Windows XP (Service Pack 2)."
+			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Update not possible!$\nThe minimum required platform is Windows 2000."
 		${EndIf}
 		Quit
 	${EndIf}
 
 	${If} ${IsWinXP}
 	${AndIf} ${AtMostServicePack} 1
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 2 or newer!"
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "For this application Windows XP with Service Pack 2 or newer is recommended!"
 		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
 		ExecShell "open" "http://www.microsoft.com/downloads/en/details.aspx?FamilyID=5b33b5a8-5e76-401f-be08-1e1555d4f3d4"
-		Quit
 	${EndIf}
 	
 	InitPluginsDir
