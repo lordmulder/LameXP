@@ -401,16 +401,16 @@ void AboutDialog::showMoreAbout(void)
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.musepack.net/"
 	);
-	moreAboutText += QString
-	(
-		"</ul></td><td><ul>"
-	);
 	moreAboutText += makeToolText
 	(
 		tr("Monkey's Audio &minus; Lossless Audio Compressor"),
 		"mac.exe", "v?.??",
 		tr("Freely available source code, simple SDK and non-restrictive licensing."),
 		"http://www.monkeysaudio.com/"
+	);
+	moreAboutText += QString
+	(
+		"</ul></td><td><ul>"
 	);
 	moreAboutText += makeToolText
 	(
@@ -439,6 +439,20 @@ void AboutDialog::showMoreAbout(void)
 		"alac.exe", "v?.?.?",
 		tr("Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious."),
 		"http://craz.net/programs/itunes/alac.html"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("wma2wav &minus; Dump WMA files to Wave Audio"),
+		"wma2wav.exe", "????-??-??",
+		tr("Copyright (c) 2011 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved."),
+		"http://forum.doom9.org/showthread.php?t=140273"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("avs2wav &minus; Avisynth to Wave Audio converter"),
+		"avs2wav.exe", "v?.?",
+		tr("By Jory Stone <jcsston@toughguy.net> and LoRd_MuldeR <mulder2@gmx.de>."),
+		"http://forum.doom9.org/showthread.php?t=70882"
 	);
 	moreAboutText += makeToolText
 	(

@@ -211,6 +211,22 @@
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

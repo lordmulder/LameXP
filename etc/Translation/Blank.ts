@@ -66,7 +66,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="186"/>
         <location filename="../../src/Dialog_About.cpp" line="314"/>
-        <location filename="../../src/Dialog_About.cpp" line="487"/>
+        <location filename="../../src/Dialog_About.cpp" line="501"/>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -108,10 +108,10 @@
         <location filename="../../src/Dialog_About.cpp" line="401"/>
         <location filename="../../src/Dialog_About.cpp" line="419"/>
         <location filename="../../src/Dialog_About.cpp" line="433"/>
-        <location filename="../../src/Dialog_About.cpp" line="447"/>
-        <location filename="../../src/Dialog_About.cpp" line="454"/>
         <location filename="../../src/Dialog_About.cpp" line="461"/>
         <location filename="../../src/Dialog_About.cpp" line="468"/>
+        <location filename="../../src/Dialog_About.cpp" line="475"/>
+        <location filename="../../src/Dialog_About.cpp" line="482"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -191,12 +191,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="410"/>
+        <location filename="../../src/Dialog_About.cpp" line="406"/>
         <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="412"/>
+        <location filename="../../src/Dialog_About.cpp" line="408"/>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -232,46 +232,66 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="445"/>
-        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
+        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="447"/>
+        <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="452"/>
-        <source>SoX &amp;minus; Sound eXchange</source>
+        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="454"/>
+        <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="459"/>
-        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
+        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="466"/>
-        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
+        <source>SoX &amp;minus; Sound eXchange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="473"/>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="475"/>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="480"/>
+        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="487"/>
+        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="489"/>
+        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="494"/>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="491"/>
+        <location filename="../../src/Dialog_About.cpp" line="505"/>
         <source>About Third-party Software</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="624"/>
+        <location filename="../../src/Dialog_About.cpp" line="638"/>
         <source>n/a</source>
         <translation type="unfinished"></translation>
     </message>
