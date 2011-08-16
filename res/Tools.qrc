@@ -11,7 +11,8 @@
     <file>tools/flac.exe</file>
     <file>tools/gpgv.exe</file>
     <file>tools/gpgv.gpg</file>
-    <file>tools/lame.exe</file>
+    <file>tools/lame.i386.exe</file>
+    <file>tools/lame.sse2.exe</file>
     <file>tools/mac.exe</file>
     <file>tools/mediainfo.i386.exe</file>
     <file>tools/mediainfo.x64.exe</file>
