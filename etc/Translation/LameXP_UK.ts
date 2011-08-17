@@ -214,19 +214,19 @@
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Всі права належать 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Деякі права захищені.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>За участі Jory Stone &lt;jcsston@toughguy.net&gt; і LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>wma2wav &amp;minus; Декодує файли WMA у Wave аудіо</translation>
     </message>
     <message>
         <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
-        <translation type="unfinished"></translation>
+        <translation>avs2wav &amp;minus; аудіоконвертер у Wave аудіо, що базується на Avisynth</translation>
     </message>
 </context>
 <context>
@@ -2085,7 +2085,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток &apos;%1&apos; вимагає для роботи Windows 2000 або пізніші версії ОС.</translation>
     </message>
 </context>
 <context>
