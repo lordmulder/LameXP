@@ -233,8 +233,11 @@ void InitializationThread::run()
 	//Register all translations
 	initTranslations();
 
-	//Look for Nero encoder
+	//Look for Nero AAC encoder
 	initNeroAac();
+
+	//Look for FHG AAC encoder
+	initFhgAac();
 
 	delay();
 	m_bSuccess = true;
@@ -410,6 +413,105 @@ void InitializationThread::initNeroAac(void)
 	}
 }
 
+void InitializationThread::initFhgAac(void)
+{
+	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
+	
+	QFileInfo fhgFileInfo[4];
+	fhgFileInfo[0] = QFileInfo(QString("%1/fhgaacenc.exe").arg(appPath));
+	fhgFileInfo[1] = QFileInfo(QString("%1/enc_fhgaac.dll").arg(appPath));
+	fhgFileInfo[2] = QFileInfo(QString("%1/nsutil.dll").arg(appPath));
+	fhgFileInfo[3] = QFileInfo(QString("%1/libmp4v2.dll").arg(appPath));
+	
+	bool fhgFilesFound = true;
+	for(int i = 0; i < 4; i++)	{ if(!fhgFileInfo[i].exists()) fhgFilesFound = false; }
+
+	//Lock the FhgAacEnc binaries
+	if(!fhgFilesFound)
+	{
+		qDebug("FhgAacEnc binaries not found -> FhgAacEnc support will be disabled!\n");
+		return;
+	}
+
+	qDebug("Found FhgAacEnc executable:\n%s\n", fhgFileInfo[0].canonicalFilePath().toUtf8().constData());
+	qDebug("Found FhgAacEnc enclibrary:\n%s\n", fhgFileInfo[1].canonicalFilePath().toUtf8().constData());
+
+	LockedFile *fhgBin[4];
+	for(int i = 0; i < 4; i++) fhgBin[i] = NULL;
+
+	try
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			fhgBin[i] = new LockedFile(fhgFileInfo[i].canonicalFilePath());
+		}
+	}
+	catch(...)
+	{
+		for(int i = 0; i < 4; i++) LAMEXP_DELETE(fhgBin[i]);
+		qWarning("Failed to get excluive lock to FhgAacEnc binary -> FhgAacEnc support will be disabled!");
+		return;
+	}
+
+	QProcess process;
+	process.setProcessChannelMode(QProcess::MergedChannels);
+	process.setReadChannel(QProcess::StandardOutput);
+	process.start(fhgFileInfo[0].canonicalFilePath(), QStringList() << "--version");
+
+	if(!process.waitForStarted())
+	{
+		qWarning("FhgAacEnc process failed to create!");
+		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
+		process.kill();
+		process.waitForFinished(-1);
+		for(int i = 0; i < 4; i++) LAMEXP_DELETE(fhgBin[i]);
+		return;
+	}
+
+	QRegExp fhgAacEncSig("fhgaacenc version (\\d+) by tmkk", Qt::CaseInsensitive);
+	unsigned int fhgVersion = 0;
+
+	while(process.state() != QProcess::NotRunning)
+	{
+		process.waitForReadyRead();
+		if(!process.bytesAvailable() && process.state() == QProcess::Running)
+		{
+			qWarning("FhgAacEnc process time out -> killing!");
+			process.kill();
+			process.waitForFinished(-1);
+			for(int i = 0; i < 4; i++) LAMEXP_DELETE(fhgBin[i]);
+			return;
+		}
+		while(process.bytesAvailable() > 0)
+		{
+			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
+			if(fhgAacEncSig.lastIndexIn(line) >= 0)
+			{
+				bool ok = false;
+				unsigned int temp = fhgAacEncSig.cap(1).toUInt(&ok);
+				if(ok) fhgVersion = temp;
+			}
+		}
+	}
+
+	if(!(fhgVersion > 0))
+	{
+		qWarning("FhgAacEnc version couldn't be determined -> FhgAacEnc support will be disabled!");
+		for(int i = 0; i < 4; i++) LAMEXP_DELETE(fhgBin[i]);
+		return;
+	}
+	else if(fhgVersion < 20110819)
+	{
+		qWarning("FhgAacEnc version is too much outdated -> FhgAacEnc support will be disabled!");
+		for(int i = 0; i < 4; i++) LAMEXP_DELETE(fhgBin[i]);
+		return;
+	}
+	
+	for(int i = 0; i < 4; i++)
+	{
+		lamexp_register_tool(fhgFileInfo[i].fileName(), fhgBin[i], fhgVersion);
+	}
+}
 
 //void InitializationThread::initWmaDec(void)
 //{

@@ -154,6 +154,7 @@ private:
 	bool m_OutputFolderViewInitialized;
 
 	const bool m_neroEncoderAvailable;
+	const bool m_fhgEncoderAvailable;
 
 	WorkingBanner *m_banner;
 	QStringList *m_delayedFileList;

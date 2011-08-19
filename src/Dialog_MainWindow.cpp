@@ -86,6 +86,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
 	m_neroEncoderAvailable(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")),
+	m_fhgEncoderAvailable(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll") && lamexp_check_tool("nsutil.dll") && lamexp_check_tool("libmp4v2.dll")),
 	m_accepted(false),
 	m_firstTimeShown(true),
 	m_OutputFolderViewInitialized(false)
@@ -200,10 +201,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_modeButtonGroup->addButton(radioButtonModeQuality, SettingsModel::VBRMode);
 	m_modeButtonGroup->addButton(radioButtonModeAverageBitrate, SettingsModel::ABRMode);
 	m_modeButtonGroup->addButton(radioButtonConstBitrate, SettingsModel::CBRMode);
-	radioButtonEncoderAAC->setEnabled(m_neroEncoderAvailable);
+	radioButtonEncoderAAC->setEnabled(m_neroEncoderAvailable || m_fhgEncoderAvailable);
 	radioButtonEncoderMP3->setChecked(m_settings->compressionEncoder() == SettingsModel::MP3Encoder);
 	radioButtonEncoderVorbis->setChecked(m_settings->compressionEncoder() == SettingsModel::VorbisEncoder);
-	radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && m_neroEncoderAvailable);
+	radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_neroEncoderAvailable || m_fhgEncoderAvailable));
 	radioButtonEncoderAC3->setChecked(m_settings->compressionEncoder() == SettingsModel::AC3Encoder);
 	radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
 	radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
@@ -988,7 +989,7 @@ void MainWindow::windowShown(void)
 	}
 	else
 	{
-		if(m_settings->neroAacNotificationsEnabled())
+		if(m_settings->neroAacNotificationsEnabled() && (!m_fhgEncoderAvailable))
 		{
 			QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 			if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
@@ -1006,32 +1007,6 @@ void MainWindow::windowShown(void)
 			}
 		}
 	}
-	
-	//Check for WMA support
-	//if(m_settings->wmaDecoderNotificationsEnabled())
-	//{
-	//	if(!lamexp_check_tool("wmawav.exe"))
-	//	{
-	//		QString messageText;
-	//		messageText += QString("<nobr>%1</nobr><br>").arg(tr("LameXP has detected that the WMA File Decoder component is not currently installed on your system.").replace("-", "&minus;"));
-	//		messageText += QString("<nobr>%1</nobr><br><br>").arg(tr("You won't be able to process WMA files as input unless the WMA File Decoder component is installed!").replace("-", "&minus;"));
-	//		messageText += QString("<nobr>%1</nobr>").arg(tr("Do you want to download and install the WMA File Decoder component now?").replace("-", "&minus;"));
-	//		int result = QMessageBox::information(this, tr("WMA Decoder Missing"), messageText, tr("Download && Install"), tr("Don't Show Again"), tr("Postpone"));
-	//		if(result == 0)
-	//		{
-	//			if(installWMADecoder())
-	//			{
-	//				QApplication::quit();
-	//				return;
-	//			}
-	//		}
-	//		else if(result == 1)
-	//		{
-	//			m_settings->wmaDecoderNotificationsEnabled(false);
-	//			actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
-	//		}
-	//	}
-	//}
 
 	//Add files from the command-line
 	for(int i = 0; i < arguments.count() - 1; i++)

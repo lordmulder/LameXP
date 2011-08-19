@@ -21,30 +21,27 @@
 
 #pragma once
 
-#include "Global.h"
-#include <QThread>
+#include "Encoder_Abstract.h"
 
-////////////////////////////////////////////////////////////
-// Splash Thread
-////////////////////////////////////////////////////////////
+#include <QObject>
 
-class InitializationThread: public QThread
+class FHGAACEncoder : public AbstractEncoder
 {
 	Q_OBJECT
 
 public:
-	InitializationThread(const lamexp_cpu_t *cpuFeatures);
-	void run();
-	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
-	bool getSlowIndicator(void) { return m_slowIndicator; }
+	FHGAACEncoder(void);
+	~FHGAACEncoder(void);
+
+	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
+	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
+	virtual QString extension(void);
+	
+	//Advanced options
+	virtual void setProfile(int profile);
 
 private:
-	void delay(void);
-	void initTranslations(void);
-	void initNeroAac(void);
-	void initFhgAac(void);
-
-	bool m_bSuccess;
-	lamexp_cpu_t m_cpuFeatures;
-	bool m_slowIndicator;
+	const QString m_binary_enc;
+	const QString m_binary_dll;
+	int m_configProfile;
 };
