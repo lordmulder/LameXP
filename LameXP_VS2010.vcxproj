@@ -203,7 +203,8 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <FloatingPointModel>Fast</FloatingPointModel>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OpenMPSupport>false</OpenMPSupport>
@@ -216,10 +217,9 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\qt4_static\lib;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <AssemblyDebug>
       </AssemblyDebug>
-      <MapExports>true</MapExports>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -228,10 +228,11 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <TargetMachine>MachineX86</TargetMachine>
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
       <EntryPointSymbol>lamexp_crt_startup</EntryPointSymbol>
-      <GenerateMapFile>true</GenerateMapFile>
+      <GenerateMapFile>false</GenerateMapFile>
       <MapFileName>
       </MapFileName>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <MapExports>false</MapExports>
     </Link>
     <PostBuildEvent>
       <Command>

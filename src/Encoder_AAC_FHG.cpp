@@ -30,6 +30,8 @@
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
+inline int round(double x) { return static_cast<int>(floor((x < 0.0) ? x - 0.5 : x + 0.5)); }
+
 FHGAACEncoder::FHGAACEncoder(void)
 :
 	m_binary_enc(lamexp_lookup_tool("fhgaacenc.exe")),
@@ -51,35 +53,37 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 {
 	QProcess process;
 	QStringList args;
+	
+	int maxBitrate = 500;
+
+	if(m_configRCMode == SettingsModel::CBRMode)
+	{
+		switch(m_configProfile)
+		{
+		case 1:
+			args << "--profile" << "lc"; //Forces use of LC AAC profile
+			break;
+		case 2:
+			maxBitrate = 128;
+			args << "--profile" << "he"; //Forces use of HE AAC profile
+			break;
+		case 3:
+			maxBitrate = 56;
+			args << "--profile" << "hev2"; //Forces use of HEv2 AAC profile
+			break;
+		}
+	}
 
 	switch(m_configRCMode)
 	{
-	case SettingsModel::VBRMode:
-		args << "--vbr" << QString::number(max(1, min(5, m_configBitrate)));
-		break;
 	case SettingsModel::CBRMode:
-		args << "--cbr" << QString::number(max(32, min(500, (m_configBitrate * 8))));
+		args << "--cbr" << QString::number(max(32, min(maxBitrate, (m_configBitrate * 8))));
 		break;
-	case SettingsModel::ABRMode:
-		qWarning("FhgAacEnc does not support ABR mode -> failure!");
-		emit messageLogged("\nTHIS ENCODER DOES NOT SUPPORT AN \"ABR\" MODE !!!");
-		return false;
+	case SettingsModel::VBRMode:
+		args << "--vbr" << QString::number(round(static_cast<double>(m_configBitrate) / 5.0) + 1);
 		break;
 	default:
 		throw "Bad rate-control mode!";
-		break;
-	}
-	
-	switch(m_configProfile)
-	{
-	case 1:
-		args << "--profile" << "lc"; //Forces use of LC AAC profile
-		break;
-	case 2:
-		args << "--profile" << "he"; //Forces use of HE AAC profile
-		break;
-	case 3:
-		args << "--profile" << "hev2"; //Forces use of HEv2 AAC profile
 		break;
 	}
 

@@ -2341,6 +2341,13 @@ void MainWindow::updateEncoder(int id)
 		radioButtonConstBitrate->setEnabled(false);
 		sliderBitrate->setEnabled(false);
 		break;
+	case SettingsModel::AACEncoder:
+		radioButtonModeQuality->setEnabled(true);
+		radioButtonModeAverageBitrate->setEnabled(!m_fhgEncoderAvailable);
+		if(m_fhgEncoderAvailable && radioButtonModeAverageBitrate->isChecked()) radioButtonConstBitrate->setChecked(true);
+		radioButtonConstBitrate->setEnabled(true);
+		sliderBitrate->setEnabled(true);
+		break;
 	default:
 		radioButtonModeQuality->setEnabled(true);
 		radioButtonModeAverageBitrate->setEnabled(true);

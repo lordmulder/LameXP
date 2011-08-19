@@ -635,10 +635,6 @@
         <translation>Ogg Vorbis</translation>
     </message>
     <message>
-        <source>Nero AAC</source>
-        <translation>Nero AAC</translation>
-    </message>
-    <message>
         <source>Wave (PCM)</source>
         <translation>Wave (PCM)</translation>
     </message>
@@ -1649,6 +1645,10 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

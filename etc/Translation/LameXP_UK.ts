@@ -631,10 +631,6 @@
         <translation>Ogg Vorbis</translation>
     </message>
     <message>
-        <source>Nero AAC</source>
-        <translation>Nero AAC</translation>
-    </message>
-    <message>
         <source>Wave (PCM)</source>
         <translation>Wave (PCM)</translation>
     </message>
@@ -1641,6 +1637,10 @@
     <message>
         <source>Bookmark Current Output Folder</source>
         <translation>Додати поточну теку до закладок</translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

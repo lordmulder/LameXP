@@ -766,7 +766,7 @@
                  <item row="0" column="3">
                   <widget class="QRadioButton" name="radioButtonEncoderAAC">
                    <property name="text">
-                    <string>Nero AAC</string>
+                    <string>MPEG-4 AAC</string>
                    </property>
                   </widget>
                  </item>

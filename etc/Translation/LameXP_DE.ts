@@ -631,10 +631,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>Nero AAC</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Wave (PCM)</source>
         <translation></translation>
     </message>
@@ -1641,6 +1637,10 @@
     <message>
         <source>Bookmark Current Output Folder</source>
         <translation>Lesezeichen für aktuelles Verzeichnis hinzufügen</translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC</source>
+        <translation></translation>
     </message>
 </context>
 <context>
