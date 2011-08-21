@@ -89,6 +89,8 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 
 	args << "--dll" << m_binary_dll;
 
+	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
+
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 

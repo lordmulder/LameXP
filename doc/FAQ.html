@@ -71,21 +71,20 @@ any ACM Codecs or DirectShow/DMO filters! And it will NOT install anything of th
 
 <a name="be0a8459"></a><b>What platforms does LameXP run on?</b><br>
 <br>
-LameXP is currently being developed and tested on the following platforms:<br><ul>
-<li>Microsoft Windows XP, Service Pack 3
-<li>Microsoft Windows 7, 32-Bit and 64-Bit editions</ul>
+LameXP is currently being developed on the following platforms:<br><ul>
+<li>Microsoft Windows 7 with Service Pack 1 (32-Bit and 64-Bit editions)
+<li>Microsoft Windows XP with Service Pack 3</ul>
 <br>
-The following platforms should work as well, but aren't tested extensively:<br><ul>
-<li>Microsoft Windows XP, Service Pack 2
-<li>Microsoft Windows Vista, 32-Bit and 64-Bit editions
+The following platforms should work, but aren't tested extensively:<br><ul>
+<li>Microsoft Windows 7 without Service Pack (32-Bit and 64-Bit editions)
+<li>Microsoft Windows Vista (32-Bit and 64-Bit editions)
+<li>Microsoft Windows XP with Service Pack 2 or even older
+<li>Microsoft Windows 2000
 <li>Microsoft Windows Server 2008
 <li>Microsoft Windows Server 2008 R2
 <li>GNU/Linux using Wine (native Linux version planned)</ul>
 <br>
-The following platforms are NOT supported any longer:<br><ul>
-<li>Microsoft Windows XP, Service Pack 1
-<li>Microsoft Windows XP, RTM (i.e. without Service Pack)
-<li>Microsoft Windows 2000
+The following "legacy" platforms are NOT supported any longer:<br><ul>
 <li>Microsoft Windows NT 4.0
 <li>Microsoft Windows Millennium Edition
 <li>Microsoft Windows 98
@@ -287,7 +286,25 @@ After you have downloaded the Nero AAC Encoder as a ZIP file, you must "install"
 LameXP can use them. Simply unzip the files 'neroAacEnc.exe', 'neroAacDec.exe' as well as 'neroAacTag.exe' to<br>
 the same directory where your LameXP executable ('LameXP.exe') is located. For unzipping the ZIP file you can<br>
 use any suitable archiver, such as <a href="http://rarlabs.com/download.htm" target="_blank">WinRAR</a> or <a href="http://sevenzip.sourceforge.net/" target="_blank">7-Zip</a>. Once the required Nero encoder binaries are located in<br>
-the LameXP directory, the AAC encoding option should be "enabled" on the next startup of LameXP.<br><br>
+the LameXP directory, the AAC encoding option should be "enabled" on the next startup of LameXP.<br>
+<br>
+Optionally LameXP also supports the FHG AAC Encoder now. Just like the Nero encoder, the FHG encoder can NOT<br>
+be redistributed along with LameXP. However the FHG AAC Encoder is included with Winamp v5.62, which is<br>
+available as a free download (you don't need to buy the "Pro" version!) from the official Winamp web-site at:<br><ul>
+<li><a href="http://www.winamp.com/media-player/" target="_blank">http://www.winamp.com/media-player/</a>
+<li><a href="http://download.nullsoft.com/winamp/client/winamp5621_full_emusic-7plus_de-de.exe" target="_blank">http://download.nullsoft.com/winamp/client/winamp5621_full_emusic-7plus_de-de.exe</a></ul>
+<br>
+In order to enable the FHG AAC Encoder support you will also need the 'FHG AAC Encoder Add-in' for LameXP:<br><ul>
+<li><a href="http://www.megaupload.com/?d=GLBGP0K8" target="_blank">http://www.megaupload.com/?d=GLBGP0K8</a>
+<li><a href="http://www.zshare.net/download/9394232900ea4ef9/" target="_blank">http://www.zshare.net/download/9394232900ea4ef9/</a>
+<li><a href="http://www.mediafire.com/?sk583zvc544j2nk" target="_blank">http://www.mediafire.com/?sk583zvc544j2nk</a>
+<li><a href="http://www.gamefront.com/files/20700206/LameXP.fhgaacenc-addin.2011-08-21.rar" target="_blank">http://www.gamefront.com/files/20700206/LameXP.fhgaacenc-addin.2011-08-21.rar</a>
+<li><a href="http://www.easy-share.com/1917621524/LameXP.fhgaacenc-addin.2011-08-21.rar" target="_blank">http://www.easy-share.com/1917621524/LameXP.fhgaacenc-addin.2011-08-21.rar</a>
+<li><a href="http://www.rapidshare.com/files/2188219435/LameXP.fhgaacenc-addin.2011-08-21.rar" target="_blank">http://www.rapidshare.com/files/2188219435/LameXP.fhgaacenc-addin.2011-08-21.rar</a>
+<li><a href="http://uploaded.to/file/bftd4stj" target="_blank">http://uploaded.to/file/bftd4stj</a></ul>
+<br>
+Please follow the install instructions that are included with the 'FHG AAC Encoder Add-in' download package!<br>
+Note that you do NOT need to install the Add-in, if you only want to use the Nero AAC Encoder.<br><br>
 
 <br><br>
 
@@ -535,19 +552,15 @@ switching to the 'Compatibility' tab and un-checking the 'Run this program in co
 
 <br><br>
 
-<a name="328b0a18"></a><b>Why do I get the error 'Executable requires Windows XP or later' on startup?</b><br>
-<a name="3ffe490e"></a><b>Why do I get the error 'The procedure entry point De/EncodePointer could not be located' on startup?</b><br>
+<a name="328b0a18"></a><b>Why do I get the error 'Executable requires Windows 2000 or later' on startup?</b><br>
+<a name="3ffe490e"></a><b>Why do I get the error 'The procedure entry point &lt;Something&gt; could not be located' on startup?</b><br>
 <a name="01922741"></a><b>Why do I get the error 'LameXP.exe is not a valid Win32 application' on startup?</b><br>
 <br>
 You are trying to run LameXP on a platform that is NOT supported, such as Windows 95, Windows 98, Windows<br>
-Millennium Edition, Windows NT 4.0 or Windows 2000. There is nothing you can do about that, except for<br>
-updating to a less antiquated OS. Running an outdated and unsupported OS is a severe security risk anyway!<br>
+Millennium Edition, Windows NT 4.0. There is nothing you can do about that, except for updating to a less<br>
+antiquated OS. Running an outdated and unsupported OS is a severe security risk anyway!<br>
 <br>
-LameXP won't run on the 'RTM' release of Windows XP (no service packs) either. Service Pack 2 or newer is<br>
-required! If needed, you can download Service Pack 3 for Windows XP as <a href="http://www.microsoft.com/downloads/en/details.aspx?FamilyID=5b33b5a8-5e76-401f-be08-1e1555d4f3d4" target="_blank">network installation</a> or as <a href="http://www.microsoft.com/downloads/en/details.aspx?FamilyID=2FCDE6CE-B5FB-4488-8C50-FE22559D164E" target="_blank">ISO image</a>.<br>
-Finally this error can also occur, if your system has been configured to run LameXP in <a href="#e7c9ae2b">compatibility mode</a>.<br>
-<br>
-Remark: Executables compiled with Microsoft Visual Studio 2010 won't run on Windows 2000 or older (<a href="http://msdn.microsoft.com/en-us/library/ws0swas0(v=VS.100).aspx" target="_blank">details</a>).<br><br>
+Note: This error can also occur, if your system has been configured to run LameXP in <a href="#e7c9ae2b">compatibility mode</a>.<br><br>
 
 <br><br>
 
@@ -557,10 +570,8 @@ This error message from the Windows operating system is somewhat misleading. It 
 a second error message and it means that Windows was unable to load/execute the program file. There are<br>
 various reasons why this error might occur, but usually it indicates that you are trying to run LameXP or the<br>
 LameXP setup/update program on a platform that is NOT supported, such as Windows 95, Windows 98, Windows<br>
-Millennium Edition, Windows NT 4.0 or Windows 2000. There is nothing you can do about that, except for<br>
-updating to a less antiquated OS. Running an outdated and unsupported OS is a severe security risk anyway!<br>
-<br>
-Remark: Executables compiled with Microsoft Visual Studio 2010 won't run on Windows 2000 or older (<a href="http://msdn.microsoft.com/en-us/library/ws0swas0(v=VS.100).aspx" target="_blank">details</a>).<br><br>
+Millennium Edition, Windows NT 4.0. There is nothing you can do about that, except for updating to a less<br>
+antiquated OS. Running an outdated and unsupported OS is a severe security risk anyway!<br><br>
 
 <br><br>
 
@@ -602,6 +613,7 @@ The preferred place to report bugs or request new features is the LameXP thread 
 <li><a href="http://forum.gleitz.info/showthread.php?t=37956" target="_blank">http://forum.gleitz.info/showthread.php?t=37956</a> (German)</ul>
 <br>
 Please do NOT send me E-Mail unless you really have to! I receive a LOT of E-Mail and your mail can get lost!<br><br>
+
 <br><br>
 
 <a name="e5694e3e"></a><b>What programming language is LameXP written in?</b><br>

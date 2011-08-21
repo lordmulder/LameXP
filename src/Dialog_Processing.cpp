@@ -596,22 +596,23 @@ void ProcessingDialog::startNextJob(void)
 		break;
 	case SettingsModel::AACEncoder:
 		{
-			if(lamexp_lookup_tool("fhgaacenc.exe").isEmpty() || lamexp_lookup_tool("enc_fhgaac.dll").isEmpty())
+			if(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll"))
+			{
+				FHGAACEncoder *aacEncoder = new FHGAACEncoder();
+				aacEncoder->setBitrate(m_settings->compressionBitrate());
+				aacEncoder->setRCMode(m_settings->compressionRCMode());
+				aacEncoder->setProfile(m_settings->aacEncProfile());
+				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
+				encoder = aacEncoder;
+			}
+			else
 			{
 				AACEncoder *aacEncoder = new AACEncoder();
 				aacEncoder->setBitrate(m_settings->compressionBitrate());
 				aacEncoder->setRCMode(m_settings->compressionRCMode());
 				aacEncoder->setEnable2Pass(m_settings->neroAACEnable2Pass());
-				aacEncoder->setProfile(m_settings->neroAACProfile());
-				aacEncoder->setCustomParams(m_settings->customParametersNeroAAC());
-				encoder = aacEncoder;
-			}
-			else
-			{
-				FHGAACEncoder *aacEncoder = new FHGAACEncoder();
-				aacEncoder->setBitrate(m_settings->compressionBitrate());
-				aacEncoder->setRCMode(m_settings->compressionRCMode());
-				aacEncoder->setProfile(m_settings->neroAACProfile());
+				aacEncoder->setProfile(m_settings->aacEncProfile());
+				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
 				encoder = aacEncoder;
 			}
 		}

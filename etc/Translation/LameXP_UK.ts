@@ -759,10 +759,6 @@
         <translation>48.000</translation>
     </message>
     <message>
-        <source>Nero AAC Options</source>
-        <translation>Опції Nero AAC</translation>
-    </message>
-    <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
         <translation>Задіяти обробку у 2 етапи (ABR Mode)</translation>
     </message>
@@ -1283,10 +1279,6 @@
         <translation>OggEnc2:</translation>
     </message>
     <message>
-        <source>Nero AAC:</source>
-        <translation>Nero AAC:</translation>
-    </message>
-    <message>
         <source>FLAC:</source>
         <translation>FLAC:</translation>
     </message>
@@ -1640,6 +1632,14 @@
     </message>
     <message>
         <source>MPEG-4 AAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC Encoder-Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

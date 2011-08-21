@@ -758,10 +758,6 @@
         <translation type="unfinished">48.000</translation>
     </message>
     <message>
-        <source>Nero AAC Options</source>
-        <translation type="unfinished">Nero AAC 옵션</translation>
-    </message>
-    <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
         <translation type="unfinished">2-패스 처리 (ABR 모드) 활성화</translation>
     </message>
@@ -816,10 +812,6 @@
     <message>
         <source>OggEnc2:</source>
         <translation type="unfinished">OggEnc2:</translation>
-    </message>
-    <message>
-        <source>Nero AAC:</source>
-        <translation type="unfinished">Nero AAC:</translation>
     </message>
     <message>
         <source>FLAC:</source>
@@ -1639,6 +1631,14 @@
     </message>
     <message>
         <source>MPEG-4 AAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC Encoder-Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

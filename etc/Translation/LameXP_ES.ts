@@ -1194,10 +1194,6 @@
         <translation>Frecuencia de muestreo (Hz):</translation>
     </message>
     <message>
-        <source>Nero AAC Options</source>
-        <translation>Opciones de Nero AAC</translation>
-    </message>
-    <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
         <translation>Procesamiento en 2-Pasos (Modo ABR)</translation>
     </message>
@@ -1280,10 +1276,6 @@
     <message>
         <source>OggEnc2:</source>
         <translation>QggEnc2:</translation>
-    </message>
-    <message>
-        <source>Nero AAC:</source>
-        <translation>Nero AAC:</translation>
     </message>
     <message>
         <source>FLAC:</source>
@@ -1639,6 +1631,14 @@
     </message>
     <message>
         <source>MPEG-4 AAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC Encoder-Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

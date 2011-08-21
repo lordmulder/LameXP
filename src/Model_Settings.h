@@ -105,7 +105,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate);
 	LAMEXP_MAKE_OPTION_I(samplingRate);
 	LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass);
-	LAMEXP_MAKE_OPTION_I(neroAACProfile);
+	LAMEXP_MAKE_OPTION_I(aacEncProfile);
 	LAMEXP_MAKE_OPTION_I(aftenAudioCodingMode);
 	LAMEXP_MAKE_OPTION_I(aftenDynamicRangeCompression);
 	LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation);
@@ -116,7 +116,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(toneAdjustTreble);
 	LAMEXP_MAKE_OPTION_S(customParametersLAME);
 	LAMEXP_MAKE_OPTION_S(customParametersOggEnc);
-	LAMEXP_MAKE_OPTION_S(customParametersNeroAAC);
+	LAMEXP_MAKE_OPTION_S(customParametersAacEnc);
 	LAMEXP_MAKE_OPTION_S(customParametersAften);
 	LAMEXP_MAKE_OPTION_S(customParametersFLAC);
 	LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled);

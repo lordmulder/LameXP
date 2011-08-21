@@ -433,8 +433,8 @@ void InitializationThread::initFhgAac(void)
 		return;
 	}
 
-	qDebug("Found FhgAacEnc executable:\n%s\n", fhgFileInfo[0].canonicalFilePath().toUtf8().constData());
-	qDebug("Found FhgAacEnc enclibrary:\n%s\n", fhgFileInfo[1].canonicalFilePath().toUtf8().constData());
+	qDebug("Found FhgAacEnc cli_exe:\n%s\n", fhgFileInfo[0].canonicalFilePath().toUtf8().constData());
+	qDebug("Found FhgAacEnc enc_dll:\n%s\n", fhgFileInfo[1].canonicalFilePath().toUtf8().constData());
 
 	LockedFile *fhgBin[4];
 	for(int i = 0; i < 4; i++) fhgBin[i] = NULL;
@@ -500,7 +500,7 @@ void InitializationThread::initFhgAac(void)
 		for(int i = 0; i < 4; i++) LAMEXP_DELETE(fhgBin[i]);
 		return;
 	}
-	else if(fhgVersion < 20110819)
+	else if(fhgVersion < lamexp_toolver_fhgaacenc())
 	{
 		qWarning("FhgAacEnc version is too much outdated -> FhgAacEnc support will be disabled!");
 		for(int i = 0; i < 4; i++) LAMEXP_DELETE(fhgBin[i]);

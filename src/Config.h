@@ -29,14 +29,15 @@
 #define VER_LAMEXP_MINOR_HI					0
 #define VER_LAMEXP_MINOR_LO					3
 #define VER_LAMEXP_TYPE						Alpha
-#define VER_LAMEXP_PATCH					13
-#define VER_LAMEXP_BUILD					654
+#define VER_LAMEXP_PATCH					14
+#define VER_LAMEXP_BUILD					656
 
 ///////////////////////////////////////////////////////////////////////////////
 // Tools versions
 ///////////////////////////////////////////////////////////////////////////////
 
 #define VER_LAMEXP_TOOL_NEROAAC				1540
+#define VER_LAMEXP_TOOL_FHGAACENC			20110821
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper macros (aka: having fun with the C pre-processor)

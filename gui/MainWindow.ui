@@ -1099,8 +1099,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
-               <height>1423</height>
+               <width>604</width>
+               <height>1426</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -1616,7 +1616,7 @@
                    </font>
                   </property>
                   <property name="title">
-                   <string>Nero AAC Options</string>
+                   <string>AAC Encoder-Options</string>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_25">
                    <item row="3" column="1">
@@ -1668,7 +1668,7 @@
                       </widget>
                      </item>
                      <item row="1" column="4">
-                      <widget class="QComboBox" name="comboBoxNeroAACProfile">
+                      <widget class="QComboBox" name="comboBoxAACProfile">
                        <property name="sizeAdjustPolicy">
                         <enum>QComboBox::AdjustToContents</enum>
                        </property>
@@ -2174,7 +2174,7 @@
                      <item row="3" column="1">
                       <widget class="QLabel" name="label_11">
                        <property name="text">
-                        <string>Nero AAC:</string>
+                        <string>MPEG-4 AAC:</string>
                        </property>
                       </widget>
                      </item>

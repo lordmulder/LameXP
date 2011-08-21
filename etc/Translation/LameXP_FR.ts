@@ -1203,10 +1203,6 @@ Sélection automatique (par défaut)</translation>
         <translation>Taux d&apos;échantillonnage (Hz) :</translation>
     </message>
     <message>
-        <source>Nero AAC Options</source>
-        <translation>Option Nero AAC</translation>
-    </message>
-    <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
         <translation>Permettre le traitement en 2-Pass (Mode ABR)</translation>
     </message>
@@ -1289,10 +1285,6 @@ Sélection automatique (par défaut)</translation>
     <message>
         <source>OggEnc2:</source>
         <translation>OggEnc2 :</translation>
-    </message>
-    <message>
-        <source>Nero AAC:</source>
-        <translation>Nero AAC :</translation>
     </message>
     <message>
         <source>FLAC:</source>
@@ -1649,6 +1641,14 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>MPEG-4 AAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC Encoder-Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

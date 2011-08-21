@@ -1195,10 +1195,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nero AAC Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1280,10 +1276,6 @@
     </message>
     <message>
         <source>OggEnc2:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nero AAC:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1640,6 +1632,14 @@
     </message>
     <message>
         <source>MPEG-4 AAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC Encoder-Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MPEG-4 AAC:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
