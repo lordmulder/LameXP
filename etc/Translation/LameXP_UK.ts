@@ -1632,15 +1632,15 @@
     </message>
     <message>
         <source>MPEG-4 AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>MPEG-4 AAC</translation>
     </message>
     <message>
         <source>AAC Encoder-Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування кодера AAC</translation>
     </message>
     <message>
         <source>MPEG-4 AAC:</source>
-        <translation type="unfinished"></translation>
+        <translation>MPEG-4 AAC:</translation>
     </message>
 </context>
 <context>
