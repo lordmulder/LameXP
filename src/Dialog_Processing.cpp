@@ -131,6 +131,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	view_log->verticalHeader()->hide();
 	view_log->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	view_log->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
+	view_log->viewport()->installEventFilter(this);
 	connect(m_progressModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
 	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
 	connect(view_log, SIGNAL(activated(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
@@ -262,6 +263,10 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 			QUrl url(lamexp_website_url());
 			QDesktopServices::openUrl(url);
 		}
+	}
+	else if(obj == view_log->viewport())
+	{
+		view_log->resizeColumnToContents(1);
 	}
 
 	return false;

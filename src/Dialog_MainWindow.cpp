@@ -112,6 +112,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	sourceFileView->setContextMenuPolicy(Qt::CustomContextMenu);
+	sourceFileView->viewport()->installEventFilter(this);
 	m_dropNoteLabel = new QLabel(sourceFileView);
 	m_dropNoteLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	SET_FONT_BOLD(m_dropNoteLabel, true);
@@ -861,6 +862,11 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 			break;
 		}
 	}
+	else if(obj == sourceFileView->viewport())
+	{
+		sourceFileView ->resizeColumnToContents(0);
+	}
+
 	return false;
 }
 
@@ -1691,7 +1697,7 @@ void MainWindow::addFilesButtonClicked(void)
 
 	TEMP_HIDE_DROPBOX
 	(
-		if(lamexp_themes_enabled())
+		if(lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 		{
 			QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
 			QStringList selectedFiles = QFileDialog::getOpenFileNames(this, tr("Add file(s)"), QString(), fileTypeFilters.join(";;"));
@@ -1727,7 +1733,7 @@ void MainWindow::openFolderActionActivated(void)
 	{
 		TEMP_HIDE_DROPBOX
 		(
-			if(lamexp_themes_enabled())
+			if(lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 			{
 				selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add Folder"), QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
 			}
