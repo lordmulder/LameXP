@@ -76,6 +76,7 @@ LAMEXP_MAKE_ID(outputDir, "OutputDirectory/SelectedPath");
 LAMEXP_MAKE_ID(outputToSourceDir, "OutputDirectory/OutputToSourceFolder");
 LAMEXP_MAKE_ID(prependRelativeSourcePath, "OutputDirectory/PrependRelativeSourcePath");
 LAMEXP_MAKE_ID(favoriteOutputFolders, "OutputDirectory/Favorites");
+LAMEXP_MAKE_ID(mostRecentInputPath, "InputDirectory/MostRecentPath");
 LAMEXP_MAKE_ID(writeMetaTags, "Flags/WriteMetaTags");
 LAMEXP_MAKE_ID(createPlaylist, "Flags/AutoCreatePlaylist");
 LAMEXP_MAKE_ID(autoUpdateLastCheck, "AutoUpdate/LastCheck");
@@ -213,7 +214,14 @@ void SettingsModel::validate(void)
 	
 	if(this->outputDir().isEmpty() || !QFileInfo(this->outputDir()).isDir())
 	{
-		this->outputDir(QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
+		QString musicLocation = QDesktopServices::storageLocation(QDesktopServices::MusicLocation);
+		this->outputDir(musicLocation.isEmpty() ? QDesktopServices::storageLocation(QDesktopServices::HomeLocation) : musicLocation);
+	}
+
+	if(this->mostRecentInputPath().isEmpty() || !QFileInfo(this->mostRecentInputPath()).isDir())
+	{
+		QString musicLocation = QDesktopServices::storageLocation(QDesktopServices::MusicLocation);
+		this->outputDir(musicLocation.isEmpty() ? QDesktopServices::storageLocation(QDesktopServices::HomeLocation) : musicLocation);
 	}
 
 	if(!lamexp_query_translations().contains(this->currentLanguage(), Qt::CaseInsensitive))
@@ -268,7 +276,7 @@ LAMEXP_MAKE_OPTION_I(interfaceStyle, 0)
 LAMEXP_MAKE_OPTION_I(compressionEncoder, 0)
 LAMEXP_MAKE_OPTION_I(compressionRCMode, 0)
 LAMEXP_MAKE_OPTION_I(compressionBitrate, 7)
-LAMEXP_MAKE_OPTION_S(outputDir, QString())
+LAMEXP_MAKE_OPTION_S(outputDir, QDesktopServices::storageLocation(QDesktopServices::MusicLocation))
 LAMEXP_MAKE_OPTION_B(outputToSourceDir, false)
 LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath, false)
 LAMEXP_MAKE_OPTION_S(favoriteOutputFolders, QString());
@@ -312,3 +320,4 @@ LAMEXP_MAKE_OPTION_U(maximumInstances, 0);
 LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation));
 LAMEXP_MAKE_OPTION_B(customTempPathEnabled, false);
 LAMEXP_MAKE_OPTION_B(slowStartup, false);
+LAMEXP_MAKE_OPTION_S(mostRecentInputPath, QDesktopServices::storageLocation(QDesktopServices::MusicLocation));

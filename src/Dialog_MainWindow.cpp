@@ -73,7 +73,8 @@
 #define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, (COLOR)); _palette.setColor(QPalette::Text, (COLOR)); WIDGET->setPalette(_palette); }
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
-#define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); CMD; if(__dropBoxVisible) m_dropBox->show(); }
+#define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); {CMD}; if(__dropBoxVisible) m_dropBox->show(); }
+#define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -1516,9 +1517,27 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 	
 	TEMP_HIDE_DROPBOX
 	(
-		QString selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), QString(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
+		QString selectedCueFile;
+
+		if(USE_NATIVE_FILE_DIALOG)
+		{
+			selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), m_settings->mostRecentInputPath(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
+		}
+		else
+		{
+			QFileDialog dialog(this, tr("Open Cue Sheet"));
+			dialog.setFileMode(QFileDialog::ExistingFile);
+			dialog.setNameFilter(QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
+			dialog.setDirectory(m_settings->mostRecentInputPath());
+			if(dialog.exec())
+			{
+				selectedCueFile = dialog.selectedFiles().first();
+			}
+		}
+
 		if(!selectedCueFile.isEmpty())
 		{
+			m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
 			CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile);
 			cueImporter->exec();
 			LAMEXP_DELETE(cueImporter);
@@ -1695,12 +1714,13 @@ void MainWindow::addFilesButtonClicked(void)
 
 	TEMP_HIDE_DROPBOX
 	(
-		if(lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
+		if(USE_NATIVE_FILE_DIALOG)
 		{
 			QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
-			QStringList selectedFiles = QFileDialog::getOpenFileNames(this, tr("Add file(s)"), QString(), fileTypeFilters.join(";;"));
+			QStringList selectedFiles = QFileDialog::getOpenFileNames(this, tr("Add file(s)"), m_settings->mostRecentInputPath(), fileTypeFilters.join(";;"));
 			if(!selectedFiles.isEmpty())
 			{
+				m_settings->mostRecentInputPath(QFileInfo(selectedFiles.first()).canonicalPath());
 				addFiles(selectedFiles);
 			}
 		}
@@ -1710,10 +1730,15 @@ void MainWindow::addFilesButtonClicked(void)
 			QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
 			dialog.setFileMode(QFileDialog::ExistingFiles);
 			dialog.setNameFilter(fileTypeFilters.join(";;"));
+			dialog.setDirectory(m_settings->mostRecentInputPath());
 			if(dialog.exec())
 			{
 				QStringList selectedFiles = dialog.selectedFiles();
-				addFiles(selectedFiles);
+				if(!selectedFiles.isEmpty())
+				{
+					m_settings->mostRecentInputPath(QFileInfo(selectedFiles.first()).canonicalPath());
+					addFiles(selectedFiles);
+				}
 			}
 		}
 	)
@@ -1731,15 +1756,15 @@ void MainWindow::openFolderActionActivated(void)
 	{
 		TEMP_HIDE_DROPBOX
 		(
-			if(lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
+			if(USE_NATIVE_FILE_DIALOG)
 			{
-				selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add Folder"), QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
+				selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add Folder"), m_settings->mostRecentInputPath());
 			}
 			else
 			{
 				QFileDialog dialog(this, tr("Add Folder"));
 				dialog.setFileMode(QFileDialog::DirectoryOnly);
-				dialog.setDirectory(QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
+				dialog.setDirectory(m_settings->mostRecentInputPath());
 				if(dialog.exec())
 				{
 					selectedFolder = dialog.selectedFiles().first();
@@ -1748,6 +1773,7 @@ void MainWindow::openFolderActionActivated(void)
 			
 			if(!selectedFolder.isEmpty())
 			{
+				m_settings->mostRecentInputPath(QDir(selectedFolder).canonicalPath());
 				addFolder(selectedFolder, action->data().toBool());
 			}
 		)
@@ -1866,7 +1892,6 @@ void MainWindow::sourceFilesContextMenu(const QPoint &pos)
  */
 void MainWindow::sourceFilesScrollbarMoved(int)
 {
-	qDebug("sourceFileView->resizeColumnToContents(0);");
 	sourceFileView->resizeColumnToContents(0);
 }
 
@@ -2854,7 +2879,22 @@ void MainWindow::autoDetectInstancesChanged(bool checked)
  */
 void MainWindow::browseCustomTempFolderButtonClicked(void)
 {
-	QString newTempFolder = QFileDialog::getExistingDirectory(this);
+	QString newTempFolder;
+
+	if(USE_NATIVE_FILE_DIALOG)
+	{
+		newTempFolder = QFileDialog::getExistingDirectory(this, QString(), m_settings->customTempPath());
+	}
+	else
+	{
+		QFileDialog dialog(this);
+		dialog.setFileMode(QFileDialog::DirectoryOnly);
+		dialog.setDirectory(m_settings->customTempPath());
+		if(dialog.exec())
+		{
+			newTempFolder = dialog.selectedFiles().first();
+		}
+	}
 
 	if(!newTempFolder.isEmpty())
 	{
