@@ -97,9 +97,6 @@
     <ClCompile Include="tmp\MOC_Thread_Process.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\QRC_Documents.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -316,6 +313,15 @@
     <ClCompile Include="tmp\MOC_Encoder_AAC_FHG.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Decd.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Encd.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Misc.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -482,9 +488,6 @@
     <CustomBuild Include="res\Localization.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="src\Decoder_Abstract.h">
       <Filter>Header Files\Decoders</Filter>
     </CustomBuild>
@@ -592,6 +595,15 @@
     </CustomBuild>
     <CustomBuild Include="src\Encoder_AAC_FHG.h">
       <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Encd.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Misc.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Decd.qrc">
+      <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

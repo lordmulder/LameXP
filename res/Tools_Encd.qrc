@@ -1,0 +1,14 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource>
+    <file>tools/aften.i386.exe</file>
+    <file>tools/aften.sse2.exe</file>
+    <file>tools/aften.x64.exe</file>
+    <file>tools/flac.exe</file>
+    <file>tools/lame.i386.exe</file>
+    <file>tools/lame.sse2.exe</file>
+    <file>tools/oggenc2.i386.exe</file>
+    <file>tools/oggenc2.sse2.exe</file>
+    <file>tools/oggenc2.x64.exe</file>
+  </qresource>
+</RCC>
