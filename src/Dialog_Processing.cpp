@@ -135,6 +135,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	connect(m_progressModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
 	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
 	connect(view_log, SIGNAL(activated(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
+	connect(view_log->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(logViewSectionSizeChanged(int,int,int)));
 
 	//Create context menu
 	m_contextMenu = new QMenu();
@@ -263,10 +264,6 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 			QUrl url(lamexp_website_url());
 			QDesktopServices::openUrl(url);
 		}
-	}
-	else if(obj == view_log->viewport())
-	{
-		view_log->resizeColumnToContents(1);
 	}
 
 	return false;
@@ -479,6 +476,18 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 	else
 	{
 		MessageBeep(MB_ICONWARNING);
+	}
+}
+
+void ProcessingDialog::logViewSectionSizeChanged(int logicalIndex, int oldSize, int newSize)
+{
+	qDebug("sectionResized");
+	if(logicalIndex == 1)
+	{
+		if(QHeaderView *hdr = view_log->horizontalHeader())
+		{
+			hdr->setMinimumSectionSize(max(hdr->minimumSectionSize(), hdr->sectionSize(1)));
+		}
 	}
 }
 

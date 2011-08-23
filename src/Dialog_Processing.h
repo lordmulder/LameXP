@@ -52,6 +52,7 @@ private slots:
 	void processFinished(const QUuid &jobId, const QString &outFileName, bool success);
 	void progressModelChanged(void);
 	void logViewDoubleClicked(const QModelIndex &index);
+	void logViewSectionSizeChanged(int, int, int);
 	void contextMenuTriggered(const QPoint &pos);
 	void contextMenuDetailsActionTriggered(void);
 	void contextMenuShowFileActionTriggered(void);

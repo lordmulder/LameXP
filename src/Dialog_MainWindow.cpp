@@ -132,6 +132,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
 	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(sourceModelChanged()));
 	connect(sourceFileView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(sourceFilesContextMenu(QPoint)));
+	connect(sourceFileView->verticalScrollBar(), SIGNAL(sliderMoved(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
+	connect(sourceFileView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
 	connect(m_showDetailsContextAction, SIGNAL(triggered(bool)), this, SLOT(showDetailsButtonClicked()));
 	connect(m_previewContextAction, SIGNAL(triggered(bool)), this, SLOT(previewContextActionTriggered()));
 	connect(m_findFileContextAction, SIGNAL(triggered(bool)), this, SLOT(findFileContextActionTriggered()));
@@ -861,10 +863,6 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
 			break;
 		}
-	}
-	else if(obj == sourceFileView->viewport())
-	{
-		sourceFileView ->resizeColumnToContents(0);
 	}
 
 	return false;
@@ -1861,6 +1859,15 @@ void MainWindow::sourceFilesContextMenu(const QPoint &pos)
 			m_sourceFilesContextMenu->popup(sender->mapToGlobal(pos));
 		}
 	}
+}
+
+/*
+ * Scrollbar of source files moved
+ */
+void MainWindow::sourceFilesScrollbarMoved(int)
+{
+	qDebug("sourceFileView->resizeColumnToContents(0);");
+	sourceFileView->resizeColumnToContents(0);
 }
 
 /*

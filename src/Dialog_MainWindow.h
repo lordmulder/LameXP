@@ -118,6 +118,7 @@ private slots:
 	void showFolderContextActionTriggered(void);
 	void showRenameMacros(const QString &text);
 	void sourceFilesContextMenu(const QPoint &pos);
+	void sourceFilesScrollbarMoved(int);
 	void sourceModelChanged(void);
 	void styleActionActivated(QAction *action);
 	void tabActionActivated(QAction *action);
