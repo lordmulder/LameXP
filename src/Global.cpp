@@ -327,7 +327,7 @@ LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionI
 		if(mainThread) TerminateThread(mainThread, ULONG_MAX);
 	}
 	
-	FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+	FatalAppExit(0, L"Unhandeled exception handler invoked, application will exit!");
 	TerminateProcess(GetCurrentProcess(), -1);
 	return LONG_MAX;
 }

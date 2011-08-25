@@ -1100,7 +1100,7 @@
                <x>0</x>
                <y>0</y>
                <width>604</width>
-               <height>1426</height>
+               <height>1486</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -1365,6 +1365,82 @@
                        </property>
                        <property name="tickInterval">
                         <number>1</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="4" column="1" colspan="3">
+                      <layout class="QHBoxLayout" name="horizontalLayout_8">
+                       <item>
+                        <widget class="QLabel" name="labelLameAlgoQualityWarningIcon">
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="../res/Icons.qrc">:/icons/exclamation.png</pixmap>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="labelLameAlgoQualityWarning">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>Warning: Audio quality will be very poor. Please do &lt;b&gt;not&lt;/b&gt; complain about audio quality!</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="5" column="1" colspan="3">
+                      <layout class="QHBoxLayout" name="horizontalLayout_9">
+                       <item>
+                        <widget class="QLabel" name="labelLameAlgoQualityNoticeIcon">
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="../res/Icons.qrc">:/icons/error.png</pixmap>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="labelLameAlgoQualityNotice">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>Warning: Processing speed will we very slow. Please do &lt;b&gt;not&lt;/b&gt; complain about processing speed!</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="3" column="1" colspan="3">
+                      <widget class="QFrame" name="labelLameAlgoQualitySpacer">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>6</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>6</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::HLine</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Sunken</enum>
                        </property>
                       </widget>
                      </item>

@@ -205,16 +205,16 @@ static int _main(int argc, char* argv[])
 		{
 			fflush(stdout);
 			fflush(stderr);
-			fprintf(stderr, "\nGURU MEDITATION: %s\n", error);
-			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error message: %s\n", error);
+			FatalAppExit(0, L"Unhandeled C++ exception error, application will exit!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
 		catch(int error)
 		{
 			fflush(stdout);
 			fflush(stderr);
-			fprintf(stderr, "\nGURU MEDITATION: Error code 0x%X\n", error);
-			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error code: 0x%X\n", error);
+			FatalAppExit(0, L"Unhandeled C++ exception error, application will exit!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
 		catch(...)
@@ -222,7 +222,7 @@ static int _main(int argc, char* argv[])
 			fflush(stdout);
 			fflush(stderr);
 			fprintf(stderr, "\nGURU MEDITATION !!!\n");
-			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			FatalAppExit(0, L"Unhandeled C++ exception error, application will exit!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
 		return iResult;
@@ -247,8 +247,8 @@ int main(int argc, char* argv[])
 		{
 			fflush(stdout);
 			fflush(stderr);
-			fprintf(stderr, "\nGURU MEDITATION !!!\n");
-			FatalAppExit(0, L"Unhandeled exception error, application will exit!");
+			fprintf(stderr, "\nGURU MEDITATION !!!\n\nUnhandeled structured exception error! [code: 0x%X]\n", GetExceptionCode());
+			FatalAppExit(0, L"Unhandeled structured exception error, application will exit!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
 	}

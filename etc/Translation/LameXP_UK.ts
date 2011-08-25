@@ -1642,6 +1642,14 @@
         <source>MPEG-4 AAC:</source>
         <translation>MPEG-4 AAC:</translation>
     </message>
+    <message>
+        <source>Warning: Audio quality will be very poor. Please do &lt;b&gt;not&lt;/b&gt; complain about audio quality!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: Processing speed will we very slow. Please do &lt;b&gt;not&lt;/b&gt; complain about processing speed!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

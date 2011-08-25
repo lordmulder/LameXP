@@ -2590,6 +2590,13 @@ void MainWindow::updateLameAlgoQuality(int value)
 		m_settings->lameAlgoQuality(value);
 		labelLameAlgoQuality->setText(text);
 	}
+
+	bool warning = (value == 0), notice = (value == 4);
+	labelLameAlgoQualityWarning->setVisible(warning);
+	labelLameAlgoQualityWarningIcon->setVisible(warning);
+	labelLameAlgoQualityNotice->setVisible(notice);
+	labelLameAlgoQualityNoticeIcon->setVisible(notice);
+	labelLameAlgoQualitySpacer->setVisible(warning || notice);
 }
 
 /*
