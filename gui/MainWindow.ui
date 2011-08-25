@@ -1389,7 +1389,7 @@
                           </sizepolicy>
                          </property>
                          <property name="text">
-                          <string>Warning: Audio quality will be very poor. Please do &lt;b&gt;not&lt;/b&gt; complain about audio quality!</string>
+                          <string>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</string>
                          </property>
                         </widget>
                        </item>
@@ -1416,7 +1416,7 @@
                           </sizepolicy>
                          </property>
                          <property name="text">
-                          <string>Warning: Processing speed will we very slow. Please do &lt;b&gt;not&lt;/b&gt; complain about processing speed!</string>
+                          <string>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</string>
                          </property>
                         </widget>
                        </item>

@@ -1643,12 +1643,12 @@
         <translation></translation>
     </message>
     <message>
-        <source>Warning: Audio quality will be very poor. Please do &lt;b&gt;not&lt;/b&gt; complain about audio quality!</source>
-        <translation>Achtung: Die Klangqualität wird sehr schlecht sein. Bitte &lt;b&gt;nicht&lt;/b&gt; über die Klangqualität beschweren!</translation>
+        <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
+        <translation>Achtung: Die Klangqualität wird sehr schlecht sein. Bitte &lt;u&gt;nicht&lt;/u&gt; über die Klangqualität beschweren!</translation>
     </message>
     <message>
-        <source>Warning: Processing speed will we very slow. Please do &lt;b&gt;not&lt;/b&gt; complain about processing speed!</source>
-        <translation>Achtung: Die Geschwindigkeit wird sehr gering sein. Bitte &lt;b&gt;nicht&lt;/b&gt; über die Geschwindigkeit beschweren!</translation>
+        <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
+        <translation>Achtung: Die Geschwindigkeit wird sehr gering sein. Bitte &lt;u&gt;nicht&lt;/u&gt; über die Geschwindigkeit beschweren!</translation>
     </message>
 </context>
 <context>
