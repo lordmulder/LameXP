@@ -492,8 +492,8 @@ void lamexp_init_console(int argc, char* argv[])
 			const int flags = _O_WRONLY | _O_U8TEXT;
 			int hCrtStdOut = _open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), flags);
 			int hCrtStdErr = _open_osfhandle((intptr_t) GetStdHandle(STD_ERROR_HANDLE), flags);
-			FILE *hfStdOut = _fdopen(hCrtStdOut, "w");
-			FILE *hfStderr = _fdopen(hCrtStdErr, "w");
+			FILE *hfStdOut = (hCrtStdOut >= 0) ? _fdopen(hCrtStdOut, "w") : NULL;
+			FILE *hfStderr = (hCrtStdErr >= 0) ? _fdopen(hCrtStdErr, "w") : NULL;
 			if(hfStdOut) *stdout = *hfStdOut;
 			if(hfStderr) *stderr = *hfStderr;
 		}
@@ -506,8 +506,9 @@ void lamexp_init_console(int argc, char* argv[])
 			EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
 			RemoveMenu(hMenu, SC_CLOSE, MF_BYCOMMAND);
 
-			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MAXIMIZEBOX));
-			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MINIMIZEBOX));
+			SetWindowPos(hwndConsole, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_FRAMECHANGED);
+			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MAXIMIZEBOX) & (~WS_MINIMIZEBOX));
+			SetWindowPos(hwndConsole, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_FRAMECHANGED);
 		}
 	}
 }
