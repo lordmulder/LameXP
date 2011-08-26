@@ -762,6 +762,10 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Check the Windows version
 	switch(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based)
 	{
+	case 0:
+	case QSysInfo::WV_NT:
+		qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
+		break;
 	case QSysInfo::WV_2000:
 		qDebug("Running on Windows 2000 (not officially supported!).\n");
 		lamexp_check_compatibility_mode("GetNativeSystemInfo", executableName);
@@ -783,7 +787,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 		lamexp_check_compatibility_mode(NULL, executableName);
 		break;
 	default:
-		qWarning("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
+		qWarning("Running on an unknown/unsupported OS (%d).\n", static_cast<int>(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based));
 		break;
 	}
 
@@ -803,7 +807,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	application->setApplicationName("LameXP - Audio Encoder Front-End");
 	application->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
 	application->setOrganizationName("LoRd_MuldeR");
-	application->setOrganizationDomain("mulder.dummwiedeutsch.de");
+	application->setOrganizationDomain("mulder.at.gg");
 	application->setWindowIcon((date.month() == 12 && date.day() >= 24 && date.day() <= 26) ? QIcon(":/MainIcon2.png") : QIcon(":/MainIcon.png"));
 	
 	//Load plugins from application directory
@@ -982,7 +986,9 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 bool lamexp_portable_mode(void)
 {
 	QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
-	return baseName.contains("lamexp", Qt::CaseInsensitive) && baseName.contains("portable", Qt::CaseInsensitive);
+	int idx1 = baseName.indexOf("lamexp", 0, Qt::CaseInsensitive);
+	int idx2 = baseName.lastIndexOf("portable", -1, Qt::CaseInsensitive);
+	return (idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2);
 }
 
 /*

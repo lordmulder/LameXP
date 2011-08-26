@@ -130,11 +130,12 @@ public:
 
 	//Misc
 	void validate(void);
-
+	
 private:
 	QSettings *m_settings;
 	QString *m_defaultLanguage;
 	QString defaultLanguage(void);
+	QString initDirectory(const QString &path);
 };
 
 ///////////////////////////////////////////////////////////////////////////////
