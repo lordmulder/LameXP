@@ -1644,11 +1644,11 @@
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: Якість аудіо буде дуже низькою. Будь ласка, &lt;u&gt;не&lt;/u&gt; жалійтеся потім на якість аудіо!</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: Швидкість обробки буде дуже низькою. Будь ласка, &lt;u&gt;не&lt;/u&gt; жалійтеся потім на швидкість обробки!</translation>
     </message>
 </context>
 <context>
