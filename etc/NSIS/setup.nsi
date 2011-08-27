@@ -180,6 +180,7 @@ VIAddVersionKey "Website" "${MyWebSite}"
 ;--------------------------------
 
 ;Installer
+!define MUI_PAGE_CUSTOMFUNCTION_LEAVE CheckForPreRelease
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_TITLE_3LINES
 !insertmacro MUI_PAGE_WELCOME
@@ -286,25 +287,25 @@ Function .onInit
 	${OrIf} ${UAC_IsAdmin}
 		${If} ${IsWin2000}
 		${AndIf} ${AtMostServicePack} 3
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 4 for Windows 2000!"
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 4 for Windows 2000 is highly recommended!"
 			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 4 for Windows 2000 now?" IDNO +2
 			ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=4127"
 		${EndIf}
 		${If} ${IsWinXP}
 		${AndIf} ${AtMostServicePack} 2
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 3 for Windows XP!"
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 3 for Windows XP is highly recommended!"
 			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
 			ExecShell "open" "http://technet.microsoft.com/en-us/windows/bb794714"
 		${EndIf}
 		${If} ${IsWinVista}
 		${AndIf} ${AtMostServicePack} 1
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 2 for Windows Vista!"
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 2 for Windows Vista is highly recommended!"
 			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 2 for Windows Vista now?" IDNO +2
 			ExecShell "open" "http://technet.microsoft.com/en-us/windows/dd262148"
 		${EndIf}
 		${If} ${IsWin7}
 		${AndIf} ${AtMostServicePack} 0
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 1 for Windows 7!"
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 1 for Windows 7 is highly recommended!"
 			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 1 for Windows 7 now?" IDNO +2
 			ExecShell "open" "http://technet.microsoft.com/en-us/windows/gg635126"
 		${EndIf}
@@ -354,14 +355,6 @@ Function MyUacInit
 		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Unable to elevate installer! (Error code: $0)"
 		Quit
 	${EndSwitch}
-	
-	!ifdef LAMEXP_IS_PRERELEASE
-		!insertmacro GetCommandlineParameter "Update" "?" $R0
-		StrCmp $R0 "?" 0 SkipPrereleaseWarning
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
-		Abort
-		SkipPrereleaseWarning:
-	!endif
 	
 	Aero::Apply
 FunctionEnd
@@ -625,6 +618,21 @@ Function CheckForUpdate
 	FindWindow $R0 "#32770" "" $HWNDPARENT
 	GetDlgItem $R1 $R0 1001
 	EnableWindow $R1 0
+FunctionEnd
+
+
+;--------------------------------
+;Check For Pre-Release
+;--------------------------------
+
+Function CheckForPreRelease
+	!ifdef LAMEXP_IS_PRERELEASE
+		!insertmacro GetCommandlineParameter "Update" "?" $R0
+		StrCmp $R0 "?" 0 SkipPrereleaseWarning
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
+		Quit
+		SkipPrereleaseWarning:
+	!endif
 FunctionEnd
 
 
