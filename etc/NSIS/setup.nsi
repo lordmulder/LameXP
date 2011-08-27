@@ -285,18 +285,29 @@ Function .onInit
 
 	${If} ${IsWin2000}
 	${AndIf} ${AtMostServicePack} 3
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application recommends Windows 2000 with Service Pack 4!"
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 4 for Windows 2000!"
 		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 4 for Windows 2000 now?" IDNO +2
 		ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=4127"
 	${EndIf}
-
 	${If} ${IsWinXP}
 	${AndIf} ${AtMostServicePack} 2
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application recommends Windows XP with Service Pack 3!"
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 3 for Windows XP!"
 		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
-		ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=24"
+		ExecShell "open" "http://technet.microsoft.com/en-us/windows/bb794714"
 	${EndIf}
-	
+	${If} ${IsWinVista}
+	${AndIf} ${AtMostServicePack} 1
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 2 for Windows Vista!"
+		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 2 for Windows Vista now?" IDNO +2
+		ExecShell "open" "http://technet.microsoft.com/en-us/windows/dd262148"
+	${EndIf}
+	${If} ${IsWin7}
+	${AndIf} ${AtMostServicePack} 0
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 1 for Windows 7!"
+		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 1 for Windows 7 now?" IDNO +2
+		ExecShell "open" "http://technet.microsoft.com/en-us/windows/gg635126"
+	${EndIf}
+
 	InitPluginsDir
 	File "/oname=$PLUGINSDIR\checkproc.exe" "checkproc.exe"
 	nsExec::Exec /TIMEOUT=5000 '"$PLUGINSDIR\checkproc.exe" Softonic Brothersoft'
