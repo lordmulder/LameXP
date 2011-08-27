@@ -257,8 +257,7 @@ UninstPage Custom un.LockedListShow
 
 Function .onInit
 	${If} ${UAC_IsInnerInstance}
-		!insertmacro MUI_LANGDLL_DISPLAY
-	${ElseIf} ${UAC_IsAdmin}
+	${OrIf} ${UAC_IsAdmin}
 		!insertmacro MUI_LANGDLL_DISPLAY
 	${Else}
 		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
@@ -282,30 +281,33 @@ Function .onInit
 		${EndIf}
 		Quit
 	${EndIf}
-
-	${If} ${IsWin2000}
-	${AndIf} ${AtMostServicePack} 3
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 4 for Windows 2000!"
-		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 4 for Windows 2000 now?" IDNO +2
-		ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=4127"
-	${EndIf}
-	${If} ${IsWinXP}
-	${AndIf} ${AtMostServicePack} 2
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 3 for Windows XP!"
-		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
-		ExecShell "open" "http://technet.microsoft.com/en-us/windows/bb794714"
-	${EndIf}
-	${If} ${IsWinVista}
-	${AndIf} ${AtMostServicePack} 1
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 2 for Windows Vista!"
-		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 2 for Windows Vista now?" IDNO +2
-		ExecShell "open" "http://technet.microsoft.com/en-us/windows/dd262148"
-	${EndIf}
-	${If} ${IsWin7}
-	${AndIf} ${AtMostServicePack} 0
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 1 for Windows 7!"
-		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 1 for Windows 7 now?" IDNO +2
-		ExecShell "open" "http://technet.microsoft.com/en-us/windows/gg635126"
+	
+	${If} ${UAC_IsInnerInstance}
+	${OrIf} ${UAC_IsAdmin}
+		${If} ${IsWin2000}
+		${AndIf} ${AtMostServicePack} 3
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 4 for Windows 2000!"
+			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 4 for Windows 2000 now?" IDNO +2
+			ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=4127"
+		${EndIf}
+		${If} ${IsWinXP}
+		${AndIf} ${AtMostServicePack} 2
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 3 for Windows XP!"
+			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
+			ExecShell "open" "http://technet.microsoft.com/en-us/windows/bb794714"
+		${EndIf}
+		${If} ${IsWinVista}
+		${AndIf} ${AtMostServicePack} 1
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 2 for Windows Vista!"
+			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 2 for Windows Vista now?" IDNO +2
+			ExecShell "open" "http://technet.microsoft.com/en-us/windows/dd262148"
+		${EndIf}
+		${If} ${IsWin7}
+		${AndIf} ${AtMostServicePack} 0
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires the Service Pack 1 for Windows 7!"
+			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 1 for Windows 7 now?" IDNO +2
+			ExecShell "open" "http://technet.microsoft.com/en-us/windows/gg635126"
+		${EndIf}
 	${EndIf}
 
 	InitPluginsDir
