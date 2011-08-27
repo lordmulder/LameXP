@@ -24,6 +24,7 @@
 #include "Global.h"
 #include "Model_Settings.h"
 
+#include <math.h>
 #include <QProcess>
 #include <QDir>
 
