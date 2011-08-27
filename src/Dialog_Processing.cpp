@@ -481,7 +481,6 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 
 void ProcessingDialog::logViewSectionSizeChanged(int logicalIndex, int oldSize, int newSize)
 {
-	qDebug("sectionResized");
 	if(logicalIndex == 1)
 	{
 		if(QHeaderView *hdr = view_log->horizontalHeader())

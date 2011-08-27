@@ -402,11 +402,15 @@ void ProcessThread::insertDownmixFilter(void)
 			applyDownmixing = false;
 		}
 	}
-		
+
 	//Now add the downmixing filter, if needed
 	if(applyDownmixing)
 	{
-		m_filters.prepend(new DownmixFilter());
+		unsigned int channels = m_audioFile.formatAudioChannels();
+		if((channels == 0) || (channels > 2))
+		{
+			m_filters.prepend(new DownmixFilter());
+		}
 	}
 }
 
