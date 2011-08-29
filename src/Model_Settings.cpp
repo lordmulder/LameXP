@@ -243,7 +243,7 @@ void SettingsModel::validate(void)
 	if(!lamexp_query_translations().contains(this->currentLanguage(), Qt::CaseInsensitive))
 	{
 		qWarning("Current language \"%s\" is unknown, reverting to default language!", this->currentLanguage().toLatin1().constData());
-			this->currentLanguage(defaultLanguage());
+		this->currentLanguage(defaultLanguage());
 	}
 }
 

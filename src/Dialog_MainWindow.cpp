@@ -947,7 +947,7 @@ void MainWindow::windowShown(void)
 	if(QDate::currentDate() >= lamexp_version_date().addYears(1))
 	{
 		qWarning("Binary is more than a year old, time to update!");
-		if(QMessageBox::warning(this, tr("Urgent Update"), QString("<nobr>%1</nobr>").arg(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program")) == 0)
+		if(QMessageBox::warning(this, tr("Urgent Update"), QString("<nobr>%1</nobr>").arg(tr("Your version of LameXP is more than a year old. Time for an update!")).replace("-", "&minus;"), tr("Check for Updates"), tr("Exit Program")) == 0)
 		{
 			if(checkForUpdates())
 			{
@@ -966,7 +966,7 @@ void MainWindow::windowShown(void)
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
 		if(!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14))
 		{
-			if(QMessageBox::information(this, tr("Update Reminder"), QString("<nobr>%1</nobr>").arg(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
+			if(QMessageBox::information(this, tr("Update Reminder"), QString("<nobr>%1</nobr>").arg(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")).replace("-", "&minus;"), tr("Check for Updates"), tr("Postpone")) == 0)
 			{
 				if(checkForUpdates())
 				{
