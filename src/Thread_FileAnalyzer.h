@@ -74,7 +74,8 @@ private:
 	{
 		fileTypeNormal = 0,
 		fileTypeCDDA = 1,
-		fileTypeDenied = 2
+		fileTypeDenied = 2,
+		fileTypeSkip = 3
 	};
 
 	const AudioFileModel analyzeFile(const QString &filePath, int *type);
@@ -90,6 +91,7 @@ private:
 	const QString m_avs2wavBin;
 
 	QStringList m_inputFiles;
+	QStringList m_recentlyAdded;
 	section_t m_currentSection;
 	cover_t m_currentCover;
 	unsigned int m_filesAccepted;

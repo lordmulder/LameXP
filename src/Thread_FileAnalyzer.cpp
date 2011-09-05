@@ -77,6 +77,7 @@ void FileAnalyzer::run()
 	m_filesCueSheet = 0;
 
 	m_inputFiles.sort();
+	m_recentlyAdded.clear();
 	m_abortFlag = false;
 
 	while(!m_inputFiles.isEmpty())
@@ -94,7 +95,11 @@ void FileAnalyzer::run()
 			qWarning("Operation cancelled by user!");
 			return;
 		}
-
+		if(fileType == fileTypeSkip)
+		{
+			qWarning("File was recently added, skipping!");
+			continue;
+		}
 		if(fileType == fileTypeDenied)
 		{
 			m_filesDenied++;
@@ -142,6 +147,7 @@ void FileAnalyzer::run()
 		}
 
 		m_filesAccepted++;
+		m_recentlyAdded.append(file.filePath());
 		emit fileAnalyzed(file);
 	}
 
@@ -160,6 +166,12 @@ const AudioFileModel FileAnalyzer::analyzeFile(const QString &filePath, int *typ
 	AudioFileModel audioFile(filePath);
 	m_currentSection = sectionOther;
 	m_currentCover = coverNone;
+
+	if(m_recentlyAdded.contains(filePath, Qt::CaseInsensitive))
+	{
+		*type = fileTypeSkip;
+		return audioFile;
+	}
 
 	QFile readTest(filePath);
 	if(!readTest.open(QIODevice::ReadOnly))
