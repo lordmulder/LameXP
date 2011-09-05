@@ -534,7 +534,7 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 		}
 		
 		QDir currentDir(folderInfoList.takeFirst().canonicalFilePath());
-		QFileInfoList fileInfoList = currentDir.entryInfoList(QDir::Files);
+		QFileInfoList fileInfoList = currentDir.entryInfoList(QDir::Files | QDir::NoSymLinks);
 
 		while(!fileInfoList.isEmpty())
 		{
@@ -732,11 +732,12 @@ void MainWindow::dropEvent(QDropEvent *event)
 	ABORT_IF_BUSY;
 
 	QStringList droppedFiles;
-	const QList<QUrl> urls = event->mimeData()->urls();
+	QList<QUrl> urls = event->mimeData()->urls();
 
-	for(int i = 0; i < urls.count(); i++)
+	while(!urls.isEmpty())
 	{
-		QFileInfo file(urls.at(i).toLocalFile());
+		QUrl currentUrl = urls.takeFirst();
+		QFileInfo file(currentUrl.toLocalFile());
 		if(!file.exists())
 		{
 			continue;
@@ -747,13 +748,25 @@ void MainWindow::dropEvent(QDropEvent *event)
 			droppedFiles << file.canonicalFilePath();
 			continue;
 		}
-		else if(file.isDir())
+		if(file.isDir())
 		{
 			qDebug64("Dropped Folder: %1", file.canonicalFilePath());
-			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files);
-			for(int j = 0; j < list.count(); j++)
+			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoSymLinks);
+			if(list.count() > 0)
 			{
-				droppedFiles << list.at(j).canonicalFilePath();
+				for(int j = 0; j < list.count(); j++)
+				{
+					droppedFiles << list.at(j).canonicalFilePath();
+				}
+			}
+			else
+			{
+				list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+				for(int j = 0; j < list.count(); j++)
+				{
+					qDebug64("Descending to Folder: %1", list.at(j).canonicalFilePath());
+					urls.prepend(QUrl::fromLocalFile(list.at(j).canonicalFilePath()));
+				}
 			}
 		}
 	}
