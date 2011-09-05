@@ -55,7 +55,7 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 	args << "gain";
-	args << "-n" << QString().sprintf("%.2f", static_cast<double>(m_peakVolume) / 100.0);
+	args << "-ne" << QString().sprintf("%.2f", static_cast<double>(m_peakVolume) / 100.0);
 
 	if(!startProcess(process, m_binary, args))
 	{
