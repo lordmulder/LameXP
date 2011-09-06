@@ -2645,23 +2645,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="786"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="798"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="786"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="798"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="826"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="838"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="830"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="831"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="842"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="843"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
