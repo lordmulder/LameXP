@@ -75,6 +75,7 @@
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
 #define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); {CMD}; if(__dropBoxVisible) m_dropBox->show(); }
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
+#define NOBR(STR) QString("<nobr>%1</nobr>").arg(STR).replace("-", "&minus;")
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -925,6 +926,10 @@ void MainWindow::windowShown(void)
 		
 		PlaySound(MAKEINTRESOURCE(IDR_WAVE_WOOHOO), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		m_settings->licenseAccepted(1);
+
+		//<ANNOUNCEMENT>
+		QMessageBox::information(this, "We want you!", QString("<nobr>We are still looking for LameXP translators!<br><br>If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:<br><tt>" + LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html") + "</tt></nobr><br>"));
+		//</ANNOUNCEMENT>
 	}
 	
 	//Check for expiration
@@ -947,8 +952,8 @@ void MainWindow::windowShown(void)
 	if(m_settings->slowStartup() && m_settings->antivirNotificationsEnabled())
 	{
 		QString message;
-		message += QString("<nobr>%1</nobr><br>").arg(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP.").replace("-", "&minus;"));
-		message += QString("<nobr>%1</nobr><br>").arg(tr("Please refer to the %1 document for details and solutions!").replace("-", "&minus;").arg("<a href=\"http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#df406578\">F.A.Q.</a>"));
+		message += NOBR(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP."));
+		message += NOBR(tr("Please refer to the %1 document for details and solutions!")).arg("<a href=\"http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#df406578\">F.A.Q.</a>");
 		if(QMessageBox::warning(this, tr("Slow Startup"), message, tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->antivirNotificationsEnabled(false);
@@ -960,7 +965,7 @@ void MainWindow::windowShown(void)
 	if(QDate::currentDate() >= lamexp_version_date().addYears(1))
 	{
 		qWarning("Binary is more than a year old, time to update!");
-		if(QMessageBox::warning(this, tr("Urgent Update"), QString("<nobr>%1</nobr>").arg(tr("Your version of LameXP is more than a year old. Time for an update!")).replace("-", "&minus;"), tr("Check for Updates"), tr("Exit Program")) == 0)
+		if(QMessageBox::warning(this, tr("Urgent Update"), NOBR(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program")) == 0)
 		{
 			if(checkForUpdates())
 			{
@@ -998,10 +1003,10 @@ void MainWindow::windowShown(void)
 			if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
 			{
 				QString messageText;
-				messageText += QString("<nobr>%1<br>").arg(tr("LameXP detected that your version of the Nero AAC encoder is outdated!"));
-				messageText += QString("%1<br><br>").arg(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe"), tr("n/a"))));
-				messageText += QString("%1<br>").arg(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:"));
-				messageText += "<tt>" + LINK(AboutDialog::neroAacUrl) + "</tt><br></nobr>";
+				messageText += NOBR(tr("LameXP detected that your version of the Nero AAC encoder is outdated!")).append("<br>");
+				messageText += NOBR(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe"), tr("n/a")))).append("<br><br>");
+				messageText += NOBR(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:")).append("<br>");
+				messageText += "<nobr><tt>" + LINK(AboutDialog::neroAacUrl) + "</tt></nobr><br>";
 				QMessageBox::information(this, tr("AAC Encoder Outdated"), messageText);
 			}
 		}
@@ -1013,12 +1018,12 @@ void MainWindow::windowShown(void)
 			QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 			if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
 			QString messageText;
-			messageText += QString("<nobr>%1</nobr><br>").arg(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.").replace("-", "&minus;"));
-			messageText += QString("<nobr>%1</nobr><br><br>").arg(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!").replace("-", "&minus;"));
-			messageText += QString("<nobr>%1</nobr><br>").arg(tr("Your LameXP directory is located here:").replace("-", "&minus;"));
-			messageText += QString("<nobr><i><a href=\"file:///%1\">%2</a></i></nobr><br><br>").arg(QDir::toNativeSeparators(appPath), QDir::toNativeSeparators(appPath).replace("-", "&minus;"));
-			messageText += QString("<nobr>%1</nobr><br>").arg(tr("You can download the Nero AAC encoder for free from the official Nero website at:").replace("-", "&minus;"));
-			messageText += "<tt>" + LINK(AboutDialog::neroAacUrl) + "</tt><br></nobr>";
+			messageText += NOBR(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.")).append("<br>");
+			messageText += NOBR(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!")).append("<br><br>");
+			messageText += NOBR(tr("Your LameXP directory is located here:")).append("<br>");
+			messageText += QString("<nobr><tt><a href=\"file:///%1\">%2</a></tt></nobr><br><br>").arg(QDir::toNativeSeparators(appPath), QDir::toNativeSeparators(appPath).replace("-", "&minus;"));
+			messageText += NOBR(tr("You can download the Nero AAC encoder for free from the official Nero website at:")).append("<br>");
+			messageText += "<nobr><tt>" + LINK(AboutDialog::neroAacUrl) + "</tt></nobr><br>";
 			if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
 			{
 				m_settings->neroAacNotificationsEnabled(false);
