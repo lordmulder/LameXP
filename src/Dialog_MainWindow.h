@@ -113,6 +113,7 @@ private slots:
 	void restoreCursor(void);
 	void samplingRateChanged(int value);
 	void saveToSourceFolderChanged(void);
+	void showAnnounceBox(void);
 	void showDetailsButtonClicked(void);
 	void showDropBoxWidgetActionTriggered(bool checked);
 	void showFolderContextActionTriggered(void);

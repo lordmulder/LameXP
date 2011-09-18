@@ -926,10 +926,7 @@ void MainWindow::windowShown(void)
 		
 		PlaySound(MAKEINTRESOURCE(IDR_WAVE_WOOHOO), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		m_settings->licenseAccepted(1);
-
-		//<ANNOUNCEMENT>
-		QMessageBox::information(this, "We want you!", QString("<nobr>We are still looking for LameXP translators!<br><br>If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:<br><tt>" + LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html") + "</tt></nobr><br>"));
-		//</ANNOUNCEMENT>
+		showAnnounceBox(); /*Do NOT forget to remove this for the final release!*/
 	}
 	
 	//Check for expiration
@@ -1076,6 +1073,33 @@ void MainWindow::windowShown(void)
 	{
 		m_dropBox->setVisible(true);
 	}
+}
+
+/*
+ * Show announce box
+ */
+void MainWindow::showAnnounceBox(void)
+{
+	QString announceText("<nobr>We are still looking for LameXP translators!<br><br>");
+	announceText.append("If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:<br>");
+	announceText.append("<tt>" + LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html") + "</tt></nobr><br>");
+	
+	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", announceText, QMessageBox::Discard, this);
+	announceBox->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+	announceBox->setIconPixmap(QIcon(":/images/Announcement.png").pixmap(64,79));
+	announceBox->button(QMessageBox::Discard)->hide();
+	
+	QTimer *announceTimer = new QTimer(this);
+	announceTimer->setSingleShot(true);
+	announceTimer->setInterval(8000);
+	connect(announceTimer, SIGNAL(timeout()), announceBox->button(QMessageBox::Discard), SLOT(show()));
+	
+	announceTimer->start();
+	announceBox->exec();
+	announceTimer->stop();
+
+	LAMEXP_DELETE(announceTimer);
+	LAMEXP_DELETE(announceBox);
 }
 
 // =========================================================
