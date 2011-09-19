@@ -516,7 +516,7 @@ void lamexp_init_console(int argc, char* argv[])
 /*
  * Detect CPU features
  */
-lamexp_cpu_t lamexp_detect_cpu_features(void)
+lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 {
 	typedef BOOL (WINAPI *IsWow64ProcessFun)(__in HANDLE hProcess, __out PBOOL Wow64Process);
 	typedef VOID (WINAPI *GetNativeSystemInfoFun)(__out LPSYSTEM_INFO lpSystemInfo);
@@ -610,6 +610,16 @@ lamexp_cpu_t lamexp_detect_cpu_features(void)
 	features.count = systemInfo.dwNumberOfProcessors;
 	features.x64 = true;
 #endif
+
+	if(argv)
+	{
+		for(int i = 0; i < argc; i++)
+		{
+			if(!_stricmp("--force-cpu-no-64bit", argv[i])) features.x64 = false;
+			if(!_stricmp("--force-cpu-no-sse", argv[i])) features.sse = features.sse2 = features.sse3 = features.ssse3 = false;
+			if(!_stricmp("--force-cpu-no-intel", argv[i])) features.intel = false;
+		}
+	}
 
 	return features;
 }
