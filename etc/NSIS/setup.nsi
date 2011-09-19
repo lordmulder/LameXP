@@ -260,7 +260,9 @@ Function .onInit
 	${If} ${UAC_IsInnerInstance}
 	${OrIf} ${UAC_IsAdmin}
 		!insertmacro MUI_LANGDLL_DISPLAY
-	${Else}
+	${EndIf}
+
+	${IfNot} ${UAC_IsInnerInstance}
 		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
 		Pop $0
 		StrCmp $0 0 +3
@@ -268,6 +270,8 @@ Function .onInit
 		Quit
 	${EndIf}
 
+	; --------
+	
 	${IfNot} ${IsNT}
 		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does NOT support Windows 9x or Windows ME!"
 		Quit
@@ -311,6 +315,8 @@ Function .onInit
 		${EndIf}
 	${EndIf}
 
+	; --------
+
 	InitPluginsDir
 	File "/oname=$PLUGINSDIR\checkproc.exe" "checkproc.exe"
 	nsExec::Exec /TIMEOUT=5000 '"$PLUGINSDIR\checkproc.exe" Softonic Brothersoft'
@@ -318,10 +324,11 @@ FunctionEnd
 
 Function un.onInit
 	${If} ${UAC_IsInnerInstance}
+	${OrIf} ${UAC_IsAdmin}
 		!insertmacro MUI_LANGDLL_DISPLAY
-	${ElseIf} ${UAC_IsAdmin}
-		!insertmacro MUI_LANGDLL_DISPLAY
-	${Else}
+	${EndIf}
+
+	${IfNot} ${UAC_IsInnerInstance}
 		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
 		Pop $0
 		StrCmp $0 0 +3
@@ -356,6 +363,8 @@ Function MyUacInit
 		Quit
 	${EndSwitch}
 	
+	StrCpy $0 $HWNDPARENT
+	System::Call "user32::SetWindowPos(i r0, i -1, i 0, i 0, i 0, i 0, i 3)"
 	Aero::Apply
 FunctionEnd
 
@@ -380,6 +389,8 @@ Function un.MyUacInit
 		Quit
 	${EndSwitch}
 	
+	StrCpy $0 $HWNDPARENT
+	System::Call "user32::SetWindowPos(i r0, i -1, i 0, i 0, i 0, i 0, i 3)"
 	Aero::Apply
 FunctionEnd
 
