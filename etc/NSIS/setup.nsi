@@ -677,7 +677,7 @@ FunctionEnd
 Function RunAppFunction
 	!insertmacro GetExecutableName $R0
 	!insertmacro UAC_AsUser_ExecShell "explore" "$INSTDIR" "" "" SW_SHOWNORMAL
-	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\$R0" "" "$INSTDIR" SW_SHOWNORMAL
+	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\$R0" "--first-run" "$INSTDIR" SW_SHOWNORMAL
 FunctionEnd
 
 Function ShowReadmeFunction

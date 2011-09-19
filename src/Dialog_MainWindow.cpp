@@ -898,12 +898,19 @@ void MainWindow::windowShown(void)
 {
 	QStringList arguments = QApplication::arguments();
 
+	//First run?
+	bool firstRun = false;
+	for(int i = 0; i < arguments.count(); i++)
+	{
+		if(!arguments[i].compare("--first-run", Qt::CaseInsensitive)) firstRun = true;
+	}
+
 	//Check license
-	if(m_settings->licenseAccepted() <= 0)
+	if((m_settings->licenseAccepted() <= 0) || firstRun)
 	{
 		int iAccepted = -1;
 
-		if(m_settings->licenseAccepted() == 0)
+		if((m_settings->licenseAccepted() == 0) || firstRun)
 		{
 			AboutDialog *about = new AboutDialog(m_settings, this, true);
 			iAccepted = about->exec();
@@ -926,7 +933,7 @@ void MainWindow::windowShown(void)
 		
 		PlaySound(MAKEINTRESOURCE(IDR_WAVE_WOOHOO), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		m_settings->licenseAccepted(1);
-		showAnnounceBox(); /*Do NOT forget to remove this for the final release!*/
+		if(lamexp_version_demo()) showAnnounceBox();
 	}
 	
 	//Check for expiration
@@ -979,7 +986,7 @@ void MainWindow::windowShown(void)
 	else if(m_settings->autoUpdateEnabled())
 	{
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
-		if(!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14))
+		if(!firstRun && (!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14)))
 		{
 			if(QMessageBox::information(this, tr("Update Reminder"), QString("<nobr>%1</nobr>").arg(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")).replace("-", "&minus;"), tr("Check for Updates"), tr("Postpone")) == 0)
 			{
@@ -1084,15 +1091,19 @@ void MainWindow::showAnnounceBox(void)
 	announceText.append("If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:<br>");
 	announceText.append("<tt>" + LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html") + "</tt></nobr><br>");
 	
-	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", announceText, QMessageBox::Discard, this);
+	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", announceText, QMessageBox::NoButton, this);
 	announceBox->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 	announceBox->setIconPixmap(QIcon(":/images/Announcement.png").pixmap(64,79));
-	announceBox->button(QMessageBox::Discard)->hide();
-	
+	QPushButton *button1 = announceBox->addButton(tr("Discard"), QMessageBox::AcceptRole);
+	QPushButton *button2 = announceBox->addButton(tr("Discard"), QMessageBox::NoRole);
+	button1->setVisible(false);
+	button2->setEnabled(false);
+
 	QTimer *announceTimer = new QTimer(this);
 	announceTimer->setSingleShot(true);
 	announceTimer->setInterval(8000);
-	connect(announceTimer, SIGNAL(timeout()), announceBox->button(QMessageBox::Discard), SLOT(show()));
+	connect(announceTimer, SIGNAL(timeout()), button1, SLOT(show()));
+	connect(announceTimer, SIGNAL(timeout()), button2, SLOT(hide()));
 	
 	announceTimer->start();
 	announceBox->exec();
