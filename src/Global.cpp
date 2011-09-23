@@ -797,7 +797,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 		lamexp_check_compatibility_mode(NULL, executableName);
 		break;
 	default:
-		qWarning("Running on an unknown/unsupported OS (%d).\n", static_cast<int>(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based));
+		qWarning("Running on an unknown/untested WinNT-based OS.\n");
 		break;
 	}
 

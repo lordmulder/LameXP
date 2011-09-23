@@ -148,6 +148,8 @@ void CueSplitter::run()
 	int nFiles = m_model->getFileCount();
 	QString albumPerformer = m_model->getAlbumPerformer();
 	QString albumTitle = m_model->getAlbumTitle();
+	QString albumGenre = m_model->getAlbumGenre();
+	unsigned int albumYear = m_model->getAlbumYear();
 
 	//Now split all files
 	for(int i = 0; i < nFiles; i++)
@@ -174,8 +176,11 @@ void CueSplitter::run()
 			AudioFileModel trackMetaInfo(QString().sprintf("cue://File%02d/Track%02d", i, j));
 			trackMetaInfo.setFileName(m_model->getTrackTitle(i, j));
 			trackMetaInfo.setFileArtist(m_model->getTrackPerformer(i, j));
+			trackMetaInfo.setFileGenre(m_model->getTrackGenre(i, j));
+			trackMetaInfo.setFileYear(m_model->getTrackYear(i, j));
 			trackMetaInfo.setFilePosition(trackNo);
 
+			//Apply album meta data on files
 			if(!albumTitle.isEmpty())
 			{
 				trackMetaInfo.setFileAlbum(albumTitle);
@@ -183,6 +188,14 @@ void CueSplitter::run()
 			if(!albumPerformer.isEmpty() && trackMetaInfo.fileArtist().isEmpty())
 			{
 				trackMetaInfo.setFileArtist(albumPerformer);
+			}
+			if(!albumGenre.isEmpty() && trackMetaInfo.fileGenre().isEmpty())
+			{
+				trackMetaInfo.setFileGenre(albumGenre);
+			}
+			if((albumYear > 0) && (trackMetaInfo.fileYear() == 0))
+			{
+				trackMetaInfo.setFileYear(albumYear);
 			}
 			if(_finite(trackLength))
 			{
