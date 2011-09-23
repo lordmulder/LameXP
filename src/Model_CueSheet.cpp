@@ -32,6 +32,8 @@
 #include <float.h>
 #include <limits>
 
+#define UNQUOTE(STR) STR.split("\"",  QString::SkipEmptyParts).first().trimmed()
+
 ////////////////////////////////////////////////////////////
 // Helper Classes
 ////////////////////////////////////////////////////////////
@@ -561,12 +563,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	qDebug("Encoding is %s.", (bUTF8 ? "UTF-8" : "Local 8-Bit"));
 	bomCheck.clear();
 
-	QRegExp rxFile("^FILE\\s+\"([^\"]+)\"\\s+(\\w+)$", Qt::CaseInsensitive);
+	QRegExp rxFile("^FILE\\s+(\"[^\"]+\"|\\S+)\\s+(\\w+)$", Qt::CaseInsensitive);
 	QRegExp rxTrack("^TRACK\\s+(\\d+)\\s(\\w+)$", Qt::CaseInsensitive);
 	QRegExp rxIndex("^INDEX\\s+(\\d+)\\s+([0-9:]+)$", Qt::CaseInsensitive);
-	QRegExp rxTitle("^TITLE\\s+\"([^\"]+)\"$", Qt::CaseInsensitive);
-	QRegExp rxPerformer("^PERFORMER\\s+\"([^\"]+)\"$", Qt::CaseInsensitive);
-	QRegExp rxGenre("^REM\\s+GENRE\\s+(\\w+)$", Qt::CaseInsensitive);
+	QRegExp rxTitle("^TITLE\\s+(\"[^\"]+\"|\\S+)$", Qt::CaseInsensitive);
+	QRegExp rxPerformer("^PERFORMER\\s+(\"[^\"]+\"|\\S+)$", Qt::CaseInsensitive);
+	QRegExp rxGenre("^REM\\s+GENRE\\s+(\"[^\"]+\"|\\S+)$", Qt::CaseInsensitive);
 	QRegExp rxYear("^REM\\s+DATE\\s+(\\d+)$", Qt::CaseInsensitive);
 	
 	bool bPreamble = true;
@@ -632,7 +634,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			}
 			if(!rxFile.cap(2).compare("WAVE", Qt::CaseInsensitive) || !rxFile.cap(2).compare("MP3", Qt::CaseInsensitive) || !rxFile.cap(2).compare("AIFF", Qt::CaseInsensitive))
 			{
-				currentFile = new CueSheetFile(baseDir.absoluteFilePath(rxFile.cap(1)));
+				currentFile = new CueSheetFile(baseDir.absoluteFilePath(UNQUOTE(rxFile.cap(1))));
 				qDebug("%03d File path: <%s>", lines, currentFile->fileName().toUtf8().constData());
 			}
 			else
@@ -702,12 +704,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(bPreamble)
 			{
-				m_albumTitle = rxTitle.cap(1).simplified();
+				m_albumTitle = UNQUOTE(rxTitle.cap(1)).simplified();
 			}
 			else if(currentFile && currentTrack)
 			{
 				qDebug("%03d     Title: <%s>", lines, rxTitle.cap(1).toUtf8().constData());
-				currentTrack->setTitle(rxTitle.cap(1).simplified());
+				currentTrack->setTitle(UNQUOTE(rxTitle.cap(1)).simplified());
 			}
 			continue;
 		}
@@ -717,12 +719,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(bPreamble)
 			{
-				m_albumPerformer = rxPerformer.cap(1).simplified();
+				m_albumPerformer = UNQUOTE(rxPerformer.cap(1)).simplified();
 			}
 			else if(currentFile && currentTrack)
 			{
 				qDebug("%03d     Title: <%s>", lines, rxPerformer.cap(1).toUtf8().constData());
-				currentTrack->setPerformer(rxPerformer.cap(1).simplified());
+				currentTrack->setPerformer(UNQUOTE(rxPerformer.cap(1)).simplified());
 			}
 			continue;
 		}
@@ -732,7 +734,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(bPreamble)
 			{
-				QString temp = rxGenre.cap(1).simplified();
+				QString temp = UNQUOTE(rxGenre.cap(1)).simplified();
 				for(int i = 0; g_lamexp_generes[i]; i++)
 				{
 					if(temp.compare(g_lamexp_generes[i], Qt::CaseInsensitive) == 0)
@@ -745,7 +747,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			else if(currentFile && currentTrack)
 			{
 				qDebug("%03d     Genre: <%s>", lines, rxGenre.cap(1).toUtf8().constData());
-				QString temp = rxGenre.cap(1).simplified();
+				QString temp = UNQUOTE(rxGenre.cap(1).simplified());
 				for(int i = 0; g_lamexp_generes[i]; i++)
 				{
 					if(temp.compare(g_lamexp_generes[i], Qt::CaseInsensitive) == 0)
@@ -831,12 +833,14 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	//Sanity check of track numbers
 	if(nFiles > 0)
 	{
+		bool hasTracks = false;
 		int previousTrackNo = -1;
 		bool trackNo[100];
 		for(int i = 0; i < 100; i++)
 		{
 			trackNo[i] = false;
 		}
+
 		for(int i = 0; i < nFiles; i++)
 		{
 			if(application)
@@ -858,7 +862,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 					}
 					if(currentTrackNo <= previousTrackNo)
 					{
-						qWarning("Non-increasing track numbers, Cue Sheet is inconsistent!", currentTrackNo);
+						qWarning("Non-increasing track numbers (%02d -> %02d), Cue Sheet is inconsistent!", previousTrackNo, currentTrackNo);
 						return ErrorInconsistent;
 					}
 					if(trackNo[currentTrackNo])
@@ -868,13 +872,22 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 					}
 					trackNo[currentTrackNo] = true;
 					previousTrackNo = currentTrackNo;
+					hasTracks = true;
 				}
 			}
 		}
+		
+		if(!hasTracks)
+		{
+			qWarning("Could not find at least one valid track in the Cue Sheet!");
+			return ErrorInconsistent;
+		}
+
 		return ErrorSuccess;
 	}
 	else
 	{
+		qWarning("Could not find at least one valid input file in the Cue Sheet!");
 		return bUnsupportedTrack ? ErrorUnsupported : ErrorBadFile;
 	}
 }

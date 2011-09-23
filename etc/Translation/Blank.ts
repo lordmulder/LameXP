@@ -538,44 +538,44 @@
 <context>
     <name>CueSheetModel</name>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="206"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="208"/>
         <source>No.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="209"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="211"/>
         <source>File / Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="212"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="214"/>
         <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="215"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="217"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="241"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="243"/>
         <source>File %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="256"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="258"/>
         <source>Track %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="265"/>
-        <location filename="../../src/Model_CueSheet.cpp" line="273"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="267"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="275"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="269"/>
-        <location filename="../../src/Model_CueSheet.cpp" line="273"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="271"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="275"/>
         <source>Unknown Title</source>
         <translation type="unfinished"></translation>
     </message>

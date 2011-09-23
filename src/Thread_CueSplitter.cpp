@@ -179,8 +179,12 @@ void CueSplitter::run()
 			trackMetaInfo.setFileGenre(m_model->getTrackGenre(i, j));
 			trackMetaInfo.setFileYear(m_model->getTrackYear(i, j));
 			trackMetaInfo.setFilePosition(trackNo);
-
+			
 			//Apply album meta data on files
+			if(trackMetaInfo.fileName().trimmed().isEmpty())
+			{
+				trackMetaInfo.setFileName(QString().sprintf("Track %02d", trackNo));
+			}
 			if(!albumTitle.isEmpty())
 			{
 				trackMetaInfo.setFileAlbum(albumTitle);
