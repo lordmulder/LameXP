@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стороннє ПЗ, що використовується в LameXP, належить авторам цього ПЗ.</translation>
+        <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стороннє ПЗ, що використовується в LameXP, належать авторам цього ПЗ.</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
@@ -272,7 +272,7 @@
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Імпортувати список Cue</translation>
+        <translation>Імпорт списку Cue</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
@@ -380,18 +380,18 @@
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>Імпортовано %1 доріжку(-и, -ок) зі списку Cue і пропущено %2 доріжку(-и, -ок).</translation>
+        <translation>Імпортовано %1 доріжок(-и, -у) зі списку Cue і пропущено %2 доріжку(-и, -ок).</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
-        <translation>Обробку списків Cue завершено</translation>
+        <translation>Обробку списку Cue завершено</translation>
     </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Імпортувати список Cue</translation>
+        <translation>Імпорт списку Cue</translation>
     </message>
     <message>
         <source>Existing Source File</source>
@@ -399,7 +399,7 @@
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation>Втрачено вхідний файл (Доріжки буде пропущено!)</translation>
+        <translation>Вхідний файл втрачено (Доріжки буде пропущено!)</translation>
     </message>
     <message>
         <source> Output Directory </source>
@@ -588,7 +588,7 @@
     </message>
     <message>
         <source> Meta Information </source>
-        <translation>Метаінформація</translation>
+        <translation>Метадані</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -596,7 +596,7 @@
     </message>
     <message>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation>Зверніть увагу: Метаінформація, введена вами тут, буде &lt;u&gt;заміщати&lt;/u&gt; дані оригінального файла!</translation>
+        <translation>Зверніть увагу: Метадані, введені вами тут, будуть &lt;u&gt;заміщати&lt;/u&gt; дані оригінального файла!</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -612,7 +612,7 @@
     </message>
     <message>
         <source>Write meta information to encoded files</source>
-        <translation>Записувати метаінформацію до файлів, що кодуються</translation>
+        <translation>Записувати метадані до файлів, що кодуються</translation>
     </message>
     <message>
         <source>Compression</source>
@@ -1472,7 +1472,7 @@
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Імпортувати список Cue</translation>
+        <translation>Імпорт списку Cue</translation>
     </message>
     <message>
         <source>CDDA Files</source>
