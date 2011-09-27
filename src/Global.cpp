@@ -49,6 +49,8 @@
 #include "LockedFile.h"
 
 //CRT includes
+#include <iostream>
+#include <fstream>
 #include <io.h>
 #include <fcntl.h>
 #include <intrin.h>
@@ -492,10 +494,10 @@ void lamexp_init_console(int argc, char* argv[])
 			const int flags = _O_WRONLY | _O_U8TEXT;
 			int hCrtStdOut = _open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), flags);
 			int hCrtStdErr = _open_osfhandle((intptr_t) GetStdHandle(STD_ERROR_HANDLE), flags);
-			FILE *hfStdOut = (hCrtStdOut >= 0) ? _fdopen(hCrtStdOut, "w") : NULL;
-			FILE *hfStderr = (hCrtStdErr >= 0) ? _fdopen(hCrtStdErr, "w") : NULL;
-			if(hfStdOut) *stdout = *hfStdOut;
-			if(hfStderr) *stderr = *hfStderr;
+			FILE *hfStdOut = (hCrtStdOut >= 0) ? _fdopen(hCrtStdOut, "wb") : NULL;
+			FILE *hfStdErr = (hCrtStdErr >= 0) ? _fdopen(hCrtStdErr, "wb") : NULL;
+			if(hfStdOut) { *stdout = *hfStdOut; std::cout.rdbuf(new std::filebuf(hfStdOut)); }
+			if(hfStdErr) { *stderr = *hfStdErr; std::cerr.rdbuf(new std::filebuf(hfStdErr)); }
 		}
 
 		HWND hwndConsole = GetConsoleWindow();
