@@ -745,13 +745,13 @@ void MainWindow::dropEvent(QDropEvent *event)
 		}
 		if(file.isFile())
 		{
-			qDebug64("Dropped File: %1", file.canonicalFilePath());
+			qDebug("Dropped File: %s", file.canonicalFilePath().toUtf8().constData());
 			droppedFiles << file.canonicalFilePath();
 			continue;
 		}
 		if(file.isDir())
 		{
-			qDebug64("Dropped Folder: %1", file.canonicalFilePath());
+			qDebug("Dropped Folder: %s", file.canonicalFilePath().toUtf8().constData());
 			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoSymLinks);
 			if(list.count() > 0)
 			{
@@ -765,7 +765,7 @@ void MainWindow::dropEvent(QDropEvent *event)
 				list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
 				for(int j = 0; j < list.count(); j++)
 				{
-					qDebug64("Descending to Folder: %1", list.at(j).canonicalFilePath());
+					qDebug("Descending to Folder: %s", list.at(j).canonicalFilePath().toUtf8().constData());
 					urls.prepend(QUrl::fromLocalFile(list.at(j).canonicalFilePath()));
 				}
 			}

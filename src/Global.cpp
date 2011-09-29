@@ -368,17 +368,14 @@ static void lamexp_console_color(FILE* file, WORD attributes)
 void lamexp_message_handler(QtMsgType type, const char *msg)
 {
 	static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
-
-	const char *text = msg;
-	const char *buffer = NULL;
 	
 	QMutexLocker lock(&g_lamexp_message_mutex);
 
-	if((strlen(msg) > 8) && (_strnicmp(msg, "@BASE64@", 8) == 0))
-	{
-		buffer = _strdup(QByteArray::fromBase64(msg + 8).constData());
-		if(buffer) text = buffer;
-	}
+	//if((strlen(msg) > 8) && (_strnicmp(msg, "@BASE64@", 8) == 0))
+	//{
+	//	buffer = _strdup(QByteArray::fromBase64(msg + 8).constData());
+	//	if(buffer) text = buffer;
+	//}
 
 	if(g_lamexp_console_attached)
 	{
@@ -393,17 +390,17 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 			fflush(stderr);
 			lamexp_console_color(stderr, FOREGROUND_RED | FOREGROUND_INTENSITY);
 			fprintf(stderr, GURU_MEDITATION);
-			fprintf(stderr, "%s\n", text);
+			fprintf(stderr, "%s\n", msg);
 			fflush(stderr);
 			break;
 		case QtWarningMsg:
 			lamexp_console_color(stderr, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fprintf(stderr, "%s\n", text);
+			fprintf(stderr, "%s\n", msg);
 			fflush(stderr);
 			break;
 		default:
 			lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fprintf(stderr, "%s\n", text);
+			fprintf(stderr, "%s\n", msg);
 			fflush(stderr);
 			break;
 		}
@@ -413,42 +410,33 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 	}
 	else
 	{
-		char temp[1024] = {'\0'};
+		QString temp("[LameXP][%1] %2");
 		
 		switch(type)
 		{
 		case QtCriticalMsg:
 		case QtFatalMsg:
-			_snprintf_s(temp, 1024, _TRUNCATE, "[LameXP][C] %s", text);
+			temp = temp.arg("C", QString::fromUtf8(msg));
 			break;
 		case QtWarningMsg:
-			_snprintf_s(temp, 1024, _TRUNCATE, "[LameXP][C] %s", text);
+			temp = temp.arg("W", QString::fromUtf8(msg));
 			break;
 		default:
-			_snprintf_s(temp, 1024, _TRUNCATE, "[LameXP][C] %s", text);
+			temp = temp.arg("I", QString::fromUtf8(msg));
 			break;
 		}
 
-		char *ptr = strchr(temp, '\n');
-		while(ptr != NULL)
-		{
-			*ptr = '\t';
-			ptr = strchr(temp, '\n');
-		}
-		
-		strncat_s(temp, 1024, "\n", _TRUNCATE);
-		OutputDebugStringA(temp);
+		temp.replace("\n", "\t").append("\n");
+		OutputDebugStringA(temp.toLatin1().constData());
 	}
 
 	if(type == QtCriticalMsg || type == QtFatalMsg)
 	{
 		lock.unlock();
-		MessageBoxW(NULL, QWCHAR(QString::fromUtf8(text)), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
+		MessageBoxW(NULL, QWCHAR(QString::fromUtf8(msg)), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
 		FatalAppExit(0, L"The application has encountered a critical error and will exit now!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
-
-	LAMEXP_SAFE_FREE(buffer);
 }
 
 /*
@@ -822,6 +810,9 @@ bool lamexp_init_qt(int argc, char* argv[])
 	application->setOrganizationDomain("mulder.at.gg");
 	application->setWindowIcon((date.month() == 12 && date.day() >= 24 && date.day() <= 26) ? QIcon(":/MainIcon2.png") : QIcon(":/MainIcon.png"));
 	
+	//Set text Codec for locale
+	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+
 	//Load plugins from application directory
 	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
 	qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());

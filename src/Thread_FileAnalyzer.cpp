@@ -84,7 +84,7 @@ void FileAnalyzer::run()
 	{
 		int fileType = fileTypeNormal;
 		QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
-		qDebug64("Analyzing: %1", currentFile);
+		qDebug("Analyzing: %s", currentFile.toUtf8().constData());
 		emit fileSelected(QFileInfo(currentFile).fileName());
 		AudioFileModel file = analyzeFile(currentFile, &fileType);
 		
@@ -134,13 +134,13 @@ void FileAnalyzer::run()
 				}
 				else
 				{
-					qDebug64("Rejected Avisynth file: %1", file.filePath());
+					qDebug("Rejected Avisynth file: %s", file.filePath().toUtf8().constData());
 					m_filesRejected++;
 				}
 			}
 			else
 			{
-				qDebug64("Rejected file of unknown type: %1", file.filePath());
+				qDebug("Rejected file of unknown type: %s", file.filePath().toUtf8().constData());
 				m_filesRejected++;
 			}
 			continue;
@@ -513,7 +513,7 @@ bool FileAnalyzer::checkFile_CDDA(QFile &file)
 
 void FileAnalyzer::retrieveCover(AudioFileModel &audioFile, const QString &filePath)
 {
-	qDebug64("Retrieving cover from: %1", filePath);
+	qDebug("Retrieving cover from: %s", filePath.toUtf8().constData());
 	QString extension;
 
 	switch(m_currentCover)

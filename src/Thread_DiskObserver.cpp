@@ -73,8 +73,8 @@ void DiskObserverThread::observe(void)
 		freeSpace = lamexp_free_diskspace(m_path);
 		if(freeSpace < minimumSpace)
 		{
-			qWarning64("Free diskspace on '%1' dropped below %2 MB, only %3 MB free!", m_path, QString::number(minimumSpace / 1048576), QString::number(freeSpace / 1048576));
-			emit messageLogged(tr("Low diskspace on drive '%1' detected (only %2 MB are free), problems can occur!").arg(QDir::toNativeSeparators(m_path), QString::number(freeSpace / 1048576)), true);
+			qWarning("Free diskspace on '%s' dropped below %s MB, only %s MB free!", m_path.toUtf8().constData(), QString::number(minimumSpace / 1048576ui64).toUtf8().constData(), QString::number(freeSpace / 1048576ui64).toUtf8().constData());
+			emit messageLogged(tr("Low diskspace on drive '%1' detected (only %2 MB are free), problems can occur!").arg(QDir::toNativeSeparators(m_path), QString::number(freeSpace / 1048576ui64)), true);
 			minimumSpace = min(freeSpace, (minimumSpace >> 1));
 		}
 		Sleep(1000);

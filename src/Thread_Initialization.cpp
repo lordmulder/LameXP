@@ -299,7 +299,7 @@ void InitializationThread::initTranslations(void)
 		
 		if(lamexp_translation_register(langId, qmFile, langName, systemId))
 		{
-			qDebug64("Registering translation: %1 = %2 (%3)", qmFile, langName, QString::number(systemId));
+			qDebug("Registering translation: %s = %s (%u)", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId);
 		}
 		else
 		{
