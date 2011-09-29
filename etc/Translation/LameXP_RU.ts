@@ -1608,7 +1608,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Entere the pattern to rename the output files here!</source>
+        <source>Enter the pattern to rename the output files here!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -3004,7 +3004,7 @@
                         <string notr="true">[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</string>
                        </property>
                        <property name="placeholderText">
-                        <string>Entere the pattern to rename the output files here!</string>
+                        <string>Enter the pattern to rename the output files here!</string>
                        </property>
                       </widget>
                      </item>

@@ -1602,7 +1602,7 @@
         <translation>¡Aquí puede introducir parámetros personalizados!</translation>
     </message>
     <message>
-        <source>Entere the pattern to rename the output files here!</source>
+        <source>Enter the pattern to rename the output files here!</source>
         <translation>¡Introduzca aquí los patrones de renombrado para los archivos de salida!</translation>
     </message>
     <message>

@@ -1250,7 +1250,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3007"/>
-        <source>Entere the pattern to rename the output files here!</source>
+        <source>Enter the pattern to rename the output files here!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
