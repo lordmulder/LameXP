@@ -412,6 +412,10 @@
         <source>Missing Source File (Tracks will be skipped!)</source>
         <translation>Fehlende Quelldatei (Tracks werden übersprungen!)</translation>
     </message>
+    <message>
+        <source>Load a different Cue Sheet</source>
+        <translation>Ein anderes Cuesheet laden</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetModel</name>

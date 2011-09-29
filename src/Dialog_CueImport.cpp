@@ -71,6 +71,7 @@ CueImportDialog::CueImportDialog(QWidget *parent, FileListModel *fileList, const
 	//Enable up/down button
 	connect(imprtButton, SIGNAL(clicked()), this, SLOT(importButtonClicked()));
 	connect(browseButton, SIGNAL(clicked()), this, SLOT(browseButtonClicked()));
+	connect(loadOtherButton, SIGNAL(clicked()), this, SLOT(loadOtherButtonClicked()));
 
 	//Translate
 	labelHeaderText->setText(QString("<b>%1</b><br>%2").arg(tr("Import Cue Sheet"), tr("The following Cue Sheet will be split and imported into LameXP.")));
@@ -226,6 +227,11 @@ void CueImportDialog::importButtonClicked(void)
 	accept();
 }
 
+void CueImportDialog::loadOtherButtonClicked(void)
+{
+	done(-1);
+}
+
 void CueImportDialog::analyzedFile(const AudioFileModel &file)
 {
 	qDebug("Received result: <%s> <%s/%s>", file.filePath().toLatin1().constData(), file.formatContainerType().toLatin1().constData(), file.formatAudioType().toLatin1().constData());
@@ -263,8 +269,7 @@ void CueImportDialog::importCueSheet(void)
 		//Now split files according to Cue Sheet
 		splitFiles();
 	}
-
-
+	
 	//Release locks
 	while(!m_locks.isEmpty())
 	{

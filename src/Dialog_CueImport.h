@@ -46,6 +46,7 @@ protected:
 private slots:
 	void browseButtonClicked(void);
 	void importButtonClicked(void);
+	void loadOtherButtonClicked(void);
 	void modelChanged(void);
 	void analyzedFile(const AudioFileModel &file);
 

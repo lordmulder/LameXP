@@ -515,6 +515,26 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
+          <widget class="QPushButton" name="loadOtherButton">
+           <property name="minimumSize">
+            <size>
+             <width>175</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Load a different Cue Sheet</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/Icons.qrc">
+             <normaloff>:/icons/folder_explore.png</normaloff>:/icons/folder_explore.png</iconset>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -626,13 +646,14 @@
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
   <include location="../res/Images.qrc"/>
+  <include location="../res/Images.qrc"/>
  </resources>
  <connections>
   <connection>
    <sender>abortButton</sender>
    <signal>clicked()</signal>
    <receiver>CueSheetImport</receiver>
-   <slot>close()</slot>
+   <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>688</x>
