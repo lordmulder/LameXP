@@ -213,19 +213,19 @@
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>wma2wav &amp;minus; Conversor de WMA a WAV</translation>
     </message>
     <message>
         <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
-        <translation type="unfinished"></translation>
+        <translation>avs2wav &amp;minus; Conversor de Avisynth a WAV</translation>
     </message>
 </context>
 <context>
@@ -371,7 +371,7 @@
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation>¡Aviso: El formato de algunos archivos de entrada no puede ser determinado!</translation>
+        <translation>Aviso: ¡El formato de algunos archivos de entrada no puede ser determinado!</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
@@ -1287,7 +1287,7 @@
     </message>
     <message>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
-        <translation>Aviso: Los parámetros personalizados no se comprobarán en absoluto. ¡¡¡ Úselos bajo su propio riesgo !!!</translation>
+        <translation>Aviso: ¡¡¡ Los parámetros personalizados no se comprobarán en absoluto. Úselos bajo su propio riesgo !!!</translation>
     </message>
     <message>
         <source> Multi-Threading </source>
@@ -1531,127 +1531,127 @@
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Parece que un falso anti-virus está ralentizando el inicio de LameXP.</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Por favor, consulte el documento%1 para ver detalles y soluciones!</translation>
     </message>
     <message>
         <source>Slow Startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicio ralentizado</translation>
     </message>
     <message>
         <source>Disable Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar notificaciones de Inicio ralentizado</translation>
     </message>
     <message>
         <source>Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificaciones de Inicio ralentizado</translation>
     </message>
     <message>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que desea deshabilitar las notificaciones de Inicio ralentizado?</translation>
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificaciones de Inicio ralentizado deshabilitadas.</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificaciones de Inicio ralentizado habilitadas.</translation>
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrado de archivos de salida</translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrar archivos de salida</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de pista con cero a la izquierda</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título de la pista</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del artista</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del álbum</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished"></translation>
+        <translation>Año con (al menos) cuatro dígitos</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Comentarios</translation>
+        <translation>Comentarios</translation>
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished"></translation>
+        <translation>Macros de renombrado</translation>
     </message>
     <message>
         <source>You can eneter custom parameters here!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Aquí puede introducir parámetros personalizados!</translation>
     </message>
     <message>
         <source>Entere the pattern to rename the output files here!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Introduzca aquí los patrones de renombrado para los archivos de salida!</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;reset&quot;&gt;Reiniciar&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Mostrar lista de macros&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de archivo sin extensión</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Patrón de renombrado:</translation>
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ejemplo de nombre de archivo:</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished"></translation>
+        <translation>Caracteres prohibidos en el nombre del archivo:</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar mezcla estéreo para archivos de entrada Surround (Multi-canal)</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar la carpeta de salida actual</translation>
     </message>
     <message>
         <source>MPEG-4 AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>MPEG-4 AAC</translation>
     </message>
     <message>
         <source>AAC Encoder-Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones AAC</translation>
     </message>
     <message>
         <source>MPEG-4 AAC:</source>
-        <translation type="unfinished"></translation>
+        <translation>MPEG-4 AAC:</translation>
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: ¡La calidad del audio será muy pobre. Por favor, &lt;u&gt;no&lt;/u&gt; se queje de la calidad del audio!</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: ¡La velocidad de proceso será muy lenta. Por favor, &lt;u&gt;no&lt;/u&gt; se queje de la velocidad de proceso!</translation>
     </message>
 </context>
 <context>
@@ -1943,23 +1943,23 @@
     </message>
     <message>
         <source>Unknown File Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de archivo desconocido</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished">Título desconocido</translation>
+        <translation>Título desconocido</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Artista desconocido</translation>
+        <translation>Artista desconocido</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Álbum desconocido</translation>
     </message>
     <message>
         <source>Unknown Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Comentario desconocido</translation>
     </message>
 </context>
 <context>
@@ -2096,7 +2096,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>El ejecutable &apos;%1&apos;requiere Windows 2000 o superior.</translation>
     </message>
 </context>
 <context>
