@@ -416,6 +416,10 @@
         <source>Missing Source File (Tracks will be skipped!)</source>
         <translation>Fichier source manquant (les pistes seront ignorées !)</translation>
     </message>
+    <message>
+        <source>Load a different Cue Sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueSheetModel</name>

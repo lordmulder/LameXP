@@ -1570,30 +1570,37 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 	
 	TEMP_HIDE_DROPBOX
 	(
-		QString selectedCueFile;
+		while(true)
+		{
+			int result = 0;
+			QString selectedCueFile;
 
-		if(USE_NATIVE_FILE_DIALOG)
-		{
-			selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), m_settings->mostRecentInputPath(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
-		}
-		else
-		{
-			QFileDialog dialog(this, tr("Open Cue Sheet"));
-			dialog.setFileMode(QFileDialog::ExistingFile);
-			dialog.setNameFilter(QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
-			dialog.setDirectory(m_settings->mostRecentInputPath());
-			if(dialog.exec())
+			if(USE_NATIVE_FILE_DIALOG)
 			{
-				selectedCueFile = dialog.selectedFiles().first();
+				selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), m_settings->mostRecentInputPath(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
 			}
-		}
+			else
+			{
+				QFileDialog dialog(this, tr("Open Cue Sheet"));
+				dialog.setFileMode(QFileDialog::ExistingFile);
+				dialog.setNameFilter(QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
+				dialog.setDirectory(m_settings->mostRecentInputPath());
+				if(dialog.exec())
+				{
+					selectedCueFile = dialog.selectedFiles().first();
+				}
+			}
 
-		if(!selectedCueFile.isEmpty())
-		{
-			m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
-			CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile);
-			cueImporter->exec();
-			LAMEXP_DELETE(cueImporter);
+			if(!selectedCueFile.isEmpty())
+			{
+				m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
+				CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile);
+				result = cueImporter->exec();
+				LAMEXP_DELETE(cueImporter);
+			}
+
+			qWarning("Result was %d", result);
+			if(result != (-1)) break;
 		}
 	)
 }

@@ -413,6 +413,10 @@
         <source>Discard</source>
         <translation>Відмінити</translation>
     </message>
+    <message>
+        <source>Load a different Cue Sheet</source>
+        <translation>Обрати інший список CUE</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetModel</name>
