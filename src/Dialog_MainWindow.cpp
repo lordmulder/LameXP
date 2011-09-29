@@ -1106,7 +1106,7 @@ void MainWindow::showAnnounceBox(void)
 	connect(announceTimer, SIGNAL(timeout()), button2, SLOT(hide()));
 	
 	announceTimer->start();
-	announceBox->exec();
+	while(announceTimer->isActive()) announceBox->exec();
 	announceTimer->stop();
 
 	LAMEXP_DELETE(announceTimer);
