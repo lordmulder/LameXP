@@ -415,7 +415,7 @@
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрати інший список CUE</translation>
     </message>
 </context>
 <context>
