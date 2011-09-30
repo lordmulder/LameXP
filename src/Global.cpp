@@ -516,12 +516,14 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 
 	lamexp_cpu_t features;
 	SYSTEM_INFO systemInfo;
+	OSVERSIONINFO osVersionInfo;
 	int CPUInfo[4] = {-1};
 	char CPUIdentificationString[0x40];
 	char CPUBrandString[0x40];
 
 	memset(&features, 0, sizeof(lamexp_cpu_t));
 	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
+	memset(&osVersionInfo, 0, sizeof(OSVERSIONINFO));
 	memset(CPUIdentificationString, 0, sizeof(CPUIdentificationString));
 	memset(CPUBrandString, 0, sizeof(CPUBrandString));
 	
@@ -600,15 +602,28 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 	features.count = systemInfo.dwNumberOfProcessors;
 	features.x64 = true;
 #endif
+	
+	//Hack to disable x64 on the Windows 8 Developer Preview
+	osVersionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+	if(features.x64 && GetVersionEx(&osVersionInfo))
+	{
+		if((osVersionInfo.dwPlatformId == VER_PLATFORM_WIN32_NT) && (osVersionInfo.dwMajorVersion == 6) && (osVersionInfo.dwMinorVersion == 2))
+		{
+			qWarning("Windows 8 (x64) detected. Going to disable all x64 support for now!\n");
+			features.x64 = false;
+		}
+	}
 
 	if(argv)
 	{
+		bool flag = false;
 		for(int i = 0; i < argc; i++)
 		{
-			if(!_stricmp("--force-cpu-no-64bit", argv[i])) features.x64 = false;
-			if(!_stricmp("--force-cpu-no-sse", argv[i])) features.sse = features.sse2 = features.sse3 = features.ssse3 = false;
-			if(!_stricmp("--force-cpu-no-intel", argv[i])) features.intel = false;
+			if(!_stricmp("--force-cpu-no-64bit", argv[i])) { flag = true; features.x64 = false; }
+			if(!_stricmp("--force-cpu-no-sse", argv[i])) { flag = true; features.sse = features.sse2 = features.sse3 = features.ssse3 = false; }
+			if(!_stricmp("--force-cpu-no-intel", argv[i])) { flag = true; features.intel = false; }
 		}
+		if(flag) qWarning("CPU flags overwritten by user-defined parameters. Take care!\n");
 	}
 
 	return features;
