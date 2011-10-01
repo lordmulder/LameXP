@@ -1599,7 +1599,6 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 				LAMEXP_DELETE(cueImporter);
 			}
 
-			qWarning("Result was %d", result);
 			if(result != (-1)) break;
 		}
 	)
