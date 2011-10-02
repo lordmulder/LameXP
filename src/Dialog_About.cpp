@@ -57,15 +57,16 @@ static const struct
 }
 g_lamexp_contributors[] =
 {
-	{"en", L"Englisch",   L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
-	{"de", L"Deutsch",    L"LoRd_MuldeR",         "MuldeR2@GMX.de"       },
-	{"",   L"",           L"Bodo Thevissen",      "Bodo@thevissen.de"    },
-	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"    },
-	{"fr", L"Française",  L"Dodich Informatique", "Dodich@live.fr"       },
-	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it"},
-	{"kr", L"한국어",        L"JaeHyung Lee",        "Kolanp@gmail.com"     },
-	{"ru", L"Русский",    L"Neonailol",           "Neonailol@gmail.com"  },
-	{"uk", L"Українська", L"Arestarh",            "Arestarh@ukr.net"     },
+	{"en", L"Englisch",   L"LoRd_MuldeR",         "MuldeR2@GMX.de"        },
+	{"de", L"Deutsch",    L"LoRd_MuldeR",         "MuldeR2@GMX.de"        },
+	{"",   L"",           L"Bodo Thevissen",      "Bodo@thevissen.de"     },
+	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"     },
+	{"fr", L"Française",  L"Dodich Informatique", "Dodich@live.fr"        },
+	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it" },
+	{"kr", L"한국어",        L"JaeHyung Lee",        "Kolanp@gmail.com"      },
+	{"pl", L"Polski",     L"Sir Daniel K",        "Sir.Daniel.K@gmail.com"},
+	{"ru", L"Русский",    L"Neonailol",           "Neonailol@gmail.com"   },
+	{"uk", L"Українська", L"Arestarh",            "Arestarh@ukr.net"      },
 	{NULL, NULL, NULL, NULL}
 };
 

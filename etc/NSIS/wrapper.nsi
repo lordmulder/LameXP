@@ -66,17 +66,17 @@
 ;Installer Attributes
 ;--------------------------------
 
-RequestExecutionLevel user
 XPStyle on
+RequestExecutionLevel user
 InstallColors /windows
 Name "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 OutFile "${LAMEXP_OUTPUT_FILE}"
 BrandingText "${LAMEXP_DATE} / Build #${LAMEXP_BUILD}"
-InstallDir "$PROGRAMFILES\MuldeR\LameXP v${LAMEXP_VERSION}"
 Icon "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
 ChangeUI all "${NSISDIR}\Contrib\UIs\sdbarker_tiny.exe"
 ShowInstDetails show
 AutoCloseWindow true
+InstallDir ""
 
 
 ;--------------------------------
@@ -132,17 +132,20 @@ Section "-LaunchTheInstaller"
 	
 	; --------
 	
-	!insertmacro GetCommandlineParameter "Update" "?" $R0
-
-	StrCmp "$R0" "?" 0 +3
 	StrCpy $R9 ""
-	Goto RunTryAgain
+	!insertmacro GetCommandlineParameter "Update" "?" $R0
 	
+	StrCmp "$R0" "?" +5
 	StrCmp "$R0" "" 0 +3
 	StrCpy $R9 "/Update"
-	Goto RunTryAgain
-
-	StrCpy $R9 "/Update=$R0"
+	Goto +2
+	StrCpy $R9 '"/Update=$R0"'
+	
+	StrCmp "$INSTDIR" "" +5
+	StrCmp "$R9" "" 0 +3
+	StrCpy $R9 '/D=$INSTDIR'
+	Goto +2
+	StrCpy $R9 '$R9 /D=$INSTDIR'
 	
 	; --------
 
@@ -161,7 +164,7 @@ Section "-LaunchTheInstaller"
 	SetDetailsPrint both
 	DetailPrint "Failed to launch installer :-("
 	SetDetailsPrint listonly
-	Abort
+	Abort "Aborted."
 	
 	RunSuccess:
 	Delete /REBOOTOK "$PLUGINSDIR\LameXP-Install.exe"
