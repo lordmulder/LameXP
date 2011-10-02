@@ -68,9 +68,10 @@
 
 RequestExecutionLevel user
 XPStyle on
+InstallColors /windows
 Name "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 OutFile "${LAMEXP_OUTPUT_FILE}"
-BrandingText "${LAMEXP_DATE} / Build ${LAMEXP_BUILD}"
+BrandingText "${LAMEXP_DATE} / Build #${LAMEXP_BUILD}"
 InstallDir "$PROGRAMFILES\MuldeR\LameXP v${LAMEXP_VERSION}"
 Icon "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
 ChangeUI all "${NSISDIR}\Contrib\UIs\sdbarker_tiny.exe"
@@ -127,28 +128,41 @@ Section "-LaunchTheInstaller"
 	
 	InitPluginsDir
 	SetOutPath "$PLUGINSDIR"
-	File "/oname=$PLUGINSDIR\Install.exe" "${LAMEXP_SOURCE_FILE}"
-	!insertmacro GetCommandlineParameter "Update" "?" $R9
+	File "/oname=$PLUGINSDIR\LameXP-Install.exe" "${LAMEXP_SOURCE_FILE}"
 	
+	; --------
+	
+	!insertmacro GetCommandlineParameter "Update" "?" $R0
+
+	StrCmp "$R0" "?" 0 +3
+	StrCpy $R9 ""
+	Goto RunTryAgain
+	
+	StrCmp "$R0" "" 0 +3
+	StrCpy $R9 "/Update"
+	Goto RunTryAgain
+
+	StrCpy $R9 "/Update=$R0"
+	
+	; --------
+
 	RunTryAgain:
 	
 	ClearErrors
-	StrCmp "$R9" "?" +3 0
-	ExecShell "open" "$PLUGINSDIR\Install.exe" '/Update=$R9' SW_SHOWNORMAL
-	Goto +2
-	ExecShell "open" "$PLUGINSDIR\Install.exe" '/Update' SW_SHOWNORMAL
+	ExecShell "open" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 	
 	ClearErrors
-	StrCmp "$R9" "?" +3 0
-	ExecShell "" "$PLUGINSDIR\Install.exe" '/Update=$R9' SW_SHOWNORMAL
-	Goto +2
-	ExecShell "" "$PLUGINSDIR\Install.exe" '/Update' SW_SHOWNORMAL
+	ExecShell "" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 
 	MessageBox MB_RETRYCANCEL|MB_ICONSTOP|MB_TOPMOST "Failed to launch installer. Please try again!" IDRETRY RunTryAgain
-	Abort "Failed to launch installer :-("
+
+	SetDetailsPrint both
+	DetailPrint "Failed to launch installer :-("
+	SetDetailsPrint listonly
+	Abort
 	
 	RunSuccess:
-	Delete /REBOOTOK "$PLUGINSDIR\Install.exe"
+	Delete /REBOOTOK "$PLUGINSDIR\LameXP-Install.exe"
 SectionEnd
