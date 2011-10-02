@@ -81,6 +81,7 @@ REM ------------------------------------------
 REM :: DELETE OLD OUTPUT FILE ::
 REM ------------------------------------------
 del "%OUT_FILE%.exe"
+del "%OUT_FILE%.sfx.exe"
 del "%OUT_FILE%.zip"
 REM ------------------------------------------
 if exist "%OUT_FILE%.exe" (
@@ -130,7 +131,8 @@ REM ------------------------------------------
 REM :: CREATE PACKAGES ::
 REM ------------------------------------------
 "%PATH_SEVENZ%\7z.exe" a -tzip -r "%OUT_FILE%.zip" "%TMP_PATH%\*"
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "%~dp0\..\NSIS\setup.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "%~dp0\..\NSIS\setup.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.exe" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx.exe" "%~dp0\..\NSIS\wrapper.nsi"
 rd /S /Q "%TMP_PATH%"
 REM ------------------------------------------
 if not exist "%OUT_FILE%.zip" (
@@ -144,10 +146,11 @@ if not exist "%OUT_FILE%.exe" (
 REM ------------------------------------------
 attrib +R "%OUT_FILE%.zip"
 attrib +R "%OUT_FILE%.exe"
+attrib +R "%OUT_FILE%.sfx.exe"
 REM ------------------------------------------
 REM :: CREATE SIGNATURE ::
 REM ------------------------------------------
-"%PATH_GNUPG1%\gpg.exe" --detach-sign "%OUT_FILE%.exe"
+"%PATH_GNUPG1%\gpg.exe" --detach-sign "%OUT_FILE%.sfx.exe"
 attrib +R "%OUT_FILE%.exe.sig"
 REM ------------------------------------------
 echo.

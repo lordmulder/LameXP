@@ -75,7 +75,7 @@
 
 !include `MUI2.nsh`
 !include `WinVer.nsh`
-!include `UAC.nsh`
+!include `StdUtils.nsh`
 !include `parameters.nsh`
 
 
@@ -83,7 +83,7 @@
 ;Installer Attributes
 ;--------------------------------
 
-RequestExecutionLevel user
+RequestExecutionLevel admin
 ShowInstDetails show
 ShowUninstDetails show
 Name "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
@@ -107,12 +107,14 @@ SetCompressorDictSize 64
 ;Reserved Files
 ;--------------------------------
 
-ReserveFile "${NSISDIR}\Plugins\UAC.dll"
 ReserveFile "${NSISDIR}\Plugins\System.dll"
+ReserveFile "${NSISDIR}\Plugins\UserInfo.dll"
+ReserveFile "${NSISDIR}\Plugins\Aero.dll"
+ReserveFile "${NSISDIR}\Plugins\StdUtils.dll"
 ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
 ReserveFile "${NSISDIR}\Plugins\StartMenu.dll"
 ReserveFile "${NSISDIR}\Plugins\LockedList.dll"
-ReserveFile "${NSISDIR}\Plugins\Aero.dll"
+ReserveFile "checkproc.exe"
 
 
 ;--------------------------------
@@ -170,8 +172,8 @@ VIAddVersionKey "Website" "${MyWebSite}"
 !define MUI_HEADERIMAGE_BITMAP "header.bmp"
 !define MUI_HEADERIMAGE_UNBITMAP "header-un.bmp"
 !define MUI_LANGDLL_ALLLANGUAGES
-!define MUI_CUSTOMFUNCTION_GUIINIT MyUacInit
-!define MUI_CUSTOMFUNCTION_UNGUIINIT un.MyUacInit
+!define MUI_CUSTOMFUNCTION_GUIINIT MyGuiInit
+!define MUI_CUSTOMFUNCTION_UNGUIINIT un.MyGuiInit
 !define MUI_LANGDLL_ALWAYSSHOW
 
 
@@ -257,18 +259,14 @@ UninstPage Custom un.LockedListShow
 ;--------------------------------
 
 Function .onInit
-	${If} ${UAC_IsInnerInstance}
-	${OrIf} ${UAC_IsAdmin}
-		!insertmacro MUI_LANGDLL_DISPLAY
-	${EndIf}
-
-	${IfNot} ${UAC_IsInnerInstance}
-		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
-		Pop $0
-		StrCmp $0 0 +3
+	System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
+	Pop $0
+	${If} $0 <> 0
 		MessageBox MB_ICONSTOP|MB_TOPMOST "Sorry, the installer is already running!"
 		Quit
 	${EndIf}
+
+	!insertmacro MUI_LANGDLL_DISPLAY
 
 	; --------
 	
@@ -287,54 +285,41 @@ Function .onInit
 		Quit
 	${EndIf}
 	
-	${If} ${UAC_IsInnerInstance}
-	${OrIf} ${UAC_IsAdmin}
-		${If} ${IsWin2000}
-		${AndIf} ${AtMostServicePack} 3
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 4 for Windows 2000 is highly recommended!"
-			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 4 for Windows 2000 now?" IDNO +2
-			ExecShell "open" "http://www.microsoft.com/download/en/details.aspx?id=4127"
-		${EndIf}
-		${If} ${IsWinXP}
-		${AndIf} ${AtMostServicePack} 2
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 3 for Windows XP is highly recommended!"
-			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
-			ExecShell "open" "http://technet.microsoft.com/en-us/windows/bb794714"
-		${EndIf}
-		${If} ${IsWinVista}
-		${AndIf} ${AtMostServicePack} 1
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 2 for Windows Vista is highly recommended!"
-			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 2 for Windows Vista now?" IDNO +2
-			ExecShell "open" "http://technet.microsoft.com/en-us/windows/dd262148"
-		${EndIf}
-		${If} ${IsWin7}
-		${AndIf} ${AtMostServicePack} 0
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "Setup has detected that your system is missing important updates:$\nThe Service Pack 1 for Windows 7 is highly recommended!"
-			MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 1 for Windows 7 now?" IDNO +2
-			ExecShell "open" "http://technet.microsoft.com/en-us/windows/gg635126"
-		${EndIf}
-	${EndIf}
+	; --------
 
+	UserInfo::GetAccountType
+	Pop $0
+	${If} $0 != "Admin"
+		MessageBox MB_ICONSTOP|MB_TOPMOST "Your system requires administrative permissions in order to install this software."
+		Quit
+	${EndIf}
+	
 	; --------
 
 	InitPluginsDir
 	File "/oname=$PLUGINSDIR\checkproc.exe" "checkproc.exe"
 	nsExec::Exec /TIMEOUT=5000 '"$PLUGINSDIR\checkproc.exe" Softonic Brothersoft'
+	Pop $0
 FunctionEnd
 
 Function un.onInit
-	${If} ${UAC_IsInnerInstance}
-	${OrIf} ${UAC_IsAdmin}
-		!insertmacro MUI_LANGDLL_DISPLAY
-	${EndIf}
-
-	${IfNot} ${UAC_IsInnerInstance}
-		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
-		Pop $0
-		StrCmp $0 0 +3
+	System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
+	Pop $0
+	${If} $0 <> 0
 		MessageBox MB_ICONSTOP|MB_TOPMOST "Sorry, the un-installer is already running!"
 		Quit
-	${EndIf}  
+	${EndIf}
+
+	!insertmacro MUI_LANGDLL_DISPLAY
+
+	; --------
+
+	UserInfo::GetAccountType
+	Pop $0
+	${If} $0 != "Admin"
+		MessageBox MB_ICONSTOP|MB_TOPMOST "Your system requires administrative permissions in order to install this software."
+		Quit
+	${EndIf}
 FunctionEnd
 
 
@@ -342,53 +327,13 @@ FunctionEnd
 ;UAC initialization
 ;--------------------------------
 
-Function MyUacInit
-	UAC_TryAgain:
-	!insertmacro UAC_RunElevated
-	${Switch} $0
-	${Case} 0
-		${IfThen} $1 = 1 ${|} Quit ${|}
-		${IfThen} $3 <> 0 ${|} ${Break} ${|}
-		${If} $1 = 3
-			MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND|MB_OKCANCEL "This installer requires admin access, please try again!" /SD IDCANCEL IDOK UAC_TryAgain
-		${EndIf}
-	${Case} 1223
-		MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND|MB_OKCANCEL "This installer requires admin privileges, please try again!" /SD IDCANCEL IDOK UAC_TryAgain
-		Quit
-	${Case} 1062
-		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Logon service not running, aborting!"
-		Quit
-	${Default}
-		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Unable to elevate installer! (Error code: $0)"
-		Quit
-	${EndSwitch}
-	
+Function MyGuiInit
 	StrCpy $0 $HWNDPARENT
 	System::Call "user32::SetWindowPos(i r0, i -1, i 0, i 0, i 0, i 0, i 3)"
 	Aero::Apply
 FunctionEnd
 
-Function un.MyUacInit
-	UAC_TryAgain:
-	!insertmacro UAC_RunElevated
-	${Switch} $0
-	${Case} 0
-		${IfThen} $1 = 1 ${|} Quit ${|}
-		${IfThen} $3 <> 0 ${|} ${Break} ${|}
-		${If} $1 = 3
-			MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND|MB_OKCANCEL "This un-installer requires admin access, please try again!" /SD IDCANCEL IDOK UAC_TryAgain
-		${EndIf}
-	${Case} 1223
-		MessageBox MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND|MB_OKCANCEL "This un-installer requires admin privileges, please try again!" /SD IDCANCEL IDOK UAC_TryAgain
-		Quit
-	${Case} 1062
-		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Logon service not running, aborting!"
-		Quit
-	${Default}
-		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "Unable to elevate installer! (Error code: $0)"
-		Quit
-	${EndSwitch}
-	
+Function un.MyGuiInit
 	StrCpy $0 $HWNDPARENT
 	System::Call "user32::SetWindowPos(i r0, i -1, i 0, i 0, i 0, i 0, i 3)"
 	Aero::Apply
@@ -472,6 +417,11 @@ FunctionEnd
 	!insertmacro TrimStr ${OutVar}
 	StrCmp ${OutVar} "" 0 +2
 	StrCpy ${OutVar} "LameXP.exe"
+!macroend
+
+!macro DisableNextButton TmpVar
+	GetDlgItem ${TmpVar} $HWNDPARENT 1
+	EnableWindow ${TmpVar} 0
 !macroend
 
 
@@ -675,12 +625,15 @@ FunctionEnd
 ;--------------------------------
 
 Function RunAppFunction
+	!insertmacro DisableNextButton $R0
 	!insertmacro GetExecutableName $R0
-	!insertmacro UAC_AsUser_ExecShell "explore" "$INSTDIR" "" "" SW_SHOWNORMAL
-	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\$R0" "--first-run" "$INSTDIR" SW_SHOWNORMAL
+	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR" "explore" ""
+	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\$R0" "open" "--first-run"
+	${StdUtils.Unload}
 FunctionEnd
 
 Function ShowReadmeFunction
-	!insertmacro UAC_AsUser_ExecShell "open" "$INSTDIR\FAQ.html" "" "" SW_SHOWNORMAL
+	!insertmacro DisableNextButton $R0
+	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\FAQ.html" "open" ""
+	${StdUtils.Unload}
 FunctionEnd
-
