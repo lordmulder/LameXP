@@ -98,6 +98,14 @@ SubCaption 4 " "
 
 
 ;--------------------------------
+;Reserved Files
+;--------------------------------
+
+ReserveFile "${NSISDIR}\Plugins\System.dll"
+ReserveFile "${NSISDIR}\Plugins\StdUtils.dll"
+
+
+;--------------------------------
 ;Version Info
 ;--------------------------------
 
@@ -151,6 +159,35 @@ Section "-LaunchTheInstaller"
 
 	RunTryAgain:
 	
+	DetailPrint "Exec: $PLUGINSDIR\LameXP-Install.exe"
+	StdUtils::ExecShellWait /NOUNLOAD '$R9' "open" "$PLUGINSDIR\LameXP-Install.exe"
+	Pop $R1
+	DetailPrint "Result: $R1"
+	
+	StrCmp $R1 "error" RunFailed
+	StrCmp $R1 "no_wait" RunSuccess
+	Sleep 333
+	HideWindow
+	StdUtils::WaitForProc /NOUNLOAD $R1
+	Goto RunSuccess
+	
+	; --------
+
+	RunFailed:
+
+	MessageBox MB_ABORTRETRYIGNORE|MB_DEFBUTTON2|MB_ICONSTOP|MB_TOPMOST "Failed to launch the installer. Please try again!" IDRETRY RunTryAgain IDIGNORE RunFallback
+
+	SetDetailsPrint both
+	DetailPrint "Failed to launch installer :-("
+	SetDetailsPrint listonly
+	
+	StdUtils::Unload
+	Abort "Aborted."
+	
+	; --------
+
+	RunFallback:
+	
 	ClearErrors
 	ExecShell "open" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
@@ -159,13 +196,12 @@ Section "-LaunchTheInstaller"
 	ExecShell "" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 
-	MessageBox MB_RETRYCANCEL|MB_ICONSTOP|MB_TOPMOST "Failed to launch installer. Please try again!" IDRETRY RunTryAgain
-
-	SetDetailsPrint both
-	DetailPrint "Failed to launch installer :-("
-	SetDetailsPrint listonly
-	Abort "Aborted."
+	Goto RunFailed
+	
+	; --------
 	
 	RunSuccess:
+
 	Delete /REBOOTOK "$PLUGINSDIR\LameXP-Install.exe"
+	StdUtils::Unload
 SectionEnd
