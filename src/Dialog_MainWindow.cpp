@@ -67,6 +67,7 @@
 
 //System includes
 #include <MMSystem.h>
+#include <ShellAPI.h>
 
 //Helper macros
 #define ABORT_IF_BUSY if(m_banner->isVisible() || m_delayedFileTimer->isActive()) { MessageBeep(MB_ICONEXCLAMATION); return; }
@@ -923,7 +924,18 @@ void MainWindow::windowShown(void)
 			QApplication::processEvents();
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 			QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
-			if(!QProcess::startDetached(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()), QStringList()))
+			QFileInfo uninstallerInfo = QFileInfo(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()));
+			if(uninstallerInfo.exists())
+			{
+				QString uninstallerDir = uninstallerInfo.canonicalPath();
+				QString uninstallerPath = uninstallerInfo.canonicalFilePath();
+				for(int i = 0; i < 3; i++)
+				{
+					HINSTANCE res = ShellExecuteW(this->winId(), L"open", QWCHAR(QDir::toNativeSeparators(uninstallerPath)), NULL, QWCHAR(QDir::toNativeSeparators(uninstallerDir)), SW_SHOWNORMAL);
+					if(reinterpret_cast<int>(res) > 32) break;
+				}
+			}
+			else
 			{
 				MoveFileEx(QWCHAR(QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath())), NULL, MOVEFILE_DELAY_UNTIL_REBOOT | MOVEFILE_REPLACE_EXISTING);
 			}
