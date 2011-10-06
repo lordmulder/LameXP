@@ -112,6 +112,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize);
 	LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled);
 	LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume);
+	LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode);
 	LAMEXP_MAKE_OPTION_I(toneAdjustBass);
 	LAMEXP_MAKE_OPTION_I(toneAdjustTreble);
 	LAMEXP_MAKE_OPTION_S(customParametersLAME);

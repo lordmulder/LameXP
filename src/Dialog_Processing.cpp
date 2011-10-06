@@ -692,7 +692,7 @@ void ProcessingDialog::startNextJob(void)
 	}
 	if(m_settings->normalizationFilterEnabled())
 	{
-		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume()));
+		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume(), m_settings->normalizationFilterEqualizationMode()));
 	}
 	if(m_settings->renameOutputFilesEnabled() && (!m_settings->renameOutputFilesPattern().simplified().isEmpty()))
 	{

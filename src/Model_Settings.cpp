@@ -103,6 +103,7 @@ LAMEXP_MAKE_ID(neroAACEnable2Pass, "AdvancedOptions/AACEnc/Enable2Pass");
 LAMEXP_MAKE_ID(aacEncProfile, "AdvancedOptions/AACEnc/ForceProfile");
 LAMEXP_MAKE_ID(normalizationFilterEnabled, "AdvancedOptions/VolumeNormalization/Enabled");
 LAMEXP_MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
+LAMEXP_MAKE_ID(normalizationFilterEqualizationMode, "AdvancedOptions/VolumeNormalization/EqualizationMode");
 LAMEXP_MAKE_ID(toneAdjustBass, "AdvancedOptions/ToneAdjustment/Bass");
 LAMEXP_MAKE_ID(toneAdjustTreble, "AdvancedOptions/ToneAdjustment/Treble");
 LAMEXP_MAKE_ID(customParametersLAME, "AdvancedOptions/CustomParameters/LAME");
@@ -346,6 +347,7 @@ LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation, false);
 LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize, 8);
 LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled, false)
 LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume, -50)
+LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode, 0);
 LAMEXP_MAKE_OPTION_I(toneAdjustBass, 0)
 LAMEXP_MAKE_OPTION_I(toneAdjustTreble, 0)
 LAMEXP_MAKE_OPTION_S(customParametersLAME, QString());

@@ -1653,6 +1653,22 @@
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
         <translation>Aviso: ¡La velocidad de proceso será muy lenta. Por favor, &lt;u&gt;no&lt;/u&gt; se queje de la velocidad de proceso!</translation>
     </message>
+    <message>
+        <source>Peak Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RMS Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Equalization Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

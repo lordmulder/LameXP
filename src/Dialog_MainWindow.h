@@ -97,6 +97,7 @@ private slots:
 	void neroAACProfileChanged(int value);
 	void normalizationEnabledChanged(bool checked);
 	void normalizationMaxVolumeChanged(double volume);
+	void normalizationModeChanged(int mode);
 	void notifyOtherInstance(void);
 	void openFolderActionActivated(void);
 	void outputFolderContextMenu(const QPoint &pos);

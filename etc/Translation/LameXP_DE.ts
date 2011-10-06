@@ -1654,6 +1654,22 @@
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
         <translation>Achtung: Die Geschwindigkeit wird sehr gering sein. Bitte &lt;u&gt;nicht&lt;/u&gt; über die Geschwindigkeit beschweren!</translation>
     </message>
+    <message>
+        <source>Peak Level</source>
+        <translation>Max. Pegel</translation>
+    </message>
+    <message>
+        <source>RMS Level</source>
+        <translation>Max. Energie</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Keiner</translation>
+    </message>
+    <message>
+        <source>Equalization Mode:</source>
+        <translation>Angleichungsmodus:</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

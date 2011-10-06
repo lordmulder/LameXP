@@ -237,6 +237,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfile());
 	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
 	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
+	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationMode());
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabled()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2Pass()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocation()) checkBoxAftenFastAllocation->click();
@@ -267,6 +268,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(spinBoxAftenSearchSize, SIGNAL(valueChanged(int)), this, SLOT(aftenSearchSizeChanged(int)));
 	connect(checkBoxAftenFastAllocation, SIGNAL(clicked(bool)), this, SLOT(aftenFastAllocationChanged(bool)));
 	connect(spinBoxNormalizationFilter, SIGNAL(valueChanged(double)), this, SLOT(normalizationMaxVolumeChanged(double)));
+	connect(comboBoxNormalizationMode, SIGNAL(currentIndexChanged(int)), this, SLOT(normalizationModeChanged(int)));
 	connect(spinBoxToneAdjustBass, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustBassChanged(double)));
 	connect(spinBoxToneAdjustTreble, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustTrebleChanged(double)));
 	connect(buttonToneAdjustReset, SIGNAL(clicked()), this, SLOT(toneAdjustTrebleReset()));
@@ -657,7 +659,7 @@ void MainWindow::changeEvent(QEvent *e)
 {
 	if(e->type() == QEvent::LanguageChange)
 	{
-		int comboBoxIndex[5];
+		int comboBoxIndex[6];
 		
 		//Backup combobox indices, as retranslateUi() resets
 		comboBoxIndex[0] = comboBoxMP3ChannelMode->currentIndex();
@@ -665,6 +667,7 @@ void MainWindow::changeEvent(QEvent *e)
 		comboBoxIndex[2] = comboBoxAACProfile->currentIndex();
 		comboBoxIndex[3] = comboBoxAftenCodingMode->currentIndex();
 		comboBoxIndex[4] = comboBoxAftenDRCMode->currentIndex();
+		comboBoxIndex[5] = comboBoxNormalizationMode->currentIndex();
 		
 		//Re-translate from UIC
 		Ui::MainWindow::retranslateUi(this);
@@ -675,6 +678,7 @@ void MainWindow::changeEvent(QEvent *e)
 		comboBoxAACProfile->setCurrentIndex(comboBoxIndex[2]);
 		comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
 		comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
+		comboBoxNormalizationMode->setCurrentIndex(comboBoxIndex[5]);
 
 		//Update the window title
 		if(LAMEXP_DEBUG)
@@ -2791,6 +2795,14 @@ void MainWindow::normalizationMaxVolumeChanged(double value)
 }
 
 /*
+ * Normalization equalization mode changed
+ */
+void MainWindow::normalizationModeChanged(int mode)
+{
+	m_settings->normalizationFilterEqualizationMode(mode);
+}
+
+/*
  * Tone adjustment has changed (Bass)
  */
 void MainWindow::toneAdjustBassChanged(double value)
@@ -3022,6 +3034,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfileDefault());
 	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
 	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
+	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
 	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabledDefault()) checkBoxBitrateManagement->click();
 	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2PassDefault()) checkBoxNeroAAC2PassMode->click();
 	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabledDefault()) checkBoxNormalizationFilter->click();

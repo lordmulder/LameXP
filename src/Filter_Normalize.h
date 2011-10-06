@@ -26,7 +26,7 @@
 class NormalizeFilter : public AbstractFilter
 {
 public:
-	NormalizeFilter(int peakVolume = -50);
+	NormalizeFilter(int peakVolume = -50, int equalizationMode = 0);
 	~NormalizeFilter(void);
 
 	virtual bool apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
@@ -34,4 +34,5 @@ public:
 private:
 	const QString m_binary;
 	int m_peakVolume;
+	int m_equalizationMode;
 };

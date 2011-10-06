@@ -27,7 +27,7 @@
 #include <QProcess>
 #include <QRegExp>
 
-NormalizeFilter::NormalizeFilter(int peakVolume)
+NormalizeFilter::NormalizeFilter(int peakVolume, int equalizationMode)
 :
 	m_binary(lamexp_lookup_tool("sox.exe"))
 {
@@ -37,6 +37,7 @@ NormalizeFilter::NormalizeFilter(int peakVolume)
 	}
 
 	m_peakVolume = min(-50, max(-3200, peakVolume));
+	m_equalizationMode = min(2, max(0, equalizationMode));
 }
 
 NormalizeFilter::~NormalizeFilter(void)
@@ -47,6 +48,7 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 {
 	QProcess process;
 	QStringList args;
+	QString eqMode = (m_equalizationMode == 0) ? "-ne" : ((m_equalizationMode == 1) ? "-nb" : "-n");
 
 	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
 
@@ -55,7 +57,7 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 	args << "gain";
-	args << "-ne" << QString().sprintf("%.2f", static_cast<double>(m_peakVolume) / 100.0);
+	args << eqMode << QString().sprintf("%.2f", static_cast<double>(m_peakVolume) / 100.0);
 
 	if(!startProcess(process, m_binary, args))
 	{
