@@ -78,6 +78,10 @@
 !include `StdUtils.nsh`
 !include `parameters.nsh`
 
+;Uninstaller
+!define __PREFIX__ "un."
+!include `parameters.nsh`
+
 
 ;--------------------------------
 ;Installer Attributes
@@ -197,7 +201,9 @@ Page Custom LockedListShow
 ;Uninstaller
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_TITLE_3LINES
+!define MUI_PAGE_CUSTOMFUNCTION_PRE un.CheckForcedUninstall
 !insertmacro MUI_UNPAGE_WELCOME
+!define MUI_PAGE_CUSTOMFUNCTION_PRE un.CheckForcedUninstall
 !insertmacro MUI_UNPAGE_CONFIRM
 UninstPage Custom un.LockedListShow
 !insertmacro MUI_UNPAGE_INSTFILES
@@ -266,7 +272,10 @@ Function .onInit
 		Quit
 	${EndIf}
 
-	!insertmacro MUI_LANGDLL_DISPLAY
+	!insertmacro GetCommandlineParameter "Update" "?" $R0
+	${If} "$R0" == "?"
+		!insertmacro MUI_LANGDLL_DISPLAY
+	${EndIf}
 
 	; --------
 	
@@ -310,8 +319,11 @@ Function un.onInit
 		Quit
 	${EndIf}
 
-	!insertmacro MUI_LANGDLL_DISPLAY
-
+	!insertmacro un.GetCommandlineParameter "Force" "?" $R0
+	${If} "$R0" == "?"
+		!insertmacro MUI_LANGDLL_DISPLAY
+	${EndIf}
+	
 	; --------
 
 	UserInfo::GetAccountType
@@ -324,7 +336,7 @@ FunctionEnd
 
 
 ;--------------------------------
-;UAC initialization
+;GUI initialization
 ;--------------------------------
 
 Function MyGuiInit
@@ -559,16 +571,20 @@ SectionEnd
 
 Function CheckForUpdate
 	!insertmacro GetCommandlineParameter "Update" "?" $R0
-	StrCmp $R0 "?" 0 EnableUpdateMode
+	${IfNotThen} "$R0" == "?" ${|} Goto EnableUpdateMode ${|}
 
-	StrCmp "$INSTDIR" "" 0 +2
-	Return
-	IfFileExists "$INSTDIR\*.*" +2
-	Return
-	StrCmp "$EXEDIR" "$INSTDIR" 0 +2
-	Return
-	IfFileExists "$INSTDIR\LameXP.exe" +2
-	Return
+	${IfThen} "$INSTDIR" == "" ${|} Return ${|}
+	${IfThen} "$INSTDIR" == "$EXEDIR" ${|} Return ${|}
+	${IfNotThen} ${FileExists} "$INSTDIR\LameXP.exe" ${|} Return ${|}
+
+	;StrCmp "$INSTDIR" "" 0 +2
+	;Return
+	;IfFileExists "$INSTDIR\*.*" +2
+	;Return
+	;StrCmp "$EXEDIR" "$INSTDIR" 0 +2
+	;Return
+	;IfFileExists "$INSTDIR\LameXP.exe" +2
+	;Return
 
 	EnableUpdateMode:
 
@@ -579,6 +595,11 @@ Function CheckForUpdate
 	FindWindow $R0 "#32770" "" $HWNDPARENT
 	GetDlgItem $R1 $R0 1001
 	EnableWindow $R1 0
+FunctionEnd
+
+Function un.CheckForcedUninstall
+	!insertmacro un.GetCommandlineParameter "Force" "?" $R0
+	${IfNotThen} "$R0" == "?" ${|} Abort ${|}
 FunctionEnd
 
 

@@ -935,7 +935,7 @@ void MainWindow::windowShown(void)
 				QString uninstallerPath = uninstallerInfo.canonicalFilePath();
 				for(int i = 0; i < 3; i++)
 				{
-					HINSTANCE res = ShellExecuteW(this->winId(), L"open", QWCHAR(QDir::toNativeSeparators(uninstallerPath)), NULL, QWCHAR(QDir::toNativeSeparators(uninstallerDir)), SW_SHOWNORMAL);
+					HINSTANCE res = ShellExecuteW(this->winId(), L"open", QWCHAR(QDir::toNativeSeparators(uninstallerPath)), L"/Force", QWCHAR(QDir::toNativeSeparators(uninstallerDir)), SW_SHOWNORMAL);
 					if(reinterpret_cast<int>(res) > 32) break;
 				}
 			}
