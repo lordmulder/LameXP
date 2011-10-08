@@ -106,13 +106,15 @@ SetCompressorDictSize 64
 ;Reserved Files
 ;--------------------------------
 
+ReserveFile "${NSISDIR}\Plugins\Aero.dll"
+ReserveFile "${NSISDIR}\Plugins\LangDLL.dll"
+ReserveFile "${NSISDIR}\Plugins\LockedList.dll"
+ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
+ReserveFile "${NSISDIR}\Plugins\nsExec.dll"
+ReserveFile "${NSISDIR}\Plugins\StartMenu.dll"
+ReserveFile "${NSISDIR}\Plugins\StdUtils.dll"
 ReserveFile "${NSISDIR}\Plugins\System.dll"
 ReserveFile "${NSISDIR}\Plugins\UserInfo.dll"
-ReserveFile "${NSISDIR}\Plugins\Aero.dll"
-ReserveFile "${NSISDIR}\Plugins\StdUtils.dll"
-ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
-ReserveFile "${NSISDIR}\Plugins\StartMenu.dll"
-ReserveFile "${NSISDIR}\Plugins\LockedList.dll"
 ReserveFile "checkproc.exe"
 
 
@@ -469,7 +471,8 @@ SectionEnd
 
 Section "-Finished"
 	!insertmacro PrintProgress "$(MUI_TEXT_FINISH_TITLE)."
-	
+	${StdUtils.Unload}
+
 	; ---- POLL ----
 	; !insertmacro UAC_AsUser_ExecShell "" "http://mulder.brhack.net/temp/style_poll/" "" "" SW_SHOWNORMAL
 	; ---- POLL ----

@@ -48,9 +48,6 @@
   !error "LAMEXP_UPX_PATH is not defined !!!"
 !endif
 
-;UUID
-!define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
-
 ;Web-Site
 !define MyWebSite "http://mulder.at.gg/"
 
@@ -159,49 +156,46 @@ Section "-LaunchTheInstaller"
 
 	RunTryAgain:
 	
-	DetailPrint "Exec: $PLUGINSDIR\LameXP-Install.exe"
-	StdUtils::ExecShellWait /NOUNLOAD '$R9' "open" "$PLUGINSDIR\LameXP-Install.exe"
-	Pop $R1
+	DetailPrint "ExecShellWait: $PLUGINSDIR\LameXP-Install.exe"
+	${StdUtils.ExecShellWait} $R1 "$PLUGINSDIR\LameXP-Install.exe" "open" '$R9'
 	DetailPrint "Result: $R1"
 	
 	StrCmp $R1 "error" RunFailed
 	StrCmp $R1 "no_wait" RunSuccess
 	Sleep 333
 	HideWindow
-	StdUtils::WaitForProc /NOUNLOAD $R1
+	${StdUtils.WaitForProc} $R1
 	Goto RunSuccess
 	
 	; --------
 
 	RunFailed:
 
-	MessageBox MB_ABORTRETRYIGNORE|MB_DEFBUTTON2|MB_ICONSTOP|MB_TOPMOST "Failed to launch the installer. Please try again!" IDRETRY RunTryAgain IDIGNORE RunFallback
+	MessageBox MB_RETRYCANCEL|MB_DEFBUTTON2|MB_ICONSTOP|MB_TOPMOST "Failed to launch the installer. Please try again!" IDRETRY RunTryAgain
 
-	SetDetailsPrint both
-	DetailPrint "Failed to launch installer :-("
-	SetDetailsPrint listonly
-	
-	StdUtils::Unload
-	Abort "Aborted."
-	
 	; --------
 
-	RunFallback:
-	
 	ClearErrors
 	ExecShell "open" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
-	
+
 	ClearErrors
 	ExecShell "" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 
-	Goto RunFailed
-	
+	; --------
+
+	SetDetailsPrint both
+	DetailPrint "Failed to launch installer :-("
+	SetDetailsPrint listonly
+
+	${StdUtils.Unload}
+	Abort "Aborted."
+
 	; --------
 	
 	RunSuccess:
 
 	Delete /REBOOTOK "$PLUGINSDIR\LameXP-Install.exe"
-	StdUtils::Unload
+	${StdUtils.Unload}
 SectionEnd
