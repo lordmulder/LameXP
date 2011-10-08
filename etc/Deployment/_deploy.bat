@@ -108,12 +108,18 @@ if "%LAMEXP_REDIST%"=="1" (
 	copy "%QTDIR%\plugins\imageformats\q???4.dll" "%TMP_PATH%\imageformats"
 )
 REM ------------------------------------------
+if "%LAMEXP_SKIP_BUILD%"=="YES" (
+	goto SkipPackingThisTime
+)
+REM ------------------------------------------
 for %%f in ("%TMP_PATH%\*.exe") do (
 	"%PATH_UPXBIN%\upx.exe" --best "%%f"
 )
 for %%f in ("%TMP_PATH%\*.dll") do (
 	"%PATH_UPXBIN%\upx.exe" --best "%%f"
 )
+REM ------------------------------------------
+:SkipPackingThisTime
 REM ------------------------------------------
 if exist "%~dp0\_postproc.bat" (
 	call "%~dp0\_postproc.bat" "%TMP_PATH%"
