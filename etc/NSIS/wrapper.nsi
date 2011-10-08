@@ -59,7 +59,7 @@
 ;Includes
 ;--------------------------------
 
-!include `parameters.nsh`
+!include `StdUtils.nsh`
 
 
 ;--------------------------------
@@ -141,7 +141,7 @@ Section "-LaunchTheInstaller"
 	; --------
 	
 	StrCpy $R9 ""
-	!insertmacro GetCommandlineParameter "Update" "?" $R0
+	${StdUtils.GetParameter} $R0 "Update" "?"
 	
 	StrCmp "$R0" "?" +5
 	StrCmp "$R0" "" 0 +3

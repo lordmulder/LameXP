@@ -407,7 +407,7 @@ void UpdateDialog::checkForUpdates(void)
 	{
 		mirrorList << QString::fromLatin1(update_mirrors_back[index]);
 	}
-
+	
 	// ----- Fetch Update Info From Server ----- //
 
 	while(!mirrorList.isEmpty())

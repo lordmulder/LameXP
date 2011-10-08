@@ -76,11 +76,6 @@
 !include `MUI2.nsh`
 !include `WinVer.nsh`
 !include `StdUtils.nsh`
-!include `parameters.nsh`
-
-;Uninstaller
-!define __PREFIX__ "un."
-!include `parameters.nsh`
 
 
 ;--------------------------------
@@ -272,7 +267,7 @@ Function .onInit
 		Quit
 	${EndIf}
 
-	!insertmacro GetCommandlineParameter "Update" "?" $R0
+	${StdUtils.GetParameter} $R0 "Update" "?"
 	${If} "$R0" == "?"
 		!insertmacro MUI_LANGDLL_DISPLAY
 	${EndIf}
@@ -285,7 +280,7 @@ Function .onInit
 	${EndIf}
 
 	${If} ${AtMostWinNT4}
-		!insertmacro GetCommandlineParameter "Update" "?" $R0
+		${StdUtils.GetParameter} $R0 "Update" "?"
 		${If} $R0 == "?"
 			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Installation aborted!$\nThe minimum required platform is Windows 2000."
 		${Else}
@@ -319,7 +314,7 @@ Function un.onInit
 		Quit
 	${EndIf}
 
-	!insertmacro un.GetCommandlineParameter "Force" "?" $R0
+	${StdUtils.GetParameter} $R0 "Force" "?"
 	${If} "$R0" == "?"
 		!insertmacro MUI_LANGDLL_DISPLAY
 	${EndIf}
@@ -425,8 +420,7 @@ Function _TrimStr
 FunctionEnd
 
 !macro GetExecutableName OutVar
-	!insertmacro GetCommandlineParameter "Update" "LameXP.exe" ${OutVar}
-	!insertmacro TrimStr ${OutVar}
+	${StdUtils.GetParameter} ${OutVar} "Update" ""
 	StrCmp ${OutVar} "" 0 +2
 	StrCpy ${OutVar} "LameXP.exe"
 !macroend
@@ -570,21 +564,12 @@ SectionEnd
 ;--------------------------------
 
 Function CheckForUpdate
-	!insertmacro GetCommandlineParameter "Update" "?" $R0
+	${StdUtils.GetParameter} $R0 "Update" "?"
 	${IfNotThen} "$R0" == "?" ${|} Goto EnableUpdateMode ${|}
 
 	${IfThen} "$INSTDIR" == "" ${|} Return ${|}
 	${IfThen} "$INSTDIR" == "$EXEDIR" ${|} Return ${|}
 	${IfNotThen} ${FileExists} "$INSTDIR\LameXP.exe" ${|} Return ${|}
-
-	;StrCmp "$INSTDIR" "" 0 +2
-	;Return
-	;IfFileExists "$INSTDIR\*.*" +2
-	;Return
-	;StrCmp "$EXEDIR" "$INSTDIR" 0 +2
-	;Return
-	;IfFileExists "$INSTDIR\LameXP.exe" +2
-	;Return
 
 	EnableUpdateMode:
 
@@ -598,7 +583,7 @@ Function CheckForUpdate
 FunctionEnd
 
 Function un.CheckForcedUninstall
-	!insertmacro un.GetCommandlineParameter "Force" "?" $R0
+	${StdUtils.GetParameter} $R0 "Force" "?"
 	${IfNotThen} "$R0" == "?" ${|} Abort ${|}
 FunctionEnd
 
@@ -609,7 +594,7 @@ FunctionEnd
 
 Function CheckForPreRelease
 	!ifdef LAMEXP_IS_PRERELEASE
-		!insertmacro GetCommandlineParameter "Update" "?" $R0
+		${StdUtils.GetParameter} $R0 "Update" "?"
 		StrCmp $R0 "?" 0 SkipPrereleaseWarning
 		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
 		Quit
