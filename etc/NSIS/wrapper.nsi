@@ -171,7 +171,7 @@ Section "-LaunchTheInstaller"
 
 	RunFailed:
 
-	MessageBox MB_RETRYCANCEL|MB_DEFBUTTON2|MB_ICONSTOP|MB_TOPMOST "Failed to launch the installer. Please try again!" IDRETRY RunTryAgain
+	MessageBox MB_RETRYCANCEL|MB_ICONSTOP|MB_TOPMOST "Failed to launch the installer. Please try again!" IDRETRY RunTryAgain
 
 	; --------
 
