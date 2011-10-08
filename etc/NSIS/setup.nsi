@@ -382,47 +382,10 @@ Function _CreateWebLink
 	SetFileAttributes "$0" FILE_ATTRIBUTE_READONLY
 FunctionEnd
 
-!macro TrimStr VarName
-	Push ${VarName}
-	Call _TrimStr
-	Pop ${VarName}
-!macroend
-
-Function _TrimStr
-	Exch $R1
-	Push $R2
- 
-	TrimLoop1:
-	StrCpy $R2 "$R1" 1
-	StrCmp "$R2" " " TrimLeft
-	StrCmp "$R2" "$\r" TrimLeft
-	StrCmp "$R2" "$\n" TrimLeft
-	StrCmp "$R2" "$\t" TrimLeft
-	Goto TrimLoop2
-	TrimLeft:	
-	StrCpy $R1 "$R1" "" 1
-	Goto TrimLoop1
- 
-	TrimLoop2:
-	StrCpy $R2 "$R1" 1 -1
-	StrCmp "$R2" " " TrimRight
-	StrCmp "$R2" "$\r" TrimRight
-	StrCmp "$R2" "$\n" TrimRight
-	StrCmp "$R2" "$\t" TrimRight
-	Goto TrimDone
-	TrimRight:	
-	StrCpy $R1 "$R1" -1
-	Goto TrimLoop2
- 
-	TrimDone:
-	Pop $R2
-	Exch $R1
-FunctionEnd
-
 !macro GetExecutableName OutVar
 	${StdUtils.GetParameter} ${OutVar} "Update" ""
-	StrCmp ${OutVar} "" 0 +2
-	StrCpy ${OutVar} "LameXP.exe"
+	${StdUtils.TrimStr} ${OutVar}
+	${IfThen} "${OutVar}" == "" ${|} StrCpy ${OutVar} "LameXP.exe" ${|}
 !macroend
 
 !macro DisableNextButton TmpVar
