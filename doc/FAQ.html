@@ -41,6 +41,7 @@ a:visited { color: #0000EE; }
 <li><a href="#d83ab3c6">Why does LameXP use LAME v3.99 rather than v3.98?</a><br>
 <li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
 <li><a href="#434f2578">Why is the maximum normalization level limited to -0.5 dB?</a>
+<li><a href="#9f8ff13a">What do the different 'Equalization' modes do?</a>
 <li><a href="#e7c9ae2b">Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</a>
 <li><a href="#328b0a18">Why do I get the error 'Executable requires Windows XP or later' on startup?</a>
 <li><a href="#3ffe490e">Why do I get the error 'The procedure entry point De/EncodePointer could not be located' on startup?</a>
@@ -523,7 +524,6 @@ the '.cda' files directly is destined to fail (as the '.cda' files do NOT actual
 
 <a name="434f2578"></a><b>Why is the maximum normalization level limited to -0.5 dB?</b><br>
 <br>
-
 When an analogue [audio] signal is converted to the digital domain, the signal is sampled at a fixed rate<br>
 (e.g. 44100 samples per second) and each "sample" value is stored with a fixed number of bits (e.g. 16 or 24<br>
 bits per sample). Consequently [uncompressed] digital audio is represented as a sequence of binary sample<br>
@@ -553,6 +553,22 @@ no more than 96% [-0.36 dB] as some audio compact disc players have problems acc
 bits that have been processed to 100% (maximum) amplitude [0dBFS].</blockquote>
 For details please refer to the following article:<br><ul>
 <li><a href="http://www.audioholics.com/education/audio-formats-technology/issues-with-0dbfs-levels-on-digital-audio-playback-systems" target="_blank">http://www.audioholics.com/...issues-with-0dbfs-levels-on-digital-audio-playback-systems</a></ul>
+
+<br><br>
+
+<a name="9f8ff13a"></a><b>What do the different 'Equalization' modes do?</b><br>
+<br>
+The "equalization" modes control how the normalization filter will deal with multi-channel input files, i.e.<br>
+everything that is not Mono. The "Peak Level" mode will normalize each channel according to its highest peak<br>
+(maximum sample value). This means that channels with a lower maximum sample value will be amplified stronger<br>
+than channels with a higher maximum sample value. Still all samples in a channel will be amplified by the<br>
+same factor, so dynamic range compression is NOT done. The "RMS Level" mode works similar to the previous<br>
+mode, but the channels are amplified according to their peak RMS level (maximum energy), instead of their<br>
+maximum sample value. This may be used to correct stereo imbalance caused by an imperfect record turntable<br>
+cartridge. Last but not least, the "None" mode will not euqalize the channels at all, i.e. all channles will<br>
+by amplified by the same factor. In the last mode, the highest peak of all(!) channels is used as threshold.<br>
+<br>
+WARNING: The "None" mode appears to be broken with more than two channels! This is a bug in SoX.<br><br>
 
 <br><br>
 
