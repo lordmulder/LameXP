@@ -1656,19 +1656,19 @@
     </message>
     <message>
         <source>Peak Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Піковий рівень</translation>
     </message>
     <message>
         <source>RMS Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Ефективний рівень</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Не задано</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим балансування:</translation>
     </message>
 </context>
 <context>
