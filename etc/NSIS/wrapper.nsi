@@ -189,7 +189,6 @@ Section "-LaunchTheInstaller"
 	DetailPrint "Failed to launch installer :-("
 	SetDetailsPrint listonly
 
-	${StdUtils.Unload}
 	Abort "Aborted."
 
 	; --------
@@ -197,5 +196,4 @@ Section "-LaunchTheInstaller"
 	RunSuccess:
 
 	Delete /REBOOTOK "$PLUGINSDIR\LameXP-Install.exe"
-	${StdUtils.Unload}
 SectionEnd

@@ -471,7 +471,6 @@ SectionEnd
 
 Section "-Finished"
 	!insertmacro PrintProgress "$(MUI_TEXT_FINISH_TITLE)."
-	${StdUtils.Unload}
 
 	; ---- POLL ----
 	; !insertmacro UAC_AsUser_ExecShell "" "http://mulder.brhack.net/temp/style_poll/" "" "" SW_SHOWNORMAL
@@ -602,11 +601,9 @@ Function RunAppFunction
 	!insertmacro GetExecutableName $R0
 	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR" "explore" ""
 	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\$R0" "open" "--first-run"
-	${StdUtils.Unload}
 FunctionEnd
 
 Function ShowReadmeFunction
 	!insertmacro DisableNextButton $R0
 	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\FAQ.html" "open" ""
-	${StdUtils.Unload}
 FunctionEnd
