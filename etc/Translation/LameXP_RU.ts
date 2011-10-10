@@ -5,19 +5,19 @@
     <name>AboutDialog</name>
     <message>
         <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP &amp;minus; Audio Encoder Front-end</translation>
+        <translation>LameXP &amp;minus; Audio Encoder Front-end</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation type="unfinished">Пожайлуйста посетите %1 за новостями и обновлениями!</translation>
+        <translation>Пожайлуйста посетите %1 за новостями и обновлениями!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation type="unfinished">Примечание: LameXP является бесплатным программным обеспечением. Вам &lt;b&gt;ненадо&lt;/b&gt; платить деньги, чтобы получить или использовать LameXP! Если некоторый сторонний веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы должны &lt;b&gt; не &lt;/b&gt;, отвечать на это предложение!!!</translation>
+        <translation>Примечание: LameXP является бесплатным программным обеспечением. Вам &lt;b&gt;ненадо&lt;/b&gt; платить деньги, чтобы получить или использовать LameXP! Если некоторый сторонний веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы должны &lt;b&gt; не &lt;/b&gt;, отвечать на это предложение!!!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation type="unfinished">Специальная благодарность &quot;John33&quot; с %1 за его непрерывную поддержку.</translation>
+        <translation>Специальная благодарность &quot;John33&quot; с %1 за его непрерывную поддержку.</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -29,19 +29,19 @@
     </message>
     <message>
         <source>Accept License</source>
-        <translation type="unfinished">Принять лицензию</translation>
+        <translation>Принять лицензию</translation>
     </message>
     <message>
         <source>Decline License</source>
-        <translation type="unfinished">Отклонить лицензию</translation>
+        <translation>Отклонить лицензию</translation>
     </message>
     <message>
         <source>3rd Party S/W</source>
-        <translation type="unfinished">ПО 3-их Сторон</translation>
+        <translation>ПО 3-их Сторон</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished">Участники</translation>
+        <translation>Участники</translation>
     </message>
     <message>
         <source>About Qt4</source>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>The following people have contributed to LameXP:</source>
-        <translation type="unfinished">Следующие люди внесли вклад в развитие LameXP:</translation>
+        <translation>Следующие люди внесли вклад в развитие LameXP:</translation>
     </message>
     <message>
         <source>Translators:</source>
@@ -61,39 +61,39 @@
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation type="unfinished">Если Вы готовы внести вклад в развитие LameXP, не стесняйтесь связаться с нами!</translation>
+        <translation>Если Вы готовы внести вклад в развитие LameXP, не стесняйтесь связаться с нами!</translation>
     </message>
     <message>
         <source>About Contributors</source>
-        <translation type="unfinished">О Участниках</translation>
+        <translation>О Участниках</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
-        <translation type="unfinished">Следующее ПО третьих лиц исползуется в LameXP:</translation>
+        <translation>Следующее ПО третьих лиц исползуется в LameXP:</translation>
     </message>
     <message>
         <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
@@ -101,67 +101,67 @@
     </message>
     <message>
         <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Musepack &amp;minus; Living Audio Compression</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Speex &amp;minus; Free Codec For Free Speech</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>SoX &amp;minus; Sound eXchange</source>
@@ -232,7 +232,7 @@
     <name>AudioFileModel</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished">Профиль</translation>
+        <translation>Профиль</translation>
     </message>
     <message>
         <source>Channels</source>
@@ -240,11 +240,11 @@
     </message>
     <message>
         <source>Samplerate</source>
-        <translation type="unfinished">Частота дискретизации</translation>
+        <translation>Частота дискретизации</translation>
     </message>
     <message>
         <source>Bitdepth</source>
-        <translation type="unfinished">Битовая глубина</translation>
+        <translation>Битовая глубина</translation>
     </message>
     <message>
         <source>Type</source>
@@ -256,15 +256,15 @@
     </message>
     <message>
         <source>Bitrate</source>
-        <translation type="unfinished">Битрэйт</translation>
+        <translation>Битрэйт</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished">Постоянный</translation>
+        <translation>Постоянный</translation>
     </message>
     <message>
         <source>Variable</source>
-        <translation type="unfinished">Переменный</translation>
+        <translation>Переменный</translation>
     </message>
 </context>
 <context>
@@ -474,7 +474,7 @@
     <name>DiskObserverThread</name>
     <message>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
-        <translation type="unfinished">Мало свободного места на диске &apos;%1&apos; (свободного всего %2 Мб), могут возникнуть проблемы!</translation>
+        <translation type="unfinished">Мало места на диске &apos;%1&apos; (свободного всего %2 Мб), могут возникнуть проблемы!</translation>
     </message>
 </context>
 <context>
@@ -523,7 +523,7 @@
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation>Копироват в буфер обмена</translation>
+        <translation type="unfinished">Копировать в буфер обмена</translation>
     </message>
     <message>
         <source>Log File</source>
@@ -566,27 +566,27 @@
     </message>
     <message>
         <source>Goto Home Folder</source>
-        <translation type="unfinished">Перейти в домашнюю папку</translation>
+        <translation type="unfinished">Домашняя папка</translation>
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation type="unfinished">Перейти в папку &quot;Моя Музыка&quot;</translation>
+        <translation type="unfinished">Моя Музыка</translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
-        <translation type="unfinished">Перейти в папку &quot;Рабочий стол&quot;</translation>
+        <translation type="unfinished">Рабочий стол</translation>
     </message>
     <message>
         <source>Make New Folder</source>
-        <translation type="unfinished">Создать новую папку</translation>
+        <translation type="unfinished">Новая папка</translation>
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation type="unfinished">Сохранять в той же папке, в которой находится исходный файл</translation>
+        <translation type="unfinished">Сохранять в той же папке</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation type="unfinished">копировать структуру каталогов исходных файлов</translation>
+        <translation type="unfinished">Сохранять структуру каталогов</translation>
     </message>
     <message>
         <source>Meta Data</source>
@@ -646,7 +646,7 @@
     </message>
     <message>
         <source> Rate Control Method </source>
-        <translation type="unfinished">Метод регулирования скорости</translation>
+        <translation type="unfinished">Битрейт</translation>
     </message>
     <message>
         <source>Quality-based (VBR)</source>
@@ -654,11 +654,11 @@
     </message>
     <message>
         <source>Average Bitrate (ABR)</source>
-        <translation type="unfinished">Средний битрейт (ABR)</translation>
+        <translation type="unfinished">Средний (ABR)</translation>
     </message>
     <message>
         <source>Constant Bitrate (CBR)</source>
-        <translation type="unfinished">Постоянный битрейт (CBR)</translation>
+        <translation type="unfinished">Постоянный (CBR)</translation>
     </message>
     <message>
         <source> Quality / Bitrate </source>
@@ -678,19 +678,19 @@
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation type="unfinished">Управление битрэйтом  (LAME and OggEnc2) </translation>
+        <translation type="unfinished">Управление битрейтом  (LAME and OggEnc2) </translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
-        <translation type="unfinished">Включить управление битрейтом</translation>
+        <translation type="unfinished">Управление битрейтом</translation>
     </message>
     <message>
         <source>Minimum (kbps):</source>
-        <translation type="unfinished">Минимум (kbps):</translation>
+        <translation type="unfinished">Мин. (kbps):</translation>
     </message>
     <message>
         <source>Maximum (kbps):</source>
-        <translation type="unfinished">Максимум (kbps):</translation>
+        <translation type="unfinished">Макс. (kbps):</translation>
     </message>
     <message>
         <source> LAME Algorithm Quality </source>
@@ -698,19 +698,19 @@
     </message>
     <message>
         <source>Faster Processing</source>
-        <translation type="unfinished">Быстрое преобразование</translation>
+        <translation type="unfinished">Быстрее</translation>
     </message>
     <message>
         <source>Better quality</source>
-        <translation type="unfinished">Лучшее качество</translation>
+        <translation type="unfinished">Качественнее</translation>
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
-        <translation type="unfinished">Колчиество каналов / Сэмплинг</translation>
+        <translation type="unfinished">Колчество каналов / Сэмплинг</translation>
     </message>
     <message>
         <source>Auto Select (Default)</source>
-        <translation type="unfinished">Автоматический Выбор (Значение по умолчанию)</translation>
+        <translation type="unfinished">Авто (по умолчанию)</translation>
     </message>
     <message>
         <source>Joint Stereo</source>
@@ -766,27 +766,27 @@
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation type="unfinished">Включить 2-х проходное преобразование (ABR Mode)</translation>
+        <translation type="unfinished">2-х проходное кодирование (ABR Mode)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
-        <translation type="unfinished">Выбрать профиль AAC:</translation>
+        <translation type="unfinished">Профиль AAC:</translation>
     </message>
     <message>
         <source>Auto Select (Recommended)</source>
-        <translation type="unfinished">Автоматический Выбор (Рекомендуемый)</translation>
+        <translation type="unfinished">Авто (Рекомендуется)</translation>
     </message>
     <message>
         <source>Enforce LC-AAC</source>
-        <translation type="unfinished">Преобразовать в  LC-AAC</translation>
+        <translation type="unfinished">LC-AAC</translation>
     </message>
     <message>
         <source>Enforce HE-AAC (AAC + SBR)</source>
-        <translation type="unfinished">Преобразовать в  HE-AAC (AAC + SBR)</translation>
+        <translation type="unfinished">HE-AAC (AAC + SBR)</translation>
     </message>
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
-        <translation type="unfinished">Преобразовать в HE-AAC v2 (AAC + SBR + PS)</translation>
+        <translation type="unfinished">HE-AAC v2 (AAC + SBR + PS)</translation>
     </message>
     <message>
         <source> Volume Normalization </source>
@@ -794,7 +794,7 @@
     </message>
     <message>
         <source>Enable Normalization Filter</source>
-        <translation type="unfinished">Включить фильтр нормализации</translation>
+        <translation type="unfinished">Фильтр нормализации</translation>
     </message>
     <message>
         <source>Peak Volume (dB):</source>
@@ -802,19 +802,19 @@
     </message>
     <message>
         <source> Tone Adjustment </source>
-        <translation type="unfinished">Регулировка тона</translation>
+        <translation type="unfinished">Корректировка тона</translation>
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
-        <translation type="unfinished">Скорректироват Treble (дБ):</translation>
+        <translation type="unfinished">Высокие частоты (дБ):</translation>
     </message>
     <message>
         <source>Adjust Bass (dB):</source>
-        <translation type="unfinished">Скорректировать Бас (dB):</translation>
+        <translation type="unfinished">Низкие частоты (dB):</translation>
     </message>
     <message>
         <source> Custom Encoder Parameters </source>
-        <translation type="unfinished">Пользовательские параметры кодера</translation>
+        <translation type="unfinished">Пользовательские параметры</translation>
     </message>
     <message>
         <source>OggEnc2:</source>
@@ -1212,7 +1212,7 @@
     </message>
     <message>
         <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished">Лучшее качество (очень медленно)</translation>
+        <translation type="unfinished">Наилучшее качество (очень медленно)</translation>
     </message>
     <message>
         <source>High Quality (Recommended)</source>
@@ -1220,15 +1220,15 @@
     </message>
     <message>
         <source>Average Quality (Default)</source>
-        <translation type="unfinished">Среднее качество (по умаолчанию)</translation>
+        <translation type="unfinished">Среднее качество (по умолчанию)</translation>
     </message>
     <message>
         <source>Low Quality (Fast)</source>
-        <translation type="unfinished">Плохое качество (быстро)</translation>
+        <translation type="unfinished">Низкое качество (быстро)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished">Низкое качество (Очень быстро)</translation>
+        <translation type="unfinished">Плохое качество (Очень быстро)</translation>
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
@@ -1248,7 +1248,7 @@
     </message>
     <message>
         <source>Please remember to check for updates at regular intervals!</source>
-        <translation type="unfinished">незабыйвайте проверять обновления регулярно!</translation>
+        <translation type="unfinished">Не забыйвайте периодически проверять обновления!</translation>
     </message>
     <message>
         <source>The update reminder has been re-enabled.</source>
@@ -1424,7 +1424,7 @@
     </message>
     <message>
         <source> Aften A/52 Options </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Параметры Aften A/52</translation>
     </message>
     <message>
         <source>Film Light</source>
@@ -1448,11 +1448,11 @@
     </message>
     <message>
         <source>None (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нет (по умолчанию)</translation>
     </message>
     <message>
         <source>Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Авто</translation>
     </message>
     <message>
         <source>1+1 (Ch1,Ch2)</source>
@@ -1488,15 +1488,15 @@
     </message>
     <message>
         <source>Audio Coding Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим кодирования:</translation>
     </message>
     <message>
         <source>Dynamic Range Compression:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сжатие динамического диапазона:</translation>
     </message>
     <message>
         <source>Fast Bit Allocation (Less Accurate)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Быстрое распределение битрейта</translation>
     </message>
     <message>
         <source>Exponent Search Size:</source>
@@ -1504,7 +1504,7 @@
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Больше не показывать</translation>
     </message>
     <message>
         <source>Import Cue Sheet</source>
@@ -1692,18 +1692,18 @@
     </message>
     <message>
         <source>Artwork</source>
-        <translation type="unfinished">Рисунок</translation>
+        <translation type="unfinished">Обложка</translation>
     </message>
 </context>
 <context>
     <name>MetaInfoDialog</name>
     <message>
         <source>Load Artwork From File</source>
-        <translation type="unfinished">Загрузить картинку из файла</translation>
+        <translation type="unfinished">Загрузить обложку из файла</translation>
     </message>
     <message>
         <source>Clear Artwork</source>
-        <translation type="unfinished">Удалить картинку</translation>
+        <translation type="unfinished">Удалить обложку</translation>
     </message>
     <message>
         <source>Meta Information</source>
@@ -1715,16 +1715,16 @@
     </message>
     <message>
         <source>Load Artwork</source>
-        <translation type="unfinished">Загрузить картинку</translation>
+        <translation type="unfinished">Загрузить обложку</translation>
     </message>
     <message>
         <source>Artwork Error</source>
         <translatorcomment>!!переделать!!</translatorcomment>
-        <translation type="unfinished">Ошибка с картинкой</translation>
+        <translation type="unfinished">Ошибка с обложкой</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
-        <translation type="unfinished">Извините, немогу загрузит картинку из выделенного файла!</translation>
+        <translation type="unfinished">Извините, не могу загрузить обложку из выбранного файла!</translation>
     </message>
     <message>
         <source>Edit this Information</source>
@@ -1906,11 +1906,11 @@
     </message>
     <message>
         <source>Not found!</source>
-        <translation type="unfinished">Ненайдено!</translation>
+        <translation type="unfinished">Не найдено!</translation>
     </message>
     <message>
         <source>The format of this file is NOT supported:</source>
-        <translation type="unfinished">Этот тип файлов неподдерживается:</translation>
+        <translation type="unfinished">Этот тип файлов не поддерживается:</translation>
     </message>
     <message>
         <source>Container Format:</source>
@@ -1950,7 +1950,7 @@
     </message>
     <message>
         <source>The source audio file could not be found:</source>
-        <translation type="unfinished">Исходный аудио файл не может быть найден:</translation>
+        <translation type="unfinished">Исходный аудио файл не найден:</translation>
     </message>
     <message>
         <source>The source audio file could not be opened for reading:</source>
@@ -1958,7 +1958,7 @@
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation type="unfinished">Папка для кодированных файлов не существует и неможет быть создана:</translation>
+        <translation type="unfinished">Папка для кодированных файлов не существует и не может быть создана:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
@@ -2021,7 +2021,7 @@
     </message>
     <message>
         <source>Encoding files, please wait...</source>
-        <translation type="unfinished">Кодируя файлы, пожалуйста, подождите...</translation>
+        <translation type="unfinished">Кодирую файлы, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
@@ -2058,7 +2058,7 @@
     <message>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translatorcomment>бред -_-</translatorcomment>
-        <translation type="unfinished">Ошибка: %1 из %2 файлов перестали работать. Дважды щелкните по отказавшим элементам для получения дальнейшей информации!</translation>
+        <translation type="unfinished">Ошибка: %1 из %2 файлов перестали работать. Дважды щелкните по отказавшим элементам для получения подробностей!</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
@@ -2078,11 +2078,11 @@
     </message>
     <message>
         <source>Playlist creation failed</source>
-        <translation type="unfinished">Немогу создать плэйлист</translation>
+        <translation type="unfinished">Не могу создать плэйлист</translation>
     </message>
     <message>
         <source>The playlist file could not be created:</source>
-        <translation type="unfinished">Плэйлист неможет быть создан:</translation>
+        <translation type="unfinished">Плэйлист не может быть создан:</translation>
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
@@ -2120,7 +2120,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исполняемому файлу  &apos;%1&apos;требуется Windows 2000 или старшне.</translation>
     </message>
 </context>
 <context>
@@ -2197,11 +2197,11 @@
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished">Проверяю обновлений, пожалйста, подождите...</translation>
+        <translation type="unfinished">Проверяю обновления, пожалйста, подождите...</translation>
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
-        <translation type="unfinished">Немогу получить информацию об обновлениях с сервера!</translation>
+        <translation type="unfinished">Не могу получить информацию об обновлениях с сервера!</translation>
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
@@ -2213,7 +2213,7 @@
     </message>
     <message>
         <source>A new version of LameXP is available!</source>
-        <translation>Новя версия LameXP доступна!</translation>
+        <translation type="unfinished">Доступна новя версия LameXP!</translation>
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
@@ -2221,7 +2221,7 @@
     </message>
     <message>
         <source>No new updates available at this time.</source>
-        <translation type="unfinished">Нет обновлений.</translation>
+        <translation type="unfinished">На данный момент обновлений нет.</translation>
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
@@ -2241,16 +2241,16 @@
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation type="unfinished">Обновление готово к инсталяции. Завершение приложения...</translation>
+        <translation type="unfinished">Обновление готово к установке. Завершение приложения...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
         <translatorcomment>Фак май майнд</translatorcomment>
-        <translation type="unfinished">Немогу установит обновление.Пожалуйста попробуйте снова или установите обновление вручную!</translation>
+        <translation type="unfinished">Не могу установить обновление.Пожалуйста попробуйте снова или установите обновление вручную!</translation>
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
-        <translation type="unfinished">Похоже компьютер неподключен к интернету!</translation>
+        <translation type="unfinished">Похоже компьютер не подключен к интернету!</translation>
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>

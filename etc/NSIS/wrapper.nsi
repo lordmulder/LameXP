@@ -56,6 +56,7 @@
 ;Includes
 ;--------------------------------
 
+!include `LogicLib.nsh`
 !include `StdUtils.nsh`
 
 
@@ -138,28 +139,12 @@ Section "-LaunchTheInstaller"
 	; --------
 	
 	${StdUtils.GetAllParameters} $R9 0
-	
-	StrCmp $R9 "too_long" 0 +2
-	StrCpy $R9 ""
-	
-	StrCmp "$R9" "" +2
-	DetailPrint "Parameters: $R9"
-	
-	; StrCpy $R9 ""
-	; ${StdUtils.GetParameter} $R0 "Update" "?"
-	
-	; StrCmp "$R0" "?" +5
-	; StrCmp "$R0" "" 0 +3
-	; StrCpy $R9 "/Update"
-	; Goto +2
-	; StrCpy $R9 '"/Update=$R0"'
-	
-	; StrCmp "$INSTDIR" "" +5
-	; StrCmp "$R9" "" 0 +3
-	; StrCpy $R9 '/D=$INSTDIR'
-	; Goto +2
-	; StrCpy $R9 '$R9 /D=$INSTDIR'
-	
+	${IfThen} "$R9" == "too_long" ${|} StrCpy $R9 "" ${|}
+
+	${IfNot} "$R9" == ""
+		DetailPrint "Parameters: $R9"
+	${EndIf}
+
 	; --------
 
 	RunTryAgain:
