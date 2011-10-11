@@ -256,7 +256,7 @@
     </message>
     <message>
         <source>Bitrate</source>
-        <translation>Битрэйт</translation>
+        <translation>Битрейт</translation>
     </message>
     <message>
         <source>Constant</source>
@@ -416,7 +416,7 @@
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Загрузить другой Cue плэйлист</translation>
     </message>
 </context>
 <context>
@@ -650,7 +650,7 @@
     </message>
     <message>
         <source>Quality-based (VBR)</source>
-        <translation type="unfinished">Основанный на качестве (VBR)</translation>
+        <translation type="unfinished">Переменный (VBR)</translation>
     </message>
     <message>
         <source>Average Bitrate (ABR)</source>
@@ -1508,19 +1508,19 @@
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Импортировать Cue плэйлист</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открыть Cue плэйлист</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> Cue плэйлист</translation>
     </message>
     <message>
         <source>CDDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файлы CDDA</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
@@ -1537,35 +1537,35 @@
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">По видимому, антивирусное ПО замедляет запуск LameXP.</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Пожалуйста прочтите %1 !</translation>
     </message>
     <message>
         <source>Slow Startup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Замедление запуска</translation>
     </message>
     <message>
         <source>Disable Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отключить уведомления о медленном запуске</translation>
     </message>
     <message>
         <source>Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Уведомления о медленном запуске</translation>
     </message>
     <message>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вы хотите отключить уведомления о медленном запуске?</translation>
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Уведомления о медленном запуске отключены.</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Уведомления о медленном запуске включены.</translation>
     </message>
     <message>
         <source> Rename Output Files </source>
@@ -1577,23 +1577,23 @@
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ноль перед номером трека</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Название</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исполнитель</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Альбом</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Год (4 цифры)</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -1601,35 +1601,35 @@
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Макрос переименования</translation>
     </message>
     <message>
         <source>You can eneter custom parameters here!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вы можете здесь ввести доп. параметры!</translation>
     </message>
     <message>
         <source>Enter the pattern to rename the output files here!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите шаблон переименования выходных файлов!</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;a href=&quot;reset&quot;&gt;Сброс&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Список макросов&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл без расширения</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Шаблон переименования:</translation>
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Имя файла:</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Утраченные символы в именах файлов:</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
@@ -1637,7 +1637,7 @@
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Запомнить текущую выходную папку</translation>
     </message>
     <message>
         <source>MPEG-4 AAC</source>
@@ -1653,11 +1653,11 @@
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Предупреждение: Качество звука будет очень плохим!</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Предупреждение: Преобразование будет идти очень медленно!</translation>
     </message>
     <message>
         <source>Peak Level</source>
@@ -1669,11 +1669,11 @@
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нет</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим эквалайзера:</translation>
     </message>
 </context>
 <context>
@@ -1966,7 +1966,7 @@
     </message>
     <message>
         <source>Unknown File Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестное имя файла</translation>
     </message>
     <message>
         <source>Unknown Title</source>
@@ -1978,11 +1978,11 @@
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестный Альбом</translation>
     </message>
     <message>
         <source>Unknown Comment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестный Комментарий</translation>
     </message>
 </context>
 <context>
