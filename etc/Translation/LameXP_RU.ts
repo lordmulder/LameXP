@@ -392,7 +392,7 @@
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished">Импортировать Cue плэйлист</translation>
+        <translation type="unfinished">Импортировать</translation>
     </message>
     <message>
         <source> Output Directory </source>
@@ -582,7 +582,7 @@
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation type="unfinished">Сохранять в той же папке</translation>
+        <translation type="unfinished">Сохранять в той же папке где исходные файлы</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
@@ -734,7 +734,7 @@
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation type="unfinished">MP3 Тип каналов:</translation>
+        <translation type="unfinished">Тип каналов MP3:</translation>
     </message>
     <message>
         <source>Sampling Rate (Hz):</source>
@@ -1059,7 +1059,7 @@
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation type="unfinished">Ваш еще не проверяли на обновления LameXP. Проверьте на обновления сейчас?</translation>
+        <translation type="unfinished">Вы еще не проверяли обновления LameXP. Проверить обновления сейчас?</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
@@ -1067,7 +1067,7 @@
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation type="unfinished">Текущая доступная версия %1 (или позже), но Вам все еще используете версию %2.</translation>
+        <translation type="unfinished">Текущая версия %1 (или новее), но Вам все еще используется версия %2.</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -1569,15 +1569,15 @@
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Переименование выходных файлов</translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Переименовывать файлы</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished">Ноль перед номером трека</translation>
+        <translation type="unfinished">Номер трека</translation>
     </message>
     <message>
         <source>Track title</source>
@@ -1601,11 +1601,11 @@
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished">Макрос переименования</translation>
+        <translation type="unfinished">Список переменных</translation>
     </message>
     <message>
         <source>You can eneter custom parameters here!</source>
-        <translation type="unfinished">Вы можете здесь ввести доп. параметры!</translation>
+        <translation type="unfinished">Вы можете здесь ввести дополнительные параметры!</translation>
     </message>
     <message>
         <source>Enter the pattern to rename the output files here!</source>
@@ -1613,7 +1613,7 @@
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;a href=&quot;reset&quot;&gt;Сброс&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Список макросов&lt;/a&gt;</translation>
+        <translation type="unfinished">&lt;a href=&quot;reset&quot;&gt;Сброс&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Переменные&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
@@ -1625,15 +1625,15 @@
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation type="unfinished">Имя файла:</translation>
+        <translation type="unfinished">Пример:</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished">Утраченные символы в именах файлов:</translation>
+        <translation type="unfinished">Недопустимые символы:</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Преобразовывать многоканальный источник в Стерео</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
@@ -1645,7 +1645,7 @@
     </message>
     <message>
         <source>AAC Encoder-Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Параметры кодера AAC</translation>
     </message>
     <message>
         <source>MPEG-4 AAC:</source>
@@ -1895,7 +1895,7 @@
     </message>
     <message>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation>Жаль, это свойство исходного файла не может быть отредактировано!</translation>
+        <translation type="unfinished">К сожалению, это свойство исходного файла не может быть изменено!</translation>
     </message>
 </context>
 <context>
@@ -1958,7 +1958,7 @@
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation type="unfinished">Папка для кодированных файлов не существует и не может быть создана:</translation>
+        <translation type="unfinished">Папка для выходных файлов не существует и не может быть создана:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
@@ -2045,7 +2045,7 @@
     </message>
     <message>
         <source>Process was aborted prematurely by the user!</source>
-        <translation type="unfinished">Процесс был прерван преждевременно пользователем!</translation>
+        <translation type="unfinished">Процесс был преждевременно прерван пользователем!</translation>
     </message>
     <message>
         <source>LameXP - Aborted</source>
@@ -2066,7 +2066,7 @@
     </message>
     <message>
         <source>At least one file has failed!</source>
-        <translation type="unfinished">По крайней мере один файл перестал работать!</translation>
+        <translation type="unfinished">Ошибка как минимум с 1 файлом!</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
@@ -2120,7 +2120,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished">Исполняемому файлу  &apos;%1&apos;требуется Windows 2000 или старшне.</translation>
+        <translation type="unfinished">Исполняемому файлу  &apos;%1&apos;требуется Windows 2000 или новее.</translation>
     </message>
 </context>
 <context>
@@ -2149,7 +2149,7 @@
     </message>
     <message>
         <source>Please wait...</source>
-        <translation>пожалуйста, подождите...</translation>
+        <translation type="unfinished">Пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Latest version available:</source>
@@ -2209,7 +2209,7 @@
     </message>
     <message>
         <source>More information available at:</source>
-        <translation type="unfinished">Больше информации доступно здесь:</translation>
+        <translation type="unfinished">Подробная информация здесь:</translation>
     </message>
     <message>
         <source>A new version of LameXP is available!</source>
