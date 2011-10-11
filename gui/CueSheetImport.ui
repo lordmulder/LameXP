@@ -527,7 +527,7 @@
            </property>
            <property name="icon">
             <iconset resource="../res/Icons.qrc">
-             <normaloff>:/icons/folder_explore.png</normaloff>:/icons/folder_explore.png</iconset>
+             <normaloff>:/icons/page_refresh.png</normaloff>:/icons/page_refresh.png</iconset>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
