@@ -66,7 +66,6 @@
 
 //Initialize static Qt plugins
 #ifdef QT_NODLL
-Q_IMPORT_PLUGIN(qgif)
 Q_IMPORT_PLUGIN(qico)
 Q_IMPORT_PLUGIN(qsvg)
 #endif
@@ -319,6 +318,28 @@ const QDate &lamexp_version_date(void)
 }
 
 /*
+ * Get the native operating system version
+ */
+static DWORD lamexp_get_os_version(void)
+{
+	OSVERSIONINFO osVerInfo;
+	memset(&osVerInfo, 0, sizeof(OSVERSIONINFO));
+	osVerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+	DWORD version = 0;
+	
+	if(GetVersionEx(&osVerInfo) == TRUE)
+	{
+		if(osVerInfo.dwPlatformId != VER_PLATFORM_WIN32_NT)
+		{
+			throw "Ouuups: Not running under Windows NT. This is not supposed to happen!";
+		}
+		version = (DWORD)((osVerInfo.dwMajorVersion << 16) | (osVerInfo.dwMinorVersion & 0xffff));
+	}
+
+	return version;
+}
+
+/*
  * Global exception handler
  */
 LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo)
@@ -516,14 +537,12 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 
 	lamexp_cpu_t features;
 	SYSTEM_INFO systemInfo;
-	OSVERSIONINFO osVersionInfo;
 	int CPUInfo[4] = {-1};
 	char CPUIdentificationString[0x40];
 	char CPUBrandString[0x40];
 
 	memset(&features, 0, sizeof(lamexp_cpu_t));
 	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
-	memset(&osVersionInfo, 0, sizeof(OSVERSIONINFO));
 	memset(CPUIdentificationString, 0, sizeof(CPUIdentificationString));
 	memset(CPUBrandString, 0, sizeof(CPUBrandString));
 	
@@ -604,10 +623,10 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 #endif
 	
 	//Hack to disable x64 on the Windows 8 Developer Preview
-	osVersionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	if(features.x64 && GetVersionEx(&osVersionInfo))
+	if(features.x64)
 	{
-		if((osVersionInfo.dwPlatformId == VER_PLATFORM_WIN32_NT) && (osVersionInfo.dwMajorVersion == 6) && (osVersionInfo.dwMinorVersion == 2))
+		DWORD osVerNo = lamexp_get_os_version();
+		if((HIWORD(osVerNo) == 6) && (LOWORD(osVerNo) == 2))
 		{
 			qWarning("Windows 8 (x64) detected. Going to disable all x64 support for now!\n");
 			features.x64 = false;
@@ -767,7 +786,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Check Qt version
-	qDebug("Using Qt Framework v%s, compiled with Qt v%s [%s]", qVersion(), QT_VERSION_STR, QT_PACKAGEDATE_STR);
+	qDebug("Using Qt Framework v%s (%s), compiled with Qt v%s [%s]", qVersion(), (qSharedBuild() ? "DLL" : "Static"), QT_VERSION_STR, QT_PACKAGEDATE_STR);
 	if(_stricmp(qVersion(), QT_VERSION_STR))
 	{
 		qFatal("%s", QApplication::tr("Executable '%1' requires Qt v%2, but found Qt v%3.").arg(QString::fromLatin1(executableName), QString::fromLatin1(QT_VERSION_STR), QString::fromLatin1(qVersion())).toLatin1().constData());
@@ -802,7 +821,10 @@ bool lamexp_init_qt(int argc, char* argv[])
 		lamexp_check_compatibility_mode(NULL, executableName);
 		break;
 	default:
-		qWarning("Running on an unknown/untested WinNT-based OS.\n");
+		{
+			DWORD osVersionNo = lamexp_get_os_version();
+			qWarning("Running on an unknown/untested WinNT-based OS (v%u.%u).\n", HIWORD(osVersionNo), LOWORD(osVersionNo));
+		}
 		break;
 	}
 
