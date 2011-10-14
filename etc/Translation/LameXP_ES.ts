@@ -810,10 +810,6 @@
         <translation>Esto suele significar que están corruptos o tienen un formato no soportado.</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation>VERSIÓN PRELIMINAR</translation>
-    </message>
-    <message>
         <source>You can drop in audio files here!</source>
         <translation>¡Puede arrastrar y soltar archivos aquí!</translation>
     </message>

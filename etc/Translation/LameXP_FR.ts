@@ -815,10 +815,6 @@
         <translation>Cela signifie que le fichier est endommagé ou le format de fichier n&apos;est pas pris en charge.</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation>VERSION DE DEMO</translation>
-    </message>
-    <message>
         <source>You can drop in audio files here!</source>
         <translation>Vous pouvez déposer les fichiers audio ici!</translation>
     </message>

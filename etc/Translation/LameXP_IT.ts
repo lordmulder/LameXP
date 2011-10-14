@@ -779,10 +779,6 @@
         <translation>Lingua</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation>VERSIONE DEMO</translation>
-    </message>
-    <message>
         <source>You can drop in audio files here!</source>
         <translation>Puoi trascinare i files audio qui!</translation>
     </message>

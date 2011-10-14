@@ -993,10 +993,6 @@
         <translation type="unfinished">Отложить</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation type="unfinished">ДЕМО ВЕРСИЯ</translation>
-    </message>
-    <message>
         <source>You can drop in audio files here!</source>
         <translation type="unfinished">Можете перетащить аудио файлы сюда!</translation>
     </message>

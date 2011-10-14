@@ -967,10 +967,6 @@
         <translation>Відхилити</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation>ДЕМО ВЕРСІЯ</translation>
-    </message>
-    <message>
         <source>You can drop in audio files here!</source>
         <translation>Ви можете перетягнути файли аудіо сюди!</translation>
     </message>

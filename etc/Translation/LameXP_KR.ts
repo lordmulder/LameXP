@@ -1046,10 +1046,6 @@
         <translation type="unfinished">나중에</translation>
     </message>
     <message>
-        <source>DEMO VERSION</source>
-        <translation type="unfinished">데모 버전</translation>
-    </message>
-    <message>
         <source>You can drop in audio files here!</source>
         <translation type="unfinished">여기로 오디오 파일을 끌어다 놓으십시오!</translation>
     </message>
