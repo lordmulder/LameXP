@@ -652,9 +652,9 @@ QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBi
 		verStr = lamexp_version2string(toolVerFmt, lamexp_tool_version(toolBin), tr("n/a"));
 	}
 
-	toolText += QString("<li><nobr><b>%1 (%2)</b></nobr><br>").arg(toolName, verStr);
-	toolText += QString("<nobr>%1</nobr><br>").arg(toolLicense);
-	if(!extraInfo.isEmpty()) toolText += QString("<nobr><i>%1</i></nobr><br>").arg(extraInfo);
+	toolText += QString("<li><nobr><b>%1 (%2)</b></nobr><br>").arg(toolName, verStr).replace("-", "&minus;");
+	toolText += QString("<nobr>%1</nobr><br>").arg(toolLicense).replace("-", "&minus;");
+	if(!extraInfo.isEmpty()) toolText += QString("<nobr><i>%1</i></nobr><br>").arg(extraInfo).replace("-", "&minus;");
 	toolText += QString("<a href=\"%1\">%1</a>").arg(toolWebsite);
 	toolText += QString("<div style=\"font-size:1pt\"><br></div>");
 
