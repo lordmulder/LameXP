@@ -45,7 +45,7 @@
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
-const char *AboutDialog::disqueUrl = "http://mulder.brhack.net/?player_url=yF6W-w0iAMM"; //http://www.youtube.com/watch_popup?v=yF6W-w0iAMM&vq=large
+const char *AboutDialog::disqueUrl =  "http://mulder.brhack.net/?player_url=38X-MXOB014"; //http://mulder.brhack.net/?player_url=yF6W-w0iAMM; http://www.youtube.com/watch_popup?v=yF6W-w0iAMM&vq=large
 
 //Contributors
 static const struct 
