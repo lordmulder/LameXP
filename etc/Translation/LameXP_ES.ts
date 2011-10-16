@@ -414,7 +414,7 @@
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar otro Cue sheet</translation>
     </message>
 </context>
 <context>
@@ -1651,19 +1651,19 @@
     </message>
     <message>
         <source>Peak Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Nivel de pico</translation>
     </message>
     <message>
         <source>RMS Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Nivel RMS</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de equalización:</translation>
     </message>
     <message>
         <source>DEMO VERSION</source>
