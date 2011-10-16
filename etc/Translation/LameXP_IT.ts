@@ -116,59 +116,59 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
+        <source>LameXP - Audio Encoder Front-end</source>
+        <translation type="unfinished">LameXP - Interfaccia per Encoder Audio</translation>
+    </message>
+    <message>
+        <source>LAME - OpenSource mp3 Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
+        <source>OggEnc - Ogg Vorbis Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
+        <source>FLAC - Free Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <source>AC3Filter Tools - AC3/DTS Decoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
+        <source>WavPack - Hybrid Lossless Compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
+        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
+        <source>The True Audio - Lossless Audio Codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
+        <source>MediaInfo - Media File Analysis Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
+        <source>SoX - Sound eXchange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SoX &amp;minus; Sound eXchange</source>
+        <source>GnuPG - The GNU Privacy Guard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -176,15 +176,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Musepack &amp;minus; Living Audio Compression</source>
+        <source>Musepack - Living Audio Compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
+        <source>Shorten - Lossless Audio Compressor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Speex &amp;minus; Free Codec For Free Speech</source>
+        <source>Speex - Free Codec For Free Speech</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -192,7 +192,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
+        <source>GNU Wget - Software for retrieving files using HTTP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -200,7 +200,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Aften &amp;minus; A/52 audio encoder</source>
+        <source>Aften - A/52 audio encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -220,11 +220,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
+        <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
+        <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1343,7 +1343,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
+        <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1664,6 +1664,10 @@
     </message>
     <message>
         <source>Equalization Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEMO VERSION</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

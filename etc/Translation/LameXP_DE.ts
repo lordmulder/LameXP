@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation>Bitte besuchen Sie %1 für aktuelle Informationen!</translation>
+        <translation>Bitte besuchen Sie %1 um aktuelle Informationen zu erhalten!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
@@ -116,55 +116,55 @@
         <translation>Das Urheberrecht an LameXP liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Autoren.</translation>
     </message>
     <message>
-        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation>LameXP &amp;minus; Audiokodierer-Oberfläche</translation>
+        <source>LameXP - Audio Encoder Front-end</source>
+        <translation>LameXP - Audiokodierer-Oberfläche</translation>
     </message>
     <message>
-        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation>LAME &amp;minus; Quelloffener mp3-Kodierer</translation>
+        <source>LAME - OpenSource mp3 Encoder</source>
+        <translation>LAME - Quelloffener mp3-Kodierer</translation>
     </message>
     <message>
-        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation>OggEnc &amp;minus; Ogg Vorbis-Kodierer</translation>
+        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <translation>OggEnc - Ogg Vorbis-Kodierer</translation>
     </message>
     <message>
-        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation>FLAC &amp;minus; Verlustfreier Audio-Codec</translation>
+        <source>FLAC - Free Lossless Audio Codec</source>
+        <translation>FLAC - Verlustfreier Audio-Codec</translation>
     </message>
     <message>
-        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 &amp;minus; Schneller MPEG Audio Konsolen-Dekodierer</translation>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation>mpg123 - Schneller MPEG Audio Konsolen-Dekodierer</translation>
     </message>
     <message>
-        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation>FAAD &amp;minus; Quelloffener MPEG-4 und MPEG-2 AAC Dekodierer</translation>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation>FAAD - Quelloffener MPEG-4 und MPEG-2 AAC Dekodierer</translation>
     </message>
     <message>
-        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools &amp;minus; AC3/DTS Dekodierer</translation>
+        <source>AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation>AC3Filter Tools - AC3/DTS Dekodierer</translation>
     </message>
     <message>
-        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation>WavPack &amp;minus; Hybride verlustfreie Kompression</translation>
+        <source>WavPack - Hybrid Lossless Compression</source>
+        <translation>WavPack - Hybride verlustfreie Kompression</translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
-        <translation>Monkey&apos;s Audio &amp;minus; Verlustfreie Audio Kompression</translation>
+        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
+        <translation>Monkey&apos;s Audio - Verlustfreie Audio Kompression</translation>
     </message>
     <message>
-        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation>The True Audio &amp;minus; Verlustfreier Audio-Codec</translation>
+        <source>The True Audio - Lossless Audio Codec</source>
+        <translation>The True Audio - Verlustfreier Audio-Codec</translation>
     </message>
     <message>
-        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation>MediaInfo &amp;minus; Multimedia Analysewerkzeug</translation>
+        <source>MediaInfo - Media File Analysis Tool</source>
+        <translation>MediaInfo - Multimedia Analysewerkzeug</translation>
     </message>
     <message>
-        <source>SoX &amp;minus; Sound eXchange</source>
+        <source>SoX - Sound eXchange</source>
         <translation></translation>
     </message>
     <message>
-        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
+        <source>GnuPG - The GNU Privacy Guard</source>
         <translation></translation>
     </message>
     <message>
@@ -172,15 +172,15 @@
         <translation>Nero AAC Referenz MPEG-4 Kodierer</translation>
     </message>
     <message>
-        <source>Musepack &amp;minus; Living Audio Compression</source>
+        <source>Musepack - Living Audio Compression</source>
         <translation></translation>
     </message>
     <message>
-        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation>Shorten &amp;minus; Verlustfreie Audiokompression</translation>
+        <source>Shorten - Lossless Audio Compressor</source>
+        <translation>Shorten - Verlustfreie Audiokompression</translation>
     </message>
     <message>
-        <source>Speex &amp;minus; Free Codec For Free Speech</source>
+        <source>Speex - Free Codec For Free Speech</source>
         <translation></translation>
     </message>
     <message>
@@ -188,20 +188,20 @@
         <translation>Freier und quelloffener Codec für Sprachaufzeichnung.</translation>
     </message>
     <message>
-        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
-        <translation>GNU Wget &amp;minus; Software für den Datei-Download über HTTP</translation>
+        <source>GNU Wget - Software for retrieving files using HTTP</source>
+        <translation>GNU Wget - Software für den Datei-Download über HTTP</translation>
     </message>
     <message>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation>Silk Icons &amp;minus; Über 700 Symbole im PNG Format</translation>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation>Silk Icons - Über 700 Symbole im PNG Format</translation>
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Hinweise: Diese Demo (Test) Version von LameXP läuft am %1 ab. Noch %2 Tage übrig.</translation>
     </message>
     <message>
-        <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation>Aften &amp;minus; A/52 Audio-Kodierer</translation>
+        <source>Aften - A/52 audio encoder</source>
+        <translation>Aften - A/52 Audio-Kodierer</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
@@ -220,12 +220,12 @@
         <translation></translation>
     </message>
     <message>
-        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
-        <translation>wma2wav &amp;minus; WMA Dateien als Wave Audio speichern</translation>
+        <source>wma2wav - Dump WMA files to Wave Audio</source>
+        <translation>wma2wav - WMA Dateien als Wave Audio speichern</translation>
     </message>
     <message>
-        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
-        <translation>avs2wav &amp;minus; Avisynth zu Wave Audio Konverter</translation>
+        <source>avs2wav - Avisynth to Wave Audio converter</source>
+        <translation>avs2wav - Avisynth zu Wave Audio Konverter</translation>
     </message>
 </context>
 <context>
@@ -339,7 +339,7 @@
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation>Es wird dringend empfohlen, vor dem Fortfahren mehr Speicherplatz freizugeben!</translation>
+        <translation>Wir empfehlen Ihnen dringend, vor dem Fortfahren mehr Speicherplatz freizugeben!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
@@ -1020,7 +1020,7 @@
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
-        <translation>Es wird dringend empfohlen, vor dem Fortfahren mehr Speicherplatz freizugeben!</translation>
+        <translation>Wir empfehlen Ihnen dringend, vor dem Fortfahren mehr Speicherplatz freizugeben!</translation>
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
@@ -1336,11 +1336,11 @@
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>%1 Datei(en) wurden abgewiesen, weil es sich um CDDA Platzhalter&amp;minus;Dateien handelt!</translation>
+        <translation>%1 Datei(en) wurden abgewiesen, weil es sich um CDDA Platzhalter-Dateien handelt!</translation>
     </message>
     <message>
-        <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation>LameXP ist derzeit leider nicht dazu in der Lage, Audio Tracks von einer Audio&amp;minus;CD zu extrahieren.</translation>
+        <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
+        <translation>LameXP ist derzeit leider nicht dazu in der Lage, Audio Tracks von einer Audio-CD zu extrahieren.</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
@@ -1520,7 +1520,7 @@
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation>%1 Datei(en) wurden abgewiesen, weil es sich um Cuesheet Image&amp;minus;Dateien handelt!</translation>
+        <translation>%1 Datei(en) wurden abgewiesen, weil es sich um Cuesheet Image-Dateien handelt!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
@@ -1665,6 +1665,10 @@
     <message>
         <source>Equalization Mode:</source>
         <translation>Angleichungsmodus:</translation>
+    </message>
+    <message>
+        <source>DEMO VERSION</source>
+        <translation></translation>
     </message>
 </context>
 <context>

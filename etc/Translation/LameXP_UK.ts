@@ -4,8 +4,8 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation>LameXP &amp;minus; Audio Encoder Front-end</translation>
+        <source>LameXP - Audio Encoder Front-end</source>
+        <translation>LameXP - Audio Encoder Front-end</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
@@ -72,16 +72,16 @@
         <translation>Наступне стороннє ПЗ використовується в LameXP:</translation>
     </message>
     <message>
-        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation>LAME &amp;minus; OpenSource mp3 Encoder</translation>
+        <source>LAME - OpenSource mp3 Encoder</source>
+        <translation>LAME - OpenSource mp3 Encoder</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
-        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation>OggEnc &amp;minus; Ogg Vorbis Encoder</translation>
+        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <translation>OggEnc - Ogg Vorbis Encoder</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
@@ -100,84 +100,84 @@
         <translation>Доступний на веб-сторінці вендора для безкоштовного завантаження:</translation>
     </message>
     <message>
-        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation>FLAC &amp;minus; Free Lossless Audio Codec</translation>
+        <source>FLAC - Free Lossless Audio Codec</source>
+        <translation>FLAC - Free Lossless Audio Codec</translation>
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation>Відкрита і вільна від патентних зборів технологія кодування аудіо без втрат.</translation>
     </message>
     <message>
-        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</translation>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation>mpg123 - Fast Console MPEG Audio Player/Decoder</translation>
     </message>
     <message>
-        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</translation>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
         <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
-        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools &amp;minus; AC3/DTS Decoder</translation>
+        <source>AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation>AC3Filter Tools - AC3/DTS Decoder</translation>
     </message>
     <message>
-        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation>WavPack &amp;minus; Hybrid Lossless Compression</translation>
+        <source>WavPack - Hybrid Lossless Compression</source>
+        <translation>WavPack - Hybrid Lossless Compression</translation>
     </message>
     <message>
         <source>Completely open audio compression format.</source>
         <translation>Повністю відкритий формат стиснення аудіо.</translation>
     </message>
     <message>
-        <source>Musepack &amp;minus; Living Audio Compression</source>
-        <translation>Musepack &amp;minus; Living Audio Compression</translation>
+        <source>Musepack - Living Audio Compression</source>
+        <translation>Musepack - Living Audio Compression</translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
-        <translation>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</translation>
+        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
+        <translation>Monkey&apos;s Audio - Lossless Audio Compressor</translation>
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation>Відкритий програмний код, простий SDK і ліцензія без обмежень.</translation>
     </message>
     <message>
-        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation>Shorten &amp;minus; Lossless Audio Compressor</translation>
+        <source>Shorten - Lossless Audio Compressor</source>
+        <translation>Shorten - Lossless Audio Compressor</translation>
     </message>
     <message>
-        <source>Speex &amp;minus; Free Codec For Free Speech</source>
-        <translation>Speex &amp;minus; Free Codec For Free Speech</translation>
+        <source>Speex - Free Codec For Free Speech</source>
+        <translation>Speex - Free Codec For Free Speech</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation>Відкритий і вільний від патентних зборів формат аудіо, призначений для обробки розмовного звукового матеріалу.</translation>
     </message>
     <message>
-        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation>The True Audio &amp;minus; Lossless Audio Codec</translation>
+        <source>The True Audio - Lossless Audio Codec</source>
+        <translation>The True Audio - Lossless Audio Codec</translation>
     </message>
     <message>
-        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation>MediaInfo &amp;minus; Media File Analysis Tool</translation>
+        <source>MediaInfo - Media File Analysis Tool</source>
+        <translation>MediaInfo - Media File Analysis Tool</translation>
     </message>
     <message>
-        <source>SoX &amp;minus; Sound eXchange</source>
-        <translation>SoX &amp;minus; Sound eXchange</translation>
+        <source>SoX - Sound eXchange</source>
+        <translation>SoX - Sound eXchange</translation>
     </message>
     <message>
-        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
-        <translation>GnuPG &amp;minus; The GNU Privacy Guard</translation>
+        <source>GnuPG - The GNU Privacy Guard</source>
+        <translation>GnuPG - The GNU Privacy Guard</translation>
     </message>
     <message>
-        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
-        <translation>GNU Wget &amp;minus; Software for retrieving files using HTTP</translation>
+        <source>GNU Wget - Software for retrieving files using HTTP</source>
+        <translation>GNU Wget - Software for retrieving files using HTTP</translation>
     </message>
     <message>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation>Silk Icons &amp;minus; Більш ніж 700 іконок в форматі PNG</translation>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation>Silk Icons - Більш ніж 700 іконок в форматі PNG</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
@@ -200,9 +200,9 @@
         <translation>Примітка: Строк дії цієї демо (тестової) версії LameXP закінчиться %1. Ще %2 днів.</translation>
     </message>
     <message>
-        <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translatorcomment>Aften &amp;minus; A/52 audio encoder</translatorcomment>
-        <translation>Aften &amp;minus; A/52 audio encoder</translation>
+        <source>Aften - A/52 audio encoder</source>
+        <translatorcomment>Aften - A/52 audio encoder</translatorcomment>
+        <translation>Aften - A/52 audio encoder</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
@@ -221,12 +221,12 @@
         <translation>За участі Jory Stone &lt;jcsston@toughguy.net&gt; і LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
-        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
-        <translation>wma2wav &amp;minus; Декодує файли WMA у Wave аудіо</translation>
+        <source>wma2wav - Dump WMA files to Wave Audio</source>
+        <translation>wma2wav - Декодує файли WMA у Wave аудіо</translation>
     </message>
     <message>
-        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
-        <translation>avs2wav &amp;minus; аудіоконвертер у Wave аудіо, що базується на Avisynth</translation>
+        <source>avs2wav - Avisynth to Wave Audio converter</source>
+        <translation>avs2wav - аудіоконвертер у Wave аудіо, що базується на Avisynth</translation>
     </message>
 </context>
 <context>
@@ -1339,8 +1339,8 @@
         <translation>%1 файл(и, ів) було пропущено, тому що вони є фіктивними файлами CDDA!</translation>
     </message>
     <message>
-        <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation>Вибачте, але LameXP наразі не може витягнути аудіодоріжки з Audio&amp;minus;CD.</translation>
+        <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
+        <translation>Вибачте, але LameXP наразі не може витягнути аудіодоріжки з Audio-CD.</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
@@ -1665,6 +1665,10 @@
     <message>
         <source>Equalization Mode:</source>
         <translation>Режим балансування:</translation>
+    </message>
+    <message>
+        <source>DEMO VERSION</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

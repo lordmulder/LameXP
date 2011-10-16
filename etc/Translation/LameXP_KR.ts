@@ -4,8 +4,8 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP &amp;minus; 오디오 인코더 프론트-엔드</translation>
+        <source>LameXP - Audio Encoder Front-end</source>
+        <translation type="unfinished">LameXP - 오디오 인코더 프론트-엔드</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
@@ -72,16 +72,16 @@
         <translation type="unfinished">다음과 같은 타사 소프트웨어가 LameXP에 사용되었습니다:</translation>
     </message>
     <message>
-        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation type="unfinished">LAME &amp;minus; 오픈소스 MP3 인코더</translation>
+        <source>LAME - OpenSource mp3 Encoder</source>
+        <translation type="unfinished">LAME - 오픈소스 MP3 인코더</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation type="unfinished">GNU 약소 일반 공중 사용 허가서의 약관 하에 출시됨.</translation>
     </message>
     <message>
-        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation type="unfinished">OggEnc &amp;minus; Ogg Vorbis Encoder</translation>
+        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <translation type="unfinished">OggEnc - Ogg Vorbis Encoder</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
@@ -100,84 +100,84 @@
         <translation type="unfinished">무료 다운로드 제공 웹사이트에서 사용 가능:</translation>
     </message>
     <message>
-        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation type="unfinished">FLAC &amp;minus; 무료 무손실 오디오 코덱</translation>
+        <source>FLAC - Free Lossless Audio Codec</source>
+        <translation type="unfinished">FLAC - 무료 무손실 오디오 코덱</translation>
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation type="unfinished">공개 및 특허 받은-무료 무손실 오디오 압축 기술.</translation>
     </message>
     <message>
-        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation type="unfinished">mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</translation>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation type="unfinished">mpg123 - Fast Console MPEG Audio Player/Decoder</translation>
     </message>
     <message>
-        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation type="unfinished">FAAD &amp;minus; 오픈소스 MPEG-4 및 MPEG-2 AAC Decoder</translation>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation type="unfinished">FAAD - 오픈소스 MPEG-4 및 MPEG-2 AAC Decoder</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
         <translation type="unfinished">GNU 일반 공중 사용 허가서의 약관 하에 줄시됨.</translation>
     </message>
     <message>
-        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
-        <translation type="unfinished">AC3Filter Tools &amp;minus; AC3/DTS Decoder</translation>
+        <source>AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished">AC3Filter Tools - AC3/DTS Decoder</translation>
     </message>
     <message>
-        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation type="unfinished">WavPack &amp;minus; 하이브리드 무손실 압축</translation>
+        <source>WavPack - Hybrid Lossless Compression</source>
+        <translation type="unfinished">WavPack - 하이브리드 무손실 압축</translation>
     </message>
     <message>
         <source>Completely open audio compression format.</source>
         <translation type="unfinished">완전히 공개된 오디오 압축 형식.</translation>
     </message>
     <message>
-        <source>Musepack &amp;minus; Living Audio Compression</source>
-        <translation type="unfinished">Musepack &amp;minus; Living Audio Compression</translation>
+        <source>Musepack - Living Audio Compression</source>
+        <translation type="unfinished">Musepack - Living Audio Compression</translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
-        <translation type="unfinished">Monkey&apos;s Audio &amp;minus; 무손실 오디오 압축기</translation>
+        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
+        <translation type="unfinished">Monkey&apos;s Audio - 무손실 오디오 압축기</translation>
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation type="unfinished">자유로이 사용 가능한 소스 코드, 간소한 SDK 및 비 한정 라이센스.</translation>
     </message>
     <message>
-        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation type="unfinished">Shorten &amp;minus; 무손실 오디오 압축기</translation>
+        <source>Shorten - Lossless Audio Compressor</source>
+        <translation type="unfinished">Shorten - 무손실 오디오 압축기</translation>
     </message>
     <message>
-        <source>Speex &amp;minus; Free Codec For Free Speech</source>
-        <translation type="unfinished">Speex &amp;minus; 음성화를 위한 무료 코덱</translation>
+        <source>Speex - Free Codec For Free Speech</source>
+        <translation type="unfinished">Speex - 음성화를 위한 무료 코덱</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation type="unfinished">음성화 제작을 위해 설계되어진 공개된 무료 오디오 형식.</translation>
     </message>
     <message>
-        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation type="unfinished">The True Audio &amp;minus; 무손실 오디오 코덱</translation>
+        <source>The True Audio - Lossless Audio Codec</source>
+        <translation type="unfinished">The True Audio - 무손실 오디오 코덱</translation>
     </message>
     <message>
-        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation type="unfinished">MediaInfo &amp;minus; 미디어 파일 분석 도구</translation>
+        <source>MediaInfo - Media File Analysis Tool</source>
+        <translation type="unfinished">MediaInfo - 미디어 파일 분석 도구</translation>
     </message>
     <message>
-        <source>SoX &amp;minus; Sound eXchange</source>
-        <translation type="unfinished">SoX &amp;minus; 사운드 교환</translation>
+        <source>SoX - Sound eXchange</source>
+        <translation type="unfinished">SoX - 사운드 교환</translation>
     </message>
     <message>
-        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
-        <translation type="unfinished">GnuPG &amp;minus; GNU 개인정보 보호</translation>
+        <source>GnuPG - The GNU Privacy Guard</source>
+        <translation type="unfinished">GnuPG - GNU 개인정보 보호</translation>
     </message>
     <message>
-        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
-        <translation type="unfinished">GNU Wget &amp;minus; HTTP를 사용하여 파일을 검색하기 위한 소프트웨어</translation>
+        <source>GNU Wget - Software for retrieving files using HTTP</source>
+        <translation type="unfinished">GNU Wget - HTTP를 사용하여 파일을 검색하기 위한 소프트웨어</translation>
     </message>
     <message>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation type="unfinished">Silk Icons &amp;minus; PNG 형식의 700 이상의 아이콘 </translation>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation type="unfinished">Silk Icons - PNG 형식의 700 이상의 아이콘 </translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
@@ -200,8 +200,8 @@
         <translation type="unfinished">알림: LameXP의 이 데모 (pre-release) 버전은 %1에 만료됩니다. 아직 %2 일 남음.</translation>
     </message>
     <message>
-        <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation type="unfinished">Aften &amp;minus; A/52 Audio Encoder</translation>
+        <source>Aften - A/52 audio encoder</source>
+        <translation type="unfinished">Aften - A/52 Audio Encoder</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
@@ -220,11 +220,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
+        <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
+        <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1014,8 +1014,8 @@
         <translation type="unfinished">%1 파일이 거부되었습니다. 가짜 CDDA 파일입니다!</translation>
     </message>
     <message>
-        <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation type="unfinished">죄송하지만, 현재 LameXP가 Audio&amp;minus;CD에서 오디오 트랙을 추출할 수 없습니다.</translation>
+        <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
+        <translation type="unfinished">죄송하지만, 현재 LameXP가 Audio-CD에서 오디오 트랙을 추출할 수 없습니다.</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
@@ -1663,6 +1663,10 @@
     </message>
     <message>
         <source>Equalization Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEMO VERSION</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

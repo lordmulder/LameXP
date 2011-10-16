@@ -116,92 +116,92 @@
         <translation>LameXP tiene copyright de LoRd_MuldeR. El copyright del software de terceros usado en LameXP pertenece a sus autores individuales.</translation>
     </message>
     <message>
-        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translation>LameXP &amp;minus; Interfaz de codificación de audio</translation>
+        <source>LameXP - Audio Encoder Front-end</source>
+        <translation>LameXP - Interfaz de codificación de audio</translation>
     </message>
     <message>
-        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translation>LameXP &amp;minus; Codificador mp3 de código abierto</translation>
+        <source>LAME - OpenSource mp3 Encoder</source>
+        <translation>LameXP - Codificador mp3 de código abierto</translation>
     </message>
     <message>
-        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation>OggEnc &amp;minus; Codificador Ogg Vorbis</translation>
+        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <translation>OggEnc - Codificador Ogg Vorbis</translation>
     </message>
     <message>
-        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation>FLAC &amp;minus; Códec de audio libre sin pérdidas</translation>
+        <source>FLAC - Free Lossless Audio Codec</source>
+        <translation>FLAC - Códec de audio libre sin pérdidas</translation>
     </message>
     <message>
-        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 &amp;minus; Consola de Reproducción/Decodificación de audio MPEG</translation>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation>mpg123 - Consola de Reproducción/Decodificación de audio MPEG</translation>
     </message>
     <message>
-        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation>FAAD &amp;minus; Decodificador MPEG-4 y MPEG-2 AAC de código abierto</translation>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation>FAAD - Decodificador MPEG-4 y MPEG-2 AAC de código abierto</translation>
     </message>
     <message>
-        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools &amp;minus; Decodificador AC3/DTS</translation>
+        <source>AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation>AC3Filter Tools - Decodificador AC3/DTS</translation>
     </message>
     <message>
-        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation>WavPack &amp;minus; Compresión híbrida sin pérdida</translation>
+        <source>WavPack - Hybrid Lossless Compression</source>
+        <translation>WavPack - Compresión híbrida sin pérdida</translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
-        <translation>Monkey&apos;s Audio &amp;minus; Compresor de audio sin pérdida</translation>
+        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
+        <translation>Monkey&apos;s Audio - Compresor de audio sin pérdida</translation>
     </message>
     <message>
-        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation>The True Audio &amp;minus; Códec de audio sin pérdida</translation>
+        <source>The True Audio - Lossless Audio Codec</source>
+        <translation>The True Audio - Códec de audio sin pérdida</translation>
     </message>
     <message>
-        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation>MediaInfo &amp;minus; Herramienta de análisis de archivos multimedia</translation>
+        <source>MediaInfo - Media File Analysis Tool</source>
+        <translation>MediaInfo - Herramienta de análisis de archivos multimedia</translation>
     </message>
     <message>
-        <source>SoX &amp;minus; Sound eXchange</source>
-        <translation>SoX &amp;minus; Sound eXchange</translation>
+        <source>SoX - Sound eXchange</source>
+        <translation>SoX - Sound eXchange</translation>
     </message>
     <message>
-        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
-        <translation>GnuPG &amp;minus; Guardián de privacidad GNU</translation>
+        <source>GnuPG - The GNU Privacy Guard</source>
+        <translation>GnuPG - Guardián de privacidad GNU</translation>
     </message>
     <message>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation>Silk Icons &amp;minus; Más de 700 iconos en formato PNG</translation>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation>Silk Icons - Más de 700 iconos en formato PNG</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation>Codificador MPEG-4 Nero AAC</translation>
     </message>
     <message>
-        <source>Musepack &amp;minus; Living Audio Compression</source>
-        <translation>Musepack &amp;minus; Compresór de audio con pérdida</translation>
+        <source>Musepack - Living Audio Compression</source>
+        <translation>Musepack - Compresór de audio con pérdida</translation>
     </message>
     <message>
-        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation>Shorten &amp;minus; Compresór de audio con pérdida</translation>
+        <source>Shorten - Lossless Audio Compressor</source>
+        <translation>Shorten - Compresór de audio con pérdida</translation>
     </message>
     <message>
-        <source>Speex &amp;minus; Free Codec For Free Speech</source>
-        <translation>Speex &amp;minus; Códec libre para libre expresión</translation>
+        <source>Speex - Free Codec For Free Speech</source>
+        <translation>Speex - Códec libre para libre expresión</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation>Patente de formato de audio de código abierto diseñado para expresión.</translation>
     </message>
     <message>
-        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
-        <translation>GNU Wget &amp;minus; Software para descarga de archivos mediante HTTP</translation>
+        <source>GNU Wget - Software for retrieving files using HTTP</source>
+        <translation>GNU Wget - Software para descarga de archivos mediante HTTP</translation>
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Nota: Esta es una versión demo (preliminar) de LameXP que expirará el %1. %2 días restantes.</translation>
     </message>
     <message>
-        <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation>Codificador de audio Aften &amp;minus; A/52</translation>
+        <source>Aften - A/52 audio encoder</source>
+        <translation>Codificador de audio Aften - A/52</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
@@ -220,12 +220,12 @@
         <translation>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
-        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
-        <translation>wma2wav &amp;minus; Conversor de WMA a WAV</translation>
+        <source>wma2wav - Dump WMA files to Wave Audio</source>
+        <translation>wma2wav - Conversor de WMA a WAV</translation>
     </message>
     <message>
-        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
-        <translation>avs2wav &amp;minus; Conversor de Avisynth a WAV</translation>
+        <source>avs2wav - Avisynth to Wave Audio converter</source>
+        <translation>avs2wav - Conversor de Avisynth a WAV</translation>
     </message>
 </context>
 <context>
@@ -1342,8 +1342,8 @@
         <translation>Es recomendable usar %1 para este proposito.</translation>
     </message>
     <message>
-        <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation>Disculpe, LameXP no puede extraer las pistas del CD&amp;minus;Audio.</translation>
+        <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
+        <translation>Disculpe, LameXP no puede extraer las pistas del CD-Audio.</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
@@ -1663,6 +1663,10 @@
     </message>
     <message>
         <source>Equalization Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEMO VERSION</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

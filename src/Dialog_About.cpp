@@ -41,7 +41,7 @@
 #include <math.h>
 
 //Helper macros
-#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
+#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
@@ -84,7 +84,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	m_rotateNext(false),
 	m_disqueDelay(_I64_MAX)
 {
-	QString versionStr = QString().sprintf
+	const QString versionStr = QString().sprintf
 	(
 		"Version %d.%02d %s, Build %d [%s], %s %s, Qt v%s",
 		lamexp_version_major(),
@@ -96,6 +96,11 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		lamexp_version_arch(),
 		qVersion()
 	);
+	const QString copyrightStr = QString().sprintf
+	(
+		"Copyright (C) 2004-%04d LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.",
+		max(lamexp_version_date().year(), QDate::currentDate().year())
+	);
 
 	for(int i = 0; i < 4; i++)
 	{
@@ -104,20 +109,20 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 
 	QString aboutText;
 
-	aboutText += QString("<h2>%1</h2>").arg(tr("LameXP &minus; Audio Encoder Front-end"));
-	aboutText += QString("<nobr><b>Copyright (C) 2004-%1 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.</b></nobr><br>").arg(max(lamexp_version_date().year(), QDate::currentDate().year())).replace("-", "&minus;");
-	aboutText += QString("<nobr><b>%1</b></nobr><br><br>").arg(versionStr).replace("-", "&minus;");
-	aboutText += QString("<nobr>%1</nobr><br>").arg(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url())));
+	aboutText += QString("<h2>%1</h2>").arg(NOBR(tr("LameXP - Audio Encoder Front-end")));
+	aboutText += QString("<b>%1</b><br>").arg(NOBR(copyrightStr));
+	aboutText += QString("<b>%1</b><br><br>").arg(NOBR(versionStr));
+	aboutText += QString("%1<br>").arg(NOBR(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url()))));
 	
 	if(LAMEXP_DEBUG)
 	{
 		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
-		aboutText += QString("<hr><nobr><font color=\"crimson\">!!! %3 DEBUG BUILD %3 Expires at: %1 %3 Days left: %2 %3 DEBUG BUILD %3 !!!</font></nobr>").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft), "&minus;&minus;&minus;");
+		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD %3 Expires at: %1 %3 Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 	else if(lamexp_version_demo())
 	{
 		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
-		aboutText += QString("<hr><nobr><font color=\"crimson\">%1</font></nobr>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))).replace("-", "&minus;");
+		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 	
 	aboutText += "<hr><br>";
@@ -136,7 +141,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += "<td valign=\"middle\"><img src=\":/icons/error_big.png\"</td><td>&nbsp;</td>";
 	aboutText += QString("<td><font color=\"darkred\">%1</font></td>").arg(tr("Note: LameXP is free software. Do <b>not</b> pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should <b>not</b> respond to the offer !!!"));
 	aboutText += "</tr></table><hr><br>";
-	aboutText += QString("%1<br>").arg(tr("Special thanks go out to \"John33\" from %1 for his continuous support.").arg(LINK("http://www.rarewares.org/")));
+	aboutText += QString("%1<br>").arg(NOBR(tr("Special thanks go out to \"John33\" from %1 for his continuous support.")).arg(LINK("http://www.rarewares.org/")));
 
 	setText(aboutText);
 	setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
@@ -303,19 +308,19 @@ void AboutDialog::showAboutContributors(void)
 	(
 		QString contributorsAboutText;
 
-		contributorsAboutText += QString("<h3><nobr>%1</nobr></h3>").arg(tr("The following people have contributed to LameXP:"));
+		contributorsAboutText += QString("<h3>%1</h3>").arg(NOBR(tr("The following people have contributed to LameXP:")));
 		contributorsAboutText += QString("<b>%1</b>").arg(tr("Translators:"));
 		contributorsAboutText += "<table style=\"margin-top:5px\">";
 		for(int i = 0; g_lamexp_contributors[i].pcName; i++)
 		{
 			QString flagIcon = (strlen(g_lamexp_contributors[i].pcFlag) > 0) ? QString("<img src=\":/flags/%1.png\">").arg(g_lamexp_contributors[i].pcFlag) : QString();
 			contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td>").arg(flagIcon);
-			contributorsAboutText += QString("<td valign=\"middle\">%2</td><td>&nbsp;&nbsp;</td>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcLanguage));
-			contributorsAboutText += QString("<td valign=\"middle\">%3</td><td>&nbsp;&nbsp;</td><td>&lt;%4&gt;</td></tr>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcName), g_lamexp_contributors[i].pcMail);
+			contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcLanguage));
+			contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td><td><a href=\"mailto:%2\">&lt;%2&gt;</a></td></tr>").arg(WCHAR2QSTR(g_lamexp_contributors[i].pcName), g_lamexp_contributors[i].pcMail);
 		}
 		contributorsAboutText += "</table>";
 		contributorsAboutText += "<br><br>";
-		contributorsAboutText += QString("<nobr><i>%1</i></nobr><br>").arg(tr("If you are willing to contribute a LameXP translation, feel free to contact us!"));
+		contributorsAboutText += QString("<i>%1</i><br>").arg(NOBR(tr("If you are willing to contribute a LameXP translation, feel free to contact us!")));
 
 		QMessageBox *contributorsAboutBox = new QMessageBox(this);
 		contributorsAboutBox->setText(contributorsAboutText);
@@ -345,14 +350,14 @@ void AboutDialog::showMoreAbout(void)
 	
 		moreAboutText += makeToolText
 		(
-			tr("LAME &minus; OpenSource mp3 Encoder"),
+			tr("LAME - OpenSource mp3 Encoder"),
 			"lame.exe", "v?.??, Beta-?",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://lame.sourceforge.net/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("OggEnc &minus; Ogg Vorbis Encoder"),
+			tr("OggEnc - Ogg Vorbis Encoder"),
 			"oggenc2.exe", "v?.??, aoTuV Beta-?.??",
 			tr("Completely open and patent-free audio encoding technology."),
 			"http://www.vorbis.com/"
@@ -367,56 +372,56 @@ void AboutDialog::showMoreAbout(void)
 		);
 		moreAboutText += makeToolText
 		(
-			tr("Aften &minus; A/52 audio encoder"),
+			tr("Aften - A/52 audio encoder"),
 			"aften.exe", "v?.?.?",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://aften.sourceforge.net/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("FLAC &minus; Free Lossless Audio Codec"),
+			tr("FLAC - Free Lossless Audio Codec"),
 			"flac.exe", "v?.?.?",
 			tr("Open and patent-free lossless audio compression technology."),
 			"http://flac.sourceforge.net/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("mpg123 &minus; Fast Console MPEG Audio Player/Decoder"),
+			tr("mpg123 - Fast Console MPEG Audio Player/Decoder"),
 			"mpg123.exe", "v?.??.?",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://www.mpg123.de/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("FAAD &minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder"),
+			tr("FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder"),
 			"faad.exe", "v?.?",
 			tr("Released under the terms of the GNU General Public License."),
 			"http://www.audiocoding.com/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("AC3Filter Tools &minus; AC3/DTS Decoder"),
+			tr("AC3Filter Tools - AC3/DTS Decoder"),
 			"valdec.exe", "v?.??",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://www.ac3filter.net/projects/tools"
 		);
 		moreAboutText += makeToolText
 			(
-			tr("WavPack &minus; Hybrid Lossless Compression"),
+			tr("WavPack - Hybrid Lossless Compression"),
 			"wvunpack.exe", "v?.??.?",
 			tr("Completely open audio compression format."),
 			"http://www.wavpack.com/"
 		);
 		moreAboutText += makeToolText
 			(
-			tr("Musepack &minus; Living Audio Compression"),
+			tr("Musepack - Living Audio Compression"),
 			"mpcdec.exe", "r???",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://www.musepack.net/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("Monkey's Audio &minus; Lossless Audio Compressor"),
+			tr("Monkey's Audio - Lossless Audio Compressor"),
 			"mac.exe", "v?.??",
 			tr("Freely available source code, simple SDK and non-restrictive licensing."),
 			"http://www.monkeysaudio.com/"
@@ -427,21 +432,21 @@ void AboutDialog::showMoreAbout(void)
 		);
 		moreAboutText += makeToolText
 		(
-			tr("Shorten &minus; Lossless Audio Compressor"),
+			tr("Shorten - Lossless Audio Compressor"),
 			"shorten.exe", "v?.?.?",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://etree.org/shnutils/shorten/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("Speex &minus; Free Codec For Free Speech"),
+			tr("Speex - Free Codec For Free Speech"),
 			"speexdec.exe", "v?.?",
 			tr("Open Source patent-free audio format designed for speech."),
 			"http://www.speex.org/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("The True Audio &minus; Lossless Audio Codec"),
+			tr("The True Audio - Lossless Audio Codec"),
 			"tta.exe", "v?.?",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://tta.sourceforge.net/"
@@ -455,56 +460,56 @@ void AboutDialog::showMoreAbout(void)
 		);
 		moreAboutText += makeToolText
 		(
-			tr("wma2wav &minus; Dump WMA files to Wave Audio"),
+			tr("wma2wav - Dump WMA files to Wave Audio"),
 			"wma2wav.exe", "????-??-??",
 			tr("Copyright (c) 2011 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved."),
 			"http://forum.doom9.org/showthread.php?t=140273"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("avs2wav &minus; Avisynth to Wave Audio converter"),
+			tr("avs2wav - Avisynth to Wave Audio converter"),
 			"avs2wav.exe", "v?.?",
 			tr("By Jory Stone <jcsston@toughguy.net> and LoRd_MuldeR <mulder2@gmx.de>."),
 			"http://forum.doom9.org/showthread.php?t=70882"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("MediaInfo &minus; Media File Analysis Tool"),
+			tr("MediaInfo - Media File Analysis Tool"),
 			"mediainfo.exe", "v?.?.??",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://mediainfo.sourceforge.net/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("SoX &minus; Sound eXchange"),
+			tr("SoX - Sound eXchange"),
 			"sox.exe", "v??.?.?",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://sox.sourceforge.net/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("GnuPG &minus; The GNU Privacy Guard"),
+			tr("GnuPG - The GNU Privacy Guard"),
 			"gpgv.exe", "v?.?.??",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://www.gnupg.org/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("GNU Wget &minus; Software for retrieving files using HTTP"),
+			tr("GNU Wget - Software for retrieving files using HTTP"),
 			"wget.exe", "v?.??.?",
 			tr("Released under the terms of the GNU Lesser General Public License."),
 			"http://www.gnu.org/software/wget/"
 		);
 		moreAboutText += makeToolText
 		(
-			tr("Silk Icons &minus; Over 700  icons in PNG format"),
+			tr("Silk Icons - Over 700  icons in PNG format"),
 			QString(), "v1.3",
 			tr("By Mark James, released under the Creative Commons 'by' License."),
 			"http://www.famfamfam.com/lab/icons/silk/"
 		);
-		moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><i><nobr>%1</nobr></i><br>").arg
+		moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><i>%1</i><br>").arg
 		(
-			tr("LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.").replace("-", "&minus;")
+			NOBR(tr("LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors."))
 		);
 
 		QMessageBox *moreAboutBox = new QMessageBox(this);
@@ -652,10 +657,10 @@ QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBi
 		verStr = lamexp_version2string(toolVerFmt, lamexp_tool_version(toolBin), tr("n/a"));
 	}
 
-	toolText += QString("<li><nobr><b>%1 (%2)</b></nobr><br>").arg(toolName, verStr).replace("-", "&minus;");
-	toolText += QString("<nobr>%1</nobr><br>").arg(toolLicense).replace("-", "&minus;");
-	if(!extraInfo.isEmpty()) toolText += QString("<nobr><i>%1</i></nobr><br>").arg(extraInfo).replace("-", "&minus;");
-	toolText += QString("<a href=\"%1\">%1</a>").arg(toolWebsite);
+	toolText += QString("<li>%1<br>").arg(NOBR(QString("<b>%1 (%2)</b>").arg(toolName, verStr)));
+	toolText += QString("%1<br>").arg(NOBR(toolLicense));
+	if(!extraInfo.isEmpty()) toolText += QString("<i>%1</i><br>").arg(NOBR(extraInfo));
+	toolText += QString("<nobr>%1</nobr>").arg(LINK(toolWebsite));
 	toolText += QString("<div style=\"font-size:1pt\"><br></div>");
 
 	return toolText;

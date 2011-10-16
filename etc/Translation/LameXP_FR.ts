@@ -118,94 +118,94 @@
         <translation></translation>
     </message>
     <message>
-        <source>LameXP &amp;minus; Audio Encoder Front-end</source>
-        <translatorcomment>LameXP &amp;minus; Encodeur audio</translatorcomment>
+        <source>LameXP - Audio Encoder Front-end</source>
+        <translatorcomment>LameXP - Encodeur audio</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <source>LAME &amp;minus; OpenSource mp3 Encoder</source>
-        <translatorcomment>LAME &amp;minus; encodeur mp3 Open Source</translatorcomment>
+        <source>LAME - OpenSource mp3 Encoder</source>
+        <translatorcomment>LAME - encodeur mp3 Open Source</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <source>OggEnc &amp;minus; Ogg Vorbis Encoder</source>
-        <translation>OggEnc &amp;minus; Encodeur Ogg Vorbis</translation>
+        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <translation>OggEnc - Encodeur Ogg Vorbis</translation>
     </message>
     <message>
-        <source>FLAC &amp;minus; Free Lossless Audio Codec</source>
-        <translation>FLAC &amp;minus; Codec audio libre sans perte</translation>
+        <source>FLAC - Free Lossless Audio Codec</source>
+        <translation>FLAC - Codec audio libre sans perte</translation>
     </message>
     <message>
-        <source>mpg123 &amp;minus; Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 &amp;minus; Console rapide MPEG audio Lecteur/Décodeur</translation>
+        <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
+        <translation>mpg123 - Console rapide MPEG audio Lecteur/Décodeur</translation>
     </message>
     <message>
-        <source>FAAD &amp;minus; OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation>FAAD &amp;minus; Décodeur AAC MPEG-4 et MPEG-2 AAC Open Source</translation>
+        <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
+        <translation>FAAD - Décodeur AAC MPEG-4 et MPEG-2 AAC Open Source</translation>
     </message>
     <message>
-        <source>AC3Filter Tools &amp;minus; AC3/DTS Decoder</source>
-        <translation>Outils AC3Filter &amp;minus; Décodeur AC3/DTS</translation>
+        <source>AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation>Outils AC3Filter - Décodeur AC3/DTS</translation>
     </message>
     <message>
-        <source>WavPack &amp;minus; Hybrid Lossless Compression</source>
-        <translation>WavPack &amp;minus; Compression hybride sans perte</translation>
+        <source>WavPack - Hybrid Lossless Compression</source>
+        <translation>WavPack - Compression hybride sans perte</translation>
     </message>
     <message>
-        <source>Monkey&apos;s Audio &amp;minus; Lossless Audio Compressor</source>
-        <translation>Monkey&apos;s Audio &amp;minus; Compresseur audio sans perte</translation>
+        <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
+        <translation>Monkey&apos;s Audio - Compresseur audio sans perte</translation>
     </message>
     <message>
-        <source>The True Audio &amp;minus; Lossless Audio Codec</source>
-        <translation>The True Audio &amp;minus; Codec audio sans perte</translation>
+        <source>The True Audio - Lossless Audio Codec</source>
+        <translation>The True Audio - Codec audio sans perte</translation>
     </message>
     <message>
-        <source>MediaInfo &amp;minus; Media File Analysis Tool</source>
-        <translation>MediaInfo &amp;minus; Outil d&apos;analyse de fichier média</translation>
+        <source>MediaInfo - Media File Analysis Tool</source>
+        <translation>MediaInfo - Outil d&apos;analyse de fichier média</translation>
     </message>
     <message>
-        <source>SoX &amp;minus; Sound eXchange</source>
-        <translation>SoX &amp;minus; Échange sonore</translation>
+        <source>SoX - Sound eXchange</source>
+        <translation>SoX - Échange sonore</translation>
     </message>
     <message>
-        <source>GnuPG &amp;minus; The GNU Privacy Guard</source>
-        <translation>GnuPG &amp;minus; The GNU Privacy Guard</translation>
+        <source>GnuPG - The GNU Privacy Guard</source>
+        <translation>GnuPG - The GNU Privacy Guard</translation>
     </message>
     <message>
-        <source>Silk Icons &amp;minus; Over 700  icons in PNG format</source>
-        <translation>Silk Icons &amp;minus; Plus de 700  icônes au format PNG</translation>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation>Silk Icons - Plus de 700  icônes au format PNG</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation>Encodeur de référence MPEG-4 Nero AAC</translation>
     </message>
     <message>
-        <source>Musepack &amp;minus; Living Audio Compression</source>
-        <translation>Musepack &amp;minus; Compression audio vivante</translation>
+        <source>Musepack - Living Audio Compression</source>
+        <translation>Musepack - Compression audio vivante</translation>
     </message>
     <message>
-        <source>Shorten &amp;minus; Lossless Audio Compressor</source>
-        <translation>Shorten &amp;minus; Compression audio sans perte</translation>
+        <source>Shorten - Lossless Audio Compressor</source>
+        <translation>Shorten - Compression audio sans perte</translation>
     </message>
     <message>
-        <source>Speex &amp;minus; Free Codec For Free Speech</source>
-        <translation>Speex &amp;minus; Codec libre pour l&apos;expression</translation>
+        <source>Speex - Free Codec For Free Speech</source>
+        <translation>Speex - Codec libre pour l&apos;expression</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation>Format audio Open Source libre de brevets conçu pour les discours.</translation>
     </message>
     <message>
-        <source>GNU Wget &amp;minus; Software for retrieving files using HTTP</source>
-        <translation>GNU Wget &amp;minus; Logiciel permettant de récupérer des fichiers à l&apos;aide du HTTP</translation>
+        <source>GNU Wget - Software for retrieving files using HTTP</source>
+        <translation>GNU Wget - Logiciel permettant de récupérer des fichiers à l&apos;aide du HTTP</translation>
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Note : Cette version  de démonstration de LameXP expirera le %1. Encore %2 jour(s) restant(s).</translation>
     </message>
     <message>
-        <source>Aften &amp;minus; A/52 audio encoder</source>
-        <translation>Aften &amp;minus; Encodeur audio A/52</translation>
+        <source>Aften - A/52 audio encoder</source>
+        <translation>Aften - Encodeur audio A/52</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
@@ -224,11 +224,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>wma2wav &amp;minus; Dump WMA files to Wave Audio</source>
+        <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>avs2wav &amp;minus; Avisynth to Wave Audio converter</source>
+        <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1351,8 +1351,8 @@ Sélection automatique (par défaut)</translation>
         <translation>Nous vous recommandons d&apos;utiliser %1 à cette fin.</translation>
     </message>
     <message>
-        <source>Sorry, LameXP cannot extract audio tracks from an Audio&amp;minus;CD at present.</source>
-        <translation>Désolé, LameXP ne peut pas extraire les pistes d&apos;un CD&amp;minus;Audio à l&apos;heure actuelle.</translation>
+        <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
+        <translation>Désolé, LameXP ne peut pas extraire les pistes d&apos;un CD-Audio à l&apos;heure actuelle.</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
@@ -1673,6 +1673,10 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEMO VERSION</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

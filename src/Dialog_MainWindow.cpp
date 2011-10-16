@@ -73,10 +73,10 @@
 #define ABORT_IF_BUSY if(m_banner->isVisible() || m_delayedFileTimer->isActive()) { MessageBeep(MB_ICONEXCLAMATION); return; }
 #define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, (COLOR)); _palette.setColor(QPalette::Text, (COLOR)); WIDGET->setPalette(_palette); }
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
-#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(URL)
+#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
+#define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); {CMD}; if(__dropBoxVisible) m_dropBox->show(); }
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
-#define NOBR(STR) QString("<nobr>%1</nobr>").arg(STR).replace("-", "&minus;")
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -493,19 +493,19 @@ void MainWindow::addFiles(const QStringList &files)
 
 	if(analyzer->filesDenied())
 	{
-		QMessageBox::warning(this, tr("Access Denied"), QString("<nobr>%1<br>%2</nobr>").arg(tr("%1 file(s) have been rejected, because read access was not granted!").arg(analyzer->filesDenied()), tr("This usually means the file is locked by another process.")));
+		QMessageBox::warning(this, tr("Access Denied"), QString("%1<br>%2").arg(NOBR(tr("%1 file(s) have been rejected, because read access was not granted!").arg(analyzer->filesDenied())), NOBR(tr("This usually means the file is locked by another process."))));
 	}
 	if(analyzer->filesDummyCDDA())
 	{
-		QMessageBox::warning(this, tr("CDDA Files"), QString("<nobr>%1<br><br>%2<br>%3</nobr>").arg(tr("%1 file(s) have been rejected, because they are dummy CDDA files!").arg(analyzer->filesDummyCDDA()), tr("Sorry, LameXP cannot extract audio tracks from an Audio&minus;CD at present."), tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>")));
+		QMessageBox::warning(this, tr("CDDA Files"), QString("%1<br><br>%2<br>%3").arg(NOBR(tr("%1 file(s) have been rejected, because they are dummy CDDA files!").arg(analyzer->filesDummyCDDA())), NOBR(tr("Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.")), NOBR(tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>"))));
 	}
 	if(analyzer->filesCueSheet())
 	{
-		QMessageBox::warning(this, tr("Cue Sheet"), QString("<nobr>%1<br>%2</nobr>").arg(tr("%1 file(s) have been rejected, because they appear to be Cue Sheet images!").arg(analyzer->filesCueSheet()), tr("Please use LameXP's Cue Sheet wizard for importing Cue Sheet files.")));
+		QMessageBox::warning(this, tr("Cue Sheet"), QString("%1<br>%2").arg(NOBR(tr("%1 file(s) have been rejected, because they appear to be Cue Sheet images!").arg(analyzer->filesCueSheet())), NOBR(tr("Please use LameXP's Cue Sheet wizard for importing Cue Sheet files."))));
 	}
 	if(analyzer->filesRejected())
 	{
-		QMessageBox::warning(this, tr("Files Rejected"), QString("<nobr>%1<br>%2</nobr>").arg(tr("%1 file(s) have been rejected, because the file format could not be recognized!").arg(analyzer->filesRejected()), tr("This usually means the file is damaged or the file format is not supported.")));
+		QMessageBox::warning(this, tr("Files Rejected"), QString("%1<br>%2").arg(NOBR(tr("%1 file(s) have been rejected, because the file format could not be recognized!").arg(analyzer->filesRejected())), NOBR(tr("This usually means the file is damaged or the file format is not supported."))));
 	}
 
 	LAMEXP_DELETE(analyzer);
@@ -959,7 +959,7 @@ void MainWindow::windowShown(void)
 		{
 			qWarning("Binary has expired !!!");
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
-			if(QMessageBox::warning(this, tr("LameXP - Expired"), QString("<nobr>%1<br>%2</nobr>").arg(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate)), tr("LameXP is free software and release versions won't expire.")), tr("Check for Updates"), tr("Exit Program")) == 0)
+			if(QMessageBox::warning(this, tr("LameXP - Expired"), QString("%1<br>%2").arg(NOBR(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate))), NOBR(tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
 				checkForUpdates();
 			}
@@ -1004,7 +1004,7 @@ void MainWindow::windowShown(void)
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
 		if(!firstRun && (!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14)))
 		{
-			if(QMessageBox::information(this, tr("Update Reminder"), QString("<nobr>%1</nobr>").arg(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")).replace("-", "&minus;"), tr("Check for Updates"), tr("Postpone")) == 0)
+			if(QMessageBox::information(this, tr("Update Reminder"), NOBR(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
 			{
 				if(checkForUpdates())
 				{
@@ -1041,7 +1041,7 @@ void MainWindow::windowShown(void)
 			messageText += NOBR(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.")).append("<br>");
 			messageText += NOBR(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!")).append("<br><br>");
 			messageText += NOBR(tr("Your LameXP directory is located here:")).append("<br>");
-			messageText += QString("<nobr><tt><a href=\"file:///%1\">%2</a></tt></nobr><br><br>").arg(QDir::toNativeSeparators(appPath), QDir::toNativeSeparators(appPath).replace("-", "&minus;"));
+			messageText += QString("<nobr><tt>%1</tt></nobr><br><br>").arg(FSLINK(QDir::toNativeSeparators(appPath)));
 			messageText += NOBR(tr("You can download the Nero AAC encoder for free from the official Nero website at:")).append("<br>");
 			messageText += "<nobr><tt>" + LINK(AboutDialog::neroAacUrl) + "</tt></nobr><br>";
 			if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
@@ -1103,9 +1103,12 @@ void MainWindow::windowShown(void)
  */
 void MainWindow::showAnnounceBox(void)
 {
-	QString announceText("<nobr>We are still looking for LameXP translators!<br><br>");
-	announceText.append("If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:<br>");
-	announceText.append("<tt>" + LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html") + "</tt></nobr><br>");
+	const QString announceText = QString("%1<br><br>%2<br><nobr><tt>%3</tt></nobr><br>").arg
+	(
+		NOBR("We are still looking for LameXP translators!"),
+		NOBR("If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:"),
+		LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html")
+	);
 	
 	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", announceText, QMessageBox::NoButton, this);
 	announceBox->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
@@ -1146,7 +1149,7 @@ void MainWindow::encodeButtonClicked(void)
 
 	if(m_fileListModel->rowCount() < 1)
 	{
-		QMessageBox::warning(this, tr("LameXP"), QString("<nobr>%1</nobr>").arg(tr("You must add at least one file to the list before proceeding!")));
+		QMessageBox::warning(this, tr("LameXP"), NOBR(tr("You must add at least one file to the list before proceeding!")));
 		tabWidget->setCurrentIndex(0);
 		return;
 	}
@@ -1154,7 +1157,7 @@ void MainWindow::encodeButtonClicked(void)
 	QString tempFolder = m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2();
 	if(!QFileInfo(tempFolder).exists() || !QFileInfo(tempFolder).isDir())
 	{
-		if(QMessageBox::warning(this, tr("Not Found"), QString("<nobr>%1</nobr><br><nobr>%2</nobr>").arg(tr("Your currently selected TEMP folder does not exist anymore:"), QDir::toNativeSeparators(tempFolder)), tr("Restore Default"), tr("Cancel")) == 0)
+		if(QMessageBox::warning(this, tr("Not Found"), QString("%1<br><tt>%2</tt>").arg(NOBR(tr("Your currently selected TEMP folder does not exist anymore:")), NOBR(QDir::toNativeSeparators(tempFolder))), tr("Restore Default"), tr("Cancel")) == 0)
 		{
 			while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
 		}
@@ -1167,7 +1170,14 @@ void MainWindow::encodeButtonClicked(void)
 		QStringList tempFolderParts = tempFolder.split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
 		tempFolderParts.takeLast();
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
-		switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br>%3").arg(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier)), tr("It is highly recommend to free up more diskspace before proceeding with the encode!"), tr("Your TEMP folder is located at:")).append("<br><nobr><i><a href=\"file:///%3\">%3</a></i></nobr><br>").arg(tempFolderParts.join("\\")), tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
+		QString lowDiskspaceMsg = QString("%1<br>%2<br><br>%3<br>%4<br>").arg
+		(
+			NOBR(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier))),
+			NOBR(tr("It is highly recommend to free up more diskspace before proceeding with the encode!")),
+			NOBR(tr("Your TEMP folder is located at:")),
+			QString("<nobr><tt>%1</tt></nobr>").arg(FSLINK(tempFolderParts.join("\\")))
+		);
+		switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), lowDiskspaceMsg, tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
 		{
 		case 1:
 			QProcess::startDetached(QString("%1/cleanmgr.exe").arg(lamexp_known_folder(lamexp_folder_systemfolder)), QStringList() << "/D" << tempFolderParts.first());
