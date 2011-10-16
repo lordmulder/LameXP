@@ -413,14 +413,27 @@ Section "!Install Files"
 	Delete "$INSTDIR\Contributors.txt"
 	Delete "$INSTDIR\FAQ.html"
 	Delete "$INSTDIR\Howto.html"
+	Delete "$INSTDIR\LameEnc.sys"
 	Delete "$INSTDIR\LameXP.exe"
 	Delete "$INSTDIR\LameXP.exe.sig"
 	Delete "$INSTDIR\License.txt"
+	Delete "$INSTDIR\Readme.htm"
 	Delete "$INSTDIR\ReadMe.txt"
+	Delete "$INSTDIR\Settings.cfg"
 	Delete "$INSTDIR\Translate.html"
 	Delete "$INSTDIR\Uninstall.exe"
 
 	!insertmacro GetExecutableName $R0
+
+	DeleteOldBinary:
+	ClearErrors
+	Delete "$INSTDIR\$R0"
+	
+	${If} ${Errors}
+		MessageBox MB_TOPMOST|MB_ICONSTOP|MB_RETRYCANCEL 'Could not delete old "$R0" file. Is LameXP still running?' IDRETRY DeleteOldBinary
+		Abort "Could not delete old binary!"
+	${EndIf}
+	
 	File `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
 	File `${LAMEXP_SOURCE_PATH}\*.txt`
 	File `${LAMEXP_SOURCE_PATH}\*.html`
