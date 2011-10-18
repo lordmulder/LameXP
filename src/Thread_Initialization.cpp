@@ -37,17 +37,20 @@
 ////////////////////////////////////////////////////////////
 
 /* CPU_TYPE_<ARCH>_<TYPE> */
+#define CPU_TYPE_X86_GEN 0x00000001UL //x86, generic
+#define CPU_TYPE_X86_SSE 0x00000002UL //x86, with SSE and SSE2 support - Intel only!
+#define CPU_TYPE_X64_GEN 0x00000004UL //x64, generic
+#define CPU_TYPE_X64_SSE 0x00000008UL //x64, with SSE and SSE2 support - Intel only!
 
-#define CPU_TYPE_X86_GEN 0x00000001UL //x86, no enhanced instruction set
-#define CPU_TYPE_X86_SSE 0x00000002UL //x86, with SSE and SSE2 support (Intel only!)
-#define CPU_TYPE_X64_GEN 0x00000004UL //x64, generic (x64 always includes SSE2)
+/* combined CPU types */
+#define CPU_TYPE_X86_ALL (CPU_TYPE_X86_GEN|CPU_TYPE_X86_SSE) //all x86 (ignore SSE/SSE2 support)
+#define CPU_TYPE_X64_ALL (CPU_TYPE_X64_GEN|CPU_TYPE_X64_SSE) //all x64 (ignore SSE/SSE2 support)
+#define CPU_TYPE_ALL_GEN (CPU_TYPE_X86_GEN|CPU_TYPE_X64_GEN) //all generic           (ignore x86/x64)
+#define CPU_TYPE_ALL_SSE (CPU_TYPE_X86_SSE|CPU_TYPE_X64_SSE) //all with SSE and SSE2 (ignore x86/x64)
+#define CPU_TYPE_ALL_ALL (CPU_TYPE_X86_ALL|CPU_TYPE_X64_ALL) //use always, no exceptions
 
-#define CPU_TYPE_X86_ALL (CPU_TYPE_X86_GEN|CPU_TYPE_X86_SSE) //all x86 CPU's, but not x64)
-#define CPU_TYPE_ALL_SSE (CPU_TYPE_X86_SSE|CPU_TYPE_X64_GEN) //all SSE2-capable CPU's (x86 and x64)
-#define CPU_TYPE_ALL_ALL (CPU_TYPE_X86_ALL|CPU_TYPE_X64_GEN) //all CPU's, no exceptions
-
-#define IS_CPU_TYPE_X64_GEN (m_cpuFeatures.x64   && m_cpuFeatures.sse && m_cpuFeatures.sse2)
-#define IS_CPU_TYPE_X86_SSE (m_cpuFeatures.intel && m_cpuFeatures.sse && m_cpuFeatures.sse2)
+/* helper macro*/
+#define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
 
 ////////////////////////////////////////////////////////////
 // TOOLS
@@ -64,7 +67,7 @@ g_lamexp_tools[] =
 {
 	{"1e4c983fe00ccc6236ee1c3f76250f64139cf86a6f4aa68f36929907fe45cf37b00862d8", CPU_TYPE_X86_GEN, "aften.i386.exe", 8},
 	{"7c843f1eaf61823285237911493d8d20da11149853d4bb7953a3279196f6dbbd310c61e3", CPU_TYPE_X86_SSE, "aften.sse2.exe", 8},
-	{"29da0d3e810bc3e8d2cddb3db452325eefca0d0c1fff1379fa17806ad447752be1b88e2f", CPU_TYPE_X64_GEN, "aften.x64.exe",  8},
+	{"29da0d3e810bc3e8d2cddb3db452325eefca0d0c1fff1379fa17806ad447752be1b88e2f", CPU_TYPE_X64_ALL, "aften.x64.exe",  8},
 	{"1cca303fabd889a18fc01c32a7fd861194cfcac60ba63740ea2d7c55d049dbf8f59259fa", CPU_TYPE_ALL_ALL, "alac.exe", 20},
 	{"6d22d4bbd7ce2162e38f70ac9187bc84eb28233b36ee6c0492d0a6195318782d7f05c444", CPU_TYPE_ALL_ALL, "avs2wav.exe", 13},
 	{"e53a787d4a0319453f4fe48c3145f190fcce7ac4802e521db908771437f6250746116e6c", CPU_TYPE_ALL_ALL, "elevator.exe", UINT_MAX},
@@ -72,17 +75,17 @@ g_lamexp_tools[] =
 	{"446054f9a7f705f1aadc9053ca7b8a86a775499ef159978954ebdea92de056c34f8841f7", CPU_TYPE_ALL_ALL, "flac.exe", 121},
 	{"dd68d074c5e13a607580f3a24595c0f3882e37211d2ca628f46e6df20fabcc832dad488a", CPU_TYPE_ALL_ALL, "gpgv.exe", 1411},
 	{"b3fca757b3567dab75c042e62213c231de378ea0fdd7fe29b733417cd5d3d33558452f94", CPU_TYPE_ALL_ALL, "gpgv.gpg", UINT_MAX},
-	{"df995d8a9e4e5fab551d0e3460b9209320714dead70f662929fcc00a4bd72d8a6d23844a", CPU_TYPE_X86_GEN, "lame.i386.exe", 3990},
-	{"873faeddc44243b4712cd42dd0bfc3174a07113d245dd834657519ffe5dbd4b1e395ce32", CPU_TYPE_ALL_SSE, "lame.sse2.exe", 3990},
+	{"77f49df0d153227600f69d0d9e3a91316afa72dccbdc6db09369f1302333e2f329ca38d1", CPU_TYPE_ALL_GEN, "lame.i386.exe", 3990},
+	{"ba702fff5db064d36d08f002e1b3a9460e8d37de79b9e977844f1439cb88dba90ac6cf4c", CPU_TYPE_ALL_SSE, "lame.sse2.exe", 3990},
 	{"67933924d68ce319795989648f29e7bd1abaac4ec09c26cbb0ff0d15a67a9df17e257933", CPU_TYPE_ALL_ALL, "mac.exe", 406},
 	{"a521603c070cbd91a54df54bbaf0d74336a61e9cf527b98eb2ee62c2ab424e6b834e3292", CPU_TYPE_X86_ALL, "mediainfo.i386.exe", 750},
-	{"6ca4f3c6e15df2e2091257d6f2647372e419e375ea914094c5f631d7d54c07375e685335", CPU_TYPE_X64_GEN, "mediainfo.x64.exe",  750},
+	{"6ca4f3c6e15df2e2091257d6f2647372e419e375ea914094c5f631d7d54c07375e685335", CPU_TYPE_X64_ALL, "mediainfo.x64.exe",  750},
 	{"a93ec86187025e66fb78026af35555bd3b4e30fe1a40e8d66f600cfd918f07f431f0b2f2", CPU_TYPE_ALL_ALL, "mpcdec.exe", 435},
 	{"7fa1beb4161d603563089cadd601f68fb9f436f05d9477b6a604501b072f5a973dd45fbb", CPU_TYPE_ALL_ALL, "mpg123.exe", 1134},
 	{"0c781805dda931c529bd16069215f616a7a4c5e5c2dfb6b75fe85d52b20511830693e528", CPU_TYPE_ALL_ALL, "oggdec.exe", UINT_MAX},
 	{"0c019e13450dc664987e21f4e5489d182be7d6d0d81efbbaaf1c78693dfe3e38e0355b93", CPU_TYPE_X86_GEN, "oggenc2.i386.exe", 287603},
 	{"693dd6f779df70a047c15c2c79350855db38d5b0cd7e529b6877b7c821cfe6addfdd50a4", CPU_TYPE_X86_SSE, "oggenc2.sse2.exe", 287603},
-	{"32cb0b2182488e5e9278ba6b9fc9141214c7546eec67ee02fa895810b0e56900368695be", CPU_TYPE_X64_GEN, "oggenc2.x64.exe",  287603},
+	{"32cb0b2182488e5e9278ba6b9fc9141214c7546eec67ee02fa895810b0e56900368695be", CPU_TYPE_X64_ALL, "oggenc2.x64.exe",  287603},
 	{"58c2b8bcff8f27bfa8fab8172b80f5da731221d072c7dba4dd3a3d7d6423490a25dc6760", CPU_TYPE_ALL_ALL, "shorten.exe", 361},
 	{"abdf9b20a8031a09d0abca9cb10c31c8418f72403b5d1350fd69bfa34041591aca3060ab", CPU_TYPE_ALL_ALL, "sox.exe", 1432},
 	{"48e7f81c024cd17dac0eaeab253aad6b223e72dc80688f7576276b0563209514ff0bb9c8", CPU_TYPE_ALL_ALL, "speexdec.exe", 12},
@@ -124,8 +127,26 @@ void InitializationThread::run()
 	delay();
 
 	//CPU type selection
-	const unsigned int cpuSupport = IS_CPU_TYPE_X64_GEN ? CPU_TYPE_X64_GEN : (IS_CPU_TYPE_X86_SSE ? CPU_TYPE_X86_SSE : CPU_TYPE_X86_GEN);
-	
+	unsigned int cpuSupport = 0;
+	if(m_cpuFeatures.sse && m_cpuFeatures.sse2 && m_cpuFeatures.intel)
+	{
+		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_SSE : CPU_TYPE_X86_SSE;
+	}
+	else
+	{
+		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_GEN : CPU_TYPE_X86_GEN;
+	}
+
+	//Print selected CPU type
+	switch(cpuSupport)
+	{
+		PRINT_CPU_TYPE(CPU_TYPE_X86_GEN); break;
+		PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
+		PRINT_CPU_TYPE(CPU_TYPE_X64_GEN); break;
+		PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
+		default: throw "CPU support undefined!";
+	}
+
 	//Allocate maps
 	QMap<QString, QString> mapChecksum;
 	QMap<QString, unsigned int> mapVersion;
