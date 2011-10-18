@@ -444,6 +444,9 @@
     <ClInclude Include="src\Decoder_Avisynth.h">
       <Filter>Header Files\Decoders</Filter>
     </ClInclude>
+    <ClInclude Include="src\Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LameXP.rc" />

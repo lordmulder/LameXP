@@ -117,7 +117,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	if(LAMEXP_DEBUG)
 	{
 		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
-		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD %3 Expires at: %1 %3 Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
+		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 	else if(lamexp_version_demo())
 	{

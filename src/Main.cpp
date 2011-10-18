@@ -121,6 +121,12 @@ static int lamexp_main(int argc, char* argv[])
 		}
 	}
 	
+	//Self-test
+	if(LAMEXP_DEBUG)
+	{
+		InitializationThread::selfTest();
+	}
+
 	//Create models
 	FileListModel *fileListModel = new FileListModel();
 	AudioFileModel *metaInfo = new AudioFileModel();

@@ -38,6 +38,8 @@ public:
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 	bool getSlowIndicator(void) { return m_slowIndicator; }
 
+	static void selfTest(void);
+
 private:
 	void delay(void);
 	void initTranslations(void);
