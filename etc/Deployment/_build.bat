@@ -11,12 +11,12 @@ call "%PATH_MSVC90%\VC\bin\vcvars32.bat" x86
 call "%PATH_QTMSVC%\bin\qtenv2.bat"
 REM -----------------------------------------------------------------
 set "LAMEXP_ERROR=1"
-msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Clean /verbosity:detailed %1
+msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Clean /verbosity:normal %1
 if not "%ERRORLEVEL%"=="0" GOTO:EOF
 echo ----------------------------------------------------------------
 set "LAMEXP_ERROR=1"
-msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Rebuild /verbosity:detailed %1
-msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Build /verbosity:detailed %1
+msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Rebuild /verbosity:normal %1
+msbuild.exe /property:Configuration=%2 /property:Platform=Win32 /target:Build /verbosity:normal %1
 if not "%ERRORLEVEL%"=="0" GOTO:EOF
 echo ----------------------------------------------------------------
 set "LAMEXP_ERROR=0"

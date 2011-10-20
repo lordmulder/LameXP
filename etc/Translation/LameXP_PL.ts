@@ -26,7 +26,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="144"/>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation type="unfinished">Specjalne podziękowania dla John33 z %1 za jego ciągłe wsparcie.</translation>
+        <translation type="unfinished">Specjalne podziękowania dla John33 z %1 za jego stałe wsparcie.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="148"/>
@@ -51,12 +51,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="172"/>
         <source>3rd Party S/W</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Programy firm trzecich</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="179"/>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tłumacze</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="186"/>
@@ -113,7 +113,7 @@
         <location filename="../../src/Dialog_About.cpp" line="493"/>
         <location filename="../../src/Dialog_About.cpp" line="500"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wydane na warunkach licencji GNU Lesser General Public License.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="360"/>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="362"/>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Całkowicie otwarta i wolna od patentów technologia kompresji dźwięku.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="367"/>
@@ -138,7 +138,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="371"/>
         <source>Available from vendor web-site as free download:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Darmowy pakiet dostępny ze strony wydawcy:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="375"/>
@@ -168,7 +168,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="398"/>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wydane na warunkach licencji GNU General Public License.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="403"/>
@@ -198,7 +198,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="426"/>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Szeroko dostępny kod źródłowy, prosty SDK i bezrestrykcyjna licencja.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="435"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="458"/>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prawa autorskie: 2004 David Hammerton. Kodu użyczył Cody Brocious.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="463"/>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="465"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prawa autorskie: 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Pewne prawa zastrzeżone.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="470"/>
@@ -248,7 +248,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="472"/>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autorami programu są Jory Stone &lt;jcsston@toughguy.net&gt; i LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="477"/>
@@ -268,7 +268,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="498"/>
         <source>GNU Wget - Software for retrieving files using HTTP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">GNU Wget - Oprogramowanie służące do pobierania plików za pomocą protokołu HTTP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="505"/>
@@ -278,12 +278,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="507"/>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autorem pakietu jest Mark James, wydano na licencji Creative Commons.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="512"/>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Do programu LameXP jako całości, prawa autorskie posiada LoRd_MuldeR. Prawa autorskie oprogramowania firm trzecich należą do autorów poszczególnych programów.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="523"/>
@@ -997,7 +997,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1661"/>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation type="unfinished">Wymuś miksowanie do stereo plików wielokanałowych</translation>
+        <translation type="unfinished">Wymuś miksowanie plików wielokanałowych do stereo</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1695"/>
@@ -1067,7 +1067,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1994"/>
         <source>Equalization Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb korekcji:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2041"/>
@@ -1136,7 +1136,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2555"/>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation type="unfinished">Wybierz ilość równoległych kodowań na podstawie ilości rdzeni (Zalecane)</translation>
+        <translation type="unfinished">Wybierz ilość równoległych kodowań na podstawie ilości wątków procesora (Zalecane)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2562"/>
@@ -2841,7 +2841,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="459"/>
         <source>More information available at:</source>
-        <translation type="unfinished">Więcej informacji tu:</translation>
+        <translation type="unfinished">Więcej informacji tutaj:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="465"/>

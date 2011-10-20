@@ -135,5 +135,6 @@
 ..\..\src\Thread_MessageHandler.h 
 ..\..\src\Thread_MessageProducer.h 
 ..\..\src\Thread_Process.h 
+..\..\src\Tools.h 
 ..\..\src\Tool_Abstract.h 
 ..\..\src\WinSevenTaskbar.h 
