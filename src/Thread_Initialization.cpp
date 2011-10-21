@@ -74,6 +74,17 @@ void InitializationThread::run()
 		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_GEN : CPU_TYPE_X86_GEN;
 	}
 
+	//Hack to disable x64 on the Windows 8 Developer Preview
+	if(cpuSupport & CPU_TYPE_X64_ALL)
+	{
+		DWORD osVerNo = lamexp_get_os_version();
+		if((HIWORD(osVerNo) == 6) && (LOWORD(osVerNo) == 2))
+		{
+			qWarning("Windows 8 (x64) developer preview detected. Going to disable all x64 support!\n");
+			cpuSupport = (cpuSupport == CPU_TYPE_X64_SSE) ? CPU_TYPE_X86_SSE : CPU_TYPE_X86_GEN;
+		}
+	}
+
 	//Print selected CPU type
 	switch(cpuSupport)
 	{

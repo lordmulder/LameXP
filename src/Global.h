@@ -83,6 +83,7 @@ unsigned int lamexp_toolver_neroaac(void);
 unsigned int lamexp_toolver_fhgaacenc(void);
 const char *lamexp_website_url(void);
 const char *lamexp_support_url(void);
+DWORD lamexp_get_os_version(void);
 
 //Public functions
 void lamexp_init_console(int argc, char* argv[]);

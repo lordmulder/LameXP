@@ -320,7 +320,7 @@ const QDate &lamexp_version_date(void)
 /*
  * Get the native operating system version
  */
-static DWORD lamexp_get_os_version(void)
+DWORD lamexp_get_os_version(void)
 {
 	OSVERSIONINFO osVerInfo;
 	memset(&osVerInfo, 0, sizeof(OSVERSIONINFO));
@@ -621,19 +621,8 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 	features.count = systemInfo.dwNumberOfProcessors;
 	features.x64 = true;
 #endif
-	
-	//Hack to disable x64 on the Windows 8 Developer Preview
-	if(features.x64)
-	{
-		DWORD osVerNo = lamexp_get_os_version();
-		if((HIWORD(osVerNo) == 6) && (LOWORD(osVerNo) == 2))
-		{
-			qWarning("Windows 8 (x64) detected. Going to disable all x64 support for now!\n");
-			features.x64 = false;
-		}
-	}
 
-	if(argv)
+	if((argv != NULL) && (argc > 0))
 	{
 		bool flag = false;
 		for(int i = 0; i < argc; i++)
