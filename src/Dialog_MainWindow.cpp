@@ -360,12 +360,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	actionDisableShellIntegration->setDisabled(lamexp_portable_mode() && actionDisableShellIntegration->isChecked());
 	actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
 	actionCheckForBetaUpdates->setEnabled(!lamexp_version_demo());
+	actionHibernateComputer->setChecked(m_settings->hibernateComputer());
 	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
 	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
 	connect(actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
 	connect(actionDisableSlowStartupNotifications, SIGNAL(triggered(bool)), this, SLOT(disableSlowStartupNotificationsActionTriggered(bool)));
 	connect(actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
 	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
+	connect(actionHibernateComputer, SIGNAL(triggered(bool)), this, SLOT(hibernateComputerActionTriggered(bool)));
 	connect(actionCheckForBetaUpdates, SIGNAL(triggered(bool)), this, SLOT(checkForBetaUpdatesActionTriggered(bool)));
 	connect(actionImportCueSheet, SIGNAL(triggered(bool)), this, SLOT(importCueSheetActionTriggered(bool)));
 		
@@ -1449,9 +1451,9 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Disable Update Reminder"), tr("Do you really want to disable the update reminder?"), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Disable Update Reminder"), NOBR(tr("Do you really want to disable the update reminder?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Update Reminder"), QString("%1<br>%2").arg(tr("The update reminder has been disabled."), tr("Please remember to check for updates at regular intervals!")));
+			QMessageBox::information(this, tr("Update Reminder"), QString("%1<br>%2").arg(NOBR(tr("The update reminder has been disabled.")), NOBR(tr("Please remember to check for updates at regular intervals!"))));
 			m_settings->autoUpdateEnabled(false);
 		}
 		else
@@ -1461,7 +1463,7 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Update Reminder"), tr("The update reminder has been re-enabled."));
+			QMessageBox::information(this, tr("Update Reminder"), NOBR(tr("The update reminder has been re-enabled.")));
 			m_settings->autoUpdateEnabled(true);
 	}
 
@@ -1475,9 +1477,9 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Disable Sound Effects"), tr("Do you really want to disable all sound effects?"), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Disable Sound Effects"), NOBR(tr("Do you really want to disable all sound effects?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Sound Effects"), tr("All sound effects have been disabled."));
+			QMessageBox::information(this, tr("Sound Effects"), NOBR(tr("All sound effects have been disabled.")));
 			m_settings->soundsEnabled(false);
 		}
 		else
@@ -1487,7 +1489,7 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Sound Effects"), tr("The sound effects have been re-enabled."));
+			QMessageBox::information(this, tr("Sound Effects"), NOBR(tr("The sound effects have been re-enabled.")));
 			m_settings->soundsEnabled(true);
 	}
 
@@ -1501,9 +1503,9 @@ void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Nero AAC Notifications"), tr("Do you really want to disable all Nero AAC Encoder notifications?"), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Nero AAC Notifications"), NOBR(tr("Do you really want to disable all Nero AAC Encoder notifications?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Nero AAC Notifications"), tr("All Nero AAC Encoder notifications have been disabled."));
+			QMessageBox::information(this, tr("Nero AAC Notifications"), NOBR(tr("All Nero AAC Encoder notifications have been disabled.")));
 			m_settings->neroAacNotificationsEnabled(false);
 		}
 		else
@@ -1513,38 +1515,12 @@ void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Nero AAC Notifications"), tr("The Nero AAC Encoder notifications have been re-enabled."));
+			QMessageBox::information(this, tr("Nero AAC Notifications"), NOBR(tr("The Nero AAC Encoder notifications have been re-enabled.")));
 			m_settings->neroAacNotificationsEnabled(true);
 	}
 
 	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 }
-
-/*
- * Disable WMA Decoder component action
- */
-//void MainWindow::disableWmaDecoderNotificationsActionTriggered(bool checked)
-//{
-//	if(checked)
-//	{
-//		if(0 == QMessageBox::question(this, tr("WMA Decoder Notifications"), tr("Do you really want to disable all WMA Decoder notifications?"), tr("Yes"), tr("No"), QString(), 1))
-//		{
-//			QMessageBox::information(this, tr("WMA Decoder Notifications"), tr("All WMA Decoder notifications have been disabled."));
-//			m_settings->wmaDecoderNotificationsEnabled(false);
-//		}
-//		else
-//		{
-//			m_settings->wmaDecoderNotificationsEnabled(true);
-//		}
-//	}
-//	else
-//	{
-//			QMessageBox::information(this, tr("WMA Decoder Notifications"), tr("The WMA Decoder notifications have been re-enabled."));
-//			m_settings->wmaDecoderNotificationsEnabled(true);
-//	}
-//
-//	actionDisableWmaDecoderNotifications->setChecked(!m_settings->wmaDecoderNotificationsEnabled());
-//}
 
 /*
  * Disable slow startup action
@@ -1553,9 +1529,9 @@ void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Slow Startup Notifications"), tr("Do you really want to disable the slow startup notifications?"), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Slow Startup Notifications"), NOBR(tr("Do you really want to disable the slow startup notifications?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Slow Startup Notifications"), tr("The slow startup notifications have been disabled."));
+			QMessageBox::information(this, tr("Slow Startup Notifications"), NOBR(tr("The slow startup notifications have been disabled.")));
 			m_settings->antivirNotificationsEnabled(false);
 		}
 		else
@@ -1565,27 +1541,12 @@ void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Slow Startup Notifications"), tr("The slow startup notifications have been re-enabled."));
+			QMessageBox::information(this, tr("Slow Startup Notifications"), NOBR(tr("The slow startup notifications have been re-enabled.")));
 			m_settings->antivirNotificationsEnabled(true);
 	}
 
 	actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 }
-
-/*
- * Download and install WMA Decoder component
- */
-//void MainWindow::installWMADecoderActionTriggered(bool checked)
-//{
-//	if(QMessageBox::question(this, tr("Install WMA Decoder"), tr("Do you want to download and install the WMA File Decoder component now?"), tr("Download && Install"), tr("Cancel")) == 0)
-//	{
-//		if(installWMADecoder())
-//		{
-//			QApplication::quit();
-//			return;
-//		}
-//	}
-//}
 
 /*
  * Import a Cue Sheet file
@@ -1654,9 +1615,9 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 	
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Beta Updates"), tr("Do you really want LameXP to check for Beta (pre-release) updates?"), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Beta Updates"), NOBR(tr("Do you really want LameXP to check for Beta (pre-release) updates?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			if(0 == QMessageBox::information(this, tr("Beta Updates"), tr("LameXP will check for Beta (pre-release) updates from now on."), tr("Check Now"), tr("Discard")))
+			if(0 == QMessageBox::information(this, tr("Beta Updates"), NOBR(tr("LameXP will check for Beta (pre-release) updates from now on.")), tr("Check Now"), tr("Discard")))
 			{
 				checkUpdatesNow = true;
 			}
@@ -1669,7 +1630,7 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Beta Updates"), tr("LameXP will <i>not</i> check for Beta (pre-release) updates from now on."));
+			QMessageBox::information(this, tr("Beta Updates"), NOBR(tr("LameXP will <i>not</i> check for Beta (pre-release) updates from now on.")));
 			m_settings->autoUpdateCheckBeta(false);
 	}
 
@@ -1685,16 +1646,42 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 }
 
 /*
+ * Hibernate computer action
+ */
+void MainWindow::hibernateComputerActionTriggered(bool checked)
+{
+	if(checked)
+	{
+		if(0 == QMessageBox::question(this, tr("Hibernate Computer"), NOBR(tr("Do you really want the computer to be hibernated on shutdown?")), tr("Yes"), tr("No"), QString(), 1))
+		{
+			QMessageBox::information(this, tr("Hibernate Computer"), NOBR(tr("LameXP will hibernate the computer on shutdown from now on.")));
+			m_settings->hibernateComputer(true);
+		}
+		else
+		{
+			m_settings->hibernateComputer(false);
+		}
+	}
+	else
+	{
+			QMessageBox::information(this, tr("Hibernate Computer"), NOBR(tr("LameXP will <i>not</i> hibernate the computer on shutdown from now on.")));
+			m_settings->hibernateComputer(false);
+	}
+
+	actionHibernateComputer->setChecked(m_settings->hibernateComputer());
+}
+
+/*
  * Disable shell integration action
  */
 void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Shell Integration"), tr("Do you really want to disable the LameXP shell integration?"), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Shell Integration"), NOBR(tr("Do you really want to disable the LameXP shell integration?")), tr("Yes"), tr("No"), QString(), 1))
 		{
 			ShellIntegration::remove();
-			QMessageBox::information(this, tr("Shell Integration"), tr("The LameXP shell integration has been disabled."));
+			QMessageBox::information(this, tr("Shell Integration"), NOBR(tr("The LameXP shell integration has been disabled.")));
 			m_settings->shellIntegrationEnabled(false);
 		}
 		else
@@ -1705,7 +1692,7 @@ void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 	else
 	{
 			ShellIntegration::install();
-			QMessageBox::information(this, tr("Shell Integration"), tr("The LameXP shell integration has been re-enabled."));
+			QMessageBox::information(this, tr("Shell Integration"), NOBR(tr("The LameXP shell integration has been re-enabled.")));
 			m_settings->shellIntegrationEnabled(true);
 	}
 

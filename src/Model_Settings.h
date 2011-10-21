@@ -128,6 +128,7 @@ public:
 	LAMEXP_MAKE_OPTION_B(customTempPathEnabled);
 	LAMEXP_MAKE_OPTION_B(slowStartup);
 	LAMEXP_MAKE_OPTION_S(mostRecentInputPath);
+	LAMEXP_MAKE_OPTION_B(hibernateComputer);
 
 	//Misc
 	void validate(void);

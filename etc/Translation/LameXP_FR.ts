@@ -1679,6 +1679,26 @@ Ouvrir le dossier récursivement...</translation>
         <source>DEMO VERSION</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hibernate Computer On Shutdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hibernate Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want the computer to be hibernated on shutdown?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP will hibernate the computer on shutdown from now on.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

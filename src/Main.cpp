@@ -46,8 +46,8 @@
 static int lamexp_main(int argc, char* argv[])
 {
 	int iResult = -1;
+	int iShutdown = shutdownFlag_None;
 	bool bAccepted = true;
-	bool bShutdown = false;
 	
 	//Init console
 	lamexp_init_console(argc, argv);
@@ -145,7 +145,7 @@ static int lamexp_main(int argc, char* argv[])
 	MainWindow *poMainWindow = new MainWindow(fileListModel, metaInfo, settingsModel);
 	
 	//Main application loop
-	while(bAccepted && !bShutdown)
+	while(bAccepted && (iShutdown <= shutdownFlag_None))
 	{
 		//Show main window
 		poMainWindow->show();
@@ -157,7 +157,7 @@ static int lamexp_main(int argc, char* argv[])
 		{
 			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, metaInfo, settingsModel);
 			processingDialog->exec();
-			bShutdown = processingDialog->getShutdownFlag();
+			iShutdown = processingDialog->getShutdownFlag();
 			LAMEXP_DELETE(processingDialog);
 		}
 	}
@@ -172,9 +172,9 @@ static int lamexp_main(int argc, char* argv[])
 	qDebug("Shutting down, please wait...\n");
 
 	//Shotdown computer
-	if(bShutdown)
+	if(iShutdown > shutdownFlag_None)
 	{
-		if(!lamexp_shutdown_computer(QApplication::applicationFilePath(), 12))
+		if(!lamexp_shutdown_computer(QApplication::applicationFilePath(), 12, true, (iShutdown == shutdownFlag_Hibernate)))
 		{
 			QMessageBox messageBox(QMessageBox::Critical, "LameXP", "Sorry, LameXP was unable to shutdown your computer!", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
 		}

@@ -113,6 +113,7 @@ LAMEXP_MAKE_ID(customParametersAften, "AdvancedOptions/CustomParameters/Aften");
 LAMEXP_MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
 LAMEXP_MAKE_ID(renameOutputFilesEnabled, "AdvancedOptions/RenameOutputFiles/Enabled");
 LAMEXP_MAKE_ID(renameOutputFilesPattern, "AdvancedOptions/RenameOutputFiles/Pattern");
+LAMEXP_MAKE_ID(hibernateComputer, "AdvancedOptions/HibernateComputerOnShutdown");
 LAMEXP_MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
 LAMEXP_MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
 LAMEXP_MAKE_ID(customTempPath, "AdvancedOptions/TempDirectory/CustomPath");
@@ -363,3 +364,4 @@ LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopS
 LAMEXP_MAKE_OPTION_B(customTempPathEnabled, false);
 LAMEXP_MAKE_OPTION_B(slowStartup, false);
 LAMEXP_MAKE_OPTION_S(mostRecentInputPath, QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
+LAMEXP_MAKE_OPTION_B(hibernateComputer, false);

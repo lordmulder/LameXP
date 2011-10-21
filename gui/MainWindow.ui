@@ -1099,8 +1099,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
-               <height>1524</height>
+               <width>602</width>
+               <height>1515</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -3482,6 +3482,7 @@
      <addaction name="actionDisableSlowStartupNotifications"/>
      <addaction name="actionDisableShellIntegration"/>
      <addaction name="separator"/>
+     <addaction name="actionHibernateComputer"/>
      <addaction name="actionCheckForBetaUpdates"/>
     </widget>
     <addaction name="actionImportCueSheet"/>
@@ -3791,6 +3792,14 @@
    </property>
    <property name="text">
     <string>Disable Slow Startup Notifications</string>
+   </property>
+  </action>
+  <action name="actionHibernateComputer">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hibernate Computer On Shutdown</string>
    </property>
   </action>
  </widget>

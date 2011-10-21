@@ -96,7 +96,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
-	m_shutdownFlag(false),
+	m_shutdownFlag(shutdownFlag_None),
 	m_diskObserver(NULL)
 {
 	//Init the dialog, from the .ui file
@@ -431,7 +431,7 @@ void ProcessingDialog::doneEncoding(void)
 	{
 		if(shutdownComputer())
 		{
-			m_shutdownFlag = true;
+			m_shutdownFlag = m_settings->hibernateComputer() ? shutdownFlag_Hibernate : shutdownFlag_TurnPowerOff;
 			accept();
 		}
 	}

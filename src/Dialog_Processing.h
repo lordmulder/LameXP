@@ -35,6 +35,13 @@ class AudioFileModel;
 class SettingsModel;
 class DiskObserverThread;
 
+enum shutdownFlag_t
+{
+	shutdownFlag_None = 0,
+	shutdownFlag_TurnPowerOff = 1,
+	shutdownFlag_Hibernate = 2
+};
+
 class ProcessingDialog : public QDialog, private Ui::ProcessingDialog
 {
 	Q_OBJECT
@@ -43,7 +50,7 @@ public:
 	ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent = 0);
 	~ProcessingDialog(void);
 	
-	bool getShutdownFlag(void) { return m_shutdownFlag; }
+	int getShutdownFlag(void) { return m_shutdownFlag; }
 
 private slots:
 	void initEncoding(void);
@@ -85,6 +92,6 @@ private:
 	QList<QUuid> m_failedJobs;
 	bool m_userAborted;
 	QSystemTrayIcon *m_systemTray;
-	bool m_shutdownFlag;
+	int m_shutdownFlag;
 	DiskObserverThread *m_diskObserver;
 };

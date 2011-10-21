@@ -1670,6 +1670,26 @@
         <source>DEMO VERSION</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Hibernate Computer On Shutdown</source>
+        <translation>Computer in den Ruhezustand versetzen</translation>
+    </message>
+    <message>
+        <source>Hibernate Computer</source>
+        <translation>Ruhezustand</translation>
+    </message>
+    <message>
+        <source>Do you really want the computer to be hibernated on shutdown?</source>
+        <translation>Sind Sie sicher, dass der Computer in den Ruhezustand versetzt werden soll?</translation>
+    </message>
+    <message>
+        <source>LameXP will hibernate the computer on shutdown from now on.</source>
+        <translation>LameXP wird den Computer fortan in den Ruhezustand versetzen.</translation>
+    </message>
+    <message>
+        <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
+        <translation>LameXP wird den Computer fortan &lt;i&gt;nicht&lt;/i&gt; in den Ruhezustand versetzen.</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

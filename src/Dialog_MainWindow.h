@@ -87,6 +87,7 @@ private slots:
 	void gotoHomeFolderButtonClicked(void);
 	void gotoMusicFolderButtonClicked(void);
 	void handleDelayedFiles(void);
+	void hibernateComputerActionTriggered(bool checked);
 	void importCueSheetActionTriggered(bool checked);
 	void initOutputFolderModel(void);
 	void languageActionActivated(QAction *action);

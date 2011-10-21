@@ -58,6 +58,7 @@
 
 //COM includes
 #include <Objbase.h>
+#include <PowrProf.h>
 
 //Debug only includes
 #if LAMEXP_DEBUG
@@ -1501,7 +1502,7 @@ __int64 lamexp_free_diskspace(const QString &path)
 /*
  * Shutdown the computer
  */
-bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout, const bool forceShutdown)
+bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout, const bool forceShutdown, const bool hibernate)
 {
 	HANDLE hToken = NULL;
 
@@ -1516,8 +1517,15 @@ bool lamexp_shutdown_computer(const QString &message, const unsigned long timeou
 		{
 			if(AdjustTokenPrivileges(hToken, FALSE, &privileges, NULL, NULL, NULL))
 			{
+				if(hibernate)
+				{
+					if(SetSuspendState(TRUE, TRUE, TRUE))
+					{
+						return true;
+					}
+				}
 				const DWORD reason = SHTDN_REASON_MAJOR_APPLICATION | SHTDN_REASON_FLAG_PLANNED;
-				return InitiateSystemShutdownEx(NULL, const_cast<wchar_t*>(QWCHAR(message)), timeout, forceShutdown, FALSE, reason);
+				return InitiateSystemShutdownEx(NULL, const_cast<wchar_t*>(QWCHAR(message)), timeout, forceShutdown ? TRUE : FALSE, FALSE, reason);
 			}
 		}
 	}
