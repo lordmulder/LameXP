@@ -1500,6 +1500,24 @@ __int64 lamexp_free_diskspace(const QString &path)
 }
 
 /*
+ * Check if computer does support hibernation
+ */
+bool lamexp_is_hibernation_supported(void)
+{
+	bool hibernationSupported = false;
+
+	SYSTEM_POWER_CAPABILITIES pwrCaps;
+	SecureZeroMemory(&pwrCaps, sizeof(SYSTEM_POWER_CAPABILITIES));
+	
+	if(GetPwrCapabilities(&pwrCaps))
+	{
+		hibernationSupported = pwrCaps.SystemS4 && pwrCaps.HiberFilePresent;
+	}
+
+	return hibernationSupported;
+}
+
+/*
  * Shutdown the computer
  */
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout, const bool forceShutdown, const bool hibernate)

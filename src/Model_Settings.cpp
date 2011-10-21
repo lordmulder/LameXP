@@ -247,6 +247,14 @@ void SettingsModel::validate(void)
 		qWarning("Current language \"%s\" is unknown, reverting to default language!", this->currentLanguage().toLatin1().constData());
 		this->currentLanguage(defaultLanguage());
 	}
+
+	if(this->hibernateComputer())
+	{
+		if(!lamexp_is_hibernation_supported())
+		{
+			this->hibernateComputer(false);
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////
