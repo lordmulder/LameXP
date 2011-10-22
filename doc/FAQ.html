@@ -42,6 +42,7 @@ a:visited { color: #0000EE; }
 <li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
 <li><a href="#434f2578">Why is the maximum normalization level limited to -0.5 dB?</a>
 <li><a href="#9f8ff13a">What do the different 'Equalization' modes do?</a>
+<li><a href="#ed4d30ed">Why is the Hibernation option disabled (greyed out) on my system?</a>
 <li><a href="#e7c9ae2b">Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</a>
 <li><a href="#328b0a18">Why do I get the error 'Executable requires Windows XP or later' on startup?</a>
 <li><a href="#3ffe490e">Why do I get the error 'The procedure entry point De/EncodePointer could not be located' on startup?</a>
@@ -504,7 +505,7 @@ So far we have not encountered any noteworthy problems with LAME v3.99. If, howe
 with LAME v3.99, please report your finding to the <a href="http://lame.sourceforge.net/contact.php" target="_blank">LAME development team</a>. Do NOT submit any LAME-specific bug<br>
 reports to the LameXP developers, as we generally cannot analyze/fix problems specific to the LAME encoder.<br>
 <br>
-[UPDATE] LAME v3.99 has been release on 2011-10-15, so that's the recommended "stable" version now! [/UPDATE]<br><br>
+[UPDATE] LAME v3.99 Final was release on 2011-10-15, so that is the official "stable" version now! [/UPDATE]<br><br>
 
 <br><br>
 
@@ -571,6 +572,22 @@ cartridge. Last but not least, the "None" mode will not euqalize the channels at
 by amplified by the same factor. In the last mode, the highest peak of all(!) channels is used as threshold.<br>
 <br>
 WARNING: The "None" mode appears to be broken with more than two channels! This is a bug in SoX.<br><br>
+
+<br><br>
+
+<a name="ed4d30ed"></a><b>Why is the Hibernation option disabled (greyed out) on my system?</b><br>
+<br>
+In order to use "Hibernation", your system must support the S4 power saving mode (aka "Suspend-to-Disk") and<br>
+the hibernation file ("hiberfil.sys") must be enabled. If these conditions are not met, then the Hibernation<br>
+option will be disabled in LameXP, for obvious reasons. Note that on older versions of Windows you can enable<br>
+or disable the hibernation file in the "Power Options" dialog of the Control Panel (see <a href="http://tothepc.com/img/2010/05/xp-hibernate-disable.png" target="_blank">here</a>). On Windows 7<br>
+and probably also on Vista, you have to do this from the Windows command interpreter. First open an elevated<br>
+command prompt by typing "cmd" in the Startmenu (not "Run" dialog!) and when "cmd.exe" appears as suggestion,<br>
+then right-click on "cmd.exe" and choose "Run as administartor". After that you should see an "Administrator"<br>
+command prompt window. Here you can type "powercfg -h on" (without the quotation marks!) and press Enter to<br>
+enable the hibernation file. You can disable the hibernation file again by typing "powercfg -h off".<br>
+<br>
+Note: The size of "hiberfil.sys" is equal to your RAM size and it always is located on the system partition!<br><br>
 
 <br><br>
 
