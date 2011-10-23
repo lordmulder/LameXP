@@ -833,7 +833,7 @@ void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason rea
 
 bool ProcessingDialog::shutdownComputer(void)
 {
-	const int iTimeout = 30;
+	const int iTimeout = m_settings->hibernateComputer() ? 10 : 30;
 	const Qt::WindowFlags flags = Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint;
 	const QString text = QString("%1%2%1").arg(QString().fill(' ', 18), tr("Warning: Computer will shutdown in %1 seconds..."));
 	
