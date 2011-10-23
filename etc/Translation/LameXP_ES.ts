@@ -1667,31 +1667,31 @@
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation>VERSIÓN DEMO</translation>
     </message>
     <message>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Hibernar equipo al cerrar el sistema</translation>
     </message>
     <message>
         <source>Hibernate Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Hibernar equipo</translation>
     </message>
     <message>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que desea que el equipo hiberne al cerrar el sistema?</translation>
     </message>
     <message>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP hibernará el equipo al cerrar el sistema a partir de ahora.</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP &lt;i&gt;no&lt;/i&gt; hibernará el equipo al cerrar el sistema a partir de ahora.</translation>
     </message>
     <message>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Sugerencia: ¡Por favor, ignore el nombre del archivo ZIP descargado y compruebe el archivo &apos;changelog.txt&apos; en su lugar!)</translation>
     </message>
 </context>
 <context>
