@@ -87,6 +87,7 @@
 }
 
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
+#define UPDATE_MIN_WIDTH(WIDGET) { if(WIDGET->width() > WIDGET->minimumWidth()) WIDGET->setMinimumWidth(WIDGET->width()); }
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -880,12 +881,14 @@ void ProcessingDialog::cpuUsageHasChanged(const double val)
 {
 	
 	this->label_cpu->setText(QString().sprintf(" %d%%", qRound(val * 100.0)));
+	UPDATE_MIN_WIDTH(label_cpu);
 }
 
 void ProcessingDialog::ramUsageHasChanged(const double val)
 {
 	
 	this->label_ram->setText(QString().sprintf(" %d%%", qRound(val * 100.0)));
+	UPDATE_MIN_WIDTH(label_ram);
 }
 
 void ProcessingDialog::diskUsageHasChanged(const quint64 val)
@@ -901,6 +904,7 @@ void ProcessingDialog::diskUsageHasChanged(const quint64 val)
 	}
 
 	this->label_disk->setText(QString().sprintf(" %3.1f %s", space, postfixStr[postfix]));
+	UPDATE_MIN_WIDTH(label_disk);
 }
 
 bool ProcessingDialog::shutdownComputer(void)
