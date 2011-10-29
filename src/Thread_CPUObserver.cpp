@@ -23,6 +23,9 @@
 #include "Global.h"
 
 #include <QDir>
+#include <QLibrary>
+
+typedef BOOL (WINAPI *GetSystemTimesPtr)(LPFILETIME lpIdleTime, LPFILETIME lpKernelTime, LPFILETIME lpUserTime);
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
@@ -73,8 +76,21 @@ void CPUObserverThread::observe(void)
 {
 	ULONGLONG sys[2], usr[2], idl[2];
 	FILETIME sysTime, usrTime, idlTime;
+	QLibrary kernel32("kernel32.dll");
+	GetSystemTimesPtr getSystemTimes = NULL;
 	bool first = true;
 	double previous = -1.0;
+
+	if(kernel32.load())
+	{
+		getSystemTimes = reinterpret_cast<GetSystemTimesPtr>(kernel32.resolve("GetSystemTimes"));
+	}
+
+	if(getSystemTimes == NULL)
+	{
+		qWarning("GetSystemTimes() ist not available on this system!");
+		return;
+	}
 	
 	for(size_t i = 0; i < 2; i++)
 	{
@@ -83,7 +99,7 @@ void CPUObserverThread::observe(void)
 
 	while(!m_terminated)
 	{
-		if(GetSystemTimes(&idlTime, &sysTime, &usrTime))
+		if(getSystemTimes(&idlTime, &sysTime, &usrTime))
 		{
 			sys[1] = sys[0]; sys[0] = filetime2ulonglong(&sysTime);
 			usr[1] = usr[0]; usr[0] = filetime2ulonglong(&usrTime);
