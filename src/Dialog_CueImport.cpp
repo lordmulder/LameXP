@@ -192,8 +192,8 @@ void CueImportDialog::browseButtonClicked(void)
 
 void CueImportDialog::importButtonClicked(void)
 {
-	static const __int64 oneGigabyte = 1073741824i64; 
-	static const __int64 minimumFreeDiskspaceMultiplier = 2i64;
+	static const unsigned __int64 oneGigabyte = 1073741824ui64; 
+	static const unsigned __int64 minimumFreeDiskspaceMultiplier = 2ui64;
 	static const char *writeTestBuffer = "LAMEXP_WRITE_TEST";
 	
 	QDir outputDir(m_outputDir);
@@ -216,8 +216,10 @@ void CueImportDialog::importButtonClicked(void)
 		writeTest.remove();
 	}
 
-	qint64 currentFreeDiskspace = lamexp_free_diskspace(m_outputDir);
-	if(currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier))
+	bool ok = false;
+	unsigned __int64 currentFreeDiskspace = lamexp_free_diskspace(m_outputDir, &ok);
+
+	if(ok && (currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier)))
 	{
 		QMessageBox::warning(this, tr("Low Diskspace Warning"), QString("<nobr>%1</nobr><br><nobr>%2</nobr>").arg(tr("There are less than %1 GB of free diskspace available in the selected output directory.").arg(QString::number(minimumFreeDiskspaceMultiplier)), tr("It is highly recommend to free up more diskspace before proceeding with the import!")));
 		return;

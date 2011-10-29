@@ -1145,8 +1145,8 @@ void MainWindow::showAnnounceBox(void)
  */
 void MainWindow::encodeButtonClicked(void)
 {
-	static const __int64 oneGigabyte = 1073741824i64; 
-	static const __int64 minimumFreeDiskspaceMultiplier = 2i64;
+	static const unsigned __int64 oneGigabyte = 1073741824ui64; 
+	static const unsigned __int64 minimumFreeDiskspaceMultiplier = 2ui64;
 	static const char *writeTestBuffer = "LAMEXP_WRITE_TEST";
 	
 	ABORT_IF_BUSY;
@@ -1168,8 +1168,10 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 
-	qint64 currentFreeDiskspace = lamexp_free_diskspace(tempFolder);
-	if(currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier))
+	bool ok = false;
+	unsigned __int64 currentFreeDiskspace = lamexp_free_diskspace(tempFolder, &ok);
+
+	if(ok && (currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier)))
 	{
 		QStringList tempFolderParts = tempFolder.split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
 		tempFolderParts.takeLast();

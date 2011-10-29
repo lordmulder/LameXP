@@ -19,26 +19,21 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Thread_DiskObserver.h"
-
+#include "Thread_RAMObserver.h"
 #include "Global.h"
 
 #include <QDir>
-
-#define MIN_DISKSPACE 104857600ui64 //100 MB
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
-DiskObserverThread::DiskObserverThread(const QString &path)
-:
-	m_path(makeRootDir(path))
+RAMObserverThread::RAMObserverThread(void)
 {
 	m_terminated = false;
 }
 
-DiskObserverThread::~DiskObserverThread(void)
+RAMObserverThread::~RAMObserverThread(void)
 {
 }
 
@@ -46,9 +41,9 @@ DiskObserverThread::~DiskObserverThread(void)
 // Protected functions
 ////////////////////////////////////////////////////////////
 
-void DiskObserverThread::run(void)
+void RAMObserverThread::run(void)
 {
-	qDebug("DiskSpace observer started!");
+	qDebug("RAM observer started!");
 	m_terminated = false;
 
 	try
@@ -65,50 +60,27 @@ void DiskObserverThread::run(void)
 	}
 }
 
-void DiskObserverThread::observe(void)
+void RAMObserverThread::observe(void)
 {
-	unsigned __int64 minimumSpace = MIN_DISKSPACE;
-	unsigned __int64 freeSpace, previousSpace = 0ui64;
-	bool ok = false;
+	MEMORYSTATUSEX memoryStatus;
+	double previous = -1.0;
 
 	while(!m_terminated)
 	{
-		freeSpace = lamexp_free_diskspace(m_path, &ok);
-		if(ok)
+		memset(&memoryStatus, 0, sizeof(MEMORYSTATUSEX));
+		memoryStatus.dwLength = sizeof(MEMORYSTATUSEX);
+		
+		if(GlobalMemoryStatusEx(&memoryStatus))
 		{
-			if(freeSpace < minimumSpace)
+			double current = static_cast<double>(memoryStatus.dwMemoryLoad) / 100.0;
+			if(current != previous)
 			{
-				qWarning("Free diskspace on '%s' dropped below %s MB, only %s MB free!", m_path.toUtf8().constData(), QString::number(minimumSpace / 1048576ui64).toUtf8().constData(), QString::number(freeSpace / 1048576ui64).toUtf8().constData());
-				emit messageLogged(tr("Low diskspace on drive '%1' detected (only %2 MB are free), problems can occur!").arg(QDir::toNativeSeparators(m_path), QString::number(freeSpace / 1048576ui64)), true);
-				minimumSpace = min(freeSpace, (minimumSpace >> 1));
-			}
-			if(freeSpace != previousSpace)
-			{
-				emit freeSpaceChanged(freeSpace);
-				previousSpace = freeSpace;
+				emit currentUsageChanged(current);
+				previous = current;
 			}
 		}
 		msleep(1000);
 	}
-}
-
-QString DiskObserverThread::makeRootDir(const QString &baseDir)
-{
-	QDir dir(baseDir);
-	
-	if(!dir.exists())
-	{
-		return baseDir;
-	}
-	
-	bool success = true;
-	
-	while(success)
-	{
-		success = dir.cdUp();
-	}
-
-	return dir.canonicalPath();
 }
 
 ////////////////////////////////////////////////////////////

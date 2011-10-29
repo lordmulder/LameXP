@@ -2113,6 +2113,18 @@
         <source>Cancel Shutdown</source>
         <translation>Herunterfahren abbrechen</translation>
     </message>
+    <message>
+        <source>CPU Usage (Overall)</source>
+        <translation>Prozessorauslastung (insgesamt)</translation>
+    </message>
+    <message>
+        <source>Physical RAM Usage</source>
+        <translation>Speicherauslastung (physikalischer Arbeitsspeicher)</translation>
+    </message>
+    <message>
+        <source>Free Disk Space (Temp Folder)</source>
+        <translation>Freier Festplattenspeicher (Temp Ordner)</translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

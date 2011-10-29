@@ -322,6 +322,18 @@
     <ClCompile Include="tmp\QRC_Tools_Misc.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Thread_CPUObserver.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_CPUObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_RAMObserver.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_RAMObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -607,6 +619,12 @@
     </CustomBuild>
     <CustomBuild Include="res\Tools_Decd.qrc">
       <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CPUObserver.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_RAMObserver.h">
+      <Filter>Header Files\Threads</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

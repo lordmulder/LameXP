@@ -23,13 +23,13 @@
 
 #include <QThread>
 
-class DiskObserverThread: public QThread
+class RAMObserverThread: public QThread
 {
 	Q_OBJECT
 
 public:
-	DiskObserverThread(const QString &path);
-	~DiskObserverThread(void);
+	RAMObserverThread(void);
+	~RAMObserverThread(void);
 
 	void stop(void) { m_terminated = true; }
 	
@@ -37,13 +37,9 @@ protected:
 	void run(void);
 	void observe(void);
 
-	static QString makeRootDir(const QString &baseDir);
-
 signals:
-	void messageLogged(const QString &text, bool isWarning);
-	void freeSpaceChanged(const quint64);
+	void currentUsageChanged(const double usage);
 
 private:
 	volatile bool m_terminated;
-	const QString m_path;
 };

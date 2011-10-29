@@ -378,8 +378,8 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="108"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="144"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="325"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="329"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="327"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="331"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished">Błąd pliku Cue Sheet</translation>
     </message>
@@ -436,67 +436,67 @@
         <translation type="unfinished">Błąd: Nie można zapisać w wybranej lokalizacji wyjściowej!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="222"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="224"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished">Ostrzeżenie o małej ilości miejsca na dysku</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="222"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="224"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation type="unfinished">Jest mniej niż %1 GB wolnego miejsca w wybranej lokalizacji wyjściowej.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="222"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="224"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation type="unfinished">Jest wysoce zalecane zwolnić miejsce na dysku zanim zaczniesz importować!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="292"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
         <source>Analyzing file(s), please wait...</source>
         <translation type="unfinished">Analizowanie pliku/ów, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="297"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="299"/>
         <source>Analysis Failed</source>
         <translation type="unfinished">Analiza zakończona niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="297"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="299"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation type="unfinished">Ostrzeżenie: Nie można rozpoznać formatu kilku plików wejściowych!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="297"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="299"/>
         <source>Continue Anyway</source>
         <translation type="unfinished">Kontynuuj pomimo to</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="297"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="299"/>
         <source>Abort</source>
         <translation type="unfinished">Przerwij</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="320"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="322"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished">Dzielenie pliku/ów, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="325"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="327"/>
         <source>Process was aborted by the user after %1 track(s)!</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika po imporcie %1 ścieżek!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="329"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="331"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished">Wystąpił nieoczekiwany błąd podczas podziału pliku Cue Sheet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="333"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="335"/>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
         <translation type="unfinished">Zaimportowano %1 ścieżek i opuszczono %2 ścieżek z pliku Cue Sheet.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="334"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="336"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished">Stworzono plik Cue Sheet</translation>
     </message>
@@ -606,7 +606,7 @@
 <context>
     <name>DiskObserverThread</name>
     <message>
-        <location filename="../../src/Thread_DiskObserver.cpp" line="77"/>
+        <location filename="../../src/Thread_DiskObserver.cpp" line="82"/>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
         <translation type="unfinished">Mało miejsca na dysku &apos;%1&apos; (tylko %2 MB dostępnych), mogą wystąpić problemy!</translation>
     </message>
@@ -1410,13 +1410,13 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3652"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1456"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1458"/>
         <source>Disable Update Reminder</source>
         <translation type="unfinished">Wyłącz przypominanie o aktualizacji</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3660"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1482"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1484"/>
         <source>Disable Sound Effects</source>
         <translation type="unfinished">Wyłącz efekty dźwiękowe</translation>
     </message>
@@ -1502,7 +1502,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="499"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2998"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3000"/>
         <source>Access Denied</source>
         <translation type="unfinished">Dostęp zablokowany</translation>
     </message>
@@ -1652,8 +1652,8 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1051"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1120"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1121"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1622"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2941"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1624"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2943"/>
         <source>Discard</source>
         <translation type="unfinished">Zamknij</translation>
     </message>
@@ -1675,8 +1675,8 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1010"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1458"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1468"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1460"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1470"/>
         <source>Update Reminder</source>
         <translation type="unfinished">Powiadomienie aktualizacji</translation>
     </message>
@@ -1747,8 +1747,8 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1156"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1207"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1217"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1209"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1219"/>
         <source>LameXP</source>
         <translation type="unfinished">LameXP</translation>
     </message>
@@ -1778,12 +1778,12 @@
         <translation type="unfinished">Anuluj</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1184"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1186"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished">Ostrzeżenie o małej ilości miejsca na dysku</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1179"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1181"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translation type="unfinished">Jest mniej niż %1 GB dostępnego miejsca w systemowym folderze TEMP.</translation>
     </message>
@@ -1798,402 +1798,402 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1180"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1182"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
         <translation type="unfinished">Jest wysoce zalecane zwolnić miejsce na dysku zanim zaczniesz kompresję!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1181"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1183"/>
         <source>Your TEMP folder is located at:</source>
         <translation type="unfinished">Twój folder TEMP znajduję się:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1184"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1186"/>
         <source>Abort Encoding Process</source>
         <translation type="unfinished">Przerwij proces kompresji</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1184"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1186"/>
         <source>Clean Disk Now</source>
         <translation type="unfinished">Wykonaj oczyszczanie dysku</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1184"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1186"/>
         <source>Ignore</source>
         <translation type="unfinished">Ignoruj</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1194"/>
         <source>Low Diskspace</source>
         <translation type="unfinished">Mało miejsca na dysku</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1194"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
         <translation type="unfinished">Chcesz zacząć działać z małą ilością miejsca na dysku. Mogą wystąpić problemy!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1207"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1209"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
         <translation type="unfinished">Został wybrany koder, który nie jest wspierany!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1217"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1219"/>
         <source>Cannot write to the selected output directory.</source>
         <translation type="unfinished">Nie można zapisać do wybranej lokalizacji.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1217"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1219"/>
         <source>Please choose a different directory!</source>
         <translation type="unfinished">Prosze wybrać inną lokalizację!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1423"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1425"/>
         <source>Load Translation</source>
         <translation type="unfinished">Zaladuj plik językowy</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1425"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1427"/>
         <source>Translation Files</source>
         <translation type="unfinished">Pliki językowe</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1456"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1458"/>
         <source>Do you really want to disable the update reminder?</source>
         <translation type="unfinished">Czy na pewno chcesz wyłączyć przypominanie o aktualizacjach?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1456"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1482"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1508"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1534"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1620"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1657"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1683"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1458"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1484"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1510"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1536"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1622"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1659"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1685"/>
         <source>Yes</source>
         <translation type="unfinished">Tak</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1456"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1482"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1508"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1534"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1620"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1657"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1683"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1458"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1484"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1510"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1536"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1622"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1659"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1685"/>
         <source>No</source>
         <translation type="unfinished">Nie</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1458"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1460"/>
         <source>The update reminder has been disabled.</source>
         <translation type="unfinished">Przypominanie o aktualizacjach wyłączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1458"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1460"/>
         <source>Please remember to check for updates at regular intervals!</source>
         <translation type="unfinished">Prosze pamiętać  o okresowym sprawdzaniu aktualizacji!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1468"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1470"/>
         <source>The update reminder has been re-enabled.</source>
         <translation type="unfinished">Przypominanie o aktualizacjach ponownie włączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1482"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1484"/>
         <source>Do you really want to disable all sound effects?</source>
         <translation type="unfinished">Czy na pewno chcesz wyłączyć wszystkie dźwiękowe?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1484"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1494"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1486"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
         <source>Sound Effects</source>
         <translation type="unfinished">Efekty dźwiękowe</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1484"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1486"/>
         <source>All sound effects have been disabled.</source>
         <translation type="unfinished">Wszystkie efekty dźwiękowe zostały wyłączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1494"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
         <source>The sound effects have been re-enabled.</source>
         <translation type="unfinished">Efekty dźwiękowe zostały ponownie włączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1508"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1510"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1520"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1512"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1522"/>
         <source>Nero AAC Notifications</source>
         <translation type="unfinished">Powiadomienia Nero AAC</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1508"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1510"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
         <translation type="unfinished">Czy na pewno chcesz wyłączyć wszystkie powiadomienia Nero AAC?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1510"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1512"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
         <translation type="unfinished">Wszystkie powiadomienia kodera Nero AAC zostały wyłączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1520"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1522"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation type="unfinished">Powiadomienia Nero AAC zostały ponownie włączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1534"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1536"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1538"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1548"/>
         <source>Slow Startup Notifications</source>
         <translation type="unfinished">Powiadomienia o powolnym  starcie</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1534"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1536"/>
         <source>Do you really want to disable the slow startup notifications?</source>
         <translation type="unfinished">Czy na pewno chcesz wyłączyć powiadomienia o powolnym starcie?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1536"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1538"/>
         <source>The slow startup notifications have been disabled.</source>
         <translation type="unfinished">Powiadomienia o powolnym starcie zostały wyłączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1548"/>
         <source>The slow startup notifications have been re-enabled.</source>
         <translation type="unfinished">Powiadomienia o powolnym starcie zostały ponownie włączone.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1569"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1571"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1575"/>
         <source>Open Cue Sheet</source>
         <translation type="unfinished">Otwórz plik Cue Sheet</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1569"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1575"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1571"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1577"/>
         <source>Cue Sheet File</source>
         <translation type="unfinished">Plik Cue Sheet</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1620"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1622"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1635"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1624"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1637"/>
         <source>Beta Updates</source>
         <translation type="unfinished">Aktualizacje Beta</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1620"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1622"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
         <translation type="unfinished">Czy na pewno chcesz aby LameXP sprawdzał aktualizacje Beta?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1622"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1624"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
         <translation type="unfinished">Od teraz LameXP będzie sprawdzał aktualizacje Beta.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1622"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1624"/>
         <source>Check Now</source>
         <translation type="unfinished">Sprawdź teraz</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1635"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1637"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation type="unfinished">LameXP od teraz &lt;i&gt;nie będzie&lt;/i&gt; sprawdzał aktualizacji Beta.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1657"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1659"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1669"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1661"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1671"/>
         <source>Hibernate Computer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1657"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1659"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1659"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1661"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1669"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1671"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1683"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1686"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1697"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1685"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1688"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1699"/>
         <source>Shell Integration</source>
         <translation type="unfinished">Integracja z systemem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1683"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1685"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
         <translation type="unfinished">Czy na pewno chcesz  wyłączyć integrację LameXP z systemem?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1686"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1688"/>
         <source>The LameXP shell integration has been disabled.</source>
         <translation type="unfinished">Integracja LameXP z systemem zostałą wyłączona.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1697"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1699"/>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation type="unfinished">Integracja LameXP z systemem została ponownie włączona.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1794"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1803"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1796"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1805"/>
         <source>Add file(s)</source>
         <translation type="unfinished">Dodaj plik(i)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1835"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1839"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1837"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1841"/>
         <source>Add Folder</source>
         <translation type="unfinished">Dodaj folder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2212"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2255"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2214"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2257"/>
         <source>New Folder</source>
         <translation type="unfinished">Nowy folder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2255"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2257"/>
         <source>Enter the name of the new folder:</source>
         <translation type="unfinished">Wprowadź nazwę nowego folderu:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2287"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2289"/>
         <source>Failed to create folder</source>
         <translation type="unfinished">Utworzenie folderu zakończone niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2287"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2289"/>
         <source>The new folder could not be created:</source>
         <translation type="unfinished">Nowy folder nie mógł zostać stworzony:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2287"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2289"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation type="unfinished">Dysk tylko do odczytu lub brak praw dostępu!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2567"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2570"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2573"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2579"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2569"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2572"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2575"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2581"/>
         <source>Quality Level %1</source>
         <translation type="unfinished">Poziom jakości %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2576"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2596"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2616"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2578"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2598"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2618"/>
         <source>Compression %1</source>
         <translation type="unfinished">Kompresja %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2582"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2602"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2622"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2584"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2604"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2624"/>
         <source>Uncompressed</source>
         <translation type="unfinished">Nieskompresowany</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2646"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2648"/>
         <source>Best Quality (Very Slow)</source>
         <translation type="unfinished">Najlepsza jakość (Bardzo wolno)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2649"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2651"/>
         <source>High Quality (Recommended)</source>
         <translation type="unfinished">Wysoka jakość (Zalecane)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2652"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2654"/>
         <source>Average Quality (Default)</source>
         <translation type="unfinished">Średnia jakość (Domyślnie)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2655"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2657"/>
         <source>Low Quality (Fast)</source>
         <translation type="unfinished">Niska jakość (Szybko)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2658"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2660"/>
         <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished">Najniższa jakość (Bardzo szybko)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2930"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2932"/>
         <source>File name without extension</source>
         <translation type="unfinished">Nazwa pliku bez rozszerzenia</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2931"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2933"/>
         <source>Track number with leading zero</source>
         <translation type="unfinished">Numer ścieżki z zerem na początku</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2932"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2934"/>
         <source>Track title</source>
         <translation type="unfinished">Nazwa ścieżki</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2933"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2935"/>
         <source>Artist name</source>
         <translation type="unfinished">Nazwa Artysty</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2934"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2936"/>
         <source>Album name</source>
         <translation type="unfinished">Nazwa Albumu</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2935"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2937"/>
         <source>Year with (at least) four digits</source>
         <translation type="unfinished">Rok z (przynajmniej) czterema cyframi</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2936"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2938"/>
         <source>Comment</source>
         <translation type="unfinished">Komentarz</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2938"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2940"/>
         <source>Characters forbidden in file names:</source>
         <translation type="unfinished">Zabronione znaki w nazwach plików:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2941"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2943"/>
         <source>Rename Macros</source>
         <translation type="unfinished">Zmień nazwy makr</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2954"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2956"/>
         <source>%1 Instance(s)</source>
         <translation type="unfinished">%1 wątek/ki</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2998"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3000"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished">Nie można zapisać do wybranej lokalizacji. Prosze wybierz inną lokalizację!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3066"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3068"/>
         <source>Already Running</source>
         <translation type="unfinished">Już działa</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3066"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3068"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished">LameXP już działa, przejdź do działającego programu!</translation>
     </message>
@@ -2600,129 +2600,147 @@
         <translation type="unfinished">Inicjowanie, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="307"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="318"/>
         <source>Shutdown the computer as soon as all files have been converted</source>
         <translation type="unfinished">Wyłącz komputer po przetworzeniu wszystkich plików</translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="404"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="341"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="397"/>
+        <source>CPU Usage (Overall)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/ProcessingDialog.ui" line="426"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="476"/>
+        <source>Physical RAM Usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/ProcessingDialog.ui" line="505"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="555"/>
+        <source>Free Disk Space (Temp Folder)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/ProcessingDialog.ui" line="657"/>
         <source>Abort</source>
         <translation type="unfinished">Przerwij</translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="427"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="680"/>
         <source>Close</source>
         <translation type="unfinished">Powrót</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="142"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="146"/>
         <source>Show details for selected job</source>
         <translation type="unfinished">Pokaż szczegóły wybranego zadania</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="143"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="147"/>
         <source>Browse Output File Location</source>
         <translation type="unfinished">Wybierz lokalizację dla plików wyjściowych</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="161"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="165"/>
         <source>Encoding Files</source>
         <translation type="unfinished">Kompresowanie plików</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="161"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="165"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished">Twoje pliki są właśnie kompresowane, prosze być cierpliwy...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="287"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="319"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished">Kompresowanie plików, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="318"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="363"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished">Wielowątkowosć włączona: Równolegle wykonywanych jest %1 kodowań!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="332"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="377"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">Przerwano! Czekanie na wyłączenie procesu...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="347"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="392"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
         <translation type="unfinished">Kompresja: Prosze czekać, jak dotąd wykonano %1 z %2 plików...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="375"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="420"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">Tworzenie pliku playlisty, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="385"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="430"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika po wykonaniu %1 plików!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="385"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="430"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">Proces został przedwcześnie zakończony przez użytkownika!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="386"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="431"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished">LameXP - Przerwano</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="386"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="431"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="398"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="443"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">Błąd: %1 z %2 plików nie zostało skompresowanych. Kliknij dwukrotnie na plik aby zobaczyć szczegóły!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="399"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="444"/>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - Błąd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="399"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="444"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished">Przynajmniej jeden plik nie został skompresowany!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="409"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="410"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="454"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished">Kompresja wszystkich plików zakończona powodzeniem.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="410"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
         <source>LameXP - Done</source>
         <translation type="unfinished">LameXP - Zrobione</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="798"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="843"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished">Tworzenie playlisty zakończone niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="798"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="843"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished">Playlista nie mogła zostać utworzona:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="838"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="910"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished">Ostrzeżenie: Komputer zostanie zamknięty za %1 sekund/y...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="842"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="843"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="914"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="915"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished">Anuluj wyłączenie komputera</translation>
     </message>

@@ -2120,6 +2120,18 @@
         <source>Cancel Shutdown</source>
         <translation type="unfinished">Отменить выключение</translation>
     </message>
+    <message>
+        <source>CPU Usage (Overall)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Physical RAM Usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free Disk Space (Temp Folder)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

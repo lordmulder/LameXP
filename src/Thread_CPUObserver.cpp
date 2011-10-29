@@ -19,26 +19,21 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Thread_DiskObserver.h"
-
+#include "Thread_CPUObserver.h"
 #include "Global.h"
 
 #include <QDir>
-
-#define MIN_DISKSPACE 104857600ui64 //100 MB
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
-DiskObserverThread::DiskObserverThread(const QString &path)
-:
-	m_path(makeRootDir(path))
+CPUObserverThread::CPUObserverThread(void)
 {
 	m_terminated = false;
 }
 
-DiskObserverThread::~DiskObserverThread(void)
+CPUObserverThread::~CPUObserverThread(void)
 {
 }
 
@@ -46,9 +41,9 @@ DiskObserverThread::~DiskObserverThread(void)
 // Protected functions
 ////////////////////////////////////////////////////////////
 
-void DiskObserverThread::run(void)
+void CPUObserverThread::run(void)
 {
-	qDebug("DiskSpace observer started!");
+	qDebug("CPU observer started!");
 	m_terminated = false;
 
 	try
@@ -65,50 +60,62 @@ void DiskObserverThread::run(void)
 	}
 }
 
-void DiskObserverThread::observe(void)
+ULONGLONG CPUObserverThread::filetime2ulonglong(const void *ftime)
 {
-	unsigned __int64 minimumSpace = MIN_DISKSPACE;
-	unsigned __int64 freeSpace, previousSpace = 0ui64;
-	bool ok = false;
+	ULARGE_INTEGER tmp; tmp.QuadPart = 0UI64;
+	const FILETIME* fileTime = reinterpret_cast<const FILETIME*>(ftime);
+	tmp.LowPart = fileTime->dwLowDateTime;
+	tmp.HighPart = fileTime->dwHighDateTime;
+	return tmp.QuadPart;
+}
+
+void CPUObserverThread::observe(void)
+{
+	ULONGLONG sys[2], usr[2], idl[2];
+	FILETIME sysTime, usrTime, idlTime;
+	bool first = true;
+	double previous = -1.0;
+	
+	for(size_t i = 0; i < 2; i++)
+	{
+		sys[i] = 0; usr[i] = 0; idl[i] = 0;
+	}
 
 	while(!m_terminated)
 	{
-		freeSpace = lamexp_free_diskspace(m_path, &ok);
-		if(ok)
+		if(GetSystemTimes(&idlTime, &sysTime, &usrTime))
 		{
-			if(freeSpace < minimumSpace)
+			sys[1] = sys[0]; sys[0] = filetime2ulonglong(&sysTime);
+			usr[1] = usr[0]; usr[0] = filetime2ulonglong(&usrTime);
+			idl[1] = idl[0]; idl[0] = filetime2ulonglong(&idlTime);
+
+			if(first)
 			{
-				qWarning("Free diskspace on '%s' dropped below %s MB, only %s MB free!", m_path.toUtf8().constData(), QString::number(minimumSpace / 1048576ui64).toUtf8().constData(), QString::number(freeSpace / 1048576ui64).toUtf8().constData());
-				emit messageLogged(tr("Low diskspace on drive '%1' detected (only %2 MB are free), problems can occur!").arg(QDir::toNativeSeparators(m_path), QString::number(freeSpace / 1048576ui64)), true);
-				minimumSpace = min(freeSpace, (minimumSpace >> 1));
+				first = false;
+				emit currentUsageChanged(1.0);
+				msleep(250);
+				continue;
 			}
-			if(freeSpace != previousSpace)
+
+			ULONGLONG timeIdl = (idl[0] - idl[1]); //Idle time only
+			ULONGLONG timeSys = (sys[0] - sys[1]); //Kernel mode time (incl. Idle time!)
+			ULONGLONG timeUsr = (usr[0] - usr[1]); //User mode time only
+				
+			ULONGLONG timeSum = timeUsr + timeSys; //Overall CPU time that has elapsed
+			ULONGLONG timeWrk = timeSum - timeIdl; //Time the CPU spent working
+
+			if((timeSum > 0) || (timeWrk > 0))
 			{
-				emit freeSpaceChanged(freeSpace);
-				previousSpace = freeSpace;
+				double current = static_cast<double>(timeWrk) / static_cast<double>(timeSum);
+				if(current != previous)
+				{
+					emit currentUsageChanged(current);
+					previous = current;
+				}
 			}
 		}
 		msleep(1000);
 	}
-}
-
-QString DiskObserverThread::makeRootDir(const QString &baseDir)
-{
-	QDir dir(baseDir);
-	
-	if(!dir.exists())
-	{
-		return baseDir;
-	}
-	
-	bool success = true;
-	
-	while(success)
-	{
-		success = dir.cdUp();
-	}
-
-	return dir.canonicalPath();
 }
 
 ////////////////////////////////////////////////////////////

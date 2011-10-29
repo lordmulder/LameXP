@@ -33,6 +33,8 @@ class ProcessThread;
 class FileListModel;
 class AudioFileModel;
 class SettingsModel;
+class CPUObserverThread;
+class RAMObserverThread;
 class DiskObserverThread;
 
 enum shutdownFlag_t
@@ -64,6 +66,9 @@ private slots:
 	void contextMenuDetailsActionTriggered(void);
 	void contextMenuShowFileActionTriggered(void);
 	void systemTrayActivated(QSystemTrayIcon::ActivationReason reason);
+	void cpuUsageHasChanged(const double val);
+	void ramUsageHasChanged(const double val);
+	void diskUsageHasChanged(const quint64 val);
 
 protected:
 	void showEvent(QShowEvent *event);
@@ -93,5 +98,7 @@ private:
 	bool m_userAborted;
 	QSystemTrayIcon *m_systemTray;
 	int m_shutdownFlag;
+	CPUObserverThread *m_cpuObserver;
+	RAMObserverThread *m_ramObserver;
 	DiskObserverThread *m_diskObserver;
 };

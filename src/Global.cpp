@@ -1486,15 +1486,17 @@ bool lamexp_themes_enabled(void)
 /*
  * Get number of free bytes on disk
  */
-__int64 lamexp_free_diskspace(const QString &path)
+unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok)
 {
 	ULARGE_INTEGER freeBytesAvailable, totalNumberOfBytes, totalNumberOfFreeBytes;
 	if(GetDiskFreeSpaceExW(reinterpret_cast<const wchar_t*>(QDir::toNativeSeparators(path).utf16()), &freeBytesAvailable, &totalNumberOfBytes, &totalNumberOfFreeBytes))
 	{
+		if(ok) *ok = true;
 		return freeBytesAvailable.QuadPart;
 	}
 	else
 	{
+		if(ok) *ok = false;
 		return 0;
 	}
 }

@@ -31,6 +31,7 @@
 		<file>icons/controller.png</file>
 		<file>icons/control_pause_blue.png</file>
 		<file>icons/control_play_blue.png</file>
+		<file>icons/cpu.png</file>
 		<file>icons/cross.png</file>
 		<file>icons/date.png</file>
 		<file>icons/delete.png</file>
@@ -60,6 +61,7 @@
 		<file>icons/information.png</file>
 		<file>icons/lightning.png</file>
 		<file>icons/media_play.png</file>
+		<file>icons/memory.png</file>
 		<file>icons/money_dollar.png</file>
 		<file>icons/monitor.png</file>
 		<file>icons/music.png</file>

@@ -62,6 +62,7 @@
 ..\..\src\PlaylistImporter.cpp 
 ..\..\src\Registry_Decoder.cpp 
 ..\..\src\ShellIntegration.cpp 
+..\..\src\Thread_CPUObserver.cpp 
 ..\..\src\Thread_CueSplitter.cpp 
 ..\..\src\Thread_DiskObserver.cpp 
 ..\..\src\Thread_FileAnalyzer.cpp 
@@ -69,6 +70,7 @@
 ..\..\src\Thread_MessageHandler.cpp 
 ..\..\src\Thread_MessageProducer.cpp 
 ..\..\src\Thread_Process.cpp 
+..\..\src\Thread_RAMObserver.cpp 
 ..\..\src\Tool_Abstract.cpp 
 ..\..\src\WinSevenTaskbar.cpp 
 ..\..\src\Config.h 
@@ -128,6 +130,7 @@
 ..\..\src\Resource.h 
 ..\..\src\ShellIntegration.h 
 ..\..\src\Targetver.h 
+..\..\src\Thread_CPUObserver.h 
 ..\..\src\Thread_CueSplitter.h 
 ..\..\src\Thread_DiskObserver.h 
 ..\..\src\Thread_FileAnalyzer.h 
@@ -135,6 +138,7 @@
 ..\..\src\Thread_MessageHandler.h 
 ..\..\src\Thread_MessageProducer.h 
 ..\..\src\Thread_Process.h 
+..\..\src\Thread_RAMObserver.h 
 ..\..\src\Tools.h 
 ..\..\src\Tool_Abstract.h 
 ..\..\src\WinSevenTaskbar.h 

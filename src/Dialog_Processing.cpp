@@ -27,6 +27,8 @@
 #include "Model_Progress.h"
 #include "Model_Settings.h"
 #include "Thread_Process.h"
+#include "Thread_CPUObserver.h"
+#include "Thread_RAMObserver.h"
 #include "Thread_DiskObserver.h"
 #include "Dialog_LogView.h"
 #include "Encoder_MP3.h"
@@ -97,7 +99,9 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_settings(settings),
 	m_metaInfo(metaInfo),
 	m_shutdownFlag(shutdownFlag_None),
-	m_diskObserver(NULL)
+	m_diskObserver(NULL),
+	m_cpuObserver(NULL),
+	m_ramObserver(NULL)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -188,7 +192,29 @@ ProcessingDialog::~ProcessingDialog(void)
 	if(m_diskObserver)
 	{
 		m_diskObserver->stop();
-		m_diskObserver->wait(15000);
+		if(!m_diskObserver->wait(15000))
+		{
+			m_diskObserver->terminate();
+			m_diskObserver->wait();
+		}
+	}
+	if(m_cpuObserver)
+	{
+		m_cpuObserver->stop();
+		if(!m_cpuObserver->wait(15000))
+		{
+			m_cpuObserver->terminate();
+			m_cpuObserver->wait();
+		}
+	}
+	if(m_ramObserver)
+	{
+		m_ramObserver->stop();
+		if(!m_ramObserver->wait(15000))
+		{
+			m_ramObserver->terminate();
+			m_ramObserver->wait();
+		}
 	}
 
 	LAMEXP_DELETE(m_progressIndicator);
@@ -196,6 +222,8 @@ ProcessingDialog::~ProcessingDialog(void)
 	LAMEXP_DELETE(m_contextMenu);
 	LAMEXP_DELETE(m_systemTray);
 	LAMEXP_DELETE(m_diskObserver);
+	LAMEXP_DELETE(m_cpuObserver);
+	LAMEXP_DELETE(m_ramObserver);
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -224,6 +252,10 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 	{
 		SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
 	}
+
+	ramUsageHasChanged(0.0);
+	cpuUsageHasChanged(0.0);
+	diskUsageHasChanged(0ui64);
 
 	QTimer::singleShot(1000, this, SLOT(initEncoding()));
 }
@@ -302,7 +334,20 @@ void ProcessingDialog::initEncoding(void)
 	{
 		m_diskObserver = new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2());
 		connect(m_diskObserver, SIGNAL(messageLogged(QString,bool)), m_progressModel, SLOT(addSystemMessage(QString,bool)), Qt::QueuedConnection);
+		connect(m_diskObserver, SIGNAL(freeSpaceChanged(quint64)), this, SLOT(diskUsageHasChanged(quint64)), Qt::QueuedConnection);
 		m_diskObserver->start();
+	}
+	if(!m_cpuObserver)
+	{
+		m_cpuObserver = new CPUObserverThread();
+		connect(m_cpuObserver, SIGNAL(currentUsageChanged(double)), this, SLOT(cpuUsageHasChanged(double)), Qt::QueuedConnection);
+		m_cpuObserver->start();
+	}
+	if(!m_ramObserver)
+	{
+		m_ramObserver = new RAMObserverThread();
+		connect(m_ramObserver, SIGNAL(currentUsageChanged(double)), this, SLOT(ramUsageHasChanged(double)), Qt::QueuedConnection);
+		m_ramObserver->start();
 	}
 	
 	int maximumInstances = max(min(m_settings->maximumInstances(), MAX_INSTANCES), 0);
@@ -829,6 +874,33 @@ void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason rea
 	{
 		SetForegroundWindow(this->winId());
 	}
+}
+
+void ProcessingDialog::cpuUsageHasChanged(const double val)
+{
+	
+	this->label_cpu->setText(QString().sprintf(" %d%%", qRound(val * 100.0)));
+}
+
+void ProcessingDialog::ramUsageHasChanged(const double val)
+{
+	
+	this->label_ram->setText(QString().sprintf(" %d%%", qRound(val * 100.0)));
+}
+
+void ProcessingDialog::diskUsageHasChanged(const quint64 val)
+{
+	int postfix = 0;
+	const char *postfixStr[6] = {"B", "KB", "MB", "GB", "TB", "PB"};
+	double space = static_cast<double>(val);
+
+	while((space >= 1000.0) && (postfix < 5))
+	{
+		space = space / 1024.0;
+		postfix++;
+	}
+
+	this->label_disk->setText(QString().sprintf(" %3.1f %s", space, postfixStr[postfix]));
 }
 
 bool ProcessingDialog::shutdownComputer(void)
