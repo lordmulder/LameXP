@@ -244,6 +244,8 @@ ProcessingDialog::~ProcessingDialog(void)
 
 void ProcessingDialog::showEvent(QShowEvent *event)
 {
+	static const char *NA = " N/A";
+
 	setCloseButtonEnabled(false);
 	button_closeDialog->setEnabled(false);
 	button_AbortProcess->setEnabled(false);
@@ -254,9 +256,9 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 		SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
 	}
 
-	ramUsageHasChanged(0.0);
-	cpuUsageHasChanged(0.0);
-	diskUsageHasChanged(0ui64);
+	label_cpu->setText(NA);
+	label_disk->setText(NA);
+	label_ram->setText(NA);
 
 	QTimer::singleShot(1000, this, SLOT(initEncoding()));
 }

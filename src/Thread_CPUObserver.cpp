@@ -74,63 +74,65 @@ ULONGLONG CPUObserverThread::filetime2ulonglong(const void *ftime)
 
 void CPUObserverThread::observe(void)
 {
-	ULONGLONG sys[2], usr[2], idl[2];
-	FILETIME sysTime, usrTime, idlTime;
 	QLibrary kernel32("kernel32.dll");
 	GetSystemTimesPtr getSystemTimes = NULL;
-	bool first = true;
-	double previous = -1.0;
 
 	if(kernel32.load())
 	{
 		getSystemTimes = reinterpret_cast<GetSystemTimesPtr>(kernel32.resolve("GetSystemTimes"));
 	}
 
-	if(getSystemTimes == NULL)
+	if(getSystemTimes != NULL)
 	{
-		qWarning("GetSystemTimes() ist not available on this system!");
-		return;
-	}
-	
-	for(size_t i = 0; i < 2; i++)
-	{
-		sys[i] = 0; usr[i] = 0; idl[i] = 0;
-	}
+		bool first = true;
+		double previous = -1.0;
+		FILETIME sysTime, usrTime, idlTime;
+		ULONGLONG sys[2], usr[2], idl[2];
 
-	while(!m_terminated)
-	{
-		if(getSystemTimes(&idlTime, &sysTime, &usrTime))
+		for(size_t i = 0; i < 2; i++)
 		{
-			sys[1] = sys[0]; sys[0] = filetime2ulonglong(&sysTime);
-			usr[1] = usr[0]; usr[0] = filetime2ulonglong(&usrTime);
-			idl[1] = idl[0]; idl[0] = filetime2ulonglong(&idlTime);
+			sys[i] = 0; usr[i] = 0; idl[i] = 0;
+		}
 
-			if(first)
+		while(!m_terminated)
+		{
+			if(getSystemTimes(&idlTime, &sysTime, &usrTime))
 			{
-				first = false;
-				emit currentUsageChanged(1.0);
-				msleep(250);
-				continue;
-			}
+				sys[1] = sys[0]; sys[0] = filetime2ulonglong(&sysTime);
+				usr[1] = usr[0]; usr[0] = filetime2ulonglong(&usrTime);
+				idl[1] = idl[0]; idl[0] = filetime2ulonglong(&idlTime);
 
-			ULONGLONG timeIdl = (idl[0] - idl[1]); //Idle time only
-			ULONGLONG timeSys = (sys[0] - sys[1]); //Kernel mode time (incl. Idle time!)
-			ULONGLONG timeUsr = (usr[0] - usr[1]); //User mode time only
-				
-			ULONGLONG timeSum = timeUsr + timeSys; //Overall CPU time that has elapsed
-			ULONGLONG timeWrk = timeSum - timeIdl; //Time the CPU spent working
-
-			if((timeSum > 0) || (timeWrk > 0))
-			{
-				double current = static_cast<double>(timeWrk) / static_cast<double>(timeSum);
-				if(current != previous)
+				if(first)
 				{
-					emit currentUsageChanged(current);
-					previous = current;
+					first = false;
+					emit currentUsageChanged(1.0);
+					msleep(250);
+					continue;
+				}
+
+				ULONGLONG timeIdl = (idl[0] - idl[1]); //Idle time only
+				ULONGLONG timeSys = (sys[0] - sys[1]); //Kernel mode time (incl. Idle time!)
+				ULONGLONG timeUsr = (usr[0] - usr[1]); //User mode time only
+				
+				ULONGLONG timeSum = timeUsr + timeSys; //Overall CPU time that has elapsed
+				ULONGLONG timeWrk = timeSum - timeIdl; //Time the CPU spent working
+
+				if(timeSum > 0)
+				{
+					double current = static_cast<double>(timeWrk) / static_cast<double>(timeSum);
+					if(current != previous)
+					{
+						emit currentUsageChanged(current);
+						previous = current;
+					}
 				}
 			}
+			msleep(1000);
 		}
-		msleep(1000);
+	}
+	else
+	{
+		qWarning("GetSystemTimes() ist not available on this system!");
 	}
 }
 
