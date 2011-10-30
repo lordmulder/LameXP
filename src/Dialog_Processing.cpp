@@ -551,13 +551,13 @@ void ProcessingDialog::contextMenuTriggered(const QPoint &pos)
 
 void ProcessingDialog::contextMenuDetailsActionTriggered(void)
 {
-	QModelIndex index = view_log->indexAt(view_log->mapFromGlobal(m_contextMenu->pos()));
+	QModelIndex index = view_log->indexAt(view_log->viewport()->mapFromGlobal(m_contextMenu->pos()));
 	logViewDoubleClicked(index.isValid() ? index : view_log->currentIndex());
 }
 
 void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 {
-	QModelIndex index = view_log->indexAt(view_log->mapFromGlobal(m_contextMenu->pos()));
+	QModelIndex index = view_log->indexAt(view_log->viewport()->mapFromGlobal(m_contextMenu->pos()));
 	const QUuid &jobId = m_progressModel->getJobId(index.isValid() ? index : view_log->currentIndex());
 	QString filePath = m_playList.value(jobId, QString());
 
