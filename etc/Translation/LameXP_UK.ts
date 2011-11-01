@@ -2115,15 +2115,15 @@
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження ЦП (загальне)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Використання фізичної пам&apos;яті</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вільне місце на диску (тека тимчасових файлів)</translation>
     </message>
 </context>
 <context>
