@@ -304,7 +304,7 @@ Function .onInit
 
 	InitPluginsDir
 	File "/oname=$PLUGINSDIR\checkproc.exe" "checkproc.exe"
-	nsExec::Exec /TIMEOUT=5000 '"$PLUGINSDIR\checkproc.exe" Softonic Brothersoft'
+	nsExec::Exec /TIMEOUT=5000 '"$PLUGINSDIR\checkproc.exe" Softonic Brothersoft Afreecodec'
 	Pop $0
 FunctionEnd
 

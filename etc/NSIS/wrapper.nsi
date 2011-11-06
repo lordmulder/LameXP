@@ -138,6 +138,14 @@ Section "-LaunchTheInstaller"
 	
 	; --------
 	
+	${If} "$EXEFILE" == "LameXP.exe"
+	${OrIf} "$EXEFILE" == "LameXP-Portable.exe"
+		MessageBox MB_ICONSTOP|MB_TOPMOST "Sorry, you must NOT rename the LameXP installation program to 'LameXP.exe' or 'LameXP-Portable.exe'. Please re-rename the installer executable file (e.g. to 'LameXP-Setup.exe') and then try again!"
+		Quit
+	${EndIf}
+
+	; --------
+
 	${StdUtils.GetAllParameters} $R9 0
 	${IfThen} "$R9" == "too_long" ${|} StrCpy $R9 "" ${|}
 
