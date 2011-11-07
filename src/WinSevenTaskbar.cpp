@@ -154,7 +154,7 @@ void WinSevenTaskbar::init(void) {}
 void WinSevenTaskbar::uninit(void) {}
 bool WinSevenTaskbar::handleWinEvent(MSG *message, long *result) { return false; }
 void WinSevenTaskbar::createInterface(void) {}
-void WinSevenTaskbar::setTaskbarState(QWidget *window, WinSevenTaskbarState state) {}
+bool WinSevenTaskbar::setTaskbarState(QWidget *window, WinSevenTaskbarState state) { return false; }
 void WinSevenTaskbar::setTaskbarProgress(QWidget *window, unsigned __int64 currentValue, unsigned __int64 maximumValue) {}
 void WinSevenTaskbar::setOverlayIcon(QWidget *window, QIcon *icon) {}
 
