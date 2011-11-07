@@ -50,9 +50,6 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 
 	//Set wait cursor
 	setCursor(Qt::WaitCursor);
-
-	//Init taskbar
-	WinSevenTaskbar::initTaskbar();
 }
 
 ////////////////////////////////////////////////////////////
@@ -156,6 +153,11 @@ void WorkingBanner::keyReleaseEvent(QKeyEvent *event)
 void WorkingBanner::closeEvent(QCloseEvent *event)
 {
 	if(!m_canClose) event->ignore();
+}
+
+bool WorkingBanner::winEvent(MSG *message, long *result)
+{
+	return WinSevenTaskbar::handleWinEvent(message, result);
 }
 
 ////////////////////////////////////////////////////////////

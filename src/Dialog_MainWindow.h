@@ -146,6 +146,7 @@ protected:
 	bool eventFilter(QObject *obj, QEvent *event);
 	void resizeEvent(QResizeEvent *event);
 	void showEvent(QShowEvent *event);
+	bool winEvent(MSG *message, long *result);
 
 private:
 	void addFiles(const QStringList &files);

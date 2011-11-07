@@ -23,81 +23,112 @@
 
 #include <QWidget>
 #include <QIcon>
+#include <ShObjIdl.h>
 
-#ifdef __ITaskbarList3_INTERFACE_DEFINED__
-
+UINT WinSevenTaskbar::m_winMsg = 0;
 ITaskbarList3 *WinSevenTaskbar::m_ptbl = NULL;
 
 WinSevenTaskbar::WinSevenTaskbar(void)
 {
+	throw "Cannot create instance of this class!";
 }
 
 WinSevenTaskbar::~WinSevenTaskbar(void)
 {
 }
 
-void WinSevenTaskbar::initTaskbar(void)
-{
-	OSVERSIONINFOW version;
-	memset(&version, 0, sizeof(OSVERSIONINFOW));
-	version.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
-	GetVersionEx(&version);
-	
-	if(version.dwMajorVersion >= 6 && version.dwMinorVersion >= 1)
-	{
-		if(!m_ptbl)
-		{
-			ITaskbarList3 *ptbl;
-			HRESULT hr = CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&ptbl));
+////////////////////////////////////////////////////////////
 
-			if (SUCCEEDED(hr))
-			{
-				HRESULT hr2 = ptbl->HrInit();
-				if(SUCCEEDED(hr2))
-				{
-					m_ptbl = ptbl;
-				}
-				else
-				{
-					ptbl->Release();
-					qWarning("ITaskbarList3::HrInit() has failed.");
-				}
-			}
-			else
-			{
-				qWarning("ITaskbarList3 could not be created.");
-			}
-		}
-	}
-	else
+#ifdef __ITaskbarList3_INTERFACE_DEFINED__	
+
+void WinSevenTaskbar::init(void)
+{
+	m_winMsg = RegisterWindowMessageW(L"TaskbarButtonCreated");
+	m_ptbl = NULL;
+}
+	
+void WinSevenTaskbar::uninit(void)
+{
+	if(m_ptbl)
 	{
-		qWarning("This OS doesn't support the ITaskbarList3 interface (needs NT 6.1 or later)");
+		m_ptbl->Release();
+		m_ptbl = NULL;
 	}
 }
 
-void WinSevenTaskbar::setTaskbarState(QWidget *window, WinSevenTaskbarState state)
+bool WinSevenTaskbar::handleWinEvent(MSG *message, long *result)
 {
+	bool stopEvent = false;
+
+	if(message->message == m_winMsg)
+	{
+		if(!m_ptbl) createInterface();
+		*result = (m_ptbl) ? S_OK : S_FALSE;
+		stopEvent = true;
+	}
+
+	return stopEvent;
+}
+
+void WinSevenTaskbar::createInterface(void)
+{
+	if(!m_ptbl)
+	{
+		ITaskbarList3 *ptbl = NULL;
+		HRESULT hr = CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&ptbl));
+
+		if (SUCCEEDED(hr))
+		{
+			HRESULT hr2 = ptbl->HrInit();
+			if(SUCCEEDED(hr2))
+			{
+				m_ptbl = ptbl;
+				/*qDebug("ITaskbarList3::HrInit() succeeded.");*/
+			}
+			else
+			{
+				ptbl->Release();
+				qWarning("ITaskbarList3::HrInit() has failed.");
+			}
+		}
+		else
+		{
+			qWarning("ITaskbarList3 could not be created.");
+		}
+	}
+}
+
+bool WinSevenTaskbar::setTaskbarState(QWidget *window, WinSevenTaskbarState state)
+{
+	bool result = false;
+	
 	if(m_ptbl && window)
 	{
+		HRESULT hr = HRESULT(-1);
+
 		switch(state)
 		{
 		case WinSevenTaskbarNoState:
-			m_ptbl->SetProgressState(window->winId(), TBPF_NOPROGRESS);
+			hr = m_ptbl->SetProgressState(window->winId(), TBPF_NOPROGRESS);
 			break;
 		case WinSevenTaskbarNormalState:
-			m_ptbl->SetProgressState(window->winId(), TBPF_NORMAL);
+			hr = m_ptbl->SetProgressState(window->winId(), TBPF_NORMAL);
 			break;
 		case WinSevenTaskbarIndeterminateState:
-			m_ptbl->SetProgressState(window->winId(), TBPF_INDETERMINATE);
+			hr = m_ptbl->SetProgressState(window->winId(), TBPF_INDETERMINATE);
 			break;
 		case WinSevenTaskbarErrorState:
-			m_ptbl->SetProgressState(window->winId(), TBPF_ERROR);
+			hr = m_ptbl->SetProgressState(window->winId(), TBPF_ERROR);
 			break;
 		case WinSevenTaskbarPausedState:
-			m_ptbl->SetProgressState(window->winId(), TBPF_PAUSED);
+			hr = m_ptbl->SetProgressState(window->winId(), TBPF_PAUSED);
 			break;
 		}
+
+		result = SUCCEEDED(hr);
 	}
+
+	return result;
 }
 
 void WinSevenTaskbar::setTaskbarProgress(QWidget *window, unsigned __int64 currentValue, unsigned __int64 maximumValue)
@@ -115,5 +146,16 @@ void WinSevenTaskbar::setOverlayIcon(QWidget *window, QIcon *icon)
 		m_ptbl->SetOverlayIcon(window->winId(), (icon ? icon->pixmap(16,16).toWinHICON() : NULL), L"LameXP");
 	}
 }
+
+#else //__ITaskbarList3_INTERFACE_DEFINED__
+
+LAMEXP_COMPILER_WARNING("ITaskbarList3 not defined. Compiling *without* support for Win7 taskbar!")
+void WinSevenTaskbar::init(void) {}
+void WinSevenTaskbar::uninit(void) {}
+bool WinSevenTaskbar::handleWinEvent(MSG *message, long *result) { return false; }
+void WinSevenTaskbar::createInterface(void) {}
+void WinSevenTaskbar::setTaskbarState(QWidget *window, WinSevenTaskbarState state) {}
+void WinSevenTaskbar::setTaskbarProgress(QWidget *window, unsigned __int64 currentValue, unsigned __int64 maximumValue) {}
+void WinSevenTaskbar::setOverlayIcon(QWidget *window, QIcon *icon) {}
 
 #endif //__ITaskbarList3_INTERFACE_DEFINED__

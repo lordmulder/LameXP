@@ -74,6 +74,7 @@ protected:
 	void showEvent(QShowEvent *event);
 	void closeEvent(QCloseEvent *event);
 	bool eventFilter(QObject *obj, QEvent *event);
+	bool winEvent(MSG *message, long *result);
 
 private:
 	void setCloseButtonEnabled(bool enabled);

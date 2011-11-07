@@ -27,6 +27,8 @@
 #include <QMovie>
 #include <QKeyEvent>
 
+#include "WinSevenTaskbar.h"
+
 #define EPS (1.0E-5)
 
 ////////////////////////////////////////////////////////////
@@ -79,22 +81,26 @@ void SplashScreen::showSplash(QThread *thread)
 	splashScreen->show();
 	QApplication::processEvents();
 
+	//Setup event loop
+	QEventLoop *loop = new QEventLoop(splashScreen);
+	connect(thread, SIGNAL(terminated()), loop, SLOT(quit()), Qt::QueuedConnection);
+	connect(thread, SIGNAL(finished()), loop, SLOT(quit()), Qt::QueuedConnection);
+
 	//Start the thread
 	thread->start();
-	
+	bool flag = false;
+
 	//Fade in
 	for(double d = 0.0; d <= 1.0 + EPS; d = d + 0.01)
 	{
 		splashScreen->setWindowOpacity(d);
 		QApplication::processEvents();
+		if(!flag) flag = WinSevenTaskbar::setTaskbarState(splashScreen, WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
 		Sleep(6);
 	}
 
 	//Loop while thread is running
-	while(thread->isRunning())
-	{
-		QApplication::processEvents(QEventLoop::AllEvents | QEventLoop::WaitForMoreEvents);
-	}
+	loop->exec();
 	
 	//Fade out
 	for(double d = 1.0; d >= 0.0; d = d - 0.01)
@@ -104,10 +110,14 @@ void SplashScreen::showSplash(QThread *thread)
 		Sleep(6);
 	}
 
+	//Restore taskbar
+	WinSevenTaskbar::setTaskbarState(splashScreen, WinSevenTaskbar::WinSevenTaskbarNoState);
+
 	//Hide splash
 	splashScreen->m_canClose = true;
 	splashScreen->close();
 
+	LAMEXP_DELETE(loop);
 	LAMEXP_DELETE(splashScreen);
 }
 
@@ -128,4 +138,9 @@ void SplashScreen::keyReleaseEvent(QKeyEvent *event)
 void SplashScreen::closeEvent(QCloseEvent *event)
 {
 	if(!m_canClose) event->ignore();
+}
+
+bool SplashScreen::winEvent(MSG *message, long *result)
+{
+	return WinSevenTaskbar::handleWinEvent(message, result);
 }

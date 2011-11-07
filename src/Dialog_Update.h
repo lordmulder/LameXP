@@ -52,6 +52,7 @@ protected:
 	void showEvent(QShowEvent *event);
 	void closeEvent(QCloseEvent *event);
 	void keyPressEvent(QKeyEvent *e);
+	bool winEvent(MSG *message, long *result);
 
 	const bool m_betaUpdates;
 

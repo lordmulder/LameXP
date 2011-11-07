@@ -30,6 +30,7 @@
 #include "Model_FileList.h"
 #include "Model_AudioFile.h"
 #include "Encoder_Abstract.h"
+#include "WinSevenTaskbar.h"
 
 //Qt includes
 #include <QApplication>
@@ -127,6 +128,9 @@ static int lamexp_main(int argc, char* argv[])
 		InitializationThread::selfTest();
 	}
 
+	//Taskbar init
+	WinSevenTaskbar::init();
+
 	//Create models
 	FileListModel *fileListModel = new FileListModel();
 	AudioFileModel *metaInfo = new AudioFileModel();
@@ -167,6 +171,9 @@ static int lamexp_main(int argc, char* argv[])
 	LAMEXP_DELETE(fileListModel);
 	LAMEXP_DELETE(metaInfo);
 	LAMEXP_DELETE(settingsModel);
+
+	//Taskbar un-init
+	WinSevenTaskbar::uninit();
 
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");

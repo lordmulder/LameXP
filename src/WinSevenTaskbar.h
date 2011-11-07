@@ -22,12 +22,10 @@
 #pragma once
 
 #include "Global.h"
-#include <ShObjIdl.h>
 
 class QWidget;
 class QIcon;
-
-#ifdef __ITaskbarList3_INTERFACE_DEFINED__
+struct ITaskbarList3;
 
 class WinSevenTaskbar
 {
@@ -46,40 +44,16 @@ public:
 	};
 	
 	//Public interface
-	static void initTaskbar(void);
-	static void setTaskbarState(QWidget *window, WinSevenTaskbarState state);
+	static bool handleWinEvent(MSG *message, long *result);
+	static bool setTaskbarState(QWidget *window, WinSevenTaskbarState state);
 	static void setTaskbarProgress(QWidget *window, unsigned __int64 currentValue, unsigned __int64 maximumValue);
 	static void setOverlayIcon(QWidget *window, QIcon *icon);
 
+	static void init(void);
+	static void uninit(void);
+
 private:
 	static ITaskbarList3 *m_ptbl;
+	static UINT m_winMsg;
+	static void createInterface(void);
 };
-
-#else //__ITaskbarList3_INTERFACE_DEFINED__
-
-LAMEXP_COMPILER_WARNING("ITaskbarList3 not defined. Compiling *without* support for Win7 taskbar!")
-
-class WinSevenTaskbar
-{
-public:
-	WinSevenTaskbar(void);
-	~WinSevenTaskbar(void);
-
-	//Taskbar states
-	enum WinSevenTaskbarState
-	{
-		WinSevenTaskbarNoState = 0,
-		WinSevenTaskbarNormalState = 1,
-		WinSevenTaskbarIndeterminateState = 2,
-		WinSevenTaskbarPausedState = 3,
-		WinSevenTaskbarErrorState = 4
-	};
-	
-	//Public interface
-	static void initTaskbar(void) {}
-	static void setTaskbarState(QWidget *window, WinSevenTaskbarState state) {}
-	static void setTaskbarProgress(QWidget *window, unsigned __int64 currentValue, unsigned __int64 maximumValue) {}
-	static void setOverlayIcon(QWidget *window, QIcon *icon) {}
-};
-
-#endif //__ITaskbarList3_INTERFACE_DEFINED__

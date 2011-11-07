@@ -264,6 +264,11 @@ void UpdateDialog::keyPressEvent(QKeyEvent *e)
 	}
 }
 
+bool UpdateDialog::winEvent(MSG *message, long *result)
+{
+	return WinSevenTaskbar::handleWinEvent(message, result);
+}
+
 void UpdateDialog::updateInit(void)
 {
 	setMinimumSize(size());

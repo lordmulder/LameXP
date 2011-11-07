@@ -304,6 +304,11 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 	return false;
 }
 
+bool ProcessingDialog::winEvent(MSG *message, long *result)
+{
+	return WinSevenTaskbar::handleWinEvent(message, result);
+}
+
 ////////////////////////////////////////////////////////////
 // SLOTS
 ////////////////////////////////////////////////////////////
@@ -328,7 +333,6 @@ void ProcessingDialog::initEncoding(void)
 	checkBox_shutdownComputer->setEnabled(true);
 	checkBox_shutdownComputer->setChecked(false);
 
-	WinSevenTaskbar::initTaskbar();
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
 	WinSevenTaskbar::setTaskbarProgress(this, 0, m_pendingJobs.count());
 	WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/control_play_blue.png"));
