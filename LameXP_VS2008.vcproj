@@ -66,7 +66,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib Winmm.lib Shlwapi.lib Wininet.lib psapi.lib"
+				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib Winmm.lib Shlwapi.lib Wininet.lib psapi.lib PowrProf.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;"
 				GenerateDebugInformation="true"
@@ -155,7 +155,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib Shlwapi.lib Wininet.lib"
+				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib Shlwapi.lib Wininet.lib PowrProf.lib"
 				ShowProgress="2"
 				Version=""
 				LinkIncremental="1"
@@ -253,7 +253,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib Shlwapi.lib Wininet.lib"
+				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib Shlwapi.lib Wininet.lib PowrProf.lib"
 				ShowProgress="2"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\lib&quot;;&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats&quot;"
@@ -521,6 +521,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Thread_CPUObserver.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Thread_CueSplitter.cpp"
 				>
 			</File>
@@ -546,6 +550,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Thread_Process.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Thread_RAMObserver.cpp"
 				>
 			</File>
 			<File
@@ -1047,7 +1055,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1057,7 +1065,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1067,7 +1075,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1581,6 +1589,40 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Thread_CPUObserver.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release_Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\src\Thread_CueSplitter.h"
 				>
 				<FileConfiguration
@@ -1819,6 +1861,40 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\src\Thread_RAMObserver.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release_Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\src\Tool_Abstract.h"
 				>
 				<FileConfiguration
@@ -1971,6 +2047,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\tmp\MOC_Thread_CPUObserver.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\tmp\MOC_Thread_CueSplitter.cpp"
 				>
 			</File>
@@ -1996,6 +2076,10 @@
 			</File>
 			<File
 				RelativePath=".\tmp\MOC_Thread_Process.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tmp\MOC_Thread_RAMObserver.cpp"
 				>
 			</File>
 			<File
@@ -2228,7 +2312,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2238,7 +2322,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2248,7 +2332,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2262,7 +2346,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2272,7 +2356,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2282,7 +2366,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2296,7 +2380,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2306,7 +2390,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -2316,7 +2400,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="RCC &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -o &quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot; -name &quot;$(SafeInputName)&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\QRC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
