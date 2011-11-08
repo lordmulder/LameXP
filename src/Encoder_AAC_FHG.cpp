@@ -28,9 +28,6 @@
 #include <QProcess>
 #include <QDir>
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-
 FHGAACEncoder::FHGAACEncoder(void)
 :
 	m_binary_enc(lamexp_lookup_tool("fhgaacenc.exe")),
@@ -76,7 +73,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	switch(m_configRCMode)
 	{
 	case SettingsModel::CBRMode:
-		args << "--cbr" << QString::number(max(32, min(maxBitrate, (m_configBitrate * 8))));
+		args << "--cbr" << QString::number(qMax(32, qMin(maxBitrate, (m_configBitrate * 8))));
 		break;
 	case SettingsModel::VBRMode:
 		args << "--vbr" << QString::number(qRound(static_cast<double>(m_configBitrate) / 5.0) + 1);

@@ -27,8 +27,6 @@
 #include <QDir>
 #include <Shellapi.h>
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
 #define FIX_SEPARATORS(STR) for(int i = 0; STR[i]; i++) { if(STR[i] == L'/') STR[i] = L'\\'; }
 
 WaveEncoder::WaveEncoder(void)

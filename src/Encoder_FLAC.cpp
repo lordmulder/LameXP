@@ -27,9 +27,6 @@
 #include <QProcess>
 #include <QDir>
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-
 FLACEncoder::FLACEncoder(void)
 :
 	m_binary(lamexp_lookup_tool("flac.exe"))
@@ -49,7 +46,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	QProcess process;
 	QStringList args;
 
-	args << QString("-%1").arg(QString::number(max(0, min(8, m_configBitrate))));
+	args << QString("-%1").arg(QString::number(qMax(0, qMin(8, m_configBitrate))));
 
 	if(!metaInfo.fileName().isEmpty()) args << "-T" << QString("title=%1").arg(metaInfo.fileName());
 	if(!metaInfo.fileArtist().isEmpty()) args << "-T" << QString("artist=%1").arg(metaInfo.fileArtist());

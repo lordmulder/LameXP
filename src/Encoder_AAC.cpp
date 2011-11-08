@@ -27,9 +27,6 @@
 #include <QProcess>
 #include <QDir>
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-
 AACEncoder::AACEncoder(void)
 :
 	m_binary_enc(lamexp_lookup_tool("neroAacEnc.exe")),
@@ -57,13 +54,13 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString().sprintf("%.2f", min(1.0, max(0.0, static_cast<double>(m_configBitrate * 5) / 100.0)));
+		args << "-q" << QString().sprintf("%.2f", qMin(1.0, qMax(0.0, static_cast<double>(m_configBitrate * 5) / 100.0)));
 		break;
 	case SettingsModel::ABRMode:
-		args << "-br" << QString::number(max(32, min(500, (m_configBitrate * 8))) * 1000);
+		args << "-br" << QString::number(qMax(32, qMin(500, (m_configBitrate * 8))) * 1000);
 		break;
 	case SettingsModel::CBRMode:
-		args << "-cbr" << QString::number(max(32, min(500, (m_configBitrate * 8))) * 1000);
+		args << "-cbr" << QString::number(qMax(32, qMin(500, (m_configBitrate * 8))) * 1000);
 		break;
 	default:
 		throw "Bad rate-control mode!";

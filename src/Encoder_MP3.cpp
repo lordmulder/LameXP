@@ -61,14 +61,14 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-V" << QString::number(9 - min(9, m_configBitrate));
+		args << "-V" << QString::number(9 - qMin(9, m_configBitrate));
 		break;
 	case SettingsModel::ABRMode:
-		args << "--abr" << QString::number(SettingsModel::mp3Bitrates[max(0, min(13, m_configBitrate))]);
+		args << "--abr" << QString::number(SettingsModel::mp3Bitrates[qMax(0, qMin(13, m_configBitrate))]);
 		break;
 	case SettingsModel::CBRMode:
 		args << "--cbr";
-		args << "-b" << QString::number(SettingsModel::mp3Bitrates[max(0, min(13, m_configBitrate))]);
+		args << "-b" << QString::number(SettingsModel::mp3Bitrates[qMax(0, qMin(13, m_configBitrate))]);
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -254,7 +254,7 @@ void MP3Encoder::setChannelMode(int value)
 
 int MP3Encoder::clipBitrate(int bitrate)
 {
-	int targetBitrate = min(max(bitrate, 32), 320);
+	int targetBitrate = qMin(qMax(bitrate, 32), 320);
 	
 	int minDiff = INT_MAX;
 	int minIndx = -1;

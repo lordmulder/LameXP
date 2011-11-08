@@ -825,7 +825,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				CueSheetTrack *currentTrack = currentFile->track(j);
 				CueSheetTrack *previousTrack = currentFile->track(j-1);
 				double duration = currentTrack->startIndex() - previousTrack->startIndex();
-				previousTrack->setDuration(max(0.0, duration));
+				previousTrack->setDuration(qMax(0.0, duration));
 			}
 		}
 	}

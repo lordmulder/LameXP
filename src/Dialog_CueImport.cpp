@@ -164,7 +164,7 @@ void CueImportDialog::browseButtonClicked(void)
 	
 	while(QDir(currentDir).exists())
 	{
-		int pos = max(currentDir.lastIndexOf(QChar('\\')), currentDir.lastIndexOf(QChar('/')));
+		int pos = qMax(currentDir.lastIndexOf(QChar('\\')), currentDir.lastIndexOf(QChar('/')));
 		if(pos > 0) currentDir.left(pos - 1); else break;
 	}
 

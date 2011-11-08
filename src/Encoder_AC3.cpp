@@ -27,9 +27,6 @@
 #include <QProcess>
 #include <QDir>
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-
 AC3Encoder::AC3Encoder(void)
 :
 	m_binary(lamexp_lookup_tool("aften.exe"))
@@ -57,10 +54,10 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString::number(max(0, min(1023, m_configBitrate * 64)));
+		args << "-q" << QString::number(qMax(0, qMin(1023, m_configBitrate * 64)));
 		break;
 	case SettingsModel::CBRMode:
-		args << "-b" << QString::number(SettingsModel::ac3Bitrates[max(0, min(18, m_configBitrate))]);
+		args << "-b" << QString::number(SettingsModel::ac3Bitrates[qMax(0, qMin(18, m_configBitrate))]);
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -154,17 +151,17 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 
 void AC3Encoder::setAudioCodingMode(int value)
 {
-	m_configAudioCodingMode = min(8, max(0, value));
+	m_configAudioCodingMode = qMin(8, qMax(0, value));
 }
 
 void AC3Encoder::setDynamicRangeCompression(int value)
 {
-	m_configDynamicRangeCompression = min(5, max(0, value));
+	m_configDynamicRangeCompression = qMin(5, qMax(0, value));
 }
 
 void AC3Encoder::setExponentSearchSize(int value)
 {
-	m_configExponentSearchSize = min(32, max(1, value));
+	m_configExponentSearchSize = qMin(32, qMax(1, value));
 }
 
 void AC3Encoder::setFastBitAllocation(bool value)

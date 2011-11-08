@@ -55,7 +55,7 @@ static int lamexp_main(int argc, char* argv[])
 
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End v%d.%02d %s (Build #%03d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build());
-	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", max(lamexp_version_date().year(),QDate::currentDate().year()));
+	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", qMax(lamexp_version_date().year(),QDate::currentDate().year()));
 	qDebug("Built on %s at %s with %s for Win-%s.\n", lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time(), lamexp_version_compiler(), lamexp_version_arch());
 	
 	//print license info

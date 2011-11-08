@@ -36,7 +36,7 @@ ResampleFilter::ResampleFilter(int samplingRate)
 		throw "Error initializing SoX filter. Tool 'sox.exe' is not registred!";
 	}
 
-	m_samplingRate = min(192000, max(8000, samplingRate));
+	m_samplingRate = qMin(192000, qMax(8000, samplingRate));
 }
 
 ResampleFilter::~ResampleFilter(void)

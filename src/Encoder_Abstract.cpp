@@ -38,8 +38,8 @@ AbstractEncoder::~AbstractEncoder(void)
  * Setters
  */
 
-void AbstractEncoder::setBitrate(int bitrate) { m_configBitrate = max(0, bitrate); }
-void AbstractEncoder::setRCMode(int mode) { m_configRCMode = max(0, mode); }
+void AbstractEncoder::setBitrate(int bitrate) { m_configBitrate = qMax(0, bitrate); }
+void AbstractEncoder::setRCMode(int mode) { m_configRCMode = qMax(0, mode); }
 void AbstractEncoder::setCustomParams(const QString &customParams) { m_configCustomParams = customParams; }
 
 /*
