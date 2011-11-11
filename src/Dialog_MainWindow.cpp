@@ -2583,7 +2583,7 @@ void MainWindow::updateBitrate(int value)
 			labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
 		case SettingsModel::AC3Encoder:
-			labelBitrate->setText(tr("Quality Level %1").arg(min(1024, max(0, value * 64))));
+			labelBitrate->setText(tr("Quality Level %1").arg(qMin(1024, qMax(0, value * 64))));
 			break;
 		case SettingsModel::PCMEncoder:
 			labelBitrate->setText(tr("Uncompressed"));
@@ -2609,7 +2609,7 @@ void MainWindow::updateBitrate(int value)
 			labelBitrate->setText(tr("Uncompressed"));
 			break;
 		default:
-			labelBitrate->setText(QString("&asymp; %1 kbps").arg(min(500, value * 8)));
+			labelBitrate->setText(QString("&asymp; %1 kbps").arg(qMin(500, value * 8)));
 			break;
 		}
 		break;
@@ -2629,7 +2629,7 @@ void MainWindow::updateBitrate(int value)
 			labelBitrate->setText(tr("Uncompressed"));
 			break;
 		default:
-			labelBitrate->setText(QString("%1 kbps").arg(min(500, value * 8)));
+			labelBitrate->setText(QString("%1 kbps").arg(qMin(500, value * 8)));
 			break;
 		}
 		break;

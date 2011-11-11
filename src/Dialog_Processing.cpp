@@ -66,10 +66,10 @@
 ////////////////////////////////////////////////////////////
 
 //Maximum number of parallel instances
-#define MAX_INSTANCES 16
+#define MAX_INSTANCES 16U
 
 //Maximum number of CPU cores for auto-detection
-#define MAX_CPU_COUNT 4
+#define MAX_CPU_COUNT 4U
 
 ////////////////////////////////////////////////////////////
 
@@ -357,20 +357,20 @@ void ProcessingDialog::initEncoding(void)
 		m_ramObserver->start();
 	}
 	
-	int maximumInstances = max(min(m_settings->maximumInstances(), MAX_INSTANCES), 0);
+	unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
 	if(maximumInstances < 1)
 	{
 		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-		maximumInstances = max(min(cpuFeatures.count, MAX_CPU_COUNT), 1);
+		maximumInstances = qBound(1U, static_cast<unsigned int>(cpuFeatures.count), MAX_CPU_COUNT);
 	}
 
-	int parallelThreadCount = max(min(maximumInstances, m_pendingJobs.count()), 1);
+	unsigned int parallelThreadCount = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
 	if(parallelThreadCount > 1)
 	{
 		m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(parallelThreadCount)));
 	}
 
-	for(int i = 0; i < parallelThreadCount; i++)
+	for(unsigned int i = 0; i < parallelThreadCount; i++)
 	{
 		startNextJob();
 	}
@@ -537,7 +537,7 @@ void ProcessingDialog::logViewSectionSizeChanged(int logicalIndex, int oldSize, 
 	{
 		if(QHeaderView *hdr = view_log->horizontalHeader())
 		{
-			hdr->setMinimumSectionSize(max(hdr->minimumSectionSize(), hdr->sectionSize(1)));
+			hdr->setMinimumSectionSize(qMax(hdr->minimumSectionSize(), hdr->sectionSize(1)));
 		}
 	}
 }

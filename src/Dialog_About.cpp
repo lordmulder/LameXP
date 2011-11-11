@@ -99,7 +99,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	const QString copyrightStr = QString().sprintf
 	(
 		"Copyright (C) 2004-%04d LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.",
-		max(lamexp_version_date().year(), QDate::currentDate().year())
+		qMax(lamexp_version_date().year(), QDate::currentDate().year())
 	);
 
 	for(int i = 0; i < 4; i++)
@@ -116,12 +116,12 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	
 	if(LAMEXP_DEBUG)
 	{
-		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
+		int daysLeft = qMax(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 	else if(lamexp_version_demo())
 	{
-		int daysLeft = max(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
+		int daysLeft = qMax(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 	
@@ -539,7 +539,7 @@ void AboutDialog::moveDisque(void)
 		if(m_disqueDelay != _I64_MAX)
 		{
 			const double delay = static_cast<double>(perfCount.QuadPart) - static_cast<double>(m_disqueDelay);
-			delta = max(1, min(128, static_cast<int>(ceil(delay / static_cast<double>(perfFrequ.QuadPart) / 0.00512))));
+			delta = qMax(1, qMin(128, static_cast<int>(ceil(delay / static_cast<double>(perfFrequ.QuadPart) / 0.00512))));
 		}
 		m_disqueDelay = perfCount.QuadPart;
 	}

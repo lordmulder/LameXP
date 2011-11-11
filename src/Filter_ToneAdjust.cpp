@@ -37,8 +37,8 @@ ToneAdjustFilter::ToneAdjustFilter(int bass, int treble)
 		throw "Error initializing SoX filter. Tool 'sox.exe' is not registred!";
 	}
 
-	m_bass = max(-2000, min(2000, bass));
-	m_treble = max(-2000, min(2000, treble));
+	m_bass = qMax(-2000, qMin(2000, bass));
+	m_treble = qMax(-2000, qMin(2000, treble));
 }
 
 ToneAdjustFilter::~ToneAdjustFilter(void)

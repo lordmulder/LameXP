@@ -336,7 +336,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 				int progress = rxProgress.cap(1).toInt(&ok);
 				if(ok)
 				{
-					maxProgress = max(maxProgress, progress);
+					maxProgress = qMax(maxProgress, progress);
 					emit fileSelected(QString("%1 [%2%]").arg(baseName, QString::number(maxProgress)));
 				}
 			}
@@ -372,7 +372,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 						qDebug("Duration updated from SoX info!");
 						int duration = intputLen - static_cast<int>(floor(offset + 0.5));
 						if(duration < 0) qWarning("Track is out of bounds: Track offset exceeds input file duration!");
-						outFileInfo.setFileDuration(max(0, duration));
+						outFileInfo.setFileDuration(qMax(0, duration));
 					}
 					else
 					{

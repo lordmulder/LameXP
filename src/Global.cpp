@@ -569,7 +569,7 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 	}
 
 	__cpuid(CPUInfo, 0x80000000);
-	int nExIds = max(min(CPUInfo[0], 0x80000004), 0x80000000);
+	int nExIds = qMax<int>(qMin<int>(CPUInfo[0], 0x80000004), 0x80000000);
 
 	for(int i = 0x80000002; i <= nExIds; ++i)
 	{

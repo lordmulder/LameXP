@@ -188,8 +188,8 @@ void DropBox::mouseMoveEvent(QMouseEvent *event)
 	const int max_x = screenGeometry.width() - frameGeometry().width() + screenGeometry.left();
 	const int max_y = screenGeometry.height() - frameGeometry().height() + screenGeometry.top();
 
-	int new_x = min(max_x, max(screenGeometry.left(), m_windowReferencePoint.x() - delta_x));
-	int new_y = min(max_y, max(screenGeometry.top(), m_windowReferencePoint.y() - delta_y));
+	int new_x = qMin(max_x, qMax(screenGeometry.left(), m_windowReferencePoint.x() - delta_x));
+	int new_y = qMin(max_y, qMax(screenGeometry.top(), m_windowReferencePoint.y() - delta_y));
 
 	if(new_x < magnetic)
 	{

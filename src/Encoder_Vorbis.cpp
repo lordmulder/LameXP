@@ -27,9 +27,6 @@
 #include <QProcess>
 #include <QDir>
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-
 VorbisEncoder::VorbisEncoder(void)
 :
 	m_binary(lamexp_lookup_tool("oggenc2.exe"))
@@ -57,10 +54,10 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString::number(max(-2, min(10, m_configBitrate)));
+		args << "-q" << QString::number(qMax(-2, qMin(10, m_configBitrate)));
 		break;
 	case SettingsModel::ABRMode:
-		args << "-b" << QString::number(max(32, min(500, (m_configBitrate * 8))));
+		args << "-b" << QString::number(qMax(32, qMin(500, (m_configBitrate * 8))));
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -69,8 +66,8 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 
 	if((m_configBitrateMaximum > 0) && (m_configBitrateMinimum > 0) && (m_configBitrateMinimum <= m_configBitrateMaximum))
 	{
-		args << "--min-bitrate" << QString::number(min(max(m_configBitrateMinimum, 32), 500));
-		args << "--max-bitrate" << QString::number(min(max(m_configBitrateMaximum, 32), 500));
+		args << "--min-bitrate" << QString::number(qMin(qMax(m_configBitrateMinimum, 32), 500));
+		args << "--max-bitrate" << QString::number(qMin(qMax(m_configBitrateMaximum, 32), 500));
 	}
 
 	if(m_configSamplingRate > 0)
