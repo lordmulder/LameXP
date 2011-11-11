@@ -218,7 +218,6 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
 	labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
 
-	QTimer::singleShot(0, this, SLOT(updateInit()));
 	installButton->setEnabled(false);
 	closeButton->setEnabled(false);
 	retryButton->setEnabled(false);
@@ -237,6 +236,8 @@ void UpdateDialog::showEvent(QShowEvent *event)
 
 	progressBar->setMaximum(counter);
 	progressBar->setValue(0);
+
+	QTimer::singleShot(0, this, SLOT(updateInit()));
 }
 
 void UpdateDialog::closeEvent(QCloseEvent *event)
@@ -273,7 +274,7 @@ void UpdateDialog::updateInit(void)
 {
 	setMinimumSize(size());
 	setMaximumHeight(height());
-
+	QApplication::processEvents();
 	checkForUpdates();
 }
 
