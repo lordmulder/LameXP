@@ -616,7 +616,7 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 	{
 		GetSystemInfo(&systemInfo);
 	}
-	features.count = systemInfo.dwNumberOfProcessors;
+	features.count = qBound(1UL, systemInfo.dwNumberOfProcessors, 64UL);
 #else
 	GetNativeSystemInfo(&systemInfo);
 	features.count = systemInfo.dwNumberOfProcessors;

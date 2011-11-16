@@ -68,9 +68,6 @@
 //Maximum number of parallel instances
 #define MAX_INSTANCES 16U
 
-//Maximum number of CPU cores for auto-detection
-#define MAX_CPU_COUNT 4U
-
 ////////////////////////////////////////////////////////////
 
 #define CHANGE_BACKGROUND_COLOR(WIDGET, COLOR) \
@@ -126,6 +123,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	
 	//Init progress indicator
 	m_progressIndicator = new QMovie(":/images/Working.gif");
+	m_progressIndicator->setCacheMode(QMovie::CacheAll);
+	m_progressIndicator->setSpeed(50);
 	label_headerWorking->setMovie(m_progressIndicator);
 	progressBar->setValue(0);
 
@@ -361,7 +360,7 @@ void ProcessingDialog::initEncoding(void)
 	if(maximumInstances < 1)
 	{
 		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-		maximumInstances = qBound(1U, static_cast<unsigned int>(cpuFeatures.count), MAX_CPU_COUNT);
+		maximumInstances = (cpuFeatures.count > 4) ? ((cpuFeatures.count / 2) + 2) : cpuFeatures.count;
 	}
 
 	unsigned int parallelThreadCount = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
