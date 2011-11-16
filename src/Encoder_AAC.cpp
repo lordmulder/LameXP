@@ -97,6 +97,8 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
+
 
 	QRegExp regExp("Processed\\s+(\\d+)\\s+seconds");
 	QRegExp regExp_pass1("First\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds");
@@ -130,7 +132,12 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 				int progress = regExp_pass1.cap(1).toInt(&ok);
 				if(ok && metaInfo.fileDuration() > 0)
 				{
-					emit statusUpdated(static_cast<int>((static_cast<double>(progress) / static_cast<double>(metaInfo.fileDuration())) * 50.0));
+					int newProgress = qRound((static_cast<double>(progress) / static_cast<double>(metaInfo.fileDuration())) * 50.0);
+					if(newProgress > prevProgress)
+					{
+						emit statusUpdated(newProgress);
+						prevProgress = qMin(newProgress + 2, 99);
+					}
 				}
 			}
 			else if(regExp_pass2.lastIndexIn(text) >= 0)
@@ -139,7 +146,12 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 				int progress = regExp_pass2.cap(1).toInt(&ok);
 				if(ok && metaInfo.fileDuration() > 0)
 				{
-					emit statusUpdated(static_cast<int>((static_cast<double>(progress) / static_cast<double>(metaInfo.fileDuration())) * 50.0) + 50);
+					int newProgress = qRound((static_cast<double>(progress) / static_cast<double>(metaInfo.fileDuration())) * 50.0) + 50;
+					if(newProgress > prevProgress)
+					{
+						emit statusUpdated(newProgress);
+						prevProgress = qMin(newProgress + 2, 99);
+					}
 				}
 			}
 			else if(regExp.lastIndexIn(text) >= 0)
@@ -148,7 +160,12 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 				int progress = regExp.cap(1).toInt(&ok);
 				if(ok && metaInfo.fileDuration() > 0)
 				{
-					emit statusUpdated(static_cast<int>((static_cast<double>(progress) / static_cast<double>(metaInfo.fileDuration())) * 100.0));
+					int newProgress = qRound((static_cast<double>(progress) / static_cast<double>(metaInfo.fileDuration())) * 100.0);
+					if(newProgress > prevProgress)
+					{
+						emit statusUpdated(newProgress);
+						prevProgress = qMin(newProgress + 2, 99);
+					}
 				}
 			}
 			else if(!text.isEmpty())

@@ -97,6 +97,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
 
 	QRegExp regExp("Progress:\\s*(\\d+)%");
 
@@ -126,7 +127,11 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 			{
 				bool ok = false;
 				int progress = regExp.cap(1).toInt(&ok);
-				if(ok) emit statusUpdated(progress);
+				if(ok && (progress > prevProgress))
+				{
+					emit statusUpdated(progress);
+					prevProgress = qMin(progress + 2, 99);
+				}
 			}
 			else if(!text.isEmpty())
 			{

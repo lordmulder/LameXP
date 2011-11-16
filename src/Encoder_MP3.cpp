@@ -139,6 +139,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
 
 	QRegExp regExp("\\(.*(\\d+)%\\)\\|");
 
@@ -168,7 +169,11 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 			{
 				bool ok = false;
 				int progress = regExp.cap(1).toInt(&ok);
-				if(ok) emit statusUpdated(progress);
+				if(ok && (progress > prevProgress))
+				{
+					emit statusUpdated(progress);
+					prevProgress = qMin(progress + 2, 99);
+				}
 			}
 			else if(!text.isEmpty())
 			{

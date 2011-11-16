@@ -209,6 +209,8 @@ void ProcessThread::processFile()
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
 	}
 
+	QThread::msleep(500);
+
 	//Report result
 	emit processStateChanged(m_jobId, (bSuccess ? tr("Done.") : (m_aborted ? tr("Aborted!") : tr("Failed!"))), (bSuccess ? ProgressModel::JobComplete : ProgressModel::JobFailed));
 	emit processStateFinished(m_jobId, outFileName, bSuccess);
@@ -222,6 +224,8 @@ void ProcessThread::processFile()
 
 void ProcessThread::handleUpdate(int progress)
 {
+	//printf("Progress: %d\n", progress);
+	
 	switch(m_currentStep)
 	{
 	case EncodingStep:

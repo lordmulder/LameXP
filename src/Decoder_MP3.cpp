@@ -56,6 +56,7 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
 
 	QRegExp regExp("\\s+Time:\\s+(\\d+):(\\d+)\\.(\\d+)\\s+\\[(\\d+):(\\d+)\\.(\\d+)\\],");
 
@@ -94,7 +95,12 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 				int timeLeft = (60 * values[3]) + values[4];
 				if(timeDone > 0 || timeLeft > 0)
 				{
-					statusUpdated(static_cast<int>((static_cast<double>(timeDone) / static_cast<double>(timeDone + timeLeft)) * 100.0));
+					int newProgress = qRound((static_cast<double>(timeDone) / static_cast<double>(timeDone + timeLeft)) * 100.0);
+					if(newProgress > prevProgress)
+					{
+						emit statusUpdated(newProgress);
+						prevProgress = qMin(newProgress + 2, 99);
+					}
 				}
 			}
 			else if(!text.isEmpty())
