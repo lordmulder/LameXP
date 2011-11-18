@@ -127,7 +127,7 @@ void CPUObserverThread::observe(void)
 					}
 				}
 			}
-			msleep(1000);
+			msleep(2000);
 		}
 	}
 	else

@@ -79,7 +79,7 @@ void RAMObserverThread::observe(void)
 				previous = current;
 			}
 		}
-		msleep(1000);
+		msleep(2000);
 	}
 }
 
