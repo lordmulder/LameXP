@@ -19,3 +19,5 @@ etc/Translation/*.ts.bak
 /tmp/MOC_*.cpp
 /tmp/QRC_*.cpp
 /tmp/UIC_*.h
+/gui/*.ui.bak*
+*.db
