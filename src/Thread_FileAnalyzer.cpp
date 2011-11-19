@@ -32,6 +32,7 @@
 #include <QDate>
 #include <QTime>
 #include <QDebug>
+#include <QImage>
 
 #include <math.h>
 
@@ -582,12 +583,19 @@ void FileAnalyzer::retrieveCover(AudioFileModel &audioFile, const QString &fileP
 								val = val.split(" ", QString::SkipEmptyParts, Qt::CaseInsensitive).first();
 							}
 							QByteArray coverData = QByteArray::fromBase64(val.toLatin1());
-							QFile coverFile(QString("%1/%2.%3").arg(lamexp_temp_folder2(), lamexp_rand_str(), extension));
-							if(coverFile.open(QIODevice::WriteOnly))
+							if(!(QImage::fromData(coverData, extension.toUpper().toLatin1().constData()).isNull()))
 							{
-								coverFile.write(coverData);
-								coverFile.close();
-								audioFile.setFileCover(coverFile.fileName(), true);
+								QFile coverFile(QString("%1/%2.%3").arg(lamexp_temp_folder2(), lamexp_rand_str(), extension));
+								if(coverFile.open(QIODevice::WriteOnly))
+								{
+									coverFile.write(coverData);
+									coverFile.close();
+									audioFile.setFileCover(coverFile.fileName(), true);
+								}
+							}
+							else
+							{
+								qWarning("Image data seems to be invalid :-(");
 							}
 							break;
 						}
