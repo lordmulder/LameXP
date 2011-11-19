@@ -88,7 +88,10 @@ void DiskObserverThread::observe(void)
 				previousSpace = freeSpace;
 			}
 		}
-		msleep(2000);
+		for(int i = 0; i < 6; i++)
+		{
+			if(!m_terminated) msleep(333);
+		}
 	}
 }
 
