@@ -417,6 +417,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Encoder_AAC_QAAC.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Encoder_Abstract.cpp"
 				>
 			</File>
@@ -1081,6 +1085,40 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\src\Encoder_AAC_QAAC.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release_Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\src\Encoder_Abstract.h"
 				>
 				<FileConfiguration
@@ -1597,7 +1635,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1607,7 +1645,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1617,7 +1655,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1869,7 +1907,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1879,7 +1917,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1889,7 +1927,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; -o &quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\MOC_$(SafeInputName).cpp&quot;"
 					/>
 				</FileConfiguration>
@@ -1988,6 +2026,10 @@
 			</File>
 			<File
 				RelativePath=".\tmp\MOC_Encoder_AAC_FHG.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tmp\MOC_Encoder_AAC_QAAC.cpp"
 				>
 			</File>
 			<File
