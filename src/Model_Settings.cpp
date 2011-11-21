@@ -222,10 +222,13 @@ void SettingsModel::validate(void)
 	{
 		if(!(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll")))
 		{
-			if(this->compressionEncoder() == SettingsModel::AACEncoder)
+			if(!(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll")))
 			{
-				qWarning("AAC encoder selected, but not available any more. Reverting to MP3!");
-				this->compressionEncoder(SettingsModel::MP3Encoder);
+				if(this->compressionEncoder() == SettingsModel::AACEncoder)
+				{
+					qWarning("AAC encoder selected, but not available any more. Reverting to MP3!");
+					this->compressionEncoder(SettingsModel::MP3Encoder);
+				}
 			}
 		}
 	}

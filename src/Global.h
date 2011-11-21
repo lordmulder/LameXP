@@ -81,6 +81,7 @@ const char *lamexp_version_arch(void);
 QDate lamexp_version_expires(void);
 unsigned int lamexp_toolver_neroaac(void);
 unsigned int lamexp_toolver_fhgaacenc(void);
+unsigned int lamexp_toolver_qaacenc(void);
 const char *lamexp_website_url(void);
 const char *lamexp_support_url(void);
 DWORD lamexp_get_os_version(void);

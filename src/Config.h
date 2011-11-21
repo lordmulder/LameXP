@@ -29,8 +29,8 @@
 #define VER_LAMEXP_MINOR_HI					0
 #define VER_LAMEXP_MINOR_LO					4
 #define VER_LAMEXP_TYPE						Alpha
-#define VER_LAMEXP_PATCH					1
-#define VER_LAMEXP_BUILD					781
+#define VER_LAMEXP_PATCH					2
+#define VER_LAMEXP_BUILD					782
 
 ///////////////////////////////////////////////////////////////////////////////
 // Tools versions
@@ -38,6 +38,7 @@
 
 #define VER_LAMEXP_TOOL_NEROAAC				1540
 #define VER_LAMEXP_TOOL_FHGAACENC			20110822
+#define VER_LAMEXP_TOOL_QAAC				104
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper macros (aka: having fun with the C pre-processor)

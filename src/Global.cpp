@@ -169,6 +169,7 @@ static const char *g_lamexp_support_url = "http://forum.doom9.org/showthread.php
 //Tool versions (expected versions!)
 static const unsigned int g_lamexp_toolver_neroaac = VER_LAMEXP_TOOL_NEROAAC;
 static const unsigned int g_lamexp_toolver_fhgaacenc = VER_LAMEXP_TOOL_FHGAACENC;
+static const unsigned int g_lamexp_toolver_qaacenc = VER_LAMEXP_TOOL_QAAC;
 
 //Special folders
 static QString g_lamexp_temp_folder;
@@ -239,7 +240,7 @@ const char *lamexp_version_compiler(void) { return g_lamexp_version_compiler; }
 const char *lamexp_version_arch(void) { return g_lamexp_version_arch; }
 unsigned int lamexp_toolver_neroaac(void) { return g_lamexp_toolver_neroaac; }
 unsigned int lamexp_toolver_fhgaacenc(void) { return g_lamexp_toolver_fhgaacenc; }
-
+unsigned int lamexp_toolver_qaacenc(void) { return g_lamexp_toolver_qaacenc; }
 /*
  * URL getters
  */

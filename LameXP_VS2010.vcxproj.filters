@@ -334,6 +334,12 @@
     <ClCompile Include="tmp\MOC_Thread_RAMObserver.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Encoder_AAC_QAAC.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_AAC_QAAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -625,6 +631,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Thread_RAMObserver.h">
       <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_AAC_QAAC.h">
+      <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
