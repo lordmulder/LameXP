@@ -484,15 +484,10 @@ void InitializationThread::initFhgAac(void)
 void InitializationThread::initQAac(void)
 {
 	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
-	
-	QFileInfo qaacFileInfo[4];
-	qaacFileInfo[0] = QFileInfo(QString("%1/qaac.exe").arg(appPath));
-	qaacFileInfo[1] = QFileInfo(QString("%1/libsoxrate.dll").arg(appPath));
-	qaacFileInfo[2] = QFileInfo(QString("%1/msvcp100.dll").arg(appPath));
-	qaacFileInfo[3] = QFileInfo(QString("%1/msvcr100.dll").arg(appPath));
-	
+
 	bool qaacFilesFound = true;
-	for(int i = 0; i < 4; i++)	{ if(!qaacFileInfo[i].exists()) qaacFilesFound = false; }
+	QFileInfo qaacFileInfo(QString("%1/qaac.exe").arg(appPath));
+	if(!qaacFileInfo.exists()) qaacFilesFound = false;
 
 	//Lock the QAAC binaries
 	if(!qaacFilesFound)
@@ -501,21 +496,16 @@ void InitializationThread::initQAac(void)
 		return;
 	}
 
-	qDebug("Found QAAC encoder:\n%s\n", qaacFileInfo[0].canonicalFilePath().toUtf8().constData());
-
-	LockedFile *qaacBin[4];
-	for(int i = 0; i < 4; i++) qaacBin[i] = NULL;
+	qDebug("Found QAAC encoder:\n%s\n", qaacFileInfo.canonicalFilePath().toUtf8().constData());
+	LockedFile *qaacBin = NULL;
 
 	try
 	{
-		for(int i = 0; i < 4; i++)
-		{
-			qaacBin[i] = new LockedFile(qaacFileInfo[i].canonicalFilePath());
-		}
+		qaacBin = new LockedFile(qaacFileInfo.canonicalFilePath());
 	}
 	catch(...)
 	{
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		LAMEXP_DELETE(qaacBin);
 		qWarning("Failed to get excluive lock to QAAC binary -> QAAC support will be disabled!");
 		return;
 	}
@@ -523,7 +513,7 @@ void InitializationThread::initQAac(void)
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
-	process.start(qaacFileInfo[0].canonicalFilePath(), QStringList() << "--check");
+	process.start(qaacFileInfo.canonicalFilePath(), QStringList() << "--check");
 
 	if(!process.waitForStarted())
 	{
@@ -531,7 +521,7 @@ void InitializationThread::initQAac(void)
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
 		process.kill();
 		process.waitForFinished(-1);
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		LAMEXP_DELETE(qaacBin);
 		return;
 	}
 
@@ -548,7 +538,7 @@ void InitializationThread::initQAac(void)
 			qWarning("QAAC process time out -> killing!");
 			process.kill();
 			process.waitForFinished(-1);
-			for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+			LAMEXP_DELETE(qaacBin);
 			return;
 		}
 		while(process.bytesAvailable() > 0)
@@ -587,33 +577,30 @@ void InitializationThread::initQAac(void)
 	if(!(qaacVersion > 0))
 	{
 		qWarning("QAAC version couldn't be determined -> QAAC support will be disabled!");
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		LAMEXP_DELETE(qaacBin);
 		return;
 	}
 	else if(qaacVersion < lamexp_toolver_qaacenc())
 	{
 		qWarning("QAAC version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.??", qaacVersion, "N/A").toLatin1().constData());
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		LAMEXP_DELETE(qaacBin);
 		return;
 	}
 
 	if(!(coreVersion > 0))
 	{
 		qWarning("CoreAudioToolbox version couldn't be determined -> QAAC support will be disabled!");
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		LAMEXP_DELETE(qaacBin);
 		return;
 	}
 	else if(coreVersion < lamexp_toolver_coreaudio())
 	{
 		qWarning("CoreAudioToolbox version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.?.?.?", coreVersion, "N/A").toLatin1().constData());
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		LAMEXP_DELETE(qaacBin);
 		return;
 	}
 
-	for(int i = 0; i < 4; i++)
-	{
-		lamexp_register_tool(qaacFileInfo[i].fileName(), qaacBin[i], qaacVersion);
-	}
+	lamexp_register_tool(qaacFileInfo.fileName(), qaacBin, qaacVersion);
 }
 
 void InitializationThread::selfTest(void)

@@ -42,6 +42,5 @@ public:
 
 private:
 	const QString m_binary_enc;
-	const QString m_binary_dll;
 	int m_configProfile;
 };

@@ -90,7 +90,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_settings(settingsModel),
 	m_neroEncoderAvailable(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")),
 	m_fhgEncoderAvailable(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll") && lamexp_check_tool("nsutil.dll") && lamexp_check_tool("libmp4v2.dll")),
-	m_qaacEncoderAvailable(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll") && lamexp_check_tool("msvcp100.dll") && lamexp_check_tool("msvcr100.dll")),
+	m_qaacEncoderAvailable(lamexp_check_tool("qaac.exe")),
 	m_accepted(false),
 	m_firstTimeShown(true),
 	m_OutputFolderViewInitialized(false)
