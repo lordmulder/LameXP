@@ -494,7 +494,7 @@ void InitializationThread::initQAac(void)
 	bool qaacFilesFound = true;
 	for(int i = 0; i < 4; i++)	{ if(!qaacFileInfo[i].exists()) qaacFilesFound = false; }
 
-	//Lock the FhgAacEnc binaries
+	//Lock the QAAC binaries
 	if(!qaacFilesFound)
 	{
 		qDebug("QAAC binaries not found -> QAAC support will be disabled!\n");
@@ -516,14 +516,14 @@ void InitializationThread::initQAac(void)
 	catch(...)
 	{
 		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
-		qWarning("Failed to get excluive lock to FhgAacEnc binary -> FhgAacEnc support will be disabled!");
+		qWarning("Failed to get excluive lock to QAAC binary -> QAAC support will be disabled!");
 		return;
 	}
 
 	QProcess process;
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
-	process.start(qaacFileInfo[0].canonicalFilePath(), QStringList());
+	process.start(qaacFileInfo[0].canonicalFilePath(), QStringList() << "--check");
 
 	if(!process.waitForStarted())
 	{
@@ -536,7 +536,9 @@ void InitializationThread::initQAac(void)
 	}
 
 	QRegExp qaacEncSig("qaac (\\d)\\.(\\d)(\\d)", Qt::CaseInsensitive);
+	QRegExp coreEncSig("CoreAudioToolbox (\\d)\\.(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
 	unsigned int qaacVersion = 0;
+	unsigned int coreVersion = 0;
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -564,8 +566,23 @@ void InitializationThread::initQAac(void)
 					qaacVersion = (qBound(0U, tmp[0], 9U) * 100) + (qBound(0U, tmp[1], 9U) * 10) + qBound(0U, tmp[2], 9U);
 				}
 			}
+			if(coreEncSig.lastIndexIn(line) >= 0)
+			{
+				unsigned int tmp[4] = {0, 0, 0, 0};
+				bool ok[4] = {false, false, false, false};
+				tmp[0] = coreEncSig.cap(1).toUInt(&ok[0]);
+				tmp[1] = coreEncSig.cap(2).toUInt(&ok[1]);
+				tmp[2] = coreEncSig.cap(3).toUInt(&ok[2]);
+				tmp[3] = coreEncSig.cap(4).toUInt(&ok[3]);
+				if(ok[0] && ok[1] && ok[2] && ok[3])
+				{
+					coreVersion = (qBound(0U, tmp[0], 9U) * 1000) + (qBound(0U, tmp[1], 9U) * 100) + (qBound(0U, tmp[2], 9U) * 10) + qBound(0U, tmp[3], 9U);
+				}
+			}
 		}
 	}
+
+	//qDebug("qaac %d, CoreAudioToolbox %d", qaacVersion, coreVersion);
 
 	if(!(qaacVersion > 0))
 	{
@@ -575,7 +592,20 @@ void InitializationThread::initQAac(void)
 	}
 	else if(qaacVersion < lamexp_toolver_qaacenc())
 	{
-		qWarning("QAAC version is too much outdated -> QAAC support will be disabled!");
+		qWarning("QAAC version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.??", qaacVersion, "N/A").toLatin1().constData());
+		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		return;
+	}
+
+	if(!(coreVersion > 0))
+	{
+		qWarning("CoreAudioToolbox version couldn't be determined -> QAAC support will be disabled!");
+		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		return;
+	}
+	else if(coreVersion < lamexp_toolver_coreaudio())
+	{
+		qWarning("CoreAudioToolbox version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.?.?.?", coreVersion, "N/A").toLatin1().constData());
 		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
 		return;
 	}

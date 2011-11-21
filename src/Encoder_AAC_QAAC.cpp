@@ -50,6 +50,8 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	QProcess process;
 	QStringList args;
 
+	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
+
 	if(m_configRCMode != SettingsModel::VBRMode)
 	{
 		switch(m_configProfile)
@@ -88,6 +90,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	if(metaInfo.filePosition()) args << "--track" << QString::number(metaInfo.filePosition());
 	if(!metaInfo.fileCover().isEmpty()) args << "--artwork" << metaInfo.fileCover();
 
+	args << "-d" << ".";
 	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
