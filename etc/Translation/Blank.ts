@@ -2600,35 +2600,35 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="318"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="321"/>
         <source>Shutdown the computer as soon as all files have been converted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="341"/>
-        <location filename="../../gui/ProcessingDialog.ui" line="397"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="344"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="400"/>
         <source>CPU Usage (Overall)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="426"/>
-        <location filename="../../gui/ProcessingDialog.ui" line="476"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="429"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="479"/>
         <source>Physical RAM Usage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="505"/>
-        <location filename="../../gui/ProcessingDialog.ui" line="555"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="508"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="558"/>
         <source>Free Disk Space (Temp Folder)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="660"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="663"/>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/ProcessingDialog.ui" line="683"/>
+        <location filename="../../gui/ProcessingDialog.ui" line="686"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
