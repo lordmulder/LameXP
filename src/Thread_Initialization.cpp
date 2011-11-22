@@ -490,7 +490,7 @@ void InitializationThread::initQAac(void)
 	qaacFileInfo[1] = QFileInfo(QString("%1/libsoxrate.dll").arg(appPath));
 	
 	bool qaacFilesFound = true;
-	for(int i = 0; i < 4; i++)	{ if(!qaacFileInfo[i].exists()) qaacFilesFound = false; }
+	for(int i = 0; i < 2; i++)	{ if(!qaacFileInfo[i].exists()) qaacFilesFound = false; }
 
 	//Lock the QAAC binaries
 	if(!qaacFilesFound)
