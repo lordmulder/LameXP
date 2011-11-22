@@ -27,6 +27,8 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QLibrary>
+#include <QProcessEnvironment>
+#include <QDir>
 
 /*
  * Win32 API definitions
@@ -97,9 +99,14 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	static AssignProcessToJobObjectFun AssignProcessToJobObjectPtr = NULL;
 	
 	QMutexLocker lock(m_mutex_startProcess);
-	
 	emit messageLogged(commandline2string(program, args) + "\n");
 
+	QProcessEnvironment env = process.processEnvironment();
+	if(env.isEmpty()) env = QProcessEnvironment::systemEnvironment();
+	env.insert("TEMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
+	env.insert("TMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
+	process.setProcessEnvironment(env);
+	
 	if(!AssignProcessToJobObjectPtr)
 	{
 		QLibrary Kernel32Lib("kernel32.dll");

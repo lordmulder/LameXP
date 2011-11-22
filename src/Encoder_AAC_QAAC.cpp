@@ -53,9 +53,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
 
 	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	env.insert("PATH", QString("%1;%2").arg(QDir::toNativeSeparators(QDir(QCoreApplication::applicationDirPath()).canonicalPath()), QDir::toNativeSeparators(lamexp_temp_folder2())));
-	env.insert("TEMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
-	env.insert("TMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
+	env.insert("PATH", QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), lamexp_temp_folder2())));
 	process.setProcessEnvironment(env);
 
 	if(m_configRCMode != SettingsModel::VBRMode)
