@@ -38,7 +38,7 @@
 
 #define VER_LAMEXP_TOOL_NEROAAC				1540
 #define VER_LAMEXP_TOOL_FHGAACENC			20110822
-#define VER_LAMEXP_TOOL_QAAC				104
+#define VER_LAMEXP_TOOL_QAAC				105
 #define VER_LAMEXP_TOOL_COREAUDIO			7710
 
 ///////////////////////////////////////////////////////////////////////////////
