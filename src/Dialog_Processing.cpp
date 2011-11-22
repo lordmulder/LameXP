@@ -661,7 +661,7 @@ void ProcessingDialog::startNextJob(void)
 		break;
 	case SettingsModel::AACEncoder:
 		{
-			if(lamexp_check_tool("qaac.exe"))
+			if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll"))
 			{
 				QAACEncoder *aacEncoder = new QAACEncoder();
 				aacEncoder->setBitrate(m_settings->compressionBitrate());

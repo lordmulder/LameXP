@@ -222,7 +222,7 @@ void SettingsModel::validate(void)
 	{
 		if(!(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll")))
 		{
-			if(!lamexp_check_tool("qaac.exe"))
+			if(!(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll")))
 			{
 				if(this->compressionEncoder() == SettingsModel::AACEncoder)
 				{

@@ -31,9 +31,10 @@
 
 QAACEncoder::QAACEncoder(void)
 :
-	m_binary_enc(lamexp_lookup_tool("qaac.exe"))
+	m_binary_enc(lamexp_lookup_tool("qaac.exe")),
+	m_binary_dll(lamexp_lookup_tool("libsoxrate.dll"))
 {
-	if(m_binary_enc.isEmpty())
+	if(m_binary_enc.isEmpty() || m_binary_dll.isEmpty())
 	{
 		throw "Error initializing QAAC. Tool 'qaac.exe' is not registred!";
 	}
