@@ -22,6 +22,7 @@
 #pragma once
 
 #include <QThread>
+#include <QSemaphore>
 
 class DiskObserverThread: public QThread
 {
@@ -31,7 +32,7 @@ public:
 	DiskObserverThread(const QString &path);
 	~DiskObserverThread(void);
 
-	void stop(void) { m_terminated = true; }
+	void stop(void) { m_semaphore.release(); }
 	
 protected:
 	void run(void);
@@ -44,6 +45,6 @@ signals:
 	void freeSpaceChanged(const quint64);
 
 private:
-	volatile bool m_terminated;
+	QSemaphore m_semaphore;
 	const QString m_path;
 };

@@ -22,6 +22,7 @@
 #pragma once
 
 #include <QThread>
+#include <QSemaphore>
 
 class CPUObserverThread: public QThread
 {
@@ -31,7 +32,7 @@ public:
 	CPUObserverThread(void);
 	~CPUObserverThread(void);
 
-	void stop(void) { m_terminated = true; }
+	void stop(void) { m_semaphore.release(); }
 	
 protected:
 	void run(void);
@@ -41,6 +42,6 @@ signals:
 	void currentUsageChanged(const double usage);
 
 private:
-	volatile bool m_terminated;
+	QSemaphore m_semaphore;
 	static inline unsigned __int64 filetime2ulonglong(const void *ftime);
 };

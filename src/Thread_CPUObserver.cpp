@@ -33,7 +33,6 @@ typedef BOOL (WINAPI *GetSystemTimesPtr)(LPFILETIME lpIdleTime, LPFILETIME lpKer
 
 CPUObserverThread::CPUObserverThread(void)
 {
-	m_terminated = false;
 }
 
 CPUObserverThread::~CPUObserverThread(void)
@@ -47,7 +46,6 @@ CPUObserverThread::~CPUObserverThread(void)
 void CPUObserverThread::run(void)
 {
 	qDebug("CPU observer started!");
-	m_terminated = false;
 
 	try
 	{
@@ -61,6 +59,8 @@ void CPUObserverThread::run(void)
 		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
+
+	while(m_semaphore.available()) m_semaphore.tryAcquire();
 }
 
 ULONGLONG CPUObserverThread::filetime2ulonglong(const void *ftime)
@@ -94,7 +94,7 @@ void CPUObserverThread::observe(void)
 			sys[i] = 0; usr[i] = 0; idl[i] = 0;
 		}
 
-		while(!m_terminated)
+		forever
 		{
 			if(getSystemTimes(&idlTime, &sysTime, &usrTime))
 			{
@@ -127,10 +127,7 @@ void CPUObserverThread::observe(void)
 					}
 				}
 			}
-			for(int i = 0; i < 6; i++)
-			{
-				if(!m_terminated) msleep(333);
-			}
+			if(m_semaphore.tryAcquire(1, 2000)) break;
 		}
 	}
 	else

@@ -22,6 +22,7 @@
 #pragma once
 
 #include <QThread>
+#include <QSemaphore>
 
 class RAMObserverThread: public QThread
 {
@@ -31,7 +32,7 @@ public:
 	RAMObserverThread(void);
 	~RAMObserverThread(void);
 
-	void stop(void) { m_terminated = true; }
+	void stop(void) { m_semaphore.release(); }
 	
 protected:
 	void run(void);
@@ -41,5 +42,5 @@ signals:
 	void currentUsageChanged(const double usage);
 
 private:
-	volatile bool m_terminated;
+	QSemaphore m_semaphore;
 };

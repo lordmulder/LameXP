@@ -35,7 +35,6 @@ DiskObserverThread::DiskObserverThread(const QString &path)
 :
 	m_path(makeRootDir(path))
 {
-	m_terminated = false;
 }
 
 DiskObserverThread::~DiskObserverThread(void)
@@ -49,7 +48,6 @@ DiskObserverThread::~DiskObserverThread(void)
 void DiskObserverThread::run(void)
 {
 	qDebug("DiskSpace observer started!");
-	m_terminated = false;
 
 	try
 	{
@@ -63,6 +61,8 @@ void DiskObserverThread::run(void)
 		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
+
+	while(m_semaphore.available()) m_semaphore.tryAcquire();
 }
 
 void DiskObserverThread::observe(void)
@@ -71,7 +71,7 @@ void DiskObserverThread::observe(void)
 	unsigned __int64 freeSpace, previousSpace = 0ui64;
 	bool ok = false;
 
-	while(!m_terminated)
+	forever
 	{
 		freeSpace = lamexp_free_diskspace(m_path, &ok);
 		if(ok)
@@ -88,10 +88,7 @@ void DiskObserverThread::observe(void)
 				previousSpace = freeSpace;
 			}
 		}
-		for(int i = 0; i < 6; i++)
-		{
-			if(!m_terminated) msleep(333);
-		}
+		if(m_semaphore.tryAcquire(1, 2000)) break;
 	}
 }
 

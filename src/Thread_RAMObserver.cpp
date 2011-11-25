@@ -30,7 +30,6 @@
 
 RAMObserverThread::RAMObserverThread(void)
 {
-	m_terminated = false;
 }
 
 RAMObserverThread::~RAMObserverThread(void)
@@ -44,7 +43,6 @@ RAMObserverThread::~RAMObserverThread(void)
 void RAMObserverThread::run(void)
 {
 	qDebug("RAM observer started!");
-	m_terminated = false;
 
 	try
 	{
@@ -58,6 +56,8 @@ void RAMObserverThread::run(void)
 		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
+
+	while(m_semaphore.available()) m_semaphore.tryAcquire();
 }
 
 void RAMObserverThread::observe(void)
@@ -65,7 +65,7 @@ void RAMObserverThread::observe(void)
 	MEMORYSTATUSEX memoryStatus;
 	double previous = -1.0;
 
-	while(!m_terminated)
+	forever
 	{
 		memset(&memoryStatus, 0, sizeof(MEMORYSTATUSEX));
 		memoryStatus.dwLength = sizeof(MEMORYSTATUSEX);
@@ -79,10 +79,7 @@ void RAMObserverThread::observe(void)
 				previous = current;
 			}
 		}
-		for(int i = 0; i < 6; i++)
-		{
-			if(!m_terminated) msleep(333);
-		}
+		if(m_semaphore.tryAcquire(1, 2000)) break;
 	}
 }
 
