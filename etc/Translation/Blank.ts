@@ -2633,114 +2633,114 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="147"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="152"/>
         <source>Show details for selected job</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="148"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="153"/>
         <source>Browse Output File Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="166"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="171"/>
         <source>Encoding Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="166"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="171"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="327"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="332"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="370"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="375"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="384"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="389"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="399"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="404"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="427"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="432"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="437"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="442"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="437"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="442"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="438"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="443"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="438"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="443"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="450"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="456"/>
         <source>LameXP - Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="456"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="461"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="462"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="466"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="467"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="462"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="467"/>
         <source>LameXP - Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="859"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="864"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="859"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="864"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="929"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="934"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="933"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="934"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="938"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="939"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
