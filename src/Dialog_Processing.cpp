@@ -70,11 +70,8 @@
 //Maximum number of parallel instances
 #define MAX_INSTANCES 16U
 
-//Helper function
-static inline double log5(double X)
-{
-	return log(X) / log(5.0);
-}
+//Function to calculate the number of instances
+static int cores2instances(int cores);
 
 ////////////////////////////////////////////////////////////
 
@@ -368,8 +365,7 @@ void ProcessingDialog::initEncoding(void)
 	if(maximumInstances < 1)
 	{
 		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-		double cpu_count = static_cast<double>(qBound(1, cpuFeatures.count, 64));
-		maximumInstances = qRound(cpu_count / qMax(log5(cpu_count), 1.0));
+		maximumInstances = cores2instances(qBound(1, cpuFeatures.count, 64));
 	}
 
 	maximumInstances = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
@@ -982,4 +978,50 @@ bool ProcessingDialog::shutdownComputer(void)
 	
 	progressDialog.close();
 	return true;
+}
+
+////////////////////////////////////////////////////////////
+// HELPER FUNCTIONS
+////////////////////////////////////////////////////////////
+
+static int cores2instances(int cores)
+{
+	//This function was approximated as a "cubic spline" with sampling points at:
+	//(1,1);(2,2);(4,4);(8,6);(16,8);(32,10);(64,12)
+
+	double x = static_cast<double>(cores), y = 1.0;
+
+	if(x >= 1.0)
+	{
+		if(x < 2.0)
+		{
+			y = ((83.0/5760.0) * pow(x,3.0)) - ((83.0/1920.0) * pow(x,2.0)) + ((2963.0/2880.0) * x);
+		}
+		else if((x >= 2.0) && (x < 4.0))
+		{
+			y = - ((83.0/2880.0) * pow(x,3.0)) + ((83.0/384.0) * pow(x,2.0)) + ((1469.0/2880.0) * x) + (83.0/240.0);
+		}
+		else if((x >= 4.0) && (x < 8.0))
+		{
+			y = ((469.0/46080.0) * pow(x,3.0)) - ((967.0/3840.0) * pow(x,2.0)) + ((343.0/144.0) * x) - (43.0/20.0);
+		}
+		else if((x >= 8.0) && (x < 16.0))
+		{
+			y = ((1.0/18432.0) * pow(x,3.0)) - ((17.0/1920.0) * pow(x,2.0)) + ((631.0/1440.0) * x) + (91.0/30.0);
+		}
+		else if((x >= 16.0) && (x < 32.0))
+		{
+			y = ((41.0/368640.0) * pow(x,3.0)) - ((89.0/7680.0) * pow(x,2.0)) + ((347.0/720.0) * x) + (14.0/5.0);
+		}
+		else if((x >= 32.0) && (x < 64.0))
+		{
+			y = ((7.0/737280.0) * pow(x,3.0)) - ((7.0/3840.0) * pow(x,2.0)) + ((61.0/360.0) * x) + (92.0/15.0);
+		}
+		else //if(x >= 64.0)
+		{
+			y = 12.0;
+		}
+	}
+
+	return qRound(y);
 }
