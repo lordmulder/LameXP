@@ -63,11 +63,18 @@
 #include <QProgressDialog>
 
 #include <MMSystem.h>
+#include <math.h>
 
 ////////////////////////////////////////////////////////////
 
 //Maximum number of parallel instances
 #define MAX_INSTANCES 16U
+
+//Helper function
+static inline double log5(double X)
+{
+	return log(X) / log(5.0);
+}
 
 ////////////////////////////////////////////////////////////
 
@@ -361,16 +368,17 @@ void ProcessingDialog::initEncoding(void)
 	if(maximumInstances < 1)
 	{
 		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
-		maximumInstances = (cpuFeatures.count > 4) ? ((cpuFeatures.count / 2) + 2) : cpuFeatures.count;
+		double cpu_count = static_cast<double>(qBound(1, cpuFeatures.count, 64));
+		maximumInstances = qRound(cpu_count / qMax(log5(cpu_count), 1.0));
 	}
 
-	unsigned int parallelThreadCount = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
-	if(parallelThreadCount > 1)
+	maximumInstances = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
+	if(maximumInstances > 1)
 	{
-		m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(parallelThreadCount)));
+		m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(maximumInstances)));
 	}
 
-	for(unsigned int i = 0; i < parallelThreadCount; i++)
+	for(unsigned int i = 0; i < maximumInstances; i++)
 	{
 		startNextJob();
 	}
