@@ -29,6 +29,7 @@
 #include <tchar.h>
 
 //Windows includes
+#define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
