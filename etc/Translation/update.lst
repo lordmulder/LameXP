@@ -36,6 +36,7 @@
 ..\..\src\Dialog_WorkingBanner.cpp 
 ..\..\src\Encoder_AAC.cpp 
 ..\..\src\Encoder_AAC_FHG.cpp 
+..\..\src\Encoder_AAC_QAAC.cpp 
 ..\..\src\Encoder_Abstract.cpp 
 ..\..\src\Encoder_AC3.cpp 
 ..\..\src\Encoder_FLAC.cpp 
@@ -103,6 +104,7 @@
 ..\..\src\Dialog_WorkingBanner.h 
 ..\..\src\Encoder_AAC.h 
 ..\..\src\Encoder_AAC_FHG.h 
+..\..\src\Encoder_AAC_QAAC.h 
 ..\..\src\Encoder_Abstract.h 
 ..\..\src\Encoder_AC3.h 
 ..\..\src\Encoder_FLAC.h 

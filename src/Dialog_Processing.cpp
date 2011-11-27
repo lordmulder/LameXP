@@ -61,6 +61,7 @@
 #include <QSystemTrayIcon>
 #include <QProcess>
 #include <QProgressDialog>
+#include <QTime>
 
 #include <MMSystem.h>
 #include <math.h>
@@ -73,6 +74,7 @@
 
 //Function to calculate the number of instances
 static int cores2instances(int cores);
+static QString time2text(const double timeVal);
 
 ////////////////////////////////////////////////////////////
 
@@ -180,6 +182,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_succeededJobs.clear();
 	m_failedJobs.clear();
 	m_userAborted = false;
+	m_timerStart = 0I64;
 }
 
 ////////////////////////////////////////////////////////////
@@ -345,7 +348,7 @@ void ProcessingDialog::initEncoding(void)
 	if(!m_diskObserver)
 	{
 		m_diskObserver = new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2());
-		connect(m_diskObserver, SIGNAL(messageLogged(QString,bool)), m_progressModel, SLOT(addSystemMessage(QString,bool)), Qt::QueuedConnection);
+		connect(m_diskObserver, SIGNAL(messageLogged(QString,int)), m_progressModel, SLOT(addSystemMessage(QString,int)), Qt::QueuedConnection);
 		connect(m_diskObserver, SIGNAL(freeSpaceChanged(quint64)), this, SLOT(diskUsageHasChanged(quint64)), Qt::QueuedConnection);
 		m_diskObserver->start();
 	}
@@ -378,6 +381,12 @@ void ProcessingDialog::initEncoding(void)
 	for(unsigned int i = 0; i < maximumInstances; i++)
 	{
 		startNextJob();
+	}
+
+	LARGE_INTEGER counter;
+	if(QueryPerformanceCounter(&counter))
+	{
+		m_timerStart = counter.QuadPart;
 	}
 }
 
@@ -447,6 +456,16 @@ void ProcessingDialog::doneEncoding(void)
 	}
 	else
 	{
+		LARGE_INTEGER counter, frequency;
+		if(QueryPerformanceCounter(&counter) && QueryPerformanceFrequency(&frequency))
+		{
+			if((m_timerStart > 0I64) && (frequency.QuadPart > 0I64) && (m_timerStart < counter.QuadPart))
+			{
+				double timeElapsed = static_cast<double>(counter.QuadPart - m_timerStart) / static_cast<double>(frequency.QuadPart);
+				m_progressModel->addSystemMessage(tr("Process finished after %1.").arg(time2text(timeElapsed)), ProgressModel::SysMsg_Performance);
+			}
+		}
+
 		if(m_failedJobs.count() > 0)
 		{
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFBABA"));
@@ -979,6 +998,33 @@ bool ProcessingDialog::shutdownComputer(void)
 	
 	progressDialog.close();
 	return true;
+}
+
+QString ProcessingDialog::time2text(const double timeVal) const
+{
+	double intPart = 0;
+	double frcPart = modf(timeVal, &intPart);
+	int x = 0, y = 0; QString a, b;
+
+	QTime time = QTime().addSecs(qRound(intPart)).addMSecs(qRound(frcPart * 1000.0));
+
+	if(time.hour() > 0)
+	{
+		x = time.hour();   a = tr("hour(s)");
+		y = time.minute(); b = tr("minute(s)");
+	}
+	else if(time.minute() > 0)
+	{
+		x = time.minute(); a = tr("minute(s)");
+		y = time.second(); b = tr("second(s)");
+	}
+	else
+	{
+		x = time.second(); a = tr("second(s)");
+		y = time.msec();   b = tr("millisecond(s)");
+	}
+
+	return QString("%1 %2, %3 %4").arg(QString::number(x), a, QString::number(y), b);
 }
 
 ////////////////////////////////////////////////////////////

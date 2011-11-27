@@ -2125,6 +2125,26 @@
         <source>Free Disk Space (Temp Folder)</source>
         <translation>Freier Festplattenspeicher (Temp Ordner)</translation>
     </message>
+    <message>
+        <source>Process finished after %1.</source>
+        <translation>Vorgang abgeschlossen nach %1.</translation>
+    </message>
+    <message>
+        <source>hour(s)</source>
+        <translation>Stunde(n)</translation>
+    </message>
+    <message>
+        <source>minute(s)</source>
+        <translation>Minute(n)</translation>
+    </message>
+    <message>
+        <source>second(s)</source>
+        <translation>Sekunde(n)</translation>
+    </message>
+    <message>
+        <source>millisecond(s)</source>
+        <translation>Millisekunde(n)</translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

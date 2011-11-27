@@ -82,6 +82,7 @@ private:
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);
+	QString time2text(const double timeVal) const;
 	
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;
@@ -102,4 +103,5 @@ private:
 	CPUObserverThread *m_cpuObserver;
 	RAMObserverThread *m_ramObserver;
 	DiskObserverThread *m_diskObserver;
+	qint64 m_timerStart;
 };

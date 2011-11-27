@@ -41,7 +41,7 @@ protected:
 	static QString makeRootDir(const QString &baseDir);
 
 signals:
-	void messageLogged(const QString &text, bool isWarning);
+	void messageLogged(const QString &text, int type);
 	void freeSpaceChanged(const quint64);
 
 private:

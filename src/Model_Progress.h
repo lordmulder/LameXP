@@ -45,7 +45,14 @@ public:
 		JobComplete = 2,
 		JobFailed = 3,
 		JobSystem = 4,
-		JobWarning = 5
+		JobWarning = 5,
+		JobPerformance = 6
+	};
+	enum SysMsgType
+	{
+		SysMsg_Info = 0,
+		SysMsg_Performance = 1,
+		SysMsg_Warning = 2
 	};
 
 	//Model functions
@@ -63,7 +70,7 @@ public slots:
 	void addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus = QString("Initializing..."), int jobInitialState = JobRunning);
 	void updateJob(const QUuid &jobId, const QString &newStatus, int newState);
 	void appendToLog(const QUuid &jobId, const QString &line);
-	void addSystemMessage(const QString &text, bool isWarning = false);
+	void addSystemMessage(const QString &text, int type = SysMsg_Info);
 
 private:
 	QList<QUuid> m_jobList;
@@ -79,4 +86,5 @@ private:
 	const QIcon m_iconFailed;
 	const QIcon m_iconSystem;
 	const QIcon m_iconWarning;
+	const QIcon m_iconPerformance;
 };

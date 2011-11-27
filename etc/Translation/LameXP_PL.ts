@@ -606,7 +606,7 @@
 <context>
     <name>DiskObserverThread</name>
     <message>
-        <location filename="../../src/Thread_DiskObserver.cpp" line="82"/>
+        <location filename="../../src/Thread_DiskObserver.cpp" line="83"/>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
         <translation type="unfinished">Mało miejsca na dysku &apos;%1&apos; (tylko %2 MB dostępnych), mogą wystąpić problemy!</translation>
     </message>
@@ -2633,127 +2633,154 @@
         <translation type="unfinished">Powrót</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="152"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="154"/>
         <source>Show details for selected job</source>
         <translation type="unfinished">Pokaż szczegóły wybranego zadania</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="153"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="155"/>
         <source>Browse Output File Location</source>
         <translation type="unfinished">Wybierz lokalizację dla plików wyjściowych</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="171"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="173"/>
         <source>Encoding Files</source>
         <translation type="unfinished">Kompresowanie plików</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="171"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="173"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished">Twoje pliki są właśnie kompresowane, prosze być cierpliwy...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="332"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="335"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished">Kompresowanie plików, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="375"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="378"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished">Wielowątkowosć włączona: Równolegle wykonywanych jest %1 kodowań!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="389"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="398"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">Przerwano! Czekanie na wyłączenie procesu...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="404"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="413"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
         <translation type="unfinished">Kompresja: Prosze czekać, jak dotąd wykonano %1 z %2 plików...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="432"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="441"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">Tworzenie pliku playlisty, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="442"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika po wykonaniu %1 plików!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="442"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">Proces został przedwcześnie zakończony przez użytkownika!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="443"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="452"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished">LameXP - Przerwano</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="443"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="452"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="465"/>
+        <source>Process finished after %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="474"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">Błąd: %1 z %2 plików nie zostało skompresowanych. Kliknij dwukrotnie na plik aby zobaczyć szczegóły!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="456"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="475"/>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - Błąd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="456"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="475"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished">Przynajmniej jeden plik nie został skompresowany!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="466"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="467"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="485"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished">Kompresja wszystkich plików zakończona powodzeniem.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="467"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
         <source>LameXP - Done</source>
         <translation type="unfinished">LameXP - Zrobione</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="864"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="883"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished">Tworzenie playlisty zakończone niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="864"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="883"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished">Playlista nie mogła zostać utworzona:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="934"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="953"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished">Ostrzeżenie: Komputer zostanie zamknięty za %1 sekund/y...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="938"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="939"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="957"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="958"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished">Anuluj wyłączenie komputera</translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="1013"/>
+        <source>hour(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="1014"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1018"/>
+        <source>minute(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="1019"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1023"/>
+        <source>second(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="1024"/>
+        <source>millisecond(s)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ProgressModel</name>
     <message>
-        <location filename="../../src/Model_Progress.cpp" line="114"/>
+        <location filename="../../src/Model_Progress.cpp" line="118"/>
         <source>Job</source>
         <translation type="unfinished">Zadanie</translation>
     </message>
     <message>
-        <location filename="../../src/Model_Progress.cpp" line="117"/>
+        <location filename="../../src/Model_Progress.cpp" line="121"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>

@@ -2124,6 +2124,26 @@
         <source>Free Disk Space (Temp Folder)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Process finished after %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hour(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minute(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>second(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>millisecond(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>
