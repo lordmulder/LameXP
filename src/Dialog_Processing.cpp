@@ -74,7 +74,6 @@
 
 //Function to calculate the number of instances
 static int cores2instances(int cores);
-static QString time2text(const double timeVal);
 
 ////////////////////////////////////////////////////////////
 
@@ -1053,7 +1052,7 @@ static int cores2instances(int cores)
 	{
 		if((x >= LUT[i][0]) && (x < LUT[i+1][0]))
 		{
-			y = (LUT[i][1] * pow(x, 3.0)) + (LUT[i][2] * pow(x, 2.0)) + (LUT[i][3] * x) + LUT[i][4];
+			y = (((((LUT[i][1] * x) + LUT[i][2]) * x) + LUT[i][3]) * x) + LUT[i][4];
 			break;
 		}
 	}
