@@ -485,16 +485,23 @@ And on systems with 64 cores, the maximum number of parallel instances is 16. 16
 <a href="http://img685.imageshack.us/img685/9453/cpucoresmappingnew.png" target="_blank"><img src="http://img685.imageshack.us/img685/9453/cpucoresmappingnew.th.png" border="0" alt="thumb"></a><br>
 <br>
 You may wonder why LameXP doesn't always create one instance for each CPU core. In theory, the more instances<br>
-we create, the more CPU cores can be utilized. In reality, however, there are some "shared" resources on the<br>
-computer. And, the more instances we run in parallel, the more processes will be competing for these shared<br>
-resources! More specifically, the amount of main memory (RAM) is limited. Creating a huge number of instances<br>
-in parallel can easily use up all RAM, which will cause the operating system to make heavy use of the page<br>
-file. This can result in HDD thrashing and may significantly hurt the overall performance! But even if there<br>
-is enough RAM available on the system, each encoder or decoder instance needs to access the HDD, e.g. for<br>
-reading the input file and for writing the output file. Thus too many instances will cause an I/O bottleneck!<br>
-If, however, you think that LameXP's choice of the number of parallel instances is too conservative, you may<br>
-overwrite the number of parallel instances on the "Advanced Options" tab. The upper limit is 16 for now.<br>
+we run in parallel, the more CPU cores can be utilized - until all CPU cores are busy and the overall CPU<br>
+usage approaches 100%. In reality, however, there are some "shared" resources on each computer. And, the more<br>
+instances we run in parallel, the more processes will be competing for these shared resources! Specifically,<br>
+the amount of main memory (RAM) is limited. Creating a huge number of instances in parallel can easily use up<br>
+all RAM, which will then cause the operating system to make heavy use of the page file. This can result in<br>
+HDD thrashing and hence may significantly hurt the overall performance! But even in case there is enough RAM<br>
+available on the system, each encoder or decoder instance needs to access the HDD quite frequently, e.g. for<br>
+reading from the input file and for writing to the output file. Thus running too many instances will generate<br>
+more I/O operations than the HDD can handle, which will result in an I/O bottleneck. In this situation the<br>
+processes will spend more and more time waiting for I/O operations to finish - rather then doing useful work.<br>
 <br>
+In other words: There will always be some point at which creating even more instances will actually slow down<br>
+the overall process! On systems with many CPU cores, this point might be reached BEFORE all cores are busy.<br>
+Even on the Quadcore computer, which is used to develop/test LameXP and which runs "only" four instances in<br>
+parallel, we sporadically notice significant drops of the CPU usage, obviously caused by HDD overstressing.<br>
+If, however, you think that LameXP's choice of the number of parallel instances is too conservative, you may<br>
+overwrite the number of parallel instances on the "Advanced Options" tab - the upper limit is 16 for now.<br>
 Finally, note that LameXP only controls the number of instances that will run in parallel, but it does NOT<br>
 control how many threads an individual instance will create! Some encoders use "built-in" multi-threading and<br>
 thus a single encoder instance may create several threads - LameXP has no control over that.<br><br>
