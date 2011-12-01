@@ -61,6 +61,7 @@ private:
 	bool getFile(const QString &url, const QString &outFile, unsigned int maxRedir = 5);
 	bool checkSignature(const QString &file, const QString &signature);
 	bool parseVersionInfo(const QString &file, UpdateInfo *updateInfo);
+	void testKnownWebSites(void);
 
 	UpdateInfo *m_updateInfo;
 	QStringList *m_logFile;

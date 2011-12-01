@@ -2633,141 +2633,141 @@
         <translation type="unfinished">Powrót</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="154"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="153"/>
         <source>Show details for selected job</source>
         <translation type="unfinished">Pokaż szczegóły wybranego zadania</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="155"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="154"/>
         <source>Browse Output File Location</source>
         <translation type="unfinished">Wybierz lokalizację dla plików wyjściowych</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="173"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="172"/>
         <source>Encoding Files</source>
         <translation type="unfinished">Kompresowanie plików</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="173"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="172"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished">Twoje pliki są właśnie kompresowane, prosze być cierpliwy...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="335"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="334"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished">Kompresowanie plików, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="378"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="377"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished">Wielowątkowosć włączona: Równolegle wykonywanych jest %1 kodowań!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="398"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="397"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">Przerwano! Czekanie na wyłączenie procesu...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="413"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="412"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
         <translation type="unfinished">Kompresja: Prosze czekać, jak dotąd wykonano %1 z %2 plików...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="441"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="440"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">Tworzenie pliku playlisty, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="450"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika po wykonaniu %1 plików!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="450"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">Proces został przedwcześnie zakończony przez użytkownika!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="452"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished">LameXP - Przerwano</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="452"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="465"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="464"/>
         <source>Process finished after %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="474"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="473"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">Błąd: %1 z %2 plików nie zostało skompresowanych. Kliknij dwukrotnie na plik aby zobaczyć szczegóły!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="475"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="474"/>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - Błąd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="475"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="474"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished">Przynajmniej jeden plik nie został skompresowany!</translation>
     </message>
     <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="484"/>
         <location filename="../../src/Dialog_Processing.cpp" line="485"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished">Kompresja wszystkich plików zakończona powodzeniem.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="485"/>
         <source>LameXP - Done</source>
         <translation type="unfinished">LameXP - Zrobione</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="883"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="882"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished">Tworzenie playlisty zakończone niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="883"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="882"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished">Playlista nie mogła zostać utworzona:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="953"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="952"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished">Ostrzeżenie: Komputer zostanie zamknięty za %1 sekund/y...</translation>
     </message>
     <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="956"/>
         <location filename="../../src/Dialog_Processing.cpp" line="957"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="958"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished">Anuluj wyłączenie komputera</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1013"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1012"/>
         <source>hour(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1014"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1018"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1013"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1017"/>
         <source>minute(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1019"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1023"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1018"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1022"/>
         <source>second(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1024"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1023"/>
         <source>millisecond(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2867,103 +2867,107 @@
         <translation type="unfinished">Zamknij</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="218"/>
-        <location filename="../../src/Dialog_Update.cpp" line="463"/>
+        <location filename="../../src/Dialog_Update.cpp" line="247"/>
+        <location filename="../../src/Dialog_Update.cpp" line="500"/>
         <source>Build</source>
         <translation type="unfinished">Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="219"/>
+        <location filename="../../src/Dialog_Update.cpp" line="248"/>
         <source>Unknown</source>
         <translation type="unfinished">Nieznany</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="307"/>
+        <location filename="../../src/Dialog_Update.cpp" line="344"/>
         <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished">Testowanie połączenia internetowego, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="327"/>
+        <location filename="../../src/Dialog_Update.cpp" line="364"/>
+        <location filename="../../src/Dialog_Update.cpp" line="928"/>
         <source>It appears that the computer currently is offline!</source>
         <translation type="unfinished">LameXP wykrył brak dostępu do internetu!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="330"/>
+        <location filename="../../src/Dialog_Update.cpp" line="367"/>
+        <location filename="../../src/Dialog_Update.cpp" line="931"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished">Upewnij się że komputer jest podłączony do internetu i spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="380"/>
+        <location filename="../../src/Dialog_Update.cpp" line="417"/>
+        <location filename="../../src/Dialog_Update.cpp" line="978"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished">Test połączenia internetowego zakończony niepowodzeniem!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="383"/>
+        <location filename="../../src/Dialog_Update.cpp" line="420"/>
+        <location filename="../../src/Dialog_Update.cpp" line="981"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation type="unfinished">Upewnij się że połączenie internetowe działa prawidłowo i spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="397"/>
+        <location filename="../../src/Dialog_Update.cpp" line="434"/>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished">Sprawdzanie aktualizacji online, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="448"/>
+        <location filename="../../src/Dialog_Update.cpp" line="485"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished">Pobieranie informacji z serwera zakończone niepowodzeniem!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="453"/>
+        <location filename="../../src/Dialog_Update.cpp" line="490"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished">Serwer aktualizacji wydaje się nie odpowiadać w tej chwili. Prosze spróbować później.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="465"/>
+        <location filename="../../src/Dialog_Update.cpp" line="502"/>
         <source>More information available at:</source>
         <translation type="unfinished">Więcej informacji tutaj:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="471"/>
+        <location filename="../../src/Dialog_Update.cpp" line="508"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished">Dostępna nowa wersja LameXP!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="473"/>
+        <location filename="../../src/Dialog_Update.cpp" line="510"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation type="unfinished">Jest wysoce zalecane aby zainstalować tę aktualizację jak najszybciej.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="482"/>
+        <location filename="../../src/Dialog_Update.cpp" line="519"/>
         <source>No new updates available at this time.</source>
         <translation type="unfinished">Nie ma nowych aktualizacji w tej chwili.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="484"/>
+        <location filename="../../src/Dialog_Update.cpp" line="521"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation type="unfinished">Posiadasz najnowszą wersję LameXP. Sprawdzaj aktualizacje regularnie!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="493"/>
+        <location filename="../../src/Dialog_Update.cpp" line="530"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished">Posiadasz nowszą wersję LameXP niż ostatnie wydanie.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="495"/>
+        <location filename="../../src/Dialog_Update.cpp" line="532"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished">To wskazuje na to, że posiadasz wersję alfa LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="778"/>
+        <location filename="../../src/Dialog_Update.cpp" line="815"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished">Pobieranie aktualizacji w toku, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="817"/>
+        <location filename="../../src/Dialog_Update.cpp" line="854"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">Aktualizacja gotowa do instalacji. Teraz program zostanie zamknięty...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="825"/>
+        <location filename="../../src/Dialog_Update.cpp" line="862"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">Aktualizacja zakończona niepowodzeniem. Prosze spróbować ponownie lub zainstalować ręcznie!</translation>
     </message>
