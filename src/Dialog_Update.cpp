@@ -142,7 +142,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
 	NULL
 };
 
-static const int MIN_CONNSCORE = 3;
+static const int MIN_CONNSCORE = 4;
 static const int VERSION_INFO_EXPIRES_MONTHS = 6;
 static char *USER_AGENT_STR = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101101 IceCat/3.6.12 (like Firefox/3.6.12)";
 

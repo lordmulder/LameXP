@@ -37,6 +37,7 @@ a:visited { color: #0000EE; }
 <li><a href="#900a2a6c">Is there a way to hide/show the LameXP console ("DOS Box") window?</a>
 <li><a href="#9b0a5c32">Why does application 'xyz' not open the Wave files created by LameXP?</a>
 <li><a href="#89cbd3d0">Why does LameXP run (only) N instances/threads in parallel on my computer?</a>
+<li><a href="#454e51dd">Why does LameXP try to connect to the web-server at 'xyz.com' secretly?</a>
 <li><a href="#12d077d5">How can I force LameXP to create ID3 version 2 (ID3v2) tags?</a>
 <li><a href="#d83ab3c6">Why does LameXP use LAME v3.99 rather than v3.98?</a><br>
 <li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
@@ -505,6 +506,25 @@ overwrite the number of parallel instances on the "Advanced Options" tab - the u
 Finally, note that LameXP only controls the number of instances that will run in parallel, but it does NOT<br>
 control how many threads an individual instance will create! Some encoders use "built-in" multi-threading and<br>
 thus a single encoder instance may create several threads - LameXP has no control over that.<br><br>
+
+<br><br>
+
+<a name="454e51dd"></a><b>Why does LameXP try to connect to the web-server at 'xyz.com' secretly?</b><br>
+<br>
+LameXP does NOT connect to any web-server secretly! Of course the 'Auto Update' feature of LameXP unavoidably<br>
+has to connect to one of our update servers. However in no event LameXP will search for updates without your<br>
+agreement. Also LameXP will NOT send any personal information to the update server. It won't even send your<br>
+program version to the server. Instead the latest version number will be downloaded from the server first and<br>
+will then be compared to your current version number on the local computer. Moreover all information obtained<br>
+from the update server are protected with a digital signature (GnuPG) in order to prevent spoofing attacks.<br>
+<br>
+Note: As LameXP is a non-profit project, we cannot afford a huge server infrastructure. Therefore the update<br>
+server may be overstrained or unavailable once in a while. As we need to be able to distinguish the case in<br>
+which our server is failing from the case in which your local internet connection has a problem, LameXP will<br>
+run a short connectivity test on your local system first. For this purpose LameXP contains a list of 64 known<br>
+hosts, taken (mostly) from the well-known Alexa 'top 500 sites on the web' listing. LameXP will assume that<br>
+your internet connection is working properly if a certain minimum number (currently four) of the known hosts<br>
+is reachable. That's also the reason why you may notice LameXP is trying to connect to a "random" web-site.<br><br>
 
 <br><br>
 
