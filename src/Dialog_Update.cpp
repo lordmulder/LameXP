@@ -61,13 +61,13 @@ static const char *update_mirrors_prim[] =
 	"http://mulder.bplaced.net/",
 	"http://lamexp.sourceforge.net/",
 	"http://free.pages.at/borschdfresser/",
+	"http://www.tricksoft.de/",
 	NULL
 };
 
 static const char *update_mirrors_back[] =
 {
 	"http://mplayer.savedonthe.net/",
-	"http://www.tricksoft.de/",
 	"http://mulder.dummwiedeutsch.de/",
 	"http://mplayer.somestuff.org/",
 	NULL
@@ -144,7 +144,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
 
 static const int MIN_CONNSCORE = 8;
 static const int VERSION_INFO_EXPIRES_MONTHS = 6;
-static char *USER_AGENT_STR = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101101 IceCat/3.6.12 (like Firefox/3.6.12)";
+static char *USER_AGENT_STR = "Mozilla/5.0 (X11; Linux i686; rv:7.0.1) Gecko/20111106 IceCat/7.0.1";
 
 static BOOL getInternetConnectedState(void)
 {
@@ -258,8 +258,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	hintIcon->hide();
 	frameAnimation->hide();
 	
-	int counter = 2;
-	for(int i = 0; known_hosts[i]; i++) counter++;
+	int counter = MIN_CONNSCORE + 2;
 	for(int i = 0; update_mirrors_prim[i]; i++) counter++;
 	for(int i = 0; update_mirrors_back[i]; i++) counter++;
 
@@ -376,6 +375,9 @@ void UpdateDialog::checkForUpdates(void)
 		return;
 	}
 	
+	progressBar->setValue(1);
+	QApplication::processEvents();
+
 	// ----- Test Known Hosts Connectivity ----- //
 
 	QStringList hostList;
@@ -387,7 +389,6 @@ void UpdateDialog::checkForUpdates(void)
 	qsrand(time(NULL));
 	while(!hostList.isEmpty())
 	{
-		progressBar->setValue(progressBar->value() + 1);
 		QString currentHost = hostList.takeAt(qrand() % hostList.count());
 		if(connectionScore < MIN_CONNSCORE)
 		{
@@ -397,17 +398,18 @@ void UpdateDialog::checkForUpdates(void)
 			if(getFile(currentHost, outFile, 0, &httpOk))
 			{
 				connectionScore++;
+				progressBar->setValue(connectionScore + 1);
+				QApplication::processEvents();
+				Sleep(125);
 			}
 			if(httpOk)
 			{
 				connectionScore++;
+				progressBar->setValue(connectionScore + 1);
+				QApplication::processEvents();
+				Sleep(125);
 			}
 			QFile::remove(outFile);
-		}
-		else
-		{
-			QApplication::processEvents();
-			Sleep(8);
 		}
 	}
 
@@ -446,7 +448,7 @@ void UpdateDialog::checkForUpdates(void)
 	}
 
 	qsrand(time(NULL));
-	for(int i = 0; i < 64; i++)
+	for(int i = 0; i < 4375; i++)
 	{
 		mirrorList.swap(i % mirrorList.count(), qrand() % mirrorList.count());
 	}
@@ -472,7 +474,7 @@ void UpdateDialog::checkForUpdates(void)
 		else
 		{
 			QApplication::processEvents();
-			Sleep(15);
+			Sleep(125);
 		}
 	}
 	
@@ -624,6 +626,8 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile, unsigned 
 	timer.setInterval(25000);
 	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 
+	const QRegExp httpResponseOK("200 OK$");
+	
 	process.start(m_binaryWGet, args);
 	
 	if(!process.waitForStarted())
@@ -636,22 +640,24 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile, unsigned 
 	while(process.state() == QProcess::Running)
 	{
 		loop.exec();
-		if(!timer.isActive())
+		bool bTimeOut = (!timer.isActive());
+		while(process.canReadLine())
+		{
+			QString line = QString::fromLatin1(process.readLine()).simplified();
+			if(line.contains(httpResponseOK))
+			{
+				line.append(" [OK]");
+				if(httpOk) *httpOk = true;
+			}
+			m_logFile->append(line);
+		}
+		if(bTimeOut)
 		{
 			qWarning("WGet process timed out <-- killing!");
 			process.kill();
 			process.waitForFinished();
-			m_logFile->append("TIMEOUT !!!");
+			m_logFile->append("!!! TIMEOUT !!!");
 			return false;
-		}
-		while(process.canReadLine())
-		{
-			QString line = QString::fromLatin1(process.readLine()).simplified();
-			m_logFile->append(line);
-			if(line.contains("200 OK", Qt::CaseSensitive))
-			{
-				if(httpOk) *httpOk = true;
-			}
 		}
 	}
 	
@@ -959,6 +965,8 @@ void UpdateDialog::testKnownWebSites(void)
 		hostList << QString::fromLatin1(known_hosts[i]);
 	}
 
+	qDebug("[Known Hosts]");
+
 	int hostCount = hostList.count();
 	while(!hostList.isEmpty())
 	{
@@ -976,12 +984,12 @@ void UpdateDialog::testKnownWebSites(void)
 		{
 			if(httpOk)
 			{
-				qWarning("Connectivity test was slow on the following site:\n%s", currentHost.toLatin1().constData());
+				qWarning("\nConnectivity test was SLOW on the following site:\n%s\n", currentHost.toLatin1().constData());
 				connectionScore++;
 			}
 			else
 			{
-				qWarning("Connectivity test failed on the following site:\n%s", currentHost.toLatin1().constData());
+				qWarning("\nConnectivity test FAILED on the following site:\n%s\n", currentHost.toLatin1().constData());
 			}
 		}
 		QFile::remove(outFile);
