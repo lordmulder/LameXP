@@ -142,7 +142,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
 	NULL
 };
 
-static const int MIN_CONNSCORE = 4;
+static const int MIN_CONNSCORE = 8;
 static const int VERSION_INFO_EXPIRES_MONTHS = 6;
 static char *USER_AGENT_STR = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101101 IceCat/3.6.12 (like Firefox/3.6.12)";
 
@@ -393,7 +393,12 @@ void UpdateDialog::checkForUpdates(void)
 		{
 			m_logFile->append(QStringList() << "" << "Testing host:" << currentHost << "");
 			QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
-			if(getFile(currentHost, outFile, 0))
+			bool httpOk = false;
+			if(getFile(currentHost, outFile, 0, &httpOk))
+			{
+				connectionScore++;
+			}
+			if(httpOk)
 			{
 				connectionScore++;
 			}
@@ -584,10 +589,11 @@ bool UpdateDialog::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)
 	return success;
 }
 
-bool UpdateDialog::getFile(const QString &url, const QString &outFile, unsigned int maxRedir)
+bool UpdateDialog::getFile(const QString &url, const QString &outFile, unsigned int maxRedir, bool *httpOk)
 {
 	QFileInfo output(outFile);
 	output.setCaching(false);
+	if(httpOk) *httpOk = false;
 
 	if(output.exists())
 	{
@@ -640,7 +646,12 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile, unsigned 
 		}
 		while(process.canReadLine())
 		{
-			m_logFile->append(QString::fromLatin1(process.readLine()).simplified());
+			QString line = QString::fromLatin1(process.readLine()).simplified();
+			m_logFile->append(line);
+			if(line.contains("200 OK", Qt::CaseSensitive))
+			{
+				if(httpOk) *httpOk = true;
+			}
 		}
 	}
 	
@@ -948,7 +959,7 @@ void UpdateDialog::testKnownWebSites(void)
 		hostList << QString::fromLatin1(known_hosts[i]);
 	}
 
-	int maxScore = hostList.count();
+	int hostCount = hostList.count();
 	while(!hostList.isEmpty())
 	{
 		progressBar->setValue(progressBar->value() + 1);
@@ -956,18 +967,27 @@ void UpdateDialog::testKnownWebSites(void)
 		qDebug("Testing: %s", currentHost.toLatin1().constData());
 		m_logFile->append(QStringList() << "" << "Testing host:" << currentHost << "");
 		QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
-		if(getFile(currentHost, outFile, 0))
+		bool httpOk = false;
+		if(getFile(currentHost, outFile, 0, &httpOk))
 		{
 			connectionScore++;
 		}
 		else
 		{
-			qWarning("Connectivity test failed on the following site:\n%s", currentHost.toLatin1().constData());
+			if(httpOk)
+			{
+				qWarning("Connectivity test was slow on the following site:\n%s", currentHost.toLatin1().constData());
+				connectionScore++;
+			}
+			else
+			{
+				qWarning("Connectivity test failed on the following site:\n%s", currentHost.toLatin1().constData());
+			}
 		}
 		QFile::remove(outFile);
 	}
 
-	if(connectionScore < maxScore)
+	if(connectionScore < hostCount)
 	{
 		if(!retryButton->isVisible()) retryButton->show();
 		if(!logButton->isVisible()) logButton->show();
