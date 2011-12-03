@@ -2868,7 +2868,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="247"/>
-        <location filename="../../src/Dialog_Update.cpp" line="500"/>
+        <location filename="../../src/Dialog_Update.cpp" line="507"/>
         <source>Build</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2878,96 +2878,96 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="344"/>
+        <location filename="../../src/Dialog_Update.cpp" line="343"/>
         <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="364"/>
-        <location filename="../../src/Dialog_Update.cpp" line="928"/>
+        <location filename="../../src/Dialog_Update.cpp" line="363"/>
+        <location filename="../../src/Dialog_Update.cpp" line="945"/>
         <source>It appears that the computer currently is offline!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="367"/>
-        <location filename="../../src/Dialog_Update.cpp" line="931"/>
+        <location filename="../../src/Dialog_Update.cpp" line="366"/>
+        <location filename="../../src/Dialog_Update.cpp" line="948"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="417"/>
-        <location filename="../../src/Dialog_Update.cpp" line="978"/>
+        <location filename="../../src/Dialog_Update.cpp" line="424"/>
+        <location filename="../../src/Dialog_Update.cpp" line="1006"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="420"/>
-        <location filename="../../src/Dialog_Update.cpp" line="981"/>
+        <location filename="../../src/Dialog_Update.cpp" line="427"/>
+        <location filename="../../src/Dialog_Update.cpp" line="1009"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="434"/>
+        <location filename="../../src/Dialog_Update.cpp" line="441"/>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="485"/>
+        <location filename="../../src/Dialog_Update.cpp" line="492"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="490"/>
+        <location filename="../../src/Dialog_Update.cpp" line="497"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="502"/>
+        <location filename="../../src/Dialog_Update.cpp" line="509"/>
         <source>More information available at:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="508"/>
+        <location filename="../../src/Dialog_Update.cpp" line="515"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="510"/>
+        <location filename="../../src/Dialog_Update.cpp" line="517"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="519"/>
+        <location filename="../../src/Dialog_Update.cpp" line="526"/>
         <source>No new updates available at this time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="521"/>
+        <location filename="../../src/Dialog_Update.cpp" line="528"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="530"/>
+        <location filename="../../src/Dialog_Update.cpp" line="537"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="532"/>
+        <location filename="../../src/Dialog_Update.cpp" line="539"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="815"/>
+        <location filename="../../src/Dialog_Update.cpp" line="832"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="854"/>
+        <location filename="../../src/Dialog_Update.cpp" line="871"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="862"/>
+        <location filename="../../src/Dialog_Update.cpp" line="879"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished"></translation>
     </message>

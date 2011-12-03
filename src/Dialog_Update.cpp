@@ -135,7 +135,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
 	"http://www.weibo.com/",
 	"http://www.wikipedia.org/",
 	"http://wordpress.com/",
-	"http://www.yahoo.com/",
+	"http://us.yahoo.com/",
 	"http://www.yandex.ru/",
 	"http://www.youtube.com/",
 	"http://www.zedo.com/",
@@ -398,14 +398,14 @@ void UpdateDialog::checkForUpdates(void)
 			if(getFile(currentHost, outFile, 0, &httpOk))
 			{
 				connectionScore++;
-				progressBar->setValue(connectionScore + 1);
+				progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
 				QApplication::processEvents();
 				Sleep(125);
 			}
 			if(httpOk)
 			{
 				connectionScore++;
-				progressBar->setValue(connectionScore + 1);
+				progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
 				QApplication::processEvents();
 				Sleep(125);
 			}
@@ -970,8 +970,8 @@ void UpdateDialog::testKnownWebSites(void)
 	int hostCount = hostList.count();
 	while(!hostList.isEmpty())
 	{
-		progressBar->setValue(progressBar->value() + 1);
 		QString currentHost = hostList.takeFirst();
+		progressBar->setValue(qRound((static_cast<double>(progressBar->maximum() - 1) / static_cast<double>(hostCount)) * static_cast<double>(connectionScore)) + 1);
 		qDebug("Testing: %s", currentHost.toLatin1().constData());
 		m_logFile->append(QStringList() << "" << "Testing host:" << currentHost << "");
 		QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
@@ -1003,10 +1003,10 @@ void UpdateDialog::testKnownWebSites(void)
 		retryButton->setEnabled(true);
 		logButton->setEnabled(true);
 		if(frameAnimation->isVisible()) frameAnimation->hide();
-		statusLabel->setText(tr("Network connectivity test has failed!"));
+		statusLabel->setText("At least one host could not be reached!");
 		progressBar->setValue(progressBar->maximum());
 		hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		hintLabel->setText(tr("Please make sure your internet connection is working properly and try again."));
+		hintLabel->setText("Please make sure your internet connection is working properly and try again.");
 		hintIcon->show();
 		hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
