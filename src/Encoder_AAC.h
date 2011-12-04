@@ -44,6 +44,9 @@ public:
 private:
 	const QString m_binary_enc;
 	const QString m_binary_tag;
+	const QString m_binary_sox;
 	int m_configProfile;
 	bool m_configEnable2Pass;
+
+	unsigned int detectLength(const QString &sourceFile, volatile bool *abortFlag);
 };

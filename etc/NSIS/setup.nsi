@@ -466,6 +466,7 @@ Section "-Create Shortcuts"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_CHANGELOG).lnk" "$INSTDIR\Changelog.html"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_TRANSLATE).lnk" "$INSTDIR\Translate.html"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_FAQ).lnk" "$INSTDIR\FAQ.html"
+		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_MANUAL).lnk" "$INSTDIR\FAQ.html"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_UNINSTALL).lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
 		
 		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\Official LameXP Homepage.url" "http://mulder.dummwiedeutsch.de/"

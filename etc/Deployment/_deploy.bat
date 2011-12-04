@@ -132,6 +132,7 @@ copy "%~dp0\..\..\ReadMe.txt" "%TMP_PATH%"
 copy "%~dp0\..\..\License.txt" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\Changelog.html" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\Translate.html" "%TMP_PATH%"
+copy "%~dp0\..\..\doc\Manual.html" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\FAQ.html" "%TMP_PATH%"
 REM ------------------------------------------
 REM :: CREATE PACKAGES ::

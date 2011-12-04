@@ -2896,13 +2896,11 @@
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="424"/>
-        <location filename="../../src/Dialog_Update.cpp" line="1006"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="427"/>
-        <location filename="../../src/Dialog_Update.cpp" line="1009"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation type="unfinished"></translation>
     </message>
