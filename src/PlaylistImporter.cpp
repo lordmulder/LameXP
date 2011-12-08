@@ -132,32 +132,40 @@ PlaylistImporter::playlist_t PlaylistImporter::isPlaylist(const QString &fileNam
 bool PlaylistImporter::parsePlaylist_m3u(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir)
 {
 	QByteArray line = data.readLine();
-	
+	const bool preferUTF8 = data.fileName().endsWith(".m3u8", Qt::CaseInsensitive);
+
 	while(line.size() > 0)
 	{
-		QFileInfo filename1(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
-		QFileInfo filename2(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
+		QString filePath[3];
 
-		filename1.setCaching(false);
-		filename2.setCaching(false);
-
-		if(!(filename1.filePath().startsWith("#") || filename2.filePath().startsWith("#")))
+		if(preferUTF8)
 		{
-			fixFilePath(filename1, baseDir, rootDir);
-			fixFilePath(filename2, baseDir, rootDir);
+			filePath[0] = QString(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
+			filePath[1] = QString(QDir::fromNativeSeparators(QString::fromLocal8Bit(line.constData(), line.size()).trimmed()));
+			filePath[2] = QString(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
+		}
+		else
+		{
+			filePath[0] = QString(QDir::fromNativeSeparators(QString::fromLocal8Bit(line.constData(), line.size()).trimmed()));
+			filePath[1] = QString(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
+			filePath[2] = QString(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
+		}
 
-			if(filename1.exists())
+		for(size_t i = 0; i < 3; i++)
+		{
+			if(!(filePath[i].startsWith("#") || filePath[i].contains(QChar(QChar::ReplacementCharacter))))
 			{
-				if(isPlaylist(filename1.canonicalFilePath()) == notPlaylist)
+				QFileInfo filename(filePath[i]);
+				filename.setCaching(false);
+				fixFilePath(filename, baseDir, rootDir);
+
+				if(filename.exists())
 				{
-					fileList << filename1.canonicalFilePath();
-				}
-			}
-			else if(filename2.exists())
-			{
-				if(isPlaylist(filename2.canonicalFilePath()) == notPlaylist)
-				{
-					fileList << filename2.canonicalFilePath();
+					if(isPlaylist(filename.canonicalFilePath()) == notPlaylist)
+					{
+						fileList << filename.canonicalFilePath();
+					}
+					break;
 				}
 			}
 		}
@@ -175,40 +183,31 @@ bool PlaylistImporter::parsePlaylist_pls(QFile &data, QStringList &fileList, con
 	
 	while(line.size() > 0)
 	{
-		bool flag = false;
-		
-		QString temp1(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
-		QString temp2(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
+		QString filePath[3];
 
-		if(!flag && plsEntry.indexIn(temp1) >= 0)
+		filePath[0] = QString(QDir::fromNativeSeparators(QString::fromLocal8Bit(line.constData(), line.size()).trimmed()));
+		filePath[2] = QString(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
+		filePath[1] = QString(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
+
+		for(size_t i = 0; i < 3; i++)
 		{
-			QFileInfo filename(QDir::fromNativeSeparators(plsEntry.cap(2)).trimmed());
-			filename.setCaching(false);
-			fixFilePath(filename, baseDir, rootDir);
-
-			if(filename.exists())
+			if(!filePath[i].contains(QChar(QChar::ReplacementCharacter)))
 			{
-				if(isPlaylist(filename.canonicalFilePath()) == notPlaylist)
+				if(plsEntry.indexIn(filePath[i]) >= 0)
 				{
-					fileList << filename.canonicalFilePath();
-				}
-				flag = true;
-			}
-		}
-		
-		if(!flag && plsEntry.indexIn(temp2) >= 0)
-		{
-			QFileInfo filename(QDir::fromNativeSeparators(plsEntry.cap(2)).trimmed());
-			filename.setCaching(false);
-			fixFilePath(filename, baseDir, rootDir);
+					QFileInfo filename(QDir::fromNativeSeparators(plsEntry.cap(2)).trimmed());
+					filename.setCaching(false);
+					fixFilePath(filename, baseDir, rootDir);
 
-			if(filename.exists())
-			{
-				if(isPlaylist(filename.canonicalFilePath()) == notPlaylist)
-				{
-					fileList << filename.canonicalFilePath();
+					if(filename.exists())
+					{
+						if(isPlaylist(filename.canonicalFilePath()) == notPlaylist)
+						{
+							fileList << filename.canonicalFilePath();
+						}
+						break;
+					}
 				}
-				flag = true;
 			}
 		}
 
