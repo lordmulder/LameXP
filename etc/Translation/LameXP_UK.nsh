@@ -38,5 +38,5 @@ LangString LAMEXP_LANG_LINK_CHANGELOG      ${LANG_UKRAINIAN} "Історія В�
 LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_UKRAINIAN} "Допомога Перекладачу"
 LangString LAMEXP_LANG_LINK_UNINSTALL      ${LANG_UKRAINIAN} "Видалення"
 LangString LAMEXP_LANG_LINK_FAQ            ${LANG_UKRAINIAN} "Часті Питання"
-LangString LAMEXP_LANG_LINK_MANUAL         ${LANG_UKRAINIAN} "User Manual"
+LangString LAMEXP_LANG_LINK_MANUAL         ${LANG_UKRAINIAN} "Посібник користувача"
 LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_UKRAINIAN} "Ви збираєтесь встановити Демо (тестову) версію LameXP!"
