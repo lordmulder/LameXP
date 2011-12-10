@@ -1627,7 +1627,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can eneter custom parameters here!</source>
+        <source>You can enter custom parameters here!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

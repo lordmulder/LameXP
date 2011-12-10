@@ -1627,7 +1627,7 @@
         <translation>Макроси для перейменовування</translation>
     </message>
     <message>
-        <source>You can eneter custom parameters here!</source>
+        <source>You can enter custom parameters here!</source>
         <translation>Можна вводити користувацькі параметри тут!</translation>
     </message>
     <message>

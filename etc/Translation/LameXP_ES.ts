@@ -1626,7 +1626,7 @@
         <translation>Macros de renombrado</translation>
     </message>
     <message>
-        <source>You can eneter custom parameters here!</source>
+        <source>You can enter custom parameters here!</source>
         <translation>¡Aquí puede introducir parámetros personalizados!</translation>
     </message>
     <message>

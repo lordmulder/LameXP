@@ -391,7 +391,7 @@
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation>ANSI Codepage fürCuesheet Datei auswählen:</translation>
+        <translation>ANSI Codepage für Cuesheet Datei auswählen:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1627,7 +1627,7 @@
         <translation>Platzhalter</translation>
     </message>
     <message>
-        <source>You can eneter custom parameters here!</source>
+        <source>You can enter custom parameters here!</source>
         <translation>Sie können hier Parameter eingeben!</translation>
     </message>
     <message>

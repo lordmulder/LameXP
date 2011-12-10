@@ -2232,7 +2232,7 @@
                         <string notr="true"/>
                        </property>
                        <property name="placeholderText">
-                        <string>You can eneter custom parameters here!</string>
+                        <string>You can enter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2247,7 +2247,7 @@
                         <string notr="true"/>
                        </property>
                        <property name="placeholderText">
-                        <string>You can eneter custom parameters here!</string>
+                        <string>You can enter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2262,7 +2262,7 @@
                         <string notr="true"/>
                        </property>
                        <property name="placeholderText">
-                        <string>You can eneter custom parameters here!</string>
+                        <string>You can enter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2277,7 +2277,7 @@
                         <string notr="true"/>
                        </property>
                        <property name="placeholderText">
-                        <string>You can eneter custom parameters here!</string>
+                        <string>You can enter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>
@@ -2430,7 +2430,7 @@
                         <string notr="true"/>
                        </property>
                        <property name="placeholderText">
-                        <string>You can eneter custom parameters here!</string>
+                        <string>You can enter custom parameters here!</string>
                        </property>
                       </widget>
                      </item>

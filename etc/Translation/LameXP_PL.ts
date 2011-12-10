@@ -366,7 +366,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="110"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="203"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="199"/>
         <source>Failed to load the Cue Sheet file:</source>
         <translation type="unfinished">Ładowanie pliku Cue Sheet zakończone niepowodzeniem:</translation>
     </message>
@@ -377,9 +377,9 @@
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="111"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="204"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="200"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="385"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="389"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="393"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished">Błąd pliku Cue Sheet</translation>
     </message>
@@ -389,144 +389,144 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="145"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="138"/>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="146"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="139"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="147"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="140"/>
         <source>Cancel</source>
         <translation type="unfinished">Anuluj</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="185"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="181"/>
         <source>An unknown error has occured!</source>
         <translation type="unfinished">Wystąpił nieokreśłony błąd!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="190"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="186"/>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
         <translation type="unfinished">Plik nie mógł zostać odczytany. Upewnij się że masz prawo odczytu!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="193"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="189"/>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
         <translation type="unfinished">Dany plik nie wydaje się prawidłowym plikiem obrazu Cue Sheet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="196"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="192"/>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
         <translation type="unfinished">Nie znaleziono wspieranego formatu dźwięku w żadnej ze ścieżek obrazu Cue Sheet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="196"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="192"/>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
         <translation type="unfinished">LameXP nie radzi sobie z formatem &quot;binarnym&quot; obrazu Cue Sheet.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="199"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="195"/>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
         <translation type="unfinished">Wybrany plik Cue Sheet zawiera niespójne informacje. Prosze zachować ostrożność!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="219"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="215"/>
         <source>Unknown Artist</source>
         <translation type="unfinished">Nieznany Artysta</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="220"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="216"/>
         <source>Unknown Album</source>
         <translation type="unfinished">Nieznany Album</translation>
     </message>
     <message>
+        <location filename="../../src/Dialog_CueImport.cpp" line="231"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="235"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="239"/>
         <source>Choose Output Directory</source>
         <translation type="unfinished">Wybierz folder wyjściowy</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="265"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="272"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="261"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="268"/>
         <source>LameXP</source>
         <translation type="unfinished">LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="265"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="261"/>
         <source>Error: The selected output directory could not be created!</source>
         <translation type="unfinished">Błąd: Wybrana  lokalizacja wyjściowa nie może zostać utworzona!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="272"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="268"/>
         <source>Error: The selected output directory is not writable!</source>
         <translation type="unfinished">Błąd: Nie można zapisać w wybranej lokalizacji wyjściowej!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="286"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="282"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished">Ostrzeżenie o małej ilości miejsca na dysku</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="286"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="282"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation type="unfinished">Jest mniej niż %1 GB wolnego miejsca w wybranej lokalizacji wyjściowej.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="286"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="282"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation type="unfinished">Jest wysoce zalecane zwolnić miejsce na dysku zanim zaczniesz importować!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="356"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="352"/>
         <source>Analyzing file(s), please wait...</source>
         <translation type="unfinished">Analizowanie pliku/ów, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="361"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="357"/>
         <source>Analysis Failed</source>
         <translation type="unfinished">Analiza zakończona niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="361"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="357"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation type="unfinished">Ostrzeżenie: Nie można rozpoznać formatu kilku plików wejściowych!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="361"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="357"/>
         <source>Continue Anyway</source>
         <translation type="unfinished">Kontynuuj pomimo to</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="361"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="357"/>
         <source>Abort</source>
         <translation type="unfinished">Przerwij</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="384"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="380"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished">Dzielenie pliku/ów, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="389"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="385"/>
         <source>Process was aborted by the user after %1 track(s)!</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika po imporcie %1 ścieżek!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="393"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="389"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished">Wystąpił nieoczekiwany błąd podczas podziału pliku Cue Sheet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="397"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="393"/>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
         <translation type="unfinished">Zaimportowano %1 ścieżek i opuszczono %2 ścieżek z pliku Cue Sheet.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="398"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="394"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished">Stworzono plik Cue Sheet</translation>
     </message>
@@ -1135,7 +1135,7 @@
         <location filename="../../gui/MainWindow.ui" line="2265"/>
         <location filename="../../gui/MainWindow.ui" line="2280"/>
         <location filename="../../gui/MainWindow.ui" line="2433"/>
-        <source>You can eneter custom parameters here!</source>
+        <source>You can enter custom parameters here!</source>
         <translation type="unfinished">Tutaj możesz wpisać własne parametry kodowania!</translation>
     </message>
     <message>

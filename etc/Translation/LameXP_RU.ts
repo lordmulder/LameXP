@@ -1632,7 +1632,7 @@
         <translation type="unfinished">Список переменных</translation>
     </message>
     <message>
-        <source>You can eneter custom parameters here!</source>
+        <source>You can enter custom parameters here!</source>
         <translation type="unfinished">Вы можете здесь ввести дополнительные параметры!</translation>
     </message>
     <message>
