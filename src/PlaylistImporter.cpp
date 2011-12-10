@@ -29,6 +29,7 @@
 #include <QDate>
 #include <QTime>
 #include <QDebug>
+#include <QTextCodec>
 
 //Un-escape XML characters
 static const struct
@@ -133,6 +134,8 @@ bool PlaylistImporter::parsePlaylist_m3u(QFile &data, QStringList &fileList, con
 {
 	QByteArray line = data.readLine();
 	const bool preferUTF8 = data.fileName().endsWith(".m3u8", Qt::CaseInsensitive);
+	const QTextCodec *codec = QTextCodec::codecForName("System");
+
 
 	while(line.size() > 0)
 	{
@@ -141,12 +144,12 @@ bool PlaylistImporter::parsePlaylist_m3u(QFile &data, QStringList &fileList, con
 		if(preferUTF8)
 		{
 			filePath[0] = QString(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
-			filePath[1] = QString(QDir::fromNativeSeparators(QString::fromLocal8Bit(line.constData(), line.size()).trimmed()));
+			filePath[1] = QString(QDir::fromNativeSeparators(codec->toUnicode(line.constData(), line.size()).trimmed()));
 			filePath[2] = QString(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
 		}
 		else
 		{
-			filePath[0] = QString(QDir::fromNativeSeparators(QString::fromLocal8Bit(line.constData(), line.size()).trimmed()));
+			filePath[0] = QString(QDir::fromNativeSeparators(codec->toUnicode(line.constData(), line.size()).trimmed()));
 			filePath[1] = QString(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
 			filePath[2] = QString(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
 		}
@@ -179,16 +182,17 @@ bool PlaylistImporter::parsePlaylist_m3u(QFile &data, QStringList &fileList, con
 bool PlaylistImporter::parsePlaylist_pls(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir)
 {
 	QRegExp plsEntry("File(\\d+)=(.+)", Qt::CaseInsensitive);
+	const QTextCodec *codec = QTextCodec::codecForName("System");
 	QByteArray line = data.readLine();
 	
 	while(line.size() > 0)
 	{
 		QString filePath[3];
 
-		filePath[0] = QString(QDir::fromNativeSeparators(QString::fromLocal8Bit(line.constData(), line.size()).trimmed()));
-		filePath[2] = QString(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
-		filePath[1] = QString(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
-
+		filePath[0] = QString(QDir::fromNativeSeparators(codec->toUnicode(line.constData(), line.size()).trimmed()));
+		filePath[1] = QString(QDir::fromNativeSeparators(QString::fromLatin1(line.constData(), line.size()).trimmed()));
+		filePath[2] = QString(QDir::fromNativeSeparators(QString::fromUtf8(line.constData(), line.size()).trimmed()));
+		
 		for(size_t i = 0; i < 3; i++)
 		{
 			if(!filePath[i].contains(QChar(QChar::ReplacementCharacter)))

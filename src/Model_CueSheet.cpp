@@ -28,6 +28,7 @@
 #include <QFileInfo>
 #include <QFont>
 #include <QTime>
+#include <QTextCodec>
 
 #include <float.h>
 #include <limits>
@@ -557,6 +558,9 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		return 2;
 	}
 
+	//Get system local Codec
+	const QTextCodec *codec = QTextCodec::codecForName("System");
+
 	//Check for UTF-8 BOM in order to guess encoding
 	bool bUTF8 = false, bForceLatin1 = false;
 	QByteArray bomCheck = cueFile.peek(128);
@@ -569,7 +573,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	{
 		const QString replacementSymbol = QString(QChar(QChar::ReplacementCharacter));
 		QByteArray data = cueFile.peek(1048576);
-		if((!data.isEmpty()) && QString::fromLocal8Bit(data.constData(), data.size()).contains(replacementSymbol))
+		if((!data.isEmpty()) && codec->toUnicode(data.constData(), data.size()).contains(replacementSymbol))
 		{
 			qWarning("Decoding error using local 8-Bit codepage. Enforcing Latin-1.");
 			bForceLatin1 = true;
@@ -611,7 +615,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			break;
 		}
 
-		QString line = bUTF8 ? QString::fromUtf8(lineData.constData(), lineData.size()).trimmed() : (bForceLatin1 ? QString::fromLatin1(lineData.constData(), lineData.size()).trimmed() : QString::fromLocal8Bit(lineData.constData(), lineData.size()).trimmed());
+		QString line = (bUTF8 ? QString::fromUtf8(lineData.constData(), lineData.size()) : (bForceLatin1 ? QString::fromLatin1(lineData.constData(), lineData.size()) : codec->toUnicode(lineData.constData(), lineData.size()))).trimmed();
 		
 		/* --- FILE --- */
 		if(rxFile.indexIn(line) >= 0)
