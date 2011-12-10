@@ -527,9 +527,10 @@ unsigned int CueSheetModel::getAlbumYear(void)
 // Cue Sheet Parser
 ////////////////////////////////////////////////////////////
 
-int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *application)
+int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *application, QTextCodec *forceCodec)
 {
 	QMutexLocker lock(&m_mutex);
+	const QTextCodec *codec = (forceCodec != NULL) ? forceCodec :  QTextCodec::codecForName("System");
 	
 	QFile cueFile(cueFileName);
 	if(!cueFile.open(QIODevice::ReadOnly))
@@ -540,16 +541,17 @@ int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *ap
 	clearData();
 
 	beginResetModel();
-	int iResult = parseCueFile(cueFile, QDir(QFileInfo(cueFile).canonicalPath()), application);
+	int iResult = parseCueFile(cueFile, QDir(QFileInfo(cueFile).canonicalPath()), application, codec);
 	endResetModel();
 
 	return iResult;
 }
 
-int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application)
+int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application, const QTextCodec *codec)
 {
 	cueFile.seek(0);
 	qDebug("\n[Cue Sheet Import]");
+	bool bForceLatin1 = false;
 
 	//Reject very large files, as parsing might take until forever
 	if(cueFile.size() >= 10485760i64)
@@ -558,28 +560,18 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		return 2;
 	}
 
-	//Get system local Codec
-	const QTextCodec *codec = QTextCodec::codecForName("System");
-
-	//Check for UTF-8 BOM in order to guess encoding
-	bool bUTF8 = false, bForceLatin1 = false;
-	QByteArray bomCheck = cueFile.peek(128);
-	bUTF8 = (!bomCheck.isEmpty()) && bomCheck.contains("\xef\xbb\xbf");
-	qDebug("Encoding is %s.", (bUTF8 ? "UTF-8" : "Local 8-Bit"));
-	bomCheck.clear();
-
 	//Test selected Codepage for decoding errors
-	if(!bUTF8)
+	qDebug("Character encoding is: %s.", codec->name().constData());
+	const QString replacementSymbol = QString(QChar(QChar::ReplacementCharacter));
+	QByteArray testData = cueFile.peek(1048576);
+	if((!testData.isEmpty()) && codec->toUnicode(testData.constData(), testData.size()).contains(replacementSymbol))
 	{
-		const QString replacementSymbol = QString(QChar(QChar::ReplacementCharacter));
-		QByteArray data = cueFile.peek(1048576);
-		if((!data.isEmpty()) && codec->toUnicode(data.constData(), data.size()).contains(replacementSymbol))
-		{
-			qWarning("Decoding error using local 8-Bit codepage. Enforcing Latin-1.");
-			bForceLatin1 = true;
-		}
+		qWarning("Decoding error using local codepage. Enforcing Latin-1.");
+		bForceLatin1 = true;
 	}
+	testData.clear();
 
+	//Create regular expressions
 	QRegExp rxFile("^FILE\\s+(\"[^\"]+\"|\\S+)\\s+(\\w+)$", Qt::CaseInsensitive);
 	QRegExp rxTrack("^TRACK\\s+(\\d+)\\s(\\w+)$", Qt::CaseInsensitive);
 	QRegExp rxIndex("^INDEX\\s+(\\d+)\\s+([0-9:]+)$", Qt::CaseInsensitive);
@@ -615,7 +607,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			break;
 		}
 
-		QString line = (bUTF8 ? QString::fromUtf8(lineData.constData(), lineData.size()) : (bForceLatin1 ? QString::fromLatin1(lineData.constData(), lineData.size()) : codec->toUnicode(lineData.constData(), lineData.size()))).trimmed();
+		QString line = (bForceLatin1 ? QString::fromLatin1(lineData.constData(), lineData.size()) : codec->toUnicode(lineData.constData(), lineData.size())).trimmed();
 		
 		/* --- FILE --- */
 		if(rxFile.indexIn(line) >= 0)

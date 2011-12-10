@@ -28,6 +28,7 @@
 class CueSheetFile;
 class QApplication;
 class QDir;
+class QTextCodec;
 
 class CueSheetModel : public QAbstractItemModel
 {
@@ -73,10 +74,10 @@ public:
 	unsigned int getAlbumYear(void);
 
 	//Cue Sheet functions
-	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL);
+	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL, QTextCodec *forceCodec= NULL);
 
 private:
-	int parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application);
+	int parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application, const QTextCodec *codec);
 	double parseTimeIndex(const QString &index);
 	QString indexToString(const double index) const;
 	

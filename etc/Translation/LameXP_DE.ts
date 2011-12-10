@@ -385,6 +385,30 @@
         <source>Process was aborted by the user after %1 track(s)!</source>
         <translation>Der Vorgang wurde vom Benutzter nach %1 Track(s) abgebrochen!</translation>
     </message>
+    <message>
+        <source>(System Default)</source>
+        <translation>(Systemstandard)</translation>
+    </message>
+    <message>
+        <source>Select ANSI Codepage for Cue Sheet file:</source>
+        <translation>ANSI Codepage fürCuesheet Datei auswählen:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Unknown Artist</source>
+        <translation>Unbekannter Künstler</translation>
+    </message>
+    <message>
+        <source>Unknown Album</source>
+        <translation>Unbekanntes Album</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>
@@ -415,6 +439,14 @@
     <message>
         <source>Load a different Cue Sheet</source>
         <translation>Ein anderes Cuesheet laden</translation>
+    </message>
+    <message>
+        <source>Artist:</source>
+        <translation>Künstler:</translation>
+    </message>
+    <message>
+        <source>Album:</source>
+        <translation>Album:</translation>
     </message>
 </context>
 <context>

@@ -386,6 +386,30 @@
         <source>Cue Sheet Completed</source>
         <translation>Обробку списку Cue завершено</translation>
     </message>
+    <message>
+        <source>(System Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select ANSI Codepage for Cue Sheet file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">Ок</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Відмінити</translation>
+    </message>
+    <message>
+        <source>Unknown Artist</source>
+        <translation type="unfinished">Невідомий виконавець</translation>
+    </message>
+    <message>
+        <source>Unknown Album</source>
+        <translation type="unfinished">Невідомий альбом</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>
@@ -416,6 +440,14 @@
     <message>
         <source>Load a different Cue Sheet</source>
         <translation>Обрати інший список CUE</translation>
+    </message>
+    <message>
+        <source>Artist:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -36,8 +36,11 @@
 #include <QFileDialog>
 #include <QProgressDialog>
 #include <QMenu>
+#include <QTextCodec>
+#include <QInputDialog>
 
 #define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
+#define EXPAND(STR) QString(STR).leftJustified(96, ' ')
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
@@ -111,6 +114,63 @@ int CueImportDialog::exec(void)
 		return CueSheetModel::ErrorIOFailure;
 	}
 
+	//----------------------//
+
+	QTextCodec *codec = NULL;
+
+	QFile cueFile(cueFileInfo.canonicalFilePath());
+	cueFile.open(QIODevice::ReadOnly);
+	QByteArray bomCheck = cueFile.isOpen() ? cueFile.peek(128) : QByteArray();
+
+	if((!bomCheck.isEmpty()) && bomCheck.contains("\xef\xbb\xbf"))
+	{
+		codec = QTextCodec::codecForName("UTF-8");
+	}
+	else
+	{
+		const QString systemDefault = tr("(System Default)");
+
+		QStringList codecList; codecList << systemDefault;
+		QList<QByteArray> availableCodecs = QTextCodec::availableCodecs();
+		while(!availableCodecs.isEmpty())
+		{
+			QByteArray current = availableCodecs.takeFirst();
+			if(!(current.startsWith("system") || current.startsWith("System")))
+			{
+				codecList << QString::fromLatin1(current.constData(), current.size());
+			}
+		}
+
+		QInputDialog *input = new QInputDialog(progress);
+		input->setLabelText(EXPAND(tr("Select ANSI Codepage for Cue Sheet file:")));
+		input->setOkButtonText(tr("OK"));
+		input->setCancelButtonText(tr("Cancel"));
+		input->setTextEchoMode(QLineEdit::Normal);
+		input->setComboBoxItems(codecList);
+	
+		if(input->exec() > 0)
+		{
+			qDebug("User-selected codec is: %s", input->textValue().toLatin1().constData());
+			if(input->textValue().compare(systemDefault, Qt::CaseInsensitive))
+			{
+				qDebug("Going to use a user-selected codec!");
+				codec = QTextCodec::codecForName(input->textValue().toLatin1().constData());
+			}
+		}
+
+		if(!codec)
+		{
+			qDebug("Going to use the system's default codec!");
+			codec = QTextCodec::codecForName("System");
+		}
+
+		LAMEXP_DELETE(input);
+	}
+
+	bomCheck.clear();
+
+	//----------------------//
+
 	m_outputDir = QString("%1/%2").arg(cueFileInfo.canonicalPath(), cueFileInfo.completeBaseName());
 	for(int n = 2; QDir(m_outputDir).exists(); n++)
 	{
@@ -119,7 +179,7 @@ int CueImportDialog::exec(void)
 
 	setWindowTitle(QString("%1: %2").arg(windowTitle().split(":", QString::SkipEmptyParts).first().trimmed(), cueFileInfo.fileName()));
 
-	int iResult = m_model->loadCueSheet(m_cueFileName, QApplication::instance());
+	int iResult = m_model->loadCueSheet(m_cueFileName, QApplication::instance(), codec);
 	if(iResult != CueSheetModel::ErrorSuccess)
 	{
 		QString errorMsg = tr("An unknown error has occured!");
@@ -156,6 +216,8 @@ void CueImportDialog::modelChanged(void)
 {
 	treeView->expandAll();
 	editOutputDir->setText(QDir::toNativeSeparators(m_outputDir));
+	labelArtist->setText(m_model->getAlbumPerformer().isEmpty() ? tr("Unknown Artist") : m_model->getAlbumPerformer());
+	labelAlbum->setText(m_model->getAlbumTitle().isEmpty() ? tr("Unknown Album") : m_model->getAlbumTitle());
 }
 
 void CueImportDialog::browseButtonClicked(void)
