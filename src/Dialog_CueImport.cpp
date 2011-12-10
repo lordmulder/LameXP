@@ -130,16 +130,9 @@ int CueImportDialog::exec(void)
 	{
 		const QString systemDefault = tr("(System Default)");
 
-		QStringList codecList; codecList << systemDefault;
-		QList<QByteArray> availableCodecs = QTextCodec::availableCodecs();
-		while(!availableCodecs.isEmpty())
-		{
-			QByteArray current = availableCodecs.takeFirst();
-			if(!(current.startsWith("system") || current.startsWith("System")))
-			{
-				codecList << QString::fromLatin1(current.constData(), current.size());
-			}
-		}
+		QStringList codecList;
+		codecList.append(systemDefault);
+		codecList.append(lamexp_available_codepages());
 
 		QInputDialog *input = new QInputDialog(progress);
 		input->setLabelText(EXPAND(tr("Select ANSI Codepage for Cue Sheet file:")));
@@ -148,17 +141,20 @@ int CueImportDialog::exec(void)
 		input->setTextEchoMode(QLineEdit::Normal);
 		input->setComboBoxItems(codecList);
 	
-		if(input->exec() > 0)
+		if(input->exec() < 1)
+		{
+			progress->close();
+			LAMEXP_DELETE(input);
+			LAMEXP_DELETE(progress);
+			return Rejected;
+		}
+	
+		if(input->textValue().compare(systemDefault, Qt::CaseInsensitive))
 		{
 			qDebug("User-selected codec is: %s", input->textValue().toLatin1().constData());
-			if(input->textValue().compare(systemDefault, Qt::CaseInsensitive))
-			{
-				qDebug("Going to use a user-selected codec!");
-				codec = QTextCodec::codecForName(input->textValue().toLatin1().constData());
-			}
+			codec = QTextCodec::codecForName(input->textValue().toLatin1().constData());
 		}
-
-		if(!codec)
+		else
 		{
 			qDebug("Going to use the system's default codec!");
 			codec = QTextCodec::codecForName("System");

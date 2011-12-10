@@ -1644,6 +1644,35 @@ const QString lamexp_clean_filepath(const QString &str)
 }
 
 /*
+ * Get a list of all available Qt Text Codecs
+ */
+QStringList lamexp_available_codepages(bool noAliases)
+{
+	QStringList codecList;
+	
+	QList<QByteArray> availableCodecs = QTextCodec::availableCodecs();
+	while(!availableCodecs.isEmpty())
+	{
+		QByteArray current = availableCodecs.takeFirst();
+		if(!(current.startsWith("system") || current.startsWith("System")))
+		{
+			codecList << QString::fromLatin1(current.constData(), current.size());
+			if(noAliases)
+			{
+				if(QTextCodec *currentCodec = QTextCodec::codecForName(current.constData()))
+				{
+					
+					QList<QByteArray> aliases = currentCodec->aliases();
+					while(!aliases.isEmpty()) availableCodecs.removeAll(aliases.takeFirst());
+				}
+			}
+		}
+	}
+
+	return codecList;
+}
+
+/*
  * Finalization function (final clean-up)
  */
 void lamexp_finalization(void)

@@ -530,7 +530,7 @@ unsigned int CueSheetModel::getAlbumYear(void)
 int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *application, QTextCodec *forceCodec)
 {
 	QMutexLocker lock(&m_mutex);
-	const QTextCodec *codec = (forceCodec != NULL) ? forceCodec :  QTextCodec::codecForName("System");
+	const QTextCodec *codec = (forceCodec != NULL) ? forceCodec : QTextCodec::codecForName("System");
 	
 	QFile cueFile(cueFileName);
 	if(!cueFile.open(QIODevice::ReadOnly))
