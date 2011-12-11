@@ -44,6 +44,7 @@ a:visited { color: #0000EE; }
 <li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
 <li><a href="#434f2578">Why is the maximum normalization level limited to -0.5 dB?</a>
 <li><a href="#9f8ff13a">What do the different 'Equalization' modes do?</a>
+<li><a href="#c6d9dfed">Why does my encoded file come out slightly longer than the original?</a>
 <li><a href="#ed4d30ed">Why is the Hibernation option disabled (greyed out) on my system?</a>
 <li><a href="#e7c9ae2b">Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</a>
 <li><a href="#328b0a18">Why do I get the error 'Executable requires Windows XP or later' on startup?</a>
@@ -642,6 +643,42 @@ by amplified by the same factor. In the last mode, the highest peak of all(!) ch
 <br>
 WARNING: The "None" mode appears to be broken with more than two channels! This is a bug in SoX.<br><br>
 
+<br><br>
+
+<a name="c6d9dfed"></a><b>Why does my encoded file come out slightly longer than the original?</b><br>
+<br>
+Because of the way most (lossy) audio compressors work, a number of "silent" samples have to be prepended to<br>
+the first input sample. Also a number of silent samples may be appended to the last input sample. Obviously<br>
+these additional "padding" samples will make the encoded file longer than the original input. If the decoder<br>
+does not compensate for the padding samples that have been added by the encoder, the padding samples at the<br>
+beginning of the encoded file will cause a certain delay/shift, compared to the (uncompressed) original file.<br>
+Another effect is that there will be a "gap" between the files, when playing multiple files in sequence.<br>
+<br>
+It has to be noted that the padding is an inherent property of the audio compressor that can not be avoided.<br>
+But, as mentioned before, the padding samples can be removed by the decoder. In that case, the decoded output<br>
+will have the exactly same length (in samples) as the original file. However this can only be done, if the<br>
+decoder is able to determine the exact number of padding samples that had been added. While the Vorbis audio<br>
+format stores the number of padding samples in the stream and thus any compliant decoder will remove them,<br>
+the MP3 and AAC audio formats do NOT define an "official" way to store the the number of padding samples!<br>
+<br>
+Nonetheless, the LAME MP3 encoder, which is used by LameXP, uses its own "non-standard" way to indicate the<br>
+exact number of padding samples. This is done by adding a so-called "LAME header" to the MP3 file. Hence MP3<br>
+decoders, which recognize the LAME header, will be able to remove the padding samples. This feature often is<br>
+referred to as "gapless" decoding/playback. The 'mpg123' decoder, which is used by LameXP, does support the<br>
+gapless decoding. This means that if you encode MP3 files with LameXP/LAME, then gapless decoding will be<br>
+possible. And if you decode these files with LameXP/mpg123 again, they will come out at the original length.<br>
+<br>
+Still you have to be aware that NOT all MP3 decoders support the LAME header. So if you encode MP3 files with<br>
+LameXP and then decode them with an arbitrary MP3 decoder, they may come out at a "wrong" length. And there<br>
+is absoloutely nothing that LameXP could do about that! Furthermore, if you decode a MP3 file in LameXP that<br>
+has been created with some MP3 decoder which did not add a LAME header, then it is impossible to remove the<br>
+padding samples. That's because in this situation there is NO way to know the number of padding samples!<br>
+<br>
+Some more info on this topic can be found here:<br><ul>
+<li><a href="http://en.wikipedia.org/wiki/Gapless_playback" target="_blank">http://en.wikipedia.org/wiki/Gapless_playback</a>
+<li><a href="http://lame.sourceforge.net/tech-FAQ.txt" target="_blank">http://lame.sourceforge.net/tech-FAQ.txt</a>
+<li><a href="http://cas.web.cern.ch/cas/Denmark-2010/Caspers/Tektronix%20%20primer%20on%20overlapping%20FFT%20signals%202009%20CAS2010.pdf" target="_blank">Understanding FFT Overlap Processing
+Fundamental</a></ul>
 <br><br>
 
 <a name="ed4d30ed"></a><b>Why is the Hibernation option disabled (greyed out) on my system?</b><br>
