@@ -120,11 +120,19 @@ int CueImportDialog::exec(void)
 
 	QFile cueFile(cueFileInfo.canonicalFilePath());
 	cueFile.open(QIODevice::ReadOnly);
-	QByteArray bomCheck = cueFile.isOpen() ? cueFile.peek(128) : QByteArray();
+	QByteArray bomCheck = cueFile.isOpen() ? cueFile.peek(16) : QByteArray();
 
-	if((!bomCheck.isEmpty()) && bomCheck.contains("\xef\xbb\xbf"))
+	if((!bomCheck.isEmpty()) && bomCheck.startsWith("\xef\xbb\xbf"))
 	{
 		codec = QTextCodec::codecForName("UTF-8");
+	}
+	else if((!bomCheck.isEmpty()) && bomCheck.startsWith("\xff\xfe"))
+	{
+		codec = QTextCodec::codecForName("UTF-16LE");
+	}
+	else if((!bomCheck.isEmpty()) && bomCheck.startsWith("\xfe\xff"))
+	{
+		codec = QTextCodec::codecForName("UTF-16BE");
 	}
 	else
 	{

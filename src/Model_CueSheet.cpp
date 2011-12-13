@@ -29,6 +29,7 @@
 #include <QFont>
 #include <QTime>
 #include <QTextCodec>
+#include <QTextStream>
 
 #include <float.h>
 #include <limits>
@@ -549,7 +550,7 @@ int CueSheetModel::loadCueSheet(const QString &cueFileName, QCoreApplication *ap
 
 int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplication *application, const QTextCodec *codec)
 {
-	cueFile.seek(0);
+	cueFile.reset();
 	qDebug("\n[Cue Sheet Import]");
 	bool bForceLatin1 = false;
 
@@ -566,10 +567,16 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	QByteArray testData = cueFile.peek(1048576);
 	if((!testData.isEmpty()) && codec->toUnicode(testData.constData(), testData.size()).contains(replacementSymbol))
 	{
-		qWarning("Decoding error using local codepage. Enforcing Latin-1.");
+		qWarning("Decoding error using selected codepage (%s). Enforcing Latin-1.", codec->name().constData());
 		bForceLatin1 = true;
 	}
 	testData.clear();
+
+	//Init text stream
+	QTextStream cueStream(&cueFile);
+	cueStream.setAutoDetectUnicode(false);
+	cueStream.setCodec(bForceLatin1 ? "latin1" : codec->name());
+	cueStream.seek(0i64);
 
 	//Create regular expressions
 	QRegExp rxFile("^FILE\\s+(\"[^\"]+\"|\\S+)\\s+(\\w+)$", Qt::CaseInsensitive);
@@ -600,14 +607,13 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			if(lines < 128) Sleep(10);
 		}
 		
-		QByteArray lineData = cueFile.readLine();
-		if(lineData.size() <= 0)
+		if(cueStream.atEnd())
 		{
 			qDebug("End of Cue Sheet file.");
 			break;
 		}
 
-		QString line = (bForceLatin1 ? QString::fromLatin1(lineData.constData(), lineData.size()) : codec->toUnicode(lineData.constData(), lineData.size())).trimmed();
+		QString line = cueStream.readLine().trimmed();
 		
 		/* --- FILE --- */
 		if(rxFile.indexIn(line) >= 0)
