@@ -346,12 +346,15 @@ MP4 (MPEG-4 Part 14) container - in almost any case that is exactly what you wan
 used to indicate "audio-only" MP4 files. Even worse: There are some buggy (hardware) players that will<br>
 recognize MP4 audio file only with the "incorrect" .m4a extension, but NOT with the "correct" .mp4 extension.<br>
 Of course LameXP will save your MP4 files with the "correct" .mp4 extension. But if you need your MP4 files<br>
-with an .m4a extension for some reason, you can simply rename(!) these files. This isn't more or less<br>
+with an .m4a extension for some reason, you can simply rename(!) these files. Renaming isn't more or less<br>
 "incorrect" than saving the files as .m4a directly. After all, an MP4 file remains an MP4 file.<br>
 <br>
-Having said that, you should NOT rename any .mp4 or .m4a files to .aac, because these are MP4 files and NOT<br>
-"raw" AAC streams. The Nero AAC encoder has NO option to output "raw" AAC streams and usually you don't need<br>
-such streams. Still, if you want to extract the "raw" AAC stream from an MP4 file, you can use <a href="http://www.videohelp.com/tools/mp4box" target="_blank">MP4Box</a>.<br><br>
+Warning: While renaming .mp4 files to .m4a (or vice versa) is safe, because both file extensions refer to MP4<br>
+files, you must NOT rename any .mp4/.m4a files to .aac (or the other way around). That's because the '.aac'<br>
+extension is used with "raw" AAC streams (ADTS format), i.e. AAC streams that are explicitly NOT stored in an<br>
+MP4 container! Unfortunately the Nero AAC encoder has NO option to output "raw" AAC streams and usually you<br>
+don't need such streams. Still, if you really want to extract the "raw" AAC stream from an MP4 file, you can<br>
+use <a href="http://www.videohelp.com/tools/mp4box" target="_blank">MP4Box</a> for that purpose. Please note that <a href="http://yamb.unite-video.com/">YAMB</a> is a great MP4Box GUI created by Kurtnoise.<br><br>
 
 <br><br>
 
