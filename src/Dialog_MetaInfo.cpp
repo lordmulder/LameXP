@@ -100,7 +100,7 @@ int MetaInfoDialog::exec(AudioFileModel &audioFile, bool allowUp, bool allowDown
 	tableView->setModel(model);
 	tableView->show();
 	frameArtwork->hide();
-	setWindowTitle(QString("Meta Information: %1").arg(QFileInfo(audioFile.filePath()).fileName()));
+	setWindowTitle(tr("Meta Information: %1").arg(QFileInfo(audioFile.filePath()).fileName()));
 	editButton->setEnabled(true);
 	upButton->setEnabled(allowUp);
 	downButton->setEnabled(allowDown);

@@ -388,27 +388,27 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Типово для ОС)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть набір символів ANSI для файлу списку Cue:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">Ок</translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Відмінити</translation>
+        <translation>Відмінити</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Невідомий виконавець</translation>
+        <translation>Невідомий виконавець</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished">Невідомий альбом</translation>
+        <translation>Невідомий альбом</translation>
     </message>
 </context>
 <context>
@@ -443,11 +443,11 @@
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконавець:</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation>Альбом:</translation>
     </message>
 </context>
 <context>
@@ -1787,6 +1787,10 @@
     <message>
         <source>Clear all Meta Info</source>
         <translation>Очистити всі метадані</translation>
+    </message>
+    <message>
+        <source>Meta Information: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

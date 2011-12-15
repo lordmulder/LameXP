@@ -2299,6 +2299,11 @@
         <translation type="unfinished">Następujące metadane zostały wyodrębnione z oryginalnego pliku.</translation>
     </message>
     <message>
+        <location filename="../../src/Dialog_MetaInfo.cpp" line="103"/>
+        <source>Meta Information: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/Dialog_MetaInfo.cpp" line="157"/>
         <source>Load Artwork</source>
         <translation type="unfinished">Załaduj okładkę</translation>

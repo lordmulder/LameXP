@@ -1788,6 +1788,10 @@
         <source>Clear all Meta Info</source>
         <translation>Metainformationen löschen</translation>
     </message>
+    <message>
+        <source>Meta Information: %1</source>
+        <translation>Metainformationen: %1</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfoModel</name>

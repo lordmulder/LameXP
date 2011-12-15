@@ -1797,6 +1797,10 @@ Ouvrir le dossier récursivement...</translation>
         <source>Clear all Meta Info</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Meta Information: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfoModel</name>

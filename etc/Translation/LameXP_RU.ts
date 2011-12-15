@@ -1794,6 +1794,10 @@
         <source>Clear all Meta Info</source>
         <translation type="unfinished">Очистить всю метаинформацию</translation>
     </message>
+    <message>
+        <source>Meta Information: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfoModel</name>
