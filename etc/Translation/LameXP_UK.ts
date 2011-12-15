@@ -1790,7 +1790,7 @@
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Метадані: %1</translation>
     </message>
 </context>
 <context>
