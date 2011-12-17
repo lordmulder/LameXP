@@ -184,7 +184,7 @@
         <translation type="unfinished">By Mark James, 크리에이티브 커먼즈 &apos;by&apos; 라이센스 하에 출시됨.</translation>
     </message>
     <message>
-        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
+        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation type="unfinished">LameXP 전체는 LoRd_MuldeR에게 저작권이 있습니다. LameXP에 사용된 타사 소프트웨어는 각 소프트웨어의 저작자에게 저작권이 있습니다.</translation>
     </message>
     <message>

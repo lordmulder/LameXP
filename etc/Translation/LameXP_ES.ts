@@ -112,7 +112,7 @@
         <translation>Distribuido bajo los términos de la Licencia Pública General GNU.</translation>
     </message>
     <message>
-        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
+        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP tiene copyright de LoRd_MuldeR. El copyright del software de terceros usado en LameXP pertenece a sus autores individuales.</translation>
     </message>
     <message>

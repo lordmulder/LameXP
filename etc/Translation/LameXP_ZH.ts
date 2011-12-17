@@ -112,7 +112,7 @@
         <translation>以下发布的GNU通用公共许可证的条款｡</translation>
     </message>
     <message>
-        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
+        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP作为一个整体的版权归LoRd_MuldeR｡在LameXP使用第三方软件著作权属于作者本人｡</translation>
     </message>
     <message>
