@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES" sourcelanguage="en">
+<TS version="2.0" language="zh_CN" sourcelanguage="cn">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation>¡Por favor, visite %1 para estar enterado de noticias y actualizaciones!</translation>
+        <translation>请访问到%1新的更新</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Nota: LameXP es software libre. ¡&lt;b&gt;No&lt;/b&gt; pague por LameXP! ¡¡¡Si alguna web intenta hacerle pagar por descargar LameXP, usted &lt;b&gt;no&lt;/b&gt; debería aceptar!!!</translation>
+        <translation>注:LameXP是免费软件｡&lt;b&gt;不用&lt;/b&gt;付钱获取或使用LameXP!如果某些第三方网站尝试让你付出代价下载LameXP,你应该&lt;b&gt;不&lt;/b&gt;接受报价!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation>Especial agradecimiento a &quot;John33&quot; de %1 por su apoyo continuo.</translation>
+        <translation>特别感谢&quot;John33&quot;从%1为他的持续支持｡</translation>
     </message>
     <message>
         <source>About LameXP</source>
-        <translation>Acerca de LameXP</translation>
+        <translation>关于 LameXP</translation>
     </message>
     <message>
         <source>Show License Text</source>
-        <translation>Mostrar licencia</translation>
+        <translation>显示许可证文本</translation>
     </message>
     <message>
         <source>Accept License</source>
-        <translation>Aceptar licencia</translation>
+        <translation>接受许可证</translation>
     </message>
     <message>
         <source>Decline License</source>
-        <translation>Rechazar licencia</translation>
+        <translation>减少许可证</translation>
     </message>
     <message>
         <source>3rd Party S/W</source>
-        <translation>Software de terceros</translation>
+        <translation>第三方 S/W</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation>Contribuidores</translation>
+        <translation>贡献者</translation>
     </message>
     <message>
         <source>About Qt4</source>
-        <translation>Acerca de Qt4</translation>
+        <translation>关于 Qt4</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation>Cancelar</translation>
+        <translation>放弃</translation>
     </message>
     <message>
         <source>The following people have contributed to LameXP:</source>
-        <translation>Las siguientes personas han contribuido a LameXP:</translation>
+        <translation>以下人士有贡献 LameXP:</translation>
     </message>
     <message>
         <source>Translators:</source>
-        <translation>Traductores:</translation>
+        <translation>翻译员:</translation>
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation>¡Si está dispuesto a traducir LameXP, contáctenos sin dudarlo!</translation>
+        <translation>如果你愿意贡献 LameXP 翻译,随时与我们联系 !</translation>
     </message>
     <message>
         <source>About Contributors</source>
-        <translation>Acerca de los contribuidores</translation>
+        <translation>关于贡献者</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
-        <translation>Software de terceros que se utiliza en LameXP:</translation>
+        <translation>在 LameXP 中使用了下列第三方软件:</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation>Distribuido bajo los términos de la Licencia Pública General Menor GNU.</translation>
+        <translation>GNU 较小的通用公共许可的条款下发布｡</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation>Tecnología de codificación de audio abierta y libre de patentes.</translation>
+        <translation>完全开放的无专利的音频编码技术｡</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation>Codificador puntero HE-AAC con soporte de 2 pases.</translation>
+        <translation>免费软件先进的他 AAC 编码器二次编码的支持｡</translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
-        <translation>Disponible en la página web del proveedor como descarga gratuita:</translation>
+        <translation>可从供应商网站上免费下载:</translation>
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation>Tecnología de codificación de audio sin pérdidas, abierta y libre de patentes.</translation>
+        <translation>打开和专利自由无损音频压缩技术｡</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>Por Mark James, distribuido bajo Licencia Creative Commons.</translation>
+        <translation>By Mark James,在知识共享的许可证发布｡</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
-        <translation>Acerca del Software de terceros</translation>
+        <translation>关于第三方软件</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -101,119 +101,119 @@
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation>Código fuente disponible, SDK simple y licencias no restrictivas.</translation>
+        <translation>免费提供源代码,简单的SDK和非限制性许可｡</translation>
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation>Formato de comresión de audio completamente abierto.</translation>
+        <translation>完全开放的音频压缩格式｡</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation>Distribuido bajo los términos de la Licencia Pública General GNU.</translation>
+        <translation>以下发布的GNU通用公共许可证的条款｡</translation>
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of thrird-party software used in LameXP belongs to the individual authors.</source>
-        <translation>LameXP tiene copyright de LoRd_MuldeR. El copyright del software de terceros usado en LameXP pertenece a sus autores individuales.</translation>
+        <translation>LameXP作为一个整体的版权归LoRd_MuldeR｡在LameXP使用第三方软件著作权属于作者本人｡</translation>
     </message>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation>LameXP - Interfaz de codificación de audio</translation>
+        <translation>LameXP - 前端音频编码器</translation>
     </message>
     <message>
         <source>LAME - OpenSource mp3 Encoder</source>
-        <translation>LameXP - Codificador mp3 de código abierto</translation>
+        <translation>LameXP - 开源的MP3编码器</translation>
     </message>
     <message>
         <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation>OggEnc - Codificador Ogg Vorbis</translation>
+        <translation>OggEnc - Ogg Vorbis编码器</translation>
     </message>
     <message>
         <source>FLAC - Free Lossless Audio Codec</source>
-        <translation>FLAC - Códec de audio libre sin pérdidas</translation>
+        <translation>FLAC - 免费的无损音频编解码器</translation>
     </message>
     <message>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 - Consola de Reproducción/Decodificación de audio MPEG</translation>
+        <translation>mpg123 - 播放控制台/ MPEG音频解码</translation>
     </message>
     <message>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation>FAAD - Decodificador MPEG-4 y MPEG-2 AAC de código abierto</translation>
+        <translation>FAAD - MPEG- 4解码器和MPEG- 2 AAC开源</translation>
     </message>
     <message>
         <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools - Decodificador AC3/DTS</translation>
+        <translation>AC3Filter Tools - AC3/DTS解码器</translation>
     </message>
     <message>
         <source>WavPack - Hybrid Lossless Compression</source>
-        <translation>WavPack - Compresión híbrida sin pérdida</translation>
+        <translation>WavPack - 无损压缩混合</translation>
     </message>
     <message>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
-        <translation>Monkey&apos;s Audio - Compresor de audio sin pérdida</translation>
+        <translation>孙悟空(Monkey&apos;s) 音频 - 无损音频压缩</translation>
     </message>
     <message>
         <source>The True Audio - Lossless Audio Codec</source>
-        <translation>The True Audio - Códec de audio sin pérdida</translation>
+        <translation>真正的音频-无损音频编解码器</translation>
     </message>
     <message>
         <source>MediaInfo - Media File Analysis Tool</source>
-        <translation>MediaInfo - Herramienta de análisis de archivos multimedia</translation>
+        <translation>MediaInfo-媒体文件分析工具</translation>
     </message>
     <message>
         <source>SoX - Sound eXchange</source>
-        <translation>SoX - Sound eXchange</translation>
+        <translation>SoX 声音交换</translation>
     </message>
     <message>
         <source>GnuPG - The GNU Privacy Guard</source>
-        <translation>GnuPG - Guardián de privacidad GNU</translation>
+        <translation>GnuPG - GNU 隐私</translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation>Silk Icons - Más de 700 iconos en formato PNG</translation>
+        <translation>丝绸图标 - 超过 700 图标 PNG 格式</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
-        <translation>Codificador MPEG-4 Nero AAC</translation>
+        <translation>Nero AAC 参考 MPEG-4 编码器</translation>
     </message>
     <message>
         <source>Musepack - Living Audio Compression</source>
-        <translation>Musepack - Compresór de audio con pérdida</translation>
+        <translation>Musepack - 生活音频压缩</translation>
     </message>
     <message>
         <source>Shorten - Lossless Audio Compressor</source>
-        <translation>Shorten - Compresór de audio con pérdida</translation>
+        <translation>Shorten - 无损音频压缩</translation>
     </message>
     <message>
         <source>Speex - Free Codec For Free Speech</source>
-        <translation>Speex - Códec libre para libre expresión</translation>
+        <translation>Speex - 免费自由的编解码器</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation>Patente de formato de audio de código abierto diseñado para expresión.</translation>
+        <translation>开源专利免费的音频格式设计的演讲｡</translation>
     </message>
     <message>
         <source>GNU Wget - Software for retrieving files using HTTP</source>
-        <translation>GNU Wget - Software para descarga de archivos mediante HTTP</translation>
+        <translation>GNU Wget - 软件通过HTTP下载文件</translation>
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation>Nota: Esta es una versión demo (preliminar) de LameXP que expirará el %1. %2 días restantes.</translation>
+        <translation>注:这是一个演示版本LameXP将届满%1｡剩余%2天｡</translation>
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
-        <translation>Codificador de audio Aften - A/52</translation>
+        <translation>Aften - A/52 音频编码器</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
-        <translation>Decodificador ALAC</translation>
+        <translation>ALAC 解码器</translation>
     </message>
     <message>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</translation>
+        <translation>版权所有 (c) 2004 David Hammerton｡科迪 Brocious 的贡献｡</translation>
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</translation>
+        <translation>版权所有 (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;｡保留某些权利｡</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
@@ -221,105 +221,105 @@
     </message>
     <message>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
-        <translation>wma2wav - Conversor de WMA a WAV</translation>
+        <translation>wma2wav - WMA到WAV转换器</translation>
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
-        <translation>avs2wav - Conversor de Avisynth a WAV</translation>
+        <translation>avs2wav - Avisynth到WAV音频转换器</translation>
     </message>
 </context>
 <context>
     <name>AudioFileModel</name>
     <message>
         <source>Profile</source>
-        <translation>Perfil</translation>
+        <translation>配置文件</translation>
     </message>
     <message>
         <source>Channels</source>
-        <translation>Canales</translation>
+        <translation>声道</translation>
     </message>
     <message>
         <source>Samplerate</source>
-        <translation>Velocidad de muestreo</translation>
+        <translation>采样率</translation>
     </message>
     <message>
         <source>Bitdepth</source>
-        <translation>Profundidad de bits</translation>
+        <translation>位深度</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation>类型</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Versión</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Bitrate</source>
-        <translation>Tasa de bits</translation>
+        <translation>比特率</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation>Constante</translation>
+        <translation>不变</translation>
     </message>
     <message>
         <source>Variable</source>
-        <translation>Variable</translation>
+        <translation>可变</translation>
     </message>
 </context>
 <context>
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Importar Cue sheet</translation>
+        <translation>导入提示表</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation>El siguiente Cue sheet será dividido e imporatdo en LameXP.</translation>
+        <translation>下面的提示表将拆分,并导入到 LameXP｡</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation>Cargando Cue sheet, por favor espere...</translation>
+        <translation>加载提示表文件,请保持耐心...</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
-        <translation>¡Ha ocurrido un error desconocido!</translation>
+        <translation>出现了一个未知的错误 !</translation>
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation>Error al cargar Cue sheet:</translation>
+        <translation>未能加载提示表文件:</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation>Error en el Cue sheet</translation>
+        <translation>错误的提示表</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
-        <translation>¡El archivo seleccionado no se encuentra!</translation>
+        <translation>找不到指定的文件 !</translation>
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation>El archivo no se puede abrir para su lectura. ¡Asegurese de tener los derechos necesarios!</translation>
+        <translation>无法打开文件进行读取｡确保您具有所需的权限 !</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation>¡El archivo proporcionado no parece un archivo Cue sheet válido!</translation>
+        <translation>提供的文件看上去不像是有效的提示表光盘映像文件 !</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation>¡No se ha podido encontrar ninguna pista de audio soportada en la imagen Cue sheet!</translation>
+        <translation>提示表映像中找不到任何受支持的音频轨道 !</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation>LameXP no soporta archivos Cue sheet &quot;binarios&quot;.</translation>
+        <translation>请注意,LameXP 不能处理&quot;二进制&quot;提示表映像｡</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation>El archivo Cue sheet seleccionado contiene información inconsistente. ¡Tenga precaución!</translation>
+        <translation>当心!所选的提示表文件包含不一致的信息｡</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation>Elija la carpeta de destino</translation>
+        <translation>选择输出目录</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -327,63 +327,63 @@
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation>¡Error: No se puede escribir en la carpeta de salida seleccionada!</translation>
+        <translation>错误: 所选的输出目录不是可写的 !</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation>Alerta de poco espacio en disco</translation>
+        <translation>低磁盘空间警告</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation>Queda menos de %1 GB de espacio disponible en la carpeta seleccionada.</translation>
+        <translation>还有 %1GB 的可用磁盘空间小于所选的输出目录中可用｡</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation>¡Es muy recomendable liberar espacio de disco antes de comenzar la importanción!</translation>
+        <translation>它是以释放更多磁盘空间进行导入之前强烈推荐 !</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation>Analizando archivo(s), por favor espere...</translation>
+        <translation>分析文件,请稍候...</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation>Dividiendo archivo(s), por favor espere...</translation>
+        <translation>扫描文件夹文件请稍候...</translation>
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation>¡Error: No se puede crear la carpeta de salida!</translation>
+        <translation>错误: 无法创建所选的输出目录 !</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation>¡Ha ocurrido un error mientras se dividia el Cue sheet!</translation>
+        <translation>扫描提示工作表时出现了意外的错误 !</translation>
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>Se ha(n) importado %1 pista(s) y se ha(n) saltado %2 del Cue sheet.</translation>
+        <translation>导入 %1 从提示表轨道,并跳过 %2 轨道｡</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
-        <translation>Cue sheet completado</translation>
+        <translation>完成提示表</translation>
     </message>
     <message>
         <source>Analysis Failed</source>
-        <translation>Análisis fallido</translation>
+        <translation>分析失败</translation>
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation>Aviso: ¡El formato de algunos archivos de entrada no puede ser determinado!</translation>
+        <translation>警告: 有些输入文件格式无法确定 !</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
-        <translation>Continuar de todas formas</translation>
+        <translation>继续</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation>Cancelar</translation>
+        <translation>中止</translation>
     </message>
     <message>
         <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation>¡El proceso fue cancelado tras %1 pista(s)!</translation>
+        <translation>用户终止了 %1 个轨道进程 !</translation>
     </message>
     <message>
         <source>(System Default)</source>
@@ -395,50 +395,50 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">Aceptar</translation>
+        <translation type="unfinished">确定</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation type="unfinished">取消</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Artista desconocido</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished">Álbum desconocido</translation>
+        <translation type="unfinished">未知专辑</translation>
     </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Importar Cue sheet</translation>
+        <translation>导入提示表</translation>
     </message>
     <message>
         <source> Output Directory </source>
-        <translation>Carpeta de destino</translation>
+        <translation>输出目录</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Seleccionar...</translation>
+        <translation>浏览...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation>Cancelar</translation>
+        <translation>放弃</translation>
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation>El archivo de origen existe</translation>
+        <translation>现有源文件</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation>El archivo de origen no existe (¡Se saltarán pistas!)</translation>
+        <translation>缺少源文件(轨道将跳转 !)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation>Cargar otro Cue sheet</translation>
+        <translation>加载不同的提示页面</translation>
     </message>
     <message>
         <source>Artist:</source>
@@ -453,209 +453,209 @@
     <name>CueSheetModel</name>
     <message>
         <source>No.</source>
-        <translation>Nº.</translation>
+        <translation>不</translation>
     </message>
     <message>
         <source>File / Track</source>
-        <translation>Archivo / Pista</translation>
+        <translation>文件 / 轨道</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation>Índice</translation>
+        <translation>索引</translation>
     </message>
     <message>
         <source>File %1</source>
-        <translation>Archivo %1</translation>
+        <translation>文件 %1</translation>
     </message>
     <message>
         <source>Track %1</source>
-        <translation>Pista %1</translation>
+        <translation>轨道 %1</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Artista desconocido</translation>
+        <translation>未知的艺术家</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation>Título desconocido</translation>
+        <translation>未知的标题</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Duración</translation>
+        <translation>持续时间</translation>
     </message>
 </context>
 <context>
     <name>DecoderRegistry</name>
     <message>
         <source>All supported types</source>
-        <translation>Todos los archivos soportados</translation>
+        <translation>所有受支持的类型</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Todos los archivos</translation>
+        <translation>所有文件</translation>
     </message>
     <message>
         <source>Playlists</source>
-        <translation>Listas de reproducción</translation>
+        <translation>播放列表</translation>
     </message>
 </context>
 <context>
     <name>DiskObserverThread</name>
     <message>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
-        <translation>¡Queda poco espacio disponible en el disco &apos;%1&apos; (solo hay %2 MB disponibles), pueden ocurrir problemas!</translation>
+        <translation>低驱动器%1磁盘空间检测(只有%2MB的是可用的),可能会发生问题!</translation>
     </message>
 </context>
 <context>
     <name>DropBox</name>
     <message>
         <source>LameXP - DropBox</source>
-        <translation>LameXP - DropBox</translation>
+        <translation>LameXP - 投放箱</translation>
     </message>
     <message>
         <source>LameXP DropBox</source>
-        <translation>LameXP DropBox</translation>
+        <translation>LameXP 投放箱</translation>
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation>¡Puede arrastrar&amp;amp;soltar archivos aquí!</translation>
+        <translation>您可以将文件拖放添加到 LameXP,拖放到此处 !</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Clic derecho para cerrar el DropBox)</translation>
+        <translation>(用鼠标右键单击关闭投放箱)</translation>
     </message>
 </context>
 <context>
     <name>FileListModel</name>
     <message>
         <source>Title</source>
-        <translation>Título</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <source>Full Path</source>
-        <translation>Ruta completa</translation>
+        <translation>完整路径</translation>
     </message>
 </context>
 <context>
     <name>LogViewDialog</name>
     <message>
         <source>Log View</source>
-        <translation>Ver archivo de registro</translation>
+        <translation>日志显示</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation>Cerrar</translation>
+        <translation>放弃</translation>
     </message>
     <message>
         <source>Save to File...</source>
-        <translation>Guardar en archivo...</translation>
+        <translation>保存到文件...</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation>Copiar al portapapeles</translation>
+        <translation>复制到剪贴板</translation>
     </message>
     <message>
         <source>Log File</source>
-        <translation>Archivo de registro</translation>
+        <translation>日志文件</translation>
     </message>
     <message>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation>El archivo de registro muestra información detallada acerca de la tarea seleccionada.</translation>
+        <translation>日志文件显示有关所选项目的详细信息｡</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation>LameXP - Interfaz de codificación de audio</translation>
+        <translation>LameXP - 前端音频编码器</translation>
     </message>
     <message>
         <source>Source Files</source>
-        <translation>Entrada</translation>
+        <translation>源文件</translation>
     </message>
     <message>
         <source>Add File(s)</source>
-        <translation>Añadir archivo(s)</translation>
+        <translation>增加文件</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Quitar</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Limpiar</translation>
+        <translation>清除</translation>
     </message>
     <message>
         <source>Show Details</source>
-        <translation>Mostrar detalles</translation>
+        <translation>显示详细</translation>
     </message>
     <message>
         <source>Output Directory</source>
-        <translation>Salida</translation>
+        <translation>输出目录</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
-        <translation>Ir a Inicio</translation>
+        <translation>保存到桌面文件夹</translation>
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation>Ir a Mi música</translation>
+        <translation>保存到音乐文件夹</translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
-        <translation>Ir al escritorio</translation>
+        <translation>保存到桌面文件夹</translation>
     </message>
     <message>
         <source>Make New Folder</source>
-        <translation>Nueva carpeta</translation>
+        <translation>使用新文件夹</translation>
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation>Guardar archivos de salida en carpeta de entrada</translation>
+        <translation>输出文件,保存在同一个地方输入文件的位置</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation>Anteponer ruta relativa de entrada al archivo de salida</translation>
+        <translation>源文件路径内部前置相对输出文件</translation>
     </message>
     <message>
         <source>Meta Data</source>
-        <translation>Metadatos</translation>
+        <translation>Meta 数据</translation>
     </message>
     <message>
         <source> Meta Information </source>
-        <translation>Metadatos</translation>
+        <translation>元信息</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation>编辑</translation>
     </message>
     <message>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation>Nota: ¡La información que introduzca aquí &lt;u&gt;sustituirá a los datos de origen&lt;/u&gt;!</translation>
+        <translation>注:元信息你进入这里将会&lt;u&gt; 取代 &lt;/u&gt;数据,从源头上中的!</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation>Resetear</translation>
+        <translation>重置</translation>
     </message>
     <message>
         <source> Options </source>
-        <translation>Opciones</translation>
+        <translation>选项</translation>
     </message>
     <message>
         <source>Automatically generate playlist file (.m3u)</source>
-        <translation>Generar lista de reproducción (.m3u)</translation>
+        <translation>播放列表文件自动生成 (.m3u)</translation>
     </message>
     <message>
         <source>Write meta information to encoded files</source>
-        <translation>Escribir metadatos en los archivos codificados</translation>
+        <translation>元信息编码文件写</translation>
     </message>
     <message>
         <source>Compression</source>
-        <translation>Compresión</translation>
+        <translation>压缩</translation>
     </message>
     <message>
         <source> Encoder / Format </source>
-        <translation>Codificador / Formato </translation>
+        <translation>编码器/格式</translation>
     </message>
     <message>
         <source>Lame MP3</source>
@@ -675,107 +675,107 @@
     </message>
     <message>
         <source> Rate Control Method </source>
-        <translation>Método de control de tasa de bits</translation>
+        <translation>率控制方法</translation>
     </message>
     <message>
         <source>Quality-based (VBR)</source>
-        <translation>Basado en calidad (VBR)</translation>
+        <translation>质量(VBR)</translation>
     </message>
     <message>
         <source>Average Bitrate (ABR)</source>
-        <translation>Tasa de bits promedio (ABR)</translation>
+        <translation>平均比特率(ABR)</translation>
     </message>
     <message>
         <source>Constant Bitrate (CBR)</source>
-        <translation>Tasa de bits constante (CBR)</translation>
+        <translation>不变的比特率(CBR)</translation>
     </message>
     <message>
         <source> Quality / Bitrate </source>
-        <translation>Calidad / Tasa de bits</translation>
+        <translation>质量/比特率</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation>Mínima</translation>
+        <translation>最低</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation>Máxima</translation>
+        <translation>最高</translation>
     </message>
     <message>
         <source>Advanced Options</source>
-        <translation>Opciones avanzadas</translation>
+        <translation>高级选项</translation>
     </message>
     <message>
         <source> Encode Now!</source>
-        <translation>¡Codificar ahora!</translation>
+        <translation>开始编码!</translation>
     </message>
     <message>
         <source>About...</source>
-        <translation>Acerca de...</translation>
+        <translation>关于...</translation>
     </message>
     <message>
         <source> Exit Program</source>
-        <translation>Salir del programa</translation>
+        <translation>退出程序</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Archivo</translation>
+        <translation>文件</translation>
     </message>
     <message>
         <source>?</source>
-        <translation>?</translation>
+        <translation>其它</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vista</translation>
+        <translation>视图</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation>Estilo</translation>
+        <translation>样式</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Idioma</translation>
+        <translation>语言</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation>Herramientas</translation>
+        <translation>工具</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Configuración</translation>
+        <translation>配置</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Salir</translation>
+        <translation>退出</translation>
     </message>
     <message>
         <source>Open File(s)...</source>
-        <translation>Añadir archivo(s)...</translation>
+        <translation>打开文件(s)...</translation>
     </message>
     <message>
         <source>Visit Official Web-Site</source>
-        <translation>Visitar página oficial</translation>
+        <translation>请访问官方网站</translation>
     </message>
     <message>
         <source>Check for Updates</source>
-        <translation>Comprobar actualizaciones</translation>
+        <translation>检查更新</translation>
     </message>
     <message>
         <source>Open Folder...</source>
-        <translation>Añadir carpeta...</translation>
+        <translation>打开文件夹...</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation>Limpiar todo</translation>
+        <translation>全部清除</translation>
     </message>
     <message>
         <source>Plastique</source>
-        <translation>Plástico</translation>
+        <translation>平淡</translation>
     </message>
     <message>
         <source>Cleanlooks</source>
-        <translation>Limpio</translation>
+        <translation>干净外观</translation>
     </message>
     <message>
         <source>Windows Vista (&quot;Aero&quot;)</source>
@@ -783,7 +783,7 @@
     </message>
     <message>
         <source>Windows Classic</source>
-        <translation>Windows clásico</translation>
+        <translation>Windows 经典</translation>
     </message>
     <message>
         <source>Windows XP (&quot;Luna&quot;)</source>
@@ -791,159 +791,159 @@
     </message>
     <message>
         <source>Disable Update Reminder</source>
-        <translation>Deshabilitar recordatorio de actualizaciones</translation>
+        <translation>禁用更新提醒</translation>
     </message>
     <message>
         <source>Disable Sound Effects</source>
-        <translation>Deshabilitar efectos de sonido</translation>
+        <translation>禁用声音效果</translation>
     </message>
     <message>
         <source>Install WMA Decoder</source>
-        <translation>Instalar decodificador WMA</translation>
+        <translation>安装 WMA 解码器</translation>
     </message>
     <message>
         <source>Disable Nero AAC Notifications</source>
-        <translation>Deshabilitar notificaciones de Nero AAC</translation>
+        <translation>禁用 Nero AAC 通知</translation>
     </message>
     <message>
         <source>Show DropBox</source>
-        <translation>Mostar DropBox</translation>
+        <translation>显示投放箱</translation>
     </message>
     <message>
         <source>From File...</source>
-        <translation>Desde archivo...</translation>
+        <translation>从文件...</translation>
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
-        <translation>Añadiendo archivo(s), espere por favor...</translation>
+        <translation>添加文件,请稍等...</translation>
     </message>
     <message>
         <source>Access Denied</source>
-        <translation>Acceso denegado</translation>
+        <translation>访问被拒绝</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation>¡Se ha rechazado %1 archivo(s) a los que no se tiene acceso de lectura!</translation>
+        <translation>%1 文件都被拒绝,因为读访问权限不允许!</translation>
     </message>
     <message>
         <source>This usually means the file is locked by another process.</source>
-        <translation>Esto suele significar que están siendo utilizados por otro proceso.</translation>
+        <translation>通常这意味着该文件由另一个进程锁定｡</translation>
     </message>
     <message>
         <source>Files Rejected</source>
-        <translation>Archivo rechazado</translation>
+        <translation>文件被拒绝</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation>¡Se ha rechazado %1 archivo(s) ya que no se reconoce su formato!</translation>
+        <translation>%1 文件被拒绝,因为文件格式分辨不出!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
-        <translation>Esto suele significar que están corruptos o tienen un formato no soportado.</translation>
+        <translation>通常,这意味着他们都已损坏,或不受支持的格式｡</translation>
     </message>
     <message>
         <source>You can drop in audio files here!</source>
-        <translation>¡Puede arrastrar y soltar archivos aquí!</translation>
+        <translation>你可以把音频文件拖放到这里 !</translation>
     </message>
     <message>
         <source>Open File in External Application</source>
-        <translation>Abrir archivo en una aplicación externa</translation>
+        <translation>用外部应用程序中打开文件</translation>
     </message>
     <message>
         <source>Browse File Location</source>
-        <translation>Abrir ubicación del archivo</translation>
+        <translation>浏览文件的位置</translation>
     </message>
     <message>
         <source>Browse Selected Folder</source>
-        <translation>Abrir carpeta seleccionada</translation>
+        <translation>浏览选定的文件夹</translation>
     </message>
     <message>
         <source>License Declined</source>
-        <translation>Licencia rechazada</translation>
+        <translation>拒绝许可</translation>
     </message>
     <message>
         <source>You have declined the license. Consequently the application will exit now!</source>
-        <translation>Ha rechazado la licencia. ¡Por lo tanto la aplicación se cerrará!</translation>
+        <translation>您已拒绝许可｡因此该应用程序将立即退出 !</translation>
     </message>
     <message>
         <source>Goodbye!</source>
-        <translation>¡Adiós!</translation>
+        <translation>再见</translation>
     </message>
     <message>
         <source>LameXP - Expired</source>
-        <translation>LameXP - Expirado</translation>
+        <translation>LameXP - 过期</translation>
     </message>
     <message>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translation>Esta versión demo (preliminar) de LameXP caducó el %1.</translation>
+        <translation>此预发行的演示版本 LameXP 已在 %1 过期｡</translation>
     </message>
     <message>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
-        <translation>LameXP es software libre y las versiones estables nunca expirarán.</translation>
+        <translation>LameXP 是一个免费的软件和版本不会过期｡</translation>
     </message>
     <message>
         <source>Exit Program</source>
-        <translation>Salir del programa</translation>
+        <translation>退出程序</translation>
     </message>
     <message>
         <source>Urgent Update</source>
-        <translation>Actualización urgente</translation>
+        <translation>紧急更新</translation>
     </message>
     <message>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
-        <translation>Su versión de LameXP tiene más de un año. ¡Es hora de actualizarla!</translation>
+        <translation>您的版本的 LameXP 超过一年的更新时间 !</translation>
     </message>
     <message>
         <source>Update Reminder</source>
-        <translation>Recordatorio de actualizaciones</translation>
+        <translation>更新提醒</translation>
     </message>
     <message>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
-        <translation>La última comprobación de actualizaciones fue hace más de 14 días. ¿Desea comprobar actualizaciones ahora?</translation>
+        <translation>您上次更新检查了超过 14 天｡立即检查更新吗?</translation>
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation>Todavía no ha comprobado ninguna actualización. ¿Desea hacerlo ahora?</translation>
+        <translation>您没有检查 LameXP 是否有新版本｡立即检查更新吗?</translation>
     </message>
     <message>
         <source>Postpone</source>
-        <translation>Más tarde</translation>
+        <translation>推迟</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
-        <translation>¡LameXP ha detectado que su versión del codificador Nero AAC esta desactualizada!</translation>
+        <translation>LameXP 检测到您的版本的 Nero AAC 编码器已经过时了 !</translation>
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation>La última versión disponible es %1 (o posterior), pero todavía está instalada la versión %2.</translation>
+        <translation>可用的新版本是 %1 (或更高版本),但你仍有版本安装 %2｡</translation>
     </message>
     <message>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation>Puede descargar la última versión del codificador Nero AAC desde la web de Nero:</translation>
+        <translation>您可以从 Nero 网址下载最新版本的 Nero AAC 编码器</translation>
     </message>
     <message>
         <source>AAC Encoder Outdated</source>
-        <translation>Codificador AAC desactualizado</translation>
+        <translation>过时的 AAC 编码器</translation>
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation>No se encuentra el codificador Nero AAC. Soporte para codificación AAC deshabilitado.</translation>
+        <translation>找不到 Nero AAC 编码器｡可能 AAC 编码器被禁用｡</translation>
     </message>
     <message>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation>¡Por favor coloque &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;, y &apos;neroAacTag.exe&apos; en la carpeta de LameXP!</translation>
+        <translation>请到把 &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; 和 &apos;neroAacTag.exe&apos; 放入 LameXP 目录!</translation>
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
-        <translation>La carpeta de LameXP está en:</translation>
+        <translation>您的 LameXP 目录位于此处</translation>
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation>Puede descargar el codificador Nero AAC gratuitamente desde la web de Nero:</translation>
+        <translation>您可以从 Nero 官方网站上免费下载 Nero AAC 编码器</translation>
     </message>
     <message>
         <source>AAC Support Disabled</source>
-        <translation>Soporte AAC deshabilitado</translation>
+        <translation>AAC 支持被禁用</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -951,251 +951,251 @@
     </message>
     <message>
         <source>You must add at least one file to the list before proceeding!</source>
-        <translation>¡Debe añadir al menos un archivo a la lista para continuar!</translation>
+        <translation>您必须在继续之前列表中添加至少一个文件 !</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation>Alerta de poco espacio en disco</translation>
+        <translation>低磁盘空间警告</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
-        <translation>Hay menos de %1 GB de espacio libre en la carpeta TEMP del sistema.</translation>
+        <translation>%1 GB 的可用磁盘空间小于上有您的系统 TEMP 文件夹｡</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
-        <translation>¡Es recomendable que libere más espacio en el disco antes de iniciar la codificación!</translation>
+        <translation>进行编码之前强烈推荐释放更多磁盘空间 !</translation>
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
-        <translation>Su carpeta TEMP se encuentra en:</translation>
+        <translation>您的 TEMP 文件夹位于</translation>
     </message>
     <message>
         <source>Abort Encoding Process</source>
-        <translation>Cancelar proceso de codificación</translation>
+        <translation>中止编码过程</translation>
     </message>
     <message>
         <source>Clean Disk Now</source>
-        <translation>Limpiar disco ahora</translation>
+        <translation>现在清理磁盘</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation>Ignorar</translation>
+        <translation>忽略</translation>
     </message>
     <message>
         <source>Low Diskspace</source>
-        <translation>Poco espacio en disco</translation>
+        <translation>低磁盘空间</translation>
     </message>
     <message>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
-        <translation>Está continuando con poco espacio en disco. ¡Puede que ocurran problemas!</translation>
+        <translation>正在进行处于低的磁盘空间,可能会出现问题 !</translation>
     </message>
     <message>
         <source>Sorry, an unsupported encoder has been chosen!</source>
-        <translation>¡Disculpe, ha seleccionado un codificador no válido!</translation>
+        <translation>对不起,选择了一个不受支持的编码器 !</translation>
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation>No se puede escribir en la carpeta de salida seleccionada.</translation>
+        <translation>无法写入所选的输出目录｡</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
-        <translation>¡Por favor, elija una carpeta diferente!</translation>
+        <translation>请选择一个不同的目录 !</translation>
     </message>
     <message>
         <source>Add file(s)</source>
-        <translation>Añadir archivo(s)</translation>
+        <translation>添加文件(s)</translation>
     </message>
     <message>
         <source>Load Translation</source>
-        <translation>Cargar traducción</translation>
+        <translation>加载翻译</translation>
     </message>
     <message>
         <source>Translation Files</source>
-        <translation>Archivos de traducción</translation>
+        <translation>翻译文件</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation>Nueva carpeta</translation>
+        <translation>新文件夹</translation>
     </message>
     <message>
         <source>Enter the name of the new folder:</source>
-        <translation>Intrudozca el nombre de la nueva carpeta:</translation>
+        <translation>输入新文件夹的名称</translation>
     </message>
     <message>
         <source>Failed to create folder</source>
-        <translation>Error al crear la carpeta</translation>
+        <translation>未能创建文件夹</translation>
     </message>
     <message>
         <source>The new folder could not be created:</source>
-        <translation>No se ha podido crear la nueva carpeta:</translation>
+        <translation>无法创建新的文件夹:</translation>
     </message>
     <message>
         <source>Drive is read-only or insufficient access rights!</source>
-        <translation>¡El disco es de solo lectura o no se tienen los derechos suficientes!</translation>
+        <translation>驱动器是只读的或没有足够的访问权限 !</translation>
     </message>
     <message>
         <source>Already Running</source>
-        <translation>Ya se está ejecutando</translation>
+        <translation>已在运行</translation>
     </message>
     <message>
         <source>LameXP is already running, please use the running instance!</source>
-        <translation>¡LameXP ya se está ejecutando, use esa instancia por favor!</translation>
+        <translation>LameXP 已在运行,请使用当前运行的实例 !</translation>
     </message>
     <message>
         <source>Quality Level %1</source>
-        <translation>Nivel de calidad %1</translation>
+        <translation>质量级别 %1</translation>
     </message>
     <message>
         <source>Compression %1</source>
-        <translation>Compresión %1</translation>
+        <translation>压缩 %1</translation>
     </message>
     <message>
         <source>Uncompressed</source>
-        <translation>Sin compresión</translation>
+        <translation>未压缩</translation>
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
-        <translation>¿Seguro que desea deshabilitar el recordatorio de actualizaciones?</translation>
+        <translation>确实要禁用更新提醒吗?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation>是</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation>不</translation>
     </message>
     <message>
         <source>The update reminder has been disabled.</source>
-        <translation>Recordatorio de actualizaciones deshabilitado.</translation>
+        <translation>更新提醒已被禁用｡</translation>
     </message>
     <message>
         <source>Please remember to check for updates at regular intervals!</source>
-        <translation>¡Recuerde comprobar las actualizaciones regularmente!</translation>
+        <translation>请记住检查间隔定期更新!</translation>
     </message>
     <message>
         <source>The update reminder has been re-enabled.</source>
-        <translation>Recordatorio de actualizaciones habilitado.</translation>
+        <translation>更新提醒已重新启用｡</translation>
     </message>
     <message>
         <source>Do you really want to disable all sound effects?</source>
-        <translation>¿Seguro que desea deshabilitar los efectos de sonido?</translation>
+        <translation>确实要禁用所有声音效果吗?</translation>
     </message>
     <message>
         <source>Sound Effects</source>
-        <translation>Efectos de sonido</translation>
+        <translation>声音效果</translation>
     </message>
     <message>
         <source>All sound effects have been disabled.</source>
-        <translation>Efectos de sonido deshabilitados.</translation>
+        <translation>已禁用所有的声音效果｡</translation>
     </message>
     <message>
         <source>The sound effects have been re-enabled.</source>
-        <translation>Efectos de sonido habilitados.</translation>
+        <translation>声音效果已经重新启用｡</translation>
     </message>
     <message>
         <source>Nero AAC Notifications</source>
-        <translation>Notificaciones Nero AAC</translation>
+        <translation>Nero AAC 通知</translation>
     </message>
     <message>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
-        <translation>¿Seguro que desea deshabilitar las notificaciones del codificador Nero AAC?</translation>
+        <translation>确实要禁用所有 Nero AAC 编码器通知吗?</translation>
     </message>
     <message>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
-        <translation>Notificaciones del codificador Nero AAC deshabilitadas.</translation>
+        <translation>已禁用所有 Nero AAC 编码器通知｡</translation>
     </message>
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation>Notificaciones del codificador Nero AAC habilitadas.</translation>
+        <translation>Nero AAC 编码器通知已重新启用｡</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation>n/d</translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <source> LAME Algorithm Quality </source>
-        <translation>Algoritmo de calidad LAME</translation>
+        <translation>LAME算法质量</translation>
     </message>
     <message>
         <source>Faster Processing</source>
-        <translation>Mayor velocidad</translation>
+        <translation>更快的处理</translation>
     </message>
     <message>
         <source>Better quality</source>
-        <translation>Mayor calidad</translation>
+        <translation>更好的质量</translation>
     </message>
     <message>
         <source>Best Quality (Very Slow)</source>
-        <translation>Calidad muy alta (muy lento)</translation>
+        <translation>最好的质量(很慢)</translation>
     </message>
     <message>
         <source>High Quality (Recommended)</source>
-        <translation>Calidad alta (recomendado)</translation>
+        <translation>高质量(推荐)</translation>
     </message>
     <message>
         <source>Average Quality (Default)</source>
-        <translation>Calidad media (predeterminado)</translation>
+        <translation>平均质量 (默认值)</translation>
     </message>
     <message>
         <source>Low Quality (Fast)</source>
-        <translation>Calidad baja (rápido)</translation>
+        <translation>低质量 (快速)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
-        <translation>Calidad muy baja (muy rápido)</translation>
+        <translation>质量差(非常快)</translation>
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation>Administración de tasa de bits (LAME y OggEnc2) </translation>
+        <translation>比特率管理 (LAME 和 OggEnc2)</translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
-        <translation>Modificar de tasa de bits</translation>
+        <translation>启用管理比特率</translation>
     </message>
     <message>
         <source>Minimum (kbps):</source>
-        <translation>Mínima (kbps):</translation>
+        <translation>最低 (kbps):</translation>
     </message>
     <message>
         <source>Maximum (kbps):</source>
-        <translation>Máxima (kbps):</translation>
+        <translation>最高 (kbps):</translation>
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
-        <translation>Modo de canal / Frecuencia de muestreo</translation>
+        <translation>声道 / 采样率</translation>
     </message>
     <message>
         <source>Auto Select (Default)</source>
-        <translation>Auto-seleccionar</translation>
+        <translation>自动选择 (默认值)</translation>
     </message>
     <message>
         <source>Joint Stereo</source>
-        <translation>Estéreo conjunto</translation>
+        <translation>联合立体声</translation>
     </message>
     <message>
         <source>Forced Joint Stereo</source>
-        <translation>Estéreo conjunto forzado</translation>
+        <translation>强制联合立体声</translation>
     </message>
     <message>
         <source>Simple</source>
-        <translation>Simple</translation>
+        <translation>简单</translation>
     </message>
     <message>
         <source>Dual Mono</source>
-        <translation>Mono dual</translation>
+        <translation>双声道</translation>
     </message>
     <message>
         <source>Mono</source>
-        <translation>Mono</translation>
+        <translation>单声道</translation>
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation>Canales MP3:</translation>
+        <translation>MP3 通道模式:</translation>
     </message>
     <message>
         <source>16.000</source>
@@ -1223,91 +1223,91 @@
     </message>
     <message>
         <source>Sampling Rate (Hz):</source>
-        <translation>Frecuencia de muestreo (Hz):</translation>
+        <translation>采样率 (Hz):</translation>
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation>Procesamiento en 2-Pasos (Modo ABR)</translation>
+        <translation>启用第二次处理 (ABR 模式)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
-        <translation>Seleccionar perfil AAC:</translation>
+        <translation>选择 AAC 配置文件:</translation>
     </message>
     <message>
         <source>Enforce LC-AAC</source>
-        <translation>Aplicar LC-AAC</translation>
+        <translation>强制 LC AAC</translation>
     </message>
     <message>
         <source>Enforce HE-AAC (AAC + SBR)</source>
-        <translation>Aplicar HE-AAC (AAC + SBR)</translation>
+        <translation>强制 HE-AAC (AAC + SBR)</translation>
     </message>
     <message>
         <source>Auto Select (Recommended)</source>
-        <translation>Auto-seleccionar</translation>
+        <translation>自动选择(推荐)</translation>
     </message>
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
-        <translation>Aplicar HE-AAC v2 (AAC + SBR + PS)</translation>
+        <translation>强制 HE-AAC v2 (AAC + SBR + PS)</translation>
     </message>
     <message>
         <source> Volume Normalization </source>
-        <translation>Normalización del volumen</translation>
+        <translation>音量标准化</translation>
     </message>
     <message>
         <source>Enable Normalization Filter</source>
-        <translation>Habilitar filtro de normalización</translation>
+        <translation>启用标准化过滤器</translation>
     </message>
     <message>
         <source>Peak Volume (dB):</source>
-        <translation>Pico de volumen (dB):</translation>
+        <translation>峰值音量(dB):</translation>
     </message>
     <message>
         <source>Reset Advanced Options </source>
-        <translation>Resetear opciones avanzadas </translation>
+        <translation>复位高级选项</translation>
     </message>
     <message>
         <source>Encode!</source>
-        <translation>¡Codificar!</translation>
+        <translation>编码</translation>
     </message>
     <message>
         <source> Tone Adjustment </source>
-        <translation> Ajuste de tono </translation>
+        <translation>音调调整</translation>
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
-        <translation>Ajustar agudos (dB):</translation>
+        <translation>调整高音(dB):</translation>
     </message>
     <message>
         <source>Adjust Bass (dB):</source>
-        <translation>Ajustar graves (dB):</translation>
+        <translation>调整低音(dB):</translation>
     </message>
     <message>
         <source>Disable Shell Integration</source>
-        <translation>Deshabilitar Menú contextual</translation>
+        <translation>禁用外壳(shell)程序集成</translation>
     </message>
     <message>
         <source>Shell Integration</source>
-        <translation>Menú contextual</translation>
+        <translation>外壳(shell)程序集成</translation>
     </message>
     <message>
         <source>Do you really want to disable the LameXP shell integration?</source>
-        <translation>¿Seguro que desea deshabilitar el menú contextual de LameXP?</translation>
+        <translation>确实要禁用 LameXP 外壳(shell)程序集成吗? </translation>
     </message>
     <message>
         <source>The LameXP shell integration has been disabled.</source>
-        <translation>Menú contextual de LameXP deshabilitado.</translation>
+        <translation>LameXP 外壳(shell)程序集成已被禁用｡</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation>Menú contextual de LameXP habilitado.</translation>
+        <translation>LameXP 外壳(shell)程序集成已重新启用｡</translation>
     </message>
     <message>
         <source> Custom Encoder Parameters </source>
-        <translation>Personalizar parámetros de codificación</translation>
+        <translation>编码器的自定义参数</translation>
     </message>
     <message>
         <source>OggEnc2:</source>
-        <translation>QggEnc2:</translation>
+        <translation>OggEnc2:</translation>
     </message>
     <message>
         <source>FLAC:</source>
@@ -1315,123 +1315,123 @@
     </message>
     <message>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
-        <translation>Aviso: ¡¡¡ Los parámetros personalizados no se comprobarán en absoluto. Úselos bajo su propio riesgo !!!</translation>
+        <translation>警告: 自定义参数将不会被检查过｡使用它们需要您自担风险!!!</translation>
     </message>
     <message>
         <source> Multi-Threading </source>
-        <translation>Multi-hilo</translation>
+        <translation>多线程处理</translation>
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation>Elegir el número de instancias paralelas basandose en el números de núcleos de la CPU (Recomendado)</translation>
+        <translation>选择基于 CPU 核心 (推荐) 的数量,并行实例的数量｡</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
-        <translation>Menos instancias</translation>
+        <translation>更少的实例</translation>
     </message>
     <message>
         <source>More Instances</source>
-        <translation>Más instancias</translation>
+        <translation>更多实例</translation>
     </message>
     <message>
         <source>%1 Instance(s)</source>
-        <translation>%1 instancia(s)</translation>
+        <translation>%1 个实例</translation>
     </message>
     <message>
         <source> Temp Directory </source>
-        <translation>Carpeta temporal</translation>
+        <translation>临时目录</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Navegar...</translation>
+        <translation>浏览...</translation>
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation>Guardar archivos temporales en la carpeta TEMP del sistema (Recomendado)</translation>
+        <translation>将临时文件存储在您的系统默认的 TEMP 目录 (推荐)</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation>No encontrado</translation>
+        <translation>找不到</translation>
     </message>
     <message>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation>La carpeta seleccionada como TEMP no existe:</translation>
+        <translation>您目前选定的 TEMP 文件夹不再存在:</translation>
     </message>
     <message>
         <source>Restore Default</source>
-        <translation>Predeterminado</translation>
+        <translation>还原默认设置</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation>¡No se puede escribir en la carpeta seleccionada. Por favor, seleccione otra!</translation>
+        <translation>无法写入所选目录｡请选择另一个目录 !</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>¡%1 archivo(s) rechazado(s), ya que son archivos CDDA vacíos!</translation>
+        <translation>%1 个文件已被拒绝,因为它们是虚拟的 CDDA 文件 !</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
-        <translation>Es recomendable usar %1 para este proposito.</translation>
+        <translation>我们建议为此目的使用 %1｡</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
-        <translation>Disculpe, LameXP no puede extraer las pistas del CD-Audio.</translation>
+        <translation>对不起,LameXP 目前无法从音频 CD 提取音频轨道｡</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
-        <translation>Preguntas Frecuentes</translation>
+        <translation>常问的问题</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation>Cambios</translation>
+        <translation>更改日志</translation>
     </message>
     <message>
         <source>Translator&apos;s Guide</source>
-        <translation>Guía de traducción</translation>
+        <translation>翻译指南</translation>
     </message>
     <message>
         <source>Help &amp;&amp; Support</source>
-        <translation>Ayuda &amp;&amp; Soporte</translation>
+        <translation>帮助 &amp;&amp; 支持</translation>
     </message>
     <message>
         <source>Open Folder Recursively...</source>
-        <translation>Abrir carpetas recursivamente...</translation>
+        <translation>打开文件夹以递归方式...</translation>
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation>Escaneando carpeta(s) buscando archivos, espere por favor...</translation>
+        <translation>扫描文件的文件夹中,请稍候...</translation>
     </message>
     <message>
         <source>Add Folder</source>
-        <translation>Añadir carpeta</translation>
+        <translation>添加文件夹</translation>
     </message>
     <message>
         <source>Check for Beta Updates</source>
-        <translation>Comprobar actualizaciones Beta</translation>
+        <translation>检查测试版更新</translation>
     </message>
     <message>
         <source>Beta Updates</source>
-        <translation>Actualizaciones Beta</translation>
+        <translation>试用版更新</translation>
     </message>
     <message>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation>¿Seguro que quiere comprobar las actualizaciones Beta (pre-release)?</translation>
+        <translation>是否确实要检查 LameXP 测试版更新?</translation>
     </message>
     <message>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation>LameXP comprobará en busca de versiones Beta (pre-release).</translation>
+        <translation>LameXP 将检查现在的测试版更新｡</translation>
     </message>
     <message>
         <source>Check Now</source>
-        <translation>Comprobar ahora</translation>
+        <translation>现在检查</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation>Cancelar</translation>
+        <translation>放弃</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation>LameXP &lt;i&gt;no&lt;/i&gt;comprobará en busca de versiones Beta (pre-release).</translation>
+        <translation>LameXP 将 &lt;i&gt; 从今以后 &lt;/i&gt; 不检查测试版更新｡</translation>
     </message>
     <message>
         <source>Aften A/52</source>
@@ -1447,35 +1447,35 @@
     </message>
     <message>
         <source> Aften A/52 Options </source>
-        <translation>Opciones Aften A/52</translation>
+        <translation>Aften A/52 选项 </translation>
     </message>
     <message>
         <source>Film Light</source>
-        <translation>Película suave</translation>
+        <translation>胶卷浅色</translation>
     </message>
     <message>
         <source>Film Standard</source>
-        <translation>Película estándar</translation>
+        <translation>胶卷标准</translation>
     </message>
     <message>
         <source>Music Light</source>
-        <translation>Musica suave</translation>
+        <translation>音乐浅色</translation>
     </message>
     <message>
         <source>Music Standard</source>
-        <translation>Música estándar</translation>
+        <translation>音乐标准</translation>
     </message>
     <message>
         <source>Speech</source>
-        <translation>Diálogo</translation>
+        <translation>语音</translation>
     </message>
     <message>
         <source>None (Default)</source>
-        <translation>Ninguno (Predet.)</translation>
+        <translation>无 (默认)</translation>
     </message>
     <message>
         <source>Auto Select</source>
-        <translation>Auto-seleccionar</translation>
+        <translation>自动选择</translation>
     </message>
     <message>
         <source>1+1 (Ch1,Ch2)</source>
@@ -1511,155 +1511,155 @@
     </message>
     <message>
         <source>Audio Coding Mode:</source>
-        <translation>Modo de codificación de audio:</translation>
+        <translation>音频编码模式:</translation>
     </message>
     <message>
         <source>Dynamic Range Compression:</source>
-        <translation>Compresión de rango dinámico:</translation>
+        <translation>动态范围压缩:</translation>
     </message>
     <message>
         <source>Fast Bit Allocation (Less Accurate)</source>
-        <translation>Localización de bits rápida (Menos preciso)</translation>
+        <translation>快速的分配位 (不太准确)</translation>
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation>Exponente de tamaño de búsqueda:</translation>
+        <translation>指数搜索大小</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
-        <translation>No mostrar de nuevo</translation>
+        <translation>不要再显示</translation>
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Importar Cue sheet</translation>
+        <translation>导入提示表</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation>Abrir Cue sheet</translation>
+        <translation>打开提示表</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation>Archivo Cue sheet</translation>
+        <translation>提示表文件</translation>
     </message>
     <message>
         <source>CDDA Files</source>
-        <translation>Archivos CDDA</translation>
+        <translation>CDDA 文件</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation>Cue sheet</translation>
+        <translation>提示表</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation>¡Se ha(n) rechazado %1 archivo(s), ya que parecen ser imágenes Cue sheet!</translation>
+        <translation>%1 个文件已被拒绝,因为他们似乎是提示表映像文件!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation>Por favor, use el asistente de imporatción de archivos Cue sheet de LameXP.</translation>
+        <translation>导入CUE文件文件,请使用LameXP的提示表向导｡</translation>
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation>Parece que un falso anti-virus está ralentizando el inicio de LameXP.</translation>
+        <translation>好像一个防病毒软件正在放缓的 LameXP 的启动｡</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation>¡Por favor, consulte el documento%1 para ver detalles y soluciones!</translation>
+        <translation>请参阅有关详细信息和解决方案的 %1 文件 !</translation>
     </message>
     <message>
         <source>Slow Startup</source>
-        <translation>Inicio ralentizado</translation>
+        <translation>启动速度慢</translation>
     </message>
     <message>
         <source>Disable Slow Startup Notifications</source>
-        <translation>Deshabilitar notificaciones de Inicio ralentizado</translation>
+        <translation>禁用缓慢启动通知</translation>
     </message>
     <message>
         <source>Slow Startup Notifications</source>
-        <translation>Notificaciones de Inicio ralentizado</translation>
+        <translation>开户启动缓慢通知</translation>
     </message>
     <message>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation>¿Seguro que desea deshabilitar las notificaciones de Inicio ralentizado?</translation>
+        <translation>确实要禁用的启动速度慢的通知吗?</translation>
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation>Notificaciones de Inicio ralentizado deshabilitadas.</translation>
+        <translation>已禁用的启动速度慢的通知｡</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation>Notificaciones de Inicio ralentizado habilitadas.</translation>
+        <translation>启动速度慢的通知已重新启用｡</translation>
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation>Renombrado de archivos de salida</translation>
+        <translation>重命名输出文件</translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation>Renombrar archivos de salida</translation>
+        <translation>重命名输出文件</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation>Número de pista con cero a la izquierda</translation>
+        <translation>轨道数字前有零</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation>Título de la pista</translation>
+        <translation>轨道标题</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation>Nombre del artista</translation>
+        <translation>艺术家姓名</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation>Nombre del álbum</translation>
+        <translation>专辑名称</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation>Año con (al menos) cuatro dígitos</translation>
+        <translation>年至少是四位数</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Comentarios</translation>
+        <translation>评论</translation>
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation>Macros de renombrado</translation>
+        <translation>重命名宏</translation>
     </message>
     <message>
         <source>You can enter custom parameters here!</source>
-        <translation>¡Aquí puede introducir parámetros personalizados!</translation>
+        <translation>您可以输入自定义参数在这里!</translation>
     </message>
     <message>
         <source>Enter the pattern to rename the output files here!</source>
-        <translation>¡Introduzca aquí los patrones de renombrado para los archivos de salida!</translation>
+        <translation>输入模式重命名输出文件!</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;reset&quot;&gt;Reiniciar&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Mostrar lista de macros&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;reset&quot;&gt;复位&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;显示宏的名单&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
-        <translation>Nombre de archivo sin extensión</translation>
+        <translation>不带扩展名的文件名称</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
-        <translation>Patrón de renombrado:</translation>
+        <translation>重命名模式:</translation>
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation>Ejemplo de nombre de archivo:</translation>
+        <translation>示例文件名称:</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation>Caracteres prohibidos en el nombre del archivo:</translation>
+        <translation>禁止在文件名称中的字符:</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation>Forzar mezcla estéreo para archivos de entrada Surround (Multi-canal)</translation>
+        <translation>强制环绕立体声缩混（多通道）来源</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation>Marcar la carpeta de salida actual</translation>
+        <translation>收藏当前输出文件夹</translation>
     </message>
     <message>
         <source>MPEG-4 AAC</source>
@@ -1667,7 +1667,7 @@
     </message>
     <message>
         <source>AAC Encoder-Options</source>
-        <translation>Opciones AAC</translation>
+        <translation>AAC 编码器-选项</translation>
     </message>
     <message>
         <source>MPEG-4 AAC:</source>
@@ -1675,117 +1675,117 @@
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation>Aviso: ¡La calidad del audio será muy pobre. Por favor, &lt;u&gt;no&lt;/u&gt; se queje de la calidad del audio!</translation>
+        <translation>警告: 音频质量会很差｡请&lt;u&gt;不要&lt;/u&gt; 抱怨音频质量差!</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation>Aviso: ¡La velocidad de proceso será muy lenta. Por favor, &lt;u&gt;no&lt;/u&gt; se queje de la velocidad de proceso!</translation>
+        <translation>警告: 处理速度会很慢｡请&lt;u&gt;不要&lt;/u&gt;抱怨处理速度慢!</translation>
     </message>
     <message>
         <source>Peak Level</source>
-        <translation>Nivel de pico</translation>
+        <translation>峰值水平</translation>
     </message>
     <message>
         <source>RMS Level</source>
-        <translation>Nivel RMS</translation>
+        <translation>RMS 水平</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Ninguno</translation>
+        <translation>无</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
-        <translation>Modo de equalización:</translation>
+        <translation>均衡模式:</translation>
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation>VERSIÓN DEMO</translation>
+        <translation>演示版</translation>
     </message>
     <message>
         <source>Hibernate Computer On Shutdown</source>
-        <translation>Hibernar equipo al cerrar el sistema</translation>
+        <translation>休眠计算机关机</translation>
     </message>
     <message>
         <source>Hibernate Computer</source>
-        <translation>Hibernar equipo</translation>
+        <translation>计算机休眠</translation>
     </message>
     <message>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation>¿Seguro que desea que el equipo hiberne al cerrar el sistema?</translation>
+        <translation>你真的要电脑休眠关机?</translation>
     </message>
     <message>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation>LameXP hibernará el equipo al cerrar el sistema a partir de ahora.</translation>
+        <translation>LameXP 将从现在的休眠的计算机关机｡</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation>LameXP &lt;i&gt;no&lt;/i&gt; hibernará el equipo al cerrar el sistema a partir de ahora.</translation>
+        <translation>LameXP 从今以后 &lt;i&gt;不会&lt;\/i&gt; 休眠的计算机关机｡</translation>
     </message>
     <message>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
-        <translation>(Sugerencia: ¡Por favor, ignore el nombre del archivo ZIP descargado y compruebe el archivo &apos;changelog.txt&apos; en su lugar!)</translation>
+        <translation>(提示: 请忽略下载的 ZIP 文件的名称,而是检查包括 &apos;changelog.txt&apos;!)</translation>
     </message>
 </context>
 <context>
     <name>MetaInfo</name>
     <message>
         <source>Meta Information</source>
-        <translation>Metadatos</translation>
+        <translation>Meta 信息</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation>编辑</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Cerrar</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <source>Artwork</source>
-        <translation>Carátula</translation>
+        <translation>原图</translation>
     </message>
 </context>
 <context>
     <name>MetaInfoDialog</name>
     <message>
         <source>Meta Information</source>
-        <translation>Metadatos</translation>
+        <translation>Meta 信息</translation>
     </message>
     <message>
         <source>The following meta information have been extracted from the original file.</source>
-        <translation>Los siguientes metadatos han sido extraídos del archivo original.</translation>
+        <translation>已从原始文件提取了以下的 Meta 信息｡</translation>
     </message>
     <message>
         <source>Load Artwork From File</source>
-        <translation>Cargar carátula desde archivo</translation>
+        <translation>从文件加载的原图</translation>
     </message>
     <message>
         <source>Clear Artwork</source>
-        <translation>Limpiar carátula</translation>
+        <translation>清除原图</translation>
     </message>
     <message>
         <source>Load Artwork</source>
-        <translation>Recargar carátula</translation>
+        <translation>加载原图</translation>
     </message>
     <message>
         <source>Artwork Error</source>
-        <translation>Error en la carátula</translation>
+        <translation>原图错误</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
-        <translation>¡Lo sentimos, ha habido un error al cargar la carátula desde el archivo seleccionado!</translation>
+        <translation>对不起,无法从所选的文件加载原图!</translation>
     </message>
     <message>
         <source>Edit this Information</source>
-        <translation>Editar esta información</translation>
+        <translation>编辑此信息</translation>
     </message>
     <message>
         <source>Copy everything to Meta Info tab</source>
-        <translation>Copiar todo a la pestaña Metadatos</translation>
+        <translation>将所有内容复制到 Meta 信息选项卡</translation>
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation>Limpiar todos los Metadatos</translation>
+        <translation>清除所有的 Meta 信息</translation>
     </message>
     <message>
         <source>Meta Information: %1</source>
@@ -1796,357 +1796,357 @@
     <name>MetaInfoModel</name>
     <message>
         <source>Full Path</source>
-        <translation>Ruta completa</translation>
+        <translation>完整路径</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation>Formato</translation>
+        <translation>格式</translation>
     </message>
     <message>
         <source>Container</source>
-        <translation>Contenedor</translation>
+        <translation>容器</translation>
     </message>
     <message>
         <source>Compression</source>
-        <translation>Compresión</translation>
+        <translation>压缩</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Duración</translation>
+        <translation>持续时间</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Título</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation>Artista</translation>
+        <translation>艺术家</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation>Álbum</translation>
+        <translation>专辑</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation>Género</translation>
+        <translation>风格</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation>Año</translation>
+        <translation>年</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Nº de pista</translation>
+        <translation>位置</translation>
     </message>
     <message>
         <source>Generate from list position</source>
-        <translation>Generar a partir de la posición en la lista</translation>
+        <translation>从列表的位置中生成</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Comentarios</translation>
+        <translation>评论</translation>
     </message>
     <message>
         <source>Property</source>
-        <translation>Propiedad</translation>
+        <translation>属性</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Valor</translation>
+        <translation>值</translation>
     </message>
     <message>
         <source>Unspecified</source>
-        <translation>Sin especificar</translation>
+        <translation>未指定</translation>
     </message>
     <message>
         <source>Edit Title</source>
-        <translation>Editar título</translation>
+        <translation>编辑标题</translation>
     </message>
     <message>
         <source>Please enter the title for this file:</source>
-        <translation>Introduzca el título de este archivo:</translation>
+        <translation>请输入此文件的标题</translation>
     </message>
     <message>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation>El título no puede estar vacío. ¡Generando título a partir del nombre del archivo!</translation>
+        <translation>标题不能为空｡从文件的名称生成标题 !</translation>
     </message>
     <message>
         <source>Edit Artist</source>
-        <translation>Editar artista</translation>
+        <translation>编辑艺术家</translation>
     </message>
     <message>
         <source>Please enter the artist for this file:</source>
-        <translation>Introduzca el artista de este archivo:</translation>
+        <translation>请输入此文件的艺术家</translation>
     </message>
     <message>
         <source>Edit Album</source>
-        <translation>Editar álbum</translation>
+        <translation>编辑专辑</translation>
     </message>
     <message>
         <source>Please enter the album for this file:</source>
-        <translation>Introduzca el álbum de este archivo:</translation>
+        <translation>请输入此文件的专辑:</translation>
     </message>
     <message>
         <source>Edit Genre</source>
-        <translation>Editar género</translation>
+        <translation>编辑风格</translation>
     </message>
     <message>
         <source>Please enter the genre for this file:</source>
-        <translation>Introduzca el género de este archivo:</translation>
+        <translation>请输入此文件风格</translation>
     </message>
     <message>
         <source>Edit Year</source>
-        <translation>Editar año</translation>
+        <translation>编辑年份</translation>
     </message>
     <message>
         <source>Please enter the year for this file:</source>
-        <translation>Introduzca el año de este archivo:</translation>
+        <translation>请输入此文件的年份</translation>
     </message>
     <message>
         <source>Edit Position</source>
-        <translation>Editar Nº de pista</translation>
+        <translation>编辑位置</translation>
     </message>
     <message>
         <source>Please enter the position (track no.) for this file:</source>
-        <translation>Introduzca el Nº de pista de este archivo:</translation>
+        <translation>请输入此文件的位置 (轨道号)</translation>
     </message>
     <message>
         <source>Unspecified (copy from source file)</source>
-        <translation>Sin especificar (copiar desde al archivo de entrada)</translation>
+        <translation>未指定 (复制源代码文件的副本)</translation>
     </message>
     <message>
         <source>Edit Comment</source>
-        <translation>Editar comentarios</translation>
+        <translation>编辑注释</translation>
     </message>
     <message>
         <source>Please enter the comment for this file:</source>
-        <translation>Por favor, introduzca los comentarios de este archivo:</translation>
+        <translation>请输入此文件的注释:</translation>
     </message>
     <message>
         <source>Encoded with LameXP</source>
-        <translation>Codificado con LameXP</translation>
+        <translation>编码与LameXP</translation>
     </message>
     <message>
         <source>Not editable</source>
-        <translation>No editable</translation>
+        <translation>不可编辑</translation>
     </message>
     <message>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation>Disculpe, ¡esta propiedad del archivo no se puede editar!</translation>
+        <translation>对不起,不能编辑此属性的源文件 !</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Not Specified</source>
-        <translation>Sin especificar</translation>
+        <translation>未指定</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Desconocido</translation>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
     <name>ProcessThread</name>
     <message>
         <source>Starting...</source>
-        <translation>Iniciando...</translation>
+        <translation>正在启动...</translation>
     </message>
     <message>
         <source>Not found!</source>
-        <translation>¡No encontrado!</translation>
+        <translation>找不到!</translation>
     </message>
     <message>
         <source>The format of this file is NOT supported:</source>
-        <translation>El formato de este archivo NO está soportado:</translation>
+        <translation>此文件的格式不受支持:</translation>
     </message>
     <message>
         <source>Container Format:</source>
-        <translation>Formato del contenedor:</translation>
+        <translation>容器格式:</translation>
     </message>
     <message>
         <source>Audio Format:</source>
-        <translation>Formato de audio:</translation>
+        <translation>音频格式:</translation>
     </message>
     <message>
         <source>Unsupported!</source>
-        <translation>¡No soportado!</translation>
+        <translation>不受支持!</translation>
     </message>
     <message>
         <source>Done.</source>
-        <translation>Finalizado.</translation>
+        <translation>完成</translation>
     </message>
     <message>
         <source>Aborted!</source>
-        <translation>¡Abortado!</translation>
+        <translation>中止!</translation>
     </message>
     <message>
         <source>Failed!</source>
-        <translation>¡Error!</translation>
+        <translation>失败!</translation>
     </message>
     <message>
         <source>Encoding</source>
-        <translation>Codificando</translation>
+        <translation>编码</translation>
     </message>
     <message>
         <source>Filtering</source>
-        <translation>Filtrando</translation>
+        <translation>过滤</translation>
     </message>
     <message>
         <source>Decoding</source>
-        <translation>Decodificando</translation>
+        <translation>解码</translation>
     </message>
     <message>
         <source>The source audio file could not be found:</source>
-        <translation>No se encuentra el archivo de entrada:</translation>
+        <translation>找不到源音频文件:</translation>
     </message>
     <message>
         <source>The source audio file could not be opened for reading:</source>
-        <translation>No se puede abrir el archivo de entrada para su lectura:</translation>
+        <translation>无法打开源音频文件进行读取:</translation>
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation>La carpeta de salida no existe y NO puede ser creada:</translation>
+        <translation>目标输出目录不存在,无法创建:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
-        <translation>NO se puede escribir en la carpeta de salida:</translation>
+        <translation>目标输出目录不是可写:</translation>
     </message>
     <message>
         <source>Unknown File Name</source>
-        <translation>Nombre de archivo desconocido</translation>
+        <translation>未知文件名称</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation>Título desconocido</translation>
+        <translation>未知标题</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Artista desconocido</translation>
+        <translation>未知艺术家</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation>Álbum desconocido</translation>
+        <translation>未知专辑</translation>
     </message>
     <message>
         <source>Unknown Comment</source>
-        <translation>Comentario desconocido</translation>
+        <translation>未知评论</translation>
     </message>
 </context>
 <context>
     <name>ProcessingDialog</name>
     <message>
         <source>LameXP - Processing</source>
-        <translation>LameXP - Procesando</translation>
+        <translation>LameXP - 处理</translation>
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation>Iniciando, espere por favor...</translation>
+        <translation>正在初始化,请稍候...</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation>Cancelar</translation>
+        <translation>中止</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Cerrar</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <source>Show details for selected job</source>
-        <translation>Mostrar detalles de la tarea seleccionada</translation>
+        <translation>显示选定的项目的详细信息</translation>
     </message>
     <message>
         <source>Encoding Files</source>
-        <translation>Codificando archivos</translation>
+        <translation>文件编码</translation>
     </message>
     <message>
         <source>Your files are being encoded, please be patient...</source>
-        <translation>Sus archivos están siendo codificados, tenga paciencia...</translation>
+        <translation>正在为您的文件编码,请耐心等待...</translation>
     </message>
     <message>
         <source>Encoding files, please wait...</source>
-        <translation>Codificando archivos, espere por favor...</translation>
+        <translation>正在编码文件,请稍候...</translation>
     </message>
     <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation>¡Cancelado! Esperando a que finalicen las tareas que se están ejecutando...</translation>
+        <translation>中止! 正在等待运行项目终止...</translation>
     </message>
     <message>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Codificando: %1 de %2 archivos completados hasta ahora, espere por favor...</translation>
+        <translation>编码:到目前为止,已完成的 %2/%1 ,请稍候...</translation>
     </message>
     <message>
         <source>Creating the playlist file, please wait...</source>
-        <translation>Creando el archivo de lista de reproducción, espere por favor...</translation>
+        <translation>创建播放列表文件,请稍候...</translation>
     </message>
     <message>
         <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation>¡Proceso cancelado por el usuario tras %1 archivo(s)!</translation>
+        <translation>进程被用户终止了 %1 个文件 !</translation>
     </message>
     <message>
         <source>LameXP - Aborted</source>
-        <translation>LameXP - Cancelado</translation>
+        <translation>LameXP - 中止</translation>
     </message>
     <message>
         <source>Process was aborted by the user.</source>
-        <translation>El proceso ha sido cancelado por el usuario.</translation>
+        <translation>进程被用户终止｡</translation>
     </message>
     <message>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>Error: %1 de %2 archivos fallidos. ¡Haga doble clic en los elementos fallidos para obtener información detallada!</translation>
+        <translation>错误: %1 的 %2 文件失败｡双击失败的项目的详细信息 !</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
-        <translation>LameXP - Error</translation>
+        <translation>LameXP - 错误</translation>
     </message>
     <message>
         <source>At least one file has failed!</source>
-        <translation>¡Se ha producido al menos un error!</translation>
+        <translation>至少一个文件失败 !</translation>
     </message>
     <message>
         <source>All files completed successfully.</source>
-        <translation>Todos los archivos han sido codificados correctamente.</translation>
+        <translation>已成功完成的所有文件｡</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
-        <translation>LameXP - Finalizado</translation>
+        <translation>LameXP - 完成了</translation>
     </message>
     <message>
         <source>Playlist creation failed</source>
-        <translation>Error al crear la lista de reproducción</translation>
+        <translation>播放列表创建失败</translation>
     </message>
     <message>
         <source>The playlist file could not be created:</source>
-        <translation>No ha podido crearse la lista de reproducción:</translation>
+        <translation>无法创建播放列表文件:</translation>
     </message>
     <message>
         <source>Process was aborted prematurely by the user!</source>
-        <translation>¡El proceso fue cancelado prematuramente por el usuario!</translation>
+        <translation>用户提前中止了进程 !</translation>
     </message>
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation>Ejecución multi-hilo habilitada: ¡Ejecutando %1 instancias en paralelo!</translation>
+        <translation>多线程启用: 以并行方式运行 %1 实例 !</translation>
     </message>
     <message>
         <source>Browse Output File Location</source>
-        <translation>Navegar hasta la ubicación del archivo de salida</translation>
+        <translation>浏览输出文件的位置</translation>
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation>Apagar el ordenador cuando todos los archivos hayan sido convertidos</translation>
+        <translation>所有文件都转换后自动关闭计算机 </translation>
     </message>
     <message>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
-        <translation>Aviso: El ordenador de apagará en %1 segundos...</translation>
+        <translation>警告:计算机将在 %1 秒关机...</translation>
     </message>
     <message>
         <source>Cancel Shutdown</source>
-        <translation>Cancelar apagado</translation>
+        <translation>取消关机</translation>
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
@@ -2185,26 +2185,26 @@
     <name>ProgressModel</name>
     <message>
         <source>Job</source>
-        <translation>Tarea</translation>
+        <translation>项目</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Estado</translation>
+        <translation>状态</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation>El ejecutable &apos;%1&apos; no soporta el modo de compatibilidad de Windows.</translation>
+        <translation>可执行文件&apos;%1&apos;不支持 Windows 兼容性模式｡</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation>El ejecutable &apos;%1&apos;requiere Qt v%2, pero se ha encontrado v%3.</translation>
+        <translation>可执行文件&apos;%1&apos;需要 Qt v2%,但发现 Qt v%3｡</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation>El ejecutable &apos;%1&apos;requiere Windows 2000 o superior.</translation>
+        <translation>可执行文件 &apos;%1&apos; 需要 Windows 2000 或更高版本｡</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
@@ -2215,133 +2215,133 @@
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>
-        <translation>Archivo de audio soportado por LameXP</translation>
+        <translation>LameXP支持的音频文件</translation>
     </message>
     <message>
         <source>Convert this file with LameXP v%1</source>
-        <translation>Convertir este archivo con LameXP v%1</translation>
+        <translation>转换此文件与LameXP v%1</translation>
     </message>
 </context>
 <context>
     <name>SplashScreen</name>
     <message>
         <source>LameXP is launching...</source>
-        <translation>Iniciando LameXP...</translation>
+        <translation>LameXP 正在启动...</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
         <source>LameXP Update Manager</source>
-        <translation>Administrador de actualizaciones de LameXP</translation>
+        <translation>LameXP 更新管理器</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation>Por favor, espere...</translation>
+        <translation>请稍候｡｡｡</translation>
     </message>
     <message>
         <source>Latest version available:</source>
-        <translation>Última versión disponible:</translation>
+        <translation>最新版本:</translation>
     </message>
     <message>
         <source>Currently installed version:</source>
-        <translation>Versión instalada actualmente:</translation>
+        <translation>安装当前的版本:</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation>Reintentar</translation>
+        <translation>重试</translation>
     </message>
     <message>
         <source>Show Log</source>
-        <translation>Mostar archivo de registro</translation>
+        <translation>显示日志</translation>
     </message>
     <message>
         <source>Download &amp;&amp; Install</source>
-        <translation>Descargar &amp;&amp; Instalar</translation>
+        <translation>下载 &amp;&amp; 安装</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Cerrar</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <source>Build</source>
-        <translation>Build</translation>
+        <translation>生成</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Desconocida</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>Testing your internet connection, please wait...</source>
-        <translation>Comprobando su conexión de internet, espere por favor...</translation>
+        <translation>测试您的 Internet 连接,请稍候...</translation>
     </message>
     <message>
         <source>Network connectivity test has failed!</source>
-        <translation>¡La prueba de conexión a internet ha fallado!</translation>
+        <translation>网络连接测试失败 !</translation>
     </message>
     <message>
         <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation>Por favor, asegúrese de que su conexión a internet funciona correctamente y vuelva a intentarlo.</translation>
+        <translation>请确保您的网络连接正常工作,然后再试｡</translation>
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
-        <translation>Comprobando en busca de nuevas actualizaciones, espere por favor...</translation>
+        <translation>在线更新检查新的版本,请稍候...</translation>
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
-        <translation>¡No se ha podido obtener información de actualización desde el servidor!</translation>
+        <translation>无法从服务器获取更新信息 !</translation>
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation>Disculpe, puede que el servidor este sobrecargado en estos momentos. Por favor, inténtelo más tarde.</translation>
+        <translation>抱歉,更新服务器可能在这一次忙｡请稍后再试｡</translation>
     </message>
     <message>
         <source>More information available at:</source>
-        <translation>Más información disponible en:</translation>
+        <translation>在可用的详细信息:</translation>
     </message>
     <message>
         <source>A new version of LameXP is available!</source>
-        <translation>¡Hay una nueva versión de LameXP disponible!</translation>
+        <translation>发现一个可用的新版本 LameXP  !</translation>
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation>Recomendamos a todos los usuarios instalar esta actualización cuanto antes.</translation>
+        <translation>我们强烈建议所有的用户,要尽快安装此更新｡</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
-        <translation>No se ha encontrado ninguna actualización.</translation>
+        <translation>这个时候没有发现新的可用更新｡</translation>
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation>LameXP está actualizado. ¡Por favor, compruebe regularmente las actualizaciones!</translation>
+        <translation>您的 LameXP 版本是仍然最新的｡请定期检查更新 !</translation>
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation>Su versión parece ser más reciente que la última versión publicada.</translation>
+        <translation>您的版本似乎是比最新的版本新｡</translation>
     </message>
     <message>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation>Esto generalmente indica que está usando una versión pre-lanzamiento de LameXP.</translation>
+        <translation>这通常表示您当前正在使用的 LameXP 预发布版｡</translation>
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
-        <translation>Descargando actualización, espere por favor...</translation>
+        <translation>正在下载更新,请耐心等待...</translation>
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation>Actualización lista para instalar. La aplicación se cerrará...</translation>
+        <translation>准备好安装更新｡应用程序将退出...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
-        <translation>Actualización fallida. ¡Por favor, vuelva a intentarlo o descárguelo manualmente!</translation>
+        <translation>更新失败｡请再试一次或手动下载 !</translation>
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
-        <translation>¡No está conectado a Internet!</translation>
+        <translation>看来,目前的计算机处于脱机状态!</translation>
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation>Por favor, asegurese de que tiene conexión a internet y vuelva a intentarlo.</translation>
+        <translation>请确保您的计算机连接到 Internet,然后重试｡</translation>
     </message>
 </context>
 </TS>

@@ -2207,6 +2207,10 @@
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>Додаток &apos;%1&apos; вимагає для роботи Windows 2000 або пізніші версії ОС.</translation>
     </message>
+    <message>
+        <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShellIntegration</name>

@@ -2207,6 +2207,10 @@
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>Programm &apos;%1&apos; benötigt Windows 2000 oder neuer.</translation>
     </message>
+    <message>
+        <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
+        <translation>Programm &apos;%1&apos; wurde für Qt &apos;%2&apos; erzeugt, aber Qt &apos;%3&apos; gefunden.</translation>
+    </message>
 </context>
 <context>
     <name>ShellIntegration</name>
