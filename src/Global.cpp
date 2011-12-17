@@ -43,6 +43,7 @@
 #include <QTranslator>
 #include <QEventLoop>
 #include <QTimer>
+#include <QLibraryInfo>
 
 //LameXP includes
 #include "Resource.h"
@@ -780,10 +781,16 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Check Qt version
-	qDebug("Using Qt Framework v%s (%s), compiled with Qt v%s [%s]", qVersion(), (qSharedBuild() ? "DLL" : "Static"), QT_VERSION_STR, QT_PACKAGEDATE_STR);
+	qDebug("Using Qt v%s (%s), %s, built on %s", qVersion(), (qSharedBuild() ? "DLL" : "Static"), QLibraryInfo::buildKey().toLatin1().constData(), QLibraryInfo::buildDate().toString(Qt::ISODate).toLatin1().constData());
+	qDebug("Compiled with Qt v%s [%s], %s\n", QT_VERSION_STR, QT_PACKAGEDATE_STR, QT_BUILD_KEY);
 	if(_stricmp(qVersion(), QT_VERSION_STR))
 	{
 		qFatal("%s", QApplication::tr("Executable '%1' requires Qt v%2, but found Qt v%3.").arg(QString::fromLatin1(executableName), QString::fromLatin1(QT_VERSION_STR), QString::fromLatin1(qVersion())).toLatin1().constData());
+		return false;
+	}
+	if(QLibraryInfo::buildKey().compare(QString::fromLatin1(QT_BUILD_KEY), Qt::CaseInsensitive))
+	{
+		qFatal("%s", QApplication::tr("Executable '%1' was built for Qt '%2', but found Qt '%3'.").arg(QString::fromLatin1(executableName), QString::fromLatin1(QT_BUILD_KEY), QLibraryInfo::buildKey()).toLatin1().constData());
 		return false;
 	}
 
