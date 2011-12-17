@@ -781,7 +781,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Check Qt version
-	qDebug("Using Qt v%s (%s), %s, built on %s", qVersion(), (qSharedBuild() ? "DLL" : "Static"), QLibraryInfo::buildKey().toLatin1().constData(), QLibraryInfo::buildDate().toString(Qt::ISODate).toLatin1().constData());
+	qDebug("Using Qt v%s [%s], %s, %s", qVersion(), QLibraryInfo::buildDate().toString(Qt::ISODate).toLatin1().constData(), (qSharedBuild() ? "DLL" : "Static"), QLibraryInfo::buildKey().toLatin1().constData());
 	qDebug("Compiled with Qt v%s [%s], %s\n", QT_VERSION_STR, QT_PACKAGEDATE_STR, QT_BUILD_KEY);
 	if(_stricmp(qVersion(), QT_VERSION_STR))
 	{

@@ -130,6 +130,7 @@ if "%LAMEXP_REDIST%"=="1" (
 )
 copy "%~dp0\..\..\ReadMe.txt" "%TMP_PATH%"
 copy "%~dp0\..\..\License.txt" "%TMP_PATH%"
+copy "%~dp0\..\..\Copying.txt" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\Changelog.html" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\Translate.html" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\Manual.html" "%TMP_PATH%"

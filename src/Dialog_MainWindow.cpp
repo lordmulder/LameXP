@@ -1950,6 +1950,8 @@ void MainWindow::showDetailsButtonClicked(void)
 	}
 
 	LAMEXP_DELETE(metaInfoDialog);
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	sourceFilesScrollbarMoved(0);
 }
 
 /*
