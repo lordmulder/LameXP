@@ -1726,6 +1726,10 @@
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
         <translation>(Hinweis: Bitte beachten Sie die enthaltene &apos;changelog.txt&apos; Datei anstelle des Dateinames der ZIP-Datei!)</translation>
     </message>
+    <message>
+        <source>Skipping update check this time, please be patient...</source>
+        <translation>Update-Überprüfung wird übersprungen, bitte warten...</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

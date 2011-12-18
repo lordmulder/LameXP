@@ -994,18 +994,24 @@ void MainWindow::windowShown(void)
 	if(QDate::currentDate() >= lamexp_version_date().addYears(1))
 	{
 		qWarning("Binary is more than a year old, time to update!");
-		if(QMessageBox::warning(this, tr("Urgent Update"), NOBR(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program")) == 0)
+		int ret = QMessageBox::warning(this, tr("Urgent Update"), NOBR(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program"), tr("Ignore"));
+		switch(ret)
 		{
+		case 0:
 			if(checkForUpdates())
 			{
 				QApplication::quit();
 				return;
 			}
-		}
-		else
-		{
+			break;
+		case 1:
 			QApplication::quit();
 			return;
+		default:
+			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WAITING), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+			m_banner->show(tr("Skipping update check this time, please be patient..."), &loop);
+			break;
 		}
 	}
 	else if(m_settings->autoUpdateEnabled())

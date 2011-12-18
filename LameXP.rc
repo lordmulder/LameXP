@@ -114,6 +114,7 @@ IDR_WAVE_WOOHOO         WAVE                    "res\\sounds\\woohoo.wav"
 IDR_WAVE_SHUTDOWN       WAVE                    "res\\sounds\\shutdown.wav"
 IDR_WAVE_BEEP           WAVE                    "res\\sounds\\beep.wav"
 IDR_WAVE_BEEP_LONG      WAVE                    "res\\sounds\\beep2.wav"
+IDR_WAVE_WAITING        WAVE                    "res\\sounds\\waiting.wav"
 
 /////////////////////////////////////////////////////////////////////////////
 //
