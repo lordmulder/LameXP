@@ -2289,32 +2289,32 @@
         <translation type="unfinished">Usuń okładkę</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MetaInfo.cpp" line="84"/>
+        <location filename="../../src/Dialog_MetaInfo.cpp" line="87"/>
         <source>Meta Information</source>
         <translation type="unfinished">Metadane</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MetaInfo.cpp" line="84"/>
+        <location filename="../../src/Dialog_MetaInfo.cpp" line="87"/>
         <source>The following meta information have been extracted from the original file.</source>
         <translation type="unfinished">Następujące metadane zostały wyodrębnione z oryginalnego pliku.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MetaInfo.cpp" line="103"/>
+        <location filename="../../src/Dialog_MetaInfo.cpp" line="106"/>
         <source>Meta Information: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MetaInfo.cpp" line="157"/>
+        <location filename="../../src/Dialog_MetaInfo.cpp" line="160"/>
         <source>Load Artwork</source>
         <translation type="unfinished">Załaduj okładkę</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MetaInfo.cpp" line="173"/>
+        <location filename="../../src/Dialog_MetaInfo.cpp" line="176"/>
         <source>Artwork Error</source>
         <translation type="unfinished">Błąd pliku okładki</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MetaInfo.cpp" line="173"/>
+        <location filename="../../src/Dialog_MetaInfo.cpp" line="176"/>
         <source>Sorry, failed to load artwork from selected file!</source>
         <translation type="unfinished">Załadowanie pliku okładki zakończone niepowodzeniem!</translation>
     </message>

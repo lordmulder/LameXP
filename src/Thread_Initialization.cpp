@@ -32,6 +32,7 @@
 #include <QLibrary>
 #include <QResource>
 #include <QTime>
+#include <QTextStream>
 
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
@@ -245,33 +246,42 @@ void InitializationThread::initTranslations(void)
 	while(!qmFiles.isEmpty())
 	{
 		QString langId, langName;
-		unsigned int systemId = 0;
 		QString qmFile = qmFiles.takeFirst();
+		unsigned int systemId = 0;
 		
 		QRegExp langIdExp("LameXP_(\\w\\w)\\.qm", Qt::CaseInsensitive);
 		if(langIdExp.indexIn(qmFile) >= 0)
 		{
 			langId = langIdExp.cap(1).toLower();
-		}
-
-		QResource langRes = (QString(":/localization/%1.txt").arg(qmFile));
-		if(langRes.isValid() && langRes.size() > 0)
-		{
-			QStringList langInfo = QString::fromUtf8(reinterpret_cast<const char*>(langRes.data()), langRes.size()).simplified().split(",", QString::SkipEmptyParts);
-			if(langInfo.count() == 2)
+			QResource langRes = QResource(QString(":/localization/%1.txt").arg(qmFile));
+			if(langRes.isValid() && langRes.size() > 0)
 			{
-				systemId = langInfo.at(0).toUInt();
-				langName = langInfo.at(1);
+				QByteArray data = QByteArray::fromRawData(reinterpret_cast<const char*>(langRes.data()), langRes.size());
+				QTextStream stream(&data, QIODevice::ReadOnly);
+				stream.setAutoDetectUnicode(false); stream.setCodec("UTF-8");
+				while(!stream.atEnd())
+				{
+					QStringList langInfo = stream.readLine().simplified().split(",", QString::SkipEmptyParts);
+					if(langInfo.count() == 2)
+					{
+						systemId = langInfo.at(0).trimmed().toUInt();
+						langName = langInfo.at(1).trimmed();
+						break;
+					}
+				}
 			}
 		}
-		
-		if(lamexp_translation_register(langId, qmFile, langName, systemId))
+
+		if(!(langId.isEmpty() || langName.isEmpty() || systemId == 0))
 		{
-			qDebug("Registering translation: %s = %s (%u)", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId);
-		}
-		else
-		{
-			qWarning("Failed to register: %s", qmFile.toLatin1().constData());
+			if(lamexp_translation_register(langId, qmFile, langName, systemId))
+			{
+				qDebug("Registering translation: %s = %s (%u)", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId);
+			}
+			else
+			{
+				qWarning("Failed to register: %s", qmFile.toLatin1().constData());
+			}
 		}
 	}
 
