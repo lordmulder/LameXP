@@ -46,6 +46,9 @@ private slots:
 	void clearMetaInfoActionTriggered(void);
 	void clearArtworkActionTriggered(void);
 
+protected:
+	bool eventFilter(QObject *obj, QEvent *event);
+
 private:
 	QMenu *m_contextMenuInfo;
 	QMenu *m_contextMenuArtwork;

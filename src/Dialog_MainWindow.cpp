@@ -889,7 +889,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 		}
 	}
 
-	return false;
+	return QMainWindow::eventFilter(obj, event);
 }
 
 bool MainWindow::winEvent(MSG *message, long *result)
