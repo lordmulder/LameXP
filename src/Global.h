@@ -111,10 +111,10 @@ bool lamexp_is_hibernation_supported(void);
 
 //Translation support
 QStringList lamexp_query_translations(void);
-bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &script);
+bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &country);
 QString lamexp_translation_name(const QString &language);
 unsigned int lamexp_translation_sysid(const QString &langId);
-unsigned int lamexp_translation_script(const QString &langId);
+unsigned int lamexp_translation_country(const QString &langId);
 bool lamexp_install_translator_from_file(const QString &qmFile);
 bool lamexp_install_translator(const QString &language);
 QStringList lamexp_available_codepages(bool noAliases = true);
