@@ -848,7 +848,9 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 		case QEvent::MouseButtonPress:
 			if(dynamic_cast<QMouseEvent*>(event)->button() == Qt::LeftButton)
 			{
-				QDesktopServices::openUrl(QString("file:///%1").arg(outputFolderLabel->text()));
+				QString path = outputFolderLabel->text();
+				if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
+				ShellExecuteW(this->winId(), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
 			}
 			break;
 		case QEvent::Enter:
@@ -2342,7 +2344,9 @@ void MainWindow::outputFolderContextMenu(const QPoint &pos)
  */
 void MainWindow::showFolderContextActionTriggered(void)
 {
-	QDesktopServices::openUrl(QUrl::fromLocalFile(m_fileSystemModel->filePath(outputFolderView->currentIndex())));
+	QString path = QDir::toNativeSeparators(m_fileSystemModel->filePath(outputFolderView->currentIndex()));
+	if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
+	ShellExecuteW(this->winId(), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
 }
 
 /*
