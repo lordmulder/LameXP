@@ -273,7 +273,7 @@ QString SettingsModel::defaultLanguage(void)
 	
 	//Check if we can use the default translation
 	QLocale systemLanguage= QLocale::system();
-	if(systemLanguage.language() == QLocale::English || systemLanguage.language() == QLocale::C)
+	if(systemLanguage.language() == QLocale::English /*|| systemLanguage.language() == QLocale::C*/)
 	{
 		m_defaultLanguage = new QString(LAMEXP_DEFAULT_LANGID);
 		return LAMEXP_DEFAULT_LANGID;
@@ -286,8 +286,12 @@ QString SettingsModel::defaultLanguage(void)
 		QString currentLangId = languages.takeFirst();
 		if(lamexp_translation_sysid(currentLangId) == systemLanguage.language())
 		{
-			m_defaultLanguage = new QString(currentLangId);
-			return currentLangId;
+			unsigned int script = lamexp_translation_script(currentLangId);
+			if((script == 0) || (systemLanguage.script() == 0) || (script == systemLanguage.script()))
+			{
+				m_defaultLanguage = new QString(currentLangId);
+				return currentLangId;
+			}
 		}
 	}
 

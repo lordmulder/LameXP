@@ -67,8 +67,9 @@ g_lamexp_contributors[] =
 	{"pl", L"Polski",     L"Sir Daniel K",        "Sir.Daniel.K@gmail.com"},
 	{"ru", L"Русский",    L"Neonailol",           "Neonailol@gmail.com"   },
 	{"",   L"",           L"Иван Митин",          "bardak@inbox.ru"       },
+	{"tw", L"繁体中文",       L"456Vv",               "123@456vv.com"         },
 	{"uk", L"Українська", L"Arestarh",            "Arestarh@ukr.net"      },
-	{"zh", L"普通话",        L"456Vv",               "123@456vv.com"         },
+	{"zh", L"简体中文",       L"456Vv",               "123@456vv.com"         },
 	{NULL, NULL, NULL, NULL}
 };
 

@@ -186,6 +186,7 @@ static struct
 	QMap<QString, QString> files;
 	QMap<QString, QString> names;
 	QMap<QString, unsigned int> sysid;
+	QMap<QString, unsigned int> scrpt;
 }
 g_lamexp_translation;
 
@@ -1251,7 +1252,7 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 /*
  * Register a new translation
  */
-bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId)
+bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &script)
 {
 	if(qmFile.isEmpty() || langName.isEmpty() || systemId < 1)
 	{
@@ -1261,6 +1262,7 @@ bool lamexp_translation_register(const QString &langId, const QString &qmFile, c
 	g_lamexp_translation.files.insert(langId, qmFile);
 	g_lamexp_translation.names.insert(langId, langName);
 	g_lamexp_translation.sysid.insert(langId, systemId);
+	g_lamexp_translation.scrpt.insert(langId, script);
 
 	return true;
 }
@@ -1287,6 +1289,14 @@ QString lamexp_translation_name(const QString &langId)
 unsigned int lamexp_translation_sysid(const QString &langId)
 {
 	return g_lamexp_translation.sysid.value(langId.toLower(), 0);
+}
+
+/*
+ * Get translation script id
+ */
+unsigned int lamexp_translation_script(const QString &langId)
+{
+	return g_lamexp_translation.scrpt.value(langId.toLower(), 0);
 }
 
 /*
