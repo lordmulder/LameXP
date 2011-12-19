@@ -277,7 +277,7 @@ void InitializationThread::initTranslations(void)
 		{
 			if(lamexp_translation_register(langId, qmFile, langName, systemId, scriptId))
 			{
-				qDebug("Registering translation: %s = %s (%u)", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId);
+				qDebug("Registering translation: %s = %s (%u) [%u]", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId, scriptId);
 			}
 			else
 			{
