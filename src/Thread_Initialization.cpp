@@ -246,7 +246,7 @@ void InitializationThread::initTranslations(void)
 	while(!qmFiles.isEmpty())
 	{
 		QString langId, langName;
-		unsigned int systemId = 0, scriptId = 0;
+		unsigned int systemId = 0, country = 0;
 		QString qmFile = qmFiles.takeFirst();
 		
 		QRegExp langIdExp("LameXP_(\\w\\w)\\.qm", Qt::CaseInsensitive);
@@ -265,7 +265,7 @@ void InitializationThread::initTranslations(void)
 					if(langInfo.count() == 3)
 					{
 						systemId = langInfo.at(0).trimmed().toUInt();
-						scriptId = langInfo.at(1).trimmed().toUInt();
+						country  = langInfo.at(1).trimmed().toUInt();
 						langName = langInfo.at(2).trimmed();
 						break;
 					}
@@ -275,9 +275,9 @@ void InitializationThread::initTranslations(void)
 
 		if(!(langId.isEmpty() || langName.isEmpty() || systemId == 0))
 		{
-			if(lamexp_translation_register(langId, qmFile, langName, systemId, scriptId))
+			if(lamexp_translation_register(langId, qmFile, langName, systemId, country))
 			{
-				qDebug("Registering translation: %s = %s (%u) [%u]", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId, scriptId);
+				qDebug("Registering translation: %s = %s (%u) [%u]", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId, country);
 			}
 			else
 			{
