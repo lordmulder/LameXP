@@ -271,16 +271,37 @@ QString SettingsModel::defaultLanguage(void)
 		return *m_defaultLanguage;
 	}
 	
-	//Check if we can use the default translation
+	//Detect system langauge
 	QLocale systemLanguage= QLocale::system();
-	if(systemLanguage.language() == QLocale::English || systemLanguage.language() == QLocale::C)
+	qDebug("[Locale]");
+	qDebug("Language: %s (%d)", QLocale::languageToString(systemLanguage.language()).toUtf8().constData(), systemLanguage.language());
+	qDebug("Country is: %s (%d)", QLocale::countryToString(systemLanguage.country()).toUtf8().constData(), systemLanguage.country());
+	qDebug("Script is: %s (%d)\n", QLocale::scriptToString(systemLanguage.script()).toUtf8().constData(), systemLanguage.script());
+
+	//Check if we can use the default translation
+	if(systemLanguage.language() == QLocale::English /*|| systemLanguage.language() == QLocale::C*/)
 	{
 		m_defaultLanguage = new QString(LAMEXP_DEFAULT_LANGID);
 		return LAMEXP_DEFAULT_LANGID;
 	}
 
-	//Try to find a suitable translation for the user's system language
+	//Try to find a suitable translation for the user's system language *and* country
 	QStringList languages = lamexp_query_translations();
+	while(!languages.isEmpty())
+	{
+		QString currentLangId = languages.takeFirst();
+		if(lamexp_translation_sysid(currentLangId) == systemLanguage.language())
+		{
+			if(lamexp_translation_country(currentLangId) == systemLanguage.country())
+			{
+				m_defaultLanguage = new QString(currentLangId);
+				return currentLangId;
+			}
+		}
+	}
+
+	//Try to find a suitable translation for the user's system language
+	languages = lamexp_query_translations();
 	while(!languages.isEmpty())
 	{
 		QString currentLangId = languages.takeFirst();
