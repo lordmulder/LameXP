@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Decline License</source>
-        <translation>减少许可证</translation>
+        <translation>删除许可证</translation>
     </message>
     <message>
         <source>3rd Party S/W</source>
@@ -97,7 +97,7 @@
     </message>
     <message>
         <source>n/a</source>
-        <translation>n/d</translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
@@ -129,11 +129,11 @@
     </message>
     <message>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
-        <translation>mpg123 - 播放控制台/ MPEG音频解码</translation>
+        <translation>mpg123 - 播放控制台/MPEG音频解码</translation>
     </message>
     <message>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation>FAAD - MPEG- 4解码器和MPEG- 2 AAC开源</translation>
+        <translation>FAAD - 开源MPEG-4和MPEG-2 AAC解码器</translation>
     </message>
     <message>
         <source>AC3Filter Tools - AC3/DTS Decoder</source>
@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation>丝绸图标 - 超过 700 图标 PNG 格式</translation>
+        <translation>Silk Icons - 超过 700 图标 PNG 格式</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
@@ -225,7 +225,7 @@
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP是作为一个整体版权由 LoRd_MuldeR 保护｡在 LameXP 中使用的第三方软件作著权属于第三方｡</translation>
     </message>
 </context>
 <context>
@@ -387,11 +387,11 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(系统默认)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择ANSI编码的提示表文件</translation>
     </message>
     <message>
         <source>OK</source>
@@ -403,7 +403,7 @@
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知的艺术家</translation>
     </message>
     <message>
         <source>Unknown Album</source>
@@ -442,11 +442,11 @@
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">艺术家</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">专辑</translation>
     </message>
 </context>
 <context>
@@ -1051,7 +1051,7 @@
     </message>
     <message>
         <source>Uncompressed</source>
-        <translation>未压缩</translation>
+        <translation>不压缩</translation>
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
@@ -1327,7 +1327,7 @@
     </message>
     <message>
         <source>Fewer Instances</source>
-        <translation>更少的实例</translation>
+        <translation>更少实例</translation>
     </message>
     <message>
         <source>More Instances</source>
@@ -1655,7 +1655,7 @@
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation>强制环绕立体声缩混（多通道）来源</translation>
+        <translation>强制环绕立体声缩混(多通道)来源</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
@@ -1727,7 +1727,7 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">跳过检查更新的时间,请耐心等待......</translation>
     </message>
 </context>
 <context>
@@ -1793,7 +1793,7 @@
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Meta 信息: %1</translation>
     </message>
 </context>
 <context>
@@ -2134,7 +2134,7 @@
     </message>
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation>多线程启用: 以并行方式运行 %1 实例 !</translation>
+        <translation>多线程启用: 以并行方式运行 %1 个实例 !</translation>
     </message>
     <message>
         <source>Browse Output File Location</source>
@@ -2154,35 +2154,35 @@
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CPU使用率(总)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">物理RAM的使用</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">可用的磁盘空间(Temp文件夹)</translation>
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">过程完成了 %1｡</translation>
     </message>
     <message>
         <source>hour(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">小时</translation>
     </message>
     <message>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">分钟</translation>
     </message>
     <message>
         <source>second(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">秒</translation>
     </message>
     <message>
         <source>millisecond(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">毫秒</translation>
     </message>
 </context>
 <context>
@@ -2212,7 +2212,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">可执行文件 &apos;%1&apos;为Qt &apos;%2&apos;,但发现Qt&apos;%3&apos;｡</translation>
     </message>
 </context>
 <context>
