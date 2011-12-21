@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="zh_CN" sourcelanguage="cn">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation>请访问到%1新的更新</translation>
+        <translation>请访问到 %1 新的更新!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>注:LameXP是免费软件｡&lt;b&gt;不用&lt;/b&gt;付钱获取或使用LameXP!如果某些第三方网站尝试让你付出代价下载LameXP,你应该&lt;b&gt;不&lt;/b&gt;接受报价!</translation>
+        <translation>注:LameXP是免费软件.&lt;b&gt;不用&lt;/b&gt;付钱获取或使用LameXP!如果某些第三方网站尝试让你付出代价下载LameXP,你应该&lt;b&gt;不&lt;/b&gt;接受报价!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation>特别感谢&quot;John33&quot;从%1为他的持续支持｡</translation>
+        <translation>特别感谢&quot;John33&quot;从 %1 为他的持续支持.</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -69,15 +69,15 @@
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation>GNU 较小的通用公共许可的条款下发布｡</translation>
+        <translation>GNU 较小的通用公共许可的条款下发布.</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation>完全开放的无专利的音频编码技术｡</translation>
+        <translation>完全开放的无专利的音频编码技术.</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation>免费软件先进的他 AAC 编码器二次编码的支持｡</translation>
+        <translation>免费软件先进的他 AAC 编码器二次编码的支持.</translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation>打开和专利自由无损音频压缩技术｡</translation>
+        <translation>打开和专利自由无损音频压缩技术.</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>By Mark James,在知识共享的许可证发布｡</translation>
+        <translation>By Mark James,在知识共享的许可证发布.</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
@@ -101,15 +101,15 @@
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation>免费提供源代码,简单的SDK和非限制性许可｡</translation>
+        <translation>免费提供源代码,简单的SDK和非限制性许可.</translation>
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation>完全开放的音频压缩格式｡</translation>
+        <translation>完全开放的音频压缩格式.</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation>以下发布的GNU通用公共许可证的条款｡</translation>
+        <translation>以下发布的GNU通用公共许可证的条款.</translation>
     </message>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation>开源专利免费的音频格式设计的演讲｡</translation>
+        <translation>开源专利免费的音频格式设计的演讲.</translation>
     </message>
     <message>
         <source>GNU Wget - Software for retrieving files using HTTP</source>
@@ -193,7 +193,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation>注:这是一个演示版本LameXP将届满%1｡剩余%2天｡</translation>
+        <translation>注:这是一个演示版本LameXP将届满%1.剩余%2天.</translation>
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
@@ -205,11 +205,11 @@
     </message>
     <message>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation>版权所有 (c) 2004 David Hammerton｡科迪 Brocious 的贡献｡</translation>
+        <translation>版权所有 (c) 2004 David Hammerton.科迪 Brocious 的贡献.</translation>
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation>版权所有 (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;｡保留某些权利｡</translation>
+        <translation>版权所有 (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;.保留某些权利.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
@@ -225,7 +225,7 @@
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
-        <translation type="unfinished">LameXP是作为一个整体版权由 LoRd_MuldeR 保护｡在 LameXP 中使用的第三方软件作著权属于第三方｡</translation>
+        <translation>LameXP是作为一个整体版权由 LoRd_MuldeR 保护.在 LameXP 中使用的第三方软件作著权属于第三方.</translation>
     </message>
 </context>
 <context>
@@ -275,7 +275,7 @@
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation>下面的提示表将拆分,并导入到 LameXP｡</translation>
+        <translation>下面的提示表将拆分,并导入到 LameXP.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation>无法打开文件进行读取｡确保您具有所需的权限 !</translation>
+        <translation>无法打开文件进行读取.确保您具有所需的权限 !</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
@@ -311,11 +311,11 @@
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation>请注意,LameXP 不能处理&quot;二进制&quot;提示表映像｡</translation>
+        <translation>请注意,LameXP 不能处理&quot;二进制&quot;提示表映像.</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation>当心!所选的提示表文件包含不一致的信息｡</translation>
+        <translation>当心,你所选的提示表文件包含不一致的信息!</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
@@ -335,7 +335,7 @@
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation>还有 %1GB 的可用磁盘空间小于所选的输出目录中可用｡</translation>
+        <translation>还有 %1GB 的可用磁盘空间小于所选的输出目录中可用.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
@@ -359,7 +359,7 @@
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>导入 %1 从提示表轨道,并跳过 %2 轨道｡</translation>
+        <translation>导入 %1 从提示表轨道,并跳过 %2 轨道.</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
@@ -387,27 +387,27 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished">(系统默认)</translation>
+        <translation>(系统默认)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished">选择ANSI编码的提示表文件</translation>
+        <translation>选择ANSI编码的提示表文件:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">确定</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">未知的艺术家</translation>
+        <translation>未知的艺术家</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished">未知专辑</translation>
+        <translation>未知专辑</translation>
     </message>
 </context>
 <context>
@@ -442,18 +442,18 @@
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished">艺术家</translation>
+        <translation>艺术家:</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished">专辑</translation>
+        <translation>专辑:</translation>
     </message>
 </context>
 <context>
     <name>CueSheetModel</name>
     <message>
         <source>No.</source>
-        <translation>不</translation>
+        <translation>不.</translation>
     </message>
     <message>
         <source>File / Track</source>
@@ -518,7 +518,7 @@
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation>您可以将文件拖放添加到 LameXP,拖放到此处 !</translation>
+        <translation>&amp;amp;您可以将文件拖放到此处添加到 LameXP!</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
@@ -560,7 +560,7 @@
     </message>
     <message>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation>日志文件显示有关所选项目的详细信息｡</translation>
+        <translation>日志文件显示有关所选项目的详细信息.</translation>
     </message>
 </context>
 <context>
@@ -723,7 +723,7 @@
     </message>
     <message>
         <source>?</source>
-        <translation>其它</translation>
+        <translation>其它?</translation>
     </message>
     <message>
         <source>View</source>
@@ -827,7 +827,7 @@
     </message>
     <message>
         <source>This usually means the file is locked by another process.</source>
-        <translation>通常这意味着该文件由另一个进程锁定｡</translation>
+        <translation>通常这意味着该文件由另一个进程锁定.</translation>
     </message>
     <message>
         <source>Files Rejected</source>
@@ -839,7 +839,7 @@
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
-        <translation>通常,这意味着他们都已损坏,或不受支持的格式｡</translation>
+        <translation>通常,这意味着他们都已损坏,或不受支持的格式.</translation>
     </message>
     <message>
         <source>You can drop in audio files here!</source>
@@ -863,11 +863,11 @@
     </message>
     <message>
         <source>You have declined the license. Consequently the application will exit now!</source>
-        <translation>您已拒绝许可｡因此该应用程序将立即退出 !</translation>
+        <translation>您已拒绝许可.因此该应用程序将立即退出 !</translation>
     </message>
     <message>
         <source>Goodbye!</source>
-        <translation>再见</translation>
+        <translation>再见!</translation>
     </message>
     <message>
         <source>LameXP - Expired</source>
@@ -875,11 +875,11 @@
     </message>
     <message>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translation>此预发行的演示版本 LameXP 已在 %1 过期｡</translation>
+        <translation>此预发行的演示版本 LameXP 已在 %1 过期.</translation>
     </message>
     <message>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
-        <translation>LameXP 是一个免费的软件和版本不会过期｡</translation>
+        <translation>LameXP 是一个免费的软件和版本不会过期.</translation>
     </message>
     <message>
         <source>Exit Program</source>
@@ -899,11 +899,11 @@
     </message>
     <message>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
-        <translation>您上次更新检查了超过 14 天｡立即检查更新吗?</translation>
+        <translation>您上次更新检查了超过 14 天.立即检查更新吗?</translation>
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation>您没有检查 LameXP 是否有新版本｡立即检查更新吗?</translation>
+        <translation>您没有检查 LameXP 是否有新版本.立即检查更新吗?</translation>
     </message>
     <message>
         <source>Postpone</source>
@@ -915,11 +915,11 @@
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation>可用的新版本是 %1 (或更高版本),但你仍有版本安装 %2｡</translation>
+        <translation>可用的新版本是 %1 (或更高版本),但你仍有版本安装 %2.</translation>
     </message>
     <message>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation>您可以从 Nero 网址下载最新版本的 Nero AAC 编码器</translation>
+        <translation>您可以从 Nero 网址下载最新版本的 Nero AAC 编码器:</translation>
     </message>
     <message>
         <source>AAC Encoder Outdated</source>
@@ -927,7 +927,7 @@
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation>找不到 Nero AAC 编码器｡可能 AAC 编码器被禁用｡</translation>
+        <translation>找不到 Nero AAC 编码器.可能 AAC 编码器被禁用.</translation>
     </message>
     <message>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
@@ -935,11 +935,11 @@
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
-        <translation>您的 LameXP 目录位于此处</translation>
+        <translation>您的 LameXP 目录位于此处:</translation>
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation>您可以从 Nero 官方网站上免费下载 Nero AAC 编码器</translation>
+        <translation>您可以从 Nero 官方网站上免费下载 Nero AAC 编码器:</translation>
     </message>
     <message>
         <source>AAC Support Disabled</source>
@@ -959,7 +959,7 @@
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
-        <translation>%1 GB 的可用磁盘空间小于上有您的系统 TEMP 文件夹｡</translation>
+        <translation>%1 GB 的可用磁盘空间小于上有您的系统 TEMP 文件夹.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
@@ -967,7 +967,7 @@
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
-        <translation>您的 TEMP 文件夹位于</translation>
+        <translation>您的 TEMP 文件夹位于:</translation>
     </message>
     <message>
         <source>Abort Encoding Process</source>
@@ -995,7 +995,7 @@
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation>无法写入所选的输出目录｡</translation>
+        <translation>无法写入所选的输出目录.</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
@@ -1019,7 +1019,7 @@
     </message>
     <message>
         <source>Enter the name of the new folder:</source>
-        <translation>输入新文件夹的名称</translation>
+        <translation>输入新文件夹的名称:</translation>
     </message>
     <message>
         <source>Failed to create folder</source>
@@ -1067,7 +1067,7 @@
     </message>
     <message>
         <source>The update reminder has been disabled.</source>
-        <translation>更新提醒已被禁用｡</translation>
+        <translation>更新提醒已被禁用.</translation>
     </message>
     <message>
         <source>Please remember to check for updates at regular intervals!</source>
@@ -1075,7 +1075,7 @@
     </message>
     <message>
         <source>The update reminder has been re-enabled.</source>
-        <translation>更新提醒已重新启用｡</translation>
+        <translation>更新提醒已重新启用.</translation>
     </message>
     <message>
         <source>Do you really want to disable all sound effects?</source>
@@ -1087,11 +1087,11 @@
     </message>
     <message>
         <source>All sound effects have been disabled.</source>
-        <translation>已禁用所有的声音效果｡</translation>
+        <translation>已禁用所有的声音效果.</translation>
     </message>
     <message>
         <source>The sound effects have been re-enabled.</source>
-        <translation>声音效果已经重新启用｡</translation>
+        <translation>声音效果已经重新启用.</translation>
     </message>
     <message>
         <source>Nero AAC Notifications</source>
@@ -1103,11 +1103,11 @@
     </message>
     <message>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
-        <translation>已禁用所有 Nero AAC 编码器通知｡</translation>
+        <translation>已禁用所有 Nero AAC 编码器通知.</translation>
     </message>
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation>Nero AAC 编码器通知已重新启用｡</translation>
+        <translation>Nero AAC 编码器通知已重新启用.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1267,7 +1267,7 @@
     </message>
     <message>
         <source>Encode!</source>
-        <translation>编码</translation>
+        <translation>编码!</translation>
     </message>
     <message>
         <source> Tone Adjustment </source>
@@ -1295,11 +1295,11 @@
     </message>
     <message>
         <source>The LameXP shell integration has been disabled.</source>
-        <translation>LameXP 外壳(shell)程序集成已被禁用｡</translation>
+        <translation>LameXP 外壳(shell)程序集成已被禁用.</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation>LameXP 外壳(shell)程序集成已重新启用｡</translation>
+        <translation>LameXP 外壳(shell)程序集成已重新启用.</translation>
     </message>
     <message>
         <source> Custom Encoder Parameters </source>
@@ -1315,7 +1315,7 @@
     </message>
     <message>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
-        <translation>警告: 自定义参数将不会被检查过｡使用它们需要您自担风险!!!</translation>
+        <translation>警告: 自定义参数将不会被检查过.使用它们需要您自担风险!!!</translation>
     </message>
     <message>
         <source> Multi-Threading </source>
@@ -1323,7 +1323,7 @@
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation>选择基于 CPU 核心 (推荐) 的数量,并行实例的数量｡</translation>
+        <translation>选择基于 CPU 核心 (推荐) 的数量,并行实例的数量</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
@@ -1363,7 +1363,7 @@
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation>无法写入所选目录｡请选择另一个目录 !</translation>
+        <translation>无法写入所选目录.请选择另一个目录 !</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
@@ -1371,11 +1371,11 @@
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
-        <translation>我们建议为此目的使用 %1｡</translation>
+        <translation>我们建议为此目的使用 %1.</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
-        <translation>对不起,LameXP 目前无法从音频 CD 提取音频轨道｡</translation>
+        <translation>对不起,LameXP 目前无法从音频 CD 提取音频轨道.</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
@@ -1419,7 +1419,7 @@
     </message>
     <message>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation>LameXP 将检查现在的测试版更新｡</translation>
+        <translation>LameXP 将检查现在的测试版更新.</translation>
     </message>
     <message>
         <source>Check Now</source>
@@ -1431,7 +1431,7 @@
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation>LameXP 将 &lt;i&gt; 从今以后 &lt;/i&gt; 不检查测试版更新｡</translation>
+        <translation>LameXP 将 &lt;i&gt; 从今以后 &lt;/i&gt; 不检查测试版更新.</translation>
     </message>
     <message>
         <source>Aften A/52</source>
@@ -1523,7 +1523,7 @@
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation>指数搜索大小</translation>
+        <translation>指数搜索大小:</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
@@ -1555,11 +1555,11 @@
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation>导入CUE文件文件,请使用LameXP的提示表向导｡</translation>
+        <translation>导入CUE文件文件,请使用LameXP的提示表向导.</translation>
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation>好像一个防病毒软件正在放缓的 LameXP 的启动｡</translation>
+        <translation>好像一个防病毒软件正在放缓的 LameXP 的启动.</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
@@ -1583,11 +1583,11 @@
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation>已禁用的启动速度慢的通知｡</translation>
+        <translation>已禁用的启动速度慢的通知.</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation>启动速度慢的通知已重新启用｡</translation>
+        <translation>启动速度慢的通知已重新启用.</translation>
     </message>
     <message>
         <source> Rename Output Files </source>
@@ -1675,11 +1675,11 @@
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation>警告: 音频质量会很差｡请&lt;u&gt;不要&lt;/u&gt;抱怨音频质量差!</translation>
+        <translation>警告: 音频质量会很差.请&lt;u&gt;不要&lt;/u&gt;抱怨音频质量差!</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation>警告: 处理速度会很慢｡请&lt;u&gt;不要&lt;/u&gt;抱怨处理速度慢!</translation>
+        <translation>警告: 处理速度会很慢.请&lt;u&gt;不要&lt;/u&gt;抱怨处理速度慢!</translation>
     </message>
     <message>
         <source>Peak Level</source>
@@ -1715,11 +1715,11 @@
     </message>
     <message>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation>LameXP 将从现在的休眠的计算机关机｡</translation>
+        <translation>LameXP 将从现在的休眠的计算机关机.</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation>LameXP 从今以后 &lt;i&gt;不会&lt;\/i&gt; 休眠的计算机关机｡</translation>
+        <translation>LameXP 从今以后 &lt;i&gt;不会&lt;\/i&gt; 休眠的计算机关机.</translation>
     </message>
     <message>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
@@ -1727,7 +1727,7 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished">跳过检查更新的时间,请耐心等待......</translation>
+        <translation>跳过检查更新的时间,请耐心等待...</translation>
     </message>
 </context>
 <context>
@@ -1757,7 +1757,7 @@
     </message>
     <message>
         <source>The following meta information have been extracted from the original file.</source>
-        <translation>已从原始文件提取了以下的 Meta 信息｡</translation>
+        <translation>已从原始文件提取了以下的 Meta 信息.</translation>
     </message>
     <message>
         <source>Load Artwork From File</source>
@@ -1793,7 +1793,7 @@
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished">Meta 信息: %1</translation>
+        <translation>Meta 信息: %1</translation>
     </message>
 </context>
 <context>
@@ -1868,11 +1868,11 @@
     </message>
     <message>
         <source>Please enter the title for this file:</source>
-        <translation>请输入此文件的标题</translation>
+        <translation>请输入此文件的标题:</translation>
     </message>
     <message>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation>标题不能为空｡从文件的名称生成标题 !</translation>
+        <translation>标题不能为空.从文件的名称生成标题 !</translation>
     </message>
     <message>
         <source>Edit Artist</source>
@@ -1880,7 +1880,7 @@
     </message>
     <message>
         <source>Please enter the artist for this file:</source>
-        <translation>请输入此文件的艺术家</translation>
+        <translation>请输入此文件的艺术家:</translation>
     </message>
     <message>
         <source>Edit Album</source>
@@ -1896,7 +1896,7 @@
     </message>
     <message>
         <source>Please enter the genre for this file:</source>
-        <translation>请输入此文件风格</translation>
+        <translation>请输入此文件风格:</translation>
     </message>
     <message>
         <source>Edit Year</source>
@@ -1904,7 +1904,7 @@
     </message>
     <message>
         <source>Please enter the year for this file:</source>
-        <translation>请输入此文件的年份</translation>
+        <translation>请输入此文件的年份:</translation>
     </message>
     <message>
         <source>Edit Position</source>
@@ -1912,7 +1912,7 @@
     </message>
     <message>
         <source>Please enter the position (track no.) for this file:</source>
-        <translation>请输入此文件的位置 (轨道号)</translation>
+        <translation>请输入此文件的位置 (轨道号):</translation>
     </message>
     <message>
         <source>Unspecified (copy from source file)</source>
@@ -1983,7 +1983,7 @@
     </message>
     <message>
         <source>Done.</source>
-        <translation>完成</translation>
+        <translation>完成.</translation>
     </message>
     <message>
         <source>Aborted!</source>
@@ -2098,11 +2098,11 @@
     </message>
     <message>
         <source>Process was aborted by the user.</source>
-        <translation>进程被用户终止｡</translation>
+        <translation>进程被用户终止.</translation>
     </message>
     <message>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>错误: %1 的 %2 文件失败｡双击失败的项目的详细信息 !</translation>
+        <translation>错误: %1 的 %2 文件失败.双击失败的项目的详细信息 !</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
@@ -2114,7 +2114,7 @@
     </message>
     <message>
         <source>All files completed successfully.</source>
-        <translation>已成功完成的所有文件｡</translation>
+        <translation>已成功完成的所有文件.</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
@@ -2154,35 +2154,35 @@
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished">CPU使用率(总)</translation>
+        <translation>CPU使用率(总)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished">物理RAM的使用</translation>
+        <translation>物理RAM的使用</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished">可用的磁盘空间(Temp文件夹)</translation>
+        <translation>可用的磁盘空间(Temp文件夹)</translation>
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation type="unfinished">过程完成了 %1｡</translation>
+        <translation>过程完成了 %1.</translation>
     </message>
     <message>
         <source>hour(s)</source>
-        <translation type="unfinished">小时</translation>
+        <translation>小时</translation>
     </message>
     <message>
         <source>minute(s)</source>
-        <translation type="unfinished">分钟</translation>
+        <translation>分钟</translation>
     </message>
     <message>
         <source>second(s)</source>
-        <translation type="unfinished">秒</translation>
+        <translation>秒</translation>
     </message>
     <message>
         <source>millisecond(s)</source>
-        <translation type="unfinished">毫秒</translation>
+        <translation>毫秒</translation>
     </message>
 </context>
 <context>
@@ -2200,19 +2200,19 @@
     <name>QApplication</name>
     <message>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation>可执行文件&apos;%1&apos;不支持 Windows 兼容性模式｡</translation>
+        <translation>可执行文件 &apos;%1&apos; 不支持 Windows 兼容性模式.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation>可执行文件&apos;%1&apos;需要 Qt v2%,但发现 Qt v%3｡</translation>
+        <translation>可执行文件 &apos;%1&apos; 需要 Qt v%2, 但发现 Qt v%3.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation>可执行文件 &apos;%1&apos; 需要 Windows 2000 或更高版本｡</translation>
+        <translation>可执行文件 &apos;%1&apos; 需要 Windows 2000 或更高版本.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished">可执行文件 &apos;%1&apos;为Qt &apos;%2&apos;,但发现Qt&apos;%3&apos;｡</translation>
+        <translation>可执行文件 &apos;%1&apos;为Qt &apos;%2&apos;,但发现Qt&apos;%3&apos;.</translation>
     </message>
 </context>
 <context>
@@ -2241,7 +2241,7 @@
     </message>
     <message>
         <source>Please wait...</source>
-        <translation>请稍候｡｡｡</translation>
+        <translation>请稍候...</translation>
     </message>
     <message>
         <source>Latest version available:</source>
@@ -2285,7 +2285,7 @@
     </message>
     <message>
         <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation>请确保您的网络连接正常工作,然后再试｡</translation>
+        <translation>请确保您的网络连接正常工作,然后再试.</translation>
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
@@ -2297,7 +2297,7 @@
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation>抱歉,更新服务器可能在这一次忙｡请稍后再试｡</translation>
+        <translation>抱歉,更新服务器可能在这一次忙.请稍后再试.</translation>
     </message>
     <message>
         <source>More information available at:</source>
@@ -2309,23 +2309,23 @@
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation>我们强烈建议所有的用户,要尽快安装此更新｡</translation>
+        <translation>我们强烈建议所有的用户,要尽快安装此更新.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
-        <translation>这个时候没有发现新的可用更新｡</translation>
+        <translation>这个时候没有发现新的可用更新.</translation>
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation>您的 LameXP 版本是仍然最新的｡请定期检查更新 !</translation>
+        <translation>您的 LameXP 版本是仍然最新的.请定期检查更新 !</translation>
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation>您的版本似乎是比最新的版本新｡</translation>
+        <translation>您的版本似乎是比最新的版本新.</translation>
     </message>
     <message>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation>这通常表示您当前正在使用的 LameXP 预发布版｡</translation>
+        <translation>这通常表示您当前正在使用的 LameXP 预发布版.</translation>
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
@@ -2333,11 +2333,11 @@
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation>准备好安装更新｡应用程序将退出...</translation>
+        <translation>准备好安装更新.应用程序将退出...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
-        <translation>更新失败｡请再试一次或手动下载 !</translation>
+        <translation>更新失败.请再试一次或手动下载 !</translation>
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
@@ -2345,7 +2345,7 @@
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation>请确保您的计算机连接到 Internet,然后重试｡</translation>
+        <translation>请确保您的计算机连接到 Internet,然后重试.</translation>
     </message>
 </context>
 </TS>
