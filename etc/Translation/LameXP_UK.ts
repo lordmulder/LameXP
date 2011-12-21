@@ -1728,7 +1728,7 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Наразі йде переривання перевірки оновлень, будь ласка, зачекайте...</translation>
     </message>
 </context>
 <context>
@@ -2213,7 +2213,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток &apos;%1&apos; був створений для Qt &apos;%2&apos;, але знайдено Qt &apos;%3&apos;.</translation>
     </message>
 </context>
 <context>
