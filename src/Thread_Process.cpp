@@ -128,18 +128,6 @@ void ProcessThread::processFile()
 		return;
 	}
 
-	//Do we need to take care of downsampling the input?
-	if(m_encoder->requiresDownsample())
-	{
-		insertDownsampleFilter();
-	}
-
-	//Do we need Stereo downmix?
-	if(m_encoder->requiresDownmix())
-	{
-		insertDownmixFilter();
-	}
-
 	QString sourceFile = m_audioFile.filePath();
 
 	//Decode source file
@@ -170,6 +158,28 @@ void ProcessThread::processFile()
 			emit processStateChanged(m_jobId, tr("Unsupported!"), ProgressModel::JobFailed);
 			emit processStateFinished(m_jobId, outFileName, false);
 			return;
+		}
+	}
+
+	//Check audio properties
+	if(bSuccess)
+	{
+		//Do we need to take care of downsampling the input?
+		if(m_encoder->supportedSamplerates())
+		{
+			insertDownsampleFilter();
+		}
+
+		//Do we need to change the bits per sample of the input?
+		if(m_encoder->supportedBitdepths())
+		{
+			insertBitdepthFilter();
+		}
+
+		//Do we need Stereo downmix?
+		if(m_encoder->requiresDownmix())
+		{
+			insertDownmixFilter();
 		}
 	}
 
@@ -370,7 +380,7 @@ void ProcessThread::insertDownsampleFilter(void)
 	//Now add the downsampling filter, if needed
 	if(applyDownsampling)
 	{
-		const unsigned int *supportedRates = m_encoder->requiresDownsample();
+		const unsigned int *supportedRates = m_encoder->supportedSamplerates();
 		const unsigned int inputRate = m_audioFile.formatAudioSamplerate();
 		unsigned int currentDiff = UINT_MAX, minimumDiff = UINT_MAX, bestRate = UINT_MAX;
 
@@ -391,6 +401,11 @@ void ProcessThread::insertDownsampleFilter(void)
 			m_filters.prepend(new ResampleFilter((bestRate != UINT_MAX) ? bestRate : supportedRates[0]));
 		}
 	}
+}
+
+void ProcessThread::insertBitdepthFilter(void)
+{
+	qFatal("ProcessThread::insertBitdepthFilter not implemented yet!");
 }
 
 void ProcessThread::insertDownmixFilter(void)

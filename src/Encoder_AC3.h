@@ -36,7 +36,7 @@ public:
 	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual QString extension(void);
-	virtual const unsigned int *requiresDownsample(void);
+	virtual const unsigned int *supportedSamplerates(void);
 
 	//Advanced options
 	virtual void setAudioCodingMode(int value);

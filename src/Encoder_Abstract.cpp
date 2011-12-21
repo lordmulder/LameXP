@@ -53,7 +53,13 @@ bool AbstractEncoder::requiresDownmix(void)
 }
 
 // Does encoder require the input to be downsampled? (NULL-terminated array of supported sampling rates)
-const unsigned int *AbstractEncoder::requiresDownsample(void)
+const unsigned int *AbstractEncoder::supportedSamplerates(void)
+{
+	return NULL;
+}
+
+// What bitdepths does the encoder support as input? (NULL-terminated array of supported bits per sample)
+const unsigned int *AbstractEncoder::supportedBitdepths(void)
 {
 	return NULL;
 }

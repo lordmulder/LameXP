@@ -179,7 +179,7 @@ QString AC3Encoder::extension(void)
 	return "ac3";
 }
 
-const unsigned int *AC3Encoder::requiresDownsample(void)
+const unsigned int *AC3Encoder::supportedSamplerates(void)
 {
 	static const unsigned int supportedRates[] = {48000, 44100, 32000, NULL};
 	return supportedRates;
