@@ -18,33 +18,22 @@
 //
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
-
 #pragma once
 
-#include "Encoder_Abstract.h"
+#include "Tool_Abstract.h"
 
-#include <QObject>
+class AudioFileModel;
 
-class AACEncoder : public AbstractEncoder
+class WaveProperties : public AbstractTool
 {
 	Q_OBJECT
 
 public:
-	AACEncoder(void);
-	~AACEncoder(void);
+	WaveProperties(void);
+	~WaveProperties(void);
 
-	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	virtual QString extension(void);
-	
-	//Advanced options
-	virtual void setProfile(int profile);
-	virtual void setEnable2Pass(bool enabled);
+	bool detect(const QString &sourceFile, AudioFileModel *info, volatile bool *abortFlag);
 
 private:
-	const QString m_binary_enc;
-	const QString m_binary_tag;
-	const QString m_binary_sox;
-	int m_configProfile;
-	bool m_configEnable2Pass;
+	const QString m_binary;
 };

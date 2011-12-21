@@ -192,7 +192,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	emit statusUpdated(100);
 	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
 
-	if(bTimeout || bAborted || process.exitStatus() != QProcess::NormalExit)
+	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
 	{
 		return false;
 	}

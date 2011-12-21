@@ -29,6 +29,7 @@
 #include "Filter_Abstract.h"
 #include "Filter_Downmix.h"
 #include "Filter_Resample.h"
+#include "Tool_WaveProperties.h"
 #include "Registry_Decoder.h"
 #include "Model_Settings.h"
 
@@ -61,7 +62,8 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_jobId(QUuid::createUuid()),
 	m_prependRelativeSourcePath(prependRelativeSourcePath),
 	m_renamePattern("<BaseName>"),
-	m_aborted(false)
+	m_aborted(false),
+	m_propDetect(new WaveProperties())
 {
 	if(m_mutex_genFileName)
 	{
@@ -70,6 +72,9 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 
 	connect(m_encoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 	connect(m_encoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
+
+	connect(m_propDetect, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
+	connect(m_propDetect, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
 	m_currentStep = UnknownStep;
 }
@@ -87,6 +92,7 @@ ProcessThread::~ProcessThread(void)
 	}
 
 	LAMEXP_DELETE(m_encoder);
+	LAMEXP_DELETE(m_propDetect);
 }
 
 ////////////////////////////////////////////////////////////
@@ -130,7 +136,9 @@ void ProcessThread::processFile()
 
 	QString sourceFile = m_audioFile.filePath();
 
+	//------------------
 	//Decode source file
+	//------------------
 	if(!m_filters.isEmpty() || !m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
 	{
 		m_currentStep = DecodingStep;
@@ -159,31 +167,44 @@ void ProcessThread::processFile()
 			emit processStateFinished(m_jobId, outFileName, false);
 			return;
 		}
+
+		//Update audio properties after decode
+		if(bSuccess)
+		{
+			if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->requiresDownmix())
+			{
+				m_currentStep = AnalyzeStep;
+				bSuccess = m_propDetect->detect(sourceFile, &m_audioFile, &m_aborted);
+
+				if(bSuccess)
+				{
+					handleMessage("\n-------------------------------\n");
+
+					//Do we need to take care of downsampling the input?
+					if(m_encoder->supportedSamplerates())
+					{
+						insertDownsampleFilter();
+					}
+
+					//Do we need to change the bits per sample of the input?
+					if(m_encoder->supportedBitdepths())
+					{
+						insertBitdepthFilter();
+					}
+
+					//Do we need Stereo downmix?
+					if(m_encoder->requiresDownmix())
+					{
+						insertDownmixFilter();
+					}
+				}
+			}
+		}
 	}
 
-	//Check audio properties
-	if(bSuccess)
-	{
-		//Do we need to take care of downsampling the input?
-		if(m_encoder->supportedSamplerates())
-		{
-			insertDownsampleFilter();
-		}
-
-		//Do we need to change the bits per sample of the input?
-		if(m_encoder->supportedBitdepths())
-		{
-			insertBitdepthFilter();
-		}
-
-		//Do we need Stereo downmix?
-		if(m_encoder->requiresDownmix())
-		{
-			insertDownmixFilter();
-		}
-	}
-
+	//-----------------------
 	//Apply all audio filters
+	//-----------------------
 	if(bSuccess)
 	{
 		while(!m_filters.isEmpty())
@@ -205,7 +226,9 @@ void ProcessThread::processFile()
 		}
 	}
 
+	//-----------------
 	//Encode audio file
+	//-----------------
 	if(bSuccess)
 	{
 		m_currentStep = EncodingStep;
@@ -240,6 +263,9 @@ void ProcessThread::handleUpdate(int progress)
 	{
 	case EncodingStep:
 		emit processStateChanged(m_jobId, QString("%1 (%2%)").arg(tr("Encoding"), QString::number(progress)), ProgressModel::JobRunning);
+		break;
+	case AnalyzeStep:
+		emit processStateChanged(m_jobId, QString("%1 (%2%)").arg(tr("Analyzing"), QString::number(progress)), ProgressModel::JobRunning);
 		break;
 	case FilteringStep:
 		emit processStateChanged(m_jobId, QString("%1 (%2%)").arg(tr("Filtering"), QString::number(progress)), ProgressModel::JobRunning);

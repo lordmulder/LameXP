@@ -340,6 +340,12 @@
     <ClCompile Include="tmp\MOC_Encoder_AAC_QAAC.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Tool_WaveProperties.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Tool_WaveProperties.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -634,6 +640,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Encoder_AAC_QAAC.h">
       <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Tool_WaveProperties.h">
+      <Filter>Header Files\Misc</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

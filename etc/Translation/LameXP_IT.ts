@@ -2042,6 +2042,10 @@
         <source>Unknown Comment</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Analyzing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>

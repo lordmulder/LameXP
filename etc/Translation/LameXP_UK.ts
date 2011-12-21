@@ -1728,7 +1728,7 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation>Наразі йде переривання перевірки оновлень, будь ласка, зачекайте...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2042,6 +2042,10 @@
         <source>Unknown Comment</source>
         <translation>Невідомий коментар</translation>
     </message>
+    <message>
+        <source>Analyzing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>
@@ -2213,7 +2217,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation>Додаток &apos;%1&apos; був створений для Qt &apos;%2&apos;, але знайдено Qt &apos;%3&apos;.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

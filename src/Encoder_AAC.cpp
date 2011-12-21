@@ -48,7 +48,7 @@ AACEncoder::~AACEncoder(void)
 
 bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
 {
-	const unsigned int fileDuration = (metaInfo.fileDuration() > 0) ? metaInfo.fileDuration() : detectLength(sourceFile, abortFlag);
+	const unsigned int fileDuration = metaInfo.fileDuration();
 	
 	QProcess process;
 	QStringList args;
@@ -188,7 +188,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	emit statusUpdated(100);
 	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
 
-	if(bTimeout || bAborted || process.exitStatus() != QProcess::NormalExit)
+	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
 	{
 		return false;
 	}
@@ -252,83 +252,12 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		
 	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
 
-	if(bTimeout || bAborted || process.exitStatus() != QProcess::NormalExit)
+	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
 	{
 		return false;
 	}
 
 	return true;
-}
-
-unsigned int AACEncoder::detectLength(const QString &sourceFile, volatile bool *abortFlag)
-{
-	unsigned int duration = 0;
-	
-	QProcess process;
-	QStringList args;
-
-	args << "--i" << sourceFile;
-
-	if(!startProcess(process, m_binary_sox, args))
-	{
-		return duration;
-	}
-
-	bool bTimeout = false;
-	bool bAborted = false;
-
-	QRegExp regExp("Duration\\s*:\\s*(\\d\\d):(\\d\\d):(\\d\\d)\\.(\\d\\d)", Qt::CaseInsensitive);
-
-	while(process.state() != QProcess::NotRunning)
-	{
-		if(*abortFlag)
-		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("SoX process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
-			{
-				bool ok[4] = {false, false, false, false};
-				unsigned int tmp1 = regExp.cap(1).toUInt(&ok[0]);
-				unsigned int tmp2 = regExp.cap(2).toUInt(&ok[1]);
-				unsigned int tmp3 = regExp.cap(3).toUInt(&ok[2]);
-				unsigned int tmp4 = regExp.cap(4).toUInt(&ok[3]);
-				if(ok[0] && ok[1] && ok[2] && ok[3])
-				{
-					duration = (tmp1 * 3600) + (tmp2 * 60) + tmp3 + qRound(static_cast<double>(tmp4) / 100.0);
-				}
-			}
-			if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
-		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-
-	//qWarning("Duration detected is: %u", duration);
-	return duration;
 }
 
 QString AACEncoder::extension(void)

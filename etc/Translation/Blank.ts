@@ -2533,107 +2533,112 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="118"/>
+        <location filename="../../src/Thread_Process.cpp" line="124"/>
         <source>Starting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="126"/>
+        <location filename="../../src/Thread_Process.cpp" line="132"/>
         <source>Not found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="169"/>
+        <location filename="../../src/Thread_Process.cpp" line="165"/>
         <source>The format of this file is NOT supported:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="169"/>
+        <location filename="../../src/Thread_Process.cpp" line="165"/>
         <source>Container Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="169"/>
+        <location filename="../../src/Thread_Process.cpp" line="165"/>
         <source>Audio Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="170"/>
+        <location filename="../../src/Thread_Process.cpp" line="166"/>
         <source>Unsupported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="215"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Done.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="215"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Aborted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="215"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="232"/>
+        <location filename="../../src/Thread_Process.cpp" line="265"/>
         <source>Encoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="235"/>
+        <location filename="../../src/Thread_Process.cpp" line="268"/>
+        <source>Analyzing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Thread_Process.cpp" line="271"/>
         <source>Filtering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="238"/>
+        <location filename="../../src/Thread_Process.cpp" line="274"/>
         <source>Decoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="261"/>
+        <location filename="../../src/Thread_Process.cpp" line="297"/>
         <source>The source audio file could not be found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="268"/>
+        <location filename="../../src/Thread_Process.cpp" line="304"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="294"/>
+        <location filename="../../src/Thread_Process.cpp" line="330"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="302"/>
+        <location filename="../../src/Thread_Process.cpp" line="338"/>
         <source>The target output directory is NOT writable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="312"/>
+        <location filename="../../src/Thread_Process.cpp" line="348"/>
         <source>Unknown File Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="314"/>
+        <location filename="../../src/Thread_Process.cpp" line="350"/>
         <source>Unknown Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="315"/>
+        <location filename="../../src/Thread_Process.cpp" line="351"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="316"/>
+        <location filename="../../src/Thread_Process.cpp" line="352"/>
         <source>Unknown Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="318"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Unknown Comment</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="zh_CN" sourcelanguage="cn">
 <context>
@@ -2040,6 +2040,10 @@
     <message>
         <source>Unknown Comment</source>
         <translation>未知评论</translation>
+    </message>
+    <message>
+        <source>Analyzing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

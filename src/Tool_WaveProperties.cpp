@@ -19,36 +19,33 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Decoder_ALAC.h"
+#include "Tool_WaveProperties.h"
 
 #include "Global.h"
+#include "Model_AudioFile.h"
 
-#include <QDir>
 #include <QProcess>
-#include <QRegExp>
-#include <QUuid>
 
-ALACDecoder::ALACDecoder(void)
+WaveProperties::WaveProperties(void)
 :
-	m_binary(lamexp_lookup_tool("alac.exe"))
+	m_binary(lamexp_lookup_tool("sox.exe"))
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing ALAC decoder. Tool 'alac.exe' is not registred!";
+		throw "Error initializing MP3 encoder. Tool 'lame.exe' is not registred!";
 	}
 }
 
-ALACDecoder::~ALACDecoder(void)
+WaveProperties::~WaveProperties(void)
 {
 }
 
-bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
 
-	args << "-f" << QDir::toNativeSeparators(outputFile);
-	args << QDir::toNativeSeparators(sourceFile);
+	args << "--i" << sourceFile;
 
 	if(!startProcess(process, m_binary, args))
 	{
@@ -58,8 +55,12 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	//The ALAC Decoder doesn't actually send any status updates :-[
-	emit statusUpdated(20 + (QUuid::createUuid().data1 % 80));
+	int progress = 0;
+
+	QRegExp regExp_precision("Precision\\s*:\\s*(\\d+)-bit", Qt::CaseInsensitive);
+	QRegExp regExp_samplerate("Sample Rate\\s*:\\s*(\\d+)", Qt::CaseInsensitive);
+	QRegExp regExp_duration("Duration\\s*:\\s*(\\d\\d):(\\d\\d):(\\d\\d)\\.(\\d\\d)", Qt::CaseInsensitive);
+	QRegExp regExp_channels("Channels\\s*:\\s*(\\d+)", Qt::CaseInsensitive);
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -74,7 +75,7 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();
-			qWarning("ALAC process timed out <-- killing!");
+			qWarning("SoX process timed out <-- killing!");
 			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
@@ -83,6 +84,40 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		{
 			QByteArray line = process.readLine();
 			QString text = QString::fromUtf8(line.constData()).simplified();
+			if(regExp_precision.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				unsigned int tmp = regExp_precision.cap(1).toUInt(&ok);
+				if(ok) info->setFormatAudioBitdepth(tmp);
+				emit statusUpdated(qMin(progress += 25, 100));
+			}
+			if(regExp_samplerate.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				unsigned int tmp = regExp_samplerate.cap(1).toUInt(&ok);
+				if(ok) info->setFormatAudioSamplerate(tmp);
+				emit statusUpdated(qMin(progress += 25, 100));
+			}
+			if(regExp_duration.lastIndexIn(text) >= 0)
+			{
+				bool ok[4] = {false, false, false, false};
+				unsigned int tmp1 = regExp_duration.cap(1).toUInt(&ok[0]);
+				unsigned int tmp2 = regExp_duration.cap(2).toUInt(&ok[1]);
+				unsigned int tmp3 = regExp_duration.cap(3).toUInt(&ok[2]);
+				unsigned int tmp4 = regExp_duration.cap(4).toUInt(&ok[3]);
+				if(ok[0] && ok[1] && ok[2] && ok[3])
+				{
+					info->setFileDuration((tmp1 * 3600) + (tmp2 * 60) + tmp3 + qRound(static_cast<double>(tmp4) / 100.0));
+				}
+				emit statusUpdated(qMin(progress += 25, 100));
+			}
+			if(regExp_channels.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				unsigned int tmp = regExp_channels.cap(1).toUInt(&ok);
+				if(ok) info->setFormatAudioChannels(tmp);
+				emit statusUpdated(qMin(progress += 25, 100));
+			}
 			if(!text.isEmpty())
 			{
 				emit messageLogged(text);
@@ -96,32 +131,14 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		process.kill();
 		process.waitForFinished(-1);
 	}
-	
+
 	emit statusUpdated(100);
 	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
 
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
+	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
 	{
 		return false;
 	}
 	
 	return true;
-}
-
-bool ALACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
-{
-	if(containerType.compare("MPEG-4", Qt::CaseInsensitive) == 0)
-	{
-		if(formatType.compare("ALAC", Qt::CaseInsensitive) == 0)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-QStringList ALACDecoder::supportedTypes(void)
-{
-	return QStringList() << "Apple Lossless (*.mp4 *.m4a)";
 }

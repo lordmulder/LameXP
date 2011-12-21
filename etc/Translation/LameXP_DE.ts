@@ -2042,6 +2042,10 @@
         <source>Unknown Comment</source>
         <translation>Unbekannter Kommentar</translation>
     </message>
+    <message>
+        <source>Analyzing</source>
+        <translation>Prüfe</translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>

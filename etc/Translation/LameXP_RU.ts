@@ -2048,6 +2048,10 @@
         <source>Unknown Comment</source>
         <translation type="unfinished">Неизвестный Комментарий</translation>
     </message>
+    <message>
+        <source>Analyzing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>

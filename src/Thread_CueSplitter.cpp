@@ -391,7 +391,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 		process.waitForFinished(-1);
 	}
 
-	if(process.exitStatus() != QProcess::NormalExit || QFileInfo(output).size() == 0)
+	if(process.exitCode() != EXIT_SUCCESS || QFileInfo(output).size() == 0)
 	{
 		qWarning("Splitting has failed !!!");
 		m_nTracksSkipped++;

@@ -30,6 +30,7 @@
 
 class QMutex;
 class AbstractFilter;
+class WaveProperties;
 
 class ProcessThread: public QThread
 {
@@ -60,9 +61,10 @@ private:
 	enum ProcessStep
 	{
 		DecodingStep = 0,
-		FilteringStep = 1,
-		EncodingStep = 2,
-		UnknownStep = 3
+		AnalyzeStep = 1,
+		FilteringStep = 2,
+		EncodingStep = 3,
+		UnknownStep = 4
 	};
 	
 	void processFile();
@@ -83,6 +85,7 @@ private:
 	const bool m_prependRelativeSourcePath;
 	QList<AbstractFilter*> m_filters;
 	QString m_renamePattern;
+	WaveProperties *m_propDetect;
 	
 	static QMutex *m_mutex_genFileName;
 };
