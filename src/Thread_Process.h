@@ -72,7 +72,6 @@ private:
 	QString generateTempFileName(void);
 	void insertDownsampleFilter(void);
 	void insertDownmixFilter(void);
-	void insertBitdepthFilter(void);
 	
 	const QUuid m_jobId;
 	AudioFileModel m_audioFile;

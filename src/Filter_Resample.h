@@ -26,7 +26,7 @@
 class ResampleFilter : public AbstractFilter
 {
 public:
-	ResampleFilter(int samplingRate = 44100);
+	ResampleFilter(int samplingRate = 0, int bitDepth = 0);
 	~ResampleFilter(void);
 
 	virtual bool apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
@@ -34,4 +34,5 @@ public:
 private:
 	const QString m_binary;
 	int m_samplingRate;
+	int m_bitDepth;
 };
