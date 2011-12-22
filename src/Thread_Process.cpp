@@ -420,7 +420,7 @@ void ProcessThread::insertDownsampleFilter(void)
 			for(int i = 0; supportedRates[i]; i++)
 			{
 				currentDiff = DIFF(inputRate, supportedRates[i]);
-				if(currentDiff < minimumDiff)
+				if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestRate < supportedRates[i])))
 				{
 					bestRate = supportedRates[i];
 					minimumDiff = currentDiff;
@@ -446,7 +446,7 @@ void ProcessThread::insertDownsampleFilter(void)
 		for(int i = 0; supportedBPS[i]; i++)
 		{
 			currentDiff = DIFF(inputBPS, supportedBPS[i]);
-			if(currentDiff < minimumDiff)
+			if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestBPS < supportedBPS[i])))
 			{
 				bestBPS = supportedBPS[i];
 				minimumDiff = currentDiff;

@@ -36,6 +36,7 @@ class SettingsModel;
 class CPUObserverThread;
 class RAMObserverThread;
 class DiskObserverThread;
+class AbstractEncoder;
 
 enum shutdownFlag_t
 {
@@ -79,6 +80,7 @@ protected:
 private:
 	void setCloseButtonEnabled(bool enabled);
 	void startNextJob(void);
+	AbstractEncoder *makeEncoder(bool *nativeResampling);
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);

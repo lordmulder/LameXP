@@ -176,14 +176,6 @@
         <translation>GNU Wget - Software for retrieving files using HTTP</translation>
     </message>
     <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation>Silk Icons - Більш ніж 700 іконок в форматі PNG</translation>
-    </message>
-    <message>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>Створено Mark James, випущено під ліцензією Creative Commons &apos;by&apos; License.</translation>
-    </message>
-    <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стороннє ПЗ, що використовується в LameXP, належать авторам цього ПЗ.</translation>
     </message>
@@ -227,6 +219,14 @@
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation>avs2wav - аудіоконвертер у Wave аудіо, що базується на Avisynth</translation>
+    </message>
+    <message>
+        <source>dcaenc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1728,6 +1728,10 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCA Enc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

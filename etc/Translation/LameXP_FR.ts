@@ -89,10 +89,6 @@
         <translation>Technologie de compression audio sans perte ouverte et libre de brevets.</translation>
     </message>
     <message>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>Par Mark James, publié sous licence Creative Commons.</translation>
-    </message>
-    <message>
         <source>About Third-party Software</source>
         <translation>A propos des logiciels tiers</translation>
     </message>
@@ -172,10 +168,6 @@
         <translation>GnuPG - The GNU Privacy Guard</translation>
     </message>
     <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation>Silk Icons - Plus de 700  icônes au format PNG</translation>
-    </message>
-    <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation>Encodeur de référence MPEG-4 Nero AAC</translation>
     </message>
@@ -229,6 +221,14 @@
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dcaenc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1737,6 +1737,10 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCA Enc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

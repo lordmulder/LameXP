@@ -176,14 +176,6 @@
         <translation type="unfinished">GNU Wget - HTTP를 사용하여 파일을 검색하기 위한 소프트웨어</translation>
     </message>
     <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished">Silk Icons - PNG 형식의 700 이상의 아이콘 </translation>
-    </message>
-    <message>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished">By Mark James, 크리에이티브 커먼즈 &apos;by&apos; 라이센스 하에 출시됨.</translation>
-    </message>
-    <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation type="unfinished">LameXP 전체는 LoRd_MuldeR에게 저작권이 있습니다. LameXP에 사용된 타사 소프트웨어는 각 소프트웨어의 저작자에게 저작권이 있습니다.</translation>
     </message>
@@ -225,6 +217,14 @@
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dcaenc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1727,6 +1727,10 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCA Enc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

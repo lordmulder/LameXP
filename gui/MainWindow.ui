@@ -770,7 +770,7 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="6">
+                 <item row="0" column="7">
                   <widget class="QRadioButton" name="radioButtonEncoderPCM">
                    <property name="text">
                     <string>Wave (PCM)</string>
@@ -804,6 +804,13 @@
                   <widget class="QRadioButton" name="radioButtonEncoderAC3">
                    <property name="text">
                     <string>Aften A/52</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="6">
+                  <widget class="QRadioButton" name="radioButtonEncoderDCA">
+                   <property name="text">
+                    <string>DCA Enc</string>
                    </property>
                   </widget>
                  </item>
@@ -1099,8 +1106,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
-               <height>1515</height>
+               <width>604</width>
+               <height>1524</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">

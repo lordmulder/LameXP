@@ -88,10 +88,6 @@
         <translation>打開和專利自由無損音頻壓縮技術.</translation>
     </message>
     <message>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>By Mark James,在知識共享的許可證發布.</translation>
-    </message>
-    <message>
         <source>About Third-party Software</source>
         <translation>關于第三方軟件</translation>
     </message>
@@ -164,10 +160,6 @@
         <translation>GnuPG - GNU 隱私</translation>
     </message>
     <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation>Silk Icons - 超過 700 圖標 PNG 格式</translation>
-    </message>
-    <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation>Nero AAC 參考 MPEG-4 編碼器</translation>
     </message>
@@ -226,6 +218,14 @@
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP是作為一個整體版權由 LoRd_MuldeR 保護.在 LameXP 中使用的第三方軟件作著權屬于第三方.</translation>
+    </message>
+    <message>
+        <source>dcaenc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1728,6 +1728,10 @@
     <message>
         <source>Skipping update check this time, please be patient...</source>
         <translation>跳過檢查更新的時間,請耐心等待...</translation>
+    </message>
+    <message>
+        <source>DCA Enc</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

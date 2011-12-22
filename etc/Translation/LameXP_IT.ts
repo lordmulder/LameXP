@@ -88,10 +88,6 @@
         <translation>Tecnologia di compressione audio libera e non vincolata da brevetti.</translation>
     </message>
     <message>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>Di Mark James, rilasciato sotto Licenza &apos;by&apos; Creative Commons.</translation>
-    </message>
-    <message>
         <source>About Third-party Software</source>
         <translation>Riguardo Software Terze Parti</translation>
     </message>
@@ -168,10 +164,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -225,6 +217,14 @@
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dcaenc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1728,6 +1728,10 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCA Enc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

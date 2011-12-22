@@ -203,6 +203,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_encoderButtonGroup->addButton(radioButtonEncoderAAC, SettingsModel::AACEncoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderAC3, SettingsModel::AC3Encoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderFLAC, SettingsModel::FLACEncoder);
+	m_encoderButtonGroup->addButton(radioButtonEncoderDCA, SettingsModel::DCAEncoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderPCM, SettingsModel::PCMEncoder);
 	m_modeButtonGroup = new QButtonGroup(this);
 	m_modeButtonGroup->addButton(radioButtonModeQuality, SettingsModel::VBRMode);
@@ -214,6 +215,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable));
 	radioButtonEncoderAC3->setChecked(m_settings->compressionEncoder() == SettingsModel::AC3Encoder);
 	radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
+	radioButtonEncoderDCA->setChecked(m_settings->compressionEncoder() == SettingsModel::DCAEncoder);
 	radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
 	radioButtonModeQuality->setChecked(m_settings->compressionRCMode() == SettingsModel::VBRMode);
 	radioButtonModeAverageBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::ABRMode);
@@ -1217,6 +1219,7 @@ void MainWindow::encodeButtonClicked(void)
 	case SettingsModel::AACEncoder:
 	case SettingsModel::AC3Encoder:
 	case SettingsModel::FLACEncoder:
+	case SettingsModel::DCAEncoder:
 	case SettingsModel::PCMEncoder:
 		break;
 	default:
@@ -2481,6 +2484,13 @@ void MainWindow::updateEncoder(int id)
 		radioButtonConstBitrate->setEnabled(true);
 		sliderBitrate->setEnabled(true);
 		break;
+	case SettingsModel::DCAEncoder:
+		radioButtonModeQuality->setEnabled(false);
+		radioButtonModeAverageBitrate->setEnabled(false);
+		radioButtonConstBitrate->setEnabled(true);
+		radioButtonConstBitrate->setChecked(true);
+		sliderBitrate->setEnabled(true);
+		break;
 	default:
 		radioButtonModeQuality->setEnabled(true);
 		radioButtonModeAverageBitrate->setEnabled(true);
@@ -2556,6 +2566,10 @@ void MainWindow::updateRCMode(int id)
 	case SettingsModel::FLACEncoder:
 		sliderBitrate->setMinimum(0);
 		sliderBitrate->setMaximum(8);
+		break;
+	case SettingsModel::DCAEncoder:
+		sliderBitrate->setMinimum(1);
+		sliderBitrate->setMaximum(192);
 		break;
 	case SettingsModel::PCMEncoder:
 		sliderBitrate->setMinimum(0);
@@ -2637,6 +2651,9 @@ void MainWindow::updateBitrate(int value)
 			break;
 		case SettingsModel::AC3Encoder:
 			labelBitrate->setText(QString("%1 kbps").arg(SettingsModel::ac3Bitrates[value]));
+			break;
+		case SettingsModel::DCAEncoder:
+			labelBitrate->setText(QString("%1 kbps").arg(value * 32));
 			break;
 		case SettingsModel::PCMEncoder:
 			labelBitrate->setText(tr("Uncompressed"));

@@ -88,10 +88,6 @@
         <translation>Offene und patentfreie Technlogie zur verlustfreien Audiokompression.</translation>
     </message>
     <message>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation>Von Mark James, veröffentlicht unter der Creative Commons &apos;by&apos; Lizenz.</translation>
-    </message>
-    <message>
         <source>About Third-party Software</source>
         <translation>Über Drittsoftware</translation>
     </message>
@@ -192,10 +188,6 @@
         <translation>GNU Wget - Software für den Datei-Download über HTTP</translation>
     </message>
     <message>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation>Silk Icons - Über 700 Symbole im PNG Format</translation>
-    </message>
-    <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
         <translation>Hinweise: Diese Demo (Test) Version von LameXP läuft am %1 ab. Noch %2 Tage übrig.</translation>
     </message>
@@ -226,6 +218,14 @@
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation>avs2wav - Avisynth zu Wave Audio Konverter</translation>
+    </message>
+    <message>
+        <source>dcaenc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1729,6 +1729,10 @@
     <message>
         <source>Skipping update check this time, please be patient...</source>
         <translation>Update-Überprüfung wird übersprungen, bitte warten...</translation>
+    </message>
+    <message>
+        <source>DCA Enc</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

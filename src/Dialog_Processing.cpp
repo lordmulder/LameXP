@@ -31,13 +31,14 @@
 #include "Thread_RAMObserver.h"
 #include "Thread_DiskObserver.h"
 #include "Dialog_LogView.h"
-#include "Encoder_MP3.h"
-#include "Encoder_Vorbis.h"
 #include "Encoder_AAC.h"
 #include "Encoder_AAC_FHG.h"
 #include "Encoder_AAC_QAAC.h"
 #include "Encoder_AC3.h"
+#include "Encoder_DCA.h"
 #include "Encoder_FLAC.h"
+#include "Encoder_MP3.h"
+#include "Encoder_Vorbis.h"
 #include "Encoder_Wave.h"
 #include "Filter_Downmix.h"
 #include "Filter_Normalize.h"
@@ -638,10 +639,66 @@ void ProcessingDialog::startNextJob(void)
 	
 	m_currentFile++;
 	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
-	AbstractEncoder *encoder = NULL;
 	bool nativeResampling = false;
 
 	//Create encoder instance
+	AbstractEncoder *encoder = makeEncoder(&nativeResampling);
+
+	//Create processing thread
+	ProcessThread *thread = new ProcessThread
+	(
+		currentFile,
+		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
+		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2()),
+		encoder,
+		m_settings->prependRelativeSourcePath() && (!m_settings->outputToSourceDir())
+	);
+
+	//Add audio filters
+	if(m_settings->forceStereoDownmix())
+	{
+		thread->addFilter(new DownmixFilter());
+	}
+	if((m_settings->samplingRate() > 0) && !nativeResampling)
+	{
+		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.formatAudioSamplerate() || currentFile.formatAudioSamplerate() == 0)
+		{
+			thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
+		}
+	}
+	if((m_settings->toneAdjustBass() != 0) || (m_settings->toneAdjustTreble() != 0))
+	{
+		thread->addFilter(new ToneAdjustFilter(m_settings->toneAdjustBass(), m_settings->toneAdjustTreble()));
+	}
+	if(m_settings->normalizationFilterEnabled())
+	{
+		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume(), m_settings->normalizationFilterEqualizationMode()));
+	}
+	if(m_settings->renameOutputFilesEnabled() && (!m_settings->renameOutputFilesPattern().simplified().isEmpty()))
+	{
+		thread->setRenamePattern(m_settings->renameOutputFilesPattern());
+	}
+
+	m_threadList.append(thread);
+	m_allJobs.append(thread->getId());
+	
+	//Connect thread signals
+	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateFinished(QUuid,QString,bool)), this, SLOT(processFinished(QUuid,QString,bool)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
+	
+	//Give it a go!
+	m_runningThreads++;
+	thread->start();
+}
+
+AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
+{
+	AbstractEncoder *encoder =  NULL;
+	*nativeResampling = false;
+	
 	switch(m_settings->compressionEncoder())
 	{
 	case SettingsModel::MP3Encoder:
@@ -657,7 +714,7 @@ void ProcessingDialog::startNextJob(void)
 			if(m_settings->samplingRate() > 0)
 			{
 				mp3Encoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
-				nativeResampling = true;
+				*nativeResampling = true;
 			}
 			mp3Encoder->setChannelMode(m_settings->lameChannelMode());
 			mp3Encoder->setCustomParams(m_settings->customParametersLAME());
@@ -676,7 +733,7 @@ void ProcessingDialog::startNextJob(void)
 			if(m_settings->samplingRate() > 0)
 			{
 				vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
-				nativeResampling = true;
+				*nativeResampling = true;
 			}
 			vorbisEncoder->setCustomParams(m_settings->customParametersOggEnc());
 			encoder = vorbisEncoder;
@@ -736,6 +793,14 @@ void ProcessingDialog::startNextJob(void)
 			encoder = flacEncoder;
 		}
 		break;
+	case SettingsModel::DCAEncoder:
+		{
+			DCAEncoder *dcaEncoder = new DCAEncoder();
+			dcaEncoder->setBitrate(m_settings->compressionBitrate());
+			dcaEncoder->setRCMode(m_settings->compressionRCMode());
+			encoder = dcaEncoder;
+		}
+		break;
 	case SettingsModel::PCMEncoder:
 		{
 			WaveEncoder *waveEncoder = new WaveEncoder();
@@ -748,54 +813,7 @@ void ProcessingDialog::startNextJob(void)
 		throw "Unsupported encoder!";
 	}
 
-	//Create processing thread
-	ProcessThread *thread = new ProcessThread
-	(
-		currentFile,
-		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
-		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2()),
-		encoder,
-		m_settings->prependRelativeSourcePath() && (!m_settings->outputToSourceDir())
-	);
-
-	//Add audio filters
-	if(m_settings->forceStereoDownmix())
-	{
-		thread->addFilter(new DownmixFilter());
-	}
-	if((m_settings->samplingRate() > 0) && !nativeResampling)
-	{
-		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.formatAudioSamplerate() || currentFile.formatAudioSamplerate() == 0)
-		{
-			thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
-		}
-	}
-	if((m_settings->toneAdjustBass() != 0) || (m_settings->toneAdjustTreble() != 0))
-	{
-		thread->addFilter(new ToneAdjustFilter(m_settings->toneAdjustBass(), m_settings->toneAdjustTreble()));
-	}
-	if(m_settings->normalizationFilterEnabled())
-	{
-		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume(), m_settings->normalizationFilterEqualizationMode()));
-	}
-	if(m_settings->renameOutputFilesEnabled() && (!m_settings->renameOutputFilesPattern().simplified().isEmpty()))
-	{
-		thread->setRenamePattern(m_settings->renameOutputFilesPattern());
-	}
-
-	m_threadList.append(thread);
-	m_allJobs.append(thread->getId());
-	
-	//Connect thread signals
-	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateFinished(QUuid,QString,bool)), this, SLOT(processFinished(QUuid,QString,bool)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
-	
-	//Give it a go!
-	m_runningThreads++;
-	thread->start();
+	return encoder;
 }
 
 void ProcessingDialog::writePlayList(void)

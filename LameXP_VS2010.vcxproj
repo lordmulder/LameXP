@@ -275,6 +275,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Encoder_AAC_QAAC.cpp" />
     <ClCompile Include="src\Encoder_Abstract.cpp" />
     <ClCompile Include="src\Encoder_AC3.cpp" />
+    <ClCompile Include="src\Encoder_DCA.cpp" />
     <ClCompile Include="src\Encoder_FLAC.cpp" />
     <ClCompile Include="src\Encoder_MP3.cpp" />
     <ClCompile Include="src\Encoder_Vorbis.cpp" />
@@ -327,6 +328,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="tmp\MOC_Encoder_AAC_QAAC.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_Abstract.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_AC3.cpp" />
+    <ClCompile Include="tmp\MOC_Encoder_DCA.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_FLAC.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_MP3.cpp" />
     <ClCompile Include="tmp\MOC_Encoder_Vorbis.cpp" />
@@ -450,6 +452,17 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_DCA.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="src\Tools.h" />
     <CustomBuild Include="src\Tool_WaveProperties.h">
