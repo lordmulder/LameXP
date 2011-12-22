@@ -177,7 +177,7 @@ void ProcessThread::processFile()
 	//------------------------------------
 	if(bSuccess && IS_WAVE(m_audioFile))
 	{
-		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->requiresDownmix())
+		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount())
 		{
 			m_currentStep = AnalyzeStep;
 			bSuccess = m_propDetect->detect(sourceFile, &m_audioFile, &m_aborted);
@@ -187,7 +187,7 @@ void ProcessThread::processFile()
 				handleMessage("\n-------------------------------\n");
 
 				//Do we need to take care if Stereo downmix?
-				if(m_encoder->requiresDownmix())
+				if(m_encoder->supportedChannelCount())
 				{
 					insertDownmixFilter();
 				}
@@ -477,6 +477,7 @@ void ProcessThread::insertDownmixFilter(void)
 		if(dynamic_cast<DownmixFilter*>(m_filters.at(i)))
 		{
 			qWarning("Encoder requires Stereo downmix, but user has already forced downmix!");
+			handleMessage("WARNING: Encoder may need downmixning, but already using downmixning filter. Encoding *may* fail!\n");
 			applyDownmixing = false;
 		}
 	}
@@ -484,8 +485,20 @@ void ProcessThread::insertDownmixFilter(void)
 	//Now add the downmixing filter, if needed
 	if(applyDownmixing)
 	{
+		bool requiresDownmix = true;
+		const unsigned int *supportedChannels = m_encoder->supportedChannelCount();
 		unsigned int channels = m_audioFile.formatAudioChannels();
-		if((channels == 0) || (channels > 2))
+
+		for(int i = 0; supportedChannels[i]; i++)
+		{
+			if(supportedChannels[i] == channels)
+			{
+				requiresDownmix = false;
+				break;
+			}
+		}
+
+		if(requiresDownmix)
 		{
 			m_filters.append(new DownmixFilter());
 		}

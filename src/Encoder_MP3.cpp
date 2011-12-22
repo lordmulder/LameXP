@@ -231,9 +231,10 @@ bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
-bool MP3Encoder::requiresDownmix(void)
+const unsigned int *MP3Encoder::supportedChannelCount(void)
 {
-	return true;
+	static const unsigned int supportedChannels[] = {1, 2, NULL};
+	return supportedChannels;
 }
 
 void MP3Encoder::setAlgoQuality(int value)

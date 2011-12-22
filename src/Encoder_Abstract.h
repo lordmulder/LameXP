@@ -40,8 +40,8 @@ public:
 	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag) = 0;
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion) = 0;
 	virtual QString extension(void) = 0;
-	virtual bool requiresDownmix(void);
 	virtual const unsigned int *supportedSamplerates(void);
+	virtual const unsigned int *supportedChannelCount(void);
 	virtual const unsigned int *supportedBitdepths(void);
 
 	//Common setter methods

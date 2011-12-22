@@ -139,6 +139,12 @@ bool DCAEncoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
+const unsigned int *DCAEncoder::supportedChannelCount(void)
+{
+	static const unsigned int supportedChannels[] = {1, 2, 4, 5, 6, NULL};
+	return supportedChannels;
+}
+
 const unsigned int *DCAEncoder::supportedSamplerates(void)
 {
 	static const unsigned int supportedRates[] = {48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, NULL};

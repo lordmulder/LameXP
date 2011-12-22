@@ -47,9 +47,9 @@ void AbstractEncoder::setCustomParams(const QString &customParams) { m_configCus
  */
 
 // Does encoder require the input to be downmixed to stereo?
-bool AbstractEncoder::requiresDownmix(void)
+const unsigned int *AbstractEncoder::supportedChannelCount(void)
 {
-	return false;
+	return NULL;
 }
 
 // Does encoder require the input to be downsampled? (NULL-terminated array of supported sampling rates)
