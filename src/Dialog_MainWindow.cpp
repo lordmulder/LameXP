@@ -2569,7 +2569,7 @@ void MainWindow::updateRCMode(int id)
 		break;
 	case SettingsModel::DCAEncoder:
 		sliderBitrate->setMinimum(1);
-		sliderBitrate->setMaximum(192);
+		sliderBitrate->setMaximum(128);
 		break;
 	case SettingsModel::PCMEncoder:
 		sliderBitrate->setMinimum(0);
