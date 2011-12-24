@@ -113,6 +113,9 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
 	
+	//Update header icon
+	label_headerIcon->setPixmap(QApplication::windowIcon().pixmap(label_headerIcon->pixmap()->size()));
+	
 	//Setup version info
 	label_versionInfo->setText(QString().sprintf("v%d.%02d %s (Build %d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build()));
 	label_versionInfo->installEventFilter(this);

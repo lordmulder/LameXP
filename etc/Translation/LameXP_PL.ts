@@ -2854,17 +2854,17 @@
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="789"/>
+        <location filename="../../src/Global.cpp" line="843"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="794"/>
+        <location filename="../../src/Global.cpp" line="848"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="803"/>
+        <location filename="../../src/Global.cpp" line="857"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>
