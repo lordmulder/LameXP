@@ -25,7 +25,24 @@
 #include <QDir>
 #include <QLibrary>
 
+////////////////////////////////////////////////////////////
+
+typedef enum { SystemProcInfo = 8 } SYSTEM_INFO_CLASS;
+
+typedef struct
+{
+	LARGE_INTEGER IdleTime;
+	LARGE_INTEGER KrnlTime;
+	LARGE_INTEGER UserTime;
+	LARGE_INTEGER Reserved[2];
+	ULONG Reserved2;
+}
+SYSTEM_PROC_INFO;
+
 typedef BOOL (WINAPI *GetSystemTimesPtr)(LPFILETIME lpIdleTime, LPFILETIME lpKernelTime, LPFILETIME lpUserTime);
+typedef LONG (WINAPI *NtQuerySystemInformationPtr)(SYSTEM_INFO_CLASS SystemInformationClass, PVOID SystemInformation, ULONG SystemInformationLength, PULONG ReturnLength);
+
+#define IS_OK(X) (((LONG)(X)) == ((LONG)0x00000000L))
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
@@ -74,7 +91,11 @@ ULONGLONG CPUObserverThread::filetime2ulonglong(const void *ftime)
 
 void CPUObserverThread::observe(void)
 {
-	QLibrary kernel32("kernel32.dll");
+	QLibrary kernel32("kernel32.dll"), ntdll("ntdll.dll");
+
+	ULONG performanceInfoSize = 0;
+	BYTE *performanceInfoBuffer = NULL;
+	NtQuerySystemInformationPtr querySysInfo = NULL;
 	GetSystemTimesPtr getSystemTimes = NULL;
 
 	if(kernel32.load())
@@ -82,7 +103,22 @@ void CPUObserverThread::observe(void)
 		getSystemTimes = reinterpret_cast<GetSystemTimesPtr>(kernel32.resolve("GetSystemTimes"));
 	}
 
-	if(getSystemTimes != NULL)
+	if(!getSystemTimes)
+	{
+		qWarning("GetSystemTimes() not found, falling back to NtQueryInformationProcess().");
+		if(ntdll.load())
+		{
+			querySysInfo = reinterpret_cast<NtQuerySystemInformationPtr>(ntdll.resolve("NtQuerySystemInformation"));
+			if(querySysInfo)
+			{
+				querySysInfo(SystemProcInfo, &performanceInfoBuffer, 0, &performanceInfoSize);
+				if(performanceInfoSize < sizeof(SYSTEM_PROC_INFO)) performanceInfoSize = sizeof(SYSTEM_PROC_INFO);
+				performanceInfoBuffer = new BYTE[performanceInfoSize];
+			}
+		}
+	}
+
+	if(getSystemTimes || (querySysInfo && performanceInfoBuffer))
 	{
 		bool first = true;
 		double previous = -1.0;
@@ -96,12 +132,29 @@ void CPUObserverThread::observe(void)
 
 		forever
 		{
-			if(getSystemTimes(&idlTime, &sysTime, &usrTime))
+			bool ok = false;
+			
+			if(getSystemTimes)
 			{
-				sys[1] = sys[0]; sys[0] = filetime2ulonglong(&sysTime);
-				usr[1] = usr[0]; usr[0] = filetime2ulonglong(&usrTime);
-				idl[1] = idl[0]; idl[0] = filetime2ulonglong(&idlTime);
+				if(ok = getSystemTimes(&idlTime, &sysTime, &usrTime))
+				{
+					sys[1] = sys[0]; sys[0] = filetime2ulonglong(&sysTime);
+					usr[1] = usr[0]; usr[0] = filetime2ulonglong(&usrTime);
+					idl[1] = idl[0]; idl[0] = filetime2ulonglong(&idlTime);
+				}
+			}
+			else
+			{
+				if(ok = IS_OK(querySysInfo(SystemProcInfo, performanceInfoBuffer, performanceInfoSize, NULL)))
+				{
+					sys[1] = sys[0]; sys[0] = reinterpret_cast<SYSTEM_PROC_INFO*>(performanceInfoBuffer)[0].KrnlTime.QuadPart;
+					usr[1] = usr[0]; usr[0] = reinterpret_cast<SYSTEM_PROC_INFO*>(performanceInfoBuffer)[0].UserTime.QuadPart;
+					idl[1] = idl[0]; idl[0] = reinterpret_cast<SYSTEM_PROC_INFO*>(performanceInfoBuffer)[0].IdleTime.QuadPart;
+				}
+			}
 
+			if(ok)
+			{
 				if(first)
 				{
 					first = false;
@@ -132,8 +185,10 @@ void CPUObserverThread::observe(void)
 	}
 	else
 	{
-		qWarning("GetSystemTimes() ist not available on this system!");
+		qWarning("NtQueryInformationProcess() not available, giving up!");
 	}
+
+	LAMEXP_DELETE_ARRAY(performanceInfoBuffer);
 }
 
 ////////////////////////////////////////////////////////////
