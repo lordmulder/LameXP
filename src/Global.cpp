@@ -734,23 +734,48 @@ static bool lamexp_computus(const QDate &date)
 }
 
 /*
+ * Check for Thanksgiving
+ */
+static bool lamexp_thanksgiving(const QDate &date)
+{
+	int day = 0;
+
+	switch(QDate(date.year(), 11, 1).dayOfWeek())
+	{
+		case 1: day = 25; break; 
+		case 2: day = 24; break; 
+		case 3: day = 23; break; 
+		case 4: day = 22; break; 
+		case 5: day = 28; break; 
+		case 6: day = 27; break; 
+		case 7: day = 26; break;
+	}
+
+	return (date.month() == 11) && (date.day() == day);
+}
+
+/*
  * Initialize app icon
  */
 static QIcon lamexp_init_icon(const QDate &date, const QTime &time)
 {
-	if(((date.month() == 1) && (date.day() == 1)) || ((date.month() == 12) && (date.day() == 31) && (time.hour() > 20)))
+	if(lamexp_thanksgiving(date))
+	{
+		return QIcon(":/MainIcon6.png");
+	}
+	else if(((date.month() == 12) && (date.day() == 31) && (time.hour() >= 20)) || ((date.month() == 1) && (date.day() == 1)  && (time.hour() <= 19)))
 	{
 		return QIcon(":/MainIcon5.png");
 	}
-	else if(((date.month() == 10) && (date.day() == 31)) || ((date.month() == 11) && (date.day() == 1) && (time.hour() < 7)))
+	else if(((date.month() == 10) && (date.day() == 31) && (time.hour() >= 12)) || ((date.month() == 11) && (date.day() == 1)  && (time.hour() <= 11)))
 	{
 		return QIcon(":/MainIcon4.png");
 	}
-	else if(lamexp_computus(date))
+	else if((date.month() == 12) && (date.day() >= 24) && (date.day() <= 26))
 	{
 		return QIcon(":/MainIcon3.png");
 	}
-	else if((date.month() == 12) && (date.day() >= 24) && (date.day() <= 26))
+	else if(lamexp_computus(date))
 	{
 		return QIcon(":/MainIcon2.png");
 	}

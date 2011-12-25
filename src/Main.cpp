@@ -88,6 +88,10 @@ static int lamexp_main(int argc, char* argv[])
 	//Check for expiration
 	if(lamexp_version_demo())
 	{
+		if(QDate::currentDate().addDays(1) < lamexp_version_date())
+		{
+			qFatal("System's date (%s) is before LameXP build date (%s). Huh?", QDate::currentDate().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
+		}
 		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(lamexp_version_expires().toString(Qt::ISODate)).toLatin1().constData());
 	}
 
