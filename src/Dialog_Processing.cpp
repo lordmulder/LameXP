@@ -114,7 +114,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
 	
 	//Update header icon
-	label_headerIcon->setPixmap(QApplication::windowIcon().pixmap(label_headerIcon->pixmap()->size()));
+	label_headerIcon->setPixmap(lamexp_app_icon().pixmap(label_headerIcon->size()));
 	
 	//Setup version info
 	label_versionInfo->setText(QString().sprintf("v%d.%02d %s (Build %d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build()));
@@ -549,7 +549,7 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 		}
 		else
 		{
-			MessageBeep(MB_ICONWARNING);
+			QMessageBox::information(this, windowTitle(), m_progressModel->data(m_progressModel->index(index.row(), 0)).toString());
 		}
 	}
 	else

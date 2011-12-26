@@ -222,11 +222,11 @@
     </message>
     <message>
         <source>dcaenc</source>
-        <translation>dcaenc</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation>Всі права належать 2008-2011 Alexander E. Patrakov. Розповсюджується під ліцензією LGPL.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1728,11 +1728,11 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation>Наразі йде переривання перевірки оновлень, будь ласка, зачекайте...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>DCA Enc</source>
-        <translation>DCA Enc</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2048,7 +2048,7 @@
     </message>
     <message>
         <source>Analyzing</source>
-        <translation>Аналізування</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2221,7 +2221,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation>Додаток &apos;%1&apos; був створений для Qt &apos;%2&apos;, але знайдено Qt &apos;%3&apos;.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -757,25 +757,28 @@ static bool lamexp_thanksgiving(const QDate &date)
 /*
  * Initialize app icon
  */
-static QIcon lamexp_init_icon(const QDate &date, const QTime &time)
+QIcon lamexp_app_icon(const QDate *date, const QTime *time)
 {
-	if(lamexp_thanksgiving(date))
+	QDate currentDate = (date) ? QDate(*date) : QDate::currentDate();
+	QTime currentTime = (time) ? QTime(*time) : QTime::currentTime();
+	
+	if(lamexp_thanksgiving(currentDate))
 	{
 		return QIcon(":/MainIcon6.png");
 	}
-	else if(((date.month() == 12) && (date.day() == 31) && (time.hour() >= 20)) || ((date.month() == 1) && (date.day() == 1)  && (time.hour() <= 19)))
+	else if(((currentDate.month() == 12) && (currentDate.day() == 31) && (currentTime.hour() >= 20)) || ((currentDate.month() == 1) && (currentDate.day() == 1)  && (currentTime.hour() <= 19)))
 	{
 		return QIcon(":/MainIcon5.png");
 	}
-	else if(((date.month() == 10) && (date.day() == 31) && (time.hour() >= 12)) || ((date.month() == 11) && (date.day() == 1)  && (time.hour() <= 11)))
+	else if(((currentDate.month() == 10) && (currentDate.day() == 31) && (currentTime.hour() >= 12)) || ((currentDate.month() == 11) && (currentDate.day() == 1)  && (currentTime.hour() <= 11)))
 	{
 		return QIcon(":/MainIcon4.png");
 	}
-	else if((date.month() == 12) && (date.day() >= 24) && (date.day() <= 26))
+	else if((currentDate.month() == 12) && (currentDate.day() >= 24) && (currentDate.day() <= 26))
 	{
 		return QIcon(":/MainIcon3.png");
 	}
-	else if(lamexp_computus(date))
+	else if(lamexp_computus(currentDate))
 	{
 		return QIcon(":/MainIcon2.png");
 	}
@@ -919,20 +922,13 @@ bool lamexp_init_qt(int argc, char* argv[])
 		ntdll.unload();
 	}
 
-	for(int test = 2000; test < 2031; test++)
-	{
-		lamexp_computus(QDate(test, 1, 1));
-	}
-
 	//Create Qt application instance and setup version info
-	QDate date = QDate::currentDate();
-	QTime time = QTime::currentTime();
 	QApplication *application = new QApplication(argc, argv);
 	application->setApplicationName("LameXP - Audio Encoder Front-End");
 	application->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
 	application->setOrganizationName("LoRd_MuldeR");
 	application->setOrganizationDomain("mulder.at.gg");
-	application->setWindowIcon(lamexp_init_icon(date, time));
+	application->setWindowIcon(lamexp_app_icon());
 	
 	//Set text Codec for locale
 	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));

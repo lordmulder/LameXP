@@ -146,7 +146,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	aboutText += QString("%1<br>").arg(NOBR(tr("Special thanks go out to \"John33\" from %1 for his continuous support.")).arg(LINK("http://www.rarewares.org/")));
 
 	setText(aboutText);
-	setIconPixmap(dynamic_cast<QApplication*>(QApplication::instance())->windowIcon().pixmap(QSize(64,64)));
+	setIconPixmap(lamexp_app_icon().pixmap(QSize(72,72)));
 	setWindowTitle(tr("About LameXP"));
 
 	if(firstStart)
