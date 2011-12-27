@@ -39,6 +39,7 @@
 ..\..\src\Encoder_AAC_QAAC.cpp 
 ..\..\src\Encoder_Abstract.cpp 
 ..\..\src\Encoder_AC3.cpp 
+..\..\src\Encoder_DCA.cpp 
 ..\..\src\Encoder_FLAC.cpp 
 ..\..\src\Encoder_MP3.cpp 
 ..\..\src\Encoder_Vorbis.cpp 
@@ -73,6 +74,7 @@
 ..\..\src\Thread_Process.cpp 
 ..\..\src\Thread_RAMObserver.cpp 
 ..\..\src\Tool_Abstract.cpp 
+..\..\src\Tool_WaveProperties.cpp 
 ..\..\src\WinSevenTaskbar.cpp 
 ..\..\src\Config.h 
 ..\..\src\Decoder_AAC.h 
@@ -107,6 +109,7 @@
 ..\..\src\Encoder_AAC_QAAC.h 
 ..\..\src\Encoder_Abstract.h 
 ..\..\src\Encoder_AC3.h 
+..\..\src\Encoder_DCA.h 
 ..\..\src\Encoder_FLAC.h 
 ..\..\src\Encoder_MP3.h 
 ..\..\src\Encoder_Vorbis.h 
@@ -143,4 +146,5 @@
 ..\..\src\Thread_RAMObserver.h 
 ..\..\src\Tools.h 
 ..\..\src\Tool_Abstract.h 
+..\..\src\Tool_WaveProperties.h 
 ..\..\src\WinSevenTaskbar.h 

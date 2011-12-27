@@ -2714,121 +2714,121 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="338"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="344"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="381"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="387"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="401"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="407"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="416"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="422"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="444"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="450"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="454"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="460"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="454"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="460"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="461"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="461"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="468"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="477"/>
         <source>Process finished after %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="477"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="478"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="487"/>
         <source>LameXP - Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="478"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="487"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="488"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="489"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="497"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="498"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="489"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="498"/>
         <source>LameXP - Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="903"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="916"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="903"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="916"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="973"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="986"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="977"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="978"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="990"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="991"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1033"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1046"/>
         <source>hour(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1034"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1038"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1047"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1051"/>
         <source>minute(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1039"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1052"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1056"/>
         <source>second(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1057"/>
         <source>millisecond(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2849,22 +2849,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="701"/>
+        <location filename="../../src/Global.cpp" line="703"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="871"/>
+        <location filename="../../src/Global.cpp" line="914"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="876"/>
+        <location filename="../../src/Global.cpp" line="919"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="885"/>
+        <location filename="../../src/Global.cpp" line="928"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished"></translation>
     </message>

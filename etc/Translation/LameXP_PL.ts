@@ -253,12 +253,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="479"/>
         <source>dcaenc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">dcaenc</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="481"/>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prawa autorskie: 2008-2011 Alexander E. Patrakov. Rozpowszechniane na licencji LGPL.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="486"/>
@@ -386,12 +386,12 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="139"/>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Domyślne systemowe)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="146"/>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wybierz kodowanie ANSI dla piku Cue:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="147"/>
@@ -542,12 +542,12 @@
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="189"/>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Artysta:</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="241"/>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Album:</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="415"/>
@@ -656,12 +656,12 @@
     <message>
         <location filename="../../gui/DropBox.ui" line="14"/>
         <source>LameXP - DropBox</source>
-        <translation>LameXP - DropBox</translation>
+        <translation type="unfinished">LameXP - DropBox</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="102"/>
         <source>LameXP DropBox</source>
-        <translation>LameXP DropBox</translation>
+        <translation type="unfinished">LameXP DropBox</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="102"/>
@@ -788,7 +788,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="530"/>
         <source>Prepend relative source file path to output file</source>
-        <translation type="unfinished">Dodaj ścieżkę pliku źródłowego do nazwy nowego pliku</translation>
+        <translation type="unfinished">Odtwórz źródłową strukturę folderów w folderze docelowym</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="546"/>
@@ -875,7 +875,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="813"/>
         <source>DCA Enc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enkoder DCA</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="837"/>
@@ -1107,7 +1107,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1980"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Żaden</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2001"/>
@@ -1538,7 +1538,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3809"/>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hibernuj zamiast zamykać</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="498"/>
@@ -1680,7 +1680,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="988"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Najwyraźniej twoje oprogramowanie antywirusowe spowalnia uruchamianie się LameXP.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="989"/>
@@ -1835,12 +1835,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="696"/>
         <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WERSJA DEMO</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1049"/>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Podpowiedź: Zignoruj nazwę pobranego pliku ZIP, w zamian sprawdż załączony w archiwum plik &quot;changelog.txt&quot;!)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1198"/>
@@ -1871,7 +1871,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1017"/>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pomijanie sprawdzania aktualizacji, prosze czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1210"/>
@@ -2059,22 +2059,22 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1678"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1688"/>
         <source>Hibernate Computer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hibernuj komputer</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1676"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Czy na pewno chcesz aby komputer był hibernowany zamiast zamykany?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1678"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Od teraz LameXP będzie hibernował komputer zamiast zamykać.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1688"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP od teraz &lt;i&gt;nie&lt;/i&gt; będzie hibernował komputera tylko zamykał.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1702"/>
@@ -2312,7 +2312,7 @@
     <message>
         <location filename="../../src/Dialog_MetaInfo.cpp" line="106"/>
         <source>Meta Information: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Metadane: %1</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MetaInfo.cpp" line="160"/>
@@ -2590,7 +2590,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="267"/>
         <source>Analyzing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Analizowanie</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="270"/>
@@ -2669,19 +2669,19 @@
         <location filename="../../gui/ProcessingDialog.ui" line="344"/>
         <location filename="../../gui/ProcessingDialog.ui" line="400"/>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wykorzystanie procesora (Całościowo)</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="429"/>
         <location filename="../../gui/ProcessingDialog.ui" line="479"/>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wykorzystanie pamięci RAM</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="508"/>
         <location filename="../../gui/ProcessingDialog.ui" line="558"/>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wolna przestrzeń na dysku (Folder TEMP)</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="663"/>
@@ -2714,123 +2714,123 @@
         <translation type="unfinished">Twoje pliki są właśnie kompresowane, prosze być cierpliwy...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="338"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="344"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished">Kompresowanie plików, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="381"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="387"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished">Wielowątkowosć włączona: Równolegle wykonywanych jest %1 kodowań!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="401"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="407"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">Przerwano! Czekanie na wyłączenie procesu...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="416"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="422"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
         <translation type="unfinished">Kompresja: Prosze czekać, jak dotąd wykonano %1 z %2 plików...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="444"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="450"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">Tworzenie pliku playlisty, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="454"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="460"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika po wykonaniu %1 plików!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="454"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="460"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">Proces został przedwcześnie zakończony przez użytkownika!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="461"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished">LameXP - Przerwano</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="455"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="461"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="468"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="477"/>
         <source>Process finished after %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proces został zakończony po %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="477"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">Błąd: %1 z %2 plików nie zostało skompresowanych. Kliknij dwukrotnie na plik aby zobaczyć szczegóły!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="478"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="487"/>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - Błąd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="478"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="487"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished">Przynajmniej jeden plik nie został skompresowany!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="488"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="489"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="497"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="498"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished">Kompresja wszystkich plików zakończona powodzeniem.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="489"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="498"/>
         <source>LameXP - Done</source>
         <translation type="unfinished">LameXP - Zrobione</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="903"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="916"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished">Tworzenie playlisty zakończone niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="903"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="916"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished">Playlista nie mogła zostać utworzona:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="973"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="986"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished">Ostrzeżenie: Komputer zostanie zamknięty za %1 sekund/y...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="977"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="978"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="990"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="991"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished">Anuluj wyłączenie komputera</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1033"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1046"/>
         <source>hour(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">godzin/y</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1034"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1038"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1047"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1051"/>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">minut/a</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1039"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1043"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1052"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1056"/>
         <source>second(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sekund/a</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1057"/>
         <source>millisecond(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">milisekund/y</translation>
     </message>
 </context>
 <context>
@@ -2849,22 +2849,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="701"/>
+        <location filename="../../src/Global.cpp" line="703"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="871"/>
+        <location filename="../../src/Global.cpp" line="914"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="876"/>
+        <location filename="../../src/Global.cpp" line="919"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="885"/>
+        <location filename="../../src/Global.cpp" line="928"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>
@@ -2941,7 +2941,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="248"/>
         <source>Unknown</source>
-        <translation type="unfinished">Nieznany</translation>
+        <translation type="unfinished">Nieznana</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="343"/>
