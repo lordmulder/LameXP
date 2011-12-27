@@ -794,7 +794,7 @@ void MainWindow::dropEvent(QDropEvent *event)
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	if(m_banner->isVisible() || m_delayedFileTimer->isActive())
+	if((m_banner->isVisible() || m_delayedFileTimer->isActive()) && !lamexp_session_ending())
 	{
 		MessageBeep(MB_ICONEXCLAMATION);
 		event->ignore();

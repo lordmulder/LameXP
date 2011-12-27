@@ -175,7 +175,7 @@ void ProcessThread::processFile()
 	//------------------------------------
 	//Update audio properties after decode
 	//------------------------------------
-	if(bSuccess && IS_WAVE(m_audioFile))
+	if(bSuccess && !m_aborted && IS_WAVE(m_audioFile))
 	{
 		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount())
 		{
@@ -206,7 +206,7 @@ void ProcessThread::processFile()
 	//-----------------------
 	if(bSuccess)
 	{
-		while(!m_filters.isEmpty())
+		while(!m_filters.isEmpty() && !m_aborted)
 		{
 			QString tempFile = generateTempFileName();
 			AbstractFilter *poFilter = m_filters.takeFirst();
@@ -228,14 +228,14 @@ void ProcessThread::processFile()
 	//-----------------
 	//Encode audio file
 	//-----------------
-	if(bSuccess)
+	if(bSuccess && !m_aborted)
 	{
 		m_currentStep = EncodingStep;
 		bSuccess = m_encoder->encode(sourceFile, m_audioFile, outFileName, &m_aborted);
 	}
 
 	//Make sure output file exists
-	if(bSuccess)
+	if(bSuccess && !m_aborted)
 	{
 		QFileInfo fileInfo(outFileName);
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
@@ -244,7 +244,7 @@ void ProcessThread::processFile()
 	QThread::msleep(500);
 
 	//Report result
-	emit processStateChanged(m_jobId, (bSuccess ? tr("Done.") : (m_aborted ? tr("Aborted!") : tr("Failed!"))), (bSuccess ? ProgressModel::JobComplete : ProgressModel::JobFailed));
+	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
 	emit processStateFinished(m_jobId, outFileName, bSuccess);
 
 	qDebug("Process thread is done.");

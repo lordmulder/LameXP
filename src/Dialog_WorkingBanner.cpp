@@ -152,7 +152,7 @@ void WorkingBanner::keyReleaseEvent(QKeyEvent *event)
 
 void WorkingBanner::closeEvent(QCloseEvent *event)
 {
-	if(!m_canClose) event->ignore();
+	if(!m_canClose && !lamexp_session_ending()) event->ignore();
 }
 
 bool WorkingBanner::winEvent(MSG *message, long *result)
