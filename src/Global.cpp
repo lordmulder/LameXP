@@ -56,6 +56,7 @@
 #include <fcntl.h>
 #include <intrin.h>
 #include <math.h>
+#include <time.h>
 
 //COM includes
 #include <Objbase.h>
@@ -229,6 +230,9 @@ static const DWORD g_main_thread_id = GetCurrentThreadId();
 //Session ending flag
 static bool g_sessionIsEnding = false;
 
+//Log file
+static FILE *g_lamexp_log_file = NULL;
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -401,11 +405,14 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 	
 	QMutexLocker lock(&g_lamexp_message_mutex);
 
-	//if((strlen(msg) > 8) && (_strnicmp(msg, "@BASE64@", 8) == 0))
-	//{
-	//	buffer = _strdup(QByteArray::fromBase64(msg + 8).constData());
-	//	if(buffer) text = buffer;
-	//}
+	if(g_lamexp_log_file)
+	{
+		static char prefix[] = "DWCF";
+		int index = qBound(0, static_cast<int>(type), 3);
+		QString str = QString::fromUtf8(msg).trimmed().replace('\n', '\t');
+		fprintf(g_lamexp_log_file, "[%c][%04I64d] %s\r\n", prefix[index], _time64(NULL) % 3600I64, str.toUtf8().constData());
+		fflush(g_lamexp_log_file);
+	}
 
 	if(g_lamexp_console_attached)
 	{
@@ -475,6 +482,22 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 void lamexp_init_console(int argc, char* argv[])
 {
 	bool enableConsole = lamexp_version_demo();
+
+	if(_environ)
+	{
+		wchar_t *logfile = NULL;
+		size_t logfile_len = 0;
+		if(!_wdupenv_s(&logfile, &logfile_len, L"LAMEXP_LOGFILE"))
+		{
+			FILE *temp = NULL;
+			if(!_wfopen_s(&temp, logfile, L"wb"))
+			{
+				fprintf(temp, "%c%c%c", 0xEF, 0xBB, 0xBF);
+				g_lamexp_log_file = temp;
+			}
+			free(logfile);
+		}
+	}
 
 	if(!LAMEXP_DEBUG)
 	{
@@ -1875,6 +1898,13 @@ void lamexp_finalization(void)
 	LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
 	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
 	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+
+	//Close log file
+	if(g_lamexp_log_file)
+	{
+		fclose(g_lamexp_log_file);
+		g_lamexp_log_file = NULL;
+	}
 }
 
 /*
