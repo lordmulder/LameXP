@@ -808,7 +808,7 @@ static bool lamexp_event_filter(void *message, long *result)
 				{
 					app->closeAllWindows();
 					app->processEvents();
-					Sleep(0);
+					Sleep(8);
 				}
 			}
 		}
@@ -818,9 +818,13 @@ static bool lamexp_event_filter(void *message, long *result)
 		qWarning("WM_ENDSESSION message received!");
 		if(reinterpret_cast<MSG*>(message)->wParam == TRUE)
 		{
+			g_sessionIsEnding = true;
 			if(QApplication *app = reinterpret_cast<QApplication*>(QApplication::instance()))
 			{
 				app->quit();
+				app->processEvents();
+				lamexp_finalization();
+				exit(1);
 			}
 		}
 		*result = 0;
