@@ -276,6 +276,12 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 
 void ProcessingDialog::closeEvent(QCloseEvent *event)
 {
+	if(lamexp_session_ending() && !m_userAborted)
+	{
+		qWarning("Computer is shutting down, LameXP will abort and exit!");
+		abortEncoding();
+	}
+	
 	if(!button_closeDialog->isEnabled())
 	{
 		event->ignore();
@@ -423,7 +429,7 @@ void ProcessingDialog::doneEncoding(void)
 		m_threadList.takeAt(index)->deleteLater();
 	}
 
-	if(!m_pendingJobs.isEmpty() && !m_userAborted)
+	if(!m_pendingJobs.isEmpty() && !m_userAborted && !lamexp_session_ending())
 	{
 		startNextJob();
 		qDebug("Running jobs: %u", m_runningThreads);
@@ -439,14 +445,14 @@ void ProcessingDialog::doneEncoding(void)
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 	qDebug("Running jobs: %u", m_runningThreads);
 
-	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir())
+	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir() && !lamexp_session_ending())
 	{
 		SET_PROGRESS_TEXT(tr("Creating the playlist file, please wait..."));
 		QApplication::processEvents();
 		writePlayList();
 	}
 	
-	if(m_userAborted)
+	if(m_userAborted || lamexp_session_ending())
 	{
 		CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFF3BA"));
 		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
@@ -455,7 +461,10 @@ void ProcessingDialog::doneEncoding(void)
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 		QApplication::processEvents();
-		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+		if(m_settings->soundsEnabled() && !lamexp_session_ending())
+		{
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+		}
 	}
 	else
 	{
@@ -506,7 +515,11 @@ void ProcessingDialog::doneEncoding(void)
 
 	QApplication::restoreOverrideCursor();
 
-	if(!m_userAborted && checkBox_shutdownComputer->isChecked())
+	if(lamexp_session_ending())
+	{
+		accept();
+	}
+	else if(!m_userAborted && checkBox_shutdownComputer->isChecked())
 	{
 		if(shutdownComputer())
 		{

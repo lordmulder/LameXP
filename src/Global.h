@@ -111,6 +111,7 @@ bool lamexp_portable_mode(void);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);
 bool lamexp_is_hibernation_supported(void);
 QIcon lamexp_app_icon(const QDate *date = NULL, const QTime *time = NULL);
+bool lamexp_session_ending(void);
 
 //Translation support
 QStringList lamexp_query_translations(void);

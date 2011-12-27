@@ -226,6 +226,8 @@ static QMutex g_lamexp_message_mutex;
 //Main thread ID
 static const DWORD g_main_thread_id = GetCurrentThreadId();
 
+//Session ending flag
+static bool g_sessionIsEnding = false;
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
@@ -789,6 +791,47 @@ QIcon lamexp_app_icon(const QDate *date, const QTime *time)
 }
 
 /*
+ * Qt event filter
+ */
+static bool lamexp_event_filter(void *message, long *result)
+{
+	switch(reinterpret_cast<MSG*>(message)->message)
+	{
+	case WM_QUERYENDSESSION:
+		qWarning("WM_QUERYENDSESSION message received!");
+		if(!g_sessionIsEnding)
+		{
+			g_sessionIsEnding = true;
+			if(QApplication *app = reinterpret_cast<QApplication*>(QApplication::instance()))
+			{
+				for(int i = 0; i < 128; i++)
+				{
+					app->closeAllWindows();
+					app->processEvents();
+					Sleep(0);
+				}
+			}
+		}
+		*result = TRUE;
+		return true;
+	case WM_ENDSESSION:
+		qWarning("WM_ENDSESSION message received!");
+		if(reinterpret_cast<MSG*>(message)->wParam == TRUE)
+		{
+			if(QApplication *app = reinterpret_cast<QApplication*>(QApplication::instance()))
+			{
+				app->quit();
+			}
+		}
+		*result = 0;
+		return true;
+	default:
+		/*ignore this message and let Qt handle it*/
+		return false;
+	}
+}
+
+/*
  * Check for process elevation
  */
 static bool lamexp_check_elevation(void)
@@ -929,7 +972,8 @@ bool lamexp_init_qt(int argc, char* argv[])
 	application->setOrganizationName("LoRd_MuldeR");
 	application->setOrganizationDomain("mulder.at.gg");
 	application->setWindowIcon(lamexp_app_icon());
-	
+	application->setEventFilter(lamexp_event_filter);
+
 	//Set text Codec for locale
 	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
@@ -1768,6 +1812,14 @@ QStringList lamexp_available_codepages(bool noAliases)
 	}
 
 	return codecList;
+}
+
+/*
+ * Check if the session is about to end
+ */
+bool lamexp_session_ending(void)
+{
+	return g_sessionIsEnding;
 }
 
 /*
