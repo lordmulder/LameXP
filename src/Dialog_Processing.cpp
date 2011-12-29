@@ -185,6 +185,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_succeededJobs.clear();
 	m_failedJobs.clear();
 	m_userAborted = false;
+	m_forcedAbort = false;
 	m_timerStart = 0I64;
 }
 
@@ -276,12 +277,6 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 
 void ProcessingDialog::closeEvent(QCloseEvent *event)
 {
-	if(lamexp_session_ending() && !m_userAborted)
-	{
-		qWarning("Computer is shutting down, LameXP will abort and exit!");
-		abortEncoding();
-	}
-	
 	if(!button_closeDialog->isEnabled())
 	{
 		event->ignore();
@@ -321,6 +316,31 @@ bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 	return false;
 }
 
+bool ProcessingDialog::event(QEvent *e)
+{
+	switch(e->type())
+	{
+	case lamexp_event_queryendsession:
+		qWarning("System is shutting down, preparing to abort...");
+		if(!m_userAborted) abortEncoding(true);
+		return true;
+	case lamexp_event_endsession:
+		qWarning("System is shutting down, encoding will be aborted now...");
+		if(isVisible())
+		{
+			while(!close())
+			{
+				if(!m_userAborted) abortEncoding(true);
+				QApplication::processEvents(QEventLoop::WaitForMoreEvents & QEventLoop::ExcludeUserInputEvents);
+			}
+		}
+		m_pendingJobs.clear();
+		return true;
+	default:
+		return QDialog::event(e);
+	}
+}
+
 bool ProcessingDialog::winEvent(MSG *message, long *result)
 {
 	return WinSevenTaskbar::handleWinEvent(message, result);
@@ -338,6 +358,7 @@ void ProcessingDialog::initEncoding(void)
 	m_succeededJobs.clear();
 	m_failedJobs.clear();
 	m_userAborted = false;
+	m_forcedAbort = false;
 	m_playList.clear();
 	
 	CHANGE_BACKGROUND_COLOR(frame_header, QColor(Qt::white));
@@ -399,11 +420,11 @@ void ProcessingDialog::initEncoding(void)
 	}
 }
 
-void ProcessingDialog::abortEncoding(void)
+void ProcessingDialog::abortEncoding(bool force)
 {
 	m_userAborted = true;
+	if(force) m_forcedAbort = true;
 	button_AbortProcess->setEnabled(false);
-	
 	SET_PROGRESS_TEXT(tr("Aborted! Waiting for running jobs to terminate..."));
 
 	for(int i = 0; i < m_threadList.count(); i++)
@@ -429,7 +450,7 @@ void ProcessingDialog::doneEncoding(void)
 		m_threadList.takeAt(index)->deleteLater();
 	}
 
-	if(!m_pendingJobs.isEmpty() && !m_userAborted && !lamexp_session_ending())
+	if(!m_pendingJobs.isEmpty() && !m_userAborted)
 	{
 		startNextJob();
 		qDebug("Running jobs: %u", m_runningThreads);
@@ -445,14 +466,14 @@ void ProcessingDialog::doneEncoding(void)
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 	qDebug("Running jobs: %u", m_runningThreads);
 
-	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir() && !lamexp_session_ending())
+	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir())
 	{
 		SET_PROGRESS_TEXT(tr("Creating the playlist file, please wait..."));
 		QApplication::processEvents();
 		writePlayList();
 	}
 	
-	if(m_userAborted || lamexp_session_ending())
+	if(m_userAborted)
 	{
 		CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFF3BA"));
 		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
@@ -461,7 +482,7 @@ void ProcessingDialog::doneEncoding(void)
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 		QApplication::processEvents();
-		if(m_settings->soundsEnabled() && !lamexp_session_ending())
+		if(m_settings->soundsEnabled() && !m_forcedAbort)
 		{
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		}
@@ -515,11 +536,7 @@ void ProcessingDialog::doneEncoding(void)
 
 	QApplication::restoreOverrideCursor();
 
-	if(lamexp_session_ending())
-	{
-		accept();
-	}
-	else if(!m_userAborted && checkBox_shutdownComputer->isChecked())
+	if(!m_userAborted && checkBox_shutdownComputer->isChecked())
 	{
 		if(shutdownComputer())
 		{

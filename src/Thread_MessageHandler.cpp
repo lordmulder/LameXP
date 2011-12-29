@@ -91,7 +91,7 @@ void MessageHandlerThread::stop(void)
 	if(!m_aborted)
 	{
 		m_aborted = true;
-		lamexp_ipc_send(0, "");
+		lamexp_ipc_send(0, NULL);
 	}
 }
 

@@ -26,7 +26,9 @@ a:visited { color: #0000EE; }
 <li>Implemented coalescing of update signals to reduce the CPU usage of the LameXP process (<a href="http://forum.doom9.org/showpost.php?p=1539631&postcount=507" target="_blank">details</a>)
 <li>Run more than four instances in parallel on systems with more than four CPU cores (<a href="FAQ.html#89cbd3d0" target="_blank">details</a>)
 <li>Improved handling of different character encodings for Playlist and Cue Sheet import
+<li>Improved LameXP inter-process communication by adding queue support
 <li>Workaround for a bug that causes MediaInfo to not detect the duration of Wave files (64-Bit only)
+<li>Prevent LameXP from blocking a system shutdown (encoding process is aborted, if necessary)
 </ul><br>
 
 <a name="4.03"></a>Changes between v4.02 and v4.03:<br><ul>

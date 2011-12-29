@@ -446,7 +446,7 @@ MainWindow::~MainWindow(void)
 	if(m_messageHandler && m_messageHandler->isRunning())
 	{
 		m_messageHandler->stop();
-		if(!m_messageHandler->wait(10000))
+		if(!m_messageHandler->wait(2500))
 		{
 			m_messageHandler->terminate();
 			m_messageHandler->wait();
@@ -794,7 +794,7 @@ void MainWindow::dropEvent(QDropEvent *event)
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	if((m_banner->isVisible() || m_delayedFileTimer->isActive()) && !lamexp_session_ending())
+	if(m_banner->isVisible() || m_delayedFileTimer->isActive())
 	{
 		MessageBeep(MB_ICONEXCLAMATION);
 		event->ignore();
@@ -894,6 +894,31 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 	}
 
 	return QMainWindow::eventFilter(obj, event);
+}
+
+bool MainWindow::event(QEvent *e)
+{
+	switch(e->type())
+	{
+	case lamexp_event_queryendsession:
+		qWarning("System is shutting down, main window prepares to close...");
+		if(m_banner->isVisible()) m_banner->close();
+		if(m_delayedFileTimer->isActive()) m_delayedFileTimer->stop();
+		return true;
+	case lamexp_event_endsession:
+		qWarning("System is shutting down, main window will close now...");
+		if(isVisible())
+		{
+			while(!close())
+			{
+				QApplication::processEvents(QEventLoop::WaitForMoreEvents & QEventLoop::ExcludeUserInputEvents);
+			}
+		}
+		m_fileListModel->clearFiles();
+		return true;
+	default:
+		return QMainWindow::event(e);
+	}
 }
 
 bool MainWindow::winEvent(MSG *message, long *result)

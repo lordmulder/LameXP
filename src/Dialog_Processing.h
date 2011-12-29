@@ -58,7 +58,7 @@ public:
 private slots:
 	void initEncoding(void);
 	void doneEncoding(void);
-	void abortEncoding(void);
+	void abortEncoding(bool force = false);
 	void processFinished(const QUuid &jobId, const QString &outFileName, bool success);
 	void progressModelChanged(void);
 	void logViewDoubleClicked(const QModelIndex &index);
@@ -75,7 +75,8 @@ protected:
 	void showEvent(QShowEvent *event);
 	void closeEvent(QCloseEvent *event);
 	bool eventFilter(QObject *obj, QEvent *event);
-	bool winEvent(MSG *message, long *result);
+	virtual bool event(QEvent *e);
+	virtual bool winEvent(MSG *message, long *result);
 
 private:
 	void setCloseButtonEnabled(bool enabled);
@@ -100,6 +101,7 @@ private:
 	QList<QUuid> m_succeededJobs;
 	QList<QUuid> m_failedJobs;
 	bool m_userAborted;
+	bool m_forcedAbort;
 	QSystemTrayIcon *m_systemTray;
 	int m_shutdownFlag;
 	CPUObserverThread *m_cpuObserver;

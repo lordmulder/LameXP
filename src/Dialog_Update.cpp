@@ -270,7 +270,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 
 void UpdateDialog::closeEvent(QCloseEvent *event)
 {
-	if(!closeButton->isEnabled() && !lamexp_session_ending())
+	if(!closeButton->isEnabled())
 	{
 		event->ignore();
 	}

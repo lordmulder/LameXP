@@ -35,7 +35,7 @@ public:
 
 private:
 	char *m_parameter;
-	bool m_aborted;
+	volatile bool m_aborted;
 
 signals:
 	void otherInstanceDetected(void);

@@ -153,7 +153,7 @@ static int lamexp_main(int argc, char* argv[])
 	MainWindow *poMainWindow = new MainWindow(fileListModel, metaInfo, settingsModel);
 	
 	//Main application loop
-	while(bAccepted && (iShutdown <= shutdownFlag_None) && (!lamexp_session_ending()))
+	while(bAccepted && (iShutdown <= shutdownFlag_None))
 	{
 		//Show main window
 		poMainWindow->show();
@@ -161,7 +161,7 @@ static int lamexp_main(int argc, char* argv[])
 		bAccepted = poMainWindow->isAccepted();
 
 		//Show processing dialog
-		if(bAccepted && (fileListModel->rowCount() > 0) && (!lamexp_session_ending()))
+		if(bAccepted && (fileListModel->rowCount() > 0))
 		{
 			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, metaInfo, settingsModel);
 			processingDialog->exec();

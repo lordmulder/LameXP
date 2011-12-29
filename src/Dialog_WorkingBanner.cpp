@@ -78,10 +78,11 @@ void WorkingBanner::show(const QString &text)
 	QApplication::processEvents();
 }
 
-void WorkingBanner::close(void)
+bool WorkingBanner::close(void)
 {
 	m_canClose = true;
-	QDialog::close();
+	emit userAbort();
+	return QDialog::close();
 }
 
 void WorkingBanner::show(const QString &text, QThread *thread)
@@ -152,7 +153,7 @@ void WorkingBanner::keyReleaseEvent(QKeyEvent *event)
 
 void WorkingBanner::closeEvent(QCloseEvent *event)
 {
-	if(!m_canClose && !lamexp_session_ending()) event->ignore();
+	if(!m_canClose) event->ignore();
 }
 
 bool WorkingBanner::winEvent(MSG *message, long *result)

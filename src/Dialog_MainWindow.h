@@ -139,14 +139,15 @@ private slots:
 	void windowShown(void);
 
 protected:
-	void changeEvent(QEvent *e);
-	void closeEvent(QCloseEvent *event);
-	void dragEnterEvent(QDragEnterEvent *event);
-	void dropEvent(QDropEvent *event);
-	bool eventFilter(QObject *obj, QEvent *event);
-	void resizeEvent(QResizeEvent *event);
-	void showEvent(QShowEvent *event);
-	bool winEvent(MSG *message, long *result);
+	virtual void changeEvent(QEvent *e);
+	virtual void closeEvent(QCloseEvent *event);
+	virtual void dragEnterEvent(QDragEnterEvent *event);
+	virtual void dropEvent(QDropEvent *event);
+	virtual bool eventFilter(QObject *obj, QEvent *event);
+	virtual void resizeEvent(QResizeEvent *event);
+	virtual void showEvent(QShowEvent *event);
+	virtual bool event(QEvent *e);
+	virtual bool winEvent(MSG *message, long *result);
 
 private:
 	void addFiles(const QStringList &files);

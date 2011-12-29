@@ -71,6 +71,15 @@ typedef enum
 }
 lamexp_known_folder_t;
 
+//LameXP user-defined events
+typedef enum
+{
+	lamexp_event = 1000,           /*QEvent::User*/
+	lamexp_event_queryendsession = lamexp_event + 666,
+	lamexp_event_endsession      = lamexp_event + 667
+}
+lamexp_event_t;
+
 //LameXP version info
 unsigned int lamexp_version_major(void);
 unsigned int lamexp_version_minor(void);
@@ -111,7 +120,6 @@ bool lamexp_portable_mode(void);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);
 bool lamexp_is_hibernation_supported(void);
 QIcon lamexp_app_icon(const QDate *date = NULL, const QTime *time = NULL);
-bool lamexp_session_ending(void);
 
 //Translation support
 QStringList lamexp_query_translations(void);

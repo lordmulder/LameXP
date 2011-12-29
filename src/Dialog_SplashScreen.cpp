@@ -149,7 +149,7 @@ void SplashScreen::keyReleaseEvent(QKeyEvent *event)
 
 void SplashScreen::closeEvent(QCloseEvent *event)
 {
-	if(!m_canClose && !lamexp_session_ending()) event->ignore();
+	if(!m_canClose) event->ignore();
 }
 
 bool SplashScreen::winEvent(MSG *message, long *result)
