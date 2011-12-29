@@ -2569,12 +2569,12 @@
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="247"/>
-        <source>Done.</source>
+        <source>Aborted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="247"/>
-        <source>Aborted!</source>
+        <source>Done.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
