@@ -49,9 +49,9 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 
 	int bitrate = qBound(32, m_configBitrate * 32, 6144);
 
-	args << QDir::toNativeSeparators(sourceFile);
-	args << QDir::toNativeSeparators(outputFile);
-	args << QString::number(bitrate);
+	args << "-i" << QDir::toNativeSeparators(sourceFile);
+	args << "-o" << QDir::toNativeSeparators(outputFile);
+	args << "-b" << QString::number(bitrate);
 
 	if(!startProcess(process, m_binary, args))
 	{
