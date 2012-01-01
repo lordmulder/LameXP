@@ -23,6 +23,8 @@
 
 #include "Tool_Abstract.h"
 
+class AudioFileModel;
+
 class AbstractFilter : public AbstractTool
 {
 	Q_OBJECT
@@ -32,6 +34,6 @@ public:
 	~AbstractFilter(void);
 
 	//Internal decoder API
-	virtual bool apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag) = 0;
+	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag) = 0;
 };
 

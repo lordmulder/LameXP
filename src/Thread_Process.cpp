@@ -177,7 +177,7 @@ void ProcessThread::processFile()
 	//------------------------------------
 	if(bSuccess && !m_aborted && IS_WAVE(m_audioFile))
 	{
-		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount())
+		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount() || !m_filters.isEmpty())
 		{
 			m_currentStep = AnalyzeStep;
 			bSuccess = m_propDetect->detect(sourceFile, &m_audioFile, &m_aborted);
@@ -215,7 +215,7 @@ void ProcessThread::processFile()
 			connect(poFilter, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 			connect(poFilter, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
-			if(poFilter->apply(sourceFile, tempFile, &m_aborted))
+			if(poFilter->apply(sourceFile, tempFile, &m_audioFile, &m_aborted))
 			{
 				sourceFile = tempFile;
 			}

@@ -22,6 +22,7 @@
 #include "Filter_Resample.h"
 
 #include "Global.h"
+#include "Model_AudioFile.h"
 
 #include <QDir>
 #include <QProcess>
@@ -54,10 +55,17 @@ ResampleFilter::~ResampleFilter(void)
 {
 }
 
-bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
+
+	if((m_samplingRate == formatInfo->formatAudioSamplerate()) && (m_bitDepth == formatInfo->formatAudioBitdepth()))
+	{
+		messageLogged("Skipping resample filter!");
+		qDebug("Resampling filter target samplerate/bitdepth is equals to the format of the input file, skipping!");
+		return true;
+	}
 
 	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
 
@@ -145,5 +153,8 @@ bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile,
 		return false;
 	}
 	
+	if(m_samplingRate) formatInfo->setFormatAudioSamplerate(m_samplingRate);
+	if(m_bitDepth) formatInfo->setFormatAudioBitdepth(m_bitDepth);
+
 	return true;
 }

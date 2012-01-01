@@ -44,7 +44,7 @@ NormalizeFilter::~NormalizeFilter(void)
 {
 }
 
-bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;

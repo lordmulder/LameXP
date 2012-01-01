@@ -22,6 +22,8 @@
 #include "Filter_Downmix.h"
 
 #include "Global.h"
+#include "Tool_WaveProperties.h"
+#include "Model_AudioFile.h"
 
 #include <QDir>
 #include <QProcess>
@@ -41,16 +43,16 @@ DownmixFilter::~DownmixFilter(void)
 {
 }
 
-bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag)
 {
-	unsigned int channels = detectChannels(sourceFile, abortFlag);
+	unsigned int channels = formatInfo->formatAudioChannels(); //detectChannels(sourceFile, abortFlag);
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
 
 	if((channels == 1) || (channels == 2))
 	{
 		messageLogged("Skipping downmix!");
 		qDebug("Dowmmix not required for Mono or Stereo input, skipping!");
-		return false;
+		return true;
 	}
 
 	QProcess process;
@@ -152,69 +154,6 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 		return false;
 	}
 	
+	formatInfo->setFormatAudioChannels(2);
 	return true;
-}
-
-unsigned int DownmixFilter::detectChannels(const QString &sourceFile, volatile bool *abortFlag)
-{
-	unsigned int channels = 0;
-	
-	QProcess process;
-	QStringList args;
-
-	args << "--i" << sourceFile;
-
-	if(!startProcess(process, m_binary, args))
-	{
-		return channels;
-	}
-
-	bool bTimeout = false;
-	bool bAborted = false;
-
-	QRegExp regExp("Channels\\s*:\\s*(\\d+)", Qt::CaseInsensitive);
-
-	while(process.state() != QProcess::NotRunning)
-	{
-		if(*abortFlag)
-		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("SoX process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
-			{
-				bool ok = false;
-				unsigned int temp = regExp.cap(1).toUInt(&ok);
-				if(ok) channels = temp;
-			}
-			if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
-		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-
-	return channels;
 }

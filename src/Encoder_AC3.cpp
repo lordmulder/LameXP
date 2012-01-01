@@ -179,6 +179,12 @@ QString AC3Encoder::extension(void)
 	return "ac3";
 }
 
+const unsigned int *AC3Encoder::supportedChannelCount(void)
+{
+	static const unsigned int supportedChannels[] = {1, 2, 3, 4, 5, 6, NULL};
+	return supportedChannels;
+}
+
 const unsigned int *AC3Encoder::supportedSamplerates(void)
 {
 	static const unsigned int supportedRates[] = {48000, 44100, 32000, NULL};

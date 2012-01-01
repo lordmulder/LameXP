@@ -23,15 +23,16 @@
 
 #include "Filter_Abstract.h"
 
+class WaveProperties;
+
 class DownmixFilter : public AbstractFilter
 {
 public:
 	DownmixFilter(void);
 	~DownmixFilter(void);
 
-	virtual bool apply(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag);
 
 private:
 	const QString m_binary;
-	unsigned int detectChannels(const QString &sourceFile, volatile bool *abortFlag);
 };
