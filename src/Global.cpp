@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2012 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -306,39 +306,30 @@ const QDate &lamexp_version_date(void)
 {
 	if(!g_lamexp_version_date.isValid())
 	{
-		char temp[32];
-		int date[3];
+		int date[3] = {0, 0, 0}; char temp[12] = {'\0'};
+		strncpy_s(temp, 12, g_lamexp_version_raw_date, _TRUNCATE);
 
-		char *this_token = NULL;
-		char *next_token = NULL;
-
-		strncpy_s(temp, 32, g_lamexp_version_raw_date, _TRUNCATE);
-		this_token = strtok_s(temp, " ", &next_token);
-
-		for(int i = 0; i < 3; i++)
+		if(strlen(temp) == 11)
 		{
-			date[i] = -1;
-			if(this_token)
+			temp[3] = temp[6] = '\0';
+			date[2] = atoi(&temp[4]);
+			date[0] = atoi(&temp[7]);
+			
+			for(int j = 0; j < 12; j++)
 			{
-				for(int j = 0; j < 12; j++)
+				if(!_strcmpi(&temp[0], g_lamexp_months[j]))
 				{
-					if(!_strcmpi(this_token, g_lamexp_months[j]))
-					{
-						date[i] = j+1;
-						break;
-					}
+					date[1] = j+1;
+					break;
 				}
-				if(date[i] < 0)
-				{
-					date[i] = atoi(this_token);
-				}
-				this_token = strtok_s(NULL, " ", &next_token);
 			}
+
+			g_lamexp_version_date = QDate(date[0], date[1], date[2]);
 		}
 
-		if(date[0] >= 0 && date[1] >= 0 && date[2] >= 0)
+		if(!g_lamexp_version_date.isValid())
 		{
-			g_lamexp_version_date = QDate(date[2], date[0], date[1]);
+			qFatal("Internal error: Date format could not be recognized!");
 		}
 	}
 
