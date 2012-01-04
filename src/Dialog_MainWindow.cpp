@@ -125,6 +125,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_showDetailsContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
 	m_previewContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/sound.png"), "N/A");
 	m_findFileContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_go.png"), "N/A");
+	m_sourceFilesContextMenu->addSeparator();
+	m_exportCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/table_save.png"), "N/A");
 	SET_FONT_BOLD(m_showDetailsContextAction, true);
 	connect(buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
 	connect(buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
@@ -141,6 +143,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_showDetailsContextAction, SIGNAL(triggered(bool)), this, SLOT(showDetailsButtonClicked()));
 	connect(m_previewContextAction, SIGNAL(triggered(bool)), this, SLOT(previewContextActionTriggered()));
 	connect(m_findFileContextAction, SIGNAL(triggered(bool)), this, SLOT(findFileContextActionTriggered()));
+	connect(m_exportCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(exportCsvContextActionTriggered()));
 
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModelEx();
@@ -703,6 +706,7 @@ void MainWindow::changeEvent(QEvent *e)
 		m_findFileContextAction->setText(tr("Browse File Location"));
 		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
 		m_addFavoriteFolderAction->setText(tr("Bookmark Current Output Folder"));
+		m_exportCsvContextAction->setText(tr("Export Meta Tags to CSV File"));
 
 		//Force GUI update
 		m_metaInfoModel->clearData();
@@ -2125,6 +2129,51 @@ void MainWindow::handleDelayedFiles(void)
 	}
 	
 	addFiles(selectedFiles);
+}
+
+void MainWindow::exportCsvContextActionTriggered(void)
+{
+	TEMP_HIDE_DROPBOX
+	(
+		QString selectedCsvFile;
+	
+		if(USE_NATIVE_FILE_DIALOG)
+		{
+			selectedCsvFile = QFileDialog::getSaveFileName(this, tr("Save CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
+		}
+		else
+		{
+			QFileDialog dialog(this, tr("Save CSV file"));
+			dialog.setFileMode(QFileDialog::AnyFile);
+			dialog.setAcceptMode(QFileDialog::AcceptSave);
+			dialog.setNameFilter(QString("%1 (*.csv)").arg(tr("CSV File")));
+			dialog.setDirectory(m_settings->mostRecentInputPath());
+			if(dialog.exec())
+			{
+				selectedCsvFile = dialog.selectedFiles().first();
+			}
+		}
+
+		if(!selectedCsvFile.isEmpty())
+		{
+			m_settings->mostRecentInputPath(QFileInfo(selectedCsvFile).canonicalPath());
+			switch(m_fileListModel->exportToCsv(selectedCsvFile))
+			{
+			case 1:
+				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("There are no meta tags that could be exported!")));
+				break;
+			case 2:
+				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to open CSV file for writing!")));
+				break;
+			case 3:
+				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to write to the CSV file!")));
+				break;
+			default:
+				QMessageBox::information(this, tr("CSV Export"), NOBR(tr("The CSV files was created successfully!")));
+				break;
+			}
+		}
+	)
 }
 
 /*

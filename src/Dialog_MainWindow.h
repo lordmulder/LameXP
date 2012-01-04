@@ -78,6 +78,7 @@ private slots:
 	void documentActionActivated(void);
 	void editMetaButtonClicked(void);
 	void encodeButtonClicked(void);
+	void exportCsvContextActionTriggered(void);
 	void fileDownButtonClicked(void);
 	void fileUpButtonClicked(void);
 	void findFileContextActionTriggered(void);
@@ -183,6 +184,7 @@ private:
 	QAction *m_showDetailsContextAction;
 	QAction *m_showFolderContextAction;
 	QAction *m_addFavoriteFolderAction;
+	QAction *m_exportCsvContextAction;
 	QActionGroup *m_languageActionGroup;
 	QActionGroup *m_styleActionGroup;
 	QActionGroup *m_tabActionGroup;

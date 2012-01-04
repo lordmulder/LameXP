@@ -23,6 +23,7 @@
 
 #include <QFileInfo>
 #include <QDir>
+#include <QFile>
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
@@ -223,4 +224,74 @@ bool FileListModel::setFile(const QModelIndex &index, const AudioFileModel &audi
 	{
 		return false;
 	}
+}
+
+int FileListModel::exportToCsv(const QString &outFile)
+{
+	const int nFiles = m_fileList.count();
+	
+	bool havePosition = false, haveTitle = false, haveArtist = false, haveAlbum = false, haveGenre = false, haveYear = false, haveComment = false;
+	
+	for(int i = 0; i < nFiles; i++)
+	{
+		if(m_fileList.at(i).filePosition() > 0) havePosition = true;
+		if(!m_fileList.at(i).fileName().isEmpty()) haveTitle = true;
+		if(!m_fileList.at(i).fileArtist().isEmpty()) haveArtist = true;
+		if(!m_fileList.at(i).fileAlbum().isEmpty()) haveAlbum = true;
+		if(!m_fileList.at(i).fileGenre().isEmpty()) haveGenre = true;
+		if(m_fileList.at(i).fileYear() > 0) haveYear = true;
+		if(!m_fileList.at(i).fileComment().isEmpty()) haveComment = true;
+	}
+
+	if(!(haveTitle || haveArtist || haveAlbum || haveGenre || haveYear || haveComment))
+	{
+		return 1;
+	}
+
+	QFile file(outFile);
+
+	if(file.open(QIODevice::WriteOnly))
+	{
+		QStringList line;
+		
+		if(havePosition) line << "POSITION";
+		if(haveTitle) line << "TITLE";
+		if(haveArtist) line << "ARTIST";
+		if(haveAlbum) line << "ALBUM";
+		if(haveGenre) line << "GENRE";
+		if(haveYear) line << "YEAR";
+		if(haveComment) line << "COMMENT";
+
+		if(file.write(line.join(";").append("\r\n").toUtf8().prepend("\xef\xbb\xbf")) < 1)
+		{
+			file.close();
+			return 3;
+		}
+	}
+	else
+	{
+		return 2;
+	}
+
+	for(int i = 0; i < nFiles; i++)
+	{
+		QStringList line;
+		
+		if(havePosition) line << QString::number(m_fileList.at(i).filePosition());
+		if(haveTitle) line << m_fileList.at(i).fileName().trimmed();
+		if(haveArtist) line << m_fileList.at(i).fileArtist().trimmed();
+		if(haveAlbum) line << m_fileList.at(i).fileAlbum().trimmed();
+		if(haveGenre) line << m_fileList.at(i).fileGenre().trimmed();
+		if(haveYear) line << QString::number(m_fileList.at(i).fileYear());
+		if(haveComment) line << m_fileList.at(i).fileComment().trimmed();
+
+		if(file.write(line.replaceInStrings(";", ",").join(";").append("\r\n").toUtf8()) < 1)
+		{
+			file.close();
+			return 3;
+		}
+	}
+
+	file.close();
+	return 0;
 }

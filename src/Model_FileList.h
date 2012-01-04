@@ -48,6 +48,9 @@ public:
 	bool setFile(const QModelIndex &index, const AudioFileModel &audioFile);
 	AudioFileModel &operator[] (const QModelIndex &index);
 
+	//CSV export/import
+	int exportToCsv(const QString &outFile);
+
 public slots:
 	void addFile(const QString &filePath);
 	void addFile(const AudioFileModel &file);
