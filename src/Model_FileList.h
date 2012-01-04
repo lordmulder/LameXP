@@ -50,6 +50,20 @@ public:
 
 	//CSV export/import
 	int exportToCsv(const QString &outFile);
+	int importFromCsv(QWidget *parent, const QString &inFile);
+
+	//Public types
+	enum
+	{
+		CsvError_OK = 0,
+		CsvError_NoTags = 1,
+		CsvError_FileOpen = 2,
+		CsvError_FileRead = 3,
+		CsvError_FileWrite = 4,
+		CsvError_Incomplete = 5,
+		CsvError_Aborted = 6
+	}
+	CsvError;
 
 public slots:
 	void addFile(const QString &filePath);

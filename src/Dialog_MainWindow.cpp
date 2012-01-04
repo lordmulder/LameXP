@@ -127,6 +127,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_findFileContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_go.png"), "N/A");
 	m_sourceFilesContextMenu->addSeparator();
 	m_exportCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/table_save.png"), "N/A");
+	m_importCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_table.png"), "N/A");
 	SET_FONT_BOLD(m_showDetailsContextAction, true);
 	connect(buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
 	connect(buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
@@ -144,6 +145,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_previewContextAction, SIGNAL(triggered(bool)), this, SLOT(previewContextActionTriggered()));
 	connect(m_findFileContextAction, SIGNAL(triggered(bool)), this, SLOT(findFileContextActionTriggered()));
 	connect(m_exportCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(exportCsvContextActionTriggered()));
+	connect(m_importCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(importCsvContextActionTriggered()));
+	
 
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModelEx();
@@ -707,6 +710,7 @@ void MainWindow::changeEvent(QEvent *e)
 		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
 		m_addFavoriteFolderAction->setText(tr("Bookmark Current Output Folder"));
 		m_exportCsvContextAction->setText(tr("Export Meta Tags to CSV File"));
+		m_importCsvContextAction->setText(tr("Import Meta Tags from CSV File"));
 
 		//Force GUI update
 		m_metaInfoModel->clearData();
@@ -2131,6 +2135,9 @@ void MainWindow::handleDelayedFiles(void)
 	addFiles(selectedFiles);
 }
 
+/*
+ * Export Meta tags to CSV file
+ */
 void MainWindow::exportCsvContextActionTriggered(void)
 {
 	TEMP_HIDE_DROPBOX
@@ -2159,18 +2166,76 @@ void MainWindow::exportCsvContextActionTriggered(void)
 			m_settings->mostRecentInputPath(QFileInfo(selectedCsvFile).canonicalPath());
 			switch(m_fileListModel->exportToCsv(selectedCsvFile))
 			{
-			case 1:
-				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("There are no meta tags that could be exported!")));
+			case FileListModel::CsvError_NoTags:
+				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, there are no meta tags that can be exported!")));
 				break;
-			case 2:
+			case FileListModel::CsvError_FileOpen:
 				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to open CSV file for writing!")));
 				break;
-			case 3:
+			case FileListModel::CsvError_FileWrite:
 				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to write to the CSV file!")));
 				break;
-			default:
+			case FileListModel::CsvError_OK:
 				QMessageBox::information(this, tr("CSV Export"), NOBR(tr("The CSV files was created successfully!")));
 				break;
+			default:
+				qWarning("exportToCsv: Unknown return code!");
+			}
+		}
+	)
+}
+
+
+/*
+ * Import Meta tags from CSV file
+ */
+void MainWindow::importCsvContextActionTriggered(void)
+{
+	TEMP_HIDE_DROPBOX
+	(
+		QString selectedCsvFile;
+	
+		if(USE_NATIVE_FILE_DIALOG)
+		{
+			selectedCsvFile = QFileDialog::getOpenFileName(this, tr("Open CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
+		}
+		else
+		{
+			QFileDialog dialog(this, tr("Open CSV file"));
+			dialog.setFileMode(QFileDialog::ExistingFile);
+			dialog.setNameFilter(QString("%1 (*.csv)").arg(tr("CSV File")));
+			dialog.setDirectory(m_settings->mostRecentInputPath());
+			if(dialog.exec())
+			{
+				selectedCsvFile = dialog.selectedFiles().first();
+			}
+		}
+
+		if(!selectedCsvFile.isEmpty())
+		{
+			m_settings->mostRecentInputPath(QFileInfo(selectedCsvFile).canonicalPath());
+			switch(m_fileListModel->importFromCsv(this, selectedCsvFile))
+			{
+			case FileListModel::CsvError_FileOpen:
+				QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to open CSV file for reading!")));
+				break;
+			case FileListModel::CsvError_FileRead:
+				QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to read from the CSV file!")));
+				break;
+			case FileListModel::CsvError_NoTags:
+				QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, the CSV file does not contain any known fields!")));
+				break;
+			case FileListModel::CsvError_Incomplete:
+				QMessageBox::warning(this, tr("CSV Import"), NOBR(tr("CSV file is incomplete. Not all files were updated!")));
+				break;
+			case FileListModel::CsvError_OK:
+				QMessageBox::information(this, tr("CSV Import"), NOBR(tr("The CSV files was imported successfully!")));
+				break;
+			case FileListModel::CsvError_Aborted:
+				/* User aborted, ignore! */
+				break;
+			default:
+				qWarning("exportToCsv: Unknown return code!");
 			}
 		}
 	)

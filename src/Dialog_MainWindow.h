@@ -90,6 +90,7 @@ private slots:
 	void handleDelayedFiles(void);
 	void hibernateComputerActionTriggered(bool checked);
 	void importCueSheetActionTriggered(bool checked);
+	void importCsvContextActionTriggered(void);
 	void initOutputFolderModel(void);
 	void languageActionActivated(QAction *action);
 	void languageFromFileActionActivated(bool checked);
@@ -185,6 +186,7 @@ private:
 	QAction *m_showFolderContextAction;
 	QAction *m_addFavoriteFolderAction;
 	QAction *m_exportCsvContextAction;
+	QAction *m_importCsvContextAction;
 	QActionGroup *m_languageActionGroup;
 	QActionGroup *m_styleActionGroup;
 	QActionGroup *m_tabActionGroup;

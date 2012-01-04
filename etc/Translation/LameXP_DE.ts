@@ -536,6 +536,22 @@
         <source>Full Path</source>
         <translation>Dateipfad</translation>
     </message>
+    <message>
+        <source>(System Default)</source>
+        <translation>(Systemstandard)</translation>
+    </message>
+    <message>
+        <source>Select ANSI Codepage for CSV file:</source>
+        <translation>ANSI Codepage für CSV Datei auswählen:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
 </context>
 <context>
     <name>LogViewDialog</name>
@@ -1733,6 +1749,70 @@
     <message>
         <source>DCA Enc</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Export Meta Tags to CSV File</source>
+        <translation>Metatags als CSV-Datei exportieren</translation>
+    </message>
+    <message>
+        <source>Import Meta Tags from CSV File</source>
+        <translation>Metatags aus CSV-Datei importieren</translation>
+    </message>
+    <message>
+        <source>Save CSV file</source>
+        <translation>CSV-Datei speichern</translation>
+    </message>
+    <message>
+        <source>CSV File</source>
+        <translation>CSV Datei</translation>
+    </message>
+    <message>
+        <source>CSV Export</source>
+        <translation>CSV Export</translation>
+    </message>
+    <message>
+        <source>Sorry, there are no meta tags that can be exported!</source>
+        <translation>Keine Metatags gefunden, die exportiert werden können!</translation>
+    </message>
+    <message>
+        <source>Sorry, failed to open CSV file for writing!</source>
+        <translation>Die CSV-Datei konnte nicht zum Schreiben geöffnet werden!</translation>
+    </message>
+    <message>
+        <source>Sorry, failed to write to the CSV file!</source>
+        <translation>Beim Schreiben der CSV-Datei ist ein Fehler aufgetreten!</translation>
+    </message>
+    <message>
+        <source>The CSV files was created successfully!</source>
+        <translation>Die CSV-Datei wurde erfolgreich erzeugt!</translation>
+    </message>
+    <message>
+        <source>Open CSV file</source>
+        <translation>CSV-Datei öffnen</translation>
+    </message>
+    <message>
+        <source>Sorry, failed to open CSV file for reading!</source>
+        <translation>Die CSV-Datei konnte nicht zum Lesen geöffnet werden!</translation>
+    </message>
+    <message>
+        <source>Sorry, failed to read from the CSV file!</source>
+        <translation>Beim Lesen der CSV-Datei ist ein Fehler aufgetreten!</translation>
+    </message>
+    <message>
+        <source>Sorry, the CSV file does not contain any known fields!</source>
+        <translation>Die CSV-Datei enthält keine unterstützten Datenfelder!</translation>
+    </message>
+    <message>
+        <source>CSV file is incomplete. Not all files were updated!</source>
+        <translation>Die CSV-Datei ist unvollständig. Nicht alle Dateien wurden aktualisiert!</translation>
+    </message>
+    <message>
+        <source>The CSV files was imported successfully!</source>
+        <translation>Die CSV-Datei wurde erfolgreich importiert!</translation>
+    </message>
+    <message>
+        <source>CSV Import</source>
+        <translation>CSV Import</translation>
     </message>
 </context>
 <context>

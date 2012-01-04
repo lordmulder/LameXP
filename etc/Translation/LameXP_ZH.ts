@@ -535,6 +535,22 @@
         <source>Full Path</source>
         <translation>完整路径</translation>
     </message>
+    <message>
+        <source>(System Default)</source>
+        <translation type="unfinished">(系统默认)</translation>
+    </message>
+    <message>
+        <source>Select ANSI Codepage for CSV file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">确定</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
 </context>
 <context>
     <name>LogViewDialog</name>
@@ -1731,6 +1747,70 @@
     </message>
     <message>
         <source>DCA Enc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Meta Tags to CSV File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import Meta Tags from CSV File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save CSV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSV File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSV Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, there are no meta tags that can be exported!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, failed to open CSV file for writing!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, failed to write to the CSV file!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The CSV files was created successfully!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open CSV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, failed to open CSV file for reading!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, failed to read from the CSV file!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, the CSV file does not contain any known fields!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSV file is incomplete. Not all files were updated!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The CSV files was imported successfully!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSV Import</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
