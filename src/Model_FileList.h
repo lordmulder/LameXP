@@ -72,4 +72,6 @@ public slots:
 private:
 	QList<AudioFileModel> m_fileList;
 	const QIcon m_fileIcon;
+
+	static bool checkArray(const bool *a, const bool val, size_t len);
 };

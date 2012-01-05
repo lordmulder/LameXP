@@ -370,23 +370,40 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 	stream.setAutoDetectUnicode(false);
 	stream.setCodec(codec);
 
-	QStringList header = stream.readLine().simplified().split(";", QString::KeepEmptyParts);
+	QString headerLine = stream.readLine().simplified();
+
+	while(headerLine.isEmpty())
+	{
+		if(stream.atEnd())
+		{
+			qWarning("The file appears to be empty!");
+			return CsvError_FileRead;
+		}
+		qWarning("Skipping a blank line at beginning of CSV file!");
+		headerLine = stream.readLine().simplified();
+	}
+
+	QStringList header = headerLine.split(";", QString::KeepEmptyParts);
 
 	const int nCols = header.count();
 	const int nFiles = m_fileList.count();
 
 	if(nCols < 1)
 	{
+		qWarning("Header appears to be empty!");
 		return CsvError_FileRead;
-	}
-
-	for(int i = 0; i < nCols; i++)
-	{
-		header[i] = header[i].trimmed();
 	}
 
 	bool *ignore = new bool[nCols];
 	memset(ignore, 0, sizeof(bool) * nCols);
+
+	for(int i = 0; i < nCols; i++)
+	{
+		if((header[i] = header[i].trimmed()).isEmpty())
+		{
+			ignore[i] = true;
+		}
+	}
 
 	//----------------------//
 
@@ -398,9 +415,17 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 			return CsvError_Incomplete;
 		}
 		
-		QStringList line = stream.readLine().split(";", QString::KeepEmptyParts);
+		QString line = stream.readLine().simplified();
+		
+		if(line.isEmpty())
+		{
+			qWarning("Skipping a blank line in CSV file!");
+			continue;
+		}
+		
+		QStringList data = line.split(";", QString::KeepEmptyParts);
 
-		if(line.count() < header.count())
+		if(data.count() < header.count())
 		{
 			qWarning("Skipping an incomplete line in CSV file!");
 			continue;
@@ -415,62 +440,51 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 			else if(CHECK_HDR(header.at(j), "POSITION"))
 			{
 				bool ok = false;
-				unsigned int temp = line.at(j).trimmed().toUInt(&ok);
+				unsigned int temp = data.at(j).trimmed().toUInt(&ok);
 				if(ok) m_fileList[i].setFilePosition(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "TITLE"))
 			{
-				QString temp = line.at(j).trimmed();
+				QString temp = data.at(j).trimmed();
 				if(!temp.isEmpty()) m_fileList[i].setFileName(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "ARTIST"))
 			{
-				QString temp = line.at(j).trimmed();
+				QString temp = data.at(j).trimmed();
 				if(!temp.isEmpty()) m_fileList[i].setFileArtist(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "ALBUM"))
 			{
-				QString temp = line.at(j).trimmed();
+				QString temp = data.at(j).trimmed();
 				if(!temp.isEmpty()) m_fileList[i].setFileAlbum(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "GENRE"))
 			{
-				QString temp = line.at(j).trimmed();
+				QString temp = data.at(j).trimmed();
 				if(!temp.isEmpty()) m_fileList[i].setFileGenre(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "YEAR"))
 			{
 				bool ok = false;
-				unsigned int temp = line.at(j).trimmed().toUInt(&ok);
+				unsigned int temp = data.at(j).trimmed().toUInt(&ok);
 				if(ok) m_fileList[i].setFileYear(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "COMMENT"))
 			{
-				QString temp = line.at(j).trimmed();
+				QString temp = data.at(j).trimmed();
 				if(!temp.isEmpty()) m_fileList[i].setFileComment(temp);
 			}
 			else
 			{
 				qWarning("Unkonw field '%s' will be ignored!", header.at(j).toUtf8().constData());
 				ignore[j] = true;
+				
+				if(!checkArray(ignore, false, nCols))
+				{
+					qWarning("No known fields left, aborting!");
+					return CsvError_NoTags;
+				}
 			}
-		}
-
-		bool noFieldsLeft = true;
-		
-		for(int j = 0; j < nCols; j++)
-		{
-			if(!ignore[j])
-			{
-				noFieldsLeft = false;
-				break;
-			}
-		}
-
-		if(noFieldsLeft)
-		{
-			LAMEXP_DELETE_ARRAY(ignore);
-			return CsvError_NoTags;
 		}
 	}
 
@@ -478,4 +492,14 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 
 	LAMEXP_DELETE_ARRAY(ignore);
 	return CsvError_OK;
+}
+
+bool FileListModel::checkArray(const bool *a, const bool val, size_t len)
+{
+	for(size_t i = 0; i < len; i++)
+	{
+		if(a[i] == val) return true;
+	}
+
+	return false;
 }
