@@ -30,6 +30,7 @@ class AudioFileModel;
 class QFile;
 class QDir;
 class QFileInfo;
+class LockedFile;
 
 ////////////////////////////////////////////////////////////
 // Splash Thread
@@ -41,6 +42,7 @@ class FileAnalyzer: public QThread
 
 public:
 	FileAnalyzer(const QStringList &inputFiles);
+	~FileAnalyzer(void);
 	void run();
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 	unsigned int filesAccepted(void);
@@ -57,12 +59,6 @@ public slots:
 	void abortProcess(void) { m_abortFlag = true; }
 
 private:
-	enum section_t
-	{
-		sectionGeneral,
-		sectionAudio,
-		sectionOther
-	};
 	enum cover_t
 	{
 		coverNone,
@@ -79,28 +75,30 @@ private:
 	};
 
 	const AudioFileModel analyzeFile(const QString &filePath, int *type);
-	void updateInfo(AudioFileModel &audioFile, const QString &key, const QString &value);
-	void updateSection(const QString &section);
+	void updateInfo(AudioFileModel &audioFile, cover_t *coverType, QByteArray *coverData, const QString &key, const QString &value);
 	unsigned int parseYear(const QString &str);
 	unsigned int parseDuration(const QString &str);
 	bool checkFile_CDDA(QFile &file);
-	void retrieveCover(AudioFileModel &audioFile, const QString &filePath);
+	void retrieveCover(AudioFileModel &audioFile, cover_t coverType, const QByteArray &coverData);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
+	bool createTemplate(void);
 
 	const QString m_mediaInfoBin;
 	const QString m_avs2wavBin;
 
 	QStringList m_inputFiles;
 	QStringList m_recentlyAdded;
-	section_t m_currentSection;
-	cover_t m_currentCover;
 	unsigned int m_filesAccepted;
 	unsigned int m_filesRejected;
 	unsigned int m_filesDenied;
 	unsigned int m_filesDummyCDDA;
 	unsigned int m_filesCueSheet;
+	LockedFile *m_templateFile;
 	
 	volatile bool m_abortFlag;
+
+	static const char *g_tags_gen[];
+	static const char *g_tags_aud[];
 
 	bool m_bAborted;
 	bool m_bSuccess;
