@@ -75,7 +75,7 @@ private:
 	};
 
 	const AudioFileModel analyzeFile(const QString &filePath, int *type);
-	void updateInfo(AudioFileModel &audioFile, cover_t *coverType, QByteArray *coverData, const QString &key, const QString &value);
+	void updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned int *id_val, cover_t *coverType, QByteArray *coverData, const QString &key, const QString &value);
 	unsigned int parseYear(const QString &str);
 	unsigned int parseDuration(const QString &str);
 	bool checkFile_CDDA(QFile &file);
