@@ -153,6 +153,21 @@ static BOOL getInternetConnectedState(void)
 	return result;
 }
 
+static BOOL CALLBACK focusUpdaterWindow(HWND hwnd, LPARAM lParam)
+{
+	DWORD processId = *reinterpret_cast<WORD*>(lParam);
+	DWORD windowProcessId = NULL;
+	GetWindowThreadProcessId(hwnd, &windowProcessId);
+	if(windowProcessId == processId)
+	{
+		SwitchToThisWindow(hwnd, TRUE);
+		SetForegroundWindow(hwnd);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 class UpdateInfo
@@ -192,7 +207,8 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	m_logFile(new QStringList()),
 	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_demo()) : lamexp_version_demo()),
 	m_success(false),
-	m_updateReadyToInstall(false)
+	m_updateReadyToInstall(false),
+	m_updaterProcess(NULL)
 {
 	if(m_binaryWGet.isEmpty() || m_binaryGnuPG.isEmpty() || m_binaryUpdater.isEmpty() || m_binaryKeys.isEmpty())
 	{
@@ -265,6 +281,8 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	progressBar->setMaximum(counter);
 	progressBar->setValue(0);
 
+	m_updaterProcess = NULL;
+
 	QTimer::singleShot(0, this, SLOT(updateInit()));
 }
 
@@ -299,6 +317,15 @@ void UpdateDialog::keyPressEvent(QKeyEvent *e)
 	{
 		QDialog::keyPressEvent(e);
 	}
+}
+
+bool UpdateDialog::event(QEvent *e)
+{
+	if((e->type() == QEvent::ActivationChange) && (m_updaterProcess != NULL))
+	{
+		EnumWindows(focusUpdaterWindow, reinterpret_cast<LPARAM>(&m_updaterProcess));
+	}
+	return QDialog::event(e);
 }
 
 bool UpdateDialog::winEvent(MSG *message, long *result)
@@ -857,7 +884,13 @@ void UpdateDialog::applyUpdate(void)
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
 
 		process.start(m_binaryUpdater, args);
-		loop.exec();
+		bool updateStarted = process.waitForStarted();
+		if(updateStarted)
+		{
+			m_updaterProcess = process.pid()->dwProcessId;
+			loop.exec();
+		}
+		m_updaterProcess = NULL;
 		QApplication::restoreOverrideCursor();
 
 		hintLabel->show();
@@ -866,7 +899,7 @@ void UpdateDialog::applyUpdate(void)
 		progressBar->setValue(oldMax);
 		frameAnimation->hide();
 
-		if(process.exitCode() == 0)
+		if(updateStarted && (process.exitCode() == 0))
 		{
 			statusLabel->setText(tr("Update ready to install. Applicaion will quit..."));
 			m_updateReadyToInstall = true;

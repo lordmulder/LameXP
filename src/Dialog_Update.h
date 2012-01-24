@@ -49,10 +49,11 @@ private slots:
 	void progressBarValueChanged(int value);
 
 protected:
-	void showEvent(QShowEvent *event);
-	void closeEvent(QCloseEvent *event);
-	void keyPressEvent(QKeyEvent *e);
-	bool winEvent(MSG *message, long *result);
+	virtual void showEvent(QShowEvent *event);
+	virtual void closeEvent(QCloseEvent *event);
+	virtual void keyPressEvent(QKeyEvent *e);
+	virtual bool winEvent(MSG *message, long *result);
+	virtual bool event(QEvent *e);
 
 	const bool m_betaUpdates;
 
@@ -72,6 +73,7 @@ private:
 	const QString m_binaryGnuPG;
 	const QString m_binaryUpdater;
 	const QString m_binaryKeys;
+	unsigned long m_updaterProcess;
 
 	bool m_success;
 	bool m_updateReadyToInstall;
