@@ -1156,32 +1156,56 @@ void MainWindow::windowShown(void)
  */
 void MainWindow::showAnnounceBox(void)
 {
+	const unsigned int timeout = 8U;
+
 	const QString announceText = QString("%1<br><br>%2<br><nobr><tt>%3</tt></nobr><br>").arg
 	(
 		NOBR("We are still looking for LameXP translators!"),
 		NOBR("If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:"),
 		LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html")
 	);
-	
+
 	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", announceText, QMessageBox::NoButton, this);
 	announceBox->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 	announceBox->setIconPixmap(QIcon(":/images/Announcement.png").pixmap(64,79));
-	QPushButton *button1 = announceBox->addButton(tr("Discard"), QMessageBox::AcceptRole);
-	QPushButton *button2 = announceBox->addButton(tr("Discard"), QMessageBox::NoRole);
-	button1->setVisible(false);
-	button2->setEnabled(false);
-
-	QTimer *announceTimer = new QTimer(this);
-	announceTimer->setSingleShot(true);
-	announceTimer->setInterval(8000);
-	connect(announceTimer, SIGNAL(timeout()), button1, SLOT(show()));
-	connect(announceTimer, SIGNAL(timeout()), button2, SLOT(hide()));
 	
-	announceTimer->start();
-	while(announceTimer->isActive()) announceBox->exec();
-	announceTimer->stop();
+	QTimer *timers[timeout+1];
+	QPushButton *buttons[timeout+1];
 
-	LAMEXP_DELETE(announceTimer);
+	for(unsigned int i = 0; i <= timeout; i++)
+	{
+		QString text = (i > 0) ? QString("%1 (%2)").arg(tr("Discard"), QString::number(i)) : tr("Discard");
+		buttons[i] = announceBox->addButton(text, (i > 0) ? QMessageBox::NoRole : QMessageBox::AcceptRole);
+	}
+
+	for(unsigned int i = 0; i <= timeout; i++)
+	{
+		buttons[i]->setEnabled(i == 0);
+		buttons[i]->setVisible(i == timeout);
+	}
+
+	for(unsigned int i = 0; i < timeout; i++)
+	{
+		timers[i] = new QTimer(this);
+		timers[i]->setSingleShot(true);
+		timers[i]->setInterval(1000);
+		connect(timers[i], SIGNAL(timeout()), buttons[i+1], SLOT(hide()));
+		connect(timers[i], SIGNAL(timeout()), buttons[i], SLOT(show()));
+		if(i > 0)
+		{
+			connect(timers[i], SIGNAL(timeout()), timers[i-1], SLOT(start()));
+		}
+	}
+
+	timers[timeout-1]->start();
+	announceBox->exec();
+
+	for(unsigned int i = 0; i < timeout; i++)
+	{
+		timers[i]->stop();
+		LAMEXP_DELETE(timers[i]);
+	}
+
 	LAMEXP_DELETE(announceBox);
 }
 
