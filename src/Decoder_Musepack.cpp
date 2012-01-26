@@ -47,6 +47,7 @@ bool MusepackDecoder::decode(const QString &sourceFile, const QString &outputFil
 	QProcess process;
 	QStringList args;
 
+	args << "-v";
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 
@@ -57,9 +58,9 @@ bool MusepackDecoder::decode(const QString &sourceFile, const QString &outputFil
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
 
-	//The Musepack Decoder doesn't actually send any status updates :-[
-	emit statusUpdated(20 + (QUuid::createUuid().data1 % 80));
+	QRegExp regExp("Decoding progress: (\\d+)\\.(\\d+)%");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -83,7 +84,17 @@ bool MusepackDecoder::decode(const QString &sourceFile, const QString &outputFil
 		{
 			QByteArray line = process.readLine();
 			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(!text.isEmpty())
+			if(regExp.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				int progress = regExp.cap(1).toInt(&ok);
+				if(ok && (progress > prevProgress))
+				{
+					emit statusUpdated(progress);
+					prevProgress = qMin(progress + 2, 99);
+				}
+			}
+			else if(!text.isEmpty())
 			{
 				emit messageLogged(text);
 			}
