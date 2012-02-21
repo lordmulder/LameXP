@@ -89,6 +89,11 @@ AbstractTool::AbstractTool(void)
  */
 AbstractTool::~AbstractTool(void)
 {
+	if(m_handle_jobObject)
+	{
+		CloseHandle(m_handle_jobObject);
+		m_handle_jobObject = NULL;
+	}
 }
 
 /*
