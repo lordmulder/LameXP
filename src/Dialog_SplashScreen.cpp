@@ -26,6 +26,7 @@
 #include <QThread>
 #include <QMovie>
 #include <QKeyEvent>
+#include <QTimer>
 
 #include "WinSevenTaskbar.h"
 
@@ -110,7 +111,12 @@ void SplashScreen::showSplash(QThread *thread)
 	}
 
 	//Loop while thread is running
-	loop->exec();
+	while(thread->isRunning())
+	{
+		QTimer::singleShot(15000, loop, SLOT(quit()));
+		loop->exec();
+		if(thread->isRunning()) qWarning("Potential deadlock in Init thread!");
+	}
 	
 	//Fade out
 	for(int i = 100; i >= 0; i--)
