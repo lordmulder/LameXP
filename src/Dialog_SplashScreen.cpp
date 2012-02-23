@@ -93,6 +93,10 @@ void SplashScreen::showSplash(QThread *thread)
 	connect(thread, SIGNAL(terminated()), loop, SLOT(quit()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(finished()), loop, SLOT(quit()), Qt::QueuedConnection);
 
+	//Create timer
+	QTimer *timer = new QTimer();
+	connect(timer, SIGNAL(timeout()), loop, SLOT(quit()));
+
 	//Start thread
 	QApplication::processEvents();
 	thread->start();
@@ -110,14 +114,22 @@ void SplashScreen::showSplash(QThread *thread)
 		Sleep(FADE_DELAY);
 	}
 
+	//Start the timer
+	timer->start(15360);
+
 	//Loop while thread is running
 	while(thread->isRunning())
 	{
-		QTimer::singleShot(15000, loop, SLOT(quit()));
 		loop->exec();
-		if(thread->isRunning()) qWarning("Potential deadlock in Init thread!");
+		if(thread->isRunning())
+		{
+			qWarning("Potential deadlock in initialization thread!");
+		}
 	}
 	
+	//Stop the timer
+	timer->stop();
+
 	//Fade out
 	for(int i = 100; i >= 0; i--)
 	{
@@ -136,6 +148,7 @@ void SplashScreen::showSplash(QThread *thread)
 
 	//Free
 	LAMEXP_DELETE(loop);
+	LAMEXP_DELETE(timer);
 	LAMEXP_DELETE(splashScreen);
 }
 

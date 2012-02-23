@@ -1,6 +1,6 @@
 ; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
-; // Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
+; // Copyright (C) 2004-2012 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
 ; // This program is free software; you can redistribute it and/or modify
 ; // it under the terms of the GNU General Public License as published by
@@ -115,7 +115,7 @@ VIAddVersionKey "Comments" "This program is free software; you can redistribute 
 VIAddVersionKey "CompanyName" "Free Software Foundation"
 VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
-VIAddVersionKey "LegalCopyright" "Copyright 2004-2011 LoRd_MuldeR"
+VIAddVersionKey "LegalCopyright" "Copyright 2004-2012 LoRd_MuldeR"
 VIAddVersionKey "LegalTrademarks" "GNU"
 VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
 VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"
