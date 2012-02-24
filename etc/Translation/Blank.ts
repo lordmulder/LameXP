@@ -1115,17 +1115,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="2100"/>
+        <location filename="../../gui/MainWindow.ui" line="2105"/>
         <source>Peak Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="2105"/>
+        <location filename="../../gui/MainWindow.ui" line="2110"/>
         <source>RMS Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="2110"/>
+        <location filename="../../gui/MainWindow.ui" line="2100"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2960,22 +2960,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="736"/>
+        <location filename="../../src/Global.cpp" line="743"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="973"/>
+        <location filename="../../src/Global.cpp" line="980"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="978"/>
+        <location filename="../../src/Global.cpp" line="985"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="987"/>
+        <location filename="../../src/Global.cpp" line="994"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished"></translation>
     </message>

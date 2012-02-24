@@ -1827,7 +1827,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Schießen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Artwork</source>
@@ -2354,7 +2354,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Schießen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Build</source>
