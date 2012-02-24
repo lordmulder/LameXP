@@ -74,7 +74,7 @@ g_lamexp_tools[] =
 	{"693dd6f779df70a047c15c2c79350855db38d5b0cd7e529b6877b7c821cfe6addfdd50a4", CPU_TYPE_X86_SSE, "oggenc2.sse2.exe", 287603},
 	{"291cedb6a1b213330a9cb508f975ee7132a25aa26770ab91cade50109b4ffb81c9bdd09a", CPU_TYPE_X64_ALL, "oggenc2.x64.exe",  287603},
 	{"58c2b8bcff8f27bfa8fab8172b80f5da731221d072c7dba4dd3a3d7d6423490a25dc6760", CPU_TYPE_ALL_ALL, "shorten.exe", 361},
-	{"abdf9b20a8031a09d0abca9cb10c31c8418f72403b5d1350fd69bfa34041591aca3060ab", CPU_TYPE_ALL_ALL, "sox.exe", 1432},
+	{"39b0a21f1491efa752acd37017903ff8cfc5b1031750e70d5efad6119af55a532673b779", CPU_TYPE_ALL_ALL, "sox.exe", 1440},
 	{"48e7f81c024cd17dac0eaeab253aad6b223e72dc80688f7576276b0563209514ff0bb9c8", CPU_TYPE_ALL_ALL, "speexdec.exe", 12},
 	{"9b50cf64747d4afbad5d8d9b5a0a2d41c5a58256f47ebdbd8cc920e7e576085dfe1b14ff", CPU_TYPE_ALL_ALL, "tta.exe", 21},
 	{"875871c942846f6ad163f9e4949bba2f4331bec678ca5aefe58c961b6825bd0d419a078b", CPU_TYPE_ALL_ALL, "valdec.exe", 31},

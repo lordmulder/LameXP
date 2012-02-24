@@ -48,7 +48,7 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 {
 	QProcess process;
 	QStringList args;
-	QString eqMode = (m_equalizationMode == 0) ? "-ne" : ((m_equalizationMode == 1) ? "-nb" : "-n");
+	QString eqMode = (m_equalizationMode == 0) ? "-n" : ((m_equalizationMode == 1) ? "-ne" : "-nb");
 
 	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
 

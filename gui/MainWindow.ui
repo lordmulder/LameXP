@@ -1236,7 +1236,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
+               <width>604</width>
                <height>1524</height>
               </rect>
              </property>
@@ -2097,17 +2097,17 @@
                        </property>
                        <item>
                         <property name="text">
+                         <string>None</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
                          <string>Peak Level</string>
                         </property>
                        </item>
                        <item>
                         <property name="text">
                          <string>RMS Level</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>None</string>
                         </property>
                        </item>
                       </widget>

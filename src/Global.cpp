@@ -477,6 +477,13 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 	if(type == QtCriticalMsg || type == QtFatalMsg)
 	{
 		lock.unlock();
+
+		if(GetCurrentThreadId() != g_main_thread_id)
+		{
+			HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
+			if(mainThread) TerminateThread(mainThread, ULONG_MAX);
+		}
+
 		MessageBoxW(NULL, QWCHAR(QString::fromUtf8(msg)), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
 		FatalAppExit(0, L"The application has encountered a critical error and will exit now!");
 		TerminateProcess(GetCurrentProcess(), -1);
