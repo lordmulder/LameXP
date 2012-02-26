@@ -46,6 +46,8 @@ a:visited { color: #0000EE; }
 <li><a href="#9f8ff13a">What do the different 'Equalization' modes do?</a>
 <li><a href="#c6d9dfed">Why does my encoded file come out slightly longer than the original?</a>
 <li><a href="#ed4d30ed">Why is the Hibernation option disabled (greyed out) on my system?</a>
+<li><a href="#54150e92">Why do random files fail with "Not Found!" or "Failed!" status?</a>
+<li><a href="#3e999f02">Why is "Convert this file with LameXP" missing from the Explorer context menu somtimes?</a>
 <li><a href="#e7c9ae2b">Why do I get the error 'Executable doesn't support Windows compatibility mode' on startup?</a>
 <li><a href="#328b0a18">Why do I get the error 'Executable requires Windows XP or later' on startup?</a>
 <li><a href="#3ffe490e">Why do I get the error 'The procedure entry point De/EncodePointer could not be located' on startup?</a>
@@ -642,9 +644,7 @@ same factor, so dynamic range compression is NOT done. The "RMS Level" mode work
 mode, but the channels are amplified according to their peak RMS level (maximum energy), instead of their<br>
 maximum sample value. This may be used to correct stereo imbalance caused by an imperfect record turntable<br>
 cartridge. Last but not least, the "None" mode will not euqalize the channels at all, i.e. all channles will<br>
-by amplified by the same factor. In the last mode, the highest peak of all(!) channels is used as threshold.<br>
-<br>
-WARNING: The "None" mode appears to be broken with more than two channels! This is a bug in SoX.<br><br>
+by amplified by the same factor. In the last mode, the highest peak of all(!) channels is used as threshold.<br><br>
 
 <br><br>
 
@@ -697,6 +697,37 @@ command prompt window. Here you can type "powercfg -h on" (without the quotation
 enable the hibernation file. You can disable the hibernation file again by typing "powercfg -h off".<br>
 <br>
 Note: The size of "hiberfil.sys" is equal to your RAM size and it always is located on the system partition!<br><br>
+
+<br><br>
+
+<a name="54150e92"></a><b>Why do random files fail with "Not Found!" or "Failed!" status?</b><br>
+<br>
+If a file fails to convert with "Not Found!" or "Failed!" status, this usually has a reason! In that case you<br>
+can double-click on the failed item in order to view the log. The log will give detailed information about<br>
+the problem that has occured. In very rare cases, however, the following behavior has been observed by users:<br>
+When converting multiple files, some of the failes seem to fail at random. When the same files are converted<br>
+again later, some of the files that failed before will now succeed while some of the files that succeeded<br>
+before will now fail. This behavior has been tracked down to faultily "anti-virus" software! So in case you<br>
+encounter the described behavior and if you use some anti-virus software with "real-time scanner" or "guard"<br>
+functionality, then try to uninstall (or at least disable) the anti-virus software. If that resolves the<br>
+problem, then you know for sure that the anti-virus software was the cause of the problem. As the developers<br>
+of LameXP can NOT fix or workaround problems induced by faultily "anti-virus" software, please report such<br>
+problems to the developer (or support team) of your anti-virus software! Or switch to a better a/v product...<br><br>
+
+<br><br>
+
+<a name="3e999f02"></a><b>Why is "Convert this file with LameXP" missing from the Explorer context menu somtimes?</b><br>
+<br>
+The entry "Convert this file with LameXP" will be available from the Windows Explorer context menu for all<br>
+files supported by LameXP, if (and only if) the LameXP Shell-Integration is enbaleld. You can enable or<br>
+disable the LameXP Shell-Integration at any time from the "Tools &gt; Configuration" menu within LameXP at any<br>
+time. However be aware that this option will NOT be available, if LameXP is running in portable mode. Also be<br>
+aware that if you select multiple files in Explorer, the LameXP context menu entry will only appear, if ALL<br>
+files in your selection are supported by LameXP. Last but not least, Windows will NOT show the LameXP context<br>
+menu entry, if more than 15 files are selected. That is a limitation of Windows Explorer! It is "by design".<br>
+<br>
+See also:<br>
+<a href="http://support.microsoft.com/kb/2022295/" target="_blank">Context menus are shortened when more than 15 files are selected</a><br><br>
 
 <br><br>
 
