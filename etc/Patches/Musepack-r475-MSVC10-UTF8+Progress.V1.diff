@@ -1,0 +1,452 @@
+ common/unicode_support.c |   87 ++++++++++++++++++++++++++++++++++++++++++++++
+ common/unicode_support.h |   21 +++++++++++
+ libmpcdec/mpc_reader.c   |    3 +-
+ mpcdec/mpcdec.c          |   49 ++++++++++++++++++++++++--
+ win32/libcommon.vcproj   |   11 +++++-
+ win32/libmpcdec.vcproj   |    3 +-
+ win32/mpcenc.vcproj      |    3 +-
+ win32/musepack.sln       |   53 ++++++++-------------------
+ 8 files changed, 185 insertions(+), 45 deletions(-)
+
+diff --git a/common/unicode_support.c b/common/unicode_support.c
+new file mode 100644
+index 0000000..d823d9c
+--- /dev/null
++++ b/common/unicode_support.c
+@@ -0,0 +1,87 @@
++#include "unicode_support.h"
++
++#include <windows.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
+diff --git a/common/unicode_support.h b/common/unicode_support.h
+new file mode 100644
+index 0000000..97d639e
+--- /dev/null
++++ b/common/unicode_support.h
+@@ -0,0 +1,21 @@
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++char *utf16_to_utf8(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+\ No newline at end of file
+diff --git a/libmpcdec/mpc_reader.c b/libmpcdec/mpc_reader.c
+index 06aa49e..f59ffd4 100644
+--- a/libmpcdec/mpc_reader.c
++++ b/libmpcdec/mpc_reader.c
+@@ -36,6 +36,7 @@
+ #include <mpc/reader.h>
+ #include "internal.h"
+ #include <stdio.h>
++#include "../common/unicode_support.h"
+ 
+ #define STDIO_MAGIC 0xF34B963C ///< Just a random safe-check value...
+ typedef struct mpc_reader_stdio_t {
+@@ -127,7 +128,7 @@ clean:
+ mpc_status
+ mpc_reader_init_stdio(mpc_reader *p_reader, const char *filename)
+ {
+-	FILE * stream = fopen(filename, "rb");
++	FILE * stream = fopen_utf8(filename, "rb");
+ 	if (stream == NULL) return MPC_STATUS_FAIL;
+ 	return mpc_reader_init_stdio_stream(p_reader,stream);
+ }
+diff --git a/mpcdec/mpcdec.c b/mpcdec/mpcdec.c
+index b60483f..8fdb34b 100644
+--- a/mpcdec/mpcdec.c
++++ b/mpcdec/mpcdec.c
+@@ -37,8 +37,10 @@
+ #include <mpc/mpcdec.h>
+ #include "../libmpcdec/decoder.h"
+ #include "../libmpcdec/internal.h"
++#include "../common/unicode_support.h"
+ #include <libwaveformat.h>
+ #include <getopt.h>
++#include <string.h>
+ 
+ #ifdef _MSC_VER
+ #include <crtdbg.h>
+@@ -114,7 +116,7 @@ usage(const char *exename)
+ }
+ 
+ int
+-main(int argc, char **argv)
++mpcdec_main(int argc, char **argv)
+ {
+     mpc_reader reader;
+ 	mpc_demux* demux;
+@@ -122,12 +124,13 @@ main(int argc, char **argv)
+ 	mpc_status err;
+ 	mpc_bool_t info = MPC_FALSE, is_wav_output = MPC_FALSE, check = MPC_FALSE;
+     MPC_SAMPLE_FORMAT sample_buffer[MPC_DECODER_BUFFER_LENGTH];
+-    clock_t begin, end, sum; int total_samples; t_wav_output_file wav_output;
++    clock_t begin, end, sum; int total_samples, max_samples; t_wav_output_file wav_output;
++	mpc_bool_t verbose_output = MPC_FALSE;
+ 	int c;
+ 
+     fprintf(stderr, About);
+ 
+-	while ((c = getopt(argc , argv, "ihc")) != -1) {
++	while ((c = getopt(argc , argv, "ihcv")) != -1) {
+ 		switch (c) {
+ 			case 'i':
+ 				info = MPC_TRUE;
+@@ -135,6 +138,9 @@ main(int argc, char **argv)
+ 			case 'c':
+ 				check = MPC_TRUE;
+ 				break;
++			case 'v':
++				verbose_output = MPC_TRUE;
++				break;
+ 			case 'h':
+ 				usage(argv[0]);
+ 				return 0;
+@@ -177,13 +183,15 @@ main(int argc, char **argv)
+ 			SET_BINARY_MODE(stdout);
+ 		    wavo_fc.m_user_data = stdout;
+ 		} else
+-			wavo_fc.m_user_data = fopen(argv[optind + 1], "wb");
++			wavo_fc.m_user_data = fopen_utf8(argv[optind + 1], "wb");
+         if(!wavo_fc.m_user_data) return !MPC_STATUS_OK;
+         err = waveformat_output_open(&wav_output, wavo_fc, si.channels, 16, 0, si.sample_freq, (t_wav_uint32) si.samples * si.channels);
+         if(!err) return !MPC_STATUS_OK;
+     }
+ 
+     sum = total_samples = 0;
++	max_samples = (int) mpc_streaminfo_get_length_samples(&si);
++
+     while(MPC_TRUE)
+     {
+         mpc_frame_info frame;
+@@ -199,6 +207,12 @@ main(int argc, char **argv)
+         total_samples += frame.samples;
+         sum           += end - begin;
+ 
++		if(verbose_output)
++		{
++			fprintf(stderr, "Decoding progress: %3.1f%%\r", (((float)total_samples) / ((float)max_samples)) * 100.0f);
++			fflush(stderr);
++		}
++
+ 		if(is_wav_output) {
+ #ifdef MPC_FIXED_POINT
+ 			mpc_int16_t tmp_buff[MPC_DECODER_BUFFER_LENGTH];
+@@ -217,6 +231,19 @@ main(int argc, char **argv)
+ 		}
+     }
+ 
++	if(verbose_output)
++	{
++		if(err == MPC_STATUS_OK)
++		{
++			fprintf(stderr, "Decoding progress: %3.1f%%\n", 100.0f);
++		}
++		else
++		{
++			fprintf(stderr, "\n");
++		}
++		fflush(stderr);
++	}
++
+ 	if (err != MPC_STATUS_OK)
+ 		fprintf(stderr, "An error occured while decoding\n");
+ 	else if (check)
+@@ -247,3 +274,17 @@ main(int argc, char **argv)
+ #endif
+     return err;
+ }
++
++int
++main(int __argc, char **__argv)
++{
++  int argc;
++  char **argv;
++  int exit_code;
++
++  init_commandline_arguments_utf8(&argc, &argv);
++  exit_code = mpcdec_main(argc, argv);
++  free_commandline_arguments_utf8(&argc, &argv);
++  
++  return exit_code;
++}
+diff --git a/win32/libcommon.vcproj b/win32/libcommon.vcproj
+index 0acf049..567671a 100644
+--- a/win32/libcommon.vcproj
++++ b/win32/libcommon.vcproj
+@@ -1,7 +1,7 @@
+ ﻿<?xml version="1.0" encoding="UTF-8"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="9.00"
++	Version="9,00"
+ 	Name="libcommon"
+ 	ProjectGUID="{49A26D14-0AD0-497E-A982-42BFD4D992FC}"
+ 	RootNamespace="libcommon"
+@@ -112,6 +112,7 @@
+ 				ExceptionHandling="0"
+ 				BufferSecurityCheck="false"
+ 				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				FloatingPointModel="2"
+ 				WarningLevel="3"
+ 				CompileAs="1"
+@@ -170,6 +171,10 @@
+ 				RelativePath="..\common\tags.c"
+ 				>
+ 			</File>
++			<File
++				RelativePath="..\common\unicode_support.c"
++				>
++			</File>
+ 		</Filter>
+ 		<Filter
+ 			Name="headers"
+@@ -178,6 +183,10 @@
+ 				RelativePath=".\getopt.h"
+ 				>
+ 			</File>
++			<File
++				RelativePath="..\common\unicode_support.h"
++				>
++			</File>
+ 		</Filter>
+ 	</Files>
+ 	<Globals>
+diff --git a/win32/libmpcdec.vcproj b/win32/libmpcdec.vcproj
+index 16db2c3..3abf055 100644
+--- a/win32/libmpcdec.vcproj
++++ b/win32/libmpcdec.vcproj
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="9.00"
++	Version="9,00"
+ 	Name="libmpcdec"
+ 	ProjectGUID="{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}"
+ 	RootNamespace="libmpcdec"
+@@ -113,6 +113,7 @@
+ 				ExceptionHandling="0"
+ 				BufferSecurityCheck="false"
+ 				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				FloatingPointModel="2"
+ 				WarningLevel="3"
+ 				CompileAs="1"
+diff --git a/win32/mpcenc.vcproj b/win32/mpcenc.vcproj
+index fe03c93..7193e4f 100644
+--- a/win32/mpcenc.vcproj
++++ b/win32/mpcenc.vcproj
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="9.00"
++	Version="9,00"
+ 	Name="mpcenc"
+ 	ProjectGUID="{15082E34-9324-469F-8423-F995B4814A37}"
+ 	RootNamespace="mppenc"
+@@ -128,6 +128,7 @@
+ 				ExceptionHandling="0"
+ 				BufferSecurityCheck="false"
+ 				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				FloatingPointModel="2"
+ 				WarningLevel="3"
+ 				CompileAs="1"
+diff --git a/win32/musepack.sln b/win32/musepack.sln
+index 35729b4..1a04a6f 100644
+--- a/win32/musepack.sln
++++ b/win32/musepack.sln
+@@ -1,53 +1,38 @@
+ ﻿
+-Microsoft Visual Studio Solution File, Format Version 10.00
+-# Visual Studio 2008
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpcenc", "mpcenc.vcproj", "{15082E34-9324-469F-8423-F995B4814A37}"
+-	ProjectSection(ProjectDependencies) = postProject
+-		{49A26D14-0AD0-497E-A982-42BFD4D992FC} = {49A26D14-0AD0-497E-A982-42BFD4D992FC}
+-		{7CF31624-B40E-466F-9107-785816C787C4} = {7CF31624-B40E-466F-9107-785816C787C4}
+-		{44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96} = {44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96}
+-	EndProjectSection
++Microsoft Visual Studio Solution File, Format Version 11.00
++# Visual Studio 2010
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpcenc", "mpcenc.vcxproj", "{15082E34-9324-469F-8423-F995B4814A37}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcommon", "libcommon.vcproj", "{49A26D14-0AD0-497E-A982-42BFD4D992FC}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcommon", "libcommon.vcxproj", "{49A26D14-0AD0-497E-A982-42BFD4D992FC}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmpcpsy", "libmpcpsy.vcproj", "{7CF31624-B40E-466F-9107-785816C787C4}"
+-EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmpcenc", "libmpcenc.vcproj", "{44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96}"
+-EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpcdec", "mpcdec.vcproj", "{A527175B-22A9-41AB-B2E8-580F573CCAFB}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmpcpsy", "libmpcpsy.vcxproj", "{7CF31624-B40E-466F-9107-785816C787C4}"
+ 	ProjectSection(ProjectDependencies) = postProject
+ 		{49A26D14-0AD0-497E-A982-42BFD4D992FC} = {49A26D14-0AD0-497E-A982-42BFD4D992FC}
+-		{13D176A2-B6BB-403F-A816-AA1F388078B7} = {13D176A2-B6BB-403F-A816-AA1F388078B7}
+-		{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3} = {4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}
+ 	EndProjectSection
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpccut", "mpccut.vcproj", "{ABBF9DD7-650F-48A8-9810-B76F233520F3}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmpcenc", "libmpcenc.vcxproj", "{44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96} = {44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96}
+ 		{49A26D14-0AD0-497E-A982-42BFD4D992FC} = {49A26D14-0AD0-497E-A982-42BFD4D992FC}
+-		{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3} = {4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}
+ 	EndProjectSection
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpc2sv8", "mpc2sv8.vcproj", "{36225C6A-FFA3-4E70-928E-1F69F7A3FCE1}"
+-	ProjectSection(ProjectDependencies) = postProject
+-		{49A26D14-0AD0-497E-A982-42BFD4D992FC} = {49A26D14-0AD0-497E-A982-42BFD4D992FC}
+-		{44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96} = {44EC1266-D2EE-47B8-ACFC-8BD52E7FFF96}
+-		{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3} = {4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}
+-	EndProjectSection
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpcdec", "mpcdec.vcxproj", "{A527175B-22A9-41AB-B2E8-580F573CCAFB}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmpcdec", "libmpcdec.vcproj", "{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpccut", "mpccut.vcxproj", "{ABBF9DD7-650F-48A8-9810-B76F233520F3}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwavformat", "libwavformat.vcproj", "{13D176A2-B6BB-403F-A816-AA1F388078B7}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpc2sv8", "mpc2sv8.vcxproj", "{36225C6A-FFA3-4E70-928E-1F69F7A3FCE1}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libreplaygain", "..\..\..\libreplaygain\libreplaygain.vcproj", "{CB7A02E8-393A-481B-BD18-E7D041D8C6B1}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmpcdec", "libmpcdec.vcxproj", "{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}"
++	ProjectSection(ProjectDependencies) = postProject
++		{49A26D14-0AD0-497E-A982-42BFD4D992FC} = {49A26D14-0AD0-497E-A982-42BFD4D992FC}
++	EndProjectSection
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpcgain", "mpcgain.vcproj", "{76CBB7D4-0524-4569-9150-34BDE4235D04}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwavformat", "libwavformat.vcxproj", "{13D176A2-B6BB-403F-A816-AA1F388078B7}"
+ 	ProjectSection(ProjectDependencies) = postProject
+ 		{49A26D14-0AD0-497E-A982-42BFD4D992FC} = {49A26D14-0AD0-497E-A982-42BFD4D992FC}
+-		{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3} = {4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}
+-		{CB7A02E8-393A-481B-BD18-E7D041D8C6B1} = {CB7A02E8-393A-481B-BD18-E7D041D8C6B1}
+ 	EndProjectSection
+ EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpcgain", "mpcgain.vcxproj", "{76CBB7D4-0524-4569-9150-34BDE4235D04}"
++EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+ 		Debug|Win32 = Debug|Win32
+@@ -81,7 +66,6 @@ Global
+ 		{36225C6A-FFA3-4E70-928E-1F69F7A3FCE1}.Debug|Win32.ActiveCfg = Debug|Win32
+ 		{36225C6A-FFA3-4E70-928E-1F69F7A3FCE1}.Debug|Win32.Build.0 = Debug|Win32
+ 		{36225C6A-FFA3-4E70-928E-1F69F7A3FCE1}.Release|Win32.ActiveCfg = Release|Win32
+-		{36225C6A-FFA3-4E70-928E-1F69F7A3FCE1}.Release|Win32.Build.0 = Release|Win32
+ 		{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}.Debug|Win32.ActiveCfg = Debug|Win32
+ 		{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}.Debug|Win32.Build.0 = Debug|Win32
+ 		{4C5362CD-0BF2-4B3B-971B-8293EB1A1DC3}.Release|Win32.ActiveCfg = Release|Win32
+@@ -90,14 +74,9 @@ Global
+ 		{13D176A2-B6BB-403F-A816-AA1F388078B7}.Debug|Win32.Build.0 = Debug|Win32
+ 		{13D176A2-B6BB-403F-A816-AA1F388078B7}.Release|Win32.ActiveCfg = Release|Win32
+ 		{13D176A2-B6BB-403F-A816-AA1F388078B7}.Release|Win32.Build.0 = Release|Win32
+-		{CB7A02E8-393A-481B-BD18-E7D041D8C6B1}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{CB7A02E8-393A-481B-BD18-E7D041D8C6B1}.Debug|Win32.Build.0 = Debug|Win32
+-		{CB7A02E8-393A-481B-BD18-E7D041D8C6B1}.Release|Win32.ActiveCfg = Release|Win32
+-		{CB7A02E8-393A-481B-BD18-E7D041D8C6B1}.Release|Win32.Build.0 = Release|Win32
+ 		{76CBB7D4-0524-4569-9150-34BDE4235D04}.Debug|Win32.ActiveCfg = Debug|Win32
+ 		{76CBB7D4-0524-4569-9150-34BDE4235D04}.Debug|Win32.Build.0 = Debug|Win32
+ 		{76CBB7D4-0524-4569-9150-34BDE4235D04}.Release|Win32.ActiveCfg = Release|Win32
+-		{76CBB7D4-0524-4569-9150-34BDE4235D04}.Release|Win32.Build.0 = Release|Win32
+ 	EndGlobalSection
+ 	GlobalSection(SolutionProperties) = preSolution
+ 		HideSolutionNode = FALSE

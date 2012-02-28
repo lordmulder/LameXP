@@ -1,0 +1,997 @@
+ tools/unicode_support.cpp        |   86 ++++++++++++++++++
+ tools/unicode_support.h          |   21 +++++
+ tools/valdec.cpp                 |  180 ++++++++++++++++++++++++--------------
+ tools/valdec.sln                 |   50 +++++++----
+ tools/valdec.vcproj              |   61 +++++++------
+ valib/lib/valib.vcproj           |   19 ++++-
+ valib/valib/auto_file.cpp        |    3 +-
+ valib/valib/sink/sink_dsound.cpp |    4 +-
+ valib/valib/sink/sink_stdout.h   |   93 ++++++++++++++++++++
+ 9 files changed, 402 insertions(+), 115 deletions(-)
+
+diff --git a/tools/unicode_support.cpp b/tools/unicode_support.cpp
+new file mode 100644
+index 0000000..13f89ba
+--- /dev/null
++++ b/tools/unicode_support.cpp
+@@ -0,0 +1,86 @@
++#include "unicode_support.h"
++
++#include <windows.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = new char[BuffSize]; //(char*) malloc(sizeof(char) * BuffSize);
++	Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = new wchar_t[BuffSize]; //(wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = new char*[nArgs]; //malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	if(*argv != NULL)
++	{
++		for(int i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				delete [] ((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		delete [] (*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) delete [] filename_utf16;
++	if(mode_utf16) delete [] mode_utf16;
++
++	return ret;
++}
+diff --git a/tools/unicode_support.h b/tools/unicode_support.h
+new file mode 100644
+index 0000000..9ad3173
+--- /dev/null
++++ b/tools/unicode_support.h
+@@ -0,0 +1,21 @@
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++char *utf16_to_utf8(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+diff --git a/tools/valdec.cpp b/tools/valdec.cpp
+index 6b24ecf..b5fe15d 100644
+--- a/tools/valdec.cpp
++++ b/tools/valdec.cpp
+@@ -15,6 +15,7 @@
+ #include "sink\sink_raw.h"
+ #include "sink\sink_wav.h"
+ #include "sink\sink_dsound.h"
++#include "sink\sink_stdout.h"
+ 
+ // filters
+ #include "filters\dvd_graph.h"
+@@ -22,6 +23,7 @@
+ // other
+ #include "win32\cpu.h"
+ #include "vargs.h"
++#include "unicode_support.h"
+ 
+ 
+ #define bool2str(v) ((v)? "true": "false")
+@@ -65,7 +67,7 @@ const sample_t level_tbl[] =
+   1.0
+ };
+ 
+-int main(int argc, char *argv[])
++int valdec_main(int argc, char *argv[])
+ {
+   if (argc < 2)
+   {
+@@ -77,6 +79,7 @@ int main(int argc, char *argv[])
+ "\n"
+ "This utility is a part of AC3Filter project (http://ac3filter.net)\n"
+ "Copyright (c) 2006-2009 by Alexander Vigovsky\n"
++"Support for Unicode file names and STDOUT output added by LoRd_MuldeR\n"
+ "\n"
+ "Usage:\n"
+ "  valdec some_file [options]\n"
+@@ -91,6 +94,7 @@ int main(int argc, char *argv[])
+ "    -r[aw] file.raw - decode to RAW file\n"
+ "    -w[av] file.wav - decode to WAV file\n"
+ "    -n[othing] - do nothing (to be used with -i option)\n"
++"    -s[td]     - decode to RAW and write to STDOUT\n"
+ "  \n"
+ "  output options:\n"
+ //"    -spdif - spdif output (no other options will work in this mode)\n"
+@@ -184,12 +188,13 @@ int main(int argc, char *argv[])
+   /////////////////////////////////////////////////////////
+   // Sinks
+ 
+-  enum { mode_undefined, mode_nothing, mode_play, mode_raw, mode_wav, mode_decode } mode = mode_undefined;
++  enum { mode_undefined, mode_nothing, mode_play, mode_raw, mode_wav, mode_decode, mode_stdout } mode = mode_undefined;
+   const char *out_filename = 0;
+ 
+   RAWSink    raw;
+   WAVSink    wav;
+   DSoundSink dsound;
++  StdOutSink stdsnk;
+   NullSink   null;
+ 
+   Sink *sink = 0;
+@@ -216,7 +221,7 @@ int main(int argc, char *argv[])
+     {
+       if (parser)
+       {
+-        printf("-ac3 : ambigous parser\n");
++        fprintf(stderr, "-ac3 : ambigous parser\n");
+         return 1;
+       }
+ 
+@@ -229,7 +234,7 @@ int main(int argc, char *argv[])
+     {
+       if (parser)
+       {
+-        printf("-dts : ambigous parser\n");
++        fprintf(stderr, "-dts : ambigous parser\n");
+         return 1;
+       }
+ 
+@@ -242,7 +247,7 @@ int main(int argc, char *argv[])
+     {
+       if (parser)
+       {
+-        printf("-mpa : ambigous parser\n");
++        fprintf(stderr, "-mpa : ambigous parser\n");
+         return 1;
+       }
+ 
+@@ -268,7 +273,7 @@ int main(int argc, char *argv[])
+ 
+       if (imask < 0 || imask > array_size(mask_tbl))
+       {
+-        printf("-spk : incorrect speaker configuration\n");
++        fprintf(stderr, "-spk : incorrect speaker configuration\n");
+         return 1;
+       }
+       continue;
+@@ -280,7 +285,7 @@ int main(int argc, char *argv[])
+       iformat = int(arg_num(argv[iarg]));
+       if (iformat < 0 || iformat > array_size(format_tbl))
+       {
+-        printf("-fmt : incorrect sample format");
++        fprintf(stderr, "-fmt : incorrect sample format");
+         return 1;
+       }
+       continue;
+@@ -296,7 +301,7 @@ int main(int argc, char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-decode : ambigous output mode\n");
++        fprintf(stderr, "-decode : ambigous output mode\n");
+         return 1;
+       }
+ 
+@@ -312,7 +317,7 @@ int main(int argc, char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-play : ambigous output mode\n");
++        fprintf(stderr, "-play : ambigous output mode\n");
+         return 1;
+       }
+ 
+@@ -328,12 +333,12 @@ int main(int argc, char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-raw : ambigous output mode\n");
++        fprintf(stderr, "-raw : ambigous output mode\n");
+         return 1;
+       }
+       if (argc - iarg < 1)
+       {
+-        printf("-raw : specify a file name\n");
++        fprintf(stderr, "-raw : specify a file name\n");
+         return 1;
+       }
+ 
+@@ -343,19 +348,40 @@ int main(int argc, char *argv[])
+       mode = mode_raw;
+       continue;
+     }
++   
++    // -s[td] - RAW output to STDOUT
++    if (is_arg(argv[iarg], "s", argt_exist) ||
++        is_arg(argv[iarg], "std", argt_exist))
++    {
++      if (sink)
++      {
++        fprintf(stderr, "-std : ambigous output mode\n");
++        return 1;
++      }
++      if (argc - iarg < 1)
++      {
++        fprintf(stderr, "-std : specify a file name\n");
++        return 1;
++      }
+ 
++      //out_filename = argv[++iarg];
++      sink = &stdsnk;
++      control = 0;
++      mode = mode_stdout;
++      continue;
++    }
+     // -w[av] - WAV output
+     if (is_arg(argv[iarg], "w", argt_exist) ||
+         is_arg(argv[iarg], "wav", argt_exist))
+     {
+       if (sink)
+       {
+-        printf("-wav : ambigous output mode\n");
++        fprintf(stderr, "-wav : ambigous output mode\n");
+         return 1;
+       }
+       if (argc - iarg < 1)
+       {
+-        printf("-wav : specify a file name\n");
++        fprintf(stderr, "-wav : specify a file name\n");
+         return 1;
+       }
+ 
+@@ -372,7 +398,7 @@ int main(int argc, char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-nothing : ambigous output mode\n");
++        fprintf(stderr, "-nothing : ambigous output mode\n");
+         return 1;
+       }
+ 
+@@ -614,7 +640,7 @@ int main(int argc, char *argv[])
+       continue;
+     }
+ 
+-    printf("Error: unknown option: %s\n", argv[iarg]);
++    fprintf(stderr, "Error: unknown option: %s\n", argv[iarg]);
+     return 1;
+   }
+ 
+@@ -627,13 +653,13 @@ int main(int argc, char *argv[])
+ 
+   if (!file.open(input_filename, parser, 1000000))
+   {
+-    printf("Error: Cannot open file '%s'\n", input_filename);
++    fprintf(stderr, "Error: Cannot open file '%s'\n", input_filename);
+     return 1;
+   }
+     
+   if (!file.stats())
+   {
+-    printf("Error: Cannot detect input file format\n", input_filename);
++    fprintf(stderr, "Error: Cannot detect input file format\n", input_filename);
+     return 1;
+   }
+ 
+@@ -643,7 +669,7 @@ int main(int argc, char *argv[])
+ 
+   if (!file.is_frame_loaded())
+   {
+-    printf("Error: Cannot load the first frame\n");
++    fprintf(stderr, "Error: Cannot load the first frame\n");
+     return 1;
+   }
+ 
+@@ -655,9 +681,9 @@ int main(int argc, char *argv[])
+   {
+     char info[1024];
+     file.file_info(info, sizeof(info));
+-    printf("%s\n", info);
++    fprintf(stderr, "%s\n", info);
+     file.stream_info(info, sizeof(info));
+-    printf("%s", info);
++    fprintf(stderr, "%s", info);
+   }
+ 
+   if (mode == mode_nothing)
+@@ -678,7 +704,7 @@ int main(int argc, char *argv[])
+   Speakers user_spk(format_tbl[iformat], mask_tbl[imask], 0, level_tbl[iformat]);
+   if (!dvd_graph.set_user(user_spk))
+   {
+-    printf("Error: unsupported user format (%s %s %i)\n", 
++    fprintf(stderr, "Error: unsupported user format (%s %s %i)\n", 
+       user_spk.format_text(), user_spk.mode_text(), user_spk.sample_rate);
+     return 1;
+   }
+@@ -686,7 +712,7 @@ int main(int argc, char *argv[])
+   Speakers in_spk = file.get_spk();
+   if (!dvd_graph.set_input(in_spk))
+   {
+-    printf("Error: unsupported input format (%s %s %i)\n", 
++    fprintf(stderr, "Error: unsupported input format (%s %s %i)\n", 
+       in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
+     return 1;
+   }
+@@ -718,10 +744,18 @@ int main(int argc, char *argv[])
+    
+   switch (mode)
+   {
++    case mode_stdout:
++      if (!stdsnk.is_open())
++      {
++        fprintf(stderr, "Error: failed to open standard output handle.\n");
++        return 1;
++      }
++      break;
++  
+     case mode_raw:
+       if (!out_filename || !raw.open(out_filename))
+       {
+-        printf("Error: failed to open output file '%s'\n", out_filename);
++        fprintf(stderr, "Error: failed to open output file '%s'\n", out_filename);
+         return 1;
+       }
+       break;
+@@ -729,7 +763,7 @@ int main(int argc, char *argv[])
+     case mode_wav:
+       if (!out_filename || !wav.open(out_filename))
+       {
+-        printf("Error: failed to open output file '%s'\n", out_filename);
++        fprintf(stderr, "Error: failed to open output file '%s'\n", out_filename);
+         return 1;
+       }
+       break;
+@@ -737,7 +771,7 @@ int main(int argc, char *argv[])
+     case mode_play:
+       if (!dsound.open_dsound(0))
+       {
+-        printf("Error: failed to init DirectSound\n");
++        fprintf(stderr, "Error: failed to init DirectSound\n");
+         return 1;
+       }
+       break;
+@@ -765,27 +799,28 @@ int main(int argc, char *argv[])
+ 
+   int streams = 0;
+ 
+-//  fprintf(stderr, " 0.0%% Frs:      0 Err: 0 Time:   0:00.000i Level:    0dB FPS:    0 CPU: 0%%\r"); 
++//  ffprintf(stderr, stderr, " 0.0%% Frs:      0 Err: 0 Time:   0:00.000i Level:    0dB FPS:    0 CPU: 0%%\r"); 
+ 
+   file.seek(0);
+ 
+-  #define PRINT_STAT                                                                                           \
+-  {                                                                                                            \
+-    if (control)                                                                                               \
+-    {                                                                                                          \
+-      dvd_graph.proc.get_output_levels(control->get_playback_time(), levels);                                  \
+-      level = levels[0];                                                                                       \
+-      for (i = 1; i < NCHANNELS; i++)                                                                          \
+-        if (levels[i] > level)                                                                                 \
+-          level = levels[i];                                                                                   \
+-    }                                                                                                          \
+-    fprintf(stderr, "%4.1f%% Frs: %-6i Err: %-i Time: %3i:%02i.%03i Level: %-4idB FPS: %-4i CPU: %.1f%%  \r",  \
+-      file.get_pos(file.relative) * 100,                                                                       \
+-      file.get_frames(), dvd_graph.dec.get_errors(),                                                           \
+-      int(time/60), int(time) % 60, int(time * 1000) % 1000,                                                   \
+-      int(value2db(level)),                                                                                    \
+-      int(file.get_frames() / time),                                                                           \
+-      cpu_current.usage() * 100);                                                                              \
++  #define PRINT_STAT                                                                                             \
++  {                                                                                                              \
++    if (control)                                                                                                 \
++    {                                                                                                            \
++      dvd_graph.proc.get_output_levels(control->get_playback_time(), levels);                                    \
++      level = levels[0];                                                                                         \
++      for (i = 1; i < NCHANNELS; i++)                                                                            \
++        if (levels[i] > level)                                                                                   \
++          level = levels[i];                                                                                     \
++    }                                                                                                            \
++    fprintf(stderr, "[%4.1f%%] Frs: %-6i Err: %-i Time: %3i:%02i.%03i Level: %-4idB FPS: %-4i CPU: %.1f%%  \r",  \
++      file.get_pos(file.relative) * 100,                                                                         \
++      file.get_frames(), dvd_graph.dec.get_errors(),                                                             \
++      int(time/60), int(time) % 60, int(time * 1000) % 1000,                                                     \
++      int(value2db(level)),                                                                                      \
++      int(file.get_frames() / time),                                                                             \
++      cpu_current.usage() * 100);                                                                                \
++	  fflush(stderr);                                                                                            \
+   }
+ 
+   #define DROP_STAT \
+@@ -811,7 +846,7 @@ int main(int argc, char *argv[])
+         {
+           char info[1024];
+           file.stream_info(info, sizeof(info));
+-          printf("\n\n%s", info);
++          fprintf(stderr, "\n\n%s", info);
+         }
+ 
+         streams++;
+@@ -825,7 +860,7 @@ int main(int argc, char *argv[])
+       chunk.set_rawdata(file.get_spk(), file.get_frame(), file.get_frame_size());
+       if (!dvd_graph.process(&chunk))
+       {
+-        printf("\nError in dvd_graph.process()\n");
++        fprintf(stderr, "\nError in dvd_graph.process()\n");
+         return 1;
+       }
+ 
+@@ -833,7 +868,7 @@ int main(int argc, char *argv[])
+       {
+         if (!dvd_graph.get_chunk(&chunk))
+         {
+-          printf("\nError in dvd_graph.get_chunk()\n");
++          fprintf(stderr, "\nError in dvd_graph.get_chunk()\n");
+           return 1;
+         }
+ 
+@@ -847,12 +882,12 @@ int main(int argc, char *argv[])
+             if (sink->query_input(chunk.spk))
+             {
+               DROP_STAT;
+-              printf("Opening audio output %s %s %i...\n",
++              fprintf(stderr, "Opening audio output %s %s %i...\n",
+                 chunk.spk.format_text(), chunk.spk.mode_text(), chunk.spk.sample_rate);
+             }
+             else
+             {
+-              printf("\nOutput format %s %s %i is unsupported\n",
++              fprintf(stderr, "\nOutput format %s %s %i is unsupported\n",
+                 chunk.spk.format_text(), chunk.spk.mode_text(), chunk.spk.sample_rate);
+               return 1;
+             }
+@@ -860,7 +895,7 @@ int main(int argc, char *argv[])
+ 
+           if (!sink->process(&chunk))
+           {
+-            printf("\nError in sink->process()\n");
++            fprintf(stderr, "\nError in sink->process()\n");
+             return 1;
+           }
+         }
+@@ -893,7 +928,7 @@ int main(int argc, char *argv[])
+ 
+   if (!dvd_graph.process_to(&chunk, sink))
+   {
+-    printf("\nProcessing error!\n");
++    fprintf(stderr, "\nProcessing error!\n");
+     return 1;
+   }
+ 
+@@ -907,13 +942,13 @@ int main(int argc, char *argv[])
+   // Final statistics
+ 
+   PRINT_STAT;
+-  printf("\n---------------------------------------\n");
++  fprintf(stderr, "\n---------------------------------------\n");
+   if (streams > 1)
+-    printf("Streams found: %i\n", streams);
+-  printf("Frames/errors: %i/%i\n", file.get_frames(), dvd_graph.dec.get_errors());
+-  printf("System time: %ims\n", int(cpu_total.get_system_time() * 1000));
+-  printf("Process time: %ims\n", int(cpu_total.get_thread_time() * 1000 ));
+-  printf("Approx. %.2f%% realtime CPU usage\n", double(cpu_total.get_thread_time() * 100) / file.get_size(file.time));
++    fprintf(stderr, "Streams found: %i\n", streams);
++  fprintf(stderr, "Frames/errors: %i/%i\n", file.get_frames(), dvd_graph.dec.get_errors());
++  fprintf(stderr, "System time: %ims\n", int(cpu_total.get_system_time() * 1000));
++  fprintf(stderr, "Process time: %ims\n", int(cpu_total.get_thread_time() * 1000 ));
++  fprintf(stderr, "Approx. %.2f%% realtime CPU usage\n", double(cpu_total.get_thread_time() * 100) / file.get_size(file.time));
+ 
+   /////////////////////////////////////////////////////////
+   // Print levels histogram
+@@ -930,22 +965,35 @@ int main(int argc, char *argv[])
+     max_level = dvd_graph.proc.get_max_level();
+     dbpb = dvd_graph.proc.get_dbpb();
+ 
+-    printf("\nHistogram:\n");
+-    printf("------------------------------------------------------------------------------\n");
++    fprintf(stderr, "\nHistogram:\n");
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
+     for (i = 0; i*dbpb < 100 && i < MAX_HISTOGRAM; i++)
+     {
+-      printf("%2idB: %4.1f ", i * dbpb, hist[i] * 100);
++      fprintf(stderr, "%2idB: %4.1f ", i * dbpb, hist[i] * 100);
+       for (j = 0; j < 67 && j < hist[i] * 67; j++)
+-        printf("*");
+-      printf("\n");
++        fprintf(stderr, "*");
++      fprintf(stderr, "\n");
+     }
+-    printf("------------------------------------------------------------------------------\n");
+-    printf("max_level;%f\ndbpb;%i\nhistogram;", max_level, dbpb);
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
++    fprintf(stderr, "max_level;%f\ndbpb;%i\nhistogram;", max_level, dbpb);
+     for (i = 0; i < MAX_HISTOGRAM; i++)
+-      printf("%.4f;", hist[i]);
+-    printf("\n");
+-    printf("------------------------------------------------------------------------------\n");
++      fprintf(stderr, "%.4f;", hist[i]);
++    fprintf(stderr, "\n");
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
+   }
+ 
+   return 0;
+ }
++
++int main(int argc, char *argv[])
++{
++  int argc_utf8;
++  char **argv_utf8;
++  int exit_code;
++
++  init_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++  exit_code = valdec_main(argc_utf8, argv_utf8);
++  free_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++  
++  return exit_code;
++}
+diff --git a/tools/valdec.sln b/tools/valdec.sln
+index 9120b95..8b0cf39 100644
+--- a/tools/valdec.sln
++++ b/tools/valdec.sln
+@@ -1,12 +1,12 @@
+ ﻿
+ Microsoft Visual Studio Solution File, Format Version 10.00
+ # Visual Studio 2008
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "valdec", "valdec.vcproj", "{871889DF-6EF7-461F-AC1B-7DA682CB79A0}"
++Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "valdec", "valdec.icproj", "{EB870031-881E-455A-A1E2-5FD222F92D61}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C} = {30FCD216-1CAD-48FD-BF4B-337572F7EC9C}
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1} = {C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}
+ 	EndProjectSection
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "valib", "..\valib\lib\valib.vcproj", "{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}"
++Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "valib", "..\valib\lib\valib.icproj", "{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}"
+ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+@@ -16,22 +16,38 @@ Global
+ 		Release|x64 = Release|x64
+ 	EndGlobalSection
+ 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+-		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|Win32.Build.0 = Debug|Win32
+-		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|x64.ActiveCfg = Debug|x64
+-		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|x64.Build.0 = Debug|x64
+-		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Release|Win32.ActiveCfg = Release|Win32
+-		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Release|Win32.Build.0 = Release|Win32
+-		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Release|x64.ActiveCfg = Release|x64
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Debug|Win32.ActiveCfg = Debug|Win32
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Debug|Win32.Build.0 = Debug|Win32
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Debug|x64.ActiveCfg = Debug|x64
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Debug|x64.Build.0 = Debug|x64
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Release|Win32.ActiveCfg = Release|Win32
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Release|Win32.Build.0 = Release|Win32
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Release|x64.ActiveCfg = Release|x64
++		{EB870031-881E-455A-A1E2-5FD222F92D61}.Release|x64.Build.0 = Release|x64
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Debug|Win32.ActiveCfg = Debug|Win32
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Debug|Win32.Build.0 = Debug|Win32
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Debug|x64.ActiveCfg = Debug|x64
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Debug|x64.Build.0 = Debug|x64
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Release|Win32.ActiveCfg = Release|Win32
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Release|Win32.Build.0 = Release|Win32
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Release|x64.ActiveCfg = Release|x64
++		{C9AE46F3-AA5D-421B-99DF-3BBA26AEF6B1}.Release|x64.Build.0 = Release|x64
+ 		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Release|x64.Build.0 = Release|x64
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|Win32.Build.0 = Debug|Win32
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|x64.ActiveCfg = Debug|x64
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|x64.Build.0 = Debug|x64
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Release|Win32.ActiveCfg = Release|Win32
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Release|Win32.Build.0 = Release|Win32
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Release|x64.ActiveCfg = Release|x64
++		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Release|x64.ActiveCfg = Release|x64
++		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Release|Win32.Build.0 = Release|Win32
++		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Release|Win32.ActiveCfg = Release|Win32
++		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|x64.Build.0 = Debug|x64
++		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|x64.ActiveCfg = Debug|x64
++		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|Win32.Build.0 = Debug|Win32
++		{871889DF-6EF7-461F-AC1B-7DA682CB79A0}.Debug|Win32.ActiveCfg = Debug|Win32
+ 		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Release|x64.Build.0 = Release|x64
++		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Release|x64.ActiveCfg = Release|x64
++		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Release|Win32.Build.0 = Release|Win32
++		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Release|Win32.ActiveCfg = Release|Win32
++		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|x64.Build.0 = Debug|x64
++		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|x64.ActiveCfg = Debug|x64
++		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|Win32.Build.0 = Debug|Win32
++		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}.Debug|Win32.ActiveCfg = Debug|Win32
+ 	EndGlobalSection
+ 	GlobalSection(SolutionProperties) = preSolution
+ 		HideSolutionNode = FALSE
+diff --git a/tools/valdec.vcproj b/tools/valdec.vcproj
+index d6a6b98..4d3056b 100644
+--- a/tools/valdec.vcproj
++++ b/tools/valdec.vcproj
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="windows-1251"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="9.00"
++	Version="9,00"
+ 	Name="valdec"
+ 	ProjectGUID="{871889DF-6EF7-461F-AC1B-7DA682CB79A0}"
+ 	RootNamespace="valdec"
+@@ -93,12 +93,11 @@
+ 			/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
+-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+-			IntermediateDirectory="$(ConfigurationName)\$(ProjectName)"
++			Name="Debug|x64"
++			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
++			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)\$(ProjectName)"
+ 			ConfigurationType="1"
+ 			CharacterSet="1"
+-			WholeProgramOptimization="1"
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
+@@ -114,15 +113,16 @@
+ 			/>
+ 			<Tool
+ 				Name="VCMIDLTool"
++				TargetEnvironment="3"
+ 			/>
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+-				Optimization="2"
+-				EnableIntrinsicFunctions="true"
++				Optimization="0"
+ 				AdditionalIncludeDirectories="..\valib\valib"
+-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+-				RuntimeLibrary="0"
+-				EnableFunctionLevelLinking="true"
++				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
++				MinimalRebuild="true"
++				BasicRuntimeChecks="3"
++				RuntimeLibrary="1"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				DebugInformationFormat="3"
+@@ -139,12 +139,10 @@
+ 			<Tool
+ 				Name="VCLinkerTool"
+ 				AdditionalDependencies="dsound.lib"
+-				LinkIncremental="1"
++				LinkIncremental="2"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
+-				OptimizeReferences="2"
+-				EnableCOMDATFolding="2"
+-				TargetMachine="1"
++				TargetMachine="17"
+ 			/>
+ 			<Tool
+ 				Name="VCALinkTool"
+@@ -169,11 +167,12 @@
+ 			/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Debug|x64"
+-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)\$(ProjectName)"
++			Name="Release|Win32"
++			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
++			IntermediateDirectory="$(ConfigurationName)\$(ProjectName)"
+ 			ConfigurationType="1"
+ 			CharacterSet="1"
++			WholeProgramOptimization="1"
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
+@@ -189,19 +188,21 @@
+ 			/>
+ 			<Tool
+ 				Name="VCMIDLTool"
+-				TargetEnvironment="3"
+ 			/>
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+-				Optimization="0"
++				Optimization="2"
++				InlineFunctionExpansion="2"
++				EnableIntrinsicFunctions="true"
++				FavorSizeOrSpeed="1"
+ 				AdditionalIncludeDirectories="..\valib\valib"
+-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+-				MinimalRebuild="true"
+-				BasicRuntimeChecks="3"
+-				RuntimeLibrary="1"
++				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				RuntimeLibrary="0"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+-				DebugInformationFormat="3"
++				DebugInformationFormat="0"
+ 			/>
+ 			<Tool
+ 				Name="VCManagedResourceCompilerTool"
+@@ -214,11 +215,13 @@
+ 			/>
+ 			<Tool
+ 				Name="VCLinkerTool"
+-				AdditionalDependencies="dsound.lib"
+-				LinkIncremental="2"
++				AdditionalDependencies="LIBIOMP5MT.lib"
++				LinkIncremental="1"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
+-				TargetMachine="17"
++				OptimizeReferences="2"
++				EnableCOMDATFolding="2"
++				TargetMachine="1"
+ 			/>
+ 			<Tool
+ 				Name="VCALinkTool"
+@@ -324,6 +327,10 @@
+ 	</References>
+ 	<Files>
+ 		<File
++			RelativePath=".\unicode_support.cpp"
++			>
++		</File>
++		<File
+ 			RelativePath=".\valdec.cpp"
+ 			>
+ 		</File>
+diff --git a/valib/lib/valib.vcproj b/valib/lib/valib.vcproj
+index a30826e..3b04d9f 100644
+--- a/valib/lib/valib.vcproj
++++ b/valib/lib/valib.vcproj
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="windows-1251"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="9.00"
++	Version="9,00"
+ 	Name="valib"
+ 	ProjectGUID="{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}"
+ 	RootNamespace="valib"
+@@ -164,12 +164,15 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				Optimization="2"
++				InlineFunctionExpansion="2"
+ 				EnableIntrinsicFunctions="true"
++				FavorSizeOrSpeed="1"
+ 				PreprocessorDefinitions="NDEBUG"
+ 				RuntimeLibrary="0"
+ 				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				WarningLevel="3"
+-				DebugInformationFormat="3"
++				DebugInformationFormat="0"
+ 			/>
+ 			<Tool
+ 				Name="VCManagedResourceCompilerTool"
+@@ -939,6 +942,14 @@
+ 			<File
+ 				RelativePath="..\valib\sink\sink_dshow.cpp"
+ 				>
++				<FileConfiguration
++					Name="Release|Win32"
++					ExcludedFromBuild="true"
++					>
++					<Tool
++						Name="VCCLCompilerTool"
++					/>
++				</FileConfiguration>
+ 			</File>
+ 			<File
+ 				RelativePath="..\valib\sink\sink_dshow.h"
+@@ -957,6 +968,10 @@
+ 				>
+ 			</File>
+ 			<File
++				RelativePath="..\valib\sink\sink_stdout.h"
++				>
++			</File>
++			<File
+ 				RelativePath="..\valib\sink\sink_wav.cpp"
+ 				>
+ 			</File>
+diff --git a/valib/valib/auto_file.cpp b/valib/valib/auto_file.cpp
+index 235ad1d..8d99c91 100644
+--- a/valib/valib/auto_file.cpp
++++ b/valib/valib/auto_file.cpp
+@@ -1,5 +1,6 @@
+ #include <limits.h>
+ #include "auto_file.h"
++#include "..\..\tools\unicode_support.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1400)
+ 
+@@ -40,7 +41,7 @@ AutoFile::open(const char *filename, const char *mode)
+ {
+   if (f) close();
+   filesize = max_size;
+-  f = fopen(filename, mode);
++  f = fopen_utf8(filename, mode);
+   if (f)
+   {
+     if (portable_seek(f, 0, SEEK_END) == 0)
+diff --git a/valib/valib/sink/sink_dsound.cpp b/valib/valib/sink/sink_dsound.cpp
+index 542d31f..c5aa132 100644
+--- a/valib/valib/sink/sink_dsound.cpp
++++ b/valib/valib/sink/sink_dsound.cpp
+@@ -47,8 +47,8 @@ DSoundSink::open_dsound(HWND _hwnd, int _buf_size_ms, int _preload_ms, LPCGUID _
+ 
+   // Open DirectSound
+ 
+-  if FAILED(DirectSoundCreate(_device, &ds, 0))
+-    return false;
++  //if FAILED(DirectSoundCreate(_device, &ds, 0))
++  return false;
+ 
+   if (!_hwnd) _hwnd = GetForegroundWindow();
+   if (!_hwnd) _hwnd = GetDesktopWindow();
+diff --git a/valib/valib/sink/sink_stdout.h b/valib/valib/sink/sink_stdout.h
+new file mode 100644
+index 0000000..3112531
+--- /dev/null
++++ b/valib/valib/sink/sink_stdout.h
+@@ -0,0 +1,93 @@
++/*
++  RAW file output audio renderer
++*/
++
++#ifndef VALIB_SINK_STDOUT_H
++#define VALIB_SINK_STDOUT_H
++
++#include "filter.h"
++#include "auto_file.h"
++
++class StdOutSink : public Sink
++{
++protected:
++  Speakers spk;
++  HANDLE h;
++  //AutoFile f;
++
++public:
++  StdOutSink():
++  h(GetStdHandle(STD_OUTPUT_HANDLE))
++  {}
++
++  StdOutSink(const char *_filename): 
++  h(GetStdHandle(STD_OUTPUT_HANDLE))
++  {}
++
++  StdOutSink(FILE *_f): 
++  h(GetStdHandle(STD_OUTPUT_HANDLE))
++  {}
++
++  /////////////////////////////////////////////////////////
++  // RAWSink interface
++
++  bool open(const char *_filename)
++  {
++    return true; //f.open(_filename, "wb");
++  }
++
++  bool open(FILE *_f)
++  {
++    return true; //f.open(_f);
++  }
++
++  void close()
++  {
++    //f.close();
++    spk = spk_unknown;
++  }
++
++  bool is_open() const
++  {
++    return ((h != INVALID_HANDLE_VALUE) && (h != 0)); //f.is_open();
++  }
++
++  /////////////////////////////////////////////////////////
++  // Sink interface
++
++  virtual bool query_input(Speakers _spk) const  
++  { 
++    // cannot write linear format
++    return /*f.is_open() &&*/ _spk.format != FORMAT_LINEAR;
++  }
++
++  virtual bool set_input(Speakers _spk)
++  { 
++    if (!query_input(_spk))
++      return false;
++
++    spk = _spk;
++    return true;
++  }
++
++  virtual Speakers get_input() const
++  {
++    return spk;
++  }
++
++  // data write
++  virtual bool process(const Chunk *_chunk)               
++  {
++    if (_chunk->is_dummy())
++      return true;
++
++    if (spk != _chunk->spk)
++      if (!set_input(_chunk->spk))
++        return false;
++
++	DWORD bytesWritten = 0;
++    return WriteFile(h, _chunk->rawdata, _chunk->size, &bytesWritten, NULL); //f.write(_chunk->rawdata, _chunk->size) == _chunk->size;
++  }
++};
++
++#endif

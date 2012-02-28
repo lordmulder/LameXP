@@ -1,0 +1,3440 @@
+ .gitignore                                |    7 +
+ Makefile.am                               |   26 +-
+ compiler_info.h                           |   61 ++++
+ config_msvc.h                             |  101 +++++++
+ configure.ac                              |   20 +-
+ dcaenc.c                                  |   88 ++++--
+ dcaenc.h                                  |   24 ++-
+ delphi/DcaEncAPI.pas                      |   44 +++
+ delphi/DcaEncTest.cfg                     |   38 +++
+ delphi/DcaEncTest.dof                     |  136 +++++++++
+ delphi/DcaEncTest.dpr                     |   15 +
+ delphi/DcaEncTest.res                     |  Bin 0 -> 876 bytes
+ delphi/DcaEncTestForm.dfm                 |   35 +++
+ delphi/DcaEncTestForm.pas                 |  111 +++++++
+ dllmain.cpp                               |   19 ++
+ main.c                                    |  371 +++++++++++++++++++++--
+ math_tables.h                             |   10 +-
+ unicode_support.c                         |  225 ++++++++++++++
+ unicode_support.h                         |   51 ++++
+ vc_solution/dcadll_vc2010.vcxproj         |  126 ++++++++
+ vc_solution/dcadll_vc2010.vcxproj.filters |   48 +++
+ vc_solution/dcadll_vc2010.vcxproj.user    |    3 +
+ vc_solution/dcaenc_vc2010.sln             |   59 ++++
+ vc_solution/dcaenc_vc2010.vcxproj         |  206 +++++++++++++
+ vc_solution/dcaenc_vc2010.vcxproj.filters |   48 +++
+ vc_solution/dcaenc_vc2010.vcxproj.user    |    3 +
+ vc_solution/dcalib_vc2010.vcxproj         |  114 +++++++
+ vc_solution/dcalib_vc2010.vcxproj.filters |   45 +++
+ vc_solution/dcalib_vc2010.vcxproj.user    |    3 +
+ vc_solution/gentables.vcxproj             |  125 ++++++++
+ vc_solution/gentables.vcxproj.filters     |   33 ++
+ vc_solution/lib/EncodePointer.lib         |  Bin 0 -> 1058 bytes
+ vc_solution/lib/msvcrt_vc6.lib            |  Bin 0 -> 235942 bytes
+ wavfile.c                                 |  467 +++++++++++++++++++----------
+ wavfile.h                                 |    6 +-
+ xgetopt.c                                 |  206 +++++++++++++
+ xgetopt.h                                 |   29 ++
+ 37 files changed, 2644 insertions(+), 259 deletions(-)
+
+diff --git a/.gitignore b/.gitignore
+index 2f63d9a..de6fa6a 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -29,3 +29,10 @@ libtool
+ ltmain.sh
+ missing
+ stamp-h1
++vc_solution/ipch/
++vc_solution/Win32/
++vc_solution/x64/
++vc_solution/*.opensdf
++vc_solution/*.sdf
++vc_solution/*.vcxproj.user
++vc_solution/*.suo
+diff --git a/Makefile.am b/Makefile.am
+index f89fe04..7e21572 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -14,19 +14,19 @@ nodist_libdcaenc_la_SOURCES = math_tables.c
+ libdcaenc_la_LDFLAGS = -version-info 0:0:0 \
+     -export-symbols $(top_srcdir)/dcaenc.sym
+ 
+-if HAVE_ALSA
+-plugin_LTLIBRARIES = libasound_module_pcm_dca.la
+-plugindir = $(libdir)/alsa-lib
+-
+-libasound_module_pcm_dca_la_SOURCES = alsaplugin.c dcaenc.h
+-libasound_module_pcm_dca_la_LIBADD = libdcaenc.la @ALSA_LIBS@
+-libasound_module_pcm_dca_la_LDFLAGS = -no-undefined -avoid-version
+-
+-alsaconfdir = $(datadir)/alsa/pcm
+-alsaconf_DATA = dca.conf
+-endif
+-
+-dcaenc_SOURCES = main.c wavfile.c dcaenc.h wavfile.h
++#if HAVE_ALSA
++#plugin_LTLIBRARIES = libasound_module_pcm_dca.la
++#plugindir = $(libdir)/alsa-lib
++#
++#libasound_module_pcm_dca_la_SOURCES = alsaplugin.c dcaenc.h
++#libasound_module_pcm_dca_la_LIBADD = libdcaenc.la @ALSA_LIBS@
++#libasound_module_pcm_dca_la_LDFLAGS = -no-undefined -avoid-version
++#
++#alsaconfdir = $(datadir)/alsa/pcm
++#alsaconf_DATA = dca.conf
++#endif
++
++dcaenc_SOURCES = main.c wavfile.c unicode_support.c xgetopt.c dcaenc.h wavfile.h unicode_support.h xgetopt.h
+ dcaenc_LDADD = libdcaenc.la
+ 
+ gentables_SOURCES = gentables.c \
+diff --git a/compiler_info.h b/compiler_info.h
+new file mode 100644
+index 0000000..01b1cc9
+--- /dev/null
++++ b/compiler_info.h
+@@ -0,0 +1,61 @@
++/* 
++ * This file is part of dcaenc.
++ *
++ * Copyright (c) 2008-2011 Alexander E. Patrakov <patrakov@gmail.com>
++ *
++ * dcaenc is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * dcaenc is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with dcaenc; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ */
++
++#ifndef COMPILER_INFO_H
++#define COMPILER_INFO_H
++
++#ifndef _T
++#define __T(X) #X
++#define _T(X) __T(X)
++#endif
++
++#if defined(__INTEL_COMPILER)
++	#if (__INTEL_COMPILER >= 1200)
++		#define __COMPILER__ "ICL 12.x"
++	#elif (__INTEL_COMPILER >= 1100)
++		#define __COMPILER__ = "ICL 11.x"
++	#elif (__INTEL_COMPILER >= 1000)
++		#define __COMPILER__ = "ICL 10.x"
++	#else
++		#define __COMPILER__ "ICL Unknown"
++	#endif
++#elif defined(_MSC_VER)
++	#if (_MSC_VER == 1600)
++		#if (_MSC_FULL_VER >= 160040219)
++			#define __COMPILER__ "MSVC 2010-SP1"
++		#else
++			#define __COMPILER__ "MSVC 2010"
++		#endif
++	#elif (_MSC_VER == 1500)
++		#if (_MSC_FULL_VER >= 150030729)
++			#define __COMPILER__ "MSVC 2008-SP1"
++		#else
++			#define __COMPILER__ "MSVC 2008"
++		#endif
++	#else
++		#define __COMPILER__ "MSVC Unknown"
++	#endif
++#elif defined(__GNUC__)
++	#define __COMPILER__ "GNU GCC " _T(__GNUC__) "." _T(__GNUC_MINOR__)
++#else
++	#define __COMPILER__ "Unknown"
++#endif
++
++#endif
+diff --git a/config_msvc.h b/config_msvc.h
+new file mode 100644
+index 0000000..d72ce68
+--- /dev/null
++++ b/config_msvc.h
+@@ -0,0 +1,101 @@
++/* config.h.  Generated from config.h.in by configure.  */
++/* config.h.in.  Generated from configure.ac by autoheader.  */
++
++/* Define to 1 if you have the <dlfcn.h> header file. */
++/* #undef HAVE_DLFCN_H */
++
++/* Define to 1 if you have the <inttypes.h> header file. */
++/* #undef HAVE_INTTYPES_H */
++
++/* Define to 1 if you have the `asound' library (-lasound). */
++/* #undef HAVE_LIBASOUND */
++
++/* Define to 1 if you have the <memory.h> header file. */
++#define HAVE_MEMORY_H 1
++
++/* Define to 1 if you have the <stdint.h> header file. */
++#define HAVE_STDINT_H 1
++
++/* Define to 1 if you have the <stdlib.h> header file. */
++#define HAVE_STDLIB_H 1
++
++/* Define to 1 if you have the <strings.h> header file. */
++/* #undef HAVE_STRINGS_H */
++
++/* Define to 1 if you have the <string.h> header file. */
++#define HAVE_STRING_H 1
++
++/* Define to 1 if you have the <sys/stat.h> header file. */
++#define HAVE_SYS_STAT_H 1
++
++/* Define to 1 if you have the <sys/types.h> header file. */
++#define HAVE_SYS_TYPES_H 1
++
++/* Define to 1 if you have the <unistd.h> header file. */
++/* #undef HAVE_UNISTD_H */
++
++/* Define to the sub-directory in which libtool stores uninstalled libraries.
++   */
++#define LT_OBJDIR ".libs/"
++
++/* Name of package */
++#define PACKAGE "dcaenc"
++
++/* Define to the address where bug reports for this package should be sent. */
++#define PACKAGE_BUGREPORT "patrakov@gmail.com"
++
++/* Define to the full name of this package. */
++#define PACKAGE_NAME "dcaenc"
++
++/* Define to the full name and version of this package. */
++#define PACKAGE_STRING "dcaenc 1"
++
++/* Define to the one symbol short name of this package. */
++#define PACKAGE_TARNAME "dcaenc"
++
++/* Define to the home page for this package. */
++#define PACKAGE_URL "http://aepatrakov.narod.ru/dcaenc/"
++
++/* Define to the version of this package. */
++#define PACKAGE_VERSION "1"
++
++/* Define to 1 if you have the ANSI C header files. */
++#define STDC_HEADERS 1
++
++/* Version number of package */
++#define VERSION "1"
++
++/* Define for Solaris 2.5.1 so the uint32_t typedef from <sys/synch.h>,
++   <pthread.h>, or <semaphore.h> is not used. If the typedef were allowed, the
++   #define below would cause a syntax error. */
++/* #undef _UINT32_T */
++
++/* Define for Solaris 2.5.1 so the uint8_t typedef from <sys/synch.h>,
++   <pthread.h>, or <semaphore.h> is not used. If the typedef were allowed, the
++   #define below would cause a syntax error. */
++/* #undef _UINT8_T */
++
++/* Define to `__inline__' or `__inline' if that's what the C compiler
++   calls it, or to nothing if 'inline' is not supported under any name.  */
++/* #ifndef __cplusplus */
++#define inline __inline
++/* #endif */
++
++/* Define to the type of a signed integer type of width exactly 32 bits if
++   such a type exists and the standard includes do not define it. */
++/* #undef int32_t */
++
++/* Define to the type of a signed integer type of width exactly 64 bits if
++   such a type exists and the standard includes do not define it. */
++/* #undef int64_t */
++
++/* Define to `unsigned int' if <sys/types.h> does not define. */
++/* #undef size_t */
++
++/* Define to the type of an unsigned integer type of width exactly 32 bits if
++   such a type exists and the standard includes do not define it. */
++/* #undef uint32_t */
++
++/* Define to the type of an unsigned integer type of width exactly 8 bits if
++   such a type exists and the standard includes do not define it. */
++/* #undef uint8_t */
+diff --git a/configure.ac b/configure.ac
+index db25f0a..78c0c07 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -13,7 +13,7 @@ LT_INIT([disable-static])
+ 
+ # Checks for programs.
+ AC_PROG_CC
+-PKG_PROG_PKG_CONFIG 
++#PKG_PROG_PKG_CONFIG 
+ 
+ # Checks for libraries.
+ AC_ARG_ENABLE([alsa],
+@@ -21,15 +21,15 @@ AC_ARG_ENABLE([alsa],
+ 
+ ac_save_LIBS="$LIBS"
+ 
+-if test "x$enable_alsa" != "xno"; then
+-	PKG_CHECK_MODULES([ALSA], [alsa >= 1.0.11], [HAVE_ALSA=yes], [HAVE_ALSA=no])
+-	AC_CHECK_LIB(asound, snd_pcm_extplug_create,,
+-             [HAVE_ALSA=no], -ldl)
+-	if test "x$enable_alsa" = "xyes" -a "x$HAVE_ALSA" = "xno"; then
+-		AC_MSG_ERROR([ALSA libraries not found])
+-	fi
+-fi
+-AM_CONDITIONAL(HAVE_ALSA, test "x$enable_alsa" != "xno" -a "x$HAVE_ALSA" = "xyes")
++#if test "x$enable_alsa" != "xno"; then
++#	PKG_CHECK_MODULES([ALSA], [alsa >= 1.0.11], [HAVE_ALSA=yes], [HAVE_ALSA=no])
++#	AC_CHECK_LIB(asound, snd_pcm_extplug_create,,
++#             [HAVE_ALSA=no], -ldl)
++#	if test "x$enable_alsa" = "xyes" -a "x$HAVE_ALSA" = "xno"; then
++#		AC_MSG_ERROR([ALSA libraries not found])
++#	fi
++#fi
++#AM_CONDITIONAL(HAVE_ALSA, test "x$enable_alsa" != "xno" -a "x$HAVE_ALSA" = "xyes")
+ LIBS="$ac_save_LIBS"
+ 
+ # Checks for header files.
+diff --git a/dcaenc.c b/dcaenc.c
+index 5e762ce..bf0eacf 100644
+--- a/dcaenc.c
++++ b/dcaenc.c
+@@ -20,6 +20,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <assert.h>
++#include "config.h"
+ #include "dcaenc.h"
+ #include "dcaenc_private.h"
+ #include "int_data.h"
+@@ -30,10 +31,9 @@
+ #define div_round_up(a, b) (((a) + (b) - 1) / (b))
+ #define round_up(a, b) ((((a) + (b) - 1) / (b)) * (b))
+ 
+-dcaenc_context dcaenc_create(int sample_rate, int channel_config,
+-                             int approx_bitrate, int flags)
++dcaenc_context dcaenc_create(int sample_rate, int channel_config, int approx_bitrate, int flags)
+ {
+-	int i, frame_bits, bit_step, fir, useful_bitrate;
++	int i, frame_bits, bit_step, fir, useful_bitrate, min_frame_bits;
+ 	dcaenc_context result;
+ 
+ 	i = 0;
+@@ -60,7 +60,7 @@ dcaenc_context dcaenc_create(int sample_rate, int channel_config,
+ 	/* Round frame_bits up to the next permitted value */
+ 	frame_bits = round_up(frame_bits, bit_step);
+ 	
+-	int min_frame_bits = 132 + (493 + 28 * 32) * channels_table[channel_config];
++	min_frame_bits = 132 + (493 + 28 * 32) * channels_table[channel_config];
+ 	if (flags & DCAENC_FLAG_LFE)
+ 		min_frame_bits += 72;
+ 
+@@ -108,19 +108,19 @@ int dcaenc_output_size(dcaenc_context c)
+ 	return c->frame_bits / ((c->flags & DCAENC_FLAG_28BIT) ? 7 : 8);
+ }
+ 
+-static inline const int32_t *pcm_sample(dcaenc_context c,
+-                                        const int32_t *container,
+-                                        int sample, int channel)
++inline static const int32_t *pcm_sample(dcaenc_context c,
++										const int32_t *container,
++										int sample, int channel)
+ {
+ 	return &container[sample * c->channels + channel];
+ }
+ 
+-static inline int32_t half32(int32_t a)
++inline static int32_t half32(int32_t a)
+ {
+ 	return (a + 1) >> 1;
+ }
+ 
+-static inline int32_t mul32(int32_t a, int32_t b)
++inline static int32_t mul32(int32_t a, int32_t b)
+ {
+ 	int64_t r = (int64_t)a * b + 0x80000000ULL;
+ 	return r >> 32;
+@@ -148,7 +148,7 @@ static void dcaenc_subband_transform(dcaenc_context c, const int32_t *input)
+ 				accum[i] = 0;
+ 
+ 			for (k = 0, i = hist_start, j = 0;
+-			     i < 512; k = (k + 1) & 63, i++, j++)
++				 i < 512; k = (k + 1) & 63, i++, j++)
+ 				accum[k] += mul32(hist[i], c->band_interpolation[j]);
+ 			for (i = 0; i < hist_start; k = (k + 1) & 63, i++, j++)
+ 				accum[k] += mul32(hist[i], c->band_interpolation[j]);
+@@ -204,7 +204,7 @@ static void dcaenc_lfe_downsample(dcaenc_context c, const int32_t *input)
+ 		/* Copy in 64 new samples from input */
+ 		for (i = 0; i < 64; i++)
+ 			hist[i + hist_start] = *pcm_sample(c, input,
+-			                                   lfes * 64 + i, c->channels - 1);
++											   lfes * 64 + i, c->channels - 1);
+ 
+ 		hist_start = (hist_start + 64) & 511;
+ 	}
+@@ -313,7 +313,7 @@ static int32_t add_cb(int32_t a, int32_t b)
+ 
+ /* accepts anything, out_cb[i] can only grow */
+ static void adjust_jnd(int samplerate_index,
+-                       const int32_t in[512], int32_t out_cb[256])
++					   const int32_t in[512], int32_t out_cb[256])
+ {
+ 	int i, j;
+ 	int32_t power[256];
+@@ -336,7 +336,7 @@ static void adjust_jnd(int samplerate_index,
+ 			denom = add_cb(denom, power[j] + auf[samplerate_index][i][j]);
+ 		for (j = 0; j < 256; j++)
+ 			out_cb_unnorm[j] = add_cb(out_cb_unnorm[j],
+-			                          -denom + auf[samplerate_index][i][j]);
++									  -denom + auf[samplerate_index][i][j]);
+ 	}
+ 
+ 	for (j = 0; j < 256; j++)
+@@ -345,11 +345,11 @@ static void adjust_jnd(int samplerate_index,
+ 
+ 
+ typedef void (*walk_band_t)(dcaenc_context c, int band1, int band2, int f,
+-                            int32_t spectrum1, int32_t spectrum2, int channel,
+-                            int32_t * arg);
++							int32_t spectrum1, int32_t spectrum2, int channel,
++							int32_t * arg);
+ 
+ static void walk_band_low(dcaenc_context c, int band, int channel,
+-                          walk_band_t walk, int32_t * arg)
++						  walk_band_t walk, int32_t * arg)
+ {
+ 	int f;
+ 	if (band == 0) {
+@@ -358,12 +358,12 @@ static void walk_band_low(dcaenc_context c, int band, int channel,
+ 	} else {
+ 		for (f = 0; f < 8; f++)
+ 			walk(c, band, band - 1, 8 * band - 4 + f,
+-			     c->band_spectrum[7 - f], c->band_spectrum[f], channel, arg);
++				 c->band_spectrum[7 - f], c->band_spectrum[f], channel, arg);
+ 	}
+ }
+ 
+ static void walk_band_high(dcaenc_context c, int band, int channel,
+-                           walk_band_t walk, int32_t * arg)
++						   walk_band_t walk, int32_t * arg)
+ {
+ 	int f;
+ 	if (band == 31) {
+@@ -372,12 +372,12 @@ static void walk_band_high(dcaenc_context c, int band, int channel,
+ 	} else {
+ 		for (f = 0; f < 8; f++)
+ 			walk(c, band, band + 1, 8 * band + 4 + f,
+-			     c->band_spectrum[f], c->band_spectrum[7 - f], channel, arg);
++				 c->band_spectrum[f], c->band_spectrum[7 - f], channel, arg);
+ 	}
+ }
+ 
+ static void walk_whole_spectrum(dcaenc_context c, int channel,
+-                                walk_band_t walk, int32_t * arg)
++								walk_band_t walk, int32_t * arg)
+ {
+ 	int band;
+ 	for (band = 0; band < 32; band++)
+@@ -453,10 +453,14 @@ static void dcaenc_find_peaks(dcaenc_context c)
+ }
+ 
+ static const int snr_fudge = 128;
++static const int USED_1ABITS = 1;
++static const int USED_NABITS = 2;
++static const int USED_26ABITS = 4;
+ 
+-static void init_quantization_noise(dcaenc_context c, int noise)
++static int init_quantization_noise(dcaenc_context c, int noise)
+ {
+ 	int ch, band;
++	int ret = 0;
+ 	
+ 	c->consumed_bits = 132 + 493 * c->fullband_channels;
+ 	if (c->flags & DCAENC_FLAG_LFE)
+@@ -472,10 +476,19 @@ static void init_quantization_noise(dcaenc_context c, int noise)
+ 				- c->band_masking_cb[band]
+ 				- noise;
+ 
+-			c->abits[band][ch] = (snr_cb >= 1312) ? 26
+-				: (snr_cb >= 222) ? (8 + mul32(snr_cb - 222, 69000000))
+-				: (snr_cb >= 0) ? (2 + mul32(snr_cb, 106000000))
+-				: 1;
++			if (snr_cb >= 1312) {
++				c->abits[band][ch] = 26;
++				ret |= USED_26ABITS;
++			} else if (snr_cb >= 222) {
++				c->abits[band][ch] = 8 + mul32(snr_cb - 222, 69000000);
++				ret |= USED_NABITS;
++			} else if (snr_cb >= 0) {
++				c->abits[band][ch] = 2 + mul32(snr_cb, 106000000);
++				ret |= USED_NABITS;
++			} else {
++				c->abits[band][ch] = 1;
++				ret |= USED_1ABITS;
++			}
+ 		}
+ 	}
+ 
+@@ -484,36 +497,41 @@ static void init_quantization_noise(dcaenc_context c, int noise)
+ 			c->consumed_bits += bit_consumption[c->abits[band][ch]];
+ 	}
+ 
++	return ret;
+ }
+ 
+ static void dcaenc_assign_bits(dcaenc_context c)
+ {
+ 	/* Find the bounds where the binary search should work */
+-	int low, high;
++	int low, high, down, used_abits;
+ 	init_quantization_noise(c, c->worst_quantization_noise);
+ 	low = high = c->worst_quantization_noise;
++	used_abits = 0;
+ 	if (c->consumed_bits > c->frame_bits) {
+ 		while (c->consumed_bits > c->frame_bits) {
++			assert(("Too low bitrate should have been rejected in dcaenc_create", used_abits != USED_1ABITS));
+ 			low = high;
+ 			high += snr_fudge;
+-			init_quantization_noise(c, high);
++			used_abits = init_quantization_noise(c, high);
+ 		}
+ 	} else {
+ 		while (c->consumed_bits <= c->frame_bits) {
+ 			high = low;
++			if (used_abits == USED_26ABITS)
++				goto out; /* The requested bitrate is too high, pad with zeros */
+ 			low -= snr_fudge;
+-			init_quantization_noise(c, low);
++			used_abits = init_quantization_noise(c, low);
+ 		}
+ 	}
+ 
+ 	/* Now do a binary search between low and high to see what fits */
+-	int down;
+ 	for (down = snr_fudge >> 1; down; down >>= 1) {
+ 		init_quantization_noise(c, high - down);
+ 		if (c->consumed_bits <= c->frame_bits)
+ 			high -= down;
+ 	}
+ 	init_quantization_noise(c, high);
++out:
+ 	c->worst_quantization_noise = high;
+ 	if (high > c->worst_noise_ever)
+ 		c->worst_noise_ever = high;
+@@ -538,8 +556,9 @@ static void bitstream_init(dcaenc_context c, uint8_t *output)
+ 
+ static void bitstream_put(dcaenc_context c, uint32_t bits, int nbits)
+ {
++	int max_bits;
+ 	assert(bits < (1 << nbits));
+-	int max_bits = (c->flags & DCAENC_FLAG_28BIT) ? 28 : 32;
++	max_bits = (c->flags & DCAENC_FLAG_28BIT) ? 28 : 32;
+ 	c->wrote += nbits;
+ 	bits &= ~(0xffffffff << nbits);
+ 	if (nbits + c->wbits >= max_bits) {
+@@ -599,7 +618,7 @@ static int32_t dcaenc_quantize_value(int32_t value, softfloat quant)
+ static int32_t dcaenc_quantize(dcaenc_context c, int sample, int band, int ch)
+ {
+ 	int32_t result = dcaenc_quantize_value(c->subband_samples[sample][band][ch],
+-					       c->quant[band][ch]);
++						   c->quant[band][ch]);
+ 
+ 	assert(result <= (quant_levels[c->abits[band][ch]] - 1) / 2);
+ 	assert(result >= -(quant_levels[c->abits[band][ch]] / 2));
+@@ -608,11 +627,12 @@ static int32_t dcaenc_quantize(dcaenc_context c, int sample, int band, int ch)
+ 
+ static int dcaenc_calc_one_scale(int32_t peak_cb, int abits, softfloat *quant)
+ {
+-	assert(peak_cb <= 0);
+-	assert(peak_cb >= -2047);
+-	int32_t peak = cb_to_level[-peak_cb];
+ 	int our_nscale, try_remove;
++	int32_t peak;
+ 	softfloat our_quant;
++	assert(peak_cb <= 0);
++	assert(peak_cb >= -2047);
++	peak = cb_to_level[-peak_cb];
+ 	our_nscale = 127;
+ 
+ 	for (try_remove = 64; try_remove > 0; try_remove >>= 1) {
+diff --git a/dcaenc.h b/dcaenc.h
+index 17f01f3..f62a58b 100644
+--- a/dcaenc.h
++++ b/dcaenc.h
+@@ -48,11 +48,23 @@ typedef struct dcaenc_context_s *dcaenc_context;
+ #define DCAENC_CHANNELS_4FRONT_4REAR 14
+ #define DCAENC_CHANNELS_5FRONT_3REAR 15
+ 
+-dcaenc_context dcaenc_create(int sample_rate, int channel_config, int approx_bitrate, int flags);
+-int dcaenc_bitrate(dcaenc_context c);
+-int dcaenc_input_size(dcaenc_context c);
+-int dcaenc_output_size(dcaenc_context c);
+-int dcaenc_convert_s32(dcaenc_context c, const int32_t *input, uint8_t *output);
+-int dcaenc_destroy(dcaenc_context c, uint8_t *output);
++#if defined(_MSC_VER) || defined(__INTEL_COMPILER)
++	#if defined(DCADLL_VC2010_EXPORTS)
++		#define MAKE_DLL __declspec(dllexport)
++	#elif defined(DCADLL_VC2010_IMPORTS)
++		#define MAKE_DLL __declspec(dllimport)
++	#else
++		#define MAKE_DLL
++	#endif
++#else
++	#define MAKE_DLL
++#endif
++
++MAKE_DLL dcaenc_context dcaenc_create(int sample_rate, int channel_config, int approx_bitrate, int flags);
++MAKE_DLL int dcaenc_bitrate(dcaenc_context c);
++MAKE_DLL int dcaenc_input_size(dcaenc_context c);
++MAKE_DLL int dcaenc_output_size(dcaenc_context c);
++MAKE_DLL int dcaenc_convert_s32(dcaenc_context c, const int32_t *input, uint8_t *output);
++MAKE_DLL int dcaenc_destroy(dcaenc_context c, uint8_t *output);
+ 
+ #endif
+diff --git a/delphi/DcaEncAPI.pas b/delphi/DcaEncAPI.pas
+new file mode 100644
+index 0000000..7cc0735
+--- /dev/null
++++ b/delphi/DcaEncAPI.pas
+@@ -0,0 +1,44 @@
++unit DcaEncAPI;
++
++interface
++
++uses Windows, SysUtils;
++
++const
++  DCAENC_FLAG_28BIT = 1;
++  DCAENC_FLAG_BIGENDIAN = 2;
++  DCAENC_FLAG_LFE = 4;
++  DCAENC_FLAG_PERFECT_QMF = 8;
++  DCAENC_FLAG_IEC_WRAP = 16;
++
++  DCAENC_CHANNELS_MONO = 0;
++  DCAENC_CHANNELS_DUAL_MONO = 1;
++  DCAENC_CHANNELS_STEREO = 2;
++  DCAENC_CHANNELS_STEREO_SUMDIFF = 3;
++  DCAENC_CHANNELS_STEREO_TOTAL = 4;
++  DCAENC_CHANNELS_3FRONT = 5;
++  DCAENC_CHANNELS_2FRONT_1REAR = 6;
++  DCAENC_CHANNELS_3FRONT_1REAR = 7;
++  DCAENC_CHANNELS_2FRONT_2REAR = 8;
++  DCAENC_CHANNELS_3FRONT_2REAR = 9;
++  DCAENC_CHANNELS_4FRONT_2REAR = 10;
++  DCAENC_CHANNELS_3FRONT_2REAR_1OV = 11;
++  DCAENC_CHANNELS_3FRONT_3REAR = 12;
++  DCAENC_CHANNELS_5FRONT_2REAR = 13;
++  DCAENC_CHANNELS_4FRONT_4REAR = 14;
++  DCAENC_CHANNELS_5FRONT_3REAR = 15;
++
++type
++  TDcaEncContext = Pointer;
++
++function dcaenc_create(sample_rate, channel_config, approx_bitrate, flags: integer): TDcaEncContext; cdecl; external 'dcaenc-0.dll';
++function dcaenc_bitrate(c : TDcaEncContext): integer; cdecl; external 'dcaenc-0.dll';
++function dcaenc_input_size(c : TDcaEncContext): integer; cdecl; external 'dcaenc-0.dll';
++function dcaenc_output_size(c : TDcaEncContext): integer; cdecl; external 'dcaenc-0.dll';
++function dcaenc_convert_s32(c : TDcaEncContext; input: PLongInt; output: PByte): integer; cdecl; external 'dcaenc-0.dll';
++function dcaenc_destroy(c : TDcaEncContext; output: PByte): integer; cdecl; external 'dcaenc-0.dll';
++
++implementation
++
++end.
++
+diff --git a/delphi/DcaEncTest.cfg b/delphi/DcaEncTest.cfg
+new file mode 100644
+index 0000000..30e6ed7
+--- /dev/null
++++ b/delphi/DcaEncTest.cfg
+@@ -0,0 +1,38 @@
++-$A8
++-$B-
++-$C+
++-$D+
++-$E-
++-$F-
++-$G+
++-$H+
++-$I+
++-$J-
++-$K-
++-$L+
++-$M-
++-$N+
++-$O+
++-$P+
++-$Q-
++-$R-
++-$S-
++-$T-
++-$U-
++-$V+
++-$W-
++-$X+
++-$YD
++-$Z1
++-cg
++-AWinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
++-H+
++-W+
++-M
++-$M16384,1048576
++-K$00400000
++-LE"e:\delphi 7\Projects\Bpl"
++-LN"e:\delphi 7\Projects\Bpl"
++-w-UNSAFE_TYPE
++-w-UNSAFE_CODE
++-w-UNSAFE_CAST
+diff --git a/delphi/DcaEncTest.dof b/delphi/DcaEncTest.dof
+new file mode 100644
+index 0000000..2b75114
+--- /dev/null
++++ b/delphi/DcaEncTest.dof
+@@ -0,0 +1,136 @@
++[FileVersion]
++Version=7.0
++[Compiler]
++A=8
++B=0
++C=1
++D=1
++E=0
++F=0
++G=1
++H=1
++I=1
++J=0
++K=0
++L=1
++M=0
++N=1
++O=1
++P=1
++Q=0
++R=0
++S=0
++T=0
++U=0
++V=1
++W=0
++X=1
++Y=1
++Z=1
++ShowHints=1
++ShowWarnings=1
++UnitAliases=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
++NamespacePrefix=
++SymbolDeprecated=1
++SymbolLibrary=1
++SymbolPlatform=1
++UnitLibrary=1
++UnitPlatform=1
++UnitDeprecated=1
++HResultCompat=1
++HidingMember=1
++HiddenVirtual=1
++Garbage=1
++BoundsError=1
++ZeroNilCompat=1
++StringConstTruncated=1
++ForLoopVarVarPar=1
++TypedConstVarPar=1
++AsgToTypedConst=1
++CaseLabelRange=1
++ForVariable=1
++ConstructingAbstract=1
++ComparisonFalse=1
++ComparisonTrue=1
++ComparingSignedUnsigned=1
++CombiningSignedUnsigned=1
++UnsupportedConstruct=1
++FileOpen=1
++FileOpenUnitSrc=1
++BadGlobalSymbol=1
++DuplicateConstructorDestructor=1
++InvalidDirective=1
++PackageNoLink=1
++PackageThreadVar=1
++ImplicitImport=1
++HPPEMITIgnored=1
++NoRetVal=1
++UseBeforeDef=1
++ForLoopVarUndef=1
++UnitNameMismatch=1
++NoCFGFileFound=1
++MessageDirective=1
++ImplicitVariants=1
++UnicodeToLocale=1
++LocaleToUnicode=1
++ImagebaseMultiple=1
++SuspiciousTypecast=1
++PrivatePropAccessor=1
++UnsafeType=0
++UnsafeCode=0
++UnsafeCast=0
++[Linker]
++MapFile=0
++OutputObjs=0
++ConsoleApp=1
++DebugInfo=0
++RemoteSymbols=0
++MinStackSize=16384
++MaxStackSize=1048576
++ImageBase=4194304
++ExeDescription=
++[Directories]
++OutputDir=
++UnitOutputDir=
++PackageDLLOutputDir=
++PackageDCPOutputDir=
++SearchPath=
++Packages=vcl;rtl;vclx;indy;vclie;xmlrtl;inetdbbde;inet;inetdbxpress;dbrtl;soaprtl;dsnap;VclSmp;dbexpress;vcldb;dbxcds;inetdb;bdertl;vcldbx;adortl;teeui;teedb;tee;ibxpress;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;JclDeveloperTools;Jcl;JclVcl;JclContainers;JvCore;JvSystem;JvStdCtrls;JvAppFrm;JvBands;JvDB;JvDlgs;JvBDE;JvControls;JvCmp;JvCrypt;JvCustom;JvDocking;JvDotNetCtrls;JvGlobus;JvHMI;JvJans;JvManagedThreads;JvMM;JvNet;JvPageComps;JvPascalInterpreter;JvPluginSystem;JvPrintPreview;JvRuntimeDesign;JvTimeFramework;JvWizards;JvXPCtrls
++Conditionals=
++DebugSourceDirs=
++UsePackages=0
++[Parameters]
++RunParams=
++HostApplication=
++Launcher=
++UseLauncher=0
++DebugCWD=
++[Language]
++ActiveLang=
++ProjectLang=
++RootDir=
++[Version Info]
++IncludeVerInfo=0
++AutoIncBuild=0
++MajorVer=1
++MinorVer=0
++Release=0
++Build=0
++Debug=0
++PreRelease=0
++Special=0
++Private=0
++DLL=0
++Locale=1031
++CodePage=1252
++[Version Info Keys]
++CompanyName=
++FileDescription=
++FileVersion=1.0.0.0
++InternalName=
++LegalCopyright=
++LegalTrademarks=
++OriginalFilename=
++ProductName=
++ProductVersion=1.0.0.0
++Comments=
+diff --git a/delphi/DcaEncTest.dpr b/delphi/DcaEncTest.dpr
+new file mode 100644
+index 0000000..613e628
+--- /dev/null
++++ b/delphi/DcaEncTest.dpr
+@@ -0,0 +1,15 @@
++program DcaEncTest;
++
++uses
++  Forms,
++  DcaEncTestForm in 'DcaEncTestForm.pas' {Form1},
++  DcaEncAPI in 'DcaEncAPI.pas';
++
++{$R *.res}
++
++begin
++  Application.Initialize;
++  Application.Title := 'DCA Enc';
++  Application.CreateForm(TForm1, Form1);
++  Application.Run;
++end.
+diff --git a/delphi/DcaEncTest.res b/delphi/DcaEncTest.res
+new file mode 100644
+index 0000000..1e4099b
+Binary files /dev/null and b/delphi/DcaEncTest.res differ
+diff --git a/delphi/DcaEncTestForm.dfm b/delphi/DcaEncTestForm.dfm
+new file mode 100644
+index 0000000..5fb08d1
+--- /dev/null
++++ b/delphi/DcaEncTestForm.dfm
+@@ -0,0 +1,35 @@
++object Form1: TForm1
++  Left = 307
++  Top = 231
++  BorderIcons = [biSystemMenu, biMinimize]
++  BorderStyle = bsDialog
++  Caption = 'DCA Enc Test'
++  ClientHeight = 74
++  ClientWidth = 729
++  Color = clBtnFace
++  Font.Charset = DEFAULT_CHARSET
++  Font.Color = clWindowText
++  Font.Height = -11
++  Font.Name = 'MS Sans Serif'
++  Font.Style = []
++  OldCreateOrder = False
++  OnCloseQuery = FormCloseQuery
++  PixelsPerInch = 96
++  TextHeight = 13
++  object Button1: TButton
++    Left = 8
++    Top = 8
++    Width = 169
++    Height = 25
++    Caption = 'Begin Test'
++    TabOrder = 0
++    OnClick = Button1Click
++  end
++  object ProgressBar1: TProgressBar
++    Left = 8
++    Top = 48
++    Width = 713
++    Height = 17
++    TabOrder = 1
++  end
++end
+diff --git a/delphi/DcaEncTestForm.pas b/delphi/DcaEncTestForm.pas
+new file mode 100644
+index 0000000..ae42a14
+--- /dev/null
++++ b/delphi/DcaEncTestForm.pas
+@@ -0,0 +1,111 @@
++unit DcaEncTestForm;
++
++interface
++
++uses
++  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
++  Dialogs, StdCtrls, DcaEncAPI, ComCtrls;
++
++type
++  TForm1 = class(TForm)
++    Button1: TButton;
++    ProgressBar1: TProgressBar;
++    procedure Button1Click(Sender: TObject);
++    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
++  private
++    { Private-Deklarationen }
++  public
++    { Public-Deklarationen }
++  end;
++
++var
++  Form1: TForm1;
++
++implementation
++
++{$R *.dfm}
++
++procedure TForm1.Button1Click(Sender: TObject);
++var
++  Context: TDcaEncContext;
++  InputBuffer: array of LongInt;
++  OutputBuffer: array of Byte;
++  SamplesInInput: Integer;
++  MaxBytesInOutput: Integer;
++  BytesReturned: Cardinal;
++  BytesWritten: Cardinal;
++  i: Integer;
++  h: THandle;
++const
++  ChannelsInInput: Integer = 2;
++  EncodeSteps: Integer = 10240;
++begin
++  Button1.Enabled := False;
++  ProgressBar1.Position := 0;
++  Application.ProcessMessages;
++
++  //Create DCA Enc context
++  Context := dcaenc_create(44100, DCAENC_CHANNELS_STEREO, 768000, DCAENC_FLAG_BIGENDIAN);
++
++  //Context created successfully?
++  if(Context = nil) then
++  begin
++    ShowMessage('Failed to create context!');
++    Exit;
++  end;
++
++  //Detect input/output size
++  SamplesInInput := dcaenc_input_size(Context);
++  MaxBytesInOutput := dcaenc_output_size(Context);
++
++  //Some feedback
++  ShowMessage('SamplesInInput = ' + IntToStr(SamplesInInput));
++  ShowMessage('MaxBytesInOutput = ' + IntToStr(MaxBytesInOutput));
++
++  //Allocate buffers
++  SetLength(InputBuffer, SamplesInInput * ChannelsInInput);
++  SetLength(OutputBuffer, MaxBytesInOutput);
++
++  //ZeroBuffers
++  ZeroMemory(@InputBuffer[0], SizeOf(LongInt) * SamplesInInput * ChannelsInInput);
++  ZeroMemory(@OutputBuffer[0], SizeOf(Byte) * MaxBytesInOutput);
++
++  //Create an output file
++  h := CreateFile('Test.dts', GENERIC_WRITE, FILE_SHARE_READ, nil, CREATE_ALWAYS, 0, 0);
++  if(h = INVALID_HANDLE_VALUE) then
++  begin
++    ShowMessage('Failed to create output file!');
++    Exit;
++  end;
++
++  //Encode loop
++  for i := 0 to EncodeSteps do
++  begin
++    // TODO: Load the next 'SamplesInInput' samples into 'InputBuffer' here!
++    //       Be aware that samples have to be 32-Bit Signed for DCAEnc.
++
++    BytesReturned := dcaenc_convert_s32(Context, @InputBuffer[0], @OutputBuffer[0]);
++    WriteFile(h, OutputBuffer[0], BytesReturned, BytesWritten, nil);
++    ProgressBar1.Position := Round((i / EncodeSteps) * 100.0);
++    Application.ProcessMessages;
++  end;
++
++  //Finalize Encode
++  BytesReturned := dcaenc_destroy(Context, @OutputBuffer[0]);
++  WriteFile(h, OutputBuffer[0], BytesReturned, BytesWritten, nil);
++
++  //Close output
++  CloseHandle(h);
++
++  //We are done!
++  ShowMessage('Encode has completed :-)');
++  Button1.Enabled := True;
++  Application.ProcessMessages;
++end;
++
++procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
++begin
++  CanClose := Button1.Enabled;
++end;
++
++end.
+diff --git a/dllmain.cpp b/dllmain.cpp
+new file mode 100644
+index 0000000..cd5e470
+--- /dev/null
++++ b/dllmain.cpp
+@@ -0,0 +1,19 @@
++// dllmain.cpp : Defines the entry point for the DLL application.
++#include <Windows.h>
++
++BOOL APIENTRY DllMain( HMODULE hModule,
++					   DWORD  ul_reason_for_call,
++					   LPVOID lpReserved
++					 )
++{
++	switch (ul_reason_for_call)
++	{
++	case DLL_PROCESS_ATTACH:
++	case DLL_THREAD_ATTACH:
++	case DLL_THREAD_DETACH:
++	case DLL_PROCESS_DETACH:
++		break;
++	}
++	return TRUE;
++}
++
+diff --git a/main.c b/main.c
+index dcc7034..829fd2b 100644
+--- a/main.c
++++ b/main.c
+@@ -20,62 +20,373 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
++
+ #include "config.h"
++
+ #include "dcaenc.h"
+ #include "wavfile.h"
++#include "unicode_support.h"
++#include "xgetopt.h"
++#include "compiler_info.h"
++
++//extern const int32_t prototype_filter[512];
+ 
+-extern const int32_t prototype_filter[512];
++static char status[4] = {'|','/','-','\\'};
++static const int AUTO_SELECT = -1;
+ 
+-int main(int argc, char *argv[])
++#define BUFFSIZE_SPL 512
++#define BUFFSIZE_CHN 6
++#define BUFFSIZE_OUT 16384
++
++static int dcaenc_main(int argc, char *argv[])
+ {
+ 	dcaenc_context c;
+-	int32_t data[512 * 6];
+-	uint8_t output[16384];
++	int32_t data[BUFFSIZE_SPL * BUFFSIZE_CHN];
++	uint8_t output[BUFFSIZE_OUT];
+ 	wavfile * f;
+ 	FILE * outfile;
++	const char *error_msg;
++	unsigned int samples_total;
++	unsigned int samples_read;
++	unsigned int samples_read_total;
++	unsigned int current_pos;
++	double percent_done;
+ 	int bitrate;
+ 	int wrote;
+-	int samples_total;
++	int counter;
++	int status_idx;
++	int show_ver;
++	int show_help;
++	int ignore_len;
++	int enc_flags;
++	int channel_config;
++	int has_lfe;
++	xgetopt_t opt;
++	char t;
++	char *file_input;
++	char *file_output;
++
++	static const int channel_map[6] = {DCAENC_CHANNELS_MONO, DCAENC_CHANNELS_STEREO, DCAENC_CHANNELS_3FRONT,
++		DCAENC_CHANNELS_2FRONT_2REAR, DCAENC_CHANNELS_3FRONT_2REAR, DCAENC_CHANNELS_3FRONT_2REAR};
++	
++	fprintf(stderr, "%s-%s [%s]\n", PACKAGE_NAME, PACKAGE_VERSION, __DATE__);
++	fprintf(stderr, "Copyright (c) 2008-2011 Alexander E. Patrakov <patrakov@gmail.com>\n\n");
++	fprintf(stderr, "This program is free software: you can redistribute it and/or modify\n");
++	fprintf(stderr, "it under the terms of the GNU General Public License <http://www.gnu.org/>.\n");
++	fprintf(stderr, "Note that this program is distributed with ABSOLUTELY NO WARRANTY.\n\n");
++
++	// ----------------------------
++
++	file_input = NULL;
++	file_output = NULL;
++	bitrate = 0;
++	enc_flags = DCAENC_FLAG_BIGENDIAN;
++	channel_config = AUTO_SELECT;
++	has_lfe = 0;
++	show_ver = 0;
++	ignore_len = 0;
++	show_help = 0;
++
++	memset(&opt, 0, sizeof(xgetopt_t));
++	while((t = xgetopt(argc, argv, "i:o:b:c:fhlev", &opt)) != EOF)
++	{
++		switch(t)
++		{
++		case 'i':
++			file_input = opt.optarg;
++			break;
++		case 'o':
++			file_output = opt.optarg;
++			break;
++		case 'b':
++			bitrate = (int)(atof(opt.optarg) * 1000.0f);
++			if(bitrate > 6144000 || bitrate < 32000)
++			{
++				fprintf(stderr, "Bitrate must be between 32 and 6144 kbps!\n");
++				return 1;
++			}
++			break;
++		case 'c':
++			channel_config = atoi(opt.optarg) - 1;
++			if((channel_config < 0) || (channel_config > 15))
++			{
++				fprintf(stderr, "Bad channel configuration. Must be between 1 and 16!\n");
++				return 1;
++			}
++			break;
++		case 'f':
++			has_lfe = 1;
++			break;
++		case 'h':
++			show_help = 1;
++			break;
++		case 'l':
++			ignore_len = 1;
++			break;
++		case 'e':
++			enc_flags = enc_flags & (~DCAENC_FLAG_BIGENDIAN);
++			break;
++		case 'v':
++			show_ver = 1;
++			break;
++		case '?':
++			fprintf(stderr, "Unknown commandline option or missing argument: %s\n", argv[opt.optind-1]);
++			return 1;
++		}
++	}
+ 	
+-	static const int channel_map[6] = {DCAENC_CHANNELS_MONO, DCAENC_CHANNELS_STEREO, 0,
+-	DCAENC_CHANNELS_2FRONT_2REAR, DCAENC_CHANNELS_3FRONT_2REAR, DCAENC_CHANNELS_3FRONT_2REAR };
+-
+-	if (argc != 4) {
+-	    if (argc == 2 && !strcmp(argv[1], "--version")) {
+-	        printf(PACKAGE_NAME "-" PACKAGE_VERSION "\n");
+-		printf(PACKAGE_URL "\n");
+-		return 0;
+-	    } else {
+-	        printf("Usage: dcaenc input.wav output.dts bits_per_second\n");
+-	        return 1;
+-	    }
++	// ----------------------------
++
++	if(!file_input || !file_output || bitrate < 1 || show_ver || show_help)
++	{
++		if(show_ver)
++		{
++			fprintf(stderr, PACKAGE_NAME "-" PACKAGE_VERSION "\n");
++			fprintf(stderr, "Compiled on " __DATE__ " at " __TIME__ " using " __COMPILER__ ".\n");
++			fprintf(stderr, PACKAGE_URL "\n");
++			return 0;
++		}
++		else if(show_help)
++		{
++			fprintf(stderr, "Usage:\n  dcaenc -i <input.wav> -o <output.dts> -b <bitrate_kbps>\n\n");
++			fprintf(stderr, "Optional:\n");
++			fprintf(stderr, "  -l  Ignore input length, can be useful when reading from stdin\n");
++			fprintf(stderr, "  -e  Switch output endianess to Little Endian (default is: Big Endian)\n");
++			fprintf(stderr, "  -h  Print the help screen that your are looking at right now\n");
++			fprintf(stderr, "  -c  Overwrite the channel configuration (default is: Auto Selection)\n");
++			fprintf(stderr, "  -f  Add an additional LFE channel (default: used for 6ch input)\n");
++			fprintf(stderr, "  -v  Show version info\n\n");
++			fprintf(stderr, "Remarks:\n");
++			fprintf(stderr, "  * Input or output file name can be \"-\" for stdin/stdout.\n");
++			fprintf(stderr, "  * The bitrate is specified in kilobits per second and may be rounded up.\n");
++			fprintf(stderr, "      - Use Float value for bitrates that are not a multiple of 1 kbps.\n");
++			fprintf(stderr, "  * Supported input sample rates:\n");
++			fprintf(stderr, "      - 32000\n");
++			fprintf(stderr, "      - 44100\n");
++			fprintf(stderr, "      - 48000\n");
++			fprintf(stderr, "      - or those divided by 2 or 4\n");
++			fprintf(stderr, "  * Supported channel modes:\n");
++			fprintf(stderr, "      -  1: MONO\n");
++			fprintf(stderr, "      -  2: DUAL_MONO\n");
++			fprintf(stderr, "      -  3: STEREO\n");
++			fprintf(stderr, "      -  4: STEREO_SUMDIFF\n");
++			fprintf(stderr, "      -  5: STEREO_TOTAL\n");
++			fprintf(stderr, "      -  6: 3FRONT\n");
++			fprintf(stderr, "      -  7: 2FRONT_1REAR\n");
++			fprintf(stderr, "      -  8: 3FRONT_1REAR\n");
++			fprintf(stderr, "      -  9: 2FRONT_2REAR\n");
++			fprintf(stderr, "      - 10: 3FRONT_2REAR\n");
++			fprintf(stderr, "      - 11: 4FRONT_2REAR\n");
++			fprintf(stderr, "      - 12: 3FRONT_2REAR_1OV\n");
++			fprintf(stderr, "      - 13: 3FRONT_3REAR\n");
++			fprintf(stderr, "      - 14: 5FRONT_2REAR\n");
++			fprintf(stderr, "      - 15: 4FRONT_4REAR\n");
++			fprintf(stderr, "      - 16: 5FRONT_3REAR\n");
++			fprintf(stderr, "  * Supported bitrates:\n");
++			fprintf(stderr, "      - mono @ 8 kHz:        32-2048 kbps\n");
++			fprintf(stderr, "      - mono @ 12 kHz:       48-3072 kbps\n");
++			fprintf(stderr, "      - mono @ 16 kHz:       48-3842 kbps\n");
++			fprintf(stderr, "      - mono @ 22.05 kHz:    65-3842 kbps\n");
++			fprintf(stderr, "      - mono @ 24 kHz:       71-3842 kbps\n");
++			fprintf(stderr, "      - mono @ 32 kHz:       95-3842 kbps\n");
++			fprintf(stderr, "      - mono @ 44.1 kHz:    130-3842 kbps\n");
++			fprintf(stderr, "      - mono @ 48 kHz:      142-3842 kbps\n");
++			fprintf(stderr, "      - stereo @ 8 kHz:      96-2048 kbps\n");
++			fprintf(stderr, "      - stereo @ 12 kHz:     96-3842 kbps\n");
++			fprintf(stderr, "      - stereo @ 16 kHz:     96-3842 kbps\n");
++			fprintf(stderr, "      - stereo @ 22.05 kHz: 128-3842 kbps\n");
++			fprintf(stderr, "      - stereo @ 24 kHz:    192-3842 kbps\n");
++			fprintf(stderr, "      - stereo @ 32 kHz:    192-3842 kbps\n");
++			fprintf(stderr, "      - stereo @ 44.1 kHz:  256-3842 kbps\n");
++			fprintf(stderr, "      - stereo @ 48 kHz:    271-3842 kbps\n");
++			fprintf(stderr, "      - 5.1 @ 8 kHz:        112-2048 kbps\n");
++			fprintf(stderr, "      - 5.1 @ 12 kHz:       168-3072 kbps\n");
++			fprintf(stderr, "      - 5.1 @ 16 kHz:       224-3842 kbps\n");
++			fprintf(stderr, "      - 5.1 @ 22.05 kHz:    308-3842 kbps\n");
++			fprintf(stderr, "      - 5.1 @ 32 kHz:       447-3842 kbps\n");
++			fprintf(stderr, "      - 5.1 @ 44.1 kHz:     615-3842 kbps\n");
++			fprintf(stderr, "      - 5.1 @ 48 kHz:       670-3842 kbps\n");
++
++			return 0;
++		}
++		else
++		{
++			fprintf(stderr, "Required arguments are missing. Use '-h' option for help!\n");
++			return 1;
++		}
+ 	}
+-	f = wavfile_open(argv[1]);
++
++	fprintf(stderr, "Source: %s\n", file_input);
++	fprintf(stderr, "Output: %s\n", file_output);
++	fprintf(stderr, "KBit/s: %d.%03d\n\n", bitrate / 1000, bitrate % 1000);
++
++	// ----------------------------
++
++	f = wavfile_open(file_input, &error_msg, ignore_len);
+ 	if (!f) {
+-	    printf("Could not open or parse %s\n", argv[1]);
+-	    return 1;
++		fprintf(stderr, "Could not open or parse \"%s\".\n", file_input);
++		fprintf(stderr, "Error: %s!\n", error_msg);
++		return 1;
+ 	}
+-	bitrate = atoi(argv[3]);
+ 	
+ 	samples_total = f->samples_left;
+-	c = dcaenc_create(f->sample_rate, channel_map[f->channels - 1], bitrate, f->channels == 6 ? DCAENC_FLAG_LFE : 0);
++
++	if(channel_config == AUTO_SELECT)
++	{
++		channel_config = channel_map[f->channels - 1];
++		if(f->channels == 6) has_lfe = 1;
++	}
++
++	if(has_lfe)
++	{
++		enc_flags = enc_flags | DCAENC_FLAG_LFE;
++	}
++
++	switch(f->channels - (has_lfe ? 1 : 0))
++	{
++	case 1:
++		if(!(channel_config == DCAENC_CHANNELS_MONO))
++		{
++			fprintf(stderr, "Invalid channel configuration for input audio!\n");
++			return 1;
++		}
++		break;
++	case 2:
++		if(!(channel_config == DCAENC_CHANNELS_DUAL_MONO || channel_config == DCAENC_CHANNELS_STEREO ||
++			channel_config == DCAENC_CHANNELS_STEREO_SUMDIFF || channel_config == DCAENC_CHANNELS_STEREO_TOTAL))
++		{
++			fprintf(stderr, "Invalid channel configuration for input audio!\n");
++			return 1;
++		}
++		break;
++	case 4:
++		if(!(channel_config == DCAENC_CHANNELS_3FRONT_1REAR || channel_config == DCAENC_CHANNELS_2FRONT_2REAR))
++		{
++			fprintf(stderr, "Invalid channel configuration for input audio!\n");
++			return 1;
++		}
++		break;
++	case 5:
++		if(!(channel_config == DCAENC_CHANNELS_3FRONT_2REAR))
++		{
++			fprintf(stderr, "Invalid channel configuration for input audio!\n");
++			return 1;
++		}
++		break;
++	case 6:
++		if(!(channel_config == DCAENC_CHANNELS_3FRONT_3REAR || channel_config == DCAENC_CHANNELS_4FRONT_2REAR ||
++			 channel_config == DCAENC_CHANNELS_3FRONT_2REAR_1OV))
++		{
++			fprintf(stderr, "Invalid channel configuration for input audio!\n");
++			return 1;
++		}
++		break;
++	}
++
++	// ----------------------------
++
++	c = dcaenc_create(f->sample_rate, channel_config, bitrate, enc_flags);
+ 	
+ 	if (!c) {
+-	    printf("Wrong bitrate or sample rate\n");
+-	    return 1;
++		fprintf(stderr, "Insufficient bitrate or unsupported sample rate!\n");
++		return 1;
++	}
++	
++	if((((size_t)(dcaenc_output_size(c))) > BUFFSIZE_OUT) || (((size_t)(dcaenc_input_size(c))) > BUFFSIZE_SPL))
++	{
++		fprintf(stderr, "Internal error, buffers are too small!\n", file_output);
++		return 1;
+ 	}
+-	outfile = fopen(argv[2], "wb");
+-	if (!outfile) {
+-	    printf("Could not open %s\n", argv[2]);
+-	    return 1;
++	
++	outfile = strcmp(file_output, "-") ? fopen_utf8(file_output, "wb") : stdout;
++	if(!outfile) {
++		fprintf(stderr, "Could not open \"%s\" for writing!\n", file_output);
++		return 1;
+ 	}
+-	while (wavfile_read_s32(f, data)) {
++	
++	fflush(stdout);
++	fflush(stderr);
++	
++	// ----------------------------
++
++	counter = 0;
++	samples_read_total = 0;
++	status_idx = 0;
++	
++	while(samples_read = wavfile_read_s32(f, data, BUFFSIZE_SPL))
++	{
++		samples_read_total += samples_read;
+ 		wrote = dcaenc_convert_s32(c, data, output);
+ 		fwrite(output, 1, wrote, outfile);
++		
++		if(counter == 0)
++		{
++			current_pos = samples_read_total / f->sample_rate;
++			
++			if((samples_total > 0) && (samples_total < UNKNOWN_SIZE))
++			{
++				percent_done = ((double)(samples_total - f->samples_left)) / ((double)(samples_total));
++				fprintf(stderr, "Encoding... %d:%02d [%3.1f%%]\r", current_pos / 60, current_pos % 60, percent_done * 100.0);
++				fflush(stderr);
++			}
++			else
++			{
++				fprintf(stderr, "Encoding... %d:%02d [%c]\r", current_pos / 60, current_pos % 60, status[(status_idx = (status_idx+1) % 4)]);
++				fflush(stderr);
++			}
++		}
++		
++		counter = (counter+1) % 125;
+ 	}
++	
++	fprintf(stderr, "Encoding... %d:%02d [%3.1f%%]\n", (samples_read_total / f->sample_rate) / 60, (samples_read_total / f->sample_rate) % 60, 100.0);
++	fflush(stderr);
++
+ 	wrote = dcaenc_destroy(c, output);
+ 	fwrite(output, 1, wrote, outfile);
+-	fclose(outfile);
++	if(outfile != stdout)
++	{
++		fclose(outfile);
++	}
+ 	wavfile_close(f);
++
++	fprintf(stderr, "Done.\n");
+ 	return 0;
+ }
++
++#ifdef _WIN32
++
++#include <Windows.h>
++#include <io.h>
++#include <fcntl.h>
++
++int main( int argc, char **argv )
++{
++	int dcaenc_argc;
++	char **dcaenc_argv;
++	UINT old_cp;
++	int exit_code;
++
++	_setmode(_fileno(stdin),  _O_BINARY);
++	_setmode(_fileno(stdout), _O_BINARY);
++
++	old_cp = GetConsoleOutputCP();
++	SetConsoleOutputCP(CP_UTF8);
++
++	init_commandline_arguments_utf8(&dcaenc_argc, &dcaenc_argv);
++	exit_code = dcaenc_main(dcaenc_argc, dcaenc_argv);
++	free_commandline_arguments_utf8(&dcaenc_argc, &dcaenc_argv);
++
++	SetConsoleOutputCP(old_cp);
++	return exit_code;
++}
++
++#else //_WIN32
++
++int main( int argc, char **argv )
++{
++	return dcaenc_main(argc, argv);
++}
++
++#endif //_WIN32
+\ No newline at end of file
+diff --git a/math_tables.h b/math_tables.h
+index ce2e6c4..2b97618 100644
+--- a/math_tables.h
++++ b/math_tables.h
+@@ -17,12 +17,18 @@ extern const int32_t cb_to_add[256];
+ 
+ extern const int quant_levels_cb[27];
+ 
+-static inline int32_t cos_t(int x)
++#ifdef _MSC_VER
++#define INLINE __forceinline
++#else
++#define INLINE inline
++#endif
++
++INLINE static int32_t cos_t(int x)
+ {
+ 	return cos_table[x & 2047];
+ }
+ 
+-static inline int32_t sin_t(int x)
++INLINE static int32_t sin_t(int x)
+ {
+ 	return cos_t(x - 512);
+ }
+diff --git a/unicode_support.c b/unicode_support.c
+new file mode 100644
+index 0000000..283325c
+--- /dev/null
++++ b/unicode_support.c
+@@ -0,0 +1,225 @@
++/* 
++ * This file is part of dcaenc.
++ *
++ * Copyright (c) 2008-2011 Alexander E. Patrakov <patrakov@gmail.com>
++ *
++ * dcaenc is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * dcaenc is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with dcaenc; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ */
++#include "unicode_support.h"
++
++#ifdef _WIN32
++
++#include <windows.h>
++#include <sys/stat.h>
++#include <stdio.h>
++#include <wchar.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++char *utf16_to_ansi(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_ACP, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_ACP, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	if(Buffer)
++	{
++		Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = (char**) malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	if(NULL == *argv)
++	{
++		fprintf(stderr, "\nFATAL: Malloc failed\n\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++		if(NULL == (*argv)[i])
++		{
++			fprintf(stderr, "\nFATAL: utf16_to_utf8 failed\n\n");
++			exit(-1);
++		}
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
++
++/* int stat_utf8(const char *path_utf8, struct stat *buf)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = wstat(path_utf16, buf);
++		free(path_utf16);
++	}
++	
++	return ret;
++} */
++
++int rename_utf8(const char *oldname_utf8, const char *newname_utf8)
++{
++	int ret = -1;
++	
++	wchar_t *oldname_utf16 = utf8_to_utf16(oldname_utf8);
++	wchar_t *newname_utf16 = utf8_to_utf16(newname_utf8);
++	
++	if(oldname_utf16 && newname_utf16)
++	{
++		_wunlink(newname_utf16);
++		ret = _wrename(oldname_utf16, newname_utf16);
++	}
++
++	if(newname_utf16) free(newname_utf16);
++	if(oldname_utf16) free(oldname_utf16);
++
++	return ret;
++}
++
++char *path_utf8_to_ansi(const char *psz_filename_utf8, int b_create)
++{
++	char *short_path = NULL;
++	wchar_t *psz_filename_utf16 = NULL;
++
++	if(!psz_filename_utf8)
++	{
++		return NULL;
++	}
++	
++	psz_filename_utf16 = utf8_to_utf16(psz_filename_utf8);
++	if(psz_filename_utf16)
++	{
++		char *psz_filename_ansi = NULL;
++		if(b_create)
++		{
++			FILE *fh = _wfopen(psz_filename_utf16, L"a+");
++			if(fh) fclose(fh);
++		}
++		psz_filename_ansi = utf16_to_ansi(psz_filename_utf16);
++		if(psz_filename_ansi)
++		{
++			if(strcmp(psz_filename_ansi, psz_filename_utf8))
++			{
++				wchar_t short_name_utf16[MAX_PATH];
++				DWORD result = GetShortPathNameW(psz_filename_utf16, short_name_utf16, MAX_PATH);
++				if((result > 0) && (result < MAX_PATH))
++				{
++					short_path = utf16_to_ansi(short_name_utf16);
++					free(psz_filename_ansi);
++				}
++				else
++				{
++					short_path = psz_filename_ansi; /*if GetShortPathName() failed, use the ANSI version*/
++				}
++			}
++			else
++			{
++				short_path = psz_filename_ansi; /*don't convert plain ASCII filenames to "short" path*/
++			}
++		}
++		free(psz_filename_utf16);
++	}
++
++	return short_path;
++}
++
++#endif //_WIN32
+diff --git a/unicode_support.h b/unicode_support.h
+new file mode 100644
+index 0000000..96d9ec1
+--- /dev/null
++++ b/unicode_support.h
+@@ -0,0 +1,51 @@
++/* 
++ * This file is part of dcaenc.
++ *
++ * Copyright (c) 2008-2011 Alexander E. Patrakov <patrakov@gmail.com>
++ *
++ * dcaenc is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * dcaenc is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with dcaenc; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ */
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++#ifdef _WIN32
++#ifndef _INC_STAT
++struct stat;
++#endif
++char *utf16_to_utf8(const wchar_t *input);
++char *utf16_to_ansi(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++int rename_utf8(const char *oldname_utf8, const char *newname_utf8);
++char *path_utf8_to_ansi(const char *psz_filename_utf8, int b_create);
++#else
++#define fopen_utf8(NAME, MODE) fopen(NAME, MODE)
++#define rename_utf8(OLD, NEW) rename(OLD, NEW)
++#endif
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+\ No newline at end of file
+diff --git a/vc_solution/dcadll_vc2010.vcxproj b/vc_solution/dcadll_vc2010.vcxproj
+new file mode 100644
+index 0000000..807df23
+--- /dev/null
++++ b/vc_solution/dcadll_vc2010.vcxproj
+@@ -0,0 +1,126 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\dcaenc.c" />
++    <ClCompile Include="..\dllmain.cpp" />
++    <ClCompile Include="..\math_tables.c" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\dcaenc.h" />
++    <ClInclude Include="..\dcaenc_private.h" />
++    <ClInclude Include="..\float_data.h" />
++    <ClInclude Include="..\int_data.h" />
++    <ClInclude Include="..\math_tables.h" />
++    <ClInclude Include="..\softfloat.h" />
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}</ProjectGuid>
++    <Keyword>Win32Proj</Keyword>
++    <RootNamespace>dcadll_vc2010</RootNamespace>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++    <CharacterSet>Unicode</CharacterSet>
++    <PlatformToolset>Windows7.1SDK</PlatformToolset>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <LinkIncremental>true</LinkIncremental>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\dll\</IntDir>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <TargetName>dcaenc-0</TargetName>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <LinkIncremental>false</LinkIncremental>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\dll\</IntDir>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <TargetName>dcaenc-0</TargetName>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ClCompile>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;DCADLL_VC2010_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++    </ClCompile>
++    <Link>
++      <SubSystem>Windows</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <ImportLibrary>$(TargetDir)$(TargetName)_imp.lib</ImportLibrary>
++    </Link>
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++    </PreBuildEvent>
++    <PreBuildEvent>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ClCompile>
++      <WarningLevel>Level3</WarningLevel>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <Optimization>Full</Optimization>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;DCADLL_VC2010_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <OmitFramePointers>true</OmitFramePointers>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
++      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
++      <FloatingPointModel>Fast</FloatingPointModel>
++      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
++      <BufferSecurityCheck>false</BufferSecurityCheck>
++      <CreateHotpatchableImage>false</CreateHotpatchableImage>
++    </ClCompile>
++    <Link>
++      <SubSystem>Windows</SubSystem>
++      <GenerateDebugInformation>false</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++      <ImportLibrary>$(TargetDir)$(TargetName).dll.lib</ImportLibrary>
++      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
++      <AdditionalDependencies>$(SolutionDir)lib\EncodePointer.lib;$(SolutionDir)lib\msvcrt_vc6.lib;%(AdditionalDependencies)</AdditionalDependencies>
++      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
++      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
++      <NoEntryPoint>true</NoEntryPoint>
++    </Link>
++    <ProjectReference />
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++    </PreBuildEvent>
++    <PreBuildEvent>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcadll_vc2010.vcxproj.filters b/vc_solution/dcadll_vc2010.vcxproj.filters
+new file mode 100644
+index 0000000..d98bb04
+--- /dev/null
++++ b/vc_solution/dcadll_vc2010.vcxproj.filters
+@@ -0,0 +1,48 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup>
++    <Filter Include="Source Files">
++      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
++      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
++    </Filter>
++    <Filter Include="Header Files">
++      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
++      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
++    </Filter>
++    <Filter Include="Resource Files">
++      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
++      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
++    </Filter>
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\dllmain.cpp">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\dcaenc.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\math_tables.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\softfloat.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\dcaenc.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\dcaenc_private.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\float_data.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\int_data.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\math_tables.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++  </ItemGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcadll_vc2010.vcxproj.user b/vc_solution/dcadll_vc2010.vcxproj.user
+new file mode 100644
+index 0000000..ace9a86
+--- /dev/null
++++ b/vc_solution/dcadll_vc2010.vcxproj.user
+@@ -0,0 +1,3 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcaenc_vc2010.sln b/vc_solution/dcaenc_vc2010.sln
+new file mode 100644
+index 0000000..2b49e18
+--- /dev/null
++++ b/vc_solution/dcaenc_vc2010.sln
+@@ -0,0 +1,59 @@
++﻿
++Microsoft Visual Studio Solution File, Format Version 11.00
++# Visual Studio 2010
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dcaenc_vc2010", "dcaenc_vc2010.vcxproj", "{F90211C8-0718-46F1-AD58-683FA005BFA5}"
++	ProjectSection(ProjectDependencies) = postProject
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866} = {282DDEDF-52A5-442E-90DE-94ABEC4B4866}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dcalib_vc2010", "dcalib_vc2010.vcxproj", "{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}"
++	ProjectSection(ProjectDependencies) = postProject
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866} = {282DDEDF-52A5-442E-90DE-94ABEC4B4866}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dcadll_vc2010", "dcadll_vc2010.vcxproj", "{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}"
++	ProjectSection(ProjectDependencies) = postProject
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866} = {282DDEDF-52A5-442E-90DE-94ABEC4B4866}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gentables", "gentables.vcxproj", "{282DDEDF-52A5-442E-90DE-94ABEC4B4866}"
++EndProject
++Global
++	GlobalSection(SolutionConfigurationPlatforms) = preSolution
++		Debug|Win32 = Debug|Win32
++		Debug|x64 = Debug|x64
++		Release|Win32 = Release|Win32
++		Release|x64 = Release|x64
++	EndGlobalSection
++	GlobalSection(ProjectConfigurationPlatforms) = postSolution
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Debug|Win32.ActiveCfg = Debug|Win32
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Debug|Win32.Build.0 = Debug|Win32
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Debug|x64.ActiveCfg = Debug|x64
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Debug|x64.Build.0 = Debug|x64
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Release|Win32.ActiveCfg = Release|Win32
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Release|Win32.Build.0 = Release|Win32
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Release|x64.ActiveCfg = Release|x64
++		{F90211C8-0718-46F1-AD58-683FA005BFA5}.Release|x64.Build.0 = Release|x64
++		{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}.Debug|Win32.ActiveCfg = Debug|Win32
++		{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}.Debug|Win32.Build.0 = Debug|Win32
++		{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}.Debug|x64.ActiveCfg = Debug|Win32
++		{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}.Release|Win32.ActiveCfg = Release|Win32
++		{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}.Release|Win32.Build.0 = Release|Win32
++		{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}.Release|x64.ActiveCfg = Release|Win32
++		{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}.Debug|Win32.ActiveCfg = Debug|Win32
++		{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}.Debug|Win32.Build.0 = Debug|Win32
++		{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}.Debug|x64.ActiveCfg = Debug|Win32
++		{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}.Release|Win32.ActiveCfg = Release|Win32
++		{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}.Release|Win32.Build.0 = Release|Win32
++		{8AFCA1B5-C8F1-4F56-91F7-80415FFEB663}.Release|x64.ActiveCfg = Release|Win32
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866}.Debug|Win32.ActiveCfg = Debug|Win32
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866}.Debug|Win32.Build.0 = Debug|Win32
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866}.Debug|x64.ActiveCfg = Debug|Win32
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866}.Release|Win32.ActiveCfg = Release|Win32
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866}.Release|Win32.Build.0 = Release|Win32
++		{282DDEDF-52A5-442E-90DE-94ABEC4B4866}.Release|x64.ActiveCfg = Release|Win32
++	EndGlobalSection
++	GlobalSection(SolutionProperties) = preSolution
++		HideSolutionNode = FALSE
++	EndGlobalSection
++EndGlobal
+diff --git a/vc_solution/dcaenc_vc2010.vcxproj b/vc_solution/dcaenc_vc2010.vcxproj
+new file mode 100644
+index 0000000..39cb22b
+--- /dev/null
++++ b/vc_solution/dcaenc_vc2010.vcxproj
+@@ -0,0 +1,206 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Debug|x64">
++      <Configuration>Debug</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|x64">
++      <Configuration>Release</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\compiler_info.h" />
++    <ClInclude Include="..\unicode_support.h" />
++    <ClInclude Include="..\wavfile.h" />
++    <ClInclude Include="..\xgetopt.h" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\alsaplugin.c">
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
++    </ClCompile>
++    <ClCompile Include="..\main.c" />
++    <ClCompile Include="..\unicode_support.c" />
++    <ClCompile Include="..\wavfile.c" />
++    <ClCompile Include="..\xgetopt.c" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="dcalib_vc2010.vcxproj">
++      <Project>{b4ad2963-8469-4dbd-bd26-fad4fe303f8f}</Project>
++    </ProjectReference>
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{F90211C8-0718-46F1-AD58-683FA005BFA5}</ProjectGuid>
++    <Keyword>Win32Proj</Keyword>
++    <RootNamespace>dcaenc_vc2010</RootNamespace>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++    <CharacterSet>Unicode</CharacterSet>
++    <PlatformToolset>Windows7.1SDK</PlatformToolset>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++    <CharacterSet>Unicode</CharacterSet>
++    <PlatformToolset>Windows7.1SDK</PlatformToolset>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <LinkIncremental>true</LinkIncremental>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <LinkIncremental>true</LinkIncremental>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <LinkIncremental>false</LinkIncremental>
++    <TargetName>dcaenc</TargetName>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <LinkIncremental>false</LinkIncremental>
++    <TargetName>dcaenc</TargetName>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\</IntDir>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ClCompile>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++    </Link>
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <ClCompile>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ClCompile>
++      <WarningLevel>Level3</WarningLevel>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <Optimization>Full</Optimization>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <MultiProcessorCompilation>true</MultiProcessorCompilation>
++      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <OmitFramePointers>true</OmitFramePointers>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
++      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <BufferSecurityCheck>false</BufferSecurityCheck>
++      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
++      <FloatingPointModel>Fast</FloatingPointModel>
++      <CreateHotpatchableImage>false</CreateHotpatchableImage>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>false</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
++      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
++      <AdditionalDependencies>$(SolutionDir)lib\EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
++    </Link>
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <ClCompile>
++      <WarningLevel>Level3</WarningLevel>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <Optimization>Full</Optimization>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <MultiProcessorCompilation>true</MultiProcessorCompilation>
++      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <OmitFramePointers>true</OmitFramePointers>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
++      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <BufferSecurityCheck>false</BufferSecurityCheck>
++      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
++      <FloatingPointModel>Fast</FloatingPointModel>
++      <CreateHotpatchableImage>false</CreateHotpatchableImage>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>false</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++      <MinimumRequiredVersion>
++      </MinimumRequiredVersion>
++      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
++    </Link>
++  </ItemDefinitionGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcaenc_vc2010.vcxproj.filters b/vc_solution/dcaenc_vc2010.vcxproj.filters
+new file mode 100644
+index 0000000..9af5b8d
+--- /dev/null
++++ b/vc_solution/dcaenc_vc2010.vcxproj.filters
+@@ -0,0 +1,48 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup>
++    <Filter Include="Source Files">
++      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
++      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
++    </Filter>
++    <Filter Include="Header Files">
++      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
++      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
++    </Filter>
++    <Filter Include="Resource Files">
++      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
++      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
++    </Filter>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\unicode_support.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\wavfile.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\xgetopt.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\compiler_info.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\alsaplugin.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\main.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\unicode_support.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\wavfile.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\xgetopt.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++  </ItemGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcaenc_vc2010.vcxproj.user b/vc_solution/dcaenc_vc2010.vcxproj.user
+new file mode 100644
+index 0000000..ace9a86
+--- /dev/null
++++ b/vc_solution/dcaenc_vc2010.vcxproj.user
+@@ -0,0 +1,3 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcalib_vc2010.vcxproj b/vc_solution/dcalib_vc2010.vcxproj
+new file mode 100644
+index 0000000..5216233
+--- /dev/null
++++ b/vc_solution/dcalib_vc2010.vcxproj
+@@ -0,0 +1,114 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{B4AD2963-8469-4DBD-BD26-FAD4FE303F8F}</ProjectGuid>
++    <Keyword>Win32Proj</Keyword>
++    <RootNamespace>dcalib_vc2010</RootNamespace>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>StaticLibrary</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>StaticLibrary</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++    <CharacterSet>Unicode</CharacterSet>
++    <PlatformToolset>Windows7.1SDK</PlatformToolset>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\lib\</IntDir>
++    <TargetName>dcaenc-static-0</TargetName>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\lib\</IntDir>
++    <TargetName>dcaenc-static-0</TargetName>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ClCompile>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++    </ClCompile>
++    <Link>
++      <SubSystem>Windows</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++    </Link>
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ClCompile>
++      <WarningLevel>Level3</WarningLevel>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <Optimization>Full</Optimization>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <OmitFramePointers>true</OmitFramePointers>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
++      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <FloatingPointModel>Fast</FloatingPointModel>
++      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
++      <CreateHotpatchableImage>false</CreateHotpatchableImage>
++      <BufferSecurityCheck>false</BufferSecurityCheck>
++    </ClCompile>
++    <Link>
++      <SubSystem>Windows</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++    </Link>
++    <Lib>
++      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
++    </Lib>
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <ItemGroup>
++    <ClCompile Include="..\dcaenc.c" />
++    <ClCompile Include="..\math_tables.c" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\dcaenc.h" />
++    <ClInclude Include="..\dcaenc_private.h" />
++    <ClInclude Include="..\float_data.h" />
++    <ClInclude Include="..\int_data.h" />
++    <ClInclude Include="..\math_tables.h" />
++    <ClInclude Include="..\softfloat.h" />
++  </ItemGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcalib_vc2010.vcxproj.filters b/vc_solution/dcalib_vc2010.vcxproj.filters
+new file mode 100644
+index 0000000..b2d7092
+--- /dev/null
++++ b/vc_solution/dcalib_vc2010.vcxproj.filters
+@@ -0,0 +1,45 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup>
++    <Filter Include="Source Files">
++      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
++      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
++    </Filter>
++    <Filter Include="Header Files">
++      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
++      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
++    </Filter>
++    <Filter Include="Resource Files">
++      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
++      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
++    </Filter>
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\dcaenc.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\math_tables.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\dcaenc.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\dcaenc_private.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\math_tables.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\int_data.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\softfloat.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\float_data.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++  </ItemGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/dcalib_vc2010.vcxproj.user b/vc_solution/dcalib_vc2010.vcxproj.user
+new file mode 100644
+index 0000000..ace9a86
+--- /dev/null
++++ b/vc_solution/dcalib_vc2010.vcxproj.user
+@@ -0,0 +1,3 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/gentables.vcxproj b/vc_solution/gentables.vcxproj
+new file mode 100644
+index 0000000..85b4751
+--- /dev/null
++++ b/vc_solution/gentables.vcxproj
+@@ -0,0 +1,125 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{282DDEDF-52A5-442E-90DE-94ABEC4B4866}</ProjectGuid>
++    <Keyword>Win32Proj</Keyword>
++    <RootNamespace>gentables</RootNamespace>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <LinkIncremental>true</LinkIncremental>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\gen\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <LinkIncremental>false</LinkIncremental>
++    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
++    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\tmp\gen\</IntDir>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ClCompile>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++    </Link>
++    <CustomBuildStep>
++      <Command>
++      </Command>
++    </CustomBuildStep>
++    <CustomBuildStep>
++      <Message>
++      </Message>
++    </CustomBuildStep>
++    <PostBuildEvent>
++      <Command>"$(OutDir)\gentables.exe" &gt; "$(SolutionDir)..\math_tables.c"</Command>
++      <Message>Generating Tables</Message>
++    </PostBuildEvent>
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ClCompile>
++      <WarningLevel>Level3</WarningLevel>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <Optimization>MaxSpeed</Optimization>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++    </Link>
++    <CustomBuildStep>
++      <Command>
++      </Command>
++    </CustomBuildStep>
++    <CustomBuildStep>
++      <Message>
++      </Message>
++    </CustomBuildStep>
++    <PostBuildEvent>
++      <Command>"$(OutDir)\gentables.exe" &gt; "$(SolutionDir)..\math_tables.c"</Command>
++      <Message>Generating Tables</Message>
++    </PostBuildEvent>
++    <PreBuildEvent>
++      <Command>copy /Y "$(SolutionDir)..\config_msvc.h" "$(SolutionDir)..\config.h"</Command>
++      <Message>Create: "$(SolutionDir)config.h"</Message>
++    </PreBuildEvent>
++  </ItemDefinitionGroup>
++  <ItemGroup>
++    <None Include="ReadMe.txt" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\float_data.h" />
++    <ClInclude Include="..\int_data.h" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\gentables.c" />
++  </ItemGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/gentables.vcxproj.filters b/vc_solution/gentables.vcxproj.filters
+new file mode 100644
+index 0000000..754afe3
+--- /dev/null
++++ b/vc_solution/gentables.vcxproj.filters
+@@ -0,0 +1,33 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup>
++    <Filter Include="Source Files">
++      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
++      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
++    </Filter>
++    <Filter Include="Header Files">
++      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
++      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
++    </Filter>
++    <Filter Include="Resource Files">
++      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
++      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
++    </Filter>
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="ReadMe.txt" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\int_data.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\float_data.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\gentables.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++  </ItemGroup>
++</Project>
+\ No newline at end of file
+diff --git a/vc_solution/lib/EncodePointer.lib b/vc_solution/lib/EncodePointer.lib
+new file mode 100644
+index 0000000..c035792
+Binary files /dev/null and b/vc_solution/lib/EncodePointer.lib differ
+diff --git a/vc_solution/lib/msvcrt_vc6.lib b/vc_solution/lib/msvcrt_vc6.lib
+new file mode 100644
+index 0000000..26f03fe
+Binary files /dev/null and b/vc_solution/lib/msvcrt_vc6.lib differ
+diff --git a/wavfile.c b/wavfile.c
+index 950a08d..7f35e2f 100644
+--- a/wavfile.c
++++ b/wavfile.c
+@@ -23,189 +23,332 @@
+ #include <string.h>
+ #include <stdio.h>
+ #include "wavfile.h"
++#include "unicode_support.h"
+ 
+-static uint32_t find_chunk(FILE * file, const uint8_t chunk_id[4])
++#ifdef _M_X64
++#define SIZE2UINT32(X) (uint32_t)(((X) > UINT32_MAX) ? UINT32_MAX : (X))
++#define SIZE2INT(X) (uint32_t)(((X) > INT_MAX) ? INT_MAX : (X))
++#else
++#define SIZE2UINT32(X) (X)
++#define SIZE2INT(X) (X)
++#endif
++
++#define BUFFSIZE_SAMPLES 512
++#define BUFFSIZE_BYTES (BUFFSIZE_SAMPLES * 6 * 4)
++
++static const char *g_error_msg[13] =
+ {
+-    uint8_t buffer[8];
+-    while (1) {
+-	size_t chunksize;
+-        size_t s = fread(buffer, 1, 8, file);
+-	if (s < 8)
+-	    return 0;
+-	chunksize = (uint32_t)buffer[4] | ((uint32_t)buffer[5] << 8) |
+-	    ((uint32_t)buffer[6] << 16) | ((uint32_t)buffer[7] << 24);
+-	if (!memcmp(buffer, chunk_id, 4))
+-	    return chunksize;
+-	fseek(file, chunksize, SEEK_CUR);
+-    }
++	/* 0*/ "Success",
++	/* 1*/ "Failed to open file",
++	/* 2*/ "RIFF header not found",
++	/* 3*/ "WAVE chunk not found",
++	/* 4*/ "Format chunk not found",
++	/* 5*/ "Failed to read Format chunk",
++	/* 6*/ "Invalid or unsupported format tag",
++	/* 7*/ "Unsupported number of channels (only 1, 2, 3, 4, 5 and 6)",
++	/* 8*/ "Unsupported bits per sample (only 16 and 32 for now)",
++	/* 9*/ "Inconsistent block alignment",
++	/*10*/ "Inconsistent average bitrate",
++	/*11*/ "Data chunk not found",
++	/*12*/ "Data chunk size is invalid"
++};
++
++static int find_chunk(FILE * file, const uint8_t chunk_id[4], size_t *chunk_size)
++{
++	uint8_t buffer[8];
++	*chunk_size = 0;
++	
++	while (1) {
++		size_t chunksize;
++		size_t s = fread(buffer, 1, 8, file);
++		if (s < 8)
++			return 0;
++		chunksize = (uint32_t)buffer[4] | ((uint32_t)buffer[5] << 8) |
++			((uint32_t)buffer[6] << 16) | ((uint32_t)buffer[7] << 24);
++		
++		if(!memcmp(buffer, chunk_id, 4))
++		{
++			*chunk_size = chunksize;
++			return 1;
++		}
++		
++		if((chunksize % 2) == 1) chunksize++; //Skip extra "unused" byte at the end of odd-size chunks
++
++		if(fseek(file, SIZE2UINT32(chunksize), SEEK_CUR))
++		{
++			while(chunksize > 8)
++			{
++				s = fread(buffer, 1, 8, file);
++				if (s < 8)
++					return 0;
++				chunksize -= 8;
++			}
++			s = fread(buffer, 1, chunksize, file);
++			if (s < chunksize)
++				return 0;
++		}
++	}
+ }
+ 
+-wavfile * wavfile_open(const char * filename)
++wavfile * wavfile_open(const char * filename, const char ** error_msg, const int ignore_len)
+ {
+-    wavfile *result;
+-    size_t s;
+-    uint8_t buffer[8];
+-    uint8_t *fmt;
+-    uint32_t v;
+-    uint32_t avg_bps;
+-    uint32_t block_align;
+-    static const uint8_t riff[4] = {'R', 'I', 'F', 'F'};
+-    static const uint8_t wave[4] = { 'W', 'A', 'V', 'E'};
+-    static const uint8_t fmt_[4] = {'f', 'm', 't', ' '};
+-    static const uint8_t data[4] = {'d', 'a', 't', 'a'};
+-    
+-    result = (wavfile *)calloc(1, sizeof(wavfile));
+-    if (!result)
+-	goto err0;
+-    
+-    result->file = fopen(filename, "rb");
+-    if (!result->file)
+-	goto err1;
+-
+-    s = fread(buffer, 1, 8, result->file);
+-    if (s < 8)
+-	goto err2;
+-
+-    if (memcmp(buffer, riff, 4))
+-	goto err2;
+-
+-    /* TODO: check size (in buffer[4..8]) */
+-    s = fread(buffer, 1, 4, result->file);
+-    if (s < 4)
+-	goto err2;
+-
+-    if (memcmp(buffer, wave, 4))
+-	goto err2;
+-
+-    s = find_chunk(result->file, fmt_);
+-    if (s != 16 && s != 40)
+-	goto err2;
+-
+-    fmt = (uint8_t*)malloc(s);
+-    if (!fmt)
+-	goto err2;
+-
+-    if (fread(fmt, 1, s, result->file) != s)
+-	goto err3;
+-
+-    /* wFormatTag */
+-    v = (uint32_t)fmt[0] | ((uint32_t)fmt[1] << 8);
+-    if (v != 1 && v != 0xfffe)
+-	goto err3;
+-
+-    /* wChannels */
+-    v = (uint32_t)fmt[2] | ((uint32_t)fmt[3] << 8);
+-    if (v != 1 && v != 2 && v != 4 && v != 5 && v !=6)
+-	goto err3;
+-    result->channels = v;
+-    /* dwSamplesPerSec */
+-    result->sample_rate = (uint32_t)fmt[4] | ((uint32_t)fmt[5] << 8) |
+-	((uint32_t)fmt[6] << 16) | ((uint32_t)fmt[7] << 24);
+-
+-    /* dwAvgBytesPerSec */
+-    avg_bps = (uint32_t)fmt[8] | ((uint32_t)fmt[9] << 8) |
+-	((uint32_t)fmt[10] << 16) | ((uint32_t)fmt[11] << 24);
+-
+-    /* wBlockAlign */
+-    block_align = (uint32_t)fmt[12] | ((uint32_t)fmt[13] << 8);
+-
+-    /* wBitsPerSample */
+-    result->bits_per_sample = (uint32_t)fmt[14] | ((uint32_t)fmt[15] << 8);
+-    if (result->bits_per_sample != 16 && result->bits_per_sample != 32)
+-	goto err3;
+-
+-    if (block_align != result->channels * (result->bits_per_sample / 8))
+-	goto err3;
+-
+-    if (avg_bps != block_align * result->sample_rate)
+-	goto err3;
+-
+-    v = find_chunk(result->file, data);
+-    if (v == 0 || v % block_align != 0)
+-	goto err3;
+-
+-    result->samples_left = v / block_align;
+-    free(fmt);
+-    return result;
+-
+-    err3:
++	wavfile *result;
++	size_t s;
++	uint8_t buffer[8];
++	uint8_t *fmt;
++	size_t v;
++	uint32_t avg_bps;
++	uint32_t block_align;
++	static const uint8_t riff[4] = {'R', 'I', 'F', 'F'};
++	static const uint8_t wave[4] = { 'W', 'A', 'V', 'E'};
++	static const uint8_t fmt_[4] = {'f', 'm', 't', ' '};
++	static const uint8_t data[4] = {'d', 'a', 't', 'a'};
++
++	result = (wavfile *)calloc(1, sizeof(wavfile));
++	if (!result)
++		goto err0;
++	
++	result->file = strcmp(filename, "-") ? fopen_utf8(filename, "rb") : stdin;
++	if (!result->file)
++	{
++		*error_msg = g_error_msg[1];
++		goto err1;
++	}
++
++	s = fread(buffer, 1, 8, result->file);
++	if (s < 8)
++	{
++		*error_msg = g_error_msg[2];
++		goto err2;
++	}
++
++	if (memcmp(buffer, riff, 4))
++	{
++		*error_msg = g_error_msg[2];
++		goto err2;
++	}
++
++	/* TODO: check size (in buffer[4..8]) */
++	s = fread(buffer, 1, 4, result->file);
++	if (s < 4)
++	{
++		*error_msg = g_error_msg[3];
++		goto err2;
++	}
++
++	if (memcmp(buffer, wave, 4))
++	{
++		*error_msg = g_error_msg[3];
++		goto err2;
++	}
++
++	if(!find_chunk(result->file, fmt_, &s))
++	{
++		*error_msg = g_error_msg[4];
++		goto err2;
++	}
++	if((s < 16) || (s > 40))
++	{
++		*error_msg = g_error_msg[4];
++		goto err2;
++	}
++
++	fmt = (uint8_t*)malloc(s);
++	if(!fmt)
++	{
++		*error_msg = g_error_msg[5];
++		goto err2;
++	}
++
++	if(fread(fmt, 1, s, result->file) != s)
++	{
++		*error_msg = g_error_msg[5];
++		goto err3;
++	}
++
++	/* skip unused byte (for odd-size chunks) */
++	if((s % 2) == 1)
++	{
++		char dummy[1];
++		if(fread(&dummy, 1, 1,  result->file) != 1)
++		{
++			*error_msg = g_error_msg[5];
++			goto err3;
++		}
++	}
++
++	/* wFormatTag */
++	v = (uint32_t)fmt[0] | ((uint32_t)fmt[1] << 8);
++	if(v != 1 && v != 0xfffe)
++	{
++		*error_msg = g_error_msg[6];
++		goto err3;
++	}
++
++	/* wChannels */
++	v = (uint32_t)fmt[2] | ((uint32_t)fmt[3] << 8);
++	if((v < 1) || (v > 6))
++	{
++		*error_msg = g_error_msg[7];
++		goto err3;
++	}
++	result->channels = SIZE2UINT32(v);
++
++	/* dwSamplesPerSec */
++	result->sample_rate = (uint32_t)fmt[4] | ((uint32_t)fmt[5] << 8) |
++		((uint32_t)fmt[6] << 16) | ((uint32_t)fmt[7] << 24);
++
++	/* dwAvgBytesPerSec */
++	avg_bps = (uint32_t)fmt[8] | ((uint32_t)fmt[9] << 8) |
++		((uint32_t)fmt[10] << 16) | ((uint32_t)fmt[11] << 24);
++
++	/* wBlockAlign */
++	block_align = (uint32_t)fmt[12] | ((uint32_t)fmt[13] << 8);
++
++	/* wBitsPerSample */
++	result->bits_per_sample = (uint32_t)fmt[14] | ((uint32_t)fmt[15] << 8);
++	if(result->bits_per_sample != 16 && result->bits_per_sample != 32)
++	{
++		*error_msg = g_error_msg[8];
++		goto err3;
++	}
++
++	if(block_align != result->channels * (result->bits_per_sample / 8))
++	{
++		*error_msg = g_error_msg[9];
++		goto err3;
++	}
++
++	if(avg_bps != block_align * result->sample_rate)
++	{
++		*error_msg = g_error_msg[10];
++		goto err3;
++	}
++
++	if(!find_chunk(result->file, data, &v))
++	{
++		*error_msg = g_error_msg[11];
++		goto err3;
++	}
++	if(((v == 0) || (v % block_align != 0)) && (!ignore_len))
++	{
++		*error_msg = g_error_msg[12];
++		goto err3;
++	}
++
++	result->samples_left = SIZE2UINT32(ignore_len ? UNKNOWN_SIZE : (v / block_align));
+ 	free(fmt);
+-    err2:
+-	fclose(result->file);
+-    err1:
++	*error_msg = g_error_msg[0];
++	return result;
++
++	err3:
++	free(fmt);
++	err2:
++	if(result->file != stdin) fclose(result->file);
++	err1:
+ 	free(result);
+-    err0:
++	err0:
+ 	return NULL;
+ }
+ 
+ void wavfile_close(wavfile * f)
+ {
+-    fclose(f->file);
+-    free(f);
++	if(f->file != stdin)
++	{
++		fclose(f->file);
++	}
++	free(f);
+ }
+ 
+ static int32_t get_s32_sample(const wavfile * f, const uint8_t *buffer, int sample, int channel)
+ {
+-    int offset = (f->bits_per_sample / 8) * (f->channels * sample + channel);
+-    uint32_t v;
+-    switch (f->bits_per_sample) {
++	int offset = (f->bits_per_sample / 8) * (f->channels * sample + channel);
++	uint32_t v;
++	switch (f->bits_per_sample)
++	{
+ 	case 16:
+-	    v = (uint32_t)buffer[offset + 0] | ((uint32_t)buffer[offset + 1] << 8);
+-	    return v << 16;
+-	    break;
++		v = (uint32_t)buffer[offset + 0] | ((uint32_t)buffer[offset + 1] << 8);
++		return v << 16;
++		break;
+ 	case 32:
+-	    v = (uint32_t)buffer[offset + 0] | ((uint32_t)buffer[offset + 1] << 8) |
++		v = (uint32_t)buffer[offset + 0] | ((uint32_t)buffer[offset + 1] << 8) |
+ 		((uint32_t)buffer[offset + 2] << 16) | ((uint32_t)buffer[offset + 3] << 24);
+-	    return v;
+-	    break;
++		return v;
++		break;
+ 	default:
+-	    return 0;
+-    }
++		return 0;
++	}
+ }
+ 
+-int wavfile_read_s32(wavfile * f, int32_t *samples)
++int wavfile_read_s32(wavfile * f, int32_t *samples, size_t sample_count)
+ {
+-    uint8_t buffer[512 * 6 * 4];
+-    int32_t smpte_sample[6];
+-    int samples_to_read;
+-    int bytes_to_read;
+-    unsigned int i, ch;
+-    
+-    memset(buffer, 0, 512 * 6 * 4);
+-    samples_to_read = f->samples_left < 512 ? f->samples_left : 512;
+-    bytes_to_read = samples_to_read * f->channels * (f->bits_per_sample / 8);
+-    f->samples_left -= samples_to_read;
+-    if (fread(buffer, 1, bytes_to_read, f->file) != bytes_to_read) {
+-	f->samples_left = 0;
+-    }
+-    
+-    for (i = 0; i < 512; i++) {
+-	for (ch = 0; ch < f->channels; ch++)
+-	    smpte_sample[ch] = get_s32_sample(f, buffer, i, ch);
+-	switch(f->channels) {
+-	case 1:
+-	case 2:
+-	case 4:
+-	    for (ch = 0; ch < f->channels; ch++)
+-		    *(samples++) = smpte_sample[ch];
+-	    break;
+-	case 5:
+-	    *(samples++) = smpte_sample[2];
+-	    *(samples++) = smpte_sample[0];
+-	    *(samples++) = smpte_sample[1];
+-	    *(samples++) = smpte_sample[3];
+-	    *(samples++) = smpte_sample[4];
+-	    break;
+-	case 6:
+-	    *(samples++) = smpte_sample[2];
+-	    *(samples++) = smpte_sample[0];
+-	    *(samples++) = smpte_sample[1];
+-	    *(samples++) = smpte_sample[4];
+-	    *(samples++) = smpte_sample[5];
+-	    *(samples++) = smpte_sample[3];
+-	    break;
+-	}
+-    }
+-    
+-    return f->samples_left;
++	uint8_t buffer[BUFFSIZE_BYTES];
++	int32_t smpte_sample[6];
++	int samples_to_read;
++	int bytes_to_read;
++	int bytes_read;
++	unsigned int i, ch;
++	
++	if(sample_count != BUFFSIZE_SAMPLES)
++	{
++		fprintf(stderr, "Only 512 samples currently supported!\n");
++		return 0;
++	}
++
++	if(f->samples_left < 1)
++	{
++		return 0;
++	}
++	
++	memset(buffer, 0, BUFFSIZE_BYTES);
++	samples_to_read = (f->samples_left < BUFFSIZE_SAMPLES) ? f->samples_left : BUFFSIZE_SAMPLES;
++	bytes_to_read = samples_to_read * f->channels * (f->bits_per_sample / 8);
++	if(f->samples_left != UNKNOWN_SIZE) {
++		f->samples_left -= samples_to_read;
++	}
++	
++	bytes_read = SIZE2INT(fread(buffer, 1, bytes_to_read, f->file));
++	if(bytes_read != bytes_to_read) {
++		f->samples_left = 0;
++	}
++	
++	for (i = 0; i < BUFFSIZE_SAMPLES; i++)
++	{
++		for (ch = 0; ch < f->channels; ch++)
++			smpte_sample[ch] = get_s32_sample(f, buffer, i, ch);
++		switch(f->channels)
++		{
++		case 1:
++		case 2:
++		case 4:
++			for (ch = 0; ch < f->channels; ch++)
++				*(samples++) = smpte_sample[ch];
++			break;
++		case 3:
++			*(samples++) = smpte_sample[2];
++			*(samples++) = smpte_sample[0];
++			*(samples++) = smpte_sample[1];
++			break;
++		case 5:
++			*(samples++) = smpte_sample[2];
++			*(samples++) = smpte_sample[0];
++			*(samples++) = smpte_sample[1];
++			*(samples++) = smpte_sample[3];
++			*(samples++) = smpte_sample[4];
++			break;
++		case 6:
++			*(samples++) = smpte_sample[2];
++			*(samples++) = smpte_sample[0];
++			*(samples++) = smpte_sample[1];
++			*(samples++) = smpte_sample[4];
++			*(samples++) = smpte_sample[5];
++			*(samples++) = smpte_sample[3];
++			break;
++		default:
++			fprintf(stderr, "FIXME: Unexpected channel number!\n");
++			exit(1);
++		}
++	}
++	
++	return bytes_read / (f->channels * (f->bits_per_sample / 8));
+ }
+diff --git a/wavfile.h b/wavfile.h
+index b8945e2..418e55f 100644
+--- a/wavfile.h
++++ b/wavfile.h
+@@ -23,6 +23,8 @@
+ 
+ #include <stdio.h>
+ 
++#define UNKNOWN_SIZE 0xFFFFFFFF
++
+ typedef struct {
+ 	FILE * file;
+ 	unsigned int channels;
+@@ -31,8 +33,8 @@ typedef struct {
+ 	unsigned int samples_left;
+ } wavfile;
+ 
+-wavfile * wavfile_open(const char * filename);
+-int wavfile_read_s32(wavfile * f, int32_t * samples);
++wavfile * wavfile_open(const char * filename, const char ** error_msg, const int ignore_len);
++int wavfile_read_s32(wavfile * f, int32_t *samples, size_t sample_count);
+ void wavfile_close(wavfile * f);
+ 
+ #endif
+diff --git a/xgetopt.c b/xgetopt.c
+new file mode 100644
+index 0000000..507b44d
+--- /dev/null
++++ b/xgetopt.c
+@@ -0,0 +1,206 @@
++// XGetopt.cpp  Version 1.2
++//
++// Author:  Hans Dietrich
++//          hdietrich2@hotmail.com
++//
++// Description:
++//     XGetopt.cpp implements getopt(), a function to parse command lines.
++//
++// History
++//     Version 1.2 - 2003 May 17
++//     - Added Unicode support
++//
++//     Version 1.1 - 2002 March 10
++//     - Added example to XGetopt.cpp module header 
++//
++// This software is released into the public domain.
++// You are free to use it in any way you like.
++//
++// This software is provided "as is" with no expressed
++// or implied warranty.  I accept no liability for any
++// damage or loss of business that this software may cause.
++//
++///////////////////////////////////////////////////////////////////////////////
++
++///////////////////////////////////////////////////////////////////////////////
++#include <stdio.h>
++#include <string.h>
++///////////////////////////////////////////////////////////////////////////////
++
++#include "xgetopt.h"
++
++///////////////////////////////////////////////////////////////////////////////
++//
++//  X G e t o p t . c p p
++//
++//
++//  NAME
++//       getopt -- parse command line options
++//
++//  SYNOPSIS
++//       int getopt(int argc, char *argv[], char *optstring)
++//
++//       extern char *optarg;
++//       extern int optind;
++//
++//  DESCRIPTION
++//       The getopt() function parses the command line arguments. Its
++//       arguments argc and argv are the argument count and array as
++//       passed into the application on program invocation.  In the case
++//       of Visual C++ programs, argc and argv are available via the
++//       variables __argc and __argv (double underscores), respectively.
++//       getopt returns the next option letter in argv that matches a
++//       letter in optstring.  (Note:  Unicode programs should use
++//       __targv instead of __argv.  Also, all character and string
++//       literals should be enclosed in _T( ) ).
++//
++//       optstring is a string of recognized option letters;  if a letter
++//       is followed by a colon, the option is expected to have an argument
++//       that may or may not be separated from it by white space.  optarg
++//       is set to point to the start of the option argument on return from
++//       getopt.
++//
++//       Option letters may be combined, e.g., "-ab" is equivalent to
++//       "-a -b".  Option letters are case sensitive.
++//
++//       getopt places in the external variable optind the argv index
++//       of the next argument to be processed.  optind is initialized
++//       to 0 before the first call to getopt.
++//
++//       When all options have been processed (i.e., up to the first
++//       non-option argument), getopt returns EOF, optarg will point
++//       to the argument, and optind will be set to the argv index of
++//       the argument.  If there are no non-option arguments, optarg
++//       will be set to NULL.
++//
++//       The special option "--" may be used to delimit the end of the
++//       options;  EOF will be returned, and "--" (and everything after it)
++//       will be skipped.
++//
++//  RETURN VALUE
++//       For option letters contained in the string optstring, getopt
++//       will return the option letter.  getopt returns a question mark (?)
++//       when it encounters an option letter not included in optstring.
++//       EOF is returned when processing is finished.
++//
++//  BUGS
++//       1)  Long options are not supported.
++//       2)  The GNU double-colon extension is not supported.
++//       3)  The environment variable POSIXLY_CORRECT is not supported.
++//       4)  The + syntax is not supported.
++//       5)  The automatic permutation of arguments is not supported.
++//       6)  This implementation of getopt() returns EOF if an error is
++//           encountered, instead of -1 as the latest standard requires.
++//
++//  EXAMPLE
++//       BOOL CMyApp::ProcessCommandLine(int argc, char *argv[])
++//       {
++//           int c;
++//
++//           while ((c = getopt(argc, argv, _T("aBn:"))) != EOF)
++//           {
++//               switch (c)
++//               {
++//                   case _T('a'):
++//                       TRACE(_T("option a\n"));
++//                       //
++//                       // set some flag here
++//                       //
++//                       break;
++//
++//                   case _T('B'):
++//                       TRACE( _T("option B\n"));
++//                       //
++//                       // set some other flag here
++//                       //
++//                       break;
++//
++//                   case _T('n'):
++//                       TRACE(_T("option n: value=%d\n"), atoi(optarg));
++//                       //
++//                       // do something with value here
++//                       //
++//                       break;
++//
++//                   case _T('?'):
++//                       TRACE(_T("ERROR: illegal option %s\n"), argv[optind-1]);
++//                       return FALSE;
++//                       break;
++//
++//                   default:
++//                       TRACE(_T("WARNING: no handler for option %c\n"), c);
++//                       return FALSE;
++//                       break;
++//               }
++//           }
++//           //
++//           // check for non-option args here
++//           //
++//           return TRUE;
++//       }
++//
++///////////////////////////////////////////////////////////////////////////////
++
++int xgetopt(int argc, char *argv[], char *optstring, xgetopt_t *ctx)
++{
++	char c, *cp;
++	
++	if (ctx->optind == 0)
++		ctx->next = NULL;
++
++	ctx->optarg = NULL;
++
++	if (ctx->next == NULL || *ctx->next == '\0')
++	{
++		if (ctx->optind == 0)
++			ctx->optind++;
++
++		if (ctx->optind >= argc || argv[ctx->optind][0] != '-' || argv[ctx->optind][1] == '\0')
++		{
++			ctx->optarg = NULL;
++			if (ctx->optind < argc)
++				ctx->optarg = argv[ctx->optind];
++			return EOF;
++		}
++
++		if (strcmp(argv[ctx->optind], "--") == 0)
++		{
++			ctx->optind++;
++			ctx->optarg = NULL;
++			if (ctx->optind < argc)
++				ctx->optarg = argv[ctx->optind];
++			return EOF;
++		}
++
++		ctx->next = argv[ctx->optind];
++		ctx->next++;		// skip past -
++		ctx->optind++;
++	}
++
++	c = *ctx->next++;
++	cp = strchr(optstring, c);
++
++	if (cp == NULL || c == ':')
++		return '?';
++
++	cp++;
++	if (*cp == ':')
++	{
++		if (*ctx->next != '\0')
++		{
++			ctx->optarg = ctx->next;
++			ctx->next = NULL;
++		}
++		else if (ctx->optind < argc)
++		{
++			ctx->optarg = argv[ctx->optind];
++			ctx->optind++;
++		}
++		else
++		{
++			return '?';
++		}
++	}
++
++	return c;
++}
+diff --git a/xgetopt.h b/xgetopt.h
+new file mode 100644
+index 0000000..f9371b9
+--- /dev/null
++++ b/xgetopt.h
+@@ -0,0 +1,29 @@
++// XGetopt.h  Version 1.2
++//
++// Author:  Hans Dietrich
++//          hdietrich2@hotmail.com
++//
++// This software is released into the public domain.
++// You are free to use it in any way you like.
++//
++// This software is provided "as is" with no expressed
++// or implied warranty.  I accept no liability for any
++// damage or loss of business that this software may cause.
++//
++///////////////////////////////////////////////////////////////////////////////
++
++#ifndef XGETOPT_H
++#define XGETOPT_H
++
++typedef struct
++{
++	int optind;
++	int opterr;
++	char *optarg;
++	char *next;
++}
++xgetopt_t;
++
++int xgetopt(int argc, char *argv[], char *optstring, xgetopt_t *ctx);
++
++#endif //XGETOPT_H

@@ -1,0 +1,591 @@
+ common/mp4ff/mp4ff.vcproj  |    6 ++-
+ frontend/audio.c           |   12 +++++-
+ frontend/faad.sln          |   14 ++----
+ frontend/faad.vcproj       |   22 ++++++----
+ frontend/main.c            |   82 +++++++++++++++++++++++++++++-------
+ frontend/unicode_support.c |   98 ++++++++++++++++++++++++++++++++++++++++++++
+ frontend/unicode_support.h |   21 +++++++++
+ libfaad/common.h           |    1 +
+ libfaad/libfaad.sln        |    6 +-
+ libfaad/libfaad.vcproj     |   11 ++++-
+ 10 files changed, 230 insertions(+), 43 deletions(-)
+
+diff --git a/common/mp4ff/mp4ff.vcproj b/common/mp4ff/mp4ff.vcproj
+index 70fd4a0..7ed6158 100644
+--- a/common/mp4ff/mp4ff.vcproj
++++ b/common/mp4ff/mp4ff.vcproj
+@@ -1,9 +1,10 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8,00"
++	Version="9,00"
+ 	Name="mp4ff"
+ 	ProjectGUID="{F470BB4A-7675-4D6A-B310-41F33AC6F987}"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -44,8 +45,9 @@
+ 				InlineFunctionExpansion="1"
+ 				PreprocessorDefinitions="USE_TAGGING"
+ 				StringPooling="true"
+-				RuntimeLibrary="2"
++				RuntimeLibrary="0"
+ 				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				PrecompiledHeaderFile=".\Release/mp4ff.pch"
+ 				AssemblerListingLocation=".\Release/"
+diff --git a/frontend/audio.c b/frontend/audio.c
+index 067ac20..ad92118 100644
+--- a/frontend/audio.c
++++ b/frontend/audio.c
+@@ -36,12 +36,16 @@
+ #include <fcntl.h>
+ #include <math.h>
+ #include <neaacdec.h>
++
+ #include "audio.h"
++#include "unicode_support.h"
+ 
+ 
+ audio_file *open_audio_file(char *infile, int samplerate, int channels,
+                             int outputFormat, int fileType, long channelMask)
+ {
++    wchar_t *fileNameW;
++
+     audio_file *aufile = malloc(sizeof(audio_file));
+ 
+     aufile->outputFormat = outputFormat;
+@@ -78,7 +82,13 @@ audio_file *open_audio_file(char *infile, int samplerate, int channels,
+         aufile->toStdio = 1;
+     } else {
+         aufile->toStdio = 0;
+-        aufile->sndfile = fopen(infile, "wb");
++        aufile->sndfile = NULL;
++        fileNameW = utf8_to_utf16(infile);
++        if(fileNameW)
++        {
++            aufile->sndfile = _wfopen(fileNameW, L"wb");
++            free(fileNameW);
++        }
+     }
+ 
+     if (aufile->sndfile == NULL)
+diff --git a/frontend/faad.sln b/frontend/faad.sln
+index a47200b..3ccdf0f 100644
+--- a/frontend/faad.sln
++++ b/frontend/faad.sln
+@@ -1,15 +1,11 @@
+ ﻿
+-Microsoft Visual Studio Solution File, Format Version 9.00
+-# Visual Studio 2005
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "faad", "faad.vcproj", "{2BD8CBB3-DFC9-4A6A-9B7A-07ED749BED58}"
+-	ProjectSection(ProjectDependencies) = postProject
+-		{F470BB4A-7675-4D6A-B310-41F33AC6F987} = {F470BB4A-7675-4D6A-B310-41F33AC6F987}
+-		{BC3EFE27-9015-4C9C-AD3C-72B3B7ED2114} = {BC3EFE27-9015-4C9C-AD3C-72B3B7ED2114}
+-	EndProjectSection
++Microsoft Visual Studio Solution File, Format Version 11.00
++# Visual Studio 2010
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "faad", "faad.vcxproj", "{2BD8CBB3-DFC9-4A6A-9B7A-07ED749BED58}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfaad", "..\libfaad\libfaad.vcproj", "{BC3EFE27-9015-4C9C-AD3C-72B3B7ED2114}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfaad", "..\libfaad\libfaad.vcxproj", "{BC3EFE27-9015-4C9C-AD3C-72B3B7ED2114}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp4ff", "..\common\mp4ff\mp4ff.vcproj", "{F470BB4A-7675-4D6A-B310-41F33AC6F987}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp4ff", "..\common\mp4ff\mp4ff.vcxproj", "{F470BB4A-7675-4D6A-B310-41F33AC6F987}"
+ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+diff --git a/frontend/faad.vcproj b/frontend/faad.vcproj
+index b187293..185f64c 100644
+--- a/frontend/faad.vcproj
++++ b/frontend/faad.vcproj
+@@ -1,9 +1,10 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="faad"
+ 	ProjectGUID="{2BD8CBB3-DFC9-4A6A-9B7A-07ED749BED58}"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -78,6 +79,8 @@
+ 				GenerateDebugInformation="true"
+ 				ProgramDatabaseFile=".\Debug/faad.pdb"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 			/>
+ 			<Tool
+ 				Name="VCALinkTool"
+@@ -98,9 +101,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -133,15 +133,16 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				AdditionalOptions=""
+-				Optimization="1"
++				Optimization="3"
+ 				InlineFunctionExpansion="1"
+ 				EnableIntrinsicFunctions="true"
+ 				FavorSizeOrSpeed="1"
+ 				AdditionalIncludeDirectories="../include,../common/mp4ff,../common/faad"
+ 				PreprocessorDefinitions="WIN32,NDEBUG,_CONSOLE"
+ 				StringPooling="true"
+-				RuntimeLibrary="2"
++				RuntimeLibrary="0"
+ 				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				PrecompiledHeaderFile=".\Release/faad.pch"
+ 				AssemblerListingLocation=".\Release/"
+@@ -170,6 +171,8 @@
+ 				LinkIncremental="1"
+ 				SuppressStartupBanner="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 			/>
+ 			<Tool
+ 				Name="VCALinkTool"
+@@ -190,9 +193,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -216,6 +216,10 @@
+ 				RelativePath=".\main.c"
+ 				>
+ 			</File>
++			<File
++				RelativePath=".\unicode_support.c"
++				>
++			</File>
+ 		</Filter>
+ 		<Filter
+ 			Name="Header Files"
+diff --git a/frontend/main.c b/frontend/main.c
+index a3bb68d..8aa9bfa 100644
+--- a/frontend/main.c
++++ b/frontend/main.c
+@@ -47,6 +47,7 @@
+ #include <mp4ff.h>
+ 
+ #include "audio.h"
++#include "unicode_support.h"
+ 
+ #ifndef min
+ #define min(a,b) ( (a) < (b) ? (a) : (b) )
+@@ -69,6 +70,8 @@ static void faad_fprintf(FILE *stream, const char *fmt, ...)
+         vfprintf(stream, fmt, ap);
+ 
+         va_end(ap);
++
++		fflush(stream);
+     }
+ }
+ 
+@@ -427,11 +430,19 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+ 
+     aac_buffer b;
+ 
++    wchar_t *fileNameW;
++
+     memset(&b, 0, sizeof(aac_buffer));
+ 
+     if (adts_out)
+     {
+-        adtsFile = fopen(adts_fn, "wb");
++        adtsFile = NULL;
++        fileNameW = utf8_to_utf16(adts_fn);
++        if(fileNameW)
++        {
++            adtsFile = _wfopen(fileNameW, L"wb");
++            free(fileNameW);
++        }
+         if (adtsFile == NULL)
+         {
+             faad_fprintf(stderr, "Error opening file: %s\n", adts_fn);
+@@ -439,7 +450,13 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+         }
+     }
+ 
+-    b.infile = fopen(aacfile, "rb");
++    b.infile = NULL;
++    fileNameW = utf8_to_utf16(aacfile);
++    if(fileNameW)
++    {
++        b.infile = _wfopen(fileNameW, L"rb");
++        free(fileNameW);
++    }
+     if (b.infile == NULL)
+     {
+         /* unable to open file */
+@@ -634,7 +651,7 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+         if (percent > old_percent)
+         {
+             old_percent = percent;
+-            sprintf(percents, "%d%% decoding %s.", percent, aacfile);
++            sprintf(percents, "[%d%%] decoding %s.", percent, aacfile);
+             faad_fprintf(stderr, "%s\r", percents);
+ #ifdef _WIN32
+             SetConsoleTitle(percents);
+@@ -746,11 +763,19 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+     unsigned int framesize;
+     unsigned long timescale;
+ 
++    wchar_t *fileNameW;
+ 
+     /* initialise the callback structure */
+     mp4ff_callback_t *mp4cb = malloc(sizeof(mp4ff_callback_t));
+ 
+-    mp4File = fopen(mp4file, "rb");
++    mp4File = NULL;
++    fileNameW = utf8_to_utf16(mp4file);
++    if(fileNameW)
++    {
++        mp4File = _wfopen(fileNameW, L"rb");
++        free(fileNameW);
++    }
++    
+     mp4cb->read = read_callback;
+     mp4cb->seek = seek_callback;
+     mp4cb->user_data = mp4File;
+@@ -767,7 +792,13 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+ 
+     if (adts_out)
+     {
+-        adtsFile = fopen(adts_fn, "wb");
++        adtsFile = NULL;
++        fileNameW = utf8_to_utf16(adts_fn);
++        if(fileNameW)
++        {
++            adtsFile = _wfopen(fileNameW, L"wb");
++            free(fileNameW);
++        }
+         if (adtsFile == NULL)
+         {
+             faad_fprintf(stderr, "Error opening file: %s\n", adts_fn);
+@@ -973,8 +1004,9 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+         if (percent > old_percent)
+         {
+             old_percent = percent;
+-            sprintf(percents, "%d%% decoding %s.", percent, mp4file);
++            sprintf(percents, "[%d%%] decoding %s.", percent, mp4file);
+             faad_fprintf(stderr, "%s\r", percents);
++
+ #ifdef _WIN32
+             SetConsoleTitle(percents);
+ #endif
+@@ -1011,7 +1043,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+     return frameInfo.error;
+ }
+ 
+-int main(int argc, char *argv[])
++int faad_main(int argc, char *argv[])
+ {
+     int result;
+     int infoOnly = 0;
+@@ -1028,12 +1060,13 @@ int main(int argc, char *argv[])
+     int mp4file = 0;
+     int noGapless = 0;
+     char *fnp;
+-    char aacFileName[255];
+-    char audioFileName[255];
+-    char adtsFileName[255];
++    char *aacFileName = NULL; //[255];
++    char *audioFileName = NULL; //[255];
++    char *adtsFileName = NULL; //[255];
+     unsigned char header[8];
+     float length = 0;
+     FILE *hMP4File;
++    wchar_t *fileNameW;
+ 
+ /* System dependant types */
+ #ifdef _WIN32
+@@ -1044,7 +1077,6 @@ int main(int argc, char *argv[])
+ 
+     unsigned long cap = NeAACDecGetCapabilities();
+ 
+-
+     /* begin process command line */
+     progName = argv[0];
+     while (1) {
+@@ -1078,14 +1110,14 @@ int main(int argc, char *argv[])
+             if (optarg)
+             {
+                 outfile_set = 1;
+-                strcpy(audioFileName, optarg);
++                audioFileName = strdup(optarg);
+             }
+             break;
+         case 'a':
+             if (optarg)
+             {
+                 adts_out = 1;
+-                strcpy(adtsFileName, optarg);
++                adtsFileName = strdup(optarg);
+             }
+             break;
+         case 's':
+@@ -1205,7 +1237,7 @@ int main(int argc, char *argv[])
+ #endif
+ 
+     /* point to the specified file name */
+-    strcpy(aacFileName, argv[optind]);
++    aacFileName = strdup(argv[optind]);
+ 
+ #ifdef _WIN32
+     begin = GetTickCount();
+@@ -1218,7 +1250,7 @@ int main(int argc, char *argv[])
+      */
+     if(!writeToStdio && !outfile_set)
+     {
+-        strcpy(audioFileName, aacFileName);
++        audioFileName = strdup(aacFileName);
+ 
+         fnp = (char *)strrchr(audioFileName,'.');
+ 
+@@ -1230,7 +1262,13 @@ int main(int argc, char *argv[])
+ 
+     /* check for mp4 file */
+     mp4file = 0;
+-    hMP4File = fopen(aacFileName, "rb");
++    hMP4File = NULL;
++    fileNameW = utf8_to_utf16(aacFileName);
++    if(fileNameW)
++    {
++        hMP4File = _wfopen(fileNameW, L"rb");
++        free(fileNameW);
++    }
+     if (!hMP4File)
+     {
+         faad_fprintf(stderr, "Error opening file: %s\n", aacFileName);
+@@ -1268,3 +1306,15 @@ int main(int argc, char *argv[])
+ 
+     return 0;
+ }
++
++int wmain(int argc, wchar_t **argv_utf16)
++{
++  int result = 0;
++  char **argv_utf8 = NULL;
++
++  init_commandline_arguments_utf8(argc, &argv_utf8, argv_utf16);
++  result = faad_main(argc, argv_utf8);
++  free_commandline_arguments_utf8(argc, &argv_utf8);
++  
++  return result;
++}
+diff --git a/frontend/unicode_support.c b/frontend/unicode_support.c
+new file mode 100644
+index 0000000..21ecd5c
+--- /dev/null
++++ b/frontend/unicode_support.c
+@@ -0,0 +1,98 @@
++#include "unicode_support.h"
++
++#include <stdio.h>
++#include <windows.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	
++	if(!Buffer)
++	{
++		fprintf(stderr, "Error in utf16_to_utf8: Memory allocation failed!\n");
++		return NULL;
++	}
++
++	Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++
++	if(!Buffer)
++	{
++		fprintf(stderr, "Error in utf8_to_utf16: Memory allocation failed!\n");
++		return NULL;
++	}
++
++	Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int argc, char ***argv_utf8, wchar_t **argv_utf16)
++{
++	int i = 0;
++	
++	*argv_utf8 = (char**) malloc(argc * sizeof(char*));
++	if(!(*argv_utf8))
++	{
++		fprintf(stderr, "Error in init_commandline_arguments_utf8: Memory allocation failed!\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < argc; i++)
++	{
++		(*argv_utf8)[i] = utf16_to_utf8(argv_utf16[i]);
++		if(!(*argv_utf8)[i])
++		{
++			fprintf(stderr, "Error in init_commandline_arguments_utf8: Memory allocation failed!\n");
++			exit(-1);
++		}
++	}
++}
++
++void free_commandline_arguments_utf8(int argc, char ***argv_utf8)
++{
++	int i = 0;
++	
++	if(*argv_utf8 != NULL)
++	{
++		for(i = 0; i < argc; i++)
++		{
++			if((*argv_utf8)[i] != NULL)
++			{
++				free((*argv_utf8)[i]);
++				(*argv_utf8)[i] = NULL;
++			}
++		}
++		free(*argv_utf8);
++		*argv_utf8 = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
+diff --git a/frontend/unicode_support.h b/frontend/unicode_support.h
+new file mode 100644
+index 0000000..cc13fd9
+--- /dev/null
++++ b/frontend/unicode_support.h
+@@ -0,0 +1,21 @@
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++char *utf16_to_utf8(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int argc, char ***argv_utf8, wchar_t **argv_utf16);
++void free_commandline_arguments_utf8(int argc, char ***argv_utf8);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+\ No newline at end of file
+diff --git a/libfaad/common.h b/libfaad/common.h
+index d3b21c3..6796ded 100644
+--- a/libfaad/common.h
++++ b/libfaad/common.h
+@@ -346,6 +346,7 @@ char *strchr(), *strrchr();
+ 
+   #ifdef __ICL /* only Intel C compiler has fmath ??? */
+ 
++    #error Deine Mudda!
+     #include <mathf.h>
+ 
+     #define sin sinf
+diff --git a/libfaad/libfaad.sln b/libfaad/libfaad.sln
+index 88087f6..a22c0f4 100644
+--- a/libfaad/libfaad.sln
++++ b/libfaad/libfaad.sln
+@@ -1,6 +1,6 @@
+-Microsoft Visual Studio Solution File, Format Version 9.00
+-# Visual C++ Express 2005
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfaad", "libfaad.vcproj", "{BC3EFE27-9015-4C9C-AD3C-72B3B7ED2114}"
++Microsoft Visual Studio Solution File, Format Version 11.00
++# Visual Studio 2010
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfaad", "libfaad.vcxproj", "{BC3EFE27-9015-4C9C-AD3C-72B3B7ED2114}"
+ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+diff --git a/libfaad/libfaad.vcproj b/libfaad/libfaad.vcproj
+index 6401c9b..2adcf81 100644
+--- a/libfaad/libfaad.vcproj
++++ b/libfaad/libfaad.vcproj
+@@ -1,9 +1,11 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="libfaad"
+ 	ProjectGUID="{BC3EFE27-9015-4C9C-AD3C-72B3B7ED2114}"
++	RootNamespace="libfaad"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -41,13 +43,16 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				AdditionalOptions=""
+-				Optimization="2"
++				Optimization="3"
+ 				InlineFunctionExpansion="1"
++				EnableIntrinsicFunctions="true"
++				FavorSizeOrSpeed="1"
+ 				AdditionalIncludeDirectories="../include"
+ 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
+ 				StringPooling="true"
+-				RuntimeLibrary="2"
++				RuntimeLibrary="0"
+ 				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				PrecompiledHeaderFile=".\Release/libfaad.pch"
+ 				AssemblerListingLocation=".\Release/"

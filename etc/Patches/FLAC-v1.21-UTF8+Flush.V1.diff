@@ -1,0 +1,2798 @@
+ FLAC.sln                                           |  311 ++++++++------------
+ .../c/decode/file/example_c_decode_file.vcproj     |   13 +-
+ examples/c/decode/file/main.c                      |    2 +-
+ .../c/encode/file/example_c_encode_file.vcproj     |   13 +-
+ examples/c/encode/file/main.c                      |    2 +-
+ .../cpp/decode/file/example_cpp_decode_file.vcproj |   13 +-
+ examples/cpp/decode/file/main.cpp                  |    2 +-
+ .../cpp/encode/file/example_cpp_encode_file.vcproj |   13 +-
+ examples/cpp/encode/file/main.cpp                  |    2 +-
+ include/ogg/ogg.h                                  |  209 +++++++++++++
+ include/ogg/os_types.h                             |  148 ++++++++++
+ include/share/utf8.h                               |    3 +
+ src/flac/analyze.c                                 |    3 +-
+ src/flac/decode.c                                  |    7 +-
+ src/flac/encode.c                                  |    5 +-
+ src/flac/flac.vcproj                               |   23 +-
+ src/flac/foreign_metadata.c                        |   15 +-
+ src/flac/iffscan.c                                 |    4 +-
+ src/flac/iffscan.vcproj                            |   15 +-
+ src/flac/main.c                                    |   19 +-
+ src/flac/unicode_support.c                         |   87 ++++++
+ src/flac/unicode_support.h                         |   21 ++
+ src/flac/vorbiscomment.c                           |    7 +-
+ src/libFLAC++/libFLAC++_dynamic.vcproj             |   15 +-
+ src/libFLAC++/libFLAC++_static.vcproj              |    5 +-
+ src/libFLAC/libFLAC_dynamic.vcproj                 |   16 +-
+ src/libFLAC/libFLAC_static.vcproj                  |   11 +-
+ src/libFLAC/metadata_iterators.c                   |   12 +-
+ src/libFLAC/stream_decoder.c                       |    2 +-
+ src/libFLAC/stream_encoder.c                       |    2 +-
+ src/metaflac/metaflac.vcproj                       |   19 +-
+ .../flac_mac/flac_mac.vcproj                       |   15 +-
+ .../flac_ren/flac_ren.vcproj                       |   15 +-
+ src/plugin_common/plugin_common_static.vcproj      |    5 +-
+ src/plugin_winamp2/in_flac.vcproj                  |   15 +-
+ src/share/getopt/getopt_static.vcproj              |    5 +-
+ src/share/grabbag/grabbag_static.vcproj            |    5 +-
+ src/share/grabbag/picture.c                        |    2 +-
+ .../replaygain_analysis_static.vcproj              |    5 +-
+ .../replaygain_synthesis_static.vcproj             |    5 +-
+ src/share/utf8/utf8.c                              |    1 -
+ src/share/utf8/utf8_static.vcproj                  |    5 +-
+ src/test_grabbag/cuesheet/test_cuesheet.vcproj     |   15 +-
+ src/test_grabbag/picture/test_picture.vcproj       |   15 +-
+ src/test_libFLAC++/test_libFLAC++.vcproj           |   15 +-
+ src/test_libFLAC/test_libFLAC.vcproj               |   15 +-
+ .../test_libs_common_static.vcproj                 |    5 +-
+ src/test_seeking/test_seeking.vcproj               |   15 +-
+ src/test_streams/test_streams.vcproj               |   15 +-
+ 49 files changed, 836 insertions(+), 356 deletions(-)
+
+diff --git a/FLAC.sln b/FLAC.sln
+index a753408..4d1181c 100644
+--- a/FLAC.sln
++++ b/FLAC.sln
+@@ -1,140 +1,140 @@
+ ﻿
+-Microsoft Visual Studio Solution File, Format Version 9.00
+-# Visual C++ Express 2005
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "example_c_decode_file", "examples\c\decode\file\example_c_decode_file.vcproj", "{4cefbd00-c215-11db-8314-0800200c9a66}"
++Microsoft Visual Studio Solution File, Format Version 10.00
++# Visual Studio 2008
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example_c_decode_file", "examples\c\decode\file\example_c_decode_file.vcproj", "{4CEFBD00-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "example_c_encode_file", "examples\c\encode\file\example_c_encode_file.vcproj", "{4cefbd01-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example_c_encode_file", "examples\c\encode\file\example_c_encode_file.vcproj", "{4CEFBD01-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "example_cpp_decode_file", "examples\cpp\decode\file\example_cpp_decode_file.vcproj", "{4cefbe00-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example_cpp_decode_file", "examples\cpp\decode\file\example_cpp_decode_file.vcproj", "{4CEFBE00-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
+-		{4cefbc86-c215-11db-8314-0800200c9a66} = {4cefbc86-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
++		{4CEFBC86-C215-11DB-8314-0800200C9A66} = {4CEFBC86-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "example_cpp_encode_file", "examples\cpp\encode\file\example_cpp_encode_file.vcproj", "{4cefbe01-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example_cpp_encode_file", "examples\cpp\encode\file\example_cpp_encode_file.vcproj", "{4CEFBE01-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
+-		{4cefbc86-c215-11db-8314-0800200c9a66} = {4cefbc86-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
++		{4CEFBC86-C215-11DB-8314-0800200C9A66} = {4CEFBC86-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "flac", "src\flac\flac.vcproj", "{4cefbc7d-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flac", "src\flac\flac.vcproj", "{4CEFBC7D-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
+-		{4cefbc89-c215-11db-8314-0800200c9a66} = {4cefbc89-c215-11db-8314-0800200c9a66}
+-		{4cefbc92-c215-11db-8314-0800200c9a66} = {4cefbc92-c215-11db-8314-0800200c9a66}
+-		{4cefbc80-c215-11db-8314-0800200c9a66} = {4cefbc80-c215-11db-8314-0800200c9a66}
+-		{4cefbc8a-c215-11db-8314-0800200c9a66} = {4cefbc8a-c215-11db-8314-0800200c9a66}
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
++		{4CEFBC89-C215-11DB-8314-0800200C9A66} = {4CEFBC89-C215-11DB-8314-0800200C9A66}
++		{4CEFBC92-C215-11DB-8314-0800200C9A66} = {4CEFBC92-C215-11DB-8314-0800200C9A66}
++		{4CEFBC80-C215-11DB-8314-0800200C9A66} = {4CEFBC80-C215-11DB-8314-0800200C9A66}
++		{4CEFBC8A-C215-11DB-8314-0800200C9A66} = {4CEFBC8A-C215-11DB-8314-0800200C9A66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "iffscan", "src\flac\iffscan.vcproj", "{4cefbc94-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iffscan", "src\flac\iffscan.vcproj", "{4CEFBC94-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "flac_mac", "src\monkeys_audio_utilities\flac_mac\flac_mac.vcproj", "{4cefbc7e-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flac_mac", "src\monkeys_audio_utilities\flac_mac\flac_mac.vcproj", "{4CEFBC7E-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "flac_ren", "src\monkeys_audio_utilities\flac_ren\flac_ren.vcproj", "{4cefbc7f-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flac_ren", "src\monkeys_audio_utilities\flac_ren\flac_ren.vcproj", "{4CEFBC7F-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "flacdiff", "src\utils\flacdiff\flacdiff.vcproj", "{4cefbc93-c215-11db-8314-0800200c9a66}"
++Project("{4CEFBC7C-C215-11DB-8314-0800200C9A66}") = "flacdiff", "src\utils\flacdiff\flacdiff.vcproj", "{4CEFBC93-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc86-c215-11db-8314-0800200c9a66} = {4cefbc86-c215-11db-8314-0800200c9a66}
++		{4CEFBC86-C215-11DB-8314-0800200C9A66} = {4CEFBC86-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "flactimer", "src\utils\flactimer\flactimer.vcproj", "{4cefbc95-c215-11db-8314-0800200c9a66}"
++Project("{4CEFBC7C-C215-11DB-8314-0800200C9A66}") = "flactimer", "src\utils\flactimer\flactimer.vcproj", "{4CEFBC95-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "getopt_static", "src\share\getopt\getopt_static.vcproj", "{4cefbc80-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "getopt_static", "src\share\getopt\getopt_static.vcproj", "{4CEFBC80-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "grabbag_static", "src\share\grabbag\grabbag_static.vcproj", "{4cefbc81-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "grabbag_static", "src\share\grabbag\grabbag_static.vcproj", "{4CEFBC81-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
+-		{4cefbc89-c215-11db-8314-0800200c9a66} = {4cefbc89-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
++		{4CEFBC89-C215-11DB-8314-0800200C9A66} = {4CEFBC89-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "in_flac", "src\plugin_winamp2\in_flac.vcproj", "{4cefbc82-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "in_flac", "src\plugin_winamp2\in_flac.vcproj", "{4CEFBC82-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
+-		{4cefbc8a-c215-11db-8314-0800200c9a66} = {4cefbc8a-c215-11db-8314-0800200c9a66}
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
+-		{4cefbc88-c215-11db-8314-0800200c9a66} = {4cefbc88-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
++		{4CEFBC8A-C215-11DB-8314-0800200C9A66} = {4CEFBC8A-C215-11DB-8314-0800200C9A66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
++		{4CEFBC88-C215-11DB-8314-0800200C9A66} = {4CEFBC88-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "libFLAC_dynamic", "src\libFLAC\libFLAC_dynamic.vcproj", "{4cefbc83-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLAC_dynamic", "src\libFLAC\libFLAC_dynamic.vcproj", "{4CEFBC83-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "libFLAC_static", "src\libFLAC\libFLAC_static.vcproj", "{4cefbc84-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLAC_static", "src\libFLAC\libFLAC_static.vcproj", "{4CEFBC84-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "libFLAC++_dynamic", "src\libFLAC++\libFLAC++_dynamic.vcproj", "{4cefbc85-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLAC++_dynamic", "src\libFLAC++\libFLAC++_dynamic.vcproj", "{4CEFBC85-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc83-c215-11db-8314-0800200c9a66} = {4cefbc83-c215-11db-8314-0800200c9a66}
++		{4CEFBC83-C215-11DB-8314-0800200C9A66} = {4CEFBC83-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "libFLAC++_static", "src\libFLAC++\libFLAC++_static.vcproj", "{4cefbc86-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLAC++_static", "src\libFLAC++\libFLAC++_static.vcproj", "{4CEFBC86-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "metaflac", "src\metaflac\metaflac.vcproj", "{4cefbc87-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "metaflac", "src\metaflac\metaflac.vcproj", "{4CEFBC87-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
+-		{4cefbc80-c215-11db-8314-0800200c9a66} = {4cefbc80-c215-11db-8314-0800200c9a66}
+-		{4cefbc92-c215-11db-8314-0800200c9a66} = {4cefbc92-c215-11db-8314-0800200c9a66}
+-		{4cefbc89-c215-11db-8314-0800200c9a66} = {4cefbc89-c215-11db-8314-0800200c9a66}
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
++		{4CEFBC80-C215-11DB-8314-0800200C9A66} = {4CEFBC80-C215-11DB-8314-0800200C9A66}
++		{4CEFBC92-C215-11DB-8314-0800200C9A66} = {4CEFBC92-C215-11DB-8314-0800200C9A66}
++		{4CEFBC89-C215-11DB-8314-0800200C9A66} = {4CEFBC89-C215-11DB-8314-0800200C9A66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "plugin_common_static", "src\plugin_common\plugin_common_static.vcproj", "{4cefbc88-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin_common_static", "src\plugin_common\plugin_common_static.vcproj", "{4CEFBC88-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "replaygain_analysis_static", "src\share\replaygain_analysis\replaygain_analysis_static.vcproj", "{4cefbc89-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "replaygain_analysis_static", "src\share\replaygain_analysis\replaygain_analysis_static.vcproj", "{4CEFBC89-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "replaygain_synthesis_static", "src\share\replaygain_synthesis\replaygain_synthesis_static.vcproj", "{4cefbc8a-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "replaygain_synthesis_static", "src\share\replaygain_synthesis\replaygain_synthesis_static.vcproj", "{4CEFBC8A-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "test_cuesheet", "src\test_grabbag\cuesheet\test_cuesheet.vcproj", "{4cefbc8b-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_cuesheet", "src\test_grabbag\cuesheet\test_cuesheet.vcproj", "{4CEFBC8B-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "test_libFLAC", "src\test_libFLAC\test_libFLAC.vcproj", "{4cefbc8c-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_libFLAC", "src\test_libFLAC\test_libFLAC.vcproj", "{4CEFBC8C-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc8e-c215-11db-8314-0800200c9a66} = {4cefbc8e-c215-11db-8314-0800200c9a66}
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC8E-C215-11DB-8314-0800200C9A66} = {4CEFBC8E-C215-11DB-8314-0800200C9A66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "test_libFLAC++", "src\test_libFLAC++\test_libFLAC++.vcproj", "{4cefbc8d-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_libFLAC++", "src\test_libFLAC++\test_libFLAC++.vcproj", "{4CEFBC8D-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc86-c215-11db-8314-0800200c9a66} = {4cefbc86-c215-11db-8314-0800200c9a66}
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
+-		{4cefbc8e-c215-11db-8314-0800200c9a66} = {4cefbc8e-c215-11db-8314-0800200c9a66}
++		{4CEFBC86-C215-11DB-8314-0800200C9A66} = {4CEFBC86-C215-11DB-8314-0800200C9A66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
++		{4CEFBC8E-C215-11DB-8314-0800200C9A66} = {4CEFBC8E-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "test_libs_common_static", "src\test_libs_common\test_libs_common_static.vcproj", "{4cefbc8e-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_libs_common_static", "src\test_libs_common\test_libs_common_static.vcproj", "{4CEFBC8E-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "test_picture", "src\test_grabbag\picture\test_picture.vcproj", "{4cefbc8f-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_picture", "src\test_grabbag\picture\test_picture.vcproj", "{4CEFBC8F-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc81-c215-11db-8314-0800200c9a66} = {4cefbc81-c215-11db-8314-0800200c9a66}
++		{4CEFBC81-C215-11DB-8314-0800200C9A66} = {4CEFBC81-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "test_seeking", "src\test_seeking\test_seeking.vcproj", "{4cefbc90-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_seeking", "src\test_seeking\test_seeking.vcproj", "{4CEFBC90-C215-11DB-8314-0800200C9A66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+-		{4cefbc84-c215-11db-8314-0800200c9a66} = {4cefbc84-c215-11db-8314-0800200c9a66}
++		{4CEFBC84-C215-11DB-8314-0800200C9A66} = {4CEFBC84-C215-11DB-8314-0800200C9A66}
+ 	EndProjectSection
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "test_streams", "src\test_streams\test_streams.vcproj", "{4cefbc91-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_streams", "src\test_streams\test_streams.vcproj", "{4CEFBC91-C215-11DB-8314-0800200C9A66}"
+ EndProject
+-Project("{4cefbc7c-c215-11db-8314-0800200c9a66}") = "utf8_static", "src\share\utf8\utf8_static.vcproj", "{4cefbc92-c215-11db-8314-0800200c9a66}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "utf8_static", "src\share\utf8\utf8_static.vcproj", "{4CEFBC92-C215-11DB-8314-0800200C9A66}"
+ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+@@ -142,122 +142,61 @@ Global
+ 		Release|Win32 = Release|Win32
+ 	EndGlobalSection
+ 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+-		{4cefbc7d-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc7d-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc7d-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc7d-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc7e-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc7e-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc7e-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc7e-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc7f-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc7f-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc7f-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc7f-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc80-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc80-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc80-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc80-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc81-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc81-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc81-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc81-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc82-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc82-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc82-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc82-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc83-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc83-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc83-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc83-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc84-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc84-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc84-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc84-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc85-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc85-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc85-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc85-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc86-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc86-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc86-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc86-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc87-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc87-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc87-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc87-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc88-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc88-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc88-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc88-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc89-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc89-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc89-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc89-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc8a-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc8a-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc8a-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc8a-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc8b-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc8b-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc8b-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc8b-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc8c-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc8c-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc8c-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc8c-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc8d-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc8d-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc8d-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc8d-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc8e-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc8e-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc8e-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc8e-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc8f-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc8f-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc8f-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc8f-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc90-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc90-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc90-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc90-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc91-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc91-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc91-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc91-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc92-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc92-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc92-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc92-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc93-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc93-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc93-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc93-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc94-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc94-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc94-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc94-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbc95-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbc95-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbc95-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbc95-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbd00-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbd00-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbd00-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbd00-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbd01-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbd01-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbd01-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbd01-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbe00-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbe00-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbe00-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbe00-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
+-		{4cefbe01-c215-11db-8314-0800200c9a66}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{4cefbe01-c215-11db-8314-0800200c9a66}.Debug|Win32.Build.0 = Debug|Win32
+-		{4cefbe01-c215-11db-8314-0800200c9a66}.Release|Win32.ActiveCfg = Release|Win32
+-		{4cefbe01-c215-11db-8314-0800200c9a66}.Release|Win32.Build.0 = Release|Win32
++		{4CEFBD00-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBD00-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBD01-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBD01-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBE00-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBE00-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBE01-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBE01-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC7D-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC7D-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC7D-C215-11DB-8314-0800200C9A66}.Release|Win32.Build.0 = Release|Win32
++		{4CEFBC94-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC94-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC7E-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC7E-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC7F-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC7F-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC80-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC80-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC81-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC81-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC82-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC82-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC84-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC84-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC85-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC85-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC86-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC86-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC87-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC87-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC88-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC88-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC89-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC89-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC8A-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC8A-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC8B-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC8B-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC8C-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC8C-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC8D-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC8D-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC8E-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC8E-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC8F-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC8F-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC90-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC90-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC91-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC91-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
++		{4CEFBC92-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
++		{4CEFBC92-C215-11DB-8314-0800200C9A66}.Release|Win32.ActiveCfg = Release|Win32
+ 	EndGlobalSection
+ 	GlobalSection(SolutionProperties) = preSolution
+ 		HideSolutionNode = FALSE
+diff --git a/examples/c/decode/file/example_c_decode_file.vcproj b/examples/c/decode/file/example_c_decode_file.vcproj
+index dc338fc..348a749 100644
+--- a/examples/c/decode/file/example_c_decode_file.vcproj
++++ b/examples/c/decode/file/example_c_decode_file.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="example_c_decode_file"
+ 	ProjectGUID="{4cefbd00-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="example_c_decode_file"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -151,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/examples/c/decode/file/main.c b/examples/c/decode/file/main.c
+index 20fafa2..6f160a4 100644
+--- a/examples/c/decode/file/main.c
++++ b/examples/c/decode/file/main.c
+@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
+ 		return 1;
+ 	}
+ 
+-	if((fout = fopen(argv[2], "wb")) == NULL) {
++	if((fout = fopen_utf8(argv[2], "wb")) == NULL) {
+ 		fprintf(stderr, "ERROR: opening %s for output\n", argv[2]);
+ 		return 1;
+ 	}
+diff --git a/examples/c/encode/file/example_c_encode_file.vcproj b/examples/c/encode/file/example_c_encode_file.vcproj
+index 8a45a4d..319b8bd 100644
+--- a/examples/c/encode/file/example_c_encode_file.vcproj
++++ b/examples/c/encode/file/example_c_encode_file.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="example_c_encode_file"
+ 	ProjectGUID="{4cefbd01-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="example_c_encode_file"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -151,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/examples/c/encode/file/main.c b/examples/c/encode/file/main.c
+index d1037e3..148e045 100644
+--- a/examples/c/encode/file/main.c
++++ b/examples/c/encode/file/main.c
+@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
+ 		return 1;
+ 	}
+ 
+-	if((fin = fopen(argv[1], "rb")) == NULL) {
++	if((fin = fopen_utf8(argv[1], "rb")) == NULL) {
+ 		fprintf(stderr, "ERROR: opening %s for output\n", argv[1]);
+ 		return 1;
+ 	}
+diff --git a/examples/cpp/decode/file/example_cpp_decode_file.vcproj b/examples/cpp/decode/file/example_cpp_decode_file.vcproj
+index cace46f..eda36e1 100644
+--- a/examples/cpp/decode/file/example_cpp_decode_file.vcproj
++++ b/examples/cpp/decode/file/example_cpp_decode_file.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="example_cpp_decode_file"
+ 	ProjectGUID="{4cefbe00-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="example_cpp_decode_file"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -151,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/examples/cpp/decode/file/main.cpp b/examples/cpp/decode/file/main.cpp
+index 5614050..20749c5 100644
+--- a/examples/cpp/decode/file/main.cpp
++++ b/examples/cpp/decode/file/main.cpp
+@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
+ 		return 1;
+ 	}
+ 
+-	if((fout = fopen(argv[2], "wb")) == NULL) {
++	if((fout = fopen_utf8(argv[2], "wb")) == NULL) {
+ 		fprintf(stderr, "ERROR: opening %s for output\n", argv[2]);
+ 		return 1;
+ 	}
+diff --git a/examples/cpp/encode/file/example_cpp_encode_file.vcproj b/examples/cpp/encode/file/example_cpp_encode_file.vcproj
+index 7efab70..19d6314 100644
+--- a/examples/cpp/encode/file/example_cpp_encode_file.vcproj
++++ b/examples/cpp/encode/file/example_cpp_encode_file.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="example_cpp_encode_file"
+ 	ProjectGUID="{4cefbe01-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="example_cpp_encode_file"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -151,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/examples/cpp/encode/file/main.cpp b/examples/cpp/encode/file/main.cpp
+index 22448bb..29ce2a0 100644
+--- a/examples/cpp/encode/file/main.cpp
++++ b/examples/cpp/encode/file/main.cpp
+@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
+ 		return 1;
+ 	}
+ 
+-	if((fin = fopen(argv[1], "rb")) == NULL) {
++	if((fin = fopen_utf8(argv[1], "rb")) == NULL) {
+ 		fprintf(stderr, "ERROR: opening %s for output\n", argv[1]);
+ 		return 1;
+ 	}
+diff --git a/include/ogg/ogg.h b/include/ogg/ogg.h
+new file mode 100644
+index 0000000..cea5c16
+--- /dev/null
++++ b/include/ogg/ogg.h
+@@ -0,0 +1,209 @@
++/********************************************************************
++ *                                                                  *
++ * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
++ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
++ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
++ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
++ *                                                                  *
++ * THE OggVorbis SOURCE CODE IS (C) COPYRIGHT 1994-2007             *
++ * by the Xiph.Org Foundation http://www.xiph.org/                  *
++ *                                                                  *
++ ********************************************************************
++
++ function: toplevel libogg include
++ last mod: $Id: ogg.h 17571 2010-10-27 13:28:20Z xiphmont $
++
++ ********************************************************************/
++#ifndef _OGG_H
++#define _OGG_H
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++#include <stddef.h>
++#include <ogg/os_types.h>
++
++typedef struct {
++  void *iov_base;
++  size_t iov_len;
++} ogg_iovec_t;
++
++typedef struct {
++  long endbyte;
++  int  endbit;
++
++  unsigned char *buffer;
++  unsigned char *ptr;
++  long storage;
++} oggpack_buffer;
++
++/* ogg_page is used to encapsulate the data in one Ogg bitstream page *****/
++
++typedef struct {
++  unsigned char *header;
++  long header_len;
++  unsigned char *body;
++  long body_len;
++} ogg_page;
++
++/* ogg_stream_state contains the current encode/decode state of a logical
++   Ogg bitstream **********************************************************/
++
++typedef struct {
++  unsigned char   *body_data;    /* bytes from packet bodies */
++  long    body_storage;          /* storage elements allocated */
++  long    body_fill;             /* elements stored; fill mark */
++  long    body_returned;         /* elements of fill returned */
++
++
++  int     *lacing_vals;      /* The values that will go to the segment table */
++  ogg_int64_t *granule_vals; /* granulepos values for headers. Not compact
++                                this way, but it is simple coupled to the
++                                lacing fifo */
++  long    lacing_storage;
++  long    lacing_fill;
++  long    lacing_packet;
++  long    lacing_returned;
++
++  unsigned char    header[282];      /* working space for header encode */
++  int              header_fill;
++
++  int     e_o_s;          /* set when we have buffered the last packet in the
++                             logical bitstream */
++  int     b_o_s;          /* set after we've written the initial page
++                             of a logical bitstream */
++  long    serialno;
++  long    pageno;
++  ogg_int64_t  packetno;  /* sequence number for decode; the framing
++                             knows where there's a hole in the data,
++                             but we need coupling so that the codec
++                             (which is in a separate abstraction
++                             layer) also knows about the gap */
++  ogg_int64_t   granulepos;
++
++} ogg_stream_state;
++
++/* ogg_packet is used to encapsulate the data and metadata belonging
++   to a single raw Ogg/Vorbis packet *************************************/
++
++typedef struct {
++  unsigned char *packet;
++  long  bytes;
++  long  b_o_s;
++  long  e_o_s;
++
++  ogg_int64_t  granulepos;
++
++  ogg_int64_t  packetno;     /* sequence number for decode; the framing
++                                knows where there's a hole in the data,
++                                but we need coupling so that the codec
++                                (which is in a separate abstraction
++                                layer) also knows about the gap */
++} ogg_packet;
++
++typedef struct {
++  unsigned char *data;
++  int storage;
++  int fill;
++  int returned;
++
++  int unsynced;
++  int headerbytes;
++  int bodybytes;
++} ogg_sync_state;
++
++/* Ogg BITSTREAM PRIMITIVES: bitstream ************************/
++
++extern void  oggpack_writeinit(oggpack_buffer *b);
++extern int   oggpack_writecheck(oggpack_buffer *b);
++extern void  oggpack_writetrunc(oggpack_buffer *b,long bits);
++extern void  oggpack_writealign(oggpack_buffer *b);
++extern void  oggpack_writecopy(oggpack_buffer *b,void *source,long bits);
++extern void  oggpack_reset(oggpack_buffer *b);
++extern void  oggpack_writeclear(oggpack_buffer *b);
++extern void  oggpack_readinit(oggpack_buffer *b,unsigned char *buf,int bytes);
++extern void  oggpack_write(oggpack_buffer *b,unsigned long value,int bits);
++extern long  oggpack_look(oggpack_buffer *b,int bits);
++extern long  oggpack_look1(oggpack_buffer *b);
++extern void  oggpack_adv(oggpack_buffer *b,int bits);
++extern void  oggpack_adv1(oggpack_buffer *b);
++extern long  oggpack_read(oggpack_buffer *b,int bits);
++extern long  oggpack_read1(oggpack_buffer *b);
++extern long  oggpack_bytes(oggpack_buffer *b);
++extern long  oggpack_bits(oggpack_buffer *b);
++extern unsigned char *oggpack_get_buffer(oggpack_buffer *b);
++
++extern void  oggpackB_writeinit(oggpack_buffer *b);
++extern int   oggpackB_writecheck(oggpack_buffer *b);
++extern void  oggpackB_writetrunc(oggpack_buffer *b,long bits);
++extern void  oggpackB_writealign(oggpack_buffer *b);
++extern void  oggpackB_writecopy(oggpack_buffer *b,void *source,long bits);
++extern void  oggpackB_reset(oggpack_buffer *b);
++extern void  oggpackB_writeclear(oggpack_buffer *b);
++extern void  oggpackB_readinit(oggpack_buffer *b,unsigned char *buf,int bytes);
++extern void  oggpackB_write(oggpack_buffer *b,unsigned long value,int bits);
++extern long  oggpackB_look(oggpack_buffer *b,int bits);
++extern long  oggpackB_look1(oggpack_buffer *b);
++extern void  oggpackB_adv(oggpack_buffer *b,int bits);
++extern void  oggpackB_adv1(oggpack_buffer *b);
++extern long  oggpackB_read(oggpack_buffer *b,int bits);
++extern long  oggpackB_read1(oggpack_buffer *b);
++extern long  oggpackB_bytes(oggpack_buffer *b);
++extern long  oggpackB_bits(oggpack_buffer *b);
++extern unsigned char *oggpackB_get_buffer(oggpack_buffer *b);
++
++/* Ogg BITSTREAM PRIMITIVES: encoding **************************/
++
++extern int      ogg_stream_packetin(ogg_stream_state *os, ogg_packet *op);
++extern int      ogg_stream_iovecin(ogg_stream_state *os, ogg_iovec_t *iov,
++                                   int count, long e_o_s, ogg_int64_t granulepos);
++extern int      ogg_stream_pageout(ogg_stream_state *os, ogg_page *og);
++extern int      ogg_stream_pageout_fill(ogg_stream_state *os, ogg_page *og, int nfill);
++extern int      ogg_stream_flush(ogg_stream_state *os, ogg_page *og);
++
++/* Ogg BITSTREAM PRIMITIVES: decoding **************************/
++
++extern int      ogg_sync_init(ogg_sync_state *oy);
++extern int      ogg_sync_clear(ogg_sync_state *oy);
++extern int      ogg_sync_reset(ogg_sync_state *oy);
++extern int      ogg_sync_destroy(ogg_sync_state *oy);
++extern int      ogg_sync_check(ogg_sync_state *oy);
++
++extern char    *ogg_sync_buffer(ogg_sync_state *oy, long size);
++extern int      ogg_sync_wrote(ogg_sync_state *oy, long bytes);
++extern long     ogg_sync_pageseek(ogg_sync_state *oy,ogg_page *og);
++extern int      ogg_sync_pageout(ogg_sync_state *oy, ogg_page *og);
++extern int      ogg_stream_pagein(ogg_stream_state *os, ogg_page *og);
++extern int      ogg_stream_packetout(ogg_stream_state *os,ogg_packet *op);
++extern int      ogg_stream_packetpeek(ogg_stream_state *os,ogg_packet *op);
++
++/* Ogg BITSTREAM PRIMITIVES: general ***************************/
++
++extern int      ogg_stream_init(ogg_stream_state *os,int serialno);
++extern int      ogg_stream_clear(ogg_stream_state *os);
++extern int      ogg_stream_reset(ogg_stream_state *os);
++extern int      ogg_stream_reset_serialno(ogg_stream_state *os,int serialno);
++extern int      ogg_stream_destroy(ogg_stream_state *os);
++extern int      ogg_stream_check(ogg_stream_state *os);
++extern int      ogg_stream_eos(ogg_stream_state *os);
++
++extern void     ogg_page_checksum_set(ogg_page *og);
++
++extern int      ogg_page_version(const ogg_page *og);
++extern int      ogg_page_continued(const ogg_page *og);
++extern int      ogg_page_bos(const ogg_page *og);
++extern int      ogg_page_eos(const ogg_page *og);
++extern ogg_int64_t  ogg_page_granulepos(const ogg_page *og);
++extern int      ogg_page_serialno(const ogg_page *og);
++extern long     ogg_page_pageno(const ogg_page *og);
++extern int      ogg_page_packets(const ogg_page *og);
++
++extern void     ogg_packet_clear(ogg_packet *op);
++
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif  /* _OGG_H */
+diff --git a/include/ogg/os_types.h b/include/ogg/os_types.h
+new file mode 100644
+index 0000000..4438b30
+--- /dev/null
++++ b/include/ogg/os_types.h
+@@ -0,0 +1,148 @@
++/********************************************************************
++ *                                                                  *
++ * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
++ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
++ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
++ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
++ *                                                                  *
++ * THE OggVorbis SOURCE CODE IS (C) COPYRIGHT 1994-2002             *
++ * by the Xiph.Org Foundation http://www.xiph.org/                  *
++ *                                                                  *
++ ********************************************************************
++
++ function: #ifdef jail to whip a few platforms into the UNIX ideal.
++ last mod: $Id: os_types.h 17566 2010-10-26 10:56:31Z xiphmont $
++
++ ********************************************************************/
++#ifndef _OS_TYPES_H
++#define _OS_TYPES_H
++
++/* make it easy on the folks that want to compile the libs with a
++   different malloc than stdlib */
++#define _ogg_malloc  malloc
++#define _ogg_calloc  calloc
++#define _ogg_realloc realloc
++#define _ogg_free    free
++
++#if defined(_WIN32) 
++
++#  if defined(__CYGWIN__)
++#    include <stdint.h>
++     typedef int16_t ogg_int16_t;
++     typedef uint16_t ogg_uint16_t;
++     typedef int32_t ogg_int32_t;
++     typedef uint32_t ogg_uint32_t;
++     typedef int64_t ogg_int64_t;
++     typedef uint64_t ogg_uint64_t;
++#  elif defined(__MINGW32__)
++#    include <sys/types.h>
++     typedef short ogg_int16_t;
++     typedef unsigned short ogg_uint16_t;
++     typedef int ogg_int32_t;
++     typedef unsigned int ogg_uint32_t;
++     typedef long long ogg_int64_t;
++     typedef unsigned long long ogg_uint64_t;
++#  elif defined(__MWERKS__)
++     typedef long long ogg_int64_t;
++     typedef int ogg_int32_t;
++     typedef unsigned int ogg_uint32_t;
++     typedef short ogg_int16_t;
++     typedef unsigned short ogg_uint16_t;
++#  else
++     /* MSVC/Borland */
++     typedef unsigned __int64 ogg_uint64_t;
++     typedef __int64 ogg_int64_t;
++     typedef __int32 ogg_int32_t;
++     typedef unsigned __int32 ogg_uint32_t;
++     typedef __int16 ogg_int16_t;
++     typedef unsigned __int16 ogg_uint16_t;
++#  endif
++
++#elif defined(__MACOS__)
++
++#  include <sys/types.h>
++   typedef SInt16 ogg_int16_t;
++   typedef UInt16 ogg_uint16_t;
++   typedef SInt32 ogg_int32_t;
++   typedef UInt32 ogg_uint32_t;
++   typedef SInt64 ogg_int64_t;
++
++#elif (defined(__APPLE__) && defined(__MACH__)) /* MacOS X Framework build */
++
++#  include <inttypes.h>
++   typedef int16_t ogg_int16_t;
++   typedef u_int16_t ogg_uint16_t;
++   typedef int32_t ogg_int32_t;
++   typedef u_int32_t ogg_uint32_t;
++   typedef int64_t ogg_int64_t;
++
++#elif defined(__HAIKU__)
++
++  /* Haiku */
++#  include <sys/types.h>
++   typedef short ogg_int16_t;
++   typedef unsigned short ogg_uint16_t;
++   typedef int ogg_int32_t;
++   typedef unsigned int ogg_uint32_t;
++   typedef long long ogg_int64_t;
++
++#elif defined(__BEOS__)
++
++   /* Be */
++#  include <inttypes.h>
++   typedef int16_t ogg_int16_t;
++   typedef u_int16_t ogg_uint16_t;
++   typedef int32_t ogg_int32_t;
++   typedef u_int32_t ogg_uint32_t;
++   typedef int64_t ogg_int64_t;
++
++#elif defined (__EMX__)
++
++   /* OS/2 GCC */
++   typedef short ogg_int16_t;
++   typedef unsigned short ogg_uint16_t;
++   typedef int ogg_int32_t;
++   typedef unsigned int ogg_uint32_t;
++   typedef long long ogg_int64_t;
++
++#elif defined (DJGPP)
++
++   /* DJGPP */
++   typedef short ogg_int16_t;
++   typedef int ogg_int32_t;
++   typedef unsigned int ogg_uint32_t;
++   typedef long long ogg_int64_t;
++
++#elif defined(R5900)
++
++   /* PS2 EE */
++   typedef long ogg_int64_t;
++   typedef int ogg_int32_t;
++   typedef unsigned ogg_uint32_t;
++   typedef short ogg_int16_t;
++
++#elif defined(__SYMBIAN32__)
++
++   /* Symbian GCC */
++   typedef signed short ogg_int16_t;
++   typedef unsigned short ogg_uint16_t;
++   typedef signed int ogg_int32_t;
++   typedef unsigned int ogg_uint32_t;
++   typedef long long int ogg_int64_t;
++
++#elif defined(__TMS320C6X__)
++
++   /* TI C64x compiler */
++   typedef signed short ogg_int16_t;
++   typedef unsigned short ogg_uint16_t;
++   typedef signed int ogg_int32_t;
++   typedef unsigned int ogg_uint32_t;
++   typedef long long int ogg_int64_t;
++
++#else
++
++#  include <ogg/config_types.h>
++
++#endif
++
++#endif  /* _OS_TYPES_H */
+diff --git a/include/share/utf8.h b/include/share/utf8.h
+index 7d6650d..ebb3cbe 100644
+--- a/include/share/utf8.h
++++ b/include/share/utf8.h
+@@ -18,6 +18,9 @@
+  *   2 : input was invalid (but still converted, using '#')
+  *   3 : unknown encoding (but still converted, using '?')
+  */
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
+ 
+ int utf8_encode(const char *from, char **to);
+ int utf8_decode(const char *from, char **to);
+diff --git a/src/flac/analyze.c b/src/flac/analyze.c
+index 47a5e76..85cc9ad 100644
+--- a/src/flac/analyze.c
++++ b/src/flac/analyze.c
+@@ -27,6 +27,7 @@
+ #include <string.h>
+ #include "FLAC/all.h"
+ #include "analyze.h"
++#include <unicode_support.h>
+ 
+ typedef struct {
+ 	FLAC__int32 residual;
+@@ -218,7 +219,7 @@ FLAC__bool dump_stats(const subframe_stats_t *stats, const char *filename)
+ 	const double s1 = stats->stddev, s2 = s1*2, s3 = s1*3, s4 = s1*4, s5 = s1*5, s6 = s1*6;
+ 	const double p = stats->buckets[stats->peak_index].count;
+ 
+-	outfile = fopen(filename, "w");
++	outfile = fopen_utf8(filename, "w");
+ 
+ 	if(0 == outfile) {
+ 		fprintf(stderr, "ERROR opening %s: %s\n", filename, strerror(errno));
+diff --git a/src/flac/decode.c b/src/flac/decode.c
+index 1e537c0..bb53bcb 100644
+--- a/src/flac/decode.c
++++ b/src/flac/decode.c
+@@ -41,6 +41,7 @@
+ #include "share/grabbag.h"
+ #include "share/replaygain_synthesis.h"
+ #include "decode.h"
++#include <unicode_support.h>
+ 
+ typedef struct {
+ #if FLAC__HAS_OGG
+@@ -331,7 +332,7 @@ FLAC__bool DecoderSession_construct(DecoderSession *d, FLAC__bool is_ogg, FLAC__
+ 			d->fout = grabbag__file_get_binary_stdout();
+ 		}
+ 		else {
+-			if(0 == (d->fout = fopen(outfilename, "wb"))) {
++			if(0 == (d->fout = fopen_utf8(outfilename, "wb"))) {
+ 				flac__utils_printf(stderr, 1, "%s: ERROR: can't open output file %s: %s\n", d->inbasefilename, outfilename, strerror(errno));
+ 				DecoderSession_destroy(d, /*error_occurred=*/true);
+ 				return false;
+@@ -890,7 +891,7 @@ FLAC__bool write_sane_extended(FILE *f, unsigned val)
+ FLAC__bool fixup_iff_headers(DecoderSession *d)
+ {
+ 	const char *fmt_desc = (d->is_wave_out? "WAVE" : "AIFF");
+-	FILE *f = fopen(d->outfilename, "r+b"); /* stream is positioned at beginning of file */
++	FILE *f = fopen_utf8(d->outfilename, "r+b"); /* stream is positioned at beginning of file */
+ 
+ 	if(0 == f) {
+ 		flac__utils_printf(stderr, 1, "ERROR, couldn't open file %s while fixing up %s chunk size: %s\n", d->outfilename, fmt_desc, strerror(errno));
+@@ -1376,5 +1377,7 @@ void print_stats(const DecoderSession *decoder_session)
+ 				(unsigned)decoder_session->samples_processed
+ 			);
+ 		}
++
++		fflush(stderr);
+ 	}
+ }
+diff --git a/src/flac/encode.c b/src/flac/encode.c
+index 8d24349..c8267c3 100644
+--- a/src/flac/encode.c
++++ b/src/flac/encode.c
+@@ -43,6 +43,7 @@
+ #include "share/alloc.h"
+ #include "share/grabbag.h"
+ #include "encode.h"
++#include <unicode_support.h>
+ 
+ #ifdef min
+ #undef min
+@@ -2611,7 +2612,7 @@ FLAC__bool parse_cuesheet(FLAC__StreamMetadata **cuesheet, const char *cuesheet_
+ 		return false;
+ 	}
+ 
+-	if(0 == (f = fopen(cuesheet_filename, "r"))) {
++	if(0 == (f = fopen_utf8(cuesheet_filename, "r"))) {
+ 		flac__utils_printf(stderr, 1, "%s: ERROR opening cuesheet \"%s\" for reading: %s\n", inbasefilename, cuesheet_filename, strerror(errno));
+ 		return false;
+ 	}
+@@ -2666,6 +2667,8 @@ void print_stats(const EncoderSession *encoder_session)
+ 	else {
+ 		flac__utils_printf(stderr, 2, "\r%s: %u%% complete, ratio=%0.3f", encoder_session->inbasefilename, (unsigned)floor(progress * 100.0 + 0.5), ratio);
+ 	}
++
++	fflush(stderr);
+ }
+ 
+ void print_error_with_init_status(const EncoderSession *e, const char *message, FLAC__StreamEncoderInitStatus init_status)
+diff --git a/src/flac/flac.vcproj b/src/flac/flac.vcproj
+index 0680364..ca82678 100644
+--- a/src/flac/flac.vcproj
++++ b/src/flac/flac.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="flac"
+ 	ProjectGUID="{4cefbc7d-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="flac"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -125,6 +125,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__HAS_OGG;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -151,6 +153,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +176,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -208,6 +209,10 @@
+ 				>
+ 			</File>
+ 			<File
++				RelativePath=".\unicode_support.h"
++				>
++			</File>
++			<File
+ 				RelativePath=".\utils.h"
+ 				>
+ 			</File>
+@@ -246,6 +251,10 @@
+ 				>
+ 			</File>
+ 			<File
++				RelativePath=".\unicode_support.c"
++				>
++			</File>
++			<File
+ 				RelativePath=".\utils.c"
+ 				>
+ 			</File>
+diff --git a/src/flac/foreign_metadata.c b/src/flac/foreign_metadata.c
+index 3fc5310..88e7c28 100644
+--- a/src/flac/foreign_metadata.c
++++ b/src/flac/foreign_metadata.c
+@@ -34,6 +34,7 @@
+ #include "FLAC/metadata.h"
+ #include "share/alloc.h"
+ #include "foreign_metadata.h"
++#include <unicode_support.h>
+ 
+ #ifdef min
+ #undef min
+@@ -488,7 +489,7 @@ void flac__foreign_metadata_delete(foreign_metadata_t *fm)
+ FLAC__bool flac__foreign_metadata_read_from_aiff(foreign_metadata_t *fm, const char *filename, const char **error)
+ {
+ 	FLAC__bool ok;
+-	FILE *f = fopen(filename, "rb");
++	FILE *f = fopen_utf8(filename, "rb");
+ 	if(!f) {
+ 		if(error) *error = "can't open AIFF file for reading (000)";
+ 		return false;
+@@ -501,7 +502,7 @@ FLAC__bool flac__foreign_metadata_read_from_aiff(foreign_metadata_t *fm, const c
+ FLAC__bool flac__foreign_metadata_read_from_wave(foreign_metadata_t *fm, const char *filename, const char **error)
+ {
+ 	FLAC__bool ok;
+-	FILE *f = fopen(filename, "rb");
++	FILE *f = fopen_utf8(filename, "rb");
+ 	if(!f) {
+ 		if(error) *error = "can't open WAVE file for reading (000)";
+ 		return false;
+@@ -525,12 +526,12 @@ FLAC__bool flac__foreign_metadata_write_to_flac(foreign_metadata_t *fm, const ch
+ 		FLAC__metadata_simple_iterator_delete(it);
+ 		return false;
+ 	}
+-	if(0 == (fin = fopen(infilename, "rb"))) {
++	if(0 == (fin = fopen_utf8(infilename, "rb"))) {
+ 		if(error) *error = "can't open WAVE/AIFF file for reading (002)";
+ 		FLAC__metadata_simple_iterator_delete(it);
+ 		return false;
+ 	}
+-	if(0 == (fout = fopen(outfilename, "r+b"))) {
++	if(0 == (fout = fopen_utf8(outfilename, "r+b"))) {
+ 		if(error) *error = "can't open FLAC file for updating (003)";
+ 		FLAC__metadata_simple_iterator_delete(it);
+ 		fclose(fin);
+@@ -557,7 +558,7 @@ FLAC__bool flac__foreign_metadata_read_from_flac(foreign_metadata_t *fm, const c
+ 		FLAC__metadata_simple_iterator_delete(it);
+ 		return false;
+ 	}
+-	if(0 == (f = fopen(filename, "rb"))) {
++	if(0 == (f = fopen_utf8(filename, "rb"))) {
+ 		if(error) *error = "can't open FLAC file for reading (002)";
+ 		FLAC__metadata_simple_iterator_delete(it);
+ 		return false;
+@@ -572,11 +573,11 @@ FLAC__bool flac__foreign_metadata_write_to_iff(foreign_metadata_t *fm, const cha
+ {
+ 	FLAC__bool ok;
+ 	FILE *fin, *fout;
+-	if(0 == (fin = fopen(infilename, "rb"))) {
++	if(0 == (fin = fopen_utf8(infilename, "rb"))) {
+ 		if(error) *error = "can't open FLAC file for reading (000)";
+ 		return false;
+ 	}
+-	if(0 == (fout = fopen(outfilename, "r+b"))) {
++	if(0 == (fout = fopen_utf8(outfilename, "r+b"))) {
+ 		if(error) *error = "can't open WAVE/AIFF file for updating (001)";
+ 		fclose(fin);
+ 		return false;
+diff --git a/src/flac/iffscan.c b/src/flac/iffscan.c
+index d03b65b..46d11ef 100644
+--- a/src/flac/iffscan.c
++++ b/src/flac/iffscan.c
+@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
+ 		return 1;
+ 	}
+ 	fn = argv[1];
+-	if(0 == (f = fopen(fn, "rb")) || fread(buf, 1, 4, f) != 4) {
++	if(0 == (f = fopen_utf8(fn, "rb")) || fread(buf, 1, 4, f) != 4) {
+ 		fprintf(stderr, "ERROR opening %s for reading\n", fn);
+ 		return 1;
+ 	}
+@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
+ 			return 1;
+ 		}
+ 	}
+-	if(0 == (f = fopen(fn, "rb"))) {
++	if(0 == (f = fopen_utf8(fn, "rb"))) {
+ 		fprintf(stderr, "ERROR opening %s for reading\n", fn);
+ 		return 1;
+ 	}
+diff --git a/src/flac/iffscan.vcproj b/src/flac/iffscan.vcproj
+index 0651666..a2c5a58 100644
+--- a/src/flac/iffscan.vcproj
++++ b/src/flac/iffscan.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="iffscan"
+ 	ProjectGUID="{4cefbc94-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="iffscan"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -125,6 +125,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__HAS_OGG;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -151,6 +153,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +176,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/flac/main.c b/src/flac/main.c
+index f3716a8..b662978 100644
+--- a/src/flac/main.c
++++ b/src/flac/main.c
+@@ -28,6 +28,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
++#include <unicode_support.h>
+ 
+ #if !defined _MSC_VER && !defined __MINGW32__
+ /* unlink is in stdio.h in VC++ */
+@@ -294,7 +295,7 @@ static FLAC__int32 *align_reservoir[2] = { align_reservoir_0, align_reservoir_1
+ static unsigned align_reservoir_samples = 0; /* 0 .. 587 */
+ 
+ 
+-int main(int argc, char *argv[])
++int flac_main(int argc, char *argv[])
+ {
+ 	int retval = 0;
+ 
+@@ -1642,7 +1643,7 @@ int encode_file(const char *infilename, FLAC__bool is_first_file, FLAC__bool is_
+ 	}
+ 	else {
+ 		infilesize = grabbag__file_get_filesize(infilename);
+-		if(0 == (encode_infile = fopen(infilename, "rb"))) {
++		if(0 == (encode_infile = fopen_utf8(infilename, "rb"))) {
+ 			flac__utils_printf(stderr, 1, "ERROR: can't open input file %s: %s\n", infilename, strerror(errno));
+ 			return 1;
+ 		}
+@@ -2179,3 +2180,17 @@ FLAC__int64 local__strtoll(const char *src, char **endptr)
+ 	return neg? -ret : ret;
+ }
+ #endif
++
++int main(int __argc, char **__argv)
++{
++  int argc;
++  char **argv;
++  int exit_code;
++
++  init_commandline_arguments_utf8(&argc, &argv);
++  exit_code = flac_main(argc, argv);
++  free_commandline_arguments_utf8(&argc, &argv);
++  
++  return exit_code;
++}
++
+diff --git a/src/flac/unicode_support.c b/src/flac/unicode_support.c
+new file mode 100644
+index 0000000..d823d9c
+--- /dev/null
++++ b/src/flac/unicode_support.c
+@@ -0,0 +1,87 @@
++#include "unicode_support.h"
++
++#include <windows.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
+diff --git a/src/flac/unicode_support.h b/src/flac/unicode_support.h
+new file mode 100644
+index 0000000..97d639e
+--- /dev/null
++++ b/src/flac/unicode_support.h
+@@ -0,0 +1,21 @@
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++char *utf16_to_utf8(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+\ No newline at end of file
+diff --git a/src/flac/vorbiscomment.c b/src/flac/vorbiscomment.c
+index 6b35a1e..83c93eb 100644
+--- a/src/flac/vorbiscomment.c
++++ b/src/flac/vorbiscomment.c
+@@ -29,7 +29,8 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-
++#include <unicode_support.h>
++#include <Windows.h>
+ 
+ /*
+  * This struct and the following 4 static functions are copied from
+@@ -125,7 +126,7 @@ static FLAC__bool set_vc_field(FLAC__StreamMetadata *block, const Argument_VcFie
+ 		if(0 == (data = malloc(size+1)))
+ 			die("out of memory allocating tag value");
+ 		data[size] = '\0';
+-		if(0 == (f = fopen(field->field_value, "rb")) || fread(data, 1, size, f) != (size_t)size) {
++		if(0 == (f = fopen_utf8(field->field_value, "rb")) || fread(data, 1, size, f) != (size_t)size) {
+ 			free(data);
+ 			if(f)
+ 				fclose(f);
+@@ -169,7 +170,7 @@ static FLAC__bool set_vc_field(FLAC__StreamMetadata *block, const Argument_VcFie
+ 	}
+ 	else {
+ 		FLAC__bool needs_free = false;
+-		if(raw) {
++		if(true) {
+ 			entry.entry = (FLAC__byte *)field->field;
+ 		}
+ 		else if(utf8_encode(field->field, &converted) >= 0) {
+diff --git a/src/libFLAC++/libFLAC++_dynamic.vcproj b/src/libFLAC++/libFLAC++_dynamic.vcproj
+index 01aa2ea..6e5f413 100644
+--- a/src/libFLAC++/libFLAC++_dynamic.vcproj
++++ b/src/libFLAC++/libFLAC++_dynamic.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="libFLAC++_dynamic"
+ 	ProjectGUID="{4cefbc85-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="libFLAC++_dynamic"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -64,6 +65,8 @@
+ 				LinkIncremental="2"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="2"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -85,9 +88,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -122,6 +122,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;FLACPP_API_EXPORTS"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -145,6 +147,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -166,9 +170,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/libFLAC++/libFLAC++_static.vcproj b/src/libFLAC++/libFLAC++_static.vcproj
+index 9d75223..06377a4 100644
+--- a/src/libFLAC++/libFLAC++_static.vcproj
++++ b/src/libFLAC++/libFLAC++_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="libFLAC++_static"
+ 	ProjectGUID="{4cefbc86-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="libFLAC++_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -110,6 +111,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/libFLAC/libFLAC_dynamic.vcproj b/src/libFLAC/libFLAC_dynamic.vcproj
+index f8163ab..ae77c10 100644
+--- a/src/libFLAC/libFLAC_dynamic.vcproj
++++ b/src/libFLAC/libFLAC_dynamic.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="libFLAC_dynamic"
+ 	ProjectGUID="{4cefbc83-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="libFLAC_dynamic"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="2"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -125,6 +125,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;FLAC_API_EXPORTS;FLAC__HAS_OGG;FLAC__CPU_IA32;FLAC__HAS_NASM;FLAC__USE_3DNOW;VERSION=\&quot;1.2.0\&quot;"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -151,6 +153,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +176,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -436,6 +437,7 @@
+ 		</File>
+ 		<File
+ 			RelativePath=".\release_static\BuildLog.htm"
++			DeploymentContent="true"
+ 			>
+ 		</File>
+ 		<File
+diff --git a/src/libFLAC/libFLAC_static.vcproj b/src/libFLAC/libFLAC_static.vcproj
+index cdc1531..cdaef02 100644
+--- a/src/libFLAC/libFLAC_static.vcproj
++++ b/src/libFLAC/libFLAC_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="libFLAC_static"
+ 	ProjectGUID="{4cefbc84-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="libFLAC_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -108,9 +109,11 @@
+ 				OmitFramePointers="true"
+ 				WholeProgramOptimization="true"
+ 				AdditionalIncludeDirectories=".\include;..\..\include"
+-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__HAS_OGG;FLAC__CPU_IA32;FLAC__HAS_NASM;FLAC__USE_3DNOW;VERSION=\&quot;1.2.0\&quot;;FLAC__NO_DLL"
++				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__HAS_OGG;FLAC__CPU_IA32;FLAC__HAS_NASM;FLAC__USE_3DNOW;VERSION=\&quot;1.2.1\&quot;;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -157,11 +160,11 @@
+ 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+ 			>
+ 			<File
+-				RelativePath=".\include\protected\all.h"
++				RelativePath=".\include\private\all.h"
+ 				>
+ 			</File>
+ 			<File
+-				RelativePath=".\include\private\all.h"
++				RelativePath=".\include\protected\all.h"
+ 				>
+ 			</File>
+ 			<File
+diff --git a/src/libFLAC/metadata_iterators.c b/src/libFLAC/metadata_iterators.c
+index 15362f7..3571214 100644
+--- a/src/libFLAC/metadata_iterators.c
++++ b/src/libFLAC/metadata_iterators.c
+@@ -438,10 +438,10 @@ static FLAC__bool simple_iterator_prime_input_(FLAC__Metadata_SimpleIterator *it
+ 
+ 	FLAC__ASSERT(0 != iterator);
+ 
+-	if(read_only || 0 == (iterator->file = fopen(iterator->filename, "r+b"))) {
++	if(read_only || 0 == (iterator->file = fopen_utf8(iterator->filename, "r+b"))) {
+ 		iterator->is_writable = false;
+ 		if(read_only || errno == EACCES) {
+-			if(0 == (iterator->file = fopen(iterator->filename, "rb"))) {
++			if(0 == (iterator->file = fopen_utf8(iterator->filename, "rb"))) {
+ 				iterator->status = FLAC__METADATA_SIMPLE_ITERATOR_STATUS_ERROR_OPENING_FILE;
+ 				return false;
+ 			}
+@@ -1380,7 +1380,7 @@ static FLAC__bool chain_rewrite_metadata_in_place_(FLAC__Metadata_Chain *chain)
+ 
+ 	FLAC__ASSERT(0 != chain->filename);
+ 
+-	if(0 == (file = fopen(chain->filename, "r+b"))) {
++	if(0 == (file = fopen_utf8(chain->filename, "r+b"))) {
+ 		chain->status = FLAC__METADATA_CHAIN_STATUS_ERROR_OPENING_FILE;
+ 		return false;
+ 	}
+@@ -1405,7 +1405,7 @@ static FLAC__bool chain_rewrite_file_(FLAC__Metadata_Chain *chain, const char *t
+ 	FLAC__ASSERT(0 != chain->head);
+ 
+ 	/* copy the file prefix (data up to first metadata block */
+-	if(0 == (f = fopen(chain->filename, "rb"))) {
++	if(0 == (f = fopen_utf8(chain->filename, "rb"))) {
+ 		chain->status = FLAC__METADATA_CHAIN_STATUS_ERROR_OPENING_FILE;
+ 		return false;
+ 	}
+@@ -1542,7 +1542,7 @@ static FLAC__bool chain_read_(FLAC__Metadata_Chain *chain, const char *filename,
+ 
+ 	chain->is_ogg = is_ogg;
+ 
+-	if(0 == (file = fopen(filename, "rb"))) {
++	if(0 == (file = fopen_utf8(filename, "rb"))) {
+ 		chain->status = FLAC__METADATA_CHAIN_STATUS_ERROR_OPENING_FILE;
+ 		return false;
+ 	}
+@@ -3240,7 +3240,7 @@ FLAC__bool open_tempfile_(const char *filename, const char *tempfile_path_prefix
+ 		strcat(*tempfilename, tempfile_suffix);
+ 	}
+ 
+-	if(0 == (*tempfile = fopen(*tempfilename, "w+b"))) {
++	if(0 == (*tempfile = fopen_utf8(*tempfilename, "w+b"))) {
+ 		*status = FLAC__METADATA_SIMPLE_ITERATOR_STATUS_ERROR_OPENING_FILE;
+ 		return false;
+ 	}
+diff --git a/src/libFLAC/stream_decoder.c b/src/libFLAC/stream_decoder.c
+index 4d86fda..1e02948 100644
+--- a/src/libFLAC/stream_decoder.c
++++ b/src/libFLAC/stream_decoder.c
+@@ -628,7 +628,7 @@ static FLAC__StreamDecoderInitStatus init_file_internal_(
+ 	if(0 == write_callback || 0 == error_callback)
+ 		return decoder->protected_->state = FLAC__STREAM_DECODER_INIT_STATUS_INVALID_CALLBACKS;
+ 
+-	file = filename? fopen(filename, "rb") : stdin;
++	file = filename? fopen_utf8(filename, "rb") : stdin;
+ 
+ 	if(0 == file)
+ 		return FLAC__STREAM_DECODER_INIT_STATUS_ERROR_OPENING_FILE;
+diff --git a/src/libFLAC/stream_encoder.c b/src/libFLAC/stream_encoder.c
+index 6d9859c..2c1f1ad 100644
+--- a/src/libFLAC/stream_encoder.c
++++ b/src/libFLAC/stream_encoder.c
+@@ -1283,7 +1283,7 @@ static FLAC__StreamEncoderInitStatus init_file_internal_(
+ 	if(encoder->protected_->state != FLAC__STREAM_ENCODER_UNINITIALIZED)
+ 		return FLAC__STREAM_ENCODER_INIT_STATUS_ALREADY_INITIALIZED;
+ 
+-	file = filename? fopen(filename, "w+b") : stdout;
++	file = filename? fopen_utf8(filename, "w+b") : stdout;
+ 
+ 	if(file == 0) {
+ 		encoder->protected_->state = FLAC__STREAM_ENCODER_IO_ERROR;
+diff --git a/src/metaflac/metaflac.vcproj b/src/metaflac/metaflac.vcproj
+index 6da60fe..e2acb7d 100644
+--- a/src/metaflac/metaflac.vcproj
++++ b/src/metaflac/metaflac.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="metaflac"
+ 	ProjectGUID="{4cefbc87-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="metaflac"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -125,6 +125,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__HAS_OGG;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -151,6 +153,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +176,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -242,6 +243,10 @@
+ 				>
+ 			</File>
+ 			<File
++				RelativePath="..\flac\unicode_support.c"
++				>
++			</File>
++			<File
+ 				RelativePath=".\usage.c"
+ 				>
+ 			</File>
+diff --git a/src/monkeys_audio_utilities/flac_mac/flac_mac.vcproj b/src/monkeys_audio_utilities/flac_mac/flac_mac.vcproj
+index cc65f83..78fcf25 100644
+--- a/src/monkeys_audio_utilities/flac_mac/flac_mac.vcproj
++++ b/src/monkeys_audio_utilities/flac_mac/flac_mac.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="flac_mac"
+ 	ProjectGUID="{4cefbc7e-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="flac_mac"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -65,6 +66,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -86,9 +89,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -122,6 +122,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -147,6 +149,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -168,9 +172,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/monkeys_audio_utilities/flac_ren/flac_ren.vcproj b/src/monkeys_audio_utilities/flac_ren/flac_ren.vcproj
+index e6f274e..711fb9a 100644
+--- a/src/monkeys_audio_utilities/flac_ren/flac_ren.vcproj
++++ b/src/monkeys_audio_utilities/flac_ren/flac_ren.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="flac_ren"
+ 	ProjectGUID="{4cefbc7f-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="flac_ren"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -65,6 +66,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -86,9 +89,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -122,6 +122,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -147,6 +149,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -168,9 +172,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/plugin_common/plugin_common_static.vcproj b/src/plugin_common/plugin_common_static.vcproj
+index ee64d25..13bf3af 100644
+--- a/src/plugin_common/plugin_common_static.vcproj
++++ b/src/plugin_common/plugin_common_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="plugin_common_static"
+ 	ProjectGUID="{4cefbc88-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="plugin_common_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -111,6 +112,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/plugin_winamp2/in_flac.vcproj b/src/plugin_winamp2/in_flac.vcproj
+index 553451c..10439dc 100644
+--- a/src/plugin_winamp2/in_flac.vcproj
++++ b/src/plugin_winamp2/in_flac.vcproj
+@@ -1,10 +1,11 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="in_flac"
+ 	ProjectGUID="{4cefbc82-c215-11db-8314-0800200c9a66}"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="2"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -125,6 +125,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;IN_FLAC_EXPORTS;FLAC__NO_DLL;VERSION=\&quot;1.2.0\&quot;;TAGZ_UNICODE"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -152,6 +154,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -173,9 +177,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/share/getopt/getopt_static.vcproj b/src/share/getopt/getopt_static.vcproj
+index 028c82d..cd04394 100644
+--- a/src/share/getopt/getopt_static.vcproj
++++ b/src/share/getopt/getopt_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="getopt_static"
+ 	ProjectGUID="{4cefbc80-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="getopt_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -111,6 +112,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/share/grabbag/grabbag_static.vcproj b/src/share/grabbag/grabbag_static.vcproj
+index f548202..2483383 100644
+--- a/src/share/grabbag/grabbag_static.vcproj
++++ b/src/share/grabbag/grabbag_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="grabbag_static"
+ 	ProjectGUID="{4cefbc81-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="grabbag_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -111,6 +112,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/share/grabbag/picture.c b/src/share/grabbag/picture.c
+index 0e37273..aaeadfb 100644
+--- a/src/share/grabbag/picture.c
++++ b/src/share/grabbag/picture.c
+@@ -362,7 +362,7 @@ FLAC__StreamMetadata *grabbag__picture_parse_specification(const char *spec, con
+ 					if(0 == buffer)
+ 						*error_message = error_messages[0];
+ 					else {
+-						FILE *f = fopen(spec, "rb");
++						FILE *f = fopen_utf8(spec, "rb");
+ 						if(0 == f)
+ 							*error_message = error_messages[5];
+ 						else {
+diff --git a/src/share/replaygain_analysis/replaygain_analysis_static.vcproj b/src/share/replaygain_analysis/replaygain_analysis_static.vcproj
+index a6ffda2..c6b677f 100644
+--- a/src/share/replaygain_analysis/replaygain_analysis_static.vcproj
++++ b/src/share/replaygain_analysis/replaygain_analysis_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="replaygain_analysis_static"
+ 	ProjectGUID="{4cefbc89-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="replaygain_analysis_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -111,6 +112,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/share/replaygain_synthesis/replaygain_synthesis_static.vcproj b/src/share/replaygain_synthesis/replaygain_synthesis_static.vcproj
+index 627ab49..8e49a83 100644
+--- a/src/share/replaygain_synthesis/replaygain_synthesis_static.vcproj
++++ b/src/share/replaygain_synthesis/replaygain_synthesis_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="replaygain_synthesis_static"
+ 	ProjectGUID="{4cefbc8a-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="replaygain_synthesis_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -111,6 +112,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/share/utf8/utf8.c b/src/share/utf8/utf8.c
+index 303fe23..79eeb7d 100644
+--- a/src/share/utf8/utf8.c
++++ b/src/share/utf8/utf8.c
+@@ -34,7 +34,6 @@
+ #include "utf8.h"
+ #include "charset.h"
+ 
+-
+ #ifdef _WIN32
+ 
+ 	/* Thanks to Peter Harris <peter.harris@hummingbird.com> for this win32
+diff --git a/src/share/utf8/utf8_static.vcproj b/src/share/utf8/utf8_static.vcproj
+index bcc8ca3..ee90ccc 100644
+--- a/src/share/utf8/utf8_static.vcproj
++++ b/src/share/utf8/utf8_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="utf8_static"
+ 	ProjectGUID="{4cefbc92-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="utf8_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -111,6 +112,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/test_grabbag/cuesheet/test_cuesheet.vcproj b/src/test_grabbag/cuesheet/test_cuesheet.vcproj
+index e916bee..be37242 100644
+--- a/src/test_grabbag/cuesheet/test_cuesheet.vcproj
++++ b/src/test_grabbag/cuesheet/test_cuesheet.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="test_cuesheet"
+ 	ProjectGUID="{4cefbc8b-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="test_cuesheet"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -66,6 +67,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -87,9 +90,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -124,6 +124,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -149,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -170,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/test_grabbag/picture/test_picture.vcproj b/src/test_grabbag/picture/test_picture.vcproj
+index bd300ec..fc2800f 100644
+--- a/src/test_grabbag/picture/test_picture.vcproj
++++ b/src/test_grabbag/picture/test_picture.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="test_picture"
+ 	ProjectGUID="{4cefbc8f-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="test_picture"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -66,6 +67,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -87,9 +90,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -124,6 +124,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -149,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -170,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/test_libFLAC++/test_libFLAC++.vcproj b/src/test_libFLAC++/test_libFLAC++.vcproj
+index ed392ab..18451ac 100644
+--- a/src/test_libFLAC++/test_libFLAC++.vcproj
++++ b/src/test_libFLAC++/test_libFLAC++.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="test_libFLAC++"
+ 	ProjectGUID="{4cefbc8d-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="test_libFLAC++"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -66,6 +67,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -87,9 +90,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -124,6 +124,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -149,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -170,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/test_libFLAC/test_libFLAC.vcproj b/src/test_libFLAC/test_libFLAC.vcproj
+index 47988e7..d62611b 100644
+--- a/src/test_libFLAC/test_libFLAC.vcproj
++++ b/src/test_libFLAC/test_libFLAC.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="test_libFLAC"
+ 	ProjectGUID="{4cefbc8c-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="test_libFLAC"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -125,6 +125,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -151,6 +153,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +176,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/test_libs_common/test_libs_common_static.vcproj b/src/test_libs_common/test_libs_common_static.vcproj
+index b1c9074..9d960ea 100644
+--- a/src/test_libs_common/test_libs_common_static.vcproj
++++ b/src/test_libs_common/test_libs_common_static.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="test_libs_common_static"
+ 	ProjectGUID="{4cefbc8e-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="test_libs_common_static"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -111,6 +112,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+diff --git a/src/test_seeking/test_seeking.vcproj b/src/test_seeking/test_seeking.vcproj
+index b4cf8ec..428c845 100644
+--- a/src/test_seeking/test_seeking.vcproj
++++ b/src/test_seeking/test_seeking.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="test_seeking"
+ 	ProjectGUID="{4cefbc90-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="test_seeking"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -67,6 +68,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -88,9 +91,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -125,6 +125,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__HAS_OGG;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -151,6 +153,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -172,9 +176,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+diff --git a/src/test_streams/test_streams.vcproj b/src/test_streams/test_streams.vcproj
+index fec5fac..0988966 100644
+--- a/src/test_streams/test_streams.vcproj
++++ b/src/test_streams/test_streams.vcproj
+@@ -1,11 +1,12 @@
+ <?xml version="1.0" encoding="Windows-1252"?>
+ <VisualStudioProject
+ 	ProjectType="Visual C++"
+-	Version="8.00"
++	Version="9,00"
+ 	Name="test_streams"
+ 	ProjectGUID="{4cefbc91-c215-11db-8314-0800200c9a66}"
+ 	RootNamespace="test_streams"
+ 	Keyword="Win32Proj"
++	TargetFrameworkVersion="131072"
+ 	>
+ 	<Platforms>
+ 		<Platform
+@@ -66,6 +67,8 @@
+ 				IgnoreDefaultLibraryNames="uuid.lib"
+ 				GenerateDebugInformation="true"
+ 				SubSystem="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -87,9 +90,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>
+@@ -124,6 +124,8 @@
+ 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FLAC__NO_DLL"
+ 				RuntimeLibrary="0"
+ 				BufferSecurityCheck="false"
++				EnableFunctionLevelLinking="true"
++				EnableEnhancedInstructionSet="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="true"
+@@ -149,6 +151,8 @@
+ 				OptimizeReferences="2"
+ 				EnableCOMDATFolding="2"
+ 				LinkTimeCodeGeneration="1"
++				RandomizedBaseAddress="1"
++				DataExecutionPrevention="0"
+ 				TargetMachine="1"
+ 			/>
+ 			<Tool
+@@ -170,9 +174,6 @@
+ 				Name="VCAppVerifierTool"
+ 			/>
+ 			<Tool
+-				Name="VCWebDeploymentTool"
+-			/>
+-			<Tool
+ 				Name="VCPostBuildEventTool"
+ 			/>
+ 		</Configuration>

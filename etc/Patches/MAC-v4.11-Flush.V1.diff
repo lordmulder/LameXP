@@ -1,0 +1,19 @@
+ Source/Console/Console.cpp          |    1 +
+ Source/MACLib/Assembly/Assembly.obj |  Bin 836 -> 836 bytes
+ 2 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/Source/Console/Console.cpp b/Source/Console/Console.cpp
+index 7d7c8c4..3a3179b 100644
+--- a/Source/Console/Console.cpp
++++ b/Source/Console/Console.cpp
+@@ -63,6 +63,7 @@ void CALLBACK ProgressCallback(int nPercentageDone)
+ 	// output the progress
+ 	_ftprintf(stderr, _T("Progress: %.1f%% (%.1f seconds remaining, %.1f seconds total)          \r"), 
+ 		dProgress * 100, dRemaining, dElapsed);
++	fflush(stderr);
+ }
+ 
+ /***************************************************************************************
+diff --git a/Source/MACLib/Assembly/Assembly.obj b/Source/MACLib/Assembly/Assembly.obj
+index b38feba..2289e97 100644
+Binary files a/Source/MACLib/Assembly/Assembly.obj and b/Source/MACLib/Assembly/Assembly.obj differ
