@@ -94,6 +94,10 @@ AbstractTool::AbstractTool(void)
 					CloseHandle(jobObject);
 				}
 			}
+			else
+			{
+				qWarning("Failed to create the job object!");
+			}
 		}
 	}
 	else
