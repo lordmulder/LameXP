@@ -40,8 +40,16 @@ typedef BOOL (WINAPI *AssignProcessToJobObjectFun)(__in HANDLE hJob, __in HANDLE
 /*
  * Static vars
  */
+quint64 AbstractTool::m_lastLaunchTime = 0ui64;
 QMutex *AbstractTool::m_mutex_startProcess = NULL;
 HANDLE AbstractTool::m_handle_jobObject = NULL;
+unsigned int AbstractTool::m_jobObjRefCount = 0U;
+
+/*
+ * Const
+ */
+static const DWORD START_DELAY = 333; //in milliseconds
+static const quint64 START_DELAY_NANO = START_DELAY * 1000 * 10; //in 100-nanosecond intervals
 
 /*
  * Constructor
@@ -56,7 +64,9 @@ AbstractTool::AbstractTool(void)
 		m_mutex_startProcess = new QMutex();
 	}
 
-	if(!m_handle_jobObject)
+	QMutexLocker lock(m_mutex_startProcess);
+
+	if(m_jobObjRefCount < 1U)
 	{
 		if(!CreateJobObjectPtr || !SetInformationJobObjectPtr)
 		{
@@ -66,19 +76,29 @@ AbstractTool::AbstractTool(void)
 		}
 		if(CreateJobObjectPtr && SetInformationJobObjectPtr)
 		{
-			m_handle_jobObject = CreateJobObjectPtr(NULL, NULL);
-			if(m_handle_jobObject == INVALID_HANDLE_VALUE)
-			{
-				m_handle_jobObject = NULL;
-			}
-			if(m_handle_jobObject)
+			HANDLE jobObject = CreateJobObjectPtr(NULL, NULL);
+			if((jobObject != NULL) && (jobObject != INVALID_HANDLE_VALUE))
 			{
 				JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobExtendedLimitInfo;
 				memset(&jobExtendedLimitInfo, 0, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
+				memset(&jobExtendedLimitInfo.BasicLimitInformation, 0, sizeof(JOBOBJECT_BASIC_LIMIT_INFORMATION));
 				jobExtendedLimitInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE | JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
-				SetInformationJobObjectPtr(m_handle_jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
+				if(SetInformationJobObjectPtr(jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION)))
+				{
+					m_handle_jobObject = jobObject;
+					m_jobObjRefCount = 1U;
+				}
+				else
+				{
+					qWarning("Failed to set job object information!");
+					CloseHandle(jobObject);
+				}
 			}
 		}
+	}
+	else
+	{
+		m_jobObjRefCount++;
 	}
 
 	m_firstLaunch = true;
@@ -89,10 +109,16 @@ AbstractTool::AbstractTool(void)
  */
 AbstractTool::~AbstractTool(void)
 {
-	if(m_handle_jobObject)
+	QMutexLocker lock(m_mutex_startProcess);
+
+	if(m_jobObjRefCount >= 1U)
 	{
-		CloseHandle(m_handle_jobObject);
-		m_handle_jobObject = NULL;
+		m_jobObjRefCount--;
+		if((m_jobObjRefCount < 1U) && m_handle_jobObject)
+		{
+			CloseHandle(m_handle_jobObject);
+			m_handle_jobObject = NULL;
+		}
 	}
 }
 
@@ -104,6 +130,12 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	static AssignProcessToJobObjectFun AssignProcessToJobObjectPtr = NULL;
 	
 	QMutexLocker lock(m_mutex_startProcess);
+
+	if(currentTime() <= m_lastLaunchTime)
+	{
+		Sleep(START_DELAY);
+	}
+
 	emit messageLogged(commandline2string(program, args) + "\n");
 
 	QProcessEnvironment env = process.processEnvironment();
@@ -124,10 +156,12 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	
 	if(process.waitForStarted())
 	{
-		
-		if(AssignProcessToJobObjectPtr)
+		if(AssignProcessToJobObjectPtr && m_handle_jobObject)
 		{
-			AssignProcessToJobObjectPtr(m_handle_jobObject, process.pid()->hProcess);
+			if(!AssignProcessToJobObjectPtr(m_handle_jobObject, process.pid()->hProcess))
+			{
+				qWarning("Failed to assign process to job object!");
+			}
 		}
 		if(!SetPriorityClass(process.pid()->hProcess, BELOW_NORMAL_PRIORITY_CLASS))
 		{
@@ -142,6 +176,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 			m_firstLaunch = false;
 		}
 		
+		m_lastLaunchTime = currentTime() + START_DELAY_NANO;
 		return true;
 	}
 
@@ -151,6 +186,8 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 
 	process.kill();
 	process.waitForFinished(-1);
+
+	m_lastLaunchTime = currentTime() + START_DELAY_NANO;
 	return false;
 }
 
@@ -193,3 +230,14 @@ QString AbstractTool::pathToShort(const QString &longPath)
 	return (shortPath.isEmpty() ? longPath : shortPath);
 }
 
+const quint64 AbstractTool::currentTime(void)
+{
+	FILETIME fileTime;
+	GetSystemTimeAsFileTime(&fileTime);
+
+	ULARGE_INTEGER temp;
+	temp.HighPart = fileTime.dwHighDateTime;
+	temp.LowPart = fileTime.dwLowDateTime;
+
+	return temp.QuadPart;
+}

@@ -110,7 +110,7 @@ void SplashScreen::showSplash(QThread *thread)
 	{
 		opacity = 0.01 * static_cast<double>(i);
 		splashScreen->setWindowOpacity(opacity);
-		QApplication::processEvents();
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
 		Sleep(FADE_DELAY);
 	}
 
@@ -135,7 +135,7 @@ void SplashScreen::showSplash(QThread *thread)
 	{
 		opacity = 0.01 * static_cast<double>(i);
 		splashScreen->setWindowOpacity(opacity);
-		QApplication::processEvents();
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
 		Sleep(FADE_DELAY);
 	}
 

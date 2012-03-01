@@ -826,18 +826,20 @@ LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(softwar
 <br>
 LameXP is currently being developed using the following build environment:<br><ul>
 <li><a href="http://www.microsoft.com/visualstudio/en-us" target="_blank">Visual Studio 2010</a> with Service Pack 1, running on Windows 7 with Service Pack 1
-<li>Desktop Qt v4.7.3 (MSVC 2008), included in <a href="http://qt.nokia.com/products/qt-sdk" target="_blank">Qt SDK v1.1</a>
+<li>Desktop Qt v4.8.0 (MSVC 2010), included in <a href="http://qt.nokia.com/products/qt-sdk" target="_blank">Qt SDK v1.2</a>
 <li><a href="http://www.microsoft.com/downloads/en/details.aspx?FamilyID=35AEDA01-421D-4BA5-B44B-543DC8C33A20" target="_blank">Windows Platform SDK v7.1</a> (Windows SDK for Windows 7 and .NET Framework 4)
-<li>The minimum supported Windows version is Windows XP with Service Pack 2</ul>
+<li>The minimum supported build platform is Windows XP with Service Pack 2</ul>
 <br>
 Also note the following hints:<br><ul>
 <li>Run "qtenv2.bat" before launching Visual Studio in order to set up the Qt environment
 <li>Visual Studio 2008 solution/project files are still provided for people targeting Windows 2000
 <li>In order to make a "fully static" build of LameXP, you need to compile Qt as 'static' libraries
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
+<li>Only the "fully static" builds may still run on Windows 2000, due to workarounds we implemented
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
 <br>
 In order to use the LameXP deployment scripts you need the following tools:<br><ul>
+<li>Visual Studio 2010 with Service Pack 1 with Desktop Qt v4.8.0
 <li><a href="http://www.7-zip.org/" target="_blank">7-Zip</a> - file archiver with a high compression ratio
 <li><a href="http://www.scratchpaper.com/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (Unicode Version)<ul>
 <li><a href="http://nsis.sourceforge.net/StdUtils_plug-in" target="_blank">StdUtils plug-in</a>
@@ -847,7 +849,7 @@ In order to use the LameXP deployment scripts you need the following tools:<br><
 <li><a href="http://upx.sourceforge.net/" target="_blank">UPX</a> - the Ultimate Packer for eXecutables
 <li><a href="http://www.matcode.com/mpress.htm" target="_blank">MPRESS</a> - high-performance executable packer for PE32/PE32+
 <li><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x<div style="height:7px"></div>
-<li>Copy 'buildenv.template.txt' to 'buildenv.txt' and edit the paths as needed!</ul>
+<li>NOTE: Copy 'buildenv.template.txt' to 'buildenv.txt' and edit the paths as needed!</ul>
 <br>
 Instructions to build Qt as 'static' libraries:<br><ul>
 <li>Make sure Visual Studio 2010 and Strawberry Perl for Windows are installed

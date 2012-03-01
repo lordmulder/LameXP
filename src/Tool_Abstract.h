@@ -37,6 +37,7 @@ public:
 	bool startProcess(QProcess &process, const QString &program, const QStringList &args);
 	static QString commandline2string(const QString &program, const QStringList &arguments);
 	static QString AbstractTool::pathToShort(const QString &longPath);
+	static inline const quint64 currentTime(void);
 
 signals:
 	void statusUpdated(int progress);
@@ -46,7 +47,10 @@ protected:
 	static const int m_processTimeoutInterval = 600000;
 
 private:
+	static quint64 m_lastLaunchTime;
 	static QMutex *m_mutex_startProcess;
+	static unsigned int  m_jobObjRefCount;
 	static void *m_handle_jobObject;
+
 	bool m_firstLaunch;
 };
