@@ -68,11 +68,15 @@ AbstractTool::AbstractTool(void)
 
 	if(m_jobObjRefCount < 1U)
 	{
-		if(!CreateJobObjectPtr || !SetInformationJobObjectPtr)
+		DWORD osVersionNo = lamexp_get_os_version();
+		if(((HIWORD(osVersionNo) == 5) && (LOWORD(osVersionNo) >= 1)) || (HIWORD(osVersionNo) > 5))
 		{
-			QLibrary Kernel32Lib("kernel32.dll");
-			CreateJobObjectPtr = (CreateJobObjectFun) Kernel32Lib.resolve("CreateJobObjectA");
-			SetInformationJobObjectPtr = (SetInformationJobObjectFun) Kernel32Lib.resolve("SetInformationJobObject");
+			if((!CreateJobObjectPtr) || (!SetInformationJobObjectPtr))
+			{
+				QLibrary Kernel32Lib("kernel32.dll");
+				CreateJobObjectPtr = (CreateJobObjectFun) Kernel32Lib.resolve("CreateJobObjectA");
+				SetInformationJobObjectPtr = (SetInformationJobObjectFun) Kernel32Lib.resolve("SetInformationJobObject");
+			}
 		}
 		if(CreateJobObjectPtr && SetInformationJobObjectPtr)
 		{
