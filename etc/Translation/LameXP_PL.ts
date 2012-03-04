@@ -26,7 +26,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="146"/>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation type="unfinished">Specjalne podziękowania dla John33 z %1 za jego stałe wsparcie.</translation>
+        <translation type="unfinished">Specjalne podziękowania dla John33 z %1 za jego ciągłe wsparcie.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="150"/>
@@ -88,7 +88,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="335"/>
         <source>About Contributors</source>
-        <translation type="unfinished">Info o </translation>
+        <translation type="unfinished">Informacje o tłumaczach</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="350"/>
@@ -421,7 +421,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="200"/>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation type="unfinished">Nie znaleziono wspieranego formatu dźwięku w żadnej ze ścieżek obrazu Cue Sheet!</translation>
+        <translation type="unfinished">Nie znaleziono obsługiwanego formatu dźwięku w żadnej ze ścieżek obrazu Cue Sheet!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="200"/>
@@ -630,7 +630,7 @@
     <message>
         <location filename="../../src/Registry_Decoder.cpp" line="108"/>
         <source>All supported types</source>
-        <translation type="unfinished">Wszystkie wspierane pliki</translation>
+        <translation type="unfinished">Wszystkie obsługiwane pliki</translation>
     </message>
     <message>
         <location filename="../../src/Registry_Decoder.cpp" line="111"/>
@@ -694,7 +694,7 @@
     <message>
         <location filename="../../src/Model_FileList.cpp" line="339"/>
         <source>Select ANSI Codepage for CSV file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wybierz zestaw znaków ANSI dla pliku CVS:</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileList.cpp" line="340"/>
@@ -1256,7 +1256,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2921"/>
         <source>Speech</source>
-        <translation type="unfinished">Mowa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2926"/>
@@ -1351,7 +1351,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3292"/>
         <source>Rename Pattern:</source>
-        <translation type="unfinished">Wzór wyjściowy:</translation>
+        <translation type="unfinished">Format wyjściowy:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3305"/>
@@ -1890,12 +1890,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="712"/>
         <source>Export Meta Tags to CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eksportuj Tagi do pliku CVS</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="713"/>
         <source>Import Meta Tags from CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Importuj Tagi do pliku CVS</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1050"/>
@@ -2143,7 +2143,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2173"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2177"/>
         <source>Save CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zapisz plik CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2173"/>
@@ -2151,7 +2151,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2224"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2230"/>
         <source>CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Plik CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2194"/>
@@ -2159,38 +2159,38 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2200"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
         <source>CSV Export</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eksportowanie CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2194"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie ma żadnych tagów, które można eksportować!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2197"/>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można otworzyć pliku CSV aby go zapisać!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2200"/>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można zapisać do pliku CSV!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2203"/>
         <source>The CSV files was created successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pliki CSV utworzone pomyślnie!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2224"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2228"/>
         <source>Open CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Otwórz plik CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2244"/>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można otworzyć pliku CSV aby go wczytać!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2244"/>
@@ -2199,27 +2199,27 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2253"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2256"/>
         <source>CSV Import</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Importowanie CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2247"/>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Próba odczytania pliku CSV zakończona niepowodzeniem!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2250"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Plik CSV nie zawiera żadnych znanych pól!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2253"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Plik CSV nie jest kompletny. Nie wszystkie pliki zostały zaktualizowane!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2256"/>
         <source>The CSV files was imported successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pliki CSV zaimportowano pomyślnie!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2396"/>
@@ -2524,7 +2524,7 @@
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="226"/>
         <source>Property</source>
-        <translation type="unfinished">Właściwość</translation>
+        <translation type="unfinished">Pole</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="229"/>
@@ -2617,7 +2617,7 @@
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="401"/>
         <source>Unspecified (copy from source file)</source>
-        <translation type="unfinished">Nieokreślony (kopia z pliku źródłowego)</translation>
+        <translation type="unfinished">Nieokreślony (kopiuj z pliku źródłowego)</translation>
     </message>
     <message>
         <location filename="../../src/Model_MetaInfo.cpp" line="416"/>
@@ -2924,24 +2924,24 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1063"/>
         <source>hour(s)</source>
-        <translation type="unfinished">godzin/y</translation>
+        <translation type="unfinished">godzinie/ach</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1064"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1068"/>
         <source>minute(s)</source>
-        <translation type="unfinished">minut/a</translation>
+        <translation type="unfinished">minutach</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1069"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1073"/>
         <source>second(s)</source>
-        <translation type="unfinished">sekund/a</translation>
+        <translation type="unfinished">sekundach</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1074"/>
         <source>millisecond(s)</source>
-        <translation type="unfinished">milisekund/y</translation>
+        <translation type="unfinished">milisekundach</translation>
     </message>
 </context>
 <context>

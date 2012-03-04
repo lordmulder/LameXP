@@ -883,11 +883,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="891"/>
-        <source>FLAC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../gui/MainWindow.ui" line="799"/>
         <source>Aften A/52</source>
         <translation type="unfinished"></translation>
@@ -895,6 +890,11 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="806"/>
         <source>DCA Enc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/MainWindow.ui" line="891"/>
+        <source>FLAC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1115,6 +1115,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../gui/MainWindow.ui" line="2100"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../gui/MainWindow.ui" line="2105"/>
         <source>Peak Level</source>
         <translation type="unfinished"></translation>
@@ -1122,11 +1127,6 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2110"/>
         <source>RMS Level</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../gui/MainWindow.ui" line="2100"/>
-        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
