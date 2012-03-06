@@ -1814,6 +1814,26 @@
         <source>CSV Import</source>
         <translation>CSV Import</translation>
     </message>
+    <message>
+        <source>QAAC (Apple)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>FHG AAC (Winamp)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Nero AAC</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Not available!</source>
+        <translation>Nicht verfügbar!</translation>
+    </message>
+    <message>
+        <source>Current AAC Encoder: %1</source>
+        <translation>Aktueller AAC-Kodierer: %1</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

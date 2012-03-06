@@ -2662,6 +2662,17 @@ void MainWindow::updateEncoder(int id)
 		break;
 	}
 
+	if(m_settings->compressionEncoder() == SettingsModel::AACEncoder)
+	{
+		const QString encoderName = m_qaacEncoderAvailable ? tr("QAAC (Apple)") : (m_fhgEncoderAvailable ? tr("FHG AAC (Winamp)") : (m_neroEncoderAvailable ? tr("Nero AAC") : tr("Not available!")));
+		labelEncoderInfo->setVisible(true);
+		labelEncoderInfo->setText(tr("Current AAC Encoder: %1").arg(encoderName));
+	}
+	else
+	{
+		labelEncoderInfo->setVisible(false);
+	}
+
 	updateRCMode(m_modeButtonGroup->checkedId());
 }
 

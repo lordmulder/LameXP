@@ -115,7 +115,7 @@ void SplashScreen::showSplash(QThread *thread)
 	}
 
 	//Start the timer
-	timer->start(15360);
+	timer->start(30720);
 
 	//Loop while thread is running
 	while(thread->isRunning())
