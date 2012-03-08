@@ -176,6 +176,23 @@ bool FHGAACEncoder::isFormatSupported(const QString &containerType, const QStrin
 	return false;
 }
 
+const unsigned int *FHGAACEncoder::supportedChannelCount(void)
+{
+	static const unsigned int supportedChannels[] = {1, 2, 4, 5, 6, NULL};
+	return supportedChannels;
+}
+
+const unsigned int *FHGAACEncoder::supportedSamplerates(void)
+{
+	static const unsigned int supportedRates[] = {192000, 96000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 6000, NULL};
+	return supportedRates;
+}
+
+const unsigned int *FHGAACEncoder::supportedBitdepths(void)
+{
+	static const unsigned int supportedBPS[] = {16, 24, NULL};
+	return supportedBPS;
+}
 
 void FHGAACEncoder::setProfile(int profile)
 {
