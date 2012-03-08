@@ -61,6 +61,7 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, vol
 	QRegExp regExp_samplerate("Sample Rate\\s*:\\s*(\\d+)", Qt::CaseInsensitive);
 	QRegExp regExp_duration("Duration\\s*:\\s*(\\d\\d):(\\d\\d):(\\d\\d)\\.(\\d\\d)", Qt::CaseInsensitive);
 	QRegExp regExp_channels("Channels\\s*:\\s*(\\d+)", Qt::CaseInsensitive);
+	QRegExp regExp_encoding("Sample Encoding\\s*:\\s*(\\d+)-bit\\s*Float", Qt::CaseInsensitive); //SoX returns a precision of 24-Bit for 32-Bit Float data, so we detect it this way!
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -88,6 +89,13 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, vol
 			{
 				bool ok = false;
 				unsigned int tmp = regExp_precision.cap(1).toUInt(&ok);
+				if(ok) info->setFormatAudioBitdepth(tmp);
+				emit statusUpdated(qMin(progress += 25, 100));
+			}
+			if(regExp_encoding.lastIndexIn(text) >= 0)
+			{
+				bool ok = false;
+				unsigned int tmp = regExp_encoding.cap(1).toUInt(&ok);
 				if(ok) info->setFormatAudioBitdepth(tmp);
 				emit statusUpdated(qMin(progress += 25, 100));
 			}
