@@ -110,6 +110,7 @@ const char *FileAnalyzer::g_tags_aud[] =
 	"Format_Version",
 	"Channel(s)",
 	"SamplingRate",
+	"BitDepth",
 	"BitRate",
 	"BitRate_Mode",
 	NULL
