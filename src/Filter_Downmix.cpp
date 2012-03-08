@@ -48,10 +48,10 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	unsigned int channels = formatInfo->formatAudioChannels(); //detectChannels(sourceFile, abortFlag);
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
 
-	if((channels == 1) || (channels == 2))
+	if(channels == 2)
 	{
 		messageLogged("Skipping downmix!");
-		qDebug("Dowmmix not required for Mono or Stereo input, skipping!");
+		qDebug("Dowmmix not required for Stereo input, skipping!");
 		return true;
 	}
 
@@ -67,6 +67,8 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 
 	switch(channels)
 	{
+	case 2: //Unknown
+		qWarning("Downmixer: Nothing to do!");
 	case 3: //3.0 (L/R/C)
 		args << "remix" << "1v0.66,3v0.34" << "2v0.66,3v0.34";
 		break;

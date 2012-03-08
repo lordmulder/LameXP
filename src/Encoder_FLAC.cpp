@@ -149,3 +149,15 @@ bool FLACEncoder::isFormatSupported(const QString &containerType, const QString 
 
 	return false;
 }
+
+const unsigned int *FLACEncoder::supportedChannelCount(void)
+{
+	static const unsigned int supportedChannels[] = {2, 5, 6, NULL};
+	return supportedChannels;
+}
+
+const unsigned int *FLACEncoder::supportedBitdepths(void)
+{
+	static const unsigned int supportedBPS[] = {16, 24, NULL};
+	return supportedBPS;
+}
