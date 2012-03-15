@@ -1816,23 +1816,23 @@
     </message>
     <message>
         <source>QAAC (Apple)</source>
-        <translation type="unfinished"></translation>
+        <translation>QAAC (Apple)</translation>
     </message>
     <message>
         <source>FHG AAC (Winamp)</source>
-        <translation type="unfinished"></translation>
+        <translation>FHG AAC (Winamp)</translation>
     </message>
     <message>
         <source>Nero AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero AAC</translation>
     </message>
     <message>
         <source>Not available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не доступно!</translation>
     </message>
     <message>
         <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Поточний кодер AAC: %1</translation>
     </message>
 </context>
 <context>
