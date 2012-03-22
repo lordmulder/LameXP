@@ -117,16 +117,20 @@ void SplashScreen::showSplash(QThread *thread)
 	//Start the timer
 	timer->start(30720);
 
-	//Loop while thread is running
+	//Loop while thread is still running
 	while(thread->isRunning())
 	{
 		loop->exec();
 		if(thread->isRunning())
 		{
-			qWarning("Potential deadlock in initialization thread!");
+			QThread::yieldCurrentThread();
+			if(thread->isRunning())
+			{
+				qWarning("Potential deadlock in initialization thread!");
+			}
 		}
 	}
-	
+
 	//Stop the timer
 	timer->stop();
 
