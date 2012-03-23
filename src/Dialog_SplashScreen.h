@@ -41,6 +41,8 @@ private:
 	QMovie *m_working;
 	bool m_canClose;
 
+	static inline bool threadStillRunning(const QThread *thread);
+
 protected:
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);

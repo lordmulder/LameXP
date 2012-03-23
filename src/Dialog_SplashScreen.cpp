@@ -38,7 +38,8 @@
 ////////////////////////////////////////////////////////////
 
 SplashScreen::SplashScreen(QWidget *parent)
-	: QFrame(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint)
+:
+	QFrame(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -118,16 +119,13 @@ void SplashScreen::showSplash(QThread *thread)
 	timer->start(30720);
 
 	//Loop while thread is still running
-	while(thread->isRunning())
+	bool bStillRunning = threadStillRunning(thread);
+	while(bStillRunning)
 	{
 		loop->exec();
-		if(thread->isRunning())
+		if(bStillRunning = threadStillRunning(thread))
 		{
-			QThread::yieldCurrentThread();
-			if(thread->isRunning())
-			{
-				qWarning("Potential deadlock in initialization thread!");
-			}
+			qWarning("Potential deadlock in initialization thread!");
 		}
 	}
 
@@ -178,4 +176,22 @@ void SplashScreen::closeEvent(QCloseEvent *event)
 bool SplashScreen::winEvent(MSG *message, long *result)
 {
 	return WinSevenTaskbar::handleWinEvent(message, result);
+}
+
+////////////////////////////////////////////////////////////
+// HELPER FUNCTIONS
+////////////////////////////////////////////////////////////
+
+bool SplashScreen::threadStillRunning(const QThread *thread)
+{
+	for(int i = 0; i < 128; i++)
+	{
+		if(!(thread->isRunning()))
+		{
+			return false;
+		}
+		QThread::yieldCurrentThread();
+	}
+
+	return thread->isRunning();
 }
