@@ -30,8 +30,8 @@
 
 #include "WinSevenTaskbar.h"
 
-#define EPS (1.0E-5)
 #define FADE_DELAY 4
+#define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ?  (!((THRD)->wait(16))) : false)
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -119,11 +119,11 @@ void SplashScreen::showSplash(QThread *thread)
 	timer->start(30720);
 
 	//Loop while thread is still running
-	bool bStillRunning = threadStillRunning(thread);
-	while(bStillRunning)
+	bool bIsRunning = THREAD_RUNNING(thread);
+	while(bIsRunning)
 	{
 		loop->exec();
-		if(bStillRunning = threadStillRunning(thread))
+		if(bIsRunning = THREAD_RUNNING(thread))
 		{
 			qWarning("Potential deadlock in initialization thread!");
 		}
@@ -176,22 +176,4 @@ void SplashScreen::closeEvent(QCloseEvent *event)
 bool SplashScreen::winEvent(MSG *message, long *result)
 {
 	return WinSevenTaskbar::handleWinEvent(message, result);
-}
-
-////////////////////////////////////////////////////////////
-// HELPER FUNCTIONS
-////////////////////////////////////////////////////////////
-
-bool SplashScreen::threadStillRunning(const QThread *thread)
-{
-	for(int i = 0; i < 128; i++)
-	{
-		if(!(thread->isRunning()))
-		{
-			return false;
-		}
-		QThread::yieldCurrentThread();
-	}
-
-	return thread->isRunning();
 }
