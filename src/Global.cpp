@@ -58,6 +58,7 @@
 #include <intrin.h>
 #include <math.h>
 #include <time.h>
+#include <process.h>
 
 //COM includes
 #include <Objbase.h>
@@ -689,29 +690,53 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 /*
  * Check for debugger (detect routine)
  */
-static bool lamexp_check_for_debugger(void)
+static __forceinline bool lamexp_check_for_debugger(void)
 {
+	if(IsDebuggerPresent())
+	{
+		return true;
+	}
+	
+	__try
+	{
+		CloseHandle((HANDLE) 0x7FFFFFFF);
+	}
+	__except(EXCEPTION_EXECUTE_HANDLER)
+	{
+		return true;
+	}
+
 	__try 
 	{
 		DebugBreak();
 	}
-	__except(GetExceptionCode() == EXCEPTION_BREAKPOINT ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) 
+	__except(EXCEPTION_EXECUTE_HANDLER) 
 	{
 		return false;
 	}
+	
 	return true;
 }
 
 /*
  * Check for debugger (thread proc)
  */
-static void WINAPI lamexp_debug_thread_proc(__in LPVOID lpParameter)
+static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
 {
-	while(!(IsDebuggerPresent() || lamexp_check_for_debugger()))
+	while(!lamexp_check_for_debugger())
 	{
-		Sleep(333);
+		Sleep(32);
+	}
+	if(HANDLE thrd = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id))
+	{
+		if(TerminateThread(thrd, -1))
+		{
+			FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
+		}
+		CloseHandle(thrd);
 	}
 	TerminateProcess(GetCurrentProcess(), -1);
+	return 666;
 }
 
 /*
@@ -719,13 +744,13 @@ static void WINAPI lamexp_debug_thread_proc(__in LPVOID lpParameter)
  */
 static HANDLE lamexp_debug_thread_init(void)
 {
-	if(IsDebuggerPresent() || lamexp_check_for_debugger())
+	if(lamexp_check_for_debugger())
 	{
 		FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
 
-	return CreateThread(NULL, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(&lamexp_debug_thread_proc), NULL, NULL, NULL);
+	return (HANDLE) _beginthreadex(NULL, 0, lamexp_debug_thread_proc, NULL, 0, NULL);
 }
 
 /*
@@ -870,6 +895,12 @@ static bool lamexp_broadcast(int eventType, bool onlyToVisible)
  */
 static bool lamexp_event_filter(void *message, long *result)
 {
+	if((!(LAMEXP_DEBUG)) && lamexp_check_for_debugger())
+	{
+		FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
+		TerminateProcess(GetCurrentProcess(), -1);
+	}
+	
 	switch(reinterpret_cast<MSG*>(message)->message)
 	{
 	case WM_QUERYENDSESSION:
