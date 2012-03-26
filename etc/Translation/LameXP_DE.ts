@@ -1834,6 +1834,14 @@
         <source>Current AAC Encoder: %1</source>
         <translation>Aktueller AAC-Kodierer: %1</translation>
     </message>
+    <message>
+        <source>Edit Output Path</source>
+        <translation>Zielverzeichnis bearbeiten</translation>
+    </message>
+    <message>
+        <source>Show Favorites</source>
+        <translation>Favoriten anzeigen</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

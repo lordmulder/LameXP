@@ -30,7 +30,7 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="usesScrollButtons">
          <bool>false</bool>
@@ -341,6 +341,41 @@
                </widget>
               </item>
               <item>
+               <widget class="QLineEdit" name="outputFolderEdit">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">($OUTDIR)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="outputFoldersEditorLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Edit Output Path</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../res/Icons.qrc">:/icons/drive_edit.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="outputFoldersFovoritesLabel">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -348,11 +383,14 @@
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="toolTip">
+                 <string>Show Favorites</string>
+                </property>
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
                 </property>
                 <property name="text">
-                 <string/>
+                 <string notr="true"/>
                 </property>
                 <property name="pixmap">
                  <pixmap resource="../res/Icons.qrc">:/icons/star.png</pixmap>
@@ -1265,8 +1303,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
-               <height>1524</height>
+               <width>602</width>
+               <height>1515</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">

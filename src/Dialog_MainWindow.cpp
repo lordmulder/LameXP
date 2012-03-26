@@ -161,6 +161,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	outputFolderView->installEventFilter(this);
+	outputFoldersEditorLabel->installEventFilter(this);
 	outputFoldersFovoritesLabel->installEventFilter(this);
 	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
 	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
@@ -174,6 +175,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
 	connect(saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
 	connect(prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
+	connect(outputFolderEdit, SIGNAL(editingFinished()), this, SLOT(outputFolderEditFinished()));
 	m_outputFolderContextMenu = new QMenu();
 	m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
 	m_outputFolderFavoritesMenu = new QMenu();
@@ -182,6 +184,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
 	connect(m_showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
 	connect(m_addFavoriteFolderAction, SIGNAL(triggered(bool)), this, SLOT(addFavoriteFolderActionTriggered()));
+	outputFolderEdit->setVisible(false);
 	outputFolderLabel->installEventFilter(this);
 	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
 	outputFolderViewClicked(outputFolderView->currentIndex());
@@ -897,6 +900,39 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 			break;
 		case QEvent::Leave:
 			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
+			break;
+		}
+	}
+	else if(obj == outputFoldersEditorLabel)
+	{
+		QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event);
+		QPoint pos = (mouseEvent != NULL) ? mouseEvent->pos() : QPoint();
+		QWidget *sender = dynamic_cast<QLabel*>(obj);
+
+		switch(event->type())
+		{
+		case QEvent::Enter:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
+			break;
+		case QEvent::MouseButtonPress:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Sunken);
+			break;
+		case QEvent::MouseButtonRelease:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
+			if(sender && mouseEvent)
+			{
+				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
+				{
+					outputFolderLabel->setVisible(false);
+					outputFolderEdit->setVisible(true);
+					outputFolderEdit->setText(outputFolderLabel->text());
+					outputFolderEdit->selectAll();
+					outputFolderEdit->setFocus();
+				}
+			}
+			break;
+		case QEvent::Leave:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Plain);
 			break;
 		}
 	}
@@ -2535,6 +2571,47 @@ void MainWindow::addFavoriteFolderActionTriggered(void)
 
 	m_settings->favoriteOutputFolders(favorites.join("|"));
 	refreshFavorites();
+}
+
+/*
+ * Output folder edit finished
+ */
+void MainWindow::outputFolderEditFinished(void)
+{
+	QString text = QDir::fromNativeSeparators(outputFolderEdit->text().trimmed());
+	
+	outputFolderEdit->setVisible(false);
+	outputFolderLabel->setVisible(true);
+
+	while(!text.isEmpty())
+	{
+		while(text.startsWith('"') || text.startsWith('/')) text = text.right(text.length() - 1).trimmed();
+		while(text.endsWith('"') || text.endsWith('/')) text = text.left(text.length() - 1).trimmed();
+
+		QFileInfo info(text);
+		if(info.exists() && info.isDir())
+		{
+			QModelIndex index = m_fileSystemModel->index(info.canonicalFilePath());
+			if(index.isValid())
+			{
+				outputFolderView->setCurrentIndex(index);
+				return;
+			}
+		}
+		else if(info.exists() && info.isFile())
+		{
+			QModelIndex index = m_fileSystemModel->index(info.canonicalPath());
+			if(index.isValid())
+			{
+				outputFolderView->setCurrentIndex(index);
+				return;
+			}
+		}
+
+		text = text.left(text.length() - 1).trimmed();
+	}
+
+	MessageBeep(MB_ICONERROR);
 }
 
 /*

@@ -104,6 +104,7 @@ private slots:
 	void notifyOtherInstance(void);
 	void openFolderActionActivated(void);
 	void outputFolderContextMenu(const QPoint &pos);
+	void outputFolderEditFinished(void);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void outputFolderViewMoved(const QModelIndex &index);
 	void playlistEnabledChanged(void);

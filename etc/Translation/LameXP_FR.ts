@@ -1843,6 +1843,14 @@ Ouvrir le dossier récursivement...</translation>
         <source>Current AAC Encoder: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Output Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
