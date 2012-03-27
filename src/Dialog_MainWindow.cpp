@@ -894,7 +894,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 			{
 				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
 				{
-					m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
+					if(outputFolderView->isEnabled())
+					{
+						m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
+					}
 				}
 			}
 			break;
@@ -923,11 +926,15 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 			{
 				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
 				{
-					outputFolderLabel->setVisible(false);
-					outputFolderEdit->setVisible(true);
-					outputFolderEdit->setText(outputFolderLabel->text());
-					outputFolderEdit->selectAll();
-					outputFolderEdit->setFocus();
+					if(outputFolderView->isEnabled())
+					{
+						outputFolderView->setEnabled(false);
+						outputFolderLabel->setVisible(false);
+						outputFolderEdit->setVisible(true);
+						outputFolderEdit->setText(outputFolderLabel->text());
+						outputFolderEdit->selectAll();
+						outputFolderEdit->setFocus();
+					}
 				}
 			}
 			break;
@@ -960,6 +967,11 @@ bool MainWindow::event(QEvent *e)
 		}
 		m_fileListModel->clearFiles();
 		return true;
+	case QEvent::MouseButtonPress:
+		if(outputFolderEdit->isVisible())
+		{
+			QTimer::singleShot(0, this, SLOT(outputFolderEditFinished()));
+		}
 	default:
 		return QMainWindow::event(e);
 	}
@@ -2578,24 +2590,38 @@ void MainWindow::addFavoriteFolderActionTriggered(void)
  */
 void MainWindow::outputFolderEditFinished(void)
 {
-	QString text = QDir::fromNativeSeparators(outputFolderEdit->text().trimmed());
-	
-	outputFolderEdit->setVisible(false);
-	outputFolderLabel->setVisible(true);
-
-	while(!text.isEmpty())
+	if(outputFolderEdit->isHidden())
 	{
-		while(text.startsWith('"') || text.startsWith('/')) text = text.right(text.length() - 1).trimmed();
-		while(text.endsWith('"') || text.endsWith('/')) text = text.left(text.length() - 1).trimmed();
+		return; //Not currently in edit mode!
+	}
+	
+	bool ok = false;
+	
+	QString text = QDir::fromNativeSeparators(outputFolderEdit->text().trimmed());
+	while(text.startsWith('"') || text.startsWith('/')) text = text.right(text.length() - 1).trimmed();
+	while(text.endsWith('"') || text.endsWith('/')) text = text.left(text.length() - 1).trimmed();
 
+	static const char *str = "?*<>|\"";
+	for(size_t i = 0; str[i]; i++) text.replace(str[i], "_");
+
+	if(!((text.length() >= 2) && text.at(0).isLetter() && text.at(1) == QChar(':')))
+	{
+		text = QString("%1/%2").arg(QDir::fromNativeSeparators(outputFolderLabel->text()), text);
+	}
+
+	if(text.length() == 2) text += "/"; /* "X:" => "X:/" */
+
+	while(text.length() > 2)
+	{
 		QFileInfo info(text);
 		if(info.exists() && info.isDir())
 		{
 			QModelIndex index = m_fileSystemModel->index(info.canonicalFilePath());
 			if(index.isValid())
 			{
+				ok = true;
 				outputFolderView->setCurrentIndex(index);
-				return;
+				break;
 			}
 		}
 		else if(info.exists() && info.isFile())
@@ -2603,15 +2629,20 @@ void MainWindow::outputFolderEditFinished(void)
 			QModelIndex index = m_fileSystemModel->index(info.canonicalPath());
 			if(index.isValid())
 			{
+				ok = true;
 				outputFolderView->setCurrentIndex(index);
-				return;
+				break;
 			}
 		}
 
 		text = text.left(text.length() - 1).trimmed();
 	}
 
-	MessageBeep(MB_ICONERROR);
+	if(!ok) MessageBeep(MB_ICONERROR);
+	outputFolderEdit->setVisible(false);
+	outputFolderLabel->setVisible(true);
+	outputFolderView->setEnabled(true);
+	outputFolderView->setFocus();
 }
 
 /*
