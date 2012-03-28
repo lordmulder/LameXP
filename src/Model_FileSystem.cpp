@@ -154,8 +154,7 @@ bool QFileSystemModelEx::hasChildren(const QModelIndex &parent) const
 {
 	if(parent.isValid())
 	{
-		QDir dir = QDir(QFileSystemModel::filePath(parent));
-		return dir.exists() && (dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot).count() > 0);
+		return (QDir(QFileSystemModel::filePath(parent)).entryList(QDir::Dirs | QDir::NoDotAndDotDot).count() > 0);
 	}
 	
 	return true;

@@ -1435,6 +1435,10 @@ void MainWindow::tabPageChanged(int idx)
 		{
 			QTimer::singleShot(0, this, SLOT(initOutputFolderModel()));
 		}
+		else
+		{
+			QTimer::singleShot(0, this, SLOT(centerOutputFolderModel()));
+		}
 	}
 
 	if(initialWidth < this->width())
@@ -2616,7 +2620,7 @@ void MainWindow::outputFolderEditFinished(void)
 		QFileInfo info(text);
 		if(info.exists() && info.isDir())
 		{
-			QModelIndex index = m_fileSystemModel->index(info.canonicalFilePath());
+			QModelIndex index = m_fileSystemModel->index(QFileInfo(info.canonicalFilePath()).absoluteFilePath());
 			if(index.isValid())
 			{
 				ok = true;
@@ -2626,7 +2630,7 @@ void MainWindow::outputFolderEditFinished(void)
 		}
 		else if(info.exists() && info.isFile())
 		{
-			QModelIndex index = m_fileSystemModel->index(info.canonicalPath());
+			QModelIndex index = m_fileSystemModel->index(QFileInfo(info.canonicalFilePath()).absoluteFilePath());
 			if(index.isValid())
 			{
 				ok = true;
@@ -2650,12 +2654,21 @@ void MainWindow::outputFolderEditFinished(void)
  */
 void MainWindow::initOutputFolderModel(void)
 {
-	QModelIndex previousIndex = outputFolderView->currentIndex();
-	m_fileSystemModel->setRootPath(m_fileSystemModel->rootPath());
-	QApplication::processEvents();
-	outputFolderView->reset();
-	outputFolderView->setCurrentIndex(previousIndex);
+	//QModelIndex previousIndex = outputFolderView->currentIndex();
+	//outputFolderView->reset();
+	//QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	//outputFolderView->setCurrentIndex(previousIndex);
+	//QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+
+	m_fileSystemModel->setRootPath("");
+	QTimer::singleShot(333, this, SLOT(centerOutputFolderModel()));
 	m_OutputFolderViewInitialized = true;
+}
+
+void MainWindow::centerOutputFolderModel(void)
+{
+	outputFolderView->scrollTo(outputFolderView->currentIndex(), QAbstractItemView::PositionAtCenter);
+	outputFolderView->setFocus();
 }
 
 // =========================================================
