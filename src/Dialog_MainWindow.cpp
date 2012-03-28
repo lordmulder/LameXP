@@ -93,7 +93,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_qaacEncoderAvailable(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll")),
 	m_accepted(false),
 	m_firstTimeShown(true),
-	m_OutputFolderViewInitialized(false)
+	m_outputFolderViewInitialized(false),
+	m_outputFolderViewCentering(false)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -169,6 +170,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(pressed(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewMoved(QModelIndex)));
+	connect(outputFolderView, SIGNAL(expanded(QModelIndex)), this, SLOT(outputFolderItemExpanded(QModelIndex)));
 	connect(buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
 	connect(buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
 	connect(buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
@@ -176,6 +178,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
 	connect(prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
 	connect(outputFolderEdit, SIGNAL(editingFinished()), this, SLOT(outputFolderEditFinished()));
+	connect(m_fileSystemModel, SIGNAL(directoryLoaded(QString)), this, SLOT(outputFolderDirectoryLoaded(QString)));
 	m_outputFolderContextMenu = new QMenu();
 	m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
 	m_outputFolderFavoritesMenu = new QMenu();
@@ -1431,13 +1434,13 @@ void MainWindow::tabPageChanged(int idx)
 	}
 	else if(idx == tabWidget->indexOf(tabOutputDir))
 	{
-		if(!m_OutputFolderViewInitialized)
+		if(!m_outputFolderViewInitialized)
 		{
-			QTimer::singleShot(0, this, SLOT(initOutputFolderModel()));
+			QTimer::singleShot(125, this, SLOT(initOutputFolderModel()));
 		}
 		else
 		{
-			QTimer::singleShot(0, this, SLOT(centerOutputFolderModel()));
+			QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
 		}
 	}
 
@@ -2515,7 +2518,7 @@ void MainWindow::makeFolderButtonClicked(void)
 				{
 					outputFolderView->setCurrentIndex(m_fileSystemModel->index(createdDir.canonicalPath()));
 					outputFolderViewClicked(outputFolderView->currentIndex());
-					outputFolderView->setFocus();
+					QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
 				}
 			}
 			else
@@ -2625,16 +2628,18 @@ void MainWindow::outputFolderEditFinished(void)
 			{
 				ok = true;
 				outputFolderView->setCurrentIndex(index);
+				outputFolderViewClicked(index);
 				break;
 			}
 		}
 		else if(info.exists() && info.isFile())
 		{
-			QModelIndex index = m_fileSystemModel->index(QFileInfo(info.canonicalFilePath()).absoluteFilePath());
+			QModelIndex index = m_fileSystemModel->index(QFileInfo(info.canonicalPath()).absoluteFilePath());
 			if(index.isValid())
 			{
 				ok = true;
 				outputFolderView->setCurrentIndex(index);
+				outputFolderViewClicked(index);
 				break;
 			}
 		}
@@ -2643,6 +2648,8 @@ void MainWindow::outputFolderEditFinished(void)
 	}
 
 	if(!ok) MessageBeep(MB_ICONERROR);
+	QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+
 	outputFolderEdit->setVisible(false);
 	outputFolderLabel->setVisible(true);
 	outputFolderView->setEnabled(true);
@@ -2654,21 +2661,45 @@ void MainWindow::outputFolderEditFinished(void)
  */
 void MainWindow::initOutputFolderModel(void)
 {
-	//QModelIndex previousIndex = outputFolderView->currentIndex();
-	//outputFolderView->reset();
-	//QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	//outputFolderView->setCurrentIndex(previousIndex);
-	//QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
-
 	m_fileSystemModel->setRootPath("");
-	QTimer::singleShot(333, this, SLOT(centerOutputFolderModel()));
-	m_OutputFolderViewInitialized = true;
+	QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+	m_outputFolderViewInitialized = true;
 }
 
+/*
+ * Center current folder in view
+ */
 void MainWindow::centerOutputFolderModel(void)
 {
-	outputFolderView->scrollTo(outputFolderView->currentIndex(), QAbstractItemView::PositionAtCenter);
-	outputFolderView->setFocus();
+	if(outputFolderView->isVisible())
+	{
+		m_outputFolderViewCentering = true;
+		const QModelIndex index = outputFolderView->currentIndex();
+		QApplication::processEvents();
+		outputFolderView->scrollTo(index, QAbstractItemView::PositionAtCenter);
+		outputFolderView->setFocus();
+	}
+}
+
+/*
+ * File system model asynchronously loaded a dir
+ */
+void MainWindow::outputFolderDirectoryLoaded(const QString &path)
+{
+	//We need to center again, because the focus on the current item gets lost when a dir is loaded asynchronously!
+	if(m_outputFolderViewCentering)
+	{
+		QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+	}
+}
+
+/*
+ * Directory view item was expanded by user
+ */
+void MainWindow::outputFolderItemExpanded(const QModelIndex &item)
+{
+	//We need to stop centering as soon as the user has expanded an item manually!
+	m_outputFolderViewCentering = false;
 }
 
 // =========================================================

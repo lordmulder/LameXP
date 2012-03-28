@@ -105,7 +105,9 @@ private slots:
 	void notifyOtherInstance(void);
 	void openFolderActionActivated(void);
 	void outputFolderContextMenu(const QPoint &pos);
+	void outputFolderDirectoryLoaded(const QString &path);
 	void outputFolderEditFinished(void);
+	void outputFolderItemExpanded(const QModelIndex &item);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void outputFolderViewMoved(const QModelIndex &index);
 	void playlistEnabledChanged(void);
@@ -161,7 +163,8 @@ private:
 	
 	bool m_accepted;
 	bool m_firstTimeShown;
-	bool m_OutputFolderViewInitialized;
+	bool m_outputFolderViewInitialized;
+	bool m_outputFolderViewCentering;
 
 	const bool m_neroEncoderAvailable;
 	const bool m_fhgEncoderAvailable;
