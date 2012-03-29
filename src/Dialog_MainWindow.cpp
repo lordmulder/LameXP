@@ -147,7 +147,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_findFileContextAction, SIGNAL(triggered(bool)), this, SLOT(findFileContextActionTriggered()));
 	connect(m_exportCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(exportCsvContextActionTriggered()));
 	connect(m_importCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(importCsvContextActionTriggered()));
-	
 
 	//Setup "Output" tab
 	m_fileSystemModel = new QFileSystemModelEx();
@@ -179,6 +178,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
 	connect(outputFolderEdit, SIGNAL(editingFinished()), this, SLOT(outputFolderEditFinished()));
 	connect(m_fileSystemModel, SIGNAL(directoryLoaded(QString)), this, SLOT(outputFolderDirectoryLoaded(QString)));
+	connect(m_fileSystemModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(outputFolderRowsInserted(QModelIndex,int,int)));
 	m_outputFolderContextMenu = new QMenu();
 	m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
 	m_outputFolderFavoritesMenu = new QMenu();
@@ -2673,9 +2673,20 @@ void MainWindow::centerOutputFolderModel(void)
 {
 	if(outputFolderView->isVisible())
 	{
+		centerOutputFolderModelAsync();
+		QTimer::singleShot(125, this, SLOT(centerOutputFolderModelAsync()));
+	}
+}
+
+/*
+ * Center current folder in view (do NOT call this one directly!)
+ */
+void MainWindow::centerOutputFolderModelAsync(void)
+{
+	if(outputFolderView->isVisible())
+	{
 		m_outputFolderViewCentering = true;
 		const QModelIndex index = outputFolderView->currentIndex();
-		QApplication::processEvents();
 		outputFolderView->scrollTo(index, QAbstractItemView::PositionAtCenter);
 		outputFolderView->setFocus();
 	}
@@ -2686,7 +2697,17 @@ void MainWindow::centerOutputFolderModel(void)
  */
 void MainWindow::outputFolderDirectoryLoaded(const QString &path)
 {
-	//We need to center again, because the focus on the current item gets lost when a dir is loaded asynchronously!
+	if(m_outputFolderViewCentering)
+	{
+		QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+	}
+}
+
+/*
+ * File system model inserted new items
+ */
+void MainWindow::outputFolderRowsInserted(const QModelIndex &parent, int start, int end)
+{
 	if(m_outputFolderViewCentering)
 	{
 		QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));

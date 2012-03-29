@@ -63,6 +63,7 @@ private slots:
 	void bitrateManagementMinChanged(int value);
 	void browseCustomTempFolderButtonClicked(void);
 	void centerOutputFolderModel(void);
+	void centerOutputFolderModelAsync(void);
 	void channelModeChanged(int value);
 	void checkForBetaUpdatesActionTriggered(bool checked);
 	void checkUpdatesActionActivated(void);
@@ -108,6 +109,7 @@ private slots:
 	void outputFolderDirectoryLoaded(const QString &path);
 	void outputFolderEditFinished(void);
 	void outputFolderItemExpanded(const QModelIndex &item);
+	void outputFolderRowsInserted(const QModelIndex &parent, int start, int end);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void outputFolderViewMoved(const QModelIndex &index);
 	void playlistEnabledChanged(void);

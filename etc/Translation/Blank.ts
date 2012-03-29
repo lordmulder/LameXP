@@ -1577,7 +1577,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="514"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3361"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3382"/>
         <source>Access Denied</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1742,7 +1742,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1151"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1228"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3304"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3325"/>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2258,139 +2258,139 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
         <source>QAAC (Apple)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
         <source>FHG AAC (Winamp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
         <source>Nero AAC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
         <source>Not available!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2821"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2842"/>
         <source>Current AAC Encoder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2927"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2930"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2933"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2939"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2948"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2951"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2954"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2960"/>
         <source>Quality Level %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2936"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2956"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2976"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2957"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2977"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2997"/>
         <source>Compression %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2942"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2962"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2985"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2963"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2983"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3006"/>
         <source>Uncompressed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3009"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3030"/>
         <source>Best Quality (Very Slow)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3012"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3033"/>
         <source>High Quality (Recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3015"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3036"/>
         <source>Average Quality (Default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3018"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3039"/>
         <source>Low Quality (Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3021"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3042"/>
         <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3293"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3314"/>
         <source>File name without extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3294"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3315"/>
         <source>Track number with leading zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3295"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3316"/>
         <source>Track title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3296"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3317"/>
         <source>Artist name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3297"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3318"/>
         <source>Album name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3298"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3319"/>
         <source>Year with (at least) four digits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3320"/>
         <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3301"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3322"/>
         <source>Characters forbidden in file names:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3304"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3325"/>
         <source>Rename Macros</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3317"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3338"/>
         <source>%1 Instance(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3361"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3382"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3429"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3450"/>
         <source>Already Running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3429"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3450"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished"></translation>
     </message>
