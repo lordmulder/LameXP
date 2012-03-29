@@ -63,7 +63,7 @@ private slots:
 	void bitrateManagementMinChanged(int value);
 	void browseCustomTempFolderButtonClicked(void);
 	void centerOutputFolderModel(void);
-	void centerOutputFolderModelAsync(void);
+	void centerOutputFolderModel_doAsync(void);
 	void channelModeChanged(int value);
 	void checkForBetaUpdatesActionTriggered(bool checked);
 	void checkUpdatesActionActivated(void);

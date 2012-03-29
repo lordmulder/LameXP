@@ -77,6 +77,7 @@
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); {CMD}; if(__dropBoxVisible) m_dropBox->show(); }
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
+#define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -1440,7 +1441,7 @@ void MainWindow::tabPageChanged(int idx)
 		}
 		else
 		{
-			QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+			CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 		}
 	}
 
@@ -2369,7 +2370,7 @@ void MainWindow::gotoDesktopButtonClicked(void)
 	{
 		outputFolderView->setCurrentIndex(m_fileSystemModel->index(desktopPath));
 		outputFolderViewClicked(outputFolderView->currentIndex());
-		outputFolderView->setFocus();
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 	else
 	{
@@ -2388,7 +2389,7 @@ void MainWindow::gotoHomeFolderButtonClicked(void)
 	{
 		outputFolderView->setCurrentIndex(m_fileSystemModel->index(homePath));
 		outputFolderViewClicked(outputFolderView->currentIndex());
-		outputFolderView->setFocus();
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 	else
 	{
@@ -2407,7 +2408,7 @@ void MainWindow::gotoMusicFolderButtonClicked(void)
 	{
 		outputFolderView->setCurrentIndex(m_fileSystemModel->index(musicPath));
 		outputFolderViewClicked(outputFolderView->currentIndex());
-		outputFolderView->setFocus();
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 	else
 	{
@@ -2429,7 +2430,7 @@ void MainWindow::gotoFavoriteFolder(void)
 		{
 			outputFolderView->setCurrentIndex(m_fileSystemModel->index(path.canonicalPath()));
 			outputFolderViewClicked(outputFolderView->currentIndex());
-			outputFolderView->setFocus();
+			CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 		}
 		else
 		{
@@ -2518,7 +2519,7 @@ void MainWindow::makeFolderButtonClicked(void)
 				{
 					outputFolderView->setCurrentIndex(m_fileSystemModel->index(createdDir.canonicalPath()));
 					outputFolderViewClicked(outputFolderView->currentIndex());
-					QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+					CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 				}
 			}
 			else
@@ -2647,13 +2648,12 @@ void MainWindow::outputFolderEditFinished(void)
 		text = text.left(text.length() - 1).trimmed();
 	}
 
-	if(!ok) MessageBeep(MB_ICONERROR);
-	QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
-
 	outputFolderEdit->setVisible(false);
 	outputFolderLabel->setVisible(true);
 	outputFolderView->setEnabled(true);
-	outputFolderView->setFocus();
+
+	if(!ok) MessageBeep(MB_ICONERROR);
+	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 }
 
 /*
@@ -2662,7 +2662,7 @@ void MainWindow::outputFolderEditFinished(void)
 void MainWindow::initOutputFolderModel(void)
 {
 	m_fileSystemModel->setRootPath("");
-	QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	m_outputFolderViewInitialized = true;
 }
 
@@ -2673,15 +2673,15 @@ void MainWindow::centerOutputFolderModel(void)
 {
 	if(outputFolderView->isVisible())
 	{
-		centerOutputFolderModelAsync();
-		QTimer::singleShot(125, this, SLOT(centerOutputFolderModelAsync()));
+		centerOutputFolderModel_doAsync();
+		QTimer::singleShot(125, this, SLOT(centerOutputFolderModel_doAsync()));
 	}
 }
 
 /*
  * Center current folder in view (do NOT call this one directly!)
  */
-void MainWindow::centerOutputFolderModelAsync(void)
+void MainWindow::centerOutputFolderModel_doAsync(void)
 {
 	if(outputFolderView->isVisible())
 	{
@@ -2699,7 +2699,7 @@ void MainWindow::outputFolderDirectoryLoaded(const QString &path)
 {
 	if(m_outputFolderViewCentering)
 	{
-		QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 }
 
@@ -2710,7 +2710,7 @@ void MainWindow::outputFolderRowsInserted(const QModelIndex &parent, int start, 
 {
 	if(m_outputFolderViewCentering)
 	{
-		QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()));
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 }
 
