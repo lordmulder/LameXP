@@ -35,12 +35,13 @@ public:
 	virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
 	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	virtual void fetchMore(const QModelIndex &parent);
+	virtual QModelIndex index(const QString &path, int column = 0) const;
 
 private:
 	QFileIconProviderEx *m_myIconProvider;
 	
-	static QHash<const QString, bool> s_hasFolderCache;
-	static QMutex s_hasFolderMutex;
+	static QHash<const QString, bool> s_hasSubfolderCache;
+	static QMutex s_hasSubfolderMutex;
 
 	static bool hasSubfolders(const QString &path);
 	static bool hasSubfoldersCached(const QString &path);

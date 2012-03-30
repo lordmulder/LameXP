@@ -25,9 +25,12 @@
 #include <QApplication>
 #include <QFileIconProvider>
 #include <QDesktopServices>
+#include <QLibrary>
 
 #define IS_DIR(ATTR) (((ATTR) & FILE_ATTRIBUTE_DIRECTORY) && (!((ATTR) & FILE_ATTRIBUTE_HIDDEN)))
 #define NO_DOT_OR_DOTDOT(STR) (wcscmp((STR), L".") && wcscmp((STR), L".."))
+
+typedef HANDLE (WINAPI *FindFirstFileExFun)(LPCWSTR lpFileName, FINDEX_INFO_LEVELS fInfoLevelId, LPVOID lpFindFileData, FINDEX_SEARCH_OPS fSearchOp, LPVOID lpSearchFilter, DWORD dwAdditionalFlags);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Dummy QFileIconProvider class
@@ -157,7 +160,7 @@ bool QFileSystemModelEx::hasChildren(const QModelIndex &parent) const
 {
 	if(parent.isValid())
 	{
-		return (QFileSystemModel::rowCount(parent) > 0) || hasSubfoldersCached(filePath(parent));
+		return /*(QFileSystemModel::rowCount(parent) > 0) ||*/ hasSubfoldersCached(filePath(parent));
 	}
 	
 	return true;
@@ -183,38 +186,71 @@ void QFileSystemModelEx::fetchMore(const QModelIndex &parent)
 	QFileSystemModel::fetchMore(parent);
 }
 
+QModelIndex QFileSystemModelEx::index(const QString &path, int column) const
+{
+	QFileInfo info(path);
+	if(info.exists() && info.isDir())
+	{
+		QStringList parts = QDir::fromNativeSeparators(info.canonicalFilePath()).split('/', QString::SkipEmptyParts);
+		for(int i = 2; i <= parts.count(); i++)
+		{
+			QFileInfo currentPath(((QStringList) parts.mid(0, i)).join("/"));
+			if((!currentPath.exists()) || (!currentPath.isDir()) || currentPath.isHidden())
+			{
+				return QModelIndex();
+			}
+		}
+		return QFileSystemModel::index(path, column);
+	}
+	return QModelIndex();
+}
 
 /* ------------------------ */
 /*  STATIC FUNCTIONS BELOW  */
 /* ------------------------ */
 
-QHash<const QString, bool> QFileSystemModelEx::s_hasFolderCache;
-QMutex QFileSystemModelEx::s_hasFolderMutex;
+QHash<const QString, bool> QFileSystemModelEx::s_hasSubfolderCache;
+QMutex QFileSystemModelEx::s_hasSubfolderMutex;
 
 bool QFileSystemModelEx::hasSubfoldersCached(const QString &path)
 {
-	QMutexLocker lock(&s_hasFolderMutex);
+	QMutexLocker lock(&s_hasSubfolderMutex);
 	
-	if(s_hasFolderCache.contains(path))
+	if(s_hasSubfolderCache.contains(path))
 	{
-		return s_hasFolderCache.value(path);
+		return s_hasSubfolderCache.value(path);
 	}
 	
 	bool bChildren = hasSubfolders(path);
-	s_hasFolderCache.insert(path, bChildren);
+	s_hasSubfolderCache.insert(path, bChildren);
 	return bChildren;
 }
 
 void QFileSystemModelEx::removeFromCache(const QString &path)
 {
-	QMutexLocker lock(&s_hasFolderMutex);
-	s_hasFolderCache.remove(path);
+	QMutexLocker lock(&s_hasSubfolderMutex);
+	s_hasSubfolderCache.remove(path);
 }
 
 bool QFileSystemModelEx::hasSubfolders(const QString &path)
 {
-	bool bChildren = false; WIN32_FIND_DATAW findData;
-	HANDLE h = FindFirstFileW(QWCHAR(QDir::toNativeSeparators(path + "/*")), &findData);
+	static bool FindFirstFileExInitialized = false;
+	static FindFirstFileExFun FindFirstFileExPtr = NULL;
+
+	if(!FindFirstFileExInitialized)
+	{
+		QLibrary Kernel32Lib("kernel32.dll");
+		FindFirstFileExPtr = (FindFirstFileExFun) Kernel32Lib.resolve("FindFirstFileExW");
+		FindFirstFileExInitialized = true;
+	}
+		
+	WIN32_FIND_DATAW findData;
+	bool bChildren = false;
+
+	HANDLE h = (FindFirstFileExPtr)
+		? FindFirstFileExPtr(QWCHAR(QDir::toNativeSeparators(path + "/*")), FindExInfoStandard, &findData, FindExSearchLimitToDirectories, NULL, 0)
+		: FindFirstFileW(QWCHAR(QDir::toNativeSeparators(path + "/*")), &findData);
+	
 	if(h != INVALID_HANDLE_VALUE)
 	{
 		if(NO_DOT_OR_DOTDOT(findData.cFileName))
