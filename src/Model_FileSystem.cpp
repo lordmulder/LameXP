@@ -26,6 +26,9 @@
 #include <QFileIconProvider>
 #include <QDesktopServices>
 
+#define IS_DIR(ATTR) (((ATTR) & FILE_ATTRIBUTE_DIRECTORY) && (!((ATTR) & FILE_ATTRIBUTE_HIDDEN)))
+#define NO_DOT_OR_DOTDOT(STR) (wcscmp((STR), L".") && wcscmp((STR), L".."))
+
 ///////////////////////////////////////////////////////////////////////////////
 // Dummy QFileIconProvider class
 ///////////////////////////////////////////////////////////////////////////////
@@ -154,8 +157,78 @@ bool QFileSystemModelEx::hasChildren(const QModelIndex &parent) const
 {
 	if(parent.isValid())
 	{
-		return (QDir(QFileSystemModel::filePath(parent)).entryList(QDir::Dirs | QDir::NoDotAndDotDot).count() > 0);
+		return (QFileSystemModel::rowCount(parent) > 0) || hasSubfoldersCached(filePath(parent));
 	}
 	
 	return true;
+}
+
+int QFileSystemModelEx::rowCount(const QModelIndex &parent) const
+{
+	if(parent.isValid())
+	{
+		removeFromCache(filePath(parent));
+	}
+
+	return QFileSystemModel::rowCount(parent);
+}
+
+void QFileSystemModelEx::fetchMore(const QModelIndex &parent)
+{
+	if(parent.isValid())
+	{
+		removeFromCache(filePath(parent));
+	}
+
+	QFileSystemModel::fetchMore(parent);
+}
+
+
+/* ------------------------ */
+/*  STATIC FUNCTIONS BELOW  */
+/* ------------------------ */
+
+QHash<const QString, bool> QFileSystemModelEx::s_hasFolderCache;
+QMutex QFileSystemModelEx::s_hasFolderMutex;
+
+bool QFileSystemModelEx::hasSubfoldersCached(const QString &path)
+{
+	QMutexLocker lock(&s_hasFolderMutex);
+	
+	if(s_hasFolderCache.contains(path))
+	{
+		return s_hasFolderCache.value(path);
+	}
+	
+	bool bChildren = hasSubfolders(path);
+	s_hasFolderCache.insert(path, bChildren);
+	return bChildren;
+}
+
+void QFileSystemModelEx::removeFromCache(const QString &path)
+{
+	QMutexLocker lock(&s_hasFolderMutex);
+	s_hasFolderCache.remove(path);
+}
+
+bool QFileSystemModelEx::hasSubfolders(const QString &path)
+{
+	bool bChildren = false; WIN32_FIND_DATAW findData;
+	HANDLE h = FindFirstFileW(QWCHAR(QDir::toNativeSeparators(path + "/*")), &findData);
+	if(h != INVALID_HANDLE_VALUE)
+	{
+		if(NO_DOT_OR_DOTDOT(findData.cFileName))
+		{
+			bChildren = IS_DIR(findData.dwFileAttributes);
+		}
+		while((!bChildren) && FindNextFile(h, &findData))
+		{
+			if(NO_DOT_OR_DOTDOT(findData.cFileName))
+			{
+				bChildren = IS_DIR(findData.dwFileAttributes);
+			}
+		}
+		FindClose(h);
+	}
+	return bChildren;
 }

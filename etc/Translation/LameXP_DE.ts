@@ -1842,6 +1842,10 @@
         <source>Show Favorites</source>
         <translation>Favoriten anzeigen</translation>
     </message>
+    <message>
+        <source>Initializing directory outline, please be patient...</source>
+        <translation>Verzeichnisbaum wird erzeugt, bitte warten...</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

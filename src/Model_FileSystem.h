@@ -22,6 +22,7 @@
 #pragma once
 
 #include <QFileSystemModel>
+#include <QMutex>
 
 class QFileIconProviderEx;
 
@@ -32,7 +33,16 @@ public:
 	~QFileSystemModelEx();
 
 	virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
+	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	virtual void fetchMore(const QModelIndex &parent);
 
 private:
 	QFileIconProviderEx *m_myIconProvider;
+	
+	static QHash<const QString, bool> s_hasFolderCache;
+	static QMutex s_hasFolderMutex;
+
+	static bool hasSubfolders(const QString &path);
+	static bool hasSubfoldersCached(const QString &path);
+	static void removeFromCache(const QString &path);
 };

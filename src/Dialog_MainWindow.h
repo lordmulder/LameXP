@@ -94,6 +94,7 @@ private slots:
 	void importCueSheetActionTriggered(bool checked);
 	void importCsvContextActionTriggered(void);
 	void initOutputFolderModel(void);
+	void initOutputFolderModel_doAsync(void);
 	void languageActionActivated(QAction *action);
 	void languageFromFileActionActivated(bool checked);
 	void makeFolderButtonClicked(void);
@@ -165,7 +166,7 @@ private:
 	
 	bool m_accepted;
 	bool m_firstTimeShown;
-	bool m_outputFolderViewInitialized;
+	uint m_outputFolderViewInitialized;
 	bool m_outputFolderViewCentering;
 
 	const bool m_neroEncoderAvailable;
@@ -186,6 +187,7 @@ private:
 	SettingsModel *m_settings;
 	QMenu *m_sourceFilesContextMenu;
 	QMenu *m_outputFolderFavoritesMenu;
+	QLabel *m_outputFolderNoteBox;
 
 	QAction *m_findFileContextAction;
 	QAction *m_previewContextAction;

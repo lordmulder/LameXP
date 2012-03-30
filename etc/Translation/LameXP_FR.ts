@@ -1851,6 +1851,10 @@ Ouvrir le dossier récursivement...</translation>
         <source>Show Favorites</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Initializing directory outline, please be patient...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

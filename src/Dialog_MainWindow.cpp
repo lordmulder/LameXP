@@ -94,7 +94,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_qaacEncoderAvailable(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll")),
 	m_accepted(false),
 	m_firstTimeShown(true),
-	m_outputFolderViewInitialized(false),
+	m_outputFolderViewInitialized(3),
 	m_outputFolderViewCentering(false)
 {
 	//Init the dialog, from the .ui file
@@ -161,6 +161,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setAnimated(false);
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
+	outputFolderView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 	outputFolderView->installEventFilter(this);
 	outputFoldersEditorLabel->installEventFilter(this);
 	outputFoldersFovoritesLabel->installEventFilter(this);
@@ -192,6 +193,11 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderLabel->installEventFilter(this);
 	outputFolderView->setCurrentIndex(m_fileSystemModel->index(m_settings->outputDir()));
 	outputFolderViewClicked(outputFolderView->currentIndex());
+	m_outputFolderNoteBox = new QLabel(outputFolderView);
+	m_outputFolderNoteBox->setAutoFillBackground(true);
+	m_outputFolderNoteBox->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+	m_outputFolderNoteBox->setFrameShape(QFrame::StyledPanel);
+	SET_FONT_BOLD(m_outputFolderNoteBox, true);
 	refreshFavorites();
 	
 	//Setup "Meta Data" tab
@@ -711,6 +717,7 @@ void MainWindow::changeEvent(QEvent *e)
 
 		//Manually re-translate widgets that UIC doesn't handle
 		m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
+		m_outputFolderNoteBox->setText(tr("Initializing directory outline, please be patient..."));
 		m_showDetailsContextAction->setText(tr("Show Details"));
 		m_previewContextAction->setText(tr("Open File in External Application"));
 		m_findFileContextAction->setText(tr("Browse File Location"));
@@ -826,8 +833,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
  */
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-	QMainWindow::resizeEvent(event);
+	if(event) QMainWindow::resizeEvent(event);
 	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+
+	if(QWidget *port = outputFolderView->viewport())
+	{
+		m_outputFolderNoteBox->setGeometry(16, (port->height() - 64) / 2, port->width() - 32,  64);
+	}
 }
 
 /*
@@ -1390,6 +1402,8 @@ void MainWindow::closeButtonClicked(void)
  */
 void MainWindow::tabPageChanged(int idx)
 {
+	resizeEvent(NULL);
+	
 	QList<QAction*> actions = m_tabActionGroup->actions();
 	for(int i = 0; i < actions.count(); i++)
 	{
@@ -1435,7 +1449,7 @@ void MainWindow::tabPageChanged(int idx)
 	}
 	else if(idx == tabWidget->indexOf(tabOutputDir))
 	{
-		if(!m_outputFolderViewInitialized)
+		if(m_outputFolderViewInitialized > 0)
 		{
 			QTimer::singleShot(125, this, SLOT(initOutputFolderModel()));
 		}
@@ -2517,8 +2531,9 @@ void MainWindow::makeFolderButtonClicked(void)
 				QDir createdDir = basePath;
 				if(createdDir.cd(newFolder))
 				{
-					outputFolderView->setCurrentIndex(m_fileSystemModel->index(createdDir.canonicalPath()));
-					outputFolderViewClicked(outputFolderView->currentIndex());
+					QModelIndex newIndex = m_fileSystemModel->index(createdDir.canonicalPath());
+					outputFolderView->setCurrentIndex(newIndex);
+					outputFolderViewClicked(newIndex);
 					CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 				}
 			}
@@ -2661,9 +2676,26 @@ void MainWindow::outputFolderEditFinished(void)
  */
 void MainWindow::initOutputFolderModel(void)
 {
-	m_fileSystemModel->setRootPath("");
+	if(m_fileSystemModel) m_fileSystemModel->setRootPath("");
 	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
-	m_outputFolderViewInitialized = true;
+	QTimer::singleShot(125, this, SLOT(initOutputFolderModel_doAsync()));
+}
+
+/*
+ * Initialize file system model (do NOT call this one directly!)
+ */
+void MainWindow::initOutputFolderModel_doAsync(void)
+{
+	if(m_outputFolderViewInitialized > 0)
+	{
+		m_outputFolderViewInitialized--;
+		QTimer::singleShot(125, this, SLOT(initOutputFolderModel_doAsync()));
+	}
+	else
+	{
+		QTimer::singleShot(125, m_outputFolderNoteBox, SLOT(hide()));
+		outputFolderView->setFocus();
+	}
 }
 
 /*
