@@ -43,6 +43,10 @@ private:
 	static QHash<const QString, bool> s_hasSubfolderCache;
 	static QMutex s_hasSubfolderMutex;
 
+	static void *FindFirstFileExPtr;
+	static bool FindFirstFileExInitialized;
+	static bool FindFirstFileExInfoBasicOK;
+
 	static bool hasSubfolders(const QString &path);
 	static bool hasSubfoldersCached(const QString &path);
 	static void removeFromCache(const QString &path);

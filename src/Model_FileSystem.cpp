@@ -212,6 +212,10 @@ QModelIndex QFileSystemModelEx::index(const QString &path, int column) const
 QHash<const QString, bool> QFileSystemModelEx::s_hasSubfolderCache;
 QMutex QFileSystemModelEx::s_hasSubfolderMutex;
 
+void *QFileSystemModelEx::FindFirstFileExPtr = NULL;
+bool QFileSystemModelEx::FindFirstFileExInitialized = false;
+bool QFileSystemModelEx::FindFirstFileExInfoBasicOK = false;
+
 bool QFileSystemModelEx::hasSubfoldersCached(const QString &path)
 {
 	QMutexLocker lock(&s_hasSubfolderMutex);
@@ -234,23 +238,22 @@ void QFileSystemModelEx::removeFromCache(const QString &path)
 
 bool QFileSystemModelEx::hasSubfolders(const QString &path)
 {
-	static bool FindFirstFileExInitialized = false;
-	static FindFirstFileExFun FindFirstFileExPtr = NULL;
-
 	if(!FindFirstFileExInitialized)
 	{
 		QLibrary Kernel32Lib("kernel32.dll");
-		FindFirstFileExPtr = (FindFirstFileExFun) Kernel32Lib.resolve("FindFirstFileExW");
+		FindFirstFileExPtr = Kernel32Lib.resolve("FindFirstFileExW");
+		DWORD osVersionNo = lamexp_get_os_version();
+		FindFirstFileExInfoBasicOK = LAMEXP_MIN_OS_VER(osVersionNo, 6, 1);
 		FindFirstFileExInitialized = true;
 	}
-		
+
 	WIN32_FIND_DATAW findData;
 	bool bChildren = false;
 
 	HANDLE h = (FindFirstFileExPtr)
-		? FindFirstFileExPtr(QWCHAR(QDir::toNativeSeparators(path + "/*")), FindExInfoStandard, &findData, FindExSearchLimitToDirectories, NULL, 0)
+		? reinterpret_cast<FindFirstFileExFun>(FindFirstFileExPtr)(QWCHAR(QDir::toNativeSeparators(path + "/*")), (FindFirstFileExInfoBasicOK ? FindExInfoBasic : FindExInfoStandard), &findData, FindExSearchLimitToDirectories, NULL, 0)
 		: FindFirstFileW(QWCHAR(QDir::toNativeSeparators(path + "/*")), &findData);
-	
+
 	if(h != INVALID_HANDLE_VALUE)
 	{
 		if(NO_DOT_OR_DOTDOT(findData.cFileName))
@@ -266,5 +269,14 @@ bool QFileSystemModelEx::hasSubfolders(const QString &path)
 		}
 		FindClose(h);
 	}
+	else
+	{
+		DWORD err = GetLastError();
+		if((err == ERROR_NOT_SUPPORTED) || (err == ERROR_INVALID_PARAMETER))
+		{
+			qWarning("%s failed with error code #%u", FindFirstFileExPtr ? "FindFirstFileEx" : "FindFirstFile", err);
+		}
+	}
+
 	return bChildren;
 }

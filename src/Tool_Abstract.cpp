@@ -69,7 +69,7 @@ AbstractTool::AbstractTool(void)
 	if(m_jobObjRefCount < 1U)
 	{
 		DWORD osVersionNo = lamexp_get_os_version();
-		if(((HIWORD(osVersionNo) == 5) && (LOWORD(osVersionNo) >= 1)) || (HIWORD(osVersionNo) > 5))
+		if(LAMEXP_MIN_OS_VER(osVersionNo, 5, 1))
 		{
 			if((!CreateJobObjectPtr) || (!SetInformationJobObjectPtr))
 			{
