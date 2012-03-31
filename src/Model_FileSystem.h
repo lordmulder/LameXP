@@ -33,7 +33,7 @@ public:
 	~QFileSystemModelEx();
 
 	virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
-	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	//virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	virtual void fetchMore(const QModelIndex &parent);
 	virtual QModelIndex index(const QString &path, int column = 0) const;
 

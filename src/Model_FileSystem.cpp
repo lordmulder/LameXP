@@ -160,27 +160,16 @@ bool QFileSystemModelEx::hasChildren(const QModelIndex &parent) const
 {
 	if(parent.isValid())
 	{
-		return /*(QFileSystemModel::rowCount(parent) > 0) ||*/ hasSubfoldersCached(filePath(parent));
+		return hasSubfoldersCached(filePath(parent).toLower()); //return (QDir(QFileSystemModel::filePath(parent)).entryList(QDir::Dirs | QDir::NoDotAndDotDot).count() > 0);
 	}
-	
 	return true;
-}
-
-int QFileSystemModelEx::rowCount(const QModelIndex &parent) const
-{
-	if(parent.isValid())
-	{
-		removeFromCache(filePath(parent));
-	}
-
-	return QFileSystemModel::rowCount(parent);
 }
 
 void QFileSystemModelEx::fetchMore(const QModelIndex &parent)
 {
 	if(parent.isValid())
 	{
-		removeFromCache(filePath(parent));
+		removeFromCache(filePath(parent).toLower());
 	}
 
 	QFileSystemModel::fetchMore(parent);
@@ -191,7 +180,8 @@ QModelIndex QFileSystemModelEx::index(const QString &path, int column) const
 	QFileInfo info(path);
 	if(info.exists() && info.isDir())
 	{
-		QStringList parts = QDir::fromNativeSeparators(info.canonicalFilePath()).split('/', QString::SkipEmptyParts);
+		QString fullPath = QDir::fromNativeSeparators(info.canonicalFilePath());
+		QStringList parts = fullPath.split('/', QString::SkipEmptyParts);
 		for(int i = 2; i <= parts.count(); i++)
 		{
 			QFileInfo currentPath(((QStringList) parts.mid(0, i)).join("/"));
@@ -200,7 +190,17 @@ QModelIndex QFileSystemModelEx::index(const QString &path, int column) const
 				return QModelIndex();
 			}
 		}
-		return QFileSystemModel::index(path, column);
+		QModelIndex index = QFileSystemModel::index(fullPath, column);
+		if(index.isValid())
+		{
+			QModelIndex temp = index;
+			while(temp.isValid())
+			{
+				removeFromCache(filePath(temp).toLower());
+				temp = temp.parent();
+			}
+			return index;
+		}
 	}
 	return QModelIndex();
 }
@@ -219,7 +219,7 @@ bool QFileSystemModelEx::FindFirstFileExInfoBasicOK = false;
 bool QFileSystemModelEx::hasSubfoldersCached(const QString &path)
 {
 	QMutexLocker lock(&s_hasSubfolderMutex);
-	
+
 	if(s_hasSubfolderCache.contains(path))
 	{
 		return s_hasSubfolderCache.value(path);

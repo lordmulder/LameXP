@@ -94,7 +94,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_qaacEncoderAvailable(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll")),
 	m_accepted(false),
 	m_firstTimeShown(true),
-	m_outputFolderViewInitialized(3),
+	m_outputFolderViewInitialized(4),
 	m_outputFolderViewCentering(false)
 {
 	//Init the dialog, from the .ui file
