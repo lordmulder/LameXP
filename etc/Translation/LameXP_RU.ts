@@ -393,7 +393,7 @@
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодировка ANSI для файла CUE:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -544,7 +544,7 @@
     </message>
     <message>
         <source>Select ANSI Codepage for CSV file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодировка ANSI для файла CSV:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1721,35 +1721,35 @@
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ДЕМО ВЕРСИЯ</translation>
     </message>
     <message>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Гибернация компьютера при выключении</translation>
     </message>
     <message>
         <source>Hibernate Computer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Гибернация компьютера</translation>
     </message>
     <message>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Переводить компьютер в состояние гибернации при выключении?</translation>
     </message>
     <message>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP  переведёт компьютер в состояние гибернации при выключении.</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP &lt;i&gt;НЕ&lt;/i&gt; переведёт компьютер в состояние гибернации при выключении.</translation>
     </message>
     <message>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Подсказка: Пожалуйста игнорируйте имя загруженного ZIP-файла и проверьте &apos;changelog.txt&apos;)</translation>
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Пропуск проверки обновлений, пожалуйста подождите...</translation>
     </message>
     <message>
         <source>DCA Enc</source>
@@ -1757,67 +1757,67 @@
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Экспорт Meta-тегов в файл CSV</translation>
     </message>
     <message>
         <source>Import Meta Tags from CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Испорт Meta-теги из файла CSV</translation>
     </message>
     <message>
         <source>Save CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сохранить файл CSV</translation>
     </message>
     <message>
         <source>CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV файл</translation>
     </message>
     <message>
         <source>CSV Export</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV Экспорт</translation>
     </message>
     <message>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Meta-теги, которые могут быть экспортированы, отсутствуют!</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ошибка открытия файла CSV для записи!</translation>
     </message>
     <message>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ошибка записи файла CSV!</translation>
     </message>
     <message>
         <source>The CSV files was created successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл CSV был успешно создан!</translation>
     </message>
     <message>
         <source>Open CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открыть файл CSV</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ошибка открытия файла CSV для чтения!</translation>
     </message>
     <message>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ошибка при чтении файла CSV!</translation>
     </message>
     <message>
         <source>Sorry, the CSV file does not contain any known fields!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл CSV не содержит ни одного известного поля!</translation>
     </message>
     <message>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл CSV не полный. Обновлены не все файлы!</translation>
     </message>
     <message>
         <source>The CSV files was imported successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файлы CSV успешно импортированы!</translation>
     </message>
     <message>
         <source>CSV Import</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Импорт CSV</translation>
     </message>
     <message>
         <source>QAAC (Apple)</source>
@@ -1833,23 +1833,23 @@
     </message>
     <message>
         <source>Not available!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Недоступно!</translation>
     </message>
     <message>
         <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Текущий кодировщик AAC: %1</translation>
     </message>
     <message>
         <source>Edit Output Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить папку выходных файлов</translation>
     </message>
     <message>
         <source>Show Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показать избранные папки</translation>
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Чтение структуры каталогов, пожалуйста ждите...</translation>
     </message>
 </context>
 <context>
@@ -1916,7 +1916,7 @@
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Метаинформация: %1</translation>
     </message>
 </context>
 <context>
@@ -2166,7 +2166,7 @@
     </message>
     <message>
         <source>Analyzing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Анализ</translation>
     </message>
 </context>
 <context>
@@ -2258,7 +2258,7 @@
     </message>
     <message>
         <source>All files completed successfully.</source>
-        <translation type="unfinished">Все файлы завершились успешно.</translation>
+        <translation type="unfinished">Все файлы преобразовались успешно.</translation>
     </message>
     <message>
         <source>Playlist creation failed</source>
@@ -2282,35 +2282,35 @@
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Загрузка процессора (Общая)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Использование оперативной памяти</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Свободное место на диске (Временная папка)</translation>
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодирование заняло %1</translation>
     </message>
     <message>
         <source>hour(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>час.</translation>
     </message>
     <message>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>мин.</translation>
     </message>
     <message>
         <source>second(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>сек.</translation>
     </message>
     <message>
         <source>millisecond(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>мс.</translation>
     </message>
 </context>
 <context>
@@ -2340,7 +2340,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исполняемый файл  &apos;%1&apos; был собран для Qt &apos;%2&apos;, но найдена версия Qt &apos;%3&apos;.</translation>
     </message>
 </context>
 <context>
@@ -2437,7 +2437,7 @@
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation type="unfinished">Мы очень рекомендуем установить это обновлений как можо скорее.</translation>
+        <translation type="unfinished">Мы очень рекомендуем установить это обновление как можо скорее.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
