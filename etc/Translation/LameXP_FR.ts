@@ -1855,6 +1855,10 @@ Ouvrir le dossier récursivement...</translation>
         <source>Initializing directory outline, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Refresh Directory Outline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

@@ -153,6 +153,7 @@ QFileSystemModelEx::QFileSystemModelEx()
 
 QFileSystemModelEx::~QFileSystemModelEx()
 {
+	removeAllFromCache();
 	LAMEXP_DELETE(m_myIconProvider);
 }
 
@@ -205,6 +206,11 @@ QModelIndex QFileSystemModelEx::index(const QString &path, int column) const
 	return QModelIndex();
 }
 
+void QFileSystemModelEx::flushCache(void)
+{
+	removeAllFromCache();
+}
+
 /* ------------------------ */
 /*  STATIC FUNCTIONS BELOW  */
 /* ------------------------ */
@@ -234,6 +240,12 @@ void QFileSystemModelEx::removeFromCache(const QString &path)
 {
 	QMutexLocker lock(&s_hasSubfolderMutex);
 	s_hasSubfolderCache.remove(path);
+}
+
+void QFileSystemModelEx::removeAllFromCache(void)
+{
+	QMutexLocker lock(&s_hasSubfolderMutex);
+	s_hasSubfolderCache.clear();
 }
 
 bool QFileSystemModelEx::hasSubfolders(const QString &path)

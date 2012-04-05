@@ -36,6 +36,7 @@ public:
 	//virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	virtual void fetchMore(const QModelIndex &parent);
 	virtual QModelIndex index(const QString &path, int column = 0) const;
+	virtual void flushCache(void);
 
 private:
 	QFileIconProviderEx *m_myIconProvider;
@@ -50,4 +51,5 @@ private:
 	static bool hasSubfolders(const QString &path);
 	static bool hasSubfoldersCached(const QString &path);
 	static void removeFromCache(const QString &path);
+	static void removeAllFromCache(void);
 };

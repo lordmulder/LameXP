@@ -1851,6 +1851,10 @@
         <source>Initializing directory outline, please be patient...</source>
         <translation type="unfinished">Чтение структуры каталогов, пожалуйста ждите...</translation>
     </message>
+    <message>
+        <source>Refresh Directory Outline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

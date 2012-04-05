@@ -116,6 +116,7 @@ private slots:
 	void playlistEnabledChanged(void);
 	void prependRelativePathChanged(void);
 	void previewContextActionTriggered(void);
+	void refreshFolderContextActionTriggered(void);
 	void removeFileButtonClicked(void);
 	void renameOutputEnabledChanged(bool checked);
 	void renameOutputPatternChanged(void);
@@ -155,6 +156,7 @@ protected:
 	virtual bool eventFilter(QObject *obj, QEvent *event);
 	virtual void resizeEvent(QResizeEvent *event);
 	virtual void showEvent(QShowEvent *event);
+	virtual void keyPressEvent(QKeyEvent *e);
 	virtual bool event(QEvent *e);
 	virtual bool winEvent(MSG *message, long *result);
 
@@ -166,7 +168,7 @@ private:
 	
 	bool m_accepted;
 	bool m_firstTimeShown;
-	uint m_outputFolderViewInitialized;
+	uint m_outputFolderViewInitCounter;
 	bool m_outputFolderViewCentering;
 
 	const bool m_neroEncoderAvailable;
@@ -193,6 +195,7 @@ private:
 	QAction *m_previewContextAction;
 	QAction *m_showDetailsContextAction;
 	QAction *m_showFolderContextAction;
+	QAction *m_refreshFolderContextAction;
 	QAction *m_addFavoriteFolderAction;
 	QAction *m_exportCsvContextAction;
 	QAction *m_importCsvContextAction;
