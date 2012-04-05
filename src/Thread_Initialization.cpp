@@ -75,16 +75,17 @@ void InitializationThread::run()
 		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_GEN : CPU_TYPE_X86_GEN;
 	}
 
-	//Hack to disable x64 on the Windows 8 Developer Preview (not required anymore)
-	//if(cpuSupport & CPU_TYPE_X64_ALL)
-	//{
-	//	DWORD osVerNo = lamexp_get_os_version();
-	//	if((HIWORD(osVerNo) == 6) && (LOWORD(osVerNo) == 2))
-	//	{
-	//		qWarning("Windows 8 (x64) developer preview detected. Going to disable all x64 support!\n");
-	//		cpuSupport = (cpuSupport == CPU_TYPE_X64_SSE) ? CPU_TYPE_X86_SSE : CPU_TYPE_X86_GEN;
-	//	}
-	//}
+	//Hack to disable x64 on Wine, as x64 binaries won't run under Wine (tested with Wine 1.4 under Ubuntu 12.04 x64)
+	if(cpuSupport & CPU_TYPE_X64_ALL)
+	{
+		//DWORD osVerNo = lamexp_get_os_version();
+		//if((HIWORD(osVerNo) == 6) && (LOWORD(osVerNo) == 2))
+		if(lamexp_detect_wine())
+		{
+			qWarning("Running under Wine on a 64-Bit system. Going to disable all x64 support!\n");
+			cpuSupport = (cpuSupport == CPU_TYPE_X64_SSE) ? CPU_TYPE_X86_SSE : CPU_TYPE_X86_GEN;
+		}
+	}
 
 	//Print selected CPU type
 	switch(cpuSupport)

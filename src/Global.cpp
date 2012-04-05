@@ -342,21 +342,48 @@ const QDate &lamexp_version_date(void)
  */
 DWORD lamexp_get_os_version(void)
 {
-	OSVERSIONINFO osVerInfo;
-	memset(&osVerInfo, 0, sizeof(OSVERSIONINFO));
-	osVerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	DWORD version = 0;
+	static DWORD osVersion = 0;
 	
-	if(GetVersionEx(&osVerInfo) == TRUE)
+	if(!osVersion)
 	{
-		if(osVerInfo.dwPlatformId != VER_PLATFORM_WIN32_NT)
+		OSVERSIONINFO osVerInfo;
+		memset(&osVerInfo, 0, sizeof(OSVERSIONINFO));
+		osVerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+	
+		if(GetVersionEx(&osVerInfo) == TRUE)
 		{
-			throw "Ouuups: Not running under Windows NT. This is not supposed to happen!";
+			if(osVerInfo.dwPlatformId != VER_PLATFORM_WIN32_NT)
+			{
+				throw "Ouuups: Not running under Windows NT. This is not supposed to happen!";
+			}
+			osVersion = (DWORD)((osVerInfo.dwMajorVersion << 16) | (osVerInfo.dwMinorVersion & 0xffff));
 		}
-		version = (DWORD)((osVerInfo.dwMajorVersion << 16) | (osVerInfo.dwMinorVersion & 0xffff));
 	}
 
-	return version;
+	return osVersion;
+}
+
+/*
+ * Check if we are running under wine
+ */
+bool lamexp_detect_wine(void)
+{
+	static bool isWine = false;
+	static bool isWine_initialized = false;
+
+	if(!isWine_initialized)
+	{
+		QLibrary ntdll("ntdll.dll");
+		if(ntdll.load())
+		{
+			if(ntdll.resolve("wine_nt_to_unix_file_name") != NULL) isWine = true;
+			if(ntdll.resolve("wine_get_version") != NULL) isWine = true;
+			ntdll.unload();
+		}
+		isWine_initialized = true;
+	}
+
+	return isWine;
 }
 
 /*
@@ -978,7 +1005,6 @@ static bool lamexp_check_elevation(void)
 bool lamexp_init_qt(int argc, char* argv[])
 {
 	static bool qt_initialized = false;
-	bool isWine = false;
 	typedef BOOL (WINAPI *SetDllDirectoryProc)(WCHAR *lpPathName);
 
 	//Don't initialized again, if done already
@@ -1053,14 +1079,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Check for Wine
-	QLibrary ntdll("ntdll.dll");
-	if(ntdll.load())
+	if(lamexp_detect_wine())
 	{
-		if(ntdll.resolve("wine_nt_to_unix_file_name") != NULL) isWine = true;
-		if(ntdll.resolve("wine_get_version") != NULL) isWine = true;
-		if(isWine) qWarning("It appears we are running under Wine, unexpected things might happen!\n");
-		ntdll.unload();
+		qWarning("It appears we are running under Wine, unexpected things might happen!\n");
 	}
+
 
 	//Create Qt application instance and setup version info
 	QApplication *application = new QApplication(argc, argv);
@@ -1103,7 +1126,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Update console icon, if a console is attached
-	if(g_lamexp_console_attached && !isWine)
+	if(g_lamexp_console_attached && (!lamexp_detect_wine()))
 	{
 		typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
 		QLibrary kernel32("kernel32.dll");
