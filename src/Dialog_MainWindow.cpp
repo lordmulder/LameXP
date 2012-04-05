@@ -199,6 +199,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		m_outputFolderNoteBox->hide();
 
 	}
+	outputFolderViewClicked(QModelIndex());
 	refreshFavorites();
 	
 	//Setup "Meta Data" tab
@@ -2376,12 +2377,16 @@ void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 		outputFolderView->setCurrentIndex(index);
 	}
 	
-	if(m_fileSystemModel)
+	if(m_fileSystemModel && index.isValid())
 	{
 		QString selectedDir = m_fileSystemModel->filePath(index);
 		if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
 		outputFolderLabel->setText(QDir::toNativeSeparators(selectedDir));
 		m_settings->outputDir(selectedDir);
+	}
+	else
+	{
+		outputFolderLabel->setText(QDir::toNativeSeparators(m_settings->outputDir()));
 	}
 }
 

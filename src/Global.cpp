@@ -1117,7 +1117,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	g_lamexp_translation.names.insert(LAMEXP_DEFAULT_LANGID, "English");
 
 	//Check for process elevation
-	if(!lamexp_check_elevation())
+	if((!lamexp_check_elevation()) && (!lamexp_detect_wine()))
 	{
 		if(QMessageBox::warning(NULL, "LameXP", "<nobr>LameXP was started with elevated rights. This is a potential security risk!</nobr>", "Quit Program (Recommended)", "Ignore") == 0)
 		{
