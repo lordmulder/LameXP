@@ -78,6 +78,7 @@
 #define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); {CMD}; if(__dropBoxVisible) m_dropBox->show(); }
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
+#define SET_MODEL(VIEW, MODEL) { QItemSelectionModel *_tmp = (VIEW)->selectionModel(); (VIEW)->setModel(MODEL); LAMEXP_DELETE(_tmp); }
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -475,8 +476,9 @@ MainWindow::~MainWindow(void)
 	}
 
 	//Unset models
-	sourceFileView->setModel(NULL);
-	metaDataView->setModel(NULL);
+	SET_MODEL(sourceFileView, NULL);
+	SET_MODEL(outputFolderView, NULL);
+	SET_MODEL(metaDataView, NULL);
 
 	//Free memory
 	LAMEXP_DELETE(m_tabActionGroup);
@@ -2372,7 +2374,7 @@ void MainWindow::sourceModelChanged(void)
  */
 void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 {
-	if(outputFolderView->currentIndex() != index)
+	if(index.isValid() && (outputFolderView->currentIndex() != index))
 	{
 		outputFolderView->setCurrentIndex(index);
 	}
@@ -2655,20 +2657,8 @@ void MainWindow::showFolderContextActionTriggered(void)
  */
 void MainWindow::refreshFolderContextActionTriggered(void)
 {
+	//force re-initialization
 	QTimer::singleShot(0, this, SLOT(initOutputFolderModel()));
-
-	/*
-	const QString path = m_fileSystemModel->filePath(outputFolderView->currentIndex());
-	m_fileSystemModel->flushCache();
-	outputFolderView->reset();
-	QModelIndex index = (!path.isEmpty()) ? m_fileSystemModel->index(path) : QModelIndex();
-	
-	if(index.isValid())
-	{
-		outputFolderView->setCurrentIndex(index);
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
-	}
-	*/
 }
 
 /*
@@ -2764,12 +2754,14 @@ void MainWindow::initOutputFolderModel(void)
 	if(m_outputFolderNoteBox->isHidden())
 	{
 		m_outputFolderNoteBox->show();
+		m_outputFolderNoteBox->repaint();
 		m_outputFolderViewInitCounter = 4;
 
 		if(m_fileSystemModel)
 		{
-			outputFolderView->setModel(NULL);
+			SET_MODEL(outputFolderView, NULL);
 			LAMEXP_DELETE(m_fileSystemModel);
+			outputFolderView->repaint();
 		}
 
 		if(m_fileSystemModel = new QFileSystemModelEx())
@@ -2778,7 +2770,7 @@ void MainWindow::initOutputFolderModel(void)
 			connect(m_fileSystemModel, SIGNAL(directoryLoaded(QString)), this, SLOT(outputFolderDirectoryLoaded(QString)));
 			connect(m_fileSystemModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(outputFolderRowsInserted(QModelIndex,int,int)));
 
-			outputFolderView->setModel(m_fileSystemModel);
+			SET_MODEL(outputFolderView, m_fileSystemModel);
 			outputFolderView->header()->setStretchLastSection(true);
 			outputFolderView->header()->hideSection(1);
 			outputFolderView->header()->hideSection(2);
@@ -2789,7 +2781,7 @@ void MainWindow::initOutputFolderModel(void)
 			if(index.isValid()) outputFolderView->setCurrentIndex(index);
 			outputFolderViewClicked(outputFolderView->currentIndex());
 		}
-		
+
 		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 		QTimer::singleShot(125, this, SLOT(initOutputFolderModel_doAsync()));
 	}
