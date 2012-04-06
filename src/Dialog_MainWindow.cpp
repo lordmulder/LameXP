@@ -494,6 +494,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_encoderButtonGroup);
 	LAMEXP_DELETE(m_sourceFilesContextMenu);
 	LAMEXP_DELETE(m_outputFolderFavoritesMenu);
+	LAMEXP_DELETE(m_outputFolderContextMenu);
 	LAMEXP_DELETE(m_dropBox);
 }
 
@@ -1563,7 +1564,11 @@ void MainWindow::styleActionActivated(QAction *action)
 	}
 
 	//Force re-translate after style change
-	changeEvent(new QEvent(QEvent::LanguageChange));
+	if(QEvent *e = new QEvent(QEvent::LanguageChange))
+	{
+		changeEvent(e);
+		LAMEXP_DELETE(e);
+	}
 }
 
 /*

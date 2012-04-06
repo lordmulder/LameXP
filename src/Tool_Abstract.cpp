@@ -40,10 +40,10 @@ typedef BOOL (WINAPI *AssignProcessToJobObjectFun)(__in HANDLE hJob, __in HANDLE
 /*
  * Static vars
  */
-quint64 AbstractTool::m_lastLaunchTime = 0ui64;
-QMutex *AbstractTool::m_mutex_startProcess = NULL;
-HANDLE AbstractTool::m_handle_jobObject = NULL;
-unsigned int AbstractTool::m_jobObjRefCount = 0U;
+quint64 AbstractTool::s_lastLaunchTime = 0ui64;
+QMutex AbstractTool::s_mutex_startProcess;
+HANDLE AbstractTool::s_handle_jobObject = NULL;
+unsigned int AbstractTool::s_jobObjRefCount = 0U;
 
 /*
  * Const
@@ -59,14 +59,9 @@ AbstractTool::AbstractTool(void)
 	static CreateJobObjectFun CreateJobObjectPtr = NULL;
 	static SetInformationJobObjectFun SetInformationJobObjectPtr = NULL;
 
-	if(!m_mutex_startProcess)
-	{
-		m_mutex_startProcess = new QMutex();
-	}
+	QMutexLocker lock(&s_mutex_startProcess);
 
-	QMutexLocker lock(m_mutex_startProcess);
-
-	if(m_jobObjRefCount < 1U)
+	if(s_jobObjRefCount < 1U)
 	{
 		DWORD osVersionNo = lamexp_get_os_version();
 		if(LAMEXP_MIN_OS_VER(osVersionNo, 5, 1))
@@ -89,8 +84,8 @@ AbstractTool::AbstractTool(void)
 				jobExtendedLimitInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE | JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
 				if(SetInformationJobObjectPtr(jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION)))
 				{
-					m_handle_jobObject = jobObject;
-					m_jobObjRefCount = 1U;
+					s_handle_jobObject = jobObject;
+					s_jobObjRefCount = 1U;
 				}
 				else
 				{
@@ -106,7 +101,7 @@ AbstractTool::AbstractTool(void)
 	}
 	else
 	{
-		m_jobObjRefCount++;
+		s_jobObjRefCount++;
 	}
 
 	m_firstLaunch = true;
@@ -117,15 +112,15 @@ AbstractTool::AbstractTool(void)
  */
 AbstractTool::~AbstractTool(void)
 {
-	QMutexLocker lock(m_mutex_startProcess);
+	QMutexLocker lock(&s_mutex_startProcess);
 
-	if(m_jobObjRefCount >= 1U)
+	if(s_jobObjRefCount >= 1U)
 	{
-		m_jobObjRefCount--;
-		if((m_jobObjRefCount < 1U) && m_handle_jobObject)
+		s_jobObjRefCount--;
+		if((s_jobObjRefCount < 1U) && s_handle_jobObject)
 		{
-			CloseHandle(m_handle_jobObject);
-			m_handle_jobObject = NULL;
+			CloseHandle(s_handle_jobObject);
+			s_handle_jobObject = NULL;
 		}
 	}
 }
@@ -137,9 +132,9 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 {
 	static AssignProcessToJobObjectFun AssignProcessToJobObjectPtr = NULL;
 	
-	QMutexLocker lock(m_mutex_startProcess);
+	QMutexLocker lock(&s_mutex_startProcess);
 
-	if(currentTime() <= m_lastLaunchTime)
+	if(currentTime() <= s_lastLaunchTime)
 	{
 		Sleep(START_DELAY);
 	}
@@ -164,9 +159,9 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	
 	if(process.waitForStarted())
 	{
-		if(AssignProcessToJobObjectPtr && m_handle_jobObject)
+		if(AssignProcessToJobObjectPtr && s_handle_jobObject)
 		{
-			if(!AssignProcessToJobObjectPtr(m_handle_jobObject, process.pid()->hProcess))
+			if(!AssignProcessToJobObjectPtr(s_handle_jobObject, process.pid()->hProcess))
 			{
 				qWarning("Failed to assign process to job object!");
 			}
@@ -184,7 +179,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 			m_firstLaunch = false;
 		}
 		
-		m_lastLaunchTime = currentTime() + START_DELAY_NANO;
+		s_lastLaunchTime = currentTime() + START_DELAY_NANO;
 		return true;
 	}
 
@@ -195,7 +190,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	process.kill();
 	process.waitForFinished(-1);
 
-	m_lastLaunchTime = currentTime() + START_DELAY_NANO;
+	s_lastLaunchTime = currentTime() + START_DELAY_NANO;
 	return false;
 }
 

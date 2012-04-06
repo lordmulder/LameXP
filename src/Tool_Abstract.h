@@ -47,10 +47,10 @@ protected:
 	static const int m_processTimeoutInterval = 600000;
 
 private:
-	static quint64 m_lastLaunchTime;
-	static QMutex *m_mutex_startProcess;
-	static unsigned int  m_jobObjRefCount;
-	static void *m_handle_jobObject;
+	static quint64 s_lastLaunchTime;
+	static QMutex s_mutex_startProcess;
+	static unsigned int s_jobObjRefCount;
+	static void *s_handle_jobObject;
 
 	bool m_firstLaunch;
 };

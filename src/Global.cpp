@@ -1658,15 +1658,17 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 	static const GUID GUID_PROGRAM_FILES = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
 	static const GUID GUID_SYSTEM_FOLDER = {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}};
 
-	static QLibrary *Kernel32Lib = NULL;
 	static SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = NULL;
 	static SHGetFolderPathFun SHGetFolderPathPtr = NULL;
 
 	if((!SHGetKnownFolderPathPtr) && (!SHGetFolderPathPtr))
 	{
-		if(!Kernel32Lib) Kernel32Lib = new QLibrary("shell32.dll");
-		SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) Kernel32Lib->resolve("SHGetKnownFolderPath");
-		SHGetFolderPathPtr = (SHGetFolderPathFun) Kernel32Lib->resolve("SHGetFolderPathW");
+		QLibrary kernel32Lib("shell32.dll");
+		if(kernel32Lib.load())
+		{
+			SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) kernel32Lib.resolve("SHGetKnownFolderPath");
+			SHGetFolderPathPtr = (SHGetFolderPathFun) kernel32Lib.resolve("SHGetFolderPathW");
+		}
 	}
 
 	int folderCSIDL = -1;
@@ -2024,6 +2026,23 @@ void lamexp_finalization(void)
 	LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
 	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
 	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
+
+	//Free STDOUT and STDERR buffers
+	if(g_lamexp_console_attached)
+	{
+		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cout.rdbuf()))
+		{
+			std::cout.rdbuf(NULL);
+			LAMEXP_DELETE(tmp);
+		}
+		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cerr.rdbuf()))
+		{
+			std::cerr.rdbuf(NULL);
+			LAMEXP_DELETE(tmp);
+		}
+	}
 
 	//Close log file
 	if(g_lamexp_log_file)
