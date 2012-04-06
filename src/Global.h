@@ -33,6 +33,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
+//Visual Leaks Detector
+#include <vld.h>
+
 //Declarations
 class QString;
 class QStringList;
@@ -178,17 +181,25 @@ SIZE_T lamexp_dbg_private_bytes(void);
 
 //Memory check
 #if defined(_DEBUG)
-#define LAMEXP_MEMORY_CHECK(CMD) \
+#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) \
 { \
 	SIZE_T _privateBytesBefore = lamexp_dbg_private_bytes(); \
-	CMD; \
+	RETV = FUNC(__VA_ARGS__); \
 	SIZE_T _privateBytesLeak = (lamexp_dbg_private_bytes() - _privateBytesBefore) / 1024; \
-	if(_privateBytesLeak > 10) { \
-		qWarning("Memory leak: Lost %u KiloBytes.", _privateBytesLeak); \
+	if(_privateBytesLeak > 0) { \
+		char _buffer[128]; \
+		qWarning("LameXP Memory Leak: Lost %u KiloBytes.", _privateBytesLeak); \
+		_snprintf_s(_buffer, 128, _TRUNCATE, "Memory leak: Lost %u KiloBytes.\n", _privateBytesLeak); \
+		OutputDebugStringA("----------\n"); \
+		OutputDebugStringA(_buffer); \
+		OutputDebugStringA("----------\n"); \
 	} \
 }
 #else
-#define LAMEXP_MEMORY_CHECK(CMD) CMD
+#define LAMEXP_MEMORY_CHECK(FUNC, RETV, ...) \
+{ \
+	RETV = FUNC(__VA_ARGS__); \
+}
 #endif
 
 //Check for CPU-compatibility options
