@@ -157,8 +157,8 @@ Section "-LaunchTheInstaller"
 
 	RunTryAgain:
 	
-	DetailPrint "ExecShellWait: $PLUGINSDIR\LameXP-Install.exe"
-	${StdUtils.ExecShellWait} $R1 "$PLUGINSDIR\LameXP-Install.exe" "open" '$R9'
+	DetailPrint "ExecShellWait: $PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe"
+	${StdUtils.ExecShellWait} $R1 "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" "open" '$R9'
 	DetailPrint "Result: $R1"
 	
 	StrCmp $R1 "error" RunFailed
@@ -177,11 +177,11 @@ Section "-LaunchTheInstaller"
 	; --------
 
 	ClearErrors
-	ExecShell "open" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
+	ExecShell "open" "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 
 	ClearErrors
-	ExecShell "" "$PLUGINSDIR\LameXP-Install.exe" '$R9' SW_SHOWNORMAL
+	ExecShell "" "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 
 	; --------
@@ -196,5 +196,5 @@ Section "-LaunchTheInstaller"
 	
 	RunSuccess:
 
-	Delete /REBOOTOK "$PLUGINSDIR\LameXP-Install.exe"
+	Delete /REBOOTOK "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe"
 SectionEnd
