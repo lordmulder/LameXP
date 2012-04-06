@@ -134,7 +134,7 @@ Section "-LaunchTheInstaller"
 	
 	InitPluginsDir
 	SetOutPath "$PLUGINSDIR"
-	File "/oname=$PLUGINSDIR\LameXP-Install.exe" "${LAMEXP_SOURCE_FILE}"
+	File "/oname=$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" "${LAMEXP_SOURCE_FILE}"
 	
 	; --------
 	
