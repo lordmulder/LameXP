@@ -180,7 +180,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #endif
 
 //Memory check
-#if defined(_DEBUG)
+#if LAMEXP_DEBUG
 #define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) \
 { \
 	SIZE_T _privateBytesBefore = lamexp_dbg_private_bytes(); \
@@ -188,17 +188,16 @@ SIZE_T lamexp_dbg_private_bytes(void);
 	SIZE_T _privateBytesLeak = (lamexp_dbg_private_bytes() - _privateBytesBefore) / 1024; \
 	if(_privateBytesLeak > 0) { \
 		char _buffer[128]; \
-		qWarning("LameXP Memory Leak: Lost %u KiloBytes.", _privateBytesLeak); \
-		_snprintf_s(_buffer, 128, _TRUNCATE, "Memory leak: Lost %u KiloBytes.\n", _privateBytesLeak); \
+		_snprintf_s(_buffer, 128, _TRUNCATE, "Memory leak: Lost %u KiloBytes of PrivateUsage memory.\n", _privateBytesLeak); \
 		OutputDebugStringA("----------\n"); \
 		OutputDebugStringA(_buffer); \
 		OutputDebugStringA("----------\n"); \
 	} \
 }
 #else
-#define LAMEXP_MEMORY_CHECK(FUNC, RETV, ...) \
+#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) \
 { \
-	RETV = FUNC(__VA_ARGS__); \
+	RETV = __noop(__VA_ARGS__); \
 }
 #endif
 

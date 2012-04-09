@@ -55,6 +55,7 @@ private:
 	const QIcon m_musicIcon;
 	const QIcon m_moviesIcon;
 	const QIcon m_picturesIcon;
+	const QIcon m_heartIcon;
 	const QIcon m_emptyIcon;
 	const QString m_folderType;
 	const QString m_emptyType;
@@ -63,6 +64,7 @@ private:
 	const QString m_musicDir;
 	const QString m_moviesDir;
 	const QString m_picturesDir;
+	const QString m_installDir;
 };
 
 QFileIconProviderEx::QFileIconProviderEx()
@@ -77,11 +79,13 @@ QFileIconProviderEx::QFileIconProviderEx()
 	m_musicIcon(":/icons/music.png"),
 	m_moviesIcon(":/icons/film.png"),
 	m_picturesIcon(":/icons/picture.png"),
+	m_heartIcon(":/icons/heart.png"),
 	m_homeDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::HomeLocation))),
 	m_desktopDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::DesktopLocation))),
 	m_musicDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::MusicLocation))),
 	m_moviesDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::MoviesLocation))),
 	m_picturesDir(QDir::fromNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::PicturesLocation))),
+	m_installDir(QDir::fromNativeSeparators(qApp->applicationDirPath())),
 	m_folderType("Folder")
 {
 	/* Nothing to do! */
@@ -111,29 +115,37 @@ QIcon QFileIconProviderEx::icon(const QFileInfo &info) const
 			break;
 		}
 	}
-	else if(!info.filePath().compare(m_homeDir, Qt::CaseInsensitive))
-	{
-		return m_homeIcon;
-	}
-	else if(!info.filePath().compare(m_desktopDir, Qt::CaseInsensitive))
-	{
-		return m_desktopIcon;
-	}
-	else if(!info.filePath().compare(m_musicDir, Qt::CaseInsensitive))
-	{
-		return m_musicIcon;
-	}
-	else if(!info.filePath().compare(m_moviesDir, Qt::CaseInsensitive))
-	{
-		return m_moviesIcon;
-	}
-	else if(!info.filePath().compare(m_picturesDir, Qt::CaseInsensitive))
-	{
-		return m_picturesIcon;
-	}
 	else
 	{
-		return  m_folderIcon;
+		const QString filePath = info.filePath();
+		if(m_homeDir.compare(filePath, Qt::CaseInsensitive) == 0)
+		{
+			return m_homeIcon;
+		}
+		else if(m_desktopDir.compare(filePath, Qt::CaseInsensitive) == 0)
+		{
+			return m_desktopIcon;
+		}
+		else if(m_musicDir.compare(filePath, Qt::CaseInsensitive) == 0)
+		{
+			return m_musicIcon;
+		}
+		else if(m_moviesDir.compare(filePath, Qt::CaseInsensitive) == 0)
+		{
+			return m_moviesIcon;
+		}
+		else if(m_picturesDir.compare(filePath, Qt::CaseInsensitive) == 0)
+		{
+			return m_picturesIcon;
+		}
+		else if(m_installDir.compare(filePath, Qt::CaseInsensitive) == 0)
+		{
+			return m_heartIcon;
+		}
+		else
+		{
+			return  m_folderIcon;
+		}
 	}
 }
 

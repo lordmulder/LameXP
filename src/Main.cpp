@@ -205,7 +205,7 @@ static int _main(int argc, char* argv[])
 	{
 		int iResult = -1;
 		qInstallMsgHandler(lamexp_message_handler);
-		LAMEXP_MEMORY_CHECK(lamexp_main, iResult, argc, argv);
+		iResult = lamexp_main(argc, argv);
 		lamexp_finalization();
 		return iResult;
 	}
@@ -250,7 +250,9 @@ int main(int argc, char* argv[])
 {
 	if(LAMEXP_DEBUG)
 	{
-		return _main(argc, argv);
+		int exit_code = -1;
+		LAMEXP_MEMORY_CHECK(_main, exit_code, argc, argv);
+		return exit_code;
 	}
 	else
 	{

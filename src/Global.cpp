@@ -133,9 +133,9 @@ static bool g_lamexp_console_attached = false;
 	#if (__INTEL_COMPILER >= 1200)
 		static const char *g_lamexp_version_compiler = "ICL 12.x";
 	#elif (__INTEL_COMPILER >= 1100)
-		static const char *g_lamexp_version_compiler = = "ICL 11.x";
+		static const char *g_lamexp_version_compiler = "ICL 11.x";
 	#elif (__INTEL_COMPILER >= 1000)
-		static const char *g_lamexp_version_compiler = = "ICL 10.x";
+		static const char *g_lamexp_version_compiler = "ICL 10.x";
 	#else
 		#error Compiler is not supported!
 	#endif

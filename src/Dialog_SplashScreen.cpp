@@ -30,8 +30,10 @@
 
 #include "WinSevenTaskbar.h"
 
-#define FADE_DELAY 4
-#define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ?  (!((THRD)->wait(16))) : false)
+#define FADE_DELAY 16
+#define OPACITY_DELTA 0.02
+
+#define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ? (!((THRD)->wait(50))) : false)
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -76,7 +78,8 @@ SplashScreen::~SplashScreen(void)
 
 void SplashScreen::showSplash(QThread *thread)
 {
-	double opacity = 0.0;
+	double opacity = OPACITY_DELTA;
+	const int opacitySteps = qRound(1.0 / OPACITY_DELTA);
 	SplashScreen *splashScreen = new SplashScreen();
 	
 	//Show splash
@@ -85,9 +88,9 @@ void SplashScreen::showSplash(QThread *thread)
 	splashScreen->show();
 
 	//Wait for window to show
-	QApplication::processEvents();
-	Sleep(100);
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	splashScreen->repaint();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	//Setup the event loop
 	QEventLoop *loop = new QEventLoop(splashScreen);
@@ -99,17 +102,17 @@ void SplashScreen::showSplash(QThread *thread)
 	connect(timer, SIGNAL(timeout()), loop, SLOT(quit()));
 
 	//Start thread
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	thread->start();
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	//Init taskbar
 	WinSevenTaskbar::setTaskbarState(splashScreen, WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
 
 	//Fade in
-	for(int i = 0; i <= 100; i++)
+	for(int i = 1; i <= opacitySteps; i++)
 	{
-		opacity = 0.01 * static_cast<double>(i);
+		opacity = OPACITY_DELTA * static_cast<double>(i);
 		splashScreen->setWindowOpacity(opacity);
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
 		Sleep(FADE_DELAY);
@@ -135,9 +138,9 @@ void SplashScreen::showSplash(QThread *thread)
 	timer->stop();
 
 	//Fade out
-	for(int i = 100; i >= 0; i--)
+	for(int i = opacitySteps; i >= 0; i--)
 	{
-		opacity = 0.01 * static_cast<double>(i);
+		opacity = OPACITY_DELTA * static_cast<double>(i);
 		splashScreen->setWindowOpacity(opacity);
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
 		Sleep(FADE_DELAY);

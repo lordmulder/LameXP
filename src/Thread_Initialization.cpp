@@ -160,7 +160,7 @@ void InitializationThread::run()
 				else
 				{
 					qDebug("Extracting file: %s -> %s", toolName.toLatin1().constData(),  toolShortName.toLatin1().constData());
-					LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString("%1/tool_%2").arg(lamexp_temp_folder2(), toolShortName), toolHash);
+					LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString("%1/lamexp_%2").arg(lamexp_temp_folder2(), toolShortName), toolHash);
 					lamexp_register_tool(toolShortName, lockedFile, toolVersion);
 				}
 			}
