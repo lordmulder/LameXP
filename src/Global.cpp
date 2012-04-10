@@ -1119,7 +1119,10 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Check for process elevation
 	if((!lamexp_check_elevation()) && (!lamexp_detect_wine()))
 	{
-		if(QMessageBox::warning(NULL, "LameXP", "<nobr>LameXP was started with elevated rights. This is a potential security risk!</nobr>", "Quit Program (Recommended)", "Ignore") == 0)
+		QMessageBox messageBox(QMessageBox::Warning, "LameXP", "<nobr>LameXP was started with 'elevated' rights, altough LameXP does not need these rights.<br>Running an applications with unnecessary rights is a potential security risk!</nobr>", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
+		messageBox.addButton("Quit Program (Recommended)", QMessageBox::NoRole);
+		messageBox.addButton("Ignore", QMessageBox::NoRole);
+		if(messageBox.exec() == 0)
 		{
 			return false;
 		}
@@ -1774,17 +1777,26 @@ bool lamexp_themes_enabled(void)
 {
 	typedef int (WINAPI *IsAppThemedFun)(void);
 	
-	bool isAppThemed = false;
-	QLibrary uxTheme(QString("%1/UxTheme.dll").arg(lamexp_known_folder(lamexp_folder_systemfolder)));
-	IsAppThemedFun IsAppThemedPtr = (IsAppThemedFun) uxTheme.resolve("IsAppThemed");
+	static bool isAppThemed = false;
+	static bool isAppThemed_initialized = false;
 
-	if(IsAppThemedPtr)
+	if(!isAppThemed_initialized)
 	{
-		isAppThemed = IsAppThemedPtr();
-		if(!isAppThemed)
+		IsAppThemedFun IsAppThemedPtr = NULL;
+		QLibrary uxTheme(QString("%1/UxTheme.dll").arg(lamexp_known_folder(lamexp_folder_systemfolder)));
+		if(uxTheme.load())
 		{
-			qWarning("Theme support is disabled for this process!");
+			IsAppThemedPtr = (IsAppThemedFun) uxTheme.resolve("IsAppThemed");
 		}
+		if(IsAppThemedPtr)
+		{
+			isAppThemed = IsAppThemedPtr();
+			if(!isAppThemed)
+			{
+				qWarning("Theme support is disabled for this process!");
+			}
+		}
+		isAppThemed_initialized = true;
 	}
 
 	return isAppThemed;
