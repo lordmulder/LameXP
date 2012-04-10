@@ -297,7 +297,7 @@ bool lamexp_version_demo(void)
  */
 QDate lamexp_version_expires(void)
 {
-	return lamexp_version_date().addDays(LAMEXP_DEBUG ? 2 : 30);
+	return lamexp_version_date().addDays(LAMEXP_DEBUG ? 7 : 30);
 }
 
 /*
@@ -1030,6 +1030,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Check Qt version
+#ifdef QT_BUILD_KEY
 	qDebug("Using Qt v%s [%s], %s, %s", qVersion(), QLibraryInfo::buildDate().toString(Qt::ISODate).toLatin1().constData(), (qSharedBuild() ? "DLL" : "Static"), QLibraryInfo::buildKey().toLatin1().constData());
 	qDebug("Compiled with Qt v%s [%s], %s\n", QT_VERSION_STR, QT_PACKAGEDATE_STR, QT_BUILD_KEY);
 	if(_stricmp(qVersion(), QT_VERSION_STR))
@@ -1042,6 +1043,10 @@ bool lamexp_init_qt(int argc, char* argv[])
 		qFatal("%s", QApplication::tr("Executable '%1' was built for Qt '%2', but found Qt '%3'.").arg(QString::fromLatin1(executableName), QString::fromLatin1(QT_BUILD_KEY), QLibraryInfo::buildKey()).toLatin1().constData());
 		return false;
 	}
+#else
+	qDebug("Using Qt v%s [%s], %s", qVersion(), QLibraryInfo::buildDate().toString(Qt::ISODate).toLatin1().constData(), (qSharedBuild() ? "DLL" : "Static"));
+	qDebug("Compiled with Qt v%s [%s]\n", QT_VERSION_STR, QT_PACKAGEDATE_STR);
+#endif
 
 	//Check the Windows version
 	switch(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based)
@@ -1084,9 +1089,17 @@ bool lamexp_init_qt(int argc, char* argv[])
 		qWarning("It appears we are running under Wine, unexpected things might happen!\n");
 	}
 
+	//Set text Codec for locale
+	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
-	//Create Qt application instance and setup version info
+	//Create Qt application instance
 	QApplication *application = new QApplication(argc, argv);
+
+	//Load plugins from application directory
+	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
+	qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
+
+	//Set application properties
 	application->setApplicationName("LameXP - Audio Encoder Front-End");
 	application->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
 	application->setOrganizationName("LoRd_MuldeR");
@@ -1095,11 +1108,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 	application->setEventFilter(lamexp_event_filter);
 
 	//Set text Codec for locale
-	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+	// QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
 	//Load plugins from application directory
-	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
-	qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
+	// QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
+	// qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
 
 	//Check for supported image formats
 	QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
@@ -1129,6 +1142,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Update console icon, if a console is attached
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 	if(g_lamexp_console_attached && (!lamexp_detect_wine()))
 	{
 		typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
@@ -1140,6 +1154,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 			kernel32.unload();
 		}
 	}
+#endif
 
 	//Done
 	qt_initialized = true;

@@ -77,4 +77,5 @@ private:
 
 	bool m_success;
 	bool m_updateReadyToInstall;
+	bool m_firstShow;
 };

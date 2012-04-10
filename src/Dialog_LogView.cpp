@@ -25,6 +25,7 @@
 
 #include <QClipboard>
 #include <QFileDialog>
+#include <QMimeData>
 
 LogViewDialog::LogViewDialog(QWidget *parent)
 :

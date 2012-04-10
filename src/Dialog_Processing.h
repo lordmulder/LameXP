@@ -102,6 +102,7 @@ private:
 	QList<QUuid> m_failedJobs;
 	bool m_userAborted;
 	bool m_forcedAbort;
+	bool m_firstShow;
 	QSystemTrayIcon *m_systemTray;
 	int m_shutdownFlag;
 	CPUObserverThread *m_cpuObserver;

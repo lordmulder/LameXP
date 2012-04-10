@@ -107,7 +107,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_shutdownFlag(shutdownFlag_None),
 	m_diskObserver(NULL),
 	m_cpuObserver(NULL),
-	m_ramObserver(NULL)
+	m_ramObserver(NULL),
+	m_firstShow(true)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -256,23 +257,29 @@ ProcessingDialog::~ProcessingDialog(void)
 
 void ProcessingDialog::showEvent(QShowEvent *event)
 {
-	static const char *NA = " N/A";
+	QDialog::showEvent(event);
 
-	setCloseButtonEnabled(false);
-	button_closeDialog->setEnabled(false);
-	button_AbortProcess->setEnabled(false);
-	m_systemTray->setVisible(true);
-	
-	if(!SetPriorityClass(GetCurrentProcess(), ABOVE_NORMAL_PRIORITY_CLASS))
+	if(m_firstShow)
 	{
-		SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
+		static const char *NA = " N/A";
+	
+		setCloseButtonEnabled(false);
+		button_closeDialog->setEnabled(false);
+		button_AbortProcess->setEnabled(false);
+		m_systemTray->setVisible(true);
+	
+		if(!SetPriorityClass(GetCurrentProcess(), ABOVE_NORMAL_PRIORITY_CLASS))
+		{
+			SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
+		}
+
+		label_cpu->setText(NA);
+		label_disk->setText(NA);
+		label_ram->setText(NA);
+
+		QTimer::singleShot(1000, this, SLOT(initEncoding()));
+		m_firstShow = false;
 	}
-
-	label_cpu->setText(NA);
-	label_disk->setText(NA);
-	label_ram->setText(NA);
-
-	QTimer::singleShot(1000, this, SLOT(initEncoding()));
 }
 
 void ProcessingDialog::closeEvent(QCloseEvent *event)
@@ -352,6 +359,8 @@ bool ProcessingDialog::winEvent(MSG *message, long *result)
 
 void ProcessingDialog::initEncoding(void)
 {
+	qWarning("ProcessingDialog::initEncoding()");
+	
 	m_runningThreads = 0;
 	m_currentFile = 0;
 	m_allJobs.clear();
@@ -962,7 +971,7 @@ void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason rea
 {
 	if(reason == QSystemTrayIcon::DoubleClick)
 	{
-		SetForegroundWindow(this->winId());
+		SetForegroundWindow(reinterpret_cast<HWND>(this->winId()));
 	}
 }
 

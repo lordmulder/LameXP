@@ -74,6 +74,7 @@ void WorkingBanner::show(const QString &text)
 {
 	m_canClose = false;
 	QDialog::show();
+	setFixedSize(size());
 	setText(text);
 	QApplication::processEvents();
 }

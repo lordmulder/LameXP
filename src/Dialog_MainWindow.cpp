@@ -56,7 +56,7 @@
 #include <QWindowsStyle>
 #include <QSysInfo>
 #include <QDragEnterEvent>
-#include <QWindowsMime>
+#include <QMimeData>				//#include <QWindowsMime>
 #include <QProcess>
 #include <QUuid>
 #include <QProcessEnvironment>
@@ -902,7 +902,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 			{
 				QString path = outputFolderLabel->text();
 				if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
-				ShellExecuteW(this->winId(), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
+				ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
 			}
 			break;
 		case QEvent::Enter:
@@ -1068,7 +1068,7 @@ void MainWindow::windowShown(void)
 				QString uninstallerPath = uninstallerInfo.canonicalFilePath();
 				for(int i = 0; i < 3; i++)
 				{
-					HINSTANCE res = ShellExecuteW(this->winId(), L"open", QWCHAR(QDir::toNativeSeparators(uninstallerPath)), L"/Force", QWCHAR(QDir::toNativeSeparators(uninstallerDir)), SW_SHOWNORMAL);
+					HINSTANCE res = ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"open", QWCHAR(QDir::toNativeSeparators(uninstallerPath)), L"/Force", QWCHAR(QDir::toNativeSeparators(uninstallerDir)), SW_SHOWNORMAL);
 					if(reinterpret_cast<int>(res) > 32) break;
 				}
 			}
@@ -2654,7 +2654,7 @@ void MainWindow::showFolderContextActionTriggered(void)
 
 	QString path = QDir::toNativeSeparators(m_fileSystemModel->filePath(outputFolderView->currentIndex()));
 	if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
-	ShellExecuteW(this->winId(), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
+	ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
 }
 
 /*

@@ -109,19 +109,19 @@ bool WinSevenTaskbar::setTaskbarState(QWidget *window, WinSevenTaskbarState stat
 		switch(state)
 		{
 		case WinSevenTaskbarNoState:
-			hr = m_ptbl->SetProgressState(window->winId(), TBPF_NOPROGRESS);
+			hr = m_ptbl->SetProgressState(reinterpret_cast<HWND>(window->winId()), TBPF_NOPROGRESS);
 			break;
 		case WinSevenTaskbarNormalState:
-			hr = m_ptbl->SetProgressState(window->winId(), TBPF_NORMAL);
+			hr = m_ptbl->SetProgressState(reinterpret_cast<HWND>(window->winId()), TBPF_NORMAL);
 			break;
 		case WinSevenTaskbarIndeterminateState:
-			hr = m_ptbl->SetProgressState(window->winId(), TBPF_INDETERMINATE);
+			hr = m_ptbl->SetProgressState(reinterpret_cast<HWND>(window->winId()), TBPF_INDETERMINATE);
 			break;
 		case WinSevenTaskbarErrorState:
-			hr = m_ptbl->SetProgressState(window->winId(), TBPF_ERROR);
+			hr = m_ptbl->SetProgressState(reinterpret_cast<HWND>(window->winId()), TBPF_ERROR);
 			break;
 		case WinSevenTaskbarPausedState:
-			hr = m_ptbl->SetProgressState(window->winId(), TBPF_PAUSED);
+			hr = m_ptbl->SetProgressState(reinterpret_cast<HWND>(window->winId()), TBPF_PAUSED);
 			break;
 		}
 
@@ -135,16 +135,18 @@ void WinSevenTaskbar::setTaskbarProgress(QWidget *window, unsigned __int64 curre
 {
 	if(m_ptbl && window)
 	{
-		m_ptbl->SetProgressValue(window->winId(), currentValue, maximumValue);
+		m_ptbl->SetProgressValue(reinterpret_cast<HWND>(window->winId()), currentValue, maximumValue);
 	}
 }
 
 void WinSevenTaskbar::setOverlayIcon(QWidget *window, QIcon *icon)
 {
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 	if(m_ptbl && window)
 	{
 		m_ptbl->SetOverlayIcon(window->winId(), (icon ? icon->pixmap(16,16).toWinHICON() : NULL), L"LameXP");
 	}
+#endif
 }
 
 #else //__ITaskbarList3_INTERFACE_DEFINED__

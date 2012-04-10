@@ -85,6 +85,7 @@ void SplashScreen::showSplash(QThread *thread)
 	//Show splash
 	splashScreen->m_canClose = false;
 	splashScreen->setWindowOpacity(opacity);
+	splashScreen->setFixedSize(splashScreen->size());
 	splashScreen->show();
 
 	//Wait for window to show

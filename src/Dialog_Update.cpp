@@ -207,6 +207,7 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	m_logFile(new QStringList()),
 	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_demo()) : lamexp_version_demo()),
 	m_success(false),
+	m_firstShow(true),
 	m_updateReadyToInstall(false),
 	m_updaterProcess(NULL)
 {
@@ -260,30 +261,34 @@ void UpdateDialog::showEvent(QShowEvent *event)
 {
 	QDialog::showEvent(event);
 	
-	labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
-	labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
+	if(m_firstShow)
+	{
+		labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
+		labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
 
-	installButton->setEnabled(false);
-	closeButton->setEnabled(false);
-	retryButton->setEnabled(false);
-	logButton->setEnabled(false);
-	retryButton->hide();
-	logButton->hide();
-	infoLabel->hide();
-	hintLabel->hide();
-	hintIcon->hide();
-	frameAnimation->hide();
+		installButton->setEnabled(false);
+		closeButton->setEnabled(false);
+		retryButton->setEnabled(false);
+		logButton->setEnabled(false);
+		retryButton->hide();
+		logButton->hide();
+		infoLabel->hide();
+		hintLabel->hide();
+		hintIcon->hide();
+		frameAnimation->hide();
 	
-	int counter = MIN_CONNSCORE + 2;
-	for(int i = 0; update_mirrors_prim[i]; i++) counter++;
-	for(int i = 0; update_mirrors_back[i]; i++) counter++;
+		int counter = MIN_CONNSCORE + 2;
+		for(int i = 0; update_mirrors_prim[i]; i++) counter++;
+		for(int i = 0; update_mirrors_back[i]; i++) counter++;
 
-	progressBar->setMaximum(counter);
-	progressBar->setValue(0);
+		progressBar->setMaximum(counter);
+		progressBar->setValue(0);
 
-	m_updaterProcess = NULL;
+		m_updaterProcess = NULL;
 
-	QTimer::singleShot(0, this, SLOT(updateInit()));
+		QTimer::singleShot(0, this, SLOT(updateInit()));
+		m_firstShow = false;
+	}
 }
 
 void UpdateDialog::closeEvent(QCloseEvent *event)
