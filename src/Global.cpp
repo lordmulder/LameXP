@@ -71,8 +71,13 @@
 
 //Initialize static Qt plugins
 #ifdef QT_NODLL
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 Q_IMPORT_PLUGIN(qico)
 Q_IMPORT_PLUGIN(qsvg)
+#else
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+Q_IMPORT_PLUGIN(QICOPlugin)
+#endif
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -238,7 +243,11 @@ g_lamexp_ipc_ptr =
 };
 
 //Image formats
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 static const char *g_lamexp_imageformats[] = {"png", "jpg", "gif", "ico", "svg", NULL};
+#else
+static const char *g_lamexp_imageformats[] = {"png", "jpg", "gif", "ico", NULL};
+#endif
 
 //Global locks
 static QMutex g_lamexp_message_mutex;
