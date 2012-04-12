@@ -61,12 +61,12 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="202"/>
-        <source>About Qt4</source>
+        <source>About Qt5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="202"/>
-        <source>About Qt5</source>
+        <source>About Qt4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -229,7 +229,7 @@
     </message>
     <message>
         <source>About Qt5</source>
-        <translation type="unfinished">Über Qt5</translation>
+        <translation>Über Qt5</translation>
     </message>
 </context>
 <context>
