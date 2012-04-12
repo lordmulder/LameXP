@@ -192,14 +192,15 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		connect(firstButton, SIGNAL(clicked()), this, SLOT(showMoreAbout()));
 
 		QPushButton *secondButton = addButton(tr("Contributors"), QMessageBox::AcceptRole);
-		secondButton->setIcon(QIcon(":icons/user_suit.png"));
+		secondButton->setIcon(QIcon(":/icons/user_suit.png"));
 		secondButton->setIconSize(QSize(16, 16));
 		secondButton->setMinimumWidth(120);
 		secondButton->disconnect();
 		connect(secondButton, SIGNAL(clicked()), this, SLOT(showAboutContributors()));
 
-		QPushButton *thirdButton = addButton(tr("About Qt4"), QMessageBox::AcceptRole);
-		thirdButton->setIcon(QIcon(":/images/Qt.svg"));
+		static const bool isQt5 = (QT_VERSION >= QT_VERSION_CHECK(5,0,0));
+		QPushButton *thirdButton = addButton(isQt5 ? tr("About Qt5") : tr("About Qt4"), QMessageBox::AcceptRole);
+		thirdButton->setIcon(QIcon(":/icons/qt.png"));
 		thirdButton->setIconSize(QSize(16, 16));
 		thirdButton->setMinimumWidth(120);
 		thirdButton->disconnect();

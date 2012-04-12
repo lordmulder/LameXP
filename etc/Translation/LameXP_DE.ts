@@ -227,6 +227,10 @@
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation></translation>
     </message>
+    <message>
+        <source>About Qt5</source>
+        <translation type="unfinished">Über Qt5</translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

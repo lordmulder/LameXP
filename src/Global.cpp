@@ -243,11 +243,7 @@ g_lamexp_ipc_ptr =
 };
 
 //Image formats
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-static const char *g_lamexp_imageformats[] = {"png", "jpg", "gif", "ico", "svg", NULL};
-#else
-static const char *g_lamexp_imageformats[] = {"png", "jpg", "gif", "ico", NULL};
-#endif
+static const char *g_lamexp_imageformats[] = {"bmp", "png", "jpg", "gif", "ico", "xpm", NULL}; //"svg"
 
 //Global locks
 static QMutex g_lamexp_message_mutex;
@@ -1116,13 +1112,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 	application->setWindowIcon(lamexp_app_icon());
 	application->setEventFilter(lamexp_event_filter);
 
-	//Set text Codec for locale
-	// QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
-
-	//Load plugins from application directory
-	// QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
-	// qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
-
 	//Check for supported image formats
 	QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
 	for(int i = 0; g_lamexp_imageformats[i]; i++)
@@ -1133,7 +1122,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 			return false;
 		}
 	}
-
+	
 	//Add default translations
 	g_lamexp_translation.files.insert(LAMEXP_DEFAULT_LANGID, "");
 	g_lamexp_translation.names.insert(LAMEXP_DEFAULT_LANGID, "English");
