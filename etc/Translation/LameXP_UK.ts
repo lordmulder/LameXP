@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>About Qt5</source>
-        <translation type="unfinished">Про Qt5</translation>
+        <translation>Про Qt5</translation>
     </message>
 </context>
 <context>
@@ -1840,19 +1840,19 @@
     </message>
     <message>
         <source>Edit Output Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати шлях до файла(-ів) на виході</translation>
     </message>
     <message>
         <source>Show Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати закладки</translation>
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Йде ініціалізація структури тек, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished"></translation>
+        <translation>Поновити структуру тек</translation>
     </message>
 </context>
 <context>
