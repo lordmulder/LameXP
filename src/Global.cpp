@@ -361,7 +361,13 @@ DWORD lamexp_get_os_version(void)
 			{
 				throw "Ouuups: Not running under Windows NT. This is not supposed to happen!";
 			}
-			osVersion = (DWORD)((osVerInfo.dwMajorVersion << 16) | (osVerInfo.dwMinorVersion & 0xffff));
+			const DWORD osVerHi = (DWORD)(((DWORD)(osVerInfo.dwMajorVersion)) << 16);
+			const DWORD osVerLo = (DWORD)(((DWORD)(osVerInfo.dwMinorVersion)) & ((DWORD)(0xffff)));
+			osVersion = (DWORD)(((DWORD)(osVerHi)) | ((DWORD)(osVerLo)));
+		}
+		else
+		{
+			throw "GetVersionEx() has failed. This is not supposed to happen!";
 		}
 	}
 
@@ -792,7 +798,7 @@ static bool lamexp_check_compatibility_mode(const char *exportName, const char *
 {
 	QLibrary kernel32("kernel32.dll");
 
-	if(exportName != NULL)
+	if((exportName != NULL) && kernel32.load())
 	{
 		if(kernel32.resolve(exportName) != NULL)
 		{
@@ -1078,12 +1084,20 @@ bool lamexp_init_qt(int argc, char* argv[])
 		break;
 	case QSysInfo::WV_WINDOWS7:
 		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
-		lamexp_check_compatibility_mode(NULL, executableName);
+		lamexp_check_compatibility_mode("CreateFile2", executableName);
 		break;
 	default:
 		{
 			DWORD osVersionNo = lamexp_get_os_version();
-			qWarning("Running on an unknown/untested WinNT-based OS (v%u.%u).\n", HIWORD(osVersionNo), LOWORD(osVersionNo));
+			if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 2))
+			{
+				qDebug("Running on Windows 8 (still experimental!)\n");
+				lamexp_check_compatibility_mode(NULL, executableName);
+			}
+			else
+			{
+				qWarning("Running on an unknown/untested WinNT-based OS (v%u.%u).\n", HIWORD(osVersionNo), LOWORD(osVersionNo));
+			}
 		}
 		break;
 	}

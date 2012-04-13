@@ -359,7 +359,7 @@ bool ProcessingDialog::winEvent(MSG *message, long *result)
 
 void ProcessingDialog::initEncoding(void)
 {
-	qWarning("ProcessingDialog::initEncoding()");
+	qDebug("Initializing encoding process...");
 	
 	m_runningThreads = 0;
 	m_currentFile = 0;
