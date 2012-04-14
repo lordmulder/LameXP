@@ -221,15 +221,15 @@
     </message>
     <message>
         <source>dcaenc</source>
-        <translation type="unfinished"></translation>
+        <translation>dcaenc</translation>
     </message>
     <message>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2008-2011 Alexander E. Patrakov. Distribuido bajo licencia LGPL.</translation>
     </message>
     <message>
         <source>About Qt5</source>
-        <translation type="unfinished">Acerca de Qt5</translation>
+        <translation>Acerca de Qt5</translation>
     </message>
 </context>
 <context>
@@ -391,27 +391,27 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Predeterminado del sistema)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar página de códigos ANSI para el Cue sheet:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">Aceptar</translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Artista desconocido</translation>
+        <translation>Artista desconocido</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished">Álbum desconocido</translation>
+        <translation>Álbum desconocido</translation>
     </message>
 </context>
 <context>
@@ -446,11 +446,11 @@
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation>Artista:</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation>Álbum:</translation>
     </message>
 </context>
 <context>
@@ -541,19 +541,19 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Predeterminado del sistema)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for CSV file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar página de códigos ANSI para el CSV:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">Aceptar</translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -1747,111 +1747,111 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Saltando la comprobación de actualizaciones, por favor espere...</translation>
     </message>
     <message>
         <source>DCA Enc</source>
-        <translation type="unfinished"></translation>
+        <translation>DCA Enc</translation>
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Meta-Etiquetas a un archivo CSV</translation>
     </message>
     <message>
         <source>Import Meta Tags from CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Meta-Etiquetas desde un archivo CSV</translation>
     </message>
     <message>
         <source>Save CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar archivo CSV</translation>
     </message>
     <message>
         <source>CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo CSV</translation>
     </message>
     <message>
         <source>CSV Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar CSV</translation>
     </message>
     <message>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Lo sentimos, no hay Meta-Eqtiquetas para exportar!</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Lo sentimos, no se pudo abrir el archivo CSV para su escritura!</translation>
     </message>
     <message>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Lo sentimos, no se pudo escribir en el archivo CSV!</translation>
     </message>
     <message>
         <source>The CSV files was created successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El archivo CSV se ha creado correctamente!</translation>
     </message>
     <message>
         <source>Open CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir archivo CSV</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Lo sentimos, no se pudo abrir el archivo CSV para su lectura!</translation>
     </message>
     <message>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Lo sentimos, no se pudo leer el archivo CSV!</translation>
     </message>
     <message>
         <source>Sorry, the CSV file does not contain any known fields!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Lo sentimos, el archivo CSV no contiene ningún campo conocido!</translation>
     </message>
     <message>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo CSV está incompleto. ¡No se han actualizado todos los archivos!</translation>
     </message>
     <message>
         <source>The CSV files was imported successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Archivo CSV importado correctamente!</translation>
     </message>
     <message>
         <source>CSV Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar CSV</translation>
     </message>
     <message>
         <source>QAAC (Apple)</source>
-        <translation type="unfinished"></translation>
+        <translation>QAAC (Apple)</translation>
     </message>
     <message>
         <source>FHG AAC (Winamp)</source>
-        <translation type="unfinished"></translation>
+        <translation>FHG AAC (Winamp)</translation>
     </message>
     <message>
         <source>Nero AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero AAC</translation>
     </message>
     <message>
         <source>Not available!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡No disponible!</translation>
     </message>
     <message>
         <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificador AAC actual: %1</translation>
     </message>
     <message>
         <source>Edit Output Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar ruta de salida</translation>
     </message>
     <message>
         <source>Show Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostar Favoritos</translation>
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicializando esquema de directorios, por favor espere...</translation>
     </message>
     <message>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar esquema de directorios</translation>
     </message>
 </context>
 <context>
@@ -1913,11 +1913,11 @@
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation>Limpiar todos los Metadatos</translation>
+        <translation>Limpiar todos los metadatos</translation>
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Metadatos: %1</translation>
     </message>
 </context>
 <context>
@@ -2167,7 +2167,7 @@
     </message>
     <message>
         <source>Analyzing</source>
-        <translation type="unfinished"></translation>
+        <translation>Analizando</translation>
     </message>
 </context>
 <context>
@@ -2282,35 +2282,35 @@
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uso de CPU (total)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Uso de memoria RAM</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation>Espcaio libre en disco (Carpeta temporal)</translation>
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizado en %1.</translation>
     </message>
     <message>
         <source>hour(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>hora(s)</translation>
     </message>
     <message>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>minuto(s)</translation>
     </message>
     <message>
         <source>second(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>segundo(s)</translation>
     </message>
     <message>
         <source>millisecond(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>milisegundo(s)</translation>
     </message>
 </context>
 <context>
@@ -2340,7 +2340,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>El ejecutable &apos;%1&apos;fue creado con Qt &apos;%2&apos;, pero se ha encontrado Qt &apos;%3&apos;.</translation>
     </message>
 </context>
 <context>
