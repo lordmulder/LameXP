@@ -636,7 +636,7 @@
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation>Relativer Pfad zur Quelle dem Zielpfad voranstellen</translation>
+        <translation>Relativen Pfad zur Quelle dem Zielpfad voranstellen</translation>
     </message>
     <message>
         <source>Meta Data</source>
@@ -1544,7 +1544,7 @@
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation>Exponenten Such-Größe:</translation>
+        <translation>Exponenten Suchgröße:</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
@@ -2243,7 +2243,7 @@
     </message>
     <message>
         <source>All files completed successfully.</source>
-        <translation>Alle Dateien wurden erfolgreich abgeschlossen.</translation>
+        <translation>Alle Dateien wurden erfolgreich umgewandelt.</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
