@@ -5,11 +5,11 @@
     <name>AboutDialog</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP - 오디오 인코더 프론트-엔드</translation>
+        <translation type="unfinished">LameXP - 오디오 인코더 프런트-엔드</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation type="unfinished">새 소식과 업데이트를 위해 %1로 방문하십시오!</translation>
+        <translation type="unfinished">새로운 소식과 업데이트를 위해 %1로 방문하여 주십시오!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
@@ -25,15 +25,15 @@
     </message>
     <message>
         <source>Show License Text</source>
-        <translation type="unfinished">라이센스 텍스트 표시</translation>
+        <translation type="unfinished">라이센스 보기</translation>
     </message>
     <message>
         <source>Accept License</source>
-        <translation type="unfinished">라이센스 동의</translation>
+        <translation type="unfinished">동의</translation>
     </message>
     <message>
         <source>Decline License</source>
-        <translation type="unfinished">라이센스 거부</translation>
+        <translation type="unfinished">거절</translation>
     </message>
     <message>
         <source>3rd Party S/W</source>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Translators:</source>
-        <translation type="unfinished">번역하신 분들:</translation>
+        <translation type="unfinished">번역 도우미:</translation>
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
@@ -81,23 +81,23 @@
     </message>
     <message>
         <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation type="unfinished">OggEnc - Ogg Vorbis Encoder</translation>
+        <translation type="unfinished">OggEnc - Ogg Vorbis 인코더</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation type="unfinished">완전히 공개된, 특허받은 무료 오디오 인코딩 기술.</translation>
+        <translation type="unfinished">완전 공개되고 특허 받은 무료 오디오 인코딩 기술.</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
-        <translation type="unfinished">Nero AAC Reference MPEG-4 Encoder</translation>
+        <translation type="unfinished">Nero AAC 레퍼런스 MPEG-4 인코더</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation type="unfinished">2-Pass를 지원하는 프리웨어 state-of-the-art HE-AAC encoder.</translation>
+        <translation type="unfinished">2-패스를 지원하는 최신 기술의 프리웨어 HE-AAC encoder.</translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
-        <translation type="unfinished">무료 다운로드 제공 웹사이트에서 사용 가능:</translation>
+        <translation type="unfinished">무료 다운로드를 제공하는 웹사이트에서 사용 가능:</translation>
     </message>
     <message>
         <source>FLAC - Free Lossless Audio Codec</source>
@@ -105,15 +105,15 @@
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation type="unfinished">공개 및 특허 받은-무료 무손실 오디오 압축 기술.</translation>
+        <translation type="unfinished">공개 및 특허 받은 무료 무손실 오디오 압축 기술.</translation>
     </message>
     <message>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
-        <translation type="unfinished">mpg123 - Fast Console MPEG Audio Player/Decoder</translation>
+        <translation type="unfinished">mpg123 - 빠른 콘솔 MPEG 오디오 플레이어/디코더</translation>
     </message>
     <message>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation type="unfinished">FAAD - 오픈소스 MPEG-4 및 MPEG-2 AAC Decoder</translation>
+        <translation type="unfinished">FAAD - 오픈소스 MPEG-4 및 MPEG-2 AAC 디코더</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished">AC3Filter Tools - AC3/DTS Decoder</translation>
+        <translation type="unfinished">AC3Filter 도구 - AC3/DTS 디코더</translation>
     </message>
     <message>
         <source>WavPack - Hybrid Lossless Compression</source>
@@ -129,11 +129,11 @@
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation type="unfinished">완전히 공개된 오디오 압축 형식.</translation>
+        <translation type="unfinished">완전 공개된 오디오 압축 형식.</translation>
     </message>
     <message>
         <source>Musepack - Living Audio Compression</source>
-        <translation type="unfinished">Musepack - Living Audio Compression</translation>
+        <translation type="unfinished">Musepack - 실시간 오디오 압축</translation>
     </message>
     <message>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation type="unfinished">자유로이 사용 가능한 소스 코드, 간소한 SDK 및 비 한정 라이센스.</translation>
+        <translation type="unfinished">자유롭게 사용 가능한 소스 코드, 간소한 SDK와 비제한 라이센스.</translation>
     </message>
     <message>
         <source>Shorten - Lossless Audio Compressor</source>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation type="unfinished">음성화 제작을 위해 설계되어진 공개된 무료 오디오 형식.</translation>
+        <translation type="unfinished">음성화 제작을 위해 설계된 공개 무료 오디오 형식.</translation>
     </message>
     <message>
         <source>The True Audio - Lossless Audio Codec</source>
@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
-        <translation type="unfinished">LameXP 전체는 LoRd_MuldeR에게 저작권이 있습니다. LameXP에 사용된 타사 소프트웨어는 각 소프트웨어의 저작자에게 저작권이 있습니다.</translation>
+        <translation type="unfinished">LameXP 전체의 저작권은 LoRd_MuldeR에게 있습니다. LameXP에 사용된 타사 소프트웨어는 각 소프트웨어의 저작자에게 저작권이 있습니다.</translation>
     </message>
     <message>
         <source>About Third-party Software</source>
@@ -189,47 +189,47 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished">알림: LameXP의 이 데모 (pre-release) 버전은 %1에 만료됩니다. 아직 %2 일 남음.</translation>
+        <translation type="unfinished">알림: LameXP의 이 데모(pre-release) 버전은 %1에 만료됩니다. 아직 %2 일 남음.</translation>
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
-        <translation type="unfinished">Aften - A/52 Audio Encoder</translation>
+        <translation type="unfinished">Aften - A/52 오디오 인코더</translation>
     </message>
     <message>
         <source>ALAC Decoder</source>
-        <translation type="unfinished">ALAC Decoder</translation>
+        <translation type="unfinished">ALAC 디코더</translation>
     </message>
     <message>
         <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation type="unfinished">Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</translation>
+        <translation type="unfinished">저작권 (c) 2004 David Hammerton. Contributions by Cody Brocious.</translation>
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">저작권 (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. 일부 권리 소유.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">wma2wav - WMA 파일을 Wave 오디오로 덤프</translation>
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">avs2wav - Avisynth를 Wave로 오디오 변환</translation>
     </message>
     <message>
         <source>dcaenc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">dcaenc</translation>
     </message>
     <message>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">저작권 (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</translation>
     </message>
     <message>
         <source>About Qt5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Qt5에 대해</translation>
     </message>
 </context>
 <context>
@@ -260,70 +260,70 @@
     </message>
     <message>
         <source>Bitrate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">비트레이트</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">상수</translation>
     </message>
     <message>
         <source>Variable</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">변수</translation>
     </message>
 </context>
 <context>
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 가져오기</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">다음의 큐 시트는 분할되며 LameXP로 가져옵니다.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 파일 불러오는 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알 수 없는 오류가 발생했습니다!</translation>
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 파일 불러오기 실패:</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 오류</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">지정한 파일을 찾을 수 없습니다!</translation>
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일을 읽기 위해 열 수가 없습니다. 필요한 권한을 소유했는지 확인해주십시오!</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">제공된 파일은 유효한 큐 시트 디스크 이미지 파일로 보이지 않습니다!</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 이미지에서 지원되는 오디오 트랙을 찾을 수 없습니다!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP는 &quot;바이너리&quot; 큐 시트 이미지를 처리할 수 없음을 알아두십시오.</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">선택한 큐 시트 파일이 모순되는 정보를 포함합니다. 확인해주십시오!</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">출력 디렉토리 선택</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">오류: 선택한 출력 디렉토리는 쓰기가 불가능합니다!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
@@ -339,47 +339,47 @@
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">선택한 출력 디렉토리에서 사용 가능한 여유 디스크 공간이 %1 GB보다 작습니다.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">가져오기를 진행하기 전에 디스크 여유 공간을 확보할 것을 권장합니다!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일 검토중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일 분할중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">오류: 선택한 출력 디렉토리를 만들 수 없습니다!</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트를 분할하는 도중에 예기치 않은 오류가 발생했습니다!</translation>
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트로부터 %1 트랙 가져옴, 그리고 %2 트랙 건너뜀.</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 작업 완료</translation>
     </message>
     <message>
         <source>Analysis Failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">분석 실패</translation>
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">경고: 입력 파일들의 일부 형식을 결정할 수 없습니다!</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">무시하고 계속</translation>
     </message>
     <message>
         <source>Abort</source>
@@ -387,15 +387,15 @@
     </message>
     <message>
         <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 트랙 처리 후 사용자에 의해 작업이 취소되었습니다!</translation>
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(시스템 기본)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 파일에 대한 ANSI 코드페이지 선택:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -407,22 +407,22 @@
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없음 가수</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 앨범</translation>
     </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 가져오기</translation>
     </message>
     <message>
         <source> Output Directory </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">출력 디렉토리</translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -434,54 +434,54 @@
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">기존 소스 파일</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">누락 소스 파일 (트랙은 건너뛰게 됩니다!)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">다른 큐 시트 불러오기</translation>
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">가수:</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">앨범:</translation>
     </message>
 </context>
 <context>
     <name>CueSheetModel</name>
     <message>
         <source>No.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">아니오.</translation>
     </message>
     <message>
         <source>File / Track</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일 / 트랙</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">인덱스</translation>
     </message>
     <message>
         <source>File %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 파일</translation>
     </message>
     <message>
         <source>Track %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 트랙</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 가수</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 제목</translation>
     </message>
     <message>
         <source>Duration</source>
@@ -541,11 +541,11 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(시스템 기본)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for CSV file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일에 대한 ANSI 코드페이지:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -580,14 +580,14 @@
     </message>
     <message>
         <source>The log file shows detailed information about the selected job.</source>
-        <translation type="unfinished">로그 파일은 선택한 작업에 관한 자세한 정보를 표시합니다.</translation>
+        <translation type="unfinished">로그 파일은 선택한 작업에 대한 자세한 정보를 표시합니다.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP - 오디오 인코더 프론트-엔드</translation>
+        <translation type="unfinished">LameXP - 오디오 인코더 프런트-엔드</translation>
     </message>
     <message>
         <source>Source Files</source>
@@ -603,7 +603,7 @@
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">제거</translation>
+        <translation type="unfinished">지우기</translation>
     </message>
     <message>
         <source>Show Details</source>
@@ -615,19 +615,19 @@
     </message>
     <message>
         <source>Goto Home Folder</source>
-        <translation type="unfinished">홈 폴드로 </translation>
+        <translation type="unfinished">홈 폴더로 </translation>
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation type="unfinished">뮤직 폴드로 </translation>
+        <translation type="unfinished">뮤직 폴더로 </translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
-        <translation type="unfinished">바탕 화면 폴드로</translation>
+        <translation type="unfinished">바탕 화면 폴더로</translation>
     </message>
     <message>
         <source>Make New Folder</source>
-        <translation type="unfinished">새 폴드 만들기</translation>
+        <translation type="unfinished">새 폴더 만들기</translation>
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>Write meta information to encoded files</source>
-        <translation type="unfinished">인코딩된 파일에 메타 정보를 작성</translation>
+        <translation type="unfinished">인코딩 파일에 메타 정보 작성</translation>
     </message>
     <message>
         <source>Compression</source>
@@ -967,7 +967,7 @@
     </message>
     <message>
         <source>Open Folder...</source>
-        <translation type="unfinished">폴드 열기...</translation>
+        <translation type="unfinished">폴더 열기...</translation>
     </message>
     <message>
         <source>Clear All</source>
@@ -1043,7 +1043,7 @@
     </message>
     <message>
         <source>Open Folder Recursively...</source>
-        <translation type="unfinished">폴드 반복 열기...</translation>
+        <translation type="unfinished">모든 폴더 열기...</translation>
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
@@ -1083,11 +1083,11 @@
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
-        <translation type="unfinished">파일이 손상 또는 지원되지 않는 파일 형식일 경우입니다.</translation>
+        <translation type="unfinished">파일이 손상되었거나 지원되지 않는 파일 형식입니다.</translation>
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished">폴드에서 파일 검색중, 잠시 기다려 주십시오...</translation>
+        <translation type="unfinished">폴더에서 파일 검색중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1103,7 +1103,7 @@
     </message>
     <message>
         <source>Open File in External Application</source>
-        <translation type="unfinished">외부 플레이어로 열기</translation>
+        <translation type="unfinished">외부 플레이어로 재생</translation>
     </message>
     <message>
         <source>Browse File Location</source>
@@ -1111,7 +1111,7 @@
     </message>
     <message>
         <source>Browse Selected Folder</source>
-        <translation type="unfinished">선택 폴드 찾아보기</translation>
+        <translation type="unfinished">선택 폴더 찾아보기</translation>
     </message>
     <message>
         <source>License Declined</source>
@@ -1215,7 +1215,7 @@
     </message>
     <message>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation type="unfinished">현재 선택한 TEMP 폴드가 더 이상 존재하지 않습니다:</translation>
+        <translation type="unfinished">현재 선택한 TEMP 폴더가 더 이상 존재하지 않습니다:</translation>
     </message>
     <message>
         <source>Restore Default</source>
@@ -1227,7 +1227,7 @@
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
-        <translation type="unfinished">시스템의 TEMP 폴드의 사용 가능한 여유 디스크 공간이 %1 GB보다 적습니다.</translation>
+        <translation type="unfinished">시스템의 TEMP 폴더의 사용 가능한 여유 디스크 공간이 %1 GB보다 적습니다.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
@@ -1235,7 +1235,7 @@
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
-        <translation type="unfinished">사용자 TEMP 폴드 위치:</translation>
+        <translation type="unfinished">사용자 TEMP 폴더 위치:</translation>
     </message>
     <message>
         <source>Abort Encoding Process</source>
@@ -1275,11 +1275,11 @@
     </message>
     <message>
         <source>Add Folder</source>
-        <translation type="unfinished">폴드 추가</translation>
+        <translation type="unfinished">폴더 추가</translation>
     </message>
     <message>
         <source>Load Translation</source>
-        <translation type="unfinished">번역 불러오기</translation>
+        <translation type="unfinished">번역 파일 불러오기</translation>
     </message>
     <message>
         <source>Translation Files</source>
@@ -1287,19 +1287,19 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">새 폴드</translation>
+        <translation type="unfinished">새 폴더</translation>
     </message>
     <message>
         <source>Enter the name of the new folder:</source>
-        <translation type="unfinished">새 폴드 이름을 입력하십시오:</translation>
+        <translation type="unfinished">새 폴더 이름을 입력하십시오:</translation>
     </message>
     <message>
         <source>Failed to create folder</source>
-        <translation type="unfinished">폴드 생성이 실패되었습니다</translation>
+        <translation type="unfinished">폴더 생성이 실패되었습니다</translation>
     </message>
     <message>
         <source>The new folder could not be created:</source>
-        <translation type="unfinished">새 폴드를 생성할 수 없음:</translation>
+        <translation type="unfinished">새 폴더를 생성할 수 없음:</translation>
     </message>
     <message>
         <source>Drive is read-only or insufficient access rights!</source>
@@ -1539,7 +1539,7 @@
     </message>
     <message>
         <source>Fast Bit Allocation (Less Accurate)</source>
-        <translation type="unfinished">빠른 비트 할당 (덜 정확)</translation>
+        <translation type="unfinished">빠른 비트 할당 (정확도 낮음)</translation>
     </message>
     <message>
         <source>Exponent Search Size:</source>
@@ -1551,91 +1551,91 @@
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 가져오기</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 열기</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 파일</translation>
     </message>
     <message>
         <source>CDDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CDDA 파일</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 파일이 거부되었습니다. 그 파일들은 큐 시트 이미지들로 나타나기 때문입니다!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">큐 시트 파일을 가져오려면 LameXP의 큐 시트 마법사를 사용하십시오.</translation>
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">가짜 안티-바이러스 소프트웨억 LameXP의 시작을 지연시키고 있는 것 같습니다.</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">자세한 내용과 솔루션은 %1 문서를 참조하시기 바랍니다!</translation>
     </message>
     <message>
         <source>Slow Startup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">느린 시작</translation>
     </message>
     <message>
         <source>Disable Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">느린 시작 알림 비활성화</translation>
     </message>
     <message>
         <source>Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">느린 시작 알림</translation>
     </message>
     <message>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">느린 시작 알림을 비활성화하시겠습니까?</translation>
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">느린 시작 알림이 비활성화되었습니다.</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">느린 시작 알림이 재활성화되었습니다.</translation>
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">출력 파일 이름 변경</translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">출력 파일 이름 변경</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">선행 제로의 트랙 번호 표기</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">트랙 제목</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">가수 이름</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">앨범 이름</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">출판 연도(적어도 4자리)</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -1643,215 +1643,215 @@
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">매크로 이름 변경</translation>
     </message>
     <message>
         <source>You can enter custom parameters here!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">여기에 사용자 변수를 입력할 수 있습니다!</translation>
     </message>
     <message>
         <source>Enter the pattern to rename the output files here!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">출력 파일의 이름 바꾸기 패턴을 입력하십시오!</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;a href=&quot;reset&quot;&gt;재설정&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;매크로 목록 표시&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">확장 없는 파일명</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">패턴 이름 변경:</translation>
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일명 예제:</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일명에 금지된 문자:</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">서라운드(멀티-채널) 소스의 스트레오 다운믹스 강제</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">현재 출력 폴더 북마트</translation>
     </message>
     <message>
         <source>MPEG-4 AAC</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MPEG-4 AAC</translation>
     </message>
     <message>
         <source>AAC Encoder-Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AAC Encoder-옵션</translation>
     </message>
     <message>
         <source>MPEG-4 AAC:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MPEG-4 AAC:</translation>
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">경고: 오디오 품질이 매우 저하됩니다. 오디오 품질에 대해 &lt;u&gt;불평하지 마십시오&lt;/u&gt;!</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">경고: 처리 속도가 매우 느리게 됩니다. 처리 속도에 대해 &lt;u&gt;불평하지 마십시오&lt;/u&gt;!</translation>
     </message>
     <message>
         <source>Peak Level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">피크 레벨</translation>
     </message>
     <message>
         <source>RMS Level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">RMS 레벨</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">없음</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">이퀄라이저 방식:</translation>
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">데모 버전</translation>
     </message>
     <message>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">종료시 컴퓨터 최대 절전 모드</translation>
     </message>
     <message>
         <source>Hibernate Computer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">컴퓨터 최대 절전 모드</translation>
     </message>
     <message>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">종료시 컴퓨터를 최대 절전 모드로 전환하시겠습니까?</translation>
     </message>
     <message>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP가 지금부터 컴퓨터를 최대 절전 모드로 전환합니다.</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP가 지금부터 컴퓨터를 최대 절전 모드로 &lt;i&gt;전환하지 않습니다&lt;/i&gt;.</translation>
     </message>
     <message>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(도움말: 내려받은 ZIP 파일의 이름을 무시하고 대신에 &apos;changelog.txt&apos;가 포함되었는지 확인해주십시오!)</translation>
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">이 번에 업데이트 확인 건너뛰는 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>DCA Enc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">DCA Enc</translation>
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일로 메타 태그 내보내기</translation>
     </message>
     <message>
         <source>Import Meta Tags from CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일로부터 메타 태그 가져오기</translation>
     </message>
     <message>
         <source>Save CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일 저장</translation>
     </message>
     <message>
         <source>CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일</translation>
     </message>
     <message>
         <source>CSV Export</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 내보내기</translation>
     </message>
     <message>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">내보낼 수 있는 메타 태그가 없습니다!</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">작성을 위한 CSV 파일 열기가 실패되었습니다!</translation>
     </message>
     <message>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일로 쓰기가 실패되었습니다!</translation>
     </message>
     <message>
         <source>The CSV files was created successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일이 성공적으로 생성되었습니다!</translation>
     </message>
     <message>
         <source>Open CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일 열기</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">읽기 위한 CSV 파일 열기가 실패되었습니다!</translation>
     </message>
     <message>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일로부터 읽기가 실패되었습니다!</translation>
     </message>
     <message>
         <source>Sorry, the CSV file does not contain any known fields!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일이 어떤 알려진 필드를 포함하고 있지 않습니다!</translation>
     </message>
     <message>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일이 불완전합니다. 모든 파일이 업데이트되지 않았습니다!</translation>
     </message>
     <message>
         <source>The CSV files was imported successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 파일을 성공적으로 가져왔습니다!</translation>
     </message>
     <message>
         <source>CSV Import</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CSV 가져오기</translation>
     </message>
     <message>
         <source>QAAC (Apple)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">QAAC (애플)</translation>
     </message>
     <message>
         <source>FHG AAC (Winamp)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">FHG AAC (윈앰프)</translation>
     </message>
     <message>
         <source>Nero AAC</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nero AAC</translation>
     </message>
     <message>
         <source>Not available!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">사용할 수 없음!</translation>
     </message>
     <message>
         <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">현재 AAC Encoder: %1</translation>
     </message>
     <message>
         <source>Edit Output Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">출력 경로 편집</translation>
     </message>
     <message>
         <source>Show Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">즐겨찾기 표시</translation>
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">디렉토리 목록 초기화중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">디렉토리 목록 새로 고침</translation>
     </message>
 </context>
 <context>
@@ -1877,7 +1877,7 @@
     <name>MetaInfoDialog</name>
     <message>
         <source>Load Artwork From File</source>
-        <translation type="unfinished">파일에서 아트워크 불러오기</translation>
+        <translation type="unfinished">파일로부터 아트워크 불러오기</translation>
     </message>
     <message>
         <source>Clear Artwork</source>
@@ -1889,7 +1889,7 @@
     </message>
     <message>
         <source>The following meta information have been extracted from the original file.</source>
-        <translation type="unfinished">원본 파일에서 다음의 메타 정보가 추출되었습니다.</translation>
+        <translation type="unfinished">다음의 메타 정보가 원본 파일로부터 추출되었습니다.</translation>
     </message>
     <message>
         <source>Load Artwork</source>
@@ -1901,23 +1901,23 @@
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
-        <translation type="unfinished">죄송하지만, 선택한 파일로부터 아트워크 불러기가 실패되었습니다!</translation>
+        <translation type="unfinished">선택한 파일로부터 아트워크 불러오가 실패되었습니다!</translation>
     </message>
     <message>
         <source>Edit this Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">이 정보 편집</translation>
     </message>
     <message>
         <source>Copy everything to Meta Info tab</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">메타 정보 탭으로 모두 복사</translation>
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">모든 메타 정보 지우기</translation>
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">메타 정보: %1</translation>
     </message>
 </context>
 <context>
@@ -2068,7 +2068,7 @@
     </message>
     <message>
         <source>Encoded with LameXP</source>
-        <translation type="unfinished">LameXP로 인코딩 됨</translation>
+        <translation type="unfinished">LameXP로 인코딩 되었음</translation>
     </message>
     <message>
         <source>Not editable</source>
@@ -2147,27 +2147,27 @@
     </message>
     <message>
         <source>Unknown File Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 파일명</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 제목</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 가수</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 앨범</translation>
     </message>
     <message>
         <source>Unknown Comment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알수 없는 설명</translation>
     </message>
     <message>
         <source>Analyzing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">검토중</translation>
     </message>
 </context>
 <context>
@@ -2182,7 +2182,7 @@
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation type="unfinished">모든 파일이 변환 완료되면 컴퓨터 종료</translation>
+        <translation type="unfinished">모든 파일 변환 완료시 컴퓨터 종료</translation>
     </message>
     <message>
         <source>Abort</source>
@@ -2206,7 +2206,7 @@
     </message>
     <message>
         <source>Your files are being encoded, please be patient...</source>
-        <translation type="unfinished">파일이 인코딩 되고 있습니다. 째끔만 참으세요...</translation>
+        <translation type="unfinished">파일을 인코딩하고 있습니다. 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Encoding files, please wait...</source>
@@ -2258,7 +2258,7 @@
     </message>
     <message>
         <source>All files completed successfully.</source>
-        <translation type="unfinished">모든 파일을 성공적으로 완료하였습니다.</translation>
+        <translation type="unfinished">모든 파일을 성공적으로 인코딩 완료하였습니다.</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
@@ -2282,35 +2282,35 @@
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CPU 사용(전체)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">실제 메모리 사용</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">여유 디스크 공간(임시 폴더)</translation>
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">작업 시간이 %1 걸렸습니다.</translation>
     </message>
     <message>
         <source>hour(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">시간</translation>
     </message>
     <message>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">분</translation>
     </message>
     <message>
         <source>second(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">초</translation>
     </message>
     <message>
         <source>millisecond(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ms</translation>
     </message>
 </context>
 <context>
@@ -2336,11 +2336,11 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&apos;%1&apos;의 실행은 윈도우 2000 또는 상위 버전이 필요합니다.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&apos;%1&apos;의 실행은 Qt &apos;%2&apos;용으로 제작되었습니다. 하지만 Qt v%3이 발견되었습니다.</translation>
     </message>
 </context>
 <context>
@@ -2445,7 +2445,7 @@
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation type="unfinished">LameXP의 버전이 최신 상태입니다. 자주 업데이트를 확인하여 주십시오!</translation>
+        <translation type="unfinished">LameXP의 최신 버전입니다. 자주 업데이트를 확인하여 주십시오!</translation>
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
