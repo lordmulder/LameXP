@@ -67,7 +67,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="202"/>
         <source>About Qt5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Info o Qt5</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="209"/>
@@ -1138,12 +1138,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="365"/>
         <source>Edit Output Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Edytuj ścieżkę wyjściową</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="387"/>
         <source>Show Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż ulubione</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2198"/>
@@ -1906,12 +1906,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="725"/>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ładowanie zestawu folderów, prosze czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Odśwież foldery</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="732"/>
@@ -2276,27 +2276,27 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2983"/>
         <source>QAAC (Apple)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">QAAC (Apple)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2983"/>
         <source>FHG AAC (Winamp)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">FHG AAC (Winamp)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2983"/>
         <source>Nero AAC</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nero AAC</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2983"/>
         <source>Not available!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Niedostępny!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2985"/>
         <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Obecny koder AAC: %1</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3091"/>
