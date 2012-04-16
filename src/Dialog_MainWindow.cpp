@@ -1351,7 +1351,7 @@ void MainWindow::encodeButtonClicked(void)
 			return;
 			break;
 		default:
-			QMessageBox::warning(this, tr("Low Diskspace"), tr("You are proceeding with low diskspace. Problems might occur!"));
+			QMessageBox::warning(this, tr("Low Diskspace"), NOBR(tr("You are proceeding with low diskspace. Problems might occur!")));
 			break;
 		}
 	}
