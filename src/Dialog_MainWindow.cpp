@@ -862,6 +862,15 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 		}
 	}
 
+	if(e->key() == Qt::Key_Delete)
+	{
+		if(sourceFileView->isVisible())
+		{
+			QTimer::singleShot(0, this, SLOT(removeFileButtonClicked()));
+			return;
+		}
+	}
+
 	QMainWindow::keyPressEvent(e);
 }
 
