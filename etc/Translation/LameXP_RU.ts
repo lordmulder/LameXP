@@ -9,11 +9,11 @@
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
-        <translation>Пожайлуйста посетите %1 за новостями и обновлениями!</translation>
+        <translation>Пожалуйста посетите %1 для новостей и обновлений!</translation>
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Примечание: LameXP является бесплатным программным обеспечением. Вам &lt;b&gt;ненадо&lt;/b&gt; платить деньги, чтобы получить или использовать LameXP! Если некоторый сторонний веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы должны &lt;b&gt; не &lt;/b&gt;, отвечать на это предложение!!!</translation>
+        <translation>Примечание: LameXP является бесплатным программным обеспечением. Вам &lt;b&gt;не надо&lt;/b&gt; платить деньги, чтобы получить или использовать LameXP! Если какой-то веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы должны &lt;b&gt; не отвечать&lt;/b&gt; на это предложение!!!</translation>
     </message>
     <message>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished">Внимание: это демо (пре-релиз) версия LameXP прекратит работу %1. Осталось %2 дней.</translation>
+        <translation type="unfinished">Внимание: эта демо (пре-релиз) версия LameXP прекратит работу %1. Осталось %2 дней.</translation>
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
@@ -448,11 +448,11 @@
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исполнитель:</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Альбом:</translation>
     </message>
 </context>
 <context>
@@ -654,7 +654,7 @@
     </message>
     <message>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation type="unfinished">Примечание: метаинформация введённая здесь  &lt;u&gt;замененит&lt;/u&gt; информацию из источника!</translation>
+        <translation type="unfinished">Примечание: метаинформация введённая здесь  &lt;u&gt;заменит&lt;/u&gt; информацию из источника!</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -1857,7 +1857,7 @@
     </message>
     <message>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить</translation>
     </message>
 </context>
 <context>
@@ -2197,7 +2197,7 @@
     </message>
     <message>
         <source>Show details for selected job</source>
-        <translation type="unfinished">Показать детали задания</translation>
+        <translation type="unfinished">Показать подробности задания</translation>
     </message>
     <message>
         <source>Browse Output File Location</source>
@@ -2225,7 +2225,7 @@
     </message>
     <message>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation type="unfinished">Кодирование: %1 файл из %2 завершен, пожалуйста ожидайте...</translation>
+        <translation>Кодирование: %1 из %2 завершено.</translation>
     </message>
     <message>
         <source>Creating the playlist file, please wait...</source>
@@ -2250,7 +2250,7 @@
     <message>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translatorcomment>бред -_-</translatorcomment>
-        <translation type="unfinished">Ошибка: %1 из %2 файлов перестали работать. Дважды щелкните по отказавшим элементам для получения подробностей!</translation>
+        <translation type="unfinished">Ошибка с %1 из %2 файлов. Дважды щелкните по файлам с ошибкой для подробностей!</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
@@ -2373,11 +2373,11 @@
     <name>UpdateDialog</name>
     <message>
         <source>LameXP Update Manager</source>
-        <translation type="unfinished">Менеджер обновлений LameXP</translation>
+        <translation>Менеджер обновлений LameXP</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished">Пожалуйста, подождите...</translation>
+        <translation>Пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Latest version available:</source>
@@ -2385,7 +2385,7 @@
     </message>
     <message>
         <source>Currently installed version:</source>
-        <translation>Установленная верися:</translation>
+        <translation>Установленная версия:</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -2405,7 +2405,7 @@
     </message>
     <message>
         <source>Build</source>
-        <translation type="unfinished">Сборка</translation>
+        <translation>Сборка</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -2425,7 +2425,7 @@
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished">Проверяю обновления, пожалйста, подождите...</translation>
+        <translation type="unfinished">Проверяю обновления, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
@@ -2433,7 +2433,7 @@
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation type="unfinished">Извините, сервер обновлений сейчас недоступен. Пожалуйста попробуйте позднее.</translation>
+        <translation type="unfinished">Извините, сервер обновлений сейчас недоступен. Пожалуйста, попробуйте позднее.</translation>
     </message>
     <message>
         <source>More information available at:</source>
@@ -2453,7 +2453,7 @@
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
-        <translation type="unfinished">Вы используете самую новую версию LameXP. Проверяйте обновления регулярно!</translation>
+        <translation>Вы используете самую новую версию. Проверяйте обновления регулярно!</translation>
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
@@ -2461,11 +2461,11 @@
     </message>
     <message>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation type="unfinished">Это обычно показывает, что вы используете бета версию LameXP.</translation>
+        <translation type="unfinished">Это обычно значит, что вы используете бета версию LameXP.</translation>
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished">Скачиваю обновления, будте терпеливы...</translation>
+        <translation type="unfinished">Скачиваю обновление, будте терпеливы...</translation>
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
@@ -2482,7 +2482,7 @@
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation type="unfinished">Пожалуйста, проверьте, что ваш компьютер подключен к интернету и поробуйте снова.</translation>
+        <translation type="unfinished">Пожалуйста, проверьте, что ваш компьютер подключен к интернету и попробуйте снова.</translation>
     </message>
 </context>
 </TS>
