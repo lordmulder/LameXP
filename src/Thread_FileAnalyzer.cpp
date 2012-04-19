@@ -394,7 +394,10 @@ void FileAnalyzer::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigne
 	{
 		if(IS_KEY("Gen_Format"))
 		{
-			audioFile.setFormatContainerType(value);
+			if(value.compare("HLS", Qt::CaseInsensitive)) //MediaInfo detects "HLS" for .m3u files, we'll ignore that
+			{
+				audioFile.setFormatContainerType(value);
+			}
 		}
 		else if(IS_KEY("Gen_Format_Profile"))
 		{
