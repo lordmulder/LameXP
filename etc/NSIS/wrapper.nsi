@@ -117,7 +117,7 @@ VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
 VIAddVersionKey "LegalCopyright" "Copyright 2004-2012 LoRd_MuldeR"
 VIAddVersionKey "LegalTrademarks" "GNU"
-VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
+VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.Build-${LAMEXP_BUILD}.exe"
 VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"
 VIAddVersionKey "ProductVersion" "${LAMEXP_VERSION}, Build #${LAMEXP_BUILD} (${LAMEXP_DATE})"
 VIAddVersionKey "Website" "${MyWebSite}"
@@ -134,7 +134,7 @@ Section "-LaunchTheInstaller"
 	
 	InitPluginsDir
 	SetOutPath "$PLUGINSDIR"
-	File "/oname=$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" "${LAMEXP_SOURCE_FILE}"
+	File "/oname=$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" "${LAMEXP_SOURCE_FILE}"
 	
 	; --------
 	
@@ -157,8 +157,8 @@ Section "-LaunchTheInstaller"
 
 	RunTryAgain:
 	
-	DetailPrint "ExecShellWait: $PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe"
-	${StdUtils.ExecShellWait} $R1 "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" "open" '$R9'
+	DetailPrint "ExecShellWait: $PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe"
+	${StdUtils.ExecShellWait} $R1 "$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" "open" '$R9'
 	DetailPrint "Result: $R1"
 	
 	StrCmp $R1 "error" RunFailed
@@ -177,11 +177,11 @@ Section "-LaunchTheInstaller"
 	; --------
 
 	ClearErrors
-	ExecShell "open" "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" '$R9' SW_SHOWNORMAL
+	ExecShell "open" "$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 
 	ClearErrors
-	ExecShell "" "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe" '$R9' SW_SHOWNORMAL
+	ExecShell "" "$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
 
 	; --------
@@ -196,5 +196,5 @@ Section "-LaunchTheInstaller"
 	
 	RunSuccess:
 
-	Delete /REBOOTOK "$PLUGINSDIR\LameXP-SETUP.${LAMEXP_DATE}.${LAMEXP_BUILD}.exe"
+	Delete /REBOOTOK "$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe"
 SectionEnd
