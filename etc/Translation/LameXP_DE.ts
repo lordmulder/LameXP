@@ -275,7 +275,7 @@
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Cuehseet Assistent</translation>
+        <translation>Cuesheet Assistent</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
