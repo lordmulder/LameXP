@@ -1,0 +1,236 @@
+ aften/aften.c           |   23 ++++++++++-
+ aften/unicode_support.c |   98 +++++++++++++++++++++++++++++++++++++++++++++++
+ aften/unicode_support.h |   21 ++++++++++
+ libaften/a52.h          |    2 +-
+ 4 files changed, 140 insertions(+), 4 deletions(-)
+
+diff --git a/aften/aften.c b/aften/aften.c
+index 143bb1c..a93da2f 100644
+--- a/aften/aften.c
++++ b/aften/aften.c
+@@ -38,6 +38,7 @@
+ #include "pcm.h"
+ #include "helptext.h"
+ #include "opts.h"
++#include "unicode_support.h"
+ 
+ static const int acmod_to_ch[8] = { 2, 1, 2, 3, 3, 4, 4, 5 };
+ 
+@@ -82,7 +83,7 @@ print_simd_in_use(FILE *out, AftenSimdInstructions *simd_instructions)
+ }
+ 
+ int
+-main(int argc, char **argv)
++aften_main(int argc, char **argv)
+ {
+     void (*aften_remap)(void *samples, int n, int ch,
+                         A52SampleFormat fmt, int acmod) = NULL;
+@@ -137,7 +138,7 @@ main(int argc, char **argv)
+ #endif
+             ifp[i] = stdin;
+         } else {
+-            ifp[i] = fopen(opts.infile[i], "rb");
++            ifp[i] = fopen_utf8(opts.infile[i], "rb");
+             if (!ifp[i]) {
+                 fprintf(stderr, "error opening input file: %s\n", opts.infile[i]);
+                 goto error_end;
+@@ -235,7 +236,7 @@ main(int argc, char **argv)
+ #endif
+         ofp = stdout;
+     } else {
+-        ofp = fopen(opts.outfile, "wb");
++        ofp = fopen_utf8(opts.outfile, "wb");
+         if (!ofp) {
+             fprintf(stderr, "error opening output file: %s\n", opts.outfile);
+             goto error_end;
+@@ -327,6 +328,7 @@ main(int argc, char **argv)
+                                     "bw: %2.1f | bitrate: %4.1f kbps ",
+                                     percent, (qual / (frame_cnt+1)),
+                                     (bw / (frame_cnt+1)), kbps);
++                            fflush(stderr);
+                         }
+                         t0 = t1;
+                         last_update_clock = current_clock;
+@@ -335,6 +337,7 @@ main(int argc, char **argv)
+                     fprintf(stderr, "frame: %7d | q: %4d | bw: %2d | bitrate: %3d kbps\n",
+                             frame_cnt, s.status.quality, s.status.bwcode,
+                             s.status.bit_rate);
++                    fflush(stderr);
+                 }
+             }
+             fwrite(frame, 1, fs, ofp);
+@@ -352,11 +355,13 @@ main(int argc, char **argv)
+         if (s.verbose == 1) {
+             fprintf(stderr, "\rprogress: 100%% | q: %4.1f | bw: %2.1f | bitrate: %4.1f kbps\n\n",
+                     (qual / frame_cnt), (bw / frame_cnt), kbps);
++            fflush(stderr);
+         } else if (s.verbose == 2) {
+             fprintf(stderr, "\n");
+             fprintf(stderr, "average quality:   %4.1f\n", (qual / frame_cnt));
+             fprintf(stderr, "average bandwidth: %2.1f\n", (bw / frame_cnt));
+             fprintf(stderr, "average bitrate:   %4.1f kbps\n\n", kbps);
++            fflush(stderr);
+         }
+     }
+     goto end;
+@@ -382,3 +387,15 @@ end:
+ 
+     return ret_val;
+ }
++
++int wmain(int argc, wchar_t **argv_utf16)
++{
++  int result = 0;
++  char **argv_utf8 = NULL;
++
++  init_commandline_arguments_utf8(argc, &argv_utf8, argv_utf16);
++  result = aften_main(argc, argv_utf8);
++  free_commandline_arguments_utf8(argc, &argv_utf8);
++  
++  return result;
++}
+diff --git a/aften/unicode_support.c b/aften/unicode_support.c
+new file mode 100644
+index 0000000..21ecd5c
+--- /dev/null
++++ b/aften/unicode_support.c
+@@ -0,0 +1,98 @@
++#include "unicode_support.h"
++
++#include <stdio.h>
++#include <windows.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	
++	if(!Buffer)
++	{
++		fprintf(stderr, "Error in utf16_to_utf8: Memory allocation failed!\n");
++		return NULL;
++	}
++
++	Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++
++	if(!Buffer)
++	{
++		fprintf(stderr, "Error in utf8_to_utf16: Memory allocation failed!\n");
++		return NULL;
++	}
++
++	Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int argc, char ***argv_utf8, wchar_t **argv_utf16)
++{
++	int i = 0;
++	
++	*argv_utf8 = (char**) malloc(argc * sizeof(char*));
++	if(!(*argv_utf8))
++	{
++		fprintf(stderr, "Error in init_commandline_arguments_utf8: Memory allocation failed!\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < argc; i++)
++	{
++		(*argv_utf8)[i] = utf16_to_utf8(argv_utf16[i]);
++		if(!(*argv_utf8)[i])
++		{
++			fprintf(stderr, "Error in init_commandline_arguments_utf8: Memory allocation failed!\n");
++			exit(-1);
++		}
++	}
++}
++
++void free_commandline_arguments_utf8(int argc, char ***argv_utf8)
++{
++	int i = 0;
++	
++	if(*argv_utf8 != NULL)
++	{
++		for(i = 0; i < argc; i++)
++		{
++			if((*argv_utf8)[i] != NULL)
++			{
++				free((*argv_utf8)[i]);
++				(*argv_utf8)[i] = NULL;
++			}
++		}
++		free(*argv_utf8);
++		*argv_utf8 = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
+diff --git a/aften/unicode_support.h b/aften/unicode_support.h
+new file mode 100644
+index 0000000..cc13fd9
+--- /dev/null
++++ b/aften/unicode_support.h
+@@ -0,0 +1,21 @@
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++char *utf16_to_utf8(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int argc, char ***argv_utf8, wchar_t **argv_utf16);
++void free_commandline_arguments_utf8(int argc, char ***argv_utf8);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+\ No newline at end of file
+diff --git a/libaften/a52.h b/libaften/a52.h
+index 9a6812b..85c6fa5 100644
+--- a/libaften/a52.h
++++ b/libaften/a52.h
+@@ -32,7 +32,7 @@
+ #include "a52tab.h"
+ #include "aften-types.h"
+ 
+-#define AFTEN_VERSION "git"
++#define AFTEN_VERSION "0.0.8+"
+ 
+ #define A52_MAX_CHANNELS 6
+ 
