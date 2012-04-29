@@ -33,10 +33,93 @@
 #include <QResource>
 #include <QTime>
 #include <QTextStream>
+#include <QRunnable>
+#include <QThreadPool>
+#include <QMutex>
+#include <QMutexLocker>
 
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
-static const double g_allowedExtractDelay = 10.0;
+static const double g_allowedExtractDelay = 12.0;
+
+////////////////////////////////////////////////////////////
+// ExtractorTask class
+////////////////////////////////////////////////////////////
+
+class ExtractorTask : public QRunnable
+{
+public:
+	ExtractorTask(const QDir &appDir, const QString &toolName, const QString &toolShortName, const QByteArray &toolHash, const unsigned int toolVersion)
+	:
+		QRunnable(), m_appDir(appDir), m_toolName(toolName), m_toolShortName(toolShortName), m_toolHash(toolHash), m_toolVersion(toolVersion)
+	{
+		/* Nothing to do */
+	}
+
+	static void clearFlags(void)
+	{
+		s_bAbort = s_bCustom = false;
+		s_errMsg[0] = '\0';
+	}
+
+	static bool getAbort(void) { return s_bAbort; }
+	static bool getCustom(void) { return s_bCustom; }
+	static char *const getError(void) { return s_errMsg; }
+
+protected:
+	void run()
+	{
+		try
+		{
+			LockedFile *lockedFile = NULL;
+			unsigned int version = m_toolVersion;
+			
+			if(!s_bAbort)
+			{
+				QFileInfo customTool(QString("%1/tools/%2/%3").arg(m_appDir.canonicalPath(), QString::number(lamexp_version_build()), m_toolShortName));
+				if(customTool.exists() && customTool.isFile())
+				{
+					qDebug("Setting up file: %s <- %s", m_toolShortName.toLatin1().constData(), m_appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
+					lockedFile = new LockedFile(customTool.canonicalFilePath()); version = UINT_MAX; s_bCustom = true;
+				}
+				else
+				{
+					qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), m_toolShortName.toLatin1().constData());
+					lockedFile = new LockedFile(QString(":/tools/%1").arg(m_toolName), QString("%1/lamexp_%2").arg(lamexp_temp_folder2(), m_toolShortName), m_toolHash);
+				}
+
+				if(lockedFile)
+				{
+					QMutexLocker lock(&s_mutex);
+					lamexp_register_tool(m_toolShortName, lockedFile, version);
+				}
+			}
+		}
+		catch(char *errorMsg)
+		{
+			qWarning("At least one of the required tools could not be initialized:\n%s", errorMsg);
+			QMutexLocker lock(&s_mutex);
+			if(!s_bAbort) { s_bAbort = true; strncpy_s(s_errMsg, 1024, errorMsg, _TRUNCATE); }
+		}
+	}
+
+private:
+	const QDir m_appDir;
+	const QString m_toolName;
+	const QString m_toolShortName;
+	const QByteArray m_toolHash;
+	const unsigned int m_toolVersion;
+
+	static volatile bool s_bAbort;
+	static volatile bool s_bCustom;
+	static QMutex s_mutex;
+	static char s_errMsg[1024];
+};
+
+volatile bool ExtractorTask::s_bAbort = false;
+volatile bool ExtractorTask::s_bCustom = false;
+char ExtractorTask::s_errMsg[1024] = {'\0'};
+QMutex ExtractorTask::s_mutex;
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -61,7 +144,6 @@ InitializationThread::InitializationThread(const lamexp_cpu_t *cpuFeatures)
 void InitializationThread::run()
 {
 	m_bSuccess = false;
-	bool bCustom = false;
 	delay();
 
 	//CPU type selection
@@ -126,6 +208,15 @@ void InitializationThread::run()
 	QList<QFileInfo> toolsList = toolsDir.entryInfoList(QStringList("*.*"), QDir::Files, QDir::Name);
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
+	QThreadPool *pool = new QThreadPool();
+	int idealThreadCount = QThread::idealThreadCount();
+	if(idealThreadCount > 0)
+	{
+		pool->setMaxThreadCount(idealThreadCount * 2);
+	}
+	
+	ExtractorTask::clearFlags();
+
 	QTime timer;
 	timer.start();
 	
@@ -149,20 +240,8 @@ void InitializationThread::run()
 			
 			if(toolCpuType & cpuSupport)
 			{
-				QFileInfo customTool(QString("%1/tools/%2/%3").arg(appDir.canonicalPath(), QString::number(lamexp_version_build()), toolShortName));
-				if(customTool.exists() && customTool.isFile())
-				{
-					bCustom = true;
-					qDebug("Setting up file: %s <- %s", toolShortName.toLatin1().constData(), appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
-					LockedFile *lockedFile = new LockedFile(customTool.canonicalFilePath());
-					lamexp_register_tool(toolShortName, lockedFile, UINT_MAX);
-				}
-				else
-				{
-					qDebug("Extracting file: %s -> %s", toolName.toLatin1().constData(),  toolShortName.toLatin1().constData());
-					LockedFile *lockedFile = new LockedFile(QString(":/tools/%1").arg(toolName), QString("%1/lamexp_%2").arg(lamexp_temp_folder2(), toolShortName), toolHash);
-					lamexp_register_tool(toolShortName, lockedFile, toolVersion);
-				}
+				pool->start(new ExtractorTask(appDir, toolName, toolShortName, toolHash, toolVersion));
+				QThread::yieldCurrentThread();
 			}
 		}
 		catch(char *errorMsg)
@@ -172,13 +251,24 @@ void InitializationThread::run()
 		}
 	}
 	
+	//Wait for extrator threads to finish
+	pool->waitForDone();
+	LAMEXP_DELETE(pool);
+
+	//Make sure all files were extracted correctly
+	if(ExtractorTask::getAbort())
+	{
+		qFatal("At least one of the required tools could not be initialized:\n%s", ExtractorTask::getError());
+		return;
+	}
+
 	//Make sure all files were extracted
 	if(!mapChecksum.isEmpty())
 	{
 		qFatal("At least one required tool could not be found:\n%s", toolsDir.filePath(mapChecksum.keys().first()).toLatin1().constData());
 		return;
 	}
-	
+
 	qDebug("All extracted.\n");
 
 	//Clean-up
@@ -187,7 +277,7 @@ void InitializationThread::run()
 	mapCpuType.clear();
 	
 	//Using any custom tools?
-	if(bCustom)
+	if(ExtractorTask::getCustom())
 	{
 		qWarning("Warning: Using custom tools, you might encounter unexpected problems!\n");
 	}
