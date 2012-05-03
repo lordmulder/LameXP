@@ -36,7 +36,6 @@
 #include <QRunnable>
 #include <QThreadPool>
 #include <QMutex>
-#include <QMutexLocker>
 
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
@@ -98,8 +97,11 @@ protected:
 		catch(char *errorMsg)
 		{
 			qWarning("At least one of the required tools could not be initialized:\n%s", errorMsg);
-			QMutexLocker lock(&s_mutex);
-			if(!s_bAbort) { s_bAbort = true; strncpy_s(s_errMsg, 1024, errorMsg, _TRUNCATE); }
+			if(s_mutex.tryLock())
+			{
+				if(!s_bAbort) { s_bAbort = true; strncpy_s(s_errMsg, 1024, errorMsg, _TRUNCATE); }
+				s_mutex.unlock();
+			}
 		}
 	}
 
@@ -250,7 +252,7 @@ void InitializationThread::run()
 			return;
 		}
 	}
-	
+
 	//Wait for extrator threads to finish
 	pool->waitForDone();
 	LAMEXP_DELETE(pool);

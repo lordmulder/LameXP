@@ -45,6 +45,9 @@
 #include <QTimer>
 #include <QLibraryInfo>
 #include <QEvent>
+#include <QReadWriteLock>
+#include <QReadLocker>
+#include <QWriteLocker>
 
 //LameXP includes
 #include "Resource.h"
@@ -198,6 +201,7 @@ static QString g_lamexp_temp_folder;
 //Tools
 static QMap<QString, LockedFile*> g_lamexp_tool_registry;
 static QMap<QString, unsigned int> g_lamexp_tool_versions;
+static QReadWriteLock g_lamexp_tool_lock;
 
 //Languages
 static struct
@@ -1485,6 +1489,8 @@ bool lamexp_clean_folder(const QString &folderPath)
  */
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version)
 {
+	QWriteLocker writeLock(&g_lamexp_tool_lock);
+	
 	if(g_lamexp_tool_registry.contains(toolName.toLower()))
 	{
 		throw "lamexp_register_tool: Tool is already registered!";
@@ -1499,6 +1505,7 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned in
  */
 bool lamexp_check_tool(const QString &toolName)
 {
+	QReadLocker readLock(&g_lamexp_tool_lock);
 	return g_lamexp_tool_registry.contains(toolName.toLower());
 }
 
@@ -1507,6 +1514,8 @@ bool lamexp_check_tool(const QString &toolName)
  */
 const QString lamexp_lookup_tool(const QString &toolName)
 {
+	QReadLocker readLock(&g_lamexp_tool_lock);
+
 	if(g_lamexp_tool_registry.contains(toolName.toLower()))
 	{
 		return g_lamexp_tool_registry.value(toolName.toLower())->filePath();
@@ -1522,6 +1531,8 @@ const QString lamexp_lookup_tool(const QString &toolName)
  */
 unsigned int lamexp_tool_version(const QString &toolName)
 {
+	QReadLocker readLock(&g_lamexp_tool_lock);
+
 	if(g_lamexp_tool_versions.contains(toolName.toLower()))
 	{
 		return g_lamexp_tool_versions.value(toolName.toLower());
