@@ -31,6 +31,11 @@
 
 #define EPS (1.0E-5)
 
+/* It can happen that the QThread has just terminated and already emitted the 'terminated' signal, but did NOT change the 'isRunning' flag to FALSE yet. */
+/* For this reason the macro will first check the 'isRunning' flag. If (and only if) the flag still returns TRUE, then we will wait() for at most 50 ms. */
+/* If, after 50 ms, the wait() function returns with FALSE, then the thread probably is still running and we return TRUE. Otherwise we can return FALSE. */
+#define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ? (!((THRD)->wait(50))) : false)
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -91,22 +96,30 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	//Show splash
 	this->show(text);
 
-	//Start the thread
-	thread->start();
+	//Create event loop
+	QEventLoop *loop = new QEventLoop(this);
+	connect(thread, SIGNAL(finished()), loop, SLOT(quit()));
+	connect(thread, SIGNAL(terminated()), loop, SLOT(quit()));
 
 	//Set taskbar state
 	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), &QIcon(":/icons/hourglass.png"));
 	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
 
-	//Loop while thread is running
-	while(thread->isRunning())
+	//Start the thread
+	thread->start();
+
+	//Loop while thread is still running
+	while(THREAD_RUNNING(thread))
 	{
-		QApplication::processEvents(QEventLoop::AllEvents | QEventLoop::WaitForMoreEvents);
+		loop->exec();
 	}
 
 	//Set taskbar state
 	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
 	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), NULL);
+
+	//Free memory
+	LAMEXP_DELETE(loop);
 
 	//Hide splash
 	this->close();
@@ -184,8 +197,10 @@ void WorkingBanner::setText(const QString &text)
 		}
 		labelStatus->setText(choppedText);
 	}
+	/*
 	if(this->isVisible())
 	{
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	}
+	*/
 }
