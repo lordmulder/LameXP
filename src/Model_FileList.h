@@ -70,7 +70,8 @@ public slots:
 	void addFile(const AudioFileModel &file);
 
 private:
-	QList<AudioFileModel> m_fileList;
+	QList<QString> m_fileList;
+	QHash<QString, AudioFileModel> m_fileStore;
 	const QIcon m_fileIcon;
 
 	static bool checkArray(const bool *a, const bool val, size_t len);
