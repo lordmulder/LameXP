@@ -692,6 +692,9 @@ unsigned __int64 AnalyzeTask::makeThreadIdx(void)
 
 void AnalyzeTask::waitForPreviousThreads(void)
 {
+	//This function will block until all threads with a *lower* index have terminated.
+	//Required to make sure that the files will be added in the "correct" order!
+	
 	for(int i = 0; i < 240; i++) 
 	{
 		QReadLocker lock(&s_lock);
@@ -699,8 +702,9 @@ void AnalyzeTask::waitForPreviousThreads(void)
 		{
 			break;
 		}
+		DWORD sleepInterval = 100 + (static_cast<DWORD>(qBound(1ui64, m_threadIdx - s_threadIdx_finished, 8ui64)) * 25);
 		lock.unlock();
-		Sleep(125);
+		Sleep(sleepInterval);
 	}
 }
 

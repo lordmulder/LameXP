@@ -124,6 +124,11 @@ void FileAnalyzer::run()
 
 	AnalyzeTask::reset();
 	QThreadPool *pool = new QThreadPool();
+	
+	if(pool->maxThreadCount() < 2)
+	{
+		pool->setMaxThreadCount(2);
+	}
 
 	while(!(m_inputFiles.isEmpty() || m_bAborted))
 	{
@@ -142,7 +147,7 @@ void FileAnalyzer::run()
 
 			while(!pool->tryStart(task))
 			{
-				QThread::msleep(125); //No more free threads, wait for active threads!
+				pool->waitForDone(250); //No more free threads, wait for active threads!
 				if(m_abortFlag) { LAMEXP_DELETE(task); break; }
 			}
 
@@ -164,14 +169,13 @@ void FileAnalyzer::run()
 	
 	pool->waitForDone();
 	LAMEXP_DELETE(pool);
-
 	
 	if(m_bAborted)
 	{
 		qWarning("Operation cancelled by user!");
 		return;
 	}
-
+	
 	qDebug("All files added.\n");
 	m_bSuccess = true;
 }
