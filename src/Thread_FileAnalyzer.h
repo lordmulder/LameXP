@@ -45,6 +45,7 @@ public:
 	~FileAnalyzer(void);
 	void run();
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
+
 	unsigned int filesAccepted(void);
 	unsigned int filesRejected(void);
 	unsigned int filesDenied(void);
@@ -59,40 +60,10 @@ public slots:
 	void abortProcess(void) { m_abortFlag = true; }
 
 private:
-	enum cover_t
-	{
-		coverNone,
-		coverJpeg,
-		coverPng,
-		coverGif
-	};
-	enum fileType_t
-	{
-		fileTypeNormal = 0,
-		fileTypeCDDA = 1,
-		fileTypeDenied = 2,
-		fileTypeSkip = 3
-	};
-
 	const AudioFileModel analyzeFile(const QString &filePath, int *type);
-	void updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned int *id_val, cover_t *coverType, QByteArray *coverData, const QString &key, const QString &value);
-	unsigned int parseYear(const QString &str);
-	unsigned int parseDuration(const QString &str);
-	bool checkFile_CDDA(QFile &file);
-	void retrieveCover(AudioFileModel &audioFile, cover_t coverType, const QByteArray &coverData);
-	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
 	bool createTemplate(void);
 
-	const QString m_mediaInfoBin;
-	const QString m_avs2wavBin;
-
 	QStringList m_inputFiles;
-	QStringList m_recentlyAdded;
-	unsigned int m_filesAccepted;
-	unsigned int m_filesRejected;
-	unsigned int m_filesDenied;
-	unsigned int m_filesDummyCDDA;
-	unsigned int m_filesCueSheet;
 	LockedFile *m_templateFile;
 	
 	volatile bool m_abortFlag;

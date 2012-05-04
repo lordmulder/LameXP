@@ -66,7 +66,7 @@ public:
 	static char *const getError(void) { return s_errMsg; }
 
 protected:
-	void run()
+	void run(void)
 	{
 		try
 		{

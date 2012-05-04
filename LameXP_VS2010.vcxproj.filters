@@ -352,6 +352,12 @@
     <ClCompile Include="tmp\MOC_Encoder_DCA.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Thread_FileAnalyzer_Task.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_Task.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -652,6 +658,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Encoder_DCA.h">
       <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_FileAnalyzer_Task.h">
+      <Filter>Header Files\Threads</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
