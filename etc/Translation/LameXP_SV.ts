@@ -683,32 +683,32 @@
 <context>
     <name>FileListModel</name>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="100"/>
+        <location filename="../../src/Model_FileList.cpp" line="101"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="103"/>
+        <location filename="../../src/Model_FileList.cpp" line="104"/>
         <source>Full Path</source>
         <translation>Sökväg</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="332"/>
+        <location filename="../../src/Model_FileList.cpp" line="339"/>
         <source>(System Default)</source>
         <translation>(Systemstandard)</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="339"/>
+        <location filename="../../src/Model_FileList.cpp" line="346"/>
         <source>Select ANSI Codepage for CSV file:</source>
         <translation>Välj ANSI som teckentabell för CSV-fil:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="340"/>
+        <location filename="../../src/Model_FileList.cpp" line="347"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="341"/>
+        <location filename="../../src/Model_FileList.cpp" line="348"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -3011,22 +3011,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="806"/>
+        <location filename="../../src/Global.cpp" line="810"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation>EXE-filen &apos;%1&apos; stöder inte Windows kompatibilitetsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1049"/>
+        <location filename="../../src/Global.cpp" line="1053"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Qt v%2, du har Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1054"/>
+        <location filename="../../src/Global.cpp" line="1058"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>EXE-filen &apos;%1&apos; är byggd för Qt &apos;%2&apos;, du har Qt &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1067"/>
+        <location filename="../../src/Global.cpp" line="1071"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Windows 2000 eller senare.</translation>
     </message>

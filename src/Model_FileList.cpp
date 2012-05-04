@@ -204,7 +204,7 @@ AudioFileModel FileListModel::getFile(const QModelIndex &index)
 {
 	if(index.row() >= 0 && index.row() < m_fileList.count())
 	{
-		return m_fileList.at(index.row());
+		return m_fileStore.value(m_fileList.at(index.row()));
 	}
 	else
 	{

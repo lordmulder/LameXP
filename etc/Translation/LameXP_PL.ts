@@ -683,32 +683,32 @@
 <context>
     <name>FileListModel</name>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="100"/>
+        <location filename="../../src/Model_FileList.cpp" line="101"/>
         <source>Title</source>
         <translation type="unfinished">Tytuł</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="103"/>
+        <location filename="../../src/Model_FileList.cpp" line="104"/>
         <source>Full Path</source>
         <translation type="unfinished">Pełna ścieżka</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="332"/>
+        <location filename="../../src/Model_FileList.cpp" line="339"/>
         <source>(System Default)</source>
         <translation type="unfinished">(Domyślne systemowe)</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="339"/>
+        <location filename="../../src/Model_FileList.cpp" line="346"/>
         <source>Select ANSI Codepage for CSV file:</source>
         <translation type="unfinished">Wybierz zestaw znaków ANSI dla pliku CVS:</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="340"/>
+        <location filename="../../src/Model_FileList.cpp" line="347"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="341"/>
+        <location filename="../../src/Model_FileList.cpp" line="348"/>
         <source>Cancel</source>
         <translation type="unfinished">Anuluj</translation>
     </message>
@@ -3011,22 +3011,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="806"/>
+        <location filename="../../src/Global.cpp" line="810"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1049"/>
+        <location filename="../../src/Global.cpp" line="1053"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1054"/>
+        <location filename="../../src/Global.cpp" line="1058"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1067"/>
+        <location filename="../../src/Global.cpp" line="1071"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>
