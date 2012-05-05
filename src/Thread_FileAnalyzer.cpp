@@ -143,13 +143,18 @@ void FileAnalyzer::run()
 
 			while(!pool->tryStart(task))
 			{
-				AnalyzeTask::waitForOneThread(1250);
+				if(!AnalyzeTask::waitForOneThread(1250))
+				{
+					qWarning("FileAnalyzer::run() -> Timeout !!!");
+				}
 				
 				if(m_abortFlag)
 				{
 					LAMEXP_DELETE(task);
 					break;
 				}
+
+				QThread::yieldCurrentThread();
 			}
 
 			if(m_abortFlag)

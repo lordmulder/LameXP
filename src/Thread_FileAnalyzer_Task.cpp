@@ -80,7 +80,7 @@ AnalyzeTask::AnalyzeTask(const QString &inputFile, const QString &templateFile, 
 AnalyzeTask::~AnalyzeTask(void)
 {
 	QWriteLocker lock(&s_lock);
-	s_threadIdx_finished = qMax(s_threadIdx_finished, m_threadIdx + 1);
+	s_threadIdx_finished = qMax(s_threadIdx_finished, m_threadIdx + 1ui64);
 	s_waitCond.wakeAll();
 }
 
@@ -88,7 +88,23 @@ AnalyzeTask::~AnalyzeTask(void)
 // Thread Main
 ////////////////////////////////////////////////////////////
 
-void AnalyzeTask::run(void)
+void AnalyzeTask::run()
+{
+	try
+	{
+		run_ex();
+	}
+	catch(...)
+	{
+		qWarning("WARNING: Caught an in exception AnalyzeTask thread!");
+	}
+
+	QWriteLocker lock(&s_lock);
+	s_threadIdx_finished = qMax(s_threadIdx_finished, m_threadIdx + 1ui64);
+	s_waitCond.wakeAll();
+}
+
+void AnalyzeTask::run_ex(void)
 {
 	int fileType = fileTypeNormal;
 	QString currentFile = QDir::fromNativeSeparators(m_inputFile);
@@ -707,7 +723,10 @@ void AnalyzeTask::waitForPreviousThreads(void)
 		}
 		lock.unlock();
 
-		waitForOneThread(1250);
+		if(!AnalyzeTask::waitForOneThread(1250))
+		{
+			qWarning("AnalyzeTask::waitForPreviousThreads -> Timeout !!!");
+		}
 	}
 }
 

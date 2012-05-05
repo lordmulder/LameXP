@@ -40,6 +40,7 @@
 
 FileListModel::FileListModel(void)
 :
+	m_blockUpdates(false),
 	m_fileIcon(":/icons/page_white_cd.png")
 {
 }
@@ -138,26 +139,28 @@ void FileListModel::addFile(const QString &filePath)
 {
 	QFileInfo fileInfo(filePath);
 	const QString key = MAKE_KEY(fileInfo.canonicalFilePath()); 
+	const bool flag = (!m_blockUpdates);
 
 	if(!m_fileStore.contains(key))
 	{
-		beginInsertRows(QModelIndex(), m_fileList.count(), m_fileList.count());
+		if(flag) beginInsertRows(QModelIndex(), m_fileList.count(), m_fileList.count());
 		m_fileStore.insert(key, AudioFileModel(fileInfo.canonicalFilePath(), fileInfo.baseName()));
 		m_fileList.append(key);
-		endInsertRows();
+		if(flag) endInsertRows();
 	}
 }
 
 void FileListModel::addFile(const AudioFileModel &file)
 {
 	const QString key = MAKE_KEY(file.filePath()); 
+	const bool flag = (!m_blockUpdates);
 
 	if(!m_fileStore.contains(key))
 	{
-		beginInsertRows(QModelIndex(), m_fileList.count(), m_fileList.count());
+		if(flag) beginInsertRows(QModelIndex(), m_fileList.count(), m_fileList.count());
 		m_fileStore.insert(key, file);
 		m_fileList.append(key);
-		endInsertRows();
+		if(flag) endInsertRows();
 	}
 }
 

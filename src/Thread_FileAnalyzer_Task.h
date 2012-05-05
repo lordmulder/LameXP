@@ -54,20 +54,22 @@ public:
 	static unsigned int filesCueSheet(void);
 
 	//Wait till the next running thread terminates
-	static void waitForOneThread(unsigned long timeout)
+	static __forceinline bool waitForOneThread(unsigned long timeout)
 	{
+		bool ret = false;
 		s_waitMutex.lock();
-		s_waitCond.wait(&s_waitMutex, timeout);
+		ret = s_waitCond.wait(&s_waitMutex, timeout);
 		s_waitMutex.unlock();
+		return ret;
 	}
-
-	void run(void);
 
 signals:
 	void fileSelected(const QString &fileName);
 	void fileAnalyzed(const AudioFileModel &file);
 
 protected:
+	void run(void);
+	void run_ex(void);
 
 private:
 	enum cover_t

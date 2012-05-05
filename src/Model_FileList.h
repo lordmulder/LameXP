@@ -65,11 +65,19 @@ public:
 	}
 	CsvError;
 
+	//Speed hacks
+	void setBlockUpdates(bool flag)
+	{
+		m_blockUpdates = flag;
+		if(!flag) reset();
+	}
+
 public slots:
 	void addFile(const QString &filePath);
 	void addFile(const AudioFileModel &file);
 
 private:
+	bool m_blockUpdates;
 	QList<QString> m_fileList;
 	QHash<QString, AudioFileModel> m_fileStore;
 	const QIcon m_fileIcon;

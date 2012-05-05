@@ -519,7 +519,22 @@ void MainWindow::addFiles(const QStringList &files)
 	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
 	connect(m_banner, SIGNAL(userAbort()), analyzer, SLOT(abortProcess()), Qt::DirectConnection);
 
-	m_banner->show(tr("Adding file(s), please wait..."), analyzer);
+	try
+	{
+		m_fileListModel->setBlockUpdates(true);
+		m_banner->show(tr("Adding file(s), please wait..."), analyzer);
+	}
+	catch(...)
+	{
+		/* ignore any exceptions that may occur */
+	}
+
+	m_fileListModel->setBlockUpdates(false);
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+	sourceFileView->update();
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+	sourceFileView->scrollToBottom();
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	if(analyzer->filesDenied())
 	{
@@ -539,7 +554,6 @@ void MainWindow::addFiles(const QStringList &files)
 	}
 
 	LAMEXP_DELETE(analyzer);
-	sourceFileView->scrollToBottom();
 	m_banner->close();
 }
 
