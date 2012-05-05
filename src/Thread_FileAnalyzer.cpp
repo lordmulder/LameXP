@@ -34,6 +34,7 @@
 #include <QDebug>
 #include <QImage>
 #include <QThreadPool>
+#include <QTime>
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -136,19 +137,19 @@ void FileAnalyzer::run()
 		{
 			const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
 
-			if(m_inputFiles.isEmpty())
-			{
-				pool->waitForDone();
-			}
-
 			AnalyzeTask *task = new AnalyzeTask(currentFile, m_templateFile->filePath(), &m_abortFlag);
 			connect(task, SIGNAL(fileSelected(QString)), this, SIGNAL(fileSelected(QString)), Qt::DirectConnection);
 			connect(task, SIGNAL(fileAnalyzed(AudioFileModel)), this, SIGNAL(fileAnalyzed(AudioFileModel)), Qt::DirectConnection);
 
 			while(!pool->tryStart(task))
 			{
-				pool->waitForDone(250); //No more free threads, wait for active threads!
-				if(m_abortFlag) { LAMEXP_DELETE(task); break; }
+				AnalyzeTask::waitForOneThread(1250);
+				
+				if(m_abortFlag)
+				{
+					LAMEXP_DELETE(task);
+					break;
+				}
 			}
 
 			if(m_abortFlag)
@@ -160,6 +161,7 @@ void FileAnalyzer::run()
 			QThread::yieldCurrentThread();
 		}
 
+		//One of the Analyze tasks may have gathered additional files from a playlist!
 		if(!m_bAborted)
 		{
 			pool->waitForDone();
@@ -169,7 +171,7 @@ void FileAnalyzer::run()
 	
 	pool->waitForDone();
 	LAMEXP_DELETE(pool);
-	
+
 	if(m_bAborted)
 	{
 		qWarning("Operation cancelled by user!");

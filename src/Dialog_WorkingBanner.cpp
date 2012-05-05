@@ -50,6 +50,7 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 
 	//Start animation
 	m_working = new QMovie(":/images/Busy.gif");
+	m_working->setSpeed(25);
 	labelWorking->setMovie(m_working);
 	m_working->start();
 

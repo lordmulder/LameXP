@@ -23,7 +23,9 @@
 
 #include <QRunnable>
 #include <QReadWriteLock>
+#include <QWaitCondition>
 #include <QStringList>
+#include <QMutex>
 
 class AudioFileModel;
 class QFile;
@@ -51,12 +53,21 @@ public:
 	static unsigned int filesDummyCDDA(void);
 	static unsigned int filesCueSheet(void);
 
+	//Wait till the next running thread terminates
+	static void waitForOneThread(unsigned long timeout)
+	{
+		s_waitMutex.lock();
+		s_waitCond.wait(&s_waitMutex, timeout);
+		s_waitMutex.unlock();
+	}
+
+	void run(void);
+
 signals:
 	void fileSelected(const QString &fileName);
 	void fileAnalyzed(const AudioFileModel &file);
 
 protected:
-	void run(void);
 
 private:
 	enum cover_t
@@ -93,15 +104,20 @@ private:
 	volatile bool *m_abortFlag;
 
 	static QReadWriteLock s_lock;
+	static QMutex s_waitMutex;
+	static QWaitCondition s_waitCond;
+	
 	static unsigned __int64 s_threadIdx_created;
 	static unsigned __int64 s_threadIdx_finished;
+
+	static QStringList s_recentlyAdded;
+	static QStringList s_additionalFiles;
+	
 	static unsigned int s_filesAccepted;
 	static unsigned int s_filesRejected;
 	static unsigned int s_filesDenied;
 	static unsigned int s_filesDummyCDDA;
 	static unsigned int s_filesCueSheet;
-	static QStringList s_recentlyAdded;
-	static QStringList s_additionalFiles;
-
+	
 	static unsigned __int64 makeThreadIdx(void);
 };

@@ -46,6 +46,8 @@
 
 /* static vars */
 QReadWriteLock AnalyzeTask::s_lock;
+QMutex AnalyzeTask::s_waitMutex;
+QWaitCondition AnalyzeTask::s_waitCond;
 unsigned __int64 AnalyzeTask::s_threadIdx_created;
 unsigned __int64 AnalyzeTask::s_threadIdx_finished;
 unsigned int AnalyzeTask::s_filesAccepted;
@@ -79,6 +81,7 @@ AnalyzeTask::~AnalyzeTask(void)
 {
 	QWriteLocker lock(&s_lock);
 	s_threadIdx_finished = qMax(s_threadIdx_finished, m_threadIdx + 1);
+	s_waitCond.wakeAll();
 }
 
 ////////////////////////////////////////////////////////////
@@ -695,16 +698,16 @@ void AnalyzeTask::waitForPreviousThreads(void)
 	//This function will block until all threads with a *lower* index have terminated.
 	//Required to make sure that the files will be added in the "correct" order!
 	
-	for(int i = 0; i < 240; i++) 
+	for(int i = 0; i < 64; i++) 
 	{
 		QReadLocker lock(&s_lock);
 		if((s_threadIdx_finished >= m_threadIdx) || *m_abortFlag)
 		{
 			break;
 		}
-		DWORD sleepInterval = 100 + (static_cast<DWORD>(qBound(1ui64, m_threadIdx - s_threadIdx_finished, 8ui64)) * 25);
 		lock.unlock();
-		Sleep(sleepInterval);
+
+		waitForOneThread(1250);
 	}
 }
 
