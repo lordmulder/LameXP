@@ -63,13 +63,13 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 
 	//Set font size
 	QFont font = m_progress->font();
-	font.setPointSize(5);
+	font.setPointSize(6);
 	m_progress->setFont(font);
 
 	//Set font color
 	QPalette color = m_progress->palette();
-	color.setColor(QPalette::Text, QColor::fromRgb(0x36, 0x36, 0x36));
-	color.setColor(QPalette::WindowText, QColor::fromRgb(0x36, 0x36, 0x36));
+	color.setColor(QPalette::Text, QColor::fromRgb(0x33, 0x33, 0x33));
+	color.setColor(QPalette::WindowText, QColor::fromRgb(0x33, 0x33, 0x33));
 	m_progress->setPalette(color);
 
 	//Set wait cursor

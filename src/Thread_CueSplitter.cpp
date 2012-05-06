@@ -102,6 +102,9 @@ void CueSplitter::run()
 	QStringList inputFileList = m_inputFilesInfo.keys();
 	int nInputFiles = inputFileList.count();
 	
+	emit progressMaxChanged(nInputFiles);
+	emit progressValChanged(0);
+
 	//Decompress all input files
 	for(int i = 0; i < nInputFiles; i++)
 	{
@@ -112,9 +115,13 @@ void CueSplitter::run()
 			if(decoder)
 			{
 				m_activeFile = shortName(QFileInfo(inputFileList.at(i)).fileName());
+				
 				emit fileSelected(m_activeFile);
+				emit progressValChanged(i+1);
+				
 				QString tempFile = QString("%1/~%2.wav").arg(m_outputDir, lamexp_rand_str());
 				connect(decoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
+				
 				if(decoder->decode(inputFileList.at(i), tempFile, &m_abortFlag))
 				{
 					m_decompressedFiles.insert(inputFileList.at(i), tempFile);
@@ -125,6 +132,7 @@ void CueSplitter::run()
 					qWarning("Failed to decompress file: <%s>", inputFileList.at(i).toLatin1().constData());
 					lamexp_remove_file(tempFile);
 				}
+				
 				m_activeFile.clear();
 				LAMEXP_DELETE(decoder);
 			}
@@ -137,6 +145,7 @@ void CueSplitter::run()
 		{
 			m_decompressedFiles.insert(inputFileList.at(i), inputFileList.at(i));
 		}
+
 		if(m_abortFlag)
 		{
 			m_bAborted = true;
@@ -146,6 +155,17 @@ void CueSplitter::run()
 	}
 
 	int nFiles = m_model->getFileCount();
+	int nTracksTotal = 0;
+	int nTracksComplete = 0;
+
+	for(int i = 0; i < nFiles; i++)
+	{
+		nTracksTotal += m_model->getTrackCount(i);
+	}
+
+	emit progressMaxChanged(nTracksTotal);
+	emit progressValChanged(0);
+
 	QString albumPerformer = m_model->getAlbumPerformer();
 	QString albumTitle = m_model->getAlbumTitle();
 	QString albumGenre = m_model->getAlbumGenre();
@@ -161,6 +181,7 @@ void CueSplitter::run()
 		//Process all tracks
 		for(int j = 0; j < nTracks; j++)
 		{
+			emit progressValChanged(++nTracksComplete);
 			int trackNo = m_model->getTrackNo(i, j);
 			double trackOffset = std::numeric_limits<double>::quiet_NaN();
 			double trackLength = std::numeric_limits<double>::quiet_NaN();

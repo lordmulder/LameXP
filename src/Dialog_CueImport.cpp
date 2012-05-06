@@ -383,6 +383,8 @@ void CueImportDialog::splitFiles(void)
 
 	connect(splitter, SIGNAL(fileSelected(QString)), progress, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(splitter, SIGNAL(fileSplit(AudioFileModel)), m_fileList, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+	connect(splitter, SIGNAL(progressValChanged(unsigned int)), progress, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
+	connect(splitter, SIGNAL(progressMaxChanged(unsigned int)), progress, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
 	connect(progress, SIGNAL(userAbort()), splitter, SLOT(abortProcess()), Qt::DirectConnection);
 
 	progress->show(tr("Splitting file(s), please wait..."), splitter);

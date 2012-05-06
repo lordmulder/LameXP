@@ -56,7 +56,7 @@
 #include <QWindowsStyle>
 #include <QSysInfo>
 #include <QDragEnterEvent>
-#include <QMimeData>				//#include <QWindowsMime>
+#include <QMimeData>
 #include <QProcess>
 #include <QUuid>
 #include <QProcessEnvironment>

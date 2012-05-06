@@ -384,8 +384,8 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="111"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="208"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="393"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="397"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="395"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -512,27 +512,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="388"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="390"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="393"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="395"/>
         <source>Process was aborted by the user after %1 track(s)!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="397"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="401"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="402"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="404"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished"></translation>
     </message>

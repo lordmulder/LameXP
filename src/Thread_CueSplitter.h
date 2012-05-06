@@ -52,6 +52,8 @@ public:
 signals:
 	void fileSelected(const QString &fileName);
 	void fileSplit(const AudioFileModel &file);
+	void progressValChanged(unsigned int);
+	void progressMaxChanged(unsigned int);
 
 private slots:
 	void handleUpdate(int progress);
