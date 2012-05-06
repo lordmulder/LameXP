@@ -147,6 +147,7 @@ void FileListModel::addFile(const QString &filePath)
 		m_fileStore.insert(key, AudioFileModel(fileInfo.canonicalFilePath(), fileInfo.baseName()));
 		m_fileList.append(key);
 		if(flag) endInsertRows();
+		emit rowAppended();
 	}
 }
 
@@ -161,6 +162,7 @@ void FileListModel::addFile(const AudioFileModel &file)
 		m_fileStore.insert(key, file);
 		m_fileList.append(key);
 		if(flag) endInsertRows();
+		emit rowAppended();
 	}
 }
 

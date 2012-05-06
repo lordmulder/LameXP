@@ -108,11 +108,17 @@ const char *FileAnalyzer::g_tags_aud[] =
 
 void FileAnalyzer::run()
 {
-	m_bSuccess = false;
+	m_abortFlag = false;
+
 	m_bAborted = false;
+	m_bSuccess = false;
+
+	int nFiles = m_inputFiles.count();
+
+	emit progressMaxChanged(nFiles);
+	emit progressValChanged(0);
 
 	m_inputFiles.sort();
-	m_abortFlag = false;
 
 	if(!m_templateFile)
 	{
@@ -125,7 +131,8 @@ void FileAnalyzer::run()
 
 	AnalyzeTask::reset();
 	QThreadPool *pool = new QThreadPool();
-	
+	QThread::msleep(333);
+
 	if(pool->maxThreadCount() < 2)
 	{
 		pool->setMaxThreadCount(2);
@@ -139,13 +146,15 @@ void FileAnalyzer::run()
 
 			AnalyzeTask *task = new AnalyzeTask(currentFile, m_templateFile->filePath(), &m_abortFlag);
 			connect(task, SIGNAL(fileSelected(QString)), this, SIGNAL(fileSelected(QString)), Qt::DirectConnection);
+			connect(task, SIGNAL(progressValChanged(unsigned int)), this, SIGNAL(progressValChanged(unsigned int)), Qt::DirectConnection);
+			connect(task, SIGNAL(progressMaxChanged(unsigned int)), this, SIGNAL(progressMaxChanged(unsigned int)), Qt::DirectConnection);
 			connect(task, SIGNAL(fileAnalyzed(AudioFileModel)), this, SIGNAL(fileAnalyzed(AudioFileModel)), Qt::DirectConnection);
 
 			while(!pool->tryStart(task))
 			{
 				if(!AnalyzeTask::waitForOneThread(1250))
 				{
-					qWarning("FileAnalyzer::run() -> Timeout !!!");
+					qWarning("FileAnalyzer: Timeout, retrying!");
 				}
 				
 				if(m_abortFlag)
@@ -162,8 +171,10 @@ void FileAnalyzer::run()
 				MessageBeep(MB_ICONERROR);
 				m_bAborted = true;
 			}
-
-			QThread::yieldCurrentThread();
+			else
+			{
+				QThread::msleep(5);
+			}
 		}
 
 		//One of the Analyze tasks may have gathered additional files from a playlist!
@@ -171,6 +182,8 @@ void FileAnalyzer::run()
 		{
 			pool->waitForDone();
 			AnalyzeTask::getAdditionalFiles(m_inputFiles);
+			nFiles += m_inputFiles.count();
+			emit progressMaxChanged(nFiles);
 		}
 	}
 	

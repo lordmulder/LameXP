@@ -76,6 +76,9 @@ public slots:
 	void addFile(const QString &filePath);
 	void addFile(const AudioFileModel &file);
 
+signals:
+	void rowAppended(void);
+
 private:
 	bool m_blockUpdates;
 	QList<QString> m_fileList;

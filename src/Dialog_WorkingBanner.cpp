@@ -42,7 +42,8 @@
 
 WorkingBanner::WorkingBanner(QWidget *parent)
 :
-	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint)
+	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
+	m_progressMax(0), m_progressVal(0)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -53,6 +54,23 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	m_working->setSpeed(50);
 	labelWorking->setMovie(m_working);
 	m_working->start();
+
+	//Create progress indicator
+	m_progress = new QLabel(labelWorking);
+	m_progress->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+	m_progress->move(0, 0);
+	m_progress->resize(labelWorking->size());
+
+	//Set font size
+	QFont font = m_progress->font();
+	font.setPointSize(5);
+	m_progress->setFont(font);
+
+	//Set font color
+	QPalette color = m_progress->palette();
+	color.setColor(QPalette::Text, QColor::fromRgb(0x36, 0x36, 0x36));
+	color.setColor(QPalette::WindowText, QColor::fromRgb(0x36, 0x36, 0x36));
+	m_progress->setPalette(color);
 
 	//Set wait cursor
 	setCursor(Qt::WaitCursor);
@@ -70,6 +88,8 @@ WorkingBanner::~WorkingBanner(void)
 		delete m_working;
 		m_working = NULL;
 	}
+
+	LAMEXP_DELETE(m_progress);
 }
 
 ////////////////////////////////////////////////////////////
@@ -82,6 +102,9 @@ void WorkingBanner::show(const QString &text)
 	QDialog::show();
 	setFixedSize(size());
 	setText(text);
+
+	m_progress->setText(QString());
+
 	QApplication::processEvents();
 }
 
@@ -204,4 +227,19 @@ void WorkingBanner::setText(const QString &text)
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	}
 	*/
+}
+
+void WorkingBanner::setProgressMax(unsigned int max)
+{
+	m_progressMax = max;
+}
+
+void WorkingBanner::setProgressVal(unsigned int val)
+{
+	m_progressVal = val;
+	if(m_progressMax > 0)
+	{
+		int progress = qRound(qBound(0.0, static_cast<double>(m_progressVal) / static_cast<double>(m_progressMax), 1.0) * 100.0);
+		m_progress->setText(QString::number(progress));
+	}
 }

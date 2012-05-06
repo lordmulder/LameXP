@@ -109,9 +109,12 @@ void AnalyzeTask::run_ex(void)
 	int fileType = fileTypeNormal;
 	QString currentFile = QDir::fromNativeSeparators(m_inputFile);
 	qDebug("Analyzing: %s", currentFile.toUtf8().constData());
+	
 	emit fileSelected(QFileInfo(currentFile).fileName());
+	emit progressValChanged(m_threadIdx + 1);
+	
 	AudioFileModel file = analyzeFile(currentFile, &fileType);
-		
+
 	if(*m_abortFlag)
 	{
 		qWarning("Operation cancelled by user!");
@@ -725,7 +728,7 @@ void AnalyzeTask::waitForPreviousThreads(void)
 
 		if(!AnalyzeTask::waitForOneThread(1250))
 		{
-			qWarning("AnalyzeTask::waitForPreviousThreads -> Timeout !!!");
+			qWarning("FileAnalyzerTask: Timeout, retrying!");
 		}
 	}
 }

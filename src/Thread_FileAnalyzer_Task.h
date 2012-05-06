@@ -66,6 +66,8 @@ public:
 signals:
 	void fileSelected(const QString &fileName);
 	void fileAnalyzed(const AudioFileModel &file);
+	void progressValChanged(unsigned int);
+	void progressMaxChanged(unsigned int);
 
 protected:
 	void run(void);
