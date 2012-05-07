@@ -46,7 +46,7 @@ public:
 	~AnalyzeTask(void);
 	
 	static void reset(void);
-	static void getAdditionalFiles(QStringList &fileList);
+	static int getAdditionalFiles(QStringList &fileList);
 	static unsigned int filesAccepted(void);
 	static unsigned int filesRejected(void);
 	static unsigned int filesDenied(void);

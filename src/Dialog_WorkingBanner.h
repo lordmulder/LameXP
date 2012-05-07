@@ -59,6 +59,7 @@ protected:
 	bool winEvent(MSG *message, long *result);
 
 	QLabel *m_progress;
+	QFontMetrics *m_metrics;
 	unsigned int m_progressMax;
 	unsigned int m_progressVal;
 };

@@ -145,8 +145,9 @@ void AnalyzeTask::run_ex(void)
 		QStringList fileList;
 		if(PlaylistImporter::importPlaylist(fileList, currentFile))
 		{
-			QWriteLocker lock(&s_lock);
+			waitForPreviousThreads();
 			qDebug("Imported playlist file.");
+			QWriteLocker lock(&s_lock);
 			s_additionalFiles << fileList;
 		}
 		else if(!QFileInfo(currentFile).suffix().compare("cue", Qt::CaseInsensitive))
@@ -164,6 +165,7 @@ void AnalyzeTask::run_ex(void)
 				s_filesAccepted++;
 				s_recentlyAdded.append(file.filePath());
 				lock.unlock();
+
 				waitForPreviousThreads();
 				emit fileAnalyzed(file);
 			}
@@ -767,11 +769,22 @@ unsigned int AnalyzeTask::filesCueSheet(void)
 	return s_filesCueSheet;
 }
 
-void AnalyzeTask::getAdditionalFiles(QStringList &fileList)
+int AnalyzeTask::getAdditionalFiles(QStringList &fileList)
 {
-	QReadLocker lock(&s_lock);
-	fileList << s_additionalFiles;
-	s_additionalFiles.clear();
+	QReadLocker readLock(&s_lock);
+	int count = s_additionalFiles.count();
+	readLock.unlock();
+
+	if(count > 0)
+	{
+		QWriteLocker lock(&s_lock);
+		count = s_additionalFiles.count();
+		fileList << s_additionalFiles;
+		s_additionalFiles.clear();
+		return count;
+	}
+
+	return 0;
 }
 
 void AnalyzeTask::reset(void)

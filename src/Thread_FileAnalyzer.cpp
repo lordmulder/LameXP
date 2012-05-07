@@ -173,6 +173,10 @@ void FileAnalyzer::run()
 			}
 			else
 			{
+				if(int count = AnalyzeTask::getAdditionalFiles(m_inputFiles))
+				{
+					emit progressMaxChanged(nFiles += count);
+				}
 				QThread::msleep(5);
 			}
 		}
@@ -181,9 +185,10 @@ void FileAnalyzer::run()
 		if(!m_bAborted)
 		{
 			pool->waitForDone();
-			AnalyzeTask::getAdditionalFiles(m_inputFiles);
-			nFiles += m_inputFiles.count();
-			emit progressMaxChanged(nFiles);
+			if(int count = AnalyzeTask::getAdditionalFiles(m_inputFiles))
+			{
+				emit progressMaxChanged(nFiles += count);
+			}
 		}
 	}
 	

@@ -43,7 +43,7 @@
 WorkingBanner::WorkingBanner(QWidget *parent)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
-	m_progressMax(0), m_progressVal(0)
+	m_progressMax(0), m_progressVal(0), m_metrics(NULL)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -90,6 +90,7 @@ WorkingBanner::~WorkingBanner(void)
 	}
 
 	LAMEXP_DELETE(m_progress);
+	LAMEXP_DELETE(m_metrics);
 }
 
 ////////////////////////////////////////////////////////////
@@ -205,15 +206,19 @@ bool WorkingBanner::winEvent(MSG *message, long *result)
 
 void WorkingBanner::setText(const QString &text)
 {
-	QFontMetrics metrics(labelStatus->font());
-	if(metrics.width(text) <= labelStatus->width())
+	if(!m_metrics)
+	{
+		 m_metrics = new QFontMetrics(labelStatus->font());
+	}
+
+	if(m_metrics->width(text) <= labelStatus->width())
 	{
 		labelStatus->setText(text);
 	}
 	else
 	{
 		QString choppedText = text.simplified().append("...");
-		while(metrics.width(choppedText) > labelStatus->width() && choppedText.length() > 8)
+		while((m_metrics->width(choppedText) > labelStatus->width()) && (choppedText.length() > 8))
 		{
 			choppedText.chop(4);
 			choppedText = choppedText.trimmed();

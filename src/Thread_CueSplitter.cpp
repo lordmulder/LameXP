@@ -155,8 +155,7 @@ void CueSplitter::run()
 	}
 
 	int nFiles = m_model->getFileCount();
-	int nTracksTotal = 0;
-	int nTracksComplete = 0;
+	int nTracksTotal = 0, nTracksComplete = 0;
 
 	for(int i = 0; i < nFiles; i++)
 	{
