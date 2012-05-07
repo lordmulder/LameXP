@@ -25,7 +25,9 @@
 
 #include <QString>
 #include <QStringList>
-#include <QMap>
+#include <QHash>
+#include <QSet>
+#include <QUuid>
 #include <QIcon>
 #include <QUuid>
 
@@ -75,10 +77,12 @@ public slots:
 private:
 	QList<QUuid> m_jobList;
 	QList<QUuid> m_jobListHidden;
-	QMap<QUuid, QString> m_jobName;
-	QMap<QUuid, QString> m_jobStatus;
-	QMap<QUuid, int> m_jobState;
-	QMap<QUuid, QStringList> m_jobLogFile;
+	QHash<QUuid, QString> m_jobName;
+	QHash<QUuid, QString> m_jobStatus;
+	QHash<QUuid, int> m_jobState;
+	QHash<QUuid, QStringList> m_jobLogFile;
+	QHash<QUuid, int> m_jobIndexCache;
+	QSet<QUuid> m_jobIdentifiers;
 
 	const QIcon m_iconRunning;
 	const QIcon m_iconPaused;

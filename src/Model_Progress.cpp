@@ -136,7 +136,7 @@ QVariant ProgressModel::headerData(int section, Qt::Orientation orientation, int
 
 void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState)
 {
-	if(m_jobList.contains(jobId) || m_jobListHidden.contains(jobId))
+	if(m_jobIdentifiers.contains(jobId))
 	{
 		return;
 	}
@@ -145,6 +145,7 @@ void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QSt
 	{
 		beginRemoveRows(QModelIndex(), 0, 0);
 		m_jobListHidden.append(m_jobList.takeFirst());
+		m_jobIndexCache.clear();
 		endRemoveRows();
 	}
 
@@ -156,33 +157,41 @@ void ProgressModel::addJob(const QUuid &jobId, const QString &jobName, const QSt
 	m_jobStatus.insert(jobId, jobInitialStatus);
 	m_jobState.insert(jobId, jobInitialState);
 	m_jobLogFile.insert(jobId, QStringList());
+	m_jobIdentifiers.insert(jobId);
 	
 	endInsertRows();
 }
 
 void ProgressModel::updateJob(const QUuid &jobId, const QString &newStatus, int newState)
 {
-	int row = m_jobList.indexOf(jobId);
-
-	if(row < 0)
+	if(!m_jobIdentifiers.contains(jobId))
 	{
-		if(m_jobListHidden.indexOf(jobId) >= 0)
-		{
-			if(!newStatus.isEmpty()) m_jobStatus.insert(jobId, newStatus);
-			if(newState >= 0) m_jobState.insert(jobId, newState);
-		}
 		return;
 	}
-
+	
 	if(!newStatus.isEmpty()) m_jobStatus.insert(jobId, newStatus);
 	if(newState >= 0) m_jobState.insert(jobId, newState);
-	
-	emit dataChanged(index(row, 0), index(row, 1));
+
+	const int row = m_jobIndexCache.value(jobId, -1);
+
+	if(row >= 0)
+	{
+		emit dataChanged(index(row, 0), index(row, 1));
+	}
+	else
+	{
+		const int tmp = m_jobList.indexOf(jobId);
+		if(tmp >= 0)
+		{
+			m_jobIndexCache.insert(jobId, tmp);
+			emit dataChanged(index(tmp, 0), index(tmp, 1));
+		}
+	}
 }
 
 void ProgressModel::appendToLog(const QUuid &jobId, const QString &line)
 {
-	if(m_jobList.contains(jobId))
+	if(m_jobIdentifiers.contains(jobId))
 	{
 		m_jobLogFile[jobId].append(line.split('\n'));
 	}
@@ -213,7 +222,7 @@ void ProgressModel::addSystemMessage(const QString &text, int type)
 {
 	const QUuid &jobId = QUuid::createUuid();
 
-	if(m_jobList.contains(jobId))
+	if(m_jobIdentifiers.contains(jobId))
 	{
 		return;
 	}
@@ -222,6 +231,7 @@ void ProgressModel::addSystemMessage(const QString &text, int type)
 	{
 		beginRemoveRows(QModelIndex(), 0, 0);
 		m_jobListHidden.append(m_jobList.takeFirst());
+		m_jobIndexCache.clear();
 		endRemoveRows();
 	}
 
@@ -248,6 +258,7 @@ void ProgressModel::addSystemMessage(const QString &text, int type)
 	m_jobStatus.insert(jobId, QString());
 	m_jobState.insert(jobId, jobState);
 	m_jobLogFile.insert(jobId, QStringList());
+	m_jobIdentifiers.insert(jobId);
 	
 	endInsertRows();
 }
@@ -261,6 +272,7 @@ void ProgressModel::restoreHiddenItems(void)
 		{
 			m_jobList.prepend(m_jobListHidden.takeLast());
 		}
+		m_jobIndexCache.clear();
 		endResetModel();
 	}
 }
