@@ -54,14 +54,7 @@ public:
 	static unsigned int filesCueSheet(void);
 
 	//Wait till the next running thread terminates
-	static __forceinline bool waitForOneThread(unsigned long timeout)
-	{
-		bool ret = false;
-		s_waitMutex.lock();
-		ret = s_waitCond.wait(&s_waitMutex, timeout);
-		s_waitMutex.unlock();
-		return ret;
-	}
+	static bool waitForOneThread(unsigned long timeout);
 
 signals:
 	void fileSelected(const QString &fileName);
@@ -107,21 +100,19 @@ private:
 	
 	volatile bool *m_abortFlag;
 
-	static QReadWriteLock s_lock;
 	static QMutex s_waitMutex;
 	static QWaitCondition s_waitCond;
-	
 	static unsigned __int64 s_threadIdx_created;
 	static unsigned __int64 s_threadIdx_finished;
-
-	static QStringList s_recentlyAdded;
-	static QStringList s_additionalFiles;
 	
+	static QReadWriteLock s_lock;
 	static unsigned int s_filesAccepted;
 	static unsigned int s_filesRejected;
 	static unsigned int s_filesDenied;
 	static unsigned int s_filesDummyCDDA;
 	static unsigned int s_filesCueSheet;
+	static QStringList s_recentlyAdded;
+	static QStringList s_additionalFiles;
 	
 	static unsigned __int64 makeThreadIdx(void);
 };

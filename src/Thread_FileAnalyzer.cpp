@@ -133,7 +133,11 @@ void FileAnalyzer::run()
 	QThreadPool *pool = new QThreadPool();
 	QThread::msleep(333);
 
-	if(pool->maxThreadCount() < 2)
+	if(QThread::idealThreadCount() > 1)
+	{
+		pool->setMaxThreadCount((QThread::idealThreadCount() * 3) / 2);
+	}
+	else
 	{
 		pool->setMaxThreadCount(2);
 	}
@@ -177,7 +181,7 @@ void FileAnalyzer::run()
 				{
 					emit progressMaxChanged(nFiles += count);
 				}
-				QThread::msleep(5);
+				QThread::msleep(8);
 			}
 		}
 

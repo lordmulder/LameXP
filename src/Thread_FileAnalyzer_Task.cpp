@@ -79,8 +79,10 @@ AnalyzeTask::AnalyzeTask(const QString &inputFile, const QString &templateFile, 
 
 AnalyzeTask::~AnalyzeTask(void)
 {
-	QWriteLocker lock(&s_lock);
+	s_waitMutex.lock();
 	s_threadIdx_finished = qMax(s_threadIdx_finished, m_threadIdx + 1ui64);
+	s_waitMutex.unlock();
+
 	s_waitCond.wakeAll();
 }
 
@@ -99,8 +101,10 @@ void AnalyzeTask::run()
 		qWarning("WARNING: Caught an in exception AnalyzeTask thread!");
 	}
 
-	QWriteLocker lock(&s_lock);
+	s_waitMutex.lock();
 	s_threadIdx_finished = qMax(s_threadIdx_finished, m_threadIdx + 1ui64);
+	s_waitMutex.unlock();
+
 	s_waitCond.wakeAll();
 }
 
@@ -710,28 +714,34 @@ unsigned int AnalyzeTask::parseDuration(const QString &str)
 
 unsigned __int64 AnalyzeTask::makeThreadIdx(void)
 {
-	QWriteLocker lock(&s_lock);
-	return s_threadIdx_created++;
+	s_waitMutex.lock();
+	unsigned __int64 idx = s_threadIdx_created++;
+	s_waitMutex.unlock();
+
+	return idx;
 }
 
 void AnalyzeTask::waitForPreviousThreads(void)
 {
 	//This function will block until all threads with a *lower* index have terminated.
 	//Required to make sure that the files will be added in the "correct" order!
-	
+
 	for(int i = 0; i < 64; i++) 
 	{
-		QReadLocker lock(&s_lock);
+		s_waitMutex.lock();
+
 		if((s_threadIdx_finished >= m_threadIdx) || *m_abortFlag)
 		{
+			s_waitMutex.unlock();
 			break;
 		}
-		lock.unlock();
 
-		if(!AnalyzeTask::waitForOneThread(1250))
+		if(!s_waitCond.wait(&s_waitMutex, 1250))
 		{
 			qWarning("FileAnalyzerTask: Timeout, retrying!");
 		}
+
+		s_waitMutex.unlock();
 	}
 }
 
@@ -787,12 +797,20 @@ int AnalyzeTask::getAdditionalFiles(QStringList &fileList)
 	return 0;
 }
 
+bool AnalyzeTask::waitForOneThread(unsigned long timeout)
+{
+	bool ret = false;
+
+	s_waitMutex.lock();
+	ret = s_waitCond.wait(&s_waitMutex, timeout);
+	s_waitMutex.unlock();
+
+	return ret;
+}
+
 void AnalyzeTask::reset(void)
 {
 	QWriteLocker lock(&s_lock);
-
-	s_threadIdx_created = 0;
-	s_threadIdx_finished = 0;
 	s_filesAccepted = 0;
 	s_filesRejected = 0;
 	s_filesDenied = 0;
@@ -800,8 +818,13 @@ void AnalyzeTask::reset(void)
 	s_filesCueSheet = 0;
 	s_additionalFiles.clear();
 	s_recentlyAdded.clear();
-}
+	lock.unlock();
 
+	s_waitMutex.lock();
+	s_threadIdx_created = 0;
+	s_threadIdx_finished = 0;
+	s_waitMutex.unlock();
+}
 ////////////////////////////////////////////////////////////
 // EVENTS
 ////////////////////////////////////////////////////////////
