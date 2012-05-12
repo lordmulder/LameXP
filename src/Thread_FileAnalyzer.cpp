@@ -133,14 +133,7 @@ void FileAnalyzer::run()
 	QThreadPool *pool = new QThreadPool();
 	QThread::msleep(333);
 
-	if(QThread::idealThreadCount() > 1)
-	{
-		pool->setMaxThreadCount((QThread::idealThreadCount() * 3) / 2);
-	}
-	else
-	{
-		pool->setMaxThreadCount(2);
-	}
+	pool->setMaxThreadCount(qBound(2, ((QThread::idealThreadCount() * 3) / 2), 12));
 
 	while(!(m_inputFiles.isEmpty() || m_bAborted))
 	{
@@ -156,10 +149,7 @@ void FileAnalyzer::run()
 
 			while(!pool->tryStart(task))
 			{
-				if(!AnalyzeTask::waitForOneThread(1250))
-				{
-					qWarning("FileAnalyzer: Timeout, retrying!");
-				}
+				AnalyzeTask::waitForOneThread();
 				
 				if(m_abortFlag)
 				{
@@ -175,7 +165,8 @@ void FileAnalyzer::run()
 				MessageBeep(MB_ICONERROR);
 				m_bAborted = true;
 			}
-			else
+			
+			if(!m_bAborted)
 			{
 				if(int count = AnalyzeTask::getAdditionalFiles(m_inputFiles))
 				{

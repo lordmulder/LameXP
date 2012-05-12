@@ -54,7 +54,7 @@ public:
 	static unsigned int filesCueSheet(void);
 
 	//Wait till the next running thread terminates
-	static bool waitForOneThread(unsigned long timeout);
+	static bool waitForOneThread(void);
 
 signals:
 	void fileSelected(const QString &fileName);
@@ -111,7 +111,7 @@ private:
 	static unsigned int s_filesDenied;
 	static unsigned int s_filesDummyCDDA;
 	static unsigned int s_filesCueSheet;
-	static QStringList s_recentlyAdded;
+	static QSet<QString> s_recentlyAdded;
 	static QStringList s_additionalFiles;
 	
 	static unsigned __int64 makeThreadIdx(void);

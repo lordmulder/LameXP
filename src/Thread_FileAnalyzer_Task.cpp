@@ -56,7 +56,11 @@ unsigned int AnalyzeTask::s_filesDenied;
 unsigned int AnalyzeTask::s_filesDummyCDDA;
 unsigned int AnalyzeTask::s_filesCueSheet;
 QStringList AnalyzeTask::s_additionalFiles;
-QStringList AnalyzeTask::s_recentlyAdded;
+QSet<QString> AnalyzeTask::s_recentlyAdded;
+
+/*constants*/
+const int WAITCOND_TIMEOUT = 2500;
+const int MAX_RETRIES = 60000 / WAITCOND_TIMEOUT;
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -126,6 +130,7 @@ void AnalyzeTask::run_ex(void)
 	}
 	if(fileType == fileTypeSkip)
 	{
+		waitForPreviousThreads();
 		qWarning("File was recently added, skipping!");
 		return;
 	}
@@ -133,6 +138,8 @@ void AnalyzeTask::run_ex(void)
 	{
 		QWriteLocker lock(&s_lock);
 		s_filesDenied++;
+		lock.unlock();
+		waitForPreviousThreads();
 		qWarning("Cannot access file for reading, skipping!");
 		return;
 	}
@@ -140,10 +147,13 @@ void AnalyzeTask::run_ex(void)
 	{
 		QWriteLocker lock(&s_lock);
 		s_filesDummyCDDA++;
+		lock.unlock();
+		waitForPreviousThreads();
 		qWarning("Dummy CDDA file detected, skipping!");
 		return;
 	}
-		
+
+	//Handle files with *incomplete* meida info
 	if(file.fileName().isEmpty() || file.formatContainerType().isEmpty() || file.formatAudioType().isEmpty())
 	{
 		QStringList fileList;
@@ -167,9 +177,8 @@ void AnalyzeTask::run_ex(void)
 			{
 				QWriteLocker lock(&s_lock);
 				s_filesAccepted++;
-				s_recentlyAdded.append(file.filePath());
+				s_recentlyAdded.insert(file.filePath().toLower());
 				lock.unlock();
-
 				waitForPreviousThreads();
 				emit fileAnalyzed(file);
 			}
@@ -186,14 +195,15 @@ void AnalyzeTask::run_ex(void)
 			qDebug("Rejected file of unknown type: %s", file.filePath().toUtf8().constData());
 			s_filesRejected++;
 		}
+		waitForPreviousThreads();
 		return;
 	}
 
+	//Emit the file now!
 	QWriteLocker lock(&s_lock);
 	s_filesAccepted++;
-	s_recentlyAdded.append(file.filePath());
+	s_recentlyAdded.insert(file.filePath().toLower());
 	lock.unlock();
-
 	waitForPreviousThreads();
 	emit fileAnalyzed(file);
 }
@@ -208,7 +218,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 	AudioFileModel audioFile(filePath);
 
 	QReadLocker readLock(&s_lock);
-	if(s_recentlyAdded.contains(filePath, Qt::CaseInsensitive))
+	if(s_recentlyAdded.contains(filePath.toLower()))
 	{
 		*type = fileTypeSkip;
 		return audioFile;
@@ -726,23 +736,27 @@ void AnalyzeTask::waitForPreviousThreads(void)
 	//This function will block until all threads with a *lower* index have terminated.
 	//Required to make sure that the files will be added in the "correct" order!
 
-	for(int i = 0; i < 64; i++) 
+	int retryCount = 0;
+	
+	while(retryCount < MAX_RETRIES) 
 	{
 		s_waitMutex.lock();
 
 		if((s_threadIdx_finished >= m_threadIdx) || *m_abortFlag)
 		{
 			s_waitMutex.unlock();
-			break;
+			return;
 		}
 
-		if(!s_waitCond.wait(&s_waitMutex, 1250))
+		if(!s_waitCond.wait(&s_waitMutex, WAITCOND_TIMEOUT))
 		{
-			qWarning("FileAnalyzerTask: Timeout, retrying!");
+			retryCount++;
 		}
 
 		s_waitMutex.unlock();
 	}
+
+	qWarning("AnalyzeTask Timeout, will proceed anyway !!!");
 }
 
 ////////////////////////////////////////////////////////////
@@ -797,12 +811,12 @@ int AnalyzeTask::getAdditionalFiles(QStringList &fileList)
 	return 0;
 }
 
-bool AnalyzeTask::waitForOneThread(unsigned long timeout)
+bool AnalyzeTask::waitForOneThread(void)
 {
 	bool ret = false;
 
 	s_waitMutex.lock();
-	ret = s_waitCond.wait(&s_waitMutex, timeout);
+	ret = s_waitCond.wait(&s_waitMutex, WAITCOND_TIMEOUT);
 	s_waitMutex.unlock();
 
 	return ret;
@@ -825,6 +839,7 @@ void AnalyzeTask::reset(void)
 	s_threadIdx_finished = 0;
 	s_waitMutex.unlock();
 }
+
 ////////////////////////////////////////////////////////////
 // EVENTS
 ////////////////////////////////////////////////////////////

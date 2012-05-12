@@ -43,7 +43,7 @@
 WorkingBanner::WorkingBanner(QWidget *parent)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
-	m_progressMax(0), m_progressVal(0), m_metrics(NULL)
+	m_progressMax(0), m_progressVal(0), m_progressInt(0), m_metrics(NULL)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
@@ -226,25 +226,41 @@ void WorkingBanner::setText(const QString &text)
 		}
 		labelStatus->setText(choppedText);
 	}
-	/*
 	if(this->isVisible())
 	{
-		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+		labelStatus->repaint();
 	}
-	*/
 }
 
 void WorkingBanner::setProgressMax(unsigned int max)
 {
 	m_progressMax = max;
+	updateProgress();
 }
 
 void WorkingBanner::setProgressVal(unsigned int val)
 {
 	m_progressVal = val;
+	updateProgress();
+}
+
+////////////////////////////////////////////////////////////
+// Private
+////////////////////////////////////////////////////////////
+
+void WorkingBanner::updateProgress(void)
+{
 	if(m_progressMax > 0)
 	{
-		int progress = qRound(qBound(0.0, static_cast<double>(m_progressVal) / static_cast<double>(m_progressMax), 1.0) * 100.0);
-		m_progress->setText(QString::number(progress));
+		int newProgress = qRound(qBound(0.0, static_cast<double>(m_progressVal) / static_cast<double>(m_progressMax), 1.0) * 100.0);
+		if(m_progressInt != newProgress)
+		{
+			m_progressInt = newProgress;
+			m_progress->setText(QString::number(m_progressInt));
+			if(this->isVisible())
+			{
+				labelStatus->repaint();
+			}
+		}
 	}
 }
