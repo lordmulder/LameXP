@@ -358,6 +358,12 @@
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_Task.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Thread_FileAnalyzer_ST.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_ST.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -660,6 +666,9 @@
       <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
     <CustomBuild Include="src\Thread_FileAnalyzer_Task.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_FileAnalyzer_ST.h">
       <Filter>Header Files\Threads</Filter>
     </CustomBuild>
   </ItemGroup>

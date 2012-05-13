@@ -31,6 +31,7 @@
 #include "Dialog_DropBox.h"
 #include "Dialog_CueImport.h"
 #include "Thread_FileAnalyzer.h"
+#include "Thread_FileAnalyzer_ST.h"
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
 #include "Model_Settings.h"
@@ -515,6 +516,10 @@ void MainWindow::addFiles(const QStringList &files)
 
 	tabWidget->setCurrentIndex(0);
 
+	int timeMT = 0, timeST = 0;
+
+	//--MT--
+
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
 	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(analyzer, SIGNAL(progressValChanged(unsigned int)), m_banner, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
@@ -525,12 +530,43 @@ void MainWindow::addFiles(const QStringList &files)
 	try
 	{
 		m_fileListModel->setBlockUpdates(true);
+		QTime startTime = QTime::currentTime();
 		m_banner->show(tr("Adding file(s), please wait..."), analyzer);
+		timeMT = startTime.secsTo(QTime::currentTime());
 	}
 	catch(...)
 	{
 		/* ignore any exceptions that may occur */
 	}
+
+	//--ST--
+
+	FileAnalyzer_ST *analyzerST = new FileAnalyzer_ST(files);
+	connect(analyzerST, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
+	connect(analyzerST, SIGNAL(progressValChanged(unsigned int)), m_banner, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
+	connect(analyzerST, SIGNAL(progressMaxChanged(unsigned int)), m_banner, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
+	connect(analyzerST, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
+	connect(m_banner, SIGNAL(userAbort()), analyzerST, SLOT(abortProcess()), Qt::DirectConnection);
+
+	try
+	{
+		m_fileListModel->setBlockUpdates(true);
+		QTime startTime = QTime::currentTime();
+		m_banner->show(tr("Adding file(s), please wait..."), analyzerST);
+		timeST = startTime.secsTo(QTime::currentTime());
+	}
+	catch(...)
+	{
+		/* ignore any exceptions that may occur */
+	}
+
+	//------
+
+	double speedUp = static_cast<double>(timeST) / static_cast<double>(timeMT);
+	QMessageBox::information(this, "Speed Up", QString().sprintf("Announcement: The new multi-threaded file analyzer is %.1fx faster !!!", speedUp), QMessageBox::Ok);
+	qWarning("ST: %d, MT: %d", timeST, timeMT);
+
+	//------
 
 	m_fileListModel->setBlockUpdates(false);
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -557,6 +593,7 @@ void MainWindow::addFiles(const QStringList &files)
 	}
 
 	LAMEXP_DELETE(analyzer);
+	LAMEXP_DELETE(analyzerST);
 	m_banner->close();
 }
 

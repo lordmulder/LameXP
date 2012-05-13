@@ -19,13 +19,14 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
+// --------------------------------------------------------------------
+// !!! THIS IS THE OLD SINGLE-THREADED VERSION OF THE FILE ANALYZER !!!
+// --------------------------------------------------------------------
+
 #pragma once
 
-#include <QRunnable>
-#include <QReadWriteLock>
-#include <QWaitCondition>
+#include <QThread>
 #include <QStringList>
-#include <QMutex>
 
 class AudioFileModel;
 class QFile;
@@ -37,34 +38,27 @@ class LockedFile;
 // Splash Thread
 ////////////////////////////////////////////////////////////
 
-class AnalyzeTask: public QObject, public QRunnable
+class FileAnalyzer_ST: public QThread
 {
 	Q_OBJECT
 
 public:
-	AnalyzeTask(const QString &inputFile, const QString &templateFile, volatile bool *abortFlag);
-	~AnalyzeTask(void);
-	
-	static void reset(void);
-	static int getAdditionalFiles(QStringList &fileList);
-	static unsigned int filesAccepted(void);
-	static unsigned int filesRejected(void);
-	static unsigned int filesDenied(void);
-	static unsigned int filesDummyCDDA(void);
-	static unsigned int filesCueSheet(void);
-
-	//Wait till the next running thread terminates
-	static bool waitForOneThread(void);
+	FileAnalyzer_ST(const QStringList &inputFiles);
+	~FileAnalyzer_ST(void);
+	void run();
+	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
+	unsigned int filesAccepted(void);
+	unsigned int filesRejected(void);
+	unsigned int filesDenied(void);
+	unsigned int filesDummyCDDA(void);
+	unsigned int filesCueSheet(void);
 
 signals:
 	void fileSelected(const QString &fileName);
 	void fileAnalyzed(const AudioFileModel &file);
-	void progressValChanged(unsigned int);
-	void progressMaxChanged(unsigned int);
 
-protected:
-	void run(void);
-	void run_ex(void);
+public slots:
+	void abortProcess(void) { m_abortFlag = true; }
 
 private:
 	enum cover_t
@@ -89,30 +83,25 @@ private:
 	bool checkFile_CDDA(QFile &file);
 	void retrieveCover(AudioFileModel &audioFile, cover_t coverType, const QByteArray &coverData);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
-	void waitForPreviousThreads(void);
-
-	const unsigned __int64 m_threadIdx;
+	bool createTemplate(void);
 
 	const QString m_mediaInfoBin;
 	const QString m_avs2wavBin;
-	const QString m_templateFile;
-	const QString m_inputFile;
-	
-	volatile bool *m_abortFlag;
 
-	static QMutex s_waitMutex;
-	static QWaitCondition s_waitCond;
-	static QSet<unsigned int> s_threadIdx_running;
-	static unsigned int s_threadIdx_next;
+	QStringList m_inputFiles;
+	QStringList m_recentlyAdded;
+	unsigned int m_filesAccepted;
+	unsigned int m_filesRejected;
+	unsigned int m_filesDenied;
+	unsigned int m_filesDummyCDDA;
+	unsigned int m_filesCueSheet;
+	LockedFile *m_templateFile;
 	
-	static QReadWriteLock s_lock;
-	static unsigned int s_filesAccepted;
-	static unsigned int s_filesRejected;
-	static unsigned int s_filesDenied;
-	static unsigned int s_filesDummyCDDA;
-	static unsigned int s_filesCueSheet;
-	static QSet<QString> s_recentlyAdded;
-	static QStringList s_additionalFiles;
-	
-	static unsigned __int64 makeThreadIdx(void);
+	volatile bool m_abortFlag;
+
+	static const char *g_tags_gen[];
+	static const char *g_tags_aud[];
+
+	bool m_bAborted;
+	bool m_bSuccess;
 };

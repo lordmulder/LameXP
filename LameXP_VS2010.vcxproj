@@ -448,6 +448,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Thread_CueSplitter.cpp" />
     <ClCompile Include="src\Thread_DiskObserver.cpp" />
     <ClCompile Include="src\Thread_FileAnalyzer.cpp" />
+    <ClCompile Include="src\Thread_FileAnalyzer_ST.cpp" />
     <ClCompile Include="src\Thread_FileAnalyzer_Task.cpp" />
     <ClCompile Include="src\Thread_Initialization.cpp" />
     <ClCompile Include="src\Thread_MessageHandler.cpp" />
@@ -490,6 +491,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="tmp\MOC_Thread_CueSplitter.cpp" />
     <ClCompile Include="tmp\MOC_Thread_DiskObserver.cpp" />
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer.cpp" />
+    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_ST.cpp" />
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_Task.cpp" />
     <ClCompile Include="tmp\MOC_Thread_Initialization.cpp" />
     <ClCompile Include="tmp\MOC_Thread_MessageHandler.cpp" />
@@ -665,6 +667,23 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="src\Thread_FileAnalyzer_Task.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_FileAnalyzer_ST.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
@@ -1234,41 +1253,35 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <CustomBuild Include="src\Thread_Initialization.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">"$(QTDIR5)\qtbase\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">"$(QTDIR5)\qtbase\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"
-</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="src\Thread_MessageHandler.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">"$(QTDIR5)\qtbase\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">"$(QTDIR5)\qtbase\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"
-</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="src\Thread_MessageProducer.h">

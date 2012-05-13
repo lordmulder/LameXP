@@ -100,6 +100,8 @@ WorkingBanner::~WorkingBanner(void)
 void WorkingBanner::show(const QString &text)
 {
 	m_canClose = false;
+	m_progressInt = -1;
+
 	QDialog::show();
 	setFixedSize(size());
 	setText(text);
