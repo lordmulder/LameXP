@@ -536,6 +536,7 @@ void MainWindow::addFiles(const QStringList &files)
 	{
 		/* ignore any exceptions that may occur */
 	}
+
 	//--MT--
 
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
