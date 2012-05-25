@@ -50,6 +50,7 @@ QMutex AnalyzeTask::s_waitMutex;
 QWaitCondition AnalyzeTask::s_waitCond;
 QSet<unsigned int> AnalyzeTask::s_threadIdx_running;
 unsigned int AnalyzeTask::s_threadIdx_next = 0;
+QSemaphore AnalyzeTask::s_semaphore(0);
 
 /* more static vars */
 QReadWriteLock AnalyzeTask::s_lock;
@@ -64,6 +65,7 @@ QSet<QString> AnalyzeTask::s_recentlyAdded;
 /*constants*/
 const int WAITCOND_TIMEOUT = 2500;
 const int MAX_RETRIES = 60000 / WAITCOND_TIMEOUT;
+const int MAX_QUEUE_SLOTS = 32;
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -86,6 +88,8 @@ AnalyzeTask::AnalyzeTask(const QString &inputFile, const QString &templateFile, 
 
 AnalyzeTask::~AnalyzeTask(void)
 {
+	s_semaphore.release();
+	
 	s_waitMutex.lock();
 	s_threadIdx_running.remove(m_threadIdx);
 	s_waitMutex.unlock();
@@ -817,13 +821,15 @@ int AnalyzeTask::getAdditionalFiles(QStringList &fileList)
 	return 0;
 }
 
-bool AnalyzeTask::waitForOneThread(void)
+bool AnalyzeTask::waitForFreeSlot(volatile bool *abortFlag)
 {
 	bool ret = false;
 
-	s_waitMutex.lock();
-	ret = s_waitCond.wait(&s_waitMutex, WAITCOND_TIMEOUT);
-	s_waitMutex.unlock();
+	for(int i = 0; i < MAX_RETRIES; i++)
+	{
+		ret = s_semaphore.tryAcquire(1, WAITCOND_TIMEOUT);
+		if(ret || (*abortFlag)) break;
+	}
 
 	return ret;
 }
@@ -844,6 +850,12 @@ void AnalyzeTask::reset(void)
 	s_threadIdx_next = 0;
 	s_threadIdx_running.clear();
 	s_waitMutex.unlock();
+
+	int freeSlots = s_semaphore.available();
+	if(freeSlots < MAX_QUEUE_SLOTS)
+	{
+		s_semaphore.release(MAX_QUEUE_SLOTS - freeSlots);
+	}
 }
 
 ////////////////////////////////////////////////////////////

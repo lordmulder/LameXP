@@ -7,6 +7,7 @@ set "VER_LAMEXP_MINOR_LO="
 set "VER_LAMEXP_BUILD="
 set "VER_LAMEXP_TYPE="
 set "VER_LAMEXP_PATCH="
+set "VER_LAMEXP_BASENAME="
 REM ------------------------------------------
 for /f "tokens=2,*" %%s in (%~dp0\..\..\src\Config.h) do (
 	if "%%s"=="VER_LAMEXP_MAJOR" set "VER_LAMEXP_MAJOR=%%~t"
@@ -24,6 +25,9 @@ if "%VER_LAMEXP_MINOR_LO%"=="" GOTO:EOF
 if "%VER_LAMEXP_BUILD%"=="" GOTO:EOF
 if "%VER_LAMEXP_TYPE%"=="" GOTO:EOF
 if "%VER_LAMEXP_PATCH%"=="" GOTO:EOF
+REM ------------------------------------------
+set "VER_LAMEXP_BASENAME=LameXP"
+if not "%VER_LAMEXP_TYPE%" == "Final" set "VER_LAMEXP_BASENAME=LameXP-PRERELEASE"
 REM ------------------------------------------
 echo LameXP Version:
 echo %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%, Build #%VER_LAMEXP_BUILD% (%VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH%)

@@ -108,6 +108,8 @@ const char *FileAnalyzer::g_tags_aud[] =
 
 void FileAnalyzer::run()
 {
+	qWarning("--- FileAnalyzer::run() ---");
+	
 	m_abortFlag = false;
 
 	m_bAborted = false;
@@ -139,40 +141,34 @@ void FileAnalyzer::run()
 	{
 		while(!(m_inputFiles.isEmpty() || m_bAborted))
 		{
-			const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
-
-			AnalyzeTask *task = new AnalyzeTask(currentFile, m_templateFile->filePath(), &m_abortFlag);
-			connect(task, SIGNAL(fileSelected(QString)), this, SIGNAL(fileSelected(QString)), Qt::DirectConnection);
-			connect(task, SIGNAL(progressValChanged(unsigned int)), this, SIGNAL(progressValChanged(unsigned int)), Qt::DirectConnection);
-			connect(task, SIGNAL(progressMaxChanged(unsigned int)), this, SIGNAL(progressMaxChanged(unsigned int)), Qt::DirectConnection);
-			connect(task, SIGNAL(fileAnalyzed(AudioFileModel)), this, SIGNAL(fileAnalyzed(AudioFileModel)), Qt::DirectConnection);
-
-			while(!pool->tryStart(task))
+			if(!AnalyzeTask::waitForFreeSlot(&m_abortFlag))
 			{
-				AnalyzeTask::waitForOneThread();
-				
-				if(m_abortFlag)
-				{
-					LAMEXP_DELETE(task);
-					break;
-				}
-
-				QThread::yieldCurrentThread();
+				qWarning("Timeout in AnalyzeTask::waitForFreeSlot() !!!");
 			}
 
 			if(m_abortFlag)
 			{
 				MessageBeep(MB_ICONERROR);
 				m_bAborted = true;
+				break;
 			}
 			
 			if(!m_bAborted)
 			{
+				const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
+
+				AnalyzeTask *task = new AnalyzeTask(currentFile, m_templateFile->filePath(), &m_abortFlag);
+				connect(task, SIGNAL(fileSelected(QString)), this, SIGNAL(fileSelected(QString)), Qt::DirectConnection);
+				connect(task, SIGNAL(progressValChanged(unsigned int)), this, SIGNAL(progressValChanged(unsigned int)), Qt::DirectConnection);
+				connect(task, SIGNAL(progressMaxChanged(unsigned int)), this, SIGNAL(progressMaxChanged(unsigned int)), Qt::DirectConnection);
+				connect(task, SIGNAL(fileAnalyzed(AudioFileModel)), this, SIGNAL(fileAnalyzed(AudioFileModel)), Qt::DirectConnection);
+
+				pool->start(task);
+
 				if(int count = AnalyzeTask::getAdditionalFiles(m_inputFiles))
 				{
 					emit progressMaxChanged(nFiles += count);
 				}
-				QThread::msleep(8);
 			}
 		}
 

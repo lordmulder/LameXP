@@ -72,10 +72,10 @@ if not "%LAMEXP_ERROR%"=="0" (
 	GOTO:EOF
 )
 REM ------------------------------------------
-set "OUT_FILE=%OUT_PATH%\..\LameXP.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%"
+set "OUT_FILE=%OUT_PATH%\..\%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%"
 for /L %%n in (1, 1, 99) do (
-	if exist "!OUT_FILE!.exe" set "OUT_FILE=%OUT_PATH%\..\LameXP.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
-	if exist "!OUT_FILE!.zip" set "OUT_FILE=%OUT_PATH%\..\LameXP.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	if exist "!OUT_FILE!.exe" set "OUT_FILE=%OUT_PATH%\..\%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	if exist "!OUT_FILE!.zip" set "OUT_FILE=%OUT_PATH%\..\%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
 )
 REM ------------------------------------------
 REM :: DELETE OLD OUTPUT FILE ::

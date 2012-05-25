@@ -26,6 +26,7 @@
 #include <QWaitCondition>
 #include <QStringList>
 #include <QMutex>
+#include <QSemaphore>
 
 class AudioFileModel;
 class QFile;
@@ -53,8 +54,8 @@ public:
 	static unsigned int filesDummyCDDA(void);
 	static unsigned int filesCueSheet(void);
 
-	//Wait till the next running thread terminates
-	static bool waitForOneThread(void);
+	//Wait until there is a free slot in the queue
+	static bool waitForFreeSlot(volatile bool *abortFlag);
 
 signals:
 	void fileSelected(const QString &fileName);
@@ -105,6 +106,8 @@ private:
 	static QSet<unsigned int> s_threadIdx_running;
 	static unsigned int s_threadIdx_next;
 	
+	static QSemaphore s_semaphore;
+
 	static QReadWriteLock s_lock;
 	static unsigned int s_filesAccepted;
 	static unsigned int s_filesRejected;
