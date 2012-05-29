@@ -372,7 +372,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="110"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="207"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="211"/>
         <source>Failed to load the Cue Sheet file:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -383,9 +383,9 @@
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="111"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="208"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="395"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="212"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,129 +410,134 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="189"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="180"/>
+        <source>New Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_CueImport.cpp" line="193"/>
         <source>An unknown error has occured!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="194"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="198"/>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="197"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="201"/>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="200"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="204"/>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="200"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="204"/>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="203"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="207"/>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="223"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="227"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="224"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="228"/>
         <source>Unknown Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="239"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="243"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="247"/>
         <source>Choose Output Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="269"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="276"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="273"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
         <source>LameXP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="269"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="273"/>
         <source>Error: The selected output directory could not be created!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="276"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
         <source>Error: The selected output directory is not writable!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="290"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="290"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="290"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="360"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
         <source>Analyzing file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="365"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Analysis Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="365"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="365"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Continue Anyway</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="365"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="390"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="394"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="395"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
         <source>Process was aborted by the user after %1 track(s)!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="407"/>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="404"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="408"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3095,105 +3100,105 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="266"/>
-        <location filename="../../src/Dialog_Update.cpp" line="539"/>
+        <location filename="../../src/Dialog_Update.cpp" line="267"/>
+        <location filename="../../src/Dialog_Update.cpp" line="540"/>
         <source>Build</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="267"/>
+        <location filename="../../src/Dialog_Update.cpp" line="268"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="375"/>
+        <location filename="../../src/Dialog_Update.cpp" line="376"/>
         <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="395"/>
-        <location filename="../../src/Dialog_Update.cpp" line="983"/>
+        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="984"/>
         <source>It appears that the computer currently is offline!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="398"/>
-        <location filename="../../src/Dialog_Update.cpp" line="986"/>
+        <location filename="../../src/Dialog_Update.cpp" line="399"/>
+        <location filename="../../src/Dialog_Update.cpp" line="987"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="456"/>
+        <location filename="../../src/Dialog_Update.cpp" line="457"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="459"/>
+        <location filename="../../src/Dialog_Update.cpp" line="460"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="473"/>
+        <location filename="../../src/Dialog_Update.cpp" line="474"/>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="524"/>
+        <location filename="../../src/Dialog_Update.cpp" line="525"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="529"/>
+        <location filename="../../src/Dialog_Update.cpp" line="530"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="541"/>
+        <location filename="../../src/Dialog_Update.cpp" line="542"/>
         <source>More information available at:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="547"/>
+        <location filename="../../src/Dialog_Update.cpp" line="548"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="549"/>
+        <location filename="../../src/Dialog_Update.cpp" line="550"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="558"/>
+        <location filename="../../src/Dialog_Update.cpp" line="559"/>
         <source>No new updates available at this time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="560"/>
+        <location filename="../../src/Dialog_Update.cpp" line="561"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="569"/>
+        <location filename="../../src/Dialog_Update.cpp" line="570"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="571"/>
+        <location filename="../../src/Dialog_Update.cpp" line="572"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="864"/>
+        <location filename="../../src/Dialog_Update.cpp" line="865"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="909"/>
+        <location filename="../../src/Dialog_Update.cpp" line="910"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="917"/>
+        <location filename="../../src/Dialog_Update.cpp" line="918"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished"></translation>
     </message>

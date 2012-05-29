@@ -413,6 +413,10 @@
         <source>Unknown Album</source>
         <translation>Unbekanntes Album</translation>
     </message>
+    <message>
+        <source>New Folder</source>
+        <translation>Neuer Ordner</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

@@ -61,6 +61,7 @@ static const char *update_mirrors_prim[] =
 	"http://mulder.bplaced.net/",
 	"http://lamexp.sourceforge.net/",
 	"http://free.pages.at/borschdfresser/",
+	"http://lordmulder.github.com/LameXP/",
 	"http://www.tricksoft.de/",
 	NULL
 };

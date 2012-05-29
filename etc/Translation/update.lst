@@ -68,6 +68,8 @@
 ..\..\src\Thread_CueSplitter.cpp 
 ..\..\src\Thread_DiskObserver.cpp 
 ..\..\src\Thread_FileAnalyzer.cpp 
+..\..\src\Thread_FileAnalyzer_ST.cpp 
+..\..\src\Thread_FileAnalyzer_Task.cpp 
 ..\..\src\Thread_Initialization.cpp 
 ..\..\src\Thread_MessageHandler.cpp 
 ..\..\src\Thread_MessageProducer.cpp 
@@ -139,6 +141,8 @@
 ..\..\src\Thread_CueSplitter.h 
 ..\..\src\Thread_DiskObserver.h 
 ..\..\src\Thread_FileAnalyzer.h 
+..\..\src\Thread_FileAnalyzer_ST.h 
+..\..\src\Thread_FileAnalyzer_Task.h 
 ..\..\src\Thread_Initialization.h 
 ..\..\src\Thread_MessageHandler.h 
 ..\..\src\Thread_MessageProducer.h 
