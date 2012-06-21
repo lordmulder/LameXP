@@ -49,7 +49,7 @@ static int lamexp_main(int argc, char* argv[])
 	int iResult = -1;
 	int iShutdown = shutdownFlag_None;
 	bool bAccepted = true;
-	
+
 	//Init console
 	lamexp_init_console(argc, argv);
 
@@ -71,6 +71,14 @@ static int lamexp_main(int argc, char* argv[])
 		qWarning("---------------------------------------------------------\n"); 
 	}
 	
+	//Enumerate CLI arguments
+	qDebug("Command-Line Arguments:");
+	for(int i = 0; i < argc; i++)
+	{
+		qDebug("argv[%d]=%s", i, argv[i]);
+	}
+	qDebug("");
+
 	//Detect CPU capabilities
 	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(argc, argv);
 	qDebug("   CPU vendor id  :  %s (Intel: %s)", cpuFeatures.vendor, LAMEXP_BOOL(cpuFeatures.intel));

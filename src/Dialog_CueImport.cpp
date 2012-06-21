@@ -180,7 +180,7 @@ int CueImportDialog::exec(void)
 	if(baseName.isEmpty()) baseName = tr("New Folder");
 
 	m_outputDir = QString("%1/%2").arg(cueFileInfo.canonicalPath(), baseName);
-	for(int n = 2; QDir(m_outputDir).exists(); n++)
+	for(int n = 2; QDir(m_outputDir).exists() || QFileInfo(m_outputDir).exists(); n++)
 	{
 		m_outputDir = QString("%1/%2 (%3)").arg(cueFileInfo.canonicalPath(), baseName, QString::number(n));
 	}

@@ -1131,6 +1131,7 @@ void MainWindow::windowShown(void)
 	bool firstRun = false;
 	for(int i = 0; i < arguments.count(); i++)
 	{
+		/*QMessageBox::information(this, QString::number(i), arguments[i]);*/
 		if(!arguments[i].compare("--first-run", Qt::CaseInsensitive)) firstRun = true;
 	}
 
