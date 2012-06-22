@@ -50,8 +50,11 @@ static int lamexp_main(int argc, char* argv[])
 	int iShutdown = shutdownFlag_None;
 	bool bAccepted = true;
 
+	//Get CLI arguments
+	const QStringList &arguments = lamexp_arguments();
+
 	//Init console
-	lamexp_init_console(argc, argv);
+	lamexp_init_console(arguments);
 
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End v%d.%02d %s (Build #%03d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build());
@@ -73,9 +76,9 @@ static int lamexp_main(int argc, char* argv[])
 	
 	//Enumerate CLI arguments
 	qDebug("Command-Line Arguments:");
-	for(int i = 0; i < argc; i++)
+	for(int i = 0; i < arguments.count(); i++)
 	{
-		qDebug("argv[%d]=%s", i, argv[i]);
+		qDebug("argv[%d]=%s", i, arguments.at(i).toUtf8().constData());
 	}
 	qDebug("");
 

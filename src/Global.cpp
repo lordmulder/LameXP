@@ -63,6 +63,9 @@
 #include <time.h>
 #include <process.h>
 
+//Shell API
+#include <Shellapi.h>
+
 //COM includes
 #include <Objbase.h>
 #include <PowrProf.h>
@@ -257,6 +260,9 @@ static const DWORD g_main_thread_id = GetCurrentThreadId();
 
 //Log file
 static FILE *g_lamexp_log_file = NULL;
+
+//CLI Arguments
+static QStringList *g_lamexp_argv = NULL;
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
@@ -536,7 +542,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 /*
  * Initialize the console
  */
-void lamexp_init_console(int argc, char* argv[])
+void lamexp_init_console(const QStringList &argv)
 {
 	bool enableConsole = lamexp_version_demo();
 
@@ -561,13 +567,13 @@ void lamexp_init_console(int argc, char* argv[])
 
 	if(!LAMEXP_DEBUG)
 	{
-		for(int i = 0; i < argc; i++)
+		for(int i = 0; i < argv.count(); i++)
 		{
-			if(!_stricmp(argv[i], "--console"))
+			if(!argv.at(i).compare("--console", Qt::CaseInsensitive))
 			{
 				enableConsole = true;
 			}
-			else if(!_stricmp(argv[i], "--no-console"))
+			else if(!argv.at(i).compare("--no-console", Qt::CaseInsensitive))
 			{
 				enableConsole = false;
 			}
@@ -1683,6 +1689,31 @@ bool lamexp_install_translator_from_file(const QString &qmFile)
 	return success;
 }
 
+const QStringList &lamexp_arguments(void)
+{
+	if(!g_lamexp_argv)
+	{
+		g_lamexp_argv = new QStringList();
+		int nArgs = 0;
+		LPWSTR *szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
+
+		if(NULL != szArglist)
+		{
+			for(int i = 0; i < nArgs; i++)
+			{
+				*g_lamexp_argv << WCHAR2QSTR(szArglist[i]);
+			}
+			LocalFree(szArglist);
+		}
+		else
+		{
+			qWarning("CommandLineToArgvW failed !!!");
+		}
+	}
+
+	return *g_lamexp_argv;
+}
+
 /*
  * Locate known folder on local system
  */
@@ -2100,6 +2131,9 @@ void lamexp_finalization(void)
 		fclose(g_lamexp_log_file);
 		g_lamexp_log_file = NULL;
 	}
+
+	//Free CLI Arguments
+	LAMEXP_DELETE(g_lamexp_argv);
 }
 
 /*

@@ -46,7 +46,7 @@ void MessageProducerThread::run()
 {
 	setTerminationEnabled(true);
 	bool bSentFiles = false;
-	QStringList arguments = QApplication::arguments();
+	const QStringList &arguments = lamexp_arguments(); //QApplication::arguments();
 
 	for(int i = 0; i < arguments.count(); i++)
 	{

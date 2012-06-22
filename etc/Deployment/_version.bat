@@ -27,7 +27,8 @@ if "%VER_LAMEXP_TYPE%"=="" GOTO:EOF
 if "%VER_LAMEXP_PATCH%"=="" GOTO:EOF
 REM ------------------------------------------
 set "VER_LAMEXP_BASENAME=LameXP"
-if not "%VER_LAMEXP_TYPE%" == "Final" set "VER_LAMEXP_BASENAME=LameXP-PRERELEASE"
+if "%VER_LAMEXP_TYPE%" == "Alpha" set "VER_LAMEXP_BASENAME=LameXP-ALPHA"
+if "%VER_LAMEXP_TYPE%" == "Beta" set "VER_LAMEXP_BASENAME=LameXP-BETA"
 REM ------------------------------------------
 echo LameXP Version:
 echo %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%, Build #%VER_LAMEXP_BUILD% (%VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH%)

@@ -1125,7 +1125,7 @@ bool MainWindow::winEvent(MSG *message, long *result)
  */
 void MainWindow::windowShown(void)
 {
-	QStringList arguments = QApplication::arguments();
+	const QStringList &arguments = lamexp_arguments(); //QApplication::arguments();
 
 	//First run?
 	bool firstRun = false;
