@@ -407,7 +407,7 @@ void ProcessingDialog::initEncoding(void)
 	unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
 	if(maximumInstances < 1)
 	{
-		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features();
+		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(lamexp_arguments());
 		maximumInstances = cores2instances(qBound(1, cpuFeatures.count, 64));
 	}
 

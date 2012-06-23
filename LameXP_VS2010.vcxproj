@@ -125,6 +125,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Message>Copy plugin DLL%27s</Message>
@@ -168,6 +169,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Message>Copy plugin DLL%27s</Message>
@@ -236,7 +238,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
-      <EntryPointSymbol>lamexp_crt_startup</EntryPointSymbol>
+      <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
       <MapFileName>
       </MapFileName>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
@@ -306,7 +308,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
-      <EntryPointSymbol>lamexp_crt_startup</EntryPointSymbol>
+      <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
       <GenerateMapFile>false</GenerateMapFile>
       <MapFileName>
       </MapFileName>
@@ -371,7 +373,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
-      <EntryPointSymbol>lamexp_crt_startup</EntryPointSymbol>
+      <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
       <GenerateMapFile>false</GenerateMapFile>
       <MapFileName>
       </MapFileName>

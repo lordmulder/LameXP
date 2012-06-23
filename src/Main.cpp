@@ -83,7 +83,7 @@ static int lamexp_main(int argc, char* argv[])
 	qDebug("");
 
 	//Detect CPU capabilities
-	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(argc, argv);
+	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(arguments);
 	qDebug("   CPU vendor id  :  %s (Intel: %s)", cpuFeatures.vendor, LAMEXP_BOOL(cpuFeatures.intel));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
 	qDebug("   CPU signature  :  Family: %d, Model: %d, Stepping: %d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
@@ -131,7 +131,7 @@ static int lamexp_main(int argc, char* argv[])
 	//Kill application?
 	for(int i = 0; i < argc; i++)
 	{
-		if(!_stricmp("--kill", argv[i]) || !_stricmp("--force-kill", argv[i]))
+		if(!arguments[i].compare("--kill", Qt::CaseInsensitive) || !arguments[i].compare("--force-kill", Qt::CaseInsensitive))
 		{
 			return 0;
 		}
@@ -281,19 +281,5 @@ int main(int argc, char* argv[])
 			FatalAppExit(0, L"Unhandeled structured exception error, application will exit!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// CRT initialization
-///////////////////////////////////////////////////////////////////////////////
-
-extern "C"
-{
-	int WinMainCRTStartup(void);
-
-	int lamexp_crt_startup(void)
-	{
-		return WinMainCRTStartup();
 	}
 }

@@ -625,7 +625,7 @@ void lamexp_init_console(const QStringList &argv)
 /*
  * Detect CPU features
  */
-lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
+lamexp_cpu_t lamexp_detect_cpu_features(const QStringList &argv)
 {
 	typedef BOOL (WINAPI *IsWow64ProcessFun)(__in HANDLE hProcess, __out PBOOL Wow64Process);
 	typedef VOID (WINAPI *GetNativeSystemInfoFun)(__out LPSYSTEM_INFO lpSystemInfo);
@@ -720,14 +720,14 @@ lamexp_cpu_t lamexp_detect_cpu_features(int argc, char **argv)
 	features.x64 = true;
 #endif
 
-	if((argv != NULL) && (argc > 0))
+	if(argv.count() > 0)
 	{
 		bool flag = false;
-		for(int i = 0; i < argc; i++)
+		for(int i = 0; i < argv.count(); i++)
 		{
-			if(!_stricmp("--force-cpu-no-64bit", argv[i])) { flag = true; features.x64 = false; }
-			if(!_stricmp("--force-cpu-no-sse", argv[i])) { flag = true; features.sse = features.sse2 = features.sse3 = features.ssse3 = false; }
-			if(!_stricmp("--force-cpu-no-intel", argv[i])) { flag = true; features.intel = false; }
+			if(!argv[i].compare("--force-cpu-no-64bit", Qt::CaseInsensitive)) { flag = true; features.x64 = false; }
+			if(!argv[i].compare("--force-cpu-no-sse", Qt::CaseInsensitive)) { flag = true; features.sse = features.sse2 = features.sse3 = features.ssse3 = false; }
+			if(!argv[i].compare("--force-cpu-no-intel", Qt::CaseInsensitive)) { flag = true; features.intel = false; }
 		}
 		if(flag) qWarning("CPU flags overwritten by user-defined parameters. Take care!\n");
 	}
@@ -804,7 +804,7 @@ static HANDLE lamexp_debug_thread_init(void)
 /*
  * Check for compatibility mode
  */
-static bool lamexp_check_compatibility_mode(const char *exportName, const char *executableName)
+static bool lamexp_check_compatibility_mode(const char *exportName, const QString &executableName)
 {
 	QLibrary kernel32("kernel32.dll");
 
@@ -813,7 +813,7 @@ static bool lamexp_check_compatibility_mode(const char *exportName, const char *
 		if(kernel32.resolve(exportName) != NULL)
 		{
 			qWarning("Function '%s' exported from 'kernel32.dll' -> Windows compatibility mode!", exportName);
-			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
+			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
 			return false;
 		}
 	}
@@ -1027,6 +1027,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 {
 	static bool qt_initialized = false;
 	typedef BOOL (WINAPI *SetDllDirectoryProc)(WCHAR *lpPathName);
+	const QStringList &arguments = lamexp_arguments();
 
 	//Don't initialized again, if done already
 	if(qt_initialized)
@@ -1044,10 +1045,21 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Extract executable name from argv[] array
-	char *executableName = argv[0];
-	while(char *temp = strpbrk(executableName, "\\/:?"))
+	QString executableName = QLatin1String("LameXP.exe");
+	if(arguments.count() > 0)
 	{
-		executableName = temp + 1;
+		static const char *delimiters = "\\/:?";
+		executableName = arguments[0].trimmed();
+		for(int i = 0; delimiters[i]; i++)
+		{
+			int temp = executableName.lastIndexOf(QChar(delimiters[i]));
+			if(temp >= 0) executableName = executableName.mid(temp + 1);
+		}
+		executableName = executableName.trimmed();
+		if(executableName.isEmpty())
+		{
+			executableName = QLatin1String("LameXP.exe");
+		}
 	}
 
 	//Check Qt version
@@ -1056,12 +1068,12 @@ bool lamexp_init_qt(int argc, char* argv[])
 	qDebug("Compiled with Qt v%s [%s], %s\n", QT_VERSION_STR, QT_PACKAGEDATE_STR, QT_BUILD_KEY);
 	if(_stricmp(qVersion(), QT_VERSION_STR))
 	{
-		qFatal("%s", QApplication::tr("Executable '%1' requires Qt v%2, but found Qt v%3.").arg(QString::fromLatin1(executableName), QString::fromLatin1(QT_VERSION_STR), QString::fromLatin1(qVersion())).toLatin1().constData());
+		qFatal("%s", QApplication::tr("Executable '%1' requires Qt v%2, but found Qt v%3.").arg(executableName, QString::fromLatin1(QT_VERSION_STR), QString::fromLatin1(qVersion())).toLatin1().constData());
 		return false;
 	}
 	if(QLibraryInfo::buildKey().compare(QString::fromLatin1(QT_BUILD_KEY), Qt::CaseInsensitive))
 	{
-		qFatal("%s", QApplication::tr("Executable '%1' was built for Qt '%2', but found Qt '%3'.").arg(QString::fromLatin1(executableName), QString::fromLatin1(QT_BUILD_KEY), QLibraryInfo::buildKey()).toLatin1().constData());
+		qFatal("%s", QApplication::tr("Executable '%1' was built for Qt '%2', but found Qt '%3'.").arg(executableName, QString::fromLatin1(QT_BUILD_KEY), QLibraryInfo::buildKey()).toLatin1().constData());
 		return false;
 	}
 #else
@@ -1074,7 +1086,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	{
 	case 0:
 	case QSysInfo::WV_NT:
-		qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(QString::fromLatin1(executableName)).toLatin1().constData());
+		qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(executableName).toLatin1().constData());
 		break;
 	case QSysInfo::WV_2000:
 		qDebug("Running on Windows 2000 (not officially supported!).\n");
@@ -2054,6 +2066,24 @@ QStringList lamexp_available_codepages(bool noAliases)
 	}
 
 	return codecList;
+}
+
+/*
+ * Application entry point (runs before static initializers)
+ */
+extern "C"
+{
+	int WinMainCRTStartup(void);
+	
+	int lamexp_entry_point(void)
+	{
+		if((!LAMEXP_DEBUG) && lamexp_check_for_debugger())
+		{
+			FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
+			TerminateProcess(GetCurrentProcess(), -1);
+		}
+		return WinMainCRTStartup();
+	}
 }
 
 /*
