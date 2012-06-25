@@ -158,9 +158,15 @@ void ProcessThread::processFile()
 			if(bSuccess)
 			{
 				sourceFile = tempFile;
-				handleMessage("\n-------------------------------\n");
 				m_audioFile.setFormatContainerType(QString::fromLatin1("Wave"));
 				m_audioFile.setFormatAudioType(QString::fromLatin1("PCM"));
+
+				if(QFileInfo(sourceFile).size() >= 4294967296i64)
+				{
+					handleMessage(tr("WARNING: Decoded file size exceeds 4 GB, problems might occur!\n"));
+				}
+
+				handleMessage("\n-------------------------------\n");
 			}
 		}
 		else

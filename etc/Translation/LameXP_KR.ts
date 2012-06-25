@@ -2173,6 +2173,11 @@
         <source>Analyzing</source>
         <translation type="unfinished">검토중</translation>
     </message>
+    <message>
+        <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>

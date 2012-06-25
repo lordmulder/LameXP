@@ -2174,6 +2174,11 @@
         <source>Analyzing</source>
         <translation>Аналізування</translation>
     </message>
+    <message>
+        <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>

@@ -2715,102 +2715,108 @@
         <translation>Hittas ej!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="168"/>
+        <location filename="../../src/Thread_Process.cpp" line="166"/>
+        <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Thread_Process.cpp" line="174"/>
         <source>The format of this file is NOT supported:</source>
         <translation>Det här filformatet saknar stöd i LameXP:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="168"/>
+        <location filename="../../src/Thread_Process.cpp" line="174"/>
         <source>Container Format:</source>
         <translation>Behållarformat:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="168"/>
+        <location filename="../../src/Thread_Process.cpp" line="174"/>
         <source>Audio Format:</source>
         <translation>Ljudformat:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="169"/>
+        <location filename="../../src/Thread_Process.cpp" line="175"/>
         <source>Unsupported!</source>
         <translation>Stöd saknas!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="247"/>
+        <location filename="../../src/Thread_Process.cpp" line="253"/>
         <source>Aborted!</source>
         <translation>Avbruten!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="247"/>
+        <location filename="../../src/Thread_Process.cpp" line="253"/>
         <source>Done.</source>
         <translation>Klar.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="247"/>
+        <location filename="../../src/Thread_Process.cpp" line="253"/>
         <source>Failed!</source>
         <translation>Misslyckades!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="264"/>
+        <location filename="../../src/Thread_Process.cpp" line="270"/>
         <source>Encoding</source>
         <translation>Kodar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="267"/>
+        <location filename="../../src/Thread_Process.cpp" line="273"/>
         <source>Analyzing</source>
         <translation>Analyserar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="270"/>
+        <location filename="../../src/Thread_Process.cpp" line="276"/>
         <source>Filtering</source>
         <translation>Filtrerar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="273"/>
+        <location filename="../../src/Thread_Process.cpp" line="279"/>
         <source>Decoding</source>
         <translation>Avkodar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="296"/>
+        <location filename="../../src/Thread_Process.cpp" line="302"/>
         <source>The source audio file could not be found:</source>
         <translation>Källfilen kan inte hittas:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="303"/>
+        <location filename="../../src/Thread_Process.cpp" line="309"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Källfilen kan inte öppnas för läsning:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="329"/>
+        <location filename="../../src/Thread_Process.cpp" line="335"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Målmappen finns inte och kan inte skapas:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="337"/>
+        <location filename="../../src/Thread_Process.cpp" line="343"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Målmappen är INTE skrivbar:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="347"/>
+        <location filename="../../src/Thread_Process.cpp" line="353"/>
         <source>Unknown File Name</source>
         <translation>Okänt filnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="349"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Unknown Title</source>
         <translation>Okänd titel</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="350"/>
+        <location filename="../../src/Thread_Process.cpp" line="356"/>
         <source>Unknown Artist</source>
         <translation>Okänd artist</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="351"/>
+        <location filename="../../src/Thread_Process.cpp" line="357"/>
         <source>Unknown Album</source>
         <translation>Okänt album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="353"/>
+        <location filename="../../src/Thread_Process.cpp" line="359"/>
         <source>Unknown Comment</source>
         <translation>Okänd kommentar</translation>
     </message>
