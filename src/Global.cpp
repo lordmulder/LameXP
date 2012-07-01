@@ -1706,6 +1706,7 @@ const QStringList &lamexp_arguments(void)
 	if(!g_lamexp_argv)
 	{
 		g_lamexp_argv = new QStringList();
+
 		int nArgs = 0;
 		LPWSTR *szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
 
@@ -1719,7 +1720,7 @@ const QStringList &lamexp_arguments(void)
 		}
 		else
 		{
-			qWarning("CommandLineToArgvW failed !!!");
+			qWarning("CommandLineToArgvW() has failed !!!");
 		}
 	}
 

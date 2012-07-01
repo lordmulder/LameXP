@@ -135,6 +135,11 @@ copy "%~dp0\..\..\doc\Changelog.html" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\Translate.html" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\Manual.html" "%TMP_PATH%"
 copy "%~dp0\..\..\doc\FAQ.html" "%TMP_PATH%"
+if not "%VER_LAMEXP_TYPE%" == "Final" (
+	if not "%VER_LAMEXP_TYPE%" == "Hotfix" (
+		copy "%~dp0\..\..\doc\PRE_RELEASE_INFO.txt" "%TMP_PATH%"
+	)
+)
 REM ------------------------------------------
 REM :: CREATE PACKAGES ::
 REM ------------------------------------------

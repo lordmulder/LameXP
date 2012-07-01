@@ -1,0 +1,10 @@
+LameXP Pre-Release Version
+--------------------------
+
+This pre-release version of LameXP is intended for testing and evaluation only.
+We recommend to *not* use this version for production. Use it at your own risk!
+
+Note: This "test" version of LameXP will expire 30 days after the release date.
+LameXP is free/libre software. The "stable" versions of LameXP do *not* expire!
+
+You have been warned ;-)
