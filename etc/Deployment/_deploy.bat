@@ -140,12 +140,19 @@ if not "%VER_LAMEXP_TYPE%" == "Final" (
 		copy "%~dp0\..\..\doc\PRE_RELEASE_INFO.txt" "%TMP_PATH%"
 	)
 )
+attrib +R "%TMP_PATH%\*.txt"
+attrib +R "%TMP_PATH%\*.html"
+attrib +R "%TMP_PATH%\*.exe"
 REM ------------------------------------------
 REM :: CREATE PACKAGES ::
 REM ------------------------------------------
 "%PATH_SEVENZ%\7z.exe" a -tzip -r "%OUT_FILE%.zip" "%TMP_PATH%\*"
 "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
 "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
+REM ------------------------------------------
+attrib -R "%TMP_PATH%\*.txt"
+attrib -R "%TMP_PATH%\*.html"
+attrib -R "%TMP_PATH%\*.exe"
 rd /S /Q "%TMP_PATH%"
 REM ------------------------------------------
 if not exist "%OUT_FILE%.zip" (

@@ -411,15 +411,16 @@ Section "!Install Files"
 	Delete "$INSTDIR\Changelog.htm"
 	Delete "$INSTDIR\Changelog.html"
 	Delete "$INSTDIR\Contributors.txt"
+	Delete "$INSTDIR\Copying.txt"
 	Delete "$INSTDIR\FAQ.html"
 	Delete "$INSTDIR\Howto.html"
 	Delete "$INSTDIR\LameEnc.sys"
 	Delete "$INSTDIR\LameXP.exe"
 	Delete "$INSTDIR\LameXP.exe.sig"
 	Delete "$INSTDIR\License.txt"
-	Delete "$INSTDIR\PRE_RELEASE_INFO.txt"
 	Delete "$INSTDIR\Readme.htm"
 	Delete "$INSTDIR\ReadMe.txt"
+	Delete "$INSTDIR\PRE_RELEASE_INFO.txt"
 	Delete "$INSTDIR\Settings.cfg"
 	Delete "$INSTDIR\Translate.html"
 	Delete "$INSTDIR\Uninstall.exe"
@@ -435,9 +436,9 @@ Section "!Install Files"
 		Abort "Could not delete old binary!"
 	${EndIf}
 	
-	File `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
-	File `${LAMEXP_SOURCE_PATH}\*.txt`
-	File `${LAMEXP_SOURCE_PATH}\*.html`
+	File /a `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
+	File /a `${LAMEXP_SOURCE_PATH}\*.txt`
+	File /a `${LAMEXP_SOURCE_PATH}\*.html`
 SectionEnd
 
 Section "-Write Uinstaller"
@@ -509,17 +510,21 @@ Section "Uninstall"
 	Delete /REBOOTOK "$INSTDIR\LameXP-Portable.exe"
 	Delete /REBOOTOK "$INSTDIR\LameXP.exe.sig"
 	Delete /REBOOTOK "$INSTDIR\LameXP*"
-	Delete /REBOOTOK "$INSTDIR\Uninstall.exe"
+	
 	Delete /REBOOTOK "$INSTDIR\Changelog.htm"
 	Delete /REBOOTOK "$INSTDIR\Changelog.html"
-	Delete /REBOOTOK "$INSTDIR\Translate.html"
+	Delete /REBOOTOK "$INSTDIR\Contributors.txt"
+	Delete /REBOOTOK "$INSTDIR\Copying.txt"
 	Delete /REBOOTOK "$INSTDIR\FAQ.html"
 	Delete /REBOOTOK "$INSTDIR\Howto.html"
-	Delete /REBOOTOK "$INSTDIR\Copying.txt"
+	Delete /REBOOTOK "$INSTDIR\LameEnc.sys"
 	Delete /REBOOTOK "$INSTDIR\License.txt"
-	Delete /REBOOTOK "$INSTDIR\Contributors.txt"
+	Delete /REBOOTOK "$INSTDIR\Readme.htm"
 	Delete /REBOOTOK "$INSTDIR\ReadMe.txt"
 	Delete /REBOOTOK "$INSTDIR\PRE_RELEASE_INFO.txt"
+	Delete /REBOOTOK "$INSTDIR\Settings.cfg"
+	Delete /REBOOTOK "$INSTDIR\Translate.html"
+	Delete /REBOOTOK "$INSTDIR\Uninstall.exe"
 
 	RMDir "$INSTDIR"
 
