@@ -8,3 +8,7 @@ Note: This "test" version of LameXP will expire 30 days after the release date.
 LameXP is free/libre software. The "stable" versions of LameXP do *not* expire!
 
 You have been warned ;-)
+
+
+The latest official (stable) release of LameXP can be found at:
+http://lamexp.sourceforge.net/
