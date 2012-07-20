@@ -682,18 +682,6 @@
         <translation>編碼器/格式</translation>
     </message>
     <message>
-        <source>Lame MP3</source>
-        <translation>Lame MP3</translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis</source>
-        <translation>Ogg Vorbis</translation>
-    </message>
-    <message>
-        <source>Wave (PCM)</source>
-        <translation>Wav (PCM)</translation>
-    </message>
-    <message>
         <source>FLAC</source>
         <translation>FLAC</translation>
     </message>
@@ -1458,10 +1446,6 @@
         <translation>LameXP 將 &lt;i&gt; 從今以后 &lt;/i&gt; 不檢查測試版更新.</translation>
     </message>
     <message>
-        <source>Aften A/52</source>
-        <translation>Aften A/52</translation>
-    </message>
-    <message>
         <source>Lame MP3:</source>
         <translation>Lame MP3:</translation>
     </message>
@@ -1686,10 +1670,6 @@
         <translation>收藏當前輸出文件夾</translation>
     </message>
     <message>
-        <source>MPEG-4 AAC</source>
-        <translation>MPEG-4 AAC</translation>
-    </message>
-    <message>
         <source>AAC Encoder-Options</source>
         <translation>AAC 編碼器-選項</translation>
     </message>
@@ -1752,10 +1732,6 @@
     <message>
         <source>Skipping update check this time, please be patient...</source>
         <translation>跳過檢查更新的時間,請耐心等待...</translation>
-    </message>
-    <message>
-        <source>DCA Enc</source>
-        <translation>DCA Enc</translation>
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
@@ -1856,6 +1832,34 @@
     <message>
         <source>Refresh Directory Outline</source>
         <translation>刷新輸出目錄列表</translation>
+    </message>
+    <message>
+        <source>MP3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg/Vorbis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC/MP4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PCM/Wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/52</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opus</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

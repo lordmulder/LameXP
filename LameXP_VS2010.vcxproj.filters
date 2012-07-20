@@ -364,6 +364,15 @@
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_ST.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Encoder_Opus.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_Opus.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Opus.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -488,6 +497,9 @@
     </ClInclude>
     <ClInclude Include="src\Tools.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Opus.h">
+      <Filter>Header Files\Decoders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -670,6 +682,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Thread_FileAnalyzer_ST.h">
       <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_Opus.h">
+      <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

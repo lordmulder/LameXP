@@ -683,18 +683,6 @@
         <translation>Encoder / Formato</translation>
     </message>
     <message>
-        <source>Lame MP3</source>
-        <translation>Lame MP3</translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis</source>
-        <translation>Ogg Vorbis</translation>
-    </message>
-    <message>
-        <source>Wave (PCM)</source>
-        <translation>Wave (PCM)</translation>
-    </message>
-    <message>
         <source>FLAC</source>
         <translation>FLAC</translation>
     </message>
@@ -1459,10 +1447,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Aften A/52</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Lame MP3:</source>
         <translation type="unfinished">Lame MP3:</translation>
     </message>
@@ -1687,10 +1671,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MPEG-4 AAC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>AAC Encoder-Options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1752,10 +1732,6 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DCA Enc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1856,6 +1832,34 @@
     </message>
     <message>
         <source>Refresh Directory Outline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MP3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg/Vorbis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC/MP4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PCM/Wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/52</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opus</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

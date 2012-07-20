@@ -685,18 +685,6 @@
         <translation type="unfinished">Кодер / Формат</translation>
     </message>
     <message>
-        <source>Lame MP3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wave (PCM)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>FLAC</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1463,10 +1451,6 @@
         <translation type="unfinished">LameXP не бует &lt;i&gt;проверять&lt;/i&gt; наличие БЕТА (пред-релизных) обновлений.</translation>
     </message>
     <message>
-        <source>Aften A/52</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Lame MP3:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1692,10 +1676,6 @@
         <translation type="unfinished">Запомнить текущую выходную папку</translation>
     </message>
     <message>
-        <source>MPEG-4 AAC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>AAC Encoder-Options</source>
         <translation type="unfinished">Параметры кодера AAC</translation>
     </message>
@@ -1758,10 +1738,6 @@
     <message>
         <source>Skipping update check this time, please be patient...</source>
         <translation type="unfinished">Пропуск проверки обновлений, пожалуйста подождите...</translation>
-    </message>
-    <message>
-        <source>DCA Enc</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
@@ -1862,6 +1838,34 @@
     <message>
         <source>Refresh Directory Outline</source>
         <translation>Обновить</translation>
+    </message>
+    <message>
+        <source>MP3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg/Vorbis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AAC/MP4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PCM/Wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/52</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opus</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

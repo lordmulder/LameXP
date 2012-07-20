@@ -62,8 +62,9 @@ public:
 		AACEncoder = 2,
 		AC3Encoder = 3,
 		FLACEncoder = 4,
-		DCAEncoder = 5,
-		PCMEncoder = 6
+		OpusEncoder = 5,
+		DCAEncoder = 6,
+		PCMEncoder = 7
 	};
 	enum RCMode
 	{

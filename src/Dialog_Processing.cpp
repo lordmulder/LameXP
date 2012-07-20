@@ -39,6 +39,7 @@
 #include "Encoder_FLAC.h"
 #include "Encoder_MP3.h"
 #include "Encoder_Vorbis.h"
+#include "Encoder_Opus.h"
 #include "Encoder_Wave.h"
 #include "Filter_Downmix.h"
 #include "Filter_Normalize.h"
@@ -835,7 +836,15 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			encoder = flacEncoder;
 		}
 		break;
-	case SettingsModel::DCAEncoder:
+	case SettingsModel::OpusEncoder:
+		{
+			OpusEncoder *opusEncoder = new OpusEncoder();
+			opusEncoder->setBitrate(m_settings->compressionBitrate());
+			opusEncoder->setRCMode(m_settings->compressionRCMode());
+			//TODO: opusEncoder->setCustomParams(m_settings->customParametersOpus());
+			encoder = opusEncoder;
+		}
+		break;	case SettingsModel::DCAEncoder:
 		{
 			DCAEncoder *dcaEncoder = new DCAEncoder();
 			dcaEncoder->setBitrate(m_settings->compressionBitrate());

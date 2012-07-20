@@ -173,6 +173,27 @@ void AnalyzeTask::run_ex(void)
 			qWarning("Cue Sheet file detected, skipping!");
 			s_filesCueSheet++;
 		}
+		else if((!QFileInfo(currentFile).suffix().compare("opus", Qt::CaseInsensitive)) || (!QFileInfo(currentFile).suffix().compare("ogg", Qt::CaseInsensitive)))
+		{
+			qDebug("Found a potential Opus audio file, investigating...");
+			QFile opusTest(currentFile);
+			if(analyzeOpusFile(currentFile, file))
+			{
+				qDebug("Accepted Opus file: %s", file.filePath().toUtf8().constData());
+				QWriteLocker lock(&s_lock);
+				s_filesAccepted++;
+				s_recentlyAdded.insert(file.filePath().toLower());
+				lock.unlock();
+				waitForPreviousThreads();
+				emit fileAnalyzed(file);
+			}
+			else
+			{
+				QWriteLocker lock(&s_lock);
+				qDebug("Rejected Opus file: %s", file.filePath().toUtf8().constData());
+				s_filesRejected++;
+			}
+		}
 		else if(!QFileInfo(currentFile).suffix().compare("avs", Qt::CaseInsensitive))
 		{
 			qDebug("Found a potential Avisynth script, investigating...");
@@ -569,6 +590,28 @@ void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, cover_t coverType, co
 	{
 		qWarning("Image data seems to be invalid :-(");
 	}
+}
+
+bool AnalyzeTask::analyzeOpusFile(const QString &filePath, AudioFileModel &info)
+{
+	QFile opusFile(filePath);
+	if(opusFile.open(QIODevice::ReadOnly))
+	{
+		QByteArray data = opusFile.peek(1024);
+		int idx1 = data.indexOf(QString::fromAscii("OggS"));
+		int idx2 = data.indexOf(QString::fromAscii("OpusHead"));
+		if((idx1 >= 0) && (idx2 > idx1))
+		{
+			info.setFormatContainerType("OGG");
+			info.setFormatAudioType("Opus");
+			opusFile.close();
+			return true;
+		}
+		opusFile.close();
+		return false;
+	}
+
+	return false;
 }
 
 bool AnalyzeTask::analyzeAvisynthFile(const QString &filePath, AudioFileModel &info)

@@ -19,7 +19,7 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Decoder_ALAC.h"
+#include "Decoder_Opus.h"
 
 #include "Global.h"
 
@@ -28,27 +28,27 @@
 #include <QRegExp>
 #include <QUuid>
 
-ALACDecoder::ALACDecoder(void)
+OpusDecoder::OpusDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("alac.exe"))
+	m_binary(lamexp_lookup_tool("opusdec.exe"))
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing ALAC decoder. Tool 'alac.exe' is not registred!";
+		throw "Error initializing Opus decoder. Tool 'opusdec.exe' is not registred!";
 	}
 }
 
-ALACDecoder::~ALACDecoder(void)
+OpusDecoder::~OpusDecoder(void)
 {
 }
 
-bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
 
-	args << "-f" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
+	args << QDir::toNativeSeparators(outputFile);
 
 	if(!startProcess(process, m_binary, args))
 	{
@@ -57,10 +57,13 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
+
+	//QRegExp regExp("\\s+Time:\\s+(\\d+):(\\d+)\\.(\\d+)\\s+\\[(\\d+):(\\d+)\\.(\\d+)\\],");
 
 	//The ALAC Decoder doesn't actually send any status updates :-[
 	emit statusUpdated(20 + (QUuid::createUuid().data1 % 60));
-
+	
 	while(process.state() != QProcess::NotRunning)
 	{
 		if(*abortFlag)
@@ -74,7 +77,7 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		if(!process.bytesAvailable() && process.state() == QProcess::Running)
 		{
 			process.kill();
-			qWarning("ALAC process timed out <-- killing!");
+			qWarning("opusdec process timed out <-- killing!");
 			emit messageLogged("\nPROCESS TIMEOUT !!!");
 			bTimeout = true;
 			break;
@@ -83,6 +86,27 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		{
 			QByteArray line = process.readLine();
 			QString text = QString::fromUtf8(line.constData()).simplified();
+			/* if(regExp.lastIndexIn(text) >= 0)
+			{
+				int values[6];
+				for(int i = 0; i < 6; i++)
+				{
+					bool ok = false;
+					int temp = regExp.cap(i+1).toInt(&ok);
+					values[i] = (ok ? temp : 0);
+				}
+				int timeDone = (60 * values[0]) + values[1];
+				int timeLeft = (60 * values[3]) + values[4];
+				if(timeDone > 0 || timeLeft > 0)
+				{
+					int newProgress = qRound((static_cast<double>(timeDone) / static_cast<double>(timeDone + timeLeft)) * 100.0);
+					if(newProgress > prevProgress)
+					{
+						emit statusUpdated(newProgress);
+						prevProgress = qMin(newProgress + 2, 99);
+					}
+				}
+			} */
 			if(!text.isEmpty())
 			{
 				emit messageLogged(text);
@@ -100,7 +124,7 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	emit statusUpdated(100);
 	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
 
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
+	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
 	{
 		return false;
 	}
@@ -108,20 +132,23 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	return true;
 }
 
-bool ALACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+bool OpusDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("MPEG-4", Qt::CaseInsensitive) == 0)
+	if(containerType.compare("OGG", Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("ALAC", Qt::CaseInsensitive) == 0)
+		if(formatType.compare("Opus", Qt::CaseInsensitive) == 0)
 		{
-			return true;
+			{
+				return true;
+			}
 		}
 	}
 
 	return false;
 }
 
-QStringList ALACDecoder::supportedTypes(void)
+QStringList OpusDecoder::supportedTypes(void)
 {
-	return QStringList() << "Apple Lossless (*.mp4 *.m4a)";
+	return QStringList() << "Opus Audio Codec (*.opus *.ogg)";
 }
+

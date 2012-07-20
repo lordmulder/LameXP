@@ -226,6 +226,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_encoderButtonGroup->addButton(radioButtonEncoderAAC, SettingsModel::AACEncoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderAC3, SettingsModel::AC3Encoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderFLAC, SettingsModel::FLACEncoder);
+	m_encoderButtonGroup->addButton(radioButtonEncoderOpus, SettingsModel::OpusEncoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderDCA, SettingsModel::DCAEncoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderPCM, SettingsModel::PCMEncoder);
 	m_modeButtonGroup = new QButtonGroup(this);
@@ -238,6 +239,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable));
 	radioButtonEncoderAC3->setChecked(m_settings->compressionEncoder() == SettingsModel::AC3Encoder);
 	radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
+	radioButtonEncoderOpus->setChecked(m_settings->compressionEncoder() == SettingsModel::OpusEncoder);
 	radioButtonEncoderDCA->setChecked(m_settings->compressionEncoder() == SettingsModel::DCAEncoder);
 	radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
 	radioButtonModeQuality->setChecked(m_settings->compressionRCMode() == SettingsModel::VBRMode);
@@ -1455,6 +1457,7 @@ void MainWindow::encodeButtonClicked(void)
 	case SettingsModel::AACEncoder:
 	case SettingsModel::AC3Encoder:
 	case SettingsModel::FLACEncoder:
+	case SettingsModel::OpusEncoder:
 	case SettingsModel::DCAEncoder:
 	case SettingsModel::PCMEncoder:
 		break;
@@ -3149,6 +3152,10 @@ void MainWindow::updateRCMode(int id)
 		sliderBitrate->setMinimum(0);
 		sliderBitrate->setMaximum(8);
 		break;
+	case SettingsModel::OpusEncoder:
+		sliderBitrate->setMinimum(1);
+		sliderBitrate->setMaximum(32);
+		break;
 	case SettingsModel::DCAEncoder:
 		sliderBitrate->setMinimum(1);
 		sliderBitrate->setMaximum(128);
@@ -3190,6 +3197,9 @@ void MainWindow::updateBitrate(int value)
 			break;
 		case SettingsModel::FLACEncoder:
 			labelBitrate->setText(tr("Compression %1").arg(value));
+			break;
+		case SettingsModel::OpusEncoder:
+			labelBitrate->setText(QString("&asymp; %1 kbps").arg(qMin(500, value * 8)));
 			break;
 		case SettingsModel::AC3Encoder:
 			labelBitrate->setText(tr("Quality Level %1").arg(qMin(1024, qMax(0, value * 64))));

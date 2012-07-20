@@ -108,8 +108,6 @@ const char *FileAnalyzer::g_tags_aud[] =
 
 void FileAnalyzer::run()
 {
-	qWarning("--- FileAnalyzer::run() ---");
-	
 	m_abortFlag = false;
 
 	m_bAborted = false;

@@ -36,6 +36,7 @@
 #include "Decoder_Vorbis.h"
 #include "Decoder_Wave.h"
 #include "Decoder_WavPack.h"
+#include "Decoder_Opus.h"
 #include "Decoder_WMA.h"
 #include "PlaylistImporter.h"
 
@@ -63,6 +64,7 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	PROBE_DECODER(WMADecoder);
 	PROBE_DECODER(ADPCMDecoder);
 	PROBE_DECODER(WaveDecoder);
+	PROBE_DECODER(OpusDecoder);
 	PROBE_DECODER(AvisynthDecoder);
 	
 	return NULL;
@@ -87,6 +89,7 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	types << GET_FILETYPES(ALACDecoder);
 	types << GET_FILETYPES(WMADecoder);
 	types << GET_FILETYPES(ADPCMDecoder);
+	types << GET_FILETYPES(OpusDecoder);
 	types << GET_FILETYPES(AvisynthDecoder);
 
 	QStringList extensions;

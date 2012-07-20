@@ -8,6 +8,7 @@
     <file>tools/mpcdec.exe</file>
     <file>tools/mpg123.exe</file>
     <file>tools/oggdec.exe</file>
+    <file>tools/opusdec.exe</file>
     <file>tools/shorten.exe</file>
     <file>tools/speexdec.exe</file>
     <file>tools/tta.exe</file>
