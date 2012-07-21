@@ -59,7 +59,7 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	//QRegExp regExp("\\s+Time:\\s+(\\d+):(\\d+)\\.(\\d+)\\s+\\[(\\d+):(\\d+)\\.(\\d+)\\],");
+	QRegExp regExp("\\[(-|\\\\|/|\\|)\\]");
 
 	//The ALAC Decoder doesn't actually send any status updates :-[
 	emit statusUpdated(20 + (QUuid::createUuid().data1 % 60));
@@ -86,8 +86,10 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		{
 			QByteArray line = process.readLine();
 			QString text = QString::fromUtf8(line.constData()).simplified();
-			/* if(regExp.lastIndexIn(text) >= 0)
+			if(regExp.lastIndexIn(text) >= 0)
 			{
+				__noop;
+				/*
 				int values[6];
 				for(int i = 0; i < 6; i++)
 				{
@@ -106,8 +108,9 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 						prevProgress = qMin(newProgress + 2, 99);
 					}
 				}
-			} */
-			if(!text.isEmpty())
+				*/
+			}
+			else if(!text.isEmpty())
 			{
 				emit messageLogged(text);
 			}

@@ -64,6 +64,12 @@ const unsigned int *AbstractEncoder::supportedBitdepths(void)
 	return NULL;
 }
 
+//Does the encoder need the exact duration of the source?
+const bool AbstractEncoder::needsTimingInfo(void)
+{
+	return false;
+}
+
 /*
  * Helper functions
  */

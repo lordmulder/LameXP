@@ -38,7 +38,16 @@ public:
 	virtual QString extension(void);
 	virtual const unsigned int *supportedChannelCount(void);
 	virtual const unsigned int *supportedBitdepths(void);
+	virtual const bool needsTimingInfo(void);
+
+	//Advanced options
+	virtual void setOptimizeFor(int optimizeFor);
+	virtual void setEncodeComplexity(int complexity);
+	virtual void setFrameSize(int frameSize);
 
 private:
 	const QString m_binary;
+	int m_configOptimizeFor;
+	int m_configEncodeComplexity;
+	int m_configFrameSize;
 };

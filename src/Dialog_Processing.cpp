@@ -841,6 +841,9 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			OpusEncoder *opusEncoder = new OpusEncoder();
 			opusEncoder->setBitrate(m_settings->compressionBitrate());
 			opusEncoder->setRCMode(m_settings->compressionRCMode());
+			opusEncoder->setOptimizeFor(m_settings->opusOptimizeFor());
+			opusEncoder->setEncodeComplexity(m_settings->opusComplexity());
+			opusEncoder->setFrameSize(m_settings->opusFramesize());
 			//TODO: opusEncoder->setCustomParams(m_settings->customParametersOpus());
 			encoder = opusEncoder;
 		}

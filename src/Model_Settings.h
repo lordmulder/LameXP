@@ -112,6 +112,9 @@ public:
 	LAMEXP_MAKE_OPTION_I(aftenDynamicRangeCompression);
 	LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation);
 	LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize);
+	LAMEXP_MAKE_OPTION_I(opusOptimizeFor);
+	LAMEXP_MAKE_OPTION_I(opusComplexity);
+	LAMEXP_MAKE_OPTION_I(opusFramesize);
 	LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled);
 	LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume);
 	LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode);

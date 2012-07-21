@@ -287,3 +287,8 @@ void AACEncoder::setEnable2Pass(bool enabled)
 {
 	m_configEnable2Pass = enabled;
 }
+
+const bool AACEncoder::needsTimingInfo(void)
+{
+	return true;
+}

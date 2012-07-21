@@ -183,7 +183,7 @@ void ProcessThread::processFile()
 	//------------------------------------
 	if(bSuccess && !m_aborted && IS_WAVE(m_audioFile))
 	{
-		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount() || !m_filters.isEmpty())
+		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount() || m_encoder->needsTimingInfo() || !m_filters.isEmpty())
 		{
 			m_currentStep = AnalyzeStep;
 			bSuccess = m_propDetect->detect(sourceFile, &m_audioFile, &m_aborted);

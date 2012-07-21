@@ -1836,31 +1836,79 @@
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <source> Opus Encoder Options </source>
+        <translation>Opus Kodierer Optionen</translation>
+    </message>
+    <message>
+        <source>Optimize for Signal Type:</source>
+        <translation>Optimieren für Signaltyp:</translation>
+    </message>
+    <message>
+        <source>Encoding Complexity:</source>
+        <translation>Kodierer Komplexität:</translation>
+    </message>
+    <message>
+        <source>Music</source>
+        <translation>Musik</translation>
+    </message>
+    <message>
+        <source>(Undefined)</source>
+        <translation>(Undefiniert)</translation>
+    </message>
+    <message>
+        <source>Frame Size:</source>
+        <translation>Framegröße:</translation>
+    </message>
+    <message>
+        <source>2.5</source>
+        <translation>2,5</translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>10</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>20</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>40</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>60</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2181,7 +2229,7 @@
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>WARNUNG: Dekodierte Dateigröße übersteigt 4 GB, Probleme sind vorprogrammiert!</translation>
     </message>
 </context>
 <context>

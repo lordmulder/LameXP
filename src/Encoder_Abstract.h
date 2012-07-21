@@ -43,6 +43,7 @@ public:
 	virtual const unsigned int *supportedSamplerates(void);
 	virtual const unsigned int *supportedChannelCount(void);
 	virtual const unsigned int *supportedBitdepths(void);
+	virtual const bool needsTimingInfo(void);
 
 	//Common setter methods
 	void setBitrate(int bitrate);

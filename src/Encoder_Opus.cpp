@@ -36,6 +36,10 @@ OpusEncoder::OpusEncoder(void)
 	{
 		throw "Error initializing Opus encoder. Tool 'opusenc.exe' is not registred!";
 	}
+
+	m_configOptimizeFor = 0;
+	m_configEncodeComplexity = 10;
+	m_configFrameSize = 3;
 }
 
 OpusEncoder::~OpusEncoder(void)
@@ -44,10 +48,10 @@ OpusEncoder::~OpusEncoder(void)
 
 bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
 {
+	const unsigned int fileDuration = metaInfo.fileDuration();
+	
 	QProcess process;
 	QStringList args;
-
-	args << "--music"; //TODO: Make other optimizations available!
 
 	switch(m_configRCMode)
 	{
@@ -62,6 +66,40 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		break;
 	default:
 		throw "Bad rate-control mode!";
+		break;
+	}
+
+	switch(m_configOptimizeFor)
+	{
+	case 0:
+		args << "--music";
+		break;
+	case 1:
+		args << "--speech";
+		break;
+	}
+
+	args << "--comp" << QString::number(m_configEncodeComplexity);
+
+	switch(m_configFrameSize)
+	{
+	case 0:
+		args << "--framesize" << "2.5";
+		break;
+	case 1:
+		args << "--framesize" << "5";
+		break;
+	case 2:
+		args << "--framesize" << "10";
+		break;
+	case 3:
+		args << "--framesize" << "20";
+		break;
+	case 4:
+		args << "--framesize" << "40";
+		break;
+	case 5:
+		args << "--framesize" << "60";
 		break;
 	}
 
@@ -89,10 +127,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\[(-|\\\\|/|\\|)\\]");
-
-	//The Opus encoder doesn't flus it's status updates :-[
-	emit statusUpdated(20 + (QUuid::createUuid().data1 % 60));
+	QRegExp regExp("\\[(-|\\\\|/|\\|)\\]\\s*(\\d+):(\\d+):(\\d+)");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -118,12 +153,19 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 			QString text = QString::fromUtf8(line.constData()).simplified();
 			if(regExp.lastIndexIn(text) >= 0)
 			{
-				bool ok = false;
-				int progress = regExp.cap(1).toInt(&ok);
-				if(ok && (progress > prevProgress))
+				bool ok[3] = {false, false, false};
+				int h = regExp.cap(2).toInt(&ok[0]);
+				int m = regExp.cap(3).toInt(&ok[1]);
+				int s = regExp.cap(4).toInt(&ok[2]);
+				if(ok[0] && ok[1] && ok[2] && (fileDuration > 0))
 				{
-					emit statusUpdated(progress);
-					prevProgress = qMin(progress + 2, 99);
+					int filePosition = (h * 3600) + (m * 60) + s;
+					int newProgress = qRound((static_cast<double>(filePosition) / static_cast<double>(fileDuration)) * 100.0);
+					if(newProgress > prevProgress)
+					{
+						emit statusUpdated(newProgress);
+						prevProgress = qMin(newProgress + 2, 99);
+					}
 				}
 			}
 			else if(!text.isEmpty())
@@ -149,6 +191,21 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	}
 	
 	return true;
+}
+
+void OpusEncoder::setOptimizeFor(int optimizeFor)
+{
+	m_configOptimizeFor = qBound(0, optimizeFor, 2);
+}
+
+void OpusEncoder::setEncodeComplexity(int complexity)
+{
+	m_configEncodeComplexity = qBound(0, complexity, 10);
+}
+
+void OpusEncoder::setFrameSize(int frameSize)
+{
+	m_configFrameSize = qBound(0, frameSize, 5);
 }
 
 QString OpusEncoder::extension(void)
@@ -177,4 +234,9 @@ const unsigned int *OpusEncoder::supportedChannelCount(void)
 const unsigned int *OpusEncoder::supportedBitdepths(void)
 {
 	return NULL;
+}
+
+const bool OpusEncoder::needsTimingInfo(void)
+{
+	return true;
 }

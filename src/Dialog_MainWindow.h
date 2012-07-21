@@ -106,6 +106,7 @@ private slots:
 	void normalizationModeChanged(int mode);
 	void notifyOtherInstance(void);
 	void openFolderActionActivated(void);
+	void opusSettingsChanged(void);
 	void outputFolderContextMenu(const QPoint &pos);
 	void outputFolderDirectoryLoaded(const QString &path);
 	void outputFolderEditFinished(void);
