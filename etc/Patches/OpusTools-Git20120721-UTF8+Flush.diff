@@ -1,0 +1,535 @@
+ src/opusdec.c               |   39 ++++++++++--
+ src/opusdec.vcxproj         |   15 ++++-
+ src/opusdec.vcxproj.filters |    6 ++
+ src/opusenc.c               |   24 +++++--
+ src/opusenc.vcxproj         |   15 ++++-
+ src/opusenc.vcxproj.filters |    6 ++
+ src/opusinfo.vcxproj        |    4 +-
+ src/unicode_support.c       |  148 +++++++++++++++++++++++++++++++++++++++++++
+ src/unicode_support.h       |   16 +++++
+ 9 files changed, 256 insertions(+), 17 deletions(-)
+
+diff --git a/src/opusdec.c b/src/opusdec.c
+index 7b7ce7c..d6a0fbb 100644
+--- a/src/opusdec.c
++++ b/src/opusdec.c
+@@ -103,6 +103,8 @@
+ #include "speex_resampler.h"
+ #include "stack_alloc.h"
+ 
++#include "unicode_support.h"
++
+ #define MINI(_a,_b)      ((_a)<(_b)?(_a):(_b))
+ #define MAXI(_a,_b)      ((_a)>(_b)?(_a):(_b))
+ #define CLAMPI(_a,_b,_c) (MAXI(_a,MINI(_b,_c)))
+@@ -403,7 +405,7 @@ FILE *out_file_open(char *outFile, int *wav_format, int rate, int mapping_family
+       }
+       else
+       {
+-         fout = fopen(outFile, "wb");
++         fout = fopen_utf8(outFile, "wb");
+          if (!fout)
+          {
+             perror(outFile);
+@@ -601,7 +603,7 @@ opus_int64 audio_write(float *pcm, int channels, int frame_size, FILE *fout, Spe
+    return sampout;
+ }
+ 
+-int main(int argc, char **argv)
++static int opusdec_main(int argc, char **argv)
+ {
+    int c;
+    int option_index = 0;
+@@ -651,6 +653,7 @@ int main(int argc, char **argv)
+    SpeexResamplerState *resampler=NULL;
+    float gain=1;
+    int streams=0;
++   size_t last_spin=0;
+ 
+    output=0;
+    shapemem.a_buf=0;
+@@ -694,7 +697,7 @@ int main(int argc, char **argv)
+          {
+             manual_gain=atof (optarg);
+          }else if(strcmp(long_options[option_index].name,"save-range")==0){
+-          frange=fopen(optarg,"w");
++          frange=fopen_utf8(optarg,"w");
+           if(frange==NULL){
+             perror(optarg);
+             fprintf(stderr,"Could not open save-range file: %s\n",optarg);
+@@ -744,7 +747,7 @@ int main(int argc, char **argv)
+    }
+    else
+    {
+-      fin = fopen(inFile, "rb");
++      fin = fopen_utf8(inFile, "rb");
+       if (!fin)
+       {
+          perror(inFile);
+@@ -861,6 +864,16 @@ int main(int argc, char **argv)
+                   ret = opus_multistream_decode_float(st, NULL, 0, output, lost_size, 0);
+                }
+ 
++               if(!quiet){
++                  static const char spinner[]="|/-\\";
++                  if(!(last_spin % 100)) {
++                     fprintf(stderr,"[%c]\b\b\b", spinner[(last_spin/100) % 3]);
++                     fflush(stderr);
++                  }
++                  last_spin++;
++               }
++
++
+                if (ret<0)
+                {
+                   fprintf (stderr, "Decoding error: %s\n", opus_strerror(ret));
+@@ -919,8 +932,11 @@ int main(int argc, char **argv)
+             st=NULL;
+          }
+       }
+-      if (feof(fin))
++      if (feof(fin)) {
++         fprintf(stderr, "Complete.\n");
++         fflush(stderr);
+          break;
++      }
+    }
+ 
+    if (fout && wav_format>=0 && audio_size<0x7FFFFFFF)
+@@ -968,3 +984,16 @@ int main(int argc, char **argv)
+ 
+    return 0;
+ }
++
++int main( int argc, char **argv )
++{
++  int my_argc;
++  char **my_argv;
++  int exit_code;
++
++  init_commandline_arguments_utf8(&my_argc, &my_argv);
++  exit_code = opusdec_main(my_argc, my_argv);
++  free_commandline_arguments_utf8(&my_argc, &my_argv);
++
++  return exit_code;
++}
+\ No newline at end of file
+diff --git a/src/opusdec.vcxproj b/src/opusdec.vcxproj
+index 4992007..6bdb0ac 100644
+--- a/src/opusdec.vcxproj
++++ b/src/opusdec.vcxproj
+@@ -27,6 +27,7 @@
+     <ClCompile Include="opusdec.c" />
+     <ClCompile Include="opus_header.c" />
+     <ClCompile Include="resample.c" />
++    <ClCompile Include="unicode_support.c" />
+     <ClCompile Include="wave_out.c" />
+     <ClCompile Include="wav_io.c" />
+   </ItemGroup>
+@@ -41,6 +42,7 @@
+     <ClInclude Include="os_support.h" />
+     <ClInclude Include="speex_resampler.h" />
+     <ClInclude Include="stack_alloc.h" />
++    <ClInclude Include="unicode_support.h" />
+     <ClInclude Include="wave_out.h" />
+     <ClInclude Include="wav_io.h" />
+   </ItemGroup>
+@@ -165,9 +167,14 @@
+       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+       <WarningLevel>Level3</WarningLevel>
+-      <AdditionalIncludeDirectories>..\..\libogg\include;..\..\opus\include;..\win32;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>..\..\libogg-1.3.0\include;..\..\opus-git\include;..\win32;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <Optimization>Full</Optimization>
++      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
++      <OmitFramePointers>true</OmitFramePointers>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+     </ClCompile>
+     <Link>
+       <TargetMachine>MachineX86</TargetMachine>
+@@ -175,8 +182,10 @@
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+-      <AdditionalDependencies>celt.lib;opus.lib;silk_common.lib;silk_float.lib;libogg_static.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
++      <AdditionalDependencies>F:\DeLpHi\EncodePointerLib\Release\EncodePointer.lib;celt.lib;opus.lib;silk_common.lib;silk_float.lib;libogg_static.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
++      <AdditionalLibraryDirectories>$(OutDir);D:\SVN\Tools\opus-git\Release;D:\SVN\Tools\libogg-1.3.0\win32\VS2010\Win32\Release</AdditionalLibraryDirectories>
++      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
++      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
+     </Link>
+     <PreBuildEvent>
+       <Command>"$(ProjectDir)..\win32\genversion.bat" "$(ProjectDir)..\win32\version.h" VERSION</Command>
+diff --git a/src/opusdec.vcxproj.filters b/src/opusdec.vcxproj.filters
+index cbf5e37..f00f948 100644
+--- a/src/opusdec.vcxproj.filters
++++ b/src/opusdec.vcxproj.filters
+@@ -41,6 +41,9 @@
+     <ClCompile Include="..\share\getopt1.c">
+       <Filter>Source Files</Filter>
+     </ClCompile>
++    <ClCompile Include="unicode_support.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="lpc.h">
+@@ -79,5 +82,8 @@
+     <ClInclude Include="info_opus.h">
+       <Filter>Header Files</Filter>
+     </ClInclude>
++    <ClInclude Include="unicode_support.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
+   </ItemGroup>
+ </Project>
+\ No newline at end of file
+diff --git a/src/opusenc.c b/src/opusenc.c
+index 5836826..3119eec 100644
+--- a/src/opusenc.c
++++ b/src/opusenc.c
+@@ -76,6 +76,8 @@
+ #define VG_CHECK(x,y)
+ #endif
+ 
++#include "unicode_support.h"
++
+ static void comment_init(char **comments, int* length, const char *vendor_string);
+ static void comment_add(char **comments, int* length, char *tag, char *val);
+ 
+@@ -170,7 +172,7 @@ static inline void print_time(double seconds)
+   if(seconds>0)fprintf(stderr," %0.4g second%s",seconds,seconds!=1?"s":"");
+ }
+ 
+-int main(int argc, char **argv)
++static int opusenc_main(int argc, char **argv)
+ {
+   static const input_format raw_format = {NULL, 0, raw_open, wav_close, "raw",N_("RAW file reader")};
+   int option_index=0;
+@@ -414,7 +416,7 @@ int main(int argc, char **argv)
+           opt_ctls_ctlval[opt_ctls*3+2]=atoi(spos+1);
+           opt_ctls++;
+         }else if(strcmp(long_options[option_index].name,"save-range")==0){
+-          frange=fopen(optarg,"w");
++          frange=fopen_utf8(optarg,"w");
+           if(frange==NULL){
+             perror(optarg);
+             fprintf(stderr,"Could not open save-range file: %s\n",optarg);
+@@ -466,7 +468,7 @@ int main(int argc, char **argv)
+ #endif
+     fin=stdin;
+   }else{
+-    fin=fopen(inFile, "rb");
++    fin=fopen_utf8(inFile, "rb");
+     if(!fin){
+       perror(inFile);
+       exit(1);
+@@ -689,7 +691,7 @@ int main(int argc, char **argv)
+ #endif
+     fout=stdout;
+   }else{
+-    fout=fopen(outFile, "wb");
++    fout=fopen_utf8(outFile, "wb");
+     if(!fout){
+       perror(outFile);
+       exit(1);
+@@ -907,6 +909,7 @@ int main(int argc, char **argv)
+           coded_seconds/wall_time,
+           estbitrate/1000.);
+         fprintf(stderr,"%s",sbuf);
++        fflush(stderr); //Required for real-time progress updates in GUI's!
+         last_spin_len=strlen(sbuf);
+         last_spin=stop_time;
+       }
+@@ -1027,3 +1030,16 @@ static void comment_add(char **comments, int* length, char *tag, char *val)
+ }
+ #undef readint
+ #undef writeint
++
++int main( int argc, char **argv )
++{
++  int my_argc;
++  char **my_argv;
++  int exit_code;
++
++  init_commandline_arguments_utf8(&my_argc, &my_argv);
++  exit_code = opusenc_main(my_argc, my_argv);
++  free_commandline_arguments_utf8(&my_argc, &my_argv);
++
++  return exit_code;
++}
+diff --git a/src/opusenc.vcxproj b/src/opusenc.vcxproj
+index 69f4e24..b3e003f 100644
+--- a/src/opusenc.vcxproj
++++ b/src/opusenc.vcxproj
+@@ -27,6 +27,7 @@
+     <ClCompile Include="opusenc.c" />
+     <ClCompile Include="opus_header.c" />
+     <ClCompile Include="resample.c" />
++    <ClCompile Include="unicode_support.c" />
+     <ClCompile Include="wave_out.c" />
+     <ClCompile Include="wav_io.c" />
+   </ItemGroup>
+@@ -41,6 +42,7 @@
+     <ClInclude Include="os_support.h" />
+     <ClInclude Include="speex_resampler.h" />
+     <ClInclude Include="stack_alloc.h" />
++    <ClInclude Include="unicode_support.h" />
+     <ClInclude Include="wave_out.h" />
+     <ClInclude Include="wav_io.h" />
+   </ItemGroup>
+@@ -165,9 +167,14 @@
+       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+       <WarningLevel>Level3</WarningLevel>
+-      <AdditionalIncludeDirectories>..\..\libogg\include;..\..\opus\include;..\win32;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>..\..\libogg-1.3.0\include;..\..\opus-git\include;..\win32;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <Optimization>Full</Optimization>
++      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
++      <OmitFramePointers>true</OmitFramePointers>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+     </ClCompile>
+     <Link>
+       <TargetMachine>MachineX86</TargetMachine>
+@@ -175,8 +182,10 @@
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+-      <AdditionalDependencies>celt.lib;opus.lib;silk_common.lib;silk_float.lib;libogg_static.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
++      <AdditionalDependencies>F:\DeLpHi\EncodePointerLib\Release\EncodePointer.lib;celt.lib;opus.lib;silk_common.lib;silk_float.lib;libogg_static.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
++      <AdditionalLibraryDirectories>$(OutDir);D:\SVN\Tools\opus-git\Release;D:\SVN\Tools\libogg-1.3.0\win32\VS2010\Win32\Release</AdditionalLibraryDirectories>
++      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
++      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
+     </Link>
+     <PreBuildEvent>
+       <Command>"$(ProjectDir)..\win32\genversion.bat" "$(ProjectDir)..\win32\version.h" VERSION</Command>
+diff --git a/src/opusenc.vcxproj.filters b/src/opusenc.vcxproj.filters
+index 0d0fe39..9f2e768 100644
+--- a/src/opusenc.vcxproj.filters
++++ b/src/opusenc.vcxproj.filters
+@@ -41,6 +41,9 @@
+     <ClCompile Include="..\share\getopt1.c">
+       <Filter>Source Files</Filter>
+     </ClCompile>
++    <ClCompile Include="unicode_support.c">
++      <Filter>Source Files</Filter>
++    </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="info_opus.h">
+@@ -79,5 +82,8 @@
+     <ClInclude Include="diag_range.h">
+       <Filter>Header Files</Filter>
+     </ClInclude>
++    <ClInclude Include="unicode_support.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
+   </ItemGroup>
+ </Project>
+\ No newline at end of file
+diff --git a/src/opusinfo.vcxproj b/src/opusinfo.vcxproj
+index 11eee29..538bf0c 100644
+--- a/src/opusinfo.vcxproj
++++ b/src/opusinfo.vcxproj
+@@ -166,7 +166,7 @@
+       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+       <WarningLevel>Level3</WarningLevel>
+-      <AdditionalIncludeDirectories>..\..\libogg\include;..\..\opus\include;..\win32;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>..\..\libogg-1.3.0\include;..\..\opus-git\include;..\win32;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+     </ClCompile>
+@@ -177,7 +177,7 @@
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <AdditionalDependencies>celt.lib;opus.lib;silk_common.lib;silk_float.lib;libogg_static.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
++      <AdditionalLibraryDirectories>$(OutDir);D:\SVN\Tools\opus-git\Release;D:\SVN\Tools\libogg-1.3.0\win32\VS2010\Win32\Release</AdditionalLibraryDirectories>
+     </Link>
+     <PreBuildEvent>
+       <Command>"$(ProjectDir)..\win32\genversion.bat" "$(ProjectDir)..\win32\version.h" VERSION</Command>
+diff --git a/src/unicode_support.c b/src/unicode_support.c
+new file mode 100644
+index 0000000..e0cbbc9
+--- /dev/null
++++ b/src/unicode_support.c
+@@ -0,0 +1,148 @@
++#include "unicode_support.h"
++
++#include <windows.h>
++#include <io.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++char *utf16_to_ansi(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_ACP, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_ACP, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	if(Buffer)
++	{
++		Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = (char**) malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	if(NULL == *argv)
++	{
++		fprintf(stderr, "\nFATAL: Malloc failed\n\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++		if(NULL == (*argv)[i])
++		{
++			fprintf(stderr, "\nFATAL: utf16_to_utf8 failed\n\n");
++			exit(-1);
++		}
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
++
++int stat_utf8(const char *path_utf8, struct _stat *buf)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wstat(path_utf16, buf);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
++
++int unlink_utf8(const char *path_utf8)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wunlink(path_utf16);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
+diff --git a/src/unicode_support.h b/src/unicode_support.h
+new file mode 100644
+index 0000000..6775e00
+--- /dev/null
++++ b/src/unicode_support.h
+@@ -0,0 +1,16 @@
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <stdio.h>
++#include <sys/stat.h>
++
++char *utf16_to_utf8(const wchar_t *input);
++char *utf16_to_ansi(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++int stat_utf8(const char *path_utf8, struct _stat *buf);
++int unlink_utf8(const char *path_utf8);
++
++#endif
+\ No newline at end of file
