@@ -59,11 +59,8 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\[(-|\\\\|/|\\|)\\]");
+	QRegExp regExp("\\((\\d+)%\\)");
 
-	//The ALAC Decoder doesn't actually send any status updates :-[
-	emit statusUpdated(20 + (QUuid::createUuid().data1 % 60));
-	
 	while(process.state() != QProcess::NotRunning)
 	{
 		if(*abortFlag)
@@ -88,27 +85,13 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 			QString text = QString::fromUtf8(line.constData()).simplified();
 			if(regExp.lastIndexIn(text) >= 0)
 			{
-				__noop;
-				/*
-				int values[6];
-				for(int i = 0; i < 6; i++)
+				bool ok = false;
+				int progress = regExp.cap(1).toInt(&ok);
+				if(ok && (progress > prevProgress))
 				{
-					bool ok = false;
-					int temp = regExp.cap(i+1).toInt(&ok);
-					values[i] = (ok ? temp : 0);
+					emit statusUpdated(progress);
+					prevProgress = qMin(progress + 2, 99);
 				}
-				int timeDone = (60 * values[0]) + values[1];
-				int timeLeft = (60 * values[3]) + values[4];
-				if(timeDone > 0 || timeLeft > 0)
-				{
-					int newProgress = qRound((static_cast<double>(timeDone) / static_cast<double>(timeDone + timeLeft)) * 100.0);
-					if(newProgress > prevProgress)
-					{
-						emit statusUpdated(newProgress);
-						prevProgress = qMin(newProgress + 2, 99);
-					}
-				}
-				*/
 			}
 			else if(!text.isEmpty())
 			{

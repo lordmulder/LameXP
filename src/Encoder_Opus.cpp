@@ -127,7 +127,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\[(-|\\\\|/|\\|)\\]\\s*(\\d+):(\\d+):(\\d+)");
+	QRegExp regExp("\\((\\d+)%\\)");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -153,19 +153,12 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 			QString text = QString::fromUtf8(line.constData()).simplified();
 			if(regExp.lastIndexIn(text) >= 0)
 			{
-				bool ok[3] = {false, false, false};
-				int h = regExp.cap(2).toInt(&ok[0]);
-				int m = regExp.cap(3).toInt(&ok[1]);
-				int s = regExp.cap(4).toInt(&ok[2]);
-				if(ok[0] && ok[1] && ok[2] && (fileDuration > 0))
+				bool ok = false;
+				int progress = regExp.cap(1).toInt(&ok);
+				if(ok && (progress > prevProgress))
 				{
-					int filePosition = (h * 3600) + (m * 60) + s;
-					int newProgress = qRound((static_cast<double>(filePosition) / static_cast<double>(fileDuration)) * 100.0);
-					if(newProgress > prevProgress)
-					{
-						emit statusUpdated(newProgress);
-						prevProgress = qMin(newProgress + 2, 99);
-					}
+					emit statusUpdated(progress);
+					prevProgress = qMin(progress + 2, 99);
 				}
 			}
 			else if(!text.isEmpty())

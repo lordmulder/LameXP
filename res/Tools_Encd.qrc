@@ -11,6 +11,7 @@
     <file>tools/oggenc2.i386.exe</file>
     <file>tools/oggenc2.sse2.exe</file>
     <file>tools/oggenc2.x64.exe</file>
-    <file>tools/opusenc.exe</file>
+    <file>tools/opusenc.i386.exe</file>
+    <file>tools/opusenc.sse2.exe</file>
   </qresource>
 </RCC>
