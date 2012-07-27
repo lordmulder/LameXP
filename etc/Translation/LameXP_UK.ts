@@ -1836,31 +1836,31 @@
     </message>
     <message>
         <source>MP3</source>
-        <translation></translation>
+        <translation>MP3</translation>
     </message>
     <message>
         <source>Ogg/Vorbis</source>
-        <translation></translation>
+        <translation>Ogg/Vorbis</translation>
     </message>
     <message>
         <source>AAC/MP4</source>
-        <translation></translation>
+        <translation>AAC/MP4</translation>
     </message>
     <message>
         <source>PCM/Wave</source>
-        <translation></translation>
+        <translation>PCM/Wave</translation>
     </message>
     <message>
         <source>A/52</source>
-        <translation></translation>
+        <translation>A/52</translation>
     </message>
     <message>
         <source>DCA</source>
-        <translation></translation>
+        <translation>DCA</translation>
     </message>
     <message>
         <source>Opus</source>
-        <translation></translation>
+        <translation>Opus</translation>
     </message>
     <message>
         <source> Opus Encoder Options </source>
