@@ -416,7 +416,7 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">Нова тека</translation>
+        <translation>Нова тека</translation>
     </message>
 </context>
 <context>
@@ -1836,79 +1836,79 @@
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування кодера Opus</translation>
     </message>
     <message>
         <source>Optimize for Signal Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Оптимізувати відносно типу сигнала:</translation>
     </message>
     <message>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Складність кодування:</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Музика</translation>
     </message>
     <message>
         <source>(Undefined)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Невизначено)</translation>
     </message>
     <message>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмір кадру:</translation>
     </message>
     <message>
         <source>2.5</source>
-        <translation type="unfinished">2.5</translation>
+        <translation>2.5</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished">10</translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>20</source>
-        <translation type="unfinished">20</translation>
+        <translation>20</translation>
     </message>
     <message>
         <source>40</source>
-        <translation type="unfinished">40</translation>
+        <translation>40</translation>
     </message>
     <message>
         <source>60</source>
-        <translation type="unfinished">60</translation>
+        <translation>60</translation>
     </message>
 </context>
 <context>
@@ -2229,7 +2229,7 @@
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ПОПЕРЕДЖЕННЯ: Розмір декодованного файла перевищує 4 ГБ, можуть виникнути проблеми!</translation>
     </message>
 </context>
 <context>
