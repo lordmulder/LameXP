@@ -1887,28 +1887,8 @@
         <translation>Розмір кадру:</translation>
     </message>
     <message>
-        <source>2.5</source>
-        <translation>2.5</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation>5</translation>
-    </message>
-    <message>
-        <source>10</source>
-        <translation>10</translation>
-    </message>
-    <message>
-        <source>20</source>
-        <translation>20</translation>
-    </message>
-    <message>
-        <source>40</source>
-        <translation>40</translation>
-    </message>
-    <message>
-        <source>60</source>
-        <translation>60</translation>
+        <source>Use Experimental Encoder Perceptual Tuning</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
