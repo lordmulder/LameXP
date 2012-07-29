@@ -70,16 +70,58 @@
 #include <MMSystem.h>
 #include <ShellAPI.h>
 
+////////////////////////////////////////////////////////////
 //Helper macros
-#define ABORT_IF_BUSY if(m_banner->isVisible() || m_delayedFileTimer->isActive()) { MessageBeep(MB_ICONEXCLAMATION); return; }
-#define SET_TEXT_COLOR(WIDGET,COLOR) { QPalette _palette = WIDGET->palette(); _palette.setColor(QPalette::WindowText, (COLOR)); _palette.setColor(QPalette::Text, (COLOR)); WIDGET->setPalette(_palette); }
-#define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET->font(); _font.setBold(BOLD); WIDGET->setFont(_font); }
+////////////////////////////////////////////////////////////
+
+#define ABORT_IF_BUSY do \
+{ \
+	if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
+	{ \
+		MessageBeep(MB_ICONEXCLAMATION); \
+		return; \
+	} \
+} \
+while(0)
+
+#define SET_TEXT_COLOR(WIDGET, COLOR) do \
+{ \
+	QPalette _palette = WIDGET->palette(); \
+	_palette.setColor(QPalette::WindowText, (COLOR)); \
+	_palette.setColor(QPalette::Text, (COLOR)); \
+	WIDGET->setPalette(_palette); \
+} \
+while(0)
+
+#define SET_FONT_BOLD(WIDGET,BOLD) do \
+{ \
+	QFont _font = WIDGET->font(); \
+	_font.setBold(BOLD); \
+	WIDGET->setFont(_font); \
+} \
+while(0)
+
+#define TEMP_HIDE_DROPBOX(CMD) do \
+{ \
+	bool _dropBoxVisible = m_dropBox->isVisible(); \
+	if(_dropBoxVisible) m_dropBox->hide(); \
+	do { CMD } while(0); \
+	if(_dropBoxVisible) m_dropBox->show(); \
+} \
+while(0)
+
+#define SET_MODEL(VIEW, MODEL) do \
+{ \
+	QItemSelectionModel *_tmp = (VIEW)->selectionModel(); \
+	(VIEW)->setModel(MODEL); \
+	LAMEXP_DELETE(_tmp); \
+} \
+while(0)
+
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
-#define TEMP_HIDE_DROPBOX(CMD) { bool __dropBoxVisible = m_dropBox->isVisible(); if(__dropBoxVisible) m_dropBox->hide(); {CMD}; if(__dropBoxVisible) m_dropBox->show(); }
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
-#define SET_MODEL(VIEW, MODEL) { QItemSelectionModel *_tmp = (VIEW)->selectionModel(); (VIEW)->setModel(MODEL); LAMEXP_DELETE(_tmp); }
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -1511,7 +1553,7 @@ void MainWindow::aboutButtonClicked(void)
 		AboutDialog *aboutBox = new AboutDialog(m_settings, this);
 		aboutBox->exec();
 		LAMEXP_DELETE(aboutBox);
-	)
+	);
 }
 
 /*
@@ -1870,7 +1912,7 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 
 			if(result != (-1)) break;
 		}
-	)
+	);
 }
 
 /*
@@ -2047,7 +2089,7 @@ void MainWindow::checkUpdatesActionActivated(void)
 	TEMP_HIDE_DROPBOX
 	(
 		bFlag = checkForUpdates();
-	)
+	);
 	
 	if(bFlag)
 	{
@@ -2095,7 +2137,7 @@ void MainWindow::addFilesButtonClicked(void)
 				}
 			}
 		}
-	)
+	);
 }
 
 /*
@@ -2130,7 +2172,7 @@ void MainWindow::openFolderActionActivated(void)
 				m_settings->mostRecentInputPath(QDir(selectedFolder).canonicalPath());
 				addFolder(selectedFolder, action->data().toBool());
 			}
-		)
+		);
 	}
 }
 
@@ -2209,7 +2251,7 @@ void MainWindow::showDetailsButtonClicked(void)
 		TEMP_HIDE_DROPBOX
 		(
 			iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
-		)
+		);
 		
 		if(iResult == INT_MAX)
 		{
@@ -2410,7 +2452,7 @@ void MainWindow::exportCsvContextActionTriggered(void)
 				qWarning("exportToCsv: Unknown return code!");
 			}
 		}
-	)
+	);
 }
 
 
@@ -2466,7 +2508,7 @@ void MainWindow::importCsvContextActionTriggered(void)
 				qWarning("exportToCsv: Unknown return code!");
 			}
 		}
-	)
+	);
 }
 
 /*

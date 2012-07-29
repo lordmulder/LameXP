@@ -152,26 +152,27 @@ const QString lamexp_clean_filepath(const QString &str);
 SIZE_T lamexp_dbg_private_bytes(void);
 
 //Helper macros
-#define LAMEXP_DELETE(PTR) if(PTR) { delete PTR; PTR = NULL; }
-#define LAMEXP_DELETE_ARRAY(PTR) if(PTR) { delete [] PTR; PTR = NULL; }
-#define LAMEXP_SAFE_FREE(PTR) if(PTR) { free((void*) PTR); PTR = NULL; }
-#define LAMEXP_CLOSE(HANDLE) if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; }
+#define LAMEXP_DELETE(PTR) do { if(PTR) { delete PTR; PTR = NULL; } } while(0)
+#define LAMEXP_DELETE_ARRAY(PTR) do { if(PTR) { delete [] PTR; PTR = NULL; } } while(0)
+#define LAMEXP_SAFE_FREE(PTR) do { if(PTR) { free((void*) PTR); PTR = NULL; } } while(0)
+#define LAMEXP_CLOSE(HANDLE) do { if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; } } while(0)
 #define LAMEXP_MIN_OS_VER(VER_INFO, VER_MAJ, VER_MIN) ((HIWORD(VER_INFO) > (VER_MAJ)) || ((HIWORD(VER_INFO) == (VER_MAJ)) && (LOWORD(VER_INFO) >= (VER_MIN))))
 #define LAMEXP_MAX_OS_VER(VER_INFO, VER_MAJ, VER_MIN) ((HIWORD(VER_INFO) < (VER_MAJ)) || ((HIWORD(VER_INFO) == (VER_MAJ)) && (LOWORD(VER_INFO) <= (VER_MIN))))
 #define LAMEXP_EQL_OS_VER(VER_INFO, VER_MAJ, VER_MIN) ((HIWORD(VER_INFO) == (VER_MAJ)) && (LOWORD(VER_INFO) == (VER_MIN)))
 #define QWCHAR(STR) reinterpret_cast<const wchar_t*>(STR.utf16())
 #define WCHAR2QSTR(STR) QString::fromUtf16(reinterpret_cast<const unsigned short*>(STR))
-#define	LAMEXP_DYNCAST(OUT,CLASS,SRC) try { OUT = dynamic_cast<CLASS>(SRC); } catch(std::bad_cast) { OUT = NULL; }
-#define LAMEXP_BOOL(X) (X ? "1" : "0")
+#define LAMEXP_BOOL2STR(X) (X ? "1" : "0")
 #define LAMEXP_MAKE_STRING_EX(X) #X
 #define LAMEXP_MAKE_STRING(X) LAMEXP_MAKE_STRING_EX(X)
 #define LAMEXP_COMPILER_WARNING(TXT) __pragma(message(__FILE__ "(" LAMEXP_MAKE_STRING(__LINE__) ") : warning: " TXT))
 #define NOBR(STR) (QString("<nobr>%1</nobr>").arg((STR)).replace("-", "&minus;"))
 
 //Output Qt debug message (Unicode-safe versions)
-//#define qDebug64(FORMAT, ...) qDebug("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
-//#define qWarning64(FORMAT, ...) qWarning("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
-//#define qFatal64(FORMAT, ...) qFatal("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
+/*
+#define qDebug64(FORMAT, ...) qDebug("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
+#define qWarning64(FORMAT, ...) qWarning("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
+#define qFatal64(FORMAT, ...) qFatal("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
+*/
 
 //Check for debug build
 #if defined(_DEBUG) && defined(QT_DEBUG) && !defined(NDEBUG) && !defined(QT_NO_DEBUG)
