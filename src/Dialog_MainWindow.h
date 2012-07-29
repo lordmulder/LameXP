@@ -35,6 +35,7 @@ class FileListModel;
 class AbstractEncoder;
 class QMenu;
 class DropBox;
+class CustomEventFilter;
 
 class MainWindow: public QMainWindow, private Ui::MainWindow
 {
@@ -71,6 +72,7 @@ private slots:
 	void clearMetaButtonClicked(void);
 	void closeButtonClicked(void);
 	void customParamsChanged(void);
+	void customParamsHelpRequested(QObject*);
 	void customTempFolderChanged(const QString &text);
 	void disableNeroAacNotificationsActionTriggered(bool checked);
 	void disableShellIntegrationActionTriggered(bool);
@@ -205,4 +207,6 @@ private:
 	QActionGroup *m_tabActionGroup;
 	QButtonGroup *m_encoderButtonGroup;
 	QButtonGroup *m_modeButtonGroup;
+
+	CustomEventFilter *m_evenFilterCustumParamsHelp;
 };

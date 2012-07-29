@@ -1889,6 +1889,10 @@
         <source>Use Experimental Encoder Perceptual Tuning</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>OpusEnc:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

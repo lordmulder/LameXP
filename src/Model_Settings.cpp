@@ -115,6 +115,7 @@ LAMEXP_MAKE_ID(customParametersOggEnc, "AdvancedOptions/CustomParameters/OggEnc"
 LAMEXP_MAKE_ID(customParametersAacEnc, "AdvancedOptions/CustomParameters/AacEnc");
 LAMEXP_MAKE_ID(customParametersAften, "AdvancedOptions/CustomParameters/Aften");
 LAMEXP_MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
+LAMEXP_MAKE_ID(customParametersOpus, "AdvancedOptions/CustomParameters/OpusEnc");
 LAMEXP_MAKE_ID(renameOutputFilesEnabled, "AdvancedOptions/RenameOutputFiles/Enabled");
 LAMEXP_MAKE_ID(renameOutputFilesPattern, "AdvancedOptions/RenameOutputFiles/Pattern");
 LAMEXP_MAKE_ID(hibernateComputer, "AdvancedOptions/HibernateComputerOnShutdown");
@@ -396,6 +397,7 @@ LAMEXP_MAKE_OPTION_S(customParametersOggEnc, QString());
 LAMEXP_MAKE_OPTION_S(customParametersAacEnc, QString());
 LAMEXP_MAKE_OPTION_S(customParametersAften, QString());
 LAMEXP_MAKE_OPTION_S(customParametersFLAC, QString());
+LAMEXP_MAKE_OPTION_S(customParametersOpus, QString());
 LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled, false);
 LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern, "[<TrackNo>] <Artist> - <Title>");
 LAMEXP_MAKE_OPTION_U(metaInfoPosition, UINT_MAX);

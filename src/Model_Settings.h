@@ -126,6 +126,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(customParametersAacEnc);
 	LAMEXP_MAKE_OPTION_S(customParametersAften);
 	LAMEXP_MAKE_OPTION_S(customParametersFLAC);
+	LAMEXP_MAKE_OPTION_S(customParametersOpus);
 	LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled);
 	LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern);
 	LAMEXP_MAKE_OPTION_U(metaInfoPosition);

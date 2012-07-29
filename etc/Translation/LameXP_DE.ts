@@ -1890,6 +1890,10 @@
         <source>Use Experimental Encoder Perceptual Tuning</source>
         <translation>Psychoakustische Optimierungen (experimentell)</translation>
     </message>
+    <message>
+        <source>OpusEnc:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

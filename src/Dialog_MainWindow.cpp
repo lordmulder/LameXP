@@ -30,6 +30,7 @@
 #include "Dialog_Update.h"
 #include "Dialog_DropBox.h"
 #include "Dialog_CueImport.h"
+#include "Dialog_LogView.h"
 #include "Thread_FileAnalyzer.h"
 #include "Thread_FileAnalyzer_ST.h"
 #include "Thread_MessageHandler.h"
@@ -40,6 +41,7 @@
 #include "WinSevenTaskbar.h"
 #include "Registry_Decoder.h"
 #include "ShellIntegration.h"
+#include "CustomEventFilter.h"
 
 //Qt includes
 #include <QMessageBox>
@@ -71,7 +73,7 @@
 #include <ShellAPI.h>
 
 ////////////////////////////////////////////////////////////
-//Helper macros
+// Helper macros
 ////////////////////////////////////////////////////////////
 
 #define ABORT_IF_BUSY do \
@@ -118,6 +120,25 @@ while(0)
 } \
 while(0)
 
+#define SET_CHECKBOX_STATE(CHCKBX, STATE) do \
+{ \
+	if((CHCKBX)->isChecked() != (STATE)) \
+	{ \
+		(CHCKBX)->click(); \
+	} \
+	if((CHCKBX)->isChecked() != (STATE)) \
+	{ \
+		qWarning("Warning: Failed to set checkbox " #CHCKBX " state!"); \
+	} \
+} \
+while(0)
+
+#define TRIM_STRING_RIGHT(STR) do \
+{ \
+	while((STR.length() > 0) && STR[STR.length()-1].isSpace()) STR.chop(1); \
+} \
+while(0)
+
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
@@ -158,7 +179,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	tabWidget->setCurrentIndex(0);
 	connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabPageChanged(int)));
 
-	//Setup "Source" tab
+	//--------------------------------
+	// Setup "Source" tab
+	//--------------------------------
+
 	sourceFileView->setModel(m_fileListModel);
 	sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
@@ -194,7 +218,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_exportCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(exportCsvContextActionTriggered()));
 	connect(m_importCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(importCsvContextActionTriggered()));
 
-	//Setup "Output" tab
+	//--------------------------------
+	// Setup "Output" tab
+	//--------------------------------
+
 	outputFolderView->setHeaderHidden(true);
 	outputFolderView->setAnimated(false);
 	outputFolderView->setMouseTracking(false);
@@ -203,7 +230,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->installEventFilter(this);
 	outputFoldersEditorLabel->installEventFilter(this);
 	outputFoldersFovoritesLabel->installEventFilter(this);
-	while(saveToSourceFolderCheckBox->isChecked() != m_settings->outputToSourceDir()) saveToSourceFolderCheckBox->click();
+	SET_CHECKBOX_STATE(saveToSourceFolderCheckBox, m_settings->outputToSourceDir());
 	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
@@ -246,7 +273,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderViewClicked(QModelIndex());
 	refreshFavorites();
 	
-	//Setup "Meta Data" tab
+	//--------------------------------
+	// Setup "Meta Data" tab
+	//--------------------------------
+
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
 	m_metaInfoModel->clearData();
 	m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
@@ -254,14 +284,17 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	metaDataView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	metaDataView->verticalHeader()->hide();
 	metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-	while(writeMetaDataCheckBox->isChecked() != m_settings->writeMetaTags()) writeMetaDataCheckBox->click();
+	SET_CHECKBOX_STATE(writeMetaDataCheckBox, m_settings->writeMetaTags());
 	generatePlaylistCheckBox->setChecked(m_settings->createPlaylist());
 	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
 	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
 	connect(writeMetaDataCheckBox, SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
 	connect(generatePlaylistCheckBox, SIGNAL(clicked()), this, SLOT(playlistEnabledChanged()));
 
+	//--------------------------------
 	//Setup "Compression" tab
+	//--------------------------------
+
 	m_encoderButtonGroup = new QButtonGroup(this);
 	m_encoderButtonGroup->addButton(radioButtonEncoderMP3, SettingsModel::MP3Encoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderVorbis, SettingsModel::VorbisEncoder);
@@ -293,9 +326,13 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
 	updateEncoder(m_encoderButtonGroup->checkedId());
 
+	//--------------------------------
 	//Setup "Advanced Options" tab
+	//--------------------------------
+
 	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
 	if(m_settings->maximumInstances() > 0) sliderMaxInstances->setValue(m_settings->maximumInstances());
+
 	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
 	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
 	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
@@ -303,6 +340,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTreble()) / 100.0);
 	spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSize());
 	spinBoxOpusComplexity->setValue(m_settings->opusComplexity());
+	
 	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelMode());
 	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRate());
 	comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfile());
@@ -311,23 +349,35 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationMode());
 	comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeFor());
 	comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesize());
-	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabled()) checkBoxBitrateManagement->click();
-	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2Pass()) checkBoxNeroAAC2PassMode->click();
-	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocation()) checkBoxAftenFastAllocation->click();
-	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabled()) checkBoxNormalizationFilter->click();
-	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstances() < 1)) checkBoxAutoDetectInstances->click();
-	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabled()) checkBoxUseSystemTempFolder->click();
-	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabled()) checkBoxRenameOutput->click();
-	while(checkBoxForceStereoDownmix->isChecked() != m_settings->forceStereoDownmix()) checkBoxForceStereoDownmix->click();
-	while(checkBoxOpusExpAnalysis->isChecked() != m_settings->opusExpAnalysis()) checkBoxOpusExpAnalysis->click();
+	
+	SET_CHECKBOX_STATE(checkBoxBitrateManagement, m_settings->bitrateManagementEnabled());
+	SET_CHECKBOX_STATE(checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2Pass());
+	SET_CHECKBOX_STATE(checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocation());
+	SET_CHECKBOX_STATE(checkBoxNormalizationFilter, m_settings->normalizationFilterEnabled());
+	SET_CHECKBOX_STATE(checkBoxAutoDetectInstances, (m_settings->maximumInstances() < 1));
+	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, m_settings->customTempPathEnabled());
+	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
+	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
+	SET_CHECKBOX_STATE(checkBoxOpusExpAnalysis, m_settings->opusExpAnalysis());
 	checkBoxNeroAAC2PassMode->setEnabled(!(m_fhgEncoderAvailable || m_qaacEncoderAvailable));
+	
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEnc());
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
 	lineEditCustomParamAften->setText(m_settings->customParametersAften());
+	lineEditCustomParamOpus->setText(m_settings->customParametersOpus());
 	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
 	lineEditRenamePattern->setText(m_settings->renameOutputFilesPattern());
+	
+	m_evenFilterCustumParamsHelp = new CustomEventFilter();
+	helpCustomParamLAME->installEventFilter(m_evenFilterCustumParamsHelp);
+	helpCustomParamOggEnc->installEventFilter(m_evenFilterCustumParamsHelp);
+	helpCustomParamNeroAAC->installEventFilter(m_evenFilterCustumParamsHelp);
+	helpCustomParamFLAC->installEventFilter(m_evenFilterCustumParamsHelp);
+	helpCustomParamAften->installEventFilter(m_evenFilterCustumParamsHelp);
+	helpCustomParamOpus->installEventFilter(m_evenFilterCustumParamsHelp);
+	
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
 	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
@@ -351,6 +401,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(lineEditCustomParamNeroAAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(lineEditCustomParamAften, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(lineEditCustomParamOpus, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
 	connect(sliderMaxInstances, SIGNAL(valueChanged(int)), this, SLOT(updateMaximumInstances(int)));
 	connect(checkBoxAutoDetectInstances, SIGNAL(clicked(bool)), this, SLOT(autoDetectInstancesChanged(bool)));
 	connect(buttonBrowseCustomTempFolder, SIGNAL(clicked()), this, SLOT(browseCustomTempFolderButtonClicked()));
@@ -366,12 +417,22 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
+	connect(m_evenFilterCustumParamsHelp, SIGNAL(clicked(QObject*)), this, SLOT(customParamsHelpRequested(QObject*)));
+
+	//--------------------------------
+	// Force initial GUI update
+	//--------------------------------
+
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	updateMaximumInstances(sliderMaxInstances->value());
 	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
 	toneAdjustBassChanged(spinBoxToneAdjustBass->value());
 	customParamsChanged();
 	
+	//--------------------------------
+	// Initialize actions
+	//--------------------------------
+
 	//Activate file menu actions
 	actionOpenFolder->setData(QVariant::fromValue<bool>(false));
 	actionOpenFolderRecursively->setData(QVariant::fromValue<bool>(true));
@@ -463,6 +524,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(actionDocumentChangelog, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(actionDocumentTranslate, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	
+	//--------------------------------
+	// Prepare to show window
+	//--------------------------------
+
 	//Center window in screen
 	QRect desktopRect = QApplication::desktop()->screenGeometry();
 	QRect thisRect = this->geometry();
@@ -550,6 +615,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_outputFolderFavoritesMenu);
 	LAMEXP_DELETE(m_outputFolderContextMenu);
 	LAMEXP_DELETE(m_dropBox);
+	LAMEXP_DELETE(m_evenFilterCustumParamsHelp);
 }
 
 ////////////////////////////////////////////////////////////
@@ -1471,7 +1537,7 @@ void MainWindow::encodeButtonClicked(void)
 	{
 		if(QMessageBox::warning(this, tr("Not Found"), QString("%1<br><tt>%2</tt>").arg(NOBR(tr("Your currently selected TEMP folder does not exist anymore:")), NOBR(QDir::toNativeSeparators(tempFolder))), tr("Restore Default"), tr("Cancel")) == 0)
 		{
-			while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
+			SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, m_settings->customTempPathEnabledDefault());
 		}
 		return;
 	}
@@ -3535,6 +3601,7 @@ void MainWindow::customParamsChanged(void)
 	lineEditCustomParamNeroAAC->setText(lineEditCustomParamNeroAAC->text().simplified());
 	lineEditCustomParamFLAC->setText(lineEditCustomParamFLAC->text().simplified());
 	lineEditCustomParamAften->setText(lineEditCustomParamAften->text().simplified());
+	lineEditCustomParamOpus->setText(lineEditCustomParamOpus->text().simplified());
 
 	bool customParamsUsed = false;
 	if(!lineEditCustomParamLAME->text().isEmpty()) customParamsUsed = true;
@@ -3542,6 +3609,7 @@ void MainWindow::customParamsChanged(void)
 	if(!lineEditCustomParamNeroAAC->text().isEmpty()) customParamsUsed = true;
 	if(!lineEditCustomParamFLAC->text().isEmpty()) customParamsUsed = true;
 	if(!lineEditCustomParamAften->text().isEmpty()) customParamsUsed = true;
+	if(!lineEditCustomParamOpus->text().isEmpty()) customParamsUsed = true;
 
 	labelCustomParamsIcon->setVisible(customParamsUsed);
 	labelCustomParamsText->setVisible(customParamsUsed);
@@ -3552,8 +3620,8 @@ void MainWindow::customParamsChanged(void)
 	m_settings->customParametersAacEnc(lineEditCustomParamNeroAAC->text());
 	m_settings->customParametersFLAC(lineEditCustomParamFLAC->text());
 	m_settings->customParametersAften(lineEditCustomParamAften->text());
+	m_settings->customParametersOpus(lineEditCustomParamOpus->text());
 }
-
 
 /*
  * Rename output files enabled changed
@@ -3712,6 +3780,83 @@ void MainWindow::useCustomTempFolderChanged(bool checked)
 }
 
 /*
+ * Show help for custom parameters
+ */
+void MainWindow::customParamsHelpRequested(QObject *obj)
+{
+	QString toolName, command;
+
+	if(obj == helpCustomParamLAME)      { toolName = "lame.exe";        command = "--help"; }
+	if(obj == helpCustomParamOggEnc)    { toolName = "oggenc2.exe";     command = "--help"; }
+	if(obj == helpCustomParamNeroAAC)
+	{
+		if(m_qaacEncoderAvailable)      { toolName = "qaac.exe";        command = "--help"; }
+		else if(m_fhgEncoderAvailable)  { toolName = "fhgaacenc.exe";   command = "";       }
+		else if(m_neroEncoderAvailable) { toolName = "neroAacEnc.exe";  command = "-help";  }
+	}
+	if(obj == helpCustomParamFLAC)      { toolName = "flac.exe";        command = "--help"; }
+	if(obj == helpCustomParamAften)     { toolName = "aften.exe";       command = "-h";     }
+	if(obj == helpCustomParamOpus)      { toolName = "opusenc_std.exe"; command = "--help"; }
+
+	if(toolName.isEmpty() || command.isNull())
+	{
+		MessageBeep(MB_ICONERROR);
+		return;
+	}
+
+	const QString binary = lamexp_lookup_tool(toolName);
+	if(binary.isEmpty())
+	{
+		MessageBeep(MB_ICONERROR);
+		qWarning("customParamsHelpRequested: Binary could not be found!");
+		return;
+	}
+
+	QProcess *process = new QProcess();
+	process->setProcessChannelMode(QProcess::MergedChannels);
+	process->setReadChannel(QProcess::StandardOutput);
+	process->start(binary, command.isEmpty() ? QStringList() : QStringList() << command);
+	
+	if(process->waitForStarted(15000))
+	{
+		qApp->processEvents();
+		process->waitForFinished(15000);
+	}
+	if(process->state() != QProcess::NotRunning)
+	{
+		process->kill();
+		process->waitForFinished(-1);
+	}
+
+	QStringList output; bool spaceFlag = true;
+
+	while(process->canReadLine())
+	{
+		QString temp = QString::fromUtf8(process->readLine());
+		TRIM_STRING_RIGHT(temp);
+		if(temp.isEmpty())
+		{
+			if(!spaceFlag) { output << temp; spaceFlag = true; }
+		}
+		else
+		{
+			output << temp; spaceFlag = false;
+		}
+	}
+
+	LAMEXP_DELETE(process);
+
+	if(output.count() < 1)
+	{
+		MessageBeep(MB_ICONERROR);
+	}
+
+	LogViewDialog *dialog = new LogViewDialog(this);
+	TEMP_HIDE_DROPBOX( dialog->exec(output); );
+	LAMEXP_DELETE(dialog);
+}
+
+/*
  * Reset all advanced options to their defaults
  */
 void MainWindow::resetAdvancedOptionsButtonClicked(void)
@@ -3732,19 +3877,20 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
 	comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeForDefault());
 	comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
-	while(checkBoxBitrateManagement->isChecked() != m_settings->bitrateManagementEnabledDefault()) checkBoxBitrateManagement->click();
-	while(checkBoxNeroAAC2PassMode->isChecked() != m_settings->neroAACEnable2PassDefault()) checkBoxNeroAAC2PassMode->click();
-	while(checkBoxNormalizationFilter->isChecked() != m_settings->normalizationFilterEnabledDefault()) checkBoxNormalizationFilter->click();
-	while(checkBoxAutoDetectInstances->isChecked() != (m_settings->maximumInstancesDefault() < 1)) checkBoxAutoDetectInstances->click();
-	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabledDefault()) checkBoxUseSystemTempFolder->click();
-	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocationDefault()) checkBoxAftenFastAllocation->click();
-	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabledDefault()) checkBoxRenameOutput->click();
-	while(checkBoxForceStereoDownmix->isChecked() != m_settings->forceStereoDownmixDefault()) checkBoxForceStereoDownmix->click();
-	while(checkBoxOpusExpAnalysis->isChecked() != m_settings->opusExpAnalysisDefault()) checkBoxOpusExpAnalysis->click();
+	SET_CHECKBOX_STATE(checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());
+	SET_CHECKBOX_STATE(checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
+	SET_CHECKBOX_STATE(checkBoxNormalizationFilter, m_settings->normalizationFilterEnabledDefault());
+	SET_CHECKBOX_STATE(checkBoxAutoDetectInstances, (m_settings->maximumInstancesDefault() < 1));
+	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, m_settings->customTempPathEnabledDefault());
+	SET_CHECKBOX_STATE(checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocationDefault());
+	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
+	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
+	SET_CHECKBOX_STATE(checkBoxOpusExpAnalysis, m_settings->opusExpAnalysisDefault());
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());
 	lineEditCustomParamFLAC->setText(m_settings->customParametersFLACDefault());
+	lineEditCustomParamOpus->setText(m_settings->customParametersFLACDefault());
 	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
 	lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
 	customParamsChanged();
