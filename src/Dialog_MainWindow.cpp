@@ -277,6 +277,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	while(checkBoxUseSystemTempFolder->isChecked() == m_settings->customTempPathEnabled()) checkBoxUseSystemTempFolder->click();
 	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabled()) checkBoxRenameOutput->click();
 	while(checkBoxForceStereoDownmix->isChecked() != m_settings->forceStereoDownmix()) checkBoxForceStereoDownmix->click();
+	while(checkBoxOpusExpAnalysis->isChecked() != m_settings->opusExpAnalysis()) checkBoxOpusExpAnalysis->click();
 	checkBoxNeroAAC2PassMode->setEnabled(!(m_fhgEncoderAvailable || m_qaacEncoderAvailable));
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
@@ -322,6 +323,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(comboBoxOpusOptimize, SIGNAL(currentIndexChanged(int)), SLOT(opusSettingsChanged()));
 	connect(comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
+	connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
 	updateLameAlgoQuality(sliderLameAlgoQuality->value());
 	updateMaximumInstances(sliderMaxInstances->value());
 	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
@@ -3425,6 +3427,7 @@ void MainWindow::opusSettingsChanged(void)
 	m_settings->opusOptimizeFor(comboBoxOpusOptimize->currentIndex());
 	m_settings->opusFramesize(comboBoxOpusFramesize->currentIndex());
 	m_settings->opusComplexity(spinBoxOpusComplexity->value());
+	m_settings->opusExpAnalysis(checkBoxOpusExpAnalysis->isChecked());
 }
 
 /*
@@ -3695,6 +3698,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	while(checkBoxAftenFastAllocation->isChecked() != m_settings->aftenFastBitAllocationDefault()) checkBoxAftenFastAllocation->click();
 	while(checkBoxRenameOutput->isChecked() != m_settings->renameOutputFilesEnabledDefault()) checkBoxRenameOutput->click();
 	while(checkBoxForceStereoDownmix->isChecked() != m_settings->forceStereoDownmixDefault()) checkBoxForceStereoDownmix->click();
+	while(checkBoxOpusExpAnalysis->isChecked() != m_settings->opusExpAnalysisDefault()) checkBoxOpusExpAnalysis->click();
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());

@@ -1887,27 +1887,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>2.5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>10</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>20</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>40</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>60</source>
+        <source>Use Experimental Encoder Perceptual Tuning</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

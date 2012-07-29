@@ -1887,28 +1887,8 @@
         <translation>Framegröße:</translation>
     </message>
     <message>
-        <source>2.5</source>
-        <translation>2,5</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>10</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>20</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>40</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>60</source>
-        <translation></translation>
+        <source>Use Experimental Encoder Perceptual Tuning</source>
+        <translation>Psychoakustische Optimierungen (experimentell)</translation>
     </message>
 </context>
 <context>
