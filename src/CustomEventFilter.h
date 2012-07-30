@@ -19,8 +19,10 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
 #include <QEvent>
-#include <QObject>
+#include <QWidget>
 
 class CustomEventFilter: public QObject
 {
@@ -28,21 +30,24 @@ class CustomEventFilter: public QObject
 
 public:
 	CustomEventFilter(void) {}
+	~CustomEventFilter(void) {}
 
 	bool eventFilter(QObject *obj, QEvent *event)
 	{
-		if(obj != this)
+		if(QWidget *sender = dynamic_cast<QWidget*>(obj))
 		{
 			switch(event->type())
 			{
-			case QEvent::MouseButtonPress:
-				emit clicked(obj);
-				break;
 			case QEvent::Enter:
-				emit mouseEntered(obj);
-				break;
 			case QEvent::Leave:
-				emit mouseLeft(obj);
+			case QEvent::KeyPress:
+			case QEvent::KeyRelease:
+			case QEvent::MouseButtonPress:
+			case QEvent::MouseButtonRelease:
+			case QEvent::FocusIn:
+			case QEvent::FocusOut:
+			case QEvent::TouchEnd:
+				eventOccurred(sender, event);
 				break;
 			}
 		}
@@ -51,7 +56,5 @@ public:
 	}
 
 signals:
-	void clicked(QObject *sender);
-	void mouseEntered(QObject *sender);
-	void mouseLeft(QObject *sender);
+	void eventOccurred(QWidget *sender, QEvent *event);
 };

@@ -72,7 +72,7 @@ private slots:
 	void clearMetaButtonClicked(void);
 	void closeButtonClicked(void);
 	void customParamsChanged(void);
-	void customParamsHelpRequested(QObject*);
+	void customParamsHelpRequested(QWidget *obj, QEvent *event);
 	void customTempFolderChanged(const QString &text);
 	void disableNeroAacNotificationsActionTriggered(bool checked);
 	void disableShellIntegrationActionTriggered(bool);
@@ -113,6 +113,8 @@ private slots:
 	void outputFolderDirectoryLoaded(const QString &path);
 	void outputFolderEditFinished(void);
 	void outputFolderItemExpanded(const QModelIndex &item);
+	void outputFolderMouseEventOccurred(QWidget *sender, QEvent *event);
+	void outputFolderViewEventOccurred(QWidget *sender, QEvent *event);
 	void outputFolderRowsInserted(const QModelIndex &parent, int start, int end);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void outputFolderViewMoved(const QModelIndex &index);
@@ -129,6 +131,7 @@ private slots:
 	void samplingRateChanged(int value);
 	void saveToSourceFolderChanged(void);
 	void showAnnounceBox(void);
+	void showCustomParamsHelpScreen(const QString &toolName, const QString &command);
 	void showDetailsButtonClicked(void);
 	void showDropBoxWidgetActionTriggered(bool checked);
 	void showFolderContextActionTriggered(void);
@@ -209,4 +212,6 @@ private:
 	QButtonGroup *m_modeButtonGroup;
 
 	CustomEventFilter *m_evenFilterCustumParamsHelp;
+	CustomEventFilter *m_evenFilterOutputFolderMouse;
+	CustomEventFilter *m_evenFilterOutputFolderView;
 };

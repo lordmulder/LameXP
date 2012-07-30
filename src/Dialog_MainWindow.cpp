@@ -227,11 +227,18 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	outputFolderView->setMouseTracking(false);
 	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	outputFolderView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-	outputFolderView->installEventFilter(this);
-	outputFoldersEditorLabel->installEventFilter(this);
-	outputFoldersFovoritesLabel->installEventFilter(this);
+
+	m_evenFilterOutputFolderMouse = new CustomEventFilter;
+	outputFoldersEditorLabel->installEventFilter(m_evenFilterOutputFolderMouse);
+	outputFoldersFovoritesLabel->installEventFilter(m_evenFilterOutputFolderMouse);
+	outputFolderLabel->installEventFilter(m_evenFilterOutputFolderMouse);
+
+	m_evenFilterOutputFolderView = new CustomEventFilter;
+	outputFolderView->installEventFilter(m_evenFilterOutputFolderView);
+
 	SET_CHECKBOX_STATE(saveToSourceFolderCheckBox, m_settings->outputToSourceDir());
 	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
+	
 	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
 	connect(outputFolderView, SIGNAL(pressed(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
@@ -244,6 +251,9 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
 	connect(prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
 	connect(outputFolderEdit, SIGNAL(editingFinished()), this, SLOT(outputFolderEditFinished()));
+	connect(m_evenFilterOutputFolderMouse, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderMouseEventOccurred(QWidget*, QEvent*)));
+	connect(m_evenFilterOutputFolderView, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderViewEventOccurred(QWidget*, QEvent*)));
+
 	if(m_outputFolderContextMenu = new QMenu())
 	{
 		m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
@@ -253,14 +263,15 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		connect(m_showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
 		connect(m_refreshFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(refreshFolderContextActionTriggered()));
 	}
+
 	if(m_outputFolderFavoritesMenu = new QMenu())
 	{
 		m_addFavoriteFolderAction = m_outputFolderFavoritesMenu->addAction(QIcon(":/icons/add.png"), "N/A");
 		m_outputFolderFavoritesMenu->insertSeparator(m_addFavoriteFolderAction);
 		connect(m_addFavoriteFolderAction, SIGNAL(triggered(bool)), this, SLOT(addFavoriteFolderActionTriggered()));
 	}
+
 	outputFolderEdit->setVisible(false);
-	outputFolderLabel->installEventFilter(this);
 	if(m_outputFolderNoteBox = new QLabel(outputFolderView))
 	{
 		m_outputFolderNoteBox->setAutoFillBackground(true);
@@ -270,6 +281,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		m_outputFolderNoteBox->hide();
 
 	}
+
 	outputFolderViewClicked(QModelIndex());
 	refreshFavorites();
 	
@@ -417,7 +429,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
-	connect(m_evenFilterCustumParamsHelp, SIGNAL(clicked(QObject*)), this, SLOT(customParamsHelpRequested(QObject*)));
+	connect(m_evenFilterCustumParamsHelp, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 
 	//--------------------------------
 	// Force initial GUI update
@@ -616,6 +628,8 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_outputFolderContextMenu);
 	LAMEXP_DELETE(m_dropBox);
 	LAMEXP_DELETE(m_evenFilterCustumParamsHelp);
+	LAMEXP_DELETE(m_evenFilterOutputFolderMouse);
+	LAMEXP_DELETE(m_evenFilterOutputFolderView);
 }
 
 ////////////////////////////////////////////////////////////
@@ -1089,110 +1103,6 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 		{
 			QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 			QTimer::singleShot(250, this, SLOT(restoreCursor()));
-		}
-	}
-	else if(obj == outputFolderView)
-	{
-		switch(event->type())
-		{
-		case QEvent::Enter:
-		case QEvent::Leave:
-		case QEvent::KeyPress:
-		case QEvent::KeyRelease:
-		case QEvent::FocusIn:
-		case QEvent::FocusOut:
-		case QEvent::TouchEnd:
-			outputFolderViewClicked(outputFolderView->currentIndex());
-			break;
-		}
-	}
-	else if(obj == outputFolderLabel)
-	{
-		switch(event->type())
-		{
-		case QEvent::MouseButtonPress:
-			if(dynamic_cast<QMouseEvent*>(event)->button() == Qt::LeftButton)
-			{
-				QString path = outputFolderLabel->text();
-				if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
-				ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
-			}
-			break;
-		case QEvent::Enter:
-			outputFolderLabel->setForegroundRole(QPalette::Link);
-			break;
-		case QEvent::Leave:
-			outputFolderLabel->setForegroundRole(QPalette::WindowText);
-			break;
-		}
-	}
-	else if(obj == outputFoldersFovoritesLabel)
-	{
-		QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event);
-		QPoint pos = (mouseEvent != NULL) ? mouseEvent->pos() : QPoint();
-		QWidget *sender = dynamic_cast<QLabel*>(obj);
-
-		switch(event->type())
-		{
-		case QEvent::Enter:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
-			break;
-		case QEvent::MouseButtonPress:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Sunken);
-			break;
-		case QEvent::MouseButtonRelease:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
-			if(sender && mouseEvent)
-			{
-				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
-				{
-					if(outputFolderView->isEnabled())
-					{
-						m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
-					}
-				}
-			}
-			break;
-		case QEvent::Leave:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
-			break;
-		}
-	}
-	else if(obj == outputFoldersEditorLabel)
-	{
-		QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event);
-		QPoint pos = (mouseEvent != NULL) ? mouseEvent->pos() : QPoint();
-		QWidget *sender = dynamic_cast<QLabel*>(obj);
-
-		switch(event->type())
-		{
-		case QEvent::Enter:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
-			break;
-		case QEvent::MouseButtonPress:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Sunken);
-			break;
-		case QEvent::MouseButtonRelease:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
-			if(sender && mouseEvent)
-			{
-				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
-				{
-					if(outputFolderView->isEnabled())
-					{
-						outputFolderView->setEnabled(false);
-						outputFolderLabel->setVisible(false);
-						outputFolderEdit->setVisible(true);
-						outputFolderEdit->setText(outputFolderLabel->text());
-						outputFolderEdit->selectAll();
-						outputFolderEdit->setFocus();
-					}
-				}
-			}
-			break;
-		case QEvent::Leave:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Plain);
-			break;
 		}
 	}
 
@@ -3081,6 +2991,116 @@ void MainWindow::outputFolderItemExpanded(const QModelIndex &item)
 	m_outputFolderViewCentering = false;
 }
 
+/*
+ * View event for output folder control occurred
+ */
+void MainWindow::outputFolderViewEventOccurred(QWidget *sender, QEvent *event)
+{
+	switch(event->type())
+	{
+	case QEvent::Enter:
+	case QEvent::Leave:
+	case QEvent::KeyPress:
+	case QEvent::KeyRelease:
+	case QEvent::FocusIn:
+	case QEvent::FocusOut:
+	case QEvent::TouchEnd:
+		outputFolderViewClicked(outputFolderView->currentIndex());
+		break;
+	}
+}
+
+/*
+ * Mouse event for output folder control occurred
+ */
+void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
+{
+	QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event);
+	QPoint pos = (mouseEvent) ? mouseEvent->pos() : QPoint();
+
+	if(sender == outputFolderLabel)
+	{
+		switch(event->type())
+		{
+		case QEvent::MouseButtonPress:
+			if(mouseEvent && (mouseEvent->button() == Qt::LeftButton))
+			{
+				QString path = outputFolderLabel->text();
+				if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
+				ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
+			}
+			break;
+		case QEvent::Enter:
+			outputFolderLabel->setForegroundRole(QPalette::Link);
+			break;
+		case QEvent::Leave:
+			outputFolderLabel->setForegroundRole(QPalette::WindowText);
+			break;
+		}
+	}
+	else if(sender == outputFoldersFovoritesLabel)
+	{
+		switch(event->type())
+		{
+		case QEvent::Enter:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
+			break;
+		case QEvent::MouseButtonPress:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Sunken);
+			break;
+		case QEvent::MouseButtonRelease:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
+			if(mouseEvent)
+			{
+				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
+				{
+					if(outputFolderView->isEnabled())
+					{
+						m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
+					}
+				}
+			}
+			break;
+		case QEvent::Leave:
+			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
+			break;
+		}
+	}
+	else if(sender == outputFoldersEditorLabel)
+	{
+		switch(event->type())
+		{
+		case QEvent::Enter:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
+			break;
+		case QEvent::MouseButtonPress:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Sunken);
+			break;
+		case QEvent::MouseButtonRelease:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
+			if(mouseEvent)
+			{
+				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
+				{
+					if(outputFolderView->isEnabled())
+					{
+						outputFolderView->setEnabled(false);
+						outputFolderLabel->setVisible(false);
+						outputFolderEdit->setVisible(true);
+						outputFolderEdit->setText(outputFolderLabel->text());
+						outputFolderEdit->selectAll();
+						outputFolderEdit->setFocus();
+					}
+				}
+			}
+			break;
+		case QEvent::Leave:
+			outputFoldersEditorLabel->setFrameShadow(QFrame::Plain);
+			break;
+		}
+	}
+}
+
 // =========================================================
 // Metadata tab slots
 // =========================================================
@@ -3780,30 +3800,44 @@ void MainWindow::useCustomTempFolderChanged(bool checked)
 }
 
 /*
- * Show help for custom parameters
+ * Help for custom parameters was requested
  */
-void MainWindow::customParamsHelpRequested(QObject *obj)
+void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 {
-	QString toolName, command;
-
-	if(obj == helpCustomParamLAME)      { toolName = "lame.exe";        command = "--help"; }
-	if(obj == helpCustomParamOggEnc)    { toolName = "oggenc2.exe";     command = "--help"; }
-	if(obj == helpCustomParamNeroAAC)
+	if(event->type() != QEvent::MouseButtonRelease)
 	{
-		if(m_qaacEncoderAvailable)      { toolName = "qaac.exe";        command = "--help"; }
-		else if(m_fhgEncoderAvailable)  { toolName = "fhgaacenc.exe";   command = "";       }
-		else if(m_neroEncoderAvailable) { toolName = "neroAacEnc.exe";  command = "-help";  }
-	}
-	if(obj == helpCustomParamFLAC)      { toolName = "flac.exe";        command = "--help"; }
-	if(obj == helpCustomParamAften)     { toolName = "aften.exe";       command = "-h";     }
-	if(obj == helpCustomParamOpus)      { toolName = "opusenc_std.exe"; command = "--help"; }
-
-	if(toolName.isEmpty() || command.isNull())
-	{
-		MessageBeep(MB_ICONERROR);
 		return;
 	}
 
+	if(QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event))
+	{
+		QPoint pos = mouseEvent->pos();
+		if(!(pos.x() <= obj->width() && pos.y() <= obj->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton))
+		{
+			return;
+		}
+	}
+
+	if(obj == helpCustomParamLAME)      showCustomParamsHelpScreen("lame.exe",        "--longhelp");
+	if(obj == helpCustomParamOggEnc)    showCustomParamsHelpScreen("oggenc2.exe",     "--help"    );
+	if(obj == helpCustomParamNeroAAC)
+	{
+		if(m_qaacEncoderAvailable)      showCustomParamsHelpScreen("qaac.exe",        "--help"    );
+		else if(m_fhgEncoderAvailable)  showCustomParamsHelpScreen("fhgaacenc.exe",   ""          );
+		else if(m_neroEncoderAvailable) showCustomParamsHelpScreen("neroAacEnc.exe",  "-help"     );
+	}
+	if(obj == helpCustomParamFLAC)      showCustomParamsHelpScreen("flac.exe",        "--help"    );
+	if(obj == helpCustomParamAften)     showCustomParamsHelpScreen("aften.exe",       "-h"        );
+	if(obj == helpCustomParamOpus)      showCustomParamsHelpScreen("opusenc_std.exe", "--help"    );
+
+	MessageBeep(MB_ICONERROR);
+}
+
+/*
+ * Show help for custom parameters
+ */
+void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QString &command)
+{
 	const QString binary = lamexp_lookup_tool(toolName);
 	if(binary.isEmpty())
 	{
@@ -3816,18 +3850,21 @@ void MainWindow::customParamsHelpRequested(QObject *obj)
 	process->setProcessChannelMode(QProcess::MergedChannels);
 	process->setReadChannel(QProcess::StandardOutput);
 	process->start(binary, command.isEmpty() ? QStringList() : QStringList() << command);
-	
+	qApp->setOverrideCursor(QCursor(Qt::WaitCursor));
+
 	if(process->waitForStarted(15000))
 	{
 		qApp->processEvents();
 		process->waitForFinished(15000);
 	}
+	
 	if(process->state() != QProcess::NotRunning)
 	{
 		process->kill();
 		process->waitForFinished(-1);
 	}
 
+	qApp->restoreOverrideCursor();
 	QStringList output; bool spaceFlag = true;
 
 	while(process->canReadLine())
@@ -3848,6 +3885,7 @@ void MainWindow::customParamsHelpRequested(QObject *obj)
 
 	if(output.count() < 1)
 	{
+		qWarning("Empty output, cannot show help screen!");
 		MessageBeep(MB_ICONERROR);
 	}
 
