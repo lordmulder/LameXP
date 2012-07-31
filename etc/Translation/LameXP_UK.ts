@@ -271,6 +271,10 @@
         <source>Variable</source>
         <translation>Змінний</translation>
     </message>
+    <message>
+        <source>Encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueImportDialog</name>

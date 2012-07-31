@@ -305,51 +305,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="261"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="310"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="264"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="313"/>
         <source>Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="278"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="281"/>
         <source>Channels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="283"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="286"/>
         <source>Samplerate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="288"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="291"/>
         <source>Bitdepth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="305"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="308"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="314"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="317"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="321"/>
         <location filename="../../src/Model_AudioFile.cpp" line="324"/>
         <location filename="../../src/Model_AudioFile.cpp" line="327"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
         <source>Bitrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="321"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="324"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="324"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="327"/>
         <source>Variable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Model_AudioFile.cpp" line="336"/>
+        <source>Encoder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

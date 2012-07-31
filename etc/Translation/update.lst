@@ -81,6 +81,7 @@
 ..\..\src\Tool_WaveProperties.cpp 
 ..\..\src\WinSevenTaskbar.cpp 
 ..\..\src\Config.h 
+..\..\src\CustomEventFilter.h 
 ..\..\src\Decoder_AAC.h 
 ..\..\src\Decoder_Abstract.h 
 ..\..\src\Decoder_AC3.h 

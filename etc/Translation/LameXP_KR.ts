@@ -270,6 +270,10 @@
         <source>Variable</source>
         <translation type="unfinished">변수</translation>
     </message>
+    <message>
+        <source>Encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueImportDialog</name>
