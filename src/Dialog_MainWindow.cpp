@@ -3818,19 +3818,19 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 		}
 	}
 
-	if(obj == helpCustomParamLAME)      showCustomParamsHelpScreen("lame.exe",        "--longhelp");
-	if(obj == helpCustomParamOggEnc)    showCustomParamsHelpScreen("oggenc2.exe",     "--help"    );
-	if(obj == helpCustomParamNeroAAC)
+	if(obj == helpCustomParamLAME)         showCustomParamsHelpScreen("lame.exe", "--longhelp");
+	else if(obj == helpCustomParamOggEnc)  showCustomParamsHelpScreen("oggenc2.exe", "--help");
+	else if(obj == helpCustomParamNeroAAC)
 	{
-		if(m_qaacEncoderAvailable)      showCustomParamsHelpScreen("qaac.exe",        "--help"    );
-		else if(m_fhgEncoderAvailable)  showCustomParamsHelpScreen("fhgaacenc.exe",   ""          );
-		else if(m_neroEncoderAvailable) showCustomParamsHelpScreen("neroAacEnc.exe",  "-help"     );
+		if(m_qaacEncoderAvailable)         showCustomParamsHelpScreen("qaac.exe", "--help");
+		else if(m_fhgEncoderAvailable)     showCustomParamsHelpScreen("fhgaacenc.exe", "");
+		else if(m_neroEncoderAvailable)    showCustomParamsHelpScreen("neroAacEnc.exe", "-help");
+		else MessageBeep(MB_ICONERROR);
 	}
-	if(obj == helpCustomParamFLAC)      showCustomParamsHelpScreen("flac.exe",        "--help"    );
-	if(obj == helpCustomParamAften)     showCustomParamsHelpScreen("aften.exe",       "-h"        );
-	if(obj == helpCustomParamOpus)      showCustomParamsHelpScreen("opusenc_std.exe", "--help"    );
-
-	MessageBeep(MB_ICONERROR);
+	else if(obj == helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
+	else if(obj == helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
+	else if(obj == helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc_std.exe", "--help");
+	else MessageBeep(MB_ICONERROR);
 }
 
 /*
