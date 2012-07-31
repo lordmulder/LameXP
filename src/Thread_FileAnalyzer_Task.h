@@ -90,7 +90,6 @@ private:
 	bool checkFile_CDDA(QFile &file);
 	void retrieveCover(AudioFileModel &audioFile, cover_t coverType, const QByteArray &coverData);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
-	bool analyzeOpusFile(const QString &filePath, AudioFileModel &info);
 	void waitForPreviousThreads(void);
 
 	const unsigned __int64 m_threadIdx;

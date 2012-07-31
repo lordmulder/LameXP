@@ -97,6 +97,7 @@ public:
 	void setFormatAudioType(const QString &type);
 	void setFormatAudioProfile(const QString &profile);
 	void setFormatAudioVersion(const QString &version);
+	void setFormatAudioEncodeLib(const QString &encodeLib);
 	void setFormatAudioSamplerate(unsigned int samplerate);
 	void setFormatAudioChannels(unsigned int channels);
 	void setFormatAudioBitdepth(unsigned int bitdepth);
@@ -122,6 +123,7 @@ private:
 	QString m_formatAudioType;
 	QString m_formatAudioProfile;
 	QString m_formatAudioVersion;
+	QString m_formatAudioEncodeLib;
 	unsigned int m_formatAudioSamplerate;
 	unsigned int m_formatAudioChannels;
 	unsigned int m_formatAudioBitdepth;

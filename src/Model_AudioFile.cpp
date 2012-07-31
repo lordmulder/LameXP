@@ -50,6 +50,7 @@ AudioFileModel::AudioFileModel(const AudioFileModel &model, bool copyMetaInfo)
 	setFormatAudioType(model.m_formatAudioType);
 	setFormatAudioProfile(model.m_formatAudioProfile);
 	setFormatAudioVersion(model.m_formatAudioVersion);
+	setFormatAudioEncodeLib(model.m_formatAudioEncodeLib);
 	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
 	setFormatAudioChannels(model.m_formatAudioChannels);
 	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
@@ -88,6 +89,7 @@ AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 	setFormatAudioType(model.m_formatAudioType);
 	setFormatAudioProfile(model.m_formatAudioProfile);
 	setFormatAudioVersion(model.m_formatAudioVersion);
+	setFormatAudioEncodeLib(model.m_formatAudioEncodeLib);
 	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
 	setFormatAudioChannels(model.m_formatAudioChannels);
 	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
@@ -124,6 +126,7 @@ void AudioFileModel::resetAll(void)
 	m_formatAudioType.clear();
 	m_formatAudioProfile.clear();
 	m_formatAudioVersion.clear();
+	m_formatAudioEncodeLib.clear();
 	
 	m_formatAudioSamplerate = 0;
 	m_formatAudioChannels = 0;
@@ -328,6 +331,10 @@ const QString AudioFileModel::formatAudioCompressInfo(void) const
 				break;
 			}
 		}
+		if(!m_formatAudioEncodeLib.isEmpty())
+		{
+			info.append(QString(", %1: %2").arg(tr("Encoder"), m_formatAudioEncodeLib));
+		}
 		return info;
 	}
 	else
@@ -418,6 +425,11 @@ void AudioFileModel::setFormatAudioProfile(const QString &profile)
 void AudioFileModel::setFormatAudioVersion(const QString &version)
 {
 	m_formatAudioVersion = version;
+}
+
+void AudioFileModel::setFormatAudioEncodeLib(const QString &encodeLib)
+{
+	m_formatAudioEncodeLib = encodeLib;
 }
 
 void AudioFileModel::setFormatAudioSamplerate(unsigned int samplerate)

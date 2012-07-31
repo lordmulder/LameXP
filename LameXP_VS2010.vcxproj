@@ -452,7 +452,13 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Thread_CueSplitter.cpp" />
     <ClCompile Include="src\Thread_DiskObserver.cpp" />
     <ClCompile Include="src\Thread_FileAnalyzer.cpp" />
-    <ClCompile Include="src\Thread_FileAnalyzer_ST.cpp" />
+    <ClCompile Include="src\Thread_FileAnalyzer_ST.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Qt5|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static_Qt5|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Thread_FileAnalyzer_Task.cpp" />
     <ClCompile Include="src\Thread_Initialization.cpp" />
     <ClCompile Include="src\Thread_MessageHandler.cpp" />

@@ -99,6 +99,7 @@ const char *FileAnalyzer::g_tags_aud[] =
 	"BitDepth",
 	"BitRate",
 	"BitRate_Mode",
+	"Encoded_Library",
 	NULL
 };
 
