@@ -26,6 +26,7 @@ a:visited { color: #0000EE; }
 <li><a href="#fd53d98a">Who created LameXP?</a>
 <li><a href="#de1c5e44">What license is LameXP released under?</a>
 <li><a href="#303e5fa7">Do I have to pay for LameXP? / How can I donate to the authors of LameXP?</a>
+<li><a href="#e75ad4ac">Why is the thing called "LameXP" when it does so much more?</a>
 <li><a href="#054010d9">MP3, AAC or Vorbis - What is the best compressed audio format?</a>
 <li><a href="#411d1257">What is the difference between the CBR, VBR and ABR rate control modes?</a>
 <li><a href="#71a113b0">How do I enable AAC/MP4/M4A output (encoding) in LameXP?</a>
@@ -216,6 +217,23 @@ If you want to support the development of LameXP, you can do so by contributing 
 
 <br><br>
 
+<a name="e75ad4ac"></a><b>Why is the thing called "LameXP" although it does so much more?</b><br>
+<br>
+LameXP was created as a (very simple!) GUI front-end to the LAME MP3 encoder, back in 2004. That version did<br>
+NOT support any encoders except for LAME, it did NOT support any input formats other than Wave Audio files,<br>
+it did NOT support any audio filters, it did NOT support multi-threading, it did NOT support Unicode file<br>
+names and it did NOT handle meta data at all. Because the program really was nothing but (yet another) LAME<br>
+front-end for Windows and because at that time Windows XP was the operating system of choice - for many<br>
+people it still is nowadays - I decided to call the program "LameXP" (aka "LAME for Windows XP"). Since then<br>
+more and more features have been added to LameXP. The program even went through two complete re-writes. Thus<br>
+the name "LameXP" may not be the most meaningful one, especially because the program supports a huge number<br>
+of encoders and decoders now, but I'm obviosuly lacking the creativity to come up with a better name. Also I<br>
+think we already have enough doubious "super-duper everything to everything converter" programs out there...<br>
+<br>
+So to make a long story short: The name has historical reasons and probably isn't going to change ;-)<br><br>
+
+<br><br>
+
 <a name="054010d9"></a><b>MP3, AAC or Vorbis - What is the best compressed audio format?</b><br>
 <br>
 This question can NOT be answered in general. The best audio format is the format that works best for you!<br>
@@ -252,31 +270,35 @@ Another resource you might find interesting are Sebastian's Public Listening Tes
 <br>
 CBR means "constant bitrate" and, as the name implies, CBR mode allocates the bits at a constant rate. This<br>
 means that each part of the audio will get the same amount of bits, regardless of its content. Obviously this<br>
-will waste bits in parts of the audio that are easy to compress. At the same time the quality of parts of the<br>
-audio that are hard to compress will be degraded. Consequently using CBR mode is NOT a very good idea, unless<br>
-you really have to for some reason. However CBR mode has the advantage that the final size of the compressed<br>
-file is perfectly predictable. The resulting file size is defined simply as "duration &times; fixed bitrate".<br>
+will waste bits in parts of the audio that are "easy" to compress. At the same time the quality of parts of<br>
+the audio that are "hard" to compress will be degraded. Consequently using CBR mode is NOT a very good idea,<br>
+unless you really have to enforce a 100% constant bitrate (this is almost NEVER the case). However CBR mode<br>
+has the advantage that the final size of the compressed file is perfectly predictable. The resulting file<br>
+size is defined simply as "duration &times; fixed_bitrate". Note: The file size *is* predictable with ABR mode too!<br>
 <br>
 VBR means "variable bitrate" and, in contrast to CBR mode, VBR mode allows the bitrate to vary/fluctuate.<br>
 Thus the VBR mode enables the encoder to adapt the bitrate with respect to the content of the audio. Parts of<br>
-the audio that are easy to compress will get a lower bitrate in order to safe bits. Parts of the audio that<br>
-are hard to compress will get a higher bitrate in order to avoid quality degradation. Or in other words: VBR<br>
-mode "moves" the bits to the locations where they are actually needed. Therefore the VBR mode achieves a much<br>
-better compression efficiency than the CBR mode, i.e. with VBR mode you can get a better quality at the same<br>
-file size, or the same quality at a smaller file size (compared to CBR mode). One disadvantage of the VBR<br>
-mode is, however, that the final size of the compressed file can NOT be predicted. The resulting file size is<br>
-defined as "duration &times; average bitrate", but the average bitrate can NOT be known beforehand. That's<br>
-because the average bitrate for a specific VBR quality level can vary greatly, depending solely on the<br>
-complexity of the individual audio. Nonetheless VBR mode generally should be the preferred encoding mode.<br>
+the audio that are "easy" to compress will get a lower bitrate in order to avoid wasting bits there. At the<br>
+same time, parts of the audio that are "hard" to compress will get a higher bitrate in order to avoid quality<br>
+degradation. Or in other words: VBR mode "moves" the bits to the locations where they are actually needed!<br>
+Therefore the VBR mode achieves a much better compression efficiency than the CBR mode. This means with VBR<br>
+mode you can get a better quality at the same file size - or the same quality at a smaller file size. One<br>
+disadvantage of the VBR mode, however, is that the final size of the compressed file can NOT be predicted.<br>
+The resulting file size now is defined as "duration &times; average_bitrate", but the average bitrate is NOT<br>
+known beforehand. That's because the average bitrate for a specific VBR quality level can vary greatly,<br>
+depending solely on the complexity of the individual audio. With VBR mode the encoder uses as many bits as<br>
+required to achieve the desired level of quality. That clearly makes VBR the preferred encoding mode.<br>
 <br>
 ABR means "average bitrate". You can think of ABR mode as a compromise between the CBR and VBR mode. With ABR<br>
 mode the bitrate is allowed to vary/fluctuate, similar to VBR mode. However the ABR mode doesn't work with a<br>
 predefined/fixed quality level, as VBR mode does. Instead in ABR mode the encoder will continuously re-adjust<br>
 the quality level in order to hit the target average(!) bitrate. You can also think of ABR mode as a mode<br>
 that pre-allocates the bits in a CBR-like fashion and then redistributes the bits within a local neighborhood<br>
-as needed. Thus the ABR mode combines advantages of CBR mode (predictability) and VBR mode (good quality).<br>
-The final size of the encoded file is still defined as "duration &times; average bitrate", but with ABR mode the<br>
+as needed. Thus the ABR mode combines advantages of CBR mode (predictability) and VBR mode (higher quality).<br>
+The final size of the encoded file is still defined as "duration &times; average_bitrate", but with ABR mode the<br>
 average bitrate *is* known beforehand. So if you need to hit a specific file size, ABR mode is the solution.<br>
+Using ABR mode is to be preferred over CBR mode. Nonetheless VBR mode usually provides the best experience.<br>
+<br>
 <br>
 Hint: The Nero AAC encoder supports a variant of the ABR mode, the so-called "2-Pass" mode. That mode scans<br>
 through the entire file once (first pass) before the actual encoding is performed (second pass). This way the<br>
@@ -291,10 +313,11 @@ quality for obvious reasons. But drawing the conclusion that there is no differe
 VBR/ABR modes would be very wrong! The differences will become significant when using a reasonable bitrate.<br>
 Another mistake is starting with a low-quality source file and concluding that all modes perform equally bad.<br>
 <br>
-Summary of rate control modes:<br><ul>
-<li>Need to hit a specific fixed file size and still want to retain decent quality? &rArr; ABR mode
-<li>Want to retain a certain level of quality and the file size doesn't matter that much? &rArr; VBR mode
-<li>Avoid CBR mode by all means, unless there are crude restrictions that force you to use it!</ul>
+<br>
+SUMMARY ON RATE CONTROL MODES:<br><ul>
+<li>Need to hit a specific fixed file size and still want to retain a decent quality? &rArr; ABR mode
+<li>Want to retain a certain level of quality and hitting an exact file size is not needed? &rArr; VBR mode
+<li>Avoid CBR mode by all means, unless there are "external" restrictions that force you to use it!</ul>
 
 <br><br>
 

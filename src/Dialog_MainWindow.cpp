@@ -316,10 +316,12 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_encoderButtonGroup->addButton(radioButtonEncoderOpus, SettingsModel::OpusEncoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderDCA, SettingsModel::DCAEncoder);
 	m_encoderButtonGroup->addButton(radioButtonEncoderPCM, SettingsModel::PCMEncoder);
+
 	m_modeButtonGroup = new QButtonGroup(this);
 	m_modeButtonGroup->addButton(radioButtonModeQuality, SettingsModel::VBRMode);
 	m_modeButtonGroup->addButton(radioButtonModeAverageBitrate, SettingsModel::ABRMode);
 	m_modeButtonGroup->addButton(radioButtonConstBitrate, SettingsModel::CBRMode);
+
 	radioButtonEncoderAAC->setEnabled(m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable);
 	radioButtonEncoderMP3->setChecked(m_settings->compressionEncoder() == SettingsModel::MP3Encoder);
 	radioButtonEncoderVorbis->setChecked(m_settings->compressionEncoder() == SettingsModel::VorbisEncoder);
@@ -333,9 +335,15 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	radioButtonModeAverageBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::ABRMode);
 	radioButtonConstBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::CBRMode);
 	sliderBitrate->setValue(m_settings->compressionBitrate());
+	
+	m_evenFilterCompressionTab = new CustomEventFilter();
+	labelCompressionHelp->installEventFilter(m_evenFilterCompressionTab);
+
 	connect(m_encoderButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateEncoder(int)));
 	connect(m_modeButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateRCMode(int)));
+	connect(m_evenFilterCompressionTab, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(compressionTabEventOccurred(QWidget*, QEvent*)));
 	connect(sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
+
 	updateEncoder(m_encoderButtonGroup->checkedId());
 
 	//--------------------------------
@@ -630,6 +638,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_evenFilterCustumParamsHelp);
 	LAMEXP_DELETE(m_evenFilterOutputFolderMouse);
 	LAMEXP_DELETE(m_evenFilterOutputFolderView);
+	LAMEXP_DELETE(m_evenFilterCompressionTab);
 }
 
 ////////////////////////////////////////////////////////////
@@ -689,42 +698,6 @@ void MainWindow::addFiles(const QStringList &files)
 	{
 		/* ignore any exceptions that may occur */
 	}
-
-	//--ST--
-	//
-	//FileAnalyzer_ST *analyzerST = new FileAnalyzer_ST(files);
-	//connect(analyzerST, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
-	//connect(analyzerST, SIGNAL(progressValChanged(unsigned int)), m_banner, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
-	//connect(analyzerST, SIGNAL(progressMaxChanged(unsigned int)), m_banner, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
-	//connect(analyzerST, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-	//connect(m_banner, SIGNAL(userAbort()), analyzerST, SLOT(abortProcess()), Qt::DirectConnection);
-	//
-	//try
-	//{
-	//	m_fileListModel->setBlockUpdates(true);
-	//	QTime startTime = QTime::currentTime();
-	//	m_banner->show(tr("Adding file(s), please wait..."), analyzerST);
-	//	timeST = startTime.secsTo(QTime::currentTime());
-	//}
-	//catch(...)
-	//{
-	//	/* ignore any exceptions that may occur */
-	//}
-	//
-	//------
-	//
-	//if(timeST > 0 && timeMT > 0)
-	//{
-	//	double speedUp = static_cast<double>(timeST) / static_cast<double>(timeMT);
-	//	qWarning("ST: %d, MT: %d", timeST, timeMT);
-	//	QMessageBox::information(this, "Speed Up", QString().sprintf("Announcement: The new multi-threaded file analyzer is %.1fx faster !!!", speedUp), QMessageBox::Ok);
-	//}
-	//else
-	//{
-	//	QMessageBox::information(this, "Speed Up", "Couldn't compare the the new multi-threaded file analyzer this time!", QMessageBox::Ok);
-	//}
-	//
-	//------
 
 	m_fileListModel->setBlockUpdates(false);
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -3395,6 +3368,17 @@ void MainWindow::updateBitrate(int value)
 			break;
 		}
 		break;
+	}
+}
+
+/*
+ * Event for compression tab occurred
+ */
+void MainWindow::compressionTabEventOccurred(QWidget *sender, QEvent *event)
+{
+	if((sender == labelCompressionHelp) && (event->type() == QEvent::MouseButtonPress))
+	{
+		QDesktopServices::openUrl(QUrl("http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#054010d9"));
 	}
 }
 

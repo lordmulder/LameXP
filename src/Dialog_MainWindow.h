@@ -71,6 +71,7 @@ private slots:
 	void clearFilesButtonClicked(void);
 	void clearMetaButtonClicked(void);
 	void closeButtonClicked(void);
+	void compressionTabEventOccurred(QWidget*, QEvent*);
 	void customParamsChanged(void);
 	void customParamsHelpRequested(QWidget *obj, QEvent *event);
 	void customTempFolderChanged(const QString &text);
@@ -214,4 +215,5 @@ private:
 	CustomEventFilter *m_evenFilterCustumParamsHelp;
 	CustomEventFilter *m_evenFilterOutputFolderMouse;
 	CustomEventFilter *m_evenFilterOutputFolderView;
+	CustomEventFilter *m_evenFilterCompressionTab;
 };

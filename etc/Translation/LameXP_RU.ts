@@ -1903,6 +1903,10 @@
         <source>OpusEnc:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

@@ -1898,6 +1898,10 @@
         <source>OpusEnc:</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Show Help</source>
+        <translation>Hilfethemen anzeigen</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
