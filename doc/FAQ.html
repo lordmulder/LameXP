@@ -26,8 +26,8 @@ a:visited { color: #0000EE; }
 <li><a href="#fd53d98a">Who created LameXP?</a>
 <li><a href="#de1c5e44">What license is LameXP released under?</a>
 <li><a href="#303e5fa7">Do I have to pay for LameXP? / How can I donate to the authors of LameXP?</a>
-<li><a href="#e75ad4ac">Why is the thing called "LameXP" when it does so much more?</a>
-<li><a href="#054010d9">MP3, AAC or Vorbis - What is the best compressed audio format?</a>
+<li><a href="#e75ad4ac">Why is the thing called "LameXP" although it does so much more?</a>
+<li><a href="#054010d9">MP3, AAC/MP4, Vorbis, FLAC or Opus - What is the best audio format?</a>
 <li><a href="#411d1257">What is the difference between the CBR, VBR and ABR rate control modes?</a>
 <li><a href="#71a113b0">How do I enable AAC/MP4/M4A output (encoding) in LameXP?</a>
 <li><a href="#126abc5a">Is there a way to output ".m4a" or ".aac" files with LameXP?</a>
@@ -234,11 +234,50 @@ So to make a long story short: The name has historical reasons and probably isn'
 
 <br><br>
 
-<a name="054010d9"></a><b>MP3, AAC or Vorbis - What is the best compressed audio format?</b><br>
+<a name="054010d9"></a><b>MP3, AAC/MP4, Vorbis, FLAC or Opus - What is the best audio format?</b><br>
 <br>
 This question can NOT be answered in general. The best audio format is the format that works best for you!<br>
 <br>
-Having said that, there are a few things to consider. First of all: All output formats supported by LameXP,<br>
+Having said that, let's have a look at the output formats supported by LameXP: MPEG-1 Audio Layer III, better<br>
+known as "MP3", was released in 1993 and probably still is the most widely used and most widely supported<br>
+compressed audio format. So if compatibility is your concern, MP3 is a good choice. Also MP3 can retain very<br>
+good quality - at higher bitrates. However MP3 does not support multi-channel audio and it does not perform<br>
+well at lower bitrates. MP3 also is pretty restrictive with the sampling rates and bitrates that it supports.<br>
+<br>
+Advanced Audio Coding, often abbreviated as "AAC", was introduced as part of the MPEG-2 standard (1997) and<br>
+has been adopted by the MPEG-4 standard later (1999). AAC is often considered to be the "successor" of MP3.<br>
+Compared to MP3, AAC adds support for multi-channel audio, it support more sampling rates as well as more<br>
+flexible bitrates. Two variants of AAC are commonly used: Low-Complexity (LC) and High-Efficiency (HE). While<br>
+LC-AAC is intended for medium to high bitrates, LC-AAC works best at low bitrates. At low bitrates, HE-AAC<br>
+clearly outperforms MP3 - at higher bitrates the differences aren't that clear. AAC streams are usually, but<br>
+not necessarily, encapsulated in an MP4 (MPEG-4 Part 14) container. That's why AAC audio files almost always<br>
+have an ".mp4" file extension. Still the audio format is AAC - MP4 is only the container! Be aware that some<br>
+applications create audio-only MP4 files with a non-standard (wrong) ".m4a" file extension. AAC is widely<br>
+supported too nowadays (especially in "mobile" devices), though not all players fully support the HE variant.<br>
+<br>
+Vorbis, often called "Ogg Vorbis", is a free audio format, developed by the Xiph foundation and released in<br>
+2000. In contrast to MP3/AAC, Vorbis is 100% patent-free. Vorbis streams are usually, but not necessarily,<br>
+encapsulated in an Ogg container (developed by Xiph too) and thus Vorbis files almost always have an ".ogg"<br>
+file extension. Vorbis is known to outperform MP3 at the same bitrate, although the differences are less<br>
+apparent at high bitrates. Furthermore HE-AAC has been known to outperform Vorbis at lower bitrates, though<br>
+there now is a tuned Vorbis encoder ("aoTuV") which further improves the quality of Vorbis - especially at<br>
+the lower bitrates. Hardware support for Ogg Vorbis is worse than for MP3/AAC, but it's constantly improving.<br>
+<br>
+Free Lossless Audio Codec, better known as "FLAC", is a lossless audio format. This means that in contrast to<br>
+MP3, AAC and Vorbis, with the FLAC compression there is absolutely no loss in quality. This made FLAC famous<br>
+among "audiophile" people. However the lossless nature of FLAC comes at a big disadvantage: The compression<br>
+ratio of FLAC files isn't anywhere near the "lossy" audio formats. Or in other words: FLAC files are huge!<br>
+They are not as big as uncompressed Wave files, but usually the size cannot be reduced to less than 75%. Just<br>
+like Ogg Vorbis, hardware support for FLAC files is worse than for MP3/AAC, but it's constantly improving.<br>
+<br>
+Opus is a new audio format which, at this time (Aug 2012), is still under active development. It is being<br>
+developed by engineers from Xiph, Mozilla and Skype/Microsoft. Opus has been accepted as an upcoming Internet<br>
+standard by the IETF recently. The Opus format is designed to work for low-latency speech encoding (VoIP) as<br>
+well as for high-quality music encoding. Opus is sometimes referred to as the "successor" of both, Vorbis and<br>
+Speex (the latter is Xiph's current speech codec). Currently, Opus reaches the quality of 128 kbps MP3 at an<br>
+bitrate of 80 kbps. As the development is still in progress, significant improvements are to be expected.<br>
+<!--
+there are a few things to consider. First of all: All output formats supported by LameXP,<br>
 except for FLAC and PCM/Wave, use a lossy(!) kind of compression. That applies to MP3 and AAC as well as<br>
 Vorbis. Consequently with these formats a certain quality loss is unavoidable when re-encoding/converting, no<br>
 matter what. This is called "generation loss". Nonetheless all three formats (MP3, AAC and Vorbis) are able<br>
@@ -256,6 +295,8 @@ especially on portable devices. Hardware support for Vorbis is more limited, but
 is a priority, then MP3 is a good choice. However the MP3 format does NOT support multi-channel audio, which<br>
 means that you will have to use AAC or Vorbis for multi-channel files. Last but not least, if you prefer a<br>
 truly "open" and patent-free audio format, then Vorbis will be the format of your choice!<br>
+-->
+<br>
 <br>
 Another resource you might find interesting are Sebastian's Public Listening Tests:<br><ul>
 <li><a href="http://listening-tests.hydrogenaudio.org/sebastian/mp3-128-1/results.htm" target="_blank">MP3 listening test @ 128 kbps, includes MP3 encoders (like LAME) only</a>
