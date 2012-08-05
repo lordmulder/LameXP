@@ -695,6 +695,7 @@ void InitializationThread::initQAac(void)
 	else if(qaacVersion < lamexp_toolver_qaacenc())
 	{
 		qWarning("QAAC version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.??", qaacVersion, "N/A").toLatin1().constData());
+		qWarning("Minimum required QAAC version currently is: %s.\n", lamexp_version2string("v?.??", lamexp_toolver_qaacenc(), "N/A").toLatin1().constData());
 		for(int i = 0; i < 2; i++) LAMEXP_DELETE(qaacBin[i]);
 		return;
 	}
@@ -708,6 +709,7 @@ void InitializationThread::initQAac(void)
 	else if(coreVersion < lamexp_toolver_coreaudio())
 	{
 		qWarning("CoreAudioToolbox version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.?.?.?", coreVersion, "N/A").toLatin1().constData());
+		qWarning("Minimum required CoreAudioToolbox version currently is: %s.\n", lamexp_version2string("v?.??", lamexp_toolver_coreaudio(), "N/A").toLatin1().constData());
 		for(int i = 0; i < 2; i++) LAMEXP_DELETE(qaacBin[i]);
 		return;
 	}

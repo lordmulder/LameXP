@@ -1,0 +1,94 @@
+ src/opusdec.c |   17 +++++++++++++++--
+ src/opusenc.c |   17 +++++++----------
+ 2 files changed, 22 insertions(+), 12 deletions(-)
+
+diff --git a/src/opusdec.c b/src/opusdec.c
+index fd52b2b..3f685d4 100644
+--- a/src/opusdec.c
++++ b/src/opusdec.c
+@@ -57,6 +57,7 @@
+ # include <io.h>
+ # include <fcntl.h>
+ # define I64FORMAT "I64d"
++# define ftello64(_x) _ftelli64((_x))
+ #else
+ # define I64FORMAT "lld"
+ # define fopen_utf8(_x,_y) fopen((_x),(_y))
+@@ -646,6 +647,7 @@ int main(int argc, char **argv)
+    int close_in=0;
+    int eos=0;
+    ogg_int64_t audio_size=0;
++   ogg_int64_t input_size=0;
+    double last_coded_seconds=0;
+    float loss_percent=-1;
+    float manual_gain=0;
+@@ -797,6 +799,16 @@ int main(int argc, char **argv)
+       close_in=1;
+    }
+ 
++   /*detect input size*/
++   if(fin != stdin)
++   {
++      struct _stat64 info;
++      if(_fstati64(_fileno(fin), &info) == 0)
++      {
++        input_size = info.st_size;
++      }
++   }
++
+    /*Init Ogg data struct*/
+    ogg_sync_init(&oy);
+ 
+@@ -919,10 +931,11 @@ int main(int argc, char **argv)
+                if(!quiet){
+                   static const char spinner[]="|/-\\";
+                   double coded_seconds = (double)audio_size/(channels*rate*sizeof(short));
++                  double percent = (input_size>0) ? ((double)ftello64(fin))/((double)input_size) : 0.0;
+                   if(coded_seconds>=last_coded_seconds+1){
+-                     fprintf(stderr,"\r[%c] %02d:%02d:%02d", spinner[last_spin&3],
++                     fprintf(stderr,"\r[%c] %02d:%02d:%02d (%.f%%)", spinner[last_spin&3],
+                              (int)(coded_seconds/3600),(int)(coded_seconds/60)%60,
+-                             (int)(coded_seconds)%60);
++                             (int)(coded_seconds)%60,percent*100.0);
+                      fflush(stderr);
+                      last_spin++;
+                      last_coded_seconds=coded_seconds;
+diff --git a/src/opusenc.c b/src/opusenc.c
+index 3051bee..0a5bc4f 100644
+--- a/src/opusenc.c
++++ b/src/opusenc.c
+@@ -910,6 +910,7 @@ int main(int argc, char **argv)
+         double estbitrate;
+         double coded_seconds=nb_encoded/(double)coding_rate;
+         double wall_time=(stop_time-start_time)+1e-6;
++        double percent = 0.0;
+         char sbuf[55];
+         static const char spinner[]="|/-\\";
+         if(!with_hard_cbr){
+@@ -917,20 +918,16 @@ int main(int argc, char **argv)
+           estbitrate=(total_bytes*8.0/coded_seconds)*tweight+
+                       bitrate*(1.-tweight);
+         }else estbitrate=nbBytes*8*((double)coding_rate/frame_size);
++        if(inopt.total_samples_per_channel>0){
++          percent = ((double)nb_encoded) / ((double)inopt.total_samples_per_channel);
++        }
+         fprintf(stderr,"\r");
+         for(i=0;i<last_spin_len;i++)fprintf(stderr," ");
+-        if(inopt.total_samples_per_channel>0 && inopt.total_samples_per_channel<nb_encoded){
+-          snprintf(sbuf,54,"\r[%c] %02d%% ",spinner[last_spin&3],
+-          (int)floor(nb_encoded/(double)(inopt.total_samples_per_channel+inopt.skip)*100.));
+-        }else{
+-          snprintf(sbuf,54,"\r[%c] ",spinner[last_spin&3]);
+-        }
+-        last_spin_len=strlen(sbuf);
+-        snprintf(sbuf+last_spin_len,54-last_spin_len,
+-          "%02d:%02d:%02d.%02d %4.3gx realtime, %5.4gkbit/s",
++        snprintf(sbuf,54,"\r[%c] %02d:%02d:%02d.%02d (%.f%%) %4.3gx realtime, %5.4gkbit/s",
++          spinner[last_spin&3],
+           (int)(coded_seconds/3600),(int)(coded_seconds/60)%60,
+           (int)(coded_seconds)%60,(int)(coded_seconds*100)%100,
+-          coded_seconds/wall_time,
++          percent*100.0,coded_seconds/wall_time,
+           estbitrate/1000.);
+         fprintf(stderr,"%s",sbuf);
+         fflush(stderr);
