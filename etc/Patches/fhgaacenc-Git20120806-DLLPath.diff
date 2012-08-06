@@ -1,0 +1,146 @@
+ fhgaacenc.sln           |    6 ++---
+ fhgaacenc/common.h      |    3 ++-
+ fhgaacenc/fhgaacenc.cpp |   67 +++++++++++++++++++++++++++++++++++++++--------
+ 3 files changed, 61 insertions(+), 15 deletions(-)
+
+diff --git a/fhgaacenc/common.h b/fhgaacenc/common.h
+index e7221be..b7d1bf7 100644
+--- a/fhgaacenc/common.h
++++ b/fhgaacenc/common.h
+@@ -6,7 +6,7 @@
+ 
+ #pragma once
+ 
+-#define VERSION 20120624
++#define VERSION 20120806
+ 
+ #ifdef _MSC_VER
+ #define fseeko _fseeki64
+@@ -34,6 +34,7 @@ typedef struct
+ {
+ 	_TCHAR *inFile;
+ 	_TCHAR *outFile;
++	_TCHAR *dllFile;
+ 	codecMode mode;
+ 	int modeQuality;
+ 	codecProfile profile;
+diff --git a/fhgaacenc/fhgaacenc.cpp b/fhgaacenc/fhgaacenc.cpp
+index 1ee1036..a817f17 100644
+--- a/fhgaacenc/fhgaacenc.cpp
++++ b/fhgaacenc/fhgaacenc.cpp
+@@ -8,6 +8,8 @@
+ #include "common.h"
+ #include "FhGAACEncoder.h"
+ 
++typedef BOOL (WINAPI *SetDllDirectoryFun)(__in_opt LPCWSTR lpPathName);
++
+ bool getPathForWinAmp(_TCHAR *path, unsigned int length)
+ {
+ 	if(!path) return false;
+@@ -45,6 +47,7 @@ static void printUsage(void)
+ 	fprintf(stderr,"  Other options \n");
+ 	fprintf(stderr,"\t--ignorelength : ignore the size of data chunk when encoding from pipe\n");
+ 	fprintf(stderr,"\t--quiet        : don't print the progress\n");
++	fprintf(stderr,"\t--dll <path>   : overwrite path to the \"enc_fhgaac.dll\" library\n");
+ }
+ 
+ static void replaceSlashWithBackSlash(_TCHAR *str)
+@@ -60,6 +63,11 @@ static int parseArguments(int argc, _TCHAR* argv[], encodingParameters *params)
+ 	int i;
+ 	for(i=1;i<argc;i++) {
+ 		if(!_tcscmp(argv[i],_T("--quiet"))) params->quiet = true;
++		else if(!_tcscmp(argv[i],_T("--dll"))) {
++			if(++i<argc) {
++				params->dllFile = argv[i];
++			}
++		}
+ 		else if(!_tcscmp(argv[i],_T("--cbr"))) {
+ 			params->mode = kModeCBR;
+ 			if(++i<argc) {
+@@ -111,16 +119,51 @@ int _tmain(int argc, _TCHAR* argv[])
+ {
+ 	_tsetlocale(LC_ALL, _T(""));
+ 
+-	if(argc==1) {
++	if(argc<2) {
++		printUsage();
++		return 0;
++	}
++
++	encodingParameters params;
++	memset(&params,0,sizeof(encodingParameters));
++	params.modeQuality = 4;
++	if(parseArguments(argc, argv, &params)) {
++		if(argc>1)fprintf(stderr,"Error while parsing arguments\n");
+ 		printUsage();
+ 		return 0;
+ 	}
+ 
+-	HMODULE h = LoadLibrary(_T("enc_fhgaac.dll"));
++	fprintf(stderr,"fhgaacenc version %d by tmkk\n\n", VERSION);
++
++	SetDllDirectoryFun SetDllDirectoryPtr = NULL;
++	HMODULE hKernel32 = GetModuleHandle(L"kernel32.dll");
++	if(hKernel32 != NULL)
++	{
++		SetDllDirectoryPtr = (SetDllDirectoryFun) GetProcAddress(hKernel32, "SetDllDirectoryW");
++		if(SetDllDirectoryPtr != NULL) SetDllDirectoryPtr(L"");
++	}
++	
++	if((params.dllFile != NULL) && (SetDllDirectoryPtr != NULL))
++	{
++		_TCHAR tmp[MAX_PATH+1];
++		wcsncpy(tmp, params.dllFile, MAX_PATH+1);
++		tmp[MAX_PATH] = L'\0';
++		size_t len = wcslen(tmp);
++		if(len > 0)
++		{
++			for(size_t i = len-1; i > 0; i--)
++			{
++				if((tmp[i] == L'\\') || (tmp[i] == L'/')) { tmp[i] = L'\0'; break; }
++			}
++		}
++		if(wcslen(tmp) > 0) SetDllDirectoryPtr(tmp);
++	}
++
++	HMODULE h = LoadLibrary((params.dllFile != NULL) ? params.dllFile : _T("enc_fhgaac.dll"));
+ 	if(!h) {
+ 		_TCHAR tmp[MAX_PATH+1];
+ 		if(getPathForWinAmp(tmp,MAX_PATH+1)) {
+-			SetDllDirectory(tmp);
++			if(SetDllDirectoryPtr != NULL) SetDllDirectoryPtr(tmp);
+ 			_sntprintf_s(tmp,MAX_PATH+1,_TRUNCATE,_T("%s\\Plugins\\enc_fhgaac.dll"),tmp);
+ 			h = LoadLibrary(tmp);
+ 		}
+@@ -130,6 +173,16 @@ int _tmain(int argc, _TCHAR* argv[])
+ 		}
+ 	}
+ 
++	if(h)
++	{
++		_TCHAR tmp[MAX_PATH+1];
++		DWORD ret = GetModuleFileName(h, tmp, MAX_PATH+1);
++		if((ret > 0) && ret <= MAX_PATH)
++		{
++			fwprintf(stderr, L"Using encoder DLL:\n%s\n\n", tmp);
++		}
++	}
++
+ 	FhGAACEncoder *fhgenc = new FhGAACEncoder();
+ 
+ 	*(void **)&(fhgenc->createAudio3) = (void *)GetProcAddress(h, "CreateAudio3");
+@@ -147,14 +200,6 @@ int _tmain(int argc, _TCHAR* argv[])
+ 		return 0;
+ 	}
+ 
+-	encodingParameters params;
+-	memset(&params,0,sizeof(encodingParameters));
+-	params.modeQuality = 4;
+-	if(parseArguments(argc, argv, &params)) {
+-		if(argc>1)fprintf(stderr,"Error while parsing arguments\n");
+-		printUsage();
+-		return 0;
+-	}
+ 	/*
+ 	if(params.mode == kModeVBR && params.adtsMode) {
+ 		fprintf(stderr,"Error: only CBR is supported in ADTS AAC encoder.\n");
