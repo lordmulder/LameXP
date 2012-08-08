@@ -79,7 +79,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="328"/>
         <source>The following people have contributed to LameXP:</source>
-        <translation>Följande har medverkat i LameXP</translation>
+        <translation>Följande har medverkat i LameXP:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="329"/>
@@ -144,7 +144,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="388"/>
         <source>Available from vendor web-site as free download:</source>
-        <translation>Tillgänglig som gratis nedladdning, från utvecklarens webbsida.</translation>
+        <translation>Tillgänglig som gratis nedladdning, från utvecklarens webbsida:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="392"/>
@@ -355,7 +355,8 @@
     <message>
         <location filename="../../src/Model_AudioFile.cpp" line="336"/>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Kodare</translatorcomment>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -417,7 +418,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="180"/>
         <source>New Folder</source>
-        <translation type="unfinished">Ny mapp</translation>
+        <translation>Ny mapp</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="193"/>
@@ -891,32 +892,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="790"/>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation>MP3</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="800"/>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg/Vorbis</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="807"/>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation>AAC/MP4</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="814"/>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation>PCM/Wave</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="837"/>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation>A/52</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="844"/>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation>DCA</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="929"/>
@@ -926,7 +927,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="949"/>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation>Opus</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="986"/>
@@ -966,7 +967,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1349"/>
         <source>Show Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa hjälp</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1381"/>
@@ -1233,7 +1234,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2816"/>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation>OpusEnc:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2862"/>
@@ -1404,37 +1405,37 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3615"/>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translation>Opus-alternativ</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3655"/>
         <source>Optimize for Signal Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Optimera för signaltyp:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3697"/>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodningskomplexitet:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3720"/>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Musik</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3730"/>
         <source>(Undefined)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Odefinierad)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3738"/>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ramstorlek:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3819"/>
         <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd experimentell perceptuell optimering i kodaren</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3908"/>
@@ -2775,7 +2776,8 @@
         <location filename="../../src/Thread_Process.cpp" line="166"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>VARNING! Omkodad filstorlek överstiger 4 GB. Problem kan uppstå!
+</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="174"/>
