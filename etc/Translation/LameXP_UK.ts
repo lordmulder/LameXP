@@ -273,7 +273,7 @@
     </message>
     <message>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодер</translation>
     </message>
 </context>
 <context>
@@ -1892,15 +1892,15 @@
     </message>
     <message>
         <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати експериментальне відчуттєве налагодження кодера</translation>
     </message>
     <message>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation>OpusEnc:</translation>
     </message>
     <message>
         <source>Show Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Відобразити допоміжну інформацію</translation>
     </message>
 </context>
 <context>
