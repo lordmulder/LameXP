@@ -84,7 +84,7 @@ protected:
 				else
 				{
 					qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), m_toolShortName.toLatin1().constData());
-					lockedFile = new LockedFile(QString(":/tools/%1").arg(m_toolName), QString("%1/lamexp_%2").arg(lamexp_temp_folder2(), m_toolShortName), m_toolHash);
+					lockedFile = new LockedFile(QString(":/tools/%1").arg(m_toolName), QString("%1/lxp_%2").arg(lamexp_temp_folder2(), m_toolShortName), m_toolHash);
 				}
 
 				if(lockedFile)

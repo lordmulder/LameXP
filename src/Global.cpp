@@ -200,11 +200,16 @@ static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO
 
 //Special folders
 static QString g_lamexp_temp_folder;
+static QReadWriteLock g_lamexp_folder_lock;
 
 //Tools
-static QMap<QString, LockedFile*> g_lamexp_tool_registry;
-static QMap<QString, unsigned int> g_lamexp_tool_versions;
-static QReadWriteLock g_lamexp_tool_lock;
+static struct
+{
+	QMap<QString, LockedFile*> registry;
+	QMap<QString, unsigned int> versions;
+	QReadWriteLock lock;
+}
+g_lamexp_tools;
 
 //Languages
 static struct
@@ -213,11 +218,18 @@ static struct
 	QMap<QString, QString> names;
 	QMap<QString, unsigned int> sysid;
 	QMap<QString, unsigned int> cntry;
+	QReadWriteLock lock;
 }
 g_lamexp_translation;
 
 //Translator
-static QTranslator *g_lamexp_currentTranslator = NULL;
+static struct
+{
+	QVariant instance;
+	QReadWriteLock lock;
+
+}
+g_lamexp_currentTranslator;
 
 //Shared memory
 static const struct
@@ -1160,8 +1172,10 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 	
 	//Add default translations
+	QWriteLocker writeLockTranslations(&g_lamexp_translation.lock);
 	g_lamexp_translation.files.insert(LAMEXP_DEFAULT_LANGID, "");
 	g_lamexp_translation.names.insert(LAMEXP_DEFAULT_LANGID, "English");
+	writeLockTranslations.unlock();
 
 	//Check for process elevation
 	if((!lamexp_check_elevation()) && (!lamexp_detect_wine()))
@@ -1390,9 +1404,7 @@ QString lamexp_rand_str(void)
  */
 const QString &lamexp_temp_folder2(void)
 {
-	static const char *TEMP_STR = "Temp";
-	const QString WRITE_TEST_DATA = lamexp_rand_str();
-	const QString SUB_FOLDER = lamexp_rand_str();
+	QReadLocker readLock(&g_lamexp_folder_lock);
 
 	//Already initialized?
 	if(!g_lamexp_temp_folder.isEmpty())
@@ -1401,12 +1413,16 @@ const QString &lamexp_temp_folder2(void)
 		{
 			return g_lamexp_temp_folder;
 		}
-		else
-		{
-			g_lamexp_temp_folder.clear();
-		}
 	}
 	
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_folder_lock);
+	g_lamexp_temp_folder.clear();
+
+	static const char *TEMP_STR = "Temp";
+	const QString WRITE_TEST_DATA = lamexp_rand_str();
+	const QString SUB_FOLDER = lamexp_rand_str();
+
 	//Try the %TMP% or %TEMP% directory first
 	QDir temp = QDir::temp();
 	if(temp.exists())
@@ -1507,15 +1523,15 @@ bool lamexp_clean_folder(const QString &folderPath)
  */
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version)
 {
-	QWriteLocker writeLock(&g_lamexp_tool_lock);
+	QWriteLocker writeLock(&g_lamexp_tools.lock);
 	
-	if(g_lamexp_tool_registry.contains(toolName.toLower()))
+	if(g_lamexp_tools.registry.contains(toolName.toLower()))
 	{
 		throw "lamexp_register_tool: Tool is already registered!";
 	}
 
-	g_lamexp_tool_registry.insert(toolName.toLower(), file);
-	g_lamexp_tool_versions.insert(toolName.toLower(), version);
+	g_lamexp_tools.registry.insert(toolName.toLower(), file);
+	g_lamexp_tools.versions.insert(toolName.toLower(), version);
 }
 
 /*
@@ -1523,8 +1539,8 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned in
  */
 bool lamexp_check_tool(const QString &toolName)
 {
-	QReadLocker readLock(&g_lamexp_tool_lock);
-	return g_lamexp_tool_registry.contains(toolName.toLower());
+	QReadLocker readLock(&g_lamexp_tools.lock);
+	return g_lamexp_tools.registry.contains(toolName.toLower());
 }
 
 /*
@@ -1532,11 +1548,11 @@ bool lamexp_check_tool(const QString &toolName)
  */
 const QString lamexp_lookup_tool(const QString &toolName)
 {
-	QReadLocker readLock(&g_lamexp_tool_lock);
+	QReadLocker readLock(&g_lamexp_tools.lock);
 
-	if(g_lamexp_tool_registry.contains(toolName.toLower()))
+	if(g_lamexp_tools.registry.contains(toolName.toLower()))
 	{
-		return g_lamexp_tool_registry.value(toolName.toLower())->filePath();
+		return g_lamexp_tools.registry.value(toolName.toLower())->filePath();
 	}
 	else
 	{
@@ -1549,11 +1565,11 @@ const QString lamexp_lookup_tool(const QString &toolName)
  */
 unsigned int lamexp_tool_version(const QString &toolName)
 {
-	QReadLocker readLock(&g_lamexp_tool_lock);
+	QReadLocker readLock(&g_lamexp_tools.lock);
 
-	if(g_lamexp_tool_versions.contains(toolName.toLower()))
+	if(g_lamexp_tools.versions.contains(toolName.toLower()))
 	{
-		return g_lamexp_tool_versions.value(toolName.toLower());
+		return g_lamexp_tools.versions.value(toolName.toLower());
 	}
 	else
 	{
@@ -1597,6 +1613,8 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
  */
 bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &country)
 {
+	QWriteLocker writeLockTranslations(&g_lamexp_translation.lock);
+
 	if(qmFile.isEmpty() || langName.isEmpty() || systemId < 1)
 	{
 		return false;
@@ -1615,6 +1633,7 @@ bool lamexp_translation_register(const QString &langId, const QString &qmFile, c
  */
 QStringList lamexp_query_translations(void)
 {
+	QReadLocker writeLockTranslations(&g_lamexp_translation.lock);
 	return g_lamexp_translation.files.keys();
 }
 
@@ -1623,6 +1642,7 @@ QStringList lamexp_query_translations(void)
  */
 QString lamexp_translation_name(const QString &langId)
 {
+	QReadLocker writeLockTranslations(&g_lamexp_translation.lock);
 	return g_lamexp_translation.names.value(langId.toLower(), QString());
 }
 
@@ -1631,6 +1651,7 @@ QString lamexp_translation_name(const QString &langId)
  */
 unsigned int lamexp_translation_sysid(const QString &langId)
 {
+	QReadLocker writeLockTranslations(&g_lamexp_translation.lock);
 	return g_lamexp_translation.sysid.value(langId.toLower(), 0);
 }
 
@@ -1639,6 +1660,7 @@ unsigned int lamexp_translation_sysid(const QString &langId)
  */
 unsigned int lamexp_translation_country(const QString &langId)
 {
+	QReadLocker writeLockTranslations(&g_lamexp_translation.lock);
 	return g_lamexp_translation.cntry.value(langId.toLower(), 0);
 }
 
@@ -1655,6 +1677,7 @@ bool lamexp_install_translator(const QString &langId)
 	}
 	else
 	{
+		QReadLocker readLock(&g_lamexp_translation.lock);
 		QString qmFile = g_lamexp_translation.files.value(langId.toLower(), QString());
 		if(!qmFile.isEmpty())
 		{
@@ -1674,27 +1697,31 @@ bool lamexp_install_translator(const QString &langId)
  */
 bool lamexp_install_translator_from_file(const QString &qmFile)
 {
+	QWriteLocker writeLock(&g_lamexp_currentTranslator.lock);
 	bool success = false;
 
-	if(!g_lamexp_currentTranslator)
+	if(!g_lamexp_currentTranslator.instance.isValid())
 	{
-		g_lamexp_currentTranslator = new QTranslator();
+		g_lamexp_currentTranslator.instance.setValue<QObject*>(new QTranslator());
 	}
 
 	if(!qmFile.isEmpty())
 	{
 		QString qmPath = QFileInfo(qmFile).canonicalFilePath();
-		QApplication::removeTranslator(g_lamexp_currentTranslator);
-		success = g_lamexp_currentTranslator->load(qmPath);
-		QApplication::installTranslator(g_lamexp_currentTranslator);
-		if(!success)
+		QTranslator *poTranslator = dynamic_cast<QTranslator*>(g_lamexp_currentTranslator.instance.value<QObject*>());
+		QApplication::removeTranslator(poTranslator);
+		if(success = poTranslator->load(qmPath))
+		{
+			QApplication::installTranslator(poTranslator);
+		}
+		else
 		{
 			qWarning("Failed to load translation:\n\"%s\"", qmPath.toLatin1().constData());
 		}
 	}
 	else
 	{
-		QApplication::removeTranslator(g_lamexp_currentTranslator);
+		QApplication::removeTranslator(dynamic_cast<QTranslator*>(g_lamexp_currentTranslator.instance.value<QObject*>()));
 		success = true;
 	}
 
@@ -2095,15 +2122,15 @@ void lamexp_finalization(void)
 	qDebug("lamexp_finalization()");
 	
 	//Free all tools
-	if(!g_lamexp_tool_registry.isEmpty())
+	if(!g_lamexp_tools.registry.isEmpty())
 	{
-		QStringList keys = g_lamexp_tool_registry.keys();
+		QStringList keys = g_lamexp_tools.registry.keys();
 		for(int i = 0; i < keys.count(); i++)
 		{
-			LAMEXP_DELETE(g_lamexp_tool_registry[keys.at(i)]);
+			LAMEXP_DELETE(g_lamexp_tools.registry[keys.at(i)]);
 		}
-		g_lamexp_tool_registry.clear();
-		g_lamexp_tool_versions.clear();
+		g_lamexp_tools.registry.clear();
+		g_lamexp_tools.versions.clear();
 	}
 	
 	//Delete temporary files
@@ -2121,13 +2148,17 @@ void lamexp_finalization(void)
 	}
 
 	//Clear languages
-	if(g_lamexp_currentTranslator)
+	if(g_lamexp_currentTranslator.instance.isValid())
 	{
-		QApplication::removeTranslator(g_lamexp_currentTranslator);
-		LAMEXP_DELETE(g_lamexp_currentTranslator);
+		QTranslator *poTranslator = dynamic_cast<QTranslator*>(g_lamexp_currentTranslator.instance.value<QObject*>());
+		g_lamexp_currentTranslator.instance.clear();
+		QApplication::removeTranslator(poTranslator);
+		LAMEXP_DELETE(poTranslator);
 	}
 	g_lamexp_translation.files.clear();
 	g_lamexp_translation.names.clear();
+	g_lamexp_translation.cntry.clear();
+	g_lamexp_translation.sysid.clear();
 
 	//Destroy Qt application object
 	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
