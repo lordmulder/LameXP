@@ -27,7 +27,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="160"/>
         <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation type="unfinished">Specjalne podziękowania dla John33 z %1 za jego ciągłe wsparcie.</translation>
+        <translation type="unfinished">Specjalne podziękowania dla John33 z %1 za jego stałe wsparcie.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="164"/>
@@ -355,7 +355,7 @@
     <message>
         <location filename="../../src/Model_AudioFile.cpp" line="336"/>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enkoder</translation>
     </message>
 </context>
 <context>
@@ -1128,42 +1128,42 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="790"/>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MP3</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="800"/>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ogg/Vorbis</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="807"/>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AAC/MP4</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="814"/>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PCM/Wave</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="837"/>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A/52</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="844"/>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">DCA</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="949"/>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opus</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1349"/>
         <source>Show Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż pomoc</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2295"/>
@@ -1233,7 +1233,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2816"/>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OpusEnc:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2862"/>
@@ -1299,7 +1299,7 @@
         <location filename="../../gui/MainWindow.ui" line="3188"/>
         <location filename="../../gui/MainWindow.ui" line="3725"/>
         <source>Speech</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Speech</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3193"/>
@@ -1404,37 +1404,38 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3615"/>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Opcje kodera Opus</translatorcomment>
+        <translation type="unfinished">Opcje kodera Opus</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3655"/>
         <source>Optimize for Signal Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Optymalizuj dla rodzaju sygnału:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3697"/>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Złożoność kompresji:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3720"/>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Music</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3730"/>
         <source>(Undefined)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Niezdefiniowany)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3738"/>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rozmiar ramki:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3819"/>
         <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Użyj eksperymentalnej optymalizacji percepcji</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3908"/>
@@ -2775,7 +2776,7 @@
         <location filename="../../src/Thread_Process.cpp" line="166"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">UWAGA: Plik po zdekodowaniu przekracza 4 GB, mogą wystąpić problemy!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="174"/>
@@ -3079,22 +3080,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="816"/>
+        <location filename="../../src/Global.cpp" line="828"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1071"/>
+        <location filename="../../src/Global.cpp" line="1083"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1076"/>
+        <location filename="../../src/Global.cpp" line="1088"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1089"/>
+        <location filename="../../src/Global.cpp" line="1101"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>
