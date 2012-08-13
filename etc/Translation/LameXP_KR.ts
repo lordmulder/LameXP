@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">인코더</translation>
     </message>
 </context>
 <context>
@@ -1839,67 +1839,67 @@
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MP3</translation>
     </message>
     <message>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ogg/Vorbis</translation>
     </message>
     <message>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AAC/MP4</translation>
     </message>
     <message>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PCM/Wave</translation>
     </message>
     <message>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A/52</translation>
     </message>
     <message>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">DCA</translation>
     </message>
     <message>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opus</translation>
     </message>
     <message>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> Opus 인코더 옵션 </translation>
     </message>
     <message>
         <source>Optimize for Signal Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">신호 방식 최적화:</translation>
     </message>
     <message>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">인코딩 복잡도:</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">음악</translation>
     </message>
     <message>
         <source>(Undefined)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(정의되지 않음)</translation>
     </message>
     <message>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">프레임 크기:</translation>
     </message>
     <message>
         <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">경험적 인코더 인식 조정 사용</translation>
     </message>
     <message>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OpusEnc:</translation>
     </message>
     <message>
         <source>Show Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">도움말 표시</translation>
     </message>
 </context>
 <context>
@@ -2220,7 +2220,7 @@
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알림: 디코드 파일 크기가 4GB 초과, 문제가 발생할 수 있습니다!</translation>
     </message>
 </context>
 <context>
