@@ -199,8 +199,13 @@ static const unsigned int g_lamexp_toolver_qaacenc = VER_LAMEXP_TOOL_QAAC;
 static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO;
 
 //Special folders
-static QString g_lamexp_temp_folder;
-static QReadWriteLock g_lamexp_folder_lock;
+static struct
+{
+	QString temp;
+	QString knownFolders[3];
+	QReadWriteLock lock;
+}
+g_lamexp_folder;
 
 //Tools
 static struct
@@ -1046,7 +1051,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	{
 		return true;
 	}
-	
+
 	//Secure DLL loading
 	QLibrary kernel32("kernel32.dll");
 	if(kernel32.load())
@@ -1404,20 +1409,20 @@ QString lamexp_rand_str(void)
  */
 const QString &lamexp_temp_folder2(void)
 {
-	QReadLocker readLock(&g_lamexp_folder_lock);
+	QReadLocker readLock(&g_lamexp_folder.lock);
 
 	//Already initialized?
-	if(!g_lamexp_temp_folder.isEmpty())
+	if(!g_lamexp_folder.temp.isEmpty())
 	{
-		if(QDir(g_lamexp_temp_folder).exists())
+		if(QDir(g_lamexp_folder.temp).exists())
 		{
-			return g_lamexp_temp_folder;
+			return g_lamexp_folder.temp;
 		}
 	}
 	
 	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_folder_lock);
-	g_lamexp_temp_folder.clear();
+	QWriteLocker writeLock(&g_lamexp_folder.lock);
+	g_lamexp_folder.temp.clear();
 
 	static const char *TEMP_STR = "Temp";
 	const QString WRITE_TEST_DATA = lamexp_rand_str();
@@ -1435,14 +1440,14 @@ const QString &lamexp_temp_folder2(void)
 			{
 				if(testFile.write(WRITE_TEST_DATA.toLatin1().constData()) >= strlen(WRITE_TEST_DATA.toLatin1().constData()))
 				{
-					g_lamexp_temp_folder = temp.canonicalPath();
+					g_lamexp_folder.temp = temp.canonicalPath();
 				}
 				testFile.remove();
 			}
 		}
-		if(!g_lamexp_temp_folder.isEmpty())
+		if(!g_lamexp_folder.temp.isEmpty())
 		{
-			return g_lamexp_temp_folder;
+			return g_lamexp_folder.temp;
 		}
 	}
 
@@ -1470,22 +1475,22 @@ const QString &lamexp_temp_folder2(void)
 					{
 						if(testFile.write(WRITE_TEST_DATA.toLatin1().constData()) >= strlen(WRITE_TEST_DATA.toLatin1().constData()))
 						{
-							g_lamexp_temp_folder = localAppData.canonicalPath();
+							g_lamexp_folder.temp = localAppData.canonicalPath();
 						}
 						testFile.remove();
 					}
 				}
 			}
 		}
-		if(!g_lamexp_temp_folder.isEmpty())
+		if(!g_lamexp_folder.temp.isEmpty())
 		{
-			return g_lamexp_temp_folder;
+			return g_lamexp_folder.temp;
 		}
 	}
 
 	//Failed to create TEMP folder!
 	qFatal("Temporary directory could not be initialized!\n\nFirst attempt:\n%s\n\nSecond attempt:\n%s", temp.canonicalPath().toUtf8().constData(), localAppData.canonicalPath().toUtf8().constData());
-	return g_lamexp_temp_folder;
+	return g_lamexp_folder.temp;
 }
 
 /*
@@ -1770,6 +1775,43 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 	static const GUID GUID_PROGRAM_FILES = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
 	static const GUID GUID_SYSTEM_FOLDER = {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}};
 
+	QReadLocker readLock(&g_lamexp_folder.lock);
+
+	int folderCSIDL = -1;
+	GUID folderGUID = {0x0000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}};
+	size_t folderCacheId = size_t(-1);
+
+	switch(folder_id)
+	{
+	case lamexp_folder_localappdata:
+		folderCacheId = 0;
+		folderCSIDL = CSIDL_LOCAL_APPDATA;
+		folderGUID = GUID_LOCAL_APPDATA;
+		break;
+	case lamexp_folder_programfiles:
+		folderCacheId = 1;
+		folderCSIDL = CSIDL_PROGRAM_FILES;
+		folderGUID = GUID_PROGRAM_FILES;
+		break;
+	case lamexp_folder_systemfolder:
+		folderCacheId = 2;
+		folderCSIDL = CSIDL_SYSTEM_FOLDER;
+		folderGUID = GUID_SYSTEM_FOLDER;
+		break;
+	default:
+		return QString();
+		break;
+	}
+
+	//Already in cache?
+	if(!g_lamexp_folder.knownFolders[folderCacheId].isEmpty())
+	{
+		return g_lamexp_folder.knownFolders[folderCacheId];
+	}
+
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_folder.lock);
+
 	static SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = NULL;
 	static SHGetFolderPathFun SHGetFolderPathPtr = NULL;
 
@@ -1781,28 +1823,6 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 			SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) kernel32Lib.resolve("SHGetKnownFolderPath");
 			SHGetFolderPathPtr = (SHGetFolderPathFun) kernel32Lib.resolve("SHGetFolderPathW");
 		}
-	}
-
-	int folderCSIDL = -1;
-	GUID folderGUID = {0x0000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}};
-
-	switch(folder_id)
-	{
-	case lamexp_folder_localappdata:
-		folderCSIDL = CSIDL_LOCAL_APPDATA;
-		folderGUID = GUID_LOCAL_APPDATA;
-		break;
-	case lamexp_folder_programfiles:
-		folderCSIDL = CSIDL_PROGRAM_FILES;
-		folderGUID = GUID_PROGRAM_FILES;
-		break;
-	case lamexp_folder_systemfolder:
-		folderCSIDL = CSIDL_SYSTEM_FOLDER;
-		folderGUID = GUID_SYSTEM_FOLDER;
-		break;
-	default:
-		return QString();
-		break;
 	}
 
 	QString folder;
@@ -1842,6 +1862,12 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 			}
 		}
 		delete [] path;
+	}
+
+	//Update cache
+	if(!folder.isEmpty())
+	{
+		g_lamexp_folder.knownFolders[folderCacheId] = folder;
 	}
 
 	return folder;
@@ -2134,17 +2160,17 @@ void lamexp_finalization(void)
 	}
 	
 	//Delete temporary files
-	if(!g_lamexp_temp_folder.isEmpty())
+	if(!g_lamexp_folder.temp.isEmpty())
 	{
 		for(int i = 0; i < 100; i++)
 		{
-			if(lamexp_clean_folder(g_lamexp_temp_folder))
+			if(lamexp_clean_folder(g_lamexp_folder.temp))
 			{
 				break;
 			}
 			Sleep(125);
 		}
-		g_lamexp_temp_folder.clear();
+		g_lamexp_folder.temp.clear();
 	}
 
 	//Clear languages
