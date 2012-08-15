@@ -56,12 +56,16 @@ if not exist "%PATH_UPXBIN%\upx.exe" GOTO:EOF
 if not exist "%PATH_MKNSIS%\makensis.exe" GOTO:EOF
 if not exist "%PATH_MSVC90%\VC\vcvarsall.bat" GOTO:EOF
 if not exist "%PATH_MSVC90%\VC\bin\cl.exe" GOTO:EOF
-if not exist "%PATH_QTMSVC%\bin\qtenv2.bat" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\uic.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\moc.exe" GOTO:EOF
 if not exist "%PATH_QTMSVC%\bin\rcc.exe" GOTO:EOF
 if not exist "%PATH_GNUPG1%\gpg.exe" GOTO:EOF
 if not exist "%PATH_GNUPG1%\gpg.exe" GOTO:EOF
 if not exist "%~dp0\..\..\%PATH_VCPROJ%" GOTO:EOF
+REM ------------------------------------------
+if exist "%PATH_QTMSVC%\bin\qtvars.bat" goto qtvars_found
+if exist "%PATH_QTMSVC%\bin\qtenv2.bat" goto qtvars_found
+GOTO:EOF
+:qtvars_found
 REM ------------------------------------------
 set "LAMEXP_ERROR=0"
