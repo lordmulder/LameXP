@@ -1799,6 +1799,7 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 		folderGUID = GUID_SYSTEM_FOLDER;
 		break;
 	default:
+		qWarning("Invalid 'known' folder was requested!");
 		return QString();
 		break;
 	}
