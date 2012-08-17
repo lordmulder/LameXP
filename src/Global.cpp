@@ -232,7 +232,6 @@ static struct
 {
 	QVariant instance;
 	QReadWriteLock lock;
-
 }
 g_lamexp_currentTranslator;
 
@@ -279,7 +278,12 @@ static const DWORD g_main_thread_id = GetCurrentThreadId();
 static FILE *g_lamexp_log_file = NULL;
 
 //CLI Arguments
-static QStringList *g_lamexp_argv = NULL;
+static struct
+{
+	QStringList list;
+	QReadWriteLock lock;
+}
+g_lamexp_argv;
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
@@ -1130,7 +1134,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 			DWORD osVersionNo = lamexp_get_os_version();
 			if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 2))
 			{
-				qDebug("Running on Windows 8 (still experimental!)\n");
+				qDebug("Running on Windows 8 or Windows Server 2012\n");
 				lamexp_check_compatibility_mode(NULL, executableName);
 			}
 			else
@@ -1735,9 +1739,12 @@ bool lamexp_install_translator_from_file(const QString &qmFile)
 
 const QStringList &lamexp_arguments(void)
 {
-	if(!g_lamexp_argv)
+	QReadLocker readLock(&g_lamexp_argv.lock);
+	
+	if(g_lamexp_argv.list.isEmpty())
 	{
-		g_lamexp_argv = new QStringList();
+		readLock.unlock();
+		QWriteLocker writeLock(&g_lamexp_argv.lock);
 
 		int nArgs = 0;
 		LPWSTR *szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
@@ -1746,7 +1753,7 @@ const QStringList &lamexp_arguments(void)
 		{
 			for(int i = 0; i < nArgs; i++)
 			{
-				*g_lamexp_argv << WCHAR2QSTR(szArglist[i]);
+				g_lamexp_argv.list << WCHAR2QSTR(szArglist[i]);
 			}
 			LocalFree(szArglist);
 		}
@@ -1756,7 +1763,7 @@ const QStringList &lamexp_arguments(void)
 		}
 	}
 
-	return *g_lamexp_argv;
+	return g_lamexp_argv.list;
 }
 
 /*
@@ -2222,7 +2229,7 @@ void lamexp_finalization(void)
 	}
 
 	//Free CLI Arguments
-	LAMEXP_DELETE(g_lamexp_argv);
+	g_lamexp_argv.list.clear();
 }
 
 /*
