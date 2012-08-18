@@ -185,7 +185,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 
 //Memory check
 #if LAMEXP_DEBUG
-#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) \
+#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
 { \
 	SIZE_T _privateBytesBefore = lamexp_dbg_private_bytes(); \
 	RETV = FUNC(__VA_ARGS__); \
@@ -197,12 +197,14 @@ SIZE_T lamexp_dbg_private_bytes(void);
 		OutputDebugStringA(_buffer); \
 		OutputDebugStringA("----------\n"); \
 	} \
-}
+} \
+while(0)
 #else
-#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) \
+#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
 { \
 	RETV = __noop(__VA_ARGS__); \
-}
+} \
+while(0)
 #endif
 
 //Check for CPU-compatibility options

@@ -2177,6 +2177,22 @@ QStringList lamexp_available_codepages(bool noAliases)
 }
 
 /*
+ * Entry point checks
+ */
+static bool lamexp_entry_check(void);
+static bool g_lamexp_entry_check = false;
+static bool g_lamexp_entry_check_result = lamexp_entry_check();
+static bool lamexp_entry_check(void)
+{
+	if(!g_lamexp_entry_check)
+	{
+		FatalAppExit(0, L"Application initialization has failed!");
+		TerminateProcess(GetCurrentProcess(), -1);
+	}
+	return true;
+}
+
+/*
  * Application entry point (runs before static initializers)
  */
 extern "C"
@@ -2185,13 +2201,15 @@ extern "C"
 	
 	int lamexp_entry_point(void)
 	{
+		/*MessageBoxA(NULL, "lamexp_entry_point", NULL, MB_TOPMOST);*/
+		
 		if((!LAMEXP_DEBUG) && lamexp_check_for_debugger())
 		{
 			FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
 		
-		//Init global structs to NULL *before* constructors are called
+		//Zero *before* constructors are called
 		LAMEXP_ZERO_MEMORY(g_lamexp_argv);
 		LAMEXP_ZERO_MEMORY(g_lamexp_tools);
 		LAMEXP_ZERO_MEMORY(g_lamexp_currentTranslator);
@@ -2199,6 +2217,10 @@ extern "C"
 		LAMEXP_ZERO_MEMORY(g_lamexp_folder);
 		LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
 
+		//Make sure we will pass the check
+		g_lamexp_entry_check = true;
+
+		//Now initialize the C Runtime library!
 		return WinMainCRTStartup();
 	}
 }
