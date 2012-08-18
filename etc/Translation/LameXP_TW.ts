@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>編碼器</translation>
     </message>
 </context>
 <context>
@@ -419,7 +419,7 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">新文件夾</translation>
+        <translation>新文件夾</translation>
     </message>
 </context>
 <context>
@@ -1839,67 +1839,67 @@
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation>MP3</translation>
     </message>
     <message>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg/Vorbis</translation>
     </message>
     <message>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation>AAC/MP4</translation>
     </message>
     <message>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation>PCM/Wave</translation>
     </message>
     <message>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation>A/52</translation>
     </message>
     <message>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation>DCA</translation>
     </message>
     <message>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation>Opus</translation>
     </message>
     <message>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translation> Opus 編碼器選項 </translation>
     </message>
     <message>
         <source>Optimize for Signal Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>優化信號類型:</translation>
     </message>
     <message>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation>編碼復雜度:</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>音樂</translation>
     </message>
     <message>
         <source>(Undefined)</source>
-        <translation type="unfinished"></translation>
+        <translation>(未定義)</translation>
     </message>
     <message>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>幀大小:</translation>
     </message>
     <message>
         <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>使用實驗編碼調整感知</translation>
     </message>
     <message>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation>OpusEnc:</translation>
     </message>
     <message>
         <source>Show Help</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示幫助</translation>
     </message>
 </context>
 <context>
