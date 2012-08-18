@@ -1811,7 +1811,7 @@ const QStringList &lamexp_arguments(void)
 /*
  * Locate known folder on local system
  */
-QString lamexp_known_folder(lamexp_known_folder_t folder_id)
+const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 {
 	typedef HRESULT (WINAPI *SHGetKnownFolderPathFun)(__in const GUID &rfid, __in DWORD dwFlags, __in HANDLE hToken, __out PWSTR *ppszPath);
 	typedef HRESULT (WINAPI *SHGetFolderPathFun)(__in HWND hwndOwner, __in int nFolder, __in HANDLE hToken, __in DWORD dwFlags, __out LPWSTR pszPath);
@@ -1849,7 +1849,7 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 		break;
 	default:
 		qWarning("Invalid 'known' folder was requested!");
-		return QString();
+		return *reinterpret_cast<QString*>(NULL);
 		break;
 	}
 
@@ -1858,7 +1858,7 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 	{
 		if(g_lamexp_folder.knownFolders->contains(folderCacheId))
 		{
-			return g_lamexp_folder.knownFolders->value(folderCacheId, QString());
+			return (*g_lamexp_folder.knownFolders)[folderCacheId];
 		}
 	}
 
@@ -1917,14 +1917,15 @@ QString lamexp_known_folder(lamexp_known_folder_t folder_id)
 		delete [] path;
 	}
 
-	//Update cache
-	if(!folder.isEmpty())
+	//Create cache
+	if(!g_lamexp_folder.knownFolders)
 	{
-		if(!g_lamexp_folder.knownFolders) g_lamexp_folder.knownFolders = new QMap<size_t, QString>();
-		g_lamexp_folder.knownFolders->insert(folderCacheId, folder);
+		g_lamexp_folder.knownFolders = new QMap<size_t, QString>();
 	}
 
-	return folder;
+	//Update cache
+	g_lamexp_folder.knownFolders->insert(folderCacheId, folder);
+	return (*g_lamexp_folder.knownFolders)[folderCacheId];
 }
 
 /*
@@ -2189,7 +2190,8 @@ static bool lamexp_entry_check(void)
 		FatalAppExit(0, L"Application initialization has failed!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
-	return true;
+	volatile bool retVal = true;
+	return retVal;
 }
 
 /*
