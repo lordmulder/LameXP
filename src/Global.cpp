@@ -2180,17 +2180,17 @@ QStringList lamexp_available_codepages(bool noAliases)
 /*
  * Entry point checks
  */
-static bool lamexp_entry_check(void);
-static bool g_lamexp_entry_check = false;
-static bool g_lamexp_entry_check_result = lamexp_entry_check();
-static bool lamexp_entry_check(void)
+static DWORD lamexp_entry_check(void);
+static DWORD g_lamexp_entry_check_result = lamexp_entry_check();
+static DWORD g_lamexp_entry_check_flag = 0x789E09B2;
+static DWORD lamexp_entry_check(void)
 {
-	if(!g_lamexp_entry_check)
+	volatile DWORD retVal = 0xA199B5AF;
+	if(g_lamexp_entry_check_flag != 0x8761F64D)
 	{
-		FatalAppExit(0, L"Application initialization has failed!");
+		FatalAppExit(0, L"Application initialization has failed, take care!");
 		TerminateProcess(GetCurrentProcess(), -1);
 	}
-	volatile bool retVal = true;
 	return retVal;
 }
 
@@ -2203,14 +2203,18 @@ extern "C"
 	
 	int lamexp_entry_point(void)
 	{
-		/*MessageBoxA(NULL, "lamexp_entry_point", NULL, MB_TOPMOST);*/
-		
 		if((!LAMEXP_DEBUG) && lamexp_check_for_debugger())
 		{
 			FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
-		
+
+		if(g_lamexp_entry_check_flag != 0x789E09B2)
+		{
+			FatalAppExit(0, L"Application initialization has failed, take care!");
+			TerminateProcess(GetCurrentProcess(), -1);
+		}
+
 		//Zero *before* constructors are called
 		LAMEXP_ZERO_MEMORY(g_lamexp_argv);
 		LAMEXP_ZERO_MEMORY(g_lamexp_tools);
@@ -2220,7 +2224,7 @@ extern "C"
 		LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
 
 		//Make sure we will pass the check
-		g_lamexp_entry_check = true;
+		g_lamexp_entry_check_flag = ~g_lamexp_entry_check_flag;
 
 		//Now initialize the C Runtime library!
 		return WinMainCRTStartup();
