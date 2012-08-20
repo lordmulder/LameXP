@@ -1203,7 +1203,7 @@ void MainWindow::windowShown(void)
 	{
 		QString message;
 		message += NOBR(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP.")).append("<br>");
-		message += NOBR(tr("Please refer to the %1 document for details and solutions!")).arg("<a href=\"http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#df406578\">F.A.Q.</a>").append("<br>");
+		message += NOBR(tr("Please refer to the %1 document for details and solutions!")).arg("<a href=\"http://lamexp.sourceforge.net/doc/FAQ.html#df406578\">F.A.Q.</a>").append("<br>");
 		if(QMessageBox::warning(this, tr("Slow Startup"), message, tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->antivirNotificationsEnabled(false);
@@ -1346,7 +1346,7 @@ void MainWindow::showAnnounceBox(void)
 	(
 		NOBR("We are still looking for LameXP translators!"),
 		NOBR("If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:"),
-		LINK("http://mulder.brhack.net/public/doc/lamexp_translate.html")
+		LINK("http://lamexp.sourceforge.net/doc/Translate.html")
 	);
 
 	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", announceText, QMessageBox::NoButton, this);
@@ -3376,9 +3376,11 @@ void MainWindow::updateBitrate(int value)
  */
 void MainWindow::compressionTabEventOccurred(QWidget *sender, QEvent *event)
 {
+	static const QUrl helpUrl("http://lamexp.sourceforge.net/doc/FAQ.html#054010d9");
+	
 	if((sender == labelCompressionHelp) && (event->type() == QEvent::MouseButtonPress))
 	{
-		QDesktopServices::openUrl(QUrl("http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=blob_plain;f=doc/FAQ.html;hb=HEAD#054010d9"));
+		QDesktopServices::openUrl(helpUrl);
 	}
 }
 
