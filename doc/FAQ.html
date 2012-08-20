@@ -158,18 +158,31 @@ Currently the following input formats are supported by LameXP:<br><ul>
 
 <a name="96205e91"></a><b>My anti-virus program raises an alarm when I try to download/install/launch LameXP. Why is that?</b><br>
 <br>
-Occasionally your anti-virus program may mistakenly(!) detect "malware" (e.g. virus, trojan horse or worm) in<br>
-LameXP. This is called a "false positive" and the file is actually innocent/clean. It's an error in your<br>
+Occasionally your anti-virus program may mistakenly(!) detect malware ("virus", "trojan horse", "worm", etc.)<br>
+in LameXP. This is called a "false positive" and the file is actually innocent/clean. It's an error in your<br>
 specific anti-virus software. So in case you encounter such problems, please use <a href="http://www.virustotal.com/" target="_blank">http://www.virustotal.com/</a>,<br>
 <a href="http://www.virscan.org/" target="_blank">http://www.virscan.org/</a> or a similar online-service to check the file in question with multiple(!) anti-virus<br>
-engines. Especially take care with scan results like "suspicious", "generic" or "packed", as such results are<br>
-NOT confirmed malware detections and in almost any case they can be ignored/discarded safely!<br>
+engines. Especially take care with heuristic scan results like "suspicious", "generic" or "packed". Such<br>
+results are NOT confirmed malware detections - they are speculative and almost always can be ignored safely!<br>
 <br>
 Apparently anti-virus programs tend to suspect installers or uninstallers created with <a href="http://nsis.sourceforge.net/" target="_blank">NSIS</a>. Furthermore some<br>
-anti-virus programs blindly suspect all "packed" executables of being malware. Obviously that is a stupid<br>
-generalization, so please ignore these nasty warnings! Last but not least: Always keep in mind that LameXP is<br>
-OpenSource software. If you don't trust the provided pre-compiled binaries, simply download the <a href="#982cf1c0">source codes</a>,<br>
-search the code for "malicious" functions (you won't find any!) and then <a href="#a0c1e92b">compile</a> your own binary.<br>
+anti-virus programs blindly suspect ALL "packed" executables of being malware. Obviously that is a stupid<br>
+generalization, because "EXE packers" are commonly used by legitimate software (inlcuding a large number of<br>
+OpenSource tools), so please ignore these nasty warnings! Last but not least: Always keep in mind that LameXP<br>
+is free software. If you don't trust the pre-compiled LameXP binaries that we provide, simply download the<br>
+<a href="#982cf1c0">source codes</a>, search the code for "malicious" functions (you won't find any ^^) and <a href="#a0c1e92b">compile</a> LameXP yourself!<br>
+<br>
+Another important fact to consider is that for the creator of LameXP, it is impossible to know WHY a specific<br>
+anti-virus program is failing on our software. That's because anti-virus programs usually are proprietary<br>
+CloseSource applications, so we cannot know what is going on "behind the scenes". Consequently any attempt to<br>
+guess what "aspect" of LameXP the anti-virus software is misinterpreting as malware would be pure speculation<br>
+and might even change with the next anti-virus update. Only the developer of the anti-virus program can fix<br>
+bugs inside the anti-virus program. So please report these bugs to the developer of your anti-virus program!<br>
+<br>
+Finally, be aware that we are NOT liable for any files (downloads), except for those that are directly linked<br>
+on the official LameXP web-site or one of the <a href="#8dba381f">official mirros</a>. Other web-sites may be redistributing our<br>
+software, but we are NOT affiliated with or funded by any of these web-sites. So while the license of LameXP<br>
+allows redistribution, there is absolutely NO guarantee that binaries offered by third parties are genuine!<br>
 <br>
 Conclusion:<ul>
 <li>IN CASE YOU HAVE A CONFIRMED INFECTION, RE-DOWNLOAD THE FILE FROM ONE OF THE *OFFICIAL* MIRRORS!
