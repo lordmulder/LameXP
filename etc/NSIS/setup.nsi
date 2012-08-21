@@ -488,9 +488,11 @@ SectionEnd
 Section "-Finished"
 	!insertmacro PrintProgress "$(MUI_TEXT_FINISH_TITLE)."
 
+!ifdef LAMEXP_IS_PRERELEASE
 	${If} ${FileExists} "$INSTDIR\PRE_RELEASE_INFO.txt"
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\PRE_RELEASE_INFO.txt" "open" ""
 	${EndIf}
+!endif
 
 	; ---- POLL ----
 	; !insertmacro UAC_AsUser_ExecShell "" "http://mulder.brhack.net/temp/style_poll/" "" "" SW_SHOWNORMAL
