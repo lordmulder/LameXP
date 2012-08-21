@@ -862,14 +862,14 @@ anti-virus software. In that case report the bug to the support team of your ant
 possible. Or, if they don't fix the bug (in due time), switch to a better anti-virus product!<br>
 <br>
 See also:<br>
-<a href="#96205e91">My anti-virus program raises an alarm when I try to download/install/launch LameXP. Why is that?</a><br><br>
+<a href="#96205e91">My anti-virus program raises an alarm when I try to download, install or launch LameXP. Why is that?</a><br><br>
 
 <br><br>
 
 <a name="f35cfa24"></a><b>How can I translate LameXP to my language or improve an existing translation?</b><br>
 <br>
 Please see the guide for translators at:<br><ul>
-<li><a href="http://mulder.brhack.net/public/doc/lamexp_translate.html" target="_blank">http://mulder.brhack.net/public/doc/lamexp_translate.html</a></ul>
+<li><a href="http://lamexp.sourceforge.net/doc/Translate.html" target="_blank">http://lamexp.sourceforge.net/doc/Translate.html</a></ul>
 
 <br><br>
 
@@ -903,22 +903,22 @@ application framework and offers full Unicode support. For the time being LameXP
 <a name="982cf1c0"></a><b>Where can I find the LameXP source code?</b><br>
 <br>
 LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a> revision control system. The LameXP Git repository is mirrored at:<br><ul>
-<li><a href="git://github.com/lordmulder/LameXP.git" target="_blank">git://github.com/lordmulder/LameXP.git</a> (<a href="https://github.com/lordmulder/LameXP/commits/master" target="_blank">Log</a>)
-<li><a href="git://lamexp.git.sourceforge.net/gitroot/lamexp/lamexp" target="_blank">git://lamexp.git.sourceforge.net/gitroot/lamexp/lamexp</a> (<a href="http://lamexp.git.sourceforge.net/git/gitweb.cgi?p=lamexp/lamexp;a=shortlog;h=HEAD" target="_blank">Log</a>)
-<li><a href="git://gitorious.org/lamexp/lamexp.git" target="_blank">git://gitorious.org/lamexp/lamexp.git</a> (<a href="http://gitorious.org/lamexp/lamexp/commits/master" target="_blank">Log</a>)</ul>
+<li><a href="git://github.com/lordmulder/LameXP.git" target="_blank">git://github.com/lordmulder/LameXP.git</a> (<a href="https://github.com/lordmulder/LameXP" target="_blank">Browse</a>)
+<li><a href="git://git.code.sf.net/p/lamexp/code" target="_blank">git://git.code.sf.net/p/lamexp/code</a> (<a href="http://sourceforge.net/p/lamexp/code/" target="_blank">Browse</a>)
+<li><a href="git://gitorious.org/lamexp/lamexp.git" target="_blank">git://gitorious.org/lamexp/lamexp.git</a> (<a href="http://gitorious.org/lamexp/lamexp/trees/master" target="_blank">Browse</a>)</ul>
 
 <br><br>
 
 <a name="a0c1e92b"></a><b>What are the prerequisites to build LameXP from the sources?</b><br>
 <br>
 LameXP is currently being developed using the following build environment:<br><ul>
-<li><a href="http://www.microsoft.com/visualstudio/en-us" target="_blank">Visual Studio 2010</a> with Service Pack 1, running on Windows 7 with Service Pack 1
-<li>Desktop Qt v4.8.0 (MSVC 2010), included in <a href="http://qt.nokia.com/products/qt-sdk" target="_blank">Qt SDK v1.2</a>
-<li><a href="http://www.microsoft.com/downloads/en/details.aspx?FamilyID=35AEDA01-421D-4BA5-B44B-543DC8C33A20" target="_blank">Windows Platform SDK v7.1</a> (Windows SDK for Windows 7 and .NET Framework 4)
+<li><a href="http://www.microsoft.com/visualstudio/en-us/products/2010-editions/express" target="_blank">Visual Studio 2010</a> with Service Pack 1, running on Windows 7 with Service Pack 1
+<li><a href="http://qt.nokia.com/downloads/downloads#qt-lib" target="_blank">Qt libraries 4.8.2</a> for Windows (MSVC 2010)
+<li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=8442" target="_blank">Windows Platform SDK v7.1</a> (Windows SDK for Windows 7 and .NET Framework 4)
 <li>The minimum supported build platform is Windows XP with Service Pack 2</ul>
 <br>
 Also note the following hints:<br><ul>
-<li>Run "qtenv2.bat" before launching Visual Studio in order to set up the Qt environment
+<li>Run "qtvars.bat" before launching Visual Studio in order to set up the Qt environment
 <li>Visual Studio 2008 solution/project files are still provided for people targeting Windows 2000
 <li>In order to make a "fully static" build of LameXP, you need to compile Qt as 'static' libraries
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
@@ -926,9 +926,9 @@ Also note the following hints:<br><ul>
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
 <br>
 In order to use the LameXP deployment scripts you need the following tools:<br><ul>
-<li>Visual Studio 2010 with Service Pack 1 with Desktop Qt v4.8.0
+<li>Visual Studio 2010 with Service Pack 1 with Desktop Qt v4.8.2
 <li><a href="http://www.7-zip.org/" target="_blank">7-Zip</a> - file archiver with a high compression ratio
-<li><a href="http://www.scratchpaper.com/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (Unicode Version)<ul>
+<li><a href="http://nsis.sourceforge.net/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (<a href="http://www.scratchpaper.com/" target="_blank">Unicode version</a> recommended!)<ul>
 <li><a href="http://nsis.sourceforge.net/StdUtils_plug-in" target="_blank">StdUtils plug-in</a>
 <li><a href="http://nsis.sourceforge.net/LockedList_plug-in" target="_blank">LockedList plug-in</a>
 <li><a href="http://nsis.sourceforge.net/Inetc_plug-in" target="_blank">Inetc plug-in</a>
@@ -940,11 +940,11 @@ In order to use the LameXP deployment scripts you need the following tools:<br><
 <br>
 Instructions to build Qt as 'static' libraries:<br><ul>
 <li>Make sure Visual Studio 2010 and Strawberry Perl for Windows are installed
-<li>Install the Qt SDK v1.1 and choose to install the Qt 4.7.3 Sources
+<li>Download and extract the Qt 4.8.2 source code package
 <li>Open a new command window (cmd.exe)
 <li>Add Strawberry Perl to your PATH (e.g. 'set PATH=C:\strawberry\perl\bin;%PATH%')
 <li>Now run 'vcvarsall.bat' form your Visual C++ install directory - within the same console!
-<li>Change the current directory to the Qt Sources path (e.g. 'C:\QtSDK\QtSources\4.7.3')
+<li>Change the current directory to the Qt Sources path (e.g. 'C:\QtSources\4.8.2')
 <li>Finally run 'configure.exe -release -static -ltcg &lt;more options&gt;' and wait for completion
 <li>You can now open and build the solution files (e.g. 'src\corelib\QtCore.sln' in Visual Studio
 <li>Make sure you select the "Release" configuration for your builds!
