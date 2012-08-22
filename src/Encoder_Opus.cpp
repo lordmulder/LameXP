@@ -233,7 +233,8 @@ const unsigned int *OpusEncoder::supportedChannelCount(void)
 
 const unsigned int *OpusEncoder::supportedBitdepths(void)
 {
-	return NULL;
+	static const unsigned int supportedBPS[] = {8, 16, 24, AudioFileModel::BITDEPTH_IEEE_FLOAT32, NULL};
+	return supportedBPS;
 }
 
 const bool OpusEncoder::needsTimingInfo(void)

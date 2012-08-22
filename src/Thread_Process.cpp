@@ -444,25 +444,40 @@ void ProcessThread::insertDownsampleFilter(void)
 	/* Adjust bit depth (word size) */
 	if(m_encoder->supportedBitdepths() && m_audioFile.formatAudioBitdepth())
 	{
-		const unsigned int *supportedBPS = m_encoder->supportedBitdepths();
 		const unsigned int inputBPS = m_audioFile.formatAudioBitdepth();
-		unsigned int currentDiff = UINT_MAX, minimumDiff = UINT_MAX, bestBPS = UINT_MAX;
+		const unsigned int *supportedBPS = m_encoder->supportedBitdepths();
 
-		//Find the most suitable supported bit depth
+		bool bAdjustBitdepth = true;
+
+		//Is the input bit depth supported exactly? (inclduing IEEE Float)
 		for(int i = 0; supportedBPS[i]; i++)
 		{
-			currentDiff = DIFF(inputBPS, supportedBPS[i]);
-			if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestBPS < supportedBPS[i])))
-			{
-				bestBPS = supportedBPS[i];
-				minimumDiff = currentDiff;
-				if(!(minimumDiff > 0)) break;
-			}
+			if(supportedBPS[i] == inputBPS) bAdjustBitdepth = false;
 		}
-
-		if(bestBPS != inputBPS)
+		
+		if(bAdjustBitdepth)
 		{
-			targetBitDepth = (bestBPS != UINT_MAX) ? bestBPS : supportedBPS[0];
+			unsigned int currentDiff = UINT_MAX, minimumDiff = UINT_MAX, bestBPS = UINT_MAX;
+			const unsigned int originalBPS = (inputBPS == AudioFileModel::BITDEPTH_IEEE_FLOAT32) ? 32 : inputBPS;
+
+			//Find the most suitable supported bit depth
+			for(int i = 0; supportedBPS[i]; i++)
+			{
+				if(supportedBPS[i] == AudioFileModel::BITDEPTH_IEEE_FLOAT32) continue;
+				
+				currentDiff = DIFF(originalBPS, supportedBPS[i]);
+				if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestBPS < supportedBPS[i])))
+				{
+					bestBPS = supportedBPS[i];
+					minimumDiff = currentDiff;
+					if(!(minimumDiff > 0)) break;
+				}
+			}
+
+			if(bestBPS != originalBPS)
+			{
+				targetBitDepth = (bestBPS != UINT_MAX) ? bestBPS : supportedBPS[0];
+			}
 		}
 	}
 

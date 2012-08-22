@@ -96,7 +96,7 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, vol
 			{
 				bool ok = false;
 				unsigned int tmp = regExp_encoding.cap(1).toUInt(&ok);
-				if(ok) info->setFormatAudioBitdepth(tmp);
+				if(ok) info->setFormatAudioBitdepth((tmp == 32) ? AudioFileModel::BITDEPTH_IEEE_FLOAT32 : tmp);
 				emit statusUpdated(qMin(progress += 25, 100));
 			}
 			if(regExp_samplerate.lastIndexIn(text) >= 0)

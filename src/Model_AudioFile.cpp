@@ -25,8 +25,11 @@
 #include <QObject>
 #include <QMutexLocker>
 #include <QFile>
+#include <limits.h>
 
 #define U16Str(X) QString::fromUtf16(reinterpret_cast<const unsigned short*>(L##X))
+
+const unsigned int AudioFileModel::BITDEPTH_IEEE_FLOAT32 = UINT_MAX-1;
 
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
@@ -288,7 +291,14 @@ const QString AudioFileModel::formatAudioBaseInfo(void) const
 		if(m_formatAudioBitdepth)
 		{
 			if(!info.isEmpty()) info.append(", ");
-			info.append(QString("%1: %2 Bit").arg(tr("Bitdepth"), QString::number(m_formatAudioBitdepth)));
+			if(m_formatAudioBitdepth == BITDEPTH_IEEE_FLOAT32)
+			{
+				info.append(QString("%1: %2 Bit (IEEE Float)").arg(tr("Bitdepth"), QString::number(32)));
+			}
+			else
+			{
+				info.append(QString("%1: %2 Bit").arg(tr("Bitdepth"), QString::number(m_formatAudioBitdepth)));
+			}
 		}
 		return info;
 	}

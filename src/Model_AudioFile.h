@@ -45,6 +45,8 @@ public:
 		BitrateModeVariable = 2,
 	};
 
+	static const unsigned int BITDEPTH_IEEE_FLOAT32;
+
 	//-----------------------
 	//Getters
 	//-----------------------

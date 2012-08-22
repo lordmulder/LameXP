@@ -339,6 +339,11 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 		retrieveCover(audioFile, coverType, coverData);
 	}
 
+	if((audioFile.formatAudioType().compare("PCM", Qt::CaseInsensitive) == 0) && (audioFile.formatAudioProfile().compare("Float", Qt::CaseInsensitive) == 0))
+	{
+		if(audioFile.formatAudioBitdepth() == 32) audioFile.setFormatAudioBitdepth(AudioFileModel::BITDEPTH_IEEE_FLOAT32);
+	}
+
 	return audioFile;
 }
 
