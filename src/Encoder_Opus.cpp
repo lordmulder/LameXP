@@ -61,7 +61,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		args << "--vbr";
 		break;
 	case SettingsModel::ABRMode:
-		args << "-cvbr";
+		args << "--cvbr";
 		break;
 	case SettingsModel::CBRMode:
 		args << "--hard-cbr";
