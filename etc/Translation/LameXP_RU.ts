@@ -272,22 +272,22 @@
     </message>
     <message>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кодер</translation>
     </message>
 </context>
 <context>
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished">Импорт Cue плэйлиста</translation>
+        <translation type="unfinished">Импорт CUE плэйлиста</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished">Следующий Cue плэйлист будет импортирован в LameXP.</translation>
+        <translation type="unfinished">Следующий CUE плэйлист будет импортирован в LameXP.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished">Загружаю Cue плэйлист, пожалуйста, подождите...</translation>
+        <translation type="unfinished">Загружаю CUE плэйлист, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
@@ -295,11 +295,11 @@
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished">Немогу загрузить Cue плэйлист:</translation>
+        <translation type="unfinished">Не могу загрузить CUE плэйлист:</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished">Ошибка Cue плэйлиста</translation>
+        <translation type="unfinished">Ошибка CUE плэйлиста</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
@@ -307,25 +307,25 @@
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished">Немогу открыть файл для чтения. Пожалуйста проверьте что у вас есть доступ к файлу!</translation>
+        <translation type="unfinished">Не могу открыть файл для чтения. Пожалуйста проверьте что у вас есть доступ к файлу!</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished">Выбранный файл непохож на провельный Cue плэйлист!</translation>
+        <translation type="unfinished">Выбранный файл не похож на правильный CUE плэйлист!</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
         <translatorcomment>пыщь пыщь</translatorcomment>
-        <translation type="unfinished">Немогу найти аудио файлы, которые LameXP поддерживает!</translation>
+        <translation type="unfinished">Не могу найти аудио файлы, которые LameXP поддерживает!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished">Заметьте, что LameXP неподдерживает бинарныйе Cue плэйлисты.</translation>
+        <translation type="unfinished">Заметьте, что LameXP не поддерживает бинарныйе CUE плэйлисты.</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
         <translatorcomment>омг сложные фразы</translatorcomment>
-        <translation type="unfinished">Выбранный Cue плэйлист содержит нелогичную информацию. Будьте осторожны!</translation>
+        <translation type="unfinished">Выбранный CUE плэйлист содержит некорректную информацию. Будьте осторожны!</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
@@ -361,15 +361,15 @@
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished">Ошибка: Немогу создать директорию!</translation>
+        <translation type="unfinished">Ошибка: Не могу создать директорию!</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation type="unfinished">Непредвиденная ошибка случилась при разделении Cue плэйлиста!</translation>
+        <translation type="unfinished">Непредвиденная ошибка случилась при разделении CUE плэйлиста!</translation>
     </message>
     <message>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation type="unfinished">Импортировано %1 трэк(ов) из Cue плэйлиста, пропущено %2 трэк(ов).</translation>
+        <translation type="unfinished">Импортировано %1 трэк(ов) из CUE плэйлиста, пропущено %2 трэк(ов).</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
@@ -452,7 +452,7 @@
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished">Загрузить другой Cue плэйлист</translation>
+        <translation type="unfinished">Загрузить другой CUE плэйлист</translation>
     </message>
     <message>
         <source>Artist:</source>
@@ -518,7 +518,7 @@
     <name>DiskObserverThread</name>
     <message>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
-        <translation type="unfinished">Мало места на диске &apos;%1&apos; (свободного всего %2 Мб), могут возникнуть проблемы!</translation>
+        <translation>Мало места на диске &apos;%1&apos; (свободного всего %2 Мб), могут возникнуть проблемы!</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
     </message>
     <message>
         <source>Add File(s)</source>
-        <translation type="unfinished">Добавть файлы</translation>
+        <translation type="unfinished">Добавить файлы</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -630,7 +630,7 @@
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation type="unfinished">Моя Музыка</translation>
+        <translation type="unfinished">Моя музыка</translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
@@ -674,7 +674,7 @@
     </message>
     <message>
         <source>Automatically generate playlist file (.m3u)</source>
-        <translation type="unfinished">Автоматически генерировать файл плэйлиста (.m3u)</translation>
+        <translation type="unfinished">Автоматически генерировать файл плэйлиста (.M3U)</translation>
     </message>
     <message>
         <source>Write meta information to encoded files</source>
@@ -726,7 +726,7 @@
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation type="unfinished">Управление битрейтом  (LAME and OggEnc2) </translation>
+        <translation type="unfinished">Управление битрейтом  (Lame и OggEnc2) </translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
@@ -754,7 +754,7 @@
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
-        <translation type="unfinished">Колчество каналов / Сэмплинг</translation>
+        <translation type="unfinished">Количество каналов / Сэмплинг</translation>
     </message>
     <message>
         <source>Auto Select (Default)</source>
@@ -814,7 +814,7 @@
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation type="unfinished">2-х проходное кодирование (ABR Mode)</translation>
+        <translation type="unfinished">2-х проходное кодирование (режим ABR)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
@@ -854,7 +854,7 @@
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
-        <translation type="unfinished">Высокие частоты (дБ):</translation>
+        <translation type="unfinished">Высокие частоты (dB):</translation>
     </message>
     <message>
         <source>Adjust Bass (dB):</source>
@@ -1196,7 +1196,7 @@
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation type="unfinished">Немогу записать в выбранню папку.</translation>
+        <translation type="unfinished">Не могу записать в выбранню папку.</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
@@ -1224,11 +1224,11 @@
     </message>
     <message>
         <source>Failed to create folder</source>
-        <translation type="unfinished">Немогу создать папку</translation>
+        <translation type="unfinished">Не могу создать папку</translation>
     </message>
     <message>
         <source>The new folder could not be created:</source>
-        <translation type="unfinished">Немогу создать новую папку:</translation>
+        <translation type="unfinished">Не могу создать новую папку:</translation>
     </message>
     <message>
         <source>Drive is read-only or insufficient access rights!</source>
@@ -1332,7 +1332,7 @@
     </message>
     <message>
         <source>Shell Integration</source>
-        <translation type="unfinished">Интеграция в контексное меню</translation>
+        <translation type="unfinished">Интеграция в контекстное меню</translation>
     </message>
     <message>
         <source>Do you really want to disable the LameXP shell integration?</source>
@@ -1352,7 +1352,7 @@
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation type="unfinished">Определять число паралельных потоков по числу ядер процессора (Рекомендуется)</translation>
+        <translation type="unfinished">Определять число параллельных потоков по числу ядер процессора (Рекомендуется)</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
@@ -1464,27 +1464,27 @@
     </message>
     <message>
         <source> Aften A/52 Options </source>
-        <translation type="unfinished">Параметры Aften A/52</translation>
+        <translation type="unfinished">Параметры кодера Aften A/52</translation>
     </message>
     <message>
         <source>Film Light</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Фильм Light</translation>
     </message>
     <message>
         <source>Film Standard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Фильм Standard</translation>
     </message>
     <message>
         <source>Music Light</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Музыка Light</translation>
     </message>
     <message>
         <source>Music Standard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Музыка Standard</translation>
     </message>
     <message>
         <source>Speech</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Речь</translation>
     </message>
     <message>
         <source>None (Default)</source>
@@ -1540,7 +1540,7 @@
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Размер области поиска:</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
@@ -1548,15 +1548,15 @@
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished">Импортировать Cue плэйлист</translation>
+        <translation type="unfinished">Импортировать CUE плэйлист</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished">Открыть Cue плэйлист</translation>
+        <translation type="unfinished">Открыть CUE плэйлист</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"> Cue плэйлист</translation>
+        <translation type="unfinished"> CUE плэйлист</translation>
     </message>
     <message>
         <source>CDDA Files</source>
@@ -1564,16 +1564,16 @@
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation type="unfinished">Cue плэйлист</translation>
+        <translation type="unfinished">CUE плэйлист</translation>
     </message>
     <message>
         <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">%1 файл(ов) было отменено, потому что они являются Cue плэйлистами!</translation>
+        <translation type="unfinished">%1 файл(ов) было отменено, потому что они являются CUE плэйлистами!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translatorcomment>пиздец бред</translatorcomment>
-        <translation type="unfinished">Пожалуйста используйте Мастер импорта Cue файлов для импорта Cue файлов.</translation>
+        <translation type="unfinished">Пожалуйста используйте Мастер импорта CUE файлов для импорта CUE файлов.</translation>
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
@@ -1873,31 +1873,31 @@
     </message>
     <message>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Параметры кодера Opus</translation>
     </message>
     <message>
         <source>Optimize for Signal Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Оптимизация:</translation>
     </message>
     <message>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сложность кодирования:</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Музыка</translation>
     </message>
     <message>
         <source>(Undefined)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нет</translation>
     </message>
     <message>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Размер кадра:</translation>
     </message>
     <message>
         <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Экспериментальный перцептуальный режим</translation>
     </message>
     <message>
         <source>OpusEnc:</source>
@@ -1905,7 +1905,7 @@
     </message>
     <message>
         <source>Show Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Справка</translation>
     </message>
 </context>
 <context>
@@ -2007,7 +2007,7 @@
     </message>
     <message>
         <source>Title</source>
-        <translation>Заголовок</translation>
+        <translation type="unfinished">Название</translation>
     </message>
     <message>
         <source>Artist</source>
@@ -2227,7 +2227,7 @@
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ВНИМАНИЕ: декодированный файл больше 4 ГБ, возможны проблемы!</translation>
     </message>
 </context>
 <context>
