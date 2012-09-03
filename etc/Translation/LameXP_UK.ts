@@ -1892,7 +1892,7 @@
     </message>
     <message>
         <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation>Використовувати експериментальне відчуттєве налагодження кодера</translation>
+        <translation>Використовувати експериментальне сприйняттєве налагодження кодера</translation>
     </message>
     <message>
         <source>OpusEnc:</source>
