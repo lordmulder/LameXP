@@ -375,7 +375,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	SET_CHECKBOX_STATE(checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocation());
 	SET_CHECKBOX_STATE(checkBoxNormalizationFilter, m_settings->normalizationFilterEnabled());
 	SET_CHECKBOX_STATE(checkBoxAutoDetectInstances, (m_settings->maximumInstances() < 1));
-	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, m_settings->customTempPathEnabled());
+	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabled());
 	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
 	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
 	SET_CHECKBOX_STATE(checkBoxOpusExpAnalysis, m_settings->opusExpAnalysis());
@@ -3905,7 +3905,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
 	SET_CHECKBOX_STATE(checkBoxNormalizationFilter, m_settings->normalizationFilterEnabledDefault());
 	SET_CHECKBOX_STATE(checkBoxAutoDetectInstances, (m_settings->maximumInstancesDefault() < 1));
-	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, m_settings->customTempPathEnabledDefault());
+	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabledDefault());
 	SET_CHECKBOX_STATE(checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocationDefault());
 	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
 	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
