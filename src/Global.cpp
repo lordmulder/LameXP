@@ -245,6 +245,15 @@ static struct
 }
 g_lamexp_argv;
 
+//CLI Arguments
+static struct
+{
+	bool bInitialized;
+	lamexp_os_version_t version;
+	QReadWriteLock lock;
+}
+g_lamexp_os_version;
+
 //Shared memory
 static const struct
 {
@@ -376,11 +385,21 @@ const QDate &lamexp_version_date(void)
 /*
  * Get the native operating system version
  */
-DWORD lamexp_get_os_version(void)
+const lamexp_os_version_t *lamexp_get_os_version(void)
 {
-	static DWORD osVersion = 0;
+	QReadLocker readLock(&g_lamexp_os_version.lock);
+
+	//Already initialized?
+	if(g_lamexp_os_version.bInitialized)
+	{
+		return &g_lamexp_os_version.version;
+	}
 	
-	if(!osVersion)
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_os_version.lock);
+
+	//Detect OS version
+	if(!g_lamexp_os_version.bInitialized)
 	{
 		OSVERSIONINFO osVerInfo;
 		memset(&osVerInfo, 0, sizeof(OSVERSIONINFO));
@@ -388,21 +407,27 @@ DWORD lamexp_get_os_version(void)
 	
 		if(GetVersionEx(&osVerInfo) == TRUE)
 		{
-			if(osVerInfo.dwPlatformId != VER_PLATFORM_WIN32_NT)
+			if(osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT)
 			{
-				throw "Ouuups: Not running under Windows NT. This is not supposed to happen!";
+				g_lamexp_os_version.version.versionMajor = osVerInfo.dwMajorVersion;
+				g_lamexp_os_version.version.versionMinor = osVerInfo.dwMinorVersion;
 			}
-			const DWORD osVerHi = (DWORD)(((DWORD)(osVerInfo.dwMajorVersion)) << 16);
-			const DWORD osVerLo = (DWORD)(((DWORD)(osVerInfo.dwMinorVersion)) & ((DWORD)(0xffff)));
-			osVersion = (DWORD)(((DWORD)(osVerHi)) | ((DWORD)(osVerLo)));
+			else
+			{
+				qWarning("lamexp_get_os_version: Not running under Windows NT, this is not supposed to happen!");
+				g_lamexp_os_version.version.versionMajor = 0;
+				g_lamexp_os_version.version.versionMinor = 0;
+			}
 		}
 		else
 		{
 			throw "GetVersionEx() has failed. This is not supposed to happen!";
 		}
+		
+		g_lamexp_os_version.bInitialized = true;
 	}
 
-	return osVersion;
+	return  &g_lamexp_os_version.version;
 }
 
 /*
@@ -1131,15 +1156,19 @@ bool lamexp_init_qt(int argc, char* argv[])
 		break;
 	default:
 		{
-			DWORD osVersionNo = lamexp_get_os_version();
-			if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 2))
+			const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
+			if(osVersionNo->versionMajor < 5)
+			{
+				qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(executableName).toLatin1().constData());
+			}
+			else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 2))
 			{
 				qDebug("Running on Windows 8 or Windows Server 2012\n");
 				lamexp_check_compatibility_mode(NULL, executableName);
 			}
 			else
 			{
-				qWarning("Running on an unknown/untested WinNT-based OS (v%u.%u).\n", HIWORD(osVersionNo), LOWORD(osVersionNo));
+				qWarning("Running on an unknown/untested WinNT-based OS (v%u.%u).\n", osVersionNo->versionMajor, osVersionNo->versionMinor);
 			}
 		}
 		break;
@@ -2222,6 +2251,7 @@ extern "C"
 		LAMEXP_ZERO_MEMORY(g_lamexp_translation);
 		LAMEXP_ZERO_MEMORY(g_lamexp_folder);
 		LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
+		LAMEXP_ZERO_MEMORY(g_lamexp_os_version);
 
 		//Make sure we will pass the check
 		g_lamexp_entry_check_flag = ~g_lamexp_entry_check_flag;

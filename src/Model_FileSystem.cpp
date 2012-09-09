@@ -268,7 +268,7 @@ bool QFileSystemModelEx::hasSubfolders(const QString &path)
 		if(kernel32Lib.load())
 		{
 			FindFirstFileExPtr = kernel32Lib.resolve("FindFirstFileExW");
-			DWORD osVersionNo = lamexp_get_os_version();
+			const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
 			FindFirstFileExInfoBasicOK = LAMEXP_MIN_OS_VER(osVersionNo, 6, 1);
 		}
 		FindFirstFileExInitialized = true;
