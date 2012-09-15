@@ -20,10 +20,6 @@
         <translation>Acerca de LameXP</translation>
     </message>
     <message>
-        <source>Show License Text</source>
-        <translation>Mostrar licencia</translation>
-    </message>
-    <message>
         <source>Accept License</source>
         <translation>Aceptar licencia</translation>
     </message>
@@ -40,10 +36,6 @@
         <translation>Contribuidores</translation>
     </message>
     <message>
-        <source>About Qt4</source>
-        <translation>Acerca de Qt4</translation>
-    </message>
-    <message>
         <source>Discard</source>
         <translation>Cancelar</translation>
     </message>
@@ -58,10 +50,6 @@
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
         <translation>¡Si está dispuesto a traducir LameXP, contáctenos sin dudarlo!</translation>
-    </message>
-    <message>
-        <source>About Contributors</source>
-        <translation>Acerca de los contribuidores</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
@@ -86,10 +74,6 @@
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translation>Tecnología de codificación de audio sin pérdidas, abierta y libre de patentes.</translation>
-    </message>
-    <message>
-        <source>About Third-party Software</source>
-        <translation>Acerca del Software de terceros</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -228,8 +212,40 @@
         <translation>Copyright (c) 2008-2011 Alexander E. Patrakov. Distribuido bajo licencia LGPL.</translation>
     </message>
     <message>
-        <source>About Qt5</source>
-        <translation>Acerca de Qt5</translation>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Programmers:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project Leader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opus Audio Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Totally open, royalty-free, highly versatile audio codec.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

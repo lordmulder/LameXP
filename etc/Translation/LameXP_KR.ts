@@ -24,10 +24,6 @@
         <translation type="unfinished">LameXP에 대해</translation>
     </message>
     <message>
-        <source>Show License Text</source>
-        <translation type="unfinished">라이센스 보기</translation>
-    </message>
-    <message>
         <source>Accept License</source>
         <translation type="unfinished">동의</translation>
     </message>
@@ -44,10 +40,6 @@
         <translation type="unfinished">기여자</translation>
     </message>
     <message>
-        <source>About Qt4</source>
-        <translation type="unfinished">Qt4에 대해</translation>
-    </message>
-    <message>
         <source>Discard</source>
         <translation type="unfinished">닫기</translation>
     </message>
@@ -62,10 +54,6 @@
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
         <translation type="unfinished">LameXP 번역에 도움을 주실 분들은 연락주시기 바랍니다!</translation>
-    </message>
-    <message>
-        <source>About Contributors</source>
-        <translation type="unfinished">도움 주신 분들</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
@@ -180,10 +168,6 @@
         <translation type="unfinished">LameXP 전체의 저작권은 LoRd_MuldeR에게 있습니다. LameXP에 사용된 타사 소프트웨어는 각 소프트웨어의 저작자에게 저작권이 있습니다.</translation>
     </message>
     <message>
-        <source>About Third-party Software</source>
-        <translation type="unfinished">타사 소프트웨어에 대해</translation>
-    </message>
-    <message>
         <source>n/a</source>
         <translation type="unfinished">없음</translation>
     </message>
@@ -228,8 +212,40 @@
         <translation type="unfinished">저작권 (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</translation>
     </message>
     <message>
-        <source>About Qt5</source>
-        <translation type="unfinished">Qt5에 대해</translation>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Programmers:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project Leader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opus Audio Codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Totally open, royalty-free, highly versatile audio codec.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

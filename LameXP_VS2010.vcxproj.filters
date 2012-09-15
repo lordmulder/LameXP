@@ -692,6 +692,9 @@
     <CustomBuild Include="src\CustomEventFilter.h">
       <Filter>Header Files\Misc</Filter>
     </CustomBuild>
+    <CustomBuild Include="gui\AboutDialog.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MainIcon.ico" />

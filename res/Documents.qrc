@@ -4,5 +4,6 @@
     <file>../doc/FAQ.html</file>
     <file>../doc/Changelog.html</file>
     <file>../doc/Translate.html</file>
+    <file>../License.txt</file>
   </qresource>
 </RCC>

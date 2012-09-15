@@ -21,11 +21,11 @@
 
 #pragma once
 
-#include <QMessageBox>
+#include "../tmp/UIC_AboutDialog.h"
 
 class SettingsModel;
 
-class AboutDialog : public QMessageBox
+class AboutDialog : public QDialog, private Ui::AboutDialog
 {
 	Q_OBJECT
 
@@ -38,10 +38,8 @@ public:
 public slots:
 	int exec();
 	void enableButtons(void);
-	void openLicenseText(void);
-	void showMoreAbout(void);
+	void openURL(const QString &url);
 	void showAboutQt(void);
-	void showAboutContributors(void);
 	void moveDisque(void);
 
 protected:
@@ -57,6 +55,11 @@ private:
 	QPixmap *m_cartoon[4];
 	bool m_rotateNext;
 	__int64 m_disqueDelay;
+
+	void initInformationTab(void);
+	void initContributorsTab(void);
+	void initSoftwareTab(void);
+	void initLicenseTab(void);
 
 	QString makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo = QString());
 	bool playResoureSound(const QString &library, const unsigned long soundId, const bool async);
