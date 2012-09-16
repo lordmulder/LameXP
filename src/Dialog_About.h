@@ -45,7 +45,8 @@ public slots:
 	void tabChanged(int index);
 
 protected:
-	void showEvent(QShowEvent *e);
+	virtual void showEvent(QShowEvent *e);
+	virtual void closeEvent(QCloseEvent *e);
 	bool eventFilter(QObject *obj, QEvent *event);
 
 private:

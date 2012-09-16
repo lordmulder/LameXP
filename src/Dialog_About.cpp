@@ -39,6 +39,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QScrollBar>
+#include <QCloseEvent>
 
 #include <ShellAPI.h>
 #include <MMSystem.h>
@@ -46,6 +47,7 @@
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
+#define TRIM_RIGHT(STR) do { while(STR.endsWith(QChar(' ')) || STR.endsWith(QChar('\t')) || STR.endsWith(QChar('\r')) || STR.endsWith(QChar('\n'))) STR.chop(1); } while(0)
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
@@ -99,11 +101,15 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	tabWidget->setCurrentIndex(tabWidget->indexOf(infoTab));
 
 	//Disable "X" button
-	if(HMENU hMenu = GetSystemMenu((HWND) winId(), FALSE))
+	if(firstStart)
 	{
-		EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+		if(HMENU hMenu = GetSystemMenu((HWND) winId(), FALSE))
+		{
+			EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+		}
 	}
 
+	//Init images
 	for(int i = 0; i < 4; i++)
 	{
 		m_cartoon[i] = NULL;
@@ -242,6 +248,8 @@ void AboutDialog::tabChanged(int index)
 		}
 
 		m_initFlags->insert(tabWidget->widget(index), true);
+
+		tabWidget->widget(index)->update();
 		qApp->processEvents();
 		qApp->restoreOverrideCursor();
 	}
@@ -386,6 +394,11 @@ void AboutDialog::showEvent(QShowEvent *e)
 		QTimer::singleShot(5000, this, SLOT(enableButtons()));
 		setCursor(QCursor(Qt::WaitCursor));
 	}
+}
+
+void AboutDialog::closeEvent(QCloseEvent *e)
+{
+	if(m_firstShow) e->ignore();
 }
 
 bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
@@ -695,7 +708,7 @@ void AboutDialog::initSoftwareTab(void)
 		tr("By Mark James, released under the Creative Commons 'by' License."),
 		"http://www.famfamfam.com/lab/icons/silk/"
 	);
-	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><i>%1</i><br>").arg
+	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><br><i>%1</i><br>").arg
 	(
 		tr("The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.")
 	);
@@ -717,25 +730,31 @@ void AboutDialog::initLicenseTab(void)
 		unsigned int counter = 0;
 		while((!stream.atEnd()) && (stream.status() == QTextStream::Ok))
 		{
-			QString line = stream.readLine().replace('<', "&lt;").replace('>', "&gt;");
+			QString line = stream.readLine();
+			const bool bIsBlank = line.trimmed().isEmpty();
+			line.replace('<', "&lt;").replace('>', "&gt;");
+
 			switch(counter)
 			{
 			case 0:
-				if(!line.isEmpty()) licenseText += QString("<font size=\"+2\">%1</font><br>").arg(line.simplified());
+				if(!bIsBlank) licenseText += QString("<font size=\"+2\">%1</font><br>").arg(line.simplified());
 				break;
 			case 1:
-				if(!line.isEmpty()) licenseText += QString("<font size=\"+1\">%1</font><br>").arg(line.simplified());
+				if(!bIsBlank) licenseText += QString("<font size=\"+1\">%1</font><br>").arg(line.simplified());
 				break;
 			default:
+				TRIM_RIGHT(line);
 				licenseText += QString("<nobr>%1</nobr><br>").arg(line.replace(' ', "&nbsp;"));
 				break;
 			}
-			if(!line.isEmpty()) counter++;
+
+			if(!bIsBlank) counter++;
 		}
 		stream.device()->close();
 	}
 	else
 	{
+		licenseText += QString("<font color=\"darkred\">Oups, failed to load license text. Please refer to:</font><br>");
 		licenseText += LINK("http://www.gnu.org/licenses/gpl-2.0.html");
 	}
 
@@ -743,6 +762,7 @@ void AboutDialog::initLicenseTab(void)
 
 	licenseLabel->setText(licenseText);
 	licenseIcon->setPixmap(QIcon(":/images/Logo_GNU.png").pixmap(QSize(72,65)));
+	connect(licenseLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
 
 
@@ -759,7 +779,7 @@ QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBi
 	toolText += QString("%1<br>").arg(NOBR(toolLicense));
 	if(!extraInfo.isEmpty()) toolText += QString("<i>%1</i><br>").arg(NOBR(extraInfo));
 	toolText += QString("<nobr>%1</nobr>").arg(LINK(toolWebsite));
-	toolText += QString("<div style=\"font-size:1pt\"><br></div>");
+	toolText += QString("<font style=\"font-size:9px\"><br>&nbsp;</font>");
 
 	return toolText;
 }
