@@ -12,10 +12,6 @@
         <translation>注:LameXP是免费软件.&lt;b&gt;不用&lt;/b&gt;付钱获取或使用LameXP!如果某些第三方网站尝试让你付出代价下载LameXP,你应该&lt;b&gt;不&lt;/b&gt;接受报价!</translation>
     </message>
     <message>
-        <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation>特别感谢&quot;John33&quot;从 %1 为他的持续支持.</translation>
-    </message>
-    <message>
         <source>About LameXP</source>
         <translation>关于 LameXP</translation>
     </message>
@@ -200,7 +196,7 @@
         <translation>avs2wav - Avisynth到WAV音频转换器</translation>
     </message>
     <message>
-        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
+        <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP是作为一个整体版权由 LoRd_MuldeR 保护.在 LameXP 中使用的第三方软件作著权属于第三方.</translation>
     </message>
     <message>
@@ -217,10 +213,6 @@
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -245,6 +237,14 @@
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show License Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

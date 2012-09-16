@@ -16,10 +16,6 @@
         <translation>Примітка: LameXP є вільним ПЗ. &lt;b&gt;Не&lt;/b&gt; надавайте грошей за його отримання або використання! Якщо хтось хоче отримати гроші за завантаження LameXP, ви &lt;b&gt;не&lt;/b&gt; повинні відповідати на такий запит !!!</translation>
     </message>
     <message>
-        <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation>Окрема подяка  &quot;John33&quot; з %1 за постійну підтримку.</translation>
-    </message>
-    <message>
         <source>About LameXP</source>
         <translation>Про LameXP</translation>
     </message>
@@ -164,7 +160,7 @@
         <translation>GNU Wget - Software for retrieving files using HTTP</translation>
     </message>
     <message>
-        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
+        <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стороннє ПЗ, що використовується в LameXP, належать авторам цього ПЗ.</translation>
     </message>
     <message>
@@ -221,10 +217,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Programmers:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -246,6 +238,14 @@
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show License Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

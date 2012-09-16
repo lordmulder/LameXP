@@ -38,6 +38,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QScrollBar>
 
 #include <ShellAPI.h>
 #include <MMSystem.h>
@@ -85,6 +86,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 :
 	QDialog(parent),
 	m_settings(settings),
+	m_initFlags(new QMap<QWidget*,bool>),
 	m_disque(NULL),
 	m_disqueTimer(NULL),
 	m_rotateNext(false),
@@ -107,64 +109,10 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		m_cartoon[i] = NULL;
 	}
 
-	//Init dialog text
-	initInformationTab();
-	initContributorsTab();
-	initSoftwareTab();
-	initLicenseTab();
+	//Init tab widget
+	connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
 
-	/*
-	if(firstStart)
-	{
-		QPushButton *firstButton = addButton(tr("Show License Text"), QMessageBox::AcceptRole);
-		firstButton->setIcon(QIcon(":/icons/script.png"));
-		firstButton->setIconSize(QSize(16, 16));
-		firstButton->setMinimumWidth(135);
-		firstButton->disconnect();
-		connect(firstButton, SIGNAL(clicked()), this, SLOT(openLicenseText()));
-
-		QPushButton *secondButton = addButton(tr("Accept License"), QMessageBox::AcceptRole);
-		secondButton->setIcon(QIcon(":/icons/accept.png"));
-		secondButton->setIconSize(QSize(16, 16));
-		secondButton->setMinimumWidth(120);
-
-		QPushButton *thirdButton = addButton(tr("Decline License"), QMessageBox::AcceptRole);
-		thirdButton->setIcon(QIcon(":/icons/delete.png"));
-		thirdButton->setIconSize(QSize(16, 16));
-		thirdButton->setMinimumWidth(120);
-		thirdButton->setEnabled(false);
-	}
-	else
-	{
-		QPushButton *firstButton = addButton(tr("3rd Party S/W"), QMessageBox::AcceptRole);
-		firstButton->setIcon(QIcon(":/icons/page_white_cplusplus.png"));
-		firstButton->setIconSize(QSize(16, 16));
-		firstButton->setMinimumWidth(120);
-		firstButton->disconnect();
-		connect(firstButton, SIGNAL(clicked()), this, SLOT(showMoreAbout()));
-
-		QPushButton *secondButton = addButton(tr("Contributors"), QMessageBox::AcceptRole);
-		secondButton->setIcon(QIcon(":/icons/user_suit.png"));
-		secondButton->setIconSize(QSize(16, 16));
-		secondButton->setMinimumWidth(120);
-		secondButton->disconnect();
-		connect(secondButton, SIGNAL(clicked()), this, SLOT(showAboutContributors()));
-
-		static const bool isQt5 = (QT_VERSION >= QT_VERSION_CHECK(5,0,0));
-		QPushButton *thirdButton = addButton(isQt5 ? tr("About Qt5") : tr("About Qt4"), QMessageBox::AcceptRole);
-		thirdButton->setIcon(QIcon(":/icons/qt.png"));
-		thirdButton->setIconSize(QSize(16, 16));
-		thirdButton->setMinimumWidth(120);
-		thirdButton->disconnect();
-		connect(thirdButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
-
-		QPushButton *fourthButton = addButton(tr("Discard"), QMessageBox::AcceptRole);
-		fourthButton->setIcon(QIcon(":/icons/cross.png"));
-		fourthButton->setIconSize(QSize(16, 16));
-		fourthButton->setMinimumWidth(90);
-	}
-	*/
-
+	//Show about dialog for the first time?
 	if(!firstStart)
 	{
 		acceptButton->hide();
@@ -199,6 +147,10 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		closeButton->hide();
 	}
 
+	//Activate "show license" button
+	showLicenseButton->show();
+	connect(showLicenseButton, SIGNAL(clicked()), this, SLOT(gotoLicenseTab()));
+
 	m_firstShow = firstStart;
 }
 
@@ -218,7 +170,7 @@ AboutDialog::~AboutDialog(void)
 	{
 		LAMEXP_DELETE(m_cartoon[i]);
 	}
-
+	LAMEXP_DELETE(m_initFlags);
 }
 
 ////////////////////////////////////////////////////////////
@@ -263,6 +215,59 @@ int AboutDialog::exec()
 #define TEMP_HIDE_DISQUE(CMD) \
 if(m_disque) { bool _tmp = m_disque->isVisible(); if(_tmp) m_disque->hide(); {CMD}; if(_tmp) { m_disque->show(); m_disque->setWindowOpacity(0.01); } } else {CMD}
 
+void AboutDialog::tabChanged(int index)
+{
+	bool bInitialized = m_initFlags->value(tabWidget->widget(index), false);
+
+	if(!bInitialized)
+	{
+		qApp->setOverrideCursor(QCursor(Qt::WaitCursor));
+
+		switch(index)
+		{
+		case 0:
+			initInformationTab();
+			break;
+		case 1:
+			initContributorsTab();
+			break;
+		case 2:
+			initSoftwareTab();
+			break;
+		case 3:
+			initLicenseTab();
+			break;
+		default:
+			qWarning("Unknown tab index: %d !!!", index);
+		}
+
+		m_initFlags->insert(tabWidget->widget(index), true);
+		qApp->processEvents();
+		qApp->restoreOverrideCursor();
+	}
+
+	//Scroll to the top
+	switch(index)
+	{
+	case 0:
+		infoScrollArea->verticalScrollBar()->setSliderPosition(0);
+		break;
+	case 1:
+		contributorsScrollArea->verticalScrollBar()->setSliderPosition(0);
+		break;
+	case 2:
+		softwareScrollArea->verticalScrollBar()->setSliderPosition(0);
+		break;
+	case 3:
+		licenseScrollArea->verticalScrollBar()->setSliderPosition(0);
+		break;
+	default:
+		qWarning("Unknown tab index: %d !!!", index);
+	}
+
+	showLicenseButton->setChecked(tabWidget->widget(index) == licenseTab);
+}
+
 void AboutDialog::enableButtons(void)
 {
 	acceptButton->setEnabled(true);
@@ -284,6 +289,11 @@ void AboutDialog::showAboutQt(void)
 	(
 		QMessageBox::aboutQt(this);
 	);
+}
+
+void AboutDialog::gotoLicenseTab(void)
+{
+	tabWidget->setCurrentIndex(tabWidget->indexOf(showLicenseButton->isChecked() ? licenseTab : infoTab));
 }
 
 void AboutDialog::moveDisque(void)
@@ -368,6 +378,7 @@ void AboutDialog::moveDisque(void)
 void AboutDialog::showEvent(QShowEvent *e)
 {
 	QDialog::showEvent(e);
+	tabChanged(tabWidget->currentIndex());
 	if(m_firstShow)
 	{
 		acceptButton->setEnabled(false);
@@ -464,11 +475,11 @@ void AboutDialog::initInformationTab(void)
 	aboutText += "You should have received a copy of the GNU General Public License<br>";
 	aboutText += "along with this program; if not, write to the Free Software<br>";
 	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110&minus;1301, USA.</tt></nobr><br>";
-	aboutText += "<hr><table><tr>";
+	aboutText += "<hr><table style=\"margin-top:4px\"><tr>";
 	aboutText += "<td valign=\"middle\"><img src=\":/icons/error_big.png\"</td><td>&nbsp;</td>";
 	aboutText += QString("<td><font color=\"darkred\">%1</font></td>").arg(tr("Note: LameXP is free software. Do <b>not</b> pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should <b>not</b> respond to the offer !!!"));
-	aboutText += "</tr></table><hr><br>";
-	aboutText += QString("%1<br>").arg(NOBR(tr("Special thanks go out to \"John33\" from %1 for his continuous support.")).arg(LINK("http://www.rarewares.org/")));
+	aboutText += "</tr></table>";
+	//aboutText += QString("%1<br>").arg(NOBR(tr("Special thanks go out to \"John33\" from %1 for his continuous support.")).arg(LINK("http://www.rarewares.org/")));
 
 	infoLabel->setText(aboutText);
 	infoIcon->setPixmap(lamexp_app_icon().pixmap(QSize(72,72)));
@@ -477,26 +488,27 @@ void AboutDialog::initInformationTab(void)
 
 void AboutDialog::initContributorsTab(void)
 {
-	const QString extraSpace("<font style=\"font-size:5px\"><br>&nbsp;</font>");
+	const QString spaces("&nbsp;&nbsp;&nbsp;&nbsp;");
+	const QString extraVSpace("<font style=\"font-size:7px\"><br>&nbsp;</font>");
 	
 	QString contributorsAboutText;
 	contributorsAboutText += QString("<h3>%1</h3>").arg(NOBR(tr("The following people have contributed to LameXP:")));
 	contributorsAboutText += "<table style=\"margin-top:12px\">";
 	
-	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Programmers:"), extraSpace);
-	QString icon = QString("<img src=\":/icons/%1.png\">").arg("page_white_cplusplus");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td>").arg(icon);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td>").arg(tr("Project Leader"));
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td><td><a href=\"mailto:%2\">&lt;%2&gt;</a></td></tr>").arg("LoRd_MuldeR", "MuldeR2@GMX.de");
+	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Programmers:"), extraVSpace);
+	QString icon = QString("<img src=\":/icons/%1.png\">").arg("user_gray");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(icon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(tr("Project Leader"), spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%2\">&lt;%3&gt;</a></td></tr>").arg("LoRd_MuldeR", spaces, "MuldeR2@GMX.de");
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");
 
-	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Translators:"),extraSpace);
+	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Translators:"), extraVSpace);
 	for(int i = 0; g_lamexp_translators[i].pcName; i++)
 	{
 		QString flagIcon = (strlen(g_lamexp_translators[i].pcFlag) > 0) ? QString("<img src=\":/flags/%1.png\">").arg(g_lamexp_translators[i].pcFlag) : QString();
-		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td>").arg(flagIcon);
-		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcLanguage));
-		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>&nbsp;&nbsp;</td><td><a href=\"mailto:%2\">&lt;%2&gt;</a></td></tr>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcName), g_lamexp_translators[i].pcMail);
+		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(flagIcon, spaces);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcLanguage), spaces);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%2\">&lt;%3&gt;</a></td></tr>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcName), spaces, g_lamexp_translators[i].pcMail);
 	}
 
 	contributorsAboutText += "</table><br><br>";
@@ -685,7 +697,7 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><i>%1</i><br>").arg
 	(
-		tr("LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.")
+		tr("The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.")
 	);
 
 	softwareLabel->setText(moreAboutText);

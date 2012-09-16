@@ -16,10 +16,6 @@
         <translation>Примечание: LameXP является бесплатным программным обеспечением. Вам &lt;b&gt;не надо&lt;/b&gt; платить деньги, чтобы получить или использовать LameXP! Если какой-то веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы должны &lt;b&gt; не отвечать&lt;/b&gt; на это предложение!!!</translation>
     </message>
     <message>
-        <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation>Специальная благодарность &quot;John33&quot; с %1 за его непрерывную поддержку.</translation>
-    </message>
-    <message>
         <source>About LameXP</source>
         <translation>О LameXP</translation>
     </message>
@@ -164,7 +160,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
+        <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation type="unfinished">LameXP защищена авторским правом LoRd_MuldeR. Авторское право на  программное обеспечение третьих сторон, используемое в LameXP, принадлежит индивидуальным авторам.</translation>
     </message>
     <message>
@@ -220,10 +216,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Programmers:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -245,6 +237,14 @@
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show License Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

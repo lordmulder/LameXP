@@ -39,8 +39,10 @@ public slots:
 	int exec();
 	void enableButtons(void);
 	void openURL(const QString &url);
+	void gotoLicenseTab(void);
 	void showAboutQt(void);
 	void moveDisque(void);
+	void tabChanged(int index);
 
 protected:
 	void showEvent(QShowEvent *e);
@@ -49,6 +51,7 @@ protected:
 private:
 	bool m_firstShow;
 	SettingsModel *m_settings;
+	QMap<QWidget*,bool> *m_initFlags;
 	QLabel *m_disque;
 	QTimer * m_disqueTimer;
 	bool m_disqueFlags[2];

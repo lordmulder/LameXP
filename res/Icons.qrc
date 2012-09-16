@@ -38,6 +38,7 @@
 		<file>icons/control_play_blue.png</file>
 		<file>icons/cpu.png</file>
 		<file>icons/cross.png</file>
+		<file>icons/crown.png</file>
 		<file>icons/date.png</file>
 		<file>icons/delete.png</file>
 		<file>icons/disk.png</file>
@@ -94,6 +95,7 @@
 		<file>icons/resultset_next.png</file>
 		<file>icons/script.png</file>
 		<file>icons/script_edit.png</file>
+		<file>icons/script_go.png</file>
 		<file>icons/server_error.png</file>
 		<file>icons/shield_admin.png</file>
 		<file>icons/shield_error.png</file>
@@ -108,6 +110,7 @@
 		<file>icons/transmit.png</file>
 		<file>icons/transmit_blue.png</file>
 		<file>icons/user.png</file>
+		<file>icons/user_gray.png</file>
 		<file>icons/user_suit.png</file>
 		<file>icons/user_comment.png</file>
 		<file>icons/wma.png</file>

@@ -12,10 +12,6 @@
         <translation>Hinweis: LameXP ist freie Software. Zahlen Sie &lt;b&gt;kein&lt;/b&gt; Geld um LameXP zu erhalten oder zu verwenden! Gehen Sie insbesondere &lt;b&gt;nicht&lt;/b&gt; auf kostenpflichtige Download-Angebote ein !!!</translation>
     </message>
     <message>
-        <source>Special thanks go out to &quot;John33&quot; from %1 for his continuous support.</source>
-        <translation>Besonderen Dank an &quot;John33&quot; von %1 für seine langjährige Unterstützung.</translation>
-    </message>
-    <message>
         <source>About LameXP</source>
         <translation>Über LameXP</translation>
     </message>
@@ -92,8 +88,8 @@
         <translation>Veröffentlicht unter den Bestimmungen der GNU General Public License.</translation>
     </message>
     <message>
-        <source>LameXP as a whole is copyrighted by LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
-        <translation>Das Urheberrecht an LameXP liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Autoren.</translation>
+        <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
+        <translation>Das Urheberrecht an LameXP als Gesamtwerk liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Autoren.</translation>
     </message>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
@@ -220,10 +216,6 @@
         <translation>Lizenzbedingungen</translation>
     </message>
     <message>
-        <source>About Qt</source>
-        <translation>Über Qt</translation>
-    </message>
-    <message>
         <source>Programmers:</source>
         <translation>Entwickler:</translation>
     </message>
@@ -246,6 +238,14 @@
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
         <translation>Von Mark James, veröffentlicht unter der Creative Commons &apos;by&apos; Lizenz.</translation>
+    </message>
+    <message>
+        <source>Show License Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
