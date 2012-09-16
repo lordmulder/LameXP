@@ -241,11 +241,11 @@
     </message>
     <message>
         <source>Show License Text</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示許可證文本</translation>
     </message>
     <message>
         <source>About Qt...</source>
-        <translation type="unfinished"></translation>
+        <translation>關于 Qt</translation>
     </message>
 </context>
 <context>

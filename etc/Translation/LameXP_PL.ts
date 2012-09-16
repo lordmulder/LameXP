@@ -32,7 +32,7 @@
     <message>
         <location filename="../../gui/AboutDialog.ui" line="442"/>
         <source>Show License Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż tekst licencji</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="481"/>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../../gui/AboutDialog.ui" line="521"/>
         <source>About Qt...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Info o Qt</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="239"/>

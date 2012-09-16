@@ -242,11 +242,11 @@
     </message>
     <message>
         <source>Show License Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати текст ліцензії</translation>
     </message>
     <message>
         <source>About Qt...</source>
-        <translation type="unfinished"></translation>
+        <translation>Про Qt</translation>
     </message>
 </context>
 <context>

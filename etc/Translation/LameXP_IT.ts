@@ -241,11 +241,11 @@
     </message>
     <message>
         <source>Show License Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizza Testo Licenza</translation>
     </message>
     <message>
         <source>About Qt...</source>
-        <translation type="unfinished"></translation>
+        <translation>Riguardo Qt...</translation>
     </message>
 </context>
 <context>
