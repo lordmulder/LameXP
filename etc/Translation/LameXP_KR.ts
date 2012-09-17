@@ -247,6 +247,42 @@
         <source>About Qt...</source>
         <translation type="unfinished">Qt에 대해</translation>
     </message>
+    <message>
+        <source>Special thanks to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doom9&apos;s Forum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gleitz | German Doom9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hydrogenaudio Forums</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RareWares</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GitHub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SourceForge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt Developer Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marius Hudea</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

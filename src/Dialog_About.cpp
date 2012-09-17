@@ -40,6 +40,8 @@
 #include <QTextStream>
 #include <QScrollBar>
 #include <QCloseEvent>
+#include <QWindowsVistaStyle>
+#include <QWindowsXPStyle>
 
 #include <ShellAPI.h>
 #include <MMSystem.h>
@@ -48,6 +50,8 @@
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define TRIM_RIGHT(STR) do { while(STR.endsWith(QChar(' ')) || STR.endsWith(QChar('\t')) || STR.endsWith(QChar('\r')) || STR.endsWith(QChar('\n'))) STR.chop(1); } while(0)
+#define MAKE_TRANSPARENT(WIDGET) do { QPalette _p = (WIDGET)->palette(); _p.setColor(QPalette::Background, Qt::transparent); (WIDGET)->setPalette(_p); } while(0)
+
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
@@ -92,14 +96,14 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	m_disque(NULL),
 	m_disqueTimer(NULL),
 	m_rotateNext(false),
-	m_disqueDelay(_I64_MAX)
+	m_disqueDelay(_I64_MAX),
+	m_lastTab(0)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
 	setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
 	resize(this->minimumSize());
-	tabWidget->setCurrentIndex(tabWidget->indexOf(infoTab));
-
+	
 	//Disable "X" button
 	if(firstStart)
 	{
@@ -117,6 +121,16 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 
 	//Init tab widget
 	connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
+
+	//Make transparent
+	QStyle *style = qApp->style();
+	if((dynamic_cast<QWindowsVistaStyle*>(style)) || (dynamic_cast<QWindowsXPStyle*>(style)))
+	{
+		MAKE_TRANSPARENT(infoScrollArea);
+		MAKE_TRANSPARENT(contributorsScrollArea);
+		MAKE_TRANSPARENT(softwareScrollArea);
+		MAKE_TRANSPARENT(licenseScrollArea);
+	}
 
 	//Show about dialog for the first time?
 	if(!firstStart)
@@ -229,25 +243,25 @@ void AboutDialog::tabChanged(int index)
 	{
 		qApp->setOverrideCursor(QCursor(Qt::WaitCursor));
 
-		switch(index)
+		if(QWidget *tab = tabWidget->widget(index))
 		{
-		case 0:
-			initInformationTab();
-			break;
-		case 1:
-			initContributorsTab();
-			break;
-		case 2:
-			initSoftwareTab();
-			break;
-		case 3:
-			initLicenseTab();
-			break;
-		default:
-			qWarning("Unknown tab index: %d !!!", index);
-		}
+			bool ok = false;
 
-		m_initFlags->insert(tabWidget->widget(index), true);
+			if(tab == infoTab) { initInformationTab(); ok = true; }
+			if(tab == contributorsTab) { initContributorsTab(); ok = true; }
+			if(tab == softwareTab) { initSoftwareTab(); ok = true; }
+			if(tab == licenseTab) { initLicenseTab(); ok = true; }
+
+			if(ok)
+			{
+				m_initFlags->insert(tab, true);
+			}
+			else
+			{
+				qWarning("Unknown tab %p encountered, cannot initialize !!!", tab);
+			}
+			
+		}
 
 		tabWidget->widget(index)->update();
 		qApp->processEvents();
@@ -255,25 +269,17 @@ void AboutDialog::tabChanged(int index)
 	}
 
 	//Scroll to the top
-	switch(index)
+	if(QWidget *tab = tabWidget->widget(index))
 	{
-	case 0:
-		infoScrollArea->verticalScrollBar()->setSliderPosition(0);
-		break;
-	case 1:
-		contributorsScrollArea->verticalScrollBar()->setSliderPosition(0);
-		break;
-	case 2:
-		softwareScrollArea->verticalScrollBar()->setSliderPosition(0);
-		break;
-	case 3:
-		licenseScrollArea->verticalScrollBar()->setSliderPosition(0);
-		break;
-	default:
-		qWarning("Unknown tab index: %d !!!", index);
+		if(tab == infoTab) infoScrollArea->verticalScrollBar()->setSliderPosition(0);
+		if(tab == contributorsTab) contributorsScrollArea->verticalScrollBar()->setSliderPosition(0);
+		if(tab == softwareTab) softwareScrollArea->verticalScrollBar()->setSliderPosition(0);
+		if(tab == licenseTab) licenseScrollArea->verticalScrollBar()->setSliderPosition(0);
 	}
 
+	//Update license button
 	showLicenseButton->setChecked(tabWidget->widget(index) == licenseTab);
+	if(tabWidget->widget(index) != licenseTab) m_lastTab = index;
 }
 
 void AboutDialog::enableButtons(void)
@@ -301,7 +307,7 @@ void AboutDialog::showAboutQt(void)
 
 void AboutDialog::gotoLicenseTab(void)
 {
-	tabWidget->setCurrentIndex(tabWidget->indexOf(showLicenseButton->isChecked() ? licenseTab : infoTab));
+	tabWidget->setCurrentIndex(tabWidget->indexOf(showLicenseButton->isChecked() ? licenseTab : tabWidget->widget(m_lastTab)));
 }
 
 void AboutDialog::moveDisque(void)
@@ -386,7 +392,10 @@ void AboutDialog::moveDisque(void)
 void AboutDialog::showEvent(QShowEvent *e)
 {
 	QDialog::showEvent(e);
-	tabChanged(tabWidget->currentIndex());
+	
+	tabWidget->setCurrentIndex(tabWidget->indexOf(infoTab));
+	tabChanged(m_lastTab = tabWidget->currentIndex());
+	
 	if(m_firstShow)
 	{
 		acceptButton->setEnabled(false);
@@ -506,7 +515,7 @@ void AboutDialog::initContributorsTab(void)
 	
 	QString contributorsAboutText;
 	contributorsAboutText += QString("<h3>%1</h3>").arg(NOBR(tr("The following people have contributed to LameXP:")));
-	contributorsAboutText += "<table style=\"margin-top:12px\">";
+	contributorsAboutText += "<table style=\"margin-top:12px;white-space:nowrap\">";
 	
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Programmers:"), extraVSpace);
 	QString icon = QString("<img src=\":/icons/%1.png\">").arg("user_gray");
@@ -524,8 +533,29 @@ void AboutDialog::initContributorsTab(void)
 		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%2\">&lt;%3&gt;</a></td></tr>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcName), spaces, g_lamexp_translators[i].pcMail);
 	}
 
-	contributorsAboutText += "</table><br><br>";
-	contributorsAboutText += QString("<i>%1</i>").arg(NOBR(tr("If you are willing to contribute a LameXP translation, feel free to contact us!")));
+	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");
+	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Special thanks to:"), extraVSpace);
+
+	QString webIcon = QString("<img src=\":/icons/%1.png\">").arg("world");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Doom9's Forum"), spaces, "http://forum.doom9.org/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Gleitz | German Doom9"), spaces, "http://forum.gleitz.info/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Hydrogenaudio Forums"), spaces, "http://www.hydrogenaudio.org/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("RareWares"), spaces, "http://www.rarewares.org/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("GitHub"), spaces, "http://github.com/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("SourceForge"), spaces, "http://sourceforge.net/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Qt Developer Network"), spaces, "http://qt-project.org/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Marius Hudea"), spaces, "http://savedonthe.net/");
+
+	contributorsAboutText += "</table><br><br><br>";
+	contributorsAboutText += QString("<i>%1</i><br>").arg(NOBR(tr("If you are willing to contribute a LameXP translation, feel free to contact us!")));
 
 	contributorsLabel->setText(contributorsAboutText);
 	contributorsIcon->setPixmap(QIcon(":/images/Logo_Contributors.png").pixmap(QSize(72,84)));
@@ -750,6 +780,7 @@ void AboutDialog::initLicenseTab(void)
 
 			if(!bIsBlank) counter++;
 		}
+		licenseText += QString("<br><br>%1").arg(LINK("http://www.gnu.org/licenses/gpl-2.0.html"));
 		stream.device()->close();
 	}
 	else

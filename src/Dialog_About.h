@@ -53,6 +53,8 @@ private:
 	bool m_firstShow;
 	SettingsModel *m_settings;
 	QMap<QWidget*,bool> *m_initFlags;
+	int m_lastTab;
+	
 	QLabel *m_disque;
 	QTimer * m_disqueTimer;
 	bool m_disqueFlags[2];
