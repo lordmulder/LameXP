@@ -733,6 +733,13 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("UPX - The Ultimate Packer for eXecutables"),
+		QString(), "v3.08",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"http://upx.sourceforge.net/"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("Silk Icons - Over 700  icons in PNG format"),
 		QString(), "v1.3",
 		tr("By Mark James, released under the Creative Commons 'by' License."),

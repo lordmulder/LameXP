@@ -283,6 +283,10 @@
         <source>Marius Hudea</source>
         <translation></translation>
     </message>
+    <message>
+        <source>UPX - The Ultimate Packer for eXecutables</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

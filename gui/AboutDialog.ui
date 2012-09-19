@@ -19,9 +19,6 @@
   <property name="windowTitle">
    <string>About LameXP</string>
   </property>
-  <property name="modal">
-   <bool>true</bool>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
@@ -157,8 +154,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>676</width>
-            <height>413</height>
+            <width>110</width>
+            <height>37</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -255,8 +252,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>676</width>
-            <height>413</height>
+            <width>110</width>
+            <height>37</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -353,8 +350,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>676</width>
-            <height>413</height>
+            <width>100</width>
+            <height>37</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_4">

@@ -9,47 +9,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="43"/>
+        <location filename="../../gui/AboutDialog.ui" line="40"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="141"/>
+        <location filename="../../gui/AboutDialog.ui" line="138"/>
         <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="239"/>
+        <location filename="../../gui/AboutDialog.ui" line="236"/>
         <source>3rd Party S/W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="337"/>
+        <location filename="../../gui/AboutDialog.ui" line="334"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="442"/>
+        <location filename="../../gui/AboutDialog.ui" line="439"/>
         <source>Show License Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="481"/>
+        <location filename="../../gui/AboutDialog.ui" line="478"/>
         <source>Accept License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="501"/>
+        <location filename="../../gui/AboutDialog.ui" line="498"/>
         <source>Decline License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="521"/>
+        <location filename="../../gui/AboutDialog.ui" line="518"/>
         <source>About Qt...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/AboutDialog.ui" line="538"/>
+        <location filename="../../gui/AboutDialog.ui" line="535"/>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -166,6 +166,7 @@
         <location filename="../../src/Dialog_About.cpp" line="717"/>
         <location filename="../../src/Dialog_About.cpp" line="724"/>
         <location filename="../../src/Dialog_About.cpp" line="731"/>
+        <location filename="../../src/Dialog_About.cpp" line="738"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -346,21 +347,26 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="736"/>
-        <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="738"/>
-        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="743"/>
+        <source>Silk Icons - Over 700  icons in PNG format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="745"/>
+        <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="750"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="806"/>
+        <location filename="../../src/Dialog_About.cpp" line="813"/>
         <source>n/a</source>
         <translation type="unfinished"></translation>
     </message>
