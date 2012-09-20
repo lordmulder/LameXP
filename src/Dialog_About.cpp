@@ -385,6 +385,20 @@ void AboutDialog::moveDisque(void)
 		}
 	}
 }
+
+void AboutDialog::adjustSize(void)
+{
+	int maximumHeight = QApplication::desktop()->availableGeometry().height();
+
+	int delta = infoScrollArea->widget()->height() - infoScrollArea->viewport()->height();
+	if(delta > 0)
+	{
+		this->resize(this->width(), qMin(this->height() + delta, maximumHeight));
+		this->move(this->x(), this->y() - (delta/2));
+		this->setMinimumHeight(qMax(this->minimumHeight(), this->height()));
+	}
+}
+
 ////////////////////////////////////////////////////////////
 // Protected Functions
 ////////////////////////////////////////////////////////////
@@ -403,6 +417,8 @@ void AboutDialog::showEvent(QShowEvent *e)
 		QTimer::singleShot(5000, this, SLOT(enableButtons()));
 		setCursor(QCursor(Qt::WaitCursor));
 	}
+
+	QTimer::singleShot(0, this, SLOT(adjustSize()));
 }
 
 void AboutDialog::closeEvent(QCloseEvent *e)
@@ -777,7 +793,7 @@ void AboutDialog::initLicenseTab(void)
 				if(!bIsBlank) licenseText += QString("<font size=\"+2\">%1</font><br>").arg(line.simplified());
 				break;
 			case 1:
-				if(!bIsBlank) licenseText += QString("<font size=\"+1\">%1</font><br>").arg(line.simplified());
+				if(!bIsBlank) licenseText += QString("<font size=\"+1\">%1 &minus; %2</font><br>").arg(line.simplified(), LINK("http://www.gnu.org/licenses/gpl-2.0.html"));
 				break;
 			default:
 				TRIM_RIGHT(line);
@@ -787,7 +803,7 @@ void AboutDialog::initLicenseTab(void)
 
 			if(!bIsBlank) counter++;
 		}
-		licenseText += QString("<br><br>%1").arg(LINK("http://www.gnu.org/licenses/gpl-2.0.html"));
+		licenseText += QString("<br>");
 		stream.device()->close();
 	}
 	else

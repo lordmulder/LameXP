@@ -43,6 +43,7 @@ public slots:
 	void showAboutQt(void);
 	void moveDisque(void);
 	void tabChanged(int index);
+	void adjustSize(void);
 
 protected:
 	virtual void showEvent(QShowEvent *e);
