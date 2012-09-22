@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
-        <translation type="unfinished"></translation>
+        <translation>UPX - The Ultimate Packer for eXecutables</translation>
     </message>
 </context>
 <context>
