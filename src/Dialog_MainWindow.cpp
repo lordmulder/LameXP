@@ -1537,31 +1537,28 @@ void MainWindow::tabPageChanged(int idx)
 	}
 
 	int initialWidth = this->width();
-	int maximumWidth = QApplication::desktop()->width();
+	int maximumWidth = QApplication::desktop()->availableGeometry().width();
 
+	//Make sure all tab headers are fully visible
 	if(this->isVisible())
 	{
-		while(tabWidget->width() < tabWidget->sizeHint().width())
+		int delta = tabWidget->sizeHint().width() - tabWidget->width();
+		if(delta > 0)
 		{
-			int previousWidth = this->width();
-			this->resize(this->width() + 1, this->height());
-			if(this->frameGeometry().width() >= maximumWidth) break;
-			if(this->width() <= previousWidth) break;
+			this->resize(qMin(this->width() + delta, maximumWidth), this->height());
 		}
 	}
 
+	//Tab specific operations
 	if(idx == tabWidget->indexOf(tabOptions) && scrollArea->widget() && this->isVisible())
 	{
-		for(int i = 0; i < 2; i++)
+		scrollArea->widget()->updateGeometry();
+		scrollArea->viewport()->updateGeometry();
+		qApp->processEvents();
+		int delta = scrollArea->widget()->width() - scrollArea->viewport()->width();
+		if(delta > 0)
 		{
-			QApplication::processEvents();
-			while(scrollArea->viewport()->width() < scrollArea->widget()->width())
-			{
-				int previousWidth = this->width();
-				this->resize(this->width() + 1, this->height());
-				if(this->frameGeometry().width() >= maximumWidth) break;
-				if(this->width() <= previousWidth) break;
-			}
+			this->resize(qMin(this->width() + delta, maximumWidth), this->height());
 		}
 	}
 	else if(idx == tabWidget->indexOf(tabSourceFiles))
@@ -1580,6 +1577,7 @@ void MainWindow::tabPageChanged(int idx)
 		}
 	}
 
+	//Center window around previous position
 	if(initialWidth < this->width())
 	{
 		QPoint prevPos = this->pos();

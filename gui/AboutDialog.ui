@@ -19,9 +19,6 @@
   <property name="windowTitle">
    <string>About LameXP</string>
   </property>
-  <property name="modal">
-   <bool>true</bool>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
@@ -65,7 +62,7 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <property name="spacing">
-            <number>24</number>
+            <number>18</number>
            </property>
            <property name="leftMargin">
             <number>8</number>
@@ -74,7 +71,7 @@
             <number>12</number>
            </property>
            <property name="rightMargin">
-            <number>12</number>
+            <number>8</number>
            </property>
            <property name="bottomMargin">
             <number>12</number>
@@ -163,7 +160,7 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <property name="spacing">
-            <number>24</number>
+            <number>18</number>
            </property>
            <property name="leftMargin">
             <number>8</number>
@@ -172,7 +169,7 @@
             <number>12</number>
            </property>
            <property name="rightMargin">
-            <number>12</number>
+            <number>8</number>
            </property>
            <property name="bottomMargin">
             <number>12</number>
@@ -261,7 +258,7 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <property name="spacing">
-            <number>24</number>
+            <number>18</number>
            </property>
            <property name="leftMargin">
             <number>8</number>
@@ -270,7 +267,7 @@
             <number>12</number>
            </property>
            <property name="rightMargin">
-            <number>12</number>
+            <number>8</number>
            </property>
            <property name="bottomMargin">
             <number>12</number>

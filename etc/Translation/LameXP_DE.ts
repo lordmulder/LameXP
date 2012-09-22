@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation>Hinweise: Diese Demo (Test) Version von LameXP läuft am %1 ab. Noch %2 Tage übrig.</translation>
+        <translation>Hinweis: Diese Demo (Test) Version von LameXP läuft am %1 ab. Noch %2 Tage übrig.</translation>
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
@@ -282,6 +282,10 @@
     <message>
         <source>Marius Hudea</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>UPX - The Ultimate Packer for eXecutables</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
