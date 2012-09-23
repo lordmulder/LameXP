@@ -71,15 +71,15 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		break;
 	}
 
-	switch(m_configOptimizeFor)
-	{
-	case 0:
-		args << "--music";
-		break;
-	case 1:
-		args << "--speech";
-		break;
-	}
+	//switch(m_configOptimizeFor)
+	//{
+	//case 0:
+	//	args << "--music";
+	//	break;
+	//case 1:
+	//	args << "--speech";
+	//	break;
+	//}
 
 	args << "--comp" << QString::number(m_configEncodeComplexity);
 

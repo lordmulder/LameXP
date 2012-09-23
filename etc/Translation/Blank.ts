@@ -835,7 +835,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="50"/>
-        <location filename="../../gui/MainWindow.ui" line="4201"/>
+        <location filename="../../gui/MainWindow.ui" line="4207"/>
         <source>Source Files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -862,7 +862,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="274"/>
-        <location filename="../../gui/MainWindow.ui" line="4209"/>
+        <location filename="../../gui/MainWindow.ui" line="4215"/>
         <source>Output Directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -908,7 +908,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="584"/>
-        <location filename="../../gui/MainWindow.ui" line="4225"/>
+        <location filename="../../gui/MainWindow.ui" line="4231"/>
         <source>Meta Data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -949,7 +949,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="762"/>
-        <location filename="../../gui/MainWindow.ui" line="4217"/>
+        <location filename="../../gui/MainWindow.ui" line="4223"/>
         <source>Compression</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1040,7 +1040,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1381"/>
-        <location filename="../../gui/MainWindow.ui" line="4233"/>
+        <location filename="../../gui/MainWindow.ui" line="4239"/>
         <source>Advanced Options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1367,7 +1367,7 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3188"/>
-        <location filename="../../gui/MainWindow.ui" line="3725"/>
+        <location filename="../../gui/MainWindow.ui" line="3825"/>
         <source>Speech</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1477,109 +1477,109 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3655"/>
+        <location filename="../../gui/MainWindow.ui" line="3742"/>
         <source>Optimize for Signal Type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3697"/>
+        <location filename="../../gui/MainWindow.ui" line="3870"/>
         <source>Encoding Complexity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3720"/>
+        <location filename="../../gui/MainWindow.ui" line="3820"/>
         <source>Music</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3730"/>
+        <location filename="../../gui/MainWindow.ui" line="3830"/>
         <source>(Undefined)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3738"/>
+        <location filename="../../gui/MainWindow.ui" line="3729"/>
         <source>Frame Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3819"/>
+        <location filename="../../gui/MainWindow.ui" line="3860"/>
         <source>Use Experimental Encoder Perceptual Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3908"/>
+        <location filename="../../gui/MainWindow.ui" line="3914"/>
         <source>Reset Advanced Options </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3974"/>
+        <location filename="../../gui/MainWindow.ui" line="3980"/>
         <source> Encode Now!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4016"/>
-        <location filename="../../gui/MainWindow.ui" line="4184"/>
+        <location filename="../../gui/MainWindow.ui" line="4022"/>
+        <location filename="../../gui/MainWindow.ui" line="4190"/>
         <source>About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4052"/>
+        <location filename="../../gui/MainWindow.ui" line="4058"/>
         <source> Exit Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4084"/>
+        <location filename="../../gui/MainWindow.ui" line="4090"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4098"/>
+        <location filename="../../gui/MainWindow.ui" line="4104"/>
         <source>?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4112"/>
+        <location filename="../../gui/MainWindow.ui" line="4118"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4116"/>
+        <location filename="../../gui/MainWindow.ui" line="4122"/>
         <source>Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4130"/>
+        <location filename="../../gui/MainWindow.ui" line="4136"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4149"/>
+        <location filename="../../gui/MainWindow.ui" line="4155"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4153"/>
+        <location filename="../../gui/MainWindow.ui" line="4159"/>
         <source>Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4193"/>
+        <location filename="../../gui/MainWindow.ui" line="4199"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4242"/>
+        <location filename="../../gui/MainWindow.ui" line="4248"/>
         <source>Open File(s)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4251"/>
-        <location filename="../../gui/MainWindow.ui" line="4254"/>
+        <location filename="../../gui/MainWindow.ui" line="4257"/>
+        <location filename="../../gui/MainWindow.ui" line="4260"/>
         <source>Visit Official Web-Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4263"/>
+        <location filename="../../gui/MainWindow.ui" line="4269"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1218"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
@@ -1587,124 +1587,124 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4272"/>
+        <location filename="../../gui/MainWindow.ui" line="4278"/>
         <source>Open Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4281"/>
+        <location filename="../../gui/MainWindow.ui" line="4287"/>
         <source>Clear All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4292"/>
+        <location filename="../../gui/MainWindow.ui" line="4298"/>
         <source>Plastique</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4300"/>
+        <location filename="../../gui/MainWindow.ui" line="4306"/>
         <source>Cleanlooks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4308"/>
+        <location filename="../../gui/MainWindow.ui" line="4314"/>
         <source>Windows Vista (&quot;Aero&quot;)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4316"/>
+        <location filename="../../gui/MainWindow.ui" line="4322"/>
         <source>Windows Classic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4324"/>
+        <location filename="../../gui/MainWindow.ui" line="4330"/>
         <source>Windows XP (&quot;Luna&quot;)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4332"/>
+        <location filename="../../gui/MainWindow.ui" line="4338"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1725"/>
         <source>Disable Update Reminder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4340"/>
+        <location filename="../../gui/MainWindow.ui" line="4346"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1751"/>
         <source>Disable Sound Effects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4349"/>
+        <location filename="../../gui/MainWindow.ui" line="4355"/>
         <source>Install WMA Decoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4357"/>
+        <location filename="../../gui/MainWindow.ui" line="4363"/>
         <source>Disable Nero AAC Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4366"/>
+        <location filename="../../gui/MainWindow.ui" line="4372"/>
         <source>Show DropBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4387"/>
+        <location filename="../../gui/MainWindow.ui" line="4393"/>
         <source>From File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4396"/>
+        <location filename="../../gui/MainWindow.ui" line="4402"/>
         <source>Encode!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4404"/>
+        <location filename="../../gui/MainWindow.ui" line="4410"/>
         <source>Disable Shell Integration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4413"/>
+        <location filename="../../gui/MainWindow.ui" line="4419"/>
         <source>Frequently Asked Questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4422"/>
+        <location filename="../../gui/MainWindow.ui" line="4428"/>
         <source>Changelog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4431"/>
+        <location filename="../../gui/MainWindow.ui" line="4437"/>
         <source>Translator&apos;s Guide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4440"/>
+        <location filename="../../gui/MainWindow.ui" line="4446"/>
         <source>Help &amp;&amp; Support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4449"/>
+        <location filename="../../gui/MainWindow.ui" line="4455"/>
         <source>Open Folder Recursively...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4457"/>
+        <location filename="../../gui/MainWindow.ui" line="4463"/>
         <source>Check for Beta Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4466"/>
+        <location filename="../../gui/MainWindow.ui" line="4472"/>
         <source>Import Cue Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4474"/>
+        <location filename="../../gui/MainWindow.ui" line="4480"/>
         <source>Disable Slow Startup Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="4482"/>
+        <location filename="../../gui/MainWindow.ui" line="4488"/>
         <source>Hibernate Computer On Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
