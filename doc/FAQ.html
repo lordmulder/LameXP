@@ -918,11 +918,11 @@ LameXP is currently being developed using the following build environment:<br><u
 <li>The minimum supported build platform is Windows XP with Service Pack 2</ul>
 <br>
 Also note the following hints:<br><ul>
-<li>Run "qtvars.bat" before launching Visual Studio in order to set up the Qt environment
+<li>Run "qtvars.bat" (or "qtenv2.bat") before launching Visual Studio in order to set up the Qt environment
 <li>Visual Studio 2008 solution/project files are still provided for people targeting Windows 2000
-<li>In order to make a "fully static" build of LameXP, you need to compile Qt as 'static' libraries
+<li>In order to make "fully static" builds of LameXP, you need to compile/download <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a>
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
-<li>Only the "fully static" builds may still run on Windows 2000, due to workarounds we implemented
+<li>Only the "fully static" builds may still run on Windows 2000, due to <a href="http://code.google.com/p/mulder/source/browse/trunk/Utils/EncodePointerLib/README.txt" target="_blank">workarounds</a> we implemented
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
 <br>
 In order to use the LameXP deployment scripts you need the following tools:<br><ul>
@@ -938,7 +938,7 @@ In order to use the LameXP deployment scripts you need the following tools:<br><
 <li><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x<div style="height:7px"></div>
 <li>NOTE: Copy 'buildenv.template.txt' to 'buildenv.txt' and edit the paths as needed!</ul>
 <br>
-Instructions to build Qt as 'static' libraries:<br><ul>
+Instructions to build <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a>:<br><ul>
 <li>Make sure Visual Studio 2010 and Strawberry Perl for Windows are installed
 <li>Download and extract the Qt 4.8.2 source code package
 <li>Open a new command window (cmd.exe)
