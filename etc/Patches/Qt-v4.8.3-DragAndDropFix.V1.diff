@@ -1,0 +1,13 @@
+diff --git "a/E:\\QtSource\\4.8.3\\src\\gui\\kernel\\qdnd_win.org" "b/E:\\QtSource\\4.8.3\\src\\gui\\kernel\\qdnd_win.cpp"
+index 20dfa76..c0268e1 100644
+--- "a/E:\\QtSource\\4.8.3\\src\\gui\\kernel\\qdnd_win.org"
++++ "b/E:\\QtSource\\4.8.3\\src\\gui\\kernel\\qdnd_win.cpp"
+@@ -712,7 +712,7 @@ QOleDropTarget::DragOver(DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect)
+         return NOERROR;
+     }
+ 
+-    while (dragOverWidget && dragOverWidget != widget && !acceptsDrop(dragOverWidget))
++    while (dragOverWidget && !dragOverWidget->isWindow() && !acceptsDrop(dragOverWidget))
+         dragOverWidget = dragOverWidget->parentWidget();
+ 
+     if (!dragOverWidget || !acceptsDrop(dragOverWidget)) {
