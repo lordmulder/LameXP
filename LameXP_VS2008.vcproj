@@ -2759,6 +2759,40 @@
 			Name="Dialogs"
 			>
 			<File
+				RelativePath=".\gui\AboutDialog.ui"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release_Static|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;"
+						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\gui\CueSheetImport.ui"
 				>
 				<FileConfiguration
