@@ -5,11 +5,12 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <style type="text/css">
 <!--
-body { font-family:Monospace; font-size:10pt; }
+body { font-family:Consolas, "Lucida Console", Monospace; font-size:10pt; }
 a { text-decoration:none; color:#0000EE; transition:color 0.5s ease; -moz-transition:background-color 0.5s ease; -o-transition:background-color 0.5s ease; -webkit-transition:background-color 0.5s ease; }
 a:hover { background-color: #CCCCCC; }
 a:active { color: #551A8B; }
 a:visited { color: #0000EE; }
+.code { background-color: #E0E0E0; }
 -->
 </style>
 </head>
@@ -569,7 +570,7 @@ accept, as SoX apparently doesn't insert any 'JUNK' chunks (although it would be
 your Wave file with SoX does NOT change the actual content at all, as long as no additional filters are used.<br>
 <br>
 You can use a command-line like this:<br>
-<blockquote>sox.exe "c:\some path\input.wav" "c:\some path\output.wav"</blockquote>
+<blockquote><font class="code">sox.exe "c:\some path\input.wav" "c:\some path\output.wav"</font></blockquote>
 
 <br><br>
 
@@ -913,12 +914,12 @@ LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(softwar
 <br>
 LameXP is currently being developed using the following build environment:<br><ul>
 <li><a href="http://www.microsoft.com/visualstudio/en-us/products/2010-editions/express" target="_blank">Visual Studio 2010</a> with Service Pack 1, running on Windows 7 with Service Pack 1
-<li><a href="http://qt.nokia.com/downloads/downloads#qt-lib" target="_blank">Qt libraries 4.8.2</a> for Windows (MSVC 2010)
+<li><a href="http://qt.nokia.com/downloads/downloads#qt-lib" target="_blank">Qt libraries 4.8.3</a> for Windows (MSVC 2010)
 <li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=8442" target="_blank">Windows Platform SDK v7.1</a> (Windows SDK for Windows 7 and .NET Framework 4)
 <li>The minimum supported build platform is Windows XP with Service Pack 2</ul>
 <br>
 Also note the following hints:<br><ul>
-<li>Run "qtvars.bat" (or "qtenv2.bat") before launching Visual Studio in order to set up the Qt environment
+<li>Run <font class="code">qtvars.bat</font> (or <font class="code">qtenv2.bat</font>) before launching Visual Studio in order to set up the Qt environment
 <li>Visual Studio 2008 solution/project files are still provided for people targeting Windows 2000
 <li>In order to make "fully static" builds of LameXP, you need to compile/download <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a>
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
@@ -926,7 +927,7 @@ Also note the following hints:<br><ul>
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
 <br>
 In order to use the LameXP deployment scripts you need the following tools:<br><ul>
-<li>Visual Studio 2010 with Service Pack 1 with Desktop Qt v4.8.2
+<li>Visual Studio 2010 with Service Pack 1 <b>&plus;</b> Desktop Qt v4.8.x (MSVC 2010)
 <li><a href="http://www.7-zip.org/" target="_blank">7-Zip</a> - file archiver with a high compression ratio
 <li><a href="http://nsis.sourceforge.net/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (<a href="http://www.scratchpaper.com/" target="_blank">Unicode version</a> recommended!)<ul>
 <li><a href="http://nsis.sourceforge.net/StdUtils_plug-in" target="_blank">StdUtils plug-in</a>
@@ -936,17 +937,17 @@ In order to use the LameXP deployment scripts you need the following tools:<br><
 <li><a href="http://upx.sourceforge.net/" target="_blank">UPX</a> - the Ultimate Packer for eXecutables
 <li><a href="http://www.matcode.com/mpress.htm" target="_blank">MPRESS</a> - high-performance executable packer for PE32/PE32+
 <li><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x<div style="height:7px"></div>
-<li>NOTE: Copy 'buildenv.template.txt' to 'buildenv.txt' and edit the paths as needed!</ul>
+<li>NOTE: Copy <font class="code">buildenv.template.txt</font> to <font class="code">buildenv.txt</font> and edit the paths as needed!</ul>
 <br>
 Instructions to build <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a>:<br><ul>
 <li>Make sure Visual Studio 2010 and Strawberry Perl for Windows are installed
-<li>Download and extract the Qt 4.8.2 source code package
+<li>Download and extract the Qt 4.8.x source code package
 <li>Open a new command window (cmd.exe)
-<li>Add Strawberry Perl to your PATH (e.g. 'set PATH=C:\strawberry\perl\bin;%PATH%')
-<li>Now run 'vcvarsall.bat' form your Visual C++ install directory - within the same console!
-<li>Change the current directory to the Qt Sources path (e.g. 'C:\QtSources\4.8.2')
-<li>Finally run 'configure.exe -release -static -ltcg &lt;more options&gt;' and wait for completion
-<li>You can now open and build the solution files (e.g. 'src\corelib\QtCore.sln' in Visual Studio
+<li>Add Strawberry Perl to your PATH (e.g. <font class="code">set PATH=C:\strawberry\perl\bin;%PATH%</font>)
+<li>Now run <font class="code">vcvarsall.bat</font> form your Visual C++ install directory - within the same console!
+<li>Change the current directory to the Qt Sources path (e.g. <font class="code">C:\QtSources\4.8.x</font>)
+<li>Finally run <font class="code">configure.exe -release -static -ltcg &lt;more options&gt;</font> and wait for completion
+<li>You can now open and build the solution files (e.g. <font class="code">src\corelib\QtCore.sln</font> in Visual Studio
 <li>Make sure you select the "Release" configuration for your builds!
 <li>It is also required to change "Code Generation &rArr; Runtime Library" to "/MT" for all projects!
 <li>Libraries you need to build for LameXP include the following:<ul>
