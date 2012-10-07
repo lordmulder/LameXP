@@ -317,7 +317,6 @@ void InitializationThread::delay(void)
 	for(int i = 0; i < 20; i++)
 	{
 		printf("%c\b", temp[i%4]);
-		msleep(25);
 	}
 
 	printf("Done\n\n");
