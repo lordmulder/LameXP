@@ -62,6 +62,7 @@ static const char *update_mirrors_prim[] =
 	"http://lamexp.sourceforge.net/",
 	"http://free.pages.at/borschdfresser/",
 	"http://lordmulder.github.com/LameXP/",
+	"http://lord_mulder.bitbucket.org/",
 	"http://www.tricksoft.de/",
 	NULL
 };
@@ -69,8 +70,8 @@ static const char *update_mirrors_prim[] =
 static const char *update_mirrors_back[] =
 {
 	"http://mplayer.savedonthe.net/",
-	"http://mulder.dummwiedeutsch.de/",
-	"http://mplayer.somestuff.org/",
+	"http://www.rarewares.org/",
+	"http://lord_mulder.doom9.net/",
 	NULL
 };
 
@@ -473,17 +474,21 @@ void UpdateDialog::checkForUpdates(void)
 
 	statusLabel->setText(tr("Checking for new updates online, please wait..."));
 	m_logFile->append(QStringList() << "" << "----" << "" << "Checking for updates online...");
-	
+
 	QStringList mirrorList;
 	for(int index = 0; update_mirrors_prim[index]; index++)
 	{
 		mirrorList << QString::fromLatin1(update_mirrors_prim[index]);
 	}
 
-	qsrand(time(NULL));
-	for(int i = 0; i < 4375; i++)
+	qsrand(GetTickCount() ^ ((DWORD)time(NULL)));
+	if(const int len = mirrorList.count())
 	{
-		mirrorList.swap(i % mirrorList.count(), qrand() % mirrorList.count());
+		const int rounds = len * 16;
+		for(int i = 0; i < rounds; i++)
+		{
+			mirrorList.swap(i % len, qrand() % len);
+		}
 	}
 
 	for(int index = 0; update_mirrors_back[index]; index++)
