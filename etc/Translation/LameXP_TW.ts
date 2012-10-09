@@ -209,35 +209,35 @@
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>信息</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>許可證</translation>
     </message>
     <message>
         <source>Programmers:</source>
-        <translation type="unfinished"></translation>
+        <translation>程序員:</translation>
     </message>
     <message>
         <source>Project Leader</source>
-        <translation type="unfinished"></translation>
+        <translation>項目負責人</translation>
     </message>
     <message>
         <source>Opus Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opus音頻編解碼器</translation>
     </message>
     <message>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation type="unfinished"></translation>
+        <translation>完全開放的，免版稅的，高度靈活的音頻編解碼器。</translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk圖標 - 超過700 PNG格式的圖標</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>馬克詹姆斯，在知識共享授權下發布。</translation>
     </message>
     <message>
         <source>Show License Text</source>
@@ -245,47 +245,47 @@
     </message>
     <message>
         <source>About Qt...</source>
-        <translation>關于 Qt</translation>
+        <translation>關于 Qt...</translation>
     </message>
     <message>
         <source>Special thanks to:</source>
-        <translation type="unfinished"></translation>
+        <translation>特別感謝:</translation>
     </message>
     <message>
         <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Doom9論壇</translation>
     </message>
     <message>
         <source>Gleitz | German Doom9</source>
-        <translation type="unfinished"></translation>
+        <translation>格雷茲 | 德國 Doom9</translation>
     </message>
     <message>
         <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished"></translation>
+        <translation>Hydrogenaudio論壇</translation>
     </message>
     <message>
         <source>RareWares</source>
-        <translation type="unfinished"></translation>
+        <translation>RareWares</translation>
     </message>
     <message>
         <source>GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub</translation>
     </message>
     <message>
         <source>SourceForge</source>
-        <translation type="unfinished"></translation>
+        <translation>SourceForge</translation>
     </message>
     <message>
         <source>Qt Developer Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt的開發者網絡</translation>
     </message>
     <message>
         <source>Marius Hudea</source>
-        <translation type="unfinished"></translation>
+        <translation>Marius Hudea</translation>
     </message>
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
-        <translation type="unfinished"></translation>
+        <translation>UPX - 終極可執行程序文件壓縮器</translation>
     </message>
 </context>
 <context>
@@ -2276,7 +2276,7 @@
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>警告: 解碼文件大小超過4GB, 可能會出現問題!</translation>
     </message>
 </context>
 <context>
