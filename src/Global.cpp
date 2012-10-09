@@ -2214,7 +2214,7 @@ unsigned int lamexp_mix(const unsigned int x, const unsigned int y, const unsign
 {
 	unsigned int a = x;
 	unsigned int b = y;
-	unsigned int c = y;
+	unsigned int c = z;
 	
 	a=a-b;  a=a-c;  a=a^(c >> 13);
 	b=b-c;  b=b-a;  b=b^(a << 8); 
