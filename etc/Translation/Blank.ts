@@ -1477,13 +1477,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3742"/>
-        <source>Optimize for Signal Type:</source>
+        <location filename="../../gui/MainWindow.ui" line="3729"/>
+        <source>Frame Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3870"/>
-        <source>Encoding Complexity:</source>
+        <location filename="../../gui/MainWindow.ui" line="3742"/>
+        <source>Optimize for Signal Type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1497,13 +1497,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3729"/>
-        <source>Frame Size:</source>
+        <location filename="../../gui/MainWindow.ui" line="3860"/>
+        <source>Use Experimental Encoder Perceptual Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/MainWindow.ui" line="3860"/>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
+        <location filename="../../gui/MainWindow.ui" line="3870"/>
+        <source>Encoding Complexity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3234,105 +3234,105 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="267"/>
-        <location filename="../../src/Dialog_Update.cpp" line="540"/>
+        <location filename="../../src/Dialog_Update.cpp" line="268"/>
+        <location filename="../../src/Dialog_Update.cpp" line="545"/>
         <source>Build</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="268"/>
+        <location filename="../../src/Dialog_Update.cpp" line="269"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="376"/>
+        <location filename="../../src/Dialog_Update.cpp" line="377"/>
         <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
-        <location filename="../../src/Dialog_Update.cpp" line="984"/>
+        <location filename="../../src/Dialog_Update.cpp" line="397"/>
+        <location filename="../../src/Dialog_Update.cpp" line="989"/>
         <source>It appears that the computer currently is offline!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="399"/>
-        <location filename="../../src/Dialog_Update.cpp" line="987"/>
+        <location filename="../../src/Dialog_Update.cpp" line="400"/>
+        <location filename="../../src/Dialog_Update.cpp" line="992"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="457"/>
+        <location filename="../../src/Dialog_Update.cpp" line="458"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="460"/>
+        <location filename="../../src/Dialog_Update.cpp" line="461"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="474"/>
+        <location filename="../../src/Dialog_Update.cpp" line="475"/>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="525"/>
+        <location filename="../../src/Dialog_Update.cpp" line="530"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="530"/>
+        <location filename="../../src/Dialog_Update.cpp" line="535"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="542"/>
+        <location filename="../../src/Dialog_Update.cpp" line="547"/>
         <source>More information available at:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="548"/>
+        <location filename="../../src/Dialog_Update.cpp" line="553"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="550"/>
+        <location filename="../../src/Dialog_Update.cpp" line="555"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="559"/>
+        <location filename="../../src/Dialog_Update.cpp" line="564"/>
         <source>No new updates available at this time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="561"/>
+        <location filename="../../src/Dialog_Update.cpp" line="566"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="570"/>
+        <location filename="../../src/Dialog_Update.cpp" line="575"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="572"/>
+        <location filename="../../src/Dialog_Update.cpp" line="577"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="865"/>
+        <location filename="../../src/Dialog_Update.cpp" line="870"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="910"/>
+        <location filename="../../src/Dialog_Update.cpp" line="915"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="918"/>
+        <location filename="../../src/Dialog_Update.cpp" line="923"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished"></translation>
     </message>

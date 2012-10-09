@@ -209,35 +209,35 @@
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Información</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencia</translation>
     </message>
     <message>
         <source>Programmers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Programadores:</translation>
     </message>
     <message>
         <source>Project Leader</source>
-        <translation type="unfinished"></translation>
+        <translation>Líder del proyecto</translation>
     </message>
     <message>
         <source>Opus Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opus Audio Codec</translation>
     </message>
     <message>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation type="unfinished"></translation>
+        <translation>Codec de audio versátil, completamente abierto y libre de derechos de autor.</translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - Más de 700 iconos en formato PNG</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por Mark James, liberado bajo licencia Creative Commons.</translation>
     </message>
     <message>
         <source>Show License Text</source>
@@ -249,43 +249,43 @@
     </message>
     <message>
         <source>Special thanks to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Agradecimientos a:</translation>
     </message>
     <message>
         <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Doom9&apos;s Forum</translation>
     </message>
     <message>
         <source>Gleitz | German Doom9</source>
-        <translation type="unfinished"></translation>
+        <translation>Gleitz | German Doom9</translation>
     </message>
     <message>
         <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished"></translation>
+        <translation>Hydrogenaudio Forums</translation>
     </message>
     <message>
         <source>RareWares</source>
-        <translation type="unfinished"></translation>
+        <translation>RareWares</translation>
     </message>
     <message>
         <source>GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub</translation>
     </message>
     <message>
         <source>SourceForge</source>
-        <translation type="unfinished"></translation>
+        <translation>SourceForge</translation>
     </message>
     <message>
         <source>Qt Developer Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt Developer Network</translation>
     </message>
     <message>
         <source>Marius Hudea</source>
-        <translation type="unfinished"></translation>
+        <translation>Marius Hudea</translation>
     </message>
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
-        <translation type="unfinished"></translation>
+        <translation>UPX - The Ultimate Packer for eXecutables</translation>
     </message>
 </context>
 <context>
