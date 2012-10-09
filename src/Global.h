@@ -155,6 +155,7 @@ bool lamexp_themes_enabled(void);
 void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned int delay = 150);
 const QString lamexp_clean_filename(const QString &str);
 const QString lamexp_clean_filepath(const QString &str);
+unsigned int lamexp_mix(const unsigned int x, const unsigned int y, const unsigned int z);
 
 //Debug-only functions
 SIZE_T lamexp_dbg_private_bytes(void);

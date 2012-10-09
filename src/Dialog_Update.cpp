@@ -42,6 +42,7 @@
 #include <time.h>
 #include <MMSystem.h>
 #include <WinInet.h>
+#include <process.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -91,12 +92,14 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
 	"http://www.bing.com/",
 	"http://www.cnet.com/",
 	"http://cnzz.com/",
+	"http://qt.digia.com/",
 	"http://www.ebay.com/",
 	"http://www.equation.com/",
 	"http://fc2.com/",
 	"http://www.ffmpeg.org/",
 	"http://www.flickr.com/",
 	"http://www.gitorious.org/",
+	"http://git-scm.com/",
 	"http://www.gnome.org/",
 	"http://www.gnu.org/",
 	"http://go.com/",
@@ -114,13 +117,14 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
 	"http://www.livejournal.com/",
 	"http://mail.ru/",
 	"http://www.mediafire.com/",
-	"http://www.mozilla.org/",
+	"http://www.mozilla.org/en-US/",
 	"http://mplayerhq.hu/",
 	"http://www.msn.com/?st=1",
 	"http://oss.netfarm.it/",
 	"http://www.nytimes.com/",
 	"http://www.opera.com/",
 	"http://www.quakelive.com/",
+	"http://qt-project.org/",
 	"http://www.seamonkey-project.org/",
 	"http://www.sina.com.cn/",
 	"http://www.sohu.com/",
@@ -141,6 +145,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
 	"http://www.yandex.ru/",
 	"http://www.youtube.com/",
 	"http://www.zedo.com/",
+	"http://ffmpeg.zeranoe.com/",
 	NULL
 };
 
@@ -420,7 +425,7 @@ void UpdateDialog::checkForUpdates(void)
 		hostList << QString::fromLatin1(known_hosts[i]);
 	}
 
-	qsrand(time(NULL));
+	qsrand(lamexp_mix(clock(), time(NULL), _getpid()));
 	while(!hostList.isEmpty())
 	{
 		QString currentHost = hostList.takeAt(qrand() % hostList.count());
@@ -481,10 +486,10 @@ void UpdateDialog::checkForUpdates(void)
 		mirrorList << QString::fromLatin1(update_mirrors_prim[index]);
 	}
 
-	qsrand(GetTickCount() ^ ((DWORD)time(NULL)));
+	qsrand(lamexp_mix(clock(), time(NULL), _getpid()));
 	if(const int len = mirrorList.count())
 	{
-		const int rounds = len * 16;
+		const int rounds = len * 1097;
 		for(int i = 0; i < rounds; i++)
 		{
 			mirrorList.swap(i % len, qrand() % len);
