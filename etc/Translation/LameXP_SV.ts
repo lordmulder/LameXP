@@ -47,7 +47,7 @@
     <message>
         <location filename="../../gui/AboutDialog.ui" line="518"/>
         <source>About Qt...</source>
-        <translation>Om Qt</translation>
+        <translation>Om Qt...</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="236"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../../gui/AboutDialog.ui" line="40"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="138"/>
@@ -67,7 +67,7 @@
     <message>
         <location filename="../../gui/AboutDialog.ui" line="334"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licens</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="535"/>
@@ -82,12 +82,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="536"/>
         <source>Programmers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmerare:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="539"/>
         <source>Project Leader</source>
-        <translation type="unfinished"></translation>
+        <translation>Projektledare</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="543"/>
@@ -97,47 +97,47 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="553"/>
         <source>Special thanks to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Speciellt tack till:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="557"/>
         <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Doom9&apos;s Forum</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="559"/>
         <source>Gleitz | German Doom9</source>
-        <translation type="unfinished"></translation>
+        <translation>Gleitz | German Doom9</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="561"/>
         <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished"></translation>
+        <translation>Hydrogenaudio Forums</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="563"/>
         <source>RareWares</source>
-        <translation type="unfinished"></translation>
+        <translation>RareWares</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="565"/>
         <source>GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="567"/>
         <source>SourceForge</source>
-        <translation type="unfinished"></translation>
+        <translation>SourceForge</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="569"/>
         <source>Qt Developer Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt Developer Network</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="571"/>
         <source>Marius Hudea</source>
-        <translation type="unfinished"></translation>
+        <translation>Marius Hudea</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="574"/>
@@ -213,12 +213,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="626"/>
         <source>Opus Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opus Audio Codec</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="628"/>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation type="unfinished"></translation>
+        <translation>Helt öppen, avgiftsfri, mycket mångsidig ljud-codec</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="633"/>
@@ -348,17 +348,17 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="752"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
-        <translation type="unfinished"></translation>
+        <translation>UPX - Den ultimata paketeraren för exekverbara filer</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="759"/>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - Över 700  iconer i PNG-format</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="761"/>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Av Mark James, publicerad under Creative Commons &apos;by&apos; Licens.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="766"/>
@@ -580,7 +580,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation>Varning! Formatet på vissa filer kunde inte avgöras.</translation>
+        <translation>Varning! Formatet på vissa filer kunde inte avgöras!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
@@ -1536,7 +1536,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4104"/>
         <source>?</source>
-        <translation>Info</translation>
+        <translation>?</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4118"/>
@@ -1687,7 +1687,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4455"/>
         <source>Open Folder Recursively...</source>
-        <translation>Öppna mapp rekursivt</translation>
+        <translation>Öppna mapp rekursivt...</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4463"/>
@@ -1738,7 +1738,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="715"/>
         <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>%1 fil(er) har undantagits, på grund av att det är fejkade CDDA-filer</translation>
+        <translation>%1 fil(er) har undantagits, på grund av att det är fejkade CDDA-filer!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="715"/>
@@ -3094,7 +3094,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="967"/>
         <source>Playlist creation failed</source>
-        <translation>Kunde inte skapa spelningslista!</translation>
+        <translation>Kunde inte skapa spelningslista</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="967"/>
@@ -3286,7 +3286,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="535"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation>Uppdateringsservern kan vara upptagen. Försök senare!</translation>
+        <translation>Uppdateringsservern kan vara upptagen. Försök senare.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="547"/>
