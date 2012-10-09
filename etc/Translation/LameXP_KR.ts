@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished">알림: LameXP의 이 데모(pre-release) 버전은 %1에 만료됩니다. 아직 %2 일 남음.</translation>
+        <translation type="unfinished">알림: LameXP의 이 데모(pre-release) 버전은 %1에 만료됩니다. 아직 %2일 남음.</translation>
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
@@ -209,35 +209,35 @@
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">정보</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">라이센스</translation>
     </message>
     <message>
         <source>Programmers:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">프로그래머:</translation>
     </message>
     <message>
         <source>Project Leader</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">프로젝트 리더</translation>
     </message>
     <message>
         <source>Opus Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opus 오디오 코덱</translation>
     </message>
     <message>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">완전 오픈 소스, 저작권 사용료 무료, 매우 다목적 오디오 코덱.</translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">실크 아이콘 - PNG 형식의 700 이상의 아이콘</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">By Mark James, 크리에이티브 커먼스 &apos;by&apos; 라이센스 따라 출시됨.</translation>
     </message>
     <message>
         <source>Show License Text</source>
@@ -245,47 +245,47 @@
     </message>
     <message>
         <source>About Qt...</source>
-        <translation type="unfinished">Qt에 대해</translation>
+        <translation type="unfinished">Qt에 대해...</translation>
     </message>
     <message>
         <source>Special thanks to:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">특별히 감사합니다:</translation>
     </message>
     <message>
         <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Doom9 포럼</translation>
     </message>
     <message>
         <source>Gleitz | German Doom9</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gleitz | German Doom9</translation>
     </message>
     <message>
         <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hydrogenaudio 포럼</translation>
     </message>
     <message>
         <source>RareWares</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">RareWares</translation>
     </message>
     <message>
         <source>GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">GitHub</translation>
     </message>
     <message>
         <source>SourceForge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">SourceForge</translation>
     </message>
     <message>
         <source>Qt Developer Network</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Qt 개발자 네트워크</translation>
     </message>
     <message>
         <source>Marius Hudea</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marius Hudea</translation>
     </message>
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">UPX - The Ultimate Packer for eXecutables</translation>
     </message>
 </context>
 <context>
@@ -578,11 +578,11 @@
     <name>DropBox</name>
     <message>
         <source>LameXP - DropBox</source>
-        <translation type="unfinished">LameXP - 드롭박스</translation>
+        <translation type="unfinished">LameXP - 드롭 박스</translation>
     </message>
     <message>
         <source>LameXP DropBox</source>
-        <translation type="unfinished">LameXP 드롭박스</translation>
+        <translation type="unfinished">LameXP 드롭 박스</translation>
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
@@ -590,7 +590,7 @@
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation type="unfinished">(드롭박스를 종료하려면 우 클릭)</translation>
+        <translation type="unfinished">(드롭 박스를 종료하려면 우 클릭)</translation>
     </message>
 </context>
 <context>
@@ -695,7 +695,7 @@
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation type="unfinished">입력 파일과 동일 위치에 출력 파일 저장</translation>
+        <translation type="unfinished">입력 파일과 동일한 위치에 출력 파일 저장</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
@@ -1063,7 +1063,7 @@
     </message>
     <message>
         <source>Show DropBox</source>
-        <translation type="unfinished">드롭박스 표시</translation>
+        <translation type="unfinished">드롭 박스 표시</translation>
     </message>
     <message>
         <source>From File...</source>
@@ -1235,11 +1235,11 @@
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation type="unfinished">Nero AAC encoder를 찾을 수 없습니다. AAC 인코딩 지원이 비활성화 됩니다.</translation>
+        <translation type="unfinished">Nero AAC encoder를 찾을 수 없음. AAC 인코딩 지원이 비활성화 됩니다.</translation>
     </message>
     <message>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation type="unfinished">LameXP 디렉토리로 &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;와 &apos;neroAacTag.exe&apos; 파일들을 넣어주십시오!</translation>
+        <translation type="unfinished">&apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;와 &apos;neroAacTag.exe&apos; 파일들을 LameXP 디렉토리로 넣어주십시오!</translation>
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
@@ -1259,7 +1259,7 @@
     </message>
     <message>
         <source>You must add at least one file to the list before proceeding!</source>
-        <translation type="unfinished">인코딩 처리하기 전에 적어도 하나 이상의 파일을 추가해야 합니다!</translation>
+        <translation type="unfinished">인코딩 전에 적어도 하나 이상의 파일을 추가해야 합니다!</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -1667,7 +1667,7 @@
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished">선행 제로의 트랙 번호 표기</translation>
+        <translation type="unfinished">트랙 번호 01, 02, 03...</translation>
     </message>
     <message>
         <source>Track title</source>
@@ -1707,7 +1707,7 @@
     </message>
     <message>
         <source>File name without extension</source>
-        <translation type="unfinished">확장 없는 파일명</translation>
+        <translation type="unfinished">확장자 없는 파일명</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
@@ -1767,7 +1767,7 @@
     </message>
     <message>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished">종료시 컴퓨터 최대 절전 모드</translation>
+        <translation type="unfinished">종료시 컴퓨터 절전 모드</translation>
     </message>
     <message>
         <source>Hibernate Computer</source>
@@ -2124,7 +2124,7 @@
     </message>
     <message>
         <source>Please enter the artist for this file:</source>
-        <translation type="unfinished">이 파일에 대한 가수명을 입력하십시오:</translation>
+        <translation type="unfinished">이 파일에 대한 가수 이름을 입력하십시오:</translation>
     </message>
     <message>
         <source>Edit Album</source>
@@ -2403,7 +2403,7 @@
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation type="unfinished">작업 시간이 %1 걸렸습니다.</translation>
+        <translation type="unfinished">작업 경과 시간: %1 소요됨.</translation>
     </message>
     <message>
         <source>hour(s)</source>
