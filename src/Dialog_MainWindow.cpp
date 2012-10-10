@@ -1143,18 +1143,20 @@ void MainWindow::windowShown(void)
 	//Check license
 	if((m_settings->licenseAccepted() <= 0) || firstRun)
 	{
-		int iAccepted = -1;
+		int iAccepted = m_settings->licenseAccepted();
 
-		if((m_settings->licenseAccepted() == 0) || firstRun)
+		if((iAccepted == 0) || firstRun)
 		{
 			AboutDialog *about = new AboutDialog(m_settings, this, true);
 			iAccepted = about->exec();
+			if(iAccepted <= 0) iAccepted = -2;
 			LAMEXP_DELETE(about);
 		}
 
 		if(iAccepted <= 0)
 		{
-			m_settings->licenseAccepted(-1);
+			m_settings->licenseAccepted(++iAccepted);
+			m_settings->syncNow();
 			QApplication::processEvents();
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 			QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
@@ -1179,6 +1181,7 @@ void MainWindow::windowShown(void)
 		
 		PlaySound(MAKEINTRESOURCE(IDR_WAVE_WOOHOO), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
 		m_settings->licenseAccepted(1);
+		m_settings->syncNow();
 		if(lamexp_version_demo()) showAnnounceBox();
 	}
 	

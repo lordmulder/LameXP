@@ -1581,9 +1581,9 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4269"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1218"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1195"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1221"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
         <source>Check for Updates</source>
         <translation>Sök efter uppdateringar</translation>
     </message>
@@ -1624,13 +1624,13 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4338"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1725"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1728"/>
         <source>Disable Update Reminder</source>
         <translation>Inaktivera uppdateringsmeddelande</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4346"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1751"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1754"/>
         <source>Disable Sound Effects</source>
         <translation>Inaktivera ljudeffekter</translation>
     </message>
@@ -1716,7 +1716,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="711"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3765"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3768"/>
         <source>Access Denied</source>
         <translation>Åtkomst nekad</translation>
     </message>
@@ -1836,710 +1836,710 @@
         <translation>Importera metadata från CSV-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1160"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1162"/>
         <source>License Declined</source>
         <translation>Licensavtal avvisat</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1160"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1162"/>
         <source>You have declined the license. Consequently the application will exit now!</source>
         <translation>Du har nekat att godkänna licensavtalet. Programmet kommer nu att avslutas!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1160"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1162"/>
         <source>Goodbye!</source>
         <translation>Hej då!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1195"/>
         <source>LameXP - Expired</source>
         <translation>LameXP - Upphört</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1195"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
         <translation>Denna demoversion av LameXP har upphört att gälla från %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1195"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
         <translation>LameXP är kostnadsfritt och release-versionerna upphör inte att gälla.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1192"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1218"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1195"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1221"/>
         <source>Exit Program</source>
         <translation>Avsluta programmet</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1205"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1208"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
         <translation>Det verkar som ett antivirusprogram orsakar långsammare uppstart av LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1206"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1209"/>
         <source>Please refer to the %1 document for details and solutions!</source>
         <translation>Läs gärna %1 för detaljer och lösningar!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1207"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1210"/>
         <source>Slow Startup</source>
         <translation>Långsam uppstart</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1207"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1284"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1361"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1891"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3708"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1210"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1287"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1364"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1894"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3711"/>
         <source>Discard</source>
         <translation>Stäng</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1207"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1284"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1210"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1287"/>
         <source>Don&apos;t Show Again</source>
         <translation>Visa inte igen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1218"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1221"/>
         <source>Urgent Update</source>
         <translation>Viktig uppdatering</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1218"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1221"/>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
         <translation>Din version av LameXP är mer än ett år gammal. Dags att uppdatera!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1218"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1443"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1221"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1446"/>
         <source>Ignore</source>
         <translation>Ignorera</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1234"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1237"/>
         <source>Skipping update check this time, please be patient...</source>
         <translation>Hoppar över uppdateringskontrollen den här gången, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1727"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1730"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1740"/>
         <source>Update Reminder</source>
         <translation>Uppdateringspåminnelse</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
         <translation>Din senaste uppdateringskontroll var för mer än 14 dagar sedan. Vill du söka efter uppdateringar nu?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
         <translation>Du har inte genomfört uppdateringskontroll ännu. Vill du söka efter uppdateringar nu?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1243"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1246"/>
         <source>Postpone</source>
         <translation>Skjut upp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1265"/>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
         <translation>LameXP har uptäckt att din version av Nero AAC-kodare är utdaterad!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1263"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1266"/>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
         <translation>Aktuell version är %1 (eller senare), men du har fortfarande version %2.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1263"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1266"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1264"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1267"/>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
         <translation>Du kan ladda ner senaste versionen av Nero AAC-kodare från Neros webbsida:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1266"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1269"/>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
         <translation>(Tips: Bortse från den nedladde zipfilens namn, och kontrollera istället den inkluderade textfilen &apos;changelog.txt&apos;!)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1267"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1270"/>
         <source>AAC Encoder Outdated</source>
         <translation>AAC-kodare utdaterad</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1278"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1281"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
         <translation>Neros AAC-kodare kan inte hittas. Stödet för AAC-kodning kommer att inaktiveras.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1279"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1282"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
         <translation>Placera &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; och &apos;neroAacTag.exe&apos; i LameXPs programmmapp!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1280"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1283"/>
         <source>Your LameXP directory is located here:</source>
         <translation>Din LameXP programmapp finns här:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1282"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1285"/>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
         <translation>Du kan ladda ner Nero AAC-kodare gratis från den officiella webbsidan:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1284"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1287"/>
         <source>AAC Support Disabled</source>
         <translation>AAC-stödet är inaktiverat</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1413"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1468"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1478"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1416"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1471"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1481"/>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1413"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1416"/>
         <source>You must add at least one file to the list before proceeding!</source>
         <translation>Du måste lägga till minst en fil till listan innan du fortsätter!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1421"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1424"/>
         <source>Not Found</source>
         <translation>Kan inte hittas</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1421"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1424"/>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
         <translation>Din aktuella TEMP-mapp finns inte längre:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1421"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1424"/>
         <source>Restore Default</source>
         <translation>Återställ standard</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1421"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1424"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1438"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1441"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translation>Det finns mindre än %1 GB ledigt diskutrymme i systemets temp-mapp.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1442"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
         <translation>Du behöver frigöra mer diskutrymme innan du fortsätter med omkodningen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1440"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1443"/>
         <source>Your TEMP folder is located at:</source>
         <translation>Temp-mappens placering:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1443"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1446"/>
         <source>Low Diskspace Warning</source>
         <translation>Varning för dåligt diskutrymme</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1443"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1446"/>
         <source>Abort Encoding Process</source>
         <translation>Avbryt omkodningsprocessen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1443"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1446"/>
         <source>Clean Disk Now</source>
         <translation>Rensa disken nu</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1451"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1454"/>
         <source>Low Diskspace</source>
         <translation>Dåligt diskutrymme</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1451"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1454"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
         <translation>Du fortsätter med dåligt diskutrymme. Problem kan uppstå!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1468"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1471"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
         <translation>En kodare som saknar stöd har valts!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1478"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1481"/>
         <source>Cannot write to the selected output directory.</source>
         <translation>Kan inte skriva till den valda utdatamappen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1478"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1481"/>
         <source>Please choose a different directory!</source>
         <translation>Välj en annan målmapp!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1692"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1695"/>
         <source>Load Translation</source>
         <translation>Läs in översättning</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1694"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1697"/>
         <source>Translation Files</source>
         <translation>Översättningsfiler</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1725"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1728"/>
         <source>Do you really want to disable the update reminder?</source>
         <translation>Vill du verkligen inaktivera uppdateringspåminnelsen?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1725"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1751"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1803"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1889"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1926"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1952"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1728"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1754"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1806"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1892"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1929"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1955"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1725"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1751"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1803"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1889"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1926"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1952"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1728"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1754"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1806"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1892"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1929"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1955"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1727"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1730"/>
         <source>The update reminder has been disabled.</source>
         <translation>Uppdateringspåminnelsen har inaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1727"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1730"/>
         <source>Please remember to check for updates at regular intervals!</source>
         <translation>Glöm inte att söka efter uppdateringar med jämna mellanrum!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1740"/>
         <source>The update reminder has been re-enabled.</source>
         <translation>Uppdateringspåminnelsen har återaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1751"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1754"/>
         <source>Do you really want to disable all sound effects?</source>
         <translation>Vill du verkligen inaktivera alla ljudeffekter?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1763"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1766"/>
         <source>Sound Effects</source>
         <translation>Ljudeffekter</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1753"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
         <source>All sound effects have been disabled.</source>
         <translation>Alla ljudeffekter har inaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1763"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1766"/>
         <source>The sound effects have been re-enabled.</source>
         <translation>Ljudeffekterna har återaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1779"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1789"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1782"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1792"/>
         <source>Nero AAC Notifications</source>
         <translation>Nero AAC-meddelanden</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1777"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1780"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
         <translation>Vill du verkligen inaktivera alla Nero AAC-meddelanden?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1779"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1782"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
         <translation>Alla Nero AAC-meddelanden har inaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1789"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1792"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation>Nero AAC-meddelanden har återaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1803"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1805"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1815"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1806"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1818"/>
         <source>Slow Startup Notifications</source>
         <translation>Meddelande om långsam uppstart</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1803"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1806"/>
         <source>Do you really want to disable the slow startup notifications?</source>
         <translation>Vill du verkligen inaktivera meddelanden om långsam uppstart?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1808"/>
         <source>The slow startup notifications have been disabled.</source>
         <translation>Meddelanden om långsam uppstart har inaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1815"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1818"/>
         <source>The slow startup notifications have been re-enabled.</source>
         <translation>Meddelanden om långsam uppstart har återaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1838"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1842"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1841"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1845"/>
         <source>Open Cue Sheet</source>
         <translation>Öppna cue-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1838"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1844"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1841"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1847"/>
         <source>Cue Sheet File</source>
         <translation>Cue-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1889"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1891"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1892"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1894"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1907"/>
         <source>Beta Updates</source>
         <translation>Beta-uppdateringar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1889"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1892"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
         <translation>Vill du verkligen att LameXP skall söka efter beta-uppdateringar?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1891"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1894"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
         <translation>LameXP kommer i fortsättningen att söka efter beta-uppdatyeringar.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1891"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1894"/>
         <source>Check Now</source>
         <translation>Sök nu</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1907"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation>LameXP kommer i fortsättningen &lt;i&gt;inte&lt;/i&gt; att söka efter beta-uppdateringar.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1926"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1928"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1938"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1929"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1931"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1941"/>
         <source>Hibernate Computer</source>
         <translation>Viloläge</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1926"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1929"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
         <translation>Vill du verkligen att datorn skall försättas i viloläge vid avslut?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1928"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1931"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
         <translation>LameXP kommer i fortsättningen att försätta datorn i viloläge vid avslut.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1938"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1941"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
         <translation>LameXP kommer i fortsättningen &lt;i&gt;inte&lt;/i&gt; att försätta datorn i viloläge vid avslut.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1952"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1955"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1966"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1958"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1969"/>
         <source>Shell Integration</source>
         <translation>Utforskarintegrering</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1952"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1955"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
         <translation>Vill du verkligen inaktivera LameXPs utforskarintegration?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1955"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1958"/>
         <source>The LameXP shell integration has been disabled.</source>
         <translation>LameXPs utforskarintegration har inaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1966"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1969"/>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation>LameXPs utforskarintegration har återaktiverats.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2063"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2072"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2066"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2075"/>
         <source>Add file(s)</source>
         <translation>Lägg till fil(er)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2104"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2108"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2107"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2111"/>
         <source>Add Folder</source>
         <translation>Lägg till mapp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2366"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2370"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2369"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2373"/>
         <source>Save CSV file</source>
         <translation>Spara CSV-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2366"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2373"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2417"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2423"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2369"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2420"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2426"/>
         <source>CSV File</source>
         <translation>CSV-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2387"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2390"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2393"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2396"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2399"/>
         <source>CSV Export</source>
         <translation>CSV-export</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2387"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2390"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation>Det finns ingen meta-data som kan exporteras!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2390"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2393"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation>Kunde inte öppna CSV-filen för skrivning!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2393"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2396"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation>Kunde inte skriva till CSV-filen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2396"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2399"/>
         <source>The CSV files was created successfully!</source>
         <translation>CSV-filen skapades korrekt!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2417"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2421"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2420"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2424"/>
         <source>Open CSV file</source>
         <translation>Öppna CSV-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2437"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2440"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2443"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2446"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2449"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2452"/>
         <source>CSV Import</source>
         <translation>CSV-import</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2437"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2440"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation>Kunde inte öppna CSV-filen för läsning!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2440"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2443"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation>Kunde inte läsa från CSV-filen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2443"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2446"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation>CSV-filen innehåller inga kända fält!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2446"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2449"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation>CSV-filen är inte komplett. Alla filer uppdaterades inte!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2449"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2452"/>
         <source>The CSV files was imported successfully!</source>
         <translation>CSV-filen importerades korrekt!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2627"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2670"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2630"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2673"/>
         <source>New Folder</source>
         <translation>Ny mapp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2670"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2673"/>
         <source>Enter the name of the new folder:</source>
         <translation>Namn på den nya mappen:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2703"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2706"/>
         <source>Failed to create folder</source>
         <translation>Kunde inte skapa någon mapp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2703"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2706"/>
         <source>The new folder could not be created:</source>
         <translation>Den nya mappen kunde inte skapas:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2703"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2706"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation>Diskenheten är skrivskyddad eller åtkomsträttigheter saknas!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3189"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3192"/>
         <source>QAAC (Apple)</source>
         <translation>QAAC (Apple)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3189"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3192"/>
         <source>FHG AAC (Winamp)</source>
         <translation>FHG AAC (Winamp)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3189"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3192"/>
         <source>Nero AAC</source>
         <translation>Nero AAC</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3189"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3192"/>
         <source>Not available!</source>
         <translation>Ej tillgänglig!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3191"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3194"/>
         <source>Current AAC Encoder: %1</source>
         <translation>Aktuell AAC-kodare: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3301"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3304"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3307"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3316"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3310"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3319"/>
         <source>Quality Level %1</source>
         <translation>Kvallitetsnivå %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3310"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3333"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3353"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3336"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3356"/>
         <source>Compression %1</source>
         <translation>Kompression %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3319"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3339"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3362"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3322"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3342"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3365"/>
         <source>Uncompressed</source>
         <translation>Okomprimerad</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3399"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3402"/>
         <source>Best Quality (Very Slow)</source>
         <translation>Bäst kvallitet (långsam)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3402"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3405"/>
         <source>High Quality (Recommended)</source>
         <translation>Hög kvallitet (rekommenderas)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3405"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3408"/>
         <source>Average Quality (Default)</source>
         <translation>Medelkvallitet (standard)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3408"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3411"/>
         <source>Low Quality (Fast)</source>
         <translation>Låg kvallitet (snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3411"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3414"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Dålig kvallitet (mycket snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3697"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3700"/>
         <source>File name without extension</source>
         <translation>Filnamn utan filtillägg</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3698"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3701"/>
         <source>Track number with leading zero</source>
         <translation>Spårnummer med inledande nolla</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3699"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3702"/>
         <source>Track title</source>
         <translation>Spårtitel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3700"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3703"/>
         <source>Artist name</source>
         <translation>Artistnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3701"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3704"/>
         <source>Album name</source>
         <translation>Albumnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3702"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3705"/>
         <source>Year with (at least) four digits</source>
         <translation>Årtal med (minst) fyra siffror</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3703"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3706"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3705"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3708"/>
         <source>Characters forbidden in file names:</source>
         <translation>Förbjudna tecken i filnamn:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3708"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3711"/>
         <source>Rename Macros</source>
         <translation>Namnändra macron</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
         <source>%1 Instance(s)</source>
         <translation>%1 instans(er)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3765"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3768"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Kan inte skriva till den specificerade mappen. Välj en annan destination!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3933"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3936"/>
         <source>Already Running</source>
         <translation>Körs redan</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3933"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3936"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP körs redan, använd den redan startade instansen!</translation>
     </message>

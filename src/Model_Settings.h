@@ -139,6 +139,7 @@ public:
 
 	//Misc
 	void validate(void);
+	void syncNow(void);
 	
 private:
 	QSettings *m_settings;
