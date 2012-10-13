@@ -472,7 +472,7 @@ LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionI
 /*
  * Invalid parameters handler
  */
-void lamexp_invalid_param_handler(const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t)
+void lamexp_invalid_param_handler(const wchar_t* exp, const wchar_t* fun, const wchar_t* fil, unsigned int, uintptr_t)
 {
 	if(GetCurrentThreadId() != g_main_thread_id)
 	{
@@ -2210,7 +2210,7 @@ QStringList lamexp_available_codepages(bool noAliases)
  * Robert Jenkins' 96 bit Mix Function
  * Source: http://www.concentric.net/~Ttwang/tech/inthash.htm
  */
-unsigned int lamexp_mix(const unsigned int x, const unsigned int y, const unsigned int z)
+static unsigned int lamexp_mix(const unsigned int x, const unsigned int y, const unsigned int z)
 {
 	unsigned int a = x;
 	unsigned int b = y;
@@ -2227,6 +2227,39 @@ unsigned int lamexp_mix(const unsigned int x, const unsigned int y, const unsign
 	c=c-a;  c=c-b;  c=c^(b >> 15);
 
 	return c;
+}
+
+/*
+ * Seeds the random number generator
+ * Note: Altough rand_s() doesn't need a seed, this must be called pripr to lamexp_rand(), just to to be sure!
+ */
+void lamexp_seed_rand(void)
+{
+	qsrand(lamexp_mix(clock(), time(NULL), _getpid()));
+}
+
+/*
+ * Returns a randum number
+ * Note: This function uses rand_s() if available, but falls back to qrand() otherwise
+ */
+unsigned int lamexp_rand(void)
+{
+	unsigned int rnd = 0;
+	if(const lamexp_os_version_t* osVer = lamexp_get_os_version())
+	{
+		if(LAMEXP_MIN_OS_VER(osVer, 5, 1))
+		{
+			if(rand_s(&rnd) == 0)
+			{
+				return rnd;
+			}
+		}
+	}
+	for(size_t i = 0; i < sizeof(unsigned int); i++)
+	{
+		rnd = (rnd << 8) ^ qrand();
+	}
+	return rnd;
 }
 
 /*

@@ -25,6 +25,7 @@
 #include "Targetver.h"
 
 //inlcude C standard library
+#define _CRT_RAND_S
 #include <stdio.h>
 #include <tchar.h>
 
@@ -155,7 +156,8 @@ bool lamexp_themes_enabled(void);
 void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned int delay = 150);
 const QString lamexp_clean_filename(const QString &str);
 const QString lamexp_clean_filepath(const QString &str);
-unsigned int lamexp_mix(const unsigned int x, const unsigned int y, const unsigned int z);
+void lamexp_seed_rand(void);
+unsigned int lamexp_rand(void);
 
 //Debug-only functions
 SIZE_T lamexp_dbg_private_bytes(void);

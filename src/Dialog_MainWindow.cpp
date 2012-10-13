@@ -1171,10 +1171,6 @@ void MainWindow::windowShown(void)
 					if(reinterpret_cast<int>(res) > 32) break;
 				}
 			}
-			else
-			{
-				MoveFileEx(QWCHAR(QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath())), NULL, MOVEFILE_DELAY_UNTIL_REBOOT | MOVEFILE_REPLACE_EXISTING);
-			}
 			QApplication::quit();
 			return;
 		}

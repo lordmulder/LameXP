@@ -39,10 +39,8 @@
 #include <QMovie>
 #include <QtConcurrentRun>
 
-#include <time.h>
 #include <MMSystem.h>
 #include <WinInet.h>
-#include <process.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -425,10 +423,10 @@ void UpdateDialog::checkForUpdates(void)
 		hostList << QString::fromLatin1(known_hosts[i]);
 	}
 
-	qsrand(lamexp_mix(clock(), time(NULL), _getpid()));
+	lamexp_seed_rand();
 	while(!hostList.isEmpty())
 	{
-		QString currentHost = hostList.takeAt(qrand() % hostList.count());
+		QString currentHost = hostList.takeAt(lamexp_rand() % hostList.count());
 		if(connectionScore < MIN_CONNSCORE)
 		{
 			m_logFile->append(QStringList() << "" << "Testing host:" << currentHost << "");
@@ -486,13 +484,13 @@ void UpdateDialog::checkForUpdates(void)
 		mirrorList << QString::fromLatin1(update_mirrors_prim[index]);
 	}
 
-	qsrand(lamexp_mix(clock(), time(NULL), _getpid()));
+	lamexp_seed_rand();
 	if(const int len = mirrorList.count())
 	{
 		const int rounds = len * 1097;
 		for(int i = 0; i < rounds; i++)
 		{
-			mirrorList.swap(i % len, qrand() % len);
+			mirrorList.swap(i % len, lamexp_rand() % len);
 		}
 	}
 

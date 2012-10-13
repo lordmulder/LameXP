@@ -135,23 +135,25 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	//Show about dialog for the first time?
 	if(!firstStart)
 	{
+		lamexp_seed_rand();
+
 		acceptButton->hide();
 		declineButton->hide();
 		aboutQtButton->show();
 		closeButton->show();
-		
+
 		QPixmap disque(":/images/Disque.png");
 		QRect screenGeometry = QApplication::desktop()->availableGeometry();
 		m_disque = new QLabel(this, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 		m_disque->installEventFilter(this);
 		m_disque->setStyleSheet("background:transparent;");
 		m_disque->setAttribute(Qt::WA_TranslucentBackground);
-		m_disque->setGeometry(qrand() % (screenGeometry.width() - disque.width()), qrand() % (screenGeometry.height() - disque.height()), disque.width(), disque.height());
+		m_disque->setGeometry(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(screenGeometry.width() - disque.width())), static_cast<int>(lamexp_rand() % static_cast<unsigned int>(screenGeometry.height() - disque.height())), disque.width(), disque.height());
 		m_disque->setPixmap(disque);
 		m_disque->setWindowOpacity(0.01);
 		m_disque->show();
-		m_disqueFlags[0] = (qrand() > (RAND_MAX/2));
-		m_disqueFlags[1] = (qrand() > (RAND_MAX/2));
+		m_disqueFlags[0] = (lamexp_rand() > (UINT_MAX/2));
+		m_disqueFlags[1] = (lamexp_rand() > (UINT_MAX/2));
 		m_disqueTimer = new QTimer;
 		connect(m_disqueTimer, SIGNAL(timeout()), this, SLOT(moveDisque()));
 		m_disqueTimer->setInterval(10);
