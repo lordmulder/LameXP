@@ -1398,7 +1398,7 @@
                <x>0</x>
                <y>0</y>
                <width>607</width>
-               <height>1677</height>
+               <height>1668</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -4385,6 +4385,9 @@
    </property>
   </action>
   <action name="actionLoadTranslationFromFile">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/Icons.qrc">
      <normaloff>:/icons/folder_page.png</normaloff>:/icons/folder_page.png</iconset>

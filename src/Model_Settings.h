@@ -99,6 +99,7 @@ public:
 	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled);
 	LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled);
 	LAMEXP_MAKE_OPTION_S(currentLanguage);
+	LAMEXP_MAKE_OPTION_S(currentLanguageFile);
 	LAMEXP_MAKE_OPTION_I(lameAlgoQuality);
 	LAMEXP_MAKE_OPTION_I(lameChannelMode);
 	LAMEXP_MAKE_OPTION_B(forceStereoDownmix);

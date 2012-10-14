@@ -171,6 +171,7 @@ private:
 	void addFiles(const QStringList &files);
 	void addFolder(const QString &path, bool recursive = false, bool delayed = false);
 	bool checkForUpdates(void);
+	void initializeTranslation(void);
 	void refreshFavorites(void);
 	
 	bool m_accepted;

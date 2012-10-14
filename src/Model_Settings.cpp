@@ -88,6 +88,7 @@ LAMEXP_MAKE_ID(antivirNotificationsEnabled, "Flags/EnableAntivirusNotifications"
 LAMEXP_MAKE_ID(dropBoxWidgetEnabled, "Flags/EnableDropBoxWidget");
 LAMEXP_MAKE_ID(shellIntegrationEnabled, "Flags/EnableShellIntegration");
 LAMEXP_MAKE_ID(currentLanguage, "Localization/Language");
+LAMEXP_MAKE_ID(currentLanguageFile, "Localization/UseQMFile");
 LAMEXP_MAKE_ID(lameAlgoQuality, "AdvancedOptions/LAME/AlgorithmQuality");
 LAMEXP_MAKE_ID(lameChannelMode, "AdvancedOptions/LAME/ChannelMode");
 LAMEXP_MAKE_ID(forceStereoDownmix, "AdvancedOptions/StereoDownmix/Force");
@@ -250,6 +251,16 @@ void SettingsModel::validate(void)
 		this->outputDir(musicLocation.isEmpty() ? QDesktopServices::storageLocation(QDesktopServices::HomeLocation) : musicLocation);
 	}
 
+	if(!this->currentLanguageFile().isEmpty())
+	{
+		const QString qmPath = QFileInfo(this->currentLanguageFile()).canonicalFilePath();
+		if(!(QFileInfo(qmPath).exists() && QFileInfo(qmPath).isFile() && (QFileInfo(qmPath).suffix().compare("qm", Qt::CaseInsensitive) == 0)))
+		{
+			qWarning("Current language file \"%s\" missing, reverting to built-in translator!", qmPath.toUtf8().constData());
+			this->currentLanguageFile(QString());
+		}
+	}
+
 	if(!lamexp_query_translations().contains(this->currentLanguage(), Qt::CaseInsensitive))
 	{
 		qWarning("Current language \"%s\" is unknown, reverting to default language!", this->currentLanguage().toLatin1().constData());
@@ -375,6 +386,7 @@ LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled, true)
 LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_portable_mode())
 LAMEXP_MAKE_OPTION_S(currentLanguage, defaultLanguage())
+LAMEXP_MAKE_OPTION_S(currentLanguageFile, QString())
 LAMEXP_MAKE_OPTION_I(lameAlgoQuality, 3)
 LAMEXP_MAKE_OPTION_I(lameChannelMode, 0)
 LAMEXP_MAKE_OPTION_B(forceStereoDownmix, false)

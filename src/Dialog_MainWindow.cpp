@@ -503,12 +503,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		currentLanguage->setText(lamexp_translation_name(langId));
 		currentLanguage->setIcon(QIcon(QString(":/flags/%1.png").arg(langId)));
 		currentLanguage->setCheckable(true);
+		currentLanguage->setChecked(false);
 		m_languageActionGroup->addAction(currentLanguage);
 		menuLanguage->insertAction(actionLoadTranslationFromFile, currentLanguage);
 	}
 	menuLanguage->insertSeparator(actionLoadTranslationFromFile);
 	connect(actionLoadTranslationFromFile, SIGNAL(triggered(bool)), this, SLOT(languageFromFileActionActivated(bool)));
 	connect(m_languageActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
+	actionLoadTranslationFromFile->setChecked(false);
 
 	//Activate tools menu actions
 	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
@@ -577,17 +579,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
 
-	//Load translation file
-	QList<QAction*> languageActions = m_languageActionGroup->actions();
-	while(!languageActions.isEmpty())
-	{
-		QAction *currentLanguage = languageActions.takeFirst();
-		if(currentLanguage->data().toString().compare(m_settings->currentLanguage(), Qt::CaseInsensitive) == 0)
-		{
-			currentLanguage->setChecked(true);
-			languageActionActivated(currentLanguage);
-		}
-	}
+	//Load translation
+	initializeTranslation();
 
 	//Re-translate (make sure we translate once)
 	QEvent languageChangeEvent(QEvent::LanguageChange);
@@ -657,29 +650,6 @@ void MainWindow::addFiles(const QStringList &files)
 
 	tabWidget->setCurrentIndex(0);
 
-	//int timeMT = 0, timeST = 0;
-	//
-	//--Prepass--
-	//
-	//FileAnalyzer_ST *analyzerPre = new FileAnalyzer_ST(files);
-	//connect(analyzerPre, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
-	//connect(analyzerPre, SIGNAL(progressValChanged(unsigned int)), m_banner, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
-	//connect(analyzerPre, SIGNAL(progressMaxChanged(unsigned int)), m_banner, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
-	//connect(analyzerPre, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-	//connect(m_banner, SIGNAL(userAbort()), analyzerPre, SLOT(abortProcess()), Qt::DirectConnection);
-	//
-	//try
-	//{
-	//	m_fileListModel->setBlockUpdates(true);
-	//	m_banner->show(tr("Adding file(s), please wait..."), analyzerPre);
-	//}
-	//catch(...)
-	//{
-	//	/* ignore any exceptions that may occur */
-	//}
-	//
-	//--MT--
-
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
 	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(analyzer, SIGNAL(progressValChanged(unsigned int)), m_banner, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
@@ -724,9 +694,6 @@ void MainWindow::addFiles(const QStringList &files)
 	}
 
 	LAMEXP_DELETE(analyzer);
-	//LAMEXP_DELETE(analyzerST);
-	//LAMEXP_DELETE(analyzerPre);
-
 	m_banner->close();
 }
 
@@ -807,6 +774,9 @@ bool MainWindow::checkForUpdates(void)
 	return bReadyToInstall;
 }
 
+/*
+ * Refresh list of favorites
+ */
 void MainWindow::refreshFavorites(void)
 {
 	QList<QAction*> folderList = m_outputFolderFavoritesMenu->actions();
@@ -834,6 +804,68 @@ void MainWindow::refreshFavorites(void)
 			connect(action, SIGNAL(triggered(bool)), this, SLOT(gotoFavoriteFolder()));
 			lastItem = action;
 		}
+	}
+}
+
+/*
+ * Initilaize translation
+ */
+void MainWindow::initializeTranslation(void)
+{
+	bool translationLoaded = false;
+
+	//Try to load "external" translation file
+	if(!m_settings->currentLanguageFile().isEmpty())
+	{
+		const QString qmFilePath = QFileInfo(m_settings->currentLanguageFile()).canonicalFilePath();
+		if(QFileInfo(qmFilePath).exists() && QFileInfo(qmFilePath).isFile() && (QFileInfo(qmFilePath).suffix().compare("qm", Qt::CaseInsensitive) == 0))
+		{
+			if(lamexp_install_translator_from_file(qmFilePath))
+			{
+				QList<QAction*> actions = m_languageActionGroup->actions();
+				while(!actions.isEmpty()) actions.takeFirst()->setChecked(false);
+				actionLoadTranslationFromFile->setChecked(true);
+				translationLoaded = true;
+			}
+		}
+	}
+
+	//Try to load "built-in" translation file
+	if(!translationLoaded)
+	{
+		QList<QAction*> languageActions = m_languageActionGroup->actions();
+		while(!languageActions.isEmpty())
+		{
+			QAction *currentLanguage = languageActions.takeFirst();
+			if(currentLanguage->data().toString().compare(m_settings->currentLanguage(), Qt::CaseInsensitive) == 0)
+			{
+				currentLanguage->setChecked(true);
+				languageActionActivated(currentLanguage);
+				translationLoaded = true;
+			}
+		}
+	}
+
+	//Fallback to default translation
+	if(!translationLoaded)
+	{
+		QList<QAction*> languageActions = m_languageActionGroup->actions();
+		while(!languageActions.isEmpty())
+		{
+			QAction *currentLanguage = languageActions.takeFirst();
+			if(currentLanguage->data().toString().compare(LAMEXP_DEFAULT_LANGID, Qt::CaseInsensitive) == 0)
+			{
+				currentLanguage->setChecked(true);
+				languageActionActivated(currentLanguage);
+				translationLoaded = true;
+			}
+		}
+	}
+
+	//Make sure we loaded some translation
+	if(!translationLoaded)
+	{
+		qFatal("Failed to load any translation, this is NOT supposed to happen!");
 	}
 }
 
@@ -1044,20 +1076,27 @@ void MainWindow::resizeEvent(QResizeEvent *event)
  */
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-	if(e->key() == Qt::Key_F5)
-	{
-		if(outputFolderView->isVisible())
-		{
-			QTimer::singleShot(0, this, SLOT(refreshFolderContextActionTriggered()));
-			return;
-		}
-	}
-
 	if(e->key() == Qt::Key_Delete)
 	{
 		if(sourceFileView->isVisible())
 		{
 			QTimer::singleShot(0, this, SLOT(removeFileButtonClicked()));
+			return;
+		}
+	}
+
+	if(e->modifiers().testFlag(Qt::ControlModifier) && (e->key() == Qt::Key_F5))
+	{
+		initializeTranslation();
+		MessageBeep(MB_ICONINFORMATION);
+		return;
+	}
+
+	if(e->key() == Qt::Key_F5)
+	{
+		if(outputFolderView->isVisible())
+		{
+			QTimer::singleShot(0, this, SLOT(refreshFolderContextActionTriggered()));
 			return;
 		}
 	}
@@ -1678,7 +1717,9 @@ void MainWindow::languageActionActivated(QAction *action)
 		if(lamexp_install_translator(langId))
 		{
 			action->setChecked(true);
+			actionLoadTranslationFromFile->setChecked(false);
 			m_settings->currentLanguage(langId);
+			m_settings->currentLanguageFile(QString());
 		}
 	}
 }
@@ -1695,13 +1736,16 @@ void MainWindow::languageFromFileActionActivated(bool checked)
 	if(dialog.exec())
 	{
 		QStringList selectedFiles = dialog.selectedFiles();
-		if(lamexp_install_translator_from_file(selectedFiles.first()))
+		const QString qmFile = QFileInfo(selectedFiles.first()).canonicalFilePath();
+		if(lamexp_install_translator_from_file(qmFile))
 		{
 			QList<QAction*> actions = m_languageActionGroup->actions();
 			while(!actions.isEmpty())
 			{
 				actions.takeFirst()->setChecked(false);
 			}
+			actionLoadTranslationFromFile->setChecked(true);
+			m_settings->currentLanguageFile(qmFile);
 		}
 		else
 		{
