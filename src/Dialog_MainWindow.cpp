@@ -818,7 +818,7 @@ void MainWindow::initializeTranslation(void)
 	if(!m_settings->currentLanguageFile().isEmpty())
 	{
 		const QString qmFilePath = QFileInfo(m_settings->currentLanguageFile()).canonicalFilePath();
-		if(QFileInfo(qmFilePath).exists() && QFileInfo(qmFilePath).isFile() && (QFileInfo(qmFilePath).suffix().compare("qm", Qt::CaseInsensitive) == 0))
+		if((!qmFilePath.isEmpty()) && QFileInfo(qmFilePath).exists() && QFileInfo(qmFilePath).isFile() && (QFileInfo(qmFilePath).suffix().compare("qm", Qt::CaseInsensitive) == 0))
 		{
 			if(lamexp_install_translator_from_file(qmFilePath))
 			{

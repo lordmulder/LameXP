@@ -254,9 +254,9 @@ void SettingsModel::validate(void)
 	if(!this->currentLanguageFile().isEmpty())
 	{
 		const QString qmPath = QFileInfo(this->currentLanguageFile()).canonicalFilePath();
-		if(!(QFileInfo(qmPath).exists() && QFileInfo(qmPath).isFile() && (QFileInfo(qmPath).suffix().compare("qm", Qt::CaseInsensitive) == 0)))
+		if(qmPath.isEmpty() || (!(QFileInfo(qmPath).exists() && QFileInfo(qmPath).isFile() && (QFileInfo(qmPath).suffix().compare("qm", Qt::CaseInsensitive) == 0))))
 		{
-			qWarning("Current language file \"%s\" missing, reverting to built-in translator!", qmPath.toUtf8().constData());
+			qWarning("Current language file missing, reverting to built-in translator!");
 			this->currentLanguageFile(QString());
 		}
 	}
