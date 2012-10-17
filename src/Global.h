@@ -170,7 +170,7 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define LAMEXP_MIN_OS_VER(VER_INFO, VER_MAJ, VER_MIN) (((VER_INFO)->versionMajor > (VER_MAJ)) || (((VER_INFO)->versionMajor == (VER_MAJ)) && ((VER_INFO)->versionMinor >= (VER_MIN))))
 #define LAMEXP_MAX_OS_VER(VER_INFO, VER_MAJ, VER_MIN) (((VER_INFO)->versionMajor < (VER_MAJ)) || (((VER_INFO)->versionMajor == (VER_MAJ)) && ((VER_INFO)->versionMinor <= (VER_MIN))))
 #define LAMEXP_EQL_OS_VER(VER_INFO, VER_MAJ, VER_MIN) (((VER_INFO)->versionMajor == (VER_MAJ)) && ((VER_INFO)->versionMinor == (VER_MIN)))
-#define QWCHAR(STR) reinterpret_cast<const wchar_t*>(STR.utf16())
+#define QWCHAR(STR) reinterpret_cast<const wchar_t*>((STR).utf16())
 #define WCHAR2QSTR(STR) QString::fromUtf16(reinterpret_cast<const unsigned short*>(STR))
 #define LAMEXP_BOOL2STR(X) (X ? "1" : "0")
 #define LAMEXP_MAKE_STRING_EX(X) #X

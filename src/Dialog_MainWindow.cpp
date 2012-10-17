@@ -144,6 +144,8 @@ while(0)
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
 
+static const DWORD IDM_ABOUTBOX = 0xEFF0;
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -178,6 +180,13 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//Setup tab widget
 	tabWidget->setCurrentIndex(0);
 	connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabPageChanged(int)));
+
+	//Add system menu
+	if(HMENU hMenu = ::GetSystemMenu(winId(), FALSE))
+	{
+		AppendMenuW(hMenu, MF_SEPARATOR, 0, 0);
+		AppendMenuW(hMenu, MF_STRING, IDM_ABOUTBOX, L"About...");
+	}
 
 	//--------------------------------
 	// Setup "Source" tab
@@ -969,6 +978,12 @@ void MainWindow::changeEvent(QEvent *e)
 			ShellIntegration::install();
 		}
 
+		//Translate system menu
+		if(HMENU hMenu = ::GetSystemMenu(winId(), FALSE))
+		{
+			ModifyMenu(hMenu, IDM_ABOUTBOX, MF_STRING | MF_BYCOMMAND, IDM_ABOUTBOX, QWCHAR(buttonAbout->text()));
+		}
+			
 		//Force resize, if needed
 		tabPageChanged(tabWidget->currentIndex());
 	}
@@ -1153,6 +1168,11 @@ bool MainWindow::event(QEvent *e)
 
 bool MainWindow::winEvent(MSG *message, long *result)
 {
+	if((message->message == WM_SYSCOMMAND) && ((message->wParam & 0xFFF0) == IDM_ABOUTBOX))
+	{
+		buttonAbout->click();
+		return true;
+	}
 	return WinSevenTaskbar::handleWinEvent(message, result);
 }
 
