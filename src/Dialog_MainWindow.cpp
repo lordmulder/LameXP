@@ -1170,7 +1170,8 @@ bool MainWindow::winEvent(MSG *message, long *result)
 {
 	if((message->message == WM_SYSCOMMAND) && ((message->wParam & 0xFFF0) == IDM_ABOUTBOX))
 	{
-		buttonAbout->click();
+		QTimer::singleShot(0, buttonAbout, SLOT(click()));
+		*result = 0;
 		return true;
 	}
 	return WinSevenTaskbar::handleWinEvent(message, result);
