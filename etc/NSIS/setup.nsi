@@ -465,7 +465,11 @@ Section "-Create Shortcuts"
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.pif"
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.url"
 
-		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" "$INSTDIR\LameXP.exe" "" "$INSTDIR\LameXP.exe" 0
+		!insertmacro GetExecutableName $R0
+		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR" "$R0" ${StdUtils.Const.ISV_PinToTaskbar}
+		DetailPrint 'Pin to Taskbar: "$INSTDIR\$R0" -> $R1'
+		
+		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" "$INSTDIR\$R0" "" "$INSTDIR\$R0" 0
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_LICENSE).lnk" "$INSTDIR\License.txt"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_CHANGELOG).lnk" "$INSTDIR\Changelog.html"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_TRANSLATE).lnk" "$INSTDIR\Translate.html"
@@ -482,7 +486,9 @@ SectionEnd
 
 Section "-Update Registry"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_REGISTRY)"
+	!insertmacro GetExecutableName $R0
 	WriteRegStr HKLM "${MyRegPath}" "InstallLocation" "$INSTDIR"
+	WriteRegStr HKLM "${MyRegPath}" "ExecutableName" "$R0"
 	WriteRegStr HKLM "${MyRegPath}" "UninstallString" '"$INSTDIR\Uninstall.exe"'
 	WriteRegStr HKLM "${MyRegPath}" "DisplayName" "LameXP"
 SectionEnd
@@ -495,10 +501,8 @@ Section "-Finished"
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\PRE_RELEASE_INFO.txt" "open" ""
 	${EndIf}
 !endif
-
-	; ---- POLL ----
-	; !insertmacro UAC_AsUser_ExecShell "" "http://mulder.brhack.net/temp/style_poll/" "" "" SW_SHOWNORMAL
-	; ---- POLL ----
+	
+	DetailPrint "Almost there..."
 SectionEnd
 
 
@@ -510,7 +514,13 @@ Section "Uninstall"
 	SetOutPath "$INSTDIR"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_UNINSTALL)"
 
+	ReadRegStr $R0 HKLM "${MyRegPath}" "ExecutableName"
+	${IfThen} "$R0" == "" ${|} StrCpy $R0 "LameXP.exe" ${|}
+	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR" "$R0" ${StdUtils.Const.ISV_UnpinFromTaskbar}
+	DetailPrint 'Unpin from Taskbar: "$INSTDIR\$R0" -> $R1'
+	
 	Delete /REBOOTOK "$INSTDIR\LameXP.exe"
+	Delete /REBOOTOK "$INSTDIR\$R0"
 	Delete /REBOOTOK "$INSTDIR\LameXP-Portable.exe"
 	Delete /REBOOTOK "$INSTDIR\LameXP.exe.sig"
 	Delete /REBOOTOK "$INSTDIR\LameXP*"
