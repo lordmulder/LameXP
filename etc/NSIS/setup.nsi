@@ -466,8 +466,6 @@ Section "-Create Shortcuts"
 		Delete "$SMPROGRAMS\$StartMenuFolder\*.url"
 
 		!insertmacro GetExecutableName $R0
-		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR" "$R0" ${StdUtils.Const.ISV_PinToTaskbar}
-		DetailPrint 'Pin to Taskbar: "$INSTDIR\$R0" -> $R1'
 		
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" "$INSTDIR\$R0" "" "$INSTDIR\$R0" 0
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\$(LAMEXP_LANG_LINK_LICENSE).lnk" "$INSTDIR\License.txt"
@@ -481,11 +479,17 @@ Section "-Create Shortcuts"
 		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\Doom9's Forum.url" "http://forum.doom9.org/"
 		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\RareWares.org.url" "http://rarewares.org/"
 		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\Hydrogenaudio Forums.url" "http://www.hydrogenaudio.org/"
+
+		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk"
+			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ISV_PinToTaskbar}
+			DetailPrint 'Pin: "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" -> $R1'
+		${EndIf}
 	!insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
 Section "-Update Registry"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_REGISTRY)"
+
 	!insertmacro GetExecutableName $R0
 	WriteRegStr HKLM "${MyRegPath}" "InstallLocation" "$INSTDIR"
 	WriteRegStr HKLM "${MyRegPath}" "ExecutableName" "$R0"
@@ -501,8 +505,6 @@ Section "-Finished"
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\PRE_RELEASE_INFO.txt" "open" ""
 	${EndIf}
 !endif
-	
-	DetailPrint "Almost there..."
 SectionEnd
 
 
@@ -514,11 +516,42 @@ Section "Uninstall"
 	SetOutPath "$INSTDIR"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_UNINSTALL)"
 
+	; --------------
+	; Startmenu
+	; --------------
+	
+	!insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
+	${IfNot} "$StartMenuFolder" == ""
+		SetShellVarContext current
+		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk"
+			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ISV_UnpinFromTaskbar}
+			DetailPrint 'Unpin: "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" -> $R1'
+		${EndIf}
+		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\*.*"
+			Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.lnk"
+			Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.url"
+			RMDir "$SMPROGRAMS\$StartMenuFolder"
+		${EndIf}
+		
+		SetShellVarContext all
+		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk"
+			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ISV_UnpinFromTaskbar}
+			DetailPrint 'Unpin: "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" -> $R1'
+		${EndIf}
+		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\*.*"
+			Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.lnk"
+			Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.url"
+			RMDir "$SMPROGRAMS\$StartMenuFolder"
+		${EndIf}
+	${EndIf}
+
+	; --------------
+	; Files
+	; --------------
+
 	ReadRegStr $R0 HKLM "${MyRegPath}" "ExecutableName"
 	${IfThen} "$R0" == "" ${|} StrCpy $R0 "LameXP.exe" ${|}
-	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR" "$R0" ${StdUtils.Const.ISV_UnpinFromTaskbar}
-	DetailPrint 'Unpin from Taskbar: "$INSTDIR\$R0" -> $R1'
-	
+
 	Delete /REBOOTOK "$INSTDIR\LameXP.exe"
 	Delete /REBOOTOK "$INSTDIR\$R0"
 	Delete /REBOOTOK "$INSTDIR\LameXP-Portable.exe"
@@ -543,16 +576,12 @@ Section "Uninstall"
 
 	RMDir "$INSTDIR"
 
-	!insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
-	StrCmp "$StartMenuFolder" "" NoStartmenuFolder
-	IfFileExists "$SMPROGRAMS\$StartMenuFolder\*.*" 0 NoStartmenuFolder
-	Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.lnk"
-	Delete /REBOOTOK "$SMPROGRAMS\$StartMenuFolder\*.url"
-	RMDir "$SMPROGRAMS\$StartMenuFolder"
-
-	NoStartmenuFolder:
-
+	; --------------
+	; Registry
+	; --------------
+	
 	DeleteRegValue HKLM "${MyRegPath}" "InstallLocation"
+	DeleteRegValue HKLM "${MyRegPath}" "ExecutableName"
 	DeleteRegValue HKLM "${MyRegPath}" "UninstallString"
 	DeleteRegValue HKLM "${MyRegPath}" "DisplayName"
 	DeleteRegValue HKLM "${MyRegPath}" "StartmenuFolder"
