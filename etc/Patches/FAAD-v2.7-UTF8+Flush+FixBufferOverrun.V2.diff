@@ -1,0 +1,409 @@
+ frontend/audio.c           | 11 +++++-
+ frontend/main.c            | 89 ++++++++++++++++++++++++++++++++---------
+ frontend/unicode_support.c | 98 ++++++++++++++++++++++++++++++++++++++++++++++
+ frontend/unicode_support.h | 21 ++++++++++
+ include/neaacdec.h         |  6 +--
+ 5 files changed, 202 insertions(+), 23 deletions(-)
+
+diff --git a/frontend/audio.c b/frontend/audio.c
+index 067ac20..a502c6e 100644
+--- a/frontend/audio.c
++++ b/frontend/audio.c
+@@ -37,11 +37,14 @@
+ #include <math.h>
+ #include <neaacdec.h>
+ #include "audio.h"
++#include "unicode_support.h"
+ 
+ 
+ audio_file *open_audio_file(char *infile, int samplerate, int channels,
+                             int outputFormat, int fileType, long channelMask)
+ {
++    wchar_t *fileNameW;
++
+     audio_file *aufile = malloc(sizeof(audio_file));
+ 
+     aufile->outputFormat = outputFormat;
+@@ -78,7 +81,13 @@ audio_file *open_audio_file(char *infile, int samplerate, int channels,
+         aufile->toStdio = 1;
+     } else {
+         aufile->toStdio = 0;
+-        aufile->sndfile = fopen(infile, "wb");
++        aufile->sndfile = NULL;
++        fileNameW = utf8_to_utf16(infile);
++        if(fileNameW)
++        {
++            aufile->sndfile = _wfopen(fileNameW, L"wb");
++            free(fileNameW);
++        }
+     }
+ 
+     if (aufile->sndfile == NULL)
+diff --git a/frontend/main.c b/frontend/main.c
+index 04e2058..01a5b7a 100644
+--- a/frontend/main.c
++++ b/frontend/main.c
+@@ -44,11 +44,13 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <getopt.h>
++#include <io.h>
+ 
+ #include <neaacdec.h>
+ #include <mp4ff.h>
+ 
+ #include "audio.h"
++#include "unicode_support.h"
+ 
+ #ifndef min
+ #define min(a,b) ( (a) < (b) ? (a) : (b) )
+@@ -71,6 +73,8 @@ static void faad_fprintf(FILE *stream, const char *fmt, ...)
+         vfprintf(stream, fmt, ap);
+ 
+         va_end(ap);
++
++        fflush(stream);
+     }
+ }
+ 
+@@ -443,7 +447,7 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+     NeAACDecFrameInfo frameInfo;
+     NeAACDecConfigurationPtr config;
+ 
+-    char percents[200];
++    char percents[300];
+     int percent, old_percent = -1;
+     int bread, fileread;
+     int header_type = 0;
+@@ -456,11 +460,19 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+ 
+     aac_buffer b;
+ 
++    wchar_t *fileNameW;
++
+     memset(&b, 0, sizeof(aac_buffer));
+ 
+     if (adts_out)
+     {
+-        adtsFile = fopen(adts_fn, "wb");
++        adtsFile = NULL;
++        fileNameW = utf8_to_utf16(adts_fn);
++        if(fileNameW)
++        {
++            adtsFile = _wfopen(fileNameW, L"wb");
++            free(fileNameW);
++        }
+         if (adtsFile == NULL)
+         {
+             faad_fprintf(stderr, "Error opening file: %s\n", adts_fn);
+@@ -470,20 +482,26 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+ 
+     if (0 == strcmp(aacfile, "-"))
+     {
+-	b.infile = stdin;
++        b.infile = stdin;
+ #ifdef _WIN32
+         setmode(fileno(stdin), O_BINARY);
+ #endif
+-
+-    } else
++    }
++    else
+     {
+-    	b.infile = fopen(aacfile, "rb");
+-    	if (b.infile == NULL)
+-    	{
+-    	    /* unable to open file */
+-    	    faad_fprintf(stderr, "Error opening file: %s\n", aacfile);
+-    	    return 1;
+-    	}
++        b.infile = NULL;
++        fileNameW = utf8_to_utf16(aacfile);
++        if(fileNameW)
++        {
++            b.infile = _wfopen(fileNameW, L"rb");
++            free(fileNameW);
++        }
++        if (b.infile == NULL)
++        {
++            /* unable to open file */
++            faad_fprintf(stderr, "Error opening file: %s\n", aacfile);
++            return 1;
++        }
+     }
+ 
+     retval = fseek(b.infile, 0, SEEK_END);
+@@ -708,7 +726,7 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+         if (percent > old_percent)
+         {
+             old_percent = percent;
+-            sprintf(percents, "%d%% decoding %s.", percent, aacfile);
++            _snprintf_s(percents, 300, _TRUNCATE, "[%d%%] decoding %s.", percent, aacfile);
+             faad_fprintf(stderr, "%s\r", percents);
+ #ifdef _WIN32
+             SetConsoleTitle(percents);
+@@ -810,7 +828,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+     unsigned char *buffer;
+     int buffer_size;
+ 
+-    char percents[200];
++    char percents[300];
+     int percent, old_percent = -1;
+ 
+     int first_time = 1;
+@@ -821,6 +839,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+     unsigned int framesize;
+     unsigned long timescale;
+ 
++    wchar_t *fileNameW;
+ 
+     /* initialise the callback structure */
+     mp4ff_callback_t *mp4cb = malloc(sizeof(mp4ff_callback_t));
+@@ -830,7 +849,14 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+         return 1;
+     }
+ 
+-    mp4File = fopen(mp4file, "rb");
++    mp4File = NULL;
++    fileNameW = utf8_to_utf16(mp4file);
++    if(fileNameW)
++    {
++        mp4File = _wfopen(fileNameW, L"rb");
++        free(fileNameW);
++    }
++
+     mp4cb->read = read_callback;
+     mp4cb->seek = seek_callback;
+     mp4cb->user_data = mp4File;
+@@ -847,7 +873,13 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+ 
+     if (adts_out)
+     {
+-        adtsFile = fopen(adts_fn, "wb");
++        adtsFile = NULL;
++        fileNameW = utf8_to_utf16(adts_fn);
++        if(fileNameW)
++        {
++            adtsFile = _wfopen(fileNameW, L"wb");
++            free(fileNameW);
++        }
+         if (adtsFile == NULL)
+         {
+             faad_fprintf(stderr, "Error opening file: %s\n", adts_fn);
+@@ -1053,7 +1085,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+         if (percent > old_percent)
+         {
+             old_percent = percent;
+-            sprintf(percents, "%d%% decoding %s.", percent, mp4file);
++            _snprintf_s(percents, 300, _TRUNCATE, "[%d%%] decoding %s.", percent, mp4file);
+             faad_fprintf(stderr, "%s\r", percents);
+ #ifdef _WIN32
+             SetConsoleTitle(percents);
+@@ -1091,7 +1123,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+     return frameInfo.error;
+ }
+ 
+-int main(int argc, char *argv[])
++int faad_main(int argc, char *argv[])
+ {
+     int result;
+     int infoOnly = 0;
+@@ -1115,6 +1147,7 @@ int main(int argc, char *argv[])
+     unsigned char header[8];
+     float length = 0;
+     FILE *hMP4File;
++    wchar_t *fileNameW;
+ 
+ /* System dependant types */
+ #ifdef _WIN32
+@@ -1345,7 +1378,13 @@ int main(int argc, char *argv[])
+     } else {
+ 
+     	mp4file = 0;
+-    	hMP4File = fopen(aacFileName, "rb");
++    	hMP4File = NULL;
++    	fileNameW = utf8_to_utf16(aacFileName);
++    	if(fileNameW)
++    	{
++    		hMP4File = _wfopen(fileNameW, L"rb");
++    		free(fileNameW);
++    	}
+     	if (!hMP4File)
+     	{
+     	    faad_fprintf(stderr, "Error opening file: %s\n", aacFileName);
+@@ -1408,3 +1447,15 @@ int main(int argc, char *argv[])
+ 
+     return 0;
+ }
++
++int wmain(int argc, wchar_t **argv_utf16)
++{
++    int result = 0;
++    char **argv_utf8 = NULL;
++
++    init_commandline_arguments_utf8(argc, &argv_utf8, argv_utf16);
++    result = faad_main(argc, argv_utf8);
++    free_commandline_arguments_utf8(argc, &argv_utf8);
++  
++    return result;
++}
+diff --git a/frontend/unicode_support.c b/frontend/unicode_support.c
+new file mode 100644
+index 0000000..21ecd5c
+--- /dev/null
++++ b/frontend/unicode_support.c
+@@ -0,0 +1,98 @@
++#include "unicode_support.h"
++
++#include <stdio.h>
++#include <windows.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	
++	if(!Buffer)
++	{
++		fprintf(stderr, "Error in utf16_to_utf8: Memory allocation failed!\n");
++		return NULL;
++	}
++
++	Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++
++	if(!Buffer)
++	{
++		fprintf(stderr, "Error in utf8_to_utf16: Memory allocation failed!\n");
++		return NULL;
++	}
++
++	Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int argc, char ***argv_utf8, wchar_t **argv_utf16)
++{
++	int i = 0;
++	
++	*argv_utf8 = (char**) malloc(argc * sizeof(char*));
++	if(!(*argv_utf8))
++	{
++		fprintf(stderr, "Error in init_commandline_arguments_utf8: Memory allocation failed!\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < argc; i++)
++	{
++		(*argv_utf8)[i] = utf16_to_utf8(argv_utf16[i]);
++		if(!(*argv_utf8)[i])
++		{
++			fprintf(stderr, "Error in init_commandline_arguments_utf8: Memory allocation failed!\n");
++			exit(-1);
++		}
++	}
++}
++
++void free_commandline_arguments_utf8(int argc, char ***argv_utf8)
++{
++	int i = 0;
++	
++	if(*argv_utf8 != NULL)
++	{
++		for(i = 0; i < argc; i++)
++		{
++			if((*argv_utf8)[i] != NULL)
++			{
++				free((*argv_utf8)[i]);
++				(*argv_utf8)[i] = NULL;
++			}
++		}
++		free(*argv_utf8);
++		*argv_utf8 = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
+diff --git a/frontend/unicode_support.h b/frontend/unicode_support.h
+new file mode 100644
+index 0000000..cc13fd9
+--- /dev/null
++++ b/frontend/unicode_support.h
+@@ -0,0 +1,21 @@
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++char *utf16_to_utf8(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int argc, char ***argv_utf8, wchar_t **argv_utf16);
++void free_commandline_arguments_utf8(int argc, char ***argv_utf8);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++
++#ifdef __cplusplus
++}
++#endif
++#endif
+\ No newline at end of file
+diff --git a/include/neaacdec.h b/include/neaacdec.h
+index 610a00b..7904175 100644
+--- a/include/neaacdec.h
++++ b/include/neaacdec.h
+@@ -202,7 +202,7 @@ typedef struct NeAACDecFrameInfo
+     unsigned char ps;
+ } NeAACDecFrameInfo;
+ 
+-char NEAACDECAPI *NeAACDecGetErrorMessage(unsigned char errcode);
++char* NEAACDECAPI NeAACDecGetErrorMessage(unsigned char errcode);
+ 
+ unsigned long NEAACDECAPI NeAACDecGetCapabilities(void);
+ 
+@@ -235,12 +235,12 @@ void NEAACDECAPI NeAACDecPostSeekReset(NeAACDecHandle hDecoder, long frame);
+ 
+ void NEAACDECAPI NeAACDecClose(NeAACDecHandle hDecoder);
+ 
+-void NEAACDECAPI *NeAACDecDecode(NeAACDecHandle hDecoder,
++void* NEAACDECAPI NeAACDecDecode(NeAACDecHandle hDecoder,
+                                  NeAACDecFrameInfo *hInfo,
+                                  unsigned char *buffer,
+                                  unsigned long buffer_size);
+ 
+-void NEAACDECAPI *NeAACDecDecode2(NeAACDecHandle hDecoder,
++void* NEAACDECAPI NeAACDecDecode2(NeAACDecHandle hDecoder,
+                                   NeAACDecFrameInfo *hInfo,
+                                   unsigned char *buffer,
+                                   unsigned long buffer_size,
