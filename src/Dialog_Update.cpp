@@ -58,8 +58,10 @@ static const char *update_mirrors_prim[] =
 {
 	"http://mulder.brhack.net/",
 	"http://mulder.bplaced.net/",
+	"http://mulder.cwsurf.de/",
+	"http://mulder.6te.net/",
+//	"http://free.pages.at/borschdfresser/",
 	"http://lamexp.sourceforge.net/",
-	"http://free.pages.at/borschdfresser/",
 	"http://lordmulder.github.com/LameXP/",
 	"http://lord_mulder.bitbucket.org/",
 	"http://www.tricksoft.de/",
@@ -74,7 +76,7 @@ static const char *update_mirrors_back[] =
 	NULL
 };
 
-static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites
+static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites !!!
 {
 	"http://www.163.com/",
 	"http://www.360buy.com/",
