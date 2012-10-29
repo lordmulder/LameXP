@@ -172,14 +172,6 @@
         <translation>Aften - A/52 音頻編碼器</translation>
     </message>
     <message>
-        <source>ALAC Decoder</source>
-        <translation>ALAC 解碼器</translation>
-    </message>
-    <message>
-        <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation>版權所有 (c) 2004 David Hammerton.科迪 Brocious 的貢獻.</translation>
-    </message>
-    <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
         <translation>版權所有 (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;.保留某些權利.</translation>
     </message>
@@ -286,6 +278,14 @@
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - 終極可執行程序文件壓縮器</translation>
+    </message>
+    <message>
+        <source>refalac - Win32 command line ALAC encoder/decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

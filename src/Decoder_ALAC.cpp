@@ -30,11 +30,11 @@
 
 ALACDecoder::ALACDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("alac.exe"))
+	m_binary(lamexp_lookup_tool("refalac.exe"))
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing ALAC decoder. Tool 'alac.exe' is not registred!";
+		throw "Error initializing ALAC decoder. Tool 'refalac.exe' is not registred!";
 	}
 }
 
@@ -47,7 +47,8 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	QProcess process;
 	QStringList args;
 
-	args << "-f" << QDir::toNativeSeparators(outputFile);
+	args << "--decode";
+	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args))
@@ -57,9 +58,11 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
 
 	//The ALAC Decoder doesn't actually send any status updates :-[
-	emit statusUpdated(20 + (QUuid::createUuid().data1 % 60));
+	//emit statusUpdated(20 + (QUuid::createUuid().data1 % 60));
+	QRegExp regExp("\\[(\\d+)\\.(\\d)%\\]");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -83,7 +86,23 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		{
 			QByteArray line = process.readLine();
 			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(!text.isEmpty())
+			if(regExp.lastIndexIn(text) >= 0)
+			{
+				bool ok[2] = {false, false};
+				int intVal[2] = {0, 0};
+				intVal[0] = regExp.cap(1).toInt(&ok[0]);
+				intVal[1] = regExp.cap(2).toInt(&ok[1]);
+				if(ok[0] && ok[1])
+				{
+					int progress = qRound(static_cast<double>(intVal[0]) + (static_cast<double>(intVal[1]) / 10.0));
+					if(progress > prevProgress)
+					{
+						emit statusUpdated(progress);
+						prevProgress = qMin(progress + 2, 99);
+					}
+				}
+			}
+			else if(!text.isEmpty())
 			{
 				emit messageLogged(text);
 			}

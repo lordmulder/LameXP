@@ -693,12 +693,19 @@ void AboutDialog::initSoftwareTab(void)
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://tta.sourceforge.net/"
 	);
+	//moreAboutText += makeToolText
+	//(
+	//	tr("ALAC Decoder"),
+	//	"alac.exe", "v?.?.?",
+	//	tr("Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious."),
+	//	"http://craz.net/programs/itunes/alac.html"
+	//);
 	moreAboutText += makeToolText
 	(
-		tr("ALAC Decoder"),
-		"alac.exe", "v?.?.?",
-		tr("Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious."),
-		"http://craz.net/programs/itunes/alac.html"
+		tr("refalac - Win32 command line ALAC encoder/decoder"),
+		"refalac.exe", "v?.??",
+		tr("The ALAC reference implementation by Apple is available under the Apache license."),
+		"http://alac.macosforge.org/"
 	);
 	moreAboutText += makeToolText
 	(

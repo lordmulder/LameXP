@@ -1,7 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
-    <file>tools/alac.exe</file>
     <file>tools/avs2wav.exe</file>
     <file>tools/faad.exe</file>
     <file>tools/mac.exe</file>
@@ -9,6 +8,7 @@
     <file>tools/mpg123.exe</file>
     <file>tools/oggdec.exe</file>
     <file>tools/opusdec.exe</file>
+    <file>tools/refalac.exe</file>
     <file>tools/shorten.exe</file>
     <file>tools/speexdec.exe</file>
     <file>tools/tta.exe</file>

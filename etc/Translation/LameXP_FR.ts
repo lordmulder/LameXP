@@ -180,14 +180,6 @@
         <translation>Aften - Encodeur audio A/52</translation>
     </message>
     <message>
-        <source>ALAC Decoder</source>
-        <translation>Décodeur ALAC</translation>
-    </message>
-    <message>
-        <source>Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious.</source>
-        <translation>Copyright (c) 2004 David Hammerton. Contributions par Cody Brocious.</translation>
-    </message>
-    <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -289,6 +281,14 @@
     </message>
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>refalac - Win32 command line ALAC encoder/decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
