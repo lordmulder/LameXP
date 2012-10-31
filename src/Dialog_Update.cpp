@@ -60,6 +60,7 @@ static const char *update_mirrors_prim[] =
 	"http://mulder.bplaced.net/",
 	"http://mulder.cwsurf.de/",
 	"http://mulder.6te.net/",
+	"http://mulder.webuda.com/",
 //	"http://free.pages.at/borschdfresser/",
 	"http://lamexp.sourceforge.net/",
 	"http://lordmulder.github.com/LameXP/",
@@ -439,14 +440,14 @@ void UpdateDialog::checkForUpdates(void)
 				connectionScore++;
 				progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
 				QApplication::processEvents();
-				Sleep(125);
+				Sleep(64);
 			}
 			if(httpOk)
 			{
 				connectionScore++;
 				progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
 				QApplication::processEvents();
-				Sleep(125);
+				Sleep(64);
 			}
 			QFile::remove(outFile);
 		}
@@ -517,7 +518,7 @@ void UpdateDialog::checkForUpdates(void)
 		else
 		{
 			QApplication::processEvents();
-			Sleep(125);
+			Sleep(64);
 		}
 	}
 	
