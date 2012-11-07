@@ -1398,7 +1398,7 @@
                <x>0</x>
                <y>0</y>
                <width>607</width>
-               <height>1668</height>
+               <height>1762</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -2511,7 +2511,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="9" column="0">
+                <item row="10" column="0">
                  <widget class="QGroupBox" name="groupBox_11">
                   <property name="font">
                    <font>
@@ -2850,7 +2850,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="10" column="0">
+                <item row="11" column="0">
                  <widget class="QGroupBox" name="groupBox_12">
                   <property name="font">
                    <font>
@@ -3014,7 +3014,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="11" column="0">
+                <item row="12" column="0">
                  <widget class="QGroupBox" name="groupBox_13">
                   <property name="font">
                    <font>
@@ -3870,6 +3870,175 @@
                         <string>Encoding Complexity:</string>
                        </property>
                       </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="9" column="0">
+                 <widget class="QGroupBox" name="groupBox_17">
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="title">
+                   <string> Overwrite Mode </string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_42">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="gridLayout_41">
+                     <item row="1" column="4">
+                      <spacer name="horizontalSpacer_63">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="7">
+                      <widget class="QRadioButton" name="radioButtonOverwriteModeReplaces">
+                       <property name="text">
+                        <string>Overwrite Existing File</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="5">
+                      <widget class="QRadioButton" name="radioButtonOverwriteModeSkipFile">
+                       <property name="text">
+                        <string>Skip File</string>
+                       </property>
+                       <property name="checked">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="3">
+                      <widget class="QRadioButton" name="radioButtonOverwriteModeKeepBoth">
+                       <property name="text">
+                        <string>Keep Both Files (Default)</string>
+                       </property>
+                       <property name="checked">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QLabel" name="label_24">
+                       <property name="text">
+                        <string>If Target File Already Exists:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="6">
+                      <spacer name="horizontalSpacer_64">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="2">
+                      <spacer name="horizontalSpacer_65">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="2" column="1" colspan="7">
+                      <spacer name="verticalSpacer_37">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>6</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1" colspan="7">
+                      <spacer name="verticalSpacer_36">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>6</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="9" rowspan="3">
+                      <spacer name="horizontalSpacer_62">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="0" rowspan="3">
+                      <spacer name="horizontalSpacer_61">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="8">
+                      <spacer name="horizontalSpacer_66">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
                      </item>
                     </layout>
                    </item>

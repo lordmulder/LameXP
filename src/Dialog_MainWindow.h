@@ -119,6 +119,7 @@ private slots:
 	void outputFolderRowsInserted(const QModelIndex &parent, int start, int end);
 	void outputFolderViewClicked(const QModelIndex &index);
 	void outputFolderViewMoved(const QModelIndex &index);
+	void overwriteModeChanged(int id);
 	void playlistEnabledChanged(void);
 	void prependRelativePathChanged(void);
 	void previewContextActionTriggered(void);
@@ -212,6 +213,7 @@ private:
 	QActionGroup *m_tabActionGroup;
 	QButtonGroup *m_encoderButtonGroup;
 	QButtonGroup *m_modeButtonGroup;
+	QButtonGroup *m_overwriteButtonGroup;
 
 	CustomEventFilter *m_evenFilterCustumParamsHelp;
 	CustomEventFilter *m_evenFilterOutputFolderMouse;

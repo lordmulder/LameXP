@@ -119,6 +119,7 @@ LAMEXP_MAKE_ID(customParametersFLAC, "AdvancedOptions/CustomParameters/FLAC");
 LAMEXP_MAKE_ID(customParametersOpus, "AdvancedOptions/CustomParameters/OpusEnc");
 LAMEXP_MAKE_ID(renameOutputFilesEnabled, "AdvancedOptions/RenameOutputFiles/Enabled");
 LAMEXP_MAKE_ID(renameOutputFilesPattern, "AdvancedOptions/RenameOutputFiles/Pattern");
+LAMEXP_MAKE_ID(overwriteMode, "AdvancedOptions/OverwriteMode");
 LAMEXP_MAKE_ID(hibernateComputer, "AdvancedOptions/HibernateComputerOnShutdown");
 LAMEXP_MAKE_ID(metaInfoPosition, "MetaInformation/PlaylistPosition");
 LAMEXP_MAKE_ID(maximumInstances, "AdvancedOptions/Threading/MaximumInstances");
@@ -274,6 +275,12 @@ void SettingsModel::validate(void)
 			this->hibernateComputer(false);
 		}
 	}
+
+	if(this->overwriteMode() < SettingsModel::Overwrite_KeepBoth || this->overwriteMode() > SettingsModel::Overwrite_Replaces)
+	{
+		this->overwriteMode(SettingsModel::Overwrite_KeepBoth);
+	}
+
 }
 
 void SettingsModel::syncNow(void)
@@ -417,6 +424,7 @@ LAMEXP_MAKE_OPTION_S(customParametersFLAC, QString());
 LAMEXP_MAKE_OPTION_S(customParametersOpus, QString());
 LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled, false);
 LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern, "[<TrackNo>] <Artist> - <Title>");
+LAMEXP_MAKE_OPTION_I(overwriteMode, Overwrite_KeepBoth);
 LAMEXP_MAKE_OPTION_U(metaInfoPosition, UINT_MAX);
 LAMEXP_MAKE_OPTION_U(maximumInstances, 0);
 LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation));

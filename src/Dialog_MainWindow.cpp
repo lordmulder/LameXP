@@ -407,6 +407,15 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	helpCustomParamAften->installEventFilter(m_evenFilterCustumParamsHelp);
 	helpCustomParamOpus->installEventFilter(m_evenFilterCustumParamsHelp);
 	
+	m_overwriteButtonGroup = new QButtonGroup(this);
+	m_overwriteButtonGroup->addButton(radioButtonOverwriteModeKeepBoth, SettingsModel::Overwrite_KeepBoth);
+	m_overwriteButtonGroup->addButton(radioButtonOverwriteModeSkipFile, SettingsModel::Overwrite_SkipFile);
+	m_overwriteButtonGroup->addButton(radioButtonOverwriteModeReplaces, SettingsModel::Overwrite_Replaces);
+
+	radioButtonOverwriteModeKeepBoth->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_KeepBoth);
+	radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
+	radioButtonOverwriteModeReplaces->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces);
+
 	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
 	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
 	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
@@ -446,6 +455,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
+	connect(m_overwriteButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(overwriteModeChanged(int)));
 	connect(m_evenFilterCustumParamsHelp, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 
 	//--------------------------------
@@ -632,7 +642,8 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_delayedFileTimer);
 	LAMEXP_DELETE(m_metaInfoModel);
 	LAMEXP_DELETE(m_encoderButtonGroup);
-	LAMEXP_DELETE(m_encoderButtonGroup);
+	LAMEXP_DELETE(m_modeButtonGroup);
+	LAMEXP_DELETE(m_overwriteButtonGroup);
 	LAMEXP_DELETE(m_sourceFilesContextMenu);
 	LAMEXP_DELETE(m_outputFolderFavoritesMenu);
 	LAMEXP_DELETE(m_outputFolderContextMenu);
@@ -3942,6 +3953,23 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 	LAMEXP_DELETE(dialog);
 }
 
+void MainWindow::overwriteModeChanged(int id)
+{
+	qWarning("overwriteModeChanged: %d", id);
+	
+	if((id == SettingsModel::Overwrite_Replaces) && (m_settings->overwriteMode() != SettingsModel::Overwrite_Replaces))
+	{
+		if(QMessageBox::warning(this, tr("Overwrite Mode"), tr("Warning: This mode may overwrite existing files with no way to revert!"), tr("Continue"), tr("Revert"), QString(), 1) != 0)
+		{
+			radioButtonOverwriteModeKeepBoth->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_KeepBoth);
+			radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
+			return;
+		}
+	}
+
+	m_settings->overwriteMode(id);
+}
+
 /*
  * Reset all advanced options to their defaults
  */
@@ -3979,6 +4007,9 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	lineEditCustomParamOpus->setText(m_settings->customParametersFLACDefault());
 	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
 	lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_KeepBoth) radioButtonOverwriteModeKeepBoth->click();
+	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_SkipFile) radioButtonOverwriteModeSkipFile->click();
+	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_Replaces) radioButtonOverwriteModeReplaces->click();
 	customParamsChanged();
 	scrollArea->verticalScrollBar()->setValue(0);
 }

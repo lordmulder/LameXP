@@ -1958,6 +1958,42 @@
         <source>Show Help</source>
         <translation>Hilfethemen anzeigen</translation>
     </message>
+    <message>
+        <source> Overwrite Mode </source>
+        <translation> Überschreiben Modus </translation>
+    </message>
+    <message>
+        <source>Overwrite Existing File</source>
+        <translation>Zieldatei ersetzen</translation>
+    </message>
+    <message>
+        <source>Skip File</source>
+        <translation>Überspringen</translation>
+    </message>
+    <message>
+        <source>Keep Both Files (Default)</source>
+        <translation>Beide erhalten (Standard)</translation>
+    </message>
+    <message>
+        <source>If Target File Already Exists:</source>
+        <translation>Bei existierender Zieldatei:</translation>
+    </message>
+    <message>
+        <source>Overwrite Mode</source>
+        <translation>Überschreiben Modus</translation>
+    </message>
+    <message>
+        <source>Warning: This mode may overwrite existing files with no way to revert!</source>
+        <translation>Achtung: Dieser Modus überschreibt möglicherweise existierende Dateien!</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Fortfahren</translation>
+    </message>
+    <message>
+        <source>Revert</source>
+        <translation>Zurück</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

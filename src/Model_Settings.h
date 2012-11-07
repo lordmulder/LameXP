@@ -72,6 +72,12 @@ public:
 		ABRMode = 1,
 		CBRMode = 2
 	};
+	enum Overwrite
+	{
+		Overwrite_KeepBoth = 0,
+		Overwrite_SkipFile = 1,
+		Overwrite_Replaces = 2
+	};
 	
 	//Consts
 	static const int mp3Bitrates[15];
@@ -130,6 +136,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(customParametersOpus);
 	LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled);
 	LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern);
+	LAMEXP_MAKE_OPTION_I(overwriteMode);
 	LAMEXP_MAKE_OPTION_U(metaInfoPosition);
 	LAMEXP_MAKE_OPTION_U(maximumInstances);
 	LAMEXP_MAKE_OPTION_S(customTempPath);

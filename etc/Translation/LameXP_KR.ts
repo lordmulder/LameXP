@@ -1957,6 +1957,42 @@
         <source>Show Help</source>
         <translation type="unfinished">도움말 표시</translation>
     </message>
+    <message>
+        <source> Overwrite Mode </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite Existing File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep Both Files (Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If Target File Already Exists:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: This mode may overwrite existing files with no way to revert!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Revert</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
