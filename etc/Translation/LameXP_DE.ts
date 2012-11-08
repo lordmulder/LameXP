@@ -2315,6 +2315,26 @@
 </source>
         <translation>WARNUNG: Dekodierte Dateigröße übersteigt 4 GB, Probleme sind vorprogrammiert!</translation>
     </message>
+    <message>
+        <source>Skipped.</source>
+        <translation>Übersprungen.</translation>
+    </message>
+    <message>
+        <source>Target output file already exists, going to skip this file:</source>
+        <translation>Zieldatei existiert bereits, die Datei wird übersprungen:</translation>
+    </message>
+    <message>
+        <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
+        <translation>Wenn existierende Dateien nicht übersprungen werden sollen, ändern Sie bitte den Überschreiben-Modus!</translation>
+    </message>
+    <message>
+        <source>Target output file already exists, going to delete existing file:</source>
+        <translation>Zieldatei existiert bereits, die Datei wird gelöscht und überschrieben:</translation>
+    </message>
+    <message>
+        <source>Failed to delete existing target file, will save to another file name!</source>
+        <translation>Die existierende Datei konnte nicht gelöscht werden, ein anderer Dateiname wird gewählt!</translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>

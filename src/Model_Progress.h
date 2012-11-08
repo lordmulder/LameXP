@@ -48,7 +48,8 @@ public:
 		JobFailed = 3,
 		JobSystem = 4,
 		JobWarning = 5,
-		JobPerformance = 6
+		JobPerformance = 6,
+		JobSkipped = 7
 	};
 	enum SysMsgType
 	{
@@ -91,4 +92,5 @@ private:
 	const QIcon m_iconSystem;
 	const QIcon m_iconWarning;
 	const QIcon m_iconPerformance;
+	const QIcon m_iconSkipped;
 };

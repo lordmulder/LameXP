@@ -433,6 +433,7 @@ void ProcessingDialog::initEncoding(void)
 	for(unsigned int i = 0; i < maximumInstances; i++)
 	{
 		startNextJob();
+		qApp->processEvents();
 	}
 
 	LARGE_INTEGER counter;
@@ -733,6 +734,10 @@ void ProcessingDialog::startNextJob(void)
 	{
 		thread->setRenamePattern(m_settings->renameOutputFilesPattern());
 	}
+	if(m_settings->overwriteMode() != SettingsModel::Overwrite_KeepBoth)
+	{
+		thread->setOverwriteMode((m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile), (m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces));
+	}
 
 	m_threadList.append(thread);
 	m_allJobs.append(thread->getId());
@@ -747,6 +752,12 @@ void ProcessingDialog::startNextJob(void)
 	//Give it a go!
 	m_runningThreads++;
 	thread->start();
+
+	//Give thread some advance
+	for(unsigned int i = 0; i < MAX_INSTANCES; i++)
+	{
+		QThread::yieldCurrentThread();
+	}
 }
 
 AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)

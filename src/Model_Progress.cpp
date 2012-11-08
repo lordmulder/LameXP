@@ -33,7 +33,8 @@ ProgressModel::ProgressModel(void)
 	m_iconFailed(":/icons/exclamation.png"),
 	m_iconSystem(":/icons/computer.png"),
 	m_iconWarning(":/icons/error.png"),
-	m_iconPerformance(":/icons/clock.png")
+	m_iconPerformance(":/icons/clock.png"),
+	m_iconSkipped(":/icons/step_over.png")
 {
 }
 
@@ -91,6 +92,9 @@ QVariant ProgressModel::data(const QModelIndex &index, int role) const
 				break;
 			case JobPerformance:
 				return m_iconPerformance;
+				break;
+			case JobSkipped:
+				return m_iconSkipped;
 				break;
 			default:
 				return m_iconFailed;

@@ -2324,6 +2324,26 @@ Ouvrir le dossier récursivement...</translation>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target output file already exists, going to skip this file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target output file already exists, going to delete existing file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to delete existing target file, will save to another file name!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProcessingDialog</name>
