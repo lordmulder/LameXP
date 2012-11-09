@@ -879,7 +879,7 @@
     </message>
     <message>
         <source>Show DropBox</source>
-        <translation>Mostar DropBox</translation>
+        <translation>Mostrar DropBox</translation>
     </message>
     <message>
         <source>From File...</source>
