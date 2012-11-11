@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QKeccakHash_VS2010", "QKeccakHash_VS2010.vcxproj", "{70E8B639-3DB7-479A-AFED-4CECDD747657}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release_Static|Win32 = Release_Static|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70E8B639-3DB7-479A-AFED-4CECDD747657}.Debug|Win32.ActiveCfg = Debug|Win32
+		{70E8B639-3DB7-479A-AFED-4CECDD747657}.Debug|Win32.Build.0 = Debug|Win32
+		{70E8B639-3DB7-479A-AFED-4CECDD747657}.Release_Static|Win32.ActiveCfg = Release_Static|Win32
+		{70E8B639-3DB7-479A-AFED-4CECDD747657}.Release_Static|Win32.Build.0 = Release_Static|Win32
+		{70E8B639-3DB7-479A-AFED-4CECDD747657}.Release|Win32.ActiveCfg = Release|Win32
+		{70E8B639-3DB7-479A-AFED-4CECDD747657}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
