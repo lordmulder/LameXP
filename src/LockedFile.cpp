@@ -27,6 +27,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QCryptographicHash>
+#include <QKeccakHash>
 
 #include <stdio.h>
 #include <io.h>
@@ -50,27 +51,35 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-static const char *g_seed = "b14bf0ed8d5a62311b366907a6450ea2d52ad8bbc7d520b70400f1dd8ddfa9339011a473";
-static const char *g_salt = "80e0cce7af513880065488568071342e5889d6c5ee96190c303b7260e5c8356c350fbe44";
+static const char *g_blnk = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef";
+static const char *g_seed = "c375d83b4388329408dfcbb4d9a065b6e06d28272f25ef299c70b506e26600af79fd2f866ae24602daf38f25c9d4b7e1";
+static const char *g_salt = "ee9f7bdabc170763d2200a7e3030045aafe380011aefc1730e547e9244c62308aac42a976feeca224ba553de0c4bb883";
 
 static QByteArray fileHash(QFile &file)
 {
-	QByteArray hash = QByteArray::fromHex(g_seed);
-	QByteArray salt = QByteArray::fromHex(g_salt);
-	
+	QByteArray hash = QByteArray::fromHex(g_blnk);
+
 	if(file.isOpen() && file.reset())
 	{
-		QByteArray data = file.readAll();
-		QCryptographicHash sha(QCryptographicHash::Sha1);
-		QCryptographicHash md5(QCryptographicHash::Md5);
+		QKeccakHash keccak;
 
-		for(int r = 0; r < 8; r++)
+		QByteArray data = file.readAll();
+		QByteArray seed = QByteArray::fromHex(g_seed);
+		QByteArray salt = QByteArray::fromHex(g_salt);
+	
+		if(keccak.startBatch(QKeccakHash::hb384))
 		{
-			sha.reset(); md5.reset();
-			sha.addData(hash); md5.addData(hash);
-			sha.addData(data); md5.addData(data);
-			sha.addData(salt); md5.addData(salt);
-			hash = sha.result() + md5.result();
+			bool ok[3];
+			ok[0] = keccak.putBatch(seed);
+			ok[1] = keccak.putBatch(data);
+			ok[2] = keccak.putBatch(salt);
+			if(ok[0] && ok[1] && ok[2])
+			{
+				if(keccak.stopBatch())
+				{
+					hash = keccak.toHex();
+				}
+			}
 		}
 	}
 
@@ -154,7 +163,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	QByteArray hash;
 	if(outFile.isOpen())
 	{
-		hash = fileHash(outFile).toHex();
+		hash = fileHash(outFile);
 		outFile.close();
 	}
 	else

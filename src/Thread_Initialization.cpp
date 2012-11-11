@@ -235,7 +235,7 @@ void InitializationThread::run()
 			unsigned int toolCpuType = mapCpuType.take(toolName);
 			unsigned int toolVersion = mapVersion.take(toolName);
 			
-			if(toolHash.size() != 72)
+			if(toolHash.size() != 96)
 			{
 				throw "The required checksum is missing, take care!";
 			}

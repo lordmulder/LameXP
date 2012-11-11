@@ -107,7 +107,7 @@
     </CustomBuildStep>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;_DEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -120,8 +120,8 @@
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2010.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -151,7 +151,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
     </CustomBuildStep>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(QTDIR5)\qtbase\include;$(QTDIR5)\qtbase\include\QtCore;$(QTDIR5)\qtbase\include\QtGui;$(QTDIR5)\qtbase\include\QtWidgets;$(QTDIR5)\qtbase\include\QtConcurrent;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;_DEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_WIDGETS_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -202,7 +202,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -222,7 +222,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;QKeccakHash_VS2010.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <Version>
       </Version>
@@ -244,7 +244,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <CreateHotPatchableImage>
       </CreateHotPatchableImage>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Message>Copy plugin DLL%27s</Message>
@@ -274,7 +274,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG;QT_NODLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -294,9 +294,9 @@ del "$(TargetDir)imageformats\q???d4.dll"
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>qtmain.lib;QtCore.lib;QtGui.lib;QtSvg.lib;qsvg.lib;qico.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore.lib;QtGui.lib;QtSvg.lib;qsvg.lib;qico.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;QKeccakHash_VS2010.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
-      <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\qt4_static\lib;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\qt4_static\lib;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AssemblyDebug>
@@ -339,7 +339,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>$(QTDIR5)\qtbase\include;$(QTDIR5)\qtbase\include\QtCore;$(QTDIR5)\qtbase\include\QtGui;$(QTDIR5)\qtbase\include\QtWidgets;$(QTDIR5)\qtbase\include\QtConcurrent;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_WIDGETS_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG;QT_NODLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
