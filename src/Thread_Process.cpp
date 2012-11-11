@@ -183,6 +183,7 @@ void ProcessThread::processFile()
 		}
 		else
 		{
+			if(QFileInfo(outFileName).exists() && (QFileInfo(outFileName).size() < 512)) QFile::remove(outFileName);
 			handleMessage(QString("%1\n%2\n\n%3\t%4\n%5\t%6").arg(tr("The format of this file is NOT supported:"), m_audioFile.filePath(), tr("Container Format:"), m_audioFile.formatContainerInfo(), tr("Audio Format:"), m_audioFile.formatAudioCompressInfo()));
 			emit processStateChanged(m_jobId, tr("Unsupported!"), ProgressModel::JobFailed);
 			emit processStateFinished(m_jobId, outFileName, 0);
@@ -252,8 +253,18 @@ void ProcessThread::processFile()
 		bSuccess = m_encoder->encode(sourceFile, m_audioFile, outFileName, &m_aborted);
 	}
 
+	//Clean-up
+	if((!bSuccess) || m_aborted)
+	{
+		QFileInfo fileInfo(outFileName);
+		if(fileInfo.exists() && (fileInfo.size() < 512))
+		{
+			QFile::remove(outFileName);
+		}
+	}
+
 	//Make sure output file exists
-	if(bSuccess && !m_aborted)
+	if(bSuccess && (!m_aborted))
 	{
 		QFileInfo fileInfo(outFileName);
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
