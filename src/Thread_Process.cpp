@@ -138,12 +138,12 @@ void ProcessThread::processFile()
 	case -1:
 		//File name already exists -> skipping!
 		emit processStateChanged(m_jobId, tr("Skipped."), ProgressModel::JobSkipped);
-		emit processStateFinished(m_jobId, outFileName, true);
+		emit processStateFinished(m_jobId, outFileName, -1);
 		return;
 	default:
 		//File name could not be generated
 		emit processStateChanged(m_jobId, tr("Not found!"), ProgressModel::JobFailed);
-		emit processStateFinished(m_jobId, outFileName, false);
+		emit processStateFinished(m_jobId, outFileName, 0);
 		return;
 	}
 
@@ -185,7 +185,7 @@ void ProcessThread::processFile()
 		{
 			handleMessage(QString("%1\n%2\n\n%3\t%4\n%5\t%6").arg(tr("The format of this file is NOT supported:"), m_audioFile.filePath(), tr("Container Format:"), m_audioFile.formatContainerInfo(), tr("Audio Format:"), m_audioFile.formatAudioCompressInfo()));
 			emit processStateChanged(m_jobId, tr("Unsupported!"), ProgressModel::JobFailed);
-			emit processStateFinished(m_jobId, outFileName, false);
+			emit processStateFinished(m_jobId, outFileName, 0);
 			return;
 		}
 	}
@@ -263,7 +263,7 @@ void ProcessThread::processFile()
 
 	//Report result
 	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
-	emit processStateFinished(m_jobId, outFileName, bSuccess);
+	emit processStateFinished(m_jobId, outFileName, (bSuccess ? 1 : 0));
 
 	qDebug("Process thread is done.");
 }

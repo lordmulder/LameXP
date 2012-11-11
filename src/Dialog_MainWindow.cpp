@@ -3955,8 +3955,6 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 
 void MainWindow::overwriteModeChanged(int id)
 {
-	qWarning("overwriteModeChanged: %d", id);
-	
 	if((id == SettingsModel::Overwrite_Replaces) && (m_settings->overwriteMode() != SettingsModel::Overwrite_Replaces))
 	{
 		if(QMessageBox::warning(this, tr("Overwrite Mode"), tr("Warning: This mode may overwrite existing files with no way to revert!"), tr("Continue"), tr("Revert"), QString(), 1) != 0)

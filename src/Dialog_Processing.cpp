@@ -121,6 +121,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_diskObserver(NULL),
 	m_cpuObserver(NULL),
 	m_ramObserver(NULL),
+	m_progressViewFilter(-1),
 	m_firstShow(true)
 {
 	//Init the dialog, from the .ui file
@@ -162,6 +163,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	view_log->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
 	view_log->viewport()->installEventFilter(this);
 	connect(m_progressModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
+	connect(m_progressModel, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)), this, SLOT(progressModelChanged()));
+	connect(m_progressModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
 	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
 	connect(view_log, SIGNAL(activated(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
 	connect(view_log->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(logViewSectionSizeChanged(int,int,int)));
@@ -170,11 +173,34 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_contextMenu = new QMenu();
 	QAction *contextMenuDetailsAction = m_contextMenu->addAction(QIcon(":/icons/zoom.png"), tr("Show details for selected job"));
 	QAction *contextMenuShowFileAction = m_contextMenu->addAction(QIcon(":/icons/folder_go.png"), tr("Browse Output File Location"));
+	m_contextMenu->addSeparator();
 
+	//Create "filter" context menu
+	m_progressViewFilterGroup = new QActionGroup(this);
+	QAction *contextMenuFilterAction[5] = {NULL, NULL, NULL, NULL, NULL};
+	if(QMenu *filterMenu = m_contextMenu->addMenu(QIcon(":/icons/filter.png"), tr("Filter Log Items")))
+	{
+		contextMenuFilterAction[0] = filterMenu->addAction(QIcon(":/icons/media_play.png"), tr("Show Running Only"));
+		contextMenuFilterAction[1] = filterMenu->addAction(QIcon(":/icons/tick.png"), tr("Show Succeeded Only"));
+		contextMenuFilterAction[2] = filterMenu->addAction(QIcon(":/icons/exclamation.png"), tr("Show Failed Only"));
+		contextMenuFilterAction[3] = filterMenu->addAction(QIcon(":/icons/step_over.png"), tr("Show Skipped Only"));
+		contextMenuFilterAction[4] = filterMenu->addAction(QIcon(":/icons/report.png"), tr("Show All Items"));
+		if(QAction *a = contextMenuFilterAction[0]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobRunning); }
+		if(QAction *a = contextMenuFilterAction[1]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobComplete); }
+		if(QAction *a = contextMenuFilterAction[2]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobFailed); }
+		if(QAction *a = contextMenuFilterAction[3]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobSkipped); }
+		if(QAction *a = contextMenuFilterAction[4]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(-1); a->setChecked(true); }
+	}
+
+	//Connect context menu
 	view_log->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(view_log, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
 	connect(contextMenuDetailsAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuDetailsActionTriggered()));
 	connect(contextMenuShowFileAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuShowFileActionTriggered()));
+	for(size_t i = 0; i < 4; i++)
+	{
+		if(contextMenuFilterAction[i]) connect(contextMenuFilterAction[i], SIGNAL(triggered(bool)), this, SLOT(contextMenuFilterActionTriggered()));
+	}
 	SET_FONT_BOLD(contextMenuDetailsAction, true);
 
 	//Enque jobs
@@ -198,6 +224,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	m_allJobs.clear();
 	m_succeededJobs.clear();
 	m_failedJobs.clear();
+	m_skippedJobs.clear();
 	m_userAborted = false;
 	m_forcedAbort = false;
 	m_timerStart = 0I64;
@@ -251,6 +278,7 @@ ProcessingDialog::~ProcessingDialog(void)
 	LAMEXP_DELETE(m_diskObserver);
 	LAMEXP_DELETE(m_cpuObserver);
 	LAMEXP_DELETE(m_ramObserver);
+	LAMEXP_DELETE(m_progressViewFilterGroup);
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -262,6 +290,7 @@ ProcessingDialog::~ProcessingDialog(void)
 		thread->wait(15000);
 		delete thread;
 	}
+
 }
 
 ////////////////////////////////////////////////////////////
@@ -379,6 +408,7 @@ void ProcessingDialog::initEncoding(void)
 	m_allJobs.clear();
 	m_succeededJobs.clear();
 	m_failedJobs.clear();
+	m_skippedJobs.clear();
 	m_userAborted = false;
 	m_forcedAbort = false;
 	m_playList.clear();
@@ -527,7 +557,14 @@ void ProcessingDialog::doneEncoding(void)
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#FFBABA"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
-			SET_PROGRESS_TEXT(tr("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count())));
+			if(m_skippedJobs.count() > 0)
+			{
+				SET_PROGRESS_TEXT(tr("Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count() + m_skippedJobs.count()), QString::number(m_skippedJobs.count())));
+			}
+			else
+			{
+				SET_PROGRESS_TEXT(tr("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count())));
+			}
 			m_systemTray->showMessage(tr("LameXP - Error"), tr("At least one file has failed!"), QSystemTrayIcon::Critical);
 			m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 			QApplication::processEvents();
@@ -538,7 +575,14 @@ void ProcessingDialog::doneEncoding(void)
 			CHANGE_BACKGROUND_COLOR(frame_header, QColor("#E0FFE2"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
-			SET_PROGRESS_TEXT(tr("All files completed successfully."));
+			if(m_skippedJobs.count() > 0)
+			{
+				SET_PROGRESS_TEXT(tr("All files completed successfully. Skipped %1 files.").arg(QString::number(m_skippedJobs.count())));
+			}
+			else
+			{
+				SET_PROGRESS_TEXT(tr("All files completed successfully."));
+			}
 			m_systemTray->showMessage(tr("LameXP - Done"), tr("All files completed successfully."), QSystemTrayIcon::Information);
 			m_systemTray->setIcon(QIcon(":/icons/cd_add.png"));
 			QApplication::processEvents();
@@ -569,22 +613,39 @@ void ProcessingDialog::doneEncoding(void)
 	}
 }
 
-void ProcessingDialog::processFinished(const QUuid &jobId, const QString &outFileName, bool success)
+void ProcessingDialog::processFinished(const QUuid &jobId, const QString &outFileName, int success)
 {
-	if(success)
+	if(success > 0)
 	{
 		m_playList.insert(jobId, outFileName);
 		m_succeededJobs.append(jobId);
+	}
+	else if(success < 0)
+	{
+		m_playList.insert(jobId, outFileName);
+		m_skippedJobs.append(jobId);
 	}
 	else
 	{
 		m_failedJobs.append(jobId);
 	}
+
+	//Update filter as soon as a job finished!
+	if(m_progressViewFilter >= 0)
+	{
+		QTimer::singleShot(0, this, SLOT(progressViewFilterChanged()));
+	}
 }
 
 void ProcessingDialog::progressModelChanged(void)
 {
-	view_log->scrollToBottom();
+	//Update filter as soon as the model changes!
+	if(m_progressViewFilter >= 0)
+	{
+		QTimer::singleShot(0, this, SLOT(progressViewFilterChanged()));
+	}
+
+	QTimer::singleShot(0, view_log, SLOT(scrollToBottom()));
 }
 
 void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
@@ -682,6 +743,43 @@ void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 	}
 }
 
+void ProcessingDialog::contextMenuFilterActionTriggered(void)
+{
+	if(QAction *action = dynamic_cast<QAction*>(QObject::sender()))
+	{
+		if(action->data().type() == QVariant::Int)
+		{
+			m_progressViewFilter = action->data().toInt();
+			progressViewFilterChanged();
+			QTimer::singleShot(0, this, SLOT(progressViewFilterChanged()));
+			QTimer::singleShot(0, view_log, SLOT(scrollToBottom()));
+			action->setChecked(true);
+		}
+	}
+}
+
+void ProcessingDialog::progressViewFilterChanged(void)
+{
+	unsigned int counter = 0;
+
+	for(int i = 0; i < view_log->model()->rowCount(); i++)
+	{
+		QModelIndex index = (m_progressViewFilter >= 0) ? m_progressModel->index(i, 0) : QModelIndex();
+		const bool bHide = index.isValid() ? (m_progressModel->getJobState(index) != m_progressViewFilter) : false;
+		view_log->setRowHidden(i, bHide);
+		if(!bHide) counter++;
+	}
+
+	if((m_progressViewFilter >= 0) && (counter == 0))
+	{
+		qWarning("Filter does NOT match on any item, reverting to show all!");
+		for(int i = 0; i < view_log->model()->rowCount(); i++)
+		{
+			view_log->setRowHidden(i, false);
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
@@ -746,7 +844,7 @@ void ProcessingDialog::startNextJob(void)
 	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateFinished(QUuid,QString,bool)), this, SLOT(processFinished(QUuid,QString,bool)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
 	
 	//Give it a go!

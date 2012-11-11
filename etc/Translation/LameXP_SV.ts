@@ -2559,32 +2559,32 @@
         <translation>Kan inte skriva till den specificerade mappen. Välj en annan destination!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3962"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3960"/>
         <source>Overwrite Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3962"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3960"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3962"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3960"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3962"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3960"/>
         <source>Revert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4028"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4026"/>
         <source>Already Running</source>
         <translation>Körs redan</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4028"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4026"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP körs redan, använd den redan startade instansen!</translation>
     </message>
@@ -3066,141 +3066,181 @@
         <translation>Stäng</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="171"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="174"/>
         <source>Show details for selected job</source>
         <translation>Visa detaljerad info för markerad åtgärd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="172"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="175"/>
         <source>Browse Output File Location</source>
         <translation>Öppna utdatamnappen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="190"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="181"/>
+        <source>Filter Log Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="183"/>
+        <source>Show Running Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="184"/>
+        <source>Show Succeeded Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="185"/>
+        <source>Show Failed Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="186"/>
+        <source>Show Skipped Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="187"/>
+        <source>Show All Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="216"/>
         <source>Encoding Files</source>
         <translation>Kodar om filer</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="190"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="216"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>Dina filer kodas om, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="387"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="417"/>
         <source>Encoding files, please wait...</source>
         <translation>Kodar om filer, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="430"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="460"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Flertrådskörning aktiverad: Kör %1 parallella instanser!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="451"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="481"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Avbrutet! Väntar på att aktiva processer skall avslutas...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="466"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="496"/>
         <source>Encoding: %1 files of %2 completed so far, please wait...</source>
         <translation>Omkodning: %1 fil(er) av %2 bearbetade hittills, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="494"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="524"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Skapar spelningslista, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="504"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="534"/>
         <source>Process was aborted by the user after %1 file(s)!</source>
         <translation>Åtgärden avbröts av användaren efter %1 fil(er)!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="504"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="534"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Åtgärden avbröts i förtid av användaren!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="505"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="535"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Avbrutet</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="505"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="535"/>
         <source>Process was aborted by the user.</source>
         <translation>Åtgärden avbröts av användaren.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="521"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="551"/>
         <source>Process finished after %1.</source>
         <translation>Åtgärden slutförd efter %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="530"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="562"/>
+        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="566"/>
         <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
         <translation>Fel: %1 av %2 filer misslyckades. Dubbelklicka på det misslyckade objektet för detaljerad information!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="531"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="568"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Fel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="531"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="568"/>
         <source>At least one file has failed!</source>
         <translation>Minst en fil har misslyckats!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="541"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="542"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="580"/>
+        <source>All files completed successfully. Skipped %1 files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_Processing.cpp" line="584"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="586"/>
         <source>All files completed successfully.</source>
         <translation>Alla filer korrekt omkodade.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="542"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="586"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Klar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="978"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1076"/>
         <source>Playlist creation failed</source>
         <translation>Kunde inte skapa spelningslista</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="978"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1076"/>
         <source>The playlist file could not be created:</source>
         <translation>Spelningslistan kunde inte skapas:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1048"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1146"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Varning! Datorn kommer att stängas av om %1 sekunder...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1052"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1053"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1150"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1151"/>
         <source>Cancel Shutdown</source>
         <translation>Avbryt avstängning</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1108"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1206"/>
         <source>hour(s)</source>
         <translation>timma(r)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1113"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1207"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1211"/>
         <source>minute(s)</source>
         <translation>minut(er)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1114"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1118"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1212"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1216"/>
         <source>second(s)</source>
         <translation>sekund(er)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1119"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1217"/>
         <source>millisecond(s)</source>
         <translation>millisekund(er)</translation>
     </message>

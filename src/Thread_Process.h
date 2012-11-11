@@ -55,7 +55,7 @@ private slots:
 signals:
 	void processStateInitialized(const QUuid &jobId, const QString &jobName, const QString &jobInitialStatus, int jobInitialState);
 	void processStateChanged(const QUuid &jobId, const QString &newStatus, int newState);
-	void processStateFinished(const QUuid &jobId, const QString &outFileName, bool success);
+	void processStateFinished(const QUuid &jobId, const QString &outFileName, int success);
 	void processMessageLogged(const QUuid &jobId, const QString &line);
 
 private:

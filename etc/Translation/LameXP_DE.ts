@@ -2478,6 +2478,38 @@
         <source>millisecond(s)</source>
         <translation>Millisekunde(n)</translation>
     </message>
+    <message>
+        <source>Filter Log Items</source>
+        <translation>Logeinträge filtern</translation>
+    </message>
+    <message>
+        <source>Show Running Only</source>
+        <translation>Nur laufende anzeigen</translation>
+    </message>
+    <message>
+        <source>Show Succeeded Only</source>
+        <translation>Nur erfolgreiche anzeigen</translation>
+    </message>
+    <message>
+        <source>Show Failed Only</source>
+        <translation>Nur fehlgeschlagene anzeigen</translation>
+    </message>
+    <message>
+        <source>Show Skipped Only</source>
+        <translation>Nur übersprungene anzeigen</translation>
+    </message>
+    <message>
+        <source>Show All Items</source>
+        <translation>Alle Einträge anzeigen</translation>
+    </message>
+    <message>
+        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
+        <translation>Fehler: %1 von %2 Dateien sind fehlgeschlagen (%3 übersprungen). Doppelklicken um Details anzuzeigen!</translation>
+    </message>
+    <message>
+        <source>All files completed successfully. Skipped %1 files.</source>
+        <translation>Alle Dateien wurden erfolgreich umgewandelt. %1 Dateien wurden übersprungen.</translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

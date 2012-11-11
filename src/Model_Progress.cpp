@@ -222,6 +222,16 @@ const QUuid &ProgressModel::getJobId(const QModelIndex &index)
 	return *(reinterpret_cast<QUuid*>(NULL));
 }
 
+const ProgressModel::JobState ProgressModel::getJobState(const QModelIndex &index) const
+{
+	if(index.row() < m_jobList.count())
+	{
+		return static_cast<JobState>(m_jobState.value(m_jobList.at(index.row()), -1));
+	}
+
+	return static_cast<JobState>(NULL);
+}
+
 void ProgressModel::addSystemMessage(const QString &text, int type)
 {
 	const QUuid &jobId = QUuid::createUuid();

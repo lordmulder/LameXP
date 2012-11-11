@@ -67,6 +67,7 @@ public:
 	//Public functions
 	const QStringList &getLogFile(const QModelIndex &index);
 	const QUuid &getJobId(const QModelIndex &index);
+	const JobState getJobState(const QModelIndex &index) const;
 	void restoreHiddenItems(void);
 
 public slots:

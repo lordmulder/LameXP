@@ -2485,6 +2485,38 @@
         <source>millisecond(s)</source>
         <translation>мс.</translation>
     </message>
+    <message>
+        <source>Filter Log Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Running Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Succeeded Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Failed Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Skipped Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show All Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files completed successfully. Skipped %1 files.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>
