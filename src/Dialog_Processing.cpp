@@ -185,11 +185,11 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 		contextMenuFilterAction[2] = filterMenu->addAction(QIcon(":/icons/exclamation.png"), tr("Show Failed Only"));
 		contextMenuFilterAction[3] = filterMenu->addAction(QIcon(":/icons/step_over.png"), tr("Show Skipped Only"));
 		contextMenuFilterAction[4] = filterMenu->addAction(QIcon(":/icons/report.png"), tr("Show All Items"));
-		if(QAction *a = contextMenuFilterAction[0]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobRunning); }
-		if(QAction *a = contextMenuFilterAction[1]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobComplete); }
-		if(QAction *a = contextMenuFilterAction[2]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobFailed); }
-		if(QAction *a = contextMenuFilterAction[3]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(ProgressModel::JobSkipped); }
-		if(QAction *a = contextMenuFilterAction[4]) { m_progressViewFilterGroup->addAction(a); a->setCheckable(true); a->setData(-1); a->setChecked(true); }
+		if(QAction *act = contextMenuFilterAction[0]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobRunning); }
+		if(QAction *act = contextMenuFilterAction[1]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobComplete); }
+		if(QAction *act = contextMenuFilterAction[2]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobFailed); }
+		if(QAction *act = contextMenuFilterAction[3]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobSkipped); }
+		if(QAction *act = contextMenuFilterAction[4]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(-1); act->setChecked(true); }
 	}
 
 	//Connect context menu
@@ -197,7 +197,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	connect(view_log, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
 	connect(contextMenuDetailsAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuDetailsActionTriggered()));
 	connect(contextMenuShowFileAction, SIGNAL(triggered(bool)), this, SLOT(contextMenuShowFileActionTriggered()));
-	for(size_t i = 0; i < 4; i++)
+	for(size_t i = 0; i < 5; i++)
 	{
 		if(contextMenuFilterAction[i]) connect(contextMenuFilterAction[i], SIGNAL(triggered(bool)), this, SLOT(contextMenuFilterActionTriggered()));
 	}
