@@ -1,0 +1,777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\Global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Tool_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Decoder_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_About.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_DropBox.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_LogView.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_MainWindow.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_MetaInfo.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_Processing.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_SplashScreen.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_Update.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_WorkingBanner.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_AAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_FLAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_MP3.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_Vorbis.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_Wave.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Filter_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Model_AudioFile.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Model_FileList.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Model_MetaInfo.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Model_Progress.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Registry_Decoder.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_ShellIntegration.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_DiskObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_Initialization.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_MessageHandler.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_MessageProducer.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_Process.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Documents.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Flags.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Icons.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Images.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Localization.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_AAC.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_WMA.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Abstract.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_AC3.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_ADPCM.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_ALAC.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_FLAC.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_MAC.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_MP3.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Musepack.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Shorten.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Speex.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_TTA.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Vorbis.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Wave.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_WavPack.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_WorkingBanner.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_About.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_DropBox.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_LogView.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_MainWindow.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_MetaInfo.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_Processing.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_SplashScreen.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_Update.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_Wave.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_AAC.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_Abstract.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_FLAC.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_MP3.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_Vorbis.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Filter_ToneAdjust.cpp">
+      <Filter>Source Files\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Filter_Abstract.cpp">
+      <Filter>Source Files\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Filter_Downmix.cpp">
+      <Filter>Source Files\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Filter_Normalize.cpp">
+      <Filter>Source Files\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Filter_Resample.cpp">
+      <Filter>Source Files\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_Settings.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_Artwork.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_AudioFile.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_FileList.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_FileSystem.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_MetaInfo.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_Progress.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_Process.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_DiskObserver.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_FileAnalyzer.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_Initialization.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_MessageHandler.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_MessageProducer.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WinSevenTaskbar.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LockedFile.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlaylistImporter.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Registry_Decoder.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShellIntegration.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tool_Abstract.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Genres.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_AC3.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_AC3.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialog_CueImport.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Dialog_CueImport.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model_CueSheet.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Model_CueSheet.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_CueSplitter.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_CueSplitter.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Avisynth.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_AAC_FHG.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_AAC_FHG.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Decd.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Encd.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Misc.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_CPUObserver.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_CPUObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_RAMObserver.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_RAMObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_AAC_QAAC.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_AAC_QAAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tool_WaveProperties.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Tool_WaveProperties.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_DCA.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_DCA.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_FileAnalyzer_Task.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_Task.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_FileAnalyzer_ST.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_ST.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_Opus.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_Opus.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Decoder_Opus.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_CustomEventFilter.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WinMain.cpp">
+      <Filter>Source Files\VS2012</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_WorkingBanner.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_DropBox.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_LogViewDialog.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_MainWindow.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_MetaInfo.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_ProcessingDialog.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_SplashScreen.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_UpdateDialog.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_AAC.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_WMA.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_AC3.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_ADPCM.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_ALAC.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_FLAC.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_MAC.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_MP3.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Musepack.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Shorten.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Speex.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_TTA.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Vorbis.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Wave.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_WavPack.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Filter_ToneAdjust.h">
+      <Filter>Header Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Filter_Downmix.h">
+      <Filter>Header Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Filter_Normalize.h">
+      <Filter>Header Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Filter_Resample.h">
+      <Filter>Header Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model_Artwork.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model_Settings.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model_FileSystem.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Genres.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LockedFile.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlaylistImporter.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WinSevenTaskbar.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\UIC_CueSheetImport.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Avisynth.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Decoder_Opus.h">
+      <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LameXP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="gui\DropBox.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\LogViewDialog.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\MainWindow.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\MetaInfo.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\ProcessingDialog.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\SplashScreen.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\UpdateDialog.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\WorkingBanner.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Documents.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Flags.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Icons.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Images.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Localization.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Decoder_Abstract.h">
+      <Filter>Header Files\Decoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_Wave.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_AAC.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_Abstract.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_FLAC.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_MP3.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_Vorbis.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_WorkingBanner.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_About.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_DropBox.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_LogView.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_MainWindow.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_MetaInfo.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_Processing.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_SplashScreen.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_Update.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Filter_Abstract.h">
+      <Filter>Header Files\Filters</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Model_AudioFile.h">
+      <Filter>Header Files\Models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Model_FileList.h">
+      <Filter>Header Files\Models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Model_MetaInfo.h">
+      <Filter>Header Files\Models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Model_Progress.h">
+      <Filter>Header Files\Models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_Process.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_DiskObserver.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_FileAnalyzer.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_Initialization.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_MessageHandler.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_MessageProducer.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Registry_Decoder.h">
+      <Filter>Header Files\Misc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\ShellIntegration.h">
+      <Filter>Header Files\Misc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Tool_Abstract.h">
+      <Filter>Header Files\Misc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_AC3.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\CueSheetImport.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Dialog_CueImport.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Model_CueSheet.h">
+      <Filter>Header Files\Models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CueSplitter.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_AAC_FHG.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Encd.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Misc.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Decd.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CPUObserver.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_RAMObserver.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_AAC_QAAC.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Tool_WaveProperties.h">
+      <Filter>Header Files\Misc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_DCA.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_FileAnalyzer_Task.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_FileAnalyzer_ST.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_Opus.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\CustomEventFilter.h">
+      <Filter>Header Files\Misc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\AboutDialog.ui">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\MainIcon.ico" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{89d327eb-a2f0-431a-b412-b172a8db93df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{b01edff8-d1a1-4ef2-a04f-dc208e4f0d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{c63683a5-0526-43fc-92ec-8be2c69c151b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{4d7d515e-4b66-460c-8008-447a4cc0aac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{58a5f533-07b8-4b17-8a6f-481aa31cb336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\MOC">
+      <UniqueIdentifier>{0bf1b1bc-3b87-4a51-b7e7-c94a61943b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\QRC">
+      <UniqueIdentifier>{9b4e5b21-f71c-4a03-9d82-47ff9ec447b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\UIC">
+      <UniqueIdentifier>{b3ec6e98-7950-4857-bef2-039225c16fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Decoders">
+      <UniqueIdentifier>{8c221bf1-2d34-47f4-9219-f7fb71e0efa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dialogs">
+      <UniqueIdentifier>{03fcf9d8-a87b-4ebd-95d6-236c0344284f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Encoders">
+      <UniqueIdentifier>{93f30d33-da07-4034-8598-7402b75dfdb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Filters">
+      <UniqueIdentifier>{0416f66b-49ba-4f61-82f5-cc8c2a39440d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{ff018374-4927-4d66-af04-b29cc1df6e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Threads">
+      <UniqueIdentifier>{9edb911f-6402-4fe8-b20b-a420341ebcdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{ce0f5867-3ceb-466e-896c-cf6ebce426c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Decoders">
+      <UniqueIdentifier>{8a5e7f0a-3332-433a-b194-f9ae44602b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Encoders">
+      <UniqueIdentifier>{81b7e58a-2bee-407c-b4e0-01c698bad44a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dialogs">
+      <UniqueIdentifier>{6a49c9d3-3787-418c-8237-59a2626d80de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Filters">
+      <UniqueIdentifier>{e5180318-3e07-4bcd-833f-d6cd74a67c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models">
+      <UniqueIdentifier>{bb8a339e-5725-433f-a677-906441091975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Threads">
+      <UniqueIdentifier>{d5a0daf9-6132-4c4a-b60f-3579fd207bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Misc">
+      <UniqueIdentifier>{36024ab5-840b-4c4f-a562-1bd4c15eded9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VS2012">
+      <UniqueIdentifier>{706d6d8f-831c-4ec7-8e20-2ed65f012d11}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

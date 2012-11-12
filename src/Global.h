@@ -219,8 +219,8 @@ while(0)
 #endif
 
 //Check for CPU-compatibility options
-#if !defined(_M_X64) && defined(_M_IX86_FP)
-	#if (_M_IX86_FP != 0)
+#if !defined(_M_X64) && defined(_MSC_VER) && defined(_M_IX86_FP)
+	#if (_M_IX86_FP != 0) && (_MSC_VER < 1700)
 		#error We should not enabled SSE or SSE2 in release builds!
 	#endif
 #endif
