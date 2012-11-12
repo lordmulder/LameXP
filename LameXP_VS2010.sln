@@ -5,19 +5,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LameXP", "LameXP_VS2010.vcx
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug_Qt5|Win32 = Debug_Qt5|Win32
 		Debug|Win32 = Debug|Win32
-		Release_Static_Qt5|Win32 = Release_Static_Qt5|Win32
 		Release_Static|Win32 = Release_Static|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Debug_Qt5|Win32.ActiveCfg = Debug_Qt5|Win32
-		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Debug_Qt5|Win32.Build.0 = Debug_Qt5|Win32
 		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Debug|Win32.ActiveCfg = Debug|Win32
 		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Debug|Win32.Build.0 = Debug|Win32
-		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Release_Static_Qt5|Win32.ActiveCfg = Release_Static_Qt5|Win32
-		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Release_Static_Qt5|Win32.Build.0 = Release_Static_Qt5|Win32
 		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Release_Static|Win32.ActiveCfg = Release_Static|Win32
 		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Release_Static|Win32.Build.0 = Release_Static|Win32
 		{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}.Release|Win32.ActiveCfg = Release|Win32
