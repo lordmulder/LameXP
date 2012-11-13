@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WIN32_WINNT 0x0500;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_DEBUG"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -66,9 +66,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib Winmm.lib Shlwapi.lib Wininet.lib psapi.lib PowrProf.lib"
+				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib Winmm.lib Shlwapi.lib Wininet.lib psapi.lib PowrProf.lib QKeccakHash_VS2008.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(ConfigurationName)&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				EntryPointSymbol="lamexp_entry_point"
@@ -132,7 +132,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WIN32_WINNT 0x0500;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -156,11 +156,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib Shlwapi.lib Wininet.lib PowrProf.lib"
+				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib Shlwapi.lib Wininet.lib PowrProf.lib QKeccakHash_VS2008.lib"
 				ShowProgress="2"
 				Version=""
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(QTDIR)\plugins\imageformats&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="false"
 				AssemblyDebug="0"
 				GenerateMapFile="false"
@@ -231,7 +231,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WIN32_WINNT 0x0500;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG;QT_NODLL"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -255,10 +255,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib Shlwapi.lib Wininet.lib PowrProf.lib"
+				AdditionalDependencies="qtmain.lib QtCore.lib QtGui.lib QtSvg.lib qsvg.lib qico.lib Winmm.lib imm32.lib ws2_32.lib Shlwapi.lib Wininet.lib PowrProf.lib QKeccakHash_VS2008.lib"
 				ShowProgress="2"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\lib&quot;;&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\lib&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(ConfigurationName)&quot;;&quot;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="false"
 				AssemblyDebug="0"
@@ -2767,7 +2767,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
 					/>
 				</FileConfiguration>
@@ -2777,7 +2777,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
 					/>
 				</FileConfiguration>
@@ -2787,7 +2787,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="UIC &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
 						Outputs="&quot;$(SolutionDir)tmp\UIC_$(SafeInputName).h&quot;"
 					/>
 				</FileConfiguration>
