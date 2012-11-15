@@ -80,6 +80,7 @@
 ..\..\src\Thread_RAMObserver.cpp 
 ..\..\src\Tool_Abstract.cpp 
 ..\..\src\Tool_WaveProperties.cpp 
+..\..\src\WinMain.cpp 
 ..\..\src\WinSevenTaskbar.cpp 
 ..\..\src\Config.h 
 ..\..\src\CustomEventFilter.h 
