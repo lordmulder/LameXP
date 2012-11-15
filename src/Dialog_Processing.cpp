@@ -63,6 +63,7 @@
 #include <QSystemTrayIcon>
 #include <QProcess>
 #include <QProgressDialog>
+#include <QResizeEvent>
 #include <QTime>
 
 #include <MMSystem.h>
@@ -98,6 +99,15 @@ while(0)
 { \
 	QFont _font = WIDGET->font(); \
 	_font.setBold(BOLD); WIDGET->setFont(_font); \
+} \
+while(0)
+
+#define SET_TEXT_COLOR(WIDGET, COLOR) do \
+{ \
+	QPalette _palette = WIDGET->palette(); \
+	_palette.setColor(QPalette::WindowText, (COLOR)); \
+	_palette.setColor(QPalette::Text, (COLOR)); \
+	WIDGET->setPalette(_palette); \
 } \
 while(0)
 
@@ -190,6 +200,19 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 		if(QAction *act = contextMenuFilterAction[2]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobFailed); }
 		if(QAction *act = contextMenuFilterAction[3]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobSkipped); }
 		if(QAction *act = contextMenuFilterAction[4]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(-1); act->setChecked(true); }
+	}
+
+	//Create info label
+	if(m_filterInfoLabel = new QLabel(view_log))
+	{
+		m_filterInfoLabel->setFrameShape(QFrame::NoFrame);
+		m_filterInfoLabel->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+		m_filterInfoLabel->setUserData(0, reinterpret_cast<QObjectUserData*>(-1));
+		SET_FONT_BOLD(m_filterInfoLabel, true);
+		SET_TEXT_COLOR(m_filterInfoLabel, Qt::darkGray);
+		m_filterInfoLabel->setContextMenuPolicy(Qt::CustomContextMenu);
+		connect(m_filterInfoLabel, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
+		m_filterInfoLabel->hide();
 	}
 
 	//Connect context menu
@@ -322,6 +345,9 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 		QTimer::singleShot(1000, this, SLOT(initEncoding()));
 		m_firstShow = false;
 	}
+
+	//Force update geometry
+	resizeEvent(NULL);
 }
 
 void ProcessingDialog::closeEvent(QCloseEvent *event)
@@ -387,6 +413,20 @@ bool ProcessingDialog::event(QEvent *e)
 		return true;
 	default:
 		return QDialog::event(e);
+	}
+}
+
+/*
+ * Window was resized
+ */
+void ProcessingDialog::resizeEvent(QResizeEvent *event)
+{
+	if(event) QDialog::resizeEvent(event);
+
+	if(QWidget *port = view_log->viewport())
+	{
+		QRect geom = port->geometry();
+		m_filterInfoLabel->setGeometry(geom.left() + 16, geom.top() + 16, geom.width() - 32, geom.height() - 32);
 	}
 }
 
@@ -758,6 +798,9 @@ void ProcessingDialog::contextMenuFilterActionTriggered(void)
 	}
 }
 
+/*
+ * Filter progress items
+ */
 void ProcessingDialog::progressViewFilterChanged(void)
 {
 	unsigned int counter = 0;
@@ -772,11 +815,26 @@ void ProcessingDialog::progressViewFilterChanged(void)
 
 	if((m_progressViewFilter >= 0) && (counter == 0))
 	{
-		qWarning("Filter does NOT match on any item, reverting to show all!");
-		for(int i = 0; i < view_log->model()->rowCount(); i++)
+		if(m_filterInfoLabel->isHidden() || (m_filterInfoLabel->userData(0) != reinterpret_cast<QObjectUserData*>(m_progressViewFilter)))
 		{
-			view_log->setRowHidden(i, false);
+			QString iconPath;
+			switch(m_progressViewFilter)
+			{
+				case ProgressModel::JobRunning: iconPath = ":/icons/media_play.png"; break;
+				case ProgressModel::JobComplete: iconPath = ":/icons/tick.png"; break;
+				case ProgressModel::JobFailed: iconPath = ":/icons/exclamation.png"; break;
+				case ProgressModel::JobSkipped: iconPath = ":/icons/step_over.png"; break;
+				default: iconPath = ":/icons/report.png"; break;
+			}
+			m_filterInfoLabel->show();
+			m_filterInfoLabel->setText(QString("&raquo; %1 &laquo;<br><br><img src=\"%2\">").arg(tr("None of the items matches the current filtering rules"), iconPath));
+			m_filterInfoLabel->setUserData(0, reinterpret_cast<QObjectUserData*>(m_progressViewFilter));
+			resizeEvent(NULL);
 		}
+	}
+	else if(!m_filterInfoLabel->isHidden())
+	{
+		m_filterInfoLabel->hide();
 	}
 }
 
