@@ -2509,6 +2509,10 @@
         <source>All files completed successfully. Skipped %1 files.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>None of the items matches the current filtering rules</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

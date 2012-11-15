@@ -88,6 +88,10 @@ Q_IMPORT_PLUGIN(QICOPlugin)
 
 #define LAMEXP_ZERO_MEMORY(X) SecureZeroMemory(&X, sizeof(X))
 
+//Helper macros
+#define _LAMEXP_MAKE_STR(STR) #STR
+#define LAMEXP_MAKE_STR(STR) _LAMEXP_MAKE_STR(STR)
+
 ///////////////////////////////////////////////////////////////////////////////
 // TYPES
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,8 +147,10 @@ static bool g_lamexp_console_attached = false;
 //Compiler detection
 //The following code was borrowed from MPC-HC project: http://mpc-hc.sf.net/
 #if defined(__INTEL_COMPILER)
-	#if (__INTEL_COMPILER >= 1200)
-		static const char *g_lamexp_version_compiler = "ICL 12.x";
+	#if (__INTEL_COMPILER >= 1300)
+		static const char *g_lamexp_version_compiler = "ICL 13." LAMEXP_MAKE_STR(__INTEL_COMPILER_BUILD_DATE);
+	#elif (__INTEL_COMPILER >= 1200)
+		static const char *g_lamexp_version_compiler = "ICL 12." LAMEXP_MAKE_STR(__INTEL_COMPILER_BUILD_DATE);
 	#elif (__INTEL_COMPILER >= 1100)
 		static const char *g_lamexp_version_compiler = "ICL 11.x";
 	#elif (__INTEL_COMPILER >= 1000)

@@ -2510,6 +2510,10 @@
         <source>All files completed successfully. Skipped %1 files.</source>
         <translation>Alle Dateien wurden erfolgreich umgewandelt. %1 Dateien wurden übersprungen.</translation>
     </message>
+    <message>
+        <source>None of the items matches the current filtering rules</source>
+        <translation>Keiner der Einträge entspricht den aktuellen Filterregeln</translation>
+    </message>
 </context>
 <context>
     <name>ProgressModel</name>

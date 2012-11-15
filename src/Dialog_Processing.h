@@ -79,6 +79,7 @@ protected:
 	bool eventFilter(QObject *obj, QEvent *event);
 	virtual bool event(QEvent *e);
 	virtual bool winEvent(MSG *message, long *result);
+	virtual void resizeEvent(QResizeEvent *event);
 
 private:
 	void setCloseButtonEnabled(bool enabled);
@@ -98,6 +99,7 @@ private:
 	QMap<QUuid,QString> m_playList;
 	QMenu *m_contextMenu;
 	QActionGroup *m_progressViewFilterGroup;
+	QLabel *m_filterInfoLabel;
 	unsigned int m_runningThreads;
 	unsigned int m_currentFile;
 	QList<QUuid> m_allJobs;
