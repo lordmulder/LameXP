@@ -3261,23 +3261,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="862"/>
+        <location filename="../../src/Global.cpp" line="868"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation>EXE-filen &apos;%1&apos; stöder inte Windows kompatibilitetsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1117"/>
+        <location filename="../../src/Global.cpp" line="1123"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Qt v%2, du har Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1122"/>
+        <location filename="../../src/Global.cpp" line="1128"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>EXE-filen &apos;%1&apos; är byggd för Qt &apos;%2&apos;, du har Qt &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1135"/>
-        <location filename="../../src/Global.cpp" line="1162"/>
+        <location filename="../../src/Global.cpp" line="1141"/>
+        <location filename="../../src/Global.cpp" line="1168"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Windows 2000 eller senare.</translation>
     </message>

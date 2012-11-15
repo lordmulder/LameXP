@@ -235,6 +235,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       </MapFileName>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <MapExports>false</MapExports>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent>
       <Command>
