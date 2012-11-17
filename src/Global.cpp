@@ -831,7 +831,7 @@ static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
 {
 	while(!lamexp_check_for_debugger())
 	{
-		Sleep(32);
+		Sleep(250);
 	}
 	if(HANDLE thrd = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id))
 	{

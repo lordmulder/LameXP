@@ -21,6 +21,21 @@
 
 #pragma once
 
+// Check Windows SDK version
+// We currently do NOT support the Windows SDK 8.0, because it broke Windows XP support!
+// Also the minimum required Windows SDK version to build LameXP currently is 6.0A
+#include <ntverp.h>
+#if !defined(VER_PRODUCTMAJORVERSION) || !defined(VER_PRODUCTMINORVERSION)
+#error Windows SDK version is NOT defined !!!
+#endif
+#if (VER_PRODUCTMAJORVERSION < 6)
+#error Your Windows SDK is too old (unsupported), please build LameXP with Windows SDK version 7.1! (6.0A or 7.0A should work too)
+#endif
+#if (VER_PRODUCTMAJORVERSION > 6) || ((VER_PRODUCTMAJORVERSION == 6) && (VER_PRODUCTMINORVERSION > 1))
+#error Your Windows SDK is too new (unsupported), please build LameXP with Windows SDK version 7.1! (6.0A or 7.0A should work too)
+#endif
+
+
 // The following macros define the minimum required platform.  The minimum required platform
 // is the earliest version of Windows, Internet Explorer etc. that has the necessary features to run 
 // your application.  The macros work by enabling all features available on platform versions up to and 
