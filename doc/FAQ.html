@@ -11,6 +11,8 @@ a:hover { background-color: #CCCCCC; }
 a:active { color: #551A8B; }
 a:visited { color: #0000EE; }
 .code { background-color: #EAEAEA; }
+.diff_del { color: #660000; background-color: #FF6666; }
+.diff_add { color: #006600; background-color: #66FF66; }
 -->
 </style>
 </head>
@@ -61,7 +63,8 @@ a:visited { color: #0000EE; }
 <li><a href="#9c2e273d">Where can I submit bug reports or feature requests?</a>
 <li><a href="#e5694e3e">What programming language is LameXP written in?</a><br>
 <li><a href="#982cf1c0">Where can I find the LameXP source code?</a>
-<li><a href="#a0c1e92b">What are the prerequisites to build LameXP from the sources?</a></ul>
+<li><a href="#a0c1e92b">What are the prerequisites to build LameXP from the sources?</a>
+<li><a href="#87f001c0">How do I compile latest Qt as 'static' libraries?</a></ul>
 
 <br><br>
 
@@ -926,7 +929,8 @@ LameXP is currently being developed using the following build environment:<br><u
 Also note the following hints:<br><ul>
 <li>Run <font class="code">qtvars.bat</font> (or <font class="code">qtenv2.bat</font>) before launching Visual Studio in order to set up the Qt environment
 <li>Visual Studio 2008 solution/project files are still provided for people targeting Windows 2000
-<li>In order to make "fully static" builds of LameXP, you need to compile/download <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a>
+<li>Visual Studio 2012 solution/project files are now provided too, but make sure you installed "Update 1"
+<li>In order to make "fully static" builds of LameXP, you'll need <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a> (see below!)
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
 <li>Only the "fully static" builds may still run on Windows 2000, due to <a href="http://code.google.com/p/mulder/source/browse/trunk/Utils/EncodePointerLib/README.txt" target="_blank">workarounds</a> we implemented
 <li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
@@ -941,31 +945,44 @@ In order to use the LameXP deployment scripts you need the following tools:<br><
 <li><a href="http://forums.winamp.com/showthread.php?t=329990" target="_blank">Aero plug-in</a></ul>
 <li><a href="http://upx.sourceforge.net/" target="_blank">UPX</a> - the Ultimate Packer for eXecutables
 <li><a href="http://www.matcode.com/mpress.htm" target="_blank">MPRESS</a> - high-performance executable packer for PE32/PE32+
-<li><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x<div style="height:7px"></div>
+<li style="margin-bottom:0.48em"><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x
 <li>NOTE: Copy <font class="code">buildenv.template.txt</font> to <font class="code">buildenv.txt</font> and edit the paths as needed!</ul>
+
+<br><br>
+
+<a name="87f001c0"></a><b>How do I compile latest Qt as 'static' libraries?</b><br>
 <br>
-Instructions to build <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a>:<br><ul>
-<li>Make sure Visual Studio 2010 and Strawberry Perl for Windows are installed
-<li>Download and extract the Qt 4.8.x source code package
-<li>Open a new command window (cmd.exe)
+In order to make "fully static" builds of LameXP, i.e. builds that don't depend pn any DLL's except for the<br>
+obligatory operating system DLL's, you'll need to compile Qt as 'static' libraries. The following simple<br>
+instructions should make it easy to build Qt from the sources and as "static" libraries:<br><ul>
+<li>Make sure Visual Studio 2010 with Service Pack 1 or Visual Studio 2012 with Update 1 are installed
+<li>Make sure <a href="http://strawberryperl.com/" target="_blank">Strawberry</a> Perl for Windows and <a href="http://www.activestate.com/activepython/downloads" target="_blank">Python</a> 2.7 are installed
+<li><a href="http://qt-project.org/downloads" target="_blank">Download</a> and <a href="http://www.rarlabs.com/" target="_blank">extract</a> the Qt 4.8.x source code package (e.g. to <font class="code">C:\QtSources\4.8.x</font>)
+<li>Edit the file <font class="code">mkspecs\win32-msvc2010\qmake.conf</font> from your Qt Sources directory as follows:<ul>
+<li style="margin-bottom:0.33em">Old: <font class="diff_del">QMAKE_CFLAGS_RELEASE = -O2 -MD</font><br>New: <font class="diff_add">QMAKE_CFLAGS_RELEASE = -O2 -MT &lt;more optimization flags here&gt;</font>
+<li>Old: <font class="diff_del">QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi</font><br>New: <font class="diff_add">QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi &lt;more optimization flags here&gt;</font></ul>
+<li>Open a new command window (cmd.exe) - use this very same console for all upcoming steps!
 <li>Add Strawberry Perl to your PATH (e.g. <font class="code">set PATH=C:\strawberry\perl\bin;%PATH%</font>)
-<li>Now run <font class="code">vcvarsall.bat</font> form your Visual C++ install directory - within the same console!
+<li>Add Python 2.7 to your PATH (e.g. <font class="code">set PATH=C:\python27;%PATH%</font>)
+<li>Run <font class="code">vcvarsall.bat x86</font> form your Visual C++ install directory - within the same console!
 <li>Change the current directory to the Qt Sources path (e.g. <font class="code">C:\QtSources\4.8.x</font>)
-<li>Finally run <font class="code">configure.exe -release -static -ltcg &lt;more options&gt;</font> and wait for completion
-<li>You can now open and build the solution files (e.g. <font class="code">src\corelib\QtCore.sln</font> in Visual Studio
-<li>Make sure you select the "Release" configuration for your builds!
-<li>It is also required to change "Code Generation &rArr; Runtime Library" to "/MT" for all projects!
-<li>Libraries you need to build for LameXP include the following:<ul>
+<li>Run <font class="code">configure.exe -release -static -ltcg -qt-zlib -qt-libpng -qt-libjpeg -qt-libtiff -qt-libmng</font><ul>
+<li>Hint: For Visual Studio 2012 you currently need to add <font class="code">-platform win32-msvc2010</font> too</ul>
+<li>Now the makefiles should have been generated, so simply enter <font class="code">nmake /B</font> and be patient - voilà!
+<li>The build process is going to take good amount of time. Once done, make sure you got all needed libs
+<li>Libraries you'll need to build LameXP as a "static" binary include the following:<ul>
 <li>lib\qtmain.lib
 <li>lib\QtCore.lib
 <li>lib\QtGui.lib
 <li>lib\QtSvg.lib
 <li>lib\QtXml.lib
-<li>plugins\imageformats\qgif.lib
 <li>plugins\imageformats\qico.lib
-<li>plugins\imageformats\qsvg.lib</ul>
-<li>Put the static *.lib files into the 'LameXP\etc\Prerequisites\qt4_static\lib' directory
-<li>ImageFormat plugins go to 'LameXP\etc\Prerequisites\qt4_static\plugins\imageformats'</ul>
+<li>plugins\imageformats\qsvg.lib
+<li>plugins\imageformats\qtga.lib</ul>
+<li>Put all the static <font class="code">*.lib</font> files into the 'LameXP\etc\Prerequisites\qt4_static\lib' directory
+<li>ImageFormat plugins go to 'LameXP\etc\Prerequisites\qt4_static\plugins\imageformats'
+<li style="margin-bottom:0.48em">Congratulations, you should now be prepared to build the <font class="code">Release_Static</font> configuration of LameXP :-)
+<li>NOTE: Static libraries only work with the same compiler (version) they were built with!</ul>
 <br><br>
 
 eof</body></html>
