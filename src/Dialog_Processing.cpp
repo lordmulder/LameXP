@@ -118,6 +118,19 @@ while(0)
 while(0)
 
 ////////////////////////////////////////////////////////////
+
+//Dummy class for UserData
+class IntUserData : public QObjectUserData
+{
+public:
+	IntUserData(int value) : m_value(value) {/*NOP*/}
+	int value(void) { return m_value; }
+	void setValue(int value) { m_value = value; }
+private:
+	int m_value;
+};
+
+////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
@@ -190,11 +203,11 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	QAction *contextMenuFilterAction[5] = {NULL, NULL, NULL, NULL, NULL};
 	if(QMenu *filterMenu = m_contextMenu->addMenu(QIcon(":/icons/filter.png"), tr("Filter Log Items")))
 	{
-		contextMenuFilterAction[0] = filterMenu->addAction(QIcon(":/icons/media_play.png"), tr("Show Running Only"));
-		contextMenuFilterAction[1] = filterMenu->addAction(QIcon(":/icons/tick.png"), tr("Show Succeeded Only"));
-		contextMenuFilterAction[2] = filterMenu->addAction(QIcon(":/icons/exclamation.png"), tr("Show Failed Only"));
-		contextMenuFilterAction[3] = filterMenu->addAction(QIcon(":/icons/step_over.png"), tr("Show Skipped Only"));
-		contextMenuFilterAction[4] = filterMenu->addAction(QIcon(":/icons/report.png"), tr("Show All Items"));
+		contextMenuFilterAction[0] = filterMenu->addAction(m_progressModel->getIcon(ProgressModel::JobRunning), tr("Show Running Only"));
+		contextMenuFilterAction[1] = filterMenu->addAction(m_progressModel->getIcon(ProgressModel::JobComplete), tr("Show Succeeded Only"));
+		contextMenuFilterAction[2] = filterMenu->addAction(m_progressModel->getIcon(ProgressModel::JobFailed), tr("Show Failed Only"));
+		contextMenuFilterAction[3] = filterMenu->addAction(m_progressModel->getIcon(ProgressModel::JobSkipped), tr("Show Skipped Only"));
+		contextMenuFilterAction[4] = filterMenu->addAction(m_progressModel->getIcon(ProgressModel::JobState(-1)), tr("Show All Items"));
 		if(QAction *act = contextMenuFilterAction[0]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobRunning); }
 		if(QAction *act = contextMenuFilterAction[1]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobComplete); }
 		if(QAction *act = contextMenuFilterAction[2]) { m_progressViewFilterGroup->addAction(act); act->setCheckable(true); act->setData(ProgressModel::JobFailed); }
@@ -206,13 +219,23 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 	if(m_filterInfoLabel = new QLabel(view_log))
 	{
 		m_filterInfoLabel->setFrameShape(QFrame::NoFrame);
-		m_filterInfoLabel->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
-		m_filterInfoLabel->setUserData(0, reinterpret_cast<QObjectUserData*>(-1));
+		m_filterInfoLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+		m_filterInfoLabel->setUserData(0, new IntUserData(-1));
 		SET_FONT_BOLD(m_filterInfoLabel, true);
 		SET_TEXT_COLOR(m_filterInfoLabel, Qt::darkGray);
 		m_filterInfoLabel->setContextMenuPolicy(Qt::CustomContextMenu);
 		connect(m_filterInfoLabel, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
 		m_filterInfoLabel->hide();
+	}
+	if(m_filterInfoLabelIcon = new QLabel(view_log))
+	{
+		m_filterInfoLabelIcon->setFrameShape(QFrame::NoFrame);
+		m_filterInfoLabelIcon->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+		m_filterInfoLabelIcon->setContextMenuPolicy(Qt::CustomContextMenu);
+		const QIcon &ico = m_progressModel->getIcon(ProgressModel::JobState(-1));
+		m_filterInfoLabelIcon->setPixmap(ico.pixmap(16, 16));
+		connect(m_filterInfoLabelIcon, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
+		m_filterInfoLabelIcon->hide();
 	}
 
 	//Connect context menu
@@ -259,6 +282,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 
 ProcessingDialog::~ProcessingDialog(void)
 {
+	fprintf(stderr, "BUMP 1\n"); fflush(stderr);
+	
 	view_log->setModel(NULL);
 
 	if(m_progressIndicator)
@@ -294,17 +319,7 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	LAMEXP_DELETE(m_progressIndicator);
-	LAMEXP_DELETE(m_progressModel);
-	LAMEXP_DELETE(m_contextMenu);
-	LAMEXP_DELETE(m_systemTray);
-	LAMEXP_DELETE(m_diskObserver);
-	LAMEXP_DELETE(m_cpuObserver);
-	LAMEXP_DELETE(m_ramObserver);
-	LAMEXP_DELETE(m_progressViewFilterGroup);
-
-	WinSevenTaskbar::setOverlayIcon(this, NULL);
-	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
+	fprintf(stderr, "BUMP 2\n"); fflush(stderr);
 
 	while(!m_threadList.isEmpty())
 	{
@@ -314,6 +329,25 @@ ProcessingDialog::~ProcessingDialog(void)
 		delete thread;
 	}
 
+	fprintf(stderr, "BUMP 3\n"); fflush(stderr);
+
+	LAMEXP_DELETE(m_progressIndicator);
+	LAMEXP_DELETE(m_systemTray);
+	LAMEXP_DELETE(m_diskObserver);
+	LAMEXP_DELETE(m_cpuObserver);
+	LAMEXP_DELETE(m_ramObserver);
+	LAMEXP_DELETE(m_progressViewFilterGroup);
+	LAMEXP_DELETE(m_filterInfoLabel);
+	LAMEXP_DELETE(m_filterInfoLabelIcon);
+	LAMEXP_DELETE(m_contextMenu);
+	LAMEXP_DELETE(m_progressModel);
+
+	fprintf(stderr, "BUMP 4\n"); fflush(stderr);
+
+	WinSevenTaskbar::setOverlayIcon(this, NULL);
+	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
+
+	fprintf(stderr, "BUMP 5\n"); fflush(stderr);
 }
 
 ////////////////////////////////////////////////////////////
@@ -426,7 +460,8 @@ void ProcessingDialog::resizeEvent(QResizeEvent *event)
 	if(QWidget *port = view_log->viewport())
 	{
 		QRect geom = port->geometry();
-		m_filterInfoLabel->setGeometry(geom.left() + 16, geom.top() + 16, geom.width() - 32, geom.height() - 32);
+		m_filterInfoLabel->setGeometry(geom.left() + 16, geom.top() + 16, geom.width() - 32, 48);
+		m_filterInfoLabelIcon->setGeometry(geom.left() + 16, geom.top() + 64, geom.width() - 32, geom.height() - 80);
 	}
 }
 
@@ -803,38 +838,31 @@ void ProcessingDialog::contextMenuFilterActionTriggered(void)
  */
 void ProcessingDialog::progressViewFilterChanged(void)
 {
-	unsigned int counter = 0;
+	bool matchFound = false;
 
 	for(int i = 0; i < view_log->model()->rowCount(); i++)
 	{
 		QModelIndex index = (m_progressViewFilter >= 0) ? m_progressModel->index(i, 0) : QModelIndex();
 		const bool bHide = index.isValid() ? (m_progressModel->getJobState(index) != m_progressViewFilter) : false;
-		view_log->setRowHidden(i, bHide);
-		if(!bHide) counter++;
+		view_log->setRowHidden(i, bHide); matchFound = matchFound || (!bHide);
 	}
 
-	if((m_progressViewFilter >= 0) && (counter == 0))
+	if((m_progressViewFilter >= 0) && (!matchFound))
 	{
-		if(m_filterInfoLabel->isHidden() || (m_filterInfoLabel->userData(0) != reinterpret_cast<QObjectUserData*>(m_progressViewFilter)))
+		if(m_filterInfoLabel->isHidden() || (dynamic_cast<IntUserData*>(m_filterInfoLabel->userData(0))->value() != m_progressViewFilter))
 		{
-			QString iconPath;
-			switch(m_progressViewFilter)
-			{
-				case ProgressModel::JobRunning: iconPath = ":/icons/media_play.png"; break;
-				case ProgressModel::JobComplete: iconPath = ":/icons/tick.png"; break;
-				case ProgressModel::JobFailed: iconPath = ":/icons/exclamation.png"; break;
-				case ProgressModel::JobSkipped: iconPath = ":/icons/step_over.png"; break;
-				default: iconPath = ":/icons/report.png"; break;
-			}
+			dynamic_cast<IntUserData*>(m_filterInfoLabel->userData(0))->setValue(m_progressViewFilter);
+			m_filterInfoLabel->setText(QString("<p>&raquo; %1 &laquo;</p>").arg(tr("None of the items matches the current filtering rules")));
 			m_filterInfoLabel->show();
-			m_filterInfoLabel->setText(QString("&raquo; %1 &laquo;<br><br><img src=\"%2\">").arg(tr("None of the items matches the current filtering rules"), iconPath));
-			m_filterInfoLabel->setUserData(0, reinterpret_cast<QObjectUserData*>(m_progressViewFilter));
+			m_filterInfoLabelIcon->setPixmap(m_progressModel->getIcon(static_cast<ProgressModel::JobState>(m_progressViewFilter)).pixmap(16, 16, QIcon::Disabled));
+			m_filterInfoLabelIcon->show();
 			resizeEvent(NULL);
 		}
 	}
 	else if(!m_filterInfoLabel->isHidden())
 	{
 		m_filterInfoLabel->hide();
+		m_filterInfoLabelIcon->hide();
 	}
 }
 

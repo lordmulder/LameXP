@@ -100,6 +100,7 @@ private:
 	QMenu *m_contextMenu;
 	QActionGroup *m_progressViewFilterGroup;
 	QLabel *m_filterInfoLabel;
+	QLabel *m_filterInfoLabelIcon;
 	unsigned int m_runningThreads;
 	unsigned int m_currentFile;
 	QList<QUuid> m_allJobs;

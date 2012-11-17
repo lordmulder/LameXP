@@ -34,7 +34,8 @@ ProgressModel::ProgressModel(void)
 	m_iconSystem(":/icons/computer.png"),
 	m_iconWarning(":/icons/error.png"),
 	m_iconPerformance(":/icons/clock.png"),
-	m_iconSkipped(":/icons/step_over.png")
+	m_iconSkipped(":/icons/step_over.png"),
+	m_iconUndefined(":/icons/report.png")
 {
 }
 
@@ -73,33 +74,8 @@ QVariant ProgressModel::data(const QModelIndex &index, int role) const
 		}
 		else if(role == Qt::DecorationRole && index.column() == 0)
 		{
-			switch(m_jobState.value(m_jobList.at(index.row())))
-			{
-			case JobRunning:
-				return m_iconRunning;
-				break;
-			case JobPaused:
-				return m_iconPaused;
-				break;
-			case JobComplete:
-				return m_iconComplete;
-				break;
-			case JobSystem:
-				return m_iconSystem;
-				break;
-			case JobWarning:
-				return m_iconWarning;
-				break;
-			case JobPerformance:
-				return m_iconPerformance;
-				break;
-			case JobSkipped:
-				return m_iconSkipped;
-				break;
-			default:
-				return m_iconFailed;
-				break;
-			}
+			const int currentState = m_jobState.value(m_jobList.at(index.row()));
+			return getIcon(static_cast<const JobState>(currentState));
 		}
 		else if(role == Qt::TextAlignmentRole)
 		{
@@ -212,7 +188,7 @@ const QStringList &ProgressModel::getLogFile(const QModelIndex &index)
 	return *(reinterpret_cast<QStringList*>(NULL));
 }
 
-const QUuid &ProgressModel::getJobId(const QModelIndex &index)
+const QUuid &ProgressModel::getJobId(const QModelIndex &index) const
 {
 	if(index.row() < m_jobList.count())
 	{
@@ -288,5 +264,36 @@ void ProgressModel::restoreHiddenItems(void)
 		}
 		m_jobIndexCache.clear();
 		endResetModel();
+	}
+}
+
+const QIcon &ProgressModel::getIcon(ProgressModel::JobState state) const
+{
+	switch(state)
+	{
+	case JobRunning:
+		return m_iconRunning;
+		break;
+	case JobPaused:
+		return m_iconPaused;
+		break;
+	case JobComplete:
+		return m_iconComplete;
+		break;
+	case JobSystem:
+		return m_iconSystem;
+		break;
+	case JobWarning:
+		return m_iconWarning;
+		break;
+	case JobPerformance:
+		return m_iconPerformance;
+		break;
+	case JobSkipped:
+		return m_iconSkipped;
+		break;
+	default:
+		return (state < 0) ? m_iconUndefined : m_iconFailed;
+		break;
 	}
 }
