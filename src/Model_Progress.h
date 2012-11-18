@@ -65,7 +65,7 @@ public:
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 	//Public functions
-	const QStringList &getLogFile(const QModelIndex &index);
+	const QStringList &getLogFile(const QModelIndex &index) const;
 	const QUuid &getJobId(const QModelIndex &index) const;
 	const JobState getJobState(const QModelIndex &index) const;
 	const QIcon &ProgressModel::getIcon(ProgressModel::JobState state) const;
@@ -96,4 +96,7 @@ private:
 	const QIcon m_iconPerformance;
 	const QIcon m_iconSkipped;
 	const QIcon m_iconUndefined;
+
+	const QStringList m_emptyList;
+	const QUuid m_emptyUuid;
 };

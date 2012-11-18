@@ -35,7 +35,9 @@ ProgressModel::ProgressModel(void)
 	m_iconWarning(":/icons/error.png"),
 	m_iconPerformance(":/icons/clock.png"),
 	m_iconSkipped(":/icons/step_over.png"),
-	m_iconUndefined(":/icons/report.png")
+	m_iconUndefined(":/icons/report.png"),
+	m_emptyUuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00),
+	m_emptyList("Oups, no data available!")
 {
 }
 
@@ -177,15 +179,16 @@ void ProgressModel::appendToLog(const QUuid &jobId, const QString &line)
 	}
 }
 
-const QStringList &ProgressModel::getLogFile(const QModelIndex &index)
+const QStringList &ProgressModel::getLogFile(const QModelIndex &index) const
 {
 	if(index.row() < m_jobList.count())
 	{
 		QUuid id = m_jobList.at(index.row());
-		return m_jobLogFile[id];
+		QHash<QUuid,QStringList>::const_iterator iter = m_jobLogFile.constFind(id);
+		if(iter != m_jobLogFile.constEnd()) { return iter.value(); }
 	}
 
-	return *(reinterpret_cast<QStringList*>(NULL));
+	return m_emptyList;
 }
 
 const QUuid &ProgressModel::getJobId(const QModelIndex &index) const
@@ -195,7 +198,7 @@ const QUuid &ProgressModel::getJobId(const QModelIndex &index) const
 		return m_jobList.at(index.row());
 	}
 
-	return *(reinterpret_cast<QUuid*>(NULL));
+	return m_emptyUuid;
 }
 
 const ProgressModel::JobState ProgressModel::getJobState(const QModelIndex &index) const
@@ -205,7 +208,7 @@ const ProgressModel::JobState ProgressModel::getJobState(const QModelIndex &inde
 		return static_cast<JobState>(m_jobState.value(m_jobList.at(index.row()), -1));
 	}
 
-	return static_cast<JobState>(NULL);
+	return static_cast<JobState>(-1);
 }
 
 void ProgressModel::addSystemMessage(const QString &text, int type)
