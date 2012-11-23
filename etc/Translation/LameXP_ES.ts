@@ -1926,28 +1926,12 @@
         <translation>Opciones del codificador Opus</translation>
     </message>
     <message>
-        <source>Optimize for Signal Type:</source>
-        <translation>Optimizar para tipo de señal:</translation>
-    </message>
-    <message>
         <source>Encoding Complexity:</source>
         <translation>Complejidad de codificación:</translation>
     </message>
     <message>
-        <source>Music</source>
-        <translation>Música</translation>
-    </message>
-    <message>
-        <source>(Undefined)</source>
-        <translation>(Sin definir)</translation>
-    </message>
-    <message>
         <source>Frame Size:</source>
         <translation>Tamaño de muestra:</translation>
-    </message>
-    <message>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation>Utilizar Experimental Encoder Perceptual Tuning</translation>
     </message>
     <message>
         <source>OpusEnc:</source>

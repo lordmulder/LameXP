@@ -1936,27 +1936,11 @@ Ouvrir le dossier récursivement...</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Optimize for Signal Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Encoding Complexity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Music</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(Undefined)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

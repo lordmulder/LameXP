@@ -1926,28 +1926,12 @@
         <translation> Opus 編碼器選項 </translation>
     </message>
     <message>
-        <source>Optimize for Signal Type:</source>
-        <translation>優化信號類型:</translation>
-    </message>
-    <message>
         <source>Encoding Complexity:</source>
         <translation>編碼復雜度:</translation>
     </message>
     <message>
-        <source>Music</source>
-        <translation>音樂</translation>
-    </message>
-    <message>
-        <source>(Undefined)</source>
-        <translation>(未定義)</translation>
-    </message>
-    <message>
         <source>Frame Size:</source>
         <translation>幀大小:</translation>
-    </message>
-    <message>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation>使用實驗編碼調整感知</translation>
     </message>
     <message>
         <source>OpusEnc:</source>

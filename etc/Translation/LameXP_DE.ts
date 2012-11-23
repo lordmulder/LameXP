@@ -1927,28 +1927,12 @@
         <translation>Opus Kodierer Optionen</translation>
     </message>
     <message>
-        <source>Optimize for Signal Type:</source>
-        <translation>Optimieren für Signaltyp:</translation>
-    </message>
-    <message>
         <source>Encoding Complexity:</source>
         <translation>Kodierer Komplexität:</translation>
     </message>
     <message>
-        <source>Music</source>
-        <translation>Musik</translation>
-    </message>
-    <message>
-        <source>(Undefined)</source>
-        <translation>(Undefiniert)</translation>
-    </message>
-    <message>
         <source>Frame Size:</source>
         <translation>Framegröße:</translation>
-    </message>
-    <message>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation>Psychoakustische Optimierungen (experimentell)</translation>
     </message>
     <message>
         <source>OpusEnc:</source>

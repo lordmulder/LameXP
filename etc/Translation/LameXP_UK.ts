@@ -1927,28 +1927,12 @@
         <translation>Налаштування кодера Opus</translation>
     </message>
     <message>
-        <source>Optimize for Signal Type:</source>
-        <translation>Оптимізувати відносно типу сигнала:</translation>
-    </message>
-    <message>
         <source>Encoding Complexity:</source>
         <translation>Складність кодування:</translation>
     </message>
     <message>
-        <source>Music</source>
-        <translation>Музика</translation>
-    </message>
-    <message>
-        <source>(Undefined)</source>
-        <translation>(Невизначено)</translation>
-    </message>
-    <message>
         <source>Frame Size:</source>
         <translation>Розмір кадру:</translation>
-    </message>
-    <message>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation>Використовувати експериментальне сприйняттєве налагодження кодера</translation>
     </message>
     <message>
         <source>OpusEnc:</source>

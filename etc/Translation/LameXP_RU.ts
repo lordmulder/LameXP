@@ -1932,28 +1932,12 @@
         <translation type="unfinished">Параметры кодера Opus</translation>
     </message>
     <message>
-        <source>Optimize for Signal Type:</source>
-        <translation type="unfinished">Оптимизация:</translation>
-    </message>
-    <message>
         <source>Encoding Complexity:</source>
         <translation type="unfinished">Сложность кодирования:</translation>
     </message>
     <message>
-        <source>Music</source>
-        <translation type="unfinished">Музыка</translation>
-    </message>
-    <message>
-        <source>(Undefined)</source>
-        <translation type="unfinished">Нет</translation>
-    </message>
-    <message>
         <source>Frame Size:</source>
         <translation type="unfinished">Размер кадра:</translation>
-    </message>
-    <message>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished">Экспериментальный перцептуальный режим</translation>
     </message>
     <message>
         <source>OpusEnc:</source>

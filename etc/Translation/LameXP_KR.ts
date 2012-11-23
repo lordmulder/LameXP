@@ -1926,28 +1926,12 @@
         <translation type="unfinished"> Opus 인코더 옵션 </translation>
     </message>
     <message>
-        <source>Optimize for Signal Type:</source>
-        <translation type="unfinished">신호 방식 최적화:</translation>
-    </message>
-    <message>
         <source>Encoding Complexity:</source>
         <translation type="unfinished">인코딩 복잡도:</translation>
     </message>
     <message>
-        <source>Music</source>
-        <translation type="unfinished">음악</translation>
-    </message>
-    <message>
-        <source>(Undefined)</source>
-        <translation type="unfinished">(정의되지 않음)</translation>
-    </message>
-    <message>
         <source>Frame Size:</source>
         <translation type="unfinished">프레임 크기:</translation>
-    </message>
-    <message>
-        <source>Use Experimental Encoder Perceptual Tuning</source>
-        <translation type="unfinished">경험적 인코더 인식 조정 사용</translation>
     </message>
     <message>
         <source>OpusEnc:</source>

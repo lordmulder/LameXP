@@ -30,10 +30,9 @@
 
 OpusEncoder::OpusEncoder(void)
 :
-	m_binary_std(lamexp_lookup_tool("opusenc_std.exe")),
-	m_binary_ea7(lamexp_lookup_tool("opusenc_ea7.exe"))
+	m_binary(lamexp_lookup_tool("opusenc.exe"))
 {
-	if(m_binary_std.isEmpty() || m_binary_ea7.isEmpty())
+	if(m_binary.isEmpty())
 	{
 		throw "Error initializing Opus encoder. Tool 'opusenc.exe' is not registred!";
 	}
@@ -41,7 +40,6 @@ OpusEncoder::OpusEncoder(void)
 	m_configOptimizeFor = 0;
 	m_configEncodeComplexity = 10;
 	m_configFrameSize = 3;
-	m_configExpAnalysisOn = true;
 }
 
 OpusEncoder::~OpusEncoder(void)
@@ -120,7 +118,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 
-	if(!startProcess(process, m_configExpAnalysisOn ? m_binary_ea7 : m_binary_std, args))
+	if(!startProcess(process, m_binary, args))
 	{
 		return false;
 	}
@@ -201,11 +199,6 @@ void OpusEncoder::setEncodeComplexity(int complexity)
 void OpusEncoder::setFrameSize(int frameSize)
 {
 	m_configFrameSize = qBound(0, frameSize, 5);
-}
-
-void OpusEncoder::setExpAnalysisOn(bool expAnalysisOn)
-{
-	m_configExpAnalysisOn = expAnalysisOn;
 }
 
 QString OpusEncoder::extension(void)

@@ -44,14 +44,11 @@ public:
 	virtual void setOptimizeFor(int optimizeFor);
 	virtual void setEncodeComplexity(int complexity);
 	virtual void setFrameSize(int frameSize);
-	virtual void setExpAnalysisOn(bool expAnalysisOn);
 
 private:
-	const QString m_binary_std;
-	const QString m_binary_ea7;
+	const QString m_binary;
 	
 	int m_configOptimizeFor;
 	int m_configEncodeComplexity;
 	int m_configFrameSize;
-	bool m_configExpAnalysisOn;
 };

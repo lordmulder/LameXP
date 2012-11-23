@@ -376,7 +376,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
 	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
 	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationMode());
-	comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeFor());
+	//comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeFor());
 	comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesize());
 	
 	SET_CHECKBOX_STATE(checkBoxBitrateManagement, m_settings->bitrateManagementEnabled());
@@ -387,7 +387,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabled());
 	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
 	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
-	SET_CHECKBOX_STATE(checkBoxOpusExpAnalysis, m_settings->opusExpAnalysis());
 	checkBoxNeroAAC2PassMode->setEnabled(!(m_fhgEncoderAvailable || m_qaacEncoderAvailable));
 	
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
@@ -451,10 +450,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(lineEditRenamePattern, SIGNAL(textChanged(QString)), this, SLOT(renameOutputPatternChanged(QString)));
 	connect(labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros(QString)));
 	connect(checkBoxForceStereoDownmix, SIGNAL(clicked(bool)), this, SLOT(forceStereoDownmixEnabledChanged(bool)));
-	connect(comboBoxOpusOptimize, SIGNAL(currentIndexChanged(int)), SLOT(opusSettingsChanged()));
 	connect(comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
-	connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
+	//connect(comboBoxOpusOptimize, SIGNAL(currentIndexChanged(int)), SLOT(opusSettingsChanged()));
+	//connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
 	connect(m_overwriteButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(overwriteModeChanged(int)));
 	connect(m_evenFilterCustumParamsHelp, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 
@@ -937,7 +936,7 @@ void MainWindow::changeEvent(QEvent *e)
 		comboBoxIndex[3] = comboBoxAftenCodingMode->currentIndex();
 		comboBoxIndex[4] = comboBoxAftenDRCMode->currentIndex();
 		comboBoxIndex[5] = comboBoxNormalizationMode->currentIndex();
-		comboBoxIndex[6] = comboBoxOpusOptimize->currentIndex();
+		comboBoxIndex[6] = 0; //comboBoxOpusOptimize->currentIndex();
 		comboBoxIndex[7] = comboBoxOpusFramesize->currentIndex();
 		
 		//Re-translate from UIC
@@ -950,7 +949,7 @@ void MainWindow::changeEvent(QEvent *e)
 		comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
 		comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
 		comboBoxNormalizationMode->setCurrentIndex(comboBoxIndex[5]);
-		comboBoxOpusOptimize->setCurrentIndex(comboBoxIndex[6]);
+		//comboBoxOpusOptimize->setCurrentIndex(comboBoxIndex[6]);
 		comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[7]);
 
 		//Update the window title
@@ -3611,10 +3610,9 @@ void MainWindow::aftenFastAllocationChanged(bool checked)
  */
 void MainWindow::opusSettingsChanged(void)
 {
-	m_settings->opusOptimizeFor(comboBoxOpusOptimize->currentIndex());
 	m_settings->opusFramesize(comboBoxOpusFramesize->currentIndex());
 	m_settings->opusComplexity(spinBoxOpusComplexity->value());
-	m_settings->opusExpAnalysis(checkBoxOpusExpAnalysis->isChecked());
+	//m_settings->opusOptimizeFor(comboBoxOpusOptimize->currentIndex());
 }
 
 /*
@@ -3987,7 +3985,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
 	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
 	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
-	comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeForDefault());
+	//comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeForDefault());
 	comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
 	SET_CHECKBOX_STATE(checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());
 	SET_CHECKBOX_STATE(checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
@@ -3997,7 +3995,6 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocationDefault());
 	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
 	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
-	SET_CHECKBOX_STATE(checkBoxOpusExpAnalysis, m_settings->opusExpAnalysisDefault());
 	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());

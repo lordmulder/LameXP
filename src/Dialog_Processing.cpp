@@ -1051,7 +1051,6 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			opusEncoder->setOptimizeFor(m_settings->opusOptimizeFor());
 			opusEncoder->setEncodeComplexity(m_settings->opusComplexity());
 			opusEncoder->setFrameSize(m_settings->opusFramesize());
-			opusEncoder->setExpAnalysisOn(m_settings->opusExpAnalysis());
 			opusEncoder->setCustomParams(m_settings->customParametersOpus());
 			encoder = opusEncoder;
 		}

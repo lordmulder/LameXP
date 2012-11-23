@@ -105,7 +105,6 @@ LAMEXP_MAKE_ID(aacEncProfile, "AdvancedOptions/AACEnc/ForceProfile");
 LAMEXP_MAKE_ID(opusOptimizeFor, "AdvancedOptions/Opus/OptimizeForSignalType");
 LAMEXP_MAKE_ID(opusComplexity, "AdvancedOptions/Opus/EncodingComplexity");
 LAMEXP_MAKE_ID(opusFramesize, "AdvancedOptions/Opus/FrameSize");
-LAMEXP_MAKE_ID(opusExpAnalysis, "AdvancedOptions/Opus/EnableExpAnalysis");
 LAMEXP_MAKE_ID(normalizationFilterEnabled, "AdvancedOptions/VolumeNormalization/Enabled");
 LAMEXP_MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
 LAMEXP_MAKE_ID(normalizationFilterEqualizationMode, "AdvancedOptions/VolumeNormalization/EqualizationMode");
@@ -410,7 +409,6 @@ LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize, 8);
 LAMEXP_MAKE_OPTION_I(opusOptimizeFor, 0);
 LAMEXP_MAKE_OPTION_I(opusComplexity, 10);
 LAMEXP_MAKE_OPTION_I(opusFramesize, 3);
-LAMEXP_MAKE_OPTION_B(opusExpAnalysis, true);
 LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled, false)
 LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume, -50)
 LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode, 0);
