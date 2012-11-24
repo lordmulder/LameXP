@@ -25,18 +25,18 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v110_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v110_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v110_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -64,21 +64,9 @@
     <EnableManagedIncrementalBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</EnableManagedIncrementalBuild>
     <EnableManagedIncrementalBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</EnableManagedIncrementalBuild>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
-    <IncludePath>$(LXP_WINSDK_ROOT)\Include;$(IncludePath)</IncludePath>
-    <ExecutablePath>$(LXP_WINSDK_ROOT)\Bin;$(LXP_WINSDK_ROOT)\Bin\vsstools;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>$(LXP_WINSDK_ROOT)\Lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ExecutablePath>$(LXP_WINSDK_ROOT)\Bin;$(LXP_WINSDK_ROOT)\Bin\vsstools;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(LXP_WINSDK_ROOT)\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LXP_WINSDK_ROOT)\Lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ExecutablePath>$(LXP_WINSDK_ROOT)\Bin;$(LXP_WINSDK_ROOT)\Bin\vsstools;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(LXP_WINSDK_ROOT)\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LXP_WINSDK_ROOT)\Lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PreBuildEvent>
       <Command>"$(ProjectDir)\etc\Utilities\AutoInc.exe" "VER_LAMEXP_BUILD" "$(ProjectDir)\src\Config.h"</Command>
@@ -253,7 +241,6 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <MapExports>false</MapExports>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <MinimumRequiredVersion>5.1</MinimumRequiredVersion>
     </Link>
     <PostBuildEvent>
       <Command>

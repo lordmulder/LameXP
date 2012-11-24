@@ -162,14 +162,20 @@ static bool g_lamexp_console_attached = false;
 	#if (_MSC_VER == 1700)
 		#if (_MSC_FULL_VER < 170050727)
 			static const char *g_lamexp_version_compiler = "MSVC 2012-Beta";
+		#elif (_MSC_FULL_VER < 170051020)
+			static const char *g_lamexp_version_compiler = "MSVC 2012-RTM";
+		#elif (_MSC_FULL_VER == 170051020)
+			static const char *g_lamexp_version_compiler = "MSVC 2012-U1 CTP";
 		#else
-			static const char *g_lamexp_version_compiler = "MSVC 2012";
+			#error Compiler version is not supported yet!
 		#endif
 	#elif (_MSC_VER == 1600)
-		#if (_MSC_FULL_VER >= 160040219)
+		#if (_MSC_FULL_VER < 160040219)
+			static const char *g_lamexp_version_compiler = "MSVC 2010-RTM";
+		#elif (_MSC_FULL_VER == 160040219)
 			static const char *g_lamexp_version_compiler = "MSVC 2010-SP1";
 		#else
-			static const char *g_lamexp_version_compiler = "MSVC 2010";
+			#error Compiler version is not supported yet!
 		#endif
 	#elif (_MSC_VER == 1500)
 		#if (_MSC_FULL_VER >= 150030729)

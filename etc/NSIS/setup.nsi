@@ -277,17 +277,20 @@ Function .onInit
 	; --------
 	
 	${IfNot} ${IsNT}
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does NOT support Windows 9x or Windows ME!"
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does *not* support Windows 9x or Windows ME!"
 		Quit
 	${EndIf}
 
-	${If} ${AtMostWinNT4}
-		${StdUtils.GetParameter} $R0 "Update" "?"
-		${If} $R0 == "?"
-			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Installation aborted!$\nThe minimum required platform is Windows 2000."
-		${Else}
-			MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, your platform is not supported anymore. Update not possible!$\nThe minimum required platform is Windows 2000."
-		${EndIf}
+	${If} ${AtMostWin2000}
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, but your platform is *not* supported anymore.$\nInstallation will be aborted!$\n$\nThe minimum required platform is Windows XP (Service Pack 3)."
+		Quit
+	${EndIf}
+
+	${If} ${IsWinXP}
+	${AndIf} ${AtMostServicePack} 2
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 3.$\nSupport for Windows XP prior to Service Pack 3 is discontinued!"
+		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
+		ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=24"
 		Quit
 	${EndIf}
 	
