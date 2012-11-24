@@ -1,0 +1,26 @@
+diff --git "a/C:\\Program Files\\Microsoft Visual Studio 11.0\\VC\\bin\\vcvars32.bat" "b/C:\\Program Files\\Microsoft Visual Studio 11.0\\VC\\bin\\vcvars32_XP.bat"
+index d02a974..815d2d3 100644
+--- "a/C:\\Program Files\\Microsoft Visual Studio 11.0\\VC\\bin\\vcvars32.bat"	
++++ "b/C:\\Program Files\\Microsoft Visual Studio 11.0\\VC\\bin\\vcvars32_XP.bat"	
+@@ -12,14 +12,18 @@
+ @set FrameworkDir=%FrameworkDir32%
+ @set FrameworkVersion=%FrameworkVersion32%
+ 
++@rem --- MOD ---
++@set "WindowsSdkDir=C:\Program Files\Microsoft SDKs\Windows\v7.1A\"
++@rem --- /MOD ---
++
+ @if not "%WindowsSdkDir_old%" == "" (
+ 	@set "PATH=%WindowsSdkDir_old%bin\NETFX 4.0 Tools;%WindowsSdkDir_35%;%PATH%"
+ )
+ 
+ @if not "%WindowsSdkDir%" == "" (
+-	@set "PATH=%WindowsSdkDir%bin\x86;%PATH%"
+-	@set "INCLUDE=%WindowsSdkDir%include\shared;%WindowsSdkDir%include\um;%WindowsSdkDir%include\winrt;%INCLUDE%"
+-	@set "LIB=%WindowsSdkDir%lib\win8\um\x86;%LIB%"
++	@set "PATH=%WindowsSdkDir%bin;%WindowsSdkDir%bin\x86;%PATH%"
++	@set "INCLUDE=%WindowsSdkDir%include;%WindowsSdkDir%include\shared;%WindowsSdkDir%include\um;%WindowsSdkDir%include\winrt;%INCLUDE%"
++	@set "LIB=%WindowsSdkDir%lib;%WindowsSdkDir%lib\win8\um\x86;%LIB%"
+ 	@set "LIBPATH=%WindowsSdkDir%References\CommonConfiguration\Neutral;%ExtensionSDKDir%\Microsoft.VCLibs\11.0\References\CommonConfiguration\neutral;%LIBPATH%"
+ )
+ 
