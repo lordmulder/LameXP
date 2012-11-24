@@ -282,13 +282,14 @@ Function .onInit
 	${EndIf}
 
 	${If} ${AtMostWin2000}
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, but your platform is *not* supported anymore.$\nInstallation will be aborted!$\n$\nThe minimum required platform is Windows XP (Service Pack 3)."
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, but your operating system is *not* supported anymore.$\nInstallation will be aborted!$\n$\nThe minimum required platform is Windows XP (Service Pack 3)."
+		ExecShell "open" "http://windows.microsoft.com/"
 		Quit
 	${EndIf}
 
 	${If} ${IsWinXP}
 	${AndIf} ${AtMostServicePack} 2
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 3.$\nSupport for Windows XP prior to Service Pack 3 is discontinued!"
+		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 3 installed.$\nWindows XP *without* Service Pack 3 reached end-of-life on 2010-07-13.$\nCurrent Windows XP (Service Pack 3) will be supported until 2014-04-08.$\n$\nPlease install Service Pack 3 now or just run Windows Update!"
 		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
 		ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=24"
 		Quit
