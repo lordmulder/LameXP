@@ -97,19 +97,19 @@ rate conversion, normalization (gain), tone adjustment and downmixing of multi-c
 <a name="be0a8459"></a><b>What platforms does LameXP run on?</b><br>
 <br>
 LameXP is currently being developed on the following platforms:<br><ul>
-<li>Microsoft Windows 7 (32-Bit and 64-Bit editions) with <a href="http://technet.microsoft.com/en-us/windows/gg635126" target="_blank">Service Pack 1</a>
-<li>Microsoft Windows XP with <a href="http://technet.microsoft.com/en-us/windows/bb794714" target="_blank">Service Pack 3</a></ul>
+<li>Microsoft Windows 7 (32-Bit and 64-Bit editions) with <a href="http://www.microsoft.com/en-us/download/details.aspx?id=5842" target="_blank">Service Pack 1</a>
+<li>Microsoft Windows XP with <a href="http://www.microsoft.com/en-us/download/details.aspx?id=24" target="_blank">Service Pack 3</a></ul>
 <br>
 The following platforms should work too, but aren't tested extensively:<br><ul>
 <li>Microsoft Windows 8 (32-Bit and 64-Bit editions)
-<li>Microsoft Windows Vista (32-Bit and 64-Bit editions) with <a href="http://technet.microsoft.com/en-us/windows/dd262148" target="_blank">Service Pack 2</a>
+<li>Microsoft Windows Vista (32-Bit and 64-Bit editions) with <a href="http://www.microsoft.com/en-us/download/details.aspx?id=15278" target="_blank">Service Pack 2</a>
 <li>Microsoft Windows XP x64 Edition with <a href="http://www.microsoft.com/download/en/details.aspx?id=17791" target="_blank">Service Pack 2</a>
-<li>Microsoft Windows 2000 with <a href="http://www.microsoft.com/download/en/details.aspx?id=4127" target="_blank">Service Pack 4</a>
 <li>Microsoft Windows Server 2008 with <a href="http://technet.microsoft.com/en-us/windows/dd262148" target="_blank">Service Pack 2</a>
 <li>Microsoft Windows Server 2008 R2 with <a href="http://technet.microsoft.com/en-us/windows/gg635126" target="_blank">Service Pack 1</a>
 <li>GNU/Linux (e.g. Ubuntu 12.04) using <a href="http://www.winehq.org/" target="_blank">Wine</a> v1.4+, native Linux version planned</ul>
 <br>
 The following "legacy" platforms are NOT supported any longer:<br><ul>
+<li>Microsoft Windows 2000
 <li>Microsoft Windows NT 4.0
 <li>Microsoft Windows Millennium Edition (*)
 <li>Microsoft Windows 98 (*)
@@ -921,22 +921,21 @@ For Windows users, we highly recommend using <a href="http://msysgit.github.com/
 <a name="a0c1e92b"></a><b>What are the prerequisites to build LameXP from the sources?</b><br>
 <br>
 LameXP is currently being developed using the following build environment:<br><ul>
-<li><a href="http://www.microsoft.com/visualstudio/en-us/products/2010-editions/express" target="_blank">Visual Studio 2010</a> with Service Pack 1, running on Windows 7 with Service Pack 1
-<li><a href="http://qt.nokia.com/downloads/downloads#qt-lib" target="_blank">Qt libraries 4.8.3</a> for Windows (MSVC 2010)
-<li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=8442" target="_blank">Windows Platform SDK v7.1</a> (Windows SDK for Windows 7 and .NET Framework 4)
-<li>The minimum supported build platform is Windows XP with Service Pack 2</ul>
+<li><a href="http://www.microsoft.com/visualstudio/eng/downloads#d-2012-express" target="_blank">Visual Studio 2012</a> with <a href="http://www.microsoft.com/en-us/download/details.aspx?id=34818" target="_blank">Update-1</a>, running on Windows 7 with Service Pack 1
+<li><a href="http://qt-project.org/downloads#qt-lib" target="_blank">Qt libraries 4.8.3</a> for Windows
+<li>Windows Platform SDK v7.1A, included with the Update-1 of Visual Studio 2012
+<li>The minimum supported *build* platform is Windows 7 (x86 and x64)</ul>
 <br>
 Also note the following hints:<br><ul>
 <li>Run <font class="code">qtvars.bat</font> (or <font class="code">qtenv2.bat</font>) before launching Visual Studio in order to set up the Qt environment
-<li>Visual Studio 2008 solution/project files are still provided for people targeting Windows 2000
 <li>Visual Studio 2012 solution/project files are now provided too, but make sure you installed "Update 1"
+<li>Visual Studio 2008 solution/project files are still provided for people still targeting Windows 2000
 <li>In order to make "fully static" builds of LameXP, you'll need <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/" target="_blank">Qt as 'static' libraries</a> (see below!)
 <li>The Windows Platform SDK v6.0A should work as well, but there may be a few limitations
-<li>Only the "fully static" builds may still run on Windows 2000, due to <a href="http://code.google.com/p/mulder/source/browse/trunk/Utils/EncodePointerLib/README.txt" target="_blank">workarounds</a> we implemented
-<li>Support for the GNU Toolchain (GCC/MinGW + Make) is planned for a future version</ul>
+<li>Support for the GNU Toolchain (GCC/MinGW + MSYS/Make) is planned for a future version of LameXP</ul>
 <br>
 In order to use the LameXP deployment scripts you need the following tools:<br><ul>
-<li>Visual Studio 2010 with Service Pack 1 <b>&plus;</b> Desktop Qt v4.8.x (MSVC 2010)
+<li>Visual Studio 2012 (Express for Windows Desktop) with Update-1 <b>+</b> Desktop Qt v4.8.x (MSVC 2010)
 <li><a href="http://www.7-zip.org/" target="_blank">7-Zip</a> - file archiver with a high compression ratio
 <li><a href="http://nsis.sourceforge.net/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (<a href="http://www.scratchpaper.com/" target="_blank">Unicode version</a> recommended!)<ul>
 <li><a href="http://nsis.sourceforge.net/StdUtils_plug-in" target="_blank">StdUtils plug-in</a>
