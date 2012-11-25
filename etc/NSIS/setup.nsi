@@ -19,9 +19,14 @@
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
 
+
 ;--------------------------------
 ;Basic Defines
 ;--------------------------------
+
+!ifndef NSIS_UNICODE
+  !error "NSIS_UNICODE is undefined, please compile with Unicode NSIS !!!"
+!endif
 
 !ifndef LAMEXP_VERSION
   !error "LAMEXP_VERSION is not defined !!!"
@@ -275,6 +280,7 @@ Function .onInit
 	# Running on Windows NT family?
 	${IfNot} ${IsNT}
 		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does *not* support Windows 9x or Windows ME!"
+		ExecShell "open" "http://windows.microsoft.com/"
 		Quit
 	${EndIf}
 
@@ -290,11 +296,14 @@ Function .onInit
 	${AndIf} ${AtMostServicePack} 2
 	${AndIfNot} ${RunningX64}
 		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 3 installed.$\nWindows XP *without* Service Pack 3 reached end-of-life on 2010-07-13.$\nCurrent Windows XP (Service Pack 3) will be supported until 2014-04-08.$\n$\nPlease install Service Pack 3 now or just run Windows Update!"
-		MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDNO +2
-		ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=24"
+		${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDYES`
+			ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=24"
+		${Else}
+			ExecShell "open" "http://windowsupdate.microsoft.com/"
+		${EndIf}
 		Quit
 	${EndIf}
-	
+
 	; --------
 
 	${StdUtils.GetParameter} $R0 "Update" "?"
