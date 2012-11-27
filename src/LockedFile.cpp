@@ -63,22 +63,20 @@ static QByteArray fileHash(QFile &file)
 	{
 		QKeccakHash keccak;
 
-		QByteArray data = file.readAll();
-		QByteArray seed = QByteArray::fromHex(g_seed);
-		QByteArray salt = QByteArray::fromHex(g_salt);
+		const QByteArray data = file.readAll();
+		const QByteArray seed = QByteArray::fromHex(g_seed);
+		const QByteArray salt = QByteArray::fromHex(g_salt);
 	
-		if(keccak.startBatch(QKeccakHash::hb384))
+		if(keccak.init(QKeccakHash::hb384))
 		{
-			bool ok[3];
-			ok[0] = keccak.putBatch(seed);
-			ok[1] = keccak.putBatch(data);
-			ok[2] = keccak.putBatch(salt);
-			if(ok[0] && ok[1] && ok[2])
+			bool ok = true;
+			ok = ok && keccak.addData(seed);
+			ok = ok && keccak.addData(data);
+			ok = ok && keccak.addData(salt);
+			if(ok)
 			{
-				if(keccak.stopBatch())
-				{
-					hash = keccak.toHex();
-				}
+				const QByteArray digest = keccak.finalize();
+				if(!digest.isEmpty()) hash = digest.toHex();
 			}
 		}
 	}
@@ -223,4 +221,12 @@ LockedFile::~LockedFile(void)
 const QString &LockedFile::filePath()
 {
 	return m_filePath;
+}
+
+void LockedFile::selfTest()
+{
+	if(!QKeccakHash::selfTest())
+	{
+		qFatal("QKeccakHash self-test has failed!");
+	}
 }

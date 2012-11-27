@@ -217,6 +217,7 @@ void InitializationThread::run()
 		pool->setMaxThreadCount(idealThreadCount * 2);
 	}
 	
+	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
 
 	QTime timer;

@@ -28,173 +28,158 @@
 
 #include "keccakimpl.cpp"
 
-QKeccakHash::QKeccakHash() :
-  mState(0),
-  mHashBitLength(0)
+QKeccakHash::QKeccakHash()
 {
-}
-
-QKeccakHash::QKeccakHash(const QString &asciiMessage, HashBits hashBits) :
-  mState(0),
-  mHashBitLength(0)
-{
-  if (!setHashBitLength(hashBits))
-    return;
-  
-  bool success = false;
-  QByteArray msg = asciiMessage.toAscii();
-  
-  mState = new KeccakImpl::hashState;
-  if (KeccakImpl::Init(mState, mHashBitLength) == KeccakImpl::SUCCESS)
-  {
-    if (KeccakImpl::Update(mState, (KeccakImpl::BitSequence*)msg.constData(), msg.size()*8) == KeccakImpl::SUCCESS)
-    {
-      if (KeccakImpl::Final(mState, (KeccakImpl::BitSequence*)mHashResult.data()) == KeccakImpl::SUCCESS)
-        success = true;
-    }
-  }
-  delete mState;
-  mState = 0;
-  
-  if (!success)
-  {
-    mHashResult.clear();
-    qDebug() << "QKeccakHash::QKeccakHash(): hash construction failed";
-  }
+	m_initialized = false;
+	m_state = new KeccakImpl::hashState;
+	memset(m_state, 0, sizeof(KeccakImpl::hashState));
+	m_hashResult.clear();
 }
 
 QKeccakHash::~QKeccakHash()
 {
-  if (mState)
-    delete mState;
+	m_hashResult.clear();
+
+	if(m_state)
+	{
+		delete m_state;
+		m_state = NULL;
+	}
 }
 
-QByteArray QKeccakHash::toRaw() const
+bool QKeccakHash::init(HashBits hashBits)
 {
-  return mHashResult;
+	if(m_initialized)
+	{
+		qWarning("QKeccakHash has already been initialized!");
+		return false;
+	}
+
+	m_hashResult.clear();
+	memset(m_state, 0, sizeof(KeccakImpl::hashState));
+	int hashBitLength = 0;
+
+	switch (hashBits)
+	{
+		case hb224: hashBitLength = 224; break;
+		case hb256: hashBitLength = 256; break;
+		case hb384: hashBitLength = 384; break;
+		case hb512: hashBitLength = 512; break;
+		default: throw "Invalid hash length!!";
+	}
+
+	if(KeccakImpl::Init(m_state, hashBitLength) != KeccakImpl::SUCCESS)
+	{
+		qWarning("KeccakImpl::Init() has failed unexpectedly!");
+		return false;
+	}
+	
+	m_hashResult.fill(char(0), hashBitLength/8);
+	m_initialized = true;
+
+	return true;
 }
 
-QByteArray QKeccakHash::toHex() const
+bool QKeccakHash::addData(const QByteArray &data)
 {
-  return mHashResult.toHex();
+	return addData(data.constData(), data.size());
 }
 
-QString QKeccakHash::toHexString() const
+bool QKeccakHash::addData(const char *data, int size)
 {
-  return QString(mHashResult.toHex());
+	if(!m_initialized)
+	{
+		qWarning("QKeccakHash has not been initialized yet!");
+		return false;
+	}
+	
+	if(KeccakImpl::Update(m_state, (KeccakImpl::BitSequence*)data, size*8) != KeccakImpl::SUCCESS)
+	{
+		qWarning("KeccakImpl::Update() has failed unexpectedly!");
+		m_hashResult.clear();
+		m_initialized = false;
+		return false;
+	}
+	
+	return true;
 }
 
-bool QKeccakHash::file(const QString &fileName, HashBits hashBits, int blockSize)
+const QByteArray &QKeccakHash::finalize()
 {
-  if (isBatchRunning() || blockSize < 1)
-    return false;
-  if (!setHashBitLength(hashBits))
-    return false;
-  QFile file(fileName);
-  if (file.open(QFile::ReadOnly))
-  {
-    qint64 fileSize = file.size();
-    qint64 readBytes = 0;
-    if (!startBatch())
-      return false;
-    bool success = true;
-    char *buffer = new char[blockSize];
-    // repeatedly read blockSize bytes of the file to buffer and pass it to putBatch:
-    while (file.error() == QFile::NoError)
-    {
-      readBytes = file.read(buffer, qMin(fileSize-file.pos(), (qint64)blockSize)); // read till end of file to buffer, but not more than blockSize bytes
-      if (readBytes > 0)
-      {
-        if (!putBatch(buffer, readBytes))
-        {
-          success = false;
-          break;
-        }
-        if (readBytes < blockSize) // that was the last block
-          break;
-      } else // error occured
-      {
-        success = false;
-        break;
-      }
-    }
-    delete buffer;
-    if (!stopBatch())
-      success = false;
-    return success;
-  } else
-    return false;
+	if(!m_initialized)
+	{
+		qWarning("QKeccakHash has not been initialized yet!");
+		m_hashResult.clear();
+		return m_hashResult;
+	}
+
+	if(KeccakImpl::Final(m_state, (KeccakImpl::BitSequence*)m_hashResult.data()) != KeccakImpl::SUCCESS)
+	{
+		qWarning("KeccakImpl::Final() has failed unexpectedly!");
+		m_hashResult.clear();
+	}
+
+	m_initialized = false;
+	return m_hashResult;
 }
 
-bool QKeccakHash::startBatch(HashBits hashBits)
+bool QKeccakHash::selfTest(void)
 {
-  if (isBatchRunning())
-    return false;
-  if (!setHashBitLength(hashBits))
-    return false;
-  mState = new KeccakImpl::hashState;
-  bool success = KeccakImpl::Init(mState, mHashBitLength) == KeccakImpl::SUCCESS;
-  if (!success)
-  {
-    delete mState;
-    mState = 0;
-    mHashResult.clear();
-  }
-  return success;
-}
+	QKeccakHash hash;
+	const QByteArray input("The quick brown fox jumps over the lazy dog");
+	bool passed[4] = {false, false, false, false};
 
-bool QKeccakHash::putBatch(const QByteArray &ba)
-{
-  return putBatch(ba.constData(), ba.size());
-}
+	if(hash.init(QKeccakHash::hb224))
+	{
+		if(hash.addData(input))
+		{
+			QByteArray result = hash.finalize();
+			if(!result.isEmpty())
+			{
+				passed[0] = (_stricmp(result.toHex().constData(), "310aee6b30c47350576ac2873fa89fd190cdc488442f3ef654cf23fe") == 0);
+				if(!passed[0]) qWarning("QKeccakHash self-test: Test #1 failed !!!");
+			}
+		}
+	}
 
-bool QKeccakHash::putBatch(const char *data, int size)
-{
-  if (!isBatchRunning() || mHashBitLength == 0)
-    return false;
-  bool success = KeccakImpl::Update(mState, (KeccakImpl::BitSequence*)data, size*8) == KeccakImpl::SUCCESS;
-  if (!success)
-  {
-    delete mState;
-    mState = 0;
-    mHashResult.clear();
-  }
-  return success;
-}
+	if(hash.init(QKeccakHash::hb256))
+	{
+		if(hash.addData(input))
+		{
+			QByteArray result = hash.finalize();
+			if(!result.isEmpty())
+			{
+				passed[1] = (_stricmp(result.toHex().constData(), "4d741b6f1eb29cb2a9b9911c82f56fa8d73b04959d3d9d222895df6c0b28aa15") == 0);
+				if(!passed[1]) qWarning("QKeccakHash self-test: Test #2 failed !!!");
+			}
+		}
+	}
+	
+	if(hash.init(QKeccakHash::hb384))
+	{
+		if(hash.addData(input))
+		{
+			QByteArray result = hash.finalize();
+			if(!result.isEmpty())
+			{
+				passed[2] = (_stricmp(result.toHex().constData(), "283990fa9d5fb731d786c5bbee94ea4db4910f18c62c03d173fc0a5e494422e8a0b3da7574dae7fa0baf005e504063b3") == 0);
+				if(!passed[2]) qWarning("QKeccakHash self-test: Test #3 failed !!!");
+			}
+		}
+	}
 
-bool QKeccakHash::stopBatch()
-{
-  if (!isBatchRunning() || mHashBitLength == 0)
-    return false;
-  bool success = KeccakImpl::Final(mState, (KeccakImpl::BitSequence*)mHashResult.data()) == KeccakImpl::SUCCESS;
-  delete mState;
-  mState = 0;
-  if (!success)
-    mHashResult.clear();
-  return success;
-}
+	if(hash.init(QKeccakHash::hb512))
+	{
+		if(hash.addData(input))
+		{
+			QByteArray result = hash.finalize();
+			if(!result.isEmpty())
+			{
+				passed[3] = (_stricmp(result.toHex().constData(), "d135bb84d0439dbac432247ee573a23ea7d3c9deb2a968eb31d47c4fb45f1ef4422d6c531b5b9bd6f449ebcc449ea94d0a8f05f62130fda612da53c79659f609") == 0);
+				if(!passed[3]) qWarning("QKeccakHash self-test: Test #4 failed !!!");
+			}
+		}
+	}
 
-bool QKeccakHash::isBatchRunning() const
-{
-  return mState;
+	return (passed[0] && passed[1] && passed[2] && passed[3]);
 }
-
-bool QKeccakHash::setHashBitLength(HashBits hashBits)
-{
-  switch (hashBits)
-  {
-    case hb224: mHashBitLength = 224; break;
-    case hb256: mHashBitLength = 256; break;
-    case hb384: mHashBitLength = 384; break;
-    case hb512: mHashBitLength = 512; break;
-    default: 
-    {
-      mHashBitLength = 0;
-      qDebug() << "QKeccakHash::setHashBitLength(): invalid hash bit value" << (int)hashBits << ", must be hb224, hb256, hb384 or hb512";
-      return false;
-    }
-  }
-  mHashResult.fill(0, mHashBitLength/8);
-  return true;
-}
-

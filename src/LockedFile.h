@@ -32,6 +32,8 @@ public:
 
 	const QString &filePath();
 
+	static void selfTest();
+
 private:
 	QString m_filePath;
 	void *m_fileHandle;
