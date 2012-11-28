@@ -164,8 +164,10 @@ static bool g_lamexp_console_attached = false;
 			static const char *g_lamexp_version_compiler = "MSVC 2012-Beta";
 		#elif (_MSC_FULL_VER < 170051020)
 			static const char *g_lamexp_version_compiler = "MSVC 2012-RTM";
-		#elif (_MSC_FULL_VER == 170051020)
+		#elif (_MSC_FULL_VER < 170051106)
 			static const char *g_lamexp_version_compiler = "MSVC 2012-U1 CTP";
+		#elif (_MSC_FULL_VER == 170051106)
+			static const char *g_lamexp_version_compiler = "MSVC 2012-U1";
 		#else
 			#error Compiler version is not supported yet!
 		#endif
