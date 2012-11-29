@@ -1,0 +1,21 @@
+diff --git "a/D:\\Qt\\QtSource\\4.8.4\\src\\corelib\\io\\qprocess_win.org" "b/D:\\Qt\\QtSource\\4.8.4\\src\\corelib\\io\\qprocess_win.cpp"
+index b78ad7d..28f08ff 100644
+--- "a/D:\\Qt\\QtSource\\4.8.4\\src\\corelib\\io\\qprocess_win.org"
++++ "b/D:\\Qt\\QtSource\\4.8.4\\src\\corelib\\io\\qprocess_win.cpp"
+@@ -413,6 +413,7 @@ void QProcessPrivate::startProcess()
+ #else
+     DWORD dwCreationFlags = CREATE_NO_WINDOW;
+     dwCreationFlags |= CREATE_UNICODE_ENVIRONMENT;
++    dwCreationFlags |= CREATE_BREAKAWAY_FROM_JOB;
+     STARTUPINFOW startupInfo = { sizeof( STARTUPINFO ), 0, 0, 0,
+                                  (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
+                                  (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
+@@ -858,7 +859,7 @@ bool QProcessPrivate::startDetached(const QString &program, const QStringList &a
+                                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                                    };
+         success = CreateProcess(0, (wchar_t*)args.utf16(),
+-                                0, 0, FALSE, CREATE_UNICODE_ENVIRONMENT | CREATE_NEW_CONSOLE, 0,
++                                0, 0, FALSE, CREATE_UNICODE_ENVIRONMENT | CREATE_NEW_CONSOLE | CREATE_BREAKAWAY_FROM_JOB, 0,
+                                 workingDir.isEmpty() ? 0 : (wchar_t*)workingDir.utf16(),
+                                 &startupInfo, &pinfo);
+ #endif // Q_OS_WINCE
