@@ -1,6 +1,6 @@
 LameXP was created from the scratch by LoRd_MuldeR <mulder2@gmx.de> and is distributed under the terms of GNU General Public License. Please see the 'License.txt' file for details!
 
-The Qt GUI Toolkit is Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies). You may use, distribute and copy the Qt GUI Toolkit under the terms of GNU General Public License version 3.
+The Qt GUI Toolkit is Copyright (C) 2012 Digia Finland Ltd and/or its subsidiary(-ies). You may use, distribute and copy the Qt GUI Toolkit under the terms of GNU General Public License version 3.
 
 The copyright of all third-party programs included in LameXP belongs to the individual software authors. Please see the "About third-party software" dialog for details!
 
