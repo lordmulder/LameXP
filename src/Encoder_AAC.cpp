@@ -198,11 +198,11 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	args.clear();
 	args << QDir::toNativeSeparators(outputFile);
 
-	if(!metaInfo.fileName().isEmpty()) args << QString("-meta:title=%1").arg(metaInfo.fileName());
-	if(!metaInfo.fileArtist().isEmpty()) args << QString("-meta:artist=%1").arg(metaInfo.fileArtist());
-	if(!metaInfo.fileAlbum().isEmpty()) args << QString("-meta:album=%1").arg(metaInfo.fileAlbum());
-	if(!metaInfo.fileGenre().isEmpty()) args << QString("-meta:genre=%1").arg(metaInfo.fileGenre());
-	if(!metaInfo.fileComment().isEmpty()) args << QString("-meta:comment=%1").arg(metaInfo.fileComment());
+	if(!metaInfo.fileName().isEmpty()) args << QString("-meta:title=%1").arg(cleanTag(metaInfo.fileName()));
+	if(!metaInfo.fileArtist().isEmpty()) args << QString("-meta:artist=%1").arg(cleanTag(metaInfo.fileArtist()));
+	if(!metaInfo.fileAlbum().isEmpty()) args << QString("-meta:album=%1").arg(cleanTag(metaInfo.fileAlbum()));
+	if(!metaInfo.fileGenre().isEmpty()) args << QString("-meta:genre=%1").arg(cleanTag(metaInfo.fileGenre()));
+	if(!metaInfo.fileComment().isEmpty()) args << QString("-meta:comment=%1").arg(cleanTag(metaInfo.fileComment()));
 	if(metaInfo.fileYear()) args << QString("-meta:year=%1").arg(QString::number(metaInfo.fileYear()));
 	if(metaInfo.filePosition()) args << QString("-meta:track=%1").arg(QString::number(metaInfo.filePosition()));
 	if(!metaInfo.fileCover().isEmpty()) args << QString("-add-cover:%1:%2").arg("front", metaInfo.fileCover());

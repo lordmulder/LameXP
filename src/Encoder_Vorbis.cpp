@@ -75,11 +75,11 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 		args << "--resample" << QString::number(m_configSamplingRate) << "--converter" << QString::number(0);
 	}
 
-	if(!metaInfo.fileName().isEmpty()) args << "-t" << metaInfo.fileName();
-	if(!metaInfo.fileArtist().isEmpty()) args << "-a" << metaInfo.fileArtist();
-	if(!metaInfo.fileAlbum().isEmpty()) args << "-l" << metaInfo.fileAlbum();
-	if(!metaInfo.fileGenre().isEmpty()) args << "-G" << metaInfo.fileGenre();
-	if(!metaInfo.fileComment().isEmpty()) args << "-c" << QString("comment=%1").arg(metaInfo.fileComment());
+	if(!metaInfo.fileName().isEmpty()) args << "-t" << cleanTag(metaInfo.fileName());
+	if(!metaInfo.fileArtist().isEmpty()) args << "-a" << cleanTag(metaInfo.fileArtist());
+	if(!metaInfo.fileAlbum().isEmpty()) args << "-l" << cleanTag(metaInfo.fileAlbum());
+	if(!metaInfo.fileGenre().isEmpty()) args << "-G" << cleanTag(metaInfo.fileGenre());
+	if(!metaInfo.fileComment().isEmpty()) args << "-c" << QString("comment=%1").arg(cleanTag(metaInfo.fileComment()));
 	if(metaInfo.fileYear()) args << "-d" << QString::number(metaInfo.fileYear());
 	if(metaInfo.filePosition()) args << "-N" << QString::number(metaInfo.filePosition());
 	

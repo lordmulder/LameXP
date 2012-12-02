@@ -57,4 +57,5 @@ protected:
 
 	//Helper functions
 	bool isUnicode(const QString &text);
+	QString cleanTag(const QString &text);
 };
