@@ -51,6 +51,7 @@
 
 //LameXP includes
 #include "Resource.h"
+#include "Config.h"
 #include "LockedFile.h"
 
 //CRT includes

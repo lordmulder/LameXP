@@ -282,8 +282,6 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 
 ProcessingDialog::~ProcessingDialog(void)
 {
-	fprintf(stderr, "BUMP 1\n"); fflush(stderr);
-	
 	view_log->setModel(NULL);
 
 	if(m_progressIndicator)
@@ -319,8 +317,6 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	fprintf(stderr, "BUMP 2\n"); fflush(stderr);
-
 	while(!m_threadList.isEmpty())
 	{
 		ProcessThread *thread = m_threadList.takeFirst();
@@ -328,8 +324,6 @@ ProcessingDialog::~ProcessingDialog(void)
 		thread->wait(15000);
 		delete thread;
 	}
-
-	fprintf(stderr, "BUMP 3\n"); fflush(stderr);
 
 	LAMEXP_DELETE(m_progressIndicator);
 	LAMEXP_DELETE(m_systemTray);
@@ -342,12 +336,8 @@ ProcessingDialog::~ProcessingDialog(void)
 	LAMEXP_DELETE(m_contextMenu);
 	LAMEXP_DELETE(m_progressModel);
 
-	fprintf(stderr, "BUMP 4\n"); fflush(stderr);
-
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
-
-	fprintf(stderr, "BUMP 5\n"); fflush(stderr);
 }
 
 ////////////////////////////////////////////////////////////

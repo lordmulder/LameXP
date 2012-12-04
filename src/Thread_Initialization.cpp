@@ -747,7 +747,7 @@ void InitializationThread::selfTest(void)
 				qDebug("%02i -> %s", ++n, g_lamexp_tools[i].pcName);
 			}
 		}
-		if(n != 28)
+		if(n != 27)
 		{
 			qFatal("Tool count mismatch !!!");
 		}

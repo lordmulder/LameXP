@@ -21,6 +21,9 @@
 
 #include "Dialog_MainWindow.h"
 
+//UIC includes
+#include "../tmp/UIC_MainWindow.h"
+
 //LameXP includes
 #include "Global.h"
 #include "Resource.h"
@@ -153,6 +156,7 @@ static const DWORD IDM_ABOUTBOX = 0xEFF0;
 MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settingsModel, QWidget *parent)
 :
 	QMainWindow(parent),
+	ui(new Ui::MainWindow),
 	m_fileListModel(fileListModel),
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
@@ -166,20 +170,20 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_outputFolderViewInitCounter(0)
 {
 	//Init the dialog, from the .ui file
-	setupUi(this);
+	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
 	
 	//Register meta types
 	qRegisterMetaType<AudioFileModel>("AudioFileModel");
 
 	//Enabled main buttons
-	connect(buttonAbout, SIGNAL(clicked()), this, SLOT(aboutButtonClicked()));
-	connect(buttonStart, SIGNAL(clicked()), this, SLOT(encodeButtonClicked()));
-	connect(buttonQuit, SIGNAL(clicked()), this, SLOT(closeButtonClicked()));
+	connect(ui->buttonAbout, SIGNAL(clicked()), this, SLOT(aboutButtonClicked()));
+	connect(ui->buttonStart, SIGNAL(clicked()), this, SLOT(encodeButtonClicked()));
+	connect(ui->buttonQuit, SIGNAL(clicked()), this, SLOT(closeButtonClicked()));
 
 	//Setup tab widget
-	tabWidget->setCurrentIndex(0);
-	connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabPageChanged(int)));
+	ui->tabWidget->setCurrentIndex(0);
+	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabPageChanged(int)));
 
 	//Add system menu
 	if(HMENU hMenu = ::GetSystemMenu(winId(), FALSE))
@@ -192,12 +196,12 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	// Setup "Source" tab
 	//--------------------------------
 
-	sourceFileView->setModel(m_fileListModel);
-	sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-	sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-	sourceFileView->setContextMenuPolicy(Qt::CustomContextMenu);
-	sourceFileView->viewport()->installEventFilter(this);
-	m_dropNoteLabel = new QLabel(sourceFileView);
+	ui->sourceFileView->setModel(m_fileListModel);
+	ui->sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	ui->sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	ui->sourceFileView->setContextMenuPolicy(Qt::CustomContextMenu);
+	ui->sourceFileView->viewport()->installEventFilter(this);
+	m_dropNoteLabel = new QLabel(ui->sourceFileView);
 	m_dropNoteLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	SET_FONT_BOLD(m_dropNoteLabel, true);
 	SET_TEXT_COLOR(m_dropNoteLabel, Qt::darkGray);
@@ -209,18 +213,18 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_exportCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/table_save.png"), "N/A");
 	m_importCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_table.png"), "N/A");
 	SET_FONT_BOLD(m_showDetailsContextAction, true);
-	connect(buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
-	connect(buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
-	connect(buttonClearFiles, SIGNAL(clicked()), this, SLOT(clearFilesButtonClicked()));
-	connect(buttonFileUp, SIGNAL(clicked()), this, SLOT(fileUpButtonClicked()));
-	connect(buttonFileDown, SIGNAL(clicked()), this, SLOT(fileDownButtonClicked()));
-	connect(buttonShowDetails, SIGNAL(clicked()), this, SLOT(showDetailsButtonClicked()));
+	connect(ui->buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
+	connect(ui->buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
+	connect(ui->buttonClearFiles, SIGNAL(clicked()), this, SLOT(clearFilesButtonClicked()));
+	connect(ui->buttonFileUp, SIGNAL(clicked()), this, SLOT(fileUpButtonClicked()));
+	connect(ui->buttonFileDown, SIGNAL(clicked()), this, SLOT(fileDownButtonClicked()));
+	connect(ui->buttonShowDetails, SIGNAL(clicked()), this, SLOT(showDetailsButtonClicked()));
 	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
 	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
 	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(sourceModelChanged()));
-	connect(sourceFileView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(sourceFilesContextMenu(QPoint)));
-	connect(sourceFileView->verticalScrollBar(), SIGNAL(sliderMoved(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
-	connect(sourceFileView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
+	connect(ui->sourceFileView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(sourceFilesContextMenu(QPoint)));
+	connect(ui->sourceFileView->verticalScrollBar(), SIGNAL(sliderMoved(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
+	connect(ui->sourceFileView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
 	connect(m_showDetailsContextAction, SIGNAL(triggered(bool)), this, SLOT(showDetailsButtonClicked()));
 	connect(m_previewContextAction, SIGNAL(triggered(bool)), this, SLOT(previewContextActionTriggered()));
 	connect(m_findFileContextAction, SIGNAL(triggered(bool)), this, SLOT(findFileContextActionTriggered()));
@@ -231,35 +235,35 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	// Setup "Output" tab
 	//--------------------------------
 
-	outputFolderView->setHeaderHidden(true);
-	outputFolderView->setAnimated(false);
-	outputFolderView->setMouseTracking(false);
-	outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
-	outputFolderView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+	ui->outputFolderView->setHeaderHidden(true);
+	ui->outputFolderView->setAnimated(false);
+	ui->outputFolderView->setMouseTracking(false);
+	ui->outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
+	ui->outputFolderView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
 	m_evenFilterOutputFolderMouse = new CustomEventFilter;
-	outputFoldersEditorLabel->installEventFilter(m_evenFilterOutputFolderMouse);
-	outputFoldersFovoritesLabel->installEventFilter(m_evenFilterOutputFolderMouse);
-	outputFolderLabel->installEventFilter(m_evenFilterOutputFolderMouse);
+	ui->outputFoldersEditorLabel->installEventFilter(m_evenFilterOutputFolderMouse);
+	ui->outputFoldersFovoritesLabel->installEventFilter(m_evenFilterOutputFolderMouse);
+	ui->outputFolderLabel->installEventFilter(m_evenFilterOutputFolderMouse);
 
 	m_evenFilterOutputFolderView = new CustomEventFilter;
-	outputFolderView->installEventFilter(m_evenFilterOutputFolderView);
+	ui->outputFolderView->installEventFilter(m_evenFilterOutputFolderView);
 
-	SET_CHECKBOX_STATE(saveToSourceFolderCheckBox, m_settings->outputToSourceDir());
-	prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
+	SET_CHECKBOX_STATE(ui->saveToSourceFolderCheckBox, m_settings->outputToSourceDir());
+	ui->prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
 	
-	connect(outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	connect(outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	connect(outputFolderView, SIGNAL(pressed(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	connect(outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewMoved(QModelIndex)));
-	connect(outputFolderView, SIGNAL(expanded(QModelIndex)), this, SLOT(outputFolderItemExpanded(QModelIndex)));
-	connect(buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
-	connect(buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
-	connect(buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
-	connect(buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
-	connect(saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
-	connect(prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
-	connect(outputFolderEdit, SIGNAL(editingFinished()), this, SLOT(outputFolderEditFinished()));
+	connect(ui->outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(ui->outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(ui->outputFolderView, SIGNAL(pressed(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(ui->outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewMoved(QModelIndex)));
+	connect(ui->outputFolderView, SIGNAL(expanded(QModelIndex)), this, SLOT(outputFolderItemExpanded(QModelIndex)));
+	connect(ui->buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
+	connect(ui->buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
+	connect(ui->buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
+	connect(ui->buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
+	connect(ui->saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
+	connect(ui->prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
+	connect(ui->outputFolderEdit, SIGNAL(editingFinished()), this, SLOT(outputFolderEditFinished()));
 	connect(m_evenFilterOutputFolderMouse, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderMouseEventOccurred(QWidget*, QEvent*)));
 	connect(m_evenFilterOutputFolderView, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderViewEventOccurred(QWidget*, QEvent*)));
 
@@ -268,7 +272,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
 		m_refreshFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/arrow_refresh.png"), "N/A");
 		m_outputFolderContextMenu->setDefaultAction(m_showFolderContextAction);
-		connect(outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
+		connect(ui->outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
 		connect(m_showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
 		connect(m_refreshFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(refreshFolderContextActionTriggered()));
 	}
@@ -280,8 +284,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		connect(m_addFavoriteFolderAction, SIGNAL(triggered(bool)), this, SLOT(addFavoriteFolderActionTriggered()));
 	}
 
-	outputFolderEdit->setVisible(false);
-	if(m_outputFolderNoteBox = new QLabel(outputFolderView))
+	ui->outputFolderEdit->setVisible(false);
+	if(m_outputFolderNoteBox = new QLabel(ui->outputFolderView))
 	{
 		m_outputFolderNoteBox->setAutoFillBackground(true);
 		m_outputFolderNoteBox->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -301,57 +305,57 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
 	m_metaInfoModel->clearData();
 	m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
-	metaDataView->setModel(m_metaInfoModel);
-	metaDataView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-	metaDataView->verticalHeader()->hide();
-	metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-	SET_CHECKBOX_STATE(writeMetaDataCheckBox, m_settings->writeMetaTags());
-	generatePlaylistCheckBox->setChecked(m_settings->createPlaylist());
-	connect(buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
-	connect(buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
-	connect(writeMetaDataCheckBox, SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
-	connect(generatePlaylistCheckBox, SIGNAL(clicked()), this, SLOT(playlistEnabledChanged()));
+	ui->metaDataView->setModel(m_metaInfoModel);
+	ui->metaDataView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	ui->metaDataView->verticalHeader()->hide();
+	ui->metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	SET_CHECKBOX_STATE(ui->writeMetaDataCheckBox, m_settings->writeMetaTags());
+	ui->generatePlaylistCheckBox->setChecked(m_settings->createPlaylist());
+	connect(ui->buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
+	connect(ui->buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
+	connect(ui->writeMetaDataCheckBox, SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
+	connect(ui->generatePlaylistCheckBox, SIGNAL(clicked()), this, SLOT(playlistEnabledChanged()));
 
 	//--------------------------------
 	//Setup "Compression" tab
 	//--------------------------------
 
 	m_encoderButtonGroup = new QButtonGroup(this);
-	m_encoderButtonGroup->addButton(radioButtonEncoderMP3, SettingsModel::MP3Encoder);
-	m_encoderButtonGroup->addButton(radioButtonEncoderVorbis, SettingsModel::VorbisEncoder);
-	m_encoderButtonGroup->addButton(radioButtonEncoderAAC, SettingsModel::AACEncoder);
-	m_encoderButtonGroup->addButton(radioButtonEncoderAC3, SettingsModel::AC3Encoder);
-	m_encoderButtonGroup->addButton(radioButtonEncoderFLAC, SettingsModel::FLACEncoder);
-	m_encoderButtonGroup->addButton(radioButtonEncoderOpus, SettingsModel::OpusEncoder);
-	m_encoderButtonGroup->addButton(radioButtonEncoderDCA, SettingsModel::DCAEncoder);
-	m_encoderButtonGroup->addButton(radioButtonEncoderPCM, SettingsModel::PCMEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderMP3, SettingsModel::MP3Encoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderVorbis, SettingsModel::VorbisEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAAC, SettingsModel::AACEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAC3, SettingsModel::AC3Encoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderFLAC, SettingsModel::FLACEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderOpus, SettingsModel::OpusEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderDCA, SettingsModel::DCAEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderPCM, SettingsModel::PCMEncoder);
 
 	m_modeButtonGroup = new QButtonGroup(this);
-	m_modeButtonGroup->addButton(radioButtonModeQuality, SettingsModel::VBRMode);
-	m_modeButtonGroup->addButton(radioButtonModeAverageBitrate, SettingsModel::ABRMode);
-	m_modeButtonGroup->addButton(radioButtonConstBitrate, SettingsModel::CBRMode);
+	m_modeButtonGroup->addButton(ui->radioButtonModeQuality, SettingsModel::VBRMode);
+	m_modeButtonGroup->addButton(ui->radioButtonModeAverageBitrate, SettingsModel::ABRMode);
+	m_modeButtonGroup->addButton(ui->radioButtonConstBitrate, SettingsModel::CBRMode);
 
-	radioButtonEncoderAAC->setEnabled(m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable);
-	radioButtonEncoderMP3->setChecked(m_settings->compressionEncoder() == SettingsModel::MP3Encoder);
-	radioButtonEncoderVorbis->setChecked(m_settings->compressionEncoder() == SettingsModel::VorbisEncoder);
-	radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable));
-	radioButtonEncoderAC3->setChecked(m_settings->compressionEncoder() == SettingsModel::AC3Encoder);
-	radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
-	radioButtonEncoderOpus->setChecked(m_settings->compressionEncoder() == SettingsModel::OpusEncoder);
-	radioButtonEncoderDCA->setChecked(m_settings->compressionEncoder() == SettingsModel::DCAEncoder);
-	radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
-	radioButtonModeQuality->setChecked(m_settings->compressionRCMode() == SettingsModel::VBRMode);
-	radioButtonModeAverageBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::ABRMode);
-	radioButtonConstBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::CBRMode);
-	sliderBitrate->setValue(m_settings->compressionBitrate());
+	ui->radioButtonEncoderAAC->setEnabled(m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable);
+	ui->radioButtonEncoderMP3->setChecked(m_settings->compressionEncoder() == SettingsModel::MP3Encoder);
+	ui->radioButtonEncoderVorbis->setChecked(m_settings->compressionEncoder() == SettingsModel::VorbisEncoder);
+	ui->radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable));
+	ui->radioButtonEncoderAC3->setChecked(m_settings->compressionEncoder() == SettingsModel::AC3Encoder);
+	ui->radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
+	ui->radioButtonEncoderOpus->setChecked(m_settings->compressionEncoder() == SettingsModel::OpusEncoder);
+	ui->radioButtonEncoderDCA->setChecked(m_settings->compressionEncoder() == SettingsModel::DCAEncoder);
+	ui->radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
+	ui->radioButtonModeQuality->setChecked(m_settings->compressionRCMode() == SettingsModel::VBRMode);
+	ui->radioButtonModeAverageBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::ABRMode);
+	ui->radioButtonConstBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::CBRMode);
+	ui->sliderBitrate->setValue(m_settings->compressionBitrate());
 	
 	m_evenFilterCompressionTab = new CustomEventFilter();
-	labelCompressionHelp->installEventFilter(m_evenFilterCompressionTab);
+	ui->labelCompressionHelp->installEventFilter(m_evenFilterCompressionTab);
 
 	connect(m_encoderButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateEncoder(int)));
 	connect(m_modeButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateRCMode(int)));
 	connect(m_evenFilterCompressionTab, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(compressionTabEventOccurred(QWidget*, QEvent*)));
-	connect(sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
+	connect(ui->sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
 
 	updateEncoder(m_encoderButtonGroup->checkedId());
 
@@ -359,99 +363,99 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//Setup "Advanced Options" tab
 	//--------------------------------
 
-	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
-	if(m_settings->maximumInstances() > 0) sliderMaxInstances->setValue(m_settings->maximumInstances());
+	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
+	if(m_settings->maximumInstances() > 0) ui->sliderMaxInstances->setValue(m_settings->maximumInstances());
 
-	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
-	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
-	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
-	spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBass()) / 100.0);
-	spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTreble()) / 100.0);
-	spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSize());
-	spinBoxOpusComplexity->setValue(m_settings->opusComplexity());
+	ui->spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
+	ui->spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
+	ui->spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
+	ui->spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBass()) / 100.0);
+	ui->spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTreble()) / 100.0);
+	ui->spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSize());
+	ui->spinBoxOpusComplexity->setValue(m_settings->opusComplexity());
 	
-	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelMode());
-	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRate());
-	comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfile());
-	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
-	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
-	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationMode());
+	ui->comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelMode());
+	ui->comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRate());
+	ui->comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfile());
+	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
+	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
+	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationMode());
 	//comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeFor());
-	comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesize());
+	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesize());
 	
-	SET_CHECKBOX_STATE(checkBoxBitrateManagement, m_settings->bitrateManagementEnabled());
-	SET_CHECKBOX_STATE(checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2Pass());
-	SET_CHECKBOX_STATE(checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocation());
-	SET_CHECKBOX_STATE(checkBoxNormalizationFilter, m_settings->normalizationFilterEnabled());
-	SET_CHECKBOX_STATE(checkBoxAutoDetectInstances, (m_settings->maximumInstances() < 1));
-	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabled());
-	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
-	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
-	checkBoxNeroAAC2PassMode->setEnabled(!(m_fhgEncoderAvailable || m_qaacEncoderAvailable));
+	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2Pass());
+	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocation());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilter, m_settings->normalizationFilterEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances, (m_settings->maximumInstances() < 1));
+	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
+	ui->checkBoxNeroAAC2PassMode->setEnabled(!(m_fhgEncoderAvailable || m_qaacEncoderAvailable));
 	
-	lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
-	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
-	lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEnc());
-	lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
-	lineEditCustomParamAften->setText(m_settings->customParametersAften());
-	lineEditCustomParamOpus->setText(m_settings->customParametersOpus());
-	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
-	lineEditRenamePattern->setText(m_settings->renameOutputFilesPattern());
+	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
+	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
+	ui->lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEnc());
+	ui->lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
+	ui->lineEditCustomParamAften->setText(m_settings->customParametersAften());
+	ui->lineEditCustomParamOpus->setText(m_settings->customParametersOpus());
+	ui->lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
+	ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPattern());
 	
 	m_evenFilterCustumParamsHelp = new CustomEventFilter();
-	helpCustomParamLAME->installEventFilter(m_evenFilterCustumParamsHelp);
-	helpCustomParamOggEnc->installEventFilter(m_evenFilterCustumParamsHelp);
-	helpCustomParamNeroAAC->installEventFilter(m_evenFilterCustumParamsHelp);
-	helpCustomParamFLAC->installEventFilter(m_evenFilterCustumParamsHelp);
-	helpCustomParamAften->installEventFilter(m_evenFilterCustumParamsHelp);
-	helpCustomParamOpus->installEventFilter(m_evenFilterCustumParamsHelp);
+	ui->helpCustomParamLAME->installEventFilter(m_evenFilterCustumParamsHelp);
+	ui->helpCustomParamOggEnc->installEventFilter(m_evenFilterCustumParamsHelp);
+	ui->helpCustomParamNeroAAC->installEventFilter(m_evenFilterCustumParamsHelp);
+	ui->helpCustomParamFLAC->installEventFilter(m_evenFilterCustumParamsHelp);
+	ui->helpCustomParamAften->installEventFilter(m_evenFilterCustumParamsHelp);
+	ui->helpCustomParamOpus->installEventFilter(m_evenFilterCustumParamsHelp);
 	
 	m_overwriteButtonGroup = new QButtonGroup(this);
-	m_overwriteButtonGroup->addButton(radioButtonOverwriteModeKeepBoth, SettingsModel::Overwrite_KeepBoth);
-	m_overwriteButtonGroup->addButton(radioButtonOverwriteModeSkipFile, SettingsModel::Overwrite_SkipFile);
-	m_overwriteButtonGroup->addButton(radioButtonOverwriteModeReplaces, SettingsModel::Overwrite_Replaces);
+	m_overwriteButtonGroup->addButton(ui->radioButtonOverwriteModeKeepBoth, SettingsModel::Overwrite_KeepBoth);
+	m_overwriteButtonGroup->addButton(ui->radioButtonOverwriteModeSkipFile, SettingsModel::Overwrite_SkipFile);
+	m_overwriteButtonGroup->addButton(ui->radioButtonOverwriteModeReplaces, SettingsModel::Overwrite_Replaces);
 
-	radioButtonOverwriteModeKeepBoth->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_KeepBoth);
-	radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
-	radioButtonOverwriteModeReplaces->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces);
+	ui->radioButtonOverwriteModeKeepBoth->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_KeepBoth);
+	ui->radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
+	ui->radioButtonOverwriteModeReplaces->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces);
 
-	connect(sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
-	connect(checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
-	connect(spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
-	connect(spinBoxBitrateManagementMax, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMaxChanged(int)));
-	connect(comboBoxMP3ChannelMode, SIGNAL(currentIndexChanged(int)), this, SLOT(channelModeChanged(int)));
-	connect(comboBoxSamplingRate, SIGNAL(currentIndexChanged(int)), this, SLOT(samplingRateChanged(int)));
-	connect(checkBoxNeroAAC2PassMode, SIGNAL(clicked(bool)), this, SLOT(neroAAC2PassChanged(bool)));
-	connect(comboBoxAACProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(neroAACProfileChanged(int)));
-	connect(checkBoxNormalizationFilter, SIGNAL(clicked(bool)), this, SLOT(normalizationEnabledChanged(bool)));
-	connect(comboBoxAftenCodingMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenCodingModeChanged(int)));
-	connect(comboBoxAftenDRCMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenDRCModeChanged(int)));
-	connect(spinBoxAftenSearchSize, SIGNAL(valueChanged(int)), this, SLOT(aftenSearchSizeChanged(int)));
-	connect(checkBoxAftenFastAllocation, SIGNAL(clicked(bool)), this, SLOT(aftenFastAllocationChanged(bool)));
-	connect(spinBoxNormalizationFilter, SIGNAL(valueChanged(double)), this, SLOT(normalizationMaxVolumeChanged(double)));
-	connect(comboBoxNormalizationMode, SIGNAL(currentIndexChanged(int)), this, SLOT(normalizationModeChanged(int)));
-	connect(spinBoxToneAdjustBass, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustBassChanged(double)));
-	connect(spinBoxToneAdjustTreble, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustTrebleChanged(double)));
-	connect(buttonToneAdjustReset, SIGNAL(clicked()), this, SLOT(toneAdjustTrebleReset()));
-	connect(lineEditCustomParamLAME, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(lineEditCustomParamOggEnc, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(lineEditCustomParamNeroAAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(lineEditCustomParamAften, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(lineEditCustomParamOpus, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(sliderMaxInstances, SIGNAL(valueChanged(int)), this, SLOT(updateMaximumInstances(int)));
-	connect(checkBoxAutoDetectInstances, SIGNAL(clicked(bool)), this, SLOT(autoDetectInstancesChanged(bool)));
-	connect(buttonBrowseCustomTempFolder, SIGNAL(clicked()), this, SLOT(browseCustomTempFolderButtonClicked()));
-	connect(lineEditCustomTempFolder, SIGNAL(textChanged(QString)), this, SLOT(customTempFolderChanged(QString)));
-	connect(checkBoxUseSystemTempFolder, SIGNAL(clicked(bool)), this, SLOT(useCustomTempFolderChanged(bool)));
-	connect(buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
-	connect(checkBoxRenameOutput, SIGNAL(clicked(bool)), this, SLOT(renameOutputEnabledChanged(bool)));
-	connect(lineEditRenamePattern, SIGNAL(editingFinished()), this, SLOT(renameOutputPatternChanged()));
-	connect(lineEditRenamePattern, SIGNAL(textChanged(QString)), this, SLOT(renameOutputPatternChanged(QString)));
-	connect(labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros(QString)));
-	connect(checkBoxForceStereoDownmix, SIGNAL(clicked(bool)), this, SLOT(forceStereoDownmixEnabledChanged(bool)));
-	connect(comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
-	connect(spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
+	connect(ui->sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
+	connect(ui->checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
+	connect(ui->spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
+	connect(ui->spinBoxBitrateManagementMax, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMaxChanged(int)));
+	connect(ui->comboBoxMP3ChannelMode, SIGNAL(currentIndexChanged(int)), this, SLOT(channelModeChanged(int)));
+	connect(ui->comboBoxSamplingRate, SIGNAL(currentIndexChanged(int)), this, SLOT(samplingRateChanged(int)));
+	connect(ui->checkBoxNeroAAC2PassMode, SIGNAL(clicked(bool)), this, SLOT(neroAAC2PassChanged(bool)));
+	connect(ui->comboBoxAACProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(neroAACProfileChanged(int)));
+	connect(ui->checkBoxNormalizationFilter, SIGNAL(clicked(bool)), this, SLOT(normalizationEnabledChanged(bool)));
+	connect(ui->comboBoxAftenCodingMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenCodingModeChanged(int)));
+	connect(ui->comboBoxAftenDRCMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenDRCModeChanged(int)));
+	connect(ui->spinBoxAftenSearchSize, SIGNAL(valueChanged(int)), this, SLOT(aftenSearchSizeChanged(int)));
+	connect(ui->checkBoxAftenFastAllocation, SIGNAL(clicked(bool)), this, SLOT(aftenFastAllocationChanged(bool)));
+	connect(ui->spinBoxNormalizationFilter, SIGNAL(valueChanged(double)), this, SLOT(normalizationMaxVolumeChanged(double)));
+	connect(ui->comboBoxNormalizationMode, SIGNAL(currentIndexChanged(int)), this, SLOT(normalizationModeChanged(int)));
+	connect(ui->spinBoxToneAdjustBass, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustBassChanged(double)));
+	connect(ui->spinBoxToneAdjustTreble, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustTrebleChanged(double)));
+	connect(ui->buttonToneAdjustReset, SIGNAL(clicked()), this, SLOT(toneAdjustTrebleReset()));
+	connect(ui->lineEditCustomParamLAME, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamOggEnc, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamNeroAAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamAften, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamOpus, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
+	connect(ui->sliderMaxInstances, SIGNAL(valueChanged(int)), this, SLOT(updateMaximumInstances(int)));
+	connect(ui->checkBoxAutoDetectInstances, SIGNAL(clicked(bool)), this, SLOT(autoDetectInstancesChanged(bool)));
+	connect(ui->buttonBrowseCustomTempFolder, SIGNAL(clicked()), this, SLOT(browseCustomTempFolderButtonClicked()));
+	connect(ui->lineEditCustomTempFolder, SIGNAL(textChanged(QString)), this, SLOT(customTempFolderChanged(QString)));
+	connect(ui->checkBoxUseSystemTempFolder, SIGNAL(clicked(bool)), this, SLOT(useCustomTempFolderChanged(bool)));
+	connect(ui->buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
+	connect(ui->checkBoxRenameOutput, SIGNAL(clicked(bool)), this, SLOT(renameOutputEnabledChanged(bool)));
+	connect(ui->lineEditRenamePattern, SIGNAL(editingFinished()), this, SLOT(renameOutputPatternChanged()));
+	connect(ui->lineEditRenamePattern, SIGNAL(textChanged(QString)), this, SLOT(renameOutputPatternChanged(QString)));
+	connect(ui->labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros(QString)));
+	connect(ui->checkBoxForceStereoDownmix, SIGNAL(clicked(bool)), this, SLOT(forceStereoDownmixEnabledChanged(bool)));
+	connect(ui->comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
+	connect(ui->spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
 	//connect(comboBoxOpusOptimize, SIGNAL(currentIndexChanged(int)), SLOT(opusSettingsChanged()));
 	//connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
 	connect(m_overwriteButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(overwriteModeChanged(int)));
@@ -461,10 +465,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	// Force initial GUI update
 	//--------------------------------
 
-	updateLameAlgoQuality(sliderLameAlgoQuality->value());
-	updateMaximumInstances(sliderMaxInstances->value());
-	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
-	toneAdjustBassChanged(spinBoxToneAdjustBass->value());
+	updateLameAlgoQuality(ui->sliderLameAlgoQuality->value());
+	updateMaximumInstances(ui->sliderMaxInstances->value());
+	toneAdjustTrebleChanged(ui->spinBoxToneAdjustTreble->value());
+	toneAdjustBassChanged(ui->spinBoxToneAdjustBass->value());
 	customParamsChanged();
 	
 	//--------------------------------
@@ -472,41 +476,41 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//--------------------------------
 
 	//Activate file menu actions
-	actionOpenFolder->setData(QVariant::fromValue<bool>(false));
-	actionOpenFolderRecursively->setData(QVariant::fromValue<bool>(true));
-	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
-	connect(actionOpenFolderRecursively, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
+	ui->actionOpenFolder->setData(QVariant::fromValue<bool>(false));
+	ui->actionOpenFolderRecursively->setData(QVariant::fromValue<bool>(true));
+	connect(ui->actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
+	connect(ui->actionOpenFolderRecursively, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
 
 	//Activate view menu actions
 	m_tabActionGroup = new QActionGroup(this);
-	m_tabActionGroup->addAction(actionSourceFiles);
-	m_tabActionGroup->addAction(actionOutputDirectory);
-	m_tabActionGroup->addAction(actionCompression);
-	m_tabActionGroup->addAction(actionMetaData);
-	m_tabActionGroup->addAction(actionAdvancedOptions);
-	actionSourceFiles->setData(0);
-	actionOutputDirectory->setData(1);
-	actionMetaData->setData(2);
-	actionCompression->setData(3);
-	actionAdvancedOptions->setData(4);
-	actionSourceFiles->setChecked(true);
+	m_tabActionGroup->addAction(ui->actionSourceFiles);
+	m_tabActionGroup->addAction(ui->actionOutputDirectory);
+	m_tabActionGroup->addAction(ui->actionCompression);
+	m_tabActionGroup->addAction(ui->actionMetaData);
+	m_tabActionGroup->addAction(ui->actionAdvancedOptions);
+	ui->actionSourceFiles->setData(0);
+	ui->actionOutputDirectory->setData(1);
+	ui->actionMetaData->setData(2);
+	ui->actionCompression->setData(3);
+	ui->actionAdvancedOptions->setData(4);
+	ui->actionSourceFiles->setChecked(true);
 	connect(m_tabActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabActionActivated(QAction*)));
 
 	//Activate style menu actions
 	m_styleActionGroup = new QActionGroup(this);
-	m_styleActionGroup->addAction(actionStylePlastique);
-	m_styleActionGroup->addAction(actionStyleCleanlooks);
-	m_styleActionGroup->addAction(actionStyleWindowsVista);
-	m_styleActionGroup->addAction(actionStyleWindowsXP);
-	m_styleActionGroup->addAction(actionStyleWindowsClassic);
-	actionStylePlastique->setData(0);
-	actionStyleCleanlooks->setData(1);
-	actionStyleWindowsVista->setData(2);
-	actionStyleWindowsXP->setData(3);
-	actionStyleWindowsClassic->setData(4);
-	actionStylePlastique->setChecked(true);
-	actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP && lamexp_themes_enabled());
-	actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA && lamexp_themes_enabled());
+	m_styleActionGroup->addAction(ui->actionStylePlastique);
+	m_styleActionGroup->addAction(ui->actionStyleCleanlooks);
+	m_styleActionGroup->addAction(ui->actionStyleWindowsVista);
+	m_styleActionGroup->addAction(ui->actionStyleWindowsXP);
+	m_styleActionGroup->addAction(ui->actionStyleWindowsClassic);
+	ui->actionStylePlastique->setData(0);
+	ui->actionStyleCleanlooks->setData(1);
+	ui->actionStyleWindowsVista->setData(2);
+	ui->actionStyleWindowsXP->setData(3);
+	ui->actionStyleWindowsClassic->setData(4);
+	ui->actionStylePlastique->setChecked(true);
+	ui->actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP && lamexp_themes_enabled());
+	ui->actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA && lamexp_themes_enabled());
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 	styleActionActivated(NULL);
 
@@ -523,46 +527,46 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 		currentLanguage->setCheckable(true);
 		currentLanguage->setChecked(false);
 		m_languageActionGroup->addAction(currentLanguage);
-		menuLanguage->insertAction(actionLoadTranslationFromFile, currentLanguage);
+		ui->menuLanguage->insertAction(ui->actionLoadTranslationFromFile, currentLanguage);
 	}
-	menuLanguage->insertSeparator(actionLoadTranslationFromFile);
-	connect(actionLoadTranslationFromFile, SIGNAL(triggered(bool)), this, SLOT(languageFromFileActionActivated(bool)));
+	ui->menuLanguage->insertSeparator(ui->actionLoadTranslationFromFile);
+	connect(ui->actionLoadTranslationFromFile, SIGNAL(triggered(bool)), this, SLOT(languageFromFileActionActivated(bool)));
 	connect(m_languageActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
-	actionLoadTranslationFromFile->setChecked(false);
+	ui->actionLoadTranslationFromFile->setChecked(false);
 
 	//Activate tools menu actions
-	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
-	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
-	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
-	actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
-	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
-	actionDisableShellIntegration->setDisabled(lamexp_portable_mode() && actionDisableShellIntegration->isChecked());
-	actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
-	actionCheckForBetaUpdates->setEnabled(!lamexp_version_demo());
-	actionHibernateComputer->setChecked(m_settings->hibernateComputer());
-	actionHibernateComputer->setEnabled(lamexp_is_hibernation_supported());
-	connect(actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
-	connect(actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
-	connect(actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
-	connect(actionDisableSlowStartupNotifications, SIGNAL(triggered(bool)), this, SLOT(disableSlowStartupNotificationsActionTriggered(bool)));
-	connect(actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
-	connect(actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
-	connect(actionHibernateComputer, SIGNAL(triggered(bool)), this, SLOT(hibernateComputerActionTriggered(bool)));
-	connect(actionCheckForBetaUpdates, SIGNAL(triggered(bool)), this, SLOT(checkForBetaUpdatesActionTriggered(bool)));
-	connect(actionImportCueSheet, SIGNAL(triggered(bool)), this, SLOT(importCueSheetActionTriggered(bool)));
+	ui->actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
+	ui->actionDisableSounds->setChecked(!m_settings->soundsEnabled());
+	ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
+	ui->actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
+	ui->actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
+	ui->actionDisableShellIntegration->setDisabled(lamexp_portable_mode() && ui->actionDisableShellIntegration->isChecked());
+	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
+	ui->actionCheckForBetaUpdates->setEnabled(!lamexp_version_demo());
+	ui->actionHibernateComputer->setChecked(m_settings->hibernateComputer());
+	ui->actionHibernateComputer->setEnabled(lamexp_is_hibernation_supported());
+	connect(ui->actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
+	connect(ui->actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
+	connect(ui->actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
+	connect(ui->actionDisableSlowStartupNotifications, SIGNAL(triggered(bool)), this, SLOT(disableSlowStartupNotificationsActionTriggered(bool)));
+	connect(ui->actionDisableShellIntegration, SIGNAL(triggered(bool)), this, SLOT(disableShellIntegrationActionTriggered(bool)));
+	connect(ui->actionShowDropBoxWidget, SIGNAL(triggered(bool)), this, SLOT(showDropBoxWidgetActionTriggered(bool)));
+	connect(ui->actionHibernateComputer, SIGNAL(triggered(bool)), this, SLOT(hibernateComputerActionTriggered(bool)));
+	connect(ui->actionCheckForBetaUpdates, SIGNAL(triggered(bool)), this, SLOT(checkForBetaUpdatesActionTriggered(bool)));
+	connect(ui->actionImportCueSheet, SIGNAL(triggered(bool)), this, SLOT(importCueSheetActionTriggered(bool)));
 		
 	//Activate help menu actions
-	actionVisitHomepage->setData(QString::fromLatin1(lamexp_website_url()));
-	actionVisitSupport->setData(QString::fromLatin1(lamexp_support_url()));
-	actionDocumentFAQ->setData(QString("%1/FAQ.html").arg(QApplication::applicationDirPath()));
-	actionDocumentChangelog->setData(QString("%1/Changelog.html").arg(QApplication::applicationDirPath()));
-	actionDocumentTranslate->setData(QString("%1/Translate.html").arg(QApplication::applicationDirPath()));
-	connect(actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
-	connect(actionVisitHomepage, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
-	connect(actionVisitSupport, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
-	connect(actionDocumentFAQ, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
-	connect(actionDocumentChangelog, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
-	connect(actionDocumentTranslate, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
+	ui->actionVisitHomepage->setData(QString::fromLatin1(lamexp_website_url()));
+	ui->actionVisitSupport->setData(QString::fromLatin1(lamexp_support_url()));
+	ui->actionDocumentFAQ->setData(QString("%1/FAQ.html").arg(QApplication::applicationDirPath()));
+	ui->actionDocumentChangelog->setData(QString("%1/Changelog.html").arg(QApplication::applicationDirPath()));
+	ui->actionDocumentTranslate->setData(QString("%1/Translate.html").arg(QApplication::applicationDirPath()));
+	connect(ui->actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
+	connect(ui->actionVisitHomepage, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionVisitSupport, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionDocumentFAQ, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
+	connect(ui->actionDocumentChangelog, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
+	connect(ui->actionDocumentTranslate, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	
 	//--------------------------------
 	// Prepare to show window
@@ -626,9 +630,9 @@ MainWindow::~MainWindow(void)
 	}
 
 	//Unset models
-	SET_MODEL(sourceFileView, NULL);
-	SET_MODEL(outputFolderView, NULL);
-	SET_MODEL(metaDataView, NULL);
+	SET_MODEL(ui->sourceFileView, NULL);
+	SET_MODEL(ui->outputFolderView, NULL);
+	SET_MODEL(ui->metaDataView, NULL);
 
 	//Free memory
 	LAMEXP_DELETE(m_tabActionGroup);
@@ -651,6 +655,9 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_evenFilterOutputFolderMouse);
 	LAMEXP_DELETE(m_evenFilterOutputFolderView);
 	LAMEXP_DELETE(m_evenFilterCompressionTab);
+	
+	//Un-initialize the dialog
+	LAMEXP_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////
@@ -667,7 +674,7 @@ void MainWindow::addFiles(const QStringList &files)
 		return;
 	}
 
-	tabWidget->setCurrentIndex(0);
+	ui->tabWidget->setCurrentIndex(0);
 
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
 	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
@@ -681,7 +688,6 @@ void MainWindow::addFiles(const QStringList &files)
 		m_fileListModel->setBlockUpdates(true);
 		QTime startTime = QTime::currentTime();
 		m_banner->show(tr("Adding file(s), please wait..."), analyzer);
-		//timeMT = startTime.secsTo(QTime::currentTime());
 	}
 	catch(...)
 	{
@@ -690,9 +696,9 @@ void MainWindow::addFiles(const QStringList &files)
 
 	m_fileListModel->setBlockUpdates(false);
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-	sourceFileView->update();
+	ui->sourceFileView->update();
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-	sourceFileView->scrollToBottom();
+	ui->sourceFileView->scrollToBottom();
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	if(analyzer->filesDenied())
@@ -843,7 +849,7 @@ void MainWindow::initializeTranslation(void)
 			{
 				QList<QAction*> actions = m_languageActionGroup->actions();
 				while(!actions.isEmpty()) actions.takeFirst()->setChecked(false);
-				actionLoadTranslationFromFile->setChecked(true);
+				ui->actionLoadTranslationFromFile->setChecked(true);
 				translationLoaded = true;
 			}
 		}
@@ -898,12 +904,12 @@ void MainWindow::initializeTranslation(void)
 void MainWindow::showEvent(QShowEvent *event)
 {
 	m_accepted = false;
-	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+	m_dropNoteLabel->setGeometry(0, 0, ui->sourceFileView->width(), ui->sourceFileView->height());
 	sourceModelChanged();
 	
 	if(!event->spontaneous())
 	{
-		tabWidget->setCurrentIndex(0);
+		ui->tabWidget->setCurrentIndex(0);
 	}
 
 	if(m_firstTimeShown)
@@ -930,27 +936,27 @@ void MainWindow::changeEvent(QEvent *e)
 		int comboBoxIndex[8];
 		
 		//Backup combobox indices, as retranslateUi() resets
-		comboBoxIndex[0] = comboBoxMP3ChannelMode->currentIndex();
-		comboBoxIndex[1] = comboBoxSamplingRate->currentIndex();
-		comboBoxIndex[2] = comboBoxAACProfile->currentIndex();
-		comboBoxIndex[3] = comboBoxAftenCodingMode->currentIndex();
-		comboBoxIndex[4] = comboBoxAftenDRCMode->currentIndex();
-		comboBoxIndex[5] = comboBoxNormalizationMode->currentIndex();
+		comboBoxIndex[0] = ui->comboBoxMP3ChannelMode->currentIndex();
+		comboBoxIndex[1] = ui->comboBoxSamplingRate->currentIndex();
+		comboBoxIndex[2] = ui->comboBoxAACProfile->currentIndex();
+		comboBoxIndex[3] = ui->comboBoxAftenCodingMode->currentIndex();
+		comboBoxIndex[4] = ui->comboBoxAftenDRCMode->currentIndex();
+		comboBoxIndex[5] = ui->comboBoxNormalizationMode->currentIndex();
 		comboBoxIndex[6] = 0; //comboBoxOpusOptimize->currentIndex();
-		comboBoxIndex[7] = comboBoxOpusFramesize->currentIndex();
+		comboBoxIndex[7] = ui->comboBoxOpusFramesize->currentIndex();
 		
 		//Re-translate from UIC
-		Ui::MainWindow::retranslateUi(this);
+		ui->retranslateUi(this);
 
 		//Restore combobox indices
-		comboBoxMP3ChannelMode->setCurrentIndex(comboBoxIndex[0]);
-		comboBoxSamplingRate->setCurrentIndex(comboBoxIndex[1]);
-		comboBoxAACProfile->setCurrentIndex(comboBoxIndex[2]);
-		comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
-		comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
-		comboBoxNormalizationMode->setCurrentIndex(comboBoxIndex[5]);
+		ui->comboBoxMP3ChannelMode->setCurrentIndex(comboBoxIndex[0]);
+		ui->comboBoxSamplingRate->setCurrentIndex(comboBoxIndex[1]);
+		ui->comboBoxAACProfile->setCurrentIndex(comboBoxIndex[2]);
+		ui->comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
+		ui->comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
+		ui->comboBoxNormalizationMode->setCurrentIndex(comboBoxIndex[5]);
 		//comboBoxOpusOptimize->setCurrentIndex(comboBoxIndex[6]);
-		comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[7]);
+		ui->comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[7]);
 
 		//Update the window title
 		if(LAMEXP_DEBUG)
@@ -978,9 +984,9 @@ void MainWindow::changeEvent(QEvent *e)
 		m_metaInfoModel->clearData();
 		m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
 		updateEncoder(m_settings->compressionEncoder());
-		updateLameAlgoQuality(sliderLameAlgoQuality->value());
-		updateMaximumInstances(sliderMaxInstances->value());
-		renameOutputPatternChanged(lineEditRenamePattern->text());
+		updateLameAlgoQuality(ui->sliderLameAlgoQuality->value());
+		updateMaximumInstances(ui->sliderMaxInstances->value());
+		renameOutputPatternChanged(ui->lineEditRenamePattern->text());
 
 		//Re-install shell integration
 		if(m_settings->shellIntegrationEnabled())
@@ -991,11 +997,11 @@ void MainWindow::changeEvent(QEvent *e)
 		//Translate system menu
 		if(HMENU hMenu = ::GetSystemMenu(winId(), FALSE))
 		{
-			ModifyMenu(hMenu, IDM_ABOUTBOX, MF_STRING | MF_BYCOMMAND, IDM_ABOUTBOX, QWCHAR(buttonAbout->text()));
+			ModifyMenu(hMenu, IDM_ABOUTBOX, MF_STRING | MF_BYCOMMAND, IDM_ABOUTBOX, QWCHAR(ui->buttonAbout->text()));
 		}
 			
 		//Force resize, if needed
-		tabPageChanged(tabWidget->currentIndex());
+		tabPageChanged(ui->tabWidget->currentIndex());
 	}
 }
 
@@ -1088,9 +1094,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
 	if(event) QMainWindow::resizeEvent(event);
-	m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+	m_dropNoteLabel->setGeometry(0, 0, ui->sourceFileView->width(), ui->sourceFileView->height());
 
-	if(QWidget *port = outputFolderView->viewport())
+	if(QWidget *port = ui->outputFolderView->viewport())
 	{
 		m_outputFolderNoteBox->setGeometry(16, (port->height() - 64) / 2, port->width() - 32,  64);
 	}
@@ -1103,7 +1109,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 {
 	if(e->key() == Qt::Key_Delete)
 	{
-		if(sourceFileView->isVisible())
+		if(ui->sourceFileView->isVisible())
 		{
 			QTimer::singleShot(0, this, SLOT(removeFileButtonClicked()));
 			return;
@@ -1119,7 +1125,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
 	if(e->key() == Qt::Key_F5)
 	{
-		if(outputFolderView->isVisible())
+		if(ui->outputFolderView->isVisible())
 		{
 			QTimer::singleShot(0, this, SLOT(refreshFolderContextActionTriggered()));
 			return;
@@ -1167,7 +1173,7 @@ bool MainWindow::event(QEvent *e)
 		m_fileListModel->clearFiles();
 		return true;
 	case QEvent::MouseButtonPress:
-		if(outputFolderEdit->isVisible())
+		if(ui->outputFolderEdit->isVisible())
 		{
 			QTimer::singleShot(0, this, SLOT(outputFolderEditFinished()));
 		}
@@ -1180,7 +1186,7 @@ bool MainWindow::winEvent(MSG *message, long *result)
 {
 	if((message->message == WM_SYSCOMMAND) && ((message->wParam & 0xFFF0) == IDM_ABOUTBOX))
 	{
-		QTimer::singleShot(0, buttonAbout, SLOT(click()));
+		QTimer::singleShot(0, ui->buttonAbout, SLOT(click()));
 		*result = 0;
 		return true;
 	}
@@ -1276,7 +1282,7 @@ void MainWindow::windowShown(void)
 		if(QMessageBox::warning(this, tr("Slow Startup"), message, tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->antivirNotificationsEnabled(false);
-			actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
+			ui->actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 		}
 	}
 
@@ -1353,7 +1359,7 @@ void MainWindow::windowShown(void)
 			if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
 			{
 				m_settings->neroAacNotificationsEnabled(false);
-				actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
+				ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 			}
 		}
 	}
@@ -1480,7 +1486,7 @@ void MainWindow::encodeButtonClicked(void)
 	if(m_fileListModel->rowCount() < 1)
 	{
 		QMessageBox::warning(this, tr("LameXP"), NOBR(tr("You must add at least one file to the list before proceeding!")));
-		tabWidget->setCurrentIndex(0);
+		ui->tabWidget->setCurrentIndex(0);
 		return;
 	}
 	
@@ -1489,7 +1495,7 @@ void MainWindow::encodeButtonClicked(void)
 	{
 		if(QMessageBox::warning(this, tr("Not Found"), QString("%1<br><tt>%2</tt>").arg(NOBR(tr("Your currently selected TEMP folder does not exist anymore:")), NOBR(QDir::toNativeSeparators(tempFolder))), tr("Restore Default"), tr("Cancel")) == 0)
 		{
-			SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, m_settings->customTempPathEnabledDefault());
+			SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, m_settings->customTempPathEnabledDefault());
 		}
 		return;
 	}
@@ -1535,7 +1541,7 @@ void MainWindow::encodeButtonClicked(void)
 		break;
 	default:
 		QMessageBox::warning(this, tr("LameXP"), tr("Sorry, an unsupported encoder has been chosen!"));
-		tabWidget->setCurrentIndex(3);
+		ui->tabWidget->setCurrentIndex(3);
 		return;
 	}
 
@@ -1545,7 +1551,7 @@ void MainWindow::encodeButtonClicked(void)
 		if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 		{
 			QMessageBox::warning(this, tr("LameXP"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("Cannot write to the selected output directory."), m_settings->outputDir(), tr("Please choose a different directory!")));
-			tabWidget->setCurrentIndex(1);
+			ui->tabWidget->setCurrentIndex(1);
 			return;
 		}
 		else
@@ -1611,7 +1617,7 @@ void MainWindow::tabPageChanged(int idx)
 	//Make sure all tab headers are fully visible
 	if(this->isVisible())
 	{
-		int delta = tabWidget->sizeHint().width() - tabWidget->width();
+		int delta = ui->tabWidget->sizeHint().width() - ui->tabWidget->width();
 		if(delta > 0)
 		{
 			this->resize(qMin(this->width() + delta, maximumWidth), this->height());
@@ -1619,22 +1625,22 @@ void MainWindow::tabPageChanged(int idx)
 	}
 
 	//Tab specific operations
-	if(idx == tabWidget->indexOf(tabOptions) && scrollArea->widget() && this->isVisible())
+	if(idx == ui->tabWidget->indexOf(ui->tabOptions) && ui->scrollArea->widget() && this->isVisible())
 	{
-		scrollArea->widget()->updateGeometry();
-		scrollArea->viewport()->updateGeometry();
+		ui->scrollArea->widget()->updateGeometry();
+		ui->scrollArea->viewport()->updateGeometry();
 		qApp->processEvents();
-		int delta = scrollArea->widget()->width() - scrollArea->viewport()->width();
+		int delta = ui->scrollArea->widget()->width() - ui->scrollArea->viewport()->width();
 		if(delta > 0)
 		{
 			this->resize(qMin(this->width() + delta, maximumWidth), this->height());
 		}
 	}
-	else if(idx == tabWidget->indexOf(tabSourceFiles))
+	else if(idx == ui->tabWidget->indexOf(ui->tabSourceFiles))
 	{
-		m_dropNoteLabel->setGeometry(0, 0, sourceFileView->width(), sourceFileView->height());
+		m_dropNoteLabel->setGeometry(0, 0, ui->sourceFileView->width(), ui->sourceFileView->height());
 	}
-	else if(idx == tabWidget->indexOf(tabOutputDir))
+	else if(idx == ui->tabWidget->indexOf(ui->tabOutputDir))
 	{
 		if(!m_fileSystemModel)
 		{
@@ -1666,7 +1672,7 @@ void MainWindow::tabActionActivated(QAction *action)
 		int index = action->data().toInt(&ok);
 		if(ok)
 		{
-			tabWidget->setCurrentIndex(index);
+			ui->tabWidget->setCurrentIndex(index);
 		}
 	}
 }
@@ -1695,35 +1701,35 @@ void MainWindow::styleActionActivated(QAction *action)
 	switch(m_settings->interfaceStyle())
 	{
 	case 1:
-		if(actionStyleCleanlooks->isEnabled())
+		if(ui->actionStyleCleanlooks->isEnabled())
 		{
-			actionStyleCleanlooks->setChecked(true);
+			ui->actionStyleCleanlooks->setChecked(true);
 			QApplication::setStyle(new QCleanlooksStyle());
 			break;
 		}
 	case 2:
-		if(actionStyleWindowsVista->isEnabled())
+		if(ui->actionStyleWindowsVista->isEnabled())
 		{
-			actionStyleWindowsVista->setChecked(true);
+			ui->actionStyleWindowsVista->setChecked(true);
 			QApplication::setStyle(new QWindowsVistaStyle());
 			break;
 		}
 	case 3:
-		if(actionStyleWindowsXP->isEnabled())
+		if(ui->actionStyleWindowsXP->isEnabled())
 		{
-			actionStyleWindowsXP->setChecked(true);
+			ui->actionStyleWindowsXP->setChecked(true);
 			QApplication::setStyle(new QWindowsXPStyle());
 			break;
 		}
 	case 4:
-		if(actionStyleWindowsClassic->isEnabled())
+		if(ui->actionStyleWindowsClassic->isEnabled())
 		{
-			actionStyleWindowsClassic->setChecked(true);
+			ui->actionStyleWindowsClassic->setChecked(true);
 			QApplication::setStyle(new QWindowsStyle());
 			break;
 		}
 	default:
-		actionStylePlastique->setChecked(true);
+		ui->actionStylePlastique->setChecked(true);
 		QApplication::setStyle(new QPlastiqueStyle());
 		break;
 	}
@@ -1748,7 +1754,7 @@ void MainWindow::languageActionActivated(QAction *action)
 		if(lamexp_install_translator(langId))
 		{
 			action->setChecked(true);
-			actionLoadTranslationFromFile->setChecked(false);
+			ui->actionLoadTranslationFromFile->setChecked(false);
 			m_settings->currentLanguage(langId);
 			m_settings->currentLanguageFile(QString());
 		}
@@ -1775,7 +1781,7 @@ void MainWindow::languageFromFileActionActivated(bool checked)
 			{
 				actions.takeFirst()->setChecked(false);
 			}
-			actionLoadTranslationFromFile->setChecked(true);
+			ui->actionLoadTranslationFromFile->setChecked(true);
 			m_settings->currentLanguageFile(qmFile);
 		}
 		else
@@ -1812,7 +1818,7 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 			m_settings->autoUpdateEnabled(true);
 	}
 
-	actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
+	ui->actionDisableUpdateReminder->setChecked(!m_settings->autoUpdateEnabled());
 }
 
 /*
@@ -1838,7 +1844,7 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 			m_settings->soundsEnabled(true);
 	}
 
-	actionDisableSounds->setChecked(!m_settings->soundsEnabled());
+	ui->actionDisableSounds->setChecked(!m_settings->soundsEnabled());
 }
 
 /*
@@ -1864,7 +1870,7 @@ void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
 			m_settings->neroAacNotificationsEnabled(true);
 	}
 
-	actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
+	ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 }
 
 /*
@@ -1890,7 +1896,7 @@ void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
 			m_settings->antivirNotificationsEnabled(true);
 	}
 
-	actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
+	ui->actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 }
 
 /*
@@ -1979,7 +1985,7 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 			m_settings->autoUpdateCheckBeta(false);
 	}
 
-	actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta());
+	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta());
 
 	if(checkUpdatesNow)
 	{
@@ -2013,7 +2019,7 @@ void MainWindow::hibernateComputerActionTriggered(bool checked)
 			m_settings->hibernateComputer(false);
 	}
 
-	actionHibernateComputer->setChecked(m_settings->hibernateComputer());
+	ui->actionHibernateComputer->setChecked(m_settings->hibernateComputer());
 }
 
 /*
@@ -2041,11 +2047,11 @@ void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 			m_settings->shellIntegrationEnabled(true);
 	}
 
-	actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
+	ui->actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
 	
-	if(lamexp_portable_mode() && actionDisableShellIntegration->isChecked())
+	if(lamexp_portable_mode() && ui->actionDisableShellIntegration->isChecked())
 	{
-		actionDisableShellIntegration->setEnabled(false);
+		ui->actionDisableShellIntegration->setEnabled(false);
 	}
 }
 
@@ -2202,11 +2208,11 @@ void MainWindow::openFolderActionActivated(void)
  */
 void MainWindow::removeFileButtonClicked(void)
 {
-	if(sourceFileView->currentIndex().isValid())
+	if(ui->sourceFileView->currentIndex().isValid())
 	{
-		int iRow = sourceFileView->currentIndex().row();
-		m_fileListModel->removeFile(sourceFileView->currentIndex());
-		sourceFileView->selectRow(iRow < m_fileListModel->rowCount() ? iRow : m_fileListModel->rowCount()-1);
+		int iRow = ui->sourceFileView->currentIndex().row();
+		m_fileListModel->removeFile(ui->sourceFileView->currentIndex());
+		ui->sourceFileView->selectRow(iRow < m_fileListModel->rowCount() ? iRow : m_fileListModel->rowCount()-1);
 	}
 }
 
@@ -2223,11 +2229,11 @@ void MainWindow::clearFilesButtonClicked(void)
  */
 void MainWindow::fileUpButtonClicked(void)
 {
-	if(sourceFileView->currentIndex().isValid())
+	if(ui->sourceFileView->currentIndex().isValid())
 	{
-		int iRow = sourceFileView->currentIndex().row() - 1;
-		m_fileListModel->moveFile(sourceFileView->currentIndex(), -1);
-		sourceFileView->selectRow(iRow >= 0 ? iRow : 0);
+		int iRow = ui->sourceFileView->currentIndex().row() - 1;
+		m_fileListModel->moveFile(ui->sourceFileView->currentIndex(), -1);
+		ui->sourceFileView->selectRow(iRow >= 0 ? iRow : 0);
 	}
 }
 
@@ -2236,11 +2242,11 @@ void MainWindow::fileUpButtonClicked(void)
  */
 void MainWindow::fileDownButtonClicked(void)
 {
-	if(sourceFileView->currentIndex().isValid())
+	if(ui->sourceFileView->currentIndex().isValid())
 	{
-		int iRow = sourceFileView->currentIndex().row() + 1;
-		m_fileListModel->moveFile(sourceFileView->currentIndex(), 1);
-		sourceFileView->selectRow(iRow < m_fileListModel->rowCount() ? iRow : m_fileListModel->rowCount()-1);
+		int iRow = ui->sourceFileView->currentIndex().row() + 1;
+		m_fileListModel->moveFile(ui->sourceFileView->currentIndex(), 1);
+		ui->sourceFileView->selectRow(iRow < m_fileListModel->rowCount() ? iRow : m_fileListModel->rowCount()-1);
 	}
 }
 
@@ -2253,19 +2259,19 @@ void MainWindow::showDetailsButtonClicked(void)
 
 	int iResult = 0;
 	MetaInfoDialog *metaInfoDialog = new MetaInfoDialog(this);
-	QModelIndex index = sourceFileView->currentIndex();
+	QModelIndex index = ui->sourceFileView->currentIndex();
 
 	while(index.isValid())
 	{
 		if(iResult > 0)
 		{
 			index = m_fileListModel->index(index.row() + 1, index.column()); 
-			sourceFileView->selectRow(index.row());
+			ui->sourceFileView->selectRow(index.row());
 		}
 		if(iResult < 0)
 		{
 			index = m_fileListModel->index(index.row() - 1, index.column()); 
-			sourceFileView->selectRow(index.row());
+			ui->sourceFileView->selectRow(index.row());
 		}
 
 		AudioFileModel &file = (*m_fileListModel)[index];
@@ -2277,7 +2283,7 @@ void MainWindow::showDetailsButtonClicked(void)
 		if(iResult == INT_MAX)
 		{
 			m_metaInfoModel->assignInfoFrom(file);
-			tabWidget->setCurrentIndex(tabWidget->indexOf(tabMetaData));
+			ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabMetaData));
 			break;
 		}
 
@@ -2311,7 +2317,7 @@ void MainWindow::sourceFilesContextMenu(const QPoint &pos)
  */
 void MainWindow::sourceFilesScrollbarMoved(int)
 {
-	sourceFileView->resizeColumnToContents(0);
+	ui->sourceFileView->resizeColumnToContents(0);
 }
 
 /*
@@ -2322,7 +2328,7 @@ void MainWindow::previewContextActionTriggered(void)
 	const static char *appNames[3] = {"smplayer_portable.exe", "smplayer.exe", "mplayer.exe"};
 	const static wchar_t *registryKey = L"SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{DB9E4EAB-2717-499F-8D56-4CC8A644AB60}";
 	
-	QModelIndex index = sourceFileView->currentIndex();
+	QModelIndex index = ui->sourceFileView->currentIndex();
 	if(!index.isValid())
 	{
 		return;
@@ -2365,7 +2371,7 @@ void MainWindow::previewContextActionTriggered(void)
  */
 void MainWindow::findFileContextActionTriggered(void)
 {
-	QModelIndex index = sourceFileView->currentIndex();
+	QModelIndex index = ui->sourceFileView->currentIndex();
 	if(index.isValid())
 	{
 		QString systemRootPath;
@@ -2411,7 +2417,7 @@ void MainWindow::handleDelayedFiles(void)
 	}
 
 	QStringList selectedFiles;
-	tabWidget->setCurrentIndex(0);
+	ui->tabWidget->setCurrentIndex(0);
 
 	while(!m_delayedFileList->isEmpty())
 	{
@@ -2549,21 +2555,21 @@ void MainWindow::sourceModelChanged(void)
  */
 void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 {
-	if(index.isValid() && (outputFolderView->currentIndex() != index))
+	if(index.isValid() && (ui->outputFolderView->currentIndex() != index))
 	{
-		outputFolderView->setCurrentIndex(index);
+		ui->outputFolderView->setCurrentIndex(index);
 	}
 	
 	if(m_fileSystemModel && index.isValid())
 	{
 		QString selectedDir = m_fileSystemModel->filePath(index);
 		if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
-		outputFolderLabel->setText(QDir::toNativeSeparators(selectedDir));
+		ui->outputFolderLabel->setText(QDir::toNativeSeparators(selectedDir));
 		m_settings->outputDir(selectedDir);
 	}
 	else
 	{
-		outputFolderLabel->setText(QDir::toNativeSeparators(m_settings->outputDir()));
+		ui->outputFolderLabel->setText(QDir::toNativeSeparators(m_settings->outputDir()));
 	}
 }
 
@@ -2593,13 +2599,13 @@ void MainWindow::gotoDesktopButtonClicked(void)
 	
 	if(!desktopPath.isEmpty() && QDir(desktopPath).exists())
 	{
-		outputFolderView->setCurrentIndex(m_fileSystemModel->index(desktopPath));
-		outputFolderViewClicked(outputFolderView->currentIndex());
+		ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(desktopPath));
+		outputFolderViewClicked(ui->outputFolderView->currentIndex());
 		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 	else
 	{
-		buttonGotoDesktop->setEnabled(false);
+		ui->buttonGotoDesktop->setEnabled(false);
 	}
 }
 
@@ -2618,13 +2624,13 @@ void MainWindow::gotoHomeFolderButtonClicked(void)
 	
 	if(!homePath.isEmpty() && QDir(homePath).exists())
 	{
-		outputFolderView->setCurrentIndex(m_fileSystemModel->index(homePath));
-		outputFolderViewClicked(outputFolderView->currentIndex());
+		ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(homePath));
+		outputFolderViewClicked(ui->outputFolderView->currentIndex());
 		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 	else
 	{
-		buttonGotoHome->setEnabled(false);
+		ui->buttonGotoHome->setEnabled(false);
 	}
 }
 
@@ -2643,13 +2649,13 @@ void MainWindow::gotoMusicFolderButtonClicked(void)
 	
 	if(!musicPath.isEmpty() && QDir(musicPath).exists())
 	{
-		outputFolderView->setCurrentIndex(m_fileSystemModel->index(musicPath));
-		outputFolderViewClicked(outputFolderView->currentIndex());
+		ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(musicPath));
+		outputFolderViewClicked(ui->outputFolderView->currentIndex());
 		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
 	else
 	{
-		buttonGotoMusic->setEnabled(false);
+		ui->buttonGotoMusic->setEnabled(false);
 	}
 }
 
@@ -2671,8 +2677,8 @@ void MainWindow::gotoFavoriteFolder(void)
 		QDir path(item->data().toString());
 		if(path.exists())
 		{
-			outputFolderView->setCurrentIndex(m_fileSystemModel->index(path.canonicalPath()));
-			outputFolderViewClicked(outputFolderView->currentIndex());
+			ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(path.canonicalPath()));
+			outputFolderViewClicked(ui->outputFolderView->currentIndex());
 			CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 		}
 		else
@@ -2697,7 +2703,7 @@ void MainWindow::makeFolderButtonClicked(void)
 		return;
 	}
 
-	QDir basePath(m_fileSystemModel->fileInfo(outputFolderView->currentIndex()).absoluteFilePath());
+	QDir basePath(m_fileSystemModel->fileInfo(ui->outputFolderView->currentIndex()).absoluteFilePath());
 	QString suggestedName = tr("New Folder");
 
 	if(!m_metaData->fileArtist().isEmpty() && !m_metaData->fileAlbum().isEmpty())
@@ -2767,7 +2773,7 @@ void MainWindow::makeFolderButtonClicked(void)
 				if(createdDir.cd(newFolder))
 				{
 					QModelIndex newIndex = m_fileSystemModel->index(createdDir.canonicalPath());
-					outputFolderView->setCurrentIndex(newIndex);
+					ui->outputFolderView->setCurrentIndex(newIndex);
 					outputFolderViewClicked(newIndex);
 					CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 				}
@@ -2786,7 +2792,7 @@ void MainWindow::makeFolderButtonClicked(void)
  */
 void MainWindow::saveToSourceFolderChanged(void)
 {
-	m_settings->outputToSourceDir(saveToSourceFolderCheckBox->isChecked());
+	m_settings->outputToSourceDir(ui->saveToSourceFolderCheckBox->isChecked());
 }
 
 /*
@@ -2794,7 +2800,7 @@ void MainWindow::saveToSourceFolderChanged(void)
  */
 void MainWindow::prependRelativePathChanged(void)
 {
-	m_settings->prependRelativeSourcePath(prependRelativePathCheckBox->isChecked());
+	m_settings->prependRelativeSourcePath(ui->prependRelativePathCheckBox->isChecked());
 }
 
 /*
@@ -2822,7 +2828,7 @@ void MainWindow::showFolderContextActionTriggered(void)
 		return;
 	}
 
-	QString path = QDir::toNativeSeparators(m_fileSystemModel->filePath(outputFolderView->currentIndex()));
+	QString path = QDir::toNativeSeparators(m_fileSystemModel->filePath(ui->outputFolderView->currentIndex()));
 	if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
 	ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
 }
@@ -2841,7 +2847,7 @@ void MainWindow::refreshFolderContextActionTriggered(void)
  */
 void MainWindow::addFavoriteFolderActionTriggered(void)
 {
-	QString path = m_fileSystemModel->filePath(outputFolderView->currentIndex());
+	QString path = m_fileSystemModel->filePath(ui->outputFolderView->currentIndex());
 	QStringList favorites = m_settings->favoriteOutputFolders().split("|", QString::SkipEmptyParts);
 
 	if(!favorites.contains(path, Qt::CaseInsensitive))
@@ -2863,14 +2869,14 @@ void MainWindow::addFavoriteFolderActionTriggered(void)
  */
 void MainWindow::outputFolderEditFinished(void)
 {
-	if(outputFolderEdit->isHidden())
+	if(ui->outputFolderEdit->isHidden())
 	{
 		return; //Not currently in edit mode!
 	}
 	
 	bool ok = false;
 	
-	QString text = QDir::fromNativeSeparators(outputFolderEdit->text().trimmed());
+	QString text = QDir::fromNativeSeparators(ui->outputFolderEdit->text().trimmed());
 	while(text.startsWith('"') || text.startsWith('/')) text = text.right(text.length() - 1).trimmed();
 	while(text.endsWith('"') || text.endsWith('/')) text = text.left(text.length() - 1).trimmed();
 
@@ -2879,7 +2885,7 @@ void MainWindow::outputFolderEditFinished(void)
 
 	if(!((text.length() >= 2) && text.at(0).isLetter() && text.at(1) == QChar(':')))
 	{
-		text = QString("%1/%2").arg(QDir::fromNativeSeparators(outputFolderLabel->text()), text);
+		text = QString("%1/%2").arg(QDir::fromNativeSeparators(ui->outputFolderLabel->text()), text);
 	}
 
 	if(text.length() == 2) text += "/"; /* "X:" => "X:/" */
@@ -2893,7 +2899,7 @@ void MainWindow::outputFolderEditFinished(void)
 			if(index.isValid())
 			{
 				ok = true;
-				outputFolderView->setCurrentIndex(index);
+				ui->outputFolderView->setCurrentIndex(index);
 				outputFolderViewClicked(index);
 				break;
 			}
@@ -2904,7 +2910,7 @@ void MainWindow::outputFolderEditFinished(void)
 			if(index.isValid())
 			{
 				ok = true;
-				outputFolderView->setCurrentIndex(index);
+				ui->outputFolderView->setCurrentIndex(index);
 				outputFolderViewClicked(index);
 				break;
 			}
@@ -2913,9 +2919,9 @@ void MainWindow::outputFolderEditFinished(void)
 		text = text.left(text.length() - 1).trimmed();
 	}
 
-	outputFolderEdit->setVisible(false);
-	outputFolderLabel->setVisible(true);
-	outputFolderView->setEnabled(true);
+	ui->outputFolderEdit->setVisible(false);
+	ui->outputFolderLabel->setVisible(true);
+	ui->outputFolderView->setEnabled(true);
 
 	if(!ok) MessageBeep(MB_ICONERROR);
 	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
@@ -2934,9 +2940,9 @@ void MainWindow::initOutputFolderModel(void)
 
 		if(m_fileSystemModel)
 		{
-			SET_MODEL(outputFolderView, NULL);
+			SET_MODEL(ui->outputFolderView, NULL);
 			LAMEXP_DELETE(m_fileSystemModel);
-			outputFolderView->repaint();
+			ui->outputFolderView->repaint();
 		}
 
 		if(m_fileSystemModel = new QFileSystemModelEx())
@@ -2945,16 +2951,16 @@ void MainWindow::initOutputFolderModel(void)
 			connect(m_fileSystemModel, SIGNAL(directoryLoaded(QString)), this, SLOT(outputFolderDirectoryLoaded(QString)));
 			connect(m_fileSystemModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(outputFolderRowsInserted(QModelIndex,int,int)));
 
-			SET_MODEL(outputFolderView, m_fileSystemModel);
-			outputFolderView->header()->setStretchLastSection(true);
-			outputFolderView->header()->hideSection(1);
-			outputFolderView->header()->hideSection(2);
-			outputFolderView->header()->hideSection(3);
+			SET_MODEL(ui->outputFolderView, m_fileSystemModel);
+			ui->outputFolderView->header()->setStretchLastSection(true);
+			ui->outputFolderView->header()->hideSection(1);
+			ui->outputFolderView->header()->hideSection(2);
+			ui->outputFolderView->header()->hideSection(3);
 		
 			m_fileSystemModel->setRootPath("");
 			QModelIndex index = m_fileSystemModel->index(m_settings->outputDir());
-			if(index.isValid()) outputFolderView->setCurrentIndex(index);
-			outputFolderViewClicked(outputFolderView->currentIndex());
+			if(index.isValid()) ui->outputFolderView->setCurrentIndex(index);
+			outputFolderViewClicked(ui->outputFolderView->currentIndex());
 		}
 
 		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
@@ -2975,7 +2981,7 @@ void MainWindow::initOutputFolderModel_doAsync(void)
 	else
 	{
 		QTimer::singleShot(125, m_outputFolderNoteBox, SLOT(hide()));
-		outputFolderView->setFocus();
+		ui->outputFolderView->setFocus();
 	}
 }
 
@@ -2984,7 +2990,7 @@ void MainWindow::initOutputFolderModel_doAsync(void)
  */
 void MainWindow::centerOutputFolderModel(void)
 {
-	if(outputFolderView->isVisible())
+	if(ui->outputFolderView->isVisible())
 	{
 		centerOutputFolderModel_doAsync();
 		QTimer::singleShot(125, this, SLOT(centerOutputFolderModel_doAsync()));
@@ -2996,12 +3002,12 @@ void MainWindow::centerOutputFolderModel(void)
  */
 void MainWindow::centerOutputFolderModel_doAsync(void)
 {
-	if(outputFolderView->isVisible())
+	if(ui->outputFolderView->isVisible())
 	{
 		m_outputFolderViewCentering = true;
-		const QModelIndex index = outputFolderView->currentIndex();
-		outputFolderView->scrollTo(index, QAbstractItemView::PositionAtCenter);
-		outputFolderView->setFocus();
+		const QModelIndex index = ui->outputFolderView->currentIndex();
+		ui->outputFolderView->scrollTo(index, QAbstractItemView::PositionAtCenter);
+		ui->outputFolderView->setFocus();
 	}
 }
 
@@ -3050,7 +3056,7 @@ void MainWindow::outputFolderViewEventOccurred(QWidget *sender, QEvent *event)
 	case QEvent::FocusIn:
 	case QEvent::FocusOut:
 	case QEvent::TouchEnd:
-		outputFolderViewClicked(outputFolderView->currentIndex());
+		outputFolderViewClicked(ui->outputFolderView->currentIndex());
 		break;
 	}
 }
@@ -3063,43 +3069,43 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 	QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event);
 	QPoint pos = (mouseEvent) ? mouseEvent->pos() : QPoint();
 
-	if(sender == outputFolderLabel)
+	if(sender == ui->outputFolderLabel)
 	{
 		switch(event->type())
 		{
 		case QEvent::MouseButtonPress:
 			if(mouseEvent && (mouseEvent->button() == Qt::LeftButton))
 			{
-				QString path = outputFolderLabel->text();
+				QString path = ui->outputFolderLabel->text();
 				if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
 				ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
 			}
 			break;
 		case QEvent::Enter:
-			outputFolderLabel->setForegroundRole(QPalette::Link);
+			ui->outputFolderLabel->setForegroundRole(QPalette::Link);
 			break;
 		case QEvent::Leave:
-			outputFolderLabel->setForegroundRole(QPalette::WindowText);
+			ui->outputFolderLabel->setForegroundRole(QPalette::WindowText);
 			break;
 		}
 	}
-	else if(sender == outputFoldersFovoritesLabel)
+	else if(sender == ui->outputFoldersFovoritesLabel)
 	{
 		switch(event->type())
 		{
 		case QEvent::Enter:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
+			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
 			break;
 		case QEvent::MouseButtonPress:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Sunken);
+			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Sunken);
 			break;
 		case QEvent::MouseButtonRelease:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
+			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
 			if(mouseEvent)
 			{
 				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
 				{
-					if(outputFolderView->isEnabled())
+					if(ui->outputFolderView->isEnabled())
 					{
 						m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
 					}
@@ -3107,40 +3113,40 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 			}
 			break;
 		case QEvent::Leave:
-			outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
+			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
 			break;
 		}
 	}
-	else if(sender == outputFoldersEditorLabel)
+	else if(sender == ui->outputFoldersEditorLabel)
 	{
 		switch(event->type())
 		{
 		case QEvent::Enter:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
+			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
 			break;
 		case QEvent::MouseButtonPress:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Sunken);
+			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Sunken);
 			break;
 		case QEvent::MouseButtonRelease:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
+			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
 			if(mouseEvent)
 			{
 				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
 				{
-					if(outputFolderView->isEnabled())
+					if(ui->outputFolderView->isEnabled())
 					{
-						outputFolderView->setEnabled(false);
-						outputFolderLabel->setVisible(false);
-						outputFolderEdit->setVisible(true);
-						outputFolderEdit->setText(outputFolderLabel->text());
-						outputFolderEdit->selectAll();
-						outputFolderEdit->setFocus();
+						ui->outputFolderView->setEnabled(false);
+						ui->outputFolderLabel->setVisible(false);
+						ui->outputFolderEdit->setVisible(true);
+						ui->outputFolderEdit->setText(ui->outputFolderLabel->text());
+						ui->outputFolderEdit->selectAll();
+						ui->outputFolderEdit->setFocus();
 					}
 				}
 			}
 			break;
 		case QEvent::Leave:
-			outputFoldersEditorLabel->setFrameShadow(QFrame::Plain);
+			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Plain);
 			break;
 		}
 	}
@@ -3157,7 +3163,7 @@ void MainWindow::editMetaButtonClicked(void)
 {
 	ABORT_IF_BUSY;
 
-	const QModelIndex index = metaDataView->currentIndex();
+	const QModelIndex index = ui->metaDataView->currentIndex();
 
 	if(index.isValid())
 	{
@@ -3184,7 +3190,7 @@ void MainWindow::clearMetaButtonClicked(void)
  */
 void MainWindow::metaTagsEnabledChanged(void)
 {
-	m_settings->writeMetaTags(writeMetaDataCheckBox->isChecked());
+	m_settings->writeMetaTags(ui->writeMetaDataCheckBox->isChecked());
 }
 
 /*
@@ -3192,7 +3198,7 @@ void MainWindow::metaTagsEnabledChanged(void)
  */
 void MainWindow::playlistEnabledChanged(void)
 {
-	m_settings->createPlaylist(generatePlaylistCheckBox->isChecked());
+	m_settings->createPlaylist(ui->generatePlaylistCheckBox->isChecked());
 }
 
 // =========================================================
@@ -3209,64 +3215,64 @@ void MainWindow::updateEncoder(int id)
 	switch(m_settings->compressionEncoder())
 	{
 	case SettingsModel::VorbisEncoder:
-		radioButtonModeQuality->setEnabled(true);
-		radioButtonModeAverageBitrate->setEnabled(true);
-		radioButtonConstBitrate->setEnabled(false);
-		if(radioButtonConstBitrate->isChecked()) radioButtonModeQuality->setChecked(true);
-		sliderBitrate->setEnabled(true);
+		ui->radioButtonModeQuality->setEnabled(true);
+		ui->radioButtonModeAverageBitrate->setEnabled(true);
+		ui->radioButtonConstBitrate->setEnabled(false);
+		if(ui->radioButtonConstBitrate->isChecked()) ui->radioButtonModeQuality->setChecked(true);
+		ui->sliderBitrate->setEnabled(true);
 		break;
 	case SettingsModel::AC3Encoder:
-		radioButtonModeQuality->setEnabled(true);
-		radioButtonModeQuality->setChecked(true);
-		radioButtonModeAverageBitrate->setEnabled(false);
-		radioButtonConstBitrate->setEnabled(true);
-		sliderBitrate->setEnabled(true);
+		ui->radioButtonModeQuality->setEnabled(true);
+		ui->radioButtonModeQuality->setChecked(true);
+		ui->radioButtonModeAverageBitrate->setEnabled(false);
+		ui->radioButtonConstBitrate->setEnabled(true);
+		ui->sliderBitrate->setEnabled(true);
 		break;
 	case SettingsModel::FLACEncoder:
-		radioButtonModeQuality->setEnabled(false);
-		radioButtonModeQuality->setChecked(true);
-		radioButtonModeAverageBitrate->setEnabled(false);
-		radioButtonConstBitrate->setEnabled(false);
-		sliderBitrate->setEnabled(true);
+		ui->radioButtonModeQuality->setEnabled(false);
+		ui->radioButtonModeQuality->setChecked(true);
+		ui->radioButtonModeAverageBitrate->setEnabled(false);
+		ui->radioButtonConstBitrate->setEnabled(false);
+		ui->sliderBitrate->setEnabled(true);
 		break;
 	case SettingsModel::PCMEncoder:
-		radioButtonModeQuality->setEnabled(false);
-		radioButtonModeQuality->setChecked(true);
-		radioButtonModeAverageBitrate->setEnabled(false);
-		radioButtonConstBitrate->setEnabled(false);
-		sliderBitrate->setEnabled(false);
+		ui->radioButtonModeQuality->setEnabled(false);
+		ui->radioButtonModeQuality->setChecked(true);
+		ui->radioButtonModeAverageBitrate->setEnabled(false);
+		ui->radioButtonConstBitrate->setEnabled(false);
+		ui->sliderBitrate->setEnabled(false);
 		break;
 	case SettingsModel::AACEncoder:
-		radioButtonModeQuality->setEnabled(true);
-		radioButtonModeAverageBitrate->setEnabled(!m_fhgEncoderAvailable);
-		if(m_fhgEncoderAvailable && radioButtonModeAverageBitrate->isChecked()) radioButtonConstBitrate->setChecked(true);
-		radioButtonConstBitrate->setEnabled(true);
-		sliderBitrate->setEnabled(true);
+		ui->radioButtonModeQuality->setEnabled(true);
+		ui->radioButtonModeAverageBitrate->setEnabled(!m_fhgEncoderAvailable);
+		if(m_fhgEncoderAvailable && ui->radioButtonModeAverageBitrate->isChecked()) ui->radioButtonConstBitrate->setChecked(true);
+		ui->radioButtonConstBitrate->setEnabled(true);
+		ui->sliderBitrate->setEnabled(true);
 		break;
 	case SettingsModel::DCAEncoder:
-		radioButtonModeQuality->setEnabled(false);
-		radioButtonModeAverageBitrate->setEnabled(false);
-		radioButtonConstBitrate->setEnabled(true);
-		radioButtonConstBitrate->setChecked(true);
-		sliderBitrate->setEnabled(true);
+		ui->radioButtonModeQuality->setEnabled(false);
+		ui->radioButtonModeAverageBitrate->setEnabled(false);
+		ui->radioButtonConstBitrate->setEnabled(true);
+		ui->radioButtonConstBitrate->setChecked(true);
+		ui->sliderBitrate->setEnabled(true);
 		break;
 	default:
-		radioButtonModeQuality->setEnabled(true);
-		radioButtonModeAverageBitrate->setEnabled(true);
-		radioButtonConstBitrate->setEnabled(true);
-		sliderBitrate->setEnabled(true);
+		ui->radioButtonModeQuality->setEnabled(true);
+		ui->radioButtonModeAverageBitrate->setEnabled(true);
+		ui->radioButtonConstBitrate->setEnabled(true);
+		ui->sliderBitrate->setEnabled(true);
 		break;
 	}
 
 	if(m_settings->compressionEncoder() == SettingsModel::AACEncoder)
 	{
 		const QString encoderName = m_qaacEncoderAvailable ? tr("QAAC (Apple)") : (m_fhgEncoderAvailable ? tr("FHG AAC (Winamp)") : (m_neroEncoderAvailable ? tr("Nero AAC") : tr("Not available!")));
-		labelEncoderInfo->setVisible(true);
-		labelEncoderInfo->setText(tr("Current AAC Encoder: %1").arg(encoderName));
+		ui->labelEncoderInfo->setVisible(true);
+		ui->labelEncoderInfo->setText(tr("Current AAC Encoder: %1").arg(encoderName));
 	}
 	else
 	{
-		labelEncoderInfo->setVisible(false);
+		ui->labelEncoderInfo->setVisible(false);
 	}
 
 	updateRCMode(m_modeButtonGroup->checkedId());
@@ -3285,12 +3291,12 @@ void MainWindow::updateRCMode(int id)
 		switch(m_settings->compressionRCMode())
 		{
 		case SettingsModel::VBRMode:
-			sliderBitrate->setMinimum(0);
-			sliderBitrate->setMaximum(9);
+			ui->sliderBitrate->setMinimum(0);
+			ui->sliderBitrate->setMaximum(9);
 			break;
 		default:
-			sliderBitrate->setMinimum(0);
-			sliderBitrate->setMaximum(13);
+			ui->sliderBitrate->setMinimum(0);
+			ui->sliderBitrate->setMaximum(13);
 			break;
 		}
 		break;
@@ -3298,12 +3304,12 @@ void MainWindow::updateRCMode(int id)
 		switch(m_settings->compressionRCMode())
 		{
 		case SettingsModel::VBRMode:
-			sliderBitrate->setMinimum(-2);
-			sliderBitrate->setMaximum(10);
+			ui->sliderBitrate->setMinimum(-2);
+			ui->sliderBitrate->setMaximum(10);
 			break;
 		default:
-			sliderBitrate->setMinimum(4);
-			sliderBitrate->setMaximum(63);
+			ui->sliderBitrate->setMinimum(4);
+			ui->sliderBitrate->setMaximum(63);
 			break;
 		}
 		break;
@@ -3311,12 +3317,12 @@ void MainWindow::updateRCMode(int id)
 		switch(m_settings->compressionRCMode())
 		{
 		case SettingsModel::VBRMode:
-			sliderBitrate->setMinimum(0);
-			sliderBitrate->setMaximum(16);
+			ui->sliderBitrate->setMinimum(0);
+			ui->sliderBitrate->setMaximum(16);
 			break;
 		default:
-			sliderBitrate->setMinimum(0);
-			sliderBitrate->setMaximum(18);
+			ui->sliderBitrate->setMinimum(0);
+			ui->sliderBitrate->setMaximum(18);
 			break;
 		}
 		break;
@@ -3324,39 +3330,39 @@ void MainWindow::updateRCMode(int id)
 		switch(m_settings->compressionRCMode())
 		{
 		case SettingsModel::VBRMode:
-			sliderBitrate->setMinimum(0);
-			sliderBitrate->setMaximum(20);
+			ui->sliderBitrate->setMinimum(0);
+			ui->sliderBitrate->setMaximum(20);
 			break;
 		default:
-			sliderBitrate->setMinimum(4);
-			sliderBitrate->setMaximum(63);
+			ui->sliderBitrate->setMinimum(4);
+			ui->sliderBitrate->setMaximum(63);
 			break;
 		}
 		break;
 	case SettingsModel::FLACEncoder:
-		sliderBitrate->setMinimum(0);
-		sliderBitrate->setMaximum(8);
+		ui->sliderBitrate->setMinimum(0);
+		ui->sliderBitrate->setMaximum(8);
 		break;
 	case SettingsModel::OpusEncoder:
-		sliderBitrate->setMinimum(1);
-		sliderBitrate->setMaximum(32);
+		ui->sliderBitrate->setMinimum(1);
+		ui->sliderBitrate->setMaximum(32);
 		break;
 	case SettingsModel::DCAEncoder:
-		sliderBitrate->setMinimum(1);
-		sliderBitrate->setMaximum(128);
+		ui->sliderBitrate->setMinimum(1);
+		ui->sliderBitrate->setMaximum(128);
 		break;
 	case SettingsModel::PCMEncoder:
-		sliderBitrate->setMinimum(0);
-		sliderBitrate->setMaximum(2);
-		sliderBitrate->setValue(1);
+		ui->sliderBitrate->setMinimum(0);
+		ui->sliderBitrate->setMaximum(2);
+		ui->sliderBitrate->setValue(1);
 		break;
 	default:
-		sliderBitrate->setMinimum(0);
-		sliderBitrate->setMaximum(0);
+		ui->sliderBitrate->setMinimum(0);
+		ui->sliderBitrate->setMaximum(0);
 		break;
 	}
 
-	updateBitrate(sliderBitrate->value());
+	updateBitrate(ui->sliderBitrate->value());
 }
 
 /*
@@ -3372,28 +3378,28 @@ void MainWindow::updateBitrate(int value)
 		switch(m_settings->compressionEncoder())
 		{
 		case SettingsModel::MP3Encoder:
-			labelBitrate->setText(tr("Quality Level %1").arg(9 - value));
+			ui->labelBitrate->setText(tr("Quality Level %1").arg(9 - value));
 			break;
 		case SettingsModel::VorbisEncoder:
-			labelBitrate->setText(tr("Quality Level %1").arg(value));
+			ui->labelBitrate->setText(tr("Quality Level %1").arg(value));
 			break;
 		case SettingsModel::AACEncoder:
-			labelBitrate->setText(tr("Quality Level %1").arg(QString().sprintf("%.2f", static_cast<double>(value * 5) / 100.0)));
+			ui->labelBitrate->setText(tr("Quality Level %1").arg(QString().sprintf("%.2f", static_cast<double>(value * 5) / 100.0)));
 			break;
 		case SettingsModel::FLACEncoder:
-			labelBitrate->setText(tr("Compression %1").arg(value));
+			ui->labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
 		case SettingsModel::OpusEncoder:
-			labelBitrate->setText(QString("&asymp; %1 kbps").arg(qMin(500, value * 8)));
+			ui->labelBitrate->setText(QString("&asymp; %1 kbps").arg(qMin(500, value * 8)));
 			break;
 		case SettingsModel::AC3Encoder:
-			labelBitrate->setText(tr("Quality Level %1").arg(qMin(1024, qMax(0, value * 64))));
+			ui->labelBitrate->setText(tr("Quality Level %1").arg(qMin(1024, qMax(0, value * 64))));
 			break;
 		case SettingsModel::PCMEncoder:
-			labelBitrate->setText(tr("Uncompressed"));
+			ui->labelBitrate->setText(tr("Uncompressed"));
 			break;
 		default:
-			labelBitrate->setText(QString::number(value));
+			ui->labelBitrate->setText(QString::number(value));
 			break;
 		}
 		break;
@@ -3401,19 +3407,19 @@ void MainWindow::updateBitrate(int value)
 		switch(m_settings->compressionEncoder())
 		{
 		case SettingsModel::MP3Encoder:
-			labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::mp3Bitrates[value]));
+			ui->labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::mp3Bitrates[value]));
 			break;
 		case SettingsModel::FLACEncoder:
-			labelBitrate->setText(tr("Compression %1").arg(value));
+			ui->labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
 		case SettingsModel::AC3Encoder:
-			labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::ac3Bitrates[value]));
+			ui->labelBitrate->setText(QString("&asymp; %1 kbps").arg(SettingsModel::ac3Bitrates[value]));
 			break;
 		case SettingsModel::PCMEncoder:
-			labelBitrate->setText(tr("Uncompressed"));
+			ui->labelBitrate->setText(tr("Uncompressed"));
 			break;
 		default:
-			labelBitrate->setText(QString("&asymp; %1 kbps").arg(qMin(500, value * 8)));
+			ui->labelBitrate->setText(QString("&asymp; %1 kbps").arg(qMin(500, value * 8)));
 			break;
 		}
 		break;
@@ -3421,22 +3427,22 @@ void MainWindow::updateBitrate(int value)
 		switch(m_settings->compressionEncoder())
 		{
 		case SettingsModel::MP3Encoder:
-			labelBitrate->setText(QString("%1 kbps").arg(SettingsModel::mp3Bitrates[value]));
+			ui->labelBitrate->setText(QString("%1 kbps").arg(SettingsModel::mp3Bitrates[value]));
 			break;
 		case SettingsModel::FLACEncoder:
-			labelBitrate->setText(tr("Compression %1").arg(value));
+			ui->labelBitrate->setText(tr("Compression %1").arg(value));
 			break;
 		case SettingsModel::AC3Encoder:
-			labelBitrate->setText(QString("%1 kbps").arg(SettingsModel::ac3Bitrates[value]));
+			ui->labelBitrate->setText(QString("%1 kbps").arg(SettingsModel::ac3Bitrates[value]));
 			break;
 		case SettingsModel::DCAEncoder:
-			labelBitrate->setText(QString("%1 kbps").arg(value * 32));
+			ui->labelBitrate->setText(QString("%1 kbps").arg(value * 32));
 			break;
 		case SettingsModel::PCMEncoder:
-			labelBitrate->setText(tr("Uncompressed"));
+			ui->labelBitrate->setText(tr("Uncompressed"));
 			break;
 		default:
-			labelBitrate->setText(QString("%1 kbps").arg(qMin(500, value * 8)));
+			ui->labelBitrate->setText(QString("%1 kbps").arg(qMin(500, value * 8)));
 			break;
 		}
 		break;
@@ -3450,7 +3456,7 @@ void MainWindow::compressionTabEventOccurred(QWidget *sender, QEvent *event)
 {
 	static const QUrl helpUrl("http://lamexp.sourceforge.net/doc/FAQ.html#054010d9");
 	
-	if((sender == labelCompressionHelp) && (event->type() == QEvent::MouseButtonPress))
+	if((sender == ui->labelCompressionHelp) && (event->type() == QEvent::MouseButtonPress))
 	{
 		QDesktopServices::openUrl(helpUrl);
 	}
@@ -3489,15 +3495,15 @@ void MainWindow::updateLameAlgoQuality(int value)
 	if(!text.isEmpty())
 	{
 		m_settings->lameAlgoQuality(value);
-		labelLameAlgoQuality->setText(text);
+		ui->labelLameAlgoQuality->setText(text);
 	}
 
 	bool warning = (value == 0), notice = (value == 4);
-	labelLameAlgoQualityWarning->setVisible(warning);
-	labelLameAlgoQualityWarningIcon->setVisible(warning);
-	labelLameAlgoQualityNotice->setVisible(notice);
-	labelLameAlgoQualityNoticeIcon->setVisible(notice);
-	labelLameAlgoQualitySpacer->setVisible(warning || notice);
+	ui->labelLameAlgoQualityWarning->setVisible(warning);
+	ui->labelLameAlgoQualityWarningIcon->setVisible(warning);
+	ui->labelLameAlgoQualityNotice->setVisible(notice);
+	ui->labelLameAlgoQualityNoticeIcon->setVisible(notice);
+	ui->labelLameAlgoQualitySpacer->setVisible(warning || notice);
 }
 
 /*
@@ -3513,10 +3519,10 @@ void MainWindow::bitrateManagementEnabledChanged(bool checked)
  */
 void MainWindow::bitrateManagementMinChanged(int value)
 {
-	if(value > spinBoxBitrateManagementMax->value())
+	if(value > ui->spinBoxBitrateManagementMax->value())
 	{
-		spinBoxBitrateManagementMin->setValue(spinBoxBitrateManagementMax->value());
-		m_settings->bitrateManagementMinRate(spinBoxBitrateManagementMax->value());
+		ui->spinBoxBitrateManagementMin->setValue(ui->spinBoxBitrateManagementMax->value());
+		m_settings->bitrateManagementMinRate(ui->spinBoxBitrateManagementMax->value());
 	}
 	else
 	{
@@ -3529,10 +3535,10 @@ void MainWindow::bitrateManagementMinChanged(int value)
  */
 void MainWindow::bitrateManagementMaxChanged(int value)
 {
-	if(value < spinBoxBitrateManagementMin->value())
+	if(value < ui->spinBoxBitrateManagementMin->value())
 	{
-		spinBoxBitrateManagementMax->setValue(spinBoxBitrateManagementMin->value());
-		m_settings->bitrateManagementMaxRate(spinBoxBitrateManagementMin->value());
+		ui->spinBoxBitrateManagementMax->setValue(ui->spinBoxBitrateManagementMin->value());
+		m_settings->bitrateManagementMaxRate(ui->spinBoxBitrateManagementMin->value());
 	}
 	else
 	{
@@ -3610,8 +3616,8 @@ void MainWindow::aftenFastAllocationChanged(bool checked)
  */
 void MainWindow::opusSettingsChanged(void)
 {
-	m_settings->opusFramesize(comboBoxOpusFramesize->currentIndex());
-	m_settings->opusComplexity(spinBoxOpusComplexity->value());
+	m_settings->opusFramesize(ui->comboBoxOpusFramesize->currentIndex());
+	m_settings->opusComplexity(ui->spinBoxOpusComplexity->value());
 	//m_settings->opusOptimizeFor(comboBoxOpusOptimize->currentIndex());
 }
 
@@ -3645,7 +3651,7 @@ void MainWindow::normalizationModeChanged(int mode)
 void MainWindow::toneAdjustBassChanged(double value)
 {
 	m_settings->toneAdjustBass(static_cast<int>(value * 100.0));
-	spinBoxToneAdjustBass->setPrefix((value > 0) ? "+" : QString());
+	ui->spinBoxToneAdjustBass->setPrefix((value > 0) ? "+" : QString());
 }
 
 /*
@@ -3654,7 +3660,7 @@ void MainWindow::toneAdjustBassChanged(double value)
 void MainWindow::toneAdjustTrebleChanged(double value)
 {
 	m_settings->toneAdjustTreble(static_cast<int>(value * 100.0));
-	spinBoxToneAdjustTreble->setPrefix((value > 0) ? "+" : QString());
+	ui->spinBoxToneAdjustTreble->setPrefix((value > 0) ? "+" : QString());
 }
 
 /*
@@ -3662,10 +3668,10 @@ void MainWindow::toneAdjustTrebleChanged(double value)
  */
 void MainWindow::toneAdjustTrebleReset(void)
 {
-	spinBoxToneAdjustBass->setValue(m_settings->toneAdjustBassDefault());
-	spinBoxToneAdjustTreble->setValue(m_settings->toneAdjustTrebleDefault());
-	toneAdjustBassChanged(spinBoxToneAdjustBass->value());
-	toneAdjustTrebleChanged(spinBoxToneAdjustTreble->value());
+	ui->spinBoxToneAdjustBass->setValue(m_settings->toneAdjustBassDefault());
+	ui->spinBoxToneAdjustTreble->setValue(m_settings->toneAdjustTrebleDefault());
+	toneAdjustBassChanged(ui->spinBoxToneAdjustBass->value());
+	toneAdjustTrebleChanged(ui->spinBoxToneAdjustTreble->value());
 }
 
 /*
@@ -3673,31 +3679,31 @@ void MainWindow::toneAdjustTrebleReset(void)
  */
 void MainWindow::customParamsChanged(void)
 {
-	lineEditCustomParamLAME->setText(lineEditCustomParamLAME->text().simplified());
-	lineEditCustomParamOggEnc->setText(lineEditCustomParamOggEnc->text().simplified());
-	lineEditCustomParamNeroAAC->setText(lineEditCustomParamNeroAAC->text().simplified());
-	lineEditCustomParamFLAC->setText(lineEditCustomParamFLAC->text().simplified());
-	lineEditCustomParamAften->setText(lineEditCustomParamAften->text().simplified());
-	lineEditCustomParamOpus->setText(lineEditCustomParamOpus->text().simplified());
+	ui->lineEditCustomParamLAME->setText(ui->lineEditCustomParamLAME->text().simplified());
+	ui->lineEditCustomParamOggEnc->setText(ui->lineEditCustomParamOggEnc->text().simplified());
+	ui->lineEditCustomParamNeroAAC->setText(ui->lineEditCustomParamNeroAAC->text().simplified());
+	ui->lineEditCustomParamFLAC->setText(ui->lineEditCustomParamFLAC->text().simplified());
+	ui->lineEditCustomParamAften->setText(ui->lineEditCustomParamAften->text().simplified());
+	ui->lineEditCustomParamOpus->setText(ui->lineEditCustomParamOpus->text().simplified());
 
 	bool customParamsUsed = false;
-	if(!lineEditCustomParamLAME->text().isEmpty()) customParamsUsed = true;
-	if(!lineEditCustomParamOggEnc->text().isEmpty()) customParamsUsed = true;
-	if(!lineEditCustomParamNeroAAC->text().isEmpty()) customParamsUsed = true;
-	if(!lineEditCustomParamFLAC->text().isEmpty()) customParamsUsed = true;
-	if(!lineEditCustomParamAften->text().isEmpty()) customParamsUsed = true;
-	if(!lineEditCustomParamOpus->text().isEmpty()) customParamsUsed = true;
+	if(!ui->lineEditCustomParamLAME->text().isEmpty()) customParamsUsed = true;
+	if(!ui->lineEditCustomParamOggEnc->text().isEmpty()) customParamsUsed = true;
+	if(!ui->lineEditCustomParamNeroAAC->text().isEmpty()) customParamsUsed = true;
+	if(!ui->lineEditCustomParamFLAC->text().isEmpty()) customParamsUsed = true;
+	if(!ui->lineEditCustomParamAften->text().isEmpty()) customParamsUsed = true;
+	if(!ui->lineEditCustomParamOpus->text().isEmpty()) customParamsUsed = true;
 
-	labelCustomParamsIcon->setVisible(customParamsUsed);
-	labelCustomParamsText->setVisible(customParamsUsed);
-	labelCustomParamsSpacer->setVisible(customParamsUsed);
+	ui->labelCustomParamsIcon->setVisible(customParamsUsed);
+	ui->labelCustomParamsText->setVisible(customParamsUsed);
+	ui->labelCustomParamsSpacer->setVisible(customParamsUsed);
 
-	m_settings->customParametersLAME(lineEditCustomParamLAME->text());
-	m_settings->customParametersOggEnc(lineEditCustomParamOggEnc->text());
-	m_settings->customParametersAacEnc(lineEditCustomParamNeroAAC->text());
-	m_settings->customParametersFLAC(lineEditCustomParamFLAC->text());
-	m_settings->customParametersAften(lineEditCustomParamAften->text());
-	m_settings->customParametersOpus(lineEditCustomParamOpus->text());
+	m_settings->customParametersLAME(ui->lineEditCustomParamLAME->text());
+	m_settings->customParametersOggEnc(ui->lineEditCustomParamOggEnc->text());
+	m_settings->customParametersAacEnc(ui->lineEditCustomParamNeroAAC->text());
+	m_settings->customParametersFLAC(ui->lineEditCustomParamFLAC->text());
+	m_settings->customParametersAften(ui->lineEditCustomParamAften->text());
+	m_settings->customParametersOpus(ui->lineEditCustomParamOpus->text());
 }
 
 /*
@@ -3713,9 +3719,9 @@ void MainWindow::renameOutputEnabledChanged(bool checked)
  */
 void MainWindow::renameOutputPatternChanged(void)
 {
-	QString temp = lineEditRenamePattern->text().simplified();
-	lineEditRenamePattern->setText(temp.isEmpty() ? m_settings->renameOutputFilesPatternDefault() : temp);
-	m_settings->renameOutputFilesPattern(lineEditRenamePattern->text());
+	QString temp = ui->lineEditRenamePattern->text().simplified();
+	ui->lineEditRenamePattern->setText(temp.isEmpty() ? m_settings->renameOutputFilesPatternDefault() : temp);
+	m_settings->renameOutputFilesPattern(ui->lineEditRenamePattern->text());
 }
 
 /*
@@ -3735,22 +3741,22 @@ void MainWindow::renameOutputPatternChanged(const QString &text)
 
 	if(pattern.compare(lamexp_clean_filename(pattern)))
 	{
-		if(lineEditRenamePattern->palette().color(QPalette::Text) != Qt::red)
+		if(ui->lineEditRenamePattern->palette().color(QPalette::Text) != Qt::red)
 		{
 			MessageBeep(MB_ICONERROR);
-			SET_TEXT_COLOR(lineEditRenamePattern, Qt::red);
+			SET_TEXT_COLOR(ui->lineEditRenamePattern, Qt::red);
 		}
 	}
 	else
 	{
-		if(lineEditRenamePattern->palette().color(QPalette::Text) != Qt::black)
+		if(ui->lineEditRenamePattern->palette().color(QPalette::Text) != Qt::black)
 		{
 			MessageBeep(MB_ICONINFORMATION);
-			SET_TEXT_COLOR(lineEditRenamePattern, Qt::black);
+			SET_TEXT_COLOR(ui->lineEditRenamePattern, Qt::black);
 		}
 	}
 
-	labelRanameExample->setText(lamexp_clean_filename(pattern));
+	ui->labelRanameExample->setText(lamexp_clean_filename(pattern));
 }
 
 /*
@@ -3760,7 +3766,7 @@ void MainWindow::showRenameMacros(const QString &text)
 {
 	if(text.compare("reset", Qt::CaseInsensitive) == 0)
 	{
-		lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+		ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
 		return;
 	}
 
@@ -3791,8 +3797,8 @@ void MainWindow::forceStereoDownmixEnabledChanged(bool checked)
  */
 void MainWindow::updateMaximumInstances(int value)
 {
-	labelMaxInstances->setText(tr("%1 Instance(s)").arg(QString::number(value)));
-	m_settings->maximumInstances(checkBoxAutoDetectInstances->isChecked() ? NULL : value);
+	ui->labelMaxInstances->setText(tr("%1 Instance(s)").arg(QString::number(value)));
+	m_settings->maximumInstances(ui->checkBoxAutoDetectInstances->isChecked() ? NULL : value);
 }
 
 /*
@@ -3800,7 +3806,7 @@ void MainWindow::updateMaximumInstances(int value)
  */
 void MainWindow::autoDetectInstancesChanged(bool checked)
 {
-	m_settings->maximumInstances(checked ? NULL : sliderMaxInstances->value());
+	m_settings->maximumInstances(checked ? NULL : ui->sliderMaxInstances->value());
 }
 
 /*
@@ -3831,7 +3837,7 @@ void MainWindow::browseCustomTempFolderButtonClicked(void)
 		if(writeTest.open(QIODevice::ReadWrite))
 		{
 			writeTest.remove();
-			lineEditCustomTempFolder->setText(QDir::toNativeSeparators(newTempFolder));
+			ui->lineEditCustomTempFolder->setText(QDir::toNativeSeparators(newTempFolder));
 		}
 		else
 		{
@@ -3875,18 +3881,18 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 		}
 	}
 
-	if(obj == helpCustomParamLAME)         showCustomParamsHelpScreen("lame.exe", "--longhelp");
-	else if(obj == helpCustomParamOggEnc)  showCustomParamsHelpScreen("oggenc2.exe", "--help");
-	else if(obj == helpCustomParamNeroAAC)
+	if(obj == ui->helpCustomParamLAME)         showCustomParamsHelpScreen("lame.exe", "--longhelp");
+	else if(obj == ui->helpCustomParamOggEnc)  showCustomParamsHelpScreen("oggenc2.exe", "--help");
+	else if(obj == ui->helpCustomParamNeroAAC)
 	{
 		if(m_qaacEncoderAvailable)         showCustomParamsHelpScreen("qaac.exe", "--help");
 		else if(m_fhgEncoderAvailable)     showCustomParamsHelpScreen("fhgaacenc.exe", "");
 		else if(m_neroEncoderAvailable)    showCustomParamsHelpScreen("neroAacEnc.exe", "-help");
 		else MessageBeep(MB_ICONERROR);
 	}
-	else if(obj == helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
-	else if(obj == helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
-	else if(obj == helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc_std.exe", "--help");
+	else if(obj == ui->helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
+	else if(obj == ui->helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
+	else if(obj == ui->helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc_std.exe", "--help");
 	else MessageBeep(MB_ICONERROR);
 }
 
@@ -3957,8 +3963,8 @@ void MainWindow::overwriteModeChanged(int id)
 	{
 		if(QMessageBox::warning(this, tr("Overwrite Mode"), tr("Warning: This mode may overwrite existing files with no way to revert!"), tr("Continue"), tr("Revert"), QString(), 1) != 0)
 		{
-			radioButtonOverwriteModeKeepBoth->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_KeepBoth);
-			radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
+			ui->radioButtonOverwriteModeKeepBoth->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_KeepBoth);
+			ui->radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
 			return;
 		}
 	}
@@ -3971,42 +3977,42 @@ void MainWindow::overwriteModeChanged(int id)
  */
 void MainWindow::resetAdvancedOptionsButtonClicked(void)
 {
-	sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());
-	spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());
-	spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRateDefault());
-	spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolumeDefault()) / 100.0);
-	spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBassDefault()) / 100.0);
-	spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTrebleDefault()) / 100.0);
-	spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSizeDefault());
-	spinBoxOpusComplexity->setValue(m_settings->opusComplexityDefault());
-	comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelModeDefault());
-	comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRateDefault());
-	comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfileDefault());
-	comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
-	comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
-	comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
+	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());
+	ui->spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());
+	ui->spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRateDefault());
+	ui->spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolumeDefault()) / 100.0);
+	ui->spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBassDefault()) / 100.0);
+	ui->spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTrebleDefault()) / 100.0);
+	ui->spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSizeDefault());
+	ui->spinBoxOpusComplexity->setValue(m_settings->opusComplexityDefault());
+	ui->comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelModeDefault());
+	ui->comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRateDefault());
+	ui->comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfileDefault());
+	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
+	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
+	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
 	//comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeForDefault());
-	comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
-	SET_CHECKBOX_STATE(checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());
-	SET_CHECKBOX_STATE(checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
-	SET_CHECKBOX_STATE(checkBoxNormalizationFilter, m_settings->normalizationFilterEnabledDefault());
-	SET_CHECKBOX_STATE(checkBoxAutoDetectInstances, (m_settings->maximumInstancesDefault() < 1));
-	SET_CHECKBOX_STATE(checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabledDefault());
-	SET_CHECKBOX_STATE(checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocationDefault());
-	SET_CHECKBOX_STATE(checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
-	SET_CHECKBOX_STATE(checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
-	lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
-	lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
-	lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());
-	lineEditCustomParamFLAC->setText(m_settings->customParametersFLACDefault());
-	lineEditCustomParamOpus->setText(m_settings->customParametersFLACDefault());
-	lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
-	lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
-	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_KeepBoth) radioButtonOverwriteModeKeepBoth->click();
-	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_SkipFile) radioButtonOverwriteModeSkipFile->click();
-	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_Replaces) radioButtonOverwriteModeReplaces->click();
+	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilter, m_settings->normalizationFilterEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances, (m_settings->maximumInstancesDefault() < 1));
+	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocationDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
+	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
+	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
+	ui->lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());
+	ui->lineEditCustomParamFLAC->setText(m_settings->customParametersFLACDefault());
+	ui->lineEditCustomParamOpus->setText(m_settings->customParametersFLACDefault());
+	ui->lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
+	ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_KeepBoth) ui->radioButtonOverwriteModeKeepBoth->click();
+	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_SkipFile) ui->radioButtonOverwriteModeSkipFile->click();
+	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_Replaces) ui->radioButtonOverwriteModeReplaces->click();
 	customParamsChanged();
-	scrollArea->verticalScrollBar()->setValue(0);
+	ui->scrollArea->verticalScrollBar()->setValue(0);
 }
 
 // =========================================================
