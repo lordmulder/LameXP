@@ -21,22 +21,25 @@
 
 #pragma once
 
-#include "../tmp/UIC_ProcessingDialog.h"
-
+#include <QDialog>
 #include <QUuid>
 #include <QSystemTrayIcon>
+#include <QMap>
 
-class QMovie;
-class QMenu;
-class ProgressModel;
-class ProcessThread;
-class FileListModel;
-class AudioFileModel;
-class SettingsModel;
-class CPUObserverThread;
-class RAMObserverThread;
-class DiskObserverThread;
 class AbstractEncoder;
+class AudioFileModel;
+class CPUObserverThread;
+class DiskObserverThread;
+class FileListModel;
+class ProcessThread;
+class ProgressModel;
+class QActionGroup;
+class QLabel;
+class QMenu;
+class QModelIndex;
+class QMovie;
+class RAMObserverThread;
+class SettingsModel;
 
 enum shutdownFlag_t
 {
@@ -45,7 +48,13 @@ enum shutdownFlag_t
 	shutdownFlag_Hibernate = 2
 };
 
-class ProcessingDialog : public QDialog, private Ui::ProcessingDialog
+//UIC forward declartion
+namespace Ui {
+	class ProcessingDialog;
+}
+
+//ProcessingDialog class
+class ProcessingDialog : public QDialog
 {
 	Q_OBJECT
 
@@ -82,6 +91,8 @@ protected:
 	virtual void resizeEvent(QResizeEvent *event);
 
 private:
+	Ui::ProcessingDialog *ui; //for Qt UIC
+
 	void setCloseButtonEnabled(bool enabled);
 	void startNextJob(void);
 	AbstractEncoder *makeEncoder(bool *nativeResampling);
