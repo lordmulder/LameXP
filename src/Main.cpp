@@ -150,7 +150,7 @@ static int lamexp_main(int argc, char* argv[])
 	FileListModel *fileListModel = new FileListModel();
 	AudioFileModel *metaInfo = new AudioFileModel();
 	SettingsModel *settingsModel = new SettingsModel();
-	
+
 	//Show splash screen
 	InitializationThread *poInitializationThread = new InitializationThread(&cpuFeatures);
 	SplashScreen::showSplash(poInitializationThread);

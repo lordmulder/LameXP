@@ -523,8 +523,14 @@ static void lamexp_console_color(FILE* file, WORD attributes)
  */
 void lamexp_message_handler(QtMsgType type, const char *msg)
 {
+	static volatile bool bFatalFlag = false;
 	static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
-	
+
+	if(bFatalFlag || (msg == NULL))
+	{
+		return; //We are about to terminate, discard any further messages!
+	}
+
 	QMutexLocker lock(&g_lamexp_message_mutex);
 
 	if(g_lamexp_log_file)
@@ -546,6 +552,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		{
 		case QtCriticalMsg:
 		case QtFatalMsg:
+			bFatalFlag = true;
 			fflush(stdout);
 			fflush(stderr);
 			lamexp_console_color(stderr, FOREGROUND_RED | FOREGROUND_INTENSITY);
@@ -590,7 +597,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		OutputDebugStringA(temp.toLatin1().constData());
 	}
 
-	if(type == QtCriticalMsg || type == QtFatalMsg)
+	if(bFatalFlag)
 	{
 		lock.unlock();
 

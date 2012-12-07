@@ -140,8 +140,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OpenMPSupport>false</OpenMPSupport>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
+      <DebugInformationFormat>None</DebugInformationFormat>
       <TreatWarningAsError>true</TreatWarningAsError>
       <CompileAsManaged>false</CompileAsManaged>
       <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
@@ -167,10 +166,10 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
       <MapFileName>
       </MapFileName>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <CreateHotPatchableImage>
       </CreateHotPatchableImage>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
     <PostBuildEvent>
       <Message>Copy plugin DLL%27s</Message>
