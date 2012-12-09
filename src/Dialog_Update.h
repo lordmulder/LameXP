@@ -21,15 +21,19 @@
 
 #pragma once
 
-#include "..\tmp\UIC_UpdateDialog.h"
-
 #include <QDialog>
 
 class UpdateInfo;
 class SettingsModel;
 class QMovie;
 
-class UpdateDialog : public QDialog, private Ui::UpdateDialog
+//UIC forward declartion
+namespace Ui {
+	class UpdateDialog;
+}
+
+//UpdateDialog class
+class UpdateDialog : public QDialog
 {
 	Q_OBJECT
 
@@ -58,6 +62,8 @@ protected:
 	const bool m_betaUpdates;
 
 private:
+	Ui::UpdateDialog *ui; //for Qt UIC
+
 	bool tryUpdateMirror(UpdateInfo *updateInfo, const QString &url);
 	bool getFile(const QString &url, const QString &outFile, unsigned int maxRedir = 5, bool *httpOk = NULL);
 	bool checkSignature(const QString &file, const QString &signature);

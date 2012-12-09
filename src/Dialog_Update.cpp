@@ -21,12 +21,17 @@
 
 #include "Dialog_Update.h"
 
+//UIC includes
+#include "..\tmp\UIC_UpdateDialog.h"
+
+//LameXP includes
 #include "Global.h"
 #include "Resource.h"
 #include "Dialog_LogView.h"
 #include "Model_Settings.h"
 #include "WinSevenTaskbar.h"
 
+//Qt includes
 #include <QClipboard>
 #include <QFileDialog>
 #include <QTimer>
@@ -39,6 +44,7 @@
 #include <QMovie>
 #include <QtConcurrentRun>
 
+//Win32 includes
 #include <MMSystem.h>
 #include <WinInet.h>
 
@@ -206,6 +212,7 @@ public:
 UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 :
 	QDialog(parent),
+	ui(new Ui::UpdateDialog),
 	m_binaryWGet(lamexp_lookup_tool("wget.exe")),
 	m_binaryGnuPG(lamexp_lookup_tool("gpgv.exe")),
 	m_binaryUpdater(lamexp_lookup_tool("wupdate.exe")),
@@ -225,7 +232,7 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	}
 	
 	//Init the dialog, from the .ui file
-	setupUi(this);
+	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
 
 	//Disable "X" button
@@ -234,7 +241,7 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 
 	//Init animation
 	m_animator = new QMovie(":/images/Loading3.gif");
-	labelAnimationCenter->setMovie(m_animator);
+	ui->labelAnimationCenter->setMovie(m_animator);
 	m_animator->start();
 
 	//Indicate beta updates
@@ -244,13 +251,13 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	}
 	
 	//Enable button
-	connect(retryButton, SIGNAL(clicked()), this, SLOT(checkForUpdates()));
-	connect(installButton, SIGNAL(clicked()), this, SLOT(applyUpdate()));
-	connect(infoLabel, SIGNAL(linkActivated(QString)), this, SLOT(linkActivated(QString)));
-	connect(logButton, SIGNAL(clicked()), this, SLOT(logButtonClicked()));
+	connect(ui->retryButton, SIGNAL(clicked()), this, SLOT(checkForUpdates()));
+	connect(ui->installButton, SIGNAL(clicked()), this, SLOT(applyUpdate()));
+	connect(ui->infoLabel, SIGNAL(linkActivated(QString)), this, SLOT(linkActivated(QString)));
+	connect(ui->logButton, SIGNAL(clicked()), this, SLOT(logButtonClicked()));
 
 	//Enable progress bar
-	connect(progressBar, SIGNAL(valueChanged(int)), this, SLOT(progressBarValueChanged(int)));
+	connect(ui->progressBar, SIGNAL(valueChanged(int)), this, SLOT(progressBarValueChanged(int)));
 }
 
 UpdateDialog::~UpdateDialog(void)
@@ -263,6 +270,8 @@ UpdateDialog::~UpdateDialog(void)
 
 	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
 	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
+
+	LAMEXP_DELETE(ui);
 }
 
 void UpdateDialog::showEvent(QShowEvent *event)
@@ -271,26 +280,26 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	
 	if(m_firstShow)
 	{
-		labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
-		labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
+		ui->labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
+		ui->labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
 
-		installButton->setEnabled(false);
-		closeButton->setEnabled(false);
-		retryButton->setEnabled(false);
-		logButton->setEnabled(false);
-		retryButton->hide();
-		logButton->hide();
-		infoLabel->hide();
-		hintLabel->hide();
-		hintIcon->hide();
-		frameAnimation->hide();
+		ui->installButton->setEnabled(false);
+		ui->closeButton->setEnabled(false);
+		ui->retryButton->setEnabled(false);
+		ui->logButton->setEnabled(false);
+		ui->retryButton->hide();
+		ui->logButton->hide();
+		ui->infoLabel->hide();
+		ui->hintLabel->hide();
+		ui->hintIcon->hide();
+		ui->frameAnimation->hide();
 	
 		int counter = MIN_CONNSCORE + 2;
 		for(int i = 0; update_mirrors_prim[i]; i++) counter++;
 		for(int i = 0; update_mirrors_back[i]; i++) counter++;
 
-		progressBar->setMaximum(counter);
-		progressBar->setValue(0);
+		ui->progressBar->setMaximum(counter);
+		ui->progressBar->setValue(0);
 
 		m_updaterProcess = NULL;
 
@@ -301,7 +310,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 
 void UpdateDialog::closeEvent(QCloseEvent *event)
 {
-	if(!closeButton->isEnabled())
+	if(!ui->closeButton->isEnabled())
 	{
 		event->ignore();
 	}
@@ -316,11 +325,11 @@ void UpdateDialog::keyPressEvent(QKeyEvent *e)
 {
 	if(e->key() == Qt::Key_F11)
 	{
-		if(closeButton->isEnabled()) logButtonClicked();
+		if(ui->closeButton->isEnabled()) logButtonClicked();
 	}
 	else if((e->key() == Qt::Key_F12) && e->modifiers().testFlag(Qt::ControlModifier))
 	{
-		if(closeButton->isEnabled())
+		if(ui->closeButton->isEnabled())
 		{
 			testKnownWebSites();
 			logButtonClicked();
@@ -363,24 +372,24 @@ void UpdateDialog::checkForUpdates(void)
 
 	m_updateInfo = new UpdateInfo;
 
-	progressBar->setValue(0);
+	ui->progressBar->setValue(0);
 	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNormalState);
 	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
-	installButton->setEnabled(false);
-	closeButton->setEnabled(false);
-	retryButton->setEnabled(false);
-	logButton->setEnabled(false);
-	if(infoLabel->isVisible()) infoLabel->hide();
-	if(hintLabel->isVisible()) hintLabel->hide();
-	if(hintIcon->isVisible()) hintIcon->hide();
-	frameAnimation->show();
+	ui->installButton->setEnabled(false);
+	ui->closeButton->setEnabled(false);
+	ui->retryButton->setEnabled(false);
+	ui->logButton->setEnabled(false);
+	if(ui->infoLabel->isVisible()) ui->infoLabel->hide();
+	if(ui->hintLabel->isVisible()) ui->hintLabel->hide();
+	if(ui->hintIcon->isVisible()) ui->hintIcon->hide();
+	ui->frameAnimation->show();
 
 	QApplication::processEvents();
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
 	// ----- Test Internet Connection ----- //
 
-	statusLabel->setText(tr("Testing your internet connection, please wait..."));
+	ui->statusLabel->setText(tr("Testing your internet connection, please wait..."));
 
 	m_logFile->clear();
 	m_logFile->append("Checking internet connection...");
@@ -394,28 +403,28 @@ void UpdateDialog::checkForUpdates(void)
 	if(!connectedState.result())
 	{
 		m_logFile->append(QStringList() << "" << "Operating system reports that the computer is currently offline !!!");
-		if(!retryButton->isVisible()) retryButton->show();
-		if(!logButton->isVisible()) logButton->show();
-		closeButton->setEnabled(true);
-		retryButton->setEnabled(true);
-		logButton->setEnabled(true);
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		statusLabel->setText(tr("It appears that the computer currently is offline!"));
-		progressBar->setValue(progressBar->maximum());
-		hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		hintLabel->setText(tr("Please make sure your computer is connected to the internet and try again."));
-		hintIcon->show();
-		hintLabel->show();
+		if(!ui->retryButton->isVisible()) ui->retryButton->show();
+		if(!ui->logButton->isVisible()) ui->logButton->show();
+		ui->closeButton->setEnabled(true);
+		ui->retryButton->setEnabled(true);
+		ui->logButton->setEnabled(true);
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
+		ui->progressBar->setValue(ui->progressBar->maximum());
+		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
+		ui->hintLabel->setText(tr("Please make sure your computer is connected to the internet and try again."));
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		QApplication::restoreOverrideCursor();
-		progressBar->setValue(progressBar->maximum());
+		ui->progressBar->setValue(ui->progressBar->maximum());
 		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 		return;
 	}
 	
-	progressBar->setValue(1);
+	ui->progressBar->setValue(1);
 	QApplication::processEvents();
 
 	// ----- Test Known Hosts Connectivity ----- //
@@ -438,14 +447,14 @@ void UpdateDialog::checkForUpdates(void)
 			if(getFile(currentHost, outFile, 0, &httpOk))
 			{
 				connectionScore++;
-				progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
+				ui->progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
 				QApplication::processEvents();
 				Sleep(64);
 			}
 			if(httpOk)
 			{
 				connectionScore++;
-				progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
+				ui->progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
 				QApplication::processEvents();
 				Sleep(64);
 			}
@@ -455,22 +464,22 @@ void UpdateDialog::checkForUpdates(void)
 
 	if(connectionScore < MIN_CONNSCORE)
 	{
-		if(!retryButton->isVisible()) retryButton->show();
-		if(!logButton->isVisible()) logButton->show();
-		closeButton->setEnabled(true);
-		retryButton->setEnabled(true);
-		logButton->setEnabled(true);
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		statusLabel->setText(tr("Network connectivity test has failed!"));
-		progressBar->setValue(progressBar->maximum());
-		hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		hintLabel->setText(tr("Please make sure your internet connection is working properly and try again."));
-		hintIcon->show();
-		hintLabel->show();
+		if(!ui->retryButton->isVisible()) ui->retryButton->show();
+		if(!ui->logButton->isVisible()) ui->logButton->show();
+		ui->closeButton->setEnabled(true);
+		ui->retryButton->setEnabled(true);
+		ui->logButton->setEnabled(true);
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->statusLabel->setText(tr("Network connectivity test has failed!"));
+		ui->progressBar->setValue(ui->progressBar->maximum());
+		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
+		ui->hintLabel->setText(tr("Please make sure your internet connection is working properly and try again."));
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		QApplication::restoreOverrideCursor();
-		progressBar->setValue(progressBar->maximum());
+		ui->progressBar->setValue(ui->progressBar->maximum());
 		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 		return;
@@ -478,7 +487,7 @@ void UpdateDialog::checkForUpdates(void)
 
 	// ----- Build Mirror List ----- //
 
-	statusLabel->setText(tr("Checking for new updates online, please wait..."));
+	ui->statusLabel->setText(tr("Checking for new updates online, please wait..."));
 	m_logFile->append(QStringList() << "" << "----" << "" << "Checking for updates online...");
 
 	QStringList mirrorList;
@@ -507,7 +516,7 @@ void UpdateDialog::checkForUpdates(void)
 	while(!mirrorList.isEmpty())
 	{
 		QString currentMirror = mirrorList.takeFirst();
-		progressBar->setValue(progressBar->value() + 1);
+		ui->progressBar->setValue(ui->progressBar->value() + 1);
 		if(!success)
 		{
 			if(tryUpdateMirror(m_updateInfo, currentMirror))
@@ -523,24 +532,24 @@ void UpdateDialog::checkForUpdates(void)
 	}
 	
 	QApplication::restoreOverrideCursor();
-	progressBar->setValue(progressBar->maximum());
+	ui->progressBar->setValue(ui->progressBar->maximum());
 	
 	if(!success)
 	{
-		if(!retryButton->isVisible()) retryButton->show();
-		if(!logButton->isVisible()) logButton->show();
-		closeButton->setEnabled(true);
-		retryButton->setEnabled(true);
-		logButton->setEnabled(true);
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		statusLabel->setText(tr("Failed to fetch update information from server!"));
-		progressBar->setValue(progressBar->maximum());
+		if(!ui->retryButton->isVisible()) ui->retryButton->show();
+		if(!ui->logButton->isVisible()) ui->logButton->show();
+		ui->closeButton->setEnabled(true);
+		ui->retryButton->setEnabled(true);
+		ui->logButton->setEnabled(true);
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->statusLabel->setText(tr("Failed to fetch update information from server!"));
+		ui->progressBar->setValue(ui->progressBar->maximum());
 		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
-		hintIcon->setPixmap(QIcon(":/icons/server_error.png").pixmap(16,16));
-		hintLabel->setText(tr("Sorry, the update server might be busy at this time. Plase try again later."));
-		hintIcon->show();
-		hintLabel->show();
+		ui->hintIcon->setPixmap(QIcon(":/icons/server_error.png").pixmap(16,16));
+		ui->hintLabel->setText(tr("Sorry, the update server might be busy at this time. Plase try again later."));
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		return;
@@ -548,50 +557,50 @@ void UpdateDialog::checkForUpdates(void)
 
 	// ----- Download New Program Version ----- //
 	
-	labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
-	infoLabel->show();
-	infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), m_updateInfo->m_downloadSite));
+	ui->labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
+	ui->infoLabel->show();
+	ui->infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), m_updateInfo->m_downloadSite));
 	QApplication::processEvents();
 	
 	if(m_updateInfo->m_buildNo > lamexp_version_build())
 	{
-		installButton->setEnabled(true);
-		statusLabel->setText(tr("A new version of LameXP is available!"));
-		hintIcon->setPixmap(QIcon(":/icons/shield_exclamation.png").pixmap(16,16));
-		hintLabel->setText(tr("We highly recommend all users to install this update as soon as possible."));
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		hintIcon->show();
-		hintLabel->show();
+		ui->installButton->setEnabled(true);
+		ui->statusLabel->setText(tr("A new version of LameXP is available!"));
+		ui->hintIcon->setPixmap(QIcon(":/icons/shield_exclamation.png").pixmap(16,16));
+		ui->hintLabel->setText(tr("We highly recommend all users to install this update as soon as possible."));
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_exclamation.png"));
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else if(m_updateInfo->m_buildNo == lamexp_version_build())
 	{
-		statusLabel->setText(tr("No new updates available at this time."));
-		hintIcon->setPixmap(QIcon(":/icons/shield_green.png").pixmap(16,16));
-		hintLabel->setText(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"));
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		hintIcon->show();
-		hintLabel->show();
+		ui->statusLabel->setText(tr("No new updates available at this time."));
+		ui->hintIcon->setPixmap(QIcon(":/icons/shield_green.png").pixmap(16,16));
+		ui->hintLabel->setText(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"));
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_green.png"));
 		MessageBeep(MB_ICONINFORMATION);
 	}
 	else
 	{
-		statusLabel->setText(tr("Your version appears to be newer than the latest release."));
-		hintIcon->setPixmap(QIcon(":/icons/shield_error.png").pixmap(16,16));
-		hintLabel->setText(tr("This usually indicates your are currently using a pre-release version of LameXP."));
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		hintIcon->show();
-		hintLabel->show();
+		ui->statusLabel->setText(tr("Your version appears to be newer than the latest release."));
+		ui->hintIcon->setPixmap(QIcon(":/icons/shield_error.png").pixmap(16,16));
+		ui->hintLabel->setText(tr("This usually indicates your are currently using a pre-release version of LameXP."));
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_error.png"));
 		MessageBeep(MB_ICONEXCLAMATION);
 	}
 
-	closeButton->setEnabled(true);
-	if(retryButton->isVisible()) retryButton->hide();
-	if(logButton->isVisible()) logButton->hide();
-	if(frameAnimation->isVisible()) frameAnimation->hide();
+	ui->closeButton->setEnabled(true);
+	if(ui->retryButton->isVisible()) ui->retryButton->hide();
+	if(ui->logButton->isVisible()) ui->logButton->hide();
+	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
 
 	m_success = true;
 }
@@ -867,19 +876,19 @@ void UpdateDialog::linkActivated(const QString &link)
 
 void UpdateDialog::applyUpdate(void)
 {
-	installButton->setEnabled(false);
-	closeButton->setEnabled(false);
-	retryButton->setEnabled(false);
+	ui->installButton->setEnabled(false);
+	ui->closeButton->setEnabled(false);
+	ui->retryButton->setEnabled(false);
 
 	if(m_updateInfo)
 	{
-		statusLabel->setText(tr("Update is being downloaded, please be patient..."));
-		frameAnimation->show();
-		if(hintLabel->isVisible()) hintLabel->hide();
-		if(hintIcon->isVisible()) hintIcon->hide();
-		int oldMax = progressBar->maximum();
-		int oldMin = progressBar->minimum();
-		progressBar->setRange(0, 0);
+		ui->statusLabel->setText(tr("Update is being downloaded, please be patient..."));
+		ui->frameAnimation->show();
+		if(ui->hintLabel->isVisible()) ui->hintLabel->hide();
+		if(ui->hintIcon->isVisible()) ui->hintIcon->hide();
+		int oldMax = ui->progressBar->maximum();
+		int oldMin = ui->progressBar->minimum();
+		ui->progressBar->setRange(0, 0);
 		QApplication::processEvents();
 		
 		QProcess process;
@@ -910,15 +919,15 @@ void UpdateDialog::applyUpdate(void)
 		m_updaterProcess = NULL;
 		QApplication::restoreOverrideCursor();
 
-		hintLabel->show();
-		hintIcon->show();
-		progressBar->setRange(oldMin, oldMax);
-		progressBar->setValue(oldMax);
-		frameAnimation->hide();
+		ui->hintLabel->show();
+		ui->hintIcon->show();
+		ui->progressBar->setRange(oldMin, oldMax);
+		ui->progressBar->setValue(oldMax);
+		ui->frameAnimation->hide();
 
 		if(updateStarted && (process.exitCode() == 0))
 		{
-			statusLabel->setText(tr("Update ready to install. Applicaion will quit..."));
+			ui->statusLabel->setText(tr("Update ready to install. Applicaion will quit..."));
 			m_updateReadyToInstall = true;
 			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
 			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
@@ -926,15 +935,15 @@ void UpdateDialog::applyUpdate(void)
 		}
 		else
 		{
-			statusLabel->setText(tr("Update failed. Please try again or download manually!"));
+			ui->statusLabel->setText(tr("Update failed. Please try again or download manually!"));
 			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
 			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 			WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), 100, 100);
 		}
 	}
 
-	installButton->setEnabled(true);
-	closeButton->setEnabled(true);
+	ui->installButton->setEnabled(true);
+	ui->closeButton->setEnabled(true);
 }
 
 void UpdateDialog::logButtonClicked(void)
@@ -946,7 +955,7 @@ void UpdateDialog::logButtonClicked(void)
 
 void UpdateDialog::progressBarValueChanged(int value)
 {
-	WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), value, progressBar->maximum());
+	WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), value, ui->progressBar->maximum());
 }
 
 void UpdateDialog::testKnownWebSites(void)
@@ -955,24 +964,24 @@ void UpdateDialog::testKnownWebSites(void)
 
 	// ----- Initialization ----- //
 
-	progressBar->setValue(0);
+	ui->progressBar->setValue(0);
 	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNormalState);
 	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
-	installButton->setEnabled(false);
-	closeButton->setEnabled(false);
-	retryButton->setEnabled(false);
-	logButton->setEnabled(false);
-	if(infoLabel->isVisible()) infoLabel->hide();
-	if(hintLabel->isVisible()) hintLabel->hide();
-	if(hintIcon->isVisible()) hintIcon->hide();
-	frameAnimation->show();
+	ui->installButton->setEnabled(false);
+	ui->closeButton->setEnabled(false);
+	ui->retryButton->setEnabled(false);
+	ui->logButton->setEnabled(false);
+	if(ui->infoLabel->isVisible()) ui->infoLabel->hide();
+	if(ui->hintLabel->isVisible()) ui->hintLabel->hide();
+	if(ui->hintIcon->isVisible()) ui->hintIcon->hide();
+	ui->frameAnimation->show();
 
 	QApplication::processEvents();
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
 	// ----- Test Internet Connection ----- //
 
-	statusLabel->setText("Testing all known hosts, this may take a few minutes...");
+	ui->statusLabel->setText("Testing all known hosts, this may take a few minutes...");
 
 	m_logFile->clear();
 	m_logFile->append("Checking internet connection...");
@@ -986,22 +995,22 @@ void UpdateDialog::testKnownWebSites(void)
 	if(!connectedState.result())
 	{
 		m_logFile->append(QStringList() << "" << "Operating system reports that the computer is currently offline !!!");
-		if(!retryButton->isVisible()) retryButton->show();
-		if(!logButton->isVisible()) logButton->show();
-		closeButton->setEnabled(true);
-		retryButton->setEnabled(true);
-		logButton->setEnabled(true);
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		statusLabel->setText(tr("It appears that the computer currently is offline!"));
-		progressBar->setValue(progressBar->maximum());
-		hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		hintLabel->setText(tr("Please make sure your computer is connected to the internet and try again."));
-		hintIcon->show();
-		hintLabel->show();
+		if(!ui->retryButton->isVisible()) ui->retryButton->show();
+		if(!ui->logButton->isVisible()) ui->logButton->show();
+		ui->closeButton->setEnabled(true);
+		ui->retryButton->setEnabled(true);
+		ui->logButton->setEnabled(true);
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
+		ui->progressBar->setValue(ui->progressBar->maximum());
+		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
+		ui->hintLabel->setText(tr("Please make sure your computer is connected to the internet and try again."));
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		QApplication::restoreOverrideCursor();
-		progressBar->setValue(progressBar->maximum());
+		ui->progressBar->setValue(ui->progressBar->maximum());
 		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 		return;
@@ -1021,7 +1030,7 @@ void UpdateDialog::testKnownWebSites(void)
 	while(!hostList.isEmpty())
 	{
 		QString currentHost = hostList.takeFirst();
-		progressBar->setValue(qRound((static_cast<double>(progressBar->maximum() - 1) / static_cast<double>(hostCount)) * static_cast<double>(connectionScore)) + 1);
+		ui->progressBar->setValue(qRound((static_cast<double>(ui->progressBar->maximum() - 1) / static_cast<double>(hostCount)) * static_cast<double>(connectionScore)) + 1);
 		qDebug("Testing: %s", currentHost.toLatin1().constData());
 		m_logFile->append(QStringList() << "" << "Testing host:" << currentHost << "");
 		QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
@@ -1047,22 +1056,22 @@ void UpdateDialog::testKnownWebSites(void)
 
 	if(connectionScore < hostCount)
 	{
-		if(!retryButton->isVisible()) retryButton->show();
-		if(!logButton->isVisible()) logButton->show();
-		closeButton->setEnabled(true);
-		retryButton->setEnabled(true);
-		logButton->setEnabled(true);
-		if(frameAnimation->isVisible()) frameAnimation->hide();
-		statusLabel->setText("At least one host could not be reached!");
-		progressBar->setValue(progressBar->maximum());
-		hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		hintLabel->setText("Please make sure your internet connection is working properly and try again.");
-		hintIcon->show();
-		hintLabel->show();
+		if(!ui->retryButton->isVisible()) ui->retryButton->show();
+		if(!ui->logButton->isVisible()) ui->logButton->show();
+		ui->closeButton->setEnabled(true);
+		ui->retryButton->setEnabled(true);
+		ui->logButton->setEnabled(true);
+		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+		ui->statusLabel->setText("At least one host could not be reached!");
+		ui->progressBar->setValue(ui->progressBar->maximum());
+		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
+		ui->hintLabel->setText("Please make sure your internet connection is working properly and try again.");
+		ui->hintIcon->show();
+		ui->hintLabel->show();
 		LAMEXP_DELETE(m_updateInfo);
 		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		QApplication::restoreOverrideCursor();
-		progressBar->setValue(progressBar->maximum());
+		ui->progressBar->setValue(ui->progressBar->maximum());
 		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
 		return;
@@ -1071,19 +1080,19 @@ void UpdateDialog::testKnownWebSites(void)
 	// ----- Done ----- //
 	
 	QApplication::restoreOverrideCursor();
-	progressBar->setValue(progressBar->maximum());
+	ui->progressBar->setValue(ui->progressBar->maximum());
 
-	statusLabel->setText("Test completed.");
-	hintIcon->setPixmap(QIcon(":/icons/shield_green.png").pixmap(16,16));
-	hintLabel->setText("Congratulations, the test has completed.");
-	if(frameAnimation->isVisible()) frameAnimation->hide();
-	hintIcon->show();
-	hintLabel->show();
+	ui->statusLabel->setText("Test completed.");
+	ui->hintIcon->setPixmap(QIcon(":/icons/shield_green.png").pixmap(16,16));
+	ui->hintLabel->setText("Congratulations, the test has completed.");
+	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+	ui->hintIcon->show();
+	ui->hintLabel->show();
 	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_green.png"));
 	MessageBeep(MB_ICONINFORMATION);
 
-	closeButton->setEnabled(true);
-	if(retryButton->isVisible()) retryButton->hide();
-	if(logButton->isVisible()) logButton->hide();
-	if(frameAnimation->isVisible()) frameAnimation->hide();
+	ui->closeButton->setEnabled(true);
+	if(ui->retryButton->isVisible()) ui->retryButton->hide();
+	if(ui->logButton->isVisible()) ui->logButton->hide();
+	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
 }
