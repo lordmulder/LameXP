@@ -21,6 +21,8 @@
 
 #include "Dialog_About.h"
 
+#include "../tmp/UIC_AboutDialog.h"
+
 #include "Global.h"
 #include "Resource.h"
 #include "Model_Settings.h"
@@ -91,6 +93,7 @@ g_lamexp_translators[] =
 AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstStart)
 :
 	QDialog(parent),
+	ui(new Ui::AboutDialog),
 	m_settings(settings),
 	m_initFlags(new QMap<QWidget*,bool>),
 	m_disque(NULL),
@@ -100,7 +103,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	m_lastTab(0)
 {
 	//Init the dialog, from the .ui file
-	setupUi(this);
+	ui->setupUi(this);
 	setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
 	resize(this->minimumSize());
 	
@@ -120,16 +123,16 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	}
 
 	//Init tab widget
-	connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
+	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
 
 	//Make transparent
 	QStyle *style = qApp->style();
 	if((dynamic_cast<QWindowsVistaStyle*>(style)) || (dynamic_cast<QWindowsXPStyle*>(style)))
 	{
-		MAKE_TRANSPARENT(infoScrollArea);
-		MAKE_TRANSPARENT(contributorsScrollArea);
-		MAKE_TRANSPARENT(softwareScrollArea);
-		MAKE_TRANSPARENT(licenseScrollArea);
+		MAKE_TRANSPARENT(ui->infoScrollArea);
+		MAKE_TRANSPARENT(ui->contributorsScrollArea);
+		MAKE_TRANSPARENT(ui->softwareScrollArea);
+		MAKE_TRANSPARENT(ui->licenseScrollArea);
 	}
 
 	//Show about dialog for the first time?
@@ -137,10 +140,10 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	{
 		lamexp_seed_rand();
 
-		acceptButton->hide();
-		declineButton->hide();
-		aboutQtButton->show();
-		closeButton->show();
+		ui->acceptButton->hide();
+		ui->declineButton->hide();
+		ui->aboutQtButton->show();
+		ui->closeButton->show();
 
 		QPixmap disque(":/images/Disque.png");
 		QRect screenGeometry = QApplication::desktop()->availableGeometry();
@@ -159,19 +162,19 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		m_disqueTimer->setInterval(10);
 		m_disqueTimer->start();
 
-		connect(aboutQtButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
+		connect(ui->aboutQtButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
 	}
 	else
 	{
-		acceptButton->show();
-		declineButton->show();
-		aboutQtButton->hide();
-		closeButton->hide();
+		ui->acceptButton->show();
+		ui->declineButton->show();
+		ui->aboutQtButton->hide();
+		ui->closeButton->hide();
 	}
 
 	//Activate "show license" button
-	showLicenseButton->show();
-	connect(showLicenseButton, SIGNAL(clicked()), this, SLOT(gotoLicenseTab()));
+	ui->showLicenseButton->show();
+	connect(ui->showLicenseButton, SIGNAL(clicked()), this, SLOT(gotoLicenseTab()));
 
 	m_firstShow = firstStart;
 }
@@ -193,6 +196,7 @@ AboutDialog::~AboutDialog(void)
 		LAMEXP_DELETE(m_cartoon[i]);
 	}
 	LAMEXP_DELETE(m_initFlags);
+	LAMEXP_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////
@@ -239,20 +243,20 @@ if(m_disque) { bool _tmp = m_disque->isVisible(); if(_tmp) m_disque->hide(); {CM
 
 void AboutDialog::tabChanged(int index)
 {
-	bool bInitialized = m_initFlags->value(tabWidget->widget(index), false);
+	bool bInitialized = m_initFlags->value(ui->tabWidget->widget(index), false);
 
 	if(!bInitialized)
 	{
 		qApp->setOverrideCursor(QCursor(Qt::WaitCursor));
 
-		if(QWidget *tab = tabWidget->widget(index))
+		if(QWidget *tab = ui->tabWidget->widget(index))
 		{
 			bool ok = false;
 
-			if(tab == infoTab) { initInformationTab(); ok = true; }
-			if(tab == contributorsTab) { initContributorsTab(); ok = true; }
-			if(tab == softwareTab) { initSoftwareTab(); ok = true; }
-			if(tab == licenseTab) { initLicenseTab(); ok = true; }
+			if(tab == ui->infoTab) { initInformationTab(); ok = true; }
+			if(tab == ui->contributorsTab) { initContributorsTab(); ok = true; }
+			if(tab == ui->softwareTab) { initSoftwareTab(); ok = true; }
+			if(tab == ui->licenseTab) { initLicenseTab(); ok = true; }
 
 			if(ok)
 			{
@@ -265,29 +269,29 @@ void AboutDialog::tabChanged(int index)
 			
 		}
 
-		tabWidget->widget(index)->update();
+		ui->tabWidget->widget(index)->update();
 		qApp->processEvents();
 		qApp->restoreOverrideCursor();
 	}
 
 	//Scroll to the top
-	if(QWidget *tab = tabWidget->widget(index))
+	if(QWidget *tab = ui->tabWidget->widget(index))
 	{
-		if(tab == infoTab) infoScrollArea->verticalScrollBar()->setSliderPosition(0);
-		if(tab == contributorsTab) contributorsScrollArea->verticalScrollBar()->setSliderPosition(0);
-		if(tab == softwareTab) softwareScrollArea->verticalScrollBar()->setSliderPosition(0);
-		if(tab == licenseTab) licenseScrollArea->verticalScrollBar()->setSliderPosition(0);
+		if(tab == ui->infoTab) ui->infoScrollArea->verticalScrollBar()->setSliderPosition(0);
+		if(tab == ui->contributorsTab) ui->contributorsScrollArea->verticalScrollBar()->setSliderPosition(0);
+		if(tab == ui->softwareTab) ui->softwareScrollArea->verticalScrollBar()->setSliderPosition(0);
+		if(tab == ui->licenseTab) ui->licenseScrollArea->verticalScrollBar()->setSliderPosition(0);
 	}
 
 	//Update license button
-	showLicenseButton->setChecked(tabWidget->widget(index) == licenseTab);
-	if(tabWidget->widget(index) != licenseTab) m_lastTab = index;
+	ui->showLicenseButton->setChecked(ui->tabWidget->widget(index) == ui->licenseTab);
+	if(ui->tabWidget->widget(index) != ui->licenseTab) m_lastTab = index;
 }
 
 void AboutDialog::enableButtons(void)
 {
-	acceptButton->setEnabled(true);
-	declineButton->setEnabled(true);
+	ui->acceptButton->setEnabled(true);
+	ui->declineButton->setEnabled(true);
 	setCursor(QCursor(Qt::ArrowCursor));
 }
 
@@ -309,7 +313,7 @@ void AboutDialog::showAboutQt(void)
 
 void AboutDialog::gotoLicenseTab(void)
 {
-	tabWidget->setCurrentIndex(tabWidget->indexOf(showLicenseButton->isChecked() ? licenseTab : tabWidget->widget(m_lastTab)));
+	ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->showLicenseButton->isChecked() ? ui->licenseTab : ui->tabWidget->widget(m_lastTab)));
 }
 
 void AboutDialog::moveDisque(void)
@@ -392,7 +396,7 @@ void AboutDialog::adjustSize(void)
 {
 	int maximumHeight = QApplication::desktop()->availableGeometry().height();
 
-	int delta = infoScrollArea->widget()->height() - infoScrollArea->viewport()->height();
+	int delta = ui->infoScrollArea->widget()->height() - ui->infoScrollArea->viewport()->height();
 	if(delta > 0)
 	{
 		this->resize(this->width(), qMin(this->height() + delta, maximumHeight));
@@ -409,13 +413,13 @@ void AboutDialog::showEvent(QShowEvent *e)
 {
 	QDialog::showEvent(e);
 	
-	tabWidget->setCurrentIndex(tabWidget->indexOf(infoTab));
-	tabChanged(m_lastTab = tabWidget->currentIndex());
+	ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->infoTab));
+	tabChanged(m_lastTab = ui->tabWidget->currentIndex());
 	
 	if(m_firstShow)
 	{
-		acceptButton->setEnabled(false);
-		declineButton->setEnabled(false);
+		ui->acceptButton->setEnabled(false);
+		ui->declineButton->setEnabled(false);
 		QTimer::singleShot(5000, this, SLOT(enableButtons()));
 		setCursor(QCursor(Qt::WaitCursor));
 	}
@@ -521,9 +525,9 @@ void AboutDialog::initInformationTab(void)
 	aboutText += "</tr></table>";
 	//aboutText += QString("%1<br>").arg(NOBR(tr("Special thanks go out to \"John33\" from %1 for his continuous support.")).arg(LINK("http://www.rarewares.org/")));
 
-	infoLabel->setText(aboutText);
-	infoIcon->setPixmap(lamexp_app_icon().pixmap(QSize(72,72)));
-	connect(infoLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
+	ui->infoLabel->setText(aboutText);
+	ui->infoIcon->setPixmap(lamexp_app_icon().pixmap(QSize(72,72)));
+	connect(ui->infoLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
 
 void AboutDialog::initContributorsTab(void)
@@ -575,9 +579,9 @@ void AboutDialog::initContributorsTab(void)
 	contributorsAboutText += "</table><br><br><br>";
 	contributorsAboutText += QString("<i>%1</i><br>").arg(NOBR(tr("If you are willing to contribute a LameXP translation, feel free to contact us!")));
 
-	contributorsLabel->setText(contributorsAboutText);
-	contributorsIcon->setPixmap(QIcon(":/images/Logo_Contributors.png").pixmap(QSize(72,84)));
-	connect(contributorsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
+	ui->contributorsLabel->setText(contributorsAboutText);
+	ui->contributorsIcon->setPixmap(QIcon(":/images/Logo_Contributors.png").pixmap(QSize(72,84)));
+	connect(ui->contributorsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
 
 void AboutDialog::initSoftwareTab(void)
@@ -775,9 +779,9 @@ void AboutDialog::initSoftwareTab(void)
 		tr("The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.")
 	);
 
-	softwareLabel->setText(moreAboutText);
-	softwareIcon->setPixmap(QIcon(":/images/Logo_Software.png").pixmap(QSize(72,65)));
-	connect(softwareLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
+	ui->softwareLabel->setText(moreAboutText);
+	ui->softwareIcon->setPixmap(QIcon(":/images/Logo_Software.png").pixmap(QSize(72,65)));
+	connect(ui->softwareLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
 
 void AboutDialog::initLicenseTab(void)
@@ -823,9 +827,9 @@ void AboutDialog::initLicenseTab(void)
 
 	licenseText += ("</tt>");
 
-	licenseLabel->setText(licenseText);
-	licenseIcon->setPixmap(QIcon(":/images/Logo_GNU.png").pixmap(QSize(72,65)));
-	connect(licenseLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
+	ui->licenseLabel->setText(licenseText);
+	ui->licenseIcon->setPixmap(QIcon(":/images/Logo_GNU.png").pixmap(QSize(72,65)));
+	connect(ui->licenseLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
 
 

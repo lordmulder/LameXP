@@ -21,11 +21,21 @@
 
 #pragma once
 
-#include "../tmp/UIC_AboutDialog.h"
+#include <QDialog>
 
+//UIC forward declartion
+namespace Ui {
+	class AboutDialog;
+}
+
+//Class declarations
+class QLabel;
+class QPixmap;
+class QTimer;
 class SettingsModel;
 
-class AboutDialog : public QDialog, private Ui::AboutDialog
+//AboutDialog class
+class AboutDialog : public QDialog
 {
 	Q_OBJECT
 
@@ -51,6 +61,8 @@ protected:
 	bool eventFilter(QObject *obj, QEvent *event);
 
 private:
+	Ui::AboutDialog *ui; //for Qt UIC
+
 	bool m_firstShow;
 	SettingsModel *m_settings;
 	QMap<QWidget*,bool> *m_initFlags;
