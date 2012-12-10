@@ -30,7 +30,7 @@
 #define VER_LAMEXP_MINOR_LO					7
 #define VER_LAMEXP_TYPE						Alpha
 #define VER_LAMEXP_PATCH					6
-#define VER_LAMEXP_BUILD					1209
+#define VER_LAMEXP_BUILD					1212
 
 ///////////////////////////////////////////////////////////////////////////////
 // Tool versions (minimum expected versions!)
