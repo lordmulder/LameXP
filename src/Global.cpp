@@ -479,14 +479,7 @@ bool lamexp_detect_wine(void)
  */
 LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo)
 {
-	if(GetCurrentThreadId() != g_main_thread_id)
-	{
-		HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
-		if(mainThread) TerminateThread(mainThread, ULONG_MAX);
-	}
-	
-	FatalAppExit(0, L"Unhandeled exception handler invoked, application will exit!");
-	TerminateProcess(GetCurrentProcess(), -1);
+	lamexp_fatal_exit(L"Unhandeled exception handler invoked, application will exit!");
 	return LONG_MAX;
 }
 
@@ -495,15 +488,7 @@ LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionI
  */
 void lamexp_invalid_param_handler(const wchar_t* exp, const wchar_t* fun, const wchar_t* fil, unsigned int, uintptr_t)
 {
-	if(GetCurrentThreadId() != g_main_thread_id)
-	{
-		HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
-		if(mainThread) TerminateThread(mainThread, ULONG_MAX);
-		
-	}
-	
-	FatalAppExit(0, L"Invalid parameter handler invoked, application will exit!");
-	TerminateProcess(GetCurrentProcess(), -1);
+	lamexp_fatal_exit(L"Invalid parameter handler invoked, application will exit!");
 }
 
 /*
@@ -523,13 +508,9 @@ static void lamexp_console_color(FILE* file, WORD attributes)
  */
 void lamexp_message_handler(QtMsgType type, const char *msg)
 {
-	static volatile bool bFatalFlag = false;
 	static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
 
-	if(bFatalFlag || (msg == NULL))
-	{
-		return; //We are about to terminate, discard any further messages!
-	}
+	if(msg == NULL) return;
 
 	QMutexLocker lock(&g_lamexp_message_mutex);
 
@@ -552,7 +533,6 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		{
 		case QtCriticalMsg:
 		case QtFatalMsg:
-			bFatalFlag = true;
 			fflush(stdout);
 			fflush(stderr);
 			lamexp_console_color(stderr, FOREGROUND_RED | FOREGROUND_INTENSITY);
@@ -597,19 +577,10 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		OutputDebugStringA(temp.toLatin1().constData());
 	}
 
-	if(bFatalFlag)
+	if((type == QtCriticalMsg) || (type == QtFatalMsg))
 	{
 		lock.unlock();
-
-		if(GetCurrentThreadId() != g_main_thread_id)
-		{
-			HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
-			if(mainThread) TerminateThread(mainThread, ULONG_MAX);
-		}
-
-		MessageBoxW(NULL, QWCHAR(QString::fromUtf8(msg)), L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
-		FatalAppExit(0, L"The application has encountered a critical error and will exit now!");
-		TerminateProcess(GetCurrentProcess(), -1);
+		lamexp_fatal_exit(L"The application has encountered a critical error and will exit now!", QWCHAR(QString::fromUtf8(msg)));
 	}
 }
 
@@ -849,15 +820,7 @@ static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
 	{
 		Sleep(250);
 	}
-	if(HANDLE thrd = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id))
-	{
-		if(TerminateThread(thrd, -1))
-		{
-			FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
-		}
-		CloseHandle(thrd);
-	}
-	TerminateProcess(GetCurrentProcess(), -1);
+	lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
 	return 666;
 }
 
@@ -868,8 +831,7 @@ static HANDLE lamexp_debug_thread_init(void)
 {
 	if(lamexp_check_for_debugger())
 	{
-		FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
-		TerminateProcess(GetCurrentProcess(), -1);
+		lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
 	}
 
 	return (HANDLE) _beginthreadex(NULL, 0, lamexp_debug_thread_proc, NULL, 0, NULL);
@@ -1019,8 +981,7 @@ static bool lamexp_event_filter(void *message, long *result)
 {
 	if((!(LAMEXP_DEBUG)) && lamexp_check_for_debugger())
 	{
-		FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
-		TerminateProcess(GetCurrentProcess(), -1);
+		lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
 	}
 	
 	switch(reinterpret_cast<MSG*>(message)->message)
@@ -2301,8 +2262,7 @@ static DWORD lamexp_entry_check(void)
 	volatile DWORD retVal = 0xA199B5AF;
 	if(g_lamexp_entry_check_flag != 0x8761F64D)
 	{
-		FatalAppExit(0, L"Application initialization has failed, take care!");
-		TerminateProcess(GetCurrentProcess(), -1);
+		lamexp_fatal_exit(L"Application initialization has failed, take care!");
 	}
 	return retVal;
 }
@@ -2318,14 +2278,11 @@ extern "C"
 	{
 		if((!LAMEXP_DEBUG) && lamexp_check_for_debugger())
 		{
-			FatalAppExit(0, L"Not a debug build. Please unload debugger and try again!");
-			TerminateProcess(GetCurrentProcess(), -1);
+			lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
 		}
-
 		if(g_lamexp_entry_check_flag != 0x789E09B2)
 		{
-			FatalAppExit(0, L"Application initialization has failed, take care!");
-			TerminateProcess(GetCurrentProcess(), -1);
+			lamexp_fatal_exit(L"Application initialization has failed, take care!");
 		}
 
 		//Zero *before* constructors are called
@@ -2342,6 +2299,35 @@ extern "C"
 
 		//Now initialize the C Runtime library!
 		return WinMainCRTStartup();
+	}
+}
+
+/*
+ * Fatal application exit
+ */
+#pragma intrinsic(_InterlockedExchange)
+void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage)
+{
+	static volatile long bFatalFlag = 0L;
+
+	if(_InterlockedExchange(&bFatalFlag, 1L) == 0L)
+	{
+		if(GetCurrentThreadId() != g_main_thread_id)
+		{
+			HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
+			if(mainThread) TerminateThread(mainThread, ULONG_MAX);
+		}
+	
+		if(errorBoxMessage)
+		{
+			MessageBoxW(NULL, errorBoxMessage, L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
+		}
+
+		for(;;)
+		{
+			FatalAppExit(0, exitMessage);
+			TerminateProcess(GetCurrentProcess(), -1);
+		}
 	}
 }
 

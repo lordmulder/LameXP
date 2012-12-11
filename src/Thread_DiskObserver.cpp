@@ -59,8 +59,7 @@ void DiskObserverThread::run(void)
 		fflush(stdout);
 		fflush(stderr);
 		fprintf(stderr, "\nGURU MEDITATION !!!\n");
-		FatalAppExit(0, L"Unhandeled exception error, application will exit!");
-		TerminateProcess(GetCurrentProcess(), -1);
+		lamexp_fatal_exit(L"Unhandeled exception error, application will exit!");
 	}
 
 	while(m_semaphore.available()) m_semaphore.tryAcquire();

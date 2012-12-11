@@ -158,6 +158,7 @@ const QString lamexp_clean_filename(const QString &str);
 const QString lamexp_clean_filepath(const QString &str);
 void lamexp_seed_rand(void);
 unsigned int lamexp_rand(void);
+void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage = NULL);
 
 //Debug-only functions
 SIZE_T lamexp_dbg_private_bytes(void);
