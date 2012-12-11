@@ -21,6 +21,8 @@
 
 #include "Dialog_DropBox.h"
 
+#include "../tmp/UIC_DropBox.h"
+
 #include "Global.h"
 #include "Model_Settings.h"
 
@@ -32,7 +34,7 @@
 #include <QTimer>
 
 #define EPS (1.0E-5)
-#define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = WIDGET.font(); _font.setBold(BOLD); WIDGET.setFont(_font); }
+#define SET_FONT_BOLD(WIDGET,BOLD) { QFont _font = (WIDGET)->font(); _font.setBold(BOLD); (WIDGET)->setFont(_font); }
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -41,20 +43,24 @@
 DropBox::DropBox(QWidget *parent, QAbstractItemModel *model, SettingsModel *settings)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
-	m_counterLabel(this),
+	ui(new Ui::DropBox),
 	m_model(model),
 	m_settings(settings),
 	m_moving(false),
 	m_firstShow(true)
 {
 	//Init the dialog, from the .ui file
-	setupUi(this);
-	
+	ui->setupUi(this);
+
 	//Init counter
-	m_counterLabel.setParent(dropBoxLabel);
-	m_counterLabel.setText("0");
-	m_counterLabel.setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+	m_counterLabel = new QLabel(this);
+	m_counterLabel->setParent(ui->dropBoxLabel);
+	m_counterLabel->setText("0");
+	m_counterLabel->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
 	SET_FONT_BOLD(m_counterLabel, true);
+
+	m_windowReferencePoint = new QPoint;
+	m_mouseReferencePoint = new QPoint;
 
 	//Prevent close
 	m_canClose = false;
@@ -73,6 +79,10 @@ DropBox::DropBox(QWidget *parent, QAbstractItemModel *model, SettingsModel *sett
 
 DropBox::~DropBox(void)
 {
+	LAMEXP_DELETE(m_counterLabel);
+	LAMEXP_DELETE(m_windowReferencePoint);
+	LAMEXP_DELETE(m_mouseReferencePoint);
+	LAMEXP_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////
@@ -83,7 +93,7 @@ void DropBox::modelChanged(void)
 {
 	if(m_model)
 	{
-		m_counterLabel.setText(QString::number(m_model->rowCount()));
+		m_counterLabel->setText(QString::number(m_model->rowCount()));
 	}
 }
 
@@ -98,8 +108,8 @@ void DropBox::changeEvent(QEvent *e)
 {
 	if(e->type() == QEvent::LanguageChange)
 	{
-		Ui::DropBox::retranslateUi(this);
-		dropBoxLabel->setToolTip(QString("<b>%1</b><br><nobr>%2</nobr><br><nobr>%3</nobr>").arg(tr("LameXP DropBox"), tr("You can add files to LameXP via Drag&amp;Drop here!"), tr("(Right-click to close the DropBox)")));
+		ui->retranslateUi(this);
+		ui->dropBoxLabel->setToolTip(QString("<b>%1</b><br><nobr>%2</nobr><br><nobr>%3</nobr>").arg(tr("LameXP DropBox"), tr("You can add files to LameXP via Drag&amp;Drop here!"), tr("(Right-click to close the DropBox)")));
 	}
 }
 
@@ -107,10 +117,10 @@ void DropBox::showEvent(QShowEvent *event)
 {
 	QRect screenGeometry = QApplication::desktop()->availableGeometry();
 
-	resize(dropBoxLabel->pixmap()->size());
-	setMaximumSize(dropBoxLabel->pixmap()->size());
+	resize(ui->dropBoxLabel->pixmap()->size());
+	setMaximumSize(ui->dropBoxLabel->pixmap()->size());
 	
-	m_counterLabel.setGeometry(0, dropBoxLabel->height() - 30, dropBoxLabel->width(), 25);
+	m_counterLabel->setGeometry(0, ui->dropBoxLabel->height() - 30, ui->dropBoxLabel->width(), 25);
 
 	if(m_firstShow)
 	{
@@ -159,9 +169,9 @@ void DropBox::mousePressEvent(QMouseEvent *event)
 	}
 
 	QApplication::setOverrideCursor(Qt::SizeAllCursor);
+	*m_windowReferencePoint = this->pos();
+	*m_mouseReferencePoint = event->globalPos();
 	m_moving = true;
-	m_windowReferencePoint = this->pos();
-	m_mouseReferencePoint = event->globalPos();
 }
 
 void DropBox::mouseReleaseEvent(QMouseEvent *event)
@@ -183,13 +193,13 @@ void DropBox::mouseMoveEvent(QMouseEvent *event)
 	static const int magnetic = 22;
 	QRect screenGeometry = QApplication::desktop()->availableGeometry();
 	
-	const int delta_x = m_mouseReferencePoint.x() - event->globalX();
-	const int delta_y = m_mouseReferencePoint.y() - event->globalY();
+	const int delta_x = m_mouseReferencePoint->x() - event->globalX();
+	const int delta_y = m_mouseReferencePoint->y() - event->globalY();
 	const int max_x = screenGeometry.width() - frameGeometry().width() + screenGeometry.left();
 	const int max_y = screenGeometry.height() - frameGeometry().height() + screenGeometry.top();
 
-	int new_x = qMin(max_x, qMax(screenGeometry.left(), m_windowReferencePoint.x() - delta_x));
-	int new_y = qMin(max_y, qMax(screenGeometry.top(), m_windowReferencePoint.y() - delta_y));
+	int new_x = qMin(max_x, qMax(screenGeometry.left(), m_windowReferencePoint->x() - delta_x));
+	int new_y = qMin(max_y, qMax(screenGeometry.top(), m_windowReferencePoint->y() - delta_y));
 
 	if(new_x < magnetic)
 	{
@@ -214,7 +224,7 @@ void DropBox::mouseMoveEvent(QMouseEvent *event)
 
 void DropBox::showToolTip(void)
 {
-	QToolTip::showText(dropBoxLabel->mapToGlobal(dropBoxLabel->pos()), dropBoxLabel->toolTip());
+	QToolTip::showText(ui->dropBoxLabel->mapToGlobal(ui->dropBoxLabel->pos()), ui->dropBoxLabel->toolTip());
 }
 
 bool DropBox::event(QEvent *event)

@@ -21,20 +21,23 @@
 
 #pragma once
 
-#include "../tmp/UIC_DropBox.h"
+#include <QDialog>
 
-#include <QPoint>
+//UIC forward declartion
+namespace Ui {
+	class DropBox;
+}
 
-class QDragEnterEvent;
-class QMouseEvent;
+//Class declarations
 class QAbstractItemModel;
+class QDragEnterEvent;
+class QLabel;
+class QMouseEvent;
+class QPoint;
 class SettingsModel;
 
-////////////////////////////////////////////////////////////
-// Splash Frame
-////////////////////////////////////////////////////////////
-
-class DropBox: public QDialog, private Ui::DropBox
+//DropBox class
+class DropBox: public QDialog
 {
 	Q_OBJECT
 
@@ -43,10 +46,12 @@ public:
 	~DropBox(void);
 	
 private:
+	Ui::DropBox *ui; //for Qt UIC
+
 	bool m_canClose;
-	QPoint m_mouseReferencePoint;
-	QPoint m_windowReferencePoint;
-	QLabel m_counterLabel;
+	QPoint *m_mouseReferencePoint;
+	QPoint *m_windowReferencePoint;
+	QLabel *m_counterLabel;
 	QAbstractItemModel *m_model;
 	SettingsModel *m_settings;
 	bool m_moving;
