@@ -242,6 +242,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	ui->outputFolderView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
 	m_evenFilterOutputFolderMouse = new CustomEventFilter;
+	ui->outputFoldersGoUpLabel->installEventFilter(m_evenFilterOutputFolderMouse);
 	ui->outputFoldersEditorLabel->installEventFilter(m_evenFilterOutputFolderMouse);
 	ui->outputFoldersFovoritesLabel->installEventFilter(m_evenFilterOutputFolderMouse);
 	ui->outputFolderLabel->installEventFilter(m_evenFilterOutputFolderMouse);
@@ -3089,65 +3090,62 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 			break;
 		}
 	}
-	else if(sender == ui->outputFoldersFovoritesLabel)
+
+	if((sender == ui->outputFoldersFovoritesLabel) || (sender == ui->outputFoldersEditorLabel) || (sender == ui->outputFoldersGoUpLabel))
 	{
 		switch(event->type())
 		{
 		case QEvent::Enter:
-			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Raised);
 			break;
 		case QEvent::MouseButtonPress:
-			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Sunken);
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Sunken);
 			break;
 		case QEvent::MouseButtonRelease:
-			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Raised);
-			if(mouseEvent)
-			{
-				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
-				{
-					if(ui->outputFolderView->isEnabled())
-					{
-						m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
-					}
-				}
-			}
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Raised);
 			break;
 		case QEvent::Leave:
-			ui->outputFoldersFovoritesLabel->setFrameShadow(QFrame::Plain);
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Plain);
 			break;
 		}
-	}
-	else if(sender == ui->outputFoldersEditorLabel)
-	{
-		switch(event->type())
+
+		if((event->type() == QEvent::MouseButtonRelease) && ui->outputFolderView->isEnabled() && (mouseEvent))
 		{
-		case QEvent::Enter:
-			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
-			break;
-		case QEvent::MouseButtonPress:
-			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Sunken);
-			break;
-		case QEvent::MouseButtonRelease:
-			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Raised);
-			if(mouseEvent)
+			if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
 			{
-				if(pos.x() <= sender->width() && pos.y() <= sender->height() && pos.x() >= 0 && pos.y() >= 0 && mouseEvent->button() != Qt::MidButton)
+				if(sender == ui->outputFoldersFovoritesLabel)
 				{
-					if(ui->outputFolderView->isEnabled())
+					m_outputFolderFavoritesMenu->popup(sender->mapToGlobal(pos));
+				}
+				else if(sender == ui->outputFoldersEditorLabel)
+				{
+					ui->outputFolderView->setEnabled(false);
+					ui->outputFolderLabel->setVisible(false);
+					ui->outputFolderEdit->setVisible(true);
+					ui->outputFolderEdit->setText(ui->outputFolderLabel->text());
+					ui->outputFolderEdit->selectAll();
+					ui->outputFolderEdit->setFocus();
+				}
+				else if(sender == ui->outputFoldersGoUpLabel)
+				{
+					QModelIndex current = ui->outputFolderView->currentIndex();
+					if(current.isValid() && current.parent().isValid())
 					{
-						ui->outputFolderView->setEnabled(false);
-						ui->outputFolderLabel->setVisible(false);
-						ui->outputFolderEdit->setVisible(true);
-						ui->outputFolderEdit->setText(ui->outputFolderLabel->text());
-						ui->outputFolderEdit->selectAll();
-						ui->outputFolderEdit->setFocus();
+						QModelIndex parent = current.parent();
+						ui->outputFolderView->setCurrentIndex(parent);
+						outputFolderViewClicked(parent);
 					}
+					else
+					{
+						MessageBeep(MB_ICONWARNING);
+					}
+					CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+				}
+				else
+				{
+					throw "Oups, this is not supposed to happen!";
 				}
 			}
-			break;
-		case QEvent::Leave:
-			ui->outputFoldersEditorLabel->setFrameShadow(QFrame::Plain);
-			break;
 		}
 	}
 }

@@ -1977,6 +1977,10 @@
         <source>Revert</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Up One Level</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

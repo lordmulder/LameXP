@@ -354,6 +354,28 @@
                </widget>
               </item>
               <item>
+               <widget class="QLabel" name="outputFoldersGoUpLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Up One Level</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../res/Icons.qrc">:/icons/folder_up.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="outputFoldersEditorLabel">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Maximum" vsizetype="Preferred">

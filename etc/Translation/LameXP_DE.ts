@@ -1978,6 +1978,10 @@
         <source>Revert</source>
         <translation>Zurück</translation>
     </message>
+    <message>
+        <source>Up One Level</source>
+        <translation>Aufwärts</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
