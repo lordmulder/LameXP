@@ -1991,6 +1991,10 @@ Ouvrir le dossier récursivement...</translation>
         <source>Up One Level</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Go To Parent Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

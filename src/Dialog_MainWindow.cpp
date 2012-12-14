@@ -271,11 +271,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	if(m_outputFolderContextMenu = new QMenu())
 	{
 		m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
+		m_goUpFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/folder_up.png"), "N/A");
+		m_outputFolderContextMenu->addSeparator();
 		m_refreshFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/arrow_refresh.png"), "N/A");
 		m_outputFolderContextMenu->setDefaultAction(m_showFolderContextAction);
 		connect(ui->outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
 		connect(m_showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
 		connect(m_refreshFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(refreshFolderContextActionTriggered()));
+		connect(m_goUpFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(goUpFolderContextActionTriggered()));
 	}
 
 	if(m_outputFolderFavoritesMenu = new QMenu())
@@ -977,6 +980,7 @@ void MainWindow::changeEvent(QEvent *e)
 		m_findFileContextAction->setText(tr("Browse File Location"));
 		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
 		m_refreshFolderContextAction->setText(tr("Refresh Directory Outline"));
+		m_goUpFolderContextAction->setText(tr("Go To Parent Directory"));
 		m_addFavoriteFolderAction->setText(tr("Bookmark Current Output Folder"));
 		m_exportCsvContextAction->setText(tr("Export Meta Tags to CSV File"));
 		m_importCsvContextAction->setText(tr("Import Meta Tags from CSV File"));
@@ -2846,6 +2850,29 @@ void MainWindow::refreshFolderContextActionTriggered(void)
 }
 
 /*
+ * Go one directory up
+ */
+void MainWindow::goUpFolderContextActionTriggered(void)
+{
+	QModelIndex current = ui->outputFolderView->currentIndex();
+	if(current.isValid())
+	{
+		QModelIndex parent = current.parent();
+		if(parent.isValid())
+		{
+			
+			ui->outputFolderView->setCurrentIndex(parent);
+			outputFolderViewClicked(parent);
+		}
+		else
+		{
+			MessageBeep(MB_ICONWARNING);
+		}
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+	}
+}
+
+/*
  * Add current folder to favorites
  */
 void MainWindow::addFavoriteFolderActionTriggered(void)
@@ -3130,18 +3157,7 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 				}
 				else if(sender == ui->outputFoldersGoUpLabel)
 				{
-					QModelIndex current = ui->outputFolderView->currentIndex();
-					if(current.isValid() && current.parent().isValid())
-					{
-						QModelIndex parent = current.parent();
-						ui->outputFolderView->setCurrentIndex(parent);
-						outputFolderViewClicked(parent);
-					}
-					else
-					{
-						MessageBeep(MB_ICONWARNING);
-					}
-					CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+					QTimer::singleShot(0, this, SLOT(goUpFolderContextActionTriggered()));
 				}
 				else
 				{

@@ -101,6 +101,7 @@ private slots:
 	void gotoFavoriteFolder(void);
 	void gotoHomeFolderButtonClicked(void);
 	void gotoMusicFolderButtonClicked(void);
+	void goUpFolderContextActionTriggered(void);
 	void handleDelayedFiles(void);
 	void hibernateComputerActionTriggered(bool checked);
 	void importCueSheetActionTriggered(bool checked);
@@ -216,6 +217,7 @@ private:
 	QAction *m_showDetailsContextAction;
 	QAction *m_showFolderContextAction;
 	QAction *m_refreshFolderContextAction;
+	QAction *m_goUpFolderContextAction;
 	QAction *m_addFavoriteFolderAction;
 	QAction *m_exportCsvContextAction;
 	QAction *m_importCsvContextAction;
