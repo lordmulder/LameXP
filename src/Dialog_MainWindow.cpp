@@ -2566,11 +2566,13 @@ void MainWindow::outputFolderViewClicked(const QModelIndex &index)
 		QString selectedDir = m_fileSystemModel->filePath(index);
 		if(selectedDir.length() < 3) selectedDir.append(QDir::separator());
 		ui->outputFolderLabel->setText(QDir::toNativeSeparators(selectedDir));
+		ui->outputFolderLabel->setToolTip(ui->outputFolderLabel->text());
 		m_settings->outputDir(selectedDir);
 	}
 	else
 	{
 		ui->outputFolderLabel->setText(QDir::toNativeSeparators(m_settings->outputDir()));
+		ui->outputFolderLabel->setToolTip(ui->outputFolderLabel->text());
 	}
 }
 
@@ -3096,16 +3098,16 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 		switch(event->type())
 		{
 		case QEvent::Enter:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Raised);
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Raised : QFrame::Plain);
 			break;
 		case QEvent::MouseButtonPress:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Sunken);
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Sunken : QFrame::Plain);
 			break;
 		case QEvent::MouseButtonRelease:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Raised);
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Raised : QFrame::Plain);
 			break;
 		case QEvent::Leave:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Plain);
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Plain : QFrame::Plain);
 			break;
 		}
 
