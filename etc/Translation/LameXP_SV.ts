@@ -432,188 +432,188 @@
 <context>
     <name>CueImportDialog</name>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="80"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="86"/>
         <source>Import Cue Sheet</source>
         <translation>Importera .cue-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="80"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="86"/>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
         <translation>Följande cue-fil kommer att delas och importeras till LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="105"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="112"/>
         <source>Loading Cue Sheet file, please be patient...</source>
         <translation>Läser in cue-fil. Vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="110"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="211"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="117"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="218"/>
         <source>Failed to load the Cue Sheet file:</source>
         <translation>Kunde inte läsa in cue-fil:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="110"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="117"/>
         <source>The specified file could not be found!</source>
         <translation>Den specificerade filen kunde inte hittas!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="111"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="212"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="118"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="219"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="406"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Cue Sheet Error</source>
         <translation>Cue-fel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="139"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="146"/>
         <source>(System Default)</source>
         <translation>(Systemstandard)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="146"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="153"/>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
         <translation>Välj ANSI som teckentabell för cue-fil:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="147"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="154"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="148"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="155"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="180"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="187"/>
         <source>New Folder</source>
         <translation>Ny mapp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="193"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="200"/>
         <source>An unknown error has occured!</source>
         <translation>Ett okänt fel har uppstått!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="198"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="205"/>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
         <translation>Filen kunde inte läsas in. Tillse att du har növändig behörighet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="201"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="208"/>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
         <translation>Den specificerade filen verkar inte vara någon giltig cue-fil för skivavbildningar!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="204"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="211"/>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
         <translation>Kunde inte hitta något ljudspår som stöds i cue-filen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="204"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="211"/>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
         <translation>Notera att LameXP inte kan hantera &quot;binära&quot; cue-avbilder.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="207"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="214"/>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
         <translation>Den specificerade cue-filen innehåller inkonsekvent information. Undersök det!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="227"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="234"/>
         <source>Unknown Artist</source>
         <translation>Okänd artist</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="228"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="235"/>
         <source>Unknown Album</source>
         <translation>Okänt album</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="243"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="247"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="250"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="254"/>
         <source>Choose Output Directory</source>
         <translation>Välj målmapp för utdata</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="273"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="287"/>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="273"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
         <source>Error: The selected output directory could not be created!</source>
         <translation>Fel: Den specificerade målmappen kunde inte skapas!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="287"/>
         <source>Error: The selected output directory is not writable!</source>
         <translation>Fel: Den specificerade målmappen är skrivskyddad!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="301"/>
         <source>Low Diskspace Warning</source>
         <translation>Varning för lågt diskutrymme</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="301"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation>Det finns mindre än %1 GB ledigt diskutrymme på den specificerade måladressen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="301"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation>Du bör frigöra mer diskutrymme innan du fortsätter med importen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="371"/>
         <source>Analyzing file(s), please wait...</source>
         <translation>Analyserar fil(er), vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Analysis Failed</source>
         <translation>Analys misslyckades</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation>Varning! Formatet på vissa filer kunde inte avgöras!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Continue Anyway</source>
         <translation>Fortsätt ändå</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Abort</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="394"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="401"/>
         <source>Splitting file(s), please wait...</source>
         <translation>Delar fil(er), vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="406"/>
         <source>Process was aborted by the user after %1 track(s)!</source>
         <translation>Åtgärden avbröts av användaren efter %1 spår!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation>Ett oväntat fel uppstod vid delningen av cue-filen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="407"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="414"/>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
         <translation>Importerade %1 spår från cue-filen och hoppade över %2 spår.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="408"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="415"/>
         <source>Cue Sheet Completed</source>
         <translation>cue-fil färdigbearbetad</translation>
     </message>

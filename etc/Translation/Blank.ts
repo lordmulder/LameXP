@@ -431,188 +431,188 @@
 <context>
     <name>CueImportDialog</name>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="80"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="86"/>
         <source>Import Cue Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="80"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="86"/>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="105"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="112"/>
         <source>Loading Cue Sheet file, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="110"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="211"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="117"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="218"/>
         <source>Failed to load the Cue Sheet file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="110"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="117"/>
         <source>The specified file could not be found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="111"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="212"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="118"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="219"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="406"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="139"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="146"/>
         <source>(System Default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="146"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="153"/>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="147"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="154"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="148"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="155"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="180"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="187"/>
         <source>New Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="193"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="200"/>
         <source>An unknown error has occured!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="198"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="205"/>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="201"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="208"/>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="204"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="211"/>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="204"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="211"/>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="207"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="214"/>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="227"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="234"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="228"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="235"/>
         <source>Unknown Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="243"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="247"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="250"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="254"/>
         <source>Choose Output Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="273"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="287"/>
         <source>LameXP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="273"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
         <source>Error: The selected output directory could not be created!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="280"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="287"/>
         <source>Error: The selected output directory is not writable!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="301"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="301"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="294"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="301"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="371"/>
         <source>Analyzing file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Analysis Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Continue Anyway</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="394"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="401"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="406"/>
         <source>Process was aborted by the user after %1 track(s)!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="403"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="407"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="414"/>
         <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="408"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="415"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished"></translation>
     </message>
