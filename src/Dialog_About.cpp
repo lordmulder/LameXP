@@ -126,8 +126,8 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
 
 	//Make transparent
-	QStyle *style = qApp->style();
-	if((dynamic_cast<QWindowsVistaStyle*>(style)) || (dynamic_cast<QWindowsXPStyle*>(style)))
+	const type_info &styleType = typeid(*qApp->style());
+	if((typeid(QWindowsVistaStyle) == styleType) || (typeid(QWindowsXPStyle) == styleType))
 	{
 		MAKE_TRANSPARENT(ui->infoScrollArea);
 		MAKE_TRANSPARENT(ui->contributorsScrollArea);

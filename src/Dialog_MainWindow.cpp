@@ -142,6 +142,14 @@ while(0)
 } \
 while(0)
 
+#define MAKE_TRANSPARENT(WIDGET, FLAG) do \
+{ \
+	QPalette _p = (WIDGET)->palette(); \
+	_p.setColor(QPalette::Background, Qt::transparent); \
+	(WIDGET)->setPalette(FLAG ? _p : QPalette()); \
+} \
+while(0)
+
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
@@ -1745,6 +1753,11 @@ void MainWindow::styleActionActivated(QAction *action)
 		changeEvent(e);
 		LAMEXP_DELETE(e);
 	}
+
+	//Make transparent
+	const type_info &styleType = typeid(*qApp->style());
+	const bool bTransparent = ((typeid(QWindowsVistaStyle) == styleType) || (typeid(QWindowsXPStyle) == styleType));
+	MAKE_TRANSPARENT(ui->scrollArea, bTransparent);
 }
 
 /*
@@ -3122,20 +3135,28 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 
 	if((sender == ui->outputFoldersFovoritesLabel) || (sender == ui->outputFoldersEditorLabel) || (sender == ui->outputFoldersGoUpLabel))
 	{
-		switch(event->type())
+		const type_info &styleType = typeid(*qApp->style());
+		if((typeid(QPlastiqueStyle) == styleType) || (typeid(QWindowsStyle) == styleType))
 		{
-		case QEvent::Enter:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Raised : QFrame::Plain);
-			break;
-		case QEvent::MouseButtonPress:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Sunken : QFrame::Plain);
-			break;
-		case QEvent::MouseButtonRelease:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Raised : QFrame::Plain);
-			break;
-		case QEvent::Leave:
-			dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Plain : QFrame::Plain);
-			break;
+			switch(event->type())
+			{
+			case QEvent::Enter:
+				dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Raised : QFrame::Plain);
+				break;
+			case QEvent::MouseButtonPress:
+				dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Sunken : QFrame::Plain);
+				break;
+			case QEvent::MouseButtonRelease:
+				dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Raised : QFrame::Plain);
+				break;
+			case QEvent::Leave:
+				dynamic_cast<QLabel*>(sender)->setFrameShadow(ui->outputFolderView->isEnabled() ? QFrame::Plain : QFrame::Plain);
+				break;
+			}
+		}
+		else
+		{
+			dynamic_cast<QLabel*>(sender)->setFrameShadow(QFrame::Plain);
 		}
 
 		if((event->type() == QEvent::MouseButtonRelease) && ui->outputFolderView->isEnabled() && (mouseEvent))
