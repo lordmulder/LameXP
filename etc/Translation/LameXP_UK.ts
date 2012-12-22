@@ -868,7 +868,7 @@
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation>Задіяти обробку у 2 етапи (ABR Mode)</translation>
+        <translation>Задіяти обробку у 2 етапи (Режим ABR)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
@@ -2504,7 +2504,7 @@
     </message>
     <message>
         <source>None of the items matches the current filtering rules</source>
-        <translation>Жодного запису не підпадає під поточні правила фільтрування.</translation>
+        <translation>Жодного запису не підпадає під поточні правила фільтрування</translation>
     </message>
 </context>
 <context>
