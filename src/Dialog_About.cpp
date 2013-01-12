@@ -473,7 +473,7 @@ void AboutDialog::initInformationTab(void)
 	const QString copyrightStr = QString().sprintf
 	(
 		"Copyright (C) 2004-%04d LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.",
-		qMax(lamexp_version_date().year(), QDate::currentDate().year())
+		qMax(lamexp_version_date().year(), lamexp_current_date_safe().year())
 	);
 
 	QString aboutText;
@@ -484,25 +484,27 @@ void AboutDialog::initInformationTab(void)
 	aboutText += QString("%1<br>").arg(NOBR(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url()))));
 
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+	const QDate currentDate = lamexp_current_date_safe();
 	if(LAMEXP_DEBUG)
 	{
-		int daysLeft = qMax(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
+		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 	else if(lamexp_version_demo())
 	{
-		int daysLeft = qMax(QDate::currentDate().daysTo(lamexp_version_expires()), 0);
+		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 #else
+	const QDate currentDate = lamexp_current_date_safe();
 	if(LAMEXP_DEBUG)
 	{
-		int daysLeft = qMax(QDate::currentDate().daysTo(lamexp_version_expires()), 0i64);
+		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0i64);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 	else if(lamexp_version_demo())
 	{
-		int daysLeft = qMax(QDate::currentDate().daysTo(lamexp_version_expires()), 0i64);
+		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0i64);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
 	}
 #endif

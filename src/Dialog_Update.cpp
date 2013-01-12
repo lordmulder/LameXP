@@ -840,13 +840,13 @@ bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
 		m_logFile->append("WARNING: Version info timestamp is missing!");
 		return false;
 	}
-	else if(updateInfoDate.addMonths(VERSION_INFO_EXPIRES_MONTHS) < QDate::currentDate())
+	else if(updateInfoDate.addMonths(VERSION_INFO_EXPIRES_MONTHS) < lamexp_current_date_safe())
 	{
 		updateInfo->resetInfo();
 		m_logFile->append(QString::fromLatin1("WARNING: This version info has expired at %1!").arg(updateInfoDate.addMonths(VERSION_INFO_EXPIRES_MONTHS).toString(Qt::ISODate)));
 		return false;
 	}
-	else if(QDate::currentDate() < updateInfoDate)
+	else if(lamexp_current_date_safe() < updateInfoDate)
 	{
 		m_logFile->append("Version info is from the future, take care!");
 		qWarning("Version info is from the future, take care!");

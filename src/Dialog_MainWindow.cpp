@@ -1273,7 +1273,7 @@ void MainWindow::windowShown(void)
 	//Check for expiration
 	if(lamexp_version_demo())
 	{
-		if(QDate::currentDate() >= lamexp_version_expires())
+		if(lamexp_current_date_safe() >= lamexp_version_expires())
 		{
 			qWarning("Binary has expired !!!");
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
@@ -1300,7 +1300,7 @@ void MainWindow::windowShown(void)
 	}
 
 	//Update reminder
-	if(QDate::currentDate() >= lamexp_version_date().addYears(1))
+	if(lamexp_current_date_safe() >= lamexp_version_date().addYears(1))
 	{
 		qWarning("Binary is more than a year old, time to update!");
 		int ret = QMessageBox::warning(this, tr("Urgent Update"), NOBR(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program"), tr("Ignore"));
@@ -1326,7 +1326,7 @@ void MainWindow::windowShown(void)
 	else if(m_settings->autoUpdateEnabled())
 	{
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
-		if(!firstRun && (!lastUpdateCheck.isValid() || QDate::currentDate() >= lastUpdateCheck.addDays(14)))
+		if(!firstRun && (!lastUpdateCheck.isValid() || lamexp_current_date_safe() >= lastUpdateCheck.addDays(14)))
 		{
 			if(QMessageBox::information(this, tr("Update Reminder"), NOBR(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
 			{

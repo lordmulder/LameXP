@@ -71,10 +71,8 @@
 #include <Objbase.h>
 #include <PowrProf.h>
 
-//Debug only includes
-#if LAMEXP_DEBUG
+//Process API
 #include <Psapi.h>
-#endif
 
 //Initialize static Qt plugins
 #ifdef QT_NODLL
@@ -2252,6 +2250,69 @@ unsigned int lamexp_rand(void)
 }
 
 /*
+ * Determines the current date, resistant against certain manipulations
+ */
+QDate lamexp_current_date_safe(void)
+{
+	const DWORD MAX_PROC = 1024;
+	DWORD *processes = new DWORD[MAX_PROC];
+	DWORD bytesReturned = 0;
+	
+	if(!EnumProcesses(processes, sizeof(DWORD) * MAX_PROC, &bytesReturned))
+	{
+		LAMEXP_DELETE_ARRAY(processes);
+		return QDate::currentDate();
+	}
+
+	const DWORD procCount = bytesReturned / sizeof(DWORD);
+	ULARGE_INTEGER lastStartTime;
+	memset(&lastStartTime, 0, sizeof(ULARGE_INTEGER));
+
+	for(DWORD i = 0; i < procCount; i++)
+	{
+		HANDLE hProc = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, processes[i]);
+		if(hProc)
+		{
+			FILETIME processTime[4];
+			if(GetProcessTimes(hProc, &processTime[0], &processTime[1], &processTime[2], &processTime[3]))
+			{
+				ULARGE_INTEGER timeCreation;
+				timeCreation.LowPart = processTime[0].dwLowDateTime;
+				timeCreation.HighPart = processTime[0].dwHighDateTime;
+				if(timeCreation.QuadPart > lastStartTime.QuadPart)
+				{
+					lastStartTime.QuadPart = timeCreation.QuadPart;
+				}
+			}
+			CloseHandle(hProc);
+		}
+	}
+
+	LAMEXP_DELETE_ARRAY(processes);
+	
+	FILETIME lastStartTime_fileTime;
+	lastStartTime_fileTime.dwHighDateTime = lastStartTime.HighPart;
+	lastStartTime_fileTime.dwLowDateTime = lastStartTime.LowPart;
+
+	FILETIME lastStartTime_localTime;
+	if(!FileTimeToLocalFileTime(&lastStartTime_fileTime, &lastStartTime_localTime))
+	{
+		memcpy(&lastStartTime_localTime, &lastStartTime_fileTime, sizeof(FILETIME));
+	}
+	
+	SYSTEMTIME lastStartTime_system;
+	if(!FileTimeToSystemTime(&lastStartTime_localTime, &lastStartTime_system))
+	{
+		memset(&lastStartTime_system, 0, sizeof(SYSTEMTIME));
+		lastStartTime_system.wYear = 1970; lastStartTime_system.wMonth = lastStartTime_system.wDay = 1;
+	}
+
+	const QDate currentDate = QDate::currentDate();
+	const QDate processDate = QDate(lastStartTime_system.wYear, lastStartTime_system.wMonth, lastStartTime_system.wDay);
+	return (currentDate >= processDate) ? currentDate : processDate;
+}
+
+/*
  * Entry point checks
  */
 static DWORD lamexp_entry_check(void);
@@ -2329,6 +2390,9 @@ void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessag
 			TerminateProcess(GetCurrentProcess(), -1);
 		}
 	}
+
+	Sleep(30000);
+	TerminateProcess(GetCurrentProcess(), -1);
 }
 
 /*
