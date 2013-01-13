@@ -328,6 +328,7 @@ Function .onInit
 	Pop $0
 	${If} $0 != "Admin"
 		MessageBox MB_ICONSTOP|MB_TOPMOST "Your system requires administrative permissions in order to install this software."
+		SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
 		Quit
 	${EndIf}
 	
@@ -358,6 +359,7 @@ Function un.onInit
 	Pop $0
 	${If} $0 != "Admin"
 		MessageBox MB_ICONSTOP|MB_TOPMOST "Your system requires administrative permissions in order to install this software."
+		SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
 		Quit
 	${EndIf}
 FunctionEnd
