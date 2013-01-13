@@ -21,11 +21,17 @@
 
 #pragma once
 
-#include "..\tmp\UIC_LogViewDialog.h"
-
 #include <QDialog>
 
-class LogViewDialog : public QDialog, private Ui::LogViewDialog
+//Class declarations
+class QIcon;
+
+//UIC forward declartion
+namespace Ui {
+	class LogViewDialog;
+}
+
+class LogViewDialog : public QDialog
 {
 	Q_OBJECT
 
@@ -39,6 +45,13 @@ public slots:
 	void copyButtonClicked(void);
 	void saveButtonClicked(void);
 
+private slots:
+	void restoreIcon(void);
+
 private:
+	Ui::LogViewDialog *ui; //for Qt UIC
+	
 	bool m_clipboardUsed;
+	const QIcon *m_acceptIcon;
+	QIcon *m_oldIcon;
 };

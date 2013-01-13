@@ -21,29 +21,38 @@
 
 #include "Dialog_LogView.h"
 
+//UIC includes
+#include "../tmp/UIC_LogViewDialog.h"
+
+//Internal
 #include "Global.h"
 
+//Qt includes
 #include <QClipboard>
 #include <QFileDialog>
 #include <QMimeData>
+#include <QTimer>
 
 LogViewDialog::LogViewDialog(QWidget *parent)
 :
-	QDialog(parent)
+	QDialog(parent),
+	m_acceptIcon(new QIcon(":/icons/accept.png")),
+	m_oldIcon(new QIcon()),
+	ui(new Ui::LogViewDialog)
 {
 	//Init the dialog, from the .ui file
-	setupUi(this);
+	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
 	
 	//Translate
-	headerText->setText(QString("<b>%1</b><br>%2").arg(tr("Log File"), tr("The log file shows detailed information about the selected job.")));
+	ui->headerText->setText(QString("<b>%1</b><br>%2").arg(tr("Log File"), tr("The log file shows detailed information about the selected job.")));
 
 	//Clear
-	textEdit->clear();
+	ui->textEdit->clear();
 
 	//Enable buttons
-	connect(buttonCopy, SIGNAL(clicked()), this, SLOT(copyButtonClicked()));
-	connect(buttonSave, SIGNAL(clicked()), this, SLOT(saveButtonClicked()));
+	connect(ui->buttonCopy, SIGNAL(clicked()), this, SLOT(copyButtonClicked()));
+	connect(ui->buttonSave, SIGNAL(clicked()), this, SLOT(saveButtonClicked()));
 
 	//Init flags
 	m_clipboardUsed = false;
@@ -55,20 +64,28 @@ LogViewDialog::~LogViewDialog(void)
 	{
 		QApplication::clipboard()->clear();
 	}
+
+	LAMEXP_DELETE(m_oldIcon);
+	LAMEXP_DELETE(m_acceptIcon);
+	LAMEXP_DELETE(ui);
 }
 
 int LogViewDialog::exec(const QStringList &logData)
 {
-	textEdit->setPlainText(logData.join("\n"));
+	ui->textEdit->setPlainText(logData.join("\n"));
 	return QDialog::exec();
 }
 
 void LogViewDialog::copyButtonClicked(void)
 {
 	QMimeData *mime = new QMimeData();
-	mime->setData("text/plain", textEdit->toPlainText().toUtf8().constData());
+	mime->setData("text/plain", ui->textEdit->toPlainText().toUtf8().constData());
 	QApplication::clipboard()->setMimeData(mime);
 	m_clipboardUsed = true;
+	m_oldIcon->swap(ui->buttonCopy->icon());
+	ui->buttonCopy->setIcon(*m_acceptIcon);
+	ui->buttonCopy->blockSignals(true);
+	QTimer::singleShot(1250, this, SLOT(restoreIcon()));
 	MessageBeep(MB_ICONINFORMATION);
 }
 
@@ -81,10 +98,20 @@ void LogViewDialog::saveButtonClicked(void)
 		QFile file(fileName);
 		if(file.open(QIODevice::WriteOnly))
 		{
-			QByteArray data = textEdit->toPlainText().toUtf8();
+			QByteArray data = ui->textEdit->toPlainText().toUtf8();
 			data.replace("\n", "\r\n");
 			file.write(data.constData(), data.size());
 			file.close();
 		}
+	}
+}
+
+void LogViewDialog::restoreIcon(void)
+{
+	if(!m_oldIcon->isNull())
+	{
+		ui->buttonCopy->setIcon(*m_oldIcon);
+		ui->buttonCopy->blockSignals(false);
+		m_oldIcon->swap(QIcon());
 	}
 }
