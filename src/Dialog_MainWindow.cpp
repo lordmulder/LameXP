@@ -3929,7 +3929,7 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 	}
 	else if(obj == ui->helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
 	else if(obj == ui->helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
-	else if(obj == ui->helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc_std.exe", "--help");
+	else if(obj == ui->helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc.exe", "--help");
 	else MessageBeep(MB_ICONERROR);
 }
 
