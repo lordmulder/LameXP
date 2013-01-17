@@ -2391,8 +2391,8 @@ void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessag
 		}
 	}
 
-	Sleep(30000);
-	TerminateProcess(GetCurrentProcess(), -1);
+	TerminateThread(GetCurrentThread(), -1);
+	Sleep(INFINITE);
 }
 
 /*
