@@ -403,6 +403,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabled());
 	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
+	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResample());
 	ui->checkBoxNeroAAC2PassMode->setEnabled(!(m_fhgEncoderAvailable || m_qaacEncoderAvailable));
 	
 	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
@@ -468,8 +469,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(ui->checkBoxForceStereoDownmix, SIGNAL(clicked(bool)), this, SLOT(forceStereoDownmixEnabledChanged(bool)));
 	connect(ui->comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
 	connect(ui->spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
-	//connect(comboBoxOpusOptimize, SIGNAL(currentIndexChanged(int)), SLOT(opusSettingsChanged()));
-	//connect(checkBoxOpusExpAnalysis, SIGNAL(clicked(bool)), this, SLOT(opusSettingsChanged()));
+	connect(ui->checkBoxOpusDisableResample, SIGNAL(clicked(bool)), SLOT(opusSettingsChanged()));
 	connect(m_overwriteButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(overwriteModeChanged(int)));
 	connect(m_evenFilterCustumParamsHelp, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 
@@ -1950,7 +1950,7 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 			if(!selectedCueFile.isEmpty())
 			{
 				m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
-				CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile);
+				CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile, m_settings);
 				result = cueImporter->exec();
 				LAMEXP_DELETE(cueImporter);
 			}
@@ -3655,7 +3655,7 @@ void MainWindow::opusSettingsChanged(void)
 {
 	m_settings->opusFramesize(ui->comboBoxOpusFramesize->currentIndex());
 	m_settings->opusComplexity(ui->spinBoxOpusComplexity->value());
-	//m_settings->opusOptimizeFor(comboBoxOpusOptimize->currentIndex());
+	m_settings->opusDisableResample(ui->checkBoxOpusDisableResample->isChecked());
 }
 
 /*
@@ -4028,7 +4028,6 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
 	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
 	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
-	//comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeForDefault());
 	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
@@ -4038,6 +4037,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocationDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResampleDefault());
 	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	ui->lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());

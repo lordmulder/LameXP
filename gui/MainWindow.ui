@@ -823,14 +823,14 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="5">
+                 <item row="0" column="7">
                   <widget class="QRadioButton" name="radioButtonEncoderAAC">
                    <property name="text">
                     <string>AAC/MP4</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="17">
+                 <item row="0" column="19">
                   <widget class="QRadioButton" name="radioButtonEncoderPCM">
                    <property name="text">
                     <string>PCM/Wave</string>
@@ -853,14 +853,14 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="11">
+                 <item row="0" column="13">
                   <widget class="QRadioButton" name="radioButtonEncoderAC3">
                    <property name="text">
                     <string>A/52</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="15">
+                 <item row="0" column="17">
                   <widget class="QRadioButton" name="radioButtonEncoderDCA">
                    <property name="text">
                     <string>DCA</string>
@@ -880,7 +880,7 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="4">
+                 <item row="0" column="6">
                   <spacer name="horizontalSpacer_46">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -893,7 +893,7 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="6">
+                 <item row="0" column="8">
                   <spacer name="horizontalSpacer_47">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -906,7 +906,7 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="14">
+                 <item row="0" column="16">
                   <spacer name="horizontalSpacer_49">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -919,7 +919,7 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="16">
+                 <item row="0" column="18">
                   <spacer name="horizontalSpacer_50">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -932,7 +932,7 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="18">
+                 <item row="0" column="20">
                   <spacer name="horizontalSpacer_51">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -945,15 +945,15 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="7">
+                 <item row="0" column="9">
                   <widget class="QRadioButton" name="radioButtonEncoderFLAC">
                    <property name="text">
                     <string>FLAC</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="8">
-                  <spacer name="horizontalSpacer_48">
+                 <item row="0" column="12">
+                  <spacer name="horizontalSpacer_55">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -965,15 +965,15 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="9">
+                 <item row="0" column="5">
                   <widget class="QRadioButton" name="radioButtonEncoderOpus">
                    <property name="text">
                     <string>Opus</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="10">
-                  <spacer name="horizontalSpacer_55">
+                 <item row="0" column="4">
+                  <spacer name="horizontalSpacer_48">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -1420,7 +1420,7 @@
                <x>0</x>
                <y>0</y>
                <width>604</width>
-               <height>1724</height>
+               <height>1759</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -3639,39 +3639,7 @@
                   <layout class="QGridLayout" name="gridLayout_40">
                    <item row="2" column="0">
                     <layout class="QGridLayout" name="gridLayout_39">
-                     <item row="1" column="0" rowspan="2">
-                      <spacer name="horizontalSpacer_56">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>10</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item row="1" column="11" rowspan="2">
-                      <spacer name="horizontalSpacer_57">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>10</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item row="0" column="1" colspan="10">
+                     <item row="0" column="1" colspan="9">
                       <spacer name="verticalSpacer_33">
                        <property name="orientation">
                         <enum>Qt::Vertical</enum>
@@ -3687,7 +3655,7 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="3" column="1" colspan="10">
+                     <item row="5" column="1" colspan="9">
                       <spacer name="verticalSpacer_34">
                        <property name="orientation">
                         <enum>Qt::Vertical</enum>
@@ -3703,14 +3671,14 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="1" column="2" rowspan="2" colspan="2">
+                     <item row="1" column="1" rowspan="2" colspan="2">
                       <widget class="QLabel" name="label_21">
                        <property name="text">
                         <string>Encoding Complexity:</string>
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="4" rowspan="2">
+                     <item row="1" column="3" rowspan="2">
                       <widget class="QSpinBox" name="spinBoxOpusComplexity">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -3732,7 +3700,7 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="5" rowspan="2">
+                     <item row="1" column="4" rowspan="2">
                       <spacer name="horizontalSpacer_58">
                        <property name="orientation">
                         <enum>Qt::Horizontal</enum>
@@ -3745,7 +3713,7 @@
                        </property>
                       </spacer>
                      </item>
-                     <item row="1" column="6" rowspan="2" colspan="2">
+                     <item row="1" column="5" rowspan="2" colspan="2">
                       <widget class="QLabel" name="label_22">
                        <property name="text">
                         <string>Frame Size:</string>
@@ -3755,7 +3723,7 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="8" rowspan="2" colspan="2">
+                     <item row="1" column="7" rowspan="2" colspan="2">
                       <widget class="QComboBox" name="comboBoxOpusFramesize">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -3804,7 +3772,7 @@
                        </item>
                       </widget>
                      </item>
-                     <item row="1" column="10" rowspan="2">
+                     <item row="1" column="9" rowspan="2">
                       <spacer name="horizontalSpacer_59">
                        <property name="orientation">
                         <enum>Qt::Horizontal</enum>
@@ -3812,6 +3780,61 @@
                        <property name="sizeHint" stdset="0">
                         <size>
                          <width>1</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="3" column="1" colspan="9">
+                      <spacer name="verticalSpacer_35">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>6</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="4" column="1" colspan="9">
+                      <widget class="QCheckBox" name="checkBoxOpusDisableResample">
+                       <property name="text">
+                        <string>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="10" rowspan="4">
+                      <spacer name="horizontalSpacer_57">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="1" column="0" rowspan="4">
+                      <spacer name="horizontalSpacer_56">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>10</width>
                          <height>20</height>
                         </size>
                        </property>

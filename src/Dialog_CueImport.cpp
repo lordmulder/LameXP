@@ -32,6 +32,7 @@
 #include "Dialog_WorkingBanner.h"
 #include "Thread_FileAnalyzer.h"
 #include "Thread_CueSplitter.h"
+#include "Registry_Decoder.h"
 #include "LockedFile.h"
 
 //Qt includes
@@ -51,12 +52,13 @@
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
-CueImportDialog::CueImportDialog(QWidget *parent, FileListModel *fileList, const QString &cueFile)
+CueImportDialog::CueImportDialog(QWidget *parent, FileListModel *fileList, const QString &cueFile, const SettingsModel *settings)
 :
 	QDialog(parent),
 	ui(new Ui::CueSheetImport),
+	m_fileList(fileList),
 	m_cueFileName(cueFile),
-	m_fileList(fileList)
+	m_settings(settings)
 {
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
@@ -398,10 +400,12 @@ void CueImportDialog::splitFiles(void)
 	connect(splitter, SIGNAL(progressMaxChanged(unsigned int)), progress, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
 	connect(progress, SIGNAL(userAbort()), splitter, SLOT(abortProcess()), Qt::DirectConnection);
 
+	DecoderRegistry::configureDecoders(m_settings);
+
 	progress->show(tr("Splitting file(s), please wait..."), splitter);
 	progress->close();
 
-	if(splitter->getAborted())	
+	if(splitter->getAborted())
 	{
 		QMessageBox::warning(this, tr("Cue Sheet Error"), tr("Process was aborted by the user after %1 track(s)!").arg(QString::number(splitter->getTracksSuccess())));
 	}

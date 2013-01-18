@@ -1986,6 +1986,10 @@
         <source>Go To Parent Directory</source>
         <translation>Zum übergeordneten Verzeichnis wechseln</translation>
     </message>
+    <message>
+        <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
+        <translation>Opus-Dekodierer Abtastratenkonvertierung deaktivieren (d.h. immer 48.000 Hz ausgeben)</translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

@@ -1986,6 +1986,10 @@
         <source>Go To Parent Directory</source>
         <translation>Перейти до кореневої теки</translation>
     </message>
+    <message>
+        <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
