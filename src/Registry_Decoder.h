@@ -26,12 +26,14 @@
 class QString;
 class QStringList;
 class AbstractDecoder;
+class SettingsModel;
 
 class DecoderRegistry : public QObject
 {
 	Q_OBJECT
 
 public:
+	static void configureDecoders(const SettingsModel *settings);
 	static AbstractDecoder *lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	static QStringList DecoderRegistry::getSupportedTypes(void);
 };

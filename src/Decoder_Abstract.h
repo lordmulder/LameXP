@@ -29,7 +29,7 @@ class AbstractDecoder : public AbstractTool
 
 public:
 	AbstractDecoder(void);
-	~AbstractDecoder(void);
+	virtual ~AbstractDecoder(void);
 
 	//Internal decoder API
 	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag) = 0;

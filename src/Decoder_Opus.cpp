@@ -28,6 +28,8 @@
 #include <QRegExp>
 #include <QUuid>
 
+bool OpusDecoder::m_disableResampling = false;
+
 OpusDecoder::OpusDecoder(void)
 :
 	m_binary(lamexp_lookup_tool("opusdec.exe"))
@@ -46,6 +48,11 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 {
 	QProcess process;
 	QStringList args;
+
+	if(m_disableResampling)
+	{
+		args << "--no-resample";
+	}
 
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);

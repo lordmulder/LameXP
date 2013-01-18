@@ -44,6 +44,7 @@
 #include "Encoder_Vorbis.h"
 #include "Encoder_Opus.h"
 #include "Encoder_Wave.h"
+#include "Registry_Decoder.h"
 #include "Filter_Downmix.h"
 #include "Filter_Normalize.h"
 #include "Filter_Resample.h"
@@ -483,7 +484,9 @@ void ProcessingDialog::initEncoding(void)
 	m_userAborted = false;
 	m_forcedAbort = false;
 	m_playList.clear();
-	
+
+	DecoderRegistry::configureDecoders(m_settings);
+
 	CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor(Qt::white));
 	SET_PROGRESS_TEXT(tr("Encoding files, please wait..."));
 	m_progressIndicator->start();

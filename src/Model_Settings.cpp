@@ -32,29 +32,31 @@
 #include <QStringList>
 #include <QLocale>
 #include <QRegExp>
-
+#include <QReadWriteLock>
+#include <QReadLocker>
+#include <QWriteLocker>
 
 ////////////////////////////////////////////////////////////
 //Macros
 ////////////////////////////////////////////////////////////
 
 #define LAMEXP_MAKE_OPTION_I(OPT,DEF) \
-int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); } \
+int SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); } \
 void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 int SettingsModel::OPT##Default(void) { return DEF; }
 
 #define LAMEXP_MAKE_OPTION_S(OPT,DEF) \
-QString SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toString().trimmed(); } \
+QString SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toString().trimmed(); } \
 void SettingsModel::OPT(const QString &value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 QString SettingsModel::OPT##Default(void) { return DEF; }
 
 #define LAMEXP_MAKE_OPTION_B(OPT,DEF) \
-bool SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toBool(); } \
+bool SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toBool(); } \
 void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 bool SettingsModel::OPT##Default(void) { return DEF; }
 
 #define LAMEXP_MAKE_OPTION_U(OPT,DEF) \
-unsigned int SettingsModel::OPT(void) { return m_settings->value(g_settingsId_##OPT, DEF).toUInt(); } \
+unsigned int SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toUInt(); } \
 void SettingsModel::OPT(unsigned int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
 unsigned int SettingsModel::OPT##Default(void) { return DEF; }
 
@@ -105,6 +107,7 @@ LAMEXP_MAKE_ID(aacEncProfile, "AdvancedOptions/AACEnc/ForceProfile");
 LAMEXP_MAKE_ID(opusOptimizeFor, "AdvancedOptions/Opus/OptimizeForSignalType");
 LAMEXP_MAKE_ID(opusComplexity, "AdvancedOptions/Opus/EncodingComplexity");
 LAMEXP_MAKE_ID(opusFramesize, "AdvancedOptions/Opus/FrameSize");
+LAMEXP_MAKE_ID(opusDisableResample, "AdvancedOptions/Opus/DisableResample");
 LAMEXP_MAKE_ID(normalizationFilterEnabled, "AdvancedOptions/VolumeNormalization/Enabled");
 LAMEXP_MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
 LAMEXP_MAKE_ID(normalizationFilterEqualizationMode, "AdvancedOptions/VolumeNormalization/EqualizationMode");
@@ -131,13 +134,13 @@ const int SettingsModel::mp3Bitrates[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128
 const int SettingsModel::ac3Bitrates[20] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 448, 512, 576, 640, -1};
 const int SettingsModel::samplingRates[8] = {0, 16000, 22050, 24000, 32000, 44100, 48000, -1};
 
+static QReadWriteLock s_lock;
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
 SettingsModel::SettingsModel(void)
-:
-	m_defaultLanguage(NULL)
 {
 	QString configPath = "LameXP.ini";
 	
@@ -291,12 +294,20 @@ void SettingsModel::syncNow(void)
 // Private Functions
 ////////////////////////////////////////////////////////////
 
-QString SettingsModel::defaultLanguage(void)
+QString *SettingsModel::m_defaultLanguage = NULL;
+
+QString SettingsModel::defaultLanguage(void) const
 {
+	QReadLocker readLock(&s_lock);
+	
 	if(m_defaultLanguage)
 	{
 		return *m_defaultLanguage;
 	}
+	
+	//Acquire write lock now
+	readLock.unlock();
+	QWriteLocker writeLock(&s_lock);
 	
 	//Detect system langauge
 	QLocale systemLanguage= QLocale::system();
@@ -409,6 +420,7 @@ LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize, 8);
 LAMEXP_MAKE_OPTION_I(opusOptimizeFor, 0);
 LAMEXP_MAKE_OPTION_I(opusComplexity, 10);
 LAMEXP_MAKE_OPTION_I(opusFramesize, 3);
+LAMEXP_MAKE_OPTION_B(opusDisableResample, false);
 LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled, false)
 LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume, -50)
 LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode, 0);

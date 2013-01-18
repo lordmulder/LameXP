@@ -33,6 +33,11 @@ public:
 	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	static QStringList supportedTypes(void);
 
+	static void setDisableResampling(bool disableResample) { m_disableResampling = disableResample; }
+
 private:
 	const QString m_binary;
+
+	//Options
+	static bool m_disableResampling;
 };

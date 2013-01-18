@@ -39,6 +39,7 @@
 #include "Decoder_Opus.h"
 #include "Decoder_WMA.h"
 #include "PlaylistImporter.h"
+#include "Model_Settings.h"
 
 #include <QString>
 #include <QStringList>
@@ -115,4 +116,9 @@ QStringList DecoderRegistry::getSupportedTypes(void)
 	types << QString("%1 (*.*)").arg(tr("All files"));
 
 	return types;
+}
+
+void DecoderRegistry::configureDecoders(const SettingsModel *settings)
+{
+	OpusDecoder::setDisableResampling(settings->opusDisableResample());
 }

@@ -34,7 +34,7 @@ class AbstractEncoder : public AbstractTool
 
 public:
 	AbstractEncoder(void);
-	~AbstractEncoder(void);
+	virtual ~AbstractEncoder(void);
 
 	//Internal encoder API
 	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag) = 0;

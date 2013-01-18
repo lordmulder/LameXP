@@ -27,22 +27,22 @@ class QString;
 ///////////////////////////////////////////////////////////////////////////////
 
 #define LAMEXP_MAKE_OPTION_I(OPT) \
-int OPT(void); \
+int OPT(void) const; \
 void OPT(int value); \
 int OPT##Default(void);
 
 #define LAMEXP_MAKE_OPTION_S(OPT) \
-QString OPT(void); \
+QString OPT(void) const; \
 void OPT(const QString &value); \
 QString OPT##Default(void);
 
 #define LAMEXP_MAKE_OPTION_B(OPT) \
-bool OPT(void); \
+bool OPT(void) const; \
 void OPT(bool value); \
 bool OPT##Default(void);
 
 #define LAMEXP_MAKE_OPTION_U(OPT) \
-unsigned int OPT(void); \
+unsigned int OPT(void) const; \
 void OPT(unsigned int value); \
 unsigned int OPT##Default(void);
 
@@ -122,6 +122,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(opusOptimizeFor);
 	LAMEXP_MAKE_OPTION_I(opusComplexity);
 	LAMEXP_MAKE_OPTION_I(opusFramesize);
+	LAMEXP_MAKE_OPTION_B(opusDisableResample);
 	LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled);
 	LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume);
 	LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode);
@@ -150,9 +151,9 @@ public:
 	
 private:
 	QSettings *m_settings;
-	QString *m_defaultLanguage;
-	QString defaultLanguage(void);
 	QString initDirectory(const QString &path);
+	static QString *m_defaultLanguage;
+	QString defaultLanguage(void) const;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
