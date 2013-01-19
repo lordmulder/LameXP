@@ -1988,7 +1988,7 @@
     </message>
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути зміну частоти дискретизації декодером Opus (тобто заборонити отримання завжди на виході 48000 Гц)</translation>
     </message>
 </context>
 <context>
