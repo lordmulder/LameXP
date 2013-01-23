@@ -28,5 +28,6 @@ for %%f in (*.ts) do (
 	copy %%f %%f.bak
 	lupdate.exe @update.lst -no-obsolete -ts %%f
 )
+lupdate.exe @update.lst -no-obsolete -pluralonly -ts "LameXP_EN.ts"
 REM ---------------------------
 pause

@@ -422,10 +422,6 @@
         <translation>扫描提示工作表时出现了意外的错误 !</translation>
     </message>
     <message>
-        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>导入 %1 从提示表轨道,并跳过 %2 轨道.</translation>
-    </message>
-    <message>
         <source>Cue Sheet Completed</source>
         <translation>完成提示表</translation>
     </message>
@@ -444,10 +440,6 @@
     <message>
         <source>Abort</source>
         <translation>中止</translation>
-    </message>
-    <message>
-        <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation>用户终止了 %1 个轨道进程 !</translation>
     </message>
     <message>
         <source>(System Default)</source>
@@ -476,6 +468,24 @@
     <message>
         <source>New Folder</source>
         <translation>新文件夹</translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n track(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Imported %n track(s) from the Cue Sheet.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Skipped %n track(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -894,20 +904,12 @@
         <translation>访问被拒绝</translation>
     </message>
     <message>
-        <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation>%1 文件都被拒绝,因为读访问权限不允许!</translation>
-    </message>
-    <message>
         <source>This usually means the file is locked by another process.</source>
         <translation>通常这意味着该文件由另一个进程锁定.</translation>
     </message>
     <message>
         <source>Files Rejected</source>
         <translation>文件被拒绝</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation>%1 文件被拒绝,因为文件格式分辨不出!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
@@ -1406,10 +1408,6 @@
         <translation>更多实例</translation>
     </message>
     <message>
-        <source>%1 Instance(s)</source>
-        <translation>%1 个实例</translation>
-    </message>
-    <message>
         <source> Temp Directory </source>
         <translation>临时目录</translation>
     </message>
@@ -1436,10 +1434,6 @@
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>无法写入所选目录.请选择另一个目录 !</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>%1 个文件已被拒绝,因为它们是虚拟的 CDDA 文件 !</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
@@ -1616,10 +1610,6 @@
     <message>
         <source>Cue Sheet</source>
         <translation>提示表</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation>%1 个文件已被拒绝,因为他们似乎是提示表映像文件!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
@@ -1988,6 +1978,36 @@
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because read access was not granted!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Instance(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -2378,10 +2398,6 @@
         <translation>创建播放列表文件,请稍候...</translation>
     </message>
     <message>
-        <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation>进程被用户终止了 %1 个文件 !</translation>
-    </message>
-    <message>
         <source>LameXP - Aborted</source>
         <translation>LameXP - 中止</translation>
     </message>
@@ -2458,22 +2474,6 @@
         <translation>过程完成了 %1.</translation>
     </message>
     <message>
-        <source>hour(s)</source>
-        <translation>小时</translation>
-    </message>
-    <message>
-        <source>minute(s)</source>
-        <translation>分钟</translation>
-    </message>
-    <message>
-        <source>second(s)</source>
-        <translation>秒</translation>
-    </message>
-    <message>
-        <source>millisecond(s)</source>
-        <translation>毫秒</translation>
-    </message>
-    <message>
         <source>Filter Log Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2508,6 +2508,36 @@
     <message>
         <source>None of the items matches the current filtering rules</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n file(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n second(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

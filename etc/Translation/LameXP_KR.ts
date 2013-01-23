@@ -422,10 +422,6 @@
         <translation type="unfinished">큐 시트를 분할하는 도중에 예기치 않은 오류가 발생했습니다!</translation>
     </message>
     <message>
-        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation type="unfinished">큐 시트로부터 %1 트랙 가져옴, 그리고 %2 트랙 건너뜀.</translation>
-    </message>
-    <message>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished">큐 시트 작업 완료</translation>
     </message>
@@ -444,10 +440,6 @@
     <message>
         <source>Abort</source>
         <translation type="unfinished">취소</translation>
-    </message>
-    <message>
-        <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation type="unfinished">%1 트랙 처리 후 사용자에 의해 작업이 취소되었습니다!</translation>
     </message>
     <message>
         <source>(System Default)</source>
@@ -476,6 +468,24 @@
     <message>
         <source>New Folder</source>
         <translation type="unfinished">새 폴더</translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n track(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Imported %n track(s) from the Cue Sheet.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Skipped %n track(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -1106,16 +1116,8 @@
         <translation type="unfinished">접근 거부</translation>
     </message>
     <message>
-        <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">%1 파일이 거부되었습니다. 읽기 권한이 부여되지 않았습니다!</translation>
-    </message>
-    <message>
         <source>This usually means the file is locked by another process.</source>
         <translation type="unfinished">다른 프로세스에 의해 파일이 잠겨 있는 경우입니다.</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">%1 파일이 거부되었습니다. 가짜 CDDA 파일입니다!</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
@@ -1128,10 +1130,6 @@
     <message>
         <source>Files Rejected</source>
         <translation type="unfinished">파일 거부</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">%1 파일이 거부되었습니다. 파일 형식이 인식되지 않습니다!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
@@ -1398,10 +1396,6 @@
         <translation type="unfinished">최저 품질 (매우 빠름)</translation>
     </message>
     <message>
-        <source>%1 Instance(s)</source>
-        <translation type="unfinished">%1 인스턴스</translation>
-    </message>
-    <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished">선택한 디렉토리에 작성할 수 없습니다. 다른 디렉토리를 선택하여 주십시오!</translation>
     </message>
@@ -1616,10 +1610,6 @@
     <message>
         <source>Cue Sheet</source>
         <translation type="unfinished">큐 시트</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">%1 파일이 거부되었습니다. 그 파일들은 큐 시트 이미지들로 나타나기 때문입니다!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
@@ -1988,6 +1978,36 @@
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because read access was not granted!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Instance(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -2390,10 +2410,6 @@
         <translation type="unfinished">재생 목록 파일 생성중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
-        <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation type="unfinished">%1 파일 후 처리가 사용자에 의해 중단되었습니다!</translation>
-    </message>
-    <message>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">처리가 사용자에 의해 완전히 중단되었습니다!</translation>
     </message>
@@ -2458,22 +2474,6 @@
         <translation type="unfinished">작업 경과 시간: %1 소요됨.</translation>
     </message>
     <message>
-        <source>hour(s)</source>
-        <translation type="unfinished">시간</translation>
-    </message>
-    <message>
-        <source>minute(s)</source>
-        <translation type="unfinished">분</translation>
-    </message>
-    <message>
-        <source>second(s)</source>
-        <translation type="unfinished">초</translation>
-    </message>
-    <message>
-        <source>millisecond(s)</source>
-        <translation type="unfinished">ms</translation>
-    </message>
-    <message>
         <source>Filter Log Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2508,6 +2508,36 @@
     <message>
         <source>None of the items matches the current filtering rules</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n file(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n second(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

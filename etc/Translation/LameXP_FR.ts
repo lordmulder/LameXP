@@ -426,10 +426,6 @@
         <translation>Une erreur inattendue s&apos;est produite en divisant la Cue Sheet !</translation>
     </message>
     <message>
-        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>%1 piste(s) importée(s) de la Cue Sheet et %2 piste(s) ignorée(s).</translation>
-    </message>
-    <message>
         <source>Cue Sheet Completed</source>
         <translation>Cue Sheet terminé</translation>
     </message>
@@ -448,10 +444,6 @@
     <message>
         <source>Abort</source>
         <translation type="unfinished">Abandonner</translation>
-    </message>
-    <message>
-        <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>(System Default)</source>
@@ -480,6 +472,27 @@
     <message>
         <source>New Folder</source>
         <translation type="unfinished">Nouveau dossier</translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n track(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Imported %n track(s) from the Cue Sheet.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Skipped %n track(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -899,20 +912,12 @@
         <translation>Accès refusé</translation>
     </message>
     <message>
-        <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation>%1 fichiers ont été rejetés, parce que l&apos;accès en lecture n&apos;est pas accordée!</translation>
-    </message>
-    <message>
         <source>This usually means the file is locked by another process.</source>
         <translation>Cela signifie généralement que le fichier est verrouillé par un autre processus.</translation>
     </message>
     <message>
         <source>Files Rejected</source>
         <translation>Fichiers rejetés</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation>%1 fichiers ont été rejetés, car le format de fichier ne peut pas être reconnu!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
@@ -1415,10 +1420,6 @@ Sélection automatique (par défaut)</translation>
         <translation>Plus d&apos;instances</translation>
     </message>
     <message>
-        <source>%1 Instance(s)</source>
-        <translation>%1 Instance(s)</translation>
-    </message>
-    <message>
         <source> Temp Directory </source>
         <translation>Répertoire temporaire</translation>
     </message>
@@ -1445,10 +1446,6 @@ Sélection automatique (par défaut)</translation>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Impossible d&apos;écrire dans le répertoire sélectionné. Veuillez choisir un autre répertoire !</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>%1 fichiers ont été rejetés parce qu&apos;ils sont des fichiers CDDA fictifs !</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
@@ -1625,10 +1622,6 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1998,6 +1991,41 @@ Ouvrir le dossier récursivement...</translation>
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because read access was not granted!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Instance(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -2388,10 +2416,6 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Création de la liste de lecture, patientez...</translation>
     </message>
     <message>
-        <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation>Le processus a été abandonné par l&apos;utilisateur après %1 fichier(s)!</translation>
-    </message>
-    <message>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Abandonné</translation>
     </message>
@@ -2468,22 +2492,6 @@ Ouvrir le dossier récursivement...</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>hour(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>minute(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>second(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>millisecond(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Filter Log Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2518,6 +2526,41 @@ Ouvrir le dossier récursivement...</translation>
     <message>
         <source>None of the items matches the current filtering rules</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n file(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n second(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

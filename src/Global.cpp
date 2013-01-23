@@ -313,6 +313,10 @@ static const DWORD g_main_thread_id = GetCurrentThreadId();
 //Log file
 static FILE *g_lamexp_log_file = NULL;
 
+//Localization
+const char* LAMEXP_DEFAULT_LANGID = "en";
+const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -1734,10 +1738,11 @@ unsigned int lamexp_translation_country(const QString &langId)
 bool lamexp_install_translator(const QString &langId)
 {
 	bool success = false;
+	const QString qmFileToPath(":/localization/%1");
 
 	if(langId.isEmpty() || langId.toLower().compare(LAMEXP_DEFAULT_LANGID) == 0)
 	{
-		success = lamexp_install_translator_from_file(QString());
+		success = lamexp_install_translator_from_file(qmFileToPath.arg(LAMEXP_DEFAULT_TRANSLATION));
 	}
 	else
 	{
@@ -1747,7 +1752,7 @@ bool lamexp_install_translator(const QString &langId)
 
 		if(!qmFile.isEmpty())
 		{
-			success = lamexp_install_translator_from_file(QString(":/localization/%1").arg(qmFile));
+			success = lamexp_install_translator_from_file(qmFileToPath.arg(qmFile));
 		}
 		else
 		{

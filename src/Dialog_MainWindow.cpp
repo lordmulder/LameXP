@@ -715,19 +715,19 @@ void MainWindow::addFiles(const QStringList &files)
 
 	if(analyzer->filesDenied())
 	{
-		QMessageBox::warning(this, tr("Access Denied"), QString("%1<br>%2").arg(NOBR(tr("%1 file(s) have been rejected, because read access was not granted!").arg(analyzer->filesDenied())), NOBR(tr("This usually means the file is locked by another process."))));
+		QMessageBox::warning(this, tr("Access Denied"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because read access was not granted!", "", analyzer->filesDenied())), NOBR(tr("This usually means the file is locked by another process."))));
 	}
 	if(analyzer->filesDummyCDDA())
 	{
-		QMessageBox::warning(this, tr("CDDA Files"), QString("%1<br><br>%2<br>%3").arg(NOBR(tr("%1 file(s) have been rejected, because they are dummy CDDA files!").arg(analyzer->filesDummyCDDA())), NOBR(tr("Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.")), NOBR(tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>"))));
+		QMessageBox::warning(this, tr("CDDA Files"), QString("%1<br><br>%2<br>%3").arg(NOBR(tr("%n file(s) have been rejected, because they are dummy CDDA files!", "", analyzer->filesDummyCDDA())), NOBR(tr("Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.")), NOBR(tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>"))));
 	}
 	if(analyzer->filesCueSheet())
 	{
-		QMessageBox::warning(this, tr("Cue Sheet"), QString("%1<br>%2").arg(NOBR(tr("%1 file(s) have been rejected, because they appear to be Cue Sheet images!").arg(analyzer->filesCueSheet())), NOBR(tr("Please use LameXP's Cue Sheet wizard for importing Cue Sheet files."))));
+		QMessageBox::warning(this, tr("Cue Sheet"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because they appear to be Cue Sheet images!", "",analyzer->filesCueSheet())), NOBR(tr("Please use LameXP's Cue Sheet wizard for importing Cue Sheet files."))));
 	}
 	if(analyzer->filesRejected())
 	{
-		QMessageBox::warning(this, tr("Files Rejected"), QString("%1<br>%2").arg(NOBR(tr("%1 file(s) have been rejected, because the file format could not be recognized!").arg(analyzer->filesRejected())), NOBR(tr("This usually means the file is damaged or the file format is not supported."))));
+		QMessageBox::warning(this, tr("Files Rejected"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because the file format could not be recognized!", "", analyzer->filesRejected())), NOBR(tr("This usually means the file is damaged or the file format is not supported."))));
 	}
 
 	LAMEXP_DELETE(analyzer);
@@ -3834,7 +3834,7 @@ void MainWindow::forceStereoDownmixEnabledChanged(bool checked)
  */
 void MainWindow::updateMaximumInstances(int value)
 {
-	ui->labelMaxInstances->setText(tr("%1 Instance(s)").arg(QString::number(value)));
+	ui->labelMaxInstances->setText(tr("%n Instance(s)", "", value));
 	m_settings->maximumInstances(ui->checkBoxAutoDetectInstances->isChecked() ? NULL : value);
 }
 

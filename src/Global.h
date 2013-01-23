@@ -144,7 +144,8 @@ unsigned int lamexp_translation_country(const QString &langId);
 bool lamexp_install_translator_from_file(const QString &qmFile);
 bool lamexp_install_translator(const QString &language);
 QStringList lamexp_available_codepages(bool noAliases = true);
-static const char* LAMEXP_DEFAULT_LANGID = "en";
+extern const char* LAMEXP_DEFAULT_LANGID;
+extern const char* LAMEXP_DEFAULT_TRANSLATION;
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString &folderPath);

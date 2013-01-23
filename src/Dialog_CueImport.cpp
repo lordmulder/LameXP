@@ -407,7 +407,7 @@ void CueImportDialog::splitFiles(void)
 
 	if(splitter->getAborted())
 	{
-		QMessageBox::warning(this, tr("Cue Sheet Error"), tr("Process was aborted by the user after %1 track(s)!").arg(QString::number(splitter->getTracksSuccess())));
+		QMessageBox::warning(this, tr("Cue Sheet Error"), tr("Process was aborted by the user after %n track(s)!", "", splitter->getTracksSuccess()));
 	}
 	else if(!splitter->getSuccess())
 	{
@@ -415,7 +415,7 @@ void CueImportDialog::splitFiles(void)
 	}
 	else
 	{
-		QString text = QString("<nobr>%1</nobr>").arg(tr("Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).").arg(QString::number(splitter->getTracksSuccess()), QString::number(splitter->getTracksSkipped() /*+ nTracksSkipped*/)));
+		QString text = QString("<nobr>%1 %2</nobr>").arg(tr("Imported %n track(s) from the Cue Sheet.", "", splitter->getTracksSuccess()), tr("Skipped %n track(s).", "", splitter->getTracksSkipped()));
 		QMessageBox::information(this, tr("Cue Sheet Completed"), text);
 	}
 

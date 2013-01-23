@@ -422,10 +422,6 @@
         <translation>Beim Aufteilen des Cuesheets is ein unerwarteter Fehler aufgetreten!</translation>
     </message>
     <message>
-        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>%1 Datei(ein) wurden aus dem Cuesheet importiert. %2 Datei(en) übersprungen.</translation>
-    </message>
-    <message>
         <source>Cue Sheet Completed</source>
         <translation>Cuesheet Abgeschlossen</translation>
     </message>
@@ -444,10 +440,6 @@
     <message>
         <source>Abort</source>
         <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation>Der Vorgang wurde vom Benutzter nach %1 Track(s) abgebrochen!</translation>
     </message>
     <message>
         <source>(System Default)</source>
@@ -476,6 +468,27 @@
     <message>
         <source>New Folder</source>
         <translation>Neuer Ordner</translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n track(s)!</source>
+        <translation>
+            <numerusform>Der Vorgang wurde vom Benutzter nach %n Track abgebrochen!</numerusform>
+            <numerusform>Der Vorgang wurde vom Benutzter nach %n Tracks abgebrochen!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Imported %n track(s) from the Cue Sheet.</source>
+        <translation>
+            <numerusform>%n Datei wurde aus dem Cuesheet importiert.</numerusform>
+            <numerusform>%n Dateiein wurden aus dem Cuesheet importiert.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Skipped %n track(s).</source>
+        <translation>
+            <numerusform>%n Datei übersprungen.</numerusform>
+            <numerusform>%n Dateien übersprungen.</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -1131,16 +1144,8 @@
         <translation>Ihr TEMP Verzeichnis befindet sich hier:</translation>
     </message>
     <message>
-        <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation>%1 Datei(en) wurden abgewiesen, weil die Datei nicht geöffnet werden konnte!</translation>
-    </message>
-    <message>
         <source>This usually means the file is locked by another process.</source>
         <translation>Die Datei wird möglicherweise von einem anderen Prozess benutzt.</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation>%1 Datei(en) wurden abgewiesen, weil das Dateiformat nicht erkannt werden konnte!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
@@ -1407,10 +1412,6 @@
         <translation>Mehr Instanzen</translation>
     </message>
     <message>
-        <source>%1 Instance(s)</source>
-        <translation>%1 Instanz(en)</translation>
-    </message>
-    <message>
         <source> Temp Directory </source>
         <translation> Temp-Verzeichnis </translation>
     </message>
@@ -1437,10 +1438,6 @@
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>In das ausgewählte Verzeichnis kann nicht geschrieben werden. Bitte ein anderes Verzeichnis auswählen!</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>%1 Datei(en) wurden abgewiesen, weil es sich um CDDA Platzhalter-Dateien handelt!</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
@@ -1617,10 +1614,6 @@
     <message>
         <source>Cue Sheet</source>
         <translation>Cuesheet</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation>%1 Datei(en) wurden abgewiesen, weil es sich um Cuesheet Image-Dateien handelt!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
@@ -1989,6 +1982,41 @@
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
         <translation>Opus-Dekodierer Abtastratenkonvertierung deaktivieren (d.h. immer 48.000 Hz ausgeben)</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because read access was not granted!</source>
+        <translation>
+            <numerusform>%n Datei wurde abgewiesen, weil die Datei nicht geöffnet werden konnte!</numerusform>
+            <numerusform>%n Dateien wurden abgewiesen, weil die Dateien nicht geöffnet werden konnten!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation>
+            <numerusform>%n Datei wurde abgewiesen, weil es sich um eine CDDA Platzhalter-Datei handelt!</numerusform>
+            <numerusform>%n Dateien wurden abgewiesen, weil es sich um CDDA Platzhalter-Dateien handelt!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation>
+            <numerusform>%n Datei wurde abgewiesen, weil es sich um eine Cuesheet Image-Datei handelt!</numerusform>
+            <numerusform>%n Dateien wurden abgewiesen, weil es sich um Cuesheet Image-Dateien handelt!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation>
+            <numerusform>%n Datei wurden abgewiesen, weil das Dateiformat nicht erkannt werden konnte!</numerusform>
+            <numerusform>%n Dateien wurden abgewiesen, weil deren Dateiformat nicht erkannt werden konnte!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Instance(s)</source>
+        <translation>
+            <numerusform>%n Instanz</numerusform>
+            <numerusform>%n Instanzen</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -2379,10 +2407,6 @@
         <translation>Erzeuge Wiedergabeliste, bitte warten...</translation>
     </message>
     <message>
-        <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation>Der Vorgang wurde vom Benutzter nach %1 Datei(en) abgebrochen!</translation>
-    </message>
-    <message>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Abgebrochen</translation>
     </message>
@@ -2459,22 +2483,6 @@
         <translation>Vorgang abgeschlossen nach %1.</translation>
     </message>
     <message>
-        <source>hour(s)</source>
-        <translation>Stunde(n)</translation>
-    </message>
-    <message>
-        <source>minute(s)</source>
-        <translation>Minute(n)</translation>
-    </message>
-    <message>
-        <source>second(s)</source>
-        <translation>Sekunde(n)</translation>
-    </message>
-    <message>
-        <source>millisecond(s)</source>
-        <translation>Millisekunde(n)</translation>
-    </message>
-    <message>
         <source>Filter Log Items</source>
         <translation>Logeinträge filtern</translation>
     </message>
@@ -2509,6 +2517,41 @@
     <message>
         <source>None of the items matches the current filtering rules</source>
         <translation>Keiner der Einträge entspricht den aktuellen Filterregeln</translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n file(s)!</source>
+        <translation>
+            <numerusform>Der Vorgang wurde vom Benutzter nach %n Track abgebrochen!</numerusform>
+            <numerusform>Der Vorgang wurde vom Benutzter nach %n Tracks abgebrochen!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation>
+            <numerusform>%n Stunde</numerusform>
+            <numerusform>%n Stunden</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n Minute</numerusform>
+            <numerusform>%n Minuten</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n second(s)</source>
+        <translation>
+            <numerusform>%n Sekunde</numerusform>
+            <numerusform>%n Sekunden</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n millisecond(s)</source>
+        <translation>
+            <numerusform>%n Millisekunde</numerusform>
+            <numerusform>%n Millisekunden</numerusform>
+        </translation>
     </message>
 </context>
 <context>

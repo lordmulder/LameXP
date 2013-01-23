@@ -3,6 +3,8 @@
   <qresource>
     <file>localization/LameXP_DE.qm</file>
     <file>localization/LameXP_DE.qm.txt</file>
+    <file>localization/LameXP_EN.qm</file>
+    <file>localization/LameXP_EN.qm.txt</file>
     <file>localization/LameXP_FR.qm</file>
     <file>localization/LameXP_FR.qm.txt</file>
     <file>localization/LameXP_IT.qm</file>

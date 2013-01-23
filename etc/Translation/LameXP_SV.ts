@@ -597,20 +597,34 @@
         <source>Splitting file(s), please wait...</source>
         <translation>Delar fil(er), vänta...</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
-        <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation>Åtgärden avbröts av användaren efter %1 spår!</translation>
+        <source>Process was aborted by the user after %n track(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="414"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation>Ett oväntat fel uppstod vid delningen av cue-filen!</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
-        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>Importerade %1 spår från cue-filen och hoppade över %2 spår.</translation>
+        <source>Imported %n track(s) from the Cue Sheet.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
+        <source>Skipped %n track(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="419"/>
@@ -1736,23 +1750,21 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
-        <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation>%1 fil(er) har undantagits, på grund av att åtkomst nekades!</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
         <source>This usually means the file is locked by another process.</source>
         <translation>Det innebär oftast att filen är låst av någon annan process.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
+        <source>%n file(s) have been rejected, because read access was not granted!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
         <source>CDDA Files</source>
         <translation>CDDA-filer</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
-        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>%1 fil(er) har undantagits, på grund av att det är fejkade CDDA-filer!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
@@ -1764,6 +1776,14 @@
         <source>We recommend using %1 for that purpose.</source>
         <translation>Vi rekommenderar att du använder %1 för det ändamålet.</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
+        <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
         <source>Cue Sheet</source>
@@ -1771,13 +1791,16 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
-        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation>%1 fil(er) har undantagits, på grund av att de verkar vara cue-filer!</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translation>Använd LameXPs cue-guide för att importera cue-filer.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
+        <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
@@ -1786,13 +1809,16 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
-        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation>%1 fil(er) har undantagits, på grund av att filformatet inte känns igen!</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
         <source>This usually means the file is damaged or the file format is not supported.</source>
         <translation>Det innebär oftast att filen är skadad eller att filformatet inte stöds.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
+        <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="746"/>
@@ -2542,10 +2568,13 @@
         <source>Rename Macros</source>
         <translation>Namnändra macron</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="3837"/>
-        <source>%1 Instance(s)</source>
-        <translation>%1 instans(er)</translation>
+        <source>%n Instance(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3881"/>
@@ -3136,13 +3165,16 @@
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="608"/>
-        <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation>Åtgärden avbröts av användaren efter %1 fil(er)!</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="608"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Åtgärden avbröts i förtid av användaren!</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="608"/>
+        <source>Process was aborted by the user after %n file(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="609"/>
@@ -3221,27 +3253,39 @@
         <source>Cancel Shutdown</source>
         <translation>Avbryt avstängning</translation>
     </message>
-    <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1290"/>
-        <source>hour(s)</source>
-        <translation>timma(r)</translation>
-    </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1291"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1295"/>
-        <source>minute(s)</source>
-        <translation>minut(er)</translation>
+        <source>%n hour(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="1292"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1296"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1300"/>
-        <source>second(s)</source>
-        <translation>sekund(er)</translation>
+        <source>%n minute(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="1297"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1301"/>
-        <source>millisecond(s)</source>
-        <translation>millisekund(er)</translation>
+        <source>%n second(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="1302"/>
+        <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -3260,23 +3304,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="850"/>
+        <location filename="../../src/Global.cpp" line="854"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation>EXE-filen &apos;%1&apos; stöder inte Windows kompatibilitetsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1104"/>
+        <location filename="../../src/Global.cpp" line="1108"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Qt v%2, du har Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1109"/>
+        <location filename="../../src/Global.cpp" line="1113"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>EXE-filen &apos;%1&apos; är byggd för Qt &apos;%2&apos;, du har Qt &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1122"/>
-        <location filename="../../src/Global.cpp" line="1149"/>
+        <location filename="../../src/Global.cpp" line="1126"/>
+        <location filename="../../src/Global.cpp" line="1153"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Windows 2000 eller senare.</translation>
     </message>

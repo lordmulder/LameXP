@@ -605,7 +605,7 @@ void ProcessingDialog::doneEncoding(void)
 		CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFF3BA"));
 		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
-		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %1 file(s)!").arg(QString::number(m_succeededJobs.count())) : tr("Process was aborted prematurely by the user!"));
+		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %n file(s)!", "", m_succeededJobs.count()) : tr("Process was aborted prematurely by the user!"));
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 		QApplication::processEvents();
@@ -1281,27 +1281,28 @@ QString ProcessingDialog::time2text(const double timeVal) const
 {
 	double intPart = 0;
 	double frcPart = modf(timeVal, &intPart);
-	int x = 0, y = 0; QString a, b;
 
 	QTime time = QTime().addSecs(qRound(intPart)).addMSecs(qRound(frcPart * 1000.0));
 
+	QString a, b;
+
 	if(time.hour() > 0)
 	{
-		x = time.hour();   a = tr("hour(s)");
-		y = time.minute(); b = tr("minute(s)");
+		a = tr("%n hour(s)", "", time.hour());
+		b = tr("%n minute(s)", "", time.minute());
 	}
 	else if(time.minute() > 0)
 	{
-		x = time.minute(); a = tr("minute(s)");
-		y = time.second(); b = tr("second(s)");
+		a = tr("%n minute(s)", "", time.minute());
+		b = tr("%n second(s)", "", time.second());
 	}
 	else
 	{
-		x = time.second(); a = tr("second(s)");
-		y = time.msec();   b = tr("millisecond(s)");
+		a = tr("%n second(s)", "", time.second());
+		b = tr("%n millisecond(s)", "", time.msec());
 	}
 
-	return QString("%1 %2, %3 %4").arg(QString::number(x), a, QString::number(y), b);
+	return QString("%1, %2").arg(a, b);
 }
 
 ////////////////////////////////////////////////////////////

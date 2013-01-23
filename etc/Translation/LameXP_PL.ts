@@ -596,20 +596,37 @@
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished">Dzielenie pliku/ów, prosze czekać...</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
-        <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation type="unfinished">Proces został przerwany przez użytkownika po imporcie %1 ścieżek!</translation>
+        <source>Process was aborted by the user after %n track(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="414"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished">Wystąpił nieoczekiwany błąd podczas podziału pliku Cue Sheet!</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
-        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation type="unfinished">Zaimportowano %1 ścieżek i opuszczono %2 ścieżek z pliku Cue Sheet.</translation>
+        <source>Imported %n track(s) from the Cue Sheet.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
+        <source>Skipped %n track(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="419"/>
@@ -1736,11 +1753,6 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
-        <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">%1 plik(ów) zostało odrzuconych z powodu braku dostępu do pliku!</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
         <source>This usually means the file is locked by another process.</source>
         <translation type="unfinished">To przeważnie oznacza, że plik jest zablokowany przez inny proces.</translation>
     </message>
@@ -1748,11 +1760,6 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
         <source>CDDA Files</source>
         <translation type="unfinished">Pliki CDDA</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
-        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">%1 plik(ów) zostało odrzuconych ponieważ to nie są właściwe pliki CDDA!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
@@ -1771,11 +1778,6 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
-        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">%1 plik(ów) zostało odrzuconych, ponieważ to nie są pliki obrazów Cue Sheet!</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translation type="unfinished">Prosze użyć przewodnika  Cue Sheet w LameXP w celu importowania tych plików.</translation>
     </message>
@@ -1783,11 +1785,6 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
         <source>Files Rejected</source>
         <translation type="unfinished">Pliki odrzucone</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
-        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">%1 plik(ów) zostało odrzuconych, ponieważ ich format nie został rozpoznany!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
@@ -2049,6 +2046,42 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1531"/>
         <source>Ignore</source>
         <translation type="unfinished">Ignoruj</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
+        <source>%n file(s) have been rejected, because read access was not granted!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
+        <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
+        <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
+        <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="985"/>
@@ -2542,10 +2575,14 @@
         <source>Rename Macros</source>
         <translation type="unfinished">Zmień nazwy makr</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="3837"/>
-        <source>%1 Instance(s)</source>
-        <translation type="unfinished">%1 wątek/ki</translation>
+        <source>%n Instance(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3881"/>
@@ -3135,13 +3172,17 @@
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="608"/>
-        <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation type="unfinished">Proces został przerwany przez użytkownika po wykonaniu %1 plików!</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="608"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">Proces został przedwcześnie zakończony przez użytkownika!</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="608"/>
+        <source>Process was aborted by the user after %n file(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="609"/>
@@ -3220,27 +3261,43 @@
         <source>Cancel Shutdown</source>
         <translation type="unfinished">Anuluj wyłączenie komputera</translation>
     </message>
-    <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1290"/>
-        <source>hour(s)</source>
-        <translation type="unfinished">godzinie/ach</translation>
-    </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1291"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1295"/>
-        <source>minute(s)</source>
-        <translation type="unfinished">minutach</translation>
+        <source>%n hour(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="1292"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1296"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1300"/>
-        <source>second(s)</source>
-        <translation type="unfinished">sekundach</translation>
+        <source>%n minute(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="1297"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1301"/>
-        <source>millisecond(s)</source>
-        <translation type="unfinished">milisekundach</translation>
+        <source>%n second(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="1302"/>
+        <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -3259,23 +3316,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="850"/>
+        <location filename="../../src/Global.cpp" line="854"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1104"/>
+        <location filename="../../src/Global.cpp" line="1108"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1109"/>
+        <location filename="../../src/Global.cpp" line="1113"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1122"/>
-        <location filename="../../src/Global.cpp" line="1149"/>
+        <location filename="../../src/Global.cpp" line="1126"/>
+        <location filename="../../src/Global.cpp" line="1153"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>

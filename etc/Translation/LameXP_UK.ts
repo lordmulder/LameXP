@@ -435,16 +435,8 @@
         <translation>Розділення файлу(-ів), будь ласка, зачекайте...</translation>
     </message>
     <message>
-        <source>Process was aborted by the user after %1 track(s)!</source>
-        <translation>Процес було перервано користувачем після %1 доріжки(-ок)!</translation>
-    </message>
-    <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation>Виникла неочікувана помилка під час розділення списку Cue!</translation>
-    </message>
-    <message>
-        <source>Imported %1 track(s) from the Cue Sheet and skipped %2 track(s).</source>
-        <translation>Імпортовано %1 доріжок(-и, -у) зі списку Cue і пропущено %2 доріжку(-и, -ок).</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
@@ -477,6 +469,30 @@
     <message>
         <source>New Folder</source>
         <translation>Нова тека</translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n track(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Imported %n track(s) from the Cue Sheet.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Skipped %n track(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -1043,20 +1059,12 @@
         <translation>Доступ заборонено</translation>
     </message>
     <message>
-        <source>%1 file(s) have been rejected, because read access was not granted!</source>
-        <translation>%1 файл(и, ів) було пропущено, так як не гарантувався доступ на читання до них!</translation>
-    </message>
-    <message>
         <source>This usually means the file is locked by another process.</source>
         <translation>Це зазвичай означає, що файл заблоковано іншим процесом.</translation>
     </message>
     <message>
         <source>Files Rejected</source>
         <translation>Файли пропущено</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation>%1 файл(и, ів) було пропущено, так як не був розпізнаний формат файлу!</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
@@ -1439,10 +1447,6 @@
         <translation>Відкрити дерево тек...</translation>
     </message>
     <message>
-        <source>%1 file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation>%1 файл(и, ів) було пропущено, тому що вони є фіктивними файлами CDDA!</translation>
-    </message>
-    <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
         <translation>Вибачте, але LameXP наразі не може витягнути аудіодоріжки з Audio-CD.</translation>
     </message>
@@ -1469,10 +1473,6 @@
     <message>
         <source>Add Folder</source>
         <translation>Додати теку</translation>
-    </message>
-    <message>
-        <source>%1 Instance(s)</source>
-        <translation>%1 Копія (ї, й)</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
@@ -1581,10 +1581,6 @@
     <message>
         <source>Cue Sheet</source>
         <translation>Списки Cue</translation>
-    </message>
-    <message>
-        <source>%1 file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation>%1 файл(и, ів) було пропущено, тому що вони скоріш за все є образами списків Cue!</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
@@ -1990,6 +1986,46 @@
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because read access was not granted!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Instance(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
@@ -2383,10 +2419,6 @@
         <translation>Йде створення списку відтворення, будь ласка, зачекайте...</translation>
     </message>
     <message>
-        <source>Process was aborted by the user after %1 file(s)!</source>
-        <translation>Процес було перервано користувачем після %1 файла(-ів)!</translation>
-    </message>
-    <message>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Процес було перервано користувачем завчасно!</translation>
     </message>
@@ -2459,22 +2491,6 @@
         <translation>Процес тривав %1.</translation>
     </message>
     <message>
-        <source>hour(s)</source>
-        <translation>годин(-у, -и)</translation>
-    </message>
-    <message>
-        <source>minute(s)</source>
-        <translation>хвилин(-у, -и)</translation>
-    </message>
-    <message>
-        <source>second(s)</source>
-        <translation>секунд(-у, -и)</translation>
-    </message>
-    <message>
-        <source>millisecond(s)</source>
-        <translation>мілісекунд(-у, -и)</translation>
-    </message>
-    <message>
         <source>Filter Log Items</source>
         <translation>Фільтрувати записи журналу</translation>
     </message>
@@ -2509,6 +2525,46 @@
     <message>
         <source>None of the items matches the current filtering rules</source>
         <translation>Жодного запису не підпадає під поточні правила фільтрування</translation>
+    </message>
+    <message numerus="yes">
+        <source>Process was aborted by the user after %n file(s)!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n hour(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n second(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
