@@ -3153,10 +3153,13 @@
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Avbrutet! Väntar på att aktiva processer skall avslutas...</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="570"/>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Omkodning: %1 fil(er) av %2 bearbetade hittills, vänta...</translation>
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="598"/>

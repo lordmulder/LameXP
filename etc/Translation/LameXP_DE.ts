@@ -2399,10 +2399,6 @@
         <translation>Abbruch! Laufende Jobs werden beendet...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Kodiere: %1 von %2 Dateien abgeschlossen, bitte warten...</translation>
-    </message>
-    <message>
         <source>Creating the playlist file, please wait...</source>
         <translation>Erzeuge Wiedergabeliste, bitte warten...</translation>
     </message>
@@ -2551,6 +2547,13 @@
         <translation>
             <numerusform>%n Millisekunde</numerusform>
             <numerusform>%n Millisekunden</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
+        <translation>
+            <numerusform>Kodiere: %n Datei von %1 abgeschlossen, bitte warten...</numerusform>
+            <numerusform>Kodiere: %n Dateien von %1 abgeschlossen, bitte warten...</numerusform>
         </translation>
     </message>
 </context>

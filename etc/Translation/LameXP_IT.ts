@@ -2399,10 +2399,6 @@
         <translation>Fermato! Attendi che venga concluso il lavoro in corso...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>In codifica: %1 files di %2 completati finora, attendere prego...</translation>
-    </message>
-    <message>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Abortito</translation>
     </message>
@@ -2548,6 +2544,13 @@
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>

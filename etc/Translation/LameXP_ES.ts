@@ -2398,10 +2398,6 @@
         <translation>¡Cancelado! Esperando a que finalicen las tareas que se están ejecutando...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Codificando: %1 de %2 archivos completados hasta ahora, espere por favor...</translation>
-    </message>
-    <message>
         <source>Creating the playlist file, please wait...</source>
         <translation>Creando el archivo de lista de reproducción, espere por favor...</translation>
     </message>
@@ -2547,6 +2543,13 @@
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>

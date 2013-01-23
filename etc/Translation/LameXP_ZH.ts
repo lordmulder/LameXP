@@ -2390,10 +2390,6 @@
         <translation>中止! 正在等待运行项目终止...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>编码:到目前为止,已完成的 %2/%1 ,请稍候...</translation>
-    </message>
-    <message>
         <source>Creating the playlist file, please wait...</source>
         <translation>创建播放列表文件,请稍候...</translation>
     </message>
@@ -2535,6 +2531,12 @@
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>

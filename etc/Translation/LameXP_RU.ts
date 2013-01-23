@@ -2421,10 +2421,6 @@
         <translation type="unfinished">Отменено! Ожидание завершения запущенных заданий...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Кодирование: %1 из %2 завершено.</translation>
-    </message>
-    <message>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">Создаю плэйлист, пожалуйста, подождите...</translation>
     </message>
@@ -2567,6 +2563,14 @@
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>

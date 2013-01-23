@@ -2402,10 +2402,6 @@
         <translation type="unfinished">중단됨! 종료를 위해 실행중인 작업을 대기중...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation type="unfinished">편집중: 현재 %1/%2 파일 완료됨, 잠시만 기다려 주십시오...</translation>
-    </message>
-    <message>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">재생 목록 파일 생성중, 잠시 기다려 주십시오...</translation>
     </message>
@@ -2535,6 +2531,12 @@
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>

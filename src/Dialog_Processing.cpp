@@ -567,7 +567,7 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(!m_userAborted)
 	{
-		SET_PROGRESS_TEXT(tr("Encoding: %1 files of %2 completed so far, please wait...").arg(QString::number(ui->progressBar->value()), QString::number(ui->progressBar->maximum())));
+		SET_PROGRESS_TEXT(tr("Encoding: %n file(s) of %1 completed so far, please wait...", "", ui->progressBar->value()).arg(QString::number(ui->progressBar->maximum())));
 		WinSevenTaskbar::setTaskbarProgress(this, ui->progressBar->value(), ui->progressBar->maximum());
 	}
 	

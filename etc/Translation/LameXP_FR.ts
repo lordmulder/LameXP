@@ -2408,10 +2408,6 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Abandonné ! En attente pour la fin de l&apos;exécution des travaux...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Encodage : %1 fichier(s) sur %2 terminé(s), patientez...</translation>
-    </message>
-    <message>
         <source>Creating the playlist file, please wait...</source>
         <translation>Création de la liste de lecture, patientez...</translation>
     </message>
@@ -2557,6 +2553,13 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>

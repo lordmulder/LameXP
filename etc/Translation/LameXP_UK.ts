@@ -2411,10 +2411,6 @@
         <translation>Перервано! Чекаємо на завершення запущених завдань...</translation>
     </message>
     <message>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation>Кодування: %1 файлів з %2 оброблено, будь ласка, зачекайте...</translation>
-    </message>
-    <message>
         <source>Creating the playlist file, please wait...</source>
         <translation>Йде створення списку відтворення, будь ласка, зачекайте...</translation>
     </message>
@@ -2560,6 +2556,14 @@
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>

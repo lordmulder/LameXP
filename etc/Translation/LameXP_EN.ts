@@ -74,6 +74,14 @@
 <context>
     <name>ProcessingDialog</name>
     <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="570"/>
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
+        <translation>
+            <numerusform>Encoding: %n file of %1 completed so far, please wait...</numerusform>
+            <numerusform>Encoding: %n files of %1 completed so far, please wait...</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="608"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>

@@ -3143,10 +3143,12 @@
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="570"/>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation type="unfinished"></translation>
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="598"/>

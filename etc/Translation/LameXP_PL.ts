@@ -3160,10 +3160,14 @@
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">Przerwano! Czekanie na wyłączenie procesu...</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="570"/>
-        <source>Encoding: %1 files of %2 completed so far, please wait...</source>
-        <translation type="unfinished">Kompresja: Prosze czekać, jak dotąd wykonano %1 z %2 plików...</translation>
+        <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="598"/>
