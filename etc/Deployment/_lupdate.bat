@@ -32,6 +32,7 @@ for %%f in ("%~dp0\..\Translation\*.ts") do (
 	copy %%f %%f.bak
 	lupdate.exe "@%LST_FILE%" -no-obsolete -ts %%f
 )
+lupdate.exe "@%LST_FILE%" -no-obsolete -pluralonly -ts "%~dp0\..\Translation\LameXP_EN.ts"
 del "%LST_FILE%"
 echo ----------------------------------------------------------------
 for %%f in ("%~dp0\..\Translation\LameXP_??.ts") do (
