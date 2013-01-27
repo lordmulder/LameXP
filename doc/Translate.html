@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>Howto: Translate LameXP v4.xx</title>
@@ -32,11 +32,20 @@ Only language files that have been edited according to the following rules can b
 <ul>
 <li>The translated string should <i>not</i> be significant longer (or shorter) than the original string, so the layout isn't destroyed.
 <li>Strings don't have to be translated literally, as long as the original meaning is retained.
-<li>Do <i>not</i> use any HTML-style tags, like <tt>&lt;b&gt;&hellip;&lt;/b&gt;</tt>, <tt>&lt;i&gt;&hellip;&lt;/i&gt;</tt> or <tt>&lt;u&gt;&hellip;&lt;/u&gt;</tt> in your translated text, except when present in the original string.
-<li>Take care of the <a href="http://en.wikipedia.org/wiki/Printf" target="_blank">C printf</a> syntax: All the <tt>%s</tt> and <tt>%d</tt> placeholders <i>must</i> remain in the translated strings, at the appropriate position.
-<li>All Qt-style placeholders, like <tt>%1</tt>, <tt>%2</tt> and so on, <i>must</i> remain in the translated strings, at the appropriate position.
+<li>Do <i>not</i> use any HTML-style tags, like <tt>&lt;b&gt;&hellip;&lt;/b&gt;</tt>, <tt>&lt;i&gt;&hellip;&lt;/i&gt;</tt> or <tt>&lt;u&gt;&hellip;&lt;/u&gt;</tt> in your translated text, except when such tags are already present in the original string.
+<li>Take care of the C-style <a href="http://en.wikipedia.org/wiki/Printf" target="_blank">printf()</a> syntax: All the <tt>%s</tt> and <tt>%d</tt> placeholders <i>must</i> remain in the translated strings, at the appropriate position.
+<li>All Qt-style place markers, like <tt>%1</tt>, <tt>%2</tt> and so on, <i>must</i> remain in the translated strings, at the appropriate position.
+<li>Strings containing <i>plurals</i> need two translations: One for the "singular" form and one for the "plural" form. The <tt>%n</tt> number place marker must remain, at the appropriate position.
 <li>Once the translation for a string is finished, please click the 'mark item as done' button, so the item (string) gets a green <font style="color:darkgreen">&#10004;</font> icon.
 <li>Note that the red <font style="color:darkred;font-weight:bold">!</font> icon and the yellow <font style="color:#AA8B0F">&#10004;</font> icon indicate that there is some problem with your translation, which needs to be resolved!
+</ul>
+<br>
+<h3>Examples:</h3>
+Here are a few examples of properly translated strings:
+<ul>
+<li><b>Example #1</b><table><tr><td>&bull; Original:</td><td>&nbsp;</td><td><tt>Multi-threading enabled: Running <font style="color:darkred">%1</font> instances in parallel!</tt></td></tr><tr><td>&bull; Translated:</td><td>&nbsp;</td><td><tt>Multithreading aktiviert: Führe <font style="color:darkred">%1</font> Instanzen parallel aus!</tt></td></tr></table><br>
+<li><b>Example #2</b><table><tr><td>&bull; Original:</td><td>&nbsp;</td><td><tt>LameXP will <font style="color:darkred">&lt;i&gt;</font>not<font style="color:darkred">&lt;/i&gt;</font> check for Beta (pre-release) updates from now on.</tt></td></tr><tr><td>&bull; Translated:</td><td>&nbsp;</td><td><tt>LameXP wird fortan <font style="color:darkred">&lt;i&gt;</font>nicht<font style="color:darkred">&lt;/i&gt;</font> nach Beta (Entwickler) Updates suchen.</tt></td></tr></table><br>
+<li><b>Example #3</b><table><tr><td>&bull; Original:</td><td>&nbsp;</td><td><tt><font style="color:darkred">%n</font> minute(s)</tt></td></tr><tr><td>&bull; Translated (Singular):</td><td>&nbsp;</td><td><tt><font style="color:darkred">%n</font> Minute</tt></td></tr><tr><td>&bull; Translated (Plural):</td><td>&nbsp;</td><td><tt><font style="color:darkred">%n</font> Minuten</tt></td></tr></table>
 </ul>
 <br>
 <h3>Testing your translation:</h3>
@@ -44,13 +53,13 @@ Only language files that have been edited according to the following rules can b
 <br>
 <h3>Submitting your translation:</h3>
 <p>Once you are done with your translation (i.e. all items and all contexts have a green <font style="color:darkgreen">&#10004;</font> icon), you can submit it, so it can be integrated into the next LameXP release. You can contact me by e-mail:<br><b><a href="mailto:mulder2%20[at]%20gmx%20[dot]%20de">mulder2<font color="dimgray">[at]</font>gmx<font color="dimgray">[dot]</font>de</a></b></p>
-<p>Please do <i>not</i> submit translations that have any items/context with <font style="color:#AA8B0F">&#10004;</font>, <font style="color:#AA8B0F;font-weight:bold">?</font>, <font style="color:#427D7E;font-weight:bold">?</font> or even <font style="color:darkred;font-weight:bold">!</font> icon left. Also do <i>not</i> submit QM files, do <i>not</i> compress the submitted file (ZIP, RAR, etc) and do <i>not</i> attach a flag icon file. It is sufficient to submit the translation (TS) file.</p>
-<p><b><i>Legal notice:</i></b> By submitting LameXP translations, all translators agree that their work will be incorporated into the LameXP software and, from then on, will be published and redistributed under the terms of the GNU General Public License. If you do <i>not</i> agree, please do <i>not</i> submit!
-<p>(Note: Advanced translators can get write-access to the Git repository on request, so they can keep their translations up-to-date easily)</p>
+<p>Please do <i>not</i> submit translations that have any items/context with <font style="color:#AA8B0F">&#10004;</font>, <font style="color:#AA8B0F;font-weight:bold">?</font>, <font style="color:#427D7E;font-weight:bold">?</font> or even <font style="color:darkred;font-weight:bold">!</font> icon left. Also do <i>not</i> submit QM files, do <i>not</i> compress the submitted file (ZIP, RAR, etc) and do <i>not</i> attach a flag icon file. It is perfectly sufficient to submit <i>only</i> the translation (TS) file.</p>
+<p><b><u>Legal notice:</u></b> By submitting LameXP translations, all translators agree that their work will be incorporated into the LameXP software and, from then on, will be published and redistributed under the terms of the GNU General Public License. If you do <i>not</i> agree, please do <i>not</i> submit!
+<p>(Advanced translators can get write-access to the Git repository, so they can keep their translations up-to-date easily. If you need Git access, just drop me a note!)</p>
 <p style="border-width:2px;border-style:solid;border-color:darkred;margin-top:2em"><font color="darkred"><b>IMPORTANT:</b> Before you start to create a new translation, always make sure you downloaded the <i>latest</i> "Blank.ts" file from the LameXP Git repository. Also before you start editing or updating an <i>existing</i> translation, including translations you have created yourself, make sure you downloaded the <i>latest</i> TS file from the LameXP Git repository. <i>Never</i> do any translations based on an old working copy (TS file) from your local system! The translation files (TS) in the Git repository will be updated/extended continuously, as the development proceeds. We cannot accept translations based on an <i>outdated</i> TS file!</font></p>
 <br>
 <h3>Personalization:</h3>
-<p>Usually all translators will be mentioned in the "About..." dialogue. If you don't want your (nick)name and/or e-mail address to appear there, please tell us how you want to be credited!</p>
+<p>Usually all translators will be mentioned in the "About..." dialogue of LameXP. If you don't want your (nick)name and/or e-mail address to appear there, please tell us that you whish to stay anonymous!</p>
 <br>
 <br>
 Thanks in advance !!!<br><br><img src="http://forum.doom9.org/images/smilies/thanks-t.gif" alt="emoticon">
