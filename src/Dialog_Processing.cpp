@@ -633,11 +633,11 @@ void ProcessingDialog::doneEncoding(void)
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
 			if(m_skippedJobs.count() > 0)
 			{
-				SET_PROGRESS_TEXT(tr("Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count() + m_skippedJobs.count()), QString::number(m_skippedJobs.count())));
+				SET_PROGRESS_TEXT(tr("Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!", "", m_failedJobs.count() + m_succeededJobs.count() + m_skippedJobs.count()).arg(QString::number(m_failedJobs.count()), tr("%n file(s) skipped", "", m_skippedJobs.count())));
 			}
 			else
 			{
-				SET_PROGRESS_TEXT(tr("Error: %1 of %2 files failed. Double-click failed items for detailed information!").arg(QString::number(m_failedJobs.count()), QString::number(m_failedJobs.count() + m_succeededJobs.count())));
+				SET_PROGRESS_TEXT(tr("Error: %1 of %n file(s) failed. Double-click failed items for detailed information!", "", m_failedJobs.count() + m_succeededJobs.count()).arg(QString::number(m_failedJobs.count())));
 			}
 			m_systemTray->showMessage(tr("LameXP - Error"), tr("At least one file has failed!"), QSystemTrayIcon::Critical);
 			m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
@@ -651,7 +651,7 @@ void ProcessingDialog::doneEncoding(void)
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
 			if(m_skippedJobs.count() > 0)
 			{
-				SET_PROGRESS_TEXT(tr("All files completed successfully. Skipped %1 files.").arg(QString::number(m_skippedJobs.count())));
+				SET_PROGRESS_TEXT(tr("All files completed successfully. Skipped %n file(s).", "", m_skippedJobs.count()));
 			}
 			else
 			{

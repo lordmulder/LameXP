@@ -2411,10 +2411,6 @@
         <translation>Der Vorgang wurde vom Benutzer abgebrochen.</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>Fehler: %1 von %2 Dateien sind fehlgeschlagen. Doppelklicken um detaillierte Informationen anzuzeigen!</translation>
-    </message>
-    <message>
         <source>LameXP - Error</source>
         <translation>LameXP - Fehler</translation>
     </message>
@@ -2503,14 +2499,6 @@
         <translation>Alle Einträge anzeigen</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation>Fehler: %1 von %2 Dateien sind fehlgeschlagen (%3 übersprungen). Doppelklicken um Details anzuzeigen!</translation>
-    </message>
-    <message>
-        <source>All files completed successfully. Skipped %1 files.</source>
-        <translation>Alle Dateien wurden erfolgreich umgewandelt. %1 Dateien wurden übersprungen.</translation>
-    </message>
-    <message>
         <source>None of the items matches the current filtering rules</source>
         <translation>Keiner der Einträge entspricht den aktuellen Filterregeln</translation>
     </message>
@@ -2554,6 +2542,34 @@
         <translation>
             <numerusform>Kodiere: %n Datei von %1 abgeschlossen, bitte warten...</numerusform>
             <numerusform>Kodiere: %n Dateien von %1 abgeschlossen, bitte warten...</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation>
+            <numerusform>Fehler: %1 von %n Datei fehlgeschlagen (%2). Doppelklicken um Details anzuzeigen!</numerusform>
+            <numerusform>Fehler: %1 von %n Dateien fehlgeschlagen (%2). Doppelklicken um Details anzuzeigen!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) skipped</source>
+        <translation>
+            <numerusform>%n Datei übersprungen</numerusform>
+            <numerusform>%n Dateien übersprungen</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation>
+            <numerusform>Fehler: %1 von %n Datei fehlgeschlagen. Doppelklicken um detaillierte Informationen anzuzeigen!</numerusform>
+            <numerusform>Fehler: %1 von %n Dateien fehlgeschlagen. Doppelklicken um detaillierte Informationen anzuzeigen!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>All files completed successfully. Skipped %n file(s).</source>
+        <translation>
+            <numerusform>Alle Dateien wurden erfolgreich umgewandelt. %n Datei wurde übersprungen.</numerusform>
+            <numerusform>Alle Dateien wurden erfolgreich umgewandelt. %n Dateien wurden übersprungen.</numerusform>
         </translation>
     </message>
 </context>

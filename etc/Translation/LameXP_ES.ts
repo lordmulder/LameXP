@@ -2410,10 +2410,6 @@
         <translation>El proceso ha sido cancelado por el usuario.</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>Error: %1 de %2 archivos fallidos. ¡Haga doble clic en los elementos fallidos para obtener información detallada!</translation>
-    </message>
-    <message>
         <source>LameXP - Error</source>
         <translation>LameXP - Error</translation>
     </message>
@@ -2502,16 +2498,6 @@
         <translation>Mostrar todos los archivos</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translatorcomment>Plural: &quot;Error: %1 de %2 archivos fallidos (%3 archivo omitidos). ¡Haga doble clic en los archivos para ver información más detallada!&quot;</translatorcomment>
-        <translation>Error: %1 de %2 archivo fallido (%3 archivo omitido). ¡Haga doble clic en el archivo para ver información más detallada!</translation>
-    </message>
-    <message>
-        <source>All files completed successfully. Skipped %1 files.</source>
-        <translatorcomment>Plural: &quot;Todos los archivos han sido procesados. Se han omitido %1 archivos.&quot;</translatorcomment>
-        <translation>Todos los archivos han sido procesados. Se ha omitido %1 archivo.</translation>
-    </message>
-    <message>
         <source>None of the items matches the current filtering rules</source>
         <translation>Ninguno de los archivos concuerda con las reglas de filtrado</translation>
     </message>
@@ -2553,6 +2539,35 @@
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) skipped</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>All files completed successfully. Skipped %n file(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>

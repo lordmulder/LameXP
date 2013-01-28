@@ -90,6 +90,38 @@
         </translation>
     </message>
     <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="636"/>
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation>
+            <numerusform>Error: %1 of %n file failed (%2). Double-click failed items for detailed information!</numerusform>
+            <numerusform>Error: %1 of %n files failed (%2). Double-click failed items for detailed information!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="636"/>
+        <source>%n file(s) skipped</source>
+        <translation>
+            <numerusform>%n file skipped</numerusform>
+            <numerusform>%n files skipped</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="640"/>
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation>
+            <numerusform>Error: %1 of %n file failed. Double-click failed items for detailed information!</numerusform>
+            <numerusform>Error: %1 of %n files failed. Double-click failed items for detailed information!</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="654"/>
+        <source>All files completed successfully. Skipped %n file(s).</source>
+        <translation>
+            <numerusform>All files completed successfully. Skipped %n file.</numerusform>
+            <numerusform>All files completed successfully. Skipped %n files.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1291"/>
         <source>%n hour(s)</source>
         <translation>

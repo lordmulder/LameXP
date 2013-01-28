@@ -3182,15 +3182,26 @@
         <source>Process finished after %1.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="636"/>
-        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation type="unfinished"></translation>
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
+        <location filename="../../src/Dialog_Processing.cpp" line="636"/>
+        <source>%n file(s) skipped</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="640"/>
-        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished"></translation>
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="642"/>
@@ -3202,10 +3213,12 @@
         <source>At least one file has failed!</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="654"/>
-        <source>All files completed successfully. Skipped %1 files.</source>
-        <translation type="unfinished"></translation>
+        <source>All files completed successfully. Skipped %n file(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="658"/>

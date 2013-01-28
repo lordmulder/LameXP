@@ -2427,10 +2427,6 @@
         <translation>Процес було перервано користувачем.</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>Помилка:збій при обробці %1 з %2 файлів. Подвійний клік мишею на записах зі збоєм для відображення детальної інформації!</translation>
-    </message>
-    <message>
         <source>LameXP - Error</source>
         <translation>LameXP - Помилка</translation>
     </message>
@@ -2511,14 +2507,6 @@
         <translation>Відображати всі записи</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation>Помилка: обробка %1 з %2 файлів завершилась невдачею (%3 файлів пропущено). Для одержання більш детальної інформації необхідно зробити подвійний клік на записах, що відповідають завершеним невдало елементам!</translation>
-    </message>
-    <message>
-        <source>All files completed successfully. Skipped %1 files.</source>
-        <translation>Обробка усіх файлів завершена успішно. Пропущено %1 файлів.</translation>
-    </message>
-    <message>
         <source>None of the items matches the current filtering rules</source>
         <translation>Жодного запису не підпадає під поточні правила фільтрування</translation>
     </message>
@@ -2564,6 +2552,38 @@
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) skipped</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>

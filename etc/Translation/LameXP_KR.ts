@@ -2419,10 +2419,6 @@
         <translation type="unfinished">처리가 사용자에 의해 중단되었습니다.</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished">오류: %1 /%2 파일 실패됨. 자세한 정보를 보려면 실패된 항목을 더블 클릭하십시오!</translation>
-    </message>
-    <message>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - 오류</translation>
     </message>
@@ -2495,14 +2491,6 @@
         <translation type="unfinished">모든 항목 표시</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation type="unfinished">오류: %1 / %2 파일 실패됨 (%3 파일 건너뜀). 자세한 정보를 보려면 실패된 항목을 더블 클릭하십시오!</translation>
-    </message>
-    <message>
-        <source>All files completed successfully. Skipped %1 files.</source>
-        <translation type="unfinished">모든 파일들이 성공적으로 완료되었습니다. %1 파일 건너뜀.</translation>
-    </message>
-    <message>
         <source>None of the items matches the current filtering rules</source>
         <translation>현재 필터링 규칙과 일치하지 항목이 없습니다.</translation>
     </message>
@@ -2540,6 +2528,30 @@
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform>인코딩: 현재 %n / %1 파일 완료됨, 잠시만 기다려 주십시오...</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) skipped</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>All files completed successfully. Skipped %n file(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>

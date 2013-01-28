@@ -2402,10 +2402,6 @@
         <translation>進程被用戶終止.</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>錯誤: %1 的 %2 文件失敗.雙擊失敗的項目的詳細信息 !</translation>
-    </message>
-    <message>
         <source>LameXP - Error</source>
         <translation>LameXP - 錯誤</translation>
     </message>
@@ -2494,14 +2490,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All files completed successfully. Skipped %1 files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>None of the items matches the current filtering rules</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2537,6 +2525,30 @@
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) skipped</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
