@@ -288,12 +288,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="711"/>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>refalac - Win32 kommandorad ALAC-kodare/-avkodare</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="713"/>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translation type="unfinished"></translation>
+        <translation>ALAC referensimplementation av Apple finns tillgänglig under Apache-licensen.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="718"/>
@@ -600,9 +600,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Process was aborted by the user after %n track(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Åtgärden avbröts av användaren efter %n spår!</numerusform>
+            <numerusform>Åtgärden avbröts av användaren efter %n spår!</numerusform>
         </translation>
     </message>
     <message>
@@ -613,17 +613,17 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Importerade %n spår från cue-filen.</numerusform>
+            <numerusform>Importerade %n spår från cue-filen.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
         <source>Skipped %n track(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Hoppade över %n spår.</numerusform>
+            <numerusform>Hoppade över %n spår.</numerusform>
         </translation>
     </message>
     <message>
@@ -884,7 +884,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="365"/>
         <source>Up One Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Upp en nivå</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="387"/>
@@ -1508,32 +1508,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3807"/>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Inaktivera omsampling för Opus-avkodare (all utdata 48.000 Hz)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3857"/>
         <source> Overwrite Mode </source>
-        <translation type="unfinished"></translation>
+        <translation>Överskrivningsläge </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3878"/>
         <source>Overwrite Existing File</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv över befintlig fil</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3885"/>
         <source>Skip File</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoppa över fil</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3895"/>
         <source>Keep Both Files (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Behåll båda filerna (Standard)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3905"/>
         <source>If Target File Already Exists:</source>
-        <translation type="unfinished"></translation>
+        <translation>Om målfilen redan finns:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4052"/>
@@ -1756,9 +1756,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
         <source>%n file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fil har avvisats, eftersom läsbehörighet saknas!</numerusform>
+            <numerusform>%n fierl har avvisats, eftersom läsbehörighet saknas!</numerusform>
         </translation>
     </message>
     <message>
@@ -1779,9 +1779,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fil har avvisats, eftersom det är en CDDA attrappfil (dummy)!</numerusform>
+            <numerusform>%n filer har avvisats, eftersom de är CDDA attrappfiler (dummy)!</numerusform>
         </translation>
     </message>
     <message>
@@ -1797,9 +1797,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fil har avvisats, eftersom det verkar vara en cue-avbildning!</numerusform>
+            <numerusform>%n filer har avvisats, eftersom det verkar vara cue-avbildningar!</numerusform>
         </translation>
     </message>
     <message>
@@ -1815,9 +1815,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fil har avvisats, eftersom filformatet inte känns igen!</numerusform>
+            <numerusform>%n filer har avvisats, eftersom filformatet inte känns igen!</numerusform>
         </translation>
     </message>
     <message>
@@ -1863,7 +1863,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="991"/>
         <source>Go To Parent Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå till överordnad mapp</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="992"/>
@@ -2571,9 +2571,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="3837"/>
         <source>%n Instance(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n instans</numerusform>
+            <numerusform>%n instanser</numerusform>
         </translation>
     </message>
     <message>
@@ -2584,22 +2584,22 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Overwrite Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Överskrivningsläge</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
-        <translation type="unfinished"></translation>
+        <translation>Varning! Det här läget kan skriva över befintliga filer, utan möjlighet att återskapa!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortsätt</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4066"/>
@@ -2908,7 +2908,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="139"/>
         <source>Skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>Överhoppad.</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="144"/>
@@ -3025,22 +3025,22 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="396"/>
         <source>Target output file already exists, going to skip this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Målfilen finns redan! Den här filen hoppas över:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="397"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
-        <translation type="unfinished"></translation>
+        <translation>Om du inte vill att befintliga filer hoppas över, måste du ändra överskrivningsläge!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="404"/>
         <source>Target output file already exists, going to delete existing file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Målfilen finns redan! Befintlig fil kommer att tas bort:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="414"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte ta bort befintlig målfil. Sparar med annat filnamn!</translation>
     </message>
 </context>
 <context>
@@ -3101,32 +3101,32 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="209"/>
         <source>Filter Log Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrera loggobjekt</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="211"/>
         <source>Show Running Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa endast aktiva</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="212"/>
         <source>Show Succeeded Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa endast klara</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="213"/>
         <source>Show Failed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa endast misslyckade</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="214"/>
         <source>Show Skipped Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa endast överhoppade</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="215"/>
         <source>Show All Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa alla</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="267"/>
@@ -3156,9 +3156,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="570"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Kodar! %n fil av%1 slutförd. vänta...</numerusform>
+            <numerusform>Kodar! %n filer av%1 slutförda. vänta...</numerusform>
         </translation>
     </message>
     <message>
@@ -3174,9 +3174,9 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="608"/>
         <source>Process was aborted by the user after %n file(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Åtgärden avbröts av användaren efter %n fil!</numerusform>
+            <numerusform>Åtgärden avbröts av användaren efter %n filer!</numerusform>
         </translation>
     </message>
     <message>
@@ -3197,7 +3197,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="636"/>
         <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fel! %1 av %2 filer misslyckades (%3 överhoppade). Dubbelklicka misslyckade objekt för detaljerad info!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="640"/>
@@ -3217,7 +3217,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="654"/>
         <source>All files completed successfully. Skipped %1 files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla filer klara. %1 hoppades över.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="658"/>
@@ -3233,7 +3233,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="854"/>
         <source>None of the items matches the current filtering rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga objekt matchar aktuell filtrering</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1160"/>
@@ -3259,35 +3259,35 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1291"/>
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n timma</numerusform>
+            <numerusform>%n timmar</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1292"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1296"/>
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n minut</numerusform>
+            <numerusform>%n minuter</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1297"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1301"/>
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n sekund</numerusform>
+            <numerusform>%n sekunder</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1302"/>
         <source>%n millisecond(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n millisekund</numerusform>
+            <numerusform>%n millisekunder</numerusform>
         </translation>
     </message>
 </context>
