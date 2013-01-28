@@ -281,11 +281,11 @@
     </message>
     <message>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>refalac - De/codificador ALAC mediante línea de comandos Win32</translation>
     </message>
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translation type="unfinished"></translation>
+        <translation>La implementación de referencia ALAC de Apple está disponible bajo la licencia Apache.</translation>
     </message>
 </context>
 <context>
@@ -471,23 +471,23 @@
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n track(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>¡El proceso fue abortado por el usuario tras %n pista!</numerusform>
+            <numerusform>¡El proceso fue abortado por el usuario tras %n pistas!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Imported %n track(s) from the Cue Sheet.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n pista importada del Cue sheet.</numerusform>
+            <numerusform>%n pistas importadas del Cue sheet.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Skipped %n track(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n pista omitida.</numerusform>
+            <numerusform>%n pistas omitidas.</numerusform>
         </translation>
     </message>
 </context>
@@ -515,7 +515,7 @@
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation>El archivo de origen no existe (¡Se saltarán pistas!)</translation>
+        <translation>El archivo de origen no existe (¡Se omitirán algunas pistas!)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
@@ -1784,7 +1784,7 @@
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation>Saltando la comprobación de actualizaciones, por favor espere...</translation>
+        <translation>Omitiendo la comprobación de actualizaciones por esta vez, por favor espere...</translation>
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
@@ -1936,85 +1936,85 @@
     </message>
     <message>
         <source> Overwrite Mode </source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de sobreescritura</translation>
     </message>
     <message>
         <source>Overwrite Existing File</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobreescribir archivo existente</translation>
     </message>
     <message>
         <source>Skip File</source>
-        <translation type="unfinished"></translation>
+        <translation>Omitir archivo</translation>
     </message>
     <message>
         <source>Keep Both Files (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Conservar ambos archivos (por defecto)</translation>
     </message>
     <message>
         <source>If Target File Already Exists:</source>
-        <translation type="unfinished"></translation>
+        <translation>Si el archivo de destino ya existe:</translation>
     </message>
     <message>
         <source>Overwrite Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de sobreescritura</translation>
     </message>
     <message>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: ¡Este modo sobreescribirá los archivos existentes sin ninguna posibilidad de recuperarlos!</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Revertir</translation>
     </message>
     <message>
         <source>Up One Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir un nivel</translation>
     </message>
     <message>
         <source>Go To Parent Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir al directorio superior</translation>
     </message>
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar el resampling del decodificador Opus (es decir, siempre usar 48.000 Hz)</translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>¡%n archivo ha sido rechazado ya que el acceso de lectura no estaba garantizado!</numerusform>
+            <numerusform>¡%n archivos han sido rechazados ya que el acceso de lectura no estaba garantizado!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>¡%n archivo ha sido rechazado ya que era un archivo dummy CDDA!</numerusform>
+            <numerusform>¡%n archivos han sido rechazados ya que eran archivos dummy CDDA!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>¡%n archivo ha sido rechazado ya que parecía ser una imagen Cue sheet!</numerusform>
+            <numerusform>¡%n archivos han sido rechazados ya que parecían ser imagenes Cue sheet!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>¡%n archivo ha sido rechazado ya que su formato no puede ser reconocido!</numerusform>
+            <numerusform>¡%n archivos han sido rechazados ya que su formato no puede ser reconocido!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n Instance(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n instancia</numerusform>
+            <numerusform>%n instancias</numerusform>
         </translation>
     </message>
 </context>
@@ -2340,23 +2340,23 @@
     </message>
     <message>
         <source>Skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>Omitidos.</translation>
     </message>
     <message>
         <source>Target output file already exists, going to skip this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo de destino ya existe, se omitirá este archivo:</translation>
     </message>
     <message>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Si no quiere sobreescribir los archivos existentes, cambie el modo sobreescritura por favor!</translation>
     </message>
     <message>
         <source>Target output file already exists, going to delete existing file:</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo de destino ya existe, se eliminará este archivo:</translation>
     </message>
     <message>
         <source>Failed to delete existing target file, will save to another file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Error al eliminar el archivo de destino existente, se guardará con otro nombre!</translation>
     </message>
 </context>
 <context>
@@ -2479,79 +2479,80 @@
     </message>
     <message>
         <source>Filter Log Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrar el registro de archivos</translation>
     </message>
     <message>
         <source>Show Running Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar solo en ejecución</translation>
     </message>
     <message>
         <source>Show Succeeded Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar solo finalizados</translation>
     </message>
     <message>
         <source>Show Failed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar solo fallidos</translation>
     </message>
     <message>
         <source>Show Skipped Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar solo omitidos</translation>
     </message>
     <message>
         <source>Show All Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar todos los archivos</translation>
     </message>
     <message>
         <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Plural: &quot;Error: %1 de %2 archivos fallidos (%3 archivo omitidos). ¡Haga doble clic en los archivos para ver información más detallada!&quot;</translatorcomment>
+        <translation>Error: %1 de %2 archivo fallido (%3 archivo omitido). ¡Haga doble clic en el archivo para ver información más detallada!</translation>
     </message>
     <message>
         <source>All files completed successfully. Skipped %1 files.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Plural: &quot;Todos los archivos han sido procesados. Se han omitido %1 archivos.&quot;</translatorcomment>
+        <translation>Todos los archivos han sido procesados. Se ha omitido %1 archivo.</translation>
     </message>
     <message>
         <source>None of the items matches the current filtering rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno de los archivos concuerda con las reglas de filtrado</translation>
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n file(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>¡El proceso fue abortado por el usuario tras %n archivo!</numerusform>
+            <numerusform>¡El proceso fue abortado por el usuario tras %n archivos!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n hora</numerusform>
+            <numerusform>%n horas</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n minuto</numerusform>
+            <numerusform>%n minutos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n segundo</numerusform>
+            <numerusform>%n segundos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n milisegundo</numerusform>
+            <numerusform>%n milisegundos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
             <numerusform></numerusform>
         </translation>
     </message>
