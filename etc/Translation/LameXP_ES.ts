@@ -2539,36 +2539,36 @@
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Codificando: %n de %1 archivo completado, espere por favor...</numerusform>
+            <numerusform>Codificando: %n de %1 archivos completados, espere por favor...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Error: %1 de %n archivo fallido (%2). ¡Haga doble clic en el archivo para obtener información más detallada!</numerusform>
+            <numerusform>Error: %1 de %n archivos fallidos (%2). ¡Haga doble clic en los archivos para obtener información más detallada!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) skipped</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n archivo omitido</numerusform>
+            <numerusform>%n archivos omitidos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Error: %1 de %n archivo fallido. ¡Haga doble clic en el archivo para obtener información más detallada!</numerusform>
+            <numerusform>Error: %1 de %n archivos fallidos. ¡Haga doble clic en los archivos para obtener información más detallada!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>All files completed successfully. Skipped %n file(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Todos los archivos han sido procesados. Se ha omitido %n archivo.</numerusform>
+            <numerusform>Todos los archivos han sido procesados. Se han omitido %n archivos.</numerusform>
         </translation>
     </message>
 </context>
