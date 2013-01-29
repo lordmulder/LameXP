@@ -3197,33 +3197,33 @@
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="636"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Fel! %1 av %n filer misslyckades (%2). Dubbelklicka på misslyckat objekt för info!</numerusform>
+            <numerusform>Fel! %1 av %n filer misslyckades (%2). Dubbelklicka på misslyckat objekt för info!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="636"/>
         <source>%n file(s) skipped</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fil hoppades över</numerusform>
+            <numerusform>%n filer hoppades över</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="640"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Fel! %1 av %n filer misslyckades. Dubbelklicka på misslyckat objekt för info!</numerusform>
+            <numerusform>Fel! %1 av %n filer misslyckades. Dubbelklicka på misslyckat objekt för info!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="654"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Alla filer korrekt slutförda. %n fil hoppades över.</numerusform>
+            <numerusform>Alla filer korrekt slutförda. %n filer hoppades över.</numerusform>
         </translation>
     </message>
     <message>
