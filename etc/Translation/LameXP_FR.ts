@@ -181,59 +181,59 @@
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Tous droits réservés.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par Jory Stone &lt;jcsston@toughguy.net&gt; et LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>wma2wav - Transformer les fichiers WMA en Wave</translation>
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
-        <translation type="unfinished"></translation>
+        <translation>avs2wav - Convertir Avisynth en Wave</translation>
     </message>
     <message>
         <source>dcaenc</source>
-        <translation type="unfinished"></translation>
+        <translation>dcaenc</translation>
     </message>
     <message>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2008-2011 Alexander E. Patrakov. Distribué sous la licence LGPL.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence</translation>
     </message>
     <message>
         <source>Programmers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmeurs :</translation>
     </message>
     <message>
         <source>Project Leader</source>
-        <translation type="unfinished"></translation>
+        <translation>Chef de projet</translation>
     </message>
     <message>
         <source>Opus Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opus Codec Audio</translation>
     </message>
     <message>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation type="unfinished"></translation>
+        <translation>Codec audio totalement ouvert, libres, très polyvalent.</translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - Plus de 700 icônes au format PNG</translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par Mark James, distribué sous la licence Creative Commons.</translation>
     </message>
     <message>
         <source>Show License Text</source>
@@ -245,51 +245,51 @@
     </message>
     <message>
         <source>Special thanks to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grand merci à :</translation>
     </message>
     <message>
         <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Forum Doom9&apos;s</translation>
     </message>
     <message>
         <source>Gleitz | German Doom9</source>
-        <translation type="unfinished"></translation>
+        <translation>Gleitz | German Doom9</translation>
     </message>
     <message>
         <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished"></translation>
+        <translation>Forums Hydrogenaudi</translation>
     </message>
     <message>
         <source>RareWares</source>
-        <translation type="unfinished"></translation>
+        <translation>RareWares</translation>
     </message>
     <message>
         <source>GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub</translation>
     </message>
     <message>
         <source>SourceForge</source>
-        <translation type="unfinished"></translation>
+        <translation>SourceForge</translation>
     </message>
     <message>
         <source>Qt Developer Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt Developer Network</translation>
     </message>
     <message>
         <source>Marius Hudea</source>
-        <translation type="unfinished"></translation>
+        <translation>Marius Hudea</translation>
     </message>
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
-        <translation type="unfinished"></translation>
+        <translation>UPX - The Ultimate Packer for eXecutable</translation>
     </message>
     <message>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>refalac - ALAC encodeur/décodeur en de ligne de commande Win32</translation>
     </message>
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;implémentation de référence ALAC par Apple est disponible sous licence Apache.</translation>
     </message>
 </context>
 <context>
@@ -320,19 +320,19 @@
     </message>
     <message>
         <source>Bitrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitrate</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation>Constant</translation>
     </message>
     <message>
         <source>Variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Variable</translation>
     </message>
     <message>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Encodeur</translation>
     </message>
 </context>
 <context>
@@ -431,66 +431,66 @@
     </message>
     <message>
         <source>Analysis Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;analyse a échoué</translation>
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention : Le format des fichiers d&apos;entrée n&apos;a pas pu être déterminé !</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer malgré tout</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Abandonner</translation>
+        <translation>Abandonner</translation>
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Par défaut)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner l&apos;encodage ANSI pour les fichiers Cue Sheet :</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Artiste inconnu</translation>
+        <translation>Artiste inconnu</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Album inconnu</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">Nouveau dossier</translation>
+        <translation>Nouveau dossier</translation>
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n track(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n piste(s) !</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Imported %n track(s) from the Cue Sheet.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n piste(s) importée(s) depuis le contenu musical.</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Skipped %n track(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n piste(s) ignorée(s).</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -523,15 +523,15 @@
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger un contenu musical différent</translation>
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished"></translation>
+        <translation>Artiste :</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished"></translation>
+        <translation>Album :</translation>
     </message>
 </context>
 <context>
@@ -622,19 +622,19 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Par défaut)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for CSV file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner l&apos;encodage ANSI pour le fichier CSV :</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -1618,412 +1618,412 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>CDDA Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers CDDA</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenu musical</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez utiliser l&apos;assistant musical de LameXP pour importer les fichiers du contenu musical.</translation>
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il semble qu&apos;un logiciel antivirus ralenti le démarrage de LameXP.</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez vous reporter au document %1 pour des détails et des solutions !</translation>
     </message>
     <message>
         <source>Slow Startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrage lent</translation>
     </message>
     <message>
         <source>Disable Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver les notifications de démarrage lent</translation>
     </message>
     <message>
         <source>Slow Startup Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notifications de démarrage lent</translation>
     </message>
     <message>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment désactiver les notifications de démarrage lent ?</translation>
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les notifications de démarrage lent ont été désactivées.</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les notifications de démarrage lent ont été réactivées.</translation>
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation type="unfinished"></translation>
+        <translation> Renommer les fichiers de sortie </translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommez les fichiers de sortie</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro de piste avec zéro non significatif</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre de piste</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de l&apos;artiste</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de l&apos;album</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished"></translation>
+        <translation>Année avec (au moins) quatre chiffres</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Commentaire</translation>
+        <translation>Commentaire</translation>
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer les macros</translation>
     </message>
     <message>
         <source>You can enter custom parameters here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez entrer des paramètres personnalisés !</translation>
     </message>
     <message>
         <source>Enter the pattern to rename the output files here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrer le modèle pour renommer les fichiers de sortie ici !</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;Remise à zéro&quot;&gt;Remise à zéro&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Afficher la liste des macros&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de fichier sans extension</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer le modèle :</translation>
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Exemple de nom de fichier :</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished"></translation>
+        <translation>Caractères interdits dans les noms de fichier :</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer les sources Downmix stéréo Surround (multi-canal)</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Marquer le dossier de sortie actuel</translation>
     </message>
     <message>
         <source>AAC Encoder-Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options encodeur AAC</translation>
     </message>
     <message>
         <source>MPEG-4 AAC:</source>
-        <translation type="unfinished"></translation>
+        <translation>MPEG-4 AAC :</translation>
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT : La qualité sonore sera très médiocre. &lt;u&gt;Ne&lt;/u&gt; vous plaignez pas de la qualité audio !</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT : La vitesse de traitement sera très lente. Veuillez &lt;u&gt;ne pas&lt;/u&gt; vous plaindre de la vitesse de traitement !</translation>
     </message>
     <message>
         <source>Peak Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Niveau maximum</translation>
     </message>
     <message>
         <source>RMS Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Niveau RMS</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode d&apos;égalisation :</translation>
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation>VERSION DE DÉMONSTRATION</translation>
     </message>
     <message>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise en veille prolongée de l&apos;ordinateur lors de l&apos;arrêt</translation>
     </message>
     <message>
         <source>Hibernate Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise en veille prolongée de l&apos;ordinateur</translation>
     </message>
     <message>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment être mis en veille prolongée lors de l&apos;arrêt de l&apos;ordinateur ?</translation>
     </message>
     <message>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP mettra l&apos;ordinateur en veille prolongée à partir de maintenant.</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP &lt;i&gt;ne mettra pas&lt;/i&gt; l&apos;ordinateur en veille prolongée à partir de maintenant.</translation>
     </message>
     <message>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Astuce : veuillez ignorer le nom du fichier ZIP téléchargé et vérifier le «changelog.txt» inclus à la place !)</translation>
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer la vérification de mise à jour cette fois, veuillez patienter...</translation>
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les balises Meta dans le fichier CSV</translation>
     </message>
     <message>
         <source>Import Meta Tags from CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer les balises Meta depuis le fichier CSV</translation>
     </message>
     <message>
         <source>Save CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder le fichier CSV</translation>
     </message>
     <message>
         <source>CSV File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier CSV</translation>
     </message>
     <message>
         <source>CSV Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter CSV</translation>
     </message>
     <message>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, il n&apos;y a aucune balise meta qui peut être exportée !</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, impossible d&apos;ouvrir le fichier CSV pour l&apos;écriture !</translation>
     </message>
     <message>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, impossible d&apos;écrire dans le fichier CSV !</translation>
     </message>
     <message>
         <source>The CSV files was created successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier CSV a été créé avec succès !</translation>
     </message>
     <message>
         <source>Open CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le fichier CSV</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, impossible d&apos;ouvrir le fichier CSV pour la lecture !</translation>
     </message>
     <message>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, impossible de lire le fichier CSV !</translation>
     </message>
     <message>
         <source>Sorry, the CSV file does not contain any known fields!</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, le fichier CSV ne contient pas tous les champs connus !</translation>
     </message>
     <message>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier CSV est incomplèt. Tous les fichiers n&apos;ont pas été mis à jour !</translation>
     </message>
     <message>
         <source>The CSV files was imported successfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier CSV a été importé avec succès !</translation>
     </message>
     <message>
         <source>CSV Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer CSV</translation>
     </message>
     <message>
         <source>QAAC (Apple)</source>
-        <translation type="unfinished"></translation>
+        <translation>QAAC (Apple)</translation>
     </message>
     <message>
         <source>FHG AAC (Winamp)</source>
-        <translation type="unfinished"></translation>
+        <translation>FHG AAC (Winamp)</translation>
     </message>
     <message>
         <source>Nero AAC</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero AAC</translation>
     </message>
     <message>
         <source>Not available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Non disponible !</translation>
     </message>
     <message>
         <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Encodeur AAC actuel : %1</translation>
     </message>
     <message>
         <source>Edit Output Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier le dossier de sortie</translation>
     </message>
     <message>
         <source>Show Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les favoris</translation>
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisation de la structure du répertoire, veuillez patienter...</translation>
     </message>
     <message>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualiser la structure du répertoire</translation>
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation>MP3</translation>
     </message>
     <message>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg/Vorbis</translation>
     </message>
     <message>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation>AAC/MP4</translation>
     </message>
     <message>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation>PCM/Wave</translation>
     </message>
     <message>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation>A/52</translation>
     </message>
     <message>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation>DCA</translation>
     </message>
     <message>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation>Opus</translation>
     </message>
     <message>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished"></translation>
+        <translation> Options de l&apos;encodeur Opus </translation>
     </message>
     <message>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Complexité de codage :</translation>
     </message>
     <message>
         <source>Frame Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille d&apos;image :</translation>
     </message>
     <message>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation>OpusEnc :</translation>
     </message>
     <message>
         <source>Show Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;aide</translation>
     </message>
     <message>
         <source> Overwrite Mode </source>
-        <translation type="unfinished"></translation>
+        <translation> Mode d&apos;écrasement </translation>
     </message>
     <message>
         <source>Overwrite Existing File</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer le fichier existant</translation>
     </message>
     <message>
         <source>Skip File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer le fichier</translation>
     </message>
     <message>
         <source>Keep Both Files (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Conserver les deux fichiers (par défaut)</translation>
     </message>
     <message>
         <source>If Target File Already Exists:</source>
-        <translation type="unfinished"></translation>
+        <translation>Si le fichier cible existe déjà :</translation>
     </message>
     <message>
         <source>Overwrite Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode d&apos;écrasement</translation>
     </message>
     <message>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT : Ce mode peut remplacer les fichiers existants sans aucun moyen de revenir en arrière !</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenir</translation>
     </message>
     <message>
         <source>Up One Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Remonter d&apos;un niveau</translation>
     </message>
     <message>
         <source>Go To Parent Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller au répertoire parent</translation>
     </message>
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver le rééchantillonnage du décodeur Opus (i.e. toujours 48.000 Hz)</translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fichier(s) ont été rejetés, parce que l&apos;accès en lecture n&apos;a pas été accordé !</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fichier(s) ont été rejetés, car ce sont des fichiers CDDA factices !</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fichier(s) ont été rejetés, parce qu&apos;elles semblent être des images de contenu musical !</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fichier(s) ont été rejetés, parce que le format de fichier peut ne pas être reconnu !</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n Instance(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n Instance(s)</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -2079,19 +2079,19 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Edit this Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier cette information</translation>
     </message>
     <message>
         <source>Copy everything to Meta Info tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout copier dans l&apos;onglet Méta-informations</translation>
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer tous les méta-informations</translation>
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Méta Information : %1</translation>
     </message>
 </context>
 <context>
@@ -2321,52 +2321,53 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Unknown File Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de fichier inconnu</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished">Titre inconnu</translation>
+        <translation>Titre inconnu</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Artiste inconnu</translation>
+        <translation>Artiste inconnu</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Album inconnu</translation>
     </message>
     <message>
         <source>Unknown Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Commentaire inconnu</translation>
     </message>
     <message>
         <source>Analyzing</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyse</translation>
     </message>
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT : La taille du fichier décodé dépasse 4Go, des problèmes peuvent survenir!
+</translation>
     </message>
     <message>
         <source>Skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorée.</translation>
     </message>
     <message>
         <source>Target output file already exists, going to skip this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier de sortie existe déjà, vous allez ignorer ce fichier :</translation>
     </message>
     <message>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous ne voulez pas ignorer les fichiers existants, veuillez changer le mode de remplacement !</translation>
     </message>
     <message>
         <source>Target output file already exists, going to delete existing file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier de sortie existe déjà, vous allez supprimer ce fichier :</translation>
     </message>
     <message>
         <source>Failed to delete existing target file, will save to another file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de supprimer le fichier existant, voulez-vous l&apos;enregistrer sous un autre nom !</translation>
     </message>
 </context>
 <context>
@@ -2420,6 +2421,10 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Le processus a été abandonné par l&apos;utilisateur.</translation>
     </message>
     <message>
+        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
+        <translation>Erreur : %1 de %2 fichier(s) a échoué. Double-cliquez sur les éléments défectueux pour les informations détaillées!</translation>
+    </message>
+    <message>
         <source>LameXP - Error</source>
         <translation>LameXP - Erreur</translation>
     </message>
@@ -2469,115 +2474,96 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisation du CPU (hors tout)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisation de la RAM physique</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished"></translation>
+        <translation>Espace disque libre (dossier Temp)</translation>
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Processus terminé après %1.</translation>
     </message>
     <message>
         <source>Filter Log Items</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Filtrer les éléments du journal</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <source>Show Running Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher uniquement les fichiers en cours</translation>
     </message>
     <message>
         <source>Show Succeeded Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichier uniquement les fichiers terminés</translation>
     </message>
     <message>
         <source>Show Failed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher uniquement les échecs</translation>
     </message>
     <message>
         <source>Show Skipped Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher uniquement les fichiers ignorés</translation>
     </message>
     <message>
         <source>Show All Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher tous les éléments</translation>
+    </message>
+    <message>
+        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
+        <translation>Erreur : %1 de %2 fichiers échoués (%3 fichiers ignorés). Double-cliquez sur les éléments ayant échoués pour plus d&apos;informations !</translation>
+    </message>
+    <message>
+        <source>All files completed successfully. Skipped %1 files.</source>
+        <translation>Tous les fichiers terminées avec succès. %1 fichiers ignorés.</translation>
     </message>
     <message>
         <source>None of the items matches the current filtering rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Les règles de filtrage actuelles ne correspondent à aucun des éléments</translation>
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n file(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n fichier(s) !</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n heure(s)</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n minute(s)</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n seconde(s)</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n milliseconde(s)</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>%n file(s) skipped</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>All files completed successfully. Skipped %n file(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Encodage : %n fichier(s) sur %1 terminé(s) pour l&apos;instant, veuillez patienter...</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -2605,11 +2591,11 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;exécutable &apos;%1&apos; nécessite Windows 2000 ou supérieur.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;exécutable &apos;%1&apos; a été construit pour Qt &apos;%2&apos;, mais a trouvé Qt &apos;%3&apos;.</translation>
     </message>
 </context>
 <context>
