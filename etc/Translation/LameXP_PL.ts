@@ -288,12 +288,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="711"/>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">refalac - Koder/dekoder ALAC na platformę Win32 działający z wiersza poleceń</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="713"/>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Referencyjna implementacja formatu ALAC firmy Apple jest dostępna na licencji Apache.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="718"/>
@@ -600,9 +600,9 @@
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Process was aborted by the user after %n track(s)!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Proces został przerwany przez użytkownika po zakończeniu %n ścieżki!</numerusform>
+            <numerusform>Proces został przerwany przez użytkownika po zakończeniu %n ścieżek!</numerusform>
+            <numerusform>Proces został przerwany przez użytkownika po zakończeniu %n ścieżek!</numerusform>
         </translation>
     </message>
     <message>
@@ -614,18 +614,18 @@
         <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Zaimportowano %n ścieżkę z pliku Cue Sheet.</numerusform>
+            <numerusform>Zaimportowano %n ścieżki z pliku Cue Sheet.</numerusform>
+            <numerusform>Zaimportowano %n ścieżek z pliku Cue Sheet.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
         <source>Skipped %n track(s).</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Pominięto %n ścieżkę.</numerusform>
+            <numerusform>Pominięto %n ścieżki.</numerusform>
+            <numerusform>Pominięto %n ścieżek.</numerusform>
         </translation>
     </message>
     <message>
@@ -1190,12 +1190,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2291"/>
         <source>Peak Level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wg poziomu szczytowego</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2296"/>
         <source>RMS Level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wg poziomu RMS</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2286"/>
@@ -1205,7 +1205,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="365"/>
         <source>Up One Level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Do góry o jeden poziom</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="387"/>
@@ -1511,32 +1511,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3807"/>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wyłącz zmianę częstotliwości dźwięku dekodera Opus (np. zawsze na wyjściu 48.000 Hz)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3857"/>
         <source> Overwrite Mode </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb nadpisywania</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3878"/>
         <source>Overwrite Existing File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nadpisz istniejący plik</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3885"/>
         <source>Skip File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pomiń plik</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3895"/>
         <source>Keep Both Files (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zachowaj obydwa pliki (Domyślnie)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3905"/>
         <source>If Target File Already Exists:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jeśli plik o takiej samej nazwie już istnieje to:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4052"/>
@@ -1932,7 +1932,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1351"/>
         <source>n/a</source>
-        <translation type="unfinished">n/d</translation>
+        <translation type="unfinished">b/d</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1352"/>
@@ -2051,36 +2051,36 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
         <source>%n file(s) have been rejected, because read access was not granted!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n plik został odrzucony, ponieważ nie dano praw odczytu!</numerusform>
+            <numerusform>%n pliki zostały odrzucone, ponieważ nie dano praw odczytu!</numerusform>
+            <numerusform>%n plików zostało odrzuconych, ponieważ nie dano praw odczytu!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n plik został odrzucony, ponieważ jest to plik CDDA!</numerusform>
+            <numerusform>%n pliki zostały odrzucone, ponieważ są to pliki CDDA!</numerusform>
+            <numerusform>%n plików zostało odrzuconych, ponieważ są to pliki CDDA!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n plik został odrzucony, ponieważ jest to plik Cue!</numerusform>
+            <numerusform>%n pliki zostały odrzucone, ponieważ są to pliki Cue!</numerusform>
+            <numerusform>%n plików zostało odrzuconych, ponieważ są to pliki Cue!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n plik został odrzucony, ponieważ jego format nie został rozpoznany!</numerusform>
+            <numerusform>%n pliki zostały odrzucone, ponieważ ich format nie został rozpoznany!</numerusform>
+            <numerusform>%n plików zostało odrzuconych, ponieważ ich format nie został rozpoznany!</numerusform>
         </translation>
     </message>
     <message>
@@ -2096,7 +2096,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="991"/>
         <source>Go To Parent Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Idź do głównego folderu</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="993"/>
@@ -2579,9 +2579,9 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="3837"/>
         <source>%n Instance(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n wątek</numerusform>
+            <numerusform>%n wątki</numerusform>
+            <numerusform>%n wątków</numerusform>
         </translation>
     </message>
     <message>
@@ -2592,22 +2592,22 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Overwrite Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb nadpisywania</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ostrzeżenie: W tym trybie istniejące pliki będą nadpisywane bez możliwości ich odzyskania!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kontynuuj</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4001"/>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cofnij</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4066"/>
@@ -2617,7 +2617,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4066"/>
         <source>LameXP is already running, please use the running instance!</source>
-        <translation type="unfinished">LameXP już działa, przejdź do działającego programu!</translation>
+        <translation type="unfinished">LameXP już działa, przejdź do działającego procesu!</translation>
     </message>
 </context>
 <context>
@@ -2916,7 +2916,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="139"/>
         <source>Skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pominięto.</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="144"/>
@@ -2957,7 +2957,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="275"/>
         <source>Aborted!</source>
-        <translation type="unfinished">Przerwane!</translation>
+        <translation type="unfinished">Przerwano!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="275"/>
@@ -3032,22 +3032,22 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="396"/>
         <source>Target output file already exists, going to skip this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Plik wynikowy już istnieje, zostanie pominięty plik:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="397"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jeśli nie chcesz aby istniejące pliki były pomijane, zmień tryb nadpisywania!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="404"/>
         <source>Target output file already exists, going to delete existing file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Plik wynikowy już istnieje, zostanie usunięty plik:</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="414"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usuwanie istniejącego pliku zakończone niepowodzeniem, nowy plik zostanie zapisany pod inną nazwą!</translation>
     </message>
 </context>
 <context>
@@ -3108,32 +3108,32 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="209"/>
         <source>Filter Log Items</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtruj długie pozycje</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="211"/>
         <source>Show Running Only</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż tylko trwające</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="212"/>
         <source>Show Succeeded Only</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż tylko zakończone pomyślnie</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="213"/>
         <source>Show Failed Only</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż tylko zakończone niepowodzeniem</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="214"/>
         <source>Show Skipped Only</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż tylko pominięte</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="215"/>
         <source>Show All Items</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż wszystkie pozycje</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="267"/>
@@ -3164,9 +3164,9 @@
         <location filename="../../src/Dialog_Processing.cpp" line="570"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Kompresowanie: %n plik z %1 został do tej pory zakończony, prosze czekać...</numerusform>
+            <numerusform>Kompresowanie: %n pliki z %1 zostały do tej pory zakończone, prosze czekać...</numerusform>
+            <numerusform>Kompresowanie: %n plików z %1 zostało do tej pory zakończonych, prosze czekać...</numerusform>
         </translation>
     </message>
     <message>
@@ -3183,9 +3183,9 @@
         <location filename="../../src/Dialog_Processing.cpp" line="608"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Proces został zakończony przez użytkownika  po zakończeniu %n pliku!</numerusform>
+            <numerusform>Proces został zakończony przez użytkownika  po zakończeniu %n plików!</numerusform>
+            <numerusform>Proces został zakończony przez użytkownika  po zakończeniu %n plików!</numerusform>
         </translation>
     </message>
     <message>
@@ -3207,36 +3207,36 @@
         <location filename="../../src/Dialog_Processing.cpp" line="636"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Błąd: %1 z %n pliku zakończono niepowodzeniem (%2). Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
+            <numerusform>Błąd: %1 z %n plików zakończono niepowodzeniem (%2). Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
+            <numerusform>Błąd: %1 z %n plików zakończono niepowodzeniem (%2). Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="636"/>
         <source>%n file(s) skipped</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>pominięto %n plik</numerusform>
+            <numerusform>pominięto %n pliki</numerusform>
+            <numerusform>pominięto %n plików</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="640"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Błąd: %1 z %n pliku zakończono niepowodzeniem. Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
+            <numerusform>Błąd: %1 z %n plików zakończono niepowodzeniem. Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
+            <numerusform>Błąd: %1 z %n plików zakończono niepowodzeniem. Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="654"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Wszystkie zadania wykonano pomyślnie. Pominięto %n plik.</numerusform>
+            <numerusform>Wszystkie zadania wykonano pomyślnie. Pominięto %n pliki.</numerusform>
+            <numerusform>Wszystkie zadania wykonano pomyślnie. Pominięto %n plików.</numerusform>
         </translation>
     </message>
     <message>
@@ -3263,7 +3263,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="854"/>
         <source>None of the items matches the current filtering rules</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Żadna z pozycji nie spełnia reguł filtra</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1160"/>
@@ -3290,9 +3290,9 @@
         <location filename="../../src/Dialog_Processing.cpp" line="1291"/>
         <source>%n hour(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n godzina</numerusform>
+            <numerusform>%n godziny</numerusform>
+            <numerusform>%n godzin</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -3300,9 +3300,9 @@
         <location filename="../../src/Dialog_Processing.cpp" line="1296"/>
         <source>%n minute(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n minuta</numerusform>
+            <numerusform>%n minuty</numerusform>
+            <numerusform>%n minut</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -3310,18 +3310,18 @@
         <location filename="../../src/Dialog_Processing.cpp" line="1301"/>
         <source>%n second(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n sekunda</numerusform>
+            <numerusform>%n sekundy</numerusform>
+            <numerusform>%n sekund</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="1302"/>
         <source>%n millisecond(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n milisekunda</numerusform>
+            <numerusform>%n milisekundy</numerusform>
+            <numerusform>%n milisekund</numerusform>
         </translation>
     </message>
 </context>
