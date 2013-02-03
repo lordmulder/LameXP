@@ -2421,10 +2421,6 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Le processus a été abandonné par l&apos;utilisateur.</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed. Double-click failed items for detailed information!</source>
-        <translation>Erreur : %1 de %2 fichier(s) a échoué. Double-cliquez sur les éléments défectueux pour les informations détaillées!</translation>
-    </message>
-    <message>
         <source>LameXP - Error</source>
         <translation>LameXP - Erreur</translation>
     </message>
@@ -2514,14 +2510,6 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Afficher tous les éléments</translation>
     </message>
     <message>
-        <source>Error: %1 of %2 files failed (%3 files skipped). Double-click failed items for detailed information!</source>
-        <translation>Erreur : %1 de %2 fichiers échoués (%3 fichiers ignorés). Double-cliquez sur les éléments ayant échoués pour plus d&apos;informations !</translation>
-    </message>
-    <message>
-        <source>All files completed successfully. Skipped %1 files.</source>
-        <translation>Tous les fichiers terminées avec succès. %1 fichiers ignorés.</translation>
-    </message>
-    <message>
         <source>None of the items matches the current filtering rules</source>
         <translation>Les règles de filtrage actuelles ne correspondent à aucun des éléments</translation>
     </message>
@@ -2564,6 +2552,34 @@ Ouvrir le dossier récursivement...</translation>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Encodage : %n fichier(s) sur %1 terminé(s) pour l&apos;instant, veuillez patienter...</numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n file(s) skipped</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>All files completed successfully. Skipped %n file(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
