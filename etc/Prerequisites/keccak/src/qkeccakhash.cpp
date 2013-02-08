@@ -2,7 +2,7 @@
 **                                                                        **
 **  QKeccakHash, an API wrapper bringing the optimized implementation of  **
 **  Keccak (http://keccak.noekeon.org/) to Qt.                            **
-**  Copyright (C) 2012 Emanuel Eichhammer                                 **
+**  Copyright (C) 2013 Emanuel Eichhammer                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
