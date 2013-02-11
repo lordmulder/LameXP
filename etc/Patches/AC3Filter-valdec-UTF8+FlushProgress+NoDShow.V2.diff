@@ -1,0 +1,1801 @@
+ tools/Release/valdec.exe              | Bin 5513728 -> 5512704 bytes
+ tools/valdec.cpp                      | 140 +++++++++++++++---------
+ tools/valdec.sln                      |  17 +--
+ tools/valdec.suo                      | Bin 11776 -> 31744 bytes
+ valib/3rdparty/faad/decoder.c         |  14 +--
+ valib/3rdparty/faad/drm_dec.c         |   8 +-
+ valib/3rdparty/faad/filtbank.c        |  10 +-
+ valib/3rdparty/faad/huffman.c         |  10 +-
+ valib/3rdparty/faad/mdct.c            |   4 +-
+ valib/3rdparty/faad/ps_dec.c          |  42 +++----
+ valib/3rdparty/faad/rvlc.c            |  18 +--
+ valib/3rdparty/faad/sbr_dec.c         |   8 +-
+ valib/3rdparty/faad/sbr_fbt.c         |  46 ++++----
+ valib/3rdparty/faad/sbr_syntax.c      |  38 +++----
+ valib/3rdparty/faad/specrec.c         |  36 +++---
+ valib/3rdparty/faad/syntax.c          |  54 ++++-----
+ valib/3rdparty/faad/tns.c             |   4 +-
+ valib/3rdparty/libmpg123/icy2utf8.c   |   2 +-
+ valib/3rdparty/libmpg123/optimize.c   |   4 +-
+ valib/valib/auto_file.cpp             |   3 +-
+ valib/valib/auto_file.h               |   4 +-
+ valib/valib/log.cpp                   |   2 +-
+ valib/valib/sink/sink_dsound.cpp      |   2 +-
+ valib/valib/version.h                 |   4 -
+ valib/valib/win32/unicode_support.c   | 199 ++++++++++++++++++++++++++++++++++
+ valib/valib/win32/unicode_support.cpp |  86 +++++++++++++++
+ valib/valib/win32/unicode_support.h   |  57 ++++++++++
+ 27 files changed, 592 insertions(+), 220 deletions(-)
+
+diff --git a/tools/Release/valdec.exe b/tools/Release/valdec.exe
+index 995954e..12b8e8f 100644
+Binary files a/tools/Release/valdec.exe and b/tools/Release/valdec.exe differ
+diff --git a/tools/valdec.cpp b/tools/valdec.cpp
+index 5582c8d..965e201 100644
+--- a/tools/valdec.cpp
++++ b/tools/valdec.cpp
+@@ -23,6 +23,7 @@
+ 
+ // other
+ #include "win32/cpu.h"
++#include "win32/unicode_support.h"
+ #include "vargs.h"
+ 
+ #include "valdec_usage.txt.h"
+@@ -94,12 +95,12 @@ const enum_opt format_tbl[] =
+   { "7", FORMAT_PCMDOUBLE },
+ };
+ 
+-int valdec(int argc, const char *argv[])
++int valdec(int argc, const char **argv)
+ {
+   using std::string;
+   if (argc < 2)
+   {
+-    printf(usage);
++    fprintf(stderr, usage);
+     return 1;
+   }
+ 
+@@ -179,7 +180,7 @@ int valdec(int argc, const char *argv[])
+     {
+       if (parser)
+       {
+-        printf("-ac3 : ambiguous parser\n");
++        fprintf(stderr, "-ac3 : ambiguous parser\n");
+         return 1;
+       }
+ 
+@@ -192,7 +193,7 @@ int valdec(int argc, const char *argv[])
+     {
+       if (parser)
+       {
+-        printf("-dts : ambiguous parser\n");
++        fprintf(stderr, "-dts : ambiguous parser\n");
+         return 1;
+       }
+ 
+@@ -205,7 +206,7 @@ int valdec(int argc, const char *argv[])
+     {
+       if (parser)
+       {
+-        printf("-mpa : ambiguous parser\n");
++        fprintf(stderr, "-mpa : ambiguous parser\n");
+         return 1;
+       }
+ 
+@@ -223,7 +224,7 @@ int valdec(int argc, const char *argv[])
+       int new_mask;
+       if (!arg_enum(argv[iarg], new_mask, mask_tbl, array_size(mask_tbl)))
+       {
+-        printf("-spk : unknown channel layout: %s\n", arg_text(argv[iarg]));
++        fprintf(stderr, "-spk : unknown channel layout: %s\n", arg_text(argv[iarg]));
+         return 1;
+       }
+       mask |= new_mask;
+@@ -235,7 +236,7 @@ int valdec(int argc, const char *argv[])
+     {
+       if (!arg_enum(argv[iarg], format, format_tbl, array_size(format_tbl)))
+       {
+-        printf("-fmt : unknown sample format: %s\n", arg_text(argv[iarg]));
++        fprintf(stderr, "-fmt : unknown sample format: %s\n", arg_text(argv[iarg]));
+         return 1;
+       }
+       continue;
+@@ -257,7 +258,7 @@ int valdec(int argc, const char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-decode : ambiguous output mode\n");
++        fprintf(stderr, "-decode : ambiguous output mode\n");
+         return 1;
+       }
+ 
+@@ -273,7 +274,7 @@ int valdec(int argc, const char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-play : ambiguous output mode\n");
++        fprintf(stderr, "-play : ambiguous output mode\n");
+         return 1;
+       }
+ 
+@@ -289,12 +290,12 @@ int valdec(int argc, const char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-raw : ambiguous output mode\n");
++        fprintf(stderr, "-raw : ambiguous output mode\n");
+         return 1;
+       }
+       if (argc - iarg < 1)
+       {
+-        printf("-raw : specify a file name\n");
++        fprintf(stderr, "-raw : specify a file name\n");
+         return 1;
+       }
+ 
+@@ -311,12 +312,12 @@ int valdec(int argc, const char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-wav : ambiguous output mode\n");
++        fprintf(stderr, "-wav : ambiguous output mode\n");
+         return 1;
+       }
+       if (argc - iarg < 1)
+       {
+-        printf("-wav : specify a file name\n");
++        fprintf(stderr, "-wav : specify a file name\n");
+         return 1;
+       }
+ 
+@@ -333,7 +334,7 @@ int valdec(int argc, const char *argv[])
+     {
+       if (sink)
+       {
+-        printf("-nothing : ambiguous output mode\n");
++        fprintf(stderr, "-nothing : ambiguous output mode\n");
+         return 1;
+       }
+ 
+@@ -541,7 +542,7 @@ int valdec(int argc, const char *argv[])
+     }
+     if (have_delay) continue;
+ 
+-    printf("Error: unknown option: %s\n", argv[iarg]);
++    fprintf(stderr, "Error: unknown option: %s\n", argv[iarg]);
+     return 1;
+   }
+ 
+@@ -554,13 +555,13 @@ int valdec(int argc, const char *argv[])
+ 
+   if (!file.open(input_filename, parser, 1000000))
+   {
+-    printf("Error: Cannot open file '%s'\n", input_filename);
++    fprintf(stderr, "Error: Cannot open file '%s'\n", input_filename);
+     return 1;
+   }
+ 
+   if (!file.stats() || !file.probe())
+   {
+-    printf("Error: Cannot detect input file format\n", input_filename);
++    fprintf(stderr, "Error: Cannot detect input file format\n", input_filename);
+     return 1;
+   }
+ 
+@@ -570,8 +571,8 @@ int valdec(int argc, const char *argv[])
+ 
+   if (print_info)
+   {
+-    printf("%s\n", file.file_info().c_str());
+-    printf("%s", file.stream_info().c_str());
++    fprintf(stderr, "%s\n", file.file_info().c_str());
++    fprintf(stderr, "%s", file.stream_info().c_str());
+   }
+ 
+   if (mode == mode_nothing)
+@@ -592,14 +593,14 @@ int valdec(int argc, const char *argv[])
+   Speakers user_spk(format, mask, sample_rate);
+   if (!dvd_graph.set_user(user_spk))
+   {
+-    printf("Error: unsupported user format %s\n", user_spk.print());
++    fprintf(stderr, "Error: unsupported user format %s\n", user_spk.print());
+     return 1;
+   }
+ 
+   Speakers in_spk = file.get_output();
+   if (!dvd_graph.open(in_spk))
+   {
+-    printf("Error: unsupported file format %s\n", in_spk.print());
++    fprintf(stderr, "Error: unsupported file format %s\n", in_spk.print());
+     return 1;
+   }
+ 
+@@ -633,7 +634,7 @@ int valdec(int argc, const char *argv[])
+     case mode_raw:
+       if (!out_filename || !raw.open_file(out_filename))
+       {
+-        printf("Error: failed to open output file '%s'\n", out_filename);
++        fprintf(stderr, "Error: failed to open output file '%s'\n", out_filename);
+         return 1;
+       }
+       break;
+@@ -641,7 +642,7 @@ int valdec(int argc, const char *argv[])
+     case mode_wav:
+       if (!out_filename || !wav.open_file(out_filename))
+       {
+-        printf("Error: failed to open output file '%s'\n", out_filename);
++        fprintf(stderr, "Error: failed to open output file '%s'\n", out_filename);
+         return 1;
+       }
+       break;
+@@ -649,7 +650,7 @@ int valdec(int argc, const char *argv[])
+     case mode_play:
+       if (!dsound.open_dsound(0))
+       {
+-        printf("Error: failed to init DirectSound\n");
++        fprintf(stderr, "Error: failed to init DirectSound\n");
+         return 1;
+       }
+       break;
+@@ -681,7 +682,7 @@ int valdec(int argc, const char *argv[])
+ 
+   file.seek(0);
+ 
+-  #define PRINT_STAT                                                                                           \
++  #define PRINT_STAT do                                                                                        \
+   {                                                                                                            \
+     if (control)                                                                                               \
+     {                                                                                                          \
+@@ -698,10 +699,16 @@ int valdec(int argc, const char *argv[])
+       int(value2db(level)),                                                                                    \
+       int(file.get_frames() / time),                                                                           \
+       cpu_current.usage() * 100);                                                                              \
+-  }
++	fflush(stderr);                                                                                            \
++  }                                                                                                            \
++  while(0)
+ 
+-  #define DROP_STAT \
+-    fprintf(stderr, "                                                                             \r");
++  #define DROP_STAT do                                                                                         \
++  {                                                                                                            \
++    fprintf(stderr, "                                                                             \r");        \
++	fflush(stderr);                                                                                            \
++  }                                                                                                            \
++  while(0)
+ 
+   while (file.get_chunk(chunk))
+   {
+@@ -714,7 +721,7 @@ int valdec(int argc, const char *argv[])
+         PRINT_STAT;
+ 
+       if (streams > 0 && print_info)
+-        printf("\n\n%s", file.stream_info().c_str());
++        fprintf(stderr, "\n\n%s", file.stream_info().c_str());
+ 
+       streams++;
+       if (mode == mode_nothing)
+@@ -729,11 +736,11 @@ int valdec(int argc, const char *argv[])
+         if (sink->open(new_spk))
+         {
+           DROP_STAT;
+-          printf("Opening audio output %s...\n", new_spk.print().c_str());
++          fprintf(stderr, "Opening audio output %s...\n", new_spk.print().c_str());
+         }
+         else
+         {
+-          printf("\nOutput format %s is unsupported\n", new_spk.print().c_str());
++          fprintf(stderr, "\nOutput format %s is unsupported\n", new_spk.print().c_str());
+           return 1;
+         }
+       }
+@@ -760,11 +767,11 @@ int valdec(int argc, const char *argv[])
+       if (sink->open(new_spk))
+       {
+         DROP_STAT;
+-        printf("Opening audio output %s...\n", new_spk.print().c_str());
++        fprintf(stderr, "Opening audio output %s...\n", new_spk.print().c_str());
+       }
+       else
+       {
+-        printf("\nOutput format %s is unsupported\n", new_spk.print().c_str());
++        fprintf(stderr, "\nOutput format %s is unsupported\n", new_spk.print().c_str());
+         return 1;
+       }
+     }
+@@ -783,13 +790,13 @@ int valdec(int argc, const char *argv[])
+   // Final statistics
+ 
+   PRINT_STAT;
+-  printf("\n---------------------------------------\n");
++  fprintf(stderr, "\n---------------------------------------\n");
+   if (streams > 1)
+-    printf("Streams found: %i\n", streams);
+-  printf("Frames: %i\n", file.get_frames());
+-  printf("System time: %ims\n", int(cpu_total.get_system_time() * 1000));
+-  printf("Process time: %ims\n", int(cpu_total.get_thread_time() * 1000 ));
+-  printf("Approx. %.2f%% realtime CPU usage\n", double(cpu_total.get_thread_time() * 100) / file.get_size(file.time));
++    fprintf(stderr, "Streams found: %i\n", streams);
++  fprintf(stderr, "Frames: %i\n", file.get_frames());
++  fprintf(stderr, "System time: %ims\n", int(cpu_total.get_system_time() * 1000));
++  fprintf(stderr, "Process time: %ims\n", int(cpu_total.get_thread_time() * 1000 ));
++  fprintf(stderr, "Approx. %.2f%% realtime CPU usage\n", double(cpu_total.get_thread_time() * 100) / file.get_size(file.time));
+ 
+   /////////////////////////////////////////////////////////
+   // Print levels histogram
+@@ -806,27 +813,27 @@ int valdec(int argc, const char *argv[])
+     max_level = dvd_graph.proc.get_max_level();
+     dbpb = dvd_graph.proc.get_dbpb();
+ 
+-    printf("\nHistogram:\n");
+-    printf("------------------------------------------------------------------------------\n");
++    fprintf(stderr, "\nHistogram:\n");
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
+     for (i = 0; i*dbpb < 100 && i < MAX_HISTOGRAM; i++)
+     {
+-      printf("%2idB: %4.1f ", i * dbpb, hist[i] * 100);
++      fprintf(stderr, "%2idB: %4.1f ", i * dbpb, hist[i] * 100);
+       for (j = 0; j < 67 && j < hist[i] * 67; j++)
+-        printf("*");
+-      printf("\n");
++        fprintf(stderr, "*");
++      fprintf(stderr, "\n");
+     }
+-    printf("------------------------------------------------------------------------------\n");
+-    printf("max_level;%f\ndbpb;%i\nhistogram;", max_level, dbpb);
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
++    fprintf(stderr, "max_level;%f\ndbpb;%i\nhistogram;", max_level, dbpb);
+     for (i = 0; i < MAX_HISTOGRAM; i++)
+-      printf("%.4f;", hist[i]);
+-    printf("\n");
+-    printf("------------------------------------------------------------------------------\n");
++      fprintf(stderr, "%.4f;", hist[i]);
++    fprintf(stderr, "\n");
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
+   }
+ 
+   return 0;
+ }
+ 
+-int main(int argc, const char *argv[])
++int valdec_main(int argc, const char **argv)
+ {
+   try
+   {
+@@ -834,8 +841,39 @@ int main(int argc, const char *argv[])
+   }
+   catch (ValibException &e)
+   {
+-    printf("Processing error: %s\n", boost::diagnostic_information(e).c_str());
++    fprintf(stderr, "Processing error: %s\n", boost::diagnostic_information(e).c_str());
+     return -1;
+   }
+   return 0;
+ }
++
++int main(int argc, char *argv[])
++{
++  int argc_utf8;
++  char **argv_utf8;
++  int exit_code;
++
++  __try
++  {
++	init_console_utf8();
++	init_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++  }
++  __except(1)
++  {
++    __noop();
++  }
++  
++  exit_code = valdec_main(argc_utf8, const_cast<const char**>(argv_utf8));
++
++  __try
++  {
++    uninit_console_utf8();
++    free_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++  }
++  __except(1)
++  {
++    __noop();
++  }
++  
++  return exit_code;
++}
+diff --git a/tools/valdec.sln b/tools/valdec.sln
+index 22b4d5b..3e76282 100644
+--- a/tools/valdec.sln
++++ b/tools/valdec.sln
+@@ -1,18 +1,13 @@
+ ﻿
+-Microsoft Visual Studio Solution File, Format Version 10.00
+-# Visual Studio 2008
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "valdec", "valdec.vcproj", "{871889DF-6EF7-461F-AC1B-7DA682CB79A0}"
+-	ProjectSection(ProjectDependencies) = postProject
+-		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C} = {30FCD216-1CAD-48FD-BF4B-337572F7EC9C}
+-		{11F10C24-A2EC-4514-AD78-85CF2FEF698D} = {11F10C24-A2EC-4514-AD78-85CF2FEF698D}
+-		{B8D9A742-1BED-4B8D-BC46-3D1669F3405E} = {B8D9A742-1BED-4B8D-BC46-3D1669F3405E}
+-	EndProjectSection
++Microsoft Visual Studio Solution File, Format Version 11.00
++# Visual Studio 2010
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "valdec", "valdec.vcxproj", "{871889DF-6EF7-461F-AC1B-7DA682CB79A0}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "valib", "..\valib\lib\valib.vcproj", "{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "valib", "..\valib\lib\valib.vcxproj", "{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpa", "..\valib\lib\mpa.vcproj", "{11F10C24-A2EC-4514-AD78-85CF2FEF698D}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpa", "..\valib\lib\mpa.vcxproj", "{11F10C24-A2EC-4514-AD78-85CF2FEF698D}"
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aac", "..\valib\lib\aac.vcproj", "{B8D9A742-1BED-4B8D-BC46-3D1669F3405E}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aac", "..\valib\lib\aac.vcxproj", "{B8D9A742-1BED-4B8D-BC46-3D1669F3405E}"
+ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+diff --git a/tools/valdec.suo b/tools/valdec.suo
+index 90eaeea..a9bc645 100644
+Binary files a/tools/valdec.suo and b/tools/valdec.suo differ
+diff --git a/valib/3rdparty/faad/decoder.c b/valib/3rdparty/faad/decoder.c
+index 85dd423..1dbc040 100644
+--- a/valib/3rdparty/faad/decoder.c
++++ b/valib/3rdparty/faad/decoder.c
+@@ -512,11 +512,11 @@ void NEAACDECAPI NeAACDecClose(NeAACDecHandle hpDecoder)
+         return;
+ 
+ #ifdef PROFILE
+-    printf("AAC decoder total:  %I64d cycles\n", hDecoder->cycles);
+-    printf("requant:            %I64d cycles\n", hDecoder->requant_cycles);
+-    printf("spectral_data:      %I64d cycles\n", hDecoder->spectral_cycles);
+-    printf("scalefactors:       %I64d cycles\n", hDecoder->scalefac_cycles);
+-    printf("output:             %I64d cycles\n", hDecoder->output_cycles);
++    fprintf(stderr, "AAC decoder total:  %I64d cycles\n", hDecoder->cycles);
++    fprintf(stderr, "requant:            %I64d cycles\n", hDecoder->requant_cycles);
++    fprintf(stderr, "spectral_data:      %I64d cycles\n", hDecoder->spectral_cycles);
++    fprintf(stderr, "scalefactors:       %I64d cycles\n", hDecoder->scalefac_cycles);
++    fprintf(stderr, "output:             %I64d cycles\n", hDecoder->output_cycles);
+ #endif
+ 
+     for (i = 0; i < MAX_CHANNELS; i++)
+@@ -852,7 +852,7 @@ static void* aac_frame_decode(NeAACDecStruct *hDecoder,
+     }
+ 
+ #if 0
+-    printf("%d\n", buffer_size*8);
++    fprintf(stderr, "%d\n", buffer_size*8);
+ #endif
+ 
+     frame_len = hDecoder->frameLength;
+@@ -901,7 +901,7 @@ static void* aac_frame_decode(NeAACDecStruct *hDecoder,
+             buf = faad_getbitbuffer(&ld, 32);
+             //temp = getdword((void*)buf);
+             temp = *((uint32_t*)buf);
+-            printf("0x%.8X\n", temp);
++            fprintf(stderr, "0x%.8X\n", temp);
+             free(buf);
+         }
+         faad_endbits(&ld);
+diff --git a/valib/3rdparty/faad/drm_dec.c b/valib/3rdparty/faad/drm_dec.c
+index 61cb818..0a72fce 100644
+--- a/valib/3rdparty/faad/drm_dec.c
++++ b/valib/3rdparty/faad/drm_dec.c
+@@ -522,11 +522,11 @@ static int8_t huff_dec(bitfile *ld, drm_ps_huff_tab huff)
+ static int8_t sa_delta_clip(drm_ps_info *ps, int8_t i)
+ {
+     if (i < 0) {
+-      /*  printf(" SAminclip %d", i); */
++      /*  fprintf(stderr, " SAminclip %d", i); */
+         ps->sa_decode_error = 1;
+         return 0;
+     } else if (i > 7) {
+-     /*   printf(" SAmaxclip %d", i); */
++     /*   fprintf(stderr, " SAmaxclip %d", i); */
+         ps->sa_decode_error = 1;
+         return 7;
+     } else
+@@ -536,11 +536,11 @@ static int8_t sa_delta_clip(drm_ps_info *ps, int8_t i)
+ static int8_t pan_delta_clip(drm_ps_info *ps, int8_t i)
+ {   
+     if (i < -7) {
+-        /* printf(" PANminclip %d", i); */
++        /* fprintf(stderr, " PANminclip %d", i); */
+         ps->pan_decode_error = 1;
+         return -7;
+     } else if (i > 7) {
+-       /* printf(" PANmaxclip %d", i);  */
++       /* fprintf(stderr, " PANmaxclip %d", i);  */
+         ps->pan_decode_error = 1;
+         return 7;
+     } else
+diff --git a/valib/3rdparty/faad/filtbank.c b/valib/3rdparty/faad/filtbank.c
+index 1b1464b..8665c27 100644
+--- a/valib/3rdparty/faad/filtbank.c
++++ b/valib/3rdparty/faad/filtbank.c
+@@ -97,7 +97,7 @@ void filter_bank_end(fb_info *fb)
+     if (fb != NULL)
+     {
+ #ifdef PROFILE
+-        printf("FB:                 %I64d cycles\n", fb->cycles);
++        fprintf(stderr, "FB:                 %I64d cycles\n", fb->cycles);
+ #endif
+ 
+         faad_mdct_end(fb->mdct256);
+@@ -203,12 +203,12 @@ void ifilter_bank(fb_info *fb, uint8_t window_sequence, uint8_t window_shape,
+ #if 0
+     for (i = 0; i < 1024; i++)
+     {
+-        printf("%d\n", freq_in[i]);
++        fprintf(stderr, "%d\n", freq_in[i]);
+     }
+ #endif
+ 
+ #if 0
+-    printf("%d %d\n", window_sequence, window_shape);
++    fprintf(stderr, "%d %d\n", window_sequence, window_shape);
+ #endif
+ 
+     switch (window_sequence)
+@@ -319,8 +319,8 @@ void ifilter_bank(fb_info *fb, uint8_t window_sequence, uint8_t window_shape,
+ #if 0
+     for (i = 0; i < 1024; i++)
+     {
+-        printf("%d\n", time_out[i]);
+-        //printf("0x%.8X\n", time_out[i]);
++        fprintf(stderr, "%d\n", time_out[i]);
++        //fprintf(stderr, "0x%.8X\n", time_out[i]);
+     }
+ #endif
+ 
+diff --git a/valib/3rdparty/faad/huffman.c b/valib/3rdparty/faad/huffman.c
+index e2656c0..44b08f7 100644
+--- a/valib/3rdparty/faad/huffman.c
++++ b/valib/3rdparty/faad/huffman.c
+@@ -67,7 +67,7 @@ int8_t huffman_scale_factor(bitfile *ld)
+ 
+         if (offset > 240)
+         {
+-            /* printf("ERROR: offset into hcb_sf = %d >240!\n", offset); */
++            /* fprintf(stderr, "ERROR: offset into hcb_sf = %d >240!\n", offset); */
+             return -1;
+         }
+     }
+@@ -179,7 +179,7 @@ static uint8_t huffman_2step_quad(uint8_t cb, bitfile *ld, int16_t *sp)
+ 
+     if (offset > hcb_2_quad_table_size[cb])
+     {
+-        /* printf("ERROR: offset into hcb_2_quad_table = %d >%d!\n", offset,
++        /* fprintf(stderr, "ERROR: offset into hcb_2_quad_table = %d >%d!\n", offset,
+            hcb_2_quad_table_size[cb]); */
+         return 10;
+     }
+@@ -222,7 +222,7 @@ static uint8_t huffman_2step_pair(uint8_t cb, bitfile *ld, int16_t *sp)
+ 
+     if (offset > hcb_2_pair_table_size[cb])
+     {
+-        /* printf("ERROR: offset into hcb_2_pair_table = %d >%d!\n", offset,
++        /* fprintf(stderr, "ERROR: offset into hcb_2_pair_table = %d >%d!\n", offset,
+            hcb_2_pair_table_size[cb]); */
+         return 10;
+     }
+@@ -254,7 +254,7 @@ static uint8_t huffman_binary_quad(uint8_t cb, bitfile *ld, int16_t *sp)
+ 
+     if (offset > hcb_bin_table_size[cb])
+     {
+-        /* printf("ERROR: offset into hcb_bin_table = %d >%d!\n", offset,
++        /* fprintf(stderr, "ERROR: offset into hcb_bin_table = %d >%d!\n", offset,
+            hcb_bin_table_size[cb]); */
+         return 10;
+     }
+@@ -288,7 +288,7 @@ static uint8_t huffman_binary_pair(uint8_t cb, bitfile *ld, int16_t *sp)
+ 
+     if (offset > hcb_bin_table_size[cb])
+     {
+-        /* printf("ERROR: offset into hcb_bin_table = %d >%d!\n", offset,
++        /* fprintf(stderr, "ERROR: offset into hcb_bin_table = %d >%d!\n", offset,
+            hcb_bin_table_size[cb]); */
+         return 10;
+     }
+diff --git a/valib/3rdparty/faad/mdct.c b/valib/3rdparty/faad/mdct.c
+index 247691e..9756f84 100644
+--- a/valib/3rdparty/faad/mdct.c
++++ b/valib/3rdparty/faad/mdct.c
+@@ -109,8 +109,8 @@ void faad_mdct_end(mdct_info *mdct)
+     if (mdct != NULL)
+     {
+ #ifdef PROFILE
+-        printf("MDCT[%.4d]:         %I64d cycles\n", mdct->N, mdct->cycles);
+-        printf("CFFT[%.4d]:         %I64d cycles\n", mdct->N/4, mdct->fft_cycles);
++        fprintf(stderr, "MDCT[%.4d]:         %I64d cycles\n", mdct->N, mdct->cycles);
++        fprintf(stderr, "CFFT[%.4d]:         %I64d cycles\n", mdct->N/4, mdct->fft_cycles);
+ #endif
+ 
+         cfftu(mdct->cfft);
+diff --git a/valib/3rdparty/faad/ps_dec.c b/valib/3rdparty/faad/ps_dec.c
+index 6d9c7be..ec73230 100644
+--- a/valib/3rdparty/faad/ps_dec.c
++++ b/valib/3rdparty/faad/ps_dec.c
+@@ -643,8 +643,8 @@ static void delta_decode(uint8_t enable, int8_t *index, int8_t *index_prev,
+                 //int8_t tmp2;
+                 //int8_t tmp = index[i];
+ 
+-                //printf("%d %d\n", index_prev[i*stride], index[i]);
+-                //printf("%d\n", index[i]);
++                //fprintf(stderr, "%d %d\n", index_prev[i*stride], index[i]);
++                //fprintf(stderr, "%d\n", index[i]);
+ 
+                 index[i] = index_prev[i*stride] + index[i];
+                 //tmp2 = index[i];
+@@ -654,7 +654,7 @@ static void delta_decode(uint8_t enable, int8_t *index, int8_t *index_prev,
+                 //{
+                 //    if (index[i] == 7)
+                 //    {
+-                //        printf("%d %d %d\n", index_prev[i*stride], tmp, tmp2);
++                //        fprintf(stderr, "%d %d %d\n", index_prev[i*stride], tmp, tmp2);
+                 //    }
+                 //}
+             }
+@@ -991,41 +991,41 @@ static void ps_data_decode(ps_info *ps)
+ #if 0
+     for (env = 0; env < ps->num_env; env++)
+     {
+-        printf("iid[env:%d]:", env);
++        fprintf(stderr, "iid[env:%d]:", env);
+         for (bin = 0; bin < 34; bin++)
+         {
+-            printf(" %d", ps->iid_index[env][bin]);
++            fprintf(stderr, " %d", ps->iid_index[env][bin]);
+         }
+-        printf("\n");
++        fprintf(stderr, "\n");
+     }
+     for (env = 0; env < ps->num_env; env++)
+     {
+-        printf("icc[env:%d]:", env);
++        fprintf(stderr, "icc[env:%d]:", env);
+         for (bin = 0; bin < 34; bin++)
+         {
+-            printf(" %d", ps->icc_index[env][bin]);
++            fprintf(stderr, " %d", ps->icc_index[env][bin]);
+         }
+-        printf("\n");
++        fprintf(stderr, "\n");
+     }
+     for (env = 0; env < ps->num_env; env++)
+     {
+-        printf("ipd[env:%d]:", env);
++        fprintf(stderr, "ipd[env:%d]:", env);
+         for (bin = 0; bin < 17; bin++)
+         {
+-            printf(" %d", ps->ipd_index[env][bin]);
++            fprintf(stderr, " %d", ps->ipd_index[env][bin]);
+         }
+-        printf("\n");
++        fprintf(stderr, "\n");
+     }
+     for (env = 0; env < ps->num_env; env++)
+     {
+-        printf("opd[env:%d]:", env);
++        fprintf(stderr, "opd[env:%d]:", env);
+         for (bin = 0; bin < 17; bin++)
+         {
+-            printf(" %d", ps->opd_index[env][bin]);
++            fprintf(stderr, " %d", ps->opd_index[env][bin]);
+         }
+-        printf("\n");
++        fprintf(stderr, "\n");
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ }
+ 
+@@ -1109,9 +1109,9 @@ static void ps_decorrelate(ps_info *ps, qmf_t X_left[38][64], qmf_t X_right[38][
+         for (bk = 0; bk < 34; bk++)
+         {
+ #ifdef FIXED_POINT
+-            printf("%d %d: %d\n", n, bk, P[n][bk] /*/(float)REAL_PRECISION*/);
++            fprintf(stderr, "%d %d: %d\n", n, bk, P[n][bk] /*/(float)REAL_PRECISION*/);
+ #else
+-            printf("%d %d: %f\n", n, bk, P[n][bk]/1024.0);
++            fprintf(stderr, "%d %d: %f\n", n, bk, P[n][bk]/1024.0);
+ #endif
+         }
+     }
+@@ -1154,9 +1154,9 @@ static void ps_decorrelate(ps_info *ps, qmf_t X_left[38][64], qmf_t X_right[38][
+         for (bk = 0; bk < 34; bk++)
+         {
+ #ifdef FIXED_POINT
+-            printf("%d %d: %f\n", n, bk, G_TransientRatio[n][bk]/(float)REAL_PRECISION);
++            fprintf(stderr, "%d %d: %f\n", n, bk, G_TransientRatio[n][bk]/(float)REAL_PRECISION);
+ #else
+-            printf("%d %d: %f\n", n, bk, G_TransientRatio[n][bk]);
++            fprintf(stderr, "%d %d: %f\n", n, bk, G_TransientRatio[n][bk]);
+ #endif
+         }
+     }
+@@ -1506,7 +1506,7 @@ static void ps_mix_phase(ps_info *ps, qmf_t X_left[38][64], qmf_t X_right[38][64
+                 beta = alpha * ( c_1 - c_2 ) / sqrt(2.0);
+                 */
+ 
+-                //printf("%d\n", ps->iid_index[env][bk]);
++                //fprintf(stderr, "%d\n", ps->iid_index[env][bk]);
+ 
+                 /* calculate the scalefactors c_1 and c_2 from the intensity differences */
+                 c_1 = sf_iid[no_iid_steps + ps->iid_index[env][bk]];
+diff --git a/valib/3rdparty/faad/rvlc.c b/valib/3rdparty/faad/rvlc.c
+index 73619c6..9df7f2a 100644
+--- a/valib/3rdparty/faad/rvlc.c
++++ b/valib/3rdparty/faad/rvlc.c
+@@ -179,7 +179,7 @@ static uint8_t rvlc_decode_sf_forward(ic_stream *ics, bitfile *ld_sf, bitfile *l
+     int16_t noise_energy = ics->global_gain - 90 - 256;
+ 
+ #ifdef PRINT_RVLC
+-    printf("\nglobal_gain: %d\n", ics->global_gain);
++    fprintf(stderr, "\nglobal_gain: %d\n", ics->global_gain);
+ #endif
+ 
+     for (g = 0; g < ics->num_window_groups; g++)
+@@ -237,7 +237,7 @@ static uint8_t rvlc_decode_sf_forward(ic_stream *ics, bitfile *ld_sf, bitfile *l
+                     break;
+                 }
+ #ifdef PRINT_RVLC
+-                printf("%3d:%4d%4d\n", sfb, ics->sfb_cb[g][sfb],
++                fprintf(stderr, "%3d:%4d%4d\n", sfb, ics->sfb_cb[g][sfb],
+                     ics->scale_factors[g][sfb]);
+ #endif
+                 if (t == 99)
+@@ -248,7 +248,7 @@ static uint8_t rvlc_decode_sf_forward(ic_stream *ics, bitfile *ld_sf, bitfile *l
+         }
+     }
+ #ifdef PRINT_RVLC
+-    printf("\n\n");
++    fprintf(stderr, "\n\n");
+ #endif
+ 
+     return 0;
+@@ -268,14 +268,14 @@ static uint8_t rvlc_decode_sf_reverse(ic_stream *ics, bitfile *ld_sf, bitfile *l
+     int16_t noise_energy = ics->rev_global_gain;
+ 
+ #ifdef PRINT_RVLC
+-    printf("\nrev_global_gain: %d\n", ics->rev_global_gain);
++    fprintf(stderr, "\nrev_global_gain: %d\n", ics->rev_global_gain);
+ #endif
+ 
+     if (intensity_used)
+     {
+         is_position = rvlc_huffman_sf(ld_sf, ld_esc, -1);
+ #ifdef PRINT_RVLC
+-        printf("is_position: %d\n", is_position);
++        fprintf(stderr, "is_position: %d\n", is_position);
+ #endif
+     }
+ 
+@@ -340,7 +340,7 @@ static uint8_t rvlc_decode_sf_reverse(ic_stream *ics, bitfile *ld_sf, bitfile *l
+                     break;
+                 }
+ #ifdef PRINT_RVLC
+-                printf("%3d:%4d%4d\n", sfb, ics->sfb_cb[g][sfb],
++                fprintf(stderr, "%3d:%4d%4d\n", sfb, ics->sfb_cb[g][sfb],
+                     ics->scale_factors[g][sfb]);
+ #endif
+                 if (t == 99)
+@@ -352,7 +352,7 @@ static uint8_t rvlc_decode_sf_reverse(ic_stream *ics, bitfile *ld_sf, bitfile *l
+     }
+ 
+ #ifdef PRINT_RVLC
+-    printf("\n\n");
++    fprintf(stderr, "\n\n");
+ #endif
+ 
+     return 0;
+@@ -483,7 +483,7 @@ static int8_t rvlc_huffman_sf(bitfile *ld_sf, bitfile *ld_esc,
+             return 99;
+         index += esc;
+ #ifdef PRINT_RVLC
+-        printf("esc: %d - ", esc);
++        fprintf(stderr, "esc: %d - ", esc);
+ #endif
+     }
+     if (index == -ESC_VAL)
+@@ -493,7 +493,7 @@ static int8_t rvlc_huffman_sf(bitfile *ld_sf, bitfile *ld_esc,
+             return 99;
+         index -= esc;
+ #ifdef PRINT_RVLC
+-        printf("esc: %d - ", esc);
++        fprintf(stderr, "esc: %d - ", esc);
+ #endif
+     }
+ 
+diff --git a/valib/3rdparty/faad/sbr_dec.c b/valib/3rdparty/faad/sbr_dec.c
+index 0705ddd..1aefdf0 100644
+--- a/valib/3rdparty/faad/sbr_dec.c
++++ b/valib/3rdparty/faad/sbr_dec.c
+@@ -324,7 +324,7 @@ static uint8_t sbr_process_channel(sbr_info *sbr, real_t *channel_buf, qmf_t X[M
+         int i;
+         for (i = 0; i < 1024; i++)
+         {
+-            printf("%d\n", channel_buf[i]);
++            fprintf(stderr, "%d\n", channel_buf[i]);
+         }
+     }
+ #endif
+@@ -516,11 +516,11 @@ uint8_t sbrDecodeCoupleFrame(sbr_info *sbr, real_t *left_chan, real_t *right_cha
+         int i;
+         for (i = 0; i < 2048; i++)
+         {
+-            printf("%d\n", left_chan[i]);
++            fprintf(stderr, "%d\n", left_chan[i]);
+         }
+         for (i = 0; i < 2048; i++)
+         {
+-            printf("%d\n", right_chan[i]);
++            fprintf(stderr, "%d\n", right_chan[i]);
+         }
+     }
+ #endif
+@@ -587,7 +587,7 @@ uint8_t sbrDecodeSingleFrame(sbr_info *sbr, real_t *channel,
+         int i;
+         for (i = 0; i < 2048; i++)
+         {
+-            printf("%d\n", channel[i]);
++            fprintf(stderr, "%d\n", channel[i]);
+         }
+     }
+ #endif
+diff --git a/valib/3rdparty/faad/sbr_fbt.c b/valib/3rdparty/faad/sbr_fbt.c
+index 5919c7b..edd11eb 100644
+--- a/valib/3rdparty/faad/sbr_fbt.c
++++ b/valib/3rdparty/faad/sbr_fbt.c
+@@ -245,12 +245,12 @@ uint8_t master_frequency_table_fs0(sbr_info *sbr, uint8_t k0, uint8_t k2,
+     sbr->N_master = (min(sbr->N_master, 64));
+ 
+ #if 0
+-    printf("f_master[%d]: ", nrBands);
++    fprintf(stderr, "f_master[%d]: ", nrBands);
+     for (k = 0; k <= nrBands; k++)
+     {
+-        printf("%d ", sbr->f_master[k]);
++        fprintf(stderr, "%d ", sbr->f_master[k]);
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ 
+     return 0;
+@@ -492,12 +492,12 @@ uint8_t master_frequency_table(sbr_info *sbr, uint8_t k0, uint8_t k2,
+     }
+ 
+ #if 0
+-    printf("f_master[%d]: ", sbr->N_master);
++    fprintf(stderr, "f_master[%d]: ", sbr->N_master);
+     for (k = 0; k <= sbr->N_master; k++)
+     {
+-        printf("%d ", sbr->f_master[k]);
++        fprintf(stderr, "%d ", sbr->f_master[k]);
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ 
+     return 0;
+@@ -544,22 +544,22 @@ uint8_t derived_frequency_table(sbr_info *sbr, uint8_t bs_xover_band,
+     }
+ 
+ #if 0
+-    printf("bs_freq_scale: %d\n", sbr->bs_freq_scale);
+-    printf("bs_limiter_bands: %d\n", sbr->bs_limiter_bands);
+-    printf("f_table_res[HI_RES][%d]: ", sbr->N_high);
++    fprintf(stderr, "bs_freq_scale: %d\n", sbr->bs_freq_scale);
++    fprintf(stderr, "bs_limiter_bands: %d\n", sbr->bs_limiter_bands);
++    fprintf(stderr, "f_table_res[HI_RES][%d]: ", sbr->N_high);
+     for (k = 0; k <= sbr->N_high; k++)
+     {
+-        printf("%d ", sbr->f_table_res[HI_RES][k]);
++        fprintf(stderr, "%d ", sbr->f_table_res[HI_RES][k]);
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ #if 0
+-    printf("f_table_res[LO_RES][%d]: ", sbr->N_low);
++    fprintf(stderr, "f_table_res[LO_RES][%d]: ", sbr->N_low);
+     for (k = 0; k <= sbr->N_low; k++)
+     {
+-        printf("%d ", sbr->f_table_res[LO_RES][k]);
++        fprintf(stderr, "%d ", sbr->f_table_res[LO_RES][k]);
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ 
+     sbr->N_Q = 0;
+@@ -603,12 +603,12 @@ uint8_t derived_frequency_table(sbr_info *sbr, uint8_t bs_xover_band,
+     }
+ 
+ #if 0
+-    printf("f_table_noise[%d]: ", sbr->N_Q);
++    fprintf(stderr, "f_table_noise[%d]: ", sbr->N_Q);
+     for (k = 0; k <= sbr->N_Q; k++)
+     {
+-        printf("%d ", sbr->f_table_noise[k] - sbr->kx);
++        fprintf(stderr, "%d ", sbr->f_table_noise[k] - sbr->kx);
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ 
+     return 0;
+@@ -639,12 +639,12 @@ void limiter_frequency_table(sbr_info *sbr)
+     sbr->N_L[0] = 1;
+ 
+ #if 0
+-    printf("f_table_lim[%d][%d]: ", 0, sbr->N_L[0]);
++    fprintf(stderr, "f_table_lim[%d][%d]: ", 0, sbr->N_L[0]);
+     for (k = 0; k <= sbr->N_L[0]; k++)
+     {
+-        printf("%d ", sbr->f_table_lim[0][k]);
++        fprintf(stderr, "%d ", sbr->f_table_lim[0][k]);
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ 
+     for (s = 1; s < 4; s++)
+@@ -751,12 +751,12 @@ restart:
+         }
+ 
+ #if 0
+-        printf("f_table_lim[%d][%d]: ", s, sbr->N_L[s]);
++        fprintf(stderr, "f_table_lim[%d][%d]: ", s, sbr->N_L[s]);
+         for (k = 0; k <= sbr->N_L[s]; k++)
+         {
+-            printf("%d ", sbr->f_table_lim[s][k]);
++            fprintf(stderr, "%d ", sbr->f_table_lim[s][k]);
+         }
+-        printf("\n");
++        fprintf(stderr, "\n");
+ #endif
+     }
+ }
+diff --git a/valib/3rdparty/faad/sbr_syntax.c b/valib/3rdparty/faad/sbr_syntax.c
+index 6c9b97c..44372ad 100644
+--- a/valib/3rdparty/faad/sbr_syntax.c
++++ b/valib/3rdparty/faad/sbr_syntax.c
+@@ -68,12 +68,12 @@ static void sinusoidal_coding(bitfile *ld, sbr_info *sbr, uint8_t ch);
+ static void sbr_reset(sbr_info *sbr)
+ {
+ #if 0
+-    printf("%d\n", sbr->bs_start_freq_prev);
+-    printf("%d\n", sbr->bs_stop_freq_prev);
+-    printf("%d\n", sbr->bs_freq_scale_prev);
+-    printf("%d\n", sbr->bs_alter_scale_prev);
+-    printf("%d\n", sbr->bs_xover_band_prev);
+-    printf("%d\n\n", sbr->bs_noise_bands_prev);
++    fprintf(stderr, "%d\n", sbr->bs_start_freq_prev);
++    fprintf(stderr, "%d\n", sbr->bs_stop_freq_prev);
++    fprintf(stderr, "%d\n", sbr->bs_freq_scale_prev);
++    fprintf(stderr, "%d\n", sbr->bs_alter_scale_prev);
++    fprintf(stderr, "%d\n", sbr->bs_xover_band_prev);
++    fprintf(stderr, "%d\n\n", sbr->bs_noise_bands_prev);
+ #endif
+ 
+     /* if these are different from the previous frame: Reset = 1 */
+@@ -325,24 +325,24 @@ static void sbr_header(bitfile *ld, sbr_info *sbr)
+ 
+ #if 0
+     /* print the header to screen */
+-    printf("bs_amp_res: %d\n", sbr->bs_amp_res);
+-    printf("bs_start_freq: %d\n", sbr->bs_start_freq);
+-    printf("bs_stop_freq: %d\n", sbr->bs_stop_freq);
+-    printf("bs_xover_band: %d\n", sbr->bs_xover_band);
++    fprintf(stderr, "bs_amp_res: %d\n", sbr->bs_amp_res);
++    fprintf(stderr, "bs_start_freq: %d\n", sbr->bs_start_freq);
++    fprintf(stderr, "bs_stop_freq: %d\n", sbr->bs_stop_freq);
++    fprintf(stderr, "bs_xover_band: %d\n", sbr->bs_xover_band);
+     if (bs_header_extra_1)
+     {
+-        printf("bs_freq_scale: %d\n", sbr->bs_freq_scale);
+-        printf("bs_alter_scale: %d\n", sbr->bs_alter_scale);
+-        printf("bs_noise_bands: %d\n", sbr->bs_noise_bands);
++        fprintf(stderr, "bs_freq_scale: %d\n", sbr->bs_freq_scale);
++        fprintf(stderr, "bs_alter_scale: %d\n", sbr->bs_alter_scale);
++        fprintf(stderr, "bs_noise_bands: %d\n", sbr->bs_noise_bands);
+     }
+     if (bs_header_extra_2)
+     {
+-        printf("bs_limiter_bands: %d\n", sbr->bs_limiter_bands);
+-        printf("bs_limiter_gains: %d\n", sbr->bs_limiter_gains);
+-        printf("bs_interpol_freq: %d\n", sbr->bs_interpol_freq);
+-        printf("bs_smoothing_mode: %d\n", sbr->bs_smoothing_mode);
++        fprintf(stderr, "bs_limiter_bands: %d\n", sbr->bs_limiter_bands);
++        fprintf(stderr, "bs_limiter_gains: %d\n", sbr->bs_limiter_gains);
++        fprintf(stderr, "bs_interpol_freq: %d\n", sbr->bs_interpol_freq);
++        fprintf(stderr, "bs_smoothing_mode: %d\n", sbr->bs_smoothing_mode);
+     }
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ }
+ 
+@@ -806,7 +806,7 @@ static uint8_t sbr_grid(bitfile *ld, sbr_info *sbr, uint8_t ch)
+ #if 0
+     for (env = 0; env < bs_num_env; env++)
+     {
+-        printf("freq_res[ch:%d][env:%d]: %d\n", ch, env, sbr->f[ch][env]);
++        fprintf(stderr, "freq_res[ch:%d][env:%d]: %d\n", ch, env, sbr->f[ch][env]);
+     }
+ #endif
+ 
+diff --git a/valib/3rdparty/faad/specrec.c b/valib/3rdparty/faad/specrec.c
+index 011b80b..e601d0c 100644
+--- a/valib/3rdparty/faad/specrec.c
++++ b/valib/3rdparty/faad/specrec.c
+@@ -455,8 +455,8 @@ static INLINE real_t iquant(int16_t q, const real_t *tab, uint8_t *error)
+     {
+ //#define IQUANT_PRINT
+ #ifdef IQUANT_PRINT
+-        //printf("0x%.8X\n", sgn * tab[q]);
+-        printf("%d\n", sgn * tab[q]);
++        //fprintf(stderr, "0x%.8X\n", sgn * tab[q]);
++        fprintf(stderr, "%d\n", sgn * tab[q]);
+ #endif
+         return sgn * tab[q];
+     }
+@@ -656,14 +656,14 @@ static uint8_t quant_to_spec(NeAACDecStruct *hDecoder,
+ 
+ //#define SCFS_PRINT
+ #ifdef SCFS_PRINT
+-                    printf("%d\n", spec_data[gindex+(win*win_inc)+j+bin+0]);
+-                    printf("%d\n", spec_data[gindex+(win*win_inc)+j+bin+1]);
+-                    printf("%d\n", spec_data[gindex+(win*win_inc)+j+bin+2]);
+-                    printf("%d\n", spec_data[gindex+(win*win_inc)+j+bin+3]);
+-                    //printf("0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+0]);
+-                    //printf("0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+1]);
+-                    //printf("0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+2]);
+-                    //printf("0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+3]);
++                    fprintf(stderr, "%d\n", spec_data[gindex+(win*win_inc)+j+bin+0]);
++                    fprintf(stderr, "%d\n", spec_data[gindex+(win*win_inc)+j+bin+1]);
++                    fprintf(stderr, "%d\n", spec_data[gindex+(win*win_inc)+j+bin+2]);
++                    fprintf(stderr, "%d\n", spec_data[gindex+(win*win_inc)+j+bin+3]);
++                    //fprintf(stderr, "0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+0]);
++                    //fprintf(stderr, "0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+1]);
++                    //fprintf(stderr, "0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+2]);
++                    //fprintf(stderr, "0x%.8X\n", spec_data[gindex+(win*win_inc)+j+bin+3]);
+ #endif
+ #endif
+ 
+@@ -1152,13 +1152,13 @@ uint8_t reconstruct_channel_pair(NeAACDecStruct *hDecoder, ic_stream *ics1, ic_s
+         int i;
+         for (i = 0; i < 1024; i++)
+         {
+-            //printf("%d\n", spec_coef1[i]);
+-            printf("0x%.8X\n", spec_coef1[i]);
++            //fprintf(stderr, "%d\n", spec_coef1[i]);
++            fprintf(stderr, "0x%.8X\n", spec_coef1[i]);
+         }
+         for (i = 0; i < 1024; i++)
+         {
+-            //printf("%d\n", spec_coef2[i]);
+-            printf("0x%.8X\n", spec_coef2[i]);
++            //fprintf(stderr, "%d\n", spec_coef2[i]);
++            fprintf(stderr, "0x%.8X\n", spec_coef2[i]);
+         }
+     }
+ #endif
+@@ -1171,13 +1171,13 @@ uint8_t reconstruct_channel_pair(NeAACDecStruct *hDecoder, ic_stream *ics1, ic_s
+         int i;
+         for (i = 0; i < 1024; i++)
+         {
+-            printf("%d\n", spec_coef1[i]);
+-            //printf("0x%.8X\n", spec_coef1[i]);
++            fprintf(stderr, "%d\n", spec_coef1[i]);
++            //fprintf(stderr, "0x%.8X\n", spec_coef1[i]);
+         }
+         for (i = 0; i < 1024; i++)
+         {
+-            printf("%d\n", spec_coef2[i]);
+-            //printf("0x%.8X\n", spec_coef2[i]);
++            fprintf(stderr, "%d\n", spec_coef2[i]);
++            //fprintf(stderr, "0x%.8X\n", spec_coef2[i]);
+         }
+     }
+ #endif
+diff --git a/valib/3rdparty/faad/syntax.c b/valib/3rdparty/faad/syntax.c
+index f8e808c..185b8d2 100644
+--- a/valib/3rdparty/faad/syntax.c
++++ b/valib/3rdparty/faad/syntax.c
+@@ -903,12 +903,12 @@ static uint8_t pulse_data(ic_stream *ics, pulse_info *pul, bitfile *ld)
+         pul->pulse_offset[i] = (uint8_t)faad_getbits(ld, 5
+             DEBUGVAR(1,58,"pulse_data(): pulse_offset"));
+ #if 0
+-        printf("%d\n", pul->pulse_offset[i]);
++        fprintf(stderr, "%d\n", pul->pulse_offset[i]);
+ #endif
+         pul->pulse_amp[i] = (uint8_t)faad_getbits(ld, 4
+             DEBUGVAR(1,59,"pulse_data(): pulse_amp"));
+ #if 0
+-        printf("%d\n", pul->pulse_amp[i]);
++        fprintf(stderr, "%d\n", pul->pulse_amp[i]);
+ #endif
+     }
+ 
+@@ -1089,7 +1089,7 @@ static uint8_t fill_element(NeAACDecStruct *hDecoder, bitfile *ld, drc_info *drc
+ #if 0
+             if (hDecoder->sbr[sbr_ele]->ret > 0)
+             {
+-                printf("%s\n", NeAACDecGetErrorMessage(hDecoder->sbr[sbr_ele]->ret));
++                fprintf(stderr, "%s\n", NeAACDecGetErrorMessage(hDecoder->sbr[sbr_ele]->ret));
+             }
+ #endif
+ 
+@@ -1661,8 +1661,8 @@ static uint8_t section_data(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *l
+     sect_esc_val = (1<<sect_bits) - 1;
+ 
+ #if 0
+-    printf("\ntotal sfb %d\n", ics->max_sfb);
+-    printf("   sect    top     cb\n");
++    fprintf(stderr, "\ntotal sfb %d\n", ics->max_sfb);
++    fprintf(stderr, "   sect    top     cb\n");
+ #endif
+ 
+     for (g = 0; g < ics->num_window_groups; g++)
+@@ -1697,7 +1697,7 @@ static uint8_t section_data(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *l
+                 return 32;
+ 
+ #if 0
+-            printf("%d\n", ics->sect_cb[g][i]);
++            fprintf(stderr, "%d\n", ics->sect_cb[g][i]);
+ #endif
+ 
+ #ifndef DRM
+@@ -1744,10 +1744,10 @@ static uint8_t section_data(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *l
+             ics->sect_end[g][i] = k + sect_len;
+ 
+ #if 0
+-            printf("%d\n", ics->sect_start[g][i]);
++            fprintf(stderr, "%d\n", ics->sect_start[g][i]);
+ #endif
+ #if 0
+-            printf("%d\n", ics->sect_end[g][i]);
++            fprintf(stderr, "%d\n", ics->sect_end[g][i]);
+ #endif
+ 
+             if (ics->window_sequence == EIGHT_SHORT_SEQUENCE)
+@@ -1767,12 +1767,12 @@ static uint8_t section_data(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *l
+             {
+                 ics->sfb_cb[g][sfb] = ics->sect_cb[g][i];
+ #if 0
+-                printf("%d\n", ics->sfb_cb[g][sfb]);
++                fprintf(stderr, "%d\n", ics->sfb_cb[g][sfb]);
+ #endif
+             }
+ 
+ #if 0
+-            printf(" %6d %6d %6d\n",
++            fprintf(stderr, " %6d %6d %6d\n",
+                 i,
+                 ics->sect_end[g][i],
+                 ics->sect_cb[g][i]);
+@@ -1790,12 +1790,12 @@ static uint8_t section_data(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *l
+             return 32;
+         }
+ #if 0
+-        printf("%d\n", ics->num_sec[g]);
++        fprintf(stderr, "%d\n", ics->num_sec[g]);
+ #endif
+     }
+ 
+ #if 0
+-    printf("\n");
++    fprintf(stderr, "\n");
+ #endif
+ 
+     return 0;
+@@ -1832,7 +1832,7 @@ static uint8_t decode_scale_factors(ic_stream *ics, bitfile *ld)
+                 ics->scale_factors[g][sfb] = 0;
+ //#define SF_PRINT
+ #ifdef SF_PRINT
+-                printf("%d\n", ics->scale_factors[g][sfb]);
++                fprintf(stderr, "%d\n", ics->scale_factors[g][sfb]);
+ #endif
+                 break;
+             case INTENSITY_HCB: /* intensity books */
+@@ -1843,7 +1843,7 @@ static uint8_t decode_scale_factors(ic_stream *ics, bitfile *ld)
+                 is_position += (t - 60);
+                 ics->scale_factors[g][sfb] = is_position;
+ #ifdef SF_PRINT
+-                printf("%d\n", ics->scale_factors[g][sfb]);
++                fprintf(stderr, "%d\n", ics->scale_factors[g][sfb]);
+ #endif
+ 
+                 break;
+@@ -1863,7 +1863,7 @@ static uint8_t decode_scale_factors(ic_stream *ics, bitfile *ld)
+                 noise_energy += t;
+                 ics->scale_factors[g][sfb] = noise_energy;
+ #ifdef SF_PRINT
+-                printf("%d\n", ics->scale_factors[g][sfb]);
++                fprintf(stderr, "%d\n", ics->scale_factors[g][sfb]);
+ #endif
+ #else
+                 /* PNS not allowed in DRM */
+@@ -1884,7 +1884,7 @@ static uint8_t decode_scale_factors(ic_stream *ics, bitfile *ld)
+                     return 4;
+                 ics->scale_factors[g][sfb] = scale_factor;
+ #ifdef SF_PRINT
+-                printf("%d\n", ics->scale_factors[g][sfb]);
++                fprintf(stderr, "%d\n", ics->scale_factors[g][sfb]);
+ #endif
+ 
+                 break;
+@@ -1946,7 +1946,7 @@ static void tns_data(ic_stream *ics, tns_info *tns, bitfile *ld)
+         tns->n_filt[w] = (uint8_t)faad_getbits(ld, n_filt_bits
+             DEBUGVAR(1,74,"tns_data(): n_filt"));
+ #if 0
+-        printf("%d\n", tns->n_filt[w]);
++        fprintf(stderr, "%d\n", tns->n_filt[w]);
+ #endif
+ 
+         if (tns->n_filt[w])
+@@ -1959,7 +1959,7 @@ static void tns_data(ic_stream *ics, tns_info *tns, bitfile *ld)
+                 start_coef_bits = 3;
+             }
+ #if 0
+-            printf("%d\n", tns->coef_res[w]);
++            fprintf(stderr, "%d\n", tns->coef_res[w]);
+ #endif
+         }
+ 
+@@ -1968,24 +1968,24 @@ static void tns_data(ic_stream *ics, tns_info *tns, bitfile *ld)
+             tns->length[w][filt] = (uint8_t)faad_getbits(ld, length_bits
+                 DEBUGVAR(1,76,"tns_data(): length"));
+ #if 0
+-            printf("%d\n", tns->length[w][filt]);
++            fprintf(stderr, "%d\n", tns->length[w][filt]);
+ #endif
+             tns->order[w][filt]  = (uint8_t)faad_getbits(ld, order_bits
+                 DEBUGVAR(1,77,"tns_data(): order"));
+ #if 0
+-            printf("%d\n", tns->order[w][filt]);
++            fprintf(stderr, "%d\n", tns->order[w][filt]);
+ #endif
+             if (tns->order[w][filt])
+             {
+                 tns->direction[w][filt] = faad_get1bit(ld
+                     DEBUGVAR(1,78,"tns_data(): direction"));
+ #if 0
+-                printf("%d\n", tns->direction[w][filt]);
++                fprintf(stderr, "%d\n", tns->direction[w][filt]);
+ #endif
+                 tns->coef_compress[w][filt] = faad_get1bit(ld
+                     DEBUGVAR(1,79,"tns_data(): coef_compress"));
+ #if 0
+-                printf("%d\n", tns->coef_compress[w][filt]);
++                fprintf(stderr, "%d\n", tns->coef_compress[w][filt]);
+ #endif
+ 
+                 coef_bits = start_coef_bits - tns->coef_compress[w][filt];
+@@ -1994,7 +1994,7 @@ static void tns_data(ic_stream *ics, tns_info *tns, bitfile *ld)
+                     tns->coef[w][filt][i] = (uint8_t)faad_getbits(ld, coef_bits
+                         DEBUGVAR(1,80,"tns_data(): coef"));
+ #if 0
+-                    printf("%d\n", tns->coef[w][filt][i]);
++                    fprintf(stderr, "%d\n", tns->coef[w][filt][i]);
+ #endif
+                 }
+             }
+@@ -2104,20 +2104,20 @@ static uint8_t spectral_data(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *
+                     int j;
+                     for (j = ics->sect_sfb_offset[g][ics->sect_start[g][i]]; j < ics->sect_sfb_offset[g][ics->sect_end[g][i]]; j++)
+                     {
+-                        printf("%d\n", 0);
++                        fprintf(stderr, "%d\n", 0);
+                     }
+                 }
+ #endif
+ //#define SFBO_PRINT
+ #ifdef SFBO_PRINT
+-                printf("%d\n", ics->sect_sfb_offset[g][ics->sect_start[g][i]]);
++                fprintf(stderr, "%d\n", ics->sect_sfb_offset[g][ics->sect_start[g][i]]);
+ #endif
+                 p += (ics->sect_sfb_offset[g][ics->sect_end[g][i]] -
+                     ics->sect_sfb_offset[g][ics->sect_start[g][i]]);
+                 break;
+             default:
+ #ifdef SFBO_PRINT
+-                printf("%d\n", ics->sect_sfb_offset[g][ics->sect_start[g][i]]);
++                fprintf(stderr, "%d\n", ics->sect_sfb_offset[g][ics->sect_start[g][i]]);
+ #endif
+                 for (k = ics->sect_sfb_offset[g][ics->sect_start[g][i]];
+                      k < ics->sect_sfb_offset[g][ics->sect_end[g][i]]; k += inc)
+@@ -2129,7 +2129,7 @@ static uint8_t spectral_data(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *
+                         int j;
+                         for (j = p; j < p+inc; j++)
+                         {
+-                            printf("%d\n", spectral_data[j]);
++                            fprintf(stderr, "%d\n", spectral_data[j]);
+                         }
+                     }
+ #endif
+diff --git a/valib/3rdparty/faad/tns.c b/valib/3rdparty/faad/tns.c
+index 6118652..bcaf661 100644
+--- a/valib/3rdparty/faad/tns.c
++++ b/valib/3rdparty/faad/tns.c
+@@ -265,8 +265,8 @@ static void tns_ar_filter(real_t *spectrum, uint16_t size, int8_t inc, real_t *l
+ 
+ //#define TNS_PRINT
+ #ifdef TNS_PRINT
+-        //printf("%d\n", y);
+-        printf("0x%.8X\n", y);
++        //fprintf(stderr, "%d\n", y);
++        fprintf(stderr, "0x%.8X\n", y);
+ #endif
+     }
+ }
+diff --git a/valib/3rdparty/libmpg123/icy2utf8.c b/valib/3rdparty/libmpg123/icy2utf8.c
+index 4e72162..abba33b 100644
+--- a/valib/3rdparty/libmpg123/icy2utf8.c
++++ b/valib/3rdparty/libmpg123/icy2utf8.c
+@@ -428,7 +428,7 @@ main(void)
+ 		return (1);
+ 	}
+ 
+-	printf("Result is:\t\343\200\214%s\343\200\215\n"
++	fprintf(stderr, "Result is:\t\343\200\214%s\343\200\215\n"
+ 		"\t\t\343\200\214%s\343\200\215\n", t, t2);
+ 
+ 	free(t);
+diff --git a/valib/3rdparty/libmpg123/optimize.c b/valib/3rdparty/libmpg123/optimize.c
+index d5aae4c..1d8e9cd 100644
+--- a/valib/3rdparty/libmpg123/optimize.c
++++ b/valib/3rdparty/libmpg123/optimize.c
+@@ -893,8 +893,8 @@ void check_decoders(void )
+ 	getcpuflags(&cpu_flags);
+ 	if(cpu_i586(cpu_flags))
+ 	{
+-		/* not yet: if(cpu_sse2(cpu_flags)) printf(" SSE2");
+-		if(cpu_sse3(cpu_flags)) printf(" SSE3"); */
++		/* not yet: if(cpu_sse2(cpu_flags)) fprintf(stderr, " SSE2");
++		if(cpu_sse3(cpu_flags)) fprintf(stderr, " SSE3"); */
+ #ifdef OPT_SSE
+ 		if(cpu_sse(cpu_flags)) *(d++) = decname[sse];
+ #endif
+diff --git a/valib/valib/auto_file.cpp b/valib/valib/auto_file.cpp
+index a07ef3b..9fe23e2 100644
+--- a/valib/valib/auto_file.cpp
++++ b/valib/valib/auto_file.cpp
+@@ -1,5 +1,6 @@
+ #include <limits>
+ #include "auto_file.h"
++#include "win32/unicode_support.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1400)
+ 
+@@ -39,7 +40,7 @@ bool
+ AutoFile::open(const char *filename, const char *mode)
+ {
+   if (f) close();
+-  f = fopen(filename, mode);
++  f = fopen_utf8(filename, mode);
+   if (f)
+   {
+     filesize = bad_size;
+diff --git a/valib/valib/auto_file.h b/valib/valib/auto_file.h
+index 189d082..4f0d4eb 100644
+--- a/valib/valib/auto_file.h
++++ b/valib/valib/auto_file.h
+@@ -51,7 +51,7 @@
+ 
+   \fn AutoFile::AutoFile(const char *filename, const char *mode = "rb")
+     \param filename File name to open
+-    \param mode Open mode (equivalent to the mode at fopen()).
++    \param mode Open mode (equivalent to the mode at fopen_utf8()).
+ 
+     Create and open a file. In case of failure, is_open() reports false.
+ 
+@@ -67,7 +67,7 @@
+ 
+   \fn bool AutoFile::open(const char *filename, const char *mode = "rb")
+     \param filename File name to open
+-    \param mode Open mode (equivalent to the mode at fopen()).
++    \param mode Open mode (equivalent to the mode at fopen_utf8()).
+     \return Returns true on success and false otherwise.
+ 
+     Open the file.
+diff --git a/valib/valib/log.cpp b/valib/valib/log.cpp
+index f087760..6638e5c 100644
+--- a/valib/valib/log.cpp
++++ b/valib/valib/log.cpp
+@@ -261,7 +261,7 @@ Log::clear_status()
+   // erase status line (if it is)
+   if (istatus)
+   {
+-    printf("                                                                               \r");
++    fprintf(stderr, "                                                                               \r");
+     istatus = 0;
+   }
+ }
+diff --git a/valib/valib/sink/sink_dsound.cpp b/valib/valib/sink/sink_dsound.cpp
+index f22104d..8d8fcf7 100644
+--- a/valib/valib/sink/sink_dsound.cpp
++++ b/valib/valib/sink/sink_dsound.cpp
+@@ -47,7 +47,7 @@ DSoundSink::open_dsound(HWND _hwnd, int _buf_size_ms, int _preload_ms, LPCGUID _
+ 
+   // Open DirectSound
+ 
+-  if FAILED(DirectSoundCreate(_device, &ds, 0))
++  if (1); //FAILED(DirectSoundCreate(_device, &ds, 0))
+     return false;
+ 
+   if (!_hwnd) _hwnd = GetForegroundWindow();
+diff --git a/valib/valib/version.h b/valib/valib/version.h
+index 1b119dd..e69de29 100644
+--- a/valib/valib/version.h
++++ b/valib/valib/version.h
+@@ -1,4 +0,0 @@
+-#define VALIB_HG_REVISION               1675
+-#define VALIB_HG_LOCAL_MODIFICATIONS    1
+-#define VALIB_HG_CHANGESET              "217ad09860f6eb4acc7b0e53cdcbe8b99df2ed56"
+-#define VALIB_HG_CHANGESET_SHORT        "217ad09860f6"
+diff --git a/valib/valib/win32/unicode_support.c b/valib/valib/win32/unicode_support.c
+new file mode 100644
+index 0000000..f2a0a9e
+--- /dev/null
++++ b/valib/valib/win32/unicode_support.c
+@@ -0,0 +1,199 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.c
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#if defined WIN32 || defined _WIN32 || defined WIN64 || defined _WIN64
++
++#include "unicode_support.h"
++
++#include <windows.h>
++#include <io.h>
++
++static UINT g_old_output_cp = ((UINT)-1);
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++char *utf16_to_ansi(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_ACP, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_ACP, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	if(Buffer)
++	{
++		Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = (char**) malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	if(NULL == *argv)
++	{
++		fprintf(stderr, "\nFATAL: Malloc failed\n\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++		if(NULL == (*argv)[i])
++		{
++			fprintf(stderr, "\nFATAL: utf16_to_utf8 failed\n\n");
++			exit(-1);
++		}
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		FILE *fh = NULL;
++		int err = _wfopen_s(&fh, filename_utf16, mode_utf16);
++		if(err == 0) ret = fh;
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
++
++int stat_utf8(const char *path_utf8, struct _stat *buf)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wstat(path_utf16, buf);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
++
++int unlink_utf8(const char *path_utf8)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wunlink(path_utf16);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
++
++void init_console_utf8(void)
++{
++	g_old_output_cp = GetConsoleOutputCP();
++	SetConsoleOutputCP(CP_UTF8);
++}
++
++void uninit_console_utf8(void)
++{
++	if(g_old_output_cp != ((UINT)-1))
++	{
++		SetConsoleOutputCP(g_old_output_cp);
++	}
++}
++
++#endif
+\ No newline at end of file
+diff --git a/valib/valib/win32/unicode_support.cpp b/valib/valib/win32/unicode_support.cpp
+new file mode 100644
+index 0000000..13f89ba
+--- /dev/null
++++ b/valib/valib/win32/unicode_support.cpp
+@@ -0,0 +1,86 @@
++#include "unicode_support.h"
++
++#include <windows.h>
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = new char[BuffSize]; //(char*) malloc(sizeof(char) * BuffSize);
++	Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize, Result;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = new wchar_t[BuffSize]; //(wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = new char*[nArgs]; //malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	if(*argv != NULL)
++	{
++		for(int i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				delete [] ((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		delete [] (*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) delete [] filename_utf16;
++	if(mode_utf16) delete [] mode_utf16;
++
++	return ret;
++}
+diff --git a/valib/valib/win32/unicode_support.h b/valib/valib/win32/unicode_support.h
+new file mode 100644
+index 0000000..41c2783
+--- /dev/null
++++ b/valib/valib/win32/unicode_support.h
+@@ -0,0 +1,57 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.h
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <stdio.h>
++#include <sys/stat.h>
++
++#define WIN_UNICODE 1
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++char *utf16_to_utf8(const wchar_t *input);
++char *utf16_to_ansi(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++int stat_utf8(const char *path_utf8, struct _stat *buf);
++int unlink_utf8(const char *path_utf8);
++void init_console_utf8(void);
++void uninit_console_utf8(void);
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif
+\ No newline at end of file
