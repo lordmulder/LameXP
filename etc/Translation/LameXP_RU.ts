@@ -104,10 +104,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation></translation>
     </message>
@@ -285,6 +281,10 @@
     </message>
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

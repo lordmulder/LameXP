@@ -237,8 +237,8 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="655"/>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools - AC3/DTS Decoder</translation>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="662"/>
@@ -366,7 +366,7 @@
         <translation>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="844"/>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
@@ -3324,23 +3324,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="854"/>
+        <location filename="../../src/Global.cpp" line="855"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation>EXE-filen &apos;%1&apos; stöder inte Windows kompatibilitetsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1108"/>
+        <location filename="../../src/Global.cpp" line="1109"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Qt v%2, du har Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1113"/>
+        <location filename="../../src/Global.cpp" line="1114"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>EXE-filen &apos;%1&apos; är byggd för Qt &apos;%2&apos;, du har Qt &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1126"/>
-        <location filename="../../src/Global.cpp" line="1153"/>
+        <location filename="../../src/Global.cpp" line="1127"/>
+        <location filename="../../src/Global.cpp" line="1154"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Windows 2000 eller senare.</translation>
     </message>

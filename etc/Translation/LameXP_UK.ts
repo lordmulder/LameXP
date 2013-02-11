@@ -104,10 +104,6 @@
         <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools - AC3/DTS Decoder</translation>
-    </message>
-    <message>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - Hybrid Lossless Compression</translation>
     </message>
@@ -287,6 +283,10 @@
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>Оригінальна реалізація ALAC від Apple доступна під ліцензією Apache.</translation>
+    </message>
+    <message>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

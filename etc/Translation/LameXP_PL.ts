@@ -237,8 +237,8 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="655"/>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished">AC3Filter Tools - Dekoder AC3/DTS</translation>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="662"/>
@@ -366,7 +366,7 @@
         <translation type="unfinished">Do programu LameXP jako całości, prawa autorskie posiada LoRd_MuldeR. Prawa autorskie oprogramowania firm trzecich należą do autorów poszczególnych programów.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="844"/>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
         <source>n/a</source>
         <translation type="unfinished">n/d</translation>
     </message>
@@ -3341,23 +3341,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="854"/>
+        <location filename="../../src/Global.cpp" line="855"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1108"/>
+        <location filename="../../src/Global.cpp" line="1109"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1113"/>
+        <location filename="../../src/Global.cpp" line="1114"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1126"/>
-        <location filename="../../src/Global.cpp" line="1153"/>
+        <location filename="../../src/Global.cpp" line="1127"/>
+        <location filename="../../src/Global.cpp" line="1154"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>

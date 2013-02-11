@@ -104,10 +104,6 @@
         <translation type="unfinished">GNU 일반 공중 사용 허가서의 약관 하에 줄시됨.</translation>
     </message>
     <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished">AC3Filter 도구 - AC3/DTS 디코더</translation>
-    </message>
-    <message>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation type="unfinished">WavPack - 하이브리드 무손실 압축</translation>
     </message>
@@ -287,6 +283,10 @@
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translatorcomment>애플의 ALAC 참조 구현은 Apache 라이센스에 따라 사용 가능합니다.</translatorcomment>
         <translation type="unfinished">ALAC reference implementation by Apple is available under the Apache license.</translation>
+    </message>
+    <message>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

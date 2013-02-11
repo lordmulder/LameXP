@@ -120,10 +120,6 @@
         <translation>FAAD - Décodeur AAC MPEG-4 et MPEG-2 AAC Open Source</translation>
     </message>
     <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>Outils AC3Filter - Décodeur AC3/DTS</translation>
-    </message>
-    <message>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - Compression hybride sans perte</translation>
     </message>
@@ -290,6 +286,10 @@
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>L&apos;implémentation de référence ALAC par Apple est disponible sous licence Apache.</translation>
+    </message>
+    <message>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -476,22 +476,22 @@
     <message numerus="yes">
         <source>Process was aborted by the user after %n track(s)!</source>
         <translation>
-            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n piste(s) !</numerusform>
-            <numerusform></numerusform>
+            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n piste !</numerusform>
+            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n pistes !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Imported %n track(s) from the Cue Sheet.</source>
         <translation>
-            <numerusform>%n piste(s) importée(s) depuis le contenu musical.</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n piste importée depuis le contenu musical.</numerusform>
+            <numerusform>%n pistes importées depuis le contenu musical.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Skipped %n track(s).</source>
         <translation>
-            <numerusform>%n piste(s) ignorée(s).</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n piste ignorée.</numerusform>
+            <numerusform>%n pistes ignorées.</numerusform>
         </translation>
     </message>
 </context>
@@ -1995,36 +1995,36 @@ Ouvrir le dossier récursivement...</translation>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because read access was not granted!</source>
         <translation>
-            <numerusform>%n fichier(s) ont été rejetés, parce que l&apos;accès en lecture n&apos;a pas été accordé !</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n fichier a été rejeté, parce que l&apos;accès en lecture n&apos;a pas été accordé !</numerusform>
+            <numerusform>%n fichiers ont été rejetés, parce que l&apos;accès en lecture n&apos;a pas été accordé !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
         <translation>
-            <numerusform>%n fichier(s) ont été rejetés, car ce sont des fichiers CDDA factices !</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n fichier a été rejeté, car c&apos;est un fichier CDDA factice !</numerusform>
+            <numerusform>%n fichiers ont été rejetés, car ce sont des fichiers CDDA factices !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
         <translation>
-            <numerusform>%n fichier(s) ont été rejetés, parce qu&apos;elles semblent être des images de contenu musical !</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n fichier a été rejeté, parce qu&apos;elle semble être une image de contenu musical !</numerusform>
+            <numerusform>%n fichiers ont été rejetés, parce qu&apos;elles semblent être des images de contenu musical !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
         <translation>
-            <numerusform>%n fichier(s) ont été rejetés, parce que le format de fichier peut ne pas être reconnu !</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n fichier a été rejeté, parce que le format de fichier ne peut pas être reconnu !</numerusform>
+            <numerusform>%n fichiers ont été rejetés, parce que le format de fichier ne peut pas être reconnu !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n Instance(s)</source>
         <translation>
-            <numerusform>%n Instance(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n Instance</numerusform>
+            <numerusform>%n Instances</numerusform>
         </translation>
     </message>
 </context>
@@ -2516,71 +2516,71 @@ Ouvrir le dossier récursivement...</translation>
     <message numerus="yes">
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
-            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n fichier(s) !</numerusform>
-            <numerusform></numerusform>
+            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n fichier !</numerusform>
+            <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n fichiers !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation>
-            <numerusform>%n heure(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n heure</numerusform>
+            <numerusform>%n heures</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation>
-            <numerusform>%n minute(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n minute</numerusform>
+            <numerusform>%n minutes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation>
-            <numerusform>%n seconde(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n seconde</numerusform>
+            <numerusform>%n secondes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
         <translation>
-            <numerusform>%n milliseconde(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n milliseconde</numerusform>
+            <numerusform>%n millisecondes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
-            <numerusform>Encodage : %n fichier(s) sur %1 terminé(s) pour l&apos;instant, veuillez patienter...</numerusform>
-            <numerusform></numerusform>
+            <numerusform>Encodage : %n fichier sur %1 terminé pour l&apos;instant, veuillez patienter...</numerusform>
+            <numerusform>Encodage : %n fichiers sur %1 terminés pour l&apos;instant, veuillez patienter...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Erreur : %1 sur %n fichier échoué (%2). Double-cliquez sur l&apos;élément défaillant pour plus d&apos;informations !</numerusform>
+            <numerusform>Erreur : %1 sur %n fichiers échoués (%2). Double-cliquez sur les éléments défaillants pour plus d&apos;informations !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) skipped</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fichier ignoré</numerusform>
+            <numerusform>%n fichiers ignorés</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Erreur : %1 sur %n fichier échoué. Double-cliquez sur l&apos;élément défaillant pour plus d&apos;informations !</numerusform>
+            <numerusform>Erreur : %1 sur %n fichiers échoués. Double-cliquez sur les éléments défaillants pour plus d&apos;informations !</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>All files completed successfully. Skipped %n file(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Tous les fichiers terminés avec succès. %n fichier ignoré.</numerusform>
+            <numerusform>Tous les fichiers terminés avec succès. %n fichiers ignorés.</numerusform>
         </translation>
     </message>
 </context>

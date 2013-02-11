@@ -116,10 +116,6 @@
         <translation>FAAD - Quelloffener MPEG-4 und MPEG-2 AAC Dekodierer</translation>
     </message>
     <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools - AC3/DTS Dekodierer</translation>
-    </message>
-    <message>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - Hybride verlustfreie Kompression</translation>
     </message>
@@ -286,6 +282,10 @@
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>Die ALAC Referenzsoftware von Apple wird unter der Apache-Lizenz veröffentlicht.</translation>
+    </message>
+    <message>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

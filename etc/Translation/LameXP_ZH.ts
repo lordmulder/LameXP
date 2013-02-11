@@ -112,10 +112,6 @@
         <translation>FAAD - 开源MPEG-4和MPEG-2 AAC解码器</translation>
     </message>
     <message>
-        <source>AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>AC3Filter Tools - AC3/DTS解码器</translation>
-    </message>
-    <message>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - 无损压缩混合</translation>
     </message>
@@ -286,6 +282,10 @@
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>ALAC 是在苹果公司Apache许可证下参考实现.</translation>
+    </message>
+    <message>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
