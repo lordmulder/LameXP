@@ -119,10 +119,10 @@ int lamexp_init_ipc(void);
 LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo);
 void lamexp_invalid_param_handler(const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t);
 void lamexp_message_handler(QtMsgType type, const char *msg);
-void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0);
+void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
 bool lamexp_check_tool(const QString &toolName);
 const QString lamexp_lookup_tool(const QString &toolName);
-unsigned int lamexp_tool_version(const QString &toolName);
+unsigned int lamexp_tool_version(const QString &toolName, QString *tag = NULL);
 void lamexp_finalization(void);
 QString lamexp_rand_str(void);
 const QString &lamexp_temp_folder2(void);
@@ -149,7 +149,7 @@ extern const char* LAMEXP_DEFAULT_TRANSLATION;
 
 //Auxiliary functions
 bool lamexp_clean_folder(const QString &folderPath);
-const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText);
+const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag = NULL);
 const QString &lamexp_known_folder(lamexp_known_folder_t folder_id);
 unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok = NULL);
 bool lamexp_remove_file(const QString &filename);

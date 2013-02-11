@@ -233,6 +233,7 @@ static struct
 {
 	QMap<QString, LockedFile*> *registry;
 	QMap<QString, unsigned int> *versions;
+	QMap<QString, QString> *tags;
 	QReadWriteLock lock;
 }
 g_lamexp_tools;
@@ -1567,12 +1568,13 @@ bool lamexp_clean_folder(const QString &folderPath)
 /*
  * Register tool
  */
-void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version)
+void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version, const QString *tag)
 {
 	QWriteLocker writeLock(&g_lamexp_tools.lock);
 	
 	if(!g_lamexp_tools.registry) g_lamexp_tools.registry = new QMap<QString, LockedFile*>();
 	if(!g_lamexp_tools.versions) g_lamexp_tools.versions = new QMap<QString, unsigned int>();
+	if(!g_lamexp_tools.tags) g_lamexp_tools.tags = new QMap<QString, QString>();
 
 	if(g_lamexp_tools.registry->contains(toolName.toLower()))
 	{
@@ -1581,6 +1583,7 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned in
 
 	g_lamexp_tools.registry->insert(toolName.toLower(), file);
 	g_lamexp_tools.versions->insert(toolName.toLower(), version);
+	g_lamexp_tools.tags->insert(toolName.toLower(), (tag) ? (*tag) : QString());
 }
 
 /*
@@ -1619,14 +1622,19 @@ const QString lamexp_lookup_tool(const QString &toolName)
 /*
  * Lookup tool version
  */
-unsigned int lamexp_tool_version(const QString &toolName)
+unsigned int lamexp_tool_version(const QString &toolName, QString *tag)
 {
 	QReadLocker readLock(&g_lamexp_tools.lock);
+	if(tag) tag->clear();
 
 	if(g_lamexp_tools.versions)
 	{
 		if(g_lamexp_tools.versions->contains(toolName.toLower()))
 		{
+			if(tag)
+			{
+				if(g_lamexp_tools.tags->contains(toolName.toLower())) *tag = g_lamexp_tools.tags->value(toolName.toLower());
+			}
 			return g_lamexp_tools.versions->value(toolName.toLower());
 		}
 		else
@@ -1643,7 +1651,7 @@ unsigned int lamexp_tool_version(const QString &toolName)
 /*
  * Version number to human-readable string
  */
-const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText)
+const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag)
 {
 	if(version == UINT_MAX)
 	{
@@ -1666,6 +1674,11 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 	{
 		result[index] = versionStr[pos++];
 		index = result.indexOf("?", Qt::CaseInsensitive);
+	}
+
+	if(tag)
+	{
+		result.replace(QChar('#'), *tag, Qt::CaseInsensitive);
 	}
 
 	return result;
@@ -2417,6 +2430,7 @@ void lamexp_finalization(void)
 		}
 		LAMEXP_DELETE(g_lamexp_tools.registry);
 		LAMEXP_DELETE(g_lamexp_tools.versions);
+		LAMEXP_DELETE(g_lamexp_tools.tags);
 	}
 	
 	//Delete temporary files

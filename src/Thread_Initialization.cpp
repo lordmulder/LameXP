@@ -48,9 +48,9 @@ static const double g_allowedExtractDelay = 12.0;
 class ExtractorTask : public QRunnable
 {
 public:
-	ExtractorTask(const QDir &appDir, const QString &toolName, const QString &toolShortName, const QByteArray &toolHash, const unsigned int toolVersion)
+	ExtractorTask(const QDir &appDir, const QString &toolName, const QString &toolShortName, const QByteArray &toolHash, const unsigned int toolVersion, const QString &toolTag)
 	:
-		QRunnable(), m_appDir(appDir), m_toolName(toolName), m_toolShortName(toolShortName), m_toolHash(toolHash), m_toolVersion(toolVersion)
+		QRunnable(), m_appDir(appDir), m_toolName(toolName), m_toolShortName(toolShortName), m_toolHash(toolHash), m_toolVersion(toolVersion), m_toolTag(toolTag)
 	{
 		/* Nothing to do */
 	}
@@ -90,7 +90,7 @@ protected:
 				if(lockedFile)
 				{
 					QMutexLocker lock(&s_mutex);
-					lamexp_register_tool(m_toolShortName, lockedFile, version);
+					lamexp_register_tool(m_toolShortName, lockedFile, version, &m_toolTag);
 				}
 			}
 		}
@@ -109,6 +109,7 @@ private:
 	const QDir m_appDir;
 	const QString m_toolName;
 	const QString m_toolShortName;
+	const QString m_toolTag;
 	const QByteArray m_toolHash;
 	const unsigned int m_toolVersion;
 
@@ -185,6 +186,7 @@ void InitializationThread::run()
 	QMap<QString, QString> mapChecksum;
 	QMap<QString, unsigned int> mapVersion;
 	QMap<QString, unsigned int> mapCpuType;
+	QMap<QString, QString> mapVersTag;
 
 	//Init properties
 	for(int i = 0; i < INT_MAX; i++)
@@ -199,6 +201,7 @@ void InitializationThread::run()
 			mapChecksum.insert(currentTool, QString::fromLatin1(g_lamexp_tools[i].pcHash));
 			mapCpuType.insert(currentTool, g_lamexp_tools[i].uiCpuType);
 			mapVersion.insert(currentTool, g_lamexp_tools[i].uiVersion);
+			mapVersTag.insert(currentTool, g_lamexp_tools[i].pcVersTag);
 		}
 		else
 		{
@@ -235,6 +238,7 @@ void InitializationThread::run()
 			QByteArray toolHash = mapChecksum.take(toolName).toLatin1();
 			unsigned int toolCpuType = mapCpuType.take(toolName);
 			unsigned int toolVersion = mapVersion.take(toolName);
+			QString toolVersTag = mapVersTag.take(toolName);
 			
 			if(toolHash.size() != 96)
 			{
@@ -243,7 +247,7 @@ void InitializationThread::run()
 			
 			if(toolCpuType & cpuSupport)
 			{
-				pool->start(new ExtractorTask(appDir, toolName, toolShortName, toolHash, toolVersion));
+				pool->start(new ExtractorTask(appDir, toolName, toolShortName, toolHash, toolVersion, toolVersTag));
 				QThread::yieldCurrentThread();
 			}
 		}

@@ -596,14 +596,14 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("LAME - OpenSource mp3 Encoder"),
-		"lame.exe", "v?.??, Final-?",
+		"lame.exe", "v?.??, #-?",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://lame.sourceforge.net/"
 	);
 	moreAboutText += makeToolText
 	(
 		tr("OggEnc - Ogg Vorbis Encoder"),
-		"oggenc2.exe", "v?.??, aoTuV Beta-?.??",
+		"oggenc2.exe", "v?.??, aoTuV #-?.??",
 		tr("Completely open and patent-free audio encoding technology."),
 		"http://www.vorbis.com/"
 	);
@@ -632,7 +632,7 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("Opus Audio Codec"),
-		"opusenc_std.exe", "????-??-??",
+		"opusenc.exe", "????-??-??",
 		tr("Totally open, royalty-free, highly versatile audio codec."),
 		"http://www.opus-codec.org/"
 	);
@@ -652,8 +652,8 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
-		tr("AC3Filter Tools - AC3/DTS Decoder"),
-		"valdec.exe", "v?.??",
+		tr("Valdec from AC3Filter Tools - AC3/DTS Decoder"),
+		"valdec.exe", "v?.?.?#",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.ac3filter.net/projects/tools"
 	);
@@ -837,11 +837,12 @@ void AboutDialog::initLicenseTab(void)
 
 QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo)
 {
-	QString toolText, verStr(toolVerFmt);
+	QString toolText, toolTag, verStr(toolVerFmt);
 
 	if(!toolBin.isEmpty())
 	{
-		verStr = lamexp_version2string(toolVerFmt, lamexp_tool_version(toolBin), tr("n/a"));
+		const unsigned int version = lamexp_tool_version(toolBin, &toolTag);
+		verStr = lamexp_version2string(toolVerFmt, version, tr("n/a"), &toolTag);
 	}
 
 	toolText += QString("<li>%1<br>").arg(NOBR(QString("<b>%1 (%2)</b>").arg(toolName, verStr)));
