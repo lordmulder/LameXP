@@ -47,7 +47,7 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	QStringList args;
 
 	args << QDir::toNativeSeparators(sourceFile);
-	args << "-w" << QDir::toNativeSeparators(outputFile);
+	args << "-i" << "-w" << QDir::toNativeSeparators(outputFile);
 
 	if(!startProcess(process, m_binary, args))
 	{
