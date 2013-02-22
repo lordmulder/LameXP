@@ -1,12 +1,12 @@
 [!Update]
-TimestampCreated=2012-11-04
+TimestampCreated=2013-02-23
 
 [MPlayer for Windows]
-BuildNo=91
-DownloadSite=http://mulder.dummwiedeutsch.de/home/?page=projects#mplayer
+BuildNo=108
+DownloadSite=http://forum.doom9.org/showthread.php?t=138725
 DownloadAddress=http://mplayer.savedonthe.net/
-DownloadFilename=MPUI.2011-06-09.Full-Package.exe
-DownloadFilecode=fcf8c1c694daf2729b6fa06d9cda1649e5c6897c
+DownloadFilename=MPUI.2013-02-22.exe
+DownloadFilecode=0b85b2aac076db3bab5bef4b1ec0c55b99e352fa
 
 [LameXP]
 BuildNo=1170
