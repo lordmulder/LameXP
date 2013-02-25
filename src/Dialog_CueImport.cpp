@@ -247,7 +247,7 @@ void CueImportDialog::browseButtonClicked(void)
 		if(pos > 0) currentDir.left(pos - 1); else break;
 	}
 
-	if(lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
+	if(lamexp_themes_enabled())
 	{
 		newOutDir = QFileDialog::getExistingDirectory(this, tr("Choose Output Directory"), currentDir);
 	}

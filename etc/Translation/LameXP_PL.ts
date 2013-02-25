@@ -3341,23 +3341,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="855"/>
+        <location filename="../../src/Global.cpp" line="864"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1109"/>
+        <location filename="../../src/Global.cpp" line="1118"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1114"/>
+        <location filename="../../src/Global.cpp" line="1123"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1127"/>
-        <location filename="../../src/Global.cpp" line="1154"/>
+        <location filename="../../src/Global.cpp" line="1136"/>
+        <location filename="../../src/Global.cpp" line="1163"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>

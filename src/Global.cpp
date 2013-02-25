@@ -265,7 +265,7 @@ static struct
 }
 g_lamexp_argv;
 
-//CLI Arguments
+//OS Version
 static struct
 {
 	bool bInitialized;
@@ -273,6 +273,15 @@ static struct
 	QReadWriteLock lock;
 }
 g_lamexp_os_version;
+
+//Win32 Theme support
+static struct
+{
+	bool bInitialized;
+	bool bThemesEnabled;
+	QReadWriteLock lock;
+}
+g_lamexp_themes_enabled;
 
 //Shared memory
 static const struct
@@ -2001,29 +2010,40 @@ bool lamexp_themes_enabled(void)
 {
 	typedef int (WINAPI *IsAppThemedFun)(void);
 	
-	static bool isAppThemed = false;
-	static bool isAppThemed_initialized = false;
-
-	if(!isAppThemed_initialized)
+	QReadLocker readLock(&g_lamexp_themes_enabled.lock);
+	if(g_lamexp_themes_enabled.bInitialized)
 	{
-		IsAppThemedFun IsAppThemedPtr = NULL;
-		QLibrary uxTheme(QString("%1/UxTheme.dll").arg(lamexp_known_folder(lamexp_folder_systemfolder)));
-		if(uxTheme.load())
-		{
-			IsAppThemedPtr = (IsAppThemedFun) uxTheme.resolve("IsAppThemed");
-		}
-		if(IsAppThemedPtr)
-		{
-			isAppThemed = IsAppThemedPtr();
-			if(!isAppThemed)
-			{
-				qWarning("Theme support is disabled for this process!");
-			}
-		}
-		isAppThemed_initialized = true;
+		return g_lamexp_themes_enabled.bThemesEnabled;
 	}
 
-	return isAppThemed;
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_themes_enabled.lock);
+
+	if(!g_lamexp_themes_enabled.bInitialized)
+	{
+		g_lamexp_themes_enabled.bThemesEnabled = false;
+		const lamexp_os_version_t * osVersion = lamexp_get_os_version();
+		if(LAMEXP_MIN_OS_VER(osVersion, 5, 1))
+		{
+			IsAppThemedFun IsAppThemedPtr = NULL;
+			QLibrary uxTheme(QString("%1/UxTheme.dll").arg(lamexp_known_folder(lamexp_folder_systemfolder)));
+			if(uxTheme.load())
+			{
+				IsAppThemedPtr = (IsAppThemedFun) uxTheme.resolve("IsAppThemed");
+			}
+			if(IsAppThemedPtr)
+			{
+				g_lamexp_themes_enabled.bThemesEnabled = IsAppThemedPtr();
+				if(!g_lamexp_themes_enabled.bThemesEnabled)
+				{
+					qWarning("Theme support is disabled for this process!");
+				}
+			}
+		}
+		g_lamexp_themes_enabled.bInitialized = true;
+	}
+
+	return g_lamexp_themes_enabled.bThemesEnabled;
 }
 
 /*
@@ -2372,6 +2392,7 @@ extern "C"
 		LAMEXP_ZERO_MEMORY(g_lamexp_folder);
 		LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
 		LAMEXP_ZERO_MEMORY(g_lamexp_os_version);
+		LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
 
 		//Make sure we will pass the check
 		g_lamexp_entry_check_flag = ~g_lamexp_entry_check_flag;
