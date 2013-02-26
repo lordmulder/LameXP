@@ -77,7 +77,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		args << "--abr" << QString::number(qBound(32, m_configBitrate * 8, 500));
 		break;
 	case SettingsModel::VBRMode:
-		args << "--tvbr" << QString::number(qBound(0, qRound((static_cast<double>(m_configBitrate * 5) / 100.0) * 127.0), 127));
+		args << "--tvbr" << QString::number(qBound(0, m_configBitrate * 4, 127));
 		break;
 	default:
 		throw "Bad rate-control mode!";

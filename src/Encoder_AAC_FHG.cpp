@@ -76,7 +76,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 		args << "--cbr" << QString::number(qMax(32, qMin(maxBitrate, (m_configBitrate * 8))));
 		break;
 	case SettingsModel::VBRMode:
-		args << "--vbr" << QString::number(qRound(static_cast<double>(m_configBitrate) / 5.0) + 1);
+		args << "--vbr" << QString::number(qBound(1, m_configBitrate, 6));
 		break;
 	default:
 		throw "Bad rate-control mode!";

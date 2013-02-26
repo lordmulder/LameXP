@@ -3367,8 +3367,21 @@ void MainWindow::updateRCMode(int id)
 		switch(m_settings->compressionRCMode())
 		{
 		case SettingsModel::VBRMode:
-			ui->sliderBitrate->setMinimum(0);
-			ui->sliderBitrate->setMaximum(20);
+			if(m_qaacEncoderAvailable)
+			{
+				ui->sliderBitrate->setMinimum(0);
+				ui->sliderBitrate->setMaximum(32);
+			}
+			else if(m_fhgEncoderAvailable)
+			{
+				ui->sliderBitrate->setMinimum(1);
+				ui->sliderBitrate->setMaximum(6);
+			}
+			else
+			{
+				ui->sliderBitrate->setMinimum(0);
+				ui->sliderBitrate->setMaximum(20);
+			}
 			break;
 		default:
 			ui->sliderBitrate->setMinimum(4);
@@ -3421,7 +3434,18 @@ void MainWindow::updateBitrate(int value)
 			ui->labelBitrate->setText(tr("Quality Level %1").arg(value));
 			break;
 		case SettingsModel::AACEncoder:
-			ui->labelBitrate->setText(tr("Quality Level %1").arg(QString().sprintf("%.2f", static_cast<double>(value * 5) / 100.0)));
+			if(m_qaacEncoderAvailable)
+			{
+				ui->labelBitrate->setText(tr("Quality Level %1").arg(QString::number(qBound(0, value * 4 , 127))));
+			}
+			else if(m_fhgEncoderAvailable)
+			{
+				ui->labelBitrate->setText(tr("Quality Level %1").arg(QString::number(value)));
+			}
+			else
+			{
+				ui->labelBitrate->setText(tr("Quality Level %1").arg(QString().sprintf("%.2f", static_cast<double>(value) / 20.0)));
+			}
 			break;
 		case SettingsModel::FLACEncoder:
 			ui->labelBitrate->setText(tr("Compression %1").arg(value));

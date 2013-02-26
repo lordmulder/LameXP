@@ -57,7 +57,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString().sprintf("%.2f", qBound(0.0, static_cast<double>(m_configBitrate * 5) / 100.0, 1.0));
+		args << "-q" << QString().sprintf("%.2f", qBound(0.0, static_cast<double>(m_configBitrate) / 20.0, 1.0));
 		break;
 	case SettingsModel::ABRMode:
 		args << "-br" << QString::number(qMax(32, qMin(500, (m_configBitrate * 8))) * 1000);
