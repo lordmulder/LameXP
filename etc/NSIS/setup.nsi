@@ -1,6 +1,6 @@
 ; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
-; // Copyright (C) 2004-2012 LoRd_MuldeR <MuldeR2@GMX.de>
+; // Copyright (C) 2004-2013 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
 ; // This program is free software; you can redistribute it and/or modify
 ; // it under the terms of the GNU General Public License as published by
@@ -143,7 +143,7 @@ VIAddVersionKey "Comments" "This program is free software; you can redistribute 
 VIAddVersionKey "CompanyName" "Free Software Foundation"
 VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
-VIAddVersionKey "LegalCopyright" "Copyright 2004-2012 LoRd_MuldeR"
+VIAddVersionKey "LegalCopyright" "Copyright 2004-2013 LoRd_MuldeR"
 VIAddVersionKey "LegalTrademarks" "GNU"
 VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
 VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"
@@ -526,8 +526,13 @@ Section "-Update Registry"
 	!insertmacro GetExecutableName $R0
 	WriteRegStr HKLM "${MyRegPath}" "InstallLocation" "$INSTDIR"
 	WriteRegStr HKLM "${MyRegPath}" "ExecutableName" "$R0"
+	WriteRegStr HKLM "${MyRegPath}" "DisplayIcon" "$INSTDIR\$R0,0"
 	WriteRegStr HKLM "${MyRegPath}" "UninstallString" '"$INSTDIR\Uninstall.exe"'
-	WriteRegStr HKLM "${MyRegPath}" "DisplayName" "LameXP"
+	WriteRegStr HKLM "${MyRegPath}" "DisplayName" "LameXP v${LAMEXP_VERSION}"
+	WriteRegStr HKLM "${MyRegPath}" "Publisher" "LoRd_MuldeR <mulder2@gmx.de>"
+	WriteRegStr HKLM "${MyRegPath}" "DisplayVersion" "${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
+	WriteRegStr HKLM "${MyRegPath}" "URLInfoAbout" "${MyWebSite}"
+	WriteRegStr HKLM "${MyRegPath}" "URLUpdateInfo" "${MyWebSite}"
 SectionEnd
 
 Section "-Finished"
@@ -613,12 +618,11 @@ Section "Uninstall"
 	; Registry
 	; --------------
 	
-	DeleteRegValue HKLM "${MyRegPath}" "InstallLocation"
-	DeleteRegValue HKLM "${MyRegPath}" "ExecutableName"
-	DeleteRegValue HKLM "${MyRegPath}" "UninstallString"
-	DeleteRegValue HKLM "${MyRegPath}" "DisplayName"
-	DeleteRegValue HKLM "${MyRegPath}" "StartmenuFolder"
-	DeleteRegValue HKLM "${MyRegPath}" "SetupLanguage"
+	DeleteRegKey HKLM "${MyRegPath}"
+	DeleteRegKey HKCU "${MyRegPath}"
+
+	DeleteRegKey HKLM "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{54dcbccb-c905-46dc-b6e6-48563d0e9e55}"
+	DeleteRegKey HKCU "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{54dcbccb-c905-46dc-b6e6-48563d0e9e55}"
 	
 	MessageBox MB_YESNO|MB_TOPMOST "$(LAMEXP_LANG_UNINST_PERSONAL)" IDNO +3
 	Delete "$LOCALAPPDATA\LoRd_MuldeR\LameXP - Audio Encoder Front-End\config.ini"
