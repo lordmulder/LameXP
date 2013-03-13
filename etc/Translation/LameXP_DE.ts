@@ -285,7 +285,7 @@
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Valdec aus den AC3Filter Tools - AC3/DTS Decoder</translation>
     </message>
 </context>
 <context>
@@ -1208,20 +1208,8 @@
         <translation>Bessere Qualität</translation>
     </message>
     <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation>Beste Qualität (sehr langsam)</translation>
-    </message>
-    <message>
         <source>High Quality (Recommended)</source>
-        <translation>Höhere Qualität (empfohlen)</translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation>Mittlere Qualität (Standard)</translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
-        <translation>Niedrige Qualität (schnell)</translation>
+        <translation>Hohe Qualität (empfohlen)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
@@ -2017,6 +2005,14 @@
             <numerusform>%n Instanz</numerusform>
             <numerusform>%n Instanzen</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation>Beste Qualität (langsam)</translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
+        <translation>Akzeptable Qualität (schnell)</translation>
     </message>
 </context>
 <context>

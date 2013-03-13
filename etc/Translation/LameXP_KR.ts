@@ -1377,20 +1377,8 @@
         <translation type="unfinished">비압축</translation>
     </message>
     <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished">최고 품질 (매우 느림)</translation>
-    </message>
-    <message>
         <source>High Quality (Recommended)</source>
         <translation type="unfinished">높은 품질 (권장)</translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation type="unfinished">평균 품질 (기본)</translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
-        <translation type="unfinished">낮은 품질 (빠름)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
@@ -2009,6 +1997,14 @@
         <translation type="unfinished">
             <numerusform>%n 인스턴스</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1204,20 +1204,8 @@
         <translation>更好的質量</translation>
     </message>
     <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation>最好的質量(很慢)</translation>
-    </message>
-    <message>
         <source>High Quality (Recommended)</source>
         <translation>高質量(推薦)</translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation>平均質量 (默認值)</translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
-        <translation>低質量 (快速)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
@@ -2008,6 +1996,14 @@
         <translation>
             <numerusform>%n 個實例</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

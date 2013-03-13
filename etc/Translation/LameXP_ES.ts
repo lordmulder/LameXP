@@ -1207,20 +1207,8 @@
         <translation>Mayor calidad</translation>
     </message>
     <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation>Calidad muy alta (muy lento)</translation>
-    </message>
-    <message>
         <source>High Quality (Recommended)</source>
         <translation>Calidad alta (recomendado)</translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation>Calidad media (predeterminado)</translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
-        <translation>Calidad baja (rápido)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
@@ -2016,6 +2004,14 @@
             <numerusform>%n instancia</numerusform>
             <numerusform>%n instancias</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

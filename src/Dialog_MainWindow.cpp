@@ -3536,17 +3536,14 @@ void MainWindow::updateLameAlgoQuality(int value)
 
 	switch(value)
 	{
-	case 4:
-		text = tr("Best Quality (Very Slow)");
-		break;
 	case 3:
-		text = tr("High Quality (Recommended)");
+		text = tr("Best Quality (Slow)");
 		break;
 	case 2:
-		text = tr("Average Quality (Default)");
+		text = tr("High Quality (Recommended)");
 		break;
 	case 1:
-		text = tr("Low Quality (Fast)");
+		text = tr("Acceptable Quality (Fast)");
 		break;
 	case 0:
 		text = tr("Poor Quality (Very Fast)");
@@ -3559,7 +3556,7 @@ void MainWindow::updateLameAlgoQuality(int value)
 		ui->labelLameAlgoQuality->setText(text);
 	}
 
-	bool warning = (value == 0), notice = (value == 4);
+	bool warning = (value == 0), notice = (value == 3);
 	ui->labelLameAlgoQualityWarning->setVisible(warning);
 	ui->labelLameAlgoQualityWarningIcon->setVisible(warning);
 	ui->labelLameAlgoQualityNotice->setVisible(notice);

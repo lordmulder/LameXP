@@ -1213,21 +1213,8 @@ Votre dossier TEMP est situé ici:</translation>
         <translation>Meilleure qualité</translation>
     </message>
     <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation>Meilleure qualité (très lent)</translation>
-    </message>
-    <message>
         <source>High Quality (Recommended)</source>
         <translation>Haute qualité (recommandé)</translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation>Qualité moyenne (par défaut)</translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
-        <translation>	
-Faible qualité (rapide)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
@@ -2026,6 +2013,14 @@ Ouvrir le dossier récursivement...</translation>
             <numerusform>%n Instance</numerusform>
             <numerusform>%n Instances</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

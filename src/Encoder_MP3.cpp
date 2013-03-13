@@ -28,7 +28,7 @@
 #include <QDir>
 #include <limits.h>
 
-static const int g_lameAgorithmQualityLUT[] = {9, 7, 5, 2, 0, INT_MAX};
+static const int g_lameAgorithmQualityLUT[] = {9, 7, 3, 0, INT_MAX};
 
 MP3Encoder::MP3Encoder(void)
 :
@@ -61,14 +61,14 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-V" << QString::number(9 - qMin(9, m_configBitrate));
+		args << "-V" << QString::number(9 - qBound(0, m_configBitrate, 9));
 		break;
 	case SettingsModel::ABRMode:
-		args << "--abr" << QString::number(SettingsModel::mp3Bitrates[qMax(0, qMin(13, m_configBitrate))]);
+		args << "--abr" << QString::number(SettingsModel::mp3Bitrates[qBound(0, m_configBitrate, 13)]);
 		break;
 	case SettingsModel::CBRMode:
 		args << "--cbr";
-		args << "-b" << QString::number(SettingsModel::mp3Bitrates[qMax(0, qMin(13, m_configBitrate))]);
+		args << "-b" << QString::number(SettingsModel::mp3Bitrates[qBound(0, m_configBitrate, 13)]);
 		break;
 	default:
 		throw "Bad rate-control mode!";

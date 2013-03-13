@@ -1319,20 +1319,8 @@
         <translation type="unfinished">Несжатый</translation>
     </message>
     <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished">Наилучшее качество (очень медленно)</translation>
-    </message>
-    <message>
         <source>High Quality (Recommended)</source>
         <translation type="unfinished">Высокое качество (рекомендуется)</translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation type="unfinished">Среднее качество (по умолчанию)</translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
-        <translation type="unfinished">Низкое качество (быстро)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
@@ -2030,6 +2018,14 @@
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

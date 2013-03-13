@@ -1208,19 +1208,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>High Quality (Recommended)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Average Quality (Default)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Low Quality (Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2017,6 +2005,14 @@
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

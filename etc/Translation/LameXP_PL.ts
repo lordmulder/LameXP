@@ -1747,7 +1747,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3905"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3902"/>
         <source>Access Denied</source>
         <translation type="unfinished">Dostęp zablokowany</translation>
     </message>
@@ -1877,7 +1877,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1372"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1449"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1989"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3848"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3845"/>
         <source>Discard</source>
         <translation type="unfinished">Zamknij</translation>
     </message>
@@ -2509,8 +2509,13 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3540"/>
-        <source>Best Quality (Very Slow)</source>
-        <translation type="unfinished">Najlepsza jakość (Bardzo wolno)</translation>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3546"/>
+        <source>Acceptable Quality (Fast)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3543"/>
@@ -2518,67 +2523,57 @@
         <translation type="unfinished">Wysoka jakość (Zalecane)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3546"/>
-        <source>Average Quality (Default)</source>
-        <translation type="unfinished">Średnia jakość (Domyślnie)</translation>
-    </message>
-    <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3549"/>
-        <source>Low Quality (Fast)</source>
-        <translation type="unfinished">Niska jakość (Szybko)</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3552"/>
         <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished">Najniższa jakość (Bardzo szybko)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3837"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3834"/>
         <source>File name without extension</source>
         <translation type="unfinished">Nazwa pliku bez rozszerzenia</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3838"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3835"/>
         <source>Track number with leading zero</source>
         <translation type="unfinished">Numer ścieżki z zerem na początku</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3839"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3836"/>
         <source>Track title</source>
         <translation type="unfinished">Nazwa ścieżki</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3840"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3837"/>
         <source>Artist name</source>
         <translation type="unfinished">Nazwa Artysty</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3841"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3838"/>
         <source>Album name</source>
         <translation type="unfinished">Nazwa Albumu</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3842"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3839"/>
         <source>Year with (at least) four digits</source>
         <translation type="unfinished">Rok z (przynajmniej) czterema cyframi</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3843"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3840"/>
         <source>Comment</source>
         <translation type="unfinished">Komentarz</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3845"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3842"/>
         <source>Characters forbidden in file names:</source>
         <translation type="unfinished">Zabronione znaki w nazwach plików:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3848"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3845"/>
         <source>Rename Macros</source>
         <translation type="unfinished">Zmień nazwy makr</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3861"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3858"/>
         <source>%n Instance(s)</source>
         <translation type="unfinished">
             <numerusform>%n wątek</numerusform>
@@ -2587,37 +2582,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3905"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3902"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished">Nie można zapisać do wybranej lokalizacji. Prosze wybierz inną lokalizację!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4025"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4022"/>
         <source>Overwrite Mode</source>
         <translation type="unfinished">Tryb nadpisywania</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4025"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4022"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation type="unfinished">Ostrzeżenie: W tym trybie istniejące pliki będą nadpisywane bez możliwości ich odzyskania!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4025"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4022"/>
         <source>Continue</source>
         <translation type="unfinished">Kontynuuj</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4025"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4022"/>
         <source>Revert</source>
         <translation type="unfinished">Cofnij</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4090"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4087"/>
         <source>Already Running</source>
         <translation type="unfinished">Już działa</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4090"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4087"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished">LameXP już działa, przejdź do działającego procesu!</translation>
     </message>
