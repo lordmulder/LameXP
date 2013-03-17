@@ -44,7 +44,7 @@ a:visited { color: #0000EE; }
 <li><a href="#89cbd3d0">Why does LameXP run (only) N instances/threads in parallel on my computer?</a>
 <li><a href="#454e51dd">Why does LameXP try to connect to the web-server at 'xyz.com' secretly?</a>
 <li><a href="#12d077d5">How can I force LameXP to create ID3 version 2 (ID3v2) tags?</a>
-<li><a href="#d83ab3c6">Why does LameXP use LAME v3.99 rather than v3.98?</a><br>
+<li><a href="#f6ca0225">What does the LAME algorithm quality option do exactly?</a>
 <li><a href="#4213adbc">Can LameXP be used to convert/extract tracks from an Audio CD?</a>
 <li><a href="#434f2578">Why is the maximum normalization level limited to -0.5 dB?</a>
 <li><a href="#9f8ff13a">What do the different 'Equalization' modes do?</a>
@@ -405,7 +405,8 @@ be installed. Both, QuickTime and iTunes, can be <a href="http://www.apple.com/q
 <br>
 In order to enable the QAAC Encoder support you will also need the 'QAAC Encoder Add-in' for LameXP:<br><ul>
 <li><a href="http://www.mediafire.com/file/o5is7bqporboa7b/LameXP.qaac-addin.2012-08-05.zip" target="_blank">http://www.mediafire.com/file/o5is7bqporboa7b/LameXP.qaac-addin.2012-08-05.zip</a>
-<li><a href="http://mulder.brhack.net/public/add-in/LameXP.qaac-addin.2012-08-05.zip" target="_blank">http://mulder.brhack.net/public/add-in/LameXP.qaac-addin.2012-08-05.zip</a></ul>
+<li><a href="http://mulder.brhack.net/public/add-in/LameXP.qaac-addin.2012-08-05.zip" target="_blank">http://mulder.brhack.net/public/add-in/LameXP.qaac-addin.2012-08-05.zip</a>
+<li><a href="http://muldersoft.com/misc/lamexp/add-ins/LameXP.qaac-addin.2012-08-05.zip" target="_blank">http://muldersoft.com/misc/lamexp/add-ins/LameXP.qaac-addin.2012-08-05.zip</a></ul>
 <br>
 Please follow the install instructions that are included with the 'QAAC Encoder Add-in' download package!<br>
 Note that you do NOT need to install this Add-in, if you only want to use the Nero AAC Encoder.<br>
@@ -421,7 +422,8 @@ available as a free download (you don't need to buy the "Pro" version!) from the
 <br>
 In order to enable the FHG AAC Encoder support you will also need the 'FHG AAC Encoder Add-in' for LameXP:<br><ul>
 <li><a href="http://www.mediafire.com/file/ni7w4323pqub9x3/LameXP.fhgaacenc-addin.2012-08-06.zip" target="_blank">http://www.mediafire.com/file/ni7w4323pqub9x3/LameXP.fhgaacenc-addin.2012-08-06.zip</a>
-<li><a href="http://mulder.brhack.net/public/add-in/LameXP.fhgaacenc-addin.2012-08-06.zip" target="_blank">http://mulder.brhack.net/public/add-in/LameXP.fhgaacenc-addin.2012-08-06.zip</a></ul>
+<li><a href="http://mulder.brhack.net/public/add-in/LameXP.fhgaacenc-addin.2012-08-06.zip" target="_blank">http://mulder.brhack.net/public/add-in/LameXP.fhgaacenc-addin.2012-08-06.zip</a>
+<li><a href="http://muldersoft.com/misc/lamexp/add-ins/LameXP.fhgaacenc-addin.2012-08-06.zip" target="_blank">http://muldersoft.com/misc/lamexp/add-ins/LameXP.fhgaacenc-addin.2012-08-06.zip</a></ul>
 <br>
 Please follow the install instructions that are included with the 'FHG AAC Encoder Add-in' download package!<br>
 Note that you do NOT need to install this Add-in, if you only want to use the Nero AAC Encoder.<br><br>
@@ -660,7 +662,38 @@ or output is redirected to stdout.</blockquote>
 
 <br><br>
 
-<a name="d83ab3c6"></a><b>Why does LameXP use LAME v3.99 rather than v3.98?</b><br>
+<a name="f6ca0225"></a><b>What does the LAME algorithm quality option do exactly?</b><br>
+<br>
+The sound quality of MP3 files is influenced primarily by the chosen bitrate (ABR/CBR mode) or by the chosen<br>
+VBR quality level. These options control the "file size -vs- quality" trade-off. That means, you can get a<br>
+better quality at the cost of a bigger file (increased bitrate); or you can get a smaller file at the cost of<br>
+reduced sound quality (decreased bitrate). The "algorithm quality" is yet another way to control the quality.<br>
+<br>
+While the chosen bitrate (or VBR level) influences the resulting bitrate, the algorithm quality does not!<br>
+Instead, the algorithm quality controls the "encoding speed -vs- quality" trade-off. That means, you can get<br>
+a better sound quality at the cost of increased encoding time (higher algorithm quality); or you can get a<br>
+faster encoding speed at the cost of reduced sound quality (lower algorithm quality). Note that while the<br>
+algorithm quality does influence the encoding speed, it does NOT influence the decoding speed at all. Also<br>
+note, again, that the chosen algorithm quality does NOT influence the resulting file size at all.<br>
+<br>
+The LAME algorithm quality is an integral value between "0" (best/slowest) and "9" (worst/fastest), but NOT<br>
+all possible values will currently have a distinct effect! More specifically, the following table applies:<br>
+<br>
+For CBR and ARB modes:<ul>
+<li>0: Use slowest &amp; best possible version of all algorithms
+<li>3: Default value, good speed, good quality
+<li>7: Very fast, ok quality (psycho acoustics are used for pre-echo &amp; M/S, but NO noise shaping)
+<li>9: Disables almost all algorithms including psy-model, poor quality</ul>
+For (new) VBR mode only:<ul>
+<li>0 to 4: Use the best algorithm (slower)
+<li>5 to 9: Use the not so good algorithm (faster)</ul>
+<br>
+The "algorithm quality" options available in LameXP will be mapped to "0", "3", "7" and "9", respecitly. Note<br>
+that option "0" (best quality) is only very slightly better than "3" (high quality), but significant slower!<br><br>
+
+<br><br>
+
+<!-- <a name="d83ab3c6"></a><b>Why does LameXP use LAME v3.99 rather than v3.98?</b><br>
 <br>
 LAME v3.99 contains the latest improvements and bugfixes of the LAME mp3 encoder, but it's less tested than<br>
 the older 3.98 release series. The most important reason why LAME v3.99 is used in LameXP v4.xx is because<br>
@@ -673,7 +706,7 @@ reports to the LameXP developers, as we generally cannot analyze/fix problems sp
 <br>
 [UPDATE] LAME v3.99 Final was release on 2011-10-15, so that is the official "stable" version now! [/UPDATE]<br><br>
 
-<br><br>
+<br><br> -->
 
 <a name="4213adbc"></a><b>Can LameXP be used to convert/extract tracks from an Audio CD?</b><br>
 <br>
