@@ -4244,6 +4244,7 @@
     <addaction name="actionCheckUpdates"/>
     <addaction name="actionVisitSupport"/>
     <addaction name="actionVisitHomepage"/>
+    <addaction name="actionVisitMuldersSite"/>
     <addaction name="separator"/>
     <addaction name="actionDocumentFAQ"/>
     <addaction name="actionDocumentChangelog"/>
@@ -4392,7 +4393,7 @@
      <normaloff>:/icons/world.png</normaloff>:/icons/world.png</iconset>
    </property>
    <property name="text">
-    <string>Visit Official Web-Site</string>
+    <string>Official LameXP Project Web-Site</string>
    </property>
    <property name="toolTip">
     <string>Visit Official Web-Site</string>
@@ -4627,6 +4628,15 @@
    </property>
    <property name="text">
     <string>Hibernate Computer On Shutdown</string>
+   </property>
+  </action>
+  <action name="actionVisitMuldersSite">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/world.png</normaloff>:/icons/world.png</iconset>
+   </property>
+   <property name="text">
+    <string>MuldeR's OpenSource Projects</string>
    </property>
   </action>
  </widget>

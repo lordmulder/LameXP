@@ -570,11 +570,13 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	//Activate help menu actions
 	ui->actionVisitHomepage->setData(QString::fromLatin1(lamexp_website_url()));
 	ui->actionVisitSupport->setData(QString::fromLatin1(lamexp_support_url()));
+	ui->actionVisitMuldersSite->setData(QString::fromLatin1(lamexp_mulders_url()));
 	ui->actionDocumentFAQ->setData(QString("%1/FAQ.html").arg(QApplication::applicationDirPath()));
 	ui->actionDocumentChangelog->setData(QString("%1/Changelog.html").arg(QApplication::applicationDirPath()));
 	ui->actionDocumentTranslate->setData(QString("%1/Translate.html").arg(QApplication::applicationDirPath()));
 	connect(ui->actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
 	connect(ui->actionVisitHomepage, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionVisitMuldersSite, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
 	connect(ui->actionVisitSupport, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
 	connect(ui->actionDocumentFAQ, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(ui->actionDocumentChangelog, SIGNAL(triggered()), this, SLOT(documentActionActivated()));

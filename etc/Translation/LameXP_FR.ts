@@ -2022,6 +2022,14 @@ Ouvrir le dossier récursivement...</translation>
         <source>Acceptable Quality (Fast)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Official LameXP Project Web-Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuldeR&apos;s OpenSource Projects</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

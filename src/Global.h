@@ -108,6 +108,7 @@ unsigned int lamexp_toolver_fhgaacenc(void);
 unsigned int lamexp_toolver_qaacenc(void);
 unsigned int lamexp_toolver_coreaudio(void);
 const char *lamexp_website_url(void);
+const char *lamexp_mulders_url(void);
 const char *lamexp_support_url(void);
 const lamexp_os_version_t *lamexp_get_os_version(void);
 bool lamexp_detect_wine(void);

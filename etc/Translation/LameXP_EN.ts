@@ -31,7 +31,7 @@
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="718"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="720"/>
         <source>%n file(s) have been rejected, because read access was not granted!</source>
         <translation>
             <numerusform>%n file have been rejected, because read access was not granted!</numerusform>
@@ -39,7 +39,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="722"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="724"/>
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
         <translation>
             <numerusform>%n file have been rejected, because they are dummy CDDA files!</numerusform>
@@ -47,7 +47,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="726"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="728"/>
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
         <translation>
             <numerusform>%n file have been rejected, because they appear to be Cue Sheet images!</numerusform>
@@ -55,7 +55,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="732"/>
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
         <translation>
             <numerusform>%n file have been rejected, because the file format could not be recognized!</numerusform>
@@ -63,7 +63,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3858"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3860"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n Instance</numerusform>
