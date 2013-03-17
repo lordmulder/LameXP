@@ -1,0 +1,195 @@
+ tools/cli_args.cpp                     | 86 ++++++++++++++++++++++++++++++++++
+ tools/cli_args.h                       |  6 +++
+ tools/valdec.cpp                       | 21 +++++++--
+ valib/valib/parsers/ffmpeg_decoder.cpp |  2 +
+ valib/valib/sink/sink_dsound.cpp       |  4 +-
+ 5 files changed, 113 insertions(+), 6 deletions(-)
+
+diff --git a/tools/cli_args.cpp b/tools/cli_args.cpp
+new file mode 100644
+index 0000000..37a6983
+--- /dev/null
++++ b/tools/cli_args.cpp
+@@ -0,0 +1,86 @@
++
++#define WIN32_LEAN_AND_MEAN
++
++#include <stdio.h>
++#include <assert.h>
++#include <windows.h>
++#include <Shellapi.h>
++#include <io.h>
++
++#include "../valib/3rdparty/utf8/utf8.h"
++
++static std::string wstring_to_utf8(const std::wstring &s)
++{
++  std::string u8;
++  if (sizeof(wchar_t) == 2)
++	utf8::utf16to8(s.begin(), s.end(), std::back_inserter(u8));
++  else if (sizeof(wchar_t) == 4)
++	utf8::utf32to8(s.begin(), s.end(), std::back_inserter(u8));
++  else
++	assert(false);
++  return u8;
++}
++
++int init_cli_args(char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed !!!\n\n");
++		exit(-1);
++	}
++
++	*argv = (char**) malloc(sizeof(char*) * nArgs);
++	if(NULL == *argv)
++	{
++		fprintf(stderr, "\nFATAL: Malloc failed\n\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = _strdup(wstring_to_utf8(szArglist[i]).c_str());
++	}
++
++	LocalFree(szArglist);
++	return nArgs;
++}
++
++void free_cli_args(int argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++static UINT g_old_output_cp = ((UINT)-1);
++
++void init_console(void)
++{
++	g_old_output_cp = GetConsoleOutputCP();
++	SetConsoleOutputCP(CP_UTF8);
++}
++
++void reset_console(void)
++{
++	if(g_old_output_cp != ((UINT)-1))
++	{
++		SetConsoleOutputCP(g_old_output_cp);
++	}
++}
+diff --git a/tools/cli_args.h b/tools/cli_args.h
+new file mode 100644
+index 0000000..3be906b
+--- /dev/null
++++ b/tools/cli_args.h
+@@ -0,0 +1,6 @@
++
++int init_cli_args(char ***argv);
++void free_cli_args(int argc, char ***argv);
++
++void init_console(void);
++void reset_console(void);
+diff --git a/tools/valdec.cpp b/tools/valdec.cpp
+index 5582c8d..e434c0d 100644
+--- a/tools/valdec.cpp
++++ b/tools/valdec.cpp
+@@ -24,6 +24,7 @@
+ // other
+ #include "win32/cpu.h"
+ #include "vargs.h"
++#include "cli_args.h"
+ 
+ #include "valdec_usage.txt.h"
+ 
+@@ -94,7 +95,7 @@ const enum_opt format_tbl[] =
+   { "7", FORMAT_PCMDOUBLE },
+ };
+ 
+-int valdec(int argc, const char *argv[])
++int valdec(int argc, char **argv)
+ {
+   using std::string;
+   if (argc < 2)
+@@ -698,10 +699,14 @@ int valdec(int argc, const char *argv[])
+       int(value2db(level)),                                                                                    \
+       int(file.get_frames() / time),                                                                           \
+       cpu_current.usage() * 100);                                                                              \
++      fflush(stderr);                                                                                          \
+   }
+ 
+-  #define DROP_STAT \
+-    fprintf(stderr, "                                                                             \r");
++  #define DROP_STAT                                                                                            \
++  {                                                                                                            \
++    fprintf(stderr, "                                                                             \r");        \
++    fflush(stderr);                                                                                            \
++  }
+ 
+   while (file.get_chunk(chunk))
+   {
+@@ -830,7 +835,15 @@ int main(int argc, const char *argv[])
+ {
+   try
+   {
+-    return valdec(argc, argv);
++    char **argv_utf8 = NULL;
++    init_console();
++    int argc_utf8 = init_cli_args(&argv_utf8);
++    
++    int ret = valdec(argc_utf8, argv_utf8);
++    
++    free_cli_args(argc_utf8, &argv_utf8);
++    reset_console();
++    return ret;
+   }
+   catch (ValibException &e)
+   {
+diff --git a/valib/valib/parsers/ffmpeg_decoder.cpp b/valib/valib/parsers/ffmpeg_decoder.cpp
+index b6b20d7..864f83c 100644
+--- a/valib/valib/parsers/ffmpeg_decoder.cpp
++++ b/valib/valib/parsers/ffmpeg_decoder.cpp
+@@ -10,6 +10,8 @@ extern "C"
+ {
+ #define __STDC_CONSTANT_MACROS
+ #include "../../3rdparty/ffmpeg/include/libavcodec/avcodec.h"
++#include "../../3rdparty/ffmpeg/include/libavutil/mem.h"
++#include "../../3rdparty/ffmpeg/include/libavutil/channel_layout.h"
+ }
+ 
+ static const string module = "FfmpegDecoder";
+diff --git a/valib/valib/sink/sink_dsound.cpp b/valib/valib/sink/sink_dsound.cpp
+index f22104d..f5f07bf 100644
+--- a/valib/valib/sink/sink_dsound.cpp
++++ b/valib/valib/sink/sink_dsound.cpp
+@@ -47,9 +47,9 @@ DSoundSink::open_dsound(HWND _hwnd, int _buf_size_ms, int _preload_ms, LPCGUID _
+ 
+   // Open DirectSound
+ 
+-  if FAILED(DirectSoundCreate(_device, &ds, 0))
++  if(1) //FAILED(DirectSoundCreate(_device, &ds, 0))
+     return false;
+-
++  
+   if (!_hwnd) _hwnd = GetForegroundWindow();
+   if (!_hwnd) _hwnd = GetDesktopWindow();
+   if FAILED(ds->SetCooperativeLevel(_hwnd, DSSCL_PRIORITY))
