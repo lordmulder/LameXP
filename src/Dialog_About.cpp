@@ -53,7 +53,7 @@
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define TRIM_RIGHT(STR) do { while(STR.endsWith(QChar(' ')) || STR.endsWith(QChar('\t')) || STR.endsWith(QChar('\r')) || STR.endsWith(QChar('\n'))) STR.chop(1); } while(0)
 #define MAKE_TRANSPARENT(WIDGET) do { QPalette _p = (WIDGET)->palette(); _p.setColor(QPalette::Background, Qt::transparent); (WIDGET)->setPalette(_p); } while(0)
-
+#define FLIP(X) do { (X) = (!(X)); } while (0)
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
@@ -339,36 +339,15 @@ void AboutDialog::moveDisque(void)
 		const int minY = screenGeometry.top();
 		const int maxY = screenGeometry.height() - m_disque->height() + screenGeometry.top();
 		
-		QPoint pos = m_disque->pos();
-		pos.setX(m_disqueFlags[0] ? pos.x() + delta : pos.x() - delta);
-		pos.setY(m_disqueFlags[1] ? pos.y() + delta : pos.y() - delta);
+		const QPoint posOld = m_disque->pos();
+		const int x = qBound(minX, m_disqueFlags[0] ? posOld.x() + delta : posOld.x() - delta, maxX);
+		const int y = qBound(minY, m_disqueFlags[1] ? posOld.y() + delta : posOld.y() - delta, maxY);
 
-		if(pos.x() <= minX)
-		{
-			m_disqueFlags[0] = true;
-			pos.setX(minX);
-			m_rotateNext = true;
-		}
-		else if(pos.x() >= maxX)
-		{
-			m_disqueFlags[0] = false;
-			pos.setX(maxX);
-			m_rotateNext = true;
-		}
-		if(pos.y() <= minY)
-		{
-			m_disqueFlags[1] = true;
-			pos.setY(minY);
-			m_rotateNext = true;
-		}
-		else if(pos.y() >= maxY)
-		{
-			m_disqueFlags[1] = false;
-			pos.setY(maxY);
-			m_rotateNext = true;
-		}
+		m_disque->move(x, y);
 
-		m_disque->move(pos);
+		const QPoint posNew = m_disque->pos();
+		if(posNew.x() == posOld.x()) { FLIP(m_disqueFlags[0]); m_rotateNext = true; }
+		if(posNew.y() == posOld.y()) { FLIP(m_disqueFlags[1]); m_rotateNext = true; }
 
 		if(m_rotateNext)
 		{
@@ -385,9 +364,15 @@ void AboutDialog::moveDisque(void)
 			m_rotateNext = false;
 		}
 
-		if(m_disque->windowOpacity() < 0.9)
+		double opacity = m_disque->windowOpacity();
+		if(opacity != 1.0)
 		{
-			m_disque->setWindowOpacity(m_disque->windowOpacity() + 0.01);
+			opacity = opacity + 0.01;
+			if(qFuzzyCompare(opacity, 1.0) || (opacity > 1.0))
+			{
+				opacity = 1.0;
+			}
+			m_disque->setWindowOpacity(opacity);
 		}
 	}
 }
