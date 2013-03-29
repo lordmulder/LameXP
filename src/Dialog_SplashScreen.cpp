@@ -38,6 +38,18 @@
 /* If, after 50 ms, the wait() function returns with FALSE, then the thread probably is still running and we return TRUE. Otherwise we can return FALSE. */
 #define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ? (!((THRD)->wait(50))) : false)
 
+#define SET_TASKBAR_STATE(FLAG) do \
+{ \
+	if(FLAG) \
+	{ \
+		if(!bTaskBar) bTaskBar = WinSevenTaskbar::setTaskbarState(splashScreen, WinSevenTaskbar::WinSevenTaskbarIndeterminateState); \
+	} \
+	else \
+	{ \
+		if(bTaskBar) bTaskBar = (!WinSevenTaskbar::setTaskbarState(splashScreen, WinSevenTaskbar::WinSevenTaskbarNoState)); \
+	} \
+} \
+while(0)
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -85,6 +97,7 @@ void SplashScreen::showSplash(QThread *thread)
 	double opacity = OPACITY_DELTA;
 	const int opacitySteps = qRound(1.0 / OPACITY_DELTA);
 	SplashScreen *splashScreen = new SplashScreen();
+	bool bTaskBar = false;
 	
 	//Show splash
 	splashScreen->m_canClose = false;
@@ -112,14 +125,15 @@ void SplashScreen::showSplash(QThread *thread)
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	//Init taskbar
-	WinSevenTaskbar::setTaskbarState(splashScreen, WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+	SET_TASKBAR_STATE(true);
 
 	//Fade in
 	for(int i = 1; i <= opacitySteps; i++)
 	{
-		opacity = OPACITY_DELTA * static_cast<double>(i);
+		opacity = (i < opacitySteps) ? (OPACITY_DELTA * static_cast<double>(i)) : 1.0;
 		splashScreen->setWindowOpacity(opacity);
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
+		SET_TASKBAR_STATE(true);
 		Sleep(FADE_DELAY);
 	}
 
@@ -152,7 +166,7 @@ void SplashScreen::showSplash(QThread *thread)
 	}
 
 	//Restore taskbar
-	WinSevenTaskbar::setTaskbarState(splashScreen, WinSevenTaskbar::WinSevenTaskbarNoState);
+	SET_TASKBAR_STATE(false);
 
 	//Hide splash
 	splashScreen->m_canClose = true;
