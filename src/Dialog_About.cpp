@@ -53,7 +53,6 @@
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define TRIM_RIGHT(STR) do { while(STR.endsWith(QChar(' ')) || STR.endsWith(QChar('\t')) || STR.endsWith(QChar('\r')) || STR.endsWith(QChar('\n'))) STR.chop(1); } while(0)
 #define MAKE_TRANSPARENT(WIDGET) do { QPalette _p = (WIDGET)->palette(); _p.setColor(QPalette::Background, Qt::transparent); (WIDGET)->setPalette(_p); } while(0)
-#define FLIP(X) do { (X) = (!(X)); } while (0)
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
@@ -146,21 +145,28 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		ui->closeButton->show();
 
 		QPixmap disque(":/images/Disque.png");
-		QRect screenGeometry = QApplication::desktop()->availableGeometry();
 		m_disque = new QLabel(this, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-		m_disque->installEventFilter(this);
+		m_disque->resize(disque.size());
 		m_disque->setStyleSheet("background:transparent;");
 		m_disque->setAttribute(Qt::WA_TranslucentBackground);
-		m_disque->setGeometry(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(screenGeometry.width() - disque.width())), static_cast<int>(lamexp_rand() % static_cast<unsigned int>(screenGeometry.height() - disque.height())), disque.width(), disque.height());
 		m_disque->setPixmap(disque);
-		m_disque->setWindowOpacity(0.01);
-		m_disque->show();
+		m_disque->installEventFilter(this);
+
+		connect(QApplication::desktop(), SIGNAL(workAreaResized(int)), this, SLOT(geometryUpdated()));
+		geometryUpdated();
+
+		m_discOpacity = 0.01;
+		m_disquePos.setX(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_posMax_x - disque.width()  - m_posMin_x)) + m_posMin_x);
+		m_disquePos.setY(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_posMax_y - disque.height() - m_posMin_y)) + m_posMin_y);
 		m_disqueFlags[0] = (lamexp_rand() > (UINT_MAX/2));
 		m_disqueFlags[1] = (lamexp_rand() > (UINT_MAX/2));
+		m_disque->move(m_disquePos);
+		m_disque->setWindowOpacity(m_discOpacity);
+		m_disque->show();
+
 		m_disqueTimer = new QTimer;
 		connect(m_disqueTimer, SIGNAL(timeout()), this, SLOT(moveDisque()));
-		m_disqueTimer->setInterval(10);
-		m_disqueTimer->start();
+		m_disqueTimer->start(10);
 
 		connect(ui->aboutQtButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
 	}
@@ -238,8 +244,19 @@ int AboutDialog::exec()
 // Slots
 ////////////////////////////////////////////////////////////
 
-#define TEMP_HIDE_DISQUE(CMD) \
-if(m_disque) { bool _tmp = m_disque->isVisible(); if(_tmp) m_disque->hide(); {CMD}; if(_tmp) { m_disque->show(); m_disque->setWindowOpacity(0.01); } } else {CMD}
+#define TEMP_HIDE_DISQUE(CMD) do \
+{ \
+	bool _tmp = (m_disque) ? m_disque->isVisible() : false; \
+	if(_tmp) m_disque->hide(); \
+	{ CMD } \
+	if(_tmp) \
+	{ \
+		m_discOpacity = 0.01; \
+		m_disque->setWindowOpacity(m_discOpacity); \
+		m_disque->show(); \
+	} \
+} \
+while(0)
 
 void AboutDialog::tabChanged(int index)
 {
@@ -333,22 +350,16 @@ void AboutDialog::moveDisque(void)
 
 	if(m_disque)
 	{
-		QRect screenGeometry = QApplication::desktop()->availableGeometry();
-		const int minX = screenGeometry.left();
-		const int maxX = screenGeometry.width() - m_disque->width() + screenGeometry.left();
-		const int minY = screenGeometry.top();
-		const int maxY = screenGeometry.height() - m_disque->height() + screenGeometry.top();
+		if(m_disquePos.x() <= m_posMin_x) { m_disqueFlags[0] = true;  m_rotateNext = true; }
+		if(m_disquePos.x() >= m_posMax_x) { m_disqueFlags[0] = false; m_rotateNext = true; }
+		if(m_disquePos.y() <= m_posMin_y) { m_disqueFlags[1] = true;  m_rotateNext = true; }
+		if(m_disquePos.y() >= m_posMax_y) { m_disqueFlags[1] = false; m_rotateNext = true; }
 		
-		const QPoint posOld = m_disque->pos();
-		const int x = qBound(minX, m_disqueFlags[0] ? posOld.x() + delta : posOld.x() - delta, maxX);
-		const int y = qBound(minY, m_disqueFlags[1] ? posOld.y() + delta : posOld.y() - delta, maxY);
+		m_disquePos.setX(m_disqueFlags[0] ? (m_disquePos.x() + delta) : (m_disquePos.x() - delta));
+		m_disquePos.setY(m_disqueFlags[1] ? (m_disquePos.y() + delta) : (m_disquePos.y() - delta));
 
-		m_disque->move(x, y);
-
-		const QPoint posNew = m_disque->pos();
-		if(posNew.x() == posOld.x()) { FLIP(m_disqueFlags[0]); m_rotateNext = true; }
-		if(posNew.y() == posOld.y()) { FLIP(m_disqueFlags[1]); m_rotateNext = true; }
-
+		m_disque->move(m_disquePos);
+		
 		if(m_rotateNext)
 		{
 			QPixmap *cartoon = NULL;
@@ -359,21 +370,37 @@ void AboutDialog::moveDisque(void)
 			if(cartoon)
 			{
 				m_disque->setPixmap(*cartoon);
-				m_disque->resize(cartoon->size());
+				if(m_disque->size() != cartoon->size())
+				{
+					m_disque->resize(cartoon->size());
+					geometryUpdated();
+				}
 			}
 			m_rotateNext = false;
 		}
 
-		double opacity = m_disque->windowOpacity();
-		if(opacity != 1.0)
+		if(m_discOpacity != 1.0)
 		{
-			opacity = opacity + 0.01;
-			if(qFuzzyCompare(opacity, 1.0) || (opacity > 1.0))
+			m_discOpacity = m_discOpacity + 0.01;
+			if(qFuzzyCompare(m_discOpacity, 1.0) || (m_discOpacity > 1.0))
 			{
-				opacity = 1.0;
+				m_discOpacity = 1.0;
 			}
-			m_disque->setWindowOpacity(opacity);
+			m_disque->setWindowOpacity(m_discOpacity);
+			m_disque->update();
 		}
+	}
+}
+
+void AboutDialog::geometryUpdated(void)
+{
+	if(m_disque)
+	{
+		QRect screenGeometry = QApplication::desktop()->availableGeometry();
+		m_posMin_x = screenGeometry.left();
+		m_posMax_x = screenGeometry.width() - m_disque->width() + screenGeometry.left();
+		m_posMin_y = screenGeometry.top();
+		m_posMax_y = screenGeometry.height() - m_disque->height() + screenGeometry.top();
 	}
 }
 
