@@ -69,15 +69,11 @@ private:
 	QMap<QWidget*,bool> *m_initFlags;
 	int m_lastTab;
 	
-	int m_posMin_x;
-	int m_posMax_x;
-	int m_posMin_y;
-	int m_posMax_y;
-
 	QLabel *m_disque;
 	QTimer * m_disqueTimer;
 	bool m_disqueFlags[2];
 	QPoint m_disquePos;
+	QRect m_disqueBound;
 	double m_discOpacity;
 	QPixmap *m_cartoon[4];
 	bool m_rotateNext;

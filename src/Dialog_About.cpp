@@ -156,8 +156,8 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		geometryUpdated();
 
 		m_discOpacity = 0.01;
-		m_disquePos.setX(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_posMax_x - disque.width()  - m_posMin_x)) + m_posMin_x);
-		m_disquePos.setY(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_posMax_y - disque.height() - m_posMin_y)) + m_posMin_y);
+		m_disquePos.setX(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_disqueBound.right()  - disque.width()  - m_disqueBound.left())) + m_disqueBound.left());
+		m_disquePos.setY(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_disqueBound.bottom() - disque.height() - m_disqueBound.top()))  + m_disqueBound.top());
 		m_disqueFlags[0] = (lamexp_rand() > (UINT_MAX/2));
 		m_disqueFlags[1] = (lamexp_rand() > (UINT_MAX/2));
 		m_disque->move(m_disquePos);
@@ -350,10 +350,10 @@ void AboutDialog::moveDisque(void)
 
 	if(m_disque)
 	{
-		if(m_disquePos.x() <= m_posMin_x) { m_disqueFlags[0] = true;  m_rotateNext = true; }
-		if(m_disquePos.x() >= m_posMax_x) { m_disqueFlags[0] = false; m_rotateNext = true; }
-		if(m_disquePos.y() <= m_posMin_y) { m_disqueFlags[1] = true;  m_rotateNext = true; }
-		if(m_disquePos.y() >= m_posMax_y) { m_disqueFlags[1] = false; m_rotateNext = true; }
+		if(m_disquePos.x() <= m_disqueBound.left())   { m_disqueFlags[0] = true;  m_rotateNext = true; }
+		if(m_disquePos.x() >= m_disqueBound.right())  { m_disqueFlags[0] = false; m_rotateNext = true; }
+		if(m_disquePos.y() <= m_disqueBound.top())    { m_disqueFlags[1] = true;  m_rotateNext = true; }
+		if(m_disquePos.y() >= m_disqueBound.bottom()) { m_disqueFlags[1] = false; m_rotateNext = true; }
 		
 		m_disquePos.setX(m_disqueFlags[0] ? (m_disquePos.x() + delta) : (m_disquePos.x() - delta));
 		m_disquePos.setY(m_disqueFlags[1] ? (m_disquePos.y() + delta) : (m_disquePos.y() - delta));
@@ -397,10 +397,14 @@ void AboutDialog::geometryUpdated(void)
 	if(m_disque)
 	{
 		QRect screenGeometry = QApplication::desktop()->availableGeometry();
-		m_posMin_x = screenGeometry.left();
-		m_posMax_x = screenGeometry.width() - m_disque->width() + screenGeometry.left();
-		m_posMin_y = screenGeometry.top();
-		m_posMax_y = screenGeometry.height() - m_disque->height() + screenGeometry.top();
+		m_disqueBound.setLeft(screenGeometry.left());
+		m_disqueBound.setRight(screenGeometry.width() - m_disque->width() + screenGeometry.left());
+		m_disqueBound.setTop(screenGeometry.top());
+		m_disqueBound.setBottom(screenGeometry.height() - m_disque->height() + screenGeometry.top());
+	}
+	else
+	{
+		m_disqueBound = QApplication::desktop()->availableGeometry();
 	}
 }
 
@@ -665,7 +669,7 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("Valdec from AC3Filter Tools - AC3/DTS Decoder"),
-		"valdec.exe", "v?.?.?#",
+		"valdec.exe", "v?.??#",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.ac3filter.net/projects/tools"
 	);
