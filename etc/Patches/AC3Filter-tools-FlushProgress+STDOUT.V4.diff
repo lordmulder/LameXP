@@ -1,0 +1,326 @@
+ valdec.cpp | 102 +++++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 56 insertions(+), 46 deletions(-)
+
+diff --git a/valdec.cpp b/valdec.cpp
+index 2530a56..589068c 100644
+--- a/valdec.cpp
++++ b/valdec.cpp
+@@ -3,6 +3,10 @@
+ #include <math.h>
+ #include <string>
+ 
++// CRT
++#include <fcntl.h>
++#include <io.h>
++
+ // parsers
+ #include "source/file_parser.h"
+ 
+@@ -131,7 +135,7 @@ int valdec(const arg_list_t &args)
+   using std::string;
+   if (args.size() < 2)
+   {
+-    printf(usage);
++    fprintf(stderr, usage);
+     return 1;
+   }
+ 
+@@ -218,7 +222,7 @@ int valdec(const arg_list_t &args)
+     {
+       if (parser)
+       {
+-        printf("-ac3 : ambiguous parser\n");
++        fprintf(stderr, "-ac3 : ambiguous parser\n");
+         return 1;
+       }
+ 
+@@ -231,7 +235,7 @@ int valdec(const arg_list_t &args)
+     {
+       if (parser)
+       {
+-        printf("-dts : ambiguous parser\n");
++        fprintf(stderr, "-dts : ambiguous parser\n");
+         return 1;
+       }
+ 
+@@ -244,7 +248,7 @@ int valdec(const arg_list_t &args)
+     {
+       if (parser)
+       {
+-        printf("-mpa : ambiguous parser\n");
++        fprintf(stderr, "-mpa : ambiguous parser\n");
+         return 1;
+       }
+ 
+@@ -288,7 +292,7 @@ int valdec(const arg_list_t &args)
+     {
+       if (sink)
+       {
+-        printf("-decode : ambiguous output mode\n");
++        fprintf(stderr, "-decode : ambiguous output mode\n");
+         return 1;
+       }
+ 
+@@ -304,7 +308,7 @@ int valdec(const arg_list_t &args)
+     {
+       if (sink)
+       {
+-        printf("-play : ambiguous output mode\n");
++        fprintf(stderr, "-play : ambiguous output mode\n");
+         return 1;
+       }
+ 
+@@ -320,12 +324,12 @@ int valdec(const arg_list_t &args)
+     {
+       if (sink)
+       {
+-        printf("-raw : ambiguous output mode\n");
++        fprintf(stderr, "-raw : ambiguous output mode\n");
+         return 1;
+       }
+       if (args.size() - iarg < 1)
+       {
+-        printf("-raw : specify a file name\n");
++        fprintf(stderr, "-raw : specify a file name\n");
+         return 1;
+       }
+ 
+@@ -342,12 +346,12 @@ int valdec(const arg_list_t &args)
+     {
+       if (sink)
+       {
+-        printf("-wav : ambiguous output mode\n");
++        fprintf(stderr, "-wav : ambiguous output mode\n");
+         return 1;
+       }
+       if (args.size() - iarg < 1)
+       {
+-        printf("-wav : specify a file name\n");
++        fprintf(stderr, "-wav : specify a file name\n");
+         return 1;
+       }
+ 
+@@ -364,7 +368,7 @@ int valdec(const arg_list_t &args)
+     {
+       if (sink)
+       {
+-        printf("-nothing : ambiguous output mode\n");
++        fprintf(stderr, "-nothing : ambiguous output mode\n");
+         return 1;
+       }
+ 
+@@ -404,7 +408,7 @@ int valdec(const arg_list_t &args)
+     {
+       if (args.size() - iarg < 1)
+       {
+-        printf("-log : specify a file name\n");
++        fprintf(stderr, "-log : specify a file name\n");
+         return 1;
+       }
+ 
+@@ -587,7 +591,7 @@ int valdec(const arg_list_t &args)
+     }
+     if (have_delay) continue;
+ 
+-    printf("Error: unknown option: %s\n", arg.raw.c_str());
++    fprintf(stderr, "Error: unknown option: %s\n", arg.raw.c_str());
+     return 1;
+   }
+ 
+@@ -600,13 +604,13 @@ int valdec(const arg_list_t &args)
+ 
+   if (!file.open(input_filename, parser, 1000000))
+   {
+-    printf("Error: Cannot open file '%s'\n", input_filename);
++    fprintf(stderr, "Error: Cannot open file '%s'\n", input_filename);
+     return 1;
+   }
+ 
+   if (!file.stats() || !file.probe())
+   {
+-    printf("Error: Cannot detect input file format\n", input_filename);
++    fprintf(stderr, "Error: Cannot detect input file format\n", input_filename);
+     return 1;
+   }
+ 
+@@ -616,8 +620,8 @@ int valdec(const arg_list_t &args)
+ 
+   if (print_info)
+   {
+-    printf("%s\n", file.file_info().c_str());
+-    printf("%s", file.stream_info().c_str());
++    fprintf(stderr, "%s\n", file.file_info().c_str());
++    fprintf(stderr, "%s", file.stream_info().c_str());
+   }
+ 
+   if (mode == mode_nothing)
+@@ -638,14 +642,14 @@ int valdec(const arg_list_t &args)
+   Speakers user_spk(format, mask, sample_rate);
+   if (!dvd_graph.set_user(user_spk))
+   {
+-    printf("Error: unsupported user format %s\n", user_spk.print());
++    fprintf(stderr, "Error: unsupported user format %s\n", user_spk.print());
+     return 1;
+   }
+ 
+   Speakers in_spk = file.get_output();
+   if (!dvd_graph.open(in_spk))
+   {
+-    printf("Error: unsupported file format %s\n", in_spk.print());
++    fprintf(stderr, "Error: unsupported file format %s\n", in_spk.print());
+     return 1;
+   }
+ 
+@@ -679,7 +683,7 @@ int valdec(const arg_list_t &args)
+     case mode_raw:
+       if (!out_filename || !raw.open_file(out_filename))
+       {
+-        printf("Error: failed to open output file '%s'\n", out_filename);
++        fprintf(stderr, "Error: failed to open output file '%s'\n", out_filename);
+         return 1;
+       }
+       break;
+@@ -687,7 +691,7 @@ int valdec(const arg_list_t &args)
+     case mode_wav:
+       if (!out_filename || !wav.open_file(out_filename))
+       {
+-        printf("Error: failed to open output file '%s'\n", out_filename);
++        fprintf(stderr, "Error: failed to open output file '%s'\n", out_filename);
+         return 1;
+       }
+       break;
+@@ -695,7 +699,7 @@ int valdec(const arg_list_t &args)
+     case mode_play:
+       if (!dsound.open_dsound(0))
+       {
+-        printf("Error: failed to init DirectSound\n");
++        fprintf(stderr, "Error: failed to init DirectSound\n");
+         return 1;
+       }
+       break;
+@@ -744,10 +748,14 @@ int valdec(const arg_list_t &args)
+       int(value2db(level)),                                                                                    \
+       int(file.get_frames() / time),                                                                           \
+       cpu_current.usage() * 100);                                                                              \
++    fflush(stderr);                                                                                            \
+   }
+ 
+   #define DROP_STAT \
+-    fprintf(stderr, "                                                                             \r");
++  { \
++    fprintf(stderr, "                                                                             \r"); \
++    fflush(stderr); \
++  }
+ 
+   while (file.get_chunk(chunk))
+   {
+@@ -760,7 +768,7 @@ int valdec(const arg_list_t &args)
+         PRINT_STAT;
+ 
+       if (streams > 0 && print_info)
+-        printf("\n\n%s", file.stream_info().c_str());
++        fprintf(stderr, "\n\n%s", file.stream_info().c_str());
+ 
+       streams++;
+       if (mode == mode_nothing)
+@@ -775,11 +783,11 @@ int valdec(const arg_list_t &args)
+         if (sink->open(new_spk))
+         {
+           DROP_STAT;
+-          printf("Opening audio output %s...\n", new_spk.print().c_str());
++          fprintf(stderr, "Opening audio output %s...\n", new_spk.print().c_str());
+         }
+         else
+         {
+-          printf("\nOutput format %s is unsupported\n", new_spk.print().c_str());
++          fprintf(stderr, "\nOutput format %s is unsupported\n", new_spk.print().c_str());
+           return 1;
+         }
+       }
+@@ -806,11 +814,11 @@ int valdec(const arg_list_t &args)
+       if (sink->open(new_spk))
+       {
+         DROP_STAT;
+-        printf("Opening audio output %s...\n", new_spk.print().c_str());
++        fprintf(stderr, "Opening audio output %s...\n", new_spk.print().c_str());
+       }
+       else
+       {
+-        printf("\nOutput format %s is unsupported\n", new_spk.print().c_str());
++        fprintf(stderr, "\nOutput format %s is unsupported\n", new_spk.print().c_str());
+         return 1;
+       }
+     }
+@@ -829,13 +837,13 @@ int valdec(const arg_list_t &args)
+   // Final statistics
+ 
+   PRINT_STAT;
+-  printf("\n---------------------------------------\n");
++  fprintf(stderr, "\n---------------------------------------\n");
+   if (streams > 1)
+-    printf("Streams found: %i\n", streams);
+-  printf("Frames: %i\n", file.get_frames());
+-  printf("System time: %ims\n", int(cpu_total.get_system_time() * 1000));
+-  printf("Process time: %ims\n", int(cpu_total.get_thread_time() * 1000 ));
+-  printf("Approx. %.2f%% realtime CPU usage\n", double(cpu_total.get_thread_time() * 100) / file.get_size(file.time));
++    fprintf(stderr, "Streams found: %i\n", streams);
++  fprintf(stderr, "Frames: %i\n", file.get_frames());
++  fprintf(stderr, "System time: %ims\n", int(cpu_total.get_system_time() * 1000));
++  fprintf(stderr, "Process time: %ims\n", int(cpu_total.get_thread_time() * 1000 ));
++  fprintf(stderr, "Approx. %.2f%% realtime CPU usage\n", double(cpu_total.get_thread_time() * 100) / file.get_size(file.time));
+ 
+   /////////////////////////////////////////////////////////
+   // Print levels histogram
+@@ -852,21 +860,21 @@ int valdec(const arg_list_t &args)
+     max_level = dvd_graph.proc.get_max_level();
+     dbpb = dvd_graph.proc.get_dbpb();
+ 
+-    printf("\nHistogram:\n");
+-    printf("------------------------------------------------------------------------------\n");
++    fprintf(stderr, "\nHistogram:\n");
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
+     for (i = 0; i*dbpb < 100 && i < MAX_HISTOGRAM; i++)
+     {
+-      printf("%2idB: %4.1f ", i * dbpb, hist[i] * 100);
++      fprintf(stderr, "%2idB: %4.1f ", i * dbpb, hist[i] * 100);
+       for (j = 0; j < 67 && j < hist[i] * 67; j++)
+-        printf("*");
+-      printf("\n");
++        fprintf(stderr, "*");
++      fprintf(stderr, "\n");
+     }
+-    printf("------------------------------------------------------------------------------\n");
+-    printf("max_level;%f\ndbpb;%i\nhistogram;", max_level, dbpb);
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
++    fprintf(stderr, "max_level;%f\ndbpb;%i\nhistogram;", max_level, dbpb);
+     for (i = 0; i < MAX_HISTOGRAM; i++)
+-      printf("%.4f;", hist[i]);
+-    printf("\n");
+-    printf("------------------------------------------------------------------------------\n");
++      fprintf(stderr, "%.4f;", hist[i]);
++    fprintf(stderr, "\n");
++    fprintf(stderr, "------------------------------------------------------------------------------\n");
+   }
+ 
+   return 0;
+@@ -876,16 +884,18 @@ int main(int argc, const char *argv[])
+ {
+   try
+   {
++    _setmode(_fileno(stdout), _O_BINARY);
++    _setmode(_fileno(stdin), _O_BINARY);
+     return valdec(args_utf8(argc, argv));
+   }
+   catch (ValibException &e)
+   {
+-    printf("Processing error: %s\n", boost::diagnostic_information(e).c_str());
++    fprintf(stderr, "Processing error: %s\n", boost::diagnostic_information(e).c_str());
+     return -1;
+   }
+   catch (arg_t::bad_value_e &e)
+   {
+-    printf("Bad argument value: %s", e.arg.c_str());
++    fprintf(stderr, "Bad argument value: %s", e.arg.c_str());
+     return -1;
+   }
+   return 0;

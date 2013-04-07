@@ -1,0 +1,41 @@
+ valib/auto_file.cpp              | 13 +++++++++++++
+ valib/parsers/ffmpeg_decoder.cpp |  2 ++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/valib/auto_file.cpp b/valib/auto_file.cpp
+index 8f1dec3..91ae397 100644
+--- a/valib/auto_file.cpp
++++ b/valib/auto_file.cpp
+@@ -90,6 +90,19 @@ bool
+ AutoFile::open(const char *filename, const char *mode)
+ {
+   if (f) close();
++  
++  if(_stricmp(filename, "-") == 0)
++  {
++    const bool flag_r = (strchr(mode, 'r') != NULL);
++    const bool flag_w = (strchr(mode, 'w') != NULL) || (strchr(mode, 'a') != NULL);
++    if((!(flag_r && flag_w)) && (flag_r || flag_w))
++    {
++      f = (flag_r) ? stdin : stdout;
++      own_file = false;
++    }
++    return is_open();
++  }
++  
+   f = fopen_utf8(filename, mode);
+   if (f)
+   {
+diff --git a/valib/parsers/ffmpeg_decoder.cpp b/valib/parsers/ffmpeg_decoder.cpp
+index b6b20d7..864f83c 100644
+--- a/valib/parsers/ffmpeg_decoder.cpp
++++ b/valib/parsers/ffmpeg_decoder.cpp
+@@ -10,6 +10,8 @@ extern "C"
+ {
+ #define __STDC_CONSTANT_MACROS
+ #include "../../3rdparty/ffmpeg/include/libavcodec/avcodec.h"
++#include "../../3rdparty/ffmpeg/include/libavutil/mem.h"
++#include "../../3rdparty/ffmpeg/include/libavutil/channel_layout.h"
+ }
+ 
+ static const string module = "FfmpegDecoder";
