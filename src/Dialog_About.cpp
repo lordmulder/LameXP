@@ -781,7 +781,7 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("UPX - The Ultimate Packer for eXecutables"),
-		QString(), "v3.08",
+		QString(), "v3.09",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://upx.sourceforge.net/"
 	);

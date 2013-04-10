@@ -132,6 +132,7 @@ void SplashScreen::showSplash(QThread *thread)
 	{
 		opacity = (i < opacitySteps) ? (OPACITY_DELTA * static_cast<double>(i)) : 1.0;
 		splashScreen->setWindowOpacity(opacity);
+		splashScreen->update();
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
 		SET_TASKBAR_STATE(true);
 		Sleep(FADE_DELAY);
@@ -161,6 +162,7 @@ void SplashScreen::showSplash(QThread *thread)
 	{
 		opacity = OPACITY_DELTA * static_cast<double>(i);
 		splashScreen->setWindowOpacity(opacity);
+		splashScreen->update();
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
 		Sleep(FADE_DELAY);
 	}
