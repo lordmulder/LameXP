@@ -2177,7 +2177,9 @@ void lamexp_blink_window(QWidget *poWindow, unsigned int count, unsigned int del
 const QString lamexp_clean_filename(const QString &str)
 {
 	QString newStr(str);
-	
+	QRegExp rx("\"(.+)\"");
+	rx.setMinimal(true);
+
 	newStr.replace("\\", "-");
 	newStr.replace(" / ", ", ");
 	newStr.replace("/", ",");
@@ -2187,6 +2189,8 @@ const QString lamexp_clean_filename(const QString &str)
 	newStr.replace("<", "[");
 	newStr.replace(">", "]");
 	newStr.replace("|", "!");
+	newStr.replace(rx, "`\\1´");
+	newStr.replace("\"", "'");
 	
 	return newStr.simplified();
 }
