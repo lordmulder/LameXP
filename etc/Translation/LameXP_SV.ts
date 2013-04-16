@@ -238,7 +238,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="671"/>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Valdec från AC3Filter Tools - AC3/DTS Decoder</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="678"/>
@@ -1604,7 +1604,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4396"/>
         <source>Official LameXP Project Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation>Officiell LameXP projektwebbsida</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4399"/>
@@ -1744,7 +1744,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4639"/>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>MuldeRs Öppen källkodsprojekt</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="704"/>
@@ -2512,12 +2512,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3542"/>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bäst kvalitet (Långsam)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3548"/>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Acceptabel kvalitet (Snabb)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3545"/>
