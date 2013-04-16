@@ -49,6 +49,9 @@ static int lamexp_main(int argc, char* argv[])
 	int iShutdown = shutdownFlag_None;
 	bool bAccepted = true;
 
+	//Increase "main" thread priority
+	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
+
 	//Get CLI arguments
 	const QStringList &arguments = lamexp_arguments();
 
