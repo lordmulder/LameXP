@@ -277,6 +277,15 @@ static struct
 }
 g_lamexp_os_version;
 
+//Portable Mode
+static struct
+{
+	bool bInitialized;
+	bool bPortableModeEnabled;
+	QReadWriteLock lock;
+}
+g_lamexp_portable;
+
 //Win32 Theme support
 static struct
 {
@@ -1428,10 +1437,34 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
  */
 bool lamexp_portable_mode(void)
 {
-	QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
-	int idx1 = baseName.indexOf("lamexp", 0, Qt::CaseInsensitive);
-	int idx2 = baseName.lastIndexOf("portable", -1, Qt::CaseInsensitive);
-	return (idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2);
+	QReadLocker readLock(&g_lamexp_portable.lock);
+
+	if(g_lamexp_portable.bInitialized)
+	{
+		return g_lamexp_portable.bPortableModeEnabled;
+	}
+	
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_portable.lock);
+
+	if(!g_lamexp_portable.bInitialized)
+	{
+		if(VER_LAMEXP_PORTABLE_EDITION)
+		{
+			qWarning("LameXP portable edition!\n");
+			g_lamexp_portable.bPortableModeEnabled = true;
+		}
+		else
+		{
+			QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
+			int idx1 = baseName.indexOf("lamexp", 0, Qt::CaseInsensitive);
+			int idx2 = baseName.lastIndexOf("portable", -1, Qt::CaseInsensitive);
+			g_lamexp_portable.bPortableModeEnabled = (idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2);
+		}
+		g_lamexp_portable.bInitialized = true;
+	}
+	
+	return g_lamexp_portable.bPortableModeEnabled;
 }
 
 /*
@@ -2401,6 +2434,7 @@ extern "C"
 		LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
 		LAMEXP_ZERO_MEMORY(g_lamexp_os_version);
 		LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
+		LAMEXP_ZERO_MEMORY(g_lamexp_portable);
 
 		//Make sure we will pass the check
 		g_lamexp_entry_check_flag = ~g_lamexp_entry_check_flag;
