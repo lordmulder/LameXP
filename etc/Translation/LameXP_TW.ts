@@ -285,7 +285,7 @@
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>AC3Filter工具 - AC3/DTS 解碼器</translation>
     </message>
 </context>
 <context>
@@ -1999,19 +1999,19 @@
     </message>
     <message>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>最佳質量（慢）</translation>
     </message>
     <message>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>可接受的質量（快速）</translation>
     </message>
     <message>
         <source>Official LameXP Project Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP 官方項目網站</translation>
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Mulder的開源項目</translation>
     </message>
 </context>
 <context>
@@ -2212,7 +2212,7 @@
     </message>
     <message>
         <source>Encoded with LameXP</source>
-        <translation>編碼與LameXP</translation>
+        <translation>LameXP編碼器</translation>
     </message>
     <message>
         <source>Not editable</source>
