@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AC3Filter 도구의 Valdec - AC3/DTS Decoder</translation>
     </message>
 </context>
 <context>
@@ -2000,19 +2000,19 @@
     </message>
     <message>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">최상 품질 (느림)</translation>
     </message>
     <message>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">허용 가능 품질 (빠름)</translation>
     </message>
     <message>
         <source>Official LameXP Project Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP Project 공식 웹사이트</translation>
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuldeR&apos;s 오픈소스 프로젝트</translation>
     </message>
 </context>
 <context>
@@ -2537,25 +2537,25 @@
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
+            <numerusform>오류: %1/%n 파일 실패 (%2). 자세한 정보를 보려면 실패 항목을 더블 클릭하십시오!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) skipped</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
+            <numerusform>%n 파일 건너뜀</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
+            <numerusform>오류: : %1 / %n 파일 실패. 자세한 정보를 보려면 실패 항목을 더블 클릭하십시오!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
+            <numerusform>모든 파일들이 성공적으로 완료되었습니다. %n 파일 건너뜀.</numerusform>
         </translation>
     </message>
 </context>
