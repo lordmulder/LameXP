@@ -287,6 +287,10 @@
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation>AC3Filter工具 - AC3/DTS 解碼器</translation>
     </message>
+    <message>
+        <source>Codecs.com</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

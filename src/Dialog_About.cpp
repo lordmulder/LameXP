@@ -593,6 +593,8 @@ void AboutDialog::initContributorsTab(void)
 	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Qt Developer Network"), spaces, "http://qt-project.org/");
 	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
 	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Marius Hudea"), spaces, "http://savedonthe.net/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Codecs.com"), spaces, "http://www.codecs.com/");
 
 	contributorsAboutText += "</table><br><br><br>";
 	contributorsAboutText += QString("<i>%1</i><br>").arg(NOBR(tr("If you are willing to contribute a LameXP translation, feel free to contact us!")));
