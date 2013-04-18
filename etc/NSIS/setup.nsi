@@ -57,7 +57,7 @@
 !define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
 
 ;Web-Site
-!define MyWebSite "http://mulder.at.gg/"
+!define MyWebSite "http://muldersoft.com/"
 
 
 ;--------------------------------
