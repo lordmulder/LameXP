@@ -285,11 +285,11 @@
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Valdec de AC3Filter Tools - Decodificador AC3/DTS</translation>
     </message>
     <message>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Codecs.com</translation>
     </message>
 </context>
 <context>
@@ -2011,19 +2011,19 @@
     </message>
     <message>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mejor calidad (lento)</translation>
     </message>
     <message>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad aceptable (rápido)</translation>
     </message>
     <message>
         <source>Official LameXP Project Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation>Web oficial del proyecto LameXP</translation>
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Proyectos de código abierto de MuldeR</translation>
     </message>
 </context>
 <context>
