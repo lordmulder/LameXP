@@ -650,7 +650,7 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("Opus Audio Codec"),
-		"opusenc.exe", "????-??-??",
+		"opusenc.exe", "#, ????-??-??",
 		tr("Totally open, royalty-free, highly versatile audio codec."),
 		"http://www.opus-codec.org/"
 	);
