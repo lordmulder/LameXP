@@ -2345,44 +2345,69 @@ void MainWindow::sourceFilesScrollbarMoved(int)
  */
 void MainWindow::previewContextActionTriggered(void)
 {
-	const static char *appNames[3] = {"smplayer_portable.exe", "smplayer.exe", "mplayer.exe"};
-	const static wchar_t *registryKey = L"SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{DB9E4EAB-2717-499F-8D56-4CC8A644AB60}";
-	
+	const static wchar_t *registryPrefix[2] = { L"SOFTWARE\\", L"SOFTWARE\\Wow6432Node\\" };
+	const static wchar_t *registryKeys[3] = 
+	{
+		L"Microsoft\\Windows\\CurrentVersion\\Uninstall\\{97D341C8-B0D1-4E4A-A49A-C30B52F168E9}",
+		L"Microsoft\\Windows\\CurrentVersion\\Uninstall\\{DB9E4EAB-2717-499F-8D56-4CC8A644AB60}",
+		L"foobar2000"
+	};
+	const static wchar_t *appNames[4] = { L"smplayer_portable.exe", L"smplayer.exe", L"MPUI.exe", L"foobar2000.exe" };
+	const static wchar_t *valueNames[2] = { L"InstallLocation", L"InstallDir" };
+
 	QModelIndex index = ui->sourceFileView->currentIndex();
 	if(!index.isValid())
 	{
 		return;
 	}
 
-	QString mplayerPath;
-	HKEY registryKeyHandle;
-
-	if(RegOpenKeyExW(HKEY_LOCAL_MACHINE, registryKey, 0, KEY_READ, &registryKeyHandle) == ERROR_SUCCESS)
+	for(size_t i = 0; i < 3; i++)
 	{
-		wchar_t Buffer[4096];
-		DWORD BuffSize = sizeof(wchar_t*) * 4096;
-		if(RegQueryValueExW(registryKeyHandle, L"InstallLocation", 0, 0, reinterpret_cast<BYTE*>(Buffer), &BuffSize) == ERROR_SUCCESS)
+		for(size_t j = 0; j < 2; j++)
 		{
-			mplayerPath = QString::fromUtf16(reinterpret_cast<const unsigned short*>(Buffer));
-		}
-	}
+			QString mplayerPath;
+			HKEY registryKeyHandle = NULL;
 
-	if(!mplayerPath.isEmpty())
-	{
-		QDir mplayerDir(mplayerPath);
-		if(mplayerDir.exists())
-		{
-			for(int i = 0; i < 3; i++)
+			const QString currentKey = WCHAR2QSTR(registryPrefix[j]).append(WCHAR2QSTR(registryKeys[i]));
+			if(RegOpenKeyExW(HKEY_LOCAL_MACHINE, QWCHAR(currentKey), 0, KEY_READ, &registryKeyHandle) == ERROR_SUCCESS)
 			{
-				if(mplayerDir.exists(appNames[i]))
+				for(size_t k = 0; k < 2; k++)
 				{
-					QProcess::startDetached(mplayerDir.absoluteFilePath(appNames[i]), QStringList() << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
-					return;
+					wchar_t Buffer[4096];
+					DWORD BuffSize = sizeof(wchar_t*) * 4096;
+					DWORD DataType = REG_NONE;
+					if(RegQueryValueExW(registryKeyHandle, valueNames[k], 0, &DataType, reinterpret_cast<BYTE*>(Buffer), &BuffSize) == ERROR_SUCCESS)
+					{
+						if((DataType == REG_SZ) || (DataType == REG_EXPAND_SZ) || (DataType == REG_LINK))
+						{
+							mplayerPath = WCHAR2QSTR(Buffer);
+							break;
+						}
+					}
+				}
+				RegCloseKey(registryKeyHandle);
+			}
+
+			if(!mplayerPath.isEmpty())
+			{
+				QDir mplayerDir(mplayerPath);
+				if(mplayerDir.exists())
+				{
+					for(size_t k = 0; k < 4; k++)
+					{
+						if(mplayerDir.exists(WCHAR2QSTR(appNames[k])))
+						{
+							qDebug("Player found at:\n%s\n", mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])).toUtf8().constData());
+							QProcess::startDetached(mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])), QStringList() << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
+							return;
+						}
+					}
 				}
 			}
 		}
 	}
 	
+	qDebug("Player not found, falling back to default application...");
 	QDesktopServices::openUrl(QString("file:///").append(m_fileListModel->getFile(index).filePath()));
 }
 

@@ -1758,7 +1758,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="720"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3929"/>
         <source>Access Denied</source>
         <translation>Åtkomst nekad</translation>
     </message>
@@ -1950,7 +1950,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1374"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1451"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1991"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3847"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3872"/>
         <source>Discard</source>
         <translation>Stäng</translation>
     </message>
@@ -2358,229 +2358,229 @@
         <translation>Lägg till mapp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2466"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2470"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2491"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2495"/>
         <source>Save CSV file</source>
         <translation>Spara CSV-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2466"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2473"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2517"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2523"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2491"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2498"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2542"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2548"/>
         <source>CSV File</source>
         <translation>CSV-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2487"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2490"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2493"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2496"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2512"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2515"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2518"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2521"/>
         <source>CSV Export</source>
         <translation>CSV-export</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2487"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2512"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation>Det finns ingen meta-data som kan exporteras!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2490"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2515"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation>Kunde inte öppna CSV-filen för skrivning!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2493"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2518"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation>Kunde inte skriva till CSV-filen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2496"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2521"/>
         <source>The CSV files was created successfully!</source>
         <translation>CSV-filen skapades korrekt!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2517"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2521"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2542"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2546"/>
         <source>Open CSV file</source>
         <translation>Öppna CSV-fil</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2537"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2540"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2543"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2546"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2549"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2562"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2565"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2568"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2571"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2574"/>
         <source>CSV Import</source>
         <translation>CSV-import</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2537"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2562"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation>Kunde inte öppna CSV-filen för läsning!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2540"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2565"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation>Kunde inte läsa från CSV-filen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2543"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2568"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation>CSV-filen innehåller inga kända fält!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2571"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation>CSV-filen är inte komplett. Alla filer uppdaterades inte!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2549"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2574"/>
         <source>The CSV files was imported successfully!</source>
         <translation>CSV-filen importerades korrekt!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2729"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2772"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2754"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2797"/>
         <source>New Folder</source>
         <translation>Ny mapp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2772"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2797"/>
         <source>Enter the name of the new folder:</source>
         <translation>Namn på den nya mappen:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2830"/>
         <source>Failed to create folder</source>
         <translation>Kunde inte skapa någon mapp</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2830"/>
         <source>The new folder could not be created:</source>
         <translation>Den nya mappen kunde inte skapas:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2830"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation>Diskenheten är skrivskyddad eller åtkomsträttigheter saknas!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3308"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3333"/>
         <source>QAAC (Apple)</source>
         <translation>QAAC (Apple)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3308"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3333"/>
         <source>FHG AAC (Winamp)</source>
         <translation>FHG AAC (Winamp)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3308"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3333"/>
         <source>Nero AAC</source>
         <translation>Nero AAC</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3308"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3333"/>
         <source>Not available!</source>
         <translation>Ej tillgänglig!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3310"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3335"/>
         <source>Current AAC Encoder: %1</source>
         <translation>Aktuell AAC-kodare: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3433"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3436"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3441"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3445"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3449"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3459"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3458"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3461"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3466"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3470"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3474"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3484"/>
         <source>Quality Level %1</source>
         <translation>Kvallitetsnivå %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3453"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3476"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3496"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3478"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3501"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3521"/>
         <source>Compression %1</source>
         <translation>Kompression %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3462"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3482"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3505"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3487"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3507"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3530"/>
         <source>Uncompressed</source>
         <translation>Okomprimerad</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3542"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3567"/>
         <source>Best Quality (Slow)</source>
         <translation>Bäst kvalitet (Långsam)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3548"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3573"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>Acceptabel kvalitet (Snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3545"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3570"/>
         <source>High Quality (Recommended)</source>
         <translation>Hög kvallitet (rekommenderas)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3551"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3576"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Dålig kvallitet (mycket snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3836"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3861"/>
         <source>File name without extension</source>
         <translation>Filnamn utan filtillägg</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3837"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3862"/>
         <source>Track number with leading zero</source>
         <translation>Spårnummer med inledande nolla</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3838"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3863"/>
         <source>Track title</source>
         <translation>Spårtitel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3839"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3864"/>
         <source>Artist name</source>
         <translation>Artistnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3840"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3865"/>
         <source>Album name</source>
         <translation>Albumnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3841"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3866"/>
         <source>Year with (at least) four digits</source>
         <translation>Årtal med (minst) fyra siffror</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3842"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3867"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3844"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3869"/>
         <source>Characters forbidden in file names:</source>
         <translation>Förbjudna tecken i filnamn:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3847"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3872"/>
         <source>Rename Macros</source>
         <translation>Namnändra macron</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3860"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3885"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n instans</numerusform>
@@ -2588,37 +2588,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3929"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Kan inte skriva till den specificerade mappen. Välj en annan destination!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4024"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
         <source>Overwrite Mode</source>
         <translation>Överskrivningsläge</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4024"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Varning! Det här läget kan skriva över befintliga filer, utan möjlighet att återskapa!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4024"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
         <source>Continue</source>
         <translation>Fortsätt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4024"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
         <source>Revert</source>
         <translation>Återställ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4089"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4114"/>
         <source>Already Running</source>
         <translation>Körs redan</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4089"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4114"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP körs redan, använd den redan startade instansen!</translation>
     </message>

@@ -30,7 +30,7 @@
 #define VER_LAMEXP_MINOR_LO					7
 #define VER_LAMEXP_TYPE						RC
 #define VER_LAMEXP_PATCH					4
-#define VER_LAMEXP_BUILD					1282
+#define VER_LAMEXP_BUILD					1284
 
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP Build Options
