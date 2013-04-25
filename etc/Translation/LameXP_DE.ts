@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Hinweis: LameXP ist freie Software. Zahlen Sie &lt;b&gt;kein&lt;/b&gt; Geld um LameXP zu erhalten oder zu verwenden! Gehen Sie insbesondere &lt;b&gt;nicht&lt;/b&gt; auf kostenpflichtige Download-Angebote ein !!!</translation>
+        <translation>Hinweis: LameXP ist freie Software. Zahlen Sie &lt;b&gt;kein&lt;/b&gt; Geld, um LameXP zu erhalten oder zu verwenden! Gehen Sie insbesondere &lt;b&gt;nicht&lt;/b&gt; auf kostenpflichtige Download-Angebote ein !!!</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -1081,7 +1081,7 @@
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
-        <translation>Datei(en) werden hinzugefügt, bitte warten...</translation>
+        <translation>Dateien werden hinzugefügt. Bitte warten...</translation>
     </message>
     <message>
         <source>Access Denied</source>
@@ -1873,7 +1873,7 @@
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation>Verzeichnisbaum wird erzeugt, bitte warten...</translation>
+        <translation>Verzeichnisbaum wird erzeugt. Bitte warten...</translation>
     </message>
     <message>
         <source>Refresh Directory Outline</source>
@@ -2086,11 +2086,11 @@
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation>Metainformationen löschen</translation>
+        <translation>Meta-Informationen löschen</translation>
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation>Metainformationen: %1</translation>
+        <translation>Meta-Informationen: %1</translation>
     </message>
 </context>
 <context>
@@ -2548,8 +2548,8 @@
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
-            <numerusform>Kodiere: %n Datei von %1 abgeschlossen, bitte warten...</numerusform>
-            <numerusform>Kodiere: %n Dateien von %1 abgeschlossen, bitte warten...</numerusform>
+            <numerusform>Kodiere: %n Datei von %1 abgeschlossen. Bitte warten...</numerusform>
+            <numerusform>Kodiere: %n Dateien von %1 abgeschlossen. Bitte warten...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
