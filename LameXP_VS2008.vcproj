@@ -156,7 +156,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib Shlwapi.lib Wininet.lib PowrProf.lib QKeccakHash_VS2008.lib"
+				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib Winmm.lib Shlwapi.lib Wininet.lib PowrProf.lib psapi.lib QKeccakHash_VS2008.lib"
 				ShowProgress="2"
 				Version=""
 				LinkIncremental="1"
