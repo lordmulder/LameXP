@@ -86,7 +86,7 @@ static const char *update_mirrors_back[] =
 static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites !!!
 {
 	"http://www.163.com/",
-	"http://www.360buy.com/",
+	"http://en.360buy.com/",
 	"http://www.ac3filter.net/",
 	"http://www.amazon.com/",
 	"http://www.aol.com/",
