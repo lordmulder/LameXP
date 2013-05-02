@@ -1001,7 +1001,7 @@ void MainWindow::changeEvent(QEvent *e)
 		updateEncoder(m_settings->compressionEncoder());
 		updateLameAlgoQuality(ui->sliderLameAlgoQuality->value());
 		updateMaximumInstances(ui->sliderMaxInstances->value());
-		renameOutputPatternChanged(ui->lineEditRenamePattern->text());
+		renameOutputPatternChanged(ui->lineEditRenamePattern->text(), true);
 
 		//Re-install shell integration
 		if(m_settings->shellIntegrationEnabled())
@@ -3812,7 +3812,7 @@ void MainWindow::renameOutputPatternChanged(void)
 /*
  * Rename output files patterm changed
  */
-void MainWindow::renameOutputPatternChanged(const QString &text)
+void MainWindow::renameOutputPatternChanged(const QString &text, bool silent)
 {
 	QString pattern(text.simplified());
 	
@@ -3824,24 +3824,26 @@ void MainWindow::renameOutputPatternChanged(const QString &text)
 	pattern.replace("<Year>", "2001", Qt::CaseInsensitive);
 	pattern.replace("<Comment>", "Encoded by LameXP", Qt::CaseInsensitive);
 
-	if(pattern.compare(lamexp_clean_filename(pattern)))
+	const QString patternClean = lamexp_clean_filename(pattern);
+
+	if(pattern.compare(patternClean))
 	{
 		if(ui->lineEditRenamePattern->palette().color(QPalette::Text) != Qt::red)
 		{
-			MessageBeep(MB_ICONERROR);
+			if(!silent) MessageBeep(MB_ICONERROR);
 			SET_TEXT_COLOR(ui->lineEditRenamePattern, Qt::red);
 		}
 	}
 	else
 	{
-		if(ui->lineEditRenamePattern->palette().color(QPalette::Text) != Qt::black)
+		if(ui->lineEditRenamePattern->palette() != QPalette())
 		{
-			MessageBeep(MB_ICONINFORMATION);
-			SET_TEXT_COLOR(ui->lineEditRenamePattern, Qt::black);
+			if(!silent) MessageBeep(MB_ICONINFORMATION);
+			ui->lineEditRenamePattern->setPalette(QPalette());
 		}
 	}
 
-	ui->labelRanameExample->setText(lamexp_clean_filename(pattern));
+	ui->labelRanameExample->setText(patternClean);
 }
 
 /*

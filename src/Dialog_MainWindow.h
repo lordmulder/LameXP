@@ -137,7 +137,7 @@ private slots:
 	void removeFileButtonClicked(void);
 	void renameOutputEnabledChanged(bool checked);
 	void renameOutputPatternChanged(void);
-	void renameOutputPatternChanged(const QString &text);
+	void renameOutputPatternChanged(const QString &text, bool silent = false);
 	void resetAdvancedOptionsButtonClicked(void);
 	void restoreCursor(void);
 	void samplingRateChanged(int value);

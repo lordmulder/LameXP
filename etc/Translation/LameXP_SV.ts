@@ -1758,7 +1758,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="720"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3929"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3931"/>
         <source>Access Denied</source>
         <translation>Åtkomst nekad</translation>
     </message>
@@ -1950,7 +1950,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1374"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1451"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1991"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3874"/>
         <source>Discard</source>
         <translation>Stäng</translation>
     </message>
@@ -2535,52 +2535,52 @@
         <translation>Dålig kvallitet (mycket snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3861"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3863"/>
         <source>File name without extension</source>
         <translation>Filnamn utan filtillägg</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3862"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3864"/>
         <source>Track number with leading zero</source>
         <translation>Spårnummer med inledande nolla</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3863"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3865"/>
         <source>Track title</source>
         <translation>Spårtitel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3864"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3866"/>
         <source>Artist name</source>
         <translation>Artistnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3865"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3867"/>
         <source>Album name</source>
         <translation>Albumnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3866"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3868"/>
         <source>Year with (at least) four digits</source>
         <translation>Årtal med (minst) fyra siffror</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3867"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3869"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3869"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3871"/>
         <source>Characters forbidden in file names:</source>
         <translation>Förbjudna tecken i filnamn:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3874"/>
         <source>Rename Macros</source>
         <translation>Namnändra macron</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3885"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3887"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n instans</numerusform>
@@ -2588,37 +2588,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3929"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3931"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Kan inte skriva till den specificerade mappen. Välj en annan destination!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4051"/>
         <source>Overwrite Mode</source>
         <translation>Överskrivningsläge</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4051"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Varning! Det här läget kan skriva över befintliga filer, utan möjlighet att återskapa!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4051"/>
         <source>Continue</source>
         <translation>Fortsätt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4049"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4051"/>
         <source>Revert</source>
         <translation>Återställ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4114"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4116"/>
         <source>Already Running</source>
         <translation>Körs redan</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4114"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4116"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP körs redan, använd den redan startade instansen!</translation>
     </message>
@@ -3335,23 +3335,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="877"/>
+        <location filename="../../src/Global.cpp" line="881"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation>EXE-filen &apos;%1&apos; stöder inte Windows kompatibilitetsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1131"/>
+        <location filename="../../src/Global.cpp" line="1135"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Qt v%2, du har Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1136"/>
+        <location filename="../../src/Global.cpp" line="1140"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>EXE-filen &apos;%1&apos; är byggd för Qt &apos;%2&apos;, du har Qt &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1149"/>
-        <location filename="../../src/Global.cpp" line="1176"/>
+        <location filename="../../src/Global.cpp" line="1153"/>
+        <location filename="../../src/Global.cpp" line="1180"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Windows 2000 eller senare.</translation>
     </message>
@@ -3420,105 +3420,105 @@
         <translation>Stäng</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="287"/>
-        <location filename="../../src/Dialog_Update.cpp" line="564"/>
+        <location filename="../../src/Dialog_Update.cpp" line="288"/>
+        <location filename="../../src/Dialog_Update.cpp" line="565"/>
         <source>Build</source>
         <translation>Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="288"/>
+        <location filename="../../src/Dialog_Update.cpp" line="289"/>
         <source>Unknown</source>
         <translation>Okänd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="396"/>
+        <location filename="../../src/Dialog_Update.cpp" line="397"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>Kontrollerar iInternetanslutningen, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="416"/>
-        <location filename="../../src/Dialog_Update.cpp" line="1008"/>
+        <location filename="../../src/Dialog_Update.cpp" line="417"/>
+        <location filename="../../src/Dialog_Update.cpp" line="1009"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>Datorn verkar inte vara ansluten till Internet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="419"/>
-        <location filename="../../src/Dialog_Update.cpp" line="1011"/>
+        <location filename="../../src/Dialog_Update.cpp" line="420"/>
+        <location filename="../../src/Dialog_Update.cpp" line="1012"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Tillse att datorn är ansluten till Internet och försök igen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="477"/>
+        <location filename="../../src/Dialog_Update.cpp" line="478"/>
         <source>Network connectivity test has failed!</source>
         <translation>Anslutningskontrollen misslyckades!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="480"/>
+        <location filename="../../src/Dialog_Update.cpp" line="481"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation>Tillse att Internetuppkopplingen fungerar korrekt och försök igen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="494"/>
+        <location filename="../../src/Dialog_Update.cpp" line="495"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>Söker nya uppdateringar, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="549"/>
+        <location filename="../../src/Dialog_Update.cpp" line="550"/>
         <source>Failed to fetch update information from server!</source>
         <translation>Kunde inte hämta uppdateringsinformation från servern!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="554"/>
+        <location filename="../../src/Dialog_Update.cpp" line="555"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>Uppdateringsservern kan vara upptagen. Försök senare.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="566"/>
+        <location filename="../../src/Dialog_Update.cpp" line="567"/>
         <source>More information available at:</source>
         <translation>Mer information hittas på:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="572"/>
+        <location filename="../../src/Dialog_Update.cpp" line="573"/>
         <source>A new version of LameXP is available!</source>
         <translation>En ny version av LameXP finns tillgänglig!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="574"/>
+        <location filename="../../src/Dialog_Update.cpp" line="575"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>Vi rekommenderar alla användare att installera denna uppdatering så snart som möjligt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="583"/>
+        <location filename="../../src/Dialog_Update.cpp" line="584"/>
         <source>No new updates available at this time.</source>
         <translation>Det finns inga nya uppdateringar.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="585"/>
+        <location filename="../../src/Dialog_Update.cpp" line="586"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>Din version av LameXP är uppdaterad. Kontrollera regelbundet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="594"/>
+        <location filename="../../src/Dialog_Update.cpp" line="595"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>Din version verkar vara nyare än senaste &apos;Release&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="596"/>
+        <location filename="../../src/Dialog_Update.cpp" line="597"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>Det innebär normalt att du använder en beta-version av LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="889"/>
+        <location filename="../../src/Dialog_Update.cpp" line="890"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>Uppdatering laddas ner, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="934"/>
+        <location filename="../../src/Dialog_Update.cpp" line="935"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Uppdatering klar att installeras. Programmet kommer att avslutas...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="942"/>
+        <location filename="../../src/Dialog_Update.cpp" line="943"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Uppdateringen misslyckades. Försök igen, eller ladda ner manuellt!</translation>
     </message>
