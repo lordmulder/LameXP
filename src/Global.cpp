@@ -50,6 +50,7 @@
 #include <QWriteLocker>
 
 //LameXP includes
+#define LAMEXP_INC_CONFIG
 #include "Resource.h"
 #include "Config.h"
 #include "LockedFile.h"
@@ -124,14 +125,16 @@ static const struct
 	unsigned int ver_major;
 	unsigned int ver_minor;
 	unsigned int ver_build;
+	unsigned int ver_confg;
 	char *ver_release_name;
 }
 g_lamexp_version =
 {
 	VER_LAMEXP_MAJOR,
-	VER_LAMEXP_MINOR,
+	(10 * VER_LAMEXP_MINOR_HI) + VER_LAMEXP_MINOR_LO,
 	VER_LAMEXP_BUILD,
-	VER_LAMEXP_RNAME
+	VER_LAMEXP_CONFG,
+	VER_LAMEXP_RNAME,
 };
 
 //Build date
@@ -349,6 +352,7 @@ const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
 unsigned int lamexp_version_major(void) { return g_lamexp_version.ver_major; }
 unsigned int lamexp_version_minor(void) { return g_lamexp_version.ver_minor; }
 unsigned int lamexp_version_build(void) { return g_lamexp_version.ver_build; }
+unsigned int lamexp_version_confg(void) { return g_lamexp_version.ver_confg; }
 const char *lamexp_version_release(void) { return g_lamexp_version.ver_release_name; }
 const char *lamexp_version_time(void) { return g_lamexp_version_raw_time; }
 const char *lamexp_version_compiler(void) { return g_lamexp_version_compiler; }

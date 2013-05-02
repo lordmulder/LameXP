@@ -1,7 +1,8 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "src/Resource.h"
+#define LAMEXP_INC_CONFIG
 #include "src/Config.h"
+#include "src/Resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////

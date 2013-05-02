@@ -176,7 +176,7 @@ SettingsModel::SettingsModel(void)
 	}
 
 	m_settings = new QSettings(configPath, QSettings::IniFormat);
-	const QString groupKey = QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build());
+	const QString groupKey = QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_confg());
 	QStringList childGroups = m_settings->childGroups();
 
 	while(!childGroups.isEmpty())
@@ -187,7 +187,7 @@ SettingsModel::SettingsModel(void)
 		{
 			bool ok = false;
 			unsigned int temp = filter.cap(3).toUInt(&ok) + 10;
-			if(ok && (temp >= lamexp_version_build()))
+			if(ok && (temp >= lamexp_version_confg()))
 			{
 				continue;
 			}

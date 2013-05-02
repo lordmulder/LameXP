@@ -96,6 +96,7 @@ lamexp_os_version_t;
 unsigned int lamexp_version_major(void);
 unsigned int lamexp_version_minor(void);
 unsigned int lamexp_version_build(void);
+unsigned int lamexp_version_confg(void);
 const QDate &lamexp_version_date(void);
 const char *lamexp_version_time(void);
 const char *lamexp_version_release(void);
