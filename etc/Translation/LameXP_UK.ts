@@ -285,11 +285,11 @@
         <translation>Оригінальна реалізація ALAC від Apple доступна під ліцензією Apache.</translation>
     </message>
     <message>
-        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
+        <source>Codecs.com</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Codecs.com</source>
+        <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -476,26 +476,26 @@
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n track(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Процес було перервано користувачем після %n доріжки!</numerusform>
+            <numerusform>Процес було перервано користувачем після %n доріжок!</numerusform>
+            <numerusform>Процес було перервано користувачем після %n доріжок!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Imported %n track(s) from the Cue Sheet.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Імпортовано %n доріжку зі списку Cue.</numerusform>
+            <numerusform>Імпортовано %n доріжки зі списку Cue.</numerusform>
+            <numerusform>Імпортовано %n доріжок зі списку Cue.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Skipped %n track(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Пропущено %n доріжку.</numerusform>
+            <numerusform>Пропущено %n доріжки.</numerusform>
+            <numerusform>Пропущено %n доріжок.</numerusform>
         </translation>
     </message>
 </context>
@@ -1980,51 +1980,43 @@
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл був відхилений через відсутність дозволу на зчитування!</numerusform>
+            <numerusform>%n файли було відхилено через відсутність дозволу на зчитування!</numerusform>
+            <numerusform>%n файлів було відхилено через відсутність дозволу на зчитування!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл був відхилений через те, що він є фіктивним файлом CDDA!</numerusform>
+            <numerusform>%n файли було відхилено через те, що вони є фіктивними файлами CDDA!</numerusform>
+            <numerusform>%n файлів було відхилено через те, що вони є фіктивними файлами CDDA!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл був відхилений через те, що він, напевне, є образом списку Cue!</numerusform>
+            <numerusform>%n файли було відхилено через те, що вони, напевне, є образами списків Cue!</numerusform>
+            <numerusform>%n файлів було відхилено через те, що вони, напевне, є образами списків Cue!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл був відхилений через неможливість розпізнання формату файла!</numerusform>
+            <numerusform>%n файли було відхилено через  неможливість розпізнання форматів файлів!</numerusform>
+            <numerusform>%n файлів було відхилено через неможливість розпізнання форматів файлів!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n Instance(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n Копія</numerusform>
+            <numerusform>%n Копії</numerusform>
+            <numerusform>%n Копій</numerusform>
         </translation>
-    </message>
-    <message>
-        <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Official LameXP Project Web-Site</source>
@@ -2032,6 +2024,14 @@
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Best Quality (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceptable Quality (Fast)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2520,82 +2520,82 @@
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n file(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Процес було перервано користувачем після %n файлу!</numerusform>
+            <numerusform>Процес було перервано користувачем після %n файлів!</numerusform>
+            <numerusform>Процес було перервано користувачем після %n файлів!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n годину</numerusform>
+            <numerusform>%n години</numerusform>
+            <numerusform>%n годин</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n хвилину</numerusform>
+            <numerusform>%n хвилини</numerusform>
+            <numerusform>%n хвилин</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n секунду</numerusform>
+            <numerusform>%n секунди</numerusform>
+            <numerusform>%n секунд</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n мілісекунду</numerusform>
+            <numerusform>%n мілісекунди</numerusform>
+            <numerusform>%n мілісекунд</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Кодування: %n файл з %1 поки що оброблено, будь ласка, зачекайте...</numerusform>
+            <numerusform>Кодування: %n файли з %1 поки що оброблено, будь ласка, зачекайте...</numerusform>
+            <numerusform>Кодування: %n файлів з %1 поки що оброблено, будь ласка, зачекайте...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Помилка: збій обробки %1 з %n файлів (%2). Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
+            <numerusform>Помилка: збій обробки %1 з %n файлів (%2). Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
+            <numerusform>Помилка: збій обробки %1 з %n файлів (%2). Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) skipped</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл пропущено</numerusform>
+            <numerusform>%n файли пропущено</numerusform>
+            <numerusform>%n файлів пропущено</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Помилка: збій обробки %1 з %n файлів. Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
+            <numerusform>Помилка: збій обробки %1 з %n файлів. Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
+            <numerusform>Помилка: збій обробки %1 з %n файлів. Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>All files completed successfully. Skipped %n file(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Всі файли оброблено успішно. Пропущено %n файл.</numerusform>
+            <numerusform>Всі файли оброблено успішно. Пропущено %n файли.</numerusform>
+            <numerusform>Всі файли оброблено успішно. Пропущено %n файлів.</numerusform>
         </translation>
     </message>
 </context>
