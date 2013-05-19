@@ -286,11 +286,11 @@
     </message>
     <message>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Codecs.com</translation>
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Valdec зі складу AC3Filter Tools - декодер AC3/DTS</translation>
     </message>
 </context>
 <context>
@@ -2020,19 +2020,19 @@
     </message>
     <message>
         <source>Official LameXP Project Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation>Офіційний веб-сайт проекту LameXP</translation>
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Проекти відкритого ПО від MuldeR</translation>
     </message>
     <message>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Найкраща якість (Повільно)</translation>
     </message>
     <message>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Прийнятна якість (Швидко)</translation>
     </message>
 </context>
 <context>
