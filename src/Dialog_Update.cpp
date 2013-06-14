@@ -62,13 +62,14 @@ static const char *mirror_url_postfix[] =
 
 static const char *update_mirrors_prim[] =
 {
-	"http://muldersoft.com/",
-	"http://mulder.brhack.net/",
+	"http://muldersoft.com/",					//	"http://mulder.brhack.net/",
 	"http://mulder.bplaced.net/",
 	"http://mulder.cwsurf.de/",
 	"http://mulder.6te.net/",
 	"http://mulder.webuda.com/",
 	"http://mulder.byethost13.com/",
+	"http://muldersoft.kilu.de/",
+	"http://muldersoft.zxq.net/",
 	"http://lamexp.sourceforge.net/",
 	"http://lordmulder.github.com/LameXP/",
 	"http://lord_mulder.bitbucket.org/",
