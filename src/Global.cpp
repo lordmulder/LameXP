@@ -618,7 +618,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
  */
 void lamexp_init_console(const QStringList &argv)
 {
-	bool enableConsole = lamexp_version_demo();
+	bool enableConsole = (VER_LAMEXP_CONSOLE_ENABLED) && lamexp_version_demo();
 
 	if(_environ)
 	{
