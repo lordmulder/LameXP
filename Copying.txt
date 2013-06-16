@@ -5,3 +5,7 @@ The Qt GUI Toolkit is Copyright (C) 2013 Digia Finland Ltd and/or its subsidiary
 The copyright of all third-party programs included in LameXP belongs to the individual software authors. Please see the "About third-party software" dialog for details!
 
 The Nero AAC Encoder is Copyright (C) 2009 Nero AG. You may NOT redistribute the Nero AAC Encoder; it is NOT included in LameXP and may be obtained form the Nero web-site as a free download.
+
+-----
+
+Note: LameXP contains some third-party tools with custom modifications and fixes. The respective patches are provided in the "etc/Patches" directory...
