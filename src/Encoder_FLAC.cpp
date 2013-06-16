@@ -74,7 +74,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\s(\\d+)% complete");
+	QRegExp regExp("\\b(\\d+)% complete");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -96,7 +96,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		}
 		while(process.bytesAvailable() > 0)
 		{
-			QByteArray line = process.readLine();
+			QByteArray line = process.readLine().replace('\b', char(0x20));
 			QString text = QString::fromUtf8(line.constData()).simplified();
 			if(regExp.lastIndexIn(text) >= 0)
 			{

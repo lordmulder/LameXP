@@ -58,7 +58,7 @@ bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	bool bTimeout = false;
 	bool bAborted = false;
 
-	QRegExp regExp("\\s(\\d+)% complete");
+	QRegExp regExp("\\b(\\d+)% complete");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -80,7 +80,7 @@ bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 		}
 		while(process.bytesAvailable() > 0)
 		{
-			QByteArray line = process.readLine();
+			QByteArray line = process.readLine().replace('\b', char(0x20));
 			QString text = QString::fromUtf8(line.constData()).simplified();
 			if(regExp.lastIndexIn(text) >= 0)
 			{
