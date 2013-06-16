@@ -1,0 +1,12 @@
+diff --git "a/C:\\Sandbox\\FLAC\\flac-1.3.0-c7957b2\\src\\flac\\utils.c.org" "b/C:\\Sandbox\\FLAC\\flac-1.3.0-c7957b2\\src\\flac\\utils.c"
+index 9e08bf4..903709e 100644
+--- "a/src/flac/utils.c"
++++ "b/src/flac/utils.c"
+@@ -258,6 +258,7 @@ void stats_print_info(int level, const char *format, ...)
+ 			console_chars_left = console_width;
+ 		}
+ 		stats_char_count = fprintf(stderr, "%s", tmp);
++		fflush(stderr);
+ 	}
+ }
+ 
