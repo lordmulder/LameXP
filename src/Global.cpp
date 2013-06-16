@@ -384,7 +384,7 @@ bool lamexp_version_demo(void)
 			releaseVersion = (!_stricmp(prefix, "Final")) || (!_stricmp(prefix, "Hotfix"));
 		}
 	}
-	return LAMEXP_DEBUG || (!releaseVersion);
+	return (!releaseVersion);
 }
 
 /*
@@ -618,7 +618,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
  */
 void lamexp_init_console(const QStringList &argv)
 {
-	bool enableConsole = (VER_LAMEXP_CONSOLE_ENABLED) && lamexp_version_demo();
+	bool enableConsole = (LAMEXP_DEBUG) || ((VER_LAMEXP_CONSOLE_ENABLED) && lamexp_version_demo());
 
 	if(_environ)
 	{

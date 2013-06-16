@@ -918,7 +918,7 @@ void MainWindow::initializeTranslation(void)
 void MainWindow::showEvent(QShowEvent *event)
 {
 	m_accepted = false;
-	m_dropNoteLabel->setGeometry(0, 0, ui->sourceFileView->width(), ui->sourceFileView->height());
+	resizeEvent(NULL);
 	sourceModelChanged();
 	
 	if(!event->spontaneous())
@@ -983,8 +983,8 @@ void MainWindow::changeEvent(QEvent *e)
 		}
 
 		//Manually re-translate widgets that UIC doesn't handle
-		m_dropNoteLabel->setText(QString("» %1 «").arg(tr("You can drop in audio files here!")));
 		m_outputFolderNoteBox->setText(tr("Initializing directory outline, please be patient..."));
+		m_dropNoteLabel->setText(QString("<br><br>» %1 «<br><br><br><img src=\":/images/Sound.png\">").arg(tr("You can drop in audio files here!")));
 		m_showDetailsContextAction->setText(tr("Show Details"));
 		m_previewContextAction->setText(tr("Open File in External Application"));
 		m_findFileContextAction->setText(tr("Browse File Location"));
@@ -1109,7 +1109,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
 	if(event) QMainWindow::resizeEvent(event);
-	m_dropNoteLabel->setGeometry(0, 0, ui->sourceFileView->width(), ui->sourceFileView->height());
+
+	if(QWidget *port = ui->sourceFileView->viewport())
+	{
+		m_dropNoteLabel->setGeometry(port->geometry());
+	}
 
 	if(QWidget *port = ui->outputFolderView->viewport())
 	{
@@ -1222,6 +1226,9 @@ bool MainWindow::winEvent(MSG *message, long *result)
 void MainWindow::windowShown(void)
 {
 	const QStringList &arguments = lamexp_arguments(); //QApplication::arguments();
+
+	//Force resize event
+	resizeEvent(NULL);
 
 	//First run?
 	bool firstRun = false;
