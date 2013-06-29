@@ -144,12 +144,14 @@ void SplashScreen::showSplash(QThread *thread)
 	//Loop while thread is still running
 	if(bool bIsRunning = THREAD_RUNNING(thread))
 	{
+		int deadlockCounter = 0;
 		while(bIsRunning)
 		{
 			loop->exec();
 			if(bIsRunning = THREAD_RUNNING(thread))
 			{
 				qWarning("Potential deadlock in initialization thread!");
+				if(++deadlockCounter >= 10) qFatal("Deadlock in initialization thread!");
 			}
 		}
 	}

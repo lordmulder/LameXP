@@ -228,11 +228,18 @@ static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO
 //Special folders
 static struct
 {
-	QString *temp;
 	QMap<size_t, QString> *knownFolders;
 	QReadWriteLock lock;
 }
-g_lamexp_folder;
+g_lamexp_known_folder;
+
+//%TEMP% folder
+static struct
+{
+	QString *path;
+	QReadWriteLock lock;
+}
+g_lamexp_temp_folder;
 
 //Tools
 static struct
@@ -1487,102 +1494,103 @@ QString lamexp_rand_str(void)
 	throw "The RegExp didn't match on the UUID string. This shouldn't happen ;-)";
 }
 
+
+/*
+ * Try to initialize the folder (with *write* access)
+ */
+static QString lamexp_try_init_folder(const QString &folderPath)
+{
+	bool success = false;
+
+	const QFileInfo folderInfo(folderPath);
+	const QDir folderDir(folderInfo.absoluteFilePath());
+
+	//Create folder, if it does *not* exist yet
+	if(!folderDir.exists())
+	{
+		folderDir.mkpath(".");
+	}
+
+	//Make sure folder exists now *and* is writable
+	if(folderDir.exists())
+	{
+		QFile testFile(folderDir.absoluteFilePath(QString("~%1.tmp").arg(lamexp_rand_str())));
+		if(testFile.open(QIODevice::ReadWrite))
+		{
+			const QByteArray testData = QByteArray("Lorem ipsum dolor sit amet, consectetur, adipisci velit!");
+			if(testFile.write(testData) >= strlen(testData))
+			{
+				success = true;
+				testFile.remove();
+			}
+			testFile.close();
+		}
+	}
+
+	return (success ? folderDir.canonicalPath() : QString());
+}
+
 /*
  * Get LameXP temp folder
  */
 const QString &lamexp_temp_folder2(void)
 {
-	QReadLocker readLock(&g_lamexp_folder.lock);
+	QReadLocker readLock(&g_lamexp_temp_folder.lock);
 
 	//Already initialized?
-	if(g_lamexp_folder.temp)
+	if(g_lamexp_temp_folder.path && (!g_lamexp_temp_folder.path->isEmpty()))
 	{
-		if(!g_lamexp_folder.temp->isEmpty())
+		if(QDir(*g_lamexp_temp_folder.path).exists())
 		{
-			if(QDir(*g_lamexp_folder.temp).exists())
-			{
-				return *g_lamexp_folder.temp;
-			}
+			return *g_lamexp_temp_folder.path;
 		}
 	}
-	
+
+	//Obtain the write lock to initilaize
 	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_folder.lock);
+	QWriteLocker writeLock(&g_lamexp_temp_folder.lock);
 	
-	if(!g_lamexp_folder.temp)
+	//Still uninitilaized?
+	if(g_lamexp_temp_folder.path && (!g_lamexp_temp_folder.path->isEmpty()))
 	{
-		g_lamexp_folder.temp = new QString();
+		if(QDir(*g_lamexp_temp_folder.path).exists())
+		{
+			return *g_lamexp_temp_folder.path;
+		}
+	}
+
+	//Create the string, if not done yet
+	if(!g_lamexp_temp_folder.path)
+	{
+		g_lamexp_temp_folder.path = new QString();
 	}
 	
-	g_lamexp_folder.temp->clear();
-
-	static const char *TEMP_STR = "Temp";
-	const QString WRITE_TEST_DATA = lamexp_rand_str();
-	const QString SUB_FOLDER = lamexp_rand_str();
+	g_lamexp_temp_folder.path->clear();
 
 	//Try the %TMP% or %TEMP% directory first
-	QDir temp = QDir::temp();
-	if(temp.exists())
+	QString tempPath = lamexp_try_init_folder(QDir::temp().absolutePath());
+	if(!tempPath.isEmpty())
 	{
-		temp.mkdir(SUB_FOLDER);
-		if(temp.cd(SUB_FOLDER) && temp.exists())
+		(*g_lamexp_temp_folder.path) = lamexp_try_init_folder(QString("%1/%2").arg(tempPath, lamexp_rand_str()));
+	}
+
+	//Otherwise create TEMP folder in %LOCALAPPDATA%
+	if(g_lamexp_temp_folder.path->isEmpty())
+	{
+		tempPath = lamexp_try_init_folder(QString("%1/Temp").arg(lamexp_known_folder(lamexp_folder_localappdata)));
+		if(!tempPath.isEmpty())
 		{
-			QFile testFile(QString("%1/~%2.tmp").arg(temp.canonicalPath(), lamexp_rand_str()));
-			if(testFile.open(QIODevice::ReadWrite))
-			{
-				if(testFile.write(WRITE_TEST_DATA.toLatin1().constData()) >= strlen(WRITE_TEST_DATA.toLatin1().constData()))
-				{
-					(*g_lamexp_folder.temp) = temp.canonicalPath();
-				}
-				testFile.remove();
-			}
-		}
-		if(!g_lamexp_folder.temp->isEmpty())
-		{
-			return *g_lamexp_folder.temp;
+			(*g_lamexp_temp_folder.path) = lamexp_try_init_folder(QString("%1/%2").arg(tempPath, lamexp_rand_str()));
 		}
 	}
 
-	//Create TEMP folder in %LOCALAPPDATA%
-	QDir localAppData = QDir(lamexp_known_folder(lamexp_folder_localappdata));
-	if(!localAppData.path().isEmpty())
+	//Failed to create TEMP folder?
+	if(g_lamexp_temp_folder.path->isEmpty())
 	{
-		if(!localAppData.exists())
-		{
-			localAppData.mkpath(".");
-		}
-		if(localAppData.exists())
-		{
-			if(!localAppData.entryList(QDir::AllDirs).contains(TEMP_STR, Qt::CaseInsensitive))
-			{
-				localAppData.mkdir(TEMP_STR);
-			}
-			if(localAppData.cd(TEMP_STR) && localAppData.exists())
-			{
-				localAppData.mkdir(SUB_FOLDER);
-				if(localAppData.cd(SUB_FOLDER) && localAppData.exists())
-				{
-					QFile testFile(QString("%1/~%2.tmp").arg(localAppData.canonicalPath(), lamexp_rand_str()));
-					if(testFile.open(QIODevice::ReadWrite))
-					{
-						if(testFile.write(WRITE_TEST_DATA.toLatin1().constData()) >= strlen(WRITE_TEST_DATA.toLatin1().constData()))
-						{
-							(*g_lamexp_folder.temp) = localAppData.canonicalPath();
-						}
-						testFile.remove();
-					}
-				}
-			}
-		}
-		if(!g_lamexp_folder.temp->isEmpty())
-		{
-			return *g_lamexp_folder.temp;
-		}
+		qFatal("Temporary directory could not be initialized !!!");
 	}
-
-	//Failed to create TEMP folder!
-	qFatal("Temporary directory could not be initialized!\n\nFirst attempt:\n%s\n\nSecond attempt:\n%s", temp.canonicalPath().toUtf8().constData(), localAppData.canonicalPath().toUtf8().constData());
-	return *g_lamexp_folder.temp;
+	
+	return *g_lamexp_temp_folder.path;
 }
 
 /*
@@ -1908,7 +1916,7 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 	static const GUID GUID_PROGRAM_FILES = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
 	static const GUID GUID_SYSTEM_FOLDER = {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}};
 
-	QReadLocker readLock(&g_lamexp_folder.lock);
+	QReadLocker readLock(&g_lamexp_known_folder.lock);
 
 	int folderCSIDL = -1;
 	GUID folderGUID = {0x0000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}};
@@ -1938,20 +1946,31 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 	}
 
 	//Already in cache?
-	if(g_lamexp_folder.knownFolders)
+	if(g_lamexp_known_folder.knownFolders)
 	{
-		if(g_lamexp_folder.knownFolders->contains(folderCacheId))
+		if(g_lamexp_known_folder.knownFolders->contains(folderCacheId))
 		{
-			return (*g_lamexp_folder.knownFolders)[folderCacheId];
+			return (*g_lamexp_known_folder.knownFolders)[folderCacheId];
 		}
 	}
 
+	//Obtain write lock to initialize
 	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_folder.lock);
+	QWriteLocker writeLock(&g_lamexp_known_folder.lock);
+
+	//Still not in cache?
+	if(g_lamexp_known_folder.knownFolders)
+	{
+		if(g_lamexp_known_folder.knownFolders->contains(folderCacheId))
+		{
+			return (*g_lamexp_known_folder.knownFolders)[folderCacheId];
+		}
+	}
 
 	static SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = NULL;
 	static SHGetFolderPathFun SHGetFolderPathPtr = NULL;
 
+	//Lookup functions
 	if((!SHGetKnownFolderPathPtr) && (!SHGetFolderPathPtr))
 	{
 		QLibrary kernel32Lib("shell32.dll");
@@ -1964,6 +1983,7 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 
 	QString folder;
 
+	//Now try to get the folder path!
 	if(SHGetKnownFolderPathPtr)
 	{
 		WCHAR *path = NULL;
@@ -2002,14 +2022,14 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 	}
 
 	//Create cache
-	if(!g_lamexp_folder.knownFolders)
+	if(!g_lamexp_known_folder.knownFolders)
 	{
-		g_lamexp_folder.knownFolders = new QMap<size_t, QString>();
+		g_lamexp_known_folder.knownFolders = new QMap<size_t, QString>();
 	}
 
 	//Update cache
-	g_lamexp_folder.knownFolders->insert(folderCacheId, folder);
-	return (*g_lamexp_folder.knownFolders)[folderCacheId];
+	g_lamexp_known_folder.knownFolders->insert(folderCacheId, folder);
+	return (*g_lamexp_known_folder.knownFolders)[folderCacheId];
 }
 
 /*
@@ -2434,7 +2454,8 @@ extern "C"
 		LAMEXP_ZERO_MEMORY(g_lamexp_tools);
 		LAMEXP_ZERO_MEMORY(g_lamexp_currentTranslator);
 		LAMEXP_ZERO_MEMORY(g_lamexp_translation);
-		LAMEXP_ZERO_MEMORY(g_lamexp_folder);
+		LAMEXP_ZERO_MEMORY(g_lamexp_known_folder);
+		LAMEXP_ZERO_MEMORY(g_lamexp_temp_folder);
 		LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
 		LAMEXP_ZERO_MEMORY(g_lamexp_os_version);
 		LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
@@ -2501,24 +2522,24 @@ void lamexp_finalization(void)
 	}
 	
 	//Delete temporary files
-	if(g_lamexp_folder.temp)
+	if(g_lamexp_temp_folder.path)
 	{
-		if(!g_lamexp_folder.temp->isEmpty())
+		if(!g_lamexp_temp_folder.path->isEmpty())
 		{
 			for(int i = 0; i < 100; i++)
 			{
-				if(lamexp_clean_folder(*g_lamexp_folder.temp))
+				if(lamexp_clean_folder(*g_lamexp_temp_folder.path))
 				{
 					break;
 				}
 				Sleep(125);
 			}
 		}
-		LAMEXP_DELETE(g_lamexp_folder.temp);
+		LAMEXP_DELETE(g_lamexp_temp_folder.path);
 	}
 
 	//Clear folder cache
-	LAMEXP_DELETE(g_lamexp_folder.knownFolders);
+	LAMEXP_DELETE(g_lamexp_known_folder.knownFolders);
 
 	//Clear languages
 	if(g_lamexp_currentTranslator.instance)

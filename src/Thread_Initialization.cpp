@@ -297,6 +297,10 @@ void InitializationThread::run()
 		qWarning("Extracting tools took %.3f seconds -> probably slow realtime virus scanner.", delayExtract);
 		qWarning("Please report performance problems to your anti-virus developer !!!\n");
 	}
+	else
+	{
+		qDebug("Extracting the tools took %.3f seconds (OK).\n", delayExtract);
+	}
 
 	//Register all translations
 	initTranslations();
