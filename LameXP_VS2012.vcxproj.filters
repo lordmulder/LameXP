@@ -376,8 +376,8 @@
     <ClCompile Include="tmp\MOC_CustomEventFilter.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
-    <ClCompile Include="src\WinMain.cpp">
-      <Filter>Source Files\VS2012</Filter>
+    <ClCompile Include="etc\Prerequisites\qtmain\qtmain_win.cpp">
+      <Filter>Source Files\Misc\3rd Party</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -770,8 +770,8 @@
     <Filter Include="Header Files\Misc">
       <UniqueIdentifier>{36024ab5-840b-4c4f-a562-1bd4c15eded9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\VS2012">
-      <UniqueIdentifier>{706d6d8f-831c-4ec7-8e20-2ed65f012d11}</UniqueIdentifier>
+    <Filter Include="Source Files\Misc\3rd Party">
+      <UniqueIdentifier>{72c665f5-e6cf-4c48-8b3b-0f02369ee33e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

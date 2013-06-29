@@ -170,8 +170,10 @@ static bool g_lamexp_console_attached = false;
 			static const char *g_lamexp_version_compiler = "MSVC 2012-U1 CTP";
 		#elif (_MSC_FULL_VER < 170060315)
 			static const char *g_lamexp_version_compiler = "MSVC 2012-U1";
-		#elif (_MSC_FULL_VER == 170060315)
+		#elif (_MSC_FULL_VER < 170060610)
 			static const char *g_lamexp_version_compiler = "MSVC 2012-U2";
+		#elif (_MSC_FULL_VER == 170060610)
+			static const char *g_lamexp_version_compiler = "MSVC 2012-U3";
 		#else
 			#error Compiler version is not supported yet!
 		#endif
@@ -1531,6 +1533,15 @@ static QString lamexp_try_init_folder(const QString &folderPath)
 }
 
 /*
+ * Initialize LameXP temp folder
+ */
+#define INIT_TEMP_FOLDER(OUT,TMP) do \
+{ \
+	(OUT) = lamexp_try_init_folder(QString("%1/%2").arg((TMP), lamexp_rand_str())); \
+} \
+while(0)
+
+/*
  * Get LameXP temp folder
  */
 const QString &lamexp_temp_folder2(void)
@@ -1571,7 +1582,7 @@ const QString &lamexp_temp_folder2(void)
 	QString tempPath = lamexp_try_init_folder(QDir::temp().absolutePath());
 	if(!tempPath.isEmpty())
 	{
-		(*g_lamexp_temp_folder.path) = lamexp_try_init_folder(QString("%1/%2").arg(tempPath, lamexp_rand_str()));
+		INIT_TEMP_FOLDER(*g_lamexp_temp_folder.path, tempPath);
 	}
 
 	//Otherwise create TEMP folder in %LOCALAPPDATA%
@@ -1580,7 +1591,7 @@ const QString &lamexp_temp_folder2(void)
 		tempPath = lamexp_try_init_folder(QString("%1/Temp").arg(lamexp_known_folder(lamexp_folder_localappdata)));
 		if(!tempPath.isEmpty())
 		{
-			(*g_lamexp_temp_folder.path) = lamexp_try_init_folder(QString("%1/%2").arg(tempPath, lamexp_rand_str()));
+			INIT_TEMP_FOLDER(*g_lamexp_temp_folder.path, tempPath);
 		}
 	}
 

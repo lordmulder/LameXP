@@ -259,6 +259,12 @@ del "$(TargetDir)imageformats\q???d4.dll"
     </Xdcmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="etc\Prerequisites\qtmain\qtmain_win.cpp">
+      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWChar_tAsBuiltInType>
+      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</TreatWChar_tAsBuiltInType>
+      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</TreatWChar_tAsBuiltInType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Decoder_AAC.cpp" />
     <ClCompile Include="src\Decoder_Abstract.cpp" />
     <ClCompile Include="src\Decoder_AC3.cpp" />
@@ -335,12 +341,6 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Thread_RAMObserver.cpp" />
     <ClCompile Include="src\Tool_Abstract.cpp" />
     <ClCompile Include="src\Tool_WaveProperties.cpp" />
-    <ClCompile Include="src\WinMain.cpp">
-      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWChar_tAsBuiltInType>
-      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</TreatWChar_tAsBuiltInType>
-      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</TreatWChar_tAsBuiltInType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\WinSevenTaskbar.cpp" />
     <ClCompile Include="tmp\MOC_CustomEventFilter.cpp" />
     <ClCompile Include="tmp\MOC_Decoder_Abstract.cpp" />
