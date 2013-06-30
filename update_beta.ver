@@ -1,10 +1,10 @@
 [!Update]
-TimestampCreated=2013-06-17
+TimestampCreated=2013-06-30
 
 [LameXP]
-BuildNo=1296
-BuildDate=2013-06-17
+BuildNo=1304
+BuildDate=2013-06-30
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://mplayer.savedonthe.net/
-DownloadFilename=LameXP-ALPHA.2013-06-17.Release-Static.Build-1296.exe
-DownloadFilecode=b5ee2423970dd3795adcb5470deeb32b5dc7b764
+DownloadFilename=LameXP-ALPHA.2013-06-30.Release-Static.Build-1304.exe
+DownloadFilecode=e0172094a6f919d767e2369a85b07fd8fc74dd2a
