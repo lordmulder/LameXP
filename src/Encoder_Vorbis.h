@@ -38,6 +38,7 @@ public:
 	virtual QString extension(void);
 	virtual void setBitrateLimits(int minimumBitrate, int maximumBitrate);
 	virtual void setSamplingRate(int value);
+	virtual void setBitrate(int bitrate);
 
 private:
 	const QString m_binary;

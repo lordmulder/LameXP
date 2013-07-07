@@ -46,14 +46,14 @@ public:
 	virtual const bool needsTimingInfo(void);
 
 	//Common setter methods
-	void setBitrate(int bitrate);
-	void setRCMode(int mode);
-	void setCustomParams(const QString &customParams);
+	virtual void setBitrate(int bitrate);
+	virtual void setRCMode(int mode);
+	virtual void setCustomParams(const QString &customParams);
 
 protected:
-	int m_configBitrate;
-	int m_configRCMode;
-	QString m_configCustomParams;
+	int m_configBitrate;			//Bitrate *or* VBR-quality-level
+	int m_configRCMode;				//Rate-control mode
+	QString m_configCustomParams;	//Custom parameters, if any
 
 	//Helper functions
 	bool isUnicode(const QString &text);

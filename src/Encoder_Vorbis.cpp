@@ -158,6 +158,11 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	return true;
 }
 
+void VorbisEncoder::setBitrate(int bitrate)
+{
+	m_configBitrate = qMax(-2, bitrate);
+}
+
 QString VorbisEncoder::extension(void)
 {
 	return "ogg";

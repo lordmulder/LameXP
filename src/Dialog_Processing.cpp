@@ -121,6 +121,8 @@ while(0)
 } \
 while(0)
 
+#define IS_VBR(RC_MODE) ((RC_MODE) == SettingsModel::VBRMode)
+
 ////////////////////////////////////////////////////////////
 
 //Dummy class for UserData
@@ -945,16 +947,18 @@ void ProcessingDialog::startNextJob(void)
 
 AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 {
+	int rcMode = -1;
 	AbstractEncoder *encoder =  NULL;
 	*nativeResampling = false;
-	
+
 	switch(m_settings->compressionEncoder())
 	{
+	/*-------- MP3Encoder /*--------*/
 	case SettingsModel::MP3Encoder:
 		{
 			MP3Encoder *mp3Encoder = new MP3Encoder();
-			mp3Encoder->setBitrate(m_settings->compressionBitrate());
-			mp3Encoder->setRCMode(m_settings->compressionRCMode());
+			mp3Encoder->setRCMode(rcMode = m_settings->compressionRCModeLAME());
+			mp3Encoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelLAME() : m_settings->compressionBitrateLAME());
 			mp3Encoder->setAlgoQuality(m_settings->lameAlgoQuality());
 			if(m_settings->bitrateManagementEnabled())
 			{
@@ -970,11 +974,12 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			encoder = mp3Encoder;
 		}
 		break;
+	/*-------- VorbisEncoder /*--------*/
 	case SettingsModel::VorbisEncoder:
 		{
 			VorbisEncoder *vorbisEncoder = new VorbisEncoder();
-			vorbisEncoder->setBitrate(m_settings->compressionBitrate());
-			vorbisEncoder->setRCMode(m_settings->compressionRCMode());
+			vorbisEncoder->setRCMode(rcMode = m_settings->compressionRCModeOggEnc());
+			vorbisEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelOggEnc() : m_settings->compressionBitrateOggEnc());
 			if(m_settings->bitrateManagementEnabled())
 			{
 				vorbisEncoder->setBitrateLimits(m_settings->bitrateManagementMinRate(), m_settings->bitrateManagementMaxRate());
@@ -988,13 +993,14 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			encoder = vorbisEncoder;
 		}
 		break;
+	/*-------- AACEncoder /*--------*/
 	case SettingsModel::AACEncoder:
 		{
 			if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll"))
 			{
 				QAACEncoder *aacEncoder = new QAACEncoder();
-				aacEncoder->setBitrate(m_settings->compressionBitrate());
-				aacEncoder->setRCMode(m_settings->compressionRCMode());
+				aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
+				aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
 				aacEncoder->setProfile(m_settings->aacEncProfile());
 				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
 				encoder = aacEncoder;
@@ -1002,8 +1008,8 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			else if(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll"))
 			{
 				FHGAACEncoder *aacEncoder = new FHGAACEncoder();
-				aacEncoder->setBitrate(m_settings->compressionBitrate());
-				aacEncoder->setRCMode(m_settings->compressionRCMode());
+				aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
+				aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
 				aacEncoder->setProfile(m_settings->aacEncProfile());
 				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
 				encoder = aacEncoder;
@@ -1011,8 +1017,8 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			else
 			{
 				AACEncoder *aacEncoder = new AACEncoder();
-				aacEncoder->setBitrate(m_settings->compressionBitrate());
-				aacEncoder->setRCMode(m_settings->compressionRCMode());
+				aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
+				aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
 				aacEncoder->setEnable2Pass(m_settings->neroAACEnable2Pass());
 				aacEncoder->setProfile(m_settings->aacEncProfile());
 				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
@@ -1020,11 +1026,12 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			}
 		}
 		break;
+	/*-------- AC3Encoder /*--------*/
 	case SettingsModel::AC3Encoder:
 		{
 			AC3Encoder *ac3Encoder = new AC3Encoder();
-			ac3Encoder->setBitrate(m_settings->compressionBitrate());
-			ac3Encoder->setRCMode(m_settings->compressionRCMode());
+			ac3Encoder->setRCMode(rcMode = m_settings->compressionRCModeAften());
+			ac3Encoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAften() : m_settings->compressionBitrateAften());
 			ac3Encoder->setCustomParams(m_settings->customParametersAften());
 			ac3Encoder->setAudioCodingMode(m_settings->aftenAudioCodingMode());
 			ac3Encoder->setDynamicRangeCompression(m_settings->aftenDynamicRangeCompression());
@@ -1033,44 +1040,56 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 			encoder = ac3Encoder;
 		}
 		break;
+	/*-------- FLACEncoder /*--------*/
 	case SettingsModel::FLACEncoder:
 		{
 			FLACEncoder *flacEncoder = new FLACEncoder();
-			flacEncoder->setBitrate(m_settings->compressionBitrate());
-			flacEncoder->setRCMode(m_settings->compressionRCMode());
+			flacEncoder->setBitrate(m_settings->compressionVbrLevelFLAC());
+			flacEncoder->setRCMode(SettingsModel::VBRMode);
 			flacEncoder->setCustomParams(m_settings->customParametersFLAC());
 			encoder = flacEncoder;
 		}
 		break;
+	/*-------- OpusEncoder --------*/
 	case SettingsModel::OpusEncoder:
 		{
 			OpusEncoder *opusEncoder = new OpusEncoder();
-			opusEncoder->setBitrate(m_settings->compressionBitrate());
-			opusEncoder->setRCMode(m_settings->compressionRCMode());
+			opusEncoder->setRCMode(rcMode = m_settings->compressionRCModeOpusEnc());
+			opusEncoder->setBitrate(m_settings->compressionBitrateOpusEnc()); /*Opus always uses bitrate*/
 			opusEncoder->setOptimizeFor(m_settings->opusOptimizeFor());
 			opusEncoder->setEncodeComplexity(m_settings->opusComplexity());
 			opusEncoder->setFrameSize(m_settings->opusFramesize());
 			opusEncoder->setCustomParams(m_settings->customParametersOpus());
 			encoder = opusEncoder;
 		}
-		break;	case SettingsModel::DCAEncoder:
+		break;
+	/*-------- DCAEncoder --------*/
+	case SettingsModel::DCAEncoder:
 		{
 			DCAEncoder *dcaEncoder = new DCAEncoder();
-			dcaEncoder->setBitrate(m_settings->compressionBitrate());
-			dcaEncoder->setRCMode(m_settings->compressionRCMode());
+			dcaEncoder->setRCMode(SettingsModel::CBRMode);
+			dcaEncoder->setBitrate(IS_VBR(rcMode) ? 0 : m_settings->compressionBitrateDcaEnc());
 			encoder = dcaEncoder;
 		}
 		break;
+	/*-------- PCMEncoder --------*/
 	case SettingsModel::PCMEncoder:
 		{
 			WaveEncoder *waveEncoder = new WaveEncoder();
-			waveEncoder->setBitrate(m_settings->compressionBitrate());
-			waveEncoder->setRCMode(m_settings->compressionRCMode());
+			waveEncoder->setBitrate(0); /*does NOT apply to PCM output*/
+			waveEncoder->setRCMode(0); /*does NOT apply to PCM output*/
 			encoder = waveEncoder;
 		}
 		break;
+	/*-------- default --------*/
 	default:
 		throw "Unsupported encoder!";
+	}
+
+	//Sanity checking
+	if(!encoder)
+	{
+		throw "No encoder instance has been assigend!";
 	}
 
 	return encoder;

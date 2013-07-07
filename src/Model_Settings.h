@@ -64,14 +64,18 @@ public:
 		FLACEncoder = 4,
 		OpusEncoder = 5,
 		DCAEncoder = 6,
-		PCMEncoder = 7
+		PCMEncoder = 7,
+		ENCODER_COUNT = 8
 	};
+
 	enum RCMode
 	{
 		VBRMode = 0,
 		ABRMode = 1,
-		CBRMode = 2
+		CBRMode = 2,
+		RCMODE_COUNT = 3
 	};
+
 	enum Overwrite
 	{
 		Overwrite_KeepBoth = 0,
@@ -85,65 +89,79 @@ public:
 	static const int samplingRates[8];
 
 	//Getters & setters
-	LAMEXP_MAKE_OPTION_I(licenseAccepted);
-	LAMEXP_MAKE_OPTION_I(interfaceStyle);
-	LAMEXP_MAKE_OPTION_I(compressionEncoder);
-	LAMEXP_MAKE_OPTION_I(compressionRCMode);
-	LAMEXP_MAKE_OPTION_I(compressionBitrate);
-	LAMEXP_MAKE_OPTION_S(outputDir);
-	LAMEXP_MAKE_OPTION_B(outputToSourceDir);
-	LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath);
-	LAMEXP_MAKE_OPTION_S(favoriteOutputFolders);
-	LAMEXP_MAKE_OPTION_B(writeMetaTags);
-	LAMEXP_MAKE_OPTION_B(createPlaylist);
-	LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck);
-	LAMEXP_MAKE_OPTION_B(autoUpdateEnabled);
-	LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta);
-	LAMEXP_MAKE_OPTION_B(soundsEnabled);
-	LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled);
-	LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled);
-	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled);
-	LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled);
-	LAMEXP_MAKE_OPTION_S(currentLanguage);
-	LAMEXP_MAKE_OPTION_S(currentLanguageFile);
-	LAMEXP_MAKE_OPTION_I(lameAlgoQuality);
-	LAMEXP_MAKE_OPTION_I(lameChannelMode);
-	LAMEXP_MAKE_OPTION_B(forceStereoDownmix);
-	LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled);
-	LAMEXP_MAKE_OPTION_I(bitrateManagementMinRate);
-	LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate);
-	LAMEXP_MAKE_OPTION_I(samplingRate);
-	LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass);
-	LAMEXP_MAKE_OPTION_I(aacEncProfile);
-	LAMEXP_MAKE_OPTION_I(aftenAudioCodingMode);
-	LAMEXP_MAKE_OPTION_I(aftenDynamicRangeCompression);
-	LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation);
-	LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize);
-	LAMEXP_MAKE_OPTION_I(opusOptimizeFor);
-	LAMEXP_MAKE_OPTION_I(opusComplexity);
-	LAMEXP_MAKE_OPTION_I(opusFramesize);
-	LAMEXP_MAKE_OPTION_B(opusDisableResample);
-	LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled);
-	LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume);
-	LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode);
-	LAMEXP_MAKE_OPTION_I(toneAdjustBass);
-	LAMEXP_MAKE_OPTION_I(toneAdjustTreble);
-	LAMEXP_MAKE_OPTION_S(customParametersLAME);
-	LAMEXP_MAKE_OPTION_S(customParametersOggEnc);
-	LAMEXP_MAKE_OPTION_S(customParametersAacEnc);
-	LAMEXP_MAKE_OPTION_S(customParametersAften);
-	LAMEXP_MAKE_OPTION_S(customParametersFLAC);
-	LAMEXP_MAKE_OPTION_S(customParametersOpus);
-	LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled);
-	LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern);
-	LAMEXP_MAKE_OPTION_I(overwriteMode);
-	LAMEXP_MAKE_OPTION_U(metaInfoPosition);
-	LAMEXP_MAKE_OPTION_U(maximumInstances);
-	LAMEXP_MAKE_OPTION_S(customTempPath);
-	LAMEXP_MAKE_OPTION_B(customTempPathEnabled);
-	LAMEXP_MAKE_OPTION_B(slowStartup);
-	LAMEXP_MAKE_OPTION_S(mostRecentInputPath);
-	LAMEXP_MAKE_OPTION_B(hibernateComputer);
+	LAMEXP_MAKE_OPTION_I(aacEncProfile)
+	LAMEXP_MAKE_OPTION_I(aftenAudioCodingMode)
+	LAMEXP_MAKE_OPTION_I(aftenDynamicRangeCompression)
+	LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize)
+	LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation)
+	LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled)
+	LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta)
+	LAMEXP_MAKE_OPTION_B(autoUpdateEnabled)
+	LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck)
+	LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled)
+	LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate)
+	LAMEXP_MAKE_OPTION_I(bitrateManagementMinRate)
+	LAMEXP_MAKE_OPTION_I(compressionBitrateAacEnc)
+	LAMEXP_MAKE_OPTION_I(compressionBitrateAften)
+	LAMEXP_MAKE_OPTION_I(compressionBitrateDcaEnc)
+	LAMEXP_MAKE_OPTION_I(compressionBitrateLAME)
+	LAMEXP_MAKE_OPTION_I(compressionBitrateOggEnc)
+	LAMEXP_MAKE_OPTION_I(compressionBitrateOpusEnc)
+	LAMEXP_MAKE_OPTION_I(compressionEncoder)
+	LAMEXP_MAKE_OPTION_I(compressionRCModeAacEnc)
+	LAMEXP_MAKE_OPTION_I(compressionRCModeAften)
+	LAMEXP_MAKE_OPTION_I(compressionRCModeLAME)
+	LAMEXP_MAKE_OPTION_I(compressionRCModeOggEnc)
+	LAMEXP_MAKE_OPTION_I(compressionRCModeOpusEnc)
+	LAMEXP_MAKE_OPTION_I(compressionVbrLevelAacEnc)
+	LAMEXP_MAKE_OPTION_I(compressionVbrLevelAften)
+	LAMEXP_MAKE_OPTION_I(compressionVbrLevelFLAC)
+	LAMEXP_MAKE_OPTION_I(compressionVbrLevelLAME)
+	LAMEXP_MAKE_OPTION_I(compressionVbrLevelOggEnc)
+	LAMEXP_MAKE_OPTION_B(createPlaylist)
+	LAMEXP_MAKE_OPTION_S(currentLanguage)
+	LAMEXP_MAKE_OPTION_S(currentLanguageFile)
+	LAMEXP_MAKE_OPTION_S(customParametersAacEnc)
+	LAMEXP_MAKE_OPTION_S(customParametersAften)
+	LAMEXP_MAKE_OPTION_S(customParametersFLAC)
+	LAMEXP_MAKE_OPTION_S(customParametersLAME)
+	LAMEXP_MAKE_OPTION_S(customParametersOggEnc)
+	LAMEXP_MAKE_OPTION_S(customParametersOpus)
+	LAMEXP_MAKE_OPTION_S(customTempPath)
+	LAMEXP_MAKE_OPTION_B(customTempPathEnabled)
+	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled)
+	LAMEXP_MAKE_OPTION_S(favoriteOutputFolders)
+	LAMEXP_MAKE_OPTION_B(forceStereoDownmix)
+	LAMEXP_MAKE_OPTION_B(hibernateComputer)
+	LAMEXP_MAKE_OPTION_I(interfaceStyle)
+	LAMEXP_MAKE_OPTION_I(lameAlgoQuality)
+	LAMEXP_MAKE_OPTION_I(lameChannelMode)
+	LAMEXP_MAKE_OPTION_I(licenseAccepted)
+	LAMEXP_MAKE_OPTION_U(maximumInstances)
+	LAMEXP_MAKE_OPTION_U(metaInfoPosition)
+	LAMEXP_MAKE_OPTION_S(mostRecentInputPath)
+	LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass)
+	LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled)
+	LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled)
+	LAMEXP_MAKE_OPTION_I(normalizationFilterEqualizationMode)
+	LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume)
+	LAMEXP_MAKE_OPTION_I(opusComplexity)
+	LAMEXP_MAKE_OPTION_B(opusDisableResample)
+	LAMEXP_MAKE_OPTION_I(opusFramesize)
+	LAMEXP_MAKE_OPTION_I(opusOptimizeFor)
+	LAMEXP_MAKE_OPTION_S(outputDir)
+	LAMEXP_MAKE_OPTION_B(outputToSourceDir)
+	LAMEXP_MAKE_OPTION_I(overwriteMode)
+	LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath)
+	LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled)
+	LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern)
+	LAMEXP_MAKE_OPTION_I(samplingRate)
+	LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled)
+	LAMEXP_MAKE_OPTION_B(slowStartup)
+	LAMEXP_MAKE_OPTION_B(soundsEnabled)
+	LAMEXP_MAKE_OPTION_I(toneAdjustBass)
+	LAMEXP_MAKE_OPTION_I(toneAdjustTreble)
+	LAMEXP_MAKE_OPTION_B(writeMetaTags)
 
 	//Misc
 	void validate(void);
