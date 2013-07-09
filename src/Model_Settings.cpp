@@ -63,6 +63,8 @@ unsigned int SettingsModel::OPT##Default(void) { return DEF; }
 #define LAMEXP_MAKE_ID(DEC,STR) static const char *g_settingsId_##DEC = STR
 #define REMOVE_GROUP(OBJ,ID) OBJ->beginGroup(ID); OBJ->remove(""); OBJ->endGroup();
 
+#define DIR_EXISTS(PATH) (QFileInfo(PATH).exists() && QFileInfo(PATH).isDir())
+
 ////////////////////////////////////////////////////////////
 //Constants
 ////////////////////////////////////////////////////////////
@@ -274,17 +276,16 @@ void SettingsModel::validate(void)
 		}
 	}
 	
-	if(this->outputDir().isEmpty() || !QFileInfo(this->outputDir()).isDir())
+	if(this->outputDir().isEmpty() || (!DIR_EXISTS(this->outputDir())))
 	{
-		qWarning("Output directory not set yet or does NOT exist anymore -> Resetting to QDesktopServices::MusicLocation");
-		QString musicLocation = QDesktopServices::storageLocation(QDesktopServices::MusicLocation);
-		this->outputDir(musicLocation.isEmpty() ? QDesktopServices::storageLocation(QDesktopServices::HomeLocation) : musicLocation);
+		qWarning("Output directory not set yet or does NOT exist anymore -> Resetting");
+		this->outputDir(defaultDirectory());
 	}
 
-	if(this->mostRecentInputPath().isEmpty() || !QFileInfo(this->mostRecentInputPath()).isDir())
+	if(this->mostRecentInputPath().isEmpty() || (!DIR_EXISTS(this->mostRecentInputPath())))
 	{
-		QString musicLocation = QDesktopServices::storageLocation(QDesktopServices::MusicLocation);
-		this->outputDir(musicLocation.isEmpty() ? QDesktopServices::storageLocation(QDesktopServices::HomeLocation) : musicLocation);
+		qWarning("Most recent input directory not set yet or does NOT exist anymore -> Resetting");
+		this->mostRecentInputPath(defaultDirectory());
 	}
 
 	if(!this->currentLanguageFile().isEmpty())
@@ -388,7 +389,24 @@ QString SettingsModel::defaultLanguage(void) const
 	return LAMEXP_DEFAULT_LANGID;
 }
 
-QString SettingsModel::initDirectory(const QString &path)
+QString SettingsModel::defaultDirectory(void) const
+{
+	QString defaultLocation = initDirectory(QDesktopServices::storageLocation(QDesktopServices::MusicLocation));
+
+	if(defaultLocation.isEmpty())
+	{
+		defaultLocation = initDirectory(QDesktopServices::storageLocation(QDesktopServices::HomeLocation));
+
+		if(defaultLocation.isEmpty())
+		{
+			defaultLocation = initDirectory(QDir::currentPath());
+		}
+	}
+
+	return defaultLocation;
+}
+
+QString SettingsModel::initDirectory(const QString &path) const
 {
 	if(path.isEmpty())
 	{
@@ -466,7 +484,7 @@ LAMEXP_MAKE_OPTION_I(lameChannelMode, 0)
 LAMEXP_MAKE_OPTION_I(licenseAccepted, 0)
 LAMEXP_MAKE_OPTION_U(maximumInstances, 0)
 LAMEXP_MAKE_OPTION_U(metaInfoPosition, UINT_MAX)
-LAMEXP_MAKE_OPTION_S(mostRecentInputPath, QDesktopServices::storageLocation(QDesktopServices::MusicLocation))
+LAMEXP_MAKE_OPTION_S(mostRecentInputPath, defaultDirectory())
 LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass, true)
 LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled, false)
@@ -476,7 +494,7 @@ LAMEXP_MAKE_OPTION_I(opusComplexity, 10)
 LAMEXP_MAKE_OPTION_B(opusDisableResample, false)
 LAMEXP_MAKE_OPTION_I(opusFramesize, 3)
 LAMEXP_MAKE_OPTION_I(opusOptimizeFor, 0)
-LAMEXP_MAKE_OPTION_S(outputDir, QDesktopServices::storageLocation(QDesktopServices::MusicLocation))
+LAMEXP_MAKE_OPTION_S(outputDir, defaultDirectory())
 LAMEXP_MAKE_OPTION_B(outputToSourceDir, false)
 LAMEXP_MAKE_OPTION_I(overwriteMode, Overwrite_KeepBoth)
 LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath, false)

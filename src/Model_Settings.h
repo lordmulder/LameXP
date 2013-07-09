@@ -169,9 +169,10 @@ public:
 	
 private:
 	QSettings *m_settings;
-	QString initDirectory(const QString &path);
 	static QString *m_defaultLanguage;
+	QString initDirectory(const QString &path) const;
 	QString defaultLanguage(void) const;
+	QString defaultDirectory(void) const;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

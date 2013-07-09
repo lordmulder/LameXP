@@ -152,9 +152,9 @@ while(0)
 
 #define WITH_BLOCKED_SIGNALS(WIDGET, CMD, ...) do \
 { \
-	(WIDGET)->blockSignals(true); \
+	const bool _flag = (WIDGET)->blockSignals(true); \
 	(WIDGET)->CMD(__VA_ARGS__); \
-	(WIDGET)->blockSignals(false); \
+	if(!(_flag)) { (WIDGET)->blockSignals(false); } \
 } \
 while(0)
 
