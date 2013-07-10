@@ -3167,7 +3167,6 @@ void MainWindow::initOutputFolderModel(void)
 			ui->outputFolderView->header()->hideSection(3);
 		
 			m_fileSystemModel->setRootPath("");
-			qWarning("Initializing QFileSystemModel to:\n%s\n", m_settings->outputDir().toUtf8().constData());
 			QModelIndex index = m_fileSystemModel->index(m_settings->outputDir());
 			if(index.isValid()) ui->outputFolderView->setCurrentIndex(index);
 			outputFolderViewClicked(ui->outputFolderView->currentIndex());

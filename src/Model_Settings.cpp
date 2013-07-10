@@ -215,14 +215,6 @@ SettingsModel::SettingsModel(void)
 	m_settings->beginGroup(groupKey);
 	m_settings->setValue(g_settingsId_versionNumber, QApplication::applicationVersion());
 	m_settings->sync();
-
-	const bool isDefined = m_settings->contains(g_settingsId_outputDir);
-	qWarning("Value '%s' is currently: %s\n", g_settingsId_outputDir, (isDefined ? "defined" : "un-defined"));
-	if(isDefined)
-	{
-		qWarning("It's value is:\n%s\n", m_settings->value(g_settingsId_outputDir).toString().toUtf8().constData());
-	}
-	qWarning("Current output directory is:\n%s\n", outputDir().toUtf8().constData());
 }
 
 ////////////////////////////////////////////////////////////
