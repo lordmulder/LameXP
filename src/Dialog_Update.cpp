@@ -88,7 +88,6 @@ static const char *update_mirrors_back[] =
 static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites !!!
 {
 	"http://www.163.com/",
-	"http://en.360buy.com/",
 	"http://www.ac3filter.net/",
 	"http://www.amazon.com/",
 	"http://www.aol.com/",
@@ -121,6 +120,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites 
 	"http://www.imdb.com/",
 	"http://www.imgburn.com/",
 	"http://imgur.com/",
+	"http://en.jd.com/", //http://en.360buy.com/
 	"http://mirrors.kernel.org/",
 	"http://www.libav.org/",
 	"http://www.linkedin.com/",
@@ -146,7 +146,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites 
 	"http://tdm-gcc.tdragon.net/",
 	"http://www.tdrsmusic.com/",
 	"http://www.ubuntu.com/",
-	"http://blog.twitter.com/",
+	"http://status.twitter.com/",
 	"http://www.uol.com.br/",
 	"http://www.videohelp.com/",
 	"http://www.videolan.org/",
