@@ -1758,7 +1758,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="729"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4261"/>
         <source>Access Denied</source>
         <translation>Åtkomst nekad</translation>
     </message>
@@ -1950,7 +1950,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1513"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1590"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2130"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4205"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4204"/>
         <source>Discard</source>
         <translation>Stäng</translation>
     </message>
@@ -2466,117 +2466,117 @@
         <translation>Diskenheten är skrivskyddad eller åtkomsträttigheter saknas!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3461"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3460"/>
         <source>QAAC (Apple)</source>
         <translation>QAAC (Apple)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3461"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3460"/>
         <source>FHG AAC (Winamp)</source>
         <translation>FHG AAC (Winamp)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3461"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3460"/>
         <source>Nero AAC</source>
         <translation>Nero AAC</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3461"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3460"/>
         <source>Not available!</source>
         <translation>Ej tillgänglig!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3463"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3462"/>
         <source>Current AAC Encoder: %1</source>
         <translation>Aktuell AAC-kodare: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3702"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3723"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3746"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3750"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3754"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3776"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3701"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3722"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3745"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3749"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3753"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3775"/>
         <source>Quality Level %1</source>
         <translation>Kvallitetsnivå %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3797"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3796"/>
         <source>Compression %1</source>
         <translation>Kompression %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3854"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3853"/>
         <source>Uncompressed</source>
         <translation>Okomprimerad</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3898"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3897"/>
         <source>Best Quality (Slow)</source>
         <translation>Bäst kvalitet (Långsam)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3903"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>Acceptabel kvalitet (Snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3901"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3900"/>
         <source>High Quality (Recommended)</source>
         <translation>Hög kvallitet (rekommenderas)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3907"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3906"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Dålig kvallitet (mycket snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4193"/>
         <source>File name without extension</source>
         <translation>Filnamn utan filtillägg</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4195"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
         <source>Track number with leading zero</source>
         <translation>Spårnummer med inledande nolla</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4195"/>
         <source>Track title</source>
         <translation>Spårtitel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4197"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
         <source>Artist name</source>
         <translation>Artistnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4198"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4197"/>
         <source>Album name</source>
         <translation>Albumnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4198"/>
         <source>Year with (at least) four digits</source>
         <translation>Årtal med (minst) fyra siffror</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4200"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4201"/>
         <source>Characters forbidden in file names:</source>
         <translation>Förbjudna tecken i filnamn:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4205"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4204"/>
         <source>Rename Macros</source>
         <translation>Namnändra macron</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4218"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4217"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n instans</numerusform>
@@ -2584,37 +2584,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4262"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4261"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Kan inte skriva till den specificerade mappen. Välj en annan destination!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4382"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4381"/>
         <source>Overwrite Mode</source>
         <translation>Överskrivningsläge</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4382"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4381"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Varning! Det här läget kan skriva över befintliga filer, utan möjlighet att återskapa!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4382"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4381"/>
         <source>Continue</source>
         <translation>Fortsätt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4382"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4381"/>
         <source>Revert</source>
         <translation>Återställ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4447"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4446"/>
         <source>Already Running</source>
         <translation>Körs redan</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4447"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4446"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP körs redan, använd den redan startade instansen!</translation>
     </message>
