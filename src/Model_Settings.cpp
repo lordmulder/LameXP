@@ -200,9 +200,9 @@ SettingsModel::SettingsModel(void)
 	m_cacheDirty = new QSet<QString>();
 
 	//Create settings
-	m_settings = new QSettings(configPath, QSettings::IniFormat);
+	m_configFile = new QSettings(configPath, QSettings::IniFormat);
 	const QString groupKey = QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_confg());
-	QStringList childGroups = m_settings->childGroups();
+	QStringList childGroups = m_configFile->childGroups();
 
 	//Clean-up settings
 	while(!childGroups.isEmpty())
@@ -219,13 +219,13 @@ SettingsModel::SettingsModel(void)
 			}
 		}
 		qWarning("Deleting obsolete group from config: %s", current.toUtf8().constData());
-		REMOVE_GROUP(m_settings, current);
+		REMOVE_GROUP(m_configFile, current);
 	}
 
 	//Setup settings
-	m_settings->beginGroup(groupKey);
-	m_settings->setValue(g_settingsId_versionNumber, QApplication::applicationVersion());
-	m_settings->sync();
+	m_configFile->beginGroup(groupKey);
+	m_configFile->setValue(g_settingsId_versionNumber, QApplication::applicationVersion());
+	m_configFile->sync();
 }
 
 ////////////////////////////////////////////////////////////
@@ -239,7 +239,7 @@ SettingsModel::~SettingsModel(void)
 	LAMEXP_DELETE(m_cache);
 	LAMEXP_DELETE(m_cacheDirty);
 	LAMEXP_DELETE(m_cacheLock);
-	LAMEXP_DELETE(m_settings);
+	LAMEXP_DELETE(m_configFile);
 	LAMEXP_DELETE(m_defaultLanguage);
 }
 
@@ -467,7 +467,7 @@ QVariant SettingsModel::loadValue(const QString &key, const QVariant &defaultVal
 
 	if(!m_cache->contains(key))
 	{
-		const QVariant storedValue = m_settings->value(key, defaultValue);
+		const QVariant storedValue = m_configFile->value(key, defaultValue);
 		m_cache->insert(key, storedValue);
 	}
 
@@ -480,15 +480,19 @@ void SettingsModel::flushValues(void)
 
 	if(!m_cacheDirty->isEmpty())
 	{
-		QHash<QString, QVariant>::ConstIterator iter;
-		for(iter = m_cache->constBegin(); iter != m_cache->constEnd(); iter++)
+		QSet<QString>::ConstIterator iter;
+		for(iter = m_cacheDirty->constBegin(); iter != m_cacheDirty->constEnd(); iter++)
 		{
-			if(m_cacheDirty->contains(iter.key()))
+			if(m_cache->contains(*iter))
 			{
-				m_settings->setValue(iter.key(), iter.value());
+				m_configFile->setValue((*iter), m_cache->value(*iter));
+			}
+			else
+			{
+				qWarning("Could not find '%s' in cache, but it has been marked as dirty!", (*iter).toUtf8().constData());
 			}
 		}
-		m_settings->sync();
+		m_configFile->sync();
 		m_cacheDirty->clear();
 	}
 }

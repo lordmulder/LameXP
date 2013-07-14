@@ -162,6 +162,7 @@ while(0)
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 //#define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
+#define RESET_SETTING(OBJ,NAME) (OBJ)->NAME((OBJ)->NAME##Default())
 
 static const DWORD IDM_ABOUTBOX = 0xEFF0;
 
@@ -364,14 +365,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	ui->radioButtonEncoderOpus->setChecked(m_settings->compressionEncoder() == SettingsModel::OpusEncoder);
 	ui->radioButtonEncoderDCA->setChecked(m_settings->compressionEncoder() == SettingsModel::DCAEncoder);
 	ui->radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
-
-	//ui->radioButtonModeQuality->setChecked(m_settings->compressionRCMode() == SettingsModel::VBRMode);
-	//ui->radioButtonModeAverageBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::ABRMode);
-	//ui->radioButtonConstBitrate->setChecked(m_settings->compressionRCMode() == SettingsModel::CBRMode);
-	//ui->sliderBitrate->setValue(m_settings->compressionBitrate());
 	
 	m_evenFilterCompressionTab = new CustomEventFilter();
 	ui->labelCompressionHelp->installEventFilter(m_evenFilterCompressionTab);
+	ui->labelResetEncoders ->installEventFilter(m_evenFilterCompressionTab);
 
 	connect(m_encoderButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateEncoder(int)));
 	connect(m_modeButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateRCMode(int)));
@@ -3878,6 +3875,36 @@ void MainWindow::compressionTabEventOccurred(QWidget *sender, QEvent *event)
 	{
 		QDesktopServices::openUrl(helpUrl);
 	}
+	else if((sender == ui->labelResetEncoders) && (event->type() == QEvent::MouseButtonPress))
+	{
+		if(m_settings->soundsEnabled())
+		{
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE_BLAST), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+		}
+
+		RESET_SETTING(m_settings, compressionBitrateAacEnc);
+		RESET_SETTING(m_settings, compressionBitrateAften);
+		RESET_SETTING(m_settings, compressionBitrateDcaEnc);
+		RESET_SETTING(m_settings, compressionBitrateLAME);
+		RESET_SETTING(m_settings, compressionBitrateOggEnc);
+		RESET_SETTING(m_settings, compressionBitrateOpusEnc);
+
+		RESET_SETTING(m_settings, compressionRCModeAacEnc);
+		RESET_SETTING(m_settings, compressionRCModeAften);
+		RESET_SETTING(m_settings, compressionRCModeLAME);
+		RESET_SETTING(m_settings, compressionRCModeOggEnc);
+		RESET_SETTING(m_settings, compressionRCModeOpusEnc);
+
+		RESET_SETTING(m_settings, compressionVbrLevelAacEnc);
+		RESET_SETTING(m_settings, compressionVbrLevelAften);
+		RESET_SETTING(m_settings, compressionVbrLevelFLAC);
+		RESET_SETTING(m_settings, compressionVbrLevelLAME);
+		RESET_SETTING(m_settings, compressionVbrLevelOggEnc);
+
+		m_settings->compressionEncoder(SettingsModel::MP3Encoder);
+		ui->radioButtonEncoderMP3->setChecked(true);
+		QTimer::singleShot(0, this, SLOT(updateEncoder()));
+	}
 }
 
 // =========================================================
@@ -4394,6 +4421,11 @@ void MainWindow::overwriteModeChanged(int id)
  */
 void MainWindow::resetAdvancedOptionsButtonClicked(void)
 {
+	if(m_settings->soundsEnabled())
+	{
+		PlaySound(MAKEINTRESOURCE(IDR_WAVE_BLAST), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+	}
+
 	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());
 	ui->spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());
 	ui->spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRateDefault());
@@ -4409,6 +4441,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
 	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
 	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
+
 	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilter, m_settings->normalizationFilterEnabledDefault());
@@ -4418,6 +4451,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResampleDefault());
+
 	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
 	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
 	ui->lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());
@@ -4425,9 +4459,11 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	ui->lineEditCustomParamOpus->setText(m_settings->customParametersFLACDefault());
 	ui->lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
 	ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_KeepBoth) ui->radioButtonOverwriteModeKeepBoth->click();
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_SkipFile) ui->radioButtonOverwriteModeSkipFile->click();
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_Replaces) ui->radioButtonOverwriteModeReplaces->click();
+
 	customParamsChanged();
 	ui->scrollArea->verticalScrollBar()->setValue(0);
 }

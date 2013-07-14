@@ -173,7 +173,7 @@ public:
 	void syncNow(void);
 	
 private:
-	QSettings *m_settings;
+	QSettings *m_configFile;
 	QHash<QString, QVariant> *m_cache;
 	QSet<QString> *m_cacheDirty;
 	QMutex *m_cacheLock;

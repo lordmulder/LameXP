@@ -34,6 +34,7 @@
 #define IDR_WAVE_BEEP                   673
 #define IDR_WAVE_BEEP_LONG              674
 #define IDR_WAVE_WAITING                675
+#define IDR_WAVE_BLAST                  676
 
 /*
  * Next default values for new objects

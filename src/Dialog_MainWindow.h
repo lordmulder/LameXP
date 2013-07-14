@@ -158,7 +158,7 @@ private slots:
 	void toneAdjustTrebleChanged(double value);
 	void toneAdjustTrebleReset(void);
 	void updateBitrate(int value);
-	void updateEncoder(int id);
+	void updateEncoder(int id = 0);
 	void updateLameAlgoQuality(int value);
 	void updateMaximumInstances(int value);
 	void updateRCMode(int id);
