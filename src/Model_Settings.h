@@ -21,13 +21,8 @@
 
 #pragma once
 
-class QSettings;
 class QString;
-class QVariant;
-class QMutex;
-
-template<class K, class V> class QHash;
-template<class T> class QSet;
+class SettingsCache;
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -173,20 +168,13 @@ public:
 	void syncNow(void);
 	
 private:
-	QSettings *m_configFile;
-	QHash<QString, QVariant> *m_cache;
-	QSet<QString> *m_cacheDirty;
-	QMutex *m_cacheLock;
-
-	static QString *m_defaultLanguage;
-
-	inline void storeValue(const QString &key, const QVariant &value);
-	inline QVariant loadValue(const QString &key, const QVariant &defaultValue) const;
-	inline void flushValues(void);
+	SettingsCache *m_configCache;
 
 	QString initDirectory(const QString &path) const;
 	QString defaultLanguage(void) const;
 	QString defaultDirectory(void) const;
+
+	static QString *m_defaultLanguage;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
