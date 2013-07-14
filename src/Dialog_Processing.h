@@ -128,4 +128,6 @@ private:
 	DiskObserverThread *m_diskObserver;
 	qint64 m_timerStart;
 	int m_progressViewFilter;
+
+	const int m_aacEncoder;
 };

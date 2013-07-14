@@ -83,6 +83,14 @@ public:
 		Overwrite_Replaces = 2
 	};
 	
+	enum AACEncoderType
+	{
+		AAC_ENCODER_NONE = 0,
+		AAC_ENCODER_NERO = 1,
+		AAC_ENCODER_FHG  = 2,
+		AAC_ENCODER_QAAC = 3,
+	};
+
 	//Consts
 	static const int mp3Bitrates[15];
 	static const int ac3Bitrates[20];
@@ -167,6 +175,9 @@ public:
 	void validate(void);
 	void syncNow(void);
 	
+	//Static
+	static int getAacEncoder(void);
+
 private:
 	SettingsCache *m_configCache;
 

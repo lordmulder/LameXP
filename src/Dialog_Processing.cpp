@@ -144,6 +144,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 :
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
+	m_aacEncoder(SettingsModel::getAacEncoder()),
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
@@ -996,33 +997,42 @@ AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
 	/*-------- AACEncoder /*--------*/
 	case SettingsModel::AACEncoder:
 		{
-			if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll"))
+			switch(m_aacEncoder)
 			{
-				QAACEncoder *aacEncoder = new QAACEncoder();
-				aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
-				aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
-				aacEncoder->setProfile(m_settings->aacEncProfile());
-				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
-				encoder = aacEncoder;
-			}
-			else if(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll"))
-			{
-				FHGAACEncoder *aacEncoder = new FHGAACEncoder();
-				aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
-				aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
-				aacEncoder->setProfile(m_settings->aacEncProfile());
-				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
-				encoder = aacEncoder;
-			}
-			else
-			{
-				AACEncoder *aacEncoder = new AACEncoder();
-				aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
-				aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
-				aacEncoder->setEnable2Pass(m_settings->neroAACEnable2Pass());
-				aacEncoder->setProfile(m_settings->aacEncProfile());
-				aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
-				encoder = aacEncoder;
+			case SettingsModel::AAC_ENCODER_QAAC:
+				{
+					QAACEncoder *aacEncoder = new QAACEncoder();
+					aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
+					aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
+					aacEncoder->setProfile(m_settings->aacEncProfile());
+					aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
+					encoder = aacEncoder;
+				}
+				break;
+			case SettingsModel::AAC_ENCODER_FHG:
+				{
+					FHGAACEncoder *aacEncoder = new FHGAACEncoder();
+					aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
+					aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
+					aacEncoder->setProfile(m_settings->aacEncProfile());
+					aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
+					encoder = aacEncoder;
+				}
+				break;
+			case SettingsModel::AAC_ENCODER_NERO:
+				{
+					AACEncoder *aacEncoder = new AACEncoder();
+					aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
+					aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
+					aacEncoder->setEnable2Pass(m_settings->neroAACEnable2Pass());
+					aacEncoder->setProfile(m_settings->aacEncProfile());
+					aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
+					encoder = aacEncoder;
+				}
+				break;
+			default:
+				throw "makeEncoder(): Unknown AAC encoder specified!";
+				break;
 			}
 		}
 		break;

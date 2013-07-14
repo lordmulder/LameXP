@@ -40,7 +40,7 @@
 #include <QSet>
 
 ////////////////////////////////////////////////////////////
-//SettingsCache Class
+// SettingsCache Class
 ////////////////////////////////////////////////////////////
 
 class SettingsCache
@@ -126,7 +126,7 @@ private:
 };
 
 ////////////////////////////////////////////////////////////
-//Macros
+// Macros
 ////////////////////////////////////////////////////////////
 
 #define LAMEXP_MAKE_OPTION_I(OPT,DEF) \
@@ -162,7 +162,7 @@ while(0)
 #define DIR_EXISTS(PATH) (QFileInfo(PATH).exists() && QFileInfo(PATH).isDir())
 
 ////////////////////////////////////////////////////////////
-//Constants
+// Constants
 ////////////////////////////////////////////////////////////
 
 //Setting ID's
@@ -416,6 +416,30 @@ void SettingsModel::validate(void)
 void SettingsModel::syncNow(void)
 {
 	m_configCache->flushValues();
+}
+
+////////////////////////////////////////////////////////////
+// Static Functions
+////////////////////////////////////////////////////////////
+
+int SettingsModel::getAacEncoder(void)
+{
+	if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll"))
+	{
+		return AAC_ENCODER_QAAC;
+	}
+	else if(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll") && lamexp_check_tool("nsutil.dll") && lamexp_check_tool("libmp4v2.dll"))
+	{
+		return AAC_ENCODER_FHG;
+	}
+	else if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
+	{
+		return AAC_ENCODER_NERO;
+	}
+	else
+	{
+		return AAC_ENCODER_NONE;
+	}
 }
 
 ////////////////////////////////////////////////////////////

@@ -195,10 +195,6 @@ private:
 	uint m_outputFolderViewInitCounter;
 	bool m_outputFolderViewCentering;
 
-	const bool m_neroEncoderAvailable;
-	const bool m_fhgEncoderAvailable;
-	const bool m_qaacEncoderAvailable;
-
 	WorkingBanner *m_banner;
 	QStringList *m_delayedFileList;
 	QTimer *m_delayedFileTimer;
@@ -235,4 +231,6 @@ private:
 	CustomEventFilter *m_evenFilterOutputFolderMouse;
 	CustomEventFilter *m_evenFilterOutputFolderView;
 	CustomEventFilter *m_evenFilterCompressionTab;
+
+	const int m_aacEncoder;
 };

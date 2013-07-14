@@ -178,9 +178,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
 	m_fileSystemModel(NULL),
-	m_neroEncoderAvailable(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")),
-	m_fhgEncoderAvailable(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll") && lamexp_check_tool("nsutil.dll") && lamexp_check_tool("libmp4v2.dll")),
-	m_qaacEncoderAvailable(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll")),
+	m_aacEncoder(SettingsModel::getAacEncoder()),
 	m_accepted(false),
 	m_firstTimeShown(true),
 	m_outputFolderViewCentering(false),
@@ -356,10 +354,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_modeButtonGroup->addButton(ui->radioButtonModeAverageBitrate, SettingsModel::ABRMode);
 	m_modeButtonGroup->addButton(ui->radioButtonConstBitrate, SettingsModel::CBRMode);
 
-	ui->radioButtonEncoderAAC->setEnabled(m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable);
+	ui->radioButtonEncoderAAC->setEnabled(m_aacEncoder > SettingsModel::AAC_ENCODER_NONE);
 	ui->radioButtonEncoderMP3->setChecked(m_settings->compressionEncoder() == SettingsModel::MP3Encoder);
 	ui->radioButtonEncoderVorbis->setChecked(m_settings->compressionEncoder() == SettingsModel::VorbisEncoder);
-	ui->radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_neroEncoderAvailable || m_fhgEncoderAvailable || m_qaacEncoderAvailable));
+	ui->radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_aacEncoder > SettingsModel::AAC_ENCODER_NONE));
 	ui->radioButtonEncoderAC3->setChecked(m_settings->compressionEncoder() == SettingsModel::AC3Encoder);
 	ui->radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
 	ui->radioButtonEncoderOpus->setChecked(m_settings->compressionEncoder() == SettingsModel::OpusEncoder);
@@ -410,7 +408,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResample());
-	ui->checkBoxNeroAAC2PassMode->setEnabled(!(m_fhgEncoderAvailable || m_qaacEncoderAvailable));
+	ui->checkBoxNeroAAC2PassMode->setEnabled(m_aacEncoder == SettingsModel::AAC_ENCODER_NERO);
 	
 	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
 	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
@@ -1478,7 +1476,7 @@ void MainWindow::windowShown(void)
 	}
 
 	//Check for AAC support
-	if(m_neroEncoderAvailable)
+	if(m_aacEncoder == SettingsModel::AAC_ENCODER_NERO)
 	{
 		if(m_settings->neroAacNotificationsEnabled())
 		{
@@ -1496,7 +1494,7 @@ void MainWindow::windowShown(void)
 	}
 	else
 	{
-		if(m_settings->neroAacNotificationsEnabled() && (!(m_fhgEncoderAvailable || m_qaacEncoderAvailable)))
+		if(m_settings->neroAacNotificationsEnabled() && (m_aacEncoder <= SettingsModel::AAC_ENCODER_NONE))
 		{
 			QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 			if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
@@ -3454,7 +3452,13 @@ void MainWindow::updateEncoder(int id)
 	//Add AAC info
 	if(m_settings->compressionEncoder() == SettingsModel::AACEncoder)
 	{
-		const QString encoderName = m_qaacEncoderAvailable ? tr("QAAC (Apple)") : (m_fhgEncoderAvailable ? tr("FHG AAC (Winamp)") : (m_neroEncoderAvailable ? tr("Nero AAC") : tr("Not available!")));
+		QString encoderName = tr("Not available!");
+		switch(m_aacEncoder)
+		{
+			case SettingsModel::AAC_ENCODER_NERO: encoderName = tr("Nero AAC"); break;
+			case SettingsModel::AAC_ENCODER_FHG : encoderName = tr("FHG AAC (Winamp)"); break;
+			case SettingsModel::AAC_ENCODER_QAAC: encoderName = tr("QAAC (Apple)"); break;
+		}
 		ui->labelEncoderInfo->setVisible(true);
 		ui->labelEncoderInfo->setText(tr("Current AAC Encoder: %1").arg(encoderName));
 	}
@@ -3539,20 +3543,23 @@ void MainWindow::updateRCMode(int id)
 		switch(id)
 		{
 		case SettingsModel::VBRMode:
-			if(m_qaacEncoderAvailable)
+			switch(m_aacEncoder)
 			{
+			case SettingsModel::AAC_ENCODER_QAAC:
 				sliderMin = 0;
 				sliderMax = 32;
-			}
-			else if(m_fhgEncoderAvailable)
-			{
+				break;
+			case SettingsModel::AAC_ENCODER_FHG:
 				sliderMin = 1;
 				sliderMax = 6;
-			}
-			else
-			{
+				break;
+			case SettingsModel::AAC_ENCODER_NERO:
 				sliderMin = 0;
 				sliderMax = 20;
+				break;
+			default:
+				throw "updateRCMode(): Unknown AAC encoder specified!";
+				break;
 			}
 			break;
 		case SettingsModel::ABRMode:
@@ -3737,17 +3744,20 @@ void MainWindow::updateBitrate(int value)
 		switch(currentRCMode)
 		{
 		case SettingsModel::VBRMode:
-			if(m_qaacEncoderAvailable)
+			switch(m_aacEncoder)
 			{
+			case SettingsModel::AAC_ENCODER_QAAC:
 				sliderText = tr("Quality Level %1").arg(QString::number(qBound(0, value * 4 , 127)));
-			}
-			else if(m_fhgEncoderAvailable)
-			{
+				break;
+			case SettingsModel::AAC_ENCODER_FHG:
 				sliderText = tr("Quality Level %1").arg(QString::number(value));
-			}
-			else
-			{
+				break;
+			case SettingsModel::AAC_ENCODER_NERO:
 				sliderText = tr("Quality Level %1").arg(QString().sprintf("%.2f", static_cast<double>(value) / 20.0));
+				break;
+			default:
+				throw "updateBitrate(): Unknown AAC encoder specified!";
+				break;
 			}
 			m_settings->compressionVbrLevelAacEnc(value);
 			break;
@@ -4329,10 +4339,13 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 	else if(obj == ui->helpCustomParamOggEnc)  showCustomParamsHelpScreen("oggenc2.exe", "--help");
 	else if(obj == ui->helpCustomParamNeroAAC)
 	{
-		if(m_qaacEncoderAvailable)         showCustomParamsHelpScreen("qaac.exe", "--help");
-		else if(m_fhgEncoderAvailable)     showCustomParamsHelpScreen("fhgaacenc.exe", "");
-		else if(m_neroEncoderAvailable)    showCustomParamsHelpScreen("neroAacEnc.exe", "-help");
-		else MessageBeep(MB_ICONERROR);
+		switch(m_aacEncoder)
+		{
+			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac.exe", "--help"); break;
+			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe", ""); break;
+			case SettingsModel::AAC_ENCODER_NERO: showCustomParamsHelpScreen("neroAacEnc.exe", "-help"); break;
+			default: MessageBeep(MB_ICONERROR); break;
+		}
 	}
 	else if(obj == ui->helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
 	else if(obj == ui->helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
