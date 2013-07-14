@@ -174,6 +174,9 @@ static int lamexp_main(int argc, char* argv[])
 		iResult = QApplication::instance()->exec();
 		bAccepted = poMainWindow->isAccepted();
 
+		//Sync settings
+		settingsModel->syncNow();
+
 		//Show processing dialog
 		if(bAccepted && (fileListModel->rowCount() > 0))
 		{

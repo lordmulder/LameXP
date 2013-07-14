@@ -35,30 +35,33 @@
 #include <QReadWriteLock>
 #include <QReadLocker>
 #include <QWriteLocker>
+#include <QHash>
+#include <QMutex>
+#include <QSet>
 
 ////////////////////////////////////////////////////////////
 //Macros
 ////////////////////////////////////////////////////////////
 
 #define LAMEXP_MAKE_OPTION_I(OPT,DEF) \
-int SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toInt(); } \
-void SettingsModel::OPT(int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
-int SettingsModel::OPT##Default(void) { return DEF; }
+int SettingsModel::OPT(void) const { return loadValue(g_settingsId_##OPT, (DEF)).toInt(); } \
+void SettingsModel::OPT(int value) { storeValue(g_settingsId_##OPT, value); } \
+int SettingsModel::OPT##Default(void) { return (DEF); }
 
 #define LAMEXP_MAKE_OPTION_S(OPT,DEF) \
-QString SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toString().trimmed(); } \
-void SettingsModel::OPT(const QString &value) { m_settings->setValue(g_settingsId_##OPT, value); } \
-QString SettingsModel::OPT##Default(void) { return DEF; }
+QString SettingsModel::OPT(void) const { return loadValue(g_settingsId_##OPT, (DEF)).toString().trimmed(); } \
+void SettingsModel::OPT(const QString &value) { storeValue(g_settingsId_##OPT, value); } \
+QString SettingsModel::OPT##Default(void) { return (DEF); }
 
 #define LAMEXP_MAKE_OPTION_B(OPT,DEF) \
-bool SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toBool(); } \
-void SettingsModel::OPT(bool value) { m_settings->setValue(g_settingsId_##OPT, value); } \
-bool SettingsModel::OPT##Default(void) { return DEF; }
+bool SettingsModel::OPT(void) const { return loadValue(g_settingsId_##OPT, (DEF)).toBool(); } \
+void SettingsModel::OPT(bool value) { storeValue(g_settingsId_##OPT, value); } \
+bool SettingsModel::OPT##Default(void) { return (DEF); }
 
 #define LAMEXP_MAKE_OPTION_U(OPT,DEF) \
-unsigned int SettingsModel::OPT(void) const { return m_settings->value(g_settingsId_##OPT, DEF).toUInt(); } \
-void SettingsModel::OPT(unsigned int value) { m_settings->setValue(g_settingsId_##OPT, value); } \
-unsigned int SettingsModel::OPT##Default(void) { return DEF; }
+unsigned int SettingsModel::OPT(void) const { return loadValue(g_settingsId_##OPT, (DEF)).toUInt(); } \
+void SettingsModel::OPT(unsigned int value) { storeValue(g_settingsId_##OPT, value); } \
+unsigned int SettingsModel::OPT##Default(void) { return (DEF); }
 
 #define LAMEXP_MAKE_ID(DEC,STR) static const char *g_settingsId_##DEC = STR
 #define REMOVE_GROUP(OBJ,ID) OBJ->beginGroup(ID); OBJ->remove(""); OBJ->endGroup();
@@ -191,10 +194,17 @@ SettingsModel::SettingsModel(void)
 		}
 	}
 
+	//Create the cache
+	m_cache = new QHash<QString, QVariant>();
+	m_cacheLock = new QMutex();
+	m_cacheDirty = new QSet<QString>();
+
+	//Create settings
 	m_settings = new QSettings(configPath, QSettings::IniFormat);
 	const QString groupKey = QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_confg());
 	QStringList childGroups = m_settings->childGroups();
 
+	//Clean-up settings
 	while(!childGroups.isEmpty())
 	{
 		QString current = childGroups.takeFirst();
@@ -212,6 +222,7 @@ SettingsModel::SettingsModel(void)
 		REMOVE_GROUP(m_settings, current);
 	}
 
+	//Setup settings
 	m_settings->beginGroup(groupKey);
 	m_settings->setValue(g_settingsId_versionNumber, QApplication::applicationVersion());
 	m_settings->sync();
@@ -223,6 +234,11 @@ SettingsModel::SettingsModel(void)
 
 SettingsModel::~SettingsModel(void)
 {
+	flushValues();
+
+	LAMEXP_DELETE(m_cache);
+	LAMEXP_DELETE(m_cacheDirty);
+	LAMEXP_DELETE(m_cacheLock);
 	LAMEXP_DELETE(m_settings);
 	LAMEXP_DELETE(m_defaultLanguage);
 }
@@ -313,7 +329,7 @@ void SettingsModel::validate(void)
 
 void SettingsModel::syncNow(void)
 {
-	m_settings->sync();
+	flushValues();
 }
 
 ////////////////////////////////////////////////////////////
@@ -420,6 +436,61 @@ QString SettingsModel::initDirectory(const QString &path) const
 	}
 	
 	return QDir(path).canonicalPath();
+}
+
+////////////////////////////////////////////////////////////
+// Cache support
+////////////////////////////////////////////////////////////
+
+void SettingsModel::storeValue(const QString &key, const QVariant &value)
+{
+	QMutexLocker lock(m_cacheLock);
+	
+	if(!m_cache->contains(key))
+	{
+		m_cache->insert(key, value);
+		m_cacheDirty->insert(key);
+	}
+	else
+	{
+		if(m_cache->value(key) != value)
+		{
+			m_cache->insert(key, value);
+			m_cacheDirty->insert(key);
+		}
+	}
+}
+
+QVariant SettingsModel::loadValue(const QString &key, const QVariant &defaultValue) const
+{
+	QMutexLocker lock(m_cacheLock);
+
+	if(!m_cache->contains(key))
+	{
+		const QVariant storedValue = m_settings->value(key, defaultValue);
+		m_cache->insert(key, storedValue);
+	}
+
+	return m_cache->value(key, defaultValue);
+}
+
+void SettingsModel::flushValues(void)
+{
+	QMutexLocker lock(m_cacheLock);
+
+	if(!m_cacheDirty->isEmpty())
+	{
+		QHash<QString, QVariant>::ConstIterator iter;
+		for(iter = m_cache->constBegin(); iter != m_cache->constEnd(); iter++)
+		{
+			if(m_cacheDirty->contains(iter.key()))
+			{
+				m_settings->setValue(iter.key(), iter.value());
+			}
+		}
+		m_settings->sync();
+		m_cacheDirty->clear();
+	}
 }
 
 ////////////////////////////////////////////////////////////

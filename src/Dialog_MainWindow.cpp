@@ -1714,7 +1714,7 @@ void MainWindow::encodeButtonClicked(void)
 			writeTest.remove();
 		}
 	}
-		
+
 	m_accepted = true;
 	close();
 }
