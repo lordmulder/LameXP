@@ -2612,6 +2612,7 @@ static const HANDLE g_debug_thread = LAMEXP_DEBUG ? NULL : lamexp_debug_thread_i
 SIZE_T lamexp_dbg_private_bytes(void)
 {
 #if LAMEXP_DEBUG
+	for(int i = 0; i < 8; i++) _heapmin();
 	PROCESS_MEMORY_COUNTERS_EX memoryCounters;
 	memoryCounters.cb = sizeof(PROCESS_MEMORY_COUNTERS_EX);
 	GetProcessMemoryInfo(GetCurrentProcess(), (PPROCESS_MEMORY_COUNTERS) &memoryCounters, sizeof(PROCESS_MEMORY_COUNTERS_EX));
