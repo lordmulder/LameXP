@@ -142,7 +142,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="597"/>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Codecs.com</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="600"/>
@@ -3332,23 +3332,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="890"/>
+        <location filename="../../src/Global.cpp" line="891"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation>EXE-filen &apos;%1&apos; stöder inte Windows kompatibilitetsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1144"/>
+        <location filename="../../src/Global.cpp" line="1145"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Qt v%2, du har Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1149"/>
+        <location filename="../../src/Global.cpp" line="1150"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>EXE-filen &apos;%1&apos; är byggd för Qt &apos;%2&apos;, du har Qt &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1162"/>
-        <location filename="../../src/Global.cpp" line="1189"/>
+        <location filename="../../src/Global.cpp" line="1163"/>
+        <location filename="../../src/Global.cpp" line="1190"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Windows 2000 eller senare.</translation>
     </message>
