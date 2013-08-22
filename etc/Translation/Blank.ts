@@ -3312,23 +3312,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="890"/>
+        <location filename="../../src/Global.cpp" line="891"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1144"/>
+        <location filename="../../src/Global.cpp" line="1145"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1149"/>
+        <location filename="../../src/Global.cpp" line="1150"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1162"/>
-        <location filename="../../src/Global.cpp" line="1189"/>
+        <location filename="../../src/Global.cpp" line="1163"/>
+        <location filename="../../src/Global.cpp" line="1190"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished"></translation>
     </message>

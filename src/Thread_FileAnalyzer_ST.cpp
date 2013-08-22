@@ -136,7 +136,8 @@ void FileAnalyzer_ST::run()
 	m_filesDummyCDDA = 0;
 	m_filesCueSheet = 0;
 
-	m_inputFiles.sort();
+	lamexp_natural_string_sort(m_inputFiles); // .sort()
+	
 	m_recentlyAdded.clear();
 	m_abortFlag = false;
 

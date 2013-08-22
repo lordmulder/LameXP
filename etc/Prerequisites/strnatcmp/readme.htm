@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  <title>Natural Order String Comparison</title>
+</head>
+<body>
+
+<h1>Natural Order String Comparison</h1>
+<p>by <a href="http://sourcefrog.net/">Martin Pool</a>
+
+</p><p>Computer string sorting algorithms generally don't order strings
+containing numbers in the same way that a human would do.  Consider:
+
+</p><blockquote><pre>rfc1.txt
+rfc2086.txt
+rfc822.txt
+</pre></blockquote>
+<p>It would be more friendly if the program listed the files as
+
+</p><blockquote><pre>rfc1.txt
+rfc822.txt
+rfc2086.txt
+</pre></blockquote>
+
+<p>Filenames sort properly if people insert leading zeros, but they
+don't always do that.
+
+</p><p>I've written a subroutine that compares strings according to this
+natural ordering.  You can use this routine in your own software, or
+download a patch to add it to your favourite Unix program.
+
+
+</p><h2>Sorting</h2>
+
+<p>Strings are sorted as usual, except that decimal integer substrings
+are compared on their numeric value.  For example,
+
+</p><blockquote>
+   a &lt; a0 &lt; a1 &lt; a1a &lt; a1b &lt; a2 &lt; a10 &lt; a20
+</blockquote>
+
+<p>Strings can contain several number parts:
+
+</p><blockquote>
+  x2-g8 &lt; x2-y7 &lt; x2-y08 &lt; x8-y8
+</blockquote>
+
+in which case numeric fields are separated by nonnumeric characters.
+Leading spaces are ignored.  This works very well for IP addresses
+from log files, for example.
+
+<p>
+Leading zeros are <u>not</u> ignored, which tends to give more
+reasonable results on decimal fractions.  
+</p>
+    
+    <blockquote>
+      1.001 &lt; 1.002 &lt; 1.010 &lt; 1.02 &lt; 1.1 &lt; 1.3
+    </blockquote>
+
+<p>Some applications may wish to change this by modifying the test
+      that calls <code>isspace</code>.
+    
+
+    </p><p>
+      Performance is linear: each character of the string is scanned
+      at most once, and only as many characters as necessary to decide
+      are considered.
+    </p>
+
+<p><a href="http://sourcefrog.net/projects/natsort/example-out.txt">Longer example of the results</a>
+
+
+</p><h2>Licensing</h2>
+
+<p>This software is copyright by Martin Pool, and made available under
+the same licence as zlib:
+
+</p><blockquote>
+<p>  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+</p><p>  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+</p><p>  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+</p><p>  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+</p><p>  3. This notice may not be removed or altered from any source distribution.
+</p></blockquote>
+
+<p>This licence applies only to the C implementation.  You are free to
+reimplement the idea fom scratch in any language.
+
+</p><h2>Related Work</h2>
+
+
+    <p>
+      POSIX sort(1) has the -n option to sort numbers, but this doesn't
+      work if there is a non-numeric prefix.
+    </p>
+    
+    <p>
+      GNU ls(1) has the <tt>--sort=version</tt> option, which works
+      the same way.
+    </p>
+
+    <p>
+      The PHP scripting language now has a
+      <a href="http://us3.php.net/manual/en/function.strnatcmp.php">strnatcmp</a>
+      function based on this code.
+      The PHP wrapper was done by Andrei Zimievsky.
+    </p>
+
+    <p>
+      <a href="http://www.naturalordersort.org/">Stuart
+	Cheshire</a> has a Macintosh <q>system extension</q>  to do natural ordering.
+      I indepdendently reinvented the algorithm, but Stuart had it
+	first.  I borrowed the term <q>natural sort</q> from him.
+        
+    </p>
+
+    <p>
+      <a href="http://search.cpan.org/src/EDAVIS/Sort-Versions-1.4/README"><tt>Sort::Versions</tt></a>
+      in Perl.  "The code has some special magic to deal with common 
+conventions in program version numbers, like the difference between 
+'decimal' versions (eg perl 5.005) and the Unix kind (eg perl 5.6.1)."
+
+    </p><p><a href="http://www.cpan.org/modules/by-module/Sort/Sort-Naturally-1.01.readme"><tt>Sort::Naturally</tt></a>
+      is also in Perl, by  Sean M. Burke.  It uses locale-sensitive character classes to sort words and numeric substrings
+      in a way similar to natsort.
+
+    </p><p>
+      Ed Avis wrote <a href="http://membled.com/work/apps/todo/numsort">something similar in Haskell</a>.
+
+
+    </p><p>
+    Pierre-Luc Paour wrote a <a href="http://pierre-luc.paour.9online.fr/NaturalOrderComparator.java"><tt>NaturalOrderComparator</tt>
+    in Java</a>
+
+    </p><p>Kristof Coomans wrote a <a href="http://sourcefrog.net/projects/natsort/natcompare.js">natural sort comparison in Javascript</a></p>
+
+    <p>Alan Davies wrote 
+    <a href="http://sourcefrog.net/projects/natsort/natcmp.rb"><tt>natcmp.rb</tt></a>,
+     an implementation in <a href="http://www.ruby-lang.org/">Ruby</a>.
+
+    </p><p><a href="http://sourceforge.net/projects/numacomp">Numacomp</a>
+    - similar thing in Python.
+    
+    </p><p><a href="http://code.google.com/p/as3natcompare/">as3natcompare</a> 
+      implementation in Flash ActionScript 3.
+
+</p><h2>Get It!</h2>
+
+  <ul>
+    <li><a href="http://sourcefrog.net/projects/natsort/strnatcmp.c">strnatcmp.c</a>,
+     <a href="http://sourcefrog.net/projects/natsort/strnatcmp.h">strnatcmp.h</a> - the algorithm itself
+
+    </li><li><a href="http://sourcefrog.net/projects/natsort/natsort.c">natsort.c</a> - example driver program.
+    (Try <tt>ls -F /proc | natsort</tt>)
+
+      </li><li><a href="http://sourcefrog.net/projects/natsort/textutils.diff">textutils.diff</a> - patch to add
+	natural sort to sort(1) from GNU textutils-2.0; use the new
+	<tt>-N</tt> option.</li>
+
+      <li>Natural ordering is now in PHP4rc2, through the <a href="http://php.net/manual/html/function.strnatcasecmp.html">strnatcasecmp</a>
+      and <a href="http://php.net/manual/html/function.strnatcmp.html">strnatcmp</a>
+	functions.</li>
+  </ul>
+
+
+  <h2>To Do</h2>
+
+  <p>
+    Comparison of characters is purely numeric, without taking
+    character set or locale into account.  So it is only correct for
+    ASCII.  This should probably be a separate function because doing
+    the comparisons will probably introduce a dependency on the OS
+    mechanism for finding the locale and comparing characters.
+
+
+  </p><p>
+    It might be good to support multibyte character sets too.
+
+  </p><p>
+    If you fix either of these, please mail me.  They should not be
+    very hard.
+
+
+
+</p></body></html>

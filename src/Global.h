@@ -162,6 +162,7 @@ const QString lamexp_clean_filepath(const QString &str);
 void lamexp_seed_rand(void);
 unsigned int lamexp_rand(void);
 QDate lamexp_current_date_safe(void);
+void lamexp_natural_string_sort(QStringList &list);
 void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage = NULL);
 
 //Debug-only functions

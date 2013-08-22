@@ -54,6 +54,7 @@
 #include "Resource.h"
 #include "Config.h"
 #include "LockedFile.h"
+#include "strnatcmp.h"
 
 //CRT includes
 #include <iostream>
@@ -2424,6 +2425,23 @@ QDate lamexp_current_date_safe(void)
 	const QDate currentDate = QDate::currentDate();
 	const QDate processDate = QDate(lastStartTime_system.wYear, lastStartTime_system.wMonth, lastStartTime_system.wDay);
 	return (currentDate >= processDate) ? currentDate : processDate;
+}
+
+
+/*
+ * Natural Order String Comparison - the 'lessThan' helper function
+ */
+static bool lamexp_natural_string_sort_helper(const QString &str1, const QString &str2)
+{
+	return (strnatcmp(QWCHAR(str1), QWCHAR(str2)) < 0);
+}
+
+/*
+ * Natural Order String Comparison - the main sorting function
+ */
+void lamexp_natural_string_sort(QStringList &list)
+{
+	qSort(list.begin(), list.end(), lamexp_natural_string_sort_helper);
 }
 
 /*
