@@ -289,11 +289,11 @@
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Valdec depuis les outils AC3Filter - Décodeur AC3/DTS</translation>
     </message>
     <message>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Codecs.com</translation>
     </message>
 </context>
 <context>
@@ -2020,19 +2020,19 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Meilleure qualité (lente)</translation>
     </message>
     <message>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualité acceptable (Rapide)</translation>
     </message>
     <message>
         <source>Official LameXP Project Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation>Site web officiel du projet LameXP</translation>
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Projets OpenSource de MuldeR</translation>
     </message>
 </context>
 <context>

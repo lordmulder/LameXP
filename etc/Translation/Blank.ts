@@ -2459,13 +2459,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3460"/>
-        <source>QAAC (Apple)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3459"/>
-        <source>FHG AAC (Winamp)</source>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3455"/>
+        <source>Not available!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2474,8 +2469,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3455"/>
-        <source>Not available!</source>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3459"/>
+        <source>FHG AAC (Winamp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3460"/>
+        <source>QAAC (Apple)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
