@@ -30,6 +30,12 @@ misrepresented as being the original software.
 * negative chars in their default char type.
 */
 
+/*
+* 2013-08-23: Skip leading zero's for any run of digits, except
+*             when a decimal point was seen immediatley before.
+*             Patch by LoRd_MuldeR <mulder2@gmx.de>
+*/
+
 #include <ctype.h>
 #include <string.h>
 #include <assert.h>
@@ -39,30 +45,26 @@ misrepresented as being the original software.
 
 /* These are defined as macros to make it easier to adapt this code to
 * different characters types or comparison functions. */
-static inline int
-nat_isdigit(nat_char a)
+static inline int nat_isdigit(nat_char a)
 {
 	return iswdigit(a);
 }
 
-
-static inline int
-nat_isspace(nat_char a)
+static inline int nat_isspace(nat_char a)
 {
 	return iswspace(a);
 }
 
-
-static inline nat_char
-nat_toupper(nat_char a)
+static inline nat_char nat_isdecpoint(nat_char a)
+{
+	return (a == L'.') || (a == L',');
+}
+static inline nat_char nat_toupper(nat_char a)
 {
 	return towupper(a);
 }
 
-
-
-static int
-compare_right(nat_char const *a, nat_char const *b)
+static int compare_right(nat_char const *a, nat_char const *b)
 {
 	int bias = 0;
 
@@ -70,34 +72,38 @@ compare_right(nat_char const *a, nat_char const *b)
 	value wins, but we can't know that it will until we've scanned
 	both numbers to know that they have the same magnitude, so we
 	remember it in BIAS. */
-	for (;; a++, b++) {
-		if (!nat_isdigit(*a)  &&  !nat_isdigit(*b))
+	for (;; a++, b++)
+	{
+		if (!nat_isdigit(*a) && !nat_isdigit(*b))
 			return bias;
 		else if (!nat_isdigit(*a))
 			return -1;
 		else if (!nat_isdigit(*b))
 			return +1;
-		else if (*a < *b) {
+		else if (*a < *b)
+		{
 			if (!bias)
 				bias = -1;
-		} else if (*a > *b) {
+		}
+		else if (*a > *b)
+		{
 			if (!bias)
 				bias = +1;
-		} else if (!*a  &&  !*b)
+		}
+		else if (!*a && !*b)
 			return bias;
 	}
 
 	return 0;
 }
 
-
-static int
-compare_left(nat_char const *a, nat_char const *b)
+static int compare_left(nat_char const *a, nat_char const *b)
 {
 	/* Compare two left-aligned numbers: the first to have a
 	different value wins. */
-	for (;; a++, b++) {
-		if (!nat_isdigit(*a)  &&  !nat_isdigit(*b))
+	for (;; a++, b++)
+	{
+		if (!nat_isdigit(*a) && !nat_isdigit(*b))
 			return 0;
 		else if (!nat_isdigit(*a))
 			return -1;
@@ -112,16 +118,20 @@ compare_left(nat_char const *a, nat_char const *b)
 	return 0;
 }
 
-
-static int strnatcmp0(nat_char const *a, nat_char const *b, int fold_case)
+static int strnatcmp0(nat_char const *a, nat_char const *b, const bool fold_case)
 {
 	int ai, bi;
 	nat_char ca, cb;
-	int fractional, result;
-
+	int result;
+	bool fractional, skip_zeros;
+	int sa, sb;
+	
 	assert(a && b);
 	ai = bi = 0;
-	while (1) {
+	skip_zeros = true;
+
+	while (1)
+	{
 		ca = a[ai]; cb = b[bi];
 
 		/* skip over leading spaces or zeros */
@@ -132,25 +142,45 @@ static int strnatcmp0(nat_char const *a, nat_char const *b, int fold_case)
 			cb = b[++bi];
 
 		/* process run of digits */
-		if (nat_isdigit(ca)  &&  nat_isdigit(cb)) {
-			fractional = (ca == '0' || cb == '0');
+		if (nat_isdigit(ca) && nat_isdigit(cb))
+		{
+			sa = sb = 0;
 
-			if (fractional) {
+			if(skip_zeros)
+			{
+				while (ca == L'0') { ca = a[++ai]; sa++; }
+				while (cb == L'0') { cb = b[++bi]; sb++; }
+			}
+
+			fractional = (ca == L'0' || cb == L'0');
+
+			if (fractional)
+			{
 				if ((result = compare_left(a+ai, b+bi)) != 0)
 					return result;
-			} else {
+			}
+			else
+			{
 				if ((result = compare_right(a+ai, b+bi)) != 0)
 					return result;
 			}
+
+			/* on tie, the string with the longer leading zero's sequence wins */
+			if(sa < sb)
+				return -1;
+			else if(sa > sb)
+				return +1;
 		}
 
-		if (!ca && !cb) {
+		if (!ca && !cb)
+		{
 			/* The strings compare the same.  Perhaps the caller
 			will want to call strcmp to break the tie. */
-			return 0;
+			return (fold_case) ? _wcsicmp(a, b) : wcscmp(a, b);
 		}
 
-		if (fold_case) {
+		if (fold_case)
+		{
 			ca = nat_toupper(ca);
 			cb = nat_toupper(cb);
 		}
@@ -160,18 +190,20 @@ static int strnatcmp0(nat_char const *a, nat_char const *b, int fold_case)
 		else if (ca > cb)
 			return +1;
 
+		/* skipp leading zero's, unless previously seen char was a decimal point */
+		skip_zeros = (!nat_isdecpoint(ca)) || (!nat_isdecpoint(cb));
+
 		++ai; ++bi;
 	}
 }
 
-
-
-int strnatcmp(nat_char const *a, nat_char const *b) {
-	return strnatcmp0(a, b, 0);
+int strnatcmp(nat_char const *a, nat_char const *b)
+{
+	return strnatcmp0(a, b, false);
 }
 
-
 /* Compare, recognizing numeric string and ignoring case. */
-int strnatcasecmp(nat_char const *a, nat_char const *b) {
-	return strnatcmp0(a, b, 1);
+int strnatcasecmp(nat_char const *a, nat_char const *b)
+{
+	return strnatcmp0(a, b, true);
 }
