@@ -2437,11 +2437,19 @@ static bool lamexp_natural_string_sort_helper(const QString &str1, const QString
 }
 
 /*
+ * Natural Order String Comparison - the 'lessThan' helper function *with* case folding
+ */
+static bool lamexp_natural_string_sort_helper_fold_case(const QString &str1, const QString &str2)
+{
+	return (strnatcasecmp(QWCHAR(str1), QWCHAR(str2)) < 0);
+}
+
+/*
  * Natural Order String Comparison - the main sorting function
  */
-void lamexp_natural_string_sort(QStringList &list)
+void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase)
 {
-	qSort(list.begin(), list.end(), lamexp_natural_string_sort_helper);
+	qSort(list.begin(), list.end(), bIgnoreCase ? lamexp_natural_string_sort_helper_fold_case : lamexp_natural_string_sort_helper);
 }
 
 /*

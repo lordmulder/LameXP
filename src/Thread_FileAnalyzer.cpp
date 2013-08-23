@@ -119,7 +119,7 @@ void FileAnalyzer::run()
 	emit progressMaxChanged(nFiles);
 	emit progressValChanged(0);
 
-	lamexp_natural_string_sort(m_inputFiles); //.sort();
+	lamexp_natural_string_sort(m_inputFiles, true); //.sort();
 
 	if(!m_templateFile)
 	{
