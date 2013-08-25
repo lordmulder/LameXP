@@ -59,6 +59,7 @@ static inline nat_char nat_isdecpoint(nat_char a)
 {
 	return (a == L'.') || (a == L',');
 }
+
 static inline nat_char nat_toupper(nat_char a)
 {
 	return towupper(a);
@@ -123,12 +124,12 @@ static int strnatcmp0(nat_char const *a, nat_char const *b, const bool fold_case
 	int ai, bi;
 	nat_char ca, cb;
 	int result;
-	bool fractional, skip_zeros;
+	bool fractional;
 	int sa, sb;
 	
 	assert(a && b);
 	ai = bi = 0;
-	skip_zeros = true;
+	fractional = false;
 
 	while (1)
 	{
@@ -146,13 +147,17 @@ static int strnatcmp0(nat_char const *a, nat_char const *b, const bool fold_case
 		{
 			sa = sb = 0;
 
-			if(skip_zeros)
+			if(!fractional)
 			{
-				while (ca == L'0') { ca = a[++ai]; sa++; }
-				while (cb == L'0') { cb = b[++bi]; sb++; }
+				while (ca == L'0')
+				{
+					ca = a[++ai]; sa++;
+				}
+				while (cb == L'0')
+				{
+					cb = b[++bi]; sb++;
+				}
 			}
-
-			fractional = (ca == L'0' || cb == L'0');
 
 			if (fractional)
 			{
@@ -191,7 +196,7 @@ static int strnatcmp0(nat_char const *a, nat_char const *b, const bool fold_case
 			return +1;
 
 		/* skipp leading zero's, unless previously seen char was a decimal point */
-		skip_zeros = (!nat_isdecpoint(ca)) || (!nat_isdecpoint(cb));
+		fractional = nat_isdecpoint(ca) && nat_isdecpoint(cb);
 
 		++ai; ++bi;
 	}
