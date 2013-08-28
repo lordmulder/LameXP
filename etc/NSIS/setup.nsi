@@ -222,6 +222,7 @@ UninstPage Custom un.LockedListShow
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "Russian"
 !insertmacro MUI_LANGUAGE "Ukrainian"
+!insertmacro MUI_LANGUAGE "Polish"
 
 ; !insertmacro MUI_LANGUAGE "French"
 ; !insertmacro MUI_LANGUAGE "SpanishInternational"
@@ -231,7 +232,6 @@ UninstPage Custom un.LockedListShow
 ; !insertmacro MUI_LANGUAGE "Italian"
 ; !insertmacro MUI_LANGUAGE "Dutch"
 ; !insertmacro MUI_LANGUAGE "Greek"
-; !insertmacro MUI_LANGUAGE "Polish"
 ; !insertmacro MUI_LANGUAGE "Hungarian"
 ; !insertmacro MUI_LANGUAGE "Romanian"
 ; !insertmacro MUI_LANGUAGE "Serbian"
@@ -261,6 +261,9 @@ UninstPage Custom un.LockedListShow
 
 ;Ukrainian
 !include "..\Translation\LameXP_UK.nsh"
+
+;Polish
+!include "..\Translation\LameXP_PL.nsh"
 
 
 ;--------------------------------

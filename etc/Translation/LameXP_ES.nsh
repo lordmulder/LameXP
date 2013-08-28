@@ -1,4 +1,4 @@
-; ///////////////////////////////////////////////////////////////////////////////
+ï»¿; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
 ; // Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
@@ -19,24 +19,24 @@
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
 
-LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_SPANISH} "Cerrando instancias en ejecución, espere por favor..."
+LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_SPANISH} "Cerrando instancias en ejecuciÃ³n, espere por favor..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_SPANISH} "Instalando archivos de programa, espere por favor..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_SPANISH} "Creando desinstalador, espere por favor..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_SPANISH} "Creando accesos directos, espere por favor..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_SPANISH} "Actualizando el registro, espere por favor..."
 LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_SPANISH} "Desinstalando el programa, espere por favor..."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_SPANISH} "Instancias en ejecución"
-LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_SPANISH} "Comprobando instancias de LameXP en ejecución."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_SPANISH} "Por favor, cierre los siguientes programas antes de continuar con la instalación..."
-LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_SPANISH} "No se está ejecutando ningún programa que haya que cerrar."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_SPANISH} "Instancias en ejecuciÃ³n"
+LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_SPANISH} "Comprobando instancias de LameXP en ejecuciÃ³n."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_SPANISH} "Por favor, cierre los siguientes programas antes de continuar con la instalaciÃ³n..."
+LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_SPANISH} "No se estÃ¡ ejecutando ningÃºn programa que haya que cerrar."
 LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_SPANISH} "Buscando, espere por favor..."
-LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_SPANISH} "Aplicación"
+LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_SPANISH} "AplicaciÃ³n"
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_SPANISH} "Proceso"
-LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_SPANISH} "¿Desea que se borren también sus ajustes personales?"
+LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_SPANISH} "Â¿Desea que se borren tambiÃ©n sus ajustes personales?"
 LangString LAMEXP_LANG_LINK_LICENSE        ${LANG_SPANISH} "Licencia"
 LangString LAMEXP_LANG_LINK_CHANGELOG      ${LANG_SPANISH} "Historial de versiones"
-LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_SPANISH} "Guía de traducción"
+LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_SPANISH} "GuÃ­a de traducciÃ³n"
 LangString LAMEXP_LANG_LINK_UNINSTALL      ${LANG_SPANISH} "Desinstalar"
 LangString LAMEXP_LANG_LINK_FAQ            ${LANG_SPANISH} "Preguntas frecuentes"
 LangString LAMEXP_LANG_LINK_MANUAL         ${LANG_SPANISH} "Manual de usuario"
-LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_SPANISH} "¡Está a punto de instalar una versión Demo (preliminar) de LameXP!"
+LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_SPANISH} "Â¡EstÃ¡ a punto de instalar una versiÃ³n Demo (preliminar) de LameXP!"

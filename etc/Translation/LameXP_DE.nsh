@@ -1,4 +1,4 @@
-; ///////////////////////////////////////////////////////////////////////////////
+ï»¿; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
 ; // Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
@@ -19,24 +19,24 @@
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
 
-LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_GERMAN} "Schließe laufende Instanz, bitte warten..."
+LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_GERMAN} "SchlieÃŸe laufende Instanz, bitte warten..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_GERMAN} "Installiere Programm-Dateien, bitte warten..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_GERMAN} "Erzeuge Uninstaller, bitte warten..."
-LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_GERMAN} "Erzeuge Verknüpfungen, bitte warten..."
+LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_GERMAN} "Erzeuge VerknÃ¼pfungen, bitte warten..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_GERMAN} "Registrierung wird aktualisiert, bitte warten..."
 LangString LAMEXP_LANG_STATUS_UNINSTALL    ${LANG_GERMAN} "Programm wird deinstalliert, bitte warten..."
 LangString LAMEXP_LANG_LOCKEDLIST_HEADER   ${LANG_GERMAN} "Laufende Instanzen"
 LangString LAMEXP_LANG_LOCKEDLIST_TEXT     ${LANG_GERMAN} "Suche nach laufenden Instanzen von LameXP."
-LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_GERMAN} "Bitte schließen Sie die folgenden Programme um fortfahren zu können..."
-LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_GERMAN} "Es müssen keine Programme geschlossen werden."
+LangString LAMEXP_LANG_LOCKEDLIST_HEADING  ${LANG_GERMAN} "Bitte schlieÃŸen Sie die folgenden Programme um fortfahren zu kÃ¶nnen..."
+LangString LAMEXP_LANG_LOCKEDLIST_NOPROG   ${LANG_GERMAN} "Es mÃ¼ssen keine Programme geschlossen werden."
 LangString LAMEXP_LANG_LOCKEDLIST_SEARCH   ${LANG_GERMAN} "Suche, bitte warten..."
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR1  ${LANG_GERMAN} "Anwendung"
 LangString LAMEXP_LANG_LOCKEDLIST_COLHDR2  ${LANG_GERMAN} "Prozess"
-LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_GERMAN} "Sollen Ihre persönlichen Einstellungen ebenfalls gelöscht werden?"
+LangString LAMEXP_LANG_UNINST_PERSONAL     ${LANG_GERMAN} "Sollen Ihre persÃ¶nlichen Einstellungen ebenfalls gelÃ¶scht werden?"
 LangString LAMEXP_LANG_LINK_LICENSE        ${LANG_GERMAN} "Lizenz"
 LangString LAMEXP_LANG_LINK_CHANGELOG      ${LANG_GERMAN} "Versionshistorie"
-LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_GERMAN} "Leitfaden für Übersetzer"
+LangString LAMEXP_LANG_LINK_TRANSLATE      ${LANG_GERMAN} "Leitfaden fÃ¼r Ãœbersetzer"
 LangString LAMEXP_LANG_LINK_UNINSTALL      ${LANG_GERMAN} "Deinstallieren"
-LangString LAMEXP_LANG_LINK_FAQ            ${LANG_GERMAN} "Häufig Gestellte Fragen"
+LangString LAMEXP_LANG_LINK_FAQ            ${LANG_GERMAN} "HÃ¤ufig Gestellte Fragen"
 LangString LAMEXP_LANG_LINK_MANUAL         ${LANG_GERMAN} "Benutzerhandbuch"
 LangString LAMEXP_LANG_PRERELEASE_WARNING  ${LANG_GERMAN} "Sie sind dabei eine Demo (Test) Version von LameXP zu installieren!"
