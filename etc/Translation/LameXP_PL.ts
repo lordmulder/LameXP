@@ -142,7 +142,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="597"/>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Codecs.com</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="600"/>
@@ -999,17 +999,17 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1112"/>
         <source> Quality / Bitrate </source>
-        <translation type="unfinished"> Jakość/Bitrate </translation>
+        <translation type="unfinished"> Jakość/Przepływność bitów </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1151"/>
         <source>Minimum</source>
-        <translation type="unfinished">Minimalny</translation>
+        <translation type="unfinished">Minimalna</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1161"/>
         <source>Maximum</source>
-        <translation type="unfinished">Maksymalny</translation>
+        <translation type="unfinished">Maksymalna</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1473"/>
@@ -2521,12 +2521,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3934"/>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Najlepsza jakość (Powoli)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3940"/>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Akceptowalna jakość (Szybko)</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3937"/>
