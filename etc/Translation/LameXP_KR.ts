@@ -290,7 +290,7 @@
     </message>
     <message>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Codecs.com</translation>
     </message>
 </context>
 <context>
@@ -1674,7 +1674,7 @@
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation>매크로 이름 변경</translation>
+        <translation type="unfinished">이름 바꾸기 매크로</translation>
     </message>
     <message>
         <source>You can enter custom parameters here!</source>
