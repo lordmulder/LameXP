@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\strnatcmp\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WIN32_WINNT 0x0500;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_DEBUG"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -132,7 +132,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\strnatcmp\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WIN32_WINNT 0x0500;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -231,7 +231,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\keccak\include&quot;;&quot;$(SolutionDir)\etc\Prerequisites\strnatcmp\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WIN32_WINNT 0x0500;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG;QT_NODLL"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -619,6 +619,14 @@
 				RelativePath=".\src\WinSevenTaskbar.cpp"
 				>
 			</File>
+			<Filter
+				Name="3rd Party"
+				>
+				<File
+					RelativePath=".\etc\Prerequisites\strnatcmp\src\strnatcmp.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

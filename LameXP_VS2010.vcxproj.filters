@@ -376,6 +376,9 @@
     <ClCompile Include="tmp\MOC_CustomEventFilter.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="etc\Prerequisites\strnatcmp\src\strnatcmp.cpp">
+      <Filter>Source Files\Misc\3rd Party</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -766,6 +769,9 @@
     </Filter>
     <Filter Include="Header Files\Misc">
       <UniqueIdentifier>{36024ab5-840b-4c4f-a562-1bd4c15eded9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc\3rd Party">
+      <UniqueIdentifier>{e46f4cc1-5aac-4532-90f4-fc3dfe88350d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
