@@ -21,39 +21,19 @@
 
 #pragma once
 
-#include "Encoder_Abstract.h"
-
 #include <QObject>
 
-class MP3Encoder : public AbstractEncoder
+class AbstractEncoder;
+class AbstractEncoderInfo;
+class SettingsModel;
+
+class EncoderRegistry : public QObject
 {
 	Q_OBJECT
 
 public:
-	MP3Encoder(void);
-	~MP3Encoder(void);
-
-	virtual bool encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag);
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	virtual QString extension(void);
-	virtual const unsigned int *supportedChannelCount(void);
-	
-	//Advanced options
-	virtual void setAlgoQuality(int value);
-	virtual void setBitrateLimits(int minimumBitrate, int maximumBitrate);
-	virtual void setSamplingRate(int value);
-	virtual void setChannelMode(int value);
-
-	//Encoder info
-	static const AbstractEncoderInfo *getEncoderInfo(void);
-
-private:
-	const QString m_binary;
-	int m_algorithmQuality;
-	int m_configBitrateMaximum;
-	int m_configBitrateMinimum;
-	int m_configSamplingRate;
-	int m_configChannelMode;
-
-	int clipBitrate(int bitrate);
+	static AbstractEncoder *createInstance(const int encoderId, const SettingsModel *settings, bool *nativeResampling);
+	static const AbstractEncoderInfo *getEncoderInfo(const int encoderId);
+	static void saveEncoderConfig(SettingsModel *settings, const int encoderId, const int rcMode, const int value);
+	static int loadEncoderConfig(const SettingsModel *settings, const int encoderId, const int rcMode);
 };

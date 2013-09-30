@@ -28,7 +28,81 @@
 #include <QDir>
 #include <limits.h>
 
-static const int g_lameAgorithmQualityLUT[] = {9, 7, 3, 0, INT_MAX};
+static const int g_lameAgorithmQualityLUT[5] = {9, 7, 3, 0, INT_MAX};
+static const int g_mp3BitrateLUT[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
+static const int g_lameVBRQualityLUT[11] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, INT_MAX};
+
+///////////////////////////////////////////////////////////////////////////////
+
+class : public AbstractEncoderInfo
+{
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			 return true;
+			 break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return 10;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return 14;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return g_lameVBRQualityLUT[index];
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return g_mp3BitrateLUT[index];
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return TYPE_QUALITY_LEVEL;
+			break;
+		case SettingsModel::ABRMode:
+			return TYPE_APPROX_BITRATE;
+			break;
+		case SettingsModel::CBRMode:
+			return TYPE_BITRATE;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+}
+g_mp3EncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
 
 MP3Encoder::MP3Encoder(void)
 :
@@ -61,14 +135,14 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-V" << QString::number(9 - qBound(0, m_configBitrate, 9));
+		args << "-V" << QString::number(g_lameVBRQualityLUT[qBound(0, m_configBitrate, 9)]);
 		break;
 	case SettingsModel::ABRMode:
-		args << "--abr" << QString::number(SettingsModel::mp3Bitrates[qBound(0, m_configBitrate, 13)]);
+		args << "--abr" << QString::number(g_mp3BitrateLUT[qBound(0, m_configBitrate, 13)]);
 		break;
 	case SettingsModel::CBRMode:
 		args << "--cbr";
-		args << "-b" << QString::number(SettingsModel::mp3Bitrates[qBound(0, m_configBitrate, 13)]);
+		args << "-b" << QString::number(g_mp3BitrateLUT[qBound(0, m_configBitrate, 13)]);
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -281,4 +355,9 @@ int MP3Encoder::clipBitrate(int bitrate)
 	}
 
 	return targetBitrate;
+}
+
+const AbstractEncoderInfo *MP3Encoder::getEncoderInfo(void)
+{
+	return &g_mp3EncoderInfo;
 }

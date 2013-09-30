@@ -28,6 +28,25 @@ class QProcess;
 class QStringList;
 class QMutex;
 
+class AbstractEncoderInfo
+{
+public:
+	typedef enum
+	{
+		TYPE_BITRATE = 0,
+		TYPE_APPROX_BITRATE = 1,
+		TYPE_QUALITY_LEVEL = 2,
+		TYPE_COMPRESSION_LEVEL = 3,
+		TYPE_UNCOMPRESSED = 4
+	}
+	value_type_t;
+
+	virtual bool isModeSupported(int mode) const = 0;	//Returns whether the encoder does support the current RC mode
+	virtual int valueCount(int mode) const = 0;			//The number of bitrate/quality values for current RC mode
+	virtual int valueAt(int mode, int index) const = 0;	//The bitrate/quality value at 'index' for the current RC mode
+	virtual int valueType(int mode) const = 0;			//The display type of the values for the current RC mode
+};
+
 class AbstractEncoder : public AbstractTool
 {
 	Q_OBJECT
@@ -49,6 +68,13 @@ public:
 	virtual void setBitrate(int bitrate);
 	virtual void setRCMode(int mode);
 	virtual void setCustomParams(const QString &customParams);
+
+	//Encoder info
+	static const AbstractEncoderInfo *getEncoderInfo(void)
+	{
+		throw "This method is supposed to be re-implemented in derived classes!";
+		return NULL;
+	}
 
 protected:
 	int m_configBitrate;			//Bitrate *or* VBR-quality-level
