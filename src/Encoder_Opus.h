@@ -45,6 +45,9 @@ public:
 	virtual void setEncodeComplexity(int complexity);
 	virtual void setFrameSize(int frameSize);
 
+	//Encoder info
+	static const AbstractEncoderInfo *getEncoderInfo(void);
+
 private:
 	const QString m_binary;
 	

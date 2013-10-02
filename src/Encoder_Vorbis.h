@@ -40,6 +40,9 @@ public:
 	virtual void setSamplingRate(int value);
 	virtual void setBitrate(int bitrate);
 
+	//Encoder info
+	static const AbstractEncoderInfo *getEncoderInfo(void);
+
 private:
 	const QString m_binary;
 	int m_configBitrateMaximum;

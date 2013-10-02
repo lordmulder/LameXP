@@ -180,7 +180,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
 	m_fileSystemModel(NULL),
-	m_aacEncoder(SettingsModel::getAacEncoder()),
 	m_accepted(false),
 	m_firstTimeShown(true),
 	m_outputFolderViewCentering(false),
@@ -351,7 +350,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderDCA, SettingsModel::DCAEncoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderPCM, SettingsModel::PCMEncoder);
 
-	ui->radioButtonEncoderAAC->setEnabled(m_aacEncoder > SettingsModel::AAC_ENCODER_NONE);
+	const int aacEncoder = EncoderRegistry::getAacEncoder();
+	ui->radioButtonEncoderAAC->setEnabled(aacEncoder > SettingsModel::AAC_ENCODER_NONE);
 
 	m_modeButtonGroup = new QButtonGroup(this);
 	m_modeButtonGroup->addButton(ui->radioButtonModeQuality, SettingsModel::VBRMode);
@@ -412,7 +412,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResample());
-	ui->checkBoxNeroAAC2PassMode->setEnabled(m_aacEncoder == SettingsModel::AAC_ENCODER_NERO);
+	ui->checkBoxNeroAAC2PassMode->setEnabled(aacEncoder == SettingsModel::AAC_ENCODER_NERO);
 	
 	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
 	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
@@ -955,6 +955,8 @@ void MainWindow::changeEvent(QEvent *e)
 {
 	if(e->type() == QEvent::LanguageChange)
 	{
+		qWarning("\nMainWindow::changeEvent()\n");
+
 		int comboBoxIndex[8];
 		
 		//Backup combobox indices, as retranslateUi() resets
@@ -1357,7 +1359,8 @@ void MainWindow::windowShown(void)
 	}
 
 	//Check for AAC support
-	if(m_aacEncoder == SettingsModel::AAC_ENCODER_NERO)
+	const int aacEncoder = EncoderRegistry::getAacEncoder();
+	if(aacEncoder == SettingsModel::AAC_ENCODER_NERO)
 	{
 		if(m_settings->neroAacNotificationsEnabled())
 		{
@@ -1375,7 +1378,7 @@ void MainWindow::windowShown(void)
 	}
 	else
 	{
-		if(m_settings->neroAacNotificationsEnabled() && (m_aacEncoder <= SettingsModel::AAC_ENCODER_NONE))
+		if(m_settings->neroAacNotificationsEnabled() && (aacEncoder <= SettingsModel::AAC_ENCODER_NONE))
 		{
 			QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 			if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
@@ -3289,8 +3292,14 @@ void MainWindow::playlistEnabledChanged(void)
  */
 void MainWindow::updateEncoder(int id)
 {
+	qWarning("\nupdateEncoder(%d)", id);
+
 	m_settings->compressionEncoder(id);
 	const AbstractEncoderInfo *info = EncoderRegistry::getEncoderInfo(id);
+
+	qWarning("info->isModeSupported(SettingsModel::VBRMode) = %s", info->isModeSupported(SettingsModel::VBRMode) ? "YES" : "NO");
+	qWarning("info->isModeSupported(SettingsModel::ABRMode) = %s", info->isModeSupported(SettingsModel::ABRMode) ? "YES" : "NO");
+	qWarning("info->isModeSupported(SettingsModel::CBRMode) = %s", info->isModeSupported(SettingsModel::CBRMode) ? "YES" : "NO");
 
 	//Update UI controls
 	ui->radioButtonModeQuality->setEnabled(info->isModeSupported(SettingsModel::VBRMode));
@@ -3298,9 +3307,10 @@ void MainWindow::updateEncoder(int id)
 	ui->radioButtonConstBitrate->setEnabled(info->isModeSupported(SettingsModel::CBRMode));
 	
 	//Initialize checkbox state
-	if(ui->radioButtonConstBitrate->isEnabled()) ui->radioButtonConstBitrate->setChecked(true);
-	if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
 	if(ui->radioButtonModeQuality->isEnabled()) ui->radioButtonModeQuality->setChecked(true);
+	else if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
+	else if(ui->radioButtonConstBitrate->isEnabled()) ui->radioButtonConstBitrate->setChecked(true);
+	else throw "It appears that the encoder does not support *any* RC mode!";
 
 	//Apply current RC mode
 	const int currentRCMode = EncoderRegistry::loadEncoderMode(m_settings, id);
@@ -3884,7 +3894,7 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 	else if(obj == ui->helpCustomParamOggEnc)  showCustomParamsHelpScreen("oggenc2.exe", "--help");
 	else if(obj == ui->helpCustomParamNeroAAC)
 	{
-		switch(m_aacEncoder)
+		switch(EncoderRegistry::getAacEncoder())
 		{
 			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac.exe", "--help"); break;
 			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe", ""); break;

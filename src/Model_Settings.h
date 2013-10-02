@@ -180,9 +180,6 @@ public:
 	//Misc
 	void validate(void);
 	void syncNow(void);
-	
-	//Static
-	static int getAacEncoder(void);
 
 private:
 	SettingsCache *m_configCache;

@@ -28,6 +28,83 @@
 #include <QDir>
 #include <QUUid>
 
+///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
+
+class OpusEncoderInfo : public AbstractEncoderInfo
+{
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return true;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return 32;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return qBound(8, (index + 1) * 8, 256);
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+			return TYPE_APPROX_BITRATE;
+			break;
+		case SettingsModel::CBRMode:
+			return TYPE_BITRATE;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "Opus-Tools OpusEnc (libopus)";
+		return s_description;
+	}
+};
+
+static const OpusEncoderInfo g_opusEncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
+///////////////////////////////////////////////////////////////////////////////
+
 OpusEncoder::OpusEncoder(void)
 :
 	m_binary(lamexp_lookup_tool("opusenc.exe"))
@@ -69,16 +146,6 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		break;
 	}
 
-	//switch(m_configOptimizeFor)
-	//{
-	//case 0:
-	//	args << "--music";
-	//	break;
-	//case 1:
-	//	args << "--speech";
-	//	break;
-	//}
-
 	args << "--comp" << QString::number(m_configEncodeComplexity);
 
 	switch(m_configFrameSize)
@@ -103,7 +170,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 		break;
 	}
 
-	args << QString("--bitrate") << QString::number(qMax(0, qMin(500, m_configBitrate * 8)));
+	args << QString("--bitrate") << QString::number(qBound(8, (m_configBitrate + 1) * 8, 256));
 
 	if(!metaInfo.fileName().isEmpty()) args << "--title" << cleanTag(metaInfo.fileName());
 	if(!metaInfo.fileArtist().isEmpty()) args << "--artist" << cleanTag(metaInfo.fileArtist());
@@ -233,4 +300,9 @@ const unsigned int *OpusEncoder::supportedBitdepths(void)
 const bool OpusEncoder::needsTimingInfo(void)
 {
 	return true;
+}
+
+const AbstractEncoderInfo *OpusEncoder::getEncoderInfo(void)
+{
+	return &g_opusEncoderInfo;
 }

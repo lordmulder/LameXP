@@ -40,4 +40,6 @@ public:
 	
 	static void saveEncoderValue(SettingsModel *settings, const int encoderId, const int rcMode, const int value);
 	static int loadEncoderValue(const SettingsModel *settings, const int encoderId, const int rcMode);
+
+	static int getAacEncoder(void);
 };

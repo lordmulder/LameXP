@@ -425,30 +425,6 @@ void SettingsModel::syncNow(void)
 }
 
 ////////////////////////////////////////////////////////////
-// Static Functions
-////////////////////////////////////////////////////////////
-
-int SettingsModel::getAacEncoder(void)
-{
-	if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll"))
-	{
-		return AAC_ENCODER_QAAC;
-	}
-	else if(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll") && lamexp_check_tool("nsutil.dll") && lamexp_check_tool("libmp4v2.dll"))
-	{
-		return AAC_ENCODER_FHG;
-	}
-	else if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
-	{
-		return AAC_ENCODER_NERO;
-	}
-	else
-	{
-		return AAC_ENCODER_NONE;
-	}
-}
-
-////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
 

@@ -33,8 +33,10 @@ static const int g_mp3BitrateLUT[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 16
 static const int g_lameVBRQualityLUT[11] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, INT_MAX};
 
 ///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
 
-class : public AbstractEncoderInfo
+class MP3EncoderInfo : public AbstractEncoderInfo
 {
 	virtual bool isModeSupported(int mode) const
 	{
@@ -43,8 +45,8 @@ class : public AbstractEncoderInfo
 		case SettingsModel::VBRMode:
 		case SettingsModel::ABRMode:
 		case SettingsModel::CBRMode:
-			 return true;
-			 break;
+			return true;
+			break;
 		default:
 			throw "Bad RC mode specified!";
 		}
@@ -71,11 +73,11 @@ class : public AbstractEncoderInfo
 		switch(mode)
 		{
 		case SettingsModel::VBRMode:
-			return g_lameVBRQualityLUT[index];
+			return g_lameVBRQualityLUT[qBound(0, index, 9)];
 			break;
 		case SettingsModel::ABRMode:
 		case SettingsModel::CBRMode:
-			return g_mp3BitrateLUT[index];
+			return g_mp3BitrateLUT[qBound(0, index, 13)];
 			break;
 		default:
 			throw "Bad RC mode specified!";
@@ -105,9 +107,12 @@ class : public AbstractEncoderInfo
 		static const char* s_description = "LAME MP3 Encoder";
 		return s_description;
 	}
-}
-g_mp3EncoderInfo;
+};
 
+static const MP3EncoderInfo g_mp3EncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
 ///////////////////////////////////////////////////////////////////////////////
 
 MP3Encoder::MP3Encoder(void)

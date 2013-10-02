@@ -228,6 +228,4 @@ private:
 	CustomEventFilter *m_evenFilterOutputFolderMouse;
 	CustomEventFilter *m_evenFilterOutputFolderView;
 	CustomEventFilter *m_evenFilterCompressionTab;
-
-	const int m_aacEncoder;
 };

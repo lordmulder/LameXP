@@ -21,6 +21,7 @@
 
 #include "Registry_Encoder.h"
 
+#include "Global.h"
 #include "Model_Settings.h"
 #include "Encoder_AAC.h"
 #include "Encoder_AAC_FHG.h"
@@ -97,7 +98,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	/*-------- AACEncoder /*--------*/
 	case SettingsModel::AACEncoder:
 		{
-			switch(SettingsModel::getAacEncoder())
+			switch(getAacEncoder())
 			{
 			case SettingsModel::AAC_ENCODER_QAAC:
 				{
@@ -215,57 +216,23 @@ const AbstractEncoderInfo *EncoderRegistry::getEncoderInfo(const int encoderId)
 
 	switch(encoderId)
 	{
-	/*-------- MP3Encoder /*--------*/
-	case SettingsModel::MP3Encoder:
-		info = MP3Encoder::getEncoderInfo();
-		break;
-	/*-------- VorbisEncoder /*--------*/
-	case SettingsModel::VorbisEncoder:
-		info = VorbisEncoder::getEncoderInfo();
-		break;
-	/*-------- AACEncoder /*--------*/
-	case SettingsModel::AACEncoder:
-		{
-			switch(SettingsModel::getAacEncoder())
+		case SettingsModel::MP3Encoder:    info = MP3Encoder::getEncoderInfo();    break;
+		case SettingsModel::VorbisEncoder: info = VorbisEncoder::getEncoderInfo(); break;
+		case SettingsModel::AC3Encoder:    info = AC3Encoder::getEncoderInfo();    break;
+		case SettingsModel::FLACEncoder:   info = FLACEncoder::getEncoderInfo();   break;
+		case SettingsModel::OpusEncoder:   info = OpusEncoder::getEncoderInfo();   break;
+		case SettingsModel::DCAEncoder:    info = DCAEncoder::getEncoderInfo();    break;
+		case SettingsModel::PCMEncoder:    info = WaveEncoder::getEncoderInfo();   break;
+		case SettingsModel::AACEncoder:
+			switch(getAacEncoder())
 			{
-			case SettingsModel::AAC_ENCODER_QAAC:
-				info = QAACEncoder::getEncoderInfo();
-				break;
-			case SettingsModel::AAC_ENCODER_FHG:
-				info = FHGAACEncoder::getEncoderInfo();
-				break;
-			case SettingsModel::AAC_ENCODER_NERO:
-				info = AACEncoder::getEncoderInfo();
-				break;
-			default:
-				throw "Unknown AAC encoder specified!";
-				break;
+				case SettingsModel::AAC_ENCODER_QAAC: info = QAACEncoder::getEncoderInfo();   break;
+				case SettingsModel::AAC_ENCODER_FHG:  info = FHGAACEncoder::getEncoderInfo(); break;
+				case SettingsModel::AAC_ENCODER_NERO: info = AACEncoder::getEncoderInfo();    break;
+				default: throw "Unknown AAC encoder specified!";
 			}
-		}
-		break;
-	/*-------- AC3Encoder /*--------*/
-	case SettingsModel::AC3Encoder:
-		info = AC3Encoder::getEncoderInfo();
-		break;
-	/*-------- FLACEncoder /*--------*/
-	case SettingsModel::FLACEncoder:
-		info = FLACEncoder::getEncoderInfo();
-		break;
-	/*-------- OpusEncoder --------*/
-	case SettingsModel::OpusEncoder:
-		info = OpusEncoder::getEncoderInfo();
-		break;
-	/*-------- DCAEncoder --------*/
-	case SettingsModel::DCAEncoder:
-		info = DCAEncoder::getEncoderInfo();
-		break;
-	/*-------- PCMEncoder --------*/
-	case SettingsModel::PCMEncoder:
-		info = WaveEncoder::getEncoderInfo();
-		break;
-	/*-------- default --------*/
-	default:
-		throw "Unsupported encoder!";
+			break;
+		default: throw "Unsupported encoder!";
 	}
 
 	//Sanity checking
@@ -415,4 +382,28 @@ int EncoderRegistry::loadEncoderValue(const SettingsModel *settings, const int e
 	}
 
 	return value;
+}
+
+////////////////////////////////////////////////////////////
+// Static Functions
+////////////////////////////////////////////////////////////
+
+int EncoderRegistry::getAacEncoder(void)
+{
+	if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll"))
+	{
+		return SettingsModel::AAC_ENCODER_QAAC;
+	}
+	else if(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll") && lamexp_check_tool("nsutil.dll") && lamexp_check_tool("libmp4v2.dll"))
+	{
+		return SettingsModel::AAC_ENCODER_FHG;
+	}
+	else if(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe"))
+	{
+		return SettingsModel::AAC_ENCODER_NERO;
+	}
+	else
+	{
+		return SettingsModel::AAC_ENCODER_NONE;
+	}
 }
