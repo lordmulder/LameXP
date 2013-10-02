@@ -95,7 +95,6 @@ private:
 
 	void setCloseButtonEnabled(bool enabled);
 	void startNextJob(void);
-	AbstractEncoder *makeEncoder(bool *nativeResampling);
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);
@@ -129,5 +128,6 @@ private:
 	qint64 m_timerStart;
 	int m_progressViewFilter;
 
-	const int m_aacEncoder;
+	//const int m_aacEncoder;
+	//AbstractEncoder *makeEncoder(bool *nativeResampling);
 };

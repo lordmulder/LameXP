@@ -35,12 +35,23 @@
 
 #define IS_VBR(RC_MODE) ((RC_MODE) == SettingsModel::VBRMode)
 
+////////////////////////////////////////////////////////////
+// Create encoder instance
+////////////////////////////////////////////////////////////
+
 AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const SettingsModel *settings, bool *nativeResampling)
 {
 	int rcMode = -1;
 	AbstractEncoder *encoder =  NULL;
 	*nativeResampling = false;
 
+	//Sanity checking
+	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
+	{
+		throw "Unknown rate-control mode!";
+	}
+
+	//Create new encoder instance
 	switch(encoderId)
 	{
 	/*-------- MP3Encoder /*--------*/
@@ -194,6 +205,10 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	return encoder;
 }
 
+////////////////////////////////////////////////////////////
+// Get encoder info
+////////////////////////////////////////////////////////////
+
 const AbstractEncoderInfo *EncoderRegistry::getEncoderInfo(const int encoderId)
 {
 	const AbstractEncoderInfo *info = NULL;
@@ -260,4 +275,144 @@ const AbstractEncoderInfo *EncoderRegistry::getEncoderInfo(const int encoderId)
 	}
 
 	return info;
+}
+
+////////////////////////////////////////////////////////////
+// Load/store encoder RC mode
+////////////////////////////////////////////////////////////
+
+#define STORE_MODE(ENCODER_ID, RC_MODE) do \
+{ \
+	settings->compressionRCMode##ENCODER_ID(RC_MODE); \
+} \
+while(0)
+
+#define LOAD_MODE(RC_MODE, ENCODER_ID) do \
+{ \
+	(RC_MODE) = settings->compressionRCMode##ENCODER_ID(); \
+} \
+while(0)
+
+void EncoderRegistry::saveEncoderMode(SettingsModel *settings, const int encoderId, const int rcMode)
+{
+	//Sanity checking
+	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
+	{
+		throw "Unknown rate-control mode!";
+	}
+
+	//Store the encoder bitrate/quality value
+	switch(encoderId)
+	{
+		case SettingsModel::MP3Encoder:    STORE_MODE(LAME,    rcMode); break;
+		case SettingsModel::VorbisEncoder: STORE_MODE(OggEnc,  rcMode); break;
+		case SettingsModel::AACEncoder:    STORE_MODE(AacEnc,  rcMode); break;
+		case SettingsModel::AC3Encoder:    STORE_MODE(Aften,   rcMode); break;
+		case SettingsModel::FLACEncoder:   STORE_MODE(FLAC,    rcMode); break;
+		case SettingsModel::OpusEncoder:   STORE_MODE(OpusEnc, rcMode); break;
+		case SettingsModel::DCAEncoder:    STORE_MODE(DcaEnc,  rcMode); break;
+		case SettingsModel::PCMEncoder:    STORE_MODE(Wave,    rcMode); break;
+		default: throw "Unsupported encoder!";
+	}
+}
+
+int EncoderRegistry::loadEncoderMode(SettingsModel *settings, const int encoderId)
+{
+	int rcMode = -1;
+	
+	//Store the encoder bitrate/quality value
+	switch(encoderId)
+	{
+		case SettingsModel::MP3Encoder:    LOAD_MODE(rcMode, LAME);    break;
+		case SettingsModel::VorbisEncoder: LOAD_MODE(rcMode, OggEnc);  break;
+		case SettingsModel::AACEncoder:    LOAD_MODE(rcMode, AacEnc);  break;
+		case SettingsModel::AC3Encoder:    LOAD_MODE(rcMode, Aften);   break;
+		case SettingsModel::FLACEncoder:   LOAD_MODE(rcMode, FLAC);    break;
+		case SettingsModel::OpusEncoder:   LOAD_MODE(rcMode, OpusEnc); break;
+		case SettingsModel::DCAEncoder:    LOAD_MODE(rcMode, DcaEnc);  break;
+		case SettingsModel::PCMEncoder:    LOAD_MODE(rcMode, Wave);    break;
+		default: throw "Unsupported encoder!";
+	}
+
+	return rcMode;
+}
+
+////////////////////////////////////////////////////////////
+// Load/store encoder bitrate/quality value
+////////////////////////////////////////////////////////////
+
+#define STORE_VALUE(ENCODER_ID, RC_MODE, VALUE) do \
+{ \
+	if(IS_VBR(RC_MODE)) \
+	{ \
+		settings->compressionVbrLevel##ENCODER_ID(VALUE); \
+	} \
+	else \
+	{ \
+		settings->compressionBitrate##ENCODER_ID(VALUE); \
+	} \
+} \
+while(0)
+
+#define LOAD_VALUE(VALUE, ENCODER_ID, RC_MODE) do \
+{ \
+	if(IS_VBR(RC_MODE)) \
+	{ \
+		(VALUE) = settings->compressionVbrLevel##ENCODER_ID(); \
+	} \
+	else \
+	{ \
+		(VALUE) = settings->compressionBitrate##ENCODER_ID(); \
+	} \
+} \
+while(0)
+
+void EncoderRegistry::saveEncoderValue(SettingsModel *settings, const int encoderId, const int rcMode, const int value)
+{
+	//Sanity checking
+	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
+	{
+		throw "Unknown rate-control mode!";
+	}
+
+	//Store the encoder bitrate/quality value
+	switch(encoderId)
+	{
+		case SettingsModel::MP3Encoder:    STORE_VALUE(LAME,    rcMode, value); break;
+		case SettingsModel::VorbisEncoder: STORE_VALUE(OggEnc,  rcMode, value); break;
+		case SettingsModel::AACEncoder:    STORE_VALUE(AacEnc,  rcMode, value); break;
+		case SettingsModel::AC3Encoder:    STORE_VALUE(Aften,   rcMode, value); break;
+		case SettingsModel::FLACEncoder:   STORE_VALUE(FLAC,    rcMode, value); break;
+		case SettingsModel::OpusEncoder:   STORE_VALUE(OpusEnc, rcMode, value); break;
+		case SettingsModel::DCAEncoder:    STORE_VALUE(DcaEnc,  rcMode, value); break;
+		case SettingsModel::PCMEncoder:    STORE_VALUE(Wave,    rcMode, value); break;
+		default: throw "Unsupported encoder!";
+	}
+}
+
+int EncoderRegistry::loadEncoderValue(const SettingsModel *settings, const int encoderId, const int rcMode)
+{
+	int value = INT_MAX;
+	
+	//Sanity checking
+	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
+	{
+		throw "Unknown rate-control mode!";
+	}
+
+	//Load the encoder bitrate/quality value
+	switch(encoderId)
+	{
+		case SettingsModel::MP3Encoder:    LOAD_VALUE(value, LAME,    rcMode); break;
+		case SettingsModel::VorbisEncoder: LOAD_VALUE(value, OggEnc,  rcMode); break;
+		case SettingsModel::AACEncoder:    LOAD_VALUE(value, AacEnc,  rcMode); break;
+		case SettingsModel::AC3Encoder:    LOAD_VALUE(value, Aften,   rcMode); break;
+		case SettingsModel::FLACEncoder:   LOAD_VALUE(value, FLAC,    rcMode); break;
+		case SettingsModel::OpusEncoder:   LOAD_VALUE(value, OpusEnc, rcMode); break;
+		case SettingsModel::DCAEncoder:    LOAD_VALUE(value, DcaEnc,  rcMode); break;
+		case SettingsModel::PCMEncoder:    LOAD_VALUE(value, Wave,    rcMode); break;
+		default: throw "Unsupported encoder!";
+	}
+
+	return value;
 }

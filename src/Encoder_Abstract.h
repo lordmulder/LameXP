@@ -45,6 +45,7 @@ public:
 	virtual int valueCount(int mode) const = 0;			//The number of bitrate/quality values for current RC mode
 	virtual int valueAt(int mode, int index) const = 0;	//The bitrate/quality value at 'index' for the current RC mode
 	virtual int valueType(int mode) const = 0;			//The display type of the values for the current RC mode
+	virtual const char* description(void) const = 0;	//Description of the encoder that can be displayed to the user
 };
 
 class AbstractEncoder : public AbstractTool
@@ -72,7 +73,7 @@ public:
 	//Encoder info
 	static const AbstractEncoderInfo *getEncoderInfo(void)
 	{
-		throw "This method is supposed to be re-implemented in derived classes!";
+		throw "This method shall be re-implemented in derived classes!";
 		return NULL;
 	}
 

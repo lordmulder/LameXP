@@ -27,6 +27,8 @@
 #include <QProcess>
 #include <QDir>
 
+static const int g_ac3BitratesLUT[20] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 448, 512, 576, 640, -1};
+
 AC3Encoder::AC3Encoder(void)
 :
 	m_binary(lamexp_lookup_tool("aften.exe"))
@@ -57,7 +59,7 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 		args << "-q" << QString::number(qMax(0, qMin(1023, m_configBitrate * 64)));
 		break;
 	case SettingsModel::CBRMode:
-		args << "-b" << QString::number(SettingsModel::ac3Bitrates[qMax(0, qMin(18, m_configBitrate))]);
+		args << "-b" << QString::number(g_ac3BitratesLUT[qMax(0, qMin(18, m_configBitrate))]);
 		break;
 	default:
 		throw "Bad rate-control mode!";

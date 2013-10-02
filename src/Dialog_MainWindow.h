@@ -186,9 +186,6 @@ private:
 	bool checkForUpdates(void);
 	void initializeTranslation(void);
 	void refreshFavorites(void);
-	int getCurrentRCMode(int encoder);
-	int getCurrentQuality(int encoder);
-	int getCurrentBitrate(int encoder);
 	
 	bool m_accepted;
 	bool m_firstTimeShown;

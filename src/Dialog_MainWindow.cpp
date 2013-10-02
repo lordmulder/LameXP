@@ -42,7 +42,9 @@
 #include "Model_FileList.h"
 #include "Model_FileSystem.h"
 #include "WinSevenTaskbar.h"
+#include "Registry_Encoder.h"
 #include "Registry_Decoder.h"
+#include "Encoder_Abstract.h"
 #include "ShellIntegration.h"
 #include "CustomEventFilter.h"
 
@@ -349,21 +351,23 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderDCA, SettingsModel::DCAEncoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderPCM, SettingsModel::PCMEncoder);
 
+	ui->radioButtonEncoderAAC->setEnabled(m_aacEncoder > SettingsModel::AAC_ENCODER_NONE);
+
 	m_modeButtonGroup = new QButtonGroup(this);
 	m_modeButtonGroup->addButton(ui->radioButtonModeQuality, SettingsModel::VBRMode);
 	m_modeButtonGroup->addButton(ui->radioButtonModeAverageBitrate, SettingsModel::ABRMode);
 	m_modeButtonGroup->addButton(ui->radioButtonConstBitrate, SettingsModel::CBRMode);
 
-	ui->radioButtonEncoderAAC->setEnabled(m_aacEncoder > SettingsModel::AAC_ENCODER_NONE);
-	ui->radioButtonEncoderMP3->setChecked(m_settings->compressionEncoder() == SettingsModel::MP3Encoder);
-	ui->radioButtonEncoderVorbis->setChecked(m_settings->compressionEncoder() == SettingsModel::VorbisEncoder);
-	ui->radioButtonEncoderAAC->setChecked((m_settings->compressionEncoder() == SettingsModel::AACEncoder) && (m_aacEncoder > SettingsModel::AAC_ENCODER_NONE));
-	ui->radioButtonEncoderAC3->setChecked(m_settings->compressionEncoder() == SettingsModel::AC3Encoder);
-	ui->radioButtonEncoderFLAC->setChecked(m_settings->compressionEncoder() == SettingsModel::FLACEncoder);
-	ui->radioButtonEncoderOpus->setChecked(m_settings->compressionEncoder() == SettingsModel::OpusEncoder);
-	ui->radioButtonEncoderDCA->setChecked(m_settings->compressionEncoder() == SettingsModel::DCAEncoder);
-	ui->radioButtonEncoderPCM->setChecked(m_settings->compressionEncoder() == SettingsModel::PCMEncoder);
-	
+	ui->radioButtonEncoderMP3->setChecked(true);
+	foreach(QAbstractButton *currentButton, m_encoderButtonGroup->buttons())
+	{
+		if(currentButton->isEnabled() && (m_encoderButtonGroup->id(currentButton) == m_settings->compressionEncoder()))
+		{
+			currentButton->setChecked(true);
+			break;
+		}
+	}
+
 	m_evenFilterCompressionTab = new CustomEventFilter();
 	ui->labelCompressionHelp->installEventFilter(m_evenFilterCompressionTab);
 	ui->labelResetEncoders ->installEventFilter(m_evenFilterCompressionTab);
@@ -395,7 +399,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	ui->comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfile());
 	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
 	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
-	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationMode());
+	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEQMode());
 	//comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeFor());
 	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesize());
 	
@@ -910,129 +914,6 @@ void MainWindow::initializeTranslation(void)
 	{
 		qFatal("Failed to load any translation, this is NOT supposed to happen!");
 	}
-}
-
-/*
- * Get the current RC-Mode (for selected encoder)
- */
-int MainWindow::getCurrentRCMode(int encoder)
-{
-	int mode = -1;
-	
-	switch(encoder)
-	{
-	case SettingsModel::MP3Encoder:
-		mode = m_settings->compressionRCModeLAME();
-		break;
-	case SettingsModel::VorbisEncoder:
-		mode = m_settings->compressionRCModeOggEnc();
-		break;
-	case SettingsModel::AACEncoder:
-		mode = m_settings->compressionRCModeAacEnc();
-		break;
-	case SettingsModel::AC3Encoder:
-		mode = m_settings->compressionRCModeAften();
-		break;
-	case SettingsModel::FLACEncoder:
-		mode = SettingsModel::VBRMode; /*FLAC has no RC modes*/
-		break;
-	case SettingsModel::OpusEncoder:
-		mode = m_settings->compressionRCModeOpusEnc();
-		break;
-	case SettingsModel::DCAEncoder:
-		mode = SettingsModel::CBRMode; /*DcaEnc has no RC modes*/
-		break;
-	case SettingsModel::PCMEncoder:
-		mode = SettingsModel::CBRMode; /*PCM has no RC modes*/
-		break;
-	default:
-		throw "getCurrentRCMode(): Unknown encoder specified!";
-		break;
-	}
-
-	return mode;
-}
-
-/*
- * Get the current VBR-Level (for selected encoder)
- */
-int MainWindow::getCurrentQuality(int encoder)
-{
-	int quality = -1;
-	
-	switch(encoder)
-	{
-	case SettingsModel::MP3Encoder:
-		quality = m_settings->compressionVbrLevelLAME();
-		break;
-	case SettingsModel::VorbisEncoder:
-		quality = m_settings->compressionVbrLevelOggEnc();
-		break;
-	case SettingsModel::AACEncoder:
-		quality = m_settings->compressionVbrLevelAacEnc();
-		break;
-	case SettingsModel::AC3Encoder:
-		quality = m_settings->compressionVbrLevelAften();
-		break;
-	case SettingsModel::FLACEncoder:
-		quality = m_settings->compressionVbrLevelFLAC();
-		break;
-	case SettingsModel::OpusEncoder:
-		quality = m_settings->compressionBitrateOpusEnc();
-		break;
-	case SettingsModel::DCAEncoder:
-		quality = 0; /*DcaEnc has no quality level*/
-		break;
-	case SettingsModel::PCMEncoder:
-		quality = 1; /*PCM has no quality level*/
-		break;
-	default:
-		throw "getCurrentVbrLevel(): Unknown encoder specified!";
-		break;
-	}
-
-	return quality;
-}
-
-/*
- * Get the current Bitrate (for selected encoder)
- */
-int MainWindow::getCurrentBitrate(int encoder)
-{
-	int bitrate = -1;
-	
-	switch(encoder)
-	{
-	case SettingsModel::MP3Encoder:
-		bitrate = m_settings->compressionBitrateLAME();
-		break;
-	case SettingsModel::VorbisEncoder:
-		bitrate = m_settings->compressionBitrateOggEnc();
-		break;
-	case SettingsModel::AACEncoder:
-		bitrate = m_settings->compressionBitrateAacEnc();
-		break;
-	case SettingsModel::AC3Encoder:
-		bitrate = m_settings->compressionBitrateAften();
-		break;
-	case SettingsModel::FLACEncoder:
-		bitrate = 0; /*FLAC has no bitrate*/
-		break;
-	case SettingsModel::OpusEncoder:
-		bitrate = m_settings->compressionBitrateOpusEnc();
-		break;
-	case SettingsModel::DCAEncoder:
-		bitrate = m_settings->compressionBitrateDcaEnc();
-		break;
-	case SettingsModel::PCMEncoder:
-		bitrate = 1; /*PCM has no bitrate*/
-		break;
-	default:
-		throw "getCurrentBitrate(): Unknown encoder specified!";
-		break;
-	}
-
-	return bitrate;
 }
 
 ////////////////////////////////////////////////////////////
@@ -3409,79 +3290,44 @@ void MainWindow::playlistEnabledChanged(void)
 void MainWindow::updateEncoder(int id)
 {
 	m_settings->compressionEncoder(id);
-
-	bool bSupportsVBR = false;
-	bool bSupportsABR = false;;
-	bool bSupportsCBR = false;
-	bool bSliderEnabled = false;
-
-	//Set encoder-specific features
-	switch(m_settings->compressionEncoder())
-	{
-	case SettingsModel::MP3Encoder:
-	case SettingsModel::AACEncoder:
-	case SettingsModel::OpusEncoder:
-		bSupportsVBR = bSupportsABR = bSupportsCBR = bSliderEnabled = true;
-		break;
-	case SettingsModel::VorbisEncoder:
-		bSupportsVBR = bSupportsABR = bSliderEnabled = true;
-		break;
-	case SettingsModel::AC3Encoder:
-		bSupportsVBR = bSupportsCBR = bSliderEnabled = true;
-		break;
-	case SettingsModel::FLACEncoder:
-		bSupportsVBR = bSliderEnabled = true;
-		break;
-	case SettingsModel::DCAEncoder:
-		bSupportsCBR = bSliderEnabled = true;
-		break;
-	case SettingsModel::PCMEncoder:
-		bSupportsCBR = true;
-		break;
-	default:
-		throw "updateEncoder(): Unknown encoder encountered!";
-		break;
-	}
+	const AbstractEncoderInfo *info = EncoderRegistry::getEncoderInfo(id);
 
 	//Update UI controls
-	ui->radioButtonModeQuality->setEnabled(bSupportsVBR);
-	ui->radioButtonModeAverageBitrate->setEnabled(bSupportsABR);
-	ui->radioButtonConstBitrate->setEnabled(bSupportsCBR);
-	ui->sliderBitrate->setEnabled(bSliderEnabled);
+	ui->radioButtonModeQuality->setEnabled(info->isModeSupported(SettingsModel::VBRMode));
+	ui->radioButtonModeAverageBitrate->setEnabled(info->isModeSupported(SettingsModel::ABRMode));
+	ui->radioButtonConstBitrate->setEnabled(info->isModeSupported(SettingsModel::CBRMode));
+	
+	//Initialize checkbox state
+	if(ui->radioButtonConstBitrate->isEnabled()) ui->radioButtonConstBitrate->setChecked(true);
+	if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
+	if(ui->radioButtonModeQuality->isEnabled()) ui->radioButtonModeQuality->setChecked(true);
 
-	//Add AAC info
-	if(m_settings->compressionEncoder() == SettingsModel::AACEncoder)
+	//Apply current RC mode
+	const int currentRCMode = EncoderRegistry::loadEncoderMode(m_settings, id);
+	switch(currentRCMode)
 	{
-		QString encoderName = tr("Not available!");
-		switch(m_aacEncoder)
-		{
-			case SettingsModel::AAC_ENCODER_NERO: encoderName = tr("Nero AAC"); break;
-			case SettingsModel::AAC_ENCODER_FHG : encoderName = tr("FHG AAC (Winamp)"); break;
-			case SettingsModel::AAC_ENCODER_QAAC: encoderName = tr("QAAC (Apple)"); break;
-		}
+	case SettingsModel::VBRMode:
+		if(ui->radioButtonModeQuality->isEnabled()) ui->radioButtonModeQuality->setChecked(true);
+		break;
+	case SettingsModel::ABRMode:
+		if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
+		break;
+	case SettingsModel::CBRMode:
+		if(ui->radioButtonConstBitrate->isEnabled()) ui->radioButtonConstBitrate->setChecked(true);
+		break;
+	default:
+		throw "updateEncoder(): Unknown rc-mode encountered!";
+	}
+
+	//Display encoder description
+	if(const char* description = info->description())
+	{
 		ui->labelEncoderInfo->setVisible(true);
-		ui->labelEncoderInfo->setText(tr("Current AAC Encoder: %1").arg(encoderName));
+		ui->labelEncoderInfo->setText(tr("Current Encoder: %1").arg(QString::fromUtf8(description)));
 	}
 	else
 	{
 		ui->labelEncoderInfo->setVisible(false);
-	}
-
-	//Set current RC mode
-	const int currentRCMode = getCurrentRCMode(id);
-	switch(currentRCMode)
-	{
-	case SettingsModel::VBRMode:
-		ui->radioButtonModeQuality->setChecked(true);
-		break;
-	case SettingsModel::ABRMode:
-		ui->radioButtonModeAverageBitrate->setChecked(true);
-		break;
-	case SettingsModel::CBRMode:
-		ui->radioButtonConstBitrate->setChecked(true);
-		break;
-	default:
-		throw "updateEncoder(): Unknown rc-mode encountered!";
 	}
 
 	//Update RC mode!
@@ -3493,195 +3339,40 @@ void MainWindow::updateEncoder(int id)
  */
 void MainWindow::updateRCMode(int id)
 {
-	int sliderMin = INT_MIN;
-	int sliderMax = INT_MAX;
+	//Store new RC mode
+	const int currentEncoder = m_encoderButtonGroup->checkedId();
+	EncoderRegistry::saveEncoderMode(m_settings, currentEncoder, id);
 
-	//Update encoder-specific settings
-	const int currentEncoder = m_settings->compressionEncoder();
-	switch(currentEncoder)
-	{
-	/* -------- MP3Encoder -------- */
-	case SettingsModel::MP3Encoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-			sliderMin = 0;
-			sliderMax = 9;
-			break;
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 0;
-			sliderMax = 13;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		m_settings->compressionRCModeLAME(id);
-		break;
-	/* -------- VorbisEncoder -------- */
-	case SettingsModel::VorbisEncoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-			sliderMin = -2;
-			sliderMax = 10;
-			break;
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 4;
-			sliderMax = 63;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		m_settings->compressionRCModeOggEnc(id);
-		break;
-	/* -------- AACEncoder -------- */
-	case SettingsModel::AACEncoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-			switch(m_aacEncoder)
-			{
-			case SettingsModel::AAC_ENCODER_QAAC:
-				sliderMin = 0;
-				sliderMax = 32;
-				break;
-			case SettingsModel::AAC_ENCODER_FHG:
-				sliderMin = 1;
-				sliderMax = 6;
-				break;
-			case SettingsModel::AAC_ENCODER_NERO:
-				sliderMin = 0;
-				sliderMax = 20;
-				break;
-			default:
-				throw "updateRCMode(): Unknown AAC encoder specified!";
-				break;
-			}
-			break;
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 4;
-			sliderMax = 63;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		m_settings->compressionRCModeAacEnc(id);
-		break;
-	/* -------- AC3Encoder -------- */
-	case SettingsModel::AC3Encoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-			sliderMin = 0;
-			sliderMax = 16;
-			break;
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 0;
-			sliderMax = 18;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		m_settings->compressionRCModeAften(id);
-		break;
-	/* -------- FLACEncoder -------- */
-	case SettingsModel::FLACEncoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 0;
-			sliderMax = 8;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- OpusEncoder -------- */
-	case SettingsModel::OpusEncoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 1;
-			sliderMax = 32;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		m_settings->compressionRCModeOpusEnc(id);
-		break;
-	/* -------- DCAEncoder -------- */
-	case SettingsModel::DCAEncoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 1;
-			sliderMax = 128;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- PCMEncoder -------- */
-	case SettingsModel::PCMEncoder:
-		switch(id)
-		{
-		case SettingsModel::VBRMode:
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderMin = 0;
-			sliderMax = 2;
-			break;
-		default:
-			throw "updateRCMode(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- default -------- */
-	default:
-		throw "updateRCMode(): Unknown encoder specified!";
-		break;
-	}
+	//Fetch encoder info
+	const AbstractEncoderInfo *info = EncoderRegistry::getEncoderInfo(currentEncoder);
+	const int valueCount = info->valueCount(id);
 
 	//Update slider min/max values
-	WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMinimum, sliderMin);
-	WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMaximum, sliderMax);
-	
-	//Update slider position
-	int currentPosition = INT_MAX;
-	switch(id)
+	if(valueCount > 0)
 	{
-	case SettingsModel::VBRMode:
-		currentPosition = getCurrentQuality(currentEncoder);
-		break;
-	case SettingsModel::ABRMode:
-	case SettingsModel::CBRMode:
-		currentPosition = getCurrentBitrate(currentEncoder);
-		break;
-	default:
-		throw "updateRCMode(): Unknown rc-mode specified!";
-		break;
+		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setEnabled, true);
+		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMinimum, 0);
+		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMaximum, valueCount-1);
 	}
-	
-	//Update bitrate/quality value!
-	ui->sliderBitrate->setValue(currentPosition);
-	updateBitrate(currentPosition);
+	else
+	{
+		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setEnabled, false);
+		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMinimum, 0);
+		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMaximum, 2);
+	}
+
+	//Now update bitrate/quality value!
+	if(valueCount > 0)
+	{
+		const int currentValue = qBound(0, EncoderRegistry::loadEncoderValue(m_settings, currentEncoder, id), valueCount-1);
+		ui->sliderBitrate->setValue(currentValue);
+		updateBitrate(currentValue);
+	}
+	else
+	{
+		ui->sliderBitrate->setValue(1);
+		updateBitrate(0);
+	}
 }
 
 /*
@@ -3689,189 +3380,43 @@ void MainWindow::updateRCMode(int id)
  */
 void MainWindow::updateBitrate(int value)
 {
-	//Update encoder-specific settings
-	const int currentEncoder = m_settings->compressionEncoder();
-	const int currentRCMode = getCurrentRCMode(currentEncoder);
+	//Load current encoder and RC mode
+	const int currentEncoder = m_encoderButtonGroup->checkedId();
+	const int currentRCMode = EncoderRegistry::loadEncoderMode(m_settings, currentEncoder);
 
-	QString sliderText;
+	//Fetch encoder info
+	const AbstractEncoderInfo *info = EncoderRegistry::getEncoderInfo(currentEncoder);
+	const int valueCount = info->valueCount(currentRCMode);
 
-	switch(currentEncoder)
+	//Store new bitrate valie
+	if(valueCount > 0)
 	{
-	/* -------- MP3Encoder -------- */
-	case SettingsModel::MP3Encoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-			sliderText = tr("Quality Level %1").arg(9 - value);
-			m_settings->compressionVbrLevelLAME(value);
-			break;
-		case SettingsModel::ABRMode:
-			sliderText = QString("&asymp; %1 kbps").arg(SettingsModel::mp3Bitrates[value]);
-			m_settings->compressionBitrateLAME(value);
-			break;
-		case SettingsModel::CBRMode:
-			sliderText = QString("%1 kbps").arg(SettingsModel::mp3Bitrates[value]);
-			m_settings->compressionBitrateLAME(value);
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- VorbisEncoder -------- */
-	case SettingsModel::VorbisEncoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-			sliderText = tr("Quality Level %1").arg(value);
-			m_settings->compressionVbrLevelOggEnc(value);
-			break;
-		case SettingsModel::ABRMode:
-			sliderText = QString("&asymp; %1 kbps").arg(qMin(500, value * 8));
-			m_settings->compressionBitrateOggEnc(value);
-			break;
-		case SettingsModel::CBRMode:
-			sliderText = QString("%1 kbps").arg(qMin(500, value * 8));
-			m_settings->compressionBitrateOggEnc(value);
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- AACEncoder -------- */
-	case SettingsModel::AACEncoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-			switch(m_aacEncoder)
-			{
-			case SettingsModel::AAC_ENCODER_QAAC:
-				sliderText = tr("Quality Level %1").arg(QString::number(qBound(0, value * 4 , 127)));
-				break;
-			case SettingsModel::AAC_ENCODER_FHG:
-				sliderText = tr("Quality Level %1").arg(QString::number(value));
-				break;
-			case SettingsModel::AAC_ENCODER_NERO:
-				sliderText = tr("Quality Level %1").arg(QString().sprintf("%.2f", static_cast<double>(value) / 20.0));
-				break;
-			default:
-				throw "updateBitrate(): Unknown AAC encoder specified!";
-				break;
-			}
-			m_settings->compressionVbrLevelAacEnc(value);
-			break;
-		case SettingsModel::ABRMode:
-			sliderText = QString("&asymp; %1 kbps").arg(qMin(500, value * 8));
-			m_settings->compressionBitrateAacEnc(value);
-			break;
-		case SettingsModel::CBRMode:
-			sliderText = QString("%1 kbps").arg(qMin(500, value * 8));
-			m_settings->compressionBitrateAacEnc(value);
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- AC3Encoder -------- */
-	case SettingsModel::AC3Encoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-			sliderText = tr("Quality Level %1").arg(qMin(1024, qMax(0, value * 64)));
-			m_settings->compressionVbrLevelAften(value);
-			break;
-		case SettingsModel::ABRMode:
-			sliderText = QString("&asymp; %1 kbps").arg(SettingsModel::ac3Bitrates[value]);
-			m_settings->compressionBitrateAften(value);
-			break;
-		case SettingsModel::CBRMode:
-			sliderText = QString("%1 kbps").arg(SettingsModel::ac3Bitrates[value]);
-			m_settings->compressionBitrateAften(value);
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- FLACEncoder -------- */
-	case SettingsModel::FLACEncoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-			sliderText = tr("Compression %1").arg(value);
-			m_settings->compressionVbrLevelFLAC(value);
-			break;
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			qWarning("FLAC does *not* support ABR or CBR mode!");
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- OpusEncoder -------- */
-	case SettingsModel::OpusEncoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-			sliderText = QString("&asymp; %1 kbps").arg(qMin(500, value * 8));
-			m_settings->compressionBitrateOpusEnc(value);
-			break;
-		case SettingsModel::ABRMode:
-			sliderText = QString("&asymp; %1 kbps").arg(qMin(500, value * 8));
-			m_settings->compressionBitrateOpusEnc(value);
-			break;
-		case SettingsModel::CBRMode:
-			sliderText = QString("%1 kbps").arg(qMin(500, value * 8));
-			m_settings->compressionBitrateOpusEnc(value);
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- DCAEncoder -------- */
-	case SettingsModel::DCAEncoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-		case SettingsModel::ABRMode:
-			qWarning("DcaEnc does *not* support VBR or ABR mode!");
-			break;
-		case SettingsModel::CBRMode:
-			sliderText = QString("%1 kbps").arg(value * 32);
-			m_settings->compressionBitrateDcaEnc(value);
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- PCMEncoder -------- */
-	case SettingsModel::PCMEncoder:
-		switch(currentRCMode)
-		{
-		case SettingsModel::VBRMode:
-		case SettingsModel::ABRMode:
-		case SettingsModel::CBRMode:
-			sliderText = tr("Uncompressed");
-			break;
-		default:
-			throw "updateBitrate(): Unknown rc-mode specified!";
-			break;
-		}
-		break;
-	/* -------- default -------- */
-	default:
-		throw "updateBitrate(): Unknown encoder specified!";
-		break;
+		EncoderRegistry::saveEncoderValue(m_settings, currentEncoder, currentRCMode, qBound(0, value, valueCount-1));
 	}
 
-	//Update slider text
-	ui->labelBitrate->setText(sliderText);
+	//Update bitrate value
+	const int displayValue = (valueCount > 0) ? info->valueAt(currentRCMode, qBound(0, value, valueCount-1)) : INT_MAX;
+	switch(info->valueType(currentRCMode))
+	{
+	case AbstractEncoderInfo::TYPE_BITRATE:
+		ui->labelBitrate->setText(QString("%1 kbps").arg(QString::number(displayValue)));
+		break;
+	case AbstractEncoderInfo::TYPE_APPROX_BITRATE:
+		ui->labelBitrate->setText(QString("&asymp; %1 kbps").arg(QString::number(displayValue)));
+		break;
+	case AbstractEncoderInfo::TYPE_QUALITY_LEVEL:
+		ui->labelBitrate->setText(tr("Quality Level %1").arg(QString::number(displayValue)));
+		break;
+	case AbstractEncoderInfo::TYPE_COMPRESSION_LEVEL:
+		ui->labelBitrate->setText(tr("Compression %1").arg(QString::number(displayValue)));
+		break;
+	case AbstractEncoderInfo::TYPE_UNCOMPRESSED:
+		ui->labelBitrate->setText(tr("Uncompressed"));
+		break;
+	default:
+		throw "Unknown display value type encountered!";
+		break;
+	}
 }
 
 /*
@@ -4094,7 +3639,7 @@ void MainWindow::normalizationMaxVolumeChanged(double value)
  */
 void MainWindow::normalizationModeChanged(int mode)
 {
-	m_settings->normalizationFilterEqualizationMode(mode);
+	m_settings->normalizationFilterEQMode(mode);
 }
 
 /*
@@ -4452,7 +3997,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	ui->comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfileDefault());
 	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
 	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
-	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEqualizationModeDefault());
+	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEQModeDefault());
 	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
 
 	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());

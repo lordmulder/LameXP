@@ -99,6 +99,12 @@ class : public AbstractEncoderInfo
 			throw "Bad RC mode specified!";
 		}
 	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "LAME MP3 Encoder";
+		return s_description;
+	}
 }
 g_mp3EncoderInfo;
 
@@ -339,9 +345,9 @@ int MP3Encoder::clipBitrate(int bitrate)
 	int minDiff = INT_MAX;
 	int minIndx = -1;
 
-	for(int i = 0; SettingsModel::mp3Bitrates[i] > 0; i++)
+	for(int i = 0; g_mp3BitrateLUT[i] > 0; i++)
 	{
-		int currentDiff = abs(targetBitrate - SettingsModel::mp3Bitrates[i]);
+		int currentDiff = abs(targetBitrate - g_mp3BitrateLUT[i]);
 		if(currentDiff < minDiff)
 		{
 			minDiff = currentDiff;
@@ -351,7 +357,7 @@ int MP3Encoder::clipBitrate(int bitrate)
 
 	if(minIndx >= 0)
 	{
-		return SettingsModel::mp3Bitrates[minIndx];
+		return g_mp3BitrateLUT[minIndx];
 	}
 
 	return targetBitrate;
