@@ -954,7 +954,7 @@ void MainWindow::changeEvent(QEvent *e)
 {
 	if(e->type() == QEvent::LanguageChange)
 	{
-		qWarning("\nMainWindow::changeEvent()\n");
+		/*qWarning("\nMainWindow::changeEvent()\n");*/
 
 		int comboBoxIndex[8];
 		
