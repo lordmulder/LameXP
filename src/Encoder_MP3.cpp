@@ -107,9 +107,8 @@ class MP3EncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "LAME MP3 Encoder";
 		return s_description;
 	}
-};
-
-static const MP3EncoderInfo g_mp3EncoderInfo;
+}
+static const g_mp3EncoderInfo;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder implementation

@@ -40,6 +40,9 @@ public:
 	virtual const unsigned int *supportedBitdepths(void);
 	virtual const unsigned int *supportedSamplerates(void);
 
+	//Encoder info
+	static const AbstractEncoderInfo *getEncoderInfo(void);
+
 private:
 	const QString m_binary;
 	int clipBitrate(int bitrate);

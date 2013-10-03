@@ -99,9 +99,8 @@ public:
 		static const char* s_description = "Wave Audio (PCM)";
 		return s_description;
 	}
-};
-
-static const WaveEncoderInfo g_waveEncoderInfo;
+}
+static const g_waveEncoderInfo;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder implementation

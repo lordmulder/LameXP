@@ -104,9 +104,8 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "OggEnc2 Vorbis Encoder (aoTuV)";
 		return s_description;
 	}
-};
-
-static const VorbisEncoderInfo g_vorbisEncoderInfo;
+}
+static const g_vorbisEncoderInfo;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder implementation

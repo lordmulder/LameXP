@@ -3291,41 +3291,30 @@ void MainWindow::playlistEnabledChanged(void)
  */
 void MainWindow::updateEncoder(int id)
 {
-	qWarning("\nupdateEncoder(%d)", id);
+	/*qWarning("\nupdateEncoder(%d)", id);*/
 
 	m_settings->compressionEncoder(id);
 	const AbstractEncoderInfo *info = EncoderRegistry::getEncoderInfo(id);
 
-	qWarning("info->isModeSupported(SettingsModel::VBRMode) = %s", info->isModeSupported(SettingsModel::VBRMode) ? "YES" : "NO");
-	qWarning("info->isModeSupported(SettingsModel::ABRMode) = %s", info->isModeSupported(SettingsModel::ABRMode) ? "YES" : "NO");
-	qWarning("info->isModeSupported(SettingsModel::CBRMode) = %s", info->isModeSupported(SettingsModel::CBRMode) ? "YES" : "NO");
-
 	//Update UI controls
-	ui->radioButtonModeQuality->setEnabled(info->isModeSupported(SettingsModel::VBRMode));
+	ui->radioButtonModeQuality       ->setEnabled(info->isModeSupported(SettingsModel::VBRMode));
 	ui->radioButtonModeAverageBitrate->setEnabled(info->isModeSupported(SettingsModel::ABRMode));
-	ui->radioButtonConstBitrate->setEnabled(info->isModeSupported(SettingsModel::CBRMode));
+	ui->radioButtonConstBitrate      ->setEnabled(info->isModeSupported(SettingsModel::CBRMode));
 	
 	//Initialize checkbox state
-	if(ui->radioButtonModeQuality->isEnabled()) ui->radioButtonModeQuality->setChecked(true);
+	if(ui->radioButtonModeQuality->isEnabled())             ui->radioButtonModeQuality->setChecked(true);
 	else if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
-	else if(ui->radioButtonConstBitrate->isEnabled()) ui->radioButtonConstBitrate->setChecked(true);
+	else if(ui->radioButtonConstBitrate->isEnabled())       ui->radioButtonConstBitrate->setChecked(true);
 	else throw "It appears that the encoder does not support *any* RC mode!";
 
 	//Apply current RC mode
 	const int currentRCMode = EncoderRegistry::loadEncoderMode(m_settings, id);
 	switch(currentRCMode)
 	{
-	case SettingsModel::VBRMode:
-		if(ui->radioButtonModeQuality->isEnabled()) ui->radioButtonModeQuality->setChecked(true);
-		break;
-	case SettingsModel::ABRMode:
-		if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
-		break;
-	case SettingsModel::CBRMode:
-		if(ui->radioButtonConstBitrate->isEnabled()) ui->radioButtonConstBitrate->setChecked(true);
-		break;
-	default:
-		throw "updateEncoder(): Unknown rc-mode encountered!";
+		case SettingsModel::VBRMode: if(ui->radioButtonModeQuality->isEnabled())        ui->radioButtonModeQuality->setChecked(true);        break;
+		case SettingsModel::ABRMode: if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true); break;
+		case SettingsModel::CBRMode: if(ui->radioButtonConstBitrate->isEnabled())       ui->radioButtonConstBitrate->setChecked(true);       break;
+		default: throw "updateEncoder(): Unknown rc-mode encountered!";
 	}
 
 	//Display encoder description
@@ -3340,7 +3329,7 @@ void MainWindow::updateEncoder(int id)
 	}
 
 	//Update RC mode!
-	updateRCMode(currentRCMode);
+	updateRCMode(m_modeButtonGroup->checkedId());
 }
 
 /*
@@ -3348,6 +3337,8 @@ void MainWindow::updateEncoder(int id)
  */
 void MainWindow::updateRCMode(int id)
 {
+	/*qWarning("updateRCMode(%d)", id);*/
+
 	//Store new RC mode
 	const int currentEncoder = m_encoderButtonGroup->checkedId();
 	EncoderRegistry::saveEncoderMode(m_settings, currentEncoder, id);
@@ -3355,6 +3346,14 @@ void MainWindow::updateRCMode(int id)
 	//Fetch encoder info
 	const AbstractEncoderInfo *info = EncoderRegistry::getEncoderInfo(currentEncoder);
 	const int valueCount = info->valueCount(id);
+
+	//Sanity check
+	if(!info->isModeSupported(id))
+	{
+		qWarning("Attempting to use an unsupported RC mode (%d) with current encoder (%d)!", id, currentEncoder);
+		ui->labelBitrate->setText("(ERROR)");
+		return;
+	}
 
 	//Update slider min/max values
 	if(valueCount > 0)
@@ -3373,9 +3372,9 @@ void MainWindow::updateRCMode(int id)
 	//Now update bitrate/quality value!
 	if(valueCount > 0)
 	{
-		const int currentValue = qBound(0, EncoderRegistry::loadEncoderValue(m_settings, currentEncoder, id), valueCount-1);
-		ui->sliderBitrate->setValue(currentValue);
-		updateBitrate(currentValue);
+		const int currentValue = EncoderRegistry::loadEncoderValue(m_settings, currentEncoder, id);
+		ui->sliderBitrate->setValue(qBound(0, currentValue, valueCount-1));
+		updateBitrate(qBound(0, currentValue, valueCount-1));
 	}
 	else
 	{
@@ -3389,15 +3388,25 @@ void MainWindow::updateRCMode(int id)
  */
 void MainWindow::updateBitrate(int value)
 {
+	/*qWarning("updateBitrate(%d)", value);*/
+
 	//Load current encoder and RC mode
 	const int currentEncoder = m_encoderButtonGroup->checkedId();
-	const int currentRCMode = EncoderRegistry::loadEncoderMode(m_settings, currentEncoder);
+	const int currentRCMode = m_modeButtonGroup->checkedId();
 
 	//Fetch encoder info
 	const AbstractEncoderInfo *info = EncoderRegistry::getEncoderInfo(currentEncoder);
 	const int valueCount = info->valueCount(currentRCMode);
 
-	//Store new bitrate valie
+	//Sanity check
+	if(!info->isModeSupported(currentRCMode))
+	{
+		qWarning("Attempting to use an unsupported RC mode (%d) with current encoder (%d)!", currentRCMode, currentEncoder);
+		ui->labelBitrate->setText("(ERROR)");
+		return;
+	}
+
+	//Store new bitrate value
 	if(valueCount > 0)
 	{
 		EncoderRegistry::saveEncoderValue(m_settings, currentEncoder, currentRCMode, qBound(0, value, valueCount-1));

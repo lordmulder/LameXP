@@ -97,9 +97,8 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "Opus-Tools OpusEnc (libopus)";
 		return s_description;
 	}
-};
-
-static const OpusEncoderInfo g_opusEncoderInfo;
+}
+static const g_opusEncoderInfo;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder implementation

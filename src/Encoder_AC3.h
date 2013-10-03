@@ -45,6 +45,9 @@ public:
 	virtual void setExponentSearchSize(int value);
 	virtual void setFastBitAllocation(bool value);
 	
+	//Encoder info
+	static const AbstractEncoderInfo *getEncoderInfo(void);
+
 private:
 	const QString m_binary;
 	int m_configAudioCodingMode;

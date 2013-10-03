@@ -28,6 +28,93 @@
 #include <QDir>
 #include <limits.h>
 
+static int index2bitrate(const int index)
+{
+	return (index < 8) ? ((index + 1) * 32) : ((index < 12) ? ((index - 3) * 64) : ((index < 24) ? (index - 7) * 128 : (index - 15) * 256));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
+
+class DCAEncoderInfo : public AbstractEncoderInfo
+{
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+			return false;
+			break;
+		case SettingsModel::CBRMode:
+			return true;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+			return 0;
+			break;
+		case SettingsModel::CBRMode:
+			return 32;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+			return 0;
+			break;
+		case SettingsModel::CBRMode:
+			return qBound(32, index2bitrate(index), 4096);
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return TYPE_QUALITY_LEVEL;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return TYPE_BITRATE;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "dcaenc-2 by Alexander E. Patrakov";
+		return s_description;
+	}
+}
+static const g_dcaEncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
+///////////////////////////////////////////////////////////////////////////////
+
 DCAEncoder::DCAEncoder(void)
 :
 	m_binary(lamexp_lookup_tool("dcaenc.exe"))
@@ -47,11 +134,9 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	QProcess process;
 	QStringList args;
 
-	int bitrate = qBound(32, m_configBitrate * 32, 6144);
-
 	args << "-i" << QDir::toNativeSeparators(sourceFile);
 	args << "-o" << QDir::toNativeSeparators(outputFile);
-	args << "-b" << QString::number(bitrate);
+	args << "-b" << QString::number(qBound(32, index2bitrate(m_configBitrate), 4096));
 
 	if(!startProcess(process, m_binary, args))
 	{
@@ -155,4 +240,9 @@ const unsigned int *DCAEncoder::supportedBitdepths(void)
 {
 	static const unsigned int supportedBPS[] = {16, 32, NULL};
 	return supportedBPS;
+}
+
+const AbstractEncoderInfo *DCAEncoder::getEncoderInfo(void)
+{
+	return &g_dcaEncoderInfo;
 }

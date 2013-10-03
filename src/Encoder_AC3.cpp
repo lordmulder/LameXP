@@ -29,6 +29,90 @@
 
 static const int g_ac3BitratesLUT[20] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 448, 512, 576, 640, -1};
 
+///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
+
+class AC3EncoderInfo : public AbstractEncoderInfo
+{
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::CBRMode:
+			return true;
+			break;
+		case SettingsModel::ABRMode:
+			return false;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return 65;
+			break;
+		case SettingsModel::ABRMode:
+			return 0;
+			break;
+		case SettingsModel::CBRMode:
+			return 19;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return qBound(0, index * 16, 1023);
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return g_ac3BitratesLUT[qBound(0, index, 18)];
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return TYPE_QUALITY_LEVEL;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return TYPE_BITRATE;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "Aften: A/52 Audio Encoder";
+		return s_description;
+	}
+}
+static const g_aftenEncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
+///////////////////////////////////////////////////////////////////////////////
+
 AC3Encoder::AC3Encoder(void)
 :
 	m_binary(lamexp_lookup_tool("aften.exe"))
@@ -56,10 +140,10 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString::number(qMax(0, qMin(1023, m_configBitrate * 64)));
+		args << "-q" << QString::number(qBound(0, m_configBitrate * 16, 1023));
 		break;
 	case SettingsModel::CBRMode:
-		args << "-b" << QString::number(g_ac3BitratesLUT[qMax(0, qMin(18, m_configBitrate))]);
+		args << "-b" << QString::number(g_ac3BitratesLUT[qBound(0, m_configBitrate, 18)]);
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -204,4 +288,9 @@ bool AC3Encoder::isFormatSupported(const QString &containerType, const QString &
 	}
 
 	return false;
+}
+
+const AbstractEncoderInfo *AC3Encoder::getEncoderInfo(void)
+{
+	return &g_aftenEncoderInfo;
 }

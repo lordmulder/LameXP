@@ -27,6 +27,88 @@
 #include <QProcess>
 #include <QDir>
 
+///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
+
+class FLACEncoderInfo : public AbstractEncoderInfo
+{
+public:
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return true;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return false;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return 9;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return 0;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return qBound(0, index, 8);
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return -1;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return TYPE_COMPRESSION_LEVEL;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return -1;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "Free Lossless Audio Codec (FLAC)";
+		return s_description;
+	}
+}
+static const g_flacEncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
+///////////////////////////////////////////////////////////////////////////////
+
 FLACEncoder::FLACEncoder(void)
 :
 	m_binary(lamexp_lookup_tool("flac.exe"))
@@ -46,7 +128,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	QProcess process;
 	QStringList args;
 
-	args << QString("-%1").arg(QString::number(qMax(0, qMin(8, m_configBitrate))));
+	args << QString("-%1").arg(QString::number(qBound(0, m_configBitrate, 8)));
 	args << "--channel-map=none";
 
 	if(!metaInfo.fileName().isEmpty()) args << "-T" << QString("title=%1").arg(cleanTag(metaInfo.fileName()));
@@ -161,4 +243,9 @@ const unsigned int *FLACEncoder::supportedBitdepths(void)
 {
 	static const unsigned int supportedBPS[] = {16, 24, NULL};
 	return supportedBPS;
+}
+
+const AbstractEncoderInfo *FLACEncoder::getEncoderInfo(void)
+{
+	return &g_flacEncoderInfo;
 }
