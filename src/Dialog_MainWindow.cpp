@@ -164,7 +164,6 @@ while(0)
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 //#define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
-#define RESET_SETTING(OBJ,NAME) (OBJ)->NAME((OBJ)->NAME##Default())
 
 static const DWORD IDM_ABOUTBOX = 0xEFF0;
 
@@ -3447,25 +3446,7 @@ void MainWindow::compressionTabEventOccurred(QWidget *sender, QEvent *event)
 			PlaySound(MAKEINTRESOURCE(IDR_WAVE_BLAST), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
 		}
 
-		RESET_SETTING(m_settings, compressionBitrateAacEnc);
-		RESET_SETTING(m_settings, compressionBitrateAften);
-		RESET_SETTING(m_settings, compressionBitrateDcaEnc);
-		RESET_SETTING(m_settings, compressionBitrateLAME);
-		RESET_SETTING(m_settings, compressionBitrateOggEnc);
-		RESET_SETTING(m_settings, compressionBitrateOpusEnc);
-
-		RESET_SETTING(m_settings, compressionRCModeAacEnc);
-		RESET_SETTING(m_settings, compressionRCModeAften);
-		RESET_SETTING(m_settings, compressionRCModeLAME);
-		RESET_SETTING(m_settings, compressionRCModeOggEnc);
-		RESET_SETTING(m_settings, compressionRCModeOpusEnc);
-
-		RESET_SETTING(m_settings, compressionVbrLevelAacEnc);
-		RESET_SETTING(m_settings, compressionVbrLevelAften);
-		RESET_SETTING(m_settings, compressionVbrLevelFLAC);
-		RESET_SETTING(m_settings, compressionVbrLevelLAME);
-		RESET_SETTING(m_settings, compressionVbrLevelOggEnc);
-
+		EncoderRegistry::resetAllEncoders(m_settings);
 		m_settings->compressionEncoder(SettingsModel::MP3Encoder);
 		ui->radioButtonEncoderMP3->setChecked(true);
 		QTimer::singleShot(0, this, SLOT(updateEncoder()));

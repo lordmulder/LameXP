@@ -35,6 +35,8 @@
 #include "Encoder_Wave.h"
 
 #define IS_VBR(RC_MODE) ((RC_MODE) == SettingsModel::VBRMode)
+#define IS_ABR(RC_MODE) ((RC_MODE) == SettingsModel::ABRMode)
+#define IS_CBR(RC_MODE) ((RC_MODE) == SettingsModel::CBRMode)
 
 ////////////////////////////////////////////////////////////
 // Create encoder instance
@@ -60,7 +62,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 		{
 			MP3Encoder *mp3Encoder = new MP3Encoder();
 			mp3Encoder->setRCMode(rcMode = settings->compressionRCModeLAME());
-			mp3Encoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrLevelLAME() : settings->compressionBitrateLAME());
+			mp3Encoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityLAME() : settings->compressionAbrBitrateLAME());
 			mp3Encoder->setAlgoQuality(settings->lameAlgoQuality());
 			if(settings->bitrateManagementEnabled())
 			{
@@ -81,7 +83,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 		{
 			VorbisEncoder *vorbisEncoder = new VorbisEncoder();
 			vorbisEncoder->setRCMode(rcMode = settings->compressionRCModeOggEnc());
-			vorbisEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrLevelOggEnc() : settings->compressionBitrateOggEnc());
+			vorbisEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityOggEnc() : settings->compressionAbrBitrateOggEnc());
 			if(settings->bitrateManagementEnabled())
 			{
 				vorbisEncoder->setBitrateLimits(settings->bitrateManagementMinRate(), settings->bitrateManagementMaxRate());
@@ -104,7 +106,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 				{
 					QAACEncoder *aacEncoder = new QAACEncoder();
 					aacEncoder->setRCMode(rcMode = settings->compressionRCModeAacEnc());
-					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrLevelAacEnc() : settings->compressionBitrateAacEnc());
+					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAacEnc() : settings->compressionAbrBitrateAacEnc());
 					aacEncoder->setProfile(settings->aacEncProfile());
 					aacEncoder->setCustomParams(settings->customParametersAacEnc());
 					encoder = aacEncoder;
@@ -114,7 +116,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 				{
 					FHGAACEncoder *aacEncoder = new FHGAACEncoder();
 					aacEncoder->setRCMode(rcMode = settings->compressionRCModeAacEnc());
-					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrLevelAacEnc() : settings->compressionBitrateAacEnc());
+					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAacEnc() : settings->compressionAbrBitrateAacEnc());
 					aacEncoder->setProfile(settings->aacEncProfile());
 					aacEncoder->setCustomParams(settings->customParametersAacEnc());
 					encoder = aacEncoder;
@@ -124,7 +126,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 				{
 					AACEncoder *aacEncoder = new AACEncoder();
 					aacEncoder->setRCMode(rcMode = settings->compressionRCModeAacEnc());
-					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrLevelAacEnc() : settings->compressionBitrateAacEnc());
+					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAacEnc() : settings->compressionAbrBitrateAacEnc());
 					aacEncoder->setEnable2Pass(settings->neroAACEnable2Pass());
 					aacEncoder->setProfile(settings->aacEncProfile());
 					aacEncoder->setCustomParams(settings->customParametersAacEnc());
@@ -142,7 +144,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 		{
 			AC3Encoder *ac3Encoder = new AC3Encoder();
 			ac3Encoder->setRCMode(rcMode = settings->compressionRCModeAften());
-			ac3Encoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrLevelAften() : settings->compressionBitrateAften());
+			ac3Encoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAften() : settings->compressionAbrBitrateAften());
 			ac3Encoder->setCustomParams(settings->customParametersAften());
 			ac3Encoder->setAudioCodingMode(settings->aftenAudioCodingMode());
 			ac3Encoder->setDynamicRangeCompression(settings->aftenDynamicRangeCompression());
@@ -155,7 +157,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	case SettingsModel::FLACEncoder:
 		{
 			FLACEncoder *flacEncoder = new FLACEncoder();
-			flacEncoder->setBitrate(settings->compressionVbrLevelFLAC());
+			flacEncoder->setBitrate(settings->compressionVbrQualityFLAC());
 			flacEncoder->setRCMode(SettingsModel::VBRMode);
 			flacEncoder->setCustomParams(settings->customParametersFLAC());
 			encoder = flacEncoder;
@@ -166,7 +168,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 		{
 			OpusEncoder *opusEncoder = new OpusEncoder();
 			opusEncoder->setRCMode(rcMode = settings->compressionRCModeOpusEnc());
-			opusEncoder->setBitrate(settings->compressionBitrateOpusEnc()); /*Opus always uses bitrate*/
+			opusEncoder->setBitrate(settings->compressionAbrBitrateOpusEnc()); /*Opus always uses bitrate*/
 			opusEncoder->setOptimizeFor(settings->opusOptimizeFor());
 			opusEncoder->setEncodeComplexity(settings->opusComplexity());
 			opusEncoder->setFrameSize(settings->opusFramesize());
@@ -179,7 +181,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 		{
 			DCAEncoder *dcaEncoder = new DCAEncoder();
 			dcaEncoder->setRCMode(SettingsModel::CBRMode);
-			dcaEncoder->setBitrate(IS_VBR(rcMode) ? 0 : settings->compressionBitrateDcaEnc());
+			dcaEncoder->setBitrate(IS_VBR(rcMode) ? 0 : settings->compressionAbrBitrateDcaEnc());
 			encoder = dcaEncoder;
 		}
 		break;
@@ -310,27 +312,17 @@ int EncoderRegistry::loadEncoderMode(SettingsModel *settings, const int encoderI
 
 #define STORE_VALUE(ENCODER_ID, RC_MODE, VALUE) do \
 { \
-	if(IS_VBR(RC_MODE)) \
-	{ \
-		settings->compressionVbrLevel##ENCODER_ID(VALUE); \
-	} \
-	else \
-	{ \
-		settings->compressionBitrate##ENCODER_ID(VALUE); \
-	} \
+	if(IS_VBR(RC_MODE)) settings->compressionVbrQuality##ENCODER_ID(VALUE); \
+	if(IS_ABR(RC_MODE)) settings->compressionAbrBitrate##ENCODER_ID(VALUE); \
+	if(IS_CBR(RC_MODE)) settings->compressionCbrBitrate##ENCODER_ID(VALUE); \
 } \
 while(0)
 
 #define LOAD_VALUE(VALUE, ENCODER_ID, RC_MODE) do \
 { \
-	if(IS_VBR(RC_MODE)) \
-	{ \
-		(VALUE) = settings->compressionVbrLevel##ENCODER_ID(); \
-	} \
-	else \
-	{ \
-		(VALUE) = settings->compressionBitrate##ENCODER_ID(); \
-	} \
+	if(IS_VBR(RC_MODE)) (VALUE) = settings->compressionVbrQuality##ENCODER_ID(); \
+	if(IS_ABR(RC_MODE)) (VALUE) = settings->compressionAbrBitrate##ENCODER_ID(); \
+	if(IS_CBR(RC_MODE)) (VALUE) = settings->compressionCbrBitrate##ENCODER_ID(); \
 } \
 while(0)
 
@@ -382,6 +374,55 @@ int EncoderRegistry::loadEncoderValue(const SettingsModel *settings, const int e
 	}
 
 	return value;
+}
+
+////////////////////////////////////////////////////////////
+// Reset encoder settings
+////////////////////////////////////////////////////////////
+
+#define RESET_SETTING(OBJ,NAME) do \
+{ \
+	(OBJ)->NAME((OBJ)->NAME##Default()); \
+} \
+while(0)
+
+void EncoderRegistry::resetAllEncoders(SettingsModel *settings)
+{
+	RESET_SETTING(settings, compressionAbrBitrateAacEnc);
+	RESET_SETTING(settings, compressionAbrBitrateAften);
+	RESET_SETTING(settings, compressionAbrBitrateDcaEnc);
+	RESET_SETTING(settings, compressionAbrBitrateFLAC);
+	RESET_SETTING(settings, compressionAbrBitrateLAME);
+	RESET_SETTING(settings, compressionAbrBitrateOggEnc);
+	RESET_SETTING(settings, compressionAbrBitrateOpusEnc);
+	RESET_SETTING(settings, compressionAbrBitrateWave);
+
+	RESET_SETTING(settings, compressionCbrBitrateAacEnc);
+	RESET_SETTING(settings, compressionCbrBitrateAften);
+	RESET_SETTING(settings, compressionCbrBitrateDcaEnc);
+	RESET_SETTING(settings, compressionCbrBitrateFLAC);
+	RESET_SETTING(settings, compressionCbrBitrateLAME);
+	RESET_SETTING(settings, compressionCbrBitrateOggEnc);
+	RESET_SETTING(settings, compressionCbrBitrateOpusEnc);
+	RESET_SETTING(settings, compressionCbrBitrateWave);
+
+	RESET_SETTING(settings, compressionRCModeAacEnc);
+	RESET_SETTING(settings, compressionRCModeAften);
+	RESET_SETTING(settings, compressionRCModeDcaEnc);
+	RESET_SETTING(settings, compressionRCModeFLAC);
+	RESET_SETTING(settings, compressionRCModeLAME);
+	RESET_SETTING(settings, compressionRCModeOggEnc);
+	RESET_SETTING(settings, compressionRCModeOpusEnc);
+	RESET_SETTING(settings, compressionRCModeWave);
+
+	RESET_SETTING(settings, compressionVbrQualityAacEnc);
+	RESET_SETTING(settings, compressionVbrQualityAften);
+	RESET_SETTING(settings, compressionVbrQualityDcaEnc);
+	RESET_SETTING(settings, compressionVbrQualityFLAC);
+	RESET_SETTING(settings, compressionVbrQualityLAME);
+	RESET_SETTING(settings, compressionVbrQualityOggEnc);
+	RESET_SETTING(settings, compressionVbrQualityOpusEnc);
+	RESET_SETTING(settings, compressionVbrQualityWave);
 }
 
 ////////////////////////////////////////////////////////////
