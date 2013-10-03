@@ -2008,7 +2008,7 @@
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation>Gewählter Kodierer:</translation>
+        <translation>Gewählter Kodierer: %1</translation>
     </message>
 </context>
 <context>
