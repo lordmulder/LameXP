@@ -1843,26 +1843,6 @@
         <translation>Importar CSV</translation>
     </message>
     <message>
-        <source>QAAC (Apple)</source>
-        <translation>QAAC (Apple)</translation>
-    </message>
-    <message>
-        <source>FHG AAC (Winamp)</source>
-        <translation>FHG AAC (Winamp)</translation>
-    </message>
-    <message>
-        <source>Nero AAC</source>
-        <translation>Nero AAC</translation>
-    </message>
-    <message>
-        <source>Not available!</source>
-        <translation>¡No disponible!</translation>
-    </message>
-    <message>
-        <source>Current AAC Encoder: %1</source>
-        <translation>Codificador AAC actual: %1</translation>
-    </message>
-    <message>
         <source>Edit Output Path</source>
         <translation>Editar ruta de salida</translation>
     </message>
@@ -2024,6 +2004,10 @@
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
         <translation>Proyectos de código abierto de MuldeR</translation>
+    </message>
+    <message>
+        <source>Current Encoder: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

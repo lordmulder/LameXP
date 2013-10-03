@@ -1841,26 +1841,6 @@
         <translation type="unfinished">CSV 가져오기</translation>
     </message>
     <message>
-        <source>QAAC (Apple)</source>
-        <translation type="unfinished">QAAC (애플)</translation>
-    </message>
-    <message>
-        <source>FHG AAC (Winamp)</source>
-        <translation type="unfinished">FHG AAC (윈앰프)</translation>
-    </message>
-    <message>
-        <source>Nero AAC</source>
-        <translation type="unfinished">Nero AAC</translation>
-    </message>
-    <message>
-        <source>Not available!</source>
-        <translation type="unfinished">사용할 수 없음!</translation>
-    </message>
-    <message>
-        <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished">현재 AAC Encoder: %1</translation>
-    </message>
-    <message>
         <source>Edit Output Path</source>
         <translation type="unfinished">출력 경로 편집</translation>
     </message>
@@ -2017,6 +1997,10 @@
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
         <translation type="unfinished">MuldeR&apos;s 오픈소스 프로젝트</translation>
+    </message>
+    <message>
+        <source>Current Encoder: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

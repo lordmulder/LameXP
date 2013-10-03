@@ -66,6 +66,7 @@
 ..\..\src\Model_Settings.cpp 
 ..\..\src\PlaylistImporter.cpp 
 ..\..\src\Registry_Decoder.cpp 
+..\..\src\Registry_Encoder.cpp 
 ..\..\src\ShellIntegration.cpp 
 ..\..\src\Thread_CPUObserver.cpp 
 ..\..\src\Thread_CueSplitter.cpp 
@@ -140,6 +141,7 @@
 ..\..\src\Model_Settings.h 
 ..\..\src\PlaylistImporter.h 
 ..\..\src\Registry_Decoder.h 
+..\..\src\Registry_Encoder.h 
 ..\..\src\Resource.h 
 ..\..\src\ShellIntegration.h 
 ..\..\src\Targetver.h 

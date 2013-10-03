@@ -1844,26 +1844,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>QAAC (Apple)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FHG AAC (Winamp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nero AAC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Not available!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current AAC Encoder: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit Output Path</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2024,6 +2004,10 @@
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current Encoder: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

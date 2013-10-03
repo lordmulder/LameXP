@@ -1847,26 +1847,6 @@
         <translation>Імпорт CSV</translation>
     </message>
     <message>
-        <source>QAAC (Apple)</source>
-        <translation>QAAC (Apple)</translation>
-    </message>
-    <message>
-        <source>FHG AAC (Winamp)</source>
-        <translation>FHG AAC (Winamp)</translation>
-    </message>
-    <message>
-        <source>Nero AAC</source>
-        <translation>Nero AAC</translation>
-    </message>
-    <message>
-        <source>Not available!</source>
-        <translation>Не доступно!</translation>
-    </message>
-    <message>
-        <source>Current AAC Encoder: %1</source>
-        <translation>Поточний кодер AAC: %1</translation>
-    </message>
-    <message>
         <source>Edit Output Path</source>
         <translation>Редагувати шлях до файла(-ів) на виході</translation>
     </message>
@@ -2033,6 +2013,10 @@
     <message>
         <source>Acceptable Quality (Fast)</source>
         <translation>Прийнятна якість (Швидко)</translation>
+    </message>
+    <message>
+        <source>Current Encoder: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1840,26 +1840,6 @@
         <translation>CSV导入</translation>
     </message>
     <message>
-        <source>QAAC (Apple)</source>
-        <translation>QAAC (Apple)</translation>
-    </message>
-    <message>
-        <source>FHG AAC (Winamp)</source>
-        <translation>FHG AAC (Winamp)</translation>
-    </message>
-    <message>
-        <source>Nero AAC</source>
-        <translation>Nero AAC</translation>
-    </message>
-    <message>
-        <source>Not available!</source>
-        <translation>暂时不可用!</translation>
-    </message>
-    <message>
-        <source>Current AAC Encoder: %1</source>
-        <translation>当前的AAC编码器: %1</translation>
-    </message>
-    <message>
         <source>Edit Output Path</source>
         <translation>编辑输出路径</translation>
     </message>
@@ -2016,6 +1996,10 @@
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
         <translation>MuldeR的开源项目</translation>
+    </message>
+    <message>
+        <source>Current Encoder: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
