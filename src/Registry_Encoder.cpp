@@ -48,21 +48,13 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	AbstractEncoder *encoder =  NULL;
 	*nativeResampling = false;
 
-	//Sanity checking
-	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
-	{
-		throw "Unknown rate-control mode!";
-	}
-
-	//Create new encoder instance
+	//Create new encoder instance and apply encoder-specific settings
 	switch(encoderId)
 	{
 	/*-------- MP3Encoder /*--------*/
 	case SettingsModel::MP3Encoder:
 		{
 			MP3Encoder *mp3Encoder = new MP3Encoder();
-			mp3Encoder->setRCMode(rcMode = settings->compressionRCModeLAME());
-			mp3Encoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityLAME() : settings->compressionAbrBitrateLAME());
 			mp3Encoder->setAlgoQuality(settings->lameAlgoQuality());
 			if(settings->bitrateManagementEnabled())
 			{
@@ -74,7 +66,6 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 				*nativeResampling = true;
 			}
 			mp3Encoder->setChannelMode(settings->lameChannelMode());
-			mp3Encoder->setCustomParams(settings->customParametersLAME());
 			encoder = mp3Encoder;
 		}
 		break;
@@ -82,8 +73,6 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	case SettingsModel::VorbisEncoder:
 		{
 			VorbisEncoder *vorbisEncoder = new VorbisEncoder();
-			vorbisEncoder->setRCMode(rcMode = settings->compressionRCModeOggEnc());
-			vorbisEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityOggEnc() : settings->compressionAbrBitrateOggEnc());
 			if(settings->bitrateManagementEnabled())
 			{
 				vorbisEncoder->setBitrateLimits(settings->bitrateManagementMinRate(), settings->bitrateManagementMaxRate());
@@ -93,7 +82,6 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 				vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[settings->samplingRate()]);
 				*nativeResampling = true;
 			}
-			vorbisEncoder->setCustomParams(settings->customParametersOggEnc());
 			encoder = vorbisEncoder;
 		}
 		break;
@@ -105,31 +93,22 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 			case SettingsModel::AAC_ENCODER_QAAC:
 				{
 					QAACEncoder *aacEncoder = new QAACEncoder();
-					aacEncoder->setRCMode(rcMode = settings->compressionRCModeAacEnc());
-					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAacEnc() : settings->compressionAbrBitrateAacEnc());
 					aacEncoder->setProfile(settings->aacEncProfile());
-					aacEncoder->setCustomParams(settings->customParametersAacEnc());
 					encoder = aacEncoder;
 				}
 				break;
 			case SettingsModel::AAC_ENCODER_FHG:
 				{
 					FHGAACEncoder *aacEncoder = new FHGAACEncoder();
-					aacEncoder->setRCMode(rcMode = settings->compressionRCModeAacEnc());
-					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAacEnc() : settings->compressionAbrBitrateAacEnc());
 					aacEncoder->setProfile(settings->aacEncProfile());
-					aacEncoder->setCustomParams(settings->customParametersAacEnc());
 					encoder = aacEncoder;
 				}
 				break;
 			case SettingsModel::AAC_ENCODER_NERO:
 				{
 					AACEncoder *aacEncoder = new AACEncoder();
-					aacEncoder->setRCMode(rcMode = settings->compressionRCModeAacEnc());
-					aacEncoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAacEnc() : settings->compressionAbrBitrateAacEnc());
 					aacEncoder->setEnable2Pass(settings->neroAACEnable2Pass());
 					aacEncoder->setProfile(settings->aacEncProfile());
-					aacEncoder->setCustomParams(settings->customParametersAacEnc());
 					encoder = aacEncoder;
 				}
 				break;
@@ -143,9 +122,6 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	case SettingsModel::AC3Encoder:
 		{
 			AC3Encoder *ac3Encoder = new AC3Encoder();
-			ac3Encoder->setRCMode(rcMode = settings->compressionRCModeAften());
-			ac3Encoder->setBitrate(IS_VBR(rcMode) ? settings->compressionVbrQualityAften() : settings->compressionAbrBitrateAften());
-			ac3Encoder->setCustomParams(settings->customParametersAften());
 			ac3Encoder->setAudioCodingMode(settings->aftenAudioCodingMode());
 			ac3Encoder->setDynamicRangeCompression(settings->aftenDynamicRangeCompression());
 			ac3Encoder->setExponentSearchSize(settings->aftenExponentSearchSize());
@@ -157,9 +133,6 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	case SettingsModel::FLACEncoder:
 		{
 			FLACEncoder *flacEncoder = new FLACEncoder();
-			flacEncoder->setBitrate(settings->compressionVbrQualityFLAC());
-			flacEncoder->setRCMode(SettingsModel::VBRMode);
-			flacEncoder->setCustomParams(settings->customParametersFLAC());
 			encoder = flacEncoder;
 		}
 		break;
@@ -167,12 +140,9 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	case SettingsModel::OpusEncoder:
 		{
 			OpusEncoder *opusEncoder = new OpusEncoder();
-			opusEncoder->setRCMode(rcMode = settings->compressionRCModeOpusEnc());
-			opusEncoder->setBitrate(settings->compressionAbrBitrateOpusEnc()); /*Opus always uses bitrate*/
 			opusEncoder->setOptimizeFor(settings->opusOptimizeFor());
 			opusEncoder->setEncodeComplexity(settings->opusComplexity());
 			opusEncoder->setFrameSize(settings->opusFramesize());
-			opusEncoder->setCustomParams(settings->customParametersOpus());
 			encoder = opusEncoder;
 		}
 		break;
@@ -180,8 +150,6 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	case SettingsModel::DCAEncoder:
 		{
 			DCAEncoder *dcaEncoder = new DCAEncoder();
-			dcaEncoder->setRCMode(SettingsModel::CBRMode);
-			dcaEncoder->setBitrate(IS_VBR(rcMode) ? 0 : settings->compressionAbrBitrateDcaEnc());
 			encoder = dcaEncoder;
 		}
 		break;
@@ -189,8 +157,6 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	case SettingsModel::PCMEncoder:
 		{
 			WaveEncoder *waveEncoder = new WaveEncoder();
-			waveEncoder->setBitrate(0); /*does NOT apply to PCM output*/
-			waveEncoder->setRCMode(0); /*does NOT apply to PCM output*/
 			encoder = waveEncoder;
 		}
 		break;
@@ -204,6 +170,11 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	{
 		throw "No encoder instance has been assigend!";
 	}
+
+	//Apply common settings
+	encoder->setRCMode(rcMode = loadEncoderMode(settings, encoderId));
+	encoder->setCustomParams(loadEncoderCustomParams(settings, encoderId));
+	encoder->setBitrate(loadEncoderValue(settings, encoderId, rcMode));
 
 	return encoder;
 }
@@ -285,7 +256,7 @@ void EncoderRegistry::saveEncoderMode(SettingsModel *settings, const int encoder
 	}
 }
 
-int EncoderRegistry::loadEncoderMode(SettingsModel *settings, const int encoderId)
+int EncoderRegistry::loadEncoderMode(const SettingsModel *settings, const int encoderId)
 {
 	int rcMode = -1;
 	
@@ -374,6 +345,60 @@ int EncoderRegistry::loadEncoderValue(const SettingsModel *settings, const int e
 	}
 
 	return value;
+}
+
+////////////////////////////////////////////////////////////
+// Load/store encoder custom parameters
+////////////////////////////////////////////////////////////
+
+#define STORE_PARAMS(ENCODER_ID, PARAMS) do \
+{ \
+	settings->customParameters##ENCODER_ID(PARAMS); \
+} \
+while(0)
+
+#define LOAD_PARAMS(PARAMS, ENCODER_ID) do \
+{ \
+	(PARAMS) = settings->customParameters##ENCODER_ID(); \
+} \
+while(0)
+
+void EncoderRegistry::saveEncoderCustomParams(SettingsModel *settings, const int encoderId, const QString params)
+{
+	//Store the encoder bitrate/quality value
+	switch(encoderId)
+	{
+		case SettingsModel::MP3Encoder:    STORE_PARAMS(LAME,    params.trimmed()); break;
+		case SettingsModel::VorbisEncoder: STORE_PARAMS(OggEnc,  params.trimmed()); break;
+		case SettingsModel::AACEncoder:    STORE_PARAMS(AacEnc,  params.trimmed()); break;
+		case SettingsModel::AC3Encoder:    STORE_PARAMS(Aften,   params.trimmed()); break;
+		case SettingsModel::FLACEncoder:   STORE_PARAMS(FLAC,    params.trimmed()); break;
+		case SettingsModel::OpusEncoder:   STORE_PARAMS(OpusEnc, params.trimmed()); break;
+		case SettingsModel::DCAEncoder:    STORE_PARAMS(DcaEnc,  params.trimmed()); break;
+		case SettingsModel::PCMEncoder:    STORE_PARAMS(Wave,    params.trimmed()); break;
+		default: throw "Unsupported encoder!";
+	}
+}
+
+QString EncoderRegistry::loadEncoderCustomParams(const SettingsModel *settings, const int encoderId)
+{
+	QString params;
+	
+	//Load the encoder bitrate/quality value
+	switch(encoderId)
+	{
+		case SettingsModel::MP3Encoder:    LOAD_PARAMS(params, LAME);    break;
+		case SettingsModel::VorbisEncoder: LOAD_PARAMS(params, OggEnc);  break;
+		case SettingsModel::AACEncoder:    LOAD_PARAMS(params, AacEnc);  break;
+		case SettingsModel::AC3Encoder:    LOAD_PARAMS(params, Aften);   break;
+		case SettingsModel::FLACEncoder:   LOAD_PARAMS(params, FLAC);    break;
+		case SettingsModel::OpusEncoder:   LOAD_PARAMS(params, OpusEnc); break;
+		case SettingsModel::DCAEncoder:    LOAD_PARAMS(params, DcaEnc);  break;
+		case SettingsModel::PCMEncoder:    LOAD_PARAMS(params, Wave);    break;
+		default: throw "Unsupported encoder!";
+	}
+
+	return params;
 }
 
 ////////////////////////////////////////////////////////////

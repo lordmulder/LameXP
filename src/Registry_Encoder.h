@@ -36,10 +36,13 @@ public:
 	static const AbstractEncoderInfo *getEncoderInfo(const int encoderId);
 	
 	static void saveEncoderMode(SettingsModel *settings, const int encoderId, const int rcMode);
-	static int loadEncoderMode(SettingsModel *settings, const int encoderId);
+	static int loadEncoderMode(const SettingsModel *settings, const int encoderId);
 	
 	static void saveEncoderValue(SettingsModel *settings, const int encoderId, const int rcMode, const int value);
 	static int loadEncoderValue(const SettingsModel *settings, const int encoderId, const int rcMode);
+
+	static void saveEncoderCustomParams(SettingsModel *settings, const int encoderId, const QString params);
+	static QString loadEncoderCustomParams(const SettingsModel *settings, const int encoderId);
 
 	static void resetAllEncoders(SettingsModel *settings);
 	static int getAacEncoder(void);

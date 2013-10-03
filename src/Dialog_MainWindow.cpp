@@ -413,14 +413,14 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResample());
 	ui->checkBoxNeroAAC2PassMode->setEnabled(aacEncoder == SettingsModel::AAC_ENCODER_NERO);
 	
-	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAME());
-	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEnc());
-	ui->lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEnc());
-	ui->lineEditCustomParamFLAC->setText(m_settings->customParametersFLAC());
-	ui->lineEditCustomParamAften->setText(m_settings->customParametersAften());
-	ui->lineEditCustomParamOpus->setText(m_settings->customParametersOpus());
-	ui->lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
-	ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPattern());
+	ui->lineEditCustomParamLAME   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::MP3Encoder));
+	ui->lineEditCustomParamOggEnc ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::VorbisEncoder));
+	ui->lineEditCustomParamNeroAAC->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::AACEncoder));
+	ui->lineEditCustomParamFLAC   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::FLACEncoder));
+	ui->lineEditCustomParamAften  ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::AC3Encoder));
+	ui->lineEditCustomParamOpus   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::OpusEncoder));
+	ui->lineEditCustomTempFolder  ->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
+	ui->lineEditRenamePattern     ->setText(m_settings->renameOutputFilesPattern());
 	
 	m_evenFilterCustumParamsHelp = new CustomEventFilter();
 	ui->helpCustomParamLAME->installEventFilter(m_evenFilterCustumParamsHelp);
@@ -3686,12 +3686,12 @@ void MainWindow::customParamsChanged(void)
 	ui->labelCustomParamsText->setVisible(customParamsUsed);
 	ui->labelCustomParamsSpacer->setVisible(customParamsUsed);
 
-	m_settings->customParametersLAME(ui->lineEditCustomParamLAME->text());
-	m_settings->customParametersOggEnc(ui->lineEditCustomParamOggEnc->text());
-	m_settings->customParametersAacEnc(ui->lineEditCustomParamNeroAAC->text());
-	m_settings->customParametersFLAC(ui->lineEditCustomParamFLAC->text());
-	m_settings->customParametersAften(ui->lineEditCustomParamAften->text());
-	m_settings->customParametersOpus(ui->lineEditCustomParamOpus->text());
+	EncoderRegistry::saveEncoderCustomParams(m_settings, SettingsModel::MP3Encoder,    ui->lineEditCustomParamLAME->text());
+	EncoderRegistry::saveEncoderCustomParams(m_settings, SettingsModel::VorbisEncoder, ui->lineEditCustomParamOggEnc->text());
+	EncoderRegistry::saveEncoderCustomParams(m_settings, SettingsModel::AACEncoder,    ui->lineEditCustomParamNeroAAC->text());
+	EncoderRegistry::saveEncoderCustomParams(m_settings, SettingsModel::FLACEncoder,   ui->lineEditCustomParamFLAC->text());
+	EncoderRegistry::saveEncoderCustomParams(m_settings, SettingsModel::AC3Encoder,    ui->lineEditCustomParamAften->text());
+	EncoderRegistry::saveEncoderCustomParams(m_settings, SettingsModel::OpusEncoder,   ui->lineEditCustomParamOpus->text());
 }
 
 /*
@@ -4000,14 +4000,14 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResampleDefault());
-
-	ui->lineEditCustomParamLAME->setText(m_settings->customParametersLAMEDefault());
-	ui->lineEditCustomParamOggEnc->setText(m_settings->customParametersOggEncDefault());
+	
+	ui->lineEditCustomParamLAME   ->setText(m_settings->customParametersLAMEDefault());
+	ui->lineEditCustomParamOggEnc ->setText(m_settings->customParametersOggEncDefault());
 	ui->lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());
-	ui->lineEditCustomParamFLAC->setText(m_settings->customParametersFLACDefault());
-	ui->lineEditCustomParamOpus->setText(m_settings->customParametersFLACDefault());
-	ui->lineEditCustomTempFolder->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
-	ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+	ui->lineEditCustomParamFLAC   ->setText(m_settings->customParametersFLACDefault());
+	ui->lineEditCustomParamOpus   ->setText(m_settings->customParametersOpusEncDefault());
+	ui->lineEditCustomTempFolder  ->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
+	ui->lineEditRenamePattern     ->setText(m_settings->renameOutputFilesPatternDefault());
 
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_KeepBoth) ui->radioButtonOverwriteModeKeepBoth->click();
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_SkipFile) ui->radioButtonOverwriteModeSkipFile->click();

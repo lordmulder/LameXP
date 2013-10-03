@@ -216,10 +216,12 @@ LAMEXP_MAKE_ID(currentLanguage,              "Localization/Language");
 LAMEXP_MAKE_ID(currentLanguageFile,          "Localization/UseQMFile");
 LAMEXP_MAKE_ID(customParametersAacEnc,       "AdvancedOptions/CustomParameters/AacEnc");
 LAMEXP_MAKE_ID(customParametersAften,        "AdvancedOptions/CustomParameters/Aften");
+LAMEXP_MAKE_ID(customParametersDcaEnc,       "AdvancedOptions/CustomParameters/DcaEnc");
 LAMEXP_MAKE_ID(customParametersFLAC,         "AdvancedOptions/CustomParameters/FLAC");
 LAMEXP_MAKE_ID(customParametersLAME,         "AdvancedOptions/CustomParameters/LAME");
 LAMEXP_MAKE_ID(customParametersOggEnc,       "AdvancedOptions/CustomParameters/OggEnc");
-LAMEXP_MAKE_ID(customParametersOpus,         "AdvancedOptions/CustomParameters/OpusEnc");
+LAMEXP_MAKE_ID(customParametersOpusEnc,      "AdvancedOptions/CustomParameters/OpusEnc");
+LAMEXP_MAKE_ID(customParametersWave,         "AdvancedOptions/CustomParameters/Wave");
 LAMEXP_MAKE_ID(customTempPath,               "AdvancedOptions/TempDirectory/CustomPath");
 LAMEXP_MAKE_ID(customTempPathEnabled,        "AdvancedOptions/TempDirectory/UseCustomPath");
 LAMEXP_MAKE_ID(dropBoxWidgetEnabled,         "Flags/EnableDropBoxWidget");
@@ -599,10 +601,12 @@ LAMEXP_MAKE_OPTION_S(currentLanguage, defaultLanguage())
 LAMEXP_MAKE_OPTION_S(currentLanguageFile, QString())
 LAMEXP_MAKE_OPTION_S(customParametersAacEnc, QString())
 LAMEXP_MAKE_OPTION_S(customParametersAften, QString())
+LAMEXP_MAKE_OPTION_S(customParametersDcaEnc, QString())
 LAMEXP_MAKE_OPTION_S(customParametersFLAC, QString())
 LAMEXP_MAKE_OPTION_S(customParametersLAME, QString())
 LAMEXP_MAKE_OPTION_S(customParametersOggEnc, QString())
-LAMEXP_MAKE_OPTION_S(customParametersOpus, QString())
+LAMEXP_MAKE_OPTION_S(customParametersOpusEnc, QString())
+LAMEXP_MAKE_OPTION_S(customParametersWave, QString())
 LAMEXP_MAKE_OPTION_S(customTempPath, QDesktopServices::storageLocation(QDesktopServices::TempLocation))
 LAMEXP_MAKE_OPTION_B(customTempPathEnabled, false)
 LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled, true)
