@@ -2007,7 +2007,7 @@
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificador actual: %1</translation>
     </message>
 </context>
 <context>
