@@ -3392,105 +3392,105 @@
         <translation>Stäng</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="262"/>
-        <location filename="../../src/Dialog_Update.cpp" line="539"/>
+        <location filename="../../src/Dialog_Update.cpp" line="263"/>
+        <location filename="../../src/Dialog_Update.cpp" line="540"/>
         <source>Build</source>
         <translation>Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="263"/>
+        <location filename="../../src/Dialog_Update.cpp" line="264"/>
         <source>Unknown</source>
         <translation>Okänd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="371"/>
+        <location filename="../../src/Dialog_Update.cpp" line="372"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>Kontrollerar iInternetanslutningen, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="391"/>
-        <location filename="../../src/Dialog_Update.cpp" line="983"/>
+        <location filename="../../src/Dialog_Update.cpp" line="392"/>
+        <location filename="../../src/Dialog_Update.cpp" line="984"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>Datorn verkar inte vara ansluten till Internet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="394"/>
-        <location filename="../../src/Dialog_Update.cpp" line="986"/>
+        <location filename="../../src/Dialog_Update.cpp" line="395"/>
+        <location filename="../../src/Dialog_Update.cpp" line="987"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Tillse att datorn är ansluten till Internet och försök igen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="452"/>
+        <location filename="../../src/Dialog_Update.cpp" line="453"/>
         <source>Network connectivity test has failed!</source>
         <translation>Anslutningskontrollen misslyckades!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="455"/>
+        <location filename="../../src/Dialog_Update.cpp" line="456"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation>Tillse att Internetuppkopplingen fungerar korrekt och försök igen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="469"/>
+        <location filename="../../src/Dialog_Update.cpp" line="470"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>Söker nya uppdateringar, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="524"/>
+        <location filename="../../src/Dialog_Update.cpp" line="525"/>
         <source>Failed to fetch update information from server!</source>
         <translation>Kunde inte hämta uppdateringsinformation från servern!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="529"/>
+        <location filename="../../src/Dialog_Update.cpp" line="530"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>Uppdateringsservern kan vara upptagen. Försök senare.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="541"/>
+        <location filename="../../src/Dialog_Update.cpp" line="542"/>
         <source>More information available at:</source>
         <translation>Mer information hittas på:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="547"/>
+        <location filename="../../src/Dialog_Update.cpp" line="548"/>
         <source>A new version of LameXP is available!</source>
         <translation>En ny version av LameXP finns tillgänglig!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="549"/>
+        <location filename="../../src/Dialog_Update.cpp" line="550"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>Vi rekommenderar alla användare att installera denna uppdatering så snart som möjligt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="558"/>
+        <location filename="../../src/Dialog_Update.cpp" line="559"/>
         <source>No new updates available at this time.</source>
         <translation>Det finns inga nya uppdateringar.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="560"/>
+        <location filename="../../src/Dialog_Update.cpp" line="561"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>Din version av LameXP är uppdaterad. Kontrollera regelbundet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="569"/>
+        <location filename="../../src/Dialog_Update.cpp" line="570"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>Din version verkar vara nyare än senaste &apos;Release&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="571"/>
+        <location filename="../../src/Dialog_Update.cpp" line="572"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>Det innebär normalt att du använder en beta-version av LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="864"/>
+        <location filename="../../src/Dialog_Update.cpp" line="865"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>Uppdatering laddas ner, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="909"/>
+        <location filename="../../src/Dialog_Update.cpp" line="910"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Uppdatering klar att installeras. Programmet kommer att avslutas...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="917"/>
+        <location filename="../../src/Dialog_Update.cpp" line="918"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Uppdateringen misslyckades. Försök igen, eller ladda ner manuellt!</translation>
     </message>
