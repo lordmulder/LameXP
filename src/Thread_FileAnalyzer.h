@@ -25,12 +25,16 @@
 
 #include <QThread>
 #include <QStringList>
+#include <QHash>
+#include <QSet>
 
 class AudioFileModel;
 class QFile;
 class QDir;
 class QFileInfo;
 class LockedFile;
+class QThreadPool;
+class QElapsedTimer;
 
 ////////////////////////////////////////////////////////////
 // Splash Thread
@@ -44,7 +48,7 @@ public:
 	FileAnalyzer(const QStringList &inputFiles);
 	~FileAnalyzer(void);
 	void run();
-	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
+	bool getSuccess(void) { return (!isRunning()) && (!m_bAborted) && m_bSuccess; }
 
 	unsigned int filesAccepted(void);
 	unsigned int filesRejected(void);
@@ -59,20 +63,41 @@ signals:
 	void progressMaxChanged(unsigned int);
 
 public slots:
-	void abortProcess(void) { m_abortFlag = true; }
+	void abortProcess(void) { m_bAborted = true; exit(-1); }
+
+private slots:
+	void initializeTasks(void);
+	void taskFileAnalyzed(const unsigned int taskId, const int fileType, const AudioFileModel &file);
+	void taskThreadFinish(const unsigned int);
 
 private:
-	const AudioFileModel analyzeFile(const QString &filePath, int *type);
+	bool analyzeNextFile(void);
+	void handlePlaylistFiles(void);
 	bool createTemplate(void);
+
+	QThreadPool *m_pool;
+	QElapsedTimer *m_timer;
+
+	unsigned int m_tasksCounterNext;
+	unsigned int m_tasksCounterDone;
+	unsigned int m_completedCounter;
+
+	unsigned int m_filesAccepted;
+	unsigned int m_filesRejected;
+	unsigned int m_filesDenied;
+	unsigned int m_filesDummyCDDA;
+	unsigned int m_filesCueSheet;
 
 	QStringList m_inputFiles;
 	LockedFile *m_templateFile;
-	
-	volatile bool m_abortFlag;
+
+	QSet<unsigned int> m_completedTaskIds;
+	QSet<unsigned int> m_runningTaskIds;
+	QHash<unsigned int, AudioFileModel> m_completedFiles;
 
 	static const char *g_tags_gen[];
 	static const char *g_tags_aud[];
 
-	bool m_bAborted;
-	bool m_bSuccess;
+	volatile bool m_bAborted;
+	volatile bool m_bSuccess;
 };

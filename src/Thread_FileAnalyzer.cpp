@@ -25,6 +25,7 @@
 #include "LockedFile.h"
 #include "Model_AudioFile.h"
 #include "Thread_FileAnalyzer_Task.h"
+#include "PlaylistImporter.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -35,6 +36,8 @@
 #include <QImage>
 #include <QThreadPool>
 #include <QTime>
+#include <QElapsedTimer>
+#include <QTimer>
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -42,12 +45,22 @@
 
 FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 :
-	m_abortFlag(false),
+	m_tasksCounterNext(0),
+	m_tasksCounterDone(0),
 	m_inputFiles(inputFiles),
-	m_templateFile(NULL)
+	m_templateFile(NULL),
+	m_pool(NULL)
 {
 	m_bSuccess = false;
 	m_bAborted = false;
+
+	m_filesAccepted = 0;
+	m_filesRejected = 0;
+	m_filesDenied = 0;
+	m_filesDummyCDDA = 0;
+	m_filesCueSheet = 0;
+
+	m_timer = new QElapsedTimer;
 }
 
 FileAnalyzer::~FileAnalyzer(void)
@@ -59,7 +72,13 @@ FileAnalyzer::~FileAnalyzer(void)
 		if(QFile::exists(templatePath)) QFile::remove(templatePath);
 	}
 	
-	AnalyzeTask::reset();
+	if(!m_pool->waitForDone(2500))
+	{
+		qWarning("There are still running tasks in the thread pool!");
+	}
+
+	LAMEXP_DELETE(m_pool);
+	LAMEXP_DELETE(m_timer);
 }
 
 ////////////////////////////////////////////////////////////
@@ -109,18 +128,29 @@ const char *FileAnalyzer::g_tags_aud[] =
 
 void FileAnalyzer::run()
 {
-	m_abortFlag = false;
-
-	m_bAborted = false;
 	m_bSuccess = false;
 
-	int nFiles = m_inputFiles.count();
+	m_tasksCounterNext = 0;
+	m_tasksCounterDone = 0;
+	m_completedCounter = 0;
 
-	emit progressMaxChanged(nFiles);
+	m_completedFiles.clear();
+	m_completedTaskIds.clear();
+	m_runningTaskIds.clear();
+
+	m_filesAccepted = 0;
+	m_filesRejected = 0;
+	m_filesDenied = 0;
+	m_filesDummyCDDA = 0;
+	m_filesCueSheet = 0;
+
+	m_timer->invalidate();
+
+	//Update progress
+	emit progressMaxChanged(m_inputFiles.count());
 	emit progressValChanged(0);
 
-	lamexp_natural_string_sort(m_inputFiles, true); //.sort();
-
+	//Create MediaInfo template file
 	if(!m_templateFile)
 	{
 		if(!createTemplate())
@@ -130,74 +160,105 @@ void FileAnalyzer::run()
 		}
 	}
 
-	AnalyzeTask::reset();
-	QThreadPool *pool = new QThreadPool();
-	QThread::msleep(333);
+	//Handle playlist files
+	lamexp_natural_string_sort(m_inputFiles, true);
+	handlePlaylistFiles();
+	lamexp_natural_string_sort(m_inputFiles, true);
 
-	pool->setMaxThreadCount(qBound(2, ((QThread::idealThreadCount() * 3) / 2), 12));
+	const unsigned int nFiles = m_inputFiles.count();
 
-	while(!(m_inputFiles.isEmpty() || m_bAborted))
-	{
-		while(!(m_inputFiles.isEmpty() || m_bAborted))
-		{
-			if(!AnalyzeTask::waitForFreeSlot(&m_abortFlag))
-			{
-				qWarning("Timeout in AnalyzeTask::waitForFreeSlot() !!!");
-			}
+	//Update progress
+	emit progressMaxChanged(nFiles);
 
-			if(m_abortFlag)
-			{
-				MessageBeep(MB_ICONERROR);
-				m_bAborted = true;
-				break;
-			}
-			
-			if(!m_bAborted)
-			{
-				const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
+	//Create thread pool
+	if(!m_pool) m_pool = new QThreadPool();
+	m_pool->setMaxThreadCount(qBound(2, ((QThread::idealThreadCount() * 3) / 2), 12));
 
-				AnalyzeTask *task = new AnalyzeTask(currentFile, m_templateFile->filePath(), &m_abortFlag);
-				connect(task, SIGNAL(fileSelected(QString)), this, SIGNAL(fileSelected(QString)), Qt::DirectConnection);
-				connect(task, SIGNAL(progressValChanged(unsigned int)), this, SIGNAL(progressValChanged(unsigned int)), Qt::DirectConnection);
-				connect(task, SIGNAL(progressMaxChanged(unsigned int)), this, SIGNAL(progressMaxChanged(unsigned int)), Qt::DirectConnection);
-				connect(task, SIGNAL(fileAnalyzed(AudioFileModel)), this, SIGNAL(fileAnalyzed(AudioFileModel)), Qt::DirectConnection);
+	//Start first N threads
+	QTimer::singleShot(0, this, SLOT(initializeTasks()));
 
-				pool->start(task);
+	//Start event processing
+	this->exec();
 
-				if(int count = AnalyzeTask::getAdditionalFiles(m_inputFiles))
-				{
-					emit progressMaxChanged(nFiles += count);
-				}
-			}
-		}
+	//Wait for pending tasks to complete
+	m_pool->waitForDone();
 
-		//One of the Analyze tasks may have gathered additional files from a playlist!
-		if(!m_bAborted)
-		{
-			pool->waitForDone();
-			if(int count = AnalyzeTask::getAdditionalFiles(m_inputFiles))
-			{
-				emit progressMaxChanged(nFiles += count);
-			}
-		}
-	}
-	
-	pool->waitForDone();
-	LAMEXP_DELETE(pool);
-
+	//Was opertaion aborted?
 	if(m_bAborted)
 	{
 		qWarning("Operation cancelled by user!");
 		return;
 	}
 	
+	//Update progress
+	emit progressValChanged(nFiles);
+
+	//Emit pending files (this should not be required though!)
+	if(!m_completedFiles.isEmpty())
+	{
+		qWarning("FileAnalyzer: Pending file information found after last thread terminated!");
+		QList<unsigned int> keys = m_completedFiles.keys(); qSort(keys);
+		while(!keys.isEmpty())
+		{
+			emit fileAnalyzed(m_completedFiles.take(keys.takeFirst()));
+		}
+	}
+
 	qDebug("All files added.\n");
 	m_bSuccess = true;
+
+	QThread::msleep(333);
 }
 
 ////////////////////////////////////////////////////////////
 // Privtae Functions
 ////////////////////////////////////////////////////////////
+
+bool FileAnalyzer::analyzeNextFile(void)
+{
+	if(!(m_inputFiles.isEmpty() || m_bAborted))
+	{
+		const unsigned int taskId = m_tasksCounterNext++;
+		const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
+
+		if((!m_timer->isValid()) || (m_timer->elapsed() >= 250))
+		{
+			emit fileSelected(QFileInfo(currentFile).fileName());
+			m_timer->restart();
+		}
+	
+		AnalyzeTask *task = new AnalyzeTask(taskId, currentFile, m_templateFile->filePath(), &m_bAborted);
+		connect(task, SIGNAL(fileAnalyzed(const unsigned int, const int, AudioFileModel)), this, SLOT(taskFileAnalyzed(unsigned int, const int, AudioFileModel)), Qt::QueuedConnection);
+		connect(task, SIGNAL(taskCompleted(const unsigned int)), this, SLOT(taskThreadFinish(const unsigned int)), Qt::QueuedConnection);
+		m_runningTaskIds.insert(taskId); m_pool->start(task);
+
+		return true;
+	}
+
+	return false;
+}
+
+void FileAnalyzer::handlePlaylistFiles(void)
+{
+	QStringList importedFiles;
+	while(!m_inputFiles.isEmpty())
+	{
+		const QString currentFile = m_inputFiles.takeFirst();
+		if(!PlaylistImporter::importPlaylist(importedFiles, currentFile))
+		{
+			importedFiles << currentFile;
+		}
+	}
+
+	while(!importedFiles.isEmpty())
+	{
+		const QString currentFile = importedFiles.takeFirst();
+		if(!m_inputFiles.contains(currentFile, Qt::CaseInsensitive))
+		{
+			m_inputFiles << currentFile;
+		}
+	}
+}
 
 bool FileAnalyzer::createTemplate(void)
 {
@@ -252,32 +313,104 @@ bool FileAnalyzer::createTemplate(void)
 }
 
 ////////////////////////////////////////////////////////////
+// Slot Functions
+////////////////////////////////////////////////////////////
+
+void FileAnalyzer::initializeTasks(void)
+{
+	for(int i = 0; i < m_pool->maxThreadCount(); i++)
+	{
+		if(!analyzeNextFile()) break;
+	}
+}
+
+void FileAnalyzer::taskFileAnalyzed(const unsigned int taskId, const int fileType, const AudioFileModel &file)
+{
+	m_completedTaskIds.insert(taskId);
+
+	switch(fileType)
+	{
+	case AnalyzeTask::fileTypeNormal:
+		m_filesAccepted++;
+		if(m_tasksCounterDone == taskId)
+		{
+			emit fileAnalyzed(file);
+			m_tasksCounterDone++;
+		}
+		else
+		{
+			m_completedFiles.insert(taskId, file);
+		}
+		break;
+	case AnalyzeTask::fileTypeCDDA:
+		m_filesDummyCDDA++;
+		break;
+	case AnalyzeTask::fileTypeDenied:
+		m_filesDenied++;
+		break;
+	case AnalyzeTask::fileTypeCueSheet:
+		m_filesCueSheet++;
+		break;
+	case AnalyzeTask::fileTypeUnknown:
+		m_filesRejected++;
+		break;
+	default:
+		throw "Unknown file type identifier!";
+	}
+
+	//Emit all pending files
+	while(m_completedTaskIds.contains(m_tasksCounterDone))
+	{
+		if(m_completedFiles.contains(m_tasksCounterDone))
+		{
+			emit fileAnalyzed(m_completedFiles.take(m_tasksCounterDone));
+		}
+		m_completedTaskIds.remove(m_tasksCounterDone);
+		m_tasksCounterDone++;
+	}
+}
+
+void FileAnalyzer::taskThreadFinish(const unsigned int taskId)
+{
+	m_runningTaskIds.remove(taskId);
+	emit progressValChanged(++m_completedCounter);
+
+	if(!analyzeNextFile())
+	{
+		if(m_runningTaskIds.empty())
+		{
+			QTimer::singleShot(0, this, SLOT(quit())); //Stop event processing, if all threads have completed!
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////
 // Public Functions
 ////////////////////////////////////////////////////////////
 
 unsigned int FileAnalyzer::filesAccepted(void)
 {
-	return AnalyzeTask::filesAccepted();
+	return m_filesAccepted;
 }
 
 unsigned int FileAnalyzer::filesRejected(void)
 {
-	return AnalyzeTask::filesRejected();
+	return m_filesRejected;
 }
 
 unsigned int FileAnalyzer::filesDenied(void)
 {
-	return AnalyzeTask::filesDenied();
+	return m_filesDenied;
 }
 
 unsigned int FileAnalyzer::filesDummyCDDA(void)
 {
-	return AnalyzeTask::filesDummyCDDA();
+	return m_filesDummyCDDA;
 }
 
 unsigned int FileAnalyzer::filesCueSheet(void)
 {
-	return AnalyzeTask::filesCueSheet();
+	return m_filesCueSheet;
 }
 
 ////////////////////////////////////////////////////////////
