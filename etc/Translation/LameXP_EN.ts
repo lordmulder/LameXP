@@ -31,7 +31,7 @@
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="727"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="730"/>
         <source>%n file(s) have been rejected, because read access was not granted!</source>
         <translation>
             <numerusform>%n file have been rejected, because read access was not granted!</numerusform>
@@ -39,7 +39,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="731"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="734"/>
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
         <translation>
             <numerusform>%n file have been rejected, because they are dummy CDDA files!</numerusform>
@@ -47,7 +47,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="735"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="738"/>
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
         <translation>
             <numerusform>%n file have been rejected, because they appear to be Cue Sheet images!</numerusform>
@@ -55,7 +55,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="739"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="742"/>
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
         <translation>
             <numerusform>%n file have been rejected, because the file format could not be recognized!</numerusform>
@@ -63,7 +63,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3799"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3802"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n Instance</numerusform>
@@ -74,7 +74,7 @@
 <context>
     <name>ProcessingDialog</name>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="564"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="569"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Encoding: %n file of %1 completed so far, please wait...</numerusform>
@@ -82,7 +82,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="602"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="607"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>Process was aborted by the user after %n file!</numerusform>
@@ -90,7 +90,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="630"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="635"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 of %n file failed (%2). Double-click failed items for detailed information!</numerusform>
@@ -98,7 +98,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="630"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="635"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n file skipped</numerusform>
@@ -106,7 +106,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="634"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="639"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 of %n file failed. Double-click failed items for detailed information!</numerusform>
@@ -114,7 +114,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="648"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="653"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>All files completed successfully. Skipped %n file.</numerusform>
@@ -122,7 +122,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1311"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1316"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n hour</numerusform>
@@ -130,8 +130,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1312"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1316"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1317"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1321"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n minute</numerusform>
@@ -139,8 +139,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1317"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1321"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1322"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1326"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n second</numerusform>
@@ -148,7 +148,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1322"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1327"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n millisecond</numerusform>
