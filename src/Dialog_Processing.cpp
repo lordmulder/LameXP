@@ -61,12 +61,6 @@
 #include <QResizeEvent>
 #include <QTime>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <MMSystem.h>
-
 #include <math.h>
 #include <float.h>
 
@@ -358,15 +352,12 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 	{
 		static const char *NA = " N/A";
 	
-		setCloseButtonEnabled(false);
+		lamexp_enable_close_button(this, false);
 		ui->button_closeDialog->setEnabled(false);
 		ui->button_AbortProcess->setEnabled(false);
 		m_systemTray->setVisible(true);
-	
-		if(!SetPriorityClass(GetCurrentProcess(), ABOVE_NORMAL_PRIORITY_CLASS))
-		{
-			SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
-		}
+		
+		lamexp_change_process_priority(1);
 
 		ui->label_cpu->setText(NA);
 		ui->label_disk->setText(NA);
@@ -539,11 +530,7 @@ void ProcessingDialog::initEncoding(void)
 		qApp->processEvents();
 	}
 
-	LARGE_INTEGER counter;
-	if(QueryPerformanceCounter(&counter))
-	{
-		m_timerStart = counter.QuadPart;
-	}
+	m_timerStart = lamexp_perfcounter_value();
 }
 
 void ProcessingDialog::abortEncoding(bool force)
@@ -610,17 +597,18 @@ void ProcessingDialog::doneEncoding(void)
 		QApplication::processEvents();
 		if(m_settings->soundsEnabled() && !m_forcedAbort)
 		{
-			PlaySound(MAKEINTRESOURCE(IDR_WAVE_ABORTED), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+			lamexp_play_sound(IDR_WAVE_ABORTED, false);
 		}
 	}
 	else
 	{
-		LARGE_INTEGER counter, frequency;
-		if(QueryPerformanceCounter(&counter) && QueryPerformanceFrequency(&frequency))
+		const __int64 counter = lamexp_perfcounter_value();
+		const __int64 frequency  = lamexp_perfcounter_frequ();
+		if((counter >= 0I64) && (frequency >= 0))
 		{
-			if((m_timerStart > 0I64) && (frequency.QuadPart > 0I64) && (m_timerStart < counter.QuadPart))
+			if((m_timerStart >= 0I64) && (m_timerStart < counter))
 			{
-				double timeElapsed = static_cast<double>(counter.QuadPart - m_timerStart) / static_cast<double>(frequency.QuadPart);
+				double timeElapsed = static_cast<double>(counter - m_timerStart) / static_cast<double>(frequency);
 				m_progressModel->addSystemMessage(tr("Process finished after %1.").arg(time2text(timeElapsed)), ProgressModel::SysMsg_Performance);
 			}
 		}
@@ -641,7 +629,7 @@ void ProcessingDialog::doneEncoding(void)
 			m_systemTray->showMessage(tr("LameXP - Error"), tr("At least one file has failed!"), QSystemTrayIcon::Critical);
 			m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 			QApplication::processEvents();
-			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_ERROR), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+			if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, false);
 		}
 		else
 		{
@@ -659,11 +647,11 @@ void ProcessingDialog::doneEncoding(void)
 			m_systemTray->showMessage(tr("LameXP - Done"), tr("All files completed successfully."), QSystemTrayIcon::Information);
 			m_systemTray->setIcon(QIcon(":/icons/cd_add.png"));
 			QApplication::processEvents();
-			if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_SUCCESS), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+			if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_SUCCESS, false);
 		}
 	}
 	
-	setCloseButtonEnabled(true);
+	lamexp_enable_close_button(this, true);
 	ui->button_closeDialog->setEnabled(true);
 	ui->button_AbortProcess->setEnabled(false);
 	ui->checkBox_shutdownComputer->setEnabled(false);
@@ -741,7 +729,7 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 	}
 	else
 	{
-		MessageBeep(MB_ICONWARNING);
+		lamexp_beep(lamexp_beep_warning);
 	}
 }
 
@@ -781,7 +769,7 @@ void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 
 	if(filePath.isEmpty())
 	{
-		MessageBeep(MB_ICONWARNING);
+		lamexp_beep(lamexp_beep_warning);
 		return;
 	}
 
@@ -812,7 +800,7 @@ void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 	else
 	{
 		qWarning("File not found: %s", filePath.toLatin1().constData());
-		MessageBeep(MB_ICONERROR);
+		lamexp_beep(lamexp_beep_error);
 	}
 }
 
@@ -1204,17 +1192,11 @@ AudioFileModel ProcessingDialog::updateMetaInfo(const AudioFileModel &audioFile)
 	return result;
 }
 
-void ProcessingDialog::setCloseButtonEnabled(bool enabled)
-{
-	HMENU hMenu = GetSystemMenu((HWND) winId(), FALSE);
-	EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | (enabled ? MF_ENABLED : MF_GRAYED));
-}
-
 void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason reason)
 {
 	if(reason == QSystemTrayIcon::DoubleClick)
 	{
-		SetForegroundWindow(reinterpret_cast<HWND>(this->winId()));
+		lamexp_bring_to_front(this);
 	}
 }
 
@@ -1271,7 +1253,7 @@ bool ProcessingDialog::shutdownComputer(void)
 	if(m_settings->soundsEnabled())
 	{
 		QApplication::setOverrideCursor(Qt::WaitCursor);
-		PlaySound(MAKEINTRESOURCE(IDR_WAVE_SHUTDOWN), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+		lamexp_play_sound(IDR_WAVE_SHUTDOWN, false);
 		QApplication::restoreOverrideCursor();
 	}
 
@@ -1295,7 +1277,7 @@ bool ProcessingDialog::shutdownComputer(void)
 		progressDialog.setLabelText(text.arg(iTimeout-i));
 		if(iTimeout-i == 3) progressDialog.setCancelButton(NULL);
 		QApplication::processEvents();
-		PlaySound(MAKEINTRESOURCE((i < iTimeout) ? IDR_WAVE_BEEP : IDR_WAVE_BEEP_LONG), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+		lamexp_play_sound(((i < iTimeout) ? IDR_WAVE_BEEP : IDR_WAVE_BEEP_LONG), false);
 	}
 	
 	progressDialog.close();

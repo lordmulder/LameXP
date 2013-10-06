@@ -39,11 +39,6 @@
 #include <QMutex>
 #include <QSet>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 ////////////////////////////////////////////////////////////
 // SettingsCache Class
 ////////////////////////////////////////////////////////////
@@ -540,7 +535,7 @@ QString SettingsModel::initDirectory(const QString &path) const
 		for(int i = 0; i < 32; i++)
 		{
 			if(QDir(path).mkpath(".")) break;
-			Sleep(1);
+			lamexp_sleep(1);
 		}
 	}
 

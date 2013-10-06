@@ -73,13 +73,6 @@
 #include <QResource>
 #include <QScrollBar>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <MMSystem.h>
-#include <ShellAPI.h>
-
 ////////////////////////////////////////////////////////////
 // Helper macros
 ////////////////////////////////////////////////////////////
@@ -88,7 +81,7 @@
 { \
 	if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
 	{ \
-		MessageBeep(MB_ICONEXCLAMATION); \
+		lamexp_beep(lamexp_beep_warning); \
 		return; \
 	} \
 } \
@@ -168,7 +161,7 @@ while(0)
 //#define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
 
-static const DWORD IDM_ABOUTBOX = 0xEFF0;
+static const unsigned int IDM_ABOUTBOX = 0xEFF0;
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -204,11 +197,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabPageChanged(int)));
 
 	//Add system menu
-	if(HMENU hMenu = ::GetSystemMenu(winId(), FALSE))
-	{
-		AppendMenuW(hMenu, MF_SEPARATOR, 0, 0);
-		AppendMenuW(hMenu, MF_STRING, IDM_ABOUTBOX, L"About...");
-	}
+	lamexp_append_sysmenu(this, IDM_ABOUTBOX, "About...");
 
 	//--------------------------------
 	// Setup "Source" tab
@@ -758,13 +747,13 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 	m_banner->show(tr("Scanning folder(s) for files, please wait..."));
 	
 	QApplication::processEvents();
-	GetAsyncKeyState(VK_ESCAPE);
+	lamexp_check_escape_state();
 
 	while(!folderInfoList.isEmpty())
 	{
-		if(GetAsyncKeyState(VK_ESCAPE) & 0x0001)
+		if(lamexp_check_escape_state())
 		{
-			MessageBeep(MB_ICONERROR);
+			lamexp_beep(lamexp_beep_error);
 			qWarning("Operation cancelled by user!");
 			fileList.clear();
 			break;
@@ -1022,10 +1011,7 @@ void MainWindow::changeEvent(QEvent *e)
 		}
 
 		//Translate system menu
-		if(HMENU hMenu = ::GetSystemMenu(winId(), FALSE))
-		{
-			ModifyMenu(hMenu, IDM_ABOUTBOX, MF_STRING | MF_BYCOMMAND, IDM_ABOUTBOX, QWCHAR(ui->buttonAbout->text()));
-		}
+		lamexp_update_sysmenu(this, IDM_ABOUTBOX, ui->buttonAbout->text());
 			
 		//Force resize, if needed
 		tabPageChanged(ui->tabWidget->currentIndex());
@@ -1105,7 +1091,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 	if(m_banner->isVisible() || m_delayedFileTimer->isActive())
 	{
-		MessageBeep(MB_ICONEXCLAMATION);
+		lamexp_beep(lamexp_beep_warning);
 		event->ignore();
 	}
 	
@@ -1150,7 +1136,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 	if(e->modifiers().testFlag(Qt::ControlModifier) && (e->key() == Qt::Key_F5))
 	{
 		initializeTranslation();
-		MessageBeep(MB_ICONINFORMATION);
+		lamexp_beep(lamexp_beep_info);
 		return;
 	}
 
@@ -1215,7 +1201,7 @@ bool MainWindow::event(QEvent *e)
 
 bool MainWindow::winEvent(MSG *message, long *result)
 {
-	if((message->message == WM_SYSCOMMAND) && ((message->wParam & 0xFFF0) == IDM_ABOUTBOX))
+	if(lamexp_check_sysmenu_msg(message, IDM_ABOUTBOX))
 	{
 		QTimer::singleShot(0, ui->buttonAbout, SLOT(click()));
 		*result = 0;
@@ -1268,7 +1254,7 @@ void MainWindow::windowShown(void)
 			m_settings->licenseAccepted(++iAccepted);
 			m_settings->syncNow();
 			QApplication::processEvents();
-			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+			lamexp_play_sound(IDR_WAVE_WHAMMY, false);
 			QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
 			QFileInfo uninstallerInfo = QFileInfo(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()));
 			if(uninstallerInfo.exists())
@@ -1277,15 +1263,14 @@ void MainWindow::windowShown(void)
 				QString uninstallerPath = uninstallerInfo.canonicalFilePath();
 				for(int i = 0; i < 3; i++)
 				{
-					HINSTANCE res = ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"open", QWCHAR(QDir::toNativeSeparators(uninstallerPath)), L"/Force", QWCHAR(QDir::toNativeSeparators(uninstallerDir)), SW_SHOWNORMAL);
-					if(reinterpret_cast<int>(res) > 32) break;
+					if(lamexp_exec_shell(this, QDir::toNativeSeparators(uninstallerPath), "/Force", QDir::toNativeSeparators(uninstallerDir))) break;
 				}
 			}
 			QApplication::quit();
 			return;
 		}
 		
-		PlaySound(MAKEINTRESOURCE(IDR_WAVE_WOOHOO), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+		lamexp_play_sound(IDR_WAVE_WOOHOO, false);
 		m_settings->licenseAccepted(1);
 		m_settings->syncNow();
 		if(lamexp_version_demo()) showAnnounceBox();
@@ -1297,7 +1282,7 @@ void MainWindow::windowShown(void)
 		if(lamexp_current_date_safe() >= lamexp_version_expires())
 		{
 			qWarning("Binary has expired !!!");
-			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+			lamexp_play_sound(IDR_WAVE_WHAMMY, false);
 			if(QMessageBox::warning(this, tr("LameXP - Expired"), QString("%1<br>%2").arg(NOBR(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate))), NOBR(tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
 				checkForUpdates();
@@ -1339,7 +1324,7 @@ void MainWindow::windowShown(void)
 			return;
 		default:
 			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
-			PlaySound(MAKEINTRESOURCE(IDR_WAVE_WAITING), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+			lamexp_play_sound(IDR_WAVE_WAITING, true);
 			m_banner->show(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
 		}
@@ -1542,7 +1527,7 @@ void MainWindow::encodeButtonClicked(void)
 	{
 		QStringList tempFolderParts = tempFolder.split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
 		tempFolderParts.takeLast();
-		if(m_settings->soundsEnabled()) PlaySound(MAKEINTRESOURCE(IDR_WAVE_WHAMMY), GetModuleHandle(NULL), SND_RESOURCE | SND_SYNC);
+		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_WHAMMY, false);
 		QString lowDiskspaceMsg = QString("%1<br>%2<br><br>%3<br>%4<br>").arg
 		(
 			NOBR(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier))),
@@ -2365,70 +2350,17 @@ void MainWindow::sourceFilesScrollbarMoved(int)
  */
 void MainWindow::previewContextActionTriggered(void)
 {
-	const static wchar_t *registryPrefix[2] = { L"SOFTWARE\\", L"SOFTWARE\\Wow6432Node\\" };
-	const static wchar_t *registryKeys[3] = 
-	{
-		L"Microsoft\\Windows\\CurrentVersion\\Uninstall\\{97D341C8-B0D1-4E4A-A49A-C30B52F168E9}",
-		L"Microsoft\\Windows\\CurrentVersion\\Uninstall\\{DB9E4EAB-2717-499F-8D56-4CC8A644AB60}",
-		L"foobar2000"
-	};
-	const static wchar_t *appNames[4] = { L"smplayer_portable.exe", L"smplayer.exe", L"MPUI.exe", L"foobar2000.exe" };
-	const static wchar_t *valueNames[2] = { L"InstallLocation", L"InstallDir" };
-
 	QModelIndex index = ui->sourceFileView->currentIndex();
 	if(!index.isValid())
 	{
 		return;
 	}
 
-	for(size_t i = 0; i < 3; i++)
+	if(!lamexp_open_media_file(m_fileListModel->getFile(index).filePath()))
 	{
-		for(size_t j = 0; j < 2; j++)
-		{
-			QString mplayerPath;
-			HKEY registryKeyHandle = NULL;
-
-			const QString currentKey = WCHAR2QSTR(registryPrefix[j]).append(WCHAR2QSTR(registryKeys[i]));
-			if(RegOpenKeyExW(HKEY_LOCAL_MACHINE, QWCHAR(currentKey), 0, KEY_READ, &registryKeyHandle) == ERROR_SUCCESS)
-			{
-				for(size_t k = 0; k < 2; k++)
-				{
-					wchar_t Buffer[4096];
-					DWORD BuffSize = sizeof(wchar_t*) * 4096;
-					DWORD DataType = REG_NONE;
-					if(RegQueryValueExW(registryKeyHandle, valueNames[k], 0, &DataType, reinterpret_cast<BYTE*>(Buffer), &BuffSize) == ERROR_SUCCESS)
-					{
-						if((DataType == REG_SZ) || (DataType == REG_EXPAND_SZ) || (DataType == REG_LINK))
-						{
-							mplayerPath = WCHAR2QSTR(Buffer);
-							break;
-						}
-					}
-				}
-				RegCloseKey(registryKeyHandle);
-			}
-
-			if(!mplayerPath.isEmpty())
-			{
-				QDir mplayerDir(mplayerPath);
-				if(mplayerDir.exists())
-				{
-					for(size_t k = 0; k < 4; k++)
-					{
-						if(mplayerDir.exists(WCHAR2QSTR(appNames[k])))
-						{
-							qDebug("Player found at:\n%s\n", mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])).toUtf8().constData());
-							QProcess::startDetached(mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])), QStringList() << QDir::toNativeSeparators(m_fileListModel->getFile(index).filePath()));
-							return;
-						}
-					}
-				}
-			}
-		}
+		qDebug("Player not found, falling back to default application...");
+		QDesktopServices::openUrl(QString("file:///").append(m_fileListModel->getFile(index).filePath()));
 	}
-	
-	qDebug("Player not found, falling back to default application...");
-	QDesktopServices::openUrl(QString("file:///").append(m_fileListModel->getFile(index).filePath()));
 }
 
 /*
@@ -2750,7 +2682,7 @@ void MainWindow::gotoFavoriteFolder(void)
 		}
 		else
 		{
-			MessageBeep(MB_ICONERROR);
+			lamexp_beep(lamexp_beep_error);
 			m_outputFolderFavoritesMenu->removeAction(item);
 			item->deleteLater();
 		}
@@ -2822,7 +2754,7 @@ void MainWindow::makeFolderButtonClicked(void)
 
 			if(folderName.isEmpty())
 			{
-				MessageBeep(MB_ICONERROR);
+				lamexp_beep(lamexp_beep_error);
 				continue;
 			}
 
@@ -2897,7 +2829,7 @@ void MainWindow::showFolderContextActionTriggered(void)
 
 	QString path = QDir::toNativeSeparators(m_fileSystemModel->filePath(ui->outputFolderView->currentIndex()));
 	if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
-	ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
+	lamexp_exec_shell(this, path, true);
 }
 
 /*
@@ -2926,7 +2858,7 @@ void MainWindow::goUpFolderContextActionTriggered(void)
 		}
 		else
 		{
-			MessageBeep(MB_ICONWARNING);
+			lamexp_beep(lamexp_beep_warning);
 		}
 		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
@@ -2947,7 +2879,7 @@ void MainWindow::addFavoriteFolderActionTriggered(void)
 	}
 	else
 	{
-		MessageBeep(MB_ICONWARNING);
+		lamexp_beep(lamexp_beep_warning);
 	}
 
 	m_settings->favoriteOutputFolders(favorites.join("|"));
@@ -3013,7 +2945,7 @@ void MainWindow::outputFolderEditFinished(void)
 	ui->outputFolderLabel->setVisible(true);
 	ui->outputFolderView->setEnabled(true);
 
-	if(!ok) MessageBeep(MB_ICONERROR);
+	if(!ok) lamexp_beep(lamexp_beep_error);
 	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 }
 
@@ -3168,7 +3100,7 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 			{
 				QString path = ui->outputFolderLabel->text();
 				if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
-				ShellExecuteW(reinterpret_cast<HWND>(this->winId()), L"explore", QWCHAR(path), NULL, NULL, SW_SHOW);
+				lamexp_exec_shell(this, path, true);
 			}
 			break;
 		case QEvent::Enter:
@@ -3455,7 +3387,7 @@ void MainWindow::compressionTabEventOccurred(QWidget *sender, QEvent *event)
 	{
 		if(m_settings->soundsEnabled())
 		{
-			PlaySound(MAKEINTRESOURCE(IDR_WAVE_BLAST), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+			lamexp_play_sound(IDR_WAVE_BLAST, true);
 		}
 
 		EncoderRegistry::resetAllEncoders(m_settings);
@@ -3745,7 +3677,7 @@ void MainWindow::renameOutputPatternChanged(const QString &text, bool silent)
 	{
 		if(ui->lineEditRenamePattern->palette().color(QPalette::Text) != Qt::red)
 		{
-			if(!silent) MessageBeep(MB_ICONERROR);
+			if(!silent) lamexp_beep(lamexp_beep_error);
 			SET_TEXT_COLOR(ui->lineEditRenamePattern, Qt::red);
 		}
 	}
@@ -3753,7 +3685,7 @@ void MainWindow::renameOutputPatternChanged(const QString &text, bool silent)
 	{
 		if(ui->lineEditRenamePattern->palette() != QPalette())
 		{
-			if(!silent) MessageBeep(MB_ICONINFORMATION);
+			if(!silent) lamexp_beep(lamexp_beep_info);
 			ui->lineEditRenamePattern->setPalette(QPalette());
 		}
 	}
@@ -3892,13 +3824,13 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac.exe", "--help"); break;
 			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe", ""); break;
 			case SettingsModel::AAC_ENCODER_NERO: showCustomParamsHelpScreen("neroAacEnc.exe", "-help"); break;
-			default: MessageBeep(MB_ICONERROR); break;
+			default: lamexp_beep(lamexp_beep_error); break;
 		}
 	}
 	else if(obj == ui->helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
 	else if(obj == ui->helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
 	else if(obj == ui->helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc.exe", "--help");
-	else MessageBeep(MB_ICONERROR);
+	else lamexp_beep(lamexp_beep_error);
 }
 
 /*
@@ -3909,7 +3841,7 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 	const QString binary = lamexp_lookup_tool(toolName);
 	if(binary.isEmpty())
 	{
-		MessageBeep(MB_ICONERROR);
+		lamexp_beep(lamexp_beep_error);
 		qWarning("customParamsHelpRequested: Binary could not be found!");
 		return;
 	}
@@ -3954,7 +3886,7 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 	if(output.count() < 1)
 	{
 		qWarning("Empty output, cannot show help screen!");
-		MessageBeep(MB_ICONERROR);
+		lamexp_beep(lamexp_beep_error);
 	}
 
 	LogViewDialog *dialog = new LogViewDialog(this);
@@ -3984,7 +3916,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 {
 	if(m_settings->soundsEnabled())
 	{
-		PlaySound(MAKEINTRESOURCE(IDR_WAVE_BLAST), GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC);
+		lamexp_play_sound(IDR_WAVE_BLAST, true);
 	}
 
 	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());

@@ -93,7 +93,6 @@ protected:
 private:
 	Ui::ProcessingDialog *ui; //for Qt UIC
 
-	void setCloseButtonEnabled(bool enabled);
 	void startNextJob(void);
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
 	void writePlayList(void);

@@ -31,11 +31,6 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 #include <float.h>
 #include <limits>
 
@@ -609,7 +604,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		if(application)
 		{
 			application->processEvents();
-			if(lines < 128) Sleep(10);
+			if(lines < 128) lamexp_sleep(10);
 		}
 		
 		if(cueStream.atEnd())
@@ -833,7 +828,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		if(application)
 		{
 			application->processEvents();
-			Sleep(10);
+			lamexp_sleep(10);
 		}
 
 		CueSheetFile *currentFile = m_files.at(i);
@@ -866,7 +861,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			if(application)
 			{
 				application->processEvents();
-				Sleep(10);
+				lamexp_sleep(10);
 			}
 			CueSheetFile *currentFile = m_files.at(i);
 			int nTracks = currentFile->trackCount();

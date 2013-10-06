@@ -39,6 +39,7 @@ class QDate;
 class QTime;
 class QIcon;
 class QWidget;
+class QProcess;
 class LockedFile;
 enum QtMsgType;
 
@@ -86,6 +87,15 @@ typedef struct
 	unsigned int versionMinor;
 }
 lamexp_os_version_t;
+
+//Beep types
+typedef enum
+{
+	lamexp_beep_info = 0,
+	lamexp_beep_warning = 1,
+	lamexp_beep_error = 2
+}
+lamexp_beep_t;
 
 //LameXP version info
 unsigned int lamexp_version_major(void);
@@ -156,7 +166,30 @@ const QString lamexp_clean_filepath(const QString &str);
 void lamexp_seed_rand(void);
 unsigned int lamexp_rand(void);
 QDate lamexp_current_date_safe(void);
+void lamexp_sleep(const unsigned int delay);
+bool lamexp_beep(int beepType);
+bool lamexp_play_sound(const unsigned short uiSoundIdx, const bool bAsync, const wchar_t *alias = NULL);
+bool lamexp_play_sound_file(const QString &library, const unsigned short uiSoundIdx, const bool bAsync);
+bool lamexp_exec_shell(const QWidget *win, const QString &url, const bool explore = false);
+bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &parameters, const QString &directory, const bool explore = false);
+__int64 lamexp_perfcounter_frequ(void);
+__int64 lamexp_perfcounter_value(void);
+bool lamexp_append_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
+bool lamexp_update_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
+bool lamexp_check_sysmenu_msg(void *message, const unsigned int identifier);
+bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
+bool lamexp_check_escape_state(void);
+bool lamexp_change_process_priority(const int priority);
+bool lamexp_change_process_priority(const QProcess *proc, const int priority);
+bool lamexp_change_process_priority(void *hProcess, const int priority);
+bool lamexp_bring_to_front(const QWidget *win);
+bool lamexp_bring_process_to_front(const unsigned long pid);
+bool lamexp_get_connection_state(void);
+unsigned long lamexp_process_id(const QProcess *proc);
+unsigned __int64 lamexp_current_file_time(void);
 void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase);
+bool lamexp_open_media_file(const QString &mediaFilePath);
+QString lamexp_path_to_short(const QString &longPath);
 void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage = NULL);
 
 //Debug-only functions

@@ -21,35 +21,16 @@
 
 #pragma once
 
-#include <QObject>
-
-class QMutex;
 class QProcess;
-class JobObject;
 
-class AbstractTool : public QObject
+class JobObject
 {
-	Q_OBJECT
-
 public:
-	AbstractTool(void);
-	~AbstractTool(void);
-	
-	bool startProcess(QProcess &process, const QString &program, const QStringList &args);
-	static QString commandline2string(const QString &program, const QStringList &arguments);
+	JobObject(void);
+	~JobObject(void);
 
-signals:
-	void statusUpdated(int progress);
-	void messageLogged(const QString &line);
-
-protected:
-	static const int m_processTimeoutInterval = 600000;
+	bool addProcessToJob(const QProcess *proc);
 
 private:
-	static quint64 s_lastLaunchTime;
-	static QMutex s_mutex_startProcess;
-	static unsigned int s_jobObjRefCount;
-	static JobObject *s_jobObject;
-
-	bool m_firstLaunch;
+	void *m_hJobObject;
 };

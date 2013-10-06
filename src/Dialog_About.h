@@ -85,5 +85,4 @@ private:
 	void initLicenseTab(void);
 
 	QString makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo = QString());
-	bool playResoureSound(const QString &library, const unsigned long soundId, const bool async);
 };

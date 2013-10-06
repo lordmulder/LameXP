@@ -25,6 +25,9 @@
 #define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#include <MMSystem.h>
+#include <ShellAPI.h>
+#include <WinInet.h>
 
 //Qt includes
 #include <QApplication>
@@ -53,6 +56,7 @@
 #include <QReadWriteLock>
 #include <QReadLocker>
 #include <QWriteLocker>
+#include <QProcess>
 
 //LameXP includes
 #define LAMEXP_INC_CONFIG
@@ -2455,6 +2459,382 @@ static bool lamexp_natural_string_sort_helper_fold_case(const QString &str1, con
 void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase)
 {
 	qSort(list.begin(), list.end(), bIgnoreCase ? lamexp_natural_string_sort_helper_fold_case : lamexp_natural_string_sort_helper);
+}
+
+/*
+ * Suspend calling thread for N milliseconds
+ */
+void lamexp_sleep(const unsigned int delay)
+{
+	Sleep(delay);
+}
+
+bool lamexp_beep(int beepType)
+{
+	switch(beepType)
+	{
+		case lamexp_beep_info:    return MessageBeep(MB_ICONASTERISK) == TRUE;    break;
+		case lamexp_beep_warning: return MessageBeep(MB_ICONEXCLAMATION) == TRUE; break;
+		case lamexp_beep_error:   return MessageBeep(MB_ICONHAND) == TRUE;        break;
+		default: return false;
+	}
+}
+
+/*
+ * Play a sound (from resources)
+ */
+bool lamexp_play_sound(const unsigned short uiSoundIdx, const bool bAsync, const wchar_t *alias)
+{
+	if(alias)
+	{
+		return PlaySound(alias, GetModuleHandle(NULL), (SND_ALIAS | (bAsync ? SND_ASYNC : SND_SYNC))) == TRUE;
+	}
+	else
+	{
+		return PlaySound(MAKEINTRESOURCE(uiSoundIdx), GetModuleHandle(NULL), (SND_RESOURCE | (bAsync ? SND_ASYNC : SND_SYNC))) == TRUE;
+	}
+}
+
+/*
+ * Play a sound (from resources)
+ */
+bool lamexp_play_sound_file(const QString &library, const unsigned short uiSoundIdx, const bool bAsync)
+{
+	bool result = false;
+	HMODULE module = NULL;
+
+	QFileInfo libraryFile(library);
+	if(!libraryFile.isAbsolute())
+	{
+		unsigned int buffSize = GetSystemDirectoryW(NULL, NULL) + 1;
+		wchar_t *buffer = (wchar_t*) _malloca(buffSize * sizeof(wchar_t));
+		unsigned int result = GetSystemDirectory(buffer, buffSize);
+		if(result > 0 && result < buffSize)
+		{
+			libraryFile.setFile(QString("%1/%2").arg(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(buffer))), library));
+		}
+		_freea(buffer);
+	}
+
+	module = LoadLibraryW(QWCHAR(QDir::toNativeSeparators(libraryFile.absoluteFilePath())));
+	if(module)
+	{
+		result = (PlaySound(MAKEINTRESOURCE(uiSoundIdx), module, (SND_RESOURCE | (bAsync ? SND_ASYNC : SND_SYNC))) == TRUE);
+		FreeLibrary(module);
+	}
+
+	return result;
+}
+
+/*
+ * Open file using the shell
+ */
+bool lamexp_exec_shell(const QWidget *win, const QString &url, const bool explore)
+{
+	return lamexp_exec_shell(win, url, QString(), QString(), explore);
+}
+
+/*
+ * Open file using the shell (with parameters)
+ */
+bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &parameters, const QString &directory, const bool explore)
+{
+	return ((int) ShellExecuteW(((win) ? win->winId() : NULL), (explore ? L"explore" : L"open"), QWCHAR(url), ((!parameters.isEmpty()) ? QWCHAR(parameters) : NULL), ((!directory.isEmpty()) ? QWCHAR(directory) : NULL), SW_SHOW)) > 32;
+}
+
+	/*
+ * Query value of the performance counter
+ */
+__int64 lamexp_perfcounter_value(void)
+{
+	LARGE_INTEGER counter;
+	if(QueryPerformanceCounter(&counter) == TRUE)
+	{
+		return counter.QuadPart;
+	}
+	return -1;
+}
+
+/*
+ * Query frequency of the performance counter
+ */
+__int64 lamexp_perfcounter_frequ(void)
+{
+	LARGE_INTEGER frequency;
+	if(QueryPerformanceFrequency(&frequency) == TRUE)
+	{
+		return frequency.QuadPart;
+	}
+	return -1;
+}
+
+/*
+ * Insert entry to the window's system menu
+ */
+bool lamexp_append_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text)
+{
+	bool ok = false;
+	
+	if(HMENU hMenu = GetSystemMenu(win->winId(), FALSE))
+	{
+		ok = (AppendMenuW(hMenu, MF_SEPARATOR, 0, 0) == TRUE);
+		ok = (AppendMenuW(hMenu, MF_STRING, identifier, QWCHAR(text)) == TRUE);
+	}
+
+	return ok;
+}
+
+/*
+ * Insert entry to the window's system menu
+ */
+bool lamexp_check_sysmenu_msg(void *message, const unsigned int identifier)
+{
+	return (((MSG*)message)->message == WM_SYSCOMMAND) && ((((MSG*)message)->wParam & 0xFFF0) == identifier);
+}
+
+/*
+ * Update system menu entry
+ */
+bool lamexp_update_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text)
+{
+	bool ok = false;
+	
+	if(HMENU hMenu = ::GetSystemMenu(win->winId(), FALSE))
+	{
+		ok = (ModifyMenu(hMenu, identifier, MF_STRING | MF_BYCOMMAND, identifier, QWCHAR(text)) == TRUE);
+	}
+	return ok;
+}
+
+/*
+ * Display the window's close button
+ */
+bool lamexp_enable_close_button(const QWidget *win, const bool bEnable)
+{
+	bool ok = false;
+
+	if(HMENU hMenu = GetSystemMenu(win->winId(), FALSE))
+	{
+		ok = (EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | (bEnable ? MF_ENABLED : MF_GRAYED)) == TRUE);
+	}
+
+	return ok;
+}
+
+/*
+ * Check whether ESC key has been pressed since the previous call to this function
+ */
+bool lamexp_check_escape_state(void)
+{
+	return (GetAsyncKeyState(VK_ESCAPE) & 0x0001) != 0;
+}
+
+/*
+ * Set the process priority class for current process
+ */
+bool lamexp_change_process_priority(const int priority)
+{
+	return lamexp_change_process_priority(GetCurrentProcess(), priority);
+}
+
+/*
+ * Set the process priority class for specified process
+ */
+bool lamexp_change_process_priority(const QProcess *proc, const int priority)
+{
+	return lamexp_change_process_priority(proc->pid()->hProcess, priority);
+}
+
+/*
+ * Set the process priority class for specified process
+ */
+bool lamexp_change_process_priority(void *hProcess, const int priority)
+{
+	bool ok = false;
+
+	switch(qBound(-2, priority, 2))
+	{
+	case 2:
+		ok = (SetPriorityClass(hProcess, HIGH_PRIORITY_CLASS) == TRUE);
+		break;
+	case 1:
+		if(!(ok = (SetPriorityClass(hProcess, ABOVE_NORMAL_PRIORITY_CLASS) == TRUE)))
+		{
+			ok = (SetPriorityClass(hProcess, HIGH_PRIORITY_CLASS) == TRUE);
+		}
+		break;
+	case 0:
+		ok = (SetPriorityClass(hProcess, NORMAL_PRIORITY_CLASS) == TRUE);
+		break;
+	case -1:
+		if(!(ok = (SetPriorityClass(hProcess, BELOW_NORMAL_PRIORITY_CLASS) == TRUE)))
+		{
+			ok = (SetPriorityClass(hProcess, IDLE_PRIORITY_CLASS) == TRUE);
+		}
+		break;
+	case -2:
+		ok = (SetPriorityClass(hProcess, IDLE_PRIORITY_CLASS) == TRUE);
+		break;
+	}
+
+	return ok;
+}
+
+/*
+ * Returns the current file time
+ */
+unsigned __int64 lamexp_current_file_time(void)
+{
+	FILETIME fileTime;
+	GetSystemTimeAsFileTime(&fileTime);
+
+	ULARGE_INTEGER temp;
+	temp.HighPart = fileTime.dwHighDateTime;
+	temp.LowPart = fileTime.dwLowDateTime;
+
+	return temp.QuadPart;
+}
+
+/*
+ * Bring the specifed window to the front
+ */
+bool lamexp_bring_to_front(const QWidget *win)
+{
+	const bool ret = (SetForegroundWindow(win->winId()) == TRUE);
+	SwitchToThisWindow(win->winId(), TRUE);
+	return ret;
+}
+
+/*
+ * Bring window of the specifed process to the front (callback)
+ */
+static BOOL CALLBACK lamexp_bring_process_to_front_helper(HWND hwnd, LPARAM lParam)
+{
+	DWORD processId = *reinterpret_cast<WORD*>(lParam);
+	DWORD windowProcessId = NULL;
+	GetWindowThreadProcessId(hwnd, &windowProcessId);
+	if(windowProcessId == processId)
+	{
+		SwitchToThisWindow(hwnd, TRUE);
+		SetForegroundWindow(hwnd);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+/*
+ * Bring window of the specifed process to the front
+ */
+bool lamexp_bring_process_to_front(const unsigned long pid)
+{
+	return EnumWindows(lamexp_bring_process_to_front_helper, reinterpret_cast<LPARAM>(&pid)) == TRUE;
+}
+
+/*
+ * Check the Internet connection status
+ */
+bool lamexp_get_connection_state(void)
+{
+	DWORD lpdwFlags = NULL;
+	BOOL result = InternetGetConnectedState(&lpdwFlags, NULL);
+	return result == TRUE;
+}
+
+/*
+ * Retrun the process ID of the given QProcess
+ */
+unsigned long lamexp_process_id(const QProcess *proc)
+{
+	PROCESS_INFORMATION *procInf = proc->pid();
+	return (procInf) ? procInf->dwProcessId : NULL;
+}
+
+/*
+ * Convert long path to short path
+ */
+QString lamexp_path_to_short(const QString &longPath)
+{
+	QString shortPath;
+	DWORD buffSize = GetShortPathNameW(reinterpret_cast<const wchar_t*>(longPath.utf16()), NULL, NULL);
+	
+	if(buffSize > 0)
+	{
+		wchar_t *buffer = new wchar_t[buffSize];
+		DWORD result = GetShortPathNameW(reinterpret_cast<const wchar_t*>(longPath.utf16()), buffer, buffSize);
+
+		if(result > 0 && result < buffSize)
+		{
+			shortPath = QString::fromUtf16(reinterpret_cast<const unsigned short*>(buffer));
+		}
+
+		delete[] buffer;
+	}
+
+	return (shortPath.isEmpty() ? longPath : shortPath);
+}
+
+/*
+ * Open media file in external player
+ */
+bool lamexp_open_media_file(const QString &mediaFilePath)
+{
+	const static wchar_t *registryPrefix[2] = { L"SOFTWARE\\", L"SOFTWARE\\Wow6432Node\\" };
+	const static wchar_t *registryKeys[3] = 
+	{
+		L"Microsoft\\Windows\\CurrentVersion\\Uninstall\\{97D341C8-B0D1-4E4A-A49A-C30B52F168E9}",
+		L"Microsoft\\Windows\\CurrentVersion\\Uninstall\\{DB9E4EAB-2717-499F-8D56-4CC8A644AB60}",
+		L"foobar2000"
+	};
+	const static wchar_t *appNames[4] = { L"smplayer_portable.exe", L"smplayer.exe", L"MPUI.exe", L"foobar2000.exe" };
+	const static wchar_t *valueNames[2] = { L"InstallLocation", L"InstallDir" };
+
+	for(size_t i = 0; i < 3; i++)
+	{
+		for(size_t j = 0; j < 2; j++)
+		{
+			QString mplayerPath;
+			HKEY registryKeyHandle = NULL;
+
+			const QString currentKey = WCHAR2QSTR(registryPrefix[j]).append(WCHAR2QSTR(registryKeys[i]));
+			if(RegOpenKeyExW(HKEY_LOCAL_MACHINE, QWCHAR(currentKey), 0, KEY_READ, &registryKeyHandle) == ERROR_SUCCESS)
+			{
+				for(size_t k = 0; k < 2; k++)
+				{
+					wchar_t Buffer[4096];
+					DWORD BuffSize = sizeof(wchar_t*) * 4096;
+					DWORD DataType = REG_NONE;
+					if(RegQueryValueExW(registryKeyHandle, valueNames[k], 0, &DataType, reinterpret_cast<BYTE*>(Buffer), &BuffSize) == ERROR_SUCCESS)
+					{
+						if((DataType == REG_SZ) || (DataType == REG_EXPAND_SZ) || (DataType == REG_LINK))
+						{
+							mplayerPath = WCHAR2QSTR(Buffer);
+							break;
+						}
+					}
+				}
+				RegCloseKey(registryKeyHandle);
+			}
+
+			if(!mplayerPath.isEmpty())
+			{
+				QDir mplayerDir(mplayerPath);
+				if(mplayerDir.exists())
+				{
+					for(size_t k = 0; k < 4; k++)
+					{
+						if(mplayerDir.exists(WCHAR2QSTR(appNames[k])))
+						{
+							qDebug("Player found at:\n%s\n", mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])).toUtf8().constData());
+							QProcess::startDetached(mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])), QStringList() << QDir::toNativeSeparators(mediaFilePath));
+							return true;
+						}
+					}
+				}
+			}
+		}
+	}
+	return false;
 }
 
 /*

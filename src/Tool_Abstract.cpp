@@ -22,6 +22,7 @@
 #include "Tool_Abstract.h"
 
 #include "Global.h"
+#include "JobObject.h"
 
 #include <QProcess>
 #include <QMutex>
@@ -30,23 +31,18 @@
 #include <QProcessEnvironment>
 #include <QDir>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 /*
  * Static vars
  */
 quint64 AbstractTool::s_lastLaunchTime = 0ui64;
 QMutex AbstractTool::s_mutex_startProcess;
-HANDLE AbstractTool::s_handle_jobObject = NULL;
+JobObject *AbstractTool::s_jobObject = NULL;
 unsigned int AbstractTool::s_jobObjRefCount = 0U;
 
 /*
  * Const
  */
-static const DWORD START_DELAY = 333; //in milliseconds
+static const unsigned int START_DELAY = 333;					//in milliseconds
 static const quint64 START_DELAY_NANO = START_DELAY * 1000 * 10; //in 100-nanosecond intervals
 
 /*
@@ -58,28 +54,8 @@ AbstractTool::AbstractTool(void)
 
 	if(s_jobObjRefCount < 1U)
 	{
-		HANDLE jobObject = CreateJobObject(NULL, NULL);
-		if((jobObject != NULL) && (jobObject != INVALID_HANDLE_VALUE))
-		{
-			JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobExtendedLimitInfo;
-			memset(&jobExtendedLimitInfo, 0, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
-			memset(&jobExtendedLimitInfo.BasicLimitInformation, 0, sizeof(JOBOBJECT_BASIC_LIMIT_INFORMATION));
-			jobExtendedLimitInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE | JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
-			if(SetInformationJobObject(jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION)))
-			{
-				s_handle_jobObject = jobObject;
-				s_jobObjRefCount = 1U;
-			}
-			else
-			{
-				qWarning("Failed to set job object information!");
-				CloseHandle(jobObject);
-			}
-		}
-		else
-		{
-			qWarning("Failed to create the job object!");
-		}
+		s_jobObject = new JobObject();
+		s_jobObjRefCount = 1U;
 	}
 	else
 	{
@@ -99,10 +75,9 @@ AbstractTool::~AbstractTool(void)
 	if(s_jobObjRefCount >= 1U)
 	{
 		s_jobObjRefCount--;
-		if((s_jobObjRefCount < 1U) && s_handle_jobObject)
+		if(s_jobObjRefCount < 1U)
 		{
-			CloseHandle(s_handle_jobObject);
-			s_handle_jobObject = NULL;
+			LAMEXP_DELETE(s_jobObject);
 		}
 	}
 }
@@ -114,9 +89,9 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 {
 	QMutexLocker lock(&s_mutex_startProcess);
 
-	if(currentTime() <= s_lastLaunchTime)
+	if(lamexp_current_file_time() <= s_lastLaunchTime)
 	{
-		Sleep(START_DELAY);
+		lamexp_sleep(START_DELAY);
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");
@@ -133,18 +108,15 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	
 	if(process.waitForStarted())
 	{
-		if(s_handle_jobObject)
+		if(s_jobObject)
 		{
-			if(!AssignProcessToJobObject(s_handle_jobObject, process.pid()->hProcess))
+			if(!s_jobObject->addProcessToJob(&process))
 			{
 				qWarning("Failed to assign process to job object!");
 			}
 		}
-		if(!SetPriorityClass(process.pid()->hProcess, BELOW_NORMAL_PRIORITY_CLASS))
-		{
-			SetPriorityClass(process.pid()->hProcess, IDLE_PRIORITY_CLASS);
-		}
-		
+
+		lamexp_change_process_priority(&process, -1);
 		lock.unlock();
 		
 		if(m_firstLaunch)
@@ -153,7 +125,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 			m_firstLaunch = false;
 		}
 		
-		s_lastLaunchTime = currentTime() + START_DELAY_NANO;
+		s_lastLaunchTime = lamexp_current_file_time() + START_DELAY_NANO;
 		return true;
 	}
 
@@ -164,7 +136,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	process.kill();
 	process.waitForFinished(-1);
 
-	s_lastLaunchTime = currentTime() + START_DELAY_NANO;
+	s_lastLaunchTime = lamexp_current_file_time() + START_DELAY_NANO;
 	return false;
 }
 
@@ -183,38 +155,4 @@ QString AbstractTool::commandline2string(const QString &program, const QStringLi
 	return commandline;
 }
 
-/*
- * Convert long path to short path
- */
-QString AbstractTool::pathToShort(const QString &longPath)
-{
-	QString shortPath;
-	DWORD buffSize = GetShortPathNameW(reinterpret_cast<const wchar_t*>(longPath.utf16()), NULL, NULL);
-	
-	if(buffSize > 0)
-	{
-		wchar_t *buffer = new wchar_t[buffSize];
-		DWORD result = GetShortPathNameW(reinterpret_cast<const wchar_t*>(longPath.utf16()), buffer, buffSize);
 
-		if(result > 0 && result < buffSize)
-		{
-			shortPath = QString::fromUtf16(reinterpret_cast<const unsigned short*>(buffer));
-		}
-
-		delete[] buffer;
-	}
-
-	return (shortPath.isEmpty() ? longPath : shortPath);
-}
-
-const quint64 AbstractTool::currentTime(void)
-{
-	FILETIME fileTime;
-	GetSystemTimeAsFileTime(&fileTime);
-
-	ULARGE_INTEGER temp;
-	temp.HighPart = fileTime.dwHighDateTime;
-	temp.LowPart = fileTime.dwLowDateTime;
-
-	return temp.QuadPart;
-}

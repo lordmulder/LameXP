@@ -33,11 +33,6 @@
 #include <QMimeData>
 #include <QTimer>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 LogViewDialog::LogViewDialog(QWidget *parent)
 :
 	QDialog(parent),
@@ -91,7 +86,7 @@ void LogViewDialog::copyButtonClicked(void)
 	ui->buttonCopy->setIcon(*m_acceptIcon);
 	ui->buttonCopy->blockSignals(true);
 	QTimer::singleShot(1250, this, SLOT(restoreIcon()));
-	MessageBeep(MB_ICONINFORMATION);
+	lamexp_beep(lamexp_beep_info);
 }
 
 void LogViewDialog::saveButtonClicked(void)

@@ -312,6 +312,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Filter_ToneAdjust.cpp" />
     <ClCompile Include="src\Genres.cpp" />
     <ClCompile Include="src\Global.cpp" />
+    <ClCompile Include="src\JobObject.cpp" />
     <ClCompile Include="src\LockedFile.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Model_Artwork.cpp" />
@@ -557,6 +558,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="src\JobObject.h" />
     <ClInclude Include="src\Tools.h" />
     <CustomBuild Include="src\Tool_WaveProperties.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>

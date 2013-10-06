@@ -28,11 +28,6 @@
 #include <QKeyEvent>
 #include <QTimer>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 #include "WinSevenTaskbar.h"
 
 #define FADE_DELAY 16
@@ -140,7 +135,7 @@ void SplashScreen::showSplash(QThread *thread)
 		splashScreen->update();
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
 		SET_TASKBAR_STATE(true);
-		Sleep(FADE_DELAY);
+		lamexp_sleep(FADE_DELAY);
 	}
 
 	//Start the timer
@@ -171,7 +166,7 @@ void SplashScreen::showSplash(QThread *thread)
 		splashScreen->setWindowOpacity(opacity);
 		splashScreen->update();
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents, FADE_DELAY);
-		Sleep(FADE_DELAY);
+		lamexp_sleep(FADE_DELAY);
 	}
 
 	//Restore taskbar

@@ -29,11 +29,6 @@
 
 #include <limits.h>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -74,7 +69,7 @@ void MessageHandlerThread::run()
 		case 666:
 			if(!_stricmp(m_parameter, "Force!"))
 			{
-				ExitProcess(-2);
+				_exit(-2);
 			}
 			else
 			{
