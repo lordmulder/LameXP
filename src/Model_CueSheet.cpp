@@ -31,6 +31,11 @@
 #include <QTextCodec>
 #include <QTextStream>
 
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 #include <float.h>
 #include <limits>
 

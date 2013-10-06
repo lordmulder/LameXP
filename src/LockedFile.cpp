@@ -33,6 +33,11 @@
 #include <io.h>
 #include <fcntl.h>
 
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #define THROW(STR)					\

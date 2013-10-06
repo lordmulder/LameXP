@@ -27,6 +27,8 @@
 #include "Resource.h"
 #include "Model_Settings.h"
 
+#include <math.h>
+
 #include <QDate>
 #include <QApplication>
 #include <QIcon>
@@ -45,9 +47,12 @@
 #include <QWindowsVistaStyle>
 #include <QWindowsXPStyle>
 
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #include <ShellAPI.h>
 #include <MMSystem.h>
-#include <math.h>
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))

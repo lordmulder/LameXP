@@ -25,6 +25,11 @@
 #include <QDir>
 #include <QLibrary>
 
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 ////////////////////////////////////////////////////////////
 
 typedef enum { SystemProcInfo = 8 } SYSTEM_INFO_CLASS;

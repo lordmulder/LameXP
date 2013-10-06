@@ -30,12 +30,10 @@
 #include <QProcessEnvironment>
 #include <QDir>
 
-/*
- * Win32 API definitions
- */
-typedef HANDLE (WINAPI *CreateJobObjectFun)(__in_opt LPSECURITY_ATTRIBUTES lpJobAttributes, __in_opt LPCSTR lpName);
-typedef BOOL (WINAPI *SetInformationJobObjectFun)(__in HANDLE hJob, __in JOBOBJECTINFOCLASS JobObjectInformationClass, __in_bcount(cbJobObjectInformationLength) LPVOID lpJobObjectInformation, __in DWORD cbJobObjectInformationLength);
-typedef BOOL (WINAPI *AssignProcessToJobObjectFun)(__in HANDLE hJob, __in HANDLE hProcess);
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 
 /*
  * Static vars
@@ -56,47 +54,31 @@ static const quint64 START_DELAY_NANO = START_DELAY * 1000 * 10; //in 100-nanose
  */
 AbstractTool::AbstractTool(void)
 {
-	static CreateJobObjectFun CreateJobObjectPtr = NULL;
-	static SetInformationJobObjectFun SetInformationJobObjectPtr = NULL;
-
 	QMutexLocker lock(&s_mutex_startProcess);
 
 	if(s_jobObjRefCount < 1U)
 	{
-		const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
-		if(LAMEXP_MIN_OS_VER(osVersionNo, 5, 1))
+		HANDLE jobObject = CreateJobObject(NULL, NULL);
+		if((jobObject != NULL) && (jobObject != INVALID_HANDLE_VALUE))
 		{
-			if((!CreateJobObjectPtr) || (!SetInformationJobObjectPtr))
+			JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobExtendedLimitInfo;
+			memset(&jobExtendedLimitInfo, 0, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
+			memset(&jobExtendedLimitInfo.BasicLimitInformation, 0, sizeof(JOBOBJECT_BASIC_LIMIT_INFORMATION));
+			jobExtendedLimitInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE | JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
+			if(SetInformationJobObject(jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION)))
 			{
-				QLibrary Kernel32Lib("kernel32.dll");
-				CreateJobObjectPtr = (CreateJobObjectFun) Kernel32Lib.resolve("CreateJobObjectA");
-				SetInformationJobObjectPtr = (SetInformationJobObjectFun) Kernel32Lib.resolve("SetInformationJobObject");
-			}
-		}
-		if(CreateJobObjectPtr && SetInformationJobObjectPtr)
-		{
-			HANDLE jobObject = CreateJobObjectPtr(NULL, NULL);
-			if((jobObject != NULL) && (jobObject != INVALID_HANDLE_VALUE))
-			{
-				JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobExtendedLimitInfo;
-				memset(&jobExtendedLimitInfo, 0, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
-				memset(&jobExtendedLimitInfo.BasicLimitInformation, 0, sizeof(JOBOBJECT_BASIC_LIMIT_INFORMATION));
-				jobExtendedLimitInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE | JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION;
-				if(SetInformationJobObjectPtr(jobObject, JobObjectExtendedLimitInformation, &jobExtendedLimitInfo, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION)))
-				{
-					s_handle_jobObject = jobObject;
-					s_jobObjRefCount = 1U;
-				}
-				else
-				{
-					qWarning("Failed to set job object information!");
-					CloseHandle(jobObject);
-				}
+				s_handle_jobObject = jobObject;
+				s_jobObjRefCount = 1U;
 			}
 			else
 			{
-				qWarning("Failed to create the job object!");
+				qWarning("Failed to set job object information!");
+				CloseHandle(jobObject);
 			}
+		}
+		else
+		{
+			qWarning("Failed to create the job object!");
 		}
 	}
 	else
@@ -130,8 +112,6 @@ AbstractTool::~AbstractTool(void)
  */
 bool AbstractTool::startProcess(QProcess &process, const QString &program, const QStringList &args)
 {
-	static AssignProcessToJobObjectFun AssignProcessToJobObjectPtr = NULL;
-	
 	QMutexLocker lock(&s_mutex_startProcess);
 
 	if(currentTime() <= s_lastLaunchTime)
@@ -146,22 +126,16 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	env.insert("TEMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
 	env.insert("TMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
 	process.setProcessEnvironment(env);
-	
-	if(!AssignProcessToJobObjectPtr)
-	{
-		QLibrary Kernel32Lib("kernel32.dll");
-		AssignProcessToJobObjectPtr = (AssignProcessToJobObjectFun) Kernel32Lib.resolve("AssignProcessToJobObject");
-	}
-	
+		
 	process.setProcessChannelMode(QProcess::MergedChannels);
 	process.setReadChannel(QProcess::StandardOutput);
 	process.start(program, args);
 	
 	if(process.waitForStarted())
 	{
-		if(AssignProcessToJobObjectPtr && s_handle_jobObject)
+		if(s_handle_jobObject)
 		{
-			if(!AssignProcessToJobObjectPtr(s_handle_jobObject, process.pid()->hProcess))
+			if(!AssignProcessToJobObject(s_handle_jobObject, process.pid()->hProcess))
 			{
 				qWarning("Failed to assign process to job object!");
 			}

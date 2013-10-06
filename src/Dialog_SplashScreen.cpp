@@ -28,6 +28,11 @@
 #include <QKeyEvent>
 #include <QTimer>
 
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 #include "WinSevenTaskbar.h"
 
 #define FADE_DELAY 16

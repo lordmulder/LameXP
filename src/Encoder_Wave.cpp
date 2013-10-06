@@ -25,6 +25,11 @@
 #include "Model_Settings.h"
 
 #include <QDir>
+
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #include <Shellapi.h>
 
 #define FIX_SEPARATORS(STR) for(int i = 0; STR[i]; i++) { if(STR[i] == L'/') STR[i] = L'\\'; }

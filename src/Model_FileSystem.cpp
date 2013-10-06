@@ -27,6 +27,11 @@
 #include <QDesktopServices>
 #include <QLibrary>
 
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 #define IS_DIR(ATTR) (((ATTR) & FILE_ATTRIBUTE_DIRECTORY) && (!((ATTR) & FILE_ATTRIBUTE_HIDDEN)))
 #define NO_DOT_OR_DOTDOT(STR) (wcscmp((STR), L".") && wcscmp((STR), L".."))
 

@@ -62,12 +62,6 @@ bool PlaylistImporter::importPlaylist(QStringList &fileList, const QString &play
 
 	QDir rootDir(baseDir);
 	while(rootDir.cdUp());
-
-	//Sanity check
-	if(file.size() < 3 || file.size() > 512000)
-	{
-		return false;
-	}
 	
 	//Detect playlist type
 	playlist_t playlistType = isPlaylist(file.canonicalFilePath());
@@ -87,7 +81,7 @@ bool PlaylistImporter::importPlaylist(QStringList &fileList, const QString &play
 	}
 
 	//Skip very large files (parsing could take very long)
-	if(data.size() >= 10485760i64)
+	if((file.size() < 3) || (file.size() > 524288))
 	{
 		qWarning("File is very big. Probably not a Playlist. Rejecting...");
 		return false;
@@ -222,7 +216,7 @@ bool PlaylistImporter::parsePlaylist_m3u(QFile &data, QStringList &fileList, con
 		}
 	}
 
-	return true;
+	return foundAtLeastOneFile;
 }
 
 bool PlaylistImporter::parsePlaylist_pls(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir)
@@ -306,11 +300,13 @@ bool PlaylistImporter::parsePlaylist_pls(QFile &data, QStringList &fileList, con
 		}
 	}
 
-	return true;
+	return foundAtLeastOneFile;
 }
 
 bool PlaylistImporter::parsePlaylist_wpl(QFile &data, QStringList &fileList, const QDir &baseDir, const QDir &rootDir)
 {
+	bool foundAtLeastOneFile = false;
+
 	QRegExp skipData("<!--(.+)-->", Qt::CaseInsensitive);
 	QRegExp wplEntry("<(media|ref)[^<>]*(src|href)=\"([^\"]+)\"[^<>]*>", Qt::CaseInsensitive);
 	
@@ -340,11 +336,12 @@ bool PlaylistImporter::parsePlaylist_wpl(QFile &data, QStringList &fileList, con
 			if(isPlaylist(filename.canonicalFilePath()) == notPlaylist)
 			{
 				fileList << filename.canonicalFilePath();
+				foundAtLeastOneFile = true;
 			}
 		}
 	}
 
-	return true;
+	return foundAtLeastOneFile;
 }
 
 void PlaylistImporter::fixFilePath(QFileInfo &filename, const QDir &baseDir, const QDir &rootDir)

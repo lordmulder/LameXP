@@ -73,7 +73,10 @@
 #include <QResource>
 #include <QScrollBar>
 
-//System includes
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #include <MMSystem.h>
 #include <ShellAPI.h>
 

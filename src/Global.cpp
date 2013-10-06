@@ -21,6 +21,11 @@
 
 #include "Global.h"
 
+//Windows includes
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 //Qt includes
 #include <QApplication>
 #include <QMessageBox>
@@ -2635,7 +2640,7 @@ static const HANDLE g_debug_thread = LAMEXP_DEBUG ? NULL : lamexp_debug_thread_i
 /*
  * Get number private bytes [debug only]
  */
-SIZE_T lamexp_dbg_private_bytes(void)
+unsigned long lamexp_dbg_private_bytes(void)
 {
 #if LAMEXP_DEBUG
 	for(int i = 0; i < 8; i++) _heapmin();

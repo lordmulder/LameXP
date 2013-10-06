@@ -29,11 +29,6 @@
 #include <stdio.h>
 #include <tchar.h>
 
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-
 //Visual Leaks Detector
 #include <vld.h>
 
@@ -118,7 +113,6 @@ bool lamexp_detect_wine(void);
 void lamexp_init_console(const QStringList &argv);
 bool lamexp_init_qt(int argc, char* argv[]);
 int lamexp_init_ipc(void);
-LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo);
 void lamexp_invalid_param_handler(const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t);
 void lamexp_message_handler(QtMsgType type, const char *msg);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
@@ -166,7 +160,7 @@ void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase);
 void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage = NULL);
 
 //Debug-only functions
-SIZE_T lamexp_dbg_private_bytes(void);
+unsigned long lamexp_dbg_private_bytes(void);
 
 //Helper macros
 #define LAMEXP_DELETE(PTR) do { if(PTR) { delete PTR; PTR = NULL; } } while(0)
@@ -183,13 +177,6 @@ SIZE_T lamexp_dbg_private_bytes(void);
 #define LAMEXP_MAKE_STRING(X) LAMEXP_MAKE_STRING_EX(X)
 #define LAMEXP_COMPILER_WARNING(TXT) __pragma(message(__FILE__ "(" LAMEXP_MAKE_STRING(__LINE__) ") : warning: " TXT))
 #define NOBR(STR) (QString("<nobr>%1</nobr>").arg((STR)).replace("-", "&minus;"))
-
-//Output Qt debug message (Unicode-safe versions)
-/*
-#define qDebug64(FORMAT, ...) qDebug("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
-#define qWarning64(FORMAT, ...) qWarning("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
-#define qFatal64(FORMAT, ...) qFatal("@BASE64@%s", QString(FORMAT).arg(__VA_ARGS__).toUtf8().toBase64().constData());
-*/
 
 //Check for debug build
 #if defined(_DEBUG) && defined(QT_DEBUG) && !defined(NDEBUG) && !defined(QT_NO_DEBUG)
