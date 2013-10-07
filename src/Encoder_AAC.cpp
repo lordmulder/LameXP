@@ -27,6 +27,93 @@
 #include <QProcess>
 #include <QDir>
 
+static int index2bitrate(const int index)
+{
+	return (index < 32) ? ((index + 1) * 8) : ((index - 15) * 16);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
+
+class AACEncoderInfo : public AbstractEncoderInfo
+{
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return true;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return 21;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return 41;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return qBound(0, index * 5, 100);
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return qBound(8, index2bitrate(index), 400);
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return TYPE_QUALITY_LEVEL_FLT;
+			break;
+		case SettingsModel::ABRMode:
+			return TYPE_APPROX_BITRATE;
+			break;
+		case SettingsModel::CBRMode:
+			return TYPE_BITRATE;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "Nero AAC Encoder (\x0C2\x0A9 Nero AG)";
+		return s_description;
+	}
+}
+static const g_aacEncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
+///////////////////////////////////////////////////////////////////////////////
+
 AACEncoder::AACEncoder(void)
 :
 	m_binary_enc(lamexp_lookup_tool("neroAacEnc.exe")),
@@ -57,13 +144,13 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString().sprintf("%.2f", qBound(0.0, static_cast<double>(m_configBitrate) / 20.0, 1.0));
+		args << "-q" << QString().sprintf("%.2f", double(qBound(0, m_configBitrate * 5, 100)) / 100.0);
 		break;
 	case SettingsModel::ABRMode:
-		args << "-br" << QString::number(qMax(32, qMin(500, (m_configBitrate * 8))) * 1000);
+		args << "-br" << QString::number(qBound(8, index2bitrate(m_configBitrate), 400) * 1000);
 		break;
 	case SettingsModel::CBRMode:
-		args << "-cbr" << QString::number(qMax(32, qMin(500, (m_configBitrate * 8))) * 1000);
+		args << "-cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 400) * 1000);
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -291,4 +378,9 @@ void AACEncoder::setEnable2Pass(bool enabled)
 const bool AACEncoder::needsTimingInfo(void)
 {
 	return true;
+}
+
+const AbstractEncoderInfo *AACEncoder::getEncoderInfo(void)
+{
+	return &g_aacEncoderInfo;
 }

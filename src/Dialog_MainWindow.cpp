@@ -3357,8 +3357,11 @@ void MainWindow::updateBitrate(int value)
 	case AbstractEncoderInfo::TYPE_APPROX_BITRATE:
 		ui->labelBitrate->setText(QString("&asymp; %1 kbps").arg(QString::number(displayValue)));
 		break;
-	case AbstractEncoderInfo::TYPE_QUALITY_LEVEL:
+	case AbstractEncoderInfo::TYPE_QUALITY_LEVEL_INT:
 		ui->labelBitrate->setText(tr("Quality Level %1").arg(QString::number(displayValue)));
+		break;
+	case AbstractEncoderInfo::TYPE_QUALITY_LEVEL_FLT:
+		ui->labelBitrate->setText(tr("Quality Level %1").arg(QString().sprintf("%.2f", double(displayValue)/100.0)));
 		break;
 	case AbstractEncoderInfo::TYPE_COMPRESSION_LEVEL:
 		ui->labelBitrate->setText(tr("Compression %1").arg(QString::number(displayValue)));

@@ -29,6 +29,95 @@
 #include <QDir>
 #include <QCoreApplication>
 
+static int index2bitrate(const int index)
+{
+	return (index < 32) ? ((index + 1) * 8) : ((index - 15) * 16);
+}
+
+static const int g_qaacVBRQualityLUT[16] = {0 ,9, 18, 27, 36, 45, 54, 63, 73, 82, 91, 100, 109, 118, 127, INT_MAX};
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
+
+class QAACEncoderInfo : public AbstractEncoderInfo
+{
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::CBRMode:
+		case SettingsModel::ABRMode:
+			return true;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return 15;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return 52;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return g_qaacVBRQualityLUT[qBound(0, index , 14)];
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return qBound(8, index2bitrate(index), 576);
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return TYPE_QUALITY_LEVEL_INT;
+			break;
+		case SettingsModel::ABRMode:
+			return TYPE_APPROX_BITRATE;
+			break;
+		case SettingsModel::CBRMode:
+			return TYPE_BITRATE;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "QAAC/QuickTime (\x0C2\x0A9 Appel)";
+		return s_description;
+	}
+}
+static const g_qaacEncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
+///////////////////////////////////////////////////////////////////////////////
+
 QAACEncoder::QAACEncoder(void)
 :
 	m_binary_enc(lamexp_lookup_tool("qaac.exe")),
@@ -71,13 +160,13 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	switch(m_configRCMode)
 	{
 	case SettingsModel::CBRMode:
-		args << "--cbr" << QString::number(qBound(32, m_configBitrate * 8, 500));
+		args << "--cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
 		break;
 	case SettingsModel::ABRMode:
-		args << "--abr" << QString::number(qBound(32, m_configBitrate * 8, 500));
+		args << "--abr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
 		break;
 	case SettingsModel::VBRMode:
-		args << "--tvbr" << QString::number(qBound(0, m_configBitrate * 4, 127));
+		args << "--tvbr" << QString::number(g_qaacVBRQualityLUT[qBound(0, m_configBitrate , 14)]);
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -185,8 +274,12 @@ bool QAACEncoder::isFormatSupported(const QString &containerType, const QString 
 	return false;
 }
 
-
 void QAACEncoder::setProfile(int profile)
 {
 	m_configProfile = profile;
+}
+
+const AbstractEncoderInfo *QAACEncoder::getEncoderInfo(void)
+{
+	return &g_qaacEncoderInfo;
 }

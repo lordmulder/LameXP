@@ -1759,7 +1759,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="719"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3778"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3781"/>
         <source>Access Denied</source>
         <translation>Åtkomst nekad</translation>
     </message>
@@ -1951,7 +1951,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1379"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1456"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1996"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
         <source>Discard</source>
         <translation>Stäng</translation>
     </message>
@@ -2468,31 +2468,32 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3361"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3364"/>
         <source>Quality Level %1</source>
         <translation>Kvallitetsnivå %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3364"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3367"/>
         <source>Compression %1</source>
         <translation>Kompression %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3367"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3370"/>
         <source>Uncompressed</source>
         <translation>Okomprimerad</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3414"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3417"/>
         <source>Best Quality (Slow)</source>
         <translation>Bäst kvalitet (Långsam)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3420"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3423"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>Acceptabel kvalitet (Snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3417"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3420"/>
         <source>High Quality (Recommended)</source>
         <translation>Hög kvallitet (rekommenderas)</translation>
     </message>
@@ -2502,57 +2503,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3423"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3426"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Dålig kvallitet (mycket snabb)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3710"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3713"/>
         <source>File name without extension</source>
         <translation>Filnamn utan filtillägg</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3711"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3714"/>
         <source>Track number with leading zero</source>
         <translation>Spårnummer med inledande nolla</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3712"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3715"/>
         <source>Track title</source>
         <translation>Spårtitel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3713"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
         <source>Artist name</source>
         <translation>Artistnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3714"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3717"/>
         <source>Album name</source>
         <translation>Albumnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3715"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3718"/>
         <source>Year with (at least) four digits</source>
         <translation>Årtal med (minst) fyra siffror</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3719"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3718"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
         <source>Characters forbidden in file names:</source>
         <translation>Förbjudna tecken i filnamn:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
         <source>Rename Macros</source>
         <translation>Namnändra macron</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3734"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3737"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n instans</numerusform>
@@ -2560,37 +2561,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3778"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3781"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Kan inte skriva till den specificerade mappen. Välj en annan destination!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3901"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
         <source>Overwrite Mode</source>
         <translation>Överskrivningsläge</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3901"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Varning! Det här läget kan skriva över befintliga filer, utan möjlighet att återskapa!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3901"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
         <source>Continue</source>
         <translation>Fortsätt</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3901"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
         <source>Revert</source>
         <translation>Återställ</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3975"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3978"/>
         <source>Already Running</source>
         <translation>Körs redan</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3975"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3978"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP körs redan, använd den redan startade instansen!</translation>
     </message>

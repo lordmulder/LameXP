@@ -86,7 +86,7 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 		switch(mode)
 		{
 		case SettingsModel::VBRMode:
-			return TYPE_QUALITY_LEVEL;
+			return TYPE_QUALITY_LEVEL_INT;
 			break;
 		case SettingsModel::ABRMode:
 			return TYPE_APPROX_BITRATE;

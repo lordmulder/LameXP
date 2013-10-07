@@ -28,6 +28,95 @@
 #include <QProcess>
 #include <QDir>
 
+static int index2bitrate(const int index)
+{
+	return (index < 32) ? ((index + 1) * 8) : ((index - 15) * 16);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder Info
+///////////////////////////////////////////////////////////////////////////////
+
+class FHGAACEncoderInfo : public AbstractEncoderInfo
+{
+	virtual bool isModeSupported(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+		case SettingsModel::CBRMode:
+			return true;
+			break;
+		case SettingsModel::ABRMode:
+			return false;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueCount(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return 6;
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return 52;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueAt(int mode, int index) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return qBound(1, index + 1, 6);
+			break;
+		case SettingsModel::ABRMode:
+		case SettingsModel::CBRMode:
+			return qBound(8, index2bitrate(index), 576);
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual int valueType(int mode) const
+	{
+		switch(mode)
+		{
+		case SettingsModel::VBRMode:
+			return TYPE_QUALITY_LEVEL_INT;
+			break;
+		case SettingsModel::ABRMode:
+			return TYPE_APPROX_BITRATE;
+			break;
+		case SettingsModel::CBRMode:
+			return TYPE_BITRATE;
+			break;
+		default:
+			throw "Bad RC mode specified!";
+		}
+	}
+
+	virtual const char *description(void) const
+	{
+		static const char* s_description = "fhgaacenc/Winamp (\x0C2\x0A9 Nullsoft)";
+		return s_description;
+	}
+}
+static const g_fhgAacEncoderInfo;
+
+///////////////////////////////////////////////////////////////////////////////
+// Encoder implementation
+///////////////////////////////////////////////////////////////////////////////
+
 FHGAACEncoder::FHGAACEncoder(void)
 :
 	m_binary_enc(lamexp_lookup_tool("fhgaacenc.exe")),
@@ -50,7 +139,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	QProcess process;
 	QStringList args;
 	
-	int maxBitrate = 500;
+	int maxBitrate = 576;
 
 	if(m_configRCMode == SettingsModel::CBRMode)
 	{
@@ -73,10 +162,10 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 	switch(m_configRCMode)
 	{
 	case SettingsModel::CBRMode:
-		args << "--cbr" << QString::number(qMax(32, qMin(maxBitrate, (m_configBitrate * 8))));
+		args << "--cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), maxBitrate));
 		break;
 	case SettingsModel::VBRMode:
-		args << "--vbr" << QString::number(qBound(1, m_configBitrate, 6));
+		args << "--vbr" << QString::number(qBound(1, m_configBitrate + 1, 6));
 		break;
 	default:
 		throw "Bad rate-control mode!";
@@ -197,4 +286,9 @@ const unsigned int *FHGAACEncoder::supportedBitdepths(void)
 void FHGAACEncoder::setProfile(int profile)
 {
 	m_configProfile = profile;
+}
+
+const AbstractEncoderInfo *FHGAACEncoder::getEncoderInfo(void)
+{
+	return &g_fhgAacEncoderInfo;
 }

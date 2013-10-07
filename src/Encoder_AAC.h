@@ -42,6 +42,9 @@ public:
 	virtual void setProfile(int profile);
 	virtual void setEnable2Pass(bool enabled);
 
+	//Encoder info
+	static const AbstractEncoderInfo *getEncoderInfo(void);
+
 private:
 	const QString m_binary_enc;
 	const QString m_binary_tag;

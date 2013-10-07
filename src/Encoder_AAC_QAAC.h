@@ -40,6 +40,9 @@ public:
 	//Advanced options
 	virtual void setProfile(int profile);
 
+	//Encoder info
+	static const AbstractEncoderInfo *getEncoderInfo(void);
+
 private:
 	const QString m_binary_enc;
 	const QString m_binary_dll;
