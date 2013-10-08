@@ -54,6 +54,7 @@
 ..\..\src\Filter_ToneAdjust.cpp 
 ..\..\src\Genres.cpp 
 ..\..\src\Global.cpp 
+..\..\src\JobObject.cpp 
 ..\..\src\LockedFile.cpp 
 ..\..\src\Main.cpp 
 ..\..\src\Model_Artwork.cpp 
@@ -130,6 +131,7 @@
 ..\..\src\Filter_ToneAdjust.h 
 ..\..\src\Genres.h 
 ..\..\src\Global.h 
+..\..\src\JobObject.h 
 ..\..\src\LockedFile.h 
 ..\..\src\Model_Artwork.h 
 ..\..\src\Model_AudioFile.h 

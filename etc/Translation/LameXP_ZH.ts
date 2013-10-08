@@ -1999,7 +1999,7 @@
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>当前的编码器：%1</translation>
     </message>
 </context>
 <context>

@@ -80,6 +80,7 @@ g_lamexp_translators[] =
 	{"tw", L"繁体中文",       L"456Vv",               "123@456vv.com"         },
 	{"uk", L"Українська", L"Arestarh",            "Arestarh@ukr.net"      },
 	{"zh", L"简体中文",       L"456Vv",               "123@456vv.com"         },
+	{"",   L"",           L"庄泓川",                 "kidneybean@sohu.com"   },
 	{NULL, NULL, NULL, NULL}
 };
 
