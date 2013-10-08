@@ -358,12 +358,6 @@
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_Task.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
-    <ClCompile Include="src\Thread_FileAnalyzer_ST.cpp">
-      <Filter>Source Files\Threads</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_ST.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Encoder_Opus.cpp">
       <Filter>Source Files\Encoders</Filter>
     </ClCompile>
@@ -378,6 +372,12 @@
     </ClCompile>
     <ClCompile Include="etc\Prerequisites\strnatcmp\src\strnatcmp.cpp">
       <Filter>Source Files\Misc\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Registry_Encoder.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JobObject.cpp">
+      <Filter>Source Files\Misc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -506,6 +506,15 @@
     </ClInclude>
     <ClInclude Include="src\Decoder_Opus.h">
       <Filter>Header Files\Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Registry_Encoder.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\JobObject.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h">
+      <Filter>Header Files\Misc\3rd Party</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -686,9 +695,6 @@
     <CustomBuild Include="src\Thread_FileAnalyzer_Task.h">
       <Filter>Header Files\Threads</Filter>
     </CustomBuild>
-    <CustomBuild Include="src\Thread_FileAnalyzer_ST.h">
-      <Filter>Header Files\Threads</Filter>
-    </CustomBuild>
     <CustomBuild Include="src\Encoder_Opus.h">
       <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
@@ -772,6 +778,9 @@
     </Filter>
     <Filter Include="Source Files\Misc\3rd Party">
       <UniqueIdentifier>{e46f4cc1-5aac-4532-90f4-fc3dfe88350d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Misc\3rd Party">
+      <UniqueIdentifier>{cbf43849-15bc-446f-894b-a5ffd74270e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

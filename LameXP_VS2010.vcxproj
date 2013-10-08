@@ -76,7 +76,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;$(SolutionDir)\etc\Prerequisites\strnatcmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;_DEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;_DEBUG;_CONSOLE;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -125,7 +125,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;$(SolutionDir)\etc\Prerequisites\strnatcmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;NDEBUG;_CONSOLE;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_DLL;QT_NO_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -197,7 +197,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\include;$(SolutionDir)\etc\Prerequisites\keccak\include;$(SolutionDir)\etc\Prerequisites\strnatcmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;NDEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG;QT_NODLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);WIN32;NDEBUG;_CONSOLE;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;QT_NO_DEBUG;QT_NODLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -218,7 +218,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>qtmain.lib;QtCore.lib;QtGui.lib;QtSvg.lib;qsvg.lib;qico.lib;qtga.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;Psapi.lib;QKeccakHash_VS2010.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
-      <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\qt4_static.VS2010\lib;$(SolutionDir)\etc\Prerequisites\qt4_static.VS2010\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\z_old\qt4_static.VS2010\lib;$(SolutionDir)\etc\Prerequisites\z_old\qt4_static.VS2010\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AssemblyDebug>
@@ -293,6 +293,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Filter_ToneAdjust.cpp" />
     <ClCompile Include="src\Genres.cpp" />
     <ClCompile Include="src\Global.cpp" />
+    <ClCompile Include="src\JobObject.cpp" />
     <ClCompile Include="src\LockedFile.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Model_Artwork.cpp" />
@@ -305,16 +306,12 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Model_Settings.cpp" />
     <ClCompile Include="src\PlaylistImporter.cpp" />
     <ClCompile Include="src\Registry_Decoder.cpp" />
+    <ClCompile Include="src\Registry_Encoder.cpp" />
     <ClCompile Include="src\ShellIntegration.cpp" />
     <ClCompile Include="src\Thread_CPUObserver.cpp" />
     <ClCompile Include="src\Thread_CueSplitter.cpp" />
     <ClCompile Include="src\Thread_DiskObserver.cpp" />
     <ClCompile Include="src\Thread_FileAnalyzer.cpp" />
-    <ClCompile Include="src\Thread_FileAnalyzer_ST.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\Thread_FileAnalyzer_Task.cpp" />
     <ClCompile Include="src\Thread_Initialization.cpp" />
     <ClCompile Include="src\Thread_MessageHandler.cpp" />
@@ -359,7 +356,6 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="tmp\MOC_Thread_CueSplitter.cpp" />
     <ClCompile Include="tmp\MOC_Thread_DiskObserver.cpp" />
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer.cpp" />
-    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_ST.cpp" />
     <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_Task.cpp" />
     <ClCompile Include="tmp\MOC_Thread_Initialization.cpp" />
     <ClCompile Include="tmp\MOC_Thread_MessageHandler.cpp" />
@@ -378,6 +374,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="tmp\QRC_Tools_Misc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h" />
     <ClInclude Include="src\Config.h" />
     <CustomBuild Include="src\CustomEventFilter.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
@@ -502,17 +499,6 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="src\Thread_FileAnalyzer_ST.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\MOC_%(Filename).cpp"</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
-    </CustomBuild>
     <CustomBuild Include="src\Encoder_Opus.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
@@ -525,6 +511,8 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="src\Decoder_Opus.h" />
+    <ClInclude Include="src\JobObject.h" />
+    <ClInclude Include="src\Registry_Encoder.h" />
     <ClInclude Include="src\Tools.h" />
     <CustomBuild Include="src\Tool_WaveProperties.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\MOC_%(Filename).cpp" "%(FullPath)"</Command>
