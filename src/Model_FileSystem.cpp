@@ -35,8 +35,6 @@
 #define IS_DIR(ATTR) (((ATTR) & FILE_ATTRIBUTE_DIRECTORY) && (!((ATTR) & FILE_ATTRIBUTE_HIDDEN)))
 #define NO_DOT_OR_DOTDOT(STR) (wcscmp((STR), L".") && wcscmp((STR), L".."))
 
-typedef HANDLE (WINAPI *FindFirstFileExFun)(LPCWSTR lpFileName, FINDEX_INFO_LEVELS fInfoLevelId, LPVOID lpFindFileData, FINDEX_SEARCH_OPS fSearchOp, LPVOID lpSearchFilter, DWORD dwAdditionalFlags);
-
 ///////////////////////////////////////////////////////////////////////////////
 // Dummy QFileIconProvider class
 ///////////////////////////////////////////////////////////////////////////////
@@ -93,7 +91,7 @@ QFileIconProviderEx::QFileIconProviderEx()
 	m_installDir(QDir::fromNativeSeparators(qApp->applicationDirPath())),
 	m_folderType("Folder")
 {
-	/* Nothing to do! */
+	/*nothing to do*/
 }
 
 QIcon QFileIconProviderEx::icon(const QFileInfo &info) const
@@ -234,10 +232,7 @@ void QFileSystemModelEx::flushCache(void)
 
 QHash<const QString, bool> QFileSystemModelEx::s_hasSubfolderCache;
 QMutex QFileSystemModelEx::s_hasSubfolderMutex;
-
-void *QFileSystemModelEx::FindFirstFileExPtr = NULL;
-bool QFileSystemModelEx::FindFirstFileExInitialized = false;
-bool QFileSystemModelEx::FindFirstFileExInfoBasicOK = false;
+int QFileSystemModelEx::s_findFirstFileExInfoLevel = INT_MAX;
 
 bool QFileSystemModelEx::hasSubfoldersCached(const QString &path)
 {
@@ -267,24 +262,16 @@ void QFileSystemModelEx::removeAllFromCache(void)
 
 bool QFileSystemModelEx::hasSubfolders(const QString &path)
 {
-	if(!FindFirstFileExInitialized)
+	if(s_findFirstFileExInfoLevel == INT_MAX)
 	{
-		QLibrary kernel32Lib("kernel32.dll");
-		if(kernel32Lib.load())
-		{
-			FindFirstFileExPtr = kernel32Lib.resolve("FindFirstFileExW");
-			const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
-			FindFirstFileExInfoBasicOK = LAMEXP_MIN_OS_VER(osVersionNo, 6, 1);
-		}
-		FindFirstFileExInitialized = true;
+		const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
+		s_findFirstFileExInfoLevel = LAMEXP_MIN_OS_VER(osVersionNo, 6, 1) ? FindExInfoBasic : FindExInfoStandard;
 	}
 
 	WIN32_FIND_DATAW findData;
 	bool bChildren = false;
 
-	HANDLE h = (FindFirstFileExPtr)
-		? reinterpret_cast<FindFirstFileExFun>(FindFirstFileExPtr)(QWCHAR(QDir::toNativeSeparators(path + "/*")), (FindFirstFileExInfoBasicOK ? FindExInfoBasic : FindExInfoStandard), &findData, FindExSearchLimitToDirectories, NULL, 0)
-		: FindFirstFileW(QWCHAR(QDir::toNativeSeparators(path + "/*")), &findData);
+	HANDLE h = FindFirstFileEx(QWCHAR(QDir::toNativeSeparators(path + "/*")), ((FINDEX_INFO_LEVELS)s_findFirstFileExInfoLevel), &findData, FindExSearchLimitToDirectories, NULL, 0);
 
 	if(h != INVALID_HANDLE_VALUE)
 	{
@@ -306,7 +293,7 @@ bool QFileSystemModelEx::hasSubfolders(const QString &path)
 		DWORD err = GetLastError();
 		if((err == ERROR_NOT_SUPPORTED) || (err == ERROR_INVALID_PARAMETER))
 		{
-			qWarning("%s failed with error code #%u", FindFirstFileExPtr ? "FindFirstFileEx" : "FindFirstFile", err);
+			qWarning("FindFirstFileEx failed with error code #%u", err);
 		}
 	}
 

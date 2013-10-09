@@ -33,7 +33,6 @@ public:
 	~QFileSystemModelEx();
 
 	virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
-	//virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	virtual void fetchMore(const QModelIndex &parent);
 	virtual QModelIndex index(const QString &path, int column = 0) const;
 	virtual void flushCache(void);
@@ -43,10 +42,7 @@ private:
 	
 	static QHash<const QString, bool> s_hasSubfolderCache;
 	static QMutex s_hasSubfolderMutex;
-
-	static void *FindFirstFileExPtr;
-	static bool FindFirstFileExInitialized;
-	static bool FindFirstFileExInfoBasicOK;
+	static int s_findFirstFileExInfoLevel;
 
 	static bool hasSubfolders(const QString &path);
 	static bool hasSubfoldersCached(const QString &path);
