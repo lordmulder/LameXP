@@ -60,6 +60,7 @@
 #include <QProgressDialog>
 #include <QResizeEvent>
 #include <QTime>
+#include <QThreadPool>
 
 #include <math.h>
 #include <float.h>
@@ -134,11 +135,11 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel 
 :
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
-	//m_aacEncoder(SettingsModel::getAacEncoder()),
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
 	m_shutdownFlag(shutdownFlag_None),
+	m_threadPool(NULL),
 	m_diskObserver(NULL),
 	m_cpuObserver(NULL),
 	m_ramObserver(NULL),
@@ -315,12 +316,21 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	while(!m_threadList.isEmpty())
+	//while(!m_threadList.isEmpty())
+	//{
+	//	ProcessThread *thread = m_threadList.takeFirst();
+	//	thread->terminate();
+	//	thread->wait(15000);
+	//	delete thread;
+	//}
+
+	if(m_threadPool)
 	{
-		ProcessThread *thread = m_threadList.takeFirst();
-		thread->terminate();
-		thread->wait(15000);
-		delete thread;
+		if(!m_threadPool->waitForDone(100))
+		{
+			emit abortRunningTasks();
+			m_threadPool->waitForDone();
+		}
 	}
 
 	LAMEXP_DELETE(m_progressIndicator);
@@ -333,6 +343,7 @@ ProcessingDialog::~ProcessingDialog(void)
 	LAMEXP_DELETE(m_filterInfoLabelIcon);
 	LAMEXP_DELETE(m_contextMenu);
 	LAMEXP_DELETE(m_progressModel);
+	LAMEXP_DELETE(m_threadPool);
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -510,24 +521,30 @@ void ProcessingDialog::initEncoding(void)
 		connect(m_ramObserver, SIGNAL(currentUsageChanged(double)), this, SLOT(ramUsageHasChanged(double)), Qt::QueuedConnection);
 		m_ramObserver->start();
 	}
-	
-	unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
-	if(maximumInstances < 1)
+
+	if(!m_threadPool)
 	{
-		lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(lamexp_arguments());
-		maximumInstances = cores2instances(qBound(1, cpuFeatures.count, 64));
+		unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
+		if(maximumInstances < 1)
+		{
+			lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(lamexp_arguments());
+			maximumInstances = cores2instances(qBound(1, cpuFeatures.count, 64));
+		}
+
+		maximumInstances = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
+		if(maximumInstances > 1)
+		{
+			m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(maximumInstances)));
+		}
+
+		m_threadPool = new QThreadPool();
+		m_threadPool->setMaxThreadCount(maximumInstances);
 	}
 
-	maximumInstances = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
-	if(maximumInstances > 1)
-	{
-		m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(maximumInstances)));
-	}
-
-	for(unsigned int i = 0; i < maximumInstances; i++)
+	for(int i = 0; i < m_threadPool->maxThreadCount(); i++)
 	{
 		startNextJob();
-		qApp->processEvents();
+		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 	}
 
 	m_timerStart = lamexp_perfcounter_value();
@@ -539,11 +556,7 @@ void ProcessingDialog::abortEncoding(bool force)
 	if(force) m_forcedAbort = true;
 	ui->button_AbortProcess->setEnabled(false);
 	SET_PROGRESS_TEXT(tr("Aborted! Waiting for running jobs to terminate..."));
-
-	for(int i = 0; i < m_threadList.count(); i++)
-	{
-		m_threadList.at(i)->abort();
-	}
+	emit abortRunningTasks();
 }
 
 void ProcessingDialog::doneEncoding(void)
@@ -557,13 +570,7 @@ void ProcessingDialog::doneEncoding(void)
 		WinSevenTaskbar::setTaskbarProgress(this, ui->progressBar->value(), ui->progressBar->maximum());
 	}
 	
-	int index = m_threadList.indexOf(dynamic_cast<ProcessThread*>(QWidget::sender()));
-	if(index >= 0)
-	{
-		m_threadList.takeAt(index)->deleteLater();
-	}
-
-	if(!m_pendingJobs.isEmpty() && !m_userAborted)
+	if((!m_pendingJobs.isEmpty()) && (!m_userAborted))
 	{
 		startNextJob();
 		qDebug("Running jobs: %u", m_runningThreads);
@@ -595,7 +602,7 @@ void ProcessingDialog::doneEncoding(void)
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 		QApplication::processEvents();
-		if(m_settings->soundsEnabled() && !m_forcedAbort)
+		if(m_settings->soundsEnabled() && (!m_forcedAbort))
 		{
 			lamexp_play_sound(IDR_WAVE_ABORTED, false);
 		}
@@ -909,185 +916,23 @@ void ProcessingDialog::startNextJob(void)
 		thread->setOverwriteMode((m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile), (m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces));
 	}
 
-	m_threadList.append(thread);
 	m_allJobs.append(thread->getId());
 	
 	//Connect thread signals
-	connect(thread, SIGNAL(finished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processFinished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
+	connect(this, SIGNAL(abortRunningTasks()), thread, SLOT(abort()), Qt::DirectConnection);
 	
 	//Give it a go!
 	m_runningThreads++;
-	thread->start();
+	m_threadPool->start(thread);
 
 	//Give thread some advance
-	for(unsigned int i = 0; i < MAX_INSTANCES; i++)
-	{
-		QThread::yieldCurrentThread();
-	}
+	lamexp_sleep(1);
 }
-
-//AbstractEncoder *ProcessingDialog::makeEncoder(bool *nativeResampling)
-//{
-//	int rcMode = -1;
-//	AbstractEncoder *encoder =  NULL;
-//	*nativeResampling = false;
-//
-//	switch(m_settings->compressionEncoder())
-//	{
-//	/*-------- MP3Encoder /*--------*/
-//	case SettingsModel::MP3Encoder:
-//		{
-//			MP3Encoder *mp3Encoder = new MP3Encoder();
-//			mp3Encoder->setRCMode(rcMode = m_settings->compressionRCModeLAME());
-//			mp3Encoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelLAME() : m_settings->compressionBitrateLAME());
-//			mp3Encoder->setAlgoQuality(m_settings->lameAlgoQuality());
-//			if(m_settings->bitrateManagementEnabled())
-//			{
-//				mp3Encoder->setBitrateLimits(m_settings->bitrateManagementMinRate(), m_settings->bitrateManagementMaxRate());
-//			}
-//			if(m_settings->samplingRate() > 0)
-//			{
-//				mp3Encoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
-//				*nativeResampling = true;
-//			}
-//			mp3Encoder->setChannelMode(m_settings->lameChannelMode());
-//			mp3Encoder->setCustomParams(m_settings->customParametersLAME());
-//			encoder = mp3Encoder;
-//		}
-//		break;
-//	/*-------- VorbisEncoder /*--------*/
-//	case SettingsModel::VorbisEncoder:
-//		{
-//			VorbisEncoder *vorbisEncoder = new VorbisEncoder();
-//			vorbisEncoder->setRCMode(rcMode = m_settings->compressionRCModeOggEnc());
-//			vorbisEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelOggEnc() : m_settings->compressionBitrateOggEnc());
-//			if(m_settings->bitrateManagementEnabled())
-//			{
-//				vorbisEncoder->setBitrateLimits(m_settings->bitrateManagementMinRate(), m_settings->bitrateManagementMaxRate());
-//			}
-//			if(m_settings->samplingRate() > 0)
-//			{
-//				vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[m_settings->samplingRate()]);
-//				*nativeResampling = true;
-//			}
-//			vorbisEncoder->setCustomParams(m_settings->customParametersOggEnc());
-//			encoder = vorbisEncoder;
-//		}
-//		break;
-//	/*-------- AACEncoder /*--------*/
-//	case SettingsModel::AACEncoder:
-//		{
-//			switch(m_aacEncoder)
-//			{
-//			case SettingsModel::AAC_ENCODER_QAAC:
-//				{
-//					QAACEncoder *aacEncoder = new QAACEncoder();
-//					aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
-//					aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
-//					aacEncoder->setProfile(m_settings->aacEncProfile());
-//					aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
-//					encoder = aacEncoder;
-//				}
-//				break;
-//			case SettingsModel::AAC_ENCODER_FHG:
-//				{
-//					FHGAACEncoder *aacEncoder = new FHGAACEncoder();
-//					aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
-//					aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
-//					aacEncoder->setProfile(m_settings->aacEncProfile());
-//					aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
-//					encoder = aacEncoder;
-//				}
-//				break;
-//			case SettingsModel::AAC_ENCODER_NERO:
-//				{
-//					AACEncoder *aacEncoder = new AACEncoder();
-//					aacEncoder->setRCMode(rcMode = m_settings->compressionRCModeAacEnc());
-//					aacEncoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAacEnc() : m_settings->compressionBitrateAacEnc());
-//					aacEncoder->setEnable2Pass(m_settings->neroAACEnable2Pass());
-//					aacEncoder->setProfile(m_settings->aacEncProfile());
-//					aacEncoder->setCustomParams(m_settings->customParametersAacEnc());
-//					encoder = aacEncoder;
-//				}
-//				break;
-//			default:
-//				throw "makeEncoder(): Unknown AAC encoder specified!";
-//				break;
-//			}
-//		}
-//		break;
-//	/*-------- AC3Encoder /*--------*/
-//	case SettingsModel::AC3Encoder:
-//		{
-//			AC3Encoder *ac3Encoder = new AC3Encoder();
-//			ac3Encoder->setRCMode(rcMode = m_settings->compressionRCModeAften());
-//			ac3Encoder->setBitrate(IS_VBR(rcMode) ? m_settings->compressionVbrLevelAften() : m_settings->compressionBitrateAften());
-//			ac3Encoder->setCustomParams(m_settings->customParametersAften());
-//			ac3Encoder->setAudioCodingMode(m_settings->aftenAudioCodingMode());
-//			ac3Encoder->setDynamicRangeCompression(m_settings->aftenDynamicRangeCompression());
-//			ac3Encoder->setExponentSearchSize(m_settings->aftenExponentSearchSize());
-//			ac3Encoder->setFastBitAllocation(m_settings->aftenFastBitAllocation());
-//			encoder = ac3Encoder;
-//		}
-//		break;
-//	/*-------- FLACEncoder /*--------*/
-//	case SettingsModel::FLACEncoder:
-//		{
-//			FLACEncoder *flacEncoder = new FLACEncoder();
-//			flacEncoder->setBitrate(m_settings->compressionVbrLevelFLAC());
-//			flacEncoder->setRCMode(SettingsModel::VBRMode);
-//			flacEncoder->setCustomParams(m_settings->customParametersFLAC());
-//			encoder = flacEncoder;
-//		}
-//		break;
-//	/*-------- OpusEncoder --------*/
-//	case SettingsModel::OpusEncoder:
-//		{
-//			OpusEncoder *opusEncoder = new OpusEncoder();
-//			opusEncoder->setRCMode(rcMode = m_settings->compressionRCModeOpusEnc());
-//			opusEncoder->setBitrate(m_settings->compressionBitrateOpusEnc()); /*Opus always uses bitrate*/
-//			opusEncoder->setOptimizeFor(m_settings->opusOptimizeFor());
-//			opusEncoder->setEncodeComplexity(m_settings->opusComplexity());
-//			opusEncoder->setFrameSize(m_settings->opusFramesize());
-//			opusEncoder->setCustomParams(m_settings->customParametersOpus());
-//			encoder = opusEncoder;
-//		}
-//		break;
-//	/*-------- DCAEncoder --------*/
-//	case SettingsModel::DCAEncoder:
-//		{
-//			DCAEncoder *dcaEncoder = new DCAEncoder();
-//			dcaEncoder->setRCMode(SettingsModel::CBRMode);
-//			dcaEncoder->setBitrate(IS_VBR(rcMode) ? 0 : m_settings->compressionBitrateDcaEnc());
-//			encoder = dcaEncoder;
-//		}
-//		break;
-//	/*-------- PCMEncoder --------*/
-//	case SettingsModel::PCMEncoder:
-//		{
-//			WaveEncoder *waveEncoder = new WaveEncoder();
-//			waveEncoder->setBitrate(0); /*does NOT apply to PCM output*/
-//			waveEncoder->setRCMode(0); /*does NOT apply to PCM output*/
-//			encoder = waveEncoder;
-//		}
-//		break;
-//	/*-------- default --------*/
-//	default:
-//		throw "Unsupported encoder!";
-//	}
-//
-//	//Sanity checking
-//	if(!encoder)
-//	{
-//		throw "No encoder instance has been assigend!";
-//	}
-//
-//	return encoder;
-//}
 
 void ProcessingDialog::writePlayList(void)
 {

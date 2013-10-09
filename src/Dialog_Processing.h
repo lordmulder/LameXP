@@ -40,6 +40,7 @@ class QModelIndex;
 class QMovie;
 class RAMObserverThread;
 class SettingsModel;
+class QThreadPool;
 
 enum shutdownFlag_t
 {
@@ -82,6 +83,9 @@ private slots:
 	void diskUsageHasChanged(const quint64 val);
 	void progressViewFilterChanged(void);
 
+signals:
+	void abortRunningTasks(void);
+
 protected:
 	void showEvent(QShowEvent *event);
 	void closeEvent(QCloseEvent *event);
@@ -99,10 +103,10 @@ private:
 	bool shutdownComputer(void);
 	QString time2text(const double timeVal) const;
 	
+	QThreadPool *m_threadPool;
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;
 	AudioFileModel *m_metaInfo;
-	QList<ProcessThread*> m_threadList;
 	QMovie *m_progressIndicator;
 	ProgressModel *m_progressModel;
 	QMap<QUuid,QString> m_playList;
@@ -126,7 +130,4 @@ private:
 	DiskObserverThread *m_diskObserver;
 	qint64 m_timerStart;
 	int m_progressViewFilter;
-
-	//const int m_aacEncoder;
-	//AbstractEncoder *makeEncoder(bool *nativeResampling);
 };

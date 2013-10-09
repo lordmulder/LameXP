@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include <QThread>
+#include <QRunnable>
 #include <QUuid>
 #include <QStringList>
 
@@ -32,7 +32,7 @@ class QMutex;
 class AbstractFilter;
 class WaveProperties;
 
-class ProcessThread: public QThread
+class ProcessThread: public QObject, public QRunnable
 {
 	Q_OBJECT
 
@@ -40,13 +40,15 @@ public:
 	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, const QString &tempDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath);
 	~ProcessThread(void);
 	
-	void run();
+	void run(void);
 	
-	void abort() { m_aborted = true; }
-	QUuid getId() { return m_jobId; }
+	QUuid getId(void) { return m_jobId; }
 	void setRenamePattern(const QString &pattern);
 	void setOverwriteMode(const bool bSkipExistingFile, const bool ReplacesExisting = false);
 	void addFilter(AbstractFilter *filter);
+
+public slots:
+	void abort(void) { m_aborted = true; }
 
 private slots:
 	void handleUpdate(int progress);
@@ -57,6 +59,7 @@ signals:
 	void processStateChanged(const QUuid &jobId, const QString &newStatus, int newState);
 	void processStateFinished(const QUuid &jobId, const QString &outFileName, int success);
 	void processMessageLogged(const QUuid &jobId, const QString &line);
+	void processFinished(void);
 
 private:
 	enum ProcessStep

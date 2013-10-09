@@ -96,6 +96,8 @@ ProcessThread::~ProcessThread(void)
 
 	LAMEXP_DELETE(m_encoder);
 	LAMEXP_DELETE(m_propDetect);
+
+	emit processFinished();
 }
 
 ////////////////////////////////////////////////////////////
@@ -121,9 +123,12 @@ void ProcessThread::processFile()
 {
 	m_aborted = false;
 	bool bSuccess = true;
-		
+
+	//Initialize job status
 	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
 	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
+
+	//Initialize log
 	handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time()));
 	handleMessage("\n-------------------------------\n");
 
@@ -269,7 +274,7 @@ void ProcessThread::processFile()
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
 	}
 
-	QThread::msleep(125);
+	lamexp_sleep(125);
 
 	//Report result
 	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
@@ -407,7 +412,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 		{
 			bOkay = QFile::remove(outFileName);
 			if(bOkay) break;
-			QThread::msleep(125);
+			lamexp_sleep(125);
 		}
 		if(QFileInfo(outFileName).exists() || (!bOkay))
 		{
