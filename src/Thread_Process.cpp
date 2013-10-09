@@ -39,6 +39,8 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QDate>
+#include <QCoreApplication>
+#include <QThreadPool>
 
 #include <limits.h>
 #include <time.h>
@@ -47,8 +49,6 @@
 #define DIFF(X,Y) ((X > Y) ? (X-Y) : (Y-X))
 #define IS_WAVE(X) ((X.formatContainerType().compare("Wave", Qt::CaseInsensitive) == 0) && (X.formatAudioType().compare("PCM", Qt::CaseInsensitive) == 0))
 #define STRDEF(STR,DEF) ((!STR.isEmpty()) ? STR : DEF)
-
-QMutex *ProcessThread::m_mutex_genFileName = NULL;
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -65,14 +65,10 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_renamePattern("<BaseName>"),
 	m_overwriteSkipExistingFile(false),
 	m_overwriteReplacesExisting(false),
+	m_initialized(false),
 	m_aborted(false),
 	m_propDetect(new WaveProperties())
 {
-	if(m_mutex_genFileName)
-	{
-		m_mutex_genFileName = new QMutex;
-	}
-
 	connect(m_encoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 	connect(m_encoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
@@ -101,6 +97,54 @@ ProcessThread::~ProcessThread(void)
 }
 
 ////////////////////////////////////////////////////////////
+// Init Function
+////////////////////////////////////////////////////////////
+
+bool ProcessThread::start(QThreadPool *pool, QCoreApplication *app)
+{
+	if(!m_initialized)
+	{
+		m_initialized = true;
+
+		//Initialize job status
+		qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
+		emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
+
+		//Initialize log
+		handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time()));
+		handleMessage("\n-------------------------------\n");
+
+		//Process pending GUI events
+		if(app) app->processEvents(QEventLoop::ExcludeUserInputEvents);
+
+		//Generate output file name
+		m_outFileName.clear();
+		switch(generateOutFileName(m_outFileName))
+		{
+		case 1:
+			//File name generated successfully :-)
+			pool->start(this);
+			return true;
+			break;
+		case -1:
+			//File name already exists -> skipping!
+			emit processStateChanged(m_jobId, tr("Skipped."), ProgressModel::JobSkipped);
+			emit processStateFinished(m_jobId, m_outFileName, -1);
+			return false;
+			break;
+		default:
+			//File name could not be generated
+			emit processStateChanged(m_jobId, tr("Not found!"), ProgressModel::JobFailed);
+			emit processStateFinished(m_jobId, m_outFileName, 0);
+			return false;
+			break;
+		}
+	}
+
+	return false;
+}
+
+////////////////////////////////////////////////////////////
 // Thread Entry Point
 ////////////////////////////////////////////////////////////
 
@@ -124,31 +168,10 @@ void ProcessThread::processFile()
 	m_aborted = false;
 	bool bSuccess = true;
 
-	//Initialize job status
-	qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
-	emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
-
-	//Initialize log
-	handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time()));
-	handleMessage("\n-------------------------------\n");
-
-	//Generate output file name
-	QString outFileName;
-	switch(generateOutFileName(outFileName))
+	//Make sure object was initialized correctly
+	if(!m_initialized)
 	{
-	case 1:
-		//File name generated successfully :-)
-		break;
-	case -1:
-		//File name already exists -> skipping!
-		emit processStateChanged(m_jobId, tr("Skipped."), ProgressModel::JobSkipped);
-		emit processStateFinished(m_jobId, outFileName, -1);
-		return;
-	default:
-		//File name could not be generated
-		emit processStateChanged(m_jobId, tr("Not found!"), ProgressModel::JobFailed);
-		emit processStateFinished(m_jobId, outFileName, 0);
-		return;
+		throw "Object not initialized yet!";
 	}
 
 	QString sourceFile = m_audioFile.filePath();
@@ -187,10 +210,10 @@ void ProcessThread::processFile()
 		}
 		else
 		{
-			if(QFileInfo(outFileName).exists() && (QFileInfo(outFileName).size() < 512)) QFile::remove(outFileName);
+			if(QFileInfo(m_outFileName).exists() && (QFileInfo(m_outFileName).size() < 512)) QFile::remove(m_outFileName);
 			handleMessage(QString("%1\n%2\n\n%3\t%4\n%5\t%6").arg(tr("The format of this file is NOT supported:"), m_audioFile.filePath(), tr("Container Format:"), m_audioFile.formatContainerInfo(), tr("Audio Format:"), m_audioFile.formatAudioCompressInfo()));
 			emit processStateChanged(m_jobId, tr("Unsupported!"), ProgressModel::JobFailed);
-			emit processStateFinished(m_jobId, outFileName, 0);
+			emit processStateFinished(m_jobId, m_outFileName, 0);
 			return;
 		}
 	}
@@ -254,23 +277,23 @@ void ProcessThread::processFile()
 	if(bSuccess && !m_aborted)
 	{
 		m_currentStep = EncodingStep;
-		bSuccess = m_encoder->encode(sourceFile, m_audioFile, outFileName, &m_aborted);
+		bSuccess = m_encoder->encode(sourceFile, m_audioFile, m_outFileName, &m_aborted);
 	}
 
 	//Clean-up
 	if((!bSuccess) || m_aborted)
 	{
-		QFileInfo fileInfo(outFileName);
+		QFileInfo fileInfo(m_outFileName);
 		if(fileInfo.exists() && (fileInfo.size() < 512))
 		{
-			QFile::remove(outFileName);
+			QFile::remove(m_outFileName);
 		}
 	}
 
 	//Make sure output file exists
 	if(bSuccess && (!m_aborted))
 	{
-		QFileInfo fileInfo(outFileName);
+		QFileInfo fileInfo(m_outFileName);
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
 	}
 
@@ -278,7 +301,7 @@ void ProcessThread::processFile()
 
 	//Report result
 	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
-	emit processStateFinished(m_jobId, outFileName, (bSuccess ? 1 : 0));
+	emit processStateFinished(m_jobId, m_outFileName, (bSuccess ? 1 : 0));
 
 	qDebug("Process thread is done.");
 }
@@ -320,8 +343,6 @@ void ProcessThread::handleMessage(const QString &line)
 int ProcessThread::generateOutFileName(QString &outFileName)
 {
 	outFileName.clear();
-
-	QMutexLocker lock(m_mutex_genFileName);
 
 	//Make sure the source file exists
 	QFileInfo sourceFile(m_audioFile.filePath());
@@ -440,18 +461,30 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 
 QString ProcessThread::generateTempFileName(void)
 {
-	QMutexLocker lock(m_mutex_genFileName);
-	QString tempFileName = QString("%1/%2.wav").arg(m_tempDirectory, lamexp_rand_str());
-
-	while(QFileInfo(tempFileName).exists())
+	bool bOkay = false;
+	QString tempFileName;
+	
+	for(int i = 0; i < 4096; i++)
 	{
 		tempFileName = QString("%1/%2.wav").arg(m_tempDirectory, lamexp_rand_str());
+		if(m_tempFiles.contains(tempFileName, Qt::CaseInsensitive) || QFileInfo(tempFileName).exists())
+		{
+			continue;
+		}
+
+		QFile file(tempFileName);
+		if(file.open(QFile::ReadWrite))
+		{
+			file.close();
+			bOkay = true;
+			break;
+		}
 	}
 
-	QFile file(tempFileName);
-	if(file.open(QFile::ReadWrite))
+	if(!bOkay)
 	{
-		file.close();
+		qWarning("Failed to generate unique temp file name!");
+		return QString("%1/~whoops.wav").arg(m_tempDirectory);
 	}
 
 	m_tempFiles << tempFileName;

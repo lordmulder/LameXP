@@ -928,10 +928,10 @@ void ProcessingDialog::startNextJob(void)
 	
 	//Give it a go!
 	m_runningThreads++;
-	m_threadPool->start(thread);
-
-	//Give thread some advance
-	lamexp_sleep(1);
+	if(!thread->start(m_threadPool, QApplication::instance()))
+	{
+		QTimer::singleShot(0, this, SLOT(doneEncoding()));
+	}
 }
 
 void ProcessingDialog::writePlayList(void)

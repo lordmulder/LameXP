@@ -28,9 +28,10 @@
 #include "Model_AudioFile.h"
 #include "Encoder_Abstract.h"
 
-class QMutex;
 class AbstractFilter;
 class WaveProperties;
+class QThreadPool;
+class QCoreApplication;
 
 class ProcessThread: public QObject, public QRunnable
 {
@@ -40,7 +41,7 @@ public:
 	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, const QString &tempDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath);
 	~ProcessThread(void);
 	
-	void run(void);
+	bool start(QThreadPool *pool, QCoreApplication *app = NULL);
 	
 	QUuid getId(void) { return m_jobId; }
 	void setRenamePattern(const QString &pattern);
@@ -61,6 +62,9 @@ signals:
 	void processMessageLogged(const QUuid &jobId, const QString &line);
 	void processFinished(void);
 
+protected:
+	virtual void run(void);
+
 private:
 	enum ProcessStep
 	{
@@ -74,15 +78,17 @@ private:
 	void processFile();
 	int generateOutFileName(QString &outFileName);
 	QString generateTempFileName(void);
-	void insertDownsampleFilter(void);
 	void insertDownmixFilter(void);
-	
+	void insertDownsampleFilter(void);
+
+	volatile bool m_aborted;
+	volatile bool m_initialized;
+
 	const QUuid m_jobId;
 	AudioFileModel m_audioFile;
 	AbstractEncoder *m_encoder;
 	const QString m_outputDirectory;
 	const QString m_tempDirectory;
-	volatile bool m_aborted;
 	ProcessStep m_currentStep;
 	QStringList m_tempFiles;
 	const bool m_prependRelativeSourcePath;
@@ -91,6 +97,5 @@ private:
 	bool m_overwriteSkipExistingFile;
 	bool m_overwriteReplacesExisting;
 	WaveProperties *m_propDetect;
-	
-	static QMutex *m_mutex_genFileName;
+	QString m_outFileName;
 };

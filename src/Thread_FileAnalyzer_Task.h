@@ -82,7 +82,6 @@ private:
 	bool checkFile_CDDA(QFile &file);
 	void retrieveCover(AudioFileModel &audioFile, cover_t coverType, const QByteArray &coverData);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
-	void waitForPreviousThreads(void);
 
 	const unsigned int m_taskId;
 
