@@ -1493,17 +1493,16 @@ bool lamexp_portable_mode(void)
 /*
  * Get a random string
  */
-QString lamexp_rand_str(void)
+QString lamexp_rand_str(const bool bLong)
 {
-	QRegExp regExp("\\{(\\w+)-(\\w+)-(\\w+)-(\\w+)-(\\w+)\\}");
-	QString uuid = QUuid::createUuid().toString();
+	const QUuid uuid = QUuid::createUuid().toString();
 
-	if(regExp.indexIn(uuid) >= 0)
-	{
-		return QString().append(regExp.cap(1)).append(regExp.cap(2)).append(regExp.cap(3)).append(regExp.cap(4)).append(regExp.cap(5));
-	}
+	const unsigned int u1 = uuid.data1;
+	const unsigned int u2 = (((unsigned int)(uuid.data2)) << 16) | ((unsigned int)(uuid.data3));
+	const unsigned int u3 = (((unsigned int)(uuid.data4[0])) << 24) | (((unsigned int)(uuid.data4[1])) << 16) | (((unsigned int)(uuid.data4[2])) << 8) | ((unsigned int)(uuid.data4[3]));
+	const unsigned int u4 = (((unsigned int)(uuid.data4[4])) << 24) | (((unsigned int)(uuid.data4[5])) << 16) | (((unsigned int)(uuid.data4[6])) << 8) | ((unsigned int)(uuid.data4[7]));
 
-	throw "The RegExp didn't match on the UUID string. This shouldn't happen ;-)";
+	return bLong ? QString().sprintf("%08x%08x%08x%08x", u1, u2, u3, u4) : QString().sprintf("%08x%08x", (u1 ^ u2), (u3 ^ u4));
 }
 
 
