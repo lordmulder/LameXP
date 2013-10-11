@@ -2354,21 +2354,18 @@ void lamexp_seed_rand(void)
  */
 unsigned int lamexp_rand(void)
 {
-	unsigned int rnd = 0;
-	if(const lamexp_os_version_t* osVer = lamexp_get_os_version())
+	quint32 rnd = 0;
+
+	if(rand_s(&rnd) == 0)
 	{
-		if(LAMEXP_MIN_OS_VER(osVer, 5, 1))
-		{
-			if(rand_s(&rnd) == 0)
-			{
-				return rnd;
-			}
-		}
+		return rnd;
 	}
+
 	for(size_t i = 0; i < sizeof(unsigned int); i++)
 	{
 		rnd = (rnd << 8) ^ qrand();
 	}
+
 	return rnd;
 }
 
