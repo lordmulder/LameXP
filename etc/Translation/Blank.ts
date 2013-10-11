@@ -2876,143 +2876,143 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="126"/>
+        <location filename="../../src/Thread_Process.cpp" line="110"/>
         <source>Starting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="139"/>
+        <location filename="../../src/Thread_Process.cpp" line="143"/>
         <source>Skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="144"/>
+        <location filename="../../src/Thread_Process.cpp" line="149"/>
         <source>Not found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="177"/>
+        <location filename="../../src/Thread_Process.cpp" line="217"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="186"/>
+        <location filename="../../src/Thread_Process.cpp" line="226"/>
         <source>The format of this file is NOT supported:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="186"/>
+        <location filename="../../src/Thread_Process.cpp" line="226"/>
         <source>Container Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="186"/>
+        <location filename="../../src/Thread_Process.cpp" line="226"/>
         <source>Audio Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="187"/>
+        <location filename="../../src/Thread_Process.cpp" line="227"/>
         <source>Unsupported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="275"/>
+        <location filename="../../src/Thread_Process.cpp" line="315"/>
         <source>Aborted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="275"/>
+        <location filename="../../src/Thread_Process.cpp" line="315"/>
         <source>Done.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="275"/>
+        <location filename="../../src/Thread_Process.cpp" line="315"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="292"/>
+        <location filename="../../src/Thread_Process.cpp" line="332"/>
         <source>Encoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="295"/>
+        <location filename="../../src/Thread_Process.cpp" line="335"/>
         <source>Analyzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="298"/>
+        <location filename="../../src/Thread_Process.cpp" line="338"/>
         <source>Filtering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="301"/>
+        <location filename="../../src/Thread_Process.cpp" line="341"/>
         <source>Decoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="325"/>
+        <location filename="../../src/Thread_Process.cpp" line="363"/>
         <source>The source audio file could not be found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="333"/>
+        <location filename="../../src/Thread_Process.cpp" line="371"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="361"/>
+        <location filename="../../src/Thread_Process.cpp" line="399"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="370"/>
+        <location filename="../../src/Thread_Process.cpp" line="408"/>
         <source>The target output directory is NOT writable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="419"/>
         <source>Unknown File Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="383"/>
+        <location filename="../../src/Thread_Process.cpp" line="421"/>
         <source>Unknown Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="384"/>
+        <location filename="../../src/Thread_Process.cpp" line="422"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="385"/>
+        <location filename="../../src/Thread_Process.cpp" line="423"/>
         <source>Unknown Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="387"/>
+        <location filename="../../src/Thread_Process.cpp" line="425"/>
         <source>Unknown Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="396"/>
+        <location filename="../../src/Thread_Process.cpp" line="434"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="397"/>
+        <location filename="../../src/Thread_Process.cpp" line="435"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="404"/>
+        <location filename="../../src/Thread_Process.cpp" line="442"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="414"/>
+        <location filename="../../src/Thread_Process.cpp" line="452"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3063,209 +3063,209 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="195"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="196"/>
         <source>Show details for selected job</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="196"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="197"/>
         <source>Browse Output File Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="202"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="203"/>
         <source>Filter Log Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="204"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="205"/>
         <source>Show Running Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="205"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="206"/>
         <source>Show Succeeded Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="206"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="207"/>
         <source>Show Failed Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="207"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="208"/>
         <source>Show Skipped Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="208"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="209"/>
         <source>Show All Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="260"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="261"/>
         <source>Encoding Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="260"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="261"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="481"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="524"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="537"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="541"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="559"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="556"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="570"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="584"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="592"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="594"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="602"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="594"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="602"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="595"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="603"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="595"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="603"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="612"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="620"/>
         <source>Process finished after %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="623"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="631"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="623"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="631"/>
         <source>%n file(s) skipped</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="627"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="635"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="629"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="637"/>
         <source>LameXP - Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="629"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="637"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="641"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="649"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="645"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="647"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="653"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="647"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
         <source>LameXP - Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="841"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="849"/>
         <source>None of the items matches the current filtering rules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1173"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1030"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1173"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1030"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1237"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1094"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1241"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1242"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1098"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1099"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1298"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1155"/>
         <source>%n hour(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1299"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1303"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1156"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1160"/>
         <source>%n minute(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1304"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1308"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1161"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1165"/>
         <source>%n second(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1309"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1166"/>
         <source>%n millisecond(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>

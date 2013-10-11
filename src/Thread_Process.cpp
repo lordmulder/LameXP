@@ -39,7 +39,6 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QDate>
-#include <QCoreApplication>
 #include <QThreadPool>
 
 #include <limits.h>
@@ -65,7 +64,7 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_renamePattern("<BaseName>"),
 	m_overwriteSkipExistingFile(false),
 	m_overwriteReplacesExisting(false),
-	m_initialized(false),
+	m_initialized(-1),
 	m_aborted(false),
 	m_propDetect(new WaveProperties())
 {
@@ -100,11 +99,11 @@ ProcessThread::~ProcessThread(void)
 // Init Function
 ////////////////////////////////////////////////////////////
 
-bool ProcessThread::start(QThreadPool *pool, QCoreApplication *app)
+bool ProcessThread::init(void)
 {
-	if(!m_initialized)
+	if(m_initialized < 0)
 	{
-		m_initialized = true;
+		m_initialized = 0;
 
 		//Initialize job status
 		qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
@@ -113,9 +112,22 @@ bool ProcessThread::start(QThreadPool *pool, QCoreApplication *app)
 		//Initialize log
 		handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time()));
 		handleMessage("\n-------------------------------\n");
+	}
 
-		//Process pending GUI events
-		if(app) app->processEvents(QEventLoop::ExcludeUserInputEvents);
+	return true;
+}
+
+bool ProcessThread::start(QThreadPool *pool)
+{
+	//Make sure object was initialized correctly
+	if(m_initialized < 0)
+	{
+		throw "Object not initialized yet!";
+	}
+
+	if(m_initialized < 1)
+	{
+		m_initialized = 1;
 
 		//Generate output file name
 		m_outFileName.clear();
@@ -169,7 +181,7 @@ void ProcessThread::processFile()
 	bool bSuccess = true;
 
 	//Make sure object was initialized correctly
-	if(!m_initialized)
+	if(m_initialized < 1)
 	{
 		throw "Object not initialized yet!";
 	}

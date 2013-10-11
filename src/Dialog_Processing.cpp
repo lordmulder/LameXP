@@ -545,6 +545,7 @@ void ProcessingDialog::initEncoding(void)
 	{
 		startNextJob();
 		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+		QThread::yieldCurrentThread();
 	}
 
 	m_timerStart = lamexp_perfcounter_value();
@@ -871,6 +872,8 @@ void ProcessingDialog::startNextJob(void)
 	}
 	
 	m_currentFile++;
+	m_runningThreads++;
+
 	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
 	bool nativeResampling = false;
 
@@ -925,10 +928,19 @@ void ProcessingDialog::startNextJob(void)
 	connect(thread, SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
 	connect(this, SIGNAL(abortRunningTasks()), thread, SLOT(abort()), Qt::DirectConnection);
-	
+
+
+	//Initialize thread object
+	if(!thread->init())
+	{
+		qFatal("Fatal Error: Thread initialization has failed!");
+	}
+
+	//Update GUI
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+
 	//Give it a go!
-	m_runningThreads++;
-	if(!thread->start(m_threadPool, QApplication::instance()))
+	if(!thread->start(m_threadPool))
 	{
 		QTimer::singleShot(0, this, SLOT(doneEncoding()));
 	}

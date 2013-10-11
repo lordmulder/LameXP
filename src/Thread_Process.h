@@ -41,7 +41,8 @@ public:
 	ProcessThread(const AudioFileModel &audioFile, const QString &outputDirectory, const QString &tempDirectory, AbstractEncoder *encoder, const bool prependRelativeSourcePath);
 	~ProcessThread(void);
 	
-	bool start(QThreadPool *pool, QCoreApplication *app = NULL);
+	bool init(void);
+	bool start(QThreadPool *pool);
 	
 	QUuid getId(void) { return m_jobId; }
 	void setRenamePattern(const QString &pattern);
@@ -82,7 +83,7 @@ private:
 	void insertDownsampleFilter(void);
 
 	volatile bool m_aborted;
-	volatile bool m_initialized;
+	volatile int m_initialized;
 
 	const QUuid m_jobId;
 	AudioFileModel m_audioFile;
