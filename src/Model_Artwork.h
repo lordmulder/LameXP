@@ -22,10 +22,9 @@
 #pragma once
 
 #include <QString>
-#include <QMap>
-#include <QMutex>
 
-class QFile;
+class ArtworkModel_SharedData;
+class QMutex;
 
 class ArtworkModel
 {
@@ -42,10 +41,7 @@ public:
 	void clear(void);
 
 private:
-	QString m_filePath;
-	bool m_isOwner;
-
-	static QMutex m_mutex;
-	static QMap<QString, unsigned int> m_refCount;
-	static QMap<QString, QFile*> m_fileHandle;
+	const QString m_nullString;
+	ArtworkModel_SharedData *m_data;
+	QMutex *m_mutex;
 };

@@ -30,6 +30,7 @@
 #include <QTime>
 #include <QTextCodec>
 #include <QTextStream>
+#include <QMutexLocker>
 
 #include <float.h>
 #include <limits>

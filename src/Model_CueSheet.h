@@ -29,6 +29,7 @@ class CueSheetFile;
 class QApplication;
 class QDir;
 class QTextCodec;
+class QFile;
 
 class CueSheetModel : public QAbstractItemModel
 {
