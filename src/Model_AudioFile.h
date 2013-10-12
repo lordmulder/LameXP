@@ -21,23 +21,131 @@
 
 #pragma once
 
-#include "Model_Artwork.h"
-
 #include <QObject>
 #include <QString>
-#include <QMap>
-#include <QMutex>
+
+#include "Model_Artwork.h"
+
+///////////////////////////////////////////////////////////////////////////////
+// Audio File - Meta Info
+///////////////////////////////////////////////////////////////////////////////
+
+class AudioFileModel_MetaInfo : public QObject
+{
+	Q_OBJECT
+
+public:
+	//Constructors & Destructor
+	AudioFileModel_MetaInfo(void);
+	AudioFileModel_MetaInfo(const AudioFileModel_MetaInfo &model);
+	AudioFileModel_MetaInfo &operator=(const AudioFileModel_MetaInfo &model);
+	~AudioFileModel_MetaInfo(void);
+
+	//Getter
+	inline const QString &title(void) const { return m_titel; }
+	inline const QString &artist(void) const { return m_artist; }
+	inline const QString &album(void) const { return m_album; }
+	inline const QString &genre(void) const { return m_genre; }
+	inline const QString &comment(void) const { return m_comment; }
+	inline const QString &cover(void) const { return m_cover.filePath(); }
+	inline unsigned int year(void) const { return m_year; }
+	inline unsigned int position(void) const { return m_position; }
+	inline unsigned int duration(void) const { return m_duration; }
+
+	//Setter
+	inline void setTitle(const QString &titel) { m_titel = titel.trimmed(); }
+	inline void setArtist(const QString &artist) { m_artist = artist.trimmed(); }
+	inline void setAlbum(const QString &album) { m_album = album.trimmed(); }
+	inline void setGenre(const QString &genre) { m_genre = genre.trimmed(); }
+	inline void setComment(const QString &comment) { m_comment = comment.trimmed(); }
+	inline const ArtworkModel &cover(const QString &path, const bool isOwner) { m_cover.setFilePath(path, isOwner); }
+	inline void setYear(const unsigned int year) { m_year = year; }
+	inline void setPosition(const unsigned int position) { m_position = position; }
+	inline void setDuration(const unsigned int duration) { m_duration = duration; }
+
+	//Reset
+	void reset(void);
+
+private:
+	QString m_titel;
+	QString m_artist;
+	QString m_album;
+	QString m_genre;
+	QString m_comment;
+	ArtworkModel m_cover;
+	unsigned int m_year;
+	unsigned int m_position;
+	unsigned int m_duration;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Audio File - Technical Info
+///////////////////////////////////////////////////////////////////////////////
+
+class AudioFileModel_TechInfo : public QObject
+{
+	Q_OBJECT
+
+public:
+	//Constructors & Destructor
+	AudioFileModel_TechInfo(void);
+	AudioFileModel_TechInfo(const AudioFileModel_TechInfo &model);
+	AudioFileModel_TechInfo &operator=(const AudioFileModel_TechInfo &model);
+	~AudioFileModel_TechInfo(void);
+
+	//Getter
+	inline const QString &containerType(void) const { return m_containerType; }
+	inline const QString &containerProfile(void) const { return m_containerProfile; }
+	inline const QString &audioType(void) const { return m_audioType; }
+	inline const QString &audioProfile(void) const { return m_audioProfile; }
+	inline const QString &audioVersion(void) const { return m_audioVersion; }
+	inline const QString &audioEncodeLib(void) const { return m_audioEncodeLib; }
+	inline unsigned int audioSamplerate(void) const { return m_audioSamplerate; }
+	inline unsigned int audioChannels(void) const { return m_audioChannels; }
+	inline unsigned int audioBitdepth(void) const { return m_audioBitdepth; }
+	inline unsigned int audioBitrate(void) const { return m_audioBitrate; }
+	inline unsigned int audioBitrateMode(void) const { return m_audioBitrateMode; }
+
+	//Setter
+	inline const QString &setContainerType(const QString &containerType) { m_containerType = containerType; }
+	inline const QString &setContainerProfile(const QString &containerProfile) { m_containerProfile = containerProfile; }
+	inline const QString &setAudioType(const QString &audioType) { m_audioType = audioType; }
+	inline const QString &setAudioProfile(const QString &audioProfile) { m_audioProfile = audioProfile; }
+	inline const QString &setAudioVersion(const QString &audioVersion) { m_audioVersion = audioVersion; }
+	inline const QString &setAudioEncodeLib(const QString &audioEncodeLib) { m_audioEncodeLib = audioEncodeLib; }
+	inline unsigned int setAudioSamplerate(const unsigned int audioSamplerate) { m_audioSamplerate = audioSamplerate; }
+	inline unsigned int setAudioChannels(const unsigned int audioChannels) { m_audioChannels = audioChannels; }
+	inline unsigned int setAudioBitdepth(const unsigned int audioBitdepth) { m_audioBitdepth = audioBitdepth; }
+	inline unsigned int setAudioBitrate(const unsigned int audioBitrate) { m_audioBitrate = audioBitrate; }
+	inline unsigned int setAudioBitrateMode(const unsigned int audioBitrateMode) { m_audioBitrateMode = audioBitrateMode; }
+
+	//Reset
+	void reset(void);
+
+private:
+	QString m_containerType;
+	QString m_containerProfile;
+	QString m_audioType;
+	QString m_audioProfile;
+	QString m_audioVersion;
+	QString m_audioEncodeLib;
+	unsigned int m_audioSamplerate;
+	unsigned int m_audioChannels;
+	unsigned int m_audioBitdepth;
+	unsigned int m_audioBitrate;
+	unsigned int m_audioBitrateMode;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Audio File Model
+///////////////////////////////////////////////////////////////////////////////
 
 class AudioFileModel : public QObject
 {
 	Q_OBJECT
 
 public:
-	AudioFileModel(const QString &path = QString(), const QString &name = QString());
-	AudioFileModel(const AudioFileModel &model, bool copyMetaInfo = true);
-	AudioFileModel &operator=(const AudioFileModel &model);
-	~AudioFileModel(void);
-
+	//Types
 	enum BitrateMode
 	{
 		BitrateModeUndefined = 0,
@@ -45,92 +153,38 @@ public:
 		BitrateModeVariable = 2,
 	};
 
+	//Constants
 	static const unsigned int BITDEPTH_IEEE_FLOAT32;
 
-	//-----------------------
-	//Getters
-	//-----------------------
+	//Constructors & Destructor
+	AudioFileModel(const QString &path);
+	AudioFileModel(const AudioFileModel &model);
+	AudioFileModel &operator=(const AudioFileModel &model);
+	~AudioFileModel(void);
 
-	const QString &filePath(void) const;
-	const QString &fileName(void) const;
-	const QString &fileArtist(void) const;
-	const QString &fileAlbum(void) const;
-	const QString &fileGenre(void) const;
-	const QString &fileComment(void) const;
-	const QString &fileCover(void) const;
-	unsigned int fileYear(void) const;
-	unsigned int filePosition(void) const;
-	unsigned int fileDuration(void) const;
+	//Getter
+	inline const QString &filePath(void) const { return m_filePath; }
+	inline const AudioFileModel_MetaInfo &metaInfo(void) const { return m_metaInfo; }
+	inline const AudioFileModel_TechInfo &techInfo(void) const { return m_techInfo; }
+	inline AudioFileModel_MetaInfo &metaInfo(void) { return m_metaInfo; }
+	inline AudioFileModel_TechInfo &techInfo(void) { return m_techInfo; }
 
-	const QString &formatContainerType(void) const;
-	const QString &formatContainerProfile(void) const;
-	const QString &formatAudioType(void) const;
-	const QString &formatAudioProfile(void) const;
-	const QString &formatAudioVersion(void) const;
-	unsigned int formatAudioSamplerate(void) const;
-	unsigned int formatAudioChannels(void) const;
-	unsigned int formatAudioBitdepth(void) const;
-	unsigned int formatAudioBitrate(void) const;
-	unsigned int formatAudioBitrateMode(void) const;
-	
-	const QString fileDurationInfo(void) const;
-	const QString formatContainerInfo(void) const;
-	const QString formatAudioBaseInfo(void) const;
-	const QString formatAudioCompressInfo(void) const;
+	//Setter
+	inline const QString &setFilePath(const QString &filePath) { m_filePath = filePath; }
+	inline void setMetaInfo(const AudioFileModel_MetaInfo &metaInfo) { m_metaInfo = metaInfo; }
+	inline void setTechInfo(const AudioFileModel_TechInfo &techInfo) { m_techInfo = techInfo; }
 
-	//-----------------------
-	//Setters
-	//-----------------------
+	//Helpers
+	const QString durationInfo(void) const;
+	const QString containerInfo(void) const;
+	const QString audioBaseInfo(void) const;
+	const QString audioCompressInfo(void) const;
 
-	void setFilePath(const QString &path);
-	void setFileName(const QString &name);
-	void setFileArtist(const QString &artist);
-	void setFileAlbum(const QString &album);
-	void setFileGenre(const QString &genre);
-	void setFileComment(const QString &comment);
-	void setFileCover(const QString &coverFile, bool owner);
-	void setFileCover(const ArtworkModel &model);
-	void setFileYear(unsigned int year);
-	void setFilePosition(unsigned int position);
-	void setFileDuration(unsigned int duration);
-
-	void setFormatContainerType(const QString &type);
-	void setFormatContainerProfile(const QString &profile);
-	void setFormatAudioType(const QString &type);
-	void setFormatAudioProfile(const QString &profile);
-	void setFormatAudioVersion(const QString &version);
-	void setFormatAudioEncodeLib(const QString &encodeLib);
-	void setFormatAudioSamplerate(unsigned int samplerate);
-	void setFormatAudioChannels(unsigned int channels);
-	void setFormatAudioBitdepth(unsigned int bitdepth);
-	void setFormatAudioBitrate(unsigned int bitrate);
-	void setFormatAudioBitrateMode(unsigned int bitrateMode);
-
-	void updateMetaInfo(const AudioFileModel &model);
+	//Reset
+	void reset(void);
 
 private:
 	QString m_filePath;
-	QString m_fileName;
-	QString m_fileArtist;
-	QString m_fileAlbum;
-	QString m_fileGenre;
-	QString m_fileComment;
-	ArtworkModel m_fileCover;
-	unsigned int m_fileYear;
-	unsigned int m_filePosition;
-	unsigned int m_fileDuration;
-
-	QString m_formatContainerType;
-	QString m_formatContainerProfile;
-	QString m_formatAudioType;
-	QString m_formatAudioProfile;
-	QString m_formatAudioVersion;
-	QString m_formatAudioEncodeLib;
-	unsigned int m_formatAudioSamplerate;
-	unsigned int m_formatAudioChannels;
-	unsigned int m_formatAudioBitdepth;
-	unsigned int m_formatAudioBitrate;
-	unsigned int m_formatAudioBitrateMode;
-
-	void resetAll(void);
+	AudioFileModel_MetaInfo m_metaInfo;
+	AudioFileModel_TechInfo m_techInfo;
 };

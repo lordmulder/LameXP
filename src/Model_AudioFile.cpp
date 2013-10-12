@@ -21,236 +21,183 @@
 
 #include "Model_AudioFile.h"
 
+#include "Global.h"
+
 #include <QTime>
 #include <QObject>
 #include <QMutexLocker>
 #include <QFile>
-#include <limits.h>
 
-#define U16Str(X) QString::fromUtf16(reinterpret_cast<const unsigned short*>(L##X))
+#include <limits.h>
 
 const unsigned int AudioFileModel::BITDEPTH_IEEE_FLOAT32 = UINT_MAX-1;
 
-////////////////////////////////////////////////////////////
-// Constructor & Destructor
-////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// Audio File - Meta Info
+///////////////////////////////////////////////////////////////////////////////
 
-AudioFileModel::AudioFileModel(const QString &path, const QString &name)
+AudioFileModel_MetaInfo::AudioFileModel_MetaInfo(void)
 {
-	resetAll();
-
-	m_filePath = path;
-	m_fileName = name;
+	reset();
 }
 
-AudioFileModel::AudioFileModel(const AudioFileModel &model, bool copyMetaInfo)
+AudioFileModel_MetaInfo::AudioFileModel_MetaInfo(const AudioFileModel_MetaInfo &model)
 {
-	resetAll();
+	m_titel = model.m_titel;
+	m_artist = model.m_artist;
+	m_album = model.m_album;
+	m_genre = model.m_genre;
+	m_comment = model.m_comment;
+	m_cover = model.m_cover;
+	m_year = model.m_year;
+	m_position = model.m_position;
+	m_duration = model.m_duration;
+}
 
-	setFilePath(model.m_filePath);
-	setFormatContainerType(model.m_formatContainerType);
-	setFormatContainerProfile(model.m_formatContainerProfile);
-	setFormatAudioType(model.m_formatAudioType);
-	setFormatAudioProfile(model.m_formatAudioProfile);
-	setFormatAudioVersion(model.m_formatAudioVersion);
-	setFormatAudioEncodeLib(model.m_formatAudioEncodeLib);
-	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
-	setFormatAudioChannels(model.m_formatAudioChannels);
-	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
-	setFormatAudioBitrate(model.m_formatAudioBitrate);
-	setFormatAudioBitrateMode(model.m_formatAudioBitrateMode);
-	setFileDuration(model.m_fileDuration);
+AudioFileModel_MetaInfo &AudioFileModel_MetaInfo::operator=(const AudioFileModel_MetaInfo &model)
+{
+	m_titel = model.m_titel;
+	m_artist = model.m_artist;
+	m_album = model.m_album;
+	m_genre = model.m_genre;
+	m_comment = model.m_comment;
+	m_cover = model.m_cover;
+	m_year = model.m_year;
+	m_position = model.m_position;
+	m_duration = model.m_duration;
 
-	if(copyMetaInfo)
-	{
-		setFileName(model.m_fileName);
-		setFileArtist(model.m_fileArtist);
-		setFileAlbum(model.m_fileAlbum);
-		setFileGenre(model.m_fileGenre);
-		setFileComment(model.m_fileComment);
-		setFileCover(model.m_fileCover);
-		setFileYear(model.m_fileYear);
-		setFilePosition(model.m_filePosition);
-	}
+	return (*this);
+}
+
+AudioFileModel_MetaInfo::~AudioFileModel_MetaInfo(void)
+{
+	/*nothing to do*/
+}
+
+void AudioFileModel_MetaInfo::reset(void)
+{
+	m_titel.clear();
+	m_artist.clear();
+	m_album.clear();
+	m_genre.clear();
+	m_comment.clear();
+	m_cover.clear();
+	m_year = 0;
+	m_position = 0;
+	m_duration = 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Audio File - Technical Info
+///////////////////////////////////////////////////////////////////////////////
+
+AudioFileModel_TechInfo::AudioFileModel_TechInfo(void)
+{
+	reset();
+}
+
+AudioFileModel_TechInfo::AudioFileModel_TechInfo(const AudioFileModel_TechInfo &model)
+{
+	m_containerType = model.m_containerType;
+	m_containerProfile = model.m_containerProfile;
+	m_audioType = model.m_audioType;
+	m_audioProfile = model.m_audioProfile;
+	m_audioVersion = model.m_audioVersion;
+	m_audioEncodeLib = model.m_audioEncodeLib;
+	m_audioSamplerate = model.m_audioSamplerate;
+	m_audioChannels = model.m_audioChannels;
+	m_audioBitdepth = model.m_audioBitdepth;
+	m_audioBitrate = model.m_audioBitrate;
+	m_audioBitrateMode = model.m_audioBitrateMode;
+}
+
+AudioFileModel_TechInfo &AudioFileModel_TechInfo::operator=(const AudioFileModel_TechInfo &model)
+{
+	m_containerType = model.m_containerType;
+	m_containerProfile = model.m_containerProfile;
+	m_audioType = model.m_audioType;
+	m_audioProfile = model.m_audioProfile;
+	m_audioVersion = model.m_audioVersion;
+	m_audioEncodeLib = model.m_audioEncodeLib;
+	m_audioSamplerate = model.m_audioSamplerate;
+	m_audioChannels = model.m_audioChannels;
+	m_audioBitdepth = model.m_audioBitdepth;
+	m_audioBitrate = model.m_audioBitrate;
+	m_audioBitrateMode = model.m_audioBitrateMode;
+
+	return (*this);
+}
+
+AudioFileModel_TechInfo::~AudioFileModel_TechInfo(void)
+{
+	/*nothing to do*/
+}
+
+void AudioFileModel_TechInfo::reset(void)
+{
+	m_containerType.clear();
+	m_containerProfile.clear();
+	m_audioType.clear();
+	m_audioProfile.clear();
+	m_audioVersion.clear();
+	m_audioEncodeLib.clear();
+	m_audioSamplerate = 0;
+	m_audioChannels = 0;
+	m_audioBitdepth = 0;
+	m_audioBitrate = 0;
+	m_audioBitrateMode = 0;
+}
+
+////////////////////////////////////////////////////////////
+// Audio File Model
+////////////////////////////////////////////////////////////
+
+AudioFileModel::AudioFileModel(const QString &path)
+:
+	m_filePath(path)
+{
+	m_metaInfo.reset();
+	m_techInfo.reset();
+}
+
+AudioFileModel::AudioFileModel(const AudioFileModel &model)
+{
+	m_filePath = model.m_filePath;
+	m_metaInfo = model.m_metaInfo;
+	m_techInfo = model.m_techInfo;
 }
 
 AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 {
-	setFilePath(model.m_filePath);
-	setFileName(model.m_fileName);
-	setFileArtist(model.m_fileArtist);
-	setFileAlbum(model.m_fileAlbum);
-	setFileGenre(model.m_fileGenre);
-	setFileComment(model.m_fileComment);
-	setFileCover(model.m_fileCover);
-	setFileYear(model.m_fileYear);
-	setFilePosition(model.m_filePosition);
-	setFileDuration(model.m_fileDuration);
-
-	setFormatContainerType(model.m_formatContainerType);
-	setFormatContainerProfile(model.m_formatContainerProfile);
-	setFormatAudioType(model.m_formatAudioType);
-	setFormatAudioProfile(model.m_formatAudioProfile);
-	setFormatAudioVersion(model.m_formatAudioVersion);
-	setFormatAudioEncodeLib(model.m_formatAudioEncodeLib);
-	setFormatAudioSamplerate(model.m_formatAudioSamplerate);
-	setFormatAudioChannels(model.m_formatAudioChannels);
-	setFormatAudioBitdepth(model.m_formatAudioBitdepth);
-	setFormatAudioBitrate(model.m_formatAudioBitrate);
-	setFormatAudioBitrateMode(model.m_formatAudioBitrateMode);
+	m_filePath = model.m_filePath;
+	m_metaInfo = model.m_metaInfo;
+	m_techInfo = model.m_techInfo;
 
 	return (*this);
 }
 
 AudioFileModel::~AudioFileModel(void)
 {
+	/*nothing to do*/
 }
 
-////////////////////////////////////////////////////////////
-// Private Functions
-////////////////////////////////////////////////////////////
 
-void AudioFileModel::resetAll(void)
+void AudioFileModel::reset(void)
 {
 	m_filePath.clear();
-	m_fileName.clear();
-	m_fileArtist.clear();
-	m_fileAlbum.clear();
-	m_fileGenre.clear();
-	m_fileComment.clear();
-	m_fileCover.clear();
-	
-	m_fileYear = 0;
-	m_filePosition = 0;
-	m_fileDuration = 0;
-
-	m_formatContainerType.clear();
-	m_formatContainerProfile.clear();
-	m_formatAudioType.clear();
-	m_formatAudioProfile.clear();
-	m_formatAudioVersion.clear();
-	m_formatAudioEncodeLib.clear();
-	
-	m_formatAudioSamplerate = 0;
-	m_formatAudioChannels = 0;
-	m_formatAudioBitdepth = 0;
-	m_formatAudioBitrate = 0;
-	m_formatAudioBitrateMode = BitrateModeUndefined;
+	m_metaInfo.reset();
+	m_techInfo.reset();
 }
 
-////////////////////////////////////////////////////////////
-// Public Functions
-////////////////////////////////////////////////////////////
+/*------------------------------------*/
+/* Helper functions
+/*------------------------------------*/
 
-// ---------------------------------
-// Getter methods
-// ---------------------------------
-
-const QString &AudioFileModel::filePath(void) const
+const QString AudioFileModel::durationInfo(void) const
 {
-	return m_filePath;
-}
-
-const QString &AudioFileModel::fileName(void) const
-{
-	return m_fileName;
-}
-
-const QString &AudioFileModel::fileArtist(void) const
-{
-	return m_fileArtist;
-}
-
-const QString &AudioFileModel::fileAlbum(void) const
-{
-	return m_fileAlbum;
-}
-
-const QString &AudioFileModel::fileGenre(void) const
-{
-	return m_fileGenre;
-}
-
-const QString &AudioFileModel::fileComment(void) const
-{
-	return m_fileComment;
-}
-
-const QString &AudioFileModel::fileCover(void) const
-{
-	return m_fileCover.filePath();
-}
-
-unsigned int AudioFileModel::fileYear(void) const
-{
-	return m_fileYear;
-}
-
-unsigned int AudioFileModel::filePosition(void) const
-{
-	return m_filePosition;
-}
-
-unsigned int AudioFileModel::fileDuration(void) const
-{
-	return m_fileDuration;
-}
-
-const QString &AudioFileModel::formatContainerType(void) const
-{
-	return m_formatContainerType;
-}
-
-const QString &AudioFileModel::formatContainerProfile(void) const
-{
-	return m_formatContainerProfile;
-}
-
-const QString &AudioFileModel::formatAudioType(void) const
-{
-	return m_formatAudioType;
-}
-
-const QString &AudioFileModel::formatAudioProfile(void) const
-{
-	return m_formatAudioProfile;
-}
-
-const QString &AudioFileModel::formatAudioVersion(void) const
-{
-	return m_formatAudioVersion;
-}
-
-unsigned int AudioFileModel::formatAudioSamplerate(void) const
-{
-	return m_formatAudioSamplerate;
-}
-
-unsigned int AudioFileModel::formatAudioChannels(void) const
-{
-	return m_formatAudioChannels;
-}
-
-unsigned int AudioFileModel::formatAudioBitdepth(void) const
-{
-	return m_formatAudioBitdepth;
-}
-
-unsigned int AudioFileModel::formatAudioBitrate(void) const
-{
-	return m_formatAudioBitrate;
-}
-
-unsigned int  AudioFileModel::formatAudioBitrateMode(void) const
-{
-	return m_formatAudioBitrateMode;
-}
-
-const QString AudioFileModel::fileDurationInfo(void) const
-{
-	if(m_fileDuration)
+	if(m_metaInfo.duration())
 	{
-		QTime time = QTime().addSecs(m_fileDuration);
+		QTime time = QTime().addSecs(m_metaInfo.duration());
 		return time.toString("hh:mm:ss");
 	}
 	else
@@ -259,12 +206,12 @@ const QString AudioFileModel::fileDurationInfo(void) const
 	}
 }
 
-const QString AudioFileModel::formatContainerInfo(void) const
+const QString AudioFileModel::containerInfo(void) const
 {
-	if(!m_formatContainerType.isEmpty())
+	if(!m_techInfo.containerType().isEmpty())
 	{
-		QString info = m_formatContainerType;
-		if(!m_formatContainerProfile.isEmpty()) info.append(QString(" (%1: %2)").arg(tr("Profile"), m_formatContainerProfile));
+		QString info = m_techInfo.containerType();
+		if(!m_techInfo.containerProfile().isEmpty()) info.append(QString(" (%1: %2)").arg(tr("Profile"), m_techInfo.containerProfile()));
 		return info;
 	}
 	else
@@ -273,31 +220,31 @@ const QString AudioFileModel::formatContainerInfo(void) const
 	}
 }
 
-const QString AudioFileModel::formatAudioBaseInfo(void) const
+const QString AudioFileModel::audioBaseInfo(void) const
 {
-	if(m_formatAudioSamplerate || m_formatAudioChannels || m_formatAudioBitdepth)
+	if(m_techInfo.audioSamplerate() || m_techInfo.audioChannels() || m_techInfo.audioBitdepth())
 	{
 		QString info;
-		if(m_formatAudioChannels)
+		if(m_techInfo.audioChannels())
 		{
 			if(!info.isEmpty()) info.append(", ");
-			info.append(QString("%1: %2").arg(tr("Channels"), QString::number(m_formatAudioChannels)));
+			info.append(QString("%1: %2").arg(tr("Channels"), QString::number(m_techInfo.audioChannels())));
 		}
-		if(m_formatAudioSamplerate)
+		if(m_techInfo.audioSamplerate())
 		{
 			if(!info.isEmpty()) info.append(", ");
-			info.append(QString("%1: %2 Hz").arg(tr("Samplerate"), QString::number(m_formatAudioSamplerate)));
+			info.append(QString("%1: %2 Hz").arg(tr("Samplerate"), QString::number(m_techInfo.audioSamplerate())));
 		}
-		if(m_formatAudioBitdepth)
+		if(m_techInfo.audioBitdepth())
 		{
 			if(!info.isEmpty()) info.append(", ");
-			if(m_formatAudioBitdepth == BITDEPTH_IEEE_FLOAT32)
+			if(m_techInfo.audioBitdepth() == BITDEPTH_IEEE_FLOAT32)
 			{
 				info.append(QString("%1: %2 Bit (IEEE Float)").arg(tr("Bitdepth"), QString::number(32)));
 			}
 			else
 			{
-				info.append(QString("%1: %2 Bit").arg(tr("Bitdepth"), QString::number(m_formatAudioBitdepth)));
+				info.append(QString("%1: %2 Bit").arg(tr("Bitdepth"), QString::number(m_techInfo.audioBitdepth())));
 			}
 		}
 		return info;
@@ -308,42 +255,42 @@ const QString AudioFileModel::formatAudioBaseInfo(void) const
 	}
 }
 
-const QString AudioFileModel::formatAudioCompressInfo(void) const
+const QString AudioFileModel::audioCompressInfo(void) const
 {
-	if(!m_formatAudioType.isEmpty())
+	if(!m_techInfo.audioType().isEmpty())
 	{
 		QString info;
-		if(!m_formatAudioProfile.isEmpty() || !m_formatAudioVersion.isEmpty())
+		if(!m_techInfo.audioProfile().isEmpty() || !m_techInfo.audioVersion().isEmpty())
 		{
 			info.append(QString("%1: ").arg(tr("Type")));
 		}
-		info.append(m_formatAudioType);
-		if(!m_formatAudioProfile.isEmpty())
+		info.append(m_techInfo.audioType());
+		if(!m_techInfo.audioProfile().isEmpty())
 		{
-			info.append(QString(", %1: %2").arg(tr("Profile"), m_formatAudioProfile));
+			info.append(QString(", %1: %2").arg(tr("Profile"), m_techInfo.audioProfile()));
 		}
-		if(!m_formatAudioVersion.isEmpty())
+		if(!m_techInfo.audioVersion().isEmpty())
 		{
-			info.append(QString(", %1: %2").arg(tr("Version"), m_formatAudioVersion));
+			info.append(QString(", %1: %2").arg(tr("Version"), m_techInfo.audioVersion()));
 		}
-		if(m_formatAudioBitrate > 0)
+		if(m_techInfo.audioBitrate() > 0)
 		{
-			switch(m_formatAudioBitrateMode)
+			switch(m_techInfo.audioBitrateMode())
 			{
 			case BitrateModeConstant:
-				info.append(U16Str(", %1: %2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_formatAudioBitrate), tr("Constant")));
+				info.append(QString(", %1: %2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_techInfo.audioBitrate()), tr("Constant")));
 				break;
 			case BitrateModeVariable:
-				info.append(U16Str(", %1: \u2248%2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_formatAudioBitrate), tr("Variable")));
+				info.append(WCHAR2QSTR(L", %1: \u2248%2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_techInfo.audioBitrate()), tr("Variable")));
 				break;
 			default:
-				info.append(U16Str(", %1: %2 kbps").arg(tr("Bitrate"), QString::number(m_formatAudioBitrate)));
+				info.append(QString(", %1: %2 kbps").arg(tr("Bitrate"), QString::number(m_techInfo.audioBitrate())));
 				break;
 			}
 		}
-		if(!m_formatAudioEncodeLib.isEmpty())
+		if(!m_techInfo.audioEncodeLib().isEmpty())
 		{
-			info.append(QString(", %1: %2").arg(tr("Encoder"), m_formatAudioEncodeLib));
+			info.append(QString(", %1: %2").arg(tr("Encoder"), m_techInfo.audioEncodeLib()));
 		}
 		return info;
 	}
@@ -351,127 +298,4 @@ const QString AudioFileModel::formatAudioCompressInfo(void) const
 	{
 		return QString();
 	}
-}
-
-// ---------------------------------
-// Setter methods
-// ---------------------------------
-
-void AudioFileModel::setFilePath(const QString &path)
-{
-	m_filePath = path;
-}
-
-void AudioFileModel::setFileName(const QString &name)
-{
-	m_fileName = name;
-}
-
-void AudioFileModel::setFileArtist(const QString &artist)
-{
-	m_fileArtist = artist;
-}
-
-void AudioFileModel::setFileAlbum(const QString &album)
-{
-	m_fileAlbum = album;
-}
-
-void AudioFileModel::setFileGenre(const QString &genre)
-{
-	m_fileGenre = genre;
-}
-
-void AudioFileModel::setFileComment(const QString &comment)
-{
-	m_fileComment = comment;
-}
-
-void AudioFileModel::setFileCover(const QString &coverFile, bool owner)
-{
-	m_fileCover.setFilePath(coverFile, owner);
-}
-
-void AudioFileModel::setFileCover(const ArtworkModel &model)
-{
-	m_fileCover = model;
-}
-
-void AudioFileModel::setFileYear(unsigned int year)
-{
-	m_fileYear = year;
-}
-
-void AudioFileModel::setFilePosition(unsigned int position)
-{
-	m_filePosition = position;
-}
-
-void AudioFileModel::setFileDuration(unsigned int duration)
-{
-	m_fileDuration = duration;
-}
-
-void AudioFileModel::setFormatContainerType(const QString &type)
-{
-	m_formatContainerType = type;
-}
-
-void AudioFileModel::setFormatContainerProfile(const QString &profile)
-{
-	m_formatContainerProfile = profile;
-}
-
-void AudioFileModel::setFormatAudioType(const QString &type)
-{
-	m_formatAudioType = type;
-}
-
-void AudioFileModel::setFormatAudioProfile(const QString &profile)
-{
-	m_formatAudioProfile = profile;
-}
-
-void AudioFileModel::setFormatAudioVersion(const QString &version)
-{
-	m_formatAudioVersion = version;
-}
-
-void AudioFileModel::setFormatAudioEncodeLib(const QString &encodeLib)
-{
-	m_formatAudioEncodeLib = encodeLib;
-}
-
-void AudioFileModel::setFormatAudioSamplerate(unsigned int samplerate)
-{
-	m_formatAudioSamplerate = samplerate;
-}
-
-void AudioFileModel::setFormatAudioChannels(unsigned int channels)
-{
-	m_formatAudioChannels = channels;
-}
-
-void AudioFileModel::setFormatAudioBitdepth(unsigned int bitdepth)
-{
-	m_formatAudioBitdepth = bitdepth;
-}
-
-void AudioFileModel::setFormatAudioBitrate(unsigned int bitrate)
-{
-	m_formatAudioBitrate = bitrate;
-}
-
-void AudioFileModel::setFormatAudioBitrateMode(unsigned int bitrateMode)
-{
-	m_formatAudioBitrateMode = bitrateMode;
-}
-
-void AudioFileModel::updateMetaInfo(const AudioFileModel &model)
-{
-	if(!model.fileArtist().isEmpty()) setFileArtist(model.fileArtist());
-	if(!model.fileAlbum().isEmpty()) setFileAlbum(model.fileAlbum());
-	if(!model.fileGenre().isEmpty()) setFileGenre(model.fileGenre());
-	if(!model.fileComment().isEmpty()) setFileComment(model.fileComment());
-	if(model.fileYear()) setFileYear(model.fileYear());
 }
