@@ -63,7 +63,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3739"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n Instance</numerusform>
@@ -74,7 +74,7 @@
 <context>
     <name>ProcessingDialog</name>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="570"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="652"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Encoding: %n file of %1 completed so far, please wait...</numerusform>
@@ -82,7 +82,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="602"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="684"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>Process was aborted by the user after %n file!</numerusform>
@@ -90,7 +90,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="631"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 of %n file failed (%2). Double-click failed items for detailed information!</numerusform>
@@ -98,7 +98,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="631"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n file skipped</numerusform>
@@ -106,7 +106,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="635"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="717"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 of %n file failed. Double-click failed items for detailed information!</numerusform>
@@ -114,7 +114,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="649"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>All files completed successfully. Skipped %n file.</numerusform>

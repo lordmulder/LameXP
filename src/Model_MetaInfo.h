@@ -31,7 +31,8 @@ class MetaInfoModel : public QAbstractTableModel
 	Q_OBJECT
 
 public:
-	MetaInfoModel(AudioFileModel *file, unsigned int offset = 0);
+	MetaInfoModel(AudioFileModel *file);
+	MetaInfoModel(AudioFileModel_MetaInfo *metaInfo);
 	~MetaInfoModel(void);
 
 	//Model functions
@@ -47,8 +48,11 @@ public:
 	void clearData(bool clearMetaOnly = false);
 
 private:
-	AudioFileModel* m_audioFile;
-	unsigned int m_offset;
+	const unsigned int m_offset;
+
+	AudioFileModel *const m_fullInfo;
+	AudioFileModel_MetaInfo *const m_metaInfo;
+
 	QString m_textNotSpecified;
 	QString m_textUnknown;
 };

@@ -39,18 +39,24 @@
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
-MetaInfoModel::MetaInfoModel(AudioFileModel *file, unsigned int offset)
+MetaInfoModel::MetaInfoModel(AudioFileModel *file)
+:
+	m_fullInfo(file),
+	m_metaInfo(&file->metaInfo()),
+	m_offset(0)
 {
-	if(offset >= MODEL_ROW_COUNT)
-	{
-		throw "Offset is out of range!";
-	}
-
 	m_textUnknown = QString("(%1)").arg(tr("Unknown"));
 	m_textNotSpecified = QString("(%1)").arg(tr("Not Specified"));
+}
 
-	m_audioFile = file;
-	m_offset = offset;
+MetaInfoModel::MetaInfoModel(AudioFileModel_MetaInfo *metaInfo)
+:
+	m_fullInfo(NULL),
+	m_metaInfo(metaInfo),
+	m_offset(6)
+{
+	m_textUnknown = QString("(%1)").arg(tr("Unknown"));
+	m_textNotSpecified = QString("(%1)").arg(tr("Not Specified"));
 }
 
 MetaInfoModel::~MetaInfoModel(void)
@@ -78,40 +84,40 @@ QVariant MetaInfoModel::data(const QModelIndex &index, int role) const
 		switch(index.row() + m_offset)
 		{
 		case 0:
-			return (!index.column()) ? tr("Full Path") : CHECK1(m_audioFile->filePath());
+			return (!index.column()) ? tr("Full Path") : CHECK1(m_fullInfo->filePath());
 			break;
 		case 1:
-			return (!index.column()) ? tr("Format") : CHECK1(m_audioFile->audioBaseInfo());
+			return (!index.column()) ? tr("Format") : CHECK1(m_fullInfo->audioBaseInfo());
 			break;
 		case 2:
-			return (!index.column()) ? tr("Container") : CHECK1(m_audioFile->containerInfo());
+			return (!index.column()) ? tr("Container") : CHECK1(m_fullInfo->containerInfo());
 			break;
 		case 3:
-			return (!index.column()) ? tr("Compression") : CHECK1(m_audioFile->audioCompressInfo());
+			return (!index.column()) ? tr("Compression") : CHECK1(m_fullInfo->audioCompressInfo());
 			break;
 		case 4:
-			return (!index.column()) ? tr("Duration") : CHECK1(m_audioFile->durationInfo());
+			return (!index.column()) ? tr("Duration") : CHECK1(m_fullInfo->durationInfo());
 			break;
 		case 5:
-			return (!index.column()) ? tr("Title") : CHECK1(m_audioFile->metaInfo().title());
+			return (!index.column()) ? tr("Title") : CHECK1(m_metaInfo->title());
 			break;
 		case 6:
-			return (!index.column()) ? tr("Artist") : CHECK1(m_audioFile->metaInfo().artist());
+			return (!index.column()) ? tr("Artist") : CHECK1(m_metaInfo->artist());
 			break;
 		case 7:
-			return (!index.column()) ? tr("Album") : CHECK1(m_audioFile->metaInfo().album());
+			return (!index.column()) ? tr("Album") : CHECK1(m_metaInfo->album());
 			break;
 		case 8:
-			return (!index.column()) ? tr("Genre") : CHECK1(m_audioFile->metaInfo().genre());
+			return (!index.column()) ? tr("Genre") : CHECK1(m_metaInfo->genre());
 			break;
 		case 9:
-			return (!index.column()) ? tr("Year") : CHECK2(m_audioFile->metaInfo().year());
+			return (!index.column()) ? tr("Year") : CHECK2(m_metaInfo->year());
 			break;
 		case 10:
-			return (!index.column()) ? tr("Position") : ((m_audioFile->metaInfo().position() == UINT_MAX) ? tr("Generate from list position") : CHECK2(m_audioFile->metaInfo().position()));
+			return (!index.column()) ? tr("Position") : ((m_metaInfo->position() == UINT_MAX) ? tr("Generate from list position") : CHECK2(m_metaInfo->position()));
 			break;
 		case 11:
-			return (!index.column()) ? tr("Comment") : CHECK1(m_audioFile->metaInfo().comment());
+			return (!index.column()) ? tr("Comment") : CHECK1(m_metaInfo->comment());
 			break;
 		default:
 			return QVariant();
@@ -168,40 +174,40 @@ QVariant MetaInfoModel::data(const QModelIndex &index, int role) const
 		switch(index.row() + m_offset)
 		{
 		case 0:
-			return CHECK3(m_audioFile->filePath());
+			return CHECK3(m_fullInfo->filePath());
 			break;
 		case 1:
-			return CHECK3(m_audioFile->audioBaseInfo());
+			return CHECK3(m_fullInfo->audioBaseInfo());
 			break;
 		case 2:
-			return CHECK3(m_audioFile->containerInfo());
+			return CHECK3(m_fullInfo->containerInfo());
 			break;
 		case 3:
-			return CHECK3(m_audioFile->audioCompressInfo());
+			return CHECK3(m_fullInfo->audioCompressInfo());
 			break;
 		case 4:
-			return CHECK4(m_audioFile->durationInfo());
+			return CHECK4(m_fullInfo->durationInfo());
 			break;
 		case 5:
-			return CHECK3(m_audioFile->metaInfo().title());
+			return CHECK3(m_metaInfo->title());
 			break;
 		case 6:
-			return CHECK3(m_audioFile->metaInfo().artist());
+			return CHECK3(m_metaInfo->artist());
 			break;
 		case 7:
-			return CHECK3(m_audioFile->metaInfo().album());
+			return CHECK3(m_metaInfo->album());
 			break;
 		case 8:
-			return CHECK3(m_audioFile->metaInfo().genre());
+			return CHECK3(m_metaInfo->genre());
 			break;
 		case 9:
-			return CHECK4(m_audioFile->metaInfo().year());
+			return CHECK4(m_metaInfo->year());
 			break;
 		case 10:
-			return CHECK4(m_audioFile->metaInfo().position());
+			return CHECK4(m_metaInfo->position());
 			break;
 		case 11:
-			return CHECK3(m_audioFile->metaInfo().comment());
+			return CHECK3(m_metaInfo->comment());
 			break;
 		default:
 			return QVariant();
@@ -254,7 +260,7 @@ bool MetaInfoModel::setData (const QModelIndex &index, const QVariant &value, in
 	switch(index.row() + m_offset)
 	{
 	case 0:
-		m_audioFile->setFilePath(value.toString());
+		m_fullInfo->setFilePath(value.toString());
 		break;
 	case 1:
 	case 2:
@@ -262,28 +268,28 @@ bool MetaInfoModel::setData (const QModelIndex &index, const QVariant &value, in
 		return false;
 		break;
 	case 4:
-		m_audioFile->techInfo().setDuration(value.toUInt());
+		m_fullInfo->techInfo().setDuration(value.toUInt());
 		break;
 	case 5:
-		m_audioFile->metaInfo().setTitle(value.toString());
+		m_metaInfo->setTitle(value.toString());
 		break;
 	case 6:
-		m_audioFile->metaInfo().setArtist(value.toString());
+		m_metaInfo->setArtist(value.toString());
 		break;
 	case 7:
-		m_audioFile->metaInfo().setAlbum(value.toString());
+		m_metaInfo->setAlbum(value.toString());
 		break;
 	case 8:
-		m_audioFile->metaInfo().setGenre(value.toString());
+		m_metaInfo->setGenre(value.toString());
 		break;
 	case 9:
-		m_audioFile->metaInfo().setYear(value.toUInt());
+		m_metaInfo->setYear(value.toUInt());
 		break;
 	case 10:
-		m_audioFile->metaInfo().setPosition(value.toUInt());
+		m_metaInfo->setPosition(value.toUInt());
 		break;
 	case 11:
-		m_audioFile->metaInfo().setComment(value.toString());
+		m_metaInfo->setComment(value.toString());
 		break;
 	default:
 		return false;
@@ -311,43 +317,43 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	case 5:
 		input.setWindowTitle(tr("Edit Title"));
 		input.setLabelText(EXPAND(tr("Please enter the title for this file:")));
-		input.setTextValue(m_audioFile->metaInfo().title());
+		input.setTextValue(m_metaInfo->title());
 		if(input.exec() != 0)
 		{
 			temp = input.textValue().simplified();
 			if(temp.isEmpty())
 			{
 				QMessageBox::warning(parent, tr("Edit Title"), tr("The title must not be empty. Generating title from file name!"));
-				temp = QFileInfo(m_audioFile->filePath()).completeBaseName().replace("_", " ").simplified();
+				temp = QFileInfo(m_fullInfo->filePath()).completeBaseName().replace("_", " ").simplified();
 				int index = temp.lastIndexOf(" - ");
 				if(index >= 0) temp = temp.mid(index + 3).trimmed();
 			}
 			beginResetModel();
-			m_audioFile->metaInfo().setTitle(temp.isEmpty() ? QString() : temp);
+			m_metaInfo->setTitle(temp.isEmpty() ? QString() : temp);
 			endResetModel();
 		}
 		break;
 	case 6:
 		input.setWindowTitle(tr("Edit Artist"));
 		input.setLabelText(EXPAND(tr("Please enter the artist for this file:")));
-		input.setTextValue(m_audioFile->metaInfo().artist());
+		input.setTextValue(m_metaInfo->artist());
 		if(input.exec() != 0)
 		{
 			temp = input.textValue().simplified();
 			beginResetModel();
-			m_audioFile->metaInfo().setArtist(temp.isEmpty() ? QString() : temp);
+			m_metaInfo->setArtist(temp.isEmpty() ? QString() : temp);
 			endResetModel();
 		}
 		break;
 	case 7:
 		input.setWindowTitle(tr("Edit Album"));
 		input.setLabelText(EXPAND(tr("Please enter the album for this file:")));
-		input.setTextValue(m_audioFile->metaInfo().album());
+		input.setTextValue(m_metaInfo->album());
 		if(input.exec() != 0)
 		{
 			temp = input.textValue().simplified();
 			beginResetModel();
-			m_audioFile->metaInfo().setAlbum(temp.isEmpty() ? QString() : temp);
+			m_metaInfo->setAlbum(temp.isEmpty() ? QString() : temp);
 			endResetModel();
 		}
 		break;
@@ -356,12 +362,12 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		input.setLabelText(EXPAND(tr("Please enter the genre for this file:")));
 		for(int i = 0; g_lamexp_generes[i]; i++) generes << g_lamexp_generes[i];
 		input.setComboBoxItems(generes);
-		input.setTextValue(m_audioFile->metaInfo().genre());
+		input.setTextValue(m_metaInfo->genre());
 		if(input.exec() != 0)
 		{
 			temp = input.textValue().simplified();
 			beginResetModel();
-			m_audioFile->metaInfo().setGenre((temp.isEmpty() || !temp.compare(generes.at(0), Qt::CaseInsensitive)) ? QString() : temp);
+			m_metaInfo->setGenre((temp.isEmpty() || !temp.compare(generes.at(0), Qt::CaseInsensitive)) ? QString() : temp);
 			endResetModel();
 		}
 		break;
@@ -369,13 +375,13 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 		input.setWindowTitle(tr("Edit Year"));
 		input.setLabelText(EXPAND(tr("Please enter the year for this file:")));
 		input.setIntRange(0, 2100);
-		input.setIntValue((m_audioFile->metaInfo().year() ? m_audioFile->metaInfo().year() : 1900));
+		input.setIntValue((m_metaInfo->year() ? m_metaInfo->year() : 1900));
 		input.setIntStep(1);
 		if(input.exec() != 0)
 		{
 			val = input.intValue();
 			beginResetModel();
-			m_audioFile->metaInfo().setYear(val);
+			m_metaInfo->setYear(val);
 			endResetModel();
 		}
 		break;
@@ -385,13 +391,13 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 			input.setWindowTitle(tr("Edit Position"));
 			input.setLabelText(EXPAND(tr("Please enter the position (track no.) for this file:")));
 			input.setIntRange(0, 99);
-			input.setIntValue((m_audioFile->metaInfo().position() ? m_audioFile->metaInfo().position() : 1));
+			input.setIntValue((m_metaInfo->position() ? m_metaInfo->position() : 1));
 			input.setIntStep(1);
 			if(input.exec() != 0)
 			{
 				val = input.intValue();
 				beginResetModel();
-				m_audioFile->metaInfo().setPosition(val);
+				m_metaInfo->setPosition(val);
 				endResetModel();
 			}
 		}
@@ -402,12 +408,12 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 			input.setWindowTitle(tr("Edit Position"));
 			input.setLabelText(EXPAND(tr("Please enter the position (track no.) for this file:")));
 			input.setComboBoxItems(options);
-			input.setTextValue(options.value((m_audioFile->metaInfo().position() == UINT_MAX) ? 1 : 0));
+			input.setTextValue(options.value((m_metaInfo->position() == UINT_MAX) ? 1 : 0));
 			if(input.exec() != 0)
 			{
 				temp = input.textValue().simplified();
 				beginResetModel();
-				m_audioFile->metaInfo().setPosition((options.indexOf(temp) == 1) ? UINT_MAX : 0);
+				m_metaInfo->setPosition((options.indexOf(temp) == 1) ? UINT_MAX : 0);
 				endResetModel();
 			}
 		}
@@ -415,12 +421,12 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 	case 11:
 		input.setWindowTitle(tr("Edit Comment"));
 		input.setLabelText(EXPAND(tr("Please enter the comment for this file:")));
-		input.setTextValue((m_audioFile->metaInfo().comment().isEmpty() ? tr("Encoded with LameXP") : m_audioFile->metaInfo().comment()));
+		input.setTextValue((m_metaInfo->comment().isEmpty() ? tr("Encoded with LameXP") : m_metaInfo->comment()));
 		if(input.exec() != 0)
 		{
 			temp = input.textValue().simplified();
 			beginResetModel();
-			m_audioFile->metaInfo().setComment(temp.isEmpty() ? QString() : temp);
+			m_metaInfo->setComment(temp.isEmpty() ? QString() : temp);
 			endResetModel();
 		}
 		break;
@@ -432,7 +438,7 @@ void MetaInfoModel::editItem(const QModelIndex &index, QWidget *parent)
 
 void MetaInfoModel::editArtwork(const QString &imagePath)
 {
-	m_audioFile->metaInfo().setCover(imagePath, false);
+	m_metaInfo->setCover(imagePath, false);
 }
 
 void MetaInfoModel::clearData(bool clearMetaOnly)
@@ -442,39 +448,23 @@ void MetaInfoModel::clearData(bool clearMetaOnly)
 	m_textUnknown = QString("(%1)").arg(tr("Unknown"));
 	m_textNotSpecified = QString("(%1)").arg(tr("Not Specified"));
 
-	m_audioFile->metaInfo().reset();
-	m_audioFile->metaInfo().setComment(tr("Encoded with LameXP"));
-	m_audioFile->metaInfo().setPosition(m_offset ? UINT_MAX : 0);
-
-	//m_audioFile->setFileArtist(QString());
-	//m_audioFile->setFileAlbum(QString());
-	//m_audioFile->setFileGenre(QString());
-	//m_audioFile->setFileComment(tr("Encoded with LameXP"));
-	//m_audioFile->setFileCover(QString(), false);
-	//m_audioFile->setFileYear(0);
-	//m_audioFile->setFilePosition(m_offset ? UINT_MAX : 0);
-
-	if(!clearMetaOnly)
+	if((!clearMetaOnly) && m_fullInfo)
 	{
-		m_audioFile->techInfo().reset();
-
-		//m_audioFile->setFilePath(QString());
-		//m_audioFile->setFileName(QString());
-		//m_audioFile->setFileDuration(0);
-		//m_audioFile->setFormatContainerType(QString());
-		//m_audioFile->setFormatContainerProfile(QString());
-		//m_audioFile->setFormatAudioType(QString());
-		//m_audioFile->setFormatAudioProfile(QString());
-		//m_audioFile->setFormatAudioVersion(QString());
-		//m_audioFile->setFormatAudioSamplerate(0);
-		//m_audioFile->setFormatAudioChannels(0);
-		//m_audioFile->setFormatAudioBitdepth(0);
+		m_fullInfo->techInfo().reset();
 	}
-	else
+
+	if(m_metaInfo)
 	{
-		QString temp = QFileInfo(m_audioFile->filePath()).baseName();
+		m_metaInfo->reset();
+		m_metaInfo->setComment(tr("Encoded with LameXP"));
+		m_metaInfo->setPosition(m_offset ? UINT_MAX : 0);
+	}
+
+	if(m_fullInfo)
+	{
+		QString temp = QFileInfo(m_fullInfo->filePath()).baseName();
 		temp = temp.split("-", QString::SkipEmptyParts).last().trimmed();
-		m_audioFile->metaInfo().setTitle(temp);
+		m_metaInfo->setTitle(temp);
 	}
 
 	endResetModel();
@@ -488,6 +478,6 @@ Qt::ItemFlags MetaInfoModel::flags(const QModelIndex &index) const
 void MetaInfoModel::assignInfoFrom(const AudioFileModel &file)
 {
 	beginResetModel();
-	m_audioFile->metaInfo().update(file.metaInfo());
+	m_metaInfo->update(file.metaInfo());
 	endResetModel();
 }

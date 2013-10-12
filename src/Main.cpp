@@ -159,7 +159,7 @@ static int lamexp_main(int argc, char* argv[])
 
 	//Create models
 	FileListModel *fileListModel = new FileListModel();
-	AudioFileModel *metaInfo = new AudioFileModel();
+	AudioFileModel_MetaInfo *metaInfo = new AudioFileModel_MetaInfo();
 	SettingsModel *settingsModel = new SettingsModel();
 
 	//Show splash screen

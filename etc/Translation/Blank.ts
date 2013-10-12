@@ -379,56 +379,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="267"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="323"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="227"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="283"/>
         <source>Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="284"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="244"/>
         <source>Channels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="289"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="249"/>
         <source>Samplerate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="296"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="300"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="256"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="260"/>
         <source>Bitdepth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="318"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="278"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="327"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="287"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="334"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="337"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="340"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="294"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="297"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="300"/>
         <source>Bitrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="334"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="294"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="337"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="297"/>
         <source>Variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="346"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="306"/>
         <source>Encoder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -685,44 +685,44 @@
 <context>
     <name>CueSheetModel</name>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="210"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="211"/>
         <source>No.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="213"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="214"/>
         <source>File / Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="216"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="217"/>
         <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="219"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="220"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="245"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="246"/>
         <source>File %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="260"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="261"/>
         <source>Track %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="269"/>
-        <location filename="../../src/Model_CueSheet.cpp" line="277"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="270"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="278"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="273"/>
-        <location filename="../../src/Model_CueSheet.cpp" line="277"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="274"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="278"/>
         <source>Unknown Title</source>
         <translation type="unfinished"></translation>
     </message>
@@ -789,22 +789,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="344"/>
+        <location filename="../../src/Model_FileList.cpp" line="348"/>
         <source>(System Default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="351"/>
+        <location filename="../../src/Model_FileList.cpp" line="355"/>
         <source>Select ANSI Codepage for CSV file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="352"/>
+        <location filename="../../src/Model_FileList.cpp" line="356"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_FileList.cpp" line="353"/>
+        <location filename="../../src/Model_FileList.cpp" line="357"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1755,7 +1755,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="719"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3781"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3783"/>
         <source>Access Denied</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1943,7 +1943,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1379"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1456"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1996"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3726"/>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2434,155 +2434,155 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2706"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2749"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2751"/>
         <source>New Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2749"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2751"/>
         <source>Enter the name of the new folder:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2782"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
         <source>Failed to create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2782"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
         <source>The new folder could not be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2782"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3259"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3261"/>
         <source>Current Encoder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3361"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3364"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3363"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3366"/>
         <source>Quality Level %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3367"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3369"/>
         <source>Compression %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3370"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3372"/>
         <source>Uncompressed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3417"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3419"/>
         <source>Best Quality (Slow)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3420"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3422"/>
         <source>High Quality (Recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3423"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3425"/>
         <source>Acceptable Quality (Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3426"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3428"/>
         <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3713"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3715"/>
         <source>File name without extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3714"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
         <source>Track number with leading zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3715"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3717"/>
         <source>Track title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3718"/>
         <source>Artist name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3717"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3719"/>
         <source>Album name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3718"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3720"/>
         <source>Year with (at least) four digits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3719"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
         <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3723"/>
         <source>Characters forbidden in file names:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3726"/>
         <source>Rename Macros</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3737"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3739"/>
         <source>%n Instance(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3781"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3783"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3906"/>
         <source>Overwrite Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3906"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3906"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3904"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3906"/>
         <source>Revert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3978"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3980"/>
         <source>Already Running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3978"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3980"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2671,204 +2671,206 @@
 <context>
     <name>MetaInfoModel</name>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="49"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="442"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="48"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="58"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="448"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="50"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="443"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="49"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="59"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="449"/>
         <source>Not Specified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="81"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="87"/>
         <source>Full Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="84"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="90"/>
         <source>Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="87"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="93"/>
         <source>Container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="90"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="96"/>
         <source>Compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="93"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="99"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="96"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="102"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="99"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="105"/>
         <source>Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="102"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="108"/>
         <source>Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="105"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="111"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="108"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="114"/>
         <source>Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="111"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="117"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="111"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="401"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="117"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="407"/>
         <source>Generate from list position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="114"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="120"/>
         <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="226"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="232"/>
         <source>Property</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="229"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="235"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="301"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="307"/>
         <source>Unspecified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="305"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="311"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="306"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="312"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="312"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="318"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="326"/>
         <source>Edit Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="313"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="319"/>
         <source>Please enter the title for this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="320"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="326"/>
         <source>The title must not be empty. Generating title from file name!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="331"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="337"/>
         <source>Edit Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="332"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="338"/>
         <source>Please enter the artist for this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="343"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="349"/>
         <source>Edit Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="344"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="350"/>
         <source>Please enter the album for this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="355"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="361"/>
         <source>Edit Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="356"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="362"/>
         <source>Please enter the genre for this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="369"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="375"/>
         <source>Edit Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="370"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="376"/>
         <source>Please enter the year for this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="385"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="402"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="391"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="408"/>
         <source>Edit Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="386"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="403"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="392"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="409"/>
         <source>Please enter the position (track no.) for this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="401"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="407"/>
         <source>Unspecified (copy from source file)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="416"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="422"/>
         <source>Edit Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="417"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="423"/>
         <source>Please enter the comment for this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="418"/>
-        <location filename="../../src/Model_MetaInfo.cpp" line="448"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="424"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="459"/>
         <source>Encoded with LameXP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="428"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="434"/>
         <source>Not editable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_MetaInfo.cpp" line="428"/>
+        <location filename="../../src/Model_MetaInfo.cpp" line="434"/>
         <source>Sorry, this property of the source file cannot be edited!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2881,138 +2883,138 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="143"/>
+        <location filename="../../src/Thread_Process.cpp" line="148"/>
         <source>Skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="149"/>
+        <location filename="../../src/Thread_Process.cpp" line="153"/>
         <source>Not found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="217"/>
+        <location filename="../../src/Thread_Process.cpp" line="229"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="226"/>
+        <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>The format of this file is NOT supported:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="226"/>
+        <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>Container Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="226"/>
+        <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>Audio Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="227"/>
+        <location filename="../../src/Thread_Process.cpp" line="239"/>
         <source>Unsupported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="315"/>
+        <location filename="../../src/Thread_Process.cpp" line="327"/>
         <source>Aborted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="315"/>
+        <location filename="../../src/Thread_Process.cpp" line="327"/>
         <source>Done.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="315"/>
+        <location filename="../../src/Thread_Process.cpp" line="327"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="332"/>
+        <location filename="../../src/Thread_Process.cpp" line="344"/>
         <source>Encoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="335"/>
+        <location filename="../../src/Thread_Process.cpp" line="347"/>
         <source>Analyzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="338"/>
+        <location filename="../../src/Thread_Process.cpp" line="350"/>
         <source>Filtering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="341"/>
+        <location filename="../../src/Thread_Process.cpp" line="353"/>
         <source>Decoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="363"/>
+        <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>The source audio file could not be found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="371"/>
+        <location filename="../../src/Thread_Process.cpp" line="383"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="399"/>
+        <location filename="../../src/Thread_Process.cpp" line="411"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="408"/>
+        <location filename="../../src/Thread_Process.cpp" line="420"/>
         <source>The target output directory is NOT writable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="419"/>
+        <location filename="../../src/Thread_Process.cpp" line="482"/>
         <source>Unknown File Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="421"/>
+        <location filename="../../src/Thread_Process.cpp" line="484"/>
         <source>Unknown Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="422"/>
+        <location filename="../../src/Thread_Process.cpp" line="485"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="423"/>
+        <location filename="../../src/Thread_Process.cpp" line="486"/>
         <source>Unknown Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="425"/>
+        <location filename="../../src/Thread_Process.cpp" line="488"/>
         <source>Unknown Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="434"/>
+        <location filename="../../src/Thread_Process.cpp" line="438"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="435"/>
+        <location filename="../../src/Thread_Process.cpp" line="439"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="442"/>
+        <location filename="../../src/Thread_Process.cpp" line="446"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="452"/>
+        <location filename="../../src/Thread_Process.cpp" line="456"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3123,100 +3125,100 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="559"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="641"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="570"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="652"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="592"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="674"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="602"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="684"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="602"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="684"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="603"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="685"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="603"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="685"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="620"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="702"/>
         <source>Process finished after %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="631"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="631"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
         <source>%n file(s) skipped</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="635"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="717"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="637"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
         <source>LameXP - Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="637"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="649"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="653"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
         <source>LameXP - Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="849"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="931"/>
         <source>None of the items matches the current filtering rules</source>
         <translation type="unfinished"></translation>
     </message>

@@ -57,7 +57,7 @@ public:
 	inline void setAlbum(const QString &album) { m_album = album.trimmed(); }
 	inline void setGenre(const QString &genre) { m_genre = genre.trimmed(); }
 	inline void setComment(const QString &comment) { m_comment = comment.trimmed(); }
-	inline const ArtworkModel &setCover(const QString &path, const bool isOwner) { m_cover.setFilePath(path, isOwner); }
+	inline void setCover(const QString &path, const bool isOwner) { m_cover.setFilePath(path, isOwner); }
 	inline void setYear(const unsigned int year) { m_year = year; }
 	inline void setPosition(const unsigned int position) { m_position = position; }
 
@@ -108,17 +108,17 @@ public:
 	inline unsigned int duration(void) const { return m_duration; }
 
 	//Setter
-	inline const QString &setContainerType(const QString &containerType) { m_containerType = containerType.trimmed(); }
-	inline const QString &setContainerProfile(const QString &containerProfile) { m_containerProfile = containerProfile.trimmed(); }
-	inline const QString &setAudioType(const QString &audioType) { m_audioType = audioType.trimmed(); }
-	inline const QString &setAudioProfile(const QString &audioProfile) { m_audioProfile = audioProfile.trimmed(); }
-	inline const QString &setAudioVersion(const QString &audioVersion) { m_audioVersion = audioVersion.trimmed(); }
-	inline const QString &setAudioEncodeLib(const QString &audioEncodeLib) { m_audioEncodeLib = audioEncodeLib.trimmed(); }
-	inline unsigned int setAudioSamplerate(const unsigned int audioSamplerate) { m_audioSamplerate = audioSamplerate; }
-	inline unsigned int setAudioChannels(const unsigned int audioChannels) { m_audioChannels = audioChannels; }
-	inline unsigned int setAudioBitdepth(const unsigned int audioBitdepth) { m_audioBitdepth = audioBitdepth; }
-	inline unsigned int setAudioBitrate(const unsigned int audioBitrate) { m_audioBitrate = audioBitrate; }
-	inline unsigned int setAudioBitrateMode(const unsigned int audioBitrateMode) { m_audioBitrateMode = audioBitrateMode; }
+	inline void setContainerType(const QString &containerType) { m_containerType = containerType.trimmed(); }
+	inline void setContainerProfile(const QString &containerProfile) { m_containerProfile = containerProfile.trimmed(); }
+	inline void setAudioType(const QString &audioType) { m_audioType = audioType.trimmed(); }
+	inline void setAudioProfile(const QString &audioProfile) { m_audioProfile = audioProfile.trimmed(); }
+	inline void setAudioVersion(const QString &audioVersion) { m_audioVersion = audioVersion.trimmed(); }
+	inline void setAudioEncodeLib(const QString &audioEncodeLib) { m_audioEncodeLib = audioEncodeLib.trimmed(); }
+	inline void setAudioSamplerate(const unsigned int audioSamplerate) { m_audioSamplerate = audioSamplerate; }
+	inline void setAudioChannels(const unsigned int audioChannels) { m_audioChannels = audioChannels; }
+	inline void setAudioBitdepth(const unsigned int audioBitdepth) { m_audioBitdepth = audioBitdepth; }
+	inline void setAudioBitrate(const unsigned int audioBitrate) { m_audioBitrate = audioBitrate; }
+	inline void setAudioBitrateMode(const unsigned int audioBitrateMode) { m_audioBitrateMode = audioBitrateMode; }
 	inline void setDuration(const unsigned int duration) { m_duration = duration; }
 
 	//Reset
@@ -173,7 +173,7 @@ public:
 	inline AudioFileModel_TechInfo &techInfo(void) { return m_techInfo; }
 
 	//Setter
-	inline const QString &setFilePath(const QString &filePath) { m_filePath = filePath; }
+	inline void setFilePath(const QString &filePath) { m_filePath = filePath; }
 	inline void setMetaInfo(const AudioFileModel_MetaInfo &metaInfo) { m_metaInfo = metaInfo; }
 	inline void setTechInfo(const AudioFileModel_TechInfo &techInfo) { m_techInfo = techInfo; }
 

@@ -167,7 +167,7 @@ static const unsigned int IDM_ABOUTBOX = 0xEFF0;
 // Constructor
 ////////////////////////////////////////////////////////////
 
-MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settingsModel, QWidget *parent)
+MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *metaInfo, SettingsModel *settingsModel, QWidget *parent)
 :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
@@ -313,7 +313,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel *metaInfo, S
 	// Setup "Meta Data" tab
 	//--------------------------------
 
-	m_metaInfoModel = new MetaInfoModel(m_metaData, 6);
+	m_metaInfoModel = new MetaInfoModel(m_metaData);
 	m_metaInfoModel->clearData();
 	m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
 	ui->metaDataView->setModel(m_metaInfoModel);
@@ -2705,26 +2705,24 @@ void MainWindow::makeFolderButtonClicked(void)
 	QDir basePath(m_fileSystemModel->fileInfo(ui->outputFolderView->currentIndex()).absoluteFilePath());
 	QString suggestedName = tr("New Folder");
 
-	const AudioFileModel_MetaInfo &metaInfo = m_metaData->metaInfo();
-
-	if(!metaInfo.artist().isEmpty() && !metaInfo.album().isEmpty())
+	if(!m_metaData->artist().isEmpty() && !m_metaData->album().isEmpty())
 	{
-		suggestedName = QString("%1 - %2").arg(metaInfo.artist(), metaInfo.album());
+		suggestedName = QString("%1 - %2").arg(m_metaData->artist(),m_metaData->album());
 	}
-	else if(!metaInfo.artist().isEmpty())
+	else if(!m_metaData->artist().isEmpty())
 	{
-		suggestedName = metaInfo.artist();
+		suggestedName = m_metaData->artist();
 	}
-	else if(!metaInfo.album().isEmpty())
+	else if(!m_metaData->album().isEmpty())
 	{
-		suggestedName = metaInfo.album();
+		suggestedName =m_metaData->album();
 	}
 	else
 	{
 		for(int i = 0; i < m_fileListModel->rowCount(); i++)
 		{
 			const AudioFileModel &audioFile = m_fileListModel->getFile(m_fileListModel->index(i, 0));
-			const AudioFileModel_MetaInfo &fileMetaInfo = m_metaData->metaInfo();
+			const AudioFileModel_MetaInfo &fileMetaInfo = audioFile.metaInfo();
 
 			if(!fileMetaInfo.album().isEmpty() || !fileMetaInfo.artist().isEmpty())
 			{
@@ -3191,7 +3189,7 @@ void MainWindow::editMetaButtonClicked(void)
 	
 		if(index.row() == 4)
 		{
-			m_settings->metaInfoPosition(m_metaData->metaInfo().position());
+			m_settings->metaInfoPosition(m_metaData->position());
 		}
 	}
 }

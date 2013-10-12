@@ -131,7 +131,7 @@ private:
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent)
+ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFileModel_MetaInfo *metaInfo, SettingsModel *settings, QWidget *parent)
 :
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
@@ -964,10 +964,10 @@ void ProcessingDialog::writePlayList(void)
 	int counter = 1;
 
 	//Generate playlist name
-	QString playListName = (m_metaInfo->metaInfo().album().isEmpty() ? "Playlist" : m_metaInfo->metaInfo().album());
-	if(!m_metaInfo->metaInfo().artist().isEmpty())
+	QString playListName = (m_metaInfo->album().isEmpty() ? "Playlist" : m_metaInfo->album());
+	if(!m_metaInfo->artist().isEmpty())
 	{
-		playListName = QString("%1 - %2").arg(m_metaInfo->metaInfo().artist(), playListName);
+		playListName = QString("%1 - %2").arg(m_metaInfo->artist(), playListName);
 	}
 
 	//Clean playlist name
@@ -1039,7 +1039,7 @@ AudioFileModel ProcessingDialog::updateMetaInfo(AudioFileModel &audioFile)
 		return audioFile;
 	}
 	
-	audioFile.metaInfo().update(m_metaInfo->metaInfo());
+	audioFile.metaInfo().update(*m_metaInfo);
 	
 	if(audioFile.metaInfo().position() == UINT_MAX)
 	{

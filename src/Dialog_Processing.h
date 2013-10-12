@@ -28,6 +28,7 @@
 
 class AbstractEncoder;
 class AudioFileModel;
+class AudioFileModel_MetaInfo;
 class CPUObserverThread;
 class DiskObserverThread;
 class FileListModel;
@@ -60,7 +61,7 @@ class ProcessingDialog : public QDialog
 	Q_OBJECT
 
 public:
-	ProcessingDialog(FileListModel *fileListModel, AudioFileModel *metaInfo, SettingsModel *settings, QWidget *parent = 0);
+	ProcessingDialog(FileListModel *fileListModel, const AudioFileModel_MetaInfo *metaInfo, SettingsModel *settings, QWidget *parent = 0);
 	~ProcessingDialog(void);
 	
 	int getShutdownFlag(void) { return m_shutdownFlag; }
@@ -106,7 +107,7 @@ private:
 	QThreadPool *m_threadPool;
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;
-	AudioFileModel *m_metaInfo;
+	const AudioFileModel_MetaInfo *const m_metaInfo;
 	QMovie *m_progressIndicator;
 	ProgressModel *m_progressModel;
 	QMap<QUuid,QString> m_playList;
