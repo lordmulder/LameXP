@@ -438,7 +438,7 @@ bool ProcessingDialog::event(QEvent *e)
 			while(!close())
 			{
 				if(!m_userAborted) abortEncoding(true);
-				QApplication::processEvents(QEventLoop::WaitForMoreEvents & QEventLoop::ExcludeUserInputEvents);
+				qApp->processEvents(QEventLoop::WaitForMoreEvents | QEventLoop::ExcludeUserInputEvents);
 			}
 		}
 		m_pendingJobs.clear();
@@ -551,6 +551,88 @@ void ProcessingDialog::initEncoding(void)
 	m_timerStart = lamexp_perfcounter_value();
 }
 
+void ProcessingDialog::startNextJob(void)
+{
+	if(m_pendingJobs.isEmpty())
+	{
+		qWarning("No more files left, unable to start another job!");
+		return;
+	}
+	
+	m_currentFile++;
+	m_runningThreads++;
+
+	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
+	bool nativeResampling = false;
+
+	//Create encoder instance
+	AbstractEncoder *encoder = EncoderRegistry::createInstance(m_settings->compressionEncoder(), m_settings, &nativeResampling);
+
+	//Create processing thread
+	ProcessThread *thread = new ProcessThread
+	(
+		currentFile,
+		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
+		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2()),
+		encoder,
+		m_settings->prependRelativeSourcePath() && (!m_settings->outputToSourceDir())
+	);
+
+	//Add audio filters
+	if(m_settings->forceStereoDownmix())
+	{
+		thread->addFilter(new DownmixFilter());
+	}
+	if((m_settings->samplingRate() > 0) && !nativeResampling)
+	{
+		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.formatAudioSamplerate() || currentFile.formatAudioSamplerate() == 0)
+		{
+			thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
+		}
+	}
+	if((m_settings->toneAdjustBass() != 0) || (m_settings->toneAdjustTreble() != 0))
+	{
+		thread->addFilter(new ToneAdjustFilter(m_settings->toneAdjustBass(), m_settings->toneAdjustTreble()));
+	}
+	if(m_settings->normalizationFilterEnabled())
+	{
+		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume(), m_settings->normalizationFilterEQMode()));
+	}
+	if(m_settings->renameOutputFilesEnabled() && (!m_settings->renameOutputFilesPattern().simplified().isEmpty()))
+	{
+		thread->setRenamePattern(m_settings->renameOutputFilesPattern());
+	}
+	if(m_settings->overwriteMode() != SettingsModel::Overwrite_KeepBoth)
+	{
+		thread->setOverwriteMode((m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile), (m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces));
+	}
+
+	m_allJobs.append(thread->getId());
+	
+	//Connect thread signals
+	connect(thread, SIGNAL(processFinished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
+	connect(this, SIGNAL(abortRunningTasks()), thread, SLOT(abort()), Qt::DirectConnection);
+
+	//Initialize thread object
+	if(!thread->init())
+	{
+		qFatal("Fatal Error: Thread initialization has failed!");
+	}
+
+	//Update GUI
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+
+	//Give it a go!
+	if(!thread->start(m_threadPool))
+	{
+		qWarning("Job failed to start or file was skipped!");
+	}
+}
+
 void ProcessingDialog::abortEncoding(bool force)
 {
 	m_userAborted = true;
@@ -573,14 +655,14 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if((!m_pendingJobs.isEmpty()) && (!m_userAborted))
 	{
-		startNextJob();
-		qDebug("Running jobs: %u", m_runningThreads);
+		QTimer::singleShot(0, this, SLOT(startNextJob()));
+		qDebug("%d files left, starting next job...", m_pendingJobs.count());
 		return;
 	}
 	
 	if(m_runningThreads > 0)
 	{
-		qDebug("Running jobs: %u", m_runningThreads);
+		qDebug("No files left, but still have %u running jobs.", m_runningThreads);
 		return;
 	}
 
@@ -590,7 +672,7 @@ void ProcessingDialog::doneEncoding(void)
 	if(!m_userAborted && m_settings->createPlaylist() && !m_settings->outputToSourceDir())
 	{
 		SET_PROGRESS_TEXT(tr("Creating the playlist file, please wait..."));
-		QApplication::processEvents();
+		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 		writePlayList();
 	}
 	
@@ -602,7 +684,7 @@ void ProcessingDialog::doneEncoding(void)
 		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %n file(s)!", "", m_succeededJobs.count()) : tr("Process was aborted prematurely by the user!"));
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
-		QApplication::processEvents();
+		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 		if(m_settings->soundsEnabled() && (!m_forcedAbort))
 		{
 			lamexp_play_sound(IDR_WAVE_ABORTED, false);
@@ -636,7 +718,7 @@ void ProcessingDialog::doneEncoding(void)
 			}
 			m_systemTray->showMessage(tr("LameXP - Error"), tr("At least one file has failed!"), QSystemTrayIcon::Critical);
 			m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
-			QApplication::processEvents();
+			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 			if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, false);
 		}
 		else
@@ -654,7 +736,7 @@ void ProcessingDialog::doneEncoding(void)
 			}
 			m_systemTray->showMessage(tr("LameXP - Done"), tr("All files completed successfully."), QSystemTrayIcon::Information);
 			m_systemTray->setIcon(QIcon(":/icons/cd_add.png"));
-			QApplication::processEvents();
+			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 			if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_SUCCESS, false);
 		}
 	}
@@ -864,88 +946,6 @@ void ProcessingDialog::progressViewFilterChanged(void)
 // Private Functions
 ////////////////////////////////////////////////////////////
 
-void ProcessingDialog::startNextJob(void)
-{
-	if(m_pendingJobs.isEmpty())
-	{
-		return;
-	}
-	
-	m_currentFile++;
-	m_runningThreads++;
-
-	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
-	bool nativeResampling = false;
-
-	//Create encoder instance
-	AbstractEncoder *encoder = EncoderRegistry::createInstance(m_settings->compressionEncoder(), m_settings, &nativeResampling);
-
-	//Create processing thread
-	ProcessThread *thread = new ProcessThread
-	(
-		currentFile,
-		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
-		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2()),
-		encoder,
-		m_settings->prependRelativeSourcePath() && (!m_settings->outputToSourceDir())
-	);
-
-	//Add audio filters
-	if(m_settings->forceStereoDownmix())
-	{
-		thread->addFilter(new DownmixFilter());
-	}
-	if((m_settings->samplingRate() > 0) && !nativeResampling)
-	{
-		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.formatAudioSamplerate() || currentFile.formatAudioSamplerate() == 0)
-		{
-			thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
-		}
-	}
-	if((m_settings->toneAdjustBass() != 0) || (m_settings->toneAdjustTreble() != 0))
-	{
-		thread->addFilter(new ToneAdjustFilter(m_settings->toneAdjustBass(), m_settings->toneAdjustTreble()));
-	}
-	if(m_settings->normalizationFilterEnabled())
-	{
-		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume(), m_settings->normalizationFilterEQMode()));
-	}
-	if(m_settings->renameOutputFilesEnabled() && (!m_settings->renameOutputFilesPattern().simplified().isEmpty()))
-	{
-		thread->setRenamePattern(m_settings->renameOutputFilesPattern());
-	}
-	if(m_settings->overwriteMode() != SettingsModel::Overwrite_KeepBoth)
-	{
-		thread->setOverwriteMode((m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile), (m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces));
-	}
-
-	m_allJobs.append(thread->getId());
-	
-	//Connect thread signals
-	connect(thread, SIGNAL(processFinished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
-	connect(this, SIGNAL(abortRunningTasks()), thread, SLOT(abort()), Qt::DirectConnection);
-
-
-	//Initialize thread object
-	if(!thread->init())
-	{
-		qFatal("Fatal Error: Thread initialization has failed!");
-	}
-
-	//Update GUI
-	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-
-	//Give it a go!
-	if(!thread->start(m_threadPool))
-	{
-		QTimer::singleShot(0, this, SLOT(doneEncoding()));
-	}
-}
-
 void ProcessingDialog::writePlayList(void)
 {
 	if(m_succeededJobs.count() <= 0 || m_allJobs.count() <= 0)
@@ -1105,7 +1105,7 @@ bool ProcessingDialog::shutdownComputer(void)
 	progressDialog.setCancelButton(cancelButton);
 	progressDialog.show();
 	
-	QApplication::processEvents();
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	if(m_settings->soundsEnabled())
 	{
@@ -1133,7 +1133,7 @@ bool ProcessingDialog::shutdownComputer(void)
 		progressDialog.setValue(i+1);
 		progressDialog.setLabelText(text.arg(iTimeout-i));
 		if(iTimeout-i == 3) progressDialog.setCancelButton(NULL);
-		QApplication::processEvents();
+		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 		lamexp_play_sound(((i < iTimeout) ? IDR_WAVE_BEEP : IDR_WAVE_BEEP_LONG), false);
 	}
 	

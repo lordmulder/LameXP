@@ -67,6 +67,7 @@ public:
 
 private slots:
 	void initEncoding(void);
+	void startNextJob(void);
 	void doneEncoding(void);
 	void abortEncoding(bool force = false);
 	void processFinished(const QUuid &jobId, const QString &outFileName, int success);
@@ -97,7 +98,6 @@ protected:
 private:
 	Ui::ProcessingDialog *ui; //for Qt UIC
 
-	void startNextJob(void);
 	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);

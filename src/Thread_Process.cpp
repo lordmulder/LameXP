@@ -112,9 +112,12 @@ bool ProcessThread::init(void)
 		//Initialize log
 		handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time()));
 		handleMessage("\n-------------------------------\n");
+
+		return true;
 	}
 
-	return true;
+	qWarning("[ProcessThread::init] Job %s already initialialized, skipping!", m_jobId.toString().toLatin1().constData());
+	return false;
 }
 
 bool ProcessThread::start(QThreadPool *pool)
@@ -129,30 +132,38 @@ bool ProcessThread::start(QThreadPool *pool)
 	{
 		m_initialized = 1;
 
-		//Generate output file name
 		m_outFileName.clear();
+		bool bSuccess = false;
+
+		//Generate output file name
 		switch(generateOutFileName(m_outFileName))
 		{
 		case 1:
 			//File name generated successfully :-)
+			bSuccess = true;
 			pool->start(this);
-			return true;
 			break;
 		case -1:
 			//File name already exists -> skipping!
 			emit processStateChanged(m_jobId, tr("Skipped."), ProgressModel::JobSkipped);
 			emit processStateFinished(m_jobId, m_outFileName, -1);
-			return false;
 			break;
 		default:
 			//File name could not be generated
 			emit processStateChanged(m_jobId, tr("Not found!"), ProgressModel::JobFailed);
 			emit processStateFinished(m_jobId, m_outFileName, 0);
-			return false;
 			break;
 		}
+
+		if(!bSuccess)
+		{
+			emit processFinished();
+		}
+
+		return bSuccess;
 	}
 
+	qWarning("[ProcessThread::start] Job %s already started, skipping!", m_jobId.toString().toLatin1().constData());
 	return false;
 }
 
