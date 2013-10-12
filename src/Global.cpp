@@ -1619,28 +1619,30 @@ const QString &lamexp_temp_folder2(void)
 bool lamexp_clean_folder(const QString &folderPath)
 {
 	QDir tempFolder(folderPath);
-	QFileInfoList entryList = tempFolder.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
-
-	for(int i = 0; i < entryList.count(); i++)
+	if(tempFolder.exists())
 	{
-		if(entryList.at(i).isDir())
+		QFileInfoList entryList = tempFolder.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
+
+		for(int i = 0; i < entryList.count(); i++)
 		{
-			lamexp_clean_folder(entryList.at(i).canonicalFilePath());
-		}
-		else
-		{
-			for(int j = 0; j < 3; j++)
+			if(entryList.at(i).isDir())
 			{
-				if(lamexp_remove_file(entryList.at(i).canonicalFilePath()))
+				lamexp_clean_folder(entryList.at(i).canonicalFilePath());
+			}
+			else
+			{
+				for(int j = 0; j < 3; j++)
 				{
-					break;
+					if(lamexp_remove_file(entryList.at(i).canonicalFilePath()))
+					{
+						break;
+					}
 				}
 			}
 		}
+		return tempFolder.rmdir(".");
 	}
-	
-	tempFolder.rmdir(".");
-	return !tempFolder.exists();
+	return true;
 }
 
 /*
@@ -2944,13 +2946,20 @@ void lamexp_finalization(void)
 	{
 		if(!g_lamexp_temp_folder.path->isEmpty())
 		{
+			bool success = false;
 			for(int i = 0; i < 100; i++)
 			{
 				if(lamexp_clean_folder(*g_lamexp_temp_folder.path))
 				{
+					success = true;
 					break;
 				}
-				Sleep(125);
+				lamexp_sleep(100);
+			}
+			if(!success)
+			{
+				MessageBoxW(NULL, L"Sorry, LameXP was unable to clean up all temporary files. Some residual files in your TEMP directory may require manual deletion!", L"LameXP", MB_ICONEXCLAMATION|MB_TOPMOST);
+				lamexp_exec_shell(NULL, *g_lamexp_temp_folder.path, QString(), QString(), true);
 			}
 		}
 		LAMEXP_DELETE(g_lamexp_temp_folder.path);
