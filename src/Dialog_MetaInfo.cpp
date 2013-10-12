@@ -109,10 +109,10 @@ int MetaInfoDialog::exec(AudioFileModel &audioFile, bool allowUp, bool allowDown
 	downButton->setEnabled(allowDown);
 	buttonArtwork->setChecked(false);
 
-	if(!audioFile.fileCover().isEmpty())
+	if(!audioFile.metaInfo().cover().isEmpty())
 	{
 		QImage artwork;
-		if(artwork.load(audioFile.fileCover()))
+		if(artwork.load(audioFile.metaInfo().cover()))
 		{
 			if((artwork.width() > 256) || (artwork.height() > 256))
 			{

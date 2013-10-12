@@ -26,6 +26,7 @@
 #include <QMap>
 
 class AudioFileModel;
+class AudioFileModel_MetaInfo;
 class CueSheetModel;
 class QFile;
 class QDir;
@@ -62,7 +63,7 @@ public slots:
 	void abortProcess(void) { m_abortFlag = true; }
 
 private:
-	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo, int &maxProgress);
+	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, int &maxProgress);
 	QString indexToString(const double index) const;
 	QString shortName(const QString &longName) const;
 	

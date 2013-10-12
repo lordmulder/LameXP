@@ -29,7 +29,7 @@ public:
 	ResampleFilter(int samplingRate = 0, int bitDepth = 0);
 	~ResampleFilter(void);
 
-	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag);
+	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *formatInfo, volatile bool *abortFlag);
 
 private:
 	const QString m_binary;

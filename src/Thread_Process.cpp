@@ -46,7 +46,7 @@
 #include <stdlib.h>
 
 #define DIFF(X,Y) ((X > Y) ? (X-Y) : (Y-X))
-#define IS_WAVE(X) ((X.formatContainerType().compare("Wave", Qt::CaseInsensitive) == 0) && (X.formatAudioType().compare("PCM", Qt::CaseInsensitive) == 0))
+#define IS_WAVE(X) ((X.containerType().compare("Wave", Qt::CaseInsensitive) == 0) && (X.audioType().compare("PCM", Qt::CaseInsensitive) == 0))
 #define STRDEF(STR,DEF) ((!STR.isEmpty()) ? STR : DEF)
 
 ////////////////////////////////////////////////////////////
@@ -202,10 +202,11 @@ void ProcessThread::processFile()
 	//------------------
 	//Decode source file
 	//------------------
-	if(!m_filters.isEmpty() || !m_encoder->isFormatSupported(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion()))
+	const AudioFileModel_TechInfo &formatInfo = m_audioFile.techInfo();
+	if(!m_filters.isEmpty() || !m_encoder->isFormatSupported(formatInfo.containerType(), formatInfo.containerProfile(), formatInfo.audioType(), formatInfo.audioProfile(), formatInfo.audioVersion()))
 	{
 		m_currentStep = DecodingStep;
-		AbstractDecoder *decoder = DecoderRegistry::lookup(m_audioFile.formatContainerType(), m_audioFile.formatContainerProfile(), m_audioFile.formatAudioType(), m_audioFile.formatAudioProfile(), m_audioFile.formatAudioVersion());
+		AbstractDecoder *decoder = DecoderRegistry::lookup(formatInfo.containerType(), formatInfo.containerProfile(), formatInfo.audioType(), formatInfo.audioProfile(), formatInfo.audioVersion());
 		
 		if(decoder)
 		{
@@ -220,8 +221,8 @@ void ProcessThread::processFile()
 			if(bSuccess)
 			{
 				sourceFile = tempFile;
-				m_audioFile.setFormatContainerType(QString::fromLatin1("Wave"));
-				m_audioFile.setFormatAudioType(QString::fromLatin1("PCM"));
+				m_audioFile.techInfo().setContainerType(QString::fromLatin1("Wave"));
+				m_audioFile.techInfo().setAudioType(QString::fromLatin1("PCM"));
 
 				if(QFileInfo(sourceFile).size() >= 4294967296i64)
 				{
@@ -234,7 +235,7 @@ void ProcessThread::processFile()
 		else
 		{
 			if(QFileInfo(m_outFileName).exists() && (QFileInfo(m_outFileName).size() < 512)) QFile::remove(m_outFileName);
-			handleMessage(QString("%1\n%2\n\n%3\t%4\n%5\t%6").arg(tr("The format of this file is NOT supported:"), m_audioFile.filePath(), tr("Container Format:"), m_audioFile.formatContainerInfo(), tr("Audio Format:"), m_audioFile.formatAudioCompressInfo()));
+			handleMessage(QString("%1\n%2\n\n%3\t%4\n%5\t%6").arg(tr("The format of this file is NOT supported:"), m_audioFile.filePath(), tr("Container Format:"), m_audioFile.containerInfo(), tr("Audio Format:"), m_audioFile.audioCompressInfo()));
 			emit processStateChanged(m_jobId, tr("Unsupported!"), ProgressModel::JobFailed);
 			emit processStateFinished(m_jobId, m_outFileName, 0);
 			return;
@@ -244,12 +245,12 @@ void ProcessThread::processFile()
 	//------------------------------------
 	//Update audio properties after decode
 	//------------------------------------
-	if(bSuccess && !m_aborted && IS_WAVE(m_audioFile))
+	if(bSuccess && !m_aborted && IS_WAVE(m_audioFile.techInfo()))
 	{
 		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount() || m_encoder->needsTimingInfo() || !m_filters.isEmpty())
 		{
 			m_currentStep = AnalyzeStep;
-			bSuccess = m_propDetect->detect(sourceFile, &m_audioFile, &m_aborted);
+			bSuccess = m_propDetect->detect(sourceFile, &m_audioFile.techInfo(), &m_aborted);
 
 			if(bSuccess)
 			{
@@ -284,7 +285,7 @@ void ProcessThread::processFile()
 			connect(poFilter, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 			connect(poFilter, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
-			if(poFilter->apply(sourceFile, tempFile, &m_audioFile, &m_aborted))
+			if(poFilter->apply(sourceFile, tempFile, &m_audioFile.techInfo(), &m_aborted))
 			{
 				sourceFile = tempFile;
 			}
@@ -300,7 +301,7 @@ void ProcessThread::processFile()
 	if(bSuccess && !m_aborted)
 	{
 		m_currentStep = EncodingStep;
-		bSuccess = m_encoder->encode(sourceFile, m_audioFile, m_outFileName, &m_aborted);
+		bSuccess = m_encoder->encode(sourceFile, m_audioFile.metaInfo(), m_audioFile.techInfo().duration(), m_outFileName, &m_aborted);
 	}
 
 	//Clean-up
@@ -426,15 +427,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Apply rename pattern
-	QString fileName = m_renamePattern;
-	fileName.replace("<BaseName>", STRDEF(baseName, tr("Unknown File Name")), Qt::CaseInsensitive);
-	fileName.replace("<TrackNo>", QString().sprintf("%02d", m_audioFile.filePosition()), Qt::CaseInsensitive);
-	fileName.replace("<Title>", STRDEF(m_audioFile.fileName(), tr("Unknown Title")) , Qt::CaseInsensitive);
-	fileName.replace("<Artist>", STRDEF(m_audioFile.fileArtist(), tr("Unknown Artist")), Qt::CaseInsensitive);
-	fileName.replace("<Album>", STRDEF(m_audioFile.fileAlbum(), tr("Unknown Album")), Qt::CaseInsensitive);
-	fileName.replace("<Year>", QString().sprintf("%04d", m_audioFile.fileYear()), Qt::CaseInsensitive);
-	fileName.replace("<Comment>", STRDEF(m_audioFile.fileComment(), tr("Unknown Comment")), Qt::CaseInsensitive);
-	fileName = lamexp_clean_filename(fileName).simplified();
+	QString fileName = applyRenamePattern(baseName, m_audioFile.metaInfo());
 
 	//Generate full output path
 	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, m_encoder->extension());
@@ -482,6 +475,22 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	return 1;
 }
 
+QString ProcessThread::applyRenamePattern(const QString &baseName, const AudioFileModel_MetaInfo &metaInfo)
+{
+	QString fileName = m_renamePattern;
+	
+	fileName.replace("<BaseName>", STRDEF(baseName, tr("Unknown File Name")), Qt::CaseInsensitive);
+	fileName.replace("<TrackNo>", QString().sprintf("%02d", metaInfo.position()), Qt::CaseInsensitive);
+	fileName.replace("<Title>", STRDEF(metaInfo.title(), tr("Unknown Title")) , Qt::CaseInsensitive);
+	fileName.replace("<Artist>", STRDEF(metaInfo.artist(), tr("Unknown Artist")), Qt::CaseInsensitive);
+	fileName.replace("<Album>", STRDEF(metaInfo.album(), tr("Unknown Album")), Qt::CaseInsensitive);
+	fileName.replace("<Year>", QString().sprintf("%04d", metaInfo.year()), Qt::CaseInsensitive);
+	fileName.replace("<Comment>", STRDEF(metaInfo.comment(), tr("Unknown Comment")), Qt::CaseInsensitive);
+	fileName = lamexp_clean_filename(fileName).simplified();
+
+	return fileName;
+}
+
 QString ProcessThread::generateTempFileName(void)
 {
 	bool bOkay = false;
@@ -520,7 +529,7 @@ void ProcessThread::insertDownsampleFilter(void)
 	int targetBitDepth = 0;
 	
 	/* Adjust sample rate */
-	if(m_encoder->supportedSamplerates() && m_audioFile.formatAudioSamplerate())
+	if(m_encoder->supportedSamplerates() && m_audioFile.techInfo().audioSamplerate())
 	{
 		bool applyDownsampling = true;
 	
@@ -539,7 +548,7 @@ void ProcessThread::insertDownsampleFilter(void)
 		if(applyDownsampling)
 		{
 			const unsigned int *supportedRates = m_encoder->supportedSamplerates();
-			const unsigned int inputRate = m_audioFile.formatAudioSamplerate();
+			const unsigned int inputRate = m_audioFile.techInfo().audioSamplerate();
 			unsigned int currentDiff = UINT_MAX, minimumDiff = UINT_MAX, bestRate = UINT_MAX;
 
 			//Find the most suitable supported sampling rate
@@ -562,9 +571,9 @@ void ProcessThread::insertDownsampleFilter(void)
 	}
 
 	/* Adjust bit depth (word size) */
-	if(m_encoder->supportedBitdepths() && m_audioFile.formatAudioBitdepth())
+	if(m_encoder->supportedBitdepths() && m_audioFile.techInfo().audioBitdepth())
 	{
-		const unsigned int inputBPS = m_audioFile.formatAudioBitdepth();
+		const unsigned int inputBPS = m_audioFile.techInfo().audioBitdepth();
 		const unsigned int *supportedBPS = m_encoder->supportedBitdepths();
 
 		bool bAdjustBitdepth = true;
@@ -628,7 +637,7 @@ void ProcessThread::insertDownmixFilter(void)
 	{
 		bool requiresDownmix = true;
 		const unsigned int *supportedChannels = m_encoder->supportedChannelCount();
-		unsigned int channels = m_audioFile.formatAudioChannels();
+		unsigned int channels = m_audioFile.techInfo().audioChannels();
 
 		for(int i = 0; supportedChannels[i]; i++)
 		{

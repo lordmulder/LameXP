@@ -40,7 +40,7 @@ WaveProperties::~WaveProperties(void)
 {
 }
 
-bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, volatile bool *abortFlag)
+bool WaveProperties::detect(const QString &sourceFile, AudioFileModel_TechInfo *info, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -89,21 +89,21 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, vol
 			{
 				bool ok = false;
 				unsigned int tmp = regExp_precision.cap(1).toUInt(&ok);
-				if(ok) info->setFormatAudioBitdepth(tmp);
+				if(ok) info->setAudioBitdepth(tmp);
 				emit statusUpdated(qMin(progress += 25, 100));
 			}
 			if(regExp_encoding.lastIndexIn(text) >= 0)
 			{
 				bool ok = false;
 				unsigned int tmp = regExp_encoding.cap(1).toUInt(&ok);
-				if(ok) info->setFormatAudioBitdepth((tmp == 32) ? AudioFileModel::BITDEPTH_IEEE_FLOAT32 : tmp);
+				if(ok) info->setAudioBitdepth((tmp == 32) ? AudioFileModel::BITDEPTH_IEEE_FLOAT32 : tmp);
 				emit statusUpdated(qMin(progress += 25, 100));
 			}
 			if(regExp_samplerate.lastIndexIn(text) >= 0)
 			{
 				bool ok = false;
 				unsigned int tmp = regExp_samplerate.cap(1).toUInt(&ok);
-				if(ok) info->setFormatAudioSamplerate(tmp);
+				if(ok) info->setAudioSamplerate(tmp);
 				emit statusUpdated(qMin(progress += 25, 100));
 			}
 			if(regExp_duration.lastIndexIn(text) >= 0)
@@ -115,7 +115,7 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, vol
 				unsigned int tmp4 = regExp_duration.cap(4).toUInt(&ok[3]);
 				if(ok[0] && ok[1] && ok[2] && ok[3])
 				{
-					info->setFileDuration((tmp1 * 3600) + (tmp2 * 60) + tmp3 + qRound(static_cast<double>(tmp4) / 100.0));
+					info->setDuration((tmp1 * 3600) + (tmp2 * 60) + tmp3 + qRound(static_cast<double>(tmp4) / 100.0));
 				}
 				emit statusUpdated(qMin(progress += 25, 100));
 			}
@@ -123,7 +123,7 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel *info, vol
 			{
 				bool ok = false;
 				unsigned int tmp = regExp_channels.cap(1).toUInt(&ok);
-				if(ok) info->setFormatAudioChannels(tmp);
+				if(ok) info->setAudioChannels(tmp);
 				emit statusUpdated(qMin(progress += 25, 100));
 			}
 			if(!text.isEmpty())

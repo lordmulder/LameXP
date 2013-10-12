@@ -55,12 +55,12 @@ ResampleFilter::~ResampleFilter(void)
 {
 }
 
-bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag)
+bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *formatInfo, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
 
-	if((m_samplingRate == formatInfo->formatAudioSamplerate()) && (m_bitDepth == formatInfo->formatAudioBitdepth()))
+	if((m_samplingRate == formatInfo->audioSamplerate()) && (m_bitDepth == formatInfo->audioBitdepth()))
 	{
 		messageLogged("Skipping resample filter!");
 		qDebug("Resampling filter target samplerate/bitdepth is equals to the format of the input file, skipping!");
@@ -153,8 +153,8 @@ bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile,
 		return false;
 	}
 	
-	if(m_samplingRate) formatInfo->setFormatAudioSamplerate(m_samplingRate);
-	if(m_bitDepth) formatInfo->setFormatAudioBitdepth(m_bitDepth);
+	if(m_samplingRate) formatInfo->setAudioSamplerate(m_samplingRate);
+	if(m_bitDepth) formatInfo->setAudioBitdepth(m_bitDepth);
 
 	return true;
 }

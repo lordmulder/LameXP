@@ -134,7 +134,7 @@ MP3Encoder::~MP3Encoder(void)
 {
 }
 
-bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
+bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -194,22 +194,22 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel &metaInf
 
 	bool bUseUCS2 = false;
 
-	if(!metaInfo.fileName().isEmpty() && isUnicode(metaInfo.fileName())) bUseUCS2 = true;
-	if(!metaInfo.fileArtist().isEmpty() && isUnicode(metaInfo.fileArtist())) bUseUCS2 = true;
-	if(!metaInfo.fileAlbum().isEmpty() && isUnicode(metaInfo.fileAlbum())) bUseUCS2 = true;
-	if(!metaInfo.fileGenre().isEmpty() && isUnicode(metaInfo.fileGenre())) bUseUCS2 = true;
-	if(!metaInfo.fileComment().isEmpty() && isUnicode(metaInfo.fileComment())) bUseUCS2 = true;
+	if(!metaInfo.title().isEmpty() && isUnicode(metaInfo.title())) bUseUCS2 = true;
+	if(!metaInfo.artist().isEmpty() && isUnicode(metaInfo.artist())) bUseUCS2 = true;
+	if(!metaInfo.album().isEmpty() && isUnicode(metaInfo.album())) bUseUCS2 = true;
+	if(!metaInfo.genre().isEmpty() && isUnicode(metaInfo.genre())) bUseUCS2 = true;
+	if(!metaInfo.comment().isEmpty() && isUnicode(metaInfo.comment())) bUseUCS2 = true;
 
 	if(bUseUCS2) args << "--id3v2-ucs2"; //Must specify this BEFORE "--tt" and friends!
 
-	if(!metaInfo.fileName().isEmpty()) args << "--tt" << cleanTag(metaInfo.fileName());
-	if(!metaInfo.fileArtist().isEmpty()) args << "--ta" << cleanTag(metaInfo.fileArtist());
-	if(!metaInfo.fileAlbum().isEmpty()) args << "--tl" <<cleanTag( metaInfo.fileAlbum());
-	if(!metaInfo.fileGenre().isEmpty()) args << "--tg" << cleanTag(metaInfo.fileGenre());
-	if(!metaInfo.fileComment().isEmpty()) args << "--tc" << cleanTag(metaInfo.fileComment());
-	if(metaInfo.fileYear()) args << "--ty" << QString::number(metaInfo.fileYear());
-	if(metaInfo.filePosition()) args << "--tn" << QString::number(metaInfo.filePosition());
-	if(!metaInfo.fileCover().isEmpty()) args << "--ti" << QDir::toNativeSeparators(metaInfo.fileCover());
+	if(!metaInfo.title().isEmpty()) args << "--tt" << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty()) args << "--ta" << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty()) args << "--tl" <<cleanTag( metaInfo.album());
+	if(!metaInfo.genre().isEmpty()) args << "--tg" << cleanTag(metaInfo.genre());
+	if(!metaInfo.comment().isEmpty()) args << "--tc" << cleanTag(metaInfo.comment());
+	if(metaInfo.year()) args << "--ty" << QString::number(metaInfo.year());
+	if(metaInfo.position()) args << "--tn" << QString::number(metaInfo.position());
+	if(!metaInfo.cover().isEmpty()) args << "--ti" << QDir::toNativeSeparators(metaInfo.cover());
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 

@@ -108,10 +108,10 @@ void CueSplitter::run()
 	//Decompress all input files
 	for(int i = 0; i < nInputFiles; i++)
 	{
-		AudioFileModel &inputFileInfo = m_inputFilesInfo[inputFileList.at(i)];
-		if(inputFileInfo.formatContainerType().compare("Wave", Qt::CaseInsensitive) || inputFileInfo.formatAudioType().compare("PCM", Qt::CaseInsensitive))
+		const AudioFileModel_TechInfo &inputFileInfo = m_inputFilesInfo[inputFileList.at(i)].techInfo();
+		if(inputFileInfo.containerType().compare("Wave", Qt::CaseInsensitive) || inputFileInfo.audioType().compare("PCM", Qt::CaseInsensitive))
 		{
-			AbstractDecoder *decoder = DecoderRegistry::lookup(inputFileInfo.formatContainerType(), inputFileInfo.formatContainerProfile(), inputFileInfo.formatAudioType(), inputFileInfo.formatAudioProfile(), inputFileInfo.formatAudioVersion());
+			AbstractDecoder *decoder = DecoderRegistry::lookup(inputFileInfo.containerType(), inputFileInfo.containerProfile(), inputFileInfo.audioType(), inputFileInfo.audioProfile(), inputFileInfo.audioVersion());
 			if(decoder)
 			{
 				m_activeFile = shortName(QFileInfo(inputFileList.at(i)).fileName());
@@ -193,41 +193,42 @@ void CueSplitter::run()
 			}
 			
 			//Setup meta info
-			AudioFileModel trackMetaInfo(QString().sprintf("cue://File%02d/Track%02d", i, j));
-			trackMetaInfo.setFileName(m_model->getTrackTitle(i, j));
-			trackMetaInfo.setFileArtist(m_model->getTrackPerformer(i, j));
-			trackMetaInfo.setFileGenre(m_model->getTrackGenre(i, j));
-			trackMetaInfo.setFileYear(m_model->getTrackYear(i, j));
-			trackMetaInfo.setFilePosition(trackNo);
+			AudioFileModel_MetaInfo trackMetaInfo; /*QString().sprintf("cue://File%02d/Track%02d", i, j)*/;
+			trackMetaInfo.setTitle(m_model->getTrackTitle(i, j));
+			trackMetaInfo.setArtist(m_model->getTrackPerformer(i, j));
+			trackMetaInfo.setGenre(m_model->getTrackGenre(i, j));
+			trackMetaInfo.setYear(m_model->getTrackYear(i, j));
+			trackMetaInfo.setPosition(trackNo);
 			
 			//Apply album meta data on files
-			if(trackMetaInfo.fileName().trimmed().isEmpty())
+			if(trackMetaInfo.title().trimmed().isEmpty())
 			{
-				trackMetaInfo.setFileName(QString().sprintf("Track %02d", trackNo));
+				trackMetaInfo.setTitle(QString().sprintf("Track %02d", trackNo));
 			}
 			if(!albumTitle.isEmpty())
 			{
-				trackMetaInfo.setFileAlbum(albumTitle);
+				trackMetaInfo.setAlbum(albumTitle);
 			}
-			if(!albumPerformer.isEmpty() && trackMetaInfo.fileArtist().isEmpty())
+			if(!albumPerformer.isEmpty() && trackMetaInfo.artist().isEmpty())
 			{
-				trackMetaInfo.setFileArtist(albumPerformer);
+				trackMetaInfo.setArtist(albumPerformer);
 			}
-			if(!albumGenre.isEmpty() && trackMetaInfo.fileGenre().isEmpty())
+			if(!albumGenre.isEmpty() && trackMetaInfo.genre().isEmpty())
 			{
-				trackMetaInfo.setFileGenre(albumGenre);
+				trackMetaInfo.setGenre(albumGenre);
 			}
-			if((albumYear > 0) && (trackMetaInfo.fileYear() == 0))
+			if((albumYear > 0) && (trackMetaInfo.year() == 0))
 			{
-				trackMetaInfo.setFileYear(albumYear);
+				trackMetaInfo.setYear(albumYear);
 			}
 			if(_finite(trackLength))
 			{
-				trackMetaInfo.setFileDuration(static_cast<unsigned int>(abs(trackLength)));
+				//FIXME !!!
+				//trackMetaInfo.setDuration(static_cast<unsigned int>(abs(trackLength)));
 			}
 
 			//Generate output file name
-			QString trackTitle = trackMetaInfo.fileName().isEmpty() ? QString().sprintf("Track %02d", trackNo) : trackMetaInfo.fileName();
+			QString trackTitle = trackMetaInfo.title().isEmpty() ? QString().sprintf("Track %02d", trackNo) : trackMetaInfo.title();
 			QString outputFile = QString("%1/[%2] %3 - %4.wav").arg(m_outputDir, QString().sprintf("%02d", trackNo), lamexp_clean_filename(m_baseName), lamexp_clean_filename(trackTitle));
 			for(int n = 2; QFileInfo(outputFile).exists(); n++)
 			{
@@ -236,7 +237,7 @@ void CueSplitter::run()
 
 			//Call split function
 			emit fileSelected(shortName(QFileInfo(outputFile).fileName()));
-			splitFile(outputFile,  trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, maxProgress);
+			splitFile(outputFile, trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, maxProgress);
 
 			if(m_abortFlag)
 			{
@@ -264,14 +265,14 @@ void CueSplitter::handleUpdate(int progress)
 // Privtae Functions
 ////////////////////////////////////////////////////////////
 
-void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel &metaInfo, int &maxProgress)
+void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, int &maxProgress)
 {
 	qDebug("[Track %02d]", trackNo);
 	qDebug("File: <%s>", file.toUtf8().constData());
 	qDebug("Offset: <%f> <%s>", offset, indexToString(offset).toLatin1().constData());
 	qDebug("Length: <%f> <%s>", length, indexToString(length).toLatin1().constData());
-	qDebug("Artist: <%s>", metaInfo.fileArtist().toUtf8().constData());
-	qDebug("Title: <%s>", metaInfo.fileName().toUtf8().constData());
+	qDebug("Artist: <%s>", metaInfo.artist().toUtf8().constData());
+	qDebug("Title: <%s>", metaInfo.title().toUtf8().constData());
 	
 	if(!m_decompressedFiles.contains(file))
 	{
@@ -286,10 +287,11 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	
 	emit fileSelected(QString("%1 [%2%]").arg(baseName, QString::number(maxProgress)));
 
-	AudioFileModel outFileInfo(metaInfo);
+	AudioFileModel outFileInfo;
+	outFileInfo.setMetaInfo(metaInfo);
 	outFileInfo.setFilePath(output);
-	outFileInfo.setFormatContainerType("Wave");
-	outFileInfo.setFormatAudioType("PCM");
+	outFileInfo.techInfo().setContainerType("Wave");
+	outFileInfo.techInfo().setAudioType("PCM");
 
 	QStringList args;
 	args << "-S" << "-V3";
@@ -364,19 +366,19 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 			{
 				bool ok = false;
 				unsigned int channels = rxChannels.cap(1).toUInt(&ok);
-				if(ok) outFileInfo.setFormatAudioChannels(channels);
+				if(ok) outFileInfo.techInfo().setAudioChannels(channels);
 			}
 			else if(rxSamplerate.lastIndexIn(text) >= 0)
 			{
 				bool ok = false;
 				unsigned int samplerate = rxSamplerate.cap(1).toUInt(&ok);
-				if(ok) outFileInfo.setFormatAudioSamplerate(samplerate);
+				if(ok) outFileInfo.techInfo().setAudioSamplerate(samplerate);
 			}
 			else if(rxPrecision.lastIndexIn(text) >= 0)
 			{
 				bool ok = false;
 				unsigned int precision = rxPrecision.cap(1).toUInt(&ok);
-				if(ok) outFileInfo.setFormatAudioBitdepth(precision);
+				if(ok) outFileInfo.techInfo().setAudioBitdepth(precision);
 			}
 			else if(rxDuration.lastIndexIn(text) >= 0)
 			{
@@ -392,7 +394,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 						qDebug("Duration updated from SoX info!");
 						int duration = intputLen - static_cast<int>(floor(offset + 0.5));
 						if(duration < 0) qWarning("Track is out of bounds: Track offset exceeds input file duration!");
-						outFileInfo.setFileDuration(qMax(0, duration));
+						outFileInfo.techInfo().setDuration(qMax(0, duration));
 					}
 					else
 					{

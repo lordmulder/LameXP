@@ -22,7 +22,7 @@
 
 #include "Tool_Abstract.h"
 
-class AudioFileModel;
+class AudioFileModel_TechInfo;
 
 class WaveProperties : public AbstractTool
 {
@@ -32,7 +32,7 @@ public:
 	WaveProperties(void);
 	~WaveProperties(void);
 
-	bool detect(const QString &sourceFile, AudioFileModel *info, volatile bool *abortFlag);
+	bool detect(const QString &sourceFile, AudioFileModel_TechInfo *info, volatile bool *abortFlag);
 
 private:
 	const QString m_binary;

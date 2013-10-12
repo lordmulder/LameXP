@@ -70,7 +70,7 @@ QVariant FileListModel::data(const QModelIndex &index, int role) const
 		switch(index.column())
 		{
 		case 0:
-			return m_fileStore.value(m_fileList.at(index.row())).fileName();
+			return m_fileStore.value(m_fileList.at(index.row())).metaInfo().title();
 			break;
 		case 1:
 			return QDir::toNativeSeparators(m_fileStore.value(m_fileList.at(index.row())).filePath());
@@ -143,8 +143,10 @@ void FileListModel::addFile(const QString &filePath)
 
 	if(!m_fileStore.contains(key))
 	{
+		AudioFileModel audioFile(fileInfo.canonicalFilePath());
+		audioFile.metaInfo().setTitle(fileInfo.baseName());
 		if(flag) beginInsertRows(QModelIndex(), m_fileList.count(), m_fileList.count());
-		m_fileStore.insert(key, AudioFileModel(fileInfo.canonicalFilePath(), fileInfo.baseName()));
+		m_fileStore.insert(key, audioFile);
 		m_fileList.append(key);
 		if(flag) endInsertRows();
 		emit rowAppended();
@@ -205,15 +207,15 @@ bool FileListModel::moveFile(const QModelIndex &index, int delta)
 	}
 }
 
-AudioFileModel FileListModel::getFile(const QModelIndex &index)
+const AudioFileModel &FileListModel::getFile(const QModelIndex &index)
 {
 	if(index.row() >= 0 && index.row() < m_fileList.count())
 	{
-		return m_fileStore.value(m_fileList.at(index.row()));
+		return m_fileStore[m_fileList.at(index.row())];		//return m_fileStore.value(m_fileList.at(index.row()));
 	}
 	else
 	{
-		return AudioFileModel();
+		return m_nullAudioFile;
 	}
 }
 
@@ -251,15 +253,16 @@ int FileListModel::exportToCsv(const QString &outFile)
 	
 	for(int i = 0; i < nFiles; i++)
 	{
-		AudioFileModel current = m_fileStore.value(m_fileList.at(i));
+		const AudioFileModel &current = m_fileStore.value(m_fileList.at(i));
+		const AudioFileModel_MetaInfo &metaInfo = current.metaInfo();
 		
-		if(current.filePosition() > 0) havePosition = true;
-		if(!current.fileName().isEmpty()) haveTitle = true;
-		if(!current.fileArtist().isEmpty()) haveArtist = true;
-		if(!current.fileAlbum().isEmpty()) haveAlbum = true;
-		if(!current.fileGenre().isEmpty()) haveGenre = true;
-		if(current.fileYear() > 0) haveYear = true;
-		if(!current.fileComment().isEmpty()) haveComment = true;
+		if(metaInfo.position() > 0) havePosition = true;
+		if(!metaInfo.title().isEmpty()) haveTitle = true;
+		if(!metaInfo.artist().isEmpty()) haveArtist = true;
+		if(!metaInfo.album().isEmpty()) haveAlbum = true;
+		if(!metaInfo.genre().isEmpty()) haveGenre = true;
+		if(metaInfo.year() > 0) haveYear = true;
+		if(!metaInfo.comment().isEmpty()) haveComment = true;
 	}
 
 	if(!(haveTitle || haveArtist || haveAlbum || haveGenre || haveYear || haveComment))
@@ -295,15 +298,16 @@ int FileListModel::exportToCsv(const QString &outFile)
 	for(int i = 0; i < nFiles; i++)
 	{
 		QStringList line;
-		AudioFileModel current = m_fileStore.value(m_fileList.at(i));
+		const AudioFileModel &current = m_fileStore.value(m_fileList.at(i));
+		const AudioFileModel_MetaInfo &metaInfo = current.metaInfo();
 		
-		if(havePosition) line << QString::number(current.filePosition());
-		if(haveTitle) line << current.fileName().trimmed();
-		if(haveArtist) line << current.fileArtist().trimmed();
-		if(haveAlbum) line << current.fileAlbum().trimmed();
-		if(haveGenre) line << current.fileGenre().trimmed();
-		if(haveYear) line << QString::number(current.fileYear());
-		if(haveComment) line << current.fileComment().trimmed();
+		if(havePosition) line << QString::number(metaInfo.position());
+		if(haveTitle) line << metaInfo.title().trimmed();
+		if(haveArtist) line << metaInfo.artist().trimmed();
+		if(haveAlbum) line << metaInfo.album().trimmed();
+		if(haveGenre) line << metaInfo.genre().trimmed();
+		if(haveYear) line << QString::number(metaInfo.year());
+		if(haveComment) line << metaInfo.comment().trimmed();
 
 		if(file.write(line.replaceInStrings(";", ",").join(";").append("\r\n").toUtf8()) < 1)
 		{
@@ -455,38 +459,38 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 			{
 				bool ok = false;
 				unsigned int temp = data.at(j).trimmed().toUInt(&ok);
-				if(ok) m_fileStore[key].setFilePosition(temp);
+				if(ok) m_fileStore[key].metaInfo().setPosition(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "TITLE"))
 			{
 				QString temp = data.at(j).trimmed();
-				if(!temp.isEmpty()) m_fileStore[key].setFileName(temp);
+				if(!temp.isEmpty()) m_fileStore[key].metaInfo().setTitle(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "ARTIST"))
 			{
 				QString temp = data.at(j).trimmed();
-				if(!temp.isEmpty()) m_fileStore[key].setFileArtist(temp);
+				if(!temp.isEmpty()) m_fileStore[key].metaInfo().setArtist(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "ALBUM"))
 			{
 				QString temp = data.at(j).trimmed();
-				if(!temp.isEmpty()) m_fileStore[key].setFileAlbum(temp);
+				if(!temp.isEmpty()) m_fileStore[key].metaInfo().setAlbum(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "GENRE"))
 			{
 				QString temp = data.at(j).trimmed();
-				if(!temp.isEmpty()) m_fileStore[key].setFileGenre(temp);
+				if(!temp.isEmpty()) m_fileStore[key].metaInfo().setGenre(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "YEAR"))
 			{
 				bool ok = false;
 				unsigned int temp = data.at(j).trimmed().toUInt(&ok);
-				if(ok) m_fileStore[key].setFileYear(temp);
+				if(ok) m_fileStore[key].metaInfo().setYear(temp);
 			}
 			else if(CHECK_HDR(header.at(j), "COMMENT"))
 			{
 				QString temp = data.at(j).trimmed();
-				if(!temp.isEmpty()) m_fileStore[key].setFileComment(temp);
+				if(!temp.isEmpty()) m_fileStore[key].metaInfo().setComment(temp);
 			}
 			else
 			{

@@ -2705,36 +2705,40 @@ void MainWindow::makeFolderButtonClicked(void)
 	QDir basePath(m_fileSystemModel->fileInfo(ui->outputFolderView->currentIndex()).absoluteFilePath());
 	QString suggestedName = tr("New Folder");
 
-	if(!m_metaData->fileArtist().isEmpty() && !m_metaData->fileAlbum().isEmpty())
+	const AudioFileModel_MetaInfo &metaInfo = m_metaData->metaInfo();
+
+	if(!metaInfo.artist().isEmpty() && !metaInfo.album().isEmpty())
 	{
-		suggestedName = QString("%1 - %2").arg(m_metaData->fileArtist(), m_metaData->fileAlbum());
+		suggestedName = QString("%1 - %2").arg(metaInfo.artist(), metaInfo.album());
 	}
-	else if(!m_metaData->fileArtist().isEmpty())
+	else if(!metaInfo.artist().isEmpty())
 	{
-		suggestedName = m_metaData->fileArtist();
+		suggestedName = metaInfo.artist();
 	}
-	else if(!m_metaData->fileAlbum().isEmpty())
+	else if(!metaInfo.album().isEmpty())
 	{
-		suggestedName = m_metaData->fileAlbum();
+		suggestedName = metaInfo.album();
 	}
 	else
 	{
 		for(int i = 0; i < m_fileListModel->rowCount(); i++)
 		{
-			AudioFileModel audioFile = m_fileListModel->getFile(m_fileListModel->index(i, 0));
-			if(!audioFile.fileAlbum().isEmpty() || !audioFile.fileArtist().isEmpty())
+			const AudioFileModel &audioFile = m_fileListModel->getFile(m_fileListModel->index(i, 0));
+			const AudioFileModel_MetaInfo &fileMetaInfo = m_metaData->metaInfo();
+
+			if(!fileMetaInfo.album().isEmpty() || !fileMetaInfo.artist().isEmpty())
 			{
-				if(!audioFile.fileArtist().isEmpty() && !audioFile.fileAlbum().isEmpty())
+				if(!fileMetaInfo.artist().isEmpty() && !fileMetaInfo.album().isEmpty())
 				{
-					suggestedName = QString("%1 - %2").arg(audioFile.fileArtist(), audioFile.fileAlbum());
+					suggestedName = QString("%1 - %2").arg(fileMetaInfo.artist(), fileMetaInfo.album());
 				}
-				else if(!audioFile.fileArtist().isEmpty())
+				else if(!fileMetaInfo.artist().isEmpty())
 				{
-					suggestedName = audioFile.fileArtist();
+					suggestedName = fileMetaInfo.artist();
 				}
-				else if(!audioFile.fileAlbum().isEmpty())
+				else if(!fileMetaInfo.album().isEmpty())
 				{
-					suggestedName = audioFile.fileAlbum();
+					suggestedName = fileMetaInfo.album();
 				}
 				break;
 			}
@@ -3187,7 +3191,7 @@ void MainWindow::editMetaButtonClicked(void)
 	
 		if(index.row() == 4)
 		{
-			m_settings->metaInfoPosition(m_metaData->filePosition());
+			m_settings->metaInfoPosition(m_metaData->metaInfo().position());
 		}
 	}
 }

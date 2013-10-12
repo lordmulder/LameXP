@@ -78,6 +78,7 @@ private:
 	
 	void processFile();
 	int generateOutFileName(QString &outFileName);
+	QString applyRenamePattern(const QString &baseName, const AudioFileModel_MetaInfo &metaInfo);
 	QString generateTempFileName(void);
 	void insertDownmixFilter(void);
 	void insertDownsampleFilter(void);

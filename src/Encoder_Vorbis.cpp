@@ -129,7 +129,7 @@ VorbisEncoder::~VorbisEncoder(void)
 {
 }
 
-bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
+bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -159,13 +159,13 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel &meta
 		args << "--resample" << QString::number(m_configSamplingRate) << "--converter" << QString::number(0);
 	}
 
-	if(!metaInfo.fileName().isEmpty()) args << "-t" << cleanTag(metaInfo.fileName());
-	if(!metaInfo.fileArtist().isEmpty()) args << "-a" << cleanTag(metaInfo.fileArtist());
-	if(!metaInfo.fileAlbum().isEmpty()) args << "-l" << cleanTag(metaInfo.fileAlbum());
-	if(!metaInfo.fileGenre().isEmpty()) args << "-G" << cleanTag(metaInfo.fileGenre());
-	if(!metaInfo.fileComment().isEmpty()) args << "-c" << QString("comment=%1").arg(cleanTag(metaInfo.fileComment()));
-	if(metaInfo.fileYear()) args << "-d" << QString::number(metaInfo.fileYear());
-	if(metaInfo.filePosition()) args << "-N" << QString::number(metaInfo.filePosition());
+	if(!metaInfo.title().isEmpty()) args << "-t" << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty()) args << "-a" << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty()) args << "-l" << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty()) args << "-G" << cleanTag(metaInfo.genre());
+	if(!metaInfo.comment().isEmpty()) args << "-c" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
+	if(metaInfo.year()) args << "-d" << QString::number(metaInfo.year());
+	if(metaInfo.position()) args << "-N" << QString::number(metaInfo.position());
 	
 	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 

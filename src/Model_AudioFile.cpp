@@ -51,7 +51,6 @@ AudioFileModel_MetaInfo::AudioFileModel_MetaInfo(const AudioFileModel_MetaInfo &
 	m_cover = model.m_cover;
 	m_year = model.m_year;
 	m_position = model.m_position;
-	m_duration = model.m_duration;
 }
 
 AudioFileModel_MetaInfo &AudioFileModel_MetaInfo::operator=(const AudioFileModel_MetaInfo &model)
@@ -64,9 +63,20 @@ AudioFileModel_MetaInfo &AudioFileModel_MetaInfo::operator=(const AudioFileModel
 	m_cover = model.m_cover;
 	m_year = model.m_year;
 	m_position = model.m_position;
-	m_duration = model.m_duration;
 
 	return (*this);
+}
+
+void AudioFileModel_MetaInfo::update(const AudioFileModel_MetaInfo &model)
+{
+	if(!model.m_titel.isEmpty()) m_titel = model.m_titel;
+	if(!model.m_artist.isEmpty()) m_artist = model.m_artist;
+	if(!model.m_album.isEmpty()) m_album = model.m_album;
+	if(!model.m_genre.isEmpty()) m_genre = model.m_genre;
+	if(!model.m_comment.isEmpty()) m_comment = model.m_comment;
+	if(!model.m_cover.isEmpty()) m_cover = model.m_cover;
+	if(model.m_year > 0) m_year = model.m_year;
+	if(model.m_position > 0) m_position = model.m_position;
 }
 
 AudioFileModel_MetaInfo::~AudioFileModel_MetaInfo(void)
@@ -84,7 +94,6 @@ void AudioFileModel_MetaInfo::reset(void)
 	m_cover.clear();
 	m_year = 0;
 	m_position = 0;
-	m_duration = 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -109,6 +118,7 @@ AudioFileModel_TechInfo::AudioFileModel_TechInfo(const AudioFileModel_TechInfo &
 	m_audioBitdepth = model.m_audioBitdepth;
 	m_audioBitrate = model.m_audioBitrate;
 	m_audioBitrateMode = model.m_audioBitrateMode;
+	m_duration = model.m_duration;
 }
 
 AudioFileModel_TechInfo &AudioFileModel_TechInfo::operator=(const AudioFileModel_TechInfo &model)
@@ -124,6 +134,8 @@ AudioFileModel_TechInfo &AudioFileModel_TechInfo::operator=(const AudioFileModel
 	m_audioBitdepth = model.m_audioBitdepth;
 	m_audioBitrate = model.m_audioBitrate;
 	m_audioBitrateMode = model.m_audioBitrateMode;
+	m_duration = model.m_duration;
+
 
 	return (*this);
 }
@@ -146,6 +158,7 @@ void AudioFileModel_TechInfo::reset(void)
 	m_audioBitdepth = 0;
 	m_audioBitrate = 0;
 	m_audioBitrateMode = 0;
+	m_duration = 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -195,9 +208,9 @@ void AudioFileModel::reset(void)
 
 const QString AudioFileModel::durationInfo(void) const
 {
-	if(m_metaInfo.duration())
+	if(m_techInfo.duration())
 	{
-		QTime time = QTime().addSecs(m_metaInfo.duration());
+		QTime time = QTime().addSecs(m_techInfo.duration());
 		return time.toString("hh:mm:ss");
 	}
 	else

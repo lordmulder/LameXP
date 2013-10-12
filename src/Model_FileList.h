@@ -44,7 +44,7 @@ public:
 	bool removeFile(const QModelIndex &index);
 	void clearFiles(void);
 	bool moveFile(const QModelIndex &index, int delta);
-	AudioFileModel getFile(const QModelIndex &index);
+	const AudioFileModel &getFile(const QModelIndex &index);
 	bool setFile(const QModelIndex &index, const AudioFileModel &audioFile);
 	AudioFileModel &operator[] (const QModelIndex &index);
 
@@ -71,6 +71,8 @@ public:
 		m_blockUpdates = flag;
 		if(!flag) reset();
 	}
+
+	const AudioFileModel m_nullAudioFile;
 
 public slots:
 	void addFile(const QString &filePath);

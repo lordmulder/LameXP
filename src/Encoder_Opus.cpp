@@ -122,10 +122,8 @@ OpusEncoder::~OpusEncoder(void)
 {
 }
 
-bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
+bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
-	const unsigned int fileDuration = metaInfo.fileDuration();
-	
 	QProcess process;
 	QStringList args;
 
@@ -171,13 +169,13 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 
 	args << QString("--bitrate") << QString::number(qBound(8, (m_configBitrate + 1) * 8, 256));
 
-	if(!metaInfo.fileName().isEmpty()) args << "--title" << cleanTag(metaInfo.fileName());
-	if(!metaInfo.fileArtist().isEmpty()) args << "--artist" << cleanTag(metaInfo.fileArtist());
-	if(!metaInfo.fileAlbum().isEmpty()) args << "--album" << cleanTag(metaInfo.fileAlbum());
-	if(!metaInfo.fileGenre().isEmpty()) args << "--genre" << cleanTag(metaInfo.fileGenre());
-	if(metaInfo.fileYear()) args << "--date" << QString::number(metaInfo.fileYear());
-	if(metaInfo.filePosition()) args << "--comment" << QString("tracknumber=%1").arg(QString::number(metaInfo.filePosition()));
-	if(!metaInfo.fileComment().isEmpty()) args << "--comment" << QString("comment=%1").arg(cleanTag(metaInfo.fileComment()));
+	if(!metaInfo.title().isEmpty()) args << "--title" << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty()) args << "--artist" << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty()) args << "--album" << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty()) args << "--genre" << cleanTag(metaInfo.genre());
+	if(metaInfo.year()) args << "--date" << QString::number(metaInfo.year());
+	if(metaInfo.position()) args << "--comment" << QString("tracknumber=%1").arg(QString::number(metaInfo.position()));
+	if(!metaInfo.comment().isEmpty()) args << "--comment" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
 	
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 

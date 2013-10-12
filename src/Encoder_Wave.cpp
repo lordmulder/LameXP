@@ -120,7 +120,7 @@ WaveEncoder::~WaveEncoder(void)
 {
 }
 
-bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
+bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
 	SHFILEOPSTRUCTW fileOperation;
 	memset(&fileOperation, 0, sizeof(SHFILEOPSTRUCTW));

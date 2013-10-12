@@ -135,7 +135,7 @@ QAACEncoder::~QAACEncoder(void)
 {
 }
 
-bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
+bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -175,14 +175,14 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
-	if(!metaInfo.fileName().isEmpty()) args << "--title" << cleanTag(metaInfo.fileName());
-	if(!metaInfo.fileArtist().isEmpty()) args << "--artist" << cleanTag(metaInfo.fileArtist());
-	if(!metaInfo.fileAlbum().isEmpty()) args << "--album" << cleanTag(metaInfo.fileAlbum());
-	if(!metaInfo.fileGenre().isEmpty()) args << "--genre" << cleanTag(metaInfo.fileGenre());
-	if(!metaInfo.fileComment().isEmpty()) args << "--comment" << cleanTag( metaInfo.fileComment());
-	if(metaInfo.fileYear()) args << "--date" << QString::number(metaInfo.fileYear());
-	if(metaInfo.filePosition()) args << "--track" << QString::number(metaInfo.filePosition());
-	if(!metaInfo.fileCover().isEmpty()) args << "--artwork" << metaInfo.fileCover();
+	if(!metaInfo.title().isEmpty()) args << "--title" << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty()) args << "--artist" << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty()) args << "--album" << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty()) args << "--genre" << cleanTag(metaInfo.genre());
+	if(!metaInfo.comment().isEmpty()) args << "--comment" << cleanTag( metaInfo.comment());
+	if(metaInfo.year()) args << "--date" << QString::number(metaInfo.year());
+	if(metaInfo.position()) args << "--track" << QString::number(metaInfo.position());
+	if(!metaInfo.cover().isEmpty()) args << "--artwork" << metaInfo.cover();
 
 	args << "-d" << ".";
 	args << "-o" << QDir::toNativeSeparators(outputFile);

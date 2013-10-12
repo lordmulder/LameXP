@@ -315,7 +315,7 @@ void CueImportDialog::loadOtherButtonClicked(void)
 
 void CueImportDialog::analyzedFile(const AudioFileModel &file)
 {
-	qDebug("Received result: <%s> <%s/%s>", file.filePath().toLatin1().constData(), file.formatContainerType().toLatin1().constData(), file.formatAudioType().toLatin1().constData());
+	qDebug("Received result: <%s> <%s/%s>", file.filePath().toLatin1().constData(), file.techInfo().containerType().toLatin1().constData(), file.techInfo().audioType().toLatin1().constData());
 	m_fileInfo << file;
 }
 

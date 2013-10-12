@@ -123,7 +123,7 @@ FLACEncoder::~FLACEncoder(void)
 {
 }
 
-bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaInfo, const QString &outputFile, volatile bool *abortFlag)
+bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -131,14 +131,14 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel &metaIn
 	args << QString("-%1").arg(QString::number(qBound(0, m_configBitrate, 8)));
 	args << "--channel-map=none";
 
-	if(!metaInfo.fileName().isEmpty()) args << "-T" << QString("title=%1").arg(cleanTag(metaInfo.fileName()));
-	if(!metaInfo.fileArtist().isEmpty()) args << "-T" << QString("artist=%1").arg(cleanTag(metaInfo.fileArtist()));
-	if(!metaInfo.fileAlbum().isEmpty()) args << "-T" << QString("album=%1").arg(cleanTag(metaInfo.fileAlbum()));
-	if(!metaInfo.fileGenre().isEmpty()) args << "-T" << QString("genre=%1").arg(cleanTag(metaInfo.fileGenre()));
-	if(!metaInfo.fileComment().isEmpty()) args << "-T" << QString("comment=%1").arg(cleanTag(metaInfo.fileComment()));
-	if(metaInfo.fileYear()) args << "-T" << QString("date=%1").arg(QString::number(metaInfo.fileYear()));
-	if(metaInfo.filePosition()) args << "-T" << QString("track=%1").arg(QString::number(metaInfo.filePosition()));
-	if(!metaInfo.fileCover().isEmpty()) args << QString("--picture=%1").arg(metaInfo.fileCover());
+	if(!metaInfo.title().isEmpty()) args << "-T" << QString("title=%1").arg(cleanTag(metaInfo.title()));
+	if(!metaInfo.artist().isEmpty()) args << "-T" << QString("artist=%1").arg(cleanTag(metaInfo.artist()));
+	if(!metaInfo.album().isEmpty()) args << "-T" << QString("album=%1").arg(cleanTag(metaInfo.album()));
+	if(!metaInfo.genre().isEmpty()) args << "-T" << QString("genre=%1").arg(cleanTag(metaInfo.genre()));
+	if(!metaInfo.comment().isEmpty()) args << "-T" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
+	if(metaInfo.year()) args << "-T" << QString("date=%1").arg(QString::number(metaInfo.year()));
+	if(metaInfo.position()) args << "-T" << QString("track=%1").arg(QString::number(metaInfo.position()));
+	if(!metaInfo.cover().isEmpty()) args << QString("--picture=%1").arg(metaInfo.cover());
 
 	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 

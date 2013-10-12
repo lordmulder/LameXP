@@ -98,7 +98,7 @@ protected:
 private:
 	Ui::ProcessingDialog *ui; //for Qt UIC
 
-	AudioFileModel updateMetaInfo(const AudioFileModel &audioFile);
+	AudioFileModel updateMetaInfo(AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);
 	QString time2text(const double timeVal) const;

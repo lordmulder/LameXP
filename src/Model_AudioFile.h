@@ -50,7 +50,6 @@ public:
 	inline const QString &cover(void) const { return m_cover.filePath(); }
 	inline unsigned int year(void) const { return m_year; }
 	inline unsigned int position(void) const { return m_position; }
-	inline unsigned int duration(void) const { return m_duration; }
 
 	//Setter
 	inline void setTitle(const QString &titel) { m_titel = titel.trimmed(); }
@@ -58,13 +57,15 @@ public:
 	inline void setAlbum(const QString &album) { m_album = album.trimmed(); }
 	inline void setGenre(const QString &genre) { m_genre = genre.trimmed(); }
 	inline void setComment(const QString &comment) { m_comment = comment.trimmed(); }
-	inline const ArtworkModel &cover(const QString &path, const bool isOwner) { m_cover.setFilePath(path, isOwner); }
+	inline const ArtworkModel &setCover(const QString &path, const bool isOwner) { m_cover.setFilePath(path, isOwner); }
 	inline void setYear(const unsigned int year) { m_year = year; }
 	inline void setPosition(const unsigned int position) { m_position = position; }
-	inline void setDuration(const unsigned int duration) { m_duration = duration; }
 
 	//Reset
 	void reset(void);
+
+	//Update
+	void update(const AudioFileModel_MetaInfo &model);
 
 private:
 	QString m_titel;
@@ -75,7 +76,6 @@ private:
 	ArtworkModel m_cover;
 	unsigned int m_year;
 	unsigned int m_position;
-	unsigned int m_duration;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -105,19 +105,21 @@ public:
 	inline unsigned int audioBitdepth(void) const { return m_audioBitdepth; }
 	inline unsigned int audioBitrate(void) const { return m_audioBitrate; }
 	inline unsigned int audioBitrateMode(void) const { return m_audioBitrateMode; }
+	inline unsigned int duration(void) const { return m_duration; }
 
 	//Setter
-	inline const QString &setContainerType(const QString &containerType) { m_containerType = containerType; }
-	inline const QString &setContainerProfile(const QString &containerProfile) { m_containerProfile = containerProfile; }
-	inline const QString &setAudioType(const QString &audioType) { m_audioType = audioType; }
-	inline const QString &setAudioProfile(const QString &audioProfile) { m_audioProfile = audioProfile; }
-	inline const QString &setAudioVersion(const QString &audioVersion) { m_audioVersion = audioVersion; }
-	inline const QString &setAudioEncodeLib(const QString &audioEncodeLib) { m_audioEncodeLib = audioEncodeLib; }
+	inline const QString &setContainerType(const QString &containerType) { m_containerType = containerType.trimmed(); }
+	inline const QString &setContainerProfile(const QString &containerProfile) { m_containerProfile = containerProfile.trimmed(); }
+	inline const QString &setAudioType(const QString &audioType) { m_audioType = audioType.trimmed(); }
+	inline const QString &setAudioProfile(const QString &audioProfile) { m_audioProfile = audioProfile.trimmed(); }
+	inline const QString &setAudioVersion(const QString &audioVersion) { m_audioVersion = audioVersion.trimmed(); }
+	inline const QString &setAudioEncodeLib(const QString &audioEncodeLib) { m_audioEncodeLib = audioEncodeLib.trimmed(); }
 	inline unsigned int setAudioSamplerate(const unsigned int audioSamplerate) { m_audioSamplerate = audioSamplerate; }
 	inline unsigned int setAudioChannels(const unsigned int audioChannels) { m_audioChannels = audioChannels; }
 	inline unsigned int setAudioBitdepth(const unsigned int audioBitdepth) { m_audioBitdepth = audioBitdepth; }
 	inline unsigned int setAudioBitrate(const unsigned int audioBitrate) { m_audioBitrate = audioBitrate; }
 	inline unsigned int setAudioBitrateMode(const unsigned int audioBitrateMode) { m_audioBitrateMode = audioBitrateMode; }
+	inline void setDuration(const unsigned int duration) { m_duration = duration; }
 
 	//Reset
 	void reset(void);
@@ -134,6 +136,7 @@ private:
 	unsigned int m_audioBitdepth;
 	unsigned int m_audioBitrate;
 	unsigned int m_audioBitrateMode;
+	unsigned int m_duration;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -157,7 +160,7 @@ public:
 	static const unsigned int BITDEPTH_IEEE_FLOAT32;
 
 	//Constructors & Destructor
-	AudioFileModel(const QString &path);
+	AudioFileModel(const QString &path = QString());
 	AudioFileModel(const AudioFileModel &model);
 	AudioFileModel &operator=(const AudioFileModel &model);
 	~AudioFileModel(void);

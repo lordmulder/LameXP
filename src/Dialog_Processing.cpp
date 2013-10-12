@@ -585,7 +585,7 @@ void ProcessingDialog::startNextJob(void)
 	}
 	if((m_settings->samplingRate() > 0) && !nativeResampling)
 	{
-		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.formatAudioSamplerate() || currentFile.formatAudioSamplerate() == 0)
+		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.techInfo().audioSamplerate() || currentFile.techInfo().audioSamplerate() == 0)
 		{
 			thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
 		}
@@ -964,10 +964,10 @@ void ProcessingDialog::writePlayList(void)
 	int counter = 1;
 
 	//Generate playlist name
-	QString playListName = (m_metaInfo->fileAlbum().isEmpty() ? "Playlist" : m_metaInfo->fileAlbum());
-	if(!m_metaInfo->fileArtist().isEmpty())
+	QString playListName = (m_metaInfo->metaInfo().album().isEmpty() ? "Playlist" : m_metaInfo->metaInfo().album());
+	if(!m_metaInfo->metaInfo().artist().isEmpty())
 	{
-		playListName = QString("%1 - %2").arg(m_metaInfo->fileArtist(), playListName);
+		playListName = QString("%1 - %2").arg(m_metaInfo->metaInfo().artist(), playListName);
 	}
 
 	//Clean playlist name
@@ -1031,22 +1031,22 @@ void ProcessingDialog::writePlayList(void)
 	}
 }
 
-AudioFileModel ProcessingDialog::updateMetaInfo(const AudioFileModel &audioFile)
+AudioFileModel ProcessingDialog::updateMetaInfo(AudioFileModel &audioFile)
 {
 	if(!m_settings->writeMetaTags())
 	{
-		return AudioFileModel(audioFile, false);
+		audioFile.metaInfo().reset();
+		return audioFile;
 	}
 	
-	AudioFileModel result = audioFile;
-	result.updateMetaInfo(*m_metaInfo);
+	audioFile.metaInfo().update(m_metaInfo->metaInfo());
 	
-	if(m_metaInfo->filePosition() == UINT_MAX)
+	if(audioFile.metaInfo().position() == UINT_MAX)
 	{
-		result.setFilePosition(m_currentFile);
+		audioFile.metaInfo().setPosition(m_currentFile);
 	}
 
-	return result;
+	return audioFile;
 }
 
 void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason reason)

@@ -43,9 +43,9 @@ DownmixFilter::~DownmixFilter(void)
 {
 }
 
-bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel *formatInfo, volatile bool *abortFlag)
+bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *formatInfo, volatile bool *abortFlag)
 {
-	unsigned int channels = formatInfo->formatAudioChannels(); //detectChannels(sourceFile, abortFlag);
+	unsigned int channels = formatInfo->audioChannels(); //detectChannels(sourceFile, abortFlag);
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
 
 	if(channels == 2)
@@ -156,6 +156,6 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 		return false;
 	}
 	
-	formatInfo->setFormatAudioChannels(2);
+	formatInfo->setAudioChannels(2);
 	return true;
 }
