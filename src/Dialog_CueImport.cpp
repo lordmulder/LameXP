@@ -233,8 +233,11 @@ void CueImportDialog::modelChanged(void)
 {
 	ui->treeView->expandAll();
 	ui->editOutputDir->setText(QDir::toNativeSeparators(m_outputDir));
-	ui->labelArtist->setText(m_model->getAlbumPerformer().isEmpty() ? tr("Unknown Artist") : m_model->getAlbumPerformer());
-	ui->labelAlbum->setText(m_model->getAlbumTitle().isEmpty() ? tr("Unknown Album") : m_model->getAlbumTitle());
+	if(const AudioFileModel_MetaInfo *albumInfo = m_model->getAlbumInfo())
+	{
+		ui->labelArtist->setText(albumInfo->artist().isEmpty() ? tr("Unknown Artist") : albumInfo->artist());
+		ui->labelAlbum->setText(albumInfo->album().isEmpty() ? tr("Unknown Album") : albumInfo->album());
+	}
 }
 
 void CueImportDialog::browseButtonClicked(void)

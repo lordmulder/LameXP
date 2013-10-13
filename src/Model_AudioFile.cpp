@@ -32,6 +32,18 @@
 
 const unsigned int AudioFileModel::BITDEPTH_IEEE_FLOAT32 = UINT_MAX-1;
 
+#define PRINT_S(VAR) do \
+{ \
+	if((VAR).isEmpty()) qDebug(#VAR " = N/A"); else qDebug(#VAR " = \"%s\"", (VAR).toUtf8().constData()); \
+} \
+while(0)
+
+#define PRINT_U(VAR) do \
+{ \
+	if((VAR) < 1) qDebug(#VAR " = N/A"); else qDebug(#VAR " = %u", (VAR)); \
+} \
+while(0)
+
 ///////////////////////////////////////////////////////////////////////////////
 // Audio File - Meta Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -43,40 +55,50 @@ AudioFileModel_MetaInfo::AudioFileModel_MetaInfo(void)
 
 AudioFileModel_MetaInfo::AudioFileModel_MetaInfo(const AudioFileModel_MetaInfo &model)
 {
-	m_titel = model.m_titel;
-	m_artist = model.m_artist;
-	m_album = model.m_album;
-	m_genre = model.m_genre;
-	m_comment = model.m_comment;
-	m_cover = model.m_cover;
-	m_year = model.m_year;
+	m_titel =    model.m_titel;
+	m_artist =   model.m_artist;
+	m_album =    model.m_album;
+	m_genre =    model.m_genre;
+	m_comment =  model.m_comment;
+	m_cover =    model.m_cover;
+	m_year =     model.m_year;
 	m_position = model.m_position;
 }
 
 AudioFileModel_MetaInfo &AudioFileModel_MetaInfo::operator=(const AudioFileModel_MetaInfo &model)
 {
-	m_titel = model.m_titel;
-	m_artist = model.m_artist;
-	m_album = model.m_album;
-	m_genre = model.m_genre;
-	m_comment = model.m_comment;
-	m_cover = model.m_cover;
-	m_year = model.m_year;
+	m_titel =    model.m_titel;
+	m_artist =   model.m_artist;
+	m_album =    model.m_album;
+	m_genre =    model.m_genre;
+	m_comment =  model.m_comment;
+	m_cover =    model.m_cover;
+	m_year =     model.m_year;
 	m_position = model.m_position;
 
 	return (*this);
 }
 
-void AudioFileModel_MetaInfo::update(const AudioFileModel_MetaInfo &model)
+void AudioFileModel_MetaInfo::update(const AudioFileModel_MetaInfo &model, const bool replace)
 {
-	if(!model.m_titel.isEmpty()) m_titel = model.m_titel;
-	if(!model.m_artist.isEmpty()) m_artist = model.m_artist;
-	if(!model.m_album.isEmpty()) m_album = model.m_album;
-	if(!model.m_genre.isEmpty()) m_genre = model.m_genre;
-	if(!model.m_comment.isEmpty()) m_comment = model.m_comment;
-	if(!model.m_cover.isEmpty()) m_cover = model.m_cover;
-	if(model.m_year > 0) m_year = model.m_year;
-	if(model.m_position > 0) m_position = model.m_position;
+	qDebug("\n-------[AudioFileModel_MetaInfo::update]-------");
+	qDebug("Updating (%p):", this);
+	print();
+	qDebug("\nUpdating with (%p):", &model);
+	model.print();
+
+	if((!model.m_titel.isEmpty())   && (replace || m_titel.isEmpty()))   m_titel    = model.m_titel;
+	if((!model.m_artist.isEmpty())  && (replace || m_artist.isEmpty()))  m_artist   = model.m_artist;
+	if((!model.m_album.isEmpty())   && (replace || m_album.isEmpty()))   m_album    = model.m_album;
+	if((!model.m_genre.isEmpty())   && (replace || m_genre.isEmpty()))   m_genre    = model.m_genre;
+	if((!model.m_comment.isEmpty()) && (replace || m_comment.isEmpty())) m_comment  = model.m_comment;
+	if((!model.m_cover.isEmpty())   && (replace || m_cover.isEmpty()))   m_cover    = model.m_cover;
+	if((model.m_year > 0)           && (replace || (m_year == 0)))       m_year     = model.m_year;
+	if((model.m_position > 0)       && (replace || (m_position == 0)))   m_position = model.m_position;
+
+	qDebug("\nResult:");
+	print();
+	qDebug("-----------------------------------------------\n\n");
 }
 
 AudioFileModel_MetaInfo::~AudioFileModel_MetaInfo(void)
@@ -96,6 +118,18 @@ void AudioFileModel_MetaInfo::reset(void)
 	m_position = 0;
 }
 
+void AudioFileModel_MetaInfo::print(void) const
+{
+	PRINT_S(m_titel);
+	PRINT_S(m_artist);
+	PRINT_S(m_album);
+	PRINT_S(m_genre);
+	PRINT_S(m_comment);
+	PRINT_S(m_cover.filePath());
+	PRINT_U(m_year);
+	PRINT_U(m_position);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Audio File - Technical Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -107,35 +141,34 @@ AudioFileModel_TechInfo::AudioFileModel_TechInfo(void)
 
 AudioFileModel_TechInfo::AudioFileModel_TechInfo(const AudioFileModel_TechInfo &model)
 {
-	m_containerType = model.m_containerType;
+	m_containerType =    model.m_containerType;
 	m_containerProfile = model.m_containerProfile;
-	m_audioType = model.m_audioType;
-	m_audioProfile = model.m_audioProfile;
-	m_audioVersion = model.m_audioVersion;
-	m_audioEncodeLib = model.m_audioEncodeLib;
-	m_audioSamplerate = model.m_audioSamplerate;
-	m_audioChannels = model.m_audioChannels;
-	m_audioBitdepth = model.m_audioBitdepth;
-	m_audioBitrate = model.m_audioBitrate;
+	m_audioType =        model.m_audioType;
+	m_audioProfile =     model.m_audioProfile;
+	m_audioVersion =     model.m_audioVersion;
+	m_audioEncodeLib =   model.m_audioEncodeLib;
+	m_audioSamplerate =  model.m_audioSamplerate;
+	m_audioChannels =    model.m_audioChannels;
+	m_audioBitdepth =    model.m_audioBitdepth;
+	m_audioBitrate =     model.m_audioBitrate;
 	m_audioBitrateMode = model.m_audioBitrateMode;
-	m_duration = model.m_duration;
+	m_duration =         model.m_duration;
 }
 
 AudioFileModel_TechInfo &AudioFileModel_TechInfo::operator=(const AudioFileModel_TechInfo &model)
 {
-	m_containerType = model.m_containerType;
+	m_containerType =    model.m_containerType;
 	m_containerProfile = model.m_containerProfile;
-	m_audioType = model.m_audioType;
-	m_audioProfile = model.m_audioProfile;
-	m_audioVersion = model.m_audioVersion;
-	m_audioEncodeLib = model.m_audioEncodeLib;
-	m_audioSamplerate = model.m_audioSamplerate;
-	m_audioChannels = model.m_audioChannels;
-	m_audioBitdepth = model.m_audioBitdepth;
-	m_audioBitrate = model.m_audioBitrate;
+	m_audioType =        model.m_audioType;
+	m_audioProfile =     model.m_audioProfile;
+	m_audioVersion =     model.m_audioVersion;
+	m_audioEncodeLib =   model.m_audioEncodeLib;
+	m_audioSamplerate =  model.m_audioSamplerate;
+	m_audioChannels =    model.m_audioChannels;
+	m_audioBitdepth =    model.m_audioBitdepth;
+	m_audioBitrate =     model.m_audioBitrate;
 	m_audioBitrateMode = model.m_audioBitrateMode;
-	m_duration = model.m_duration;
-
+	m_duration =         model.m_duration;
 
 	return (*this);
 }

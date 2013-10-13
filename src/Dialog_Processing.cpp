@@ -1039,7 +1039,7 @@ AudioFileModel ProcessingDialog::updateMetaInfo(AudioFileModel &audioFile)
 		return audioFile;
 	}
 	
-	audioFile.metaInfo().update(*m_metaInfo);
+	audioFile.metaInfo().update(*m_metaInfo, true);
 	
 	if(audioFile.metaInfo().position() == UINT_MAX)
 	{

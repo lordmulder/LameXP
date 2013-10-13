@@ -21,6 +21,7 @@
 
 #include "Global.h"
 #include "Model_CueSheet.h"
+#include "Model_AudioFile.h"
 #include "Genres.h"
 
 #include <QApplication>
@@ -53,38 +54,32 @@ class CueSheetTrack : public CueSheetItem
 public:
 	CueSheetTrack(CueSheetFile *parent, int trackNo)
 	:
-		m_parent(parent),
-		m_trackNo(trackNo)
+		m_parent(parent)
 	{
 		m_startIndex = std::numeric_limits<double>::quiet_NaN();
 		m_duration = std::numeric_limits<double>::infinity();
-		m_year = 0;
+		m_metaInfo.setPosition(trackNo);
 	}
-	int trackNo(void) { return m_trackNo; }
+	
+	//Getter
+	CueSheetFile *parent(void) { return m_parent; }
 	double startIndex(void) { return m_startIndex; }
 	double duration(void) { return m_duration; }
-	QString title(void) { return m_title; }
-	QString performer(void) { return m_performer; }
-	QString genre(void) { return m_genre; }
-	unsigned int year(void) { return m_year; }
-	CueSheetFile *parent(void) { return m_parent; }
+	AudioFileModel_MetaInfo &metaInfo(void) { return m_metaInfo; }
+
+	//Setter
 	void setStartIndex(double startIndex) { m_startIndex = startIndex; }
 	void setDuration(double duration) { m_duration = duration; }
-	void setTitle(const QString &title, bool update = false) { if(!update || (m_title.isEmpty() && !title.isEmpty())) m_title = title; }
-	void setPerformer(const QString &performer, bool update = false) { if(!update || (m_performer.isEmpty() && !performer.isEmpty())) m_performer = performer; }
-	void setGenre(const QString &genre, bool update = false) { if(!update || (m_genre.isEmpty() && !m_genre.isEmpty())) m_genre = genre; }
-	void setYear(const unsigned int year, bool update = false) { if(!update || (year == 0)) m_year = year; }
-	virtual bool isValid(void) { return !(_isnan(m_startIndex) || (m_trackNo < 0)); }
+	
+	//Misc
+	virtual bool isValid(void) { return !(_isnan(m_startIndex) || (m_metaInfo.position() == 0)); }
 	virtual const char* type(void) { return "CueSheetTrack"; }
+
 private:
-	int m_trackNo;
 	double m_startIndex;
 	double m_duration;
-	QString m_title;
-	QString m_performer;
-	QString m_genre;
-	unsigned int m_year;
-	CueSheetFile *m_parent;
+	AudioFileModel_MetaInfo m_metaInfo;
+	CueSheetFile *const m_parent;
 };
 
 class CueSheetFile : public CueSheetItem
@@ -92,13 +87,20 @@ class CueSheetFile : public CueSheetItem
 public:
 	CueSheetFile(const QString &fileName) : m_fileName(fileName) {}
 	~CueSheetFile(void) { while(!m_tracks.isEmpty()) delete m_tracks.takeLast(); }
+	
+	//Getter
 	QString fileName(void) { return m_fileName; }
-	void addTrack(CueSheetTrack *track) { m_tracks.append(track); }
-	void clearTracks(void) { while(!m_tracks.isEmpty()) delete m_tracks.takeLast(); }
 	CueSheetTrack *track(int index) { return m_tracks.at(index); }
 	int trackCount(void) { return m_tracks.count(); }
+
+	//Modifier
+	void addTrack(CueSheetTrack *track) { m_tracks.append(track); }
+	void clearTracks(void) { while(!m_tracks.isEmpty()) delete m_tracks.takeLast(); }
+
+	//Misc
 	virtual bool isValid(void) { return m_tracks.count() > 0; }
 	virtual const char* type(void) { return "CueSheetFile"; }
+
 private:
 	const QString m_fileName;
 	QList<CueSheetTrack*> m_tracks;
@@ -115,21 +117,7 @@ CueSheetModel::CueSheetModel()
 	m_fileIcon(":/icons/music.png"),
 	m_trackIcon(":/icons/control_play_blue.png")
 {
-	int trackNo = 0;
-	m_albumYear = 0;
-	
-	for(int i = 0; i < 5; i++)
-	{
-		CueSheetFile *currentFile = new CueSheetFile(QString().sprintf("File %02d.wav", i+1));
-		for(int j = 0; j < 8; j++)
-		{
-			CueSheetTrack *currentTrack = new CueSheetTrack(currentFile, trackNo++);
-			currentTrack->setTitle("ATWA (Air Trees Water Animals)");
-			currentTrack->setPerformer("System of a Down");
-			currentFile->addTrack(currentTrack);
-		}
-		m_files.append(currentFile);
-	}
+	/*nothing to do*/
 }
 
 CueSheetModel::~CueSheetModel(void)
@@ -255,23 +243,24 @@ QVariant CueSheetModel::data(const QModelIndex &index, int role) const
 		}
 		else if(CueSheetTrack *trackPtr = dynamic_cast<CueSheetTrack*>(item))
 		{
+			const AudioFileModel_MetaInfo &trackInfo = trackPtr->metaInfo();
 			switch(index.column())
 			{
 			case 0:
-				return tr("Track %1").arg(QString().sprintf("%02d", trackPtr->trackNo())).append(" ");
+				return tr("Track %1").arg(QString().sprintf("%02d", trackInfo.position())).append(" ");
 				break;
 			case 1:
-				if(!trackPtr->title().isEmpty() && !trackPtr->performer().isEmpty())
+				if(!trackInfo.title().isEmpty() && !trackInfo.artist().isEmpty())
 				{
-					return QString("%1 - %2").arg(trackPtr->performer(), trackPtr->title());
+					return QString("%1 - %2").arg(trackInfo.artist(), trackInfo.title());
 				}
-				else if(!trackPtr->title().isEmpty())
+				else if(!trackInfo.title().isEmpty())
 				{
-					return QString("%1 - %2").arg(tr("Unknown Artist"), trackPtr->title());
+					return QString("%1 - %2").arg(tr("Unknown Artist"), trackInfo.title());
 				}
-				else if(!trackPtr->performer().isEmpty())
+				else if(!trackInfo.artist().isEmpty())
 				{
-					return QString("%1 - %2").arg(trackPtr->performer(), tr("Unknown Title"));
+					return QString("%1 - %2").arg(trackInfo.artist(), tr("Unknown Title"));
 				}
 				else
 				{
@@ -399,7 +388,7 @@ int CueSheetModel::getTrackCount(int fileIndex)
 	return m_files.at(fileIndex)->trackCount();
 }
 
-int CueSheetModel::getTrackNo(int fileIndex, int trackIndex)
+const AudioFileModel_MetaInfo *CueSheetModel::getTrackInfo(int fileIndex, int trackIndex)
 {
 	QMutexLocker lock(&m_mutex);
 	
@@ -408,14 +397,14 @@ int CueSheetModel::getTrackNo(int fileIndex, int trackIndex)
 		CueSheetFile *currentFile = m_files.at(fileIndex);
 		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
 		{
-			return currentFile->track(trackIndex)->trackNo();
+			return &currentFile->track(trackIndex)->metaInfo();
 		}
 	}
 
-	return -1;
+	return NULL;
 }
 
-void CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration)
+bool CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration)
 {
 	QMutexLocker lock(&m_mutex);
 	
@@ -430,101 +419,19 @@ void CueSheetModel::getTrackIndex(int fileIndex, int trackIndex, double *startIn
 			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
 			*startIndex = currentTrack->startIndex();
 			*duration = currentTrack->duration();
+			return true;
 		}
 	}
+
+	return false;
 }
 
-QString CueSheetModel::getTrackPerformer(int fileIndex, int trackIndex)
-{	
-	QMutexLocker lock(&m_mutex);
-	
-	if(fileIndex >= 0 && fileIndex < m_files.count())
-	{
-		CueSheetFile *currentFile = m_files.at(fileIndex);
-		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
-		{
-			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
-			return currentTrack->performer();
-		}
-	}
-	
-	return QString();
-}
-
-QString CueSheetModel::getTrackTitle(int fileIndex, int trackIndex)
+const AudioFileModel_MetaInfo *CueSheetModel::getAlbumInfo(void)
 {
 	QMutexLocker lock(&m_mutex);
-	
-	if(fileIndex >= 0 && fileIndex < m_files.count())
-	{
-		CueSheetFile *currentFile = m_files.at(fileIndex);
-		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
-		{
-			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
-			return currentTrack->title();
-		}
-	}
-	
-	return QString();
+	return &m_albumInfo;
 }
 
-QString CueSheetModel::getTrackGenre(int fileIndex, int trackIndex)
-{
-	QMutexLocker lock(&m_mutex);
-	
-	if(fileIndex >= 0 && fileIndex < m_files.count())
-	{
-		CueSheetFile *currentFile = m_files.at(fileIndex);
-		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
-		{
-			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
-			return currentTrack->genre();
-		}
-	}
-	
-	return QString();
-}
-
-unsigned int CueSheetModel::getTrackYear(int fileIndex, int trackIndex)
-{
-	QMutexLocker lock(&m_mutex);
-	
-	if(fileIndex >= 0 && fileIndex < m_files.count())
-	{
-		CueSheetFile *currentFile = m_files.at(fileIndex);
-		if(trackIndex >= 0 && trackIndex < currentFile->trackCount())
-		{
-			CueSheetTrack *currentTrack = currentFile->track(trackIndex);
-			return currentTrack->year();
-		}
-	}
-	
-	return 0;
-}
-
-QString CueSheetModel::getAlbumPerformer(void)
-{
-	QMutexLocker lock(&m_mutex);
-	return m_albumPerformer;
-}
-
-QString CueSheetModel::getAlbumTitle(void)
-{
-	QMutexLocker lock(&m_mutex);
-	return m_albumTitle;
-}
-
-QString CueSheetModel::getAlbumGenre(void)
-{
-	QMutexLocker lock(&m_mutex);
-	return m_albumGenre;
-}
-
-unsigned int CueSheetModel::getAlbumYear(void)
-{
-	QMutexLocker lock(&m_mutex);
-	return m_albumYear;
-}
 ////////////////////////////////////////////////////////////
 // Cue Sheet Parser
 ////////////////////////////////////////////////////////////
@@ -594,10 +501,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 	CueSheetFile *currentFile = NULL;
 	CueSheetTrack *currentTrack = NULL;
 
-	m_albumTitle.clear();
-	m_albumPerformer.clear();
-	m_albumGenre.clear();
-	m_albumYear = 0;
+	m_albumInfo.reset();
 
 	//Loop over the Cue Sheet until all lines were processed
 	for(int lines = 0; lines < INT_MAX; lines++)
@@ -720,12 +624,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(bPreamble)
 			{
-				m_albumTitle = UNQUOTE(rxTitle.cap(1)).simplified();
+				m_albumInfo.setAlbum(UNQUOTE(rxTitle.cap(1)).simplified());
 			}
 			else if(currentFile && currentTrack)
 			{
 				qDebug("%03d     Title: <%s>", lines, rxTitle.cap(1).toUtf8().constData());
-				currentTrack->setTitle(UNQUOTE(rxTitle.cap(1)).simplified());
+				currentTrack->metaInfo().setTitle(UNQUOTE(rxTitle.cap(1)).simplified());
 			}
 			continue;
 		}
@@ -735,12 +639,12 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(bPreamble)
 			{
-				m_albumPerformer = UNQUOTE(rxPerformer.cap(1)).simplified();
+				m_albumInfo.setArtist(UNQUOTE(rxPerformer.cap(1)).simplified());
 			}
 			else if(currentFile && currentTrack)
 			{
 				qDebug("%03d     Title: <%s>", lines, rxPerformer.cap(1).toUtf8().constData());
-				currentTrack->setPerformer(UNQUOTE(rxPerformer.cap(1)).simplified());
+				currentTrack->metaInfo().setArtist(UNQUOTE(rxPerformer.cap(1)).simplified());
 			}
 			continue;
 		}
@@ -755,7 +659,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				{
 					if(temp.compare(g_lamexp_generes[i], Qt::CaseInsensitive) == 0)
 					{
-						m_albumGenre = QString(g_lamexp_generes[i]);
+						m_albumInfo.setGenre(QString(g_lamexp_generes[i]));
 						break;
 					}
 				}
@@ -768,7 +672,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				{
 					if(temp.compare(g_lamexp_generes[i], Qt::CaseInsensitive) == 0)
 					{
-						currentTrack->setGenre(QString(g_lamexp_generes[i]));
+						currentTrack->metaInfo().setGenre(QString(g_lamexp_generes[i]));
 						break;
 					}
 				}
@@ -783,14 +687,14 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			{
 				bool ok = false;
 				unsigned int temp = rxYear.cap(1).toUInt(&ok);
-				if(ok) m_albumYear =  temp;
+				if(ok) m_albumInfo.setYear(temp);
 			}
 			else if(currentFile && currentTrack)
 			{
 				qDebug("%03d     Year: <%s>", lines, rxPerformer.cap(1).toUtf8().constData());
 				bool ok = false;
 				unsigned int temp = rxYear.cap(1).toUInt(&ok);
-				if(ok) currentTrack->setYear(temp);
+				if(ok) currentTrack->metaInfo().setYear(temp);
 			}
 			continue;
 		}
@@ -870,7 +774,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			{
 				for(int j = 0; j < nTracks; j++)
 				{
-					int currentTrackNo = currentFile->track(j)->trackNo();
+					int currentTrackNo = currentFile->track(j)->metaInfo().position();
 					if(currentTrackNo > 99)
 					{
 						qWarning("Track #%02d is invalid (maximum is 99), Cue Sheet is inconsistent!", currentTrackNo);

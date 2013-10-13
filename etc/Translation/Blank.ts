@@ -379,56 +379,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="227"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="283"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="260"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="316"/>
         <source>Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="244"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="277"/>
         <source>Channels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="249"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="282"/>
         <source>Samplerate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="256"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="260"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="289"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="293"/>
         <source>Bitdepth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="278"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="311"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="287"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="320"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="294"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="297"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="300"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="327"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="333"/>
         <source>Bitrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="294"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="327"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="297"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
         <source>Variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="306"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="339"/>
         <source>Encoder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -464,8 +464,8 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="120"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="221"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="414"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="413"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="417"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -525,110 +525,110 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="236"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="238"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="237"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="239"/>
         <source>Unknown Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="252"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="256"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="255"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="259"/>
         <source>Choose Output Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="282"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="289"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="285"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="292"/>
         <source>LameXP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="282"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="285"/>
         <source>Error: The selected output directory could not be created!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="289"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="292"/>
         <source>Error: The selected output directory is not writable!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="306"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="306"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="306"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="373"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="376"/>
         <source>Analyzing file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="378"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="381"/>
         <source>Analysis Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="378"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="381"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="378"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="381"/>
         <source>Continue Anyway</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="378"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="381"/>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="408"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="413"/>
         <source>Process was aborted by the user after %n track(s)!</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="414"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="417"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="421"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="418"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="421"/>
         <source>Skipped %n track(s).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="419"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="422"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -685,44 +685,44 @@
 <context>
     <name>CueSheetModel</name>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="211"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="199"/>
         <source>No.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="214"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="202"/>
         <source>File / Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="217"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="205"/>
         <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="220"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="208"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="246"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="234"/>
         <source>File %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="261"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="250"/>
         <source>Track %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="270"/>
-        <location filename="../../src/Model_CueSheet.cpp" line="278"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="259"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="267"/>
         <source>Unknown Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Model_CueSheet.cpp" line="274"/>
-        <location filename="../../src/Model_CueSheet.cpp" line="278"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="263"/>
+        <location filename="../../src/Model_CueSheet.cpp" line="267"/>
         <source>Unknown Title</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3290,23 +3290,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="900"/>
+        <location filename="../../src/Global.cpp" line="933"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1154"/>
+        <location filename="../../src/Global.cpp" line="1187"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1159"/>
+        <location filename="../../src/Global.cpp" line="1192"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1172"/>
-        <location filename="../../src/Global.cpp" line="1199"/>
+        <location filename="../../src/Global.cpp" line="1205"/>
+        <location filename="../../src/Global.cpp" line="1232"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished"></translation>
     </message>

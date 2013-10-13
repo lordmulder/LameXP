@@ -63,16 +63,9 @@ public:
 	int CueSheetModel::getFileCount(void);
 	QString getFileName(int fileIndex);
 	int getTrackCount(int fileIndex);
-	int getTrackNo(int fileIndex, int trackIndex);
-	void getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration);
-	QString getTrackPerformer(int fileIndex, int trackIndex);
-	QString getTrackTitle(int fileIndex, int trackIndex);
-	QString getTrackGenre(int fileIndex, int trackIndex);
-	unsigned int getTrackYear(int fileIndex, int trackIndex);
-	QString getAlbumPerformer(void);
-	QString getAlbumTitle(void);
-	QString getAlbumGenre(void);
-	unsigned int getAlbumYear(void);
+	const AudioFileModel_MetaInfo *getTrackInfo(int fileIndex, int trackIndex);
+	const AudioFileModel_MetaInfo *getAlbumInfo(void);
+	bool getTrackIndex(int fileIndex, int trackIndex, double *startIndex, double *duration);
 
 	//Cue Sheet functions
 	int loadCueSheet(const QString &cueFile, QCoreApplication *application = NULL, QTextCodec *forceCodec= NULL);
@@ -85,10 +78,7 @@ private:
 	static QMutex m_mutex;
 
 	QList<CueSheetFile*> m_files;
-	QString m_albumTitle;
-	QString m_albumPerformer;
-	QString m_albumGenre;
-	unsigned int m_albumYear;
+	AudioFileModel_MetaInfo m_albumInfo;
 
 	const QIcon m_fileIcon;
 	const QIcon m_trackIcon;

@@ -132,8 +132,11 @@ ArtworkModel::ArtworkModel(const ArtworkModel &model)
 ArtworkModel &ArtworkModel::operator=(const ArtworkModel &model)
 {
 	QMutexLocker lock(m_mutex);
-	ArtworkModel_SharedData::detach(&m_data);
-	m_data = ArtworkModel_SharedData::attach(model.m_data);
+	if(m_data != model.m_data)
+	{
+		ArtworkModel_SharedData::detach(&m_data);
+		m_data = ArtworkModel_SharedData::attach(model.m_data);
+	}
 	return (*this);
 }
 

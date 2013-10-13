@@ -65,7 +65,10 @@ public:
 	void reset(void);
 
 	//Update
-	void update(const AudioFileModel_MetaInfo &model);
+	void update(const AudioFileModel_MetaInfo &model, const bool replace);
+
+	//Debug
+	void print(void) const;
 
 private:
 	QString m_titel;

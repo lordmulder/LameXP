@@ -478,6 +478,6 @@ Qt::ItemFlags MetaInfoModel::flags(const QModelIndex &index) const
 void MetaInfoModel::assignInfoFrom(const AudioFileModel &file)
 {
 	beginResetModel();
-	m_metaInfo->update(file.metaInfo());
+	m_metaInfo->update(file.metaInfo(), true);
 	endResetModel();
 }
