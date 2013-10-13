@@ -81,12 +81,6 @@ AudioFileModel_MetaInfo &AudioFileModel_MetaInfo::operator=(const AudioFileModel
 
 void AudioFileModel_MetaInfo::update(const AudioFileModel_MetaInfo &model, const bool replace)
 {
-	qDebug("\n-------[AudioFileModel_MetaInfo::update]-------");
-	qDebug("Updating (%p):", this);
-	print();
-	qDebug("\nUpdating with (%p):", &model);
-	model.print();
-
 	if((!model.m_titel.isEmpty())   && (replace || m_titel.isEmpty()))   m_titel    = model.m_titel;
 	if((!model.m_artist.isEmpty())  && (replace || m_artist.isEmpty()))  m_artist   = model.m_artist;
 	if((!model.m_album.isEmpty())   && (replace || m_album.isEmpty()))   m_album    = model.m_album;
@@ -95,10 +89,6 @@ void AudioFileModel_MetaInfo::update(const AudioFileModel_MetaInfo &model, const
 	if((!model.m_cover.isEmpty())   && (replace || m_cover.isEmpty()))   m_cover    = model.m_cover;
 	if((model.m_year > 0)           && (replace || (m_year == 0)))       m_year     = model.m_year;
 	if((model.m_position > 0)       && (replace || (m_position == 0)))   m_position = model.m_position;
-
-	qDebug("\nResult:");
-	print();
-	qDebug("-----------------------------------------------\n\n");
 }
 
 AudioFileModel_MetaInfo::~AudioFileModel_MetaInfo(void)

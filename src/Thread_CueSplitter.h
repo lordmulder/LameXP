@@ -63,7 +63,7 @@ public slots:
 	void abortProcess(void) { m_abortFlag = true; }
 
 private:
-	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, int &maxProgress);
+	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, const int baseProgress);
 	QString indexToString(const double index) const;
 	QString shortName(const QString &longName) const;
 	

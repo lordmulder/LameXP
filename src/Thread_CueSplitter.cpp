@@ -162,7 +162,7 @@ void CueSplitter::run()
 		nTracksTotal += m_model->getTrackCount(i);
 	}
 
-	emit progressMaxChanged(nTracksTotal);
+	emit progressMaxChanged(10 * nTracksTotal);
 	emit progressValChanged(0);
 
 	const AudioFileModel_MetaInfo *albumInfo = m_model->getAlbumInfo();
@@ -172,7 +172,6 @@ void CueSplitter::run()
 	{
 		int nTracks = m_model->getTrackCount(i);
 		QString trackFile = m_model->getFileName(i);
-		int maxProgress = 0;
 
 		//Process all tracks
 		for(int j = 0; j < nTracks; j++)
@@ -209,8 +208,8 @@ void CueSplitter::run()
 
 			//Call split function
 			emit fileSelected(shortName(QFileInfo(outputFile).fileName()));
-			splitFile(outputFile, trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, maxProgress);
-			emit progressValChanged(++nTracksComplete);
+			splitFile(outputFile, trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, nTracksComplete);
+			emit progressValChanged(nTracksComplete += 10);
 
 			if(m_abortFlag)
 			{
@@ -221,7 +220,7 @@ void CueSplitter::run()
 		}
 	}
 
-	emit progressValChanged(nTracksTotal);
+	emit progressValChanged(10 * nTracksTotal);
 	lamexp_sleep(333);
 
 	qDebug("All files were split.\n");
@@ -241,7 +240,7 @@ void CueSplitter::handleUpdate(int progress)
 // Privtae Functions
 ////////////////////////////////////////////////////////////
 
-void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, int &maxProgress)
+void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, const int baseProgress)
 {
 	qDebug("[Track %02d]", trackNo);
 	qDebug("File: <%s>", file.toUtf8().constData());
@@ -251,6 +250,8 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	qDebug("Title: <%s>", metaInfo.title().toUtf8().constData());
 	qDebug("Album: <%s>", metaInfo.album().toUtf8().constData());
 	
+	int prevProgress = baseProgress;
+
 	if(!m_decompressedFiles.contains(file))
 	{
 		qWarning("Unknown or unsupported input file, skipping!");
@@ -262,8 +263,6 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	QString decompressedInput = m_decompressedFiles[file];
 	qDebug("Input: <%s>", decompressedInput.toUtf8().constData());
 	
-	//emit fileSelected(QString("%1 [%2%]").arg(baseName, QString::number(maxProgress)));
-
 	AudioFileModel outFileInfo(output);
 	outFileInfo.setMetaInfo(metaInfo);
 	
@@ -337,8 +336,12 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 				int progress = rxProgress.cap(1).toInt(&ok);
 				if(ok)
 				{
-					maxProgress = qMax(maxProgress, progress);
-					//emit fileSelected(QString("%1 [%2%]").arg(baseName, QString::number(maxProgress)));
+					const int newProgress = baseProgress + qRound(static_cast<double>(qBound(0, progress, 100)) / 10.0);
+					if(newProgress > prevProgress)
+					{
+						emit progressValChanged(newProgress);
+						prevProgress = newProgress;
+					}
 				}
 			}
 			else if(rxChannels.lastIndexIn(text) >= 0)
