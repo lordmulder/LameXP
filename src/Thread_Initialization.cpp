@@ -31,7 +31,6 @@
 #include <QDir>
 #include <QLibrary>
 #include <QResource>
-#include <QTime>
 #include <QTextStream>
 #include <QRunnable>
 #include <QThreadPool>
@@ -39,7 +38,10 @@
 
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
+
+/* constants */
 static const double g_allowedExtractDelay = 12.0;
+static const size_t BUFF_SIZE = 512;
 
 ////////////////////////////////////////////////////////////
 // ExtractorTask class
@@ -50,27 +52,36 @@ class ExtractorTask : public QRunnable
 public:
 	ExtractorTask(const QDir &appDir, const QString &toolName, const QString &toolShortName, const QByteArray &toolHash, const unsigned int toolVersion, const QString &toolTag)
 	:
-		QRunnable(), m_appDir(appDir), m_toolName(toolName), m_toolShortName(toolShortName), m_toolHash(toolHash), m_toolVersion(toolVersion), m_toolTag(toolTag)
+		m_appDir(appDir),
+		m_toolName(toolName),
+		m_toolShortName(toolShortName),
+		m_toolHash(toolHash),
+		m_toolVersion(toolVersion),
+		m_toolTag(toolTag)
 	{
 		/* Nothing to do */
 	}
 
 	static void clearFlags(void)
 	{
-		s_mutex.lock();
-		s_bAbort = s_bCustom = false;
-		s_errMsg[0] = '\0';
-		s_mutex.unlock();
+		QMutexLocker lock(&s_mutex);
+		s_bExcept = false;
+		s_bCustom = false;
+		s_errMsg[0] = char(0);
 	}
 
-	static bool getAbort(void)  { bool ret; s_mutex.lock(); ret = s_bAbort;  s_mutex.unlock(); return ret; }
-	static bool getCustom(void) { bool ret; s_mutex.lock(); ret = s_bCustom; s_mutex.unlock(); return ret; }
+	static bool getExcept(void) { bool ret; QMutexLocker lock(&s_mutex); ret = s_bExcept; return ret; }
+	static bool getCustom(void) { bool ret; QMutexLocker lock(&s_mutex); ret = s_bCustom; return ret; }
 
-	static void getError(char *buffer, const size_t buffSize)
+	static bool getErrMsg(char *buffer, const size_t buffSize)
 	{
-		s_mutex.lock();
-		strncpy_s(buffer, 1024, s_errMsg, _TRUNCATE);
-		s_mutex.unlock();
+		QMutexLocker lock(&s_mutex);
+		if(s_errMsg[0])
+		{
+			strncpy_s(buffer, BUFF_SIZE, s_errMsg, _TRUNCATE);
+			return true;
+		}
+		return false;
 	}
 
 protected:
@@ -78,42 +89,41 @@ protected:
 	{
 		try
 		{
-			LockedFile *lockedFile = NULL;
-			unsigned int version = m_toolVersion;
-			
-			if(!s_bAbort)
-			{
-				QFileInfo customTool(QString("%1/tools/%2/%3").arg(m_appDir.canonicalPath(), QString::number(lamexp_version_build()), m_toolShortName));
-				if(customTool.exists() && customTool.isFile())
-				{
-					qDebug("Setting up file: %s <- %s", m_toolShortName.toLatin1().constData(), m_appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
-					lockedFile = new LockedFile(customTool.canonicalFilePath()); version = UINT_MAX; s_bCustom = true;
-				}
-				else
-				{
-					qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), m_toolShortName.toLatin1().constData());
-					lockedFile = new LockedFile(QString(":/tools/%1").arg(m_toolName), QString("%1/lxp_%2").arg(lamexp_temp_folder2(), m_toolShortName), m_toolHash);
-				}
-
-				if(lockedFile)
-				{
-					//QMutexLocker lock(&s_mutex);
-					lamexp_register_tool(m_toolShortName, lockedFile, version, &m_toolTag);
-				}
-			}
+			if(!getExcept()) doExtract();
 		}
 		catch(char *errorMsg)
 		{
-			qWarning("At least one of the required tools could not be initialized:\n%s", errorMsg);
-			if(s_mutex.tryLock())
+			QMutexLocker lock(&s_mutex);
+			if(!s_bExcept)
 			{
-				if(!s_bAbort)
-				{
-					strncpy_s(s_errMsg, 1024, errorMsg, _TRUNCATE);
-					s_bAbort = true;
-				}
-				s_mutex.unlock();
+				s_bExcept = true;
+				strncpy_s(s_errMsg, BUFF_SIZE, errorMsg, _TRUNCATE);
+				lock.unlock();
+				qWarning("ExtractorTask error:\n%s", errorMsg);
 			}
+		}
+	}
+
+	void doExtract(void)
+	{
+		LockedFile *lockedFile = NULL;
+		unsigned int version = m_toolVersion;
+
+		QFileInfo customTool(QString("%1/tools/%2/%3").arg(m_appDir.canonicalPath(), QString::number(lamexp_version_build()), m_toolShortName));
+		if(customTool.exists() && customTool.isFile())
+		{
+			qDebug("Setting up file: %s <- %s", m_toolShortName.toLatin1().constData(), m_appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
+			lockedFile = new LockedFile(customTool.canonicalFilePath()); version = UINT_MAX; s_bCustom = true;
+		}
+		else
+		{
+			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), m_toolShortName.toLatin1().constData());
+			lockedFile = new LockedFile(QString(":/tools/%1").arg(m_toolName), QString("%1/lxp_%2").arg(lamexp_temp_folder2(), m_toolShortName), m_toolHash);
+		}
+
+		if(lockedFile)
+		{
+			lamexp_register_tool(m_toolShortName, lockedFile, version, &m_toolTag);
 		}
 	}
 
@@ -121,20 +131,20 @@ private:
 	const QDir m_appDir;
 	const QString m_toolName;
 	const QString m_toolShortName;
-	const QString m_toolTag;
-	const unsigned int m_toolVersion;
 	const QByteArray m_toolHash;
+	const unsigned int m_toolVersion;
+	const QString m_toolTag;
 
-	static volatile bool s_bAbort;
+	static volatile bool s_bExcept;
 	static volatile bool s_bCustom;
 	static QMutex s_mutex;
-	static char s_errMsg[1024];
+	static char s_errMsg[BUFF_SIZE];
 };
 
-volatile bool ExtractorTask::s_bAbort = false;
-volatile bool ExtractorTask::s_bCustom = false;
-char ExtractorTask::s_errMsg[1024] = {'\0'};
 QMutex ExtractorTask::s_mutex;
+volatile bool ExtractorTask::s_bExcept = false;
+volatile bool ExtractorTask::s_bCustom = false;
+char ExtractorTask::s_errMsg[BUFF_SIZE] = {'\0'};
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -199,9 +209,9 @@ void InitializationThread::run()
 	QMap<QString, QString> mapVersTag;
 
 	//Init properties
-	for(int i = 0; i < INT_MAX; i++)
+	for(int i = 0; true; i++)
 	{
-		if(!g_lamexp_tools[i].pcName && !g_lamexp_tools[i].pcHash && !g_lamexp_tools[i].uiVersion)
+		if(!(g_lamexp_tools[i].pcName || g_lamexp_tools[i].pcHash  || g_lamexp_tools[i].uiVersion))
 		{
 			break;
 		}
@@ -233,8 +243,7 @@ void InitializationThread::run()
 	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
 
-	QTime timer;
-	timer.start();
+	const long long timeExtractStart = lamexp_perfcounter_value();
 	
 	//Extract all files
 	while(!toolsList.isEmpty())
@@ -258,7 +267,6 @@ void InitializationThread::run()
 			if(toolCpuType & cpuSupport)
 			{
 				pool->start(new ExtractorTask(appDir, toolName, toolShortName, toolHash, toolVersion, toolVersTag));
-				QThread::yieldCurrentThread();
 			}
 		}
 		catch(char *errorMsg)
@@ -272,12 +280,18 @@ void InitializationThread::run()
 	pool->waitForDone();
 	LAMEXP_DELETE(pool);
 
+	const long long timeExtractEnd = lamexp_perfcounter_value();
+
 	//Make sure all files were extracted correctly
-	if(ExtractorTask::getAbort())
+	if(ExtractorTask::getExcept())
 	{
-		char errorMsg[1024];
-		ExtractorTask::getError(errorMsg, 1024);
-		qFatal("At least one of the required tools could not be initialized:\n%s", errorMsg);
+		char errorMsg[BUFF_SIZE];
+		if(ExtractorTask::getErrMsg(errorMsg, BUFF_SIZE))
+		{
+			qFatal("At least one of the required tools could not be initialized:\n%s", errorMsg);
+			return;
+		}
+		qFatal("At least one of the required tools could not be initialized!");
 		return;
 	}
 
@@ -302,7 +316,7 @@ void InitializationThread::run()
 	}
 
 	//Check delay
-	double delayExtract = static_cast<double>(timer.elapsed()) / 1000.0;
+	double delayExtract = static_cast<double>(timeExtractEnd - timeExtractStart) / static_cast<double>(lamexp_perfcounter_frequ());
 	if(delayExtract > g_allowedExtractDelay)
 	{
 		m_slowIndicator = true;
@@ -311,7 +325,7 @@ void InitializationThread::run()
 	}
 	else
 	{
-		qDebug("Extracting the tools took %.3f seconds (OK).\n", delayExtract);
+		qDebug("Extracting the tools took %.5f seconds (OK).\n", delayExtract);
 	}
 
 	//Register all translations
