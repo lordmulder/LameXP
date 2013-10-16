@@ -379,56 +379,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="260"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="316"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="250"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="306"/>
         <source>Profile</source>
         <translation type="unfinished">Profil</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="277"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="267"/>
         <source>Channels</source>
         <translation type="unfinished">Kanały</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="282"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="272"/>
         <source>Samplerate</source>
         <translation type="unfinished">Częstotliwość</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="289"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="293"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="279"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="283"/>
         <source>Bitdepth</source>
         <translation type="unfinished">Głębia bitów</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="311"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="301"/>
         <source>Type</source>
         <translation type="unfinished">Typ</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="320"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="310"/>
         <source>Version</source>
         <translation type="unfinished">Wersja</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="327"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="333"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="317"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="320"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="323"/>
         <source>Bitrate</source>
         <translation type="unfinished">Przepływność bitów</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="327"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="317"/>
         <source>Constant</source>
         <translation type="unfinished">Stały</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="320"/>
         <source>Variable</source>
         <translation type="unfinished">Zmienny</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="339"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="329"/>
         <source>Encoder</source>
         <translation type="unfinished">Enkoder</translation>
     </message>
@@ -3132,22 +3132,22 @@
         <translation type="unfinished">Twoje pliki są właśnie kompresowane, prosze być cierpliwy...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="484"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished">Kompresowanie plików, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="537"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="529"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished">Wielowątkowosć włączona: Równolegle wykonywanych jest %1 kodowań!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="641"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="633"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">Przerwano! Czekanie na wyłączenie procesu...</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="652"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="644"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform>Kompresowanie: %n plik z %1 został do tej pory zakończony, prosze czekać...</numerusform>
@@ -3156,17 +3156,17 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="674"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="666"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">Tworzenie pliku playlisty, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="684"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="676"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">Proces został przedwcześnie zakończony przez użytkownika!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="684"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="676"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation type="unfinished">
             <numerusform>Proces został zakończony przez użytkownika  po zakończeniu %n pliku!</numerusform>
@@ -3175,22 +3175,22 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="685"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="677"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished">LameXP - Przerwano</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="685"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="677"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished">Proces został przerwany przez użytkownika.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="702"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="694"/>
         <source>Process finished after %1.</source>
         <translation type="unfinished">Proces został zakończony po %1.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform>Błąd: %1 z %n pliku zakończono niepowodzeniem (%2). Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
@@ -3199,7 +3199,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>%n file(s) skipped</source>
         <translation type="unfinished">
             <numerusform>pominięto %n plik</numerusform>
@@ -3208,7 +3208,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="717"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform>Błąd: %1 z %n pliku zakończono niepowodzeniem. Kliknij dwukrotnie aby uzyskać więcej informacji!</numerusform>
@@ -3217,7 +3217,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="723"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
             <numerusform>Wszystkie zadania wykonano pomyślnie. Pominięto %n plik.</numerusform>
@@ -3226,54 +3226,54 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="711"/>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - Błąd</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="711"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished">Przynajmniej jeden plik nie został skompresowany!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="727"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished">Kompresja wszystkich plików zakończona powodzeniem.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>LameXP - Done</source>
         <translation type="unfinished">LameXP - Zrobione</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="931"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="923"/>
         <source>None of the items matches the current filtering rules</source>
         <translation type="unfinished">Żadna z pozycji nie spełnia reguł filtra</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1030"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1022"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished">Tworzenie playlisty zakończone niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1030"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1022"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished">Playlista nie mogła zostać utworzona:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1094"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1086"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished">Ostrzeżenie: Komputer zostanie zamknięty za %1 sekund/y...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1098"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1099"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1090"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1091"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished">Anuluj wyłączenie komputera</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1155"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1147"/>
         <source>%n hour(s)</source>
         <translation type="unfinished">
             <numerusform>%n godzina</numerusform>
@@ -3282,8 +3282,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1156"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1160"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1148"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1152"/>
         <source>%n minute(s)</source>
         <translation type="unfinished">
             <numerusform>%n minuta</numerusform>
@@ -3292,8 +3292,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1161"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1165"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1153"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1157"/>
         <source>%n second(s)</source>
         <translation type="unfinished">
             <numerusform>%n sekunda</numerusform>
@@ -3302,7 +3302,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1166"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1158"/>
         <source>%n millisecond(s)</source>
         <translation type="unfinished">
             <numerusform>%n milisekunda</numerusform>
@@ -3327,23 +3327,23 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="933"/>
+        <location filename="../../src/Global.cpp" line="916"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1187"/>
+        <location filename="../../src/Global.cpp" line="1170"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1192"/>
+        <location filename="../../src/Global.cpp" line="1175"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1205"/>
-        <location filename="../../src/Global.cpp" line="1232"/>
+        <location filename="../../src/Global.cpp" line="1188"/>
+        <location filename="../../src/Global.cpp" line="1215"/>
         <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga do uruchomienia Windows 2000 lub nowszego.</translation>
     </message>

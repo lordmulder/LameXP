@@ -60,7 +60,7 @@ g_lamexp_tools[] =
 	{"7c249f507b96967bedabdd7e631638807a7595ebff58eaaadf63530783d515eda9660bc2b1a0457fddae7e3eaef8a074", CPU_TYPE_ALL_ALL, "elevator.exe", UINT_MAX, ""},
 	{"bbc262cfe9c48633e5f1780d30347d7663075cfd7bdc76347cce3b1191d62f788d9b91bc63dffae2f66d1759d5849e92", CPU_TYPE_ALL_ALL, "faad.exe", 27, ""},
 	{"1f596224564452e66d0c717dfd776d0c4fa4fcc8650a424895a780b19d7acc8c8fb0f5c0501f2adfabc8a96da6074529", CPU_TYPE_ALL_ALL, "flac.exe", 130, ""},
-	{"dfa00ec101b413787a6e7abe3e153144dce4e8d53e1250e14480ffb2ee18cbbef7fb3c16f991455e764a4b54ffa627a7", CPU_TYPE_ALL_ALL, "gpgv.exe", 1414, ""},
+	{"ce33d2d14cc40514886bfb9a1f14e1b1a8ec4a88b2bfebe521bed55fc34cb648f5c1c12be67aa5fc955da68b6c7e3722", CPU_TYPE_ALL_ALL, "gpgv.exe", 1415, ""},
 	{"19c9dbe9089491c1f59ae48016d95d4336c4d3743577db4e782d8b59eca3b2bda6ed8f92f9004f88f434935b79e4974b", CPU_TYPE_ALL_ALL, "gpgv.gpg", UINT_MAX, ""},
 	{"53cfab3896a47d48f523315f475fa07856d468ad1aefcc8cce19c18cdf509e2f92840dab92a442995df36d941cb7a6ca", CPU_TYPE_ALL_GEN, "lame.i386.exe", 3995, "Final"},
 	{"9511e7ef2ad10de05386eedf7f14d637edab894a53dacd2f8f15c6f8ed582f12c25fb5bf88438e62c46b8eb92e7634b2", CPU_TYPE_ALL_SSE, "lame.sse2.exe", 3995, "Final"},
@@ -84,7 +84,7 @@ g_lamexp_tools[] =
 	{"9e1ade2137ea5cee0ad4657971c314a372df3068594fbe4f77d45b9eb65fa7c69e55027b0df81b6fe072a220e9a8ba8a", CPU_TYPE_ALL_ALL, "valdec.exe", 100, "a"},
 	{"2ff91e8f42b8a8a5a2d134065c0636cba427c989c5b5cf336fff3f16d23eaa621bacab55aed497b68fa5f9679c050900", CPU_TYPE_ALL_ALL, "wget.exe", 1134, ""},
 	{"572b9448bf4a338ecb9727951fdfcc5a219cc69896695cc96b9f6b083690e339910e41558968264a38992e45f2be152c", CPU_TYPE_ALL_ALL, "wma2wav.exe", 20111001, ""},
-	{"1bb54b57ddffc0b636cba73eb45c95f7458f88db4cea5a7e0d1d8cfbfceaa5ee92239f037c6bee1855cc0fb1c83e9385", CPU_TYPE_ALL_ALL, "wupdate.exe", 20130821, ""},
+	{"9c1846718eb7a738f1cac4805a23ba4c52682f7b8a00d4f1a72edf770dda1f04b9d6f74d779a28bd0ef2ed8341f9ef9f", CPU_TYPE_ALL_ALL, "wupdate.exe", 20131016, ""},
 	{"b0a564e842f2cda6b67fdd09aaa66294c775bb3eb419debf311fe54eb76ea468e99917dc3ad8ed4734fcdb59034a13cb", CPU_TYPE_ALL_ALL, "wvunpack.exe", 4601, ""},
 	{NULL, NULL, NULL, NULL, NULL}
 };
