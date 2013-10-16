@@ -172,7 +172,11 @@ void FileAnalyzer::run()
 
 	//Create thread pool
 	if(!m_pool) m_pool = new QThreadPool();
-	m_pool->setMaxThreadCount(qBound(2, ((QThread::idealThreadCount() * 3) / 2), 12));
+	const int idealThreadCount = QThread::idealThreadCount();
+	if(idealThreadCount > 0)
+	{
+		m_pool->setMaxThreadCount(qBound(2, ((idealThreadCount * 3) / 2), 12));
+	}
 
 	//Start first N threads
 	QTimer::singleShot(0, this, SLOT(initializeTasks()));

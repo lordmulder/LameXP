@@ -57,13 +57,21 @@ public:
 
 	static void clearFlags(void)
 	{
+		s_mutex.lock();
 		s_bAbort = s_bCustom = false;
 		s_errMsg[0] = '\0';
+		s_mutex.unlock();
 	}
 
-	static bool getAbort(void) { return s_bAbort; }
-	static bool getCustom(void) { return s_bCustom; }
-	static char *const getError(void) { return s_errMsg; }
+	static bool getAbort(void)  { bool ret; s_mutex.lock(); ret = s_bAbort;  s_mutex.unlock(); return ret; }
+	static bool getCustom(void) { bool ret; s_mutex.lock(); ret = s_bCustom; s_mutex.unlock(); return ret; }
+
+	static void getError(char *buffer, const size_t buffSize)
+	{
+		s_mutex.lock();
+		strncpy_s(buffer, 1024, s_errMsg, _TRUNCATE);
+		s_mutex.unlock();
+	}
 
 protected:
 	void run(void)
@@ -89,7 +97,7 @@ protected:
 
 				if(lockedFile)
 				{
-					QMutexLocker lock(&s_mutex);
+					//QMutexLocker lock(&s_mutex);
 					lamexp_register_tool(m_toolShortName, lockedFile, version, &m_toolTag);
 				}
 			}
@@ -99,7 +107,11 @@ protected:
 			qWarning("At least one of the required tools could not be initialized:\n%s", errorMsg);
 			if(s_mutex.tryLock())
 			{
-				if(!s_bAbort) { s_bAbort = true; strncpy_s(s_errMsg, 1024, errorMsg, _TRUNCATE); }
+				if(!s_bAbort)
+				{
+					strncpy_s(s_errMsg, 1024, errorMsg, _TRUNCATE);
+					s_bAbort = true;
+				}
 				s_mutex.unlock();
 			}
 		}
@@ -110,8 +122,8 @@ private:
 	const QString m_toolName;
 	const QString m_toolShortName;
 	const QString m_toolTag;
-	const QByteArray m_toolHash;
 	const unsigned int m_toolVersion;
+	const QByteArray m_toolHash;
 
 	static volatile bool s_bAbort;
 	static volatile bool s_bCustom;
@@ -163,8 +175,6 @@ void InitializationThread::run()
 	//Hack to disable x64 on Wine, as x64 binaries won't run under Wine (tested with Wine 1.4 under Ubuntu 12.04 x64)
 	if(cpuSupport & CPU_TYPE_X64_ALL)
 	{
-		//DWORD osVerNo = lamexp_get_os_version();
-		//if((HIWORD(osVerNo) == 6) && (LOWORD(osVerNo) == 2))
 		if(lamexp_detect_wine())
 		{
 			qWarning("Running under Wine on a 64-Bit system. Going to disable all x64 support!\n");
@@ -214,7 +224,7 @@ void InitializationThread::run()
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
 	QThreadPool *pool = new QThreadPool();
-	int idealThreadCount = QThread::idealThreadCount();
+	const int idealThreadCount = QThread::idealThreadCount();
 	if(idealThreadCount > 0)
 	{
 		pool->setMaxThreadCount(idealThreadCount * 2);
@@ -265,7 +275,9 @@ void InitializationThread::run()
 	//Make sure all files were extracted correctly
 	if(ExtractorTask::getAbort())
 	{
-		qFatal("At least one of the required tools could not be initialized:\n%s", ExtractorTask::getError());
+		char errorMsg[1024];
+		ExtractorTask::getError(errorMsg, 1024);
+		qFatal("At least one of the required tools could not be initialized:\n%s", errorMsg);
 		return;
 	}
 
