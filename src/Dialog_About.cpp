@@ -53,8 +53,8 @@
 #define MAKE_TRANSPARENT(WIDGET) do { QPalette _p = (WIDGET)->palette(); _p.setColor(QPalette::Background, Qt::transparent); (WIDGET)->setPalette(_p); } while(0)
 
 //Constants
-const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/technologies-aac-codec.html";
-const char *AboutDialog::disqueUrl =  "http://muldersoft.com/?player_url=38X-MXOB014"; //http://mulder.brhack.net/?player_url=yF6W-w0iAMM; http://www.youtube.com/watch_popup?v=yF6W-w0iAMM&vq=large
+const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/company/about-nero/nero-aac-codec.php";
+const char *AboutDialog::disqueUrl =  "http://muldersoft.com/?player_url=38X-MXOB014";
 
 //Contributors
 static const struct 
