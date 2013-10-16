@@ -111,11 +111,9 @@ The following platforms should work too, but aren't tested extensively:<br><ul>
 The following "legacy" platforms are NOT supported any longer:<br><ul>
 <li>Microsoft Windows 2000
 <li>Microsoft Windows NT 4.0
-<li>Microsoft Windows Millennium Edition (*)
-<li>Microsoft Windows 98 (*)
+<li>Microsoft Windows Millennium Edition
+<li>Microsoft Windows 98
 <li>Microsoft Windows 95</ul>
-<br>
-(*) Some people claim that LameXP can run on Windows 98 SE or Millennium Edition with the help of <a href="http://sourceforge.net/projects/kernelex/" target="_blank">KernelEx</a>.<br><br>
 
 <br><br>
 
@@ -386,8 +384,8 @@ LameXP uses the Nero AAC Encoder for creating AAC/MP4/M4A files. The Nero AAC En
 download. However the license doesn't allow redistribution! Therefore we can NOT ship the Nero encoder along<br>
 with LameXP. Instead you will have to obtain the Nero encoder as a separate download from the official "Nero<br>
 Digital" web-site. Currently you'll find the latest Nero AAC Encoder version at this location:<br><ul>
-<li><a href="http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php" target="_blank">http://www.nero.com/deu/downloads-nerodigital-nero-aac-codec.php</a>
-<li><a href="http://ftp6.nero.com/tools/" target="_blank">http://ftp6.nero.com/tools/</a></ul>
+<li><a href="http://www.nero.com/eng/company/about-nero/nero-aac-codec.php" target="_blank">http://www.nero.com/eng/company/about-nero/nero-aac-codec.php</a>
+<li><a href="http://ftp6.nero.com/tools/NeroAACCodec-1.5.1.zip" target="_blank">http://ftp6.nero.com/tools/NeroAACCodec-1.5.1.zip</a></ul>
 <br>
 After you have downloaded the Nero AAC Encoder as a ZIP file, you must "install" the encoder binaries, so<br>
 LameXP can use them. Simply unzip the files 'neroAacEnc.exe', 'neroAacDec.exe' as well as 'neroAacTag.exe' to<br>
@@ -503,17 +501,23 @@ If, for example, you want to replace 'lame.exe' in Build #666 of LameXP, you wou
 
 <a name="df406578"></a><b>The LameXP startup (splash screen) takes very long on my system. What can I do?</b><br>
 <br>
-Starting up LameXP shouldn't take longer than approximately 10 seconds. However it was brought to our<br>
-attention that badly optimized anti-virus software can slow down the startup procedure a lot! On our test<br>
-system (Windows 7 running on an Intel Core2 Q6600 with 4 GB of RAM) starting up LameXP takes about 3 seconds<br>
-without an anti-virus software and about 6 seconds with the "real-time protection" of Microsoft Security<br>
-Essentials enabled. With other anti-virus software the startup was delayed up to 20 seconds and more!<br>
+During the startup procedure, LameXP has to extract some "helper" files to the TEMP directory. This can take<br>
+a few moments. However, this extraction process shouldn't take longer than approximately 10 seconds. On our<br>
+test system (Windows 7 running on an old Core2 Q6600 with 4 GB of RAM) starting up LameXP takes ~1.7 seconds.<br>
+<br>
+Unfortunately, it was brought to our attention that poorly optimized anti-virus software might slow down the<br>
+startup procedure a lot! As mentioned above, on our test system, the startup procedure takes 1.7 seconds. And<br>
+that is with the "real-time protection" of Microsoft Security Essentials (MSE) enabled! Without the real-time<br>
+scanner, the startup time reduces even further, to less than 0.2 seconds. At the same time, as users have<br>
+reported to us, some other anti-virus software can increase the startup delay by as much as 20.0 seconds !!!<br>
 <br>
 So if you think that LameXP is starting up too slow on your system, you should temporarily(!) disable or<br>
-uninstall your current anti-virus program and try again. Usually it should be sufficient to disable only the<br>
-"real-time protection", "file system protection" or "guard" feature of your anti-virus software. If it turns<br>
-out that the startup is significantly(!) faster WITHOUT the anti-virus software, please report the problem to<br>
-the developer of the anti-virus software. And, if they don't fix the problem, switch to a better product!<br><br>
+uninstall the "real-time scanner" or "guard" (or whatever it is called) of your current "anti-virus" software<br>
+and then try again. If it turns out that the startup of LameXP becomes significantly(!) faster as soon as the<br>
+anti-virus software does *not* interfere with the extraction process, then please report the problem to the<br>
+developer of the anti-virus software. And, if they don't fix the problem, switch to a better product ;-)<br>
+<br>
+In short: If LameXP takes very long for starting up, then most likely poor "anti-virus" software is to balme.<br><br>
 
 <br><br>
 
@@ -863,13 +867,13 @@ switching to the 'Compatibility' tab and un-checking the 'Run this program in co
 
 <br><br>
 
-<a name="328b0a18"></a><b>Why do I get the error 'Executable requires Windows 2000 or later' on startup?</b><br>
+<a name="328b0a18"></a><b>Why do I get the error 'Executable requires Windows XP or later' on startup?</b><br>
 <a name="3ffe490e"></a><b>Why do I get the error 'The procedure entry point &lt;Something&gt; could not be located' on startup?</b><br>
 <a name="01922741"></a><b>Why do I get the error 'LameXP.exe is not a valid Win32 application' on startup?</b><br>
 <br>
 You are trying to run LameXP on a platform that is NOT supported, such as Windows 95, Windows 98, Windows<br>
-Millennium Edition, Windows NT 4.0. There is nothing you can do about that, except for updating to a less<br>
-antiquated OS. Running an outdated and unsupported OS is a severe security risk anyway!<br>
+Millennium Edition, Windows NT 4.0 or Windows 2000. There is nothing you can do about that, except for
+updating to a less antiquated OS. Running an outdated and unsupported OS is a severe security risk anyway!<br>
 <br>
 Note: This error can also occur, if your system has been configured to run LameXP in <a href="#e7c9ae2b">compatibility mode</a>.<br><br>
 
