@@ -316,14 +316,6 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	//while(!m_threadList.isEmpty())
-	//{
-	//	ProcessThread *thread = m_threadList.takeFirst();
-	//	thread->terminate();
-	//	thread->wait(15000);
-	//	delete thread;
-	//}
-
 	if(m_threadPool)
 	{
 		if(!m_threadPool->waitForDone(100))

@@ -754,10 +754,6 @@ void lamexp_init_console(const QStringList &argv)
 lamexp_cpu_t lamexp_detect_cpu_features(const QStringList &argv)
 {
 	typedef BOOL (WINAPI *IsWow64ProcessFun)(__in HANDLE hProcess, __out PBOOL Wow64Process);
-	typedef VOID (WINAPI *GetNativeSystemInfoFun)(__out LPSYSTEM_INFO lpSystemInfo);
-	
-	static IsWow64ProcessFun IsWow64ProcessPtr = NULL;
-	static GetNativeSystemInfoFun GetNativeSystemInfoPtr = NULL;
 
 	lamexp_cpu_t features;
 	SYSTEM_INFO systemInfo;
@@ -816,35 +812,22 @@ lamexp_cpu_t lamexp_detect_cpu_features(const QStringList &argv)
 	if(strlen(features.brand) < 1) strncpy_s(features.brand, 0x40, "Unknown", _TRUNCATE);
 	if(strlen(features.vendor) < 1) strncpy_s(features.vendor, 0x40, "Unknown", _TRUNCATE);
 
-#if !defined(_M_X64 ) && !defined(_M_IA64)
-	if(!IsWow64ProcessPtr || !GetNativeSystemInfoPtr)
+#if (!(defined(_M_X64) || defined(_M_IA64)))
+	QLibrary Kernel32Lib("kernel32.dll");
+	if(IsWow64ProcessFun IsWow64ProcessPtr = (IsWow64ProcessFun) Kernel32Lib.resolve("IsWow64Process"))
 	{
-		QLibrary Kernel32Lib("kernel32.dll");
-		IsWow64ProcessPtr = (IsWow64ProcessFun) Kernel32Lib.resolve("IsWow64Process");
-		GetNativeSystemInfoPtr = (GetNativeSystemInfoFun) Kernel32Lib.resolve("GetNativeSystemInfo");
-	}
-	if(IsWow64ProcessPtr)
-	{
-		BOOL x64 = FALSE;
-		if(IsWow64ProcessPtr(GetCurrentProcess(), &x64))
+		BOOL x64flag = FALSE;
+		if(IsWow64ProcessPtr(GetCurrentProcess(), &x64flag))
 		{
-			features.x64 = x64;
+			features.x64 = (x64flag == TRUE);
 		}
 	}
-	if(GetNativeSystemInfoPtr)
-	{
-		GetNativeSystemInfoPtr(&systemInfo);
-	}
-	else
-	{
-		GetSystemInfo(&systemInfo);
-	}
-	features.count = qBound(1UL, systemInfo.dwNumberOfProcessors, 64UL);
 #else
-	GetNativeSystemInfo(&systemInfo);
-	features.count = systemInfo.dwNumberOfProcessors;
 	features.x64 = true;
 #endif
+
+	GetNativeSystemInfo(&systemInfo);
+	features.count = qBound(1UL, systemInfo.dwNumberOfProcessors, 64UL);
 
 	if(argv.count() > 0)
 	{
