@@ -1140,7 +1140,6 @@ bool lamexp_init_qt(int argc, char* argv[])
 	{
 		SetDllDirectoryProc pSetDllDirectory = (SetDllDirectoryProc) kernel32.resolve("SetDllDirectoryW");
 		if(pSetDllDirectory != NULL) pSetDllDirectory(L"");
-		kernel32.unload();
 	}
 
 	//Extract executable name from argv[] array
@@ -1185,11 +1184,8 @@ bool lamexp_init_qt(int argc, char* argv[])
 	{
 	case 0:
 	case QSysInfo::WV_NT:
-		qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(executableName).toLatin1().constData());
-		break;
 	case QSysInfo::WV_2000:
-		qDebug("Running on Windows 2000 (not officially supported!).\n");
-		lamexp_check_compatibility_mode("GetNativeSystemInfo", executableName);
+		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
 		break;
 	case QSysInfo::WV_XP:
 		qDebug("Running on Windows XP.\n");
@@ -1207,21 +1203,20 @@ bool lamexp_init_qt(int argc, char* argv[])
 		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
 		lamexp_check_compatibility_mode("CreateFile2", executableName);
 		break;
+	case QSysInfo::WV_WINDOWS8:
+		qDebug("Running on Windows 8 or Windows Server 2012.\n");
+		lamexp_check_compatibility_mode(NULL, executableName);
+		break;
 	default:
 		{
 			const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
-			if(osVersionNo->versionMajor < 5)
+			if(LAMEXP_MAX_OS_VER(osVersionNo, 5, 0))
 			{
-				qFatal("%s", QApplication::tr("Executable '%1' requires Windows 2000 or later.").arg(executableName).toLatin1().constData());
-			}
-			else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 2))
-			{
-				qDebug("Running on Windows 8 or Windows Server 2012\n");
-				lamexp_check_compatibility_mode(NULL, executableName);
+				qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
 			}
 			else
 			{
-				qWarning("Running on an unknown/untested WinNT-based OS (v%u.%u).\n", osVersionNo->versionMajor, osVersionNo->versionMinor);
+				qWarning("Running on an unknown/untested WindowsNT-based OS (v%u.%u).\n", osVersionNo->versionMajor, osVersionNo->versionMinor);
 			}
 		}
 		break;
