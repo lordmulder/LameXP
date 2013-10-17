@@ -4,8 +4,6 @@
     <file>tools/elevator.exe</file>
     <file>tools/gpgv.exe</file>
     <file>tools/gpgv.gpg</file>
-    <file>tools/mediainfo.i386.exe</file>
-    <file>tools/mediainfo.x64.exe</file>
     <file>tools/sox.exe</file>
     <file>tools/wget.exe</file>
     <file>tools/wupdate.exe</file>

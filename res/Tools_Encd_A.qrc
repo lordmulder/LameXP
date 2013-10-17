@@ -8,9 +8,6 @@
     <file>tools/flac.exe</file>
     <file>tools/lame.i386.exe</file>
     <file>tools/lame.sse2.exe</file>
-    <file>tools/oggenc2.i386.exe</file>
-    <file>tools/oggenc2.sse2.exe</file>
-    <file>tools/oggenc2.x64.exe</file>
     <file>tools/opusenc.i386.exe</file>
     <file>tools/opusenc.sse2.exe</file>
   </qresource>
