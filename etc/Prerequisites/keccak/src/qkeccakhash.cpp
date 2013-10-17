@@ -31,7 +31,11 @@
 QKeccakHash::QKeccakHash()
 {
 	m_initialized = false;
-	m_state = new KeccakImpl::hashState;
+	m_state = (KeccakImpl::hashState*) _aligned_malloc(sizeof(KeccakImpl::hashState), 32);
+	if(!m_state)
+	{
+		throw "[QKeccakHash] Error: _aligned_malloc() has failed, probably out of heap space!";
+	}
 	memset(m_state, 0, sizeof(KeccakImpl::hashState));
 	m_hashResult.clear();
 }
@@ -42,7 +46,7 @@ QKeccakHash::~QKeccakHash()
 
 	if(m_state)
 	{
-		delete m_state;
+		_aligned_free(m_state);
 		m_state = NULL;
 	}
 }
