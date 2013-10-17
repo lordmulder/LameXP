@@ -710,22 +710,18 @@
     <CustomBuild Include="src\Registry_Encoder.h">
       <Filter>Header Files\Misc</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools_Encd_A.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Misc_A.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Encd_B.qrc" />
+    <CustomBuild Include="res\Tools_Misc_B.qrc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MainIcon.ico" />
     <None Include="ReadMe.txt" />
-    <None Include="res\Tools_Encd_A.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools_Encd_B.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools_Misc_A.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools_Misc_B.qrc">
-      <Filter>Resources</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

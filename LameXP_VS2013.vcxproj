@@ -25,18 +25,18 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v110_xp</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v110_xp</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110_xp</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -91,7 +91,7 @@
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2012.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2013.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -138,7 +138,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <OpenMPSupport>false</OpenMPSupport>
       <DebugInformationFormat>None</DebugInformationFormat>
       <TreatWarningAsError>true</TreatWarningAsError>
@@ -146,10 +146,11 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ProgramDataBaseFileName />
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>QtCore4.lib;QtGui4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2012.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QtCore4.lib;QtGui4.lib;Winmm.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2013.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <Version>
       </Version>
@@ -210,19 +211,19 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <FloatingPointModel>Fast</FloatingPointModel>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
+      <DebugInformationFormat>None</DebugInformationFormat>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <OpenMPSupport>false</OpenMPSupport>
       <CompileAsManaged>false</CompileAsManaged>
       <TreatWarningAsError>true</TreatWarningAsError>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>QtCore.lib;QtGui.lib;QtSvg.lib;qtmain.lib;qsvg.lib;qico.lib;qtga.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2012.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QtCore.lib;QtGui.lib;QtSvg.lib;qtmain.lib;qsvg.lib;qico.lib;qtga.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Wininet.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2013.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\qt4_static\lib;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -1207,29 +1208,29 @@ del "$(TargetDir)imageformats\q???d4.dll"
     </CustomBuild>
     <CustomBuild Include="res\Tools_Encd_A.qrc">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Encd_B.qrc">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
     </CustomBuild>
     <CustomBuild Include="res\Tools_Misc_A.qrc">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\QRC_%(Filename).cpp"</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Encd_B.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\QRC_%(Filename).cpp" -name "%(Filename)" "%(FullPath)"</Command>

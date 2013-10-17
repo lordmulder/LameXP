@@ -313,7 +313,15 @@ const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
 		#error Compiler is not supported!
 	#endif
 #elif defined(_MSC_VER)
-	#if (_MSC_VER == 1700)
+	#if (_MSC_VER == 1800)
+		#if (_MSC_FULL_VER < 180021005)
+			static const char *g_lamexp_version_compiler = "MSVC 2013-Beta";
+		#elif (_MSC_FULL_VER == 180021005)
+			static const char *g_lamexp_version_compiler = "MSVC 2013";
+		#else
+			#error Compiler version is not supported yet!
+		#endif
+	#elif (_MSC_VER == 1700)
 		#if (_MSC_FULL_VER < 170050727)
 			static const char *g_lamexp_version_compiler = "MSVC 2012-Beta";
 		#elif (_MSC_FULL_VER < 170051020)
@@ -826,8 +834,19 @@ lamexp_cpu_t lamexp_detect_cpu_features(const QStringList &argv)
 	features.x64 = true;
 #endif
 
-	GetNativeSystemInfo(&systemInfo);
-	features.count = qBound(1UL, systemInfo.dwNumberOfProcessors, 64UL);
+	DWORD_PTR procAffinity, sysAffinity;
+	if(GetProcessAffinityMask(GetCurrentProcess(), &procAffinity, &sysAffinity))
+	{
+		for(DWORD_PTR mask = 1; mask; mask <<= 1)
+		{
+			features.count += ((sysAffinity & mask) ? (1) : (0));
+		}
+	}
+	if(features.count < 1)
+	{
+		GetNativeSystemInfo(&systemInfo);
+		features.count = qBound(1UL, systemInfo.dwNumberOfProcessors, 64UL);
+	}
 
 	if(argv.count() > 0)
 	{
