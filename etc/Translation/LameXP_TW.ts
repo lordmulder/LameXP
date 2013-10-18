@@ -2568,12 +2568,12 @@
         <translation>可執行文件 &apos;%1&apos; 需要 Qt v%2, 但發現 Qt v%3.</translation>
     </message>
     <message>
-        <source>Executable &apos;%1&apos; requires Windows 2000 or later.</source>
-        <translation>可執行文件 &apos;%1&apos; 需要 Windows 2000 或更高版本.</translation>
-    </message>
-    <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>可執行文件 &apos;%1&apos;為Qt &apos;%2&apos;,但發現Qt&apos;%3&apos;.</translation>
+    </message>
+    <message>
+        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

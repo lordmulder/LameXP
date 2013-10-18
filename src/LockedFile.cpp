@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
+#include <stdexcept>
 
 //Windows includes
 #define NOMINMAX
@@ -39,13 +40,6 @@
 #include <Windows.h>
 
 ///////////////////////////////////////////////////////////////////////////////
-
-#define THROW(STR)					\
-{									\
-	char error_msg[512];			\
-	strcpy_s(error_msg, 512, STR);	\
-	throw error_msg;				\
-}
 
 // WARNING: Passing file descriptors into Qt does NOT work with dynamically linked CRT!
 #ifdef QT_NODLL
@@ -91,15 +85,14 @@ static QByteArray fileHash(QFile &file)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, const QByteArray &expectedHash)
+LockedFile::LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash)
 {
 	m_fileHandle = NULL;
-	QResource resource(resourcePath);
 	
 	//Make sure the resource is valid
-	if(!resource.isValid())
+	if(!(resource->isValid() && resource->data()))
 	{
-		THROW(QString("Resource '%1' is invalid!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toUtf8().constData());
+		THROW_FMT("The resource at %p is invalid!", resource);
 	}
 
 	QFile outFile(outPath);
@@ -116,16 +109,16 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	//Write data to file
 	if(outFile.isOpen() && outFile.isWritable())
 	{
-		if(outFile.write(reinterpret_cast<const char*>(resource.data()), resource.size()) != resource.size())
+		if(outFile.write(reinterpret_cast<const char*>(resource->data()), resource->size()) != resource->size())
 		{
 			QFile::remove(QFileInfo(outFile).canonicalFilePath());
-			THROW(QString("File '%1' could not be written!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
+			THROW_FMT("File '%s' could not be written!", QFileInfo(outFile).fileName().toUtf8().constData());
 		}
 		outFile.close();
 	}
 	else
 	{
-		THROW(QString("File '%1' could not be created!").arg(QFileInfo(outFile).fileName()).toUtf8().constData());
+		THROW_FMT("File '%s' could not be created!", QFileInfo(outFile).fileName().toUtf8().constData());
 	}
 
 	//Now lock the file!
@@ -141,9 +134,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
 	{
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
-		char error_msg[512];
-		strcpy_s(error_msg, 512, QString("File '%1' could not be locked!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
-		throw error_msg;
+		THROW_FMT("File '%s' could not be locked!", QFileInfo(outFile).fileName().toUtf8().constData());
 	}
 
 	//Open file for reading
@@ -172,7 +163,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 	else
 	{
 		QFile::remove(m_filePath);
-		THROW(QString("File '%1' could not be read!").arg(QFileInfo(outFile).fileName()).toLatin1().constData());
+		THROW_FMT("File '%s' could not be read!", QFileInfo(outFile).fileName().toUtf8().constData());
 	}
 
 	//Compare hashes
@@ -181,7 +172,7 @@ LockedFile::LockedFile(const QString &resourcePath, const QString &outPath, cons
 		qWarning("\nFile checksum error:\n A = %s\n B = %s\n", expectedHash.constData(), hash.constData());
 		LAMEXP_CLOSE(m_fileHandle);
 		QFile::remove(m_filePath);
-		THROW(QString("File '%1' is corruputed, take care!").arg(QFileInfo(resourcePath).absoluteFilePath().replace(QRegExp("^:/"), QString())).toLatin1().constData());
+		THROW_FMT("File '%s' is corruputed, take care!", QFileInfo(outFile).fileName().toUtf8().constData());
 	}
 }
 
@@ -194,9 +185,7 @@ LockedFile::LockedFile(const QString &filePath)
 	//Make sure the file exists, before we try to lock it
 	if(!existingFile.exists())
 	{
-		char error_msg[256];
-		strcpy_s(error_msg, 256, QString("File '%1' does not exist!").arg(existingFile.fileName()).toLatin1().constData());
-		throw error_msg;
+		THROW_FMT("File '%s' does not exist!", existingFile.fileName().toUtf8().constData());
 	}
 	
 	//Remember file path
@@ -214,7 +203,7 @@ LockedFile::LockedFile(const QString &filePath)
 	//Locked successfully?
 	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
 	{
-		THROW(QString("File '%1' could not be locked!").arg(existingFile.fileName()).toLatin1().constData());
+		THROW_FMT("File '%s' could not be locked!", existingFile.fileName().toUtf8().constData());
 	}
 }
 
@@ -232,6 +221,6 @@ void LockedFile::selfTest()
 {
 	if(!QKeccakHash::selfTest())
 	{
-		qFatal("QKeccakHash self-test has failed!");
+		THROW("QKeccakHash self-test has failed!");
 	}
 }

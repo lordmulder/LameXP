@@ -23,10 +23,12 @@
 
 #include <QString>
 
+class QResource;
+
 class LockedFile
 {
 public:
-	LockedFile(const QString &resourcePath, const QString &outPath, const QByteArray &expectedHash = QByteArray());
+	LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash = QByteArray());
 	LockedFile(const QString &filePath);
 	~LockedFile(void);
 

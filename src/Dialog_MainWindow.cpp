@@ -35,7 +35,6 @@
 #include "Dialog_CueImport.h"
 #include "Dialog_LogView.h"
 #include "Thread_FileAnalyzer.h"
-#include "Thread_FileAnalyzer_ST.h"
 #include "Thread_MessageHandler.h"
 #include "Model_MetaInfo.h"
 #include "Model_Settings.h"

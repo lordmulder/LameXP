@@ -250,3 +250,13 @@ while(0)
 		#error We should not enabled SSE or SSE2 in release builds!
 	#endif
 #endif
+
+//Helper macro for throwing exceptions
+#define THROW(MESSAGE) throw std::runtime_error((MESSAGE))
+#define THROW_FMT(FORMAT, ...) do \
+{ \
+	char error_msg[512]; \
+	_snprintf_s(error_msg, 512, _TRUNCATE, (FORMAT), __VA_ARGS__); \
+	throw std::runtime_error(error_msg); \
+} \
+while(0)

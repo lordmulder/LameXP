@@ -35,6 +35,7 @@
 #include <QRunnable>
 #include <QThreadPool>
 #include <QMutex>
+#include <QQueue>
 
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
@@ -50,16 +51,21 @@ static const size_t BUFF_SIZE = 512;
 class ExtractorTask : public QRunnable
 {
 public:
-	ExtractorTask(const QDir &appDir, const QString &toolName, const QString &toolShortName, const QByteArray &toolHash, const unsigned int toolVersion, const QString &toolTag)
+	ExtractorTask(QResource *const toolResource, const QDir &appDir, const QString &toolName, const QByteArray &toolHash, const unsigned int toolVersion, const QString &toolTag)
 	:
 		m_appDir(appDir),
 		m_toolName(toolName),
-		m_toolShortName(toolShortName),
 		m_toolHash(toolHash),
 		m_toolVersion(toolVersion),
-		m_toolTag(toolTag)
+		m_toolTag(toolTag),
+		m_toolResource(toolResource)
 	{
 		/* Nothing to do */
+	}
+
+	~ExtractorTask(void)
+	{
+		delete m_toolResource;
 	}
 
 	static void clearFlags(void)
@@ -91,16 +97,27 @@ protected:
 		{
 			if(!getExcept()) doExtract();
 		}
-		catch(char *errorMsg)
+		catch(const std::runtime_error &e)
 		{
 			QMutexLocker lock(&s_mutex);
 			if(!s_bExcept)
 			{
 				s_bExcept = true;
-				strncpy_s(s_errMsg, BUFF_SIZE, errorMsg, _TRUNCATE);
-				lock.unlock();
-				qWarning("ExtractorTask error:\n%s", errorMsg);
+				strncpy_s(s_errMsg, BUFF_SIZE, e.what(), _TRUNCATE);
 			}
+			lock.unlock();
+			qWarning("ExtractorTask exception error:\n%s\n\n", e.what());
+		}
+		catch(...)
+		{
+			QMutexLocker lock(&s_mutex);
+			if(!s_bExcept)
+			{
+				s_bExcept = true;
+				strncpy_s(s_errMsg, BUFF_SIZE, "Unknown exception error!", _TRUNCATE);
+			}
+			lock.unlock();
+			qWarning("ExtractorTask encountered an unknown exception!");
 		}
 	}
 
@@ -109,28 +126,31 @@ protected:
 		LockedFile *lockedFile = NULL;
 		unsigned int version = m_toolVersion;
 
-		QFileInfo customTool(QString("%1/tools/%2/%3").arg(m_appDir.canonicalPath(), QString::number(lamexp_version_build()), m_toolShortName));
+		QFileInfo toolFileInfo(m_toolName);
+		const QString toolShortName = QString("%1.%2").arg(toolFileInfo.baseName().toLower(), toolFileInfo.suffix().toLower());
+
+		QFileInfo customTool(QString("%1/tools/%2/%3").arg(m_appDir.canonicalPath(), QString::number(lamexp_version_build()), toolShortName));
 		if(customTool.exists() && customTool.isFile())
 		{
-			qDebug("Setting up file: %s <- %s", m_toolShortName.toLatin1().constData(), m_appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
+			qDebug("Setting up file: %s <- %s", toolShortName.toLatin1().constData(), m_appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
 			lockedFile = new LockedFile(customTool.canonicalFilePath()); version = UINT_MAX; s_bCustom = true;
 		}
 		else
 		{
-			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), m_toolShortName.toLatin1().constData());
-			lockedFile = new LockedFile(QString(":/tools/%1").arg(m_toolName), QString("%1/lxp_%2").arg(lamexp_temp_folder2(), m_toolShortName), m_toolHash);
+			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), toolShortName.toLatin1().constData());
+			lockedFile = new LockedFile(m_toolResource, QString("%1/lxp_%2").arg(lamexp_temp_folder2(), toolShortName), m_toolHash);
 		}
 
 		if(lockedFile)
 		{
-			lamexp_register_tool(m_toolShortName, lockedFile, version, &m_toolTag);
+			lamexp_register_tool(toolShortName, lockedFile, version, &m_toolTag);
 		}
 	}
 
 private:
+	QResource *const m_toolResource;
 	const QDir m_appDir;
 	const QString m_toolName;
-	const QString m_toolShortName;
 	const QByteArray m_toolHash;
 	const unsigned int m_toolVersion;
 	const QString m_toolTag;
@@ -142,9 +162,9 @@ private:
 };
 
 QMutex ExtractorTask::s_mutex;
+char ExtractorTask::s_errMsg[BUFF_SIZE] = {'\0'};
 volatile bool ExtractorTask::s_bExcept = false;
 volatile bool ExtractorTask::s_bCustom = false;
-char ExtractorTask::s_errMsg[BUFF_SIZE] = {'\0'};
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -203,10 +223,11 @@ void InitializationThread::run()
 	}
 
 	//Allocate maps
-	QMap<QString, QString> mapChecksum;
-	QMap<QString, unsigned int> mapVersion;
-	QMap<QString, unsigned int> mapCpuType;
-	QMap<QString, QString> mapVersTag;
+	QQueue<QString> queueToolName;
+	QQueue<QString> queueChecksum;
+	QQueue<QString> queueVersInfo;
+	QQueue<unsigned int> queueVersions;
+	QQueue<unsigned int> queueCpuTypes;
 
 	//Init properties
 	for(int i = 0; true; i++)
@@ -217,11 +238,11 @@ void InitializationThread::run()
 		}
 		else if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash && g_lamexp_tools[i].uiVersion)
 		{
-			const QString currentTool = QString::fromLatin1(g_lamexp_tools[i].pcName);
-			mapChecksum.insert(currentTool, QString::fromLatin1(g_lamexp_tools[i].pcHash));
-			mapCpuType.insert(currentTool, g_lamexp_tools[i].uiCpuType);
-			mapVersion.insert(currentTool, g_lamexp_tools[i].uiVersion);
-			mapVersTag.insert(currentTool, g_lamexp_tools[i].pcVersTag);
+			queueToolName.enqueue(QString::fromLatin1(g_lamexp_tools[i].pcName));
+			queueChecksum.enqueue(QString::fromLatin1(g_lamexp_tools[i].pcHash));
+			queueVersInfo.enqueue(QString::fromLatin1(g_lamexp_tools[i].pcVersTag));
+			queueCpuTypes.enqueue(g_lamexp_tools[i].uiCpuType);
+			queueVersions.enqueue(g_lamexp_tools[i].uiVersion);
 		}
 		else
 		{
@@ -229,8 +250,6 @@ void InitializationThread::run()
 		}
 	}
 
-	QDir toolsDir(":/tools/");
-	QList<QFileInfo> toolsList = toolsDir.entryInfoList(QStringList("*.*"), QDir::Files, QDir::Name);
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
 	QThreadPool *pool = new QThreadPool();
@@ -246,34 +265,42 @@ void InitializationThread::run()
 	const long long timeExtractStart = lamexp_perfcounter_value();
 	
 	//Extract all files
-	while(!toolsList.isEmpty())
+	while(!(queueToolName.isEmpty() || queueChecksum.isEmpty() || queueVersInfo.isEmpty() || queueCpuTypes.isEmpty() || queueVersions.isEmpty()))
 	{
-		try
+		const QString toolName = queueToolName.dequeue();
+		const QString checksum = queueChecksum.dequeue();
+		const QString versInfo = queueVersInfo.dequeue();
+		const unsigned int cpuType = queueCpuTypes.dequeue();
+		const unsigned int version = queueVersions.dequeue();
+			
+		const QByteArray toolHash(checksum.toLatin1());
+		if(toolHash.size() != 96)
 		{
-			QFileInfo currentTool = toolsList.takeFirst();
-			QString toolName = currentTool.fileName().toLower();
-			QString toolShortName = QString("%1.%2").arg(currentTool.baseName().toLower(), currentTool.suffix().toLower());
-			
-			QByteArray toolHash = mapChecksum.take(toolName).toLatin1();
-			unsigned int toolCpuType = mapCpuType.take(toolName);
-			unsigned int toolVersion = mapVersion.take(toolName);
-			QString toolVersTag = mapVersTag.take(toolName);
-			
-			if(toolHash.size() != 96)
-			{
-				throw "The required checksum is missing, take care!";
-			}
-			
-			if(toolCpuType & cpuSupport)
-			{
-				pool->start(new ExtractorTask(appDir, toolName, toolShortName, toolHash, toolVersion, toolVersTag));
-			}
-		}
-		catch(char *errorMsg)
-		{
-			qFatal("At least one of the required tools could not be initialized:\n%s", errorMsg);
+			qFatal("The checksum for \"%s\" has an invalid size!", toolName.toUtf8().constData());
 			return;
 		}
+			
+		QResource *resource = new QResource(QString(":/tools/%1").arg(toolName));
+		if(!(resource->isValid() && resource->data()))
+		{
+			LAMEXP_DELETE(resource);
+			qFatal("The resource for \"%s\" could not be found!", toolName.toUtf8().constData());
+			return;
+		}
+			
+		if(cpuType & cpuSupport)
+		{
+			pool->start(new ExtractorTask(resource, appDir, toolName, toolHash, version, versInfo));
+			continue;
+		}
+
+		LAMEXP_DELETE(resource);
+	}
+
+	//Sanity Check
+	if(!(queueToolName.isEmpty() && queueChecksum.isEmpty() && queueVersInfo.isEmpty() && queueCpuTypes.isEmpty() && queueVersions.isEmpty()))
+	{
+		qFatal("Checksum queues *not* empty fater verification completed. Take care!");
 	}
 
 	//Wait for extrator threads to finish
@@ -295,20 +322,8 @@ void InitializationThread::run()
 		return;
 	}
 
-	//Make sure all files were extracted
-	if(!mapChecksum.isEmpty())
-	{
-		qFatal("At least one required tool could not be found:\n%s", toolsDir.filePath(mapChecksum.keys().first()).toLatin1().constData());
-		return;
-	}
-
 	qDebug("All extracted.\n");
 
-	//Clean-up
-	mapChecksum.clear();
-	mapVersion.clear();
-	mapCpuType.clear();
-	
 	//Using any custom tools?
 	if(ExtractorTask::getCustom())
 	{

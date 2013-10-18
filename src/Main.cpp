@@ -243,17 +243,21 @@ static int _main(int argc, char* argv[])
 			iResult = lamexp_main(argc, argv);
 			lamexp_finalization();
 		}
+		catch(const std::runtime_error &error)
+		{
+			fflush(stdout); fflush(stderr);
+			fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error:\n%s\n", error);
+			lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
+		}
 		catch(char *error)
 		{
-			fflush(stdout);
-			fflush(stderr);
+			fflush(stdout); fflush(stderr);
 			fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error message: %s\n", error);
 			lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 		}
 		catch(int error)
 		{
-			fflush(stdout);
-			fflush(stderr);
+			fflush(stdout); fflush(stderr);
 			fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error code: 0x%X\n", error);
 			lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 		}
