@@ -46,7 +46,7 @@ public:
 			return false;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -62,7 +62,7 @@ public:
 			return 0;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -78,7 +78,7 @@ public:
 			return -1;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -93,7 +93,7 @@ public:
 		case SettingsModel::CBRMode:
 			return -1;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -115,7 +115,7 @@ FLACEncoder::FLACEncoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing FLAC encoder. Tool 'flac.exe' is not registred!";
+		THROW("Error initializing FLAC encoder. Tool 'flac.exe' is not registred!");
 	}
 }
 

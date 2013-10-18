@@ -39,7 +39,7 @@ ResampleFilter::ResampleFilter(int samplingRate, int bitDepth)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing SoX filter. Tool 'sox.exe' is not registred!";
+		THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
 	}
 
 	m_samplingRate = (samplingRate > 0) ? qBound(8000, samplingRate, 192000) : 0;

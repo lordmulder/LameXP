@@ -485,7 +485,7 @@ const QDate &lamexp_version_date(void)
 		}
 		else
 		{
-			throw "Internal error: Date format could not be recognized!";
+			THROW("Internal error: Date format could not be recognized!");
 		}
 	}
 
@@ -531,7 +531,7 @@ const lamexp_os_version_t *lamexp_get_os_version(void)
 		}
 		else
 		{
-			throw "GetVersionEx() has failed. This is not supposed to happen!";
+			THROW("GetVersionEx() has failed. This is not supposed to happen!");
 		}
 		
 		g_lamexp_os_version.bInitialized = true;
@@ -1419,7 +1419,7 @@ void lamexp_ipc_send(unsigned int command, const char* message)
 
 	if(!g_lamexp_ipc_ptr.sharedmem || !g_lamexp_ipc_ptr.semaphore_read || !g_lamexp_ipc_ptr.semaphore_write || !g_lamexp_ipc_ptr.semaphore_read_mutex || !g_lamexp_ipc_ptr.semaphore_write_mutex)
 	{
-		throw "Shared memory for IPC not initialized yet.";
+		THROW("Shared memory for IPC not initialized yet.");
 	}
 
 	lamexp_ipc_data_t ipc_data;
@@ -1456,7 +1456,7 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 	
 	if(!g_lamexp_ipc_ptr.sharedmem || !g_lamexp_ipc_ptr.semaphore_read || !g_lamexp_ipc_ptr.semaphore_write || !g_lamexp_ipc_ptr.semaphore_read_mutex || !g_lamexp_ipc_ptr.semaphore_write_mutex)
 	{
-		throw "Shared memory for IPC not initialized yet.";
+		THROW("Shared memory for IPC not initialized yet.");
 	}
 
 	lamexp_ipc_data_t ipc_data;
@@ -1688,7 +1688,7 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned in
 
 	if(g_lamexp_tools.registry->contains(toolName.toLower()))
 	{
-		throw "lamexp_register_tool: Tool is already registered!";
+		THROW("lamexp_register_tool: Tool is already registered!");
 	}
 
 	g_lamexp_tools.registry->insert(toolName.toLower(), file);
@@ -2273,7 +2273,7 @@ void lamexp_blink_window(QWidget *poWindow, unsigned int count, unsigned int del
 		QApplication::processEvents();
 		blinkMutex.unlock();
 	}
-	catch (...)
+	catch(...)
 	{
 		blinkMutex.unlock();
 		qWarning("Exception error while blinking!");
@@ -3064,6 +3064,6 @@ unsigned long lamexp_dbg_private_bytes(void)
 	GetProcessMemoryInfo(GetCurrentProcess(), (PPROCESS_MEMORY_COUNTERS) &memoryCounters, sizeof(PROCESS_MEMORY_COUNTERS_EX));
 	return memoryCounters.PrivateUsage;
 #else
-	throw "Cannot call this function in a non-debug build!";
+	THROW("Cannot call this function in a non-debug build!");
 #endif //LAMEXP_DEBUG
 }

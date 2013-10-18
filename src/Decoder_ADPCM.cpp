@@ -33,7 +33,7 @@ ADPCMDecoder::ADPCMDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing Vorbis decoder. Tool 'sox.exe' is not registred!";
+		THROW("Error initializing Vorbis decoder. Tool 'sox.exe' is not registred!");
 	}
 }
 

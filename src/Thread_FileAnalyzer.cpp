@@ -307,6 +307,11 @@ bool FileAnalyzer::createTemplate(void)
 	{
 		m_templateFile = new LockedFile(templatePath);
 	}
+	catch(const std::exception &error)
+	{
+		qWarning("Failed to lock template file:\n%s\n", error.what());
+		return false;
+	}
 	catch(...)
 	{
 		qWarning("Failed to lock template file!");
@@ -359,7 +364,7 @@ void FileAnalyzer::taskFileAnalyzed(const unsigned int taskId, const int fileTyp
 		m_filesRejected++;
 		break;
 	default:
-		throw "Unknown file type identifier!";
+		THROW("Unknown file type identifier!");
 	}
 
 	//Emit all pending files

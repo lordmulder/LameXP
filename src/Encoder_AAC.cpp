@@ -48,7 +48,7 @@ class AACEncoderInfo : public AbstractEncoderInfo
 			return true;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -64,7 +64,7 @@ class AACEncoderInfo : public AbstractEncoderInfo
 			return 41;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -80,7 +80,7 @@ class AACEncoderInfo : public AbstractEncoderInfo
 			return qBound(8, index2bitrate(index), 400);
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -98,7 +98,7 @@ class AACEncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -122,7 +122,7 @@ AACEncoder::AACEncoder(void)
 {
 	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty() || m_binary_sox.isEmpty())
 	{
-		throw "Error initializing AAC encoder. Tool 'neroAacEnc.exe' is not registred!";
+		THROW("Error initializing AAC encoder. Tool 'neroAacEnc.exe' is not registred!");
 	}
 
 	m_configProfile = 0;
@@ -151,7 +151,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		args << "-cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 400) * 1000);
 		break;
 	default:
-		throw "Bad rate-control mode!";
+		THROW("Bad rate-control mode!");
 		break;
 	}
 

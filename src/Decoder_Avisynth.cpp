@@ -33,7 +33,7 @@ AvisynthDecoder::AvisynthDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing Avisynth decoder. Tool 'avs2wav.exe' is not registred!";
+		THROW("Error initializing Avisynth decoder. Tool 'avs2wav.exe' is not registred!");
 	}
 }
 

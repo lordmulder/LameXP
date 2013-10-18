@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "Global.h"
 #include "Tool_Abstract.h"
 #include "Model_AudioFile.h"
 
@@ -74,7 +75,7 @@ public:
 	//Encoder info
 	static const AbstractEncoderInfo *getEncoderInfo(void)
 	{
-		throw "This method shall be re-implemented in derived classes!";
+		THROW("This method shall be re-implemented in derived classes!");
 		return NULL;
 	}
 

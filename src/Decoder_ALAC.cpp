@@ -34,7 +34,7 @@ ALACDecoder::ALACDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing ALAC decoder. Tool 'refalac.exe' is not registred!";
+		THROW("Error initializing ALAC decoder. Tool 'refalac.exe' is not registred!");
 	}
 }
 

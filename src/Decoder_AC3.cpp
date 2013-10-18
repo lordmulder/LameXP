@@ -33,7 +33,7 @@ AC3Decoder::AC3Decoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing Valib decoder. Tool 'valdec.exe' is not registred!";
+		THROW("Error initializing Valib decoder. Tool 'valdec.exe' is not registred!");
 	}
 }
 

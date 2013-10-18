@@ -33,7 +33,7 @@ VorbisDecoder::VorbisDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing Vorbis decoder. Tool 'oggdec.exe' is not registred!";
+		THROW("Error initializing Vorbis decoder. Tool 'oggdec.exe' is not registred!");
 	}
 }
 

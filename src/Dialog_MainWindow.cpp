@@ -1597,6 +1597,8 @@ void MainWindow::aboutButtonClicked(void)
 		aboutBox->exec();
 		LAMEXP_DELETE(aboutBox);
 	);
+
+	THROW_FMT("TEST ALDER %u!", 667);
 }
 
 /*
@@ -3162,7 +3164,7 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 				}
 				else
 				{
-					throw "Oups, this is not supposed to happen!";
+					THROW("Oups, this is not supposed to happen!");
 				}
 			}
 		}
@@ -3241,7 +3243,7 @@ void MainWindow::updateEncoder(int id)
 	if(ui->radioButtonModeQuality->isEnabled())             ui->radioButtonModeQuality->setChecked(true);
 	else if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
 	else if(ui->radioButtonConstBitrate->isEnabled())       ui->radioButtonConstBitrate->setChecked(true);
-	else throw "It appears that the encoder does not support *any* RC mode!";
+	else THROW("It appears that the encoder does not support *any* RC mode!");
 
 	//Apply current RC mode
 	const int currentRCMode = EncoderRegistry::loadEncoderMode(m_settings, id);
@@ -3250,7 +3252,7 @@ void MainWindow::updateEncoder(int id)
 		case SettingsModel::VBRMode: if(ui->radioButtonModeQuality->isEnabled())        ui->radioButtonModeQuality->setChecked(true);        break;
 		case SettingsModel::ABRMode: if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true); break;
 		case SettingsModel::CBRMode: if(ui->radioButtonConstBitrate->isEnabled())       ui->radioButtonConstBitrate->setChecked(true);       break;
-		default: throw "updateEncoder(): Unknown rc-mode encountered!";
+		default: THROW("updateEncoder(): Unknown rc-mode encountered!");
 	}
 
 	//Display encoder description
@@ -3371,7 +3373,7 @@ void MainWindow::updateBitrate(int value)
 		ui->labelBitrate->setText(tr("Uncompressed"));
 		break;
 	default:
-		throw "Unknown display value type encountered!";
+		THROW("Unknown display value type encountered!");
 		break;
 	}
 }

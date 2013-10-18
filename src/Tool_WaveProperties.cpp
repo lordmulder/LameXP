@@ -32,7 +32,7 @@ WaveProperties::WaveProperties(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing MP3 encoder. Tool 'lame.exe' is not registred!";
+		THROW("Error initializing MP3 encoder. Tool 'lame.exe' is not registred!");
 	}
 }
 

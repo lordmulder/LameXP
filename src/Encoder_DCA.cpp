@@ -51,7 +51,7 @@ class DCAEncoderInfo : public AbstractEncoderInfo
 			return true;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -67,7 +67,7 @@ class DCAEncoderInfo : public AbstractEncoderInfo
 			return 32;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -83,7 +83,7 @@ class DCAEncoderInfo : public AbstractEncoderInfo
 			return qBound(32, index2bitrate(index), 4096);
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -99,7 +99,7 @@ class DCAEncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			throw "Bad RC mode specified!";
+			THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -121,7 +121,7 @@ DCAEncoder::DCAEncoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing DCA encoder. Tool 'dcaenc.exe' is not registred!";
+		THROW("Error initializing DCA encoder. Tool 'dcaenc.exe' is not registred!");
 	}
 }
 

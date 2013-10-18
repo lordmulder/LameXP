@@ -209,7 +209,7 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 {
 	if(m_binaryWGet.isEmpty() || m_binaryGnuPG.isEmpty() || m_binaryUpdater.isEmpty() || m_binaryKeys.isEmpty())
 	{
-		throw "Tools not initialized correctly!";
+		THROW("Tools not initialized correctly!");
 	}
 	
 	//Init the dialog, from the .ui file

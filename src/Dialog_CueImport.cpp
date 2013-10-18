@@ -338,10 +338,16 @@ void CueImportDialog::importCueSheet(void)
 		try
 		{
 			m_locks << new LockedFile(temp);
+		
 		}
-		catch(char *err)
+		catch(const std::exception &error)
 		{
-			qWarning("Failed to lock file: %s", err);
+			qWarning("Failed to lock file:\n%s\n", error.what());
+			continue;
+		}
+		catch(...)
+		{
+			qWarning("Failed to lock file!");
 			continue;
 		}
 		files << temp;

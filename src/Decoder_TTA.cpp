@@ -34,7 +34,7 @@ TTADecoder::TTADecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing TTA decoder. Tool 'ttaenc.exe' is not registred!";
+		THROW("Error initializing TTA decoder. Tool 'ttaenc.exe' is not registred!");
 	}
 }
 

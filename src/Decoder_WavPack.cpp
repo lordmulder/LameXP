@@ -33,7 +33,7 @@ WavPackDecoder::WavPackDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing WavPack decoder. Tool 'wvunpack.exe' is not registred!";
+		THROW("Error initializing WavPack decoder. Tool 'wvunpack.exe' is not registred!");
 	}
 }
 

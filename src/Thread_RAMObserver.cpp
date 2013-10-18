@@ -53,12 +53,17 @@ void RAMObserverThread::run(void)
 	{
 		observe();
 	}
+	catch(const std::exception &error)
+	{
+		fflush(stdout); fflush(stderr);
+		fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
+		lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
+	}
 	catch(...)
 	{
-		fflush(stdout);
-		fflush(stderr);
-		fprintf(stderr, "\nGURU MEDITATION !!!\n");
-		lamexp_fatal_exit(L"Unhandeled exception error, application will exit!");
+		fflush(stdout); fflush(stderr);
+		fprintf(stderr, "\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
+		lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 
 	while(m_semaphore.available()) m_semaphore.tryAcquire();

@@ -33,7 +33,7 @@ NormalizeFilter::NormalizeFilter(int peakVolume, int equalizationMode)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing SoX filter. Tool 'sox.exe' is not registred!";
+		THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
 	}
 
 	m_peakVolume = qMin(-50, qMax(-3200, peakVolume));

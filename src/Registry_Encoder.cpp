@@ -113,7 +113,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 				}
 				break;
 			default:
-				throw "makeEncoder(): Unknown AAC encoder specified!";
+				THROW("makeEncoder(): Unknown AAC encoder specified!");
 				break;
 			}
 		}
@@ -162,13 +162,13 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 		break;
 	/*-------- default --------*/
 	default:
-		throw "Unsupported encoder!";
+		THROW("Unsupported encoder!");
 	}
 
 	//Sanity checking
 	if(!encoder)
 	{
-		throw "No encoder instance has been assigend!";
+		THROW("No encoder instance has been assigend!");
 	}
 
 	//Apply common settings
@@ -202,16 +202,16 @@ const AbstractEncoderInfo *EncoderRegistry::getEncoderInfo(const int encoderId)
 				case SettingsModel::AAC_ENCODER_QAAC: info = QAACEncoder::getEncoderInfo();   break;
 				case SettingsModel::AAC_ENCODER_FHG:  info = FHGAACEncoder::getEncoderInfo(); break;
 				case SettingsModel::AAC_ENCODER_NERO: info = AACEncoder::getEncoderInfo();    break;
-				default: throw "Unknown AAC encoder specified!";
+				default: THROW("Unknown AAC encoder specified!");
 			}
 			break;
-		default: throw "Unsupported encoder!";
+		default: THROW("Unsupported encoder!");
 	}
 
 	//Sanity checking
 	if(!info)
 	{
-		throw "No encoder instance has been assigend!";
+		THROW("No encoder instance has been assigend!");
 	}
 
 	return info;
@@ -238,7 +238,7 @@ void EncoderRegistry::saveEncoderMode(SettingsModel *settings, const int encoder
 	//Sanity checking
 	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
 	{
-		throw "Unknown rate-control mode!";
+		THROW("Unknown rate-control mode!");
 	}
 
 	//Store the encoder bitrate/quality value
@@ -252,7 +252,7 @@ void EncoderRegistry::saveEncoderMode(SettingsModel *settings, const int encoder
 		case SettingsModel::OpusEncoder:   STORE_MODE(OpusEnc, rcMode); break;
 		case SettingsModel::DCAEncoder:    STORE_MODE(DcaEnc,  rcMode); break;
 		case SettingsModel::PCMEncoder:    STORE_MODE(Wave,    rcMode); break;
-		default: throw "Unsupported encoder!";
+		default: THROW("Unsupported encoder!");
 	}
 }
 
@@ -271,7 +271,7 @@ int EncoderRegistry::loadEncoderMode(const SettingsModel *settings, const int en
 		case SettingsModel::OpusEncoder:   LOAD_MODE(rcMode, OpusEnc); break;
 		case SettingsModel::DCAEncoder:    LOAD_MODE(rcMode, DcaEnc);  break;
 		case SettingsModel::PCMEncoder:    LOAD_MODE(rcMode, Wave);    break;
-		default: throw "Unsupported encoder!";
+		default: THROW("Unsupported encoder!");
 	}
 
 	return rcMode;
@@ -302,7 +302,7 @@ void EncoderRegistry::saveEncoderValue(SettingsModel *settings, const int encode
 	//Sanity checking
 	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
 	{
-		throw "Unknown rate-control mode!";
+		THROW("Unknown rate-control mode!");
 	}
 
 	//Store the encoder bitrate/quality value
@@ -316,7 +316,7 @@ void EncoderRegistry::saveEncoderValue(SettingsModel *settings, const int encode
 		case SettingsModel::OpusEncoder:   STORE_VALUE(OpusEnc, rcMode, value); break;
 		case SettingsModel::DCAEncoder:    STORE_VALUE(DcaEnc,  rcMode, value); break;
 		case SettingsModel::PCMEncoder:    STORE_VALUE(Wave,    rcMode, value); break;
-		default: throw "Unsupported encoder!";
+		default: THROW("Unsupported encoder!");
 	}
 }
 
@@ -327,7 +327,7 @@ int EncoderRegistry::loadEncoderValue(const SettingsModel *settings, const int e
 	//Sanity checking
 	if((rcMode < SettingsModel::VBRMode) || (rcMode > SettingsModel::CBRMode))
 	{
-		throw "Unknown rate-control mode!";
+		THROW("Unknown rate-control mode!");
 	}
 
 	//Load the encoder bitrate/quality value
@@ -341,7 +341,7 @@ int EncoderRegistry::loadEncoderValue(const SettingsModel *settings, const int e
 		case SettingsModel::OpusEncoder:   LOAD_VALUE(value, OpusEnc, rcMode); break;
 		case SettingsModel::DCAEncoder:    LOAD_VALUE(value, DcaEnc,  rcMode); break;
 		case SettingsModel::PCMEncoder:    LOAD_VALUE(value, Wave,    rcMode); break;
-		default: throw "Unsupported encoder!";
+		default: THROW("Unsupported encoder!");
 	}
 
 	return value;
@@ -376,7 +376,7 @@ void EncoderRegistry::saveEncoderCustomParams(SettingsModel *settings, const int
 		case SettingsModel::OpusEncoder:   STORE_PARAMS(OpusEnc, params.trimmed()); break;
 		case SettingsModel::DCAEncoder:    STORE_PARAMS(DcaEnc,  params.trimmed()); break;
 		case SettingsModel::PCMEncoder:    STORE_PARAMS(Wave,    params.trimmed()); break;
-		default: throw "Unsupported encoder!";
+		default: THROW("Unsupported encoder!");
 	}
 }
 
@@ -395,7 +395,7 @@ QString EncoderRegistry::loadEncoderCustomParams(const SettingsModel *settings, 
 		case SettingsModel::OpusEncoder:   LOAD_PARAMS(params, OpusEnc); break;
 		case SettingsModel::DCAEncoder:    LOAD_PARAMS(params, DcaEnc);  break;
 		case SettingsModel::PCMEncoder:    LOAD_PARAMS(params, Wave);    break;
-		default: throw "Unsupported encoder!";
+		default: THROW("Unsupported encoder!");
 	}
 
 	return params;

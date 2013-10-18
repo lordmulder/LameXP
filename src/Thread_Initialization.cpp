@@ -97,7 +97,7 @@ protected:
 		{
 			if(!getExcept()) doExtract();
 		}
-		catch(const std::runtime_error &e)
+		catch(const std::exception &e)
 		{
 			QMutexLocker lock(&s_mutex);
 			if(!s_bExcept)
@@ -219,7 +219,7 @@ void InitializationThread::run()
 		PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
 		PRINT_CPU_TYPE(CPU_TYPE_X64_GEN); break;
 		PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
-		default: throw "CPU support undefined!";
+		default: THROW("CPU support undefined!");
 	}
 
 	//Allocate maps
@@ -782,7 +782,7 @@ void InitializationThread::selfTest(void)
 			PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X64_GEN); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
-			default: throw "CPU support undefined!";
+			default: THROW("CPU support undefined!");
 		}
 		int n = 0;
 		for(int i = 0; i < INT_MAX; i++)

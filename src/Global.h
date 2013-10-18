@@ -252,11 +252,15 @@ while(0)
 #endif
 
 //Helper macro for throwing exceptions
-#define THROW(MESSAGE) throw std::runtime_error((MESSAGE))
+#define THROW(MESSAGE) do \
+{ \
+	throw std::runtime_error((MESSAGE)); \
+} \
+while(0)
 #define THROW_FMT(FORMAT, ...) do \
 { \
-	char error_msg[512]; \
-	_snprintf_s(error_msg, 512, _TRUNCATE, (FORMAT), __VA_ARGS__); \
-	throw std::runtime_error(error_msg); \
+	char _error_msg[512]; \
+	_snprintf_s(_error_msg, 512, _TRUNCATE, (FORMAT), __VA_ARGS__); \
+	throw std::runtime_error(_error_msg); \
 } \
 while(0)

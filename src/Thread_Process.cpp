@@ -125,7 +125,7 @@ bool ProcessThread::start(QThreadPool *pool)
 	//Make sure object was initialized correctly
 	if(m_initialized < 0)
 	{
-		throw "Object not initialized yet!";
+		THROW("Object not initialized yet!");
 	}
 
 	if(m_initialized < 1)
@@ -177,12 +177,17 @@ void ProcessThread::run()
 	{
 		processFile();
 	}
+	catch(const std::exception &error)
+	{
+		fflush(stdout); fflush(stderr);
+		fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
+		lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
+	}
 	catch(...)
 	{
-		fflush(stdout);
-		fflush(stderr);
-		fprintf(stderr, "\nGURU MEDITATION !!!\n");
-		lamexp_fatal_exit(L"Unhandeled exception error, application will exit!");
+		fflush(stdout); fflush(stderr);
+		fprintf(stderr, "\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
+		lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 }
 
@@ -194,7 +199,7 @@ void ProcessThread::processFile()
 	//Make sure object was initialized correctly
 	if(m_initialized < 1)
 	{
-		throw "Object not initialized yet!";
+		THROW("Object not initialized yet!");
 	}
 
 	QString sourceFile = m_audioFile.filePath();

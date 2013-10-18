@@ -52,7 +52,7 @@ QMutex ShellIntegration::m_mutex;
 
 ShellIntegration::ShellIntegration(void)
 {
-	throw "Cannot create instance of this class, sorry!";
+	THROW("Cannot create instance of this class, sorry!");
 }
 
 ////////////////////////////////////////////////////////////

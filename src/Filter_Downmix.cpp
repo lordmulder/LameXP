@@ -35,7 +35,7 @@ DownmixFilter::DownmixFilter(void)
 {
 	if(m_binary.isEmpty())
 	{
-		throw "Error initializing SoX filter. Tool 'sox.exe' is not registred!";
+		THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
 	}
 }
 
