@@ -1597,8 +1597,6 @@ void MainWindow::aboutButtonClicked(void)
 		aboutBox->exec();
 		LAMEXP_DELETE(aboutBox);
 	);
-
-	THROW_FMT("TEST ALDER %u!", 667);
 }
 
 /*

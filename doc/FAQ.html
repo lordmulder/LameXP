@@ -917,6 +917,7 @@ Please see the guide for translators at:<br><ul>
 The latest "official" release of LameXP can be found on the following mirrors:<br><ul>
 <li><a href="http://sourceforge.net/projects/lamexp/files/" target="_blank">http://sourceforge.net/projects/lamexp/files/</a>
 <li><a href="http://developer.berlios.de/project/showfiles.php?group_id=13288" target="_blank">http://developer.berlios.de/project/showfiles.php?group_id=13288</a>
+<li><a href="https://lamexp.codeplex.com/releases/view/113532" target="_blank">https://lamexp.codeplex.com/releases/view/113532</a>
 <li><a href="https://code.google.com/p/mulder/downloads/list" target="_blank">http://code.google.com/p/mulder/downloads/list</a>
 <li><a href="https://bitbucket.org/lord_mulder/lamexp/downloads" target="_blank">https://bitbucket.org/lord_mulder/lamexp/downloads</a>
 <li><a href="http://www.free-codecs.com/lamexp_download.htm" target="_blank">http://www.free-codecs.com/lamexp_download.htm</a></ul>
@@ -945,6 +946,7 @@ application framework and offers full Unicode support. For the time being LameXP
 LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a> revision control system. You can access one of the public mirrors:<br><ul>
 <li><font class="code">git clone git://git.code.sf.net/p/lamexp/code lamexp-src</font> (<a href="http://sourceforge.net/p/lamexp/code/" target="_blank">Browse</a>)
 <li><font class="code">git clone git://git.berlios.de/lamexp lamexp-src</font> (<a href="http://git.berlios.de/cgi-bin/gitweb.cgi?p=lamexp" target="_blank">Browse</a>)
+<li><font class="code">git clone https://git01.codeplex.com/lamexp lamexp-src</font> (<a href="https://lamexp.codeplex.com/SourceControl/latest" target="_blank">Browse</a>)
 <li><font class="code">git clone https://github.com/lordmulder/LameXP.git lamexp-src</font> (<a href="https://github.com/lordmulder/LameXP" target="_blank">Browse</a>)
 <li><font class="code">git clone https://bitbucket.org/lord_mulder/lamexp.git lamexp-src</font> (<a href="https://bitbucket.org/lord_mulder/lamexp/src" target="_blank">Browse</a>)
 <li><font class="code">git clone git://gitorious.org/lamexp/lamexp.git lamexp-src</font> (<a href="http://gitorious.org/lamexp/lamexp/trees/master" target="_blank">Browse</a>)</ul>
@@ -957,9 +959,9 @@ For Windows users, we highly recommend using <a href="http://msysgit.github.com/
 <a name="a0c1e92b"></a><b>What are the prerequisites to build LameXP from the sources?</b><br>
 <br>
 LameXP is currently being developed using the following build environment:<br><ul>
-<li><a href="http://www.microsoft.com/visualstudio/eng/downloads#d-2012-express" target="_blank">Visual Studio 2012</a> with <a href="http://www.microsoft.com/en-us/download/details.aspx?id=34818" target="_blank">Update-3</a>, running on Windows 7 with Service Pack 1
+<li><a href="http://www.microsoft.com/visualstudio/eng/downloads#d-2013-express" target="_blank">Visual Studio 2013</a>, running on Windows 7 with Service Pack 1
 <li><a href="http://qt-project.org/downloads#qt-lib" target="_blank">Qt libraries 4.8.5</a> for Windows
-<li>Windows Platform SDK v7.1A, included with the Update-1 of Visual Studio 2012
+<li>Windows Platform SDK v7.1A, included with Visual Studio 2013 or Visual Studio 2012 (Update-3)
 <li>The minimum supported *build* platform is Windows 7 (x86 and x64)</ul>
 <br>
 Also note the following hints:<br><ul>
@@ -969,7 +971,7 @@ Also note the following hints:<br><ul>
 <li>Support for the GNU Toolchain (GCC/MinGW + MSYS/Make) is planned for a future version of LameXP</ul>
 <br>
 In order to use the LameXP deployment scripts you need the following tools:<br><ul>
-<li>Visual Studio 2012 (Express for Windows Desktop) with Update-1 <b>+</b> Desktop Qt v4.8.x (MSVC 2010)
+<li>Visual Studio (Express) 2013 for Windows Desktop <b>+</b> Desktop Qt v4.8.x (VS 2010)
 <li><a href="http://www.7-zip.org/" target="_blank">7-Zip</a> - file archiver with a high compression ratio
 <li><a href="http://nsis.sourceforge.net/" target="_blank">NSIS</a> - Nullsoft Scriptable Install System (<a href="http://www.scratchpaper.com/" target="_blank">Unicode version</a> recommended!)<ul>
 <li><a href="http://nsis.sourceforge.net/StdUtils_plug-in" target="_blank">StdUtils plug-in</a>
@@ -977,7 +979,6 @@ In order to use the LameXP deployment scripts you need the following tools:<br><
 <li><a href="http://nsis.sourceforge.net/Inetc_plug-in" target="_blank">Inetc plug-in</a>
 <li><a href="http://forums.winamp.com/showthread.php?t=329990" target="_blank">Aero plug-in</a></ul>
 <li><a href="http://upx.sourceforge.net/" target="_blank">UPX</a> - the Ultimate Packer for eXecutables
-<li><a href="http://www.matcode.com/mpress.htm" target="_blank">MPRESS</a> - high-performance executable packer for PE32/PE32+
 <li style="margin-bottom:0.48em"><a href="ftp://ftp.gnupg.org/gcrypt/binary/" target="_blank">GnuPG</a> - the GNU Privacy Guard v1.4.x
 <li>NOTE: Copy <font class="code">buildenv.template.txt</font> to <font class="code">buildenv.txt</font> and edit the paths as needed!</ul>
 
@@ -988,7 +989,7 @@ In order to use the LameXP deployment scripts you need the following tools:<br><
 In order to make "fully static" builds of LameXP, i.e. builds that don't depend pn any DLL's except for the<br>
 obligatory operating system DLL's, you'll need to compile Qt as 'static' libraries. The following simple<br>
 instructions should make it easy to build Qt from the sources and as "static" libraries:<br><ul>
-<li>Make sure Visual Studio 2010 with Service Pack 1 or Visual Studio 2012 with Update 1 are installed
+<li>Make sure Visual Studio 2013 or Visual Studio 2012 with Update-3 (or later) is installed
 <li>Make sure <a href="http://strawberryperl.com/" target="_blank">Strawberry</a> Perl for Windows and <a href="http://www.activestate.com/activepython/downloads" target="_blank">Python</a> 2.7 are installed
 <li><a href="http://qt-project.org/downloads" target="_blank">Download</a> and <a href="http://www.rarlabs.com/" target="_blank">extract</a> the Qt 4.8.x source code package (e.g. to <font class="code">C:\QtSources\4.8.x</font>)
 <li>Edit the file <font class="code">mkspecs\win32-msvc2010\qmake.conf</font> from your Qt Sources directory as follows:<ul>
@@ -1000,7 +1001,7 @@ instructions should make it easy to build Qt from the sources and as "static" li
 <li>Run <font class="code">vcvarsall.bat x86</font> form your Visual C++ install directory - within the same console!
 <li>Change the current directory to the Qt Sources path (e.g. <font class="code">C:\QtSources\4.8.x</font>)
 <li>Run <font class="code">configure.exe -release -static -ltcg -qt-zlib -qt-libpng -qt-libjpeg -qt-libtiff -qt-libmng</font><ul>
-<li>Hint: For Visual Studio 2012 you currently need to add <font class="code">-platform win32-msvc2010</font> too</ul>
+<li>Hint: For Visual Studio 2013 you currently need to add <font class="code">-platform win32-msvc2012</font> too</ul>
 <li>Now the makefiles should have been generated, so simply enter <font class="code">nmake /B</font> and be patient - voilà!
 <li>The build process is going to take good amount of time. Once done, make sure you got all needed libs
 <li>Libraries you'll need to build LameXP as a "static" binary include the following:<ul>
