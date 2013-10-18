@@ -1,6 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
-    <file>tools/mediainfo.i386.exe</file>
+    <file>tools/oggenc2.sse2.exe</file>
   </qresource>
 </RCC>

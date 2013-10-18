@@ -391,6 +391,15 @@
     <ClCompile Include="tmp\QRC_Tools_Misc_B.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Misc_C.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Encd_C.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Tools_Encd_D.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -716,8 +725,15 @@
     <CustomBuild Include="res\Tools_Misc_A.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools_Encd_B.qrc" />
-    <CustomBuild Include="res\Tools_Misc_B.qrc" />
+    <CustomBuild Include="res\Tools_Encd_B.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Misc_B.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Encd_C.qrc" />
+    <CustomBuild Include="res\Tools_Encd_D.qrc" />
+    <CustomBuild Include="res\Tools_Misc_C.qrc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MainIcon.ico" />
