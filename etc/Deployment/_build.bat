@@ -7,7 +7,7 @@ echo ----------------------------------------------------------------
 call "%~dp0\_paths.bat"
 if not "%LAMEXP_ERROR%"=="0" GOTO:EOF
 REM -----------------------------------------------------------------
-call "%PATH_MSVC90%\VC\bin\vcvars32.bat" x86
+call "%PATH_MSCDIR%\VC\bin\vcvars32.bat" x86
 if exist "%PATH_QTMSVC%\bin\qtenv2.bat" call "%PATH_QTMSVC%\bin\qtenv2.bat"
 if exist "%PATH_QTMSVC%\bin\qtvars.bat" call "%PATH_QTMSVC%\bin\qtvars.bat"
 REM -----------------------------------------------------------------
