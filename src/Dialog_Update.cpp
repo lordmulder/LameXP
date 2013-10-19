@@ -43,6 +43,7 @@
 #include <QCloseEvent>
 #include <QMovie>
 #include <QtConcurrentRun>
+#include <QFutureWatcher>
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -77,8 +78,6 @@ static const char *update_mirrors_prim[] =
 static const char *update_mirrors_back[] =
 {
 	"http://mplayer.savedonthe.net/",
-	"http://www.rarewares.org/",
-	"http://lord_mulder.doom9.net/",
 	NULL
 };
 
@@ -95,17 +94,19 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites 
 	"http://www.babylon.com/",
 	"http://www.baidu.com/",
 	"http://www.bbc.co.uk/",
+	"http://www.berlios.de/",
 	"http://www.bing.com/",
 	"http://www.cnet.com/",
 	"http://cnzz.com/",
 	"http://codecs.com/",
+	"http://www.codeplex.com/",
 	"http://qt.digia.com/",
 	"http://www.ebay.com/",
 	"http://www.equation.com/",
 	"http://fc2.com/",
 	"http://www.ffmpeg.org/",
 	"http://www.flickr.com/",
-	"http://www.gitorious.org/",
+	"http://blog.gitorious.org/",
 	"http://git-scm.com/",
 	"http://www.gnome.org/",
 	"http://www.gnu.org/",
@@ -117,7 +118,7 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites 
 	"http://www.imdb.com/",
 	"http://www.imgburn.com/",
 	"http://imgur.com/",
-	"http://en.jd.com/", //http://en.360buy.com/
+	"http://en.jd.com/",
 	"http://mirrors.kernel.org/",
 	"http://www.libav.org/",
 	"http://www.linkedin.com/",
@@ -162,6 +163,18 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites 
 static const int MIN_CONNSCORE = 8;
 static const int VERSION_INFO_EXPIRES_MONTHS = 6;
 static char *USER_AGENT_STR = "Mozilla/5.0 (X11; Linux i686; rv:7.0.1) Gecko/20111106 IceCat/7.0.1";
+
+///////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+T DO_ASYNC(T (*functionPointer)())
+{
+	QFutureWatcher<T> watcher; QEventLoop loop;
+	QObject::connect(&watcher, SIGNAL(finished()), &loop, SLOT(quit()));
+	watcher.setFuture(QtConcurrent::run(functionPointer));
+	loop.exec(QEventLoop::ExcludeUserInputEvents);
+	return watcher.result();
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -339,7 +352,7 @@ void UpdateDialog::updateInit(void)
 {
 	setMinimumSize(size());
 	setMaximumHeight(height());
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	checkForUpdates();
 }
 
@@ -364,7 +377,7 @@ void UpdateDialog::checkForUpdates(void)
 	if(ui->hintIcon->isVisible()) ui->hintIcon->hide();
 	ui->frameAnimation->show();
 
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
 	// ----- Test Internet Connection ----- //
@@ -374,13 +387,8 @@ void UpdateDialog::checkForUpdates(void)
 	m_logFile->clear();
 	m_logFile->append("Checking internet connection...");
 	
-	QFuture<bool> connectedState = QtConcurrent::run(lamexp_get_connection_state);
-	while(!connectedState.isFinished())
-	{
-		QApplication::processEvents(QEventLoop::WaitForMoreEvents);
-	}
-
-	if(!connectedState.result())
+	const int networkStatus = DO_ASYNC(lamexp_network_status);
+	if(networkStatus == lamexp_network_non)
 	{
 		m_logFile->append(QStringList() << "" << "Operating system reports that the computer is currently offline !!!");
 		if(!ui->retryButton->isVisible()) ui->retryButton->show();
@@ -405,7 +413,7 @@ void UpdateDialog::checkForUpdates(void)
 	}
 	
 	ui->progressBar->setValue(1);
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	// ----- Test Known Hosts Connectivity ----- //
 
@@ -428,14 +436,14 @@ void UpdateDialog::checkForUpdates(void)
 			{
 				connectionScore++;
 				ui->progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-				QApplication::processEvents();
+				QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 				lamexp_sleep(64);
 			}
 			if(httpOk)
 			{
 				connectionScore++;
 				ui->progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-				QApplication::processEvents();
+				QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 				lamexp_sleep(64);
 			}
 			QFile::remove(outFile);
@@ -506,7 +514,7 @@ void UpdateDialog::checkForUpdates(void)
 		}
 		else
 		{
-			QApplication::processEvents();
+			QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 			lamexp_sleep(64);
 		}
 	}
@@ -540,7 +548,7 @@ void UpdateDialog::checkForUpdates(void)
 	ui->labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
 	ui->infoLabel->show();
 	ui->infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), m_updateInfo->m_downloadSite));
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	
 	if(m_updateInfo->m_buildNo > lamexp_version_build())
 	{
@@ -869,7 +877,7 @@ void UpdateDialog::applyUpdate(void)
 		int oldMax = ui->progressBar->maximum();
 		int oldMin = ui->progressBar->minimum();
 		ui->progressBar->setRange(0, 0);
-		QApplication::processEvents();
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 		
 		QProcess process;
 		QStringList args;
@@ -956,7 +964,7 @@ void UpdateDialog::testKnownWebSites(void)
 	if(ui->hintIcon->isVisible()) ui->hintIcon->hide();
 	ui->frameAnimation->show();
 
-	QApplication::processEvents();
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
 	// ----- Test Internet Connection ----- //
@@ -966,13 +974,8 @@ void UpdateDialog::testKnownWebSites(void)
 	m_logFile->clear();
 	m_logFile->append("Checking internet connection...");
 	
-	QFuture<bool> connectedState = QtConcurrent::run(lamexp_get_connection_state);
-	while(!connectedState.isFinished())
-	{
-		QApplication::processEvents(QEventLoop::WaitForMoreEvents);
-	}
-
-	if(!connectedState.result())
+	const int networkStatus = DO_ASYNC(lamexp_network_status);
+	if(networkStatus == lamexp_network_non)
 	{
 		m_logFile->append(QStringList() << "" << "Operating system reports that the computer is currently offline !!!");
 		if(!ui->retryButton->isVisible()) ui->retryButton->show();
