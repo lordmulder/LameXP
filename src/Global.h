@@ -97,6 +97,15 @@ typedef enum
 }
 lamexp_beep_t;
 
+//Network connection types
+typedef enum
+{
+	lamexp_network_err = 0,	/*unknown*/
+	lamexp_network_non = 1,	/*not connected*/
+	lamexp_network_yes = 2	/*connected*/
+}
+lamexp_network_t;
+
 //LameXP version info
 unsigned int lamexp_version_major(void);
 unsigned int lamexp_version_minor(void);
@@ -184,7 +193,7 @@ bool lamexp_change_process_priority(const QProcess *proc, const int priority);
 bool lamexp_change_process_priority(void *hProcess, const int priority);
 bool lamexp_bring_to_front(const QWidget *win);
 bool lamexp_bring_process_to_front(const unsigned long pid);
-bool lamexp_get_connection_state(void);
+int lamexp_network_status(void);
 unsigned long lamexp_process_id(const QProcess *proc);
 unsigned __int64 lamexp_current_file_time(void);
 void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase);

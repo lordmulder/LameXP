@@ -27,7 +27,7 @@
 #include <Windows.h>
 #include <MMSystem.h>
 #include <ShellAPI.h>
-#include <WinInet.h>
+#include <SensAPI.h>
 
 //Qt includes
 #include <QApplication>
@@ -492,6 +492,82 @@ const QDate &lamexp_version_date(void)
 	return g_lamexp_version_date;
 }
 
+static bool lamexp_verify_os_version(const DWORD major, const DWORD minor, const BYTE opMajor, const BYTE opMinor)
+{
+	qDebug("checkOsVersion %u.%u (%u,%u)\n", major, minor, (unsigned int)opMajor, (unsigned int)opMinor);
+
+	OSVERSIONINFOEX osvi;
+	DWORDLONG dwlConditionMask = 0;
+
+	//Initialize the OSVERSIONINFOEX structure.
+	memset(&osvi, 0, sizeof(OSVERSIONINFOEX));
+	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+	osvi.dwMajorVersion = major;
+	osvi.dwMinorVersion = minor;
+	osvi.dwPlatformId = VER_PLATFORM_WIN32_NT;
+
+	//Initialize the condition mask
+	VER_SET_CONDITION(dwlConditionMask, VER_MAJORVERSION, opMajor);
+	VER_SET_CONDITION(dwlConditionMask, VER_MINORVERSION, opMinor);
+	VER_SET_CONDITION(dwlConditionMask, VER_PLATFORMID, VER_EQUAL);
+
+	// Perform the test
+	const BOOL ret = VerifyVersionInfo(&osvi, VER_MAJORVERSION | VER_MINORVERSION | VER_PLATFORMID, dwlConditionMask);
+
+	//Error checking
+	if(!ret)
+	{
+		if(GetLastError() != ERROR_OLD_WIN_VERSION)
+		{
+			qWarning("VerifyVersionInfo() system call has failed!");
+		}
+	}
+
+	return (ret != FALSE);
+}
+
+/*
+ * Determine the *real* Windows version
+ */
+static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor)
+{
+	*major = *minor = UINT_MAX;
+	
+	//Determine the *major* version first
+	for(DWORD i = 3; i < 100; i++)
+	{
+		if(lamexp_verify_os_version(i, 0, VER_GREATER_EQUAL, VER_GREATER_EQUAL))
+		{
+			*major = i;
+			continue;
+		}
+		break;
+	}
+
+	//Now also determine the *minor* version
+	if((*major) != UINT_MAX)
+	{
+		for(DWORD i = 0; i < 100; i++)
+		{
+			if(lamexp_verify_os_version((*major), i, VER_EQUAL, VER_GREATER_EQUAL))
+			{
+				*minor = i;
+				continue;
+			}
+			break;
+		}
+	}
+
+	//Check for completeness
+	if(((*major) == UINT_MAX) || ((*minor) == UINT_MAX))
+	{
+		*major = *minor = 0;
+		return false;
+	}
+
+	return true;
+}
+
 /*
  * Get the native operating system version
  */
@@ -511,33 +587,20 @@ const lamexp_os_version_t *lamexp_get_os_version(void)
 	//Detect OS version
 	if(!g_lamexp_os_version.bInitialized)
 	{
-		OSVERSIONINFO osVerInfo;
-		memset(&osVerInfo, 0, sizeof(OSVERSIONINFO));
-		osVerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	
-		if(GetVersionEx(&osVerInfo) == TRUE)
+		unsigned int major, minor;
+		if(lamexp_get_real_os_version(&major, &minor))
 		{
-			if(osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT)
-			{
-				g_lamexp_os_version.version.versionMajor = osVerInfo.dwMajorVersion;
-				g_lamexp_os_version.version.versionMinor = osVerInfo.dwMinorVersion;
-			}
-			else
-			{
-				qWarning("lamexp_get_os_version: Not running under Windows NT, this is not supposed to happen!");
-				g_lamexp_os_version.version.versionMajor = 0;
-				g_lamexp_os_version.version.versionMinor = 0;
-			}
+			g_lamexp_os_version.version.versionMajor = major;
+			g_lamexp_os_version.version.versionMinor = minor;
+			g_lamexp_os_version.bInitialized = true;
 		}
 		else
 		{
-			THROW("GetVersionEx() has failed. This is not supposed to happen!");
+			qWarning("Failed to determin the operating system version!");
 		}
-		
-		g_lamexp_os_version.bInitialized = true;
 	}
 
-	return  &g_lamexp_os_version.version;
+	return &g_lamexp_os_version.version;
 }
 
 /*
@@ -1199,46 +1262,44 @@ bool lamexp_init_qt(int argc, char* argv[])
 #endif
 
 	//Check the Windows version
-	switch(QSysInfo::windowsVersion() & QSysInfo::WV_NT_based)
+	const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
+	if(LAMEXP_MAX_OS_VER(osVersionNo, 5, 0))
 	{
-	case 0:
-	case QSysInfo::WV_NT:
-	case QSysInfo::WV_2000:
 		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
-		break;
-	case QSysInfo::WV_XP:
+	}
+	else if(LAMEXP_EQL_OS_VER(osVersionNo, 5, 1))
+	{
 		qDebug("Running on Windows XP.\n");
 		lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
-		break;
-	case QSysInfo::WV_2003:
+	}
+	else if(LAMEXP_EQL_OS_VER(osVersionNo, 5, 2))
+	{
 		qDebug("Running on Windows Server 2003 or Windows XP x64-Edition.\n");
 		lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
-		break;
-	case QSysInfo::WV_VISTA:
+	}
+	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 0))
+	{
 		qDebug("Running on Windows Vista or Windows Server 2008.\n");
 		lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName);
-		break;
-	case QSysInfo::WV_WINDOWS7:
+	}
+	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 1))
+	{
 		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
 		lamexp_check_compatibility_mode("CreateFile2", executableName);
-		break;
-	case QSysInfo::WV_WINDOWS8:
+	}
+	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 2))
+	{
 		qDebug("Running on Windows 8 or Windows Server 2012.\n");
 		lamexp_check_compatibility_mode(NULL, executableName);
-		break;
-	default:
-		{
-			const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
-			if(LAMEXP_MAX_OS_VER(osVersionNo, 5, 0))
-			{
-				qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
-			}
-			else
-			{
-				qWarning("Running on an unknown/untested WindowsNT-based OS (v%u.%u).\n", osVersionNo->versionMajor, osVersionNo->versionMinor);
-			}
-		}
-		break;
+	}
+	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 3))
+	{
+		qDebug("Running on Windows 8.1 or Windows Server 2012 R2.\n");
+		lamexp_check_compatibility_mode(NULL, executableName);
+	}
+	else
+	{
+		qWarning("Running on an unknown/untested WindowsNT-based OS (v%u.%u).\n", osVersionNo->versionMajor, osVersionNo->versionMinor);
 	}
 
 	//Check for Wine
@@ -2760,13 +2821,17 @@ bool lamexp_bring_process_to_front(const unsigned long pid)
 }
 
 /*
- * Check the Internet connection status
+ * Check the network connection status
  */
-bool lamexp_get_connection_state(void)
+int lamexp_network_status(void)
 {
-	DWORD lpdwFlags = NULL;
-	BOOL result = InternetGetConnectedState(&lpdwFlags, NULL);
-	return result == TRUE;
+	DWORD dwFlags;
+	const BOOL ret = (IsNetworkAlive(&dwFlags) == TRUE);
+	if(GetLastError() == 0)
+	{
+		return (ret == TRUE) ? lamexp_network_yes : lamexp_network_non;
+	}
+	return lamexp_network_err;
 }
 
 /*
