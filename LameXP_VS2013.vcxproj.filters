@@ -731,9 +731,15 @@
     <CustomBuild Include="res\Tools_Misc_B.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools_Encd_C.qrc" />
-    <CustomBuild Include="res\Tools_Encd_D.qrc" />
-    <CustomBuild Include="res\Tools_Misc_C.qrc" />
+    <CustomBuild Include="res\Tools_Encd_C.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Encd_D.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Misc_C.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MainIcon.ico" />
