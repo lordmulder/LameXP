@@ -291,6 +291,15 @@ static FILE *g_lamexp_log_file = NULL;
 const char* LAMEXP_DEFAULT_LANGID = "en";
 const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
 
+//Known Windows versions - maps marketing names to the actual Windows NT versions
+const lamexp_os_version_t lamexp_winver_win2k = {5,0};
+const lamexp_os_version_t lamexp_winver_winxp = {5,1};
+const lamexp_os_version_t lamexp_winver_xpx64 = {5,2};
+const lamexp_os_version_t lamexp_winver_vista = {6,0};
+const lamexp_os_version_t lamexp_winver_win70 = {6,1};
+const lamexp_os_version_t lamexp_winver_win80 = {6,2};
+const lamexp_os_version_t lamexp_winver_win81 = {6,3};
+
 ///////////////////////////////////////////////////////////////////////////////
 // COMPILER INFO
 ///////////////////////////////////////////////////////////////////////////////
@@ -492,27 +501,25 @@ const QDate &lamexp_version_date(void)
 	return g_lamexp_version_date;
 }
 
-static bool lamexp_verify_os_version(const DWORD major, const DWORD minor, const BYTE opMajor, const BYTE opMinor)
+static bool lamexp_verify_os_version(const DWORD major, const DWORD minor)
 {
-	qDebug("checkOsVersion %u.%u (%u,%u)\n", major, minor, (unsigned int)opMajor, (unsigned int)opMinor);
-
-	OSVERSIONINFOEX osvi;
+	OSVERSIONINFOEXW osvi;
 	DWORDLONG dwlConditionMask = 0;
 
-	//Initialize the OSVERSIONINFOEX structure.
-	memset(&osvi, 0, sizeof(OSVERSIONINFOEX));
-	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+	//Initialize the OSVERSIONINFOEX structure
+	memset(&osvi, 0, sizeof(OSVERSIONINFOEXW));
+	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEXW);
 	osvi.dwMajorVersion = major;
 	osvi.dwMinorVersion = minor;
 	osvi.dwPlatformId = VER_PLATFORM_WIN32_NT;
 
 	//Initialize the condition mask
-	VER_SET_CONDITION(dwlConditionMask, VER_MAJORVERSION, opMajor);
-	VER_SET_CONDITION(dwlConditionMask, VER_MINORVERSION, opMinor);
+	VER_SET_CONDITION(dwlConditionMask, VER_MAJORVERSION, VER_GREATER_EQUAL);
+	VER_SET_CONDITION(dwlConditionMask, VER_MINORVERSION, VER_GREATER_EQUAL);
 	VER_SET_CONDITION(dwlConditionMask, VER_PLATFORMID, VER_EQUAL);
 
 	// Perform the test
-	const BOOL ret = VerifyVersionInfo(&osvi, VER_MAJORVERSION | VER_MINORVERSION | VER_PLATFORMID, dwlConditionMask);
+	const BOOL ret = VerifyVersionInfoW(&osvi, VER_MAJORVERSION | VER_MINORVERSION | VER_PLATFORMID, dwlConditionMask);
 
 	//Error checking
 	if(!ret)
@@ -531,54 +538,62 @@ static bool lamexp_verify_os_version(const DWORD major, const DWORD minor, const
  */
 static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor)
 {
-	*major = *minor = UINT_MAX;
+	*major = *minor = 0;
 	
-	//Determine the *major* version first
-	for(DWORD i = 3; i < 100; i++)
+	//Initialize local variables
+	OSVERSIONINFOEXW osvi;
+	memset(&osvi, 0, sizeof(OSVERSIONINFOEXW));
+	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEXW);
+
+	//Try GetVersionEx() first
+	if(GetVersionExW((LPOSVERSIONINFOW)&osvi) != FALSE)
 	{
-		if(lamexp_verify_os_version(i, 0, VER_GREATER_EQUAL, VER_GREATER_EQUAL))
+		if(osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
 		{
-			*major = i;
+			*major = osvi.dwMajorVersion;
+			*minor = osvi.dwMinorVersion;
+		}
+	}
+
+	//Determine the real *major* version first
+	forever
+	{
+		const DWORD nextMajor = (*major) + 1;
+		if(lamexp_verify_os_version(nextMajor, 0))
+		{
+			*major = nextMajor;
+			*minor = 0;
 			continue;
 		}
 		break;
 	}
 
-	//Now also determine the *minor* version
-	if((*major) != UINT_MAX)
+	//Now also determine the real *minor* version
+	forever
 	{
-		for(DWORD i = 0; i < 100; i++)
+		const DWORD nextMinor = (*minor) + 1;
+		if(lamexp_verify_os_version((*major), nextMinor))
 		{
-			if(lamexp_verify_os_version((*major), i, VER_EQUAL, VER_GREATER_EQUAL))
-			{
-				*minor = i;
-				continue;
-			}
-			break;
+			*minor = nextMinor;
+			continue;
 		}
+		break;
 	}
 
-	//Check for completeness
-	if(((*major) == UINT_MAX) || ((*minor) == UINT_MAX))
-	{
-		*major = *minor = 0;
-		return false;
-	}
-
-	return true;
+	return ((*major) > 0);
 }
 
 /*
  * Get the native operating system version
  */
-const lamexp_os_version_t *lamexp_get_os_version(void)
+const lamexp_os_version_t &lamexp_get_os_version(void)
 {
 	QReadLocker readLock(&g_lamexp_os_version.lock);
 
 	//Already initialized?
 	if(g_lamexp_os_version.bInitialized)
 	{
-		return &g_lamexp_os_version.version;
+		return g_lamexp_os_version.version;
 	}
 	
 	readLock.unlock();
@@ -600,7 +615,7 @@ const lamexp_os_version_t *lamexp_get_os_version(void)
 		}
 	}
 
-	return &g_lamexp_os_version.version;
+	return g_lamexp_os_version.version;
 }
 
 /*
@@ -1262,44 +1277,48 @@ bool lamexp_init_qt(int argc, char* argv[])
 #endif
 
 	//Check the Windows version
-	const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
-	if(LAMEXP_MAX_OS_VER(osVersionNo, 5, 0))
+	const lamexp_os_version_t &osVersionNo = lamexp_get_os_version();
+	if(osVersionNo < lamexp_winver_winxp)
 	{
 		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
 	}
-	else if(LAMEXP_EQL_OS_VER(osVersionNo, 5, 1))
+
+	//Check for compat mode
+	if(osVersionNo == lamexp_winver_winxp)
 	{
 		qDebug("Running on Windows XP.\n");
 		lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
 	}
-	else if(LAMEXP_EQL_OS_VER(osVersionNo, 5, 2))
+	else if(osVersionNo == lamexp_winver_xpx64)
 	{
 		qDebug("Running on Windows Server 2003 or Windows XP x64-Edition.\n");
 		lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
 	}
-	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 0))
+	else if(osVersionNo == lamexp_winver_vista)
 	{
 		qDebug("Running on Windows Vista or Windows Server 2008.\n");
 		lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName);
 	}
-	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 1))
+	else if(osVersionNo == lamexp_winver_win70)
 	{
 		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
 		lamexp_check_compatibility_mode("CreateFile2", executableName);
 	}
-	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 2))
+	else if(osVersionNo == lamexp_winver_win80)
 	{
 		qDebug("Running on Windows 8 or Windows Server 2012.\n");
-		lamexp_check_compatibility_mode(NULL, executableName);
+		lamexp_check_compatibility_mode("FindPackagesByPackageFamily", executableName);
 	}
-	else if(LAMEXP_EQL_OS_VER(osVersionNo, 6, 3))
+	else if(osVersionNo == lamexp_winver_win81)
 	{
 		qDebug("Running on Windows 8.1 or Windows Server 2012 R2.\n");
 		lamexp_check_compatibility_mode(NULL, executableName);
 	}
 	else
 	{
-		qWarning("Running on an unknown/untested WindowsNT-based OS (v%u.%u).\n", osVersionNo->versionMajor, osVersionNo->versionMinor);
+		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersionNo.versionMajor, osVersionNo.versionMinor);
+		qWarning("%s\n", message.toUtf8().constData());
+		MessageBoxW(NULL, QWCHAR(message), L"LameXP", MB_OK | MB_TOPMOST | MB_ICONWARNING);
 	}
 
 	//Check for Wine
@@ -2196,8 +2215,8 @@ bool lamexp_themes_enabled(void)
 	if(!g_lamexp_themes_enabled.bInitialized)
 	{
 		g_lamexp_themes_enabled.bThemesEnabled = false;
-		const lamexp_os_version_t * osVersion = lamexp_get_os_version();
-		if(LAMEXP_MIN_OS_VER(osVersion, 5, 1))
+		const lamexp_os_version_t &osVersion = lamexp_get_os_version();
+		if(osVersion >= lamexp_winver_winxp)
 		{
 			IsAppThemedFun IsAppThemedPtr = NULL;
 			QLibrary uxTheme(QString("%1/UxTheme.dll").arg(lamexp_known_folder(lamexp_folder_systemfolder)));

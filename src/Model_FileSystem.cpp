@@ -264,8 +264,8 @@ bool QFileSystemModelEx::hasSubfolders(const QString &path)
 {
 	if(s_findFirstFileExInfoLevel == INT_MAX)
 	{
-		const lamexp_os_version_t *osVersionNo = lamexp_get_os_version();
-		s_findFirstFileExInfoLevel = LAMEXP_MIN_OS_VER(osVersionNo, 6, 1) ? FindExInfoBasic : FindExInfoStandard;
+		const lamexp_os_version_t &osVersionNo = lamexp_get_os_version();
+		s_findFirstFileExInfoLevel = (osVersionNo >= lamexp_winver_win70) ? FindExInfoBasic : FindExInfoStandard;
 	}
 
 	WIN32_FIND_DATAW findData;

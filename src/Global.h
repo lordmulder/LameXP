@@ -81,12 +81,29 @@ typedef enum
 lamexp_event_t;
 
 //OS version number
-typedef struct
+typedef struct _lamexp_os_version_t
 {
 	unsigned int versionMajor;
 	unsigned int versionMinor;
+
+	//comparision operators
+	inline bool operator== (const _lamexp_os_version_t &rhs) const { return (versionMajor == rhs.versionMajor) && (versionMinor == rhs.versionMinor); }
+	inline bool operator!= (const _lamexp_os_version_t &rhs) const { return (versionMajor != rhs.versionMajor) || (versionMinor != rhs.versionMinor); }
+	inline bool operator>  (const _lamexp_os_version_t &rhs) const { return (versionMajor > rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >  rhs.versionMinor)); }
+	inline bool operator>= (const _lamexp_os_version_t &rhs) const { return (versionMajor > rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >= rhs.versionMinor)); }
+	inline bool operator<  (const _lamexp_os_version_t &rhs) const { return (versionMajor < rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <  rhs.versionMinor)); }
+	inline bool operator<= (const _lamexp_os_version_t &rhs) const { return (versionMajor < rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <= rhs.versionMinor)); }
 }
 lamexp_os_version_t;
+
+//Known Windows versions
+extern const lamexp_os_version_t lamexp_winver_win2k;
+extern const lamexp_os_version_t lamexp_winver_winxp;
+extern const lamexp_os_version_t lamexp_winver_xpx64;
+extern const lamexp_os_version_t lamexp_winver_vista;
+extern const lamexp_os_version_t lamexp_winver_win70;
+extern const lamexp_os_version_t lamexp_winver_win80;
+extern const lamexp_os_version_t lamexp_winver_win81;
 
 //Beep types
 typedef enum
@@ -125,7 +142,7 @@ unsigned int lamexp_toolver_coreaudio(void);
 const char *lamexp_website_url(void);
 const char *lamexp_mulders_url(void);
 const char *lamexp_support_url(void);
-const lamexp_os_version_t *lamexp_get_os_version(void);
+const lamexp_os_version_t &lamexp_get_os_version(void);
 bool lamexp_detect_wine(void);
 
 //Public functions
@@ -209,9 +226,6 @@ unsigned long lamexp_dbg_private_bytes(void);
 #define LAMEXP_DELETE_ARRAY(PTR) do { if(PTR) { delete [] PTR; PTR = NULL; } } while(0)
 #define LAMEXP_SAFE_FREE(PTR) do { if(PTR) { free((void*) PTR); PTR = NULL; } } while(0)
 #define LAMEXP_CLOSE(HANDLE) do { if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; } } while(0)
-#define LAMEXP_MIN_OS_VER(VER_INFO, VER_MAJ, VER_MIN) (((VER_INFO)->versionMajor > (VER_MAJ)) || (((VER_INFO)->versionMajor == (VER_MAJ)) && ((VER_INFO)->versionMinor >= (VER_MIN))))
-#define LAMEXP_MAX_OS_VER(VER_INFO, VER_MAJ, VER_MIN) (((VER_INFO)->versionMajor < (VER_MAJ)) || (((VER_INFO)->versionMajor == (VER_MAJ)) && ((VER_INFO)->versionMinor <= (VER_MIN))))
-#define LAMEXP_EQL_OS_VER(VER_INFO, VER_MAJ, VER_MIN) (((VER_INFO)->versionMajor == (VER_MAJ)) && ((VER_INFO)->versionMinor == (VER_MIN)))
 #define QWCHAR(STR) reinterpret_cast<const wchar_t*>((STR).utf16())
 #define WCHAR2QSTR(STR) QString::fromUtf16(reinterpret_cast<const unsigned short*>(STR))
 #define LAMEXP_BOOL2STR(X) (X ? "1" : "0")
