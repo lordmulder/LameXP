@@ -54,7 +54,7 @@ static const char *g_blnk = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdea
 static const char *g_seed = "c375d83b4388329408dfcbb4d9a065b6e06d28272f25ef299c70b506e26600af79fd2f866ae24602daf38f25c9d4b7e1";
 static const char *g_salt = "ee9f7bdabc170763d2200a7e3030045aafe380011aefc1730e547e9244c62308aac42a976feeca224ba553de0c4bb883";
 
-static QByteArray fileHash(QFile &file)
+QByteArray LockedFile::fileHash(QFile &file)
 {
 	QByteArray hash = QByteArray::fromHex(g_blnk);
 

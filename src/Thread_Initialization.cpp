@@ -771,7 +771,10 @@ void InitializationThread::initQAac(void)
 
 void InitializationThread::selfTest(void)
 {
+	static const unsigned int expcetedCount = 27;
 	const unsigned int cpu[4] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE};
+
+	LockedFile::selfTest();
 
 	for(size_t k = 0; k < 4; k++)
 	{
@@ -784,21 +787,43 @@ void InitializationThread::selfTest(void)
 			PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
 			default: THROW("CPU support undefined!");
 		}
-		int n = 0;
-		for(int i = 0; i < INT_MAX; i++)
+		unsigned int n = 0;
+		for(int i = 0; true; i++)
 		{
-			if(!g_lamexp_tools[i].pcName && !g_lamexp_tools[i].pcHash && !g_lamexp_tools[i].uiVersion)
+			if(!(g_lamexp_tools[i].pcName || g_lamexp_tools[i].pcHash  || g_lamexp_tools[i].uiVersion))
 			{
 				break;
 			}
-			if(g_lamexp_tools[i].uiCpuType & cpu[k])
+			else if(g_lamexp_tools[i].pcName && g_lamexp_tools[i].pcHash && g_lamexp_tools[i].uiVersion)
 			{
-				qDebug("%02i -> %s", ++n, g_lamexp_tools[i].pcName);
+				const QString toolName = QString::fromLatin1(g_lamexp_tools[i].pcName);
+				const QByteArray expectedHash = QByteArray(g_lamexp_tools[i].pcHash);
+				if(g_lamexp_tools[i].uiCpuType & cpu[k])
+				{
+					qDebug("%02i -> %s", ++n, toolName.toUtf8().constData());
+					QFile resource(QString(":/tools/%1").arg(toolName));
+					if(!resource.open(QIODevice::ReadOnly))
+					{
+						qFatal("The resource for \"%s\" could not be opened!", toolName.toUtf8().constData());
+						break;
+					}
+					QByteArray hash = LockedFile::fileHash(resource);
+					if(hash.isNull() || _stricmp(hash.constData(), expectedHash.constData()))
+					{
+						qFatal("Hash check for tool \"%s\" has failed!", toolName.toUtf8().constData());
+						break;
+					}
+					resource.close();
+				}
+			}
+			else
+			{
+				qFatal("Inconsistent checksum data detected. Take care!");
 			}
 		}
-		if(n != 27)
+		if(n != expcetedCount)
 		{
-			qFatal("Tool count mismatch !!!");
+			qFatal("Tool count mismatch for CPU type %u !!!", cpu[4]);
 		}
 		qDebug("Done.\n");
 	}

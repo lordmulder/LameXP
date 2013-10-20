@@ -24,6 +24,7 @@
 #include <QString>
 
 class QResource;
+class QFile;
 
 class LockedFile
 {
@@ -35,6 +36,7 @@ public:
 	const QString &filePath();
 
 	static void selfTest();
+	static QByteArray fileHash(QFile &file);
 
 private:
 	QString m_filePath;
