@@ -536,9 +536,10 @@ static bool lamexp_verify_os_version(const DWORD major, const DWORD minor)
 /*
  * Determine the *real* Windows version
  */
-static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor)
+static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor, bool *pbOverride)
 {
 	*major = *minor = 0;
+	*pbOverride = false;
 	
 	//Initialize local variables
 	OSVERSIONINFOEXW osvi;
@@ -546,13 +547,22 @@ static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor)
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEXW);
 
 	//Try GetVersionEx() first
-	if(GetVersionExW((LPOSVERSIONINFOW)&osvi) != FALSE)
+	if(GetVersionExW((LPOSVERSIONINFOW)&osvi) == FALSE)
 	{
-		if(osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
-		{
-			*major = osvi.dwMajorVersion;
-			*minor = osvi.dwMinorVersion;
-		}
+		qWarning("GetVersionEx() has failed, cannot detect Windows version!");
+		return false;
+	}
+
+	//Make sure we are running on NT
+	if(osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
+	{
+		*major = osvi.dwMajorVersion;
+		*minor = osvi.dwMinorVersion;
+	}
+	else
+	{
+		qWarning("Not running on Windows NT, unsupported operating system!");
+		return false;
 	}
 
 	//Determine the real *major* version first
@@ -561,6 +571,7 @@ static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor)
 		const DWORD nextMajor = (*major) + 1;
 		if(lamexp_verify_os_version(nextMajor, 0))
 		{
+			*pbOverride = true;
 			*major = nextMajor;
 			*minor = 0;
 			continue;
@@ -574,13 +585,14 @@ static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor)
 		const DWORD nextMinor = (*minor) + 1;
 		if(lamexp_verify_os_version((*major), nextMinor))
 		{
+			*pbOverride = true;
 			*minor = nextMinor;
 			continue;
 		}
 		break;
 	}
 
-	return ((*major) > 0);
+	return true;
 }
 
 /*
@@ -602,11 +614,12 @@ const lamexp_os_version_t &lamexp_get_os_version(void)
 	//Detect OS version
 	if(!g_lamexp_os_version.bInitialized)
 	{
-		unsigned int major, minor;
-		if(lamexp_get_real_os_version(&major, &minor))
+		unsigned int major, minor; bool oflag;
+		if(lamexp_get_real_os_version(&major, &minor, &oflag))
 		{
 			g_lamexp_os_version.version.versionMajor = major;
 			g_lamexp_os_version.version.versionMinor = minor;
+			g_lamexp_os_version.version.overrideFlag = oflag;
 			g_lamexp_os_version.bInitialized = true;
 		}
 		else
@@ -1001,22 +1014,22 @@ static HANDLE lamexp_debug_thread_init(void)
 /*
  * Check for compatibility mode
  */
-static bool lamexp_check_compatibility_mode(const char *exportName, const QString &executableName)
-{
-	QLibrary kernel32("kernel32.dll");
-
-	if((exportName != NULL) && kernel32.load())
-	{
-		if(kernel32.resolve(exportName) != NULL)
-		{
-			qWarning("Function '%s' exported from 'kernel32.dll' -> Windows compatibility mode!", exportName);
-			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
-			return false;
-		}
-	}
-
-	return true;
-}
+//static bool lamexp_check_compatibility_mode(const char *exportName, const QString &executableName)
+//{
+//	QLibrary kernel32("kernel32.dll");
+//
+//	if((exportName != NULL) && kernel32.load())
+//	{
+//		if(kernel32.resolve(exportName) != NULL)
+//		{
+//			qWarning("Function '%s' exported from 'kernel32.dll' -> Windows compatibility mode!", exportName);
+//			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
+//			return false;
+//		}
+//	}
+//
+//	return true;
+//}
 
 /*
  * Computus according to H. Lichtenberg
@@ -1139,7 +1152,7 @@ static bool lamexp_broadcast(int eventType, bool onlyToVisible)
  * Qt event filter
  */
 static bool lamexp_event_filter(void *message, long *result)
-{
+{ 
 	if((!(LAMEXP_DEBUG)) && lamexp_check_for_debugger())
 	{
 		lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
@@ -1283,42 +1296,49 @@ bool lamexp_init_qt(int argc, char* argv[])
 		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
 	}
 
-	//Check for compat mode
+	//Supported Windows version?
 	if(osVersionNo == lamexp_winver_winxp)
 	{
-		qDebug("Running on Windows XP.\n");
-		lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
+		qDebug("Running on Windows XP or Windows XP Media Center Edition.\n");
+		//lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_xpx64)
 	{
-		qDebug("Running on Windows Server 2003 or Windows XP x64-Edition.\n");
-		lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
+		qDebug("Running on Windows Server 2003, Windows Server 2003 R2 or Windows XP x64.\n");
+		//lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_vista)
 	{
 		qDebug("Running on Windows Vista or Windows Server 2008.\n");
-		lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName);
+		//lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName*/);
 	}
 	else if(osVersionNo == lamexp_winver_win70)
 	{
 		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
-		lamexp_check_compatibility_mode("CreateFile2", executableName);
+		//lamexp_check_compatibility_mode("CreateFile2", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_win80)
 	{
 		qDebug("Running on Windows 8 or Windows Server 2012.\n");
-		lamexp_check_compatibility_mode("FindPackagesByPackageFamily", executableName);
+		//lamexp_check_compatibility_mode("FindPackagesByPackageFamily", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_win81)
 	{
 		qDebug("Running on Windows 8.1 or Windows Server 2012 R2.\n");
-		lamexp_check_compatibility_mode(NULL, executableName);
+		//lamexp_check_compatibility_mode(NULL, executableName);
 	}
 	else
 	{
 		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersionNo.versionMajor, osVersionNo.versionMinor);
 		qWarning("%s\n", message.toUtf8().constData());
 		MessageBoxW(NULL, QWCHAR(message), L"LameXP", MB_OK | MB_TOPMOST | MB_ICONWARNING);
+	}
+
+	//Check for compat mode
+	if(osVersionNo.overrideFlag && (osVersionNo < lamexp_winver_win81))
+	{
+		qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
+		return false;
 	}
 
 	//Check for Wine

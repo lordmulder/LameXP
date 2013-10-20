@@ -85,6 +85,7 @@ typedef struct _lamexp_os_version_t
 {
 	unsigned int versionMajor;
 	unsigned int versionMinor;
+	bool overrideFlag;
 
 	//comparision operators
 	inline bool operator== (const _lamexp_os_version_t &rhs) const { return (versionMajor == rhs.versionMajor) && (versionMinor == rhs.versionMinor); }
