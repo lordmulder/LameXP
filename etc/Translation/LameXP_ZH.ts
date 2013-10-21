@@ -2573,7 +2573,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>可执行文件 &apos;%1&apos; 需要 Windows XP 或更高版本。</translation>
     </message>
 </context>
 <context>
