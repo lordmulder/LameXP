@@ -135,8 +135,7 @@ void SplashScreen::showSplash(QThread *thread)
 	for(int i = 1; i <= opacitySteps; i++)
 	{
 		const double opacity = (i < opacitySteps) ? (OPACITY_DELTA * static_cast<double>(i)) : 1.0;
-		splashScreen->setWindowOpacity(opacity);
-		splashScreen->update();
+		splashScreen->setWindowOpacity(opacity); //splashScreen->update();
 		ASYNC_WAIT(loop, FADE_DELAY);
 		SET_TASKBAR_STATE(true);
 	}
@@ -161,8 +160,7 @@ void SplashScreen::showSplash(QThread *thread)
 	for(int i = opacitySteps; i >= 0; i--)
 	{
 		const double opacity = OPACITY_DELTA * static_cast<double>(i);
-		splashScreen->setWindowOpacity(opacity);
-		splashScreen->update();
+		splashScreen->setWindowOpacity(opacity); //splashScreen->update();
 		ASYNC_WAIT(loop, FADE_DELAY);
 	}
 

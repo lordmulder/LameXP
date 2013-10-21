@@ -58,7 +58,7 @@ static int lamexp_main(int argc, char* argv[])
 	bool bAccepted = true;
 
 	//Increase "main" thread priority
-	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
+	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
 
 	//Get CLI arguments
 	const QStringList &arguments = lamexp_arguments();
@@ -271,7 +271,7 @@ int main(int argc, char* argv[])
 	{
 		__try
 		{
-			SetErrorMode(GetErrorMode() | SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
+			SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 			SetUnhandledExceptionFilter(lamexp_exception_handler);
 			_set_invalid_parameter_handler(lamexp_invalid_param_handler);
 			return _main(argc, argv);
