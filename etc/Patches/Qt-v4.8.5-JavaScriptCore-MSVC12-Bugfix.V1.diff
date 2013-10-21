@@ -1,0 +1,15 @@
+diff --git "a/D:\\Qt\\QtSource\\4.8.5-VS2013\\src\\3rdparty\\javascriptcore\\JavaScriptCore\\wtf\\MathExtras.org" "b/D:\\Qt\\QtSource\\4.8.5-VS2013\\src\\3rdparty\\javascriptcore\\JavaScriptCore\\wtf\\MathExtras.h"
+index a18949e..27bdb50 100644
+--- "a/D:\\Qt\\QtSource\\4.8.5-VS2013\\src\\3rdparty\\javascriptcore\\JavaScriptCore\\wtf\\MathExtras.org"
++++ "b/D:\\Qt\\QtSource\\4.8.5-VS2013\\src\\3rdparty\\javascriptcore\\JavaScriptCore\\wtf\\MathExtras.h"
+@@ -125,7 +125,10 @@ inline double trunc(double num) { return num > 0 ? floor(num) : ceil(num); }
+ 
+ inline bool isinf(double num) { return !_finite(num) && !_isnan(num); }
+ inline bool isnan(double num) { return !!_isnan(num); }
++
++#if _MSC_VER < 1800
+ inline bool signbit(double num) { return _copysign(1.0, num) < 0; }
++#endif
+ 
+ inline double nextafter(double x, double y) { return _nextafter(x, y); }
+ inline float nextafterf(float x, float y) { return x > y ? x - FLT_EPSILON : x + FLT_EPSILON; }
