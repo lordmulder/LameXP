@@ -150,8 +150,8 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <CompileAsManaged>false</CompileAsManaged>
       <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <ProgramDataBaseFileName />
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
@@ -177,6 +177,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       </CreateHotPatchableImage>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <ProgramDatabaseFile />
     </Link>
     <PostBuildEvent>
       <Message>Copy plugin DLL%27s</Message>
@@ -230,6 +231,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
@@ -253,6 +255,7 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <MapExports>false</MapExports>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ProgramDatabaseFile />
     </Link>
     <PostBuildEvent>
       <Command>

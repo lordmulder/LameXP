@@ -1331,8 +1331,12 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Check for compat mode
 	if(osVersionNo.overrideFlag && (osVersionNo <= lamexp_winver_win81))
 	{
-		qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
-		return false;
+		qWarning("Windows compatibility mode detected!");
+		if(!arguments.contains("--ignore-compat-mode", Qt::CaseInsensitive))
+		{
+			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
+			return false;
+		}
 	}
 
 	//Check for Wine
