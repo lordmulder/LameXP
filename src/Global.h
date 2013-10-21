@@ -227,9 +227,10 @@ unsigned long lamexp_dbg_private_bytes(void);
 #define LAMEXP_DELETE_ARRAY(PTR) do { if(PTR) { delete [] PTR; PTR = NULL; } } while(0)
 #define LAMEXP_SAFE_FREE(PTR) do { if(PTR) { free((void*) PTR); PTR = NULL; } } while(0)
 #define LAMEXP_CLOSE(HANDLE) do { if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; } } while(0)
-#define QWCHAR(STR) reinterpret_cast<const wchar_t*>((STR).utf16())
-#define WCHAR2QSTR(STR) QString::fromUtf16(reinterpret_cast<const unsigned short*>(STR))
-#define LAMEXP_BOOL2STR(X) (X ? "1" : "0")
+#define QWCHAR(STR) (reinterpret_cast<const wchar_t*>((STR).utf16()))
+#define WCHAR2QSTR(STR) (QString::fromUtf16(reinterpret_cast<const unsigned short*>((STR))))
+#define QUTF8(STR) ((STR).toUtf8().constData())
+#define LAMEXP_BOOL2STR(X) ((X) ? "1" : "0")
 #define LAMEXP_MAKE_STRING_EX(X) #X
 #define LAMEXP_MAKE_STRING(X) LAMEXP_MAKE_STRING_EX(X)
 #define LAMEXP_COMPILER_WARNING(TXT) __pragma(message(__FILE__ "(" LAMEXP_MAKE_STRING(__LINE__) ") : warning: " TXT))
@@ -246,26 +247,26 @@ unsigned long lamexp_dbg_private_bytes(void);
 
 //Memory check
 #if LAMEXP_DEBUG
-#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
-{ \
-	SIZE_T _privateBytesBefore = lamexp_dbg_private_bytes(); \
-	RETV = FUNC(__VA_ARGS__); \
-	SIZE_T _privateBytesLeak = (lamexp_dbg_private_bytes() - _privateBytesBefore) / 1024; \
-	if(_privateBytesLeak > 0) { \
-		char _buffer[128]; \
-		_snprintf_s(_buffer, 128, _TRUNCATE, "Memory leak: Lost %u KiloBytes of PrivateUsage memory.\n", _privateBytesLeak); \
-		OutputDebugStringA("----------\n"); \
-		OutputDebugStringA(_buffer); \
-		OutputDebugStringA("----------\n"); \
+	#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
+	{ \
+		SIZE_T _privateBytesBefore = lamexp_dbg_private_bytes(); \
+		RETV = FUNC(__VA_ARGS__); \
+		SIZE_T _privateBytesLeak = (lamexp_dbg_private_bytes() - _privateBytesBefore) / 1024; \
+		if(_privateBytesLeak > 0) { \
+			char _buffer[128]; \
+			_snprintf_s(_buffer, 128, _TRUNCATE, "Memory leak: Lost %u KiloBytes of PrivateUsage memory.\n", _privateBytesLeak); \
+			OutputDebugStringA("----------\n"); \
+			OutputDebugStringA(_buffer); \
+			OutputDebugStringA("----------\n"); \
+		} \
 	} \
-} \
-while(0)
+	while(0)
 #else
-#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
-{ \
-	RETV = __noop(__VA_ARGS__); \
-} \
-while(0)
+	#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
+	{ \
+		RETV = __noop(__VA_ARGS__); \
+	} \
+	while(0)
 #endif
 
 //Check for CPU-compatibility options

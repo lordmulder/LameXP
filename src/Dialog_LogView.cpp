@@ -79,7 +79,7 @@ int LogViewDialog::exec(const QStringList &logData)
 void LogViewDialog::copyButtonClicked(void)
 {
 	QMimeData *mime = new QMimeData();
-	mime->setData("text/plain", ui->textEdit->toPlainText().toUtf8().constData());
+	mime->setData("text/plain", QUTF8(ui->textEdit->toPlainText()));
 	QApplication::clipboard()->setMimeData(mime);
 	m_clipboardUsed = true;
 	m_oldIcon->swap(ui->buttonCopy->icon());

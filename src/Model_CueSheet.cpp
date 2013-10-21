@@ -523,7 +523,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		/* --- FILE --- */
 		if(rxFile.indexIn(line) >= 0)
 		{
-			qDebug("%03d File: <%s> <%s>", lines, rxFile.cap(1).toUtf8().constData(), rxFile.cap(2).toUtf8().constData());
+			qDebug("%03d File: <%s> <%s>", lines, QUTF8(rxFile.cap(1)), QUTF8(rxFile.cap(2)));
 			if(currentFile)
 			{
 				if(currentTrack)
@@ -560,7 +560,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			else
 			{
 				bUnsupportedTrack = true;
-				qWarning("%03d Skipping unsupported file of type '%s'.", lines, rxFile.cap(2).toUtf8().constData());
+				qWarning("%03d Skipping unsupported file of type '%s'.", lines, QUTF8(rxFile.cap(2)));
 				currentFile = NULL;
 			}
 			bPreamble = false;
@@ -573,7 +573,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(currentFile)
 			{
-				qDebug("%03d   Track: <%s> <%s>", lines, rxTrack.cap(1).toUtf8().constData(), rxTrack.cap(2).toUtf8().constData());
+				qDebug("%03d   Track: <%s> <%s>", lines, QUTF8(rxTrack.cap(1)), QUTF8(rxTrack.cap(2)));
 				if(currentTrack)
 				{
 					if(currentTrack->isValid())
@@ -593,7 +593,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 				else
 				{
 					bUnsupportedTrack = true;
-					qWarning("%03d   Skipping unsupported track of type '%s'.", lines, rxTrack.cap(2).toUtf8().constData());
+					qWarning("%03d   Skipping unsupported track of type '%s'.", lines, QUTF8(rxTrack.cap(2)));
 					currentTrack = NULL;
 				}
 			}
@@ -610,7 +610,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		{
 			if(currentFile && currentTrack)
 			{
-				qDebug("%03d     Index: <%s> <%s>", lines, rxIndex.cap(1).toUtf8().constData(), rxIndex.cap(2).toUtf8().constData());
+				qDebug("%03d     Index: <%s> <%s>", lines, QUTF8(rxIndex.cap(1)), QUTF8(rxIndex.cap(2)));
 				if(rxIndex.cap(1).toInt() == 1)
 				{
 					currentTrack->setStartIndex(parseTimeIndex(rxIndex.cap(2)));
@@ -628,7 +628,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			}
 			else if(currentFile && currentTrack)
 			{
-				qDebug("%03d     Title: <%s>", lines, rxTitle.cap(1).toUtf8().constData());
+				qDebug("%03d     Title: <%s>", lines, QUTF8(rxTitle.cap(1)));
 				currentTrack->metaInfo().setTitle(UNQUOTE(rxTitle.cap(1)).simplified());
 			}
 			continue;
@@ -643,7 +643,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			}
 			else if(currentFile && currentTrack)
 			{
-				qDebug("%03d     Title: <%s>", lines, rxPerformer.cap(1).toUtf8().constData());
+				qDebug("%03d     Title: <%s>", lines, QUTF8(rxPerformer.cap(1)));
 				currentTrack->metaInfo().setArtist(UNQUOTE(rxPerformer.cap(1)).simplified());
 			}
 			continue;
@@ -666,7 +666,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			}
 			else if(currentFile && currentTrack)
 			{
-				qDebug("%03d     Genre: <%s>", lines, rxGenre.cap(1).toUtf8().constData());
+				qDebug("%03d     Genre: <%s>", lines, QUTF8(rxGenre.cap(1)));
 				QString temp = UNQUOTE(rxGenre.cap(1).simplified());
 				for(int i = 0; g_lamexp_generes[i]; i++)
 				{
@@ -691,7 +691,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			}
 			else if(currentFile && currentTrack)
 			{
-				qDebug("%03d     Year: <%s>", lines, rxPerformer.cap(1).toUtf8().constData());
+				qDebug("%03d     Year: <%s>", lines, QUTF8(rxPerformer.cap(1)));
 				bool ok = false;
 				unsigned int temp = rxYear.cap(1).toUInt(&ok);
 				if(ok) currentTrack->metaInfo().setYear(temp);
@@ -831,7 +831,7 @@ double CueSheetModel::parseTimeIndex(const QString &index)
 		}
 	}
 
-	qWarning("    Bad time index: '%s'", index.toUtf8().constData());
+	qWarning("    Bad time index: '%s'", QUTF8(index));
 	return std::numeric_limits<double>::quiet_NaN();
 }
 

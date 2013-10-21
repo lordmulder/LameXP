@@ -64,7 +64,7 @@ CueSplitter::CueSplitter(const QString &outputDir, const QString &baseName, CueS
 	for(int i = 0; i < nInputFiles; i++)
 	{
 		m_inputFilesInfo.insert(inputFilesInfo[i].filePath(), inputFilesInfo[i]);
-		qDebug("File %02d: <%s>", i, inputFilesInfo[i].filePath().toUtf8().constData());
+		qDebug("File %02d: <%s>", i, QUTF8(inputFilesInfo[i].filePath()));
 	}
 	
 	qDebug("All input files added.");
@@ -95,7 +95,7 @@ void CueSplitter::run()
 	
 	if(!QDir(m_outputDir).exists())
 	{
-		qWarning("Output directory \"%s\" does not exist!", m_outputDir.toUtf8().constData());
+		qWarning("Output directory \"%s\" does not exist!", QUTF8(m_outputDir));
 		return;
 	}
 	
@@ -243,12 +243,12 @@ void CueSplitter::handleUpdate(int progress)
 void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, const int baseProgress)
 {
 	qDebug("[Track %02d]", trackNo);
-	qDebug("File: <%s>", file.toUtf8().constData());
+	qDebug("File: <%s>", QUTF8(file));
 	qDebug("Offset: <%f> <%s>", offset, indexToString(offset).toLatin1().constData());
 	qDebug("Length: <%f> <%s>", length, indexToString(length).toLatin1().constData());
-	qDebug("Artist: <%s>", metaInfo.artist().toUtf8().constData());
-	qDebug("Title: <%s>", metaInfo.title().toUtf8().constData());
-	qDebug("Album: <%s>", metaInfo.album().toUtf8().constData());
+	qDebug("Artist: <%s>", QUTF8(metaInfo.artist()));
+	qDebug("Title: <%s>", QUTF8(metaInfo.title()));
+	qDebug("Album: <%s>", QUTF8(metaInfo.album()));
 	
 	int prevProgress = baseProgress;
 
@@ -261,7 +261,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 
 	QString baseName = shortName(QFileInfo(output).fileName());
 	QString decompressedInput = m_decompressedFiles[file];
-	qDebug("Input: <%s>", decompressedInput.toUtf8().constData());
+	qDebug("Input: <%s>", QUTF8(decompressedInput));
 	
 	AudioFileModel outFileInfo(output);
 	outFileInfo.setMetaInfo(metaInfo);

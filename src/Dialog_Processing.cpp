@@ -1012,7 +1012,7 @@ void ProcessingDialog::writePlayList(void)
 		playList.write("#EXTM3U\r\n");
 		while(!list.isEmpty())
 		{
-			playList.write(useUtf8 ? list.takeFirst().toUtf8().constData() : list.takeFirst().toLatin1().constData());
+			playList.write(useUtf8 ?QUTF8(list.takeFirst()) : list.takeFirst().toLatin1().constData());
 			playList.write("\r\n");
 		}
 		playList.close();

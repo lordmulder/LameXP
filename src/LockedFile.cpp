@@ -112,13 +112,13 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 		if(outFile.write(reinterpret_cast<const char*>(resource->data()), resource->size()) != resource->size())
 		{
 			QFile::remove(QFileInfo(outFile).canonicalFilePath());
-			THROW_FMT("File '%s' could not be written!", QFileInfo(outFile).fileName().toUtf8().constData());
+			THROW_FMT("File '%s' could not be written!", QUTF8(QFileInfo(outFile).fileName()));
 		}
 		outFile.close();
 	}
 	else
 	{
-		THROW_FMT("File '%s' could not be created!", QFileInfo(outFile).fileName().toUtf8().constData());
+		THROW_FMT("File '%s' could not be created!", QUTF8(QFileInfo(outFile).fileName()));
 	}
 
 	//Now lock the file!
@@ -134,7 +134,7 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
 	{
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
-		THROW_FMT("File '%s' could not be locked!", QFileInfo(outFile).fileName().toUtf8().constData());
+		THROW_FMT("File '%s' could not be locked!", QUTF8(QFileInfo(outFile).fileName()));
 	}
 
 	//Open file for reading
@@ -163,7 +163,7 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	else
 	{
 		QFile::remove(m_filePath);
-		THROW_FMT("File '%s' could not be read!", QFileInfo(outFile).fileName().toUtf8().constData());
+		THROW_FMT("File '%s' could not be read!", QUTF8(QFileInfo(outFile).fileName()));
 	}
 
 	//Compare hashes
@@ -172,7 +172,7 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 		qWarning("\nFile checksum error:\n A = %s\n B = %s\n", expectedHash.constData(), hash.constData());
 		LAMEXP_CLOSE(m_fileHandle);
 		QFile::remove(m_filePath);
-		THROW_FMT("File '%s' is corruputed, take care!", QFileInfo(outFile).fileName().toUtf8().constData());
+		THROW_FMT("File '%s' is corruputed, take care!", QUTF8(QFileInfo(outFile).fileName()));
 	}
 }
 
@@ -185,7 +185,7 @@ LockedFile::LockedFile(const QString &filePath)
 	//Make sure the file exists, before we try to lock it
 	if(!existingFile.exists())
 	{
-		THROW_FMT("File '%s' does not exist!", existingFile.fileName().toUtf8().constData());
+		THROW_FMT("File '%s' does not exist!", QUTF8(existingFile.fileName()));
 	}
 	
 	//Remember file path
@@ -203,7 +203,7 @@ LockedFile::LockedFile(const QString &filePath)
 	//Locked successfully?
 	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
 	{
-		THROW_FMT("File '%s' could not be locked!", existingFile.fileName().toUtf8().constData());
+		THROW_FMT("File '%s' could not be locked!", QUTF8(existingFile.fileName()));
 	}
 }
 

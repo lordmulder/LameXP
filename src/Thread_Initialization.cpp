@@ -222,7 +222,7 @@ void InitializationThread::run()
 		default: THROW("CPU support undefined!");
 	}
 
-	//Allocate maps
+	//Allocate queues
 	QQueue<QString> queueToolName;
 	QQueue<QString> queueChecksum;
 	QQueue<QString> queueVersInfo;
@@ -276,7 +276,7 @@ void InitializationThread::run()
 		const QByteArray toolHash(checksum.toLatin1());
 		if(toolHash.size() != 96)
 		{
-			qFatal("The checksum for \"%s\" has an invalid size!", toolName.toUtf8().constData());
+			qFatal("The checksum for \"%s\" has an invalid size!", QUTF8(toolName));
 			return;
 		}
 			
@@ -284,7 +284,7 @@ void InitializationThread::run()
 		if(!(resource->isValid() && resource->data()))
 		{
 			LAMEXP_DELETE(resource);
-			qFatal("The resource for \"%s\" could not be found!", toolName.toUtf8().constData());
+			qFatal("The resource for \"%s\" could not be found!", QUTF8(toolName));
 			return;
 		}
 			
@@ -419,7 +419,7 @@ void InitializationThread::initTranslations(void)
 		{
 			if(lamexp_translation_register(langId, qmFile, langName, systemId, country))
 			{
-				qDebug("Registering translation: %s = %s (%u) [%u]", qmFile.toUtf8().constData(), langName.toUtf8().constData(), systemId, country);
+				qDebug("Registering translation: %s = %s (%u) [%u]", QUTF8(qmFile), QUTF8(langName), systemId, country);
 			}
 			else
 			{
@@ -450,7 +450,7 @@ void InitializationThread::initNeroAac(void)
 		return;
 	}
 
-	qDebug("Found Nero AAC encoder binary:\n%s\n", neroFileInfo[0].canonicalFilePath().toUtf8().constData());
+	qDebug("Found Nero AAC encoder binary:\n%s\n", QUTF8(neroFileInfo[0].canonicalFilePath()));
 
 	LockedFile *neroBin[3];
 	for(int i = 0; i < 3; i++) neroBin[i] = NULL;
@@ -555,8 +555,8 @@ void InitializationThread::initFhgAac(void)
 		return;
 	}
 
-	qDebug("Found FhgAacEnc cli_exe:\n%s\n", fhgFileInfo[0].canonicalFilePath().toUtf8().constData());
-	qDebug("Found FhgAacEnc enc_dll:\n%s\n", fhgFileInfo[1].canonicalFilePath().toUtf8().constData());
+	qDebug("Found FhgAacEnc cli_exe:\n%s\n", QUTF8(fhgFileInfo[0].canonicalFilePath()));
+	qDebug("Found FhgAacEnc enc_dll:\n%s\n", QUTF8(fhgFileInfo[1].canonicalFilePath()));
 
 	LockedFile *fhgBin[5];
 	for(int i = 0; i < 5; i++) fhgBin[i] = NULL;
@@ -654,7 +654,7 @@ void InitializationThread::initQAac(void)
 		return;
 	}
 
-	qDebug("Found QAAC encoder:\n%s\n", qaacFileInfo[0].canonicalFilePath().toUtf8().constData());
+	qDebug("Found QAAC encoder:\n%s\n", QUTF8(qaacFileInfo[0].canonicalFilePath()));
 
 	LockedFile *qaacBin[2];
 	for(int i = 0; i < 2; i++) qaacBin[i] = NULL;
@@ -800,17 +800,17 @@ void InitializationThread::selfTest(void)
 				const QByteArray expectedHash = QByteArray(g_lamexp_tools[i].pcHash);
 				if(g_lamexp_tools[i].uiCpuType & cpu[k])
 				{
-					qDebug("%02i -> %s", ++n, toolName.toUtf8().constData());
+					qDebug("%02i -> %s", ++n, QUTF8(toolName));
 					QFile resource(QString(":/tools/%1").arg(toolName));
 					if(!resource.open(QIODevice::ReadOnly))
 					{
-						qFatal("The resource for \"%s\" could not be opened!", toolName.toUtf8().constData());
+						qFatal("The resource for \"%s\" could not be opened!", QUTF8(toolName));
 						break;
 					}
 					QByteArray hash = LockedFile::fileHash(resource);
 					if(hash.isNull() || _stricmp(hash.constData(), expectedHash.constData()))
 					{
-						qFatal("Hash check for tool \"%s\" has failed!", toolName.toUtf8().constData());
+						qFatal("Hash check for tool \"%s\" has failed!", QUTF8(toolName));
 						break;
 					}
 					resource.close();

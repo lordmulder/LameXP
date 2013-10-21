@@ -494,7 +494,7 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 			}
 			else
 			{
-				qWarning("Unkonw field '%s' will be ignored!", header.at(j).toUtf8().constData());
+				qWarning("Unkonw field '%s' will be ignored!", QUTF8(header.at(j)));
 				ignore[j] = true;
 				
 				if(!checkArray(ignore, false, nCols))

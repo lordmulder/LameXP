@@ -69,7 +69,7 @@ void MessageProducerThread::run()
 			QFileInfo file = QFileInfo(arguments[++i]);
 			if(file.exists() && file.isFile())
 			{
-				lamexp_ipc_send(1, file.canonicalFilePath().toUtf8().constData());
+				lamexp_ipc_send(1, QUTF8(file.canonicalFilePath()));
 			}
 			bSentFiles = true;
 		}
@@ -78,7 +78,7 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				lamexp_ipc_send(2, dir.canonicalPath().toUtf8().constData());
+				lamexp_ipc_send(2, QUTF8(dir.canonicalPath()));
 			}
 			bSentFiles = true;
 		}
@@ -87,7 +87,7 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				lamexp_ipc_send(3, dir.canonicalPath().toUtf8().constData());
+				lamexp_ipc_send(3, QUTF8(dir.canonicalPath()));
 			}
 			bSentFiles = true;
 		}

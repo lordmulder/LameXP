@@ -147,11 +147,11 @@ void SplashScreen::showSplash(QThread *thread)
 	//Loop while thread is still running
 	while(THREAD_RUNNING(thread))
 	{
-		ASYNC_WAIT(loop, 500);
-		if((deadlockCounter++ > 360) && thread->isRunning())
+		if((++deadlockCounter) > 60)
 		{
 			qFatal("Deadlock in initialization thread detected!");
 		}
+		ASYNC_WAIT(loop, 5000);
 	}
 
 	//Stop the timer

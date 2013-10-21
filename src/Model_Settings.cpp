@@ -110,7 +110,7 @@ public:
 				}
 				else
 				{
-					qWarning("Could not find '%s' in cache, but it has been marked as dirty!", (*iter).toUtf8().constData());
+					qWarning("Could not find '%s' in cache, but it has been marked as dirty!", QUTF8(*iter));
 				}
 			}
 			m_configFile->sync();
@@ -322,7 +322,7 @@ SettingsModel::SettingsModel(void)
 				continue;
 			}
 		}
-		qWarning("Deleting obsolete group from config: %s", current.toUtf8().constData());
+		qWarning("Deleting obsolete group from config: %s", QUTF8(current));
 		REMOVE_GROUP(configFile, current);
 	}
 
@@ -463,9 +463,9 @@ QString SettingsModel::defaultLanguage(void) const
 	//Detect system langauge
 	QLocale systemLanguage= QLocale::system();
 	qDebug("[Locale]");
-	qDebug("Language: %s (%d)", QLocale::languageToString(systemLanguage.language()).toUtf8().constData(), systemLanguage.language());
-	qDebug("Country is: %s (%d)", QLocale::countryToString(systemLanguage.country()).toUtf8().constData(), systemLanguage.country());
-	qDebug("Script is: %s (%d)\n", QLocale::scriptToString(systemLanguage.script()).toUtf8().constData(), systemLanguage.script());
+	qDebug("Language: %s (%d)", QUTF8(QLocale::languageToString(systemLanguage.language())), systemLanguage.language());
+	qDebug("Country is: %s (%d)", QUTF8(QLocale::countryToString(systemLanguage.country())), systemLanguage.country());
+	qDebug("Script is: %s (%d)\n", QUTF8(QLocale::scriptToString(systemLanguage.script())), systemLanguage.script());
 
 	//Check if we can use the default translation
 	if(systemLanguage.language() == QLocale::English /*|| systemLanguage.language() == QLocale::C*/)

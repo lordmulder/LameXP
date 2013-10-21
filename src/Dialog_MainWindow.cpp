@@ -1050,13 +1050,13 @@ void MainWindow::dropEvent(QDropEvent *event)
 		}
 		if(file.isFile())
 		{
-			qDebug("Dropped File: %s", file.canonicalFilePath().toUtf8().constData());
+			qDebug("Dropped File: %s", QUTF8(file.canonicalFilePath()));
 			droppedFiles << file.canonicalFilePath();
 			continue;
 		}
 		if(file.isDir())
 		{
-			qDebug("Dropped Folder: %s", file.canonicalFilePath().toUtf8().constData());
+			qDebug("Dropped Folder: %s", QUTF8(file.canonicalFilePath()));
 			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoSymLinks);
 			if(list.count() > 0)
 			{
@@ -1070,7 +1070,7 @@ void MainWindow::dropEvent(QDropEvent *event)
 				list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
 				for(int j = 0; j < list.count(); j++)
 				{
-					qDebug("Descending to Folder: %s", list.at(j).canonicalFilePath().toUtf8().constData());
+					qDebug("Descending to Folder: %s", QUTF8(list.at(j).canonicalFilePath()));
 					urls.prepend(QUrl::fromLocalFile(list.at(j).canonicalFilePath()));
 				}
 			}
@@ -1390,7 +1390,7 @@ void MainWindow::windowShown(void)
 		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding file from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			qDebug("Adding file from CLI: %s", QUTF8(currentFile.absoluteFilePath()));
 			addedFiles.append(currentFile.absoluteFilePath());
 		}
 		if(!addedFiles.isEmpty())
@@ -1405,13 +1405,13 @@ void MainWindow::windowShown(void)
 		if(!arguments[i].compare("--add-folder", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding folder from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			qDebug("Adding folder from CLI: %s", QUTF8(currentFile.absoluteFilePath()));
 			addFolder(currentFile.absoluteFilePath(), false, true);
 		}
 		if(!arguments[i].compare("--add-recursive", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding folder recursively from CLI: %s", currentFile.absoluteFilePath().toUtf8().constData());
+			qDebug("Adding folder recursively from CLI: %s", QUTF8(currentFile.absoluteFilePath()));
 			addFolder(currentFile.absoluteFilePath(), true, true);
 		}
 	}
@@ -3988,13 +3988,13 @@ void MainWindow::addFileDelayed(const QString &filePath, bool tryASAP)
 {
 	if(tryASAP && !m_delayedFileTimer->isActive())
 	{
-		qDebug("Received file: %s", filePath.toUtf8().constData());
+		qDebug("Received file: %s", QUTF8(filePath));
 		m_delayedFileList->append(filePath);
 		QTimer::singleShot(0, this, SLOT(handleDelayedFiles()));
 	}
 	
 	m_delayedFileTimer->stop();
-	qDebug("Received file: %s", filePath.toUtf8().constData());
+	qDebug("Received file: %s", QUTF8(filePath));
 	m_delayedFileList->append(filePath);
 	m_delayedFileTimer->start(5000);
 }

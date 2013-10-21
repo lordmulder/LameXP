@@ -34,7 +34,7 @@ const unsigned int AudioFileModel::BITDEPTH_IEEE_FLOAT32 = UINT_MAX-1;
 
 #define PRINT_S(VAR) do \
 { \
-	if((VAR).isEmpty()) qDebug(#VAR " = N/A"); else qDebug(#VAR " = \"%s\"", (VAR).toUtf8().constData()); \
+	if((VAR).isEmpty()) qDebug(#VAR " = N/A"); else qDebug(#VAR " = \"%s\"", QUTF8((VAR))); \
 } \
 while(0)
 
