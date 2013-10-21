@@ -700,7 +700,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		int index = qBound(0, static_cast<int>(type), 3);
 		unsigned int timestamp = static_cast<unsigned int>(_time64(NULL) % 3600I64);
 		QString str = QString::fromUtf8(msg).trimmed().replace('\n', '\t');
-		fprintf(g_lamexp_log_file, "[%c][%04u] %s\r\n", prefix[index], timestamp, str.toUtf8().constData());
+		fprintf(g_lamexp_log_file, "[%c][%04u] %s\r\n", prefix[index], timestamp, QUTF8(str));
 		fflush(g_lamexp_log_file);
 	}
 
@@ -1299,43 +1299,37 @@ bool lamexp_init_qt(int argc, char* argv[])
 	//Supported Windows version?
 	if(osVersionNo == lamexp_winver_winxp)
 	{
-		qDebug("Running on Windows XP or Windows XP Media Center Edition.\n");
-		//lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
+		qDebug("Running on Windows XP or Windows XP Media Center Edition.\n");						//lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_xpx64)
 	{
-		qDebug("Running on Windows Server 2003, Windows Server 2003 R2 or Windows XP x64.\n");
-		//lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
+		qDebug("Running on Windows Server 2003, Windows Server 2003 R2 or Windows XP x64.\n");		//lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_vista)
 	{
-		qDebug("Running on Windows Vista or Windows Server 2008.\n");
-		//lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName*/);
+		qDebug("Running on Windows Vista or Windows Server 2008.\n");								//lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName*/);
 	}
 	else if(osVersionNo == lamexp_winver_win70)
 	{
-		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");
-		//lamexp_check_compatibility_mode("CreateFile2", executableName);
+		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");								//lamexp_check_compatibility_mode("CreateFile2", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_win80)
 	{
-		qDebug("Running on Windows 8 or Windows Server 2012.\n");
-		//lamexp_check_compatibility_mode("FindPackagesByPackageFamily", executableName);
+		qDebug("Running on Windows 8 or Windows Server 2012.\n");									//lamexp_check_compatibility_mode("FindPackagesByPackageFamily", executableName);
 	}
 	else if(osVersionNo == lamexp_winver_win81)
 	{
-		qDebug("Running on Windows 8.1 or Windows Server 2012 R2.\n");
-		//lamexp_check_compatibility_mode(NULL, executableName);
+		qDebug("Running on Windows 8.1 or Windows Server 2012 R2.\n");								//lamexp_check_compatibility_mode(NULL, executableName);
 	}
 	else
 	{
 		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersionNo.versionMajor, osVersionNo.versionMinor);
-		qWarning("%s\n", message.toUtf8().constData());
+		qWarning("%s\n", QUTF8(message));
 		MessageBoxW(NULL, QWCHAR(message), L"LameXP", MB_OK | MB_TOPMOST | MB_ICONWARNING);
 	}
 
 	//Check for compat mode
-	if(osVersionNo.overrideFlag && (osVersionNo < lamexp_winver_win81))
+	if(osVersionNo.overrideFlag && (osVersionNo <= lamexp_winver_win81))
 	{
 		qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
 		return false;
@@ -1355,7 +1349,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 
 	//Load plugins from application directory
 	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
-	qDebug("Library Path:\n%s\n", QApplication::libraryPaths().first().toUtf8().constData());
+	qDebug("Library Path:\n%s\n", QUTF8(QApplication::libraryPaths().first()));
 
 	//Set application properties
 	application->setApplicationName("LameXP - Audio Encoder Front-End");
@@ -1440,7 +1434,7 @@ int lamexp_init_ipc(void)
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
+		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
 		return -1;
 	}
 	if(g_lamexp_ipc_ptr.semaphore_write->error() != QSystemSemaphore::NoError)
@@ -1450,7 +1444,7 @@ int lamexp_init_ipc(void)
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
+		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
 		return -1;
 	}
 	if(g_lamexp_ipc_ptr.semaphore_read_mutex->error() != QSystemSemaphore::NoError)
@@ -1460,7 +1454,7 @@ int lamexp_init_ipc(void)
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
+		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
 		return -1;
 	}
 	if(g_lamexp_ipc_ptr.semaphore_write_mutex->error() != QSystemSemaphore::NoError)
@@ -1470,7 +1464,7 @@ int lamexp_init_ipc(void)
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
 		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", errorMessage.toUtf8().constData());
+		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
 		return -1;
 	}
 
@@ -1489,7 +1483,7 @@ int lamexp_init_ipc(void)
 			{
 				QString errorMessage = g_lamexp_ipc_ptr.sharedmem->errorString();
 				LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
-				qFatal("Failed to attach to shared memory: %s", errorMessage.toUtf8().constData());
+				qFatal("Failed to attach to shared memory: %s", QUTF8(errorMessage));
 				return -1;
 			}
 		}
@@ -1497,7 +1491,7 @@ int lamexp_init_ipc(void)
 		{
 			QString errorMessage = g_lamexp_ipc_ptr.sharedmem->errorString();
 			LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
-			qFatal("Failed to create shared memory: %s", errorMessage.toUtf8().constData());
+			qFatal("Failed to create shared memory: %s", QUTF8(errorMessage));
 			return -1;
 		}
 	}
@@ -2957,7 +2951,7 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 					{
 						if(mplayerDir.exists(WCHAR2QSTR(appNames[k])))
 						{
-							qDebug("Player found at:\n%s\n", mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])).toUtf8().constData());
+							qDebug("Player found at:\n%s\n", QUTF8(mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k]))));
 							QProcess::startDetached(mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])), QStringList() << QDir::toNativeSeparators(mediaFilePath));
 							return true;
 						}

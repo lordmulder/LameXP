@@ -110,6 +110,11 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <Manifest>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PreBuildEvent>
@@ -184,6 +189,11 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
     <PreBuildEvent>
@@ -253,7 +263,9 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
     </ResourceCompile>
     <Manifest>
-      <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
     </Manifest>
     <Xdcmake>
       <AdditionalOptions>/wd4005 %(AdditionalOptions)</AdditionalOptions>
@@ -1298,6 +1310,9 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ResourceCompile Include="LameXP.rc">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="etc\Manifest\Compatibility.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
