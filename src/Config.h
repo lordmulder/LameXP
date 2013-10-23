@@ -5,7 +5,8 @@
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// (at your option) any later version, but always including the *additional*
+// restrictions defined in the "License.txt" file.
 //
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -34,7 +35,7 @@
 #define VER_LAMEXP_MINOR_LO					9
 #define VER_LAMEXP_TYPE						Alpha
 #define VER_LAMEXP_PATCH					3
-#define VER_LAMEXP_BUILD					1415
+#define VER_LAMEXP_BUILD					1418
 #define VER_LAMEXP_CONFG					1348
 
 ///////////////////////////////////////////////////////////////////////////////

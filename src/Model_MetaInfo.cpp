@@ -5,7 +5,8 @@
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// (at your option) any later version, but always including the *additional*
+// restrictions defined in the "License.txt" file.
 //
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,6 +26,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QFileInfo>
+#include <QDir>
 
 #define MODEL_ROW_COUNT 12
 
@@ -84,7 +86,7 @@ QVariant MetaInfoModel::data(const QModelIndex &index, int role) const
 		switch(index.row() + m_offset)
 		{
 		case 0:
-			return (!index.column()) ? tr("Full Path") : CHECK1(m_fullInfo->filePath());
+			return (!index.column()) ? tr("Full Path") : CHECK1(QDir::toNativeSeparators(m_fullInfo->filePath()));
 			break;
 		case 1:
 			return (!index.column()) ? tr("Format") : CHECK1(m_fullInfo->audioBaseInfo());

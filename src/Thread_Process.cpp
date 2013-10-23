@@ -5,7 +5,8 @@
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// (at your option) any later version, but always including the *additional*
+// restrictions defined in the "License.txt" file.
 //
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -583,7 +584,7 @@ void ProcessThread::insertDownsampleFilter(void)
 
 		bool bAdjustBitdepth = true;
 
-		//Is the input bit depth supported exactly? (inclduing IEEE Float)
+		//Is the input bit depth supported exactly? (including IEEE Float)
 		for(int i = 0; supportedBPS[i]; i++)
 		{
 			if(supportedBPS[i] == inputBPS) bAdjustBitdepth = false;

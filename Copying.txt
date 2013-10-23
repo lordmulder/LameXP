@@ -1,8 +1,12 @@
-LameXP was created from the scratch by LoRd_MuldeR <mulder2@gmx.de> and is distributed under the terms of GNU General Public License. Please see the 'License.txt' file for details!
+LameXP was created from the scratch by LoRd_MuldeR <mulder2@gmx.de>. You may use, distribute and copy LameXP under the terms of an extended variant of the GNU General Public License version 2.
+
+Please see the 'License.txt' file for details!
 
 The copyright of all third-party programs included in LameXP belongs to the individual software authors. Please see the "About third-party software" dialog for details!
 
------
+
+THIRD-PARTY LICENSE INFO:
+-------------------------
 
 The Qt GUI Toolkit is Copyright (C) 2013 Digia Finland Ltd and/or its subsidiary(-ies). You may use, distribute and copy the Qt GUI Toolkit under the terms of GNU General Public License version 3.
 
@@ -12,6 +16,8 @@ The strnatcmp() function is based on code which is Copyright (C) 2000, 2004 by M
 
 The QKeccakHash class, SHA-3/Keccak function for Qt, is Copyright (C) 2013 Emanuel Eichhammer. You may use, distribute and copy QKeccakHash under the terms of GNU General Public License version 3.
 
------
+
+PATCHES FOR THIRD-PARTY TOOLS:
+------------------------------
 
 LameXP contains some third-party OpenSource tools with custom modifications and fixes. The respective patches are provided in the "etc/Patches" directory.
