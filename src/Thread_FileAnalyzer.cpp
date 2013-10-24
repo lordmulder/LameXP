@@ -39,6 +39,16 @@
 #include <QTime>
 #include <QElapsedTimer>
 #include <QTimer>
+#include <QQueue>
+
+//Insert into QStringList *without* duplicates
+static inline void SAFE_APPEND_STRING(QStringList &list, const QString &str)
+{
+	if(!list.contains(str, Qt::CaseInsensitive))
+	{
+		list << str;
+	}
+}
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -161,12 +171,18 @@ void FileAnalyzer::run()
 		}
 	}
 
-	//Handle playlist files
-	lamexp_natural_string_sort(m_inputFiles, true);
-	handlePlaylistFiles();
+	//Sort files
 	lamexp_natural_string_sort(m_inputFiles, true);
 
+	//Handle playlist files first!
+	handlePlaylistFiles();
+
 	const unsigned int nFiles = m_inputFiles.count();
+	if(nFiles < 1)
+	{
+		qWarning("File list is empty, nothing to do!");
+		return;
+	}
 
 	//Update progress
 	emit progressMaxChanged(nFiles);
@@ -245,22 +261,51 @@ bool FileAnalyzer::analyzeNextFile(void)
 
 void FileAnalyzer::handlePlaylistFiles(void)
 {
-	QStringList importedFiles;
+	QQueue<QVariant> queue;
+	QStringList importedFromPlaylist;
+	
+	//Import playlist files into "hierarchical" list
 	while(!m_inputFiles.isEmpty())
 	{
 		const QString currentFile = m_inputFiles.takeFirst();
-		if(!PlaylistImporter::importPlaylist(importedFiles, currentFile))
+		QStringList importedFiles;
+		if(PlaylistImporter::importPlaylist(importedFiles, currentFile))
 		{
-			importedFiles << currentFile;
+			queue.enqueue(importedFiles);
+			importedFromPlaylist << importedFiles;
+		}
+		else
+		{
+			queue.enqueue(currentFile);
 		}
 	}
 
-	while(!importedFiles.isEmpty())
+	//Reduce temporary list
+	importedFromPlaylist.removeDuplicates();
+
+	//Now build the complete "flat" file list (files imported from playlist take precedence!)
+	while(!queue.isEmpty())
 	{
-		const QString currentFile = importedFiles.takeFirst();
-		if(!m_inputFiles.contains(currentFile, Qt::CaseInsensitive))
+		const QVariant current = queue.dequeue();
+		if(current.type() == QVariant::String)
 		{
-			m_inputFiles << currentFile;
+			const QString temp = current.toString();
+			if(!importedFromPlaylist.contains(temp, Qt::CaseInsensitive))
+			{
+				SAFE_APPEND_STRING(m_inputFiles, temp);
+			}
+		}
+		else if(current.type() == QVariant::StringList)
+		{
+			const QStringList temp = current.toStringList();
+			for(QStringList::ConstIterator iter = temp.constBegin(); iter != temp.constEnd(); iter++)
+			{
+				SAFE_APPEND_STRING(m_inputFiles, (*iter));
+			}
+		}
+		else
+		{
+			qWarning("Encountered an unexpected variant type!");
 		}
 	}
 }

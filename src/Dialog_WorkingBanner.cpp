@@ -35,7 +35,7 @@
 /* It can happen that the QThread has just terminated and already emitted the 'terminated' signal, but did NOT change the 'isRunning' flag to FALSE yet. */
 /* For this reason the macro will first check the 'isRunning' flag. If (and only if) the flag still returns TRUE, then we will wait() for at most 50 ms. */
 /* If, after 50 ms, the wait() function returns with FALSE, then the thread probably is still running and we return TRUE. Otherwise we can return FALSE. */
-#define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ? (!((THRD)->wait(50))) : false)
+#define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ? (!((THRD)->wait(1))) : false)
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -72,6 +72,9 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	color.setColor(QPalette::Text, QColor::fromRgb(0x33, 0x33, 0x33));
 	color.setColor(QPalette::WindowText, QColor::fromRgb(0x33, 0x33, 0x33));
 	m_progress->setPalette(color);
+
+	//Set Opacity
+	this->setWindowOpacity(0.85);
 
 	//Set wait cursor
 	setCursor(Qt::WaitCursor);
