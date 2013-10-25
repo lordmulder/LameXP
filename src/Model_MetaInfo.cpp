@@ -480,6 +480,11 @@ Qt::ItemFlags MetaInfoModel::flags(const QModelIndex &index) const
 void MetaInfoModel::assignInfoFrom(const AudioFileModel &file)
 {
 	beginResetModel();
+	const unsigned int position = m_metaInfo->position();
 	m_metaInfo->update(file.metaInfo(), true);
+	if(m_offset)
+	{
+		m_metaInfo->setPosition(position ? UINT_MAX : 0);
+	}
 	endResetModel();
 }

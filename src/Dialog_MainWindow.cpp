@@ -2314,6 +2314,7 @@ void MainWindow::showDetailsButtonClicked(void)
 			iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
 		);
 		
+		//Copy all info to Meta Info tab
 		if(iResult == INT_MAX)
 		{
 			m_metaInfoModel->assignInfoFrom(file);
