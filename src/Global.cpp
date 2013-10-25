@@ -103,6 +103,28 @@ Q_IMPORT_PLUGIN(QICOPlugin)
 #define _LAMEXP_MAKE_STR(STR) #STR
 #define LAMEXP_MAKE_STR(STR) _LAMEXP_MAKE_STR(STR)
 
+//String helper
+#define CLEAN_OUTPUT_STRING(STR) do \
+{ \
+	const char CTRL_CHARS[3] = { '\r', '\n', '\t' }; \
+	for(size_t i = 0; i < 3; i++) \
+	{ \
+		while(char *pos = strchr((STR), CTRL_CHARS[i])) *pos = char(0x20); \
+	} \
+} \
+while(0)
+
+//String helper
+#define TRIM_LEFT(STR) do \
+{ \
+	const char WHITE_SPACE[4] = { char(0x20), '\r', '\n', '\t' }; \
+	for(size_t i = 0; i < 4; i++) \
+	{ \
+		while(*(STR) == WHITE_SPACE[i]) (STR)++; \
+	} \
+} \
+while(0)
+
 ///////////////////////////////////////////////////////////////////////////////
 // TYPES
 ///////////////////////////////////////////////////////////////////////////////
@@ -300,6 +322,9 @@ const lamexp_os_version_t lamexp_winver_vista = {6,0};
 const lamexp_os_version_t lamexp_winver_win70 = {6,1};
 const lamexp_os_version_t lamexp_winver_win80 = {6,2};
 const lamexp_os_version_t lamexp_winver_win81 = {6,3};
+
+//GURU MEDITATION
+static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
 
 ///////////////////////////////////////////////////////////////////////////////
 // COMPILER INFO
@@ -685,77 +710,152 @@ static void lamexp_console_color(FILE* file, WORD attributes)
 }
 
 /*
- * Qt message handler
+ * Output logging message to console
  */
-void lamexp_message_handler(QtMsgType type, const char *msg)
-{
-	static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
-
-	if(msg == NULL) return;
-
-	QMutexLocker lock(&g_lamexp_message_mutex);
-
-	if(g_lamexp_log_file)
+static void lamexp_write_console(const int type, const char *msg)
+{	
+	__try
 	{
-		static char prefix[] = "DWCF";
-		int index = qBound(0, static_cast<int>(type), 3);
-		unsigned int timestamp = static_cast<unsigned int>(_time64(NULL) % 3600I64);
-		QString str = QString::fromUtf8(msg).trimmed().replace('\n', '\t');
-		fprintf(g_lamexp_log_file, "[%c][%04u] %s\r\n", prefix[index], timestamp, QUTF8(str));
-		fflush(g_lamexp_log_file);
-	}
-
-	if(g_lamexp_console_attached)
-	{
-		UINT oldOutputCP = GetConsoleOutputCP();
-		if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(CP_UTF8);
-
-		switch(type)
+		if(_isatty(_fileno(stderr)))
 		{
-		case QtCriticalMsg:
-		case QtFatalMsg:
-			fflush(stdout);
-			fflush(stderr);
-			lamexp_console_color(stderr, FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fprintf(stderr, GURU_MEDITATION);
-			fprintf(stderr, "%s\n", msg);
-			fflush(stderr);
-			break;
-		case QtWarningMsg:
-			lamexp_console_color(stderr, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fprintf(stderr, "%s\n", msg);
-			fflush(stderr);
-			break;
-		default:
-			lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-			fprintf(stderr, "%s\n", msg);
-			fflush(stderr);
-			break;
-		}
+			UINT oldOutputCP = GetConsoleOutputCP();
+			if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(CP_UTF8);
+
+			switch(type)
+			{
+			case QtCriticalMsg:
+			case QtFatalMsg:
+				lamexp_console_color(stderr, FOREGROUND_RED | FOREGROUND_INTENSITY);
+				fprintf(stderr, GURU_MEDITATION);
+				fprintf(stderr, "%s\n", msg);
+				fflush(stderr);
+				break;
+			case QtWarningMsg:
+				lamexp_console_color(stderr, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+				fprintf(stderr, "%s\n", msg);
+				fflush(stderr);
+				break;
+			default:
+				lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+				fprintf(stderr, "%s\n", msg);
+				fflush(stderr);
+				break;
+			}
 	
-		lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-		if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(oldOutputCP);
+			lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+			if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(oldOutputCP);
+		}
 	}
-	else
+	__except(1)
 	{
-		QString temp("[LameXP][%1] %2");
+		/*ignore any exception that might occur here!*/
+	}
+}
+
+/*
+ * Output logging message to debugger
+ */
+static void lamexp_write_dbg_out(const int type, const char *msg)
+{	
+	const char *FORMAT = "[LameXP][%c] %s\n";
+
+	__try
+	{
+		char buffer[512];
+		const char* input = msg;
+		TRIM_LEFT(input);
 		
 		switch(type)
 		{
 		case QtCriticalMsg:
 		case QtFatalMsg:
-			temp = temp.arg("C", QString::fromUtf8(msg));
+			_snprintf_s(buffer, 512, _TRUNCATE, FORMAT, 'C', input);
 			break;
 		case QtWarningMsg:
-			temp = temp.arg("W", QString::fromUtf8(msg));
+			_snprintf_s(buffer, 512, _TRUNCATE, FORMAT, 'W', input);
 			break;
 		default:
-			temp = temp.arg("I", QString::fromUtf8(msg));
+			_snprintf_s(buffer, 512, _TRUNCATE, FORMAT, 'I', input);
 			break;
 		}
 
-		temp.replace("\n", "\t").append("\n");
-		OutputDebugStringA(temp.toLatin1().constData());
+		char *temp = &buffer[0];
+		CLEAN_OUTPUT_STRING(temp);
+		OutputDebugStringA(temp);
+	}
+	__except(1)
+	{
+		/*ignore any exception that might occur here!*/
+	}
+}
+
+/*
+ * Output logging message to logfile
+ */
+static void lamexp_write_logfile(const int type, const char *msg)
+{	
+	const char *FORMAT = "[%c][%04u] %s\r\n";
+
+	__try
+	{
+		if(g_lamexp_log_file)
+		{
+			char buffer[512];
+			strncpy_s(buffer, 512, msg, _TRUNCATE);
+
+			char *temp = &buffer[0];
+			TRIM_LEFT(temp);
+			CLEAN_OUTPUT_STRING(temp);
+			
+			const unsigned int timestamp = static_cast<unsigned int>(_time64(NULL) % 3600I64);
+
+			switch(type)
+			{
+			case QtCriticalMsg:
+			case QtFatalMsg:
+				fprintf(g_lamexp_log_file, FORMAT, 'C', timestamp, temp);
+				break;
+			case QtWarningMsg:
+				fprintf(g_lamexp_log_file, FORMAT, 'W', timestamp, temp);
+				break;
+			default:
+				fprintf(g_lamexp_log_file, FORMAT, 'I', timestamp, temp);
+				break;
+			}
+
+			fflush(g_lamexp_log_file);
+		}
+	}
+	__except(1)
+	{
+		/*ignore any exception that might occur here!*/
+	}
+}
+
+/*
+ * Qt message handler
+ */
+void lamexp_message_handler(QtMsgType type, const char *msg)
+{
+	if((!msg) || (!(msg[0])))
+	{
+		return;
+	}
+
+	QMutexLocker lock(&g_lamexp_message_mutex);
+
+	if(g_lamexp_log_file)
+	{
+		lamexp_write_logfile(type, msg);
+	}
+
+	if(g_lamexp_console_attached)
+	{
+		lamexp_write_console(type, msg);
+	}
+	else
+	{
+		lamexp_write_dbg_out(type, msg);
 	}
 
 	if((type == QtCriticalMsg) || (type == QtFatalMsg))
@@ -783,7 +883,7 @@ void lamexp_init_console(const QStringList &argv)
 				FILE *temp = NULL;
 				if(!_wfopen_s(&temp, logfile, L"wb"))
 				{
-					fprintf(temp, "%c%c%c", 0xEF, 0xBB, 0xBF);
+					fprintf(temp, "%c%c%c", char(0xEF), char(0xBB), char(0xBF));
 					g_lamexp_log_file = temp;
 				}
 				free(logfile);
@@ -993,7 +1093,7 @@ static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
 {
 	while(!lamexp_check_for_debugger())
 	{
-		Sleep(250);
+		Sleep(1250);
 	}
 	lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
 	return 666;

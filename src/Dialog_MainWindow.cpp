@@ -1962,6 +1962,15 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 				LAMEXP_DELETE(cueImporter);
 			}
 
+			if(result == QDialog::Accepted)
+			{
+				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+				ui->sourceFileView->update();
+				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+				ui->sourceFileView->scrollToBottom();
+				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+			}
+
 			if(result != (-1)) break;
 		}
 	);
