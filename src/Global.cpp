@@ -1091,18 +1091,22 @@ static __forceinline bool lamexp_check_for_debugger(void)
  */
 static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
 {
-	while(!lamexp_check_for_debugger())
+	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_LOWEST);
+	forever
 	{
-		Sleep(1250);
+		if(lamexp_check_for_debugger())
+		{
+			lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
+			return 666;
+		}
+		lamexp_sleep(1);
 	}
-	lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
-	return 666;
 }
 
 /*
  * Check for debugger (startup routine)
  */
-static HANDLE lamexp_debug_thread_init(void)
+static HANDLE lamexp_debug_thread_init()
 {
 	if(lamexp_check_for_debugger())
 	{
@@ -2691,7 +2695,7 @@ void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase)
 /*
  * Suspend calling thread for N milliseconds
  */
-void lamexp_sleep(const unsigned int delay)
+inline void lamexp_sleep(const unsigned int delay)
 {
 	Sleep(delay);
 }

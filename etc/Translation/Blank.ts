@@ -1755,7 +1755,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="719"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3792"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3793"/>
         <source>Access Denied</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1943,7 +1943,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1379"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1456"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2005"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3735"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3736"/>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2351,238 +2351,238 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2452"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2456"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2453"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2457"/>
         <source>Save CSV file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2452"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2459"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2503"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2509"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2453"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2460"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2504"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2510"/>
         <source>CSV File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2473"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2476"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2479"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2482"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2474"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2477"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2480"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2483"/>
         <source>CSV Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2473"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2474"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2476"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2477"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2479"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2480"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2482"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2483"/>
         <source>The CSV files was created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2503"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2507"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2504"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2508"/>
         <source>Open CSV file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2523"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2526"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2529"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2532"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2535"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2524"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2527"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2530"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2533"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2536"/>
         <source>CSV Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2523"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2524"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2526"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2527"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2529"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2530"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2532"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2533"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2535"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2536"/>
         <source>The CSV files was imported successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2715"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2760"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2716"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2761"/>
         <source>New Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2760"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2761"/>
         <source>Enter the name of the new folder:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2793"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2794"/>
         <source>Failed to create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2793"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2794"/>
         <source>The new folder could not be created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2793"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2794"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3270"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3271"/>
         <source>Current Encoder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3372"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3375"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3373"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3376"/>
         <source>Quality Level %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3378"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3379"/>
         <source>Compression %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3381"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3382"/>
         <source>Uncompressed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3428"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3429"/>
         <source>Best Quality (Slow)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3431"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3432"/>
         <source>High Quality (Recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3434"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3435"/>
         <source>Acceptable Quality (Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3437"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3438"/>
         <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3724"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3725"/>
         <source>File name without extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3725"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3726"/>
         <source>Track number with leading zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3726"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3727"/>
         <source>Track title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3727"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3728"/>
         <source>Artist name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3728"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3729"/>
         <source>Album name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3729"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3730"/>
         <source>Year with (at least) four digits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3730"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3731"/>
         <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3732"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3733"/>
         <source>Characters forbidden in file names:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3735"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3736"/>
         <source>Rename Macros</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3748"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3749"/>
         <source>%n Instance(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3792"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3793"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3915"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3916"/>
         <source>Overwrite Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3915"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3916"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3915"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3916"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3915"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3916"/>
         <source>Revert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3989"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3990"/>
         <source>Already Running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3989"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3990"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3290,22 +3290,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global.cpp" line="1438"/>
+        <location filename="../../src/Global.cpp" line="1442"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1380"/>
+        <location filename="../../src/Global.cpp" line="1384"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1385"/>
+        <location filename="../../src/Global.cpp" line="1389"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global.cpp" line="1397"/>
+        <location filename="../../src/Global.cpp" line="1401"/>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
         <translation type="unfinished"></translation>
     </message>

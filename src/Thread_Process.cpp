@@ -342,7 +342,7 @@ void ProcessThread::processFile()
 
 void ProcessThread::handleUpdate(int progress)
 {
-	//printf("Progress: %d\n", progress);
+	//qDebug("Progress: %d\n", progress);
 	
 	switch(m_currentStep)
 	{

@@ -362,15 +362,7 @@ void InitializationThread::run()
 
 void InitializationThread::delay(void)
 {
-	const char *temp = "|/-\\";
-	printf("Thread is doing something important... ?\b");
-
-	for(int i = 0; i < 20; i++)
-	{
-		printf("%c\b", temp[i%4]);
-	}
-
-	printf("Done\n\n");
+	__noop();
 }
 
 void InitializationThread::initTranslations(void)
