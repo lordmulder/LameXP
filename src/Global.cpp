@@ -1060,29 +1060,22 @@ lamexp_cpu_t lamexp_detect_cpu_features(const QStringList &argv)
  */
 static __forceinline bool lamexp_check_for_debugger(void)
 {
-	if(IsDebuggerPresent())
-	{
-		return true;
-	}
-	
 	__try
 	{
-		CloseHandle((HANDLE) 0x7FFFFFFF);
+		CloseHandle((HANDLE)((DWORD_PTR)-3));
 	}
-	__except(EXCEPTION_EXECUTE_HANDLER)
+	__except(1)
 	{
 		return true;
 	}
-
 	__try 
 	{
-		DebugBreak();
+		__debugbreak();
 	}
-	__except(EXCEPTION_EXECUTE_HANDLER) 
+	__except(1) 
 	{
-		return false;
+		return IsDebuggerPresent();
 	}
-	
 	return true;
 }
 
@@ -1099,7 +1092,7 @@ static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
 			lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
 			return 666;
 		}
-		lamexp_sleep(1);
+		lamexp_sleep(100);
 	}
 }
 
@@ -1112,29 +1105,9 @@ static HANDLE lamexp_debug_thread_init()
 	{
 		lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
 	}
-
-	return (HANDLE) _beginthreadex(NULL, 0, lamexp_debug_thread_proc, NULL, 0, NULL);
+	const uintptr_t h = _beginthreadex(NULL, 0, lamexp_debug_thread_proc, NULL, 0, NULL);
+	return (HANDLE)(h^0xdeadbeef);
 }
-
-/*
- * Check for compatibility mode
- */
-//static bool lamexp_check_compatibility_mode(const char *exportName, const QString &executableName)
-//{
-//	QLibrary kernel32("kernel32.dll");
-//
-//	if((exportName != NULL) && kernel32.load())
-//	{
-//		if(kernel32.resolve(exportName) != NULL)
-//		{
-//			qWarning("Function '%s' exported from 'kernel32.dll' -> Windows compatibility mode!", exportName);
-//			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
-//			return false;
-//		}
-//	}
-//
-//	return true;
-//}
 
 /*
  * Computus according to H. Lichtenberg
@@ -3257,7 +3230,7 @@ void lamexp_finalization(void)
 /*
  * Initialize debug thread
  */
-static const HANDLE g_debug_thread = LAMEXP_DEBUG ? NULL : lamexp_debug_thread_init();
+static const HANDLE g_debug_thread1 = LAMEXP_DEBUG ? NULL : lamexp_debug_thread_init();
 
 /*
  * Get number private bytes [debug only]
