@@ -2016,7 +2016,7 @@
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Поточний кодер: %1</translation>
     </message>
 </context>
 <context>
@@ -2610,7 +2610,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток &apos;%1&apos; вимагає використання Windows XP або пізніших ОС.</translation>
     </message>
 </context>
 <context>
