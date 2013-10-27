@@ -255,7 +255,7 @@ int AboutDialog::exec()
 } \
 while(0)
 
-void AboutDialog::tabChanged(int index)
+void AboutDialog::tabChanged(int index, const bool silent)
 {
 	bool bInitialized = m_initFlags->value(ui->tabWidget->widget(index), false);
 
@@ -286,6 +286,12 @@ void AboutDialog::tabChanged(int index)
 		ui->tabWidget->widget(index)->update();
 		qApp->processEvents();
 		qApp->restoreOverrideCursor();
+	}
+
+	//Play tick sound
+	if(m_settings->soundsEnabled() && (!silent))
+	{
+		lamexp_play_sound(IDR_WAVE_TICK, true);
 	}
 
 	//Scroll to the top
@@ -428,7 +434,7 @@ void AboutDialog::showEvent(QShowEvent *e)
 	QDialog::showEvent(e);
 	
 	ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->infoTab));
-	tabChanged(m_lastTab = ui->tabWidget->currentIndex());
+	tabChanged(m_lastTab = ui->tabWidget->currentIndex(), true);
 	
 	if(m_firstShow)
 	{
@@ -590,6 +596,10 @@ void AboutDialog::initContributorsTab(void)
 	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("SourceForge"), spaces, "http://sourceforge.net/");
 	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
 	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Qt Developer Network"), spaces, "http://qt-project.org/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("BerliOS Developer"), spaces, "http://developer.berlios.de/");
+	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("CodePlex"), spaces, "http://www.codeplex.com/");
 	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
 	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Marius Hudea"), spaces, "http://savedonthe.net/");
 	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);

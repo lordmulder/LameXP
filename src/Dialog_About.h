@@ -53,7 +53,7 @@ public slots:
 	void gotoLicenseTab(void);
 	void showAboutQt(void);
 	void moveDisque(void);
-	void tabChanged(int index);
+	void tabChanged(int index, const bool silent = false);
 	void adjustSize(void);
 	void geometryUpdated(void);
 

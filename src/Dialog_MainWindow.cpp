@@ -1014,7 +1014,7 @@ void MainWindow::changeEvent(QEvent *e)
 		lamexp_update_sysmenu(this, IDM_ABOUTBOX, ui->buttonAbout->text());
 			
 		//Force resize, if needed
-		tabPageChanged(ui->tabWidget->currentIndex());
+		tabPageChanged(ui->tabWidget->currentIndex(), true);
 	}
 }
 
@@ -1616,10 +1616,11 @@ void MainWindow::closeButtonClicked(void)
 /*
  * Tab page changed
  */
-void MainWindow::tabPageChanged(int idx)
+void MainWindow::tabPageChanged(int idx, const bool silent)
 {
 	resizeEvent(NULL);
 	
+	//Update "view" menu
 	QList<QAction*> actions = m_tabActionGroup->actions();
 	for(int i = 0; i < actions.count(); i++)
 	{
@@ -1629,6 +1630,12 @@ void MainWindow::tabPageChanged(int idx)
 		{
 			actions.at(i)->setChecked(true);
 		}
+	}
+
+	//Play tick sound
+	if(m_settings->soundsEnabled() && (!silent))
+	{
+		lamexp_play_sound(IDR_WAVE_TICK, true);
 	}
 
 	int initialWidth = this->width();

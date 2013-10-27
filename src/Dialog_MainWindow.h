@@ -155,7 +155,7 @@ private slots:
 	void sourceModelChanged(void);
 	void styleActionActivated(QAction *action);
 	void tabActionActivated(QAction *action);
-	void tabPageChanged(int idx);
+	void tabPageChanged(int idx, const bool silent = false);
 	void toneAdjustBassChanged(double value);
 	void toneAdjustTrebleChanged(double value);
 	void toneAdjustTrebleReset(void);
