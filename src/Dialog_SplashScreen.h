@@ -33,14 +33,36 @@ class SplashScreen: public QFrame, private Ui::SplashScreen
 	Q_OBJECT
 
 public:
-	SplashScreen(QWidget *parent = 0);
-	~SplashScreen(void);
-	
 	static void showSplash(QThread *thread);
 
 private:
+	SplashScreen(QWidget *parent = 0);
+	~SplashScreen(void);
+
+	enum
+	{
+		STATUS_FADE_IN = 0,
+		STATUS_WAIT = 1,
+		STATUS_FADE_OUT = 2,
+		STATUS_DONE = 3
+	}
+	status_t;
+
 	QMovie *m_working;
-	bool m_canClose;
+	QEventLoop *m_loop;
+	QTimer *m_timer;
+	
+	const unsigned int m_opacitySteps;
+
+	unsigned int m_status;
+	unsigned int m_fadeValue;
+
+	volatile bool m_canClose;
+	volatile bool m_taskBarInit;
+
+private slots:
+	void updateHandler(void);
+	void threadComplete(void);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
