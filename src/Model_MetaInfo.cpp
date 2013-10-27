@@ -484,7 +484,9 @@ void MetaInfoModel::assignInfoFrom(const AudioFileModel &file)
 	m_metaInfo->update(file.metaInfo(), true);
 	if(m_offset)
 	{
+		m_metaInfo->setTitle(QString());
 		m_metaInfo->setPosition(position ? UINT_MAX : 0);
+		m_metaInfo->setCover(QString(), false);
 	}
 	endResetModel();
 }
