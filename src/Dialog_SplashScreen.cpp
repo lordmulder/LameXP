@@ -32,7 +32,7 @@
 #include "WinSevenTaskbar.h"
 
 #define FADE_DELAY 16
-#define OPACITY_DELTA 0.02
+#define OPACITY_DELTA 0.04
 
 //Setup taskbar indicator
 #define SET_TASKBAR_STATE(WIDGET,VAR,FLAG) do \
