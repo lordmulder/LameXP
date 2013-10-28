@@ -292,6 +292,14 @@
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation>Valdec зі складу AC3Filter Tools - декодер AC3/DTS</translation>
     </message>
+    <message>
+        <source>BerliOS Developer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CodePlex</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>

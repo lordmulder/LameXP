@@ -291,6 +291,14 @@
         <source>Codecs.com</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>BerliOS Developer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CodePlex</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AudioFileModel</name>
