@@ -31,6 +31,7 @@
 #include "Dialog_LogView.h"
 #include "Model_Settings.h"
 #include "WinSevenTaskbar.h"
+#include "Tool_Abstract.h"
 
 //Qt includes
 #include <QClipboard>
@@ -649,9 +650,7 @@ bool UpdateDialog::getFile(const QString &url, const QString &outFile, unsigned 
 	}
 
 	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
-	process.setWorkingDirectory(output.absolutePath());
+	lamexp_init_process(process, output.absolutePath());
 
 	QStringList args;
 	args << "--no-cache" << "--no-dns-cache" << QString().sprintf("--max-redirect=%u", maxRedir);
@@ -724,9 +723,7 @@ bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
 	}
 
 	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
-	process.setWorkingDirectory(QFileInfo(file).absolutePath());
+	lamexp_init_process(process, QFileInfo(file).absolutePath());
 
 	QEventLoop loop;
 	connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
@@ -884,6 +881,8 @@ void UpdateDialog::applyUpdate(void)
 		QStringList args;
 		QEventLoop loop;
 
+		lamexp_init_process(process, QFileInfo(m_binaryUpdater).absolutePath());
+
 		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
 		connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
 
@@ -903,7 +902,7 @@ void UpdateDialog::applyUpdate(void)
 		if(updateStarted)
 		{
 			m_updaterProcess = lamexp_process_id(&process);
-			loop.exec();
+			loop.exec(QEventLoop::ExcludeUserInputEvents);
 		}
 		m_updaterProcess = NULL;
 		QApplication::restoreOverrideCursor();

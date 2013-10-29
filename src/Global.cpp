@@ -2846,7 +2846,14 @@ bool lamexp_change_process_priority(const int priority)
  */
 bool lamexp_change_process_priority(const QProcess *proc, const int priority)
 {
-	return lamexp_change_process_priority(proc->pid()->hProcess, priority);
+	if(Q_PID qPid = proc->pid())
+	{
+		return lamexp_change_process_priority(qPid->hProcess, priority);
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /*
@@ -3043,6 +3050,47 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 		}
 	}
 	return false;
+}
+
+/*
+ * Setup QPorcess object
+ */
+void lamexp_init_process(QProcess &process, const QString &wokringDir)
+{
+	//Environment variable names
+	static const char *const s_envvar_names[] =
+	{
+		"WGETRC", "SYSTEM_WGETRC", "HTTP_PROXY", "FTP_PROXY", "NO_PROXY", "GNUPGHOME", "LC_ALL", "LC_COLLATE", "LC_CTYPE", "LC_MESSAGES", "LC_MONETARY", "LC_NUMERIC", "LC_TIME", "LANG", NULL
+	};
+
+	const QString tempDir = QDir::toNativeSeparators(lamexp_temp_folder2());
+
+	QProcessEnvironment env = process.processEnvironment();
+	if(env.isEmpty()) env = QProcessEnvironment::systemEnvironment();
+
+	//Setup TEMP directory
+	env.insert("TEMP", tempDir);
+	env.insert("TMP", tempDir);
+	env.insert("TMPDIR", tempDir);
+	env.insert("HOME", tempDir);
+	env.insert("USERPROFILE", tempDir);
+	env.insert("HOMEPATH", tempDir);
+
+	//Setup PATH variable
+	const QString path = env.value("PATH", QString());
+	env.insert("PATH", path.isEmpty() ? tempDir : QString("%1;%2").arg(tempDir, path));
+
+	//Clean a number of enviroment variables that might affect our tools
+	for(size_t i = 0; s_envvar_names[i]; i++)
+	{
+		env.remove(QString::fromLatin1(s_envvar_names[i]));
+		env.remove(QString::fromLatin1(s_envvar_names[i]).toLower());
+	}
+	
+	process.setWorkingDirectory(wokringDir);
+	process.setProcessChannelMode(QProcess::MergedChannels);
+	process.setReadChannel(QProcess::StandardOutput);
+	process.setProcessEnvironment(env);
 }
 
 /*

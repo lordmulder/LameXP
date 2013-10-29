@@ -3868,30 +3868,31 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 		return;
 	}
 
-	QProcess *process = new QProcess();
-	process->setProcessChannelMode(QProcess::MergedChannels);
-	process->setReadChannel(QProcess::StandardOutput);
-	process->start(binary, command.isEmpty() ? QStringList() : QStringList() << command);
+	QProcess process;
+	lamexp_init_process(process, QFileInfo(binary).absolutePath());
+
+	process.start(binary, command.isEmpty() ? QStringList() : QStringList() << command);
+
 	qApp->setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	if(process->waitForStarted(15000))
+	if(process.waitForStarted(15000))
 	{
 		qApp->processEvents();
-		process->waitForFinished(15000);
+		process.waitForFinished(15000);
 	}
 	
-	if(process->state() != QProcess::NotRunning)
+	if(process.state() != QProcess::NotRunning)
 	{
-		process->kill();
-		process->waitForFinished(-1);
+		process.kill();
+		process.waitForFinished(-1);
 	}
 
 	qApp->restoreOverrideCursor();
 	QStringList output; bool spaceFlag = true;
 
-	while(process->canReadLine())
+	while(process.canReadLine())
 	{
-		QString temp = QString::fromUtf8(process->readLine());
+		QString temp = QString::fromUtf8(process.readLine());
 		TRIM_STRING_RIGHT(temp);
 		if(temp.isEmpty())
 		{
@@ -3902,8 +3903,6 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 			output << temp; spaceFlag = false;
 		}
 	}
-
-	LAMEXP_DELETE(process);
 
 	if(output.count() < 1)
 	{

@@ -96,15 +96,8 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");
+	lamexp_init_process(process, QFileInfo(program).absolutePath());
 
-	QProcessEnvironment env = process.processEnvironment();
-	if(env.isEmpty()) env = QProcessEnvironment::systemEnvironment();
-	env.insert("TEMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
-	env.insert("TMP", QDir::toNativeSeparators(lamexp_temp_folder2()));
-	process.setProcessEnvironment(env);
-		
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
 	process.start(program, args);
 	
 	if(process.waitForStarted())

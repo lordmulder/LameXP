@@ -218,7 +218,9 @@ unsigned __int64 lamexp_current_file_time(void);
 void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase);
 bool lamexp_open_media_file(const QString &mediaFilePath);
 QString lamexp_path_to_short(const QString &longPath);
+void lamexp_init_process(QProcess &process, const QString &wokringDir);
 void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage = NULL);
+
 
 //Debug-only functions
 unsigned long lamexp_dbg_private_bytes(void);

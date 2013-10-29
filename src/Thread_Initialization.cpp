@@ -24,6 +24,7 @@
 
 #include "LockedFile.h"
 #include "Tools.h"
+#include "Tool_Abstract.h"
 
 #include <QFileInfo>
 #include <QCoreApplication>
@@ -463,8 +464,8 @@ void InitializationThread::initNeroAac(void)
 	}
 
 	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
+	lamexp_init_process(process, neroFileInfo[0].absolutePath());
+
 	process.start(neroFileInfo[0].canonicalFilePath(), QStringList() << "-help");
 
 	if(!process.waitForStarted())
@@ -569,8 +570,8 @@ void InitializationThread::initFhgAac(void)
 	}
 
 	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
+	lamexp_init_process(process, fhgFileInfo[0].absolutePath());
+
 	process.start(fhgFileInfo[0].canonicalFilePath(), QStringList() << "--version");
 
 	if(!process.waitForStarted())
@@ -667,8 +668,8 @@ void InitializationThread::initQAac(void)
 	}
 
 	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
+	lamexp_init_process(process, qaacFileInfo[0].absolutePath());
+
 	process.start(qaacFileInfo[0].canonicalFilePath(), QStringList() << "--check");
 
 	if(!process.waitForStarted())

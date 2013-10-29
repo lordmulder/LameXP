@@ -297,9 +297,8 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	QRegExp rxDuration("Duration\\s*:\\s*(\\d\\d):(\\d\\d):(\\d\\d).(\\d\\d)", Qt::CaseInsensitive);
 
 	QProcess process;
-	process.setProcessChannelMode(QProcess::MergedChannels);
-	process.setReadChannel(QProcess::StandardOutput);
-	process.setWorkingDirectory(m_outputDir);
+	lamexp_init_process(process, m_outputDir);
+
 	process.start(m_soxBin, args);
 		
 	if(!process.waitForStarted())
