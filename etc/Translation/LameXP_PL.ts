@@ -2584,32 +2584,32 @@
         <translation type="unfinished">Nie można zapisać do wybranej lokalizacji. Prosze wybierz inną lokalizację!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3923"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3922"/>
         <source>Overwrite Mode</source>
         <translation type="unfinished">Tryb nadpisywania</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3923"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3922"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation type="unfinished">Ostrzeżenie: W tym trybie istniejące pliki będą nadpisywane bez możliwości ich odzyskania!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3923"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3922"/>
         <source>Continue</source>
         <translation type="unfinished">Kontynuuj</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3923"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3922"/>
         <source>Revert</source>
         <translation type="unfinished">Cofnij</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3997"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3996"/>
         <source>Already Running</source>
         <translation type="unfinished">Już działa</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3997"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3996"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished">LameXP już działa, przejdź do działającego procesu!</translation>
     </message>
@@ -3421,105 +3421,105 @@
         <translation type="unfinished">Zamknij</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="277"/>
-        <location filename="../../src/Dialog_Update.cpp" line="549"/>
+        <location filename="../../src/Dialog_Update.cpp" line="278"/>
+        <location filename="../../src/Dialog_Update.cpp" line="550"/>
         <source>Build</source>
         <translation type="unfinished">Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="278"/>
+        <location filename="../../src/Dialog_Update.cpp" line="279"/>
         <source>Unknown</source>
         <translation type="unfinished">Nieznana</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="386"/>
+        <location filename="../../src/Dialog_Update.cpp" line="387"/>
         <source>Testing your internet connection, please wait...</source>
         <translation type="unfinished">Testowanie połączenia internetowego, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="401"/>
-        <location filename="../../src/Dialog_Update.cpp" line="988"/>
+        <location filename="../../src/Dialog_Update.cpp" line="402"/>
+        <location filename="../../src/Dialog_Update.cpp" line="987"/>
         <source>It appears that the computer currently is offline!</source>
         <translation type="unfinished">LameXP wykrył brak dostępu do internetu!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="404"/>
-        <location filename="../../src/Dialog_Update.cpp" line="991"/>
+        <location filename="../../src/Dialog_Update.cpp" line="405"/>
+        <location filename="../../src/Dialog_Update.cpp" line="990"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished">Upewnij się że komputer jest podłączony do internetu i spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="462"/>
+        <location filename="../../src/Dialog_Update.cpp" line="463"/>
         <source>Network connectivity test has failed!</source>
         <translation type="unfinished">Test połączenia internetowego zakończony niepowodzeniem!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="465"/>
+        <location filename="../../src/Dialog_Update.cpp" line="466"/>
         <source>Please make sure your internet connection is working properly and try again.</source>
         <translation type="unfinished">Upewnij się że połączenie internetowe działa prawidłowo i spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="479"/>
+        <location filename="../../src/Dialog_Update.cpp" line="480"/>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished">Sprawdzanie aktualizacji online, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="534"/>
+        <location filename="../../src/Dialog_Update.cpp" line="535"/>
         <source>Failed to fetch update information from server!</source>
         <translation type="unfinished">Pobieranie informacji z serwera zakończone niepowodzeniem!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="539"/>
+        <location filename="../../src/Dialog_Update.cpp" line="540"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation type="unfinished">Serwer aktualizacji wydaje się nie odpowiadać w tej chwili. Prosze spróbować później.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="551"/>
+        <location filename="../../src/Dialog_Update.cpp" line="552"/>
         <source>More information available at:</source>
         <translation type="unfinished">Więcej informacji tutaj:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="557"/>
+        <location filename="../../src/Dialog_Update.cpp" line="558"/>
         <source>A new version of LameXP is available!</source>
         <translation type="unfinished">Dostępna nowa wersja LameXP!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="559"/>
+        <location filename="../../src/Dialog_Update.cpp" line="560"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation type="unfinished">Jest wysoce zalecane aby zainstalować tę aktualizację jak najszybciej.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="568"/>
+        <location filename="../../src/Dialog_Update.cpp" line="569"/>
         <source>No new updates available at this time.</source>
         <translation type="unfinished">Nie ma nowych aktualizacji w tej chwili.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="570"/>
+        <location filename="../../src/Dialog_Update.cpp" line="571"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation type="unfinished">Posiadasz najnowszą wersję LameXP. Sprawdzaj aktualizacje regularnie!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="579"/>
+        <location filename="../../src/Dialog_Update.cpp" line="580"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation type="unfinished">Posiadasz nowszą wersję LameXP niż ostatnie wydanie.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="581"/>
+        <location filename="../../src/Dialog_Update.cpp" line="582"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation type="unfinished">To wskazuje na to, że posiadasz wersję alfa LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="874"/>
+        <location filename="../../src/Dialog_Update.cpp" line="871"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation type="unfinished">Pobieranie aktualizacji w toku, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="919"/>
+        <location filename="../../src/Dialog_Update.cpp" line="918"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">Aktualizacja gotowa do instalacji. Teraz program zostanie zamknięty...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="927"/>
+        <location filename="../../src/Dialog_Update.cpp" line="926"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">Aktualizacja zakończona niepowodzeniem. Prosze spróbować ponownie lub zainstalować ręcznie!</translation>
     </message>

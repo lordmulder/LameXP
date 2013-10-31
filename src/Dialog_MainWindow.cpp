@@ -985,7 +985,7 @@ void MainWindow::changeEvent(QEvent *e)
 
 		//Manually re-translate widgets that UIC doesn't handle
 		m_outputFolderNoteBox->setText(tr("Initializing directory outline, please be patient..."));
-		m_dropNoteLabel->setText(QString("<br><br>» %1 «<br><br><br><img src=\":/images/Sound.png\">").arg(tr("You can drop in audio files here!")));
+		m_dropNoteLabel->setText(QString("<br><img src=\":/images/DropZone.png\"><br><br>%1").arg(tr("You can drop in audio files here!")));
 		m_showDetailsContextAction->setText(tr("Show Details"));
 		m_previewContextAction->setText(tr("Open File in External Application"));
 		m_findFileContextAction->setText(tr("Browse File Location"));
@@ -1113,9 +1113,9 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 		m_dropNoteLabel->setGeometry(port->geometry());
 	}
 
-	if(QWidget *port = ui->outputFolderView->viewport())
+	if (QWidget *port = ui->outputFolderView->viewport())
 	{
-		m_outputFolderNoteBox->setGeometry(16, (port->height() - 64) / 2, port->width() - 32,  64);
+		m_outputFolderNoteBox->setGeometry(16, (port->height() - 64) / 2, port->width() - 32, 64);
 	}
 }
 
@@ -1772,6 +1772,10 @@ void MainWindow::styleActionActivated(QAction *action)
 	const type_info &styleType = typeid(*qApp->style());
 	const bool bTransparent = ((typeid(QWindowsVistaStyle) == styleType) || (typeid(QWindowsXPStyle) == styleType));
 	MAKE_TRANSPARENT(ui->scrollArea, bTransparent);
+
+	//Also force a re-size event
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	resizeEvent(NULL);
 }
 
 /*
