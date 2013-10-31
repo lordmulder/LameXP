@@ -1038,6 +1038,8 @@ void MainWindow::dropEvent(QDropEvent *event)
 {
 	ABORT_IF_BUSY;
 
+	if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_DROP, true);
+
 	QStringList droppedFiles;
 	QList<QUrl> urls = event->mimeData()->urls();
 
@@ -1997,6 +1999,7 @@ void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
 	if(!m_dropBox->isVisible())
 	{
 		m_dropBox->show();
+		QTimer::singleShot(2500, m_dropBox, SLOT(showToolTip()));
 	}
 	
 	lamexp_blink_window(m_dropBox);

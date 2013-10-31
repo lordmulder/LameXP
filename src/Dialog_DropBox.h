@@ -57,6 +57,7 @@ private:
 	SettingsModel *m_settings;
 	bool m_moving;
 	bool m_firstShow;
+	QRect m_screenGeometry;
 
 protected:
 	void keyPressEvent(QKeyEvent *event);

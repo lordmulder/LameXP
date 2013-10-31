@@ -37,6 +37,7 @@
 #define IDR_WAVE_WAITING                675
 #define IDR_WAVE_BLAST                  676
 #define IDR_WAVE_TICK                   677
+#define IDR_WAVE_DROP                   678
 
 /*
  * Next default values for new objects

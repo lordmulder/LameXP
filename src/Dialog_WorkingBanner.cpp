@@ -74,7 +74,7 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	m_progress->setPalette(color);
 
 	//Set Opacity
-	this->setWindowOpacity(0.85);
+	this->setWindowOpacity(0.9);
 
 	//Set wait cursor
 	setCursor(Qt::WaitCursor);
