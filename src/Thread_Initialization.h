@@ -35,11 +35,16 @@ class InitializationThread: public QThread
 
 public:
 	InitializationThread(const lamexp_cpu_t *cpuFeatures);
-	void run();
+
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 	bool getSlowIndicator(void) { return m_slowIndicator; }
 
 	static void selfTest(void);
+
+protected:
+	void run(void);
+	double doInit(const size_t threadCount = 0);
+	void runBenchmark(void);
 
 private:
 	void delay(void);

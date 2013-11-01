@@ -45,6 +45,10 @@
 /* constants */
 static const double g_allowedExtractDelay = 12.0;
 static const size_t BUFF_SIZE = 512;
+static const size_t EXPECTED_TOOL_COUNT = 27;
+
+/* benchmark */
+#undef ENABLE_BENCHMARK
 
 ////////////////////////////////////////////////////////////
 // ExtractorTask class
@@ -188,7 +192,34 @@ InitializationThread::InitializationThread(const lamexp_cpu_t *cpuFeatures)
 // Thread Main
 ////////////////////////////////////////////////////////////
 
-void InitializationThread::run()
+#ifdef ENABLE_BENCHMARK
+#define DO_INIT_FUNCT runBenchmark
+void lamexp_clean_all_tools(void);
+#else //ENABLE_BENCHMARK
+#define DO_INIT_FUNCT doInit
+#endif //ENABLE_BENCHMARK
+
+void InitializationThread::run(void)
+{
+	try
+	{
+		DO_INIT_FUNCT();
+	}
+	catch(const std::exception &error)
+	{
+		fflush(stdout); fflush(stderr);
+		fprintf(stderr, "\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
+		lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
+	}
+	catch(...)
+	{
+		fflush(stdout); fflush(stderr);
+		fprintf(stderr, "\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
+		lamexp_fatal_exit(L"Unhandeled C++ exception error, application will exit!");
+	}
+}
+
+double InitializationThread::doInit(const size_t threadCount)
 {
 	m_bSuccess = false;
 	delay();
@@ -255,11 +286,7 @@ void InitializationThread::run()
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
 	QThreadPool *pool = new QThreadPool();
-	const int idealThreadCount = QThread::idealThreadCount();
-	if(idealThreadCount > 0)
-	{
-		pool->setMaxThreadCount(idealThreadCount * 2);
-	}
+	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, (m_cpuFeatures.count * 2U), EXPECTED_TOOL_COUNT));
 	
 	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
@@ -279,7 +306,7 @@ void InitializationThread::run()
 		if(toolHash.size() != 96)
 		{
 			qFatal("The checksum for \"%s\" has an invalid size!", QUTF8(toolName));
-			return;
+			return -1.0;
 		}
 			
 		QResource *resource = new QResource(QString(":/tools/%1").arg(toolName));
@@ -287,7 +314,7 @@ void InitializationThread::run()
 		{
 			LAMEXP_DELETE(resource);
 			qFatal("The resource for \"%s\" could not be found!", QUTF8(toolName));
-			return;
+			return -1.0;
 		}
 			
 		if(cpuType & cpuSupport)
@@ -318,10 +345,10 @@ void InitializationThread::run()
 		if(ExtractorTask::getErrMsg(errorMsg, BUFF_SIZE))
 		{
 			qFatal("At least one of the required tools could not be initialized:\n%s", errorMsg);
-			return;
+			return -1.0;
 		}
 		qFatal("At least one of the required tools could not be initialized!");
-		return;
+		return -1.0;
 	}
 
 	qDebug("All extracted.\n");
@@ -333,7 +360,7 @@ void InitializationThread::run()
 	}
 
 	//Check delay
-	double delayExtract = static_cast<double>(timeExtractEnd - timeExtractStart) / static_cast<double>(lamexp_perfcounter_frequ());
+	const double delayExtract = static_cast<double>(timeExtractEnd - timeExtractStart) / static_cast<double>(lamexp_perfcounter_frequ());
 	if(delayExtract > g_allowedExtractDelay)
 	{
 		m_slowIndicator = true;
@@ -353,8 +380,55 @@ void InitializationThread::run()
 	initFhgAac();
 	initQAac();
 
-	delay();
 	m_bSuccess = true;
+	delay();
+
+	return delayExtract;
+}
+
+void InitializationThread::runBenchmark(void)
+{
+#ifdef ENABLE_BENCHMARK
+	static const size_t nLoops = 5;
+	const size_t maxThreads = (5 * m_cpuFeatures.count);
+	QMap<size_t, double> results;
+
+	for(size_t c = 1; c <= maxThreads; c++)
+	{
+		double delayAcc = 0.0;
+		for(size_t i = 0; i < nLoops; i++)
+		{
+			delayAcc += doInit(c);
+			lamexp_clean_all_tools();
+		}
+		results.insert(c, (delayAcc / double(nLoops)));
+	}
+
+	qWarning("\n----------------------------------------------");
+	qWarning("Benchmark Results:");
+	qWarning("----------------------------------------------");
+
+	double bestTime = DBL_MAX; size_t bestVal = 0;
+	QList<size_t> keys = results.keys();
+	for(QList<size_t>::ConstIterator iter = keys.begin(); iter != keys.end(); iter++)
+	{
+		const double time = results.value((*iter), DBL_MAX);
+		qWarning("%02u -> %7.4f", (*iter), time);
+		if(time < bestTime)
+		{
+			bestTime = time;
+			bestVal = (*iter);
+		}
+	}
+
+	qWarning("----------------------------------------------");
+	qWarning("BEST: %u of %u (factor: %7.4f)", bestVal, m_cpuFeatures.count, (double(bestVal) / double(m_cpuFeatures.count)));
+	qWarning("----------------------------------------------\n");
+	
+	qFatal("Benchmark complete. Thanks and bye bye!");
+#else //ENABLE_BENCHMARK
+	THROW("Sorry, the benchmark is *not* available in this build!");
+#endif //ENABLE_BENCHMARK
 }
 
 ////////////////////////////////////////////////////////////
@@ -765,7 +839,6 @@ void InitializationThread::initQAac(void)
 
 void InitializationThread::selfTest(void)
 {
-	static const unsigned int expcetedCount = 27;
 	const unsigned int cpu[4] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE};
 
 	LockedFile::selfTest();
@@ -815,7 +888,7 @@ void InitializationThread::selfTest(void)
 				qFatal("Inconsistent checksum data detected. Take care!");
 			}
 		}
-		if(n != expcetedCount)
+		if(n != EXPECTED_TOOL_COUNT)
 		{
 			qFatal("Tool count mismatch for CPU type %u !!!", cpu[4]);
 		}

@@ -3180,6 +3180,25 @@ void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessag
 }
 
 /*
+ * Free all registered tools (final clean-up)
+ */
+void lamexp_clean_all_tools(void)
+{
+	if(g_lamexp_tools.registry)
+	{
+		QStringList keys = g_lamexp_tools.registry->keys();
+		for(int i = 0; i < keys.count(); i++)
+		{
+			LockedFile *lf = g_lamexp_tools.registry->take(keys.at(i));
+			LAMEXP_DELETE(lf);
+		}
+		g_lamexp_tools.registry->clear();
+		g_lamexp_tools.versions->clear();
+		g_lamexp_tools.tags->clear();
+	}
+}
+
+/*
  * Finalization function (final clean-up)
  */
 void lamexp_finalization(void)
@@ -3189,11 +3208,7 @@ void lamexp_finalization(void)
 	//Free all tools
 	if(g_lamexp_tools.registry)
 	{
-		QStringList keys = g_lamexp_tools.registry->keys();
-		for(int i = 0; i < keys.count(); i++)
-		{
-			LAMEXP_DELETE((*g_lamexp_tools.registry)[keys.at(i)]);
-		}
+		lamexp_clean_all_tools();
 		LAMEXP_DELETE(g_lamexp_tools.registry);
 		LAMEXP_DELETE(g_lamexp_tools.versions);
 		LAMEXP_DELETE(g_lamexp_tools.tags);

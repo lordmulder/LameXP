@@ -76,18 +76,12 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 
 FileAnalyzer::~FileAnalyzer(void)
 {
-	if(m_templateFile)
-	{
-		QString templatePath = m_templateFile->filePath();
-		LAMEXP_DELETE(m_templateFile);
-		if(QFile::exists(templatePath)) QFile::remove(templatePath);
-	}
-	
 	if(!m_pool->waitForDone(2500))
 	{
 		qWarning("There are still running tasks in the thread pool!");
 	}
 
+	LAMEXP_DELETE(m_templateFile);
 	LAMEXP_DELETE(m_pool);
 	LAMEXP_DELETE(m_timer);
 }
@@ -351,7 +345,7 @@ bool FileAnalyzer::createTemplate(void)
 
 	try
 	{
-		m_templateFile = new LockedFile(templatePath);
+		m_templateFile = new LockedFile(templatePath, true);
 	}
 	catch(const std::exception &error)
 	{

@@ -131,7 +131,7 @@ void SplashScreen::showSplash(QThread *thread)
 
 	//Start the thread
 	splashScreen->m_timer->start(FADE_DELAY);
-	QTimer::singleShot(3*60*1000, splashScreen->m_loop, SLOT(quit()));
+	QTimer::singleShot(8*60*1000, splashScreen->m_loop, SLOT(quit()));
 	QTimer::singleShot(0, thread, SLOT(start()));
 
 	//Start event handling!
