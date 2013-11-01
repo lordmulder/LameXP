@@ -44,9 +44,9 @@
 
 // WARNING: Passing file descriptors into Qt does NOT work with dynamically linked CRT!
 #ifdef QT_NODLL
-	static const bool g_useFileDescr = 1;
+	static const bool g_useFileDescrForQFile = 1;
 #else
-	static const bool g_useFileDescr = 0;
+	static const bool g_useFileDescrForQFile = 0;
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -86,10 +86,14 @@ QByteArray LockedFile::fileHash(QFile &file)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-LockedFile::LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash)
+LockedFile::LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash, const bool bOwnsFile)
+:
+	m_bOwnsFile(bOwnsFile),
+	m_filePath(QFileInfo(outPath).absoluteFilePath())
 {
-	m_fileHandle = NULL;
-	
+	m_fileDescriptor = -1;
+	HANDLE fileHandle = NULL;
+		
 	//Make sure the resource is valid
 	if(!(resource->isValid() && resource->data()))
 	{
@@ -97,7 +101,6 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	}
 
 	QFile outFile(outPath);
-	m_filePath = QFileInfo(outFile).absoluteFilePath();
 	
 	//Open output file
 	for(int i = 0; i < 64; i++)
@@ -115,71 +118,84 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 			QFile::remove(QFileInfo(outFile).canonicalFilePath());
 			THROW_FMT("File '%s' could not be written!", QUTF8(QFileInfo(outFile).fileName()));
 		}
-		outFile.close();
 	}
 	else
 	{
 		THROW_FMT("File '%s' could not be created!", QUTF8(QFileInfo(outFile).fileName()));
 	}
 
+	//Close file after it has been written
+	outFile.close();
+
 	//Now lock the file!
 	for(int i = 0; i < 64; i++)
 	{
-		m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if((m_fileHandle != NULL) && (m_fileHandle != INVALID_HANDLE_VALUE)) break;
+		fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+		if((fileHandle != NULL) && (fileHandle != INVALID_HANDLE_VALUE)) break;
 		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
 		Sleep(100);
 	}
 	
 	//Locked successfully?
-	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
+	if((fileHandle == NULL) || (fileHandle == INVALID_HANDLE_VALUE))
 	{
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
 		THROW_FMT("File '%s' could not be locked!", QUTF8(QFileInfo(outFile).fileName()));
 	}
 
-	//Open file for reading
-	if(g_useFileDescr)
+	//Get file descriptor
+	m_fileDescriptor = _open_osfhandle(reinterpret_cast<intptr_t>(fileHandle), _O_RDONLY | _O_BINARY);
+	if(m_fileDescriptor < 0)
 	{
-		int fd = _open_osfhandle(reinterpret_cast<intptr_t>(m_fileHandle), _O_RDONLY | _O_BINARY);
-		if(fd >= 0) outFile.open(fd, QIODevice::ReadOnly);
+		THROW_FMT("Failed to obtain C Runtime file descriptor!");
 	}
-	else
+
+	QFile checkFile;
+
+	//Now re-open the file for reading
+	for(int i = 0; i < 64; i++)
 	{
-		for(int i = 0; i < 64; i++)
+		if(g_useFileDescrForQFile)
 		{
-			if(outFile.open(QIODevice::ReadOnly)) break;
-			if(!i) qWarning("Failed to re-open file on first attemp, retrying...");
-			Sleep(100);
+			if(checkFile.open(m_fileDescriptor, QIODevice::ReadOnly)) break;
 		}
+		else
+		{
+			if(checkFile.open(QIODevice::ReadOnly)) break;
+		}
+		if(!i) qWarning("Failed to re-open file on first attemp, retrying...");
+		Sleep(100);
+	}
+
+	//Opened successfully
+	if(!checkFile.isOpen())
+	{
+		QFile::remove(m_filePath);
+		THROW_FMT("File '%s' could not be read!", QUTF8(QFileInfo(checkFile).fileName()));
 	}
 
 	//Verify file contents
-	QByteArray hash;
-	if(outFile.isOpen())
-	{
-		hash = fileHash(outFile);
-		outFile.close();
-	}
-	else
-	{
-		QFile::remove(m_filePath);
-		THROW_FMT("File '%s' could not be read!", QUTF8(QFileInfo(outFile).fileName()));
-	}
+	const QByteArray hash = fileHash(checkFile);
+	checkFile.close();
 
 	//Compare hashes
 	if(hash.isNull() || _stricmp(hash.constData(), expectedHash.constData()))
 	{
 		qWarning("\nFile checksum error:\n A = %s\n B = %s\n", expectedHash.constData(), hash.constData());
-		LAMEXP_CLOSE(m_fileHandle);
+		LAMEXP_CLOSE(fileHandle);
 		QFile::remove(m_filePath);
-		THROW_FMT("File '%s' is corruputed, take care!", QUTF8(QFileInfo(outFile).fileName()));
+		THROW_FMT("File '%s' is corruputed, take care!", QUTF8(QFileInfo(checkFile).fileName()));
 	}
 }
 
-LockedFile::LockedFile(const QString &filePath)
+LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
+:
+	m_bOwnsFile(bOwnsFile),
+	m_filePath(QFileInfo(filePath).canonicalPath())
 {
-	m_fileHandle = NULL;
+	m_fileDescriptor = -1;
+	HANDLE fileHandle = NULL;
+
 	QFileInfo existingFile(filePath);
 	existingFile.setCaching(false);
 	
@@ -189,28 +205,47 @@ LockedFile::LockedFile(const QString &filePath)
 		THROW_FMT("File '%s' does not exist!", QUTF8(existingFile.fileName()));
 	}
 	
-	//Remember file path
-	m_filePath = existingFile.canonicalFilePath();
-
 	//Now lock the file
 	for(int i = 0; i < 64; i++)
 	{
-		m_fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if((m_fileHandle != NULL) && (m_fileHandle != INVALID_HANDLE_VALUE)) break;
+		fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+		if((fileHandle != NULL) && (fileHandle != INVALID_HANDLE_VALUE)) break;
 		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
 		Sleep(100);
 	}
 
 	//Locked successfully?
-	if((m_fileHandle == NULL) || (m_fileHandle == INVALID_HANDLE_VALUE))
+	if((fileHandle == NULL) || (fileHandle == INVALID_HANDLE_VALUE))
 	{
 		THROW_FMT("File '%s' could not be locked!", QUTF8(existingFile.fileName()));
+	}
+
+	//Get file descriptor
+	m_fileDescriptor = _open_osfhandle(reinterpret_cast<intptr_t>(fileHandle), _O_RDONLY | _O_BINARY);
+	if(m_fileDescriptor < 0)
+	{
+		THROW_FMT("Failed to obtain C Runtime file descriptor!");
 	}
 }
 
 LockedFile::~LockedFile(void)
 {
-	LAMEXP_CLOSE(m_fileHandle);
+	if(m_fileDescriptor >= 0)
+	{
+		_close(m_fileDescriptor);
+		m_fileDescriptor = -1;
+	}
+	if(m_bOwnsFile)
+	{
+		if(QFileInfo(m_filePath).exists())
+		{
+			for(int i = 0; i < 64; i++)
+			{
+				if(QFile::remove(m_filePath)) break;
+				lamexp_sleep(1);
+			}
+		}
+	}
 }
 
 const QString &LockedFile::filePath()
