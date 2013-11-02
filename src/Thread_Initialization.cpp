@@ -50,6 +50,33 @@ static const size_t EXPECTED_TOOL_COUNT = 27;
 /* benchmark */
 #undef ENABLE_BENCHMARK
 
+/* number of CPU cores -> number of threads */
+static unsigned int cores2threads(const unsigned int cores)
+{
+	static const size_t LUT_LEN = 4;
+	
+	static const struct
+	{
+		const unsigned int upperBound;
+		const double coeffs[4];
+	}
+	LUT[LUT_LEN] =
+	{
+		{  4, { -0.052695810565,  0.158087431694, 4.982841530055, -1.088233151184 } },
+		{  8, {  0.042431693989, -0.983442622951, 9.548961748634, -7.176393442623 } },
+		{ 12, { -0.006277322404,  0.185573770492, 0.196830601093, 17.762622950820 } },
+		{ 32, {  0.000673497268, -0.064655737705, 3.199584699454,  5.751606557377 } }
+	};
+
+	size_t index = 0;
+	while((cores > LUT[index].upperBound) && (index < (LUT_LEN-1))) index++;
+
+	const double x = qBound(1.0, double(cores), double(LUT[LUT_LEN-1].upperBound));
+	const double y = (LUT[index].coeffs[0] * pow(x, 3.0)) + (LUT[index].coeffs[1] * pow(x, 2.0)) + (LUT[index].coeffs[2] * x) + LUT[index].coeffs[3];
+
+	return qRound(abs(y));
+}
+
 ////////////////////////////////////////////////////////////
 // ExtractorTask class
 ////////////////////////////////////////////////////////////
@@ -286,8 +313,9 @@ double InitializationThread::doInit(const size_t threadCount)
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
 	QThreadPool *pool = new QThreadPool();
-	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, (m_cpuFeatures.count * 3U), EXPECTED_TOOL_COUNT));
-	
+	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, cores2threads(m_cpuFeatures.count), EXPECTED_TOOL_COUNT));
+	//qWarning("Using %u threads for extraction.", pool->maxThreadCount());
+
 	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
 
