@@ -395,13 +395,21 @@ void InitializationThread::runBenchmark(void)
 
 	for(size_t c = 1; c <= maxThreads; c++)
 	{
-		double delayAcc = 0.0;
+		QList<double> delayLst;
+		double delayAvg = 0.0;
 		for(size_t i = 0; i < nLoops; i++)
 		{
-			delayAcc += doInit(c);
+			delayLst << doInit(c);
 			lamexp_clean_all_tools();
 		}
-		results.insert(c, (delayAcc / double(nLoops)));
+		qSort(delayLst.begin(), delayLst.end());
+		delayLst.takeLast();
+		delayLst.takeFirst();
+		for(QList<double>::ConstIterator iter = delayLst.constBegin(); iter != delayLst.constEnd(); iter++)
+		{
+			delayAvg += (*iter);
+		}
+		results.insert(c, (delayAvg / double(delayLst.count())));
 	}
 
 	qWarning("\n----------------------------------------------");
