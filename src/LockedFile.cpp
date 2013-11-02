@@ -44,9 +44,9 @@
 
 // WARNING: Passing file descriptors into Qt does NOT work with dynamically linked CRT!
 #ifdef QT_NODLL
-	static const bool g_useFileDescrForQFile = 1;
+	static const bool g_useFileDescrForQFile = true;
 #else
-	static const bool g_useFileDescrForQFile = 0;
+	static const bool g_useFileDescrForQFile = false;
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 		THROW_FMT("The resource at %p is invalid!", resource);
 	}
 
-	QFile outFile(outPath);
+	QFile outFile(m_filePath);
 	
 	//Open output file
 	for(int i = 0; i < 64; i++)
@@ -140,7 +140,7 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	if((fileHandle == NULL) || (fileHandle == INVALID_HANDLE_VALUE))
 	{
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
-		THROW_FMT("File '%s' could not be locked!", QUTF8(QFileInfo(outFile).fileName()));
+		THROW_FMT("File '%s' could not be locked!", QUTF8(QFileInfo(m_filePath).fileName()));
 	}
 
 	//Get file descriptor
@@ -153,25 +153,26 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	QFile checkFile;
 
 	//Now re-open the file for reading
-	for(int i = 0; i < 64; i++)
+	if(g_useFileDescrForQFile)
 	{
-		if(g_useFileDescrForQFile)
-		{
-			if(checkFile.open(m_fileDescriptor, QIODevice::ReadOnly)) break;
-		}
-		else
+		checkFile.open(m_fileDescriptor, QIODevice::ReadOnly);
+	}
+	else
+	{
+		checkFile.setFileName(m_filePath);
+		for(int i = 0; i < 64; i++)
 		{
 			if(checkFile.open(QIODevice::ReadOnly)) break;
+			if(!i) qWarning("Failed to re-open file on first attemp, retrying...");
+			Sleep(100);
 		}
-		if(!i) qWarning("Failed to re-open file on first attemp, retrying...");
-		Sleep(100);
 	}
 
 	//Opened successfully
 	if(!checkFile.isOpen())
 	{
 		QFile::remove(m_filePath);
-		THROW_FMT("File '%s' could not be read!", QUTF8(QFileInfo(checkFile).fileName()));
+		THROW_FMT("File '%s' could not be read!", QUTF8(QFileInfo(m_filePath).fileName()));
 	}
 
 	//Verify file contents
@@ -184,31 +185,31 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 		qWarning("\nFile checksum error:\n A = %s\n B = %s\n", expectedHash.constData(), hash.constData());
 		LAMEXP_CLOSE(fileHandle);
 		QFile::remove(m_filePath);
-		THROW_FMT("File '%s' is corruputed, take care!", QUTF8(QFileInfo(checkFile).fileName()));
+		THROW_FMT("File '%s' is corruputed, take care!", QUTF8(QFileInfo(m_filePath).fileName()));
 	}
 }
 
 LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 :
 	m_bOwnsFile(bOwnsFile),
-	m_filePath(QFileInfo(filePath).canonicalPath())
+	m_filePath(QFileInfo(filePath).canonicalFilePath())
 {
 	m_fileDescriptor = -1;
 	HANDLE fileHandle = NULL;
 
-	QFileInfo existingFile(filePath);
-	existingFile.setCaching(false);
+	QFileInfo existingFileInfo(filePath);
+	existingFileInfo.setCaching(false);
 	
 	//Make sure the file exists, before we try to lock it
-	if(!existingFile.exists())
+	if(!(existingFileInfo.exists() && existingFileInfo.isFile()))
 	{
-		THROW_FMT("File '%s' does not exist!", QUTF8(existingFile.fileName()));
+		THROW_FMT("File '%s' does not exist!", QUTF8(m_filePath));
 	}
 	
 	//Now lock the file
 	for(int i = 0; i < 64; i++)
 	{
-		fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+		fileHandle = CreateFileW(QWCHAR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
 		if((fileHandle != NULL) && (fileHandle != INVALID_HANDLE_VALUE)) break;
 		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
 		Sleep(100);
@@ -217,7 +218,7 @@ LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 	//Locked successfully?
 	if((fileHandle == NULL) || (fileHandle == INVALID_HANDLE_VALUE))
 	{
-		THROW_FMT("File '%s' could not be locked!", QUTF8(existingFile.fileName()));
+		THROW_FMT("File '%s' could not be locked!", QUTF8(QFileInfo(m_filePath).fileName()));
 	}
 
 	//Get file descriptor
