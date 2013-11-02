@@ -155,6 +155,8 @@ public:
 	LAMEXP_MAKE_OPTION_S(customTempPath)
 	LAMEXP_MAKE_OPTION_B(customTempPathEnabled)
 	LAMEXP_MAKE_OPTION_B(dropBoxWidgetEnabled)
+	LAMEXP_MAKE_OPTION_I(dropBoxWidgetPositionX)
+	LAMEXP_MAKE_OPTION_I(dropBoxWidgetPositionY)
 	LAMEXP_MAKE_OPTION_S(favoriteOutputFolders)
 	LAMEXP_MAKE_OPTION_B(forceStereoDownmix)
 	LAMEXP_MAKE_OPTION_B(hibernateComputer)

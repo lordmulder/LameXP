@@ -777,17 +777,17 @@
         <translation type="unfinished">LameXP - DropBox</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_DropBox.cpp" line="123"/>
+        <location filename="../../src/Dialog_DropBox.cpp" line="129"/>
         <source>LameXP DropBox</source>
         <translation type="unfinished">LameXP DropBox</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_DropBox.cpp" line="123"/>
+        <location filename="../../src/Dialog_DropBox.cpp" line="129"/>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
         <translation type="unfinished">Możesz dodawać pliki do lisy wrzucając je do DropBoxa!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_DropBox.cpp" line="123"/>
+        <location filename="../../src/Dialog_DropBox.cpp" line="129"/>
         <source>(Right-click to close the DropBox)</source>
         <translation type="unfinished">(Kliknij prawym przyciskiem myszy by zamknąć okienko)</translation>
     </message>

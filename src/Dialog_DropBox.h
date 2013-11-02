@@ -53,11 +53,13 @@ private:
 	QPoint *m_mouseReferencePoint;
 	QPoint *m_windowReferencePoint;
 	QLabel *m_counterLabel;
-	QAbstractItemModel *m_model;
-	SettingsModel *m_settings;
+	QAbstractItemModel *const m_model;
+	SettingsModel *const m_settings;
 	bool m_moving;
 	bool m_firstShow;
 	QRect m_screenGeometry;
+
+	static void boundWidget(QWidget *widget);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);

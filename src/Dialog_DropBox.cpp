@@ -90,6 +90,12 @@ QDialog(parent, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint),
 
 DropBox::~DropBox(void)
 {
+	if(!m_firstShow)
+	{
+		m_settings->dropBoxWidgetPositionX(this->x());
+		m_settings->dropBoxWidgetPositionY(this->y());
+	}
+
 	LAMEXP_DELETE(m_counterLabel);
 	LAMEXP_DELETE(m_windowReferencePoint);
 	LAMEXP_DELETE(m_mouseReferencePoint);
@@ -134,11 +140,22 @@ void DropBox::showEvent(QShowEvent *event)
 	if(m_firstShow)
 	{
 		m_firstShow = false;
-		QWidget *parentWidget = dynamic_cast<QWidget*>(this->parent());
-		QRect availGeometry = QApplication::desktop()->availableGeometry((parentWidget) ? parentWidget : this);
-		int max_x = availGeometry.width()  - frameGeometry().width()  + availGeometry.left();
-		int max_y = availGeometry.height() - frameGeometry().height() + availGeometry.top();
-		move(max_x, max_y);
+		int pos_x = m_settings->dropBoxWidgetPositionX();
+		int pos_y = m_settings->dropBoxWidgetPositionY();
+		if((pos_x < 0) && (pos_y < 0))
+		{
+			QWidget *const parentWidget = dynamic_cast<QWidget*>(this->parent());
+			QWidget *const targetWidget = parentWidget ? parentWidget : this;
+			QRect availGeometry = QApplication::desktop()->availableGeometry(targetWidget);
+			pos_x = availGeometry.width()  - frameGeometry().width()  + availGeometry.left();
+			pos_y = availGeometry.height() - frameGeometry().height() + availGeometry.top();
+		}
+		else
+		{
+			pos_x = qBound(0, pos_x, m_screenGeometry.width()  - frameGeometry().width());
+			pos_y = qBound(0, pos_y, m_screenGeometry.height() - frameGeometry().height());
+		}
+		move(pos_x, pos_y);
 	}
 
 	if(m_moving)
@@ -147,6 +164,8 @@ void DropBox::showEvent(QShowEvent *event)
 		m_moving = false;
 		setWindowOpacity(LOW_OPACITY);
 	}
+
+	boundWidget(this);
 }
 
 void DropBox::keyPressEvent(QKeyEvent *event)
@@ -161,7 +180,10 @@ void DropBox::keyReleaseEvent(QKeyEvent *event)
 
 void DropBox::closeEvent(QCloseEvent *event)
 {
-	if(!m_canClose) event->ignore();
+	if(!m_canClose)
+	{
+		event->ignore();
+	}
 }
 
 void DropBox::mousePressEvent(QMouseEvent *event)
@@ -191,29 +213,12 @@ void DropBox::mouseReleaseEvent(QMouseEvent *event)
 {
 	if(m_moving && event->button() != Qt::RightButton)
 	{
-		static const int magnetic = 24;
-		QRect availGeometry = QApplication::desktop()->availableGeometry(this);
-
-		const int max_x = availGeometry.width()  - frameGeometry().width() + availGeometry.left();
-		const int max_y = availGeometry.height() - frameGeometry().height() + availGeometry.top();
-
-		int new_x = qBound(availGeometry.left(), this->x(), max_x);
-		int new_y = qBound(availGeometry.top() , this->y(), max_y);
-
-		if(new_x - availGeometry.left() < magnetic) new_x = availGeometry.left();
-		if(new_y - availGeometry.top()  < magnetic) new_y = availGeometry.top();
-
-		if(max_x - new_x < magnetic) new_x = max_x;
-		if(max_y - new_y < magnetic) new_y = max_y;
-
-		if((this->x() != new_x) || (this->y() != new_y))
-		{
-			move(new_x, new_y);
-		}
-
+		boundWidget(this);
 		QApplication::restoreOverrideCursor();
-		m_moving = false;
 		setWindowOpacity(LOW_OPACITY);
+		m_settings->dropBoxWidgetPositionX(this->x());
+		m_settings->dropBoxWidgetPositionY(this->y());
+		m_moving = false;
 	}
 }
 
@@ -256,4 +261,31 @@ bool DropBox::event(QEvent *event)
 	}
 
 	return QDialog::event(event);
+}
+
+////////////////////////////////////////////////////////////
+// PRIVATE
+////////////////////////////////////////////////////////////
+
+void DropBox::boundWidget(QWidget *widget)
+{
+	static const int magnetic = 24;
+	QRect availGeometry = QApplication::desktop()->availableGeometry(widget);
+
+	const int max_x = availGeometry.width()  - widget->frameGeometry().width()  + availGeometry.left();
+	const int max_y = availGeometry.height() - widget->frameGeometry().height() + availGeometry.top();
+
+	int new_x = qBound(availGeometry.left(), widget->x(), max_x);
+	int new_y = qBound(availGeometry.top(),  widget->y(), max_y);
+
+	if(new_x - availGeometry.left() < magnetic) new_x = availGeometry.left();
+	if(new_y - availGeometry.top()  < magnetic) new_y = availGeometry.top();
+
+	if(max_x - new_x < magnetic) new_x = max_x;
+	if(max_y - new_y < magnetic) new_y = max_y;
+
+	if((widget->x() != new_x) || (widget->y() != new_y))
+	{
+		widget->move(new_x, new_y);
+	}
 }
