@@ -286,7 +286,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
 	QThreadPool *pool = new QThreadPool();
-	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, (m_cpuFeatures.count * 2U), EXPECTED_TOOL_COUNT));
+	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, (m_cpuFeatures.count * 3U), EXPECTED_TOOL_COUNT));
 	
 	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
