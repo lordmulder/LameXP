@@ -327,7 +327,12 @@ del "$(TargetDir)imageformats\q???d4.dll"
     <ClCompile Include="src\Filter_Resample.cpp" />
     <ClCompile Include="src\Filter_ToneAdjust.cpp" />
     <ClCompile Include="src\Genres.cpp" />
-    <ClCompile Include="src\Global.cpp" />
+    <ClCompile Include="src\Global_EntryPoint.cpp" />
+    <ClCompile Include="src\Global_IPC.cpp" />
+    <ClCompile Include="src\Global_Utils.cpp" />
+    <ClCompile Include="src\Global_Version.cpp" />
+    <ClCompile Include="src\Global_Win32.cpp" />
+    <ClCompile Include="src\Global_Tools.cpp" />
     <ClCompile Include="src\JobObject.cpp" />
     <ClCompile Include="src\LockedFile.cpp" />
     <ClCompile Include="src\Main.cpp" />

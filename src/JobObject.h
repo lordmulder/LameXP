@@ -31,6 +31,7 @@ public:
 	~JobObject(void);
 
 	bool addProcessToJob(const QProcess *proc);
+	bool terminateJob(unsigned int exitCode);
 
 private:
 	void *m_hJobObject;

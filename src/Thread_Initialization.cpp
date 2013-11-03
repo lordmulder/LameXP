@@ -221,7 +221,6 @@ InitializationThread::InitializationThread(const lamexp_cpu_t *cpuFeatures)
 
 #ifdef ENABLE_BENCHMARK
 #define DO_INIT_FUNCT runBenchmark
-void lamexp_clean_all_tools(void);
 #else //ENABLE_BENCHMARK
 #define DO_INIT_FUNCT doInit
 #endif //ENABLE_BENCHMARK
@@ -314,7 +313,7 @@ double InitializationThread::doInit(const size_t threadCount)
 
 	QThreadPool *pool = new QThreadPool();
 	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, cores2threads(m_cpuFeatures.count), EXPECTED_TOOL_COUNT));
-	//qWarning("Using %u threads for extraction.", pool->maxThreadCount());
+	/* qWarning("Using %u threads for extraction.", pool->maxThreadCount()); */
 
 	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
