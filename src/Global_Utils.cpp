@@ -434,7 +434,7 @@ bool lamexp_clean_folder(const QString &folderPath)
 	QDir tempFolder(folderPath);
 	if(tempFolder.exists())
 	{
-		QFileInfoList entryList = tempFolder.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
+		QFileInfoList entryList = tempFolder.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden);
 
 		for(int i = 0; i < entryList.count(); i++)
 		{
