@@ -2668,10 +2668,6 @@
         <translation>Il test di connessione di rete è fallito!</translation>
     </message>
     <message>
-        <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation>Per favore assicurati che la tua connessione internet sia funzionante e prova ancora.</translation>
-    </message>
-    <message>
         <source>Checking for new updates online, please wait...</source>
         <translation>Ricerca di nuovi aggiornamenti in rete, attendere prego...</translation>
     </message>
@@ -2734,6 +2730,10 @@
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Initializing, please wait...</source>
+        <translation type="unfinished">Inizializzazione, attendere prego...</translation>
     </message>
 </context>
 </TS>

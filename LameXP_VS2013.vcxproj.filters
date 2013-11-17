@@ -415,6 +415,12 @@
     <ClCompile Include="src\Global_Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Thread_CheckUpdate.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_CheckUpdate.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -548,6 +554,9 @@
     </ClInclude>
     <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h">
       <Filter>Header Files\Misc\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Thread_CheckUpdate.h">
+      <Filter>Header Files\Threads</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

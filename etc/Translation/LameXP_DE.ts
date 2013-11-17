@@ -293,11 +293,11 @@
     </message>
     <message>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2600,7 +2600,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm &apos;%1&apos; benötigt Windows XP oder neuer.</translation>
     </message>
 </context>
 <context>
@@ -2668,10 +2668,6 @@
         <translation>Test der Netzwerkverbindung fehlgeschlagen!</translation>
     </message>
     <message>
-        <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation>Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es dann noch einmal.</translation>
-    </message>
-    <message>
         <source>Checking for new updates online, please wait...</source>
         <translation>Suche online nach neuen Updates, bitte warten...</translation>
     </message>
@@ -2734,6 +2730,10 @@
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Aktivieren Sie Ihre Internetverbindung und versuchen Sie es dann noch einmal.</translation>
+    </message>
+    <message>
+        <source>Initializing, please wait...</source>
+        <translation>Initialisiere, bitte warten...</translation>
     </message>
 </context>
 </TS>

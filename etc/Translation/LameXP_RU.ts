@@ -2696,10 +2696,6 @@
         <translation type="unfinished">Нет соединения с сетью!</translation>
     </message>
     <message>
-        <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation type="unfinished">Проверьте доступность интернет соединения и попробуйте снова.</translation>
-    </message>
-    <message>
         <source>Checking for new updates online, please wait...</source>
         <translation type="unfinished">Проверяю обновления, пожалуйста, подождите...</translation>
     </message>
@@ -2759,6 +2755,10 @@
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation type="unfinished">Пожалуйста, проверьте, что ваш компьютер подключен к интернету и попробуйте снова.</translation>
+    </message>
+    <message>
+        <source>Initializing, please wait...</source>
+        <translation type="unfinished">Инициализация, пожалуйста, подождите...</translation>
     </message>
 </context>
 </TS>

@@ -2690,10 +2690,6 @@
         <translation>Збій перевірки мережевого з&apos;єднання!</translation>
     </message>
     <message>
-        <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation>Будь ласка, впевніться, що ваше інтернет-з&apos;єднання працює коректно і спробуйте знову.</translation>
-    </message>
-    <message>
         <source>Checking for new updates online, please wait...</source>
         <translation>Йде перевірка оновлень онлайн, будь ласка, зачекайте...</translation>
     </message>
@@ -2752,6 +2748,10 @@
     <message>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Збій оновлення. Будь ласка, спробуйте ще раз або завантажте оновлення самостійно!</translation>
+    </message>
+    <message>
+        <source>Initializing, please wait...</source>
+        <translation type="unfinished">Ініціалізація, будь ласка, зачекайте...</translation>
     </message>
 </context>
 </TS>

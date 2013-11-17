@@ -2653,10 +2653,6 @@
         <translation>網絡連接測試失敗 !</translation>
     </message>
     <message>
-        <source>Please make sure your internet connection is working properly and try again.</source>
-        <translation>請確保您的網絡連接正常工作,然后再試.</translation>
-    </message>
-    <message>
         <source>Checking for new updates online, please wait...</source>
         <translation>在線更新檢查新的版本,請稍候...</translation>
     </message>
@@ -2715,6 +2711,10 @@
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>請確保您的計算機連接到 Internet,然后重試.</translation>
+    </message>
+    <message>
+        <source>Initializing, please wait...</source>
+        <translation type="unfinished">正在初始化,請稍候...</translation>
     </message>
 </context>
 </TS>

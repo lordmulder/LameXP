@@ -28,146 +28,24 @@
 //LameXP includes
 #include "Global.h"
 #include "Resource.h"
+#include "Thread_CheckUpdate.h"
 #include "Dialog_LogView.h"
 #include "Model_Settings.h"
 #include "WinSevenTaskbar.h"
-#include "Tool_Abstract.h"
 
 //Qt includes
 #include <QClipboard>
 #include <QFileDialog>
 #include <QTimer>
 #include <QProcess>
-#include <QDate>
-#include <QRegExp>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QCloseEvent>
 #include <QMovie>
-#include <QtConcurrentRun>
-#include <QFutureWatcher>
 
 ///////////////////////////////////////////////////////////////////////////////
 
-static const char *header_id = "!Update";
-static const char *section_id = "LameXP";
-
-static const char *mirror_url_postfix[] = 
-{
-	"update.ver",
-	"update_beta.ver",
-	NULL
-};
-
-static const char *update_mirrors_prim[] =
-{
-	"http://muldersoft.com/",
-	"http://mulder.bplaced.net/",
-	"http://mulder.cwsurf.de/",
-	"http://mulder.6te.net/",
-	"http://mulder.webuda.com/",
-	"http://mulder.byethost13.com/",
-	"http://muldersoft.kilu.de/",
-	"http://muldersoft.zxq.net/",
-	"http://lamexp.sourceforge.net/",
-	"http://lamexp.berlios.de/",
-	"http://lordmulder.github.com/LameXP/",
-	"http://lord_mulder.bitbucket.org/",
-	"http://www.tricksoft.de/",
-	NULL
-};
-
-static const char *update_mirrors_back[] =
-{
-	"http://mplayer.savedonthe.net/",
-	NULL
-};
-
-static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites !!!
-{
-	"http://www.163.com/",
-	"http://www.ac3filter.net/",
-	"http://www.amazon.com/",
-	"http://www.aol.com/",
-	"http://www.apache.org/",
-	"http://www.apple.com/",
-	"http://www.adobe.com/",
-	"http://www.avidemux.org/",
-	"http://www.babylon.com/",
-	"http://www.baidu.com/",
-	"http://www.bbc.co.uk/",
-	"http://www.berlios.de/",
-	"http://www.bing.com/",
-	"http://www.cnet.com/",
-	"http://cnzz.com/",
-	"http://codecs.com/",
-	"http://www.codeplex.com/",
-	"http://qt.digia.com/",
-	"http://www.ebay.com/",
-	"http://www.equation.com/",
-	"http://fc2.com/",
-	"http://www.ffmpeg.org/",
-	"http://www.flickr.com/",
-	"http://blog.gitorious.org/",
-	"http://git-scm.com/",
-	"http://www.gnome.org/",
-	"http://www.gnu.org/",
-	"http://go.com/",
-	"http://code.google.com/",
-	"http://www.heise.de/",
-	"http://www.huffingtonpost.co.uk/",
-	"http://www.iana.org/",
-	"http://www.imdb.com/",
-	"http://www.imgburn.com/",
-	"http://imgur.com/",
-	"http://en.jd.com/",
-	"http://mirrors.kernel.org/",
-	"http://www.libav.org/",
-	"http://www.linkedin.com/",
-	"http://www.livedoor.com/",
-	"http://www.livejournal.com/",
-	"http://mail.ru/",
-	"http://www.mediafire.com/",
-	"http://www.mozilla.org/en-US/",
-	"http://mplayerhq.hu/",
-	"http://www.msn.com/?st=1",
-	"http://oss.netfarm.it/",
-	"http://www.nytimes.com/",
-	"http://www.opera.com/",
-	"http://www.portablefreeware.com/",
-	"http://qt-project.org/",
-	"http://www.quakelive.com/",
-	"http://www.seamonkey-project.org/",
-	"http://www.sina.com.cn/",
-	"http://www.sohu.com/",
-	"http://www.soso.com/",
-	"http://sourceforge.net/",
-	"http://www.spiegel.de/",
-	"http://tdm-gcc.tdragon.net/",
-	"http://www.tdrsmusic.com/",
-	"http://www.ubuntu.com/",
-	"http://status.twitter.com/",
-	"http://www.uol.com.br/",
-	"http://www.videohelp.com/",
-	"http://www.videolan.org/",
-	"http://www.weibo.com/",
-	"http://www.wikipedia.org/",
-	"http://www.winamp.com/",
-	"http://wordpress.com/",
-	"http://us.yahoo.com/",
-	"http://www.yandex.ru/",
-	"http://www.youtube.com/",
-	"http://www.zedo.com/",
-	"http://ffmpeg.zeranoe.com/",
-	NULL
-};
-
-static const int MIN_CONNSCORE = 8;
-static const int VERSION_INFO_EXPIRES_MONTHS = 6;
-static char *USER_AGENT_STR = "Mozilla/5.0 (X11; Linux i686; rv:7.0.1) Gecko/20111106 IceCat/7.0.1";
-
-///////////////////////////////////////////////////////////////////////////////
-
+/*
 template <class T>
 T DO_ASYNC(T (*functionPointer)())
 {
@@ -177,31 +55,23 @@ T DO_ASYNC(T (*functionPointer)())
 	loop.exec(QEventLoop::ExcludeUserInputEvents);
 	return watcher.result();
 }
+*/
 
-///////////////////////////////////////////////////////////////////////////////
+#define SHOW_HINT(TEXT, ICON) do \
+{ \
+	ui->hintLabel->setText((TEXT)); \
+	ui->hintIcon->setPixmap(QIcon((ICON)).pixmap(16,16)); \
+	ui->hintIcon->show(); \
+	ui->hintLabel->show(); \
+} \
+while(0)
 
-class UpdateInfo
-{
-public:
-	UpdateInfo(void) { resetInfo(); }
-	
-	void resetInfo(void)
-	{
-		m_buildNo = 0;
-		m_buildDate.setDate(1900, 1, 1);
-		m_downloadSite.clear();
-		m_downloadAddress.clear();
-		m_downloadFilename.clear();
-		m_downloadFilecode.clear();
-	}
-
-	unsigned int m_buildNo;
-	QDate m_buildDate;
-	QString m_downloadSite;
-	QString m_downloadAddress;
-	QString m_downloadFilename;
-	QString m_downloadFilecode;
-};
+#define UPDATE_TASKBAR(STATE, ICON) do \
+{ \
+	WinSevenTaskbar::setTaskbarState(this->parentWidget(), (STATE)); \
+	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon((ICON))); \
+} \
+while(0)
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -209,24 +79,21 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 :
 	QDialog(parent),
 	ui(new Ui::UpdateDialog),
-	m_binaryWGet(lamexp_lookup_tool("wget.exe")),
-	m_binaryGnuPG(lamexp_lookup_tool("gpgv.exe")),
-	m_binaryUpdater(lamexp_lookup_tool("wupdate.exe")),
-	m_binaryKeys(lamexp_lookup_tool("gpgv.gpg")),
-	m_updateInfo(NULL),
+	m_thread(NULL),
 	m_settings(settings),
 	m_logFile(new QStringList()),
 	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_demo()) : lamexp_version_demo()),
 	m_success(false),
 	m_firstShow(true),
 	m_updateReadyToInstall(false),
-	m_updaterProcess(NULL)
+	m_updaterProcess(NULL),
+	m_binaryUpdater(lamexp_lookup_tool("wupdate.exe"))
 {
-	if(m_binaryWGet.isEmpty() || m_binaryGnuPG.isEmpty() || m_binaryUpdater.isEmpty() || m_binaryKeys.isEmpty())
+	if(m_binaryUpdater.isEmpty())
 	{
 		THROW("Tools not initialized correctly!");
 	}
-	
+
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
@@ -257,9 +124,21 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 
 UpdateDialog::~UpdateDialog(void)
 {
-	if(m_animator) m_animator->stop();
-	
-	LAMEXP_DELETE(m_updateInfo);
+	if(m_animator)
+	{
+		m_animator->stop();
+	}
+
+	if(m_thread)
+	{
+		if(!m_thread->wait(1000))
+		{
+			m_thread->terminate();
+			m_thread->wait();
+		}
+	}
+
+	LAMEXP_DELETE(m_thread);
 	LAMEXP_DELETE(m_logFile);
 	LAMEXP_DELETE(m_animator);
 
@@ -275,6 +154,17 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	
 	if(m_firstShow)
 	{
+		if(!m_thread)
+		{
+			m_thread = new UpdateCheckThread(m_betaUpdates);
+			connect(m_thread, SIGNAL(statusChanged(int)), this, SLOT(threadStatusChanged(int)));
+			connect(m_thread, SIGNAL(progressChanged(int)), this, SLOT(threadProgressChanged(int)));
+			connect(m_thread, SIGNAL(messageLogged(QString)), this, SLOT(threadMessageLogged(QString)));
+			connect(m_thread, SIGNAL(finished()), this, SLOT(threadFinished()));
+			connect(m_thread, SIGNAL(terminated()), this, SLOT(threadFinished()));
+		}
+
+		threadStatusChanged(m_thread->getUpdateStatus());
 		ui->labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
 		ui->labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
 
@@ -289,11 +179,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 		ui->hintIcon->hide();
 		ui->frameAnimation->hide();
 	
-		int counter = MIN_CONNSCORE + 2;
-		for(int i = 0; update_mirrors_prim[i]; i++) counter++;
-		for(int i = 0; update_mirrors_back[i]; i++) counter++;
-
-		ui->progressBar->setMaximum(counter);
+		ui->progressBar->setMaximum(m_thread->getMaximumProgress());
 		ui->progressBar->setValue(0);
 
 		m_updaterProcess = NULL;
@@ -324,11 +210,7 @@ void UpdateDialog::keyPressEvent(QKeyEvent *e)
 	}
 	else if((e->key() == Qt::Key_F12) && e->modifiers().testFlag(Qt::ControlModifier))
 	{
-		if(ui->closeButton->isEnabled())
-		{
-			testKnownWebSites();
-			logButtonClicked();
-		}
+		if(ui->closeButton->isEnabled()) testKnownHosts();
 	}
 	else
 	{
@@ -360,16 +242,15 @@ void UpdateDialog::updateInit(void)
 
 void UpdateDialog::checkForUpdates(void)
 {
-	bool success = false;
-	int connectionScore = 0;
+	if(m_thread->isRunning())
+	{
+		qWarning("Update in progress, cannot check for updates now!");
+	}
 
-	// ----- Initialization ----- //
-
-	m_updateInfo = new UpdateInfo;
-
-	ui->progressBar->setValue(0);
 	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNormalState);
 	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
+
+	ui->progressBar->setValue(0);
 	ui->installButton->setEnabled(false);
 	ui->closeButton->setEnabled(false);
 	ui->retryButton->setEnabled(false);
@@ -382,477 +263,102 @@ void UpdateDialog::checkForUpdates(void)
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
-	// ----- Test Internet Connection ----- //
-
-	ui->statusLabel->setText(tr("Testing your internet connection, please wait..."));
-
 	m_logFile->clear();
-	m_logFile->append("Checking internet connection...");
-	
-	const int networkStatus = DO_ASYNC(lamexp_network_status);
-	if(networkStatus == lamexp_network_non)
+	m_thread->start();
+}
+
+void UpdateDialog::threadStatusChanged(const int status)
+{
+	switch(status)
 	{
-		m_logFile->append(QStringList() << "" << "Operating system reports that the computer is currently offline !!!");
-		if(!ui->retryButton->isVisible()) ui->retryButton->show();
-		if(!ui->logButton->isVisible()) ui->logButton->show();
-		ui->closeButton->setEnabled(true);
-		ui->retryButton->setEnabled(true);
-		ui->logButton->setEnabled(true);
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		ui->hintLabel->setText(tr("Please make sure your computer is connected to the internet and try again."));
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		LAMEXP_DELETE(m_updateInfo);
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, true);
-		QApplication::restoreOverrideCursor();
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
-		return;
-	}
-	
-	ui->progressBar->setValue(1);
-	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-
-	// ----- Test Known Hosts Connectivity ----- //
-
-	QStringList hostList;
-	for(int i = 0; known_hosts[i]; i++)
-	{
-		hostList << QString::fromLatin1(known_hosts[i]);
-	}
-
-	lamexp_seed_rand();
-	while(!hostList.isEmpty())
-	{
-		QString currentHost = hostList.takeAt(lamexp_rand() % hostList.count());
-		if(connectionScore < MIN_CONNSCORE)
-		{
-			m_logFile->append(QStringList() << "" << "Testing host:" << currentHost << "");
-			QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
-			bool httpOk = false;
-			if(getFile(currentHost, outFile, 0, &httpOk))
-			{
-				connectionScore++;
-				ui->progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-				QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-				lamexp_sleep(64);
-			}
-			if(httpOk)
-			{
-				connectionScore++;
-				ui->progressBar->setValue(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-				QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-				lamexp_sleep(64);
-			}
-			QFile::remove(outFile);
-		}
-	}
-
-	if(connectionScore < MIN_CONNSCORE)
-	{
-		if(!ui->retryButton->isVisible()) ui->retryButton->show();
-		if(!ui->logButton->isVisible()) ui->logButton->show();
-		ui->closeButton->setEnabled(true);
-		ui->retryButton->setEnabled(true);
-		ui->logButton->setEnabled(true);
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->statusLabel->setText(tr("Network connectivity test has failed!"));
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		ui->hintLabel->setText(tr("Please make sure your internet connection is working properly and try again."));
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		LAMEXP_DELETE(m_updateInfo);
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, true);
-		QApplication::restoreOverrideCursor();
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
-		return;
-	}
-
-	// ----- Build Mirror List ----- //
-
-	ui->statusLabel->setText(tr("Checking for new updates online, please wait..."));
-	m_logFile->append(QStringList() << "" << "----" << "" << "Checking for updates online...");
-
-	QStringList mirrorList;
-	for(int index = 0; update_mirrors_prim[index]; index++)
-	{
-		mirrorList << QString::fromLatin1(update_mirrors_prim[index]);
-	}
-
-	lamexp_seed_rand();
-	if(const int len = mirrorList.count())
-	{
-		const int rounds = len * 1097;
-		for(int i = 0; i < rounds; i++)
-		{
-			mirrorList.swap(i % len, lamexp_rand() % len);
-		}
-	}
-
-	for(int index = 0; update_mirrors_back[index]; index++)
-	{
-		mirrorList << QString::fromLatin1(update_mirrors_back[index]);
-	}
-	
-	// ----- Fetch Update Info From Server ----- //
-
-	while(!mirrorList.isEmpty())
-	{
-		QString currentMirror = mirrorList.takeFirst();
-		ui->progressBar->setValue(ui->progressBar->value() + 1);
-		if(!success)
-		{
-			if(tryUpdateMirror(m_updateInfo, currentMirror))
-			{
-				success = true;
-			}
-		}
-		else
-		{
-			QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-			lamexp_sleep(64);
-		}
-	}
-	
-	QApplication::restoreOverrideCursor();
-	ui->progressBar->setValue(ui->progressBar->maximum());
-	
-	if(!success)
-	{
-		if(!ui->retryButton->isVisible()) ui->retryButton->show();
-		if(!ui->logButton->isVisible()) ui->logButton->show();
-		ui->closeButton->setEnabled(true);
-		ui->retryButton->setEnabled(true);
-		ui->logButton->setEnabled(true);
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->statusLabel->setText(tr("Failed to fetch update information from server!"));
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
-		ui->hintIcon->setPixmap(QIcon(":/icons/server_error.png").pixmap(16,16));
-		ui->hintLabel->setText(tr("Sorry, the update server might be busy at this time. Plase try again later."));
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		LAMEXP_DELETE(m_updateInfo);
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, true);
-		return;
-	}
-
-	// ----- Download New Program Version ----- //
-	
-	ui->labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(m_updateInfo->m_buildNo), m_updateInfo->m_buildDate.toString(Qt::ISODate)));
-	ui->infoLabel->show();
-	ui->infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), m_updateInfo->m_downloadSite));
-	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	
-	if(m_updateInfo->m_buildNo > lamexp_version_build())
-	{
-		ui->installButton->setEnabled(true);
+	case UpdateCheckThread::UpdateStatus_NotStartedYet:
+		ui->statusLabel->setText(tr("Initializing, please wait..."));
+		break;
+	case UpdateCheckThread::UpdateStatus_CheckingConnection:
+		ui->statusLabel->setText(tr("Testing your internet connection, please wait..."));
+		break;
+	case UpdateCheckThread::UpdateStatus_FetchingUpdates:
+		ui->statusLabel->setText(tr("Checking for new updates online, please wait..."));
+		break;
+	case UpdateCheckThread::UpdateStatus_CompletedUpdateAvailable:
 		ui->statusLabel->setText(tr("A new version of LameXP is available!"));
-		ui->hintIcon->setPixmap(QIcon(":/icons/shield_exclamation.png").pixmap(16,16));
-		ui->hintLabel->setText(tr("We highly recommend all users to install this update as soon as possible."));
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_exclamation.png"));
-		lamexp_beep(lamexp_beep_info);
-	}
-	else if(m_updateInfo->m_buildNo == lamexp_version_build())
-	{
+		SHOW_HINT(tr("We highly recommend all users to install this update as soon as possible."), ":/icons/shield_exclamation.png");
+		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_exclamation.png");
+		break;
+	case UpdateCheckThread::UpdateStatus_CompletedNoUpdates:
 		ui->statusLabel->setText(tr("No new updates available at this time."));
-		ui->hintIcon->setPixmap(QIcon(":/icons/shield_green.png").pixmap(16,16));
-		ui->hintLabel->setText(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"));
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_green.png"));
-		lamexp_beep(lamexp_beep_info);
-	}
-	else
-	{
+		SHOW_HINT(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"), ":/icons/shield_green.png");
+		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_green.png");
+		break;
+	case UpdateCheckThread::UpdateStatus_CompletedNewVersionOlder:
 		ui->statusLabel->setText(tr("Your version appears to be newer than the latest release."));
-		ui->hintIcon->setPixmap(QIcon(":/icons/shield_error.png").pixmap(16,16));
-		ui->hintLabel->setText(tr("This usually indicates your are currently using a pre-release version of LameXP."));
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_error.png"));
-		lamexp_beep(lamexp_beep_warning);
+		SHOW_HINT(tr("This usually indicates your are currently using a pre-release version of LameXP."), ":/icons/shield_error.png");
+		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_error.png");
+		break;
+	case UpdateCheckThread::UpdateStatus_ErrorNoConnection:
+		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
+		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
+		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
+		break;
+	case UpdateCheckThread::UpdateStatus_ErrorConnectionTestFailed:
+		ui->statusLabel->setText(tr("Network connectivity test has failed!"));
+		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
+		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
+		break;
+	case UpdateCheckThread::UpdateStatus_ErrorFetchUpdateInfo:
+		ui->statusLabel->setText(tr("Failed to fetch update information from server!"));
+		SHOW_HINT(tr("Sorry, the update server might be busy at this time. Plase try again later."), ":/icons/server_error.png");
+		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
+		break;
+	default:
+		qWarning("Unknown status %d !!!", int(status));
 	}
-
-	ui->closeButton->setEnabled(true);
-	if(ui->retryButton->isVisible()) ui->retryButton->hide();
-	if(ui->logButton->isVisible()) ui->logButton->hide();
-	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-
-	m_success = true;
 }
 
-bool UpdateDialog::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)
+void UpdateDialog::threadProgressChanged(const int progress)
 {
-	bool success = false;
-	m_logFile->append(QStringList() << "" << "Trying mirror:" << url);
+	ui->progressBar->setValue(progress);
+}
 
-	QString randPart = lamexp_rand_str();
-	QString outFileVersionInfo = QString("%1/%2.ver").arg(lamexp_temp_folder2(), randPart);
-	QString outFileSignature = QString("%1/%2.sig").arg(lamexp_temp_folder2(), randPart);
+void UpdateDialog::threadMessageLogged(const QString &message)
+{
+	(*m_logFile) << message;
+}
 
-	m_logFile->append(QStringList() << "" << "Downloading update info:");
-	bool ok1 = getFile(QString("%1%2").arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileVersionInfo);
+void UpdateDialog::threadFinished(void)
+{
+	const bool bSuccess = m_thread->getSuccess();
+	
+	ui->closeButton->setEnabled(true);
+	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
+	ui->progressBar->setValue(ui->progressBar->maximum());
 
-	m_logFile->append(QStringList() << "" << "Downloading signature:");
-	bool ok2 = getFile(QString("%1%2.sig").arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileSignature);
-
-	if(ok1 && ok2)
+	if(!bSuccess)
 	{
-		m_logFile->append(QStringList() << "" << "Download okay, checking signature:");
-		if(checkSignature(outFileVersionInfo, outFileSignature))
-		{
-			m_logFile->append(QStringList() << "" << "Signature okay, parsing info:");
-			success = parseVersionInfo(outFileVersionInfo, updateInfo);
-		}
-		else
-		{
-			m_logFile->append(QStringList() << "" << "Bad signature, take care!");
-		}
+		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, true);
 	}
 	else
 	{
-		m_logFile->append(QStringList() << "" << "Download has failed!");
-	}
+		const bool bHaveUpdate = (m_thread->getUpdateStatus() == UpdateCheckThread::UpdateStatus_CompletedUpdateAvailable);
+		ui->installButton->setEnabled(bHaveUpdate);
+		lamexp_beep(bHaveUpdate ? lamexp_beep_info : lamexp_beep_warning);
 
-	QFile::remove(outFileVersionInfo);
-	QFile::remove(outFileSignature);
-	
-	return success;
-}
-
-bool UpdateDialog::getFile(const QString &url, const QString &outFile, unsigned int maxRedir, bool *httpOk)
-{
-	QFileInfo output(outFile);
-	output.setCaching(false);
-	if(httpOk) *httpOk = false;
-
-	if(output.exists())
-	{
-		QFile::remove(output.canonicalFilePath());
-		if(output.exists())
+		if(const UpdateInfo *const updateInfo = m_thread->getUpdateInfo())
 		{
-			return false;
+			ui->infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), updateInfo->m_downloadSite));
+			ui->labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(updateInfo->m_buildNo), updateInfo->m_buildDate.toString(Qt::ISODate)));
+			ui->infoLabel->show();
 		}
+
+		m_success = true;
 	}
 
-	QProcess process;
-	lamexp_init_process(process, output.absolutePath());
+	ui->retryButton->setVisible(!bSuccess);
+	ui->logButton->setVisible(!bSuccess);
+	ui->retryButton->setEnabled(!bSuccess);
+	ui->logButton->setEnabled(!bSuccess);
 
-	QStringList args;
-	args << "--no-cache" << "--no-dns-cache" << QString().sprintf("--max-redirect=%u", maxRedir);
-	args << QString("--referer=%1://%2/").arg(QUrl(url).scheme(), QUrl(url).host()) << "-U" << USER_AGENT_STR;
-	args << "-O" << output.fileName() << url;
-
-	QEventLoop loop;
-	connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
-	connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
-	connect(&process, SIGNAL(readyRead()), &loop, SLOT(quit()));
-
-	QTimer timer;
-	timer.setSingleShot(true);
-	timer.setInterval(25000);
-	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-
-	const QRegExp httpResponseOK("200 OK$");
-	
-	process.start(m_binaryWGet, args);
-	
-	if(!process.waitForStarted())
-	{
-		return false;
-	}
-
-	timer.start();
-
-	while(process.state() == QProcess::Running)
-	{
-		loop.exec();
-		bool bTimeOut = (!timer.isActive());
-		while(process.canReadLine())
-		{
-			QString line = QString::fromLatin1(process.readLine()).simplified();
-			if(line.contains(httpResponseOK))
-			{
-				line.append(" [OK]");
-				if(httpOk) *httpOk = true;
-			}
-			m_logFile->append(line);
-		}
-		if(bTimeOut)
-		{
-			qWarning("WGet process timed out <-- killing!");
-			process.kill();
-			process.waitForFinished();
-			m_logFile->append("!!! TIMEOUT !!!");
-			return false;
-		}
-	}
-	
-	timer.stop();
-	timer.disconnect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-
-	m_logFile->append(QString().sprintf("Exited with code %d", process.exitCode()));
-	return (process.exitCode() == 0) && output.exists() && output.isFile();
-}
-
-bool UpdateDialog::checkSignature(const QString &file, const QString &signature)
-{
-	if(QFileInfo(file).absolutePath().compare(QFileInfo(signature).absolutePath(), Qt::CaseInsensitive) != 0)
-	{
-		qWarning("CheckSignature: File and signature should be in same folder!");
-		return false;
-	}
-	if(QFileInfo(file).absolutePath().compare(QFileInfo(m_binaryKeys).absolutePath(), Qt::CaseInsensitive) != 0)
-	{
-		qWarning("CheckSignature: File and keyring should be in same folder!");
-		return false;
-	}
-
-	QProcess process;
-	lamexp_init_process(process, QFileInfo(file).absolutePath());
-
-	QEventLoop loop;
-	connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
-	connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
-	connect(&process, SIGNAL(readyRead()), &loop, SLOT(quit()));
-	
-	process.start(m_binaryGnuPG, QStringList() << "--homedir" << "." << "--keyring" << QFileInfo(m_binaryKeys).fileName() << QFileInfo(signature).fileName() << QFileInfo(file).fileName());
-
-	if(!process.waitForStarted())
-	{
-		return false;
-	}
-
-	while(process.state() == QProcess::Running)
-	{
-		loop.exec();
-		while(process.canReadLine())
-		{
-			m_logFile->append(QString::fromLatin1(process.readLine()).simplified());
-		}
-	}
-	
-	m_logFile->append(QString().sprintf("Exited with code %d", process.exitCode()));
-	return (process.exitCode() == 0);
-}
-
-bool UpdateDialog::parseVersionInfo(const QString &file, UpdateInfo *updateInfo)
-{
-	QRegExp value("^(\\w+)=(.+)$");
-	QRegExp section("^\\[(.+)\\]$");
-
-	QDate updateInfoDate;
-	updateInfo->resetInfo();
-
-	QFile data(file);
-	if(!data.open(QIODevice::ReadOnly))
-	{
-		qWarning("Cannot open update info file for reading!");
-		return false;
-	}
-	
-	bool inHeader = false;
-	bool inSection = false;
-	
-	while(!data.atEnd())
-	{
-		QString line = QString::fromLatin1(data.readLine()).trimmed();
-		if(section.indexIn(line) >= 0)
-		{
-			m_logFile->append(QString("Sec: [%1]").arg(section.cap(1)));
-			inSection = (section.cap(1).compare(section_id, Qt::CaseInsensitive) == 0);
-			inHeader = (section.cap(1).compare(header_id, Qt::CaseInsensitive) == 0);
-			continue;
-		}
-		if(inSection && (value.indexIn(line) >= 0))
-		{
-			m_logFile->append(QString("Val: '%1' ==> '%2").arg(value.cap(1), value.cap(2)));
-			if(value.cap(1).compare("BuildNo", Qt::CaseInsensitive) == 0)
-			{
-				bool ok = false;
-				unsigned int temp = value.cap(2).toUInt(&ok);
-				if(ok) updateInfo->m_buildNo = temp;
-			}
-			else if(value.cap(1).compare("BuildDate", Qt::CaseInsensitive) == 0)
-			{
-				QDate temp = QDate::fromString(value.cap(2).trimmed(), Qt::ISODate);
-				if(temp.isValid()) updateInfo->m_buildDate = temp;
-			}
-			else if(value.cap(1).compare("DownloadSite", Qt::CaseInsensitive) == 0)
-			{
-				updateInfo->m_downloadSite = value.cap(2).trimmed();
-			}
-			else if(value.cap(1).compare("DownloadAddress", Qt::CaseInsensitive) == 0)
-			{
-				updateInfo->m_downloadAddress = value.cap(2).trimmed();
-			}
-			else if(value.cap(1).compare("DownloadFilename", Qt::CaseInsensitive) == 0)
-			{
-				updateInfo->m_downloadFilename = value.cap(2).trimmed();
-			}
-			else if(value.cap(1).compare("DownloadFilecode", Qt::CaseInsensitive) == 0)
-			{
-				updateInfo->m_downloadFilecode = value.cap(2).trimmed();
-			}
-		}
-		if(inHeader && (value.indexIn(line) >= 0))
-		{
-			m_logFile->append(QString("Val: '%1' ==> '%2").arg(value.cap(1), value.cap(2)));
-			if(value.cap(1).compare("TimestampCreated", Qt::CaseInsensitive) == 0)
-			{
-				QDate temp = QDate::fromString(value.cap(2).trimmed(), Qt::ISODate);
-				if(temp.isValid()) updateInfoDate = temp;
-			}
-		}
-	}
-	
-	if(!updateInfoDate.isValid())
-	{
-		updateInfo->resetInfo();
-		m_logFile->append("WARNING: Version info timestamp is missing!");
-		return false;
-	}
-	else if(updateInfoDate.addMonths(VERSION_INFO_EXPIRES_MONTHS) < lamexp_current_date_safe())
-	{
-		updateInfo->resetInfo();
-		m_logFile->append(QString::fromLatin1("WARNING: This version info has expired at %1!").arg(updateInfoDate.addMonths(VERSION_INFO_EXPIRES_MONTHS).toString(Qt::ISODate)));
-		return false;
-	}
-	else if(lamexp_current_date_safe() < updateInfoDate)
-	{
-		m_logFile->append("Version info is from the future, take care!");
-		qWarning("Version info is from the future, take care!");
-	}
-
-	bool complete = true;
-
-	if(!(updateInfo->m_buildNo > 0)) complete = false;
-	if(!(updateInfo->m_buildDate.year() >= 2010)) complete = false;
-	if(updateInfo->m_downloadSite.isEmpty()) complete = false;
-	if(updateInfo->m_downloadAddress.isEmpty()) complete = false;
-	if(updateInfo->m_downloadFilename.isEmpty()) complete = false;
-	if(updateInfo->m_downloadFilecode.isEmpty()) complete = false;
-	
-	if(!complete)
-	{
-		m_logFile->append("WARNING: Version info is incomplete!");
-	}
-
-	return complete;
+	QApplication::restoreOverrideCursor();
 }
 
 void UpdateDialog::linkActivated(const QString &link)
@@ -866,7 +372,7 @@ void UpdateDialog::applyUpdate(void)
 	ui->closeButton->setEnabled(false);
 	ui->retryButton->setEnabled(false);
 
-	if(m_updateInfo)
+	if(const UpdateInfo *updateInfo = m_thread->getUpdateInfo())
 	{
 		ui->statusLabel->setText(tr("Update is being downloaded, please be patient..."));
 		ui->frameAnimation->show();
@@ -886,16 +392,15 @@ void UpdateDialog::applyUpdate(void)
 		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
 		connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
 
-		args << QString("/Location=%1").arg(m_updateInfo->m_downloadAddress);
-		args << QString("/Filename=%1").arg(m_updateInfo->m_downloadFilename);
-		args << QString("/TicketID=%1").arg(m_updateInfo->m_downloadFilecode);
+		args << QString("/Location=%1").arg(updateInfo->m_downloadAddress);
+		args << QString("/Filename=%1").arg(updateInfo->m_downloadFilename);
+		args << QString("/TicketID=%1").arg(updateInfo->m_downloadFilecode);
 		args << QString("/ToFolder=%1").arg(QDir::toNativeSeparators(QDir(QApplication::applicationDirPath()).canonicalPath())); 
 		args << QString("/ToExFile=%1.exe").arg(QFileInfo(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath()).completeBaseName());
-		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(m_updateInfo->m_buildNo));
+		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(updateInfo->m_buildNo));
 
 		QApplication::setOverrideCursor(Qt::WaitCursor);
-		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
+		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarIndeterminateState, ":/icons/transmit_blue.png");
 
 		process.start(m_binaryUpdater, args);
 		bool updateStarted = process.waitForStarted();
@@ -946,136 +451,30 @@ void UpdateDialog::progressBarValueChanged(int value)
 	WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), value, ui->progressBar->maximum());
 }
 
-void UpdateDialog::testKnownWebSites(void)
+void UpdateDialog::testKnownHosts(void)
 {
-	int connectionScore = 0;
-
-	// ----- Initialization ----- //
-
-	ui->progressBar->setValue(0);
-	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNormalState);
-	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
-	ui->installButton->setEnabled(false);
-	ui->closeButton->setEnabled(false);
-	ui->retryButton->setEnabled(false);
-	ui->logButton->setEnabled(false);
-	if(ui->infoLabel->isVisible()) ui->infoLabel->hide();
-	if(ui->hintLabel->isVisible()) ui->hintLabel->hide();
-	if(ui->hintIcon->isVisible()) ui->hintIcon->hide();
-	ui->frameAnimation->show();
-
-	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	QApplication::setOverrideCursor(Qt::WaitCursor);
-
-	// ----- Test Internet Connection ----- //
-
 	ui->statusLabel->setText("Testing all known hosts, this may take a few minutes...");
-
-	m_logFile->clear();
-	m_logFile->append("Checking internet connection...");
 	
-	const int networkStatus = DO_ASYNC(lamexp_network_status);
-	if(networkStatus == lamexp_network_non)
+	if(UpdateCheckThread *testThread = new UpdateCheckThread(m_betaUpdates, true))
 	{
-		m_logFile->append(QStringList() << "" << "Operating system reports that the computer is currently offline !!!");
-		if(!ui->retryButton->isVisible()) ui->retryButton->show();
-		if(!ui->logButton->isVisible()) ui->logButton->show();
-		ui->closeButton->setEnabled(true);
-		ui->retryButton->setEnabled(true);
-		ui->logButton->setEnabled(true);
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		ui->hintLabel->setText(tr("Please make sure your computer is connected to the internet and try again."));
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		LAMEXP_DELETE(m_updateInfo);
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, true);
-		QApplication::restoreOverrideCursor();
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
-		return;
-	}
-	
-	// ----- Test Known Hosts Connectivity ----- //
+		QEventLoop loop;
+		m_logFile->clear();
 
-	QStringList hostList;
-	for(int i = 0; known_hosts[i]; i++)
-	{
-		hostList << QString::fromLatin1(known_hosts[i]);
-	}
+		connect(testThread, SIGNAL(messageLogged(QString)), this, SLOT(threadMessageLogged(QString)));
+		connect(testThread, SIGNAL(finished()), &loop, SLOT(quit()));
+		connect(testThread, SIGNAL(terminated()), &loop, SLOT(quit()));
 
-	qDebug("[Known Hosts]");
-
-	int hostCount = hostList.count();
-	while(!hostList.isEmpty())
-	{
-		QString currentHost = hostList.takeFirst();
-		ui->progressBar->setValue(qRound((static_cast<double>(ui->progressBar->maximum() - 1) / static_cast<double>(hostCount)) * static_cast<double>(connectionScore)) + 1);
-		qDebug("Testing: %s", currentHost.toLatin1().constData());
-		m_logFile->append(QStringList() << "" << "Testing host:" << currentHost << "");
-		QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
-		bool httpOk = false;
-		if(getFile(currentHost, outFile, 0, &httpOk))
+		testThread->start();
+		while(testThread->isRunning())
 		{
-			connectionScore++;
+			QTimer::singleShot(5000, &loop, SLOT(quit()));
+			loop.exec(QEventLoop::ExcludeUserInputEvents);
 		}
-		else
-		{
-			if(httpOk)
-			{
-				qWarning("\nConnectivity test was SLOW on the following site:\n%s\n", currentHost.toLatin1().constData());
-				connectionScore++;
-			}
-			else
-			{
-				qWarning("\nConnectivity test FAILED on the following site:\n%s\n", currentHost.toLatin1().constData());
-			}
-		}
-		QFile::remove(outFile);
-	}
 
-	if(connectionScore < hostCount)
-	{
-		if(!ui->retryButton->isVisible()) ui->retryButton->show();
-		if(!ui->logButton->isVisible()) ui->logButton->show();
-		ui->closeButton->setEnabled(true);
-		ui->retryButton->setEnabled(true);
-		ui->logButton->setEnabled(true);
-		if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-		ui->statusLabel->setText("At least one host could not be reached!");
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		ui->hintIcon->setPixmap(QIcon(":/icons/network_error.png").pixmap(16,16));
-		ui->hintLabel->setText("Please make sure your internet connection is working properly and try again.");
-		ui->hintIcon->show();
-		ui->hintLabel->show();
-		LAMEXP_DELETE(m_updateInfo);
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, true);
-		QApplication::restoreOverrideCursor();
-		ui->progressBar->setValue(ui->progressBar->maximum());
-		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
-		return;
+		LAMEXP_DELETE(testThread);
+		logButtonClicked();
 	}
-
-	// ----- Done ----- //
-	
-	QApplication::restoreOverrideCursor();
-	ui->progressBar->setValue(ui->progressBar->maximum());
 
 	ui->statusLabel->setText("Test completed.");
-	ui->hintIcon->setPixmap(QIcon(":/icons/shield_green.png").pixmap(16,16));
-	ui->hintLabel->setText("Congratulations, the test has completed.");
-	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
-	ui->hintIcon->show();
-	ui->hintLabel->show();
-	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/shield_green.png"));
 	lamexp_beep(lamexp_beep_info);
-
-	ui->closeButton->setEnabled(true);
-	if(ui->retryButton->isVisible()) ui->retryButton->hide();
-	if(ui->logButton->isVisible()) ui->logButton->hide();
-	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
 }
