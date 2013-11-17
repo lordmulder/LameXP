@@ -76,6 +76,7 @@
 #include <cmath>
 #include <ctime>
 #include <process.h>
+#include <csignal>
 
 //Initialize static Qt plugins
 #ifdef QT_NODLL
@@ -365,14 +366,6 @@ bool lamexp_detect_wine(void)
 }
 
 /*
- * Invalid parameters handler
- */
-void lamexp_invalid_param_handler(const wchar_t* exp, const wchar_t* fun, const wchar_t* fil, unsigned int, uintptr_t)
-{
-	lamexp_fatal_exit(L"Invalid parameter handler invoked, application will exit!");
-}
-
-/*
  * Change console text color
  */
 static void lamexp_console_color(FILE* file, WORD attributes)
@@ -540,11 +533,27 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 	}
 }
 
+/*
+ * Invalid parameters handler
+ */
+static void lamexp_invalid_param_handler(const wchar_t* exp, const wchar_t* fun, const wchar_t* fil, unsigned int, uintptr_t)
+{
+	lamexp_fatal_exit(L"Invalid parameter handler invoked, application will exit!");
+}
+
+/*
+ * Signal handler
+ */
+static void lamexp_signal_handler(int signal_num)
+{
+	signal(signal_num, lamexp_signal_handler);
+	lamexp_fatal_exit(L"Signal handler invoked, application will exit!");
+}
 
 /*
  * Global exception handler
  */
-static LONG WINAPI lamexp_exception_handler(__in struct _EXCEPTION_POINTERS *ExceptionInfo)
+static LONG WINAPI lamexp_exception_handler(struct _EXCEPTION_POINTERS *ExceptionInfo)
 {
 	lamexp_fatal_exit(L"Unhandeled exception handler invoked, application will exit!");
 	return LONG_MAX;
@@ -559,6 +568,13 @@ void lamexp_init_error_handlers(void)
 	SetUnhandledExceptionFilter(lamexp_exception_handler);
 	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
 	_set_invalid_parameter_handler(lamexp_invalid_param_handler);
+	
+	static const int signal_num[6] = { SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM };
+
+	for(size_t i = 0; i < 6; i++)
+	{
+		signal(signal_num[i], lamexp_signal_handler);
+	}
 }
 
 /*
@@ -1243,8 +1259,12 @@ bool lamexp_remove_file(const QString &filename)
 	{
 		if(!QFile::remove(filename))
 		{
-			DWORD attributes = GetFileAttributesW(QWCHAR(filename));
-			SetFileAttributesW(QWCHAR(filename), (attributes & (~FILE_ATTRIBUTE_READONLY)));
+			static const DWORD attrMask = FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM;
+			const DWORD attributes = GetFileAttributesW(QWCHAR(filename));
+			if(attributes & attrMask)
+			{
+				SetFileAttributesW(QWCHAR(filename), FILE_ATTRIBUTE_NORMAL);
+			}
 			if(!QFile::remove(filename))
 			{
 				qWarning("Could not delete \"%s\"", filename.toLatin1().constData());
