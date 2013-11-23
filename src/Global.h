@@ -194,6 +194,7 @@ QString lamexp_rand_str(const bool bLong = false);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
 bool lamexp_remove_file(const QString &filename);
 void lamexp_seed_rand(void);
+bool lamexp_sheet_of_glass(QWidget *window);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);
 void lamexp_sleep(const unsigned int delay);
 const char *lamexp_support_url(void);

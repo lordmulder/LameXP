@@ -555,9 +555,6 @@
     <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h">
       <Filter>Header Files\Misc\3rd Party</Filter>
     </ClInclude>
-    <ClInclude Include="src\Thread_CheckUpdate.h">
-      <Filter>Header Files\Threads</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\DropBox.ui">
@@ -761,6 +758,7 @@
     <CustomBuild Include="res\Tools_Misc_C.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="src\Thread_CheckUpdate.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

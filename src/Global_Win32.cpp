@@ -38,6 +38,7 @@
 #include <Objbase.h>
 #include <PowrProf.h>
 #include <Psapi.h>
+#include <dwmapi.h>
 
 //Qt includes
 #include <QApplication>
@@ -1843,6 +1844,62 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 		}
 	}
 	return false;
+}
+
+bool lamexp_sheet_of_glass(QWidget *window)
+{
+	typedef HRESULT (__stdcall *dwmExtendFrameIntoClientArea_t)(HWND hWnd, const MARGINS* pMarInset);
+	typedef HRESULT (__stdcall *dwmEnableBlurBehindWindow_t)(HWND hWnd, const DWM_BLURBEHIND* pBlurBehind);
+	
+	//Does OS support DWM?
+	if(lamexp_get_os_version() < lamexp_winver_vista)
+	{
+		return false;
+	}
+
+	//Load DWMAPI.DLL
+	QLibrary libDwm("dwmapi.dll");
+	if(!libDwm.load())
+	{
+		qWarning("Failed to load DWMAPI.DLL on a DWM-enabled system!");
+		return false;
+	}
+
+	//Lookup required functions
+	dwmExtendFrameIntoClientArea_t dwmExtendFrameIntoClientArea = (dwmExtendFrameIntoClientArea_t) libDwm.resolve("DwmExtendFrameIntoClientArea");
+	dwmEnableBlurBehindWindow_t    dwmEnableBlurBehindWindow    = (dwmEnableBlurBehindWindow_t)    libDwm.resolve("DwmEnableBlurBehindWindow");
+	
+	//Check function pointers
+	if((dwmExtendFrameIntoClientArea == NULL) || (dwmEnableBlurBehindWindow == NULL))
+	{
+		qWarning("Required functions are missing from DWMAPI.DLL on a DWM-enabled system!");
+		return false;
+	}
+
+	//Enable the "sheet of glass" effect on this window
+	MARGINS margins = {-1, -1, -1, -1};
+	if(HRESULT hr = dwmExtendFrameIntoClientArea(window->winId(), &margins))
+	{
+		qWarning("DwmExtendFrameIntoClientArea function has failed! (error %d)", hr);
+		return false;
+	}
+
+	//Create and populate the Blur Behind structure
+	DWM_BLURBEHIND bb;
+	memset(&bb, 0, sizeof(DWM_BLURBEHIND));
+	bb.fEnable = TRUE;
+	bb.dwFlags = DWM_BB_ENABLE;
+	if(HRESULT hr = dwmEnableBlurBehindWindow(window->winId(), &bb))
+	{
+		qWarning("DwmEnableBlurBehindWindow function has failed! (error %d)", hr);
+		return false;
+	}
+
+	//Required for Qt
+	window->setAttribute(Qt::WA_TranslucentBackground);
+	window->setAttribute(Qt::WA_NoSystemBackground);
+
+	return true;
 }
 
 /*

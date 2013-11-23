@@ -472,7 +472,7 @@ void InitializationThread::runBenchmark(void)
 
 void InitializationThread::delay(void)
 {
-	__noop();
+	lamexp_sleep(333);
 }
 
 void InitializationThread::initTranslations(void)

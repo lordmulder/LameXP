@@ -61,7 +61,7 @@ SplashScreen::SplashScreen(QWidget *parent)
 	setupUi(this);
 
 	//Make size fixed
-	setFixedSize(this->size());
+	setFixedSize(this->maximumSize());
 
 	//Create event loop
 	m_loop = new QEventLoop(this);
@@ -74,8 +74,12 @@ SplashScreen::SplashScreen(QWidget *parent)
 	//Connect timer to slot
 	connect(m_timer, SIGNAL(timeout()), this, SLOT(updateHandler()));
 
+	//Enable "sheet of glass" effect on splash screen
+	lamexp_sheet_of_glass(this);
+
 	//Start animation
-	m_working = new QMovie(":/images/Loading.gif");
+	m_working = new QMovie(":/images/Loading4.gif");
+	m_working->setCacheMode(QMovie::CacheAll);
 	labelLoading->setMovie(m_working);
 	m_working->start();
 
