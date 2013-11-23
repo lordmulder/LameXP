@@ -294,11 +294,11 @@
     </message>
     <message>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Розробник BerliOS</translation>
     </message>
     <message>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation>CodePlex</translation>
     </message>
 </context>
 <context>
@@ -2751,7 +2751,7 @@
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Ініціалізація, будь ласка, зачекайте...</translation>
+        <translation>Ініціалізація, будь ласка, зачекайте...</translation>
     </message>
 </context>
 </TS>
