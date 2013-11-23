@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>SplashScreen</class>
  <widget class="QFrame" name="SplashScreen">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,9 +37,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>41</red>
+        <green>58</green>
+        <blue>86</blue>
        </color>
       </brush>
      </colorrole>
@@ -63,9 +66,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>41</red>
+        <green>58</green>
+        <blue>86</blue>
        </color>
       </brush>
      </colorrole>
@@ -83,18 +86,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>41</red>
+        <green>58</green>
+        <blue>86</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>41</red>
+        <green>58</green>
+        <blue>86</blue>
        </color>
       </brush>
      </colorrole>
@@ -103,10 +106,6 @@
   </property>
   <property name="windowTitle">
    <string>LameXP is launching...</string>
-  </property>
-  <property name="windowIcon">
-   <iconset resource="../res/Images.qrc">
-    <normaloff>:/images/Loading2.gif</normaloff>:/images/Loading2.gif</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>

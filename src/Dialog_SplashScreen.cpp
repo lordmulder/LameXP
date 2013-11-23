@@ -61,8 +61,8 @@ SplashScreen::SplashScreen(QWidget *parent)
 	setupUi(this);
 
 	//Make size fixed
-	setFixedSize(this->maximumSize());
-
+	setFixedSize(this->size());
+	
 	//Create event loop
 	m_loop = new QEventLoop(this);
 
@@ -75,16 +75,16 @@ SplashScreen::SplashScreen(QWidget *parent)
 	connect(m_timer, SIGNAL(timeout()), this, SLOT(updateHandler()));
 
 	//Enable "sheet of glass" effect on splash screen
-	lamexp_sheet_of_glass(this);
+	if(!lamexp_sheet_of_glass(this))
+	{
+		setStyleSheet("background-image: url(:/images/Background.jpg)");
+	}
 
 	//Start animation
 	m_working = new QMovie(":/images/Loading4.gif");
 	m_working->setCacheMode(QMovie::CacheAll);
 	labelLoading->setMovie(m_working);
 	m_working->start();
-
-	//Set wait cursor
-	setCursor(Qt::WaitCursor);
 
 	//Init status
 	m_canClose = false;
@@ -116,10 +116,13 @@ SplashScreen::~SplashScreen(void)
 void SplashScreen::showSplash(QThread *thread)
 {
 	SplashScreen *splashScreen = new SplashScreen();
-	
+
 	//Show splash
 	splashScreen->setWindowOpacity(OPACITY_DELTA);
 	splashScreen->show();
+
+	//Set wait cursor
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 	//Wait for window to show
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -136,7 +139,7 @@ void SplashScreen::showSplash(QThread *thread)
 	//Start the thread
 	splashScreen->m_timer->start(FADE_DELAY);
 	QTimer::singleShot(8*60*1000, splashScreen->m_loop, SLOT(quit()));
-	QTimer::singleShot(0, thread, SLOT(start()));
+	QTimer::singleShot(333, thread, SLOT(start()));
 
 	//Start event handling!
 	const int ret = splashScreen->m_loop->exec(QEventLoop::ExcludeUserInputEvents);
@@ -150,6 +153,9 @@ void SplashScreen::showSplash(QThread *thread)
 
 	//Restore taskbar
 	SET_TASKBAR_STATE(splashScreen, splashScreen->m_taskBarInit, false);
+
+	//Restore cursor
+	QApplication::restoreOverrideCursor();
 
 	//Hide splash
 	splashScreen->m_canClose = true;

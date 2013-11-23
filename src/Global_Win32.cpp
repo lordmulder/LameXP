@@ -169,6 +169,17 @@ static struct
 }
 g_lamexp_themes_enabled;
 
+//Win32 DWM API functions
+static struct
+{
+	bool bInitialized;
+	QLibrary *dwmapi_dll;
+	HRESULT (__stdcall *dwmExtendFrameIntoClientArea)(HWND hWnd, const MARGINS* pMarInset);
+	HRESULT (__stdcall *dwmEnableBlurBehindWindow)(HWND hWnd, const DWM_BLURBEHIND* pBlurBehind);
+	QReadWriteLock lock;
+}
+g_lamexp_dwmapi;
+
 //Image formats
 static const char *g_lamexp_imageformats[] = {"bmp", "png", "jpg", "gif", "ico", "xpm", NULL}; //"svg"
 
@@ -1846,39 +1857,61 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 	return false;
 }
 
-bool lamexp_sheet_of_glass(QWidget *window)
+static void lamexp_init_dwmapi(void)
 {
-	typedef HRESULT (__stdcall *dwmExtendFrameIntoClientArea_t)(HWND hWnd, const MARGINS* pMarInset);
-	typedef HRESULT (__stdcall *dwmEnableBlurBehindWindow_t)(HWND hWnd, const DWM_BLURBEHIND* pBlurBehind);
+	QReadLocker writeLock(&g_lamexp_dwmapi.lock);
+
+	//Not initialized yet?
+	if(g_lamexp_dwmapi.bInitialized)
+	{
+		return;
+	}
 	
 	//Does OS support DWM?
-	if(lamexp_get_os_version() < lamexp_winver_vista)
+	if(lamexp_get_os_version() >= lamexp_winver_vista)
 	{
-		return false;
+		//Load DWMAPI.DLL
+		g_lamexp_dwmapi.dwmapi_dll = new QLibrary("dwmapi.dll");
+		if(g_lamexp_dwmapi.dwmapi_dll->load())
+		{
+			//Lookup required functions
+			g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = (HRESULT (__stdcall*)(HWND, const MARGINS*))        g_lamexp_dwmapi.dwmapi_dll->resolve("DwmExtendFrameIntoClientArea");
+			g_lamexp_dwmapi.dwmEnableBlurBehindWindow    = (HRESULT (__stdcall*)(HWND, const DWM_BLURBEHIND*)) g_lamexp_dwmapi.dwmapi_dll->resolve("DwmEnableBlurBehindWindow");
+		}
+		else
+		{
+			LAMEXP_DELETE(g_lamexp_dwmapi.dwmapi_dll);
+			qWarning("Failed to load DWMAPI.DLL on a DWM-enabled system!");
+		}
 	}
 
-	//Load DWMAPI.DLL
-	QLibrary libDwm("dwmapi.dll");
-	if(!libDwm.load())
-	{
-		qWarning("Failed to load DWMAPI.DLL on a DWM-enabled system!");
-		return false;
-	}
+	g_lamexp_dwmapi.bInitialized = true;
+}
 
-	//Lookup required functions
-	dwmExtendFrameIntoClientArea_t dwmExtendFrameIntoClientArea = (dwmExtendFrameIntoClientArea_t) libDwm.resolve("DwmExtendFrameIntoClientArea");
-	dwmEnableBlurBehindWindow_t    dwmEnableBlurBehindWindow    = (dwmEnableBlurBehindWindow_t)    libDwm.resolve("DwmEnableBlurBehindWindow");
+/*
+ * Enable "sheet of glass" effect on the given Window
+ */
+bool lamexp_sheet_of_glass(QWidget *window)
+{
+	QReadLocker readLock(&g_lamexp_dwmapi.lock);
+
+	//Initialize the DWM API
+	while(!g_lamexp_dwmapi.bInitialized)
+	{
+		readLock.unlock();
+		lamexp_init_dwmapi();
+		readLock.relock();
+	}
 	
-	//Check function pointers
-	if((dwmExtendFrameIntoClientArea == NULL) || (dwmEnableBlurBehindWindow == NULL))
+	//Required functions available?
+	if((g_lamexp_dwmapi.dwmExtendFrameIntoClientArea == NULL) || (g_lamexp_dwmapi.dwmEnableBlurBehindWindow == NULL))
 	{
-		qWarning("Required functions are missing from DWMAPI.DLL on a DWM-enabled system!");
 		return false;
 	}
 
 	//Enable the "sheet of glass" effect on this window
 	MARGINS margins = {-1, -1, -1, -1};
-	if(HRESULT hr = dwmExtendFrameIntoClientArea(window->winId(), &margins))
+	if(HRESULT hr = g_lamexp_dwmapi.dwmExtendFrameIntoClientArea(window->winId(), &margins))
 	{
 		qWarning("DwmExtendFrameIntoClientArea function has failed! (error %d)", hr);
 		return false;
@@ -1889,7 +1922,7 @@ bool lamexp_sheet_of_glass(QWidget *window)
 	memset(&bb, 0, sizeof(DWM_BLURBEHIND));
 	bb.fEnable = TRUE;
 	bb.dwFlags = DWM_BB_ENABLE;
-	if(HRESULT hr = dwmEnableBlurBehindWindow(window->winId(), &bb))
+	if(HRESULT hr = g_lamexp_dwmapi.dwmEnableBlurBehindWindow(window->winId(), &bb))
 	{
 		qWarning("DwmEnableBlurBehindWindow function has failed! (error %d)", hr);
 		return false;
@@ -1974,6 +2007,11 @@ void lamexp_finalization(void)
 	//Destroy Qt application object
 	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
 	LAMEXP_DELETE(application);
+
+	//Release DWM API
+	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
+	g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = NULL;
+	LAMEXP_DELETE(g_lamexp_dwmapi.dwmapi_dll);
 
 	//Detach from shared memory
 	lamexp_ipc_exit();
@@ -2062,4 +2100,5 @@ extern "C" void _lamexp_global_init_win32(void)
 	LAMEXP_ZERO_MEMORY(g_lamexp_os_version);
 	LAMEXP_ZERO_MEMORY(g_lamexp_wine);
 	LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
+	LAMEXP_ZERO_MEMORY(g_lamexp_dwmapi);
 }
