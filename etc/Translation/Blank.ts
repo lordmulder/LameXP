@@ -3300,22 +3300,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1011"/>
+        <location filename="../../src/Global_Win32.cpp" line="1023"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="953"/>
+        <location filename="../../src/Global_Win32.cpp" line="965"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="958"/>
+        <location filename="../../src/Global_Win32.cpp" line="970"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="970"/>
+        <location filename="../../src/Global_Win32.cpp" line="982"/>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3336,7 +3336,7 @@
 <context>
     <name>SplashScreen</name>
     <message>
-        <location filename="../../gui/SplashScreen.ui" line="105"/>
+        <location filename="../../gui/SplashScreen.ui" line="108"/>
         <source>LameXP is launching...</source>
         <translation type="unfinished"></translation>
     </message>

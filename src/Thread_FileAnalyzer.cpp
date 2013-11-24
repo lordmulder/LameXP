@@ -152,8 +152,8 @@ void FileAnalyzer::run()
 	m_timer->invalidate();
 
 	//Update progress
-	emit progressMaxChanged(m_inputFiles.count());
-	emit progressValChanged(0);
+	//emit progressMaxChanged(m_inputFiles.count());
+	//emit progressValChanged(0);
 
 	//Create MediaInfo template file
 	if(!m_templateFile)
@@ -180,6 +180,7 @@ void FileAnalyzer::run()
 
 	//Update progress
 	emit progressMaxChanged(nFiles);
+	emit progressValChanged(0);
 
 	//Create thread pool
 	if(!m_pool) m_pool = new QThreadPool();

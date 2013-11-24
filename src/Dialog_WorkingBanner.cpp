@@ -29,6 +29,7 @@
 #include <QMovie>
 #include <QKeyEvent>
 #include <QFontMetrics>
+#include <QPainter>
 
 #define EPS (1.0E-5)
 
@@ -37,6 +38,36 @@
 /* If, after 50 ms, the wait() function returns with FALSE, then the thread probably is still running and we return TRUE. Otherwise we can return FALSE. */
 #define THREAD_RUNNING(THRD) (((THRD)->isRunning()) ? (!((THRD)->wait(1))) : false)
 
+/*Update text color*/
+static inline void SET_TEXT_COLOR(QWidget *control, const QColor &color)
+{
+	QPalette pal = control->palette();
+	pal.setColor(QPalette::WindowText, color);
+	pal.setColor(QPalette::Text, color);
+	control->setPalette(pal);
+}
+
+/*Make widget translucent*/
+static inline void MAKE_TRANSLUCENT(QWidget *control)
+{
+	control->setAttribute(Qt::WA_TranslucentBackground);
+	control->setAttribute(Qt::WA_NoSystemBackground);
+}
+
+/*Update widget margins*/
+static inline void UPDATE_MARGINS(QWidget *control, int l = 0, int r = 0, int t = 0, int b = 0)
+{
+	if(QLayout *layout = control->layout())
+	{
+		QMargins margins = layout->contentsMargins();
+		margins.setLeft(margins.left() + l);
+		margins.setRight(margins.right() + r);
+		margins.setTop(margins.top() + t);
+		margins.setBottom(margins.bottom() + b);
+		layout->setContentsMargins(margins);
+	}
+}
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -44,40 +75,35 @@
 WorkingBanner::WorkingBanner(QWidget *parent)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
-	m_progressMax(0), m_progressVal(0), m_progressInt(0), m_metrics(NULL)
+	m_metrics(NULL), m_working(NULL)
 {
 	//Init the dialog, from the .ui file
 	setupUi(this);
 	setModal(true);
 
-	//Start animation
-	m_working = new QMovie(":/images/Busy.gif");
-	m_working->setSpeed(50);
-	labelWorking->setMovie(m_working);
-	m_working->start();
-
-	//Create progress indicator
-	m_progress = new QLabel(labelWorking);
-	m_progress->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-	m_progress->move(0, 0);
-	m_progress->resize(labelWorking->size());
-
-	//Set font size
-	QFont font = m_progress->font();
-	font.setPointSize(6);
-	m_progress->setFont(font);
-
-	//Set font color
-	QPalette color = m_progress->palette();
-	color.setColor(QPalette::Text, QColor::fromRgb(0x33, 0x33, 0x33));
-	color.setColor(QPalette::WindowText, QColor::fromRgb(0x33, 0x33, 0x33));
-	m_progress->setPalette(color);
+	//Enable the "sheet of glass" effect
+	if(lamexp_sheet_of_glass(this))
+	{
+		SET_TEXT_COLOR(labelStatus, lamexp_system_color(lamexp_syscolor_caption));
+	}
+	else
+	{
+		UPDATE_MARGINS(this, 5);
+		m_working = new QMovie(":/images/Busy.gif");
+		m_working->setSpeed(75);
+		m_working->setCacheMode(QMovie::CacheAll);
+		labelWorking->setMovie(m_working);
+		m_working->start();
+	}
 
 	//Set Opacity
 	this->setWindowOpacity(0.9);
 
 	//Set wait cursor
 	setCursor(Qt::WaitCursor);
+
+	//Clear label
+	labelStatus->clear();
 }
 
 ////////////////////////////////////////////////////////////
@@ -89,11 +115,9 @@ WorkingBanner::~WorkingBanner(void)
 	if(m_working)
 	{
 		m_working->stop();
-		delete m_working;
-		m_working = NULL;
+		LAMEXP_DELETE(m_working);
 	}
 
-	LAMEXP_DELETE(m_progress);
 	LAMEXP_DELETE(m_metrics);
 }
 
@@ -104,22 +128,14 @@ WorkingBanner::~WorkingBanner(void)
 void WorkingBanner::show(const QString &text)
 {
 	m_canClose = false;
-	m_progressInt = -1;
 
 	QDialog::show();
 	setFixedSize(size());
 	setText(text);
 
-	m_progress->setText(QString());
-
-	QApplication::processEvents();
-}
-
-bool WorkingBanner::close(void)
-{
-	m_canClose = true;
-	emit userAbort();
-	return QDialog::close();
+	//Reset progress
+	progressBar->setMaximum(0);
+	progressBar->setValue(-1);
 }
 
 void WorkingBanner::show(const QString &text, QThread *thread)
@@ -139,11 +155,17 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	//Start the thread
 	thread->start();
 
+	//Update cursor
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
 	//Loop while thread is still running
 	while(THREAD_RUNNING(thread))
 	{
 		loop->exec();
 	}
+
+	//Restore cursor
+	QApplication::restoreOverrideCursor();
 
 	//Set taskbar state
 	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -165,8 +187,14 @@ void WorkingBanner::show(const QString &text, QEventLoop *loop)
 	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), &QIcon(":/icons/hourglass.png"));
 	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
 
+	//Update cursor
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
 	//Loop while thread is running
 	loop->exec(QEventLoop::ExcludeUserInputEvents);
+
+	//Restore cursor
+	QApplication::restoreOverrideCursor();
 
 	//Set taskbar state
 	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -174,6 +202,13 @@ void WorkingBanner::show(const QString &text, QEventLoop *loop)
 
 	//Hide splash
 	this->close();
+}
+
+bool WorkingBanner::close(void)
+{
+	m_canClose = true;
+	emit userAbort();
+	return QDialog::close();
 }
 
 ////////////////////////////////////////////////////////////
@@ -217,14 +252,14 @@ void WorkingBanner::setText(const QString &text)
 		 m_metrics = new QFontMetrics(labelStatus->font());
 	}
 
-	if(m_metrics->width(text) <= labelStatus->width())
+	if(m_metrics->width(text) <= labelStatus->width() - 8)
 	{
 		labelStatus->setText(text);
 	}
 	else
 	{
 		QString choppedText = text.simplified().append("...");
-		while((m_metrics->width(choppedText) > labelStatus->width()) && (choppedText.length() > 8))
+		while((m_metrics->width(choppedText) > labelStatus->width() - 8) && (choppedText.length() > 8))
 		{
 			choppedText.chop(4);
 			choppedText = choppedText.trimmed();
@@ -232,28 +267,23 @@ void WorkingBanner::setText(const QString &text)
 		}
 		labelStatus->setText(choppedText);
 	}
-	if(this->isVisible())
-	{
-		labelStatus->repaint();
-	}
 }
 
 void WorkingBanner::setProgressMax(unsigned int max)
 {
-	m_progressMax = max;
-	updateProgress();
+	progressBar->setMaximum(max);
 }
 
 void WorkingBanner::setProgressVal(unsigned int val)
 {
-	m_progressVal = val;
-	updateProgress();
+	progressBar->setValue(val);
 }
 
 ////////////////////////////////////////////////////////////
 // Private
 ////////////////////////////////////////////////////////////
 
+/*
 void WorkingBanner::updateProgress(void)
 {
 	if(m_progressMax > 0)
@@ -270,3 +300,4 @@ void WorkingBanner::updateProgress(void)
 		}
 	}
 }
+*/

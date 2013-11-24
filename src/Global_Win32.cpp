@@ -174,6 +174,7 @@ static struct
 {
 	bool bInitialized;
 	QLibrary *dwmapi_dll;
+	HRESULT (__stdcall *dwmIsCompositionEnabled)(BOOL *bEnabled);
 	HRESULT (__stdcall *dwmExtendFrameIntoClientArea)(HWND hWnd, const MARGINS* pMarInset);
 	HRESULT (__stdcall *dwmEnableBlurBehindWindow)(HWND hWnd, const DWM_BLURBEHIND* pBlurBehind);
 	QReadWriteLock lock;
@@ -1857,16 +1858,21 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 	return false;
 }
 
-static void lamexp_init_dwmapi(void)
+static bool lamexp_init_dwmapi(void)
 {
 	QReadLocker writeLock(&g_lamexp_dwmapi.lock);
 
 	//Not initialized yet?
 	if(g_lamexp_dwmapi.bInitialized)
 	{
-		return;
+		return (g_lamexp_dwmapi.dwmIsCompositionEnabled != NULL);
 	}
 	
+	//Reset function pointers
+	g_lamexp_dwmapi.dwmIsCompositionEnabled = NULL;
+	g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = NULL;
+	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
+			
 	//Does OS support DWM?
 	if(lamexp_get_os_version() >= lamexp_winver_vista)
 	{
@@ -1874,7 +1880,8 @@ static void lamexp_init_dwmapi(void)
 		g_lamexp_dwmapi.dwmapi_dll = new QLibrary("dwmapi.dll");
 		if(g_lamexp_dwmapi.dwmapi_dll->load())
 		{
-			//Lookup required functions
+			//Initialize function pointers
+			g_lamexp_dwmapi.dwmIsCompositionEnabled      = (HRESULT (__stdcall*)(BOOL*))                       g_lamexp_dwmapi.dwmapi_dll->resolve("DwmIsCompositionEnabled");
 			g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = (HRESULT (__stdcall*)(HWND, const MARGINS*))        g_lamexp_dwmapi.dwmapi_dll->resolve("DwmExtendFrameIntoClientArea");
 			g_lamexp_dwmapi.dwmEnableBlurBehindWindow    = (HRESULT (__stdcall*)(HWND, const DWM_BLURBEHIND*)) g_lamexp_dwmapi.dwmapi_dll->resolve("DwmEnableBlurBehindWindow");
 		}
@@ -1886,6 +1893,7 @@ static void lamexp_init_dwmapi(void)
 	}
 
 	g_lamexp_dwmapi.bInitialized = true;
+	return (g_lamexp_dwmapi.dwmIsCompositionEnabled != NULL);
 }
 
 /*
@@ -1899,12 +1907,20 @@ bool lamexp_sheet_of_glass(QWidget *window)
 	while(!g_lamexp_dwmapi.bInitialized)
 	{
 		readLock.unlock();
-		lamexp_init_dwmapi();
+		if(!lamexp_init_dwmapi()) return false;
 		readLock.relock();
 	}
 	
-	//Required functions available?
-	if((g_lamexp_dwmapi.dwmExtendFrameIntoClientArea == NULL) || (g_lamexp_dwmapi.dwmEnableBlurBehindWindow == NULL))
+	//Check if composition is enabled
+	BOOL bEnabled = FALSE;
+	if(HRESULT hr = g_lamexp_dwmapi.dwmIsCompositionEnabled(&bEnabled))
+	{
+		qWarning("DwmIsCompositionEnabled function has failed! (error %d)", hr);
+		return false;
+	}
+
+	//Composition enabled and required functions available?
+	if((!bEnabled) || (g_lamexp_dwmapi.dwmExtendFrameIntoClientArea == NULL) || (g_lamexp_dwmapi.dwmEnableBlurBehindWindow == NULL))
 	{
 		return false;
 	}
@@ -1929,10 +1945,82 @@ bool lamexp_sheet_of_glass(QWidget *window)
 	}
 
 	//Required for Qt
+	window->setAutoFillBackground(false);
 	window->setAttribute(Qt::WA_TranslucentBackground);
 	window->setAttribute(Qt::WA_NoSystemBackground);
 
 	return true;
+}
+
+/*
+ * Update "sheet of glass" effect on the given Window
+ */
+bool lamexp_sheet_of_glass_update(QWidget *window)
+{
+	QReadLocker readLock(&g_lamexp_dwmapi.lock);
+
+	//Initialize the DWM API
+	while(!g_lamexp_dwmapi.bInitialized)
+	{
+		readLock.unlock();
+		if(!lamexp_init_dwmapi()) return false;
+		readLock.relock();
+	}
+	
+	//Check if composition is enabled
+	BOOL bEnabled = FALSE;
+	if(HRESULT hr = g_lamexp_dwmapi.dwmIsCompositionEnabled(&bEnabled))
+	{
+		qWarning("DwmIsCompositionEnabled function has failed! (error %d)", hr);
+		return false;
+	}
+
+	//Composition enabled and required functions available?
+	if((!bEnabled) || (g_lamexp_dwmapi.dwmEnableBlurBehindWindow == NULL))
+	{
+		return false;
+	}
+
+	//Create and populate the Blur Behind structure
+	DWM_BLURBEHIND bb;
+	memset(&bb, 0, sizeof(DWM_BLURBEHIND));
+	bb.fEnable = TRUE;
+	bb.dwFlags = DWM_BB_ENABLE;
+	if(HRESULT hr = g_lamexp_dwmapi.dwmEnableBlurBehindWindow(window->winId(), &bb))
+	{
+		qWarning("DwmEnableBlurBehindWindow function has failed! (error %d)", hr);
+		return false;
+	}
+
+	return true;
+}
+
+/*
+ * Get system color info
+ */
+QColor lamexp_system_color(const int color_id)
+{
+	int nIndex = -1;
+
+	switch(color_id)
+	{
+	case lamexp_syscolor_text:
+		nIndex = COLOR_WINDOWTEXT;       /*Text in windows*/
+		break;
+	case lamexp_syscolor_background:
+		nIndex = COLOR_WINDOW;           /*Window background*/
+		break;
+	case lamexp_syscolor_caption:
+		nIndex = COLOR_CAPTIONTEXT;      /*Text in caption, size box, and scroll bar arrow box*/
+		break;
+	default:
+		qWarning("Unknown system color id (%d) specified!", color_id);
+		nIndex = COLOR_WINDOWTEXT;
+	}
+	
+	const DWORD rgb = GetSysColor(nIndex);
+	QColor color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb));
+	return color;
 }
 
 /*
@@ -2009,8 +2097,9 @@ void lamexp_finalization(void)
 	LAMEXP_DELETE(application);
 
 	//Release DWM API
-	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
+	g_lamexp_dwmapi.dwmIsCompositionEnabled = NULL;
 	g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = NULL;
+	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
 	LAMEXP_DELETE(g_lamexp_dwmapi.dwmapi_dll);
 
 	//Detach from shared memory

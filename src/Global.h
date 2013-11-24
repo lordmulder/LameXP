@@ -33,6 +33,7 @@ class QTime;
 class QIcon;
 class QWidget;
 class QProcess;
+class QColor;
 class LockedFile;
 enum QtMsgType;
 
@@ -125,6 +126,15 @@ typedef enum
 }
 lamexp_network_t;
 
+//System color types
+typedef enum
+{
+	lamexp_syscolor_text = 0,
+	lamexp_syscolor_background = 1,
+	lamexp_syscolor_caption = 2
+}
+lamexp_syscolor_t;
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -195,8 +205,10 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned in
 bool lamexp_remove_file(const QString &filename);
 void lamexp_seed_rand(void);
 bool lamexp_sheet_of_glass(QWidget *window);
+bool lamexp_sheet_of_glass_update(QWidget *window);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);
 void lamexp_sleep(const unsigned int delay);
+QColor lamexp_system_color(const int color_id);
 const char *lamexp_support_url(void);
 const QString &lamexp_temp_folder2(void);
 void lamexp_temp_folder_clear(void);
