@@ -173,10 +173,10 @@ g_lamexp_themes_enabled;
 static struct
 {
 	bool bInitialized;
-	QLibrary *dwmapi_dll;
 	HRESULT (__stdcall *dwmIsCompositionEnabled)(BOOL *bEnabled);
 	HRESULT (__stdcall *dwmExtendFrameIntoClientArea)(HWND hWnd, const MARGINS* pMarInset);
 	HRESULT (__stdcall *dwmEnableBlurBehindWindow)(HWND hWnd, const DWM_BLURBEHIND* pBlurBehind);
+	QLibrary *dwmapi_dll;
 	QReadWriteLock lock;
 }
 g_lamexp_dwmapi;
@@ -1858,14 +1858,14 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 	return false;
 }
 
-static bool lamexp_init_dwmapi(void)
+static void lamexp_init_dwmapi(void)
 {
 	QReadLocker writeLock(&g_lamexp_dwmapi.lock);
 
 	//Not initialized yet?
 	if(g_lamexp_dwmapi.bInitialized)
 	{
-		return (g_lamexp_dwmapi.dwmIsCompositionEnabled != NULL);
+		return;
 	}
 	
 	//Reset function pointers
@@ -1893,7 +1893,6 @@ static bool lamexp_init_dwmapi(void)
 	}
 
 	g_lamexp_dwmapi.bInitialized = true;
-	return (g_lamexp_dwmapi.dwmIsCompositionEnabled != NULL);
 }
 
 /*
@@ -1907,20 +1906,25 @@ bool lamexp_sheet_of_glass(QWidget *window)
 	while(!g_lamexp_dwmapi.bInitialized)
 	{
 		readLock.unlock();
-		if(!lamexp_init_dwmapi()) return false;
+		lamexp_init_dwmapi();
 		readLock.relock();
 	}
-	
-	//Check if composition is enabled
-	BOOL bEnabled = FALSE;
-	if(HRESULT hr = g_lamexp_dwmapi.dwmIsCompositionEnabled(&bEnabled))
-	{
-		qWarning("DwmIsCompositionEnabled function has failed! (error %d)", hr);
-		return false;
-	}
 
-	//Composition enabled and required functions available?
-	if((!bEnabled) || (g_lamexp_dwmapi.dwmExtendFrameIntoClientArea == NULL) || (g_lamexp_dwmapi.dwmEnableBlurBehindWindow == NULL))
+	BOOL bCompositionEnabled = FALSE;
+
+	//Required functions available?
+	if((g_lamexp_dwmapi.dwmIsCompositionEnabled != NULL) && (g_lamexp_dwmapi.dwmExtendFrameIntoClientArea != NULL) && (g_lamexp_dwmapi.dwmEnableBlurBehindWindow != NULL))
+	{
+		//Check if composition is currently enabled
+		if(HRESULT hr = g_lamexp_dwmapi.dwmIsCompositionEnabled(&bCompositionEnabled))
+		{
+			qWarning("DwmIsCompositionEnabled function has failed! (error %d)", hr);
+			return false;
+		}
+	}
+	
+	//All functions available *and* composition enabled?
+	if(!bCompositionEnabled)
 	{
 		return false;
 	}
@@ -1963,20 +1967,25 @@ bool lamexp_sheet_of_glass_update(QWidget *window)
 	while(!g_lamexp_dwmapi.bInitialized)
 	{
 		readLock.unlock();
-		if(!lamexp_init_dwmapi()) return false;
+		lamexp_init_dwmapi();
 		readLock.relock();
 	}
-	
-	//Check if composition is enabled
-	BOOL bEnabled = FALSE;
-	if(HRESULT hr = g_lamexp_dwmapi.dwmIsCompositionEnabled(&bEnabled))
-	{
-		qWarning("DwmIsCompositionEnabled function has failed! (error %d)", hr);
-		return false;
-	}
 
-	//Composition enabled and required functions available?
-	if((!bEnabled) || (g_lamexp_dwmapi.dwmEnableBlurBehindWindow == NULL))
+	BOOL bCompositionEnabled = FALSE;
+
+	//Required functions available?
+	if((g_lamexp_dwmapi.dwmIsCompositionEnabled != NULL) && (g_lamexp_dwmapi.dwmEnableBlurBehindWindow != NULL))
+	{
+		//Check if composition is currently enabled
+		if(HRESULT hr = g_lamexp_dwmapi.dwmIsCompositionEnabled(&bCompositionEnabled))
+		{
+			qWarning("DwmIsCompositionEnabled function has failed! (error %d)", hr);
+			return false;
+		}
+	}
+	
+	//All functions available *and* composition enabled?
+	if(!bCompositionEnabled)
 	{
 		return false;
 	}
