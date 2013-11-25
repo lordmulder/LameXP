@@ -139,7 +139,7 @@ lamexp_syscolor_t;
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-QIcon lamexp_app_icon(const QDate *date = NULL, const QTime *time = NULL);
+const QIcon &lamexp_app_icon(void);
 bool lamexp_append_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
 const QStringList &lamexp_arguments(void);
 QStringList lamexp_available_codepages(bool noAliases = true);
@@ -204,6 +204,7 @@ QString lamexp_rand_str(const bool bLong = false);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
 bool lamexp_remove_file(const QString &filename);
 void lamexp_seed_rand(void);
+bool lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon);
 bool lamexp_sheet_of_glass(QWidget *window);
 bool lamexp_sheet_of_glass_update(QWidget *window);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);

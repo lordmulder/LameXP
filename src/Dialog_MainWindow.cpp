@@ -919,7 +919,7 @@ void MainWindow::showEvent(QShowEvent *event)
 	m_accepted = false;
 	resizeEvent(NULL);
 	sourceModelChanged();
-	
+
 	if(!event->spontaneous())
 	{
 		ui->tabWidget->setCurrentIndex(0);
@@ -928,6 +928,7 @@ void MainWindow::showEvent(QShowEvent *event)
 	if(m_firstTimeShown)
 	{
 		m_firstTimeShown = false;
+		lamexp_set_window_icon(this, lamexp_app_icon(), true);
 		QTimer::singleShot(0, this, SLOT(windowShown()));
 	}
 	else

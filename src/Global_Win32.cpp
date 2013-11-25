@@ -916,6 +916,22 @@ static bool lamexp_check_elevation(void)
 }
 
 /*
+ * Convert QIcon to HICON -> caller is responsible for destroying the HICON!
+ */
+static HICON lamexp_qicon2hicon(const QIcon &icon, const int w, const int h)
+{
+	if(!icon.isNull())
+	{
+		QPixmap pixmap = icon.pixmap(w, h);
+		if(!pixmap.isNull())
+		{
+			return pixmap.toWinHICON();
+		}
+	}
+	return NULL;
+}
+
+/*
  * Initialize Qt framework
  */
 bool lamexp_init_qt(int argc, char* argv[])
@@ -1079,14 +1095,18 @@ bool lamexp_init_qt(int argc, char* argv[])
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 	if(g_lamexp_console_attached && (!lamexp_detect_wine()))
 	{
-		typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
 		QLibrary kernel32("kernel32.dll");
 		if(kernel32.load())
 		{
-			SetConsoleIconFun SetConsoleIconPtr = (SetConsoleIconFun) kernel32.resolve("SetConsoleIcon");
-			QPixmap pixmap = QIcon(":/icons/sound.png").pixmap(16, 16);
-			if((SetConsoleIconPtr != NULL) && (!pixmap.isNull())) SetConsoleIconPtr(pixmap.toWinHICON());
-			kernel32.unload();
+			typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
+			if(SetConsoleIconFun SetConsoleIconPtr = (SetConsoleIconFun) kernel32.resolve("SetConsoleIcon"))
+			{
+				if(HICON hIcon = lamexp_qicon2hicon(QIcon(":/icons/sound.png"), 16, 16))
+				{
+					SetConsoleIconPtr(hIcon);
+					DestroyIcon(hIcon);
+				}
+			}
 		}
 	}
 #endif
@@ -2002,6 +2022,24 @@ bool lamexp_sheet_of_glass_update(QWidget *window)
 	}
 
 	return true;
+}
+
+/*
+ * Update the window icon
+ */
+bool lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon)
+{
+	if(!icon.isNull())
+	{
+		const int extend = (bIsBigIcon ? 32 : 16);
+		if(HICON hIcon = lamexp_qicon2hicon(icon, extend, extend))
+		{
+			SendMessage(window->winId(), WM_SETICON, (bIsBigIcon ? ICON_BIG : ICON_SMALL), LPARAM(hIcon));
+			//DestroyIcon(hIcon); /*FIXME: Destroying the icon here will remove it from the window*/
+		}
+		return true;
+	}
+	return false;
 }
 
 /*

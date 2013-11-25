@@ -69,6 +69,7 @@ public:
 
 private slots:
 	void initEncoding(void);
+	void initNextJob(void);
 	void startNextJob(void);
 	void doneEncoding(void);
 	void abortEncoding(bool force = false);
@@ -116,6 +117,7 @@ private:
 	QActionGroup *m_progressViewFilterGroup;
 	QLabel *m_filterInfoLabel;
 	QLabel *m_filterInfoLabelIcon;
+	unsigned int m_initThreads;
 	unsigned int m_runningThreads;
 	unsigned int m_currentFile;
 	QList<QUuid> m_allJobs;

@@ -54,6 +54,13 @@ static struct
 }
 g_lamexp_temp_folder;
 
+static struct
+{
+	QIcon *appIcon;
+	QReadWriteLock lock;
+}
+g_lamexp_app_icon;
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -516,35 +523,51 @@ static bool lamexp_thanksgiving(const QDate &date)
 /*
  * Initialize app icon
  */
-QIcon lamexp_app_icon(const QDate *date, const QTime *time)
+const QIcon &lamexp_app_icon(void)
 {
-	QDate currentDate = (date) ? QDate(*date) : QDate::currentDate();
-	QTime currentTime = (time) ? QTime(*time) : QTime::currentTime();
+	QReadLocker readLock(&g_lamexp_app_icon.lock);
+
+	//Already initialized?
+	if(g_lamexp_app_icon.appIcon)
+	{
+		return *g_lamexp_app_icon.appIcon;
+	}
+
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_app_icon.lock);
+
+	while(!g_lamexp_app_icon.appIcon)
+	{
+		QDate currentDate = QDate::currentDate();
+		QTime currentTime = QTime::currentTime();
 	
-	if(lamexp_thanksgiving(currentDate))
-	{
-		return QIcon(":/MainIcon6.png");
+		if(lamexp_thanksgiving(currentDate))
+		{
+			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon6.png");
+		}
+		else if(((currentDate.month() == 12) && (currentDate.day() == 31) && (currentTime.hour() >= 20)) || ((currentDate.month() == 1) && (currentDate.day() == 1)  && (currentTime.hour() <= 19)))
+		{
+			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon5.png");
+		}
+		else if(((currentDate.month() == 10) && (currentDate.day() == 31) && (currentTime.hour() >= 12)) || ((currentDate.month() == 11) && (currentDate.day() == 1)  && (currentTime.hour() <= 11)))
+		{
+			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon4.png");
+		}
+		else if((currentDate.month() == 12) && (currentDate.day() >= 24) && (currentDate.day() <= 26))
+		{
+			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon3.png");
+		}
+		else if(lamexp_computus(currentDate))
+		{
+			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon2.png");
+		}
+		else
+		{
+			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon1.png");
+		}
 	}
-	else if(((currentDate.month() == 12) && (currentDate.day() == 31) && (currentTime.hour() >= 20)) || ((currentDate.month() == 1) && (currentDate.day() == 1)  && (currentTime.hour() <= 19)))
-	{
-		return QIcon(":/MainIcon5.png");
-	}
-	else if(((currentDate.month() == 10) && (currentDate.day() == 31) && (currentTime.hour() >= 12)) || ((currentDate.month() == 11) && (currentDate.day() == 1)  && (currentTime.hour() <= 11)))
-	{
-		return QIcon(":/MainIcon4.png");
-	}
-	else if((currentDate.month() == 12) && (currentDate.day() >= 24) && (currentDate.day() <= 26))
-	{
-		return QIcon(":/MainIcon3.png");
-	}
-	else if(lamexp_computus(currentDate))
-	{
-		return QIcon(":/MainIcon2.png");
-	}
-	else
-	{
-		return QIcon(":/MainIcon1.png");
-	}
+
+	return *g_lamexp_app_icon.appIcon;
 }
 
 /*
@@ -589,4 +612,5 @@ bool lamexp_broadcast(int eventType, bool onlyToVisible)
 extern "C" void _lamexp_global_init_utils(void)
 {
 	LAMEXP_ZERO_MEMORY(g_lamexp_temp_folder);
+	LAMEXP_ZERO_MEMORY(g_lamexp_app_icon);
 }

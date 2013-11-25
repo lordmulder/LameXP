@@ -145,6 +145,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	m_cpuObserver(NULL),
 	m_ramObserver(NULL),
 	m_progressViewFilter(-1),
+	m_initThreads(0),
 	m_firstShow(true)
 {
 	//Init the dialog, from the .ui file
@@ -173,7 +174,6 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	//Init progress indicator
 	m_progressIndicator = new QMovie(":/images/Working.gif");
 	m_progressIndicator->setCacheMode(QMovie::CacheAll);
-	m_progressIndicator->setSpeed(50);
 	ui->label_headerWorking->setMovie(m_progressIndicator);
 	ui->progressBar->setValue(0);
 
@@ -356,18 +356,22 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 	{
 		static const char *NA = " N/A";
 	
+		//Update the window icon
+		lamexp_set_window_icon(this, lamexp_app_icon(), true);
+
 		lamexp_enable_close_button(this, false);
 		ui->button_closeDialog->setEnabled(false);
 		ui->button_AbortProcess->setEnabled(false);
+		m_progressIndicator->start();
 		m_systemTray->setVisible(true);
 		
 		lamexp_change_process_priority(1);
-
+		
 		ui->label_cpu->setText(NA);
 		ui->label_disk->setText(NA);
 		ui->label_ram->setText(NA);
 
-		QTimer::singleShot(1000, this, SLOT(initEncoding()));
+		QTimer::singleShot(500, this, SLOT(initEncoding()));
 		m_firstShow = false;
 	}
 
@@ -483,7 +487,6 @@ void ProcessingDialog::initEncoding(void)
 
 	CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor(Qt::white));
 	SET_PROGRESS_TEXT(tr("Encoding files, please wait..."));
-	m_progressIndicator->start();
 	
 	ui->button_closeDialog->setEnabled(false);
 	ui->button_AbortProcess->setEnabled(true);
@@ -534,14 +537,28 @@ void ProcessingDialog::initEncoding(void)
 		m_threadPool->setMaxThreadCount(maximumInstances);
 	}
 
-	for(int i = 0; i < m_threadPool->maxThreadCount(); i++)
+	//for(int i = 0; i < m_threadPool->maxThreadCount(); i++)
+	//{
+	//	startNextJob();
+	//	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+	//	QThread::yieldCurrentThread();
+	//}
+
+	m_initThreads = m_threadPool->maxThreadCount();
+	QTimer::singleShot(100, this, SLOT(initNextJob()));
+	m_timerStart = lamexp_perfcounter_value();
+}
+
+void ProcessingDialog::initNextJob(void)
+{
+	if((m_initThreads > 0) && (!m_userAborted))
 	{
 		startNextJob();
-		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-		QThread::yieldCurrentThread();
+		if(--m_initThreads > 0)
+		{
+			QTimer::singleShot(100, this, SLOT(initNextJob()));
+		}
 	}
-
-	m_timerStart = lamexp_perfcounter_value();
 }
 
 void ProcessingDialog::startNextJob(void)
@@ -615,9 +632,6 @@ void ProcessingDialog::startNextJob(void)
 	{
 		qFatal("Fatal Error: Thread initialization has failed!");
 	}
-
-	//Update GUI
-	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	//Give it a go!
 	if(!thread->start(m_threadPool))
