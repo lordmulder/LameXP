@@ -387,7 +387,7 @@ void UpdateDialog::applyUpdate(void)
 		QStringList args;
 		QEventLoop loop;
 
-		lamexp_init_process(process, QFileInfo(m_binaryUpdater).absolutePath());
+		lamexp_init_process(process, QFileInfo(m_binaryUpdater).absolutePath(), false);
 
 		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
 		connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
@@ -409,6 +409,7 @@ void UpdateDialog::applyUpdate(void)
 			m_updaterProcess = lamexp_process_id(&process);
 			loop.exec(QEventLoop::ExcludeUserInputEvents);
 		}
+
 		m_updaterProcess = NULL;
 		QApplication::restoreOverrideCursor();
 

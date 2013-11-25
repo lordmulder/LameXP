@@ -175,7 +175,7 @@ const lamexp_os_version_t &lamexp_get_os_version(void);
 void lamexp_init_console(const QStringList &argv);
 void lamexp_init_error_handlers(void);
 int lamexp_init_ipc(void);
-void lamexp_init_process(QProcess &process, const QString &wokringDir);
+void lamexp_init_process(QProcess &process, const QString &wokringDir, const bool bReplaceTempDir = true);
 bool lamexp_init_qt(int argc, char* argv[]);
 bool lamexp_install_translator(const QString &language);
 bool lamexp_install_translator_from_file(const QString &qmFile);
