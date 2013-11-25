@@ -134,7 +134,6 @@ Section "-LaunchTheInstaller"
 	
 	InitPluginsDir
 	SetOutPath "$PLUGINSDIR"
-	File "/oname=$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" "${LAMEXP_SOURCE_FILE}"
 	
 	; --------
 	
@@ -157,6 +156,8 @@ Section "-LaunchTheInstaller"
 
 	RunTryAgain:
 	
+	File "/oname=$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" "${LAMEXP_SOURCE_FILE}"
+
 	DetailPrint "ExecShellWait: $PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe"
 	${StdUtils.ExecShellWait} $R1 "$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" "open" '$R9'
 	DetailPrint "Result: $R1"
