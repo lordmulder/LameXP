@@ -155,7 +155,8 @@ Section "-LaunchTheInstaller"
 	; --------
 
 	RunTryAgain:
-	
+
+	SetOverwrite ifdiff
 	File "/oname=$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" "${LAMEXP_SOURCE_FILE}"
 
 	DetailPrint "ExecShellWait: $PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe"
@@ -177,6 +178,9 @@ Section "-LaunchTheInstaller"
 
 	; --------
 
+	SetOverwrite ifdiff
+	File "/oname=$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" "${LAMEXP_SOURCE_FILE}"
+
 	ClearErrors
 	ExecShell "open" "$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe" '$R9' SW_SHOWNORMAL
 	IfErrors 0 RunSuccess
@@ -191,6 +195,7 @@ Section "-LaunchTheInstaller"
 	DetailPrint "Failed to launch installer :-("
 	SetDetailsPrint listonly
 
+	SetErrorLevel 1
 	Abort "Aborted."
 
 	; --------
@@ -198,4 +203,5 @@ Section "-LaunchTheInstaller"
 	RunSuccess:
 
 	Delete /REBOOTOK "$PLUGINSDIR\LameXP-SETUP-r${LAMEXP_BUILD}.exe"
+	SetErrorLevel 0
 SectionEnd
