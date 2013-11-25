@@ -3513,12 +3513,12 @@
         <translation type="unfinished">Pobieranie aktualizacji w toku, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="423"/>
+        <location filename="../../src/Dialog_Update.cpp" line="424"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">Aktualizacja gotowa do instalacji. Teraz program zostanie zamknięty...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="431"/>
+        <location filename="../../src/Dialog_Update.cpp" line="432"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">Aktualizacja zakończona niepowodzeniem. Prosze spróbować ponownie lub zainstalować ręcznie!</translation>
     </message>

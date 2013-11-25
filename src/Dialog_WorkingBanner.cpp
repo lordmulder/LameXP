@@ -21,6 +21,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Dialog_WorkingBanner.h"
+#include "../tmp/UIC_WorkingBanner.h"
 
 #include "Global.h"
 #include "WinSevenTaskbar.h"
@@ -75,16 +76,16 @@ static inline void UPDATE_MARGINS(QWidget *control, int l = 0, int r = 0, int t 
 WorkingBanner::WorkingBanner(QWidget *parent)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
-	m_metrics(NULL), m_working(NULL)
+	ui(new Ui::WorkingBanner()), m_metrics(NULL), m_working(NULL)
 {
 	//Init the dialog, from the .ui file
-	setupUi(this);
+	ui->setupUi(this);
 	setModal(true);
 
 	//Enable the "sheet of glass" effect
 	if(lamexp_sheet_of_glass(this))
 	{
-		SET_TEXT_COLOR(labelStatus, lamexp_system_color(lamexp_syscolor_caption));
+		SET_TEXT_COLOR(ui->labelStatus, lamexp_system_color(lamexp_syscolor_caption));
 	}
 	else
 	{
@@ -92,7 +93,7 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 		m_working = new QMovie(":/images/Busy.gif");
 		m_working->setSpeed(75);
 		m_working->setCacheMode(QMovie::CacheAll);
-		labelWorking->setMovie(m_working);
+		ui->labelWorking->setMovie(m_working);
 		m_working->start();
 	}
 
@@ -103,7 +104,7 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	setCursor(Qt::WaitCursor);
 
 	//Clear label
-	labelStatus->clear();
+	ui->labelStatus->clear();
 }
 
 ////////////////////////////////////////////////////////////
@@ -119,6 +120,7 @@ WorkingBanner::~WorkingBanner(void)
 	}
 
 	LAMEXP_DELETE(m_metrics);
+	delete ui;
 }
 
 ////////////////////////////////////////////////////////////
@@ -134,8 +136,9 @@ void WorkingBanner::show(const QString &text)
 	setText(text);
 
 	//Reset progress
-	progressBar->setMaximum(0);
-	progressBar->setValue(-1);
+	ui->progressBar->setMinimum(0);
+	ui->progressBar->setMaximum(0);
+	ui->progressBar->setValue(-1);
 }
 
 void WorkingBanner::show(const QString &text, QThread *thread)
@@ -249,34 +252,47 @@ void WorkingBanner::setText(const QString &text)
 {
 	if(!m_metrics)
 	{
-		 m_metrics = new QFontMetrics(labelStatus->font());
+		 m_metrics = new QFontMetrics(ui->labelStatus->font());
 	}
 
-	if(m_metrics->width(text) <= labelStatus->width() - 8)
+	if(m_metrics->width(text) <= ui->labelStatus->width() - 8)
 	{
-		labelStatus->setText(text);
+		ui->labelStatus->setText(text);
 	}
 	else
 	{
 		QString choppedText = text.simplified().append("...");
-		while((m_metrics->width(choppedText) > labelStatus->width() - 8) && (choppedText.length() > 8))
+		while((m_metrics->width(choppedText) > ui->labelStatus->width() - 8) && (choppedText.length() > 8))
 		{
 			choppedText.chop(4);
 			choppedText = choppedText.trimmed();
 			choppedText.append("...");
 		}
-		labelStatus->setText(choppedText);
+		ui->labelStatus->setText(choppedText);
 	}
 }
 
 void WorkingBanner::setProgressMax(unsigned int max)
 {
-	progressBar->setMaximum(max);
+	ui->progressBar->setMaximum(max);
+	if(ui->progressBar->maximum() > ui->progressBar->minimum())
+	{
+		WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
+		WinSevenTaskbar::setTaskbarProgress(dynamic_cast<QWidget*>(this->parent()), ui->progressBar->value(), ui->progressBar->maximum());
+	}
+	else
+	{
+		WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+	}
 }
 
 void WorkingBanner::setProgressVal(unsigned int val)
 {
-	progressBar->setValue(val);
+	ui->progressBar->setValue(val);
+	if(ui->progressBar->maximum() > ui->progressBar->minimum())
+	{
+		WinSevenTaskbar::setTaskbarProgress(dynamic_cast<QWidget*>(this->parent()), ui->progressBar->value(), ui->progressBar->maximum());
+	}
 }
 
 ////////////////////////////////////////////////////////////

@@ -3476,12 +3476,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="423"/>
+        <location filename="../../src/Dialog_Update.cpp" line="424"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="431"/>
+        <location filename="../../src/Dialog_Update.cpp" line="432"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished"></translation>
     </message>

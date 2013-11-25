@@ -22,13 +22,20 @@
 
 #pragma once
 
-#include "../tmp/UIC_WorkingBanner.h"
+#include <QDialog>
+
+namespace Ui
+{
+	class WorkingBanner;
+}
+
+class QEventLoop;
 
 ////////////////////////////////////////////////////////////
 // Splash Frame
 ////////////////////////////////////////////////////////////
 
-class WorkingBanner: public QDialog, private Ui::WorkingBanner
+class WorkingBanner: public QDialog
 {
 	Q_OBJECT
 
@@ -41,6 +48,8 @@ public:
 	void show(const QString &text, QEventLoop *loop);
 
 private:
+	Ui::WorkingBanner *const ui;
+
 	QMovie *m_working;
 	bool m_canClose;
 
