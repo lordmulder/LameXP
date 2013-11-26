@@ -22,6 +22,8 @@
 
 #include "Global.h"
 
+#include <QtGlobal>
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,7 +46,7 @@ static size_t lamexp_entry_check(void)
 }
 
 /*
- * Application entry point (runs before static initializers)
+ * Function declarations
  */
 extern "C"
 {
@@ -56,24 +58,49 @@ extern "C"
 	void _lamexp_global_init_ipcom(void);
 	void _lamexp_global_init_utils(void);
 
-	int lamexp_entry_point(void)
+	void _lamexp_global_free_win32(void);
+	void _lamexp_global_free_versn(void);
+	void _lamexp_global_free_tools(void);
+	void _lamexp_global_free_ipcom(void);
+	void _lamexp_global_free_utils(void);
+}
+
+/*
+ * Application entry point (runs before static initializers)
+ */
+
+extern "C" int lamexp_entry_point(void)
+{
+	if(g_lamexp_entry_check_flag != 0x789E09B2)
 	{
-		if(g_lamexp_entry_check_flag != 0x789E09B2)
-		{
-			lamexp_fatal_exit(L"Application initialization has failed, take care!");
-		}
-
-		//Call global initialization functions
-		_lamexp_global_init_win32();
-		_lamexp_global_init_versn();
-		_lamexp_global_init_tools();
-		_lamexp_global_init_ipcom();
-		_lamexp_global_init_utils();
-
-		//Make sure we will pass the check
-		g_lamexp_entry_check_flag = (~g_lamexp_entry_check_flag);
-
-		//Now initialize the C Runtime library!
-		return WinMainCRTStartup();
+		lamexp_fatal_exit(L"Application initialization has failed, take care!");
 	}
+
+	//Call global initialization functions
+	_lamexp_global_init_win32();
+	_lamexp_global_init_versn();
+	_lamexp_global_init_tools();
+	_lamexp_global_init_ipcom();
+	_lamexp_global_init_utils();
+
+	//Make sure we will pass the check
+	g_lamexp_entry_check_flag = (~g_lamexp_entry_check_flag);
+
+	//Now initialize the C Runtime library!
+	return WinMainCRTStartup();
+}
+
+/*
+ * Application finalization function
+ */
+void lamexp_finalization(void)
+{
+	qDebug("lamexp_finalization()");
+
+	//Call global finalization functions, in proper order
+	_lamexp_global_free_versn();
+	_lamexp_global_free_tools();
+	_lamexp_global_free_ipcom();
+	_lamexp_global_free_utils();
+	_lamexp_global_free_win32();
 }

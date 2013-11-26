@@ -406,9 +406,6 @@
     <ClCompile Include="src\Global_IPC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Global_EntryPoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Global_Version.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -420,6 +417,9 @@
     </ClCompile>
     <ClCompile Include="tmp\MOC_Thread_CheckUpdate.cpp">
       <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global_Zero.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

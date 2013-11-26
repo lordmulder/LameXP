@@ -1492,6 +1492,23 @@ QDate lamexp_current_date_safe(void)
 }
 
 /*
+ * Show system message box
+ */
+int lamexp_system_message(const wchar_t *text, int beepType)
+{
+	UINT flags = MB_OK | MB_TOPMOST;
+
+	switch(beepType)
+	{
+		case lamexp_beep_info:    flags = flags | MB_ICONASTERISK;
+		case lamexp_beep_warning: flags = flags | MB_ICONEXCLAMATION;
+		case lamexp_beep_error:   flags = flags | MB_ICONHAND;
+	}
+
+	return MessageBoxW(NULL, text, L"LameXP", flags);
+}
+
+/*
  * Suspend calling thread for N milliseconds
  */
 inline void lamexp_sleep(const unsigned int delay)
@@ -1735,10 +1752,16 @@ unsigned __int64 lamexp_current_file_time(void)
 /*
  * Bring the specifed window to the front
  */
-bool lamexp_bring_to_front(const QWidget *win)
+bool lamexp_bring_to_front(const QWidget *window)
 {
-	const bool ret = (SetForegroundWindow(win->winId()) == TRUE);
-	SwitchToThisWindow(win->winId(), TRUE);
+	bool ret = false;
+	
+	if(window)
+	{
+		ret = (SetForegroundWindow(window->winId()) == TRUE);
+		SwitchToThisWindow(window->winId(), TRUE);
+	}
+
 	return ret;
 }
 
@@ -2027,7 +2050,7 @@ bool lamexp_sheet_of_glass_update(QWidget *window)
 /*
  * Update the window icon
  */
-bool lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon)
+lamexp_icon_t *lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon)
 {
 	if(!icon.isNull())
 	{
@@ -2035,11 +2058,21 @@ bool lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBi
 		if(HICON hIcon = lamexp_qicon2hicon(icon, extend, extend))
 		{
 			SendMessage(window->winId(), WM_SETICON, (bIsBigIcon ? ICON_BIG : ICON_SMALL), LPARAM(hIcon));
-			//DestroyIcon(hIcon); /*FIXME: Destroying the icon here will remove it from the window*/
+			return reinterpret_cast<lamexp_icon_t*>(hIcon);
 		}
-		return true;
 	}
-	return false;
+	return NULL;
+}
+
+/*
+ * Free window icon
+ */
+void lamexp_free_window_icon(lamexp_icon_t *icon)
+{
+	if(HICON hIcon = reinterpret_cast<HICON>(icon))
+	{
+		DestroyIcon(hIcon);
+	}
 }
 
 /*
@@ -2103,85 +2136,6 @@ void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessag
 }
 
 /*
- * Finalization function (final clean-up)
- */
-void lamexp_finalization(void)
-{
-	qDebug("lamexp_finalization()");
-	
-	//Free all tools
-	lamexp_clean_all_tools();
-	
-	//Delete temporary files
-	const QString &tempFolder = lamexp_temp_folder2();
-	if(!tempFolder.isEmpty())
-	{
-		bool success = false;
-		for(int i = 0; i < 100; i++)
-		{
-			if(lamexp_clean_folder(tempFolder))
-			{
-				success = true;
-				break;
-			}
-			lamexp_sleep(100);
-		}
-		if(!success)
-		{
-			MessageBoxW(NULL, L"Sorry, LameXP was unable to clean up all temporary files. Some residual files in your TEMP directory may require manual deletion!", L"LameXP", MB_ICONEXCLAMATION|MB_TOPMOST);
-			lamexp_exec_shell(NULL, tempFolder, QString(), QString(), true);
-		}
-	}
-
-	//Clear folder cache
-	LAMEXP_DELETE(g_lamexp_known_folder.knownFolders);
-
-	//Clear languages
-	lamexp_clean_all_translations();
-
-	//Destroy Qt application object
-	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
-	LAMEXP_DELETE(application);
-
-	//Release DWM API
-	g_lamexp_dwmapi.dwmIsCompositionEnabled = NULL;
-	g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = NULL;
-	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
-	LAMEXP_DELETE(g_lamexp_dwmapi.dwmapi_dll);
-
-	//Detach from shared memory
-	lamexp_ipc_exit();
-
-	//Free STDOUT and STDERR buffers
-	if(g_lamexp_console_attached)
-	{
-		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cout.rdbuf()))
-		{
-			std::cout.rdbuf(NULL);
-			LAMEXP_DELETE(tmp);
-		}
-		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cerr.rdbuf()))
-		{
-			std::cerr.rdbuf(NULL);
-			LAMEXP_DELETE(tmp);
-		}
-	}
-
-	//Close log file
-	if(g_lamexp_log_file)
-	{
-		fclose(g_lamexp_log_file);
-		g_lamexp_log_file = NULL;
-	}
-
-	//Free CLI Arguments
-	LAMEXP_DELETE(g_lamexp_argv.list);
-
-	//Free TEMP folder
-	lamexp_temp_folder_clear();
-}
-
-/*
  * Initialize debug thread
  */
 static const HANDLE g_debug_thread1 = LAMEXP_DEBUG ? NULL : lamexp_debug_thread_init();
@@ -2237,4 +2191,49 @@ extern "C" void _lamexp_global_init_win32(void)
 	LAMEXP_ZERO_MEMORY(g_lamexp_wine);
 	LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
 	LAMEXP_ZERO_MEMORY(g_lamexp_dwmapi);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// FINALIZATION
+///////////////////////////////////////////////////////////////////////////////
+
+extern "C" void _lamexp_global_free_win32(void)
+{
+	//Clear folder cache
+	LAMEXP_DELETE(g_lamexp_known_folder.knownFolders);
+
+	//Destroy Qt application object
+	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
+	LAMEXP_DELETE(application);
+
+	//Release DWM API
+	g_lamexp_dwmapi.dwmIsCompositionEnabled = NULL;
+	g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = NULL;
+	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
+	LAMEXP_DELETE(g_lamexp_dwmapi.dwmapi_dll);
+
+	//Free STDOUT and STDERR buffers
+	if(g_lamexp_console_attached)
+	{
+		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cout.rdbuf()))
+		{
+			std::cout.rdbuf(NULL);
+			LAMEXP_DELETE(tmp);
+		}
+		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cerr.rdbuf()))
+		{
+			std::cerr.rdbuf(NULL);
+			LAMEXP_DELETE(tmp);
+		}
+	}
+
+	//Close log file
+	if(g_lamexp_log_file)
+	{
+		fclose(g_lamexp_log_file);
+		g_lamexp_log_file = NULL;
+	}
+
+	//Free CLI Arguments
+	LAMEXP_DELETE(g_lamexp_argv.list);
 }

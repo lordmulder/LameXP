@@ -193,29 +193,6 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 }
 
 /*
- * Free all registered tools (final clean-up)
- */
-void lamexp_clean_all_tools(void)
-{
-	if(g_lamexp_tools.registry)
-	{
-		QStringList keys = g_lamexp_tools.registry->keys();
-		for(int i = 0; i < keys.count(); i++)
-		{
-			LockedFile *lf = g_lamexp_tools.registry->take(keys.at(i));
-			LAMEXP_DELETE(lf);
-		}
-		g_lamexp_tools.registry->clear();
-		g_lamexp_tools.versions->clear();
-		g_lamexp_tools.tags->clear();
-	}
-
-	LAMEXP_DELETE(g_lamexp_tools.registry);
-	LAMEXP_DELETE(g_lamexp_tools.versions);
-	LAMEXP_DELETE(g_lamexp_tools.tags);
-}
-
-/*
  * Initialize translations and add default language
  */
 bool lamexp_translation_init(void)
@@ -364,28 +341,6 @@ bool lamexp_install_translator_from_file(const QString &qmFile)
 	return success;
 }
 
-/*
- * Free all registered translations (final clean-up)
- */
-void lamexp_clean_all_translations(void)
-{
-	QWriteLocker writeLockTranslator(&g_lamexp_currentTranslator.lock);
-
-	if(g_lamexp_currentTranslator.instance)
-	{
-		QApplication::removeTranslator(g_lamexp_currentTranslator.instance);
-		LAMEXP_DELETE(g_lamexp_currentTranslator.instance);
-	}
-	
-	writeLockTranslator.unlock();
-	QWriteLocker writeLockTranslations(&g_lamexp_translation.lock);
-
-	LAMEXP_DELETE(g_lamexp_translation.files);
-	LAMEXP_DELETE(g_lamexp_translation.names);
-	LAMEXP_DELETE(g_lamexp_translation.cntry);
-	LAMEXP_DELETE(g_lamexp_translation.sysid);
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////////////////////////////////////////////
@@ -395,4 +350,40 @@ extern "C" void _lamexp_global_init_tools(void)
 	LAMEXP_ZERO_MEMORY(g_lamexp_tools);
 	LAMEXP_ZERO_MEMORY(g_lamexp_currentTranslator);
 	LAMEXP_ZERO_MEMORY(g_lamexp_translation);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// FINALIZATION
+///////////////////////////////////////////////////////////////////////////////
+
+extern "C" void _lamexp_global_free_tools(void)
+{
+	//Free *all* registered translations
+	if(g_lamexp_currentTranslator.instance)
+	{
+		QApplication::removeTranslator(g_lamexp_currentTranslator.instance);
+		LAMEXP_DELETE(g_lamexp_currentTranslator.instance);
+	}
+	LAMEXP_DELETE(g_lamexp_translation.files);
+	LAMEXP_DELETE(g_lamexp_translation.names);
+	LAMEXP_DELETE(g_lamexp_translation.cntry);
+	LAMEXP_DELETE(g_lamexp_translation.sysid);
+
+	//Free *all* registered tools
+	if(g_lamexp_tools.registry)
+	{
+		QStringList keys = g_lamexp_tools.registry->keys();
+		for(int i = 0; i < keys.count(); i++)
+		{
+			LockedFile *lf = g_lamexp_tools.registry->take(keys.at(i));
+			LAMEXP_DELETE(lf);
+		}
+		g_lamexp_tools.registry->clear();
+		g_lamexp_tools.versions->clear();
+		g_lamexp_tools.tags->clear();
+	}
+	LAMEXP_DELETE(g_lamexp_tools.registry);
+	LAMEXP_DELETE(g_lamexp_tools.versions);
+	LAMEXP_DELETE(g_lamexp_tools.tags);
+
 }

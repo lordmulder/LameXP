@@ -255,19 +255,6 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 	}
 }
 
-/*
- * Exit and clean-up IPC
- */
-void lamexp_ipc_exit(void)
-{
-	if(g_lamexp_ipc_ptr.sharedmem) g_lamexp_ipc_ptr.sharedmem->detach();
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////////////////////////////////////////////
@@ -275,4 +262,22 @@ void lamexp_ipc_exit(void)
 extern "C" void _lamexp_global_init_ipcom(void)
 {
 	LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// FINALIZATION
+///////////////////////////////////////////////////////////////////////////////
+
+extern "C" void _lamexp_global_free_ipcom(void)
+{
+	if(g_lamexp_ipc_ptr.sharedmem)
+	{
+		g_lamexp_ipc_ptr.sharedmem->detach();
+	}
+
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
+	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
 }

@@ -135,6 +135,9 @@ typedef enum
 }
 lamexp_syscolor_t;
 
+//Icon type
+class lamexp_icon_t;
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -156,8 +159,6 @@ bool lamexp_check_sysmenu_msg(void *message, const unsigned int identifier);
 bool lamexp_check_tool(const QString &toolName);
 const QString lamexp_clean_filename(const QString &str);
 const QString lamexp_clean_filepath(const QString &str);
-void lamexp_clean_all_tools(void);
-void lamexp_clean_all_translations(void);
 bool lamexp_clean_folder(const QString &folderPath);
 QDate lamexp_current_date_safe(void);
 unsigned __int64 lamexp_current_file_time(void);
@@ -171,6 +172,7 @@ bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &pa
 void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage = NULL);
 void lamexp_finalization(void);
 unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok = NULL);
+void lamexp_free_window_icon(lamexp_icon_t *icon);
 const lamexp_os_version_t &lamexp_get_os_version(void);
 void lamexp_init_console(const QStringList &argv);
 void lamexp_init_error_handlers(void);
@@ -180,7 +182,6 @@ bool lamexp_init_qt(int argc, char* argv[]);
 bool lamexp_install_translator(const QString &language);
 bool lamexp_install_translator_from_file(const QString &qmFile);
 void lamexp_invalid_param_handler(const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t);
-void lamexp_ipc_exit(void);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
 bool lamexp_is_hibernation_supported(void);
@@ -204,15 +205,15 @@ QString lamexp_rand_str(const bool bLong = false);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
 bool lamexp_remove_file(const QString &filename);
 void lamexp_seed_rand(void);
-bool lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon);
+lamexp_icon_t *lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon);
 bool lamexp_sheet_of_glass(QWidget *window);
 bool lamexp_sheet_of_glass_update(QWidget *window);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);
 void lamexp_sleep(const unsigned int delay);
 QColor lamexp_system_color(const int color_id);
+int lamexp_system_message(const wchar_t *text, int beepType);
 const char *lamexp_support_url(void);
 const QString &lamexp_temp_folder2(void);
-void lamexp_temp_folder_clear(void);
 bool lamexp_themes_enabled(void);
 unsigned int lamexp_tool_version(const QString &toolName, QString *tag = NULL);
 unsigned int lamexp_toolver_coreaudio(void);

@@ -188,15 +188,6 @@ const QString &lamexp_temp_folder2(void)
 }
 
 /*
- * Clear LameXP temp folder cache
- */
-void lamexp_temp_folder_clear(void)
-{
-	QWriteLocker writeLock(&g_lamexp_temp_folder.lock);
-	LAMEXP_DELETE(g_lamexp_temp_folder.path);
-}
-
-/*
  * Setup QPorcess object
  */
 void lamexp_init_process(QProcess &process, const QString &wokringDir, const bool bReplaceTempDir)
@@ -613,4 +604,36 @@ extern "C" void _lamexp_global_init_utils(void)
 {
 	LAMEXP_ZERO_MEMORY(g_lamexp_temp_folder);
 	LAMEXP_ZERO_MEMORY(g_lamexp_app_icon);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// FINALIZATION
+///////////////////////////////////////////////////////////////////////////////
+
+extern "C" void _lamexp_global_free_utils(void)
+{
+	//Delete temporary files
+	const QString &tempFolder = lamexp_temp_folder2();
+	if(!tempFolder.isEmpty())
+	{
+		bool success = false;
+		for(int i = 0; i < 100; i++)
+		{
+			if(lamexp_clean_folder(tempFolder))
+			{
+				success = true;
+				break;
+			}
+			lamexp_sleep(100);
+		}
+		if(!success)
+		{
+			lamexp_system_message(L"Sorry, LameXP was unable to clean up all temporary files. Some residual files in your TEMP directory may require manual deletion!", lamexp_beep_warning);
+			lamexp_exec_shell(NULL, tempFolder, QString(), QString(), true);
+		}
+	}
+
+	//Free memory
+	LAMEXP_DELETE(g_lamexp_temp_folder.path);
+	LAMEXP_DELETE(g_lamexp_app_icon.appIcon);
 }
