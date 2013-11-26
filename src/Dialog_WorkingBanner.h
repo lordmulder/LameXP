@@ -54,6 +54,7 @@ private:
 	bool m_canClose;
 
 public slots:
+	void windowShown(void);
 	void setText(const QString &text);
 	void setProgressMax(unsigned int max);
 	void setProgressVal(unsigned int val);
@@ -63,10 +64,12 @@ signals:
 	void userAbort(void);
 
 protected:
-	void keyPressEvent(QKeyEvent *event);
-	void keyReleaseEvent(QKeyEvent *event);
-	void closeEvent(QCloseEvent *event);
-	bool winEvent(MSG *message, long *result);
+	virtual void keyPressEvent(QKeyEvent *event);
+	virtual void keyReleaseEvent(QKeyEvent *event);
+	virtual void closeEvent(QCloseEvent *event);
+	virtual bool winEvent(MSG *message, long *result);
+	virtual void showEvent(QShowEvent *event);
 
 	QFontMetrics *m_metrics;
+	QStyle *m_style;
 };

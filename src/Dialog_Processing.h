@@ -43,6 +43,7 @@ class QMovie;
 class RAMObserverThread;
 class SettingsModel;
 class QThreadPool;
+class lamexp_icon_t;
 
 enum shutdownFlag_t
 {
@@ -106,6 +107,7 @@ private:
 	bool shutdownComputer(void);
 	QString time2text(const double timeVal) const;
 	
+	lamexp_icon_t *m_windowIcon;
 	QThreadPool *m_threadPool;
 	QList<AudioFileModel> m_pendingJobs;
 	SettingsModel *m_settings;

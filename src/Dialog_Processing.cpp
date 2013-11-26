@@ -136,6 +136,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 :
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
+	m_windowIcon(NULL),
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
@@ -152,6 +153,9 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
 	
+	//Update the window icon
+	m_windowIcon = lamexp_set_window_icon(this, lamexp_app_icon(), true);
+
 	//Update header icon
 	ui->label_headerIcon->setPixmap(lamexp_app_icon().pixmap(ui->label_headerIcon->size()));
 	
@@ -298,6 +302,7 @@ ProcessingDialog::~ProcessingDialog(void)
 			m_diskObserver->wait();
 		}
 	}
+
 	if(m_cpuObserver)
 	{
 		m_cpuObserver->stop();
@@ -307,6 +312,7 @@ ProcessingDialog::~ProcessingDialog(void)
 			m_cpuObserver->wait();
 		}
 	}
+
 	if(m_ramObserver)
 	{
 		m_ramObserver->stop();
@@ -341,6 +347,12 @@ ProcessingDialog::~ProcessingDialog(void)
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
 
+	if(m_windowIcon)
+	{
+		lamexp_free_window_icon(m_windowIcon);
+		m_windowIcon = NULL;
+	}
+	
 	LAMEXP_DELETE(ui);
 }
 
@@ -355,9 +367,6 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 	if(m_firstShow)
 	{
 		static const char *NA = " N/A";
-	
-		//Update the window icon
-		lamexp_set_window_icon(this, lamexp_app_icon(), true);
 
 		lamexp_enable_close_button(this, false);
 		ui->button_closeDialog->setEnabled(false);

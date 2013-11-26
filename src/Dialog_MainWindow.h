@@ -41,6 +41,7 @@ class QMenu;
 class QModelIndex;
 class SettingsModel;
 class WorkingBanner;
+class lamexp_icon_t;
 
 //UIC forward declartion
 namespace Ui {
@@ -193,6 +194,7 @@ private:
 	bool m_firstTimeShown;
 	uint m_outputFolderViewInitCounter;
 	bool m_outputFolderViewCentering;
+	lamexp_icon_t *m_windowIcon;
 
 	WorkingBanner *m_banner;
 	QStringList *m_delayedFileList;

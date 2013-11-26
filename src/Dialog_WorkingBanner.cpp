@@ -31,6 +31,8 @@
 #include <QKeyEvent>
 #include <QFontMetrics>
 #include <QPainter>
+#include <QWindowsVistaStyle>
+#include <QTimer>
 
 #define EPS (1.0E-5)
 
@@ -76,7 +78,7 @@ static inline void UPDATE_MARGINS(QWidget *control, int l = 0, int r = 0, int t 
 WorkingBanner::WorkingBanner(QWidget *parent)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
-	ui(new Ui::WorkingBanner()), m_metrics(NULL), m_working(NULL)
+	ui(new Ui::WorkingBanner()), m_metrics(NULL), m_working(NULL), m_style(NULL)
 {
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
@@ -85,18 +87,20 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	//Enable the "sheet of glass" effect
 	if(lamexp_sheet_of_glass(this))
 	{
-		SET_TEXT_COLOR(ui->labelStatus, lamexp_system_color(lamexp_syscolor_caption));
+		m_style = new QWindowsVistaStyle();
+		ui->labelStatus->setStyle(m_style);
+		ui->progressBar->setStyle(m_style);
+		ui->labelStatus->setStyleSheet("background-color: rgb(255, 255, 255);");
 	}
 	else
 	{
 		UPDATE_MARGINS(this, 5);
 		m_working = new QMovie(":/images/Busy.gif");
-		m_working->setSpeed(75);
 		m_working->setCacheMode(QMovie::CacheAll);
 		ui->labelWorking->setMovie(m_working);
 		m_working->start();
 	}
-
+	
 	//Set Opacity
 	this->setWindowOpacity(0.9);
 
@@ -119,6 +123,7 @@ WorkingBanner::~WorkingBanner(void)
 		LAMEXP_DELETE(m_working);
 	}
 
+	LAMEXP_DELETE(m_style);
 	LAMEXP_DELETE(m_metrics);
 	delete ui;
 }
@@ -244,9 +249,19 @@ bool WorkingBanner::winEvent(MSG *message, long *result)
 	return WinSevenTaskbar::handleWinEvent(message, result);
 }
 
+void WorkingBanner::showEvent(QShowEvent *event)
+{
+	QTimer::singleShot(125, this, SLOT(windowShown()));
+}
+
 ////////////////////////////////////////////////////////////
 // SLOTS
 ////////////////////////////////////////////////////////////
+
+void WorkingBanner::windowShown(void)
+{
+	lamexp_bring_to_front(this);
+}
 
 void WorkingBanner::setText(const QString &text)
 {
@@ -255,14 +270,14 @@ void WorkingBanner::setText(const QString &text)
 		 m_metrics = new QFontMetrics(ui->labelStatus->font());
 	}
 
-	if(m_metrics->width(text) <= ui->labelStatus->width() - 8)
+	if(m_metrics->width(text) <= ui->labelStatus->width() - 16)
 	{
 		ui->labelStatus->setText(text);
 	}
 	else
 	{
 		QString choppedText = text.simplified().append("...");
-		while((m_metrics->width(choppedText) > ui->labelStatus->width() - 8) && (choppedText.length() > 8))
+		while((m_metrics->width(choppedText) > ui->labelStatus->width() - 16) && (choppedText.length() > 8))
 		{
 			choppedText.chop(4);
 			choppedText = choppedText.trimmed();

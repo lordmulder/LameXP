@@ -138,10 +138,7 @@
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="lineWidth">
-        <number>0</number>
+        <enum>QFrame::Sunken</enum>
        </property>
        <property name="text">
         <string notr="true">$(Status)</string>

@@ -77,9 +77,20 @@
 // Helper macros
 ////////////////////////////////////////////////////////////
 
+#define BANNER_VISIBLE ((m_banner != NULL) && m_banner->isVisible())
+
+#define INIT_BANNER() do \
+{ \
+	if(m_banner == NULL) \
+	{ \
+		m_banner = new WorkingBanner(this); \
+	} \
+} \
+while(0)
+
 #define ABORT_IF_BUSY do \
 { \
-	if(m_banner->isVisible() || m_delayedFileTimer->isActive()) \
+	if(BANNER_VISIBLE || m_delayedFileTimer->isActive()) \
 	{ \
 		lamexp_beep(lamexp_beep_warning); \
 		return; \
@@ -158,8 +169,9 @@ while(0)
 
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
-//#define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
+
+//#define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
 
 static const unsigned int IDM_ABOUTBOX = 0xEFF0;
 
@@ -174,7 +186,9 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	m_fileListModel(fileListModel),
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
+	m_windowIcon(NULL),
 	m_fileSystemModel(NULL),
+	m_banner(NULL),
 	m_accepted(false),
 	m_firstTimeShown(true),
 	m_outputFolderViewCentering(false),
@@ -183,7 +197,10 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
-	
+
+	//Create window icon
+	m_windowIcon = lamexp_set_window_icon(this, lamexp_app_icon(), true);
+
 	//Register meta types
 	qRegisterMetaType<AudioFileModel>("AudioFileModel");
 
@@ -591,9 +608,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	move((desktopRect.width() - thisRect.width()) / 2, (desktopRect.height() - thisRect.height()) / 2);
 	setMinimumSize(thisRect.width(), thisRect.height());
 
-	//Create banner
-	m_banner = new WorkingBanner(this);
-
 	//Create DropBox widget
 	m_dropBox = new DropBox(this, m_fileListModel, m_settings);
 	connect(m_fileListModel, SIGNAL(modelReset()), m_dropBox, SLOT(modelChanged()));
@@ -669,6 +683,13 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_evenFilterOutputFolderView);
 	LAMEXP_DELETE(m_evenFilterCompressionTab);
 	
+	//Free window icon
+	if(m_windowIcon)
+	{
+		lamexp_free_window_icon(m_windowIcon);
+		m_windowIcon = NULL;
+	}
+
 	//Un-initialize the dialog
 	LAMEXP_DELETE(ui);
 }
@@ -689,7 +710,9 @@ void MainWindow::addFiles(const QStringList &files)
 
 	ui->tabWidget->setCurrentIndex(0);
 
+	INIT_BANNER();
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
+
 	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
 	connect(analyzer, SIGNAL(progressValChanged(unsigned int)), m_banner, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
 	connect(analyzer, SIGNAL(progressMaxChanged(unsigned int)), m_banner, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
@@ -740,6 +763,8 @@ void MainWindow::addFiles(const QStringList &files)
  */
 void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 {
+	INIT_BANNER();
+
 	QFileInfoList folderInfoList;
 	folderInfoList << QFileInfo(path);
 	QStringList fileList;
@@ -928,7 +953,6 @@ void MainWindow::showEvent(QShowEvent *event)
 	if(m_firstTimeShown)
 	{
 		m_firstTimeShown = false;
-		lamexp_set_window_icon(this, lamexp_app_icon(), true);
 		QTimer::singleShot(0, this, SLOT(windowShown()));
 	}
 	else
@@ -1092,7 +1116,7 @@ void MainWindow::dropEvent(QDropEvent *event)
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	if(m_banner->isVisible() || m_delayedFileTimer->isActive())
+	if(BANNER_VISIBLE || m_delayedFileTimer->isActive())
 	{
 		lamexp_beep(lamexp_beep_warning);
 		event->ignore();
@@ -1178,7 +1202,7 @@ bool MainWindow::event(QEvent *e)
 	{
 	case lamexp_event_queryendsession:
 		qWarning("System is shutting down, main window prepares to close...");
-		if(m_banner->isVisible()) m_banner->close();
+		if(BANNER_VISIBLE) m_banner->close();
 		if(m_delayedFileTimer->isActive()) m_delayedFileTimer->stop();
 		return true;
 	case lamexp_event_endsession:
@@ -1327,7 +1351,7 @@ void MainWindow::windowShown(void)
 			return;
 		default:
 			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
-			lamexp_play_sound(IDR_WAVE_WAITING, true);
+			INIT_BANNER(); lamexp_play_sound(IDR_WAVE_WAITING, true);
 			m_banner->show(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
 		}
@@ -2432,7 +2456,7 @@ void MainWindow::handleDelayedFiles(void)
 		return;
 	}
 
-	if(m_banner->isVisible())
+	if(BANNER_VISIBLE)
 	{
 		m_delayedFileTimer->start(5000);
 		return;
@@ -3999,7 +4023,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
  */
 void MainWindow::notifyOtherInstance(void)
 {
-	if(!m_banner->isVisible())
+	if(!(BANNER_VISIBLE))
 	{
 		QMessageBox msgBox(QMessageBox::Warning, tr("Already Running"), tr("LameXP is already running, please use the running instance!"), QMessageBox::NoButton, this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
 		msgBox.exec();
@@ -4049,7 +4073,7 @@ void MainWindow::addFilesDelayed(const QStringList &filePaths, bool tryASAP)
  */
 void MainWindow::addFolderDelayed(const QString &folderPath, bool recursive)
 {
-	if(!m_banner->isVisible())
+	if(!(BANNER_VISIBLE))
 	{
 		addFolder(folderPath, recursive, true);
 	}
