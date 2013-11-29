@@ -88,6 +88,32 @@
 } \
 while(0)
 
+#define SHOW_BANNER(TXT) do \
+{ \
+	INIT_BANNER(); \
+	m_banner->show((TXT)); \
+} \
+while(0)
+
+#define SHOW_BANNER_ARG(TXT, ARG) do \
+{ \
+	INIT_BANNER(); \
+	m_banner->show((TXT), (ARG)); \
+} \
+while(0)
+
+
+#define SHOW_BANNER_CONDITIONALLY(FLAG, TEST, TXT) do \
+{ \
+	if((!(FLAG)) && ((TEST))) \
+	{ \
+		INIT_BANNER(); \
+		m_banner->show((TXT)); \
+		FLAG = true; \
+	} \
+} \
+while(0)
+
 #define ABORT_IF_BUSY do \
 { \
 	if(BANNER_VISIBLE || m_delayedFileTimer->isActive()) \
@@ -617,16 +643,18 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 
 	//Create message handler thread
 	m_messageHandler = new MessageHandlerThread();
-	m_delayedFileList = new QStringList();
-	m_delayedFileTimer = new QTimer();
-	m_delayedFileTimer->setSingleShot(true);
-	m_delayedFileTimer->setInterval(5000);
 	connect(m_messageHandler, SIGNAL(otherInstanceDetected()), this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(fileReceived(QString)), this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(folderReceived(QString, bool)), this, SLOT(addFolderDelayed(QString, bool)), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(killSignalReceived()), this, SLOT(close()), Qt::QueuedConnection);
-	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 	m_messageHandler->start();
+
+	//Init delayed file handling
+	m_delayedFileList = new QStringList();
+	m_delayedFileTimer = new QTimer();
+	m_delayedFileTimer->setSingleShot(true);
+	m_delayedFileTimer->setInterval(5000);
+	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 
 	//Load translation
 	initializeTranslation();
@@ -636,6 +664,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	changeEvent(&languageChangeEvent);
 
 	//Enable Drag & Drop
+	m_droppedFileList = new QList<QUrl>();
 	this->setAcceptDrops(true);
 }
 
@@ -668,6 +697,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_banner);
 	LAMEXP_DELETE(m_fileSystemModel);
 	LAMEXP_DELETE(m_messageHandler);
+	LAMEXP_DELETE(m_droppedFileList);
 	LAMEXP_DELETE(m_delayedFileList);
 	LAMEXP_DELETE(m_delayedFileTimer);
 	LAMEXP_DELETE(m_metaInfoModel);
@@ -708,7 +738,8 @@ void MainWindow::addFiles(const QStringList &files)
 		return;
 	}
 
-	ui->tabWidget->setCurrentIndex(0);
+	WITH_BLOCKED_SIGNALS(ui->tabWidget, setCurrentIndex, 0);
+	tabPageChanged(ui->tabWidget->currentIndex(), true);
 
 	INIT_BANNER();
 	FileAnalyzer *analyzer = new FileAnalyzer(files);
@@ -763,13 +794,11 @@ void MainWindow::addFiles(const QStringList &files)
  */
 void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 {
-	INIT_BANNER();
-
 	QFileInfoList folderInfoList;
 	folderInfoList << QFileInfo(path);
 	QStringList fileList;
 	
-	m_banner->show(tr("Scanning folder(s) for files, please wait..."));
+	SHOW_BANNER(tr("Scanning folder(s) for files, please wait..."));
 	
 	QApplication::processEvents();
 	lamexp_check_escape_state();
@@ -792,7 +821,7 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 			fileList << fileInfoList.takeFirst().canonicalFilePath();
 		}
 
-		QApplication::processEvents();
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 		if(recursive)
 		{
@@ -947,7 +976,8 @@ void MainWindow::showEvent(QShowEvent *event)
 
 	if(!event->spontaneous())
 	{
-		ui->tabWidget->setCurrentIndex(0);
+		WITH_BLOCKED_SIGNALS(ui->tabWidget, setCurrentIndex, 0);
+		tabPageChanged(ui->tabWidget->currentIndex(), true);
 	}
 
 	if(m_firstTimeShown)
@@ -1061,53 +1091,12 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
  */
 void MainWindow::dropEvent(QDropEvent *event)
 {
-	ABORT_IF_BUSY;
-
-	if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_DROP, true);
-
-	QStringList droppedFiles;
-	QList<QUrl> urls = event->mimeData()->urls();
-
-	while(!urls.isEmpty())
+	m_droppedFileList->clear();
+	(*m_droppedFileList) << event->mimeData()->urls();
+	if(!m_droppedFileList->isEmpty())
 	{
-		QUrl currentUrl = urls.takeFirst();
-		QFileInfo file(currentUrl.toLocalFile());
-		if(!file.exists())
-		{
-			continue;
-		}
-		if(file.isFile())
-		{
-			qDebug("Dropped File: %s", QUTF8(file.canonicalFilePath()));
-			droppedFiles << file.canonicalFilePath();
-			continue;
-		}
-		if(file.isDir())
-		{
-			qDebug("Dropped Folder: %s", QUTF8(file.canonicalFilePath()));
-			QList<QFileInfo> list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoSymLinks);
-			if(list.count() > 0)
-			{
-				for(int j = 0; j < list.count(); j++)
-				{
-					droppedFiles << list.at(j).canonicalFilePath();
-				}
-			}
-			else
-			{
-				list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-				for(int j = 0; j < list.count(); j++)
-				{
-					qDebug("Descending to Folder: %s", QUTF8(list.at(j).canonicalFilePath()));
-					urls.prepend(QUrl::fromLocalFile(list.at(j).canonicalFilePath()));
-				}
-			}
-		}
-	}
-	
-	if(!droppedFiles.isEmpty())
-	{
-		addFilesDelayed(droppedFiles, true);
+		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_DROP, true);
+		QTimer::singleShot(0, this, SLOT(handleDroppedFiles()));
 	}
 }
 
@@ -1351,8 +1340,8 @@ void MainWindow::windowShown(void)
 			return;
 		default:
 			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
-			INIT_BANNER(); lamexp_play_sound(IDR_WAVE_WAITING, true);
-			m_banner->show(tr("Skipping update check this time, please be patient..."), &loop);
+			lamexp_play_sound(IDR_WAVE_WAITING, true);
+			SHOW_BANNER_ARG(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
 		}
 	}
@@ -2445,6 +2434,73 @@ void MainWindow::findFileContextActionTriggered(void)
 }
 
 /*
+ * Add all dropped files
+ */
+void MainWindow::handleDroppedFiles(void)
+{
+	ABORT_IF_BUSY;
+
+	static const int MIN_COUNT = 16;
+	const QString bannerText = tr("Loading dropped files or folders, please wait...");
+	bool bUseBanner = false;
+
+	SHOW_BANNER_CONDITIONALLY(bUseBanner, (m_droppedFileList->count() >= MIN_COUNT), bannerText);
+
+	QStringList droppedFiles;
+	while(!m_droppedFileList->isEmpty())
+	{
+		QFileInfo file(m_droppedFileList->takeFirst().toLocalFile());
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+
+		if(!file.exists())
+		{
+			continue;
+		}
+
+		if(file.isFile())
+		{
+			qDebug("Dropped File: %s", QUTF8(file.canonicalFilePath()));
+			droppedFiles << file.canonicalFilePath();
+			continue;
+		}
+
+		if(file.isDir())
+		{
+			qDebug("Dropped Folder: %s", QUTF8(file.canonicalFilePath()));
+			QFileInfoList list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+			if(list.count() > 0)
+			{
+				SHOW_BANNER_CONDITIONALLY(bUseBanner, (list.count() >= MIN_COUNT), bannerText);
+				for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
+				{
+					droppedFiles << (*iter).canonicalFilePath();
+				}
+			}
+			else
+			{
+				list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+				SHOW_BANNER_CONDITIONALLY(bUseBanner, (list.count() >= MIN_COUNT), bannerText);
+				for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
+				{
+					qDebug("Descending to Folder: %s", QUTF8((*iter).canonicalFilePath()));
+					m_droppedFileList->prepend(QUrl::fromLocalFile((*iter).canonicalFilePath()));
+				}
+			}
+		}
+	}
+	
+	if(bUseBanner)
+	{
+		m_banner->close();
+	}
+
+	if(!droppedFiles.isEmpty())
+	{
+		addFiles(droppedFiles);
+	}
+}
+
+/*
  * Add all pending files
  */
 void MainWindow::handleDelayedFiles(void)
@@ -2461,10 +2517,11 @@ void MainWindow::handleDelayedFiles(void)
 		m_delayedFileTimer->start(5000);
 		return;
 	}
-
+	
+	WITH_BLOCKED_SIGNALS(ui->tabWidget, setCurrentIndex, 0);
+	tabPageChanged(ui->tabWidget->currentIndex(), true);
+	
 	QStringList selectedFiles;
-	ui->tabWidget->setCurrentIndex(0);
-
 	while(!m_delayedFileList->isEmpty())
 	{
 		QFileInfo currentFile = QFileInfo(m_delayedFileList->takeFirst());
@@ -4053,7 +4110,7 @@ void MainWindow::addFileDelayed(const QString &filePath, bool tryASAP)
  */
 void MainWindow::addFilesDelayed(const QStringList &filePaths, bool tryASAP)
 {
-	if(tryASAP && !m_delayedFileTimer->isActive())
+	if(tryASAP && (!m_delayedFileTimer->isActive()))
 	{
 		qDebug("Received %d file(s).", filePaths.count());
 		m_delayedFileList->append(filePaths);

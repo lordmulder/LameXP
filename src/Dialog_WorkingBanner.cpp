@@ -88,6 +88,7 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	if(lamexp_sheet_of_glass(this))
 	{
 		m_style = new QWindowsVistaStyle();
+		this->setStyle(m_style);
 		ui->labelStatus->setStyle(m_style);
 		ui->progressBar->setStyle(m_style);
 		ui->labelStatus->setStyleSheet("background-color: rgb(255, 255, 255);");
@@ -230,6 +231,10 @@ void WorkingBanner::keyPressEvent(QKeyEvent *event)
 		qDebug("QT::KEY_ESCAPE pressed!");
 		emit userAbort();
 	}
+	else if(event->key() == Qt::Key_M)
+	{
+		QTimer::singleShot(0, parent(), SLOT(showMinimized()));
+	}
 	
 	event->ignore();
 }
@@ -251,7 +256,7 @@ bool WorkingBanner::winEvent(MSG *message, long *result)
 
 void WorkingBanner::showEvent(QShowEvent *event)
 {
-	QTimer::singleShot(125, this, SLOT(windowShown()));
+	QTimer::singleShot(25, this, SLOT(windowShown()));
 }
 
 ////////////////////////////////////////////////////////////

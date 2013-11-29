@@ -40,7 +40,7 @@ class WorkingBanner: public QDialog
 	Q_OBJECT
 
 public:
-	WorkingBanner(QWidget *parent = 0);
+	WorkingBanner(QWidget *parent);
 	~WorkingBanner(void);
 	
 	void show(const QString &text);

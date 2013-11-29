@@ -38,6 +38,7 @@ class QButtonGroup;
 class QFileSystemModelEx;
 class QLabel;
 class QMenu;
+class QUrl;
 class QModelIndex;
 class SettingsModel;
 class WorkingBanner;
@@ -106,6 +107,7 @@ private slots:
 	void gotoMusicFolderButtonClicked(void);
 	void goUpFolderContextActionTriggered(void);
 	void handleDelayedFiles(void);
+	void handleDroppedFiles(void);
 	void hibernateComputerActionTriggered(bool checked);
 	void importCueSheetActionTriggered(bool checked);
 	void importCsvContextActionTriggered(void);
@@ -197,6 +199,7 @@ private:
 	lamexp_icon_t *m_windowIcon;
 
 	WorkingBanner *m_banner;
+	QList<QUrl> *m_droppedFileList;
 	QStringList *m_delayedFileList;
 	QTimer *m_delayedFileTimer;
 	DropBox *m_dropBox;
