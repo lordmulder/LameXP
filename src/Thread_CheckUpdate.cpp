@@ -109,8 +109,10 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites 
 	"http://imgur.com/",
 	"http://en.jd.com/",
 	"http://mirrors.kernel.org/",
+	"http://lame.sourceforge.net/",
 	"http://www.libav.org/",
 	"http://www.linkedin.com/about-us",
+	"http://www.linuxmint.com/",
 	"http://www.livedoor.com/",
 	"http://www.livejournal.com/",
 	"http://mail.ru/",
@@ -137,10 +139,12 @@ static const char *known_hosts[] =		//Taken form: http://www.alexa.com/topsites 
 	"http://www.uol.com.br/",
 	"http://www.videohelp.com/",
 	"http://www.videolan.org/",
+	"http://virtualdub.org/",
 	"http://www.weibo.com/",
 	"http://www.wikipedia.org/",
 	"http://www.winamp.com/",
 	"http://wordpress.com/",
+	"http://xiph.org/",
 	"http://us.yahoo.com/",
 	"http://www.yandex.ru/",
 	"http://www.youtube.com/",
@@ -185,14 +189,14 @@ void UpdateInfo::resetInfo(void)
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
 
-UpdateCheckThread::UpdateCheckThread(const bool betaUpdates, const bool testMode)
+UpdateCheckThread::UpdateCheckThread(const QString &binWGet, const QString &binGnuPG, const QString &binKeys, const bool betaUpdates, const bool testMode)
 :
 	m_updateInfo(new UpdateInfo()),
+	m_binaryWGet(binWGet),
+	m_binaryGnuPG(binGnuPG),
+	m_binaryKeys(binKeys),
 	m_betaUpdates(betaUpdates),
 	m_testMode(testMode),
-	m_binaryWGet(lamexp_lookup_tool("wget.exe")),
-	m_binaryGnuPG(lamexp_lookup_tool("gpgv.exe")),
-	m_binaryKeys(lamexp_lookup_tool("gpgv.gpg")),
 	m_maxProgress(getMaxProgress())
 {
 	m_success = false;

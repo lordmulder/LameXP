@@ -71,6 +71,9 @@ protected:
 private:
 	Ui::UpdateDialog *ui; //for Qt UIC
 
+	const QString m_binaryWGet;
+	const QString m_binaryGnuPG;
+	const QString m_binaryKeys;
 	const QString m_binaryUpdater;
 
 	UpdateCheckThread *m_thread;

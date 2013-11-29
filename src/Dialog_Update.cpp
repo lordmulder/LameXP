@@ -87,7 +87,10 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	m_firstShow(true),
 	m_updateReadyToInstall(false),
 	m_updaterProcess(NULL),
-	m_binaryUpdater(lamexp_lookup_tool("wupdate.exe"))
+	m_binaryUpdater(lamexp_lookup_tool("wupdate.exe")),
+	m_binaryWGet(lamexp_lookup_tool("wget.exe")),
+	m_binaryGnuPG(lamexp_lookup_tool("gpgv.exe")),
+	m_binaryKeys(lamexp_lookup_tool("gpgv.gpg"))
 {
 	if(m_binaryUpdater.isEmpty())
 	{
@@ -156,7 +159,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	{
 		if(!m_thread)
 		{
-			m_thread = new UpdateCheckThread(m_betaUpdates);
+			m_thread = new UpdateCheckThread(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, m_betaUpdates);
 			connect(m_thread, SIGNAL(statusChanged(int)), this, SLOT(threadStatusChanged(int)));
 			connect(m_thread, SIGNAL(progressChanged(int)), this, SLOT(threadProgressChanged(int)));
 			connect(m_thread, SIGNAL(messageLogged(QString)), this, SLOT(threadMessageLogged(QString)));
@@ -456,7 +459,7 @@ void UpdateDialog::testKnownHosts(void)
 {
 	ui->statusLabel->setText("Testing all known hosts, this may take a few minutes...");
 	
-	if(UpdateCheckThread *testThread = new UpdateCheckThread(m_betaUpdates, true))
+	if(UpdateCheckThread *testThread = new UpdateCheckThread(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, m_betaUpdates, true))
 	{
 		QEventLoop loop;
 		m_logFile->clear();

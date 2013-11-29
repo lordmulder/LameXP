@@ -62,7 +62,7 @@ public:
 	}
 	update_status_t;
 
-	UpdateCheckThread(const bool betaUpdates, const bool testMode = false);
+	UpdateCheckThread(const QString &binWGet, const QString &binGnuPG, const QString &binKeys, const bool betaUpdates, const bool testMode = false);
 	~UpdateCheckThread(void);
 
 	const int getUpdateStatus(void) const { return m_status; }
