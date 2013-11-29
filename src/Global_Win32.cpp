@@ -120,6 +120,13 @@ while(0)
 while(0)
 
 ///////////////////////////////////////////////////////////////////////////////
+// GLOBAL TYPES
+///////////////////////////////////////////////////////////////////////////////
+
+typedef HRESULT (WINAPI *SHGetKnownFolderPath_t)(const GUID &rfid, DWORD dwFlags, HANDLE hToken, PWSTR *ppszPath);
+typedef HRESULT (WINAPI *SHGetFolderPath_t)(HWND hwndOwner, int nFolder, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
+
+///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -130,6 +137,8 @@ static bool g_lamexp_console_attached = false;
 static struct
 {
 	QMap<size_t, QString> *knownFolders;
+	SHGetKnownFolderPath_t getKnownFolderPath;
+	SHGetFolderPath_t getFolderPath;
 	QReadWriteLock lock;
 }
 g_lamexp_known_folder;
@@ -1152,60 +1161,46 @@ const QStringList &lamexp_arguments(void)
  */
 const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 {
-	typedef HRESULT (WINAPI *SHGetKnownFolderPathFun)(__in const GUID &rfid, __in DWORD dwFlags, __in HANDLE hToken, __out PWSTR *ppszPath);
-	typedef HRESULT (WINAPI *SHGetFolderPathFun)(__in HWND hwndOwner, __in int nFolder, __in HANDLE hToken, __in DWORD dwFlags, __out LPWSTR pszPath);
+	static const int CSIDL_FLAG_CREATE = 0x8000;
+	typedef enum { KF_FLAG_CREATE = 0x00008000 } kf_flags_t;
+	
+	struct
+	{
+		const int csidl;
+		const GUID guid;
+	}
+	static s_folders[] =
+	{
+		{ 0x001c, {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}} },  //CSIDL_LOCAL_APPDATA
+		{ 0x0026, {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}} },  //CSIDL_PROGRAM_FILES
+		{ 0x0024, {0xF38BF404,0x1D43,0x42F2,{0x93,0x05,0x67,0xDE,0x0B,0x28,0xFC,0x23}} },  //CSIDL_WINDOWS_FOLDER
+		{ 0x0025, {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}} },  //CSIDL_SYSTEM_FOLDER
+	};
 
-	static const int CSIDL_LOCAL_APPDATA  = 0x001c;
-	static const int CSIDL_PROGRAM_FILES  = 0x0026;
-	static const int CSIDL_WINDOWS_FOLDER = 0x0024;
-	static const int CSIDL_SYSTEM_FOLDER  = 0x0025;
-
-	static const GUID GUID_LOCAL_APPDATA     = {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
-	static const GUID GUID_LOCAL_APPDATA_LOW = {0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
-	static const GUID GUID_PROGRAM_FILES     = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
-	static const GUID GUID_WINDOWS_FOLDER    = {0xF38BF404,0x1D43,0x42F2,{0x93,0x05,0x67,0xDE,0x0B,0x28,0xFC,0x23}};
-	static const GUID GUID_SYSTEM_FOLDER     = {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}};
-
-	QReadLocker readLock(&g_lamexp_known_folder.lock);
-
-	int folderCSIDL = -1;
-	GUID folderGUID = {0x0000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}};
-	size_t folderCacheId = size_t(-1);
+	size_t folderId = size_t(-1);
 
 	switch(folder_id)
 	{
-	case lamexp_folder_localappdata:
-		folderCacheId = 0;
-		folderCSIDL = CSIDL_LOCAL_APPDATA;
-		folderGUID = GUID_LOCAL_APPDATA;
-		break;
-	case lamexp_folder_programfiles:
-		folderCacheId = 1;
-		folderCSIDL = CSIDL_PROGRAM_FILES;
-		folderGUID = GUID_PROGRAM_FILES;
-		break;
-	case lamexp_folder_systemfolder:
-		folderCacheId = 2;
-		folderCSIDL = CSIDL_SYSTEM_FOLDER;
-		folderGUID = GUID_SYSTEM_FOLDER;
-		break;
-	case lamexp_folder_systroot_dir:
-		folderCacheId = 3;
-		folderCSIDL = CSIDL_WINDOWS_FOLDER;
-		folderGUID = GUID_WINDOWS_FOLDER;
-		break;
-	default:
+		case lamexp_folder_localappdata: folderId = 0; break;
+		case lamexp_folder_programfiles: folderId = 1; break;
+		case lamexp_folder_systroot_dir: folderId = 2; break;
+		case lamexp_folder_systemfolder: folderId = 3; break;
+	}
+
+	if(folderId == size_t(-1))
+	{
 		qWarning("Invalid 'known' folder was requested!");
 		return *reinterpret_cast<QString*>(NULL);
-		break;
 	}
+
+	QReadLocker readLock(&g_lamexp_known_folder.lock);
 
 	//Already in cache?
 	if(g_lamexp_known_folder.knownFolders)
 	{
-		if(g_lamexp_known_folder.knownFolders->contains(folderCacheId))
+		if(g_lamexp_known_folder.knownFolders->contains(folderId))
 		{
-			return (*g_lamexp_known_folder.knownFolders)[folderCacheId];
+			return (*g_lamexp_known_folder.knownFolders)[folderId];
 		}
 	}
 
@@ -1216,75 +1211,59 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 	//Still not in cache?
 	if(g_lamexp_known_folder.knownFolders)
 	{
-		if(g_lamexp_known_folder.knownFolders->contains(folderCacheId))
+		if(g_lamexp_known_folder.knownFolders->contains(folderId))
 		{
-			return (*g_lamexp_known_folder.knownFolders)[folderCacheId];
+			return (*g_lamexp_known_folder.knownFolders)[folderId];
 		}
 	}
 
-	static SHGetKnownFolderPathFun SHGetKnownFolderPathPtr = NULL;
-	static SHGetFolderPathFun SHGetFolderPathPtr = NULL;
-
-	//Lookup functions
-	if((!SHGetKnownFolderPathPtr) && (!SHGetFolderPathPtr))
+	//Initialize on first call
+	if(!g_lamexp_known_folder.knownFolders)
 	{
-		QLibrary kernel32Lib("shell32.dll");
-		if(kernel32Lib.load())
+		QLibrary shell32("shell32.dll");
+		if(shell32.load())
 		{
-			SHGetKnownFolderPathPtr = (SHGetKnownFolderPathFun) kernel32Lib.resolve("SHGetKnownFolderPath");
-			SHGetFolderPathPtr = (SHGetFolderPathFun) kernel32Lib.resolve("SHGetFolderPathW");
+			g_lamexp_known_folder.getFolderPath =      (SHGetFolderPath_t)      shell32.resolve("SHGetFolderPathW");
+			g_lamexp_known_folder.getKnownFolderPath = (SHGetKnownFolderPath_t) shell32.resolve("SHGetKnownFolderPath");
 		}
+		g_lamexp_known_folder.knownFolders = new QMap<size_t, QString>();
 	}
 
-	QString folder;
+	QString folderPath;
 
 	//Now try to get the folder path!
-	if(SHGetKnownFolderPathPtr)
+	if(g_lamexp_known_folder.getKnownFolderPath)
 	{
 		WCHAR *path = NULL;
-		if(SHGetKnownFolderPathPtr(folderGUID, 0x00008000, NULL, &path) == S_OK)
+		if(g_lamexp_known_folder.getKnownFolderPath(s_folders[folderId].guid, KF_FLAG_CREATE, NULL, &path) == S_OK)
 		{
 			//MessageBoxW(0, path, L"SHGetKnownFolderPath", MB_TOPMOST);
 			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
-			if(!folderTemp.exists())
-			{
-				folderTemp.mkpath(".");
-			}
 			if(folderTemp.exists())
 			{
-				folder = folderTemp.canonicalPath();
+				folderPath = folderTemp.canonicalPath();
 			}
 			CoTaskMemFree(path);
 		}
 	}
-	else if(SHGetFolderPathPtr)
+	else if(g_lamexp_known_folder.getFolderPath)
 	{
 		WCHAR *path = new WCHAR[4096];
-		if(SHGetFolderPathPtr(NULL, folderCSIDL, NULL, NULL, path) == S_OK)
+		if(g_lamexp_known_folder.getFolderPath(NULL, s_folders[folderId].csidl | CSIDL_FLAG_CREATE, NULL, NULL, path) == S_OK)
 		{
 			//MessageBoxW(0, path, L"SHGetFolderPathW", MB_TOPMOST);
 			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
-			if(!folderTemp.exists())
-			{
-				folderTemp.mkpath(".");
-			}
 			if(folderTemp.exists())
 			{
-				folder = folderTemp.canonicalPath();
+				folderPath = folderTemp.canonicalPath();
 			}
 		}
-		delete [] path;
-	}
-
-	//Create cache
-	if(!g_lamexp_known_folder.knownFolders)
-	{
-		g_lamexp_known_folder.knownFolders = new QMap<size_t, QString>();
+		LAMEXP_DELETE_ARRAY(path);
 	}
 
 	//Update cache
-	g_lamexp_known_folder.knownFolders->insert(folderCacheId, folder);
-	return (*g_lamexp_known_folder.knownFolders)[folderCacheId];
+	g_lamexp_known_folder.knownFolders->insert(folderId, folderPath);
+	return (*g_lamexp_known_folder.knownFolders)[folderId];
 }
 
 /*

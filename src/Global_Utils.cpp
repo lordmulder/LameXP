@@ -85,7 +85,7 @@ QString lamexp_rand_str(const bool bLong)
  */
 static QString lamexp_try_init_folder(const QString &folderPath)
 {
-	static const char *DATA = "Lorem ipsum dolor sit amet, consectetur, adipisci velit!";
+	static const char *TEST_DATA = "Lorem ipsum dolor sit amet, consectetur, adipisci velit!";
 	
 	bool success = false;
 
@@ -93,17 +93,16 @@ static QString lamexp_try_init_folder(const QString &folderPath)
 	const QDir folderDir(folderInfo.absoluteFilePath());
 
 	//Create folder, if it does *not* exist yet
-	for(int i = 0; i < 16; i++)
+	for(int i = 0; (i < 16) && (!folderDir.exists()); i++)
 	{
-		if(folderDir.exists()) break;
 		folderDir.mkpath(".");
 	}
 
 	//Make sure folder exists now *and* is writable
 	if(folderDir.exists())
 	{
-		const QByteArray testData = QByteArray(DATA);
-		for(int i = 0; i < 32; i++)
+		const QByteArray testData = QByteArray(TEST_DATA);
+		for(int i = 0; (i < 32) && (!success); i++)
 		{
 			QFile testFile(folderDir.absoluteFilePath(QString("~%1.tmp").arg(lamexp_rand_str())));
 			if(testFile.open(QIODevice::ReadWrite | QIODevice::Truncate))
@@ -113,9 +112,7 @@ static QString lamexp_try_init_folder(const QString &folderPath)
 					success = true;
 				}
 				testFile.remove();
-				testFile.close();
 			}
-			if(success) break;
 		}
 	}
 
