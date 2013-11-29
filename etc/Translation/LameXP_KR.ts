@@ -2010,6 +2010,10 @@
         <source>Current Encoder: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Loading dropped files or folders, please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

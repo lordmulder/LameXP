@@ -2017,6 +2017,10 @@
         <source>Current Encoder: %1</source>
         <translation>Codificador actual: %1</translation>
     </message>
+    <message>
+        <source>Loading dropped files or folders, please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>
