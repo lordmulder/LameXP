@@ -85,30 +85,37 @@ QString lamexp_rand_str(const bool bLong)
  */
 static QString lamexp_try_init_folder(const QString &folderPath)
 {
+	static const char *DATA = "Lorem ipsum dolor sit amet, consectetur, adipisci velit!";
+	
 	bool success = false;
 
 	const QFileInfo folderInfo(folderPath);
 	const QDir folderDir(folderInfo.absoluteFilePath());
 
 	//Create folder, if it does *not* exist yet
-	if(!folderDir.exists())
+	for(int i = 0; i < 16; i++)
 	{
+		if(folderDir.exists()) break;
 		folderDir.mkpath(".");
 	}
 
 	//Make sure folder exists now *and* is writable
 	if(folderDir.exists())
 	{
-		QFile testFile(folderDir.absoluteFilePath(QString("~%1.tmp").arg(lamexp_rand_str())));
-		if(testFile.open(QIODevice::ReadWrite))
+		const QByteArray testData = QByteArray(DATA);
+		for(int i = 0; i < 32; i++)
 		{
-			const QByteArray testData = QByteArray("Lorem ipsum dolor sit amet, consectetur, adipisci velit!");
-			if(testFile.write(testData) >= strlen(testData))
+			QFile testFile(folderDir.absoluteFilePath(QString("~%1.tmp").arg(lamexp_rand_str())));
+			if(testFile.open(QIODevice::ReadWrite | QIODevice::Truncate))
 			{
-				success = true;
+				if(testFile.write(testData) >= testData.size())
+				{
+					success = true;
+				}
 				testFile.remove();
+				testFile.close();
 			}
-			testFile.close();
+			if(success) break;
 		}
 	}
 
@@ -118,9 +125,17 @@ static QString lamexp_try_init_folder(const QString &folderPath)
 /*
  * Initialize LameXP temp folder
  */
-#define INIT_TEMP_FOLDER(OUT,TMP) do \
+#define INIT_TEMP_FOLDER_RAND(OUT_PTR, BASE_DIR) do \
 { \
-	(OUT) = lamexp_try_init_folder(QString("%1/%2").arg((TMP), lamexp_rand_str())); \
+	for(int _i = 0; _i < 128; _i++) \
+	{ \
+		const QString _randDir =  QString("%1/%2").arg((BASE_DIR), lamexp_rand_str()); \
+		if(!QDir(_randDir).exists()) \
+		{ \
+			*(OUT_PTR) = lamexp_try_init_folder(_randDir); \
+			if(!(OUT_PTR)->isEmpty()) break; \
+		} \
+	} \
 } \
 while(0)
 
@@ -165,16 +180,25 @@ const QString &lamexp_temp_folder2(void)
 	QString tempPath = lamexp_try_init_folder(QDir::temp().absolutePath());
 	if(!tempPath.isEmpty())
 	{
-		INIT_TEMP_FOLDER(*g_lamexp_temp_folder.path, tempPath);
+		INIT_TEMP_FOLDER_RAND(g_lamexp_temp_folder.path, tempPath);
 	}
 
-	//Otherwise create TEMP folder in %LOCALAPPDATA%
+	//Otherwise create TEMP folder in %LOCALAPPDATA% or %SYSTEMROOT%
 	if(g_lamexp_temp_folder.path->isEmpty())
 	{
-		tempPath = lamexp_try_init_folder(QString("%1/Temp").arg(lamexp_known_folder(lamexp_folder_localappdata)));
-		if(!tempPath.isEmpty())
+		qWarning("%%TEMP%% directory not found -> trying fallback mode now!");
+		static const lamexp_known_folder_t folderId[2] = { lamexp_folder_localappdata, lamexp_folder_systroot_dir };
+		for(size_t id = 0; (g_lamexp_temp_folder.path->isEmpty() && (id < 2)); id++)
 		{
-			INIT_TEMP_FOLDER(*g_lamexp_temp_folder.path, tempPath);
+			const QString &knownFolder = lamexp_known_folder(folderId[id]);
+			if(!knownFolder.isEmpty())
+			{
+				tempPath = lamexp_try_init_folder(QString("%1/Temp").arg(knownFolder));
+				if(!tempPath.isEmpty())
+				{
+					INIT_TEMP_FOLDER_RAND(g_lamexp_temp_folder.path, tempPath);
+				}
+			}
 		}
 	}
 

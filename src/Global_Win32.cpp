@@ -1155,13 +1155,16 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 	typedef HRESULT (WINAPI *SHGetKnownFolderPathFun)(__in const GUID &rfid, __in DWORD dwFlags, __in HANDLE hToken, __out PWSTR *ppszPath);
 	typedef HRESULT (WINAPI *SHGetFolderPathFun)(__in HWND hwndOwner, __in int nFolder, __in HANDLE hToken, __in DWORD dwFlags, __out LPWSTR pszPath);
 
-	static const int CSIDL_LOCAL_APPDATA = 0x001c;
-	static const int CSIDL_PROGRAM_FILES = 0x0026;
-	static const int CSIDL_SYSTEM_FOLDER = 0x0025;
-	static const GUID GUID_LOCAL_APPDATA = {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
+	static const int CSIDL_LOCAL_APPDATA  = 0x001c;
+	static const int CSIDL_PROGRAM_FILES  = 0x0026;
+	static const int CSIDL_WINDOWS_FOLDER = 0x0024;
+	static const int CSIDL_SYSTEM_FOLDER  = 0x0025;
+
+	static const GUID GUID_LOCAL_APPDATA     = {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
 	static const GUID GUID_LOCAL_APPDATA_LOW = {0xA520A1A4,0x1780,0x4FF6,{0xBD,0x18,0x16,0x73,0x43,0xC5,0xAF,0x16}};
-	static const GUID GUID_PROGRAM_FILES = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
-	static const GUID GUID_SYSTEM_FOLDER = {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}};
+	static const GUID GUID_PROGRAM_FILES     = {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}};
+	static const GUID GUID_WINDOWS_FOLDER    = {0xF38BF404,0x1D43,0x42F2,{0x93,0x05,0x67,0xDE,0x0B,0x28,0xFC,0x23}};
+	static const GUID GUID_SYSTEM_FOLDER     = {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}};
 
 	QReadLocker readLock(&g_lamexp_known_folder.lock);
 
@@ -1185,6 +1188,11 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 		folderCacheId = 2;
 		folderCSIDL = CSIDL_SYSTEM_FOLDER;
 		folderGUID = GUID_SYSTEM_FOLDER;
+		break;
+	case lamexp_folder_systroot_dir:
+		folderCacheId = 3;
+		folderCSIDL = CSIDL_WINDOWS_FOLDER;
+		folderGUID = GUID_WINDOWS_FOLDER;
 		break;
 	default:
 		qWarning("Invalid 'known' folder was requested!");
