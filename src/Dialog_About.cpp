@@ -414,14 +414,24 @@ void AboutDialog::geometryUpdated(void)
 
 void AboutDialog::adjustSize(void)
 {
-	int maximumHeight = QApplication::desktop()->availableGeometry().height();
+	const int maxH = QApplication::desktop()->availableGeometry().height();
+	const int maxW = QApplication::desktop()->availableGeometry().width();
 
-	int delta = ui->infoScrollArea->widget()->height() - ui->infoScrollArea->viewport()->height();
-	if(delta > 0)
+	const int deltaH = ui->infoScrollArea->widget()->height() - ui->infoScrollArea->viewport()->height();
+	const int deltaW = ui->infoScrollArea->widget()->width()  - ui->infoScrollArea->viewport()->width();
+
+	if(deltaH > 0)
 	{
-		this->resize(this->width(), qMin(this->height() + delta, maximumHeight));
-		this->move(this->x(), this->y() - (delta/2));
+		this->resize(this->width(), qMin(this->height() + deltaH, maxH));
+		this->move(this->x(), this->y() - (deltaH / 2));
 		this->setMinimumHeight(qMax(this->minimumHeight(), this->height()));
+	}
+
+	if(deltaW > 0)
+	{
+		this->resize(qMin(this->width() + deltaW, maxW), this->height());
+		this->move(this->x() - (deltaW / 2), this->y());
+		this->setMinimumWidth(qMax(this->minimumWidth(), this->width()));
 	}
 }
 
