@@ -236,12 +236,12 @@ void WorkingBanner::keyPressEvent(QKeyEvent *event)
 		QTimer::singleShot(0, parent(), SLOT(showMinimized()));
 	}
 	
-	event->ignore();
+	QDialog::keyPressEvent(event);
 }
 
 void WorkingBanner::keyReleaseEvent(QKeyEvent *event)
 {
-	event->ignore();
+	QDialog::keyReleaseEvent(event);
 }
 
 void WorkingBanner::closeEvent(QCloseEvent *event)

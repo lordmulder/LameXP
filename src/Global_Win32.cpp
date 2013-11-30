@@ -1496,6 +1496,26 @@ int lamexp_system_message(const wchar_t *text, int beepType)
 }
 
 /*
+ * Block window "move" message
+ */
+bool lamexp_block_window_move(void *message)
+{
+	if(message)
+	{
+		MSG *msg = reinterpret_cast<MSG*>(message);
+		if((msg->message == WM_SYSCOMMAND) && (msg->wParam == SC_MOVE))
+		{
+			return true;
+		}
+		if((msg->message == WM_NCLBUTTONDOWN) && (msg->wParam == HTCAPTION))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+/*
  * Suspend calling thread for N milliseconds
  */
 inline void lamexp_sleep(const unsigned int delay)
@@ -1745,8 +1765,12 @@ bool lamexp_bring_to_front(const QWidget *window)
 	
 	if(window)
 	{
-		ret = (SetForegroundWindow(window->winId()) == TRUE);
-		SwitchToThisWindow(window->winId(), TRUE);
+		for(int i = 0; (i < 5) && (!ret); i++)
+		{
+			ret = (SetForegroundWindow(window->winId()) != FALSE);
+			SwitchToThisWindow(window->winId(), TRUE);
+		}
+		LockSetForegroundWindow(LSFW_LOCK);
 	}
 
 	return ret;

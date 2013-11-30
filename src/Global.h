@@ -149,6 +149,7 @@ const QStringList &lamexp_arguments(void);
 QStringList lamexp_available_codepages(bool noAliases = true);
 bool lamexp_beep(int beepType);
 void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned int delay = 150);
+bool lamexp_block_window_move(void *message);
 bool lamexp_bring_process_to_front(const unsigned long pid);
 bool lamexp_bring_to_front(const QWidget *win);
 bool lamexp_broadcast(int eventType, bool onlyToVisible);

@@ -126,7 +126,7 @@ void SplashScreen::showSplash(QThread *thread)
 
 	//Wait for window to show
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	splashScreen->repaint();
+	splashScreen->repaint(); lamexp_bring_to_front(splashScreen);
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	//Connect thread signals
@@ -181,6 +181,7 @@ void SplashScreen::updateHandler(void)
 		else
 		{
 			setWindowOpacity(1.0);
+			lamexp_bring_to_front(this);
 			m_timer->stop();
 			m_status = STATUS_WAIT;
 		}
@@ -209,6 +210,7 @@ void SplashScreen::threadComplete(void)
 	{
 		m_timer->start(FADE_DELAY);
 	}
+	lamexp_bring_to_front(this);
 }
 
 ////////////////////////////////////////////////////////////
