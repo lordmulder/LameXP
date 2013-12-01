@@ -293,11 +293,11 @@
     </message>
     <message>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>BerliOS开发者平台</translation>
     </message>
     <message>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation>CodePlex</translation>
     </message>
 </context>
 <context>
@@ -2011,7 +2011,7 @@
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>载入收集的文件或文件夹中，请稍候……</translation>
     </message>
 </context>
 <context>
@@ -2718,7 +2718,7 @@
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">正在初始化,请稍候...</translation>
+        <translation>正在初始化,请稍候...</translation>
     </message>
 </context>
 </TS>
