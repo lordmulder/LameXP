@@ -27,7 +27,6 @@
 
 //LameXP includes
 #include "Global.h"
-#include "Resource.h"
 #include "Thread_CheckUpdate.h"
 #include "Dialog_LogView.h"
 #include "Model_Settings.h"
@@ -338,7 +337,7 @@ void UpdateDialog::threadFinished(void)
 
 	if(!bSuccess)
 	{
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, true);
+		if(m_settings->soundsEnabled()) lamexp_play_sound("error", true);
 	}
 	else
 	{

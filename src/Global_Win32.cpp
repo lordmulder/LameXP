@@ -61,6 +61,7 @@
 #include <QTimer>
 #include <QTranslator>
 #include <QUuid>
+#include <QResource>
 
 //LameXP includes
 #define LAMEXP_INC_CONFIG
@@ -189,6 +190,14 @@ static struct
 	QReadWriteLock lock;
 }
 g_lamexp_dwmapi;
+
+//Sound file cache
+static struct
+{
+	QHash<const QString, const unsigned char*> *sound_db;
+	QReadWriteLock lock;
+}
+g_lamexp_sounds;
 
 //Image formats
 static const char *g_lamexp_imageformats[] = {"bmp", "png", "jpg", "gif", "ico", "xpm", NULL}; //"svg"
@@ -1537,44 +1546,84 @@ bool lamexp_beep(int beepType)
 /*
  * Play a sound (from resources)
  */
-bool lamexp_play_sound(const unsigned short uiSoundIdx, const bool bAsync, const wchar_t *alias)
+bool lamexp_play_sound(const QString &name, const bool bAsync)
 {
-	if(alias)
+	const unsigned char *data = NULL;
+	
+	//Try to look-up the sound in the cache first
+	if(!name.isEmpty())
 	{
-		return PlaySound(alias, GetModuleHandle(NULL), (SND_ALIAS | (bAsync ? SND_ASYNC : SND_SYNC))) == TRUE;
+		QReadLocker readLock(&g_lamexp_sounds.lock);
+		if(g_lamexp_sounds.sound_db && g_lamexp_sounds.sound_db->contains(name))
+		{
+			data = g_lamexp_sounds.sound_db->value(name);
+		}
 	}
-	else
+	
+	//If data not found in cache, try to load from resource!
+	if((!data) && (!name.isEmpty()))
 	{
-		return PlaySound(MAKEINTRESOURCE(uiSoundIdx), GetModuleHandle(NULL), (SND_RESOURCE | (bAsync ? SND_ASYNC : SND_SYNC))) == TRUE;
+		QResource resource(QString(":/sounds/%1.wav").arg(name));
+		if(resource.isValid() && (data = resource.data()))
+		{
+			QWriteLocker writeLock(&g_lamexp_sounds.lock);
+			if(!g_lamexp_sounds.sound_db)
+			{
+				g_lamexp_sounds.sound_db = new QHash<const QString, const unsigned char*>();
+			}
+			g_lamexp_sounds.sound_db->insert(name, data);
+		}
+		else
+		{
+			qWarning("Sound effect \"%s\" not found!", QUTF8(name));
+		}
 	}
+
+	//Play the sound, if availbale
+	if(data)
+	{
+		return PlaySound(LPCWSTR(data), NULL, (SND_MEMORY | (bAsync ? SND_ASYNC : SND_SYNC))) != FALSE;
+	}
+
+	return false;
 }
 
 /*
- * Play a sound (from resources)
+ * Play a sound (system alias)
+ */
+bool lamexp_play_sound_alias(const QString &alias, const bool bAsync)
+{
+	return PlaySound(QWCHAR(alias), GetModuleHandle(NULL), (SND_ALIAS | (bAsync ? SND_ASYNC : SND_SYNC))) != FALSE;
+}
+
+/*
+ * Play a sound (from external DLL)
  */
 bool lamexp_play_sound_file(const QString &library, const unsigned short uiSoundIdx, const bool bAsync)
 {
 	bool result = false;
-	HMODULE module = NULL;
 
 	QFileInfo libraryFile(library);
 	if(!libraryFile.isAbsolute())
 	{
-		unsigned int buffSize = GetSystemDirectoryW(NULL, NULL) + 1;
-		wchar_t *buffer = (wchar_t*) _malloca(buffSize * sizeof(wchar_t));
-		unsigned int result = GetSystemDirectory(buffer, buffSize);
-		if(result > 0 && result < buffSize)
+		const QString &systemDir = lamexp_known_folder(lamexp_folder_systemfolder);
+		if(!systemDir.isEmpty())
 		{
-			libraryFile.setFile(QString("%1/%2").arg(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(buffer))), library));
+			libraryFile.setFile(QDir(systemDir), libraryFile.fileName());
 		}
-		_freea(buffer);
 	}
 
-	module = LoadLibraryW(QWCHAR(QDir::toNativeSeparators(libraryFile.absoluteFilePath())));
-	if(module)
+	if(libraryFile.exists() && libraryFile.isFile())
 	{
-		result = (PlaySound(MAKEINTRESOURCE(uiSoundIdx), module, (SND_RESOURCE | (bAsync ? SND_ASYNC : SND_SYNC))) == TRUE);
-		FreeLibrary(module);
+		if(HMODULE module = LoadLibraryW(QWCHAR(QDir::toNativeSeparators(libraryFile.canonicalFilePath()))))
+		{
+			result = (PlaySound(MAKEINTRESOURCE(uiSoundIdx), module, (SND_RESOURCE | (bAsync ? SND_ASYNC : SND_SYNC))) != FALSE);
+			FreeLibrary(module);
+		}
+	}
+	else
+	{
+		qWarning("PlaySound: File \"%s\" could not be found!", QUTF8(libraryFile.absoluteFilePath()));
 	}
 
 	return result;
@@ -2202,6 +2251,7 @@ extern "C" void _lamexp_global_init_win32(void)
 	LAMEXP_ZERO_MEMORY(g_lamexp_wine);
 	LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
 	LAMEXP_ZERO_MEMORY(g_lamexp_dwmapi);
+	LAMEXP_ZERO_MEMORY(g_lamexp_sounds);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2244,6 +2294,9 @@ extern "C" void _lamexp_global_free_win32(void)
 		fclose(g_lamexp_log_file);
 		g_lamexp_log_file = NULL;
 	}
+
+	//Clear sound cache
+	LAMEXP_DELETE(g_lamexp_sounds.sound_db);
 
 	//Free CLI Arguments
 	LAMEXP_DELETE(g_lamexp_argv.list);

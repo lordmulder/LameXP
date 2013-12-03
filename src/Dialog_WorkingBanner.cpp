@@ -89,9 +89,9 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	{
 		m_style = new QWindowsVistaStyle();
 		this->setStyle(m_style);
-		ui->labelStatus->setStyle(m_style);
 		ui->progressBar->setStyle(m_style);
-		ui->labelStatus->setStyleSheet("background-color: rgb(255, 255, 255);");
+		ui->labelStatus->setStyle(m_style);
+		ui->labelStatus->setStyleSheet("background-color: #FFFFFF;");
 	}
 	else
 	{
@@ -99,7 +99,6 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 		m_working = new QMovie(":/images/Busy.gif");
 		m_working->setCacheMode(QMovie::CacheAll);
 		ui->labelWorking->setMovie(m_working);
-		m_working->start();
 	}
 	
 	//Set Opacity
@@ -256,7 +255,27 @@ bool WorkingBanner::winEvent(MSG *message, long *result)
 
 void WorkingBanner::showEvent(QShowEvent *event)
 {
+	QDialog::showEvent(event);
+	if(!event->spontaneous())
+	{
+		if(m_working)
+		{
+			m_working->start();
+		}
+	}
 	QTimer::singleShot(25, this, SLOT(windowShown()));
+}
+
+void WorkingBanner::hideEvent(QHideEvent *event)
+{
+	QDialog::hideEvent(event);
+	if(!event->spontaneous())
+	{
+		if(m_working)
+		{
+			m_working->stop();
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////

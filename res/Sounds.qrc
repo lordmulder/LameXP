@@ -1,0 +1,18 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+	<qresource>
+		<file>sounds/aborted.wav</file>
+		<file>sounds/beep.wav</file>
+		<file>sounds/beep2.wav</file>
+		<file>sounds/blast.wav</file>
+		<file>sounds/drop.wav</file>
+		<file>sounds/error.wav</file>
+		<file>sounds/shutdown.wav</file>
+		<file>sounds/success.wav</file>
+		<file>sounds/tick.wav</file>
+		<file>sounds/uuaarrgh.wav</file>
+		<file>sounds/waiting.wav</file>
+		<file>sounds/whammy.wav</file>
+		<file>sounds/woohoo.wav</file>
+	</qresource>
+</RCC>

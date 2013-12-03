@@ -25,7 +25,6 @@
 #include "../tmp/UIC_AboutDialog.h"
 
 #include "Global.h"
-#include "Resource.h"
 #include "Model_Settings.h"
 
 #include <math.h>
@@ -214,12 +213,12 @@ int AboutDialog::exec()
 		{
 			if(!lamexp_play_sound_file("imageres.dll", 5080, true))
 			{
-				lamexp_play_sound(0, true, L"SystemStart");
+				lamexp_play_sound_alias("SystemStart", true);
 			}
 		}
 		else
 		{
-			lamexp_play_sound(IDR_WAVE_ABOUT, true);
+			lamexp_play_sound("uuaarrgh", true);
 		}
 	}
 	
@@ -291,7 +290,7 @@ void AboutDialog::tabChanged(int index, const bool silent)
 	//Play tick sound
 	if(m_settings->soundsEnabled() && (!silent))
 	{
-		lamexp_play_sound(IDR_WAVE_TICK, true);
+		lamexp_play_sound("tick", true);
 	}
 
 	//Scroll to the top

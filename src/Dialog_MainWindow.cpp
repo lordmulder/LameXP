@@ -27,7 +27,6 @@
 
 //LameXP includes
 #include "Global.h"
-#include "Resource.h"
 #include "Dialog_WorkingBanner.h"
 #include "Dialog_MetaInfo.h"
 #include "Dialog_About.h"
@@ -190,6 +189,12 @@ while(0)
 	const bool _flag = (WIDGET)->blockSignals(true); \
 	(WIDGET)->CMD(__VA_ARGS__); \
 	if(!(_flag)) { (WIDGET)->blockSignals(false); } \
+} \
+while(0)
+
+#define PLAY_SOUND_OPTIONAL(NAME, ASYNC) do \
+{ \
+	if(m_settings->soundsEnabled()) lamexp_play_sound((NAME), (ASYNC)); \
 } \
 while(0)
 
@@ -1095,7 +1100,7 @@ void MainWindow::dropEvent(QDropEvent *event)
 	(*m_droppedFileList) << event->mimeData()->urls();
 	if(!m_droppedFileList->isEmpty())
 	{
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_DROP, true);
+		PLAY_SOUND_OPTIONAL("drop", true);
 		QTimer::singleShot(0, this, SLOT(handleDroppedFiles()));
 	}
 }
@@ -1270,7 +1275,7 @@ void MainWindow::windowShown(void)
 			m_settings->licenseAccepted(++iAccepted);
 			m_settings->syncNow();
 			QApplication::processEvents();
-			lamexp_play_sound(IDR_WAVE_WHAMMY, false);
+			lamexp_play_sound("whammy", false);
 			QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
 			QFileInfo uninstallerInfo = QFileInfo(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()));
 			if(uninstallerInfo.exists())
@@ -1286,7 +1291,7 @@ void MainWindow::windowShown(void)
 			return;
 		}
 		
-		lamexp_play_sound(IDR_WAVE_WOOHOO, false);
+		lamexp_play_sound("woohoo", false);
 		m_settings->licenseAccepted(1);
 		m_settings->syncNow();
 		if(lamexp_version_demo()) showAnnounceBox();
@@ -1298,7 +1303,7 @@ void MainWindow::windowShown(void)
 		if(lamexp_current_date_safe() >= lamexp_version_expires())
 		{
 			qWarning("Binary has expired !!!");
-			lamexp_play_sound(IDR_WAVE_WHAMMY, false);
+			lamexp_play_sound("whammy", false);
 			if(QMessageBox::warning(this, tr("LameXP - Expired"), QString("%1<br>%2").arg(NOBR(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate))), NOBR(tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
 				checkForUpdates();
@@ -1340,7 +1345,7 @@ void MainWindow::windowShown(void)
 			return;
 		default:
 			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
-			lamexp_play_sound(IDR_WAVE_WAITING, true);
+			lamexp_play_sound("waiting", true);
 			SHOW_BANNER_ARG(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
 		}
@@ -1543,7 +1548,7 @@ void MainWindow::encodeButtonClicked(void)
 	{
 		QStringList tempFolderParts = tempFolder.split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
 		tempFolderParts.takeLast();
-		if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_WHAMMY, false);
+		PLAY_SOUND_OPTIONAL("whammy", false);
 		QString lowDiskspaceMsg = QString("%1<br>%2<br><br>%3<br>%4<br>").arg
 		(
 			NOBR(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier))),
@@ -1649,9 +1654,9 @@ void MainWindow::tabPageChanged(int idx, const bool silent)
 	}
 
 	//Play tick sound
-	if(m_settings->soundsEnabled() && (!silent))
+	if(!silent)
 	{
-		lamexp_play_sound(IDR_WAVE_TICK, true);
+		PLAY_SOUND_OPTIONAL("tick", true);
 	}
 
 	int initialWidth = this->width();
@@ -3496,11 +3501,7 @@ void MainWindow::compressionTabEventOccurred(QWidget *sender, QEvent *event)
 	}
 	else if((sender == ui->labelResetEncoders) && (event->type() == QEvent::MouseButtonPress))
 	{
-		if(m_settings->soundsEnabled())
-		{
-			lamexp_play_sound(IDR_WAVE_BLAST, true);
-		}
-
+		PLAY_SOUND_OPTIONAL("blast", true);
 		EncoderRegistry::resetAllEncoders(m_settings);
 		m_settings->compressionEncoder(SettingsModel::MP3Encoder);
 		ui->radioButtonEncoderMP3->setChecked(true);
@@ -4024,10 +4025,7 @@ void MainWindow::overwriteModeChanged(int id)
  */
 void MainWindow::resetAdvancedOptionsButtonClicked(void)
 {
-	if(m_settings->soundsEnabled())
-	{
-		lamexp_play_sound(IDR_WAVE_BLAST, true);
-	}
+	PLAY_SOUND_OPTIONAL("blast", true);
 
 	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());
 	ui->spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());

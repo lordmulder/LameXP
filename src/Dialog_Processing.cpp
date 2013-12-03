@@ -26,7 +26,6 @@
 #include "../tmp/UIC_ProcessingDialog.h"
 
 #include "Global.h"
-#include "Resource.h"
 #include "Model_FileList.h"
 #include "Model_Progress.h"
 #include "Model_Settings.h"
@@ -110,6 +109,12 @@ while(0)
 #define UPDATE_MIN_WIDTH(WIDGET) do \
 { \
 	if(WIDGET->width() > WIDGET->minimumWidth()) WIDGET->setMinimumWidth(WIDGET->width()); \
+} \
+while(0)
+
+#define PLAY_SOUND_OPTIONAL(NAME, ASYNC) do \
+{ \
+	if(m_settings->soundsEnabled()) lamexp_play_sound((NAME), (ASYNC)); \
 } \
 while(0)
 
@@ -694,17 +699,14 @@ void ProcessingDialog::doneEncoding(void)
 	
 	if(m_userAborted)
 	{
-		CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFF3BA"));
+		CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFFFE0"));
 		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
 		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %n file(s)!", "", m_succeededJobs.count()) : tr("Process was aborted prematurely by the user!"));
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-		if(m_settings->soundsEnabled() && (!m_forcedAbort))
-		{
-			lamexp_play_sound(IDR_WAVE_ABORTED, false);
-		}
+		if(!m_forcedAbort) PLAY_SOUND_OPTIONAL("aborted", false);
 	}
 	else
 	{
@@ -721,7 +723,7 @@ void ProcessingDialog::doneEncoding(void)
 
 		if(m_failedJobs.count() > 0)
 		{
-			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFBABA"));
+			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFF0F0"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
 			if(m_skippedJobs.count() > 0)
@@ -735,11 +737,11 @@ void ProcessingDialog::doneEncoding(void)
 			m_systemTray->showMessage(tr("LameXP - Error"), tr("At least one file has failed!"), QSystemTrayIcon::Critical);
 			m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
 			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-			if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_ERROR, false);
+			PLAY_SOUND_OPTIONAL("error", false);
 		}
 		else
 		{
-			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#E0FFE2"));
+			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#F0FFF0"));
 			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
 			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
 			if(m_skippedJobs.count() > 0)
@@ -753,7 +755,7 @@ void ProcessingDialog::doneEncoding(void)
 			m_systemTray->showMessage(tr("LameXP - Done"), tr("All files completed successfully."), QSystemTrayIcon::Information);
 			m_systemTray->setIcon(QIcon(":/icons/cd_add.png"));
 			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-			if(m_settings->soundsEnabled()) lamexp_play_sound(IDR_WAVE_SUCCESS, false);
+			PLAY_SOUND_OPTIONAL("success", false);
 		}
 	}
 	
@@ -1123,12 +1125,9 @@ bool ProcessingDialog::shutdownComputer(void)
 	
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 
-	if(m_settings->soundsEnabled())
-	{
-		QApplication::setOverrideCursor(Qt::WaitCursor);
-		lamexp_play_sound(IDR_WAVE_SHUTDOWN, false);
-		QApplication::restoreOverrideCursor();
-	}
+	QApplication::setOverrideCursor(Qt::WaitCursor);
+	PLAY_SOUND_OPTIONAL("shutdown", false);
+	QApplication::restoreOverrideCursor();
 
 	QTimer timer;
 	timer.setInterval(1000);
@@ -1150,7 +1149,7 @@ bool ProcessingDialog::shutdownComputer(void)
 		progressDialog.setLabelText(text.arg(iTimeout-i));
 		if(iTimeout-i == 3) progressDialog.setCancelButton(NULL);
 		qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-		lamexp_play_sound(((i < iTimeout) ? IDR_WAVE_BEEP : IDR_WAVE_BEEP_LONG), false);
+		PLAY_SOUND_OPTIONAL(((i < iTimeout) ? "beep" : "beep2"), false);
 	}
 	
 	progressDialog.close();

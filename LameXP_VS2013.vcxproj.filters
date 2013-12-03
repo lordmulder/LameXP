@@ -421,6 +421,9 @@
     <ClCompile Include="src\Global_Zero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tmp\QRC_Sounds.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -758,7 +761,12 @@
     <CustomBuild Include="res\Tools_Misc_C.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="src\Thread_CheckUpdate.h" />
+    <CustomBuild Include="res\Sounds.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CheckUpdate.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

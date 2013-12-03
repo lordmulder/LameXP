@@ -69,6 +69,7 @@ protected:
 	virtual void closeEvent(QCloseEvent *event);
 	virtual bool winEvent(MSG *message, long *result);
 	virtual void showEvent(QShowEvent *event);
+	virtual void hideEvent(QHideEvent *event);
 
 	QFontMetrics *m_metrics;
 	QStyle *m_style;
