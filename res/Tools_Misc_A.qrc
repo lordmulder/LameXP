@@ -5,6 +5,7 @@
     <file>tools/gpgv.exe</file>
     <file>tools/gpgv.gpg</file>
     <file>tools/sox.exe</file>
+    <file>tools/tag.exe</file>
     <file>tools/wget.exe</file>
     <file>tools/wupdate.exe</file>
   </qresource>

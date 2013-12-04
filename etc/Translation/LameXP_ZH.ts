@@ -2013,6 +2013,10 @@
         <source>Loading dropped files or folders, please wait...</source>
         <translation>载入收集的文件或文件夹中，请稍候……</translation>
     </message>
+    <message>
+        <source>APE</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

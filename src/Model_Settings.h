@@ -58,15 +58,16 @@ public:
 	//Enums
 	enum Encoder
 	{
-		MP3Encoder = 0,
+		MP3Encoder    = 0,
 		VorbisEncoder = 1,
-		AACEncoder = 2,
-		AC3Encoder = 3,
-		FLACEncoder = 4,
-		OpusEncoder = 5,
-		DCAEncoder = 6,
-		PCMEncoder = 7,
-		ENCODER_COUNT = 8
+		AACEncoder    = 2,
+		AC3Encoder    = 3,
+		FLACEncoder   = 4,
+		OpusEncoder   = 5,
+		DCAEncoder    = 6,
+		MACEncoder    = 7,
+		PCMEncoder    = 8,
+		ENCODER_COUNT = 9
 	};
 
 	enum RCMode
@@ -113,6 +114,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(compressionAbrBitrateDcaEnc)
 	LAMEXP_MAKE_OPTION_I(compressionAbrBitrateFLAC)
 	LAMEXP_MAKE_OPTION_I(compressionAbrBitrateLAME)
+	LAMEXP_MAKE_OPTION_I(compressionAbrBitrateMacEnc)
 	LAMEXP_MAKE_OPTION_I(compressionAbrBitrateOggEnc)
 	LAMEXP_MAKE_OPTION_I(compressionAbrBitrateOpusEnc)
 	LAMEXP_MAKE_OPTION_I(compressionAbrBitrateWave)
@@ -121,6 +123,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(compressionCbrBitrateDcaEnc)
 	LAMEXP_MAKE_OPTION_I(compressionCbrBitrateFLAC)
 	LAMEXP_MAKE_OPTION_I(compressionCbrBitrateLAME)
+	LAMEXP_MAKE_OPTION_I(compressionCbrBitrateMacEnc)
 	LAMEXP_MAKE_OPTION_I(compressionCbrBitrateOggEnc)
 	LAMEXP_MAKE_OPTION_I(compressionCbrBitrateOpusEnc)
 	LAMEXP_MAKE_OPTION_I(compressionCbrBitrateWave)
@@ -130,6 +133,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(compressionRCModeDcaEnc)
 	LAMEXP_MAKE_OPTION_I(compressionRCModeFLAC)
 	LAMEXP_MAKE_OPTION_I(compressionRCModeLAME)
+	LAMEXP_MAKE_OPTION_I(compressionRCModeMacEnc)
 	LAMEXP_MAKE_OPTION_I(compressionRCModeOggEnc)
 	LAMEXP_MAKE_OPTION_I(compressionRCModeOpusEnc)
 	LAMEXP_MAKE_OPTION_I(compressionRCModeWave)
@@ -138,6 +142,7 @@ public:
 	LAMEXP_MAKE_OPTION_I(compressionVbrQualityDcaEnc)
 	LAMEXP_MAKE_OPTION_I(compressionVbrQualityFLAC)
 	LAMEXP_MAKE_OPTION_I(compressionVbrQualityLAME)
+	LAMEXP_MAKE_OPTION_I(compressionVbrQualityMacEnc)
 	LAMEXP_MAKE_OPTION_I(compressionVbrQualityOggEnc)
 	LAMEXP_MAKE_OPTION_I(compressionVbrQualityOpusEnc)
 	LAMEXP_MAKE_OPTION_I(compressionVbrQualityWave)
@@ -149,6 +154,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(customParametersDcaEnc)
 	LAMEXP_MAKE_OPTION_S(customParametersFLAC)
 	LAMEXP_MAKE_OPTION_S(customParametersLAME)
+	LAMEXP_MAKE_OPTION_S(customParametersMacEnc)
 	LAMEXP_MAKE_OPTION_S(customParametersOggEnc)
 	LAMEXP_MAKE_OPTION_S(customParametersOpusEnc)
 	LAMEXP_MAKE_OPTION_S(customParametersWave)

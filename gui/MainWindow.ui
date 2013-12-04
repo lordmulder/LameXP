@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>667</width>
+    <width>676</width>
     <height>443</height>
    </rect>
   </property>
@@ -805,39 +805,8 @@
               </property>
               <layout class="QGridLayout" name="gridLayout_3">
                <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout">
-                 <item row="0" column="1">
-                  <widget class="QRadioButton" name="radioButtonEncoderMP3">
-                   <property name="text">
-                    <string>MP3</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QRadioButton" name="radioButtonEncoderVorbis">
-                   <property name="text">
-                    <string>Ogg/Vorbis</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="7">
-                  <widget class="QRadioButton" name="radioButtonEncoderAAC">
-                   <property name="text">
-                    <string>AAC/MP4</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="19">
-                  <widget class="QRadioButton" name="radioButtonEncoderPCM">
-                   <property name="text">
-                    <string>PCM/Wave</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
                   <spacer name="horizontalSpacer_7">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -853,21 +822,17 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="13">
-                  <widget class="QRadioButton" name="radioButtonEncoderAC3">
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderMP3">
                    <property name="text">
-                    <string>A/52</string>
+                    <string>MP3</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="17">
-                  <widget class="QRadioButton" name="radioButtonEncoderDCA">
-                   <property name="text">
-                    <string>DCA</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
+                 <item>
                   <spacer name="horizontalSpacer_45">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -880,7 +845,34 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="6">
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderVorbis">
+                   <property name="text">
+                    <string>Ogg/Vorbis</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_48">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>1</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderOpus">
+                   <property name="text">
+                    <string>Opus</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <spacer name="horizontalSpacer_46">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -893,7 +885,14 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="8">
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderAAC">
+                   <property name="text">
+                    <string>AAC/MP4</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <spacer name="horizontalSpacer_47">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -906,53 +905,34 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="16">
-                  <spacer name="horizontalSpacer_49">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>1</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="0" column="18">
-                  <spacer name="horizontalSpacer_50">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>1</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="0" column="20">
-                  <spacer name="horizontalSpacer_51">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>1</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="0" column="9">
+                 <item>
                   <widget class="QRadioButton" name="radioButtonEncoderFLAC">
                    <property name="text">
                     <string>FLAC</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="12">
+                 <item>
+                  <spacer name="horizontalSpacer_68">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>1</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderAPE">
+                   <property name="text">
+                    <string>APE</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <spacer name="horizontalSpacer_55">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -965,15 +945,55 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="5">
-                  <widget class="QRadioButton" name="radioButtonEncoderOpus">
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderAC3">
                    <property name="text">
-                    <string>Opus</string>
+                    <string>A/52</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="4">
-                  <spacer name="horizontalSpacer_48">
+                 <item>
+                  <spacer name="horizontalSpacer_49">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>1</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderDCA">
+                   <property name="text">
+                    <string>DCA</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_50">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>1</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonEncoderPCM">
+                   <property name="text">
+                    <string>PCM/Wave</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_51">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -1009,32 +1029,8 @@
               </property>
               <layout class="QGridLayout" name="gridLayout_13">
                <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_12">
-                 <item row="0" column="1">
-                  <widget class="QRadioButton" name="radioButtonModeQuality">
-                   <property name="text">
-                    <string>Quality-based (VBR)</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QRadioButton" name="radioButtonModeAverageBitrate">
-                   <property name="text">
-                    <string>Average Bitrate (ABR)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="5">
-                  <widget class="QRadioButton" name="radioButtonConstBitrate">
-                   <property name="text">
-                    <string>Constant Bitrate (CBR)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_12">
+                 <item>
                   <spacer name="horizontalSpacer_8">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1050,7 +1046,17 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="2">
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonModeQuality">
+                   <property name="text">
+                    <string>Quality-based (VBR)</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <spacer name="horizontalSpacer_52">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1063,7 +1069,14 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="4">
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonModeAverageBitrate">
+                   <property name="text">
+                    <string>Average Bitrate (ABR)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <spacer name="horizontalSpacer_53">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1076,7 +1089,14 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="6">
+                 <item>
+                  <widget class="QRadioButton" name="radioButtonConstBitrate">
+                   <property name="text">
+                    <string>Constant Bitrate (CBR)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <spacer name="horizontalSpacer_54">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1489,8 +1509,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>604</width>
-               <height>1759</height>
+               <width>602</width>
+               <height>1750</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -4286,7 +4306,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>667</width>
+     <width>676</width>
      <height>21</height>
     </rect>
    </property>

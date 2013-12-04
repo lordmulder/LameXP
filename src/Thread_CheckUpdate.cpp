@@ -58,7 +58,7 @@ static const char *update_mirrors_prim[] =
 	"http://muldersoft.zxq.net/",
 	"http://lamexp.sourceforge.net/",
 	"http://lamexp.berlios.de/",
-	"http://lordmulder.github.com/LameXP/",
+	"http://lordmulder.github.io/LameXP/",
 	"http://lord_mulder.bitbucket.org/",
 	"http://www.tricksoft.de/",
 	NULL

@@ -385,6 +385,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAAC, SettingsModel::AACEncoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAC3, SettingsModel::AC3Encoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderFLAC, SettingsModel::FLACEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAPE, SettingsModel::MACEncoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderOpus, SettingsModel::OpusEncoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderDCA, SettingsModel::DCAEncoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderPCM, SettingsModel::PCMEncoder);
@@ -1578,6 +1579,7 @@ void MainWindow::encodeButtonClicked(void)
 	case SettingsModel::FLACEncoder:
 	case SettingsModel::OpusEncoder:
 	case SettingsModel::DCAEncoder:
+	case SettingsModel::MACEncoder:
 	case SettingsModel::PCMEncoder:
 		break;
 	default:

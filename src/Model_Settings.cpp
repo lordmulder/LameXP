@@ -184,6 +184,7 @@ LAMEXP_MAKE_ID(compressionAbrBitrateAften,   "Compression/AbrTaretBitrate/Aften"
 LAMEXP_MAKE_ID(compressionAbrBitrateDcaEnc,  "Compression/AbrTaretBitrate/DcaEnc");
 LAMEXP_MAKE_ID(compressionAbrBitrateFLAC,    "Compression/AbrTaretBitrate/FLAC");
 LAMEXP_MAKE_ID(compressionAbrBitrateLAME,    "Compression/AbrTaretBitrate/LAME");
+LAMEXP_MAKE_ID(compressionAbrBitrateMacEnc,  "Compression/AbrTaretBitrate/MacEnc");
 LAMEXP_MAKE_ID(compressionAbrBitrateOggEnc,  "Compression/AbrTaretBitrate/OggEnc");
 LAMEXP_MAKE_ID(compressionAbrBitrateOpusEnc, "Compression/AbrTaretBitrate/OpusEnc");
 LAMEXP_MAKE_ID(compressionAbrBitrateWave,    "Compression/AbrTaretBitrate/Wave");
@@ -192,6 +193,7 @@ LAMEXP_MAKE_ID(compressionCbrBitrateAften,   "Compression/CbrTaretBitrate/Aften"
 LAMEXP_MAKE_ID(compressionCbrBitrateDcaEnc,  "Compression/CbrTaretBitrate/DcaEnc");
 LAMEXP_MAKE_ID(compressionCbrBitrateFLAC,    "Compression/CbrTaretBitrate/FLAC");
 LAMEXP_MAKE_ID(compressionCbrBitrateLAME,    "Compression/CbrTaretBitrate/LAME");
+LAMEXP_MAKE_ID(compressionCbrBitrateMacEnc,  "Compression/CbrTaretBitrate/MacEnc");
 LAMEXP_MAKE_ID(compressionCbrBitrateOggEnc,  "Compression/CbrTaretBitrate/OggEnc");
 LAMEXP_MAKE_ID(compressionCbrBitrateOpusEnc, "Compression/CbrTaretBitrate/OpusEnc");
 LAMEXP_MAKE_ID(compressionCbrBitrateWave,    "Compression/CbrTaretBitrate/Wave");
@@ -201,6 +203,7 @@ LAMEXP_MAKE_ID(compressionRCModeAften,       "Compression/RCMode/Aften");
 LAMEXP_MAKE_ID(compressionRCModeDcaEnc,      "Compression/RCMode/DcaEnc");
 LAMEXP_MAKE_ID(compressionRCModeFLAC,        "Compression/RCMode/FLAC");
 LAMEXP_MAKE_ID(compressionRCModeLAME,        "Compression/RCMode/LAME");
+LAMEXP_MAKE_ID(compressionRCModeMacEnc,      "Compression/RCMode/MacEnc");
 LAMEXP_MAKE_ID(compressionRCModeOggEnc,      "Compression/RCMode/OggEnc");
 LAMEXP_MAKE_ID(compressionRCModeOpusEnc,     "Compression/RCMode/OpusEnc");
 LAMEXP_MAKE_ID(compressionRCModeWave,        "Compression/RCMode/Wave");
@@ -209,6 +212,7 @@ LAMEXP_MAKE_ID(compressionVbrQualityAften,   "Compression/VbrQualityLevel/Aften"
 LAMEXP_MAKE_ID(compressionVbrQualityDcaEnc,  "Compression/VbrQualityLevel/DcaEnc");
 LAMEXP_MAKE_ID(compressionVbrQualityFLAC,    "Compression/VbrQualityLevel/FLAC");
 LAMEXP_MAKE_ID(compressionVbrQualityLAME,    "Compression/VbrQualityLevel/LAME");
+LAMEXP_MAKE_ID(compressionVbrQualityMacEnc,  "Compression/VbrQualityLevel/MacEnc");
 LAMEXP_MAKE_ID(compressionVbrQualityOggEnc,  "Compression/VbrQualityLevel/OggEnc");
 LAMEXP_MAKE_ID(compressionVbrQualityOpusEnc, "Compression/VbrQualityLevel/OpusEnc");
 LAMEXP_MAKE_ID(compressionVbrQualityWave,    "Compression/VbrQualityLevel/Wave");
@@ -220,6 +224,7 @@ LAMEXP_MAKE_ID(customParametersAften,        "AdvancedOptions/CustomParameters/A
 LAMEXP_MAKE_ID(customParametersDcaEnc,       "AdvancedOptions/CustomParameters/DcaEnc");
 LAMEXP_MAKE_ID(customParametersFLAC,         "AdvancedOptions/CustomParameters/FLAC");
 LAMEXP_MAKE_ID(customParametersLAME,         "AdvancedOptions/CustomParameters/LAME");
+LAMEXP_MAKE_ID(customParametersMacEnc,       "AdvancedOptions/CustomParameters/MacEnc");
 LAMEXP_MAKE_ID(customParametersOggEnc,       "AdvancedOptions/CustomParameters/OggEnc");
 LAMEXP_MAKE_ID(customParametersOpusEnc,      "AdvancedOptions/CustomParameters/OpusEnc");
 LAMEXP_MAKE_ID(customParametersWave,         "AdvancedOptions/CustomParameters/Wave");
@@ -571,6 +576,7 @@ LAMEXP_MAKE_OPTION_I(compressionAbrBitrateAften, 17)
 LAMEXP_MAKE_OPTION_I(compressionAbrBitrateDcaEnc, 13)
 LAMEXP_MAKE_OPTION_I(compressionAbrBitrateFLAC, 5)
 LAMEXP_MAKE_OPTION_I(compressionAbrBitrateLAME, 10)
+LAMEXP_MAKE_OPTION_I(compressionAbrBitrateMacEnc, 2)
 LAMEXP_MAKE_OPTION_I(compressionAbrBitrateOggEnc, 16)
 LAMEXP_MAKE_OPTION_I(compressionAbrBitrateOpusEnc, 11)
 LAMEXP_MAKE_OPTION_I(compressionAbrBitrateWave, 0)
@@ -579,6 +585,7 @@ LAMEXP_MAKE_OPTION_I(compressionCbrBitrateAften, 17)
 LAMEXP_MAKE_OPTION_I(compressionCbrBitrateDcaEnc, 13)
 LAMEXP_MAKE_OPTION_I(compressionCbrBitrateFLAC, 5)
 LAMEXP_MAKE_OPTION_I(compressionCbrBitrateLAME, 10)
+LAMEXP_MAKE_OPTION_I(compressionCbrBitrateMacEnc, 2)
 LAMEXP_MAKE_OPTION_I(compressionCbrBitrateOggEnc, 16)
 LAMEXP_MAKE_OPTION_I(compressionCbrBitrateOpusEnc, 11)
 LAMEXP_MAKE_OPTION_I(compressionCbrBitrateWave, 0)
@@ -588,6 +595,7 @@ LAMEXP_MAKE_OPTION_I(compressionRCModeAften, 0)
 LAMEXP_MAKE_OPTION_I(compressionRCModeDcaEnc, 2)
 LAMEXP_MAKE_OPTION_I(compressionRCModeFLAC, 0)
 LAMEXP_MAKE_OPTION_I(compressionRCModeLAME, 0)
+LAMEXP_MAKE_OPTION_I(compressionRCModeMacEnc, 0)
 LAMEXP_MAKE_OPTION_I(compressionRCModeOggEnc, 0)
 LAMEXP_MAKE_OPTION_I(compressionRCModeOpusEnc, 0)
 LAMEXP_MAKE_OPTION_I(compressionRCModeWave, 2)
@@ -596,6 +604,7 @@ LAMEXP_MAKE_OPTION_I(compressionVbrQualityAften, 15)
 LAMEXP_MAKE_OPTION_I(compressionVbrQualityDcaEnc, 13)
 LAMEXP_MAKE_OPTION_I(compressionVbrQualityFLAC, 5)
 LAMEXP_MAKE_OPTION_I(compressionVbrQualityLAME, 7)
+LAMEXP_MAKE_OPTION_I(compressionVbrQualityMacEnc, 2)
 LAMEXP_MAKE_OPTION_I(compressionVbrQualityOggEnc, 7)
 LAMEXP_MAKE_OPTION_I(compressionVbrQualityOpusEnc, 11)
 LAMEXP_MAKE_OPTION_I(compressionVbrQualityWave, 0)
@@ -607,6 +616,7 @@ LAMEXP_MAKE_OPTION_S(customParametersAften, QString())
 LAMEXP_MAKE_OPTION_S(customParametersDcaEnc, QString())
 LAMEXP_MAKE_OPTION_S(customParametersFLAC, QString())
 LAMEXP_MAKE_OPTION_S(customParametersLAME, QString())
+LAMEXP_MAKE_OPTION_S(customParametersMacEnc, QString())
 LAMEXP_MAKE_OPTION_S(customParametersOggEnc, QString())
 LAMEXP_MAKE_OPTION_S(customParametersOpusEnc, QString())
 LAMEXP_MAKE_OPTION_S(customParametersWave, QString())

@@ -2022,6 +2022,10 @@
         <source>Loading dropped files or folders, please wait...</source>
         <translation>Abgelegte Dateien werden geladen, bitte warten...</translation>
     </message>
+    <message>
+        <source>APE</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

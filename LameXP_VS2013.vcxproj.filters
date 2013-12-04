@@ -424,6 +424,12 @@
     <ClCompile Include="tmp\QRC_Sounds.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Encoder_MAC.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_MAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -557,6 +563,9 @@
     </ClInclude>
     <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h">
       <Filter>Header Files\Misc\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Encoder_MAC.h">
+      <Filter>Header Files\Encoders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
