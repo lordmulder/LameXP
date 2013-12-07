@@ -164,15 +164,15 @@ Section "-LaunchTheInstaller"
 		File "/oname=${InstallerFileName}" "${LAMEXP_SOURCE_FILE}"
 		
 		DetailPrint "ExecShellWait: ${InstallerFileName}"
-		${StdUtils.ExecShellWait} $R1 "${InstallerFileName}" "open" '$R9'
-		DetailPrint "Result: $R1"
+		${StdUtils.ExecShellWaitEx} $R1 $R2 "${InstallerFileName}" "open" '$R9'
+		DetailPrint "Result: $R1 ($R2)"
 		
 		${IfThen} $R1 == "no_wait" ${|} Goto RunSuccess ${|}
 		
-		${If} $R1 != "error"
+		${If} $R1 == "ok"
 			Sleep 333
 			HideWindow
-			${StdUtils.WaitForProc} $R1
+			${StdUtils.WaitForProcEx} $R1 $R2
 			Goto RunSuccess
 		${EndIf}
 		
