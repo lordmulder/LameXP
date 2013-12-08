@@ -58,8 +58,9 @@ bool WavPackDecoder::decode(const QString &sourceFile, const QString &outputFile
 
 	bool bTimeout = false;
 	bool bAborted = false;
+	int prevProgress = -1;
 
-	QRegExp regExp("\\s(\\d+)% done");
+	QRegExp regExp("(\\s|\b)(\\d+)%\\s+done");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -86,8 +87,12 @@ bool WavPackDecoder::decode(const QString &sourceFile, const QString &outputFile
 			if(regExp.lastIndexIn(text) >= 0)
 			{
 				bool ok = false;
-				int progress = regExp.cap(1).toInt(&ok);
-				if(ok) emit statusUpdated(progress);
+				int progress = regExp.cap(2).toInt(&ok);
+				if(ok && (progress > prevProgress))
+				{
+					emit statusUpdated(progress);
+					prevProgress = qMin(progress + 2, 99);
+				}
 			}
 			else if(!text.isEmpty())
 			{

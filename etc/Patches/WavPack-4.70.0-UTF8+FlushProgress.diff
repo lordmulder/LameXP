@@ -1,0 +1,560 @@
+diff --git a/cli/wvunpack.c b/cli/wvunpack.c
+index 424514f..110d0b6 100644
+--- a/cli/wvunpack.c
++++ b/cli/wvunpack.c
+@@ -50,6 +50,7 @@
+ #ifdef WIN32
+ #define strdup(x) _strdup(x)
+ #define fileno _fileno
++#include "../src/unicode_support.h"
+ #endif
+ 
+ #ifdef DEBUG_ALLOC
+@@ -152,7 +153,7 @@ static void display_progress (double file_progress);
+ // The "main" function for the command-line WavPack decompressor.           //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-int main (argc, argv) int argc; char **argv;
++static int wvunpack_main (argc, argv) int argc; char **argv;
+ {
+ #ifdef __EMX__ /* OS/2 */
+     _wildcard (&argc, &argv);
+@@ -162,7 +163,7 @@ int main (argc, argv) int argc; char **argv;
+     int result;
+ 
+ #if defined(WIN32)
+-    struct _finddata_t _finddata_t;
++    //struct _finddata_t _finddata_t;
+     char selfname [MAX_PATH];
+ 
+     if (GetModuleFileName (NULL, selfname, sizeof (selfname)) && filespec_name (selfname) &&
+@@ -437,8 +438,10 @@ int main (argc, argv) int argc; char **argv;
+         ++error_count;
+     }
+ 
+-    if (!quiet_mode && !error_count)
+-        fprintf (stderr, sign_on, VERSION_OS, WavpackGetLibraryVersionString ());
++	if (!quiet_mode && !error_count) {
++		fprintf(stderr, sign_on, VERSION_OS, WavpackGetLibraryVersionString());
++		fflush(stderr);
++	}
+ 
+     if (!num_files) {
+         printf ("%s", usage);
+@@ -459,7 +462,7 @@ int main (argc, argv) int argc; char **argv;
+         // frontends, but could be used for other purposes.
+ 
+         if (*infilename == '@') {
+-            FILE *list = fopen (infilename+1, "rt");
++            FILE *list = fopen_utf8 (infilename+1, "rt");
+             int di, c;
+ 
+             for (di = file_index; di < num_files - 1; di++)
+@@ -501,9 +504,9 @@ int main (argc, argv) int argc; char **argv;
+             fclose (list);
+             free (infilename);
+         }
+-#if defined (WIN32)
++#if defined (WIN66)
+         else if (filespec_wild (infilename)) {
+-            FILE *list = fopen (infilename+1, "rt");
++            FILE *list = fopen_utf8 (infilename+1, "rt");
+             intptr_t file;
+             int di;
+ 
+@@ -542,7 +545,7 @@ int main (argc, argv) int argc; char **argv;
+     // be passed on the command-line, but could be used for other purposes.
+ 
+     if (outfilename && outfilename [0] == '@') {
+-        FILE *list = fopen (outfilename+1, "rt");
++        FILE *list = fopen_utf8 (outfilename+1, "rt");
+         int c;
+ 
+         if (list == NULL) {
+@@ -614,8 +617,10 @@ int main (argc, argv) int argc; char **argv;
+             if (outfilename && *outfilename != '-' && add_extension)
+                 strcat (outfilename, raw_decode ? ".raw" : ".wav");
+ 
+-            if (num_files > 1 && !quiet_mode)
+-                fprintf (stderr, "\n%s:\n", matches [file_index]);
++			if (num_files > 1 && !quiet_mode) {
++				fprintf(stderr, "\n%s:\n", matches[file_index]);
++				fflush(stderr);
++			}
+ 
+             result = unpack_file (matches [file_index], verify_only ? NULL : outfilename);
+ 
+@@ -642,6 +647,7 @@ int main (argc, argv) int argc; char **argv;
+                 fprintf (stderr, "\n **** warning: errors occurred in %d of %d files! ****\n", error_count, num_files);
+             else if (!quiet_mode)
+                 fprintf (stderr, "\n **** %d files successfully processed ****\n", num_files);
++			fflush(stderr);
+         }
+ 
+         free (matches);
+@@ -728,7 +734,7 @@ static FILE *open_output_file (char *filename, char **tempfilename)
+         return stdout;
+     }
+ 
+-    testfile = fopen (filename, "rb");
++    testfile = fopen_utf8 (filename, "rb");
+ 
+     if (testfile) {
+         size_t res = fread (&dummy, 1, 1, testfile);
+@@ -773,7 +779,7 @@ static FILE *open_output_file (char *filename, char **tempfilename)
+                         strcat (*tempfilename, ".tmp");
+                 }
+ 
+-                testfile = fopen (*tempfilename, "rb");
++                testfile = fopen_utf8 (*tempfilename, "rb");
+ 
+                 if (!testfile)
+                     break;
+@@ -787,7 +793,7 @@ static FILE *open_output_file (char *filename, char **tempfilename)
+         }
+     }
+ 
+-    retval = fopen (*tempfilename ? *tempfilename : filename, "w+b");
++    retval = fopen_utf8 (*tempfilename ? *tempfilename : filename, "w+b");
+ 
+     if (retval == NULL)
+         error_line ("can't create file %s!", *tempfilename ? *tempfilename : filename);
+@@ -945,12 +951,15 @@ static int unpack_file (char *infilename, char *outfilename)
+             return SOFT_ERROR;
+         }
+         else if (*outfilename == '-') {
+-            if (!quiet_mode)
+-                fprintf (stderr, "unpacking %s%s to stdout,", *infilename == '-' ?
+-                    "stdin" : FN_FIT (infilename), wvc_mode ? " (+.wvc)" : "");
++			if (!quiet_mode) {
++				fprintf(stderr, "unpacking %s%s to stdout,", *infilename == '-' ? "stdin" : FN_FIT(infilename), wvc_mode ? " (+.wvc)" : "");
++				fflush(stderr);
++			}
+         }
+-        else if (!quiet_mode)
+-            fprintf (stderr, "restoring %s,", FN_FIT (outfilename));
++		else if (!quiet_mode) {
++			fprintf(stderr, "restoring %s,", FN_FIT(outfilename));
++			fflush(stderr);
++		}
+ 
+         if (outbuf_k)
+             output_buffer_size = outbuf_k * 1024;
+@@ -968,9 +977,10 @@ static int unpack_file (char *infilename, char *outfilename)
+     else {      // in verify only mode we don't worry about headers
+         outfile = NULL;
+ 
+-        if (!quiet_mode)
+-            fprintf (stderr, "verifying %s%s,", *infilename == '-' ? "stdin" :
+-                FN_FIT (infilename), wvc_mode ? " (+.wvc)" : "");
++		if (!quiet_mode) {
++			fprintf(stderr, "verifying %s%s,", *infilename == '-' ? "stdin" : FN_FIT(infilename), wvc_mode ? " (+.wvc)" : "");
++			fflush(stderr);
++		}
+     }
+ 
+ #if defined(WIN32)
+@@ -1070,9 +1080,10 @@ static int unpack_file (char *infilename, char *outfilename)
+                 display_progress (progress);
+                 progress = floor (progress * 100.0 + 0.5);
+ 
+-                if (!quiet_mode)
+-                    fprintf (stderr, "%s%3d%% done...",
+-                        nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
++				if (!quiet_mode) {
++					fprintf(stderr, "%s%3d%% done...", nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int)progress);
++					fflush(stderr);
++				}
+         }
+     }
+ 
+@@ -1242,6 +1253,7 @@ static int unpack_file (char *infilename, char *outfilename)
+         }
+ 
+         error_line ("%s %s%s in %.2f secs (%s%s)", oper, file, fext, dtime, cmode, cratio);
++		fflush(stderr);
+     }
+ 
+     WavpackCloseFile (wpc);
+@@ -1249,9 +1261,10 @@ static int unpack_file (char *infilename, char *outfilename)
+     if (result == NO_ERROR && delete_source) {
+         int res = DoDeleteFile (infilename);
+ 
+-        if (!quiet_mode || !res)
+-            error_line ("%s source file %s", res ?
+-                "deleted" : "can't delete", infilename);
++		if (!quiet_mode || !res) {
++			error_line("%s source file %s", res ? "deleted" : "can't delete", infilename);
++			fflush(stderr);
++		}
+ 
+         if (wvc_mode) {
+             char in2filename [PATH_MAX];
+@@ -1260,9 +1273,10 @@ static int unpack_file (char *infilename, char *outfilename)
+             strcat (in2filename, "c");
+             res = DoDeleteFile (in2filename);
+ 
+-            if (!quiet_mode || !res)
+-                error_line ("%s source file %s", res ?
+-                    "deleted" : "can't delete", in2filename);
++			if (!quiet_mode || !res) {
++				error_line("%s source file %s", res ? "deleted" : "can't delete", in2filename);
++				fflush(stderr);
++			}
+         }
+     }
+ 
+@@ -1350,7 +1364,7 @@ static int do_tag_extractions (WavpackContext *wpc, char *outfilename)
+             else
+                 strcpy (filespec_name (full_filename), tag_filename);
+ 
+-            if (!overwrite_all && (outfile = fopen (full_filename, "r")) != NULL) {
++            if (!overwrite_all && (outfile = fopen_utf8 (full_filename, "r")) != NULL) {
+                 DoCloseHandle (outfile);
+                 fprintf (stderr, "overwrite %s (yes/no/all)? ", FN_FIT (full_filename));
+ 
+@@ -1371,7 +1385,7 @@ static int do_tag_extractions (WavpackContext *wpc, char *outfilename)
+             // open output file for writing
+ 
+             if (*full_filename) {
+-                if ((outfile = fopen (full_filename, "w")) == NULL) {
++                if ((outfile = fopen_utf8 (full_filename, "w")) == NULL) {
+                     error_line ("can't create file %s!", FN_FIT (full_filename));
+                     result = SOFT_ERROR;
+                 }
+@@ -1382,8 +1396,10 @@ static int do_tag_extractions (WavpackContext *wpc, char *outfilename)
+                         error_line ("can't close file %s!", FN_FIT (full_filename));
+                         result = SOFT_ERROR;
+                     }
+-                    else if (!quiet_mode)
+-                        error_line ("extracted tag \"%s\" to file %s", extraction_spec, FN_FIT (full_filename));
++					else if (!quiet_mode) {
++						error_line("extracted tag \"%s\" to file %s", extraction_spec, FN_FIT(full_filename));
++						fflush(stderr);
++					}
+                 }
+             }
+ 
+@@ -2060,3 +2076,30 @@ void display_progress (double file_progress)
+         DoSetConsoleTitle (title);
+     }
+ }
++
++
++//////////////////////////////////////////////////////////////////////////////
++// Entry Point
++//////////////////////////////////////////////////////////////////////////////
++
++int main(int argc, char **argv)
++{
++	int iResult = -1;
++
++#if defined (WIN32)
++	int argc_utf8;
++	char **argv_utf8;
++
++	init_console_utf8();
++	init_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++
++	iResult = wvunpack_main(argc_utf8, argv_utf8);
++
++	free_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++	uninit_console_utf8();
++#else
++	iResult = wvunpack_main(argc, argv);
++#endif
++
++	return iResult;
++}
+diff --git a/src/unicode_support.c b/src/unicode_support.c
+new file mode 100644
+index 0000000..f057ac0
+--- /dev/null
++++ b/src/unicode_support.c
+@@ -0,0 +1,197 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.c
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#if defined WIN32 || defined _WIN32 || defined WIN64 || defined _WIN64
++
++#include "unicode_support.h"
++
++#include <windows.h>
++#include <io.h>
++
++static UINT g_old_output_cp = ((UINT)-1);
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++char *utf16_to_ansi(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_ACP, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_ACP, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	if(Buffer)
++	{
++		Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = (char**) malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	if(NULL == *argv)
++	{
++		fprintf(stderr, "\nFATAL: Malloc failed\n\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++		if(NULL == (*argv)[i])
++		{
++			fprintf(stderr, "\nFATAL: utf16_to_utf8 failed\n\n");
++			exit(-1);
++		}
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
++
++int stat_utf8(const char *path_utf8, struct _stat *buf)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wstat(path_utf16, buf);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
++
++int unlink_utf8(const char *path_utf8)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wunlink(path_utf16);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
++
++void init_console_utf8(void)
++{
++	g_old_output_cp = GetConsoleOutputCP();
++	SetConsoleOutputCP(CP_UTF8);
++}
++
++void uninit_console_utf8(void)
++{
++	if(g_old_output_cp != ((UINT)-1))
++	{
++		SetConsoleOutputCP(g_old_output_cp);
++	}
++}
++
++#endif
+\ No newline at end of file
+diff --git a/src/unicode_support.h b/src/unicode_support.h
+new file mode 100644
+index 0000000..cf55719
+--- /dev/null
++++ b/src/unicode_support.h
+@@ -0,0 +1,49 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.h
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <stdio.h>
++#include <sys/stat.h>
++
++#define WIN_UNICODE 1
++
++char *utf16_to_utf8(const wchar_t *input);
++char *utf16_to_ansi(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++int stat_utf8(const char *path_utf8, struct _stat *buf);
++int unlink_utf8(const char *path_utf8);
++void init_console_utf8(void);
++void uninit_console_utf8(void);
++
++#endif
+\ No newline at end of file
+diff --git a/src/wputils.c b/src/wputils.c
+index 5d30f1e..1aebbce 100644
+--- a/src/wputils.c
++++ b/src/wputils.c
+@@ -26,6 +26,7 @@
+ 
+ #if defined (WIN32) || defined (__OS2__)
+ #include <io.h>
++#include "unicode_support.h"
+ #endif
+ 
+ #ifndef LIBWAVPACK_VERSION_STRING
+@@ -169,7 +170,7 @@ WavpackContext *WavpackOpenFileInput (const char *infilename, char *error, int f
+         setmode (fileno (stdin), O_BINARY);
+ #endif
+     }
+-    else if ((wv_id = fopen (infilename, file_mode)) == NULL) {
++    else if ((wv_id = fopen_utf8 (infilename, file_mode)) == NULL) {
+         if (error) strcpy (error, (flags & OPEN_EDIT_TAGS) ? "can't open file for editing" : "can't open file");
+         return NULL;
+     }
+@@ -179,7 +180,7 @@ WavpackContext *WavpackOpenFileInput (const char *infilename, char *error, int f
+ 
+         strcpy (in2filename, infilename);
+         strcat (in2filename, "c");
+-        wvc_id = fopen (in2filename, "rb");
++        wvc_id = fopen_utf8 (in2filename, "rb");
+         free (in2filename);
+     }
+     else
+
+\ No newline at end of file
