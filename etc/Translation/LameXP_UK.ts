@@ -2761,5 +2761,21 @@
         <source>Initializing, please wait...</source>
         <translation type="unfinished">Ініціалізація, будь ласка, зачекайте...</translation>
     </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="unfinished">Ігнорувати</translation>
+    </message>
+    <message>
+        <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please start application from an administrator account and try again!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

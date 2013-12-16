@@ -2724,5 +2724,21 @@
         <source>Initializing, please wait...</source>
         <translation type="unfinished">正在初始化,請稍候...</translation>
     </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished">放棄</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="unfinished">忽略</translation>
+    </message>
+    <message>
+        <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please start application from an administrator account and try again!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

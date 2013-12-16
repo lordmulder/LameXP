@@ -2024,7 +2024,7 @@
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2742,6 +2742,22 @@
     <message>
         <source>Initializing, please wait...</source>
         <translation>Initialisiere, bitte warten...</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation>Schließen</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation>Ignorieren</translation>
+    </message>
+    <message>
+        <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
+        <translation>Ausschließlich Benutzer der &quot;Administratoren&quot; Gruppe können Updates installieren.</translation>
+    </message>
+    <message>
+        <source>Please start application from an administrator account and try again!</source>
+        <translation>Bitte starten Sie den Update-Prozess aus einem Administrator-Konto erneut!</translation>
     </message>
 </context>
 </TS>

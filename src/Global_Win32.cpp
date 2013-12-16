@@ -892,13 +892,14 @@ static bool lamexp_event_filter(void *message, long *result)
 /*
  * Check for process elevation
  */
-static bool lamexp_check_elevation(void)
+static bool lamexp_process_is_elevated(bool *bIsUacEnabled = NULL)
 {
 	typedef enum { lamexp_token_elevationType_class = 18, lamexp_token_elevation_class = 20 } LAMEXP_TOKEN_INFORMATION_CLASS;
 	typedef enum { lamexp_elevationType_default = 1, lamexp_elevationType_full, lamexp_elevationType_limited } LAMEXP_TOKEN_ELEVATION_TYPE;
 
-	HANDLE hToken = NULL;
 	bool bIsProcessElevated = false;
+	if(bIsUacEnabled) *bIsUacEnabled = false;
+	HANDLE hToken = NULL;
 	
 	if(OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
 	{
@@ -916,9 +917,14 @@ static bool lamexp_check_elevation(void)
 				case lamexp_elevationType_full:
 					qWarning("Process token elevation type: Full -> potential security risk!\n");
 					bIsProcessElevated = true;
+					if(bIsUacEnabled) *bIsUacEnabled = true;
 					break;
 				case lamexp_elevationType_limited:
 					qDebug("Process token elevation type: Limited -> not elevated.\n");
+					if(bIsUacEnabled) *bIsUacEnabled = true;
+					break;
+				default:
+					qWarning("Unknown tokenElevationType value: %d", tokenElevationType);
 					break;
 				}
 			}
@@ -930,7 +936,7 @@ static bool lamexp_check_elevation(void)
 		qWarning("Failed to open process token!");
 	}
 
-	return !bIsProcessElevated;
+	return bIsProcessElevated;
 }
 
 /*
@@ -1098,7 +1104,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	lamexp_translation_init();
 
 	//Check for process elevation
-	if((!lamexp_check_elevation()) && (!lamexp_detect_wine()))
+	if(lamexp_process_is_elevated() && (!lamexp_detect_wine()))
 	{
 		QMessageBox messageBox(QMessageBox::Warning, "LameXP", "<nobr>LameXP was started with 'elevated' rights, altough LameXP does not need these rights.<br>Running an applications with unnecessary rights is a potential security risk!</nobr>", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
 		messageBox.addButton("Quit Program (Recommended)", QMessageBox::NoRole);
@@ -1852,15 +1858,15 @@ bool lamexp_bring_process_to_front(const unsigned long pid)
 }
 
 /*
- * Check the network connection status
+ * Check the network connectivity status
  */
 int lamexp_network_status(void)
 {
 	DWORD dwFlags;
-	const BOOL ret = (IsNetworkAlive(&dwFlags) == TRUE);
+	const BOOL ret = IsNetworkAlive(&dwFlags);
 	if(GetLastError() == 0)
 	{
-		return (ret == TRUE) ? lamexp_network_yes : lamexp_network_non;
+		return (ret != FALSE) ? lamexp_network_yes : lamexp_network_non;
 	}
 	return lamexp_network_err;
 }
@@ -2161,6 +2167,42 @@ QColor lamexp_system_color(const int color_id)
 	const DWORD rgb = GetSysColor(nIndex);
 	QColor color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb));
 	return color;
+}
+
+/*
+ * Check if the current user is in the "admin" group (up to and including Windows XP only)
+ */
+bool lamexp_user_is_admin(void)
+{
+	bool isAdmin = false;
+
+	//Check for process elevation and UAC first!
+	if(lamexp_process_is_elevated(&isAdmin))
+	{
+		qWarning("Process is elevated -> user is admin!");
+		return true;
+	}
+	
+	//If not elevated and UAC is not available -> user must be in admin group!
+	if(!isAdmin)
+	{
+		qDebug("UAC is disabled/unavailable -> checking for Administrators group");
+
+		SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
+		PSID AdministratorsGroup; 
+
+		if(AllocateAndInitializeSid(&NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &AdministratorsGroup)) 
+		{
+			BOOL b = FALSE;
+			if(CheckTokenMembership(NULL, AdministratorsGroup, &b))
+			{
+				if(b) isAdmin = true;
+			}
+			FreeSid(AdministratorsGroup); 
+		}
+	}
+
+	return isAdmin;
 }
 
 /*

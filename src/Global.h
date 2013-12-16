@@ -229,6 +229,7 @@ QString lamexp_translation_name(const QString &language);
 bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &country);
 unsigned int lamexp_translation_sysid(const QString &langId);
 bool lamexp_update_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
+bool lamexp_user_is_admin(void);
 const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag = NULL);
 const char *lamexp_version_arch(void);
 unsigned int lamexp_version_build(void);

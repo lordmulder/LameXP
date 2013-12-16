@@ -41,6 +41,7 @@
 #include <QUrl>
 #include <QCloseEvent>
 #include <QMovie>
+#include <QMessageBox>
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -238,8 +239,7 @@ void UpdateDialog::updateInit(void)
 {
 	setMinimumSize(size());
 	setMaximumHeight(height());
-	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	checkForUpdates();
+	QTimer::singleShot(0, this, SLOT(checkForUpdates()));
 }
 
 void UpdateDialog::checkForUpdates(void)
@@ -247,6 +247,19 @@ void UpdateDialog::checkForUpdates(void)
 	if(m_thread->isRunning())
 	{
 		qWarning("Update in progress, cannot check for updates now!");
+	}
+
+	if(!lamexp_user_is_admin())
+	{
+		qWarning("User is not in the \"admin\" group, cannot update!");
+		QString message;
+		message += QString("<nobr>%1</nobr><br>").arg(tr("Sorry, but only users in the \"Administrators\" group can install updates."));
+		message += QString("<nobr>%1</nobr>").arg(tr("Please start application from an administrator account and try again!"));
+		if(QMessageBox::critical(this, this->windowTitle(), message, tr("Discard"), tr("Ignore")) != 1)
+		{
+			ui->closeButton->setEnabled(true);
+			close(); return;
+		}
 	}
 
 	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNormalState);
@@ -294,7 +307,7 @@ void UpdateDialog::threadStatusChanged(const int status)
 		break;
 	case UpdateCheckThread::UpdateStatus_CompletedNewVersionOlder:
 		ui->statusLabel->setText(tr("Your version appears to be newer than the latest release."));
-		SHOW_HINT(tr("This usually indicates your are currently using a pre-release version of LameXP."), ":/icons/shield_error.png");
+		SHOW_HINT(tr("This usually indicates your are currently using a pre-release version of LameXP."), ":/icons/shield_blue.png");
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_error.png");
 		break;
 	case UpdateCheckThread::UpdateStatus_ErrorNoConnection:
