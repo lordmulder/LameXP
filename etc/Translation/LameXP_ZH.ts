@@ -2015,7 +2015,7 @@
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation>APE</translation>
     </message>
 </context>
 <context>
@@ -2726,19 +2726,19 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">放弃</translation>
+        <translation>放弃</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">忽略</translation>
+        <translation>忽略</translation>
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>抱歉，只有管理员组的用户能够安装更新。</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>请以管理员身份运行程序并重试！</translation>
     </message>
 </context>
 </TS>
