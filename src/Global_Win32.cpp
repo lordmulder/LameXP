@@ -894,32 +894,29 @@ static bool lamexp_event_filter(void *message, long *result)
  */
 static bool lamexp_process_is_elevated(bool *bIsUacEnabled = NULL)
 {
-	typedef enum { lamexp_token_elevationType_class = 18, lamexp_token_elevation_class = 20 } LAMEXP_TOKEN_INFORMATION_CLASS;
-	typedef enum { lamexp_elevationType_default = 1, lamexp_elevationType_full, lamexp_elevationType_limited } LAMEXP_TOKEN_ELEVATION_TYPE;
-
 	bool bIsProcessElevated = false;
 	if(bIsUacEnabled) *bIsUacEnabled = false;
 	HANDLE hToken = NULL;
 	
 	if(OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
 	{
-		LAMEXP_TOKEN_ELEVATION_TYPE tokenElevationType;
+		TOKEN_ELEVATION_TYPE tokenElevationType;
 		DWORD returnLength;
-		if(GetTokenInformation(hToken, (TOKEN_INFORMATION_CLASS) lamexp_token_elevationType_class, &tokenElevationType, sizeof(LAMEXP_TOKEN_ELEVATION_TYPE), &returnLength))
+		if(GetTokenInformation(hToken, TokenElevationType, &tokenElevationType, sizeof(TOKEN_ELEVATION_TYPE), &returnLength))
 		{
-			if(returnLength == sizeof(LAMEXP_TOKEN_ELEVATION_TYPE))
+			if(returnLength == sizeof(TOKEN_ELEVATION_TYPE))
 			{
 				switch(tokenElevationType)
 				{
-				case lamexp_elevationType_default:
+				case TokenElevationTypeDefault:
 					qDebug("Process token elevation type: Default -> UAC is disabled.\n");
 					break;
-				case lamexp_elevationType_full:
+				case TokenElevationTypeFull:
 					qWarning("Process token elevation type: Full -> potential security risk!\n");
 					bIsProcessElevated = true;
 					if(bIsUacEnabled) *bIsUacEnabled = true;
 					break;
-				case lamexp_elevationType_limited:
+				case TokenElevationTypeLimited:
 					qDebug("Process token elevation type: Limited -> not elevated.\n");
 					if(bIsUacEnabled) *bIsUacEnabled = true;
 					break;
@@ -927,6 +924,10 @@ static bool lamexp_process_is_elevated(bool *bIsUacEnabled = NULL)
 					qWarning("Unknown tokenElevationType value: %d", tokenElevationType);
 					break;
 				}
+			}
+			else
+			{
+				qWarning("GetTokenInformation() return an unexpected size!");
 			}
 		}
 		CloseHandle(hToken);
@@ -2170,13 +2171,72 @@ QColor lamexp_system_color(const int color_id)
 }
 
 /*
- * Check if the current user is in the "admin" group (up to and including Windows XP only)
+ * Check if the current user is an administartor (helper function)
+ */
+static bool lamexp_user_is_admin_helper(void)
+{
+	HANDLE hToken = NULL;
+	if(!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
+	{
+		return false;
+	}
+
+	DWORD dwSize = 0;
+	if(!GetTokenInformation(hToken, TokenGroups, NULL, 0, &dwSize))
+	{
+		if(GetLastError() != ERROR_INSUFFICIENT_BUFFER)
+		{
+			CloseHandle(hToken);
+			return false;
+		}
+	}
+
+	PTOKEN_GROUPS lpGroups = (PTOKEN_GROUPS) malloc(dwSize);
+	if(!lpGroups)
+	{
+		CloseHandle(hToken);
+		return false;
+	}
+
+	if(!GetTokenInformation(hToken, TokenGroups, lpGroups, dwSize, &dwSize))
+	{
+		free(lpGroups);
+		CloseHandle(hToken);
+		return false;
+	}
+
+	PSID lpSid = NULL; SID_IDENTIFIER_AUTHORITY Authority = {SECURITY_NT_AUTHORITY};
+	if(!AllocateAndInitializeSid(&Authority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &lpSid))
+	{
+		free(lpGroups);
+		CloseHandle(hToken);
+		return false;
+	}
+
+	bool bResult = false;
+	for(DWORD i = 0; i < lpGroups->GroupCount; i++)
+	{
+		if(EqualSid(lpSid, lpGroups->Groups[i].Sid))
+		{
+			bResult = true;
+			break;
+		}
+	}
+
+	FreeSid(lpSid);
+	free(lpGroups);
+	CloseHandle(hToken);
+	return bResult;
+}
+
+/*
+ * Check if the current user is an administartor
  */
 bool lamexp_user_is_admin(void)
 {
 	bool isAdmin = false;
 
-	//Check for process elevation and UAC first!
+	//Check for process elevation and UAC support first!
 	if(lamexp_process_is_elevated(&isAdmin))
 	{
 		qWarning("Process is elevated -> user is admin!");
@@ -2187,19 +2247,7 @@ bool lamexp_user_is_admin(void)
 	if(!isAdmin)
 	{
 		qDebug("UAC is disabled/unavailable -> checking for Administrators group");
-
-		SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
-		PSID AdministratorsGroup; 
-
-		if(AllocateAndInitializeSid(&NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &AdministratorsGroup)) 
-		{
-			BOOL b = FALSE;
-			if(CheckTokenMembership(NULL, AdministratorsGroup, &b))
-			{
-				if(b) isAdmin = true;
-			}
-			FreeSid(AdministratorsGroup); 
-		}
+		isAdmin = lamexp_user_is_admin_helper();
 	}
 
 	return isAdmin;
