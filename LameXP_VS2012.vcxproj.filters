@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\Global.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -400,6 +397,39 @@
     <ClCompile Include="tmp\QRC_Tools_Misc_C.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Global_IPC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global_Tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global_Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global_Version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global_Win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global_Zero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Thread_CheckUpdate.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Thread_CheckUpdate.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Encoder_MAC.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\MOC_Encoder_MAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\QRC_Sounds.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -735,6 +765,15 @@
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools_Misc_C.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CheckUpdate.h">
+      <Filter>Header Files\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_MAC.h">
+      <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Sounds.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>

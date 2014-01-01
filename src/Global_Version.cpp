@@ -122,8 +122,10 @@ static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO
 			static const char *g_lamexp_version_compiler = "MSVC 2012.1";
 		#elif (_MSC_FULL_VER < 170060610)
 			static const char *g_lamexp_version_compiler = "MSVC 2012.2";
-		#elif (_MSC_FULL_VER == 170060610)
+		#elif (_MSC_FULL_VER < 170061030)
 			static const char *g_lamexp_version_compiler = "MSVC 2012.3";
+		#elif (_MSC_FULL_VER == 170061030)
+			static const char *g_lamexp_version_compiler = "MSVC 2012.4";
 		#else
 			#error Compiler version is not supported yet!
 		#endif
