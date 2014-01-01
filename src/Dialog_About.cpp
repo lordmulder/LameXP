@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2013 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2014 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -735,13 +735,6 @@ void AboutDialog::initSoftwareTab(void)
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://tta.sourceforge.net/"
 	);
-	//moreAboutText += makeToolText
-	//(
-	//	tr("ALAC Decoder"),
-	//	"alac.exe", "v?.?.?",
-	//	tr("Copyright (c) 2004 David Hammerton. Contributions by Cody Brocious."),
-	//	"http://craz.net/programs/itunes/alac.html"
-	//);
 	moreAboutText += makeToolText
 	(
 		tr("refalac - Win32 command line ALAC encoder/decoder"),

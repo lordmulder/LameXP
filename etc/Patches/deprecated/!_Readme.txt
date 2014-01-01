@@ -7,7 +7,7 @@ Most of these modifications were required to fix Unicode support on the Windows 
 
 Other modifications were required to make the third-party audio tools compile+link properly in the build environment used in the development of LameXP.
 
-All patches provided here are Copyright (c) LoRd_MuldeR <mulder2@gmx.de> 2004-2013; each patch is released under the very same license as the original tool.
+All patches provided here are Copyright (c) LoRd_MuldeR <mulder2@gmx.de> 2004-2014; each patch is released under the very same license as the original tool.
 
 Please note that the patches provided here have NOT been approved by the original developers of the third-party audio tools - use them at your own risk!
 
