@@ -45,7 +45,7 @@
 /* constants */
 static const double g_allowedExtractDelay = 12.0;
 static const size_t BUFF_SIZE = 512;
-static const size_t EXPECTED_TOOL_COUNT = 27;
+static const size_t EXPECTED_TOOL_COUNT = 28;
 
 /* benchmark */
 #undef ENABLE_BENCHMARK
@@ -925,7 +925,7 @@ void InitializationThread::selfTest(void)
 		}
 		if(n != EXPECTED_TOOL_COUNT)
 		{
-			qFatal("Tool count mismatch for CPU type %u !!!", cpu[4]);
+			qFatal("Tool count mismatch for CPU type %u !!!", cpu[k]);
 		}
 		qDebug("Done.\n");
 	}
