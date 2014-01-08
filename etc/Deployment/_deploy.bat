@@ -84,6 +84,7 @@ REM ------------------------------------------
 del "%OUT_FILE%.exe"
 del "%OUT_FILE%.sfx"
 del "%OUT_FILE%.zip"
+del "%OUT_FILE%.txt"
 REM ------------------------------------------
 if exist "%OUT_FILE%.exe" (
 	call "%~dp0\_error.bat" "FAILD TO DELET EXISTING FILE"
@@ -147,7 +148,18 @@ attrib +R "%TMP_PATH%\*.exe"
 REM ------------------------------------------
 REM :: CREATE PACKAGES ::
 REM ------------------------------------------
-"%PATH_SEVENZ%\7z.exe" a -tzip -r "%OUT_FILE%.zip" "%TMP_PATH%\*"
+"%~dp0\..\Utilities\Echo.exe" LameXP - Audio Encoder Front-End > "%OUT_FILE%.txt"
+"%~dp0\..\Utilities\Echo.exe" v%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH% (Build #%VER_LAMEXP_BUILD%)\n >> "%OUT_FILE%.txt"
+"%~dp0\..\Utilities\Echo.exe" Built on %ISO_DATE% at %TIME%\n\n >> "%OUT_FILE%.txt"
+"%~dp0\..\Utilities\Echo.exe" ---------------------------\nREADME.TXT\n--------------------------- >> "%OUT_FILE%.txt"
+"%~dp0\..\Utilities\Cat.exe" "%~dp0\..\..\ReadMe.txt" >> "%OUT_FILE%.txt"
+"%~dp0\..\Utilities\Echo.exe" \n\n---------------------------\nLICENSE.TXT\n---------------------------\n >> "%OUT_FILE%.txt"
+"%~dp0\..\Utilities\Cat.exe" "%~dp0\..\..\License.txt" >> "%OUT_FILE%.txt"
+REM ------------------------------------------
+pushd "%TMP_PATH%"
+"%~dp0\..\Utilities\Zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
+popd
+REM ------------------------------------------
 "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
 "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
 REM ------------------------------------------

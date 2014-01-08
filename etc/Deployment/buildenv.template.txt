@@ -1,4 +1,3 @@
-#define PATH_SEVENZ "C:\Program Files\7-Zip"
 #define PATH_UPXBIN "C:\Program Files\UPX"
 #define PATH_MKNSIS "C:\Program Files\NSIS\Unicode"
 #define PATH_MSCDIR "C:\Program Files\Microsoft Visual Studio 12.0"

@@ -1,7 +1,6 @@
 @echo off
 set "LAMEXP_ERROR=1"
 REM ------------------------------------------
-set "PATH_SEVENZ="
 set "PATH_UPXBIN="
 set "PATH_MKNSIS="
 set "PATH_MSCDIR="
@@ -24,7 +23,6 @@ if not exist "%BUILDENV_TXT%" (
 )
 REM ------------------------------------------
 for /f "tokens=2,*" %%s in (%BUILDENV_TXT%) do (
-	if "%%s"=="PATH_SEVENZ" set "PATH_SEVENZ=%%~t"
 	if "%%s"=="PATH_UPXBIN" set "PATH_UPXBIN=%%~t"
 	if "%%s"=="PATH_MKNSIS" set "PATH_MKNSIS=%%~t"
 	if "%%s"=="PATH_MSCDIR" set "PATH_MSCDIR=%%~t"
@@ -36,7 +34,6 @@ REM ------------------------------------------
 set "BUILDENV_TXT="
 REM ------------------------------------------
 echo === BEGIN PATHS ===
-echo PATH_SEVENZ = "%PATH_SEVENZ%"
 echo PATH_UPXBIN = "%PATH_UPXBIN%"
 echo PATH_MKNSIS = "%PATH_MKNSIS%"
 echo PATH_MSCDIR = "%PATH_MSCDIR%"
@@ -47,7 +44,6 @@ echo === END PATHS ===
 REM ------------------------------------------
 set "LAMEXP_ERROR=1"
 REM ------------------------------------------
-if not exist "%PATH_SEVENZ%\7z.exe" GOTO:EOF
 if not exist "%PATH_UPXBIN%\upx.exe" GOTO:EOF
 if not exist "%PATH_MKNSIS%\makensis.exe" GOTO:EOF
 if not exist "%PATH_MSCDIR%\VC\vcvarsall.bat" GOTO:EOF
