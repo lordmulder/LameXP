@@ -137,12 +137,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="609"/>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>BerliOS Utvecklare</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="611"/>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation>CodePlex</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="613"/>
@@ -1037,7 +1037,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="931"/>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation>APE</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1028"/>
@@ -2376,7 +2376,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2451"/>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Läser in släppta filer och mappar! Vänta...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2556"/>
@@ -2520,7 +2520,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3374"/>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuell kodare: %1</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3537"/>
@@ -3347,7 +3347,7 @@
     <message>
         <location filename="../../src/Global_Win32.cpp" line="1023"/>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kräver Windows XP eller senare.</translation>
     </message>
 </context>
 <context>
@@ -3427,12 +3427,12 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="256"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Endast administratörer kan installera uppdayteringar.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="257"/>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta programmet från ett administratörskonto och försök igen!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="293"/>
@@ -3483,17 +3483,17 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="258"/>
         <source>Discard</source>
-        <translation type="unfinished">Stäng</translation>
+        <translation>Stäng</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="258"/>
         <source>Ignore</source>
-        <translation type="unfinished">Ignorera</translation>
+        <translation>Hoppa över</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="290"/>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Initierar, vänta...</translation>
+        <translation>Startar! Vänta...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="300"/>
