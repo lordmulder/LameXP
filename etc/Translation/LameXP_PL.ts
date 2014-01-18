@@ -646,7 +646,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="429"/>
         <source>Cue Sheet Completed</source>
-        <translation type="unfinished">Stworzono plik Cue Sheet</translation>
+        <translation type="unfinished">Utworzono plik Cue Sheet</translation>
     </message>
 </context>
 <context>
@@ -1271,7 +1271,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="931"/>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">APE</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1461"/>
@@ -3444,12 +3444,12 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="256"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tylko użytkownicy z grupy &quot;Administratorów&quot; mogą instalować aktualizacje.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="257"/>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proszę uruchomić aplikację z konta administratora i spróbować ponownie!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="293"/>
@@ -3500,7 +3500,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="258"/>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Odrzuć</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="258"/>
