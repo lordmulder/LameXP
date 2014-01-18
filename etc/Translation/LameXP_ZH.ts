@@ -2007,11 +2007,11 @@
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation>当前的编码器：%1</translation>
+        <translation>当前的编码：%1</translation>
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation>载入收集的文件或文件夹中，请稍候……</translation>
+        <translation>加载拖放文件或文件夹中，请稍候……</translation>
     </message>
     <message>
         <source>APE</source>
