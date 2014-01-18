@@ -294,11 +294,11 @@
     </message>
     <message>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>BerliOS Developer</translation>
     </message>
     <message>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation>CodePlex</translation>
     </message>
 </context>
 <context>
@@ -2028,11 +2028,11 @@
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження перетягнутих на плаваюче віконце файлів чи тек, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation>APE</translation>
     </message>
 </context>
 <context>
@@ -2759,23 +2759,23 @@
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Ініціалізація, будь ласка, зачекайте...</translation>
+        <translation>Ініціалізація, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінити</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">Ігнорувати</translation>
+        <translation>Ігнорувати</translation>
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибачте, але лише користувачі з групи &quot;Адміністратори&quot; можуть встановлювати оновлення.</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, запустіть додаток від імені адміністративного облікового запису і спробуйте ще раз!</translation>
     </message>
 </context>
 </TS>
