@@ -289,15 +289,15 @@
     </message>
     <message>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Codecs.com</translation>
     </message>
     <message>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>BerliOS Developer</translation>
     </message>
     <message>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation>CodePlex</translation>
     </message>
 </context>
 <context>
@@ -2007,15 +2007,15 @@
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>當前的編碼：%1</translation>
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>加載拖放文件或文件夾中，請稍候……</translation>
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation>APE</translation>
     </message>
 </context>
 <context>
@@ -2589,7 +2589,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>可執行文件 &apos;%1&apos; 需要 Windows XP 或更高版本。</translation>
     </message>
 </context>
 <context>
@@ -2722,23 +2722,23 @@
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">正在初始化,請稍候...</translation>
+        <translation>正在初始化,請稍候...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">放棄</translation>
+        <translation>放棄</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">忽略</translation>
+        <translation>忽略</translation>
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>抱歉，只有&quot;Administrators&quot;組的用戶能夠安裝更新。</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>請以管理員身份運行程序并重試！</translation>
     </message>
 </context>
 </TS>
