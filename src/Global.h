@@ -186,6 +186,7 @@ bool lamexp_install_translator_from_file(const QString &qmFile);
 void lamexp_invalid_param_handler(const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
+bool lamexp_is_executable(const QString &path);
 bool lamexp_is_hibernation_supported(void);
 const QString &lamexp_known_folder(lamexp_known_folder_t folder_id);
 const QString lamexp_lookup_tool(const QString &toolName);

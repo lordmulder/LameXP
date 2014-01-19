@@ -2254,6 +2254,20 @@ bool lamexp_user_is_admin(void)
 }
 
 /*
+ * Check if file is a valid Win32/Win64 executable
+ */
+bool lamexp_is_executable(const QString &path)
+{
+	bool bIsExecutable = false;
+	DWORD binaryType;
+	if(GetBinaryType(QWCHAR(QDir::toNativeSeparators(path)), &binaryType))
+	{
+		bIsExecutable = (binaryType == SCS_32BIT_BINARY || binaryType == SCS_64BIT_BINARY);
+	}
+	return bIsExecutable;
+}
+
+/*
  * Fatal application exit
  */
 #pragma intrinsic(_InterlockedExchange)
