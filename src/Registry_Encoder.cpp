@@ -476,7 +476,7 @@ void EncoderRegistry::resetAllEncoders(SettingsModel *settings)
 
 int EncoderRegistry::getAacEncoder(void)
 {
-	if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll"))
+	if(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxr.dll") && lamexp_check_tool("libsoxconvolver.dll"))
 	{
 		return SettingsModel::AAC_ENCODER_QAAC;
 	}

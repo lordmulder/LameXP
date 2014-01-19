@@ -45,7 +45,8 @@ public:
 	static const AbstractEncoderInfo *getEncoderInfo(void);
 
 private:
-	const QString m_binary_enc;
-	const QString m_binary_dll;
+	const QString m_binary_qaac;
+	const QString m_binary_soxr;
+	const QString m_binary_soxc;
 	int m_configProfile;
 };
