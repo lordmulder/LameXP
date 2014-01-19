@@ -297,11 +297,11 @@
     </message>
     <message>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Développeur BerliOS</translation>
     </message>
     <message>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation>CodePlex</translation>
     </message>
 </context>
 <context>
@@ -2024,15 +2024,15 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Encodeur actuel r: %1</translation>
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement des fichiers ou dossiers déposés, patientez...</translation>
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation>APE</translation>
     </message>
 </context>
 <context>
@@ -2618,7 +2618,7 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; requiert Windows XP ou une version ultérieure.</translation>
     </message>
 </context>
 <context>
@@ -2751,23 +2751,23 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Initialisation, patientez...</translation>
+        <translation>Initialisation, patientez...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Abandonner</translation>
+        <translation>Abandonner</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">Ignorer</translation>
+        <translation>Ignorer</translation>
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, mais seuls les « Administrateurs » peuvent installer les mises à jour.</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez démarrer l&apos;application depuis un compte administrateur, puis réessayez !</translation>
     </message>
 </context>
 </TS>
