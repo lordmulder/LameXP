@@ -109,7 +109,7 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 
 	virtual const char *description(void) const
 	{
-		static const char* s_description = "QAAC/QuickTime (\x0C2\x0A9 Appel)";
+		static const char* s_description = "QAAC/QuickTime (\x0C2\x0A9 Apple Inc.)";
 		return s_description;
 	}
 }
