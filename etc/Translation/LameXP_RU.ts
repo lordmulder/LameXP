@@ -145,19 +145,19 @@
     </message>
     <message>
         <source>SoX - Sound eXchange</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>GnuPG - The GNU Privacy Guard</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>GNU Wget - Software for retrieving files using HTTP</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
-        <translation type="unfinished">LameXP защищена авторским правом LoRd_MuldeR. Авторское право на  программное обеспечение третьих сторон, используемое в LameXP, принадлежит индивидуальным авторам.</translation>
+        <translation>Программа LameXP защищена авторским правом LoRd_MuldeR. Авторское право на  программное обеспечение третьих сторон, используемое в LameXP, принадлежит индивидуальным авторам.</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -165,67 +165,67 @@
     </message>
     <message>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translation type="unfinished">Внимание: эта демо (пре-релиз) версия LameXP прекратит работу %1. Осталось %2 дней.</translation>
+        <translation>Внимание: эта демо (пре-релиз) версия LameXP прекратит работу %1. Осталось %2 дней.</translation>
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>dcaenc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Лицензия</translation>
     </message>
     <message>
         <source>Programmers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Программисты:</translation>
     </message>
     <message>
         <source>Project Leader</source>
-        <translation type="unfinished"></translation>
+        <translation>Руководитель проекта</translation>
     </message>
     <message>
         <source>Opus Audio Codec</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - Более 700  значков в формате PNG </translation>
     </message>
     <message>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Создал Mark James, распространяется по лицензии Creative Commons.</translation>
     </message>
     <message>
         <source>Show License Text</source>
@@ -233,71 +233,71 @@
     </message>
     <message>
         <source>About Qt...</source>
-        <translation>О Qt</translation>
+        <translation>О Qt...</translation>
     </message>
     <message>
         <source>Special thanks to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Отдельная благодарность:</translation>
     </message>
     <message>
         <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Gleitz | German Doom9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>RareWares</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>SourceForge</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Qt Developer Network</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Marius Hudea</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>CodePlex</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -340,171 +340,171 @@
     </message>
     <message>
         <source>Encoder</source>
-        <translation type="unfinished">Кодер</translation>
+        <translation>Кодер</translation>
     </message>
 </context>
 <context>
     <name>CueImportDialog</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished">Импорт CUE плэйлиста</translation>
+        <translation>Импорт CUE плэйлиста</translation>
     </message>
     <message>
         <source>The following Cue Sheet will be split and imported into LameXP.</source>
-        <translation type="unfinished">Следующий CUE плэйлист будет импортирован в LameXP.</translation>
+        <translation>Следующий CUE плэйлист будет импортирован в LameXP.</translation>
     </message>
     <message>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished">Загружаю CUE плэйлист, пожалуйста, подождите...</translation>
+        <translation>Загружаю CUE плэйлист, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>An unknown error has occured!</source>
-        <translation type="unfinished">Неизвестная ошибка случилась!</translation>
+        <translation>Произошла неизвестная ошибка!</translation>
     </message>
     <message>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation type="unfinished">Не могу загрузить CUE плэйлист:</translation>
+        <translation>Не могу загрузить CUE плэйлист:</translation>
     </message>
     <message>
         <source>Cue Sheet Error</source>
-        <translation type="unfinished">Ошибка CUE плэйлиста</translation>
+        <translation>Ошибка CUE плэйлиста</translation>
     </message>
     <message>
         <source>The specified file could not be found!</source>
-        <translation type="unfinished">Выбранный файл неможет быть найден!</translation>
+        <translation>Выбранный файл не может быть найден!</translation>
     </message>
     <message>
         <source>The file could not be opened for reading. Make sure you have the required rights!</source>
-        <translation type="unfinished">Не могу открыть файл для чтения. Пожалуйста проверьте что у вас есть доступ к файлу!</translation>
+        <translation>Не могу открыть файл для чтения. Пожалуйста проверьте что у вас есть доступ к файлу!</translation>
     </message>
     <message>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation type="unfinished">Выбранный файл не похож на правильный CUE плэйлист!</translation>
+        <translation>Выбранный файл не похож на правильный CUE плэйлист!</translation>
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
         <translatorcomment>пыщь пыщь</translatorcomment>
-        <translation type="unfinished">Не могу найти аудио файлы, которые LameXP поддерживает!</translation>
+        <translation>Не могу найти аудио файлы, которые поддерживает LameXP!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
-        <translation type="unfinished">Заметьте, что LameXP не поддерживает бинарныйе CUE плэйлисты.</translation>
+        <translation>Заметьте, что LameXP не поддерживает бинарныйе CUE плэйлисты.</translation>
     </message>
     <message>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
         <translatorcomment>омг сложные фразы</translatorcomment>
-        <translation type="unfinished">Выбранный CUE плэйлист содержит некорректную информацию. Будьте осторожны!</translation>
+        <translation>Выбранный CUE плэйлист содержит некорректную информацию. Будьте осторожны!</translation>
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation type="unfinished">Выберите выходную директорию</translation>
+        <translation>Выберите выходную директорию</translation>
     </message>
     <message>
         <source>LameXP</source>
-        <translation type="unfinished">LameXP</translation>
+        <translation>LameXP</translation>
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished">Ошибка: выбранная попка недостпна для записи!</translation>
+        <translation>Ошибка: выбранная папка недостпна для записи!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished">Предупреждение: Мало свободного места на диске</translation>
+        <translation>Предупреждение: Мало свободного места на диске</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished">В выбранный папке менее %1 Гб свободного места.</translation>
+        <translation>В выбранной папке менее %1 Гб свободного места.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation type="unfinished">Очень рекомендуется освободить больше места, перед началом операции!</translation>
+        <translation>Настоятельно рекомендуется освободить больше места, перед началом операции!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished">Анализирую файл(ы), пожалуйста подождите...</translation>
+        <translation>Анализирую файл(ы), пожалуйста подождите...</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished">Разделяю файл(ы), пожалуйста подождите...</translation>
+        <translation>Разделяю файл(ы), пожалуйста подождите...</translation>
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished">Ошибка: Не могу создать директорию!</translation>
+        <translation>Ошибка: Не могу создать выходную папку!</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation type="unfinished">Непредвиденная ошибка случилась при разделении CUE плэйлиста!</translation>
+        <translation>Произошла непредвиденная ошибка при разделении CUE плэйлиста!</translation>
     </message>
     <message>
         <source>Cue Sheet Completed</source>
-        <translation type="unfinished">Операция завершена</translation>
+        <translation>Операция завершена</translation>
     </message>
     <message>
         <source>Analysis Failed</source>
-        <translation type="unfinished">Ошибка при анализе</translation>
+        <translation>Ошибка при анализе</translation>
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation type="unfinished">Предупреждение: формат некоторых файлов неопознан!</translation>
+        <translation>Предупреждение: формат некоторых файлов неопознан!</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
-        <translation type="unfinished">Всёравно продолжить</translation>
+        <translation>Всё равно продолжить</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation type="unfinished">Кодировка ANSI для файла CUE:</translation>
+        <translation>Кодировка ANSI для файла CUE:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Неизвестный Артист</translation>
+        <translation>Неизвестный Артист</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished">Неизвестный Альбом</translation>
+        <translation>Неизвестный Альбом</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">Новая папка</translation>
+        <translation>Новая папка</translation>
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n track(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Процесс прерван пользователем после %n трэка!</numerusform>
+            <numerusform>Процесс прерван пользователем после %n трэков!</numerusform>
+            <numerusform>Процесс прерван пользователем после %n трэков!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Imported %n track(s) from the Cue Sheet.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Импортирован %n трэк из CUE-плэйлиста.</numerusform>
+            <numerusform>Импортировано %n трэка из CUE-плэйлиста.</numerusform>
+            <numerusform>Импортировано %n трэков из CUE-плэйлиста.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Skipped %n track(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Пропущен %n трэк.</numerusform>
+            <numerusform>Пропущены %n трэка.</numerusform>
+            <numerusform>Пропущено %n трэков.</numerusform>
         </translation>
     </message>
 </context>
@@ -512,39 +512,39 @@
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished">Импортировать</translation>
+        <translation>Импортировать</translation>
     </message>
     <message>
         <source> Output Directory </source>
-        <translation type="unfinished">Выходная папка</translation>
+        <translation>Выходная папка</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished">Выбрать...</translation>
+        <translation>Выбрать...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation type="unfinished">Файл найден</translation>
+        <translation>Файл найден</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation type="unfinished">Файл не найден (будет пропущен!)</translation>
+        <translation>Файл не найден (будет пропущен!)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
-        <translation type="unfinished">Загрузить другой CUE плэйлист</translation>
+        <translation>Загрузить другой CUE плэйлист</translation>
     </message>
     <message>
         <source>Artist:</source>
-        <translation type="unfinished">Исполнитель:</translation>
+        <translation>Исполнитель:</translation>
     </message>
     <message>
         <source>Album:</source>
-        <translation type="unfinished">Альбом:</translation>
+        <translation>Альбом:</translation>
     </message>
 </context>
 <context>
@@ -552,35 +552,35 @@
     <message>
         <source>No.</source>
         <translatorcomment>беда беда</translatorcomment>
-        <translation type="unfinished">№.</translation>
+        <translation>№.</translation>
     </message>
     <message>
         <source>File / Track</source>
-        <translation type="unfinished">Файл / Трэк</translation>
+        <translation>Файл / Трэк</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished">Индекс</translation>
+        <translation>Индекс</translation>
     </message>
     <message>
         <source>File %1</source>
-        <translation type="unfinished">Файл %1</translation>
+        <translation>Файл %1</translation>
     </message>
     <message>
         <source>Track %1</source>
-        <translation type="unfinished">Трэк %1</translation>
+        <translation>Трэк %1</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Неизвестный Артист</translation>
+        <translation>Неизвестный Артист</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished">Неизвестное Название</translation>
+        <translation>Неизвестное Название</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Длителность</translation>
+        <translation>Длителность</translation>
     </message>
 </context>
 <context>
@@ -636,19 +636,19 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Select ANSI Codepage for CSV file:</source>
-        <translation type="unfinished">Кодировка ANSI для файла CSV:</translation>
+        <translation>Кодировка ANSI для файла CSV:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished">Копировать в буфер обмена</translation>
+        <translation>Копировать в буфер обмена</translation>
     </message>
     <message>
         <source>Log File</source>
@@ -686,11 +686,11 @@
     </message>
     <message>
         <source>Source Files</source>
-        <translation type="unfinished">Исходные Файлы</translation>
+        <translation>Исходные Файлы</translation>
     </message>
     <message>
         <source>Add File(s)</source>
-        <translation type="unfinished">Добавить файлы</translation>
+        <translation>Добавить файл(ы)</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -706,39 +706,39 @@
     </message>
     <message>
         <source>Output Directory</source>
-        <translation type="unfinished">Выходная папка</translation>
+        <translation>Выходная папка</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
-        <translation type="unfinished">Домашняя папка</translation>
+        <translation>Домашняя папка</translation>
     </message>
     <message>
         <source>Goto Music Folder</source>
-        <translation type="unfinished">Моя музыка</translation>
+        <translation>Моя музыка</translation>
     </message>
     <message>
         <source>Goto Desktop Folder</source>
-        <translation type="unfinished">Рабочий стол</translation>
+        <translation>Рабочий стол</translation>
     </message>
     <message>
         <source>Make New Folder</source>
-        <translation type="unfinished">Новая папка</translation>
+        <translation>Новая папка</translation>
     </message>
     <message>
         <source>Save output files to the same location where the input file is located</source>
-        <translation type="unfinished">Сохранять в той же папке где исходные файлы</translation>
+        <translation>Сохранять в той же папке где исходные файлы</translation>
     </message>
     <message>
         <source>Prepend relative source file path to output file</source>
-        <translation type="unfinished">Сохранять структуру каталогов</translation>
+        <translation>Сохранять структуру каталогов</translation>
     </message>
     <message>
         <source>Meta Data</source>
-        <translation type="unfinished">Метаданные</translation>
+        <translation>Метаданные</translation>
     </message>
     <message>
         <source> Meta Information </source>
-        <translation type="unfinished">Метаинформация</translation>
+        <translation>Метаинформация</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -746,367 +746,367 @@
     </message>
     <message>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation type="unfinished">Примечание: метаинформация введённая здесь  &lt;u&gt;заменит&lt;/u&gt; информацию из источника!</translation>
+        <translation>Примечание: метаинформация введённая здесь  &lt;u&gt;заменит&lt;/u&gt; информацию из источника!</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished">Сбросить</translation>
+        <translation>Сбросить</translation>
     </message>
     <message>
         <source> Options </source>
-        <translation type="unfinished">Параметры</translation>
+        <translation>Параметры</translation>
     </message>
     <message>
         <source>Automatically generate playlist file (.m3u)</source>
-        <translation type="unfinished">Автоматически генерировать файл плэйлиста (.M3U)</translation>
+        <translation>Автоматически генерировать файл плэйлиста (.M3U)</translation>
     </message>
     <message>
         <source>Write meta information to encoded files</source>
-        <translation type="unfinished">Писать метаинформацию в выходные файлы</translation>
+        <translation>Писать метаинформацию в выходные файлы</translation>
     </message>
     <message>
         <source>Compression</source>
-        <translation type="unfinished">Сжатие</translation>
+        <translation>Сжатие</translation>
     </message>
     <message>
         <source> Encoder / Format </source>
-        <translation type="unfinished">Кодер / Формат</translation>
+        <translation>Кодер / Формат</translation>
     </message>
     <message>
         <source>FLAC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> Rate Control Method </source>
-        <translation type="unfinished">Битрейт</translation>
+        <translation>Битрейт</translation>
     </message>
     <message>
         <source>Quality-based (VBR)</source>
-        <translation type="unfinished">Переменный (VBR)</translation>
+        <translation>Переменный (VBR)</translation>
     </message>
     <message>
         <source>Average Bitrate (ABR)</source>
-        <translation type="unfinished">Средний (ABR)</translation>
+        <translation>Средний (ABR)</translation>
     </message>
     <message>
         <source>Constant Bitrate (CBR)</source>
-        <translation type="unfinished">Постоянный (CBR)</translation>
+        <translation>Постоянный (CBR)</translation>
     </message>
     <message>
         <source> Quality / Bitrate </source>
-        <translation type="unfinished">Качество / Битрейт</translation>
+        <translation>Качество / Битрейт</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation type="unfinished">Минимум</translation>
+        <translation>Минимум</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation type="unfinished">Максимум</translation>
+        <translation>Максимум</translation>
     </message>
     <message>
         <source>Advanced Options</source>
-        <translation type="unfinished">Расширенные опции</translation>
+        <translation>Расширенные опции</translation>
     </message>
     <message>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation type="unfinished">Управление битрейтом  (Lame и OggEnc2) </translation>
+        <translation>Управление битрейтом  (Lame и OggEnc2) </translation>
     </message>
     <message>
         <source>Enable Bitrate Management</source>
-        <translation type="unfinished">Управление битрейтом</translation>
+        <translation>Управление битрейтом</translation>
     </message>
     <message>
         <source>Minimum (kbps):</source>
-        <translation type="unfinished">Мин. (kbps):</translation>
+        <translation>Мин. (kbps):</translation>
     </message>
     <message>
         <source>Maximum (kbps):</source>
-        <translation type="unfinished">Макс. (kbps):</translation>
+        <translation>Макс. (kbps):</translation>
     </message>
     <message>
         <source> LAME Algorithm Quality </source>
-        <translation type="unfinished">Качество алгоритма Lame </translation>
+        <translation>Качество алгоритма Lame </translation>
     </message>
     <message>
         <source>Faster Processing</source>
-        <translation type="unfinished">Быстрее</translation>
+        <translation>Быстрее</translation>
     </message>
     <message>
         <source>Better quality</source>
-        <translation type="unfinished">Качественнее</translation>
+        <translation>Качественнее</translation>
     </message>
     <message>
         <source>Channel Mode / Sampling Rate</source>
-        <translation type="unfinished">Количество каналов / Сэмплинг</translation>
+        <translation>Количество каналов / Сэмплинг</translation>
     </message>
     <message>
         <source>Auto Select (Default)</source>
-        <translation type="unfinished">Авто (по умолчанию)</translation>
+        <translation>Авто (по умолчанию)</translation>
     </message>
     <message>
         <source>Joint Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Forced Joint Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Simple</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Dual Mono</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Mono</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MP3 Channel Mode:</source>
-        <translation type="unfinished">Тип каналов MP3:</translation>
+        <translation>Тип каналов MP3:</translation>
     </message>
     <message>
         <source>Sampling Rate (Hz):</source>
-        <translation type="unfinished">Частота сэмплинга (Hz):</translation>
+        <translation>Частота сэмплинга (Hz):</translation>
     </message>
     <message>
         <source>16.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>22.050</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>24.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>32.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>44.100</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>48.000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Enable 2-Pass Processing (ABR Mode)</source>
-        <translation type="unfinished">2-х проходное кодирование (режим ABR)</translation>
+        <translation>2-х проходное кодирование (режим ABR)</translation>
     </message>
     <message>
         <source>Select AAC Profile:</source>
-        <translation type="unfinished">Профиль AAC:</translation>
+        <translation>Профиль AAC:</translation>
     </message>
     <message>
         <source>Auto Select (Recommended)</source>
-        <translation type="unfinished">Авто (Рекомендуется)</translation>
+        <translation>Авто (Рекомендуется)</translation>
     </message>
     <message>
         <source>Enforce LC-AAC</source>
-        <translation type="unfinished">LC-AAC</translation>
+        <translation>LC-AAC</translation>
     </message>
     <message>
         <source>Enforce HE-AAC (AAC + SBR)</source>
-        <translation type="unfinished">HE-AAC (AAC + SBR)</translation>
+        <translation>HE-AAC (AAC + SBR)</translation>
     </message>
     <message>
         <source>Enforce HE-AAC v2 (AAC + SBR + PS)</source>
-        <translation type="unfinished">HE-AAC v2 (AAC + SBR + PS)</translation>
+        <translation>HE-AAC v2 (AAC + SBR + PS)</translation>
     </message>
     <message>
         <source> Volume Normalization </source>
-        <translation type="unfinished">Нормализация громкости</translation>
+        <translation>Нормализация громкости</translation>
     </message>
     <message>
         <source>Enable Normalization Filter</source>
-        <translation type="unfinished">Фильтр нормализации</translation>
+        <translation>Фильтр нормализации</translation>
     </message>
     <message>
         <source>Peak Volume (dB):</source>
-        <translation type="unfinished">Пиковая громкость (dB):</translation>
+        <translation>Пиковая громкость (dB):</translation>
     </message>
     <message>
         <source> Tone Adjustment </source>
-        <translation type="unfinished">Корректировка тона</translation>
+        <translation>Корректировка тона</translation>
     </message>
     <message>
         <source>Adjust Treble (dB):</source>
-        <translation type="unfinished">Высокие частоты (dB):</translation>
+        <translation>Высокие частоты (dB):</translation>
     </message>
     <message>
         <source>Adjust Bass (dB):</source>
-        <translation type="unfinished">Низкие частоты (dB):</translation>
+        <translation>Низкие частоты (dB):</translation>
     </message>
     <message>
         <source> Custom Encoder Parameters </source>
-        <translation type="unfinished">Пользовательские параметры</translation>
+        <translation>Пользовательские параметры</translation>
     </message>
     <message>
         <source>OggEnc2:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>FLAC:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
-        <translation type="unfinished">Предупреждение: Пользовательские параметры не будут проверены вообще. Используйте их на ваш собственный риск!!!</translation>
+        <translation>Предупреждение: Пользовательские параметры не будут проверены вообще. Используйте их на ваш собственный риск!!!</translation>
     </message>
     <message>
         <source>Reset Advanced Options </source>
-        <translation type="unfinished">Сбросить расширенные опции</translation>
+        <translation>Сбросить расширенные опции</translation>
     </message>
     <message>
         <source> Encode Now!</source>
-        <translation type="unfinished">Кодировать сейчас!</translation>
+        <translation>Кодировать сейчас!</translation>
     </message>
     <message>
         <source>About...</source>
-        <translation type="unfinished">О программе...</translation>
+        <translation>О программе...</translation>
     </message>
     <message>
         <source> Exit Program</source>
-        <translation type="unfinished">Выйти из программы</translation>
+        <translation>Выйти из программы</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>?</source>
-        <translation type="unfinished">?</translation>
+        <translation>?</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Вид</translation>
+        <translation>Вид</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Стиль</translation>
+        <translation>Стиль</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Язык</translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished">Инструменты</translation>
+        <translation>Инструменты</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Конфигурация</translation>
+        <translation>Конфигурация</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished">Выход</translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <source>Open File(s)...</source>
-        <translation type="unfinished">Открыть файлы...</translation>
+        <translation>Открыть файл(ы)...</translation>
     </message>
     <message>
         <source>Visit Official Web-Site</source>
-        <translation type="unfinished">Посетить официальный сайт</translation>
+        <translation>Посетить официальный сайт</translation>
     </message>
     <message>
         <source>Check for Updates</source>
-        <translation type="unfinished">Проверить обновления</translation>
+        <translation>Проверить обновления</translation>
     </message>
     <message>
         <source>Open Folder...</source>
-        <translation type="unfinished">Открыть папку...</translation>
+        <translation>Открыть папку...</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation type="unfinished">Очистить всё</translation>
+        <translation>Очистить всё</translation>
     </message>
     <message>
         <source>Plastique</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Cleanlooks</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Windows Vista (&quot;Aero&quot;)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Windows Classic</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Windows XP (&quot;Luna&quot;)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Disable Update Reminder</source>
-        <translation type="unfinished">Отключить напоминание об обновлениях</translation>
+        <translation>Отключить напоминание об обновлениях</translation>
     </message>
     <message>
         <source>Disable Sound Effects</source>
-        <translation type="unfinished">Отключить звуковые эффекты</translation>
+        <translation>Отключить звуковые эффекты</translation>
     </message>
     <message>
         <source>Install WMA Decoder</source>
-        <translation type="unfinished">Установить WMA декодер</translation>
+        <translation>Установить WMA декодер</translation>
     </message>
     <message>
         <source>Disable Nero AAC Notifications</source>
-        <translation type="unfinished">Отключить сообщения Nero AAC</translation>
+        <translation>Отключить сообщения Nero AAC</translation>
     </message>
     <message>
         <source>Show DropBox</source>
-        <translation type="unfinished">Показать DropBox</translation>
+        <translation>Показать DropBox</translation>
     </message>
     <message>
         <source>From File...</source>
-        <translation type="unfinished">Из файла...</translation>
+        <translation>Из файла...</translation>
     </message>
     <message>
         <source>Encode!</source>
-        <translation type="unfinished">Кодировать!</translation>
+        <translation>Кодировать!</translation>
     </message>
     <message>
         <source>Disable Shell Integration</source>
-        <translation type="unfinished">Отключить интеграцию в контекстное меню</translation>
+        <translation>Отключить интеграцию в контекстное меню</translation>
     </message>
     <message>
         <source>Open Folder Recursively...</source>
-        <translation type="unfinished">Открытие папок рекурсивно...</translation>
+        <translation>Открытие папок рекурсивно...</translation>
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
-        <translation type="unfinished">Добавляю файлы, пожалуйста ожидайте...</translation>
+        <translation>Добавляю файлы, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Access Denied</source>
-        <translation type="unfinished">Доступ запрещён</translation>
+        <translation>Доступ запрещён</translation>
     </message>
     <message>
         <source>This usually means the file is locked by another process.</source>
-        <translation type="unfinished">Это обычно означает, что файл блокируется другим процессом.</translation>
+        <translation>Это обычно означает, что файл блокируется другим процессом.</translation>
     </message>
     <message>
         <source>Files Rejected</source>
-        <translation type="unfinished">Отклоненные файлы</translation>
+        <translation>Отклоненные файлы</translation>
     </message>
     <message>
         <source>This usually means the file is damaged or the file format is not supported.</source>
-        <translation type="unfinished">Это обычно означает, что файл поврежден, или формат файла не поддерживается.</translation>
+        <translation>Это обычно означает, что файл поврежден, или формат файла не поддерживается.</translation>
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished">Поиск файлов, пожалуйста, подождите...</translation>
+        <translation>Поиск файлов, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1114,112 +1114,112 @@
     </message>
     <message>
         <source>Postpone</source>
-        <translation type="unfinished">Отложить</translation>
+        <translation>Отложить</translation>
     </message>
     <message>
         <source>You can drop in audio files here!</source>
-        <translation type="unfinished">Можете перетащить аудио файлы сюда!</translation>
+        <translation>Можете перетащить аудио файлы сюда!</translation>
     </message>
     <message>
         <source>Open File in External Application</source>
-        <translation type="unfinished">Открыть файл в другой программе</translation>
+        <translation>Открыть файл в другой программе</translation>
     </message>
     <message>
         <source>Browse File Location</source>
-        <translation type="unfinished">Показать папку файла</translation>
+        <translation>Показать папку файла</translation>
     </message>
     <message>
         <source>Browse Selected Folder</source>
-        <translation type="unfinished">Показать выделенную папку</translation>
+        <translation>Показать выделенную папку</translation>
     </message>
     <message>
         <source>License Declined</source>
-        <translation type="unfinished">Лицензия отклонена</translation>
+        <translation>Лицензия отклонена</translation>
     </message>
     <message>
         <source>You have declined the license. Consequently the application will exit now!</source>
-        <translation type="unfinished">Вы отклонили лицензию. Следовательно приложение отключится сейчас!</translation>
+        <translation>Вы отклонили лицензию. Следовательно приложение сейчас закроется!</translation>
     </message>
     <message>
         <source>Goodbye!</source>
-        <translation type="unfinished">Пока!</translation>
+        <translation>Пока!</translation>
     </message>
     <message>
         <source>LameXP - Expired</source>
-        <translation type="unfinished">LameXP - пробный период окончен</translation>
+        <translation>LameXP - пробный период истёк</translation>
     </message>
     <message>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translation type="unfinished">Этот демонстрационный пример (предварительный выпуск) версии LameXP истек в %1.</translation>
+        <translation>Эта демонстрационная версия (предварительный выпуск) LameXP истекла в %1.</translation>
     </message>
     <message>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
         <translatorcomment>пределать</translatorcomment>
-        <translation type="unfinished">LameXP является бесплатным программным обеспечением, и релизные версии  не будут истекать.</translation>
+        <translation>LameXP это бесплатное ПО, и релизные версии не ограничены по сроку использования.</translation>
     </message>
     <message>
         <source>Exit Program</source>
-        <translation type="unfinished">Выйти из программы</translation>
+        <translation>Выйти из программы</translation>
     </message>
     <message>
         <source>Urgent Update</source>
-        <translation type="unfinished">Срочное Обновление</translation>
+        <translation>Срочное Обновление</translation>
     </message>
     <message>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
-        <translation type="unfinished">Вашей версии LameXP больше года. Время для обновления!</translation>
+        <translation>Вашей версии LameXP больше года. Время для обновления!</translation>
     </message>
     <message>
         <source>Update Reminder</source>
-        <translation type="unfinished">Напоминание о обновлении</translation>
+        <translation>Напоминание о обновлении</translation>
     </message>
     <message>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
-        <translation type="unfinished">Ваша проверка последнего обновления была больше чем 14 дней назад. Проверьте на обновления сейчас?</translation>
+        <translation>Проверка обновлений была больше чем 14 дней назад. Проверить на обновления сейчас?</translation>
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation type="unfinished">Вы еще не проверяли обновления LameXP. Проверить обновления сейчас?</translation>
+        <translation>Вы еще не проверяли обновления LameXP. Проверить обновления сейчас?</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
-        <translation type="unfinished">LameXP обнаружил, что Ваша версия кодера Nero AAC является устаревшей!</translation>
+        <translation>LameXP обнаружил, что Ваша версия кодера Nero AAC является устаревшей!</translation>
     </message>
     <message>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
-        <translation type="unfinished">Текущая версия %1 (или новее), но Вам все еще используется версия %2.</translation>
+        <translation>Текущая версия %1 (или новее), но Вами все еще используется версия %2.</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished">н/д</translation>
+        <translation>н/д</translation>
     </message>
     <message>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation type="unfinished">Можно загрузить самую последнюю версию кодера Nero AAC  с веб-сайта Nero здесь:</translation>
+        <translation>Можно загрузить самую последнюю версию кодера Nero AAC  с веб-сайта Nero здесь:</translation>
     </message>
     <message>
         <source>AAC Encoder Outdated</source>
-        <translation type="unfinished">Кодер AAC устарел</translation>
+        <translation>Кодер AAC устарел</translation>
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation type="unfinished">Кодер Nero AAC не найден. Поддержка кодирования AAC будет отключена.</translation>
+        <translation>Кодер Nero AAC не найден. Поддержка кодирования AAC будет отключена.</translation>
     </message>
     <message>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation type="unfinished">Пожалуйста, поместите &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; и &apos;neroAacTag.exe&apos; в каталог LameXP!</translation>
+        <translation>Пожалуйста, поместите &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; и &apos;neroAacTag.exe&apos; в папку LameXP!</translation>
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
-        <translation type="unfinished">Ваш каталог LameXP располагается здесь:</translation>
+        <translation>Ваша папка LameXP располагается здесь:</translation>
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation type="unfinished">Можно загрузить кодер Nero AAC бесплатно с официального веб-сайта Nero здесь:</translation>
+        <translation>Можно бесплатно загрузить кодер Nero AAC с официального веб-сайта Nero здесь:</translation>
     </message>
     <message>
         <source>AAC Support Disabled</source>
-        <translation type="unfinished">Поддержка AAC отключена</translation>
+        <translation>Поддержка AAC отключена</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -1227,649 +1227,649 @@
     </message>
     <message>
         <source>You must add at least one file to the list before proceeding!</source>
-        <translation type="unfinished">Следует добавить по крайней мере один файл к списку перед продолжением!</translation>
+        <translation>Следует добавить по крайней мере один файл к списку перед продолжением!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
-        <translation type="unfinished">Предупреждение: Мало свободного места на диске</translation>
+        <translation>Предупреждение: Мало свободного места на диске</translation>
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translatorcomment>улучшить</translatorcomment>
-        <translation type="unfinished">Доступно меньше чем %1 Гбайт свободного пространства на диске.</translation>
+        <translation>Во временной папке доступно меньше %1 Гбайт свободного дискового пространства.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
-        <translation type="unfinished">Настоятельно рекомендуется освободить больше дискового пространства перед продолжением кодирования!</translation>
+        <translation>Настоятельно рекомендуется освободить больше дискового пространства перед продолжением!</translation>
     </message>
     <message>
         <source>Your TEMP folder is located at:</source>
-        <translation type="unfinished">Ваш ВРЕМЕННАЯ папка располагается в:</translation>
+        <translation>Ваша ВРЕМЕННАЯ папка располагается в:</translation>
     </message>
     <message>
         <source>Abort Encoding Process</source>
-        <translation type="unfinished">Прервать процесс кодирования</translation>
+        <translation>Прервать процесс кодирования</translation>
     </message>
     <message>
         <source>Clean Disk Now</source>
-        <translation type="unfinished">Очистить диск сейчас</translation>
+        <translation>Очистить диск сейчас</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">Игнорировать</translation>
+        <translation>Игнорировать</translation>
     </message>
     <message>
         <source>Low Diskspace</source>
-        <translation type="unfinished">Свободное место на диске заканчивается</translation>
+        <translation>Свободное место на диске заканчивается</translation>
     </message>
     <message>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
-        <translation type="unfinished">Вы решили продолжить в условиях недостаточного свободного места на диске. Могут возникнуть проблемы!</translation>
+        <translation>Вы решили продолжить в условиях недостаточного свободного места на диске. Могут быть проблемы!</translation>
     </message>
     <message>
         <source>Sorry, an unsupported encoder has been chosen!</source>
-        <translation type="unfinished">Извините, неподдерживаемый кодер был выбран!</translation>
+        <translation>Извините, был выбран неподдерживаемый кодер!</translation>
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation type="unfinished">Не могу записать в выбранню папку.</translation>
+        <translation>Не могу записать в выбранню папку.</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
-        <translation type="unfinished">Выберите другую директорию!</translation>
+        <translation>Выберите другую папку!</translation>
     </message>
     <message>
         <source>Add file(s)</source>
-        <translation type="unfinished">Добавить файлы</translation>
+        <translation>Добавить файл(ы)</translation>
     </message>
     <message>
         <source>Load Translation</source>
-        <translation type="unfinished">Загрузить первод</translation>
+        <translation>Загрузить перевод</translation>
     </message>
     <message>
         <source>Translation Files</source>
-        <translation type="unfinished">Файлы локализаций</translation>
+        <translation>Файлы локализаций</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">Новая папка</translation>
+        <translation>Новая папка</translation>
     </message>
     <message>
         <source>Enter the name of the new folder:</source>
-        <translation type="unfinished">Введите имя новой папки:</translation>
+        <translation>Введите имя новой папки:</translation>
     </message>
     <message>
         <source>Failed to create folder</source>
-        <translation type="unfinished">Не могу создать папку</translation>
+        <translation>Не могу создать папку</translation>
     </message>
     <message>
         <source>The new folder could not be created:</source>
-        <translation type="unfinished">Не могу создать новую папку:</translation>
+        <translation>Не могу создать новую папку:</translation>
     </message>
     <message>
         <source>Drive is read-only or insufficient access rights!</source>
-        <translation type="unfinished">Недостаточно прав для записи на диск!</translation>
+        <translation>Диск только для чтения или недостаточно прав для записи!</translation>
     </message>
     <message>
         <source>Already Running</source>
-        <translation type="unfinished">Уже запущено</translation>
+        <translation>Уже запущено</translation>
     </message>
     <message>
         <source>LameXP is already running, please use the running instance!</source>
-        <translation type="unfinished">LameXP уже запущена, пожалуйста, используйте запущенную копию программы!</translation>
+        <translation>LameXP уже запущена, пожалуйста, используйте запущенную копию программы!</translation>
     </message>
     <message>
         <source>Quality Level %1</source>
-        <translation type="unfinished">Уровень качества %1</translation>
+        <translation>Уровень качества %1</translation>
     </message>
     <message>
         <source>Compression %1</source>
-        <translation type="unfinished">Сжатие %1</translation>
+        <translation>Сжатие %1</translation>
     </message>
     <message>
         <source>Uncompressed</source>
-        <translation type="unfinished">Несжатый</translation>
+        <translation>Несжатый</translation>
     </message>
     <message>
         <source>High Quality (Recommended)</source>
-        <translation type="unfinished">Высокое качество (рекомендуется)</translation>
+        <translation>Высокое качество (рекомендуется)</translation>
     </message>
     <message>
         <source>Poor Quality (Very Fast)</source>
-        <translation type="unfinished">Плохое качество (Очень быстро)</translation>
+        <translation>Плохое качество (Очень быстро)</translation>
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
-        <translation type="unfinished">Вы действительно хотите отключить напоминание об обновлениях?</translation>
+        <translation>Вы действительно хотите отключить напоминание об обновлениях?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>The update reminder has been disabled.</source>
-        <translation type="unfinished">Напоминаие об обновлениях отключено.</translation>
+        <translation>Напоминание об обновлениях отключено.</translation>
     </message>
     <message>
         <source>Please remember to check for updates at regular intervals!</source>
-        <translation type="unfinished">Не забыйвайте периодически проверять обновления!</translation>
+        <translation>Не забыйвайте периодически проверять обновления!</translation>
     </message>
     <message>
         <source>The update reminder has been re-enabled.</source>
-        <translation type="unfinished">Напоминаие об обновлениях включено.</translation>
+        <translation>Напоминание об обновлениях включено.</translation>
     </message>
     <message>
         <source>Do you really want to disable all sound effects?</source>
-        <translation type="unfinished">Вы действительно хотите отключить все звуковые эффекты?</translation>
+        <translation>Вы действительно хотите отключить все звуковые эффекты?</translation>
     </message>
     <message>
         <source>Sound Effects</source>
-        <translation type="unfinished">Звуковые эффекты</translation>
+        <translation>Звуковые эффекты</translation>
     </message>
     <message>
         <source>All sound effects have been disabled.</source>
-        <translation type="unfinished">Все звуковые эффекты отключены.</translation>
+        <translation>Все звуковые эффекты отключены.</translation>
     </message>
     <message>
         <source>The sound effects have been re-enabled.</source>
-        <translation type="unfinished">Звуковые эффекты включены.</translation>
+        <translation>Звуковые эффекты включены.</translation>
     </message>
     <message>
         <source>Nero AAC Notifications</source>
-        <translation type="unfinished">Напоминания о Nero AAC</translation>
+        <translation>Напоминания о Nero AAC</translation>
     </message>
     <message>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
-        <translation type="unfinished">Вы действительно хотите отключить все уведомления о кодере Nero AAC?</translation>
+        <translation>Вы действительно хотите отключить все уведомления о кодере Nero AAC?</translation>
     </message>
     <message>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
-        <translation type="unfinished">Все уведомления о кодере Nero AAC были отключены.</translation>
+        <translation>Все уведомления о кодере Nero AAC были отключены.</translation>
     </message>
     <message>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
-        <translation type="unfinished">Все уведомления о кодере Nero AAC были включены.</translation>
+        <translation>Все уведомления о кодере Nero AAC были включены.</translation>
     </message>
     <message>
         <source>Shell Integration</source>
-        <translation type="unfinished">Интеграция в контекстное меню</translation>
+        <translation>Интеграция в контекстное меню</translation>
     </message>
     <message>
         <source>Do you really want to disable the LameXP shell integration?</source>
-        <translation type="unfinished">Вы действительно хотите отключить интегрирование LameXP в оболочку Windows?</translation>
+        <translation>Вы действительно хотите отключить интеграцию LameXP в оболочку Windows?</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been disabled.</source>
-        <translation type="unfinished">Интегрирование в контекстное меню отключено.</translation>
+        <translation>Интеграция в контекстное меню отключена.</translation>
     </message>
     <message>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation type="unfinished">Интегрирование в контекстное меню включено.</translation>
+        <translation>Интеграция в контекстное меню включена.</translation>
     </message>
     <message>
         <source> Multi-Threading </source>
-        <translation type="unfinished">Многопоточность</translation>
+        <translation>Многопоточность</translation>
     </message>
     <message>
         <source>Choose the number of parallel instances based on the number of CPU cores (Recommended)</source>
-        <translation type="unfinished">Определять число параллельных потоков по числу ядер процессора (Рекомендуется)</translation>
+        <translation>Определять число параллельных потоков по числу ядер процессора (Рекомендуется)</translation>
     </message>
     <message>
         <source>Fewer Instances</source>
-        <translation type="unfinished">Меньше потоков</translation>
+        <translation>Меньше потоков</translation>
     </message>
     <message>
         <source>More Instances</source>
-        <translation type="unfinished">Больше потоков</translation>
+        <translation>Больше потоков</translation>
     </message>
     <message>
         <source> Temp Directory </source>
-        <translation type="unfinished">Временная папка</translation>
+        <translation>Временная папка</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished">Выбрать...</translation>
+        <translation>Выбрать...</translation>
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation type="unfinished">Хранить временные файлы в системной директории по умолчанию (Рекомендуется)</translation>
+        <translation>Хранить временные файлы в системной папке по умолчанию (Рекомендуется)</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished">Не найдено</translation>
+        <translation>Не найдено</translation>
     </message>
     <message>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
-        <translation type="unfinished">Выбранная директория для хранения временных файлов больше не существует:</translation>
+        <translation>Выбранная папка для хранения временных файлов больше не существует:</translation>
     </message>
     <message>
         <source>Restore Default</source>
-        <translation type="unfinished">Востановить умолчания</translation>
+        <translation>Востановить умолчания</translation>
     </message>
     <message>
         <source>Add Folder</source>
-        <translation type="unfinished">Добавить папку</translation>
+        <translation>Добавить папку</translation>
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation type="unfinished">Директория недоступна для записи. Пожалуйса, выберите другую директорию!</translation>
+        <translation>Папка недоступна для записи. Пожалуйста, выберите другую папку!</translation>
     </message>
     <message>
         <source>We recommend using %1 for that purpose.</source>
-        <translation type="unfinished">Рекомендуем исползовать %1 для этих целей.</translation>
+        <translation>Рекомендуем использовать %1 для этих целей.</translation>
     </message>
     <message>
         <source>Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.</source>
-        <translation type="unfinished">Извините, LameXP неможет извлечь аудио из Audio-CD сейчас.</translation>
+        <translation>Извините, LameXP не может извлечь аудио из Audio-CD сейчас.</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
-        <translation type="unfinished">Часто Задаваемые Вопросы</translation>
+        <translation>Часто Задаваемые Вопросы</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="unfinished">Список изменений</translation>
+        <translation>Список изменений</translation>
     </message>
     <message>
         <source>Translator&apos;s Guide</source>
-        <translation type="unfinished">Руководство перевдчика</translation>
+        <translation>Руководство перевдчика</translation>
     </message>
     <message>
         <source>Help &amp;&amp; Support</source>
-        <translation type="unfinished">Помощиь и поддержка</translation>
+        <translation>Помощь и поддержка</translation>
     </message>
     <message>
         <source>Check for Beta Updates</source>
-        <translation type="unfinished">Поиск БЕТА версий</translation>
+        <translation>Поиск БЕТА версий</translation>
     </message>
     <message>
         <source>Beta Updates</source>
-        <translation type="unfinished">БЕТА обновления</translation>
+        <translation>БЕТА обновления</translation>
     </message>
     <message>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation type="unfinished">Вы действительно хотите проверить наличие БЕТА (пред-релизных) обновлений?</translation>
+        <translation>Вы действительно хотите проверить наличие БЕТА (пред-релизных) обновлений?</translation>
     </message>
     <message>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished">LameXP бует проверять наличие БЕТА (пред-релизных) обновлений.</translation>
+        <translation>LameXP будет проверять наличие БЕТА (пред-релизных) обновлений.</translation>
     </message>
     <message>
         <source>Check Now</source>
-        <translation type="unfinished">Проверить сейчас</translation>
+        <translation>Проверить сейчас</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation type="unfinished">LameXP не бует &lt;i&gt;проверять&lt;/i&gt; наличие БЕТА (пред-релизных) обновлений.</translation>
+        <translation>LameXP не будет &lt;i&gt;проверять&lt;/i&gt; наличие БЕТА (пред-релизных) обновлений.</translation>
     </message>
     <message>
         <source>Lame MP3:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Aften A/52:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> Aften A/52 Options </source>
-        <translation type="unfinished">Параметры кодера Aften A/52</translation>
+        <translation>Параметры кодера Aften A/52</translation>
     </message>
     <message>
         <source>Film Light</source>
-        <translation type="unfinished">Фильм Light</translation>
+        <translation>Фильм Light</translation>
     </message>
     <message>
         <source>Film Standard</source>
-        <translation type="unfinished">Фильм Standard</translation>
+        <translation>Фильм Standard</translation>
     </message>
     <message>
         <source>Music Light</source>
-        <translation type="unfinished">Музыка Light</translation>
+        <translation>Музыка Light</translation>
     </message>
     <message>
         <source>Music Standard</source>
-        <translation type="unfinished">Музыка Standard</translation>
+        <translation>Музыка Standard</translation>
     </message>
     <message>
         <source>Speech</source>
-        <translation type="unfinished">Речь</translation>
+        <translation>Речь</translation>
     </message>
     <message>
         <source>None (Default)</source>
-        <translation type="unfinished">Нет (по умолчанию)</translation>
+        <translation>Нет (по умолчанию)</translation>
     </message>
     <message>
         <source>Auto Select</source>
-        <translation type="unfinished">Авто</translation>
+        <translation>Авто</translation>
     </message>
     <message>
         <source>1+1 (Ch1,Ch2)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1/0 (C)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>2/0 (L,R)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>3/0 (L,R,C)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>2/1 (L,R,S)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>3/1 (L,R,C,S)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>2/2 (L,R,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>3/2 (L,R,C,SL,SR)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Audio Coding Mode:</source>
-        <translation type="unfinished">Режим кодирования:</translation>
+        <translation>Режим кодирования:</translation>
     </message>
     <message>
         <source>Dynamic Range Compression:</source>
-        <translation type="unfinished">Сжатие динамического диапазона:</translation>
+        <translation>Сжатие динамического диапазона:</translation>
     </message>
     <message>
         <source>Fast Bit Allocation (Less Accurate)</source>
-        <translation type="unfinished">Быстрое распределение битрейта</translation>
+        <translation>Быстрое распределение битрейта</translation>
     </message>
     <message>
         <source>Exponent Search Size:</source>
-        <translation type="unfinished">Размер области поиска:</translation>
+        <translation>Размер области поиска:</translation>
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished">Больше не показывать</translation>
+        <translation>Больше не показывать</translation>
     </message>
     <message>
         <source>Import Cue Sheet</source>
-        <translation type="unfinished">Импортировать CUE плэйлист</translation>
+        <translation>Импортировать CUE плэйлист</translation>
     </message>
     <message>
         <source>Open Cue Sheet</source>
-        <translation type="unfinished">Открыть CUE плэйлист</translation>
+        <translation>Открыть CUE плэйлист</translation>
     </message>
     <message>
         <source>Cue Sheet File</source>
-        <translation type="unfinished"> CUE плэйлист</translation>
+        <translation> CUE плэйлист</translation>
     </message>
     <message>
         <source>CDDA Files</source>
-        <translation type="unfinished">Файлы CDDA</translation>
+        <translation>Файлы CDDA</translation>
     </message>
     <message>
         <source>Cue Sheet</source>
-        <translation type="unfinished">CUE плэйлист</translation>
+        <translation>CUE плэйлист</translation>
     </message>
     <message>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
         <translatorcomment>пиздец бред</translatorcomment>
-        <translation type="unfinished">Пожалуйста используйте Мастер импорта CUE файлов для импорта CUE файлов.</translation>
+        <translation>Пожалуйста, используйте инструмент импорта CUE плэйлистов для добавления CUE файлов.</translation>
     </message>
     <message>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation type="unfinished">По видимому, антивирусное ПО замедляет запуск LameXP.</translation>
+        <translation>По видимому, антивирусное ПО замедляет запуск LameXP.</translation>
     </message>
     <message>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished">Пожалуйста прочтите %1 !</translation>
+        <translation>Пожалуйста прочтите %1 !</translation>
     </message>
     <message>
         <source>Slow Startup</source>
-        <translation type="unfinished">Замедление запуска</translation>
+        <translation>Замедление запуска</translation>
     </message>
     <message>
         <source>Disable Slow Startup Notifications</source>
-        <translation type="unfinished">Отключить уведомления о медленном запуске</translation>
+        <translation>Отключить уведомления о медленном запуске</translation>
     </message>
     <message>
         <source>Slow Startup Notifications</source>
-        <translation type="unfinished">Уведомления о медленном запуске</translation>
+        <translation>Уведомления о медленном запуске</translation>
     </message>
     <message>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation type="unfinished">Вы хотите отключить уведомления о медленном запуске?</translation>
+        <translation>Вы хотите отключить уведомления о медленном запуске?</translation>
     </message>
     <message>
         <source>The slow startup notifications have been disabled.</source>
-        <translation type="unfinished">Уведомления о медленном запуске отключены.</translation>
+        <translation>Уведомления о медленном запуске отключены.</translation>
     </message>
     <message>
         <source>The slow startup notifications have been re-enabled.</source>
-        <translation type="unfinished">Уведомления о медленном запуске включены.</translation>
+        <translation>Уведомления о медленном запуске включены.</translation>
     </message>
     <message>
         <source> Rename Output Files </source>
-        <translation type="unfinished">Переименование выходных файлов</translation>
+        <translation>Переименование выходных файлов</translation>
     </message>
     <message>
         <source>Rename Output Files</source>
-        <translation type="unfinished">Переименовывать файлы</translation>
+        <translation>Переименовывать файлы</translation>
     </message>
     <message>
         <source>Track number with leading zero</source>
-        <translation type="unfinished">Номер трека</translation>
+        <translation>Номер трэка</translation>
     </message>
     <message>
         <source>Track title</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Artist name</source>
-        <translation type="unfinished">Исполнитель</translation>
+        <translation>Исполнитель</translation>
     </message>
     <message>
         <source>Album name</source>
-        <translation type="unfinished">Альбом</translation>
+        <translation>Альбом</translation>
     </message>
     <message>
         <source>Year with (at least) four digits</source>
-        <translation type="unfinished">Год (4 цифры)</translation>
+        <translation>Год (4 цифры)</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Комментарий</translation>
+        <translation>Комментарий</translation>
     </message>
     <message>
         <source>Rename Macros</source>
-        <translation type="unfinished">Список переменных</translation>
+        <translation>Список переменных</translation>
     </message>
     <message>
         <source>You can enter custom parameters here!</source>
-        <translation type="unfinished">Вы можете здесь ввести дополнительные параметры!</translation>
+        <translation>Вы можете здесь ввести дополнительные параметры!</translation>
     </message>
     <message>
         <source>Enter the pattern to rename the output files here!</source>
-        <translation type="unfinished">Введите шаблон переименования выходных файлов!</translation>
+        <translation>Введите шаблон переименования выходных файлов!</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;a href=&quot;reset&quot;&gt;Сброс&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Переменные&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;reset&quot;&gt;Сброс&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Переменные&lt;/a&gt;</translation>
     </message>
     <message>
         <source>File name without extension</source>
-        <translation type="unfinished">Файл без расширения</translation>
+        <translation>Файл без расширения</translation>
     </message>
     <message>
         <source>Rename Pattern:</source>
-        <translation type="unfinished">Шаблон переименования:</translation>
+        <translation>Шаблон переименования:</translation>
     </message>
     <message>
         <source>Example File Name:</source>
-        <translation type="unfinished">Пример:</translation>
+        <translation>Пример:</translation>
     </message>
     <message>
         <source>Characters forbidden in file names:</source>
-        <translation type="unfinished">Недопустимые символы:</translation>
+        <translation>Недопустимые символы:</translation>
     </message>
     <message>
         <source>Enforce Stereo Downmix of Surround (Multi-Channel) Sources</source>
-        <translation type="unfinished">Преобразовывать многоканальный источник в Стерео</translation>
+        <translation>Преобразовывать многоканальный источник в Стерео</translation>
     </message>
     <message>
         <source>Bookmark Current Output Folder</source>
-        <translation type="unfinished">Запомнить текущую выходную папку</translation>
+        <translation>Запомнить текущую выходную папку</translation>
     </message>
     <message>
         <source>AAC Encoder-Options</source>
-        <translation type="unfinished">Параметры кодера AAC</translation>
+        <translation>Параметры кодера AAC</translation>
     </message>
     <message>
         <source>MPEG-4 AAC:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation type="unfinished">Предупреждение: Качество звука будет очень плохим!</translation>
+        <translation>Предупреждение: Качество звука будет очень плохим!</translation>
     </message>
     <message>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished">Предупреждение: Преобразование будет идти очень медленно!</translation>
+        <translation>Предупреждение: Преобразование будет идти очень медленно!</translation>
     </message>
     <message>
         <source>Peak Level</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>RMS Level</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Equalization Mode:</source>
-        <translation type="unfinished">Режим эквалайзера:</translation>
+        <translation>Режим эквалайзера:</translation>
     </message>
     <message>
         <source>DEMO VERSION</source>
-        <translation type="unfinished">ДЕМО ВЕРСИЯ</translation>
+        <translation>ДЕМО ВЕРСИЯ</translation>
     </message>
     <message>
         <source>Hibernate Computer On Shutdown</source>
-        <translation type="unfinished">Гибернация компьютера при выключении</translation>
+        <translation>Гибернация компьютера при выключении</translation>
     </message>
     <message>
         <source>Hibernate Computer</source>
-        <translation type="unfinished">Гибернация компьютера</translation>
+        <translation>Гибернация компьютера</translation>
     </message>
     <message>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation type="unfinished">Переводить компьютер в состояние гибернации при выключении?</translation>
+        <translation>Переводить компьютер в состояние гибернации при выключении?</translation>
     </message>
     <message>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished">LameXP  переведёт компьютер в состояние гибернации при выключении.</translation>
+        <translation>LameXP  переведёт компьютер в состояние гибернации при выключении.</translation>
     </message>
     <message>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation type="unfinished">LameXP &lt;i&gt;НЕ&lt;/i&gt; переведёт компьютер в состояние гибернации при выключении.</translation>
+        <translation>LameXP &lt;i&gt;НЕ&lt;/i&gt; переведёт компьютер в состояние гибернации при выключении.</translation>
     </message>
     <message>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
-        <translation type="unfinished">(Подсказка: Пожалуйста игнорируйте имя загруженного ZIP-файла и проверьте &apos;changelog.txt&apos;)</translation>
+        <translation>(Подсказка: Пожалуйста игнорируйте имя загруженного ZIP-файла и проверьте &apos;changelog.txt&apos;)</translation>
     </message>
     <message>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished">Пропуск проверки обновлений, пожалуйста подождите...</translation>
+        <translation>Пропуск проверки обновлений, пожалуйста подождите...</translation>
     </message>
     <message>
         <source>Export Meta Tags to CSV File</source>
-        <translation type="unfinished">Экспорт Meta-тегов в файл CSV</translation>
+        <translation>Экспорт Meta-тегов в файл CSV</translation>
     </message>
     <message>
         <source>Import Meta Tags from CSV File</source>
-        <translation type="unfinished">Испорт Meta-теги из файла CSV</translation>
+        <translation>Импорт Meta-тегов из файла CSV</translation>
     </message>
     <message>
         <source>Save CSV file</source>
-        <translation type="unfinished">Сохранить файл CSV</translation>
+        <translation>Сохранить файл CSV</translation>
     </message>
     <message>
         <source>CSV File</source>
-        <translation type="unfinished">CSV файл</translation>
+        <translation>CSV файл</translation>
     </message>
     <message>
         <source>CSV Export</source>
-        <translation type="unfinished">CSV Экспорт</translation>
+        <translation>CSV Экспорт</translation>
     </message>
     <message>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation type="unfinished">Meta-теги, которые могут быть экспортированы, отсутствуют!</translation>
+        <translation>Meta-теги, которые могут быть экспортированы, отсутствуют!</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation type="unfinished">Ошибка открытия файла CSV для записи!</translation>
+        <translation>Ошибка открытия файла CSV для записи!</translation>
     </message>
     <message>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation type="unfinished">Ошибка записи файла CSV!</translation>
+        <translation>Ошибка записи файла CSV!</translation>
     </message>
     <message>
         <source>The CSV files was created successfully!</source>
-        <translation type="unfinished">Файл CSV был успешно создан!</translation>
+        <translation>Файл CSV был успешно создан!</translation>
     </message>
     <message>
         <source>Open CSV file</source>
-        <translation type="unfinished">Открыть файл CSV</translation>
+        <translation>Открыть файл CSV</translation>
     </message>
     <message>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation type="unfinished">Ошибка открытия файла CSV для чтения!</translation>
+        <translation>Ошибка открытия файла CSV для чтения!</translation>
     </message>
     <message>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation type="unfinished">Ошибка при чтении файла CSV!</translation>
+        <translation>Ошибка при чтении файла CSV!</translation>
     </message>
     <message>
         <source>Sorry, the CSV file does not contain any known fields!</source>
-        <translation type="unfinished">Файл CSV не содержит ни одного известного поля!</translation>
+        <translation>Файл CSV не содержит ни одного известного поля!</translation>
     </message>
     <message>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation type="unfinished">Файл CSV не полный. Обновлены не все файлы!</translation>
+        <translation>Файл CSV не полный. Обновлены не все файлы!</translation>
     </message>
     <message>
         <source>The CSV files was imported successfully!</source>
-        <translation type="unfinished">Файлы CSV успешно импортированы!</translation>
+        <translation>Файлы CSV успешно импортированы!</translation>
     </message>
     <message>
         <source>CSV Import</source>
-        <translation type="unfinished">Импорт CSV</translation>
+        <translation>Импорт CSV</translation>
     </message>
     <message>
         <source>Edit Output Path</source>
-        <translation type="unfinished">Изменить папку выходных файлов</translation>
+        <translation>Изменить папку выходных файлов</translation>
     </message>
     <message>
         <source>Show Favorites</source>
-        <translation type="unfinished">Показать избранные папки</translation>
+        <translation>Показать избранные папки</translation>
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished">Чтение структуры каталогов, пожалуйста ждите...</translation>
+        <translation>Чтение структуры папок, пожалуйста ждите...</translation>
     </message>
     <message>
         <source>Refresh Directory Outline</source>
@@ -1877,167 +1877,167 @@
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg/Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>AAC/MP4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PCM/Wave</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>A/52</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DCA</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Opus</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> Opus Encoder Options </source>
-        <translation type="unfinished">Параметры кодера Opus</translation>
+        <translation>Параметры кодера Opus</translation>
     </message>
     <message>
         <source>Encoding Complexity:</source>
-        <translation type="unfinished">Сложность кодирования:</translation>
+        <translation>Сложность кодирования:</translation>
     </message>
     <message>
         <source>Frame Size:</source>
-        <translation type="unfinished">Размер кадра:</translation>
+        <translation>Размер кадра:</translation>
     </message>
     <message>
         <source>OpusEnc:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Show Help</source>
-        <translation type="unfinished">Справка</translation>
+        <translation>Справка</translation>
     </message>
     <message>
         <source> Overwrite Mode </source>
-        <translation type="unfinished"></translation>
+        <translation> Режим перезаписи</translation>
     </message>
     <message>
         <source>Overwrite Existing File</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезаписать</translation>
     </message>
     <message>
         <source>Skip File</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропустить</translation>
     </message>
     <message>
         <source>Keep Both Files (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить оба (по умолчанию)</translation>
     </message>
     <message>
         <source>If Target File Already Exists:</source>
-        <translation type="unfinished"></translation>
+        <translation>Если файл уже существует:</translation>
     </message>
     <message>
         <source>Overwrite Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Ркжим перезаписи</translation>
     </message>
     <message>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: В этом режиме безвозвратно будут перезаписываться уже существующие файлы, если таковые есть!</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Up One Level</source>
-        <translation type="unfinished"></translation>
+        <translation>На уровень вверх</translation>
     </message>
     <message>
         <source>Go To Parent Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейти в родительскую папку</translation>
     </message>
     <message>
         <source>Disable Opus-Decoder Resampling (i.e. always output as 48.000 Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить преобразование частоты, всегда выводить 48000 Гц</translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because read access was not granted!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл был отколонён поскольку права на чтение не были получены!</numerusform>
+            <numerusform>%n файла были отколонены поскольку права на чтение не были получены!</numerusform>
+            <numerusform>%n файлов было отколонено поскольку права на чтение не были получены!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл был отколонён поскольку это был пустой файл CDDA!</numerusform>
+            <numerusform>%n файл был отколонён поскольку это были пустые файлы CDDA!</numerusform>
+            <numerusform>%n файлов было отколонено поскольку это были пустые файлы CDDA!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because they appear to be Cue Sheet images!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл был отклонён, поскольку он, по всей видимости, образ для Cue плэйлиста!</numerusform>
+            <numerusform>%n файла было отклонёно, поскольку они, по всей видимости, образы для Cue плэйлиста!</numerusform>
+            <numerusform>%n файлов были отклонёны, поскольку они, по всей видимости, образы для Cue плэйлиста!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) have been rejected, because the file format could not be recognized!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл был отклонен, поскольку формат файла не определился!</numerusform>
+            <numerusform>%n файла было отклонено, поскольку формат файлов не определился!</numerusform>
+            <numerusform>%n файлов было отклонено, поскольку формат файлов не определился!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n Instance(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Потоков: %n</numerusform>
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>Best Quality (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Наилучшее качество (Медленно)</translation>
     </message>
     <message>
         <source>Acceptable Quality (Fast)</source>
-        <translation type="unfinished"></translation>
+        <translation>Приемлемое качество (Быстро)</translation>
     </message>
     <message>
         <source>Official LameXP Project Web-Site</source>
-        <translation type="unfinished"></translation>
+        <translation>Официальный сайт проекта LameXP</translation>
     </message>
     <message>
         <source>MuldeR&apos;s OpenSource Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenSource проекты MuldeR&apos;а</translation>
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущий кодер: %1</translation>
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка файлов или папок, пожалуйста, ждите...</translation>
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2056,18 +2056,18 @@
     </message>
     <message>
         <source>Artwork</source>
-        <translation type="unfinished">Обложка</translation>
+        <translation>Обложка</translation>
     </message>
 </context>
 <context>
     <name>MetaInfoDialog</name>
     <message>
         <source>Load Artwork From File</source>
-        <translation type="unfinished">Загрузить обложку из файла</translation>
+        <translation>Загрузить обложку из файла</translation>
     </message>
     <message>
         <source>Clear Artwork</source>
-        <translation type="unfinished">Удалить обложку</translation>
+        <translation>Удалить обложку</translation>
     </message>
     <message>
         <source>Meta Information</source>
@@ -2079,32 +2079,32 @@
     </message>
     <message>
         <source>Load Artwork</source>
-        <translation type="unfinished">Загрузить обложку</translation>
+        <translation>Загрузить обложку</translation>
     </message>
     <message>
         <source>Artwork Error</source>
         <translatorcomment>!!переделать!!</translatorcomment>
-        <translation type="unfinished">Ошибка с обложкой</translation>
+        <translation>Ошибка обложки</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
-        <translation type="unfinished">Извините, не могу загрузить обложку из выбранного файла!</translation>
+        <translation>Извините, не могу загрузить обложку из выбранного файла!</translation>
     </message>
     <message>
         <source>Edit this Information</source>
-        <translation type="unfinished">Редактировать эту информацию</translation>
+        <translation>Редактировать эту информацию</translation>
     </message>
     <message>
         <source>Copy everything to Meta Info tab</source>
-        <translation type="unfinished">Скопировать всё во вкладку Метаинформации</translation>
+        <translation>Скопировать всё во вкладку Метаинформации</translation>
     </message>
     <message>
         <source>Clear all Meta Info</source>
-        <translation type="unfinished">Очистить всю метаинформацию</translation>
+        <translation>Очистить всю метаинформацию</translation>
     </message>
     <message>
         <source>Meta Information: %1</source>
-        <translation type="unfinished">Метаинформация: %1</translation>
+        <translation>Метаинформация: %1</translation>
     </message>
 </context>
 <context>
@@ -2127,7 +2127,7 @@
     </message>
     <message>
         <source>Container</source>
-        <translation type="unfinished">Контейнер</translation>
+        <translation>Контейнер</translation>
     </message>
     <message>
         <source>Compression</source>
@@ -2139,7 +2139,7 @@
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Artist</source>
@@ -2163,7 +2163,7 @@
     </message>
     <message>
         <source>Generate from list position</source>
-        <translation type="unfinished">Генерировать из позиции в списке</translation>
+        <translation>Генерировать из позиции в списке</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -2179,7 +2179,7 @@
     </message>
     <message>
         <source>Unspecified</source>
-        <translation type="unfinished">Не указано</translation>
+        <translation>Не указано</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2199,7 +2199,7 @@
     </message>
     <message>
         <source>The title must not be empty. Generating title from file name!</source>
-        <translation type="unfinished">Заголовок не должен быть пустым. Генерирование заголовка из имени файла!</translation>
+        <translation>Заголовок не должен быть пустым. Генерирование заголовка из имени файла!</translation>
     </message>
     <message>
         <source>Edit Artist</source>
@@ -2243,7 +2243,7 @@
     </message>
     <message>
         <source>Unspecified (copy from source file)</source>
-        <translation type="unfinished">Не указано (копировать из исходного файла)</translation>
+        <translation>Не указано (копировать из исходного файла)</translation>
     </message>
     <message>
         <source>Edit Comment</source>
@@ -2255,7 +2255,7 @@
     </message>
     <message>
         <source>Encoded with LameXP</source>
-        <translation type="unfinished">Кодировано с помощью LameXP</translation>
+        <translation>Кодировано с помощью LameXP</translation>
     </message>
     <message>
         <source>Not editable</source>
@@ -2263,7 +2263,7 @@
     </message>
     <message>
         <source>Sorry, this property of the source file cannot be edited!</source>
-        <translation type="unfinished">К сожалению, это свойство исходного файла не может быть изменено!</translation>
+        <translation>К сожалению, это свойство исходного файла не может быть изменено!</translation>
     </message>
 </context>
 <context>
@@ -2274,15 +2274,15 @@
     </message>
     <message>
         <source>Not found!</source>
-        <translation type="unfinished">Не найдено!</translation>
+        <translation>Не найдено!</translation>
     </message>
     <message>
         <source>The format of this file is NOT supported:</source>
-        <translation type="unfinished">Этот тип файлов не поддерживается:</translation>
+        <translation>Этот тип файлов не поддерживается:</translation>
     </message>
     <message>
         <source>Container Format:</source>
-        <translation type="unfinished">Формат Контейнера:</translation>
+        <translation>Формат Контейнера:</translation>
     </message>
     <message>
         <source>Audio Format:</source>
@@ -2302,7 +2302,7 @@
     </message>
     <message>
         <source>Failed!</source>
-        <translation type="unfinished">Ошибка!</translation>
+        <translation>Ошибка!</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -2318,68 +2318,68 @@
     </message>
     <message>
         <source>The source audio file could not be found:</source>
-        <translation type="unfinished">Исходный аудио файл не найден:</translation>
+        <translation>Исходный аудио файл не найден:</translation>
     </message>
     <message>
         <source>The source audio file could not be opened for reading:</source>
-        <translation type="unfinished">Исходный аудио файл не может быть открыт:</translation>
+        <translation>Исходный аудио файл не может быть открыт:</translation>
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation type="unfinished">Папка для выходных файлов не существует и не может быть создана:</translation>
+        <translation>Папка для выходных файлов не существует и не может быть создана:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
-        <translation type="unfinished">Папка для выходных файлов недоступна для записи:</translation>
+        <translation>Папка для выходных файлов недоступна для записи:</translation>
     </message>
     <message>
         <source>Unknown File Name</source>
-        <translation type="unfinished">Неизвестное имя файла</translation>
+        <translation>Неизвестное имя файла</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation type="unfinished">Неизвестное Название</translation>
+        <translation>Неизвестное Название</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Неизвестный Артист</translation>
+        <translation>Неизвестный Артист</translation>
     </message>
     <message>
         <source>Unknown Album</source>
-        <translation type="unfinished">Неизвестный Альбом</translation>
+        <translation>Неизвестный Альбом</translation>
     </message>
     <message>
         <source>Unknown Comment</source>
-        <translation type="unfinished">Неизвестный Комментарий</translation>
+        <translation>Неизвестный Комментарий</translation>
     </message>
     <message>
         <source>Analyzing</source>
-        <translation type="unfinished">Анализ</translation>
+        <translation>Анализ</translation>
     </message>
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished">ВНИМАНИЕ: декодированный файл больше 4 ГБ, возможны проблемы!</translation>
+        <translation>ВНИМАНИЕ: декодированный файл больше 4 ГБ, возможны проблемы!</translation>
     </message>
     <message>
         <source>Skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропущен.</translation>
     </message>
     <message>
         <source>Target output file already exists, going to skip this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл уже существует, будет пропущен:</translation>
     </message>
     <message>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
-        <translation type="unfinished"></translation>
+        <translation>Если Вы не хотите пропускать уже существующие файлы, пожалуйста, измените режим перезаписи!</translation>
     </message>
     <message>
         <source>Target output file already exists, going to delete existing file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл уже существует, будет удалён:</translation>
     </message>
     <message>
         <source>Failed to delete existing target file, will save to another file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка удаления существующего файла, будет сохранение с другим именем!</translation>
     </message>
 </context>
 <context>
@@ -2394,47 +2394,47 @@
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>Show details for selected job</source>
-        <translation type="unfinished">Показать подробности задания</translation>
+        <translation>Показать подробности задания</translation>
     </message>
     <message>
         <source>Browse Output File Location</source>
-        <translation type="unfinished">Открыть папку с преобразованным файлом</translation>
+        <translation>Открыть папку с преобразованным файлом</translation>
     </message>
     <message>
         <source>Encoding Files</source>
-        <translation type="unfinished">Преобразование Файлов</translation>
+        <translation>Преобразование Файлов</translation>
     </message>
     <message>
         <source>Your files are being encoded, please be patient...</source>
-        <translation type="unfinished">Ваши файлы кодируются, пожалуйста проявите терпение...</translation>
+        <translation>Ваши файлы кодируются, пожалуйста, проявите терпение...</translation>
     </message>
     <message>
         <source>Encoding files, please wait...</source>
-        <translation type="unfinished">Кодирую файлы, пожалуйста, подождите...</translation>
+        <translation>Кодирую файлы, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation type="unfinished">Многопоточность включена: Выполняется %1 экземпляра(ов) параллельно!</translation>
+        <translation>Многопоточность включена: Выполняется %1 экземпляра(ов) параллельно!</translation>
     </message>
     <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation type="unfinished">Отменено! Ожидание завершения запущенных заданий...</translation>
+        <translation>Отменено! Ожидание завершения запущенных заданий...</translation>
     </message>
     <message>
         <source>Creating the playlist file, please wait...</source>
-        <translation type="unfinished">Создаю плэйлист, пожалуйста, подождите...</translation>
+        <translation>Создаю плэйлист, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Process was aborted prematurely by the user!</source>
-        <translation type="unfinished">Процесс был преждевременно прерван пользователем!</translation>
+        <translation>Процесс был преждевременно прерван пользователем!</translation>
     </message>
     <message>
         <source>LameXP - Aborted</source>
@@ -2442,7 +2442,7 @@
     </message>
     <message>
         <source>Process was aborted by the user.</source>
-        <translation type="unfinished">Процесс был прерван пользователем.</translation>
+        <translation>Процесс был прерван пользователем.</translation>
     </message>
     <message>
         <source>LameXP - Error</source>
@@ -2450,7 +2450,7 @@
     </message>
     <message>
         <source>At least one file has failed!</source>
-        <translation type="unfinished">Ошибка как минимум с 1 файлом!</translation>
+        <translation>Ошибка как минимум с 1 файлом!</translation>
     </message>
     <message>
         <source>LameXP - Done</source>
@@ -2458,39 +2458,39 @@
     </message>
     <message>
         <source>All files completed successfully.</source>
-        <translation type="unfinished">Все файлы преобразовались успешно.</translation>
+        <translation>Все файлы преобразовались успешно.</translation>
     </message>
     <message>
         <source>Playlist creation failed</source>
-        <translation type="unfinished">Не могу создать плэйлист</translation>
+        <translation>Не могу создать плэйлист</translation>
     </message>
     <message>
         <source>The playlist file could not be created:</source>
-        <translation type="unfinished">Плэйлист не может быть создан:</translation>
+        <translation>Плэйлист не может быть создан:</translation>
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation type="unfinished">Выключить компьютер после завершения преобразования всех файлов</translation>
+        <translation>Выключить компьютер после завершения преобразования всех файлов</translation>
     </message>
     <message>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
-        <translation type="unfinished">Внимание: Компьютер выключится через %1 секунд...</translation>
+        <translation>Внимание: Компьютер выключится через %1 секунд...</translation>
     </message>
     <message>
         <source>Cancel Shutdown</source>
-        <translation type="unfinished">Отменить выключение</translation>
+        <translation>Отменить выключение</translation>
     </message>
     <message>
         <source>CPU Usage (Overall)</source>
-        <translation type="unfinished">Загрузка процессора (Общая)</translation>
+        <translation>Загрузка процессора (Общая)</translation>
     </message>
     <message>
         <source>Physical RAM Usage</source>
-        <translation type="unfinished">Использование оперативной памяти</translation>
+        <translation>Использование оперативной памяти</translation>
     </message>
     <message>
         <source>Free Disk Space (Temp Folder)</source>
-        <translation type="unfinished">Свободное место на диске (Временная папка)</translation>
+        <translation>Свободное место на диске (Временная папка)</translation>
     </message>
     <message>
         <source>Process finished after %1.</source>
@@ -2498,110 +2498,110 @@
     </message>
     <message>
         <source>Filter Log Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр</translation>
     </message>
     <message>
         <source>Show Running Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать только выполняемые</translation>
     </message>
     <message>
         <source>Show Succeeded Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать только готовые</translation>
     </message>
     <message>
         <source>Show Failed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать только с ошибками</translation>
     </message>
     <message>
         <source>Show Skipped Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать только пропущенные</translation>
     </message>
     <message>
         <source>Show All Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать все</translation>
     </message>
     <message>
         <source>None of the items matches the current filtering rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Ни один из элементов не удовлетворяет правилам фильтра</translation>
     </message>
     <message numerus="yes">
         <source>Process was aborted by the user after %n file(s)!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Процесс был прерван пользователем после %n файла</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файлов</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файлов</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n ч.</numerusform>
+            <numerusform>%n ч.</numerusform>
+            <numerusform>%n ч.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n мин.</numerusform>
+            <numerusform>%n мин.</numerusform>
+            <numerusform>%n мин.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n с.</numerusform>
+            <numerusform>%n с.</numerusform>
+            <numerusform>%n с.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n мс.</numerusform>
+            <numerusform>%n мс.</numerusform>
+            <numerusform>%n мс.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Кодирование: %n файл из %1 завершено, пожалуйста ждите...</numerusform>
+            <numerusform>Кодирование: %n файлов из %1 завершено, пожалуйста ждите...</numerusform>
+            <numerusform>Кодирование: %n файлов из %1 завершено, пожалуйста ждите...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Ошибка в: %1 из %n файле (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файлов (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файлов (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n file(s) skipped</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n файл пропущен</numerusform>
+            <numerusform>%n файла пропущено</numerusform>
+            <numerusform>%n файлов пропущено</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Ошибка в: %1 из %n файле. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файлов. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файлов. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>All files completed successfully. Skipped %n file(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Все файлы успешно преобразованы. Пропущен %n файл.</numerusform>
+            <numerusform>Все файлы успешно преобразованы. Пропущены %n файла.</numerusform>
+            <numerusform>Все файлы успешно преобразованы. Пропущено %n файлов.</numerusform>
         </translation>
     </message>
 </context>
@@ -2609,7 +2609,7 @@
     <name>ProgressModel</name>
     <message>
         <source>Job</source>
-        <translation type="unfinished">Задание</translation>
+        <translation>Задание</translation>
     </message>
     <message>
         <source>Status</source>
@@ -2620,26 +2620,26 @@
     <name>QApplication</name>
     <message>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation type="unfinished">Исполняемый файл  &apos;%1&apos; не поддерживает режим совместимости Windows.</translation>
+        <translation>Исполняемый файл  &apos;%1&apos; не поддерживает режим совместимости Windows.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation type="unfinished">Исполняемому файлу  &apos;%1&apos; требуется версия Qt  v%2, но найдена версия  v%3.</translation>
+        <translation>Исполняемому файлу  &apos;%1&apos; требуется версия Qt  v%2, но найдена версия  v%3.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished">Исполняемый файл  &apos;%1&apos; был собран для Qt &apos;%2&apos;, но найдена версия Qt &apos;%3&apos;.</translation>
+        <translation>Исполняемый файл  &apos;%1&apos; был собран для Qt &apos;%2&apos;, но найдена версия Qt &apos;%3&apos;.</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Исполняемый файл &apos;%1&apos; требует Windows XP или новее.</translation>
     </message>
 </context>
 <context>
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>
-        <translation type="unfinished">Аудио Файл поддерживаетя LameXP</translation>
+        <translation>Аудио Файл поддерживаетя LameXP</translation>
     </message>
     <message>
         <source>Convert this file with LameXP v%1</source>
@@ -2693,43 +2693,43 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестно</translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <source>Testing your internet connection, please wait...</source>
-        <translation type="unfinished">Проверяю соединение с сетью, пожалуйста, подождите...</translation>
+        <translation>Проверяю соединение с сетью, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Network connectivity test has failed!</source>
-        <translation type="unfinished">Нет соединения с сетью!</translation>
+        <translation>Нет соединения с сетью!</translation>
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished">Проверяю обновления, пожалуйста, подождите...</translation>
+        <translation>Проверяю обновления, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
-        <translation type="unfinished">Не могу получить информацию об обновлениях с сервера!</translation>
+        <translation>Не могу получить информацию об обновлениях с сервера!</translation>
     </message>
     <message>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation type="unfinished">Извините, сервер обновлений сейчас недоступен. Пожалуйста, попробуйте позднее.</translation>
+        <translation>Извините, сервер обновлений сейчас недоступен. Пожалуйста, попробуйте позднее.</translation>
     </message>
     <message>
         <source>More information available at:</source>
-        <translation type="unfinished">Подробная информация здесь:</translation>
+        <translation>Подробная информация здесь:</translation>
     </message>
     <message>
         <source>A new version of LameXP is available!</source>
-        <translation type="unfinished">Доступна новя версия LameXP!</translation>
+        <translation>Доступна новя версия LameXP!</translation>
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation type="unfinished">Мы очень рекомендуем установить это обновление как можо скорее.</translation>
+        <translation>Настоятельно  рекомендуем установить это обновление как можо скорее.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
-        <translation type="unfinished">На данный момент обновлений нет.</translation>
+        <translation>На данный момент обновлений нет.</translation>
     </message>
     <message>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
@@ -2737,52 +2737,52 @@
     </message>
     <message>
         <source>Your version appears to be newer than the latest release.</source>
-        <translation type="unfinished">Установленная версия новее чем последний релиз.</translation>
+        <translation>Установленная версия новее чем последний релиз.</translation>
     </message>
     <message>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation type="unfinished">Это обычно значит, что вы используете бета версию LameXP.</translation>
+        <translation>Это обычно значит, что вы используете бета версию LameXP.</translation>
     </message>
     <message>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished">Скачиваю обновление, будте терпеливы...</translation>
+        <translation>Скачиваю обновление...</translation>
     </message>
     <message>
         <source>Update ready to install. Applicaion will quit...</source>
-        <translation type="unfinished">Обновление готово к установке. Завершение приложения...</translation>
+        <translation>Обновление готово к установке. Завершение приложения...</translation>
     </message>
     <message>
         <source>Update failed. Please try again or download manually!</source>
         <translatorcomment>Фак май майнд</translatorcomment>
-        <translation type="unfinished">Не могу установить обновление.Пожалуйста попробуйте снова или установите обновление вручную!</translation>
+        <translation>Не могу установить обновление в автоматическом режиме. Повторите попытку или установите обновление вручную!</translation>
     </message>
     <message>
         <source>It appears that the computer currently is offline!</source>
-        <translation type="unfinished">Похоже компьютер не подключен к интернету!</translation>
+        <translation>Похоже компьютер не подключен к интернету!</translation>
     </message>
     <message>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation type="unfinished">Пожалуйста, проверьте, что ваш компьютер подключен к интернету и попробуйте снова.</translation>
+        <translation>Пожалуйста, проверьте, что ваш компьютер подключен к интернету и попробуйте снова.</translation>
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Инициализация, пожалуйста, подождите...</translation>
+        <translation>Инициализация, пожалуйста, подождите...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">Игнорировать</translation>
+        <translation>Игнорировать</translation>
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Извините, но только пользователи из группы &quot;Администраторы&quot; могут устанавливать обновления.</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, запустите приложение с правами администратора и попробуйте снова!</translation>
     </message>
 </context>
 </TS>
