@@ -253,7 +253,7 @@ void UpdateCheckThread::checkForUpdates(void)
 	// ----- Test Internet Connection ----- //
 
 	int connectionScore = 0;
-	int maxConnectTries = 2 * MIN_CONNSCORE;
+	int maxConnectTries = (3 * MIN_CONNSCORE) / 2;
 	
 	log("Checking internet connection...");
 	setStatus(UpdateStatus_CheckingConnection);
@@ -279,29 +279,21 @@ void UpdateCheckThread::checkForUpdates(void)
 
 	lamexp_seed_rand();
 
-	while(!(hostList.isEmpty() || (connectionScore >= MIN_CONNSCORE) || (--maxConnectTries < 0)))
+	while(!(hostList.isEmpty() || (connectionScore >= MIN_CONNSCORE) || (maxConnectTries < 1)))
 	{
-		QString currentHost = hostList.takeAt(lamexp_rand() % hostList.count());
-		log("", "Testing host:", currentHost);
-		QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
-		bool httpOk = false;
-		if(getFile(currentHost, outFile, 0, &httpOk))
+		switch(tryContactHost(hostList.takeAt(lamexp_rand() % hostList.count())))
 		{
-			connectionScore++;
-			setProgress(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-			lamexp_sleep(64);
+			case 01: connectionScore += 1; break;
+			case 02: connectionScore += 2; break;
+			default: maxConnectTries -= 1; break;
 		}
-		if(httpOk)
-		{
-			connectionScore++;
-			setProgress(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-			lamexp_sleep(64);
-		}
-		QFile::remove(outFile);
+		setProgress(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
+		lamexp_sleep(64);
 	}
 
 	if(connectionScore < MIN_CONNSCORE)
 	{
+		log("", "Connectivity test has failed: Internet connection appears to be broken!");
 		setProgress(m_maxProgress);
 		setStatus(UpdateStatus_ErrorConnectionTestFailed);
 		return;
@@ -438,6 +430,35 @@ void UpdateCheckThread::log(const QString &str1, const QString &str2, const QStr
 	if(!str2.isNull()) emit messageLogged(str2);
 	if(!str3.isNull()) emit messageLogged(str3);
 	if(!str4.isNull()) emit messageLogged(str4);
+}
+
+int UpdateCheckThread::tryContactHost(const QString &url)
+{
+		int result = -1; bool httpOkay = false;
+		const QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
+		log("", "Testing host:", url);
+
+		if(getFile(url, outFile, 0, &httpOkay))
+		{
+			log("Connection to host was established successfully.");
+			result = 2;
+		}
+		else
+		{
+			if(httpOkay)
+			{
+				log("Connection to host timed out after HTTP OK was received.");
+				result = 1;
+			}
+			else
+			{
+				log("Connection failed: The host could not be reached!");
+				result = 0;
+			}
+		}
+
+		QFile::remove(outFile);
+		return result;
 }
 
 bool UpdateCheckThread::tryUpdateMirror(UpdateInfo *updateInfo, const QString &url)

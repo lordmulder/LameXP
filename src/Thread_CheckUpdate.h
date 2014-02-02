@@ -102,6 +102,7 @@ private:
 	inline void log(const QString &str1, const QString &str2 = QString(), const QString &str3 = QString(), const QString &str4 = QString());
 
 	bool getFile(const QString &url, const QString &outFile, unsigned int maxRedir = 5, bool *httpOk = NULL);
+	int tryContactHost(const QString &url);
 	bool tryUpdateMirror(UpdateInfo *updateInfo, const QString &url);
 	bool checkSignature(const QString &file, const QString &signature);
 	bool parseVersionInfo(const QString &file, UpdateInfo *updateInfo);
