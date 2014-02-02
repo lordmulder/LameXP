@@ -561,7 +561,7 @@ LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize, 8)
 LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation, false)
 LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta, false)
-LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, true)
+LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, (!lamexp_portable_mode()));
 LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck, "Never")
 LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled, false)
 LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate, 500)

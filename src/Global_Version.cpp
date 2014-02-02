@@ -311,7 +311,7 @@ bool lamexp_portable_mode(void)
 			QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
 			int idx1 = baseName.indexOf("lamexp", 0, Qt::CaseInsensitive);
 			int idx2 = baseName.lastIndexOf("portable", -1, Qt::CaseInsensitive);
-			g_lamexp_portable.bPortableModeEnabled = (idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2);
+			g_lamexp_portable.bPortableModeEnabled = ((idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2));
 		}
 		g_lamexp_portable.bInitialized = true;
 	}
