@@ -253,6 +253,7 @@ void UpdateCheckThread::checkForUpdates(void)
 	// ----- Test Internet Connection ----- //
 
 	int connectionScore = 0;
+	int maxConnectTries = 2 * MIN_CONNSCORE;
 	
 	log("Checking internet connection...");
 	setStatus(UpdateStatus_CheckingConnection);
@@ -277,28 +278,26 @@ void UpdateCheckThread::checkForUpdates(void)
 	}
 
 	lamexp_seed_rand();
-	while(!hostList.isEmpty())
+
+	while(!(hostList.isEmpty() || (connectionScore >= MIN_CONNSCORE) || (--maxConnectTries < 0)))
 	{
 		QString currentHost = hostList.takeAt(lamexp_rand() % hostList.count());
-		if(connectionScore < MIN_CONNSCORE)
+		log("", "Testing host:", currentHost);
+		QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
+		bool httpOk = false;
+		if(getFile(currentHost, outFile, 0, &httpOk))
 		{
-			log("", "Testing host:", currentHost);
-			QString outFile = QString("%1/%2.htm").arg(lamexp_temp_folder2(), lamexp_rand_str());
-			bool httpOk = false;
-			if(getFile(currentHost, outFile, 0, &httpOk))
-			{
-				connectionScore++;
-				setProgress(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-				lamexp_sleep(64);
-			}
-			if(httpOk)
-			{
-				connectionScore++;
-				setProgress(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
-				lamexp_sleep(64);
-			}
-			QFile::remove(outFile);
+			connectionScore++;
+			setProgress(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
+			lamexp_sleep(64);
 		}
+		if(httpOk)
+		{
+			connectionScore++;
+			setProgress(qBound(1, connectionScore + 1, MIN_CONNSCORE + 1));
+			lamexp_sleep(64);
+		}
+		QFile::remove(outFile);
 	}
 
 	if(connectionScore < MIN_CONNSCORE)
@@ -499,7 +498,7 @@ bool UpdateCheckThread::getFile(const QString &url, const QString &outFile, unsi
 	lamexp_init_process(process, output.absolutePath());
 
 	QStringList args;
-	args << "--no-cache" << "--no-dns-cache" << QString().sprintf("--max-redirect=%u", maxRedir);
+	args << "-T" << "15" << "--no-cache" << "--no-dns-cache" << QString().sprintf("--max-redirect=%u", maxRedir);
 	args << QString("--referer=%1://%2/").arg(QUrl(url).scheme(), QUrl(url).host()) << "-U" << USER_AGENT_STR;
 	args << "-O" << output.fileName() << url;
 
@@ -524,10 +523,10 @@ bool UpdateCheckThread::getFile(const QString &url, const QString &outFile, unsi
 
 	timer.start();
 
-	while(process.state() == QProcess::Running)
+	while(process.state() != QProcess::NotRunning)
 	{
 		loop.exec();
-		bool bTimeOut = (!timer.isActive());
+		const bool bTimeOut = (!timer.isActive());
 		while(process.canReadLine())
 		{
 			QString line = QString::fromLatin1(process.readLine()).simplified();
