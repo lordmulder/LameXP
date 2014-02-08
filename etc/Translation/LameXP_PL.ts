@@ -389,56 +389,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="251"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="307"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="279"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="335"/>
         <source>Profile</source>
         <translation type="unfinished">Profil</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="268"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="296"/>
         <source>Channels</source>
         <translation type="unfinished">Kanały</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="273"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="301"/>
         <source>Samplerate</source>
         <translation type="unfinished">Częstotliwość</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="280"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="284"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="308"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="312"/>
         <source>Bitdepth</source>
         <translation type="unfinished">Głębia bitów</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="302"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
         <source>Type</source>
         <translation type="unfinished">Typ</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="311"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="339"/>
         <source>Version</source>
         <translation type="unfinished">Wersja</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="318"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="321"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="324"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="346"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="349"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="352"/>
         <source>Bitrate</source>
         <translation type="unfinished">Przepływność bitów</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="318"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="346"/>
         <source>Constant</source>
         <translation type="unfinished">Stały</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="321"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="349"/>
         <source>Variable</source>
         <translation type="unfinished">Zmienny</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="358"/>
         <source>Encoder</source>
         <translation type="unfinished">Koder</translation>
     </message>
