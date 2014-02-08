@@ -41,7 +41,7 @@ public:
 	void setFilePath(const QString &newPath, bool isOwner = true);
 	void clear(void);
 	
-	inline bool isEmpty(void) const { return (m_data != NULL); }
+	inline bool isEmpty(void) const { return (m_data == NULL); }
 
 private:
 	const QString m_nullString;
