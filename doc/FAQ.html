@@ -41,6 +41,7 @@ a:visited { color: #0000EE; }
 <li><a href="#df406578">The LameXP startup (splash screen) takes very long on my system. What can I do?</a>
 <li><a href="#a923d407">Why is there a time limit (expiration) in my version of LameXP?</a>
 <li><a href="#900a2a6c">Is there a way to hide/show the LameXP console ("DOS Box") window?</a>
+<li><a href="#c8870a0a">How can I change the font size in the LameXP window?</a>
 <li><a href="#9b0a5c32">Why does application 'xyz' not open the Wave files created by LameXP?</a>
 <li><a href="#89cbd3d0">Why does LameXP run (only) N instances/threads in parallel on my computer?</a>
 <li><a href="#454e51dd">Why does LameXP try to connect to the web-server at 'xyz.com' secretly?</a>
@@ -661,6 +662,25 @@ At the same time the console is enabled by default in all "beta" (pre-release) b
 still disable the console by passing the "--no-console" command-line parameter, if you don't like it.<br>
 <br>
 WARNING: Any attempt to close the LameXP console window will kill the application immediately !!!<br><br>
+
+<br><br>
+
+<a name="c8870a0a"></a><b>How can I change the font size in the LameXP window?</b><br>
+<br>
+Sometimes it may be required to adjust the font size, e.g. when working on a "high DPI" screen. The best way<br>
+to adjust the font size is tweaking the DPI settings of your system. On modern Windows operating systems,<br>
+this option can be found at the "Display" options at the Control Panel. Simply select, e.g., "Medium" (125%)<br>
+or "Larger" (150%) to increase the size of all GUI widgets, including larger fonts. LameXP is based on Qt and<br>
+therefore is fully "DPI aware". This means it will respect the system's DPI settings  - without(!) blurring.<br>
+<br>
+In rare cases you may which to adjust the font-size only inside the LameXP window, but *not* effect any other<br>
+applications. For this particular purpose, LameXP offers the following command-line options:<br>
+<blockquote><table>
+<tr><td><font class="code">--tiny-font </font></td><td>&nbsp;</td><td>Enforces very small font size (75%)</td></tr>
+<tr><td><font class="code">--small-font</font></td><td>&nbsp;</td><td>Enforces smaller font size (87.5%)</td></tr>
+<tr><td><font class="code">--big-font  </font></td><td>&nbsp;</td><td>Enforces larger font size (125%)</td></tr>
+<tr><td><font class="code">--huge-font </font></td><td>&nbsp;</td><td>Enforces very large font size (150%)</td></tr>
+</table></blockquote>
 
 <br><br>
 
