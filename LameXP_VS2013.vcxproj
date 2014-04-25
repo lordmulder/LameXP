@@ -90,7 +90,7 @@
       <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2013.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -154,7 +154,7 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCore4.lib;QtGui4.lib;Winmm.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2013.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <Version>
@@ -234,10 +234,10 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCore.lib;QtGui.lib;QtSvg.lib;qtmain.lib;qsvg.lib;qico.lib;qtga.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;QKeccakHash_VS2013.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
-      <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\qt4_static.VS2013\lib;$(SolutionDir)\etc\Prerequisites\qt4_static.VS2013\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\etc\Prerequisites\qt4_static\lib;$(SolutionDir)\etc\Prerequisites\qt4_static\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\EncodePointer\lib;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AssemblyDebug>
