@@ -240,38 +240,6 @@
         <translation>特別感謝:</translation>
     </message>
     <message>
-        <source>Doom9&apos;s Forum</source>
-        <translation>Doom9論壇</translation>
-    </message>
-    <message>
-        <source>Gleitz | German Doom9</source>
-        <translation>格雷茲 | 德國 Doom9</translation>
-    </message>
-    <message>
-        <source>Hydrogenaudio Forums</source>
-        <translation>Hydrogenaudio論壇</translation>
-    </message>
-    <message>
-        <source>RareWares</source>
-        <translation>RareWares</translation>
-    </message>
-    <message>
-        <source>GitHub</source>
-        <translation>GitHub</translation>
-    </message>
-    <message>
-        <source>SourceForge</source>
-        <translation>SourceForge</translation>
-    </message>
-    <message>
-        <source>Qt Developer Network</source>
-        <translation>Qt的開發者網絡</translation>
-    </message>
-    <message>
-        <source>Marius Hudea</source>
-        <translation>Marius Hudea</translation>
-    </message>
-    <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - 終極可執行程序文件壓縮器</translation>
     </message>
@@ -288,16 +256,8 @@
         <translation>Valdec AC3Filter工具 - AC3/DTS解碼器</translation>
     </message>
     <message>
-        <source>Codecs.com</source>
-        <translation>Codecs.com</translation>
-    </message>
-    <message>
-        <source>BerliOS Developer</source>
-        <translation>BerliOS Developer</translation>
-    </message>
-    <message>
-        <source>CodePlex</source>
-        <translation>CodePlex</translation>
+        <source>Official Mirrors:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -240,38 +240,6 @@
         <translation type="unfinished">특별히 감사합니다:</translation>
     </message>
     <message>
-        <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished">Doom9 포럼</translation>
-    </message>
-    <message>
-        <source>Gleitz | German Doom9</source>
-        <translation type="unfinished">Gleitz | German Doom9</translation>
-    </message>
-    <message>
-        <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished">Hydrogenaudio 포럼</translation>
-    </message>
-    <message>
-        <source>RareWares</source>
-        <translation type="unfinished">RareWares</translation>
-    </message>
-    <message>
-        <source>GitHub</source>
-        <translation type="unfinished">GitHub</translation>
-    </message>
-    <message>
-        <source>SourceForge</source>
-        <translation type="unfinished">SourceForge</translation>
-    </message>
-    <message>
-        <source>Qt Developer Network</source>
-        <translation type="unfinished">Qt 개발자 네트워크</translation>
-    </message>
-    <message>
-        <source>Marius Hudea</source>
-        <translation type="unfinished">Marius Hudea</translation>
-    </message>
-    <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation type="unfinished">UPX - The Ultimate Packer for eXecutables</translation>
     </message>
@@ -289,17 +257,8 @@
         <translation type="unfinished">AC3Filter 도구의 Valdec - AC3/DTS Decoder</translation>
     </message>
     <message>
-        <source>Codecs.com</source>
-        <translation type="unfinished">Codecs.com</translation>
-    </message>
-    <message>
-        <source>BerliOS Developer</source>
-        <translatorcomment>BerliOS 개발자</translatorcomment>
-        <translation type="unfinished">BerliOS Developer</translation>
-    </message>
-    <message>
-        <source>CodePlex</source>
-        <translation type="unfinished">CodePlex</translation>
+        <source>Official Mirrors:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
