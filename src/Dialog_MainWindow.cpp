@@ -259,7 +259,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	//Setup corner widget
 	QLabel *cornerWidget = new QLabel(ui->menubar);
 	m_evenFilterCornerWidget = new CustomEventFilter;
-	cornerWidget->setText(QString("<nobr><img src=\":/icons/exclamation_small.png\">&nbsp;<b style=\"color:darkred\">%1</b>&nbsp;&nbsp;&nbsp;</nobr>").arg(tr("Check for Updates")));
+	cornerWidget->setText("N/A");
 	cornerWidget->setFixedHeight(ui->menubar->height());
 	cornerWidget->setCursor(QCursor(Qt::PointingHandCursor));
 	cornerWidget->hide();
@@ -1028,78 +1028,93 @@ void MainWindow::showEvent(QShowEvent *event)
  */
 void MainWindow::changeEvent(QEvent *e)
 {
-	if(e->type() == QEvent::LanguageChange)
+	QMainWindow::changeEvent(e);
+	if(e->type() != QEvent::LanguageChange)
 	{
-		/*qWarning("\nMainWindow::changeEvent()\n");*/
-
-		int comboBoxIndex[8];
-		
-		//Backup combobox indices, as retranslateUi() resets
-		comboBoxIndex[0] = ui->comboBoxMP3ChannelMode->currentIndex();
-		comboBoxIndex[1] = ui->comboBoxSamplingRate->currentIndex();
-		comboBoxIndex[2] = ui->comboBoxAACProfile->currentIndex();
-		comboBoxIndex[3] = ui->comboBoxAftenCodingMode->currentIndex();
-		comboBoxIndex[4] = ui->comboBoxAftenDRCMode->currentIndex();
-		comboBoxIndex[5] = ui->comboBoxNormalizationMode->currentIndex();
-		comboBoxIndex[6] = 0; //comboBoxOpusOptimize->currentIndex();
-		comboBoxIndex[7] = ui->comboBoxOpusFramesize->currentIndex();
-		
-		//Re-translate from UIC
-		ui->retranslateUi(this);
-
-		//Restore combobox indices
-		ui->comboBoxMP3ChannelMode->setCurrentIndex(comboBoxIndex[0]);
-		ui->comboBoxSamplingRate->setCurrentIndex(comboBoxIndex[1]);
-		ui->comboBoxAACProfile->setCurrentIndex(comboBoxIndex[2]);
-		ui->comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
-		ui->comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
-		ui->comboBoxNormalizationMode->setCurrentIndex(comboBoxIndex[5]);
-		//comboBoxOpusOptimize->setCurrentIndex(comboBoxIndex[6]);
-		ui->comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[7]);
-
-		//Update the window title
-		if(LAMEXP_DEBUG)
-		{
-			setWindowTitle(QString("%1 [!!! DEBUG BUILD !!!]").arg(windowTitle()));
-		}
-		else if(lamexp_version_demo())
-		{
-			setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
-		}
-
-		//Manually re-translate widgets that UIC doesn't handle
-		m_outputFolderNoteBox->setText(tr("Initializing directory outline, please be patient..."));
-		m_dropNoteLabel->setText(QString("<br><img src=\":/images/DropZone.png\"><br><br>%1").arg(tr("You can drop in audio files here!")));
-		m_showDetailsContextAction->setText(tr("Show Details"));
-		m_previewContextAction->setText(tr("Open File in External Application"));
-		m_findFileContextAction->setText(tr("Browse File Location"));
-		m_showFolderContextAction->setText(tr("Browse Selected Folder"));
-		m_refreshFolderContextAction->setText(tr("Refresh Directory Outline"));
-		m_goUpFolderContextAction->setText(tr("Go To Parent Directory"));
-		m_addFavoriteFolderAction->setText(tr("Bookmark Current Output Folder"));
-		m_exportCsvContextAction->setText(tr("Export Meta Tags to CSV File"));
-		m_importCsvContextAction->setText(tr("Import Meta Tags from CSV File"));
-
-		//Force GUI update
-		m_metaInfoModel->clearData();
-		m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
-		updateEncoder(m_settings->compressionEncoder());
-		updateLameAlgoQuality(ui->sliderLameAlgoQuality->value());
-		updateMaximumInstances(ui->sliderMaxInstances->value());
-		renameOutputPatternChanged(ui->lineEditRenamePattern->text(), true);
-
-		//Re-install shell integration
-		if(m_settings->shellIntegrationEnabled())
-		{
-			ShellIntegration::install();
-		}
-
-		//Translate system menu
-		lamexp_update_sysmenu(this, IDM_ABOUTBOX, ui->buttonAbout->text());
-			
-		//Force resize, if needed
-		tabPageChanged(ui->tabWidget->currentIndex(), true);
+		return;
 	}
+
+	int comboBoxIndex[8];
+		
+	//Backup combobox indices, as retranslateUi() resets
+	comboBoxIndex[0] = ui->comboBoxMP3ChannelMode->currentIndex();
+	comboBoxIndex[1] = ui->comboBoxSamplingRate->currentIndex();
+	comboBoxIndex[2] = ui->comboBoxAACProfile->currentIndex();
+	comboBoxIndex[3] = ui->comboBoxAftenCodingMode->currentIndex();
+	comboBoxIndex[4] = ui->comboBoxAftenDRCMode->currentIndex();
+	comboBoxIndex[5] = ui->comboBoxNormalizationMode->currentIndex();
+	comboBoxIndex[6] = 0; //comboBoxOpusOptimize->currentIndex();
+	comboBoxIndex[7] = ui->comboBoxOpusFramesize->currentIndex();
+		
+	//Re-translate from UIC
+	ui->retranslateUi(this);
+
+	//Restore combobox indices
+	ui->comboBoxMP3ChannelMode->setCurrentIndex(comboBoxIndex[0]);
+	ui->comboBoxSamplingRate->setCurrentIndex(comboBoxIndex[1]);
+	ui->comboBoxAACProfile->setCurrentIndex(comboBoxIndex[2]);
+	ui->comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
+	ui->comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
+	ui->comboBoxNormalizationMode->setCurrentIndex(comboBoxIndex[5]);
+	//comboBoxOpusOptimize->setCurrentIndex(comboBoxIndex[6]);
+	ui->comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[7]);
+
+	//Update the window title
+	if(LAMEXP_DEBUG)
+	{
+		setWindowTitle(QString("%1 [!!! DEBUG BUILD !!!]").arg(windowTitle()));
+	}
+	else if(lamexp_version_demo())
+	{
+		setWindowTitle(QString("%1 [%2]").arg(windowTitle(), tr("DEMO VERSION")));
+	}
+
+	//Manually re-translate widgets that UIC doesn't handle
+	m_outputFolderNoteBox->setText(tr("Initializing directory outline, please be patient..."));
+	m_dropNoteLabel->setText(QString("<br><img src=\":/images/DropZone.png\"><br><br>%1").arg(tr("You can drop in audio files here!")));
+	if(QLabel *cornerWidget = dynamic_cast<QLabel*>(ui->menubar->cornerWidget()))
+	{
+		cornerWidget->setText(QString("<nobr><img src=\":/icons/exclamation_small.png\">&nbsp;<b style=\"color:darkred\">%1</b>&nbsp;&nbsp;&nbsp;</nobr>").arg(tr("Check for Updates")));
+	}
+	m_showDetailsContextAction->setText(tr("Show Details"));
+	m_previewContextAction->setText(tr("Open File in External Application"));
+	m_findFileContextAction->setText(tr("Browse File Location"));
+	m_showFolderContextAction->setText(tr("Browse Selected Folder"));
+	m_refreshFolderContextAction->setText(tr("Refresh Directory Outline"));
+	m_goUpFolderContextAction->setText(tr("Go To Parent Directory"));
+	m_addFavoriteFolderAction->setText(tr("Bookmark Current Output Folder"));
+	m_exportCsvContextAction->setText(tr("Export Meta Tags to CSV File"));
+	m_importCsvContextAction->setText(tr("Import Meta Tags from CSV File"));
+
+	//Force GUI update
+	m_metaInfoModel->clearData();
+	m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
+	updateEncoder(m_settings->compressionEncoder());
+	updateLameAlgoQuality(ui->sliderLameAlgoQuality->value());
+	updateMaximumInstances(ui->sliderMaxInstances->value());
+	renameOutputPatternChanged(ui->lineEditRenamePattern->text(), true);
+
+	//Re-install shell integration
+	if(m_settings->shellIntegrationEnabled())
+	{
+		ShellIntegration::install();
+	}
+
+	//Translate system menu
+	lamexp_update_sysmenu(this, IDM_ABOUTBOX, ui->buttonAbout->text());
+	
+	//Force resize event
+	QApplication::postEvent(this, new QResizeEvent(this->size(), QSize()));
+	for(QObjectList::ConstIterator iter = this->children().constBegin(); iter != this->children().constEnd(); iter++)
+	{
+		if(QWidget *child = dynamic_cast<QWidget*>(*iter))
+		{
+			QApplication::postEvent(child, new QResizeEvent(child->size(), QSize()));
+		}
+	}
+
+	//Force tabe page change
+	tabPageChanged(ui->tabWidget->currentIndex(), true);
 }
 
 /*
@@ -1158,7 +1173,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 		m_dropNoteLabel->setGeometry(port->geometry());
 	}
 
-	if (QWidget *port = ui->outputFolderView->viewport())
+	if(QWidget *port = ui->outputFolderView->viewport())
 	{
 		m_outputFolderNoteBox->setGeometry(16, (port->height() - 64) / 2, port->width() - 32, 64);
 	}
