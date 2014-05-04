@@ -198,6 +198,15 @@ while(0)
 } \
 while(0)
 
+#define SHOW_CORNER_WIDGET(FLAG) do \
+{ \
+	if(QWidget *cornerWidget = ui->menubar->cornerWidget()) \
+	{ \
+		cornerWidget->setVisible((FLAG)); \
+	} \
+} \
+while(0)
+
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
@@ -238,7 +247,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	//Enabled main buttons
 	connect(ui->buttonAbout, SIGNAL(clicked()), this, SLOT(aboutButtonClicked()));
 	connect(ui->buttonStart, SIGNAL(clicked()), this, SLOT(encodeButtonClicked()));
-	connect(ui->buttonQuit, SIGNAL(clicked()), this, SLOT(closeButtonClicked()));
+	connect(ui->buttonQuit,  SIGNAL(clicked()), this, SLOT(closeButtonClicked()));
 
 	//Setup tab widget
 	ui->tabWidget->setCurrentIndex(0);
@@ -246,6 +255,17 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 
 	//Add system menu
 	lamexp_append_sysmenu(this, IDM_ABOUTBOX, "About...");
+
+	//Setup corner widget
+	QLabel *cornerWidget = new QLabel(ui->menubar);
+	m_evenFilterCornerWidget = new CustomEventFilter;
+	cornerWidget->setText(QString("<nobr><img src=\":/icons/exclamation_small.png\">&nbsp;<b style=\"color:darkred\">%1</b>&nbsp;&nbsp;&nbsp;</nobr>").arg(tr("Check for Updates")));
+	cornerWidget->setFixedHeight(ui->menubar->height());
+	cornerWidget->setCursor(QCursor(Qt::PointingHandCursor));
+	cornerWidget->hide();
+	cornerWidget->installEventFilter(m_evenFilterCornerWidget);
+	connect(m_evenFilterCornerWidget, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(cornerWidgetEventOccurred(QWidget*, QEvent*)));
+	ui->menubar->setCornerWidget(cornerWidget);
 
 	//--------------------------------
 	// Setup "Source" tab
@@ -268,23 +288,24 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	m_exportCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/table_save.png"), "N/A");
 	m_importCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_table.png"), "N/A");
 	SET_FONT_BOLD(m_showDetailsContextAction, true);
-	connect(ui->buttonAddFiles, SIGNAL(clicked()), this, SLOT(addFilesButtonClicked()));
-	connect(ui->buttonRemoveFile, SIGNAL(clicked()), this, SLOT(removeFileButtonClicked()));
-	connect(ui->buttonClearFiles, SIGNAL(clicked()), this, SLOT(clearFilesButtonClicked()));
-	connect(ui->buttonFileUp, SIGNAL(clicked()), this, SLOT(fileUpButtonClicked()));
-	connect(ui->buttonFileDown, SIGNAL(clicked()), this, SLOT(fileDownButtonClicked()));
-	connect(ui->buttonShowDetails, SIGNAL(clicked()), this, SLOT(showDetailsButtonClicked()));
-	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
-	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(sourceModelChanged()));
-	connect(m_fileListModel, SIGNAL(modelReset()), this, SLOT(sourceModelChanged()));
-	connect(ui->sourceFileView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(sourceFilesContextMenu(QPoint)));
-	connect(ui->sourceFileView->verticalScrollBar(), SIGNAL(sliderMoved(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
-	connect(ui->sourceFileView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(sourceFilesScrollbarMoved(int)));
-	connect(m_showDetailsContextAction, SIGNAL(triggered(bool)), this, SLOT(showDetailsButtonClicked()));
-	connect(m_previewContextAction, SIGNAL(triggered(bool)), this, SLOT(previewContextActionTriggered()));
-	connect(m_findFileContextAction, SIGNAL(triggered(bool)), this, SLOT(findFileContextActionTriggered()));
-	connect(m_exportCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(exportCsvContextActionTriggered()));
-	connect(m_importCsvContextAction, SIGNAL(triggered(bool)), this, SLOT(importCsvContextActionTriggered()));
+
+	connect(ui->buttonAddFiles,                      SIGNAL(clicked()),                          this, SLOT(addFilesButtonClicked()));
+	connect(ui->buttonRemoveFile,                    SIGNAL(clicked()),                          this, SLOT(removeFileButtonClicked()));
+	connect(ui->buttonClearFiles,                    SIGNAL(clicked()),                          this, SLOT(clearFilesButtonClicked()));
+	connect(ui->buttonFileUp,                        SIGNAL(clicked()),                          this, SLOT(fileUpButtonClicked()));
+	connect(ui->buttonFileDown,                      SIGNAL(clicked()),                          this, SLOT(fileDownButtonClicked()));
+	connect(ui->buttonShowDetails,                   SIGNAL(clicked()),                          this, SLOT(showDetailsButtonClicked()));
+	connect(m_fileListModel,                         SIGNAL(rowsInserted(QModelIndex,int,int)),  this, SLOT(sourceModelChanged()));
+	connect(m_fileListModel,                         SIGNAL(rowsRemoved(QModelIndex,int,int)),   this, SLOT(sourceModelChanged()));
+	connect(m_fileListModel,                         SIGNAL(modelReset()),                       this, SLOT(sourceModelChanged()));
+	connect(ui->sourceFileView,                      SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(sourceFilesContextMenu(QPoint)));
+	connect(ui->sourceFileView->verticalScrollBar(), SIGNAL(sliderMoved(int)),                   this, SLOT(sourceFilesScrollbarMoved(int)));
+	connect(ui->sourceFileView->verticalScrollBar(), SIGNAL(valueChanged(int)),                  this, SLOT(sourceFilesScrollbarMoved(int)));
+	connect(m_showDetailsContextAction,              SIGNAL(triggered(bool)),                    this, SLOT(showDetailsButtonClicked()));
+	connect(m_previewContextAction,                  SIGNAL(triggered(bool)),                    this, SLOT(previewContextActionTriggered()));
+	connect(m_findFileContextAction,                 SIGNAL(triggered(bool)),                    this, SLOT(findFileContextActionTriggered()));
+	connect(m_exportCsvContextAction,                SIGNAL(triggered(bool)),                    this, SLOT(exportCsvContextActionTriggered()));
+	connect(m_importCsvContextAction,                SIGNAL(triggered(bool)),                    this, SLOT(importCsvContextActionTriggered()));
 
 	//--------------------------------
 	// Setup "Output" tab
@@ -714,6 +735,7 @@ MainWindow::~MainWindow(void)
 	LAMEXP_DELETE(m_outputFolderFavoritesMenu);
 	LAMEXP_DELETE(m_outputFolderContextMenu);
 	LAMEXP_DELETE(m_dropBox);
+	LAMEXP_DELETE(m_evenFilterCornerWidget);
 	LAMEXP_DELETE(m_evenFilterCustumParamsHelp);
 	LAMEXP_DELETE(m_evenFilterOutputFolderMouse);
 	LAMEXP_DELETE(m_evenFilterOutputFolderView);
@@ -864,6 +886,7 @@ bool MainWindow::checkForUpdates(void)
 
 	if(updateDialog->getSuccess())
 	{
+		SHOW_CORNER_WIDGET(false);
 		m_settings->autoUpdateLastCheck(QDate::currentDate().toString(Qt::ISODate));
 		bReadyToInstall = updateDialog->updateReadyToInstall();
 	}
@@ -1331,6 +1354,7 @@ void MainWindow::windowShown(void)
 	if(lamexp_current_date_safe() >= lamexp_version_date().addYears(1))
 	{
 		qWarning("Binary is more than a year old, time to update!");
+		SHOW_CORNER_WIDGET(true);
 		int ret = QMessageBox::warning(this, tr("Urgent Update"), NOBR(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program"), tr("Ignore"));
 		switch(ret)
 		{
@@ -1351,17 +1375,21 @@ void MainWindow::windowShown(void)
 			break;
 		}
 	}
-	else if(m_settings->autoUpdateEnabled())
+	else
 	{
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
-		if(!firstRun && (!lastUpdateCheck.isValid() || lamexp_current_date_safe() >= lastUpdateCheck.addDays(14)))
+		if((!firstRun) && ((!lastUpdateCheck.isValid()) || (lamexp_current_date_safe() >= lastUpdateCheck.addDays(14))))
 		{
-			if(QMessageBox::information(this, tr("Update Reminder"), NOBR(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
+			SHOW_CORNER_WIDGET(true);
+			if(m_settings->autoUpdateEnabled())
 			{
-				if(checkForUpdates())
+				if(QMessageBox::information(this, tr("Update Reminder"), NOBR(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
 				{
-					QApplication::quit();
-					return;
+					if(checkForUpdates())
+					{
+						QApplication::quit();
+						return;
+					}
 				}
 			}
 		}
@@ -1724,6 +1752,21 @@ void MainWindow::tabActionActivated(QAction *action)
 		{
 			ui->tabWidget->setCurrentIndex(index);
 		}
+	}
+}
+
+// =========================================================
+// Menubar slots
+// =========================================================
+
+/*
+ * Handle corner widget Event
+ */
+void MainWindow::cornerWidgetEventOccurred(QWidget *sender, QEvent *event)
+{
+	if(event->type() == QEvent::MouseButtonPress)
+	{
+		QTimer::singleShot(0, this, SLOT(checkUpdatesActionActivated()));
 	}
 }
 

@@ -85,6 +85,7 @@ private slots:
 	void clearMetaButtonClicked(void);
 	void closeButtonClicked(void);
 	void compressionTabEventOccurred(QWidget*, QEvent*);
+	void cornerWidgetEventOccurred(QWidget *sender, QEvent *event);
 	void customParamsChanged(void);
 	void customParamsHelpRequested(QWidget *obj, QEvent *event);
 	void customTempFolderChanged(const QString &text);
@@ -231,6 +232,7 @@ private:
 	QButtonGroup *m_modeButtonGroup;
 	QButtonGroup *m_overwriteButtonGroup;
 
+	CustomEventFilter *m_evenFilterCornerWidget;
 	CustomEventFilter *m_evenFilterCustumParamsHelp;
 	CustomEventFilter *m_evenFilterOutputFolderMouse;
 	CustomEventFilter *m_evenFilterOutputFolderView;
