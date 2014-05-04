@@ -724,7 +724,7 @@ cores, the maximum number of parallel instances is six. On systems with 16 cores
 parallel instances is eight. On systems with 32 cores, the maximum number of parallel instances is eleven.<br>
 And on systems with 64 cores, the maximum number of parallel instances is 16. 16 is the upper limit.<br>
 <br>
-<a href="http://img853.imageshack.us/img853/1428/corestoinstancesbig.png" target="_blank"><img src="http://img853.imageshack.us/img853/1428/corestoinstancesbig.th.png" border="0" alt="thumb"></a><br>
+<a href="http://i.imgur.com/QbS47Wi.png" target="_blank"><img src="http://i.imgur.com/QbS47Wis.png" border="1px" alt="thumb"></a><br>
 <br>
 You may wonder why LameXP doesn't always create one instance for each CPU core. In theory, the more instances<br>
 we run in parallel, the more CPU cores can be utilized - until all CPU cores are busy and the overall CPU<br>
@@ -855,7 +855,7 @@ filter will be applied in order to recover a continuous signal from these indivi
 reconstructed analogue signal it is possible to have voltages that are higher than the highest digital sample<br>
 in the audio track! This is illustrated in the following image (samples are represented as tiny squares):<br>
 <br>
-<a target="_blank" href="http://img3.imageshack.us/img3/9153/sine0dbfs.png"><img src="http://img3.imageshack.us/img3/9153/sine0dbfs.th.png" border="0" alt="thumb"></a><br>
+<a target="_blank" href="http://i.imgur.com/5dmIUOZ.png"><img src="http://i.imgur.com/5dmIUOZs.png" border="1px" alt="thumb"></a><br>
 <br>
 Consequently normalizing the sample values to 0dBFS is NOT a very good idea, as this may very well result in<br>
 a reconstructed analogue signal which exceeds(!) 0dBFS. And, as the analogue parts of the playback equipment<br>
@@ -1025,12 +1025,14 @@ Please see the guide for translators at:<br><ul>
 <a name="8dba381f"></a><b>Where can I download the latest version of LameXP?</b><br>
 <br>
 The latest "official" release of LameXP can be found on the following mirrors:<br><ul>
+<li><a href="https://github.com/lordmulder/LameXP/releases/latest" target="_blank">https://github.com/lordmulder/LameXP/releases/latest</a>
 <li><a href="http://sourceforge.net/projects/lamexp/files/" target="_blank">http://sourceforge.net/projects/lamexp/files/</a>
 <li><a href="http://developer.berlios.de/project/showfiles.php?group_id=13288" target="_blank">http://developer.berlios.de/project/showfiles.php?group_id=13288</a>
-<li><a href="https://lamexp.codeplex.com/releases/view/113532" target="_blank">https://lamexp.codeplex.com/releases/view/113532</a>
-<li><a href="https://code.google.com/p/mulder/downloads/list" target="_blank">http://code.google.com/p/mulder/downloads/list</a>
+<li><a href="https://lamexp.codeplex.com/releases/" target="_blank">https://lamexp.codeplex.com/releases/</a>
 <li><a href="https://bitbucket.org/lord_mulder/lamexp/downloads" target="_blank">https://bitbucket.org/lord_mulder/lamexp/downloads</a>
-<li><a href="http://www.free-codecs.com/lamexp_download.htm" target="_blank">http://www.free-codecs.com/lamexp_download.htm</a></ul>
+<li><a href="https://www.assembla.com/spaces/lamexp/documents" target="_blank">https://www.assembla.com/spaces/lamexp/documents</a>
+<li><a href="http://www.free-codecs.com/lamexp_download.htm" target="_blank">http://www.free-codecs.com/lamexp_download.htm</a>
+<li><a href="http://www.videohelp.com/tools/LameXP" target="_blank">http://www.videohelp.com/tools/LameXP</a></ul>
 <br><br>
 
 <a name="9c2e273d"></a><b>Where can I submit bug reports or feature requests?</b><br>
@@ -1056,10 +1058,11 @@ application framework and offers full Unicode support. For the time being LameXP
 LameXP is developed using the <a href="http://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a> revision control system. You can access one of the public mirrors:<br><ul>
 <li><font class="code">git clone git://git.code.sf.net/p/lamexp/code lamexp-src</font> (<a href="http://sourceforge.net/p/lamexp/code/" target="_blank">Browse</a>)
 <li><font class="code">git clone git://git.berlios.de/lamexp lamexp-src</font> (<a href="http://git.berlios.de/cgi-bin/gitweb.cgi?p=lamexp" target="_blank">Browse</a>)
-<li><font class="code">git clone https://git01.codeplex.com/lamexp lamexp-src</font> (<a href="https://lamexp.codeplex.com/SourceControl/latest" target="_blank">Browse</a>)
 <li><font class="code">git clone https://github.com/lordmulder/LameXP.git lamexp-src</font> (<a href="https://github.com/lordmulder/LameXP" target="_blank">Browse</a>)
+<li><font class="code">git clone https://git01.codeplex.com/lamexp lamexp-src</font> (<a href="https://lamexp.codeplex.com/SourceControl/latest" target="_blank">Browse</a>)
 <li><font class="code">git clone https://bitbucket.org/lord_mulder/lamexp.git lamexp-src</font> (<a href="https://bitbucket.org/lord_mulder/lamexp/src" target="_blank">Browse</a>)
-<li><font class="code">git clone git://gitorious.org/lamexp/lamexp.git lamexp-src</font> (<a href="http://gitorious.org/lamexp/lamexp/trees/master" target="_blank">Browse</a>)</ul>
+<li><font class="code">git clone git://gitorious.org/lamexp/lamexp.git lamexp-src</font> (<a href="http://gitorious.org/lamexp/lamexp/trees/master" target="_blank">Browse</a>)
+<li><font class="code">git clone git://git.assembla.com/lamexp.git lamexp-src</font> (<a href="https://www.assembla.com/code/lamexp/git/nodes" target="_blank">Browse</a>)</ul>
 <br>
 In case you are new to Git or want to extend your knowledge, have a look at the <a href="http://git-scm.com/book/en" target="_blank">Pro Git</a> book by Scott Chacon!<br>
 For Windows users, we highly recommend using <a href="http://msysgit.github.com/" target="_blank">MSYS Git</a> in conjunction with the superb <a href="http://tortoisegit.googlecode.com/" target="_blank">Tortoise Git</a> front-end.<br><br>
