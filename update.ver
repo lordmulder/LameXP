@@ -1,12 +1,12 @@
 [!Update]
-TimestampCreated=2014-05-01
+TimestampCreated=2014-05-05
 
 [MPlayer for Windows]
-BuildNo=122
+BuildNo=124
 DownloadSite=http://forum.doom9.org/showthread.php?t=138725
 DownloadAddress=http://mplayer.savedonthe.net/
-DownloadFilename=MPUI.2014-02-12.exe
-DownloadFilecode=595434095f659ce466859f6a6f4893e78d192227
+DownloadFilename=MPUI.2014-05-05.exe
+DownloadFilecode=b90c00db771c6aa216d84a6add972bd5113ceec9
 
 [LameXP]
 BuildNo=1524
