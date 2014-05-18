@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Офіційні дзеркала:</translation>
     </message>
 </context>
 <context>
