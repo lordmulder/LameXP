@@ -115,7 +115,7 @@ while(0)
 
 #define ABORT_IF_BUSY do \
 { \
-	if(BANNER_VISIBLE || m_delayedFileTimer->isActive()) \
+	if(BANNER_VISIBLE || m_delayedFileTimer->isActive() || (QApplication::activeModalWidget() != NULL)) \
 	{ \
 		lamexp_beep(lamexp_beep_warning); \
 		return; \
