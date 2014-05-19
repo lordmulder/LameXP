@@ -106,8 +106,10 @@ static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO
 	#if (_MSC_VER == 1800)
 		#if (_MSC_FULL_VER < 180021005)
 			static const char *g_lamexp_version_compiler = "MSVC 2013-Beta";
-		#elif (_MSC_FULL_VER == 180021005)
+		#elif (_MSC_FULL_VER < 180030501)
 			static const char *g_lamexp_version_compiler = "MSVC 2013";
+		#elif (_MSC_FULL_VER == 180030501)
+			static const char *g_lamexp_version_compiler = "MSVC 2013.2";
 		#else
 			#error Compiler version is not supported yet!
 		#endif
