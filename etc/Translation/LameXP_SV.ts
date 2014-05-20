@@ -102,7 +102,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="641"/>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Officiella servrar</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="651"/>
