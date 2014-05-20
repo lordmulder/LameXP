@@ -84,6 +84,46 @@ g_lamexp_translators[] =
 	{NULL, NULL, NULL, NULL}
 };
 
+//Special Thanks
+static const struct
+{
+	char* pcName;
+	char *pcAddress;
+}
+g_lamexp_specialThanks[] =
+{
+	{ "Doom9's Forum",         "http://forum.doom9.org/"       },
+	{ "Gleitz | German Doom9", "http://forum.gleitz.info/"     },
+	{ "Hydrogenaudio Forums",  "http://www.hydrogenaudio.org/" },
+	{ "RareWares",             "http://www.rarewares.org/"     },
+	{ "GitHub",                "http://github.com/"            },
+	{ "SourceForge",           "http://sourceforge.net/"       },
+	{ "Qt Developer Network",  "http://qt-project.org/"        },
+	{ "BerliOS Developer",     "http://developer.berlios.de/"  },
+	{ "CodePlex",              "http://www.codeplex.com/"      },
+	{ "Marius Hudea",          "http://savedonthe.net/"        },
+	{ "Codecs.com",            "http://www.codecs.com/"        },
+	{ NULL, NULL }
+};
+
+//Mirrors
+static const struct
+{
+	char* pcName;
+	char *pcAddress;
+}
+g_lamexp_mirrors[] =
+{
+	{ "GitHub.com",      "https://github.com/lordmulder/LameXP"              },
+	{ "SourceForge.net", "http://sourceforge.net/p/lamexp/code/"             },
+	{ "Bitbucket.org",   "https://bitbucket.org/lord_mulder/lamexp"          },
+	{ "Gitorious.org",   "https://gitorious.org/lamexp"                      },
+	{ "Codeplex.com",    "https://lamexp.codeplex.com/SourceControl/latest"  },
+	{ "Berlios.de",      "http://git.berlios.de/cgi-bin/gitweb.cgi?p=lamexp" },
+	{ "Assembla.com",    "https://www.assembla.com/spaces/lamexp/"           },
+	{ NULL, NULL }
+};
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -575,7 +615,7 @@ void AboutDialog::initContributorsTab(void)
 	QString icon = QString("<img src=\":/icons/%1.png\">").arg("user_gray");
 	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(icon, spaces);
 	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(tr("Project Leader"), spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%2\">&lt;%3&gt;</a></td></tr>").arg("LoRd_MuldeR", spaces, "MuldeR2@GMX.de");
+	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%3\">&lt;%3&gt;</a></td></tr>").arg("LoRd_MuldeR", spaces, "MuldeR2@GMX.de");
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");
 
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Translators:"), extraVSpace);
@@ -584,35 +624,28 @@ void AboutDialog::initContributorsTab(void)
 		QString flagIcon = (strlen(g_lamexp_translators[i].pcFlag) > 0) ? QString("<img src=\":/flags/%1.png\">").arg(g_lamexp_translators[i].pcFlag) : QString();
 		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(flagIcon, spaces);
 		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcLanguage), spaces);
-		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%2\">&lt;%3&gt;</a></td></tr>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcName), spaces, g_lamexp_translators[i].pcMail);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%3\">&lt;%3&gt;</a></td></tr>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcName), spaces, g_lamexp_translators[i].pcMail);
 	}
 
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Special thanks to:"), extraVSpace);
 
 	QString webIcon = QString("<img src=\":/icons/%1.png\">").arg("world");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Doom9's Forum"), spaces, "http://forum.doom9.org/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Gleitz | German Doom9"), spaces, "http://forum.gleitz.info/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Hydrogenaudio Forums"), spaces, "http://www.hydrogenaudio.org/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("RareWares"), spaces, "http://www.rarewares.org/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("GitHub"), spaces, "http://github.com/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("SourceForge"), spaces, "http://sourceforge.net/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Qt Developer Network"), spaces, "http://qt-project.org/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("BerliOS Developer"), spaces, "http://developer.berlios.de/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("CodePlex"), spaces, "http://www.codeplex.com/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Marius Hudea"), spaces, "http://savedonthe.net/");
-	contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
-	contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(tr("Codecs.com"), spaces, "http://www.codecs.com/");
+	for(int i = 0; g_lamexp_specialThanks[i].pcName; i++)
+	{
+		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(webIcon, spaces);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(QString::fromLatin1(g_lamexp_specialThanks[i].pcName), spaces, QString::fromLatin1(g_lamexp_specialThanks[i].pcAddress));
+	}
+
+	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");
+	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Official Mirrors:"), extraVSpace);
+
+	QString serverIcon = QString("<img src=\":/icons/%1.png\">").arg("server_database");
+	for(int i = 0; g_lamexp_mirrors[i].pcName; i++)
+	{
+		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(serverIcon, spaces);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td valign=\"middle\" colspan=\"3\"><a href=\"%3\">%3</td></tr>").arg(QString::fromLatin1(g_lamexp_mirrors[i].pcName), spaces, QString::fromLatin1(g_lamexp_mirrors[i].pcAddress));
+	}
 
 	contributorsAboutText += "</table><br><br><br>";
 	contributorsAboutText += QString("<i>%1</i><br>").arg(NOBR(tr("If you are willing to contribute a LameXP translation, feel free to contact us!")));

@@ -109,7 +109,7 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 
 	virtual const char *description(void) const
 	{
-		static const char* s_description = "QAAC/QuickTime (\x0C2\x0A9 Appel)";
+		static const char* s_description = "QAAC/QuickTime (\x0C2\x0A9 Apple Inc.)";
 		return s_description;
 	}
 }
@@ -121,10 +121,11 @@ static const g_qaacEncoderInfo;
 
 QAACEncoder::QAACEncoder(void)
 :
-	m_binary_enc(lamexp_lookup_tool("qaac.exe")),
-	m_binary_dll(lamexp_lookup_tool("libsoxrate.dll"))
+	m_binary_qaac(lamexp_lookup_tool("qaac.exe")),
+	m_binary_soxr(lamexp_lookup_tool("libsoxr.dll")),
+	m_binary_soxc(lamexp_lookup_tool("libsoxconvolver.dll"))
 {
-	if(m_binary_enc.isEmpty() || m_binary_dll.isEmpty())
+	if(m_binary_qaac.isEmpty() || m_binary_soxr.isEmpty() || m_binary_soxc.isEmpty())
 	{
 		THROW("Error initializing QAAC. Tool 'qaac.exe' is not registred!");
 	}
@@ -189,7 +190,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
-	if(!startProcess(process, m_binary_enc, args))
+	if(!startProcess(process, m_binary_qaac, args))
 	{
 		return false;
 	}

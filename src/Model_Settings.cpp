@@ -23,6 +23,7 @@
 #include "Model_Settings.h"
 
 #include "Global.h"
+#include "Registry_Encoder.h"
 
 #include <QSettings>
 #include <QDesktopServices>
@@ -379,18 +380,12 @@ void SettingsModel::validate(void)
 	CHECK_RCMODE(Aften);
 	CHECK_RCMODE(OpusEnc);
 	
-	if(!(lamexp_check_tool("neroAacEnc.exe") && lamexp_check_tool("neroAacDec.exe") && lamexp_check_tool("neroAacTag.exe")))
+	if(EncoderRegistry::getAacEncoder() == AAC_ENCODER_NONE)
 	{
-		if(!(lamexp_check_tool("fhgaacenc.exe") && lamexp_check_tool("enc_fhgaac.dll")))
+		if(this->compressionEncoder() == SettingsModel::AACEncoder)
 		{
-			if(!(lamexp_check_tool("qaac.exe") && lamexp_check_tool("libsoxrate.dll")))
-			{
-				if(this->compressionEncoder() == SettingsModel::AACEncoder)
-				{
-					qWarning("AAC encoder selected, but not available any more. Reverting to MP3!");
-					this->compressionEncoder(SettingsModel::MP3Encoder);
-				}
-			}
+			qWarning("AAC encoder selected, but not available any more. Reverting to MP3!");
+			this->compressionEncoder(SettingsModel::MP3Encoder);
 		}
 	}
 	
@@ -566,7 +561,7 @@ LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize, 8)
 LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation, false)
 LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta, false)
-LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, true)
+LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, (!lamexp_portable_mode()));
 LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck, "Never")
 LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled, false)
 LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate, 500)

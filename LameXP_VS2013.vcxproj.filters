@@ -564,9 +564,6 @@
     <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h">
       <Filter>Header Files\Misc\3rd Party</Filter>
     </ClInclude>
-    <ClInclude Include="src\Encoder_MAC.h">
-      <Filter>Header Files\Encoders</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\DropBox.ui">
@@ -775,6 +772,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Thread_CheckUpdate.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_MAC.h">
+      <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

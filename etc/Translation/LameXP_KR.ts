@@ -240,38 +240,6 @@
         <translation type="unfinished">특별히 감사합니다:</translation>
     </message>
     <message>
-        <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished">Doom9 포럼</translation>
-    </message>
-    <message>
-        <source>Gleitz | German Doom9</source>
-        <translation type="unfinished">Gleitz | German Doom9</translation>
-    </message>
-    <message>
-        <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished">Hydrogenaudio 포럼</translation>
-    </message>
-    <message>
-        <source>RareWares</source>
-        <translation type="unfinished">RareWares</translation>
-    </message>
-    <message>
-        <source>GitHub</source>
-        <translation type="unfinished">GitHub</translation>
-    </message>
-    <message>
-        <source>SourceForge</source>
-        <translation type="unfinished">SourceForge</translation>
-    </message>
-    <message>
-        <source>Qt Developer Network</source>
-        <translation type="unfinished">Qt 개발자 네트워크</translation>
-    </message>
-    <message>
-        <source>Marius Hudea</source>
-        <translation type="unfinished">Marius Hudea</translation>
-    </message>
-    <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation type="unfinished">UPX - The Ultimate Packer for eXecutables</translation>
     </message>
@@ -289,15 +257,7 @@
         <translation type="unfinished">AC3Filter 도구의 Valdec - AC3/DTS Decoder</translation>
     </message>
     <message>
-        <source>Codecs.com</source>
-        <translation type="unfinished">Codecs.com</translation>
-    </message>
-    <message>
-        <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CodePlex</source>
+        <source>Official Mirrors:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2008,15 +1968,15 @@
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">현재 인코더: %1</translation>
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">파일 또는 폴더 불러오는 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">APE</translation>
     </message>
 </context>
 <context>
@@ -2590,7 +2550,7 @@
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&apos;%1&apos; 실행하려면 Windows XP 또는 상위 버전이 필요합니다.</translation>
     </message>
 </context>
 <context>
@@ -2608,7 +2568,7 @@
     <name>SplashScreen</name>
     <message>
         <source>LameXP is launching...</source>
-        <translation type="unfinished">LameXP 실행중...</translation>
+        <translation type="unfinished">LameXP 실행 중...</translation>
     </message>
 </context>
 <context>
@@ -2735,11 +2695,11 @@
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">죄송하지만 관리자 그룹의 사용자들만 업데이트를 설치할 수 있습니다.</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">프로그램을 관리자 권한으로 시작한 다음 다시 시도하시기 바랍니다!</translation>
     </message>
 </context>
 </TS>

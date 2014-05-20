@@ -241,38 +241,6 @@
         <translation>Окрема подяка:</translation>
     </message>
     <message>
-        <source>Doom9&apos;s Forum</source>
-        <translation>Форум Doom9</translation>
-    </message>
-    <message>
-        <source>Gleitz | German Doom9</source>
-        <translation>Gleitz | Німецький Doom9</translation>
-    </message>
-    <message>
-        <source>Hydrogenaudio Forums</source>
-        <translation>Форуми Hydrogenaudio</translation>
-    </message>
-    <message>
-        <source>RareWares</source>
-        <translation>RareWares</translation>
-    </message>
-    <message>
-        <source>GitHub</source>
-        <translation>GitHub</translation>
-    </message>
-    <message>
-        <source>SourceForge</source>
-        <translation>SourceForge</translation>
-    </message>
-    <message>
-        <source>Qt Developer Network</source>
-        <translation>Мережа розробників Qt</translation>
-    </message>
-    <message>
-        <source>Marius Hudea</source>
-        <translation>Marius Hudea</translation>
-    </message>
-    <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - The Ultimate Packer for eXecutables</translation>
     </message>
@@ -285,20 +253,12 @@
         <translation>Оригінальна реалізація ALAC від Apple доступна під ліцензією Apache.</translation>
     </message>
     <message>
-        <source>Codecs.com</source>
-        <translation>Codecs.com</translation>
-    </message>
-    <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation>Valdec зі складу AC3Filter Tools - декодер AC3/DTS</translation>
     </message>
     <message>
-        <source>BerliOS Developer</source>
-        <translation>BerliOS Developer</translation>
-    </message>
-    <message>
-        <source>CodePlex</source>
-        <translation>CodePlex</translation>
+        <source>Official Mirrors:</source>
+        <translation>Офіційні дзеркала:</translation>
     </message>
 </context>
 <context>

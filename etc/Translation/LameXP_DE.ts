@@ -240,38 +240,6 @@
         <translation>Besonderen Dank an:</translation>
     </message>
     <message>
-        <source>Doom9&apos;s Forum</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Gleitz | German Doom9</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hydrogenaudio Forums</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>RareWares</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>GitHub</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>SourceForge</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Qt Developer Network</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Marius Hudea</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation></translation>
     </message>
@@ -288,16 +256,8 @@
         <translation>Valdec aus den AC3Filter Tools - AC3/DTS Decoder</translation>
     </message>
     <message>
-        <source>Codecs.com</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>BerliOS Developer</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>CodePlex</source>
-        <translation></translation>
+        <source>Official Mirrors:</source>
+        <translation>Offizielle Spiegelserver:</translation>
     </message>
 </context>
 <context>

@@ -244,38 +244,6 @@
         <translation>Grand merci à :</translation>
     </message>
     <message>
-        <source>Doom9&apos;s Forum</source>
-        <translation>Forum Doom9&apos;s</translation>
-    </message>
-    <message>
-        <source>Gleitz | German Doom9</source>
-        <translation>Gleitz | German Doom9</translation>
-    </message>
-    <message>
-        <source>Hydrogenaudio Forums</source>
-        <translation>Forums Hydrogenaudi</translation>
-    </message>
-    <message>
-        <source>RareWares</source>
-        <translation>RareWares</translation>
-    </message>
-    <message>
-        <source>GitHub</source>
-        <translation>GitHub</translation>
-    </message>
-    <message>
-        <source>SourceForge</source>
-        <translation>SourceForge</translation>
-    </message>
-    <message>
-        <source>Qt Developer Network</source>
-        <translation>Qt Developer Network</translation>
-    </message>
-    <message>
-        <source>Marius Hudea</source>
-        <translation>Marius Hudea</translation>
-    </message>
-    <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - The Ultimate Packer for eXecutable</translation>
     </message>
@@ -292,15 +260,7 @@
         <translation>Valdec depuis les outils AC3Filter - Décodeur AC3/DTS</translation>
     </message>
     <message>
-        <source>Codecs.com</source>
-        <translation>Codecs.com</translation>
-    </message>
-    <message>
-        <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CodePlex</source>
+        <source>Official Mirrors:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2024,15 +1984,15 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Current Encoder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Encodeur actuel r: %1</translation>
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement des fichiers ou dossiers déposés, patientez...</translation>
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation>APE</translation>
     </message>
 </context>
 <context>
@@ -2618,7 +2578,7 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; requiert Windows XP ou une version ultérieure.</translation>
     </message>
 </context>
 <context>
@@ -2751,23 +2711,23 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Initialisation, patientez...</translation>
+        <translation>Initialisation, patientez...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished">Abandonner</translation>
+        <translation>Abandonner</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">Ignorer</translation>
+        <translation>Ignorer</translation>
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, mais seuls les « Administrateurs » peuvent installer les mises à jour.</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez démarrer l&apos;application depuis un compte administrateur, puis réessayez !</translation>
     </message>
 </context>
 </TS>

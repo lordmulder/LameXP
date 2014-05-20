@@ -1101,6 +1101,20 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 	
+	//Enable larger/smaller font size
+	double fontScaleFactor = 1.0;
+	if(arguments.contains("--huge-font",  Qt::CaseInsensitive)) fontScaleFactor = 1.500;
+	if(arguments.contains("--big-font",   Qt::CaseInsensitive)) fontScaleFactor = 1.250;
+	if(arguments.contains("--small-font", Qt::CaseInsensitive)) fontScaleFactor = 0.875;
+	if(arguments.contains("--tiny-font",  Qt::CaseInsensitive)) fontScaleFactor = 0.750;
+	if(!qFuzzyCompare(fontScaleFactor, 1.0))
+	{
+		qWarning("Application font scale factor set to: %.3f\n", fontScaleFactor);
+		QFont appFont = application->font();
+		appFont.setPointSizeF(appFont.pointSizeF() * fontScaleFactor);
+		application->setFont(appFont);
+	}
+
 	//Add the default translations
 	lamexp_translation_init();
 
@@ -2251,6 +2265,20 @@ bool lamexp_user_is_admin(void)
 	}
 
 	return isAdmin;
+}
+
+/*
+ * Check if file is a valid Win32/Win64 executable
+ */
+bool lamexp_is_executable(const QString &path)
+{
+	bool bIsExecutable = false;
+	DWORD binaryType;
+	if(GetBinaryType(QWCHAR(QDir::toNativeSeparators(path)), &binaryType))
+	{
+		bIsExecutable = (binaryType == SCS_32BIT_BINARY || binaryType == SCS_64BIT_BINARY);
+	}
+	return bIsExecutable;
 }
 
 /*

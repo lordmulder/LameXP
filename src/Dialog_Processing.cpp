@@ -152,6 +152,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	m_ramObserver(NULL),
 	m_progressViewFilter(-1),
 	m_initThreads(0),
+	m_defaultColor(new QColor()),
 	m_firstShow(true)
 {
 	//Init the dialog, from the .ui file
@@ -348,6 +349,7 @@ ProcessingDialog::~ProcessingDialog(void)
 	LAMEXP_DELETE(m_contextMenu);
 	LAMEXP_DELETE(m_progressModel);
 	LAMEXP_DELETE(m_threadPool);
+	LAMEXP_DELETE(m_defaultColor);
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -407,21 +409,19 @@ void ProcessingDialog::closeEvent(QCloseEvent *event)
 
 bool ProcessingDialog::eventFilter(QObject *obj, QEvent *event)
 {
-	static QColor defaultColor = QColor();
-
 	if(obj == ui->label_versionInfo)
 	{
 		if(event->type() == QEvent::Enter)
 		{
 			QPalette palette = ui->label_versionInfo->palette();
-			defaultColor = palette.color(QPalette::Normal, QPalette::WindowText);
+			*m_defaultColor = palette.color(QPalette::Normal, QPalette::WindowText);
 			palette.setColor(QPalette::Normal, QPalette::WindowText, Qt::red);
 			ui->label_versionInfo->setPalette(palette);
 		}
 		else if(event->type() == QEvent::Leave)
 		{
 			QPalette palette = ui->label_versionInfo->palette();
-			palette.setColor(QPalette::Normal, QPalette::WindowText, defaultColor);
+			palette.setColor(QPalette::Normal, QPalette::WindowText, *m_defaultColor);
 			ui->label_versionInfo->setPalette(palette);
 		}
 		else if(event->type() == QEvent::MouseButtonPress)

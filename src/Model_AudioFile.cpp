@@ -45,6 +45,32 @@ while(0)
 } \
 while(0)
 
+//if((!(OTHER.NAME.isEmpty())) && ((FORCE) || (this.NAME.isEmpty()))) /*this.NAME = OTHER.NAME;*/ \
+
+#define UPDATE_STR(OTHER, FORCE, NAME) do \
+{ \
+	if(!(((OTHER).NAME).isEmpty())) \
+	{ \
+		if((FORCE) || ((this->NAME).isEmpty())) (this->NAME) = ((OTHER).NAME); \
+	} \
+} \
+while(0)
+
+#define UPDATE_INT(OTHER, FORCE, NAME) do \
+{ \
+	if(((OTHER).NAME) > 0) \
+	{ \
+		if((FORCE) || ((this->NAME) == 0)) (this->NAME) = ((OTHER).NAME); \
+	} \
+} \
+while(0)
+
+#define ASSIGN_VAL(OTHER, NAME)  do \
+{ \
+	(this->NAME) = ((OTHER).NAME); \
+} \
+while(0)
+
 ///////////////////////////////////////////////////////////////////////////////
 // Audio File - Meta Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -56,40 +82,42 @@ AudioFileModel_MetaInfo::AudioFileModel_MetaInfo(void)
 
 AudioFileModel_MetaInfo::AudioFileModel_MetaInfo(const AudioFileModel_MetaInfo &model)
 {
-	m_titel =    model.m_titel;
-	m_artist =   model.m_artist;
-	m_album =    model.m_album;
-	m_genre =    model.m_genre;
-	m_comment =  model.m_comment;
-	m_cover =    model.m_cover;
-	m_year =     model.m_year;
-	m_position = model.m_position;
+	ASSIGN_VAL(model, m_titel);
+	ASSIGN_VAL(model, m_artist);
+	ASSIGN_VAL(model, m_album);
+	ASSIGN_VAL(model, m_genre);
+	ASSIGN_VAL(model, m_comment);
+	ASSIGN_VAL(model, m_cover);
+	ASSIGN_VAL(model, m_year);
+	ASSIGN_VAL(model, m_position);
 }
 
 AudioFileModel_MetaInfo &AudioFileModel_MetaInfo::operator=(const AudioFileModel_MetaInfo &model)
 {
-	m_titel =    model.m_titel;
-	m_artist =   model.m_artist;
-	m_album =    model.m_album;
-	m_genre =    model.m_genre;
-	m_comment =  model.m_comment;
-	m_cover =    model.m_cover;
-	m_year =     model.m_year;
-	m_position = model.m_position;
+	ASSIGN_VAL(model, m_titel);
+	ASSIGN_VAL(model, m_artist);
+	ASSIGN_VAL(model, m_album);
+	ASSIGN_VAL(model, m_genre);
+	ASSIGN_VAL(model, m_comment);
+	ASSIGN_VAL(model, m_cover);
+	ASSIGN_VAL(model, m_year);
+	ASSIGN_VAL(model, m_position);
 
 	return (*this);
 }
 
+#define IS_EMPTY(X) ((X).isEmpty() ? "YES" : "NO")
+
 void AudioFileModel_MetaInfo::update(const AudioFileModel_MetaInfo &model, const bool replace)
 {
-	if((!model.m_titel.isEmpty())   && (replace || m_titel.isEmpty()))   m_titel    = model.m_titel;
-	if((!model.m_artist.isEmpty())  && (replace || m_artist.isEmpty()))  m_artist   = model.m_artist;
-	if((!model.m_album.isEmpty())   && (replace || m_album.isEmpty()))   m_album    = model.m_album;
-	if((!model.m_genre.isEmpty())   && (replace || m_genre.isEmpty()))   m_genre    = model.m_genre;
-	if((!model.m_comment.isEmpty()) && (replace || m_comment.isEmpty())) m_comment  = model.m_comment;
-	if((!model.m_cover.isEmpty())   && (replace || m_cover.isEmpty()))   m_cover    = model.m_cover;
-	if((model.m_year > 0)           && (replace || (m_year == 0)))       m_year     = model.m_year;
-	if((model.m_position > 0)       && (replace || (m_position == 0)))   m_position = model.m_position;
+	UPDATE_STR(model, replace, m_titel);
+	UPDATE_STR(model, replace, m_artist);
+	UPDATE_STR(model, replace, m_album);
+	UPDATE_STR(model, replace, m_genre);
+	UPDATE_STR(model, replace, m_comment);
+	UPDATE_STR(model, replace, m_cover);
+	UPDATE_INT(model, replace, m_year);
+	UPDATE_INT(model, replace, m_position);
 }
 
 AudioFileModel_MetaInfo::~AudioFileModel_MetaInfo(void)
@@ -132,34 +160,34 @@ AudioFileModel_TechInfo::AudioFileModel_TechInfo(void)
 
 AudioFileModel_TechInfo::AudioFileModel_TechInfo(const AudioFileModel_TechInfo &model)
 {
-	m_containerType =    model.m_containerType;
-	m_containerProfile = model.m_containerProfile;
-	m_audioType =        model.m_audioType;
-	m_audioProfile =     model.m_audioProfile;
-	m_audioVersion =     model.m_audioVersion;
-	m_audioEncodeLib =   model.m_audioEncodeLib;
-	m_audioSamplerate =  model.m_audioSamplerate;
-	m_audioChannels =    model.m_audioChannels;
-	m_audioBitdepth =    model.m_audioBitdepth;
-	m_audioBitrate =     model.m_audioBitrate;
-	m_audioBitrateMode = model.m_audioBitrateMode;
-	m_duration =         model.m_duration;
+	ASSIGN_VAL(model, m_containerType);
+	ASSIGN_VAL(model, m_containerProfile);
+	ASSIGN_VAL(model, m_audioType);
+	ASSIGN_VAL(model, m_audioProfile);
+	ASSIGN_VAL(model, m_audioVersion);
+	ASSIGN_VAL(model, m_audioEncodeLib);
+	ASSIGN_VAL(model, m_audioSamplerate);
+	ASSIGN_VAL(model, m_audioChannels);
+	ASSIGN_VAL(model, m_audioBitdepth);
+	ASSIGN_VAL(model, m_audioBitrate);
+	ASSIGN_VAL(model, m_audioBitrateMode);
+	ASSIGN_VAL(model, m_duration);
 }
 
 AudioFileModel_TechInfo &AudioFileModel_TechInfo::operator=(const AudioFileModel_TechInfo &model)
 {
-	m_containerType =    model.m_containerType;
-	m_containerProfile = model.m_containerProfile;
-	m_audioType =        model.m_audioType;
-	m_audioProfile =     model.m_audioProfile;
-	m_audioVersion =     model.m_audioVersion;
-	m_audioEncodeLib =   model.m_audioEncodeLib;
-	m_audioSamplerate =  model.m_audioSamplerate;
-	m_audioChannels =    model.m_audioChannels;
-	m_audioBitdepth =    model.m_audioBitdepth;
-	m_audioBitrate =     model.m_audioBitrate;
-	m_audioBitrateMode = model.m_audioBitrateMode;
-	m_duration =         model.m_duration;
+	ASSIGN_VAL(model, m_containerType);
+	ASSIGN_VAL(model, m_containerProfile);
+	ASSIGN_VAL(model, m_audioType);
+	ASSIGN_VAL(model, m_audioProfile);
+	ASSIGN_VAL(model, m_audioVersion);
+	ASSIGN_VAL(model, m_audioEncodeLib);
+	ASSIGN_VAL(model, m_audioSamplerate);
+	ASSIGN_VAL(model, m_audioChannels);
+	ASSIGN_VAL(model, m_audioBitdepth);
+	ASSIGN_VAL(model, m_audioBitrate);
+	ASSIGN_VAL(model, m_audioBitrateMode);
+	ASSIGN_VAL(model, m_duration);
 
 	return (*this);
 }
@@ -199,16 +227,16 @@ AudioFileModel::AudioFileModel(const QString &path)
 
 AudioFileModel::AudioFileModel(const AudioFileModel &model)
 {
-	m_filePath = model.m_filePath;
-	m_metaInfo = model.m_metaInfo;
-	m_techInfo = model.m_techInfo;
+	ASSIGN_VAL(model, m_filePath);
+	ASSIGN_VAL(model, m_metaInfo);
+	ASSIGN_VAL(model, m_techInfo);
 }
 
 AudioFileModel &AudioFileModel::operator=(const AudioFileModel &model)
 {
-	m_filePath = model.m_filePath;
-	m_metaInfo = model.m_metaInfo;
-	m_techInfo = model.m_techInfo;
+	ASSIGN_VAL(model, m_filePath);
+	ASSIGN_VAL(model, m_metaInfo);
+	ASSIGN_VAL(model, m_techInfo);
 
 	return (*this);
 }

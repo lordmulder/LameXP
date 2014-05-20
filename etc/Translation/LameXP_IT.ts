@@ -240,38 +240,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Doom9&apos;s Forum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gleitz | German Doom9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hydrogenaudio Forums</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RareWares</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GitHub</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SourceForge</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Qt Developer Network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Marius Hudea</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation type="unfinished"></translation>
     </message>
@@ -288,15 +256,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Codecs.com</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BerliOS Developer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CodePlex</source>
+        <source>Official Mirrors:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
