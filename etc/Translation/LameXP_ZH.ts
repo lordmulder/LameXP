@@ -257,7 +257,7 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation>官方镜像:</translation>
     </message>
 </context>
 <context>
