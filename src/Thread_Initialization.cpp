@@ -31,7 +31,6 @@
 #include <QProcess>
 #include <QMap>
 #include <QDir>
-#include <QLibrary>
 #include <QResource>
 #include <QTextStream>
 #include <QRunnable>

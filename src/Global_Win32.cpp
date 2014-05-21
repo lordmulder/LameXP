@@ -811,15 +811,14 @@ static __forceinline bool lamexp_check_for_debugger(void)
 	{
 		return true;
 	}
-	__try 
+
+	BOOL bHaveDebugger = FALSE;
+	if(CheckRemoteDebuggerPresent(GetCurrentProcess(), &bHaveDebugger))
 	{
-		__debugbreak();
+		if(bHaveDebugger) return true;
 	}
-	__except(1) 
-	{
-		return IsDebuggerPresent();
-	}
-	return true;
+
+	return IsDebuggerPresent();
 }
 
 /*
