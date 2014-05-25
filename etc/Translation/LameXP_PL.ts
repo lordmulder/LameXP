@@ -102,7 +102,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="641"/>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oficjalni dostawcy:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="651"/>
@@ -1020,7 +1020,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1829"/>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished">Ostrzeżenie: Kompresja może trwać bardzo długo. Prosze &lt;b&gt;nie&lt;b&gt; kierować skarg do autora programu!</translation>
+        <translation type="unfinished">Ostrzeżenie: Kompresja może potrwać bardzo długo. Prosze &lt;b&gt;nie&lt;b&gt; kierować skarg do autora programu!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1871"/>
@@ -3298,22 +3298,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1064"/>
+        <location filename="../../src/Global_Win32.cpp" line="1063"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; nie działa w trybie kompatybilności z Windows.</translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1006"/>
+        <location filename="../../src/Global_Win32.cpp" line="1005"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished">Plik wykonywalny &apos;%1&apos; wymaga Qt v%2, znaleziono jednak Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1011"/>
+        <location filename="../../src/Global_Win32.cpp" line="1010"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; został skompilowany dla Qt &quot;%2&quot;, znaleziono &quot;%3&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1023"/>
+        <location filename="../../src/Global_Win32.cpp" line="1022"/>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
         <translation type="unfinished">Plik wykonywalny &quot;%1&quot; wymaga Windows XP lub nowszego.</translation>
     </message>
