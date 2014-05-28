@@ -376,7 +376,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 
 	//Make sure the source file exists
 	QFileInfo sourceFile(m_audioFile.filePath());
-	if(!sourceFile.exists() || !sourceFile.isFile())
+	if(!(sourceFile.exists() && sourceFile.isFile()))
 	{
 		handleMessage(QString("%1\n%2").arg(tr("The source audio file could not be found:"), sourceFile.absoluteFilePath()));
 		return 0;
@@ -428,7 +428,6 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 	else
 	{
-		writeTest.close();
 		writeTest.remove();
 	}
 
@@ -447,26 +446,30 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Delete file, if target file exists (optional!)
-	if(m_overwriteReplacesExisting && QFileInfo(outFileName).exists())
+	if(m_overwriteReplacesExisting && QFileInfo(outFileName).exists() && QFileInfo(outFileName).isFile())
 	{
-		handleMessage(QString("%1\n%2\n").arg(tr("Target output file already exists, going to delete existing file:"), QDir::toNativeSeparators(outFileName)));
-		bool bOkay = false;
-		for(int i = 0; i < 16; i++)
+		if(sourceFile.canonicalFilePath().compare(QFileInfo(outFileName).absoluteFilePath(), Qt::CaseInsensitive) != 0)
 		{
-			bOkay = QFile::remove(outFileName);
-			if(bOkay) break;
-			lamexp_sleep(125);
-		}
-		if(QFileInfo(outFileName).exists() || (!bOkay))
-		{
-			handleMessage(QString("%1\n").arg(tr("Failed to delete existing target file, will save to another file name!")));
+			handleMessage(QString("%1\n%2\n").arg(tr("Target output file already exists, going to delete existing file:"), QDir::toNativeSeparators(outFileName)));
+			for(int i = 0; i < 16; i++)
+			{
+				if(QFile::remove(outFileName))
+				{
+					break;
+				}
+				lamexp_sleep(125);
+			}
+			if(QFileInfo(outFileName).exists())
+			{
+				handleMessage(QString("%1\n").arg(tr("Failed to delete existing target file, will save to another file name!")));
+			}
 		}
 	}
 
 	int n = 1;
 
 	//Generate final name
-	while(QFileInfo(outFileName).exists())
+	while(QFileInfo(outFileName).exists() && (n < (INT_MAX/2)))
 	{
 		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), fileName, QString::number(++n), m_encoder->extension());
 	}

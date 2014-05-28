@@ -2955,47 +2955,47 @@
         <translation>Målmappen är INTE skrivbar:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="488"/>
+        <location filename="../../src/Thread_Process.cpp" line="491"/>
         <source>Unknown File Name</source>
         <translation>Okänt filnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="490"/>
+        <location filename="../../src/Thread_Process.cpp" line="493"/>
         <source>Unknown Title</source>
         <translation>Okänd titel</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="491"/>
+        <location filename="../../src/Thread_Process.cpp" line="494"/>
         <source>Unknown Artist</source>
         <translation>Okänd artist</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="492"/>
+        <location filename="../../src/Thread_Process.cpp" line="495"/>
         <source>Unknown Album</source>
         <translation>Okänt album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="494"/>
+        <location filename="../../src/Thread_Process.cpp" line="497"/>
         <source>Unknown Comment</source>
         <translation>Okänd kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="444"/>
+        <location filename="../../src/Thread_Process.cpp" line="443"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Målfilen finns redan! Den här filen hoppas över:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="445"/>
+        <location filename="../../src/Thread_Process.cpp" line="444"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Om du inte vill att befintliga filer hoppas över, måste du ändra överskrivningsläge!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="452"/>
+        <location filename="../../src/Thread_Process.cpp" line="453"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Målfilen finns redan! Befintlig fil kommer att tas bort:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="462"/>
+        <location filename="../../src/Thread_Process.cpp" line="464"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Kunde inte ta bort befintlig målfil. Sparar med annat filnamn!</translation>
     </message>
