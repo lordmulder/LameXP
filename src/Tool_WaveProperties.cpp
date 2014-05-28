@@ -25,6 +25,7 @@
 #include "Global.h"
 #include "Model_AudioFile.h"
 
+#include <QDir>
 #include <QProcess>
 
 WaveProperties::WaveProperties(void)
@@ -46,7 +47,7 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel_TechInfo *
 	QProcess process;
 	QStringList args;
 
-	args << "--i" << sourceFile;
+	args << "--i" << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args))
 	{
