@@ -851,5 +851,13 @@
     <Filter Include="Header Files\Misc\3rd Party">
       <UniqueIdentifier>{cbf43849-15bc-446f-894b-a5ffd74270e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manifest">
+      <UniqueIdentifier>{9325bb71-b41e-47b6-858f-7144ec65d551}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="etc\Manifest\Compatibility.manifest">
+      <Filter>Manifest</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>

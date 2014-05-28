@@ -1308,6 +1308,9 @@ del "$(TargetDir)imageformats\q???d4.dll"
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="etc\Manifest\Compatibility.manifest" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
