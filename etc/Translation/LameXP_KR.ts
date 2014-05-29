@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">공식 미러:</translation>
     </message>
 </context>
 <context>
