@@ -63,8 +63,7 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_jobId(QUuid::createUuid()),
 	m_prependRelativeSourcePath(prependRelativeSourcePath),
 	m_renamePattern("<BaseName>"),
-	m_overwriteSkipExistingFile(false),
-	m_overwriteReplacesExisting(false),
+	m_overwriteMode(OverwriteMode_KeepBoth),
 	m_initialized(-1),
 	m_aborted(false),
 	m_propDetect(new WaveProperties())
@@ -438,7 +437,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, m_encoder->extension());
 
 	//Skip file, if target file exists (optional!)
-	if(m_overwriteSkipExistingFile && QFileInfo(outFileName).exists())
+	if((m_overwriteMode == OverwriteMode_SkipExisting) && QFileInfo(outFileName).exists())
 	{
 		handleMessage(QString("%1\n%2\n").arg(tr("Target output file already exists, going to skip this file:"), QDir::toNativeSeparators(outFileName)));
 		handleMessage(tr("If you don't want existing files to be skipped, please change the overwrite mode!"));
@@ -446,11 +445,11 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Delete file, if target file exists (optional!)
-	if(m_overwriteReplacesExisting && QFileInfo(outFileName).exists() && QFileInfo(outFileName).isFile())
+	if((m_overwriteMode == OverwriteMode_Overwrite) && QFileInfo(outFileName).exists() && QFileInfo(outFileName).isFile())
 	{
+		handleMessage(QString("%1\n%2\n").arg(tr("Target output file already exists, going to delete existing file:"), QDir::toNativeSeparators(outFileName)));
 		if(sourceFile.canonicalFilePath().compare(QFileInfo(outFileName).absoluteFilePath(), Qt::CaseInsensitive) != 0)
 		{
-			handleMessage(QString("%1\n%2\n").arg(tr("Target output file already exists, going to delete existing file:"), QDir::toNativeSeparators(outFileName)));
 			for(int i = 0; i < 16; i++)
 			{
 				if(QFile::remove(outFileName))
@@ -459,10 +458,10 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 				}
 				lamexp_sleep(125);
 			}
-			if(QFileInfo(outFileName).exists())
-			{
-				handleMessage(QString("%1\n").arg(tr("Failed to delete existing target file, will save to another file name!")));
-			}
+		}
+		if(QFileInfo(outFileName).exists())
+		{
+			handleMessage(QString("%1\n").arg(tr("Failed to delete existing target file, will save to another file name!")));
 		}
 	}
 
@@ -679,17 +678,19 @@ void ProcessThread::setRenamePattern(const QString &pattern)
 	if(!newPattern.isEmpty()) m_renamePattern = newPattern;
 }
 
-void ProcessThread::setOverwriteMode(const bool bSkipExistingFile, const bool bReplacesExisting)
+void ProcessThread::setOverwriteMode(const bool &bSkipExistingFile, const bool &bReplacesExisting)
 {
 	if(bSkipExistingFile && bReplacesExisting)
 	{
-		qWarning("Inconsistent overwrite flags, reverting to default!");
-		m_overwriteSkipExistingFile = false;
-		m_overwriteReplacesExisting = false;
+		qWarning("Inconsistent overwrite flags -> reverting to default!");
+		m_overwriteMode = OverwriteMode_KeepBoth;
 	}
-
-	m_overwriteSkipExistingFile = bSkipExistingFile;
-	m_overwriteReplacesExisting = bReplacesExisting;
+	else
+	{
+		m_overwriteMode = OverwriteMode_KeepBoth;
+		if(bSkipExistingFile) m_overwriteMode = OverwriteMode_SkipExisting;
+		if(bReplacesExisting) m_overwriteMode = OverwriteMode_Overwrite;
+	}
 }
 
 ////////////////////////////////////////////////////////////

@@ -47,7 +47,7 @@ public:
 	
 	QUuid getId(void) { return m_jobId; }
 	void setRenamePattern(const QString &pattern);
-	void setOverwriteMode(const bool bSkipExistingFile, const bool ReplacesExisting = false);
+	void setOverwriteMode(const bool &bSkipExistingFile, const bool &bReplacesExisting = false);
 	void addFilter(AbstractFilter *filter);
 
 public slots:
@@ -76,6 +76,13 @@ private:
 		EncodingStep = 3,
 		UnknownStep = 4
 	};
+
+	enum OverwriteMode
+	{
+		OverwriteMode_KeepBoth     = 0,
+		OverwriteMode_SkipExisting = 1,
+		OverwriteMode_Overwrite    = 2,
+	};
 	
 	void processFile();
 	int generateOutFileName(QString &outFileName);
@@ -97,8 +104,7 @@ private:
 	const bool m_prependRelativeSourcePath;
 	QList<AbstractFilter*> m_filters;
 	QString m_renamePattern;
-	bool m_overwriteSkipExistingFile;
-	bool m_overwriteReplacesExisting;
+	int m_overwriteMode;
 	WaveProperties *m_propDetect;
 	QString m_outFileName;
 };
