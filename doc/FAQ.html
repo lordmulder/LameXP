@@ -810,20 +810,27 @@ faster encoding speed at the cost of reduced sound quality (lower algorithm qual
 algorithm quality does influence the encoding speed, it does NOT influence the decoding speed at all. Also<br>
 note, again, that the chosen algorithm quality does NOT influence the resulting file's bitrate at all.<br>
 <br>
-The LAME algorithm quality is an integral value between "0" (best/slowest) and "9" (worst/fastest), but NOT<br>
-all of the possible values currently have a distinct effect! More specifically, the following table applies:<br>
+The LAME algorithm quality is an integral value in the '0' and '9' range, where '0' gives the best quality<br>
+(slowest encoding) and '9' gives the fastest encoding speed (worst quality). Note, however, that only the CBR<br>
+and ABR modes use all possible values. The (new) VBR mode has only three distinct quality levels: '0' to '4',<br>
+'5' to '6' and '7' to '9'. For example, in VBR mode, all values in the '0' to '4' range are mapped to '0'.<br>
+<br>
+The "algorithm quality" options available in LameXP will be mapped to '7', '5', '2' and '0', respectively.<br>
+Note that '0' (best quality) is only slightly better than '2' (high quality), but substantially slower!<br>
+<br>
+<br>
+The following tables contain some details about the LAME algorithm quality modes:<br>
 <br>
 For CBR and ARB modes:<ul>
-<li>0: Use slowest &amp; best possible version of all algorithms
-<li>3: Default value, good speed, good quality
-<li>7: Very fast, ok quality (psycho acoustics are used for pre-echo &amp; M/S, but NO noise shaping)
-<li>9: Disables almost all algorithms including psy-model, poor quality</ul>
+<li>0: Use slowest and best possible version of all algorithms (highest precision of parameters)
+<li>1 to 3: Similar to 0, but with decreasing precision of parameters the further from 0
+<li>5 to 6: Same as 7, but enables noise shaping and increases subblock gain
+<li>7 to 9: Very fast (psycho acoustics are used for pre-echo and M/S, but *NO* noise shaping)</ul>
 For (new) VBR mode only:<ul>
-<li>0 to 4: Use the best algorithm (slower)
-<li>5 to 9: Use the not so good algorithm (faster)</ul>
-<br>
-The "algorithm quality" options available in LameXP will be mapped to "0", "3", "7" and "9", respecitly. Note<br>
-that option "0" (best quality) is only very slightly better than "3" (high quality), but significant slower!<br><br>
+<li>0 to 4: All features of the other modes, best search when applying Huffman coding
+<li>5 to 6: All features of 7, calculat/consider actual quantisation noise, enable subblock gain
+<li>7 to 9: This level uses a psy-model but does *NOT* calculate quantisation noise</ul>
+Note that the LAME switches "-h" and "-f" are simply aliases for mode '2' and '7', respectively!<br><br>
 
 <br><br>
 
