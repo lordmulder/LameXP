@@ -29,7 +29,7 @@
 #include <QDir>
 #include <limits.h>
 
-static const int g_lameAgorithmQualityLUT[5] = {9, 7, 3, 0, INT_MAX};
+static const int g_lameAgorithmQualityLUT[5] = {7, 5, 2, 0, INT_MAX};
 static const int g_mp3BitrateLUT[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
 static const int g_lameVBRQualityLUT[11] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, INT_MAX};
 
@@ -124,7 +124,7 @@ MP3Encoder::MP3Encoder(void)
 		THROW("Error initializing MP3 encoder. Tool 'lame.exe' is not registred!");
 	}
 	
-	m_algorithmQuality = 3;
+	m_algorithmQuality = 2;
 	m_configBitrateMaximum = 0;
 	m_configBitrateMinimum = 0;
 	m_configSamplingRate = 0;
@@ -324,7 +324,7 @@ const unsigned int *MP3Encoder::supportedChannelCount(void)
 
 void MP3Encoder::setAlgoQuality(int value)
 {
-	m_algorithmQuality = value;
+	m_algorithmQuality = qBound(0, value, 3);
 }
 
 void MP3Encoder::setBitrateLimits(int minimumBitrate, int maximumBitrate)

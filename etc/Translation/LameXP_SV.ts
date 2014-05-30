@@ -2858,139 +2858,139 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="111"/>
+        <location filename="../../src/Thread_Process.cpp" line="110"/>
         <source>Starting...</source>
         <translation>Startar...</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="149"/>
+        <location filename="../../src/Thread_Process.cpp" line="148"/>
         <source>Skipped.</source>
         <translation>Överhoppad.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="154"/>
+        <location filename="../../src/Thread_Process.cpp" line="153"/>
         <source>Not found!</source>
         <translation>Hittas ej!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="235"/>
+        <location filename="../../src/Thread_Process.cpp" line="234"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>VARNING! Omkodad filstorlek överstiger 4 GB. Problem kan uppstå!
 </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="244"/>
+        <location filename="../../src/Thread_Process.cpp" line="243"/>
         <source>The format of this file is NOT supported:</source>
         <translation>Det här filformatet saknar stöd i LameXP:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="244"/>
+        <location filename="../../src/Thread_Process.cpp" line="243"/>
         <source>Container Format:</source>
         <translation>Behållarformat:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="244"/>
+        <location filename="../../src/Thread_Process.cpp" line="243"/>
         <source>Audio Format:</source>
         <translation>Ljudformat:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="245"/>
+        <location filename="../../src/Thread_Process.cpp" line="244"/>
         <source>Unsupported!</source>
         <translation>Stöd saknas!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="333"/>
+        <location filename="../../src/Thread_Process.cpp" line="332"/>
         <source>Aborted!</source>
         <translation>Avbruten!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="333"/>
+        <location filename="../../src/Thread_Process.cpp" line="332"/>
         <source>Done.</source>
         <translation>Klar.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="333"/>
+        <location filename="../../src/Thread_Process.cpp" line="332"/>
         <source>Failed!</source>
         <translation>Misslyckades!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="350"/>
+        <location filename="../../src/Thread_Process.cpp" line="349"/>
         <source>Encoding</source>
         <translation>Kodar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="353"/>
+        <location filename="../../src/Thread_Process.cpp" line="352"/>
         <source>Analyzing</source>
         <translation>Analyserar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="356"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Filtering</source>
         <translation>Filtrerar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="359"/>
+        <location filename="../../src/Thread_Process.cpp" line="358"/>
         <source>Decoding</source>
         <translation>Avkodar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="380"/>
         <source>The source audio file could not be found:</source>
         <translation>Källfilen kan inte hittas:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="389"/>
+        <location filename="../../src/Thread_Process.cpp" line="388"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Källfilen kan inte öppnas för läsning:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="417"/>
+        <location filename="../../src/Thread_Process.cpp" line="416"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Målmappen finns inte och kan inte skapas:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="426"/>
+        <location filename="../../src/Thread_Process.cpp" line="425"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Målmappen är INTE skrivbar:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="491"/>
+        <location filename="../../src/Thread_Process.cpp" line="490"/>
         <source>Unknown File Name</source>
         <translation>Okänt filnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="493"/>
+        <location filename="../../src/Thread_Process.cpp" line="492"/>
         <source>Unknown Title</source>
         <translation>Okänd titel</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="494"/>
+        <location filename="../../src/Thread_Process.cpp" line="493"/>
         <source>Unknown Artist</source>
         <translation>Okänd artist</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="495"/>
+        <location filename="../../src/Thread_Process.cpp" line="494"/>
         <source>Unknown Album</source>
         <translation>Okänt album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="497"/>
+        <location filename="../../src/Thread_Process.cpp" line="496"/>
         <source>Unknown Comment</source>
         <translation>Okänd kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="443"/>
+        <location filename="../../src/Thread_Process.cpp" line="442"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Målfilen finns redan! Den här filen hoppas över:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="444"/>
+        <location filename="../../src/Thread_Process.cpp" line="443"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Om du inte vill att befintliga filer hoppas över, måste du ändra överskrivningsläge!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="453"/>
+        <location filename="../../src/Thread_Process.cpp" line="450"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Målfilen finns redan! Befintlig fil kommer att tas bort:</translation>
     </message>
