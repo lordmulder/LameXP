@@ -275,12 +275,6 @@ del "$(TargetDir)imageformats\q???d4.dll"
     </Xdcmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="etc\Prerequisites\qtmain\qtmain_win.cpp">
-      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWChar_tAsBuiltInType>
-      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</TreatWChar_tAsBuiltInType>
-      <TreatWChar_tAsBuiltInType Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</TreatWChar_tAsBuiltInType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="etc\Prerequisites\strnatcmp\src\strnatcmp.cpp" />
     <ClCompile Include="src\Decoder_AAC.cpp" />
     <ClCompile Include="src\Decoder_Abstract.cpp" />

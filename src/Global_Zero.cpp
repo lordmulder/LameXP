@@ -50,7 +50,7 @@ static size_t lamexp_entry_check(void)
  */
 extern "C"
 {
-	int WinMainCRTStartup(void);
+	int mainCRTStartup(void);
 
 	void _lamexp_global_init_win32(void);
 	void _lamexp_global_init_versn(void);
@@ -87,7 +87,7 @@ extern "C" int lamexp_entry_point(void)
 	g_lamexp_entry_check_flag = (~g_lamexp_entry_check_flag);
 
 	//Now initialize the C Runtime library!
-	return WinMainCRTStartup();
+	return mainCRTStartup();
 }
 
 /*
