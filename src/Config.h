@@ -33,10 +33,10 @@
 #define VER_LAMEXP_MAJOR					4
 #define VER_LAMEXP_MINOR_HI					1
 #define VER_LAMEXP_MINOR_LO					0
-#define VER_LAMEXP_TYPE						RC
-#define VER_LAMEXP_PATCH					2
-#define VER_LAMEXP_BUILD					1556
-#define VER_LAMEXP_CONFG					1528
+#define VER_LAMEXP_TYPE						Final
+#define VER_LAMEXP_PATCH					1
+#define VER_LAMEXP_BUILD					1558
+#define VER_LAMEXP_CONFG					1558
 
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP Build Options
