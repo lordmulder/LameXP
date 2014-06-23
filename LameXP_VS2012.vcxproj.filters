@@ -361,9 +361,6 @@
     <ClCompile Include="tmp\MOC_CustomEventFilter.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
-    <ClCompile Include="etc\Prerequisites\qtmain\qtmain_win.cpp">
-      <Filter>Source Files\Misc\3rd Party</Filter>
-    </ClCompile>
     <ClCompile Include="etc\Prerequisites\strnatcmp\src\strnatcmp.cpp">
       <Filter>Source Files\Misc\3rd Party</Filter>
     </ClCompile>
