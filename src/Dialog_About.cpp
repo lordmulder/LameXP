@@ -671,8 +671,8 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
-		tr("OggEnc - Ogg Vorbis Encoder"),
-		"oggenc2.exe", "v?.??, aoTuV #-?.??",
+		tr("OggEnc 2.87 - Vorbis Encoder"),
+		"oggenc2.exe", "libvorbis v?.??, aoTuV b?.??_#",
 		tr("Completely open and patent-free audio encoding technology."),
 		"http://www.vorbis.com/"
 	);

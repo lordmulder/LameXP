@@ -137,7 +137,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="674"/>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
+        <source>OggEnc 2.87 - Vorbis Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

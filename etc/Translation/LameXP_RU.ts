@@ -64,10 +64,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation></translation>
     </message>
@@ -257,6 +253,10 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OggEnc 2.87 - Vorbis Encoder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

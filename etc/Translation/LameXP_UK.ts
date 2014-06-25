@@ -64,10 +64,6 @@
         <translation>Випущено під ліцензією GNU Lesser General Public License.</translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation>OggEnc - Ogg Vorbis Encoder</translation>
-    </message>
-    <message>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation>Повністю відкрита і вільна від патентних зборів технологія кодування аудіо.</translation>
     </message>
@@ -259,6 +255,10 @@
     <message>
         <source>Official Mirrors:</source>
         <translation>Офіційні дзеркала:</translation>
+    </message>
+    <message>
+        <source>OggEnc 2.87 - Vorbis Encoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

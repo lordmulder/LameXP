@@ -64,10 +64,6 @@
         <translation type="unfinished">GNU 약소 일반 공중 사용 허가서의 약관 하에 출시됨.</translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation type="unfinished">OggEnc - Ogg Vorbis 인코더</translation>
-    </message>
-    <message>
         <source>Completely open and patent-free audio encoding technology.</source>
         <translation type="unfinished">완전 공개되고 특허 받은 무료 오디오 인코딩 기술.</translation>
     </message>
@@ -259,6 +255,10 @@
     <message>
         <source>Official Mirrors:</source>
         <translation type="unfinished">공식 미러:</translation>
+    </message>
+    <message>
+        <source>OggEnc 2.87 - Vorbis Encoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

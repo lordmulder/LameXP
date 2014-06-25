@@ -100,10 +100,6 @@
         <translation>LAME - Quelloffener mp3-Kodierer</translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation>OggEnc - Ogg Vorbis-Kodierer</translation>
-    </message>
-    <message>
         <source>FLAC - Free Lossless Audio Codec</source>
         <translation>FLAC - Verlustfreier Audio-Codec</translation>
     </message>
@@ -258,6 +254,10 @@
     <message>
         <source>Official Mirrors:</source>
         <translation>Offizielle Spiegelserver:</translation>
+    </message>
+    <message>
+        <source>OggEnc 2.87 - Vorbis Encoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

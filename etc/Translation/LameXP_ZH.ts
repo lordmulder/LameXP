@@ -96,10 +96,6 @@
         <translation>LameXP - 开源的MP3编码器</translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation>OggEnc - Ogg Vorbis编码器</translation>
-    </message>
-    <message>
         <source>FLAC - Free Lossless Audio Codec</source>
         <translation>FLAC - 免费的无损音频编解码器</translation>
     </message>
@@ -258,6 +254,10 @@
     <message>
         <source>Official Mirrors:</source>
         <translation>官方镜像:</translation>
+    </message>
+    <message>
+        <source>OggEnc 2.87 - Vorbis Encoder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

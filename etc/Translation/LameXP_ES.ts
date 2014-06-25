@@ -100,10 +100,6 @@
         <translation>LameXP - Codificador mp3 de código abierto</translation>
     </message>
     <message>
-        <source>OggEnc - Ogg Vorbis Encoder</source>
-        <translation>OggEnc - Codificador Ogg Vorbis</translation>
-    </message>
-    <message>
         <source>FLAC - Free Lossless Audio Codec</source>
         <translation>FLAC - Códec de audio libre sin pérdidas</translation>
     </message>
@@ -257,6 +253,10 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OggEnc 2.87 - Vorbis Encoder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
