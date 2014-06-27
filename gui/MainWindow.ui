@@ -4333,12 +4333,15 @@
     </property>
     <addaction name="actionCheckUpdates"/>
     <addaction name="actionVisitSupport"/>
-    <addaction name="actionVisitHomepage"/>
-    <addaction name="actionVisitMuldersSite"/>
+    <addaction name="actionVisitTracker"/>
     <addaction name="separator"/>
     <addaction name="actionDocumentFAQ"/>
     <addaction name="actionDocumentChangelog"/>
     <addaction name="actionDocumentTranslate"/>
+    <addaction name="separator"/>
+    <addaction name="actionVisitHomepage"/>
+    <addaction name="actionVisitMuldersSite"/>
+    <addaction name="actionVisitHAK"/>
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
@@ -4727,6 +4730,24 @@
    </property>
    <property name="text">
     <string>MuldeR's OpenSource Projects</string>
+   </property>
+  </action>
+  <action name="actionVisitTracker">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/bug.png</normaloff>:/icons/bug.png</iconset>
+   </property>
+   <property name="text">
+    <string>Report a Bug (GitHub)</string>
+   </property>
+  </action>
+  <action name="actionVisitHAK">
+   <property name="icon">
+    <iconset resource="../res/Icons.qrc">
+     <normaloff>:/icons/world.png</normaloff>:/icons/world.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hydrogenaudio Knowledgebase</string>
    </property>
   </action>
  </widget>

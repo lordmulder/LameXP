@@ -224,6 +224,7 @@ unsigned int lamexp_toolver_coreaudio(void);
 unsigned int lamexp_toolver_fhgaacenc(void);
 unsigned int lamexp_toolver_neroaac(void);
 unsigned int lamexp_toolver_qaacenc(void);
+const char *lamexp_tracker_url(void);
 unsigned int lamexp_translation_country(const QString &langId);
 bool lamexp_translation_init(void);
 QString lamexp_translation_name(const QString &language);

@@ -72,8 +72,9 @@ static const char *g_lamexp_version_raw_time = __TIME__;
 
 //Official web-site URL
 static const char *g_lamexp_website_url = "http://lamexp.sourceforge.net/";
-static const char *g_lamexp_support_url = "http://forum.doom9.org/showthread.php?t=157726";
 static const char *g_lamexp_mulders_url = "http://muldersoft.com/";
+static const char *g_lamexp_support_url = "http://forum.doom9.org/showthread.php?t=157726";
+static const char *g_lamexp_tracker_url = "https://github.com/lordmulder/LameXP/issues";
 
 //Tool versions (expected versions!)
 static const unsigned int g_lamexp_toolver_neroaac = VER_LAMEXP_TOOL_NEROAAC;
@@ -196,6 +197,7 @@ unsigned int lamexp_toolver_coreaudio(void) { return g_lamexp_toolver_coreaudio;
 const char *lamexp_website_url(void) { return g_lamexp_website_url; }
 const char *lamexp_mulders_url(void) { return g_lamexp_mulders_url; }
 const char *lamexp_support_url(void) { return g_lamexp_support_url; }
+const char *lamexp_tracker_url(void) { return g_lamexp_tracker_url; }
 
 /*
  * Check for Demo (pre-release) version

@@ -2007,6 +2007,14 @@
         <source>APE</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Report a Bug (GitHub)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hydrogenaudio Knowledgebase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MetaInfo</name>

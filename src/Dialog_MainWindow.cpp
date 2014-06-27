@@ -211,9 +211,8 @@ while(0)
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
 
-//#define USE_NATIVE_FILE_DIALOG (lamexp_themes_enabled() || ((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) < QSysInfo::WV_XP))
-
 static const unsigned int IDM_ABOUTBOX = 0xEFF0;
+static const char *g_hydrogen_audio_url = "http://wiki.hydrogenaud.io/index.php?title=Main_Page";
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -461,7 +460,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
 	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
 	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEQMode());
-	//comboBoxOpusOptimize->setCurrentIndex(m_settings->opusOptimizeFor());
 	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesize());
 	
 	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabled());
@@ -637,17 +635,21 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	connect(ui->actionImportCueSheet, SIGNAL(triggered(bool)), this, SLOT(importCueSheetActionTriggered(bool)));
 		
 	//Activate help menu actions
-	ui->actionVisitHomepage->setData(QString::fromLatin1(lamexp_website_url()));
-	ui->actionVisitSupport->setData(QString::fromLatin1(lamexp_support_url()));
-	ui->actionVisitMuldersSite->setData(QString::fromLatin1(lamexp_mulders_url()));
-	ui->actionDocumentFAQ->setData(QString("%1/FAQ.html").arg(QApplication::applicationDirPath()));
+	ui->actionVisitHomepage    ->setData(QString::fromLatin1(lamexp_website_url()));
+	ui->actionVisitSupport     ->setData(QString::fromLatin1(lamexp_support_url()));
+	ui->actionVisitMuldersSite ->setData(QString::fromLatin1(lamexp_mulders_url()));
+	ui->actionVisitTracker     ->setData(QString::fromLatin1(lamexp_tracker_url()));
+	ui->actionVisitHAK         ->setData(QString::fromLatin1(g_hydrogen_audio_url));
+	ui->actionDocumentFAQ      ->setData(QString("%1/FAQ.html").arg(QApplication::applicationDirPath()));
 	ui->actionDocumentChangelog->setData(QString("%1/Changelog.html").arg(QApplication::applicationDirPath()));
 	ui->actionDocumentTranslate->setData(QString("%1/Translate.html").arg(QApplication::applicationDirPath()));
-	connect(ui->actionCheckUpdates, SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
-	connect(ui->actionVisitHomepage, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
-	connect(ui->actionVisitMuldersSite, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
-	connect(ui->actionVisitSupport, SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
-	connect(ui->actionDocumentFAQ, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
+	connect(ui->actionCheckUpdates,      SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
+	connect(ui->actionVisitSupport,      SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionVisitTracker,      SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionVisitHomepage,     SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionVisitMuldersSite,  SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionVisitHAK,          SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
+	connect(ui->actionDocumentFAQ,       SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(ui->actionDocumentChangelog, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(ui->actionDocumentTranslate, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	

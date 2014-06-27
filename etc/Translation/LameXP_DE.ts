@@ -257,15 +257,15 @@
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis Kodierer</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis Dekodierer</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommandozeilen Ogg Vorbis Dekodierer von John33.</translation>
     </message>
 </context>
 <context>
@@ -1993,6 +1993,14 @@
     <message>
         <source>APE</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Report a Bug (GitHub)</source>
+        <translation>Einen Fehler melden (GitHub)</translation>
+    </message>
+    <message>
+        <source>Hydrogenaudio Knowledgebase</source>
+        <translation>Hydrogenaudio Wissensdatenbank</translation>
     </message>
 </context>
 <context>
