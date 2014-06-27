@@ -671,10 +671,10 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
-		tr("OggEnc 2.87 - Vorbis Encoder"),
-		"oggenc2.exe", "libvorbis v?.??, aoTuV b?.??_#",
+		tr("OggEnc - Vorbis Encoder"),
+		"oggenc2.exe", "v?.??, libvorbis v?.?? + aoTuV b?.??_#",
 		tr("Completely open and patent-free audio encoding technology."),
-		"http://www.vorbis.com/"
+		"http://www.rarewares.org/ogg-oggenc.php"
 	);
 	moreAboutText += makeToolText
 	(
@@ -718,6 +718,13 @@ void AboutDialog::initSoftwareTab(void)
 		"faad.exe", "v?.?",
 		tr("Released under the terms of the GNU General Public License."),
 		"http://www.audiocoding.com/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("OggDec - Vorbis Decoder"),
+		"oggdec.exe", "v?.??.?",
+		tr("Command line Ogg Vorbis decoder created by John33."),
+		"http://www.rarewares.org/ogg-oggdec.php"
 	);
 	moreAboutText += makeToolText
 	(
