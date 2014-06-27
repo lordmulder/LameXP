@@ -40,7 +40,7 @@ static size_t lamexp_entry_check(void)
 	volatile size_t retVal = 0xA199B5AF;
 	if(g_lamexp_entry_check_flag != 0x8761F64D)
 	{
-		lamexp_fatal_exit(L"Application initialization has failed, take care!");
+		lamexp_fatal_exit("Application initialization has failed, take care!");
 	}
 	return retVal;
 }
@@ -73,7 +73,7 @@ extern "C" int lamexp_entry_point(void)
 {
 	if(g_lamexp_entry_check_flag != 0x789E09B2)
 	{
-		lamexp_fatal_exit(L"Application initialization has failed, take care!");
+		lamexp_fatal_exit("Application initialization has failed, take care!");
 	}
 
 	//Call global initialization functions

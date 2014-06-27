@@ -51,7 +51,6 @@
 #include <QLibraryInfo>
 #include <QMap>
 #include <QMessageBox>
-#include <QMutex>
 #include <QPlastiqueStyle>
 #include <QProcess>
 #include <QReadWriteLock>
@@ -128,11 +127,90 @@ typedef HRESULT (WINAPI *SHGetKnownFolderPath_t)(const GUID &rfid, DWORD dwFlags
 typedef HRESULT (WINAPI *SHGetFolderPath_t)(HWND hwndOwner, int nFolder, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
 
 ///////////////////////////////////////////////////////////////////////////////
+// CRITICAL SECTION
+///////////////////////////////////////////////////////////////////////////////
+
+/*
+ * wrapper for native Win32 critical sections
+ */
+class CriticalSection
+{
+public:
+	inline CriticalSection(void)
+	{
+		InitializeCriticalSection(&m_win32criticalSection);
+	}
+
+	inline ~CriticalSection(void)
+	{
+		DeleteCriticalSection(&m_win32criticalSection);
+	}
+
+	inline void enter(void)
+	{
+		EnterCriticalSection(&m_win32criticalSection);
+	}
+
+	inline bool tryEnter(void)
+	{
+		return TryEnterCriticalSection(&m_win32criticalSection);
+	}
+
+	inline void leave(void)
+	{
+		LeaveCriticalSection(&m_win32criticalSection);
+	}
+
+protected:
+	CRITICAL_SECTION m_win32criticalSection;
+};
+
+/*
+ * RAII-style critical section locker
+ */
+class CSLocker
+{
+public:
+	inline CSLocker(CriticalSection &criticalSection)
+	:
+		m_locked(false),
+		m_criticalSection(criticalSection)
+	{
+		m_criticalSection.enter();
+		m_locked = true;
+	}
+
+	inline ~CSLocker(void)
+	{
+		forceUnlock();
+	}
+
+	inline void forceUnlock(void)
+	{
+		if(m_locked)
+		{
+			m_criticalSection.leave();
+			m_locked = false;
+		}
+	}
+protected:
+	volatile bool m_locked;
+	CriticalSection &m_criticalSection;
+};
+
+///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
 ///////////////////////////////////////////////////////////////////////////////
 
 //Console attached flag
 static bool g_lamexp_console_attached = false;
+
+//Fatal exit flags
+static volatile bool g_lamexp_fatal_flag = true;
+static CriticalSection g_lamexp_fatal_lock;
+
+//Global locks
+static CriticalSection g_lamexp_message_lock;
 
 //Special folders
 static struct
@@ -201,9 +279,6 @@ g_lamexp_sounds;
 
 //Image formats
 static const char *g_lamexp_imageformats[] = {"bmp", "png", "jpg", "gif", "ico", "xpm", NULL}; //"svg"
-
-//Global locks
-static QMutex g_lamexp_message_mutex;
 
 //Main thread ID
 static const DWORD g_main_thread_id = GetCurrentThreadId();
@@ -541,7 +616,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		return;
 	}
 
-	QMutexLocker lock(&g_lamexp_message_mutex);
+	CSLocker lock(g_lamexp_message_lock);
 
 	if(g_lamexp_log_file)
 	{
@@ -559,8 +634,8 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 
 	if((type == QtCriticalMsg) || (type == QtFatalMsg))
 	{
-		lock.unlock();
-		lamexp_fatal_exit(L"The application has encountered a critical error and will exit now!", QWCHAR(QString::fromUtf8(msg)));
+		lock.forceUnlock();
+		lamexp_fatal_exit(msg);
 	}
 }
 
@@ -569,7 +644,7 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
  */
 static void lamexp_invalid_param_handler(const wchar_t* exp, const wchar_t* fun, const wchar_t* fil, unsigned int, uintptr_t)
 {
-	lamexp_fatal_exit(L"Invalid parameter handler invoked, application will exit!");
+	lamexp_fatal_exit("Invalid parameter handler invoked, application will exit!");
 }
 
 /*
@@ -578,7 +653,7 @@ static void lamexp_invalid_param_handler(const wchar_t* exp, const wchar_t* fun,
 static void lamexp_signal_handler(int signal_num)
 {
 	signal(signal_num, lamexp_signal_handler);
-	lamexp_fatal_exit(L"Signal handler invoked, application will exit!");
+	lamexp_fatal_exit("Signal handler invoked, application will exit!");
 }
 
 /*
@@ -586,7 +661,7 @@ static void lamexp_signal_handler(int signal_num)
  */
 static LONG WINAPI lamexp_exception_handler(struct _EXCEPTION_POINTERS *ExceptionInfo)
 {
-	lamexp_fatal_exit(L"Unhandeled exception handler invoked, application will exit!");
+	lamexp_fatal_exit("Unhandeled exception handler invoked, application will exit!");
 	return LONG_MAX;
 }
 
@@ -831,7 +906,7 @@ static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
 	{
 		if(lamexp_check_for_debugger())
 		{
-			lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
+			lamexp_fatal_exit("Not a debug build. Please unload debugger and try again!");
 			return 666;
 		}
 		lamexp_sleep(100);
@@ -845,7 +920,7 @@ static HANDLE lamexp_debug_thread_init()
 {
 	if(lamexp_check_for_debugger())
 	{
-		lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
+		lamexp_fatal_exit("Not a debug build. Please unload debugger and try again!");
 	}
 	const uintptr_t h = _beginthreadex(NULL, 0, lamexp_debug_thread_proc, NULL, 0, NULL);
 	return (HANDLE)(h^0xdeadbeef);
@@ -858,7 +933,7 @@ static bool lamexp_event_filter(void *message, long *result)
 { 
 	if((!(LAMEXP_DEBUG)) && lamexp_check_for_debugger())
 	{
-		lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
+		lamexp_fatal_exit("Not a debug build. Please unload debugger and try again!");
 	}
 	
 	switch(reinterpret_cast<MSG*>(message)->message)
@@ -2281,35 +2356,45 @@ bool lamexp_is_executable(const QString &path)
 }
 
 /*
+ * Fatal application exit - helper
+ */
+static DWORD WINAPI lamexp_fatal_exit_helper(LPVOID lpParameter)
+{
+	MessageBoxA(NULL, ((LPCSTR) lpParameter), "LameXP - Guru Meditation", MB_OK | MB_ICONERROR | MB_TASKMODAL | MB_TOPMOST | MB_SETFOREGROUND);
+	return 0;
+}
+
+/*
  * Fatal application exit
  */
-#pragma intrinsic(_InterlockedExchange)
-void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage)
+void lamexp_fatal_exit(const char* const errorMessage)
 {
-	static volatile long bFatalFlag = 0L;
-
-	if(_InterlockedExchange(&bFatalFlag, 1L) == 0L)
-	{
-		if(GetCurrentThreadId() != g_main_thread_id)
-		{
-			HANDLE mainThread = OpenThread(THREAD_TERMINATE, FALSE, g_main_thread_id);
-			if(mainThread) TerminateThread(mainThread, ULONG_MAX);
-		}
+	g_lamexp_fatal_lock.enter();
 	
-		if(errorBoxMessage)
-		{
-			MessageBoxW(NULL, errorBoxMessage, L"LameXP - GURU MEDITATION", MB_ICONERROR | MB_TOPMOST | MB_TASKMODAL);
-		}
+	if(!g_lamexp_fatal_flag)
+	{
+		return; /*prevent recursive invocation*/
+	}
 
-		for(;;)
+	g_lamexp_fatal_flag = false;
+
+	if(g_main_thread_id != GetCurrentThreadId())
+	{
+		if(HANDLE hThreadMain = OpenThread(THREAD_SUSPEND_RESUME, FALSE, g_main_thread_id))
 		{
-			FatalAppExit(0, exitMessage);
-			TerminateProcess(GetCurrentProcess(), -1);
+			SuspendThread(hThreadMain); /*stop main thread*/
 		}
 	}
 
-	TerminateThread(GetCurrentThread(), -1);
-	Sleep(INFINITE);
+	if(HANDLE hThread = CreateThread(NULL, 0, lamexp_fatal_exit_helper, (LPVOID) errorMessage, 0, NULL))
+	{
+		WaitForSingleObject(hThread, INFINITE);
+	}
+
+	for(;;)
+	{
+		TerminateProcess(GetCurrentProcess(), 666);
+	}
 }
 
 /*
@@ -2358,7 +2443,7 @@ extern "C" void _lamexp_global_init_win32(void)
 {
 	if((!LAMEXP_DEBUG) && lamexp_check_for_debugger())
 	{
-		lamexp_fatal_exit(L"Not a debug build. Please unload debugger and try again!");
+		lamexp_fatal_exit("Not a debug build. Please unload debugger and try again!");
 	}
 
 	//Zero *before* constructors are called

@@ -167,26 +167,28 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 	}
 	
 	QString result = pattern;
-	int digits = result.count("?", Qt::CaseInsensitive);
+	const int digits = result.count(QChar(L'?'), Qt::CaseInsensitive);
 	
 	if(digits < 1)
 	{
 		return result;
 	}
 	
-	int pos = 0;
-	QString versionStr = QString().sprintf(QString().sprintf("%%0%du", digits).toLatin1().constData(), version);
-	int index = result.indexOf("?", Qt::CaseInsensitive);
+	int pos = 0, index = -1;
+	const QString versionStr = QString().sprintf("%0*u", digits, version);
+	Q_ASSERT(versionStr.length() == digits);
 	
-	while(index >= 0 && pos < versionStr.length())
+	while((index = result.indexOf(QChar(L'?'), Qt::CaseInsensitive)) >= 0)
 	{
 		result[index] = versionStr[pos++];
-		index = result.indexOf("?", Qt::CaseInsensitive);
 	}
 
 	if(tag)
 	{
-		result.replace(QChar('#'), *tag, Qt::CaseInsensitive);
+		if((index = result.indexOf(QChar(L'#'), Qt::CaseInsensitive)) >= 0)
+		{
+			result.remove(index, 1).insert(index, (*tag));
+		}
 	}
 
 	return result;

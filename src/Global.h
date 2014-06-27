@@ -171,7 +171,7 @@ bool lamexp_detect_wine(void);
 bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const bool explore = false);
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &parameters, const QString &directory, const bool explore = false);
-void lamexp_fatal_exit(const wchar_t* exitMessage, const wchar_t* errorBoxMessage = NULL);
+void lamexp_fatal_exit(const char* const errorMessage);
 void lamexp_finalization(void);
 unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok = NULL);
 void lamexp_free_window_icon(lamexp_icon_t *icon);
@@ -290,6 +290,13 @@ while(0)
 	char _error_msg[512]; \
 	_snprintf_s(_error_msg, 512, _TRUNCATE, (FORMAT), __VA_ARGS__); \
 	throw std::runtime_error(_error_msg); \
+} \
+while(0)
+#define PRINT_ERROR(X, ...) do \
+{ \
+	fflush(stdout); \
+	fprintf(stderr, (X), __VA_ARGS__); \
+	fflush(stderr); \
 } \
 while(0)
 
