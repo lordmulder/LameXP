@@ -256,7 +256,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OggEnc 2.87 - Vorbis Encoder</source>
+        <source>OggEnc - Vorbis Encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OggDec - Vorbis Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Command line Ogg Vorbis decoder created by John33.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

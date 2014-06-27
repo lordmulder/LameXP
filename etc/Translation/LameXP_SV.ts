@@ -123,21 +123,21 @@
         <location filename="../../src/Dialog_About.cpp" line="669"/>
         <location filename="../../src/Dialog_About.cpp" line="691"/>
         <location filename="../../src/Dialog_About.cpp" line="712"/>
-        <location filename="../../src/Dialog_About.cpp" line="726"/>
-        <location filename="../../src/Dialog_About.cpp" line="740"/>
-        <location filename="../../src/Dialog_About.cpp" line="754"/>
-        <location filename="../../src/Dialog_About.cpp" line="768"/>
-        <location filename="../../src/Dialog_About.cpp" line="803"/>
+        <location filename="../../src/Dialog_About.cpp" line="733"/>
+        <location filename="../../src/Dialog_About.cpp" line="747"/>
+        <location filename="../../src/Dialog_About.cpp" line="761"/>
+        <location filename="../../src/Dialog_About.cpp" line="775"/>
         <location filename="../../src/Dialog_About.cpp" line="810"/>
         <location filename="../../src/Dialog_About.cpp" line="817"/>
         <location filename="../../src/Dialog_About.cpp" line="824"/>
         <location filename="../../src/Dialog_About.cpp" line="831"/>
+        <location filename="../../src/Dialog_About.cpp" line="838"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Släppt under Gnu Lesser General Public License.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="674"/>
-        <source>OggEnc 2.87 - Vorbis Encoder</source>
+        <source>OggEnc - Vorbis Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -202,136 +202,146 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="724"/>
+        <source>OggDec - Vorbis Decoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="726"/>
+        <source>Command line Ogg Vorbis decoder created by John33.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="731"/>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
         <translation>Valdec från AC3Filter Tools - AC3/DTS Decoder</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="731"/>
+        <location filename="../../src/Dialog_About.cpp" line="738"/>
         <source>WavPack - Hybrid Lossless Compression</source>
         <translation>WavPack - Hybrid Lossless Compression</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="733"/>
+        <location filename="../../src/Dialog_About.cpp" line="740"/>
         <source>Completely open audio compression format.</source>
         <translation>Helt öppet ljudkomprimeringsformat.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="738"/>
+        <location filename="../../src/Dialog_About.cpp" line="745"/>
         <source>Musepack - Living Audio Compression</source>
         <translation>Musepack - Living Audio Compression</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="745"/>
+        <location filename="../../src/Dialog_About.cpp" line="752"/>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
         <translation>Monkey&apos;s Audio - Lossless Audio Compressor</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="747"/>
+        <location filename="../../src/Dialog_About.cpp" line="754"/>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
         <translation>Fritt tillgänglig källkod, enkel SDK och icke-restriktiv licensiering.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="752"/>
+        <location filename="../../src/Dialog_About.cpp" line="759"/>
         <source>Shorten - Lossless Audio Compressor</source>
         <translation>Shorten - Lossless Audio Compressor</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="759"/>
+        <location filename="../../src/Dialog_About.cpp" line="766"/>
         <source>Speex - Free Codec For Free Speech</source>
         <translation>Speex - Free Codec For Free Speech</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="761"/>
+        <location filename="../../src/Dialog_About.cpp" line="768"/>
         <source>Open Source patent-free audio format designed for speech.</source>
         <translation>Öppen källkod, patentfritt ljudformat designat för tal.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="766"/>
+        <location filename="../../src/Dialog_About.cpp" line="773"/>
         <source>The True Audio - Lossless Audio Codec</source>
         <translation>The True Audio - Lossless Audio Codec</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="773"/>
+        <location filename="../../src/Dialog_About.cpp" line="780"/>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
         <translation>refalac - Win32 kommandorad ALAC-kodare/-avkodare</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="775"/>
+        <location filename="../../src/Dialog_About.cpp" line="782"/>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
         <translation>ALAC referensimplementation av Apple finns tillgänglig under Apache-licensen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="780"/>
+        <location filename="../../src/Dialog_About.cpp" line="787"/>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
         <translation>wma2wav - Dump WMA files to Wave Audio</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="782"/>
+        <location filename="../../src/Dialog_About.cpp" line="789"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
         <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="787"/>
+        <location filename="../../src/Dialog_About.cpp" line="794"/>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
         <translation>avs2wav - Avisynth to Wave Audio converter</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="789"/>
+        <location filename="../../src/Dialog_About.cpp" line="796"/>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
         <translation>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="794"/>
+        <location filename="../../src/Dialog_About.cpp" line="801"/>
         <source>dcaenc</source>
         <translation>dcaenc</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="796"/>
+        <location filename="../../src/Dialog_About.cpp" line="803"/>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
         <translation>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="801"/>
+        <location filename="../../src/Dialog_About.cpp" line="808"/>
         <source>MediaInfo - Media File Analysis Tool</source>
         <translation>MediaInfo - Analysverktyg för mediafiler</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="808"/>
+        <location filename="../../src/Dialog_About.cpp" line="815"/>
         <source>SoX - Sound eXchange</source>
         <translation>SoX - Sound eXchange</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="815"/>
+        <location filename="../../src/Dialog_About.cpp" line="822"/>
         <source>GnuPG - The GNU Privacy Guard</source>
         <translation>GnuPG - The GNU Privacy Guard</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="822"/>
+        <location filename="../../src/Dialog_About.cpp" line="829"/>
         <source>GNU Wget - Software for retrieving files using HTTP</source>
         <translation>GNU Wget - Mjukvara för att ta emot filer via HTTP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="829"/>
+        <location filename="../../src/Dialog_About.cpp" line="836"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - Den ultimata paketeraren för exekverbara filer</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="836"/>
+        <location filename="../../src/Dialog_About.cpp" line="843"/>
         <source>Silk Icons - Over 700  icons in PNG format</source>
         <translation>Silk Icons - Över 700  iconer i PNG-format</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="838"/>
+        <location filename="../../src/Dialog_About.cpp" line="845"/>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
         <translation>Av Mark James, publicerad under Creative Commons &apos;by&apos; Licens.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="843"/>
+        <location filename="../../src/Dialog_About.cpp" line="850"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="899"/>
+        <location filename="../../src/Dialog_About.cpp" line="906"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
@@ -712,7 +722,7 @@
 <context>
     <name>DiskObserverThread</name>
     <message>
-        <location filename="../../src/Thread_DiskObserver.cpp" line="88"/>
+        <location filename="../../src/Thread_DiskObserver.cpp" line="86"/>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
         <translation>Lågt diskutrymme upptäckt på enhet &apos;%1&apos; (endast %2 MB ledigt), problem kan uppstå!</translation>
     </message>
@@ -2873,129 +2883,129 @@
         <translation>Hittas ej!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="234"/>
+        <location filename="../../src/Thread_Process.cpp" line="232"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>VARNING! Omkodad filstorlek överstiger 4 GB. Problem kan uppstå!
 </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="243"/>
+        <location filename="../../src/Thread_Process.cpp" line="241"/>
         <source>The format of this file is NOT supported:</source>
         <translation>Det här filformatet saknar stöd i LameXP:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="243"/>
+        <location filename="../../src/Thread_Process.cpp" line="241"/>
         <source>Container Format:</source>
         <translation>Behållarformat:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="243"/>
+        <location filename="../../src/Thread_Process.cpp" line="241"/>
         <source>Audio Format:</source>
         <translation>Ljudformat:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="244"/>
+        <location filename="../../src/Thread_Process.cpp" line="242"/>
         <source>Unsupported!</source>
         <translation>Stöd saknas!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="332"/>
+        <location filename="../../src/Thread_Process.cpp" line="330"/>
         <source>Aborted!</source>
         <translation>Avbruten!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="332"/>
+        <location filename="../../src/Thread_Process.cpp" line="330"/>
         <source>Done.</source>
         <translation>Klar.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="332"/>
+        <location filename="../../src/Thread_Process.cpp" line="330"/>
         <source>Failed!</source>
         <translation>Misslyckades!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="349"/>
+        <location filename="../../src/Thread_Process.cpp" line="347"/>
         <source>Encoding</source>
         <translation>Kodar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="352"/>
+        <location filename="../../src/Thread_Process.cpp" line="350"/>
         <source>Analyzing</source>
         <translation>Analyserar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="353"/>
         <source>Filtering</source>
         <translation>Filtrerar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="356"/>
         <source>Decoding</source>
         <translation>Avkodar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="380"/>
+        <location filename="../../src/Thread_Process.cpp" line="378"/>
         <source>The source audio file could not be found:</source>
         <translation>Källfilen kan inte hittas:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="388"/>
+        <location filename="../../src/Thread_Process.cpp" line="386"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Källfilen kan inte öppnas för läsning:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="416"/>
+        <location filename="../../src/Thread_Process.cpp" line="414"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Målmappen finns inte och kan inte skapas:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="425"/>
+        <location filename="../../src/Thread_Process.cpp" line="423"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Målmappen är INTE skrivbar:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="490"/>
+        <location filename="../../src/Thread_Process.cpp" line="488"/>
         <source>Unknown File Name</source>
         <translation>Okänt filnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="492"/>
+        <location filename="../../src/Thread_Process.cpp" line="490"/>
         <source>Unknown Title</source>
         <translation>Okänd titel</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="493"/>
+        <location filename="../../src/Thread_Process.cpp" line="491"/>
         <source>Unknown Artist</source>
         <translation>Okänd artist</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="494"/>
+        <location filename="../../src/Thread_Process.cpp" line="492"/>
         <source>Unknown Album</source>
         <translation>Okänt album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="496"/>
+        <location filename="../../src/Thread_Process.cpp" line="494"/>
         <source>Unknown Comment</source>
         <translation>Okänd kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="442"/>
+        <location filename="../../src/Thread_Process.cpp" line="440"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Målfilen finns redan! Den här filen hoppas över:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="443"/>
+        <location filename="../../src/Thread_Process.cpp" line="441"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Om du inte vill att befintliga filer hoppas över, måste du ändra överskrivningsläge!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="450"/>
+        <location filename="../../src/Thread_Process.cpp" line="448"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Målfilen finns redan! Befintlig fil kommer att tas bort:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="464"/>
+        <location filename="../../src/Thread_Process.cpp" line="462"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Kunde inte ta bort befintlig målfil. Sparar med annat filnamn!</translation>
     </message>
@@ -3281,22 +3291,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1063"/>
+        <location filename="../../src/Global_Win32.cpp" line="1138"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation>EXE-filen &apos;%1&apos; stöder inte Windows kompatibilitetsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1005"/>
+        <location filename="../../src/Global_Win32.cpp" line="1080"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation>EXE-filen &apos;%1&apos; kräver Qt v%2, du har Qt v%3.</translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1010"/>
+        <location filename="../../src/Global_Win32.cpp" line="1085"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation>EXE-filen &apos;%1&apos; är byggd för Qt &apos;%2&apos;, du har Qt &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1022"/>
+        <location filename="../../src/Global_Win32.cpp" line="1097"/>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
         <translation>%1 kräver Windows XP eller senare.</translation>
     </message>
