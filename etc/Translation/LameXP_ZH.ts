@@ -257,15 +257,15 @@
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis编码器</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggDec - Vorbis解码器</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation>由John33创建的命令行Ogg Vorbis解码器。</translation>
     </message>
 </context>
 <context>
@@ -1987,11 +1987,11 @@
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation>报告Bug （GitHub）</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hydrogenaudio知识库</translation>
     </message>
 </context>
 <context>
