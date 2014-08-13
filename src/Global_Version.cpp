@@ -105,27 +105,23 @@ static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO
 	#endif
 #elif defined(_MSC_VER)
 	#if (_MSC_VER == 1800)
-		#if (_MSC_FULL_VER < 180021005)
-			static const char *g_lamexp_version_compiler = "MSVC 2013-Beta";
-		#elif (_MSC_FULL_VER < 180030501)
+		#if (_MSC_FULL_VER == 180021005)
 			static const char *g_lamexp_version_compiler = "MSVC 2013";
 		#elif (_MSC_FULL_VER == 180030501)
 			static const char *g_lamexp_version_compiler = "MSVC 2013.2";
+		#elif (_MSC_FULL_VER == 180030723)
+			static const char *g_lamexp_version_compiler = "MSVC 2013.3";
 		#else
 			#error Compiler version is not supported yet!
 		#endif
 	#elif (_MSC_VER == 1700)
-		#if (_MSC_FULL_VER < 170050727)
-			static const char *g_lamexp_version_compiler = "MSVC 2012-Beta";
-		#elif (_MSC_FULL_VER < 170051020)
+		#if (_MSC_FULL_VER == 170050727)
 			static const char *g_lamexp_version_compiler = "MSVC 2012";
-		#elif (_MSC_FULL_VER < 170051106)
-			static const char *g_lamexp_version_compiler = "MSVC 2012.1-CTP";
-		#elif (_MSC_FULL_VER < 170060315)
+		#elif (_MSC_FULL_VER == 170051106)
 			static const char *g_lamexp_version_compiler = "MSVC 2012.1";
-		#elif (_MSC_FULL_VER < 170060610)
+		#elif (_MSC_FULL_VER == 170060315)
 			static const char *g_lamexp_version_compiler = "MSVC 2012.2";
-		#elif (_MSC_FULL_VER < 170061030)
+		#elif (_MSC_FULL_VER == 170060610)
 			static const char *g_lamexp_version_compiler = "MSVC 2012.3";
 		#elif (_MSC_FULL_VER == 170061030)
 			static const char *g_lamexp_version_compiler = "MSVC 2012.4";
@@ -133,12 +129,10 @@ static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO
 			#error Compiler version is not supported yet!
 		#endif
 	#elif (_MSC_VER == 1600)
-		#if (_MSC_FULL_VER < 160040219)
-			static const char *g_lamexp_version_compiler = "MSVC 2010";
-		#elif (_MSC_FULL_VER == 160040219)
+		#if (_MSC_FULL_VER >= 160040219)
 			static const char *g_lamexp_version_compiler = "MSVC 2010-SP1";
 		#else
-			#error Compiler version is not supported yet!
+			static const char *g_lamexp_version_compiler = "MSVC 2010";
 		#endif
 	#elif (_MSC_VER == 1500)
 		#if (_MSC_FULL_VER >= 150030729)
