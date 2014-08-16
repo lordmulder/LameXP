@@ -468,6 +468,10 @@
             <numerusform>%n 트랙을 건너뛰었습니다.</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Warning: Some of the required input files could not be found!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

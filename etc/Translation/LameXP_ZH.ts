@@ -467,6 +467,10 @@
             <numerusform>已跳过 %n 条音轨。</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Warning: Some of the required input files could not be found!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

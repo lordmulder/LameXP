@@ -76,9 +76,12 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 
 FileAnalyzer::~FileAnalyzer(void)
 {
-	if(!m_pool->waitForDone(2500))
+	if(m_pool)
 	{
-		qWarning("There are still running tasks in the thread pool!");
+		if(!m_pool->waitForDone(2500))
+		{
+			qWarning("There are still running tasks in the thread pool!");
+		}
 	}
 
 	LAMEXP_DELETE(m_templateFile);

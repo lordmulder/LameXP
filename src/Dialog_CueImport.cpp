@@ -330,41 +330,52 @@ void CueImportDialog::analyzedFile(const AudioFileModel &file)
 void CueImportDialog::importCueSheet(void)
 {
 	QStringList files;
+	QList<LockedFile*> locks;
 
 	//Fetch all files that are referenced in the Cue Sheet and lock them
 	int nFiles = m_model->getFileCount();
 	for(int i = 0; i < nFiles; i++)
 	{
-		QString temp = m_model->getFileName(i);
 		try
 		{
-			m_locks << new LockedFile(temp);
-		
+			LockedFile *temp = new LockedFile(m_model->getFileName(i));
+			locks << temp;
+			files << temp->filePath();
 		}
 		catch(const std::exception &error)
 		{
 			qWarning("Failed to lock file:\n%s\n", error.what());
-			continue;
 		}
 		catch(...)
 		{
 			qWarning("Failed to lock file!");
-			continue;
 		}
-		files << temp;
 	}
-	
-	//Analyze all source files first
-	if(analyzeFiles(files))
+
+	//Check if all files could be locked
+	if(files.count() < m_model->getFileCount())
 	{
-		//Now split files according to Cue Sheet
-		splitFiles();
+		if(QMessageBox::warning(this, tr("Cue Sheet Error"), tr("Warning: Some of the required input files could not be found!"), tr("Continue Anyway"), tr("Abort")) == 1)
+		{
+			files.clear();
+		}
+	}
+
+	//Process all avialble input files
+	if(files.count() > 0)
+	{
+		//Analyze all source files first
+		if(analyzeFiles(files))
+		{
+			//Now split files according to Cue Sheet
+			splitFiles();
+		}
 	}
 	
 	//Release locks
-	while(!m_locks.isEmpty())
+	while(!locks.isEmpty())
 	{
-		delete m_locks.takeFirst();
+		delete locks.takeFirst();
 	}
 }
 

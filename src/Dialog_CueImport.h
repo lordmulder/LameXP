@@ -68,7 +68,6 @@ private:
 
 	const SettingsModel *m_settings;
 
-	QList<LockedFile*> m_locks;
 	QList<AudioFileModel> m_fileInfo;
 	QString m_cueFileName;
 	QString m_outputDir;

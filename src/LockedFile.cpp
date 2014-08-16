@@ -201,9 +201,9 @@ LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 	existingFileInfo.setCaching(false);
 	
 	//Make sure the file exists, before we try to lock it
-	if(!(existingFileInfo.exists() && existingFileInfo.isFile()))
+	if((!existingFileInfo.exists()) || (!existingFileInfo.isFile()) || m_filePath.isEmpty())
 	{
-		THROW_FMT("File '%s' does not exist!", QUTF8(m_filePath));
+		THROW_FMT("File '%s' does not exist!", QUTF8(filePath));
 	}
 	
 	//Now lock the file

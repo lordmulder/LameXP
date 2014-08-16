@@ -470,6 +470,10 @@
             <numerusform>%n Dateien übersprungen.</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Warning: Some of the required input files could not be found!</source>
+        <translation>Achtung: Einige der Eingabedateien konnten nicht gefunden werden!</translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>

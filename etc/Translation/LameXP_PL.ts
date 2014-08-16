@@ -434,8 +434,9 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="121"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="222"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="420"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="424"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="358"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="431"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="435"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished">Błąd pliku Cue Sheet</translation>
     </message>
@@ -542,37 +543,44 @@
         <translation type="unfinished">Jest wysoce zalecane zwolnić miejsce na dysku zanim zaczniesz importować!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="383"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="358"/>
+        <source>Warning: Some of the required input files could not be found!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_CueImport.cpp" line="394"/>
         <source>Analyzing file(s), please wait...</source>
         <translation type="unfinished">Analizowanie pliku/ów, prosze czekać...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="388"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
         <source>Analysis Failed</source>
         <translation type="unfinished">Analiza zakończona niepowodzeniem</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="388"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation type="unfinished">Ostrzeżenie: Nie można rozpoznać formatu kilku plików wejściowych!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="388"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="358"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
         <source>Continue Anyway</source>
         <translation type="unfinished">Kontynuuj pomimo to</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="388"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="358"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="399"/>
         <source>Abort</source>
         <translation type="unfinished">Przerwij</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="415"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="426"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished">Dzielenie pliku/ów, prosze czekać...</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="420"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="431"/>
         <source>Process was aborted by the user after %n track(s)!</source>
         <translation type="unfinished">
             <numerusform>Proces został przerwany przez użytkownika po zakończeniu %n ścieżki!</numerusform>
@@ -581,12 +589,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="424"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="435"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished">Wystąpił nieoczekiwany błąd podczas podziału pliku Cue Sheet!</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="428"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="439"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
         <translation type="unfinished">
             <numerusform>Zaimportowano %n ścieżkę z pliku Cue Sheet.</numerusform>
@@ -595,7 +603,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="428"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="439"/>
         <source>Skipped %n track(s).</source>
         <translation type="unfinished">
             <numerusform>Pominięto %n ścieżkę.</numerusform>
@@ -604,7 +612,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="429"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="440"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished">Utworzono plik Cue Sheet</translation>
     </message>

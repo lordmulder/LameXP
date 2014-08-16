@@ -470,6 +470,10 @@
             <numerusform></numerusform>
         </translation>
     </message>
+    <message>
+        <source>Warning: Some of the required input files could not be found!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CueSheetImport</name>
