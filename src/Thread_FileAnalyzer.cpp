@@ -71,6 +71,8 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 	m_filesDummyCDDA = 0;
 	m_filesCueSheet = 0;
 
+	moveToThread(this); /*makes sure queued slots are executed in the proper thread context*/
+
 	m_timer = new QElapsedTimer;
 }
 
@@ -154,10 +156,6 @@ void FileAnalyzer::run()
 
 	m_timer->invalidate();
 
-	//Update progress
-	//emit progressMaxChanged(m_inputFiles.count());
-	//emit progressValChanged(0);
-
 	//Create MediaInfo template file
 	if(!m_templateFile)
 	{
@@ -240,7 +238,7 @@ bool FileAnalyzer::analyzeNextFile(void)
 		const unsigned int taskId = m_tasksCounterNext++;
 		const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
 
-		if((!m_timer->isValid()) || (m_timer->elapsed() >= 250))
+		if((!m_timer->isValid()) || (m_timer->elapsed() >= 333))
 		{
 			emit fileSelected(QFileInfo(currentFile).fileName());
 			m_timer->restart();
