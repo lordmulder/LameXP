@@ -469,7 +469,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>警告：无法找到某些输入文件！</translation>
     </message>
 </context>
 <context>
