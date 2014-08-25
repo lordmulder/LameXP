@@ -476,7 +476,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: Деякі з вхідних файлів не можуть бути знайдені!</translation>
     </message>
 </context>
 <context>
