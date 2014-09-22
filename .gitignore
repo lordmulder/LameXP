@@ -19,10 +19,10 @@
 /etc/Prerequisites/qt4_dll
 /etc/Prerequisites/keccak/ipch
 /etc/Prerequisites/keccak/obj
-/etc/Prerequisites/z_old
+/etc/Prerequisites/_old_
 /ipch
 /obj
 /out
-/res/tools/old
+/res/tools/_old_
 /tmp/*.cpp
 /tmp/*.h
