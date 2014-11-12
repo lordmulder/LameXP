@@ -3289,22 +3289,22 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1138"/>
+        <location filename="../../src/Global_Win32.cpp" line="1149"/>
         <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1080"/>
+        <location filename="../../src/Global_Win32.cpp" line="1105"/>
         <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1085"/>
+        <location filename="../../src/Global_Win32.cpp" line="1110"/>
         <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Global_Win32.cpp" line="1097"/>
+        <location filename="../../src/Global_Win32.cpp" line="1122"/>
         <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
         <translation type="unfinished"></translation>
     </message>
