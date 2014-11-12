@@ -126,6 +126,14 @@ while(0)
 typedef HRESULT (WINAPI *SHGetKnownFolderPath_t)(const GUID &rfid, DWORD dwFlags, HANDLE hToken, PWSTR *ppszPath);
 typedef HRESULT (WINAPI *SHGetFolderPath_t)(HWND hwndOwner, int nFolder, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
 
+//OS version info
+typedef struct _lamexp_os_info_t
+{
+	const lamexp_os_version_t version;
+	const char friendlyName[128];
+}
+lamexp_os_info_t;
+
 ///////////////////////////////////////////////////////////////////////////////
 // CRITICAL SECTION
 ///////////////////////////////////////////////////////////////////////////////
@@ -290,14 +298,31 @@ static FILE *g_lamexp_log_file = NULL;
 const char* LAMEXP_DEFAULT_LANGID = "en";
 const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
 
-//Known Windows versions - maps marketing names to the actual Windows NT versions
-const lamexp_os_version_t lamexp_winver_win2k = {5,0};
-const lamexp_os_version_t lamexp_winver_winxp = {5,1};
-const lamexp_os_version_t lamexp_winver_xpx64 = {5,2};
-const lamexp_os_version_t lamexp_winver_vista = {6,0};
-const lamexp_os_version_t lamexp_winver_win70 = {6,1};
-const lamexp_os_version_t lamexp_winver_win80 = {6,2};
-const lamexp_os_version_t lamexp_winver_win81 = {6,3};
+//Known Windows NT versions
+const lamexp_os_version_t lamexp_winver_error = {0,0};	//N/A
+const lamexp_os_version_t lamexp_winver_win2k = {5,0};	//2000
+const lamexp_os_version_t lamexp_winver_winxp = {5,1};	//XP
+const lamexp_os_version_t lamexp_winver_xpx64 = {5,2};	//XP_x64
+const lamexp_os_version_t lamexp_winver_vista = {6,0};	//Vista
+const lamexp_os_version_t lamexp_winver_win70 = {6,1};	//7
+const lamexp_os_version_t lamexp_winver_win80 = {6,2};	//8
+const lamexp_os_version_t lamexp_winver_win81 = {6,3};	//8.1
+const lamexp_os_version_t lamexp_winver_wn100 = {6,4};	//10
+
+//Maps marketing names to the actual Windows NT versions
+static const lamexp_os_info_t lamexp_winver_lut[] =
+{
+	{ lamexp_winver_win2k, "Windows 2000"                                  },	//2000
+	{ lamexp_winver_winxp, "Windows XP or Windows XP Media Center Edition" },	//XP
+	{ lamexp_winver_xpx64, "Windows Server 2003 or Windows XP x64"         },	//XP_x64
+	{ lamexp_winver_vista, "Windows Vista or Windows Server 2008"          },	//Vista
+	{ lamexp_winver_win70, "Windows 7 or Windows Server 2008 R2"           },	//7
+	{ lamexp_winver_win80, "Windows 8 or Windows Server 2012"              },	//8
+	{ lamexp_winver_win81, "Windows 8.1 or Windows Server 2012 R2"         },	//8.1
+	{ lamexp_winver_wn100, "Windows 10 or Windows Server 2014 (Preview)"   },	//10
+	{ lamexp_winver_error, "" }
+};
+
 
 //GURU MEDITATION
 static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
@@ -462,7 +487,7 @@ bool lamexp_detect_wine(void)
 		if(ntdll.load())
 		{
 			if(ntdll.resolve("wine_nt_to_unix_file_name") != NULL) g_lamexp_wine.bIsWine = true;
-			if(ntdll.resolve("wine_get_version") != NULL) g_lamexp_wine.bIsWine = true;
+			if(ntdll.resolve("wine_get_version")          != NULL) g_lamexp_wine.bIsWine = true;
 			ntdll.unload();
 		}
 		g_lamexp_wine.bInitialized = true;
@@ -1097,32 +1122,18 @@ bool lamexp_init_qt(int argc, char* argv[])
 		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
 	}
 
-	//Supported Windows version?
-	if(osVersionNo == lamexp_winver_winxp)
+	//Check whether we are running on a supported Windows version
+	bool runningOnSupportedOSVersion = false;
+	for(size_t i = 0; lamexp_winver_lut[i].version != lamexp_winver_error; i++)
 	{
-		qDebug("Running on Windows XP or Windows XP Media Center Edition.\n");						//lamexp_check_compatibility_mode("GetLargePageMinimum", executableName);
+		if(osVersionNo == lamexp_winver_lut[i].version)
+		{	
+			runningOnSupportedOSVersion = true;
+			qDebug("Running on %s (NT v%u.%u).\n", lamexp_winver_lut[i].friendlyName, osVersionNo.versionMajor, osVersionNo.versionMinor);
+			break;
+		}
 	}
-	else if(osVersionNo == lamexp_winver_xpx64)
-	{
-		qDebug("Running on Windows Server 2003, Windows Server 2003 R2 or Windows XP x64.\n");		//lamexp_check_compatibility_mode("GetLocaleInfoEx", executableName);
-	}
-	else if(osVersionNo == lamexp_winver_vista)
-	{
-		qDebug("Running on Windows Vista or Windows Server 2008.\n");								//lamexp_check_compatibility_mode("CreateRemoteThreadEx", executableName*/);
-	}
-	else if(osVersionNo == lamexp_winver_win70)
-	{
-		qDebug("Running on Windows 7 or Windows Server 2008 R2.\n");								//lamexp_check_compatibility_mode("CreateFile2", executableName);
-	}
-	else if(osVersionNo == lamexp_winver_win80)
-	{
-		qDebug("Running on Windows 8 or Windows Server 2012.\n");									//lamexp_check_compatibility_mode("FindPackagesByPackageFamily", executableName);
-	}
-	else if(osVersionNo == lamexp_winver_win81)
-	{
-		qDebug("Running on Windows 8.1 or Windows Server 2012 R2.\n");								//lamexp_check_compatibility_mode(NULL, executableName);
-	}
-	else
+	if(!runningOnSupportedOSVersion)
 	{
 		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersionNo.versionMajor, osVersionNo.versionMinor);
 		qWarning("%s\n", QUTF8(message));
@@ -1130,7 +1141,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Check for compat mode
-	if(osVersionNo.overrideFlag && (osVersionNo <= lamexp_winver_win81))
+	if(osVersionNo.overrideFlag && (osVersionNo <= lamexp_winver_wn100))
 	{
 		qWarning("Windows compatibility mode detected!");
 		if(!arguments.contains("--ignore-compat-mode", Qt::CaseInsensitive))

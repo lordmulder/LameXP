@@ -91,16 +91,17 @@ typedef struct _lamexp_os_version_t
 	bool overrideFlag;
 
 	//comparision operators
-	inline bool operator== (const _lamexp_os_version_t &rhs) const { return (versionMajor == rhs.versionMajor) && (versionMinor == rhs.versionMinor); }
-	inline bool operator!= (const _lamexp_os_version_t &rhs) const { return (versionMajor != rhs.versionMajor) || (versionMinor != rhs.versionMinor); }
-	inline bool operator>  (const _lamexp_os_version_t &rhs) const { return (versionMajor > rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >  rhs.versionMinor)); }
-	inline bool operator>= (const _lamexp_os_version_t &rhs) const { return (versionMajor > rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >= rhs.versionMinor)); }
-	inline bool operator<  (const _lamexp_os_version_t &rhs) const { return (versionMajor < rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <  rhs.versionMinor)); }
-	inline bool operator<= (const _lamexp_os_version_t &rhs) const { return (versionMajor < rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <= rhs.versionMinor)); }
+	inline bool operator== (const _lamexp_os_version_t &rhs) const { return (versionMajor == rhs.versionMajor) && ((versionMinor == rhs.versionMinor)); }
+	inline bool operator!= (const _lamexp_os_version_t &rhs) const { return (versionMajor != rhs.versionMajor) || ((versionMinor != rhs.versionMinor)); }
+	inline bool operator>  (const _lamexp_os_version_t &rhs) const { return (versionMajor >  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >  rhs.versionMinor)); }
+	inline bool operator>= (const _lamexp_os_version_t &rhs) const { return (versionMajor >  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >= rhs.versionMinor)); }
+	inline bool operator<  (const _lamexp_os_version_t &rhs) const { return (versionMajor <  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <  rhs.versionMinor)); }
+	inline bool operator<= (const _lamexp_os_version_t &rhs) const { return (versionMajor <  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <= rhs.versionMinor)); }
 }
 lamexp_os_version_t;
 
 //Known Windows versions
+extern const lamexp_os_version_t lamexp_winver_error;
 extern const lamexp_os_version_t lamexp_winver_win2k;
 extern const lamexp_os_version_t lamexp_winver_winxp;
 extern const lamexp_os_version_t lamexp_winver_xpx64;
@@ -108,6 +109,7 @@ extern const lamexp_os_version_t lamexp_winver_vista;
 extern const lamexp_os_version_t lamexp_winver_win70;
 extern const lamexp_os_version_t lamexp_winver_win80;
 extern const lamexp_os_version_t lamexp_winver_win81;
+extern const lamexp_os_version_t lamexp_winver_wn100;
 
 //Beep types
 typedef enum
