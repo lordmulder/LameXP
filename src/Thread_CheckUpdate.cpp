@@ -472,23 +472,17 @@ bool UpdateCheckThread::tryUpdateMirror(UpdateInfo *updateInfo, const QString &u
 	bool success = false;
 	log("", "Trying mirror:", url);
 
-	QString randPart = lamexp_rand_str();
-	QString outFileVersionInfo = QString("%1/%2.ver").arg(lamexp_temp_folder2(), randPart);
-	QString outFileSignature = QString("%1/%2.sig").arg(lamexp_temp_folder2(), randPart);
+	const QString randPart = lamexp_rand_str();
+	const QString outFileVers = QString("%1/%2.ver").arg(lamexp_temp_folder2(), randPart);
+	const QString outFileSign = QString("%1/%2.sig").arg(lamexp_temp_folder2(), randPart);
 
-	log("", "Downloading update info:");
-	bool ok1 = getFile(QString("%1%2").arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileVersionInfo);
-
-	log("", "Downloading signature:");
-	bool ok2 = getFile(QString("%1%2.sig").arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileSignature);
-
-	if(ok1 && ok2)
+	if(getUpdateInfo(url, outFileVers, outFileSign))
 	{
 		log("", "Download okay, checking signature:");
-		if(checkSignature(outFileVersionInfo, outFileSignature))
+		if(checkSignature(outFileVers, outFileSign))
 		{
 			log("", "Signature okay, parsing info:");
-			success = parseVersionInfo(outFileVersionInfo, updateInfo);
+			success = parseVersionInfo(outFileVers, updateInfo);
 		}
 		else
 		{
@@ -500,11 +494,29 @@ bool UpdateCheckThread::tryUpdateMirror(UpdateInfo *updateInfo, const QString &u
 		log("", "Download has failed!");
 	}
 
-	QFile::remove(outFileVersionInfo);
-	QFile::remove(outFileSignature);
+	QFile::remove(outFileVers);
+	QFile::remove(outFileSign);
 	
 	return success;
 }
+
+bool UpdateCheckThread::getUpdateInfo(const QString &url, const QString &outFileVers, const QString &outFileSign)
+{
+	log("", "Downloading update info:");
+	if(!getFile(QString("%1%2"    ).arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileVers))
+	{
+		return false;
+	}
+
+	log("", "Downloading signature:");
+	if(!getFile(QString("%1%2.sig").arg(url, mirror_url_postfix[m_betaUpdates ? 1 : 0]), outFileSign))
+	{
+		return false;
+	}
+
+	return true;
+}
+
 
 bool UpdateCheckThread::getFile(const QString &url, const QString &outFile, unsigned int maxRedir, bool *httpOk)
 {
