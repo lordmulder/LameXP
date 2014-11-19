@@ -323,7 +323,6 @@ static const lamexp_os_info_t lamexp_winver_lut[] =
 	{ lamexp_winver_error, "" }
 };
 
-
 //GURU MEDITATION
 static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
 

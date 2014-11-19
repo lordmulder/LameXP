@@ -517,7 +517,6 @@ bool UpdateCheckThread::getUpdateInfo(const QString &url, const QString &outFile
 	return true;
 }
 
-
 bool UpdateCheckThread::getFile(const QString &url, const QString &outFile, unsigned int maxRedir, bool *httpOk)
 {
 	QFileInfo output(outFile);
