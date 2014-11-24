@@ -23,12 +23,15 @@
 #include "LockedFile.h"
 #include "Global.h"
 
+//MUtils
+#include <MUtils/KeccakHash.h>
+
+//Qt
 #include <QResource>
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
 #include <QCryptographicHash>
-#include <QKeccakHash>
 
 #include <stdio.h>
 #include <io.h>
@@ -61,13 +64,13 @@ QByteArray LockedFile::fileHash(QFile &file)
 
 	if(file.isOpen() && file.reset())
 	{
-		QKeccakHash keccak;
+		MUtils::KeccakHash keccak;
 
 		const QByteArray data = file.readAll();
 		const QByteArray seed = QByteArray::fromHex(g_seed);
 		const QByteArray salt = QByteArray::fromHex(g_salt);
 	
-		if(keccak.init(QKeccakHash::hb384))
+		if(keccak.init(MUtils::KeccakHash::hb384))
 		{
 			bool ok = true;
 			ok = ok && keccak.addData(seed);
@@ -256,7 +259,7 @@ const QString &LockedFile::filePath()
 
 void LockedFile::selfTest()
 {
-	if(!QKeccakHash::selfTest())
+	if(!MUtils::KeccakHash::selfTest())
 	{
 		THROW("QKeccakHash self-test has failed!");
 	}

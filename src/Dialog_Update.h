@@ -24,10 +24,14 @@
 
 #include <QDialog>
 
-class UpdateInfo;
 class SettingsModel;
 class QMovie;
-class UpdateCheckThread;
+
+//MUtils forward declaration
+namespace MUtils
+{
+	class UpdateChecker;
+}
 
 //UIC forward declartion
 namespace Ui {
@@ -76,7 +80,7 @@ private:
 	const QString m_binaryKeys;
 	const QString m_binaryUpdater;
 
-	UpdateCheckThread *m_thread;
+	MUtils::UpdateChecker *m_thread;
 	QStringList *m_logFile;
 	SettingsModel *m_settings;
 	QMovie *m_animator;

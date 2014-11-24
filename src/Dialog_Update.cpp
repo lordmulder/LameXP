@@ -27,10 +27,12 @@
 
 //LameXP includes
 #include "Global.h"
-#include "Thread_CheckUpdate.h"
 #include "Dialog_LogView.h"
 #include "Model_Settings.h"
 #include "WinSevenTaskbar.h"
+
+//MUtils
+#include <MUtils/UpdateChecker.h>
 
 //Qt includes
 #include <QClipboard>
@@ -159,7 +161,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	{
 		if(!m_thread)
 		{
-			m_thread = new UpdateCheckThread(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, m_betaUpdates);
+			m_thread = new MUtils::UpdateChecker(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates);
 			connect(m_thread, SIGNAL(statusChanged(int)), this, SLOT(threadStatusChanged(int)));
 			connect(m_thread, SIGNAL(progressChanged(int)), this, SLOT(threadProgressChanged(int)));
 			connect(m_thread, SIGNAL(messageLogged(QString)), this, SLOT(threadMessageLogged(QString)));
@@ -286,41 +288,41 @@ void UpdateDialog::threadStatusChanged(const int status)
 {
 	switch(status)
 	{
-	case UpdateCheckThread::UpdateStatus_NotStartedYet:
+	case MUtils::UpdateChecker::UpdateStatus_NotStartedYet:
 		ui->statusLabel->setText(tr("Initializing, please wait..."));
 		break;
-	case UpdateCheckThread::UpdateStatus_CheckingConnection:
+	case MUtils::UpdateChecker::UpdateStatus_CheckingConnection:
 		ui->statusLabel->setText(tr("Testing your internet connection, please wait..."));
 		break;
-	case UpdateCheckThread::UpdateStatus_FetchingUpdates:
+	case MUtils::UpdateChecker::UpdateStatus_FetchingUpdates:
 		ui->statusLabel->setText(tr("Checking for new updates online, please wait..."));
 		break;
-	case UpdateCheckThread::UpdateStatus_CompletedUpdateAvailable:
+	case MUtils::UpdateChecker::UpdateStatus_CompletedUpdateAvailable:
 		ui->statusLabel->setText(tr("A new version of LameXP is available!"));
 		SHOW_HINT(tr("We highly recommend all users to install this update as soon as possible."), ":/icons/shield_exclamation.png");
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_exclamation.png");
 		break;
-	case UpdateCheckThread::UpdateStatus_CompletedNoUpdates:
+	case MUtils::UpdateChecker::UpdateStatus_CompletedNoUpdates:
 		ui->statusLabel->setText(tr("No new updates available at this time."));
 		SHOW_HINT(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"), ":/icons/shield_green.png");
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_green.png");
 		break;
-	case UpdateCheckThread::UpdateStatus_CompletedNewVersionOlder:
+	case MUtils::UpdateChecker::UpdateStatus_CompletedNewVersionOlder:
 		ui->statusLabel->setText(tr("Your version appears to be newer than the latest release."));
 		SHOW_HINT(tr("This usually indicates your are currently using a pre-release version of LameXP."), ":/icons/shield_blue.png");
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_error.png");
 		break;
-	case UpdateCheckThread::UpdateStatus_ErrorNoConnection:
+	case MUtils::UpdateChecker::UpdateStatus_ErrorNoConnection:
 		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
 		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
 		break;
-	case UpdateCheckThread::UpdateStatus_ErrorConnectionTestFailed:
+	case MUtils::UpdateChecker::UpdateStatus_ErrorConnectionTestFailed:
 		ui->statusLabel->setText(tr("Network connectivity test has failed!"));
 		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
 		break;
-	case UpdateCheckThread::UpdateStatus_ErrorFetchUpdateInfo:
+	case MUtils::UpdateChecker::UpdateStatus_ErrorFetchUpdateInfo:
 		ui->statusLabel->setText(tr("Failed to fetch update information from server!"));
 		SHOW_HINT(tr("Sorry, the update server might be busy at this time. Plase try again later."), ":/icons/server_error.png");
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
@@ -354,14 +356,14 @@ void UpdateDialog::threadFinished(void)
 	}
 	else
 	{
-		const bool bHaveUpdate = (m_thread->getUpdateStatus() == UpdateCheckThread::UpdateStatus_CompletedUpdateAvailable);
+		const bool bHaveUpdate = (m_thread->getUpdateStatus() == MUtils::UpdateChecker::UpdateStatus_CompletedUpdateAvailable);
 		ui->installButton->setEnabled(bHaveUpdate);
 		lamexp_beep(bHaveUpdate ? lamexp_beep_info : lamexp_beep_warning);
 
-		if(const UpdateInfo *const updateInfo = m_thread->getUpdateInfo())
+		if(const MUtils::UpdateCheckerInfo *const updateInfo = m_thread->getUpdateInfo())
 		{
-			ui->infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), updateInfo->m_downloadSite));
-			ui->labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(updateInfo->m_buildNo), updateInfo->m_buildDate.toString(Qt::ISODate)));
+			ui->infoLabel->setText(QString("%1<br><a href=\"%2\">%2</a>").arg(tr("More information available at:"), updateInfo->getDownloadSite()));
+			ui->labelVersionLatest->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(updateInfo->getBuildNo()), updateInfo->getBuildDate().toString(Qt::ISODate)));
 			ui->infoLabel->show();
 		}
 
@@ -387,7 +389,7 @@ void UpdateDialog::applyUpdate(void)
 	ui->closeButton->setEnabled(false);
 	ui->retryButton->setEnabled(false);
 
-	if(const UpdateInfo *updateInfo = m_thread->getUpdateInfo())
+	if(const MUtils::UpdateCheckerInfo *updateInfo = m_thread->getUpdateInfo())
 	{
 		ui->statusLabel->setText(tr("Update is being downloaded, please be patient..."));
 		ui->frameAnimation->show();
@@ -407,12 +409,12 @@ void UpdateDialog::applyUpdate(void)
 		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
 		connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
 
-		args << QString("/Location=%1").arg(updateInfo->m_downloadAddress);
-		args << QString("/Filename=%1").arg(updateInfo->m_downloadFilename);
-		args << QString("/TicketID=%1").arg(updateInfo->m_downloadFilecode);
+		args << QString("/Location=%1").arg(updateInfo->getDownloadAddress());
+		args << QString("/Filename=%1").arg(updateInfo->getDownloadFilename());
+		args << QString("/TicketID=%1").arg(updateInfo->getDownloadFilecode());
 		args << QString("/ToFolder=%1").arg(QDir::toNativeSeparators(QDir(QApplication::applicationDirPath()).canonicalPath())); 
 		args << QString("/ToExFile=%1.exe").arg(QFileInfo(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath()).completeBaseName());
-		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(updateInfo->m_buildNo));
+		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(updateInfo->getBuildNo()));
 
 		QApplication::setOverrideCursor(Qt::WaitCursor);
 		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarIndeterminateState, ":/icons/transmit_blue.png");
@@ -471,7 +473,7 @@ void UpdateDialog::testKnownHosts(void)
 {
 	ui->statusLabel->setText("Testing all known hosts, this may take a few minutes...");
 	
-	if(UpdateCheckThread *testThread = new UpdateCheckThread(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, m_betaUpdates, true))
+	if(MUtils::UpdateChecker *testThread = new MUtils::UpdateChecker(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates, true))
 	{
 		QEventLoop loop;
 		m_logFile->clear();

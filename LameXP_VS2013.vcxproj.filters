@@ -238,9 +238,6 @@
     <ClCompile Include="src\Global_Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Thread_CheckUpdate.cpp">
-      <Filter>Source Files\Threads</Filter>
-    </ClCompile>
     <ClCompile Include="src\Global_Zero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -323,9 +320,6 @@
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\MOC_Thread_CPUObserver.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\MOC_Thread_CheckUpdate.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\MOC_ShellIntegration.cpp">
@@ -772,9 +766,6 @@
     </CustomBuild>
     <CustomBuild Include="src\Encoder_MAC.h">
       <Filter>Header Files\Encoders</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\Thread_CheckUpdate.h">
-      <Filter>Header Files\Threads</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
