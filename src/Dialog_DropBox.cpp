@@ -22,7 +22,7 @@
 
 #include "Dialog_DropBox.h"
 
-#include "../tmp/UIC_DropBox.h"
+#include "UIC_DropBox.h"
 
 #include "Global.h"
 #include "Model_Settings.h"

@@ -22,7 +22,7 @@
 
 #include "Dialog_About.h"
 
-#include "../tmp/UIC_AboutDialog.h"
+#include "UIC_AboutDialog.h"
 
 #include "Global.h"
 #include "Model_Settings.h"

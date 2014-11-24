@@ -23,7 +23,7 @@
 #include "Dialog_MainWindow.h"
 
 //UIC includes
-#include "../tmp/UIC_MainWindow.h"
+#include "UIC_MainWindow.h"
 
 //LameXP includes
 #include "Global.h"

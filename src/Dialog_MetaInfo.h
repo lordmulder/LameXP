@@ -23,7 +23,7 @@
 #pragma once
 
 #include <QDialog>
-#include "../tmp/UIC_MetaInfo.h"
+#include "UIC_MetaInfo.h"
 
 #include "Model_AudioFile.h"
 

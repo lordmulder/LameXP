@@ -23,7 +23,7 @@
 #include "Dialog_Processing.h"
 
 //UIC includes
-#include "../tmp/UIC_ProcessingDialog.h"
+#include "UIC_ProcessingDialog.h"
 
 #include "Global.h"
 #include "Model_FileList.h"

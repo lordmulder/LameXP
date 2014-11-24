@@ -10,6 +10,10 @@
 *.rar
 *.zip
 /bin
+/ipch
+/obj
+/out
+/tmp
 /etc/Addins
 /etc/Deployment/_postproc.bat
 /etc/Deployment/buildenv.txt
@@ -20,9 +24,4 @@
 /etc/Prerequisites/keccak/ipch
 /etc/Prerequisites/keccak/obj
 /etc/Prerequisites/_old_
-/ipch
-/obj
-/out
 /res/tools/_old_
-/tmp/*.cpp
-/tmp/*.h

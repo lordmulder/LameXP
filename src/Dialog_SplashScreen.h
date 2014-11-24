@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "../tmp/UIC_SplashScreen.h"
+#include "UIC_SplashScreen.h"
 
 ////////////////////////////////////////////////////////////
 // Splash Frame

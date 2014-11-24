@@ -23,7 +23,7 @@
 #include "Dialog_LogView.h"
 
 //UIC includes
-#include "../tmp/UIC_LogViewDialog.h"
+#include "UIC_LogViewDialog.h"
 
 //Internal
 #include "Global.h"

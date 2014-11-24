@@ -23,7 +23,7 @@
 #include "Dialog_Update.h"
 
 //UIC includes
-#include "..\tmp\UIC_UpdateDialog.h"
+#include "UIC_UpdateDialog.h"
 
 //LameXP includes
 #include "Global.h"

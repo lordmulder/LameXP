@@ -23,7 +23,7 @@
 #include "Dialog_CueImport.h"
 
 //UIC includes
-#include "../tmp/UIC_CueSheetImport.h"
+#include "UIC_CueSheetImport.h"
 
 //LameXP includes
 #include "Global.h"

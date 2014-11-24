@@ -21,7 +21,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Dialog_WorkingBanner.h"
-#include "../tmp/UIC_WorkingBanner.h"
+#include "UIC_WorkingBanner.h"
 
 #include "Global.h"
 #include "WinSevenTaskbar.h"

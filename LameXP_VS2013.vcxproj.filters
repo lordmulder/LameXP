@@ -4,111 +4,6 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Tool_Abstract.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Decoder_Abstract.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_About.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_DropBox.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_LogView.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_MainWindow.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_MetaInfo.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_Processing.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_SplashScreen.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_Update.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_WorkingBanner.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_AAC.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_Abstract.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_FLAC.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_MP3.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_Vorbis.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_Wave.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Filter_Abstract.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Model_AudioFile.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Model_FileList.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Model_MetaInfo.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Model_Progress.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Registry_Decoder.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_ShellIntegration.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_DiskObserver.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_Initialization.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_MessageHandler.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_MessageProducer.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_Process.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Documents.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Flags.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Icons.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Images.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Localization.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Decoder_AAC.cpp">
       <Filter>Source Files\Decoders</Filter>
     </ClCompile>
@@ -280,26 +175,14 @@
     <ClCompile Include="src\Encoder_AC3.cpp">
       <Filter>Source Files\Encoders</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_AC3.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Dialog_CueImport.cpp">
       <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Dialog_CueImport.cpp">
-      <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="src\Model_CueSheet.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Model_CueSheet.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Thread_CueSplitter.cpp">
       <Filter>Source Files\Threads</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_CueSplitter.cpp">
-      <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="src\Decoder_Avisynth.cpp">
       <Filter>Source Files\Decoders</Filter>
@@ -307,59 +190,29 @@
     <ClCompile Include="src\Encoder_AAC_FHG.cpp">
       <Filter>Source Files\Encoders</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_AAC_FHG.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Decd.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Thread_CPUObserver.cpp">
       <Filter>Source Files\Threads</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_CPUObserver.cpp">
-      <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="src\Thread_RAMObserver.cpp">
       <Filter>Source Files\Threads</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_RAMObserver.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Encoder_AAC_QAAC.cpp">
       <Filter>Source Files\Encoders</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_AAC_QAAC.cpp">
-      <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="src\Tool_WaveProperties.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Tool_WaveProperties.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Encoder_DCA.cpp">
       <Filter>Source Files\Encoders</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_DCA.cpp">
-      <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="src\Thread_FileAnalyzer_Task.cpp">
       <Filter>Source Files\Threads</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_FileAnalyzer_Task.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Encoder_Opus.cpp">
       <Filter>Source Files\Encoders</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_Opus.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Decoder_Opus.cpp">
       <Filter>Source Files\Decoders</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\MOC_CustomEventFilter.cpp">
-      <Filter>Generated Files\MOC</Filter>
     </ClCompile>
     <ClCompile Include="etc\Prerequisites\strnatcmp\src\strnatcmp.cpp">
       <Filter>Source Files\Misc\3rd Party</Filter>
@@ -367,32 +220,8 @@
     <ClCompile Include="src\Registry_Encoder.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Registry_Encoder.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\JobObject.cpp">
       <Filter>Source Files\Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Encd_A.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Encd_B.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Misc_A.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Misc_B.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Misc_C.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Encd_C.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Tools_Encd_D.cpp">
-      <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="src\Global_Tools.cpp">
       <Filter>Source Files</Filter>
@@ -412,19 +241,190 @@
     <ClCompile Include="src\Thread_CheckUpdate.cpp">
       <Filter>Source Files\Threads</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Thread_CheckUpdate.cpp">
-      <Filter>Generated Files\MOC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Global_Zero.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\QRC_Sounds.cpp">
-      <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="src\Encoder_MAC.cpp">
       <Filter>Source Files\Encoders</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\MOC_Encoder_MAC.cpp">
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Misc_C.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Misc_B.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Misc_A.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_D.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_C.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_B.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_A.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Sounds.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Localization.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Images.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Icons.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Flags.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Documents.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Tool_WaveProperties.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Tool_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_RAMObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_Process.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_MessageProducer.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_MessageHandler.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_Initialization.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_FileAnalyzer_Task.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_FileAnalyzer.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_DiskObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_CueSplitter.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_CPUObserver.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Thread_CheckUpdate.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_ShellIntegration.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Registry_Encoder.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Registry_Decoder.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Model_Progress.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Model_MetaInfo.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Model_FileList.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Model_CueSheet.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Model_AudioFile.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Filter_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_Wave.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_Vorbis.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_Opus.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_MP3.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_MAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_FLAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_DCA.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_AC3.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_QAAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_FHG.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_WorkingBanner.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_Update.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_SplashScreen.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_Processing.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_MetaInfo.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_MainWindow.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_LogView.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_DropBox.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_CueImport.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Dialog_About.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Decoder_Abstract.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_CustomEventFilter.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -437,30 +437,6 @@
     </ClInclude>
     <ClInclude Include="src\Targetver.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_WorkingBanner.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_DropBox.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_LogViewDialog.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_MainWindow.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_MetaInfo.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_ProcessingDialog.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_SplashScreen.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
-    <ClInclude Include="tmp\UIC_UpdateDialog.h">
-      <Filter>Generated Files\UIC</Filter>
     </ClInclude>
     <ClInclude Include="src\Decoder_AAC.h">
       <Filter>Header Files\Decoders</Filter>
@@ -543,9 +519,6 @@
     <ClInclude Include="src\Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tmp\UIC_CueSheetImport.h">
-      <Filter>Generated Files\UIC</Filter>
-    </ClInclude>
     <ClInclude Include="src\Decoder_Avisynth.h">
       <Filter>Header Files\Decoders</Filter>
     </ClInclude>
@@ -560,6 +533,36 @@
     </ClInclude>
     <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h">
       <Filter>Header Files\Misc\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_WorkingBanner.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_UpdateDialog.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_SplashScreen.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_ProcessingDialog.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_MetaInfo.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_MainWindow.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_LogViewDialog.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_DropBox.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_CueSheetImport.h">
+      <Filter>Generated Files\UIC</Filter>
+    </ClInclude>
+    <ClInclude Include="tmp\LameXP\UIC_AboutDialog.h">
+      <Filter>Generated Files\UIC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -767,11 +770,11 @@
     <CustomBuild Include="res\Sounds.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="src\Thread_CheckUpdate.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="src\Encoder_MAC.h">
       <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Thread_CheckUpdate.h">
+      <Filter>Header Files\Threads</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
