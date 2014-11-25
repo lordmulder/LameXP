@@ -22,7 +22,13 @@
 
 #pragma once
 
+//Internal
 #include "Global.h"
+
+//MUtils
+#include <MUtils/CPUFeatures.h>
+
+//Qt
 #include <QThread>
 
 ////////////////////////////////////////////////////////////
@@ -34,7 +40,7 @@ class InitializationThread: public QThread
 	Q_OBJECT
 
 public:
-	InitializationThread(const lamexp_cpu_t *cpuFeatures);
+	InitializationThread(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures);
 
 	bool getSuccess(void) { return !isRunning() && m_bSuccess; }
 	bool getSlowIndicator(void) { return m_slowIndicator; }
@@ -54,6 +60,6 @@ private:
 	void initQAac(void);
 
 	bool m_bSuccess;
-	lamexp_cpu_t m_cpuFeatures;
+	MUtils::CPUFetaures::cpu_info_t m_cpuFeatures;
 	bool m_slowIndicator;
 };

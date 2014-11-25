@@ -69,6 +69,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //CRT includes
 #include <cstdio>
@@ -794,113 +795,6 @@ void lamexp_init_console(const QStringList &argv)
 }
 
 /*
- * Detect CPU features
- */
-lamexp_cpu_t lamexp_detect_cpu_features(const QStringList &argv)
-{
-	typedef BOOL (WINAPI *IsWow64ProcessFun)(__in HANDLE hProcess, __out PBOOL Wow64Process);
-
-	lamexp_cpu_t features;
-	SYSTEM_INFO systemInfo;
-	int CPUInfo[4] = {-1};
-	char CPUIdentificationString[0x40];
-	char CPUBrandString[0x40];
-
-	memset(&features, 0, sizeof(lamexp_cpu_t));
-	memset(&systemInfo, 0, sizeof(SYSTEM_INFO));
-	memset(CPUIdentificationString, 0, sizeof(CPUIdentificationString));
-	memset(CPUBrandString, 0, sizeof(CPUBrandString));
-	
-	__cpuid(CPUInfo, 0);
-	memcpy(CPUIdentificationString, &CPUInfo[1], sizeof(int));
-	memcpy(CPUIdentificationString + 4, &CPUInfo[3], sizeof(int));
-	memcpy(CPUIdentificationString + 8, &CPUInfo[2], sizeof(int));
-	features.intel = (_stricmp(CPUIdentificationString, "GenuineIntel") == 0);
-	strncpy_s(features.vendor, 0x40, CPUIdentificationString, _TRUNCATE);
-
-	if(CPUInfo[0] >= 1)
-	{
-		__cpuid(CPUInfo, 1);
-		features.mmx = (CPUInfo[3] & 0x800000) || false;
-		features.sse = (CPUInfo[3] & 0x2000000) || false;
-		features.sse2 = (CPUInfo[3] & 0x4000000) || false;
-		features.ssse3 = (CPUInfo[2] & 0x200) || false;
-		features.sse3 = (CPUInfo[2] & 0x1) || false;
-		features.ssse3 = (CPUInfo[2] & 0x200) || false;
-		features.stepping = CPUInfo[0] & 0xf;
-		features.model = ((CPUInfo[0] >> 4) & 0xf) + (((CPUInfo[0] >> 16) & 0xf) << 4);
-		features.family = ((CPUInfo[0] >> 8) & 0xf) + ((CPUInfo[0] >> 20) & 0xff);
-	}
-
-	__cpuid(CPUInfo, 0x80000000);
-	int nExIds = qMax<int>(qMin<int>(CPUInfo[0], 0x80000004), 0x80000000);
-
-	for(int i = 0x80000002; i <= nExIds; ++i)
-	{
-		__cpuid(CPUInfo, i);
-		switch(i)
-		{
-		case 0x80000002:
-			memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo));
-			break;
-		case 0x80000003:
-			memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo));
-			break;
-		case 0x80000004:
-			memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo));
-			break;
-		}
-	}
-
-	strncpy_s(features.brand, 0x40, CPUBrandString, _TRUNCATE);
-
-	if(strlen(features.brand) < 1) strncpy_s(features.brand, 0x40, "Unknown", _TRUNCATE);
-	if(strlen(features.vendor) < 1) strncpy_s(features.vendor, 0x40, "Unknown", _TRUNCATE);
-
-#if (!(defined(_M_X64) || defined(_M_IA64)))
-	QLibrary Kernel32Lib("kernel32.dll");
-	if(IsWow64ProcessFun IsWow64ProcessPtr = (IsWow64ProcessFun) Kernel32Lib.resolve("IsWow64Process"))
-	{
-		BOOL x64flag = FALSE;
-		if(IsWow64ProcessPtr(GetCurrentProcess(), &x64flag))
-		{
-			features.x64 = (x64flag == TRUE);
-		}
-	}
-#else
-	features.x64 = true;
-#endif
-
-	DWORD_PTR procAffinity, sysAffinity;
-	if(GetProcessAffinityMask(GetCurrentProcess(), &procAffinity, &sysAffinity))
-	{
-		for(DWORD_PTR mask = 1; mask; mask <<= 1)
-		{
-			features.count += ((sysAffinity & mask) ? (1) : (0));
-		}
-	}
-	if(features.count < 1)
-	{
-		GetNativeSystemInfo(&systemInfo);
-		features.count = qBound(1UL, systemInfo.dwNumberOfProcessors, 64UL);
-	}
-
-	if(argv.count() > 0)
-	{
-		bool flag = false;
-		for(int i = 0; i < argv.count(); i++)
-		{
-			if(!argv[i].compare("--force-cpu-no-64bit", Qt::CaseInsensitive)) { flag = true; features.x64 = false; }
-			if(!argv[i].compare("--force-cpu-no-sse", Qt::CaseInsensitive)) { flag = true; features.sse = features.sse2 = features.sse3 = features.ssse3 = false; }
-			if(!argv[i].compare("--force-cpu-no-intel", Qt::CaseInsensitive)) { flag = true; features.intel = false; }
-		}
-		if(flag) qWarning("CPU flags overwritten by user-defined parameters. Take care!\n");
-	}
-
-	return features;
-}
-
-/*
  * Check for debugger (detect routine)
  */
 static __forceinline bool lamexp_check_for_debugger(void)
@@ -1274,116 +1168,6 @@ const QStringList &lamexp_arguments(void)
 }
 
 /*
- * Locate known folder on local system
- */
-const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
-{
-	static const int CSIDL_FLAG_CREATE = 0x8000;
-	typedef enum { KF_FLAG_CREATE = 0x00008000 } kf_flags_t;
-	
-	struct
-	{
-		const int csidl;
-		const GUID guid;
-	}
-	static s_folders[] =
-	{
-		{ 0x001c, {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}} },  //CSIDL_LOCAL_APPDATA
-		{ 0x0026, {0x905e63b6,0xc1bf,0x494e,{0xb2,0x9c,0x65,0xb7,0x32,0xd3,0xd2,0x1a}} },  //CSIDL_PROGRAM_FILES
-		{ 0x0024, {0xF38BF404,0x1D43,0x42F2,{0x93,0x05,0x67,0xDE,0x0B,0x28,0xFC,0x23}} },  //CSIDL_WINDOWS_FOLDER
-		{ 0x0025, {0x1AC14E77,0x02E7,0x4E5D,{0xB7,0x44,0x2E,0xB1,0xAE,0x51,0x98,0xB7}} },  //CSIDL_SYSTEM_FOLDER
-	};
-
-	size_t folderId = size_t(-1);
-
-	switch(folder_id)
-	{
-		case lamexp_folder_localappdata: folderId = 0; break;
-		case lamexp_folder_programfiles: folderId = 1; break;
-		case lamexp_folder_systroot_dir: folderId = 2; break;
-		case lamexp_folder_systemfolder: folderId = 3; break;
-	}
-
-	if(folderId == size_t(-1))
-	{
-		qWarning("Invalid 'known' folder was requested!");
-		return *reinterpret_cast<QString*>(NULL);
-	}
-
-	QReadLocker readLock(&g_lamexp_known_folder.lock);
-
-	//Already in cache?
-	if(g_lamexp_known_folder.knownFolders)
-	{
-		if(g_lamexp_known_folder.knownFolders->contains(folderId))
-		{
-			return (*g_lamexp_known_folder.knownFolders)[folderId];
-		}
-	}
-
-	//Obtain write lock to initialize
-	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_known_folder.lock);
-
-	//Still not in cache?
-	if(g_lamexp_known_folder.knownFolders)
-	{
-		if(g_lamexp_known_folder.knownFolders->contains(folderId))
-		{
-			return (*g_lamexp_known_folder.knownFolders)[folderId];
-		}
-	}
-
-	//Initialize on first call
-	if(!g_lamexp_known_folder.knownFolders)
-	{
-		QLibrary shell32("shell32.dll");
-		if(shell32.load())
-		{
-			g_lamexp_known_folder.getFolderPath =      (SHGetFolderPath_t)      shell32.resolve("SHGetFolderPathW");
-			g_lamexp_known_folder.getKnownFolderPath = (SHGetKnownFolderPath_t) shell32.resolve("SHGetKnownFolderPath");
-		}
-		g_lamexp_known_folder.knownFolders = new QMap<size_t, QString>();
-	}
-
-	QString folderPath;
-
-	//Now try to get the folder path!
-	if(g_lamexp_known_folder.getKnownFolderPath)
-	{
-		WCHAR *path = NULL;
-		if(g_lamexp_known_folder.getKnownFolderPath(s_folders[folderId].guid, KF_FLAG_CREATE, NULL, &path) == S_OK)
-		{
-			//MessageBoxW(0, path, L"SHGetKnownFolderPath", MB_TOPMOST);
-			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
-			if(folderTemp.exists())
-			{
-				folderPath = folderTemp.canonicalPath();
-			}
-			CoTaskMemFree(path);
-		}
-	}
-	else if(g_lamexp_known_folder.getFolderPath)
-	{
-		WCHAR *path = new WCHAR[4096];
-		if(g_lamexp_known_folder.getFolderPath(NULL, s_folders[folderId].csidl | CSIDL_FLAG_CREATE, NULL, NULL, path) == S_OK)
-		{
-			//MessageBoxW(0, path, L"SHGetFolderPathW", MB_TOPMOST);
-			QDir folderTemp = QDir(QDir::fromNativeSeparators(QString::fromUtf16(reinterpret_cast<const unsigned short*>(path))));
-			if(folderTemp.exists())
-			{
-				folderPath = folderTemp.canonicalPath();
-			}
-		}
-		MUTILS_DELETE_ARRAY(path);
-	}
-
-	//Update cache
-	g_lamexp_known_folder.knownFolders->insert(folderId, folderPath);
-	return (*g_lamexp_known_folder.knownFolders)[folderId];
-}
-
-/*
  * Check if visual themes are enabled (WinXP and later)
  */
 bool lamexp_themes_enabled(void)
@@ -1406,7 +1190,7 @@ bool lamexp_themes_enabled(void)
 		if(osVersion >= lamexp_winver_winxp)
 		{
 			IsAppThemedFun IsAppThemedPtr = NULL;
-			QLibrary uxTheme(QString("%1/UxTheme.dll").arg(lamexp_known_folder(lamexp_folder_systemfolder)));
+			QLibrary uxTheme(QString("%1/UxTheme.dll").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER)));
 			if(uxTheme.load())
 			{
 				IsAppThemedPtr = (IsAppThemedFun) uxTheme.resolve("IsAppThemed");
@@ -1598,7 +1382,7 @@ bool lamexp_play_sound_file(const QString &library, const unsigned short uiSound
 	QFileInfo libraryFile(library);
 	if(!libraryFile.isAbsolute())
 	{
-		const QString &systemDir = lamexp_known_folder(lamexp_folder_systemfolder);
+		const QString &systemDir = MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER);
 		if(!systemDir.isEmpty())
 		{
 			libraryFile.setFile(QDir(systemDir), libraryFile.fileName());

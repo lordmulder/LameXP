@@ -37,6 +37,7 @@
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
 #include <MUtils/Version.h>
+#include <MUtils/CPUFeatures.h>
 
 //Qt includes
 #include <QApplication>
@@ -88,11 +89,11 @@ static int lamexp_main(int argc, char* argv[])
 	qDebug("");
 
 	//Detect CPU capabilities
-	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(arguments);
-	qDebug("   CPU vendor id  :  %s (Intel: %s)", cpuFeatures.vendor, MUTILS_BOOL2STR(cpuFeatures.intel));
+	const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect(lamexp_arguments());
+	qDebug("   CPU vendor id  :  %s (Intel=%s)", cpuFeatures.vendor, MUTILS_BOOL2STR(cpuFeatures.intel));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
-	qDebug("   CPU signature  :  Family: %d, Model: %d, Stepping: %d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
-	qDebug("CPU capabilities  :  MMX: %s, SSE: %s, SSE2: %s, SSE3: %s, SSSE3: %s, x64: %s", MUTILS_BOOL2STR(cpuFeatures.mmx), MUTILS_BOOL2STR(cpuFeatures.sse), MUTILS_BOOL2STR(cpuFeatures.sse2), MUTILS_BOOL2STR(cpuFeatures.sse3), MUTILS_BOOL2STR(cpuFeatures.ssse3), MUTILS_BOOL2STR(cpuFeatures.x64));
+	qDebug("   CPU signature  :  Family=%d Model=%d Stepping=%d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
+	qDebug("CPU capabilities  :  MMX=%s SSE=%s SSE2=%s SSE3=%s SSSE3=%s SSE4=%s SSE4.2=%s x64=%s", MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_MMX), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE4), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE42), MUTILS_BOOL2STR(cpuFeatures.x64));
 	qDebug(" Number of CPU's  :  %d\n", cpuFeatures.count);
 
 	//Initialize Qt
@@ -158,7 +159,7 @@ static int lamexp_main(int argc, char* argv[])
 	SettingsModel *settingsModel = new SettingsModel();
 
 	//Show splash screen
-	InitializationThread *poInitializationThread = new InitializationThread(&cpuFeatures);
+	InitializationThread *poInitializationThread = new InitializationThread(cpuFeatures);
 	SplashScreen::showSplash(poInitializationThread);
 	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
 	MUTILS_DELETE(poInitializationThread);

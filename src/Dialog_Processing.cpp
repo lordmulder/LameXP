@@ -45,6 +45,8 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
+#include <MUtils/CPUFeatures.h>
 
 //Qt
 #include <QApplication>
@@ -542,8 +544,8 @@ void ProcessingDialog::initEncoding(void)
 		unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
 		if(maximumInstances < 1)
 		{
-			lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(lamexp_arguments());
-			maximumInstances = cores2instances(qBound(1, cpuFeatures.count, 64));
+			const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect(lamexp_arguments());
+			maximumInstances = cores2instances(qBound(1U, cpuFeatures.count, 64U));
 		}
 
 		maximumInstances = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
@@ -890,7 +892,7 @@ void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 	{
 		QString systemRootPath;
 
-		QDir systemRoot(lamexp_known_folder(lamexp_folder_systemfolder));
+		QDir systemRoot(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER));
 		if(systemRoot.exists() && systemRoot.cdUp())
 		{
 			systemRootPath = systemRoot.canonicalPath();

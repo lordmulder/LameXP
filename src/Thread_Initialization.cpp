@@ -207,16 +207,13 @@ volatile bool ExtractorTask::s_bCustom = false;
 // Constructor
 ////////////////////////////////////////////////////////////
 
-InitializationThread::InitializationThread(const lamexp_cpu_t *cpuFeatures)
+InitializationThread::InitializationThread(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures)
+:
+	m_bSuccess(false),
+	m_slowIndicator(false)
 {
-	m_bSuccess = false;
-	memset(&m_cpuFeatures, 0, sizeof(lamexp_cpu_t));
-	m_slowIndicator = false;
-	
-	if(cpuFeatures)
-	{
-		memcpy(&m_cpuFeatures, cpuFeatures, sizeof(lamexp_cpu_t));
-	}
+
+	memcpy(&m_cpuFeatures, &cpuFeatures, sizeof(MUtils::CPUFetaures::cpu_info_t));
 }
 
 ////////////////////////////////////////////////////////////
@@ -254,7 +251,7 @@ double InitializationThread::doInit(const size_t threadCount)
 
 	//CPU type selection
 	unsigned int cpuSupport = 0;
-	if(m_cpuFeatures.sse && m_cpuFeatures.sse2 && m_cpuFeatures.intel)
+	if((m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE) && (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2) && m_cpuFeatures.intel)
 	{
 		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_SSE : CPU_TYPE_X86_SSE;
 	}

@@ -1610,7 +1610,7 @@ void MainWindow::encodeButtonClicked(void)
 		switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), lowDiskspaceMsg, tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
 		{
 		case 1:
-			QProcess::startDetached(QString("%1/cleanmgr.exe").arg(lamexp_known_folder(lamexp_folder_systemfolder)), QStringList() << "/D" << tempFolderParts.first());
+			QProcess::startDetached(QString("%1/cleanmgr.exe").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER)), QStringList() << "/D" << tempFolderParts.first());
 		case 0:
 			return;
 			break;
@@ -2483,7 +2483,7 @@ void MainWindow::findFileContextActionTriggered(void)
 	{
 		QString systemRootPath;
 
-		QDir systemRoot(lamexp_known_folder(lamexp_folder_systemfolder));
+		QDir systemRoot(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER));
 		if(systemRoot.exists() && systemRoot.cdUp())
 		{
 			systemRootPath = systemRoot.canonicalPath();

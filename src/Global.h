@@ -45,35 +45,6 @@ extern const char* LAMEXP_DEFAULT_TRANSLATION;
 // TYPE DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-//CPU features
-typedef struct
-{
-	int family;
-	int model;
-	int stepping;
-	int count;
-	bool x64;
-	bool mmx;
-	bool sse;
-	bool sse2;
-	bool sse3;
-	bool ssse3;
-	char vendor[0x40];
-	char brand[0x40];
-	bool intel;
-}
-lamexp_cpu_t;
-
-//Known folders
-typedef enum
-{
-	lamexp_folder_localappdata = 0,
-	lamexp_folder_programfiles = 2,
-	lamexp_folder_systemfolder = 3,
-	lamexp_folder_systroot_dir = 4
-}
-lamexp_known_folder_t;
-
 //LameXP user-defined events
 typedef enum
 {
@@ -166,7 +137,6 @@ const QString lamexp_clean_filepath(const QString &str);
 unsigned __int64 lamexp_current_file_time(void);
 void lamexp_dbg_dbg_output_string(const char* format, ...);
 unsigned long lamexp_dbg_private_bytes(void);
-lamexp_cpu_t lamexp_detect_cpu_features(const QStringList &argv);
 bool lamexp_detect_wine(void);
 bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const bool explore = false);
@@ -187,7 +157,6 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
 bool lamexp_is_executable(const QString &path);
 bool lamexp_is_hibernation_supported(void);
-const QString &lamexp_known_folder(lamexp_known_folder_t folder_id);
 const QString lamexp_lookup_tool(const QString &toolName);
 void lamexp_message_handler(QtMsgType type, const char *msg);
 const char *lamexp_mulders_url(void);
