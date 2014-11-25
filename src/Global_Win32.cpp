@@ -124,21 +124,6 @@ while(0)
 while(0)
 
 ///////////////////////////////////////////////////////////////////////////////
-// GLOBAL TYPES
-///////////////////////////////////////////////////////////////////////////////
-
-typedef HRESULT (WINAPI *SHGetKnownFolderPath_t)(const GUID &rfid, DWORD dwFlags, HANDLE hToken, PWSTR *ppszPath);
-typedef HRESULT (WINAPI *SHGetFolderPath_t)(HWND hwndOwner, int nFolder, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
-
-//OS version info
-typedef struct _lamexp_os_info_t
-{
-	const lamexp_os_version_t version;
-	const char friendlyName[128];
-}
-lamexp_os_info_t;
-
-///////////////////////////////////////////////////////////////////////////////
 // CRITICAL SECTION
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -224,16 +209,6 @@ static CriticalSection g_lamexp_fatal_lock;
 //Global locks
 static CriticalSection g_lamexp_message_lock;
 
-//Special folders
-static struct
-{
-	QMap<size_t, QString> *knownFolders;
-	SHGetKnownFolderPath_t getKnownFolderPath;
-	SHGetFolderPath_t getFolderPath;
-	QReadWriteLock lock;
-}
-g_lamexp_known_folder;
-
 //CLI Arguments
 static struct
 {
@@ -241,15 +216,6 @@ static struct
 	QReadWriteLock lock;
 }
 g_lamexp_argv;
-
-//OS Version
-static struct
-{
-	bool bInitialized;
-	lamexp_os_version_t version;
-	QReadWriteLock lock;
-}
-g_lamexp_os_version;
 
 //Wine detection
 static struct
@@ -302,170 +268,12 @@ static FILE *g_lamexp_log_file = NULL;
 const char* LAMEXP_DEFAULT_LANGID = "en";
 const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
 
-//Known Windows NT versions
-const lamexp_os_version_t lamexp_winver_error = {0,0};	//N/A
-const lamexp_os_version_t lamexp_winver_win2k = {5,0};	//2000
-const lamexp_os_version_t lamexp_winver_winxp = {5,1};	//XP
-const lamexp_os_version_t lamexp_winver_xpx64 = {5,2};	//XP_x64
-const lamexp_os_version_t lamexp_winver_vista = {6,0};	//Vista
-const lamexp_os_version_t lamexp_winver_win70 = {6,1};	//7
-const lamexp_os_version_t lamexp_winver_win80 = {6,2};	//8
-const lamexp_os_version_t lamexp_winver_win81 = {6,3};	//8.1
-const lamexp_os_version_t lamexp_winver_wn100 = {6,4};	//10
-
-//Maps marketing names to the actual Windows NT versions
-static const lamexp_os_info_t lamexp_winver_lut[] =
-{
-	{ lamexp_winver_win2k, "Windows 2000"                                  },	//2000
-	{ lamexp_winver_winxp, "Windows XP or Windows XP Media Center Edition" },	//XP
-	{ lamexp_winver_xpx64, "Windows Server 2003 or Windows XP x64"         },	//XP_x64
-	{ lamexp_winver_vista, "Windows Vista or Windows Server 2008"          },	//Vista
-	{ lamexp_winver_win70, "Windows 7 or Windows Server 2008 R2"           },	//7
-	{ lamexp_winver_win80, "Windows 8 or Windows Server 2012"              },	//8
-	{ lamexp_winver_win81, "Windows 8.1 or Windows Server 2012 R2"         },	//8.1
-	{ lamexp_winver_wn100, "Windows 10 or Windows Server 2014 (Preview)"   },	//10
-	{ lamexp_winver_error, "" }
-};
-
 //GURU MEDITATION
 static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
-
-/*
- * Verify a specific Windows version
- */
-static bool lamexp_verify_os_version(const DWORD major, const DWORD minor)
-{
-	OSVERSIONINFOEXW osvi;
-	DWORDLONG dwlConditionMask = 0;
-
-	//Initialize the OSVERSIONINFOEX structure
-	memset(&osvi, 0, sizeof(OSVERSIONINFOEXW));
-	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEXW);
-	osvi.dwMajorVersion = major;
-	osvi.dwMinorVersion = minor;
-	osvi.dwPlatformId = VER_PLATFORM_WIN32_NT;
-
-	//Initialize the condition mask
-	VER_SET_CONDITION(dwlConditionMask, VER_MAJORVERSION, VER_GREATER_EQUAL);
-	VER_SET_CONDITION(dwlConditionMask, VER_MINORVERSION, VER_GREATER_EQUAL);
-	VER_SET_CONDITION(dwlConditionMask, VER_PLATFORMID, VER_EQUAL);
-
-	// Perform the test
-	const BOOL ret = VerifyVersionInfoW(&osvi, VER_MAJORVERSION | VER_MINORVERSION | VER_PLATFORMID, dwlConditionMask);
-
-	//Error checking
-	if(!ret)
-	{
-		if(GetLastError() != ERROR_OLD_WIN_VERSION)
-		{
-			qWarning("VerifyVersionInfo() system call has failed!");
-		}
-	}
-
-	return (ret != FALSE);
-}
-
-/*
- * Determine the *real* Windows version
- */
-static bool lamexp_get_real_os_version(unsigned int *major, unsigned int *minor, bool *pbOverride)
-{
-	*major = *minor = 0;
-	*pbOverride = false;
-	
-	//Initialize local variables
-	OSVERSIONINFOEXW osvi;
-	memset(&osvi, 0, sizeof(OSVERSIONINFOEXW));
-	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEXW);
-
-	//Try GetVersionEx() first
-	if(GetVersionExW((LPOSVERSIONINFOW)&osvi) == FALSE)
-	{
-		qWarning("GetVersionEx() has failed, cannot detect Windows version!");
-		return false;
-	}
-
-	//Make sure we are running on NT
-	if(osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
-	{
-		*major = osvi.dwMajorVersion;
-		*minor = osvi.dwMinorVersion;
-	}
-	else
-	{
-		qWarning("Not running on Windows NT, unsupported operating system!");
-		return false;
-	}
-
-	//Determine the real *major* version first
-	forever
-	{
-		const DWORD nextMajor = (*major) + 1;
-		if(lamexp_verify_os_version(nextMajor, 0))
-		{
-			*pbOverride = true;
-			*major = nextMajor;
-			*minor = 0;
-			continue;
-		}
-		break;
-	}
-
-	//Now also determine the real *minor* version
-	forever
-	{
-		const DWORD nextMinor = (*minor) + 1;
-		if(lamexp_verify_os_version((*major), nextMinor))
-		{
-			*pbOverride = true;
-			*minor = nextMinor;
-			continue;
-		}
-		break;
-	}
-
-	return true;
-}
-
-/*
- * Get the native operating system version
- */
-const lamexp_os_version_t &lamexp_get_os_version(void)
-{
-	QReadLocker readLock(&g_lamexp_os_version.lock);
-
-	//Already initialized?
-	if(g_lamexp_os_version.bInitialized)
-	{
-		return g_lamexp_os_version.version;
-	}
-	
-	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_os_version.lock);
-
-	//Detect OS version
-	if(!g_lamexp_os_version.bInitialized)
-	{
-		unsigned int major, minor; bool oflag;
-		if(lamexp_get_real_os_version(&major, &minor, &oflag))
-		{
-			g_lamexp_os_version.version.versionMajor = major;
-			g_lamexp_os_version.version.versionMinor = minor;
-			g_lamexp_os_version.version.overrideFlag = oflag;
-			g_lamexp_os_version.bInitialized = true;
-		}
-		else
-		{
-			qWarning("Failed to determin the operating system version!");
-		}
-	}
-
-	return g_lamexp_os_version.version;
-}
 
 /*
  * Check if we are running under wine
@@ -1012,32 +820,27 @@ bool lamexp_init_qt(int argc, char* argv[])
 #endif
 
 	//Check the Windows version
-	const lamexp_os_version_t &osVersionNo = lamexp_get_os_version();
-	if(osVersionNo < lamexp_winver_winxp)
+	
+	const MUtils::OS::Version::os_version_t &osVersion = MUtils::OS::os_version();
+	if((osVersion.type != MUtils::OS::Version::OS_WINDOWS) || (osVersion < MUtils::OS::Version::WINDOWS_WINXP))
 	{
 		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
 	}
 
 	//Check whether we are running on a supported Windows version
-	bool runningOnSupportedOSVersion = false;
-	for(size_t i = 0; lamexp_winver_lut[i].version != lamexp_winver_error; i++)
+	if(const char *const friendlyName = MUtils::OS::os_friendly_name(osVersion))
 	{
-		if(osVersionNo == lamexp_winver_lut[i].version)
-		{	
-			runningOnSupportedOSVersion = true;
-			qDebug("Running on %s (NT v%u.%u).\n", lamexp_winver_lut[i].friendlyName, osVersionNo.versionMajor, osVersionNo.versionMinor);
-			break;
-		}
+		qDebug("Running on %s (NT v%u.%u).\n", friendlyName, osVersion.versionMajor, osVersion.versionMinor);
 	}
-	if(!runningOnSupportedOSVersion)
+	else
 	{
-		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersionNo.versionMajor, osVersionNo.versionMinor);
+		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersion.versionMajor, osVersion.versionMinor);
 		qWarning("%s\n", MUTILS_UTF8(message));
-		MessageBoxW(NULL, MUTILS_WCHR(message), L"LameXP", MB_OK | MB_TOPMOST | MB_ICONWARNING);
+		MUtils::OS::system_message_wrn(MUTILS_WCHR(message), L"LameXP");
 	}
 
 	//Check for compat mode
-	if(osVersionNo.overrideFlag && (osVersionNo <= lamexp_winver_wn100))
+	if(osVersion.overrideFlag && (osVersion <= MUtils::OS::Version::WINDOWS_WN100))
 	{
 		qWarning("Windows compatibility mode detected!");
 		if(!arguments.contains("--ignore-compat-mode", Qt::CaseInsensitive))
@@ -1186,8 +989,8 @@ bool lamexp_themes_enabled(void)
 	if(!g_lamexp_themes_enabled.bInitialized)
 	{
 		g_lamexp_themes_enabled.bThemesEnabled = false;
-		const lamexp_os_version_t &osVersion = lamexp_get_os_version();
-		if(osVersion >= lamexp_winver_winxp)
+		const MUtils::OS::Version::os_version_t &osVersion = MUtils::OS::os_version();
+		if(osVersion >= MUtils::OS::Version::WINDOWS_WINXP)
 		{
 			IsAppThemedFun IsAppThemedPtr = NULL;
 			QLibrary uxTheme(QString("%1/UxTheme.dll").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER)));
@@ -1753,7 +1556,8 @@ static void lamexp_init_dwmapi(void)
 	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
 			
 	//Does OS support DWM?
-	if(lamexp_get_os_version() >= lamexp_winver_vista)
+	const MUtils::OS::Version::os_version_t &osVersion = MUtils::OS::os_version();
+	if(osVersion >= MUtils::OS::Version::WINDOWS_VISTA)
 	{
 		//Load DWMAPI.DLL
 		g_lamexp_dwmapi.dwmapi_dll = new QLibrary("dwmapi.dll");
@@ -2129,8 +1933,6 @@ extern "C" void _lamexp_global_init_win32(void)
 
 	//Zero *before* constructors are called
 	LAMEXP_ZERO_MEMORY(g_lamexp_argv);
-	LAMEXP_ZERO_MEMORY(g_lamexp_known_folder);
-	LAMEXP_ZERO_MEMORY(g_lamexp_os_version);
 	LAMEXP_ZERO_MEMORY(g_lamexp_wine);
 	LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
 	LAMEXP_ZERO_MEMORY(g_lamexp_dwmapi);
@@ -2143,9 +1945,6 @@ extern "C" void _lamexp_global_init_win32(void)
 
 extern "C" void _lamexp_global_free_win32(void)
 {
-	//Clear folder cache
-	MUTILS_DELETE(g_lamexp_known_folder.knownFolders);
-
 	//Destroy Qt application object
 	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
 	MUTILS_DELETE(application);

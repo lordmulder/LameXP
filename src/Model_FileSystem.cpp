@@ -27,6 +27,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //Qt
 #include <QApplication>
@@ -271,8 +272,8 @@ bool QFileSystemModelEx::hasSubfolders(const QString &path)
 {
 	if(s_findFirstFileExInfoLevel == INT_MAX)
 	{
-		const lamexp_os_version_t &osVersionNo = lamexp_get_os_version();
-		s_findFirstFileExInfoLevel = (osVersionNo >= lamexp_winver_win70) ? FindExInfoBasic : FindExInfoStandard;
+		const MUtils::OS::Version::os_version_t &osVersion = MUtils::OS::os_version();
+		s_findFirstFileExInfoLevel = (osVersion >= MUtils::OS::Version::WINDOWS_WIN70) ? FindExInfoBasic : FindExInfoStandard;
 	}
 
 	WIN32_FIND_DATAW findData;

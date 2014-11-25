@@ -54,34 +54,6 @@ typedef enum
 }
 lamexp_event_t;
 
-//OS version number
-typedef struct _lamexp_os_version_t
-{
-	unsigned int versionMajor;
-	unsigned int versionMinor;
-	bool overrideFlag;
-
-	//comparision operators
-	inline bool operator== (const _lamexp_os_version_t &rhs) const { return (versionMajor == rhs.versionMajor) && ((versionMinor == rhs.versionMinor)); }
-	inline bool operator!= (const _lamexp_os_version_t &rhs) const { return (versionMajor != rhs.versionMajor) || ((versionMinor != rhs.versionMinor)); }
-	inline bool operator>  (const _lamexp_os_version_t &rhs) const { return (versionMajor >  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >  rhs.versionMinor)); }
-	inline bool operator>= (const _lamexp_os_version_t &rhs) const { return (versionMajor >  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor >= rhs.versionMinor)); }
-	inline bool operator<  (const _lamexp_os_version_t &rhs) const { return (versionMajor <  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <  rhs.versionMinor)); }
-	inline bool operator<= (const _lamexp_os_version_t &rhs) const { return (versionMajor <  rhs.versionMajor) || ((versionMajor == rhs.versionMajor) && (versionMinor <= rhs.versionMinor)); }
-}
-lamexp_os_version_t;
-
-//Known Windows versions
-extern const lamexp_os_version_t lamexp_winver_error;
-extern const lamexp_os_version_t lamexp_winver_win2k;
-extern const lamexp_os_version_t lamexp_winver_winxp;
-extern const lamexp_os_version_t lamexp_winver_xpx64;
-extern const lamexp_os_version_t lamexp_winver_vista;
-extern const lamexp_os_version_t lamexp_winver_win70;
-extern const lamexp_os_version_t lamexp_winver_win80;
-extern const lamexp_os_version_t lamexp_winver_win81;
-extern const lamexp_os_version_t lamexp_winver_wn100;
-
 //Beep types
 typedef enum
 {
@@ -145,7 +117,6 @@ void lamexp_fatal_exit(const char* const errorMessage);
 void lamexp_finalization(void);
 unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok = NULL);
 void lamexp_free_window_icon(lamexp_icon_t *icon);
-const lamexp_os_version_t &lamexp_get_os_version(void);
 void lamexp_init_console(const QStringList &argv);
 void lamexp_init_error_handlers(void);
 int lamexp_init_ipc(void);
