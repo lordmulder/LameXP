@@ -22,12 +22,17 @@
 
 #include "Thread_FileAnalyzer.h"
 
+//Internal
 #include "Global.h"
 #include "LockedFile.h"
 #include "Model_AudioFile.h"
 #include "Thread_FileAnalyzer_Task.h"
 #include "PlaylistImporter.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
@@ -86,9 +91,9 @@ FileAnalyzer::~FileAnalyzer(void)
 		}
 	}
 
-	LAMEXP_DELETE(m_templateFile);
-	LAMEXP_DELETE(m_pool);
-	LAMEXP_DELETE(m_timer);
+	MUTILS_DELETE(m_templateFile);
+	MUTILS_DELETE(m_pool);
+	MUTILS_DELETE(m_timer);
 }
 
 ////////////////////////////////////////////////////////////
@@ -314,7 +319,7 @@ bool FileAnalyzer::createTemplate(void)
 		return true;
 	}
 	
-	QString templatePath = QString("%1/%2.txt").arg(lamexp_temp_folder2(), lamexp_rand_str());
+	QString templatePath = QString("%1/%2.txt").arg(MUtils::temp_folder(), MUtils::rand_str());
 
 	QFile templateFile(templatePath);
 	if(!templateFile.open(QIODevice::WriteOnly))

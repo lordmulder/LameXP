@@ -22,10 +22,15 @@
 
 #include "Thread_Initialization.h"
 
+//Internal
 #include "LockedFile.h"
 #include "Tools.h"
 #include "Tool_Abstract.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QFileInfo>
 #include <QCoreApplication>
 #include <QProcess>
@@ -170,7 +175,7 @@ protected:
 		else
 		{
 			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), toolShortName.toLatin1().constData());
-			lockedFile = new LockedFile(m_toolResource, QString("%1/lxp_%2").arg(lamexp_temp_folder2(), toolShortName), m_toolHash);
+			lockedFile = new LockedFile(m_toolResource, QString("%1/lxp_%2").arg(MUtils::temp_folder(), toolShortName), m_toolHash);
 		}
 
 		if(lockedFile)
@@ -329,15 +334,15 @@ double InitializationThread::doInit(const size_t threadCount)
 		const QByteArray toolHash(checksum.toLatin1());
 		if(toolHash.size() != 96)
 		{
-			qFatal("The checksum for \"%s\" has an invalid size!", QUTF8(toolName));
+			qFatal("The checksum for \"%s\" has an invalid size!", MUTILS_UTF8(toolName));
 			return -1.0;
 		}
 			
 		QResource *resource = new QResource(QString(":/tools/%1").arg(toolName));
 		if(!(resource->isValid() && resource->data()))
 		{
-			LAMEXP_DELETE(resource);
-			qFatal("The resource for \"%s\" could not be found!", QUTF8(toolName));
+			MUTILS_DELETE(resource);
+			qFatal("The resource for \"%s\" could not be found!", MUTILS_UTF8(toolName));
 			return -1.0;
 		}
 			
@@ -347,7 +352,7 @@ double InitializationThread::doInit(const size_t threadCount)
 			continue;
 		}
 
-		LAMEXP_DELETE(resource);
+		MUTILS_DELETE(resource);
 	}
 
 	//Sanity Check
@@ -358,7 +363,7 @@ double InitializationThread::doInit(const size_t threadCount)
 
 	//Wait for extrator threads to finish
 	pool->waitForDone();
-	LAMEXP_DELETE(pool);
+	MUTILS_DELETE(pool);
 
 	const long long timeExtractEnd = lamexp_perfcounter_value();
 
@@ -519,7 +524,7 @@ void InitializationThread::initTranslations(void)
 		{
 			if(lamexp_translation_register(langId, qmFile, langName, systemId, country))
 			{
-				qDebug("Registering translation: %s = %s (%u) [%u]", QUTF8(qmFile), QUTF8(langName), systemId, country);
+				qDebug("Registering translation: %s = %s (%u) [%u]", MUTILS_UTF8(qmFile), MUTILS_UTF8(langName), systemId, country);
 			}
 			else
 			{
@@ -553,12 +558,12 @@ void InitializationThread::initNeroAac(void)
 	{
 		if(!lamexp_is_executable(neroFileInfo[i].canonicalFilePath()))
 		{
-			qDebug("%s executbale is invalid -> AAC encoding support will be disabled!\n", QUTF8(neroFileInfo[i].fileName()));
+			qDebug("%s executbale is invalid -> AAC encoding support will be disabled!\n", MUTILS_UTF8(neroFileInfo[i].fileName()));
 			return;
 		}
 	}
 
-	qDebug("Found Nero AAC encoder binary:\n%s\n", QUTF8(neroFileInfo[0].canonicalFilePath()));
+	qDebug("Found Nero AAC encoder binary:\n%s\n", MUTILS_UTF8(neroFileInfo[0].canonicalFilePath()));
 
 	//Lock the Nero binaries
 	LockedFile *neroBin[3];
@@ -573,13 +578,13 @@ void InitializationThread::initNeroAac(void)
 	}
 	catch(...)
 	{
-		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
+		for(int i = 0; i < 3; i++) MUTILS_DELETE(neroBin[i]);
 		qWarning("Failed to get excluive lock to Nero encoder binary -> AAC encoding support will be disabled!");
 		return;
 	}
 
 	QProcess process;
-	lamexp_init_process(process, neroFileInfo[0].absolutePath());
+	MUtils::init_process(process, neroFileInfo[0].absolutePath());
 
 	process.start(neroFileInfo[0].canonicalFilePath(), QStringList() << "-help");
 
@@ -589,7 +594,7 @@ void InitializationThread::initNeroAac(void)
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
 		process.kill();
 		process.waitForFinished(-1);
-		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
+		for(int i = 0; i < 3; i++) MUTILS_DELETE(neroBin[i]);
 		return;
 	}
 
@@ -604,7 +609,7 @@ void InitializationThread::initNeroAac(void)
 				qWarning("Nero process time out -> killing!");
 				process.kill();
 				process.waitForFinished(-1);
-				for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
+				for(int i = 0; i < 3; i++) MUTILS_DELETE(neroBin[i]);
 				return;
 			}
 		}
@@ -633,7 +638,7 @@ void InitializationThread::initNeroAac(void)
 	if(!(neroVersion > 0))
 	{
 		qWarning("Nero AAC version could not be determined -> AAC encoding support will be disabled!");
-		for(int i = 0; i < 3; i++) LAMEXP_DELETE(neroBin[i]);
+		for(int i = 0; i < 3; i++) MUTILS_DELETE(neroBin[i]);
 		return;
 	}
 	
@@ -669,8 +674,8 @@ void InitializationThread::initFhgAac(void)
 		return;
 	}
 
-	qDebug("Found FhgAacEnc cli_exe:\n%s\n", QUTF8(fhgFileInfo[0].canonicalFilePath()));
-	qDebug("Found FhgAacEnc enc_dll:\n%s\n", QUTF8(fhgFileInfo[1].canonicalFilePath()));
+	qDebug("Found FhgAacEnc cli_exe:\n%s\n", MUTILS_UTF8(fhgFileInfo[0].canonicalFilePath()));
+	qDebug("Found FhgAacEnc enc_dll:\n%s\n", MUTILS_UTF8(fhgFileInfo[1].canonicalFilePath()));
 
 	//Lock the FhgAacEnc binaries
 	LockedFile *fhgBin[5];
@@ -685,13 +690,13 @@ void InitializationThread::initFhgAac(void)
 	}
 	catch(...)
 	{
-		for(int i = 0; i < 5; i++) LAMEXP_DELETE(fhgBin[i]);
+		for(int i = 0; i < 5; i++) MUTILS_DELETE(fhgBin[i]);
 		qWarning("Failed to get excluive lock to FhgAacEnc binary -> FhgAacEnc support will be disabled!");
 		return;
 	}
 
 	QProcess process;
-	lamexp_init_process(process, fhgFileInfo[0].absolutePath());
+	MUtils::init_process(process, fhgFileInfo[0].absolutePath());
 
 	process.start(fhgFileInfo[0].canonicalFilePath(), QStringList() << "--version");
 
@@ -701,7 +706,7 @@ void InitializationThread::initFhgAac(void)
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
 		process.kill();
 		process.waitForFinished(-1);
-		for(int i = 0; i < 5; i++) LAMEXP_DELETE(fhgBin[i]);
+		for(int i = 0; i < 5; i++) MUTILS_DELETE(fhgBin[i]);
 		return;
 	}
 
@@ -716,7 +721,7 @@ void InitializationThread::initFhgAac(void)
 			qWarning("FhgAacEnc process time out -> killing!");
 			process.kill();
 			process.waitForFinished(-1);
-			for(int i = 0; i < 5; i++) LAMEXP_DELETE(fhgBin[i]);
+			for(int i = 0; i < 5; i++) MUTILS_DELETE(fhgBin[i]);
 			return;
 		}
 		while(process.bytesAvailable() > 0)
@@ -734,14 +739,14 @@ void InitializationThread::initFhgAac(void)
 	if(!(fhgVersion > 0))
 	{
 		qWarning("FhgAacEnc version couldn't be determined -> FhgAacEnc support will be disabled!");
-		for(int i = 0; i < 5; i++) LAMEXP_DELETE(fhgBin[i]);
+		for(int i = 0; i < 5; i++) MUTILS_DELETE(fhgBin[i]);
 		return;
 	}
 	else if(fhgVersion < lamexp_toolver_fhgaacenc())
 	{
 		qWarning("FhgAacEnc version is too much outdated (%s) -> FhgAacEnc support will be disabled!", lamexp_version2string("????-??-??", fhgVersion, "N/A").toLatin1().constData());
 		qWarning("Minimum required FhgAacEnc version currently is: %s\n", lamexp_version2string("????-??-??", lamexp_toolver_fhgaacenc(), "N/A").toLatin1().constData());
-		for(int i = 0; i < 5; i++) LAMEXP_DELETE(fhgBin[i]);
+		for(int i = 0; i < 5; i++) MUTILS_DELETE(fhgBin[i]);
 		return;
 	}
 	
@@ -776,7 +781,7 @@ void InitializationThread::initQAac(void)
 		return;
 	}
 
-	qDebug("Found QAAC encoder:\n%s\n", QUTF8(qaacFileInfo[0].canonicalFilePath()));
+	qDebug("Found QAAC encoder:\n%s\n", MUTILS_UTF8(qaacFileInfo[0].canonicalFilePath()));
 
 	//Lock the required QAAC binaries
 	LockedFile *qaacBin[4];
@@ -791,13 +796,13 @@ void InitializationThread::initQAac(void)
 	}
 	catch(...)
 	{
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		for(int i = 0; i < 4; i++) MUTILS_DELETE(qaacBin[i]);
 		qWarning("Failed to get excluive lock to QAAC binary -> QAAC support will be disabled!");
 		return;
 	}
 
 	QProcess process;
-	lamexp_init_process(process, qaacFileInfo[0].absolutePath());
+	MUtils::init_process(process, qaacFileInfo[0].absolutePath());
 
 	process.start(qaacFileInfo[0].canonicalFilePath(), QStringList() << "--check");
 
@@ -807,7 +812,7 @@ void InitializationThread::initQAac(void)
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
 		process.kill();
 		process.waitForFinished(-1);
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		for(int i = 0; i < 4; i++) MUTILS_DELETE(qaacBin[i]);
 		return;
 	}
 
@@ -829,7 +834,7 @@ void InitializationThread::initQAac(void)
 			qWarning("QAAC process time out -> killing!");
 			process.kill();
 			process.waitForFinished(-1);
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		for(int i = 0; i < 4; i++) MUTILS_DELETE(qaacBin[i]);
 			return;
 		}
 		while(process.bytesAvailable() > 0)
@@ -870,28 +875,28 @@ void InitializationThread::initQAac(void)
 	if(!(qaacVersion > 0))
 	{
 		qWarning("QAAC version couldn't be determined -> QAAC support will be disabled!");
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		for(int i = 0; i < 4; i++) MUTILS_DELETE(qaacBin[i]);
 		return;
 	}
 	else if(qaacVersion < lamexp_toolver_qaacenc())
 	{
 		qWarning("QAAC version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.??", qaacVersion, "N/A").toLatin1().constData());
 		qWarning("Minimum required QAAC version currently is: %s.\n", lamexp_version2string("v?.??", lamexp_toolver_qaacenc(), "N/A").toLatin1().constData());
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		for(int i = 0; i < 4; i++) MUTILS_DELETE(qaacBin[i]);
 		return;
 	}
 
 	if(!(coreVersion > 0))
 	{
 		qWarning("CoreAudioToolbox version couldn't be determined -> QAAC support will be disabled!");
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		for(int i = 0; i < 4; i++) MUTILS_DELETE(qaacBin[i]);
 		return;
 	}
 	else if(coreVersion < lamexp_toolver_coreaudio())
 	{
 		qWarning("CoreAudioToolbox version is too much outdated (%s) -> QAAC support will be disabled!", lamexp_version2string("v?.?.?.?", coreVersion, "N/A").toLatin1().constData());
 		qWarning("Minimum required CoreAudioToolbox version currently is: %s.\n", lamexp_version2string("v?.??", lamexp_toolver_coreaudio(), "N/A").toLatin1().constData());
-		for(int i = 0; i < 4; i++) LAMEXP_DELETE(qaacBin[i]);
+		for(int i = 0; i < 4; i++) MUTILS_DELETE(qaacBin[i]);
 		return;
 	}
 
@@ -937,17 +942,17 @@ void InitializationThread::selfTest(void)
 				const QByteArray expectedHash = QByteArray(g_lamexp_tools[i].pcHash);
 				if(g_lamexp_tools[i].uiCpuType & cpu[k])
 				{
-					qDebug("%02i -> %s", ++n, QUTF8(toolName));
+					qDebug("%02i -> %s", ++n, MUTILS_UTF8(toolName));
 					QFile resource(QString(":/tools/%1").arg(toolName));
 					if(!resource.open(QIODevice::ReadOnly))
 					{
-						qFatal("The resource for \"%s\" could not be opened!", QUTF8(toolName));
+						qFatal("The resource for \"%s\" could not be opened!", MUTILS_UTF8(toolName));
 						break;
 					}
 					QByteArray hash = LockedFile::fileHash(resource);
 					if(hash.isNull() || _stricmp(hash.constData(), expectedHash.constData()))
 					{
-						qFatal("Hash check for tool \"%s\" has failed!", QUTF8(toolName));
+						qFatal("Hash check for tool \"%s\" has failed!", MUTILS_UTF8(toolName));
 						break;
 					}
 					resource.close();

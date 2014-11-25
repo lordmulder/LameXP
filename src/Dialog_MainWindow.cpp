@@ -47,6 +47,11 @@
 #include "ShellIntegration.h"
 #include "CustomEventFilter.h"
 
+//Mutils includes
+#include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
+#include <MUtils/Version.h>
+
 //Qt includes
 #include <QMessageBox>
 #include <QTimer>
@@ -153,7 +158,7 @@ while(0)
 { \
 	QItemSelectionModel *_tmp = (VIEW)->selectionModel(); \
 	(VIEW)->setModel(MODEL); \
-	LAMEXP_DELETE(_tmp); \
+	MUTILS_DELETE(_tmp); \
 } \
 while(0)
 
@@ -720,28 +725,28 @@ MainWindow::~MainWindow(void)
 	SET_MODEL(ui->metaDataView, NULL);
 
 	//Free memory
-	LAMEXP_DELETE(m_tabActionGroup);
-	LAMEXP_DELETE(m_styleActionGroup);
-	LAMEXP_DELETE(m_languageActionGroup);
-	LAMEXP_DELETE(m_banner);
-	LAMEXP_DELETE(m_fileSystemModel);
-	LAMEXP_DELETE(m_messageHandler);
-	LAMEXP_DELETE(m_droppedFileList);
-	LAMEXP_DELETE(m_delayedFileList);
-	LAMEXP_DELETE(m_delayedFileTimer);
-	LAMEXP_DELETE(m_metaInfoModel);
-	LAMEXP_DELETE(m_encoderButtonGroup);
-	LAMEXP_DELETE(m_modeButtonGroup);
-	LAMEXP_DELETE(m_overwriteButtonGroup);
-	LAMEXP_DELETE(m_sourceFilesContextMenu);
-	LAMEXP_DELETE(m_outputFolderFavoritesMenu);
-	LAMEXP_DELETE(m_outputFolderContextMenu);
-	LAMEXP_DELETE(m_dropBox);
-	LAMEXP_DELETE(m_evenFilterCornerWidget);
-	LAMEXP_DELETE(m_evenFilterCustumParamsHelp);
-	LAMEXP_DELETE(m_evenFilterOutputFolderMouse);
-	LAMEXP_DELETE(m_evenFilterOutputFolderView);
-	LAMEXP_DELETE(m_evenFilterCompressionTab);
+	MUTILS_DELETE(m_tabActionGroup);
+	MUTILS_DELETE(m_styleActionGroup);
+	MUTILS_DELETE(m_languageActionGroup);
+	MUTILS_DELETE(m_banner);
+	MUTILS_DELETE(m_fileSystemModel);
+	MUTILS_DELETE(m_messageHandler);
+	MUTILS_DELETE(m_droppedFileList);
+	MUTILS_DELETE(m_delayedFileList);
+	MUTILS_DELETE(m_delayedFileTimer);
+	MUTILS_DELETE(m_metaInfoModel);
+	MUTILS_DELETE(m_encoderButtonGroup);
+	MUTILS_DELETE(m_modeButtonGroup);
+	MUTILS_DELETE(m_overwriteButtonGroup);
+	MUTILS_DELETE(m_sourceFilesContextMenu);
+	MUTILS_DELETE(m_outputFolderFavoritesMenu);
+	MUTILS_DELETE(m_outputFolderContextMenu);
+	MUTILS_DELETE(m_dropBox);
+	MUTILS_DELETE(m_evenFilterCornerWidget);
+	MUTILS_DELETE(m_evenFilterCustumParamsHelp);
+	MUTILS_DELETE(m_evenFilterOutputFolderMouse);
+	MUTILS_DELETE(m_evenFilterOutputFolderView);
+	MUTILS_DELETE(m_evenFilterCompressionTab);
 	
 	//Free window icon
 	if(m_windowIcon)
@@ -751,7 +756,7 @@ MainWindow::~MainWindow(void)
 	}
 
 	//Un-initialize the dialog
-	LAMEXP_DELETE(ui);
+	MUTILS_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////
@@ -815,7 +820,7 @@ void MainWindow::addFiles(const QStringList &files)
 		QMessageBox::warning(this, tr("Files Rejected"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because the file format could not be recognized!", "", analyzer->filesRejected())), NOBR(tr("This usually means the file is damaged or the file format is not supported."))));
 	}
 
-	LAMEXP_DELETE(analyzer);
+	MUTILS_DELETE(analyzer);
 	m_banner->close();
 }
 
@@ -893,7 +898,7 @@ bool MainWindow::checkForUpdates(void)
 		bReadyToInstall = updateDialog->updateReadyToInstall();
 	}
 
-	LAMEXP_DELETE(updateDialog);
+	MUTILS_DELETE(updateDialog);
 	return bReadyToInstall;
 }
 
@@ -911,7 +916,7 @@ void MainWindow::refreshFavorites(void)
 		QAction *currentItem = folderList.takeFirst();
 		if(currentItem->isSeparator()) break;
 		m_outputFolderFavoritesMenu->removeAction(currentItem);
-		LAMEXP_DELETE(currentItem);
+		MUTILS_DELETE(currentItem);
 	}
 
 	QAction *lastItem = m_outputFolderFavoritesMenu->actions().first();
@@ -1062,7 +1067,7 @@ void MainWindow::changeEvent(QEvent *e)
 	ui->comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[7]);
 
 	//Update the window title
-	if(LAMEXP_DEBUG)
+	if(MUTILS_DEBUG)
 	{
 		setWindowTitle(QString("%1 [!!! DEBUG BUILD !!!]").arg(windowTitle()));
 	}
@@ -1308,7 +1313,7 @@ void MainWindow::windowShown(void)
 			AboutDialog *about = new AboutDialog(m_settings, this, true);
 			iAccepted = about->exec();
 			if(iAccepted <= 0) iAccepted = -2;
-			LAMEXP_DELETE(about);
+			MUTILS_DELETE(about);
 		}
 
 		if(iAccepted <= 0)
@@ -1341,7 +1346,7 @@ void MainWindow::windowShown(void)
 	//Check for expiration
 	if(lamexp_version_demo())
 	{
-		if(lamexp_current_date_safe() >= lamexp_version_expires())
+		if(MUtils::OS::current_date() >= lamexp_version_expires())
 		{
 			qWarning("Binary has expired !!!");
 			lamexp_play_sound("whammy", false);
@@ -1368,7 +1373,7 @@ void MainWindow::windowShown(void)
 	}
 
 	//Update reminder
-	if(lamexp_current_date_safe() >= lamexp_version_date().addYears(1))
+	if(MUtils::OS::current_date() >= MUtils::Version::build_date().addYears(1))
 	{
 		qWarning("Binary is more than a year old, time to update!");
 		SHOW_CORNER_WIDGET(true);
@@ -1395,7 +1400,7 @@ void MainWindow::windowShown(void)
 	else
 	{
 		QDate lastUpdateCheck = QDate::fromString(m_settings->autoUpdateLastCheck(), Qt::ISODate);
-		if((!firstRun) && ((!lastUpdateCheck.isValid()) || (lamexp_current_date_safe() >= lastUpdateCheck.addDays(14))))
+		if((!firstRun) && ((!lastUpdateCheck.isValid()) || (MUtils::OS::current_date() >= lastUpdateCheck.addDays(14))))
 		{
 			SHOW_CORNER_WIDGET(true);
 			if(m_settings->autoUpdateEnabled())
@@ -1458,7 +1463,7 @@ void MainWindow::windowShown(void)
 		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding file from CLI: %s", QUTF8(currentFile.absoluteFilePath()));
+			qDebug("Adding file from CLI: %s", MUTILS_UTF8(currentFile.absoluteFilePath()));
 			addedFiles.append(currentFile.absoluteFilePath());
 		}
 		if(!addedFiles.isEmpty())
@@ -1473,13 +1478,13 @@ void MainWindow::windowShown(void)
 		if(!arguments[i].compare("--add-folder", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding folder from CLI: %s", QUTF8(currentFile.absoluteFilePath()));
+			qDebug("Adding folder from CLI: %s", MUTILS_UTF8(currentFile.absoluteFilePath()));
 			addFolder(currentFile.absoluteFilePath(), false, true);
 		}
 		if(!arguments[i].compare("--add-recursive", Qt::CaseInsensitive))
 		{
 			QFileInfo currentFile(arguments[++i].trimmed());
-			qDebug("Adding folder recursively from CLI: %s", QUTF8(currentFile.absoluteFilePath()));
+			qDebug("Adding folder recursively from CLI: %s", MUTILS_UTF8(currentFile.absoluteFilePath()));
 			addFolder(currentFile.absoluteFilePath(), true, true);
 		}
 	}
@@ -1549,10 +1554,10 @@ void MainWindow::showAnnounceBox(void)
 	for(unsigned int i = 0; i < timeout; i++)
 	{
 		timers[i]->stop();
-		LAMEXP_DELETE(timers[i]);
+		MUTILS_DELETE(timers[i]);
 	}
 
-	LAMEXP_DELETE(announceBox);
+	MUTILS_DELETE(announceBox);
 }
 
 // =========================================================
@@ -1577,7 +1582,7 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 	
-	QString tempFolder = m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2();
+	QString tempFolder = m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder();
 	if(!QFileInfo(tempFolder).exists() || !QFileInfo(tempFolder).isDir())
 	{
 		if(QMessageBox::warning(this, tr("Not Found"), QString("%1<br><tt>%2</tt>").arg(NOBR(tr("Your currently selected TEMP folder does not exist anymore:")), NOBR(QDir::toNativeSeparators(tempFolder))), tr("Restore Default"), tr("Cancel")) == 0)
@@ -1635,7 +1640,7 @@ void MainWindow::encodeButtonClicked(void)
 
 	if(!m_settings->outputToSourceDir())
 	{
-		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), lamexp_rand_str()));
+		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), MUtils::rand_str()));
 		if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 		{
 			QMessageBox::warning(this, tr("LameXP"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("Cannot write to the selected output directory."), m_settings->outputDir(), tr("Please choose a different directory!")));
@@ -1664,7 +1669,7 @@ void MainWindow::aboutButtonClicked(void)
 	(
 		AboutDialog *aboutBox = new AboutDialog(m_settings, this);
 		aboutBox->exec();
-		LAMEXP_DELETE(aboutBox);
+		MUTILS_DELETE(aboutBox);
 	);
 }
 
@@ -1848,7 +1853,7 @@ void MainWindow::styleActionActivated(QAction *action)
 	if(QEvent *e = new QEvent(QEvent::LanguageChange))
 	{
 		changeEvent(e);
-		LAMEXP_DELETE(e);
+		MUTILS_DELETE(e);
 	}
 
 	//Make transparent
@@ -2053,7 +2058,7 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 				m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
 				CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile, m_settings);
 				result = cueImporter->exec();
-				LAMEXP_DELETE(cueImporter);
+				MUTILS_DELETE(cueImporter);
 			}
 
 			if(result == QDialog::Accepted)
@@ -2220,7 +2225,7 @@ void MainWindow::documentActionActivated(void)
 			else
 			{
 				QFile source(resource.filePath());
-				QFile output(QString("%1/%2.%3.html").arg(lamexp_temp_folder2(), document.baseName(), lamexp_rand_str().left(8)));
+				QFile output(QString("%1/%2.%3.html").arg(MUtils::temp_folder(), document.baseName(), MUtils::rand_str().left(8)));
 				if(source.open(QIODevice::ReadOnly) && output.open(QIODevice::ReadWrite))
 				{
 					output.write(source.readAll());
@@ -2420,7 +2425,7 @@ void MainWindow::showDetailsButtonClicked(void)
 		if(!iResult) break;
 	}
 
-	LAMEXP_DELETE(metaInfoDialog);
+	MUTILS_DELETE(metaInfoDialog);
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	sourceFilesScrollbarMoved(0);
 }
@@ -2526,14 +2531,14 @@ void MainWindow::handleDroppedFiles(void)
 
 		if(file.isFile())
 		{
-			qDebug("Dropped File: %s", QUTF8(file.canonicalFilePath()));
+			qDebug("Dropped File: %s", MUTILS_UTF8(file.canonicalFilePath()));
 			droppedFiles << file.canonicalFilePath();
 			continue;
 		}
 
 		if(file.isDir())
 		{
-			qDebug("Dropped Folder: %s", QUTF8(file.canonicalFilePath()));
+			qDebug("Dropped Folder: %s", MUTILS_UTF8(file.canonicalFilePath()));
 			QFileInfoList list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
 			if(list.count() > 0)
 			{
@@ -2549,7 +2554,7 @@ void MainWindow::handleDroppedFiles(void)
 				SHOW_BANNER_CONDITIONALLY(bUseBanner, (list.count() >= MIN_COUNT), bannerText);
 				for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
 				{
-					qDebug("Descending to Folder: %s", QUTF8((*iter).canonicalFilePath()));
+					qDebug("Descending to Folder: %s", MUTILS_UTF8((*iter).canonicalFilePath()));
 					m_droppedFileList->prepend(QUrl::fromLocalFile((*iter).canonicalFilePath()));
 				}
 			}
@@ -3138,7 +3143,7 @@ void MainWindow::initOutputFolderModel(void)
 		if(m_fileSystemModel)
 		{
 			SET_MODEL(ui->outputFolderView, NULL);
-			LAMEXP_DELETE(m_fileSystemModel);
+			MUTILS_DELETE(m_fileSystemModel);
 			ui->outputFolderView->repaint();
 		}
 
@@ -3941,7 +3946,7 @@ void MainWindow::browseCustomTempFolderButtonClicked(void)
 
 	if(!newTempFolder.isEmpty())
 	{
-		QFile writeTest(QString("%1/~%2.tmp").arg(newTempFolder, lamexp_rand_str()));
+		QFile writeTest(QString("%1/~%2.tmp").arg(newTempFolder, MUtils::rand_str()));
 		if(writeTest.open(QIODevice::ReadWrite))
 		{
 			writeTest.remove();
@@ -4021,7 +4026,7 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 	}
 
 	QProcess process;
-	lamexp_init_process(process, QFileInfo(binary).absolutePath());
+	MUtils::init_process(process, QFileInfo(binary).absolutePath());
 
 	process.start(binary, command.isEmpty() ? QStringList() : QStringList() << command);
 
@@ -4064,7 +4069,7 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 
 	LogViewDialog *dialog = new LogViewDialog(this);
 	TEMP_HIDE_DROPBOX( dialog->exec(output); );
-	LAMEXP_DELETE(dialog);
+	MUTILS_DELETE(dialog);
 }
 
 void MainWindow::overwriteModeChanged(int id)
@@ -4154,13 +4159,13 @@ void MainWindow::addFileDelayed(const QString &filePath, bool tryASAP)
 {
 	if(tryASAP && !m_delayedFileTimer->isActive())
 	{
-		qDebug("Received file: %s", QUTF8(filePath));
+		qDebug("Received file: %s", MUTILS_UTF8(filePath));
 		m_delayedFileList->append(filePath);
 		QTimer::singleShot(0, this, SLOT(handleDelayedFiles()));
 	}
 	
 	m_delayedFileTimer->stop();
-	qDebug("Received file: %s", QUTF8(filePath));
+	qDebug("Received file: %s", MUTILS_UTF8(filePath));
 	m_delayedFileList->append(filePath);
 	m_delayedFileTimer->start(5000);
 }

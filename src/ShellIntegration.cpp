@@ -22,6 +22,14 @@
 
 #include "ShellIntegration.h"
 
+//Internal
+#include "Global.h"
+#include "Registry_Decoder.h"
+
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QString>
 #include <QStringList>
 #include <QRegExp>
@@ -31,11 +39,9 @@
 #include <QMutexLocker>
 #include <QtConcurrentRun>
 
+//Win32 API
 #include <Shlobj.h>
 #include <Shlwapi.h>
-
-#include "Global.h"
-#include "Registry_Decoder.h"
 
 //Const
 static const char *g_lamexpShellAction = "ConvertWithLameXP";
@@ -83,22 +89,22 @@ void ShellIntegration::install(bool async)
 	const QString lamexpShellAction(g_lamexpShellAction);
 
 	//Register the LameXP file type
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1").arg(lamexpFileType)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1").arg(lamexpFileType)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 	{
 		REG_WRITE_STRING(key, lamexpFileInfo);
 		RegCloseKey(key);
 	}
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1\\shell").arg(lamexpFileType)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell").arg(lamexpFileType)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 	{
 		REG_WRITE_STRING(key, lamexpShellAction);
 		RegCloseKey(key);
 	}
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1\\shell\\%2").arg(lamexpFileType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2").arg(lamexpFileType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 	{
 		REG_WRITE_STRING(key, lamexpShellText);
 		RegCloseKey(key);
 	}
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 	{
 		REG_WRITE_STRING(key, lamexpShellCommand);
 		RegCloseKey(key);
@@ -112,13 +118,13 @@ void ShellIntegration::install(bool async)
 	{
 		QString currentType = types->takeFirst();
 
-		if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1\\shell\\%2").arg(currentType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+		if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2").arg(currentType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 		{
 			REG_WRITE_STRING(key, lamexpShellText);
 			RegCloseKey(key);
 		}
 
-		if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1\\shell\\%2\\command").arg(currentType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+		if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2\\command").arg(currentType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 		{
 			REG_WRITE_STRING(key, lamexpShellCommand);
 			RegCloseKey(key);
@@ -172,11 +178,11 @@ void ShellIntegration::remove(bool async)
 	//Remove shell action from all file types
 	while(!fileTypes.isEmpty())
 	{
-		SHDeleteKey(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1\\shell\\%2").arg(fileTypes.takeFirst(), lamexpShellAction)));
+		SHDeleteKey(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2").arg(fileTypes.takeFirst(), lamexpShellAction)));
 	}
 
 	//Unregister LameXP file type
-	SHDeleteKey(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1").arg(lamexpFileType)));
+	SHDeleteKey(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1").arg(lamexpFileType)));
 
 	//Shell notification
 	SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, NULL, NULL);
@@ -215,7 +221,7 @@ QStringList *ShellIntegration::detectTypes(const QString &lamexpFileType, const 
 	{
 		QString currentExt = extensions.takeFirst();
 
-		if(RegOpenKeyEx(HKEY_CLASSES_ROOT, QWCHAR(currentExt), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
+		if(RegOpenKeyEx(HKEY_CLASSES_ROOT, MUTILS_WCHR(currentExt), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
 		{
 			wchar_t data[256];
 			DWORD dataLen = 256 * sizeof(wchar_t);
@@ -236,14 +242,14 @@ QStringList *ShellIntegration::detectTypes(const QString &lamexpFileType, const 
 		}
 		else
 		{
-			if(RegCreateKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Classes\\%1").arg(currentExt)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+			if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1").arg(currentExt)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
 			{
 				REG_WRITE_STRING(key, lamexpFileType);
 				RegCloseKey(key);
 			}
 		}
 
-		if(RegOpenKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(currentExt)), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
+		if(RegOpenKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(currentExt)), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
 		{
 			wchar_t data[256];
 			DWORD dataLen = 256 * sizeof(wchar_t);
@@ -263,7 +269,7 @@ QStringList *ShellIntegration::detectTypes(const QString &lamexpFileType, const 
 			RegCloseKey(key);
 		}
 
-		if(RegOpenKeyEx(HKEY_CURRENT_USER, QWCHAR(QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\OpenWithProgids").arg(currentExt)), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
+		if(RegOpenKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\OpenWithProgids").arg(currentExt)), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
 		{
 			wchar_t name[256];
 			for(DWORD i = 0; true; i++)

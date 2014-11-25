@@ -22,9 +22,14 @@
 
 #include "Dialog_MetaInfo.h"
 
+//Internal
 #include "Global.h"
 #include "Model_MetaInfo.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QTimer>
@@ -90,8 +95,8 @@ MetaInfoDialog::MetaInfoDialog(QWidget *parent)
 
 MetaInfoDialog::~MetaInfoDialog(void)
 {
-	LAMEXP_DELETE(m_contextMenuInfo);
-	LAMEXP_DELETE(m_contextMenuArtwork);
+	MUTILS_DELETE(m_contextMenuInfo);
+	MUTILS_DELETE(m_contextMenuArtwork);
 }
 
 ////////////////////////////////////////////////////////////
@@ -135,7 +140,7 @@ int MetaInfoDialog::exec(AudioFileModel &audioFile, bool allowUp, bool allowDown
 	int iResult = QDialog::exec();
 	
 	tableView->setModel(NULL);
-	LAMEXP_DELETE(model);
+	MUTILS_DELETE(model);
 
 	return iResult;
 }

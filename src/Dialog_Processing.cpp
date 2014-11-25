@@ -25,6 +25,7 @@
 //UIC includes
 #include "UIC_ProcessingDialog.h"
 
+//Internal
 #include "Global.h"
 #include "Model_FileList.h"
 #include "Model_Progress.h"
@@ -42,6 +43,10 @@
 #include "Filter_ToneAdjust.h"
 #include "WinSevenTaskbar.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QApplication>
 #include <QRect>
 #include <QDesktopWidget>
@@ -338,18 +343,18 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	LAMEXP_DELETE(m_progressIndicator);
-	LAMEXP_DELETE(m_systemTray);
-	LAMEXP_DELETE(m_diskObserver);
-	LAMEXP_DELETE(m_cpuObserver);
-	LAMEXP_DELETE(m_ramObserver);
-	LAMEXP_DELETE(m_progressViewFilterGroup);
-	LAMEXP_DELETE(m_filterInfoLabel);
-	LAMEXP_DELETE(m_filterInfoLabelIcon);
-	LAMEXP_DELETE(m_contextMenu);
-	LAMEXP_DELETE(m_progressModel);
-	LAMEXP_DELETE(m_threadPool);
-	LAMEXP_DELETE(m_defaultColor);
+	MUTILS_DELETE(m_progressIndicator);
+	MUTILS_DELETE(m_systemTray);
+	MUTILS_DELETE(m_diskObserver);
+	MUTILS_DELETE(m_cpuObserver);
+	MUTILS_DELETE(m_ramObserver);
+	MUTILS_DELETE(m_progressViewFilterGroup);
+	MUTILS_DELETE(m_filterInfoLabel);
+	MUTILS_DELETE(m_filterInfoLabelIcon);
+	MUTILS_DELETE(m_contextMenu);
+	MUTILS_DELETE(m_progressModel);
+	MUTILS_DELETE(m_threadPool);
+	MUTILS_DELETE(m_defaultColor);
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
@@ -360,7 +365,7 @@ ProcessingDialog::~ProcessingDialog(void)
 		m_windowIcon = NULL;
 	}
 	
-	LAMEXP_DELETE(ui);
+	MUTILS_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////
@@ -514,7 +519,7 @@ void ProcessingDialog::initEncoding(void)
 
 	if(!m_diskObserver)
 	{
-		m_diskObserver = new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2());
+		m_diskObserver = new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder());
 		connect(m_diskObserver, SIGNAL(messageLogged(QString,int)), m_progressModel, SLOT(addSystemMessage(QString,int)), Qt::QueuedConnection);
 		connect(m_diskObserver, SIGNAL(freeSpaceChanged(quint64)), this, SLOT(diskUsageHasChanged(quint64)), Qt::QueuedConnection);
 		m_diskObserver->start();
@@ -597,7 +602,7 @@ void ProcessingDialog::startNextJob(void)
 	(
 		currentFile,
 		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
-		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : lamexp_temp_folder2()),
+		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder()),
 		encoder,
 		m_settings->prependRelativeSourcePath() && (!m_settings->outputToSourceDir())
 	);
@@ -828,7 +833,7 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 			LogViewDialog *logView = new LogViewDialog(this);
 			logView->setWindowTitle(QString("LameXP - [%1]").arg(m_progressModel->data(index, Qt::DisplayRole).toString()));
 			logView->exec(logFile);
-			LAMEXP_DELETE(logView);
+			MUTILS_DELETE(logView);
 		}
 		else
 		{
@@ -1013,7 +1018,7 @@ void ProcessingDialog::writePlayList(void)
 	//Do we need an UTF-8 playlist?
 	for(int i = 0; i < list.count(); i++)
 	{
-		if(wcscmp(QWCHAR(QString::fromLatin1(list.at(i).toLatin1().constData())), QWCHAR(list.at(i))))
+		if(wcscmp(MUTILS_WCHR(QString::fromLatin1(list.at(i).toLatin1().constData())), MUTILS_WCHR(list.at(i))))
 		{
 			useUtf8 = true;
 			break;
@@ -1038,7 +1043,7 @@ void ProcessingDialog::writePlayList(void)
 		playList.write("#EXTM3U\r\n");
 		while(!list.isEmpty())
 		{
-			playList.write(useUtf8 ? QUTF8(list.takeFirst()) : list.takeFirst().toLatin1().constData());
+			playList.write(useUtf8 ? MUTILS_UTF8(list.takeFirst()) : list.takeFirst().toLatin1().constData());
 			playList.write("\r\n");
 		}
 		playList.close();

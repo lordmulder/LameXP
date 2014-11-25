@@ -163,8 +163,6 @@ bool lamexp_check_sysmenu_msg(void *message, const unsigned int identifier);
 bool lamexp_check_tool(const QString &toolName);
 const QString lamexp_clean_filename(const QString &str);
 const QString lamexp_clean_filepath(const QString &str);
-bool lamexp_clean_folder(const QString &folderPath);
-QDate lamexp_current_date_safe(void);
 unsigned __int64 lamexp_current_file_time(void);
 void lamexp_dbg_dbg_output_string(const char* format, ...);
 unsigned long lamexp_dbg_private_bytes(void);
@@ -181,7 +179,6 @@ const lamexp_os_version_t &lamexp_get_os_version(void);
 void lamexp_init_console(const QStringList &argv);
 void lamexp_init_error_handlers(void);
 int lamexp_init_ipc(void);
-void lamexp_init_process(QProcess &process, const QString &wokringDir, const bool bReplaceTempDir = true);
 bool lamexp_init_qt(int argc, char* argv[]);
 bool lamexp_install_translator(const QString &language);
 bool lamexp_install_translator_from_file(const QString &qmFile);
@@ -206,20 +203,14 @@ bool lamexp_play_sound_alias(const QString &alias, const bool bAsync);
 bool lamexp_portable_mode(void);
 unsigned long lamexp_process_id(const QProcess *proc);
 QStringList lamexp_query_translations(void);
-unsigned int lamexp_rand(void);
-QString lamexp_rand_str(const bool bLong = false);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
-bool lamexp_remove_file(const QString &filename);
-void lamexp_seed_rand(void);
 lamexp_icon_t *lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon);
 bool lamexp_sheet_of_glass(QWidget *window);
 bool lamexp_sheet_of_glass_update(QWidget *window);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);
 void lamexp_sleep(const unsigned int delay);
 QColor lamexp_system_color(const int color_id);
-int lamexp_system_message(const wchar_t *text, int beepType);
 const char *lamexp_support_url(void);
-const QString &lamexp_temp_folder2(void);
 bool lamexp_themes_enabled(void);
 unsigned int lamexp_tool_version(const QString &toolName, QString *tag = NULL);
 unsigned int lamexp_toolver_coreaudio(void);
@@ -235,52 +226,25 @@ unsigned int lamexp_translation_sysid(const QString &langId);
 bool lamexp_update_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
 bool lamexp_user_is_admin(void);
 const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag = NULL);
-const char *lamexp_version_arch(void);
 unsigned int lamexp_version_build(void);
-const char *lamexp_version_compiler(void);
 unsigned int lamexp_version_confg(void);
-const QDate &lamexp_version_date(void);
 bool lamexp_version_demo(void);
 QDate lamexp_version_expires(void);
 unsigned int lamexp_version_major(void);
 unsigned int lamexp_version_minor(void);
 const char *lamexp_version_release(void);
-const char *lamexp_version_time(void);
 const char *lamexp_website_url(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // HELPER MACROS
 ///////////////////////////////////////////////////////////////////////////////
 
-#define LAMEXP_BOOL2STR(X) ((X) ? "1" : "0")
-#define LAMEXP_COMPILER_WARNING(TXT) __pragma(message(__FILE__ "(" LAMEXP_MAKE_STRING(__LINE__) ") : warning: " TXT))
 #define LAMEXP_CLOSE(HANDLE) do { if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; } } while(0)
-#define LAMEXP_DELETE(PTR) do { if(PTR) { delete PTR; PTR = NULL; } } while(0)
-#define LAMEXP_DELETE_ARRAY(PTR) do { if(PTR) { delete [] PTR; PTR = NULL; } } while(0)
 #define LAMEXP_MAKE_STRING_EX(X) #X
 #define LAMEXP_MAKE_STRING(X) LAMEXP_MAKE_STRING_EX(X)
 #define LAMEXP_SAFE_FREE(PTR) do { if(PTR) { free((void*) PTR); PTR = NULL; } } while(0)
 #define LAMEXP_ZERO_MEMORY(X) memset(&(X), 0, sizeof((X)))
 #define NOBR(STR) (QString("<nobr>%1</nobr>").arg((STR)).replace("-", "&minus;"))
-#define QUTF8(STR) ((STR).toUtf8().constData())
-#define QWCHAR(STR) (reinterpret_cast<const wchar_t*>((STR).utf16()))
-#define WCHAR2QSTR(STR) (QString::fromUtf16(reinterpret_cast<const unsigned short*>((STR))))
-
-//Check for debug build
-#if defined(_DEBUG) && defined(QT_DEBUG) && !defined(NDEBUG) && !defined(QT_NO_DEBUG)
-	#define LAMEXP_DEBUG (1)
-#elif defined(NDEBUG) && defined(QT_NO_DEBUG) && !defined(_DEBUG) && !defined(QT_DEBUG)
-	#define LAMEXP_DEBUG (0)
-#else
-	#error Inconsistent debug defines detected!
-#endif
-
-//Check for CPU-compatibility options
-#if !defined(_M_X64) && defined(_MSC_VER) && defined(_M_IX86_FP)
-	#if (_M_IX86_FP != 0)
-		#error We should not enabled SSE or SSE2 in release builds!
-	#endif
-#endif
 
 //Helper macro for throwing exceptions
 #define THROW(MESSAGE) do \

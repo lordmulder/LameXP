@@ -22,6 +22,7 @@
 
 #include "Thread_Process.h"
 
+//Internal
 #include "Global.h"
 #include "Model_AudioFile.h"
 #include "Model_Progress.h"
@@ -34,6 +35,11 @@
 #include "Registry_Decoder.h"
 #include "Model_Settings.h"
 
+//MUtils
+#include <MUtils/Global.h>
+#include <MUtils/Version.h>
+
+//Qt
 #include <QUuid>
 #include <QFileInfo>
 #include <QDir>
@@ -42,6 +48,7 @@
 #include <QDate>
 #include <QThreadPool>
 
+//CRT
 #include <limits.h>
 #include <time.h>
 #include <stdlib.h>
@@ -81,7 +88,7 @@ ProcessThread::~ProcessThread(void)
 {
 	while(!m_tempFiles.isEmpty())
 	{
-		lamexp_remove_file(m_tempFiles.takeFirst());
+		MUtils::remove_file(m_tempFiles.takeFirst());
 	}
 
 	while(!m_filters.isEmpty())
@@ -89,8 +96,8 @@ ProcessThread::~ProcessThread(void)
 		delete m_filters.takeFirst();
 	}
 
-	LAMEXP_DELETE(m_encoder);
-	LAMEXP_DELETE(m_propDetect);
+	MUTILS_DELETE(m_encoder);
+	MUTILS_DELETE(m_propDetect);
 
 	emit processFinished();
 }
@@ -110,7 +117,7 @@ bool ProcessThread::init(void)
 		emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
 
 		//Initialize log
-		handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time()));
+		handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), MUtils::Version::build_date().toString(Qt::ISODate).toLatin1().constData(), MUtils::Version::build_time()));
 		handleMessage("\n-------------------------------\n");
 
 		return true;
@@ -219,7 +226,7 @@ void ProcessThread::processFile()
 			connect(decoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
 			bSuccess = decoder->decode(sourceFile, tempFile, &m_aborted);
-			LAMEXP_DELETE(decoder);
+			MUTILS_DELETE(decoder);
 
 			if(bSuccess)
 			{
@@ -417,7 +424,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 	
 	//Make sure that the output dir is writable
-	QFile writeTest(QString("%1/.%2").arg(targetDir.canonicalPath(), lamexp_rand_str()));
+	QFile writeTest(QString("%1/.%2").arg(targetDir.canonicalPath(), MUtils::rand_str()));
 	if(!writeTest.open(QIODevice::ReadWrite))
 	{
 		handleMessage(QString("%1\n%2").arg(tr("The target output directory is NOT writable:"), QDir::toNativeSeparators(targetDir.absolutePath())));
@@ -504,7 +511,7 @@ QString ProcessThread::generateTempFileName(void)
 	
 	for(int i = 0; i < 4096; i++)
 	{
-		tempFileName = QString("%1/%2.wav").arg(m_tempDirectory, lamexp_rand_str());
+		tempFileName = QString("%1/%2.wav").arg(m_tempDirectory, MUtils::rand_str());
 		if(m_tempFiles.contains(tempFileName, Qt::CaseInsensitive) || QFileInfo(tempFileName).exists())
 		{
 			continue;

@@ -22,10 +22,15 @@
 
 #include "Thread_FileAnalyzer_Task.h"
 
+//Internal
 #include "Global.h"
 #include "LockedFile.h"
 #include "Model_AudioFile.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
@@ -37,6 +42,8 @@
 #include <QWriteLocker>
 #include <QThread>
 
+
+//CRT
 #include <math.h>
 #include <time.h>
 #include <assert.h>
@@ -95,7 +102,7 @@ void AnalyzeTask::run_ex(void)
 {
 	int fileType = fileTypeNormal;
 	QString currentFile = QDir::fromNativeSeparators(m_inputFile);
-	qDebug("Analyzing: %s", QUTF8(currentFile));
+	qDebug("Analyzing: %s", MUTILS_UTF8(currentFile));
 	
 	AudioFileModel file = analyzeFile(currentFile, &fileType);
 
@@ -131,12 +138,12 @@ void AnalyzeTask::run_ex(void)
 				}
 				else
 				{
-					qDebug("Rejected Avisynth file: %s", QUTF8(file.filePath()));
+					qDebug("Rejected Avisynth file: %s", MUTILS_UTF8(file.filePath()));
 				}
 			}
 			else
 			{
-				qDebug("Rejected file of unknown type: %s", QUTF8(file.filePath()));
+				qDebug("Rejected file of unknown type: %s", MUTILS_UTF8(file.filePath()));
 			}
 		}
 		break;
@@ -178,7 +185,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 	params << QDir::toNativeSeparators(filePath);
 	
 	QProcess process;
-	lamexp_init_process(process, QFileInfo(m_mediaInfoBin).absolutePath());
+	MUtils::init_process(process, QFileInfo(m_mediaInfoBin).absolutePath());
 
 	process.start(m_mediaInfoBin, params);
 		
@@ -218,7 +225,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
 			if(!line.isEmpty())
 			{
-				//qDebug("Line:%s", QUTF8(line));
+				//qDebug("Line:%s", MUTILS_UTF8(line));
 				
 				int index = line.indexOf('=');
 				if(index > 0)
@@ -277,7 +284,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 
 void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned int *id_val, cover_t *coverType, QByteArray *coverData, const QString &key, const QString &value)
 {
-	//qWarning("'%s' -> '%s'", QUTF8(key), QUTF8(value));
+	//qWarning("'%s' -> '%s'", MUTILS_UTF8(key), MUTILS_UTF8(value));
 	
 	/*New Stream*/
 	if(IS_KEY("Gen_ID") || IS_KEY("Aud_ID"))
@@ -392,7 +399,7 @@ void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned
 		}
 		else
 		{
-			qWarning("Unknown key '%s' with value '%s' found!", QUTF8(key), QUTF8(value));
+			qWarning("Unknown key '%s' with value '%s' found!", MUTILS_UTF8(key), MUTILS_UTF8(value));
 		}
 		return;
 	}
@@ -453,13 +460,13 @@ void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned
 		}
 		else
 		{
-			qWarning("Unknown key '%s' with value '%s' found!", QUTF8(key), QUTF8(value));
+			qWarning("Unknown key '%s' with value '%s' found!", MUTILS_UTF8(key), MUTILS_UTF8(value));
 		}
 		return;
 	}
 
 	/*Section not recognized*/
-	qWarning("Unknown section: %s", QUTF8(key));
+	qWarning("Unknown section: %s", MUTILS_UTF8(key));
 }
 
 bool AnalyzeTask::checkFile_CDDA(QFile &file)
@@ -494,7 +501,7 @@ void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, cover_t coverType, co
 	
 	if(!(QImage::fromData(coverData, extension.toUpper().toLatin1().constData()).isNull()))
 	{
-		QFile coverFile(QString("%1/%2.%3").arg(lamexp_temp_folder2(), lamexp_rand_str(), extension));
+		QFile coverFile(QString("%1/%2.%3").arg(MUtils::temp_folder(), MUtils::rand_str(), extension));
 		if(coverFile.open(QIODevice::WriteOnly))
 		{
 			coverFile.write(coverData);
@@ -511,7 +518,7 @@ void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, cover_t coverType, co
 bool AnalyzeTask::analyzeAvisynthFile(const QString &filePath, AudioFileModel &info)
 {
 	QProcess process;
-	lamexp_init_process(process, QFileInfo(m_avs2wavBin).absolutePath());
+	MUtils::init_process(process, QFileInfo(m_avs2wavBin).absolutePath());
 
 	process.start(m_avs2wavBin, QStringList() << QDir::toNativeSeparators(filePath) << "?");
 

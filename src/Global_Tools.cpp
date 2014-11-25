@@ -22,6 +22,9 @@
 
 #include "Global.h"
 
+//LameXP includes
+#include "LockedFile.h"
+
 //Qt includes
 #include <QApplication>
 #include <QMap>
@@ -33,8 +36,8 @@
 #include <QTranslator>
 #include <QFileInfo>
 
-//LameXP includes
-#include "LockedFile.h"
+//MUtils
+#include <MUtils/Global.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
@@ -364,12 +367,12 @@ extern "C" void _lamexp_global_free_tools(void)
 	if(g_lamexp_currentTranslator.instance)
 	{
 		QApplication::removeTranslator(g_lamexp_currentTranslator.instance);
-		LAMEXP_DELETE(g_lamexp_currentTranslator.instance);
+		MUTILS_DELETE(g_lamexp_currentTranslator.instance);
 	}
-	LAMEXP_DELETE(g_lamexp_translation.files);
-	LAMEXP_DELETE(g_lamexp_translation.names);
-	LAMEXP_DELETE(g_lamexp_translation.cntry);
-	LAMEXP_DELETE(g_lamexp_translation.sysid);
+	MUTILS_DELETE(g_lamexp_translation.files);
+	MUTILS_DELETE(g_lamexp_translation.names);
+	MUTILS_DELETE(g_lamexp_translation.cntry);
+	MUTILS_DELETE(g_lamexp_translation.sysid);
 
 	//Free *all* registered tools
 	if(g_lamexp_tools.registry)
@@ -378,14 +381,14 @@ extern "C" void _lamexp_global_free_tools(void)
 		for(int i = 0; i < keys.count(); i++)
 		{
 			LockedFile *lf = g_lamexp_tools.registry->take(keys.at(i));
-			LAMEXP_DELETE(lf);
+			MUTILS_DELETE(lf);
 		}
 		g_lamexp_tools.registry->clear();
 		g_lamexp_tools.versions->clear();
 		g_lamexp_tools.tags->clear();
 	}
-	LAMEXP_DELETE(g_lamexp_tools.registry);
-	LAMEXP_DELETE(g_lamexp_tools.versions);
-	LAMEXP_DELETE(g_lamexp_tools.tags);
+	MUTILS_DELETE(g_lamexp_tools.registry);
+	MUTILS_DELETE(g_lamexp_tools.versions);
+	MUTILS_DELETE(g_lamexp_tools.tags);
 
 }

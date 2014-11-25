@@ -22,9 +22,14 @@
 
 #include "Thread_DiskObserver.h"
 
+//Internal
 #include "Global.h"
 #include "Model_Progress.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QDir>
 
 #define MIN_DISKSPACE 104857600ui64 //100 MB
@@ -82,7 +87,7 @@ void DiskObserverThread::observe(void)
 		{
 			if(freeSpace < minimumSpace)
 			{
-				qWarning("Free diskspace on '%s' dropped below %s MB, only %s MB free!", QUTF8(m_path), QUTF8(QString::number(minimumSpace / 1048576ui64)), QUTF8(QString::number(freeSpace / 1048576ui64)));
+				qWarning("Free diskspace on '%s' dropped below %s MB, only %s MB free!", MUTILS_UTF8(m_path), MUTILS_UTF8(QString::number(minimumSpace / 1048576ui64)), MUTILS_UTF8(QString::number(freeSpace / 1048576ui64)));
 				emit messageLogged(tr("Low diskspace on drive '%1' detected (only %2 MB are free), problems can occur!").arg(QDir::toNativeSeparators(m_path), QString::number(freeSpace / 1048576ui64)), ProgressModel::SysMsg_Warning);
 				minimumSpace = qMin(freeSpace, (minimumSpace >> 1));
 			}

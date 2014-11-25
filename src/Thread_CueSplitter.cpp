@@ -22,6 +22,7 @@
 
 #include "Thread_CueSplitter.h"
 
+//Internal
 #include "Global.h"
 #include "LockedFile.h"
 #include "Model_AudioFile.h"
@@ -29,6 +30,10 @@
 #include "Registry_Decoder.h"
 #include "Decoder_Abstract.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
@@ -36,6 +41,7 @@
 #include <QTime>
 #include <QDebug>
 
+//CRT
 #include <math.h>
 #include <float.h>
 #include <limits>
@@ -65,7 +71,7 @@ CueSplitter::CueSplitter(const QString &outputDir, const QString &baseName, CueS
 	for(int i = 0; i < nInputFiles; i++)
 	{
 		m_inputFilesInfo.insert(inputFilesInfo[i].filePath(), inputFilesInfo[i]);
-		qDebug("File %02d: <%s>", i, QUTF8(inputFilesInfo[i].filePath()));
+		qDebug("File %02d: <%s>", i, MUTILS_UTF8(inputFilesInfo[i].filePath()));
 	}
 	
 	qDebug("All input files added.");
@@ -76,7 +82,7 @@ CueSplitter::~CueSplitter(void)
 {
 	while(!m_tempFiles.isEmpty())
 	{
-		lamexp_remove_file(m_tempFiles.takeFirst());
+		MUtils::remove_file(m_tempFiles.takeFirst());
 	}
 }
 
@@ -96,7 +102,7 @@ void CueSplitter::run()
 	
 	if(!QDir(m_outputDir).exists())
 	{
-		qWarning("Output directory \"%s\" does not exist!", QUTF8(m_outputDir));
+		qWarning("Output directory \"%s\" does not exist!", MUTILS_UTF8(m_outputDir));
 		return;
 	}
 	
@@ -120,7 +126,7 @@ void CueSplitter::run()
 				emit fileSelected(m_activeFile);
 				emit progressValChanged(i+1);
 				
-				QString tempFile = QString("%1/~%2.wav").arg(m_outputDir, lamexp_rand_str());
+				QString tempFile = QString("%1/~%2.wav").arg(m_outputDir, MUtils::rand_str());
 				connect(decoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 				
 				if(decoder->decode(inputFileList.at(i), tempFile, &m_abortFlag))
@@ -131,11 +137,11 @@ void CueSplitter::run()
 				else
 				{
 					qWarning("Failed to decompress file: <%s>", inputFileList.at(i).toLatin1().constData());
-					lamexp_remove_file(tempFile);
+					MUtils::remove_file(tempFile);
 				}
 				
 				m_activeFile.clear();
-				LAMEXP_DELETE(decoder);
+				MUTILS_DELETE(decoder);
 			}
 			else
 			{
@@ -244,12 +250,12 @@ void CueSplitter::handleUpdate(int progress)
 void CueSplitter::splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, const int baseProgress)
 {
 	qDebug("[Track %02d]", trackNo);
-	qDebug("File: <%s>", QUTF8(file));
+	qDebug("File: <%s>", MUTILS_UTF8(file));
 	qDebug("Offset: <%f> <%s>", offset, indexToString(offset).toLatin1().constData());
 	qDebug("Length: <%f> <%s>", length, indexToString(length).toLatin1().constData());
-	qDebug("Artist: <%s>", QUTF8(metaInfo.artist()));
-	qDebug("Title: <%s>", QUTF8(metaInfo.title()));
-	qDebug("Album: <%s>", QUTF8(metaInfo.album()));
+	qDebug("Artist: <%s>", MUTILS_UTF8(metaInfo.artist()));
+	qDebug("Title: <%s>", MUTILS_UTF8(metaInfo.title()));
+	qDebug("Album: <%s>", MUTILS_UTF8(metaInfo.album()));
 	
 	int prevProgress = baseProgress;
 
@@ -262,7 +268,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 
 	QString baseName = shortName(QFileInfo(output).fileName());
 	QString decompressedInput = m_decompressedFiles[file];
-	qDebug("Input: <%s>", QUTF8(decompressedInput));
+	qDebug("Input: <%s>", MUTILS_UTF8(decompressedInput));
 	
 	AudioFileModel outFileInfo(output);
 	outFileInfo.setMetaInfo(metaInfo);
@@ -297,7 +303,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 	QRegExp rxDuration("Duration\\s*:\\s*(\\d\\d):(\\d\\d):(\\d\\d).(\\d\\d)", Qt::CaseInsensitive);
 
 	QProcess process;
-	lamexp_init_process(process, m_outputDir);
+	MUtils::init_process(process, m_outputDir);
 
 	process.start(m_soxBin, args);
 		

@@ -22,10 +22,17 @@
 
 #include "Encoder_AAC_QAAC.h"
 
+//Internal
 #include "Global.h"
 #include "Model_Settings.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//StdLib
 #include <math.h>
+
+//Qt
 #include <QProcess>
 #include <QDir>
 #include <QCoreApplication>
@@ -145,7 +152,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
 
 	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	env.insert("PATH", QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), lamexp_temp_folder2())));
+	env.insert("PATH", QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), MUtils::temp_folder())));
 	process.setProcessEnvironment(env);
 
 	if(m_configRCMode != SettingsModel::VBRMode)

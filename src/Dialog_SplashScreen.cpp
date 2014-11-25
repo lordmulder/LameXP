@@ -22,14 +22,18 @@
 
 #include "Dialog_SplashScreen.h"
 
+//Internal
 #include "Global.h"
+#include "WinSevenTaskbar.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QThread>
 #include <QMovie>
 #include <QKeyEvent>
 #include <QTimer>
-
-#include "WinSevenTaskbar.h"
 
 #define FADE_DELAY 16
 #define OPACITY_DELTA 0.04
@@ -104,9 +108,9 @@ SplashScreen::~SplashScreen(void)
 		m_working->stop();
 	}
 
-	LAMEXP_DELETE(m_working);
-	LAMEXP_DELETE(m_loop);
-	LAMEXP_DELETE(m_timer);
+	MUTILS_DELETE(m_working);
+	MUTILS_DELETE(m_loop);
+	MUTILS_DELETE(m_timer);
 }
 
 ////////////////////////////////////////////////////////////
@@ -162,7 +166,7 @@ void SplashScreen::showSplash(QThread *thread)
 	splashScreen->close();
 
 	//Free
-	LAMEXP_DELETE(splashScreen);
+	MUTILS_DELETE(splashScreen);
 }
 
 ////////////////////////////////////////////////////////////

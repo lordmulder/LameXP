@@ -22,8 +22,13 @@
 
 #include "Model_FileList.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QFileInfo>
 #include <QDir>
 #include <QFile>
@@ -361,7 +366,7 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 	
 		if(input->exec() < 1)
 		{
-			LAMEXP_DELETE(input);
+			MUTILS_DELETE(input);
 			return CsvError_Aborted;
 		}
 	
@@ -376,7 +381,7 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 			codec = QTextCodec::codecForName("System");
 		}
 
-		LAMEXP_DELETE(input);
+		MUTILS_DELETE(input);
 	}
 
 	bomCheck.clear();
@@ -428,7 +433,7 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 	{
 		if(stream.atEnd())
 		{
-			LAMEXP_DELETE_ARRAY(ignore);
+			MUTILS_DELETE_ARRAY(ignore);
 			return CsvError_Incomplete;
 		}
 		
@@ -495,7 +500,7 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 			}
 			else
 			{
-				qWarning("Unkonw field '%s' will be ignored!", QUTF8(header.at(j)));
+				qWarning("Unkonw field '%s' will be ignored!", MUTILS_UTF8(header.at(j)));
 				ignore[j] = true;
 				
 				if(!checkArray(ignore, false, nCols))
@@ -509,7 +514,7 @@ int FileListModel::importFromCsv(QWidget *parent, const QString &inFile)
 
 	//----------------------//
 
-	LAMEXP_DELETE_ARRAY(ignore);
+	MUTILS_DELETE_ARRAY(ignore);
 	return CsvError_OK;
 }
 

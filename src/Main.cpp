@@ -33,6 +33,11 @@
 #include "Encoder_Abstract.h"
 #include "WinSevenTaskbar.h"
 
+//MUitls
+#include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
+#include <MUtils/Version.h>
+
 //Qt includes
 #include <QApplication>
 #include <QMessageBox>
@@ -58,8 +63,8 @@ static int lamexp_main(int argc, char* argv[])
 
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End v%d.%02d %s (Build #%03d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build());
-	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", qMax(lamexp_version_date().year(), lamexp_current_date_safe().year()));
-	qDebug("Built on %s at %s with %s for Win-%s.\n", lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(), lamexp_version_time(), lamexp_version_compiler(), lamexp_version_arch());
+	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", qMax(MUtils::Version::build_date().year(), MUtils::OS::current_date().year()));
+	qDebug("Built on %s at %s with %s for Win-%s.\n", MUTILS_UTF8(MUtils::Version::build_date().toString(Qt::ISODate)), MUTILS_UTF8(MUtils::Version::build_time().toString(Qt::ISODate)), MUtils::Version::compiler_version(), MUtils::Version::compiler_arch());
 	
 	//print license info
 	qDebug("This program is free software: you can redistribute it and/or modify");
@@ -67,27 +72,27 @@ static int lamexp_main(int argc, char* argv[])
 	qDebug("Note that this program is distributed with ABSOLUTELY NO WARRANTY.\n");
 
 	//Print warning, if this is a "debug" build
-	if(LAMEXP_DEBUG)
+	if(MUTILS_DEBUG)
 	{
 		qWarning("---------------------------------------------------------");
 		qWarning("DEBUG BUILD: DO NOT RELEASE THIS BINARY TO THE PUBLIC !!!");
-		qWarning("---------------------------------------------------------\n"); 
+		qWarning("---------------------------------------------------------\n");
 	}
 	
 	//Enumerate CLI arguments
 	qDebug("Command-Line Arguments:");
 	for(int i = 0; i < arguments.count(); i++)
 	{
-		qDebug("argv[%d]=%s", i, QUTF8(arguments.at(i)));
+		qDebug("argv[%d]=%s", i, MUTILS_UTF8(arguments.at(i)));
 	}
 	qDebug("");
 
 	//Detect CPU capabilities
 	lamexp_cpu_t cpuFeatures = lamexp_detect_cpu_features(arguments);
-	qDebug("   CPU vendor id  :  %s (Intel: %s)", cpuFeatures.vendor, LAMEXP_BOOL2STR(cpuFeatures.intel));
+	qDebug("   CPU vendor id  :  %s (Intel: %s)", cpuFeatures.vendor, MUTILS_BOOL2STR(cpuFeatures.intel));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
 	qDebug("   CPU signature  :  Family: %d, Model: %d, Stepping: %d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
-	qDebug("CPU capabilities  :  MMX: %s, SSE: %s, SSE2: %s, SSE3: %s, SSSE3: %s, x64: %s", LAMEXP_BOOL2STR(cpuFeatures.mmx), LAMEXP_BOOL2STR(cpuFeatures.sse), LAMEXP_BOOL2STR(cpuFeatures.sse2), LAMEXP_BOOL2STR(cpuFeatures.sse3), LAMEXP_BOOL2STR(cpuFeatures.ssse3), LAMEXP_BOOL2STR(cpuFeatures.x64));
+	qDebug("CPU capabilities  :  MMX: %s, SSE: %s, SSE2: %s, SSE3: %s, SSSE3: %s, x64: %s", MUTILS_BOOL2STR(cpuFeatures.mmx), MUTILS_BOOL2STR(cpuFeatures.sse), MUTILS_BOOL2STR(cpuFeatures.sse2), MUTILS_BOOL2STR(cpuFeatures.sse3), MUTILS_BOOL2STR(cpuFeatures.ssse3), MUTILS_BOOL2STR(cpuFeatures.x64));
 	qDebug(" Number of CPU's  :  %d\n", cpuFeatures.count);
 
 	//Initialize Qt
@@ -99,10 +104,10 @@ static int lamexp_main(int argc, char* argv[])
 	//Check for expiration
 	if(lamexp_version_demo())
 	{
-		const QDate currentDate = lamexp_current_date_safe();
-		if(currentDate.addDays(1) < lamexp_version_date())
+		const QDate currentDate = MUtils::OS::current_date();
+		if(currentDate.addDays(1) < MUtils::Version::build_date())
 		{
-			qFatal("System's date (%s) is before LameXP build date (%s). Huh?", currentDate.toString(Qt::ISODate).toLatin1().constData(), lamexp_version_date().toString(Qt::ISODate).toLatin1().constData());
+			qFatal("System's date (%s) is before LameXP build date (%s). Huh?", currentDate.toString(Qt::ISODate).toLatin1().constData(), MUtils::Version::build_date().toString(Qt::ISODate).toLatin1().constData());
 		}
 		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(lamexp_version_expires().toString(Qt::ISODate)).toLatin1().constData());
 	}
@@ -121,10 +126,10 @@ static int lamexp_main(int argc, char* argv[])
 				QMessageBox messageBox(QMessageBox::Critical, "LameXP", "LameXP is already running, but the running instance doesn't respond!", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
 				messageBox.exec();
 				messageProducerThread->wait();
-				LAMEXP_DELETE(messageProducerThread);
+				MUTILS_DELETE(messageProducerThread);
 				return -1;
 			}
-			LAMEXP_DELETE(messageProducerThread);
+			MUTILS_DELETE(messageProducerThread);
 		}
 		return 0;
 	}
@@ -139,7 +144,7 @@ static int lamexp_main(int argc, char* argv[])
 	}
 	
 	//Self-test
-	if(LAMEXP_DEBUG)
+	if(MUTILS_DEBUG)
 	{
 		InitializationThread::selfTest();
 	}
@@ -156,7 +161,7 @@ static int lamexp_main(int argc, char* argv[])
 	InitializationThread *poInitializationThread = new InitializationThread(&cpuFeatures);
 	SplashScreen::showSplash(poInitializationThread);
 	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
-	LAMEXP_DELETE(poInitializationThread);
+	MUTILS_DELETE(poInitializationThread);
 
 	//Validate settings
 	settingsModel->validate();
@@ -181,15 +186,15 @@ static int lamexp_main(int argc, char* argv[])
 			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, metaInfo, settingsModel);
 			processingDialog->exec();
 			iShutdown = processingDialog->getShutdownFlag();
-			LAMEXP_DELETE(processingDialog);
+			MUTILS_DELETE(processingDialog);
 		}
 	}
 	
 	//Free models
-	LAMEXP_DELETE(poMainWindow);
-	LAMEXP_DELETE(fileListModel);
-	LAMEXP_DELETE(metaInfo);
-	LAMEXP_DELETE(settingsModel);
+	MUTILS_DELETE(poMainWindow);
+	MUTILS_DELETE(fileListModel);
+	MUTILS_DELETE(metaInfo);
+	MUTILS_DELETE(settingsModel);
 
 	//Taskbar un-init
 	WinSevenTaskbar::uninit();
@@ -216,7 +221,7 @@ static int lamexp_main(int argc, char* argv[])
 
 static int _main(int argc, char* argv[])
 {
-	if(LAMEXP_DEBUG)
+	if(MUTILS_DEBUG)
 	{
 		int iResult = -1;
 		qInstallMsgHandler(lamexp_message_handler);
@@ -249,7 +254,7 @@ static int _main(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
-	if(LAMEXP_DEBUG)
+	if(MUTILS_DEBUG)
 	{
 		int exit_code = -1;
 		LAMEXP_MEMORY_CHECK(_main, exit_code, argc, argv);

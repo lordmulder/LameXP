@@ -67,6 +67,9 @@
 #include "Resource.h"
 #include "Config.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
 //CRT includes
 #include <cstdio>
 #include <iostream>
@@ -712,7 +715,7 @@ void lamexp_init_error_handlers(void)
  */
 void lamexp_init_console(const QStringList &argv)
 {
-	bool enableConsole = (LAMEXP_DEBUG) || ((VER_LAMEXP_CONSOLE_ENABLED) && lamexp_version_demo());
+	bool enableConsole = (MUTILS_DEBUG) || ((VER_LAMEXP_CONSOLE_ENABLED) && lamexp_version_demo());
 
 	if(_environ)
 	{
@@ -733,7 +736,7 @@ void lamexp_init_console(const QStringList &argv)
 		}
 	}
 
-	if(!LAMEXP_DEBUG)
+	if(!MUTILS_DEBUG)
 	{
 		for(int i = 0; i < argv.count(); i++)
 		{
@@ -955,7 +958,7 @@ static HANDLE lamexp_debug_thread_init()
  */
 static bool lamexp_event_filter(void *message, long *result)
 { 
-	if((!(LAMEXP_DEBUG)) && lamexp_check_for_debugger())
+	if((!(MUTILS_DEBUG)) && lamexp_check_for_debugger())
 	{
 		lamexp_fatal_exit("Not a debug build. Please unload debugger and try again!");
 	}
@@ -1135,8 +1138,8 @@ bool lamexp_init_qt(int argc, char* argv[])
 	if(!runningOnSupportedOSVersion)
 	{
 		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersionNo.versionMajor, osVersionNo.versionMinor);
-		qWarning("%s\n", QUTF8(message));
-		MessageBoxW(NULL, QWCHAR(message), L"LameXP", MB_OK | MB_TOPMOST | MB_ICONWARNING);
+		qWarning("%s\n", MUTILS_UTF8(message));
+		MessageBoxW(NULL, MUTILS_WCHR(message), L"LameXP", MB_OK | MB_TOPMOST | MB_ICONWARNING);
 	}
 
 	//Check for compat mode
@@ -1164,7 +1167,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 
 	//Load plugins from application directory
 	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
-	qDebug("Library Path:\n%s\n", QUTF8(QApplication::libraryPaths().first()));
+	qDebug("Library Path:\n%s\n", MUTILS_UTF8(QApplication::libraryPaths().first()));
 
 	//Set application properties
 	application->setApplicationName("LameXP - Audio Encoder Front-End");
@@ -1257,7 +1260,7 @@ const QStringList &lamexp_arguments(void)
 		{
 			for(int i = 0; i < nArgs; i++)
 			{
-				(*g_lamexp_argv.list) << WCHAR2QSTR(szArglist[i]);
+				(*g_lamexp_argv.list) << MUTILS_QSTR(szArglist[i]);
 			}
 			LocalFree(szArglist);
 		}
@@ -1372,48 +1375,12 @@ const QString &lamexp_known_folder(lamexp_known_folder_t folder_id)
 				folderPath = folderTemp.canonicalPath();
 			}
 		}
-		LAMEXP_DELETE_ARRAY(path);
+		MUTILS_DELETE_ARRAY(path);
 	}
 
 	//Update cache
 	g_lamexp_known_folder.knownFolders->insert(folderId, folderPath);
 	return (*g_lamexp_known_folder.knownFolders)[folderId];
-}
-
-/*
- * Safely remove a file
- */
-bool lamexp_remove_file(const QString &filename)
-{
-	if(!QFileInfo(filename).exists() || !QFileInfo(filename).isFile())
-	{
-		return true;
-	}
-	else
-	{
-		if(!QFile::remove(filename))
-		{
-			static const DWORD attrMask = FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM;
-			const DWORD attributes = GetFileAttributesW(QWCHAR(filename));
-			if(attributes & attrMask)
-			{
-				SetFileAttributesW(QWCHAR(filename), FILE_ATTRIBUTE_NORMAL);
-			}
-			if(!QFile::remove(filename))
-			{
-				qWarning("Could not delete \"%s\"", filename.toLatin1().constData());
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-		}
-		else
-		{
-			return true;
-		}
-	}
 }
 
 /*
@@ -1521,92 +1488,12 @@ bool lamexp_shutdown_computer(const QString &message, const unsigned long timeou
 					}
 				}
 				const DWORD reason = SHTDN_REASON_MAJOR_APPLICATION | SHTDN_REASON_FLAG_PLANNED;
-				return InitiateSystemShutdownEx(NULL, const_cast<wchar_t*>(QWCHAR(message)), timeout, forceShutdown ? TRUE : FALSE, FALSE, reason);
+				return InitiateSystemShutdownEx(NULL, const_cast<wchar_t*>(MUTILS_WCHR(message)), timeout, forceShutdown ? TRUE : FALSE, FALSE, reason);
 			}
 		}
 	}
 	
 	return false;
-}
-
-/*
- * Determines the current date, resistant against certain manipulations
- */
-QDate lamexp_current_date_safe(void)
-{
-	const DWORD MAX_PROC = 1024;
-	DWORD *processes = new DWORD[MAX_PROC];
-	DWORD bytesReturned = 0;
-	
-	if(!EnumProcesses(processes, sizeof(DWORD) * MAX_PROC, &bytesReturned))
-	{
-		LAMEXP_DELETE_ARRAY(processes);
-		return QDate::currentDate();
-	}
-
-	const DWORD procCount = bytesReturned / sizeof(DWORD);
-	ULARGE_INTEGER lastStartTime;
-	memset(&lastStartTime, 0, sizeof(ULARGE_INTEGER));
-
-	for(DWORD i = 0; i < procCount; i++)
-	{
-		HANDLE hProc = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, processes[i]);
-		if(hProc)
-		{
-			FILETIME processTime[4];
-			if(GetProcessTimes(hProc, &processTime[0], &processTime[1], &processTime[2], &processTime[3]))
-			{
-				ULARGE_INTEGER timeCreation;
-				timeCreation.LowPart = processTime[0].dwLowDateTime;
-				timeCreation.HighPart = processTime[0].dwHighDateTime;
-				if(timeCreation.QuadPart > lastStartTime.QuadPart)
-				{
-					lastStartTime.QuadPart = timeCreation.QuadPart;
-				}
-			}
-			CloseHandle(hProc);
-		}
-	}
-
-	LAMEXP_DELETE_ARRAY(processes);
-	
-	FILETIME lastStartTime_fileTime;
-	lastStartTime_fileTime.dwHighDateTime = lastStartTime.HighPart;
-	lastStartTime_fileTime.dwLowDateTime = lastStartTime.LowPart;
-
-	FILETIME lastStartTime_localTime;
-	if(!FileTimeToLocalFileTime(&lastStartTime_fileTime, &lastStartTime_localTime))
-	{
-		memcpy(&lastStartTime_localTime, &lastStartTime_fileTime, sizeof(FILETIME));
-	}
-	
-	SYSTEMTIME lastStartTime_system;
-	if(!FileTimeToSystemTime(&lastStartTime_localTime, &lastStartTime_system))
-	{
-		memset(&lastStartTime_system, 0, sizeof(SYSTEMTIME));
-		lastStartTime_system.wYear = 1970; lastStartTime_system.wMonth = lastStartTime_system.wDay = 1;
-	}
-
-	const QDate currentDate = QDate::currentDate();
-	const QDate processDate = QDate(lastStartTime_system.wYear, lastStartTime_system.wMonth, lastStartTime_system.wDay);
-	return (currentDate >= processDate) ? currentDate : processDate;
-}
-
-/*
- * Show system message box
- */
-int lamexp_system_message(const wchar_t *text, int beepType)
-{
-	UINT flags = MB_OK | MB_TOPMOST;
-
-	switch(beepType)
-	{
-		case lamexp_beep_info:    flags = flags | MB_ICONASTERISK;
-		case lamexp_beep_warning: flags = flags | MB_ICONEXCLAMATION;
-		case lamexp_beep_error:   flags = flags | MB_ICONHAND;
-	}
-
-	return MessageBoxW(NULL, text, L"LameXP", flags);
 }
 
 /*
@@ -1680,7 +1567,7 @@ bool lamexp_play_sound(const QString &name, const bool bAsync)
 		}
 		else
 		{
-			qWarning("Sound effect \"%s\" not found!", QUTF8(name));
+			qWarning("Sound effect \"%s\" not found!", MUTILS_UTF8(name));
 		}
 	}
 
@@ -1698,7 +1585,7 @@ bool lamexp_play_sound(const QString &name, const bool bAsync)
  */
 bool lamexp_play_sound_alias(const QString &alias, const bool bAsync)
 {
-	return PlaySound(QWCHAR(alias), GetModuleHandle(NULL), (SND_ALIAS | (bAsync ? SND_ASYNC : SND_SYNC))) != FALSE;
+	return PlaySound(MUTILS_WCHR(alias), GetModuleHandle(NULL), (SND_ALIAS | (bAsync ? SND_ASYNC : SND_SYNC))) != FALSE;
 }
 
 /*
@@ -1720,7 +1607,7 @@ bool lamexp_play_sound_file(const QString &library, const unsigned short uiSound
 
 	if(libraryFile.exists() && libraryFile.isFile())
 	{
-		if(HMODULE module = LoadLibraryW(QWCHAR(QDir::toNativeSeparators(libraryFile.canonicalFilePath()))))
+		if(HMODULE module = LoadLibraryW(MUTILS_WCHR(QDir::toNativeSeparators(libraryFile.canonicalFilePath()))))
 		{
 			result = (PlaySound(MAKEINTRESOURCE(uiSoundIdx), module, (SND_RESOURCE | (bAsync ? SND_ASYNC : SND_SYNC))) != FALSE);
 			FreeLibrary(module);
@@ -1728,7 +1615,7 @@ bool lamexp_play_sound_file(const QString &library, const unsigned short uiSound
 	}
 	else
 	{
-		qWarning("PlaySound: File \"%s\" could not be found!", QUTF8(libraryFile.absoluteFilePath()));
+		qWarning("PlaySound: File \"%s\" could not be found!", MUTILS_UTF8(libraryFile.absoluteFilePath()));
 	}
 
 	return result;
@@ -1747,7 +1634,7 @@ bool lamexp_exec_shell(const QWidget *win, const QString &url, const bool explor
  */
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &parameters, const QString &directory, const bool explore)
 {
-	return ((int) ShellExecuteW(((win) ? win->winId() : NULL), (explore ? L"explore" : L"open"), QWCHAR(url), ((!parameters.isEmpty()) ? QWCHAR(parameters) : NULL), ((!directory.isEmpty()) ? QWCHAR(directory) : NULL), SW_SHOW)) > 32;
+	return ((int) ShellExecuteW(((win) ? win->winId() : NULL), (explore ? L"explore" : L"open"), MUTILS_WCHR(url), ((!parameters.isEmpty()) ? MUTILS_WCHR(parameters) : NULL), ((!directory.isEmpty()) ? MUTILS_WCHR(directory) : NULL), SW_SHOW)) > 32;
 }
 
 	/*
@@ -1786,7 +1673,7 @@ bool lamexp_append_sysmenu(const QWidget *win, const unsigned int identifier, co
 	if(HMENU hMenu = GetSystemMenu(win->winId(), FALSE))
 	{
 		ok = (AppendMenuW(hMenu, MF_SEPARATOR, 0, 0) == TRUE);
-		ok = (AppendMenuW(hMenu, MF_STRING, identifier, QWCHAR(text)) == TRUE);
+		ok = (AppendMenuW(hMenu, MF_STRING, identifier, MUTILS_WCHR(text)) == TRUE);
 	}
 
 	return ok;
@@ -1809,7 +1696,7 @@ bool lamexp_update_sysmenu(const QWidget *win, const unsigned int identifier, co
 	
 	if(HMENU hMenu = ::GetSystemMenu(win->winId(), FALSE))
 	{
-		ok = (ModifyMenu(hMenu, identifier, MF_STRING | MF_BYCOMMAND, identifier, QWCHAR(text)) == TRUE);
+		ok = (ModifyMenu(hMenu, identifier, MF_STRING | MF_BYCOMMAND, identifier, MUTILS_WCHR(text)) == TRUE);
 	}
 	return ok;
 }
@@ -2025,8 +1912,8 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 			QString mplayerPath;
 			HKEY registryKeyHandle = NULL;
 
-			const QString currentKey = WCHAR2QSTR(registryPrefix[j]).append(WCHAR2QSTR(registryKeys[i]));
-			if(RegOpenKeyExW(HKEY_LOCAL_MACHINE, QWCHAR(currentKey), 0, KEY_READ, &registryKeyHandle) == ERROR_SUCCESS)
+			const QString currentKey = MUTILS_QSTR(registryPrefix[j]).append(MUTILS_QSTR(registryKeys[i]));
+			if(RegOpenKeyExW(HKEY_LOCAL_MACHINE, MUTILS_WCHR(currentKey), 0, KEY_READ, &registryKeyHandle) == ERROR_SUCCESS)
 			{
 				for(size_t k = 0; k < 2; k++)
 				{
@@ -2037,7 +1924,7 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 					{
 						if((DataType == REG_SZ) || (DataType == REG_EXPAND_SZ) || (DataType == REG_LINK))
 						{
-							mplayerPath = WCHAR2QSTR(Buffer);
+							mplayerPath = MUTILS_QSTR(Buffer);
 							break;
 						}
 					}
@@ -2052,10 +1939,10 @@ bool lamexp_open_media_file(const QString &mediaFilePath)
 				{
 					for(size_t k = 0; k < 4; k++)
 					{
-						if(mplayerDir.exists(WCHAR2QSTR(appNames[k])))
+						if(mplayerDir.exists(MUTILS_QSTR(appNames[k])))
 						{
-							qDebug("Player found at:\n%s\n", QUTF8(mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k]))));
-							QProcess::startDetached(mplayerDir.absoluteFilePath(WCHAR2QSTR(appNames[k])), QStringList() << QDir::toNativeSeparators(mediaFilePath));
+							qDebug("Player found at:\n%s\n", MUTILS_UTF8(mplayerDir.absoluteFilePath(MUTILS_QSTR(appNames[k]))));
+							QProcess::startDetached(mplayerDir.absoluteFilePath(MUTILS_QSTR(appNames[k])), QStringList() << QDir::toNativeSeparators(mediaFilePath));
 							return true;
 						}
 					}
@@ -2095,7 +1982,7 @@ static void lamexp_init_dwmapi(void)
 		}
 		else
 		{
-			LAMEXP_DELETE(g_lamexp_dwmapi.dwmapi_dll);
+			MUTILS_DELETE(g_lamexp_dwmapi.dwmapi_dll);
 			qWarning("Failed to load DWMAPI.DLL on a DWM-enabled system!");
 		}
 	}
@@ -2358,7 +2245,7 @@ bool lamexp_is_executable(const QString &path)
 {
 	bool bIsExecutable = false;
 	DWORD binaryType;
-	if(GetBinaryType(QWCHAR(QDir::toNativeSeparators(path)), &binaryType))
+	if(GetBinaryType(MUTILS_WCHR(QDir::toNativeSeparators(path)), &binaryType))
 	{
 		bIsExecutable = (binaryType == SCS_32BIT_BINARY || binaryType == SCS_64BIT_BINARY);
 	}
@@ -2410,7 +2297,7 @@ void lamexp_fatal_exit(const char* const errorMessage)
 /*
  * Initialize debug thread
  */
-static const HANDLE g_debug_thread1 = LAMEXP_DEBUG ? NULL : lamexp_debug_thread_init();
+static const HANDLE g_debug_thread1 = MUTILS_DEBUG ? NULL : lamexp_debug_thread_init();
 
 /*
  * Get number private bytes [debug only]
@@ -2451,7 +2338,7 @@ void lamexp_dbg_dbg_output_string(const char* format, ...)
 
 extern "C" void _lamexp_global_init_win32(void)
 {
-	if((!LAMEXP_DEBUG) && lamexp_check_for_debugger())
+	if((!MUTILS_DEBUG) && lamexp_check_for_debugger())
 	{
 		lamexp_fatal_exit("Not a debug build. Please unload debugger and try again!");
 	}
@@ -2473,17 +2360,17 @@ extern "C" void _lamexp_global_init_win32(void)
 extern "C" void _lamexp_global_free_win32(void)
 {
 	//Clear folder cache
-	LAMEXP_DELETE(g_lamexp_known_folder.knownFolders);
+	MUTILS_DELETE(g_lamexp_known_folder.knownFolders);
 
 	//Destroy Qt application object
 	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
-	LAMEXP_DELETE(application);
+	MUTILS_DELETE(application);
 
 	//Release DWM API
 	g_lamexp_dwmapi.dwmIsCompositionEnabled = NULL;
 	g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = NULL;
 	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
-	LAMEXP_DELETE(g_lamexp_dwmapi.dwmapi_dll);
+	MUTILS_DELETE(g_lamexp_dwmapi.dwmapi_dll);
 
 	//Free STDOUT and STDERR buffers
 	if(g_lamexp_console_attached)
@@ -2491,12 +2378,12 @@ extern "C" void _lamexp_global_free_win32(void)
 		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cout.rdbuf()))
 		{
 			std::cout.rdbuf(NULL);
-			LAMEXP_DELETE(tmp);
+			MUTILS_DELETE(tmp);
 		}
 		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cerr.rdbuf()))
 		{
 			std::cerr.rdbuf(NULL);
-			LAMEXP_DELETE(tmp);
+			MUTILS_DELETE(tmp);
 		}
 	}
 
@@ -2508,8 +2395,8 @@ extern "C" void _lamexp_global_free_win32(void)
 	}
 
 	//Clear sound cache
-	LAMEXP_DELETE(g_lamexp_sounds.sound_db);
+	MUTILS_DELETE(g_lamexp_sounds.sound_db);
 
 	//Free CLI Arguments
-	LAMEXP_DELETE(g_lamexp_argv.list);
+	MUTILS_DELETE(g_lamexp_argv.list);
 }

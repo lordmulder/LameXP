@@ -23,9 +23,14 @@
 #include "Dialog_WorkingBanner.h"
 #include "UIC_WorkingBanner.h"
 
+//Internal
 #include "Global.h"
 #include "WinSevenTaskbar.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QThread>
 #include <QMovie>
 #include <QKeyEvent>
@@ -120,11 +125,11 @@ WorkingBanner::~WorkingBanner(void)
 	if(m_working)
 	{
 		m_working->stop();
-		LAMEXP_DELETE(m_working);
+		MUTILS_DELETE(m_working);
 	}
 
-	LAMEXP_DELETE(m_style);
-	LAMEXP_DELETE(m_metrics);
+	MUTILS_DELETE(m_style);
+	MUTILS_DELETE(m_metrics);
 	delete ui;
 }
 
@@ -180,7 +185,7 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), NULL);
 
 	//Free memory
-	LAMEXP_DELETE(loop);
+	MUTILS_DELETE(loop);
 
 	//Hide splash
 	this->close();

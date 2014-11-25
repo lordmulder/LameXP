@@ -22,7 +22,11 @@
 
 #include "Encoder_Abstract.h"
 
+//Internal
 #include "Global.h"
+
+//MUtils
+#include <MUtils/Global.h>
 
 AbstractEncoder::AbstractEncoder(void)
 {
@@ -79,7 +83,7 @@ const bool AbstractEncoder::needsTimingInfo(void)
 bool AbstractEncoder::isUnicode(const QString &original)
 {
 	QString asLatin1 = QString::fromLatin1(original.toLatin1().constData());
-	return (wcscmp(QWCHAR(original), QWCHAR(asLatin1)) != 0);
+	return (wcscmp(MUTILS_WCHR(original), MUTILS_WCHR(asLatin1)) != 0);
 }
 
 //Remove "problematic" characters from tag

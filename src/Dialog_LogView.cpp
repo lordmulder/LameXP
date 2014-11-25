@@ -28,6 +28,9 @@
 //Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
 //Qt includes
 #include <QClipboard>
 #include <QFileDialog>
@@ -66,9 +69,9 @@ LogViewDialog::~LogViewDialog(void)
 		QApplication::clipboard()->clear();
 	}
 
-	LAMEXP_DELETE(m_oldIcon);
-	LAMEXP_DELETE(m_acceptIcon);
-	LAMEXP_DELETE(ui);
+	MUTILS_DELETE(m_oldIcon);
+	MUTILS_DELETE(m_acceptIcon);
+	MUTILS_DELETE(ui);
 }
 
 int LogViewDialog::exec(const QStringList &logData)
@@ -80,7 +83,7 @@ int LogViewDialog::exec(const QStringList &logData)
 void LogViewDialog::copyButtonClicked(void)
 {
 	QMimeData *mime = new QMimeData();
-	mime->setData("text/plain", QUTF8(ui->textEdit->toPlainText()));
+	mime->setData("text/plain", MUTILS_UTF8(ui->textEdit->toPlainText()));
 	QApplication::clipboard()->setMimeData(mime);
 	m_clipboardUsed = true;
 	m_oldIcon->swap(ui->buttonCopy->icon());

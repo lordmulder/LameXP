@@ -24,9 +24,14 @@
 
 #include "UIC_DropBox.h"
 
+//Internal
 #include "Global.h"
 #include "Model_Settings.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QThread>
 #include <QMovie>
 #include <QKeyEvent>
@@ -96,10 +101,10 @@ DropBox::~DropBox(void)
 		m_settings->dropBoxWidgetPositionY(this->y());
 	}
 
-	LAMEXP_DELETE(m_counterLabel);
-	LAMEXP_DELETE(m_windowReferencePoint);
-	LAMEXP_DELETE(m_mouseReferencePoint);
-	LAMEXP_DELETE(ui);
+	MUTILS_DELETE(m_counterLabel);
+	MUTILS_DELETE(m_windowReferencePoint);
+	MUTILS_DELETE(m_mouseReferencePoint);
+	MUTILS_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////

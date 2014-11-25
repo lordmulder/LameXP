@@ -24,11 +24,16 @@
 
 #include "UIC_AboutDialog.h"
 
+//Internal
 #include "Global.h"
 #include "Model_Settings.h"
 
-#include <math.h>
+//MUtils
+#include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
+#include <MUtils/Version.h>
 
+//Qt
 #include <QDate>
 #include <QApplication>
 #include <QIcon>
@@ -46,6 +51,9 @@
 #include <QCloseEvent>
 #include <QWindowsVistaStyle>
 #include <QWindowsXPStyle>
+
+//CRT
+#include <math.h>
 
 //Helper macros
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
@@ -173,7 +181,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	//Show about dialog for the first time?
 	if(!firstStart)
 	{
-		lamexp_seed_rand();
+		MUtils::seed_rand();
 
 		ui->acceptButton->hide();
 		ui->declineButton->hide();
@@ -192,10 +200,10 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		geometryUpdated();
 
 		m_discOpacity = 0.01;
-		m_disquePos.setX(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_disqueBound.right()  - disque.width()  - m_disqueBound.left())) + m_disqueBound.left());
-		m_disquePos.setY(static_cast<int>(lamexp_rand() % static_cast<unsigned int>(m_disqueBound.bottom() - disque.height() - m_disqueBound.top()))  + m_disqueBound.top());
-		m_disqueFlags[0] = (lamexp_rand() > (UINT_MAX/2));
-		m_disqueFlags[1] = (lamexp_rand() > (UINT_MAX/2));
+		m_disquePos.setX(static_cast<int>(MUtils::next_rand32() % static_cast<unsigned int>(m_disqueBound.right()  - disque.width()  - m_disqueBound.left())) + m_disqueBound.left());
+		m_disquePos.setY(static_cast<int>(MUtils::next_rand32() % static_cast<unsigned int>(m_disqueBound.bottom() - disque.height() - m_disqueBound.top()))  + m_disqueBound.top());
+		m_disqueFlags[0] = (MUtils::next_rand32() > (UINT_MAX/2));
+		m_disqueFlags[1] = (MUtils::next_rand32() > (UINT_MAX/2));
 		m_disque->move(m_disquePos);
 		m_disque->setWindowOpacity(m_discOpacity);
 		m_disque->show();
@@ -226,19 +234,19 @@ AboutDialog::~AboutDialog(void)
 	if(m_disque)
 	{
 		m_disque->close();
-		LAMEXP_DELETE(m_disque);
+		MUTILS_DELETE(m_disque);
 	}
 	if(m_disqueTimer)
 	{
 		m_disqueTimer->stop();
-		LAMEXP_DELETE(m_disqueTimer);
+		MUTILS_DELETE(m_disqueTimer);
 	}
 	for(int i = 0; i < 4; i++)
 	{
-		LAMEXP_DELETE(m_cartoon[i]);
+		MUTILS_DELETE(m_cartoon[i]);
 	}
-	LAMEXP_DELETE(m_initFlags);
-	LAMEXP_DELETE(ui);
+	MUTILS_DELETE(m_initFlags);
+	MUTILS_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////
@@ -526,6 +534,8 @@ bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 
 void AboutDialog::initInformationTab(void)
 {
+	const QDate versionDate = MUtils::Version::build_date();
+
 	const QString versionStr = QString().sprintf
 	(
 		"Version %d.%02d %s, Build %d [%s], %s %s, Qt v%s",
@@ -533,16 +543,16 @@ void AboutDialog::initInformationTab(void)
 		lamexp_version_minor(),
 		lamexp_version_release(),
 		lamexp_version_build(),
-		lamexp_version_date().toString(Qt::ISODate).toLatin1().constData(),
-		lamexp_version_compiler(),
-		lamexp_version_arch(),
+		versionDate.toString(Qt::ISODate).toLatin1().constData(),
+		MUtils::Version::compiler_version(),
+		MUtils::Version::compiler_arch(),
 		qVersion()
 	);
 
 	const QString copyrightStr = QString().sprintf
 	(
 		"Copyright (C) 2004-%04d LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Some rights reserved.",
-		qMax(lamexp_version_date().year(), lamexp_current_date_safe().year())
+		qMax(versionDate.year(), MUtils::OS::current_date().year())
 	);
 
 	QString aboutText;
@@ -553,8 +563,8 @@ void AboutDialog::initInformationTab(void)
 	aboutText += QString("%1<br>").arg(NOBR(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url()))));
 
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-	const QDate currentDate = lamexp_current_date_safe();
-	if(LAMEXP_DEBUG)
+	const QDate currentDate = MUtils::OS::current_date();
+	if(MUTILS_DEBUG)
 	{
 		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0);
 		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
@@ -623,8 +633,8 @@ void AboutDialog::initContributorsTab(void)
 	{
 		QString flagIcon = (strlen(g_lamexp_translators[i].pcFlag) > 0) ? QString("<img src=\":/flags/%1.png\">").arg(g_lamexp_translators[i].pcFlag) : QString();
 		contributorsAboutText += QString("<tr><td valign=\"middle\">%1</td><td>%2</td>").arg(flagIcon, spaces);
-		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcLanguage), spaces);
-		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%3\">&lt;%3&gt;</a></td></tr>").arg(WCHAR2QSTR(g_lamexp_translators[i].pcName), spaces, g_lamexp_translators[i].pcMail);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td>").arg(MUTILS_QSTR(g_lamexp_translators[i].pcLanguage), spaces);
+		contributorsAboutText += QString("<td valign=\"middle\">%1</td><td>%2</td><td><a href=\"mailto:%3\">&lt;%3&gt;</a></td></tr>").arg(MUTILS_QSTR(g_lamexp_translators[i].pcName), spaces, g_lamexp_translators[i].pcMail);
 	}
 
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>&nbsp;</b></td></tr>");

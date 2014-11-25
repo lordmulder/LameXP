@@ -33,6 +33,7 @@
 
 //MUtils
 #include <MUtils/UpdateChecker.h>
+#include <MUtils/Version.h>
 
 //Qt includes
 #include <QClipboard>
@@ -143,14 +144,14 @@ UpdateDialog::~UpdateDialog(void)
 		}
 	}
 
-	LAMEXP_DELETE(m_thread);
-	LAMEXP_DELETE(m_logFile);
-	LAMEXP_DELETE(m_animator);
+	MUTILS_DELETE(m_thread);
+	MUTILS_DELETE(m_logFile);
+	MUTILS_DELETE(m_animator);
 
 	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
 	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
 
-	LAMEXP_DELETE(ui);
+	MUTILS_DELETE(ui);
 }
 
 void UpdateDialog::showEvent(QShowEvent *event)
@@ -170,7 +171,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 		}
 
 		threadStatusChanged(m_thread->getUpdateStatus());
-		ui->labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), lamexp_version_date().toString(Qt::ISODate)));
+		ui->labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), MUtils::Version::build_date().toString(Qt::ISODate)));
 		ui->labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
 
 		ui->installButton->setEnabled(false);
@@ -404,7 +405,7 @@ void UpdateDialog::applyUpdate(void)
 		QStringList args;
 		QEventLoop loop;
 
-		lamexp_init_process(process, QFileInfo(m_binaryUpdater).absolutePath(), false);
+		MUtils::init_process(process, QFileInfo(m_binaryUpdater).absolutePath(), false);
 
 		connect(&process, SIGNAL(error(QProcess::ProcessError)), &loop, SLOT(quit()));
 		connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)), &loop, SLOT(quit()));
@@ -461,7 +462,7 @@ void UpdateDialog::logButtonClicked(void)
 {
 	LogViewDialog *logView = new LogViewDialog(this);
 	logView->exec(*m_logFile);
-	LAMEXP_DELETE(logView);
+	MUTILS_DELETE(logView);
 }
 
 void UpdateDialog::progressBarValueChanged(int value)
@@ -489,7 +490,7 @@ void UpdateDialog::testKnownHosts(void)
 			loop.exec(QEventLoop::ExcludeUserInputEvents);
 		}
 
-		LAMEXP_DELETE(testThread);
+		MUTILS_DELETE(testThread);
 		logButtonClicked();
 	}
 

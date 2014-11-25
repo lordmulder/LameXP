@@ -22,20 +22,26 @@
 
 #include "Model_AudioFile.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QTime>
 #include <QObject>
 #include <QMutexLocker>
 #include <QFile>
 
+//CRT
 #include <limits.h>
 
 const unsigned int AudioFileModel::BITDEPTH_IEEE_FLOAT32 = UINT_MAX-1;
 
 #define PRINT_S(VAR) do \
 { \
-	if((VAR).isEmpty()) qDebug(#VAR " = N/A"); else qDebug(#VAR " = \"%s\"", QUTF8((VAR))); \
+	if((VAR).isEmpty()) qDebug(#VAR " = N/A"); else qDebug(#VAR " = \"%s\"", MUTILS_UTF8((VAR))); \
 } \
 while(0)
 
@@ -346,7 +352,7 @@ const QString AudioFileModel::audioCompressInfo(void) const
 				info.append(QString(", %1: %2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_techInfo.audioBitrate()), tr("Constant")));
 				break;
 			case BitrateModeVariable:
-				info.append(WCHAR2QSTR(L", %1: \u2248%2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_techInfo.audioBitrate()), tr("Variable")));
+				info.append(MUTILS_QSTR(L", %1: \u2248%2 kbps (%3)").arg(tr("Bitrate"), QString::number(m_techInfo.audioBitrate()), tr("Variable")));
 				break;
 			default:
 				info.append(QString(", %1: %2 kbps").arg(tr("Bitrate"), QString::number(m_techInfo.audioBitrate())));

@@ -36,6 +36,9 @@
 #include "Registry_Decoder.h"
 #include "LockedFile.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
 //Qt includes
 #include <QFileInfo>
 #include <QMessageBox>
@@ -91,8 +94,8 @@ CueImportDialog::CueImportDialog(QWidget *parent, FileListModel *fileList, const
 
 CueImportDialog::~CueImportDialog(void)
 {
-	LAMEXP_DELETE(m_model);
-	LAMEXP_DELETE(ui);
+	MUTILS_DELETE(m_model);
+	MUTILS_DELETE(ui);
 }
 
 ////////////////////////////////////////////////////////////
@@ -120,7 +123,7 @@ int CueImportDialog::exec(void)
 		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(m_cueFileName), tr("The specified file could not be found!")).replace("-", "&minus;");
 		QMessageBox::warning(progress, tr("Cue Sheet Error"), text);
 		progress->close();
-		LAMEXP_DELETE(progress);
+		MUTILS_DELETE(progress);
 		return CueSheetModel::ErrorIOFailure;
 	}
 
@@ -162,8 +165,8 @@ int CueImportDialog::exec(void)
 		if(input->exec() < 1)
 		{
 			progress->close();
-			LAMEXP_DELETE(input);
-			LAMEXP_DELETE(progress);
+			MUTILS_DELETE(input);
+			MUTILS_DELETE(progress);
 			return Rejected;
 		}
 	
@@ -178,7 +181,7 @@ int CueImportDialog::exec(void)
 			codec = QTextCodec::codecForName("System");
 		}
 
-		LAMEXP_DELETE(input);
+		MUTILS_DELETE(input);
 	}
 
 	bomCheck.clear();
@@ -221,12 +224,12 @@ int CueImportDialog::exec(void)
 		QString text = QString("<nobr>%1</nobr><br><nobr>%2</nobr><br><br><nobr>%3</nobr>").arg(tr("Failed to load the Cue Sheet file:"), QDir::toNativeSeparators(m_cueFileName), errorMsg).replace("-", "&minus;");
 		QMessageBox::warning(progress, tr("Cue Sheet Error"), text);
 		progress->close();
-		LAMEXP_DELETE(progress);
+		MUTILS_DELETE(progress);
 		return iResult;
 	}
 	
 	progress->close();
-	LAMEXP_DELETE(progress);
+	MUTILS_DELETE(progress);
 	return QDialog::exec();
 }
 
@@ -287,7 +290,7 @@ void CueImportDialog::importButtonClicked(void)
 		return;
 	}
 
-	QFile writeTest(QString("%1/~%2.txt").arg(m_outputDir, lamexp_rand_str()));
+	QFile writeTest(QString("%1/~%2.txt").arg(m_outputDir, MUtils::rand_str()));
 	if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 	{
 		QMessageBox::warning(this, tr("LameXP"), QString("<nobr>%2</nobr>").arg(tr("Error: The selected output directory is not writable!")));
@@ -402,8 +405,8 @@ bool CueImportDialog::analyzeFiles(QStringList &files)
 		}
 	}
 
-	LAMEXP_DELETE(progress);
-	LAMEXP_DELETE(analyzer);
+	MUTILS_DELETE(progress);
+	MUTILS_DELETE(analyzer);
 
 	return bSuccess;
 }
@@ -440,6 +443,6 @@ void CueImportDialog::splitFiles(void)
 		QMessageBox::information(this, tr("Cue Sheet Completed"), text);
 	}
 
-	LAMEXP_DELETE(splitter);
-	LAMEXP_DELETE(progress);
+	MUTILS_DELETE(splitter);
+	MUTILS_DELETE(progress);
 }

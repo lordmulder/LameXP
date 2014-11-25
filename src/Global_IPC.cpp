@@ -22,6 +22,9 @@
 
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
 //Qt includes
 #include <QSharedMemory>
 #include <QSystemSemaphore>
@@ -106,41 +109,41 @@ int lamexp_init_ipc(void)
 	if(g_lamexp_ipc_ptr.semaphore_read->error() != QSystemSemaphore::NoError)
 	{
 		QString errorMessage = g_lamexp_ipc_ptr.semaphore_read->errorString();
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
+		qFatal("Failed to create system smaphore: %s", MUTILS_UTF8(errorMessage));
 		return -1;
 	}
 	if(g_lamexp_ipc_ptr.semaphore_write->error() != QSystemSemaphore::NoError)
 	{
 		QString errorMessage = g_lamexp_ipc_ptr.semaphore_write->errorString();
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
+		qFatal("Failed to create system smaphore: %s", MUTILS_UTF8(errorMessage));
 		return -1;
 	}
 	if(g_lamexp_ipc_ptr.semaphore_read_mutex->error() != QSystemSemaphore::NoError)
 	{
 		QString errorMessage = g_lamexp_ipc_ptr.semaphore_read_mutex->errorString();
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
+		qFatal("Failed to create system smaphore: %s", MUTILS_UTF8(errorMessage));
 		return -1;
 	}
 	if(g_lamexp_ipc_ptr.semaphore_write_mutex->error() != QSystemSemaphore::NoError)
 	{
 		QString errorMessage = g_lamexp_ipc_ptr.semaphore_write_mutex->errorString();
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
-		LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
-		qFatal("Failed to create system smaphore: %s", QUTF8(errorMessage));
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
+		MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
+		qFatal("Failed to create system smaphore: %s", MUTILS_UTF8(errorMessage));
 		return -1;
 	}
 
@@ -158,16 +161,16 @@ int lamexp_init_ipc(void)
 			else
 			{
 				QString errorMessage = g_lamexp_ipc_ptr.sharedmem->errorString();
-				LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
-				qFatal("Failed to attach to shared memory: %s", QUTF8(errorMessage));
+				MUTILS_DELETE(g_lamexp_ipc_ptr.sharedmem);
+				qFatal("Failed to attach to shared memory: %s", MUTILS_UTF8(errorMessage));
 				return -1;
 			}
 		}
 		else
 		{
 			QString errorMessage = g_lamexp_ipc_ptr.sharedmem->errorString();
-			LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
-			qFatal("Failed to create shared memory: %s", QUTF8(errorMessage));
+			MUTILS_DELETE(g_lamexp_ipc_ptr.sharedmem);
+			qFatal("Failed to create shared memory: %s", MUTILS_UTF8(errorMessage));
 			return -1;
 		}
 	}
@@ -275,9 +278,9 @@ extern "C" void _lamexp_global_free_ipcom(void)
 		g_lamexp_ipc_ptr.sharedmem->detach();
 	}
 
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.sharedmem);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
-	LAMEXP_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
+	MUTILS_DELETE(g_lamexp_ipc_ptr.sharedmem);
+	MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read);
+	MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write);
+	MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_read_mutex);
+	MUTILS_DELETE(g_lamexp_ipc_ptr.semaphore_write_mutex);
 }

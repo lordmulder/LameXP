@@ -22,8 +22,13 @@
 
 #include "PlaylistImporter.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QString>
 #include <QStringList>
 #include <QDir>
@@ -170,7 +175,7 @@ bool PlaylistImporter::parsePlaylist_m3u(QFile &data, QStringList &fileList, con
 
 				if(filename.exists() && filename.isFile())
 				{
-					qDebug("Found: \"%s\"", QUTF8(filePath[i]));
+					qDebug("Found: \"%s\"", MUTILS_UTF8(filePath[i]));
 					if(isPlaylist(filename.canonicalFilePath()) == notPlaylist)
 					{
 						fileList << filename.canonicalFilePath();

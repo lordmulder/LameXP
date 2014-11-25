@@ -22,13 +22,19 @@
 
 #include "Thread_MessageProducer.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QStringList>
 #include <QApplication>
 #include <QFileInfo>
 #include <QDir>
 
+//CRT
 #include <limits.h>
 
 ////////////////////////////////////////////////////////////
@@ -70,7 +76,7 @@ void MessageProducerThread::run()
 			QFileInfo file = QFileInfo(arguments[++i]);
 			if(file.exists() && file.isFile())
 			{
-				lamexp_ipc_send(1, QUTF8(file.canonicalFilePath()));
+				lamexp_ipc_send(1, MUTILS_UTF8(file.canonicalFilePath()));
 			}
 			bSentFiles = true;
 		}
@@ -79,7 +85,7 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				lamexp_ipc_send(2, QUTF8(dir.canonicalPath()));
+				lamexp_ipc_send(2, MUTILS_UTF8(dir.canonicalPath()));
 			}
 			bSentFiles = true;
 		}
@@ -88,7 +94,7 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				lamexp_ipc_send(3, QUTF8(dir.canonicalPath()));
+				lamexp_ipc_send(3, MUTILS_UTF8(dir.canonicalPath()));
 			}
 			bSentFiles = true;
 		}

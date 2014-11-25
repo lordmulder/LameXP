@@ -21,8 +21,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Model_FileSystem.h"
+
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QApplication>
 #include <QFileIconProvider>
 #include <QDesktopServices>
@@ -103,7 +109,7 @@ QIcon QFileIconProviderEx::icon(const QFileInfo &info) const
 	}
 	else if(info.isRoot())
 	{
-		switch(GetDriveType(QWCHAR(QDir::toNativeSeparators(info.absoluteFilePath()))))
+		switch(GetDriveType(MUTILS_WCHR(QDir::toNativeSeparators(info.absoluteFilePath()))))
 		{
 		case DRIVE_CDROM:
 			return m_cdromIcon;
@@ -170,7 +176,7 @@ QFileSystemModelEx::QFileSystemModelEx()
 QFileSystemModelEx::~QFileSystemModelEx()
 {
 	removeAllFromCache();
-	LAMEXP_DELETE(m_myIconProvider);
+	MUTILS_DELETE(m_myIconProvider);
 }
 
 bool QFileSystemModelEx::hasChildren(const QModelIndex &parent) const
@@ -272,7 +278,7 @@ bool QFileSystemModelEx::hasSubfolders(const QString &path)
 	WIN32_FIND_DATAW findData;
 	bool bChildren = false;
 
-	HANDLE h = FindFirstFileEx(QWCHAR(QDir::toNativeSeparators(path + "/*")), ((FINDEX_INFO_LEVELS)s_findFirstFileExInfoLevel), &findData, FindExSearchLimitToDirectories, NULL, 0);
+	HANDLE h = FindFirstFileEx(MUTILS_WCHR(QDir::toNativeSeparators(path + "/*")), ((FINDEX_INFO_LEVELS)s_findFirstFileExInfoLevel), &findData, FindExSearchLimitToDirectories, NULL, 0);
 
 	if(h != INVALID_HANDLE_VALUE)
 	{

@@ -22,8 +22,13 @@
 
 #include "Model_Artwork.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QFile>
 #include <QMutex>
 #include <QMutexLocker>
@@ -55,7 +60,7 @@ protected:
 			else
 			{
 				qWarning("[ArtworkModel] Failed to open artwork file!");
-				LAMEXP_DELETE(file);
+				MUTILS_DELETE(file);
 			}
 		}
 	}
@@ -69,7 +74,7 @@ protected:
 				m_fileHandle->remove();
 			}
 			m_fileHandle->close();
-			LAMEXP_DELETE(m_fileHandle);
+			MUTILS_DELETE(m_fileHandle);
 		}
 	}
 
@@ -156,7 +161,7 @@ ArtworkModel::~ArtworkModel(void)
 	QMutexLocker lock(m_mutex);
 	ArtworkModel_SharedData::detach(&m_data);
 	lock.unlock();
-	LAMEXP_DELETE(m_mutex);
+	MUTILS_DELETE(m_mutex);
 }
 
 ////////////////////////////////////////////////////////////

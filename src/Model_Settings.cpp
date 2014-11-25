@@ -22,9 +22,14 @@
 
 #include "Model_Settings.h"
 
+//Internal
 #include "Global.h"
 #include "Registry_Encoder.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QSettings>
 #include <QDesktopServices>
 #include <QApplication>
@@ -59,10 +64,10 @@ public:
 	{
 		flushValues();
 
-		LAMEXP_DELETE(m_cache);
-		LAMEXP_DELETE(m_cacheDirty);
-		LAMEXP_DELETE(m_cacheLock);
-		LAMEXP_DELETE(m_configFile);
+		MUTILS_DELETE(m_cache);
+		MUTILS_DELETE(m_cacheDirty);
+		MUTILS_DELETE(m_cacheLock);
+		MUTILS_DELETE(m_configFile);
 	}
 
 	inline void storeValue(const QString &key, const QVariant &value)
@@ -112,7 +117,7 @@ public:
 				}
 				else
 				{
-					qWarning("Could not find '%s' in cache, but it has been marked as dirty!", QUTF8(*iter));
+					qWarning("Could not find '%s' in cache, but it has been marked as dirty!", MUTILS_UTF8(*iter));
 				}
 			}
 			m_configFile->sync();
@@ -331,7 +336,7 @@ SettingsModel::SettingsModel(void)
 				continue;
 			}
 		}
-		qWarning("Deleting obsolete group from config: %s", QUTF8(current));
+		qWarning("Deleting obsolete group from config: %s", MUTILS_UTF8(current));
 		REMOVE_GROUP(configFile, current);
 	}
 
@@ -350,8 +355,8 @@ SettingsModel::SettingsModel(void)
 
 SettingsModel::~SettingsModel(void)
 {
-	LAMEXP_DELETE(m_configCache);
-	LAMEXP_DELETE(m_defaultLanguage);
+	MUTILS_DELETE(m_configCache);
+	MUTILS_DELETE(m_defaultLanguage);
 }
 
 ////////////////////////////////////////////////////////////
@@ -466,9 +471,9 @@ QString SettingsModel::defaultLanguage(void) const
 	//Detect system langauge
 	QLocale systemLanguage= QLocale::system();
 	qDebug("[Locale]");
-	qDebug("Language: %s (%d)", QUTF8(QLocale::languageToString(systemLanguage.language())), systemLanguage.language());
-	qDebug("Country is: %s (%d)", QUTF8(QLocale::countryToString(systemLanguage.country())), systemLanguage.country());
-	qDebug("Script is: %s (%d)\n", QUTF8(QLocale::scriptToString(systemLanguage.script())), systemLanguage.script());
+	qDebug("Language: %s (%d)", MUTILS_UTF8(QLocale::languageToString(systemLanguage.language())), systemLanguage.language());
+	qDebug("Country is: %s (%d)", MUTILS_UTF8(QLocale::countryToString(systemLanguage.country())), systemLanguage.country());
+	qDebug("Script is: %s (%d)\n", MUTILS_UTF8(QLocale::scriptToString(systemLanguage.script())), systemLanguage.script());
 
 	//Check if we can use the default translation
 	if(systemLanguage.language() == QLocale::English /*|| systemLanguage.language() == QLocale::C*/)

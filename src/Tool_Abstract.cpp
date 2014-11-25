@@ -22,9 +22,14 @@
 
 #include "Tool_Abstract.h"
 
+//Internal
 #include "Global.h"
 #include "JobObject.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Qt
 #include <QProcess>
 #include <QMutex>
 #include <QMutexLocker>
@@ -78,7 +83,7 @@ AbstractTool::~AbstractTool(void)
 		s_jobObjRefCount--;
 		if(s_jobObjRefCount < 1U)
 		{
-			LAMEXP_DELETE(s_jobObject);
+			MUTILS_DELETE(s_jobObject);
 		}
 	}
 }
@@ -96,7 +101,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");
-	lamexp_init_process(process, QFileInfo(program).absolutePath());
+	MUtils::init_process(process, QFileInfo(program).absolutePath());
 
 	process.start(program, args);
 	
