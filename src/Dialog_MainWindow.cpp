@@ -1290,7 +1290,7 @@ bool MainWindow::winEvent(MSG *message, long *result)
  */
 void MainWindow::windowShown(void)
 {
-	const QStringList &arguments = lamexp_arguments(); //QApplication::arguments();
+	const QStringList &arguments = MUtils::OS::arguments(); //QApplication::arguments();
 
 	//Force resize event
 	resizeEvent(NULL);
@@ -1373,7 +1373,7 @@ void MainWindow::windowShown(void)
 	}
 
 	//Update reminder
-	if(MUtils::OS::current_date() >= MUtils::Version::build_date().addYears(1))
+	if(MUtils::OS::current_date() >= MUtils::Version::app_build_date().addYears(1))
 	{
 		qWarning("Binary is more than a year old, time to update!");
 		SHOW_CORNER_WIDGET(true);

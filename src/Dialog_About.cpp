@@ -534,7 +534,7 @@ bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 
 void AboutDialog::initInformationTab(void)
 {
-	const QDate versionDate = MUtils::Version::build_date();
+	const QDate versionDate = MUtils::Version::app_build_date();
 
 	const QString versionStr = QString().sprintf
 	(

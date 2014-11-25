@@ -171,7 +171,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 		}
 
 		threadStatusChanged(m_thread->getUpdateStatus());
-		ui->labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), MUtils::Version::build_date().toString(Qt::ISODate)));
+		ui->labelVersionInstalled->setText(QString("%1 %2 (%3)").arg(tr("Build"), QString::number(lamexp_version_build()), MUtils::Version::app_build_date().toString(Qt::ISODate)));
 		ui->labelVersionLatest->setText(QString("(%1)").arg(tr("Unknown")));
 
 		ui->installButton->setEnabled(false);

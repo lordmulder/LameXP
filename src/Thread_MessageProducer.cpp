@@ -27,6 +27,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //Qt
 #include <QStringList>
@@ -53,7 +54,7 @@ void MessageProducerThread::run()
 {
 	setTerminationEnabled(true);
 	bool bSentFiles = false;
-	const QStringList &arguments = lamexp_arguments(); //QApplication::arguments();
+	const QStringList &arguments = MUtils::OS::arguments();
 
 	for(int i = 0; i < arguments.count(); i++)
 	{

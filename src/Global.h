@@ -90,7 +90,6 @@ class lamexp_icon_t;
 
 const QIcon &lamexp_app_icon(void);
 bool lamexp_append_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
-const QStringList &lamexp_arguments(void);
 QStringList lamexp_available_codepages(bool noAliases = true);
 bool lamexp_beep(int beepType);
 void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned int delay = 150);
@@ -116,7 +115,6 @@ bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &pa
 void lamexp_finalization(void);
 unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok = NULL);
 void lamexp_free_window_icon(lamexp_icon_t *icon);
-void lamexp_init_console(const QStringList &argv);
 void lamexp_init_error_handlers(void);
 int lamexp_init_ipc(void);
 bool lamexp_init_qt(int argc, char* argv[]);

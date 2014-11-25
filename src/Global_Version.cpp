@@ -127,7 +127,7 @@ bool lamexp_version_demo(void)
  */
 QDate lamexp_version_expires(void)
 {
-	return MUtils::Version::build_date().addDays(MUTILS_DEBUG ? 7 : 30);
+	return MUtils::Version::app_build_date().addDays(MUTILS_DEBUG ? 7 : 30);
 }
 
 /*

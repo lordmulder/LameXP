@@ -70,6 +70,7 @@
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/Terminal.h>
 
 //CRT includes
 #include <cstdio>
@@ -101,45 +102,9 @@ Q_IMPORT_PLUGIN(QICOPlugin)
 #define _LAMEXP_MAKE_STR(STR) #STR
 #define LAMEXP_MAKE_STR(STR) _LAMEXP_MAKE_STR(STR)
 
-//String helper
-#define CLEAN_OUTPUT_STRING(STR) do \
-{ \
-	const char CTRL_CHARS[3] = { '\r', '\n', '\t' }; \
-	for(size_t i = 0; i < 3; i++) \
-	{ \
-		while(char *pos = strchr((STR), CTRL_CHARS[i])) *pos = char(0x20); \
-	} \
-} \
-while(0)
-
-//String helper
-#define TRIM_LEFT(STR) do \
-{ \
-	const char WHITE_SPACE[4] = { char(0x20), '\r', '\n', '\t' }; \
-	for(size_t i = 0; i < 4; i++) \
-	{ \
-		while(*(STR) == WHITE_SPACE[i]) (STR)++; \
-	} \
-} \
-while(0)
-
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
 ///////////////////////////////////////////////////////////////////////////////
-
-//Console attached flag
-static bool g_lamexp_console_attached = false;
-
-//Fatal exit flags
-static volatile bool g_lamexp_fatal_flag = true;
-
-//CLI Arguments
-static struct
-{
-	QStringList *list;
-	QReadWriteLock lock;
-}
-g_lamexp_argv;
 
 //Wine detection
 static struct
@@ -185,15 +150,9 @@ static const char *g_lamexp_imageformats[] = {"bmp", "png", "jpg", "gif", "ico",
 //Main thread ID
 static const DWORD g_main_thread_id = GetCurrentThreadId();
 
-//Log file
-static FILE *g_lamexp_log_file = NULL;
-
 //Localization
 const char* LAMEXP_DEFAULT_LANGID = "en";
 const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
-
-//GURU MEDITATION
-static const char *GURU_MEDITATION = "\n\nGURU MEDITATION !!!\n\n";
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
@@ -232,141 +191,6 @@ bool lamexp_detect_wine(void)
 }
 
 /*
- * Change console text color
- */
-static void lamexp_console_color(FILE* file, WORD attributes)
-{
-	const HANDLE hConsole = (HANDLE)(_get_osfhandle(_fileno(file)));
-	if((hConsole != NULL) && (hConsole != INVALID_HANDLE_VALUE))
-	{
-		SetConsoleTextAttribute(hConsole, attributes);
-	}
-}
-
-/*
- * Output logging message to console
- */
-static void lamexp_write_console(const int type, const char *msg)
-{	
-	__try
-	{
-		if(_isatty(_fileno(stderr)))
-		{
-			UINT oldOutputCP = GetConsoleOutputCP();
-			if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(CP_UTF8);
-
-			switch(type)
-			{
-			case QtCriticalMsg:
-			case QtFatalMsg:
-				lamexp_console_color(stderr, FOREGROUND_RED | FOREGROUND_INTENSITY);
-				fprintf(stderr, GURU_MEDITATION);
-				fprintf(stderr, "%s\n", msg);
-				fflush(stderr);
-				break;
-			case QtWarningMsg:
-				lamexp_console_color(stderr, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-				fprintf(stderr, "%s\n", msg);
-				fflush(stderr);
-				break;
-			default:
-				lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-				fprintf(stderr, "%s\n", msg);
-				fflush(stderr);
-				break;
-			}
-	
-			lamexp_console_color(stderr, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-			if(oldOutputCP != CP_UTF8) SetConsoleOutputCP(oldOutputCP);
-		}
-	}
-	__except(1)
-	{
-		/*ignore any exception that might occur here!*/
-	}
-}
-
-/*
- * Output logging message to debugger
- */
-static void lamexp_write_dbg_out(const int type, const char *msg)
-{	
-	const char *FORMAT = "[LameXP][%c] %s\n";
-
-	__try
-	{
-		char buffer[512];
-		const char* input = msg;
-		TRIM_LEFT(input);
-		
-		switch(type)
-		{
-		case QtCriticalMsg:
-		case QtFatalMsg:
-			_snprintf_s(buffer, 512, _TRUNCATE, FORMAT, 'C', input);
-			break;
-		case QtWarningMsg:
-			_snprintf_s(buffer, 512, _TRUNCATE, FORMAT, 'W', input);
-			break;
-		default:
-			_snprintf_s(buffer, 512, _TRUNCATE, FORMAT, 'I', input);
-			break;
-		}
-
-		char *temp = &buffer[0];
-		CLEAN_OUTPUT_STRING(temp);
-		OutputDebugStringA(temp);
-	}
-	__except(1)
-	{
-		/*ignore any exception that might occur here!*/
-	}
-}
-
-/*
- * Output logging message to logfile
- */
-static void lamexp_write_logfile(const int type, const char *msg)
-{	
-	const char *FORMAT = "[%c][%04u] %s\r\n";
-
-	__try
-	{
-		if(g_lamexp_log_file)
-		{
-			char buffer[512];
-			strncpy_s(buffer, 512, msg, _TRUNCATE);
-
-			char *temp = &buffer[0];
-			TRIM_LEFT(temp);
-			CLEAN_OUTPUT_STRING(temp);
-			
-			const unsigned int timestamp = static_cast<unsigned int>(_time64(NULL) % 3600I64);
-
-			switch(type)
-			{
-			case QtCriticalMsg:
-			case QtFatalMsg:
-				fprintf(g_lamexp_log_file, FORMAT, 'C', timestamp, temp);
-				break;
-			case QtWarningMsg:
-				fprintf(g_lamexp_log_file, FORMAT, 'W', timestamp, temp);
-				break;
-			default:
-				fprintf(g_lamexp_log_file, FORMAT, 'I', timestamp, temp);
-				break;
-			}
-
-			fflush(g_lamexp_log_file);
-		}
-	}
-	__except(1)
-	{
-		/*ignore any exception that might occur here!*/
-	}
-}
-
-/*
  * Qt message handler
  */
 void lamexp_message_handler(QtMsgType type, const char *msg)
@@ -376,25 +200,10 @@ void lamexp_message_handler(QtMsgType type, const char *msg)
 		return;
 	}
 
-	//CSLocker lock(g_lamexp_message_lock); FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!!
-
-	if(g_lamexp_log_file)
-	{
-		lamexp_write_logfile(type, msg);
-	}
-
-	if(g_lamexp_console_attached)
-	{
-		lamexp_write_console(type, msg);
-	}
-	else
-	{
-		lamexp_write_dbg_out(type, msg);
-	}
+	MUtils::Terminal::write(type, msg);
 
 	if((type == QtCriticalMsg) || (type == QtFatalMsg))
 	{
-		//lock.forceUnlock();
 		MUtils::OS::fatal_exit(MUTILS_WCHR(QString::fromUtf8(msg)));
 	}
 }
@@ -440,89 +249,6 @@ void lamexp_init_error_handlers(void)
 	for(size_t i = 0; i < 6; i++)
 	{
 		signal(signal_num[i], lamexp_signal_handler);
-	}
-}
-
-/*
- * Initialize the console
- */
-void lamexp_init_console(const QStringList &argv)
-{
-	bool enableConsole = (MUTILS_DEBUG) || ((VER_LAMEXP_CONSOLE_ENABLED) && lamexp_version_demo());
-
-	if(_environ)
-	{
-		wchar_t *logfile = NULL;
-		size_t logfile_len = 0;
-		if(!_wdupenv_s(&logfile, &logfile_len, L"LAMEXP_LOGFILE"))
-		{
-			if(logfile && (logfile_len > 0))
-			{
-				FILE *temp = NULL;
-				if(!_wfopen_s(&temp, logfile, L"wb"))
-				{
-					fprintf(temp, "%c%c%c", char(0xEF), char(0xBB), char(0xBF));
-					g_lamexp_log_file = temp;
-				}
-				free(logfile);
-			}
-		}
-	}
-
-	if(!MUTILS_DEBUG)
-	{
-		for(int i = 0; i < argv.count(); i++)
-		{
-			if(!argv.at(i).compare("--console", Qt::CaseInsensitive))
-			{
-				enableConsole = true;
-			}
-			else if(!argv.at(i).compare("--no-console", Qt::CaseInsensitive))
-			{
-				enableConsole = false;
-			}
-		}
-	}
-
-	if(enableConsole)
-	{
-		if(!g_lamexp_console_attached)
-		{
-			if(AllocConsole() != FALSE)
-			{
-				SetConsoleCtrlHandler(NULL, TRUE);
-				SetConsoleTitle(L"LameXP - Audio Encoder Front-End | Debug Console");
-				SetConsoleOutputCP(CP_UTF8);
-				g_lamexp_console_attached = true;
-			}
-		}
-		
-		if(g_lamexp_console_attached)
-		{
-			//-------------------------------------------------------------------
-			//See: http://support.microsoft.com/default.aspx?scid=kb;en-us;105305
-			//-------------------------------------------------------------------
-			const int flags = _O_WRONLY | _O_U8TEXT;
-			int hCrtStdOut = _open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), flags);
-			int hCrtStdErr = _open_osfhandle((intptr_t) GetStdHandle(STD_ERROR_HANDLE),  flags);
-			FILE *hfStdOut = (hCrtStdOut >= 0) ? _fdopen(hCrtStdOut, "wb") : NULL;
-			FILE *hfStdErr = (hCrtStdErr >= 0) ? _fdopen(hCrtStdErr, "wb") : NULL;
-			if(hfStdOut) { *stdout = *hfStdOut; std::cout.rdbuf(new std::filebuf(hfStdOut)); }
-			if(hfStdErr) { *stderr = *hfStdErr; std::cerr.rdbuf(new std::filebuf(hfStdErr)); }
-		}
-
-		HWND hwndConsole = GetConsoleWindow();
-
-		if((hwndConsole != NULL) && (hwndConsole != INVALID_HANDLE_VALUE))
-		{
-			HMENU hMenu = GetSystemMenu(hwndConsole, 0);
-			EnableMenuItem(hMenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
-			RemoveMenu(hMenu, SC_CLOSE, MF_BYCOMMAND);
-
-			SetWindowPos(hwndConsole, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_FRAMECHANGED);
-			SetWindowLong(hwndConsole, GWL_STYLE, GetWindowLong(hwndConsole, GWL_STYLE) & (~WS_MAXIMIZEBOX) & (~WS_MINIMIZEBOX));
-			SetWindowPos(hwndConsole, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_FRAMECHANGED);
-		}
 	}
 }
 
@@ -690,7 +416,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 {
 	static bool qt_initialized = false;
 	typedef BOOL (WINAPI *SetDllDirectoryProc)(WCHAR *lpPathName);
-	const QStringList &arguments = lamexp_arguments();
+	const QStringList &arguments = MUtils::OS::arguments();
 
 	//Don't initialized again, if done already
 	if(qt_initialized)
@@ -839,6 +565,7 @@ bool lamexp_init_qt(int argc, char* argv[])
 	}
 
 	//Update console icon, if a console is attached
+#if 0 //FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!!
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 	if(g_lamexp_console_attached && (!lamexp_detect_wine()))
 	{
@@ -857,41 +584,11 @@ bool lamexp_init_qt(int argc, char* argv[])
 		}
 	}
 #endif
+#endif
 
 	//Done
 	qt_initialized = true;
 	return true;
-}
-
-const QStringList &lamexp_arguments(void)
-{
-	QReadLocker readLock(&g_lamexp_argv.lock);
-
-	if(!g_lamexp_argv.list)
-	{
-		readLock.unlock();
-		QWriteLocker writeLock(&g_lamexp_argv.lock);
-
-		g_lamexp_argv.list = new QStringList;
-
-		int nArgs = 0;
-		LPWSTR *szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
-
-		if(NULL != szArglist)
-		{
-			for(int i = 0; i < nArgs; i++)
-			{
-				(*g_lamexp_argv.list) << MUTILS_QSTR(szArglist[i]);
-			}
-			LocalFree(szArglist);
-		}
-		else
-		{
-			qWarning("CommandLineToArgvW() has failed !!!");
-		}
-	}
-
-	return (*g_lamexp_argv.list);
 }
 
 /*
@@ -1823,7 +1520,6 @@ extern "C" void _lamexp_global_init_win32(void)
 	}
 
 	//Zero *before* constructors are called
-	LAMEXP_ZERO_MEMORY(g_lamexp_argv);
 	LAMEXP_ZERO_MEMORY(g_lamexp_wine);
 	LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
 	LAMEXP_ZERO_MEMORY(g_lamexp_dwmapi);
@@ -1846,31 +1542,6 @@ extern "C" void _lamexp_global_free_win32(void)
 	g_lamexp_dwmapi.dwmEnableBlurBehindWindow = NULL;
 	MUTILS_DELETE(g_lamexp_dwmapi.dwmapi_dll);
 
-	//Free STDOUT and STDERR buffers
-	if(g_lamexp_console_attached)
-	{
-		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cout.rdbuf()))
-		{
-			std::cout.rdbuf(NULL);
-			MUTILS_DELETE(tmp);
-		}
-		if(std::filebuf *tmp = dynamic_cast<std::filebuf*>(std::cerr.rdbuf()))
-		{
-			std::cerr.rdbuf(NULL);
-			MUTILS_DELETE(tmp);
-		}
-	}
-
-	//Close log file
-	if(g_lamexp_log_file)
-	{
-		fclose(g_lamexp_log_file);
-		g_lamexp_log_file = NULL;
-	}
-
 	//Clear sound cache
 	MUTILS_DELETE(g_lamexp_sounds.sound_db);
-
-	//Free CLI Arguments
-	MUTILS_DELETE(g_lamexp_argv.list);
 }

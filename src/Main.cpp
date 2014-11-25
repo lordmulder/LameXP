@@ -38,6 +38,7 @@
 #include <MUtils/OSSupport.h>
 #include <MUtils/Version.h>
 #include <MUtils/CPUFeatures.h>
+#include <MUtils/Terminal.h>
 
 //Qt includes
 #include <QApplication>
@@ -57,20 +58,23 @@ static int lamexp_main(int argc, char* argv[])
 	bool bAccepted = true;
 
 	//Get CLI arguments
-	const QStringList &arguments = lamexp_arguments();
+	const QStringList &arguments = MUtils::OS::arguments();
 
 	//Init console
-	lamexp_init_console(arguments);
+	MUtils::Terminal::setup(arguments, MUTILS_DEBUG || lamexp_version_demo());
 
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End v%d.%02d %s (Build #%03d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build());
-	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", qMax(MUtils::Version::build_date().year(), MUtils::OS::current_date().year()));
-	qDebug("Built on %s at %s with %s for Win-%s.\n", MUTILS_UTF8(MUtils::Version::build_date().toString(Qt::ISODate)), MUTILS_UTF8(MUtils::Version::build_time().toString(Qt::ISODate)), MUtils::Version::compiler_version(), MUtils::Version::compiler_arch());
+	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", qMax(MUtils::Version::app_build_date().year(), MUtils::OS::current_date().year()));
+	qDebug("Built on %s at %s with %s for Win-%s.\n", MUTILS_UTF8(MUtils::Version::app_build_date().toString(Qt::ISODate)), MUTILS_UTF8(MUtils::Version::app_build_time().toString(Qt::ISODate)), MUtils::Version::compiler_version(), MUtils::Version::compiler_arch());
 	
 	//print license info
 	qDebug("This program is free software: you can redistribute it and/or modify");
 	qDebug("it under the terms of the GNU General Public License <http://www.gnu.org/>.");
 	qDebug("Note that this program is distributed with ABSOLUTELY NO WARRANTY.\n");
+
+	//Print library version
+	qDebug("This application is powerd by MUtils library v%u.%02u (%s, %s).\n", MUtils::Version::lib_version_major(), MUtils::Version::lib_version_minor(), MUTILS_UTF8(MUtils::Version::lib_build_date().toString(Qt::ISODate)), MUTILS_UTF8(MUtils::Version::lib_build_time().toString(Qt::ISODate)));
 
 	//Print warning, if this is a "debug" build
 	if(MUTILS_DEBUG)
@@ -86,10 +90,10 @@ static int lamexp_main(int argc, char* argv[])
 	{
 		qDebug("argv[%d]=%s", i, MUTILS_UTF8(arguments.at(i)));
 	}
-	qDebug("");
+	qDebug(" ");
 
 	//Detect CPU capabilities
-	const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect(lamexp_arguments());
+	const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect(MUtils::OS::arguments());
 	qDebug("   CPU vendor id  :  %s (Intel=%s)", cpuFeatures.vendor, MUTILS_BOOL2STR(cpuFeatures.intel));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
 	qDebug("   CPU signature  :  Family=%d Model=%d Stepping=%d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
@@ -106,9 +110,9 @@ static int lamexp_main(int argc, char* argv[])
 	if(lamexp_version_demo())
 	{
 		const QDate currentDate = MUtils::OS::current_date();
-		if(currentDate.addDays(1) < MUtils::Version::build_date())
+		if(currentDate.addDays(1) < MUtils::Version::app_build_date())
 		{
-			qFatal("System's date (%s) is before LameXP build date (%s). Huh?", currentDate.toString(Qt::ISODate).toLatin1().constData(), MUtils::Version::build_date().toString(Qt::ISODate).toLatin1().constData());
+			qFatal("System's date (%s) is before LameXP build date (%s). Huh?", currentDate.toString(Qt::ISODate).toLatin1().constData(), MUtils::Version::app_build_date().toString(Qt::ISODate).toLatin1().constData());
 		}
 		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(lamexp_version_expires().toString(Qt::ISODate)).toLatin1().constData());
 	}
