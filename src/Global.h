@@ -113,7 +113,6 @@ bool lamexp_detect_wine(void);
 bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const bool explore = false);
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &parameters, const QString &directory, const bool explore = false);
-void lamexp_fatal_exit(const char* const errorMessage);
 void lamexp_finalization(void);
 unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok = NULL);
 void lamexp_free_window_icon(lamexp_icon_t *icon);

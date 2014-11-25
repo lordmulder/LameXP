@@ -37,6 +37,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 #include <MUtils/Version.h>
 
 //Qt
@@ -187,12 +188,12 @@ void ProcessThread::run()
 	catch(const std::exception &error)
 	{
 		PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
-		lamexp_fatal_exit("Unhandeled C++ exception error, application will exit!");
+		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 	catch(...)
 	{
 		PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
-		lamexp_fatal_exit("Unhandeled C++ exception error, application will exit!");
+		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 }
 

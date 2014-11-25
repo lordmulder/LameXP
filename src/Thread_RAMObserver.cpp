@@ -23,6 +23,10 @@
 #include "Thread_RAMObserver.h"
 #include "Global.h"
 
+//MUtils
+#include <MUtils/OSSupport.h>
+
+//Qt
 #include <QDir>
 
 //Windows includes
@@ -57,12 +61,12 @@ void RAMObserverThread::run(void)
 	catch(const std::exception &error)
 	{
 		PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
-		lamexp_fatal_exit("Unhandeled C++ exception error, application will exit!");
+		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 	catch(...)
 	{
 		PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
-		lamexp_fatal_exit("Unhandeled C++ exception error, application will exit!");
+		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 
 	while(m_semaphore.available()) m_semaphore.tryAcquire();

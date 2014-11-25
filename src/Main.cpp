@@ -242,12 +242,12 @@ static int _main(int argc, char* argv[])
 		catch(const std::exception &error)
 		{
 			PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
-			lamexp_fatal_exit("Unhandeled C++ exception error, application will exit!");
+			MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 		}
 		catch(...)
 		{
 			PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
-			lamexp_fatal_exit("Unhandeled C++ exception error, application will exit!");
+			MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 		}
 		return iResult;
 	}
@@ -271,7 +271,7 @@ int main(int argc, char* argv[])
 		__except(1)
 		{
 			PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnhandeled structured exception error!\n");
-			lamexp_fatal_exit("Unhandeled structured exception error, application will exit!");
+			MUtils::OS::fatal_exit(L"Unhandeled structured exception error, application will exit!");
 		}
 	}
 }
