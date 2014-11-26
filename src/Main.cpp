@@ -39,6 +39,7 @@
 #include <MUtils/Version.h>
 #include <MUtils/CPUFeatures.h>
 #include <MUtils/Terminal.h>
+#include <MUtils/Startup.h>
 
 //Qt includes
 #include <QApplication>
@@ -51,17 +52,11 @@
 // Main function
 ///////////////////////////////////////////////////////////////////////////////
 
-static int lamexp_main(int argc, char* argv[])
+static int lamexp_main(int &argc, char **argv)
 {
 	int iResult = -1;
 	int iShutdown = shutdownFlag_None;
 	bool bAccepted = true;
-
-	//Get CLI arguments
-	const QStringList &arguments = MUtils::OS::arguments();
-
-	//Init console
-	MUtils::Terminal::setup(arguments, MUTILS_DEBUG || lamexp_version_demo());
 
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End v%d.%02d %s (Build #%03d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build());
@@ -84,6 +79,9 @@ static int lamexp_main(int argc, char* argv[])
 		qWarning("---------------------------------------------------------\n");
 	}
 	
+	//Get CLI arguments
+	const QStringList &arguments = MUtils::OS::arguments();
+
 	//Enumerate CLI arguments
 	qDebug("Command-Line Arguments:");
 	for(int i = 0; i < arguments.count(); i++)
@@ -103,6 +101,7 @@ static int lamexp_main(int argc, char* argv[])
 	//Initialize Qt
 	if(!lamexp_init_qt(argc, argv))
 	{
+		lamexp_finalization();
 		return -1;
 	}
 
@@ -132,10 +131,12 @@ static int lamexp_main(int argc, char* argv[])
 				messageBox.exec();
 				messageProducerThread->wait();
 				MUTILS_DELETE(messageProducerThread);
+				lamexp_finalization();
 				return -1;
 			}
 			MUTILS_DELETE(messageProducerThread);
 		}
+		lamexp_finalization();
 		return 0;
 	}
 
@@ -144,6 +145,7 @@ static int lamexp_main(int argc, char* argv[])
 	{
 		if(!arguments[i].compare("--kill", Qt::CaseInsensitive) || !arguments[i].compare("--force-kill", Qt::CaseInsensitive))
 		{
+			lamexp_finalization();
 			return 0;
 		}
 	}
@@ -217,6 +219,7 @@ static int lamexp_main(int argc, char* argv[])
 	}
 
 	//Terminate
+	lamexp_finalization();
 	return iResult;
 }
 
@@ -224,58 +227,7 @@ static int lamexp_main(int argc, char* argv[])
 // Applicaton entry point
 ///////////////////////////////////////////////////////////////////////////////
 
-static int _main(int argc, char* argv[])
-{
-	if(MUTILS_DEBUG)
-	{
-		int iResult = -1;
-		qInstallMsgHandler(lamexp_message_handler);
-		iResult = lamexp_main(argc, argv);
-		lamexp_finalization();
-		return iResult;
-	}
-	else
-	{
-		int iResult = -1;
-		try
-		{
-			qInstallMsgHandler(lamexp_message_handler);
-			iResult = lamexp_main(argc, argv);
-			lamexp_finalization();
-		}
-		catch(const std::exception &error)
-		{
-			PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
-			MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
-		}
-		catch(...)
-		{
-			PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
-			MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
-		}
-		return iResult;
-	}
-}
-
 int main(int argc, char* argv[])
 {
-	if(MUTILS_DEBUG)
-	{
-		int exit_code = -1;
-		LAMEXP_MEMORY_CHECK(_main, exit_code, argc, argv);
-		return exit_code;
-	}
-	else
-	{
-		__try
-		{
-			lamexp_init_error_handlers();
-			return _main(argc, argv);
-		}
-		__except(1)
-		{
-			PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnhandeled structured exception error!\n");
-			MUtils::OS::fatal_exit(L"Unhandeled structured exception error, application will exit!");
-		}
-	}
+	return MUtils::Startup::startup(argc, argv, lamexp_main);
 }

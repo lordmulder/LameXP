@@ -191,72 +191,11 @@ bool lamexp_detect_wine(void)
 }
 
 /*
- * Qt message handler
- */
-void lamexp_message_handler(QtMsgType type, const char *msg)
-{
-	if((!msg) || (!(msg[0])))
-	{
-		return;
-	}
-
-	MUtils::Terminal::write(type, msg);
-
-	if((type == QtCriticalMsg) || (type == QtFatalMsg))
-	{
-		MUtils::OS::fatal_exit(MUTILS_WCHR(QString::fromUtf8(msg)));
-	}
-}
-
-/*
- * Invalid parameters handler
- */
-static void lamexp_invalid_param_handler(const wchar_t* exp, const wchar_t* fun, const wchar_t* fil, unsigned int, uintptr_t)
-{
-	MUtils::OS::fatal_exit(L"Invalid parameter handler invoked, application will exit!");
-}
-
-/*
- * Signal handler
- */
-static void lamexp_signal_handler(int signal_num)
-{
-	signal(signal_num, lamexp_signal_handler);
-	MUtils::OS::fatal_exit(L"Signal handler invoked, application will exit!");
-}
-
-/*
- * Global exception handler
- */
-static LONG WINAPI lamexp_exception_handler(struct _EXCEPTION_POINTERS *ExceptionInfo)
-{
-	MUtils::OS::fatal_exit(L"Unhandeled exception handler invoked, application will exit!");
-	return LONG_MAX;
-}
-
-/*
- * Initialize error handlers
- */
-void lamexp_init_error_handlers(void)
-{
-	SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
-	SetUnhandledExceptionFilter(lamexp_exception_handler);
-	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
-	_set_invalid_parameter_handler(lamexp_invalid_param_handler);
-	
-	static const int signal_num[6] = { SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM };
-
-	for(size_t i = 0; i < 6; i++)
-	{
-		signal(signal_num[i], lamexp_signal_handler);
-	}
-}
-
-/*
  * Check for debugger (detect routine)
  */
 static __forceinline bool lamexp_check_for_debugger(void)
 {
+	return false;
 	__try
 	{
 		CloseHandle((HANDLE)((DWORD_PTR)-3));
