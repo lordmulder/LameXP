@@ -160,7 +160,7 @@ const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
  */
 static __forceinline bool lamexp_check_for_debugger(void)
 {
-	return false;
+	return false; //FIXME !!!
 	__try
 	{
 		CloseHandle((HANDLE)((DWORD_PTR)-3));
@@ -1152,10 +1152,6 @@ extern "C" void _lamexp_global_init_win32(void)
 
 extern "C" void _lamexp_global_free_win32(void)
 {
-	//Destroy Qt application object
-	QApplication *application = dynamic_cast<QApplication*>(QApplication::instance());
-	MUTILS_DELETE(application);
-
 	//Release DWM API
 	g_lamexp_dwmapi.dwmIsCompositionEnabled = NULL;
 	g_lamexp_dwmapi.dwmExtendFrameIntoClientArea = NULL;
