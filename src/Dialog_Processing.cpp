@@ -46,6 +46,7 @@
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/GUI.h>
 #include <MUtils/CPUFeatures.h>
 
 //Qt
@@ -445,11 +446,11 @@ bool ProcessingDialog::event(QEvent *e)
 {
 	switch(e->type())
 	{
-	case lamexp_event_queryendsession:
+	case MUtils::GUI::USER_EVENT_QUERYENDSESSION:
 		qWarning("System is shutting down, preparing to abort...");
 		if(!m_userAborted) abortEncoding(true);
 		return true;
-	case lamexp_event_endsession:
+	case MUtils::GUI::USER_EVENT_ENDSESSION:
 		qWarning("System is shutting down, encoding will be aborted now...");
 		if(isVisible())
 		{

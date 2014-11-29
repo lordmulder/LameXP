@@ -301,41 +301,6 @@ const QIcon &lamexp_app_icon(void)
 	return *g_lamexp_app_icon.appIcon;
 }
 
-/*
- * Broadcast event to all windows
- */
-bool lamexp_broadcast(int eventType, bool onlyToVisible)
-{
-	if(QApplication *app = dynamic_cast<QApplication*>(QApplication::instance()))
-	{
-		qDebug("Broadcasting %d", eventType);
-		
-		bool allOk = true;
-		QEvent poEvent(static_cast<QEvent::Type>(eventType));
-		QWidgetList list = app->topLevelWidgets();
-
-		while(!list.isEmpty())
-		{
-			QWidget *widget = list.takeFirst();
-			if(!onlyToVisible || widget->isVisible())
-			{
-				if(!app->sendEvent(widget, &poEvent))
-				{
-					allOk = false;
-				}
-			}
-		}
-
-		qDebug("Broadcast %d done (%s)", eventType, (allOk ? "OK" : "Stopped"));
-		return allOk;
-	}
-	else
-	{
-		qWarning("Broadcast failed, could not get QApplication instance!");
-		return false;
-	}
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////////////////////////////////////////////

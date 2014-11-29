@@ -264,7 +264,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	//Hack to disable x64 on Wine, as x64 binaries won't run under Wine (tested with Wine 1.4 under Ubuntu 12.04 x64)
 	if(cpuSupport & CPU_TYPE_X64_ALL)
 	{
-		if(lamexp_detect_wine())
+		if(MUtils::OS::running_on_wine())
 		{
 			qWarning("Running under Wine on a 64-Bit system. Going to disable all x64 support!\n");
 			cpuSupport = (cpuSupport == CPU_TYPE_X64_SSE) ? CPU_TYPE_X86_SSE : CPU_TYPE_X86_GEN;

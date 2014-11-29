@@ -50,6 +50,7 @@
 //Mutils includes
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/GUI.h>
 #include <MUtils/Version.h>
 
 //Qt includes
@@ -1240,12 +1241,12 @@ bool MainWindow::event(QEvent *e)
 {
 	switch(e->type())
 	{
-	case lamexp_event_queryendsession:
+	case MUtils::GUI::USER_EVENT_QUERYENDSESSION:
 		qWarning("System is shutting down, main window prepares to close...");
 		if(BANNER_VISIBLE) m_banner->close();
 		if(m_delayedFileTimer->isActive()) m_delayedFileTimer->stop();
 		return true;
-	case lamexp_event_endsession:
+	case MUtils::GUI::USER_EVENT_ENDSESSION:
 		qWarning("System is shutting down, main window will close now...");
 		if(isVisible())
 		{

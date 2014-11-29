@@ -45,15 +45,6 @@ extern const char* LAMEXP_DEFAULT_TRANSLATION;
 // TYPE DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-//LameXP user-defined events
-typedef enum
-{
-	lamexp_event = 1000,           /*QEvent::User*/
-	lamexp_event_queryendsession = lamexp_event + 666,
-	lamexp_event_endsession      = lamexp_event + 667
-}
-lamexp_event_t;
-
 //Beep types
 typedef enum
 {
@@ -96,7 +87,6 @@ void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned in
 bool lamexp_block_window_move(void *message);
 bool lamexp_bring_process_to_front(const unsigned long pid);
 bool lamexp_bring_to_front(const QWidget *win);
-bool lamexp_broadcast(int eventType, bool onlyToVisible);
 bool lamexp_change_process_priority(const int priority);
 bool lamexp_change_process_priority(void *hProcess, const int priority);
 bool lamexp_change_process_priority(const QProcess *proc, const int priority);
@@ -108,7 +98,6 @@ const QString lamexp_clean_filepath(const QString &str);
 unsigned __int64 lamexp_current_file_time(void);
 void lamexp_dbg_dbg_output_string(const char* format, ...);
 unsigned long lamexp_dbg_private_bytes(void);
-bool lamexp_detect_wine(void);
 bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const bool explore = false);
 bool lamexp_exec_shell(const QWidget *win, const QString &url, const QString &parameters, const QString &directory, const bool explore = false);
@@ -116,7 +105,6 @@ void lamexp_finalization(void);
 unsigned __int64 lamexp_free_diskspace(const QString &path, bool *ok = NULL);
 void lamexp_free_window_icon(lamexp_icon_t *icon);
 int lamexp_init_ipc(void);
-bool lamexp_init_qt(int argc, char* argv[]);
 bool lamexp_install_translator(const QString &language);
 bool lamexp_install_translator_from_file(const QString &qmFile);
 void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);

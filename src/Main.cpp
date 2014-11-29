@@ -99,11 +99,19 @@ static int lamexp_main(int &argc, char **argv)
 	qDebug(" Number of CPU's  :  %d\n", cpuFeatures.count);
 
 	//Initialize Qt
-	if(!lamexp_init_qt(argc, argv))
+	if(!MUtils::Startup::init_qt(argc, argv, QLatin1String("LameXP - Audio Encoder Front-End")))
 	{
 		lamexp_finalization();
 		return -1;
 	}
+
+	//Initialize application
+	MUtils::Terminal::set_icon(QIcon(":/icons/sound.png"));
+	qApp->setWindowIcon(lamexp_app_icon());
+	qApp->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
+
+	//Add the default translations
+	lamexp_translation_init();
 
 	//Check for expiration
 	if(lamexp_version_demo())

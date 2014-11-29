@@ -144,9 +144,6 @@ static struct
 }
 g_lamexp_sounds;
 
-//Image formats
-static const char *g_lamexp_imageformats[] = {"bmp", "png", "jpg", "gif", "ico", "xpm", NULL}; //"svg"
-
 //Main thread ID
 static const DWORD g_main_thread_id = GetCurrentThreadId();
 
@@ -157,38 +154,6 @@ const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
-
-/*
- * Check if we are running under wine
- */
-bool lamexp_detect_wine(void)
-{
-	QReadLocker readLock(&g_lamexp_wine.lock);
-
-	//Already initialized?
-	if(g_lamexp_wine.bInitialized)
-	{
-		return g_lamexp_wine.bIsWine;
-	}
-	
-	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_wine.lock);
-
-	if(!g_lamexp_wine.bInitialized)
-	{
-		g_lamexp_wine.bIsWine = false;
-		QLibrary ntdll("ntdll.dll");
-		if(ntdll.load())
-		{
-			if(ntdll.resolve("wine_nt_to_unix_file_name") != NULL) g_lamexp_wine.bIsWine = true;
-			if(ntdll.resolve("wine_get_version")          != NULL) g_lamexp_wine.bIsWine = true;
-			ntdll.unload();
-		}
-		g_lamexp_wine.bInitialized = true;
-	}
-
-	return g_lamexp_wine.bIsWine;
-}
 
 /*
  * Check for debugger (detect routine)
@@ -245,94 +210,6 @@ static HANDLE lamexp_debug_thread_init()
 }
 
 /*
- * Qt event filter
- */
-static bool lamexp_event_filter(void *message, long *result)
-{ 
-	if((!(MUTILS_DEBUG)) && lamexp_check_for_debugger())
-	{
-		MUtils::OS::fatal_exit(L"Not a debug build. Please unload debugger and try again!");
-	}
-	
-	switch(reinterpret_cast<MSG*>(message)->message)
-	{
-	case WM_QUERYENDSESSION:
-		qWarning("WM_QUERYENDSESSION message received!");
-		*result = lamexp_broadcast(lamexp_event_queryendsession, false) ? TRUE : FALSE;
-		return true;
-	case WM_ENDSESSION:
-		qWarning("WM_ENDSESSION message received!");
-		if(reinterpret_cast<MSG*>(message)->wParam == TRUE)
-		{
-			lamexp_broadcast(lamexp_event_endsession, false);
-			if(QApplication *app = reinterpret_cast<QApplication*>(QApplication::instance()))
-			{
-				app->closeAllWindows();
-				app->quit();
-			}
-			lamexp_finalization();
-			exit(1);
-		}
-		*result = 0;
-		return true;
-	default:
-		/*ignore this message and let Qt handle it*/
-		return false;
-	}
-}
-
-/*
- * Check for process elevation
- */
-static bool lamexp_process_is_elevated(bool *bIsUacEnabled = NULL)
-{
-	bool bIsProcessElevated = false;
-	if(bIsUacEnabled) *bIsUacEnabled = false;
-	HANDLE hToken = NULL;
-	
-	if(OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
-	{
-		TOKEN_ELEVATION_TYPE tokenElevationType;
-		DWORD returnLength;
-		if(GetTokenInformation(hToken, TokenElevationType, &tokenElevationType, sizeof(TOKEN_ELEVATION_TYPE), &returnLength))
-		{
-			if(returnLength == sizeof(TOKEN_ELEVATION_TYPE))
-			{
-				switch(tokenElevationType)
-				{
-				case TokenElevationTypeDefault:
-					qDebug("Process token elevation type: Default -> UAC is disabled.\n");
-					break;
-				case TokenElevationTypeFull:
-					qWarning("Process token elevation type: Full -> potential security risk!\n");
-					bIsProcessElevated = true;
-					if(bIsUacEnabled) *bIsUacEnabled = true;
-					break;
-				case TokenElevationTypeLimited:
-					qDebug("Process token elevation type: Limited -> not elevated.\n");
-					if(bIsUacEnabled) *bIsUacEnabled = true;
-					break;
-				default:
-					qWarning("Unknown tokenElevationType value: %d", tokenElevationType);
-					break;
-				}
-			}
-			else
-			{
-				qWarning("GetTokenInformation() return an unexpected size!");
-			}
-		}
-		CloseHandle(hToken);
-	}
-	else
-	{
-		qWarning("Failed to open process token!");
-	}
-
-	return bIsProcessElevated;
-}
-
-/*
  * Convert QIcon to HICON -> caller is responsible for destroying the HICON!
  */
 static HICON lamexp_qicon2hicon(const QIcon &icon, const int w, const int h)
@@ -346,188 +223,6 @@ static HICON lamexp_qicon2hicon(const QIcon &icon, const int w, const int h)
 		}
 	}
 	return NULL;
-}
-
-/*
- * Initialize Qt framework
- */
-bool lamexp_init_qt(int argc, char* argv[])
-{
-	static bool qt_initialized = false;
-	typedef BOOL (WINAPI *SetDllDirectoryProc)(WCHAR *lpPathName);
-	const QStringList &arguments = MUtils::OS::arguments();
-
-	//Don't initialized again, if done already
-	if(qt_initialized)
-	{
-		return true;
-	}
-
-	//Secure DLL loading
-	QLibrary kernel32("kernel32.dll");
-	if(kernel32.load())
-	{
-		SetDllDirectoryProc pSetDllDirectory = (SetDllDirectoryProc) kernel32.resolve("SetDllDirectoryW");
-		if(pSetDllDirectory != NULL) pSetDllDirectory(L"");
-	}
-
-	//Extract executable name from argv[] array
-	QString executableName = QLatin1String("LameXP.exe");
-	if(arguments.count() > 0)
-	{
-		static const char *delimiters = "\\/:?";
-		executableName = arguments[0].trimmed();
-		for(int i = 0; delimiters[i]; i++)
-		{
-			int temp = executableName.lastIndexOf(QChar(delimiters[i]));
-			if(temp >= 0) executableName = executableName.mid(temp + 1);
-		}
-		executableName = executableName.trimmed();
-		if(executableName.isEmpty())
-		{
-			executableName = QLatin1String("LameXP.exe");
-		}
-	}
-
-	//Check Qt version
-#ifdef QT_BUILD_KEY
-	qDebug("Using Qt v%s [%s], %s, %s", qVersion(), QLibraryInfo::buildDate().toString(Qt::ISODate).toLatin1().constData(), (qSharedBuild() ? "DLL" : "Static"), QLibraryInfo::buildKey().toLatin1().constData());
-	qDebug("Compiled with Qt v%s [%s], %s\n", QT_VERSION_STR, QT_PACKAGEDATE_STR, QT_BUILD_KEY);
-	if(_stricmp(qVersion(), QT_VERSION_STR))
-	{
-		qFatal("%s", QApplication::tr("Executable '%1' requires Qt v%2, but found Qt v%3.").arg(executableName, QString::fromLatin1(QT_VERSION_STR), QString::fromLatin1(qVersion())).toLatin1().constData());
-		return false;
-	}
-	if(QLibraryInfo::buildKey().compare(QString::fromLatin1(QT_BUILD_KEY), Qt::CaseInsensitive))
-	{
-		qFatal("%s", QApplication::tr("Executable '%1' was built for Qt '%2', but found Qt '%3'.").arg(executableName, QString::fromLatin1(QT_BUILD_KEY), QLibraryInfo::buildKey()).toLatin1().constData());
-		return false;
-	}
-#else
-	qDebug("Using Qt v%s [%s], %s", qVersion(), QLibraryInfo::buildDate().toString(Qt::ISODate).toLatin1().constData(), (qSharedBuild() ? "DLL" : "Static"));
-	qDebug("Compiled with Qt v%s [%s]\n", QT_VERSION_STR, QT_PACKAGEDATE_STR);
-#endif
-
-	//Check the Windows version
-	
-	const MUtils::OS::Version::os_version_t &osVersion = MUtils::OS::os_version();
-	if((osVersion.type != MUtils::OS::Version::OS_WINDOWS) || (osVersion < MUtils::OS::Version::WINDOWS_WINXP))
-	{
-		qFatal("%s", QApplication::tr("Executable '%1' requires Windows XP or later.").arg(executableName).toLatin1().constData());
-	}
-
-	//Check whether we are running on a supported Windows version
-	if(const char *const friendlyName = MUtils::OS::os_friendly_name(osVersion))
-	{
-		qDebug("Running on %s (NT v%u.%u).\n", friendlyName, osVersion.versionMajor, osVersion.versionMinor);
-	}
-	else
-	{
-		const QString message = QString().sprintf("Running on an unknown WindowsNT-based system (v%u.%u).", osVersion.versionMajor, osVersion.versionMinor);
-		qWarning("%s\n", MUTILS_UTF8(message));
-		MUtils::OS::system_message_wrn(MUTILS_WCHR(message), L"LameXP");
-	}
-
-	//Check for compat mode
-	if(osVersion.overrideFlag && (osVersion <= MUtils::OS::Version::WINDOWS_WN100))
-	{
-		qWarning("Windows compatibility mode detected!");
-		if(!arguments.contains("--ignore-compat-mode", Qt::CaseInsensitive))
-		{
-			qFatal("%s", QApplication::tr("Executable '%1' doesn't support Windows compatibility mode.").arg(executableName).toLatin1().constData());
-			return false;
-		}
-	}
-
-	//Check for Wine
-	if(lamexp_detect_wine())
-	{
-		qWarning("It appears we are running under Wine, unexpected things might happen!\n");
-	}
-
-	//Set text Codec for locale
-	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
-
-	//Create Qt application instance
-	QApplication *application = new QApplication(argc, argv);
-
-	//Load plugins from application directory
-	QCoreApplication::setLibraryPaths(QStringList() << QApplication::applicationDirPath());
-	qDebug("Library Path:\n%s\n", MUTILS_UTF8(QApplication::libraryPaths().first()));
-
-	//Set application properties
-	application->setApplicationName("LameXP - Audio Encoder Front-End");
-	application->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
-	application->setOrganizationName("LoRd_MuldeR");
-	application->setOrganizationDomain("mulder.at.gg");
-	application->setWindowIcon(lamexp_app_icon());
-	application->setEventFilter(lamexp_event_filter);
-
-	//Check for supported image formats
-	QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
-	for(int i = 0; g_lamexp_imageformats[i]; i++)
-	{
-		if(!supportedFormats.contains(g_lamexp_imageformats[i]))
-		{
-			qFatal("Qt initialization error: QImageIOHandler for '%s' missing!", g_lamexp_imageformats[i]);
-			return false;
-		}
-	}
-	
-	//Enable larger/smaller font size
-	double fontScaleFactor = 1.0;
-	if(arguments.contains("--huge-font",  Qt::CaseInsensitive)) fontScaleFactor = 1.500;
-	if(arguments.contains("--big-font",   Qt::CaseInsensitive)) fontScaleFactor = 1.250;
-	if(arguments.contains("--small-font", Qt::CaseInsensitive)) fontScaleFactor = 0.875;
-	if(arguments.contains("--tiny-font",  Qt::CaseInsensitive)) fontScaleFactor = 0.750;
-	if(!qFuzzyCompare(fontScaleFactor, 1.0))
-	{
-		qWarning("Application font scale factor set to: %.3f\n", fontScaleFactor);
-		QFont appFont = application->font();
-		appFont.setPointSizeF(appFont.pointSizeF() * fontScaleFactor);
-		application->setFont(appFont);
-	}
-
-	//Add the default translations
-	lamexp_translation_init();
-
-	//Check for process elevation
-	if(lamexp_process_is_elevated() && (!lamexp_detect_wine()))
-	{
-		QMessageBox messageBox(QMessageBox::Warning, "LameXP", "<nobr>LameXP was started with 'elevated' rights, altough LameXP does not need these rights.<br>Running an applications with unnecessary rights is a potential security risk!</nobr>", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
-		messageBox.addButton("Quit Program (Recommended)", QMessageBox::NoRole);
-		messageBox.addButton("Ignore", QMessageBox::NoRole);
-		if(messageBox.exec() == 0)
-		{
-			return false;
-		}
-	}
-
-	//Update console icon, if a console is attached
-#if 0 //FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!! FIXME !!!!
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-	if(g_lamexp_console_attached && (!lamexp_detect_wine()))
-	{
-		QLibrary kernel32("kernel32.dll");
-		if(kernel32.load())
-		{
-			typedef DWORD (__stdcall *SetConsoleIconFun)(HICON);
-			if(SetConsoleIconFun SetConsoleIconPtr = (SetConsoleIconFun) kernel32.resolve("SetConsoleIcon"))
-			{
-				if(HICON hIcon = lamexp_qicon2hicon(QIcon(":/icons/sound.png"), 16, 16))
-				{
-					SetConsoleIconPtr(hIcon);
-					DestroyIcon(hIcon);
-				}
-			}
-		}
-	}
-#endif
-#endif
-
-	//Done
-	qt_initialized = true;
-	return true;
 }
 
 /*
@@ -991,20 +686,6 @@ bool lamexp_bring_process_to_front(const unsigned long pid)
 }
 
 /*
- * Check the network connectivity status
- */
-int lamexp_network_status(void)
-{
-	DWORD dwFlags;
-	const BOOL ret = IsNetworkAlive(&dwFlags);
-	if(GetLastError() == 0)
-	{
-		return (ret != FALSE) ? lamexp_network_yes : lamexp_network_non;
-	}
-	return lamexp_network_err;
-}
-
-/*
  * Retrun the process ID of the given QProcess
  */
 unsigned long lamexp_process_id(const QProcess *proc)
@@ -1370,7 +1051,7 @@ bool lamexp_user_is_admin(void)
 	bool isAdmin = false;
 
 	//Check for process elevation and UAC support first!
-	if(lamexp_process_is_elevated(&isAdmin))
+	if(MUtils::OS::is_elevated(&isAdmin))
 	{
 		qWarning("Process is elevated -> user is admin!");
 		return true;
