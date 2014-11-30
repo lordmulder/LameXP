@@ -1509,8 +1509,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
-               <height>1750</height>
+               <width>613</width>
+               <height>1759</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -2982,7 +2982,7 @@
                         <number>1</number>
                        </property>
                        <property name="maximum">
-                        <number>16</number>
+                        <number>32</number>
                        </property>
                        <property name="pageStep">
                         <number>1</number>

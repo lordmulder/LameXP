@@ -332,7 +332,7 @@ void ProcessThread::processFile()
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
 	}
 
-	MUtils::OS::sleep_ms(125);
+	MUtils::OS::sleep_ms(25);
 
 	//Report result
 	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
@@ -462,7 +462,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 				{
 					break;
 				}
-				MUtils::OS::sleep_ms(125);
+				MUtils::OS::sleep_ms(1);
 			}
 		}
 		if(QFileInfo(outFileName).exists())

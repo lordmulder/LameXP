@@ -76,7 +76,7 @@
 ////////////////////////////////////////////////////////////
 
 //Maximum number of parallel instances
-#define MAX_INSTANCES 16U
+#define MAX_INSTANCES 32U
 
 //Function to calculate the number of instances
 static int cores2instances(int cores);
@@ -578,7 +578,7 @@ void ProcessingDialog::initNextJob(void)
 		startNextJob();
 		if(--m_initThreads > 0)
 		{
-			QTimer::singleShot(100, this, SLOT(initNextJob()));
+			QTimer::singleShot(32, this, SLOT(initNextJob()));
 		}
 	}
 }
