@@ -171,7 +171,7 @@ bool lamexp_portable_mode(void)
 
 extern "C" void _lamexp_global_init_versn(void)
 {
-	LAMEXP_ZERO_MEMORY(g_lamexp_portable);
+	MUTILS_ZERO_MEMORY(g_lamexp_portable);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

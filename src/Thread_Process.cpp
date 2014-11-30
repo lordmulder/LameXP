@@ -133,7 +133,7 @@ bool ProcessThread::start(QThreadPool *pool)
 	//Make sure object was initialized correctly
 	if(m_initialized < 0)
 	{
-		THROW("Object not initialized yet!");
+		MUTILS_THROW("Object not initialized yet!");
 	}
 
 	if(m_initialized < 1)
@@ -187,12 +187,12 @@ void ProcessThread::run()
 	}
 	catch(const std::exception &error)
 	{
-		PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
+		MUTILS_PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
 		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 	catch(...)
 	{
-		PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
+		MUTILS_PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
 		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 }
@@ -205,7 +205,7 @@ void ProcessThread::processFile()
 	//Make sure object was initialized correctly
 	if(m_initialized < 1)
 	{
-		THROW("Object not initialized yet!");
+		MUTILS_THROW("Object not initialized yet!");
 	}
 
 	QString sourceFile = m_audioFile.filePath();
@@ -332,7 +332,7 @@ void ProcessThread::processFile()
 		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
 	}
 
-	lamexp_sleep(125);
+	MUtils::OS::sleep_ms(125);
 
 	//Report result
 	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
@@ -462,7 +462,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 				{
 					break;
 				}
-				lamexp_sleep(125);
+				MUtils::OS::sleep_ms(125);
 			}
 		}
 		if(QFileInfo(outFileName).exists())

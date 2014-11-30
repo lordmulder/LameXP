@@ -48,7 +48,7 @@ class AC3EncoderInfo : public AbstractEncoderInfo
 			return false;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -66,7 +66,7 @@ class AC3EncoderInfo : public AbstractEncoderInfo
 			return 19;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -82,7 +82,7 @@ class AC3EncoderInfo : public AbstractEncoderInfo
 			return g_ac3BitratesLUT[qBound(0, index, 18)];
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -98,7 +98,7 @@ class AC3EncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -120,7 +120,7 @@ AC3Encoder::AC3Encoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing FLAC encoder. Tool 'aften.exe' is not registred!");
+		MUTILS_THROW("Error initializing FLAC encoder. Tool 'aften.exe' is not registred!");
 	}
 
 	m_configAudioCodingMode = 0;
@@ -147,7 +147,7 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		args << "-b" << QString::number(g_ac3BitratesLUT[qBound(0, m_configBitrate, 18)]);
 		break;
 	default:
-		THROW("Bad rate-control mode!");
+		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 

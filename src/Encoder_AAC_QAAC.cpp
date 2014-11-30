@@ -60,7 +60,7 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 			return true;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -76,7 +76,7 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 			return 52;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -92,7 +92,7 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 			return qBound(8, index2bitrate(index), 576);
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -110,7 +110,7 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -134,7 +134,7 @@ QAACEncoder::QAACEncoder(void)
 {
 	if(m_binary_qaac.isEmpty() || m_binary_soxr.isEmpty() || m_binary_soxc.isEmpty())
 	{
-		THROW("Error initializing QAAC. Tool 'qaac.exe' is not registred!");
+		MUTILS_THROW("Error initializing QAAC. Tool 'qaac.exe' is not registred!");
 	}
 
 	m_configProfile = 0;
@@ -178,7 +178,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		args << "--tvbr" << QString::number(g_qaacVBRQualityLUT[qBound(0, m_configBitrate , 14)]);
 		break;
 	default:
-		THROW("Bad rate-control mode!");
+		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 

@@ -51,6 +51,7 @@
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
 #include <MUtils/GUI.h>
+#include <MUtils/Exception.h>
 #include <MUtils/Version.h>
 
 //Qt includes
@@ -3342,7 +3343,7 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 				}
 				else
 				{
-					THROW("Oups, this is not supposed to happen!");
+					MUTILS_THROW("Oups, this is not supposed to happen!");
 				}
 			}
 		}
@@ -3421,7 +3422,7 @@ void MainWindow::updateEncoder(int id)
 	if(ui->radioButtonModeQuality->isEnabled())             ui->radioButtonModeQuality->setChecked(true);
 	else if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true);
 	else if(ui->radioButtonConstBitrate->isEnabled())       ui->radioButtonConstBitrate->setChecked(true);
-	else THROW("It appears that the encoder does not support *any* RC mode!");
+	else MUTILS_THROW("It appears that the encoder does not support *any* RC mode!");
 
 	//Apply current RC mode
 	const int currentRCMode = EncoderRegistry::loadEncoderMode(m_settings, id);
@@ -3430,7 +3431,7 @@ void MainWindow::updateEncoder(int id)
 		case SettingsModel::VBRMode: if(ui->radioButtonModeQuality->isEnabled())        ui->radioButtonModeQuality->setChecked(true);        break;
 		case SettingsModel::ABRMode: if(ui->radioButtonModeAverageBitrate->isEnabled()) ui->radioButtonModeAverageBitrate->setChecked(true); break;
 		case SettingsModel::CBRMode: if(ui->radioButtonConstBitrate->isEnabled())       ui->radioButtonConstBitrate->setChecked(true);       break;
-		default: THROW("updateEncoder(): Unknown rc-mode encountered!");
+		default: MUTILS_THROW("updateEncoder(): Unknown rc-mode encountered!");
 	}
 
 	//Display encoder description
@@ -3551,7 +3552,7 @@ void MainWindow::updateBitrate(int value)
 		ui->labelBitrate->setText(tr("Uncompressed"));
 		break;
 	default:
-		THROW("Unknown display value type encountered!");
+		MUTILS_THROW("Unknown display value type encountered!");
 		break;
 	}
 }

@@ -22,8 +22,13 @@
 
 #include "Decoder_WavPack.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +39,7 @@ WavPackDecoder::WavPackDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing WavPack decoder. Tool 'wvunpack.exe' is not registred!");
+		MUTILS_THROW("Error initializing WavPack decoder. Tool 'wvunpack.exe' is not registred!");
 	}
 }
 

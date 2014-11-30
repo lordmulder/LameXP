@@ -22,8 +22,13 @@
 
 #include "Decoder_Musepack.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -35,7 +40,7 @@ MusepackDecoder::MusepackDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Musepack decoder. Tool 'mpcdec.exe' is not registred!");
+		MUTILS_THROW("Error initializing Musepack decoder. Tool 'mpcdec.exe' is not registred!");
 	}
 }
 

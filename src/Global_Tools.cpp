@@ -38,6 +38,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/Exception.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
@@ -89,7 +90,7 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned in
 
 	if(g_lamexp_tools.registry->contains(toolName.toLower()))
 	{
-		THROW("lamexp_register_tool: Tool is already registered!");
+		MUTILS_THROW("lamexp_register_tool: Tool is already registered!");
 	}
 
 	g_lamexp_tools.registry->insert(toolName.toLower(), file);
@@ -352,9 +353,9 @@ bool lamexp_install_translator_from_file(const QString &qmFile)
 
 extern "C" void _lamexp_global_init_tools(void)
 {
-	LAMEXP_ZERO_MEMORY(g_lamexp_tools);
-	LAMEXP_ZERO_MEMORY(g_lamexp_currentTranslator);
-	LAMEXP_ZERO_MEMORY(g_lamexp_translation);
+	MUTILS_ZERO_MEMORY(g_lamexp_tools);
+	MUTILS_ZERO_MEMORY(g_lamexp_currentTranslator);
+	MUTILS_ZERO_MEMORY(g_lamexp_translation);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

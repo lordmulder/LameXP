@@ -22,8 +22,13 @@
 
 #include "Decoder_AC3.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +39,7 @@ AC3Decoder::AC3Decoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Valib decoder. Tool 'valdec.exe' is not registred!");
+		MUTILS_THROW("Error initializing Valib decoder. Tool 'valdec.exe' is not registred!");
 	}
 }
 

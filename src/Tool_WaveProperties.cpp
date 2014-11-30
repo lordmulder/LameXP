@@ -22,9 +22,14 @@
 
 #include "Tool_WaveProperties.h"
 
+//Internal
 #include "Global.h"
 #include "Model_AudioFile.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 
@@ -34,7 +39,7 @@ WaveProperties::WaveProperties(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing MP3 encoder. Tool 'lame.exe' is not registred!");
+		MUTILS_THROW("Error initializing MP3 encoder. Tool 'lame.exe' is not registred!");
 	}
 }
 

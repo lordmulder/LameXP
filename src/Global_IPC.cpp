@@ -24,6 +24,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/Exception.h>
 
 //Qt includes
 #include <QSharedMemory>
@@ -192,7 +193,7 @@ void lamexp_ipc_send(unsigned int command, const char* message)
 
 	if(!g_lamexp_ipc_ptr.sharedmem || !g_lamexp_ipc_ptr.semaphore_read || !g_lamexp_ipc_ptr.semaphore_write || !g_lamexp_ipc_ptr.semaphore_read_mutex || !g_lamexp_ipc_ptr.semaphore_write_mutex)
 	{
-		THROW("Shared memory for IPC not initialized yet.");
+		MUTILS_THROW("Shared memory for IPC not initialized yet.");
 	}
 
 	lamexp_ipc_data_t ipc_data;
@@ -229,7 +230,7 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 	
 	if(!g_lamexp_ipc_ptr.sharedmem || !g_lamexp_ipc_ptr.semaphore_read || !g_lamexp_ipc_ptr.semaphore_write || !g_lamexp_ipc_ptr.semaphore_read_mutex || !g_lamexp_ipc_ptr.semaphore_write_mutex)
 	{
-		THROW("Shared memory for IPC not initialized yet.");
+		MUTILS_THROW("Shared memory for IPC not initialized yet.");
 	}
 
 	lamexp_ipc_data_t ipc_data;
@@ -264,7 +265,7 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize)
 
 extern "C" void _lamexp_global_init_ipcom(void)
 {
-	LAMEXP_ZERO_MEMORY(g_lamexp_ipc_ptr);
+	MUTILS_ZERO_MEMORY(g_lamexp_ipc_ptr);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

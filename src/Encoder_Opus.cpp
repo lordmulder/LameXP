@@ -45,7 +45,7 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 			return true;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -59,7 +59,7 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 			return 32;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -73,7 +73,7 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 			return qBound(8, (index + 1) * 8, 256);
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -89,7 +89,7 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -111,7 +111,7 @@ OpusEncoder::OpusEncoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Opus encoder. Tool 'opusenc.exe' is not registred!");
+		MUTILS_THROW("Error initializing Opus encoder. Tool 'opusenc.exe' is not registred!");
 	}
 
 	m_configOptimizeFor = 0;
@@ -140,7 +140,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		args << "--hard-cbr";
 		break;
 	default:
-		THROW("Bad rate-control mode!");
+		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 

@@ -34,6 +34,7 @@
 //MUtils
 #include <MUtils/UpdateChecker.h>
 #include <MUtils/Version.h>
+#include <MUtils/Exception.h>
 
 //Qt includes
 #include <QClipboard>
@@ -47,18 +48,6 @@
 #include <QMessageBox>
 
 ///////////////////////////////////////////////////////////////////////////////
-
-/*
-template <class T>
-T DO_ASYNC(T (*functionPointer)())
-{
-	QFutureWatcher<T> watcher; QEventLoop loop;
-	QObject::connect(&watcher, SIGNAL(finished()), &loop, SLOT(quit()));
-	watcher.setFuture(QtConcurrent::run(functionPointer));
-	loop.exec(QEventLoop::ExcludeUserInputEvents);
-	return watcher.result();
-}
-*/
 
 #define SHOW_HINT(TEXT, ICON) do \
 { \
@@ -97,7 +86,7 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 {
 	if(m_binaryUpdater.isEmpty())
 	{
-		THROW("Tools not initialized correctly!");
+		MUTILS_THROW("Tools not initialized correctly!");
 	}
 
 	//Init the dialog, from the .ui file

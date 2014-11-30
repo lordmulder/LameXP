@@ -22,8 +22,13 @@
 
 #include "Filter_Normalize.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +39,7 @@ NormalizeFilter::NormalizeFilter(int peakVolume, int equalizationMode)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
+		MUTILS_THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
 	}
 
 	m_peakVolume = qMin(-50, qMax(-3200, peakVolume));

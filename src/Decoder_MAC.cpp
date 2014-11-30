@@ -22,8 +22,13 @@
 
 #include "Decoder_MAC.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +39,7 @@ MACDecoder::MACDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing MAC decoder. Tool 'mac.exe' is not registred!");
+		MUTILS_THROW("Error initializing MAC decoder. Tool 'mac.exe' is not registred!");
 	}
 }
 

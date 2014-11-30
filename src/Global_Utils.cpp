@@ -37,6 +37,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //CRT includes
 #include <time.h>
@@ -154,14 +155,14 @@ void lamexp_blink_window(QWidget *poWindow, unsigned int count, unsigned int del
 			{
 				poWindow->setWindowOpacity(x);
 				QApplication::processEvents();
-				lamexp_sleep(sleep);
+				MUtils::OS::sleep_ms(sleep);
 			}
 
 			for(double x = minOpac; x <= maxOpac; x += delOpac)
 			{
 				poWindow->setWindowOpacity(x);
 				QApplication::processEvents();
-				lamexp_sleep(sleep);
+				MUtils::OS::sleep_ms(sleep);
 			}
 		}
 
@@ -280,7 +281,7 @@ const QIcon &lamexp_app_icon(void)
 
 extern "C" void _lamexp_global_init_utils(void)
 {
-	LAMEXP_ZERO_MEMORY(g_lamexp_app_icon);
+	MUTILS_ZERO_MEMORY(g_lamexp_app_icon);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

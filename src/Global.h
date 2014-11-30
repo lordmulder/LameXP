@@ -129,7 +129,6 @@ lamexp_icon_t *lamexp_set_window_icon(QWidget *window, const QIcon &icon, const 
 bool lamexp_sheet_of_glass(QWidget *window);
 bool lamexp_sheet_of_glass_update(QWidget *window);
 bool lamexp_shutdown_computer(const QString &message, const unsigned long timeout = 30, const bool forceShutdown = true, const bool hibernate = false);
-void lamexp_sleep(const unsigned int delay);
 QColor lamexp_system_color(const int color_id);
 const char *lamexp_support_url(void);
 bool lamexp_themes_enabled(void);
@@ -160,50 +159,4 @@ const char *lamexp_website_url(void);
 // HELPER MACROS
 ///////////////////////////////////////////////////////////////////////////////
 
-#define LAMEXP_CLOSE(HANDLE) do { if(HANDLE != NULL && HANDLE != INVALID_HANDLE_VALUE) { CloseHandle(HANDLE); HANDLE = NULL; } } while(0)
-#define LAMEXP_MAKE_STRING_EX(X) #X
-#define LAMEXP_MAKE_STRING(X) LAMEXP_MAKE_STRING_EX(X)
-#define LAMEXP_SAFE_FREE(PTR) do { if(PTR) { free((void*) PTR); PTR = NULL; } } while(0)
-#define LAMEXP_ZERO_MEMORY(X) memset(&(X), 0, sizeof((X)))
 #define NOBR(STR) (QString("<nobr>%1</nobr>").arg((STR)).replace("-", "&minus;"))
-
-//Helper macro for throwing exceptions
-#define THROW(MESSAGE) do \
-{ \
-	throw std::runtime_error((MESSAGE)); \
-} \
-while(0)
-#define THROW_FMT(FORMAT, ...) do \
-{ \
-	char _error_msg[512]; \
-	_snprintf_s(_error_msg, 512, _TRUNCATE, (FORMAT), __VA_ARGS__); \
-	throw std::runtime_error(_error_msg); \
-} \
-while(0)
-#define PRINT_ERROR(X, ...) do \
-{ \
-	fflush(stdout); \
-	fprintf(stderr, (X), __VA_ARGS__); \
-	fflush(stderr); \
-} \
-while(0)
-
-//Memory check
-#if LAMEXP_DEBUG
-	#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
-	{ \
-		size_t _privateBytesBefore = lamexp_dbg_private_bytes(); \
-		RETV = FUNC(__VA_ARGS__); \
-		size_t _privateBytesLeak = (lamexp_dbg_private_bytes() - _privateBytesBefore) / 1024; \
-		if(_privateBytesLeak > 0) { \
-			lamexp_dbg_dbg_output_string("\nMemory leak: Lost %u KiloBytes of PrivateUsage memory!\n\n", _privateBytesLeak); \
-		} \
-	} \
-	while(0)
-#else
-	#define LAMEXP_MEMORY_CHECK(FUNC, RETV,  ...) do \
-	{ \
-		RETV = __noop(__VA_ARGS__); \
-	} \
-	while(0)
-#endif

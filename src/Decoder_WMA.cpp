@@ -22,8 +22,13 @@
 
 #include "Decoder_WMA.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -36,7 +41,7 @@ WMADecoder::WMADecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing WMA decoder. Tool 'wma2wav.exe' is not registred!");
+		MUTILS_THROW("Error initializing WMA decoder. Tool 'wma2wav.exe' is not registred!");
 	}
 }
 

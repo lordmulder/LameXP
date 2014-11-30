@@ -28,6 +28,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //Qt
 #include <QSettings>
@@ -543,7 +544,7 @@ QString SettingsModel::initDirectory(const QString &path) const
 		for(int i = 0; i < 32; i++)
 		{
 			if(QDir(path).mkpath(".")) break;
-			lamexp_sleep(1);
+			MUtils::OS::sleep_ms(1);
 		}
 	}
 

@@ -22,8 +22,13 @@
 
 #include "Decoder_Shorten.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -35,7 +40,7 @@ ShortenDecoder::ShortenDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Shorten decoder. Tool 'shorten.exe' is not registred!");
+		MUTILS_THROW("Error initializing Shorten decoder. Tool 'shorten.exe' is not registred!");
 	}
 }
 

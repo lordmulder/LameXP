@@ -30,6 +30,7 @@
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/Exception.h>
 
 //Qt
 #include <QFileInfo>
@@ -235,12 +236,12 @@ void InitializationThread::run(void)
 	}
 	catch(const std::exception &error)
 	{
-		PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
+		MUTILS_PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
 		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 	catch(...)
 	{
-		PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
+		MUTILS_PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
 		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 }
@@ -278,7 +279,7 @@ double InitializationThread::doInit(const size_t threadCount)
 		PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
 		PRINT_CPU_TYPE(CPU_TYPE_X64_GEN); break;
 		PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
-		default: THROW("CPU support undefined!");
+		default: MUTILS_THROW("CPU support undefined!");
 	}
 
 	//Allocate queues
@@ -462,7 +463,7 @@ void InitializationThread::runBenchmark(void)
 	
 	qFatal("Benchmark complete. Thanks and bye bye!");
 #else //ENABLE_BENCHMARK
-	THROW("Sorry, the benchmark is *not* available in this build!");
+	MUTILS_THROW("Sorry, the benchmark is *not* available in this build!");
 #endif //ENABLE_BENCHMARK
 }
 
@@ -472,7 +473,7 @@ void InitializationThread::runBenchmark(void)
 
 void InitializationThread::delay(void)
 {
-	lamexp_sleep(333);
+	MUtils::OS::sleep_ms(333);
 }
 
 void InitializationThread::initTranslations(void)
@@ -925,7 +926,7 @@ void InitializationThread::selfTest(void)
 			PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X64_GEN); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
-			default: THROW("CPU support undefined!");
+			default: MUTILS_THROW("CPU support undefined!");
 		}
 		unsigned int n = 0;
 		for(int i = 0; true; i++)

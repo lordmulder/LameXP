@@ -156,59 +156,6 @@ const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
 ///////////////////////////////////////////////////////////////////////////////
 
 /*
- * Check for debugger (detect routine)
- */
-static __forceinline bool lamexp_check_for_debugger(void)
-{
-	__try
-	{
-		CloseHandle((HANDLE)((DWORD_PTR)-3));
-	}
-	__except(1)
-	{
-		return true;
-	}
-
-	BOOL bHaveDebugger = FALSE;
-	if(CheckRemoteDebuggerPresent(GetCurrentProcess(), &bHaveDebugger))
-	{
-		if(bHaveDebugger) return true;
-	}
-
-	return IsDebuggerPresent();
-}
-
-/*
- * Check for debugger (thread proc)
- */
-static unsigned int __stdcall lamexp_debug_thread_proc(LPVOID lpParameter)
-{
-	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_LOWEST);
-	forever
-	{
-		if(lamexp_check_for_debugger())
-		{
-			MUtils::OS::fatal_exit(L"Not a debug build. Please unload debugger and try again!");
-			return 666;
-		}
-		lamexp_sleep(100);
-	}
-}
-
-/*
- * Check for debugger (startup routine)
- */
-static HANDLE lamexp_debug_thread_init()
-{
-	if(lamexp_check_for_debugger())
-	{
-		MUtils::OS::fatal_exit(L"Not a debug build. Please unload debugger and try again!");
-	}
-	const uintptr_t h = _beginthreadex(NULL, 0, lamexp_debug_thread_proc, NULL, 0, NULL);
-	return (HANDLE)(h^0xdeadbeef);
-}
-
-/*
  * Convert QIcon to HICON -> caller is responsible for destroying the HICON!
  */
 static HICON lamexp_qicon2hicon(const QIcon &icon, const int w, const int h)
@@ -1089,60 +1036,17 @@ static DWORD WINAPI lamexp_fatal_exit_helper(LPVOID lpParameter)
 	return 0;
 }
 
-/*
- * Initialize debug thread
- */
-static const HANDLE g_debug_thread1 = MUTILS_DEBUG ? NULL : lamexp_debug_thread_init();
-
-/*
- * Get number private bytes [debug only]
- */
-unsigned long lamexp_dbg_private_bytes(void)
-{
-#if LAMEXP_DEBUG
-	for(int i = 0; i < 8; i++) _heapmin();
-	PROCESS_MEMORY_COUNTERS_EX memoryCounters;
-	memoryCounters.cb = sizeof(PROCESS_MEMORY_COUNTERS_EX);
-	GetProcessMemoryInfo(GetCurrentProcess(), (PPROCESS_MEMORY_COUNTERS) &memoryCounters, sizeof(PROCESS_MEMORY_COUNTERS_EX));
-	return memoryCounters.PrivateUsage;
-#else
-	THROW("Cannot call this function in a non-debug build!");
-#endif //LAMEXP_DEBUG
-}
-
-/*
- * Output string to debugger [debug only]
- */
-void lamexp_dbg_dbg_output_string(const char* format, ...)
-{
-#if LAMEXP_DEBUG
-	char buffer[256];
-	va_list args;
-	va_start (args, format);
-	vsnprintf_s(buffer, 256, _TRUNCATE, format, args);
-	OutputDebugStringA(buffer);
-	va_end(args);
-#else
-	THROW("Cannot call this function in a non-debug build!");
-#endif //LAMEXP_DEBUG
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////////////////////////////////////////////
 
 extern "C" void _lamexp_global_init_win32(void)
 {
-	if((!MUTILS_DEBUG) && lamexp_check_for_debugger())
-	{
-		MUtils::OS::fatal_exit(L"Not a debug build. Please unload debugger and try again!");
-	}
-
 	//Zero *before* constructors are called
-	LAMEXP_ZERO_MEMORY(g_lamexp_wine);
-	LAMEXP_ZERO_MEMORY(g_lamexp_themes_enabled);
-	LAMEXP_ZERO_MEMORY(g_lamexp_dwmapi);
-	LAMEXP_ZERO_MEMORY(g_lamexp_sounds);
+	MUTILS_ZERO_MEMORY(g_lamexp_wine);
+	MUTILS_ZERO_MEMORY(g_lamexp_themes_enabled);
+	MUTILS_ZERO_MEMORY(g_lamexp_dwmapi);
+	MUTILS_ZERO_MEMORY(g_lamexp_sounds);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

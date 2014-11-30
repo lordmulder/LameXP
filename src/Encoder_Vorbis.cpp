@@ -46,7 +46,7 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 			return false;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -62,7 +62,7 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 			return 60;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -78,7 +78,7 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 			return qBound(32, (index + 4) * 8, 500);
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -96,7 +96,7 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -118,7 +118,7 @@ VorbisEncoder::VorbisEncoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Vorbis encoder. Tool 'oggenc2.exe' is not registred!");
+		MUTILS_THROW("Error initializing Vorbis encoder. Tool 'oggenc2.exe' is not registred!");
 	}
 
 	m_configBitrateMaximum = 0;
@@ -145,7 +145,7 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		args << "-b" << QString::number(qBound(32, (m_configBitrate + 4) * 8, 500));
 		break;
 	default:
-		THROW("Bad rate-control mode!");
+		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 

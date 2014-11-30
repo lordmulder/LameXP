@@ -28,6 +28,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //Qt
 #include <QApplication>
@@ -516,7 +517,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		if(application)
 		{
 			application->processEvents();
-			if(lines < 128) lamexp_sleep(10);
+			if(lines < 128) MUtils::OS::sleep_ms(10);
 		}
 		
 		if(cueStream.atEnd())
@@ -740,7 +741,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 		if(application)
 		{
 			application->processEvents();
-			lamexp_sleep(10);
+			MUtils::OS::sleep_ms(10);
 		}
 
 		CueSheetFile *currentFile = m_files.at(i);
@@ -773,7 +774,7 @@ int CueSheetModel::parseCueFile(QFile &cueFile, const QDir &baseDir, QCoreApplic
 			if(application)
 			{
 				application->processEvents();
-				lamexp_sleep(10);
+				MUtils::OS::sleep_ms(10);
 			}
 			CueSheetFile *currentFile = m_files.at(i);
 			int nTracks = currentFile->trackCount();

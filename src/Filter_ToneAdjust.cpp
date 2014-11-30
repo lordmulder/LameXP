@@ -22,8 +22,13 @@
 
 #include "Filter_ToneAdjust.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -35,7 +40,7 @@ ToneAdjustFilter::ToneAdjustFilter(int bass, int treble)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
+		MUTILS_THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
 	}
 
 	m_bass = qMax(-2000, qMin(2000, bass));

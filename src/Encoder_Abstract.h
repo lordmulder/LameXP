@@ -22,9 +22,13 @@
 
 #pragma once
 
+//Internal
 #include "Global.h"
 #include "Tool_Abstract.h"
 #include "Model_AudioFile.h"
+
+//MUtils
+#include <MUtils/Exception.h>
 
 class QProcess;
 class QStringList;
@@ -76,7 +80,7 @@ public:
 	//Encoder info
 	static const AbstractEncoderInfo *getEncoderInfo(void)
 	{
-		THROW("This method shall be re-implemented in derived classes!");
+		MUTILS_THROW("This method shall be re-implemented in derived classes!");
 		return NULL;
 	}
 

@@ -28,6 +28,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/Exception.h>
 
 //Qt
 #include <QString>
@@ -59,7 +60,7 @@ QMutex ShellIntegration::m_mutex;
 
 ShellIntegration::ShellIntegration(void)
 {
-	THROW("Cannot create instance of this class, sorry!");
+	MUTILS_THROW("Cannot create instance of this class, sorry!");
 }
 
 ////////////////////////////////////////////////////////////

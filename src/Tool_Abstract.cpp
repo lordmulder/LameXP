@@ -28,6 +28,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //Qt
 #include <QProcess>
@@ -97,7 +98,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 
 	if(lamexp_current_file_time() <= s_lastLaunchTime)
 	{
-		lamexp_sleep(START_DELAY);
+		MUtils::OS::sleep_ms(START_DELAY);
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");

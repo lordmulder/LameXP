@@ -31,6 +31,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/Exception.h>
 
 //Qt
 #include <QDir>
@@ -411,7 +412,7 @@ void FileAnalyzer::taskFileAnalyzed(const unsigned int taskId, const int fileTyp
 		m_filesRejected++;
 		break;
 	default:
-		THROW("Unknown file type identifier!");
+		MUTILS_THROW("Unknown file type identifier!");
 	}
 
 	//Emit all pending files

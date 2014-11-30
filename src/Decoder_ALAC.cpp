@@ -22,8 +22,13 @@
 
 #include "Decoder_ALAC.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -35,7 +40,7 @@ ALACDecoder::ALACDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing ALAC decoder. Tool 'refalac.exe' is not registred!");
+		MUTILS_THROW("Error initializing ALAC decoder. Tool 'refalac.exe' is not registred!");
 	}
 }
 

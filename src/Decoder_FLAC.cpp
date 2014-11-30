@@ -22,8 +22,13 @@
 
 #include "Decoder_FLAC.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +39,7 @@ FLACDecoder::FLACDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing FLAC decoder. Tool 'flac.exe' is not registred!");
+		MUTILS_THROW("Error initializing FLAC decoder. Tool 'flac.exe' is not registred!");
 	}
 }
 

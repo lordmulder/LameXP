@@ -22,10 +22,15 @@
 
 #include "Filter_Downmix.h"
 
+//Internal
 #include "Global.h"
 #include "Tool_WaveProperties.h"
 #include "Model_AudioFile.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -36,7 +41,7 @@ DownmixFilter::DownmixFilter(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
+		MUTILS_THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
 	}
 }
 

@@ -22,8 +22,13 @@
 
 #include "Decoder_ADPCM.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +39,7 @@ ADPCMDecoder::ADPCMDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Vorbis decoder. Tool 'sox.exe' is not registred!");
+		MUTILS_THROW("Error initializing Vorbis decoder. Tool 'sox.exe' is not registred!");
 	}
 }
 

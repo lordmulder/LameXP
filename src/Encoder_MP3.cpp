@@ -49,7 +49,7 @@ class MP3EncoderInfo : public AbstractEncoderInfo
 			return true;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -65,7 +65,7 @@ class MP3EncoderInfo : public AbstractEncoderInfo
 			return 14;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -81,7 +81,7 @@ class MP3EncoderInfo : public AbstractEncoderInfo
 			return g_mp3BitrateLUT[qBound(0, index, 13)];
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -99,7 +99,7 @@ class MP3EncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -121,7 +121,7 @@ MP3Encoder::MP3Encoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing MP3 encoder. Tool 'lame.exe' is not registred!");
+		MUTILS_THROW("Error initializing MP3 encoder. Tool 'lame.exe' is not registred!");
 	}
 	
 	m_algorithmQuality = 2;
@@ -156,7 +156,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		args << "-b" << QString::number(g_mp3BitrateLUT[qBound(0, m_configBitrate, 13)]);
 		break;
 	default:
-		THROW("Bad rate-control mode!");
+		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 

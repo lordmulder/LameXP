@@ -52,7 +52,7 @@ class FHGAACEncoderInfo : public AbstractEncoderInfo
 			return false;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -68,7 +68,7 @@ class FHGAACEncoderInfo : public AbstractEncoderInfo
 			return 52;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -84,7 +84,7 @@ class FHGAACEncoderInfo : public AbstractEncoderInfo
 			return qBound(8, index2bitrate(index), 576);
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -102,7 +102,7 @@ class FHGAACEncoderInfo : public AbstractEncoderInfo
 			return TYPE_BITRATE;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -125,7 +125,7 @@ FHGAACEncoder::FHGAACEncoder(void)
 {
 	if(m_binary_enc.isEmpty() || m_binary_dll.isEmpty())
 	{
-		THROW("Error initializing FhgAacEnc. Tool 'fhgaacenc.exe' is not registred!");
+		MUTILS_THROW("Error initializing FhgAacEnc. Tool 'fhgaacenc.exe' is not registred!");
 	}
 
 	m_configProfile = 0;
@@ -169,7 +169,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		args << "--vbr" << QString::number(qBound(1, m_configBitrate + 1, 6));
 		break;
 	default:
-		THROW("Bad rate-control mode!");
+		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 

@@ -46,7 +46,7 @@ class MACEncoderInfo : public AbstractEncoderInfo
 			return false;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -62,7 +62,7 @@ class MACEncoderInfo : public AbstractEncoderInfo
 			return -1;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -78,7 +78,7 @@ class MACEncoderInfo : public AbstractEncoderInfo
 			return -1;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -94,7 +94,7 @@ class MACEncoderInfo : public AbstractEncoderInfo
 			return -1;
 			break;
 		default:
-			THROW("Bad RC mode specified!");
+			MUTILS_THROW("Bad RC mode specified!");
 		}
 	}
 
@@ -117,7 +117,7 @@ MACEncoder::MACEncoder(void)
 {
 	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty())
 	{
-		THROW("Error initializing MAC encoder. Tool 'mac.exe' or 'tag.exe' is not registred!");
+		MUTILS_THROW("Error initializing MAC encoder. Tool 'mac.exe' or 'tag.exe' is not registred!");
 	}
 }
 
@@ -141,7 +141,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		args << QString().sprintf("-c%d", (m_configBitrate + 1) * 1000);
 		break;
 	default:
-		THROW("Bad rate-control mode!");
+		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 

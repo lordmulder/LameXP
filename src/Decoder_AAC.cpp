@@ -22,8 +22,13 @@
 
 #include "Decoder_AAC.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +39,7 @@ AACDecoder::AACDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing AAC decoder. Tool 'faad.exe' is not registred!");
+		MUTILS_THROW("Error initializing AAC decoder. Tool 'faad.exe' is not registred!");
 	}
 }
 

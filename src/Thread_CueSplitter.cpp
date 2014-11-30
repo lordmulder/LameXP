@@ -32,6 +32,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //Qt
 #include <QDir>
@@ -228,7 +229,7 @@ void CueSplitter::run()
 	}
 
 	emit progressValChanged(10 * nTracksTotal);
-	lamexp_sleep(333);
+	MUtils::OS::sleep_ms(333);
 
 	qDebug("All files were split.\n");
 	m_bSuccess = true;

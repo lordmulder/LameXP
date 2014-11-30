@@ -22,8 +22,13 @@
 
 #include "Decoder_Opus.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -37,7 +42,7 @@ OpusDecoder::OpusDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Opus decoder. Tool 'opusdec.exe' is not registred!");
+		MUTILS_THROW("Error initializing Opus decoder. Tool 'opusdec.exe' is not registred!");
 	}
 }
 

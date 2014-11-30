@@ -26,6 +26,7 @@
 
 //MUtils
 #include <MUtils/OSSupport.h>
+#include <MUtils/Exception.h>
 
 //Qt
 #include <QDir>
@@ -61,12 +62,12 @@ void CPUObserverThread::run(void)
 	}
 	catch(const std::exception &error)
 	{
-		PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
+		MUTILS_PRINT_ERROR("\nGURU MEDITATION !!!\n\nException error:\n%s\n", error.what());
 		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 	catch(...)
 	{
-		PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
+		MUTILS_PRINT_ERROR("\nGURU MEDITATION !!!\n\nUnknown exception error!\n");
 		MUtils::OS::fatal_exit(L"Unhandeled C++ exception error, application will exit!");
 	}
 

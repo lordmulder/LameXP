@@ -22,8 +22,14 @@
 
 #include "Decoder_Avisynth.h"
 
+
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
@@ -34,7 +40,7 @@ AvisynthDecoder::AvisynthDecoder(void)
 {
 	if(m_binary.isEmpty())
 	{
-		THROW("Error initializing Avisynth decoder. Tool 'avs2wav.exe' is not registred!");
+		MUTILS_THROW("Error initializing Avisynth decoder. Tool 'avs2wav.exe' is not registred!");
 	}
 }
 
