@@ -118,7 +118,7 @@ bool ProcessThread::init(void)
 		emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
 
 		//Initialize log
-		handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), MUtils::Version::app_build_date().toString(Qt::ISODate).toLatin1().constData(), MUtils::Version::app_build_time()));
+		handleMessage(QString().sprintf("LameXP v%u.%02u (Build #%u), compiled on %s at %s", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), MUTILS_UTF8(MUtils::Version::app_build_date().toString(Qt::ISODate)),  MUTILS_UTF8(MUtils::Version::app_build_time().toString(Qt::ISODate))));
 		handleMessage("\n-------------------------------\n");
 
 		return true;

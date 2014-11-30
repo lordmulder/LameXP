@@ -160,7 +160,6 @@ const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
  */
 static __forceinline bool lamexp_check_for_debugger(void)
 {
-	return false; //FIXME !!!
 	__try
 	{
 		CloseHandle((HANDLE)((DWORD_PTR)-3));

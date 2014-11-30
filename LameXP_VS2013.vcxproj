@@ -93,20 +93,16 @@
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Message>Copy plugin DLL%27s</Message>
-      <Command>mkdir "$(TargetDir)imageformats"
-copy /Y "$(QTDIR)\plugins\imageformats\q???d4.dll" "$(TargetDir)imageformats\"
-copy /Y "$(QTDIR)\plugins\imageformats\q????d4.dll" "$(TargetDir)imageformats\"
-copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(TargetDir)"
-copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(TargetDir)"
-</Command>
+      <Message>Copy VLD DLL%27s</Message>
+      <Command>copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(TargetDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(TargetDir)"</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -174,16 +170,14 @@ copy /Y "$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\bin\Win32\*.manifes
       </MapFileName>
       <CreateHotPatchableImage>
       </CreateHotPatchableImage>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\etc\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
     <PostBuildEvent>
-      <Message>Copy plugin DLL%27s</Message>
-      <Command>mkdir "$(TargetDir)imageformats"
-copy /Y "$(QTDIR)\plugins\imageformats\q???4.dll" "$(TargetDir)imageformats\"
-copy /Y "$(QTDIR)\plugins\imageformats\q????4.dll" "$(TargetDir)imageformats\"
-del "$(TargetDir)imageformats\q???d4.dll"
-</Command>
+      <Message>
+      </Message>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>

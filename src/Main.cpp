@@ -189,7 +189,7 @@ static int lamexp_main(int &argc, char **argv)
 	{
 		//Show main window
 		poMainWindow->show();
-		iResult = QApplication::instance()->exec();
+		iResult = qApp->exec();
 		bAccepted = poMainWindow->isAccepted();
 
 		//Sync settings
