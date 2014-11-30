@@ -172,7 +172,7 @@ void FileAnalyzer::run()
 	}
 
 	//Sort files
-	lamexp_natural_string_sort(m_inputFiles, true);
+	MUtils::natural_string_sort(m_inputFiles, true);
 
 	//Handle playlist files first!
 	handlePlaylistFiles();

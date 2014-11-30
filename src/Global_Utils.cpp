@@ -35,9 +35,6 @@
 #include <QUuid>
 #include <QWidget>
 
-//Natural sort
-#include "strnatcmp.h"
-
 //MUtils
 #include <MUtils/Global.h>
 
@@ -59,30 +56,6 @@ g_lamexp_app_icon;
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
-
-/*
- * Natural Order String Comparison - the 'lessThan' helper function
- */
-static bool lamexp_natural_string_sort_helper(const QString &str1, const QString &str2)
-{
-	return (strnatcmp(MUTILS_WCHR(str1), MUTILS_WCHR(str2)) < 0);
-}
-
-/*
- * Natural Order String Comparison - the 'lessThan' helper function *with* case folding
- */
-static bool lamexp_natural_string_sort_helper_fold_case(const QString &str1, const QString &str2)
-{
-	return (strnatcasecmp(MUTILS_WCHR(str1), MUTILS_WCHR(str2)) < 0);
-}
-
-/*
- * Natural Order String Comparison - the main sorting function
- */
-void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase)
-{
-	qSort(list.begin(), list.end(), bIgnoreCase ? lamexp_natural_string_sort_helper_fold_case : lamexp_natural_string_sort_helper);
-}
 
 /*
  * Remove forbidden characters from a filename

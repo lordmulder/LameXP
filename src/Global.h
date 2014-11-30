@@ -113,7 +113,6 @@ bool lamexp_is_executable(const QString &path);
 bool lamexp_is_hibernation_supported(void);
 const QString lamexp_lookup_tool(const QString &toolName);
 const char *lamexp_mulders_url(void);
-void lamexp_natural_string_sort(QStringList &list, const bool bIgnoreCase);
 int lamexp_network_status(void);
 bool lamexp_open_media_file(const QString &mediaFilePath);
 QString lamexp_path_to_short(const QString &longPath);

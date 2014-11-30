@@ -214,9 +214,6 @@
     <ClCompile Include="src\Decoder_Opus.cpp">
       <Filter>Source Files\Decoders</Filter>
     </ClCompile>
-    <ClCompile Include="etc\Prerequisites\strnatcmp\src\strnatcmp.cpp">
-      <Filter>Source Files\Misc\3rd Party</Filter>
-    </ClCompile>
     <ClCompile Include="src\Registry_Encoder.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
@@ -524,9 +521,6 @@
     </ClInclude>
     <ClInclude Include="src\JobObject.h">
       <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="etc\Prerequisites\strnatcmp\include\strnatcmp.h">
-      <Filter>Header Files\Misc\3rd Party</Filter>
     </ClInclude>
     <ClInclude Include="tmp\LameXP\UIC_WorkingBanner.h">
       <Filter>Generated Files\UIC</Filter>
@@ -840,12 +834,6 @@
     </Filter>
     <Filter Include="Header Files\Misc">
       <UniqueIdentifier>{36024ab5-840b-4c4f-a562-1bd4c15eded9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Misc\3rd Party">
-      <UniqueIdentifier>{72c665f5-e6cf-4c48-8b3b-0f02369ee33e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Misc\3rd Party">
-      <UniqueIdentifier>{574b856b-cea0-4c37-ba58-17f15f7911da}</UniqueIdentifier>
     </Filter>
     <Filter Include="Miscellaneous">
       <UniqueIdentifier>{da2c1d3e-888f-4f4d-98b3-3392faa475c3}</UniqueIdentifier>
