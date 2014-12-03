@@ -78,14 +78,13 @@ void DiskObserverThread::run(void)
 
 void DiskObserverThread::observe(void)
 {
-	unsigned __int64 minimumSpace = MIN_DISKSPACE;
-	unsigned __int64 freeSpace, previousSpace = 0ui64;
-	bool ok = false;
+	quint64 minimumSpace = MIN_DISKSPACE;
+	quint64 previousSpace = quint64(-1);
 
 	forever
 	{
-		freeSpace = lamexp_free_diskspace(m_path, &ok);
-		if(ok)
+		quint64 freeSpace = 0ui64;
+		if(MUtils::OS::free_diskspace(m_path, freeSpace))
 		{
 			if(freeSpace < minimumSpace)
 			{

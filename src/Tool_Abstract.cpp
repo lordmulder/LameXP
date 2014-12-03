@@ -96,7 +96,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 {
 	QMutexLocker lock(&s_mutex_startProcess);
 
-	if(lamexp_current_file_time() <= s_lastLaunchTime)
+	if(MUtils::OS::current_file_time() <= s_lastLaunchTime)
 	{
 		MUtils::OS::sleep_ms(START_DELAY);
 	}
@@ -116,7 +116,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 			}
 		}
 
-		lamexp_change_process_priority(&process, -1);
+		MUtils::OS::change_process_priority(&process, -1);
 		lock.unlock();
 		
 		if(m_firstLaunch)
@@ -125,7 +125,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 			m_firstLaunch = false;
 		}
 		
-		s_lastLaunchTime = lamexp_current_file_time() + START_DELAY_NANO;
+		s_lastLaunchTime = MUtils::OS::current_file_time() + START_DELAY_NANO;
 		return true;
 	}
 
@@ -136,7 +136,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	process.kill();
 	process.waitForFinished(-1);
 
-	s_lastLaunchTime = lamexp_current_file_time() + START_DELAY_NANO;
+	s_lastLaunchTime = MUtils::OS::current_file_time() + START_DELAY_NANO;
 	return false;
 }
 

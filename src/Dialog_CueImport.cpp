@@ -38,6 +38,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
 
 //Qt includes
 #include <QFileInfo>
@@ -302,13 +303,14 @@ void CueImportDialog::importButtonClicked(void)
 		writeTest.remove();
 	}
 
-	bool ok = false;
-	unsigned __int64 currentFreeDiskspace = lamexp_free_diskspace(m_outputDir, &ok);
-
-	if(ok && (currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier)))
+	quint64 currentFreeDiskspace = 0;
+	if(MUtils::OS::free_diskspace(m_outputDir, currentFreeDiskspace))
 	{
-		QMessageBox::warning(this, tr("Low Diskspace Warning"), QString("<nobr>%1</nobr><br><nobr>%2</nobr>").arg(tr("There are less than %1 GB of free diskspace available in the selected output directory.").arg(QString::number(minimumFreeDiskspaceMultiplier)), tr("It is highly recommend to free up more diskspace before proceeding with the import!")));
-		return;
+		if(currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier))
+		{
+			QMessageBox::warning(this, tr("Low Diskspace Warning"), QString("<nobr>%1</nobr><br><nobr>%2</nobr>").arg(tr("There are less than %1 GB of free diskspace available in the selected output directory.").arg(QString::number(minimumFreeDiskspaceMultiplier)), tr("It is highly recommend to free up more diskspace before proceeding with the import!")));
+			return;
+		}
 	}
 
 	importCueSheet();

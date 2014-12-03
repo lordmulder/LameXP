@@ -630,7 +630,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
 	ui->actionCheckForBetaUpdates->setEnabled(!lamexp_version_demo());
 	ui->actionHibernateComputer->setChecked(m_settings->hibernateComputer());
-	ui->actionHibernateComputer->setEnabled(lamexp_is_hibernation_supported());
+	ui->actionHibernateComputer->setEnabled(MUtils::OS::is_hibernation_supported());
 	connect(ui->actionDisableUpdateReminder, SIGNAL(triggered(bool)), this, SLOT(disableUpdateReminderActionTriggered(bool)));
 	connect(ui->actionDisableSounds, SIGNAL(triggered(bool)), this, SLOT(disableSoundsActionTriggered(bool)));
 	connect(ui->actionDisableNeroAacNotifications, SIGNAL(triggered(bool)), this, SLOT(disableNeroAacNotificationsActionTriggered(bool)));
@@ -1332,7 +1332,7 @@ void MainWindow::windowShown(void)
 				QString uninstallerPath = uninstallerInfo.canonicalFilePath();
 				for(int i = 0; i < 3; i++)
 				{
-					if(lamexp_exec_shell(this, QDir::toNativeSeparators(uninstallerPath), "/Force", QDir::toNativeSeparators(uninstallerDir))) break;
+					if(MUtils::OS::shell_open(this, QDir::toNativeSeparators(uninstallerPath), "/Force", QDir::toNativeSeparators(uninstallerDir))) break;
 				}
 			}
 			QApplication::quit();
@@ -1594,31 +1594,32 @@ void MainWindow::encodeButtonClicked(void)
 		return;
 	}
 
-	bool ok = false;
-	unsigned __int64 currentFreeDiskspace = lamexp_free_diskspace(tempFolder, &ok);
-
-	if(ok && (currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier)))
+	quint64 currentFreeDiskspace = 0;
+	if(MUtils::OS::free_diskspace(tempFolder, currentFreeDiskspace))
 	{
-		QStringList tempFolderParts = tempFolder.split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
-		tempFolderParts.takeLast();
-		PLAY_SOUND_OPTIONAL("whammy", false);
-		QString lowDiskspaceMsg = QString("%1<br>%2<br><br>%3<br>%4<br>").arg
-		(
-			NOBR(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier))),
-			NOBR(tr("It is highly recommend to free up more diskspace before proceeding with the encode!")),
-			NOBR(tr("Your TEMP folder is located at:")),
-			QString("<nobr><tt>%1</tt></nobr>").arg(FSLINK(tempFolderParts.join("\\")))
-		);
-		switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), lowDiskspaceMsg, tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
+		if(currentFreeDiskspace < (oneGigabyte * minimumFreeDiskspaceMultiplier))
 		{
-		case 1:
-			QProcess::startDetached(QString("%1/cleanmgr.exe").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER)), QStringList() << "/D" << tempFolderParts.first());
-		case 0:
-			return;
-			break;
-		default:
-			QMessageBox::warning(this, tr("Low Diskspace"), NOBR(tr("You are proceeding with low diskspace. Problems might occur!")));
-			break;
+			QStringList tempFolderParts = tempFolder.split("/", QString::SkipEmptyParts, Qt::CaseInsensitive);
+			tempFolderParts.takeLast();
+			PLAY_SOUND_OPTIONAL("whammy", false);
+			QString lowDiskspaceMsg = QString("%1<br>%2<br><br>%3<br>%4<br>").arg
+			(
+				NOBR(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier))),
+				NOBR(tr("It is highly recommend to free up more diskspace before proceeding with the encode!")),
+				NOBR(tr("Your TEMP folder is located at:")),
+				QString("<nobr><tt>%1</tt></nobr>").arg(FSLINK(tempFolderParts.join("\\")))
+			);
+			switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), lowDiskspaceMsg, tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
+			{
+			case 1:
+				QProcess::startDetached(QString("%1/cleanmgr.exe").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER)), QStringList() << "/D" << tempFolderParts.first());
+			case 0:
+				return;
+				break;
+			default:
+				QMessageBox::warning(this, tr("Low Diskspace"), NOBR(tr("You are proceeding with low diskspace. Problems might occur!")));
+				break;
+			}
 		}
 	}
 
@@ -2468,7 +2469,7 @@ void MainWindow::previewContextActionTriggered(void)
 		return;
 	}
 
-	if(!lamexp_open_media_file(m_fileListModel->getFile(index).filePath()))
+	if(!MUtils::OS::open_media_file(m_fileListModel->getFile(index).filePath()))
 	{
 		qDebug("Player not found, falling back to default application...");
 		QDesktopServices::openUrl(QString("file:///").append(m_fileListModel->getFile(index).filePath()));
@@ -3011,7 +3012,7 @@ void MainWindow::showFolderContextActionTriggered(void)
 
 	QString path = QDir::toNativeSeparators(m_fileSystemModel->filePath(ui->outputFolderView->currentIndex()));
 	if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
-	lamexp_exec_shell(this, path, true);
+	MUtils::OS::shell_open(this, path, true);
 }
 
 /*
@@ -3282,7 +3283,7 @@ void MainWindow::outputFolderMouseEventOccurred(QWidget *sender, QEvent *event)
 			{
 				QString path = ui->outputFolderLabel->text();
 				if(!path.endsWith(QDir::separator())) path.append(QDir::separator());
-				lamexp_exec_shell(this, path, true);
+				MUtils::OS::shell_open(this, path, true);
 			}
 			break;
 		case QEvent::Enter:

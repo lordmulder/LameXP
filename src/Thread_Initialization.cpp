@@ -319,7 +319,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
 
-	const long long timeExtractStart = lamexp_perfcounter_value();
+	const long long timeExtractStart = MUtils::OS::perfcounter_read();
 	
 	//Extract all files
 	while(!(queueToolName.isEmpty() || queueChecksum.isEmpty() || queueVersInfo.isEmpty() || queueCpuTypes.isEmpty() || queueVersions.isEmpty()))
@@ -364,7 +364,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	pool->waitForDone();
 	MUTILS_DELETE(pool);
 
-	const long long timeExtractEnd = lamexp_perfcounter_value();
+	const long long timeExtractEnd = MUtils::OS::perfcounter_read();
 
 	//Make sure all files were extracted correctly
 	if(ExtractorTask::getExcept())
@@ -388,7 +388,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	}
 
 	//Check delay
-	const double delayExtract = static_cast<double>(timeExtractEnd - timeExtractStart) / static_cast<double>(lamexp_perfcounter_frequ());
+	const double delayExtract = static_cast<double>(timeExtractEnd - timeExtractStart) / static_cast<double>(MUtils::OS::perfcounter_freq());
 	if(delayExtract > g_allowedExtractDelay)
 	{
 		m_slowIndicator = true;
@@ -555,7 +555,7 @@ void InitializationThread::initNeroAac(void)
 
 	for(int i = 0; i < 3; i++)
 	{
-		if(!lamexp_is_executable(neroFileInfo[i].canonicalFilePath()))
+		if(!MUtils::OS::is_executable_file(neroFileInfo[i].canonicalFilePath()))
 		{
 			qDebug("%s executbale is invalid -> AAC encoding support will be disabled!\n", MUTILS_UTF8(neroFileInfo[i].fileName()));
 			return;
@@ -667,7 +667,7 @@ void InitializationThread::initFhgAac(void)
 		return;
 	}
 
-	if(!lamexp_is_executable(fhgFileInfo[0].canonicalFilePath()))
+	if(!MUtils::OS::is_executable_file(fhgFileInfo[0].canonicalFilePath()))
 	{
 		qDebug("FhgAacEnc executbale is invalid -> FhgAacEnc support will be disabled!\n");
 		return;
@@ -774,7 +774,7 @@ void InitializationThread::initQAac(void)
 		return;
 	}
 
-	if(!lamexp_is_executable(qaacFileInfo[0].canonicalFilePath()))
+	if(!MUtils::OS::is_executable_file(qaacFileInfo[0].canonicalFilePath()))
 	{
 		qDebug("QAAC executbale is invalid -> QAAC support will be disabled!\n");
 		return;

@@ -389,7 +389,7 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 		m_progressIndicator->start();
 		m_systemTray->setVisible(true);
 		
-		lamexp_change_process_priority(1);
+		MUtils::OS::change_process_priority(1);
 		
 		ui->label_cpu->setText(NA);
 		ui->label_disk->setText(NA);
@@ -559,16 +559,9 @@ void ProcessingDialog::initEncoding(void)
 		m_threadPool->setMaxThreadCount(maximumInstances);
 	}
 
-	//for(int i = 0; i < m_threadPool->maxThreadCount(); i++)
-	//{
-	//	startNextJob();
-	//	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-	//	QThread::yieldCurrentThread();
-	//}
-
 	m_initThreads = m_threadPool->maxThreadCount();
 	QTimer::singleShot(100, this, SLOT(initNextJob()));
-	m_timerStart = lamexp_perfcounter_value();
+	m_timerStart = MUtils::OS::perfcounter_read();
 }
 
 void ProcessingDialog::initNextJob(void)
@@ -718,8 +711,8 @@ void ProcessingDialog::doneEncoding(void)
 	}
 	else
 	{
-		const __int64 counter = lamexp_perfcounter_value();
-		const __int64 frequency  = lamexp_perfcounter_frequ();
+		const qint64 counter = MUtils::OS::perfcounter_read();
+		const qint64 frequency  = MUtils::OS::perfcounter_freq();
 		if((counter >= 0I64) && (frequency >= 0))
 		{
 			if((m_timerStart >= 0I64) && (m_timerStart < counter))

@@ -366,7 +366,7 @@ void AboutDialog::openURL(const QString &url)
 {
 	if(!QDesktopServices::openUrl(QUrl(url)))
 	{
-		lamexp_exec_shell(this, url);
+		MUtils::OS::shell_open(this, url);
 	}
 }
 
@@ -386,8 +386,8 @@ void AboutDialog::gotoLicenseTab(void)
 void AboutDialog::moveDisque(void)
 {
 	int delta = 2;
-	const __int64 perfFrequ = lamexp_perfcounter_frequ();
-	const __int64 perfCount = lamexp_perfcounter_value();
+	const qint64 perfFrequ = MUtils::OS::perfcounter_freq();
+	const qint64 perfCount = MUtils::OS::perfcounter_read();
 
 	if((perfFrequ >= 0) && (perfCount >= 0))
 	{

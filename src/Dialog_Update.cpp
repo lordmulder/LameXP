@@ -35,6 +35,7 @@
 #include <MUtils/UpdateChecker.h>
 #include <MUtils/Version.h>
 #include <MUtils/Exception.h>
+#include <MUtils/OSSupport.h>
 
 //Qt includes
 #include <QClipboard>
@@ -241,7 +242,7 @@ void UpdateDialog::checkForUpdates(void)
 		qWarning("Update in progress, cannot check for updates now!");
 	}
 
-	if(!lamexp_user_is_admin())
+	if(!MUtils::OS::user_is_admin())
 	{
 		qWarning("User is not in the \"admin\" group, cannot update!");
 		QString message;
@@ -413,7 +414,7 @@ void UpdateDialog::applyUpdate(void)
 		bool updateStarted = process.waitForStarted();
 		if(updateStarted)
 		{
-			m_updaterProcess = lamexp_process_id(&process);
+			m_updaterProcess = MUtils::OS::process_id(&process);
 			loop.exec(QEventLoop::ExcludeUserInputEvents);
 		}
 

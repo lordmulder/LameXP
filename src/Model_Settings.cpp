@@ -425,7 +425,7 @@ void SettingsModel::validate(void)
 
 	if(this->hibernateComputer())
 	{
-		if(!lamexp_is_hibernation_supported())
+		if(!MUtils::OS::is_hibernation_supported())
 		{
 			this->hibernateComputer(false);
 		}
