@@ -106,7 +106,6 @@ static int lamexp_main(int &argc, char **argv)
 	}
 
 	//Initialize application
-	MUtils::Terminal::set_icon(QIcon(":/icons/sound.png"));
 	qApp->setWindowIcon(lamexp_app_icon());
 	qApp->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
 
