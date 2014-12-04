@@ -232,7 +232,6 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	m_fileListModel(fileListModel),
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
-	m_windowIcon(NULL),
 	m_fileSystemModel(NULL),
 	m_banner(NULL),
 	m_accepted(false),
@@ -245,7 +244,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
 
 	//Create window icon
-	m_windowIcon = lamexp_set_window_icon(this, lamexp_app_icon(), true);
+	MUtils::GUI::set_window_icon(this, lamexp_app_icon(), true);
 
 	//Register meta types
 	qRegisterMetaType<AudioFileModel>("AudioFileModel");
@@ -749,13 +748,6 @@ MainWindow::~MainWindow(void)
 	MUTILS_DELETE(m_evenFilterOutputFolderMouse);
 	MUTILS_DELETE(m_evenFilterOutputFolderView);
 	MUTILS_DELETE(m_evenFilterCompressionTab);
-	
-	//Free window icon
-	if(m_windowIcon)
-	{
-		lamexp_free_window_icon(m_windowIcon);
-		m_windowIcon = NULL;
-	}
 
 	//Un-initialize the dialog
 	MUTILS_DELETE(ui);

@@ -149,7 +149,6 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 :
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
-	m_windowIcon(NULL),
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
@@ -168,7 +167,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
 	
 	//Update the window icon
-	m_windowIcon = lamexp_set_window_icon(this, lamexp_app_icon(), true);
+	MUtils::GUI::set_window_icon(this, lamexp_app_icon(), true);
 
 	//Update header icon
 	ui->label_headerIcon->setPixmap(lamexp_app_icon().pixmap(ui->label_headerIcon->size()));
@@ -361,12 +360,6 @@ ProcessingDialog::~ProcessingDialog(void)
 
 	WinSevenTaskbar::setOverlayIcon(this, NULL);
 	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
-
-	if(m_windowIcon)
-	{
-		lamexp_free_window_icon(m_windowIcon);
-		m_windowIcon = NULL;
-	}
 	
 	MUTILS_DELETE(ui);
 }

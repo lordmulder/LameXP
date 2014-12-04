@@ -197,7 +197,6 @@ private:
 	bool m_firstTimeShown;
 	uint m_outputFolderViewInitCounter;
 	bool m_outputFolderViewCentering;
-	lamexp_icon_t *m_windowIcon;
 
 	WorkingBanner *m_banner;
 	QList<QUrl> *m_droppedFileList;

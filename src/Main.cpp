@@ -236,5 +236,5 @@ static int lamexp_main(int &argc, char **argv)
 
 int main(int argc, char* argv[])
 {
-	return MUtils::Startup::startup(argc, argv, lamexp_main);
+	return MUtils::Startup::startup(argc, argv, lamexp_main, lamexp_version_demo());
 }

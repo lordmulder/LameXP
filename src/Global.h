@@ -72,9 +72,6 @@ typedef enum
 }
 lamexp_syscolor_t;
 
-//Icon type
-class lamexp_icon_t;
-
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -95,7 +92,6 @@ const QString lamexp_clean_filepath(const QString &str);
 unsigned long lamexp_dbg_private_bytes(void);
 bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
 void lamexp_finalization(void);
-void lamexp_free_window_icon(lamexp_icon_t *icon);
 int lamexp_init_ipc(void);
 bool lamexp_install_translator(const QString &language);
 bool lamexp_install_translator_from_file(const QString &qmFile);
@@ -109,7 +105,6 @@ bool lamexp_play_sound_alias(const QString &alias, const bool bAsync);
 bool lamexp_portable_mode(void);
 QStringList lamexp_query_translations(void);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
-lamexp_icon_t *lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon);
 bool lamexp_sheet_of_glass(QWidget *window);
 bool lamexp_sheet_of_glass_update(QWidget *window);
 QColor lamexp_system_color(const int color_id);

@@ -109,17 +109,7 @@ const char *lamexp_tracker_url(void) { return g_lamexp_tracker_url; }
  */
 bool lamexp_version_demo(void)
 {
-	char buffer[128];
-	bool releaseVersion = false;
-	if(!strncpy_s(buffer, 128, g_lamexp_version.ver_release_name, _TRUNCATE))
-	{
-		char *context, *prefix = strtok_s(buffer, "-,; ", &context);
-		if(prefix)
-		{
-			releaseVersion = (!_stricmp(prefix, "Final")) || (!_stricmp(prefix, "Hotfix"));
-		}
-	}
-	return (!releaseVersion);
+	return _strnicmp(g_lamexp_version.ver_release_name, "Final", 5) && _strnicmp(g_lamexp_version.ver_release_name, "Hotfix", 6);
 }
 
 /*

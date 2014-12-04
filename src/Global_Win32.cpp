@@ -586,34 +586,6 @@ bool lamexp_sheet_of_glass_update(QWidget *window)
 }
 
 /*
- * Update the window icon
- */
-lamexp_icon_t *lamexp_set_window_icon(QWidget *window, const QIcon &icon, const bool bIsBigIcon)
-{
-	if(!icon.isNull())
-	{
-		const int extend = (bIsBigIcon ? 32 : 16);
-		if(HICON hIcon = lamexp_qicon2hicon(icon, extend, extend))
-		{
-			SendMessage(window->winId(), WM_SETICON, (bIsBigIcon ? ICON_BIG : ICON_SMALL), LPARAM(hIcon));
-			return reinterpret_cast<lamexp_icon_t*>(hIcon);
-		}
-	}
-	return NULL;
-}
-
-/*
- * Free window icon
- */
-void lamexp_free_window_icon(lamexp_icon_t *icon)
-{
-	if(HICON hIcon = reinterpret_cast<HICON>(icon))
-	{
-		DestroyIcon(hIcon);
-	}
-}
-
-/*
  * Get system color info
  */
 QColor lamexp_system_color(const int color_id)
