@@ -31,6 +31,7 @@
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/Sound.h>
 #include <MUtils/Version.h>
 
 //Qt
@@ -259,14 +260,14 @@ int AboutDialog::exec()
 	{
 		if(m_firstShow)
 		{
-			if(!lamexp_play_sound_file("imageres.dll", 5080, true))
+			if(!MUtils::Sound::play_sound_file("imageres.dll", 5080))
 			{
-				lamexp_play_sound_alias("SystemStart", true);
+				MUtils::Sound::play_system_sound("SystemStart", true);
 			}
 		}
 		else
 		{
-			lamexp_play_sound("uuaarrgh", true);
+			MUtils::Sound::play_sound("uuaarrgh", true);
 		}
 	}
 	
@@ -338,7 +339,7 @@ void AboutDialog::tabChanged(int index, const bool silent)
 	//Play tick sound
 	if(m_settings->soundsEnabled() && (!silent))
 	{
-		lamexp_play_sound("tick", true);
+		MUtils::Sound::play_sound("tick", true);
 	}
 
 	//Scroll to the top

@@ -208,10 +208,10 @@ void CueSplitter::run()
 
 			//Generate output file name
 			QString trackTitle = trackMetaInfo.title().isEmpty() ? QString().sprintf("Track %02d", trackNo) : trackMetaInfo.title();
-			QString outputFile = QString("%1/[%2] %3 - %4.wav").arg(m_outputDir, QString().sprintf("%02d", trackNo), lamexp_clean_filename(m_baseName), lamexp_clean_filename(trackTitle));
+			QString outputFile = QString("%1/[%2] %3 - %4.wav").arg(m_outputDir, QString().sprintf("%02d", trackNo), MUtils::clean_file_name(m_baseName), MUtils::clean_file_name(trackTitle));
 			for(int n = 2; QFileInfo(outputFile).exists(); n++)
 			{
-				outputFile = QString("%1/[%2] %3 - %4 (%5).wav").arg(m_outputDir, QString().sprintf("%02d", trackNo), lamexp_clean_filename(m_baseName), lamexp_clean_filename(trackTitle), QString::number(n));
+				outputFile = QString("%1/[%2] %3 - %4 (%5).wav").arg(m_outputDir, QString().sprintf("%02d", trackNo), MUtils::clean_file_name(m_baseName), MUtils::clean_file_name(trackTitle), QString::number(n));
 			}
 
 			//Call split function

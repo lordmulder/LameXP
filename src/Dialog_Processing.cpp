@@ -48,6 +48,7 @@
 #include <MUtils/OSSupport.h>
 #include <MUtils/GUI.h>
 #include <MUtils/CPUFeatures.h>
+#include <MUtils/Sound.h>
 
 //Qt
 #include <QApplication>
@@ -122,7 +123,7 @@ while(0)
 
 #define PLAY_SOUND_OPTIONAL(NAME, ASYNC) do \
 { \
-	if(m_settings->soundsEnabled()) lamexp_play_sound((NAME), (ASYNC)); \
+	if(m_settings->soundsEnabled()) MUtils::Sound::play_sound((NAME), (ASYNC)); \
 } \
 while(0)
 
@@ -831,7 +832,7 @@ void ProcessingDialog::logViewDoubleClicked(const QModelIndex &index)
 	}
 	else
 	{
-		lamexp_beep(lamexp_beep_warning);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 	}
 }
 
@@ -871,7 +872,7 @@ void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 
 	if(filePath.isEmpty())
 	{
-		lamexp_beep(lamexp_beep_warning);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 		return;
 	}
 
@@ -902,7 +903,7 @@ void ProcessingDialog::contextMenuShowFileActionTriggered(void)
 	else
 	{
 		qWarning("File not found: %s", filePath.toLatin1().constData());
-		lamexp_beep(lamexp_beep_error);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 	}
 }
 
@@ -983,7 +984,7 @@ void ProcessingDialog::writePlayList(void)
 	}
 
 	//Clean playlist name
-	playListName = lamexp_clean_filename(playListName);
+	playListName = MUtils::clean_file_name(playListName);
 
 	//Create list of audio files
 	for(int i = 0; i < m_allJobs.count(); i++)

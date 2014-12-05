@@ -500,7 +500,7 @@ QString ProcessThread::applyRenamePattern(const QString &baseName, const AudioFi
 	fileName.replace("<Album>", STRDEF(metaInfo.album(), tr("Unknown Album")), Qt::CaseInsensitive);
 	fileName.replace("<Year>", QString().sprintf("%04d", metaInfo.year()), Qt::CaseInsensitive);
 	fileName.replace("<Comment>", STRDEF(metaInfo.comment(), tr("Unknown Comment")), Qt::CaseInsensitive);
-	fileName = lamexp_clean_filename(fileName).simplified();
+	fileName = MUtils::clean_file_name(fileName);
 
 	return fileName;
 }

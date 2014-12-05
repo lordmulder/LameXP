@@ -52,6 +52,7 @@
 #include <MUtils/OSSupport.h>
 #include <MUtils/GUI.h>
 #include <MUtils/Exception.h>
+#include <MUtils/Sound.h>
 #include <MUtils/Version.h>
 
 //Qt includes
@@ -124,7 +125,7 @@ while(0)
 { \
 	if(BANNER_VISIBLE || m_delayedFileTimer->isActive() || (QApplication::activeModalWidget() != NULL)) \
 	{ \
-		lamexp_beep(lamexp_beep_warning); \
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN); \
 		return; \
 	} \
 } \
@@ -201,7 +202,7 @@ while(0)
 
 #define PLAY_SOUND_OPTIONAL(NAME, ASYNC) do \
 { \
-	if(m_settings->soundsEnabled()) lamexp_play_sound((NAME), (ASYNC)); \
+	if(m_settings->soundsEnabled()) MUtils::Sound::play_sound((NAME), (ASYNC)); \
 } \
 while(0)
 
@@ -836,7 +837,7 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 	{
 		if(lamexp_check_escape_state())
 		{
-			lamexp_beep(lamexp_beep_error);
+			MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 			qWarning("Operation cancelled by user!");
 			fileList.clear();
 			break;
@@ -1152,7 +1153,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 	if(BANNER_VISIBLE || m_delayedFileTimer->isActive())
 	{
-		lamexp_beep(lamexp_beep_warning);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 		event->ignore();
 	}
 	
@@ -1197,7 +1198,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 	if(e->modifiers().testFlag(Qt::ControlModifier) && (e->key() == Qt::Key_F5))
 	{
 		initializeTranslation();
-		lamexp_beep(lamexp_beep_info);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_NFO);
 		return;
 	}
 
@@ -1315,7 +1316,7 @@ void MainWindow::windowShown(void)
 			m_settings->licenseAccepted(++iAccepted);
 			m_settings->syncNow();
 			QApplication::processEvents();
-			lamexp_play_sound("whammy", false);
+			MUtils::Sound::play_sound("whammy", false);
 			QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
 			QFileInfo uninstallerInfo = QFileInfo(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()));
 			if(uninstallerInfo.exists())
@@ -1331,7 +1332,7 @@ void MainWindow::windowShown(void)
 			return;
 		}
 		
-		lamexp_play_sound("woohoo", false);
+		MUtils::Sound::play_sound("woohoo", false);
 		m_settings->licenseAccepted(1);
 		m_settings->syncNow();
 		if(lamexp_version_demo()) showAnnounceBox();
@@ -1343,7 +1344,7 @@ void MainWindow::windowShown(void)
 		if(MUtils::OS::current_date() >= lamexp_version_expires())
 		{
 			qWarning("Binary has expired !!!");
-			lamexp_play_sound("whammy", false);
+			MUtils::Sound::play_sound("whammy", false);
 			if(QMessageBox::warning(this, tr("LameXP - Expired"), QString("%1<br>%2").arg(NOBR(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate))), NOBR(tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
 				checkForUpdates();
@@ -1386,7 +1387,7 @@ void MainWindow::windowShown(void)
 			return;
 		default:
 			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
-			lamexp_play_sound("waiting", true);
+			MUtils::Sound::play_sound("waiting", true);
 			SHOW_BANNER_ARG(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
 		}
@@ -2855,7 +2856,7 @@ void MainWindow::gotoFavoriteFolder(void)
 		}
 		else
 		{
-			lamexp_beep(lamexp_beep_error);
+			MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 			m_outputFolderFavoritesMenu->removeAction(item);
 			item->deleteLater();
 		}
@@ -2916,7 +2917,7 @@ void MainWindow::makeFolderButtonClicked(void)
 		}
 	}
 	
-	suggestedName = lamexp_clean_filename(suggestedName);
+	suggestedName = MUtils::clean_file_name(suggestedName);
 
 	while(true)
 	{
@@ -2925,11 +2926,11 @@ void MainWindow::makeFolderButtonClicked(void)
 
 		if(bApplied)
 		{
-			folderName = lamexp_clean_filepath(folderName.simplified());
+			folderName = MUtils::clean_file_path(folderName.simplified());
 
 			if(folderName.isEmpty())
 			{
-				lamexp_beep(lamexp_beep_error);
+				MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 				continue;
 			}
 
@@ -3033,7 +3034,7 @@ void MainWindow::goUpFolderContextActionTriggered(void)
 		}
 		else
 		{
-			lamexp_beep(lamexp_beep_warning);
+			MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 		}
 		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 	}
@@ -3054,7 +3055,7 @@ void MainWindow::addFavoriteFolderActionTriggered(void)
 	}
 	else
 	{
-		lamexp_beep(lamexp_beep_warning);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 	}
 
 	m_settings->favoriteOutputFolders(favorites.join("|"));
@@ -3120,7 +3121,7 @@ void MainWindow::outputFolderEditFinished(void)
 	ui->outputFolderLabel->setVisible(true);
 	ui->outputFolderView->setEnabled(true);
 
-	if(!ok) lamexp_beep(lamexp_beep_error);
+	if(!ok) MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
 }
 
@@ -3845,13 +3846,13 @@ void MainWindow::renameOutputPatternChanged(const QString &text, bool silent)
 	pattern.replace("<Year>", "2001", Qt::CaseInsensitive);
 	pattern.replace("<Comment>", "Encoded by LameXP", Qt::CaseInsensitive);
 
-	const QString patternClean = lamexp_clean_filename(pattern);
+	const QString patternClean = MUtils::clean_file_name(pattern);
 
 	if(pattern.compare(patternClean))
 	{
 		if(ui->lineEditRenamePattern->palette().color(QPalette::Text) != Qt::red)
 		{
-			if(!silent) lamexp_beep(lamexp_beep_error);
+			if(!silent) MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 			SET_TEXT_COLOR(ui->lineEditRenamePattern, Qt::red);
 		}
 	}
@@ -3859,7 +3860,7 @@ void MainWindow::renameOutputPatternChanged(const QString &text, bool silent)
 	{
 		if(ui->lineEditRenamePattern->palette() != QPalette())
 		{
-			if(!silent) lamexp_beep(lamexp_beep_info);
+			if(!silent) MUtils::Sound::beep(MUtils::Sound::BEEP_NFO);
 			ui->lineEditRenamePattern->setPalette(QPalette());
 		}
 	}
@@ -3998,13 +3999,13 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac.exe", "--help"); break;
 			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe", ""); break;
 			case SettingsModel::AAC_ENCODER_NERO: showCustomParamsHelpScreen("neroAacEnc.exe", "-help"); break;
-			default: lamexp_beep(lamexp_beep_error); break;
+			default: MUtils::Sound::beep(MUtils::Sound::BEEP_ERR); break;
 		}
 	}
 	else if(obj == ui->helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
 	else if(obj == ui->helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
 	else if(obj == ui->helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc.exe", "--help");
-	else lamexp_beep(lamexp_beep_error);
+	else MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 }
 
 /*
@@ -4015,7 +4016,7 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 	const QString binary = lamexp_lookup_tool(toolName);
 	if(binary.isEmpty())
 	{
-		lamexp_beep(lamexp_beep_error);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 		qWarning("customParamsHelpRequested: Binary could not be found!");
 		return;
 	}
@@ -4059,7 +4060,7 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 	if(output.count() < 1)
 	{
 		qWarning("Empty output, cannot show help screen!");
-		lamexp_beep(lamexp_beep_error);
+		MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 	}
 
 	LogViewDialog *dialog = new LogViewDialog(this);

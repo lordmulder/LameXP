@@ -35,7 +35,9 @@
 #include <MUtils/UpdateChecker.h>
 #include <MUtils/Version.h>
 #include <MUtils/Exception.h>
+#include <MUtils/Sound.h>
 #include <MUtils/OSSupport.h>
+
 
 //Qt includes
 #include <QClipboard>
@@ -343,13 +345,13 @@ void UpdateDialog::threadFinished(void)
 
 	if(!bSuccess)
 	{
-		if(m_settings->soundsEnabled()) lamexp_play_sound("error", true);
+		if(m_settings->soundsEnabled()) MUtils::Sound::play_sound("error", true);
 	}
 	else
 	{
 		const bool bHaveUpdate = (m_thread->getUpdateStatus() == MUtils::UpdateChecker::UpdateStatus_CompletedUpdateAvailable);
 		ui->installButton->setEnabled(bHaveUpdate);
-		lamexp_beep(bHaveUpdate ? lamexp_beep_info : lamexp_beep_warning);
+		MUtils::Sound::beep(bHaveUpdate ? MUtils::Sound::BEEP_NFO : MUtils::Sound::BEEP_WRN);
 
 		if(const MUtils::UpdateCheckerInfo *const updateInfo = m_thread->getUpdateInfo())
 		{
@@ -485,5 +487,5 @@ void UpdateDialog::testKnownHosts(void)
 	}
 
 	ui->statusLabel->setText("Test completed.");
-	lamexp_beep(lamexp_beep_info);
+	MUtils::Sound::beep(MUtils::Sound::BEEP_NFO);
 }

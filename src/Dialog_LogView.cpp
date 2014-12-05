@@ -30,6 +30,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/Sound.h>
 
 //Qt includes
 #include <QClipboard>
@@ -90,7 +91,7 @@ void LogViewDialog::copyButtonClicked(void)
 	ui->buttonCopy->setIcon(*m_acceptIcon);
 	ui->buttonCopy->blockSignals(true);
 	QTimer::singleShot(1250, this, SLOT(restoreIcon()));
-	lamexp_beep(lamexp_beep_info);
+	MUtils::Sound::beep(MUtils::Sound::BEEP_NFO);
 }
 
 void LogViewDialog::saveButtonClicked(void)

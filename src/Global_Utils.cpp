@@ -59,45 +59,6 @@ g_lamexp_app_icon;
 ///////////////////////////////////////////////////////////////////////////////
 
 /*
- * Remove forbidden characters from a filename
- */
-const QString lamexp_clean_filename(const QString &str)
-{
-	QString newStr(str);
-	QRegExp rx("\"(.+)\"");
-	rx.setMinimal(true);
-
-	newStr.replace("\\", "-");
-	newStr.replace(" / ", ", ");
-	newStr.replace("/", ",");
-	newStr.replace(":", "-");
-	newStr.replace("*", "x");
-	newStr.replace("?", "");
-	newStr.replace("<", "[");
-	newStr.replace(">", "]");
-	newStr.replace("|", "!");
-	newStr.replace(rx, "`\\1´");
-	newStr.replace("\"", "'");
-	
-	return newStr.simplified();
-}
-
-/*
- * Remove forbidden characters from a file path
- */
-const QString lamexp_clean_filepath(const QString &str)
-{
-	QStringList parts = QString(str).replace("\\", "/").split("/");
-
-	for(int i = 0; i < parts.count(); i++)
-	{
-		parts[i] = lamexp_clean_filename(parts[i]);
-	}
-
-	return parts.join("/");
-}
-
-/*
  * Get a list of all available Qt Text Codecs
  */
 QStringList lamexp_available_codepages(bool noAliases)

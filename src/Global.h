@@ -45,24 +45,6 @@ extern const char* LAMEXP_DEFAULT_TRANSLATION;
 // TYPE DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-//Beep types
-typedef enum
-{
-	lamexp_beep_info = 0,
-	lamexp_beep_warning = 1,
-	lamexp_beep_error = 2
-}
-lamexp_beep_t;
-
-//Network connection types
-typedef enum
-{
-	lamexp_network_err = 0,	/*unknown*/
-	lamexp_network_non = 1,	/*not connected*/
-	lamexp_network_yes = 2	/*connected*/
-}
-lamexp_network_t;
-
 //System color types
 typedef enum
 {
@@ -79,7 +61,6 @@ lamexp_syscolor_t;
 const QIcon &lamexp_app_icon(void);
 bool lamexp_append_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
 QStringList lamexp_available_codepages(bool noAliases = true);
-bool lamexp_beep(int beepType);
 void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned int delay = 150);
 bool lamexp_block_window_move(void *message);
 bool lamexp_bring_process_to_front(const unsigned long pid);
@@ -87,9 +68,6 @@ bool lamexp_bring_to_front(const QWidget *win);
 bool lamexp_check_escape_state(void);
 bool lamexp_check_sysmenu_msg(void *message, const unsigned int identifier);
 bool lamexp_check_tool(const QString &toolName);
-const QString lamexp_clean_filename(const QString &str);
-const QString lamexp_clean_filepath(const QString &str);
-unsigned long lamexp_dbg_private_bytes(void);
 bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
 void lamexp_finalization(void);
 int lamexp_init_ipc(void);
@@ -99,9 +77,6 @@ void lamexp_ipc_read(unsigned int *command, char* message, size_t buffSize);
 void lamexp_ipc_send(unsigned int command, const char* message);
 const QString lamexp_lookup_tool(const QString &toolName);
 const char *lamexp_mulders_url(void);
-bool lamexp_play_sound(const QString &name, const bool bAsync);
-bool lamexp_play_sound_file(const QString &library, const unsigned short uiSoundIdx, const bool bAsync);
-bool lamexp_play_sound_alias(const QString &alias, const bool bAsync);
 bool lamexp_portable_mode(void);
 QStringList lamexp_query_translations(void);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
