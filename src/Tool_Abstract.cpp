@@ -39,34 +39,33 @@
 #include <QDir>
 
 /*
- * Static vars
+ * Job Object
  */
-quint64 AbstractTool::s_lastLaunchTime = 0ui64;
-QMutex AbstractTool::s_mutex_startProcess;
-JobObject *AbstractTool::s_jobObject = NULL;
-unsigned int AbstractTool::s_jobObjRefCount = 0U;
+QScopedPointer<JobObject> AbstractTool::s_jobObject;
+QMutex                    AbstractTool::s_jobObjMtx;
+
+/*
+ * Process Timer
+ */
+quint64 AbstractTool::s_startProcessTimer = 0ui64;
+QMutex  AbstractTool::s_startProcessMutex;
 
 /*
  * Const
  */
-static const unsigned int START_DELAY = 333;					//in milliseconds
-static const quint64 START_DELAY_NANO = START_DELAY * 1000 * 10; //in 100-nanosecond intervals
+static const unsigned int START_DELAY = 50U;								//in milliseconds
+static const quint64 START_DELAY_NANO = quint64(START_DELAY) * 10000ui64;	//in 100-nanosecond intervals
 
 /*
  * Constructor
  */
 AbstractTool::AbstractTool(void)
 {
-	QMutexLocker lock(&s_mutex_startProcess);
+	QMutexLocker lock(&s_jobObjMtx);
 
-	if(s_jobObjRefCount < 1U)
+	if(s_jobObject.isNull())
 	{
-		s_jobObject = new JobObject();
-		s_jobObjRefCount = 1U;
-	}
-	else
-	{
-		s_jobObjRefCount++;
+		s_jobObject.reset(new JobObject());
 	}
 
 	m_firstLaunch = true;
@@ -77,16 +76,6 @@ AbstractTool::AbstractTool(void)
  */
 AbstractTool::~AbstractTool(void)
 {
-	QMutexLocker lock(&s_mutex_startProcess);
-
-	if(s_jobObjRefCount >= 1U)
-	{
-		s_jobObjRefCount--;
-		if(s_jobObjRefCount < 1U)
-		{
-			MUTILS_DELETE(s_jobObject);
-		}
-	}
 }
 
 /*
@@ -94,11 +83,13 @@ AbstractTool::~AbstractTool(void)
  */
 bool AbstractTool::startProcess(QProcess &process, const QString &program, const QStringList &args)
 {
-	QMutexLocker lock(&s_mutex_startProcess);
+	QMutexLocker lock(&s_startProcessMutex);
 
-	if(MUtils::OS::current_file_time() <= s_lastLaunchTime)
+	while(MUtils::OS::current_file_time() <= s_startProcessTimer)
 	{
+		lock.unlock();
 		MUtils::OS::sleep_ms(START_DELAY);
+		lock.relock();
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");
@@ -117,7 +108,6 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 		}
 
 		MUtils::OS::change_process_priority(&process, -1);
-		lock.unlock();
 		
 		if(m_firstLaunch)
 		{
@@ -125,7 +115,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 			m_firstLaunch = false;
 		}
 		
-		s_lastLaunchTime = MUtils::OS::current_file_time() + START_DELAY_NANO;
+		s_startProcessTimer = MUtils::OS::current_file_time() + START_DELAY_NANO;
 		return true;
 	}
 
@@ -136,7 +126,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	process.kill();
 	process.waitForFinished(-1);
 
-	s_lastLaunchTime = MUtils::OS::current_file_time() + START_DELAY_NANO;
+	s_startProcessTimer = MUtils::OS::current_file_time() + START_DELAY_NANO;
 	return false;
 }
 
