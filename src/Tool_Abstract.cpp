@@ -53,7 +53,7 @@ QMutex  AbstractTool::s_startProcessMutex;
 /*
  * Const
  */
-static const unsigned int START_DELAY = 50U;								//in milliseconds
+static const unsigned int START_DELAY = 100U;								//in milliseconds
 static const quint64 START_DELAY_NANO = quint64(START_DELAY) * 10000ui64;	//in 100-nanosecond intervals
 
 /*
@@ -84,12 +84,15 @@ AbstractTool::~AbstractTool(void)
 bool AbstractTool::startProcess(QProcess &process, const QString &program, const QStringList &args)
 {
 	QMutexLocker lock(&s_startProcessMutex);
-
-	while(MUtils::OS::current_file_time() <= s_startProcessTimer)
+	
+	quint64 currentFileTime = MUtils::OS::current_file_time();
+	while(currentFileTime < s_startProcessTimer)
 	{
+		const quint64 expectedFileTime = s_startProcessTimer;
 		lock.unlock();
-		MUtils::OS::sleep_ms(START_DELAY);
+		MUtils::OS::sleep_ms(size_t((expectedFileTime - currentFileTime) / 10000ui64) + 1U);
 		lock.relock();
+		currentFileTime = MUtils::OS::current_file_time();
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");
