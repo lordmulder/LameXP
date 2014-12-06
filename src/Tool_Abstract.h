@@ -26,6 +26,7 @@
 
 class QMutex;
 class QProcess;
+class QElapsedTimer;
 class JobObject;
 
 class AbstractTool : public QObject
@@ -47,12 +48,13 @@ protected:
 	static const int m_processTimeoutInterval = 600000;
 
 private:
-	static quint64 s_startProcessTimer;
-	static QMutex  s_startProcessMutex;
+	static QScopedPointer<JobObject>     s_jobObjectInstance;
+	static QScopedPointer<QElapsedTimer> s_startProcessTimer;
 
-	static QScopedPointer<JobObject> s_jobObject;
-	static QMutex                    s_jobObjMtx;
-	static quint64                   s_jobObjCnt;
+	static QMutex s_startProcessMutex;
+	static QMutex s_createObjectMutex;
+
+	static quint64 s_referenceCounter;
 
 	bool m_firstLaunch;
 };

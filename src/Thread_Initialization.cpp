@@ -44,6 +44,7 @@
 #include <QThreadPool>
 #include <QMutex>
 #include <QQueue>
+#include <QElapsedTimer>
 
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
@@ -319,7 +320,9 @@ double InitializationThread::doInit(const size_t threadCount)
 	LockedFile::selfTest();
 	ExtractorTask::clearFlags();
 
-	const long long timeExtractStart = MUtils::OS::perfcounter_read();
+	//Start the timer
+	QElapsedTimer timeExtractStart;
+	timeExtractStart.start();
 	
 	//Extract all files
 	while(!(queueToolName.isEmpty() || queueChecksum.isEmpty() || queueVersInfo.isEmpty() || queueCpuTypes.isEmpty() || queueVersions.isEmpty()))
@@ -364,7 +367,9 @@ double InitializationThread::doInit(const size_t threadCount)
 	pool->waitForDone();
 	MUTILS_DELETE(pool);
 
-	const long long timeExtractEnd = MUtils::OS::perfcounter_read();
+	//Performance measure
+	const qint64 delayExtract = timeExtractStart.elapsed();
+	timeExtractStart.invalidate();
 
 	//Make sure all files were extracted correctly
 	if(ExtractorTask::getExcept())
@@ -388,8 +393,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	}
 
 	//Check delay
-	const double delayExtract = static_cast<double>(timeExtractEnd - timeExtractStart) / static_cast<double>(MUtils::OS::perfcounter_freq());
-	if(delayExtract > g_allowedExtractDelay)
+	if((double(delayExtract) / 1000.0) > g_allowedExtractDelay)
 	{
 		m_slowIndicator = true;
 		qWarning("Extracting tools took %.3f seconds -> probably slow realtime virus scanner.", delayExtract);

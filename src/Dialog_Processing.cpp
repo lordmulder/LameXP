@@ -69,10 +69,12 @@
 #include <QProgressDialog>
 #include <QResizeEvent>
 #include <QTime>
+#include <QElapsedTimer>
 #include <QThreadPool>
 
 #include <math.h>
 #include <float.h>
+#include <stdint.h>
 
 ////////////////////////////////////////////////////////////
 
@@ -291,7 +293,6 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	m_skippedJobs.clear();
 	m_userAborted = false;
 	m_forcedAbort = false;
-	m_timerStart = 0I64;
 }
 
 ////////////////////////////////////////////////////////////
@@ -555,7 +556,9 @@ void ProcessingDialog::initEncoding(void)
 
 	m_initThreads = m_threadPool->maxThreadCount();
 	QTimer::singleShot(100, this, SLOT(initNextJob()));
-	m_timerStart = MUtils::OS::perfcounter_read();
+	
+	m_totalTime.reset(new QElapsedTimer());
+	m_totalTime->start();
 }
 
 void ProcessingDialog::initNextJob(void)
@@ -705,15 +708,10 @@ void ProcessingDialog::doneEncoding(void)
 	}
 	else
 	{
-		const qint64 counter = MUtils::OS::perfcounter_read();
-		const qint64 frequency  = MUtils::OS::perfcounter_freq();
-		if((counter >= 0I64) && (frequency >= 0))
+		if((!m_totalTime.isNull()) && m_totalTime->isValid())
 		{
-			if((m_timerStart >= 0I64) && (m_timerStart < counter))
-			{
-				double timeElapsed = static_cast<double>(counter - m_timerStart) / static_cast<double>(frequency);
-				m_progressModel->addSystemMessage(tr("Process finished after %1.").arg(time2text(timeElapsed)), ProgressModel::SysMsg_Performance);
-			}
+			m_progressModel->addSystemMessage(tr("Process finished after %1.").arg(time2text(m_totalTime->elapsed())), ProgressModel::SysMsg_Performance);
+			m_totalTime->invalidate();
 		}
 
 		if(m_failedJobs.count() > 0)
@@ -1151,18 +1149,16 @@ bool ProcessingDialog::shutdownComputer(void)
 	return true;
 }
 
-QString ProcessingDialog::time2text(const double timeVal) const
+QString ProcessingDialog::time2text(const qint64 &msec) const
 {
-	double intPart = 0;
-	double frcPart = modf(timeVal, &intPart);
-
-	QTime time = QTime().addSecs(qRound(intPart)).addMSecs(qRound(frcPart * 1000.0));
+	const qint64 MILLISECONDS_PER_DAY = 86399999;	//24x60x60x1000 - 1
+	const QTime time = QTime().addMSecs(qMin(msec, MILLISECONDS_PER_DAY));
 
 	QString a, b;
 
 	if(time.hour() > 0)
 	{
-		a = tr("%n hour(s)", "", time.hour());
+		a = tr("%n hour(s)",   "", time.hour());
 		b = tr("%n minute(s)", "", time.minute());
 	}
 	else if(time.minute() > 0)
@@ -1172,7 +1168,7 @@ QString ProcessingDialog::time2text(const double timeVal) const
 	}
 	else
 	{
-		a = tr("%n second(s)", "", time.second());
+		a = tr("%n second(s)",      "", time.second());
 		b = tr("%n millisecond(s)", "", time.msec());
 	}
 

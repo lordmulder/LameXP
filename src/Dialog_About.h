@@ -33,6 +33,7 @@ namespace Ui {
 class QLabel;
 class QPixmap;
 class QTimer;
+class QElapsedTimer;
 class SettingsModel;
 
 //AboutDialog class
@@ -78,7 +79,7 @@ private:
 	double m_discOpacity;
 	QPixmap *m_cartoon[4];
 	bool m_rotateNext;
-	__int64 m_disqueDelay;
+	QScopedPointer<QElapsedTimer> m_disqueDelay;
 
 	void initInformationTab(void);
 	void initContributorsTab(void);

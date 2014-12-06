@@ -37,25 +37,29 @@
 #include <QLibrary>
 #include <QProcessEnvironment>
 #include <QDir>
+#include <QElapsedTimer>
 
 /*
- * Job Object
+ * Static Objects
  */
-QScopedPointer<JobObject> AbstractTool::s_jobObject;
-QMutex                    AbstractTool::s_jobObjMtx;
-quint64                   AbstractTool::s_jobObjCnt = 0ui64;
+QScopedPointer<JobObject>     AbstractTool::s_jobObjectInstance;
+QScopedPointer<QElapsedTimer> AbstractTool::s_startProcessTimer;
 
 /*
- * Process Timer
+ * Synchronization
  */
-quint64 AbstractTool::s_startProcessTimer = 0ui64;
-QMutex  AbstractTool::s_startProcessMutex;
+QMutex AbstractTool::s_startProcessMutex;
+QMutex AbstractTool::s_createObjectMutex;
+
+/*
+ * Ref Counter
+ */
+quint64 AbstractTool::s_referenceCounter = 0ui64;
 
 /*
  * Const
  */
-static const unsigned int START_DELAY = 100U;								//in milliseconds
-static const quint64 START_DELAY_NANO = quint64(START_DELAY) * 10000ui64;	//in 100-nanosecond intervals
+static const qint64 START_DELAY = 64i64;	//in milliseconds
 
 /*
  * Constructor
@@ -65,11 +69,12 @@ AbstractTool::AbstractTool(void)
 	m_firstLaunch(true)
 
 {
-	QMutexLocker lock(&s_jobObjMtx);
+	QMutexLocker lock(&s_createObjectMutex);
 
-	if(s_jobObjCnt++ == 0)
+	if(s_referenceCounter++ == 0)
 	{
-		s_jobObject.reset(new JobObject());
+		s_jobObjectInstance.reset(new JobObject());
+		s_startProcessTimer.reset(new QElapsedTimer());
 	}
 }
 
@@ -78,11 +83,12 @@ AbstractTool::AbstractTool(void)
  */
 AbstractTool::~AbstractTool(void)
 {
-	QMutexLocker lock(&s_jobObjMtx);
+	QMutexLocker lock(&s_createObjectMutex);
 
-	if(--s_jobObjCnt == 0)
+	if(--s_referenceCounter == 0)
 	{
-		s_jobObject.reset(NULL);
+		s_jobObjectInstance.reset(NULL);
+		s_startProcessTimer.reset(NULL);
 	}
 }
 
@@ -93,14 +99,16 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 {
 	QMutexLocker lock(&s_startProcessMutex);
 	
-	quint64 currentFileTime = MUtils::OS::current_file_time();
-	while(currentFileTime < s_startProcessTimer)
+	if((!s_startProcessTimer.isNull()) && s_startProcessTimer->isValid())
 	{
-		const quint64 expectedFileTime = s_startProcessTimer;
-		lock.unlock();
-		MUtils::OS::sleep_ms(size_t((expectedFileTime - currentFileTime) / 10000ui64) + 1U);
-		lock.relock();
-		currentFileTime = MUtils::OS::current_file_time();
+		qint64 elapsed = s_startProcessTimer->elapsed();
+		while(elapsed < START_DELAY)
+		{
+			lock.unlock();
+			MUtils::OS::sleep_ms((size_t)(START_DELAY - elapsed));
+			lock.relock();
+			elapsed = s_startProcessTimer->elapsed();
+		}
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");
@@ -110,9 +118,9 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	
 	if(process.waitForStarted())
 	{
-		if(!s_jobObject.isNull())
+		if(!s_jobObjectInstance.isNull())
 		{
-			if(!s_jobObject->addProcessToJob(&process))
+			if(!s_jobObjectInstance->addProcessToJob(&process))
 			{
 				qWarning("Failed to assign process to job object!");
 			}
@@ -126,7 +134,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 			m_firstLaunch = false;
 		}
 		
-		s_startProcessTimer = MUtils::OS::current_file_time() + START_DELAY_NANO;
+		s_startProcessTimer->start();
 		return true;
 	}
 
@@ -137,7 +145,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	process.kill();
 	process.waitForFinished(-1);
 
-	s_startProcessTimer = MUtils::OS::current_file_time() + START_DELAY_NANO;
+	s_startProcessTimer->start();
 	return false;
 }
 

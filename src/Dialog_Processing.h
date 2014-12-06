@@ -40,10 +40,10 @@ class QLabel;
 class QMenu;
 class QModelIndex;
 class QMovie;
+class QThreadPool;
+class QElapsedTimer;
 class RAMObserverThread;
 class SettingsModel;
-class QThreadPool;
-class lamexp_icon_t;
 
 enum shutdownFlag_t
 {
@@ -105,7 +105,7 @@ private:
 	AudioFileModel updateMetaInfo(AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);
-	QString time2text(const double timeVal) const;
+	QString time2text(const qint64 &msec) const;
 	
 	QThreadPool *m_threadPool;
 	QList<AudioFileModel> m_pendingJobs;
@@ -133,7 +133,7 @@ private:
 	CPUObserverThread *m_cpuObserver;
 	RAMObserverThread *m_ramObserver;
 	DiskObserverThread *m_diskObserver;
-	qint64 m_timerStart;
+	QScopedPointer<QElapsedTimer> m_totalTime;
 	int m_progressViewFilter;
 	QColor *m_defaultColor;
 };

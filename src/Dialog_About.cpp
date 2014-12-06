@@ -50,6 +50,7 @@
 #include <QTextStream>
 #include <QScrollBar>
 #include <QCloseEvent>
+#include <QElapsedTimer>
 #include <QWindowsVistaStyle>
 #include <QWindowsXPStyle>
 
@@ -146,7 +147,6 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	m_disque(NULL),
 	m_disqueTimer(NULL),
 	m_rotateNext(false),
-	m_disqueDelay(_I64_MAX),
 	m_lastTab(0)
 {
 	//Init the dialog, from the .ui file
@@ -387,17 +387,18 @@ void AboutDialog::gotoLicenseTab(void)
 void AboutDialog::moveDisque(void)
 {
 	int delta = 2;
-	const qint64 perfFrequ = MUtils::OS::perfcounter_freq();
-	const qint64 perfCount = MUtils::OS::perfcounter_read();
+	QElapsedTimer elapsedTimer;
+	elapsedTimer.start();
 
-	if((perfFrequ >= 0) && (perfCount >= 0))
+	if((!m_disqueDelay.isNull()) && m_disqueDelay->isValid())
 	{
-		if(m_disqueDelay != _I64_MAX)
-		{
-			const double delay = static_cast<double>(perfCount) - static_cast<double>(m_disqueDelay);
-			delta = qMax(1, qMin(128, static_cast<int>(ceil(delay / static_cast<double>(perfFrequ) / 0.00512))));
-		}
-		m_disqueDelay = perfCount;
+		const qint64 delay = m_disqueDelay->restart();
+		delta = qBound(1, static_cast<int>(ceil(static_cast<double>(delay) / 5.12)), 128);
+	}
+	else
+	{
+		m_disqueDelay.reset(new QElapsedTimer());
+		m_disqueDelay->start();
 	}
 
 	if(m_disque)
