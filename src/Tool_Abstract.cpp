@@ -43,6 +43,7 @@
  */
 QScopedPointer<JobObject> AbstractTool::s_jobObject;
 QMutex                    AbstractTool::s_jobObjMtx;
+quint64                   AbstractTool::s_jobObjCnt = 0ui64;
 
 /*
  * Process Timer
@@ -60,15 +61,16 @@ static const quint64 START_DELAY_NANO = quint64(START_DELAY) * 10000ui64;	//in 1
  * Constructor
  */
 AbstractTool::AbstractTool(void)
+:
+	m_firstLaunch(true)
+
 {
 	QMutexLocker lock(&s_jobObjMtx);
 
-	if(s_jobObject.isNull())
+	if(s_jobObjCnt++ == 0)
 	{
 		s_jobObject.reset(new JobObject());
 	}
-
-	m_firstLaunch = true;
 }
 
 /*
@@ -76,6 +78,12 @@ AbstractTool::AbstractTool(void)
  */
 AbstractTool::~AbstractTool(void)
 {
+	QMutexLocker lock(&s_jobObjMtx);
+
+	if(--s_jobObjCnt == 0)
+	{
+		s_jobObject.reset(NULL);
+	}
 }
 
 /*
@@ -102,7 +110,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	
 	if(process.waitForStarted())
 	{
-		if(s_jobObject)
+		if(!s_jobObject.isNull())
 		{
 			if(!s_jobObject->addProcessToJob(&process))
 			{

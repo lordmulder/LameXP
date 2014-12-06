@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LameXP", "LameXP_VS2013.vcxproj", "{00FE736A-8DB1-41B3-B915-4CD8DB09EF48}"
+	ProjectSection(ProjectDependencies) = postProject
+		{55405FE1-149F-434C-9D72-4B64348D2A08} = {55405FE1-149F-434C-9D72-4B64348D2A08}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MUtilities", "..\MUtilities\MUtilities_VS2013.vcxproj", "{55405FE1-149F-434C-9D72-4B64348D2A08}"
 EndProject

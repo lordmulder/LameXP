@@ -52,6 +52,7 @@ private:
 
 	static QScopedPointer<JobObject> s_jobObject;
 	static QMutex                    s_jobObjMtx;
+	static quint64                   s_jobObjCnt;
 
 	bool m_firstLaunch;
 };
