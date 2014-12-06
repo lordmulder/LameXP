@@ -75,6 +75,10 @@ AbstractTool::AbstractTool(void)
 	{
 		s_jobObjectInstance.reset(new JobObject());
 		s_startProcessTimer.reset(new QElapsedTimer());
+		if(!MUtils::OS::setup_timer_resolution())
+		{
+			qWarning("Failed to setup system timer resolution!");
+		}
 	}
 }
 
@@ -89,6 +93,10 @@ AbstractTool::~AbstractTool(void)
 	{
 		s_jobObjectInstance.reset(NULL);
 		s_startProcessTimer.reset(NULL);
+		if(!MUtils::OS::reset_timer_resolution())
+		{
+			qWarning("Failed to reset system timer resolution!");
+		}
 	}
 }
 
