@@ -319,7 +319,6 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="src\Global_Version.cpp" />
     <ClCompile Include="src\Global_Win32.cpp" />
     <ClCompile Include="src\Global_Tools.cpp" />
-    <ClCompile Include="src\JobObject.cpp" />
     <ClCompile Include="src\LockedFile.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Model_Artwork.cpp" />
@@ -576,7 +575,6 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="src\JobObject.h" />
     <ClInclude Include="src\Tools.h" />
     <CustomBuild Include="src\Tool_WaveProperties.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>

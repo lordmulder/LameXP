@@ -36,6 +36,7 @@
 #include <MUtils/Version.h>
 #include <MUtils/Exception.h>
 #include <MUtils/Sound.h>
+#include <MUtils/GUI.h>
 #include <MUtils/OSSupport.h>
 
 
@@ -97,7 +98,7 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
 
 	//Disable "X" button
-	lamexp_enable_close_button(this, false);
+	MUtils::GUI::enable_close_button(this, false);
 
 	//Init animation
 	m_animator = new QMovie(":/images/Loading3.gif");
@@ -220,7 +221,7 @@ bool UpdateDialog::event(QEvent *e)
 {
 	if((e->type() == QEvent::ActivationChange) && (m_updaterProcess != NULL))
 	{
-		lamexp_bring_process_to_front(m_updaterProcess);
+		MUtils::GUI::bring_to_front(m_updaterProcess);
 	}
 	return QDialog::event(e);
 }

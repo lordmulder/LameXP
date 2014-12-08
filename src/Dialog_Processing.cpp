@@ -378,7 +378,7 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 	{
 		static const char *NA = " N/A";
 
-		lamexp_enable_close_button(this, false);
+		MUtils::GUI::enable_close_button(this, false);
 		ui->button_closeDialog->setEnabled(false);
 		ui->button_AbortProcess->setEnabled(false);
 		m_progressIndicator->start();
@@ -752,7 +752,7 @@ void ProcessingDialog::doneEncoding(void)
 		}
 	}
 	
-	lamexp_enable_close_button(this, true);
+	MUtils::GUI::enable_close_button(this, true);
 	ui->button_closeDialog->setEnabled(true);
 	ui->button_AbortProcess->setEnabled(false);
 	ui->checkBox_shutdownComputer->setEnabled(false);
@@ -1064,7 +1064,7 @@ void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason rea
 {
 	if(reason == QSystemTrayIcon::DoubleClick)
 	{
-		lamexp_bring_to_front(this);
+		MUtils::GUI::bring_to_front(this);
 	}
 }
 

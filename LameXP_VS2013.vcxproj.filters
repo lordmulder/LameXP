@@ -217,9 +217,6 @@
     <ClCompile Include="src\Registry_Encoder.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="src\JobObject.cpp">
-      <Filter>Source Files\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="src\Global_Tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -518,9 +515,6 @@
     </ClInclude>
     <ClInclude Include="src\Decoder_Opus.h">
       <Filter>Header Files\Decoders</Filter>
-    </ClInclude>
-    <ClInclude Include="src\JobObject.h">
-      <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="tmp\LameXP\UIC_WorkingBanner.h">
       <Filter>Generated Files\UIC</Filter>

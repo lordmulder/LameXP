@@ -27,7 +27,11 @@
 class QMutex;
 class QProcess;
 class QElapsedTimer;
-class JobObject;
+
+namespace MUtils
+{
+	class JobObject;
+}
 
 class AbstractTool : public QObject
 {
@@ -48,8 +52,8 @@ protected:
 	static const int m_processTimeoutInterval = 600000;
 
 private:
-	static QScopedPointer<JobObject>     s_jobObjectInstance;
-	static QScopedPointer<QElapsedTimer> s_startProcessTimer;
+	static QScopedPointer<MUtils::JobObject> s_jobObjectInstance;
+	static QScopedPointer<QElapsedTimer>     s_startProcessTimer;
 
 	static QMutex s_startProcessMutex;
 	static QMutex s_createObjectMutex;

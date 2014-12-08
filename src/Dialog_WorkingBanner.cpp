@@ -29,6 +29,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/GUI.h>
 
 //Qt
 #include <QThread>
@@ -90,7 +91,7 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	setModal(true);
 
 	//Enable the "sheet of glass" effect
-	if(lamexp_sheet_of_glass(this))
+	if(MUtils::GUI::sheet_of_glass(this))
 	{
 		m_style = new QWindowsVistaStyle();
 		this->setStyle(m_style);
@@ -289,7 +290,7 @@ void WorkingBanner::hideEvent(QHideEvent *event)
 
 void WorkingBanner::windowShown(void)
 {
-	lamexp_bring_to_front(this);
+	MUtils::GUI::bring_to_front(this);
 }
 
 void WorkingBanner::setText(const QString &text)

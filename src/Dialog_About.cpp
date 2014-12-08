@@ -32,6 +32,7 @@
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
 #include <MUtils/Sound.h>
+#include <MUtils/GUI.h>
 #include <MUtils/Version.h>
 
 //Qt
@@ -157,7 +158,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	//Disable "X" button
 	if(firstStart)
 	{
-		lamexp_enable_close_button(this, false);
+		MUtils::GUI::enable_close_button(this, false);
 	}
 
 	//Init images

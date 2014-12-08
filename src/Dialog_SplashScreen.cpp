@@ -28,6 +28,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/GUI.h>
 
 //Qt
 #include <QThread>
@@ -79,7 +80,7 @@ SplashScreen::SplashScreen(QWidget *parent)
 	connect(m_timer, SIGNAL(timeout()), this, SLOT(updateHandler()));
 
 	//Enable "sheet of glass" effect on splash screen
-	if(!lamexp_sheet_of_glass(this))
+	if(!MUtils::GUI::sheet_of_glass(this))
 	{
 		setStyleSheet("background-image: url(:/images/Background.jpg)");
 	}
@@ -130,7 +131,7 @@ void SplashScreen::showSplash(QThread *thread)
 
 	//Wait for window to show
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	splashScreen->repaint(); lamexp_bring_to_front(splashScreen);
+	splashScreen->repaint(); MUtils::GUI::bring_to_front(splashScreen);
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	//Connect thread signals
@@ -185,7 +186,7 @@ void SplashScreen::updateHandler(void)
 		else
 		{
 			setWindowOpacity(1.0);
-			lamexp_bring_to_front(this);
+			MUtils::GUI::bring_to_front(this);
 			m_timer->stop();
 			m_status = STATUS_WAIT;
 		}
@@ -214,7 +215,7 @@ void SplashScreen::threadComplete(void)
 	{
 		m_timer->start(FADE_DELAY);
 	}
-	lamexp_bring_to_front(this);
+	MUtils::GUI::bring_to_front(this);
 }
 
 ////////////////////////////////////////////////////////////

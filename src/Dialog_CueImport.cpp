@@ -39,6 +39,7 @@
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/GUI.h>
 
 //Qt includes
 #include <QFileInfo>
@@ -255,7 +256,7 @@ void CueImportDialog::browseButtonClicked(void)
 		if(pos > 0) currentDir.left(pos - 1); else break;
 	}
 
-	if(lamexp_themes_enabled())
+	if(MUtils::GUI::themes_enabled())
 	{
 		newOutDir = QFileDialog::getExistingDirectory(this, tr("Choose Output Directory"), currentDir);
 	}

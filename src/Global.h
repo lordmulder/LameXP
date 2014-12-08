@@ -42,33 +42,12 @@ extern const char* LAMEXP_DEFAULT_LANGID;
 extern const char* LAMEXP_DEFAULT_TRANSLATION;
 
 ///////////////////////////////////////////////////////////////////////////////
-// TYPE DEFINITIONS
-///////////////////////////////////////////////////////////////////////////////
-
-//System color types
-typedef enum
-{
-	lamexp_syscolor_text = 0,
-	lamexp_syscolor_background = 1,
-	lamexp_syscolor_caption = 2
-}
-lamexp_syscolor_t;
-
-///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
 
 const QIcon &lamexp_app_icon(void);
-bool lamexp_append_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
 QStringList lamexp_available_codepages(bool noAliases = true);
-void lamexp_blink_window(QWidget *poWindow, unsigned int count = 10, unsigned int delay = 150);
-bool lamexp_block_window_move(void *message);
-bool lamexp_bring_process_to_front(const unsigned long pid);
-bool lamexp_bring_to_front(const QWidget *win);
-bool lamexp_check_escape_state(void);
-bool lamexp_check_sysmenu_msg(void *message, const unsigned int identifier);
 bool lamexp_check_tool(const QString &toolName);
-bool lamexp_enable_close_button(const QWidget *win, const bool bEnable = true);
 void lamexp_finalization(void);
 int lamexp_init_ipc(void);
 bool lamexp_install_translator(const QString &language);
@@ -80,11 +59,7 @@ const char *lamexp_mulders_url(void);
 bool lamexp_portable_mode(void);
 QStringList lamexp_query_translations(void);
 void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
-bool lamexp_sheet_of_glass(QWidget *window);
-bool lamexp_sheet_of_glass_update(QWidget *window);
-QColor lamexp_system_color(const int color_id);
 const char *lamexp_support_url(void);
-bool lamexp_themes_enabled(void);
 unsigned int lamexp_tool_version(const QString &toolName, QString *tag = NULL);
 unsigned int lamexp_toolver_coreaudio(void);
 unsigned int lamexp_toolver_fhgaacenc(void);
@@ -96,7 +71,6 @@ bool lamexp_translation_init(void);
 QString lamexp_translation_name(const QString &language);
 bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &country);
 unsigned int lamexp_translation_sysid(const QString &langId);
-bool lamexp_update_sysmenu(const QWidget *win, const unsigned int identifier, const QString &text);
 const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag = NULL);
 unsigned int lamexp_version_build(void);
 unsigned int lamexp_version_confg(void);

@@ -24,11 +24,11 @@
 
 //Internal
 #include "Global.h"
-#include "JobObject.h"
 
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/JobObject.h>
 
 //Qt
 #include <QProcess>
@@ -42,8 +42,8 @@
 /*
  * Static Objects
  */
-QScopedPointer<JobObject>     AbstractTool::s_jobObjectInstance;
-QScopedPointer<QElapsedTimer> AbstractTool::s_startProcessTimer;
+QScopedPointer<MUtils::JobObject> AbstractTool::s_jobObjectInstance;
+QScopedPointer<QElapsedTimer>     AbstractTool::s_startProcessTimer;
 
 /*
  * Synchronization
@@ -73,7 +73,7 @@ AbstractTool::AbstractTool(void)
 
 	if(s_referenceCounter++ == 0)
 	{
-		s_jobObjectInstance.reset(new JobObject());
+		s_jobObjectInstance.reset(new MUtils::JobObject());
 		s_startProcessTimer.reset(new QElapsedTimer());
 		if(!MUtils::OS::setup_timer_resolution())
 		{

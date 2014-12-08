@@ -260,7 +260,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabPageChanged(int)));
 
 	//Add system menu
-	lamexp_append_sysmenu(this, IDM_ABOUTBOX, "About...");
+	MUtils::GUI::sysmenu_append(this, IDM_ABOUTBOX, "About...");
 
 	//Setup corner widget
 	QLabel *cornerWidget = new QLabel(ui->menubar);
@@ -595,8 +595,8 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	ui->actionStyleWindowsXP->setData(3);
 	ui->actionStyleWindowsClassic->setData(4);
 	ui->actionStylePlastique->setChecked(true);
-	ui->actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP && lamexp_themes_enabled());
-	ui->actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA && lamexp_themes_enabled());
+	ui->actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP && MUtils::GUI::themes_enabled());
+	ui->actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA && MUtils::GUI::themes_enabled());
 	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 	styleActionActivated(NULL);
 
@@ -831,14 +831,14 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 	SHOW_BANNER(tr("Scanning folder(s) for files, please wait..."));
 	
 	QApplication::processEvents();
-	lamexp_check_escape_state();
+	MUtils::OS::check_key_state_esc();
 
 	while(!folderInfoList.isEmpty())
 	{
-		if(lamexp_check_escape_state())
+		if(MUtils::OS::check_key_state_esc())
 		{
-			MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 			qWarning("Operation cancelled by user!");
+			MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 			fileList.clear();
 			break;
 		}
@@ -1103,7 +1103,7 @@ void MainWindow::changeEvent(QEvent *e)
 	}
 
 	//Translate system menu
-	lamexp_update_sysmenu(this, IDM_ABOUTBOX, ui->buttonAbout->text());
+	MUtils::GUI::sysmenu_update(this, IDM_ABOUTBOX, ui->buttonAbout->text());
 	
 	//Force resize event
 	QApplication::postEvent(this, new QResizeEvent(this->size(), QSize()));
@@ -1263,7 +1263,7 @@ bool MainWindow::event(QEvent *e)
 
 bool MainWindow::winEvent(MSG *message, long *result)
 {
-	if(lamexp_check_sysmenu_msg(message, IDM_ABOUTBOX))
+	if(MUtils::GUI::sysmenu_check_msg(message, IDM_ABOUTBOX))
 	{
 		QTimer::singleShot(0, ui->buttonAbout, SLOT(click()));
 		*result = 0;
@@ -2033,7 +2033,7 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 			int result = 0;
 			QString selectedCueFile;
 
-			if(lamexp_themes_enabled())
+			if(MUtils::GUI::themes_enabled())
 			{
 				selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), m_settings->mostRecentInputPath(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
 			}
@@ -2084,7 +2084,7 @@ void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
 		QTimer::singleShot(2500, m_dropBox, SLOT(showToolTip()));
 	}
 	
-	lamexp_blink_window(m_dropBox);
+	MUtils::GUI::blink_window(m_dropBox);
 }
 
 /*
@@ -2267,7 +2267,7 @@ void MainWindow::addFilesButtonClicked(void)
 
 	TEMP_HIDE_DROPBOX
 	(
-		if(lamexp_themes_enabled())
+		if(MUtils::GUI::themes_enabled())
 		{
 			QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
 			QStringList selectedFiles = QFileDialog::getOpenFileNames(this, tr("Add file(s)"), m_settings->mostRecentInputPath(), fileTypeFilters.join(";;"));
@@ -2309,7 +2309,7 @@ void MainWindow::openFolderActionActivated(void)
 	{
 		TEMP_HIDE_DROPBOX
 		(
-			if(lamexp_themes_enabled())
+			if(MUtils::GUI::themes_enabled())
 			{
 				selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add Folder"), m_settings->mostRecentInputPath());
 			}
@@ -2612,7 +2612,7 @@ void MainWindow::exportCsvContextActionTriggered(void)
 	(
 		QString selectedCsvFile;
 	
-		if(lamexp_themes_enabled())
+		if(MUtils::GUI::themes_enabled())
 		{
 			selectedCsvFile = QFileDialog::getSaveFileName(this, tr("Save CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
 		}
@@ -2663,7 +2663,7 @@ void MainWindow::importCsvContextActionTriggered(void)
 	(
 		QString selectedCsvFile;
 	
-		if(lamexp_themes_enabled())
+		if(MUtils::GUI::themes_enabled())
 		{
 			selectedCsvFile = QFileDialog::getOpenFileName(this, tr("Open CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
 		}
@@ -3925,7 +3925,7 @@ void MainWindow::browseCustomTempFolderButtonClicked(void)
 {
 	QString newTempFolder;
 
-	if(lamexp_themes_enabled())
+	if(MUtils::GUI::themes_enabled())
 	{
 		newTempFolder = QFileDialog::getExistingDirectory(this, QString(), m_settings->customTempPath());
 	}
