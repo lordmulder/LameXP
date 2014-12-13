@@ -45,8 +45,15 @@ class WorkingBanner;
 class lamexp_icon_t;
 
 //UIC forward declartion
-namespace Ui {
+namespace Ui
+{
 	class MainWindow;
+}
+
+//IPC forward declartion
+namespace MUtils
+{
+	class IPCChannel;
 }
 
 //MainWindow class
@@ -55,7 +62,7 @@ class MainWindow: public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *metaInfo, SettingsModel *settingsModel, QWidget *parent = 0);
+	MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *const fileListModel, AudioFileModel_MetaInfo *const metaInfo, SettingsModel *const settingsModel, QWidget *const parent = 0);
 	~MainWindow(void);
 
 	bool isAccepted() { return m_accepted; }

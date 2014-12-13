@@ -226,7 +226,7 @@ static const char *g_hydrogen_audio_url = "http://wiki.hydrogenaud.io/index.php?
 // Constructor
 ////////////////////////////////////////////////////////////
 
-MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *metaInfo, SettingsModel *settingsModel, QWidget *parent)
+MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *const fileListModel, AudioFileModel_MetaInfo *const metaInfo, SettingsModel *const settingsModel, QWidget *const parent)
 :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
@@ -678,7 +678,7 @@ MainWindow::MainWindow(FileListModel *fileListModel, AudioFileModel_MetaInfo *me
 	connect(m_fileListModel, SIGNAL(rowAppended()), m_dropBox, SLOT(modelChanged()));
 
 	//Create message handler thread
-	m_messageHandler = new MessageHandlerThread();
+	m_messageHandler = new MessageHandlerThread(ipcChannel);
 	connect(m_messageHandler, SIGNAL(otherInstanceDetected()), this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(fileReceived(QString)), this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(folderReceived(QString, bool)), this, SLOT(addFolderDelayed(QString, bool)), Qt::QueuedConnection);

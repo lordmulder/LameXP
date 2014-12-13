@@ -28,6 +28,21 @@
 //Qt
 #include <QtGlobal>
 
+//Initialize static Qt plugins
+#ifdef QT_NODLL
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+Q_IMPORT_PLUGIN(qico)
+Q_IMPORT_PLUGIN(qsvg)
+#else
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+Q_IMPORT_PLUGIN(QICOPlugin)
+#endif
+#endif
+
+//Localization
+const char* LAMEXP_DEFAULT_LANGID = "en";
+const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -56,16 +71,12 @@ extern "C"
 {
 	int mainCRTStartup(void);
 
-	void _lamexp_global_init_win32(void);
 	void _lamexp_global_init_versn(void);
 	void _lamexp_global_init_tools(void);
-	void _lamexp_global_init_ipcom(void);
 	void _lamexp_global_init_utils(void);
 
-	void _lamexp_global_free_win32(void);
 	void _lamexp_global_free_versn(void);
 	void _lamexp_global_free_tools(void);
-	void _lamexp_global_free_ipcom(void);
 	void _lamexp_global_free_utils(void);
 }
 
@@ -81,10 +92,8 @@ extern "C" int lamexp_entry_point(void)
 	}
 
 	//Call global initialization functions
-	_lamexp_global_init_win32();
 	_lamexp_global_init_versn();
 	_lamexp_global_init_tools();
-	_lamexp_global_init_ipcom();
 	_lamexp_global_init_utils();
 
 	//Make sure we will pass the check
@@ -104,7 +113,5 @@ void lamexp_finalization(void)
 	//Call global finalization functions, in proper order
 	_lamexp_global_free_versn();
 	_lamexp_global_free_tools();
-	_lamexp_global_free_ipcom();
 	_lamexp_global_free_utils();
-	_lamexp_global_free_win32();
 }

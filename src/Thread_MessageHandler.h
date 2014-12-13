@@ -24,15 +24,23 @@
 
 #include <QThread>
 
+namespace MUtils
+{
+	class IPCChannel;
+}
+
 class MessageHandlerThread: public QThread
 {
 	Q_OBJECT
 
 public:
-	MessageHandlerThread(void);
+	MessageHandlerThread(MUtils::IPCChannel *const ipcChannel);
 	~MessageHandlerThread(void);
 	void run();
 	void stop(void);
+
+protected:
+	MUtils::IPCChannel *const m_ipcChannel;
 
 private:
 	char *m_parameter;

@@ -40,6 +40,7 @@
 #include <MUtils/CPUFeatures.h>
 #include <MUtils/Terminal.h>
 #include <MUtils/Startup.h>
+#include <MUtils/IPCChannel.h>
 
 //Qt includes
 #include <QApplication>
@@ -102,7 +103,7 @@ static int lamexp_main(int &argc, char **argv)
 	if(!MUtils::Startup::init_qt(argc, argv, QLatin1String("LameXP - Audio Encoder Front-End")))
 	{
 		lamexp_finalization();
-		return -1;
+		return EXIT_FAILURE;
 	}
 
 	//Initialize application
@@ -123,13 +124,14 @@ static int lamexp_main(int &argc, char **argv)
 		qWarning(QString("Note: This demo (pre-release) version of LameXP will expire at %1.\n").arg(lamexp_version_expires().toString(Qt::ISODate)).toLatin1().constData());
 	}
 
-	//Check for multiple instances of LameXP
-	if((iResult = lamexp_init_ipc()) != 0)
+	//Initialize IPC
+	MUtils::IPCChannel *ipcChannel = new MUtils::IPCChannel("LameXP", "MultiInstanceHandling");
+	if((iResult = ipcChannel->initialize()) != MUtils::IPC_RET_SUCCESS_MASTER)
 	{
-		qDebug("LameXP is already running, connecting to running instance...");
-		if(iResult == 1)
+		if(iResult == MUtils::IPC_RET_SUCCESS_SLAVE)
 		{
-			MessageProducerThread *messageProducerThread = new MessageProducerThread();
+			qDebug("LameXP is already running, connecting to running instance...");
+			MessageProducerThread *messageProducerThread = new MessageProducerThread(ipcChannel);
 			messageProducerThread->start();
 			if(!messageProducerThread->wait(30000))
 			{
@@ -138,13 +140,19 @@ static int lamexp_main(int &argc, char **argv)
 				messageBox.exec();
 				messageProducerThread->wait();
 				MUTILS_DELETE(messageProducerThread);
+				MUTILS_DELETE(ipcChannel);
 				lamexp_finalization();
-				return -1;
+				return EXIT_FAILURE;
 			}
 			MUTILS_DELETE(messageProducerThread);
 		}
+		else
+		{
+			qFatal("The IPC initialization has failed!");
+		}
+		MUTILS_DELETE(ipcChannel);
 		lamexp_finalization();
-		return 0;
+		return EXIT_SUCCESS;
 	}
 
 	//Kill application?
@@ -152,8 +160,9 @@ static int lamexp_main(int &argc, char **argv)
 	{
 		if(!arguments[i].compare("--kill", Qt::CaseInsensitive) || !arguments[i].compare("--force-kill", Qt::CaseInsensitive))
 		{
+			MUTILS_DELETE(ipcChannel);
 			lamexp_finalization();
-			return 0;
+			return EXIT_SUCCESS;
 		}
 	}
 	
@@ -181,7 +190,7 @@ static int lamexp_main(int &argc, char **argv)
 	settingsModel->validate();
 
 	//Create main window
-	MainWindow *poMainWindow = new MainWindow(fileListModel, metaInfo, settingsModel);
+	MainWindow *poMainWindow = new MainWindow(ipcChannel, fileListModel, metaInfo, settingsModel);
 	
 	//Main application loop
 	while(bAccepted && (iShutdown <= shutdownFlag_None))
@@ -212,6 +221,7 @@ static int lamexp_main(int &argc, char **argv)
 
 	//Taskbar un-init
 	WinSevenTaskbar::uninit();
+	MUTILS_DELETE(ipcChannel);
 
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");

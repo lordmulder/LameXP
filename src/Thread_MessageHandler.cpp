@@ -22,19 +22,27 @@
 
 #include "Thread_MessageHandler.h"
 
+//Internal
 #include "Global.h"
 
+//MUtils
+#include <MUtils/IPCChannel.h>
+
+//Qt
 #include <QSharedMemory>
 #include <QSystemSemaphore>
 #include <QMessageBox>
 
+//CRL
 #include <limits.h>
 
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
-MessageHandlerThread::MessageHandlerThread(void)
+MessageHandlerThread::MessageHandlerThread(MUtils::IPCChannel *const ipcChannel)
+:
+	m_ipcChannel(ipcChannel)
 {
 	m_aborted = false;
 	m_parameter = new char[4096];
@@ -53,7 +61,7 @@ void MessageHandlerThread::run()
 	while(!m_aborted)
 	{
 		unsigned int command = 0;
-		lamexp_ipc_read(&command, m_parameter, 4096);
+		m_ipcChannel->read(command, m_parameter, 4096);
 		if(!command) continue;
 
 		switch(command)
@@ -92,7 +100,7 @@ void MessageHandlerThread::stop(void)
 	if(!m_aborted)
 	{
 		m_aborted = true;
-		lamexp_ipc_send(0, NULL);
+		m_ipcChannel->send(0, NULL);
 	}
 }
 

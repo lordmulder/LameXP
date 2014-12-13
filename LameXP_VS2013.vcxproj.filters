@@ -220,12 +220,6 @@
     <ClCompile Include="src\Global_Tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Global_Win32.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Global_IPC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Global_Version.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

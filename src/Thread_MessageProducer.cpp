@@ -27,6 +27,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/IPCChannel.h>
 #include <MUtils/OSSupport.h>
 
 //Qt
@@ -42,7 +43,9 @@
 // Constructor
 ////////////////////////////////////////////////////////////
 
-MessageProducerThread::MessageProducerThread(void)
+MessageProducerThread::MessageProducerThread(MUtils::IPCChannel *const ipcChannel)
+:
+	m_ipcChannel(ipcChannel)
 {
 }
 
@@ -60,12 +63,12 @@ void MessageProducerThread::run()
 	{
 		if(!arguments[i].compare("--kill", Qt::CaseInsensitive))
 		{
-			lamexp_ipc_send(666, NULL);
+			m_ipcChannel->send(666, NULL);
 			return;
 		}
 		if(!arguments[i].compare("--force-kill", Qt::CaseInsensitive))
 		{
-			lamexp_ipc_send(666, "Force!");
+			m_ipcChannel->send(666, "Force!");
 			return;
 		}
 	}
@@ -77,7 +80,7 @@ void MessageProducerThread::run()
 			QFileInfo file = QFileInfo(arguments[++i]);
 			if(file.exists() && file.isFile())
 			{
-				lamexp_ipc_send(1, MUTILS_UTF8(file.canonicalFilePath()));
+				m_ipcChannel->send(1, MUTILS_UTF8(file.canonicalFilePath()));
 			}
 			bSentFiles = true;
 		}
@@ -86,7 +89,7 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				lamexp_ipc_send(2, MUTILS_UTF8(dir.canonicalPath()));
+				m_ipcChannel->send(2, MUTILS_UTF8(dir.canonicalPath()));
 			}
 			bSentFiles = true;
 		}
@@ -95,7 +98,7 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				lamexp_ipc_send(3, MUTILS_UTF8(dir.canonicalPath()));
+				m_ipcChannel->send(3, MUTILS_UTF8(dir.canonicalPath()));
 			}
 			bSentFiles = true;
 		}
@@ -103,7 +106,7 @@ void MessageProducerThread::run()
 
 	if(!bSentFiles)
 	{
-		lamexp_ipc_send(UINT_MAX, "Use running instance!");
+		m_ipcChannel->send(UINT_MAX, "Use running instance!");
 	}
 }
 
