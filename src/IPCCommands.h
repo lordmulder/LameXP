@@ -20,25 +20,22 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include <climits>
 
-#include <QThread>
-
-namespace MUtils
+typedef enum
 {
-	class IPCChannel;
+	IPC_CMD_NOOP       = 0x0000,
+	IPC_CMD_PING       = 0x0001,
+	IPC_CMD_ADD_FILE   = 0x0002,
+	IPC_CMD_ADD_FOLDER = 0x0003,
+	IPC_CMD_TERMINATE  = 0xFFFF
 }
+lamexp_ipc_command_t;
 
-class MessageProducerThread: public QThread
+typedef enum
 {
-	Q_OBJECT
-
-public:
-	MessageProducerThread(MUtils::IPCChannel *const ipcChannel);
-	~MessageProducerThread(void);
-
-	void run();
-
-protected:
-	MUtils::IPCChannel *const m_ipcChannel;
-};
+	IPC_FLAG_NONE          = 0x0000,
+	IPC_FLAG_ADD_RECURSIVE = 0x0001,
+	IPC_FLAG_FORCE         = 0x8000,
+}
+lamexp_ipc_flag_t;

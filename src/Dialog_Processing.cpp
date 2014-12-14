@@ -155,7 +155,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
-	m_shutdownFlag(shutdownFlag_None),
+	m_shutdownFlag(SHUTDOWN_FLAG_NONE),
 	m_threadPool(NULL),
 	m_diskObserver(NULL),
 	m_cpuObserver(NULL),
@@ -769,7 +769,7 @@ void ProcessingDialog::doneEncoding(void)
 	{
 		if(shutdownComputer())
 		{
-			m_shutdownFlag = m_settings->hibernateComputer() ? shutdownFlag_Hibernate : shutdownFlag_TurnPowerOff;
+			m_shutdownFlag = m_settings->hibernateComputer() ? SHUTDOWN_FLAG_HIBERNATE : SHUTDOWN_FLAG_POWER_OFF;
 			accept();
 		}
 	}

@@ -50,15 +50,11 @@
 #include <QDir>
 
 ///////////////////////////////////////////////////////////////////////////////
-// Main function
+// Helper functions
 ///////////////////////////////////////////////////////////////////////////////
 
-static int lamexp_main(int &argc, char **argv)
+static void lamexp_print_logo(void)
 {
-	int iResult = -1;
-	int iShutdown = shutdownFlag_None;
-	bool bAccepted = true;
-
 	//Print version info
 	qDebug("LameXP - Audio Encoder Front-End v%d.%02d %s (Build #%03d)", lamexp_version_major(), lamexp_version_minor(), lamexp_version_release(), lamexp_version_build());
 	qDebug("Copyright (c) 2004-%04d LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.", qMax(MUtils::Version::app_build_date().year(), MUtils::OS::current_date().year()));
@@ -71,7 +67,7 @@ static int lamexp_main(int &argc, char **argv)
 
 	//Print library version
 	qDebug("This application is powerd by MUtils library v%u.%02u (%s, %s).\n", MUtils::Version::lib_version_major(), MUtils::Version::lib_version_minor(), MUTILS_UTF8(MUtils::Version::lib_build_date().toString(Qt::ISODate)), MUTILS_UTF8(MUtils::Version::lib_build_time().toString(Qt::ISODate)));
-
+	
 	//Print warning, if this is a "debug" build
 	if(MUTILS_DEBUG)
 	{
@@ -79,7 +75,107 @@ static int lamexp_main(int &argc, char **argv)
 		qWarning("DEBUG BUILD: DO NOT RELEASE THIS BINARY TO THE PUBLIC !!!");
 		qWarning("---------------------------------------------------------\n");
 	}
+}
+
+static int lamexp_initialize_ipc(MUtils::IPCChannel *const ipcChannel)
+{
+	int iResult = 0;
+
+	if((iResult = ipcChannel->initialize()) != MUtils::IPCChannel::RET_SUCCESS_MASTER)
+	{
+		if(iResult == MUtils::IPCChannel::RET_SUCCESS_SLAVE)
+		{
+			qDebug("LameXP is already running, connecting to running instance...");
+			QScopedPointer<MessageProducerThread> messageProducerThread(new MessageProducerThread(ipcChannel));
+			messageProducerThread->start();
+			if(!messageProducerThread->wait(30000))
+			{
+				qWarning("MessageProducer thread has encountered timeout -> going to kill!");
+				messageProducerThread->terminate();
+				messageProducerThread->wait();
+				MUtils::OS::system_message_err(L"LameXP", L"LameXP is already running, but the running instance doesn't respond!");
+				return -1;
+			}
+			return 0;
+		}
+		else
+		{
+			qFatal("The IPC initialization has failed!");
+			return -1;
+		}
+	}
+
+	return 1;
+}
+
+static void lamexp_show_splash(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, SettingsModel *const settingsModel)
+{
+	QScopedPointer<InitializationThread> poInitializationThread(new InitializationThread(cpuFeatures));
+	SplashScreen::showSplash(poInitializationThread.data());
+	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
+}
+
+static int lamexp_main_loop_helper(MUtils::IPCChannel *const ipcChannel, FileListModel *const fileListModel, AudioFileModel_MetaInfo *const metaInfo, SettingsModel *const settingsModel, int &iShutdown)
+{
+	int iResult = -1;
+	bool bAccepted = true;
+
+	//Create main window
+	QScopedPointer<MainWindow> poMainWindow(new MainWindow(ipcChannel, fileListModel, metaInfo, settingsModel));
+
+	//Main application loop
+	while(bAccepted && (iShutdown <= SHUTDOWN_FLAG_NONE))
+	{
+		//Show main window
+		poMainWindow->show();
+		iResult = qApp->exec();
+		bAccepted = poMainWindow->isAccepted();
+
+		//Sync settings
+		settingsModel->syncNow();
+
+		//Show processing dialog
+		if(bAccepted && (fileListModel->rowCount() > 0))
+		{
+			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, metaInfo, settingsModel);
+			processingDialog->exec();
+			iShutdown = processingDialog->getShutdownFlag();
+			MUTILS_DELETE(processingDialog);
+		}
+	}
+
+	return iResult;
+}
+
+static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, MUtils::IPCChannel *const ipcChannel, int &iShutdown)
+{
+	//Create models
+	QScopedPointer<FileListModel>           fileListModel(new FileListModel()          );
+	QScopedPointer<AudioFileModel_MetaInfo> metaInfo     (new AudioFileModel_MetaInfo());
+	QScopedPointer<SettingsModel>           settingsModel(new SettingsModel()          );
+
+	//Show splash screen
+	lamexp_show_splash(cpuFeatures, settingsModel.data());
+
+	//Validate settings
+	settingsModel->validate();
+
+	//Main processing loop
+	return lamexp_main_loop_helper(ipcChannel, fileListModel.data(), metaInfo.data(), settingsModel.data(), iShutdown);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Main function
+///////////////////////////////////////////////////////////////////////////////
+
+static int lamexp_main(int &argc, char **argv)
+{
+	int iResult = -1;
+	int iShutdown = SHUTDOWN_FLAG_NONE;
 	
+	//Print logo
+	lamexp_print_logo();
+
 	//Get CLI arguments
 	const QStringList &arguments = MUtils::OS::arguments();
 
@@ -125,34 +221,10 @@ static int lamexp_main(int &argc, char **argv)
 	}
 
 	//Initialize IPC
-	MUtils::IPCChannel *ipcChannel = new MUtils::IPCChannel("LameXP", "MultiInstanceHandling");
-	if((iResult = ipcChannel->initialize()) != MUtils::IPC_RET_SUCCESS_MASTER)
+	QScopedPointer<MUtils::IPCChannel> ipcChannel(new MUtils::IPCChannel("lamexp-v4", lamexp_version_build(), "instance"));
+	if((iResult = lamexp_initialize_ipc(ipcChannel.data())) < 1)
 	{
-		if(iResult == MUtils::IPC_RET_SUCCESS_SLAVE)
-		{
-			qDebug("LameXP is already running, connecting to running instance...");
-			MessageProducerThread *messageProducerThread = new MessageProducerThread(ipcChannel);
-			messageProducerThread->start();
-			if(!messageProducerThread->wait(30000))
-			{
-				messageProducerThread->terminate();
-				QMessageBox messageBox(QMessageBox::Critical, "LameXP", "LameXP is already running, but the running instance doesn't respond!", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
-				messageBox.exec();
-				messageProducerThread->wait();
-				MUTILS_DELETE(messageProducerThread);
-				MUTILS_DELETE(ipcChannel);
-				lamexp_finalization();
-				return EXIT_FAILURE;
-			}
-			MUTILS_DELETE(messageProducerThread);
-		}
-		else
-		{
-			qFatal("The IPC initialization has failed!");
-		}
-		MUTILS_DELETE(ipcChannel);
-		lamexp_finalization();
-		return EXIT_SUCCESS;
+		return (iResult == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 	}
 
 	//Kill application?
@@ -160,7 +232,6 @@ static int lamexp_main(int &argc, char **argv)
 	{
 		if(!arguments[i].compare("--kill", Qt::CaseInsensitive) || !arguments[i].compare("--force-kill", Qt::CaseInsensitive))
 		{
-			MUTILS_DELETE(ipcChannel);
 			lamexp_finalization();
 			return EXIT_SUCCESS;
 		}
@@ -175,61 +246,19 @@ static int lamexp_main(int &argc, char **argv)
 	//Taskbar init
 	WinSevenTaskbar::init();
 
-	//Create models
-	FileListModel *fileListModel = new FileListModel();
-	AudioFileModel_MetaInfo *metaInfo = new AudioFileModel_MetaInfo();
-	SettingsModel *settingsModel = new SettingsModel();
-
-	//Show splash screen
-	InitializationThread *poInitializationThread = new InitializationThread(cpuFeatures);
-	SplashScreen::showSplash(poInitializationThread);
-	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
-	MUTILS_DELETE(poInitializationThread);
-
-	//Validate settings
-	settingsModel->validate();
-
-	//Create main window
-	MainWindow *poMainWindow = new MainWindow(ipcChannel, fileListModel, metaInfo, settingsModel);
-	
 	//Main application loop
-	while(bAccepted && (iShutdown <= shutdownFlag_None))
-	{
-		//Show main window
-		poMainWindow->show();
-		iResult = qApp->exec();
-		bAccepted = poMainWindow->isAccepted();
-
-		//Sync settings
-		settingsModel->syncNow();
-
-		//Show processing dialog
-		if(bAccepted && (fileListModel->rowCount() > 0))
-		{
-			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, metaInfo, settingsModel);
-			processingDialog->exec();
-			iShutdown = processingDialog->getShutdownFlag();
-			MUTILS_DELETE(processingDialog);
-		}
-	}
-	
-	//Free models
-	MUTILS_DELETE(poMainWindow);
-	MUTILS_DELETE(fileListModel);
-	MUTILS_DELETE(metaInfo);
-	MUTILS_DELETE(settingsModel);
+	iResult = lamexp_main_loop(cpuFeatures, ipcChannel.data(), iShutdown);
 
 	//Taskbar un-init
 	WinSevenTaskbar::uninit();
-	MUTILS_DELETE(ipcChannel);
 
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");
 
 	//Shotdown computer
-	if(iShutdown > shutdownFlag_None)
+	if(iShutdown > SHUTDOWN_FLAG_NONE)
 	{
-		if(!MUtils::OS::shutdown_computer(QApplication::applicationFilePath(), 12, true, (iShutdown == shutdownFlag_Hibernate)))
+		if(!MUtils::OS::shutdown_computer(QApplication::applicationFilePath(), 12, true, (iShutdown == SHUTDOWN_FLAG_HIBERNATE)))
 		{
 			QMessageBox messageBox(QMessageBox::Critical, "LameXP", "Sorry, LameXP was unable to shutdown your computer!", QMessageBox::NoButton, NULL, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
 		}

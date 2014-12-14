@@ -540,6 +540,9 @@
     <ClInclude Include="tmp\LameXP\UIC_AboutDialog.h">
       <Filter>Generated Files\UIC</Filter>
     </ClInclude>
+    <ClInclude Include="src\IPCCommands.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\DropBox.ui">

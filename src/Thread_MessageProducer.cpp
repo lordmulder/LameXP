@@ -24,6 +24,7 @@
 
 //Internal
 #include "Global.h"
+#include "IPCCommands.h"
 
 //MUtils
 #include <MUtils/Global.h>
@@ -63,12 +64,18 @@ void MessageProducerThread::run()
 	{
 		if(!arguments[i].compare("--kill", Qt::CaseInsensitive))
 		{
-			m_ipcChannel->send(666, NULL);
+			if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_NONE, NULL))
+			{
+				qWarning("Failed to send IPC message!");
+			}
 			return;
 		}
 		if(!arguments[i].compare("--force-kill", Qt::CaseInsensitive))
 		{
-			m_ipcChannel->send(666, "Force!");
+			if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_FORCE, NULL))
+			{
+				qWarning("Failed to send IPC message!");
+			}
 			return;
 		}
 	}
@@ -80,7 +87,10 @@ void MessageProducerThread::run()
 			QFileInfo file = QFileInfo(arguments[++i]);
 			if(file.exists() && file.isFile())
 			{
-				m_ipcChannel->send(1, MUTILS_UTF8(file.canonicalFilePath()));
+				if(!m_ipcChannel->send(IPC_CMD_ADD_FILE, IPC_FLAG_NONE, MUTILS_UTF8(file.canonicalFilePath())))
+				{
+					qWarning("Failed to send IPC message!");
+				}
 			}
 			bSentFiles = true;
 		}
@@ -89,7 +99,10 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				m_ipcChannel->send(2, MUTILS_UTF8(dir.canonicalPath()));
+				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_NONE, MUTILS_UTF8(dir.canonicalPath())))
+				{
+					qWarning("Failed to send IPC message!");
+				}
 			}
 			bSentFiles = true;
 		}
@@ -98,7 +111,10 @@ void MessageProducerThread::run()
 			QDir dir = QDir(arguments[++i]);
 			if(dir.exists())
 			{
-				m_ipcChannel->send(3, MUTILS_UTF8(dir.canonicalPath()));
+				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_ADD_RECURSIVE, MUTILS_UTF8(dir.canonicalPath())))
+				{
+					qWarning("Failed to send IPC message!");
+				}
 			}
 			bSentFiles = true;
 		}
@@ -106,7 +122,10 @@ void MessageProducerThread::run()
 
 	if(!bSentFiles)
 	{
-		m_ipcChannel->send(UINT_MAX, "Use running instance!");
+		if(!m_ipcChannel->send(IPC_CMD_PING, IPC_FLAG_NONE, "Use running instance!"))
+		{
+			qWarning("Failed to send IPC message!");
+		}
 	}
 }
 

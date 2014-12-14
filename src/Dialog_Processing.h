@@ -45,11 +45,11 @@ class QElapsedTimer;
 class RAMObserverThread;
 class SettingsModel;
 
-enum shutdownFlag_t
+enum lamexp_shutdownFlag_t
 {
-	shutdownFlag_None = 0,
-	shutdownFlag_TurnPowerOff = 1,
-	shutdownFlag_Hibernate = 2
+	SHUTDOWN_FLAG_NONE = 0,
+	SHUTDOWN_FLAG_POWER_OFF = 1,
+	SHUTDOWN_FLAG_HIBERNATE = 2
 };
 
 //UIC forward declartion

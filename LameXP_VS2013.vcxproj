@@ -406,6 +406,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\IPCCommands.h" />
     <ClInclude Include="tmp\LameXP\UIC_AboutDialog.h" />
     <ClInclude Include="tmp\LameXP\UIC_CueSheetImport.h" />
     <ClInclude Include="tmp\LameXP\UIC_DropBox.h" />

@@ -24,6 +24,7 @@
 
 //Internal
 #include "Global.h"
+#include "IPCCommands.h"
 
 //MUtils
 #include <MUtils/IPCChannel.h>
@@ -36,6 +37,8 @@
 //CRL
 #include <limits.h>
 
+#define TEST_FLAG(X) ((flags & (X)) == (X))
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -45,7 +48,7 @@ MessageHandlerThread::MessageHandlerThread(MUtils::IPCChannel *const ipcChannel)
 	m_ipcChannel(ipcChannel)
 {
 	m_aborted = false;
-	m_parameter = new char[4096];
+	m_parameter = new char[MUtils::IPCChannel::MAX_MESSAGE_LEN];
 }
 
 MessageHandlerThread::~MessageHandlerThread(void)
@@ -60,33 +63,35 @@ void MessageHandlerThread::run()
 
 	while(!m_aborted)
 	{
-		unsigned int command = 0;
-		m_ipcChannel->read(command, m_parameter, 4096);
-		if(!command) continue;
+		unsigned int command = 0, flags = 0;
+		if(!m_ipcChannel->read(command, flags, m_parameter, MUtils::IPCChannel::MAX_MESSAGE_LEN))
+		{
+			qWarning("Failed to read next IPC message!");
+			break;
+		}
+		
+		if(command == IPC_CMD_NOOP)
+		{
+			continue;
+		}
 
 		switch(command)
 		{
-		case 1:
+		case IPC_CMD_PING:
+			emit otherInstanceDetected();
+			break;
+		case IPC_CMD_ADD_FILE:
 			emit fileReceived(QString::fromUtf8(m_parameter));
 			break;
-		case 2:
-			emit folderReceived(QString::fromUtf8(m_parameter), false);
+		case IPC_CMD_ADD_FOLDER:
+			emit folderReceived(QString::fromUtf8(m_parameter), TEST_FLAG(IPC_FLAG_ADD_RECURSIVE));
 			break;
-		case 3:
-			emit folderReceived(QString::fromUtf8(m_parameter), true);
-			break;
-		case 666:
-			if(!_stricmp(m_parameter, "Force!"))
+		case IPC_CMD_TERMINATE:
+			if(TEST_FLAG(IPC_FLAG_FORCE))
 			{
 				_exit(-2);
 			}
-			else
-			{
-				emit killSignalReceived();
-			}
-			break;
-		case UINT_MAX:
-			emit otherInstanceDetected();
+			emit killSignalReceived();
 			break;
 		default:
 			qWarning("Received an unknown IPC message! (command=%u)", command);
@@ -100,7 +105,7 @@ void MessageHandlerThread::stop(void)
 	if(!m_aborted)
 	{
 		m_aborted = true;
-		m_ipcChannel->send(0, NULL);
+		m_ipcChannel->send(0, 0, NULL);
 	}
 }
 
