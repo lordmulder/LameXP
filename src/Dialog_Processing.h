@@ -53,8 +53,15 @@ enum lamexp_shutdownFlag_t
 };
 
 //UIC forward declartion
-namespace Ui {
+namespace Ui
+{
 	class ProcessingDialog;
+}
+
+//MUtils forward declartion
+namespace MUtils
+{
+	class Taskbar7;
 }
 
 //ProcessingDialog class
@@ -96,7 +103,6 @@ protected:
 	void closeEvent(QCloseEvent *event);
 	bool eventFilter(QObject *obj, QEvent *event);
 	virtual bool event(QEvent *e);
-	virtual bool winEvent(MSG *message, long *result);
 	virtual void resizeEvent(QResizeEvent *event);
 
 private:
@@ -136,4 +142,5 @@ private:
 	QScopedPointer<QElapsedTimer> m_totalTime;
 	int m_progressViewFilter;
 	QColor *m_defaultColor;
+	QScopedPointer<MUtils::Taskbar7> m_taskbar;
 };

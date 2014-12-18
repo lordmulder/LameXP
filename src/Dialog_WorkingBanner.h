@@ -29,6 +29,11 @@ namespace Ui
 	class WorkingBanner;
 }
 
+namespace MUtils
+{
+	class Taskbar7;
+}
+
 class QEventLoop;
 
 ////////////////////////////////////////////////////////////
@@ -50,7 +55,9 @@ public:
 private:
 	Ui::WorkingBanner *const ui;
 
-	QMovie *m_working;
+	QScopedPointer<MUtils::Taskbar7> m_taskbar;
+	QScopedPointer<QMovie> m_working;
+
 	bool m_canClose;
 
 public slots:
@@ -67,10 +74,9 @@ protected:
 	virtual void keyPressEvent(QKeyEvent *event);
 	virtual void keyReleaseEvent(QKeyEvent *event);
 	virtual void closeEvent(QCloseEvent *event);
-	virtual bool winEvent(MSG *message, long *result);
 	virtual void showEvent(QShowEvent *event);
 	virtual void hideEvent(QHideEvent *event);
 
-	QFontMetrics *m_metrics;
-	QStyle *m_style;
+	QScopedPointer<QFontMetrics> m_metrics;
+	QScopedPointer<QStyle> m_style;
 };

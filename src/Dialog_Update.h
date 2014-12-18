@@ -31,10 +31,12 @@ class QMovie;
 namespace MUtils
 {
 	class UpdateChecker;
+	class Taskbar7;
 }
 
 //UIC forward declartion
-namespace Ui {
+namespace Ui
+{
 	class UpdateDialog;
 }
 
@@ -44,7 +46,7 @@ class UpdateDialog : public QDialog
 	Q_OBJECT
 
 public:
-	UpdateDialog(SettingsModel *settings, QWidget *parent = 0);
+	UpdateDialog(const SettingsModel *const settings, QWidget *parent = 0);
 	~UpdateDialog(void);
 
 	bool getSuccess(void) { return m_success; }
@@ -67,23 +69,23 @@ protected:
 	virtual void showEvent(QShowEvent *event);
 	virtual void closeEvent(QCloseEvent *event);
 	virtual void keyPressEvent(QKeyEvent *e);
-	virtual bool winEvent(MSG *message, long *result);
 	virtual bool event(QEvent *e);
 
 	const bool m_betaUpdates;
 
 private:
-	Ui::UpdateDialog *ui; //for Qt UIC
+	Ui::UpdateDialog *const ui; //for Qt UIC
+	const SettingsModel *const m_settings;
 
 	const QString m_binaryWGet;
 	const QString m_binaryGnuPG;
 	const QString m_binaryKeys;
 	const QString m_binaryUpdater;
 
-	MUtils::UpdateChecker *m_thread;
-	QStringList *m_logFile;
-	SettingsModel *m_settings;
-	QMovie *m_animator;
+	QScopedPointer<MUtils::Taskbar7> m_taskbar;
+	QScopedPointer<MUtils::UpdateChecker> m_thread;
+	QScopedPointer<QStringList> m_logFile;
+	QScopedPointer<QMovie> m_animator;
 
 	unsigned long m_updaterProcess;
 

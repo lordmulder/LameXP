@@ -343,7 +343,6 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="src\Thread_RAMObserver.cpp" />
     <ClCompile Include="src\Tool_Abstract.cpp" />
     <ClCompile Include="src\Tool_WaveProperties.cpp" />
-    <ClCompile Include="src\WinSevenTaskbar.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_CustomEventFilter.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Decoder_Abstract.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Dialog_About.cpp" />
@@ -943,7 +942,6 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="src\WinSevenTaskbar.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\Documents.qrc">

@@ -22,13 +22,16 @@
 
 #include "Dialog_SplashScreen.h"
 
+//UIC includes
+#include "UIC_SplashScreen.h"
+
 //Internal
 #include "Global.h"
-#include "WinSevenTaskbar.h"
 
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/GUI.h>
+#include <MUtils/Taskbar7.h>
 
 //Qt
 #include <QThread>
@@ -40,15 +43,14 @@
 #define OPACITY_DELTA 0.04
 
 //Setup taskbar indicator
-#define SET_TASKBAR_STATE(WIDGET,VAR,FLAG) do \
+#define SET_TASKBAR_STATE(WIDGET,FLAG) do \
 { \
-	if(FLAG) \
+	if((WIDGET)->m_taskBarFlag != (FLAG)) \
 	{ \
-		if(!(VAR)) (VAR) = WinSevenTaskbar::setTaskbarState((WIDGET), WinSevenTaskbar::WinSevenTaskbarIndeterminateState); \
-	} \
-	else \
-	{ \
-		if((VAR)) (VAR) = (!WinSevenTaskbar::setTaskbarState((WIDGET), WinSevenTaskbar::WinSevenTaskbarNoState)); \
+		if((WIDGET)->m_taskbar->setTaskbarState((FLAG) ? MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE : MUtils::Taskbar7::TASKBAR_STATE_NONE)) \
+		{ \
+			(WIDGET)->m_taskBarFlag = (FLAG); \
+		} \
 	} \
 } \
 while(0)
@@ -59,25 +61,27 @@ while(0)
 
 SplashScreen::SplashScreen(QWidget *parent)
 :
+	QFrame(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
+	ui(new Ui::SplashScreen),
 	m_opacitySteps(qRound(1.0 / OPACITY_DELTA)),
-	QFrame(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint)
+	m_taskbar(new MUtils::Taskbar7(this))
 {
 	//Init the dialog, from the .ui file
-	setupUi(this);
+	ui->setupUi(this);
 
 	//Make size fixed
 	setFixedSize(this->size());
 	
 	//Create event loop
-	m_loop = new QEventLoop(this);
+	m_loop.reset(new QEventLoop(this));
 
 	//Create timer
-	m_timer = new QTimer(this);
+	m_timer.reset(new QTimer(this));
 	m_timer->setInterval(FADE_DELAY);
 	m_timer->setSingleShot(false);
 
 	//Connect timer to slot
-	connect(m_timer, SIGNAL(timeout()), this, SLOT(updateHandler()));
+	connect(m_timer.data(), SIGNAL(timeout()), this, SLOT(updateHandler()));
 
 	//Enable "sheet of glass" effect on splash screen
 	if(!MUtils::GUI::sheet_of_glass(this))
@@ -86,16 +90,16 @@ SplashScreen::SplashScreen(QWidget *parent)
 	}
 
 	//Start animation
-	m_working = new QMovie(":/images/Loading4.gif");
+	m_working.reset(new QMovie(":/images/Loading4.gif"));
 	m_working->setCacheMode(QMovie::CacheAll);
-	labelLoading->setMovie(m_working);
+	ui->labelLoading->setMovie(m_working.data());
 	m_working->start();
 
 	//Init status
 	m_canClose = false;
 	m_status = STATUS_FADE_IN;
 	m_fadeValue = 0;
-	m_taskBarInit = false;
+	m_taskBarFlag = false;
 }
 
 ////////////////////////////////////////////////////////////
@@ -109,9 +113,7 @@ SplashScreen::~SplashScreen(void)
 		m_working->stop();
 	}
 
-	MUTILS_DELETE(m_working);
-	MUTILS_DELETE(m_loop);
-	MUTILS_DELETE(m_timer);
+	delete ui;
 }
 
 ////////////////////////////////////////////////////////////
@@ -120,7 +122,7 @@ SplashScreen::~SplashScreen(void)
 
 void SplashScreen::showSplash(QThread *thread)
 {
-	SplashScreen *splashScreen = new SplashScreen();
+	QScopedPointer<SplashScreen> splashScreen(new SplashScreen());
 
 	//Show splash
 	splashScreen->setWindowOpacity(OPACITY_DELTA);
@@ -131,19 +133,19 @@ void SplashScreen::showSplash(QThread *thread)
 
 	//Wait for window to show
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	splashScreen->repaint(); MUtils::GUI::bring_to_front(splashScreen);
+	splashScreen->repaint(); MUtils::GUI::bring_to_front(splashScreen.data());
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	//Connect thread signals
-	connect(thread, SIGNAL(terminated()), splashScreen, SLOT(threadComplete()), Qt::QueuedConnection);
-	connect(thread, SIGNAL(finished()),   splashScreen, SLOT(threadComplete()), Qt::QueuedConnection);
+	connect(thread, SIGNAL(terminated()), splashScreen.data(), SLOT(threadComplete()), Qt::QueuedConnection);
+	connect(thread, SIGNAL(finished()),   splashScreen.data(), SLOT(threadComplete()), Qt::QueuedConnection);
 
 	//Init taskbar
-	SET_TASKBAR_STATE(splashScreen, splashScreen->m_taskBarInit, true);
+	SET_TASKBAR_STATE(splashScreen, true);
 
 	//Start the thread
 	splashScreen->m_timer->start(FADE_DELAY);
-	QTimer::singleShot(8*60*1000, splashScreen->m_loop, SLOT(quit()));
+	QTimer::singleShot(8*60*1000, splashScreen->m_loop.data(), SLOT(quit()));
 	QTimer::singleShot(333, thread, SLOT(start()));
 
 	//Start event handling!
@@ -157,7 +159,7 @@ void SplashScreen::showSplash(QThread *thread)
 	}
 
 	//Restore taskbar
-	SET_TASKBAR_STATE(splashScreen, splashScreen->m_taskBarInit, false);
+	SET_TASKBAR_STATE(splashScreen, false);
 
 	//Restore cursor
 	QApplication::restoreOverrideCursor();
@@ -165,9 +167,6 @@ void SplashScreen::showSplash(QThread *thread)
 	//Hide splash
 	splashScreen->m_canClose = true;
 	splashScreen->close();
-
-	//Free
-	MUTILS_DELETE(splashScreen);
 }
 
 ////////////////////////////////////////////////////////////
@@ -181,7 +180,7 @@ void SplashScreen::updateHandler(void)
 		if(m_fadeValue < m_opacitySteps)
 		{
 			setWindowOpacity(OPACITY_DELTA * static_cast<double>(++m_fadeValue));
-			SET_TASKBAR_STATE(this, m_taskBarInit, true);
+			SET_TASKBAR_STATE(this, true);
 		}
 		else
 		{
@@ -196,7 +195,7 @@ void SplashScreen::updateHandler(void)
 		if(m_fadeValue > 0)
 		{
 			setWindowOpacity(OPACITY_DELTA * static_cast<double>(--m_fadeValue));
-			SET_TASKBAR_STATE(this, m_taskBarInit, true);
+			SET_TASKBAR_STATE(this, true);
 		}
 		else
 		{
@@ -235,9 +234,4 @@ void SplashScreen::keyReleaseEvent(QKeyEvent *event)
 void SplashScreen::closeEvent(QCloseEvent *event)
 {
 	if(!m_canClose) event->ignore();
-}
-
-bool SplashScreen::winEvent(MSG *message, long *result)
-{
-	return WinSevenTaskbar::handleWinEvent(message, result);
 }

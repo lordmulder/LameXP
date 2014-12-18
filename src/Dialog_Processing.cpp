@@ -41,7 +41,6 @@
 #include "Filter_Normalize.h"
 #include "Filter_Resample.h"
 #include "Filter_ToneAdjust.h"
-#include "WinSevenTaskbar.h"
 
 //MUtils
 #include <MUtils/Global.h>
@@ -49,6 +48,7 @@
 #include <MUtils/GUI.h>
 #include <MUtils/CPUFeatures.h>
 #include <MUtils/Sound.h>
+#include <MUtils/Taskbar7.h>
 
 //Qt
 #include <QApplication>
@@ -153,6 +153,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
 	m_systemTray(new QSystemTrayIcon(QIcon(":/icons/cd_go.png"), this)),
+	m_taskbar(new MUtils::Taskbar7(this)),
 	m_settings(settings),
 	m_metaInfo(metaInfo),
 	m_shutdownFlag(SHUTDOWN_FLAG_NONE),
@@ -360,8 +361,8 @@ ProcessingDialog::~ProcessingDialog(void)
 	MUTILS_DELETE(m_threadPool);
 	MUTILS_DELETE(m_defaultColor);
 
-	WinSevenTaskbar::setOverlayIcon(this, NULL);
-	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNoState);
+	m_taskbar->setOverlayIcon(NULL);
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
 	
 	MUTILS_DELETE(ui);
 }
@@ -477,11 +478,6 @@ void ProcessingDialog::resizeEvent(QResizeEvent *event)
 	}
 }
 
-bool ProcessingDialog::winEvent(MSG *message, long *result)
-{
-	return WinSevenTaskbar::handleWinEvent(message, result);
-}
-
 ////////////////////////////////////////////////////////////
 // SLOTS
 ////////////////////////////////////////////////////////////
@@ -511,9 +507,9 @@ void ProcessingDialog::initEncoding(void)
 	ui->checkBox_shutdownComputer->setEnabled(true);
 	ui->checkBox_shutdownComputer->setChecked(false);
 
-	WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
-	WinSevenTaskbar::setTaskbarProgress(this, 0, m_pendingJobs.count());
-	WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/control_play_blue.png"));
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
+	m_taskbar->setTaskbarProgress(0, m_pendingJobs.count());
+	m_taskbar->setOverlayIcon(&QIcon(":/icons/control_play_blue.png"));
 
 	if(!m_diskObserver)
 	{
@@ -669,7 +665,7 @@ void ProcessingDialog::doneEncoding(void)
 	if(!m_userAborted)
 	{
 		SET_PROGRESS_TEXT(tr("Encoding: %n file(s) of %1 completed so far, please wait...", "", ui->progressBar->value()).arg(QString::number(ui->progressBar->maximum())));
-		WinSevenTaskbar::setTaskbarProgress(this, ui->progressBar->value(), ui->progressBar->maximum());
+		m_taskbar->setTaskbarProgress(ui->progressBar->value(), ui->progressBar->maximum());
 	}
 	
 	if((!m_pendingJobs.isEmpty()) && (!m_userAborted))
@@ -698,8 +694,8 @@ void ProcessingDialog::doneEncoding(void)
 	if(m_userAborted)
 	{
 		CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFFFE0"));
-		WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
-		WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/error.png"));
+		m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
+		m_taskbar->setOverlayIcon(&QIcon(":/icons/error.png"));
 		SET_PROGRESS_TEXT((m_succeededJobs.count() > 0) ? tr("Process was aborted by the user after %n file(s)!", "", m_succeededJobs.count()) : tr("Process was aborted prematurely by the user!"));
 		m_systemTray->showMessage(tr("LameXP - Aborted"), tr("Process was aborted by the user."), QSystemTrayIcon::Warning);
 		m_systemTray->setIcon(QIcon(":/icons/cd_delete.png"));
@@ -717,8 +713,8 @@ void ProcessingDialog::doneEncoding(void)
 		if(m_failedJobs.count() > 0)
 		{
 			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#FFF0F0"));
-			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarErrorState);
-			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/exclamation.png"));
+			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
+			m_taskbar->setOverlayIcon(&QIcon(":/icons/exclamation.png"));
 			if(m_skippedJobs.count() > 0)
 			{
 				SET_PROGRESS_TEXT(tr("Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!", "", m_failedJobs.count() + m_succeededJobs.count() + m_skippedJobs.count()).arg(QString::number(m_failedJobs.count()), tr("%n file(s) skipped", "", m_skippedJobs.count())));
@@ -735,8 +731,8 @@ void ProcessingDialog::doneEncoding(void)
 		else
 		{
 			CHANGE_BACKGROUND_COLOR(ui->frame_header, QColor("#F0FFF0"));
-			WinSevenTaskbar::setTaskbarState(this, WinSevenTaskbar::WinSevenTaskbarNormalState);
-			WinSevenTaskbar::setOverlayIcon(this, &QIcon(":/icons/accept.png"));
+			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
+			m_taskbar->setOverlayIcon(&QIcon(":/icons/accept.png"));
 			if(m_skippedJobs.count() > 0)
 			{
 				SET_PROGRESS_TEXT(tr("All files completed successfully. Skipped %n file(s).", "", m_skippedJobs.count()));
@@ -761,7 +757,7 @@ void ProcessingDialog::doneEncoding(void)
 	ui->view_log->scrollToBottom();
 	m_progressIndicator->stop();
 	ui->progressBar->setValue(ui->progressBar->maximum());
-	WinSevenTaskbar::setTaskbarProgress(this, ui->progressBar->value(), ui->progressBar->maximum());
+	m_taskbar->setTaskbarProgress(ui->progressBar->value(), ui->progressBar->maximum());
 
 	QApplication::restoreOverrideCursor();
 

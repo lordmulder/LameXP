@@ -40,7 +40,6 @@
 #include "Model_Settings.h"
 #include "Model_FileList.h"
 #include "Model_FileSystem.h"
-#include "WinSevenTaskbar.h"
 #include "Registry_Encoder.h"
 #include "Registry_Decoder.h"
 #include "Encoder_Abstract.h"
@@ -1269,7 +1268,7 @@ bool MainWindow::winEvent(MSG *message, long *result)
 		*result = 0;
 		return true;
 	}
-	return WinSevenTaskbar::handleWinEvent(message, result);
+	return false;
 }
 
 ////////////////////////////////////////////////////////////

@@ -24,21 +24,33 @@
 
 #include "UIC_SplashScreen.h"
 
+//MUtils forward declaration
+namespace MUtils
+{
+	class Taskbar7;
+}
+
+//UIC forward declartion
+namespace Ui
+{
+	class SplashScreen;
+}
+
 ////////////////////////////////////////////////////////////
 // Splash Frame
 ////////////////////////////////////////////////////////////
 
-class SplashScreen: public QFrame, private Ui::SplashScreen
+class SplashScreen: public QFrame
 {
 	Q_OBJECT
 
 public:
-	static void showSplash(QThread *thread);
-
-private:
 	SplashScreen(QWidget *parent = 0);
 	~SplashScreen(void);
 
+	static void showSplash(QThread *thread);
+
+private:
 	enum
 	{
 		STATUS_FADE_IN = 0,
@@ -48,9 +60,12 @@ private:
 	}
 	status_t;
 
-	QMovie *m_working;
-	QEventLoop *m_loop;
-	QTimer *m_timer;
+	Ui::SplashScreen *ui; //for Qt UIC
+
+	QScopedPointer<QMovie> m_working;
+	QScopedPointer<QEventLoop> m_loop;
+	QScopedPointer<QTimer> m_timer;
+	QScopedPointer<MUtils::Taskbar7> m_taskbar;
 	
 	const unsigned int m_opacitySteps;
 
@@ -58,7 +73,7 @@ private:
 	unsigned int m_fadeValue;
 
 	volatile bool m_canClose;
-	volatile bool m_taskBarInit;
+	volatile bool m_taskBarFlag;
 
 private slots:
 	void updateHandler(void);
@@ -68,5 +83,4 @@ protected:
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);
 	void closeEvent(QCloseEvent *event);
-	bool winEvent(MSG *message, long *result);
 };

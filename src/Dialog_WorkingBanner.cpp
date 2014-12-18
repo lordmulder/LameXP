@@ -25,11 +25,11 @@
 
 //Internal
 #include "Global.h"
-#include "WinSevenTaskbar.h"
 
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/GUI.h>
+#include <MUtils/Taskbar7.h>
 
 //Qt
 #include <QThread>
@@ -84,7 +84,9 @@ static inline void UPDATE_MARGINS(QWidget *control, int l = 0, int r = 0, int t 
 WorkingBanner::WorkingBanner(QWidget *parent)
 :
 	QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint),
-	ui(new Ui::WorkingBanner()), m_metrics(NULL), m_working(NULL), m_style(NULL)
+	ui(new Ui::WorkingBanner()),
+	m_taskbar(new MUtils::Taskbar7(parent)),
+	m_metrics(NULL), m_working(NULL), m_style(NULL)
 {
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
@@ -93,18 +95,18 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 	//Enable the "sheet of glass" effect
 	if(MUtils::GUI::sheet_of_glass(this))
 	{
-		m_style = new QWindowsVistaStyle();
-		this->setStyle(m_style);
-		ui->progressBar->setStyle(m_style);
-		ui->labelStatus->setStyle(m_style);
+		m_style.reset(new QWindowsVistaStyle());
+		this->setStyle(m_style.data());
+		ui->progressBar->setStyle(m_style.data());
+		ui->labelStatus->setStyle(m_style.data());
 		ui->labelStatus->setStyleSheet("background-color: #FFFFFF;");
 	}
 	else
 	{
 		UPDATE_MARGINS(this, 5);
-		m_working = new QMovie(":/images/Busy.gif");
+		m_working.reset(new QMovie(":/images/Busy.gif"));
 		m_working->setCacheMode(QMovie::CacheAll);
-		ui->labelWorking->setMovie(m_working);
+		ui->labelWorking->setMovie(m_working.data());
 	}
 	
 	//Set Opacity
@@ -123,14 +125,11 @@ WorkingBanner::WorkingBanner(QWidget *parent)
 
 WorkingBanner::~WorkingBanner(void)
 {
-	if(m_working)
+	if(!m_working.isNull())
 	{
 		m_working->stop();
-		MUTILS_DELETE(m_working);
 	}
 
-	MUTILS_DELETE(m_style);
-	MUTILS_DELETE(m_metrics);
 	delete ui;
 }
 
@@ -163,8 +162,8 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	connect(thread, SIGNAL(terminated()), loop, SLOT(quit()));
 
 	//Set taskbar state
-	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), &QIcon(":/icons/hourglass.png"));
-	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+	m_taskbar->setOverlayIcon(&QIcon(":/icons/hourglass.png"));
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE);
 
 	//Start the thread
 	thread->start();
@@ -182,8 +181,8 @@ void WorkingBanner::show(const QString &text, QThread *thread)
 	QApplication::restoreOverrideCursor();
 
 	//Set taskbar state
-	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
-	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), NULL);
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
+	m_taskbar->setOverlayIcon(NULL);
 
 	//Free memory
 	MUTILS_DELETE(loop);
@@ -198,8 +197,8 @@ void WorkingBanner::show(const QString &text, QEventLoop *loop)
 	this->show(text);
 
 	//Set taskbar state
-	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), &QIcon(":/icons/hourglass.png"));
-	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+	m_taskbar->setOverlayIcon(&QIcon(":/icons/hourglass.png"));
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE);
 
 	//Update cursor
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -211,8 +210,8 @@ void WorkingBanner::show(const QString &text, QEventLoop *loop)
 	QApplication::restoreOverrideCursor();
 
 	//Set taskbar state
-	WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
-	WinSevenTaskbar::setOverlayIcon(dynamic_cast<QWidget*>(this->parent()), NULL);
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
+	m_taskbar->setOverlayIcon(NULL);
 
 	//Hide splash
 	this->close();
@@ -254,11 +253,6 @@ void WorkingBanner::closeEvent(QCloseEvent *event)
 	if(!m_canClose) event->ignore();
 }
 
-bool WorkingBanner::winEvent(MSG *message, long *result)
-{
-	return WinSevenTaskbar::handleWinEvent(message, result);
-}
-
 void WorkingBanner::showEvent(QShowEvent *event)
 {
 	QDialog::showEvent(event);
@@ -295,9 +289,9 @@ void WorkingBanner::windowShown(void)
 
 void WorkingBanner::setText(const QString &text)
 {
-	if(!m_metrics)
+	if(m_metrics.isNull())
 	{
-		 m_metrics = new QFontMetrics(ui->labelStatus->font());
+		 m_metrics.reset(new QFontMetrics(ui->labelStatus->font()));
 	}
 
 	if(m_metrics->width(text) <= ui->labelStatus->width() - 16)
@@ -322,12 +316,12 @@ void WorkingBanner::setProgressMax(unsigned int max)
 	ui->progressBar->setMaximum(max);
 	if(ui->progressBar->maximum() > ui->progressBar->minimum())
 	{
-		WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarNoState);
-		WinSevenTaskbar::setTaskbarProgress(dynamic_cast<QWidget*>(this->parent()), ui->progressBar->value(), ui->progressBar->maximum());
+		m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
+		m_taskbar->setTaskbarProgress(ui->progressBar->value(), ui->progressBar->maximum());
 	}
 	else
 	{
-		WinSevenTaskbar::setTaskbarState(dynamic_cast<QWidget*>(this->parent()), WinSevenTaskbar::WinSevenTaskbarIndeterminateState);
+		m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE);
 	}
 }
 
@@ -336,7 +330,7 @@ void WorkingBanner::setProgressVal(unsigned int val)
 	ui->progressBar->setValue(val);
 	if(ui->progressBar->maximum() > ui->progressBar->minimum())
 	{
-		WinSevenTaskbar::setTaskbarProgress(dynamic_cast<QWidget*>(this->parent()), ui->progressBar->value(), ui->progressBar->maximum());
+		m_taskbar->setTaskbarProgress(ui->progressBar->value(), ui->progressBar->maximum());
 	}
 }
 

@@ -29,7 +29,6 @@
 #include "Global.h"
 #include "Dialog_LogView.h"
 #include "Model_Settings.h"
-#include "WinSevenTaskbar.h"
 
 //MUtils
 #include <MUtils/UpdateChecker.h>
@@ -38,7 +37,7 @@
 #include <MUtils/Sound.h>
 #include <MUtils/GUI.h>
 #include <MUtils/OSSupport.h>
-
+#include <MUtils/Taskbar7.h>
 
 //Qt includes
 #include <QClipboard>
@@ -64,18 +63,18 @@ while(0)
 
 #define UPDATE_TASKBAR(STATE, ICON) do \
 { \
-	WinSevenTaskbar::setTaskbarState(this->parentWidget(), (STATE)); \
-	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon((ICON))); \
+	m_taskbar->setTaskbarState((STATE)); \
+	m_taskbar->setOverlayIcon(&QIcon((ICON))); \
 } \
 while(0)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
+UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 :
 	QDialog(parent),
 	ui(new Ui::UpdateDialog),
-	m_thread(NULL),
+	m_taskbar(new MUtils::Taskbar7(parent)),
 	m_settings(settings),
 	m_logFile(new QStringList()),
 	m_betaUpdates(settings ? (settings->autoUpdateCheckBeta() || lamexp_version_demo()) : lamexp_version_demo()),
@@ -101,8 +100,8 @@ UpdateDialog::UpdateDialog(SettingsModel *settings, QWidget *parent)
 	MUtils::GUI::enable_close_button(this, false);
 
 	//Init animation
-	m_animator = new QMovie(":/images/Loading3.gif");
-	ui->labelAnimationCenter->setMovie(m_animator);
+	m_animator.reset(new QMovie(":/images/Loading3.gif"));
+	ui->labelAnimationCenter->setMovie(m_animator.data());
 	m_animator->start();
 
 	//Indicate beta updates
@@ -128,7 +127,7 @@ UpdateDialog::~UpdateDialog(void)
 		m_animator->stop();
 	}
 
-	if(m_thread)
+	if(!m_thread.isNull())
 	{
 		if(!m_thread->wait(1000))
 		{
@@ -137,14 +136,10 @@ UpdateDialog::~UpdateDialog(void)
 		}
 	}
 
-	MUTILS_DELETE(m_thread);
-	MUTILS_DELETE(m_logFile);
-	MUTILS_DELETE(m_animator);
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
+	m_taskbar->setOverlayIcon(NULL);
 
-	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
-	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
-
-	MUTILS_DELETE(ui);
+	delete ui;
 }
 
 void UpdateDialog::showEvent(QShowEvent *event)
@@ -153,14 +148,14 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	
 	if(m_firstShow)
 	{
-		if(!m_thread)
+		if(m_thread.isNull())
 		{
-			m_thread = new MUtils::UpdateChecker(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates);
-			connect(m_thread, SIGNAL(statusChanged(int)), this, SLOT(threadStatusChanged(int)));
-			connect(m_thread, SIGNAL(progressChanged(int)), this, SLOT(threadProgressChanged(int)));
-			connect(m_thread, SIGNAL(messageLogged(QString)), this, SLOT(threadMessageLogged(QString)));
-			connect(m_thread, SIGNAL(finished()), this, SLOT(threadFinished()));
-			connect(m_thread, SIGNAL(terminated()), this, SLOT(threadFinished()));
+			m_thread.reset(new MUtils::UpdateChecker(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates));
+			connect(m_thread.data(), SIGNAL(statusChanged(int)), this, SLOT(threadStatusChanged(int)));
+			connect(m_thread.data(), SIGNAL(progressChanged(int)), this, SLOT(threadProgressChanged(int)));
+			connect(m_thread.data(), SIGNAL(messageLogged(QString)), this, SLOT(threadMessageLogged(QString)));
+			connect(m_thread.data(), SIGNAL(finished()), this, SLOT(threadFinished()));
+			connect(m_thread.data(), SIGNAL(terminated()), this, SLOT(threadFinished()));
 		}
 
 		threadStatusChanged(m_thread->getUpdateStatus());
@@ -196,8 +191,8 @@ void UpdateDialog::closeEvent(QCloseEvent *event)
 	}
 	else
 	{
-		WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
-		WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
+		m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
+		m_taskbar->setOverlayIcon(NULL);
 	}
 }
 
@@ -224,11 +219,6 @@ bool UpdateDialog::event(QEvent *e)
 		MUtils::GUI::bring_to_front(m_updaterProcess);
 	}
 	return QDialog::event(e);
-}
-
-bool UpdateDialog::winEvent(MSG *message, long *result)
-{
-	return WinSevenTaskbar::handleWinEvent(message, result);
 }
 
 void UpdateDialog::updateInit(void)
@@ -258,8 +248,8 @@ void UpdateDialog::checkForUpdates(void)
 		}
 	}
 
-	WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNormalState);
-	WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/transmit_blue.png"));
+	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NORMAL);
+	m_taskbar->setOverlayIcon(&QIcon(":/icons/transmit_blue.png"));
 
 	ui->progressBar->setValue(0);
 	ui->installButton->setEnabled(false);
@@ -294,32 +284,32 @@ void UpdateDialog::threadStatusChanged(const int status)
 	case MUtils::UpdateChecker::UpdateStatus_CompletedUpdateAvailable:
 		ui->statusLabel->setText(tr("A new version of LameXP is available!"));
 		SHOW_HINT(tr("We highly recommend all users to install this update as soon as possible."), ":/icons/shield_exclamation.png");
-		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_exclamation.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/shield_exclamation.png");
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_CompletedNoUpdates:
 		ui->statusLabel->setText(tr("No new updates available at this time."));
 		SHOW_HINT(tr("Your version of LameXP is still up-to-date. Please check for updates regularly!"), ":/icons/shield_green.png");
-		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_green.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/shield_green.png");
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_CompletedNewVersionOlder:
 		ui->statusLabel->setText(tr("Your version appears to be newer than the latest release."));
 		SHOW_HINT(tr("This usually indicates your are currently using a pre-release version of LameXP."), ":/icons/shield_blue.png");
-		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarNormalState, ":/icons/shield_error.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/shield_error.png");
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_ErrorNoConnection:
 		ui->statusLabel->setText(tr("It appears that the computer currently is offline!"));
 		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
-		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_ErrorConnectionTestFailed:
 		ui->statusLabel->setText(tr("Network connectivity test has failed!"));
 		SHOW_HINT(tr("Please make sure your computer is connected to the internet and try again."), ":/icons/network_error.png");
-		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
 		break;
 	case MUtils::UpdateChecker::UpdateStatus_ErrorFetchUpdateInfo:
 		ui->statusLabel->setText(tr("Failed to fetch update information from server!"));
 		SHOW_HINT(tr("Sorry, the update server might be busy at this time. Plase try again later."), ":/icons/server_error.png");
-		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarErrorState, ":/icons/exclamation.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
 		break;
 	default:
 		qWarning("Unknown status %d !!!", int(status));
@@ -411,7 +401,7 @@ void UpdateDialog::applyUpdate(void)
 		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(updateInfo->getBuildNo()));
 
 		QApplication::setOverrideCursor(Qt::WaitCursor);
-		UPDATE_TASKBAR(WinSevenTaskbar::WinSevenTaskbarIndeterminateState, ":/icons/transmit_blue.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE, ":/icons/transmit_blue.png");
 
 		process.start(m_binaryUpdater, args);
 		bool updateStarted = process.waitForStarted();
@@ -434,16 +424,16 @@ void UpdateDialog::applyUpdate(void)
 		{
 			ui->statusLabel->setText(tr("Update ready to install. Applicaion will quit..."));
 			m_updateReadyToInstall = true;
-			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarNoState);
-			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), NULL);
+			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
+			m_taskbar->setOverlayIcon(NULL);
 			accept();
 		}
 		else
 		{
 			ui->statusLabel->setText(tr("Update failed. Please try again or download manually!"));
-			WinSevenTaskbar::setTaskbarState(this->parentWidget(), WinSevenTaskbar::WinSevenTaskbarErrorState);
-			WinSevenTaskbar::setOverlayIcon(this->parentWidget(), &QIcon(":/icons/exclamation.png"));
-			WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), 100, 100);
+			m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_ERROR);
+			m_taskbar->setOverlayIcon(&QIcon(":/icons/exclamation.png"));
+			m_taskbar->setTaskbarProgress(100, 100);
 		}
 	}
 
@@ -460,7 +450,7 @@ void UpdateDialog::logButtonClicked(void)
 
 void UpdateDialog::progressBarValueChanged(int value)
 {
-	WinSevenTaskbar::setTaskbarProgress(this->parentWidget(), value, ui->progressBar->maximum());
+	m_taskbar->setTaskbarProgress(value, ui->progressBar->maximum());
 }
 
 void UpdateDialog::testKnownHosts(void)

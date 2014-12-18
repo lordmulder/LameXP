@@ -31,7 +31,6 @@
 #include "Model_FileList.h"
 #include "Model_AudioFile.h"
 #include "Encoder_Abstract.h"
-#include "WinSevenTaskbar.h"
 
 //MUitls
 #include <MUtils/Global.h>
@@ -243,14 +242,8 @@ static int lamexp_main(int &argc, char **argv)
 		InitializationThread::selfTest();
 	}
 
-	//Taskbar init
-	WinSevenTaskbar::init();
-
 	//Main application loop
 	iResult = lamexp_main_loop(cpuFeatures, ipcChannel.data(), iShutdown);
-
-	//Taskbar un-init
-	WinSevenTaskbar::uninit();
 
 	//Final clean-up
 	qDebug("Shutting down, please wait...\n");

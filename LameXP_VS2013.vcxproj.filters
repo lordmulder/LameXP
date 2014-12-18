@@ -151,9 +151,6 @@
     <ClCompile Include="src\Thread_MessageProducer.cpp">
       <Filter>Source Files\Threads</Filter>
     </ClCompile>
-    <ClCompile Include="src\WinSevenTaskbar.cpp">
-      <Filter>Source Files\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="src\LockedFile.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
@@ -493,9 +490,6 @@
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="src\PlaylistImporter.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WinSevenTaskbar.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="src\Global.h">
