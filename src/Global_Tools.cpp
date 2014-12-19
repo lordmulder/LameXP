@@ -73,6 +73,9 @@ static struct
 }
 g_lamexp_currentTranslator;
 
+//Null String
+static const QString g_null;
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -80,7 +83,7 @@ g_lamexp_currentTranslator;
 /*
  * Register tool
  */
-void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version, const QString *tag)
+void lamexp_tool_register(const QString &toolName, LockedFile *file, unsigned int version, const QString *tag)
 {
 	QWriteLocker writeLock(&g_lamexp_tools.lock);
 	
@@ -101,7 +104,7 @@ void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned in
 /*
  * Check for tool
  */
-bool lamexp_check_tool(const QString &toolName)
+bool lamexp_tool_check(const QString &toolName)
 {
 	QReadLocker readLock(&g_lamexp_tools.lock);
 	return (g_lamexp_tools.registry) ? g_lamexp_tools.registry->contains(toolName.toLower()) : false;
@@ -110,7 +113,7 @@ bool lamexp_check_tool(const QString &toolName)
 /*
  * Lookup tool path
  */
-const QString lamexp_lookup_tool(const QString &toolName)
+const QString &lamexp_tool_lookup(const QString &toolName)
 {
 	QReadLocker readLock(&g_lamexp_tools.lock);
 
@@ -122,12 +125,12 @@ const QString lamexp_lookup_tool(const QString &toolName)
 		}
 		else
 		{
-			return QString();
+			return g_null;
 		}
 	}
 	else
 	{
-		return QString();
+		return g_null;
 	}
 }
 

@@ -47,45 +47,12 @@
 // GLOBAL VARS
 ///////////////////////////////////////////////////////////////////////////////
 
-static struct
-{
-	QIcon *appIcon;
-	QReadWriteLock lock;
-}
-g_lamexp_app_icon;
+static QScopedPointer<QIcon> g_lamexp_icon_data;
+static QReadWriteLock        g_lamexp_icon_lock;
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
-
-/*
- * Get a list of all available Qt Text Codecs
- */
-QStringList lamexp_available_codepages(bool noAliases)
-{
-	QStringList codecList;
-	
-	QList<QByteArray> availableCodecs = QTextCodec::availableCodecs();
-	while(!availableCodecs.isEmpty())
-	{
-		QByteArray current = availableCodecs.takeFirst();
-		if(!(current.startsWith("system") || current.startsWith("System")))
-		{
-			codecList << QString::fromLatin1(current.constData(), current.size());
-			if(noAliases)
-			{
-				if(QTextCodec *currentCodec = QTextCodec::codecForName(current.constData()))
-				{
-					
-					QList<QByteArray> aliases = currentCodec->aliases();
-					while(!aliases.isEmpty()) availableCodecs.removeAll(aliases.takeFirst());
-				}
-			}
-		}
-	}
-
-	return codecList;
-}
 
 /*
  * Computus according to H. Lichtenberg
@@ -140,66 +107,47 @@ static bool lamexp_thanksgiving(const QDate &date)
  */
 const QIcon &lamexp_app_icon(void)
 {
-	QReadLocker readLock(&g_lamexp_app_icon.lock);
+	QReadLocker readLock(&g_lamexp_icon_lock);
 
 	//Already initialized?
-	if(g_lamexp_app_icon.appIcon)
+	if(!g_lamexp_icon_data.isNull())
 	{
-		return *g_lamexp_app_icon.appIcon;
+		return *g_lamexp_icon_data;
 	}
 
 	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_app_icon.lock);
+	QWriteLocker writeLock(&g_lamexp_icon_lock);
 
-	while(!g_lamexp_app_icon.appIcon)
+	while(g_lamexp_icon_data.isNull())
 	{
 		QDate currentDate = QDate::currentDate();
 		QTime currentTime = QTime::currentTime();
 	
 		if(lamexp_thanksgiving(currentDate))
 		{
-			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon6.png");
+			g_lamexp_icon_data.reset(new QIcon(":/MainIcon6.png"));
 		}
 		else if(((currentDate.month() == 12) && (currentDate.day() == 31) && (currentTime.hour() >= 20)) || ((currentDate.month() == 1) && (currentDate.day() == 1)  && (currentTime.hour() <= 19)))
 		{
-			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon5.png");
+			g_lamexp_icon_data.reset(new QIcon(":/MainIcon5.png"));
 		}
 		else if(((currentDate.month() == 10) && (currentDate.day() == 31) && (currentTime.hour() >= 12)) || ((currentDate.month() == 11) && (currentDate.day() == 1)  && (currentTime.hour() <= 11)))
 		{
-			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon4.png");
+			g_lamexp_icon_data.reset(new QIcon(":/MainIcon4.png"));
 		}
 		else if((currentDate.month() == 12) && (currentDate.day() >= 24) && (currentDate.day() <= 26))
 		{
-			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon3.png");
+			g_lamexp_icon_data.reset(new QIcon(":/MainIcon3.png"));
 		}
 		else if(lamexp_computus(currentDate))
 		{
-			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon2.png");
+			g_lamexp_icon_data.reset(new QIcon(":/MainIcon2.png"));
 		}
 		else
 		{
-			g_lamexp_app_icon.appIcon = new QIcon(":/MainIcon1.png");
+			g_lamexp_icon_data.reset(new QIcon(":/MainIcon1.png"));
 		}
 	}
 
-	return *g_lamexp_app_icon.appIcon;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// INITIALIZATION
-///////////////////////////////////////////////////////////////////////////////
-
-extern "C" void _lamexp_global_init_utils(void)
-{
-	MUTILS_ZERO_MEMORY(g_lamexp_app_icon);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// FINALIZATION
-///////////////////////////////////////////////////////////////////////////////
-
-extern "C" void _lamexp_global_free_utils(void)
-{
-	//Free memory
-	MUTILS_DELETE(g_lamexp_app_icon.appIcon);
+	return *g_lamexp_icon_data;
 }

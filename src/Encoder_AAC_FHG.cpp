@@ -120,8 +120,8 @@ static const g_fhgAacEncoderInfo;
 
 FHGAACEncoder::FHGAACEncoder(void)
 :
-	m_binary_enc(lamexp_lookup_tool("fhgaacenc.exe")),
-	m_binary_dll(lamexp_lookup_tool("enc_fhgaac.dll"))
+	m_binary_enc(lamexp_tool_lookup("fhgaacenc.exe")),
+	m_binary_dll(lamexp_tool_lookup("enc_fhgaac.dll"))
 {
 	if(m_binary_enc.isEmpty() || m_binary_dll.isEmpty())
 	{

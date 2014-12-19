@@ -70,14 +70,8 @@ static size_t lamexp_entry_check(void)
 extern "C"
 {
 	int mainCRTStartup(void);
-
-	void _lamexp_global_init_versn(void);
 	void _lamexp_global_init_tools(void);
-	void _lamexp_global_init_utils(void);
-
-	void _lamexp_global_free_versn(void);
 	void _lamexp_global_free_tools(void);
-	void _lamexp_global_free_utils(void);
 }
 
 /*
@@ -92,9 +86,7 @@ extern "C" int lamexp_entry_point(void)
 	}
 
 	//Call global initialization functions
-	_lamexp_global_init_versn();
 	_lamexp_global_init_tools();
-	_lamexp_global_init_utils();
 
 	//Make sure we will pass the check
 	g_lamexp_entry_check_flag = (~g_lamexp_entry_check_flag);
@@ -111,7 +103,5 @@ void lamexp_finalization(void)
 	qDebug("lamexp_finalization()");
 
 	//Call global finalization functions, in proper order
-	_lamexp_global_free_versn();
 	_lamexp_global_free_tools();
-	_lamexp_global_free_utils();
 }

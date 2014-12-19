@@ -128,9 +128,9 @@ static const g_qaacEncoderInfo;
 
 QAACEncoder::QAACEncoder(void)
 :
-	m_binary_qaac(lamexp_lookup_tool("qaac.exe")),
-	m_binary_soxr(lamexp_lookup_tool("libsoxr.dll")),
-	m_binary_soxc(lamexp_lookup_tool("libsoxconvolver.dll"))
+	m_binary_qaac(lamexp_tool_lookup("qaac.exe")),
+	m_binary_soxr(lamexp_tool_lookup("libsoxr.dll")),
+	m_binary_soxc(lamexp_tool_lookup("libsoxconvolver.dll"))
 {
 	if(m_binary_qaac.isEmpty() || m_binary_soxr.isEmpty() || m_binary_soxc.isEmpty())
 	{

@@ -36,7 +36,7 @@
 
 ToneAdjustFilter::ToneAdjustFilter(int bass, int treble)
 :
-	m_binary(lamexp_lookup_tool("sox.exe"))
+	m_binary(lamexp_tool_lookup("sox.exe"))
 {
 	if(m_binary.isEmpty())
 	{

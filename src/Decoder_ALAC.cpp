@@ -36,7 +36,7 @@
 
 ALACDecoder::ALACDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("refalac.exe"))
+	m_binary(lamexp_tool_lookup("refalac.exe"))
 {
 	if(m_binary.isEmpty())
 	{

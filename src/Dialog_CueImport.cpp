@@ -155,7 +155,7 @@ int CueImportDialog::exec(void)
 
 		QStringList codecList;
 		codecList.append(systemDefault);
-		codecList.append(lamexp_available_codepages());
+		codecList.append(MUtils::available_codepages());
 
 		QInputDialog *input = new QInputDialog(progress);
 		input->setLabelText(EXPAND(tr("Select ANSI Codepage for Cue Sheet file:")));

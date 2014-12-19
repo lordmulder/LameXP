@@ -36,7 +36,7 @@
 
 AvisynthDecoder::AvisynthDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("avs2wav.exe"))
+	m_binary(lamexp_tool_lookup("avs2wav.exe"))
 {
 	if(m_binary.isEmpty())
 	{

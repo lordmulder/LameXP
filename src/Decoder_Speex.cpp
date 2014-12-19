@@ -35,7 +35,7 @@
 
 SpeexDecoder::SpeexDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("speexdec.exe"))
+	m_binary(lamexp_tool_lookup("speexdec.exe"))
 {
 	if(m_binary.isEmpty())
 	{

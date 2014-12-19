@@ -287,7 +287,7 @@ SettingsModel::SettingsModel(void)
 {
 	QString configPath = "LameXP.ini";
 	
-	if(!lamexp_portable_mode())
+	if(!lamexp_version_portable())
 	{
 		QString dataPath = initDirectory(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
 		if(!dataPath.isEmpty())
@@ -567,7 +567,7 @@ LAMEXP_MAKE_OPTION_I(aftenExponentSearchSize, 8)
 LAMEXP_MAKE_OPTION_B(aftenFastBitAllocation, false)
 LAMEXP_MAKE_OPTION_B(antivirNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(autoUpdateCheckBeta, false)
-LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, (!lamexp_portable_mode()));
+LAMEXP_MAKE_OPTION_B(autoUpdateEnabled, (!lamexp_version_portable()));
 LAMEXP_MAKE_OPTION_S(autoUpdateLastCheck, "Never")
 LAMEXP_MAKE_OPTION_B(bitrateManagementEnabled, false)
 LAMEXP_MAKE_OPTION_I(bitrateManagementMaxRate, 500)
@@ -652,7 +652,7 @@ LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath, false)
 LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled, false)
 LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern, "[<TrackNo>] <Artist> - <Title>")
 LAMEXP_MAKE_OPTION_I(samplingRate, 0)
-LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_portable_mode())
+LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_version_portable())
 LAMEXP_MAKE_OPTION_B(slowStartup, false)
 LAMEXP_MAKE_OPTION_B(soundsEnabled, true)
 LAMEXP_MAKE_OPTION_I(toneAdjustBass, 0)

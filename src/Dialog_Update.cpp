@@ -82,10 +82,10 @@ UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 	m_firstShow(true),
 	m_updateReadyToInstall(false),
 	m_updaterProcess(NULL),
-	m_binaryUpdater(lamexp_lookup_tool("wupdate.exe")),
-	m_binaryWGet(lamexp_lookup_tool("wget.exe")),
-	m_binaryGnuPG(lamexp_lookup_tool("gpgv.exe")),
-	m_binaryKeys(lamexp_lookup_tool("gpgv.gpg"))
+	m_binaryUpdater(lamexp_tool_lookup("wupdate.exe")),
+	m_binaryWGet(lamexp_tool_lookup("wget.exe")),
+	m_binaryGnuPG(lamexp_tool_lookup("gpgv.exe")),
+	m_binaryKeys(lamexp_tool_lookup("gpgv.gpg"))
 {
 	if(m_binaryUpdater.isEmpty())
 	{

@@ -36,7 +36,7 @@
 
 MusepackDecoder::MusepackDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("mpcdec.exe"))
+	m_binary(lamexp_tool_lookup("mpcdec.exe"))
 {
 	if(m_binary.isEmpty())
 	{

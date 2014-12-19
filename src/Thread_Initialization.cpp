@@ -183,7 +183,7 @@ protected:
 
 		if(lockedFile)
 		{
-			lamexp_register_tool(toolShortName, lockedFile, version, &m_toolTag);
+			lamexp_tool_register(toolShortName, lockedFile, version, &m_toolTag);
 		}
 	}
 
@@ -647,7 +647,7 @@ void InitializationThread::initNeroAac(void)
 	
 	for(int i = 0; i < 3; i++)
 	{
-		lamexp_register_tool(neroFileInfo[i].fileName(), neroBin[i], neroVersion);
+		lamexp_tool_register(neroFileInfo[i].fileName(), neroBin[i], neroVersion);
 	}
 }
 
@@ -755,7 +755,7 @@ void InitializationThread::initFhgAac(void)
 	
 	for(int i = 0; i < 5; i++)
 	{
-		lamexp_register_tool(fhgFileInfo[i].fileName(), fhgBin[i], fhgVersion);
+		lamexp_tool_register(fhgFileInfo[i].fileName(), fhgBin[i], fhgVersion);
 	}
 }
 
@@ -909,10 +909,10 @@ void InitializationThread::initQAac(void)
 		return;
 	}
 
-	lamexp_register_tool(qaacFileInfo[0].fileName(), qaacBin[0], qaacVersion);
-	lamexp_register_tool(qaacFileInfo[1].fileName(), qaacBin[1], qaacVersion);
-	lamexp_register_tool(qaacFileInfo[2].fileName(), qaacBin[2], qaacVersion);
-	lamexp_register_tool(qaacFileInfo[3].fileName(), qaacBin[3], qaacVersion);
+	lamexp_tool_register(qaacFileInfo[0].fileName(), qaacBin[0], qaacVersion);
+	lamexp_tool_register(qaacFileInfo[1].fileName(), qaacBin[1], qaacVersion);
+	lamexp_tool_register(qaacFileInfo[2].fileName(), qaacBin[2], qaacVersion);
+	lamexp_tool_register(qaacFileInfo[3].fileName(), qaacBin[3], qaacVersion);
 }
 
 void InitializationThread::selfTest(void)

@@ -37,7 +37,7 @@
 
 WMADecoder::WMADecoder(void)
 :
-	m_binary(lamexp_lookup_tool("wma2wav.exe"))
+	m_binary(lamexp_tool_lookup("wma2wav.exe"))
 {
 	if(m_binary.isEmpty())
 	{

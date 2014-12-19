@@ -36,7 +36,7 @@
 
 TTADecoder::TTADecoder(void)
 :
-	m_binary(lamexp_lookup_tool("tta.exe"))
+	m_binary(lamexp_tool_lookup("tta.exe"))
 {
 	if(m_binary.isEmpty())
 	{

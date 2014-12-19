@@ -35,7 +35,7 @@
 
 MP3Decoder::MP3Decoder(void)
 :
-	m_binary(lamexp_lookup_tool("mpg123.exe"))
+	m_binary(lamexp_tool_lookup("mpg123.exe"))
 {
 	if(m_binary.isEmpty())
 	{

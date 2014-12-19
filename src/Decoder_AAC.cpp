@@ -35,7 +35,7 @@
 
 AACDecoder::AACDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("faad.exe"))
+	m_binary(lamexp_tool_lookup("faad.exe"))
 {
 	if(m_binary.isEmpty())
 	{

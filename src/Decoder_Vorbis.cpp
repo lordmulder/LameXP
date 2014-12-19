@@ -35,7 +35,7 @@
 
 VorbisDecoder::VorbisDecoder(void)
 :
-	m_binary(lamexp_lookup_tool("oggdec.exe"))
+	m_binary(lamexp_tool_lookup("oggdec.exe"))
 {
 	if(m_binary.isEmpty())
 	{

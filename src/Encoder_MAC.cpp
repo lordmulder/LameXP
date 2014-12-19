@@ -112,8 +112,8 @@ static const g_macEncoderInfo;
 
 MACEncoder::MACEncoder(void)
 :
-	m_binary_enc(lamexp_lookup_tool("mac.exe")),
-	m_binary_tag(lamexp_lookup_tool("tag.exe"))
+	m_binary_enc(lamexp_tool_lookup("mac.exe")),
+	m_binary_tag(lamexp_tool_lookup("tag.exe"))
 {
 	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty())
 	{

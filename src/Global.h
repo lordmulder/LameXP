@@ -22,22 +22,23 @@
 
 #pragma once
 
+#ifdef _MSC_VER
 #define _CRT_RAND_S
+#endif
+
 #include <cstdlib>
+#include <QtGlobal>
 
 //Forward declarations
-class QString;
-class QStringList;
 class QDate;
-class QTime;
+class QStringList;
 class QIcon;
-class QWidget;
-class QProcess;
-class QColor;
 class LockedFile;
-enum QtMsgType;
 
-//Variables
+///////////////////////////////////////////////////////////////////////////////
+// GLOBAL CONSTANTS
+///////////////////////////////////////////////////////////////////////////////
+
 extern const char* LAMEXP_DEFAULT_LANGID;
 extern const char* LAMEXP_DEFAULT_TRANSLATION;
 
@@ -45,38 +46,61 @@ extern const char* LAMEXP_DEFAULT_TRANSLATION;
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-const QIcon &lamexp_app_icon(void);
-QStringList lamexp_available_codepages(bool noAliases = true);
-bool lamexp_check_tool(const QString &toolName);
-void lamexp_finalization(void);
-bool lamexp_install_translator(const QString &language);
-bool lamexp_install_translator_from_file(const QString &qmFile);
-const QString lamexp_lookup_tool(const QString &toolName);
-const char *lamexp_mulders_url(void);
-bool lamexp_portable_mode(void);
+/*
+ * Translation Support
+ */
 QStringList lamexp_query_translations(void);
-void lamexp_register_tool(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
-const char *lamexp_support_url(void);
-unsigned int lamexp_tool_version(const QString &toolName, QString *tag = NULL);
-unsigned int lamexp_toolver_coreaudio(void);
-unsigned int lamexp_toolver_fhgaacenc(void);
-unsigned int lamexp_toolver_neroaac(void);
-unsigned int lamexp_toolver_qaacenc(void);
-const char *lamexp_tracker_url(void);
 unsigned int lamexp_translation_country(const QString &langId);
 bool lamexp_translation_init(void);
 QString lamexp_translation_name(const QString &language);
 bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &country);
 unsigned int lamexp_translation_sysid(const QString &langId);
-const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag = NULL);
-unsigned int lamexp_version_build(void);
-unsigned int lamexp_version_confg(void);
-bool lamexp_version_demo(void);
-QDate lamexp_version_expires(void);
-unsigned int lamexp_version_major(void);
-unsigned int lamexp_version_minor(void);
-const char *lamexp_version_release(void);
+bool lamexp_install_translator(const QString &language);
+bool lamexp_install_translator_from_file(const QString &qmFile);
+
+/*
+ * Tools Support
+ */
+bool           lamexp_tool_check   (const QString &toolName);
+const QString& lamexp_tool_lookup  (const QString &toolName);
+void           lamexp_tool_register(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
+unsigned int   lamexp_tool_version (const QString &toolName, QString *tag = NULL);
+
+/*
+ * Version getters
+ */
+unsigned int lamexp_version_major    (void);
+unsigned int lamexp_version_minor    (void);
+unsigned int lamexp_version_build    (void);
+unsigned int lamexp_version_confg    (void);
+const char*  lamexp_version_release  (void);
+bool         lamexp_version_portable (void);
+bool         lamexp_version_demo     (void);
+QDate&       lamexp_version_expires  (void);
+unsigned int lamexp_toolver_neroaac  (void);
+unsigned int lamexp_toolver_fhgaacenc(void);
+unsigned int lamexp_toolver_qaacenc  (void);
+unsigned int lamexp_toolver_coreaudio(void);
+
+
+/*
+ * URL getters
+ */
 const char *lamexp_website_url(void);
+const char *lamexp_mulders_url(void);
+const char *lamexp_support_url(void);
+const char *lamexp_tracker_url(void);
+
+/*
+ * Misc Functions
+ */
+const QIcon&  lamexp_app_icon(void);
+const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag = NULL);
+
+/*
+ * Finalization
+ */
+void lamexp_finalization(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 // HELPER MACROS

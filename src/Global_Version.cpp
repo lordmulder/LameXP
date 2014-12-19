@@ -40,32 +40,23 @@
 // GLOBAL VARS
 ///////////////////////////////////////////////////////////////////////////////
 
+static QReadWriteLock g_lamexp_version_lock;
+
 //Build version
-static const struct
-{
-	unsigned int ver_major;
-	unsigned int ver_minor;
-	unsigned int ver_build;
-	unsigned int ver_confg;
-	char *ver_release_name;
-}
-g_lamexp_version =
-{
-	VER_LAMEXP_MAJOR,
-	(10 * VER_LAMEXP_MINOR_HI) + VER_LAMEXP_MINOR_LO,
-	VER_LAMEXP_BUILD,
-	VER_LAMEXP_CONFG,
-	VER_LAMEXP_RNAME,
-};
+static const unsigned int g_lamexp_version_major = VER_LAMEXP_MAJOR;
+static const unsigned int g_lamexp_version_minor = (10 * VER_LAMEXP_MINOR_HI) + VER_LAMEXP_MINOR_LO;
+static const unsigned int g_lamexp_version_build = VER_LAMEXP_BUILD;
+static const unsigned int g_lamexp_version_confg = VER_LAMEXP_CONFG;
+static const char*        g_lamexp_version_rname = VER_LAMEXP_RNAME;
+
+//Demo Version
+static int g_lamexp_demo = -1;
 
 //Portable Mode
-static struct
-{
-	bool bInitialized;
-	bool bPortableModeEnabled;
-	QReadWriteLock lock;
-}
-g_lamexp_portable;
+static int g_lamexp_portable = -1;
+
+//Expiration date
+static QScopedPointer<QDate> g_lamexp_expiration_date;
 
 //Official web-site URL
 static const char *g_lamexp_website_url = "http://lamexp.sourceforge.net/";
@@ -86,14 +77,14 @@ static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO
 /*
  * Version getters
  */
-unsigned int lamexp_version_major(void)     { return g_lamexp_version.ver_major; }
-unsigned int lamexp_version_minor(void)     { return g_lamexp_version.ver_minor; }
-unsigned int lamexp_version_build(void)     { return g_lamexp_version.ver_build; }
-unsigned int lamexp_version_confg(void)     { return g_lamexp_version.ver_confg; }
-const char*  lamexp_version_release(void)   { return g_lamexp_version.ver_release_name; }
-unsigned int lamexp_toolver_neroaac(void)   { return g_lamexp_toolver_neroaac; }
+unsigned int lamexp_version_major(void)     { return g_lamexp_version_major;     }
+unsigned int lamexp_version_minor(void)     { return g_lamexp_version_minor;     }
+unsigned int lamexp_version_build(void)     { return g_lamexp_version_build;     }
+unsigned int lamexp_version_confg(void)     { return g_lamexp_version_confg;     }
+const char*  lamexp_version_release(void)   { return g_lamexp_version_rname;     }
+unsigned int lamexp_toolver_neroaac(void)   { return g_lamexp_toolver_neroaac;   }
 unsigned int lamexp_toolver_fhgaacenc(void) { return g_lamexp_toolver_fhgaacenc; }
-unsigned int lamexp_toolver_qaacenc(void)   { return g_lamexp_toolver_qaacenc; }
+unsigned int lamexp_toolver_qaacenc(void)   { return g_lamexp_toolver_qaacenc;   }
 unsigned int lamexp_toolver_coreaudio(void) { return g_lamexp_toolver_coreaudio; }
 
 /*
@@ -109,66 +100,77 @@ const char *lamexp_tracker_url(void) { return g_lamexp_tracker_url; }
  */
 bool lamexp_version_demo(void)
 {
-	return _strnicmp(g_lamexp_version.ver_release_name, "Final", 5) && _strnicmp(g_lamexp_version.ver_release_name, "Hotfix", 6);
+	QReadLocker readLock(&g_lamexp_version_lock);
+
+	if(g_lamexp_demo >= 0)
+	{
+		return (g_lamexp_demo > 0);
+	}
+	
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_version_lock);
+
+	if(g_lamexp_demo < 0)
+	{
+		g_lamexp_demo = (_strnicmp(g_lamexp_version_rname, "Final", 5) && _strnicmp(g_lamexp_version_rname, "Hotfix", 6)) ? (1) : (0);
+	}
+
+	return (g_lamexp_demo > 0);
 }
 
 /*
  * Calculate expiration date
  */
-QDate lamexp_version_expires(void)
+QDate &lamexp_version_expires(void)
 {
-	return MUtils::Version::app_build_date().addDays(MUTILS_DEBUG ? 7 : 30);
+	QReadLocker readLock(&g_lamexp_version_lock);
+
+	if(!g_lamexp_expiration_date.isNull())
+	{
+		return *g_lamexp_expiration_date;
+	}
+
+	readLock.unlock();
+	QWriteLocker writeLock(&g_lamexp_version_lock);
+
+	if(g_lamexp_expiration_date.isNull())
+	{
+		g_lamexp_expiration_date.reset(new QDate(MUtils::Version::app_build_date().addDays(MUTILS_DEBUG ? 7 : 30)));
+	}
+
+	return *g_lamexp_expiration_date;
 }
 
 /*
  * Check for LameXP "portable" mode
  */
-bool lamexp_portable_mode(void)
+bool lamexp_version_portable(void)
 {
-	QReadLocker readLock(&g_lamexp_portable.lock);
+	QReadLocker readLock(&g_lamexp_version_lock);
 
-	if(g_lamexp_portable.bInitialized)
+	if(g_lamexp_portable >= 0)
 	{
-		return g_lamexp_portable.bPortableModeEnabled;
+		return (g_lamexp_portable > 0);
 	}
 	
 	readLock.unlock();
-	QWriteLocker writeLock(&g_lamexp_portable.lock);
+	QWriteLocker writeLock(&g_lamexp_version_lock);
 
-	if(!g_lamexp_portable.bInitialized)
+	if(g_lamexp_portable < 0)
 	{
 		if(VER_LAMEXP_PORTABLE_EDITION)
 		{
 			qWarning("LameXP portable edition!\n");
-			g_lamexp_portable.bPortableModeEnabled = true;
+			g_lamexp_portable = 1;
 		}
 		else
 		{
-			QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
-			int idx1 = baseName.indexOf("lamexp", 0, Qt::CaseInsensitive);
-			int idx2 = baseName.lastIndexOf("portable", -1, Qt::CaseInsensitive);
-			g_lamexp_portable.bPortableModeEnabled = ((idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2));
+			const QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
+			const int idx1 = baseName.indexOf("lamexp", 0, Qt::CaseInsensitive);
+			const int idx2 = baseName.lastIndexOf("portable", -1, Qt::CaseInsensitive);
+			g_lamexp_portable = ((idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2)) ? (1) : (0);
 		}
-		g_lamexp_portable.bInitialized = true;
 	}
 	
-	return g_lamexp_portable.bPortableModeEnabled;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// INITIALIZATION
-///////////////////////////////////////////////////////////////////////////////
-
-extern "C" void _lamexp_global_init_versn(void)
-{
-	MUTILS_ZERO_MEMORY(g_lamexp_portable);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// FINALIZATION
-///////////////////////////////////////////////////////////////////////////////
-
-extern "C" void _lamexp_global_free_versn(void)
-{
-	/*nothing to do here*/
+	return (g_lamexp_portable > 0);
 }

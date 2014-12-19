@@ -117,7 +117,7 @@ static const g_mp3EncoderInfo;
 
 MP3Encoder::MP3Encoder(void)
 :
-	m_binary(lamexp_lookup_tool("lame.exe"))
+	m_binary(lamexp_tool_lookup("lame.exe"))
 {
 	if(m_binary.isEmpty())
 	{

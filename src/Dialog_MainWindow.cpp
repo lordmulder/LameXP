@@ -625,7 +625,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 	ui->actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
 	ui->actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
-	ui->actionDisableShellIntegration->setDisabled(lamexp_portable_mode() && ui->actionDisableShellIntegration->isChecked());
+	ui->actionDisableShellIntegration->setDisabled(lamexp_version_portable() && ui->actionDisableShellIntegration->isChecked());
 	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta() || lamexp_version_demo());
 	ui->actionCheckForBetaUpdates->setEnabled(!lamexp_version_demo());
 	ui->actionHibernateComputer->setChecked(m_settings->hibernateComputer());
@@ -2178,7 +2178,7 @@ void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 
 	ui->actionDisableShellIntegration->setChecked(!m_settings->shellIntegrationEnabled());
 	
-	if(lamexp_portable_mode() && ui->actionDisableShellIntegration->isChecked())
+	if(lamexp_version_portable() && ui->actionDisableShellIntegration->isChecked())
 	{
 		ui->actionDisableShellIntegration->setEnabled(false);
 	}
@@ -4012,7 +4012,7 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
  */
 void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QString &command)
 {
-	const QString binary = lamexp_lookup_tool(toolName);
+	const QString binary = lamexp_tool_lookup(toolName);
 	if(binary.isEmpty())
 	{
 		MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);

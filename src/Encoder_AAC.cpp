@@ -117,9 +117,9 @@ static const g_aacEncoderInfo;
 
 AACEncoder::AACEncoder(void)
 :
-	m_binary_enc(lamexp_lookup_tool("neroAacEnc.exe")),
-	m_binary_tag(lamexp_lookup_tool("neroAacTag.exe")),
-	m_binary_sox(lamexp_lookup_tool("sox.exe"))
+	m_binary_enc(lamexp_tool_lookup("neroAacEnc.exe")),
+	m_binary_tag(lamexp_tool_lookup("neroAacTag.exe")),
+	m_binary_sox(lamexp_tool_lookup("sox.exe"))
 {
 	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty() || m_binary_sox.isEmpty())
 	{
