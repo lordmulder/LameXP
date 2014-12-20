@@ -261,7 +261,7 @@ int AboutDialog::exec()
 	{
 		if(m_firstShow)
 		{
-			if(!MUtils::Sound::play_sound_file("imageres.dll", 5080))
+			if(!MUtils::Sound::play_sound_file("imageres.dll", 5080, true))
 			{
 				MUtils::Sound::play_system_sound("SystemStart", true);
 			}
