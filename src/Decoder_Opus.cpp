@@ -38,7 +38,7 @@ bool OpusDecoder::m_disableResampling = false;
 
 OpusDecoder::OpusDecoder(void)
 :
-	m_binary(lamexp_tool_lookup("opusdec.exe"))
+	m_binary(lamexp_tools_lookup("opusdec.exe"))
 {
 	if(m_binary.isEmpty())
 	{

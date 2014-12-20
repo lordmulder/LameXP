@@ -114,7 +114,7 @@ static const g_vorbisEncoderInfo;
 
 VorbisEncoder::VorbisEncoder(void)
 :
-	m_binary(lamexp_tool_lookup("oggenc2.exe"))
+	m_binary(lamexp_tools_lookup("oggenc2.exe"))
 {
 	if(m_binary.isEmpty())
 	{

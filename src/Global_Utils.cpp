@@ -151,3 +151,41 @@ const QIcon &lamexp_app_icon(void)
 
 	return *g_lamexp_icon_data;
 }
+
+/*
+ * Version number to human-readable string
+ */
+const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString &tag)
+{
+	if(version == UINT_MAX)
+	{
+		return defaultText;
+	}
+	
+	QString result = pattern;
+	const int digits = result.count(QChar(L'?'), Qt::CaseInsensitive);
+	
+	if(digits < 1)
+	{
+		return result;
+	}
+	
+	int pos = 0, index = -1;
+	const QString versionStr = QString().sprintf("%0*u", digits, version);
+	Q_ASSERT(versionStr.length() == digits);
+	
+	while((index = result.indexOf(QChar(L'?'), Qt::CaseInsensitive)) >= 0)
+	{
+		result[index] = versionStr[pos++];
+	}
+
+	if(!tag.isEmpty())
+	{
+		if((index = result.indexOf(QChar(L'#'), Qt::CaseInsensitive)) >= 0)
+		{
+			result.remove(index, 1).insert(index, tag);
+		}
+	}
+
+	return result;
+}

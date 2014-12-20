@@ -56,7 +56,7 @@ CueSplitter::CueSplitter(const QString &outputDir, const QString &baseName, CueS
 	m_model(model),
 	m_outputDir(outputDir),
 	m_baseName(baseName),
-	m_soxBin(lamexp_tool_lookup("sox.exe"))
+	m_soxBin(lamexp_tools_lookup("sox.exe"))
 {
 	if(m_soxBin.isEmpty())
 	{

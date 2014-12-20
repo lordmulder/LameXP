@@ -41,7 +41,7 @@ static __inline int multipleOf(int value, int base)
 
 ResampleFilter::ResampleFilter(int samplingRate, int bitDepth)
 :
-	m_binary(lamexp_tool_lookup("sox.exe"))
+	m_binary(lamexp_tools_lookup("sox.exe"))
 {
 	if(m_binary.isEmpty())
 	{

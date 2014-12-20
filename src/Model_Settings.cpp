@@ -28,6 +28,7 @@
 
 //MUtils
 #include <MUtils/Global.h>
+#include <MUtils/Translation.h>
 #include <MUtils/OSSupport.h>
 
 //Qt
@@ -54,26 +55,22 @@
 class SettingsCache
 {
 public:
-	SettingsCache(QSettings *configFile) : m_configFile(configFile)
+	SettingsCache(QSettings *configFile)
+	:
+		m_configFile(configFile),
+		m_cache(new cache_data_t()),
+		m_cacheDirty(new string_set_t())
 	{
-		m_cache = new QHash<QString, QVariant>();
-		m_cacheLock = new QMutex();
-		m_cacheDirty = new QSet<QString>();
 	}
 
 	~SettingsCache(void)
 	{
 		flushValues();
-
-		MUTILS_DELETE(m_cache);
-		MUTILS_DELETE(m_cacheDirty);
-		MUTILS_DELETE(m_cacheLock);
-		MUTILS_DELETE(m_configFile);
 	}
 
 	inline void storeValue(const QString &key, const QVariant &value)
 	{
-		QMutexLocker lock(m_cacheLock);
+		QWriteLocker writeLock(&m_cacheLock);
 	
 		if(!m_cache->contains(key))
 		{
@@ -92,7 +89,15 @@ public:
 
 	inline QVariant loadValue(const QString &key, const QVariant &defaultValue) const
 	{
-		QMutexLocker lock(m_cacheLock);
+		QReadLocker readLock(&m_cacheLock);
+
+		if(m_cache->contains(key))
+		{
+			return m_cache->value(key, defaultValue);
+		}
+
+		readLock.unlock();
+		QWriteLocker writeLock(&m_cacheLock);
 
 		if(!m_cache->contains(key))
 		{
@@ -105,7 +110,7 @@ public:
 
 	inline void flushValues(void)
 	{
-		QMutexLocker lock(m_cacheLock);
+		QWriteLocker writeLock(&m_cacheLock);
 
 		if(!m_cacheDirty->isEmpty())
 		{
@@ -127,10 +132,14 @@ public:
 	}
 
 private:
-	QSettings *m_configFile;
-	QHash<QString, QVariant> *m_cache;
-	QSet<QString> *m_cacheDirty;
-	QMutex *m_cacheLock;
+	typedef QSet<QString>            string_set_t;
+	typedef QHash<QString, QVariant> cache_data_t;
+
+	QScopedPointer<QSettings>    m_configFile;
+	QScopedPointer<cache_data_t> m_cache;
+	QScopedPointer<string_set_t> m_cacheDirty;
+	
+	mutable QReadWriteLock m_cacheLock;
 };
 
 ////////////////////////////////////////////////////////////
@@ -277,13 +286,13 @@ LAMEXP_MAKE_ID(writeMetaTags,                "Flags/WriteMetaTags");
 //LUT
 const int SettingsModel::samplingRates[8] = {0, 16000, 22050, 24000, 32000, 44100, 48000, -1};
 
-static QReadWriteLock s_lock;
-
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
 SettingsModel::SettingsModel(void)
+:
+	m_configCache(NULL)
 {
 	QString configPath = "LameXP.ini";
 	
@@ -357,7 +366,6 @@ SettingsModel::SettingsModel(void)
 SettingsModel::~SettingsModel(void)
 {
 	MUTILS_DELETE(m_configCache);
-	MUTILS_DELETE(m_defaultLanguage);
 }
 
 ////////////////////////////////////////////////////////////
@@ -417,10 +425,14 @@ void SettingsModel::validate(void)
 		}
 	}
 
-	if(!lamexp_query_translations().contains(this->currentLanguage(), Qt::CaseInsensitive))
+	QStringList translations;
+	if(MUtils::Translation::enumerate(translations) > 0)
 	{
-		qWarning("Current language \"%s\" is unknown, reverting to default language!", this->currentLanguage().toLatin1().constData());
-		this->currentLanguage(defaultLanguage());
+		if(!translations.contains(this->currentLanguage(), Qt::CaseInsensitive))
+		{
+			qWarning("Current language \"%s\" is unknown, reverting to default language!", this->currentLanguage().toLatin1().constData());
+			this->currentLanguage(defaultLanguage());
+		}
 	}
 
 	if(this->hibernateComputer())
@@ -435,7 +447,6 @@ void SettingsModel::validate(void)
 	{
 		this->overwriteMode(SettingsModel::Overwrite_KeepBoth);
 	}
-
 }
 
 void SettingsModel::syncNow(void)
@@ -447,24 +458,12 @@ void SettingsModel::syncNow(void)
 // Private Functions
 ////////////////////////////////////////////////////////////
 
-QString *SettingsModel::m_defaultLanguage = NULL;
-
 QString SettingsModel::defaultLanguage(void) const
 {
-	QReadLocker readLock(&s_lock);
+	QMutexLocker lock(&m_defaultLangLock);
 
 	//Default already initialized?
-	if(m_defaultLanguage)
-	{
-		return *m_defaultLanguage;
-	}
-	
-	//Acquire write lock now
-	readLock.unlock();
-	QWriteLocker writeLock(&s_lock);
-	
-	//Default still not initialized?
-	if(m_defaultLanguage)
+	if(!m_defaultLanguage.isNull())
 	{
 		return *m_defaultLanguage;
 	}
@@ -479,40 +478,40 @@ QString SettingsModel::defaultLanguage(void) const
 	//Check if we can use the default translation
 	if(systemLanguage.language() == QLocale::English /*|| systemLanguage.language() == QLocale::C*/)
 	{
-		m_defaultLanguage = new QString(LAMEXP_DEFAULT_LANGID);
-		return LAMEXP_DEFAULT_LANGID;
+		m_defaultLanguage.reset(new QString(MUtils::Translation::DEFAULT_LANGID));
+		return MUtils::Translation::DEFAULT_LANGID;
 	}
 
-	//Try to find a suitable translation for the user's system language *and* country
-	QStringList languages = lamexp_query_translations();
-	while(!languages.isEmpty())
+	QStringList languages;
+	if(MUtils::Translation::enumerate(languages) > 0)
 	{
-		QString currentLangId = languages.takeFirst();
-		if(lamexp_translation_sysid(currentLangId) == systemLanguage.language())
+		//Try to find a suitable translation for the user's system language *and* country
+		for(QStringList::ConstIterator iter = languages.constBegin(); iter != languages.constEnd(); iter++)
 		{
-			if(lamexp_translation_country(currentLangId) == systemLanguage.country())
+			if(MUtils::Translation::get_sysid(*iter) == systemLanguage.language())
 			{
-				m_defaultLanguage = new QString(currentLangId);
-				return currentLangId;
+				if(MUtils::Translation::get_country(*iter) == systemLanguage.country())
+				{
+					m_defaultLanguage.reset(new QString(*iter));
+					return (*iter);
+				}
+			}
+		}
+
+		//Try to find a suitable translation for the user's system language
+		for(QStringList::ConstIterator iter = languages.constBegin(); iter != languages.constEnd(); iter++)
+		{
+			if(MUtils::Translation::get_sysid(*iter) == systemLanguage.language())
+			{
+				m_defaultLanguage.reset(new QString(*iter));
+				return (*iter);
 			}
 		}
 	}
 
-	//Try to find a suitable translation for the user's system language
-	languages = lamexp_query_translations();
-	while(!languages.isEmpty())
-	{
-		QString currentLangId = languages.takeFirst();
-		if(lamexp_translation_sysid(currentLangId) == systemLanguage.language())
-		{
-			m_defaultLanguage = new QString(currentLangId);
-			return currentLangId;
-		}
-	}
-
 	//Fall back to the default translation
-	m_defaultLanguage = new QString(LAMEXP_DEFAULT_LANGID);
-	return LAMEXP_DEFAULT_LANGID;
+	m_defaultLanguage.reset(new QString(MUtils::Translation::DEFAULT_LANGID));
+	return MUtils::Translation::DEFAULT_LANGID;
 }
 
 QString SettingsModel::defaultDirectory(void) const

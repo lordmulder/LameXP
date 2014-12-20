@@ -107,7 +107,7 @@ static const g_opusEncoderInfo;
 
 OpusEncoder::OpusEncoder(void)
 :
-	m_binary(lamexp_tool_lookup("opusenc.exe"))
+	m_binary(lamexp_tools_lookup("opusenc.exe"))
 {
 	if(m_binary.isEmpty())
 	{

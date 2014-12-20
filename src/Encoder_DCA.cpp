@@ -118,7 +118,7 @@ static const g_dcaEncoderInfo;
 
 DCAEncoder::DCAEncoder(void)
 :
-	m_binary(lamexp_tool_lookup("dcaenc.exe"))
+	m_binary(lamexp_tools_lookup("dcaenc.exe"))
 {
 	if(m_binary.isEmpty())
 	{

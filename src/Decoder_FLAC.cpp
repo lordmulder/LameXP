@@ -35,7 +35,7 @@
 
 FLACDecoder::FLACDecoder(void)
 :
-	m_binary(lamexp_tool_lookup("flac.exe"))
+	m_binary(lamexp_tools_lookup("flac.exe"))
 {
 	if(m_binary.isEmpty())
 	{

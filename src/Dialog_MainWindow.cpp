@@ -52,6 +52,7 @@
 #include <MUtils/GUI.h>
 #include <MUtils/Exception.h>
 #include <MUtils/Sound.h>
+#include <MUtils/Translation.h>
 #include <MUtils/Version.h>
 
 //Qt includes
@@ -601,18 +602,20 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 
 	//Populate the language menu
 	m_languageActionGroup = new QActionGroup(this);
-	QStringList translations = lamexp_query_translations();
-	while(!translations.isEmpty())
+	QStringList translations;
+	if(MUtils::Translation::enumerate(translations) > 0)
 	{
-		QString langId = translations.takeFirst();
-		QAction *currentLanguage = new QAction(this);
-		currentLanguage->setData(langId);
-		currentLanguage->setText(lamexp_translation_name(langId));
-		currentLanguage->setIcon(QIcon(QString(":/flags/%1.png").arg(langId)));
-		currentLanguage->setCheckable(true);
-		currentLanguage->setChecked(false);
-		m_languageActionGroup->addAction(currentLanguage);
-		ui->menuLanguage->insertAction(ui->actionLoadTranslationFromFile, currentLanguage);
+		for(QStringList::ConstIterator iter = translations.constBegin(); iter != translations.constEnd(); iter++)
+		{
+			QAction *currentLanguage = new QAction(this);
+			currentLanguage->setData(*iter);
+			currentLanguage->setText(MUtils::Translation::get_name(*iter));
+			currentLanguage->setIcon(QIcon(QString(":/flags/%1.png").arg(*iter)));
+			currentLanguage->setCheckable(true);
+			currentLanguage->setChecked(false);
+			m_languageActionGroup->addAction(currentLanguage);
+			ui->menuLanguage->insertAction(ui->actionLoadTranslationFromFile, currentLanguage);
+		}
 	}
 	ui->menuLanguage->insertSeparator(ui->actionLoadTranslationFromFile);
 	connect(ui->actionLoadTranslationFromFile, SIGNAL(triggered(bool)), this, SLOT(languageFromFileActionActivated(bool)));
@@ -942,7 +945,7 @@ void MainWindow::initializeTranslation(void)
 		const QString qmFilePath = QFileInfo(m_settings->currentLanguageFile()).canonicalFilePath();
 		if((!qmFilePath.isEmpty()) && QFileInfo(qmFilePath).exists() && QFileInfo(qmFilePath).isFile() && (QFileInfo(qmFilePath).suffix().compare("qm", Qt::CaseInsensitive) == 0))
 		{
-			if(lamexp_install_translator_from_file(qmFilePath))
+			if(MUtils::Translation::install_translator_from_file(qmFilePath))
 			{
 				QList<QAction*> actions = m_languageActionGroup->actions();
 				while(!actions.isEmpty()) actions.takeFirst()->setChecked(false);
@@ -975,7 +978,7 @@ void MainWindow::initializeTranslation(void)
 		while(!languageActions.isEmpty())
 		{
 			QAction *currentLanguage = languageActions.takeFirst();
-			if(currentLanguage->data().toString().compare(LAMEXP_DEFAULT_LANGID, Qt::CaseInsensitive) == 0)
+			if(currentLanguage->data().toString().compare(MUtils::Translation::DEFAULT_LANGID, Qt::CaseInsensitive) == 0)
 			{
 				currentLanguage->setChecked(true);
 				languageActionActivated(currentLanguage);
@@ -1417,11 +1420,11 @@ void MainWindow::windowShown(void)
 	{
 		if(m_settings->neroAacNotificationsEnabled())
 		{
-			if(lamexp_tool_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
+			if(lamexp_tools_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
 			{
 				QString messageText;
 				messageText += NOBR(tr("LameXP detected that your version of the Nero AAC encoder is outdated!")).append("<br>");
-				messageText += NOBR(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tool_version("neroAacEnc.exe"), tr("n/a")))).append("<br><br>");
+				messageText += NOBR(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tools_version("neroAacEnc.exe"), tr("n/a")))).append("<br><br>");
 				messageText += NOBR(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:")).append("<br>");
 				messageText += "<nobr><tt>" + LINK(AboutDialog::neroAacUrl) + "</tt></nobr><br><br>";
 				messageText += NOBR(tr("(Hint: Please ignore the name of the downloaded ZIP file and check the included 'changelog.txt' instead!)")).append("<br>");
@@ -1870,7 +1873,7 @@ void MainWindow::languageActionActivated(QAction *action)
 	{
 		QString langId = action->data().toString();
 
-		if(lamexp_install_translator(langId))
+		if(MUtils::Translation::install_translator(langId))
 		{
 			action->setChecked(true);
 			ui->actionLoadTranslationFromFile->setChecked(false);
@@ -1893,7 +1896,7 @@ void MainWindow::languageFromFileActionActivated(bool checked)
 	{
 		QStringList selectedFiles = dialog.selectedFiles();
 		const QString qmFile = QFileInfo(selectedFiles.first()).canonicalFilePath();
-		if(lamexp_install_translator_from_file(qmFile))
+		if(MUtils::Translation::install_translator_from_file(qmFile))
 		{
 			QList<QAction*> actions = m_languageActionGroup->actions();
 			while(!actions.isEmpty())
@@ -4012,7 +4015,7 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
  */
 void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QString &command)
 {
-	const QString binary = lamexp_tool_lookup(toolName);
+	const QString binary = lamexp_tools_lookup(toolName);
 	if(binary.isEmpty())
 	{
 		MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);

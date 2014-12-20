@@ -23,13 +23,15 @@
 #include "Thread_Initialization.h"
 
 //Internal
-#include "LockedFile.h"
+#define LAMEXP_INC_TOOLS 1
 #include "Tools.h"
+#include "LockedFile.h"
 #include "Tool_Abstract.h"
 
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/Translation.h>
 #include <MUtils/Exception.h>
 
 //Qt
@@ -183,7 +185,7 @@ protected:
 
 		if(lockedFile)
 		{
-			lamexp_tool_register(toolShortName, lockedFile, version, &m_toolTag);
+			lamexp_tools_register(toolShortName, lockedFile, version, m_toolTag);
 		}
 	}
 
@@ -483,7 +485,8 @@ void InitializationThread::delay(void)
 void InitializationThread::initTranslations(void)
 {
 	//Search for language files
-	QStringList qmFiles = QDir(":/localization").entryList(QStringList() << "LameXP_??.qm", QDir::Files, QDir::Name);
+	const QDir qmDirectory(":/localization");
+	const QStringList qmFiles = qmDirectory.entryList(QStringList() << "LameXP_??.qm", QDir::Files, QDir::Name);
 
 	//Make sure we found at least one translation
 	if(qmFiles.count() < 1)
@@ -492,27 +495,31 @@ void InitializationThread::initTranslations(void)
 		return;
 	}
 
+	//Initialize variables
+	const QString langResTemplate(":/localization/%1.txt");
+	QRegExp langIdExp("^LameXP_(\\w\\w)\\.qm$", Qt::CaseInsensitive);
+
 	//Add all available translations
-	while(!qmFiles.isEmpty())
+	for(QStringList::ConstIterator iter = qmFiles.constBegin(); iter != qmFiles.constEnd(); iter++)
 	{
+		const QString langFile = qmDirectory.absoluteFilePath(*iter);
 		QString langId, langName;
 		unsigned int systemId = 0, country = 0;
-		QString qmFile = qmFiles.takeFirst();
 		
-		QRegExp langIdExp("LameXP_(\\w\\w)\\.qm", Qt::CaseInsensitive);
-		if(langIdExp.indexIn(qmFile) >= 0)
+		if(QFileInfo(langFile).isFile() && (langIdExp.indexIn(*iter) >= 0))
 		{
 			langId = langIdExp.cap(1).toLower();
-			QResource langRes = QResource(QString(":/localization/%1.txt").arg(qmFile));
+			QResource langRes = QResource(langResTemplate.arg(*iter));
 			if(langRes.isValid() && langRes.size() > 0)
 			{
 				QByteArray data = QByteArray::fromRawData(reinterpret_cast<const char*>(langRes.data()), langRes.size());
 				QTextStream stream(&data, QIODevice::ReadOnly);
 				stream.setAutoDetectUnicode(false); stream.setCodec("UTF-8");
-				while(!stream.atEnd())
+
+				while(!(stream.atEnd() || (stream.status() != QTextStream::Ok)))
 				{
 					QStringList langInfo = stream.readLine().simplified().split(",", QString::SkipEmptyParts);
-					if(langInfo.count() == 3)
+					if(langInfo.count() >= 3)
 					{
 						systemId = langInfo.at(0).trimmed().toUInt();
 						country  = langInfo.at(1).trimmed().toUInt();
@@ -523,15 +530,15 @@ void InitializationThread::initTranslations(void)
 			}
 		}
 
-		if(!(langId.isEmpty() || langName.isEmpty() || systemId == 0))
+		if(!(langId.isEmpty() || langName.isEmpty() || (systemId == 0)))
 		{
-			if(lamexp_translation_register(langId, qmFile, langName, systemId, country))
+			if(MUtils::Translation::insert(langId, langFile, langName, systemId, country))
 			{
-				qDebug("Registering translation: %s = %s (%u) [%u]", MUTILS_UTF8(qmFile), MUTILS_UTF8(langName), systemId, country);
+				qDebug("Registering translation: %s = %s (%u) [%u]", MUTILS_UTF8(*iter), MUTILS_UTF8(langName), systemId, country);
 			}
 			else
 			{
-				qWarning("Failed to register: %s", qmFile.toLatin1().constData());
+				qWarning("Failed to register: %s", langFile.toLatin1().constData());
 			}
 		}
 	}
@@ -647,7 +654,7 @@ void InitializationThread::initNeroAac(void)
 	
 	for(int i = 0; i < 3; i++)
 	{
-		lamexp_tool_register(neroFileInfo[i].fileName(), neroBin[i], neroVersion);
+		lamexp_tools_register(neroFileInfo[i].fileName(), neroBin[i], neroVersion);
 	}
 }
 
@@ -755,7 +762,7 @@ void InitializationThread::initFhgAac(void)
 	
 	for(int i = 0; i < 5; i++)
 	{
-		lamexp_tool_register(fhgFileInfo[i].fileName(), fhgBin[i], fhgVersion);
+		lamexp_tools_register(fhgFileInfo[i].fileName(), fhgBin[i], fhgVersion);
 	}
 }
 
@@ -909,10 +916,10 @@ void InitializationThread::initQAac(void)
 		return;
 	}
 
-	lamexp_tool_register(qaacFileInfo[0].fileName(), qaacBin[0], qaacVersion);
-	lamexp_tool_register(qaacFileInfo[1].fileName(), qaacBin[1], qaacVersion);
-	lamexp_tool_register(qaacFileInfo[2].fileName(), qaacBin[2], qaacVersion);
-	lamexp_tool_register(qaacFileInfo[3].fileName(), qaacBin[3], qaacVersion);
+	lamexp_tools_register(qaacFileInfo[0].fileName(), qaacBin[0], qaacVersion);
+	lamexp_tools_register(qaacFileInfo[1].fileName(), qaacBin[1], qaacVersion);
+	lamexp_tools_register(qaacFileInfo[2].fileName(), qaacBin[2], qaacVersion);
+	lamexp_tools_register(qaacFileInfo[3].fileName(), qaacBin[3], qaacVersion);
 }
 
 void InitializationThread::selfTest(void)

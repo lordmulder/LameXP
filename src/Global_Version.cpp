@@ -23,7 +23,7 @@
 #include "Global.h"
 
 //LameXP includes
-#define LAMEXP_INC_CONFIG
+#define LAMEXP_INC_CONFIG 1
 #include "Resource.h"
 #include "Config.h"
 
@@ -121,7 +121,7 @@ bool lamexp_version_demo(void)
 /*
  * Calculate expiration date
  */
-QDate &lamexp_version_expires(void)
+const QDate &lamexp_version_expires(void)
 {
 	QReadLocker readLock(&g_lamexp_version_lock);
 

@@ -35,7 +35,7 @@
 
 MACDecoder::MACDecoder(void)
 :
-	m_binary(lamexp_tool_lookup("mac.exe"))
+	m_binary(lamexp_tools_lookup("mac.exe"))
 {
 	if(m_binary.isEmpty())
 	{

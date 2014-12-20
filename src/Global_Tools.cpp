@@ -27,372 +27,147 @@
 
 //Qt includes
 #include <QApplication>
-#include <QMap>
+#include <QHash>
 #include <QReadWriteLock>
-#include <QReadLocker>
-#include <QWriteLocker>
 #include <QString>
 #include <QStringList>
-#include <QTranslator>
 #include <QFileInfo>
+#include <QPair>
 
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/Exception.h>
 
+//CRT
+#include <stdint.h>
+
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
 ///////////////////////////////////////////////////////////////////////////////
 
-//Tools
-static struct
-{
-	QMap<QString, LockedFile*> *registry;
-	QMap<QString, unsigned int> *versions;
-	QMap<QString, QString> *tags;
-	QReadWriteLock lock;
-}
-g_lamexp_tools;
+//Typedef
+typedef QPair<quint32,QString>          tool_info_t;
+typedef QPair<LockedFile*, tool_info_t> tool_data_t;
+typedef QHash<QString, tool_data_t>     tool_hash_t;
 
-//Supported languages
-static struct
-{
-	QMap<QString, QString> *files;
-	QMap<QString, QString> *names;
-	QMap<QString, unsigned int> *sysid;
-	QMap<QString, unsigned int> *cntry;
-	QReadWriteLock lock;
-}
-g_lamexp_translation;
-
-//Translator
-static struct
-{
-	QTranslator *instance;
-	QReadWriteLock lock;
-}
-g_lamexp_currentTranslator;
+//Tool registry
+static QScopedPointer<tool_hash_t> g_lamexp_tools_data;
+static QReadWriteLock              g_lamexp_tools_lock;
 
 //Null String
-static const QString g_null;
+static const QString g_null_string;
+
+//UINT_MAX
+static const quint32 g_max_uint32 = UINT32_MAX;
+
+//Helper Macro
+#define MAKE_ENTRY(LOCK_FILE,VER,TAG) \
+	qMakePair((LOCK_FILE),qMakePair((VER),(TAG)))
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
 
 /*
+ * Clean-up *all* registered tools
+ */
+static void lamexp_tools_clean_up(void)
+{
+	QWriteLocker writeLock(&g_lamexp_tools_lock);
+
+	if(!g_lamexp_tools_data.isNull())
+	{
+		const QStringList keys = g_lamexp_tools_data->keys();
+		for(QStringList::ConstIterator iter = keys.constBegin(); iter != keys.constEnd(); iter++)
+		{
+			tool_data_t currentTool = (*g_lamexp_tools_data)[*iter];
+			MUTILS_DELETE(currentTool.first);
+		}
+		g_lamexp_tools_data->clear();
+	}
+}
+
+/*
  * Register tool
  */
-void lamexp_tool_register(const QString &toolName, LockedFile *file, unsigned int version, const QString *tag)
+void lamexp_tools_register(const QString &toolName, LockedFile *const file, const quint32 &version, const QString &tag)
 {
-	QWriteLocker writeLock(&g_lamexp_tools.lock);
+	QWriteLocker writeLock(&g_lamexp_tools_lock);
 	
-	if(!g_lamexp_tools.registry) g_lamexp_tools.registry = new QMap<QString, LockedFile*>();
-	if(!g_lamexp_tools.versions) g_lamexp_tools.versions = new QMap<QString, unsigned int>();
-	if(!g_lamexp_tools.tags) g_lamexp_tools.tags = new QMap<QString, QString>();
+	if(g_lamexp_tools_data.isNull())
+	{
+		g_lamexp_tools_data.reset(new tool_hash_t());
+		atexit(lamexp_tools_clean_up);
+	}
 
-	if(g_lamexp_tools.registry->contains(toolName.toLower()))
+	const QString key = toolName.simplified().toLower();
+	if(g_lamexp_tools_data->contains(key))
 	{
 		MUTILS_THROW("lamexp_register_tool: Tool is already registered!");
 	}
 
-	g_lamexp_tools.registry->insert(toolName.toLower(), file);
-	g_lamexp_tools.versions->insert(toolName.toLower(), version);
-	g_lamexp_tools.tags->insert(toolName.toLower(), (tag) ? (*tag) : QString());
+	g_lamexp_tools_data->insert(key, MAKE_ENTRY(file, version, tag));
 }
 
 /*
  * Check for tool
  */
-bool lamexp_tool_check(const QString &toolName)
+bool lamexp_tools_check(const QString &toolName)
 {
-	QReadLocker readLock(&g_lamexp_tools.lock);
-	return (g_lamexp_tools.registry) ? g_lamexp_tools.registry->contains(toolName.toLower()) : false;
+	QReadLocker readLock(&g_lamexp_tools_lock);
+
+	if(!g_lamexp_tools_data.isNull())
+	{
+		const QString key = toolName.simplified().toLower();
+		return g_lamexp_tools_data->contains(key);
+	}
+
+	return false;
 }
 
 /*
  * Lookup tool path
  */
-const QString &lamexp_tool_lookup(const QString &toolName)
+const QString &lamexp_tools_lookup(const QString &toolName)
 {
-	QReadLocker readLock(&g_lamexp_tools.lock);
+	QReadLocker readLock(&g_lamexp_tools_lock);
 
-	if(g_lamexp_tools.registry)
+	if(!g_lamexp_tools_data.isNull())
 	{
-		if(g_lamexp_tools.registry->contains(toolName.toLower()))
+		const QString key = toolName.simplified().toLower();
+		if(g_lamexp_tools_data->contains(key))
 		{
-			return g_lamexp_tools.registry->value(toolName.toLower())->filePath();
-		}
-		else
-		{
-			return g_null;
+			return (*g_lamexp_tools_data)[key].first->filePath();
 		}
 	}
-	else
-	{
-		return g_null;
-	}
+
+	return g_null_string;
 }
 
 /*
  * Lookup tool version
  */
-unsigned int lamexp_tool_version(const QString &toolName, QString *tag)
+const quint32 &lamexp_tools_version(const QString &toolName, QString *const tagOut)
 {
-	QReadLocker readLock(&g_lamexp_tools.lock);
-	if(tag) tag->clear();
+	QReadLocker readLock(&g_lamexp_tools_lock);
 
-	if(g_lamexp_tools.versions)
+	if(!g_lamexp_tools_data.isNull())
 	{
-		if(g_lamexp_tools.versions->contains(toolName.toLower()))
+		const QString key = toolName.simplified().toLower();
+		if(g_lamexp_tools_data->contains(key))
 		{
-			if(tag)
+			const tool_info_t &info = (*g_lamexp_tools_data)[key].second;
+			if(tagOut)
 			{
-				if(g_lamexp_tools.tags->contains(toolName.toLower())) *tag = g_lamexp_tools.tags->value(toolName.toLower());
+				*tagOut = info.second;
 			}
-			return g_lamexp_tools.versions->value(toolName.toLower());
-		}
-		else
-		{
-			return UINT_MAX;
-		}
-	}
-	else
-	{
-		return UINT_MAX;
-	}
-}
-
-/*
- * Version number to human-readable string
- */
-const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag)
-{
-	if(version == UINT_MAX)
-	{
-		return defaultText;
-	}
-	
-	QString result = pattern;
-	const int digits = result.count(QChar(L'?'), Qt::CaseInsensitive);
-	
-	if(digits < 1)
-	{
-		return result;
-	}
-	
-	int pos = 0, index = -1;
-	const QString versionStr = QString().sprintf("%0*u", digits, version);
-	Q_ASSERT(versionStr.length() == digits);
-	
-	while((index = result.indexOf(QChar(L'?'), Qt::CaseInsensitive)) >= 0)
-	{
-		result[index] = versionStr[pos++];
-	}
-
-	if(tag)
-	{
-		if((index = result.indexOf(QChar(L'#'), Qt::CaseInsensitive)) >= 0)
-		{
-			result.remove(index, 1).insert(index, (*tag));
+			return info.first;
 		}
 	}
 
-	return result;
-}
-
-/*
- * Initialize translations and add default language
- */
-bool lamexp_translation_init(void)
-{
-	QWriteLocker writeLockTranslations(&g_lamexp_translation.lock);
-
-	if((!g_lamexp_translation.files) && (!g_lamexp_translation.names))
+	if(tagOut)
 	{
-		g_lamexp_translation.files = new QMap<QString, QString>();
-		g_lamexp_translation.names = new QMap<QString, QString>();
-		g_lamexp_translation.files->insert(LAMEXP_DEFAULT_LANGID, "");
-		g_lamexp_translation.names->insert(LAMEXP_DEFAULT_LANGID, "English");
-		return true;
+		tagOut->clear();
 	}
-	else
-	{
-		qWarning("[lamexp_translation_init] Error: Already initialized!");
-		return false;
-	}
-}
-
-/*
- * Register a new translation
- */
-bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &country)
-{
-	QWriteLocker writeLockTranslations(&g_lamexp_translation.lock);
-
-	if(qmFile.isEmpty() || langName.isEmpty() || systemId < 1)
-	{
-		return false;
-	}
-
-	if(!g_lamexp_translation.files) g_lamexp_translation.files = new QMap<QString, QString>();
-	if(!g_lamexp_translation.names) g_lamexp_translation.names = new QMap<QString, QString>();
-	if(!g_lamexp_translation.sysid) g_lamexp_translation.sysid = new QMap<QString, unsigned int>();
-	if(!g_lamexp_translation.cntry) g_lamexp_translation.cntry = new QMap<QString, unsigned int>();
-
-	g_lamexp_translation.files->insert(langId, qmFile);
-	g_lamexp_translation.names->insert(langId, langName);
-	g_lamexp_translation.sysid->insert(langId, systemId);
-	g_lamexp_translation.cntry->insert(langId, country);
-
-	return true;
-}
-
-/*
- * Get list of all translations
- */
-QStringList lamexp_query_translations(void)
-{
-	QReadLocker readLockTranslations(&g_lamexp_translation.lock);
-	return (g_lamexp_translation.files) ? g_lamexp_translation.files->keys() : QStringList();
-}
-
-/*
- * Get translation name
- */
-QString lamexp_translation_name(const QString &langId)
-{
-	QReadLocker readLockTranslations(&g_lamexp_translation.lock);
-	return (g_lamexp_translation.names) ? g_lamexp_translation.names->value(langId.toLower(), QString()) : QString();
-}
-
-/*
- * Get translation system id
- */
-unsigned int lamexp_translation_sysid(const QString &langId)
-{
-	QReadLocker readLockTranslations(&g_lamexp_translation.lock);
-	return (g_lamexp_translation.sysid) ? g_lamexp_translation.sysid->value(langId.toLower(), 0) : 0;
-}
-
-/*
- * Get translation script id
- */
-unsigned int lamexp_translation_country(const QString &langId)
-{
-	QReadLocker readLockTranslations(&g_lamexp_translation.lock);
-	return (g_lamexp_translation.cntry) ? g_lamexp_translation.cntry->value(langId.toLower(), 0) : 0;
-}
-
-/*
- * Install a new translator
- */
-bool lamexp_install_translator(const QString &langId)
-{
-	bool success = false;
-	const QString qmFileToPath(":/localization/%1");
-
-	if(langId.isEmpty() || langId.toLower().compare(LAMEXP_DEFAULT_LANGID) == 0)
-	{
-		success = lamexp_install_translator_from_file(qmFileToPath.arg(LAMEXP_DEFAULT_TRANSLATION));
-	}
-	else
-	{
-		QReadLocker readLock(&g_lamexp_translation.lock);
-		QString qmFile = (g_lamexp_translation.files) ? g_lamexp_translation.files->value(langId.toLower(), QString()) : QString();
-		readLock.unlock();
-
-		if(!qmFile.isEmpty())
-		{
-			success = lamexp_install_translator_from_file(qmFileToPath.arg(qmFile));
-		}
-		else
-		{
-			qWarning("Translation '%s' not available!", langId.toLatin1().constData());
-		}
-	}
-
-	return success;
-}
-
-/*
- * Install a new translator from file
- */
-bool lamexp_install_translator_from_file(const QString &qmFile)
-{
-	QWriteLocker writeLock(&g_lamexp_currentTranslator.lock);
-	bool success = false;
-
-	if(!g_lamexp_currentTranslator.instance)
-	{
-		g_lamexp_currentTranslator.instance = new QTranslator();
-	}
-
-	if(!qmFile.isEmpty())
-	{
-		QString qmPath = QFileInfo(qmFile).canonicalFilePath();
-		QApplication::removeTranslator(g_lamexp_currentTranslator.instance);
-		if(success = g_lamexp_currentTranslator.instance->load(qmPath))
-		{
-			QApplication::installTranslator(g_lamexp_currentTranslator.instance);
-		}
-		else
-		{
-			qWarning("Failed to load translation:\n\"%s\"", qmPath.toLatin1().constData());
-		}
-	}
-	else
-	{
-		QApplication::removeTranslator(g_lamexp_currentTranslator.instance);
-		success = true;
-	}
-
-	return success;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// INITIALIZATION
-///////////////////////////////////////////////////////////////////////////////
-
-extern "C" void _lamexp_global_init_tools(void)
-{
-	MUTILS_ZERO_MEMORY(g_lamexp_tools);
-	MUTILS_ZERO_MEMORY(g_lamexp_currentTranslator);
-	MUTILS_ZERO_MEMORY(g_lamexp_translation);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// FINALIZATION
-///////////////////////////////////////////////////////////////////////////////
-
-extern "C" void _lamexp_global_free_tools(void)
-{
-	//Free *all* registered translations
-	if(g_lamexp_currentTranslator.instance)
-	{
-		QApplication::removeTranslator(g_lamexp_currentTranslator.instance);
-		MUTILS_DELETE(g_lamexp_currentTranslator.instance);
-	}
-	MUTILS_DELETE(g_lamexp_translation.files);
-	MUTILS_DELETE(g_lamexp_translation.names);
-	MUTILS_DELETE(g_lamexp_translation.cntry);
-	MUTILS_DELETE(g_lamexp_translation.sysid);
-
-	//Free *all* registered tools
-	if(g_lamexp_tools.registry)
-	{
-		QStringList keys = g_lamexp_tools.registry->keys();
-		for(int i = 0; i < keys.count(); i++)
-		{
-			LockedFile *lf = g_lamexp_tools.registry->take(keys.at(i));
-			MUTILS_DELETE(lf);
-		}
-		g_lamexp_tools.registry->clear();
-		g_lamexp_tools.versions->clear();
-		g_lamexp_tools.tags->clear();
-	}
-	MUTILS_DELETE(g_lamexp_tools.registry);
-	MUTILS_DELETE(g_lamexp_tools.versions);
-	MUTILS_DELETE(g_lamexp_tools.tags);
-
+	return g_max_uint32;
 }

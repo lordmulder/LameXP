@@ -36,7 +36,7 @@
 
 ShortenDecoder::ShortenDecoder(void)
 :
-	m_binary(lamexp_tool_lookup("shorten.exe"))
+	m_binary(lamexp_tools_lookup("shorten.exe"))
 {
 	if(m_binary.isEmpty())
 	{

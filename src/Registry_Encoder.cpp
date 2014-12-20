@@ -476,15 +476,15 @@ void EncoderRegistry::resetAllEncoders(SettingsModel *settings)
 
 int EncoderRegistry::getAacEncoder(void)
 {
-	if(lamexp_tool_check("qaac.exe") && lamexp_tool_check("libsoxr.dll") && lamexp_tool_check("libsoxconvolver.dll"))
+	if(lamexp_tools_check("qaac.exe") && lamexp_tools_check("libsoxr.dll") && lamexp_tools_check("libsoxconvolver.dll"))
 	{
 		return SettingsModel::AAC_ENCODER_QAAC;
 	}
-	else if(lamexp_tool_check("fhgaacenc.exe") && lamexp_tool_check("enc_fhgaac.dll") && lamexp_tool_check("nsutil.dll") && lamexp_tool_check("libmp4v2.dll"))
+	else if(lamexp_tools_check("fhgaacenc.exe") && lamexp_tools_check("enc_fhgaac.dll") && lamexp_tools_check("nsutil.dll") && lamexp_tools_check("libmp4v2.dll"))
 	{
 		return SettingsModel::AAC_ENCODER_FHG;
 	}
-	else if(lamexp_tool_check("neroAacEnc.exe") && lamexp_tool_check("neroAacDec.exe") && lamexp_tool_check("neroAacTag.exe"))
+	else if(lamexp_tools_check("neroAacEnc.exe") && lamexp_tools_check("neroAacDec.exe") && lamexp_tools_check("neroAacTag.exe"))
 	{
 		return SettingsModel::AAC_ENCODER_NERO;
 	}

@@ -48,6 +48,11 @@
 #include <QMutex>
 #include <QDir>
 
+//VLD
+#ifdef _MSC_VER
+#include <vld.h>
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // Helper functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -114,13 +119,24 @@ static void lamexp_show_splash(const MUtils::CPUFetaures::cpu_info_t &cpuFeature
 	settingsModel->slowStartup(poInitializationThread->getSlowIndicator());
 }
 
-static int lamexp_main_loop_helper(MUtils::IPCChannel *const ipcChannel, FileListModel *const fileListModel, AudioFileModel_MetaInfo *const metaInfo, SettingsModel *const settingsModel, int &iShutdown)
+static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, MUtils::IPCChannel *const ipcChannel, int &iShutdown)
 {
 	int iResult = -1;
 	bool bAccepted = true;
 
+	//Create models
+	QScopedPointer<FileListModel>           fileListModel(new FileListModel()          );
+	QScopedPointer<AudioFileModel_MetaInfo> metaInfo     (new AudioFileModel_MetaInfo());
+	QScopedPointer<SettingsModel>           settingsModel(new SettingsModel()          );
+
+	//Show splash screen
+	lamexp_show_splash(cpuFeatures, settingsModel.data());
+
+	//Validate settings
+	settingsModel->validate();
+
 	//Create main window
-	QScopedPointer<MainWindow> poMainWindow(new MainWindow(ipcChannel, fileListModel, metaInfo, settingsModel));
+	QScopedPointer<MainWindow> poMainWindow(new MainWindow(ipcChannel, fileListModel.data(), metaInfo.data(), settingsModel.data()));
 
 	//Main application loop
 	while(bAccepted && (iShutdown <= SHUTDOWN_FLAG_NONE))
@@ -136,7 +152,7 @@ static int lamexp_main_loop_helper(MUtils::IPCChannel *const ipcChannel, FileLis
 		//Show processing dialog
 		if(bAccepted && (fileListModel->rowCount() > 0))
 		{
-			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel, metaInfo, settingsModel);
+			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel.data(), metaInfo.data(), settingsModel.data());
 			processingDialog->exec();
 			iShutdown = processingDialog->getShutdownFlag();
 			MUTILS_DELETE(processingDialog);
@@ -144,23 +160,6 @@ static int lamexp_main_loop_helper(MUtils::IPCChannel *const ipcChannel, FileLis
 	}
 
 	return iResult;
-}
-
-static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, MUtils::IPCChannel *const ipcChannel, int &iShutdown)
-{
-	//Create models
-	QScopedPointer<FileListModel>           fileListModel(new FileListModel()          );
-	QScopedPointer<AudioFileModel_MetaInfo> metaInfo     (new AudioFileModel_MetaInfo());
-	QScopedPointer<SettingsModel>           settingsModel(new SettingsModel()          );
-
-	//Show splash screen
-	lamexp_show_splash(cpuFeatures, settingsModel.data());
-
-	//Validate settings
-	settingsModel->validate();
-
-	//Main processing loop
-	return lamexp_main_loop_helper(ipcChannel, fileListModel.data(), metaInfo.data(), settingsModel.data(), iShutdown);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -195,18 +194,15 @@ static int lamexp_main(int &argc, char **argv)
 	qDebug(" Number of CPU's  :  %d\n", cpuFeatures.count);
 
 	//Initialize Qt
-	if(!MUtils::Startup::init_qt(argc, argv, QLatin1String("LameXP - Audio Encoder Front-End")))
+	QScopedPointer<QApplication> application(MUtils::Startup::create_qt(argc, argv, QLatin1String("LameXP - Audio Encoder Front-End")));
+	if(application.isNull())
 	{
-		lamexp_finalization();
 		return EXIT_FAILURE;
 	}
 
 	//Initialize application
-	qApp->setWindowIcon(lamexp_app_icon());
-	qApp->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
-
-	//Add the default translations
-	lamexp_translation_init();
+	application->setWindowIcon(lamexp_app_icon());
+	application->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
 
 	//Check for expiration
 	if(lamexp_version_demo())
@@ -231,7 +227,6 @@ static int lamexp_main(int &argc, char **argv)
 	{
 		if(!arguments[i].compare("--kill", Qt::CaseInsensitive) || !arguments[i].compare("--force-kill", Qt::CaseInsensitive))
 		{
-			lamexp_finalization();
 			return EXIT_SUCCESS;
 		}
 	}
@@ -258,7 +253,6 @@ static int lamexp_main(int &argc, char **argv)
 	}
 
 	//Terminate
-	lamexp_finalization();
 	return iResult;
 }
 

@@ -22,6 +22,9 @@
 
 #pragma once
 
+#include <QMutex>
+#include <QScopedPointer>
+
 class QString;
 class SettingsCache;
 
@@ -201,13 +204,17 @@ public:
 	void syncNow(void);
 
 private:
-	SettingsCache *m_configCache;
+	SettingsModel(const SettingsModel &other) {}
+	SettingsModel &operator=(const SettingsModel &other) { return *this; }
 
 	QString initDirectory(const QString &path) const;
 	QString defaultLanguage(void) const;
 	QString defaultDirectory(void) const;
 
-	static QString *m_defaultLanguage;
+	SettingsCache *m_configCache;
+
+	mutable QMutex                  m_defaultLangLock;
+	mutable QScopedPointer<QString> m_defaultLanguage;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

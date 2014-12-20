@@ -35,7 +35,7 @@
 
 WavPackDecoder::WavPackDecoder(void)
 :
-	m_binary(lamexp_tool_lookup("wvunpack.exe"))
+	m_binary(lamexp_tools_lookup("wvunpack.exe"))
 {
 	if(m_binary.isEmpty())
 	{

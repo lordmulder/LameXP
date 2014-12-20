@@ -63,8 +63,8 @@ AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, const QStri
 	m_taskId(taskId),
 	m_inputFile(inputFile),
 	m_templateFile(templateFile),
-	m_mediaInfoBin(lamexp_tool_lookup("mediainfo.exe")),
-	m_avs2wavBin(lamexp_tool_lookup("avs2wav.exe")),
+	m_mediaInfoBin(lamexp_tools_lookup("mediainfo.exe")),
+	m_avs2wavBin(lamexp_tools_lookup("avs2wav.exe")),
 	m_abortFlag(abortFlag)
 {
 	if(m_mediaInfoBin.isEmpty() || m_avs2wavBin.isEmpty())

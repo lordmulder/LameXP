@@ -116,7 +116,7 @@ static const g_aftenEncoderInfo;
 
 AC3Encoder::AC3Encoder(void)
 :
-	m_binary(lamexp_tool_lookup("aften.exe"))
+	m_binary(lamexp_tools_lookup("aften.exe"))
 {
 	if(m_binary.isEmpty())
 	{

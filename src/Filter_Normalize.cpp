@@ -35,7 +35,7 @@
 
 NormalizeFilter::NormalizeFilter(int peakVolume, int equalizationMode)
 :
-	m_binary(lamexp_tool_lookup("sox.exe"))
+	m_binary(lamexp_tools_lookup("sox.exe"))
 {
 	if(m_binary.isEmpty())
 	{

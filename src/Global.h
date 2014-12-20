@@ -28,6 +28,7 @@
 
 #include <cstdlib>
 #include <QtGlobal>
+#include <QString>
 
 //Forward declarations
 class QDate;
@@ -36,35 +37,16 @@ class QIcon;
 class LockedFile;
 
 ///////////////////////////////////////////////////////////////////////////////
-// GLOBAL CONSTANTS
-///////////////////////////////////////////////////////////////////////////////
-
-extern const char* LAMEXP_DEFAULT_LANGID;
-extern const char* LAMEXP_DEFAULT_TRANSLATION;
-
-///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
 
 /*
- * Translation Support
- */
-QStringList lamexp_query_translations(void);
-unsigned int lamexp_translation_country(const QString &langId);
-bool lamexp_translation_init(void);
-QString lamexp_translation_name(const QString &language);
-bool lamexp_translation_register(const QString &langId, const QString &qmFile, const QString &langName, unsigned int &systemId, unsigned int &country);
-unsigned int lamexp_translation_sysid(const QString &langId);
-bool lamexp_install_translator(const QString &language);
-bool lamexp_install_translator_from_file(const QString &qmFile);
-
-/*
  * Tools Support
  */
-bool           lamexp_tool_check   (const QString &toolName);
-const QString& lamexp_tool_lookup  (const QString &toolName);
-void           lamexp_tool_register(const QString &toolName, LockedFile *file, unsigned int version = 0, const QString *tag = NULL);
-unsigned int   lamexp_tool_version (const QString &toolName, QString *tag = NULL);
+void           lamexp_tools_register(const QString &toolName, LockedFile *const file, const quint32 &version, const QString &tag = QString());
+bool           lamexp_tools_check   (const QString &toolName);
+const QString& lamexp_tools_lookup  (const QString &toolName);
+const quint32& lamexp_tools_version (const QString &toolName, QString *const tagOut = NULL);
 
 /*
  * Version getters
@@ -76,12 +58,11 @@ unsigned int lamexp_version_confg    (void);
 const char*  lamexp_version_release  (void);
 bool         lamexp_version_portable (void);
 bool         lamexp_version_demo     (void);
-QDate&       lamexp_version_expires  (void);
+const QDate& lamexp_version_expires  (void);
 unsigned int lamexp_toolver_neroaac  (void);
 unsigned int lamexp_toolver_fhgaacenc(void);
 unsigned int lamexp_toolver_qaacenc  (void);
 unsigned int lamexp_toolver_coreaudio(void);
-
 
 /*
  * URL getters
@@ -95,12 +76,7 @@ const char *lamexp_tracker_url(void);
  * Misc Functions
  */
 const QIcon&  lamexp_app_icon(void);
-const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString *tag = NULL);
-
-/*
- * Finalization
- */
-void lamexp_finalization(void);
+const QString lamexp_version2string(const QString &pattern, unsigned int version, const QString &defaultText, const QString &tag = QString());
 
 ///////////////////////////////////////////////////////////////////////////////
 // HELPER MACROS

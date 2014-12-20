@@ -39,10 +39,6 @@ Q_IMPORT_PLUGIN(QICOPlugin)
 #endif
 #endif
 
-//Localization
-const char* LAMEXP_DEFAULT_LANGID = "en";
-const char* LAMEXP_DEFAULT_TRANSLATION = "LameXP_EN.qm";
-
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,14 +66,11 @@ static size_t lamexp_entry_check(void)
 extern "C"
 {
 	int mainCRTStartup(void);
-	void _lamexp_global_init_tools(void);
-	void _lamexp_global_free_tools(void);
 }
 
 /*
  * Application entry point (runs before static initializers)
  */
-
 extern "C" int lamexp_entry_point(void)
 {
 	if(g_lamexp_entry_check_flag != 0x789E09B2)
@@ -85,23 +78,9 @@ extern "C" int lamexp_entry_point(void)
 		MUtils::OS::fatal_exit(L"Application initialization has failed, take care!");
 	}
 
-	//Call global initialization functions
-	_lamexp_global_init_tools();
-
 	//Make sure we will pass the check
 	g_lamexp_entry_check_flag = (~g_lamexp_entry_check_flag);
 
 	//Now initialize the C Runtime library!
 	return mainCRTStartup();
-}
-
-/*
- * Application finalization function
- */
-void lamexp_finalization(void)
-{
-	qDebug("lamexp_finalization()");
-
-	//Call global finalization functions, in proper order
-	_lamexp_global_free_tools();
 }

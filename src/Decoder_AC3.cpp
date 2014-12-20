@@ -35,7 +35,7 @@
 
 AC3Decoder::AC3Decoder(void)
 :
-	m_binary(lamexp_tool_lookup("valdec.exe"))
+	m_binary(lamexp_tools_lookup("valdec.exe"))
 {
 	if(m_binary.isEmpty())
 	{

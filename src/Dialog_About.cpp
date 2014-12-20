@@ -915,8 +915,8 @@ QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBi
 
 	if(!toolBin.isEmpty())
 	{
-		const unsigned int version = lamexp_tool_version(toolBin, &toolTag);
-		verStr = lamexp_version2string(toolVerFmt, version, tr("n/a"), &toolTag);
+		const unsigned int version = lamexp_tools_version(toolBin, &toolTag);
+		verStr = lamexp_version2string(toolVerFmt, version, tr("n/a"), toolTag);
 	}
 
 	toolText += QString("<li>%1<br>").arg(NOBR(QString("<b>%1 (%2)</b>").arg(toolName, verStr)));
