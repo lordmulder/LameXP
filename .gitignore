@@ -1,5 +1,6 @@
 *.user
 *.opensdf
+*.local.*
 *.sdf
 *.suo
 *.ncb
@@ -14,6 +15,7 @@
 /obj
 /out
 /tmp
+/doc/img
 /etc/Addins
 /etc/Deployment/_postproc.bat
 /etc/Deployment/buildenv.txt
