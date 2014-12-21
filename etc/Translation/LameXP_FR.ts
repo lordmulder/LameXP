@@ -2583,25 +2583,6 @@ Ouvrir le dossier récursivement...</translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation>L&apos;éxécutable %1 ne supporte pas le mode de compatibilité Windows.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation>L&apos;éxécutable %1 nécessite Qt v%2, mais Qt v%3 trouvé.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation>L&apos;exécutable &apos;%1&apos; a été construit pour Qt &apos;%2&apos;, mais a trouvé Qt &apos;%3&apos;.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation>&apos;%1&apos; requiert Windows XP ou une version ultérieure.</translation>
-    </message>
-</context>
-<context>
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>

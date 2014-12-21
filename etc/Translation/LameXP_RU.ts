@@ -2597,25 +2597,6 @@
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation>Исполняемый файл  &apos;%1&apos; не поддерживает режим совместимости Windows.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation>Исполняемому файлу  &apos;%1&apos; требуется версия Qt  v%2, но найдена версия  v%3.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation>Исполняемый файл  &apos;%1&apos; был собран для Qt &apos;%2&apos;, но найдена версия Qt &apos;%3&apos;.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation>Исполняемый файл &apos;%1&apos; требует Windows XP или новее.</translation>
-    </message>
-</context>
-<context>
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>

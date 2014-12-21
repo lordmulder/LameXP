@@ -2555,25 +2555,6 @@
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Executable &apos;%1&apos; doesn&apos;t support Windows compatibility mode.</source>
-        <translation type="unfinished">&apos;%1&apos;의 실행은 윈도우 호환성 모드를 지원하지 않습니다.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; requires Qt v%2, but found Qt v%3.</source>
-        <translation type="unfinished">&apos;%1&apos;의 실행은 Qt v%2가 요구됩니다. 하지만 Qt v%3이 발견되었습니다.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; was built for Qt &apos;%2&apos;, but found Qt &apos;%3&apos;.</source>
-        <translation type="unfinished">&apos;%1&apos;의 실행은 Qt &apos;%2&apos;용으로 제작되었습니다. 하지만 Qt v%3이 발견되었습니다.</translation>
-    </message>
-    <message>
-        <source>Executable &apos;%1&apos; requires Windows XP or later.</source>
-        <translation type="unfinished">&apos;%1&apos; 실행하려면 Windows XP 또는 상위 버전이 필요합니다.</translation>
-    </message>
-</context>
-<context>
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>
