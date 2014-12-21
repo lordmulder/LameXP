@@ -56,9 +56,6 @@ static const double g_allowedExtractDelay = 12.0;
 static const size_t BUFF_SIZE = 512;
 static const size_t EXPECTED_TOOL_COUNT = 28;
 
-/* benchmark */
-#undef ENABLE_BENCHMARK
-
 /* number of CPU cores -> number of threads */
 static unsigned int cores2threads(const unsigned int cores)
 {
@@ -225,17 +222,11 @@ InitializationThread::InitializationThread(const MUtils::CPUFetaures::cpu_info_t
 // Thread Main
 ////////////////////////////////////////////////////////////
 
-#ifdef ENABLE_BENCHMARK
-#define DO_INIT_FUNCT runBenchmark
-#else //ENABLE_BENCHMARK
-#define DO_INIT_FUNCT doInit
-#endif //ENABLE_BENCHMARK
-
 void InitializationThread::run(void)
 {
 	try
 	{
-		DO_INIT_FUNCT();
+		doInit();
 	}
 	catch(const std::exception &error)
 	{
@@ -370,7 +361,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	MUTILS_DELETE(pool);
 
 	//Performance measure
-	const qint64 delayExtract = timeExtractStart.elapsed();
+	const double delayExtract = double(timeExtractStart.elapsed()) / 1000.0;
 	timeExtractStart.invalidate();
 
 	//Make sure all files were extracted correctly
@@ -395,7 +386,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	}
 
 	//Check delay
-	if((double(delayExtract) / 1000.0) > g_allowedExtractDelay)
+	if(delayExtract > g_allowedExtractDelay)
 	{
 		m_slowIndicator = true;
 		qWarning("Extracting tools took %.3f seconds -> probably slow realtime virus scanner.", delayExtract);
@@ -403,7 +394,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	}
 	else
 	{
-		qDebug("Extracting the tools took %.5f seconds (OK).\n", delayExtract);
+		qDebug("Extracting the tools took %.3f seconds (OK).\n", delayExtract);
 	}
 
 	//Register all translations
@@ -418,59 +409,6 @@ double InitializationThread::doInit(const size_t threadCount)
 	delay();
 
 	return delayExtract;
-}
-
-void InitializationThread::runBenchmark(void)
-{
-#ifdef ENABLE_BENCHMARK
-	static const size_t nLoops = 5;
-	const size_t maxThreads = (5 * m_cpuFeatures.count);
-	QMap<size_t, double> results;
-
-	for(size_t c = 1; c <= maxThreads; c++)
-	{
-		QList<double> delayLst;
-		double delayAvg = 0.0;
-		for(size_t i = 0; i < nLoops; i++)
-		{
-			delayLst << doInit(c);
-			lamexp_clean_all_tools();
-		}
-		qSort(delayLst.begin(), delayLst.end());
-		delayLst.takeLast();
-		delayLst.takeFirst();
-		for(QList<double>::ConstIterator iter = delayLst.constBegin(); iter != delayLst.constEnd(); iter++)
-		{
-			delayAvg += (*iter);
-		}
-		results.insert(c, (delayAvg / double(delayLst.count())));
-	}
-
-	qWarning("\n----------------------------------------------");
-	qWarning("Benchmark Results:");
-	qWarning("----------------------------------------------");
-
-	double bestTime = DBL_MAX; size_t bestVal = 0;
-	QList<size_t> keys = results.keys();
-	for(QList<size_t>::ConstIterator iter = keys.begin(); iter != keys.end(); iter++)
-	{
-		const double time = results.value((*iter), DBL_MAX);
-		qWarning("%02u -> %7.4f", (*iter), time);
-		if(time < bestTime)
-		{
-			bestTime = time;
-			bestVal = (*iter);
-		}
-	}
-
-	qWarning("----------------------------------------------");
-	qWarning("BEST: %u of %u (factor: %7.4f)", bestVal, m_cpuFeatures.count, (double(bestVal) / double(m_cpuFeatures.count)));
-	qWarning("----------------------------------------------\n");
-	
-	qFatal("Benchmark complete. Thanks and bye bye!");
-#else //ENABLE_BENCHMARK
-	MUTILS_THROW("Sorry, the benchmark is *not* available in this build!");
-#endif //ENABLE_BENCHMARK
 }
 
 ////////////////////////////////////////////////////////////

@@ -42,10 +42,10 @@
 #include <MUtils/IPCChannel.h>
 
 //Qt includes
+#include <QMutex>
 #include <QApplication>
 #include <QMessageBox>
 #include <QDate>
-#include <QMutex>
 #include <QDir>
 
 //VLD
@@ -170,7 +170,7 @@ static int lamexp_main(int &argc, char **argv)
 {
 	int iResult = -1;
 	int iShutdown = SHUTDOWN_FLAG_NONE;
-	
+
 	//Print logo
 	lamexp_print_logo();
 
@@ -262,5 +262,5 @@ static int lamexp_main(int &argc, char **argv)
 
 int main(int argc, char* argv[])
 {
-	return MUtils::Startup::startup(argc, argv, lamexp_main, lamexp_version_demo());
+	return MUtils::Startup::startup(argc, argv, lamexp_main, "LameXP", lamexp_version_demo());
 }

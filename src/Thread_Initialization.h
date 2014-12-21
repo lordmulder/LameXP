@@ -50,7 +50,6 @@ public:
 protected:
 	void run(void);
 	double doInit(const size_t threadCount = 0);
-	void runBenchmark(void);
 
 private:
 	void delay(void);
