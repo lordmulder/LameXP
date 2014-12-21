@@ -1,25 +1,18 @@
 LameXP is released under the terms of the GNU GENERAL PUBLIC LICENSE
-(Version 2, June 1991) including the following *additional* restrictions:
+(Version 2, June 1991) including the following *additional* annotations:
 
-When distributing binaries of LameXP, it is *strictly forbidden* to
-repackage the LameXP executable file or the LameXP setup program in any
-kind of third-party "installer" or "downloader" program. Furthermore, it
-is *strictly forbidden* to bundle the LameXP executable file or the LameXP
-setup program with any kind of PUP (potentially unwanted program),
-including, but not limited to, adware, spyware, dialers, browser toolbars,
-browser plugins/extensions as well as restricted demo/shareware programs.
-
-It is, however, perfectly legitimate, to distribute *verbatim copies* of
-the LameXP executable file or the LameXP setup program, including the ZIP
-package. It also is legitimate to bundle LameXP with other "OpenSource"
-programs, according to the OSI (Open Source Initiative). Finally, it is
-legitimate to bundle LameXP with commercial software, as long as that
-software does *not* meet the criteria of PUP (please see examples above).
-
-Note: These restrictions explicitly do *not* forbid including binaries of
-LameXP into software collections, such as magazine cover FDs/CDs/DVDs or
-Internet sites, as long as LameXP can be accessed (e.g. downloaded or
-installed) as a stand-alone file *not* violating the above restrictions.
+When distributing binaries of the LameXP software, it is *STRICTLY
+FORBIDDEN* to bundle the LameXP program files and/or the LameXP
+installation program with any kind of Adware, Spyware or PUP (potentially
+unwanted program), including, but not limited to, any downloaders,
+dialers, browser toolbars/extensions or restricted shareware/demo
+programs. It is, however, perfectly legitimate to bundle LameXP with other
+OpenSource programs, according to the OSI (Open Source Initiative).
+Finally, it is also legitimate to bundle LameXP with commercial software,
+as long as that software does not meet the criteria of Adware, Spyware or
+PUP. If you bundle the LameXP software with another software, you are
+*REQUIRED* to make sure that the user is provided with an easy way to
+install and start the LameXP software separately from that other software.
 
 
 
