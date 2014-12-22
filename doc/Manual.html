@@ -38,7 +38,12 @@
 <li><a href="#third-party-software"><span class="toc-section-number">2.1</span> Third-party Software</a></li>
 <li><a href="#license-terms"><span class="toc-section-number">2.2</span> License Terms</a></li>
 </ul></li>
-<li><a href="#tutorial-step-by-step-guide"><span class="toc-section-number">3</span> Tutorial (Step-by-Step Guide)</a></li>
+<li><a href="#tutorial-step-by-step-guide"><span class="toc-section-number">3</span> Tutorial (Step-by-Step Guide)</a><ul>
+<li><a href="#source-files"><span class="toc-section-number">3.1</span> Source Files</a></li>
+<li><a href="#output-directory"><span class="toc-section-number">3.2</span> Output Directory</a></li>
+<li><a href="#compression-settings"><span class="toc-section-number">3.3</span> Compression Settings</a></li>
+<li><a href="#processing"><span class="toc-section-number">3.4</span> Processing</a></li>
+</ul></li>
 <li><a href="#help-support"><span class="toc-section-number">4</span> Help &amp; Support</a><ul>
 <li><a href="#download-mirrors"><span class="toc-section-number">4.1</span> Download Mirrors</a></li>
 <li><a href="#bugtracker"><span class="toc-section-number">4.2</span> Bugtracker</a></li>
@@ -61,7 +66,7 @@
 <ul>
 <li>Microsoft Windows 8.1, 32-Bit and 64-Bit editions<br /></li>
 <li>Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions<br /></li>
-<li>Microsoft Windows XP with Service Pack 3 (see remarks below!)</li>
+<li>Microsoft Windows XP with Service Pack 3 <strong>(see remarks)</strong></li>
 </ul>
 <p><strong>Tier #2:</strong> The following platforms should work too, but aren't tested extensively:</p>
 <ul>
@@ -71,7 +76,7 @@
 <li>Microsoft Windows XP x64 Edition with Service Pack 2<br /></li>
 <li>Microsoft Windows Server 2008 with Service Pack 2<br /></li>
 <li>Microsoft Windows Server 2008 R2 with Service Pack 1<br /></li>
-<li>GNU/Linux (e.g. Ubuntu 12.04) using Wine v1.4+, native Linux version planned</li>
+<li>GNU/Linux (e.g. Ubuntu 12.04), using Wine v1.4+</li>
 </ul>
 <p><strong>Legacy:</strong> The following platforms are NOT actively supported any longer:</p>
 <ul>
@@ -81,7 +86,7 @@
 <li>Microsoft Windows 98<br /></li>
 <li>Microsoft Windows 95</li>
 </ul>
-<p><em>Remarks:</em> Windows XP has reached &quot;end of life&quot; on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP, i.e. <em>no</em> updates or bugfixes are made available to regular Windows XP uses since that date, <em>not</em> even security fixes! Thus, all the security vulnerabilities that have been discovered <em>after</em> this deadline - and all the security vulnerabilities that will be discovered in the future - are going remain <em>unfixed</em> forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we <em>highly</em> recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.</p>
+<p> <br /><em>Remarks:</em> Windows XP has reached &quot;end of life&quot; on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP, i.e. <em>no</em> updates or bugfixes are made available to regular Windows XP uses since that date, <em>not</em> even security fixes! Thus, all the security vulnerabilities that have been discovered <em>after</em> this deadline - and all the security vulnerabilities that will be discovered in the future - are going remain <em>unfixed</em> forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we <em>highly</em> recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.</p>
 <h2 id="output-formats-encoders"><span class="header-section-number">1.2</span> Output Formats (Encoders)</h2>
 <p>Currently the following output formats (audio encoders) are supported by LameXP:</p>
 <ul>
@@ -150,7 +155,26 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</code></pre>
 <p> <br /><strong>Addendum:</strong> When distributing binaries of the LameXP software, it is <em>strictly forbidden</em> to bundle the LameXP program files and/or the LameXP installation program with any kind of <em>Adware</em>, <em>Spyware</em> or <em>PUP (potentially unwanted program)</em>, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other <em>OpenSource</em> programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with <em>commercial software</em>, as long as that software does <em>not</em> meet the criteria of <em>Adware</em>, <em>Spyware</em> or <em>PUP</em>. If you bundle the LameXP software with another software, you are <em>required</em> to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.</p>
 <h1 id="tutorial-step-by-step-guide"><span class="header-section-number">3</span> Tutorial (Step-by-Step Guide)</h1>
-<p><strong>TODO</strong></p>
+<p>This tutorial will teach you, step by step, how to convert your audio files using the LameXP software.</p>
+<h2 id="source-files"><span class="header-section-number">3.1</span> Source Files</h2>
+<p>First of all, you need to add all <strong>source files</strong> that you want to convert. So switch to the &quot;Source Files&quot; tab, just in case that tab is not active already, and click the &quot;Add File(s)&quot; button.</p>
+<p><img src="img/lamexp/tutorial_1a.png" alt="Tutorial" /></p>
+<p> <br />This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the &quot;Open&quot; button. You can repeat this step multiple, e.g. to add files from different directories.</p>
+<p><img src="img/lamexp/tutorial_1b.png" alt="Tutorial" /></p>
+<p> <br />All files you have added, so far, will show up in the list. You can click the &quot;Remove&quot; button to remove a single file from the list or &quot;Clear&quot; to remove them all. Click the &quot;Show details&quot; button to show details about a file.</p>
+<p><img src="img/lamexp/tutorial_1c.png" alt="Tutorial" /></p>
+<p> <br /><em>Did you know?</em> Files can also be added via <a href="http://en.wikipedia.org/wiki/Drag_and_drop">Drag &amp; Drop</a>. Just grab the files that you want to add in your Explorer window and drop them onto the LameXP main window (or onto the LameXP &quot;dropbox&quot; widget).</p>
+<h2 id="output-directory"><span class="header-section-number">3.2</span> Output Directory</h2>
+<p>Next, you need to choose the <strong>output directory</strong>, i.e. the directory where the converted files will be saved. Switch to the &quot;Output Directory&quot; tab and choose the desired output directory from the directory tree view.</p>
+<p><em>Note:</em> There are several quick navigation buttons below, which will allow you to jump quickly to your personal &quot;Home&quot; folder, &quot;Desktop&quot; folder and &quot;Music&quot; folder, respectively.</p>
+<p><img src="img/lamexp/tutorial_2a.png" alt="Tutorial" /></p>
+<p> <br />Sometimes you may wish to store the converted files in a <em>new</em> (sub-)folder. In this case, simply click the &quot;Make New Folder&quot; button, enter the desired folder name and hit the &quot;OK&quot; button.</p>
+<p><img src="img/lamexp/tutorial_2b.png" alt="Tutorial" /></p>
+<p> <br />The new folder is going to be created inside the current directory and will be selected automatically. You can repeat this step multiple times in order to created nested sub-folders.</p>
+<p><img src="img/lamexp/tutorial_2c.png" alt="Tutorial" /></p>
+<p> <br /><em>Did you know?</em> If you enable the &quot;Save output files in the same directory where the input file is located&quot;, each output file will be saved to the same location where the corresponding source file resides.</p>
+<h2 id="compression-settings"><span class="header-section-number">3.3</span> Compression Settings</h2>
+<h2 id="processing"><span class="header-section-number">3.4</span> Processing</h2>
 <h1 id="help-support"><span class="header-section-number">4</span> Help &amp; Support</h1>
 <p>Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be <em>reproduced</em> with the <em>latest release</em> version of LameXP!</p>
 <h2 id="download-mirrors"><span class="header-section-number">4.1</span> Download Mirrors</h2>

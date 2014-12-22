@@ -17,7 +17,7 @@ Platform Support
 
 * Microsoft Windows 8.1, 32-Bit and 64-Bit editions
 * Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions
-* Microsoft Windows XP with Service Pack 3 (see remarks below!)
+* Microsoft Windows XP with Service Pack 3 **(see remarks)**
 
 
 **Tier #2:** The following platforms should work too, but aren't tested extensively:
@@ -28,7 +28,7 @@ Platform Support
 * Microsoft Windows XP x64 Edition with Service Pack 2
 * Microsoft Windows Server 2008 with Service Pack 2
 * Microsoft Windows Server 2008 R2 with Service Pack 1
-* GNU/Linux (e.g. Ubuntu 12.04) using Wine v1.4+, native Linux version planned
+* GNU/Linux (e.g. Ubuntu 12.04), using Wine v1.4+
 
 **Legacy:** The following platforms are NOT actively supported any longer:
 
@@ -38,6 +38,7 @@ Platform Support
 * Microsoft Windows 98
 * Microsoft Windows 95
 
+&nbsp;  
 *Remarks:* Windows XP has reached "end of life" on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP, i.e. *no* updates or bugfixes are made available to regular Windows XP uses since that date, *not* even security fixes! Thus, all the security vulnerabilities that have been discovered *after* this deadline - and all the security vulnerabilities that will be discovered in the future - are going remain *unfixed* forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we *highly* recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.
 
 
@@ -128,7 +129,59 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 Tutorial (Step-by-Step Guide)
 =============================
 
-**TODO**
+This tutorial will teach you, step by step, how to convert your audio files using the LameXP software.
+
+
+Source Files
+------------
+
+First of all, you need to add all **source files** that you want to convert. So switch to the "Source Files" tab, just in case that tab is not active already, and click the "Add File(s)" button.
+
+![Tutorial](img/lamexp/tutorial_1a.png)
+
+&nbsp;  
+This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the "Open" button. You can repeat this step multiple, e.g. to add files from different directories.
+
+![Tutorial](img/lamexp/tutorial_1b.png)
+
+&nbsp;  
+All files you have added, so far, will show up in the list. You can click the "Remove" button to remove a single file from the list or "Clear" to remove them all. Click the "Show details" button to show details about a file.
+
+![Tutorial](img/lamexp/tutorial_1c.png)
+
+&nbsp;  
+*Did you know?* Files can also be added via [Drag &amp; Drop](http://en.wikipedia.org/wiki/Drag_and_drop). Just grab the files that you want to add in your Explorer window and drop them onto the LameXP main window (or onto the LameXP "dropbox" widget).
+
+
+Output Directory
+----------------
+
+Next, you need to choose the **output directory**, i.e. the directory where the converted files will be saved. Switch to the "Output Directory" tab and choose the desired output directory from the directory tree view.
+
+*Note:* There are several quick navigation buttons below, which will allow you to jump quickly to your personal "Home" folder, "Desktop" folder and "Music" folder, respectively.
+
+![Tutorial](img/lamexp/tutorial_2a.png)
+
+&nbsp;  
+Sometimes you may wish to store the converted files in a *new* (sub-)folder. In this case, simply click the "Make New Folder" button, enter the desired folder name and hit the "OK" button.
+
+![Tutorial](img/lamexp/tutorial_2b.png)
+
+&nbsp;  
+The new folder is going to be created inside the current directory and will be selected automatically. You can repeat this step multiple times in order to created nested sub-folders.
+
+![Tutorial](img/lamexp/tutorial_2c.png)
+
+&nbsp;  
+*Did you know?* If you enable the "Save output files in the same directory where the input file is located", each output file will be saved to the same location where the corresponding source file resides.
+
+
+Compression Settings
+--------------------
+
+
+Processing
+----------
 
 
 Help &amp; Support
