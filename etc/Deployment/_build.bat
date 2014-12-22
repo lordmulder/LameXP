@@ -28,18 +28,18 @@ if exist "%PATH_QTMSVC%\bin\qtvars.bat" (
 
 msbuild.exe /property:Configuration=%3 /property:Platform=%2 /target:Clean   /verbosity:normal "%~1"
 if not "%ERRORLEVEL%"=="0" (
-	echo. && echo Build process has failed!
-	echo. && pause && exit
+	"%~dp0\..\Utilities\CEcho.exe" red "\nBuild process has failed!\n"
+	pause && exit
 )
 
 msbuild.exe /property:Configuration=%3 /property:Platform=%2 /target:Rebuild /verbosity:normal "%~1"
 if not "%ERRORLEVEL%"=="0" (
-	echo. && echo Build process has failed!
-	echo. && pause && exit
+	"%~dp0\..\Utilities\CEcho.exe" red "\nBuild process has failed!\n"
+	pause && exit
 )
 
 msbuild.exe /property:Configuration=%3 /property:Platform=%2 /target:Build   /verbosity:normal "%~1"
 if not "%ERRORLEVEL%"=="0" (
-	echo. && echo Build process has failed!
-	echo. && pause && exit
+	"%~dp0\..\Utilities\CEcho.exe" red "\nBuild process has failed!\n"
+	pause && exit
 )

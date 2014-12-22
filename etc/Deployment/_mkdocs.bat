@@ -1,11 +1,9 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-echo.
-echo ----------------------------------------------------------------
-echo Building software documentation
-echo ----------------------------------------------------------------
-echo.
+"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
+"%~dp0\..\Utilities\CEcho.exe" cyan "Building software documentation..."
+"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
 
 :: ------------------------------------------
 :: Setup Paths
@@ -22,8 +20,8 @@ for %%i in ("%~dp0\..\..\doc\*.md") do (
 	"%PATH_PANDOC%\pandoc.exe" --from markdown_github+pandoc_title_block --to html5 --toc -N --standalone -H "%~dp0\..\Style\style.css" "%%~i" --output "%%~dpni.html"
 	echo.
 	if not "!ERRORLEVEL!"=="0" (
-		echo. && echo Creating the document has failed^^!
-		echo. && pause && exit
+		"%~dp0\..\Utilities\CEcho.exe" red "\nSomething went wrong^^!\n"
+		pause && exit
 	)
 )
 

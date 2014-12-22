@@ -13,8 +13,8 @@ if exist "%~dp0\..\Utilities\Date.exe" (
 )
 
 if "%ISO_DATE%"=="" (
-	echo. && echo "Failed to set up build date!"
-	echo. && pause && exit
+	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to set up build date!\n"
+	pause && exit
 )
 
 echo.

@@ -37,11 +37,9 @@ if "%LAMEXP_SKIP_BUILD%"=="YES" (
 :: CLEAN UP
 :: ---------------------------------------------------------------------------
 
-echo.
-echo ----------------------------------------------------------------
-echo Cleaning up
-echo ----------------------------------------------------------------
-echo.
+"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
+"%~dp0\..\Utilities\CEcho.exe" cyan "Cleaning up..."
+"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
 
 for %%i in (bin,obj,tmp,ipch) do (
 	del /Q /S /F "%~dp0\..\..\%%i\*.*"
@@ -86,14 +84,18 @@ for /L %%n in (1, 1, 99) do (
 for %%i in (exe,sfx,zip,txt) do (
 	del "%OUT_FILE%.%%i" 2> NUL
 	if exist "%OUT_FILE%.%%i" (
-		echo. && echo Failed to delete existing output file^^!
-		echo. && pause && exit
+		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to delete existing output file^^!\n"
+		pause && exit
 	)
 )
 
 :: ---------------------------------------------------------------------------
 :: COPY BINARY FILES AND REDIST
 :: ---------------------------------------------------------------------------
+
+"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
+"%~dp0\..\Utilities\CEcho.exe" cyan "Copying binary files..."
+"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
 
 rd /S /Q "%TMP_PATH%"
 mkdir "%TMP_PATH%"
@@ -147,6 +149,10 @@ attrib +R "%TMP_PATH%\*.exe"
 :: CREATE PACKAGES
 :: ---------------------------------------------------------------------------
 
+"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
+"%~dp0\..\Utilities\CEcho.exe" cyan "Creating release packages..."
+"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
+
 "%~dp0\..\Utilities\Echo.exe" LameXP - Audio Encoder Front-End > "%OUT_FILE%.txt"
 "%~dp0\..\Utilities\Echo.exe" v%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH% (Build #%VER_LAMEXP_BUILD%)\n >> "%OUT_FILE%.txt"
 "%~dp0\..\Utilities\Echo.exe" Built on %ISO_DATE% at %TIME%\n\n >> "%OUT_FILE%.txt"
@@ -169,8 +175,8 @@ rd /S /Q "%TMP_PATH%"
 
 for %%i in (zip,exe) do (
 	if not exist "%OUT_FILE%.zip" (
-		echo. && echo Failed to create release packages^^!
-		echo. && pause && exit
+		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to create release packages^^!\n"
+		pause && exit
 	)
 )
 
@@ -182,6 +188,10 @@ attrib +R "%OUT_FILE%.exe"
 :: SIGN OUTPUT FILE
 :: ---------------------------------------------------------------------------
 
+"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
+"%~dp0\..\Utilities\CEcho.exe" cyan "Signing output file..."
+"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
+
 "%PATH_GNUPG1%\gpg.exe" --detach-sign "%OUT_FILE%.exe"
 attrib +R "%OUT_FILE%.exe.sig"
 
@@ -189,8 +199,8 @@ attrib +R "%OUT_FILE%.exe.sig"
 :: COMPLETED
 :: ---------------------------------------------------------------------------
 
-echo.
-echo BUIDL COMPLETED SUCCESSFULLY :-)
-echo.
+"%~dp0\..\Utilities\CEcho.exe" green "\n==========================================================================="
+"%~dp0\..\Utilities\CEcho.exe" green "Completed successfully :-)"
+"%~dp0\..\Utilities\CEcho.exe" green "===========================================================================\n"
 
 pause

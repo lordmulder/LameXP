@@ -30,12 +30,8 @@ if not "%~1"=="" (
 )
 
 if not exist "%BUILDENV_TXT%" (
-	echo.
-	echo Could not find 'buildenv.txt' in current directory^!
-	echo Please create your 'buildenv.txt' file from 'buildenv.template.txt' first.
-	echo.
-	pause
-	exit
+	"%~dp0\..\Utilities\CEcho.exe" red "\nCould not find \"buildenv.txt\" in current directory!\n\nPlease create your \"buildenv.txt\" file from 'buildenv.template.txt' first...\n"
+	pause && exit
 )
 
 :: ------------------------------------------
@@ -58,17 +54,15 @@ set "BUILDENV_TXT="
 :: Print all paths
 :: ------------------------------------------
 
-echo.
-echo ======= BEGIN PATHS =======
-echo PATH_UPXBIN = "%PATH_UPXBIN%"
-echo PATH_MKNSIS = "%PATH_MKNSIS%"
-echo PATH_MSCDIR = "%PATH_MSCDIR%"
-echo PATH_QTMSVC = "%PATH_QTMSVC%"
-echo PATH_GNUPG1 = "%PATH_GNUPG1%"
-echo PATH_PANDOC = "%PATH_PANDOC%"
-echo PATH_VCPROJ = "%PATH_VCPROJ%"
-echo ======== END PATHS ========
-echo.
+"%~dp0\..\Utilities\CEcho.exe" yellow "\n========== BEGIN PATHS =========="
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_UPXBIN = \"%PATH_UPXBIN:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_MKNSIS = \"%PATH_MKNSIS:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_MSCDIR = \"%PATH_MSCDIR:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_QTMSVC = \"%PATH_QTMSVC:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_GNUPG1 = \"%PATH_GNUPG1:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_PANDOC = \"%PATH_PANDOC:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_VCPROJ = \"%PATH_VCPROJ:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "=========== END PATHS ===========\n"
 
 :: ------------------------------------------
 :: Validate Paths
@@ -92,9 +86,8 @@ call:validate_path PATH_VCPROJ "%~dp0\..\..\%PATH_VCPROJ%"
 if exist "%PATH_QTMSVC%\bin\qtvars.bat" goto:exit_success
 if exist "%PATH_QTMSVC%\bin\qtenv2.bat" goto:exit_success
 
-echo. && echo Could not find "qtvars.bat" or "qtenv2.bat" in your Qt path.
-echo. && echo Please check your PATH_QTMSVC and try again!
-echo. && pause && exit
+"%~dp0\..\Utilities\CEcho.exe" red "\nCould not find \"qtvars.bat\" or \"qtenv2.bat\" in your Qt path!\n\nPlease check your PATH_QTMSVC path variable and try again...\n"
+pause && exit
 
 :: ------------------------------------------
 :: Validate Path
@@ -102,9 +95,8 @@ echo. && pause && exit
 
 :validate_path
 if not exist "%~2" (
-	echo. && echo Path could not be found: && echo "%~2"
-	echo. && echo Please check your %1 and try again!
-	echo. && pause && exit
+	"%~dp0\..\Utilities\CEcho.exe" red "\nPath %1 could not be found!\n\nPlease check your %1 path variable and try again...\n"
+	pause && exit
 )
 goto:eof
 
