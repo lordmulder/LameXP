@@ -121,7 +121,7 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-&nbsp;
+&nbsp;  
 **Addendum:** When distributing binaries of the LameXP software, it is *strictly forbidden* to bundle the LameXP program files and/or the LameXP installation program with any kind of *Adware*, *Spyware* or *PUP (potentially unwanted program)*, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other *OpenSource* programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with *commercial software*, as long as that software does *not* meet the criteria of *Adware*, *Spyware* or *PUP*. If you bundle the LameXP software with another software, you are *required* to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.
 
 
@@ -150,7 +150,7 @@ The latest *official* release of the LameXP software can be obtained from one of
 * <http://www.free-codecs.com/lamexp_download.htm>
 * <http://www.videohelp.com/tools/LameXP>
 
-&nbsp;
+&nbsp;  
 It is *highly recommended* to download LameXP *only* from one of the official mirrors listed above. We assume *no responsibility* for the integrity and trustworthiness of LameXP downloads you may have received from other locations!
 
 Bugtracker
@@ -160,7 +160,7 @@ The recommended way to submit *bug reports* or *feature requests* to the LameXP 
 
 * <https://github.com/lordmulder/LameXP/issues>
 
-&nbsp;
+&nbsp;  
 *Note:* In order to use the issue tracking system, you need to log in with your GitHub account. Creating a GitHub account is easy and completely free of charge, simply click [here](https://github.com/join)!
 
 
@@ -172,7 +172,7 @@ If you want to discuss the development of the LameXP software, help other users 
 * <http://forum.doom9.org/showthread.php?t=157726> &ndash; English
 * <http://forum.gleitz.info/showthread.php?t=37956> &ndash; German
 
-&nbsp;
+&nbsp;  
 *Note:* Due to the massive amount of spam attacks, Doom9 has established strict anti-spam measures. Therefore, it takes a few days until your account will be approved.
 
 
@@ -201,7 +201,7 @@ The source code of the **LameXP** software is managed using [*Git*](http://git-s
 
 * ``git clone git://repo.or.cz/LameXP.git lamexp-src`` ([Browse](http://repo.or.cz/w/LameXP.git))
 
-&nbsp;
+&nbsp;  
 The source code of the **MUtilities** library is managed using [*Git*](http://git-scm.com/) version control system. The repository can be *cloned* from one of the official Git mirrors:
 
 * ``git clone git://git.code.sf.net/p/mutilities/code mutilities-src`` ([Browse](http://sourceforge.net/p/mutilities/code/))
@@ -218,7 +218,7 @@ The source code of the **MUtilities** library is managed using [*Git*](http://gi
 
 * ``git clone git://repo.or.cz/MUtilities.git mutilities-src`` ([Browse](http://repo.or.cz/w/MUtilities.git))
 
-&nbsp;
+&nbsp;  
 *Remarks:* In case you are new to Git or want to extend your knowledge, have a look at the [*Pro Git*](http://git-scm.com/book/en/v2) book by Scott Chacon! For Windows users, we highly recommend using [*MSYS Git*](http://msysgit.github.com/) in conjunction with the superb [*Tortoise Git*](http://tortoisegit.googlecode.com/) front-end.
 
 
@@ -235,7 +235,7 @@ LameXP is currently being developed and built using the following development to
 
 * The minimum supported *build* platform is Windows 7 (x86 and x64)
 
-&nbsp;
+&nbsp;  
 In order to create LameXP release packages, using the included deployment scripts, you need the following additional tools:
 
 * [7-Zip](http://www.7-zip.org/) &ndash; file archiver with a high compression ratio
@@ -304,7 +304,7 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
 
 15. Congratulations, you should now be prepared to build the ``Release_Static`` configuration of LameXP &#x1f60a;
 
-&nbsp;
+&nbsp;  
 *Note:* Static libraries only work with the exactly same compiler (version) they were built with!
 
 

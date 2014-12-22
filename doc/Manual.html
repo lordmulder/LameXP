@@ -1,34 +1,270 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<title>LameXP - User Manual</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<style type="text/css">
-<!--
-body { font-family:Consolas, "Lucida Console", Monospace; font-size:10pt; }
-a { text-decoration:none; color:#0000EE; transition:color 0.5s ease; -moz-transition:background-color 0.5s ease; -o-transition:background-color 0.5s ease; -webkit-transition:background-color 0.5s ease; }
-a:hover { background-color: #CCCCCC; }
-a:active { color: #551A8B; }
-a:visited { color: #0000EE; }
-.code { background-color: #EAEAEA; }
--->
-</style>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>LameXP Audio-Encoder Front-End – Manual</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+  <!--
+    body { font-family: "Times New Roman", Times, serif; color: #000000; background-color: #FFFFFF; }
+    tt, pre, code { font-family: Courier New, Courier, mono; background-color: #EDF3F7; padding: 1px; }
+    h1:not(:first-child) { margin-top: 2.25em; }
+    h2 { margin-top: 2.0em; }
+    h3, h4 { margin-top: 1.75em; }
+    a { color: #0000BB; text-decoration: none; }
+    a:visited { color: #0000BB; text-decoration: none; }
+    a:active { color: #0000FF; text-decoration: none; }
+    a:hover { color: #0000FF; text-decoration: underline; }
+  -->
+  </style>
 </head>
 <body>
-<h3>LameXP - User Manual</h3>
-<br>
-<img src="http://lamexp.sourceforge.net/lamexp.png" alt="404" border="0"><br>
-<br>
-<br>
-<b>Error 404 - This document is missing!</b><br>
-<br>
-Sorry, there is no LameXP user manual (yet), but we have an extensive <b><a href="FAQ.html">F.A.Q.</a></b> document ;-)<br>
-<br>
-Please have a look at <b><a href="FAQ.html">F.A.Q.</a></b> document, it will probably answer your question...<br>
-<br>
-<br>
-<font style="color:darkred">Note: If you are willing to contribute an in-depth LameXP manual, then please contact us!</font><br>
-<br>
-<br>
-eof
-</body></html>
+<header>
+<h1 class="title">LameXP Audio-Encoder Front-End – Manual</h1>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a><ul>
+<li><a href="#platform-support"><span class="toc-section-number">1.1</span> Platform Support</a></li>
+<li><a href="#output-formats-encoders"><span class="toc-section-number">1.2</span> Output Formats (Encoders)</a></li>
+<li><a href="#input-formats-decoders"><span class="toc-section-number">1.3</span> Input Formats (Decoders)</a></li>
+</ul></li>
+<li><a href="#leagl-information"><span class="toc-section-number">2</span> Leagl Information</a><ul>
+<li><a href="#third-party-software"><span class="toc-section-number">2.1</span> Third-party Software</a></li>
+<li><a href="#license-terms"><span class="toc-section-number">2.2</span> License Terms</a></li>
+</ul></li>
+<li><a href="#tutorial-step-by-step-guide"><span class="toc-section-number">3</span> Tutorial (Step-by-Step Guide)</a></li>
+<li><a href="#help-support"><span class="toc-section-number">4</span> Help &amp; Support</a><ul>
+<li><a href="#download-mirrors"><span class="toc-section-number">4.1</span> Download Mirrors</a></li>
+<li><a href="#bugtracker"><span class="toc-section-number">4.2</span> Bugtracker</a></li>
+<li><a href="#support-forum"><span class="toc-section-number">4.3</span> Support Forum</a></li>
+</ul></li>
+<li><a href="#developer-center"><span class="toc-section-number">5</span> Developer Center</a><ul>
+<li><a href="#source-code-access"><span class="toc-section-number">5.1</span> Source Code Access</a></li>
+<li><a href="#build-prerequisites"><span class="toc-section-number">5.2</span> Build Prerequisites</a></li>
+<li><a href="#qt-as-static-libraries"><span class="toc-section-number">5.3</span> Qt as Static Libraries</a></li>
+</ul></li>
+<li><a href="#f.a.q.-frequently-asked-questions"><span class="toc-section-number">6</span> F.A.Q. (Frequently Asked Questions)</a></li>
+</ul>
+</nav>
+<h1 id="introduction"><span class="header-section-number">1</span> Introduction</h1>
+<p>LameXP is a graphical user-interface (front-end) for various of audio encoders: It allows you convert your audio files from one audio format to another one in the most simple way. Despite its name, LameXP is NOT only a front-end for the LAME encoder, but supports a wide range of output formats, including MP3, Ogg Vorbis, AAC/MP4, FLAC, AC-3 and Wave Audio. The number of supported input formats is even bigger! Furthermore LameXP does NOT only run on Windows XP, but also on Windows Vista, Windows 7 and many other operating systems.</p>
+<p><img src="http://lamexp.sourceforge.net/lamexp.png" alt="LameXP" /></p>
+<p>As all the encoders and decoders used by LameXP are already &quot;built-in&quot; (with one exception), you do NOT need to install any additional software, such as &quot;Codecs&quot;, &quot;Filters&quot; or &quot;Plug-ins&quot;, on your computer. Everything works &quot;out of the box&quot;! You can even use LameXP as a &quot;portable&quot; application, e.g. run it from your USB stick. Moreover LameXP was designed for batch processing. This means that you can convert a huge number of audio files, e.g. a complete album or even your entire music collection, in a single step. And, as LameXP is able to process several audio files in parallel, it takes full advantage of modern multi-core processors! However LameXP is NOT only optimized for speed, it also provides excellent sound quality by using the most sophisticated encoders available and by giving the user unrestricted control over all encoding parameters. In addition to that, LameXP provides full support for metadata, including cover art. So when converting your audio files, LameXP will retain existing meta tags. But there also is an easy-to-use editor for adding or modifying metadata. LameXP supports Unicode for both, meta tags and filenames, so there won't be any problems with &quot;foreign&quot; characters. And, thanks to our translators, the user-interface of LameXP is available in multiple languages. Last but not least, LameXP supports a number of post-processing filters, including sample rate conversion, normalization (gain), tone adjustment and downmixing of multi-channel sources.</p>
+<h2 id="platform-support"><span class="header-section-number">1.1</span> Platform Support</h2>
+<p><strong>Tier #1:</strong> LameXP is currently being developed on the following platforms:</p>
+<ul>
+<li>Microsoft Windows 8.1, 32-Bit and 64-Bit editions<br /></li>
+<li>Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions<br /></li>
+<li>Microsoft Windows XP with Service Pack 3 (see remarks below!)</li>
+</ul>
+<p><strong>Tier #2:</strong> The following platforms should work too, but aren't tested extensively:</p>
+<ul>
+<li>Microsoft Windows 10, 32-Bit and 64-Bit editions<br /></li>
+<li>Microsoft Windows 8.0, 32-Bit and 64-Bit editions<br /></li>
+<li>Microsoft Windows Vista with Service Pack 2, 32-Bit and 64-Bit editions<br /></li>
+<li>Microsoft Windows XP x64 Edition with Service Pack 2<br /></li>
+<li>Microsoft Windows Server 2008 with Service Pack 2<br /></li>
+<li>Microsoft Windows Server 2008 R2 with Service Pack 1<br /></li>
+<li>GNU/Linux (e.g. Ubuntu 12.04) using Wine v1.4+, native Linux version planned</li>
+</ul>
+<p><strong>Legacy:</strong> The following platforms are NOT actively supported any longer:</p>
+<ul>
+<li>Microsoft Windows 2000<br /></li>
+<li>Microsoft Windows NT 4.0<br /></li>
+<li>Microsoft Windows Millennium Edition<br /></li>
+<li>Microsoft Windows 98<br /></li>
+<li>Microsoft Windows 95</li>
+</ul>
+<p><em>Remarks:</em> Windows XP has reached &quot;end of life&quot; on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP, i.e. <em>no</em> updates or bugfixes are made available to regular Windows XP uses since that date, <em>not</em> even security fixes! Thus, all the security vulnerabilities that have been discovered <em>after</em> this deadline - and all the security vulnerabilities that will be discovered in the future - are going remain <em>unfixed</em> forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we <em>highly</em> recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.</p>
+<h2 id="output-formats-encoders"><span class="header-section-number">1.2</span> Output Formats (Encoders)</h2>
+<p>Currently the following output formats (audio encoders) are supported by LameXP:</p>
+<ul>
+<li><a href="http://www.vorbis.com/">Ogg Vorbis</a> by <a href="http://www.xiph.org/">Xiph.org</a>, using the OggEnc2/libvorbis encoder with <a href="http://www.xiph.org/">aoTuV</a> [built-in]<br /></li>
+<li><a href="http://www.opus-codec.org/">Opus Interactive Audio Codec</a> by Xiph.org and Mozilla, using the <a href="http://git.xiph.org/?p=opus-tools.git;a=summary">Opus-Tools</a> [built-in]<br /></li>
+<li><a href="http://en.wikipedia.org/wiki/MP3">MPEG Audio-Layer III (MP3)</a>, using the <a href="http://lame.sourceforge.net/">LAME</a> encoder [built-in]<br /></li>
+<li><a href="http://en.wikipedia.org/wiki/Advanced_Audio_Coding">Advanced Audio Coding (AAC)</a>, using <a href="http://www.nero.com/deu/company/about-nero/nero-aac-codec.php">Nero AAC</a> or <a href="https://sites.google.com/site/qaacpage/">QAAC</a> encoder [<em>separate download</em>]<br /></li>
+<li><a href="https://xiph.org/flac/">Free Lossless Audio Codec (FLAC)</a> [built-in]<br /></li>
+<li><a href="http://www.atsc.org/cms/index.php/standards/standards/48-atsc-a52-standard">ATSC A/52 (aka &quot;AC-3&quot;)</a>, using the <a href="http://aften.sourceforge.net/">Aften</a> encoder [built-in]<br /></li>
+<li><a href="http://www.monkeysaudio.com/">Monkey's Audio (APE)</a>, lossless audio compression [built-in]<br /></li>
+<li>DCA, using the <a href="https://gitorious.org/dtsenc/dtsenc">DCA Enc</a> encoder software (still experimental) [built-in]<br /></li>
+<li>Uncompressed PCM / Waveform Audio File (WAV/RIFF)</li>
+</ul>
+<h2 id="input-formats-decoders"><span class="header-section-number">1.3</span> Input Formats (Decoders)</h2>
+<p>Currently the following input formats (audio decoders) are supported by LameXP:</p>
+<ul>
+<li>AC-3 (ATSC A/52), using Valib decoder [built-in]<br /></li>
+<li>Advanced Audio Coding (AAC), using FAAD decoder [built-in]<br /></li>
+<li>Apple Lossless (ALAC) [built-in]<br /></li>
+<li>Apple/SGI AIFF [built-in]<br /></li>
+<li>Avisynth, audio only [requires Avisynth 2.5.x to be installed]<br /></li>
+<li>Digital Theater System, using Valib decoder [built-in]<br /></li>
+<li>Free Lossless Audio Codec (FLAC) [built-in]<br /></li>
+<li>Microsoft ADPCM [built-in]<br /></li>
+<li>Monkey's Audio (APE) [built-in]<br /></li>
+<li>MPEG Audio-Layer I (MP1), using mpg123 decoder [built-in]<br /></li>
+<li>MPEG Audio-Layer II (MP2), using mpg123 decoder [built-in]<br /></li>
+<li>MPEG Audio-Layer III (MP3), using mpg123 decoder [built-in]<br /></li>
+<li>Musepack [built-in]<br /></li>
+<li>Opus Audio Codec [built-in]<br /></li>
+<li>Shorten [built-in]<br /></li>
+<li>Speex [built-in]<br /></li>
+<li>Sun/NeXT Au [built-in]<br /></li>
+<li>The True Audio (TTA) [built-in]<br /></li>
+<li>Uncompressed PCM / Waveform Audio File (WAV/RIFF) [built-in]<br /></li>
+<li>WavPack Hybrid Lossless Audio [built-in]<br /></li>
+<li>Windows Media Audio (WMA), using wma2wav [built-in]</li>
+</ul>
+<h1 id="leagl-information"><span class="header-section-number">2</span> Leagl Information</h1>
+<p>The LameXP software was developed, from the scratch, by LoRd_MuldeR <script type="text/javascript">
+<!--
+h='&#x47;&#x4d;&#88;&#46;&#100;&#x65;&#62;';a='&#64;';n='&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'&lt;MuldeR2@GMX.de&gt;'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;&#64;&#x47;&#x4d;&#88;&#46;&#100;&#x65;&#62;&#32;&#40;&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;&#32;&#x61;&#116;&#32;&#x47;&#x4d;&#88;&#32;&#100;&#x6f;&#116;&#32;&#100;&#x65;&#62;&#x29;</noscript>. Consequently, all copyrights on the LameXP software exclusively belong to LoRd_MuldeR. The right to use, modify and redistribute the LameXP software <em>according to the license terms</em> is granted to everybody. Please see below for license details! If you want to use the LameXP software in a way that is <em>not</em> covered by the license terms, e.g. if you want to include the LameXP software (or parts of it) in a <em>proprietary</em> software, written permission by LoRd_MuldeR is required.</p>
+<p>More OpenSource projects by LoRd_MuldeR can be found at <a href="http://muldersoft.com/">http://muldersoft.com/</a> and <a href="https://github.com/lordmulder">https://github.com/lordmulder</a>. Please do <strong>not</strong> send e-mail to LoRd_MuldeR directly, if the problem or suggestion can be discussed on the support forums or on the issue tracker!</p>
+<h2 id="third-party-software"><span class="header-section-number">2.1</span> Third-party Software</h2>
+<p>It has to be noticed that LameXP uses a number of <em>third-party</em> applications and libraries. The copyright on these third-party tools belongs to the individual authors. <em>All</em> third-party tools that are included in the official distribution packages of LameXP are distributed in accordance with the respective software license. For legal reasons, some of the third-party tools can <em>not</em> be redistributed along with LameXP and therefore need to be obtained separately. For more details on the third-party tools that are used by the LameXP software, please refer to the &quot;Third-party software&quot; tab in the &quot;About&quot; dialogue. Moreover, various people have contributed translations to the LameXP project. These translation are redistributed with permission of the respective contributor. For more information about our contributors, please refer to the &quot;Contributors&quot; tab in the &quot;About&quot; dialogue.</p>
+<h2 id="license-terms"><span class="header-section-number">2.2</span> License Terms</h2>
+<p>LameXP is <a href="http://en.wikipedia.org/wiki/Free_software_movement"><em>free software</em></a>, released under the terms of the <a href="http://www.gnu.org/licenses/gpl-2.0.html"><em>GNU General Public License</em> (GPL), version 2</a>. The licenses for most software and other practical works are designed to take away your freedom to share and change the works. In contrast, the GPL is designed to guarantee your freedom to share and change all versions of the software. In other words, the GPL ensures that free software will remain free for all of its users. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the <em>GNU General Public License</em> for more details!</p>
+<pre><code>LameXP - Audio Encoder Front-End
+Copyright (C) 2004-2014 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</code></pre>
+<p> <br /><strong>Addendum:</strong> When distributing binaries of the LameXP software, it is <em>strictly forbidden</em> to bundle the LameXP program files and/or the LameXP installation program with any kind of <em>Adware</em>, <em>Spyware</em> or <em>PUP (potentially unwanted program)</em>, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other <em>OpenSource</em> programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with <em>commercial software</em>, as long as that software does <em>not</em> meet the criteria of <em>Adware</em>, <em>Spyware</em> or <em>PUP</em>. If you bundle the LameXP software with another software, you are <em>required</em> to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.</p>
+<h1 id="tutorial-step-by-step-guide"><span class="header-section-number">3</span> Tutorial (Step-by-Step Guide)</h1>
+<p><strong>TODO</strong></p>
+<h1 id="help-support"><span class="header-section-number">4</span> Help &amp; Support</h1>
+<p>Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be <em>reproduced</em> with the <em>latest release</em> version of LameXP!</p>
+<h2 id="download-mirrors"><span class="header-section-number">4.1</span> Download Mirrors</h2>
+<p>The latest <em>official</em> release of the LameXP software can be obtained from one of the following <em>official</em> download mirrors:</p>
+<ul>
+<li><a href="https://github.com/lordmulder/LameXP/releases/latest">https://github.com/lordmulder/LameXP/releases/latest</a><br /></li>
+<li><a href="http://sourceforge.net/projects/lamexp/files/">http://sourceforge.net/projects/lamexp/files/</a><br /></li>
+<li><a href="https://lamexp.codeplex.com/releases/">https://lamexp.codeplex.com/releases/</a><br /></li>
+<li><a href="https://bitbucket.org/lord_mulder/lamexp/downloads">https://bitbucket.org/lord_mulder/lamexp/downloads</a><br /></li>
+<li><a href="https://www.assembla.com/spaces/lamexp/documents">https://www.assembla.com/spaces/lamexp/documents</a><br /></li>
+<li><a href="http://www.free-codecs.com/lamexp_download.htm">http://www.free-codecs.com/lamexp_download.htm</a><br /></li>
+<li><a href="http://www.videohelp.com/tools/LameXP">http://www.videohelp.com/tools/LameXP</a></li>
+</ul>
+<p> <br />It is <em>highly recommended</em> to download LameXP <em>only</em> from one of the official mirrors listed above. We assume <em>no responsibility</em> for the integrity and trustworthiness of LameXP downloads you may have received from other locations!</p>
+<h2 id="bugtracker"><span class="header-section-number">4.2</span> Bugtracker</h2>
+<p>The recommended way to submit <em>bug reports</em> or <em>feature requests</em> to the LameXP developers is using the <em>issue tracking system</em> at our GitHub project site:</p>
+<ul>
+<li><a href="https://github.com/lordmulder/LameXP/issues">https://github.com/lordmulder/LameXP/issues</a></li>
+</ul>
+<p> <br /><em>Note:</em> In order to use the issue tracking system, you need to log in with your GitHub account. Creating a GitHub account is easy and completely free of charge, simply click <a href="https://github.com/join">here</a>!</p>
+<h2 id="support-forum"><span class="header-section-number">4.3</span> Support Forum</h2>
+<p>If you want to discuss the development of the LameXP software, help other users or receive help from other users, please use the LameXP thread at <em>Doom9's</em> Forum:</p>
+<ul>
+<li><a href="http://forum.doom9.org/showthread.php?t=157726">http://forum.doom9.org/showthread.php?t=157726</a> – English<br /></li>
+<li><a href="http://forum.gleitz.info/showthread.php?t=37956">http://forum.gleitz.info/showthread.php?t=37956</a> – German</li>
+</ul>
+<p> <br /><em>Note:</em> Due to the massive amount of spam attacks, Doom9 has established strict anti-spam measures. Therefore, it takes a few days until your account will be approved.</p>
+<h1 id="developer-center"><span class="header-section-number">5</span> Developer Center</h1>
+<p>While LameXP originally was written in Delphi/Pascal, the current version 4 series of the software has been re-written in the <a href="http://en.wikipedia.org/wiki/C%2B%2B"><strong>C++</strong></a> programming language. LameXP v4 uses the <a href="http://www.qt.io/"><em>Qt cross-platform application framework</em></a> and provides full <a href="http://en.wikipedia.org/wiki/Unicode"><em>Unicode</em></a> support. Furthermore, LameXP is tightly coupled with the <a href="https://github.com/lordmulder/MUtilities"><em>MUtilities</em></a> library, a vast collection of &quot;utility&quot; routines and classes to extend the Qt framework. Build files are currently provided for <em>Microsoft Visual Studio</em> only. Linux support is currently provided via <a href="https://www.winehq.org/"><em>Wine</em></a>; a native Linux port of LameXP is planned for a future version.</p>
+<h2 id="source-code-access"><span class="header-section-number">5.1</span> Source Code Access</h2>
+<p>The source code of the <strong>LameXP</strong> software is managed using <a href="http://git-scm.com/"><em>Git</em></a> version control system. The repository can be <em>cloned</em> from one of the official Git mirrors:</p>
+<ul>
+<li><p><code>git clone git://git.code.sf.net/p/lamexp/code lamexp-src</code> (<a href="http://sourceforge.net/p/lamexp/code/">Browse</a>)</p></li>
+<li><p><code>git clone https://github.com/lordmulder/LameXP.git lamexp-src</code> (<a href="https://github.com/lordmulder/LameXP">Browse</a>)</p></li>
+<li><p><code>git clone https://git01.codeplex.com/lamexp lamexp-src</code> (<a href="https://lamexp.codeplex.com/SourceControl/latest">Browse</a>)</p></li>
+<li><p><code>git clone https://bitbucket.org/lord_mulder/lamexp.git lamexp-src</code> (<a href="https://bitbucket.org/lord_mulder/lamexp/src">Browse</a>)</p></li>
+<li><p><code>git clone git://git.assembla.com/lamexp.git lamexp-src</code> (<a href="https://www.assembla.com/code/lamexp/git/nodes">Browse</a>)</p></li>
+<li><p><code>git clone git://gitorious.org/lamexp/lamexp.git lamexp-src</code> (<a href="http://gitorious.org/lamexp/lamexp/trees/master">Browse</a>)</p></li>
+<li><p><code>git clone git://repo.or.cz/LameXP.git lamexp-src</code> (<a href="http://repo.or.cz/w/LameXP.git">Browse</a>)</p></li>
+</ul>
+<p> <br />The source code of the <strong>MUtilities</strong> library is managed using <a href="http://git-scm.com/"><em>Git</em></a> version control system. The repository can be <em>cloned</em> from one of the official Git mirrors:</p>
+<ul>
+<li><p><code>git clone git://git.code.sf.net/p/mutilities/code mutilities-src</code> (<a href="http://sourceforge.net/p/mutilities/code/">Browse</a>)</p></li>
+<li><p><code>git clone https://github.com/lordmulder/MUtilities.git mutilities-src</code> (<a href="https://github.com/lordmulder/MUtilities">Browse</a>)</p></li>
+<li><p><code>git clone https://git01.codeplex.com/mutilities mutilities-src</code> (<a href="https://mutilities.codeplex.com/SourceControl/latest">Browse</a>)</p></li>
+<li><p><code>git clone https://bitbucket.org/lord_mulder/mutilities.git mutilities-src</code> (<a href="https://bitbucket.org/lord_mulder/mutilities/src">Browse</a>)</p></li>
+<li><p><code>git clone git://git.assembla.com/mutilities.git mutilities-src</code> (<a href="https://www.assembla.com/code/mutilities/git/nodes">Browse</a>)</p></li>
+<li><p><code>git clone git://gitorious.org/mutilities/mutilities.git mutilities-src</code> (<a href="http://gitorious.org/mutilities/mutilities/trees/master">Browse</a>)</p></li>
+<li><p><code>git clone git://repo.or.cz/MUtilities.git mutilities-src</code> (<a href="http://repo.or.cz/w/MUtilities.git">Browse</a>)</p></li>
+</ul>
+<p> <br /><em>Remarks:</em> In case you are new to Git or want to extend your knowledge, have a look at the <a href="http://git-scm.com/book/en/v2"><em>Pro Git</em></a> book by Scott Chacon! For Windows users, we highly recommend using <a href="http://msysgit.github.com/"><em>MSYS Git</em></a> in conjunction with the superb <a href="http://tortoisegit.googlecode.com/"><em>Tortoise Git</em></a> front-end.</p>
+<h2 id="build-prerequisites"><span class="header-section-number">5.2</span> Build Prerequisites</h2>
+<p>LameXP is currently being developed and built using the following development tools and libraries:</p>
+<ul>
+<li><p><a href="http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2013 Update-4</a>, running on Windows 7 with Service Pack 1</p></li>
+<li><p><a href="http://download.qt.io/archive/qt/4.8/">Qt libraries 4.8.6</a> for Windows (pre-compiled Qt libraries for Visual Studio 2013 can be found <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/"><strong>here</strong></a>)</p></li>
+<li><p>Windows Platform SDK v7.1A, included with Visual Studio 2013 or Visual Studio 2012</p></li>
+<li><p>The minimum supported <em>build</em> platform is Windows 7 (x86 and x64)</p></li>
+</ul>
+<p> <br />In order to create LameXP release packages, using the included deployment scripts, you need the following additional tools:</p>
+<ul>
+<li><p><a href="http://www.7-zip.org/">7-Zip</a> – file archiver with a high compression ratio</p></li>
+<li><p><a href="http://nsis.sourceforge.net/">NSIS</a> – Nullsoft Scriptable Install System (<a href="http://www.scratchpaper.com/"><em>Unicode version</em></a> recommended!)</p>
+<ul>
+<li><a href="http://nsis.sourceforge.net/StdUtils_plug-in">StdUtils</a> plug-in<br /></li>
+<li><a href="http://nsis.sourceforge.net/LockedList_plug-in">LockedList</a> plug-in<br /></li>
+<li><a href="http://nsis.sourceforge.net/Inetc_plug-in">Inetc</a> plug-in<br /></li>
+<li><a href="http://forums.winamp.com/showthread.php?t=329990">Aero</a> plug-in</li>
+</ul></li>
+<li><p><a href="http://upx.sourceforge.net/">UPX</a> – the Ultimate Packer for eXecutables</p></li>
+<li><p><a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> – the Universal Document Converter</p></li>
+<li><p><a href="ftp://ftp.gnupg.org/gcrypt/binary/">GnuPG</a> – the GNU Privacy Guard v1.4.x</p></li>
+</ul>
+<h2 id="qt-as-static-libraries"><span class="header-section-number">5.3</span> Qt as Static Libraries</h2>
+<p>In order to create a &quot;fully static&quot; build of LameXP, i.e. a build that does <em>not</em> depend on any &quot;external&quot; DLL files (except for the obligatory operating system DLL's that you cannot get around), you'll need to compile Qt as &quot;static&quot; libraries. The official Qt web-site <em>does</em> provide pre-compiled Qt libraries. However, they only provide DLL versions, they do <em>not</em> provide &quot;static&quot; libraries. Consequently, you need to build the required &quot;static&quot; Qt libraries yourself. The following simple instructions should make it easy to build Qt from the sources and as &quot;static&quot; libraries:</p>
+<ol>
+<li><p>Make sure <em>Visual Studio 2013</em> with Update-4 (or later) is installed</p></li>
+<li><p>Make sure <em>Strawberry Perl </em>for Windows and <em>Python 2.7</em> are installed</p></li>
+<li><p>Download and extract the <em>Qt 4.8.x</em> source code package (e.g. to <code>C:\QtSources\4.8.x</code>)</p></li>
+<li><p>Edit the file <code>mkspecs\win32-msvc2010\qmake.conf</code> from your Qt Sources directory as follows:</p>
+<ul>
+<li><code>Old: QMAKE_CFLAGS_RELEASE = -O2 -MD</code><br /></li>
+<li><code>New: QMAKE_CFLAGS_RELEASE = -O2 -MT &lt;more optimization flags here&gt;</code><br /></li>
+<li><code>Old: QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi</code><br /></li>
+<li><code>New: QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi &lt;more optimization flags here&gt;</code></li>
+</ul></li>
+<li><p>Open a new command window (<code>cmd.exe</code>) – use this very same console for all upcoming steps!</p></li>
+<li><p>Add <em>Strawberry Perl</em> to your PATH (e.g. <code>set PATH=C:\strawberry\perl\bin;%PATH%</code>)</p></li>
+<li><p>Add <em>Python 2.7</em> to your PATH (e.g. <code>set PATH=C:\python27;%PATH%</code>)</p></li>
+<li><p>Run <code>vcvarsall.bat x86</code> form your Visual C++ install directory - within the same console!</p></li>
+<li><p>Change the current directory to the <em>Qt Sources</em> path (e.g. <code>C:\QtSources\4.8.x</code>)</p></li>
+<li><p>Run <code>configure.exe -release -static -ltcg -qt-zlib -qt-libpng -qt-libjpeg -qt-libtiff -qt-libmng</code></p>
+<ul>
+<li>Hint: For Visual Studio 2013 you currently need to add <code>-platform win32-msvc2012</code> too</li>
+</ul></li>
+<li><p>Now the makefiles should have been generated, so simply enter <code>nmake /B</code> and be patient - voilà!</p></li>
+<li><p>The build process is going to take good amount of time. Once it is done, make sure you got all needed libs:</p>
+<ul>
+<li><code>lib\qtmain.lib</code><br /></li>
+<li><code>lib\QtCore.lib</code><br /></li>
+<li><code>lib\QtGui.lib</code><br /></li>
+<li><code>lib\QtSvg.lib</code><br /></li>
+<li><code>lib\QtXml.lib</code><br /></li>
+<li><code>plugins\imageformats\qico.lib</code><br /></li>
+<li><code>plugins\imageformats\qsvg.lib</code><br /></li>
+<li><code>plugins\imageformats\qtga.lib</code></li>
+</ul></li>
+<li><p>Put all the static *.lib files into the <code>Prerequisites\qt4_static\lib</code> directory</p></li>
+<li><p>ImageFormat plugins go to <code>Prerequisites\qt4_static\plugins\imageformats</code></p></li>
+<li><p>Congratulations, you should now be prepared to build the <code>Release_Static</code> configuration of LameXP 😊</p></li>
+</ol>
+<p> <br /><em>Note:</em> Static libraries only work with the exactly same compiler (version) they were built with!</p>
+<h1 id="f.a.q.-frequently-asked-questions"><span class="header-section-number">6</span> F.A.Q. (Frequently Asked Questions)</h1>
+<p><strong>TODO</strong></p>
+<p><strong>eof</strong></p>
+</body>
+</html>
