@@ -126,6 +126,64 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 **Addendum:** When distributing binaries of the LameXP software, it is *strictly forbidden* to bundle the LameXP program files and/or the LameXP installation program with any kind of *Adware*, *Spyware* or *PUP (potentially unwanted program)*, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other *OpenSource* programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with *commercial software*, as long as that software does *not* meet the criteria of *Adware*, *Spyware* or *PUP*. If you bundle the LameXP software with another software, you are *required* to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.
 
 
+Install Instructions
+====================
+
+
+Install the LameXP Software
+---------------------------
+
+### Setup Program ###
+
+**TODO**
+
+
+### ZIP Package ###
+
+**TODO**
+
+
+Install the AAC Encoder
+-----------------------
+
+For legal reasons, the AAC (Advanced Audio Coding) encoder can **not** be included in the official LameXP distribution packages. Therefore, you need to download and install the AAC encoder *manually*.
+
+LameXP can use the *Nero Digital* AAC encoder as well as the *Apple* (iTunes/QucikTime) AAC encoder. This chapter describes how to set up these AAC encoder for use with LameXP.
+
+### Nero Digital AAC Encoder ###
+
+First of all, you need to download the Nero AAC encoder from the official Nero Digital web-site. The download is free of charge:
+
+* <http://www.nero.com/eng/company/about-nero/nero-aac-codec.php>
+
+&nbsp;  
+Simply scroll down, click the "I agree" button, and enter ``user@example.com`` when asked for an e-mail address. Finally, click the "Download" button, which initates the download of the required ``NeroAACCodec-1.5.1.zip`` file.
+
+*Note:*  Although the ZIP file is called ``NeroAACCodec-1.5.1.zip``, it actually contains version **1.5.4.0** of the Nero AAC encoder software. Please check the included ``changelog.txt`` to verify this!
+
+![Tutorial](img/lamexp/setup_3a.png)
+
+&nbsp;  
+Now open the downloaded ZIP file with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRar](http://www.rarlab.com/download.htm)) and navigate to the "win32" sub-directory.
+
+![Tutorial](img/lamexp/setup_3b.png)
+
+&nbsp;  
+Finally, *extract* all the three files ``neroAacDec.exe``, ``neroAacEnc.exe`` and ``neroAacTag.exe`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. ``LameXP.exe``, is located.
+
+*Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
+
+![Tutorial](img/lamexp/setup_3c.png)
+
+&nbsp;  
+Once the required Nero AAC files have been put into the proper place, simply *restart* LameXP in order to enable the AAC encoding support!
+
+
+### QAAC/Apple AAC Encoder ###
+
+**TODO**
+
+
 Tutorial (Step-by-Step Guide)
 =============================
 
