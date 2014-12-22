@@ -155,9 +155,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</code></pre>
 <p> <br /><strong>Addendum:</strong> When distributing binaries of the LameXP software, it is <em>strictly forbidden</em> to bundle the LameXP program files and/or the LameXP installation program with any kind of <em>Adware</em>, <em>Spyware</em> or <em>PUP (potentially unwanted program)</em>, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other <em>OpenSource</em> programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with <em>commercial software</em>, as long as that software does <em>not</em> meet the criteria of <em>Adware</em>, <em>Spyware</em> or <em>PUP</em>. If you bundle the LameXP software with another software, you are <em>required</em> to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.</p>
 <h1 id="tutorial-step-by-step-guide"><span class="header-section-number">3</span> Tutorial (Step-by-Step Guide)</h1>
-<p>This tutorial will teach you, step by step, how to convert your audio files using the LameXP software.</p>
+<p>This tutorial will teach you, step by step, how to convert your audio files using the LameXP software. The tutorial assumes that LameXP is already installed on your computer.</p>
 <h2 id="source-files"><span class="header-section-number">3.1</span> Source Files</h2>
-<p>First of all, you need to add all <strong>source files</strong> that you want to convert. So switch to the &quot;Source Files&quot; tab, just in case that tab is not active already, and click the &quot;Add File(s)&quot; button.</p>
+<p>First of all, you need to add all <strong>source files</strong> that you want to convert. So switch to the &quot;Source Files&quot; tab, just in case that tab is not active already, and then click the &quot;Add File(s)&quot; button.</p>
 <p><img src="img/lamexp/tutorial_1a.png" alt="Tutorial" /></p>
 <p> <br />This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the &quot;Open&quot; button. You can repeat this step multiple, e.g. to add files from different directories.</p>
 <p><img src="img/lamexp/tutorial_1b.png" alt="Tutorial" /></p>
@@ -172,11 +172,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p><img src="img/lamexp/tutorial_2b.png" alt="Tutorial" /></p>
 <p> <br />The new folder is going to be created inside the current directory and will be selected automatically. You can repeat this step multiple times in order to created nested sub-folders.</p>
 <p><img src="img/lamexp/tutorial_2c.png" alt="Tutorial" /></p>
-<p> <br /><em>Did you know?</em> If you enable the &quot;Save output files in the same directory where the input file is located&quot;, each output file will be saved to the same location where the corresponding source file resides.</p>
+<p> <br /><em>Did you know?</em> If you enable the &quot;Save output files in the same directory where the input file is located&quot; option, each output file will be saved to the same location where the corresponding source file resides.</p>
 <h2 id="compression-settings"><span class="header-section-number">3.3</span> Compression Settings</h2>
+<p>Finally, you need to choose your <strong>compression settings</strong>. First, and most important, you must decide for an output <em>audio format (encoder)</em>. Depending on your needs and preferences, you can choose between <a href="http://en.wikipedia.org/wiki/MP3">MP3</a>, <a href="http://en.wikipedia.org/wiki/Vorbis">Ogg/Vorbis</a>, <a href="http://en.wikipedia.org/wiki/Opus_%28audio_format%29">Opus</a>, <a href="http://en.wikipedia.org/wiki/Advanced_Audio_Coding">AAC/MP4</a>, <a href="https://xiph.org/flac/">FLAC</a> and others.</p>
+<p><em>Note:</em> If you are uncertain which audio format to choose, then <a href="http://lifehacker.com/5927052/whats-the-difference-between-all-these-audio-formats-and-which-one-should-i-use">this article</a> by Lifehacker is a good starting point. Also see the <a href="http://en.wikipedia.org/wiki/Comparison_of_audio_coding_formats">comparison of audio coding formats</a> on Wikipedia. If still uncertain, just go with good old MP3 😉</p>
+<p><img src="img/lamexp/tutorial_3a.png" alt="Tutorial" /></p>
+<p> <br />Once you have decided for an audio format, you need to choose a <em>rate-control</em> mode next. The available rate-control modes include VBR (quality-base variable bitrate), ABR (average bitrate) and CBR (constant bitrate). Not all modes are available for all audio formats.</p>
+<p><em>Note:</em> If you are uncertain which rate-control mode to chose, the guideline is that VBR mode should be preferred over ABR mode whenever possible. And CBR mode generally should be avoided. See also Wikipedia's article on <a href="http://en.wikipedia.org/wiki/Variable_bitrate">variable bitrate</a> encoding.</p>
+<p><img src="img/lamexp/tutorial_3b.png" alt="Tutorial" /></p>
+<p> <br />Last but not least, you need to choose the desired target <em>bitrate</em> or <em>quality-level</em>. Put simply, this controls the &quot;quality vs. file size&quot; trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode.</p>
+<p><em>Note:</em> If you are uncertain which bitrate or quality-level to choose, bare in mind that a higher bitrate (or a better quality level) results in better audio quality, but also produces larger files – and vice versa. &quot;Level 2&quot; or &quot;192 kbps&quot; is a typical choice for MP3.</p>
+<p><img src="img/lamexp/tutorial_3c.png" alt="Tutorial" /></p>
+<p> <br /><em>Did you know?</em> You can click on the &quot;Reset&quot; link at any time in order to reset all available settings for all available encoders to their factory defaults.</p>
 <h2 id="processing"><span class="header-section-number">3.4</span> Processing</h2>
+<p>When everything has been set up properly, the time has come to actually start the encoding process. So simply click the &quot;Encode Now&quot; button in order to get going!</p>
+<p><img src="img/lamexp/tutorial_4a.png" alt="Tutorial" /></p>
+<p> <br />This will bring up the &quot;Processing&quot; dialogue. LameXP will now convert all your audio files on the list. Depending on the number of audio files and depending on the performance of your system, this may take several minutes, so please be patient 😉</p>
+<p><em>Note:</em> In order to leverage the power &quot;multi-core&quot; processors and thus massively speed-up the encoding process, LameXP will run multiple encoding jobs in parallel – provided that your system has multiple processor cores and that there are enough encoding jobs left in the queue.</p>
+<p><img src="img/lamexp/tutorial_4b.png" alt="Tutorial" /></p>
+<p> <br />The &quot;Processing&quot; dialogue is going to turn <em>green</em>, as soon as all encoding jobs have finished successfully. If anything went wrong, e.g. if one of the encoding jobs failed for some reason, it will turn <em>red</em> instead.</p>
+<p><img src="img/lamexp/tutorial_4c.png" alt="Tutorial" /></p>
+<p> <br /><em>Did you know?</em> You can double-click on a completed (or failed) job in the list, in order to bring up a dialogue with all details about the specific job. This is especially useful, if something went wrong.</p>
 <h1 id="help-support"><span class="header-section-number">4</span> Help &amp; Support</h1>
-<p>Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be <em>reproduced</em> with the <em>latest release</em> version of LameXP!</p>
+<p>Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be <em>reproduced</em> with the <strong>latest</strong> release version of LameXP!</p>
 <h2 id="download-mirrors"><span class="header-section-number">4.1</span> Download Mirrors</h2>
 <p>The latest <em>official</em> release of the LameXP software can be obtained from one of the following <em>official</em> download mirrors:</p>
 <ul>
@@ -205,25 +223,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <h1 id="developer-center"><span class="header-section-number">5</span> Developer Center</h1>
 <p>While LameXP originally was written in Delphi/Pascal, the current version 4 series of the software has been re-written in the <a href="http://en.wikipedia.org/wiki/C%2B%2B"><strong>C++</strong></a> programming language. LameXP v4 uses the <a href="http://www.qt.io/"><em>Qt cross-platform application framework</em></a> and provides full <a href="http://en.wikipedia.org/wiki/Unicode"><em>Unicode</em></a> support. Furthermore, LameXP is tightly coupled with the <a href="https://github.com/lordmulder/MUtilities"><em>MUtilities</em></a> library, a vast collection of &quot;utility&quot; routines and classes to extend the Qt framework. Build files are currently provided for <em>Microsoft Visual Studio</em> only. Linux support is currently provided via <a href="https://www.winehq.org/"><em>Wine</em></a>; a native Linux port of LameXP is planned for a future version.</p>
 <h2 id="source-code-access"><span class="header-section-number">5.1</span> Source Code Access</h2>
-<p>The source code of the <strong>LameXP</strong> software is managed using <a href="http://git-scm.com/"><em>Git</em></a> version control system. The repository can be <em>cloned</em> from one of the official Git mirrors:</p>
+<p>The source code of the <strong>LameXP</strong> software is managed using the <a href="http://git-scm.com/"><em>Git</em></a> version control system. The Git repository can be <em>cloned</em> from one of the official Git mirrors:</p>
 <ul>
-<li><p><code>git clone git://git.code.sf.net/p/lamexp/code lamexp-src</code> (<a href="http://sourceforge.net/p/lamexp/code/">Browse</a>)</p></li>
-<li><p><code>git clone https://github.com/lordmulder/LameXP.git lamexp-src</code> (<a href="https://github.com/lordmulder/LameXP">Browse</a>)</p></li>
-<li><p><code>git clone https://git01.codeplex.com/lamexp lamexp-src</code> (<a href="https://lamexp.codeplex.com/SourceControl/latest">Browse</a>)</p></li>
-<li><p><code>git clone https://bitbucket.org/lord_mulder/lamexp.git lamexp-src</code> (<a href="https://bitbucket.org/lord_mulder/lamexp/src">Browse</a>)</p></li>
-<li><p><code>git clone git://git.assembla.com/lamexp.git lamexp-src</code> (<a href="https://www.assembla.com/code/lamexp/git/nodes">Browse</a>)</p></li>
-<li><p><code>git clone git://gitorious.org/lamexp/lamexp.git lamexp-src</code> (<a href="http://gitorious.org/lamexp/lamexp/trees/master">Browse</a>)</p></li>
-<li><p><code>git clone git://repo.or.cz/LameXP.git lamexp-src</code> (<a href="http://repo.or.cz/w/LameXP.git">Browse</a>)</p></li>
+<li><p><code>git clone git://git.code.sf.net/p/lamexp/code LameXP</code> (<a href="http://sourceforge.net/p/lamexp/code/">Browse</a>)</p></li>
+<li><p><code>git clone https://github.com/lordmulder/LameXP.git LameXP</code> (<a href="https://github.com/lordmulder/LameXP">Browse</a>)</p></li>
+<li><p><code>git clone https://git01.codeplex.com/lamexp LameXP</code> (<a href="https://lamexp.codeplex.com/SourceControl/latest">Browse</a>)</p></li>
+<li><p><code>git clone https://bitbucket.org/lord_mulder/lamexp.git LameXP</code> (<a href="https://bitbucket.org/lord_mulder/lamexp/src">Browse</a>)</p></li>
+<li><p><code>git clone git://git.assembla.com/lamexp.git LameXP</code> (<a href="https://www.assembla.com/code/lamexp/git/nodes">Browse</a>)</p></li>
+<li><p><code>git clone git://gitorious.org/lamexp/lamexp.git LameXP</code> (<a href="http://gitorious.org/lamexp/lamexp/trees/master">Browse</a>)</p></li>
+<li><p><code>git clone git://repo.or.cz/LameXP.git LameXP</code> (<a href="http://repo.or.cz/w/LameXP.git">Browse</a>)</p></li>
 </ul>
-<p> <br />The source code of the <strong>MUtilities</strong> library is managed using <a href="http://git-scm.com/"><em>Git</em></a> version control system. The repository can be <em>cloned</em> from one of the official Git mirrors:</p>
+<p> <br />The source code of the <strong>MUtilities</strong> library is managed using the <a href="http://git-scm.com/"><em>Git</em></a> version control system. The Git repository can be <em>cloned</em> from one of the official Git mirrors:</p>
 <ul>
-<li><p><code>git clone git://git.code.sf.net/p/mutilities/code mutilities-src</code> (<a href="http://sourceforge.net/p/mutilities/code/">Browse</a>)</p></li>
-<li><p><code>git clone https://github.com/lordmulder/MUtilities.git mutilities-src</code> (<a href="https://github.com/lordmulder/MUtilities">Browse</a>)</p></li>
-<li><p><code>git clone https://git01.codeplex.com/mutilities mutilities-src</code> (<a href="https://mutilities.codeplex.com/SourceControl/latest">Browse</a>)</p></li>
-<li><p><code>git clone https://bitbucket.org/lord_mulder/mutilities.git mutilities-src</code> (<a href="https://bitbucket.org/lord_mulder/mutilities/src">Browse</a>)</p></li>
-<li><p><code>git clone git://git.assembla.com/mutilities.git mutilities-src</code> (<a href="https://www.assembla.com/code/mutilities/git/nodes">Browse</a>)</p></li>
-<li><p><code>git clone git://gitorious.org/mutilities/mutilities.git mutilities-src</code> (<a href="http://gitorious.org/mutilities/mutilities/trees/master">Browse</a>)</p></li>
-<li><p><code>git clone git://repo.or.cz/MUtilities.git mutilities-src</code> (<a href="http://repo.or.cz/w/MUtilities.git">Browse</a>)</p></li>
+<li><p><code>git clone git://git.code.sf.net/p/mutilities/code MUtilities</code> (<a href="http://sourceforge.net/p/mutilities/code/">Browse</a>)</p></li>
+<li><p><code>git clone https://github.com/lordmulder/MUtilities.git MUtilities</code> (<a href="https://github.com/lordmulder/MUtilities">Browse</a>)</p></li>
+<li><p><code>git clone https://git01.codeplex.com/mutilities MUtilities</code> (<a href="https://mutilities.codeplex.com/SourceControl/latest">Browse</a>)</p></li>
+<li><p><code>git clone https://bitbucket.org/lord_mulder/mutilities.git MUtilities</code> (<a href="https://bitbucket.org/lord_mulder/mutilities/src">Browse</a>)</p></li>
+<li><p><code>git clone git://git.assembla.com/mutilities.git MUtilities</code> (<a href="https://www.assembla.com/code/mutilities/git/nodes">Browse</a>)</p></li>
+<li><p><code>git clone git://gitorious.org/mutilities/mutilities.git MUtilities</code> (<a href="http://gitorious.org/mutilities/mutilities/trees/master">Browse</a>)</p></li>
+<li><p><code>git clone git://repo.or.cz/MUtilities.git MUtilities</code> (<a href="http://repo.or.cz/w/MUtilities.git">Browse</a>)</p></li>
 </ul>
 <p> <br /><em>Remarks:</em> In case you are new to Git or want to extend your knowledge, have a look at the <a href="http://git-scm.com/book/en/v2"><em>Pro Git</em></a> book by Scott Chacon! For Windows users, we highly recommend using <a href="http://msysgit.github.com/"><em>MSYS Git</em></a> in conjunction with the superb <a href="http://tortoisegit.googlecode.com/"><em>Tortoise Git</em></a> front-end.</p>
 <h2 id="build-prerequisites"><span class="header-section-number">5.2</span> Build Prerequisites</h2>

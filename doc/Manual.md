@@ -129,13 +129,13 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 Tutorial (Step-by-Step Guide)
 =============================
 
-This tutorial will teach you, step by step, how to convert your audio files using the LameXP software.
+This tutorial will teach you, step by step, how to convert your audio files using the LameXP software. The tutorial assumes that LameXP is already installed on your computer.
 
 
 Source Files
 ------------
 
-First of all, you need to add all **source files** that you want to convert. So switch to the "Source Files" tab, just in case that tab is not active already, and click the "Add File(s)" button.
+First of all, you need to add all **source files** that you want to convert. So switch to the "Source Files" tab, just in case that tab is not active already, and then click the "Add File(s)" button.
 
 ![Tutorial](img/lamexp/tutorial_1a.png)
 
@@ -173,21 +173,63 @@ The new folder is going to be created inside the current directory and will be s
 ![Tutorial](img/lamexp/tutorial_2c.png)
 
 &nbsp;  
-*Did you know?* If you enable the "Save output files in the same directory where the input file is located", each output file will be saved to the same location where the corresponding source file resides.
+*Did you know?* If you enable the "Save output files in the same directory where the input file is located" option, each output file will be saved to the same location where the corresponding source file resides.
 
 
 Compression Settings
 --------------------
 
+Finally, you need to choose your **compression settings**. First, and most important, you must decide for an output *audio format (encoder)*. Depending on your needs and preferences, you can choose between [MP3](http://en.wikipedia.org/wiki/MP3), [Ogg/Vorbis](http://en.wikipedia.org/wiki/Vorbis), [Opus](http://en.wikipedia.org/wiki/Opus_%28audio_format%29), [AAC/MP4](http://en.wikipedia.org/wiki/Advanced_Audio_Coding), [FLAC](https://xiph.org/flac/) and others.
+
+*Note:* If you are uncertain which audio format to choose, then [this article](http://lifehacker.com/5927052/whats-the-difference-between-all-these-audio-formats-and-which-one-should-i-use) by Lifehacker is a good starting point. Also see the [comparison of audio coding formats](http://en.wikipedia.org/wiki/Comparison_of_audio_coding_formats) on Wikipedia. If still uncertain, just go with good old MP3 &#x1f609;
+
+![Tutorial](img/lamexp/tutorial_3a.png)
+
+&nbsp;  
+Once you have decided for an audio format, you need to choose a *rate-control* mode next. The available rate-control modes include VBR (quality-base variable bitrate), ABR (average bitrate) and CBR (constant bitrate). Not all modes are available for all audio formats.
+
+*Note:* If you are uncertain which rate-control mode to chose, the guideline is that VBR mode should be preferred over ABR mode whenever possible. And CBR mode generally should be avoided. See also Wikipedia's article on [variable bitrate](http://en.wikipedia.org/wiki/Variable_bitrate) encoding.
+
+![Tutorial](img/lamexp/tutorial_3b.png)
+
+&nbsp;  
+Last but not least, you need to choose the desired target *bitrate* or *quality-level*. Put simply, this controls the  "quality vs. file size" trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode. 
+
+*Note:* If you are uncertain which bitrate or quality-level to choose, bare in mind that a higher bitrate (or a better quality level) results in better audio quality, but also produces larger files &ndash; and vice versa. "Level 2" or "192 kbps" is a typical choice for MP3.
+
+![Tutorial](img/lamexp/tutorial_3c.png)
+
+&nbsp;  
+*Did you know?* You can click on the "Reset" link at any time in order to reset all available settings for all available encoders to their factory defaults.
+
 
 Processing
 ----------
+
+When everything has been set up properly, the time has come to actually start the encoding process. So simply click the "Encode Now" button in order to get going!
+
+![Tutorial](img/lamexp/tutorial_4a.png)
+
+&nbsp;  
+This will bring up the "Processing" dialogue. LameXP will now convert all your audio files on the list. Depending on the number of audio files and depending on the performance of your system, this may take several minutes, so please be patient &#x1f609;
+
+*Note:* In order to leverage the power "multi-core" processors and thus massively speed-up the encoding process, LameXP will run multiple encoding jobs in parallel &ndash; provided that your system has multiple processor cores and that there are enough encoding jobs left in the queue.
+
+![Tutorial](img/lamexp/tutorial_4b.png)
+
+&nbsp;  
+The "Processing" dialogue is going to turn *green*, as soon as all encoding jobs have finished successfully. If anything went wrong, e.g. if one of the encoding jobs failed for some reason, it will turn *red* instead.
+
+![Tutorial](img/lamexp/tutorial_4c.png)
+
+&nbsp;  
+*Did you know?* You can double-click on a completed (or failed) job in the list, in order to bring up a dialogue with all details about the specific job. This is especially useful, if something went wrong.
 
 
 Help &amp; Support
 ==================
 
-Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be *reproduced* with the *latest release* version of LameXP!
+Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be *reproduced* with the **latest** release version of LameXP!
 
 
 Download Mirrors
@@ -238,38 +280,38 @@ While LameXP originally was written in Delphi/Pascal, the current version 4 seri
 Source Code Access
 ------------------
 
-The source code of the **LameXP** software is managed using [*Git*](http://git-scm.com/) version control system. The repository can be *cloned* from one of the official Git mirrors:
+The source code of the **LameXP** software is managed using the [*Git*](http://git-scm.com/) version control system. The Git repository can be *cloned* from one of the official Git mirrors:
 
-* ``git clone git://git.code.sf.net/p/lamexp/code lamexp-src`` ([Browse](http://sourceforge.net/p/lamexp/code/))
+* ``git clone git://git.code.sf.net/p/lamexp/code LameXP`` ([Browse](http://sourceforge.net/p/lamexp/code/))
 
-* ``git clone https://github.com/lordmulder/LameXP.git lamexp-src`` ([Browse](https://github.com/lordmulder/LameXP))
+* ``git clone https://github.com/lordmulder/LameXP.git LameXP`` ([Browse](https://github.com/lordmulder/LameXP))
 
-* ``git clone https://git01.codeplex.com/lamexp lamexp-src`` ([Browse](https://lamexp.codeplex.com/SourceControl/latest))
+* ``git clone https://git01.codeplex.com/lamexp LameXP`` ([Browse](https://lamexp.codeplex.com/SourceControl/latest))
 
-* ``git clone https://bitbucket.org/lord_mulder/lamexp.git lamexp-src`` ([Browse](https://bitbucket.org/lord_mulder/lamexp/src))
+* ``git clone https://bitbucket.org/lord_mulder/lamexp.git LameXP`` ([Browse](https://bitbucket.org/lord_mulder/lamexp/src))
 
-* ``git clone git://git.assembla.com/lamexp.git lamexp-src`` ([Browse](https://www.assembla.com/code/lamexp/git/nodes))
+* ``git clone git://git.assembla.com/lamexp.git LameXP`` ([Browse](https://www.assembla.com/code/lamexp/git/nodes))
 
-* ``git clone git://gitorious.org/lamexp/lamexp.git lamexp-src`` ([Browse](http://gitorious.org/lamexp/lamexp/trees/master))
+* ``git clone git://gitorious.org/lamexp/lamexp.git LameXP`` ([Browse](http://gitorious.org/lamexp/lamexp/trees/master))
 
-* ``git clone git://repo.or.cz/LameXP.git lamexp-src`` ([Browse](http://repo.or.cz/w/LameXP.git))
+* ``git clone git://repo.or.cz/LameXP.git LameXP`` ([Browse](http://repo.or.cz/w/LameXP.git))
 
 &nbsp;  
-The source code of the **MUtilities** library is managed using [*Git*](http://git-scm.com/) version control system. The repository can be *cloned* from one of the official Git mirrors:
+The source code of the **MUtilities** library is managed using the [*Git*](http://git-scm.com/) version control system. The Git repository can be *cloned* from one of the official Git mirrors:
 
-* ``git clone git://git.code.sf.net/p/mutilities/code mutilities-src`` ([Browse](http://sourceforge.net/p/mutilities/code/))
+* ``git clone git://git.code.sf.net/p/mutilities/code MUtilities`` ([Browse](http://sourceforge.net/p/mutilities/code/))
 
-* ``git clone https://github.com/lordmulder/MUtilities.git mutilities-src`` ([Browse](https://github.com/lordmulder/MUtilities))
+* ``git clone https://github.com/lordmulder/MUtilities.git MUtilities`` ([Browse](https://github.com/lordmulder/MUtilities))
 
-* ``git clone https://git01.codeplex.com/mutilities mutilities-src`` ([Browse](https://mutilities.codeplex.com/SourceControl/latest))
+* ``git clone https://git01.codeplex.com/mutilities MUtilities`` ([Browse](https://mutilities.codeplex.com/SourceControl/latest))
 
-* ``git clone https://bitbucket.org/lord_mulder/mutilities.git mutilities-src`` ([Browse](https://bitbucket.org/lord_mulder/mutilities/src))
+* ``git clone https://bitbucket.org/lord_mulder/mutilities.git MUtilities`` ([Browse](https://bitbucket.org/lord_mulder/mutilities/src))
 
-* ``git clone git://git.assembla.com/mutilities.git mutilities-src`` ([Browse](https://www.assembla.com/code/mutilities/git/nodes))
+* ``git clone git://git.assembla.com/mutilities.git MUtilities`` ([Browse](https://www.assembla.com/code/mutilities/git/nodes))
 
-* ``git clone git://gitorious.org/mutilities/mutilities.git mutilities-src`` ([Browse](http://gitorious.org/mutilities/mutilities/trees/master))
+* ``git clone git://gitorious.org/mutilities/mutilities.git MUtilities`` ([Browse](http://gitorious.org/mutilities/mutilities/trees/master))
 
-* ``git clone git://repo.or.cz/MUtilities.git mutilities-src`` ([Browse](http://repo.or.cz/w/MUtilities.git))
+* ``git clone git://repo.or.cz/MUtilities.git MUtilities`` ([Browse](http://repo.or.cz/w/MUtilities.git))
 
 &nbsp;  
 *Remarks:* In case you are new to Git or want to extend your knowledge, have a look at the [*Pro Git*](http://git-scm.com/book/en/v2) book by Scott Chacon! For Windows users, we highly recommend using [*MSYS Git*](http://msysgit.github.com/) in conjunction with the superb [*Tortoise Git*](http://tortoisegit.googlecode.com/) front-end.
