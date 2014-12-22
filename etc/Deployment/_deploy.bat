@@ -14,6 +14,10 @@ if "%LAMEXP_CONFIG%"=="" (
 	set "LAMEXP_CONFIG=Release"
 )
 
+if "%LAMEXP_PLATFORM%"=="" (
+	set "LAMEXP_PLATFORM=Win32"
+)
+
 if not "%LAMEXP_REDIST%"=="0" (
 	set "LAMEXP_REDIST=1"
 )
@@ -22,11 +26,8 @@ if not "%LAMEXP_REDIST%"=="0" (
 :: SETUP PATHS
 :: ---------------------------------------------------------------------------
 
-set "OUT_PATH=%~dp0\..\..\bin\%LAMEXP_CONFIG%"
+set "BIN_PATH=%~dp0\..\..\bin\%LAMEXP_PLATFORM%\%LAMEXP_CONFIG%"
 set "TMP_PATH=%TEMP%\~LameXP.%LAMEXP_CONFIG%.%ISO_DATE%.%RANDOM%.tmp"
-set "OBJ_PATH=%~dp0\..\..\obj\%LAMEXP_CONFIG%"
-set "MOC_PATH=%~dp0\..\..\tmp"
-set "IPC_PATH=%~dp0\..\..\ipch"
 
 if "%LAMEXP_SKIP_BUILD%"=="YES" (
 	goto SkipBuildThisTime
@@ -36,20 +37,15 @@ if "%LAMEXP_SKIP_BUILD%"=="YES" (
 :: CLEAN UP
 :: ---------------------------------------------------------------------------
 
-del /Q "%OUT_PATH%\*.exe"
-del /Q "%OUT_PATH%\*.dll"
-del /Q "%OBJ_PATH%\*.obj"
-del /Q "%OBJ_PATH%\*.res"
-del /Q "%OBJ_PATH%\*.bat"
-del /Q "%OBJ_PATH%\*.idb"
-del /Q "%OBJ_PATH%\*.log"
-del /Q "%OBJ_PATH%\*.manifest"
-del /Q "%OBJ_PATH%\*.lastbuildstate"
-del /Q "%OBJ_PATH%\*.htm"
-del /Q "%OBJ_PATH%\*.dep"
-del /Q "%MOC_PATH%\*.cpp"
-del /Q "%MOC_PATH%\*.h"
-del /Q /S "%IPC_PATH%\*.*"
+echo.
+echo ----------------------------------------------------------------
+echo Cleaning up
+echo ----------------------------------------------------------------
+echo.
+
+for %%i in (bin,obj,tmp,ipch) do (
+	del /Q /S /F "%~dp0\..\..\%%i\*.*"
+)
 
 :: ---------------------------------------------------------------------------
 :: UPDATE LANGUAGE FILES AND DCOS
@@ -62,7 +58,7 @@ call "%~dp0\_lupdate.bat"
 :: BUILD THE BINARIES
 :: ---------------------------------------------------------------------------
 
-call "%~dp0\_build.bat" "%~dp0\..\..\%PATH_VCPROJ%" "%LAMEXP_CONFIG%"
+call "%~dp0\_build.bat" "%~dp0\..\..\%PATH_VCPROJ%" "%LAMEXP_PLATFORM%" "%LAMEXP_CONFIG%"
 
 :SkipBuildThisTime
 
@@ -96,14 +92,14 @@ for %%i in (exe,sfx,zip,txt) do (
 )
 
 :: ---------------------------------------------------------------------------
-:: POST BUILD OPERATIONS
+:: COPY BINARY FILES AND REDIST
 :: ---------------------------------------------------------------------------
 
 rd /S /Q "%TMP_PATH%"
 mkdir "%TMP_PATH%"
 
 for %%i in (exe,dll) do (
-	copy "%OUT_PATH%\*.%%i" "%TMP_PATH%"
+	copy "%BIN_PATH%\*.%%i" "%TMP_PATH%"
 )
 
 if "%LAMEXP_REDIST%"=="1" (
@@ -113,7 +109,7 @@ if "%LAMEXP_REDIST%"=="1" (
 	)
 	copy "%QTDIR%\plugins\imageformats\q???4.dll" "%TMP_PATH%\imageformats"
 	for %%i in (100,110,120) do (
-		if exist %PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\*.dll" (
+		if exist "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\*.dll" (
 			copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\*.dll" "%TMP_PATH%"
 		)
 	)
