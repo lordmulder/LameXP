@@ -18,7 +18,6 @@ call "%~dp0\_paths.bat"
 for %%i in ("%~dp0\..\..\doc\*.md") do (
 	echo PANDOC: %%~nxi
 	"%PATH_PANDOC%\pandoc.exe" --from markdown_github+pandoc_title_block --to html5 --toc -N --standalone -H "%~dp0\..\Style\style.css" "%%~i" --output "%%~dpni.html"
-	echo.
 	if not "!ERRORLEVEL!"=="0" (
 		"%~dp0\..\Utilities\CEcho.exe" red "\nSomething went wrong^^!\n"
 		pause && exit

@@ -166,8 +166,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p> <br /><strong>Addendum:</strong> When distributing binaries of the LameXP software, it is <em>strictly forbidden</em> to bundle the LameXP program files and/or the LameXP installation program with any kind of <em>Adware</em>, <em>Spyware</em> or <em>PUP (potentially unwanted program)</em>, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other <em>OpenSource</em> programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with <em>commercial software</em>, as long as that software does <em>not</em> meet the criteria of <em>Adware</em>, <em>Spyware</em> or <em>PUP</em>. If you bundle the LameXP software with another software, you are <em>required</em> to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.</p>
 <h1 id="install-instructions"><span class="header-section-number">3</span> Install Instructions</h1>
 <h2 id="install-the-lamexp-software"><span class="header-section-number">3.1</span> Install the LameXP Software</h2>
+<p>The LameXP software is provided in two different forms: a self-running <strong>setup program</strong> and a <strong>ZIP package</strong>. For regular users, using the <em>setup program</em> is highly recommended!</p>
 <h3 id="setup-program"><span class="header-section-number">3.1.1</span> Setup Program</h3>
-<p><strong>TODO</strong></p>
+<p>In order to start the installation process, simply double-click on the LameXP setup program, e.g. <code>LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.exe</code>.</p>
+<p><em>Note:</em> Shortly after launching the setup program, an <a href="http://en.wikipedia.org/wiki/User_Account_Control">UAC</a> (User Access Control) dialogue may appear. This is a standard Windows security feature, so don't worry! You have to choose &quot;Yes&quot;, if you wish to continue the installation process.</p>
+<p><img src="img/lamexp/setup_1a.png" alt="Figure" /></p>
+<p> <br />Now simply follow the instructions of the setup wizard, which will guide you through the installation process…</p>
+<p><em>Note:</em> Please do <strong>not</strong> change the &quot;Destionation Folder&quot;, unless you know exactly what you are doing. The &quot;Destionation Folder&quot; cannot be changed, when <em>upgrading</em> an existing LameXP installation.</p>
+<p><img src="img/lamexp/setup_1b.png" alt="Figure" /></p>
+<p> <br />Congratulation, LameXP has been installed successfully on your computer!</p>
+<p><em>Note:</em> If you keep the &quot;Run LameXP …&quot; option enabled and click on the &quot;Finish&quot; button, the LameXP software will be launched immediately.</p>
+<p><img src="img/lamexp/setup_1c.png" alt="Figure" /></p>
 <h3 id="zip-package"><span class="header-section-number">3.1.2</span> ZIP Package</h3>
 <p><strong>TODO</strong></p>
 <h2 id="install-the-aac-encoder"><span class="header-section-number">3.2</span> Install the AAC Encoder</h2>
@@ -180,12 +189,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 </ul>
 <p> <br />Simply scroll down, click the &quot;I agree&quot; button, and enter <code>user@example.com</code> when asked for an e-mail address. Finally, click the &quot;Download&quot; button, which initates the download of the required <code>NeroAACCodec-1.5.1.zip</code> file.</p>
 <p><em>Note:</em> Although the ZIP file is called <code>NeroAACCodec-1.5.1.zip</code>, it actually contains version <strong>1.5.4.0</strong> of the Nero AAC encoder software. Please check the included <code>changelog.txt</code> to verify this!</p>
-<p><img src="img/lamexp/setup_3a.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/setup_3a.png" alt="Figure" /></p>
 <p> <br />Now open the downloaded ZIP file with your favourite file archive software (we recommend using <a href="http://www.7-zip.org/">7-Zip</a> or <a href="http://www.rarlab.com/download.htm">WinRar</a>) and navigate to the &quot;win32&quot; sub-directory.</p>
-<p><img src="img/lamexp/setup_3b.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/setup_3b.png" alt="Figure" /></p>
 <p> <br />Finally, <em>extract</em> all the three files <code>neroAacDec.exe</code>, <code>neroAacEnc.exe</code> and <code>neroAacTag.exe</code> into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. <code>LameXP.exe</code>, is located.</p>
 <p><em>Note:</em> By default, the LameXP installation directory is either <code>C:\Program Files (x86)\MuldeR\LameXP</code> or <code>C:\Program Files\MuldeR\LameXP</code>. However, this can be changed by the user during the setup process.</p>
-<p><img src="img/lamexp/setup_3c.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/setup_3c.png" alt="Figure" /></p>
 <p> <br />Once the required Nero AAC files have been put into the proper place, simply <em>restart</em> LameXP in order to enable the AAC encoding support!</p>
 <h3 id="qaacapple-aac-encoder"><span class="header-section-number">3.2.2</span> QAAC/Apple AAC Encoder</h3>
 <p><strong>TODO</strong></p>
@@ -193,40 +202,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p>This tutorial will teach you, step by step, how to convert your audio files using the LameXP software. The tutorial assumes that LameXP is already installed on your computer.</p>
 <h2 id="source-files"><span class="header-section-number">4.1</span> Source Files</h2>
 <p>First of all, you need to add all <strong>source files</strong> that you want to convert. So switch to the &quot;Source Files&quot; tab, just in case that tab is not active already, and then click the &quot;Add File(s)&quot; button.</p>
-<p><img src="img/lamexp/tutorial_1a.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_1a.png" alt="Figure" /></p>
 <p> <br />This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the &quot;Open&quot; button. You can repeat this step multiple, e.g. to add files from different directories.</p>
-<p><img src="img/lamexp/tutorial_1b.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_1b.png" alt="Figure" /></p>
 <p> <br />All files you have added, so far, will show up in the list. You can click the &quot;Remove&quot; button to remove a single file from the list or &quot;Clear&quot; to remove them all. Click the &quot;Show details&quot; button to show details about a file.</p>
-<p><img src="img/lamexp/tutorial_1c.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_1c.png" alt="Figure" /></p>
 <p> <br /><em>Did you know?</em> Files can also be added via <a href="http://en.wikipedia.org/wiki/Drag_and_drop">Drag &amp; Drop</a>. Just grab the files that you want to add in your Explorer window and drop them onto the LameXP main window (or onto the LameXP &quot;dropbox&quot; widget).</p>
 <h2 id="output-directory"><span class="header-section-number">4.2</span> Output Directory</h2>
 <p>Next, you need to choose the <strong>output directory</strong>, i.e. the directory where the converted files will be saved. Switch to the &quot;Output Directory&quot; tab and choose the desired output directory from the directory tree view.</p>
 <p><em>Note:</em> There are several quick navigation buttons below, which will allow you to jump quickly to your personal &quot;Home&quot; folder, &quot;Desktop&quot; folder and &quot;Music&quot; folder, respectively.</p>
-<p><img src="img/lamexp/tutorial_2a.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_2a.png" alt="Figure" /></p>
 <p> <br />Sometimes you may wish to store the converted files in a <em>new</em> (sub-)folder. In this case, simply click the &quot;Make New Folder&quot; button, enter the desired folder name and hit the &quot;OK&quot; button.</p>
-<p><img src="img/lamexp/tutorial_2b.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_2b.png" alt="Figure" /></p>
 <p> <br />The new folder is going to be created inside the current directory and will be selected automatically. You can repeat this step multiple times in order to created nested sub-folders.</p>
-<p><img src="img/lamexp/tutorial_2c.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_2c.png" alt="Figure" /></p>
 <p> <br /><em>Did you know?</em> If you enable the &quot;Save output files in the same directory where the input file is located&quot; option, each output file will be saved to the same location where the corresponding source file resides.</p>
 <h2 id="compression-settings"><span class="header-section-number">4.3</span> Compression Settings</h2>
 <p>Finally, you need to choose your <strong>compression settings</strong>. First, and most important, you must decide for an output <em>audio format (encoder)</em>. Depending on your needs and preferences, you can choose between <a href="http://en.wikipedia.org/wiki/MP3">MP3</a>, <a href="http://en.wikipedia.org/wiki/Vorbis">Ogg/Vorbis</a>, <a href="http://en.wikipedia.org/wiki/Opus_%28audio_format%29">Opus</a>, <a href="http://en.wikipedia.org/wiki/Advanced_Audio_Coding">AAC/MP4</a>, <a href="https://xiph.org/flac/">FLAC</a> and others.</p>
 <p><em>Note:</em> If you are uncertain which audio format to choose, then <a href="http://lifehacker.com/5927052/whats-the-difference-between-all-these-audio-formats-and-which-one-should-i-use">this article</a> by Lifehacker is a good starting point. Also see the <a href="http://en.wikipedia.org/wiki/Comparison_of_audio_coding_formats">comparison of audio coding formats</a> on Wikipedia. If still uncertain, just go with good old MP3 😉</p>
-<p><img src="img/lamexp/tutorial_3a.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_3a.png" alt="Figure" /></p>
 <p> <br />Once you have decided for an audio format, you need to choose a <em>rate-control</em> mode next. The available rate-control modes include VBR (quality-base variable bitrate), ABR (average bitrate) and CBR (constant bitrate). Not all modes are available for all audio formats.</p>
 <p><em>Note:</em> If you are uncertain which rate-control mode to chose, the guideline is that VBR mode should be preferred over ABR mode whenever possible. And CBR mode generally should be avoided. See also Wikipedia's article on <a href="http://en.wikipedia.org/wiki/Variable_bitrate">variable bitrate</a> encoding.</p>
-<p><img src="img/lamexp/tutorial_3b.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_3b.png" alt="Figure" /></p>
 <p> <br />Last but not least, you need to choose the desired target <em>bitrate</em> or <em>quality-level</em>. Put simply, this controls the &quot;quality vs. file size&quot; trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode.</p>
 <p><em>Note:</em> If you are uncertain which bitrate or quality-level to choose, bare in mind that a higher bitrate (or a better quality level) results in better audio quality, but also produces larger files – and vice versa. &quot;Level 2&quot; or &quot;192 kbps&quot; is a typical choice for MP3.</p>
-<p><img src="img/lamexp/tutorial_3c.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_3c.png" alt="Figure" /></p>
 <p> <br /><em>Did you know?</em> You can click on the &quot;Reset&quot; link at any time in order to reset all available settings for all available encoders to their factory defaults.</p>
 <h2 id="processing"><span class="header-section-number">4.4</span> Processing</h2>
 <p>When everything has been set up properly, the time has come to actually start the encoding process. So simply click the &quot;Encode Now&quot; button in order to get going!</p>
-<p><img src="img/lamexp/tutorial_4a.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_4a.png" alt="Figure" /></p>
 <p> <br />This will bring up the &quot;Processing&quot; dialogue. LameXP will now convert all your audio files on the list. Depending on the number of audio files and depending on the performance of your system, this may take several minutes, so please be patient 😉</p>
 <p><em>Note:</em> In order to leverage the power &quot;multi-core&quot; processors and thus massively speed-up the encoding process, LameXP will run multiple encoding jobs in parallel – provided that your system has multiple processor cores and that there are enough encoding jobs left in the queue.</p>
-<p><img src="img/lamexp/tutorial_4b.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_4b.png" alt="Figure" /></p>
 <p> <br />The &quot;Processing&quot; dialogue is going to turn <em>green</em>, as soon as all encoding jobs have finished successfully. If anything went wrong, e.g. if one of the encoding jobs failed for some reason, it will turn <em>red</em> instead.</p>
-<p><img src="img/lamexp/tutorial_4c.png" alt="Tutorial" /></p>
+<p><img src="img/lamexp/tutorial_4c.png" alt="Figure" /></p>
 <p> <br /><em>Did you know?</em> You can double-click on a completed (or failed) job in the list, in order to bring up a dialogue with all details about the specific job. This is especially useful, if something went wrong.</p>
 <h1 id="help-support"><span class="header-section-number">5</span> Help &amp; Support</h1>
 <p>Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be <em>reproduced</em> with the <strong>latest</strong> release version of LameXP!</p>
@@ -342,6 +351,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p> <br /><em>Note:</em> Static libraries only work with the exactly same compiler (version) they were built with!</p>
 <h1 id="f.a.q.-frequently-asked-questions"><span class="header-section-number">7</span> F.A.Q. (Frequently Asked Questions)</h1>
 <p><strong>TODO</strong></p>
-<p><strong>eof</strong></p>
+<p> <br /> <br /><strong>EOF</strong></p>
 </body>
 </html>
