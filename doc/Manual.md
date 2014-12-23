@@ -184,9 +184,12 @@ Congratulation, LameXP has been installed successfully on your computer! Now dou
 Install the AAC Encoder
 -----------------------
 
-For legal reasons, the AAC (Advanced Audio Coding) encoder can **not** be included in the official LameXP distribution packages. Therefore, you need to download and install the AAC encoder *manually*.
+For legal reasons, the AAC (Advanced Audio Coding) encoder can **not** be included in the official LameXP distribution packages. Therefore, you need to download and install the AAC encoder *manually*. Don't worry, it's easy!
 
-LameXP can use the *Nero Digital* AAC encoder as well as the *Apple* (iTunes/QucikTime) AAC encoder. This chapter describes how to set up these AAC encoder for use with LameXP.
+LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple iTunes/QuickTime) encoder. This chapter describes how to set up these AAC encoder for use with LameXP.
+
+*Note:* If you are uncertain which AAC encoder to choose, be aware that the QAAC encoder may produce slightly better sound quality, according to [listening tests](http://listening-tests.hydrogenaud.io/igorc/aac-96-a/results.html), while the Nero Digital encoder is less hassle to install.
+
 
 ### Nero Digital AAC Encoder ###
 
