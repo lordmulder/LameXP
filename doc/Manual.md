@@ -131,16 +131,17 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 Install Instructions
 ====================
 
+This chapter explains how to install the LameXP software on your computer. If LameXP has already been installed on your computer, you may skip this chapter.
 
 Install the LameXP Software
 ---------------------------
 
-The LameXP software is provided in two different forms: a self-running **setup program** and a **ZIP package**. For regular users, using the *setup program* is highly recommended!
+Distribution packages of the LameXP software is provided in two different flavours: a self-running **setup program** and a **ZIP package**. For regular users, using the *setup program* is highly recommended!
 
 
 ### Setup Program ###
 
-In order to start the installation process, simply double-click on the LameXP setup program, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.exe``.
+In order to start the installation process, simply double-click on the downloaded LameXP **setup program**, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.exe``.
 
 *Note:* Shortly after launching the setup program, an [UAC](http://en.wikipedia.org/wiki/User_Account_Control) (User Access Control) dialogue may appear. This is a standard Windows security feature, so don't worry! You have to choose "Yes", if you wish to continue the installation process.
 
@@ -163,7 +164,21 @@ Congratulation, LameXP has been installed successfully on your computer!
 
 ### ZIP Package ###
 
-**TODO**
+If you decided for the **ZIP package**, you need to open the downloaded ZIP file, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.zip``, in your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)).
+
+![Figure](img/lamexp/setup_2a.png)
+
+&nbsp;  
+This step may be slightly different, depending on what file archive software (e.g. 7-Zip or WinRAR) you are using. Select **all** files in the LameXP ZIP archive and *extract* them to a new/empty directory of your choice.
+
+*Note:* It is very important that you have write-access to the chosen destination directory. So make sure that you choose a directory where the required access rights are granted!
+
+![Figure](img/lamexp/setup_2b.png)
+
+&nbsp;  
+Congratulation, LameXP has been installed successfully on your computer! Now double-click on the ``LameXP.exe`` program file in order to launch the application!
+
+![Figure](img/lamexp/setup_2c.png)
 
 
 Install the AAC Encoder
@@ -187,7 +202,7 @@ Simply scroll down, click the "I agree" button, and enter ``user@example.com`` w
 ![Figure](img/lamexp/setup_3a.png)
 
 &nbsp;  
-Now open the downloaded ZIP file with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRar](http://www.rarlab.com/download.htm)) and navigate to the "win32" sub-directory.
+Now open the downloaded ZIP file with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and navigate to the "win32" sub-directory.
 
 ![Figure](img/lamexp/setup_3b.png)
 
@@ -222,7 +237,7 @@ First of all, you need to add all **source files** that you want to convert. So 
 ![Figure](img/lamexp/tutorial_1a.png)
 
 &nbsp;  
-This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the "Open" button. You can repeat this step multiple, e.g. to add files from different directories.
+This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the "Open" button. You can repeat this step multiple times, e.g. to add files from different directories.
 
 ![Figure](img/lamexp/tutorial_1b.png)
 
