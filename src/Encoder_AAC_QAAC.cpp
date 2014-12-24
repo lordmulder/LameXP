@@ -184,14 +184,14 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
-	if(!metaInfo.title().isEmpty()) args << "--title" << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty()) args << "--artist" << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty()) args << "--album" << cleanTag(metaInfo.album());
-	if(!metaInfo.genre().isEmpty()) args << "--genre" << cleanTag(metaInfo.genre());
+	if(!metaInfo.title().isEmpty())   args << "--title"   << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << "--artist"  << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << "--album"   << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << "--genre"   << cleanTag(metaInfo.genre());
 	if(!metaInfo.comment().isEmpty()) args << "--comment" << cleanTag( metaInfo.comment());
-	if(metaInfo.year()) args << "--date" << QString::number(metaInfo.year());
-	if(metaInfo.position()) args << "--track" << QString::number(metaInfo.position());
-	if(!metaInfo.cover().isEmpty()) args << "--artwork" << metaInfo.cover();
+	if(metaInfo.year())               args << "--date"    << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << "--track"   << QString::number(metaInfo.position());
+	if(!metaInfo.cover().isEmpty())   args << "--artwork" << metaInfo.cover();
 
 	args << "-d" << ".";
 	args << "-o" << QDir::toNativeSeparators(outputFile);

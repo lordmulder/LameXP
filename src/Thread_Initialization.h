@@ -54,9 +54,9 @@ protected:
 private:
 	void delay(void);
 	void initTranslations(void);
-	void initNeroAac(void);
-	void initFhgAac(void);
-	void initQAac(void);
+	void initAacEnc_Nero(void);
+	void initAacEnc_FHG(void);
+	void initAacEnc_QAAC(void);
 
 	bool m_bSuccess;
 	MUtils::CPUFetaures::cpu_info_t m_cpuFeatures;

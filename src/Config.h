@@ -34,8 +34,8 @@
 #define VER_LAMEXP_MINOR_HI					1
 #define VER_LAMEXP_MINOR_LO					1
 #define VER_LAMEXP_TYPE						Beta
-#define VER_LAMEXP_PATCH					11
-#define VER_LAMEXP_BUILD					1650
+#define VER_LAMEXP_PATCH					12
+#define VER_LAMEXP_BUILD					1654
 #define VER_LAMEXP_CONFG					1558
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -51,8 +51,8 @@
 
 #define VER_LAMEXP_TOOL_NEROAAC				1540
 #define VER_LAMEXP_TOOL_FHGAACENC			20120806
-#define VER_LAMEXP_TOOL_QAAC				233
-#define VER_LAMEXP_TOOL_COREAUDIO			7900
+#define VER_LAMEXP_TOOL_QAAC				244
+#define VER_LAMEXP_TOOL_COREAUDIO			7980
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper macros (aka: having fun with the C pre-processor)

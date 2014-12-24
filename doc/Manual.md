@@ -263,7 +263,7 @@ Instead, open the QuickTimer setup program, i.e. ``QuickTimeInstaller.exe``, wit
 ![Figure](img/lamexp/setup_4c.png)
 
 &nbsp;  
-After the "Apple Application Support" setup package has been extracted, launch the installer by double-clicking on the ``AppleApplicationSupport.msi`` file and follow the installer's instructions.
+After the "Apple Application Support" setup package has been extracted, you can launch it by double-clicking on the ``AppleApplicationSupport.msi`` file. Then simply follow the installer's instructions.
 
 ![Figure](img/lamexp/setup_4d.png)
 
