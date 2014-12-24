@@ -45,7 +45,7 @@
 </ul></li>
 <li><a href="#install-the-aac-encoder"><span class="toc-section-number">3.2</span> Install the AAC Encoder</a><ul>
 <li><a href="#nero-digital-aac-encoder"><span class="toc-section-number">3.2.1</span> Nero Digital AAC Encoder</a></li>
-<li><a href="#qaacapple-aac-encoder"><span class="toc-section-number">3.2.2</span> QAAC/Apple AAC Encoder</a></li>
+<li><a href="#qaac-apple-aac-encoder"><span class="toc-section-number">3.2.2</span> QAAC (Apple AAC) Encoder</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#tutorial-step-by-step-guide"><span class="toc-section-number">4</span> Tutorial (Step-by-Step Guide)</a><ul>
@@ -200,12 +200,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p><img src="img/lamexp/setup_3a.png" alt="Figure" /></p>
 <p> <br />Now open the downloaded ZIP file with your favourite file archive software (we recommend using <a href="http://www.7-zip.org/">7-Zip</a> or <a href="http://www.rarlab.com/download.htm">WinRAR</a>) and navigate to the &quot;win32&quot; sub-directory.</p>
 <p><img src="img/lamexp/setup_3b.png" alt="Figure" /></p>
-<p> <br />Finally, <em>extract</em> all the three files <code>neroAacDec.exe</code>, <code>neroAacEnc.exe</code> and <code>neroAacTag.exe</code> into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. <code>LameXP.exe</code>, is located.</p>
+<p> <br />Finally, <em>extract</em> all the three files <code>neroAacDec.exe</code>, <code>neroAacEnc.exe</code> and <code>neroAacTag.exe</code> into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the <code>LameXP.exe</code>, is located.</p>
 <p><em>Note:</em> By default, the LameXP installation directory is either <code>C:\Program Files (x86)\MuldeR\LameXP</code> or <code>C:\Program Files\MuldeR\LameXP</code>. However, this can be changed by the user during the setup process.</p>
 <p><img src="img/lamexp/setup_3c.png" alt="Figure" /></p>
 <p> <br />Once the required Nero AAC files have been put into the proper place, simply <em>restart</em> LameXP in order to enable the AAC encoding support!</p>
-<h3 id="qaacapple-aac-encoder"><span class="header-section-number">3.2.2</span> QAAC/Apple AAC Encoder</h3>
-<p><strong>TODO</strong></p>
+<h3 id="qaac-apple-aac-encoder"><span class="header-section-number">3.2.2</span> QAAC (Apple AAC) Encoder</h3>
+<p>Getting the Apple/QuickTime AAC encoder ready involves <em>two</em> separate steps: In the first place we will install the QAAC encoder, and in the second place we will install the Apple AAC encoder libraries.</p>
+<h4 id="install-qaac-encoder"><span class="header-section-number">3.2.2.1</span> Install QAAC Encoder</h4>
+<p>First of all, you need to download the <a href="https://github.com/nu774/qaac">QAAC</a> application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an <em>Add-in</em> for LameXP and is available from the following locations:</p>
+<ul>
+<li><a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/">http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/</a><br /></li>
+<li><a href="http://muldersoft.com/misc/lamexp/add-ins/qaac/">http://muldersoft.com/misc/lamexp/add-ins/qaac/</a></li>
+</ul>
+<p> <br />Now open the downloaded ZIP file, e.g. <code>LameXP.qaac-addin.yyyy-mm-dd.zip</code>, with your favourite file archive software (we recommend using <a href="http://www.7-zip.org/">7-Zip</a> or <a href="http://www.rarlab.com/download.htm">WinRAR</a>) to find the required QAAC program files.</p>
+<p><em>Note:</em> The LameXP software generally expects the <strong>latest</strong> version of the QAAC add-in; and the QAAC add-in is designed to work with the <strong>latest</strong> version of the LameXP software.</p>
+<p><img src="img/lamexp/setup_4a.png" alt="Figure" /></p>
+<p> <br />Please <em>extract</em> all the three files, the program <code>qaac.exe</code> plus its DLLs <code>libsoxr.dll</code> and <code>libsoxconvolver.dll</code>, into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the <code>LameXP.exe</code>, is located.</p>
+<p><em>Note:</em> By default, the LameXP installation directory is either <code>C:\Program Files (x86)\MuldeR\LameXP</code> or <code>C:\Program Files\MuldeR\LameXP</code>. However, this can be changed by the user during the setup process.</p>
+<p><img src="img/lamexp/setup_4b.png" alt="Figure" /></p>
+<h4 id="install-apple-aac-encoder-libraries"><span class="header-section-number">3.2.2.2</span> Install Apple AAC Encoder Libraries</h4>
+<p>Next, the actual Apple/QuickTime AAC encoder libraries, which are part of the so-called &quot;Apple Application Support&quot; package, need to be installed on your computer. QAAC can <em>not</em> work without these libraries!</p>
+<p>The required &quot;Apple Application Support&quot; package is included, for example, in the official setup packages of <em>QuickTime</em> or <em>iTunes</em> for Windows, which can be obtained from the Apple web-site free of charge:</p>
+<ul>
+<li><a href="https://www.apple.com/quicktime/download/">https://www.apple.com/quicktime/download/</a></li>
+</ul>
+<p> <br />Since you usually do <strong>not</strong> want to <em>install</em> the complete QuickTime (or iTunes) software on your computer, please only <em>download</em> the QuickTime (or iTunes) setup package, but do <strong>not</strong> actually <em>run</em> the installer!</p>
+<p>Instead, open the QuickTimer setup program, i.e. <code>QuickTimeInstaller.exe</code>, with your favourite file archive software (we recommend using <a href="http://www.7-zip.org/">7-Zip</a> or <a href="http://www.rarlab.com/download.htm">WinRAR</a>) and <em>extract</em> the required <code>AppleApplicationSupport.msi</code> package.</p>
+<p><img src="img/lamexp/setup_4c.png" alt="Figure" /></p>
 <h1 id="tutorial-step-by-step-guide"><span class="header-section-number">4</span> Tutorial (Step-by-Step Guide)</h1>
 <p>This tutorial will teach you, step by step, how to convert your audio files using the LameXP software. The tutorial assumes that LameXP is already installed on your computer.</p>
 <h2 id="source-files"><span class="header-section-number">4.1</span> Source Files</h2>
