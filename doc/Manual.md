@@ -224,6 +224,7 @@ Once the required Nero AAC files have been put into the proper place, simply *re
 
 Getting the Apple/QuickTime AAC encoder ready involves *two* separate steps: In the first place we will install the QAAC encoder, and in the second place we will install the Apple AAC encoder libraries.
 
+
 #### Install QAAC Encoder ####
 
 First of all, you need to download the [QAAC](https://github.com/nu774/qaac) application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an *Add-in* for LameXP and is available from the following locations:
@@ -234,7 +235,7 @@ First of all, you need to download the [QAAC](https://github.com/nu774/qaac) app
 &nbsp;  
 Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) to find the required QAAC program files.
 
-*Note:* The LameXP software generally expects the **latest** version of the QAAC add-in; and the QAAC add-in is designed to work with the **latest** version of the LameXP software.
+*Note:* The LameXP software generally expects the **latest** version of the QAAC add-in; and the QAAC add-in is designed to work with the **latest** version of the LameXP software. Make sure your files are up-to-date!
 
 ![Figure](img/lamexp/setup_4a.png)
 
@@ -244,6 +245,7 @@ Please *extract* all the three files, the program ``qaac.exe`` plus its DLLs ``l
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
 ![Figure](img/lamexp/setup_4b.png)
+
 
 #### Install Apple AAC Encoder Libraries ####
 
@@ -259,6 +261,14 @@ Since you usually do **not** want to *install* the complete QuickTime (or iTunes
 Instead, open the QuickTimer setup program, i.e. ``QuickTimeInstaller.exe``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and *extract* the required ``AppleApplicationSupport.msi`` package.
 
 ![Figure](img/lamexp/setup_4c.png)
+
+&nbsp;  
+After the "Apple Application Support" setup package has been extracted, launch the installer by double-clicking on the ``AppleApplicationSupport.msi`` file and follow the installer's instructions.
+
+![Figure](img/lamexp/setup_4d.png)
+
+&nbsp;  
+Once the QAAC encoder as well as the Apple AAC encoder libraries ("Apple Application Support") have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
 
 
 Tutorial (Step-by-Step Guide)
