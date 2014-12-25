@@ -109,10 +109,13 @@ if "%LAMEXP_REDIST%"=="1" (
 	for %%i in (Core,Gui,Network,Xml,Svg) do (
 		copy "%QTDIR%\bin\Qt%%i4.dll" "%TMP_PATH%"
 	)
-	copy "%QTDIR%\plugins\imageformats\q???4.dll" "%TMP_PATH%\imageformats"
+	for %%i in (gif,ico,jpeg,mng,svg,tga,tiff) do (
+		copy "%QTDIR%\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
+	)
 	for %%i in (100,110,120) do (
 		if exist "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\*.dll" (
-			copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\*.dll" "%TMP_PATH%"
+			copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\msvcr%%i.dll" "%TMP_PATH%"
+			copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\msvcp%%i.dll" "%TMP_PATH%"
 		)
 	)
 )
