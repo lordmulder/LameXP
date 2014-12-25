@@ -150,6 +150,7 @@ if exist "%~dp0\_postproc.bat" (
 attrib +R "%TMP_PATH%\*.txt"
 attrib +R "%TMP_PATH%\*.html"
 attrib +R "%TMP_PATH%\*.exe"
+attrib +R "%TMP_PATH%\*.dll"
 
 :: ---------------------------------------------------------------------------
 :: CREATE PACKAGES
