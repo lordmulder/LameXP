@@ -199,6 +199,7 @@ private:
 	bool checkForUpdates(void);
 	void initializeTranslation(void);
 	void refreshFavorites(void);
+	void openDocumentLink(QAction *const action);
 	
 	bool m_accepted;
 	bool m_firstTimeShown;

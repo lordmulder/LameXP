@@ -1073,10 +1073,6 @@
         <translation type="unfinished">쉘 통합 비활성화</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation type="unfinished">잦은 질문 답변</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation type="unfinished">업데이트 정보</translation>
     </message>
@@ -1996,6 +1992,10 @@
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

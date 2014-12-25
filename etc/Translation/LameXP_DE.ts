@@ -1420,10 +1420,6 @@
         <translation>Es wird empfohlen %1 für diesen Zweck zu verwenden.</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation>Häufig gestellte Fragen</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation>Versionshistorie</translation>
     </message>
@@ -2005,6 +2001,10 @@
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
         <translation>Hydrogenaudio Wissensdatenbank</translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
+        <translation>LameXP Benutzerhandbuch</translation>
     </message>
 </context>
 <context>

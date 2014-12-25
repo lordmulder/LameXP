@@ -221,6 +221,7 @@ while(0)
 
 static const unsigned int IDM_ABOUTBOX = 0xEFF0;
 static const char *g_hydrogen_audio_url = "http://wiki.hydrogenaud.io/index.php?title=Main_Page";
+static const char *g_documents_base_url = "http://lamexp.sourceforge.net/doc";
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -649,7 +650,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->actionVisitMuldersSite ->setData(QString::fromLatin1(lamexp_mulders_url()));
 	ui->actionVisitTracker     ->setData(QString::fromLatin1(lamexp_tracker_url()));
 	ui->actionVisitHAK         ->setData(QString::fromLatin1(g_hydrogen_audio_url));
-	ui->actionDocumentFAQ      ->setData(QString("%1/FAQ.html").arg(QApplication::applicationDirPath()));
+	ui->actionDocumentManual   ->setData(QString("%1/Manual.html")   .arg(QApplication::applicationDirPath()));
 	ui->actionDocumentChangelog->setData(QString("%1/Changelog.html").arg(QApplication::applicationDirPath()));
 	ui->actionDocumentTranslate->setData(QString("%1/Translate.html").arg(QApplication::applicationDirPath()));
 	connect(ui->actionCheckUpdates,      SIGNAL(triggered()), this, SLOT(checkUpdatesActionActivated()));
@@ -658,7 +659,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->actionVisitHomepage,     SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
 	connect(ui->actionVisitMuldersSite,  SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
 	connect(ui->actionVisitHAK,          SIGNAL(triggered()), this, SLOT(visitHomepageActionActivated()));
-	connect(ui->actionDocumentFAQ,       SIGNAL(triggered()), this, SLOT(documentActionActivated()));
+	connect(ui->actionDocumentManual,    SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(ui->actionDocumentChangelog, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	connect(ui->actionDocumentTranslate, SIGNAL(triggered()), this, SLOT(documentActionActivated()));
 	
@@ -992,6 +993,31 @@ void MainWindow::initializeTranslation(void)
 	{
 		qFatal("Failed to load any translation, this is NOT supposed to happen!");
 	}
+}
+
+/*
+ * Open a document link
+ */
+void MainWindow::openDocumentLink(QAction *const action)
+{
+	if(!(action->data().isValid() && (action->data().type() == QVariant::String)))
+	{
+		qWarning("Cannot open document for this QAction!");
+		return;
+	}
+
+	//Try to open exitsing document file
+	const QFileInfo document(action->data().toString());
+	if(document.exists() && document.isFile() && (document.size() >= 1024))
+	{
+		QDesktopServices::openUrl(QUrl::fromLocalFile(document.canonicalFilePath()));
+		return;
+	}
+
+	//Document not found -> fallback mode!
+	qWarning("Document '%s' not found -> redirecting to the website!", MUTILS_UTF8(document.fileName()));
+	const QUrl url(QString("%1/%2").arg(QString::fromLatin1(g_documents_base_url), document.fileName()));
+	QDesktopServices::openUrl(url);
 }
 
 ////////////////////////////////////////////////////////////
@@ -2212,28 +2238,7 @@ void MainWindow::documentActionActivated(void)
 {
 	if(QAction *action = dynamic_cast<QAction*>(QObject::sender()))
 	{
-		if(action->data().isValid() && (action->data().type() == QVariant::String))
-		{
-			QFileInfo document(action->data().toString());
-			QFileInfo resource(QString(":/doc/%1.html").arg(document.baseName()));
-			if(document.exists() && document.isFile() && (document.size() == resource.size()))
-			{
-				QDesktopServices::openUrl(QUrl::fromLocalFile(document.canonicalFilePath()));
-			}
-			else
-			{
-				QFile source(resource.filePath());
-				QFile output(QString("%1/%2.%3.html").arg(MUtils::temp_folder(), document.baseName(), MUtils::rand_str().left(8)));
-				if(source.open(QIODevice::ReadOnly) && output.open(QIODevice::ReadWrite))
-				{
-					output.write(source.readAll());
-					action->setData(output.fileName());
-					source.close();
-					output.close();
-					QDesktopServices::openUrl(QUrl::fromLocalFile(output.fileName()));
-				}
-			}
-		}
+		openDocumentLink(action);
 	}
 }
 

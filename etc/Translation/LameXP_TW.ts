@@ -1416,10 +1416,6 @@
         <translation>對不起,LameXP 目前無法從音頻 CD 提取音頻軌道.</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation>常問的問題</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation>更改日志</translation>
     </message>
@@ -1995,6 +1991,10 @@
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

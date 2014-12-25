@@ -1399,10 +1399,6 @@
         <translation>Зберігати тимчасові файли у відповідній системній теці (Рекомендовано)</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation>Часті Питання (FAQ)</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation>Лог змін</translation>
     </message>
@@ -2013,6 +2009,10 @@
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
         <translation>База знань Hydrogenaudio</translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

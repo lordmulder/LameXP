@@ -1416,10 +1416,6 @@
         <translation>对不起,LameXP 目前无法从音频 CD 提取音轨。</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation>常见问题</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation>更新日志</translation>
     </message>
@@ -1996,6 +1992,10 @@
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
         <translation>Hydrogenaudio知识库</translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

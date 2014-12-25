@@ -1,8 +1,9 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
-    <file>../doc/FAQ.html</file>
     <file>../doc/Changelog.html</file>
+    <file>../doc/FAQ.html</file>
+    <file>../doc/Manual.html</file>
     <file>../doc/Translate.html</file>
     <file>../License.txt</file>
   </qresource>

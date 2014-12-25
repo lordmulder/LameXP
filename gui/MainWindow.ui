@@ -1509,8 +1509,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>613</width>
-               <height>1759</height>
+               <width>602</width>
+               <height>1750</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -4335,7 +4335,7 @@
     <addaction name="actionVisitSupport"/>
     <addaction name="actionVisitTracker"/>
     <addaction name="separator"/>
-    <addaction name="actionDocumentFAQ"/>
+    <addaction name="actionDocumentManual"/>
     <addaction name="actionDocumentChangelog"/>
     <addaction name="actionDocumentTranslate"/>
     <addaction name="separator"/>
@@ -4645,13 +4645,13 @@
     <string>Disable Shell Integration</string>
    </property>
   </action>
-  <action name="actionDocumentFAQ">
+  <action name="actionDocumentManual">
    <property name="icon">
     <iconset resource="../res/Icons.qrc">
      <normaloff>:/icons/report.png</normaloff>:/icons/report.png</iconset>
    </property>
    <property name="text">
-    <string>Frequently Asked Questions</string>
+    <string>LameXP User's Manual</string>
    </property>
   </action>
   <action name="actionDocumentChangelog">

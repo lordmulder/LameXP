@@ -1419,10 +1419,6 @@
         <translation>Disculpe, LameXP no puede extraer las pistas del CD-Audio.</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation>Preguntas Frecuentes</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation>Cambios</translation>
     </message>
@@ -2003,6 +1999,10 @@
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

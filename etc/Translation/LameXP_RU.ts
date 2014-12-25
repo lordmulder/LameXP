@@ -1439,10 +1439,6 @@
         <translation>Извините, LameXP не может извлечь аудио из Audio-CD сейчас.</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation>Часто Задаваемые Вопросы</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation>Список изменений</translation>
     </message>
@@ -2017,6 +2013,10 @@
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

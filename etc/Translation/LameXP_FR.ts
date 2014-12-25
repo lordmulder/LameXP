@@ -1427,10 +1427,6 @@ Sélection automatique (par défaut)</translation>
         <translation>Désolé, LameXP ne peut pas extraire les pistes d&apos;un CD-Audio à l&apos;heure actuelle.</translation>
     </message>
     <message>
-        <source>Frequently Asked Questions</source>
-        <translation>Foire Aux Questions</translation>
-    </message>
-    <message>
         <source>Changelog</source>
         <translation>Journal des changements</translation>
     </message>
@@ -2012,6 +2008,10 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LameXP User&apos;s Manual</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
