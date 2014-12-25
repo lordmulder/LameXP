@@ -97,7 +97,7 @@ for %%i in (exe,sfx,zip,txt) do (
 "%~dp0\..\Utilities\CEcho.exe" cyan "Copying binary files..."
 "%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
 
-rd /S /Q "%TMP_PATH%"
+rd /S /Q "%TMP_PATH%" 2> NUL
 mkdir "%TMP_PATH%"
 
 for %%i in (exe,dll) do (
@@ -126,22 +126,25 @@ for %%e in (exe,dll) do (
 	)
 )
 
-if exist "%~dp0\_postproc.bat" (
-	call "%~dp0\_postproc.bat" "%TMP_PATH%"
-)
+copy "%~dp0\..\..\ReadMe.txt"           "%TMP_PATH%"
+copy "%~dp0\..\..\License.txt"          "%TMP_PATH%"
+copy "%~dp0\..\..\Copying.txt"          "%TMP_PATH%"
+copy "%~dp0\..\..\doc\Changelog.html"   "%TMP_PATH%"
+copy "%~dp0\..\..\doc\Translate.html"   "%TMP_PATH%"
+copy "%~dp0\..\..\doc\Manual.html"      "%TMP_PATH%"
+copy "%~dp0\..\..\doc\FAQ.html"         "%TMP_PATH%"
 
-copy "%~dp0\..\..\ReadMe.txt"         "%TMP_PATH%"
-copy "%~dp0\..\..\License.txt"        "%TMP_PATH%"
-copy "%~dp0\..\..\Copying.txt"        "%TMP_PATH%"
-copy "%~dp0\..\..\doc\Changelog.html" "%TMP_PATH%"
-copy "%~dp0\..\..\doc\Translate.html" "%TMP_PATH%"
-copy "%~dp0\..\..\doc\Manual.html"    "%TMP_PATH%"
-copy "%~dp0\..\..\doc\FAQ.html"       "%TMP_PATH%"
+mkdir "%TMP_PATH%\img\lamexp"
+copy "%~dp0\..\..\doc\img\lamexp\*.png" "%TMP_PATH%\img\lamexp"
 
 if not "%VER_LAMEXP_TYPE%" == "Final" (
 	if not "%VER_LAMEXP_TYPE%" == "Hotfix" (
 		copy "%~dp0\..\..\doc\PRE_RELEASE_INFO.txt" "%TMP_PATH%"
 	)
+)
+
+if exist "%~dp0\_postproc.bat" (
+	call "%~dp0\_postproc.bat" "%TMP_PATH%"
 )
 
 attrib +R "%TMP_PATH%\*.txt"
