@@ -3,11 +3,13 @@
 Introduction
 ============
 
-LameXP is a graphical user-interface (front-end) for various of audio encoders: It allows you convert your audio files from one audio format to another one in the most simple way. Despite its name, LameXP is NOT only a front-end for the LAME encoder, but supports a wide range of output formats, including MP3, Ogg Vorbis, AAC/MP4, FLAC, AC-3 and Wave Audio. The number of supported input formats is even bigger! Furthermore LameXP does NOT only run on Windows XP, but also on Windows Vista, Windows 7 and many other operating systems.
+LameXP is a graphical user-interface (front-end) for various of audio encoders: It allows you to convert your audio files from one audio format to another one in the most simple way. Despite its name, LameXP is **not** only a front-end for the LAME MP3 encoder, but supports a wide range of *output formats*, including MP3, Ogg Vorbis, Opus, AAC/MP4, FLAC, AC-3 and Wave Audio. The number of supported *input formats* is even bigger! Furthermore LameXP **not** only runs on Windows XP, but also on Windows 7, 8 and 10 as well as many other operating systems.
 
 ![LameXP](http://lamexp.sourceforge.net/lamexp.png)
 
-As all the encoders and decoders used by LameXP are already "built-in" (with one exception), you do NOT need to install any additional software, such as "Codecs", "Filters" or "Plug-ins", on your computer. Everything works "out of the box"! You can even use LameXP as a "portable" application, e.g. run it from your USB stick. Moreover LameXP was designed for batch processing. This means that you can convert a huge number of audio files, e.g. a complete album or even your entire music collection, in a single step. And, as LameXP is able to process several audio files in parallel, it takes full advantage of modern multi-core processors! However LameXP is NOT only optimized for speed, it also provides excellent sound quality by using the most sophisticated encoders available and by giving the user unrestricted control over all encoding parameters. In addition to that, LameXP provides full support for metadata, including cover art. So when converting your audio files, LameXP will retain existing meta tags. But there also is an easy-to-use editor for adding or modifying metadata. LameXP supports Unicode for both, meta tags and filenames, so there won't be any problems with "foreign" characters. And, thanks to our translators, the user-interface of LameXP is available in multiple languages. Last but not least, LameXP supports a number of post-processing filters, including sample rate conversion, normalization (gain), tone adjustment and downmixing of multi-channel sources.
+Since all the encoders and decoders that are used by the LameXP software are already *built-in* (with one exception), you do **not** need to install any additional software, such as "Codecs", "Filters" or "Plug-ins", on your computer. Everything works "out of the box". You can even use LameXP as a "portable" application, i.e. you can run LameXP directly off your USB stick. Moreover, LameXP was designed for *batch processing*. This means that you can convert a huge number of audio files, e.g. a complete album or even your entire music collection, in just a single step. At the same time, LameXP is able to process several audio files *concurrently*, so it can take full advantage of modern *multi-core* processors! However, LameXP is **not** only optimized for speed, it also provides excellent sound quality by using the most sophisticated audio encoders currently available.
+
+In addition to that, LameXP provides full support for *meta information*, including cover artwork. So when converting your audio files with LameXP, any existing meta information will be retained &ndash; to the highest possible extent. Of course, there also is an easy-to-use *meta-tag editor* for adding new meta information or managing the existing meta information. On top of it all, LameXP provides full *Unicode support*, for meta information as well as file names, thus problems with "intentional" character sets are avoided. Likewise, thanks to our *translators*, the user-interface of the LameXP software is available in many different languages, including English, German, Spanish and Chinese. Last but not least, LameXP supports a number of post-processing filters, including sample rate conversion, normalization (gain adjustment), tone adjustment as well as down-mixing.
 
 
 Platform Support
@@ -30,7 +32,7 @@ Platform Support
 * Microsoft Windows Server 2008 R2 with Service Pack 1
 * GNU/Linux (e.g. Ubuntu 12.04), using Wine v1.4+
 
-**Legacy:** The following platforms are NOT actively supported any longer:
+The following *legacy* platforms are **not** actively supported any longer:
 
 * Microsoft Windows 2000
 * Microsoft Windows NT 4.0
@@ -39,7 +41,7 @@ Platform Support
 * Microsoft Windows 95
 
 &nbsp;  
-*Remarks:* Windows XP has reached "end of life" on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP, i.e. *no* updates or bugfixes are made available to regular Windows XP uses since that date, *not* even security fixes! Thus, all the security vulnerabilities that have been discovered *after* this deadline - and all the security vulnerabilities that will be discovered in the future - are going remain *unfixed* forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we *highly* recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.
+*Remarks:* Windows XP has reached "end of life" on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP. Thus **no** updates or bugfixes are made available to regular Windows XP users since that date, **not** even security fixes! Thus, all the security vulnerabilities that have been discovered *after* the deadline &ndash; and all the security vulnerabilities that are going to be discovered in the future &ndash; will *persists* forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we *highly* recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.
 
 
 Output Formats (Encoders)
@@ -181,14 +183,41 @@ Congratulation, LameXP has been installed successfully on your computer! Now dou
 ![Figure](img/lamexp/setup_2c.png)
 
 
+Portable Mode
+-------------
+
+First of all, it is important to note that there is **no** such thing as a *separate* "portable version" or "portable edition" of the LameXP software. Instead, **all** versions of the LameXP software always *are* "portable" &ndash; in the sense that the LameXP software is *fully self-contained* and thus **no** additional dependencies (libraries, frameworks, codecs or whatsoever) need to be installed on the computer separately. Or, in other words, the LameXP software is designed to work "out of the box". And this applies regardless of whether you choose the setup program or the ZIP package!
+
+Nonetheless, the LameXP software supports a so-called "portable mode", which can be enabled or disabled at any time. By default, i.e. when the "portable mode" is **not** enabled, LameXP will store all of its configuration files in the current user's [``%APPDATA%``](http://en.wikipedia.org/wiki/Environment_variable#Windows) directory. This is the correct way of storing *user-specific* configuration files on a modern multi-user operating system. Some users, however, may wish to use LameXP as a *portable application*. For example, they may wish to run the LameXP software directly off an USB flash drive &ndash; and do that on many *different* machines. In this particular situation, storing the configuration files in the *same* location where the LameXP program file resides (e.g. on the USB flash drive), instead of the local ``%APPDATA%`` directory, may come in handy! And that is exactly what LameXP does when the "portable mode" is *enabled*.
+
+
+### Enable the Portable Mode ###
+
+If you fully understand what the consequences of the "portable mode" are and still want to *enable* this mode, then simply **rename** the LameXP program file form ``LameXP.exe`` to ``LameXP-Portable.exe``. You must exit LameXP, before you can rename the program file!
+
+*Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
+
+![Figure](img/lamexp/setup_3a.png)
+
+&nbsp;  
+**Warning:** While the "portable mode" is in effect, it is the *user's* responsibility to ensure that LameXP will be provided with the proper access rights to save/load its configuration files to/from the LameXP installation directory!
+
+
+### Disable the Portable Mode ###
+
+If you wish to *disable* the "portable mode" again, then all you need to do is **renaming** the LameXP program file form ``LameXP-Portable.exe`` back to ``LameXP.exe``. You must exit LameXP, before you can rename the program file!
+
+*Note:* After the "portable mode" has been *disabled*, any configurations files that may have been created in the LameXP installation directory will **no** longer be recognized. Therefore, you can delete these files safely&hellip;
+
+
 Install the AAC Encoder
 -----------------------
 
 For legal reasons, the AAC (Advanced Audio Coding) encoder can **not** be included in the official LameXP distribution packages. Therefore, you need to download and install the AAC encoder *manually*. Don't worry, it's easy!
 
-LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple iTunes/QuickTime) encoder. This chapter describes how to set up these AAC encoder for use with LameXP.
+LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple iTunes/QuickTime) encoder. This chapter describes how to set up one of these AAC encoders for use with the LameXP software.
 
-*Note:* If you are uncertain which AAC encoder to choose, be aware that the QAAC encoder may produce slightly better sound quality, according to [listening tests](http://listening-tests.hydrogenaud.io/igorc/aac-96-a/results.html), while the Nero Digital encoder is less hassle to install.
+*Note:* If you are uncertain which AAC encoder to choose, please be aware that the QAAC encoder may produce slightly better sound quality, according to [listening tests](http://listening-tests.hydrogenaud.io/igorc/aac-96-a/results.html), while the Nero Digital encoder is less hassle to install.
 
 
 ### Nero Digital AAC Encoder ###
@@ -196,25 +225,26 @@ LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple i
 First of all, you need to download the Nero AAC encoder from the official Nero Digital web-site. The download is free of charge:
 
 * <http://www.nero.com/eng/company/about-nero/nero-aac-codec.php>
+* <http://www.free-codecs.com/download/Nero_AAC_Codec.htm>
 
 &nbsp;  
 Simply scroll down, click the "I agree" button, and enter ``user@example.com`` when asked for an e-mail address. Finally, click the "Download" button, which initates the download of the required ``NeroAACCodec-1.5.1.zip`` file.
 
 *Note:*  Although the ZIP file is called ``NeroAACCodec-1.5.1.zip``, it actually contains version **1.5.4.0** of the Nero AAC encoder software. Please check the included ``changelog.txt`` to verify this!
 
-![Figure](img/lamexp/setup_3a.png)
+![Figure](img/lamexp/setup_4a.png)
 
 &nbsp;  
 Now open the downloaded ZIP file with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and navigate to the "win32" sub-directory.
 
-![Figure](img/lamexp/setup_3b.png)
+![Figure](img/lamexp/setup_4b.png)
 
 &nbsp;  
 Finally, *extract* all the three files ``neroAacDec.exe``, ``neroAacEnc.exe`` and ``neroAacTag.exe`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
-![Figure](img/lamexp/setup_3c.png)
+![Figure](img/lamexp/setup_4c.png)
 
 &nbsp;  
 Once the required Nero AAC files have been put into the proper place, simply *restart* LameXP in order to enable the AAC encoding support!
@@ -237,14 +267,14 @@ Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, wit
 
 *Note:* The LameXP software generally expects the **latest** version of the QAAC add-in; and the QAAC add-in is designed to work with the **latest** version of the LameXP software. Make sure your files are up-to-date!
 
-![Figure](img/lamexp/setup_4a.png)
+![Figure](img/lamexp/setup_5a.png)
 
 &nbsp;  
 Please *extract* all the three files, the program ``qaac.exe`` plus its DLLs ``libsoxr.dll`` and ``libsoxconvolver.dll``, into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
-![Figure](img/lamexp/setup_4b.png)
+![Figure](img/lamexp/setup_5b.png)
 
 
 #### Install Apple AAC Encoder Libraries ####
@@ -254,21 +284,24 @@ Next, the actual Apple/QuickTime AAC encoder libraries, which are part of the so
 The required "Apple Application Support" package is included, for example, in the official setup packages of *QuickTime* or *iTunes* for Windows, which can be obtained from the Apple web-site free of charge:
 
 * <https://www.apple.com/quicktime/download/>
+* <https://www.apple.com/itunes/download/>
 
 &nbsp;  
 Since you usually do **not** want to *install* the complete QuickTime (or iTunes) software on your computer, please only *download* the QuickTime (or iTunes) setup package, but do **not** actually *run* the installer!
 
 Instead, open the QuickTimer setup program, i.e. ``QuickTimeInstaller.exe``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and *extract* the required ``AppleApplicationSupport.msi`` package.
 
-![Figure](img/lamexp/setup_4c.png)
+![Figure](img/lamexp/setup_5c.png)
 
 &nbsp;  
 After the "Apple Application Support" setup package has been extracted, you can launch it by double-clicking on the ``AppleApplicationSupport.msi`` file. Then simply follow the installer's instructions.
 
-![Figure](img/lamexp/setup_4d.png)
+![Figure](img/lamexp/setup_5d.png)
 
 &nbsp;  
 Once the QAAC encoder as well as the Apple AAC encoder libraries ("Apple Application Support") have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
+
+*Note:* You may run ``qaac.exe --check`` from the [command prompt](http://en.wikipedia.org/wiki/Cmd.exe) to ensure that QAAC has been set up correctly. Expected output is ``qaac 2.xx, CoreAudioToolbox x.x.x.x``.
 
 
 Tutorial (Step-by-Step Guide)
@@ -393,6 +426,22 @@ The latest *official* release of the LameXP software can be obtained from one of
 
 &nbsp;  
 It is *highly recommended* to download LameXP *only* from one of the official mirrors listed above. We assume *no responsibility* for the integrity and trustworthiness of LameXP downloads you may have received from other locations!
+
+
+Diagnostic Output
+-----------------
+
+If you want to report any problems that you have encountered with the LameXP software, please provide as much details as possible. *Diagnostic output* can be especially helpful here!
+
+* If a certain encoding job has failed, you can double-click the failed job in the LameXP "Processing" dialogue, which will bring up a detailed *log* for that job. Use the "Copy to Clipboard" button to save that information.
+
+* You can launch the LameXP application with the additional [command-line](http://en.wikipedia.org/wiki/Command-line_interface) parameter ``--console`` in order to enable the LameXP *debug console*, which provides many additional information on what is going on "behind the scenes".
+
+* The [environment variable](http://en.wikipedia.org/wiki/Environment_variable) ``MUTILS_LOGFILE`` may be set in order to specify a log file that will be created by LameXP. The information saved to the log file is the same as the information available from the debug console.
+
+&nbsp;  
+*Note:* We highly recommend using a web-service like [Gist](https://gist.github.com/), [Pastie](http://pastie.org/) or [Pastebin](http://pastebin.com/) in order to share your diagnostic information. Please avoid posting long log files directly on the forums!
+
 
 Bugtracker
 ----------
