@@ -199,7 +199,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p>If you fully understand what the consequences of the &quot;portable mode&quot; are and still want to <em>enable</em> this mode, then simply <strong>rename</strong> the LameXP program file form <code>LameXP.exe</code> to <code>LameXP-Portable.exe</code>. You must exit LameXP, before you can rename the program file!</p>
 <p><em>Note:</em> By default, the LameXP installation directory is either <code>C:\Program Files (x86)\MuldeR\LameXP</code> or <code>C:\Program Files\MuldeR\LameXP</code>. However, this can be changed by the user during the setup process.</p>
 <p><img src="img/lamexp/setup_3a.png" alt="Figure" /></p>
-<p> <br /><strong>Warning:</strong> While the &quot;portable mode&quot; is in effect, it is the <em>user's</em> responsibility to ensure that LameXP will be provided with the proper access rights to save/load its configuration files to/from the LameXP installation directory!</p>
+<h4 id="warning"><span class="header-section-number">3.2.1.1</span> Warning</h4>
+<p>While the &quot;portable mode&quot; is in effect, it is the <em>user's</em> responsibility to ensure that LameXP will be provided with the proper access rights to save/load its configuration files to/from the LameXP program directory!</p>
+<p>Note that the directories <code>C:\Program Files (x86)</code> and <code>C:\Program Files</code> usually are &quot;protected&quot; by the operating system, so LameXP may <strong>not</strong> be able to write into these directories.</p>
 <h3 id="disable-the-portable-mode"><span class="header-section-number">3.2.2</span> Disable the Portable Mode</h3>
 <p>If you wish to <em>disable</em> the &quot;portable mode&quot; again, then all you need to do is <strong>renaming</strong> the LameXP program file form <code>LameXP-Portable.exe</code> back to <code>LameXP.exe</code>. You must exit LameXP, before you can rename the program file!</p>
 <p><em>Note:</em> After the &quot;portable mode&quot; has been <em>disabled</em>, any configurations files that may have been created in the LameXP installation directory will <strong>no</strong> longer be recognized. Therefore, you can delete these files safely…</p>
@@ -302,13 +304,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><a href="http://www.free-codecs.com/lamexp_download.htm">http://www.free-codecs.com/lamexp_download.htm</a><br /></li>
 <li><a href="http://www.videohelp.com/tools/LameXP">http://www.videohelp.com/tools/LameXP</a></li>
 </ul>
-<p> <br />It is <em>highly recommended</em> to download LameXP <em>only</em> from one of the official mirrors listed above. We assume <em>no responsibility</em> for the integrity and trustworthiness of LameXP downloads you may have received from other locations!</p>
+<p> <br />It is <em>highly recommended</em> to download LameXP <em>only</em> from one of the official mirrors listed above. We are <strong>not</strong> responsible for the integrity and trustworthiness of LameXP downloads you may have received from other locations!</p>
 <h2 id="diagnostic-output"><span class="header-section-number">5.2</span> Diagnostic Output</h2>
 <p>If you want to report any problems that you have encountered with the LameXP software, please provide as much details as possible. <em>Diagnostic output</em> can be especially helpful here!</p>
 <ul>
 <li><p>If a certain encoding job has failed, you can double-click the failed job in the LameXP &quot;Processing&quot; dialogue, which will bring up a detailed <em>log</em> for that job. Use the &quot;Copy to Clipboard&quot; button to save that information.</p></li>
-<li><p>You can launch the LameXP application with the additional <a href="http://en.wikipedia.org/wiki/Command-line_interface">command-line</a> parameter <code>--console</code> in order to enable the LameXP <em>debug console</em>, which provides many additional information on what is going on &quot;behind the scenes&quot;.</p></li>
-<li><p>The <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> <code>MUTILS_LOGFILE</code> may be set in order to specify a log file that will be created by LameXP. The information saved to the log file is the same as the information available from the debug console.</p></li>
+<li><p>You can launch the LameXP application with the additional <a href="http://en.wikipedia.org/wiki/Command-line_interface">command-line</a> parameter <code>--console</code> in order to enable the LameXP <em>debug console</em>, which provides many information on what is going on &quot;behind the scenes&quot;.</p></li>
+<li><p>The <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> <code>MUTILS_LOGFILE</code> may be used to specify a <em>log file</em> that will be created by LameXP. The information that are saved to the log file are the same as those available from the debug console.</p></li>
 </ul>
 <p> <br /><em>Note:</em> We highly recommend using a web-service like <a href="https://gist.github.com/">Gist</a>, <a href="http://pastie.org/">Pastie</a> or <a href="http://pastebin.com/">Pastebin</a> in order to share your diagnostic information. Please avoid posting long log files directly on the forums!</p>
 <h2 id="bugtracker"><span class="header-section-number">5.3</span> Bugtracker</h2>
