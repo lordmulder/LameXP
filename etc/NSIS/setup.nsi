@@ -716,5 +716,5 @@ FunctionEnd
 
 Function ShowReadmeFunction
 	!insertmacro DisableNextButton $R0
-	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\FAQ.html" "open" ""
+	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\Manual.html" "open" ""
 FunctionEnd

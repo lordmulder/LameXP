@@ -123,6 +123,34 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 
 
 
+# Anti-Virus Notes #
+
+Occasionally, it may happen that your anti-virus software *mistakenly* detects [malware](http://en.wikipedia.org/wiki/Malware) (virus, trojan horse, worm, etc.) while you are trying to run the LameXP application or the LameXP setup program. This is called a [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) and the file actually is **not** malware. Instead, this is an error (bug) in your particular anti-virus software! In case that you encounter this kind problem, we highly recommend using [VirusTotal.com](http://www.virustotal.com/), [Virscan.org](http://www.virscan.org/) or a similar web-service to check the file in question with *multiple* anti-virus engines. Unless the vast majority of the anti-virus engines detect malware, it can be assumed that the file is really harmless. However, please take care with *heuristic* scan results, such as "suspicious", "generic" or "packed". Those results are **not** confirmed malware detections &ndash; they are highly speculative and (almost certainly) can be ignored safely!
+
+Defective anti-virus software is an ongoing annoyance! For example, anti-virus programs tend to suspect installers (or uninstallers) created with [NSIS](http://nsis.sourceforge.net/) &ndash; which includes the LameXP setup program. But, of course, installers created with NSIS are perfectly legitimate. Thus, if your anti-virus program complains about the LameXP setup program, please ignore the *nonsensical* warning! Furthermore, it seems that some anti-virus programs accuse *all* "packed" executables of being malware. Nonetheless, using so-called "executable packers", e.g. [UPX](http://upx.sourceforge.net/), is perfectly legitimate. Executable packers are commonly used by legitimate software, including numerous OpenSource projects &ndash; and so does LameXP. Thus, if your anti-virus program complains about the LameXP program file, because it has been "packed" by UPX, please ignore the *nonsensical* warning!
+
+Last but not least: Always keep in mind that LameXP is *free software*, i.e. the *source codes* of LameXP are freely available to everybody! Thus, in case that you do *not* trust the provided *binaries* of LameXP, you may scrutinize the LameXP *source codes* and then build your own binaries&hellip;
+
+
+## Reporting False Positives ##
+
+An important fact to consider is, that, for the developer of a legitimate application, it is *impossible* to know **why** a specific anti-virus software may be *misinterpreting* his or her application as malware. That is because anti-virus programs generally are *proprietary* (ClosedSource) software &ndash; anti-virus companies don *not* publish their source codes or reveal their algorithms. Moreover, a zillion of *different* anti-virus programs exist nowadays. For these reasons, the application developer can *not* know what is going on "behind the scenes" in a particular anti-virus software. Consequently, any assumptions on the reasons that are causing the [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) would be nothing but pure speculation! Even worse, anti-virus software is updated frequently, so the reasons why the anti-virus software is *misinterpreting* the application as malware may change constantly!
+
+At this point, it should be clear that implementing *workarounds* for defective anti-virus software is **not** a viable option for application developers. Instead, since the [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) is an error (bug) in the particular *anti-virus software*, it can be fixed *only* by the developer of the anti-virus software. Therefore, it is important that *you*, the (paying) customer of the anti-virus company, contact the support team of the anti-virus company and report the problem to them! Most anti-virus companies provide ways to report *false positives* in a standardized way, e.g. by means of a [webform](http://en.wikipedia.org/wiki/Form_%28HTML%29). However, it is *not* possible to list them all here. So please refer to the anti-virus developer's web-site. Also, when reporting *false positives*, please be self-confident: As a paying customer, you can demand that *false positives* get fixed in a timely manner. Otherwise, get your money back!
+
+
+## Anti-Virus Conclusions ##
+
+* IN CASE YOU HAVE A CONFIRMED INFECTION, RE-DOWNLOAD THE FILE FROM ONE OF THE *OFFICIAL* MIRRORS!
+
+* DO NOT SEND US VIRUS REPORTS, UNLESS YOU HAVE VERIFIED THE INFECTION WITH MULTIPLE ANTI-VIRUS ENGINES!
+
+* PLEASE REPORT "FALSE POSITIVES" TO THE DEVELOPER OF YOUR ANTI-VIRUS SOFTWARE. WE CANNOT FIX THEM!
+
+* THERE ARE PLENTY OF ANTI-VIRUS PROGRAMS TO CHOOSE FROM. YOU DON'T NEED TO STICK WITH A NEUROTIC ONE!
+
+
+
 # Install Instructions #
 
 This chapter explains how to install the LameXP software on your computer. If LameXP has already been installed on your computer, you may skip this chapter.
@@ -190,11 +218,12 @@ If you fully understand what the consequences of the "portable mode" are and sti
 
 ![Figure](img/lamexp/setup_3a.png)
 
-#### Warning ####
+
+#### Portable Mode Warning ####
 
 While the "portable mode" is in effect, it is the *user's* responsibility to ensure that LameXP will be provided with the proper access rights to save/load its configuration files to/from the LameXP program directory!
 
-Note that the directories ``C:\Program Files (x86)`` and ``C:\Program Files`` usually are "protected" by the operating system, so LameXP may **not** be able to write into these directories.
+*Note:* The directories ``C:\Program Files (x86)`` and ``C:\Program Files`` usually are "protected" by the operating system, so LameXP probably will **not** be able to write into these directories.
 
 
 ### Disable the Portable Mode ###
@@ -263,7 +292,7 @@ Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, wit
 ![Figure](img/lamexp/setup_5a.png)
 
 &nbsp;  
-Please *extract* all the three files, the program ``qaac.exe`` plus its DLLs ``libsoxr.dll`` and ``libsoxconvolver.dll``, into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
+Please *extract* all the three files, the program ``qaac.exe`` plus its companion DLLs ``libsoxr.dll`` and ``libsoxconvolver.dll``, into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
@@ -371,7 +400,7 @@ Last but not least, you need to choose the desired target *bitrate* or *quality-
 *Did you know?* You can click on the "Reset" link at any time in order to reset all available settings for all available encoders to their factory defaults.
 
 
-## Processing ##
+## File Processing ##
 
 When everything has been set up properly, the time has come to actually start the encoding process. So simply click the "Encode Now" button in order to get going!
 
