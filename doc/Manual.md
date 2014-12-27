@@ -139,15 +139,26 @@ An important fact to consider is, that, for the developer of a legitimate applic
 At this point, it should be clear that implementing *workarounds* for defective anti-virus software is **not** a viable option for application developers. Instead, since the [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) is an error (bug) in the particular *anti-virus software*, it can be fixed *only* by the developer of the anti-virus software. Therefore, it is important that *you*, the (paying) customer of the anti-virus company, contact the support team of the anti-virus company and report the problem to them! Most anti-virus companies provide ways to report *false positives* in a standardized way, e.g. by means of a [webform](http://en.wikipedia.org/wiki/Form_%28HTML%29). However, it is *not* possible to list them all here. So please refer to the anti-virus developer's web-site. Also, when reporting *false positives*, please be self-confident: As a paying customer, you can demand that *false positives* get fixed in a timely manner. Otherwise, get your money back!
 
 
+## Performance Issues ##
+
+During the *startup procedure*, the LameXP software has to perform a number of *file-system* operations. This can take a few moments. However, the startup procedure should **never** take longer than *approximately* 5 seconds. Even on our test system &ndash; Windows 7 running on an *ancient* Intel Core2 processor with 4 GB of RAM &ndash; the startup procedure takes only about 1.5 seconds. And that is with the "real-time protection" of Microsoft Security Essentials (MSE) enabled! If we disable the MSE "real-time protection" feature, the startup procedure takes less than 0.5 seconds. *Unfortunately*, it has been brought to our attention, that some other anti-virus products may *slow down* the startup procedure significantly! Startup delays of up to 20 seconds have been reported by users, which corresponds to a slow down factor of **40&#xd7;** &ndash; caused by the anti-virus software!
+
+Consequently, if you think that LameXP is starting up "slow" on your machine, we recommend to *temporarily* **disable** or **uninstall** your current anti-virus software. If your anti-virus software has a so-called "real-time protection" or "guard" feature, please be sure to *deactivate* that feature too! As soon as the anti-virus software has been *neutralized* and **no** longer affects legitimate applications, please try launching the LameXP software again. If it turns out that the startup procedure of LameXP has become significantly *faster* when the anti-virus software is **not** interfering, then you know one thing for sure: It is the *anti-virus software* that was causing the slow down! Please recognize that *we* can **not** fix this kind of problems. Instead, since the problem is actually a *defect* of the anti-virus software, please report the problem to the developer of the *anti-virus software*!
+
+For reporting *performance issues*, please refer to anti-virus developer's web-site. Also, when reporting *performance issues*, please be self-confident: As a paying customer, you can demand that *performance issues* get fixed in a timely manner. Otherwise, get your money back!
+
+
 ## Anti-Virus Conclusions ##
 
-* IN CASE YOU HAVE A CONFIRMED INFECTION, RE-DOWNLOAD THE FILE FROM ONE OF THE *OFFICIAL* MIRRORS!
+The **code of conduct** regarding problems and annoyances related to so-called "anti-virus" software:
 
-* DO NOT SEND US VIRUS REPORTS, UNLESS YOU HAVE VERIFIED THE INFECTION WITH MULTIPLE ANTI-VIRUS ENGINES!
+* If your anti-virus software raises an "alarm" or "warning" while trying to launch the LameXP software or the LameXP setup program, please don't panic and take this with a grain of salt!
 
-* PLEASE REPORT "FALSE POSITIVES" TO THE DEVELOPER OF YOUR ANTI-VIRUS SOFTWARE. WE CANNOT FIX THEM!
+* Unless the alleged "malware infection" has been confirmed by **multiple** [*different*](http://www.virustotal.com/) anti-virus engines, this almost certainly is a [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) and thus can be ignored safely &#x1f60a;
 
-* THERE ARE PLENTY OF ANTI-VIRUS PROGRAMS TO CHOOSE FROM. YOU DON'T NEED TO STICK WITH A NEUROTIC ONE!
+* In the extremely rare case that you actually have a *confirmed* malware infection, please try re-downloading the LameXP software from one of the **official** mirrors first, *before* you send us any reports!
+
+* If you encounter any [**false positives**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives), please report these problems to the developer of the *defective* anti-virus software. *We* are **not** responsible for this problem and thus *we* can **not** fix it!
 
 
 
