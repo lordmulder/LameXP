@@ -637,7 +637,7 @@ This section tries to answer some of the most frequently asked questions. So if 
 
 ## Q: How can I donate to the authors of LameXP? ##
 
-**A:** At this time, the authors of the LameXP software do **not** accept any donations, in terms of money. If you wish to support the LameXP project, then you may do so by contributing translations, by improving the LameXP program code or by providing web-server capacity.
+**A:** LameXP is a *non-profit* project. The authors of the LameXP software do **not** accept any donations, in terms of money. If you wish to support the LameXP project, then you may do so by contributing translations, by improving the LameXP program code or by providing web-servers.
 
 
 ## Q: Why is this software called *LameXP*? ##
@@ -647,14 +647,14 @@ This section tries to answer some of the most frequently asked questions. So if 
 
 ## Q: Why are the LameXP binaries *not* digitally signed? ##
 
-**A:** They *are*! The official LameXP binaries *are* digitally signed, by [*PGP*](http://de.wikipedia.org/wiki/Pretty_Good_Privacy) signatures, using the [GnuPG]()http://de.wikipedia.org/wiki/GNU_Privacy_Guard software. However, the LameXP binaries are *not* signed in a way that the Microsoft Windows operating system recognizes. Note that Microsoft Windows does **not** recognize PGP/GnuPG signatures. For this reason, Microsoft Windows may show a warning when trying to launch or install the LameXP software. Microsoft Windows will also complain that the LameXP software originates from an "unknown publisher".
+**A:** They *are*! The official LameXP binaries are digitally signed by [*PGP*](http://de.wikipedia.org/wiki/Pretty_Good_Privacy) signatures, created using the [GnuPG](http://de.wikipedia.org/wiki/GNU_Privacy_Guard) software. However, the LameXP binaries are *not* signed in a way that the Microsoft Windows operating system recognizes. Please note that Microsoft Windows does **not** currently recognize PGP (GnuPG) signatures. For this reason, Microsoft Windows may show a warning when trying to launch or install the LameXP software. Microsoft Windows will also complain that the LameXP program files originate from an "unknown publisher", despite they *are* signed.
 
 So why are the LameXP binaries not signed in the way Microsoft Windows recognizes? This is because Microsoft Windows uses a *hierarchical* trust model: Windows trusts into a number of *Certificate Authorities* (CA), which are built into the operating system. These CA's can issue signing certificates, e.g., to software companies. The software company can then use its signing certificate to sign their binaries. Finally, Windows will verify the signature by using the corresponding signing certificate. And the signing certificate is verified using the *built-in* CA certificate. However, this system is *flawed*: First of all, CA's do *not* create signing certificates for free. Also these certificates  are only valid for a limited period of time. LameXP is a *non-profit* project and therefore we can *not* afford buying new certificates in regular intervals. Secondly, and even more important, the whole system depends on the *trustworthiness of the CA's*. But, as we all (should) know by now, these CA's can be forced to create "bogus" certificates, e.g. by intelligence services or other governmental organizations. Please also see [**this**](http://blog.fefe.de/?ts=b25933c5) blog post by "fefe" for an in-depth explanation.
 
 If you want to verify the LameXP signatures yourself, then you may do so by using the [Gpg4win](http://www.gpg4win.de/) software package, an easy-to-use distribution of the *GnuPG* software for Microsoft Windows. Of course you will also require the *public* key of the LameXP developers. The *finperprint* of the official  GnuPG signing key is ``3265784425BF2B394F67CE07106A413D6CF3FA22`` and the corresponding public key block is provided in the following. If you are *not* familiar with the GnuPG software yet, please have a look at the [Gpg4win compendium](http://www.gpg4win.de/documentation.html) or the [GnuPG manual](https://www.gnupg.org/documentation/manuals.html).
 
 
-**LameXP public GnuPG key:**
+**LameXP public PGP (GnuPG) key:**
 
 	-----BEGIN PGP PUBLIC KEY BLOCK-----
 	Version: GnuPG v2.0.21 (MingW32)
