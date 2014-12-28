@@ -622,7 +622,81 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
 
 # F.A.Q. (Frequently Asked Questions) #
 
-**TODO**
+This section tries to answer some of the most frequently asked questions. So if you have a question, please have a look at this section, before you send the question to us &#x1f609;
+
+
+## Q: Do I have to pay for using or obtaining LameXP? ##
+
+**A:** Nope. LameXP is [free software](http://en.wikipedia.org/wiki/Free_software). You may use it free of charge and for any purpose, including commercial purposes, according to the terms of the [*GNU General Public License*](GNU General Public License). The developers of LameXP will **never** ask you to pay for using the LameXP software. Also, several *free* download mirrors are provided. However, it was brought to our attention, that there are some *third-party* web-sites which offer *payed* downloads of LameXP, or provide LameXP downloads that have been infected with Adware &ndash; we do **not** cooperate with any of these web-sites! Therefore, please do **not** pay money for using or obtaining the LameXP software; the developers of LameXP will **not** benefit from this money. If anybody tries to make you pay money for for using or obtaining the LameXP software, this is *fraud* and you should **not** respond to this kind of offer!
+
+
+## Q: Can I redistribute the LameXP software? ##
+
+**A:** Yes. LameXP is [free software](http://en.wikipedia.org/wiki/Free_software). You may modify and/or redistribute it freely, according to the terms of the [*GNU General Public License*](GNU General Public License). However, be aware that it is *strictly forbidden* to bundle the LameXP program files and/or the LameXP installation program with any kind of Adware, Spyware or PUP (potentially unwanted program). Usually, *no* additional permission will be needed. If, however, you wish to redistribute the LameXP software in a way that does **not** *comply* with the license terms, a written permission by the author of the LameXP software is required!
+
+
+## Q: How can I donate to the authors of LameXP? ##
+
+**A:** At this time, the authors of the LameXP software do **not** accept any donations, in terms of money. If you wish to support the LameXP project, then you may do so by contributing translations, by improving the LameXP program code or by providing web-server capacity.
+
+
+## Q: Why is this software called *LameXP*? ##
+
+**A:** Originally, the LameXP software was created as a very simple [GUI front-end](http://en.wikipedia.org/wiki/Graphical_user_interface) to the [*LAME*](http://lame.sourceforge.net/) MP3 command-line encoder. The original version of this software, released some time in 2004, did **not** support any encoders except for LAME, it did **not** support any input formats except for Wave Audio, it did **not** support any audio filters, it did **not** support multi-threading, it did **not** support Unicode file names and it did **not** handle meta information. Because the software was a front-end to LAME, because it was running on the Microsoft Windows operating system and because, back at that time, *Windows XP* was the most popular Windows version (by far), I decided to call the software "LAME front-end for Windows XP" &ndash; or, in short, *LameXP*. Note the most creative name, I have to admit. Anyway, more and more features have been added to the LameXP software over the years. Also, the software has been re-written from the scratch at least two times. Nonetheless, the original name of the software has been retained. This is partly because people have become used to that name, and partly because I simply haven't been able to come up with a better name&hellip;
+
+
+## Q: Why are the LameXP binaries *not* digitally signed? ##
+
+**A:** They *are*! The official LameXP binaries *are* digitally signed, by [*PGP*](http://de.wikipedia.org/wiki/Pretty_Good_Privacy) signatures, using the [GnuPG]()http://de.wikipedia.org/wiki/GNU_Privacy_Guard software. However, the LameXP binaries are *not* signed in a way that the Microsoft Windows operating system recognizes. Note that Microsoft Windows does **not** recognize PGP/GnuPG signatures. For this reason, Microsoft Windows may show a warning when trying to launch or install the LameXP software. Microsoft Windows will also complain that the LameXP software originates from an "unknown publisher".
+
+So why are the LameXP binaries not signed in the way Microsoft Windows recognizes? This is because Microsoft Windows uses a *hierarchical* trust model: Windows trusts into a number of *Certificate Authorities* (CA), which are built into the operating system. These CA's can issue signing certificates, e.g., to software companies. The software company can then use its signing certificate to sign their binaries. Finally, Windows will verify the signature by using the corresponding signing certificate. And the signing certificate is verified using the *built-in* CA certificate. However, this system is *flawed*: First of all, CA's do *not* create signing certificates for free. Also these certificates  are only valid for a limited period of time. LameXP is a *non-profit* project and therefore we can *not* afford buying new certificates in regular intervals. Secondly, and even more important, the whole system depends on the *trustworthiness of the CA's*. But, as we all (should) know by now, these CA's can be forced to create "bogus" certificates, e.g. by intelligence services or other governmental organizations. Please also see [**this**](http://blog.fefe.de/?ts=b25933c5) blog post by "fefe" for an in-depth explanation.
+
+If you want to verify the LameXP signatures yourself, then you may do so by using the [Gpg4win](http://www.gpg4win.de/) software package, an easy-to-use distribution of the *GnuPG* software for Microsoft Windows. Of course you will also require the *public* key of the LameXP developers. The *finperprint* of the official  GnuPG signing key is ``3265784425BF2B394F67CE07106A413D6CF3FA22`` and the corresponding public key block is provided in the following. If you are *not* familiar with the GnuPG software yet, please have a look at the [Gpg4win compendium](http://www.gpg4win.de/documentation.html) or the [GnuPG manual](https://www.gnupg.org/documentation/manuals.html).
+
+
+**LameXP public GnuPG key:**
+
+	-----BEGIN PGP PUBLIC KEY BLOCK-----
+	Version: GnuPG v2.0.21 (MingW32)
+	
+	mQGiBEp0LDgRBACbZhtVHbb4tWlJCCxQ3eH9TQ3zUYrI2UHN94Yk8MJGEO1Fxigg
+	smUAeGRmHKpH24VCB/MaHef83fd3bu2yHSf8xgWe90hZR1pLLfmtxqN1SZu/YlJx
+	y4LOcxEwSc3P09cDL112fEFKs36d7OPYR6DXk75hWRwsnd0snJEnDHMVKwCgqCsn
+	9y5rxTeH32sNytkdMMijkD0D/RrNZiCr/uQcT695oLsYkemNQzbN+hd5bmkkXnRi
+	H27kHeeY1G1zLLFfTk7yKm7UZrTpMYxCXS80ORs9RF9rL8bnzzSiBAIHEz4uc5SD
+	oH7K3Y526SZ4m4GOLnlVTisd9FXpm0YHB/MXMRrNLZbSzveS3pOEmRny0yeI13cU
+	y8tqA/4xjW2DPlwB7lIUOcPyXa9pmAkLApCYF4CwUwKw4df6s+4txWkvuD0cJlli
+	nPK7B7SrMv5c2Eg2UQWpF0WN+s8IqX3eoJ1CI+oBVZVWZMhC+Vojz8K0tIkHWZh7
+	sy/gUk6XApTN8Ce/xbuMgDhfqxUXzkGzpvR9FJ0Y0R7kNgReUbQzTG9SZF9NdWxk
+	ZVIgKGh0dHA6Ly9tdWxkZXIuYXQuZ2cvKSA8bXVsZGVyMkBnbXguZGU+iGAEExEC
+	ACAFAkp0LDgCGwMGCwkIBwMCBBUCCAMEFgIDAQIeAQIXgAAKCRAQakE9bPP6IqKr
+	AJ4541p84C0jD/MdL1akNsUtAQOBrwCcDAumPHDCj7wfmmeY/KN+jOmrp8G5BA0E
+	SnQsOBAQAIy8TJYBYPxVtq8ENPs5qpLv+g3RRc/0TLaimaZGGdbsvANCswgNlxrK
+	spAb2IFC8Y85jl7PusdXhC89q1gP5cfb6WLzFggRZt6UEE3dJ+aBuKSu+k+y1n/v
+	R8oHpptIq3leonG5dXte5ZAYg+ID7DZz2QWgu4oWeDnUl945DLSCGj4vuT5sY/wi
+	zNv6PV2E0Bl+HIwkzlwHa9vYRPx84FL9eFM7llJdH5TYQZ+VkdqKIfAUWwXsDeqD
+	7YviIWLBbDxCtgfVB7sGYRZltMO9Nir7igO8SxOawkuBtLzU2ZbevBOSZmxami33
+	E2oAGWtcXGhKHMy7vPOQKfShcf2N0QMhNDSR54nxuu3/BW9diwYubJCkbkP/gv7g
+	GU/0eVWp19LeQN92zcmRN0JcJtu71T6Pcel9ZttEy/xyNyOrqhMP7vDd2sExwsYZ
+	VUqlOg7hA++TMCmNcxLQgWlb7tJxhNr4pBkJiX6Guu8/3fhQ0If99ZlpeCpmMJFN
+	kvhgFMWtCVPk5u1i/lwXsSoRcRXIfbRAcBqVEe5mgcyBBQZCoK2kQ8qt7Zol6/Lu
+	9GsY/ag4elArck1EtlK0fxpVUsEskTR2Yw7hY/upPGfI22Wzzfg6WlwaYysyONfF
+	ecoKS+ZaXVQ9BDAtRDKSD2yXkYDngJLDcbOTOPLxfDP/dKthqzkXAAMFD/0W/s64
+	tsIju1IGE8uQt1fIZECV8M8HJeVatNEVJyPDrS/WIO0vqedxhod6qpF1UwPBG1gw
+	WKe7nPhFoBzDayK92umEXUng0nQYmFUJWk7PXI751R1VFVgrbVw+LM2zy0/WRClh
+	2qUWv+q6JuK56NooPx3sgAE4uuGoiRi8qt8eNuu6FP90LUKo0t9mMEyVAHJdQbcm
+	tMFFU5K3+UehVYgosfplmLt5wpAs5GjqQSmeXA1DhvXNlPBBVn/tTSqGTw5+boqv
+	lfwHgLJOqae3GH+HZ1ega2/qb5PFVZRpV9PrRh38IRe0ZM0Y0yQtlhUPywksD8UM
+	KttadTHcBW4O/EZCEAOg69fc52mDs5GykJoXCOLsEc3/x2YJk8hvID3gR+qX/wxX
+	WDTVY0KL1IC+xo4Y3BxKXHd8EPhOyR52mHm6BvVE/bbMeQjTF0pPjqIL1iM23crA
+	Z9oYAtzYTOYyjtzx7SzY0SU+0jB7k7akr70vlbNR+Hk5iAR43MFoE5LyQpsmaUob
+	W8WwGwTUabrs0KXXNC6OotfZqylL+cgn+STDdmGLiW0rw7Yv6CxR+ZW77yiWHYam
+	TXY0hzq4U/9NnWwgCJErG5qausG8YidfDHenKIwZfc36d/bm6FSv5XGxShM7J4aO
+	uhZnmF9iIfovqAe60soJ+uH6UOnxEB6LHZNhiohJBBgRAgAJBQJKdCw4AhsMAAoJ
+	EBBqQT1s8/oi0RsAniNAOQRb8roflIOXVmeW3uB50RVtAJwLS5O19VD1W0HxjNZ6
+	sE7XdEZn+w==
+	=WDwE
+	-----END PGP PUBLIC KEY BLOCK-----
 
 
 
