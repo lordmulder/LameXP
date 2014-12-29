@@ -81,6 +81,7 @@
 <li><a href="#q-how-can-i-donate-to-the-authors-of-lamexp"><span class="toc-section-number">8.3</span> Q: How can I donate to the authors of LameXP?</a></li>
 <li><a href="#q-why-is-this-software-called-lamexp"><span class="toc-section-number">8.4</span> Q: Why is this software called <em>LameXP</em>?</a></li>
 <li><a href="#q-why-are-the-lamexp-binaries-not-digitally-signed"><span class="toc-section-number">8.5</span> Q: Why are the LameXP binaries <em>not</em> digitally signed?</a></li>
+<li><a href="#q-why-does-lamexp-connect-to-random-web-servers"><span class="toc-section-number">8.6</span> Q: Why does LameXP connect to (random) web-servers?</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -498,6 +499,9 @@ EBBqQT1s8/oi0RsAniNAOQRb8roflIOXVmeW3uB50RVtAJwLS5O19VD1W0HxjNZ6
 sE7XdEZn+w==
 =WDwE
 -----END PGP PUBLIC KEY BLOCK-----</code></pre>
+<h2 id="q-why-does-lamexp-connect-to-random-web-servers"><span class="header-section-number">8.6</span> Q: Why does LameXP connect to (random) web-servers?</h2>
+<p><strong>A:</strong> LameXP does <strong>not</strong> connect to any web-server, except for the &quot;automatic updates&quot; feature. Of course, in order to check for new updates, LameXP <em>unavoidably</em> has to communicate with our update servers. However, in <strong>no</strong> event LameXP will search for updates <em>without</em> your consent. Also, LameXP will <strong>not</strong> send any personal information to the update server. Instead of <em>uploading</em> your information, e.g. your current program version, to the web-server, LameXP will <em>download</em> the update information from the update server and compare it to your installed version locally. Furthermore, all information and program files downloaded from the update servers are protected by PGP (GnuPG) signatures, in order to assure the authenticity and integrity of these files. Files with missing/invalid signature are going to be <em>rejected</em>, so (spoofing) attacks are prevented.</p>
+<p><em>Note:</em> Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does <strong>not</strong> suffice here. In case that the update server does <strong>not</strong> respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connections is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of &quot;known&quot; hosts, taken mostly from <a href="http://www.alexa.com/topsites">Alexa's Top 500</a> list. In order to validate the Internet connection, LameXP will pick a <em>random</em> host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of &quot;known&quot; hosts have been reached successfully.</p>
 <p> <br /> <br /><strong>EOF</strong></p>
 </body>
 </html>
