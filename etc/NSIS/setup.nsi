@@ -462,6 +462,7 @@ Section "!Install Files"
 	Delete "$INSTDIR\Settings.cfg"
 	Delete "$INSTDIR\Translate.html"
 	Delete "$INSTDIR\Uninstall.exe"
+	RMDir /r "$INSTDIR\img"
 
 	!insertmacro GetExecutableName $R0
 
@@ -475,8 +476,10 @@ Section "!Install Files"
 	${EndIf}
 	
 	File /a `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
-	File /a `${LAMEXP_SOURCE_PATH}\*.txt`
-	File /a `${LAMEXP_SOURCE_PATH}\*.html`
+
+	File /a /r `${LAMEXP_SOURCE_PATH}\*.txt`
+	File /a /r `${LAMEXP_SOURCE_PATH}\*.html`
+	File /a /r `${LAMEXP_SOURCE_PATH}\*.png`
 SectionEnd
 
 Section "-Write Uinstaller"
@@ -615,6 +618,7 @@ Section "Uninstall"
 	Delete /REBOOTOK "$INSTDIR\Translate.html"
 	Delete /REBOOTOK "$INSTDIR\Uninstall.exe"
 
+	RMDir /r "$INSTDIR\img"
 	RMDir "$INSTDIR"
 
 	; --------------
