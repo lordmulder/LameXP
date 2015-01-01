@@ -1995,7 +1995,7 @@
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP用户指南</translation>
     </message>
 </context>
 <context>
