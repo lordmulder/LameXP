@@ -28,17 +28,6 @@
 //Qt
 #include <QtGlobal>
 
-//Initialize static Qt plugins
-#ifdef QT_NODLL
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-Q_IMPORT_PLUGIN(qico)
-Q_IMPORT_PLUGIN(qsvg)
-#else
-Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
-Q_IMPORT_PLUGIN(QICOPlugin)
-#endif
-#endif
-
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
