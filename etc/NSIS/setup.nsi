@@ -1,6 +1,6 @@
 ; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
-; // Copyright (C) 2004-2014 LoRd_MuldeR <MuldeR2@GMX.de>
+; // Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
 ; // This program is free software; you can redistribute it and/or modify
 ; // it under the terms of the GNU General Public License as published by
@@ -143,7 +143,7 @@ VIAddVersionKey "Comments" "This program is free software; you can redistribute 
 VIAddVersionKey "CompanyName" "Free Software Foundation"
 VIAddVersionKey "FileDescription" "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION_DATE}.${LAMEXP_BUILD} (${LAMEXP_VERSION})"
-VIAddVersionKey "LegalCopyright" "Copyright 2004-2014 LoRd_MuldeR"
+VIAddVersionKey "LegalCopyright" "Copyright 2004-2015 LoRd_MuldeR"
 VIAddVersionKey "LegalTrademarks" "GNU"
 VIAddVersionKey "OriginalFilename" "LameXP.${LAMEXP_DATE}.exe"
 VIAddVersionKey "ProductName" "LameXP - Audio Encoder Frontend"
@@ -298,7 +298,7 @@ Function .onInit
 	${If} ${IsWinXP}
 		${IfNot} ${RunningX64} # Windows XP 32-Bit, requires Service Pack 3
 		${AndIf} ${AtMostServicePack} 2
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 3 installed.$\nWindows XP *without* Service Pack 3 reached end-of-life on 2010-07-13.$\nCurrent Windows XP (Service Pack 3) will be supported until 2014-04-08.$\n$\nPlease install Service Pack 3 now or just run Windows Update!"
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 3 installed!"
 			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDYES`
 				ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=24"
 			${Else}
@@ -308,7 +308,7 @@ Function .onInit
 		${EndIf}
 		${If} ${RunningX64} # Windows XP 64-Bit, requires Service Pack 2
 		${AndIf} ${AtMostServicePack} 1
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP x64 Edition with Service Pack 2 installed.$\nWindows XP x64 Edition *without* Service Pack 2 reached end-of-life on 2009-04-14.$\nCurrent Windows XP x64 Edition (Service Pack 2) will be supported until 2014-04-08.$\n$\nPlease install Service Pack 2 now or just run Windows Update!"
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP x64 Edition with Service Pack 2 installed!"
 			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 2 for Windows XP x64 Edition now?" IDYES`
 				ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=17791"
 			${Else}

@@ -102,7 +102,7 @@ It has to be noticed that LameXP uses a number of *third-party* applications and
 LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement), released under the terms of the [*GNU General Public License* (GPL), version 2](http://www.gnu.org/licenses/gpl-2.0.html). The licenses for most software and other practical works are designed to take away your freedom to share and change the works. In contrast, the GPL is designed to guarantee your freedom to share and change all versions of the software. In other words, the GPL ensures that free software will remain free for all of its users. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the *GNU General Public License* for more details!
 
 	LameXP - Audio Encoder Front-End
-	Copyright (C) 2004-2014 LoRd_MuldeR <MuldeR2@GMX.de>
+	Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -176,7 +176,9 @@ Distribution packages of the LameXP software is provided in two different flavou
 
 In order to start the installation process, simply double-click on the downloaded LameXP **setup program**, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.exe``.
 
-*Note:* Shortly after launching the setup program, an [UAC](http://en.wikipedia.org/wiki/User_Account_Control) (User Access Control) dialogue may appear. This is a standard Windows security feature, so don't worry! You have to choose "Yes", if you wish to continue the installation process.
+Shortly after launching the setup program, an [UAC](http://en.wikipedia.org/wiki/User_Account_Control) (User Access Control) dialogue may appear. This is a standard Windows security feature, so don't worry! You have to choose "Yes", if you wish to continue the installation process.
+
+*Note:* If you wonder why Windows suggests that the LameXP setup program originates from an "unknown publisher", despite the fact that it was downloaded from the official web-site, then please the explanation [here](http://lamexp.sourceforge.net/doc/Manual.html#q-why-are-the-lamexp-binaries-not-digitally-signed)!
 
 ![Figure](img/lamexp/setup_1a.png)
 
@@ -703,7 +705,7 @@ If you want to verify the LameXP signatures yourself, then you may do so by usin
 
 **A:** LameXP does **not** connect to any web-server, except for the "automatic updates" feature. Of course, in order to check for new updates, LameXP *unavoidably* has to communicate with our update servers. However, in **no** event LameXP will search for updates *without* your consent. Also, LameXP will **not** send any personal information to the update server. Instead of *uploading* your information, e.g. your current program version, to the web-server, LameXP will *download* the update information from the update server and compare it to your installed version locally. Furthermore, all information and program files downloaded from the update servers are protected by PGP (GnuPG) signatures, in order to assure the authenticity and integrity of these files. Files with missing/invalid signature are going to be *rejected*, so (spoofing) attacks are prevented.
 
-*Note:* Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does **not** suffice here. In case that the update server does **not** respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connections is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of "known" hosts, taken mostly from [Alexa's Top 500](http://www.alexa.com/topsites) list. In order to validate the Internet connection, LameXP will pick a *random* host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of "known" hosts have been reached successfully.
+*Note:* Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does **not** suffice here. In case that the update server does **not** respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connection is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of "known" hosts, taken mostly from [Alexa's Top 500](http://www.alexa.com/topsites) list. In order to validate the Internet connection, LameXP will pick a *random* host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of "known" hosts have been reached successfully.
 
 
 
