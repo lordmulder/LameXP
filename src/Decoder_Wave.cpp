@@ -20,21 +20,15 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 ///////////////////////////////////////////////////////////////////////////////
 
+//Internal
 #include "Decoder_Wave.h"
-
 #include "Global.h"
 
+//MUtils
+#include <MUtils/OSSupport.h>
+
+//Qt
 #include <QDir>
-#include <QProcess>
-#include <QRegExp>
-
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <Shellapi.h>
-
-#define FIX_SEPARATORS(STR) for(int i = 0; STR[i]; i++) { if(STR[i] == L'/') STR[i] = L'\\'; }
 
 WaveDecoder::WaveDecoder(void)
 {
@@ -47,36 +41,21 @@ WaveDecoder::~WaveDecoder(void)
 bool WaveDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
 	emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
-	
-	SHFILEOPSTRUCTW fileOperation;
-	memset(&fileOperation, 0, sizeof(SHFILEOPSTRUCTW));
-	fileOperation.wFunc = FO_COPY;
-	fileOperation.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI | FOF_FILESONLY;
-
-	size_t srcLen = wcslen(reinterpret_cast<const wchar_t*>(sourceFile.utf16())) + 3;
-	wchar_t *srcBuffer = new wchar_t[srcLen];
-	memset(srcBuffer, 0, srcLen * sizeof(wchar_t));
-	wcsncpy_s(srcBuffer, srcLen, reinterpret_cast<const wchar_t*>(sourceFile.utf16()), _TRUNCATE);
-	FIX_SEPARATORS (srcBuffer);
-	fileOperation.pFrom = srcBuffer;
-
-	size_t outLen = wcslen(reinterpret_cast<const wchar_t*>(outputFile.utf16())) + 3;
-	wchar_t *outBuffer = new wchar_t[outLen];
-	memset(outBuffer, 0, outLen * sizeof(wchar_t));
-	wcsncpy_s(outBuffer, outLen, reinterpret_cast<const wchar_t*>(outputFile.utf16()), _TRUNCATE);
-	FIX_SEPARATORS (outBuffer);
-	fileOperation.pTo = outBuffer;
 
 	emit statusUpdated(0);
-	int result = SHFileOperation(&fileOperation);
+	const bool okay = MUtils::OS::copy_file(sourceFile, outputFile);
 	emit statusUpdated(100);
 
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", result));
+	if(okay)
+	{
+		emit messageLogged("File copied successfully.");
+	}
+	else
+	{
+		emit messageLogged("Failed to copy file!");
+	}
 
-	delete [] srcBuffer;
-	delete [] outBuffer;
-
-	return (result == 0 && fileOperation.fAnyOperationsAborted == false);
+	return okay;
 }
 
 bool WaveDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
