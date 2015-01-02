@@ -465,7 +465,9 @@ If you want to report any problems that you have encountered with the LameXP sof
 
 * You can launch the LameXP application with the additional [command-line](http://en.wikipedia.org/wiki/Command-line_interface) parameter ``--console`` in order to enable the LameXP *debug console*, which provides many information on what is going on "behind the scenes".
 
-* The [environment variable](http://en.wikipedia.org/wiki/Environment_variable) ``MUTILS_LOGFILE`` may be used to specify a *log file* that will be created by LameXP. The information that are saved to the log file are the same as those available from the debug console.
+* If the debug console is **not** enabled, you may still use the [*DebugView*](http://technet.microsoft.com/en-us/sysinternals/bb896647.aspx) utility, by Mark Russinovich, in order to show and/or capture LameXP's diagnostic output. 
+
+* In any case, the [environment variable](http://en.wikipedia.org/wiki/Environment_variable) ``MUTILS_LOGFILE`` may be used to specify a *log file* that will be created by LameXP. The information saved to the log file are the same as those available from the debug console.
 
 &nbsp;  
 *Note:* We highly recommend using a web-service like [Gist](https://gist.github.com/), [Pastie](http://pastie.org/) or [Pastebin](http://pastebin.com/) in order to share your diagnostic information. Please avoid posting long log files directly on the forums!
