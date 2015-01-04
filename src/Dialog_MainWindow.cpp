@@ -1313,18 +1313,13 @@ bool MainWindow::winEvent(MSG *message, long *result)
  */
 void MainWindow::windowShown(void)
 {
-	const QStringList &arguments = MUtils::OS::arguments(); //QApplication::arguments();
+	const MUtils::OS::ArgumentMap &arguments = MUtils::OS::arguments(); //QApplication::arguments();
 
 	//Force resize event
 	resizeEvent(NULL);
 
 	//First run?
-	bool firstRun = false;
-	for(int i = 0; i < arguments.count(); i++)
-	{
-		/*QMessageBox::information(this, QString::number(i), arguments[i]);*/
-		if(!arguments[i].compare("--first-run", Qt::CaseInsensitive)) firstRun = true;
-	}
+	const bool firstRun = arguments.contains("first-run");
 
 	//Check license
 	if((m_settings->licenseAccepted() <= 0) || firstRun)
@@ -1480,33 +1475,36 @@ void MainWindow::windowShown(void)
 	}
 
 	//Add files from the command-line
-	for(int i = 0; i < arguments.count() - 1; i++)
+	QStringList addedFiles;
+	foreach(const QString &value, arguments.values("add"))
 	{
-		QStringList addedFiles;
-		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
+		if(!value.isEmpty())
 		{
-			QFileInfo currentFile(arguments[++i].trimmed());
+			QFileInfo currentFile(value);
 			qDebug("Adding file from CLI: %s", MUTILS_UTF8(currentFile.absoluteFilePath()));
 			addedFiles.append(currentFile.absoluteFilePath());
 		}
-		if(!addedFiles.isEmpty())
-		{
-			addFilesDelayed(addedFiles);
-		}
+	}
+	if(!addedFiles.isEmpty())
+	{
+		addFilesDelayed(addedFiles);
 	}
 
 	//Add folders from the command-line
-	for(int i = 0; i < arguments.count() - 1; i++)
+	foreach(const QString &value, arguments.values("add-folder"))
 	{
-		if(!arguments[i].compare("--add-folder", Qt::CaseInsensitive))
+		if(!value.isEmpty())
 		{
-			QFileInfo currentFile(arguments[++i].trimmed());
+			const QFileInfo currentFile(value);
 			qDebug("Adding folder from CLI: %s", MUTILS_UTF8(currentFile.absoluteFilePath()));
 			addFolder(currentFile.absoluteFilePath(), false, true);
 		}
-		if(!arguments[i].compare("--add-recursive", Qt::CaseInsensitive))
+	}
+	foreach(const QString &value, arguments.values("add-recursive"))
+	{
+		if(!value.isEmpty())
 		{
-			QFileInfo currentFile(arguments[++i].trimmed());
+			const QFileInfo currentFile(value);
 			qDebug("Adding folder recursively from CLI: %s", MUTILS_UTF8(currentFile.absoluteFilePath()));
 			addFolder(currentFile.absoluteFilePath(), true, true);
 		}

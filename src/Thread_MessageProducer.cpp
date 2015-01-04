@@ -58,33 +58,32 @@ void MessageProducerThread::run()
 {
 	setTerminationEnabled(true);
 	bool bSentFiles = false;
-	const QStringList &arguments = MUtils::OS::arguments();
+	const MUtils::OS::ArgumentMap &arguments = MUtils::OS::arguments();
 
-	for(int i = 0; i < arguments.count(); i++)
+	//Kill application?
+	if(arguments.contains("kill"))
 	{
-		if(!arguments[i].compare("--kill", Qt::CaseInsensitive))
+		if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_NONE, NULL))
 		{
-			if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_NONE, NULL))
-			{
-				qWarning("Failed to send IPC message!");
-			}
-			return;
+			qWarning("Failed to send IPC message!");
 		}
-		if(!arguments[i].compare("--force-kill", Qt::CaseInsensitive))
+		return;
+	}
+	if(arguments.contains("force-kill"))
+	{
+		if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_FORCE, NULL))
 		{
-			if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_FORCE, NULL))
-			{
-				qWarning("Failed to send IPC message!");
-			}
-			return;
+			qWarning("Failed to send IPC message!");
 		}
+		return;
 	}
 
-	for(int i = 0; i < arguments.count() - 1; i++)
+	//Send file to "matser" instance
+	foreach(const QString &value, arguments.values("add"))
 	{
-		if(!arguments[i].compare("--add", Qt::CaseInsensitive))
+		if(!value.isEmpty())
 		{
-			QFileInfo file = QFileInfo(arguments[++i]);
+			const QFileInfo file = QFileInfo(value);
 			if(file.exists() && file.isFile())
 			{
 				if(!m_ipcChannel->send(IPC_CMD_ADD_FILE, IPC_FLAG_NONE, MUTILS_UTF8(file.canonicalFilePath())))
@@ -94,9 +93,12 @@ void MessageProducerThread::run()
 			}
 			bSentFiles = true;
 		}
-		if(!arguments[i].compare("--add-folder", Qt::CaseInsensitive))
+	}
+	foreach(const QString &value, arguments.values("add-folder"))
+	{
+		if(!value.isEmpty())
 		{
-			QDir dir = QDir(arguments[++i]);
+			const QDir dir = QDir(value);
 			if(dir.exists())
 			{
 				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_NONE, MUTILS_UTF8(dir.canonicalPath())))
@@ -106,9 +108,12 @@ void MessageProducerThread::run()
 			}
 			bSentFiles = true;
 		}
-		if(!arguments[i].compare("--add-recursive", Qt::CaseInsensitive))
+	}
+	foreach(const QString &value, arguments.values("add-recursive"))
+	{
+		if(!value.isEmpty())
 		{
-			QDir dir = QDir(arguments[++i]);
+			const QDir dir = QDir(value);
 			if(dir.exists())
 			{
 				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_ADD_RECURSIVE, MUTILS_UTF8(dir.canonicalPath())))

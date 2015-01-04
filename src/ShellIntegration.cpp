@@ -86,7 +86,7 @@ void ShellIntegration::install(bool async)
 	const QString lamexpFileType(g_lamexpFileType);
 	const QString lamexpFileInfo(tr("Audio File supported by LameXP"));
 	const QString lamexpShellText(tr("Convert this file with LameXP v%1").arg(QString().sprintf("%d.%02d", lamexp_version_major(), lamexp_version_minor())));
-	const QString lamexpShellCommand = QString("\"%1\" --add \"%2\"").arg(QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath()), "%1");
+	const QString lamexpShellCommand = QString("\"%1\" \"--add=%2\"").arg(QDir::toNativeSeparators(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath()), "%1");
 	const QString lamexpShellAction(g_lamexpShellAction);
 
 	//Register the LameXP file type

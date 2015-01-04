@@ -175,18 +175,29 @@ static int lamexp_main(int &argc, char **argv)
 	lamexp_print_logo();
 
 	//Get CLI arguments
-	const QStringList &arguments = MUtils::OS::arguments();
+	const MUtils::OS::ArgumentMap &arguments = MUtils::OS::arguments();
 
 	//Enumerate CLI arguments
-	qDebug("Command-Line Arguments:");
-	for(int i = 0; i < arguments.count(); i++)
+	if(!arguments.isEmpty())
 	{
-		qDebug("argv[%d]=%s", i, MUTILS_UTF8(arguments.at(i)));
+		qDebug("Command-Line Arguments:");
+		foreach(const QString &key, arguments.uniqueKeys())
+		{
+			foreach(const QString &val, arguments.values(key))
+			{
+				if(!val.isEmpty())
+				{
+					qDebug("--> %s = \"%s\"", MUTILS_UTF8(key), MUTILS_UTF8(val));
+					continue;
+				}
+				qDebug("--> %s", MUTILS_UTF8(key));
+			}
+		}
+		qDebug(" ");
 	}
-	qDebug(" ");
 
 	//Detect CPU capabilities
-	const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect(MUtils::OS::arguments());
+	const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect();
 	qDebug("   CPU vendor id  :  %s (Intel=%s)", cpuFeatures.vendor, MUTILS_BOOL2STR(cpuFeatures.intel));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
 	qDebug("   CPU signature  :  Family=%d Model=%d Stepping=%d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
@@ -225,7 +236,7 @@ static int lamexp_main(int &argc, char **argv)
 	//Kill application?
 	for(int i = 0; i < argc; i++)
 	{
-		if(!arguments[i].compare("--kill", Qt::CaseInsensitive) || !arguments[i].compare("--force-kill", Qt::CaseInsensitive))
+		if(arguments.contains("kill") || arguments.contains("force-kill"))
 		{
 			return EXIT_SUCCESS;
 		}

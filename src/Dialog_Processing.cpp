@@ -536,7 +536,7 @@ void ProcessingDialog::initEncoding(void)
 		unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
 		if(maximumInstances < 1)
 		{
-			const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect(MUtils::OS::arguments());
+			const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect();
 			maximumInstances = cores2instances(qBound(1U, cpuFeatures.count, 64U));
 		}
 
