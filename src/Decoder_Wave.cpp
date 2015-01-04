@@ -40,7 +40,7 @@ WaveDecoder::~WaveDecoder(void)
 
 bool WaveDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
-	emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
+	emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(QDir::toNativeSeparators(sourceFile), QDir::toNativeSeparators(outputFile)));
 
 	emit statusUpdated(0);
 	const bool okay = MUtils::OS::copy_file(sourceFile, outputFile);
