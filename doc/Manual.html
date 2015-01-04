@@ -64,24 +64,32 @@
 <li><a href="#compression-settings"><span class="toc-section-number">5.3</span> Compression Settings</a></li>
 <li><a href="#file-processing"><span class="toc-section-number">5.4</span> File Processing</a></li>
 </ul></li>
-<li><a href="#help-support"><span class="toc-section-number">6</span> Help &amp; Support</a><ul>
-<li><a href="#download-mirrors"><span class="toc-section-number">6.1</span> Download Mirrors</a></li>
-<li><a href="#diagnostic-output"><span class="toc-section-number">6.2</span> Diagnostic Output</a></li>
-<li><a href="#bugtracker"><span class="toc-section-number">6.3</span> Bugtracker</a></li>
-<li><a href="#support-forum"><span class="toc-section-number">6.4</span> Support Forum</a></li>
+<li><a href="#command-line-usage"><span class="toc-section-number">6</span> Command-line Usage</a><ul>
+<li><a href="#add-files-andor-folders"><span class="toc-section-number">6.1</span> Add Files and/or Folders</a><ul>
+<li><a href="#examples"><span class="toc-section-number">6.1.1</span> Examples</a></li>
 </ul></li>
-<li><a href="#developer-center"><span class="toc-section-number">7</span> Developer Center</a><ul>
-<li><a href="#source-code-access"><span class="toc-section-number">7.1</span> Source Code Access</a></li>
-<li><a href="#build-prerequisites"><span class="toc-section-number">7.2</span> Build Prerequisites</a></li>
-<li><a href="#qt-as-static-libraries"><span class="toc-section-number">7.3</span> Qt as Static Libraries</a></li>
+<li><a href="#gui-adjustment-options"><span class="toc-section-number">6.2</span> GUI Adjustment Options</a></li>
+<li><a href="#options-for-debugging"><span class="toc-section-number">6.3</span> Options for Debugging</a></li>
+<li><a href="#miscellaneous-options"><span class="toc-section-number">6.4</span> Miscellaneous Options</a></li>
 </ul></li>
-<li><a href="#f.a.q.-frequently-asked-questions"><span class="toc-section-number">8</span> F.A.Q. (Frequently Asked Questions)</a><ul>
-<li><a href="#q-do-i-have-to-pay-for-using-or-obtaining-lamexp"><span class="toc-section-number">8.1</span> Q: Do I have to pay for using or obtaining LameXP?</a></li>
-<li><a href="#q-can-i-redistribute-the-lamexp-software"><span class="toc-section-number">8.2</span> Q: Can I redistribute the LameXP software?</a></li>
-<li><a href="#q-how-can-i-donate-to-the-authors-of-lamexp"><span class="toc-section-number">8.3</span> Q: How can I donate to the authors of LameXP?</a></li>
-<li><a href="#q-why-is-this-software-called-lamexp"><span class="toc-section-number">8.4</span> Q: Why is this software called <em>LameXP</em>?</a></li>
-<li><a href="#q-why-are-the-lamexp-binaries-not-digitally-signed"><span class="toc-section-number">8.5</span> Q: Why are the LameXP binaries <em>not</em> digitally signed?</a></li>
-<li><a href="#q-why-does-lamexp-connect-to-random-web-servers"><span class="toc-section-number">8.6</span> Q: Why does LameXP connect to (random) web-servers?</a></li>
+<li><a href="#help-support"><span class="toc-section-number">7</span> Help &amp; Support</a><ul>
+<li><a href="#download-mirrors"><span class="toc-section-number">7.1</span> Download Mirrors</a></li>
+<li><a href="#diagnostic-output"><span class="toc-section-number">7.2</span> Diagnostic Output</a></li>
+<li><a href="#bugtracker"><span class="toc-section-number">7.3</span> Bugtracker</a></li>
+<li><a href="#support-forum"><span class="toc-section-number">7.4</span> Support Forum</a></li>
+</ul></li>
+<li><a href="#developer-center"><span class="toc-section-number">8</span> Developer Center</a><ul>
+<li><a href="#source-code-access"><span class="toc-section-number">8.1</span> Source Code Access</a></li>
+<li><a href="#build-prerequisites"><span class="toc-section-number">8.2</span> Build Prerequisites</a></li>
+<li><a href="#qt-as-static-libraries"><span class="toc-section-number">8.3</span> Qt as Static Libraries</a></li>
+</ul></li>
+<li><a href="#f.a.q.-frequently-asked-questions"><span class="toc-section-number">9</span> F.A.Q. (Frequently Asked Questions)</a><ul>
+<li><a href="#q-do-i-have-to-pay-for-using-or-obtaining-lamexp"><span class="toc-section-number">9.1</span> Q: Do I have to pay for using or obtaining LameXP?</a></li>
+<li><a href="#q-can-i-redistribute-the-lamexp-software"><span class="toc-section-number">9.2</span> Q: Can I redistribute the LameXP software?</a></li>
+<li><a href="#q-how-can-i-donate-to-the-authors-of-lamexp"><span class="toc-section-number">9.3</span> Q: How can I donate to the authors of LameXP?</a></li>
+<li><a href="#q-why-is-this-software-called-lamexp"><span class="toc-section-number">9.4</span> Q: Why is this software called <em>LameXP</em>?</a></li>
+<li><a href="#q-why-are-the-lamexp-binaries-not-digitally-signed"><span class="toc-section-number">9.5</span> Q: Why are the LameXP binaries <em>not</em> digitally signed?</a></li>
+<li><a href="#q-why-does-lamexp-connect-to-random-web-servers"><span class="toc-section-number">9.6</span> Q: Why does LameXP connect to (random) web-servers?</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -324,9 +332,49 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p> <br />The &quot;Processing&quot; dialogue is going to turn <em>green</em>, as soon as all encoding jobs have finished successfully. If anything went wrong, e.g. if one of the encoding jobs failed for some reason, it will turn <em>red</em> instead.</p>
 <p><img src="img/lamexp/tutorial_4c.png" alt="Figure" /></p>
 <p> <br /><em>Did you know?</em> You can double-click on a completed (or failed) job in the list, in order to bring up a dialogue with all details about the specific job. This is especially useful, if something went wrong.</p>
-<h1 id="help-support"><span class="header-section-number">6</span> Help &amp; Support</h1>
+<h1 id="command-line-usage"><span class="header-section-number">6</span> Command-line Usage</h1>
+<p>Additional <strong><a href="http://en.wikipedia.org/wiki/Command-line_interface">command-line</a> options</strong> may be passed to LameXP when launching the application. You may do so, for example, by typing the complete command-line into the <a href="http://en.wikipedia.org/wiki/Cmd.exe"><em>command prompt</em></a> or by creating a <a href="http://en.wikipedia.org/wiki/File_shortcut"><em>shortcut</em></a> with the desired command-line options. The basic command-line syntax of LameXP is as follows: Each command-line option has to start with a <code>--</code> prefix. So if you intend to pass the option called &quot;foo&quot;, then you actually need to type <code>--foo</code>. Furthermore, while some command-line options are just <em>flags</em>, i.e. they can either be present or not (but that's it!), there also are command-line options that take an <em>argument</em>. The argument is <em>appended</em> directly to the option name to which it belongs to, but a <code>=</code> sign <strong>must</strong> to be inserted as a separator. If, for example, you wish to set the command-line option &quot;foo&quot; to an argument value of &quot;bar&quot;, then the proper syntax is <code>--foo=bar</code>. Sometimes your argument value may contain <em>whitespaces</em> though, in which case the <em>whole</em> command-line option (name + argument) <strong>must</strong> be enclosed with double quotes. For example, in order to set the option &quot;foo&quot; to a value of &quot;C:\Some File.bar&quot; (note the space character between &quot;Some&quot; and &quot;File&quot;), the proper syntax is <code>&quot;--foo=C:\Some File.bar&quot;</code>. Last but not least, please note that the <em>same</em> command-line option may appear <em>multiple</em> times on the command-line – whether that actually makes any sense depends on the individual option though.</p>
+<h2 id="add-files-andor-folders"><span class="header-section-number">6.1</span> Add Files and/or Folders</h2>
+<p>Command-line options for adding files and/or folders:</p>
+<ul>
+<li><p><code>--add=filename</code><br /> Adds the file specified by <em>filename</em> to the source files list. The <em>filename</em> should be a <a href="http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths">fully-qualified</a> path. If you wish to add multiple files at once, you can simply include this option multiple times.</p></li>
+<li><p><code>--add-folder=directory</code><br /> Adds <em>all</em> supported files from the directory specified by <em>directory</em> to the source files list. The <em>directory</em> should be a <a href="http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths">fully-qualified</a> path. Sub-directories are <strong>not</strong> considered.</p></li>
+<li><p><code>--add-recursiver=directory</code><br /> This option works just like the &quot;add-folder&quot; option, except that it works recursively, i.e. it <em>does</em> take into account sub-directories. Use this option with care, since a whole lot of files may be added.</p></li>
+</ul>
+<h3 id="examples"><span class="header-section-number">6.1.1</span> Examples</h3>
+<p>Here are some <em>examples</em> on how to use the above command-line options correctly:</p>
+<ul>
+<li><p>Add one file:<br /> <code>LameXP.exe &quot;--add=C:\Some Folder\Some File.mp3&quot;</code></p></li>
+<li><p>Add multiple files at once:<br /> <code>LameXP.exe &quot;--add=C:\Some Folder\File #1.mp3&quot; &quot;--add=C:\Some Folder\File #2.mp3&quot; &quot;--add=C:\Some Folder\File #3.mp3&quot;</code></p></li>
+<li><p>Add a whole directory:<br /> <code>LameXP.exe &quot;--add-folder=C:\Some Folder&quot;</code></p></li>
+</ul>
+<h2 id="gui-adjustment-options"><span class="header-section-number">6.2</span> GUI Adjustment Options</h2>
+<p>Command-line options for adjusting the graphical user-interface:</p>
+<ul>
+<li><p><code>--huge-font</code><br /> Set the font scaling factor to 150%. Use this if you want <em>much</em> larger fonts.</p></li>
+<li><p><code>--big-font</code><br /> Set the font scaling factor to 125%. Use this if you want <em>somewhat</em> larger fonts.</p></li>
+<li><p><code>--small-font</code><br /> Set the font scaling factor to 87.5%. Use this if you want <em>somewhat</em> smaller fonts.</p></li>
+<li><p><code>--tiny-font</code><br /> Set the font scaling factor to 75%. Use this if you want <em>much</em> smaller fonts.</p></li>
+</ul>
+<h2 id="options-for-debugging"><span class="header-section-number">6.3</span> Options for Debugging</h2>
+<p>Command-line options that are intended for testing and debugging:</p>
+<ul>
+<li><p><code>--console</code><br /> Enable the LameXP debug console. Use this option with &quot;release&quot; builds of LameXP, where the console is hidden by default.</p></li>
+<li><p><code>--no-console</code><br /> The opposite of the &quot;console&quot; option: Disable the LameXP debug console. Use this option with &quot;pre-release&quot; (beta) builds of LameXP, where the console is visible by default.</p></li>
+<li><p><code>--force-cpu-no-64bit</code><br /> Treat the CPU as if it did <strong>not</strong> support <a href="http://en.wikipedia.org/wiki/X86-64">64-Bit (x64)</a> applications, even when it actually does so.</p></li>
+<li><p><code>--force-cpu-no-sse</code><br /> Treat the CPU as if it did <strong>not</strong> support any <a href="http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions">SSE</a> extensions (SSE, SSE2, SSE3, SSSE3, SSSE4, etc), even when it actually does so.</p></li>
+<li><p><code>--force-cpu-no-intel</code><br /> Treat the CPU as if it was a <em>non</em>-Intel processor, even when the vendor tag indicates an Intel processor.</p></li>
+<li><p><code>--ignore-compat-mode</code><br /> Do <strong>not</strong> check whether the application is running with &quot;compatibility mode&quot; enabled. It's still <em>not</em> recommended to run with compatibility mode enabled!</p></li>
+</ul>
+<h2 id="miscellaneous-options"><span class="header-section-number">6.4</span> Miscellaneous Options</h2>
+<p>Miscellaneous command-line options that may come in handy in certain situations:</p>
+<ul>
+<li><p><code>--kill</code><br /> Exit all running instances of LameXP.</p></li>
+<li><p><code>--force-kill</code><br /> Exit all running instances of LameXP as quickly as possible, even if that incurs data loss. Use with extreme care!</p></li>
+</ul>
+<h1 id="help-support"><span class="header-section-number">7</span> Help &amp; Support</h1>
 <p>Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be <em>reproduced</em> with the <strong>latest</strong> release version of LameXP!</p>
-<h2 id="download-mirrors"><span class="header-section-number">6.1</span> Download Mirrors</h2>
+<h2 id="download-mirrors"><span class="header-section-number">7.1</span> Download Mirrors</h2>
 <p>The latest <em>official</em> release of the LameXP software can be obtained from one of the following <em>official</em> download mirrors:</p>
 <ul>
 <li><a href="https://github.com/lordmulder/LameXP/releases/latest">https://github.com/lordmulder/LameXP/releases/latest</a><br /></li>
@@ -338,7 +386,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><a href="http://www.videohelp.com/tools/LameXP">http://www.videohelp.com/tools/LameXP</a></li>
 </ul>
 <p> <br />It is <em>highly recommended</em> to download LameXP <em>only</em> from one of the official mirrors listed above. We are <strong>not</strong> responsible for the integrity and trustworthiness of LameXP downloads you may have received from other locations!</p>
-<h2 id="diagnostic-output"><span class="header-section-number">6.2</span> Diagnostic Output</h2>
+<h2 id="diagnostic-output"><span class="header-section-number">7.2</span> Diagnostic Output</h2>
 <p>If you want to report any problems that you have encountered with the LameXP software, please provide as much details as possible. <em>Diagnostic output</em> can be especially helpful here!</p>
 <ul>
 <li><p>If a certain encoding job has failed, you can double-click the failed job in the LameXP &quot;Processing&quot; dialogue, which will bring up a detailed <em>log</em> for that job. Use the &quot;Copy to Clipboard&quot; button to save that information.</p></li>
@@ -347,22 +395,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p>In any case, the <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> <code>MUTILS_LOGFILE</code> may be used to specify a <em>log file</em> that will be created by LameXP. The information saved to the log file are the same as those available from the debug console.</p></li>
 </ul>
 <p> <br /><em>Note:</em> We highly recommend using a web-service like <a href="https://gist.github.com/">Gist</a>, <a href="http://pastie.org/">Pastie</a> or <a href="http://pastebin.com/">Pastebin</a> in order to share your diagnostic information. Please avoid posting long log files directly on the forums!</p>
-<h2 id="bugtracker"><span class="header-section-number">6.3</span> Bugtracker</h2>
+<h2 id="bugtracker"><span class="header-section-number">7.3</span> Bugtracker</h2>
 <p>The recommended way to submit <em>bug reports</em> or <em>feature requests</em> to the LameXP developers is using the <em>issue tracking system</em> at our GitHub project site:</p>
 <ul>
 <li><a href="https://github.com/lordmulder/LameXP/issues">https://github.com/lordmulder/LameXP/issues</a></li>
 </ul>
 <p> <br /><em>Note:</em> In order to use the issue tracking system, you need to log in with your GitHub account. Creating a GitHub account is easy and completely free of charge, simply click <a href="https://github.com/join">here</a>!</p>
-<h2 id="support-forum"><span class="header-section-number">6.4</span> Support Forum</h2>
+<h2 id="support-forum"><span class="header-section-number">7.4</span> Support Forum</h2>
 <p>If you want to discuss the development of the LameXP software, help other users or receive help from other users, please use the LameXP thread at <em>Doom9's</em> Forum:</p>
 <ul>
 <li><a href="http://forum.doom9.org/showthread.php?t=157726">http://forum.doom9.org/showthread.php?t=157726</a> – English<br /></li>
 <li><a href="http://forum.gleitz.info/showthread.php?t=37956">http://forum.gleitz.info/showthread.php?t=37956</a> – German</li>
 </ul>
 <p> <br /><em>Note:</em> Due to the massive amount of spam attacks, Doom9 has established strict anti-spam measures. Therefore, it takes a few days until your account will be approved.</p>
-<h1 id="developer-center"><span class="header-section-number">7</span> Developer Center</h1>
+<h1 id="developer-center"><span class="header-section-number">8</span> Developer Center</h1>
 <p>While LameXP originally was written in Delphi/Pascal, the current version 4 series of the software has been re-written in the <a href="http://en.wikipedia.org/wiki/C%2B%2B"><strong>C++</strong></a> programming language. LameXP v4 uses the <a href="http://www.qt.io/"><em>Qt cross-platform application framework</em></a> and provides full <a href="http://en.wikipedia.org/wiki/Unicode"><em>Unicode</em></a> support. Furthermore, LameXP is tightly coupled with the <a href="https://github.com/lordmulder/MUtilities"><em>MUtilities</em></a> library, a vast collection of &quot;utility&quot; routines and classes to extend the Qt framework. Build files are currently provided for <em>Microsoft Visual Studio</em> only. Linux support is currently provided via <a href="https://www.winehq.org/"><em>Wine</em></a>; a native Linux port of LameXP is planned for a future version.</p>
-<h2 id="source-code-access"><span class="header-section-number">7.1</span> Source Code Access</h2>
+<h2 id="source-code-access"><span class="header-section-number">8.1</span> Source Code Access</h2>
 <p>The source code of the <strong>LameXP</strong> software is managed using the <a href="http://git-scm.com/"><em>Git</em></a> version control system. The Git repository can be <em>cloned</em> from one of the official Git mirrors:</p>
 <ul>
 <li><p><code>git clone git://git.code.sf.net/p/lamexp/code LameXP</code> (<a href="http://sourceforge.net/p/lamexp/code/">Browse</a>)</p></li>
@@ -384,7 +432,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p><code>git clone git://repo.or.cz/MUtilities.git MUtilities</code> (<a href="http://repo.or.cz/w/MUtilities.git">Browse</a>)</p></li>
 </ul>
 <p> <br /><em>Remarks:</em> In case you are new to Git or want to extend your knowledge, have a look at the <a href="http://git-scm.com/book/en/v2"><em>Pro Git</em></a> book by Scott Chacon! For Windows users, we highly recommend using <a href="http://msysgit.github.com/"><em>MSYS Git</em></a> in conjunction with the superb <a href="http://tortoisegit.googlecode.com/"><em>Tortoise Git</em></a> front-end.</p>
-<h2 id="build-prerequisites"><span class="header-section-number">7.2</span> Build Prerequisites</h2>
+<h2 id="build-prerequisites"><span class="header-section-number">8.2</span> Build Prerequisites</h2>
 <p>LameXP is currently being developed and built using the following development tools and libraries:</p>
 <ul>
 <li><p><a href="http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2013 Update-4</a>, running on Windows 7 with Service Pack 1</p></li>
@@ -406,7 +454,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p><a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> – the Universal Document Converter</p></li>
 <li><p><a href="ftp://ftp.gnupg.org/gcrypt/binary/">GnuPG</a> – the GNU Privacy Guard v1.4.x</p></li>
 </ul>
-<h2 id="qt-as-static-libraries"><span class="header-section-number">7.3</span> Qt as Static Libraries</h2>
+<h2 id="qt-as-static-libraries"><span class="header-section-number">8.3</span> Qt as Static Libraries</h2>
 <p>In order to create a &quot;fully static&quot; build of LameXP, i.e. a build that does <em>not</em> depend on any &quot;external&quot; DLL files (except for the obligatory operating system DLL's that you cannot get around), you'll need to compile Qt as &quot;static&quot; libraries. The official Qt web-site <em>does</em> provide pre-compiled Qt libraries. However, they only provide DLL versions, they do <em>not</em> provide &quot;static&quot; libraries. Consequently, you need to build the required &quot;static&quot; Qt libraries yourself. The following simple instructions should make it easy to build Qt from the sources and as &quot;static&quot; libraries:</p>
 <ol>
 <li><p>Make sure <em>Visual Studio 2013</em> with Update-4 (or later) is installed</p></li>
@@ -445,17 +493,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p>Congratulations, you should now be prepared to build the <code>Release_Static</code> configuration of LameXP 😊</p></li>
 </ol>
 <p> <br /><em>Note:</em> Static libraries only work with the exactly same compiler (version) they were built with!</p>
-<h1 id="f.a.q.-frequently-asked-questions"><span class="header-section-number">8</span> F.A.Q. (Frequently Asked Questions)</h1>
+<h1 id="f.a.q.-frequently-asked-questions"><span class="header-section-number">9</span> F.A.Q. (Frequently Asked Questions)</h1>
 <p>This section tries to answer some of the most frequently asked questions. So if you have a question, please have a look at this section, before you send the question to us 😉</p>
-<h2 id="q-do-i-have-to-pay-for-using-or-obtaining-lamexp"><span class="header-section-number">8.1</span> Q: Do I have to pay for using or obtaining LameXP?</h2>
+<h2 id="q-do-i-have-to-pay-for-using-or-obtaining-lamexp"><span class="header-section-number">9.1</span> Q: Do I have to pay for using or obtaining LameXP?</h2>
 <p><strong>A:</strong> Nope. LameXP is <a href="http://en.wikipedia.org/wiki/Free_software">free software</a>. You may use it free of charge and for any purpose, including commercial purposes, according to the terms of the <a href="GNU%20General%20Public%20License"><em>GNU General Public License</em></a>. The developers of LameXP will <strong>never</strong> ask you to pay for using the LameXP software. Also, several <em>free</em> download mirrors are provided. However, it was brought to our attention, that there are some <em>third-party</em> web-sites which offer <em>payed</em> downloads of LameXP, or provide LameXP downloads that have been infected with Adware – we do <strong>not</strong> cooperate with any of these web-sites! Therefore, please do <strong>not</strong> pay money for using or obtaining the LameXP software; the developers of LameXP will <strong>not</strong> benefit from this money. If anybody tries to make you pay money for for using or obtaining the LameXP software, this is <em>fraud</em> and you should <strong>not</strong> respond to this kind of offer!</p>
-<h2 id="q-can-i-redistribute-the-lamexp-software"><span class="header-section-number">8.2</span> Q: Can I redistribute the LameXP software?</h2>
+<h2 id="q-can-i-redistribute-the-lamexp-software"><span class="header-section-number">9.2</span> Q: Can I redistribute the LameXP software?</h2>
 <p><strong>A:</strong> Yes. LameXP is <a href="http://en.wikipedia.org/wiki/Free_software">free software</a>. You may modify and/or redistribute it freely, according to the terms of the <a href="GNU%20General%20Public%20License"><em>GNU General Public License</em></a>. However, be aware that it is <em>strictly forbidden</em> to bundle the LameXP program files and/or the LameXP installation program with any kind of Adware, Spyware or PUP (potentially unwanted program). Usually, <em>no</em> additional permission will be needed. If, however, you wish to redistribute the LameXP software in a way that does <strong>not</strong> <em>comply</em> with the license terms, a written permission by the author of the LameXP software is required!</p>
-<h2 id="q-how-can-i-donate-to-the-authors-of-lamexp"><span class="header-section-number">8.3</span> Q: How can I donate to the authors of LameXP?</h2>
+<h2 id="q-how-can-i-donate-to-the-authors-of-lamexp"><span class="header-section-number">9.3</span> Q: How can I donate to the authors of LameXP?</h2>
 <p><strong>A:</strong> LameXP is a <em>non-profit</em> project. The authors of the LameXP software do <strong>not</strong> accept any donations, in terms of money. If you wish to support the LameXP project, then you may do so by contributing translations, by improving the LameXP program code or by providing web-servers.</p>
-<h2 id="q-why-is-this-software-called-lamexp"><span class="header-section-number">8.4</span> Q: Why is this software called <em>LameXP</em>?</h2>
+<h2 id="q-why-is-this-software-called-lamexp"><span class="header-section-number">9.4</span> Q: Why is this software called <em>LameXP</em>?</h2>
 <p><strong>A:</strong> Originally, the LameXP software was created as a very simple <a href="http://en.wikipedia.org/wiki/Graphical_user_interface">GUI front-end</a> to the <a href="http://lame.sourceforge.net/"><em>LAME</em></a> MP3 command-line encoder. The original version of this software, released some time in 2004, did <strong>not</strong> support any encoders except for LAME, it did <strong>not</strong> support any input formats except for Wave Audio, it did <strong>not</strong> support any audio filters, it did <strong>not</strong> support multi-threading, it did <strong>not</strong> support Unicode file names and it did <strong>not</strong> handle meta information. Because the software was a front-end to LAME, because it was running on the Microsoft Windows operating system and because, back at that time, <em>Windows XP</em> was the most popular Windows version (by far), I decided to call the software &quot;LAME front-end for Windows XP&quot; – or, in short, <em>LameXP</em>. Note the most creative name, I have to admit. Anyway, more and more features have been added to the LameXP software over the years. Also, the software has been re-written from the scratch at least two times. Nonetheless, the original name of the software has been retained. This is partly because people have become used to that name, and partly because I simply haven't been able to come up with a better name…</p>
-<h2 id="q-why-are-the-lamexp-binaries-not-digitally-signed"><span class="header-section-number">8.5</span> Q: Why are the LameXP binaries <em>not</em> digitally signed?</h2>
+<h2 id="q-why-are-the-lamexp-binaries-not-digitally-signed"><span class="header-section-number">9.5</span> Q: Why are the LameXP binaries <em>not</em> digitally signed?</h2>
 <p><strong>A:</strong> They <em>are</em>! The official LameXP binaries are digitally signed by <a href="http://de.wikipedia.org/wiki/Pretty_Good_Privacy"><em>PGP</em></a> signatures, created using the <a href="http://de.wikipedia.org/wiki/GNU_Privacy_Guard">GnuPG</a> software. However, the LameXP binaries are <em>not</em> signed in a way that the Microsoft Windows operating system recognizes. Please note that Microsoft Windows does <strong>not</strong> currently recognize PGP (GnuPG) signatures. For this reason, Microsoft Windows may show a warning when trying to launch or install the LameXP software. Microsoft Windows will also complain that the LameXP program files originate from an &quot;unknown publisher&quot;, despite they <em>are</em> signed.</p>
 <p>So why are the LameXP binaries not signed in the way Microsoft Windows recognizes? This is because Microsoft Windows uses a <em>hierarchical</em> trust model: Windows trusts into a number of <em>Certificate Authorities</em> (CA), which are built into the operating system. These CA's can issue signing certificates, e.g., to software companies. The software company can then use its signing certificate to sign their binaries. Finally, Windows will verify the signature by using the corresponding signing certificate. And the signing certificate is verified using the <em>built-in</em> CA certificate. However, this system is <em>flawed</em>: First of all, CA's do <em>not</em> create signing certificates for free. Also these certificates are only valid for a limited period of time. LameXP is a <em>non-profit</em> project and therefore we can <em>not</em> afford buying new certificates in regular intervals. Secondly, and even more important, the whole system depends on the <em>trustworthiness of the CA's</em>. But, as we all (should) know by now, these CA's can be forced to create &quot;bogus&quot; certificates, e.g. by intelligence services or other governmental organizations. Please also see <a href="http://blog.fefe.de/?ts=b25933c5"><strong>this</strong></a> blog post by &quot;fefe&quot; for an in-depth explanation.</p>
 <p>If you want to verify the LameXP signatures yourself, then you may do so by using the <a href="http://www.gpg4win.de/">Gpg4win</a> software package, an easy-to-use distribution of the <em>GnuPG</em> software for Microsoft Windows. Of course you will also require the <em>public</em> key of the LameXP developers. The <em>finperprint</em> of the official GnuPG signing key is <code>3265784425BF2B394F67CE07106A413D6CF3FA22</code> and the corresponding public key block is provided in the following. If you are <em>not</em> familiar with the GnuPG software yet, please have a look at the <a href="http://www.gpg4win.de/documentation.html">Gpg4win compendium</a> or the <a href="https://www.gnupg.org/documentation/manuals.html">GnuPG manual</a>.</p>
@@ -501,7 +549,7 @@ EBBqQT1s8/oi0RsAniNAOQRb8roflIOXVmeW3uB50RVtAJwLS5O19VD1W0HxjNZ6
 sE7XdEZn+w==
 =WDwE
 -----END PGP PUBLIC KEY BLOCK-----</code></pre>
-<h2 id="q-why-does-lamexp-connect-to-random-web-servers"><span class="header-section-number">8.6</span> Q: Why does LameXP connect to (random) web-servers?</h2>
+<h2 id="q-why-does-lamexp-connect-to-random-web-servers"><span class="header-section-number">9.6</span> Q: Why does LameXP connect to (random) web-servers?</h2>
 <p><strong>A:</strong> LameXP does <strong>not</strong> connect to any web-server, except for the &quot;automatic updates&quot; feature. Of course, in order to check for new updates, LameXP <em>unavoidably</em> has to communicate with our update servers. However, in <strong>no</strong> event LameXP will search for updates <em>without</em> your consent. Also, LameXP will <strong>not</strong> send any personal information to the update server. Instead of <em>uploading</em> your information, e.g. your current program version, to the web-server, LameXP will <em>download</em> the update information from the update server and compare it to your installed version locally. Furthermore, all information and program files downloaded from the update servers are protected by PGP (GnuPG) signatures, in order to assure the authenticity and integrity of these files. Files with missing/invalid signature are going to be <em>rejected</em>, so (spoofing) attacks are prevented.</p>
 <p><em>Note:</em> Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does <strong>not</strong> suffice here. In case that the update server does <strong>not</strong> respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connection is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of &quot;known&quot; hosts, taken mostly from <a href="http://www.alexa.com/topsites">Alexa's Top 500</a> list. In order to validate the Internet connection, LameXP will pick a <em>random</em> host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of &quot;known&quot; hosts have been reached successfully.</p>
 <p> <br /> <br /><strong>EOF</strong></p>

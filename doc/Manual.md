@@ -436,6 +436,91 @@ The "Processing" dialogue is going to turn *green*, as soon as all encoding jobs
 
 
 
+# Command-line Usage #
+
+Additional **[command-line](http://en.wikipedia.org/wiki/Command-line_interface) options** may be passed to LameXP when launching the application. You may do so, for example, by typing the complete command-line into the [*command prompt*](http://en.wikipedia.org/wiki/Cmd.exe) or by creating a [*shortcut*](http://en.wikipedia.org/wiki/File_shortcut) with the desired command-line options. The basic command-line syntax of LameXP is as follows: Each command-line option has to start with a ``--`` prefix. So if you intend to pass the option called "foo", then you actually need to type ``--foo``. Furthermore, while some command-line options are just *flags*, i.e. they can either be present or not (but that's it!), there also are command-line options that take an *argument*. The argument is *appended* directly to the option name to which it belongs to, but a ``=`` sign **must** to be inserted as a separator. If, for example, you wish to set the command-line option "foo" to an argument value of "bar", then the proper syntax is ``--foo=bar``. Sometimes your argument value may contain *whitespaces* though, in which case the *whole* command-line option (name + argument) **must** be enclosed with double quotes. For example, in order to set the option "foo" to a value of "C:\Some File.bar" (note the space character between "Some" and "File"), the proper syntax is ``"--foo=C:\Some File.bar"``. Last but not least, please note that the *same* command-line option may appear *multiple* times on the command-line &ndash; whether that actually makes any sense depends on the individual option though.
+
+
+## Add Files and/or Folders ##
+
+Command-line options for adding files and/or folders:
+
+* ``--add=filename``
+  Adds the file specified by *filename* to the source files list. The *filename* should be a [fully-qualified](http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths) path. If you wish to add multiple files at once, you can simply include this option multiple times.
+
+* ``--add-folder=directory``
+  Adds *all* supported files from the directory specified by *directory* to the source files list. The *directory* should be a [fully-qualified](http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths) path. Sub-directories are **not** considered.
+
+* ``--add-recursiver=directory``
+  This option works just like the "add-folder" option, except that it works recursively, i.e. it *does* take into account sub-directories. Use this option with care, since a whole lot of files may be added.
+
+
+### Examples ###
+
+Here are some *examples* on how to use the above command-line options correctly:
+
+* Add one file:
+  ``LameXP.exe "--add=C:\Some Folder\Some File.mp3"``
+
+* Add multiple files at once:
+  ``LameXP.exe "--add=C:\Some Folder\File #1.mp3" "--add=C:\Some Folder\File #2.mp3" "--add=C:\Some Folder\File #3.mp3"``
+
+* Add a whole directory:
+ ``LameXP.exe "--add-folder=C:\Some Folder"``
+
+
+## GUI Adjustment Options ##
+
+Command-line options for adjusting the graphical user-interface:
+
+* ``--huge-font``
+  Set the font scaling factor to 150%. Use this if you want *much* larger fonts.
+
+* ``--big-font``
+  Set the font scaling factor to 125%. Use this if you want *somewhat* larger fonts.
+
+* ``--small-font``
+  Set the font scaling factor to 87.5%. Use this if you want *somewhat* smaller fonts.
+
+* ``--tiny-font``
+  Set the font scaling factor to 75%. Use this if you want *much* smaller fonts.
+
+
+## Options for Debugging ##
+
+Command-line options that are intended for testing and debugging:
+
+* ``--console``
+  Enable the LameXP debug console. Use this option with "release" builds of LameXP, where the console is hidden by default.
+
+* ``--no-console``
+  The opposite of the "console" option: Disable the LameXP debug console. Use this option with "pre-release" (beta) builds of LameXP, where the console is visible by default.
+
+* ``--force-cpu-no-64bit``
+  Treat the CPU as if it did **not** support [64-Bit (x64)](http://en.wikipedia.org/wiki/X86-64) applications, even when it actually does so.
+
+* ``--force-cpu-no-sse``
+  Treat the CPU as if it did **not** support any [SSE](http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions) extensions (SSE, SSE2, SSE3, SSSE3, SSSE4, etc), even when it actually does so.
+
+* ``--force-cpu-no-intel``
+  Treat the CPU as if it was a *non*-Intel processor, even when the vendor tag indicates an Intel processor.
+
+* ``--ignore-compat-mode``
+  Do **not** check whether the application is running with "compatibility mode" enabled. It's still *not* recommended to run with compatibility mode enabled!
+
+
+## Miscellaneous Options ##
+
+Miscellaneous command-line options that may come in handy in certain situations:
+
+* ``--kill``
+  Exit all running instances of LameXP.
+
+* ``--force-kill``
+  Exit all running instances of LameXP as quickly as possible, even if that incurs data loss. Use with extreme care!
+
+
+
 # Help &amp; Support #
 
 Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be *reproduced* with the **latest** release version of LameXP!
