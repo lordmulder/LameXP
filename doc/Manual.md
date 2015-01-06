@@ -232,7 +232,7 @@ If you fully understand what the consequences of the "portable mode" are and sti
 ![Figure](img/lamexp/setup_3a.png)
 
 
-#### Portable Mode Warning ####
+#### Portable Mode Warning #### {-}
 
 While the "portable mode" is in effect, it is the *user's* responsibility to ensure that LameXP will be provided with the proper access rights to save/load its configuration files to/from the LameXP program directory!
 
@@ -290,7 +290,7 @@ Once the required Nero AAC files have been put into the proper place, simply *re
 Getting the Apple/QuickTime AAC encoder ready involves *two* separate steps: In the first place we will install the QAAC encoder, and in the second place we will install the Apple AAC encoder libraries.
 
 
-#### Install QAAC Encoder ####
+#### Install QAAC Encoder #### {-}
 
 First of all, you need to download the [QAAC](https://github.com/nu774/qaac) application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an *Add-in* for LameXP and is available from the following locations:
 
@@ -312,7 +312,7 @@ Please *extract* all the three files, the program ``qaac.exe`` plus its companio
 ![Figure](img/lamexp/setup_5b.png)
 
 
-#### Install Apple AAC Encoder Libraries ####
+#### Install Apple AAC Encoder Libraries #### {-}
 
 Next, the actual Apple/QuickTime AAC encoder libraries, which are part of the so-called "Apple Application Support" package, need to be installed on your computer. QAAC can *not* work without these libraries!
 

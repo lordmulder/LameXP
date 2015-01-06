@@ -187,10 +187,10 @@ static int lamexp_main(int &argc, char **argv)
 			{
 				if(!val.isEmpty())
 				{
-					qDebug("--> %s = \"%s\"", MUTILS_UTF8(key), MUTILS_UTF8(val));
+					qDebug("--%s = \"%s\"", MUTILS_UTF8(key), MUTILS_UTF8(val));
 					continue;
 				}
-				qDebug("--> %s", MUTILS_UTF8(key));
+				qDebug("--%s", MUTILS_UTF8(key));
 			}
 		}
 		qDebug(" ");
