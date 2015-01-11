@@ -2012,7 +2012,7 @@
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструкція користувача LameXP</translation>
     </message>
 </context>
 <context>
