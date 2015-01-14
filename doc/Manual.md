@@ -1,4 +1,5 @@
 % LameXP Audio-Encoder Front-End &ndash; Manual
+% Created by LoRd_MuldeR &lt;<mulder2@gmx>&gt; &ndash; check <http://muldersoft.com/> for news and updates!
 
 # Introduction #
 
@@ -38,7 +39,6 @@ The following *legacy* platforms are **not** actively supported any longer:
 * Microsoft Windows 98
 * Microsoft Windows 95
 
-&nbsp;  
 *Remarks:* Windows XP has reached "end of life" on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP. Thus **no** updates or bugfixes are made available to regular Windows XP users since that date, **not** even security fixes! Thus, all the security vulnerabilities that have been discovered *after* the deadline &ndash; and all the security vulnerabilities that are going to be discovered in the future &ndash; will *persists* forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we *highly* recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.
 
 
@@ -118,7 +118,6 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-&nbsp;  
 **Addendum:** When distributing binaries of the LameXP software, it is *strictly forbidden* to bundle the LameXP program files and/or the LameXP installation program with any kind of *Adware*, *Spyware* or *PUP (potentially unwanted program)*, including, but not limited to, any downloaders, dialers, browser toolbars/extensions or restricted shareware/demo programs. It is, however, perfectly legitimate to bundle LameXP with other *OpenSource* programs, according to the OSI (Open Source Initiative). Finally, it is also legitimate to bundle LameXP with *commercial software*, as long as that software does *not* meet the criteria of *Adware*, *Spyware* or *PUP*. If you bundle the LameXP software with another software, you are *required* to make sure that the user is provided with an easy way to install and start the LameXP software separately from that other software.
 
 
@@ -182,14 +181,12 @@ Shortly after launching the setup program, an [UAC](http://en.wikipedia.org/wiki
 
 ![Figure](img/lamexp/setup_1a.png)
 
-&nbsp;  
 Now simply follow the instructions of the setup wizard, which will guide you through the installation process&hellip;
 
 *Note:* Please do **not** change the "Destionation Folder", unless you know exactly what you are doing. The "Destionation Folder" cannot be changed, when *upgrading* an existing LameXP installation.
 
 ![Figure](img/lamexp/setup_1b.png)
 
-&nbsp;  
 Congratulation, LameXP has been installed successfully on your computer!
 
 *Note:* If you keep the "Run LameXP &hellip;" option enabled and click on the "Finish" button, the LameXP software will be launched immediately.
@@ -203,14 +200,12 @@ If you decided for the **ZIP package**, you need to open the downloaded ZIP file
 
 ![Figure](img/lamexp/setup_2a.png)
 
-&nbsp;  
 This step may be slightly different, depending on what file archive software (e.g. 7-Zip or WinRAR) you are using. Select **all** files in the LameXP ZIP archive and *extract* them to a new/empty directory of your choice.
 
 *Note:* It is very important that you have write-access to the chosen destination directory. So make sure that you choose a directory where the required access rights are granted!
 
 ![Figure](img/lamexp/setup_2b.png)
 
-&nbsp;  
 Congratulation, LameXP has been installed successfully on your computer! Now double-click on the ``LameXP.exe`` program file in order to launch the application!
 
 ![Figure](img/lamexp/setup_2c.png)
@@ -262,26 +257,22 @@ First of all, you need to download the Nero AAC encoder from the official Nero D
 * <http://www.nero.com/eng/company/about-nero/nero-aac-codec.php>
 * <http://www.free-codecs.com/download/Nero_AAC_Codec.htm>
 
-&nbsp;  
 Simply scroll down, click the "I agree" button, and enter ``user@example.com`` when asked for an e-mail address. Finally, click the "Download" button, which initates the download of the required ``NeroAACCodec-1.5.1.zip`` file.
 
 *Note:*  Although the ZIP file is called ``NeroAACCodec-1.5.1.zip``, it actually contains version **1.5.4.0** of the Nero AAC encoder software. Please check the included ``changelog.txt`` to verify this!
 
 ![Figure](img/lamexp/setup_4a.png)
 
-&nbsp;  
 Now open the downloaded ZIP file with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and navigate to the "win32" sub-directory.
 
 ![Figure](img/lamexp/setup_4b.png)
 
-&nbsp;  
 Finally, *extract* all the three files ``neroAacDec.exe``, ``neroAacEnc.exe`` and ``neroAacTag.exe`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
 ![Figure](img/lamexp/setup_4c.png)
 
-&nbsp;  
 Once the required Nero AAC files have been put into the proper place, simply *restart* LameXP in order to enable the AAC encoding support!
 
 
@@ -297,14 +288,12 @@ First of all, you need to download the [QAAC](https://github.com/nu774/qaac) app
 * <http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/>
 * <http://muldersoft.com/misc/lamexp/add-ins/qaac/>
 
-&nbsp;  
 Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) to find the required QAAC program files.
 
 *Note:* The LameXP software generally expects the **latest** version of the QAAC add-in; and the QAAC add-in is designed to work with the **latest** version of the LameXP software. Make sure your files are up-to-date!
 
 ![Figure](img/lamexp/setup_5a.png)
 
-&nbsp;  
 Please *extract* all the three files, the program ``qaac.exe`` plus its companion DLLs ``libsoxr.dll`` and ``libsoxconvolver.dll``, into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
@@ -321,19 +310,16 @@ The required "Apple Application Support" package is included, for example, in th
 * <https://www.apple.com/quicktime/download/>
 * <https://www.apple.com/itunes/download/>
 
-&nbsp;  
 Since you usually do **not** want to *install* the complete QuickTime (or iTunes) software on your computer, please only *download* the QuickTime (or iTunes) setup package, but do **not** actually *run* the installer!
 
 Instead, open the QuickTimer setup program, i.e. ``QuickTimeInstaller.exe``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and *extract* the required ``AppleApplicationSupport.msi`` package.
 
 ![Figure](img/lamexp/setup_5c.png)
 
-&nbsp;  
 After the "Apple Application Support" setup package has been extracted, you can launch it by double-clicking on the ``AppleApplicationSupport.msi`` file. Then simply follow the installer's instructions.
 
 ![Figure](img/lamexp/setup_5d.png)
 
-&nbsp;  
 Once the QAAC encoder as well as the Apple AAC encoder libraries ("Apple Application Support") have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
 
 *Note:* You may run ``qaac.exe --check`` from the [command prompt](http://en.wikipedia.org/wiki/Cmd.exe) to ensure that QAAC has been set up correctly. Expected output is ``qaac 2.xx, CoreAudioToolbox x.x.x.x``.
@@ -351,17 +337,18 @@ First of all, you need to add all **source files** that you want to convert. So 
 
 ![Figure](img/lamexp/tutorial_1a.png)
 
-&nbsp;  
 This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the "Open" button. You can repeat this step multiple times, e.g. to add files from different directories.
 
 ![Figure](img/lamexp/tutorial_1b.png)
 
-&nbsp;  
-All files you have added, so far, will show up in the list. You can click the "Remove" button to remove a single file from the list or "Clear" to remove them all. Click the "Show details" button to show details about a file.
+All files you have added, so far, will show up in the list. You can click the "Remove" button to remove a single file from the list or "Clear" to remove them all. You can also click the "Show details" button to show details about the selected file.
 
 ![Figure](img/lamexp/tutorial_1c.png)
 
-&nbsp;  
+If you want to add an *entire* directory, you can select "Open Folder" from the "File" menu, which will bring up a directory selection dialogue. "Open Folder Recursively" works in a similar way, but also includes *all* sub-directories.
+
+![Figure](img/lamexp/tutorial_1d.png)
+
 *Did you know?* Files can also be added via [Drag &amp; Drop](http://en.wikipedia.org/wiki/Drag_and_drop). Just grab the files that you want to add in your Explorer window and drop them onto the LameXP main window (or onto the LameXP "dropbox" widget).
 
 
@@ -373,17 +360,14 @@ Next, you need to choose the **output directory**, i.e. the directory where the 
 
 ![Figure](img/lamexp/tutorial_2a.png)
 
-&nbsp;  
 Sometimes you may wish to store the converted files in a *new* (sub-)folder. In this case, simply click the "Make New Folder" button, enter the desired folder name and hit the "OK" button.
 
 ![Figure](img/lamexp/tutorial_2b.png)
 
-&nbsp;  
 The new folder is going to be created inside the current directory and will be selected automatically. You can repeat this step multiple times in order to created nested sub-folders.
 
 ![Figure](img/lamexp/tutorial_2c.png)
 
-&nbsp;  
 *Did you know?* If you enable the "Save output files in the same directory where the input file is located" option, each output file will be saved to the same location where the corresponding source file resides.
 
 
@@ -395,21 +379,18 @@ Finally, you need to choose your **compression settings**. First, and most impor
 
 ![Figure](img/lamexp/tutorial_3a.png)
 
-&nbsp;  
 Once you have decided for an audio format, you need to choose a *rate-control* mode next. The available rate-control modes include VBR (quality-base variable bitrate), ABR (average bitrate) and CBR (constant bitrate). Not all modes are available for all audio formats.
 
 *Note:* If you are uncertain which rate-control mode to chose, the guideline is that VBR mode should be preferred over ABR mode whenever possible. And CBR mode generally should be avoided. See also Wikipedia's article on [variable bitrate](http://en.wikipedia.org/wiki/Variable_bitrate) encoding.
 
 ![Figure](img/lamexp/tutorial_3b.png)
 
-&nbsp;  
 Last but not least, you need to choose the desired target *bitrate* or *quality-level*. Put simply, this controls the  "quality vs. file size" trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode. 
 
 *Note:* If you are uncertain which bitrate or quality-level to choose, bare in mind that a higher bitrate (or a better quality level) results in better audio quality, but also produces larger files &ndash; and vice versa. "Level 2" or "192 kbps" is a typical choice for MP3.
 
 ![Figure](img/lamexp/tutorial_3c.png)
 
-&nbsp;  
 *Did you know?* You can click on the "Reset" link at any time in order to reset all available settings for all available encoders to their factory defaults.
 
 
@@ -419,19 +400,16 @@ When everything has been set up properly, the time has come to actually start th
 
 ![Figure](img/lamexp/tutorial_4a.png)
 
-&nbsp;  
 This will bring up the "Processing" dialogue. LameXP will now convert all your audio files on the list. Depending on the number of audio files and depending on the performance of your system, this may take several minutes, so please be patient &#x1f609;
 
 *Note:* In order to leverage the power "multi-core" processors and thus massively speed-up the encoding process, LameXP will run multiple encoding jobs in parallel &ndash; provided that your system has multiple processor cores and that there are enough encoding jobs left in the queue.
 
 ![Figure](img/lamexp/tutorial_4b.png)
 
-&nbsp;  
 The "Processing" dialogue is going to turn *green*, as soon as all encoding jobs have finished successfully. If anything went wrong, e.g. if one of the encoding jobs failed for some reason, it will turn *red* instead.
 
 ![Figure](img/lamexp/tutorial_4c.png)
 
-&nbsp;  
 *Did you know?* You can double-click on a completed (or failed) job in the list, in order to bring up a dialogue with all details about the specific job. This is especially useful, if something went wrong.
 
 
@@ -538,7 +516,6 @@ The latest *official* release of the LameXP software can be obtained from one of
 * <http://www.free-codecs.com/lamexp_download.htm>
 * <http://www.videohelp.com/tools/LameXP>
 
-&nbsp;  
 It is *highly recommended* to download LameXP *only* from one of the official mirrors listed above. We are **not** responsible for the integrity and trustworthiness of LameXP downloads you may have received from other locations!
 
 
@@ -554,7 +531,6 @@ If you want to report any problems that you have encountered with the LameXP sof
 
 * In any case, the [environment variable](http://en.wikipedia.org/wiki/Environment_variable) ``MUTILS_LOGFILE`` may be used to specify a *log file* that will be created by LameXP. The information saved to the log file are the same as those available from the debug console.
 
-&nbsp;  
 *Note:* We highly recommend using a web-service like [Gist](https://gist.github.com/), [Pastie](http://pastie.org/) or [Pastebin](http://pastebin.com/) in order to share your diagnostic information. Please avoid posting long log files directly on the forums!
 
 
@@ -564,7 +540,6 @@ The recommended way to submit *bug reports* or *feature requests* to the LameXP 
 
 * <https://github.com/lordmulder/LameXP/issues>
 
-&nbsp;  
 *Note:* In order to use the issue tracking system, you need to log in with your GitHub account. Creating a GitHub account is easy and completely free of charge, simply click [here](https://github.com/join)!
 
 
@@ -575,7 +550,6 @@ If you want to discuss the development of the LameXP software, help other users 
 * <http://forum.doom9.org/showthread.php?t=157726> &ndash; English
 * <http://forum.gleitz.info/showthread.php?t=37956> &ndash; German
 
-&nbsp;  
 *Note:* Due to the massive amount of spam attacks, Doom9 has established strict anti-spam measures. Therefore, it takes a few days until your account will be approved.
 
 
@@ -603,7 +577,6 @@ The source code of the **LameXP** software is managed using the [*Git*](http://g
 
 * ``git clone git://repo.or.cz/LameXP.git LameXP`` ([Browse](http://repo.or.cz/w/LameXP.git))
 
-&nbsp;  
 The source code of the **MUtilities** library is managed using the [*Git*](http://git-scm.com/) version control system. The Git repository can be *cloned* from one of the official Git mirrors:
 
 * ``git clone git://git.code.sf.net/p/mutilities/code MUtilities`` ([Browse](http://sourceforge.net/p/mutilities/code/))
@@ -620,7 +593,6 @@ The source code of the **MUtilities** library is managed using the [*Git*](http:
 
 * ``git clone git://repo.or.cz/MUtilities.git MUtilities`` ([Browse](http://repo.or.cz/w/MUtilities.git))
 
-&nbsp;  
 *Remarks:* In case you are new to Git or want to extend your knowledge, have a look at the [*Pro Git*](http://git-scm.com/book/en/v2) book by Scott Chacon! For Windows users, we highly recommend using [*MSYS Git*](http://msysgit.github.com/) in conjunction with the superb [*Tortoise Git*](http://tortoisegit.googlecode.com/) front-end.
 
 
@@ -636,7 +608,6 @@ LameXP is currently being developed and built using the following development to
 
 * The minimum supported *build* platform is Windows 7 (x86 and x64)
 
-&nbsp;  
 In order to create LameXP release packages, using the included deployment scripts, you need the following additional tools:
 
 * [7-Zip](http://www.7-zip.org/) &ndash; file archiver with a high compression ratio
@@ -704,7 +675,6 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
 
 15. Congratulations, you should now be prepared to build the ``Release_Static`` configuration of LameXP &#x1f60a;
 
-&nbsp;  
 *Note:* Static libraries only work with the exactly same compiler (version) they were built with!
 
 
@@ -793,7 +763,6 @@ If you want to verify the LameXP signatures yourself, then you may do so by usin
 **A:** LameXP does **not** connect to any web-server, except for the "automatic updates" feature. Of course, in order to check for new updates, LameXP *unavoidably* has to communicate with our update servers. However, in **no** event LameXP will search for updates *without* your consent. Also, LameXP will **not** send any personal information to the update server. Instead of *uploading* your information, e.g. your current program version, to the web-server, LameXP will *download* the update information from the update server and compare it to your installed version locally. Furthermore, all information and program files downloaded from the update servers are protected by PGP (GnuPG) signatures, in order to assure the authenticity and integrity of these files. Files with missing/invalid signature are going to be *rejected*, so (spoofing) attacks are prevented.
 
 *Note:* Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does **not** suffice here. In case that the update server does **not** respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connection is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of "known" hosts, taken mostly from [Alexa's Top 500](http://www.alexa.com/topsites) list. In order to validate the Internet connection, LameXP will pick a *random* host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of "known" hosts have been reached successfully.
-
 
 
 &nbsp;  
