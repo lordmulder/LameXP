@@ -395,7 +395,8 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="tmp\LameXP\QRC_Images.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Localization.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Sounds.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_A.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_B.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_A.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_B.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_C.cpp" />
@@ -1119,7 +1120,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\UIC_%(Filename).h;%(Outputs)</Outputs>
     </CustomBuild>
     <None Include="ReadMe.txt" />
-    <CustomBuild Include="res\Tools_Decd.qrc">
+    <CustomBuild Include="res\Tools_Decd_A.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1226,6 +1227,18 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Decd_B.qrc">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

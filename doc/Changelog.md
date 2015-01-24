@@ -12,6 +12,7 @@
 * Updated mpg123 decoder to v1.20.1 (2014-06-17), compiled with GCC 4.9.0
 * Updated Vorbis encoder to OggEnc v2.87 (2014-06-24), using libvorbis v1.3.4 and aoTuV b6.03_2014
 * Updated Vorbis decoder to OggDec v1.10.1 (2014-06-25), using libVorbis v1.3.4
+* Updated FLAC encoder/decoder to v1.3.1 (2014-11-26), compiled with ICL 15.0 and MSVC 12.0
 * Updated GnuPG to v1.4.18 (2014-06-30), compiled with GCC 4.9.1
 * Updated QAAC add-in to the latest to QAAC v2.44, including a [fix](https://github.com/nu774/qaac/commit/ad1e0ea9daed076531e96cfa3b82f290ba9eeb20) for the ``--artwork`` option
 * Fixed potential crash in Cue Sheet importer (occurred when *all* input files were missing)

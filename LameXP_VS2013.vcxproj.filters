@@ -250,9 +250,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_A.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Sounds.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -405,6 +402,12 @@
     </ClCompile>
     <ClCompile Include="tmp\LameXP\MOC_CustomEventFilter.cpp">
       <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_A.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_B.cpp">
+      <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -686,9 +689,6 @@
     <CustomBuild Include="src\Encoder_AAC_FHG.h">
       <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools_Decd.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="src\Thread_CPUObserver.h">
       <Filter>Header Files\Threads</Filter>
     </CustomBuild>
@@ -746,11 +746,17 @@
     <CustomBuild Include="src\Encoder_MAC.h">
       <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools_Decd_A.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
+    </None>
+    <None Include="res\Tools_Decd_B.qrc">
+      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
