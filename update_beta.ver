@@ -1,10 +1,10 @@
 [!Update]
-TimestampCreated=2015-01-01
+TimestampCreated=2015-01-25
 
 [LameXP]
-BuildNo=1664
-BuildDate=2015-01-01
+BuildNo=1674
+BuildDate=2015-01-25
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://mplayer.savedonthe.net/
-DownloadFilename=LameXP-BETA.2015-01-01.Release-Static.Build-1664.exe
-DownloadFilecode=39e9da43333f0d6c27471f6d996f9a938ea93a9b
+DownloadFilename=LameXP-BETA.2015-01-25.Release-Static.Build-1674.exe
+DownloadFilecode=84b9d03bb28116938e440eb3e577bc6098cbb71d
