@@ -1,5 +1,5 @@
 [!Update]
-TimestampCreated=2014-11-02
+TimestampCreated=2015-01-31
 
 [MPlayer for Windows]
 BuildNo=127
@@ -17,9 +17,9 @@ DownloadFilename=LameXP.2014-06-23.Release-Static.Build-1558.exe
 DownloadFilecode=fdc5ea0b7099d291739bc3de58487ee9412ea0bd
 
 [Simple x264 Launcher]
-BuildNo=890
-BuildDate=2014-11-02
+BuildNo=902
+BuildDate=2015-01-31
 DownloadSite=http://forum.doom9.org/showthread.php?t=144140
 DownloadAddress=http://mplayer.savedonthe.net/
-DownloadFilename=x264_launcher.2014-11-02.exe
-DownloadFilecode=764a094c365ef16b98cbc2a8322e5af7c2a54d71
+DownloadFilename=x264_launcher.2015-01-31.exe
+DownloadFilecode=c36fd842245f2fd34e083a19470fcc3bcb5d0f24
