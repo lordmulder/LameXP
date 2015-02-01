@@ -43,7 +43,6 @@ protected:
 	MUtils::IPCChannel *const m_ipcChannel;
 
 private:
-	char *m_parameter;
 	volatile bool m_aborted;
 
 signals:

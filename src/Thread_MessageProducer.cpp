@@ -63,7 +63,7 @@ void MessageProducerThread::run()
 	//Kill application?
 	if(arguments.contains("kill"))
 	{
-		if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_NONE, NULL))
+		if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_NONE))
 		{
 			qWarning("Failed to send IPC message!");
 		}
@@ -71,7 +71,7 @@ void MessageProducerThread::run()
 	}
 	if(arguments.contains("force-kill"))
 	{
-		if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_FORCE, NULL))
+		if(!m_ipcChannel->send(IPC_CMD_TERMINATE, IPC_FLAG_FORCE))
 		{
 			qWarning("Failed to send IPC message!");
 		}
@@ -86,7 +86,7 @@ void MessageProducerThread::run()
 			const QFileInfo file = QFileInfo(value);
 			if(file.exists() && file.isFile())
 			{
-				if(!m_ipcChannel->send(IPC_CMD_ADD_FILE, IPC_FLAG_NONE, MUTILS_UTF8(file.canonicalFilePath())))
+				if(!m_ipcChannel->send(IPC_CMD_ADD_FILE, IPC_FLAG_NONE, QStringList() << file.canonicalFilePath()))
 				{
 					qWarning("Failed to send IPC message!");
 				}
@@ -101,7 +101,7 @@ void MessageProducerThread::run()
 			const QDir dir = QDir(value);
 			if(dir.exists())
 			{
-				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_NONE, MUTILS_UTF8(dir.canonicalPath())))
+				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_NONE, QStringList() << dir.canonicalPath()))
 				{
 					qWarning("Failed to send IPC message!");
 				}
@@ -116,7 +116,7 @@ void MessageProducerThread::run()
 			const QDir dir = QDir(value);
 			if(dir.exists())
 			{
-				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_ADD_RECURSIVE, MUTILS_UTF8(dir.canonicalPath())))
+				if(!m_ipcChannel->send(IPC_CMD_ADD_FOLDER, IPC_FLAG_ADD_RECURSIVE, QStringList() << dir.canonicalPath()))
 				{
 					qWarning("Failed to send IPC message!");
 				}
@@ -127,7 +127,7 @@ void MessageProducerThread::run()
 
 	if(!bSentFiles)
 	{
-		if(!m_ipcChannel->send(IPC_CMD_PING, IPC_FLAG_NONE, "Use running instance!"))
+		if(!m_ipcChannel->send(IPC_CMD_PING, IPC_FLAG_NONE, QStringList() << QLatin1String("Use running instance!")))
 		{
 			qWarning("Failed to send IPC message!");
 		}

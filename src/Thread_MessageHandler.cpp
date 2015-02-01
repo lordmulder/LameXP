@@ -48,23 +48,22 @@ MessageHandlerThread::MessageHandlerThread(MUtils::IPCChannel *const ipcChannel)
 	m_ipcChannel(ipcChannel)
 {
 	m_aborted = false;
-	m_parameter = new char[MUtils::IPCChannel::MAX_MESSAGE_LEN];
 }
 
 MessageHandlerThread::~MessageHandlerThread(void)
 {
-	delete [] m_parameter;
 }
 
 void MessageHandlerThread::run()
 {
 	m_aborted = false;
 	setTerminationEnabled(true);
+	QStringList params;
+	quint32 command = 0, flags = 0;
 
 	while(!m_aborted)
 	{
-		unsigned int command = 0, flags = 0;
-		if(!m_ipcChannel->read(command, flags, m_parameter, MUtils::IPCChannel::MAX_MESSAGE_LEN))
+		if(!m_ipcChannel->read(command, flags, params))
 		{
 			qWarning("Failed to read next IPC message!");
 			break;
@@ -81,10 +80,16 @@ void MessageHandlerThread::run()
 			emit otherInstanceDetected();
 			break;
 		case IPC_CMD_ADD_FILE:
-			emit fileReceived(QString::fromUtf8(m_parameter));
+			if(params.count() > 0 )
+			{
+				emit fileReceived(params.first());
+			}
 			break;
 		case IPC_CMD_ADD_FOLDER:
-			emit folderReceived(QString::fromUtf8(m_parameter), TEST_FLAG(IPC_FLAG_ADD_RECURSIVE));
+			if(params.count() > 0 )
+			{
+				emit folderReceived(params.first(), TEST_FLAG(IPC_FLAG_ADD_RECURSIVE));
+			}
 			break;
 		case IPC_CMD_TERMINATE:
 			if(TEST_FLAG(IPC_FLAG_FORCE))
@@ -105,7 +110,7 @@ void MessageHandlerThread::stop(void)
 	if(!m_aborted)
 	{
 		m_aborted = true;
-		m_ipcChannel->send(0, 0, NULL);
+		m_ipcChannel->send(0, 0, QStringList());
 	}
 }
 
