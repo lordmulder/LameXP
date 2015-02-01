@@ -24,8 +24,8 @@
 #include "Global.h"
 
 //MUtils
-#include <MUtils/KeccakHash.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/Hash_Keccak.h>
 #include <MUtils/Exception.h>
 
 //Qt
@@ -75,13 +75,13 @@ QByteArray LockedFile::fileHash(QFile &file)
 
 	if(file.isOpen() && file.reset())
 	{
-		MUtils::KeccakHash keccak;
+		MUtils::Hash::Keccak keccak;
 
 		const QByteArray data = file.readAll();
 		const QByteArray seed = QByteArray::fromHex(g_seed);
 		const QByteArray salt = QByteArray::fromHex(g_salt);
 	
-		if(keccak.init(MUtils::KeccakHash::hb384))
+		if(keccak.init(MUtils::Hash::Keccak::hb384))
 		{
 			bool ok = true;
 			ok = ok && keccak.addData(seed);
@@ -270,7 +270,7 @@ const QString &LockedFile::filePath()
 
 void LockedFile::selfTest()
 {
-	if(!MUtils::KeccakHash::selfTest())
+	if(!MUtils::Hash::Keccak::selfTest())
 	{
 		MUTILS_THROW("QKeccakHash self-test has failed!");
 	}
