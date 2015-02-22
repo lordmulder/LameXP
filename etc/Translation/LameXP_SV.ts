@@ -102,7 +102,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="654"/>
         <source>Official Mirrors:</source>
-        <translation>Officiella servrar</translation>
+        <translation>Officiella spegelservrar:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="664"/>
@@ -138,7 +138,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="687"/>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis-kodare</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="689"/>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="718"/>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation>Helt öppen, avgiftsfri, mycket mångsidig ljud-codec</translation>
+        <translation>Helt öppen, avgiftsfri, mycket mångsidig ljud-codec.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="723"/>
@@ -203,12 +203,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="737"/>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggDec - Vorbis-kodare</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="739"/>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg Vorbis-kodare skapad av John33.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="744"/>
@@ -546,7 +546,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Varning! Några av de indatafiler som krävs, kunde inte hittas!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="400"/>
@@ -1689,7 +1689,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4654"/>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP användarmanual</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4663"/>
@@ -1739,12 +1739,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4741"/>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapportera ett fel (GitHub)</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4750"/>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hydrogenaudio kunskapsdatabas</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="790"/>
@@ -3393,18 +3393,18 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="279"/>
         <source>Testing your internet connection, please wait...</source>
-        <translation>Kontrollerar iInternetanslutningen, vänta...</translation>
+        <translation>Kontrollerar internetanslutningen, vänta...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="300"/>
         <source>It appears that the computer currently is offline!</source>
-        <translation>Datorn verkar inte vara ansluten till Internet!</translation>
+        <translation>Datorn verkar inte vara ansluten till internet!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
-        <translation>Tillse att datorn är ansluten till Internet och försök igen.</translation>
+        <translation>Tillse att datorn är ansluten till internet och försök igen.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="305"/>
