@@ -258,15 +258,15 @@
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OggEnc - Vorbis Encoder</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OggDec - Vorbis Decoder</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Command line Ogg Vorbis decoder created by John33.</translation>
     </message>
 </context>
 <context>
@@ -470,7 +470,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">알림: 일부의 필수 입력 파일들을 찾을 수 없습니다!</translation>
     </message>
 </context>
 <context>
@@ -1988,15 +1988,15 @@
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">버그 보고 (GitHub)</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hydrogenaudio 지식 베이스</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP 사용자 매뉴얼</translation>
     </message>
 </context>
 <context>
