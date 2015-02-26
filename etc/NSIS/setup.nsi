@@ -56,6 +56,9 @@
 ;UUID
 !define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
 
+;App Paths
+!define AppPaths "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths"
+
 ;Web-Site
 !define MyWebSite "http://muldersoft.com/"
 
@@ -539,6 +542,9 @@ Section "-Update Registry"
 	WriteRegStr HKLM "${MyRegPath}" "DisplayVersion" "${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 	WriteRegStr HKLM "${MyRegPath}" "URLInfoAbout" "${MyWebSite}"
 	WriteRegStr HKLM "${MyRegPath}" "URLUpdateInfo" "${MyWebSite}"
+	
+	WriteRegStr HKLM "${AppPaths}\LameXP.exe" "" "$INSTDIR\$R0"
+	WriteRegStr HKLM "${AppPaths}\LameXP.exe" "Path" "$INSTDIR"
 SectionEnd
 
 Section "-Finished"
@@ -557,7 +563,7 @@ SectionEnd
 ;--------------------------------
 
 Section "Uninstall"
-	SetOutPath "$INSTDIR"
+	SetOutPath "$EXEDIR"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_UNINSTALL)"
 
 	; --------------
@@ -631,6 +637,9 @@ Section "Uninstall"
 	DeleteRegKey HKLM "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{54dcbccb-c905-46dc-b6e6-48563d0e9e55}"
 	DeleteRegKey HKCU "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{54dcbccb-c905-46dc-b6e6-48563d0e9e55}"
 	
+	DeleteRegKey HKLM "${AppPaths}\LameXP.exe"
+	DeleteRegKey HKCU "${AppPaths}\LameXP.exe"
+
 	MessageBox MB_YESNO|MB_TOPMOST "$(LAMEXP_LANG_UNINST_PERSONAL)" IDNO +3
 	Delete "$LOCALAPPDATA\LoRd_MuldeR\LameXP - Audio Encoder Front-End\config.ini"
 	Delete "$INSTDIR\*.ini"
