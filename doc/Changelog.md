@@ -10,7 +10,7 @@
 * Updated MediaInfo to v0.7.72 (2015-01-07), compiled with ICL 15.0 and MSVC 12.0
 * Updated SoX to v14.4.2-Git (2012-10-06), compiled with ICL 15.0 and MSVC 12.0
 * Updated Opus libraries to v1.1.x and Opus-Tools v0.1.9 to latest Git Master (2014-10-04)
-* Updated mpg123 decoder to v1.21.0 (2014-10-11), compiled with GCC 4.9.1
+* Updated mpg123 decoder to v1.22.0 (2015-02-24), compiled with GCC 4.9.2
 * Updated Vorbis encoder to OggEnc v2.87 (2014-06-24), using libvorbis v1.3.4 and aoTuV b6.03_2014
 * Updated Vorbis decoder to OggDec v1.10.1 (2014-06-25), using libVorbis v1.3.4
 * Updated FLAC encoder/decoder to v1.3.1 (2014-11-26), compiled with ICL 15.0 and MSVC 12.0
@@ -21,6 +21,7 @@
 * Fixed a very rare problem that, occasionally, prevented the TEMP folder from being removed
 * The limit for the maximum number of parallel instances has been increased to 32
 * Experimental support for Windows 10 Technical Preview 
+* Updated language files (big thank-you to all contributors !!!)
 
 
 ## LameXP v4.10 [2014-06-23] ## {-}
