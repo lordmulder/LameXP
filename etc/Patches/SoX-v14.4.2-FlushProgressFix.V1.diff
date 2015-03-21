@@ -1,0 +1,15 @@
+ src/sox.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/sox.c b/src/sox.c
+index ec1dffe..ebfaf60 100644
+--- a/src/sox.c
++++ b/src/sox.c
+@@ -1273,6 +1273,7 @@ static void display_status(sox_bool all_done)
+   }
+   if (all_done)
+     fputc('\n', stderr);
++  fflush(stderr);
+ }
+ 
+ #ifdef HAVE_TERMIOS_H
