@@ -1309,7 +1309,7 @@
     </message>
     <message>
         <source>Peak Volume (dB):</source>
-        <translation>Max. Lautstärke (dB):</translation>
+        <translation>Max. Pegel (dB):</translation>
     </message>
     <message>
         <source>Reset Advanced Options </source>
@@ -1708,22 +1708,6 @@
         <translation>Achtung: Die Geschwindigkeit wird sehr gering sein. Bitte &lt;u&gt;nicht&lt;/u&gt; über die Geschwindigkeit beschweren!</translation>
     </message>
     <message>
-        <source>Peak Level</source>
-        <translation>Max. Pegel</translation>
-    </message>
-    <message>
-        <source>RMS Level</source>
-        <translation>Max. Energie</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Keiner</translation>
-    </message>
-    <message>
-        <source>Equalization Mode:</source>
-        <translation>Angleichungsmodus:</translation>
-    </message>
-    <message>
         <source>DEMO VERSION</source>
         <translation></translation>
     </message>
@@ -2005,6 +1989,18 @@
     <message>
         <source>LameXP User&apos;s Manual</source>
         <translation>LameXP Benutzerhandbuch</translation>
+    </message>
+    <message>
+        <source>Enable Dynamic Normalization</source>
+        <translation>Dynamische Normalisierung</translation>
+    </message>
+    <message>
+        <source>Window Size:</source>
+        <translation>Fenstergröße:</translation>
+    </message>
+    <message>
+        <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
+        <translation>Kanal-Kopplung aktivieren, d.h. alle Kanäle einer Mehrkanal-Datei um den gleichen Faktor verstärken</translation>
     </message>
 </context>
 <context>

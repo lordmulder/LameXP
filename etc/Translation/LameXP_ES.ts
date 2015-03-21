@@ -1707,22 +1707,6 @@
         <translation>Aviso: ¡La velocidad de proceso será muy lenta. Por favor, &lt;u&gt;no&lt;/u&gt; se queje de la velocidad de proceso!</translation>
     </message>
     <message>
-        <source>Peak Level</source>
-        <translation>Nivel de pico</translation>
-    </message>
-    <message>
-        <source>RMS Level</source>
-        <translation>Nivel RMS</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ninguno</translation>
-    </message>
-    <message>
-        <source>Equalization Mode:</source>
-        <translation>Modo de equalización:</translation>
-    </message>
-    <message>
         <source>DEMO VERSION</source>
         <translation>VERSIÓN DEMO</translation>
     </message>
@@ -2003,6 +1987,18 @@
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Dynamic Normalization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

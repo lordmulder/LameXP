@@ -167,6 +167,11 @@ while(0)
 
 #define SET_CHECKBOX_STATE(CHCKBX, STATE) do \
 { \
+	const bool isDisabled = (!(CHCKBX)->isEnabled()); \
+	if(isDisabled) \
+	{ \
+		(CHCKBX)->setEnabled(true); \
+	} \
 	if((CHCKBX)->isChecked() != (STATE)) \
 	{ \
 		(CHCKBX)->click(); \
@@ -174,6 +179,10 @@ while(0)
 	if((CHCKBX)->isChecked() != (STATE)) \
 	{ \
 		qWarning("Warning: Failed to set checkbox " #CHCKBX " state!"); \
+	} \
+	if(isDisabled) \
+	{ \
+		(CHCKBX)->setEnabled(false); \
 	} \
 } \
 while(0)
@@ -454,31 +463,34 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
 	if(m_settings->maximumInstances() > 0) ui->sliderMaxInstances->setValue(m_settings->maximumInstances());
 
-	ui->spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRate());
-	ui->spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRate());
-	ui->spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
-	ui->spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBass()) / 100.0);
-	ui->spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTreble()) / 100.0);
-	ui->spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSize());
-	ui->spinBoxOpusComplexity->setValue(m_settings->opusComplexity());
+	ui->spinBoxBitrateManagementMin   ->setValue(m_settings->bitrateManagementMinRate());
+	ui->spinBoxBitrateManagementMax   ->setValue(m_settings->bitrateManagementMaxRate());
+	ui->spinBoxNormalizationFilterPeak->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolume()) / 100.0);
+	ui->spinBoxNormalizationFilterSize->setValue(m_settings->normalizationFilterSize());
+	ui->spinBoxToneAdjustBass         ->setValue(static_cast<double>(m_settings->toneAdjustBass()) / 100.0);
+	ui->spinBoxToneAdjustTreble       ->setValue(static_cast<double>(m_settings->toneAdjustTreble()) / 100.0);
+	ui->spinBoxAftenSearchSize        ->setValue(m_settings->aftenExponentSearchSize());
+	ui->spinBoxOpusComplexity         ->setValue(m_settings->opusComplexity());
 	
-	ui->comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelMode());
-	ui->comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRate());
-	ui->comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfile());
-	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingMode());
-	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
-	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEQMode());
-	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesize());
+	ui->comboBoxMP3ChannelMode   ->setCurrentIndex(m_settings->lameChannelMode());
+	ui->comboBoxSamplingRate     ->setCurrentIndex(m_settings->samplingRate());
+	ui->comboBoxAACProfile       ->setCurrentIndex(m_settings->aacEncProfile());
+	ui->comboBoxAftenCodingMode  ->setCurrentIndex(m_settings->aftenAudioCodingMode());
+	ui->comboBoxAftenDRCMode     ->setCurrentIndex(m_settings->aftenDynamicRangeCompression());
+	ui->comboBoxOpusFramesize    ->setCurrentIndex(m_settings->opusFramesize());
 	
-	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabled());
-	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2Pass());
-	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocation());
-	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilter, m_settings->normalizationFilterEnabled());
-	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances, (m_settings->maximumInstances() < 1));
-	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabled());
-	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabled());
-	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmix());
-	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResample());
+	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement,          m_settings->bitrateManagementEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode,           m_settings->neroAACEnable2Pass());
+	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation,        m_settings->aftenFastBitAllocation());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterEnabled, m_settings->normalizationFilterEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterDynamic, m_settings->normalizationFilterDynamic());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterCoupled, m_settings->normalizationFilterCoupled());
+	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances,        (m_settings->maximumInstances() < 1));
+	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder,        (!m_settings->customTempPathEnabled()));
+	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput,               m_settings->renameOutputFilesEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmix());
+	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResample());
+
 	ui->checkBoxNeroAAC2PassMode->setEnabled(aacEncoder == SettingsModel::AAC_ENCODER_NERO);
 	
 	ui->lineEditCustomParamLAME   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::MP3Encoder));
@@ -507,46 +519,49 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
 	ui->radioButtonOverwriteModeReplaces->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces);
 
-	connect(ui->sliderLameAlgoQuality, SIGNAL(valueChanged(int)), this, SLOT(updateLameAlgoQuality(int)));
-	connect(ui->checkBoxBitrateManagement, SIGNAL(clicked(bool)), this, SLOT(bitrateManagementEnabledChanged(bool)));
-	connect(ui->spinBoxBitrateManagementMin, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMinChanged(int)));
-	connect(ui->spinBoxBitrateManagementMax, SIGNAL(valueChanged(int)), this, SLOT(bitrateManagementMaxChanged(int)));
-	connect(ui->comboBoxMP3ChannelMode, SIGNAL(currentIndexChanged(int)), this, SLOT(channelModeChanged(int)));
-	connect(ui->comboBoxSamplingRate, SIGNAL(currentIndexChanged(int)), this, SLOT(samplingRateChanged(int)));
-	connect(ui->checkBoxNeroAAC2PassMode, SIGNAL(clicked(bool)), this, SLOT(neroAAC2PassChanged(bool)));
-	connect(ui->comboBoxAACProfile, SIGNAL(currentIndexChanged(int)), this, SLOT(neroAACProfileChanged(int)));
-	connect(ui->checkBoxNormalizationFilter, SIGNAL(clicked(bool)), this, SLOT(normalizationEnabledChanged(bool)));
-	connect(ui->comboBoxAftenCodingMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenCodingModeChanged(int)));
-	connect(ui->comboBoxAftenDRCMode, SIGNAL(currentIndexChanged(int)), this, SLOT(aftenDRCModeChanged(int)));
-	connect(ui->spinBoxAftenSearchSize, SIGNAL(valueChanged(int)), this, SLOT(aftenSearchSizeChanged(int)));
-	connect(ui->checkBoxAftenFastAllocation, SIGNAL(clicked(bool)), this, SLOT(aftenFastAllocationChanged(bool)));
-	connect(ui->spinBoxNormalizationFilter, SIGNAL(valueChanged(double)), this, SLOT(normalizationMaxVolumeChanged(double)));
-	connect(ui->comboBoxNormalizationMode, SIGNAL(currentIndexChanged(int)), this, SLOT(normalizationModeChanged(int)));
-	connect(ui->spinBoxToneAdjustBass, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustBassChanged(double)));
-	connect(ui->spinBoxToneAdjustTreble, SIGNAL(valueChanged(double)), this, SLOT(toneAdjustTrebleChanged(double)));
-	connect(ui->buttonToneAdjustReset, SIGNAL(clicked()), this, SLOT(toneAdjustTrebleReset()));
-	connect(ui->lineEditCustomParamLAME, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(ui->lineEditCustomParamOggEnc, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(ui->lineEditCustomParamNeroAAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(ui->lineEditCustomParamFLAC, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(ui->lineEditCustomParamAften, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(ui->lineEditCustomParamOpus, SIGNAL(editingFinished()), this, SLOT(customParamsChanged()));
-	connect(ui->sliderMaxInstances, SIGNAL(valueChanged(int)), this, SLOT(updateMaximumInstances(int)));
-	connect(ui->checkBoxAutoDetectInstances, SIGNAL(clicked(bool)), this, SLOT(autoDetectInstancesChanged(bool)));
-	connect(ui->buttonBrowseCustomTempFolder, SIGNAL(clicked()), this, SLOT(browseCustomTempFolderButtonClicked()));
-	connect(ui->lineEditCustomTempFolder, SIGNAL(textChanged(QString)), this, SLOT(customTempFolderChanged(QString)));
-	connect(ui->checkBoxUseSystemTempFolder, SIGNAL(clicked(bool)), this, SLOT(useCustomTempFolderChanged(bool)));
-	connect(ui->buttonResetAdvancedOptions, SIGNAL(clicked()), this, SLOT(resetAdvancedOptionsButtonClicked()));
-	connect(ui->checkBoxRenameOutput, SIGNAL(clicked(bool)), this, SLOT(renameOutputEnabledChanged(bool)));
-	connect(ui->lineEditRenamePattern, SIGNAL(editingFinished()), this, SLOT(renameOutputPatternChanged()));
-	connect(ui->lineEditRenamePattern, SIGNAL(textChanged(QString)), this, SLOT(renameOutputPatternChanged(QString)));
-	connect(ui->labelShowRenameMacros, SIGNAL(linkActivated(QString)), this, SLOT(showRenameMacros(QString)));
-	connect(ui->checkBoxForceStereoDownmix, SIGNAL(clicked(bool)), this, SLOT(forceStereoDownmixEnabledChanged(bool)));
-	connect(ui->comboBoxOpusFramesize, SIGNAL(currentIndexChanged(int)), this, SLOT(opusSettingsChanged()));
-	connect(ui->spinBoxOpusComplexity, SIGNAL(valueChanged(int)), this, SLOT(opusSettingsChanged()));
-	connect(ui->checkBoxOpusDisableResample, SIGNAL(clicked(bool)), SLOT(opusSettingsChanged()));
-	connect(m_overwriteButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(overwriteModeChanged(int)));
-	connect(m_evenFilterCustumParamsHelp, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
+	connect(ui->sliderLameAlgoQuality,              SIGNAL(valueChanged(int)),                this, SLOT(updateLameAlgoQuality(int)));
+	connect(ui->checkBoxBitrateManagement,          SIGNAL(clicked(bool)),                    this, SLOT(bitrateManagementEnabledChanged(bool)));
+	connect(ui->spinBoxBitrateManagementMin,        SIGNAL(valueChanged(int)),                this, SLOT(bitrateManagementMinChanged(int)));
+	connect(ui->spinBoxBitrateManagementMax,        SIGNAL(valueChanged(int)),                this, SLOT(bitrateManagementMaxChanged(int)));
+	connect(ui->comboBoxMP3ChannelMode,             SIGNAL(currentIndexChanged(int)),         this, SLOT(channelModeChanged(int)));
+	connect(ui->comboBoxSamplingRate,               SIGNAL(currentIndexChanged(int)),         this, SLOT(samplingRateChanged(int)));
+	connect(ui->checkBoxNeroAAC2PassMode,           SIGNAL(clicked(bool)),                    this, SLOT(neroAAC2PassChanged(bool)));
+	connect(ui->comboBoxAACProfile,                 SIGNAL(currentIndexChanged(int)),         this, SLOT(neroAACProfileChanged(int)));
+	connect(ui->checkBoxNormalizationFilterEnabled, SIGNAL(clicked(bool)),                    this, SLOT(normalizationEnabledChanged(bool)));
+	connect(ui->checkBoxNormalizationFilterDynamic, SIGNAL(clicked(bool)),                    this, SLOT(normalizationDynamicChanged(bool)));
+	connect(ui->checkBoxNormalizationFilterCoupled, SIGNAL(clicked(bool)),                    this, SLOT(normalizationCoupledChanged(bool)));
+	connect(ui->comboBoxAftenCodingMode,            SIGNAL(currentIndexChanged(int)),         this, SLOT(aftenCodingModeChanged(int)));
+	connect(ui->comboBoxAftenDRCMode,               SIGNAL(currentIndexChanged(int)),         this, SLOT(aftenDRCModeChanged(int)));
+	connect(ui->spinBoxAftenSearchSize,             SIGNAL(valueChanged(int)),                this, SLOT(aftenSearchSizeChanged(int)));
+	connect(ui->checkBoxAftenFastAllocation,        SIGNAL(clicked(bool)),                    this, SLOT(aftenFastAllocationChanged(bool)));
+	connect(ui->spinBoxNormalizationFilterPeak,     SIGNAL(valueChanged(double)),             this, SLOT(normalizationMaxVolumeChanged(double)));
+	connect(ui->spinBoxNormalizationFilterSize,     SIGNAL(valueChanged(int)),                this, SLOT(normalizationFilterSizeChanged(int)));
+	connect(ui->spinBoxNormalizationFilterSize,     SIGNAL(editingFinished()),                this, SLOT(normalizationFilterSizeFinished()));
+	connect(ui->spinBoxToneAdjustBass,              SIGNAL(valueChanged(double)),             this, SLOT(toneAdjustBassChanged(double)));
+	connect(ui->spinBoxToneAdjustTreble,            SIGNAL(valueChanged(double)),             this, SLOT(toneAdjustTrebleChanged(double)));
+	connect(ui->buttonToneAdjustReset,              SIGNAL(clicked()),                        this, SLOT(toneAdjustTrebleReset()));
+	connect(ui->lineEditCustomParamLAME,            SIGNAL(editingFinished()),                this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamOggEnc,          SIGNAL(editingFinished()),                this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamNeroAAC,         SIGNAL(editingFinished()),                this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamFLAC,            SIGNAL(editingFinished()),                this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamAften,           SIGNAL(editingFinished()),                this, SLOT(customParamsChanged()));
+	connect(ui->lineEditCustomParamOpus,            SIGNAL(editingFinished()),                this, SLOT(customParamsChanged()));
+	connect(ui->sliderMaxInstances,                 SIGNAL(valueChanged(int)),                this, SLOT(updateMaximumInstances(int)));
+	connect(ui->checkBoxAutoDetectInstances,        SIGNAL(clicked(bool)),                    this, SLOT(autoDetectInstancesChanged(bool)));
+	connect(ui->buttonBrowseCustomTempFolder,       SIGNAL(clicked()),                        this, SLOT(browseCustomTempFolderButtonClicked()));
+	connect(ui->lineEditCustomTempFolder,           SIGNAL(textChanged(QString)),             this, SLOT(customTempFolderChanged(QString)));
+	connect(ui->checkBoxUseSystemTempFolder,        SIGNAL(clicked(bool)),                    this, SLOT(useCustomTempFolderChanged(bool)));
+	connect(ui->buttonResetAdvancedOptions,         SIGNAL(clicked()),                        this, SLOT(resetAdvancedOptionsButtonClicked()));
+	connect(ui->checkBoxRenameOutput,               SIGNAL(clicked(bool)),                    this, SLOT(renameOutputEnabledChanged(bool)));
+	connect(ui->lineEditRenamePattern,              SIGNAL(editingFinished()),                this, SLOT(renameOutputPatternChanged()));
+	connect(ui->lineEditRenamePattern,              SIGNAL(textChanged(QString)),             this, SLOT(renameOutputPatternChanged(QString)));
+	connect(ui->labelShowRenameMacros,              SIGNAL(linkActivated(QString)),           this, SLOT(showRenameMacros(QString)));
+	connect(ui->checkBoxForceStereoDownmix,         SIGNAL(clicked(bool)),                    this, SLOT(forceStereoDownmixEnabledChanged(bool)));
+	connect(ui->comboBoxOpusFramesize,              SIGNAL(currentIndexChanged(int)),         this, SLOT(opusSettingsChanged()));
+	connect(ui->spinBoxOpusComplexity,              SIGNAL(valueChanged(int)),                this, SLOT(opusSettingsChanged()));
+	connect(ui->checkBoxOpusDisableResample,        SIGNAL(clicked(bool)),                    this, SLOT(opusSettingsChanged()));
+	connect(m_overwriteButtonGroup,                 SIGNAL(buttonClicked(int)),               this, SLOT(overwriteModeChanged(int)));
+	connect(m_evenFilterCustumParamsHelp,           SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 
 	//--------------------------------
 	// Force initial GUI update
@@ -556,6 +571,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	updateMaximumInstances(ui->sliderMaxInstances->value());
 	toneAdjustTrebleChanged(ui->spinBoxToneAdjustTreble->value());
 	toneAdjustBassChanged(ui->spinBoxToneAdjustBass->value());
+	normalizationEnabledChanged(ui->checkBoxNormalizationFilterEnabled->isChecked());
 	customParamsChanged();
 	
 	//--------------------------------
@@ -1064,7 +1080,7 @@ void MainWindow::changeEvent(QEvent *e)
 		return;
 	}
 
-	int comboBoxIndex[8];
+	int comboBoxIndex[6];
 		
 	//Backup combobox indices, as retranslateUi() resets
 	comboBoxIndex[0] = ui->comboBoxMP3ChannelMode->currentIndex();
@@ -1072,9 +1088,7 @@ void MainWindow::changeEvent(QEvent *e)
 	comboBoxIndex[2] = ui->comboBoxAACProfile->currentIndex();
 	comboBoxIndex[3] = ui->comboBoxAftenCodingMode->currentIndex();
 	comboBoxIndex[4] = ui->comboBoxAftenDRCMode->currentIndex();
-	comboBoxIndex[5] = ui->comboBoxNormalizationMode->currentIndex();
-	comboBoxIndex[6] = 0; //comboBoxOpusOptimize->currentIndex();
-	comboBoxIndex[7] = ui->comboBoxOpusFramesize->currentIndex();
+	comboBoxIndex[5] = ui->comboBoxOpusFramesize->currentIndex();
 		
 	//Re-translate from UIC
 	ui->retranslateUi(this);
@@ -1085,9 +1099,7 @@ void MainWindow::changeEvent(QEvent *e)
 	ui->comboBoxAACProfile->setCurrentIndex(comboBoxIndex[2]);
 	ui->comboBoxAftenCodingMode->setCurrentIndex(comboBoxIndex[3]);
 	ui->comboBoxAftenDRCMode->setCurrentIndex(comboBoxIndex[4]);
-	ui->comboBoxNormalizationMode->setCurrentIndex(comboBoxIndex[5]);
-	//comboBoxOpusOptimize->setCurrentIndex(comboBoxIndex[6]);
-	ui->comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[7]);
+	ui->comboBoxOpusFramesize->setCurrentIndex(comboBoxIndex[5]);
 
 	//Update the window title
 	if(MUTILS_DEBUG)
@@ -3739,6 +3751,16 @@ void MainWindow::opusSettingsChanged(void)
 void MainWindow::normalizationEnabledChanged(bool checked)
 {
 	m_settings->normalizationFilterEnabled(checked);
+	normalizationDynamicChanged(ui->checkBoxNormalizationFilterDynamic->isChecked());
+}
+
+/*
+ * Dynamic normalization enabled changed
+ */
+void MainWindow::normalizationDynamicChanged(bool checked)
+{
+	ui->spinBoxNormalizationFilterSize->setEnabled(ui->checkBoxNormalizationFilterEnabled->isChecked() && checked);
+	m_settings->normalizationFilterDynamic(checked);
 }
 
 /*
@@ -3752,9 +3774,30 @@ void MainWindow::normalizationMaxVolumeChanged(double value)
 /*
  * Normalization equalization mode changed
  */
-void MainWindow::normalizationModeChanged(int mode)
+void MainWindow::normalizationCoupledChanged(bool checked)
 {
-	m_settings->normalizationFilterEQMode(mode);
+	m_settings->normalizationFilterCoupled(checked);
+}
+
+/*
+ * Normalization filter size changed
+ */
+void MainWindow::normalizationFilterSizeChanged(int value)
+{
+	m_settings->normalizationFilterSize(value);
+}
+
+/*
+ * Normalization filter size editing finished
+ */
+void MainWindow::normalizationFilterSizeFinished(void)
+{
+	const int value = ui->spinBoxNormalizationFilterSize->value();
+	if((value % 2) != 1)
+	{
+		bool rnd = MUtils::parity(MUtils::next_rand32());
+		ui->spinBoxNormalizationFilterSize->setValue(rnd ? value+1 : value-1);
+	}
 }
 
 /*
@@ -4095,31 +4138,33 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 {
 	PLAY_SOUND_OPTIONAL("blast", true);
 
-	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQualityDefault());
-	ui->spinBoxBitrateManagementMin->setValue(m_settings->bitrateManagementMinRateDefault());
-	ui->spinBoxBitrateManagementMax->setValue(m_settings->bitrateManagementMaxRateDefault());
-	ui->spinBoxNormalizationFilter->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolumeDefault()) / 100.0);
-	ui->spinBoxToneAdjustBass->setValue(static_cast<double>(m_settings->toneAdjustBassDefault()) / 100.0);
-	ui->spinBoxToneAdjustTreble->setValue(static_cast<double>(m_settings->toneAdjustTrebleDefault()) / 100.0);
-	ui->spinBoxAftenSearchSize->setValue(m_settings->aftenExponentSearchSizeDefault());
-	ui->spinBoxOpusComplexity->setValue(m_settings->opusComplexityDefault());
-	ui->comboBoxMP3ChannelMode->setCurrentIndex(m_settings->lameChannelModeDefault());
-	ui->comboBoxSamplingRate->setCurrentIndex(m_settings->samplingRateDefault());
-	ui->comboBoxAACProfile->setCurrentIndex(m_settings->aacEncProfileDefault());
-	ui->comboBoxAftenCodingMode->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
-	ui->comboBoxAftenDRCMode->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
-	ui->comboBoxNormalizationMode->setCurrentIndex(m_settings->normalizationFilterEQModeDefault());
-	ui->comboBoxOpusFramesize->setCurrentIndex(m_settings->opusFramesizeDefault());
+	ui->sliderLameAlgoQuality         ->setValue(m_settings->lameAlgoQualityDefault());
+	ui->spinBoxBitrateManagementMin   ->setValue(m_settings->bitrateManagementMinRateDefault());
+	ui->spinBoxBitrateManagementMax   ->setValue(m_settings->bitrateManagementMaxRateDefault());
+	ui->spinBoxNormalizationFilterPeak->setValue(static_cast<double>(m_settings->normalizationFilterMaxVolumeDefault()) / 100.0);
+	ui->spinBoxNormalizationFilterSize->setValue(m_settings->normalizationFilterSizeDefault());
+	ui->spinBoxToneAdjustBass         ->setValue(static_cast<double>(m_settings->toneAdjustBassDefault()) / 100.0);
+	ui->spinBoxToneAdjustTreble       ->setValue(static_cast<double>(m_settings->toneAdjustTrebleDefault()) / 100.0);
+	ui->spinBoxAftenSearchSize        ->setValue(m_settings->aftenExponentSearchSizeDefault());
+	ui->spinBoxOpusComplexity         ->setValue(m_settings->opusComplexityDefault());
+	ui->comboBoxMP3ChannelMode        ->setCurrentIndex(m_settings->lameChannelModeDefault());
+	ui->comboBoxSamplingRate          ->setCurrentIndex(m_settings->samplingRateDefault());
+	ui->comboBoxAACProfile            ->setCurrentIndex(m_settings->aacEncProfileDefault());
+	ui->comboBoxAftenCodingMode       ->setCurrentIndex(m_settings->aftenAudioCodingModeDefault());
+	ui->comboBoxAftenDRCMode          ->setCurrentIndex(m_settings->aftenDynamicRangeCompressionDefault());
+	ui->comboBoxOpusFramesize         ->setCurrentIndex(m_settings->opusFramesizeDefault());
 
-	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement, m_settings->bitrateManagementEnabledDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode, m_settings->neroAACEnable2PassDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilter, m_settings->normalizationFilterEnabledDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances, (m_settings->maximumInstancesDefault() < 1));
-	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, !m_settings->customTempPathEnabledDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation, m_settings->aftenFastBitAllocationDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput, m_settings->renameOutputFilesEnabledDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix, m_settings->forceStereoDownmixDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample, m_settings->opusDisableResampleDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxBitrateManagement,          m_settings->bitrateManagementEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxNeroAAC2PassMode,           m_settings->neroAACEnable2PassDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterEnabled, m_settings->normalizationFilterEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterDynamic, m_settings->normalizationFilterDynamicDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterCoupled, m_settings->normalizationFilterCoupledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances,        (m_settings->maximumInstancesDefault() < 1));
+	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder,        (!m_settings->customTempPathEnabledDefault()));
+	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation,        m_settings->aftenFastBitAllocationDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput,               m_settings->renameOutputFilesEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmixDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResampleDefault());
 	
 	ui->lineEditCustomParamLAME   ->setText(m_settings->customParametersLAMEDefault());
 	ui->lineEditCustomParamOggEnc ->setText(m_settings->customParametersOggEncDefault());

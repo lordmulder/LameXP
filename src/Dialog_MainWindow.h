@@ -127,9 +127,12 @@ private slots:
 	void metaTagsEnabledChanged(void);
 	void neroAAC2PassChanged(bool checked);
 	void neroAACProfileChanged(int value);
+	void normalizationCoupledChanged(bool checked);
+	void normalizationDynamicChanged(bool checked);
 	void normalizationEnabledChanged(bool checked);
+	void normalizationFilterSizeChanged(int value);
+	void normalizationFilterSizeFinished(void);
 	void normalizationMaxVolumeChanged(double volume);
-	void normalizationModeChanged(int mode);
 	void notifyOtherInstance(void);
 	void openFolderActionActivated(void);
 	void opusSettingsChanged(void);

@@ -26,6 +26,7 @@
 #include "Global.h"
 
 //MUtils
+#include <MUtils/Global.h>
 #include <MUtils/Exception.h>
 
 //Qt
@@ -33,17 +34,23 @@
 #include <QProcess>
 #include <QRegExp>
 
-NormalizeFilter::NormalizeFilter(int peakVolume, int equalizationMode)
+static double dbToLinear(const double &value)
+{
+	return pow(10.0, value / 20.0);
+}
+
+NormalizeFilter::NormalizeFilter(const int &peakVolume, const bool &dnyAudNorm, const bool &channelsCoupled, const int &filterSize)
 :
-	m_binary(lamexp_tools_lookup("sox.exe"))
+	m_binary(lamexp_tools_lookup("sox.exe")),
+	m_useDynAudNorm(dnyAudNorm),
+	m_peakVolume(qMin(-50, qMax(-3200, peakVolume))),
+	m_channelsCoupled(channelsCoupled),
+	m_filterLength(qBound(3, filterSize + (1 - (filterSize % 2)), 301))
 {
 	if(m_binary.isEmpty())
 	{
 		MUTILS_THROW("Error initializing SoX filter. Tool 'sox.exe' is not registred!");
 	}
-
-	m_peakVolume = qMin(-50, qMax(-3200, peakVolume));
-	m_equalizationMode = qMin(2, qMax(0, equalizationMode));
 }
 
 NormalizeFilter::~NormalizeFilter(void)
@@ -54,7 +61,6 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 {
 	QProcess process;
 	QStringList args;
-	QString eqMode = (m_equalizationMode == 0) ? "-n" : ((m_equalizationMode == 1) ? "-ne" : "-nb");
 
 	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
 
@@ -62,8 +68,23 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 	args << "--temp" << ".";
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
-	args << "gain";
-	args << eqMode << QString().sprintf("%.2f", static_cast<double>(m_peakVolume) / 100.0);
+
+	if(!m_useDynAudNorm)
+	{
+		args << "gain";
+		args << (m_channelsCoupled ? "-n" : "-nb");
+		args << QString().sprintf("%.2f", static_cast<double>(m_peakVolume) / 100.0);
+	}
+	else
+	{
+		args << "dynaudnorm";
+		args << "-p" << QString().sprintf("%.2f", qBound(0.1, dbToLinear(static_cast<double>(m_peakVolume) / 100.0), 1.0));
+		args << "-g" << QString().sprintf("%d", m_filterLength);
+		if(!m_channelsCoupled)
+		{
+			args << "-n";
+		}
+	}
 
 	if(!startProcess(process, m_binary, args))
 	{

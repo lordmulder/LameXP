@@ -1705,22 +1705,6 @@
         <translation type="unfinished">경고: 처리 속도가 매우 느리게 됩니다. 처리 속도에 대해 &lt;u&gt;불평하지 마십시오&lt;/u&gt;!</translation>
     </message>
     <message>
-        <source>Peak Level</source>
-        <translation type="unfinished">피크 레벨</translation>
-    </message>
-    <message>
-        <source>RMS Level</source>
-        <translation type="unfinished">RMS 레벨</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished">없음</translation>
-    </message>
-    <message>
-        <source>Equalization Mode:</source>
-        <translation type="unfinished">이퀄라이저 방식:</translation>
-    </message>
-    <message>
         <source>DEMO VERSION</source>
         <translation type="unfinished">데모 버전</translation>
     </message>
@@ -1997,6 +1981,18 @@
     <message>
         <source>LameXP User&apos;s Manual</source>
         <translation type="unfinished">LameXP 사용자 매뉴얼</translation>
+    </message>
+    <message>
+        <source>Enable Dynamic Normalization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

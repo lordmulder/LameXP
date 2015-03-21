@@ -1716,22 +1716,6 @@
         <translation>Предупреждение: Преобразование будет идти очень медленно!</translation>
     </message>
     <message>
-        <source>Peak Level</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>RMS Level</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Нет</translation>
-    </message>
-    <message>
-        <source>Equalization Mode:</source>
-        <translation>Режим эквалайзера:</translation>
-    </message>
-    <message>
         <source>DEMO VERSION</source>
         <translation>ДЕМО ВЕРСИЯ</translation>
     </message>
@@ -2017,6 +2001,18 @@
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Dynamic Normalization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

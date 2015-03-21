@@ -1716,22 +1716,6 @@ Ouvrir le dossier récursivement...</translation>
         <translation>AVERTISSEMENT : La vitesse de traitement sera très lente. Veuillez &lt;u&gt;ne pas&lt;/u&gt; vous plaindre de la vitesse de traitement !</translation>
     </message>
     <message>
-        <source>Peak Level</source>
-        <translation>Niveau maximum</translation>
-    </message>
-    <message>
-        <source>RMS Level</source>
-        <translation>Niveau RMS</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Aucun</translation>
-    </message>
-    <message>
-        <source>Equalization Mode:</source>
-        <translation>Mode d&apos;égalisation :</translation>
-    </message>
-    <message>
         <source>DEMO VERSION</source>
         <translation>VERSION DE DÉMONSTRATION</translation>
     </message>
@@ -2012,6 +1996,18 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Dynamic Normalization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

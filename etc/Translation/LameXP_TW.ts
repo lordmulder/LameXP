@@ -1704,22 +1704,6 @@
         <translation>警告: 處理速度會很慢.請&lt;u&gt;不要&lt;/u&gt;抱怨處理速度慢!</translation>
     </message>
     <message>
-        <source>Peak Level</source>
-        <translation>峰值水平</translation>
-    </message>
-    <message>
-        <source>RMS Level</source>
-        <translation>RMS 水平</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>無</translation>
-    </message>
-    <message>
-        <source>Equalization Mode:</source>
-        <translation>均衡模式:</translation>
-    </message>
-    <message>
         <source>DEMO VERSION</source>
         <translation>演示版</translation>
     </message>
@@ -1995,6 +1979,18 @@
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Dynamic Normalization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

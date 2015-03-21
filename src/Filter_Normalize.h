@@ -27,13 +27,15 @@
 class NormalizeFilter : public AbstractFilter
 {
 public:
-	NormalizeFilter(int peakVolume = -50, int equalizationMode = 0);
+	NormalizeFilter(const int &peakVolume = -50, const bool &dnyAudNorm = false, const bool &channelsCoupled = true, const int &filterSize = 31);
 	~NormalizeFilter(void);
 
 	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *formatInfo, volatile bool *abortFlag);
 
 private:
 	const QString m_binary;
-	int m_peakVolume;
-	int m_equalizationMode;
+	const bool m_useDynAudNorm;
+	const bool m_channelsCoupled;
+	const int m_peakVolume;
+	const int m_filterLength;
 };

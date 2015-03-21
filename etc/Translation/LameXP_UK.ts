@@ -1711,22 +1711,6 @@
         <translation>Попередження: Швидкість обробки буде дуже низькою. Будь ласка, &lt;u&gt;не&lt;/u&gt; жалійтеся потім на швидкість обробки!</translation>
     </message>
     <message>
-        <source>Peak Level</source>
-        <translation>Піковий рівень</translation>
-    </message>
-    <message>
-        <source>RMS Level</source>
-        <translation>Ефективний рівень</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Не задано</translation>
-    </message>
-    <message>
-        <source>Equalization Mode:</source>
-        <translation>Режим балансування:</translation>
-    </message>
-    <message>
         <source>DEMO VERSION</source>
         <translation>ТЕСТОВА ВЕРСІЯ</translation>
     </message>
@@ -2013,6 +1997,18 @@
     <message>
         <source>LameXP User&apos;s Manual</source>
         <translation>Інструкція користувача LameXP</translation>
+    </message>
+    <message>
+        <source>Enable Dynamic Normalization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -262,8 +262,10 @@ LAMEXP_MAKE_ID(mostRecentInputPath,          "InputDirectory/MostRecentPath");
 LAMEXP_MAKE_ID(neroAACEnable2Pass,           "AdvancedOptions/AACEnc/Enable2Pass");
 LAMEXP_MAKE_ID(neroAacNotificationsEnabled,  "Flags/EnableNeroAacNotifications");
 LAMEXP_MAKE_ID(normalizationFilterEnabled,   "AdvancedOptions/VolumeNormalization/Enabled");
-LAMEXP_MAKE_ID(normalizationFilterEQMode,    "AdvancedOptions/VolumeNormalization/EqualizationMode");
+LAMEXP_MAKE_ID(normalizationFilterDynamic,   "AdvancedOptions/VolumeNormalization/UseDynAudNorm");
+LAMEXP_MAKE_ID(normalizationFilterCoupled,    "AdvancedOptions/VolumeNormalization/ChannelCoupling");
 LAMEXP_MAKE_ID(normalizationFilterMaxVolume, "AdvancedOptions/VolumeNormalization/MaxVolume");
+LAMEXP_MAKE_ID(normalizationFilterSize,      "AdvancedOptions/VolumeNormalization/FilterLength");
 LAMEXP_MAKE_ID(opusComplexity,               "AdvancedOptions/Opus/EncodingComplexity");
 LAMEXP_MAKE_ID(opusDisableResample,          "AdvancedOptions/Opus/DisableResample");
 LAMEXP_MAKE_ID(opusFramesize,                "AdvancedOptions/Opus/FrameSize");
@@ -638,8 +640,10 @@ LAMEXP_MAKE_OPTION_S(mostRecentInputPath, defaultDirectory())
 LAMEXP_MAKE_OPTION_B(neroAACEnable2Pass, true)
 LAMEXP_MAKE_OPTION_B(neroAacNotificationsEnabled, true)
 LAMEXP_MAKE_OPTION_B(normalizationFilterEnabled, false)
-LAMEXP_MAKE_OPTION_I(normalizationFilterEQMode, 0)
+LAMEXP_MAKE_OPTION_B(normalizationFilterDynamic, false)
+LAMEXP_MAKE_OPTION_B(normalizationFilterCoupled, true)
 LAMEXP_MAKE_OPTION_I(normalizationFilterMaxVolume, -50)
+LAMEXP_MAKE_OPTION_I(normalizationFilterSize, 31)
 LAMEXP_MAKE_OPTION_I(opusComplexity, 10)
 LAMEXP_MAKE_OPTION_B(opusDisableResample, false)
 LAMEXP_MAKE_OPTION_I(opusFramesize, 3)
