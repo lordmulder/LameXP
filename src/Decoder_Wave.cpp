@@ -30,6 +30,14 @@
 //Qt
 #include <QDir>
 
+//Type
+typedef struct _ProgressData
+{
+	WaveDecoder   *const instance;
+	volatile bool *const abrtFlag;
+}
+ProgressData;
+
 WaveDecoder::WaveDecoder(void)
 {
 }
@@ -41,9 +49,11 @@ WaveDecoder::~WaveDecoder(void)
 bool WaveDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
 {
 	emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(QDir::toNativeSeparators(sourceFile), QDir::toNativeSeparators(outputFile)));
-
 	emit statusUpdated(0);
-	const bool okay = MUtils::OS::copy_file(sourceFile, outputFile);
+
+	ProgressData progressData = { this, abortFlag };
+	const bool okay = MUtils::OS::copy_file(sourceFile, outputFile, true, progressHandler, &progressData);
+	
 	emit statusUpdated(100);
 
 	if(okay)
@@ -74,4 +84,20 @@ bool WaveDecoder::isFormatSupported(const QString &containerType, const QString 
 QStringList WaveDecoder::supportedTypes(void)
 {
 	return QStringList() << "Waveform Audio File (*.wav)";
+}
+
+bool WaveDecoder::progressHandler(const double &progress, void *const data)
+{
+	if(data)
+	{
+		//qWarning("Copy progress: %.2f", progress);
+		reinterpret_cast<ProgressData*>(data)->instance->updateProgress(progress);
+		return (!(*reinterpret_cast<ProgressData*>(data)->abrtFlag));
+	}
+	return true;
+}
+
+void WaveDecoder::updateProgress(const double &progress)
+{
+	emit statusUpdated(qBound(0, qRound(progress * 100.0), 100));
 }
