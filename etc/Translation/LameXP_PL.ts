@@ -1234,17 +1234,17 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2430"/>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Włącz Dynamiczną Normalizację</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2437"/>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rozmiar okna:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2469"/>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Powiąż ze sobą kanały, tzn. wzmocnij wszystkie kanały pliku wielokanałowego o taką samą wartość</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2490"/>
