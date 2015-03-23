@@ -245,12 +245,11 @@
     </message>
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translatorcomment>애플의 ALAC 참조 구현은 Apache 라이센스에 따라 사용 가능합니다.</translatorcomment>
-        <translation type="unfinished">ALAC reference implementation by Apple is available under the Apache license.</translation>
+        <translation type="unfinished">애플 ALAC 참조 구현은 아파치 라이센스에 따라 사용 가능함.</translation>
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation type="unfinished">AC3Filter 도구의 Valdec - AC3/DTS Decoder</translation>
+        <translation type="unfinished">AC3Filter Tools의 Valdec - AC3/DTS Decoder</translation>
     </message>
     <message>
         <source>Official Mirrors:</source>
@@ -1558,7 +1557,7 @@
     </message>
     <message>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished">다시 표시하지 않음</translation>
+        <translation type="unfinished">다시 표시 안함</translation>
     </message>
     <message>
         <source>Import Cue Sheet</source>
@@ -1984,15 +1983,15 @@
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">동적 평준화 활성화</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">창 크기:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation>채널-커플링 사용. 동일한 양으로 다중-채널의 모든 채널들을 증폭합니다. </translation>
     </message>
 </context>
 <context>
@@ -2558,7 +2557,7 @@
     </message>
     <message>
         <source>Convert this file with LameXP v%1</source>
-        <translation type="unfinished">이 파일을 LameXP v%1로 변환</translation>
+        <translation type="unfinished">이 파일을 LameXP v%1(으)로 변환</translation>
     </message>
 </context>
 <context>
