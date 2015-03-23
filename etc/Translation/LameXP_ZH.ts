@@ -1983,15 +1983,15 @@
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation>启用动态标准化</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口大小:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation>启用声道耦合，使多声道文件的各个声道增大幅度相同</translation>
     </message>
 </context>
 <context>
