@@ -1232,17 +1232,17 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2430"/>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera dynamisk normalisering</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2437"/>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fönsterstorlek:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2469"/>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera kanalkoppling, d.v.s. förstärk alla kanaler i en flerkanalsfil,  lika mycket</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2490"/>
