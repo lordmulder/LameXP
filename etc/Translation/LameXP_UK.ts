@@ -2000,15 +2000,15 @@
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation>Ввімкнути динамічну нормалізацію</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмір вікна:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Ввімкнути об&apos;єднання каналів, тобто зробити підсилення всіх каналів багатоканального файла на одну і ту ж величину</translation>
     </message>
 </context>
 <context>
