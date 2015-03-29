@@ -1,0 +1,11 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource>
+    <file>tools/shorten.exe</file>
+    <file>tools/speexdec.exe</file>
+    <file>tools/tta.exe</file>
+    <file>tools/valdec.exe</file>
+    <file>tools/wma2wav.exe</file>
+    <file>tools/wvunpack.exe</file>
+  </qresource>
+</RCC>

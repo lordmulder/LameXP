@@ -1,0 +1,14 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource>
+    <file>tools/avs2wav.exe</file>
+    <file>tools/faad.exe</file>
+    <file>tools/mac.exe</file>
+    <file>tools/mpcdec.exe</file>
+    <file>tools/mpg123.exe</file>
+    <file>tools/oggdec.exe</file>
+    <file>tools/opusdec.i386.exe</file>
+    <file>tools/opusdec.sse2.exe</file>
+    <file>tools/refalac.exe</file>
+  </qresource>
+</RCC>
