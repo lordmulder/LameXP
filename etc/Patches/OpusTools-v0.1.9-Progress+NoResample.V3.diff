@@ -1,0 +1,160 @@
+ src/opusdec.c   | 24 +++++++++++++++++++++---
+ src/opusenc.c   | 18 ++++++++----------
+ win32/config.h  |  6 +++++-
+ win32/version.h |  6 +++++-
+ 4 files changed, 39 insertions(+), 15 deletions(-)
+
+diff --git a/src/opusdec.c b/src/opusdec.c
+index d085f04..92027fe 100644
+--- a/src/opusdec.c
++++ b/src/opusdec.c
+@@ -53,6 +53,7 @@
+ # include <io.h>
+ # include <fcntl.h>
+ # define I64FORMAT "I64d"
++# define ftello64(_x) _ftelli64((_x))
+ #else
+ # define I64FORMAT "lld"
+ # define fopen_utf8(_x,_y) fopen((_x),(_y))
+@@ -658,6 +659,7 @@ int main(int argc, char **argv)
+       {"force-wav", no_argument, NULL, 0},
+       {"packet-loss", required_argument, NULL, 0},
+       {"save-range", required_argument, NULL, 0},
++      {"no-resample", no_argument, NULL, 0},
+       {0, 0, 0, 0}
+    };
+    ogg_sync_state oy;
+@@ -667,6 +669,7 @@ int main(int argc, char **argv)
+    int close_in=0;
+    int eos=0;
+    ogg_int64_t audio_size=0;
++   ogg_int64_t input_size=0;
+    double last_coded_seconds=0;
+    float loss_percent=-1;
+    float manual_gain=0;
+@@ -683,6 +686,7 @@ int main(int argc, char **argv)
+    int fp=0;
+    shapestate shapemem;
+    SpeexResamplerState *resampler=NULL;
++   int no_resample = 0;
+    float gain=1;
+    int streams=0;
+    size_t last_spin=0;
+@@ -747,7 +751,10 @@ int main(int argc, char **argv)
+             forcewav=1;
+          } else if (strcmp(long_options[option_index].name,"rate")==0)
+          {
+-            rate=atoi (optarg);
++            rate=((no_resample) ? 48000 : atoi(optarg));
++         } else if (strcmp(long_options[option_index].name,"no-resample")==0)
++         {
++            no_resample=1; rate=48000;
+          } else if (strcmp(long_options[option_index].name,"gain")==0)
+          {
+             manual_gain=atof (optarg);
+@@ -833,6 +840,16 @@ int main(int argc, char **argv)
+       close_in=1;
+    }
+ 
++   /*detect input size*/
++   if(fin != stdin)
++   {
++      struct _stat64 info;
++      if(_fstati64(_fileno(fin), &info) == 0)
++      {
++        input_size = info.st_size;
++      }
++   }
++   
+    /* .opus files use the Ogg container to provide framing and timekeeping.
+     * http://tools.ietf.org/html/draft-terriberry-oggopus
+     * The easiest way to decode the Ogg container is to use libogg, so
+@@ -1011,10 +1028,11 @@ int main(int argc, char **argv)
+                   /*Display a progress spinner while decoding.*/
+                   static const char spinner[]="|/-\\";
+                   double coded_seconds = (double)audio_size/(channels*rate*(fp?4:2));
++                  double percent = (input_size>0) ? ((double)ftello64(fin))/((double)input_size) : 0.0;
+                   if(coded_seconds>=last_coded_seconds+1){
+-                     fprintf(stderr,"\r[%c] %02d:%02d:%02d", spinner[last_spin&3],
++                     fprintf(stderr,"\r[%c] %02d:%02d:%02d (%.f%%)", spinner[last_spin&3],
+                              (int)(coded_seconds/3600),(int)(coded_seconds/60)%60,
+-                             (int)(coded_seconds)%60);
++                             (int)(coded_seconds)%60, percent*100.0);
+                      fflush(stderr);
+                      last_spin++;
+                      last_coded_seconds=coded_seconds;
+diff --git a/src/opusenc.c b/src/opusenc.c
+index 0f83194..6e21a0f 100644
+--- a/src/opusenc.c
++++ b/src/opusenc.c
+@@ -41,6 +41,7 @@
+ #include <time.h>
+ #endif
+ #include <math.h>
++#include <time.h>
+ 
+ #ifdef _MSC_VER
+ #define snprintf _snprintf
+@@ -1027,6 +1028,7 @@ int main(int argc, char **argv)
+         double estbitrate;
+         double coded_seconds=nb_encoded/(double)coding_rate;
+         double wall_time=(stop_time-start_time)+1e-6;
++        double percent = 0.0;
+         char sbuf[55];
+         static const char spinner[]="|/-\\";
+         if(!with_hard_cbr){
+@@ -1034,20 +1036,16 @@ int main(int argc, char **argv)
+           estbitrate=(total_bytes*8.0/coded_seconds)*tweight+
+                       bitrate*(1.-tweight);
+         }else estbitrate=nbBytes*8*((double)coding_rate/frame_size);
++        if(inopt.total_samples_per_channel>0){
++          percent = ((double)nb_encoded) / ((double)inopt.total_samples_per_channel);
++        }
+         fprintf(stderr,"\r");
+         for(i=0;i<last_spin_len;i++)fprintf(stderr," ");
+-        if(inopt.total_samples_per_channel>0 && inopt.total_samples_per_channel<nb_encoded){
+-          snprintf(sbuf,54,"\r[%c] %02d%% ",spinner[last_spin&3],
+-          (int)floor(nb_encoded/(double)(inopt.total_samples_per_channel+inopt.skip)*100.));
+-        }else{
+-          snprintf(sbuf,54,"\r[%c] ",spinner[last_spin&3]);
+-        }
+-        last_spin_len=strlen(sbuf);
+-        snprintf(sbuf+last_spin_len,54-last_spin_len,
+-          "%02d:%02d:%02d.%02d %4.3gx realtime, %5.4gkbit/s",
++        snprintf(sbuf,54,"\r[%c] %02d:%02d:%02d.%02d (%.f%%) %4.3gx realtime, %5.4gkbit/s",
++          spinner[last_spin&3],
+           (int)(coded_seconds/3600),(int)(coded_seconds/60)%60,
+           (int)(coded_seconds)%60,(int)(coded_seconds*100)%100,
+-          coded_seconds/wall_time,
++          percent*100.0,coded_seconds/wall_time,
+           estbitrate/1000.);
+         fprintf(stderr,"%s",sbuf);
+         fflush(stderr);
+diff --git a/win32/config.h b/win32/config.h
+index 5a1e250..8b435cd 100644
+--- a/win32/config.h
++++ b/win32/config.h
+@@ -10,7 +10,11 @@
+ #define USE_ALLOCA            1
+ #define FLOATING_POINT        1
+ #define SPX_RESAMPLE_EXPORT
+-#define __SSE__
++
++/* Enable SSE functions, if compiled with SSE/SSE2 (note that AMD64 implies SSE2) */
++#if defined(_M_X64) || (defined(_M_IX86_FP) && (_M_IX86_FP >= 1))
++#define __SSE__               1
++#endif
+ 
+ #define RANDOM_PREFIX foo
+ 
+diff --git a/win32/version.h b/win32/version.h
+index 892cbc1..a7a8d8d 100644
+--- a/win32/version.h
++++ b/win32/version.h
+@@ -1 +1,5 @@
+-#define PACKAGE_VERSION "v0.1.9"
++#if defined(__SSE__) && __SSE__
++#define PACKAGE_VERSION "v0.1.9-git SSE2 [2015-03-26]"
++#else
++#define PACKAGE_VERSION "v0.1.9-git IA32 [2015-03-26]"
++#endif
