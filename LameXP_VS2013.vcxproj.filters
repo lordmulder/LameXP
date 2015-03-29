@@ -749,14 +749,14 @@
     <CustomBuild Include="res\Tools_Decd_A.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools_Decd_B.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
-    </None>
-    <None Include="res\Tools_Decd_B.qrc">
-      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
