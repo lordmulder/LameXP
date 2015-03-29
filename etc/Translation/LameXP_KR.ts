@@ -363,7 +363,7 @@
     </message>
     <message>
         <source>Choose Output Directory</source>
-        <translation type="unfinished">출력 디렉토리 선택</translation>
+        <translation type="unfinished">출력 디렉터리 선택</translation>
     </message>
     <message>
         <source>LameXP</source>
@@ -371,7 +371,7 @@
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation type="unfinished">오류: 선택한 출력 디렉토리는 쓰기가 불가능합니다!</translation>
+        <translation type="unfinished">오류: 선택한 출력 디렉터리는 쓰기가 불가능합니다!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
@@ -379,7 +379,7 @@
     </message>
     <message>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation type="unfinished">선택한 출력 디렉토리에서 사용 가능한 여유 디스크 공간이 %1 GB보다 작습니다.</translation>
+        <translation type="unfinished">선택한 출력 디렉터리에서 사용 가능한 여유 디스크 공간이 %1 GB보다 작습니다.</translation>
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
@@ -387,15 +387,15 @@
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished">파일 검토중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">파일 검토 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished">파일 분할중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">파일 분할 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Error: The selected output directory could not be created!</source>
-        <translation type="unfinished">오류: 선택한 출력 디렉토리를 만들 수 없습니다!</translation>
+        <translation type="unfinished">오류: 선택한 출력 디렉터리를 만들 수 없습니다!</translation>
     </message>
     <message>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
@@ -480,7 +480,7 @@
     </message>
     <message>
         <source> Output Directory </source>
-        <translation type="unfinished">출력 디렉토리</translation>
+        <translation type="unfinished">출력 디렉터리</translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -669,7 +669,7 @@
     </message>
     <message>
         <source>Output Directory</source>
-        <translation type="unfinished">출력 디렉토리</translation>
+        <translation type="unfinished">출력 디렉터리</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
@@ -941,7 +941,7 @@
     </message>
     <message>
         <source> Temp Directory </source>
-        <translation type="unfinished">임시 디렉토리</translation>
+        <translation type="unfinished">임시 디렉터리</translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -949,7 +949,7 @@
     </message>
     <message>
         <source>Store temporary files in your system&apos;s default TEMP directory (Recommended)</source>
-        <translation type="unfinished">사용자 시스템의 기본 TEMP 디렉토리에 임시 파일들 저장 (권장)</translation>
+        <translation type="unfinished">사용자 시스템의 기본 TEMP 디렉터리에 임시 파일들 저장 (권장)</translation>
     </message>
     <message>
         <source>Reset Advanced Options </source>
@@ -1009,7 +1009,7 @@
     </message>
     <message>
         <source>Check for Updates</source>
-        <translation type="unfinished">업데이트 점검</translation>
+        <translation type="unfinished">업데이트 확인</translation>
     </message>
     <message>
         <source>Open Folder...</source>
@@ -1089,7 +1089,7 @@
     </message>
     <message>
         <source>Adding file(s), please wait...</source>
-        <translation type="unfinished">파일 추가중, 잠시 기다려 주십시오...</translation>
+        <translation type="unfinished">파일 추가 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Access Denied</source>
@@ -1117,7 +1117,7 @@
     </message>
     <message>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished">폴더에서 파일 검색중, 잠시 기다려 주십시오...</translation>
+        <translation type="unfinished">폴더에서 파일 검색 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1185,11 +1185,11 @@
     </message>
     <message>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
-        <translation type="unfinished">마지막 업데이트 점검이 14일 전입니다. 지금 업데이트를 점검하시겠습니까?</translation>
+        <translation type="unfinished">마지막 업데이트 확인을 14일 전에 했습니다. 지금 업데이트를 확인하시겠습니까?</translation>
     </message>
     <message>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
-        <translation type="unfinished">아직 LameXP 업데이트 점점을 하지 않았습니다. 지금 업데이트를 점검하시겠습니까?</translation>
+        <translation type="unfinished">아직 LameXP 업데이트 확인을 하지 않았습니다. 지금 업데이트를 확인하시겠습니까?</translation>
     </message>
     <message>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
@@ -1213,15 +1213,15 @@
     </message>
     <message>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
-        <translation type="unfinished">Nero AAC encoder를 찾을 수 없음. AAC 인코딩 지원이 비활성화 됩니다.</translation>
+        <translation type="unfinished">Nero AAC encoder를 찾을 수 없습니다. AAC 인코딩 지원이 비활성화됩니다.</translation>
     </message>
     <message>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation type="unfinished">&apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;와 &apos;neroAacTag.exe&apos; 파일들을 LameXP 디렉토리로 넣어주십시오!</translation>
+        <translation type="unfinished">&apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;와 &apos;neroAacTag.exe&apos; 파일들을 LameXP 디렉터리로 넣어주십시오!</translation>
     </message>
     <message>
         <source>Your LameXP directory is located here:</source>
-        <translation type="unfinished">LameXP 디렉토리 위치:</translation>
+        <translation type="unfinished">LameXP 디렉터리 위치:</translation>
     </message>
     <message>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
@@ -1293,11 +1293,11 @@
     </message>
     <message>
         <source>Cannot write to the selected output directory.</source>
-        <translation type="unfinished">선택한 출력 디렉토리에 작성할 수 없습니다.</translation>
+        <translation type="unfinished">선택한 출력 디렉터리에 작성할 수 없습니다.</translation>
     </message>
     <message>
         <source>Please choose a different directory!</source>
-        <translation type="unfinished">다른 디렉토리를 선택하십시오!</translation>
+        <translation type="unfinished">다른 디렉터리를 선택하십시오!</translation>
     </message>
     <message>
         <source>Add file(s)</source>
@@ -1337,11 +1337,11 @@
     </message>
     <message>
         <source>Already Running</source>
-        <translation type="unfinished">이미 실행중</translation>
+        <translation type="unfinished">이미 실행 중</translation>
     </message>
     <message>
         <source>LameXP is already running, please use the running instance!</source>
-        <translation type="unfinished">LameXP가 이미 실행중입니다. 실행중인 인스턴스를 사용하십시오!</translation>
+        <translation type="unfinished">LameXP가 이미 실행 중입니다. 실행 중인 인스턴스를 사용하십시오!</translation>
     </message>
     <message>
         <source>Quality Level %1</source>
@@ -1365,7 +1365,7 @@
     </message>
     <message>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation type="unfinished">선택한 디렉토리에 작성할 수 없습니다. 다른 디렉토리를 선택하여 주십시오!</translation>
+        <translation type="unfinished">선택한 디렉터리에 작성할 수 없습니다. 다른 디렉터리를 선택하여 주십시오!</translation>
     </message>
     <message>
         <source>Do you really want to disable the update reminder?</source>
@@ -1457,7 +1457,7 @@
     </message>
     <message>
         <source>Check Now</source>
-        <translation type="unfinished">지금 점검</translation>
+        <translation type="unfinished">지금 확인</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -1809,11 +1809,11 @@
     </message>
     <message>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished">디렉토리 목록 초기화중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">디렉터리 목록 초기화 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Refresh Directory Outline</source>
-        <translation type="unfinished">디렉토리 목록 새로 고침</translation>
+        <translation type="unfinished">디렉터리 목록 새로 고침</translation>
     </message>
     <message>
         <source>MP3</source>
@@ -2223,7 +2223,7 @@
     <name>ProcessThread</name>
     <message>
         <source>Starting...</source>
-        <translation type="unfinished">시작중...</translation>
+        <translation type="unfinished">시작 중...</translation>
     </message>
     <message>
         <source>Not found!</source>
@@ -2279,11 +2279,11 @@
     </message>
     <message>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
-        <translation type="unfinished">대상 출력 디렉토리가 존재하지 않으며, 만들 수 없습니다:</translation>
+        <translation type="unfinished">대상 출력 디렉터리가 존재하지 않으며, 만들 수 없습니다:</translation>
     </message>
     <message>
         <source>The target output directory is NOT writable:</source>
-        <translation type="unfinished">대상 출력 디렉토리에 쓰기 불가:</translation>
+        <translation type="unfinished">대상 출력 디렉터리에 쓰기 불가:</translation>
     </message>
     <message>
         <source>Unknown File Name</source>
@@ -2307,7 +2307,7 @@
     </message>
     <message>
         <source>Analyzing</source>
-        <translation type="unfinished">검토중</translation>
+        <translation type="unfinished">검토 중</translation>
     </message>
     <message>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
@@ -2339,11 +2339,11 @@
     <name>ProcessingDialog</name>
     <message>
         <source>LameXP - Processing</source>
-        <translation type="unfinished">LameXP - 처리중</translation>
+        <translation type="unfinished">LameXP - 처리 중</translation>
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">초기화중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">초기화 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Shutdown the computer as soon as all files have been converted</source>
@@ -2375,7 +2375,7 @@
     </message>
     <message>
         <source>Encoding files, please wait...</source>
-        <translation type="unfinished">파일 인코딩중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">파일 인코딩 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
@@ -2383,11 +2383,11 @@
     </message>
     <message>
         <source>Aborted! Waiting for running jobs to terminate...</source>
-        <translation type="unfinished">중단됨! 종료를 위해 실행중인 작업을 대기중...</translation>
+        <translation type="unfinished">중단됨! 종료를 위해 실행중인 작업을 대기 중...</translation>
     </message>
     <message>
         <source>Creating the playlist file, please wait...</source>
-        <translation type="unfinished">재생 목록 파일 생성중, 잠시 기다려 주십시오...</translation>
+        <translation type="unfinished">재생 목록 파일 생성 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Process was aborted prematurely by the user!</source>
@@ -2455,7 +2455,7 @@
     </message>
     <message>
         <source>Show Running Only</source>
-        <translation type="unfinished">실행중인 항목만 표시</translation>
+        <translation type="unfinished">실행 중인 항목만 표시</translation>
     </message>
     <message>
         <source>Show Succeeded Only</source>
@@ -2611,7 +2611,7 @@
     </message>
     <message>
         <source>Testing your internet connection, please wait...</source>
-        <translation type="unfinished">인터넷 연결 테스트중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">인터넷 연결 테스트 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Network connectivity test has failed!</source>
@@ -2619,7 +2619,7 @@
     </message>
     <message>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished">새로운 업데이트 점검중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">새로운 업데이트 확인 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Failed to fetch update information from server!</source>
@@ -2679,7 +2679,7 @@
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">초기화중, 잠시만 기다려 주십시오...</translation>
+        <translation type="unfinished">초기화 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
         <source>Discard</source>
