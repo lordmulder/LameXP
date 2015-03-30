@@ -12,8 +12,8 @@
 * Updated SoX to v14.4.2-Final (2015-02-22), compiled with ICL 15.0 and MSVC 12.0
 * Updated Opus libraries to v1.1.x and Opus-Tools v0.1.9 to latest Git Master (2015-03-26)
 * Updated mpg123 decoder to v1.22.0 (2015-02-24), compiled with GCC 4.9.2
-* Updated Vorbis encoder to OggEnc v2.87 (2014-06-24), using libvorbis v1.3.4 and aoTuV b6.03_2014
-* Updated Vorbis decoder to OggDec v1.10.1 (2014-06-25), using libVorbis v1.3.4
+* Updated Vorbis encoder to OggEnc v2.87 (2014-07-03), using libvorbis v1.3.4 and aoTuV b6.03_2014
+* Updated Vorbis decoder to OggDec v1.10.1 (2015-03-19), using libVorbis v1.3.5
 * Updated FLAC encoder/decoder to v1.3.1 (2014-11-26), compiled with ICL 15.0 and MSVC 12.0
 * Updated GnuPG to v1.4.18 (2014-06-30), compiled with GCC 4.9.1
 * Updated QAAC add-in to the latest to QAAC v2.44, including a [fix](https://github.com/nu774/qaac/commit/ad1e0ea9daed076531e96cfa3b82f290ba9eeb20) for the ``--artwork`` option
