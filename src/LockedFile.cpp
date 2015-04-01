@@ -54,9 +54,11 @@
 	static const bool g_useFileDescrForQFile = false;
 #endif
 
+#define VALID_HANDLE(H) (((H) != NULL) && ((H) != INVALID_HANDLE_VALUE))
+
 static void CLOSE_HANDLE(HANDLE &h)
 {
-	if((h != NULL) && (h != INVALID_HANDLE_VALUE))
+	if(VALID_HANDLE(h))
 	{
 		CloseHandle(h);
 		h = NULL;
@@ -145,13 +147,13 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	for(int i = 0; i < 64; i++)
 	{
 		fileHandle = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if((fileHandle != NULL) && (fileHandle != INVALID_HANDLE_VALUE)) break;
+		if(VALID_HANDLE(fileHandle)) break;
 		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
 		Sleep(100);
 	}
 	
 	//Locked successfully?
-	if((fileHandle == NULL) || (fileHandle == INVALID_HANDLE_VALUE))
+	if(!VALID_HANDLE(fileHandle))
 	{
 		QFile::remove(QFileInfo(outFile).canonicalFilePath());
 		MUTILS_THROW_FMT("File '%s' could not be locked!", MUTILS_UTF8(QFileInfo(m_filePath).fileName()));
@@ -224,13 +226,13 @@ LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 	for(int i = 0; i < 64; i++)
 	{
 		fileHandle = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if((fileHandle != NULL) && (fileHandle != INVALID_HANDLE_VALUE)) break;
+		if(VALID_HANDLE(fileHandle)) break;
 		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
 		Sleep(100);
 	}
 
 	//Locked successfully?
-	if((fileHandle == NULL) || (fileHandle == INVALID_HANDLE_VALUE))
+	if(!VALID_HANDLE(fileHandle))
 	{
 		MUTILS_THROW_FMT("File '%s' could not be locked!", MUTILS_UTF8(QFileInfo(m_filePath).fileName()));
 	}
