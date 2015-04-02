@@ -602,7 +602,7 @@ LameXP is currently being developed and built using the following development to
 
 * [Visual Studio 2013 Update-4](http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx), running on Windows 7 with Service Pack 1
 
-* [Qt libraries 4.8.6](http://download.qt.io/archive/qt/4.8/) for Windows (pre-compiled Qt libraries for Visual Studio 2013 can be found [**here**](http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/))
+* [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows (our *pre-compiled* Qt libraries for Visual Studio 2013 can be found [**here**](http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/))
 
 * Windows Platform SDK v7.1A, included with Visual Studio 2013 or Visual Studio 2012
 
@@ -637,10 +637,12 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
 
  4. Edit the file ``mkspecs\win32-msvc2010\qmake.conf`` from your Qt Sources directory as follows:
 
-    + ``Old: QMAKE_CFLAGS_RELEASE = -O2 -MD``
-    + ``New: QMAKE_CFLAGS_RELEASE = -O2 -MT <more optimization flags here>``
-    + ``Old: QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi``
-    + ``New: QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi <more optimization flags here>``
+    * Edit #1:
+        + &lArr; ``QMAKE_CFLAGS_RELEASE = -O2 -MD``
+        + &rArr; ``QMAKE_CFLAGS_RELEASE = -O2 -MT <more optimization flags here>``
+    * Edit #2:
+        + &lArr; ``QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi``
+        + &rArr; ``QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi <more optimization flags here>``
     
  5. Open a new command window (``cmd.exe``) &ndash; use this very same console for all upcoming steps!
  

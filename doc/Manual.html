@@ -448,7 +448,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p>LameXP is currently being developed and built using the following development tools and libraries:</p>
 <ul>
 <li><p><a href="http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2013 Update-4</a>, running on Windows 7 with Service Pack 1</p></li>
-<li><p><a href="http://download.qt.io/archive/qt/4.8/">Qt libraries 4.8.6</a> for Windows (pre-compiled Qt libraries for Visual Studio 2013 can be found <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/"><strong>here</strong></a>)</p></li>
+<li><p><a href="http://download.qt.io/archive/qt/4.8/">Qt libraries 4.8.7</a> for Windows (our <em>pre-compiled</em> Qt libraries for Visual Studio 2013 can be found <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/"><strong>here</strong></a>)</p></li>
 <li><p>Windows Platform SDK v7.1A, included with Visual Studio 2013 or Visual Studio 2012</p></li>
 <li><p>The minimum supported <em>build</em> platform is Windows 7 (x86 and x64)</p></li>
 </ul>
@@ -474,10 +474,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p>Download and extract the <em>Qt 4.8.x</em> source code package (e.g. to <code>C:\QtSources\4.8.x</code>)</p></li>
 <li><p>Edit the file <code>mkspecs\win32-msvc2010\qmake.conf</code> from your Qt Sources directory as follows:</p>
 <ul>
-<li><code>Old: QMAKE_CFLAGS_RELEASE = -O2 -MD</code><br /></li>
-<li><code>New: QMAKE_CFLAGS_RELEASE = -O2 -MT &lt;more optimization flags here&gt;</code><br /></li>
-<li><code>Old: QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi</code><br /></li>
-<li><code>New: QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi &lt;more optimization flags here&gt;</code></li>
+<li><p>Edit #1:</p>
+<ul>
+<li>⇐ <code>QMAKE_CFLAGS_RELEASE = -O2 -MD</code><br /></li>
+<li>⇒ <code>QMAKE_CFLAGS_RELEASE = -O2 -MT &lt;more optimization flags here&gt;</code><br /></li>
+</ul></li>
+<li><p>Edit #2:</p>
+<ul>
+<li>⇐ <code>QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi</code><br /></li>
+<li>⇒ <code>QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi &lt;more optimization flags here&gt;</code></li>
+</ul></li>
 </ul></li>
 <li><p>Open a new command window (<code>cmd.exe</code>) – use this very same console for all upcoming steps!</p></li>
 <li><p>Add <em>Strawberry Perl</em> to your PATH (e.g. <code>set PATH=C:\strawberry\perl\bin;%PATH%</code>)</p></li>
