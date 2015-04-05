@@ -257,15 +257,15 @@
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis Encoder</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis Encoder</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">命令行通過John33創建的Ogg Vorbis格式的解碼器.</translation>
     </message>
 </context>
 <context>
@@ -469,7 +469,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">警告：一些所需的輸入文件找不到！</translation>
     </message>
 </context>
 <context>
@@ -1971,27 +1971,27 @@
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">報告錯誤 (GitHub)</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hydrogenaudio知識庫</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP用戶手冊</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">啟用動態正常化</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">窗口大小：</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">啟用信道耦合，即由相同量的放大的多信道文件的所有通道</translation>
     </message>
 </context>
 <context>

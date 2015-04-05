@@ -253,19 +253,19 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Espejos oficiales:</translation>
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis Encoder</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggDec - Vorbis Decoder</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation>Línea de comandos Ogg Vorbis decodificador creado por John33.</translation>
     </message>
 </context>
 <context>
@@ -472,7 +472,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia: Algunos de los archivos de entrada requeridos no se puede conocer !</translation>
     </message>
 </context>
 <context>
@@ -1971,35 +1971,35 @@
     </message>
     <message>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando caer archivos o carpetas, por favor espere ...</translation>
     </message>
     <message>
         <source>APE</source>
-        <translation type="unfinished"></translation>
+        <translation>APE</translation>
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation>Informar de un error (GitHub)</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hydrogenaudio Knowledgebase</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP Manual del usuario</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar dinámica Normalización</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de la ventana:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar canal de acoplamiento, es decir, amplificar todos los canales de un archivo multi- canal por la misma cantidad</translation>
     </message>
 </context>
 <context>
@@ -2697,23 +2697,23 @@
     </message>
     <message>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Iniciando, espere por favor...</translation>
+        <translation>La inicialización, por favor espere ...</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>descartar</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">Ignorar</translation>
+        <translation>Ignorar</translation>
     </message>
     <message>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lo sentimos , pero sólo los usuarios del grupo &quot;Administradores&quot; se pueden instalar las actualizaciones.</translation>
     </message>
     <message>
         <source>Please start application from an administrator account and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, iniciar la aplicación desde una cuenta de administrador y vuelva a intentarlo!</translation>
     </message>
 </context>
 </TS>

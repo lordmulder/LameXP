@@ -257,19 +257,19 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Miroirs officielles:</translation>
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis Encoder</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggDec - Vorbis Decoder</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligne de commande Ogg Vorbis décodeur créé par John33.</translation>
     </message>
 </context>
 <context>
@@ -476,7 +476,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention: Certains des fichiers d&apos;entrée requis n&apos;a pu être trouvée!</translation>
     </message>
 </context>
 <context>
@@ -1988,27 +1988,27 @@ Ouvrir le dossier récursivement...</translation>
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation>Signaler un Bug (GitHub)</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hydrogenaudio Knowledgebase</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>LameXP Manuel de l&apos;utilisateur</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation>Enable Dynamic normalisation</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de la fenêtre:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le canal de couplage, ce est à dire d&apos;amplifier tous les canaux d&apos;un fichier multi-canal du même montant</translation>
     </message>
 </context>
 <context>

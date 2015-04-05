@@ -253,19 +253,19 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Официальные Зеркала:</translation>
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggEnc - Vorbis Encoder</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation type="unfinished"></translation>
+        <translation>OggDec - Vorbis Decoder</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Command line Ogg Vorbis decoder created by John33.</translation>
     </message>
 </context>
 <context>
@@ -477,7 +477,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Внимание: Некоторые из необходимых входных файлов не может быть найден!</translation>
     </message>
 </context>
 <context>
@@ -1993,27 +1993,27 @@
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сообщить об ошибке (GitHub)</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hydrogenaudio Knowledgebase</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP Руководство пользователя</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Включить динамическую нормализацию</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Размер окна:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Включить канал- связь , то есть усиливать все каналы файла многоканальной на ту же сумму</translation>
     </message>
 </context>
 <context>
