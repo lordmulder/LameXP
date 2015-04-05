@@ -64,7 +64,7 @@
 #define MAKE_TRANSPARENT(WIDGET) do { QPalette _p = (WIDGET)->palette(); _p.setColor(QPalette::Background, Qt::transparent); (WIDGET)->setPalette(_p); } while(0)
 
 //Constants
-const char *AboutDialog::neroAacUrl = "http://www.videohelp.com/tools/Nero-AAC-Codec"; //"http://www.nero.com/eng/company/about-nero/nero-aac-codec.php";
+const char *AboutDialog::neroAacUrl = "http://www.nero.com/eng/company/about-nero/nero-aac-codec.php"; //"http://www.videohelp.com/tools/Nero-AAC-Codec";
 const char *AboutDialog::disqueUrl =  "http://muldersoft.com/?player_url=38X-MXOB014";
 
 //Contributors
