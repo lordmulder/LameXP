@@ -1,5 +1,5 @@
 [!Update]
-TimestampCreated=2015-02-06
+TimestampCreated=2015-04-05
 
 [MPlayer for Windows]
 BuildNo=128
@@ -9,12 +9,12 @@ DownloadFilename=MPUI.2015-02-06.exe
 DownloadFilecode=af8c8642337222f09853887676edb793c7802953
 
 [LameXP]
-BuildNo=1558
-BuildDate=2014-06-23
+BuildNo=1700
+BuildDate=2015-04-05
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://mplayer.savedonthe.net/
-DownloadFilename=LameXP.2014-06-23.Release-Static.Build-1558.exe
-DownloadFilecode=fdc5ea0b7099d291739bc3de58487ee9412ea0bd
+DownloadFilename=LameXP.2015-04-05.Release-Static.Build-1700.exe
+DownloadFilecode=18ecf1f3abe23fdf4670a5e10435eaa2e66a753f
 
 [Simple x264 Launcher]
 BuildNo=902
