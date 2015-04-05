@@ -94,7 +94,7 @@
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\lib;$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -170,7 +170,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       </MapFileName>
       <CreateHotPatchableImage>
       </CreateHotPatchableImage>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\lib;$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
