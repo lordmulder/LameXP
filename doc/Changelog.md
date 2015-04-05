@@ -2,12 +2,12 @@
 
 # LameXP v4.xx History #
 
-## LameXP v4.11 [2015-xx-xx] ## {-}
+## LameXP v4.11 [2015-04-05] ## {-}
 
 * Upgraded build environment to Microsoft Visual Studio 2013 with Update-4
 * Starting with this version, LameXP is based on the [*MUtilities*](http://sourceforge.net/p/mutilities/code/) library + massive code clean-up
 * Added support for the [*DynamicAudioNormalizer*](https://github.com/lordmulder/DynamicAudioNormalizer) normalization filter
-* Updated Qt runtime libraries to v4.8.7 snapshot-4 (2015-02-16), compiled with MSVC 12.0
+* Updated Qt runtime libraries to v4.8.7 snapshot-5 (2015-03-25), compiled with MSVC 12.0
 * Updated MediaInfo to v0.7.72 (2015-01-07), compiled with ICL 15.0 and MSVC 12.0
 * Updated SoX to v14.4.2-Final (2015-02-22), compiled with ICL 15.0 and MSVC 12.0
 * Updated Opus libraries to v1.1.x and Opus-Tools v0.1.9 to latest Git Master (2015-03-26)
