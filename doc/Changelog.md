@@ -2,6 +2,10 @@
 
 # LameXP v4.xx History #
 
+## LameXP v4.12 [xxxx-xx-xx] ## {-}
+
+* Added Hungarian translation, thanks to Zityi's Translator Team <zityisoft@gmail.com>
+
 ## LameXP v4.11 [2015-04-05] ## {-}
 
 * Upgraded build environment to Microsoft Visual Studio 2013 with Update-4
