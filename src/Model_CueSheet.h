@@ -61,7 +61,7 @@ public:
 	void clearData(void);
 
 	//External API
-	int CueSheetModel::getFileCount(void);
+	int getFileCount(void);
 	QString getFileName(int fileIndex);
 	int getTrackCount(int fileIndex);
 	const AudioFileModel_MetaInfo *getTrackInfo(int fileIndex, int trackIndex);

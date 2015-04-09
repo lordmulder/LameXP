@@ -36,5 +36,5 @@ class DecoderRegistry : public QObject
 public:
 	static void configureDecoders(const SettingsModel *settings);
 	static AbstractDecoder *lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	static QStringList DecoderRegistry::getSupportedTypes(void);
+	static QStringList getSupportedTypes(void);
 };
