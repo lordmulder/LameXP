@@ -69,7 +69,7 @@ public:
 	const QStringList &getLogFile(const QModelIndex &index) const;
 	const QUuid &getJobId(const QModelIndex &index) const;
 	const JobState getJobState(const QModelIndex &index) const;
-	const QIcon &ProgressModel::getIcon(ProgressModel::JobState state) const;
+	const QIcon &getIcon(ProgressModel::JobState state) const;
 	void restoreHiddenItems(void);
 
 public slots:

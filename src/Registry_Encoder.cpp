@@ -377,7 +377,7 @@ while(0)
 } \
 while(0)
 
-void EncoderRegistry::saveEncoderCustomParams(SettingsModel *settings, const int encoderId, const QString params)
+void EncoderRegistry::saveEncoderCustomParams(SettingsModel *settings, const int encoderId, const QString &params)
 {
 	//Store the encoder bitrate/quality value
 	switch(encoderId)

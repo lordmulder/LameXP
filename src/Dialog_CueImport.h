@@ -47,7 +47,7 @@ public:
 	int exec(void);
 
 protected:
-	void CueImportDialog::showEvent(QShowEvent *event);
+	void showEvent(QShowEvent *event);
 
 private slots:
 	void browseButtonClicked(void);
