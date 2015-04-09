@@ -67,79 +67,79 @@
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation></translation>
+        <translation>Полностью открытая и свободная от патентов технология кодирования аудио.</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
-        <translation></translation>
+        <translation>Nero AAC MPEG-4 кодировщик</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation></translation>
+        <translation>Бесплатный кодировщик HE-AAC высшего класса с поддержкой 2-х проходов.</translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
-        <translation>Доступно для загрузки с сайта создателя бесплатно:</translation>
+        <translation>Доступно для бесплатной загрузки с сайта поставщика:</translation>
     </message>
     <message>
         <source>FLAC - Free Lossless Audio Codec</source>
-        <translation></translation>
+        <translation>FLAC - свободный аудио кодек без потерь</translation>
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation></translation>
+        <translation>Открытая и свободная от патентов технология сжатия аудио без потерь.</translation>
     </message>
     <message>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
-        <translation></translation>
+        <translation>mpg123 - быстрый консольный плеер/декодер аудио MPEG</translation>
     </message>
     <message>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation></translation>
+        <translation>FAAD - декодер MPEG-4 и MPEG-2 AAC с открытым исходным кодом</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation></translation>
+        <translation>Распространяется на условиях GNU General Public License.</translation>
     </message>
     <message>
         <source>WavPack - Hybrid Lossless Compression</source>
-        <translation></translation>
+        <translation>WavPack - гибридное сжатие без потерь</translation>
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation></translation>
+        <translation>Полностью открытый формат сжатия аудио.</translation>
     </message>
     <message>
         <source>Musepack - Living Audio Compression</source>
-        <translation></translation>
+        <translation>Musepack - живое сжатие аудио</translation>
     </message>
     <message>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
-        <translation></translation>
+        <translation>Monkey&apos;s Audio - сжимальщик аудио без потерь</translation>
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation></translation>
+        <translation>Свободно доступный исходный код, простой SDK и не ограничивающее лицензирование.</translation>
     </message>
     <message>
         <source>Shorten - Lossless Audio Compressor</source>
-        <translation></translation>
+        <translation>Shorten - сжимальщик аудио без потерь</translation>
     </message>
     <message>
         <source>Speex - Free Codec For Free Speech</source>
-        <translation></translation>
+        <translation>Speex - свободный кодек для свободной речи</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation></translation>
+        <translation>Открытый, свободный от патентов аудио формат, спроектированный для речи.</translation>
     </message>
     <message>
         <source>The True Audio - Lossless Audio Codec</source>
-        <translation></translation>
+        <translation>The True Audio - аудио кодек без потерь</translation>
     </message>
     <message>
         <source>MediaInfo - Media File Analysis Tool</source>
-        <translation></translation>
+        <translation>MediaInfo - инструмент анализа медиа-файлов</translation>
     </message>
     <message>
         <source>SoX - Sound eXchange</source>
@@ -151,7 +151,7 @@
     </message>
     <message>
         <source>GNU Wget - Software for retrieving files using HTTP</source>
-        <translation></translation>
+        <translation>GNU Wget - программное обеспечение для получения файлов через HTTP</translation>
     </message>
     <message>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
@@ -167,23 +167,23 @@
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
-        <translation></translation>
+        <translation>Aften - кодировщик аудио A/52</translation>
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation></translation>
+        <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Некоторые права защищены.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation></translation>
+        <translation>Jory Stone &lt;jcsston@toughguy.net&gt; и LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
-        <translation></translation>
+        <translation>wma2wav - Сброс WMA файлов в Wave Audio</translation>
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
-        <translation></translation>
+        <translation>avs2wav - преобразователь Avisynth в Wave Audio</translation>
     </message>
     <message>
         <source>dcaenc</source>
@@ -191,7 +191,7 @@
     </message>
     <message>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation></translation>
+        <translation>Copyright (c) 2008-2011 Александр Е. Патраков. Распространяется на условиях LGPL.</translation>
     </message>
     <message>
         <source>Information</source>
@@ -211,11 +211,11 @@
     </message>
     <message>
         <source>Opus Audio Codec</source>
-        <translation></translation>
+        <translation>аудио кодек Opus</translation>
     </message>
     <message>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation></translation>
+        <translation>Полностью открытый, безвозмездный, очень разносторонний аудио кодек.</translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
@@ -243,11 +243,11 @@
     </message>
     <message>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
-        <translation></translation>
+        <translation>refalac - ALAC кодировщик/декодировщик, запускаемый из командной строки Win32</translation>
     </message>
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translation></translation>
+        <translation>Референсная реализация ALAC от Apple доступна на условиях лицензии Apache.</translation>
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
@@ -255,19 +255,19 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation>Официальные Зеркала:</translation>
+        <translation>Официальные зеркала:</translation>
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation>OggEnc - Vorbis Encoder</translation>
+        <translation>OggEnc - кодировщик Vorbis</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation>OggDec - Vorbis Decoder</translation>
+        <translation>OggDec - декодировщик Vorbis</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished">Command line Ogg Vorbis decoder created by John33.</translation>
+        <translation>Консольный декодировщик Ogg Vorbis, созданный John33.</translation>
     </message>
 </context>
 <context>
@@ -310,7 +310,7 @@
     </message>
     <message>
         <source>Encoder</source>
-        <translation>Кодер</translation>
+        <translation>Кодировщик</translation>
     </message>
 </context>
 <context>
@@ -353,8 +353,7 @@
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translatorcomment>пыщь пыщь</translatorcomment>
-        <translation>Не могу найти аудио файлы, которые поддерживает LameXP!</translation>
+        <translation>Не могу найти какую-либо поддерживаемую аудиодорожку в CUE плэйлисте!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
@@ -375,7 +374,8 @@
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation>Ошибка: выбранная папка недостпна для записи!</translation>
+        <translatorcomment>typo fix</translatorcomment>
+        <translation>Ошибка: выбранная папка недоступна для записи!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
@@ -387,7 +387,7 @@
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation>Настоятельно рекомендуется освободить больше места, перед началом операции!</translation>
+        <translation>Настоятельно рекомендуется освободить больше места перед началом операции!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
@@ -415,7 +415,7 @@
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation>Предупреждение: формат некоторых файлов неопознан!</translation>
+        <translation>Предупреждение: формат некоторых входных файлов неопознан!</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
@@ -423,15 +423,15 @@
     </message>
     <message>
         <source>Abort</source>
-        <translation>Отмена</translation>
+        <translation>Прервать</translation>
     </message>
     <message>
         <source>(System Default)</source>
-        <translation></translation>
+        <translation>(По умолчанию системы)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation>Кодировка ANSI для файла CUE:</translation>
+        <translation>Выберите кодировку ANSI для файла CUE:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -479,7 +479,7 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished">Внимание: Некоторые из необходимых входных файлов не может быть найден!</translation>
+        <translation>Внимание: Некоторые из необходимых входных файлов не могут быть найдены!</translation>
     </message>
 </context>
 <context>
