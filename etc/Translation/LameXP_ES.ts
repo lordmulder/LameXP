@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES" sourcelanguage="en">
+<TS version="2.1" language="es_ES" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -97,7 +97,8 @@
     </message>
     <message>
         <source>LAME - OpenSource mp3 Encoder</source>
-        <translation>LameXP - Codificador mp3 de código abierto</translation>
+        <translatorcomment>The LAME encoder was meant, not LameXP application</translatorcomment>
+        <translation>LAME - Codificador mp3 de código abierto</translation>
     </message>
     <message>
         <source>FLAC - Free Lossless Audio Codec</source>

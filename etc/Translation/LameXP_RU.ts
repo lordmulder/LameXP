@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU" sourcelanguage="en">
+<TS version="2.1" language="ru_RU" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation>LameXP - Audio Encoder Front-end</translation>
+        <translation>LameXP - Внешний интерфейс аудио кодировщика</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
@@ -13,7 +13,8 @@
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Примечание: LameXP является бесплатным программным обеспечением. Вам &lt;b&gt;не надо&lt;/b&gt; платить деньги, чтобы получить или использовать LameXP! Если какой-то веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы должны &lt;b&gt; не отвечать&lt;/b&gt; на это предложение!!!</translation>
+        <translatorcomment>Rephrased the translation so it corresponds more to the original.</translatorcomment>
+        <translation>Примечание: LameXP является бесплатным программным обеспечением. &lt;b&gt;Не&lt;/b&gt; платите деньги, чтобы получить или использовать LameXP! Если какой-то веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы &lt;b&gt;не&lt;/b&gt; должны отвечать на это предложение!!!</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -29,7 +30,7 @@
     </message>
     <message>
         <source>3rd Party S/W</source>
-        <translation>ПО 3-их Сторон</translation>
+        <translation>ПО 3-их сторон</translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -49,19 +50,20 @@
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation>Если Вы готовы внести вклад в развитие LameXP, не стесняйтесь связаться с нами!</translation>
+        <translation>Если Вы желаете внести вклад в развитие LameXP, не стесняйтесь связаться с нами!</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
-        <translation>Следующее ПО третьих лиц исползуется в LameXP:</translation>
+        <translatorcomment>Typo correction</translatorcomment>
+        <translation>Следующее ПО третьих лиц используется в LameXP:</translation>
     </message>
     <message>
         <source>LAME - OpenSource mp3 Encoder</source>
-        <translation></translation>
+        <translation>LAME - Кодировщик mp3 с открытым исходным кодом</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation></translation>
+        <translation>Распространяется на условиях GNU Lesser General Public License.</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
@@ -2682,7 +2684,8 @@
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation>Настоятельно  рекомендуем установить это обновление как можо скорее.</translation>
+        <translatorcomment>A nasty typo corrected</translatorcomment>
+        <translation>Настоятельно  рекомендуем установить это обновление как можно скорее.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
