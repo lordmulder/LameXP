@@ -496,11 +496,11 @@
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation>El archivo de origen existe</translation>
+        <translation>El archivo de origen existente</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation>El archivo de origen no existe (¡Se omitirán algunas pistas!)</translation>
+        <translation>El archivo de origen que falta (¡Se omitirán algunas pistas!)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>

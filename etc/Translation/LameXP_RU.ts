@@ -486,7 +486,7 @@
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Импортировать</translation>
+        <translation>Импортировать CUE плэйлист</translation>
     </message>
     <message>
         <source> Output Directory </source>
@@ -502,11 +502,11 @@
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation>Файл найден</translation>
+        <translation>Существующий исходный файл</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation>Файл не найден (будет пропущен!)</translation>
+        <translation>Отсутствующий исходный файл (дорожки будут пропущены!)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
@@ -546,15 +546,15 @@
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Неизвестный Артист</translation>
+        <translation>Неизвестный исполнитель</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation>Неизвестное Название</translation>
+        <translation>Неизвестное название</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Длителность</translation>
+        <translation>Длительность</translation>
     </message>
 </context>
 <context>
