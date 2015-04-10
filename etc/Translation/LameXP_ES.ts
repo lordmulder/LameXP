@@ -584,11 +584,11 @@
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation>¡Puede arrastrar&amp;amp;soltar archivos aquí!</translation>
+        <translation>¡Puede añadir archivos a LameXP arrastrándolos y soltándolos aquí!</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Clic derecho para cerrar el DropBox)</translation>
+        <translation>(Haga clic derecho para cerrar el DropBox)</translation>
     </message>
 </context>
 <context>
@@ -653,7 +653,7 @@
     </message>
     <message>
         <source>Source Files</source>
-        <translation>Entrada</translation>
+        <translation>Archivos de origen</translation>
     </message>
     <message>
         <source>Add File(s)</source>
@@ -673,7 +673,7 @@
     </message>
     <message>
         <source>Output Directory</source>
-        <translation>Salida</translation>
+        <translation>Carpeta de salida</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
@@ -1984,15 +1984,15 @@
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation>Hydrogenaudio Knowledgebase</translation>
+        <translation>Base de conocimientos Hydrogenaudio</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation>LameXP Manual del usuario</translation>
+        <translation>Manual del usuario de LameXP</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation>Habilitar dinámica Normalización</translation>
+        <translation>Habilitar normalización dinámica</translation>
     </message>
     <message>
         <source>Window Size:</source>

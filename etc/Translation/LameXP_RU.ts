@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation>LameXP - Внешний интерфейс аудио кодировщика</translation>
+        <translation>LameXP - Внешний интерфейс аудио кодировщиков</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
@@ -591,11 +591,11 @@
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation>Вы можете добавить файлы в LameXP перетащив их сюда!</translation>
+        <translation>Вы можете добавить файлы в LameXP, перетащив их сюда!</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Для закрытия DropBox нажмите правой кнопкой мыши)</translation>
+        <translation>(Для закрытия DropBox щёлкните правой кнопкой мыши)</translation>
     </message>
 </context>
 <context>
@@ -610,7 +610,7 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation></translation>
+        <translation>(По умолчанию системы)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for CSV file:</source>
@@ -656,11 +656,11 @@
     <name>MainWindow</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP - Audio Encoder Front-end</translation>
+        <translation>LameXP - Внешний интерфейс аудио кодировщиков</translation>
     </message>
     <message>
         <source>Source Files</source>
-        <translation>Исходные Файлы</translation>
+        <translation>Исходные файлы</translation>
     </message>
     <message>
         <source>Add File(s)</source>
@@ -1960,9 +1960,9 @@
     <message numerus="yes">
         <source>%n Instance(s)</source>
         <translation>
-            <numerusform>Потоков: %n</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n поток</numerusform>
+            <numerusform>%n потока</numerusform>
+            <numerusform>%n потоков</numerusform>
         </translation>
     </message>
     <message>
@@ -1995,27 +1995,27 @@
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished">Сообщить об ошибке (GitHub)</translation>
+        <translation>Сообщить об ошибке (GitHub)</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished">Hydrogenaudio Knowledgebase</translation>
+        <translation>База знаний Hydrogenaudio</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished">LameXP Руководство пользователя</translation>
+        <translation>Руководство пользователя LameXP</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished">Включить динамическую нормализацию</translation>
+        <translation>Включить динамическую нормализацию</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished">Размер окна:</translation>
+        <translation>Размер окна:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished">Включить канал- связь , то есть усиливать все каналы файла многоканальной на ту же сумму</translation>
+        <translation>Включить спаривание каналов, т.е. усилить все каналы многоканального файла на одну и ту же величину</translation>
     </message>
 </context>
 <context>
@@ -2026,7 +2026,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation>Изменить</translation>
+        <translation>Редактировать</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2061,8 +2061,7 @@
     </message>
     <message>
         <source>Artwork Error</source>
-        <translatorcomment>!!переделать!!</translatorcomment>
-        <translation>Ошибка обложки</translation>
+        <translation>Ошибка в обложке</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
@@ -2472,7 +2471,7 @@
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation>Кодирование заняло %1</translation>
+        <translation>Процесс завершился спустя %1.</translation>
     </message>
     <message>
         <source>Filter Log Items</source>
@@ -2505,55 +2504,55 @@
     <message numerus="yes">
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
-            <numerusform>Процесс был прерван пользователем после %n файла</numerusform>
-            <numerusform>Процесс был прерван пользователем после %n файлов</numerusform>
-            <numerusform>Процесс был прерван пользователем после %n файлов</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файла!</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файлов!</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файлов!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation>
-            <numerusform>%n ч.</numerusform>
-            <numerusform>%n ч.</numerusform>
-            <numerusform>%n ч.</numerusform>
+            <numerusform>%n час</numerusform>
+            <numerusform>%n часа</numerusform>
+            <numerusform>%n часов</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation>
-            <numerusform>%n мин.</numerusform>
-            <numerusform>%n мин.</numerusform>
-            <numerusform>%n мин.</numerusform>
+            <numerusform>%n минута</numerusform>
+            <numerusform>%n минуты</numerusform>
+            <numerusform>%n минут</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation>
-            <numerusform>%n с.</numerusform>
-            <numerusform>%n с.</numerusform>
-            <numerusform>%n с.</numerusform>
+            <numerusform>%n секунда</numerusform>
+            <numerusform>%n секунды</numerusform>
+            <numerusform>%n секунд</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
         <translation>
-            <numerusform>%n мс.</numerusform>
-            <numerusform>%n мс.</numerusform>
-            <numerusform>%n мс.</numerusform>
+            <numerusform>%n миллисекунда</numerusform>
+            <numerusform>%n миллисекунды</numerusform>
+            <numerusform>%n миллисекунд</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Кодирование: %n файл из %1 завершено, пожалуйста ждите...</numerusform>
-            <numerusform>Кодирование: %n файлов из %1 завершено, пожалуйста ждите...</numerusform>
+            <numerusform>Кодирование: %n файла из %1 завершено, пожалуйста ждите...</numerusform>
             <numerusform>Кодирование: %n файлов из %1 завершено, пожалуйста ждите...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
-            <numerusform>Ошибка в: %1 из %n файле (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файла (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
         </translation>
@@ -2569,7 +2568,7 @@
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
-            <numerusform>Ошибка в: %1 из %n файле. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файла. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
         </translation>
@@ -2598,11 +2597,11 @@
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>
-        <translation>Аудио Файл поддерживаетя LameXP</translation>
+        <translation>Аудио файл, поддерживаемый LameXP</translation>
     </message>
     <message>
         <source>Convert this file with LameXP v%1</source>
-        <translation>Конвертировать этот файл используя LameXP v%1</translation>
+        <translation>Конвертировать этот файл, используя LameXP v%1</translation>
     </message>
 </context>
 <context>
