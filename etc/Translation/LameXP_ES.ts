@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES" sourcelanguage="en">
+<TS version="2.1" language="es_ES" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -97,7 +97,8 @@
     </message>
     <message>
         <source>LAME - OpenSource mp3 Encoder</source>
-        <translation>LameXP - Codificador mp3 de código abierto</translation>
+        <translatorcomment>The LAME encoder was meant, not LameXP application</translatorcomment>
+        <translation>LAME - Codificador mp3 de código abierto</translation>
     </message>
     <message>
         <source>FLAC - Free Lossless Audio Codec</source>
@@ -169,11 +170,11 @@
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</translation>
+        <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Algunos derechos reservados.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
+        <translation>Por Jory Stone &lt;jcsston@toughguy.net&gt; y LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
@@ -495,11 +496,11 @@
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation>El archivo de origen existe</translation>
+        <translation>El archivo de origen existente</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation>El archivo de origen no existe (¡Se omitirán algunas pistas!)</translation>
+        <translation>El archivo de origen que falta (¡Se omitirán algunas pistas!)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
@@ -583,11 +584,11 @@
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation>¡Puede arrastrar&amp;amp;soltar archivos aquí!</translation>
+        <translation>¡Puede añadir archivos a LameXP arrastrándolos y soltándolos aquí!</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Clic derecho para cerrar el DropBox)</translation>
+        <translation>(Haga clic derecho para cerrar el DropBox)</translation>
     </message>
 </context>
 <context>
@@ -652,7 +653,7 @@
     </message>
     <message>
         <source>Source Files</source>
-        <translation>Entrada</translation>
+        <translation>Archivos de origen</translation>
     </message>
     <message>
         <source>Add File(s)</source>
@@ -672,7 +673,7 @@
     </message>
     <message>
         <source>Output Directory</source>
-        <translation>Salida</translation>
+        <translation>Carpeta de salida</translation>
     </message>
     <message>
         <source>Goto Home Folder</source>
@@ -1983,15 +1984,15 @@
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation>Hydrogenaudio Knowledgebase</translation>
+        <translation>Base de conocimientos Hydrogenaudio</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation>LameXP Manual del usuario</translation>
+        <translation>Manual del usuario de LameXP</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation>Habilitar dinámica Normalización</translation>
+        <translation>Habilitar normalización dinámica</translation>
     </message>
     <message>
         <source>Window Size:</source>

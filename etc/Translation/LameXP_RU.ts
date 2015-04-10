@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU" sourcelanguage="en">
+<TS version="2.1" language="ru_RU" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation>LameXP - Audio Encoder Front-end</translation>
+        <translation>LameXP - Внешний интерфейс аудио кодировщиков</translation>
     </message>
     <message>
         <source>Please visit %1 for news and updates!</source>
@@ -13,7 +13,8 @@
     </message>
     <message>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Примечание: LameXP является бесплатным программным обеспечением. Вам &lt;b&gt;не надо&lt;/b&gt; платить деньги, чтобы получить или использовать LameXP! Если какой-то веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы должны &lt;b&gt; не отвечать&lt;/b&gt; на это предложение!!!</translation>
+        <translatorcomment>Rephrased the translation so it corresponds more to the original.</translatorcomment>
+        <translation>Примечание: LameXP является бесплатным программным обеспечением. &lt;b&gt;Не&lt;/b&gt; платите деньги, чтобы получить или использовать LameXP! Если какой-то веб-сайт пытается заставить Вас заплатить за загрузку LameXP, Вы &lt;b&gt;не&lt;/b&gt; должны отвечать на это предложение!!!</translation>
     </message>
     <message>
         <source>About LameXP</source>
@@ -29,7 +30,7 @@
     </message>
     <message>
         <source>3rd Party S/W</source>
-        <translation>ПО 3-их Сторон</translation>
+        <translation>ПО 3-их сторон</translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -49,95 +50,96 @@
     </message>
     <message>
         <source>If you are willing to contribute a LameXP translation, feel free to contact us!</source>
-        <translation>Если Вы готовы внести вклад в развитие LameXP, не стесняйтесь связаться с нами!</translation>
+        <translation>Если Вы желаете внести вклад в развитие LameXP, не стесняйтесь связаться с нами!</translation>
     </message>
     <message>
         <source>The following third-party software is used in LameXP:</source>
-        <translation>Следующее ПО третьих лиц исползуется в LameXP:</translation>
+        <translatorcomment>Typo correction</translatorcomment>
+        <translation>Следующее ПО третьих лиц используется в LameXP:</translation>
     </message>
     <message>
         <source>LAME - OpenSource mp3 Encoder</source>
-        <translation></translation>
+        <translation>LAME - Кодировщик mp3 с открытым исходным кодом</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
-        <translation></translation>
+        <translation>Распространяется на условиях GNU Lesser General Public License.</translation>
     </message>
     <message>
         <source>Completely open and patent-free audio encoding technology.</source>
-        <translation></translation>
+        <translation>Полностью открытая и свободная от патентов технология кодирования аудио.</translation>
     </message>
     <message>
         <source>Nero AAC Reference MPEG-4 Encoder</source>
-        <translation></translation>
+        <translation>Nero AAC MPEG-4 кодировщик</translation>
     </message>
     <message>
         <source>Freeware state-of-the-art HE-AAC encoder with 2-Pass support.</source>
-        <translation></translation>
+        <translation>Бесплатный кодировщик HE-AAC высшего класса с поддержкой 2-х проходов.</translation>
     </message>
     <message>
         <source>Available from vendor web-site as free download:</source>
-        <translation>Доступно для загрузки с сайта создателя бесплатно:</translation>
+        <translation>Доступно для бесплатной загрузки с сайта поставщика:</translation>
     </message>
     <message>
         <source>FLAC - Free Lossless Audio Codec</source>
-        <translation></translation>
+        <translation>FLAC - свободный аудио кодек без потерь</translation>
     </message>
     <message>
         <source>Open and patent-free lossless audio compression technology.</source>
-        <translation></translation>
+        <translation>Открытая и свободная от патентов технология сжатия аудио без потерь.</translation>
     </message>
     <message>
         <source>mpg123 - Fast Console MPEG Audio Player/Decoder</source>
-        <translation></translation>
+        <translation>mpg123 - быстрый консольный плеер/декодер аудио MPEG</translation>
     </message>
     <message>
         <source>FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder</source>
-        <translation></translation>
+        <translation>FAAD - декодер MPEG-4 и MPEG-2 AAC с открытым исходным кодом</translation>
     </message>
     <message>
         <source>Released under the terms of the GNU General Public License.</source>
-        <translation></translation>
+        <translation>Распространяется на условиях GNU General Public License.</translation>
     </message>
     <message>
         <source>WavPack - Hybrid Lossless Compression</source>
-        <translation></translation>
+        <translation>WavPack - гибридное сжатие без потерь</translation>
     </message>
     <message>
         <source>Completely open audio compression format.</source>
-        <translation></translation>
+        <translation>Полностью открытый формат сжатия аудио.</translation>
     </message>
     <message>
         <source>Musepack - Living Audio Compression</source>
-        <translation></translation>
+        <translation>Musepack - живое сжатие аудио</translation>
     </message>
     <message>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
-        <translation></translation>
+        <translation>Monkey&apos;s Audio - сжимальщик аудио без потерь</translation>
     </message>
     <message>
         <source>Freely available source code, simple SDK and non-restrictive licensing.</source>
-        <translation></translation>
+        <translation>Свободно доступный исходный код, простой SDK и не ограничивающее лицензирование.</translation>
     </message>
     <message>
         <source>Shorten - Lossless Audio Compressor</source>
-        <translation></translation>
+        <translation>Shorten - сжимальщик аудио без потерь</translation>
     </message>
     <message>
         <source>Speex - Free Codec For Free Speech</source>
-        <translation></translation>
+        <translation>Speex - свободный кодек для свободной речи</translation>
     </message>
     <message>
         <source>Open Source patent-free audio format designed for speech.</source>
-        <translation></translation>
+        <translation>Открытый, свободный от патентов аудио формат, спроектированный для речи.</translation>
     </message>
     <message>
         <source>The True Audio - Lossless Audio Codec</source>
-        <translation></translation>
+        <translation>The True Audio - аудио кодек без потерь</translation>
     </message>
     <message>
         <source>MediaInfo - Media File Analysis Tool</source>
-        <translation></translation>
+        <translation>MediaInfo - инструмент анализа медиа-файлов</translation>
     </message>
     <message>
         <source>SoX - Sound eXchange</source>
@@ -149,7 +151,7 @@
     </message>
     <message>
         <source>GNU Wget - Software for retrieving files using HTTP</source>
-        <translation></translation>
+        <translation>GNU Wget - программное обеспечение для получения файлов через HTTP</translation>
     </message>
     <message>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
@@ -165,23 +167,23 @@
     </message>
     <message>
         <source>Aften - A/52 audio encoder</source>
-        <translation></translation>
+        <translation>Aften - кодировщик аудио A/52</translation>
     </message>
     <message>
         <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation></translation>
+        <translation>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Некоторые права защищены.</translation>
     </message>
     <message>
         <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation></translation>
+        <translation>Jory Stone &lt;jcsston@toughguy.net&gt; и LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <source>wma2wav - Dump WMA files to Wave Audio</source>
-        <translation></translation>
+        <translation>wma2wav - Сброс WMA файлов в Wave Audio</translation>
     </message>
     <message>
         <source>avs2wav - Avisynth to Wave Audio converter</source>
-        <translation></translation>
+        <translation>avs2wav - преобразователь Avisynth в Wave Audio</translation>
     </message>
     <message>
         <source>dcaenc</source>
@@ -189,7 +191,7 @@
     </message>
     <message>
         <source>Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL.</source>
-        <translation></translation>
+        <translation>Copyright (c) 2008-2011 Александр Е. Патраков. Распространяется на условиях LGPL.</translation>
     </message>
     <message>
         <source>Information</source>
@@ -209,11 +211,11 @@
     </message>
     <message>
         <source>Opus Audio Codec</source>
-        <translation></translation>
+        <translation>аудио кодек Opus</translation>
     </message>
     <message>
         <source>Totally open, royalty-free, highly versatile audio codec.</source>
-        <translation></translation>
+        <translation>Полностью открытый, безвозмездный, очень разносторонний аудио кодек.</translation>
     </message>
     <message>
         <source>Silk Icons - Over 700  icons in PNG format</source>
@@ -241,11 +243,11 @@
     </message>
     <message>
         <source>refalac - Win32 command line ALAC encoder/decoder</source>
-        <translation></translation>
+        <translation>refalac - ALAC кодировщик/декодировщик, запускаемый из командной строки Win32</translation>
     </message>
     <message>
         <source>The ALAC reference implementation by Apple is available under the Apache license.</source>
-        <translation></translation>
+        <translation>Референсная реализация ALAC от Apple доступна на условиях лицензии Apache.</translation>
     </message>
     <message>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
@@ -253,19 +255,19 @@
     </message>
     <message>
         <source>Official Mirrors:</source>
-        <translation>Официальные Зеркала:</translation>
+        <translation>Официальные зеркала:</translation>
     </message>
     <message>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation>OggEnc - Vorbis Encoder</translation>
+        <translation>OggEnc - кодировщик Vorbis</translation>
     </message>
     <message>
         <source>OggDec - Vorbis Decoder</source>
-        <translation>OggDec - Vorbis Decoder</translation>
+        <translation>OggDec - декодировщик Vorbis</translation>
     </message>
     <message>
         <source>Command line Ogg Vorbis decoder created by John33.</source>
-        <translation type="unfinished">Command line Ogg Vorbis decoder created by John33.</translation>
+        <translation>Консольный декодировщик Ogg Vorbis, созданный John33.</translation>
     </message>
 </context>
 <context>
@@ -308,7 +310,7 @@
     </message>
     <message>
         <source>Encoder</source>
-        <translation>Кодер</translation>
+        <translation>Кодировщик</translation>
     </message>
 </context>
 <context>
@@ -351,8 +353,7 @@
     </message>
     <message>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translatorcomment>пыщь пыщь</translatorcomment>
-        <translation>Не могу найти аудио файлы, которые поддерживает LameXP!</translation>
+        <translation>Не могу найти какую-либо поддерживаемую аудиодорожку в CUE плэйлисте!</translation>
     </message>
     <message>
         <source>Note that LameXP can not handle &quot;binary&quot; Cue Sheet images.</source>
@@ -373,7 +374,8 @@
     </message>
     <message>
         <source>Error: The selected output directory is not writable!</source>
-        <translation>Ошибка: выбранная папка недостпна для записи!</translation>
+        <translatorcomment>typo fix</translatorcomment>
+        <translation>Ошибка: выбранная папка недоступна для записи!</translation>
     </message>
     <message>
         <source>Low Diskspace Warning</source>
@@ -385,7 +387,7 @@
     </message>
     <message>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translation>Настоятельно рекомендуется освободить больше места, перед началом операции!</translation>
+        <translation>Настоятельно рекомендуется освободить больше места перед началом операции!</translation>
     </message>
     <message>
         <source>Analyzing file(s), please wait...</source>
@@ -413,7 +415,7 @@
     </message>
     <message>
         <source>Warning: The format of some of the input files could not be determined!</source>
-        <translation>Предупреждение: формат некоторых файлов неопознан!</translation>
+        <translation>Предупреждение: формат некоторых входных файлов неопознан!</translation>
     </message>
     <message>
         <source>Continue Anyway</source>
@@ -421,15 +423,15 @@
     </message>
     <message>
         <source>Abort</source>
-        <translation>Отмена</translation>
+        <translation>Прервать</translation>
     </message>
     <message>
         <source>(System Default)</source>
-        <translation></translation>
+        <translation>(По умолчанию системы)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation>Кодировка ANSI для файла CUE:</translation>
+        <translation>Выберите кодировку ANSI для файла CUE:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -477,14 +479,14 @@
     </message>
     <message>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation type="unfinished">Внимание: Некоторые из необходимых входных файлов не может быть найден!</translation>
+        <translation>Внимание: Некоторые из необходимых входных файлов не могут быть найдены!</translation>
     </message>
 </context>
 <context>
     <name>CueSheetImport</name>
     <message>
         <source>Import Cue Sheet</source>
-        <translation>Импортировать</translation>
+        <translation>Импортировать CUE плэйлист</translation>
     </message>
     <message>
         <source> Output Directory </source>
@@ -500,11 +502,11 @@
     </message>
     <message>
         <source>Existing Source File</source>
-        <translation>Файл найден</translation>
+        <translation>Существующий исходный файл</translation>
     </message>
     <message>
         <source>Missing Source File (Tracks will be skipped!)</source>
-        <translation>Файл не найден (будет пропущен!)</translation>
+        <translation>Отсутствующий исходный файл (дорожки будут пропущены!)</translation>
     </message>
     <message>
         <source>Load a different Cue Sheet</source>
@@ -544,15 +546,15 @@
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Неизвестный Артист</translation>
+        <translation>Неизвестный исполнитель</translation>
     </message>
     <message>
         <source>Unknown Title</source>
-        <translation>Неизвестное Название</translation>
+        <translation>Неизвестное название</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Длителность</translation>
+        <translation>Длительность</translation>
     </message>
 </context>
 <context>
@@ -589,11 +591,11 @@
     </message>
     <message>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation>Вы можете добавить файлы в LameXP перетащив их сюда!</translation>
+        <translation>Вы можете добавить файлы в LameXP, перетащив их сюда!</translation>
     </message>
     <message>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Для закрытия DropBox нажмите правой кнопкой мыши)</translation>
+        <translation>(Для закрытия DropBox щёлкните правой кнопкой мыши)</translation>
     </message>
 </context>
 <context>
@@ -608,7 +610,7 @@
     </message>
     <message>
         <source>(System Default)</source>
-        <translation></translation>
+        <translation>(По умолчанию системы)</translation>
     </message>
     <message>
         <source>Select ANSI Codepage for CSV file:</source>
@@ -654,11 +656,11 @@
     <name>MainWindow</name>
     <message>
         <source>LameXP - Audio Encoder Front-end</source>
-        <translation type="unfinished">LameXP - Audio Encoder Front-end</translation>
+        <translation>LameXP - Внешний интерфейс аудио кодировщиков</translation>
     </message>
     <message>
         <source>Source Files</source>
-        <translation>Исходные Файлы</translation>
+        <translation>Исходные файлы</translation>
     </message>
     <message>
         <source>Add File(s)</source>
@@ -1958,9 +1960,9 @@
     <message numerus="yes">
         <source>%n Instance(s)</source>
         <translation>
-            <numerusform>Потоков: %n</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n поток</numerusform>
+            <numerusform>%n потока</numerusform>
+            <numerusform>%n потоков</numerusform>
         </translation>
     </message>
     <message>
@@ -1993,27 +1995,27 @@
     </message>
     <message>
         <source>Report a Bug (GitHub)</source>
-        <translation type="unfinished">Сообщить об ошибке (GitHub)</translation>
+        <translation>Сообщить об ошибке (GitHub)</translation>
     </message>
     <message>
         <source>Hydrogenaudio Knowledgebase</source>
-        <translation type="unfinished">Hydrogenaudio Knowledgebase</translation>
+        <translation>База знаний Hydrogenaudio</translation>
     </message>
     <message>
         <source>LameXP User&apos;s Manual</source>
-        <translation type="unfinished">LameXP Руководство пользователя</translation>
+        <translation>Руководство пользователя LameXP</translation>
     </message>
     <message>
         <source>Enable Dynamic Normalization</source>
-        <translation type="unfinished">Включить динамическую нормализацию</translation>
+        <translation>Включить динамическую нормализацию</translation>
     </message>
     <message>
         <source>Window Size:</source>
-        <translation type="unfinished">Размер окна:</translation>
+        <translation>Размер окна:</translation>
     </message>
     <message>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation type="unfinished">Включить канал- связь , то есть усиливать все каналы файла многоканальной на ту же сумму</translation>
+        <translation>Включить спаривание каналов, т.е. усилить все каналы многоканального файла на одну и ту же величину</translation>
     </message>
 </context>
 <context>
@@ -2024,7 +2026,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation>Изменить</translation>
+        <translation>Редактировать</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2059,8 +2061,7 @@
     </message>
     <message>
         <source>Artwork Error</source>
-        <translatorcomment>!!переделать!!</translatorcomment>
-        <translation>Ошибка обложки</translation>
+        <translation>Ошибка в обложке</translation>
     </message>
     <message>
         <source>Sorry, failed to load artwork from selected file!</source>
@@ -2470,7 +2471,7 @@
     </message>
     <message>
         <source>Process finished after %1.</source>
-        <translation>Кодирование заняло %1</translation>
+        <translation>Процесс завершился спустя %1.</translation>
     </message>
     <message>
         <source>Filter Log Items</source>
@@ -2503,55 +2504,55 @@
     <message numerus="yes">
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
-            <numerusform>Процесс был прерван пользователем после %n файла</numerusform>
-            <numerusform>Процесс был прерван пользователем после %n файлов</numerusform>
-            <numerusform>Процесс был прерван пользователем после %n файлов</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файла!</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файлов!</numerusform>
+            <numerusform>Процесс был прерван пользователем после %n файлов!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation>
-            <numerusform>%n ч.</numerusform>
-            <numerusform>%n ч.</numerusform>
-            <numerusform>%n ч.</numerusform>
+            <numerusform>%n час</numerusform>
+            <numerusform>%n часа</numerusform>
+            <numerusform>%n часов</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation>
-            <numerusform>%n мин.</numerusform>
-            <numerusform>%n мин.</numerusform>
-            <numerusform>%n мин.</numerusform>
+            <numerusform>%n минута</numerusform>
+            <numerusform>%n минуты</numerusform>
+            <numerusform>%n минут</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation>
-            <numerusform>%n с.</numerusform>
-            <numerusform>%n с.</numerusform>
-            <numerusform>%n с.</numerusform>
+            <numerusform>%n секунда</numerusform>
+            <numerusform>%n секунды</numerusform>
+            <numerusform>%n секунд</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n millisecond(s)</source>
         <translation>
-            <numerusform>%n мс.</numerusform>
-            <numerusform>%n мс.</numerusform>
-            <numerusform>%n мс.</numerusform>
+            <numerusform>%n миллисекунда</numerusform>
+            <numerusform>%n миллисекунды</numerusform>
+            <numerusform>%n миллисекунд</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Кодирование: %n файл из %1 завершено, пожалуйста ждите...</numerusform>
-            <numerusform>Кодирование: %n файлов из %1 завершено, пожалуйста ждите...</numerusform>
+            <numerusform>Кодирование: %n файла из %1 завершено, пожалуйста ждите...</numerusform>
             <numerusform>Кодирование: %n файлов из %1 завершено, пожалуйста ждите...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
-            <numerusform>Ошибка в: %1 из %n файле (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файла (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов (%2). Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
         </translation>
@@ -2567,7 +2568,7 @@
     <message numerus="yes">
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
-            <numerusform>Ошибка в: %1 из %n файле. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
+            <numerusform>Ошибка в: %1 из %n файла. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
             <numerusform>Ошибка в: %1 из %n файлов. Узнайте подробности по двойному щелчку на элементе с ошибкой!</numerusform>
         </translation>
@@ -2596,11 +2597,11 @@
     <name>ShellIntegration</name>
     <message>
         <source>Audio File supported by LameXP</source>
-        <translation>Аудио Файл поддерживаетя LameXP</translation>
+        <translation>Аудио файл, поддерживаемый LameXP</translation>
     </message>
     <message>
         <source>Convert this file with LameXP v%1</source>
-        <translation>Конвертировать этот файл используя LameXP v%1</translation>
+        <translation>Конвертировать этот файл, используя LameXP v%1</translation>
     </message>
 </context>
 <context>
@@ -2682,7 +2683,8 @@
     </message>
     <message>
         <source>We highly recommend all users to install this update as soon as possible.</source>
-        <translation>Настоятельно  рекомендуем установить это обновление как можо скорее.</translation>
+        <translatorcomment>A nasty typo corrected</translatorcomment>
+        <translation>Настоятельно  рекомендуем установить это обновление как можно скорее.</translation>
     </message>
     <message>
         <source>No new updates available at this time.</source>
