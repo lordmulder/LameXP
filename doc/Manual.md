@@ -574,7 +574,7 @@ The source code of the **LameXP** software is managed using the [*Git*](http://g
 
 * ``git clone git://git.assembla.com/lamexp.git LameXP`` ([Browse](https://www.assembla.com/code/lamexp/git/nodes))
 
-* ``git clone git://gitorious.org/lamexp/lamexp.git LameXP`` ([Browse](http://gitorious.org/lamexp/lamexp/trees/master))
+* ``git clone https://gitlab.com/lamexp/lamexp.git LameXP`` ([Browse](https://gitlab.com/lamexp/lamexp/tree/master))
 
 * ``git clone git://repo.or.cz/LameXP.git LameXP`` ([Browse](http://repo.or.cz/w/LameXP.git))
 
@@ -590,7 +590,7 @@ The source code of the **MUtilities** library is managed using the [*Git*](http:
 
 * ``git clone git://git.assembla.com/mutilities.git MUtilities`` ([Browse](https://www.assembla.com/code/mutilities/git/nodes))
 
-* ``git clone git://gitorious.org/mutilities/mutilities.git MUtilities`` ([Browse](http://gitorious.org/mutilities/mutilities/trees/master))
+* ``git clone https://gitlab.com/mutilities/mutilities.git MUtilities`` ([Browse](https://gitlab.com/mutilities/mutilities/tree/master))
 
 * ``git clone git://repo.or.cz/MUtilities.git MUtilities`` ([Browse](http://repo.or.cz/w/MUtilities.git))
 
