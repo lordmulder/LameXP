@@ -317,7 +317,9 @@ Instead, open the QuickTimer setup program, i.e. ``QuickTimeInstaller.exe``, wit
 
 ![Figure](img/lamexp/setup_5c.png)
 
-After the "Apple Application Support" setup package has been extracted, you can launch it by double-clicking on the ``AppleApplicationSupport.msi`` file. Then simply follow the installer's instructions.
+After the "Apple Application Support" setup package has been extracted, you can launch it by double-clicking on the ``AppleApplicationSupport.msi`` file. Then simply follow the installer's instructions!
+
+*Note:* If you do **not** want to install the "Apple Application Support" software at all, there is an *alternative* method, that will extract only the required DLL files from the MSI package. See [*here*](https://forum.doom9.org/showpost.php?p=1718529&postcount=1221) for details&hellip;
 
 ![Figure](img/lamexp/setup_5d.png)
 
