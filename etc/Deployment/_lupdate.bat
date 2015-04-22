@@ -44,14 +44,14 @@ for %%e in (cpp,h) do (
 for %%f in ("%~dp0\..\Translation\*.ts") do (
 	del %%f.bak 2> NUL
 	copy %%f %%f.bak
-	lupdate.exe "@%LST_FILE%" -no-obsolete -ts %%f
+	lupdate.exe "@%LST_FILE%" -no-obsolete -locations absolute -ts %%f
 	if not "!ERRORLEVEL!"=="0" (
 		"%~dp0\..\Utilities\CEcho.exe" red "\nSomething went wrong^^!\n"
 		pause && exit
 	)
 )
 
-lupdate.exe "@%LST_FILE%" -no-obsolete -pluralonly -ts "%~dp0\..\Translation\LameXP_EN.ts"
+lupdate.exe "@%LST_FILE%" -no-obsolete -locations absolute -pluralonly -ts "%~dp0\..\Translation\LameXP_EN.ts"
 del "%LST_FILE%"
 
 :: ---------------------------------------------------------------------------
