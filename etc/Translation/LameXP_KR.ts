@@ -434,9 +434,9 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="126"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="227"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="441"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>Cue Sheet Error</source>
         <translation type="unfinished">큐 시트 오류</translation>
     </message>
@@ -471,81 +471,81 @@
         <translation type="unfinished">선택한 큐 시트 파일이 모순되는 정보를 포함합니다. 확인해주십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="261"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="265"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="266"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="270"/>
         <source>Choose Output Directory</source>
         <translation type="unfinished">출력 디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="291"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="298"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
         <source>LameXP</source>
         <translation type="unfinished">LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="298"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
         <source>Error: The selected output directory is not writable!</source>
         <translation type="unfinished">오류: 선택한 출력 디렉터리는 쓰기가 불가능합니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="312"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished">디스크 공간 부족 알림</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="312"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation type="unfinished">선택한 출력 디렉터리에서 사용 가능한 여유 디스크 공간이 %1 GB보다 작습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="312"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation type="unfinished">가져오기를 진행하기 전에 디스크 여유 공간을 확보할 것을 권장합니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="400"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
         <source>Analyzing file(s), please wait...</source>
         <translation type="unfinished">파일 검토 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="432"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
         <source>Splitting file(s), please wait...</source>
         <translation type="unfinished">파일 분할 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="291"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
         <source>Error: The selected output directory could not be created!</source>
         <translation type="unfinished">오류: 선택한 출력 디렉터리를 만들 수 없습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="441"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation type="unfinished">큐 시트를 분할하는 도중에 예기치 않은 오류가 발생했습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="451"/>
         <source>Cue Sheet Completed</source>
         <translation type="unfinished">큐 시트 작업 완료</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Analysis Failed</source>
         <translation type="unfinished">분석 실패</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation type="unfinished">경고: 입력 파일들의 일부 형식을 결정할 수 없습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Continue Anyway</source>
         <translation type="unfinished">무시하고 계속</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Abort</source>
         <translation type="unfinished">취소</translation>
     </message>
@@ -585,28 +585,28 @@
         <translation type="unfinished">새 폴더</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
         <source>Process was aborted by the user after %n track(s)!</source>
         <translation type="unfinished">
             <numerusform>%n 트랙 후 사용자에 의해 작업이 취소되었습니다!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="445"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
         <translation type="unfinished">
             <numerusform>큐 시트에서 %n 트랙을 가져왔습니다.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="445"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Skipped %n track(s).</source>
         <translation type="unfinished">
             <numerusform>%n 트랙을 건너뛰었습니다.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Warning: Some of the required input files could not be found!</source>
         <translation type="unfinished">알림: 일부의 필수 입력 파일들을 찾을 수 없습니다!</translation>
     </message>

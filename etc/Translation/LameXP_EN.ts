@@ -4,7 +4,7 @@
 <context>
     <name>CueImportDialog</name>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
         <source>Process was aborted by the user after %n track(s)!</source>
         <translation>
             <numerusform>Process was aborted by the user after %n track!</numerusform>
@@ -12,7 +12,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="445"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
         <translation>
             <numerusform>Imported %n track from the Cue Sheet.</numerusform>
@@ -20,7 +20,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="445"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Skipped %n track(s).</source>
         <translation>
             <numerusform>Skipped %n track.</numerusform>

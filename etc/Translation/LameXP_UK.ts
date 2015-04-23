@@ -435,9 +435,9 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="126"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="227"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="441"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>Cue Sheet Error</source>
         <translation>Помилка списку Cue</translation>
     </message>
@@ -472,81 +472,81 @@
         <translation>Вибраний файл списку Cue містить несумісну інформацію. Будьте уважні!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="261"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="265"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="266"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="270"/>
         <source>Choose Output Directory</source>
         <translation>Вибір вихідної теки</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="291"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="298"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
         <source>LameXP</source>
         <translation>LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="291"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
         <source>Error: The selected output directory could not be created!</source>
         <translation>Помилка: Вибрана вихідна тека не може бути створена!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="298"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
         <source>Error: The selected output directory is not writable!</source>
         <translation>Помилка: До вибраної вихідної теки неможливий запис інформації!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="312"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>Low Diskspace Warning</source>
         <translation>Попередження про те, що недостатньо місця на диску</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="312"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
         <translation>Наявно менш ніж %1 ГБ вільного місця у вибраній вихідній теці.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="312"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
         <translation>Рекомендовано звільнити більше місця на жорсткому диску перед продовженням імпортування!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="400"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
         <source>Analyzing file(s), please wait...</source>
         <translation>Аналіз файлу(-ів), будь ласка, зачекайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Analysis Failed</source>
         <translation>Збій під час аналізу</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translation>Попередження: формат деяких вхідних файлів неможливо визначити!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Continue Anyway</source>
         <translation>Все одно продовжувати</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
-        <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Abort</source>
         <translation>Перервати</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="432"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
         <source>Splitting file(s), please wait...</source>
         <translation>Розділення файлу(-ів), будь ласка, зачекайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="441"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
         <translation>Виникла неочікувана помилка під час розділення списку Cue!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="451"/>
         <source>Cue Sheet Completed</source>
         <translation>Обробку списку Cue завершено</translation>
     </message>
@@ -586,7 +586,7 @@
         <translation>Нова тека</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
         <source>Process was aborted by the user after %n track(s)!</source>
         <translation>
             <numerusform>Процес було перервано користувачем після %n доріжки!</numerusform>
@@ -595,7 +595,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="445"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Imported %n track(s) from the Cue Sheet.</source>
         <translation>
             <numerusform>Імпортовано %n доріжку зі списку Cue.</numerusform>
@@ -604,7 +604,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_CueImport.cpp" line="445"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="450"/>
         <source>Skipped %n track(s).</source>
         <translation>
             <numerusform>Пропущено %n доріжку.</numerusform>
@@ -613,7 +613,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_CueImport.cpp" line="364"/>
+        <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Warning: Some of the required input files could not be found!</source>
         <translation>Попередження: Деякі з вхідних файлів не можуть бути знайдені!</translation>
     </message>
