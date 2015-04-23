@@ -248,14 +248,19 @@ void CueImportDialog::modelChanged(void)
 
 void CueImportDialog::browseButtonClicked(void)
 {
-	QString newOutDir, currentDir = m_outputDir;
-	
-	while(QDir(currentDir).exists())
+	QString currentDir = QDir::fromNativeSeparators(m_outputDir);
+	while(!QDir(currentDir).exists())
 	{
-		int pos = qMax(currentDir.lastIndexOf(QChar('\\')), currentDir.lastIndexOf(QChar('/')));
-		if(pos > 0) currentDir.left(pos - 1); else break;
+		const int pos = currentDir.lastIndexOf(QChar('/'));
+		if(pos > 2)
+		{
+			currentDir = currentDir.left(pos);
+			continue;
+		}
+		break;
 	}
 
+	QString newOutDir;
 	if(MUtils::GUI::themes_enabled())
 	{
 		newOutDir = QFileDialog::getExistingDirectory(this, tr("Choose Output Directory"), currentDir);

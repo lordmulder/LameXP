@@ -6,6 +6,7 @@
 
 * Added Hungarian translation, thanks to Zityi's Translator Team <zityisoft@gmail.com>
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
+* Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
 
 ## LameXP v4.11 [2015-04-05] ## {-}
 
