@@ -403,6 +403,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	//Look for AAC encoders
 	initAacEnc_Nero();
 	initAacEnc_FHG();
+	initAacEnc_FDK();
 	initAacEnc_QAAC();
 
 	m_bSuccess = true;
@@ -522,7 +523,7 @@ void InitializationThread::initAacEnc_Nero(void)
 	{
 		if(!MUtils::OS::is_executable_file(neroFileInfo[i].canonicalFilePath()))
 		{
-			qDebug("%s executbale is invalid -> NeroAAC encoding support will be disabled!\n", MUTILS_UTF8(neroFileInfo[i].fileName()));
+			qDebug("%s executable is invalid -> NeroAAC encoding support will be disabled!\n", MUTILS_UTF8(neroFileInfo[i].fileName()));
 			return;
 		}
 	}
@@ -645,7 +646,7 @@ void InitializationThread::initAacEnc_FHG(void)
 
 	if(!MUtils::OS::is_executable_file(fhgFileInfo[0].canonicalFilePath()))
 	{
-		qDebug("FhgAacEnc executbale is invalid -> FhgAacEnc support will be disabled!\n");
+		qDebug("FhgAacEnc executable is invalid -> FhgAacEnc support will be disabled!\n");
 		return;
 	}
 
@@ -728,6 +729,96 @@ void InitializationThread::initAacEnc_FHG(void)
 	}
 }
 
+void InitializationThread::initAacEnc_FDK(void)
+{
+	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
+
+	const QFileInfo fdkFileInfo(QString("%1/fdkaac.exe").arg(appPath));
+	if(!(fdkFileInfo.exists() && fdkFileInfo.isFile()))
+	{
+		qDebug("FdkAac encoder binary not found -> FdkAac encoding support will be disabled!\n");
+		return;
+	}
+
+	if(!MUtils::OS::is_executable_file(fdkFileInfo.canonicalFilePath()))
+	{
+		qDebug("%s executable is invalid -> FdkAac encoding support will be disabled!\n", MUTILS_UTF8(fdkFileInfo.fileName()));
+		return;
+	}
+
+	qDebug("Found FdkAac encoder binary:\n%s\n", MUTILS_UTF8(fdkFileInfo.canonicalFilePath()));
+
+	//Lock the fdkaac binaries
+	QScopedPointer<LockedFile> fdkAacBin;
+	try
+	{
+		fdkAacBin.reset(new LockedFile(fdkFileInfo.canonicalFilePath()));
+	}
+	catch(...)
+	{
+		qWarning("Failed to get excluive lock to FdkAac encoder binary -> FdkAac encoding support will be disabled!");
+		return;
+	}
+
+	QProcess process;
+	MUtils::init_process(process, fdkFileInfo.absolutePath());
+
+	process.start(fdkFileInfo.canonicalFilePath(), QStringList() << "--help");
+
+	if(!process.waitForStarted())
+	{
+		qWarning("FdkAac process failed to create!");
+		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
+		process.kill();
+		process.waitForFinished(-1);
+		return;
+	}
+
+	quint32 fdkAacVersion = 0;
+	QRegExp fdkAacSig("fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
+
+	while(process.state() != QProcess::NotRunning)
+	{
+		if(!process.waitForReadyRead())
+		{
+			if(process.state() == QProcess::Running)
+			{
+				qWarning("fdkaac process time out -> killing!");
+				process.kill();
+				process.waitForFinished(-1);
+				return;
+			}
+		}
+		while(process.canReadLine())
+		{
+			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
+			if(fdkAacSig.lastIndexIn(line) >= 0)
+			{
+				quint32 tmp[3];
+				if(MUtils::regexp_parse_uint32(fdkAacSig, tmp, 3))
+				{
+					fdkAacVersion = (qBound(0U, tmp[0], 9U) * 100U) + (qBound(0U, tmp[1], 9U) * 10U) + qBound(0U, tmp[2], 9U);
+				}
+			}
+		}
+	}
+
+	if(fdkAacVersion <= 0)
+	{
+		qWarning("fdkaac version could not be determined -> fdkaac encoding support will be disabled!");
+		return;
+	}
+	else if(fdkAacVersion < lamexp_toolver_fdkaacenc())
+	{
+		qWarning("fdkaac version is too much outdated (%s) -> fdkaac support will be disabled!", MUTILS_UTF8(lamexp_version2string("v?.?.?", fdkAacVersion,              "N/A")));
+		qWarning("Minimum required fdkaac version currently is: %s\n",                           MUTILS_UTF8(lamexp_version2string("v?.?.?", lamexp_toolver_fdkaacenc(), "N/A")));
+		return;
+	}
+
+	qDebug("Enabled fdkaac encoder %s.\n", MUTILS_UTF8(lamexp_version2string("v?.?.?", fdkAacVersion, "N/A")));
+	lamexp_tools_register(fdkFileInfo.fileName(), fdkAacBin.take(), fdkAacVersion);
+}
+
 void InitializationThread::initAacEnc_QAAC(void)
 {
 	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
@@ -756,7 +847,7 @@ void InitializationThread::initAacEnc_QAAC(void)
 
 	if(!MUtils::OS::is_executable_file(qaacFileInfo[0].canonicalFilePath()))
 	{
-		qDebug("QAAC executbale is invalid -> QAAC support will be disabled!\n");
+		qDebug("QAAC executable is invalid -> QAAC support will be disabled!\n");
 		return;
 	}
 

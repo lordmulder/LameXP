@@ -5,6 +5,7 @@
 ## LameXP v4.12 [xxxx-xx-xx] ## {-}
 
 * Added Hungarian translation, thanks to Zityi's Translator Team <zityisoft@gmail.com>
+* Added optional support for the *libfdk-aac* encoder, using the [fdkaac](https://github.com/nu774/fdkaac) front-end by nu774
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
 

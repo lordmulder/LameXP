@@ -56,6 +56,7 @@ private:
 	void initTranslations(void);
 	void initAacEnc_Nero(void);
 	void initAacEnc_FHG(void);
+	void initAacEnc_FDK(void);
 	void initAacEnc_QAAC(void);
 
 	bool m_bSuccess;

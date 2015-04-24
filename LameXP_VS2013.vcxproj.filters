@@ -409,6 +409,12 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_B.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Encoder_AAC_FDK.cpp">
+      <Filter>Source Files\Encoders</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_FDK.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -539,6 +545,9 @@
     </ClInclude>
     <ClInclude Include="src\IPCCommands.h">
       <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Encoder_AAC_FDK.h">
+      <Filter>Header Files\Encoders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

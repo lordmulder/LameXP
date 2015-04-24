@@ -67,6 +67,7 @@ static const char *g_lamexp_tracker_url = "https://github.com/lordmulder/LameXP/
 //Tool versions (expected versions!)
 static const unsigned int g_lamexp_toolver_neroaac   = VER_LAMEXP_TOOL_NEROAAC;
 static const unsigned int g_lamexp_toolver_fhgaacenc = VER_LAMEXP_TOOL_FHGAACENC;
+static const unsigned int g_lamexp_toolver_fdkaacenc = VER_LAMEXP_TOOL_FDKAACENC;
 static const unsigned int g_lamexp_toolver_qaacenc   = VER_LAMEXP_TOOL_QAAC;
 static const unsigned int g_lamexp_toolver_coreaudio = VER_LAMEXP_TOOL_COREAUDIO;
 
@@ -84,6 +85,7 @@ unsigned int lamexp_version_confg(void)     { return g_lamexp_version_confg;    
 const char*  lamexp_version_release(void)   { return g_lamexp_version_rname;     }
 unsigned int lamexp_toolver_neroaac(void)   { return g_lamexp_toolver_neroaac;   }
 unsigned int lamexp_toolver_fhgaacenc(void) { return g_lamexp_toolver_fhgaacenc; }
+unsigned int lamexp_toolver_fdkaacenc(void) { return g_lamexp_toolver_fdkaacenc; }
 unsigned int lamexp_toolver_qaacenc(void)   { return g_lamexp_toolver_qaacenc;   }
 unsigned int lamexp_toolver_coreaudio(void) { return g_lamexp_toolver_coreaudio; }
 

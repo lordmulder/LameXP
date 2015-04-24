@@ -4044,14 +4044,15 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 	{
 		switch(EncoderRegistry::getAacEncoder())
 		{
-			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac.exe", "--help"); break;
-			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe", ""); break;
-			case SettingsModel::AAC_ENCODER_NERO: showCustomParamsHelpScreen("neroAacEnc.exe", "-help"); break;
+			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac.exe",       "--help"); break;
+			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe",  ""      ); break;
+			case SettingsModel::AAC_ENCODER_FDK : showCustomParamsHelpScreen("fdkaac.exe",     "--help"); break;
+			case SettingsModel::AAC_ENCODER_NERO: showCustomParamsHelpScreen("neroAacEnc.exe", "-help" ); break;
 			default: MUtils::Sound::beep(MUtils::Sound::BEEP_ERR); break;
 		}
 	}
-	else if(obj == ui->helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe", "--help");
-	else if(obj == ui->helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe", "-h");
+	else if(obj == ui->helpCustomParamFLAC)    showCustomParamsHelpScreen("flac.exe",    "--help");
+	else if(obj == ui->helpCustomParamAften)   showCustomParamsHelpScreen("aften.exe",   "-h"    );
 	else if(obj == ui->helpCustomParamOpus)    showCustomParamsHelpScreen("opusenc.exe", "--help");
 	else MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 }

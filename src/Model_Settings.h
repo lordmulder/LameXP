@@ -93,7 +93,8 @@ public:
 		AAC_ENCODER_NONE = 0,
 		AAC_ENCODER_NERO = 1,
 		AAC_ENCODER_FHG  = 2,
-		AAC_ENCODER_QAAC = 3,
+		AAC_ENCODER_FDK  = 3,
+		AAC_ENCODER_QAAC = 4,
 	};
 
 	//Consts

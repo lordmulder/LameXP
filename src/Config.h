@@ -35,7 +35,7 @@
 #define VER_LAMEXP_MINOR_LO					2
 #define VER_LAMEXP_TYPE						Alpha
 #define VER_LAMEXP_PATCH					1
-#define VER_LAMEXP_BUILD					1708
+#define VER_LAMEXP_BUILD					1710
 #define VER_LAMEXP_CONFG					1700
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -51,6 +51,7 @@
 
 #define VER_LAMEXP_TOOL_NEROAAC				1540
 #define VER_LAMEXP_TOOL_FHGAACENC			20120806
+#define VER_LAMEXP_TOOL_FDKAACENC			62
 #define VER_LAMEXP_TOOL_QAAC				244
 #define VER_LAMEXP_TOOL_COREAUDIO			7980
 

@@ -297,6 +297,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="src\Dialog_Update.cpp" />
     <ClCompile Include="src\Dialog_WorkingBanner.cpp" />
     <ClCompile Include="src\Encoder_AAC.cpp" />
+    <ClCompile Include="src\Encoder_AAC_FDK.cpp" />
     <ClCompile Include="src\Encoder_AAC_FHG.cpp" />
     <ClCompile Include="src\Encoder_AAC_QAAC.cpp" />
     <ClCompile Include="src\Encoder_Abstract.cpp" />
@@ -357,6 +358,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="tmp\LameXP\MOC_Dialog_Update.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Dialog_WorkingBanner.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC.cpp" />
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_FDK.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_FHG.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_QAAC.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_Abstract.cpp" />
@@ -407,6 +409,17 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h" />
+    <CustomBuild Include="src\Encoder_AAC_FDK.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="src\IPCCommands.h" />
     <ClInclude Include="tmp\LameXP\UIC_AboutDialog.h" />
     <ClInclude Include="tmp\LameXP\UIC_CueSheetImport.h" />

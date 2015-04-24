@@ -61,6 +61,7 @@ bool         lamexp_version_demo     (void);
 const QDate& lamexp_version_expires  (void);
 unsigned int lamexp_toolver_neroaac  (void);
 unsigned int lamexp_toolver_fhgaacenc(void);
+unsigned int lamexp_toolver_fdkaacenc(void);
 unsigned int lamexp_toolver_qaacenc  (void);
 unsigned int lamexp_toolver_coreaudio(void);
 
