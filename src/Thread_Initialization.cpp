@@ -47,7 +47,7 @@
 #include <QMutex>
 #include <QQueue>
 #include <QElapsedTimer>
-
+#include <QVector>
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
 
@@ -84,10 +84,92 @@ static unsigned int cores2threads(const unsigned int cores)
 }
 
 ////////////////////////////////////////////////////////////
+// BaseTask class
+////////////////////////////////////////////////////////////
+
+class BaseTask : public QRunnable
+{
+public:
+	BaseTask(void)
+	{
+	}
+
+	~BaseTask(void)
+	{
+	}
+
+	static void clearFlags(QMutexLocker &lock = QMutexLocker(&s_mutex))
+	{
+		s_bExcept = false;
+		s_errMsg[0] = char(0);
+	}
+
+	static bool getExcept(void)
+	{
+		bool ret;
+		QMutexLocker lock(&s_mutex);
+		ret = s_bExcept;
+		return ret;
+	}
+
+	static bool getErrMsg(char *buffer, const size_t buffSize)
+	{
+		QMutexLocker lock(&s_mutex);
+		if(s_errMsg[0])
+		{
+			strncpy_s(buffer, BUFF_SIZE, s_errMsg, _TRUNCATE);
+			return true;
+		}
+		return false;
+	}
+
+protected:
+	virtual void taskMain(void) = 0;
+
+	void run(void)
+	{
+		try
+		{
+			if(!getExcept()) taskMain();
+		}
+		catch(const std::exception &e)
+		{
+			QMutexLocker lock(&s_mutex);
+			if(!s_bExcept)
+			{
+				s_bExcept = true;
+				strncpy_s(s_errMsg, BUFF_SIZE, e.what(), _TRUNCATE);
+			}
+			lock.unlock();
+			qWarning("OptionalInitTask exception error:\n%s\n\n", e.what());
+		}
+		catch(...)
+		{
+			QMutexLocker lock(&s_mutex);
+			if(!s_bExcept)
+			{
+				s_bExcept = true;
+				strncpy_s(s_errMsg, BUFF_SIZE, "Unknown exception error!", _TRUNCATE);
+			}
+			lock.unlock();
+			qWarning("OptionalInitTask encountered an unknown exception!");
+		}
+	}
+
+	static volatile bool s_bExcept;
+	static QMutex s_mutex;
+	static char s_errMsg[BUFF_SIZE];
+};
+
+QMutex BaseTask::s_mutex;
+char BaseTask::s_errMsg[BUFF_SIZE] = {'\0'};
+volatile bool BaseTask::s_bExcept = false;
+
+////////////////////////////////////////////////////////////
 // ExtractorTask class
 ////////////////////////////////////////////////////////////
 
-class ExtractorTask : public QRunnable
+class ExtractorTask : public BaseTask
 {
 public:
 	ExtractorTask(QResource *const toolResource, const QDir &appDir, const QString &toolName, const QByteArray &toolHash, const unsigned int toolVersion, const QString &toolTag)
@@ -104,63 +186,25 @@ public:
 
 	~ExtractorTask(void)
 	{
-		delete m_toolResource;
+	}
+
+	static bool getCustom(void)
+	{
+		bool ret;
+		QMutexLocker lock(&s_mutex);
+		ret = s_bCustom;
+		return ret;
 	}
 
 	static void clearFlags(void)
 	{
 		QMutexLocker lock(&s_mutex);
-		s_bExcept = false;
 		s_bCustom = false;
-		s_errMsg[0] = char(0);
-	}
-
-	static bool getExcept(void) { bool ret; QMutexLocker lock(&s_mutex); ret = s_bExcept; return ret; }
-	static bool getCustom(void) { bool ret; QMutexLocker lock(&s_mutex); ret = s_bCustom; return ret; }
-
-	static bool getErrMsg(char *buffer, const size_t buffSize)
-	{
-		QMutexLocker lock(&s_mutex);
-		if(s_errMsg[0])
-		{
-			strncpy_s(buffer, BUFF_SIZE, s_errMsg, _TRUNCATE);
-			return true;
-		}
-		return false;
+		BaseTask::clearFlags(lock);
 	}
 
 protected:
-	void run(void)
-	{
-		try
-		{
-			if(!getExcept()) doExtract();
-		}
-		catch(const std::exception &e)
-		{
-			QMutexLocker lock(&s_mutex);
-			if(!s_bExcept)
-			{
-				s_bExcept = true;
-				strncpy_s(s_errMsg, BUFF_SIZE, e.what(), _TRUNCATE);
-			}
-			lock.unlock();
-			qWarning("ExtractorTask exception error:\n%s\n\n", e.what());
-		}
-		catch(...)
-		{
-			QMutexLocker lock(&s_mutex);
-			if(!s_bExcept)
-			{
-				s_bExcept = true;
-				strncpy_s(s_errMsg, BUFF_SIZE, "Unknown exception error!", _TRUNCATE);
-			}
-			lock.unlock();
-			qWarning("ExtractorTask encountered an unknown exception!");
-		}
-	}
-
-	void doExtract(void)
+	void taskMain(void)
 	{
 		LockedFile *lockedFile = NULL;
 		unsigned int version = m_toolVersion;
@@ -177,7 +221,7 @@ protected:
 		else
 		{
 			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), toolShortName.toLatin1().constData());
-			lockedFile = new LockedFile(m_toolResource, QString("%1/lxp_%2").arg(MUtils::temp_folder(), toolShortName), m_toolHash);
+			lockedFile = new LockedFile(m_toolResource.data(), QString("%1/lxp_%2").arg(MUtils::temp_folder(), toolShortName), m_toolHash);
 		}
 
 		if(lockedFile)
@@ -187,23 +231,46 @@ protected:
 	}
 
 private:
-	QResource *const m_toolResource;
+	QScopedPointer<QResource> m_toolResource;
 	const QDir m_appDir;
 	const QString m_toolName;
 	const QByteArray m_toolHash;
 	const unsigned int m_toolVersion;
 	const QString m_toolTag;
 
-	static volatile bool s_bExcept;
 	static volatile bool s_bCustom;
-	static QMutex s_mutex;
-	static char s_errMsg[BUFF_SIZE];
 };
 
-QMutex ExtractorTask::s_mutex;
-char ExtractorTask::s_errMsg[BUFF_SIZE] = {'\0'};
-volatile bool ExtractorTask::s_bExcept = false;
 volatile bool ExtractorTask::s_bCustom = false;
+
+////////////////////////////////////////////////////////////
+// OptionalInitTask class
+////////////////////////////////////////////////////////////
+
+typedef void (*initFunction_t)(void);
+
+class OptionalInitTask : public BaseTask
+{
+public:
+	OptionalInitTask(const initFunction_t initFunction)
+	:
+		m_initFunction(initFunction)
+	{
+	}
+
+	~OptionalInitTask(void)
+	{
+	}
+
+protected:
+	void taskMain(void)
+	{
+		m_initFunction();
+	}
+
+private:
+	const initFunction_t m_initFunction;
+};
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -306,7 +373,7 @@ double InitializationThread::doInit(const size_t threadCount)
 
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
-	QThreadPool *pool = new QThreadPool();
+	QScopedPointer<QThreadPool> pool(new QThreadPool());
 	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, cores2threads(m_cpuFeatures.count), EXPECTED_TOOL_COUNT));
 	/* qWarning("Using %u threads for extraction.", pool->maxThreadCount()); */
 
@@ -358,7 +425,6 @@ double InitializationThread::doInit(const size_t threadCount)
 
 	//Wait for extrator threads to finish
 	pool->waitForDone();
-	MUTILS_DELETE(pool);
 
 	//Performance measure
 	const double delayExtract = double(timeExtractStart.elapsed()) / 1000.0;
@@ -401,10 +467,26 @@ double InitializationThread::doInit(const size_t threadCount)
 	initTranslations();
 
 	//Look for AAC encoders
-	initAacEnc_Nero();
-	initAacEnc_FHG();
-	initAacEnc_FDK();
-	initAacEnc_QAAC();
+	OptionalInitTask::clearFlags();
+	static const initFunction_t initFunctions[] = { initAacEnc_Nero, initAacEnc_FHG, initAacEnc_FDK, initAacEnc_QAAC, NULL };
+	for(size_t i = 0; initFunctions[i]; i++)
+	{
+		pool->start(new OptionalInitTask(initFunctions[i]));
+	}
+	pool->waitForDone();
+
+	//Make sure initialization finished correctly
+	if(OptionalInitTask::getExcept())
+	{
+		char errorMsg[BUFF_SIZE];
+		if(OptionalInitTask::getErrMsg(errorMsg, BUFF_SIZE))
+		{
+			qFatal("At least one optional component failed to initialize:\n%s", errorMsg);
+			return -1.0;
+		}
+		qFatal("At least one optional component failed to initialize!");
+		return -1.0;
+	}
 
 	m_bSuccess = true;
 	delay();
@@ -493,77 +575,65 @@ void InitializationThread::initTranslations(void)
 // AAC Encoder Detection
 ////////////////////////////////////////////////////////////
 
-void InitializationThread::initAacEnc_Nero(void)
+static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp())
 {
+	static const size_t MAX_FILES = 8;
 	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 	
-	const QFileInfo neroFileInfo[3] =
+	QFileInfoList fileInfo;
+	for(size_t i = 0; fileNames[i] && (fileInfo.count() < MAX_FILES); i++)
 	{
-		QFileInfo(QString("%1/neroAacEnc.exe").arg(appPath)),
-		QFileInfo(QString("%1/neroAacDec.exe").arg(appPath)),
-		QFileInfo(QString("%1/neroAacTag.exe").arg(appPath))
-	};
+		fileInfo.append(QFileInfo(QString("%1/%2").arg(appPath, QString::fromLatin1(fileNames[i]))));
+	}
 	
-	bool neroFilesFound = true;
-	for(int i = 0; i < 3; i++)
+	for(QFileInfoList::ConstIterator iter = fileInfo.constBegin(); iter != fileInfo.constEnd(); iter++)
 	{
-		if(!(neroFileInfo[i].exists() && neroFileInfo[i].isFile()))
+		if(!(iter->exists() && iter->isFile()))
 		{
-			neroFilesFound = false;
+			qDebug("%s encoder binaries not found -> Encoding support will be disabled!\n", toolName);
+			return;
 		}
-	}
-
-	if(!neroFilesFound)
-	{
-		qDebug("Nero encoder binaries not found -> NeroAAC encoding support will be disabled!\n");
-		return;
-	}
-
-	for(int i = 0; i < 3; i++)
-	{
-		if(!MUtils::OS::is_executable_file(neroFileInfo[i].canonicalFilePath()))
+		if((iter->suffix().compare("exe", Qt::CaseInsensitive) == 0) && (!MUtils::OS::is_executable_file(iter->canonicalFilePath())))
 		{
-			qDebug("%s executable is invalid -> NeroAAC encoding support will be disabled!\n", MUTILS_UTF8(neroFileInfo[i].fileName()));
+			qDebug("%s executable is invalid -> %s support will be disabled!\n", MUTILS_UTF8(iter->fileName()), toolName);
 			return;
 		}
 	}
 
-	qDebug("Found Nero AAC encoder binary:\n%s\n", MUTILS_UTF8(neroFileInfo[0].canonicalFilePath()));
+	qDebug("Found %s encoder binary:\n%s\n", toolName, MUTILS_UTF8(fileInfo.first().canonicalFilePath()));
 
-	//Lock the Nero binaries
-	QScopedPointer<LockedFile> neroBin[3];
+	//Lock the encoder binaries
+	QScopedPointer<LockedFile> binaries[MAX_FILES];
 	try
 	{
-		for(int i = 0; i < 3; i++)
+		size_t index = 0;
+		for(QFileInfoList::ConstIterator iter = fileInfo.constBegin(); iter != fileInfo.constEnd(); iter++)
 		{
-			neroBin[i].reset(new LockedFile(neroFileInfo[i].canonicalFilePath()));
+			binaries[index++].reset(new LockedFile(iter->canonicalFilePath()));
 		}
 	}
 	catch(...)
 	{
-		qWarning("Failed to get excluive lock to Nero encoder binary -> NeroAAC encoding support will be disabled!");
+		qWarning("Failed to get excluive lock to encoder binary -> %s support will be disabled!", toolName);
 		return;
 	}
 
 	QProcess process;
-	MUtils::init_process(process, neroFileInfo[0].absolutePath());
+	MUtils::init_process(process, fileInfo.first().absolutePath());
 
-	process.start(neroFileInfo[0].canonicalFilePath(), QStringList() << "-help");
+	process.start(fileInfo.first().canonicalFilePath(), QStringList() << "-help");
 
 	if(!process.waitForStarted())
 	{
-		qWarning("Nero process failed to create!");
+		qWarning("%s process failed to create!", toolName);
 		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
 		process.kill();
 		process.waitForFinished(-1);
 		return;
 	}
 
-	bool neroSigFound = false;
-	quint32 neroVersion = 0;
-
-	QRegExp neroAacEncSig("Nero\\s+AAC\\s+Encoder", Qt::CaseInsensitive);
-	QRegExp neroAacEncVer("Package\\s+version:\\s+(\\d)\\.(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
+	quint32 toolVersion = 0;
+	bool sigFound = regExpSig.isEmpty() ? true : false;
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -571,7 +641,7 @@ void InitializationThread::initAacEnc_Nero(void)
 		{
 			if(process.state() == QProcess::Running)
 			{
-				qWarning("NeroAAC process time out -> killing!");
+				qWarning("%s process time out -> killing!", toolName);
 				process.kill();
 				process.waitForFinished(-1);
 				return;
@@ -580,393 +650,74 @@ void InitializationThread::initAacEnc_Nero(void)
 		while(process.canReadLine())
 		{
 			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
-			if(neroAacEncSig.lastIndexIn(line) >= 0)
+			if((!sigFound) && regExpSig.lastIndexIn(line) >= 0)
 			{
-				neroSigFound = true;
+				sigFound = true;
 				continue;
 			}
-			if(neroSigFound && (neroAacEncVer.lastIndexIn(line) >= 0))
+			if(sigFound && (regExpVer.lastIndexIn(line) >= 0))
 			{
-				quint32 tmp[4];
-				if(MUtils::regexp_parse_uint32(neroAacEncVer, tmp, 4))
+				quint32 tmp[8];
+				if(MUtils::regexp_parse_uint32(regExpVer, tmp, qMin(verDigits, 8U)))
 				{
-					neroVersion = (qBound(0U, tmp[0], 9U) * 1000U) + (qBound(0U, tmp[1], 9U) * 100U) + (qBound(0U, tmp[2], 9U) * 10U) + qBound(0U, tmp[3], 9U);
+					toolVersion = 0;
+					for(quint32 i = 0; i < verDigits; i++)
+					{
+						toolVersion = (toolVersion * verShift) + qBound(0U, tmp[i], (verShift - 1));
+					}
 				}
 			}
 		}
 	}
 
-	if(neroVersion <= 0)
+	if(toolVersion <= 0)
 	{
-		qWarning("NeroAAC version could not be determined -> NeroAAC encoding support will be disabled!");
+		qWarning("%s version could not be determined -> Encoding support will be disabled!", toolName);
 		return;
 	}
-	else if(neroVersion < lamexp_toolver_neroaac())
+	else if(toolVersion < toolMinVersion)
 	{
-		qWarning("NeroAAC version is too much outdated (%s) -> NeroAAC support will be disabled!", MUTILS_UTF8(lamexp_version2string("v?.?.?.?", neroVersion,              "N/A")));
-		qWarning("Minimum required NeroAAC version currently is: %s\n",                            MUTILS_UTF8(lamexp_version2string("v?.?.?.?", lamexp_toolver_neroaac(), "N/A")));
+		qWarning("%s version is too much outdated (%s) -> Encoding support will be disabled!", toolName, MUTILS_UTF8(lamexp_version2string(verStr, toolVersion,    "N/A")));
+		qWarning("Minimum required %s version currently is: %s\n",                             toolName, MUTILS_UTF8(lamexp_version2string(verStr, toolMinVersion, "N/A")));
 		return;
 	}
 
-	qDebug("Enabled NeroAAC encoder %s.\n", MUTILS_UTF8(lamexp_version2string("v?.?.?.?", neroVersion, "N/A")));
+	qDebug("Enabled %s encoder %s.\n", toolName, MUTILS_UTF8(lamexp_version2string(verStr, toolVersion, "N/A")));
 
-	for(int i = 0; i < 3; i++)
+	size_t index = 0;
+	for(QFileInfoList::ConstIterator iter = fileInfo.constBegin(); iter != fileInfo.constEnd(); iter++)
 	{
-		lamexp_tools_register(neroFileInfo[i].fileName(), neroBin[i].take(), neroVersion);
+		lamexp_tools_register(iter->fileName(), binaries[index++].take(), toolVersion);
 	}
+}
+
+void InitializationThread::initAacEnc_Nero(void)
+{
+	static const char *const neroAacFiles[] = { "neroAacEnc.exe", "neroAacDec.exe", "neroAacTag.exe", NULL };
+	QRegExp neroAacEncSig("Nero\\s+AAC\\s+Encoder",                               Qt::CaseInsensitive);
+	QRegExp neroAacEncVer("Package\\s+version:\\s+(\\d)\\.(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
+	initAacEncImpl("NeroAAC", neroAacFiles, lamexp_toolver_neroaac(), 4, 10, "v?.?.?.?", neroAacEncVer, neroAacEncSig);
 }
 
 void InitializationThread::initAacEnc_FHG(void)
 {
-	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
-	
-	const QFileInfo fhgFileInfo[5] =
-	{
-		QFileInfo(QString("%1/fhgaacenc.exe")   .arg(appPath)),
-		QFileInfo(QString("%1/enc_fhgaac.dll")  .arg(appPath)),
-		QFileInfo(QString("%1/nsutil.dll")      .arg(appPath)),
-		QFileInfo(QString("%1/libmp4v2.dll")    .arg(appPath)),
-		QFileInfo(QString("%1/libsndfile-1.dll").arg(appPath))
-	};
-	
-	bool fhgFilesFound = true;
-	for(int i = 0; i < 5; i++)
-	{
-		if(!(fhgFileInfo[i].exists() && fhgFileInfo[i].isFile()))
-		{
-			fhgFilesFound = false;
-		}
-	}
-
-	if(!fhgFilesFound)
-	{
-		qDebug("FhgAacEnc binaries not found -> FhgAacEnc support will be disabled!\n");
-		return;
-	}
-
-	if(!MUtils::OS::is_executable_file(fhgFileInfo[0].canonicalFilePath()))
-	{
-		qDebug("FhgAacEnc executable is invalid -> FhgAacEnc support will be disabled!\n");
-		return;
-	}
-
-	qDebug("Found FhgAacEnc cli_exe:\n%s\n", MUTILS_UTF8(fhgFileInfo[0].canonicalFilePath()));
-	qDebug("Found FhgAacEnc enc_dll:\n%s\n", MUTILS_UTF8(fhgFileInfo[1].canonicalFilePath()));
-
-	//Lock the FhgAacEnc binaries
-	QScopedPointer<LockedFile> fhgBin[5];
-	try
-	{
-		for(int i = 0; i < 5; i++)
-		{
-			fhgBin[i].reset(new LockedFile(fhgFileInfo[i].canonicalFilePath()));
-		}
-	}
-	catch(...)
-	{
-		qWarning("Failed to get excluive lock to FhgAacEnc binary -> FhgAacEnc support will be disabled!");
-		return;
-	}
-
-	QProcess process;
-	MUtils::init_process(process, fhgFileInfo[0].absolutePath());
-
-	process.start(fhgFileInfo[0].canonicalFilePath(), QStringList() << "--version");
-
-	if(!process.waitForStarted())
-	{
-		qWarning("FhgAacEnc process failed to create!");
-		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
-		process.kill();
-		process.waitForFinished(-1);
-		return;
-	}
-
-	quint32 fhgVersion = 0;
+	static const char *const fhgAacEncFiles[] = { "fhgaacenc.exe", "enc_fhgaac.dll", "nsutil.dll", "libmp4v2.dll", "libsndfile-1.dll", NULL };
 	QRegExp fhgAacEncSig("fhgaacenc version (\\d+) by tmkk", Qt::CaseInsensitive);
-
-	while(process.state() != QProcess::NotRunning)
-	{
-		process.waitForReadyRead();
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			qWarning("FhgAacEnc process time out -> killing!");
-			process.kill();
-			process.waitForFinished(-1);
-			return;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
-			if(fhgAacEncSig.lastIndexIn(line) >= 0)
-			{
-				quint32 tmp;
-				if(MUtils::regexp_parse_uint32(fhgAacEncSig, tmp))
-				{
-					fhgVersion = tmp;
-				}
-			}
-		}
-	}
-
-	if(fhgVersion <= 0)
-	{
-		qWarning("FhgAacEnc version couldn't be determined -> FhgAacEnc support will be disabled!");
-		return;
-	}
-	else if(fhgVersion < lamexp_toolver_fhgaacenc())
-	{
-		qWarning("FhgAacEnc version is too much outdated (%s) -> FhgAacEnc support will be disabled!", MUTILS_UTF8(lamexp_version2string("????-??-??", fhgVersion,                 "N/A")));
-		qWarning("Minimum required FhgAacEnc version currently is: %s\n",                              MUTILS_UTF8(lamexp_version2string("????-??-??", lamexp_toolver_fhgaacenc(), "N/A")));
-		return;
-	}
-	
-	qDebug("Enabled FhgAacEnc %s.\n", MUTILS_UTF8(lamexp_version2string("????-??-??", fhgVersion, "N/A")));
-
-	for(int i = 0; i < 5; i++)
-	{
-		lamexp_tools_register(fhgFileInfo[i].fileName(), fhgBin[i].take(), fhgVersion);
-	}
+	initAacEncImpl("FhgAacEnc", fhgAacEncFiles, lamexp_toolver_fhgaacenc(), 1, 100000000, "????-??-??", fhgAacEncSig);
 }
 
 void InitializationThread::initAacEnc_FDK(void)
 {
-	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
-
-	const QFileInfo fdkFileInfo(QString("%1/fdkaac.exe").arg(appPath));
-	if(!(fdkFileInfo.exists() && fdkFileInfo.isFile()))
-	{
-		qDebug("FdkAac encoder binary not found -> FdkAac encoding support will be disabled!\n");
-		return;
-	}
-
-	if(!MUtils::OS::is_executable_file(fdkFileInfo.canonicalFilePath()))
-	{
-		qDebug("%s executable is invalid -> FdkAac encoding support will be disabled!\n", MUTILS_UTF8(fdkFileInfo.fileName()));
-		return;
-	}
-
-	qDebug("Found FdkAac encoder binary:\n%s\n", MUTILS_UTF8(fdkFileInfo.canonicalFilePath()));
-
-	//Lock the fdkaac binaries
-	QScopedPointer<LockedFile> fdkAacBin;
-	try
-	{
-		fdkAacBin.reset(new LockedFile(fdkFileInfo.canonicalFilePath()));
-	}
-	catch(...)
-	{
-		qWarning("Failed to get excluive lock to FdkAac encoder binary -> FdkAac encoding support will be disabled!");
-		return;
-	}
-
-	QProcess process;
-	MUtils::init_process(process, fdkFileInfo.absolutePath());
-
-	process.start(fdkFileInfo.canonicalFilePath(), QStringList() << "--help");
-
-	if(!process.waitForStarted())
-	{
-		qWarning("FdkAac process failed to create!");
-		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
-		process.kill();
-		process.waitForFinished(-1);
-		return;
-	}
-
-	quint32 fdkAacVersion = 0;
-	QRegExp fdkAacSig("fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
-
-	while(process.state() != QProcess::NotRunning)
-	{
-		if(!process.waitForReadyRead())
-		{
-			if(process.state() == QProcess::Running)
-			{
-				qWarning("fdkaac process time out -> killing!");
-				process.kill();
-				process.waitForFinished(-1);
-				return;
-			}
-		}
-		while(process.canReadLine())
-		{
-			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
-			if(fdkAacSig.lastIndexIn(line) >= 0)
-			{
-				quint32 tmp[3];
-				if(MUtils::regexp_parse_uint32(fdkAacSig, tmp, 3))
-				{
-					fdkAacVersion = (qBound(0U, tmp[0], 9U) * 100U) + (qBound(0U, tmp[1], 9U) * 10U) + qBound(0U, tmp[2], 9U);
-				}
-			}
-		}
-	}
-
-	if(fdkAacVersion <= 0)
-	{
-		qWarning("fdkaac version could not be determined -> fdkaac encoding support will be disabled!");
-		return;
-	}
-	else if(fdkAacVersion < lamexp_toolver_fdkaacenc())
-	{
-		qWarning("fdkaac version is too much outdated (%s) -> fdkaac support will be disabled!", MUTILS_UTF8(lamexp_version2string("v?.?.?", fdkAacVersion,              "N/A")));
-		qWarning("Minimum required fdkaac version currently is: %s\n",                           MUTILS_UTF8(lamexp_version2string("v?.?.?", lamexp_toolver_fdkaacenc(), "N/A")));
-		return;
-	}
-
-	qDebug("Enabled fdkaac encoder %s.\n", MUTILS_UTF8(lamexp_version2string("v?.?.?", fdkAacVersion, "N/A")));
-	lamexp_tools_register(fdkFileInfo.fileName(), fdkAacBin.take(), fdkAacVersion);
+	static const char *const fdkAacEncFiles[] = { "fdkaac.exe", NULL };
+	QRegExp fdkAacVer("fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
+	initAacEncImpl("FdkAacEnc", fdkAacEncFiles, lamexp_toolver_fdkaacenc(), 3, 10, "v?.?.?", fdkAacVer);
 }
 
 void InitializationThread::initAacEnc_QAAC(void)
 {
-	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
-
-	const QFileInfo qaacFileInfo[3] =
-	{
-		QFileInfo(QString("%1/qaac.exe")           .arg(appPath)),
-		QFileInfo(QString("%1/libsoxr.dll")        .arg(appPath)),
-		QFileInfo(QString("%1/libsoxconvolver.dll").arg(appPath))
-	};
-	
-	bool qaacFilesFound = true;
-	for(int i = 0; i < 3; i++)
-	{
-		if(!(qaacFileInfo[i].exists() && qaacFileInfo[i].isFile()))
-		{
-			qaacFilesFound = false;
-		}
-	}
-
-	if(!qaacFilesFound)
-	{
-		qDebug("QAAC binary or companion DLL's not found -> QAAC support will be disabled!\n");
-		return;
-	}
-
-	if(!MUtils::OS::is_executable_file(qaacFileInfo[0].canonicalFilePath()))
-	{
-		qDebug("QAAC executable is invalid -> QAAC support will be disabled!\n");
-		return;
-	}
-
-	qDebug("Found QAAC encoder:\n%s\n", MUTILS_UTF8(qaacFileInfo[0].canonicalFilePath()));
-
-	//Lock the required QAAC binaries
-	QScopedPointer<LockedFile> qaacBin[3];
-	try
-	{
-		for(int i = 0; i < 3; i++)
-		{
-			qaacBin[i].reset(new LockedFile(qaacFileInfo[i].canonicalFilePath()));
-		}
-	}
-	catch(...)
-	{
-		qWarning("Failed to get excluive lock to QAAC binary -> QAAC support will be disabled!");
-		return;
-	}
-
-	QProcess process;
-	MUtils::init_process(process, qaacFileInfo[0].absolutePath());
-	process.start(qaacFileInfo[0].canonicalFilePath(), QStringList() << "--check");
-
-	if(!process.waitForStarted())
-	{
-		qWarning("QAAC process failed to create!");
-		qWarning("Error message: \"%s\"\n", process.errorString().toLatin1().constData());
-		process.kill();
-		process.waitForFinished(-1);
-		return;
-	}
-
-	QRegExp qaacEncSig("qaac (\\d)\\.(\\d+)", Qt::CaseInsensitive);
-	QRegExp coreEncSig("CoreAudioToolbox (\\d)\\.(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
-	QRegExp soxrEncSig("libsoxr-\\d\\.\\d\\.\\d", Qt::CaseInsensitive);
-	QRegExp soxcEncSig("libsoxconvolver \\d\\.\\d\\.\\d", Qt::CaseInsensitive);
-
-	quint32 qaacVersion = 0;
-	quint32 coreVersion = 0;
-	bool soxrFound = false;
-	bool soxcFound = false;
-
-	while(process.state() != QProcess::NotRunning)
-	{
-		process.waitForReadyRead();
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			qWarning("QAAC process time out -> killing!");
-			process.kill();
-			process.waitForFinished(-1);
-			return;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
-			if(qaacEncSig.lastIndexIn(line) >= 0)
-			{
-				quint32 tmp[2];
-				if(MUtils::regexp_parse_uint32(qaacEncSig, tmp, 2))
-				{
-					qaacVersion = (qBound(0U, tmp[0], 9U) * 100) +  qBound(0U, tmp[1], 99U);
-				}
-			}
-			if(coreEncSig.lastIndexIn(line) >= 0)
-			{
-				quint32 tmp[4];
-				if(MUtils::regexp_parse_uint32(coreEncSig, tmp, 4))
-				{
-					coreVersion = (qBound(0U, tmp[0], 9U) * 1000U) + (qBound(0U, tmp[1], 9U) * 100U) + (qBound(0U, tmp[2], 9U) * 10U) + qBound(0U, tmp[3], 9U);
-				}
-			}
-			if(soxcEncSig.lastIndexIn(line) >= 0)
-			{
-				soxcFound = true;
-			}
-			if(soxrEncSig.lastIndexIn(line) >= 0)
-			{
-				soxrFound = true;
-			}
-		}
-	}
-
-	if(qaacVersion <= 0)
-	{
-		qWarning("QAAC version couldn't be determined -> QAAC support will be disabled!");
-		return;
-	}
-	else if(qaacVersion < lamexp_toolver_qaacenc())
-	{
-		qWarning("QAAC version is too much outdated (%s) -> QAAC support will be disabled!", MUTILS_UTF8(lamexp_version2string("v?.??", qaacVersion,              "N/A")));
-		qWarning("Minimum required QAAC version currently is: %s.\n",                        MUTILS_UTF8(lamexp_version2string("v?.??", lamexp_toolver_qaacenc(), "N/A")));
-		return;
-	}
-
-	if(coreVersion <= 0)
-	{
-		qWarning("CoreAudioToolbox version couldn't be determined -> QAAC support will be disabled!");
-		return;
-	}
-	else if(coreVersion < lamexp_toolver_coreaudio())
-	{
-		qWarning("CoreAudioToolbox version is outdated (%s) -> QAAC support will be disabled!", MUTILS_UTF8(lamexp_version2string("v?.?.?.?", coreVersion,                "N/A")));
-		qWarning("Minimum required CoreAudioToolbox version currently is: %s.\n",               MUTILS_UTF8(lamexp_version2string("v?.?.?.?", lamexp_toolver_coreaudio(), "N/A")));
-		return;
-	}
-
-	if(!(soxrFound && soxcFound))
-	{
-		qWarning("libsoxr and/or libsoxconvolver not available -> QAAC support will be disabled!\n");
-		return;
-	}
-
-	qDebug("Enabled qaac encoder %s (using CoreAudioToolbox %s).\n", MUTILS_UTF8(lamexp_version2string("v?.??", qaacVersion, "N/A")), MUTILS_UTF8(lamexp_version2string("v?.?.?.?", coreVersion, "N/A")));
-
-	for(int i = 0; i < 3; i++)
-	{
-		lamexp_tools_register(qaacFileInfo[i].fileName(), qaacBin[i].take(), qaacVersion);
-	}
+	static const char *const qaacEncFiles[] = { "qaac.exe", "libsoxr.dll", "libsoxconvolver.dll", NULL };
+	QRegExp qaacVer("qaac (\\d)\\.(\\d+)", Qt::CaseInsensitive);
+	initAacEncImpl("QAAC", qaacEncFiles, lamexp_toolver_qaacenc(), 2, 100, "v?.??", qaacVer);
 }
 
 ////////////////////////////////////////////////////////////

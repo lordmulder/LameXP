@@ -54,10 +54,11 @@ protected:
 private:
 	void delay(void);
 	void initTranslations(void);
-	void initAacEnc_Nero(void);
-	void initAacEnc_FHG(void);
-	void initAacEnc_FDK(void);
-	void initAacEnc_QAAC(void);
+	
+	static void initAacEnc_Nero(void);
+	static void initAacEnc_FHG(void);
+	static void initAacEnc_FDK(void);
+	static void initAacEnc_QAAC(void);
 
 	bool m_bSuccess;
 	MUtils::CPUFetaures::cpu_info_t m_cpuFeatures;
