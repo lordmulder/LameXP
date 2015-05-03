@@ -41,4 +41,5 @@ private:
 
 	static void detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes);
 	static QMutex m_mutex;
+	static volatile int m_state;
 };
