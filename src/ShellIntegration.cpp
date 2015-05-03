@@ -29,6 +29,8 @@
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/Exception.h>
+#include <MUtils/OSSupport.h>
+#include <MUtils/Registry.h>
 
 //Qt
 #include <QString>
@@ -40,13 +42,9 @@
 #include <QMutexLocker>
 #include <QtConcurrentRun>
 
-//Win32 API
-#include <Shlobj.h>
-#include <Shlwapi.h>
-
 //Const
 static const char *g_lamexpShellAction = "ConvertWithLameXP";
-static const char *g_lamexpFileType = "LameXP.SupportedAudioFile";
+static const char *g_lamexpFileType    = "LameXP.SupportedAudioFile";
 
 //Mutex
 QMutex ShellIntegration::m_mutex;
@@ -78,9 +76,6 @@ void ShellIntegration::install(bool async)
 	
 	//Serialize
 	QMutexLocker lock(&m_mutex);
-
-	//Registry key
-	HKEY key = NULL;
 	
 	//Init some consts
 	const QString lamexpFileType(g_lamexpFileType);
@@ -90,53 +85,25 @@ void ShellIntegration::install(bool async)
 	const QString lamexpShellAction(g_lamexpShellAction);
 
 	//Register the LameXP file type
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1").arg(lamexpFileType)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
-	{
-		REG_WRITE_STRING(key, lamexpFileInfo);
-		RegCloseKey(key);
-	}
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell").arg(lamexpFileType)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
-	{
-		REG_WRITE_STRING(key, lamexpShellAction);
-		RegCloseKey(key);
-	}
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2").arg(lamexpFileType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
-	{
-		REG_WRITE_STRING(key, lamexpShellText);
-		RegCloseKey(key);
-	}
-	if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
-	{
-		REG_WRITE_STRING(key, lamexpShellCommand);
-		RegCloseKey(key);
-	}
+	MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1")                    .arg(lamexpFileType),                    QString(), lamexpFileInfo);
+	MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell")             .arg(lamexpFileType),                    QString(), lamexpShellAction);
+	MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2")         .arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellText);
+	MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellCommand);
 
 	//Detect supported file types
-	QStringList *types = detectTypes(lamexpFileType, lamexpShellAction);
+	QStringList types;
+	detectTypes(lamexpFileType, lamexpShellAction, types);
 
 	//Add LameXP shell action to all supported file types
-	while(types && (!types->isEmpty()))
+	while(!types.isEmpty())
 	{
-		QString currentType = types->takeFirst();
-
-		if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2").arg(currentType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
-		{
-			REG_WRITE_STRING(key, lamexpShellText);
-			RegCloseKey(key);
-		}
-
-		if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2\\command").arg(currentType, lamexpShellAction)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
-		{
-			REG_WRITE_STRING(key, lamexpShellCommand);
-			RegCloseKey(key);
-		}
+		QString currentType = types.takeFirst();
+		MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2")         .arg(currentType, lamexpShellAction), QString(), lamexpShellText);
+		MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2\\command").arg(currentType, lamexpShellAction), QString(), lamexpShellCommand);
 	}
 	
 	//Shell notification
-	SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, NULL, NULL);
-
-	//Free
-	delete types;
+	MUtils::OS::shell_change_notification();
 }
 
 void ShellIntegration::remove(bool async)
@@ -156,48 +123,35 @@ void ShellIntegration::remove(bool async)
 	const QString lamexpShellAction(g_lamexpShellAction);
 
 	//Initialization
-	HKEY key = NULL;
 	QStringList fileTypes;
 
 	//Find all registered file types
-	if(RegOpenKeyEx(HKEY_CURRENT_USER, L"Software\\Classes", NULL, KEY_ENUMERATE_SUB_KEYS ,&key) == ERROR_SUCCESS)
+	if(!MUtils::Registry::reg_enum_subkeys(MUtils::Registry::root_user, "Software\\Classes", fileTypes))
 	{
-		wchar_t name[256];
-		
-		for(DWORD i = 0; true; i++)
-		{
-			DWORD size = 256;
-			if(RegEnumKeyEx(key, i, name, &size, NULL, NULL, NULL, NULL) == ERROR_SUCCESS)
-			{
-				fileTypes << QString::fromUtf16(reinterpret_cast<const unsigned short*>(name));
-				continue;
-			}
-			break;
-		}
+		qWarning("Failed to enumerate file types!");
+		return;
 	}
 
 	//Remove shell action from all file types
 	while(!fileTypes.isEmpty())
 	{
-		SHDeleteKey(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1\\shell\\%2").arg(fileTypes.takeFirst(), lamexpShellAction)));
+		MUtils::Registry::reg_key_delete(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2").arg(fileTypes.takeFirst(), lamexpShellAction));
 	}
 
 	//Unregister LameXP file type
-	SHDeleteKey(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1").arg(lamexpFileType)));
+	MUtils::Registry::reg_key_delete(MUtils::Registry::root_user, QString("Software\\Classes\\%1").arg(lamexpFileType));
 
 	//Shell notification
-	SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, NULL, NULL);
+	MUtils::OS::shell_change_notification();
 }
 
 ////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
 
-QStringList *ShellIntegration::detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction)
+void ShellIntegration::detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes)
 {
-	HKEY key = NULL;
-
-	QStringList *nativeTypes = new QStringList();
+	nativeTypes.clear();
 	QStringList supportedTypes = DecoderRegistry::getSupportedTypes();
 	QStringList extensions;
 
@@ -220,76 +174,35 @@ QStringList *ShellIntegration::detectTypes(const QString &lamexpFileType, const 
 	//Map supported extensions to native types
 	while(!extensions.isEmpty())
 	{
-		QString currentExt = extensions.takeFirst();
+		const QString currentExt = extensions.takeFirst();
 
-		if(RegOpenKeyEx(HKEY_CLASSES_ROOT, MUTILS_WCHR(currentExt), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
+		QString currentType;
+		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_classes, currentExt, QString(), currentType))
 		{
-			wchar_t data[256];
-			DWORD dataLen = 256 * sizeof(wchar_t);
-			DWORD type = NULL;
-				
-			if(RegQueryValueEx(key, NULL, NULL, &type, reinterpret_cast<BYTE*>(data), &dataLen) == ERROR_SUCCESS)
+			if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
 			{
-				if((type == REG_SZ) || (type == REG_EXPAND_SZ))
-				{
-					QString currentType = QString::fromUtf16(reinterpret_cast<unsigned short*>(data));
-					if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && !nativeTypes->contains(currentType, Qt::CaseInsensitive))
-					{
-						nativeTypes->append(currentType);
-					}
-				}
+				nativeTypes.append(currentType);
 			}
-			RegCloseKey(key);
 		}
 		else
 		{
-			if(RegCreateKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Classes\\%1").arg(currentExt)), NULL, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &key, NULL) == ERROR_SUCCESS)
+			MUtils::Registry::reg_value_write(MUtils::Registry::root_user, currentExt, QString(), lamexpFileType);
+		}
+
+		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_user, QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(currentExt), QString(), currentType))
+		{
+			if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
 			{
-				REG_WRITE_STRING(key, lamexpFileType);
-				RegCloseKey(key);
+				nativeTypes.append(currentType);
 			}
 		}
 
-		if(RegOpenKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(currentExt)), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
+		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_user, QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\OpenWithProgids").arg(currentExt), QString(), currentType))
 		{
-			wchar_t data[256];
-			DWORD dataLen = 256 * sizeof(wchar_t);
-			DWORD type = NULL;
-				
-			if(RegQueryValueEx(key, L"Progid", NULL, &type, reinterpret_cast<BYTE*>(data), &dataLen) == ERROR_SUCCESS)
+			if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
 			{
-				if((type == REG_SZ) || (type == REG_EXPAND_SZ))
-				{
-					QString currentType = QString::fromUtf16(reinterpret_cast<unsigned short*>(data));
-					if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && !nativeTypes->contains(currentType, Qt::CaseInsensitive))
-					{
-						nativeTypes->append(currentType);
-					}
-				}
+				nativeTypes.append(currentType);
 			}
-			RegCloseKey(key);
-		}
-
-		if(RegOpenKeyEx(HKEY_CURRENT_USER, MUTILS_WCHR(QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\OpenWithProgids").arg(currentExt)), NULL, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
-		{
-			wchar_t name[256];
-			for(DWORD i = 0; true; i++)
-			{
-				DWORD size = 256;
-				if(RegEnumValue(key, i, name, &size, NULL, NULL, NULL, NULL) == ERROR_SUCCESS)
-				{
-					QString currentType = QString::fromUtf16(reinterpret_cast<unsigned short*>(name));
-					if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && !nativeTypes->contains(currentType, Qt::CaseInsensitive))
-					{
-						nativeTypes->append(currentType);
-					}
-					continue;
-				}
-				break;
-			}
-			RegCloseKey(key);
 		}
 	}
-
-	return nativeTypes;
 }

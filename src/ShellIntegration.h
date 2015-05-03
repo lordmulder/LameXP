@@ -39,6 +39,6 @@ public:
 private:
 	ShellIntegration(void);
 
-	static QStringList *detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction);
+	static void detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes);
 	static QMutex m_mutex;
 };
