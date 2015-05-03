@@ -48,8 +48,10 @@
 #include <QQueue>
 #include <QElapsedTimer>
 #include <QVector>
+
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
+#define MAKE_REGEXP(STR) (((STR) && ((STR)[0])) ? QRegExp((STR)) : QRegExp())
 
 /* constants */
 static const double g_allowedExtractDelay = 12.0;
@@ -244,32 +246,32 @@ private:
 volatile bool ExtractorTask::s_bCustom = false;
 
 ////////////////////////////////////////////////////////////
-// OptionalInitTask class
+// InitAacEncTask class
 ////////////////////////////////////////////////////////////
 
-typedef void (*initFunction_t)(void);
-
-class OptionalInitTask : public BaseTask
+class InitAacEncTask : public BaseTask
 {
 public:
-	OptionalInitTask(const initFunction_t initFunction)
+	InitAacEncTask(const aac_encoder_t *const encoder_info)
 	:
-		m_initFunction(initFunction)
+		m_encoder_info(encoder_info)
 	{
 	}
 
-	~OptionalInitTask(void)
+	~InitAacEncTask(void)
 	{
 	}
 
 protected:
 	void taskMain(void)
 	{
-		m_initFunction();
+		initAacEncImpl(m_encoder_info->toolName, m_encoder_info->fileNames, m_encoder_info->toolMinVersion, m_encoder_info->verDigits, m_encoder_info->verShift, m_encoder_info->verStr, MAKE_REGEXP(m_encoder_info->regExpVer), MAKE_REGEXP(m_encoder_info->regExpSig));
 	}
 
+	static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp());
+
 private:
-	const initFunction_t m_initFunction;
+	const aac_encoder_t *const m_encoder_info;
 };
 
 ////////////////////////////////////////////////////////////
@@ -467,19 +469,18 @@ double InitializationThread::doInit(const size_t threadCount)
 	initTranslations();
 
 	//Look for AAC encoders
-	OptionalInitTask::clearFlags();
-	static const initFunction_t initFunctions[] = { initAacEnc_Nero, initAacEnc_FHG, initAacEnc_FDK, initAacEnc_QAAC, NULL };
-	for(size_t i = 0; initFunctions[i]; i++)
+	InitAacEncTask::clearFlags();
+	for(size_t i = 0; g_lamexp_aacenc[i].toolName; i++)
 	{
-		pool->start(new OptionalInitTask(initFunctions[i]));
+		pool->start(new InitAacEncTask(&(g_lamexp_aacenc[i])));
 	}
 	pool->waitForDone();
 
 	//Make sure initialization finished correctly
-	if(OptionalInitTask::getExcept())
+	if(InitAacEncTask::getExcept())
 	{
 		char errorMsg[BUFF_SIZE];
-		if(OptionalInitTask::getErrMsg(errorMsg, BUFF_SIZE))
+		if(InitAacEncTask::getErrMsg(errorMsg, BUFF_SIZE))
 		{
 			qFatal("At least one optional component failed to initialize:\n%s", errorMsg);
 			return -1.0;
@@ -575,7 +576,7 @@ void InitializationThread::initTranslations(void)
 // AAC Encoder Detection
 ////////////////////////////////////////////////////////////
 
-static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp())
+void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *const fileNames[], const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig)
 {
 	static const size_t MAX_FILES = 8;
 	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
@@ -689,35 +690,6 @@ static void initAacEncImpl(const char *const toolName, const char *const fileNam
 	{
 		lamexp_tools_register(iter->fileName(), binaries[index++].take(), toolVersion);
 	}
-}
-
-void InitializationThread::initAacEnc_Nero(void)
-{
-	static const char *const neroAacFiles[] = { "neroAacEnc.exe", "neroAacDec.exe", "neroAacTag.exe", NULL };
-	QRegExp neroAacEncSig("Nero\\s+AAC\\s+Encoder",                               Qt::CaseInsensitive);
-	QRegExp neroAacEncVer("Package\\s+version:\\s+(\\d)\\.(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
-	initAacEncImpl("NeroAAC", neroAacFiles, lamexp_toolver_neroaac(), 4, 10, "v?.?.?.?", neroAacEncVer, neroAacEncSig);
-}
-
-void InitializationThread::initAacEnc_FHG(void)
-{
-	static const char *const fhgAacEncFiles[] = { "fhgaacenc.exe", "enc_fhgaac.dll", "nsutil.dll", "libmp4v2.dll", "libsndfile-1.dll", NULL };
-	QRegExp fhgAacEncSig("fhgaacenc version (\\d+) by tmkk", Qt::CaseInsensitive);
-	initAacEncImpl("FhgAacEnc", fhgAacEncFiles, lamexp_toolver_fhgaacenc(), 1, 100000000, "????-??-??", fhgAacEncSig);
-}
-
-void InitializationThread::initAacEnc_FDK(void)
-{
-	static const char *const fdkAacEncFiles[] = { "fdkaac.exe", NULL };
-	QRegExp fdkAacVer("fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)", Qt::CaseInsensitive);
-	initAacEncImpl("FdkAacEnc", fdkAacEncFiles, lamexp_toolver_fdkaacenc(), 3, 10, "v?.?.?", fdkAacVer);
-}
-
-void InitializationThread::initAacEnc_QAAC(void)
-{
-	static const char *const qaacEncFiles[] = { "qaac.exe", "libsoxr.dll", "libsoxconvolver.dll", NULL };
-	QRegExp qaacVer("qaac (\\d)\\.(\\d+)", Qt::CaseInsensitive);
-	initAacEncImpl("QAAC", qaacEncFiles, lamexp_toolver_qaacenc(), 2, 100, "v?.??", qaacVer);
 }
 
 ////////////////////////////////////////////////////////////

@@ -546,9 +546,6 @@
     <ClInclude Include="src\IPCCommands.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="src\Encoder_AAC_FDK.h">
-      <Filter>Header Files\Encoders</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\DropBox.ui">
@@ -760,6 +757,9 @@
     </CustomBuild>
     <CustomBuild Include="res\Tools_Decd_B.qrc">
       <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Encoder_AAC_FDK.h">
+      <Filter>Header Files\Encoders</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
