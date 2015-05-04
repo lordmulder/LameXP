@@ -3321,12 +3321,12 @@
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="82"/>
+        <location filename="../../src/ShellIntegration.cpp" line="96"/>
         <source>Audio File supported by LameXP</source>
         <translation>Аудіофайл, що підтримується LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="83"/>
+        <location filename="../../src/ShellIntegration.cpp" line="97"/>
         <source>Convert this file with LameXP v%1</source>
         <translation>Конвертувати файл за допомогою LameXP v%1</translation>
     </message>

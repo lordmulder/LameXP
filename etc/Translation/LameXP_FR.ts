@@ -3313,12 +3313,12 @@ Ouvrir le dossier récursivement...</translation>
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="82"/>
+        <location filename="../../src/ShellIntegration.cpp" line="96"/>
         <source>Audio File supported by LameXP</source>
         <translation>Fichier audio pris en charge par LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="83"/>
+        <location filename="../../src/ShellIntegration.cpp" line="97"/>
         <source>Convert this file with LameXP v%1</source>
         <translation>Convertir ce fichier avec LameXP v%1</translation>
     </message>
