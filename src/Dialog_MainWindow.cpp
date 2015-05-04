@@ -1620,7 +1620,7 @@ void MainWindow::encodeButtonClicked(void)
 	{
 		if(QMessageBox::warning(this, tr("Not Found"), QString("%1<br><tt>%2</tt>").arg(NOBR(tr("Your currently selected TEMP folder does not exist anymore:")), NOBR(QDir::toNativeSeparators(tempFolder))), tr("Restore Default"), tr("Cancel")) == 0)
 		{
-			SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, m_settings->customTempPathEnabledDefault());
+			SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, (!m_settings->customTempPathEnabledDefault()));
 		}
 		return;
 	}
