@@ -56,6 +56,7 @@
 		<file>icons/feed.png</file>
 		<file>icons/film.png</file>
 		<file>icons/filter.png</file>
+		<file>icons/find.png</file>
 		<file>icons/folder.png</file>
 		<file>icons/folder_add.png</file>
 		<file>icons/folder_go.png</file>
@@ -81,6 +82,7 @@
 		<file>icons/network_error.png</file>
 		<file>icons/palette.png</file>
 		<file>icons/package.png</file>
+		<file>icons/page_edit.png</file>
 		<file>icons/page_refresh.png</file>
 		<file>icons/page_white_cplusplus.png</file>
 		<file>icons/page_white_add.png</file>
@@ -110,6 +112,7 @@
 		<file>icons/star.png</file>
 		<file>icons/table_edit.png</file>
 		<file>icons/table_save.png</file>
+		<file>icons/tag_blue.png</file>
 		<file>icons/tick.png</file>
 		<file>icons/timeline_marker.png</file>
 		<file>icons/transmit.png</file>

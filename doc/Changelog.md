@@ -9,6 +9,7 @@
 * Updated MediaInfo to v0.7.73 (2015-04-09), compiled with ICL 15.0 and MSVC 12.0
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
+* Fixed function to restore the default Temp folder, if the custom Temp folder doesn't exist anymore
 
 ## LameXP v4.11 [2015-04-05] ## {-}
 

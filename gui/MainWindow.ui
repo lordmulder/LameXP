@@ -1510,7 +1510,7 @@
                <x>0</x>
                <y>0</y>
                <width>613</width>
-               <height>1794</height>
+               <height>1849</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
@@ -3562,186 +3562,461 @@
                    <string> Rename Output Files </string>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_38">
-                   <item row="0" column="0">
-                    <layout class="QGridLayout" name="gridLayout_37">
-                     <item row="1" column="0" rowspan="5">
-                      <spacer name="horizontalSpacer_43">
+                   <property name="verticalSpacing">
+                    <number>4</number>
+                   </property>
+                   <item row="9" column="0">
+                    <widget class="QStackedWidget" name="stackedWidget">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="currentIndex">
+                      <number>0</number>
+                     </property>
+                     <widget class="QWidget" name="pageRename_Rename">
+                      <layout class="QGridLayout" name="gridLayout">
+                       <item row="1" column="0">
+                        <layout class="QGridLayout" name="gridLayout_37">
+                         <item row="1" column="0" rowspan="5">
+                          <spacer name="horizontalSpacer_43">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>10</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="1" column="4" rowspan="5">
+                          <spacer name="horizontalSpacer_44">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>10</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="1" column="2" colspan="2">
+                          <widget class="QLineEdit" name="lineEditRenamePattern">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Lucida Console</family>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string notr="true">[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</string>
+                           </property>
+                           <property name="placeholderText">
+                            <string>Enter the pattern to rename the output files here!</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="1" colspan="3">
+                          <spacer name="verticalSpacer_26">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>8</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="6" column="1" colspan="3">
+                          <spacer name="verticalSpacer_27">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>8</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="5" column="1" colspan="2">
+                          <widget class="QCheckBox" name="checkBoxRename_Rename">
+                           <property name="text">
+                            <string>Rename Output Files</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="4" column="1" colspan="3">
+                          <spacer name="verticalSpacer_28">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>3</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="5" column="3">
+                          <widget class="QLabel" name="labelShowRenameMacros">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="1" colspan="3">
+                          <spacer name="verticalSpacer_29">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>1</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="1" column="1">
+                          <widget class="QLabel" name="label_17">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Rename Pattern:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="3" column="1">
+                          <widget class="QLabel" name="label_18">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Example File Name:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="3" column="2" colspan="2">
+                          <widget class="QLabel" name="labelRanameExample">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="text">
+                            <string notr="true"/>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="pageRename_RegExp">
+                      <layout class="QGridLayout" name="gridLayout_12">
+                       <item row="0" column="0">
+                        <layout class="QGridLayout" name="gridLayout_43">
+                         <item row="3" column="1">
+                          <widget class="QLabel" name="label_20">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Replacement:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="1">
+                          <widget class="QLabel" name="label_19">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Search Pattern:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="1" colspan="3">
+                          <spacer name="verticalSpacer_42">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>1</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="5" column="3">
+                          <widget class="QLabel" name="labelShowRegExpHelp">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>&lt;a href=&quot;regexp&quot;&gt;Regular Expression Info&lt;/a&gt;</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="4" column="1" colspan="3">
+                          <spacer name="verticalSpacer_41">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>3</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="5" column="1" colspan="2">
+                          <widget class="QCheckBox" name="checkBoxRename_RegExp">
+                           <property name="text">
+                            <string>Replace all Matching Elements</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="6" column="1" colspan="3">
+                          <spacer name="verticalSpacer_40">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>8</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="0" column="1" colspan="3">
+                          <spacer name="verticalSpacer_39">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>8</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="1" column="2" colspan="2">
+                          <widget class="QLineEdit" name="lineEditRenameRegExp_Search">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Lucida Console</family>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string notr="true"/>
+                           </property>
+                           <property name="placeholderText">
+                            <string>Enter the desired search pattern (regular expression) here!</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="4" rowspan="5">
+                          <spacer name="horizontalSpacer_71">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>10</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="1" column="0" rowspan="5">
+                          <spacer name="horizontalSpacer_70">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>10</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="3" column="2" colspan="2">
+                          <widget class="QLineEdit" name="lineEditRenameRegExp_Replace">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Lucida Console</family>
+                            </font>
+                           </property>
+                           <property name="placeholderText">
+                            <string>Enter replacement text here! It may contain backreferences.</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="pageRename_FileEx">
+                      <layout class="QVBoxLayout" name="verticalLayout_7">
+                       <item>
+                        <widget class="QListView" name="listView"/>
+                       </item>
+                      </layout>
+                     </widget>
+                    </widget>
+                   </item>
+                   <item row="4" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_13">
+                     <property name="spacing">
+                      <number>1</number>
+                     </property>
+                     <item>
+                      <widget class="QPushButton" name="buttonRename_Rename">
+                       <property name="text">
+                        <string>Rename Files </string>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="../res/Icons.qrc">
+                         <normaloff>:/icons/page_edit.png</normaloff>:/icons/page_edit.png</iconset>
+                       </property>
+                       <property name="checkable">
+                        <bool>true</bool>
+                       </property>
+                       <property name="checked">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="buttonRename_RegExp">
+                       <property name="text">
+                        <string>Regular Expressions </string>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="../res/Icons.qrc">
+                         <normaloff>:/icons/find.png</normaloff>:/icons/find.png</iconset>
+                       </property>
+                       <property name="checkable">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="buttonRename_FileEx">
+                       <property name="text">
+                        <string>File Extensions </string>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="../res/Icons.qrc">
+                         <normaloff>:/icons/tag_blue.png</normaloff>:/icons/tag_blue.png</iconset>
+                       </property>
+                       <property name="checkable">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_69">
                        <property name="orientation">
                         <enum>Qt::Horizontal</enum>
                        </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
                        <property name="sizeHint" stdset="0">
                         <size>
-                         <width>10</width>
+                         <width>40</width>
                          <height>20</height>
                         </size>
                        </property>
                       </spacer>
-                     </item>
-                     <item row="1" column="4" rowspan="5">
-                      <spacer name="horizontalSpacer_44">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>10</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item row="1" column="2" colspan="2">
-                      <widget class="QLineEdit" name="lineEditRenamePattern">
-                       <property name="enabled">
-                        <bool>false</bool>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Lucida Console</family>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string notr="true">[&lt;TrackNo&gt;] &lt;Artist&gt; - &lt;Title&gt;</string>
-                       </property>
-                       <property name="placeholderText">
-                        <string>Enter the pattern to rename the output files here!</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="1" colspan="3">
-                      <spacer name="verticalSpacer_26">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>8</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item row="6" column="1" colspan="3">
-                      <spacer name="verticalSpacer_27">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>8</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item row="5" column="1" colspan="2">
-                      <widget class="QCheckBox" name="checkBoxRenameOutput">
-                       <property name="text">
-                        <string>Rename Output Files</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="4" column="1" colspan="3">
-                      <spacer name="verticalSpacer_28">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>3</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item row="5" column="3">
-                      <widget class="QLabel" name="labelShowRenameMacros">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string>&lt;a href=&quot;reset&quot;&gt;Reset&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Show List of Macros&lt;/a&gt;</string>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="2" column="1" colspan="3">
-                      <spacer name="verticalSpacer_29">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>1</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QLabel" name="label_17">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string>Rename Pattern:</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="3" column="1">
-                      <widget class="QLabel" name="label_18">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string>Example File Name:</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="3" column="2" colspan="2">
-                      <widget class="QLabel" name="labelRanameExample">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
-                       </property>
-                       <property name="text">
-                        <string notr="true"/>
-                       </property>
-                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -5391,7 +5666,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBoxRenameOutput</sender>
+   <sender>checkBoxRename_Rename</sender>
    <signal>toggled(bool)</signal>
    <receiver>lineEditRenamePattern</receiver>
    <slot>setEnabled(bool)</slot>
@@ -5435,6 +5710,38 @@
     <hint type="destinationlabel">
      <x>328</x>
      <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxRename_RegExp</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEditRenameRegExp_Search</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>91</x>
+     <y>1121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>91</x>
+     <y>1121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxRename_RegExp</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEditRenameRegExp_Replace</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>91</x>
+     <y>1121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>91</x>
+     <y>1121</y>
     </hint>
    </hints>
   </connection>

@@ -151,6 +151,7 @@ private slots:
 	void previewContextActionTriggered(void);
 	void refreshFolderContextActionTriggered(void);
 	void removeFileButtonClicked(void);
+	void renameButtonClicked(bool checked);
 	void renameOutputEnabledChanged(bool checked);
 	void renameOutputPatternChanged(void);
 	void renameOutputPatternChanged(const QString &text, bool silent = false);

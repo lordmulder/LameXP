@@ -487,7 +487,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterCoupled, m_settings->normalizationFilterCoupled());
 	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances,        (m_settings->maximumInstances() < 1));
 	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder,        (!m_settings->customTempPathEnabled()));
-	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput,               m_settings->renameOutputFilesEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxRename_Rename,              m_settings->renameOutputFilesEnabled());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmix());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResample());
 
@@ -552,14 +552,19 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->lineEditCustomTempFolder,           SIGNAL(textChanged(QString)),             this, SLOT(customTempFolderChanged(QString)));
 	connect(ui->checkBoxUseSystemTempFolder,        SIGNAL(clicked(bool)),                    this, SLOT(useCustomTempFolderChanged(bool)));
 	connect(ui->buttonResetAdvancedOptions,         SIGNAL(clicked()),                        this, SLOT(resetAdvancedOptionsButtonClicked()));
-	connect(ui->checkBoxRenameOutput,               SIGNAL(clicked(bool)),                    this, SLOT(renameOutputEnabledChanged(bool)));
+	connect(ui->checkBoxRename_Rename,              SIGNAL(clicked(bool)),                    this, SLOT(renameOutputEnabledChanged(bool)));
+	connect(ui->checkBoxRename_RegExp,              SIGNAL(clicked(bool)),                    this, SLOT(renameOutputEnabledChanged(bool)));
 	connect(ui->lineEditRenamePattern,              SIGNAL(editingFinished()),                this, SLOT(renameOutputPatternChanged()));
 	connect(ui->lineEditRenamePattern,              SIGNAL(textChanged(QString)),             this, SLOT(renameOutputPatternChanged(QString)));
 	connect(ui->labelShowRenameMacros,              SIGNAL(linkActivated(QString)),           this, SLOT(showRenameMacros(QString)));
+	connect(ui->labelShowRegExpHelp,                SIGNAL(linkActivated(QString)),           this, SLOT(showRenameMacros(QString)));
 	connect(ui->checkBoxForceStereoDownmix,         SIGNAL(clicked(bool)),                    this, SLOT(forceStereoDownmixEnabledChanged(bool)));
 	connect(ui->comboBoxOpusFramesize,              SIGNAL(currentIndexChanged(int)),         this, SLOT(opusSettingsChanged()));
 	connect(ui->spinBoxOpusComplexity,              SIGNAL(valueChanged(int)),                this, SLOT(opusSettingsChanged()));
 	connect(ui->checkBoxOpusDisableResample,        SIGNAL(clicked(bool)),                    this, SLOT(opusSettingsChanged()));
+	connect(ui->buttonRename_Rename,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
+	connect(ui->buttonRename_RegExp,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
+	connect(ui->buttonRename_FileEx,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
 	connect(m_overwriteButtonGroup,                 SIGNAL(buttonClicked(int)),               this, SLOT(overwriteModeChanged(int)));
 	connect(m_evenFilterCustumParamsHelp,           SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 
@@ -3862,6 +3867,24 @@ void MainWindow::customParamsChanged(void)
 }
 
 /*
+ * One of the rename buttons has been clicked
+ */
+void MainWindow::renameButtonClicked(bool checked)
+{
+	if(QPushButton *const button  = dynamic_cast<QPushButton*>(QObject::sender()))
+	{
+		QWidget *pages[]       = { ui->pageRename_Rename,   ui->pageRename_RegExp,   ui->pageRename_FileEx   };
+		QPushButton *buttons[] = { ui->buttonRename_Rename, ui->buttonRename_RegExp, ui->buttonRename_FileEx };
+		for(int i = 0; i < 3; i++)
+		{
+			const bool match = (button == buttons[i]);
+			buttons[i]->setChecked(match);
+			if(match && checked) ui->stackedWidget->setCurrentWidget(pages[i]);
+		}
+	}
+}
+
+/*
  * Rename output files enabled changed
  */
 void MainWindow::renameOutputEnabledChanged(bool checked)
@@ -3924,6 +3947,12 @@ void MainWindow::showRenameMacros(const QString &text)
 	if(text.compare("reset", Qt::CaseInsensitive) == 0)
 	{
 		ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+		return;
+	}
+
+	if(text.compare("regexp", Qt::CaseInsensitive) == 0)
+	{
+		MUtils::OS::shell_open(this, "http://www.regular-expressions.info/quickstart.html");
 		return;
 	}
 
@@ -4163,7 +4192,7 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances,        (m_settings->maximumInstancesDefault() < 1));
 	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder,        (!m_settings->customTempPathEnabledDefault()));
 	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation,        m_settings->aftenFastBitAllocationDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxRenameOutput,               m_settings->renameOutputFilesEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxRename_Rename,              m_settings->renameOutputFilesEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmixDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResampleDefault());
 	
