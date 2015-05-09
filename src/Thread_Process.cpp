@@ -380,7 +380,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	outFileName.clear();
 
 	//Make sure the source file exists
-	QFileInfo sourceFile(m_audioFile.filePath());
+	const QFileInfo sourceFile(m_audioFile.filePath());
 	if(!(sourceFile.exists() && sourceFile.isFile()))
 	{
 		handleMessage(QString("%1\n%2").arg(tr("The source audio file could not be found:"), sourceFile.absoluteFilePath()));
@@ -399,7 +399,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 		readTest.close();
 	}
 
-	QString baseName = sourceFile.completeBaseName();
+	const QString baseName = sourceFile.completeBaseName();
 	QDir targetDir(m_outputDirectory.isEmpty() ? sourceFile.canonicalPath() : m_outputDirectory);
 
 	//Prepend relative source file path?
@@ -437,7 +437,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Apply rename pattern
-	QString fileName = applyRenamePattern(baseName, m_audioFile.metaInfo());
+	const QString fileName = MUtils::clean_file_name(applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo())));
 
 	//Generate full output path
 	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, m_encoder->extension());
@@ -493,16 +493,32 @@ QString ProcessThread::applyRenamePattern(const QString &baseName, const AudioFi
 {
 	QString fileName = m_renamePattern;
 	
-	fileName.replace("<BaseName>", STRDEF(baseName, tr("Unknown File Name")), Qt::CaseInsensitive);
-	fileName.replace("<TrackNo>", QString().sprintf("%02d", metaInfo.position()), Qt::CaseInsensitive);
-	fileName.replace("<Title>", STRDEF(metaInfo.title(), tr("Unknown Title")) , Qt::CaseInsensitive);
-	fileName.replace("<Artist>", STRDEF(metaInfo.artist(), tr("Unknown Artist")), Qt::CaseInsensitive);
-	fileName.replace("<Album>", STRDEF(metaInfo.album(), tr("Unknown Album")), Qt::CaseInsensitive);
-	fileName.replace("<Year>", QString().sprintf("%04d", metaInfo.year()), Qt::CaseInsensitive);
-	fileName.replace("<Comment>", STRDEF(metaInfo.comment(), tr("Unknown Comment")), Qt::CaseInsensitive);
-	fileName = MUtils::clean_file_name(fileName);
+	fileName.replace("<BaseName>", STRDEF(baseName, tr("Unknown File Name")),         Qt::CaseInsensitive);
+	fileName.replace("<TrackNo>",  QString().sprintf("%02d", metaInfo.position()),    Qt::CaseInsensitive);
+	fileName.replace("<Title>",    STRDEF(metaInfo.title(), tr("Unknown Title")) ,    Qt::CaseInsensitive);
+	fileName.replace("<Artist>",   STRDEF(metaInfo.artist(), tr("Unknown Artist")),   Qt::CaseInsensitive);
+	fileName.replace("<Album>",    STRDEF(metaInfo.album(), tr("Unknown Album")),     Qt::CaseInsensitive);
+	fileName.replace("<Year>",     QString().sprintf("%04d", metaInfo.year()),        Qt::CaseInsensitive);
+	fileName.replace("<Comment>",  STRDEF(metaInfo.comment(), tr("Unknown Comment")), Qt::CaseInsensitive);
 
 	return fileName;
+}
+
+QString ProcessThread::applyRegularExpression(const QString &fileName)
+{
+	if(m_renameRegExp_Search.isEmpty() || m_renameRegExp_Replace.isEmpty())
+	{
+		return fileName;
+	}
+
+	QRegExp regExp(m_renameRegExp_Search);
+	if(!regExp.isValid())
+	{
+		qWarning("Invalid regular expression detected -> cannot rename!");
+		return fileName;
+	}
+
+	return (QString(fileName).replace(regExp, m_renameRegExp_Replace));
 }
 
 QString ProcessThread::generateTempFileName(void)
@@ -680,8 +696,18 @@ void ProcessThread::addFilter(AbstractFilter *filter)
 
 void ProcessThread::setRenamePattern(const QString &pattern)
 {
-	QString newPattern = pattern.simplified();
+	const QString newPattern = pattern.simplified();
 	if(!newPattern.isEmpty()) m_renamePattern = newPattern;
+}
+
+void ProcessThread::setRenameRegExp(const QString &search, const QString &replace)
+{
+	const QString newSearch = search.trimmed(), newReplace = replace.simplified();
+	if((!newSearch.isEmpty()) && (!newReplace.isEmpty()))
+	{
+		m_renameRegExp_Search  = newSearch;
+		m_renameRegExp_Replace = newReplace;
+	}
 }
 
 void ProcessThread::setOverwriteMode(const bool &bSkipExistingFile, const bool &bReplacesExisting)

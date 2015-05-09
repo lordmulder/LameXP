@@ -616,9 +616,13 @@ void ProcessingDialog::startNextJob(void)
 	{
 		thread->addFilter(new NormalizeFilter(m_settings->normalizationFilterMaxVolume(), m_settings->normalizationFilterDynamic(), m_settings->normalizationFilterCoupled(), m_settings->normalizationFilterSize()));
 	}
-	if(m_settings->renameOutputFilesEnabled() && (!m_settings->renameOutputFilesPattern().simplified().isEmpty()))
+	if(m_settings->renameFiles_renameEnabled() && (!m_settings->renameFiles_renamePattern().simplified().isEmpty()))
 	{
-		thread->setRenamePattern(m_settings->renameOutputFilesPattern());
+		thread->setRenamePattern(m_settings->renameFiles_renamePattern());
+	}
+	if(m_settings->renameFiles_regExpEnabled() && (!m_settings->renameFiles_regExpSearch().trimmed().isEmpty()) && (!m_settings->renameFiles_regExpReplace().simplified().isEmpty()))
+	{
+		thread->setRenameRegExp(m_settings->renameFiles_regExpSearch(), m_settings->renameFiles_regExpReplace());
 	}
 	if(m_settings->overwriteMode() != SettingsModel::Overwrite_KeepBoth)
 	{

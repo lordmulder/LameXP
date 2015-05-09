@@ -487,20 +487,23 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	SET_CHECKBOX_STATE(ui->checkBoxNormalizationFilterCoupled, m_settings->normalizationFilterCoupled());
 	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances,        (m_settings->maximumInstances() < 1));
 	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder,        (!m_settings->customTempPathEnabled()));
-	SET_CHECKBOX_STATE(ui->checkBoxRename_Rename,              m_settings->renameOutputFilesEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxRename_Rename,              m_settings->renameFiles_renameEnabled());
+	SET_CHECKBOX_STATE(ui->checkBoxRename_RegExp,              m_settings->renameFiles_regExpEnabled());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmix());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResample());
 
 	ui->checkBoxNeroAAC2PassMode->setEnabled(aacEncoder == SettingsModel::AAC_ENCODER_NERO);
 	
-	ui->lineEditCustomParamLAME   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::MP3Encoder));
-	ui->lineEditCustomParamOggEnc ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::VorbisEncoder));
-	ui->lineEditCustomParamNeroAAC->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::AACEncoder));
-	ui->lineEditCustomParamFLAC   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::FLACEncoder));
-	ui->lineEditCustomParamAften  ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::AC3Encoder));
-	ui->lineEditCustomParamOpus   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::OpusEncoder));
-	ui->lineEditCustomTempFolder  ->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
-	ui->lineEditRenamePattern     ->setText(m_settings->renameOutputFilesPattern());
+	ui->lineEditCustomParamLAME     ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::MP3Encoder));
+	ui->lineEditCustomParamOggEnc   ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::VorbisEncoder));
+	ui->lineEditCustomParamNeroAAC  ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::AACEncoder));
+	ui->lineEditCustomParamFLAC     ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::FLACEncoder));
+	ui->lineEditCustomParamAften    ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::AC3Encoder));
+	ui->lineEditCustomParamOpus     ->setText(EncoderRegistry::loadEncoderCustomParams(m_settings, SettingsModel::OpusEncoder));
+	ui->lineEditCustomTempFolder    ->setText(QDir::toNativeSeparators(m_settings->customTempPath()));
+	ui->lineEditRenamePattern       ->setText(m_settings->renameFiles_renamePattern());
+	ui->lineEditRenameRegExp_Search ->setText(m_settings->renameFiles_regExpSearch ());
+	ui->lineEditRenameRegExp_Replace->setText(m_settings->renameFiles_regExpReplace());
 	
 	m_evenFilterCustumParamsHelp = new CustomEventFilter();
 	ui->helpCustomParamLAME->installEventFilter(m_evenFilterCustumParamsHelp);
@@ -553,9 +556,13 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->checkBoxUseSystemTempFolder,        SIGNAL(clicked(bool)),                    this, SLOT(useCustomTempFolderChanged(bool)));
 	connect(ui->buttonResetAdvancedOptions,         SIGNAL(clicked()),                        this, SLOT(resetAdvancedOptionsButtonClicked()));
 	connect(ui->checkBoxRename_Rename,              SIGNAL(clicked(bool)),                    this, SLOT(renameOutputEnabledChanged(bool)));
-	connect(ui->checkBoxRename_RegExp,              SIGNAL(clicked(bool)),                    this, SLOT(renameOutputEnabledChanged(bool)));
+	connect(ui->checkBoxRename_RegExp,              SIGNAL(clicked(bool)),                    this, SLOT(renameRegExpEnabledChanged(bool)));
 	connect(ui->lineEditRenamePattern,              SIGNAL(editingFinished()),                this, SLOT(renameOutputPatternChanged()));
 	connect(ui->lineEditRenamePattern,              SIGNAL(textChanged(QString)),             this, SLOT(renameOutputPatternChanged(QString)));
+	connect(ui->lineEditRenameRegExp_Search,        SIGNAL(editingFinished()),                this, SLOT(renameRegExpValueChanged()));
+	connect(ui->lineEditRenameRegExp_Search,        SIGNAL(textChanged(QString)),             this, SLOT(renameRegExpSearchChanged(QString)));
+	connect(ui->lineEditRenameRegExp_Replace,       SIGNAL(editingFinished()),                this, SLOT(renameRegExpValueChanged()));
+	connect(ui->lineEditRenameRegExp_Replace,       SIGNAL(textChanged(QString)),             this, SLOT(renameRegExpReplaceChanged(QString)));
 	connect(ui->labelShowRenameMacros,              SIGNAL(linkActivated(QString)),           this, SLOT(showRenameMacros(QString)));
 	connect(ui->labelShowRegExpHelp,                SIGNAL(linkActivated(QString)),           this, SLOT(showRenameMacros(QString)));
 	connect(ui->checkBoxForceStereoDownmix,         SIGNAL(clicked(bool)),                    this, SLOT(forceStereoDownmixEnabledChanged(bool)));
@@ -1140,6 +1147,8 @@ void MainWindow::changeEvent(QEvent *e)
 	updateLameAlgoQuality(ui->sliderLameAlgoQuality->value());
 	updateMaximumInstances(ui->sliderMaxInstances->value());
 	renameOutputPatternChanged(ui->lineEditRenamePattern->text(), true);
+	renameRegExpSearchChanged (ui->lineEditRenameRegExp_Search ->text(), true);
+	renameRegExpReplaceChanged(ui->lineEditRenameRegExp_Replace->text(), true);
 
 	//Re-install shell integration
 	if(m_settings->shellIntegrationEnabled())
@@ -3887,9 +3896,9 @@ void MainWindow::renameButtonClicked(bool checked)
 /*
  * Rename output files enabled changed
  */
-void MainWindow::renameOutputEnabledChanged(bool checked)
+void MainWindow::renameOutputEnabledChanged(const bool &checked)
 {
-	m_settings->renameOutputFilesEnabled(checked);
+	m_settings->renameFiles_renameEnabled(checked);
 }
 
 /*
@@ -3898,14 +3907,14 @@ void MainWindow::renameOutputEnabledChanged(bool checked)
 void MainWindow::renameOutputPatternChanged(void)
 {
 	QString temp = ui->lineEditRenamePattern->text().simplified();
-	ui->lineEditRenamePattern->setText(temp.isEmpty() ? m_settings->renameOutputFilesPatternDefault() : temp);
-	m_settings->renameOutputFilesPattern(ui->lineEditRenamePattern->text());
+	ui->lineEditRenamePattern->setText(temp.isEmpty() ? m_settings->renameFiles_renamePatternDefault() : temp);
+	m_settings->renameFiles_renamePattern(ui->lineEditRenamePattern->text());
 }
 
 /*
  * Rename output files patterm changed
  */
-void MainWindow::renameOutputPatternChanged(const QString &text, bool silent)
+void MainWindow::renameOutputPatternChanged(const QString &text, const bool &silent)
 {
 	QString pattern(text.simplified());
 	
@@ -3940,13 +3949,101 @@ void MainWindow::renameOutputPatternChanged(const QString &text, bool silent)
 }
 
 /*
+ * Regular expression enabled changed
+ */
+void MainWindow::renameRegExpEnabledChanged(const bool &checked)
+{
+	m_settings->renameFiles_regExpEnabled(checked);
+}
+
+/*
+ * Regular expression value has changed
+ */
+void  MainWindow::renameRegExpValueChanged(void)
+{
+	const QString search  = ui->lineEditRenameRegExp_Search->text() .trimmed();
+	const QString replace = ui->lineEditRenameRegExp_Replace->text().simplified();
+	ui->lineEditRenameRegExp_Search ->setText(search.isEmpty()  ? m_settings->renameFiles_regExpSearchDefault()  : search);
+	ui->lineEditRenameRegExp_Replace->setText(replace.isEmpty() ? m_settings->renameFiles_regExpReplaceDefault() : replace);
+	m_settings->renameFiles_regExpSearch (ui->lineEditRenameRegExp_Search ->text());
+	m_settings->renameFiles_regExpReplace(ui->lineEditRenameRegExp_Replace->text());
+}
+
+/*
+ * Regular expression search pattern has changed
+ */
+void  MainWindow::renameRegExpSearchChanged(const QString &text, const bool &silent)
+{
+	const QString pattern(text.trimmed());
+
+	if((!pattern.isEmpty()) && (!QRegExp(pattern.trimmed()).isValid()))
+	{
+		if(ui->lineEditRenameRegExp_Search->palette().color(QPalette::Text) != Qt::red)
+		{
+			if(!silent) MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
+			SET_TEXT_COLOR(ui->lineEditRenameRegExp_Search, Qt::red);
+		}
+	}
+	else
+	{
+		if(ui->lineEditRenameRegExp_Search->palette() != QPalette())
+		{
+			if(!silent) MUtils::Sound::beep(MUtils::Sound::BEEP_NFO);
+			ui->lineEditRenameRegExp_Search->setPalette(QPalette());
+		}
+	}
+
+	renameRegExpReplaceChanged(ui->lineEditRenameRegExp_Replace->text(), silent);
+}
+
+/*
+ * Regular expression replacement string changed
+ */
+void  MainWindow::renameRegExpReplaceChanged(const QString &text, const bool &silent)
+{
+	QString replacement(text.simplified());
+	const QString search(ui->lineEditRenameRegExp_Search->text().trimmed());
+
+	if(!search.isEmpty())
+	{
+		const QRegExp regexp(search);
+		if(regexp.isValid())
+		{
+			const int count = regexp.captureCount();
+			const QString blank; 
+			for(int i = 0; i < count; i++)
+			{
+				replacement.replace(QString("\\%0").arg(QString::number(i+1)), blank);
+			}
+		}
+	}
+
+	if(replacement.compare(MUtils::clean_file_name(replacement)))
+	{
+		if(ui->lineEditRenameRegExp_Replace->palette().color(QPalette::Text) != Qt::red)
+		{
+			if(!silent) MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
+			SET_TEXT_COLOR(ui->lineEditRenameRegExp_Replace, Qt::red);
+		}
+	}
+	else
+	{
+		if(ui->lineEditRenameRegExp_Replace->palette() != QPalette())
+		{
+			if(!silent) MUtils::Sound::beep(MUtils::Sound::BEEP_NFO);
+			ui->lineEditRenameRegExp_Replace->setPalette(QPalette());
+		}
+	}
+}
+
+/*
  * Show list of rename macros
  */
 void MainWindow::showRenameMacros(const QString &text)
 {
 	if(text.compare("reset", Qt::CaseInsensitive) == 0)
 	{
-		ui->lineEditRenamePattern->setText(m_settings->renameOutputFilesPatternDefault());
+		ui->lineEditRenamePattern->setText(m_settings->renameFiles_renamePatternDefault());
 		return;
 	}
 
@@ -4192,24 +4289,30 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(ui->checkBoxAutoDetectInstances,        (m_settings->maximumInstancesDefault() < 1));
 	SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder,        (!m_settings->customTempPathEnabledDefault()));
 	SET_CHECKBOX_STATE(ui->checkBoxAftenFastAllocation,        m_settings->aftenFastBitAllocationDefault());
-	SET_CHECKBOX_STATE(ui->checkBoxRename_Rename,              m_settings->renameOutputFilesEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxRename_Rename,              m_settings->renameFiles_renameEnabledDefault());
+	SET_CHECKBOX_STATE(ui->checkBoxRename_RegExp,              m_settings->renameFiles_regExpEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmixDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResampleDefault());
 	
-	ui->lineEditCustomParamLAME   ->setText(m_settings->customParametersLAMEDefault());
-	ui->lineEditCustomParamOggEnc ->setText(m_settings->customParametersOggEncDefault());
-	ui->lineEditCustomParamNeroAAC->setText(m_settings->customParametersAacEncDefault());
-	ui->lineEditCustomParamFLAC   ->setText(m_settings->customParametersFLACDefault());
-	ui->lineEditCustomParamOpus   ->setText(m_settings->customParametersOpusEncDefault());
-	ui->lineEditCustomTempFolder  ->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
-	ui->lineEditRenamePattern     ->setText(m_settings->renameOutputFilesPatternDefault());
+	ui->lineEditCustomParamLAME     ->setText(m_settings->customParametersLAMEDefault());
+	ui->lineEditCustomParamOggEnc   ->setText(m_settings->customParametersOggEncDefault());
+	ui->lineEditCustomParamNeroAAC  ->setText(m_settings->customParametersAacEncDefault());
+	ui->lineEditCustomParamFLAC     ->setText(m_settings->customParametersFLACDefault());
+	ui->lineEditCustomParamOpus     ->setText(m_settings->customParametersOpusEncDefault());
+	ui->lineEditCustomTempFolder    ->setText(QDir::toNativeSeparators(m_settings->customTempPathDefault()));
+	ui->lineEditRenamePattern       ->setText(m_settings->renameFiles_renamePatternDefault());
+	ui->lineEditRenameRegExp_Search ->setText(m_settings->renameFiles_regExpSearchDefault());
+	ui->lineEditRenameRegExp_Replace->setText(m_settings->renameFiles_regExpReplaceDefault());
 
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_KeepBoth) ui->radioButtonOverwriteModeKeepBoth->click();
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_SkipFile) ui->radioButtonOverwriteModeSkipFile->click();
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_Replaces) ui->radioButtonOverwriteModeReplaces->click();
 
-	customParamsChanged();
 	ui->scrollArea->verticalScrollBar()->setValue(0);
+	ui->buttonRename_Rename->click();
+	customParamsChanged();
+	renameOutputPatternChanged();
+	renameRegExpValueChanged();
 }
 
 // =========================================================

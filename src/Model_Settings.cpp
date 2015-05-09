@@ -274,8 +274,11 @@ LAMEXP_MAKE_ID(outputDir,                    "OutputDirectory/SelectedPath");
 LAMEXP_MAKE_ID(outputToSourceDir,            "OutputDirectory/OutputToSourceFolder");
 LAMEXP_MAKE_ID(overwriteMode,                "AdvancedOptions/OverwriteMode");
 LAMEXP_MAKE_ID(prependRelativeSourcePath,    "OutputDirectory/PrependRelativeSourcePath");
-LAMEXP_MAKE_ID(renameOutputFilesEnabled,     "AdvancedOptions/RenameOutputFiles/Enabled");
-LAMEXP_MAKE_ID(renameOutputFilesPattern,     "AdvancedOptions/RenameOutputFiles/Pattern");
+LAMEXP_MAKE_ID(renameFiles_regExpEnabled,    "AdvancedOptions/RenameOutputFiles/RegExp/Enabled");
+LAMEXP_MAKE_ID(renameFiles_regExpSearch,     "AdvancedOptions/RenameOutputFiles/RegExp/SearchPattern");
+LAMEXP_MAKE_ID(renameFiles_regExpReplace,    "AdvancedOptions/RenameOutputFiles/RegExp/Replacement");
+LAMEXP_MAKE_ID(renameFiles_renameEnabled,    "AdvancedOptions/RenameOutputFiles/Rename/Enabled");
+LAMEXP_MAKE_ID(renameFiles_renamePattern,    "AdvancedOptions/RenameOutputFiles/Rename/Pattern");
 LAMEXP_MAKE_ID(samplingRate,                 "AdvancedOptions/Common/Resampling");
 LAMEXP_MAKE_ID(shellIntegrationEnabled,      "Flags/EnableShellIntegration");
 LAMEXP_MAKE_ID(slowStartup,                  "Flags/SlowStartupDetected");
@@ -652,8 +655,11 @@ LAMEXP_MAKE_OPTION_S(outputDir, defaultDirectory())
 LAMEXP_MAKE_OPTION_B(outputToSourceDir, false)
 LAMEXP_MAKE_OPTION_I(overwriteMode, Overwrite_KeepBoth)
 LAMEXP_MAKE_OPTION_B(prependRelativeSourcePath, false)
-LAMEXP_MAKE_OPTION_B(renameOutputFilesEnabled, false)
-LAMEXP_MAKE_OPTION_S(renameOutputFilesPattern, "[<TrackNo>] <Artist> - <Title>")
+LAMEXP_MAKE_OPTION_B(renameFiles_regExpEnabled, false)
+LAMEXP_MAKE_OPTION_S(renameFiles_regExpSearch, QString())
+LAMEXP_MAKE_OPTION_S(renameFiles_regExpReplace, QString())
+LAMEXP_MAKE_OPTION_B(renameFiles_renameEnabled, false)
+LAMEXP_MAKE_OPTION_S(renameFiles_renamePattern, "[<TrackNo>] <Artist> - <Title>")
 LAMEXP_MAKE_OPTION_I(samplingRate, 0)
 LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_version_portable())
 LAMEXP_MAKE_OPTION_B(slowStartup, false)

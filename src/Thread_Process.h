@@ -47,6 +47,7 @@ public:
 	
 	QUuid getId(void) { return m_jobId; }
 	void setRenamePattern(const QString &pattern);
+	void setRenameRegExp(const QString &search, const QString &replace);
 	void setOverwriteMode(const bool &bSkipExistingFile, const bool &bReplacesExisting = false);
 	void addFilter(AbstractFilter *filter);
 
@@ -87,6 +88,7 @@ private:
 	void processFile();
 	int generateOutFileName(QString &outFileName);
 	QString applyRenamePattern(const QString &baseName, const AudioFileModel_MetaInfo &metaInfo);
+	QString applyRegularExpression(const QString &fileName);
 	QString generateTempFileName(void);
 	void insertDownmixFilter(void);
 	void insertDownsampleFilter(void);
@@ -104,6 +106,8 @@ private:
 	const bool m_prependRelativeSourcePath;
 	QList<AbstractFilter*> m_filters;
 	QString m_renamePattern;
+	QString m_renameRegExp_Search;
+	QString m_renameRegExp_Replace;
 	int m_overwriteMode;
 	WaveProperties *m_propDetect;
 	QString m_outFileName;

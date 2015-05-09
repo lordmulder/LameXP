@@ -152,9 +152,13 @@ private slots:
 	void refreshFolderContextActionTriggered(void);
 	void removeFileButtonClicked(void);
 	void renameButtonClicked(bool checked);
-	void renameOutputEnabledChanged(bool checked);
+	void renameOutputEnabledChanged(const bool &checked);
 	void renameOutputPatternChanged(void);
-	void renameOutputPatternChanged(const QString &text, bool silent = false);
+	void renameOutputPatternChanged(const QString &text, const bool &silent = false);
+	void renameRegExpEnabledChanged(const bool &checked);
+	void renameRegExpValueChanged(void);
+	void renameRegExpSearchChanged (const QString &text, const bool &silent = false);
+	void renameRegExpReplaceChanged(const QString &text, const bool &silent = false);
 	void resetAdvancedOptionsButtonClicked(void);
 	void restoreCursor(void);
 	void samplingRateChanged(int value);
