@@ -197,6 +197,7 @@ public:
 	LAMEXP_MAKE_OPTION_S(renameFiles_regExpReplace)
 	LAMEXP_MAKE_OPTION_B(renameFiles_renameEnabled)
 	LAMEXP_MAKE_OPTION_S(renameFiles_renamePattern)
+	LAMEXP_MAKE_OPTION_S(renameFiles_fileExtension)
 	LAMEXP_MAKE_OPTION_I(samplingRate)
 	LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled)
 	LAMEXP_MAKE_OPTION_B(slowStartup)

@@ -22,33 +22,41 @@
 
 #pragma once
 
-#include "Encoder_Abstract.h"
+#include <QAbstractItemModel>
+#include <QIcon>
 
-#include <QObject>
-
-class AACEncoder : public AbstractEncoder
+class FileExtsModel : public QAbstractItemModel
 {
 	Q_OBJECT
 
 public:
-	AACEncoder(void);
-	~AACEncoder(void);
+	FileExtsModel(QObject *const parent = 0);
+	~FileExtsModel(void);
 
-	virtual bool encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag);
-	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	virtual const bool needsTimingInfo(void);
-	
-	//Advanced options
-	virtual void setProfile(int profile);
-	virtual void setEnable2Pass(bool enabled);
+	//Model functions
+	int columnCount(const QModelIndex &parent = QModelIndex()) const;
+	int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+	QModelIndex index(int row, int column, const QModelIndex & parent = QModelIndex()) const;
+	QModelIndex parent(const QModelIndex & index) const;
 
-	//Encoder info
-	static const AbstractEncoderInfo *getEncoderInfo(void);
+	//Edit functions
+	bool addOverwrite(QWidget *const parent);
+	bool removeOverwrite(const QModelIndex &index);
+
+	//Export and Import
+	QString exportItems(void) const;
+	void importItems(const QString &data);
+
+signals:
+	void rowAppended(void);
 
 private:
-	const QString m_binary_enc;
-	const QString m_binary_tag;
-	const QString m_binary_sox;
-	int m_configProfile;
-	bool m_configEnable2Pass;
+	QString int2str(const int &value) const;
+
+	QStringList             m_fileExt;
+	QHash<QString, QString> m_replace;
+	const QIcon             m_label_1;
+	const QIcon             m_label_2;
 };

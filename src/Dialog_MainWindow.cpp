@@ -40,6 +40,7 @@
 #include "Model_Settings.h"
 #include "Model_FileList.h"
 #include "Model_FileSystem.h"
+#include "Model_FileExts.h"
 #include "Registry_Encoder.h"
 #include "Registry_Decoder.h"
 #include "Encoder_Abstract.h"
@@ -288,7 +289,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	//--------------------------------
 
 	ui->sourceFileView->setModel(m_fileListModel);
-	ui->sourceFileView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+	ui->sourceFileView->verticalHeader()  ->setResizeMode(QHeaderView::ResizeToContents);
 	ui->sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	ui->sourceFileView->setContextMenuPolicy(Qt::CustomContextMenu);
 	ui->sourceFileView->viewport()->installEventFilter(this);
@@ -522,6 +523,12 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->radioButtonOverwriteModeSkipFile->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile);
 	ui->radioButtonOverwriteModeReplaces->setChecked(m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces);
 
+	FileExtsModel *fileExtModel = new FileExtsModel(this);
+	fileExtModel->importItems(m_settings->renameFiles_fileExtension());
+	ui->tableViewFileExts->setModel(fileExtModel);
+	ui->tableViewFileExts->verticalHeader()  ->setResizeMode(QHeaderView::ResizeToContents);
+	ui->tableViewFileExts->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+
 	connect(ui->sliderLameAlgoQuality,              SIGNAL(valueChanged(int)),                this, SLOT(updateLameAlgoQuality(int)));
 	connect(ui->checkBoxBitrateManagement,          SIGNAL(clicked(bool)),                    this, SLOT(bitrateManagementEnabledChanged(bool)));
 	connect(ui->spinBoxBitrateManagementMin,        SIGNAL(valueChanged(int)),                this, SLOT(bitrateManagementMinChanged(int)));
@@ -572,8 +579,11 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->buttonRename_Rename,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
 	connect(ui->buttonRename_RegExp,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
 	connect(ui->buttonRename_FileEx,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
+	connect(ui->buttonFileExts_Add,                 SIGNAL(clicked()),                        this, SLOT(fileExtAddButtonClicked()));
+	connect(ui->buttonFileExts_Remove,              SIGNAL(clicked()),                        this, SLOT(fileExtRemoveButtonClicked()));
 	connect(m_overwriteButtonGroup,                 SIGNAL(buttonClicked(int)),               this, SLOT(overwriteModeChanged(int)));
 	connect(m_evenFilterCustumParamsHelp,           SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
+	connect(fileExtModel,                           SIGNAL(modelReset()),                     this, SLOT(fileExtModelChanged()));
 
 	//--------------------------------
 	// Force initial GUI update
@@ -4070,6 +4080,38 @@ void MainWindow::showRenameMacros(const QString &text)
 	QMessageBox::information(this, tr("Rename Macros"), message, tr("Discard"));
 }
 
+void MainWindow::fileExtAddButtonClicked(void)
+{
+	if(FileExtsModel *const model = dynamic_cast<FileExtsModel*>(ui->tableViewFileExts->model()))
+	{
+		model->addOverwrite(this);
+	}
+}
+
+void MainWindow::fileExtRemoveButtonClicked(void)
+{
+	if(FileExtsModel *const model = dynamic_cast<FileExtsModel*>(ui->tableViewFileExts->model()))
+	{
+		const QModelIndex selected = ui->tableViewFileExts->currentIndex();
+		if(selected.isValid())
+		{
+			model->removeOverwrite(selected);
+		}
+		else
+		{
+			MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
+		}
+	}
+}
+
+void MainWindow::fileExtModelChanged(void)
+{
+	if(FileExtsModel *const model = dynamic_cast<FileExtsModel*>(ui->tableViewFileExts->model()))
+	{
+		m_settings->renameFiles_fileExtension(model->exportItems());
+	}
+}
+
 void MainWindow::forceStereoDownmixEnabledChanged(bool checked)
 {
 	m_settings->forceStereoDownmix(checked);
@@ -4307,6 +4349,11 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_KeepBoth) ui->radioButtonOverwriteModeKeepBoth->click();
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_SkipFile) ui->radioButtonOverwriteModeSkipFile->click();
 	if(m_settings->overwriteModeDefault() == SettingsModel::Overwrite_Replaces) ui->radioButtonOverwriteModeReplaces->click();
+
+	if(FileExtsModel *const model = dynamic_cast<FileExtsModel*>(ui->tableViewFileExts->model()))
+	{
+		model->importItems(m_settings->renameFiles_fileExtensionDefault());
+	}
 
 	ui->scrollArea->verticalScrollBar()->setValue(0);
 	ui->buttonRename_Rename->click();

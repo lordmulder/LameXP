@@ -23,6 +23,7 @@
 #pragma once
 
 #include <QObject>
+#include <QStringList>
 
 class AbstractEncoder;
 class AbstractEncoderInfo;
@@ -46,5 +47,6 @@ public:
 	static QString loadEncoderCustomParams(const SettingsModel *settings, const int encoderId);
 
 	static void resetAllEncoders(SettingsModel *settings);
+	static QStringList getOutputFileExtensions(void);
 	static int getAacEncoder(void);
 };

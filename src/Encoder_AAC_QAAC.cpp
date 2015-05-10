@@ -119,6 +119,12 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "QAAC/QuickTime (\x0C2\x0A9 Apple Inc.)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "mp4";
+		return s_extension;
+	}
 }
 static const g_qaacEncoderInfo;
 
@@ -263,11 +269,6 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	}
 
 	return true;
-}
-
-QString QAACEncoder::extension(void)
-{
-	return "mp4";
 }
 
 bool QAACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

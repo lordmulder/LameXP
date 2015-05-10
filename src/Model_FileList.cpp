@@ -40,6 +40,16 @@
 #define CHECK_HDR(STR,NAM) (!(STR).compare((NAM), Qt::CaseInsensitive))
 #define MAKE_KEY(PATH) (QDir::fromNativeSeparators(PATH).toLower())
 
+static inline int LOG10(int x)
+{
+	int ret = 1;
+	while(x >= 10)
+	{
+		ret++; x /= 10;
+	}
+	return ret;
+}
+
 ////////////////////////////////////////////////////////////
 // Constructor & Destructor
 ////////////////////////////////////////////////////////////
@@ -71,7 +81,7 @@ int FileListModel::rowCount(const QModelIndex &parent) const
 
 QVariant FileListModel::data(const QModelIndex &index, int role) const
 {
-	if((role == Qt::DisplayRole || role == Qt::ToolTipRole) && index.row() < m_fileList.count() && index.row() >= 0)
+	if(((role == Qt::DisplayRole) || (role == Qt::ToolTipRole)) && (index.row() < m_fileList.count()) && (index.row() >= 0))
 	{
 		switch(index.column())
 		{
@@ -86,7 +96,7 @@ QVariant FileListModel::data(const QModelIndex &index, int role) const
 			break;
 		}		
 	}
-	else if(role == Qt::DecorationRole && index.column() == 0)
+	else if((role == Qt::DecorationRole) && (index.column() == 0))
 	{
 		return m_fileIcon;
 	}
@@ -117,22 +127,7 @@ QVariant FileListModel::headerData(int section, Qt::Orientation orientation, int
 		}
 		else
 		{
-			if(m_fileList.count() < 10)
-			{
-				return QVariant(QString().sprintf("%d", section + 1));
-			}
-			else if(m_fileList.count() < 100)
-			{
-				return QVariant(QString().sprintf("%02d", section + 1));
-			}
-			else if(m_fileList.count() < 1000)
-			{
-				return QVariant(QString().sprintf("%03d", section + 1));
-			}
-			else
-			{
-				return QVariant(QString().sprintf("%04d", section + 1));
-			}
+			return int2str(section + 1);
 		}
 	}
 	else
@@ -526,4 +521,17 @@ bool FileListModel::checkArray(const bool *a, const bool val, size_t len)
 	}
 
 	return false;
+}
+
+QString FileListModel::int2str(const int &value) const
+{
+	if(m_fileList.count() < 10)
+	{
+		return QString().sprintf("%d", value);
+	}
+	else
+	{
+		const QString format = QString().sprintf("%%0%dd", LOG10(m_fileList.count()));
+		return QString().sprintf(format.toLatin1().constData(), value);
+	}
 }

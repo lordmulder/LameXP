@@ -108,6 +108,12 @@ class MP3EncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "LAME MP3 Encoder";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "mp3";
+		return s_extension;
+	}
 }
 static const g_mp3EncoderInfo;
 
@@ -283,11 +289,6 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	}
 	
 	return true;
-}
-
-QString MP3Encoder::extension(void)
-{
-	return "mp3";
 }
 
 bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

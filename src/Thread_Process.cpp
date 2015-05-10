@@ -440,7 +440,8 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	const QString fileName = MUtils::clean_file_name(applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo())));
 
 	//Generate full output path
-	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, m_encoder->extension());
+	const QString fileExt = QString::fromUtf8(m_encoder->getEncoderInfo()->extension());
+	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, fileExt);
 
 	//Skip file, if target file exists (optional!)
 	if((m_overwriteMode == OverwriteMode_SkipExisting) && QFileInfo(outFileName).exists())
@@ -476,7 +477,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	//Generate final name
 	while(QFileInfo(outFileName).exists() && (n < (INT_MAX/2)))
 	{
-		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), fileName, QString::number(++n), m_encoder->extension());
+		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), fileName, QString::number(++n), fileExt);
 	}
 
 	//Create placeholder

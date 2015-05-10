@@ -109,6 +109,12 @@ class DCAEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "dcaenc-2 by Alexander E. Patrakov";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "dts";
+		return s_extension;
+	}
 }
 static const g_dcaEncoderInfo;
 
@@ -205,11 +211,6 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	}
 	
 	return true;
-}
-
-QString DCAEncoder::extension(void)
-{
-	return "dts";
 }
 
 bool DCAEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

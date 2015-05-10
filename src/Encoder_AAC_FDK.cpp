@@ -114,6 +114,12 @@ class FDKAACEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "fdkaac (libfdk-aac encoder)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "mp4";
+		return s_extension;
+	}
 }
 static const g_fdkAacEncoderInfo;
 
@@ -253,11 +259,6 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	}
 
 	return true;
-}
-
-QString FDKAACEncoder::extension(void)
-{
-	return "mp4";
 }
 
 bool FDKAACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

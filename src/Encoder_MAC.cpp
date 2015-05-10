@@ -103,6 +103,12 @@ class MACEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "Monkey's Audio (MAC)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "ape";
+		return s_extension;
+	}
 }
 static const g_macEncoderInfo;
 
@@ -276,11 +282,6 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	}
 
 	return true;
-}
-
-QString MACEncoder::extension(void)
-{
-	return "ape";
 }
 
 bool MACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

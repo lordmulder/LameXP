@@ -108,6 +108,12 @@ class AACEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "Nero AAC Encoder (\x0C2\x0A9 Nero AG)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "mp4";
+		return s_extension;
+	}
 }
 static const g_aacEncoderInfo;
 
@@ -344,11 +350,6 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	}
 
 	return true;
-}
-
-QString AACEncoder::extension(void)
-{
-	return "mp4";
 }
 
 bool AACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

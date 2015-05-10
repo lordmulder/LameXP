@@ -105,6 +105,12 @@ public:
 		static const char* s_description = "Wave Audio (PCM)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "wav";
+		return s_extension;
+	}
 }
 static const g_waveEncoderInfo;
 
@@ -169,11 +175,6 @@ bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	delete [] outBuffer;
 
 	return (result == 0 && fileOperation.fAnyOperationsAborted == false);
-}
-
-QString WaveEncoder::extension(void)
-{
-	return "wav";
 }
 
 bool WaveEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

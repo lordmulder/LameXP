@@ -48,11 +48,12 @@ public:
 	}
 	value_type_t;
 
-	virtual bool isModeSupported(int mode) const = 0;	//Returns whether the encoder does support the current RC mode
-	virtual int valueCount(int mode) const = 0;			//The number of bitrate/quality values for current RC mode
+	virtual bool isModeSupported(int mode)   const = 0;	//Returns whether the encoder does support the current RC mode
+	virtual int valueCount(int mode)         const = 0;	//The number of bitrate/quality values for current RC mode
 	virtual int valueAt(int mode, int index) const = 0;	//The bitrate/quality value at 'index' for the current RC mode
-	virtual int valueType(int mode) const = 0;			//The display type of the values for the current RC mode
-	virtual const char* description(void) const = 0;	//Description of the encoder that can be displayed to the user
+	virtual int valueType(int mode)          const = 0;	//The display type of the values for the current RC mode
+	virtual const char* description(void)    const = 0;	//Description of the encoder that can be displayed to the user
+	virtual const char* extension(void)      const = 0;	//The default file extension for files created by this encoder
 };
 
 class AbstractEncoder : public AbstractTool
@@ -66,7 +67,6 @@ public:
 	//Internal encoder API
 	virtual bool encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag) = 0;
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion) = 0;
-	virtual QString extension(void) = 0;
 	virtual const unsigned int *supportedSamplerates(void);
 	virtual const unsigned int *supportedChannelCount(void);
 	virtual const unsigned int *supportedBitdepths(void);

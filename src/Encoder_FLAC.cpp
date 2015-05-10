@@ -103,6 +103,12 @@ public:
 		static const char* s_description = "Free Lossless Audio Codec (FLAC)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "flac";
+		return s_extension;
+	}
 }
 static const g_flacEncoderInfo;
 
@@ -214,11 +220,6 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	}
 	
 	return true;
-}
-
-QString FLACEncoder::extension(void)
-{
-	return "flac";
 }
 
 bool FLACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

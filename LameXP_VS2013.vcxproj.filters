@@ -415,6 +415,12 @@
     <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_FDK.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\Model_FileExts.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\MOC_Model_FileExts.cpp">
+      <Filter>Generated Files\MOC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -760,6 +766,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Encoder_AAC_FDK.h">
       <Filter>Header Files\Encoders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\Model_FileExts.h">
+      <Filter>Header Files\Models</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

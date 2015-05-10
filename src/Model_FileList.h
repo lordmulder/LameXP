@@ -88,5 +88,6 @@ private:
 	QHash<QString, AudioFileModel> m_fileStore;
 	const QIcon m_fileIcon;
 
+	QString int2str(const int &value) const;
 	static bool checkArray(const bool *a, const bool val, size_t len);
 };

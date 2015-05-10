@@ -480,6 +480,24 @@ void EncoderRegistry::resetAllEncoders(SettingsModel *settings)
 }
 
 ////////////////////////////////////////////////////////////
+// Get File Extensions
+////////////////////////////////////////////////////////////
+
+QStringList EncoderRegistry::getOutputFileExtensions(void)
+{
+	QStringList list;
+	for(int encoderId = SettingsModel::MP3Encoder; encoderId < SettingsModel::ENCODER_COUNT; encoderId++)
+	{
+		if((encoderId == SettingsModel::AACEncoder) && (getAacEncoder() == SettingsModel::AAC_ENCODER_NONE))
+		{
+			continue;
+		}
+		list << QString::fromLatin1(getEncoderInfo(encoderId)->extension());
+	}
+	return list;
+}
+
+////////////////////////////////////////////////////////////
 // Static Functions
 ////////////////////////////////////////////////////////////
 

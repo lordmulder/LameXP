@@ -279,6 +279,7 @@ LAMEXP_MAKE_ID(renameFiles_regExpSearch,     "AdvancedOptions/RenameOutputFiles/
 LAMEXP_MAKE_ID(renameFiles_regExpReplace,    "AdvancedOptions/RenameOutputFiles/RegExp/Replacement");
 LAMEXP_MAKE_ID(renameFiles_renameEnabled,    "AdvancedOptions/RenameOutputFiles/Rename/Enabled");
 LAMEXP_MAKE_ID(renameFiles_renamePattern,    "AdvancedOptions/RenameOutputFiles/Rename/Pattern");
+LAMEXP_MAKE_ID(renameFiles_fileExtension,    "AdvancedOptions/RenameOutputFiles/FileExtensions/Overwrite");
 LAMEXP_MAKE_ID(samplingRate,                 "AdvancedOptions/Common/Resampling");
 LAMEXP_MAKE_ID(shellIntegrationEnabled,      "Flags/EnableShellIntegration");
 LAMEXP_MAKE_ID(slowStartup,                  "Flags/SlowStartupDetected");
@@ -660,6 +661,7 @@ LAMEXP_MAKE_OPTION_S(renameFiles_regExpSearch, QString())
 LAMEXP_MAKE_OPTION_S(renameFiles_regExpReplace, QString())
 LAMEXP_MAKE_OPTION_B(renameFiles_renameEnabled, false)
 LAMEXP_MAKE_OPTION_S(renameFiles_renamePattern, "[<TrackNo>] <Artist> - <Title>")
+LAMEXP_MAKE_OPTION_S(renameFiles_fileExtension, QString())
 LAMEXP_MAKE_OPTION_I(samplingRate, 0)
 LAMEXP_MAKE_OPTION_B(shellIntegrationEnabled, !lamexp_version_portable())
 LAMEXP_MAKE_OPTION_B(slowStartup, false)

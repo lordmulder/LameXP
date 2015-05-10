@@ -105,6 +105,12 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "OggEnc2 Vorbis Encoder (aoTuV)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "ogg";
+		return s_extension;
+	}
 }
 static const g_vorbisEncoderInfo;
 
@@ -241,11 +247,6 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	}
 	
 	return true;
-}
-
-QString VorbisEncoder::extension(void)
-{
-	return "ogg";
 }
 
 bool VorbisEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

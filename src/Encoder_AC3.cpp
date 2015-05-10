@@ -107,6 +107,12 @@ class AC3EncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "Aften: A/52 Audio Encoder";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "ac3";
+		return s_extension;
+	}
 }
 static const g_aftenEncoderInfo;
 
@@ -259,11 +265,6 @@ void AC3Encoder::setExponentSearchSize(int value)
 void AC3Encoder::setFastBitAllocation(bool value)
 {
 	m_configFastBitAllocation = value;
-}
-
-QString AC3Encoder::extension(void)
-{
-	return "ac3";
 }
 
 const unsigned int *AC3Encoder::supportedChannelCount(void)

@@ -98,6 +98,12 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 		static const char* s_description = "Opus-Tools OpusEnc (libopus)";
 		return s_description;
 	}
+
+	virtual const char *extension(void) const
+	{
+		static const char* s_extension = "opus";
+		return s_extension;
+	}
 }
 static const g_opusEncoderInfo;
 
@@ -264,11 +270,6 @@ void OpusEncoder::setEncodeComplexity(int complexity)
 void OpusEncoder::setFrameSize(int frameSize)
 {
 	m_configFrameSize = qBound(0, frameSize, 5);
-}
-
-QString OpusEncoder::extension(void)
-{
-	return "opus";
 }
 
 bool OpusEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

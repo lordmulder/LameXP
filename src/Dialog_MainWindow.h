@@ -106,6 +106,9 @@ private slots:
 	void encodeButtonClicked(void);
 	void exportCsvContextActionTriggered(void);
 	void fileDownButtonClicked(void);
+	void fileExtAddButtonClicked();
+	void fileExtModelChanged();
+	void fileExtRemoveButtonClicked();
 	void fileUpButtonClicked(void);
 	void findFileContextActionTriggered(void);
 	void forceStereoDownmixEnabledChanged(bool checked);
