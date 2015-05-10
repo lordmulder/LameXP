@@ -292,6 +292,20 @@ void FileExtsModel::importItems(const QString &data)
 }
 
 ////////////////////////////////////////////////////////////
+// Apply Replacement
+////////////////////////////////////////////////////////////
+
+QString FileExtsModel::apply(const QString &originalExtension) const
+{
+	if((!m_replace.isEmpty()) && m_replace.contains(originalExtension.toLower()))
+	{
+		return m_replace.value(originalExtension);
+	}
+	return originalExtension;
+}
+
+
+////////////////////////////////////////////////////////////
 // Private Functions
 ////////////////////////////////////////////////////////////
 

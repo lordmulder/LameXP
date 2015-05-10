@@ -3030,27 +3030,27 @@
         <translation type="unfinished">대상 출력 디렉터리에 쓰기 불가:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="497"/>
+        <location filename="../../src/Thread_Process.cpp" line="498"/>
         <source>Unknown File Name</source>
         <translation type="unfinished">알수 없는 파일명</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="499"/>
+        <location filename="../../src/Thread_Process.cpp" line="500"/>
         <source>Unknown Title</source>
         <translation type="unfinished">알수 없는 제목</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="500"/>
+        <location filename="../../src/Thread_Process.cpp" line="501"/>
         <source>Unknown Artist</source>
         <translation type="unfinished">알수 없는 가수</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="501"/>
+        <location filename="../../src/Thread_Process.cpp" line="502"/>
         <source>Unknown Album</source>
         <translation type="unfinished">알수 없는 앨범</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="503"/>
+        <location filename="../../src/Thread_Process.cpp" line="504"/>
         <source>Unknown Comment</source>
         <translation type="unfinished">알수 없는 설명</translation>
     </message>
@@ -3071,22 +3071,22 @@
         <translation type="unfinished">건너뜀.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="449"/>
+        <location filename="../../src/Thread_Process.cpp" line="450"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation type="unfinished">대상 출력 파일이 이미 존재합니다. 건너뛰기할 파일:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="450"/>
+        <location filename="../../src/Thread_Process.cpp" line="451"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation type="unfinished">기존 파일을 건너뛰기하지 않으려면, 덮어쓰기 방식을 변경하시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="457"/>
+        <location filename="../../src/Thread_Process.cpp" line="458"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation type="unfinished">대상 출력 파일이 이미 존재합니다. 건너뛰기할 파일:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation type="unfinished">기존 대상 파일 삭제 실패. 다른 파일명으로 저장됩니다!</translation>
     </message>
@@ -3119,99 +3119,99 @@
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="218"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="215"/>
         <source>Show details for selected job</source>
         <translation type="unfinished">선택 작업 자세히 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="216"/>
         <source>Browse Output File Location</source>
         <translation type="unfinished">출력 파일 위치 찾아보기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="283"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="284"/>
         <source>Encoding Files</source>
         <translation type="unfinished">인코딩 파일</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="283"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="284"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation type="unfinished">파일을 인코딩하고 있습니다. 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="502"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="490"/>
         <source>Encoding files, please wait...</source>
         <translation type="unfinished">파일 인코딩 중, 잠시만 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="546"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="534"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation type="unfinished">멀티-쓰레딩 활성화: %1 인스턴스 동시 실행!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="660"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="652"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation type="unfinished">중단됨! 종료를 위해 실행중인 작업을 대기 중...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="693"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="685"/>
         <source>Creating the playlist file, please wait...</source>
         <translation type="unfinished">재생 목록 파일 생성 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="703"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="695"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation type="unfinished">처리가 사용자에 의해 완전히 중단되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="696"/>
         <source>LameXP - Aborted</source>
         <translation type="unfinished">LameXP - 중단됨</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="696"/>
         <source>Process was aborted by the user.</source>
         <translation type="unfinished">처리가 사용자에 의해 중단되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="730"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="722"/>
         <source>LameXP - Error</source>
         <translation type="unfinished">LameXP - 오류</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="730"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="722"/>
         <source>At least one file has failed!</source>
         <translation type="unfinished">최소한 한 개의 파일이 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="746"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="748"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="738"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="740"/>
         <source>All files completed successfully.</source>
         <translation type="unfinished">모든 파일을 성공적으로 인코딩 완료하였습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="748"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="740"/>
         <source>LameXP - Done</source>
         <translation type="unfinished">LameXP - 완료</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1041"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1033"/>
         <source>Playlist creation failed</source>
         <translation type="unfinished">재생 목록 생성 실패</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1041"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1033"/>
         <source>The playlist file could not be created:</source>
         <translation type="unfinished">재생 목록 파일을 생성할 수 없음:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1097"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation type="unfinished">경고: 컴퓨터가 %1초 후 종료됩니다...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1101"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1102"/>
         <source>Cancel Shutdown</source>
         <translation type="unfinished">컴퓨터 종료 취소</translation>
     </message>
@@ -3234,112 +3234,112 @@
         <translation type="unfinished">여유 디스크 공간(임시 폴더)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>Process finished after %1.</source>
         <translation type="unfinished">작업 경과 시간: %1 소요됨.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
         <source>Filter Log Items</source>
         <translation type="unfinished">필터링 로그 항목</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="227"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
         <source>Show Running Only</source>
         <translation type="unfinished">실행 중인 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
         <source>Show Succeeded Only</source>
         <translation type="unfinished">성공한 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Show Failed Only</source>
         <translation type="unfinished">실패된 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="227"/>
         <source>Show Skipped Only</source>
         <translation type="unfinished">건너뛴 항목만 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
         <source>Show All Items</source>
         <translation type="unfinished">모든 항목 표시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="942"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="934"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>현재 필터링 규칙과 일치하지 항목이 없습니다.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="703"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="695"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation type="unfinished">
             <numerusform>%n 파일 후 사용자에 의해 작업이 취소되었습니다!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1161"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1153"/>
         <source>%n hour(s)</source>
         <translation type="unfinished">
             <numerusform>%n 시간</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1162"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1166"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1154"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1158"/>
         <source>%n minute(s)</source>
         <translation type="unfinished">
             <numerusform>%n 분</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1167"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1171"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1159"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1163"/>
         <source>%n second(s)</source>
         <translation type="unfinished">
             <numerusform>%n 초</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1172"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1164"/>
         <source>%n millisecond(s)</source>
         <translation type="unfinished">
             <numerusform>%n ms</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="671"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="663"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
             <numerusform>인코딩: 현재 %n / %1 파일 완료됨, 잠시만 기다려 주십시오...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="724"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="716"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform>오류: %1/%n 파일 실패 (%2). 자세한 정보를 보려면 실패 항목을 더블 클릭하십시오!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="724"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="716"/>
         <source>%n file(s) skipped</source>
         <translation type="unfinished">
             <numerusform>%n 파일 건너뜀</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="728"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="720"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation type="unfinished">
             <numerusform>오류: : %1 / %n 파일 실패. 자세한 정보를 보려면 실패 항목을 더블 클릭하십시오!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="742"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="734"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation type="unfinished">
             <numerusform>모든 파일들이 성공적으로 완료되었습니다. %n 파일 건너뜀.</numerusform>

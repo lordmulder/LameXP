@@ -44,6 +44,7 @@ class QThreadPool;
 class QElapsedTimer;
 class RAMObserverThread;
 class SettingsModel;
+class FileExtsModel;
 
 enum lamexp_shutdownFlag_t
 {
@@ -70,7 +71,7 @@ class ProcessingDialog : public QDialog
 	Q_OBJECT
 
 public:
-	ProcessingDialog(FileListModel *fileListModel, const AudioFileModel_MetaInfo *metaInfo, SettingsModel *settings, QWidget *parent = 0);
+	ProcessingDialog(FileListModel *const fileListModel, const AudioFileModel_MetaInfo *const metaInfo, const SettingsModel *const settings, QWidget *const parent = 0);
 	~ProcessingDialog(void);
 	
 	int getShutdownFlag(void) { return m_shutdownFlag; }
@@ -113,17 +114,17 @@ private:
 	bool shutdownComputer(void);
 	QString time2text(const qint64 &msec) const;
 	
-	QThreadPool *m_threadPool;
+	QScopedPointer<QThreadPool> m_threadPool;
 	QList<AudioFileModel> m_pendingJobs;
-	SettingsModel *m_settings;
+	const SettingsModel *const m_settings;
 	const AudioFileModel_MetaInfo *const m_metaInfo;
-	QMovie *m_progressIndicator;
-	ProgressModel *m_progressModel;
+	QScopedPointer<QMovie> m_progressIndicator;
+	QScopedPointer<ProgressModel> m_progressModel;
 	QMap<QUuid,QString> m_playList;
-	QMenu *m_contextMenu;
-	QActionGroup *m_progressViewFilterGroup;
-	QLabel *m_filterInfoLabel;
-	QLabel *m_filterInfoLabelIcon;
+	QScopedPointer<QMenu> m_contextMenu;
+	QScopedPointer<QActionGroup> m_progressViewFilterGroup;
+	QScopedPointer<QLabel> m_filterInfoLabel;
+	QScopedPointer<QLabel> m_filterInfoLabelIcon;
 	unsigned int m_initThreads;
 	unsigned int m_runningThreads;
 	unsigned int m_currentFile;
@@ -134,13 +135,14 @@ private:
 	bool m_userAborted;
 	bool m_forcedAbort;
 	bool m_firstShow;
-	QSystemTrayIcon *m_systemTray;
+	QScopedPointer<QSystemTrayIcon> m_systemTray;
 	int m_shutdownFlag;
-	CPUObserverThread *m_cpuObserver;
-	RAMObserverThread *m_ramObserver;
-	DiskObserverThread *m_diskObserver;
+	QScopedPointer<CPUObserverThread>  m_cpuObserver;
+	QScopedPointer<RAMObserverThread>  m_ramObserver;
+	QScopedPointer<DiskObserverThread> m_diskObserver;
 	QScopedPointer<QElapsedTimer> m_totalTime;
 	int m_progressViewFilter;
-	QColor *m_defaultColor;
+	QScopedPointer<QColor> m_defaultColor;
+	QScopedPointer<FileExtsModel> m_fileExts;
 	QScopedPointer<MUtils::Taskbar7> m_taskbar;
 };

@@ -3047,27 +3047,27 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Le répertoire de sortie cible n&apos;est pas accessible en écriture:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="497"/>
+        <location filename="../../src/Thread_Process.cpp" line="498"/>
         <source>Unknown File Name</source>
         <translation>Nom de fichier inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="499"/>
+        <location filename="../../src/Thread_Process.cpp" line="500"/>
         <source>Unknown Title</source>
         <translation>Titre inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="500"/>
+        <location filename="../../src/Thread_Process.cpp" line="501"/>
         <source>Unknown Artist</source>
         <translation>Artiste inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="501"/>
+        <location filename="../../src/Thread_Process.cpp" line="502"/>
         <source>Unknown Album</source>
         <translation>Album inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="503"/>
+        <location filename="../../src/Thread_Process.cpp" line="504"/>
         <source>Unknown Comment</source>
         <translation>Commentaire inconnu</translation>
     </message>
@@ -3089,22 +3089,22 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Ignorée.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="449"/>
+        <location filename="../../src/Thread_Process.cpp" line="450"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Le fichier de sortie existe déjà, vous allez ignorer ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="450"/>
+        <location filename="../../src/Thread_Process.cpp" line="451"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Si vous ne voulez pas ignorer les fichiers existants, veuillez changer le mode de remplacement !</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="457"/>
+        <location filename="../../src/Thread_Process.cpp" line="458"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Le fichier de sortie existe déjà, vous allez supprimer ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Impossible de supprimer le fichier existant, voulez-vous l&apos;enregistrer sous un autre nom !</translation>
     </message>
@@ -3132,88 +3132,88 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="218"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="215"/>
         <source>Show details for selected job</source>
         <translation>Afficher les détails pour travail sélectionné</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="283"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="284"/>
         <source>Encoding Files</source>
         <translation>Encodage des fichiers</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="283"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="284"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>Vos fichiers sont en cours d&apos;encodage, veuillez être patient...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="502"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="490"/>
         <source>Encoding files, please wait...</source>
         <translation>Encodage des fichiers, patientez...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="660"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="652"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Abandonné ! En attente pour la fin de l&apos;exécution des travaux...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="693"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="685"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Création de la liste de lecture, patientez...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="696"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Abandonné</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="704"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="696"/>
         <source>Process was aborted by the user.</source>
         <translation>Le processus a été abandonné par l&apos;utilisateur.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="730"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="722"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Erreur</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="730"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="722"/>
         <source>At least one file has failed!</source>
         <translation>Au moins un fichier n&apos;a pas réussi!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="746"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="748"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="738"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="740"/>
         <source>All files completed successfully.</source>
         <translation>Tous les fichiers terminés avec succès.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="748"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="740"/>
         <source>LameXP - Done</source>
         <translation>LameXP - -Fait</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1041"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1033"/>
         <source>Playlist creation failed</source>
         <translation>La création de liste de lecture a échoué</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1041"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1033"/>
         <source>The playlist file could not be created:</source>
         <translation>La liste de lecture n&apos;a pas pu être créée:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="703"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="695"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Le processus a été abandonné prématurément par l&apos;utilisateur !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="546"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="534"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Multi-threading activé : %1 instances en cours d&apos;exécution en parallèle !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="216"/>
         <source>Browse Output File Location</source>
         <translation>Rechercher l&apos;emplacement du fichier de sortie</translation>
     </message>
@@ -3223,13 +3223,13 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Arrêter l&apos;ordinateur dès que tous les fichiers ont été convertis</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1097"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Avertissement : l&apos;ordinateur s&apos;éteindra dans %1 secondes...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1109"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1101"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1102"/>
         <source>Cancel Shutdown</source>
         <translation>Annuler l&apos;extinction</translation>
     </message>
@@ -3252,48 +3252,48 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Espace disque libre (dossier Temp)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="705"/>
         <source>Process finished after %1.</source>
         <translation>Processus terminé après %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
         <source>Filter Log Items</source>
         <translatorcomment>Filtrer les éléments du journal</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="227"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
         <source>Show Running Only</source>
         <translation>Afficher uniquement les fichiers en cours</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
         <source>Show Succeeded Only</source>
         <translation>Affichier uniquement les fichiers terminés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Show Failed Only</source>
         <translation>Afficher uniquement les échecs</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="227"/>
         <source>Show Skipped Only</source>
         <translation>Afficher uniquement les fichiers ignorés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
         <source>Show All Items</source>
         <translation>Afficher tous les éléments</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="942"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="934"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Les règles de filtrage actuelles ne correspondent à aucun des éléments</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="703"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="695"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>Le processus a été interrompu par l&apos;utilisateur après %n fichier !</numerusform>
@@ -3301,7 +3301,7 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1161"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1153"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n heure</numerusform>
@@ -3309,8 +3309,8 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1162"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1166"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1154"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1158"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n minute</numerusform>
@@ -3318,8 +3318,8 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1167"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1171"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1159"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1163"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n seconde</numerusform>
@@ -3327,7 +3327,7 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1172"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1164"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n milliseconde</numerusform>
@@ -3335,7 +3335,7 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="671"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="663"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Encodage : %n fichier sur %1 terminé pour l&apos;instant, veuillez patienter...</numerusform>
@@ -3343,7 +3343,7 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="724"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="716"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Erreur : %1 sur %n fichier échoué (%2). Double-cliquez sur l&apos;élément défaillant pour plus d&apos;informations !</numerusform>
@@ -3351,7 +3351,7 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="724"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="716"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n fichier ignoré</numerusform>
@@ -3359,7 +3359,7 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="728"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="720"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Erreur : %1 sur %n fichier échoué. Double-cliquez sur l&apos;élément défaillant pour plus d&apos;informations !</numerusform>
@@ -3367,7 +3367,7 @@ Ouvrir le dossier récursivement...</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="742"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="734"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Tous les fichiers terminés avec succès. %n fichier ignoré.</numerusform>

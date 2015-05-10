@@ -30,6 +30,7 @@
 #include "Model_FileList.h"
 #include "Model_Progress.h"
 #include "Model_Settings.h"
+#include "Model_FileExts.h"
 #include "Thread_Process.h"
 #include "Thread_CPUObserver.h"
 #include "Thread_RAMObserver.h"
@@ -148,7 +149,7 @@ private:
 // Constructor
 ////////////////////////////////////////////////////////////
 
-ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFileModel_MetaInfo *metaInfo, SettingsModel *settings, QWidget *parent)
+ProcessingDialog::ProcessingDialog(FileListModel *const fileListModel, const AudioFileModel_MetaInfo *const metaInfo, const SettingsModel *const settings, QWidget *const parent)
 :
 	QDialog(parent),
 	ui(new Ui::ProcessingDialog),
@@ -157,10 +158,6 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	m_settings(settings),
 	m_metaInfo(metaInfo),
 	m_shutdownFlag(SHUTDOWN_FLAG_NONE),
-	m_threadPool(NULL),
-	m_diskObserver(NULL),
-	m_cpuObserver(NULL),
-	m_ramObserver(NULL),
 	m_progressViewFilter(-1),
 	m_initThreads(0),
 	m_defaultColor(new QColor()),
@@ -193,34 +190,34 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	connect(ui->button_AbortProcess, SIGNAL(clicked()), this, SLOT(abortEncoding()));
 	
 	//Init progress indicator
-	m_progressIndicator = new QMovie(":/images/Working.gif");
+	m_progressIndicator.reset(new QMovie(":/images/Working.gif"));
 	m_progressIndicator->setCacheMode(QMovie::CacheAll);
-	ui->label_headerWorking->setMovie(m_progressIndicator);
+	ui->label_headerWorking->setMovie(m_progressIndicator.data());
 	ui->progressBar->setValue(0);
 
 	//Init progress model
-	m_progressModel = new ProgressModel();
-	ui->view_log->setModel(m_progressModel);
+	m_progressModel.reset(new ProgressModel());
+	ui->view_log->setModel(m_progressModel.data());
 	ui->view_log->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	ui->view_log->verticalHeader()->hide();
 	ui->view_log->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	ui->view_log->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
 	ui->view_log->viewport()->installEventFilter(this);
-	connect(m_progressModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
-	connect(m_progressModel, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)), this, SLOT(progressModelChanged()));
-	connect(m_progressModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
-	connect(m_progressModel, SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
+	connect(m_progressModel.data(), SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
+	connect(m_progressModel.data(), SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)), this, SLOT(progressModelChanged()));
+	connect(m_progressModel.data(), SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(progressModelChanged()));
+	connect(m_progressModel.data(), SIGNAL(modelReset()), this, SLOT(progressModelChanged()));
 	connect(ui->view_log, SIGNAL(activated(QModelIndex)), this, SLOT(logViewDoubleClicked(QModelIndex)));
 	connect(ui->view_log->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(logViewSectionSizeChanged(int,int,int)));
 
 	//Create context menu
-	m_contextMenu = new QMenu();
-	QAction *contextMenuDetailsAction = m_contextMenu->addAction(QIcon(":/icons/zoom.png"), tr("Show details for selected job"));
+	m_contextMenu.reset(new QMenu());
+	QAction *contextMenuDetailsAction  = m_contextMenu->addAction(QIcon(":/icons/zoom.png"), tr("Show details for selected job"));
 	QAction *contextMenuShowFileAction = m_contextMenu->addAction(QIcon(":/icons/folder_go.png"), tr("Browse Output File Location"));
 	m_contextMenu->addSeparator();
 
 	//Create "filter" context menu
-	m_progressViewFilterGroup = new QActionGroup(this);
+	m_progressViewFilterGroup.reset(new QActionGroup(this));
 	QAction *contextMenuFilterAction[5] = {NULL, NULL, NULL, NULL, NULL};
 	if(QMenu *filterMenu = m_contextMenu->addMenu(QIcon(":/icons/filter.png"), tr("Filter Log Items")))
 	{
@@ -237,27 +234,24 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	}
 
 	//Create info label
-	if(m_filterInfoLabel = new QLabel(ui->view_log))
-	{
-		m_filterInfoLabel->setFrameShape(QFrame::NoFrame);
-		m_filterInfoLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-		m_filterInfoLabel->setUserData(0, new IntUserData(-1));
-		SET_FONT_BOLD(m_filterInfoLabel, true);
-		SET_TEXT_COLOR(m_filterInfoLabel, Qt::darkGray);
-		m_filterInfoLabel->setContextMenuPolicy(Qt::CustomContextMenu);
-		connect(m_filterInfoLabel, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
-		m_filterInfoLabel->hide();
-	}
-	if(m_filterInfoLabelIcon = new QLabel(ui->view_log))
-	{
-		m_filterInfoLabelIcon->setFrameShape(QFrame::NoFrame);
-		m_filterInfoLabelIcon->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
-		m_filterInfoLabelIcon->setContextMenuPolicy(Qt::CustomContextMenu);
-		const QIcon &ico = m_progressModel->getIcon(ProgressModel::JobState(-1));
-		m_filterInfoLabelIcon->setPixmap(ico.pixmap(16, 16));
-		connect(m_filterInfoLabelIcon, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
-		m_filterInfoLabelIcon->hide();
-	}
+	m_filterInfoLabel.reset(new QLabel(ui->view_log));
+	m_filterInfoLabel->setFrameShape(QFrame::NoFrame);
+	m_filterInfoLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+	m_filterInfoLabel->setUserData(0, new IntUserData(-1));
+	SET_FONT_BOLD(m_filterInfoLabel, true);
+	SET_TEXT_COLOR(m_filterInfoLabel, Qt::darkGray);
+	m_filterInfoLabel->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(m_filterInfoLabel.data(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
+	m_filterInfoLabel->hide();
+
+	m_filterInfoLabelIcon .reset(new QLabel(ui->view_log));
+	m_filterInfoLabelIcon->setFrameShape(QFrame::NoFrame);
+	m_filterInfoLabelIcon->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+	m_filterInfoLabelIcon->setContextMenuPolicy(Qt::CustomContextMenu);
+	const QIcon &ico = m_progressModel->getIcon(ProgressModel::JobState(-1));
+	m_filterInfoLabelIcon->setPixmap(ico.pixmap(16, 16));
+	connect(m_filterInfoLabelIcon.data(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuTriggered(QPoint)));
+	m_filterInfoLabelIcon->hide();
 
 	//Connect context menu
 	ui->view_log->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -269,6 +263,13 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 		if(contextMenuFilterAction[i]) connect(contextMenuFilterAction[i], SIGNAL(triggered(bool)), this, SLOT(contextMenuFilterActionTriggered()));
 	}
 	SET_FONT_BOLD(contextMenuDetailsAction, true);
+
+	//Setup file extensions
+	if(!m_settings->renameFiles_fileExtension().isEmpty())
+	{
+		m_fileExts.reset(new FileExtsModel());
+		m_fileExts->importItems(m_settings->renameFiles_fileExtension());
+	}
 
 	//Enque jobs
 	if(fileListModel)
@@ -283,7 +284,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *fileListModel, const AudioFile
 	ui->label_headerStatus->setText(QString("<b>%1</b><br>%2").arg(tr("Encoding Files"), tr("Your files are being encoded, please be patient...")));
 	
 	//Enable system tray icon
-	connect(m_systemTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(systemTrayActivated(QSystemTrayIcon::ActivationReason)));
+	connect(m_systemTray.data(), SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(systemTrayActivated(QSystemTrayIcon::ActivationReason)));
 
 	//Init other vars
 	m_runningThreads = 0;
@@ -304,12 +305,12 @@ ProcessingDialog::~ProcessingDialog(void)
 {
 	ui->view_log->setModel(NULL);
 
-	if(m_progressIndicator)
+	if(!m_progressIndicator.isNull())
 	{
 		m_progressIndicator->stop();
 	}
 
-	if(m_diskObserver)
+	if(!m_diskObserver.isNull())
 	{
 		m_diskObserver->stop();
 		if(!m_diskObserver->wait(15000))
@@ -319,7 +320,7 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	if(m_cpuObserver)
+	if(!m_cpuObserver.isNull())
 	{
 		m_cpuObserver->stop();
 		if(!m_cpuObserver->wait(15000))
@@ -329,7 +330,7 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	if(m_ramObserver)
+	if(!m_ramObserver.isNull())
 	{
 		m_ramObserver->stop();
 		if(!m_ramObserver->wait(15000))
@@ -339,7 +340,7 @@ ProcessingDialog::~ProcessingDialog(void)
 		}
 	}
 
-	if(m_threadPool)
+	if(!m_threadPool.isNull())
 	{
 		if(!m_threadPool->waitForDone(100))
 		{
@@ -347,19 +348,6 @@ ProcessingDialog::~ProcessingDialog(void)
 			m_threadPool->waitForDone();
 		}
 	}
-
-	MUTILS_DELETE(m_progressIndicator);
-	MUTILS_DELETE(m_systemTray);
-	MUTILS_DELETE(m_diskObserver);
-	MUTILS_DELETE(m_cpuObserver);
-	MUTILS_DELETE(m_ramObserver);
-	MUTILS_DELETE(m_progressViewFilterGroup);
-	MUTILS_DELETE(m_filterInfoLabel);
-	MUTILS_DELETE(m_filterInfoLabelIcon);
-	MUTILS_DELETE(m_contextMenu);
-	MUTILS_DELETE(m_progressModel);
-	MUTILS_DELETE(m_threadPool);
-	MUTILS_DELETE(m_defaultColor);
 
 	m_taskbar->setOverlayIcon(NULL);
 	m_taskbar->setTaskbarState(MUtils::Taskbar7::TASKBAR_STATE_NONE);
@@ -513,25 +501,25 @@ void ProcessingDialog::initEncoding(void)
 
 	if(!m_diskObserver)
 	{
-		m_diskObserver = new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder());
-		connect(m_diskObserver, SIGNAL(messageLogged(QString,int)), m_progressModel, SLOT(addSystemMessage(QString,int)), Qt::QueuedConnection);
-		connect(m_diskObserver, SIGNAL(freeSpaceChanged(quint64)), this, SLOT(diskUsageHasChanged(quint64)), Qt::QueuedConnection);
+		m_diskObserver.reset(new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder()));
+		connect(m_diskObserver.data(), SIGNAL(messageLogged(QString,int)), m_progressModel.data(), SLOT(addSystemMessage(QString,int)), Qt::QueuedConnection);
+		connect(m_diskObserver.data(), SIGNAL(freeSpaceChanged(quint64)), this, SLOT(diskUsageHasChanged(quint64)), Qt::QueuedConnection);
 		m_diskObserver->start();
 	}
 	if(!m_cpuObserver)
 	{
-		m_cpuObserver = new CPUObserverThread();
-		connect(m_cpuObserver, SIGNAL(currentUsageChanged(double)), this, SLOT(cpuUsageHasChanged(double)), Qt::QueuedConnection);
+		m_cpuObserver.reset(new CPUObserverThread());
+		connect(m_cpuObserver.data(), SIGNAL(currentUsageChanged(double)), this, SLOT(cpuUsageHasChanged(double)), Qt::QueuedConnection);
 		m_cpuObserver->start();
 	}
 	if(!m_ramObserver)
 	{
-		m_ramObserver = new RAMObserverThread();
-		connect(m_ramObserver, SIGNAL(currentUsageChanged(double)), this, SLOT(ramUsageHasChanged(double)), Qt::QueuedConnection);
+		m_ramObserver.reset(new RAMObserverThread());
+		connect(m_ramObserver.data(), SIGNAL(currentUsageChanged(double)), this, SLOT(ramUsageHasChanged(double)), Qt::QueuedConnection);
 		m_ramObserver->start();
 	}
 
-	if(!m_threadPool)
+	if(m_threadPool.isNull())
 	{
 		unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
 		if(maximumInstances < 1)
@@ -546,7 +534,7 @@ void ProcessingDialog::initEncoding(void)
 			m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(maximumInstances)));
 		}
 
-		m_threadPool = new QThreadPool();
+		m_threadPool.reset(new QThreadPool());
 		m_threadPool->setMaxThreadCount(maximumInstances);
 	}
 
@@ -624,6 +612,10 @@ void ProcessingDialog::startNextJob(void)
 	{
 		thread->setRenameRegExp(m_settings->renameFiles_regExpSearch(), m_settings->renameFiles_regExpReplace());
 	}
+	if(!m_fileExts.isNull())
+	{
+		thread->setRenameFileExt(m_fileExts->apply(QString::fromUtf8(EncoderRegistry::getEncoderInfo(m_settings->compressionEncoder())->extension())));
+	}
 	if(m_settings->overwriteMode() != SettingsModel::Overwrite_KeepBoth)
 	{
 		thread->setOverwriteMode((m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile), (m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces));
@@ -633,10 +625,10 @@ void ProcessingDialog::startNextJob(void)
 	
 	//Connect thread signals
 	connect(thread, SIGNAL(processFinished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel, SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel, SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel.data(), SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel.data(), SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
 	connect(thread, SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel, SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
+	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel.data(), SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
 	connect(this, SIGNAL(abortRunningTasks()), thread, SLOT(abort()), Qt::DirectConnection);
 
 	//Initialize thread object
@@ -646,7 +638,7 @@ void ProcessingDialog::startNextJob(void)
 	}
 
 	//Give it a go!
-	if(!thread->start(m_threadPool))
+	if(!thread->start(m_threadPool.data()))
 	{
 		qWarning("Job failed to start or file was skipped!");
 	}

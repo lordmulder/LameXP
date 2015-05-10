@@ -43,11 +43,12 @@ public:
 	~ProcessThread(void);
 	
 	bool init(void);
-	bool start(QThreadPool *pool);
+	bool start(QThreadPool *const pool);
 	
 	QUuid getId(void) { return m_jobId; }
 	void setRenamePattern(const QString &pattern);
 	void setRenameRegExp(const QString &search, const QString &replace);
+	void setRenameFileExt(const QString &fileExtension);
 	void setOverwriteMode(const bool &bSkipExistingFile, const bool &bReplacesExisting = false);
 	void addFilter(AbstractFilter *filter);
 
@@ -108,6 +109,7 @@ private:
 	QString m_renamePattern;
 	QString m_renameRegExp_Search;
 	QString m_renameRegExp_Replace;
+	QString m_renameFileExt;
 	int m_overwriteMode;
 	WaveProperties *m_propDetect;
 	QString m_outFileName;

@@ -49,6 +49,9 @@ public:
 	QString exportItems(void) const;
 	void importItems(const QString &data);
 
+	//Replace extension
+	QString apply(const QString &originalExtension) const;
+
 signals:
 	void rowAppended(void);
 

@@ -128,7 +128,7 @@ bool ProcessThread::init(void)
 	return false;
 }
 
-bool ProcessThread::start(QThreadPool *pool)
+bool ProcessThread::start(QThreadPool *const pool)
 {
 	//Make sure object was initialized correctly
 	if(m_initialized < 0)
@@ -440,7 +440,8 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	const QString fileName = MUtils::clean_file_name(applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo())));
 
 	//Generate full output path
-	const QString fileExt = QString::fromUtf8(m_encoder->getEncoderInfo()->extension());
+	
+	const QString fileExt = m_renameFileExt.isEmpty() ?  QString::fromUtf8(m_encoder->getEncoderInfo()->extension()) : m_renameFileExt;
 	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, fileExt);
 
 	//Skip file, if target file exists (optional!)
@@ -708,6 +709,15 @@ void ProcessThread::setRenameRegExp(const QString &search, const QString &replac
 	{
 		m_renameRegExp_Search  = newSearch;
 		m_renameRegExp_Replace = newReplace;
+	}
+}
+
+void ProcessThread::setRenameFileExt(const QString &fileExtension)
+{
+	m_renameFileExt = MUtils::clean_file_name(fileExtension).simplified();
+	while(m_renameFileExt.startsWith('.'))
+	{
+		m_renameFileExt = m_renameFileExt.mid(1).trimmed();
 	}
 }
 
