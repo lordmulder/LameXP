@@ -45,6 +45,7 @@ public:
 	virtual void setChannelMode(int value);
 
 	//Encoder info
+	virtual const AbstractEncoderInfo *toEncoderInfo(void) const { return getEncoderInfo(); }
 	static const AbstractEncoderInfo *getEncoderInfo(void);
 
 private:

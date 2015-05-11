@@ -38,6 +38,7 @@ public:
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 
 	//Encoder info
+	virtual const AbstractEncoderInfo *toEncoderInfo(void) const { return getEncoderInfo(); }
 	static const AbstractEncoderInfo *getEncoderInfo(void);
 
 private:

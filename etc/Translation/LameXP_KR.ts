@@ -763,7 +763,7 @@
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
-        <source>Repalce With</source>
+        <source>Replace With</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1791,12 +1791,12 @@
         <translation type="unfinished">드라이버가 읽기-전용이거나 접근 권한이 없습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>Already Running</source>
         <translation type="unfinished">이미 실행 중</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished">LameXP가 이미 실행 중입니다. 실행 중인 인스턴스를 사용하십시오!</translation>
     </message>
@@ -2524,22 +2524,22 @@
         <translation type="unfinished">대상 파일이 이미 존재하면:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Overwrite Mode</source>
         <translation type="unfinished">대체 방식</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation type="unfinished">경고: 이 방식은 기존 파일이 되돌릴 수 없는 방법으로 대체될 수 있습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Continue</source>
         <translation type="unfinished">계속</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Revert</source>
         <translation type="unfinished">되돌리기</translation>
     </message>

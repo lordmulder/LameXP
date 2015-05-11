@@ -763,7 +763,7 @@
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
-        <source>Repalce With</source>
+        <source>Replace With</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1484,12 +1484,12 @@
         <translation>驱动器是只读的或没有足够的访问权限!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>Already Running</source>
         <translation>已运行</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP 已在运行,请使用当前运行的实例!</translation>
     </message>
@@ -2524,22 +2524,22 @@
         <translation>如果目标文件已存在:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Overwrite Mode</source>
         <translation>覆盖模式</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>警告: 这种模式可能会覆盖现有的文件且无法恢复!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Continue</source>
         <translation>继续</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Revert</source>
         <translation>后退</translation>
     </message>

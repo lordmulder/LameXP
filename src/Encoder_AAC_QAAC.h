@@ -41,11 +41,11 @@ public:
 	virtual void setProfile(int profile);
 
 	//Encoder info
+	virtual const AbstractEncoderInfo *toEncoderInfo(void) const { return getEncoderInfo(); }
 	static const AbstractEncoderInfo *getEncoderInfo(void);
 
 private:
-	const QString m_binary_qaac;
-	const QString m_binary_soxr;
-	const QString m_binary_soxc;
+	const QString m_binary_qaac32;
+	const QString m_binary_qaac64;
 	int m_configProfile;
 };

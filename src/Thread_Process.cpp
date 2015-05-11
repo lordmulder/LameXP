@@ -441,7 +441,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 
 	//Generate full output path
 	
-	const QString fileExt = m_renameFileExt.isEmpty() ?  QString::fromUtf8(m_encoder->getEncoderInfo()->extension()) : m_renameFileExt;
+	const QString fileExt = m_renameFileExt.isEmpty() ?  QString::fromUtf8(m_encoder->toEncoderInfo()->extension()) : m_renameFileExt;
 	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, fileExt);
 
 	//Skip file, if target file exists (optional!)

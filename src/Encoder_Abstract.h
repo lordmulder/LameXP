@@ -78,6 +78,7 @@ public:
 	virtual void setCustomParams(const QString &customParams);
 
 	//Encoder info
+	virtual const AbstractEncoderInfo *toEncoderInfo(void) const = 0;
 	static const AbstractEncoderInfo *getEncoderInfo(void)
 	{
 		MUTILS_THROW("This method shall be re-implemented in derived classes!");

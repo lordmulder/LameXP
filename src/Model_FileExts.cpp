@@ -139,7 +139,7 @@ QVariant FileExtsModel::headerData(int section, Qt::Orientation orientation, int
 			case 0:
 				return QVariant(tr("File Extension"));
 			case 1:
-				return QVariant(tr("Repalce With"));
+				return QVariant(tr("Replace With"));
 			default:
 				return QVariant();
 			}

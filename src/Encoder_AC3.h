@@ -46,6 +46,7 @@ public:
 	virtual void setFastBitAllocation(bool value);
 	
 	//Encoder info
+	virtual const AbstractEncoderInfo *toEncoderInfo(void) const { return getEncoderInfo(); }
 	static const AbstractEncoderInfo *getEncoderInfo(void);
 
 private:

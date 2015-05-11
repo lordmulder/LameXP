@@ -134,11 +134,10 @@ static const g_qaacEncoderInfo;
 
 QAACEncoder::QAACEncoder(void)
 :
-	m_binary_qaac(lamexp_tools_lookup("qaac.exe")),
-	m_binary_soxr(lamexp_tools_lookup("libsoxr.dll")),
-	m_binary_soxc(lamexp_tools_lookup("libsoxconvolver.dll"))
+	m_binary_qaac32(lamexp_tools_lookup("qaac.exe")),
+	m_binary_qaac64(lamexp_tools_lookup("qaac64.exe"))
 {
-	if(m_binary_qaac.isEmpty() || m_binary_soxr.isEmpty() || m_binary_soxc.isEmpty())
+	if(m_binary_qaac32.isEmpty() && m_binary_qaac64.isEmpty())
 	{
 		MUTILS_THROW("Error initializing QAAC. Tool 'qaac.exe' is not registred!");
 	}
@@ -152,6 +151,8 @@ QAACEncoder::~QAACEncoder(void)
 
 bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
+	const QString qaac_bin = m_binary_qaac64.isEmpty() ? m_binary_qaac32 : m_binary_qaac64;
+
 	QProcess process;
 	QStringList args;
 
@@ -203,7 +204,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
-	if(!startProcess(process, m_binary_qaac, args))
+	if(!startProcess(process, qaac_bin, args))
 	{
 		return false;
 	}

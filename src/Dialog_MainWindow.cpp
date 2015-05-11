@@ -4206,16 +4206,16 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
 		}
 	}
 
-	if(obj == ui->helpCustomParamLAME)         showCustomParamsHelpScreen("lame.exe", "--longhelp");
+	if(obj == ui->helpCustomParamLAME)         showCustomParamsHelpScreen("lame.exe",    "--longhelp");
 	else if(obj == ui->helpCustomParamOggEnc)  showCustomParamsHelpScreen("oggenc2.exe", "--help");
 	else if(obj == ui->helpCustomParamNeroAAC)
 	{
 		switch(EncoderRegistry::getAacEncoder())
 		{
-			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac.exe",       "--help"); break;
-			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe",  ""      ); break;
-			case SettingsModel::AAC_ENCODER_FDK : showCustomParamsHelpScreen("fdkaac.exe",     "--help"); break;
-			case SettingsModel::AAC_ENCODER_NERO: showCustomParamsHelpScreen("neroAacEnc.exe", "-help" ); break;
+			case SettingsModel::AAC_ENCODER_QAAC: showCustomParamsHelpScreen("qaac64.exe|qaac.exe", "--help"); break;
+			case SettingsModel::AAC_ENCODER_FHG : showCustomParamsHelpScreen("fhgaacenc.exe",       ""      ); break;
+			case SettingsModel::AAC_ENCODER_FDK : showCustomParamsHelpScreen("fdkaac.exe",          "--help"); break;
+			case SettingsModel::AAC_ENCODER_NERO: showCustomParamsHelpScreen("neroAacEnc.exe",      "-help" ); break;
 			default: MUtils::Sound::beep(MUtils::Sound::BEEP_ERR); break;
 		}
 	}
@@ -4230,7 +4230,17 @@ void MainWindow::customParamsHelpRequested(QWidget *obj, QEvent *event)
  */
 void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QString &command)
 {
-	const QString binary = lamexp_tools_lookup(toolName);
+	const QStringList toolNames = toolName.split('|', QString::SkipEmptyParts);
+	QString binary;
+	for(QStringList::ConstIterator iter = toolNames.constBegin(); iter != toolNames.constEnd(); iter++)
+	{
+		if(lamexp_tools_check(*iter))
+		{
+			binary = lamexp_tools_lookup(*iter);
+			break;
+		}
+	}
+
 	if(binary.isEmpty())
 	{
 		MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);

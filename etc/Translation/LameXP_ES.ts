@@ -767,7 +767,7 @@
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
-        <source>Repalce With</source>
+        <source>Replace With</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1488,12 +1488,12 @@
         <translation>¡El disco es de solo lectura o no se tienen los derechos suficientes!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>Already Running</source>
         <translation>Ya se está ejecutando</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>¡LameXP ya se está ejecutando, use esa instancia por favor!</translation>
     </message>
@@ -2528,22 +2528,22 @@
         <translation>Si el archivo de destino ya existe:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Overwrite Mode</source>
         <translation>Modo de sobreescritura</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Aviso: ¡Este modo sobreescribirá los archivos existentes sin ninguna posibilidad de recuperarlos!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Continue</source>
         <translation>Continuar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Revert</source>
         <translation>Revertir</translation>
     </message>

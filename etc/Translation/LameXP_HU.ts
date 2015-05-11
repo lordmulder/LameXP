@@ -763,7 +763,7 @@
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
-        <source>Repalce With</source>
+        <source>Replace With</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2629,32 +2629,32 @@
         <translation>Nem lehet írni a kiválasztott könyvtárba. Kérjük válasszon egy másik könyvtárat!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Overwrite Mode</source>
         <translation>Felülírási mód</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Figyelem: Ez a mód felülírja a már létező fájlokat, amelyeket azt követően nem tud visszaállítani!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Continue</source>
         <translation>Folytatás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4292"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
         <source>Revert</source>
         <translation>Visszaállítás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>Already Running</source>
         <translation>Már fut</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4376"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4386"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>A LameXP már fut. Kérjük, használja a futó példányt!</translation>
     </message>

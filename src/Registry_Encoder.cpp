@@ -507,6 +507,10 @@ int EncoderRegistry::getAacEncoder(void)
 	{
 		return SettingsModel::AAC_ENCODER_QAAC;
 	}
+	else if(lamexp_tools_check("qaac64.exe") && lamexp_tools_check("libsoxr64.dll") && lamexp_tools_check("libsoxconvolver64.dll"))
+	{
+		return SettingsModel::AAC_ENCODER_QAAC;
+	}
 	else if(lamexp_tools_check("fdkaac.exe"))
 	{
 		return SettingsModel::AAC_ENCODER_FDK;
