@@ -6,8 +6,9 @@
 
 * Added Hungarian translation, contributed by Zityi's Translator Team <zityisoft@gmail.com>
 * Added optional support for the *libfdk-aac* encoder, using the [fdkaac](https://github.com/nu774/fdkaac) front-end by nu774
+* Added detection of the *64-Bit* version of QAAC encoder, requires 64-Bit Apple Application Support
 * Added enhanced file renaming option: Default file extensions can now be overwritten
-* Added enhanced file renaming option: Files can now be renamed based on [regular expressions](http://www.regular-expressions.info/quickstart.html)
+* Added enhanced file renaming option: Files can now be renamed via the [regular expressions](http://www.regular-expressions.info/quickstart.html) engine
 * Updated MediaInfo to v0.7.73 (2015-04-09), compiled with ICL 15.0 and MSVC 12.0
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
