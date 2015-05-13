@@ -4,13 +4,14 @@
 
 ## LameXP v4.12 [xxxx-xx-xx] ## {-}
 
-* Added Hungarian translation, thanks to Zityi's Translator Team <zityisoft@gmail.com>
+* Added Hungarian translation, contributed by Zityi's Translator Team <zityisoft@gmail.com>
 * Added optional support for the *libfdk-aac* encoder, using the [fdkaac](https://github.com/nu774/fdkaac) front-end by nu774
-* Added enhanced file renaming options: Files can now be renamed based on [regular expressions](http://www.regular-expressions.info/quickstart.html)
+* Added enhanced file renaming option: Default file extensions can now be overwritten
+* Added enhanced file renaming option: Files can now be renamed based on [regular expressions](http://www.regular-expressions.info/quickstart.html)
 * Updated MediaInfo to v0.7.73 (2015-04-09), compiled with ICL 15.0 and MSVC 12.0
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
-* Fixed function to restore the default Temp folder, if the custom Temp folder doesn't exist anymore
+* Fixed function to restore the default Temp folder, if custom Temp folder doesn't exist anymore
 
 ## LameXP v4.11 [2015-04-05] ## {-}
 
