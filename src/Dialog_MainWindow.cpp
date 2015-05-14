@@ -601,9 +601,9 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	//--------------------------------
 
 	//Activate file menu actions
-	ui->actionOpenFolder->setData(QVariant::fromValue<bool>(false));
+	ui->actionOpenFolder           ->setData(QVariant::fromValue<bool>(false));
 	ui->actionOpenFolderRecursively->setData(QVariant::fromValue<bool>(true));
-	connect(ui->actionOpenFolder, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
+	connect(ui->actionOpenFolder,            SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
 	connect(ui->actionOpenFolderRecursively, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
 
 	//Activate view menu actions
@@ -863,7 +863,7 @@ void MainWindow::addFiles(const QStringList &files)
 /*
  * Add folder to source list
  */
-void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
+void MainWindow::addFolder(const QString &path, bool recursive, bool delayed, QString filter)
 {
 	QFileInfoList folderInfoList;
 	folderInfoList << QFileInfo(path);
@@ -887,9 +887,12 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed)
 		QDir currentDir(folderInfoList.takeFirst().canonicalFilePath());
 		QFileInfoList fileInfoList = currentDir.entryInfoList(QDir::Files | QDir::NoSymLinks);
 
-		while(!fileInfoList.isEmpty())
+		for(QFileInfoList::ConstIterator iter = fileInfoList.constBegin(); iter != fileInfoList.constEnd(); iter++)
 		{
-			fileList << fileInfoList.takeFirst().canonicalFilePath();
+			if(filter.isEmpty() || (iter->suffix().compare(filter, Qt::CaseInsensitive) == 0))
+			{
+				fileList << iter->canonicalFilePath();
+			}
 		}
 
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -2364,12 +2367,46 @@ void MainWindow::openFolderActionActivated(void)
 					selectedFolder = dialog.selectedFiles().first();
 				}
 			}
-			
-			if(!selectedFolder.isEmpty())
+
+			if(selectedFolder.isEmpty())
 			{
-				m_settings->mostRecentInputPath(QDir(selectedFolder).canonicalPath());
-				addFolder(selectedFolder, action->data().toBool());
+				return;
 			}
+
+			QRegExp regExp("\\((.+)\\)", Qt::CaseInsensitive);
+			const QStringList supportedTypes = DecoderRegistry::getSupportedTypes();
+			QStringList filterItems("*.*");
+			for(QStringList::ConstIterator iter = supportedTypes.constBegin(); iter != supportedTypes.constEnd(); iter++)
+			{
+				if(regExp.lastIndexIn(*iter) >= 0)
+				{
+					const QStringList extensions = regExp.cap(1).split(' ', QString::SkipEmptyParts);
+					for(QStringList::ConstIterator iter2 = extensions.constBegin(); iter2 != extensions.constEnd(); iter2++)
+					{
+						if(!filterItems.contains((*iter2), Qt::CaseInsensitive)) filterItems << (*iter2);
+					}
+				}
+			}
+
+			bool okay;
+			QString filterStr = QInputDialog::getItem(this, tr("Filter Files"), tr("Select filename filter:"), filterItems, 0, false, &okay).trimmed();
+			if(!okay)
+			{
+				return;
+			}
+
+			QRegExp regExp2("\\*\\.([A-Za-z0-9]+)", Qt::CaseInsensitive);
+			if(regExp2.lastIndexIn(filterStr) >= 0)
+			{
+				filterStr = regExp2.cap(1).trimmed();
+			}
+			else
+			{
+				filterStr.clear();
+			}
+
+			m_settings->mostRecentInputPath(QDir(selectedFolder).canonicalPath());
+			addFolder(selectedFolder, action->data().toBool(), false, filterStr);
 		);
 	}
 }

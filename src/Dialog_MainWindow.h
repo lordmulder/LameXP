@@ -206,7 +206,7 @@ private:
 	Ui::MainWindow *ui; //for Qt UIC
 
 	void addFiles(const QStringList &files);
-	void addFolder(const QString &path, bool recursive = false, bool delayed = false);
+	void addFolder(const QString &path, bool recursive = false, bool delayed = false, QString filter = QString());
 	bool checkForUpdates(void);
 	void initializeTranslation(void);
 	void refreshFavorites(void);
