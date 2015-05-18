@@ -23,10 +23,11 @@
 #pragma once
 
 #include <QObject>
+#include "Decoder_AAC.h"
 
 class QString;
 class QStringList;
-class AbstractDecoder;
+class QMutex;
 class SettingsModel;
 
 class DecoderRegistry : public QObject
@@ -36,5 +37,16 @@ class DecoderRegistry : public QObject
 public:
 	static void configureDecoders(const SettingsModel *settings);
 	static AbstractDecoder *lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	static QStringList getSupportedTypes(void);
+	static const QStringList &getSupportedExts(void);
+	static const QStringList &getSupportedTypes(void);
+
+private:
+	typedef QList<const AbstractDecoder::supportedType_t*> typeList_t;
+
+	static QMutex m_lock;
+	static QScopedPointer<QStringList> m_supportedExts;
+	static QScopedPointer<QStringList> m_supportedTypes;
+	static QScopedPointer<typeList_t> m_availableTypes;
+
+	static const typeList_t &getAvailableDecoderTypes(void);
 };

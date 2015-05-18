@@ -22,7 +22,7 @@
 
 #include "Decoder_Abstract.h"
 
-#include <QStringList>
+#include <MUtils/Exception.h>
 
 AbstractDecoder::AbstractDecoder(void)
 {
@@ -46,7 +46,7 @@ bool AbstractDecoder::isDecoderAvailable(void)
 	return true;
 }
 
-QStringList AbstractDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *AbstractDecoder::supportedTypes(void)
 {
-	return QStringList();
+	MUTILS_THROW("This function must be re-implemented in sub-classes!");
 }

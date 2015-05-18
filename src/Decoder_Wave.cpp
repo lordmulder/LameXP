@@ -68,24 +68,6 @@ bool WaveDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	return okay;
 }
 
-bool WaveDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
-{
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
-	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-QStringList WaveDecoder::supportedTypes(void)
-{
-	return QStringList() << "Waveform Audio File (*.wav)";
-}
-
 bool WaveDecoder::progressHandler(const double &progress, void *const data)
 {
 	if(data)
@@ -100,4 +82,33 @@ bool WaveDecoder::progressHandler(const double &progress, void *const data)
 void WaveDecoder::updateProgress(const double &progress)
 {
 	emit statusUpdated(qBound(0, qRound(progress * 100.0), 100));
+}
+
+bool WaveDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
+{
+	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	{
+		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+const AbstractDecoder::supportedType_t *WaveDecoder::supportedTypes(void)
+{
+	static const char *exts[] =
+	{
+		"wav", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Waveform Audio File", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

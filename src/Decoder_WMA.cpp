@@ -136,7 +136,18 @@ bool WMADecoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
-QStringList WMADecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *WMADecoder::supportedTypes(void)
 {
-	return QStringList() << "Windows Media Audio (*.wma)";
+	static const char *exts[] =
+	{
+		"wma", "asf", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Windows Media Audio", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

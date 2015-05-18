@@ -39,8 +39,8 @@ public:
 		wplPlaylist
 	};
 
-	static const char *supportedExtensions;
 	static bool importPlaylist(QStringList &fileList, const QString &playlistFile);
+	static const char *const *const getSupportedExtensions(void);
 
 private:
 	PlaylistImporter(void) {}

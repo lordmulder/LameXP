@@ -22,6 +22,7 @@
 
 #include "Registry_Decoder.h"
 
+//Internal
 #include "Decoder_AAC.h"
 #include "Decoder_AC3.h"
 #include "Decoder_ADPCM.h"
@@ -42,12 +43,31 @@
 #include "PlaylistImporter.h"
 #include "Model_Settings.h"
 
+//MUtils
+#include <MUtils/Exception.h>
+
+//Qt
 #include <QString>
 #include <QStringList>
+#include <QMutex>
 #include <QRegExp>
 
 #define PROBE_DECODER(DEC) if(DEC::isDecoderAvailable() && DEC::isFormatSupported(containerType, containerProfile, formatType, formatProfile, formatVersion)) { return new DEC(); }
-#define GET_FILETYPES(DEC) (DEC::isDecoderAvailable() ? DEC::supportedTypes() : QStringList())
+
+#define GET_FILETYPES(LIST, DEC) do \
+{ \
+	if(DEC::isDecoderAvailable()) (LIST) << DEC::supportedTypes(); \
+} \
+while(0)
+
+QMutex DecoderRegistry::m_lock(QMutex::Recursive);
+QScopedPointer<QStringList> DecoderRegistry::m_supportedExts;
+QScopedPointer<QStringList> DecoderRegistry::m_supportedTypes;
+QScopedPointer<DecoderRegistry::typeList_t> DecoderRegistry::m_availableTypes;
+
+////////////////////////////////////////////////////////////
+// Public Functions
+////////////////////////////////////////////////////////////
 
 AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
@@ -72,54 +92,114 @@ AbstractDecoder *DecoderRegistry::lookup(const QString &containerType, const QSt
 	return NULL;
 }
 
-QStringList DecoderRegistry::getSupportedTypes(void)
+const QStringList &DecoderRegistry::getSupportedExts(void)
 {
-	QStringList types;
+	QMutexLocker locker(&m_lock);
 
-	types << GET_FILETYPES(WaveDecoder);
-	types << GET_FILETYPES(MP3Decoder);
-	types << GET_FILETYPES(VorbisDecoder);
-	types << GET_FILETYPES(AACDecoder);
-	types << GET_FILETYPES(AC3Decoder);
-	types << GET_FILETYPES(FLACDecoder);
-	types << GET_FILETYPES(WavPackDecoder);
-	types << GET_FILETYPES(MusepackDecoder);
-	types << GET_FILETYPES(ShortenDecoder);
-	types << GET_FILETYPES(MACDecoder);
-	types << GET_FILETYPES(TTADecoder);
-	types << GET_FILETYPES(SpeexDecoder);
-	types << GET_FILETYPES(ALACDecoder);
-	types << GET_FILETYPES(WMADecoder);
-	types << GET_FILETYPES(ADPCMDecoder);
-	types << GET_FILETYPES(OpusDecoder);
-	types << GET_FILETYPES(AvisynthDecoder);
-
-	QStringList extensions;
-	extensions << QString(PlaylistImporter::supportedExtensions).split(" ", QString::SkipEmptyParts);
-	QRegExp regExp("\\((.+)\\)", Qt::CaseInsensitive);
-
-	for(int i = 0; i < types.count(); i++)
+	if(!m_supportedExts.isNull())
 	{
-		if(regExp.lastIndexIn(types.at(i)) >= 0)
+		return (*m_supportedExts);
+	}
+
+	m_supportedExts.reset(new QStringList());
+
+	const typeList_t &types = getAvailableDecoderTypes();
+	for(QList<const AbstractDecoder::supportedType_t*>::ConstIterator iter = types.constBegin(); iter != types.constEnd(); iter++)
+	{
+		for(size_t i = 0; (*iter)[i].name; i++)
 		{
-			extensions << regExp.cap(1).split(" ", QString::SkipEmptyParts);
+			for(size_t j = 0; (*iter)[i].exts[j]; j++)
+			{
+				const QString ext = QString().sprintf("*.%s", (*iter)[i].exts[j]);
+				if(!m_supportedExts->contains(ext, Qt::CaseInsensitive))
+				{
+					(*m_supportedExts) << ext;
+				}
+			}
 		}
 	}
 
-	if(!extensions.empty())
-	{
-		extensions.removeDuplicates();
-		extensions.sort();
-		types.prepend(QString("%1 (%2)").arg(tr("All supported types"), extensions.join(" ")));
-	}
-	
-	types << QString("%1 (%2)").arg(tr("Playlists"), PlaylistImporter::supportedExtensions);
-	types << QString("%1 (*.*)").arg(tr("All files"));
+	m_supportedExts->sort();
+	return (*m_supportedExts);
+}
 
-	return types;
+const QStringList &DecoderRegistry::getSupportedTypes(void)
+{
+	QMutexLocker locker(&m_lock);
+
+	if(!m_supportedTypes.isNull())
+	{
+		return (*m_supportedTypes);
+	}
+
+	m_supportedTypes.reset(new QStringList());
+
+	const typeList_t &types = getAvailableDecoderTypes();
+	for(QList<const AbstractDecoder::supportedType_t*>::ConstIterator iter = types.constBegin(); iter != types.constEnd(); iter++)
+	{
+		for(size_t i = 0; (*iter)[i].name; i++)
+		{
+			QStringList extList;
+			for(size_t j = 0; (*iter)[i].exts[j]; j++)
+			{
+				extList << QString().sprintf("*.%s", (*iter)[i].exts[j]);
+			}
+			if(!extList.isEmpty())
+			{
+				(*m_supportedTypes) << QString("%1 (%2)").arg(QString::fromLatin1((*iter)[i].name), extList.join(" "));
+			}
+		}
+	}
+
+	QStringList playlistExts;
+	const char *const *const playlistPtr = PlaylistImporter::getSupportedExtensions();
+	for(size_t i = 0; playlistPtr[i]; i++)
+	{
+		playlistExts << QString().sprintf("*.%s", playlistPtr[i]);
+	}
+
+	(*m_supportedTypes) << QString("%1 (%2)").arg(tr("Playlists"), playlistExts.join(" "));
+	(*m_supportedTypes) << QString("%1 (*.*)").arg(tr("All files"));
+	m_supportedTypes->prepend(QString("%1 (%2 %3)").arg(tr("All supported types"), getSupportedExts().join(" "), playlistExts.join(" ")));
+
+	return (*m_supportedTypes);
 }
 
 void DecoderRegistry::configureDecoders(const SettingsModel *settings)
 {
 	OpusDecoder::setDisableResampling(settings->opusDisableResample());
+}
+
+////////////////////////////////////////////////////////////
+// Private Functions
+////////////////////////////////////////////////////////////
+
+const DecoderRegistry::typeList_t &DecoderRegistry::getAvailableDecoderTypes(void)
+{
+	if(!m_availableTypes.isNull())
+	{
+		return (*m_availableTypes);
+	}
+
+	m_availableTypes.reset(new typeList_t());
+
+	GET_FILETYPES(*m_availableTypes, WaveDecoder);
+	GET_FILETYPES(*m_availableTypes, MP3Decoder);
+	GET_FILETYPES(*m_availableTypes, VorbisDecoder);
+	GET_FILETYPES(*m_availableTypes, AACDecoder);
+	GET_FILETYPES(*m_availableTypes, AC3Decoder);
+	GET_FILETYPES(*m_availableTypes, FLACDecoder);
+	GET_FILETYPES(*m_availableTypes, WavPackDecoder);
+	GET_FILETYPES(*m_availableTypes, MusepackDecoder);
+	GET_FILETYPES(*m_availableTypes, ShortenDecoder);
+	GET_FILETYPES(*m_availableTypes, MACDecoder);
+	GET_FILETYPES(*m_availableTypes, TTADecoder);
+	GET_FILETYPES(*m_availableTypes, SpeexDecoder);
+	GET_FILETYPES(*m_availableTypes, ALACDecoder);
+	GET_FILETYPES(*m_availableTypes, WMADecoder);
+	GET_FILETYPES(*m_availableTypes, ADPCMDecoder);
+	GET_FILETYPES(*m_availableTypes, OpusDecoder);
+	GET_FILETYPES(*m_availableTypes, AvisynthDecoder);
+
+	return (*m_availableTypes);
 }

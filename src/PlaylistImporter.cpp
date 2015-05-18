@@ -56,9 +56,6 @@ g_xmlEscapeSequence[] =
 	{NULL, NULL}
 };
 
-const char *PlaylistImporter::supportedExtensions = "*.m3u *.m3u8 *.pls *.asx *.wpl";
-
-
 ////////////////////////////////////////////////////////////
 // Public Functions
 ////////////////////////////////////////////////////////////
@@ -377,4 +374,14 @@ QString &PlaylistImporter::unescapeXml(QString &str)
 	}
 	
 	return str;
+}
+
+const char *const *const PlaylistImporter::getSupportedExtensions(void)
+{
+	static const char *const s_supportedExtensions[] =
+	{
+		"m3u", "m3u8", "pls", "asx", "wpl", NULL
+	};
+
+	return s_supportedExtensions;
 }

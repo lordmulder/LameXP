@@ -152,8 +152,20 @@ bool AC3Decoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
-QStringList AC3Decoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *AC3Decoder::supportedTypes(void)
 {
-	return QStringList() << "AC-3 / ATSC A/52 (*.ac3 *.eac3 *.wav)" << "Digital Theater System (*.dts)";
-}
+	static const char *exts[][4] =
+	{
+		{ "ac3", "eac3", "wav", NULL },
+		{ "dts", "wav",         NULL }
+	};
 
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "AC-3 / ATSC A/52",       exts[0] },
+		{ "Digital Theater System", exts[1] },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
+}

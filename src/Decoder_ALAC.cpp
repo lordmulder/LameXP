@@ -146,7 +146,18 @@ bool ALACDecoder::isFormatSupported(const QString &containerType, const QString 
 	return false;
 }
 
-QStringList ALACDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *ALACDecoder::supportedTypes(void)
 {
-	return QStringList() << "Apple Lossless (*.mp4 *.m4a)";
+	static const char *exts[] =
+	{
+		"mp4", "m4a", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Apple Lossless", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

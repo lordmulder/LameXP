@@ -32,7 +32,7 @@ public:
 
 	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
 	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
-	static QStringList supportedTypes(void);
+	static const supportedType_t *supportedTypes(void);
 
 	static void setDisableResampling(bool disableResample) { m_disableResampling = disableResample; }
 

@@ -137,7 +137,18 @@ bool WavPackDecoder::isFormatSupported(const QString &containerType, const QStri
 	return false;
 }
 
-QStringList WavPackDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *WavPackDecoder::supportedTypes(void)
 {
-	return QStringList() << "WavPack Hybrid Lossless Audio (*.wv)";
+	static const char *exts[] =
+	{
+		"wv", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "WavPack Hybrid Lossless Audio", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

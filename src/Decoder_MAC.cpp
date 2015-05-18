@@ -137,7 +137,18 @@ bool MACDecoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
-QStringList MACDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *MACDecoder::supportedTypes(void)
 {
-	return QStringList() << "Monkey's Audio (*.ape)";
+	static const char *exts[] =
+	{
+		"ape", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Monkey's Audio", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

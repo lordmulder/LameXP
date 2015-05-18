@@ -132,7 +132,18 @@ bool FLACDecoder::isFormatSupported(const QString &containerType, const QString 
 	return false;
 }
 
-QStringList FLACDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *FLACDecoder::supportedTypes(void)
 {
-	return QStringList() << "Free Lossless Audio Codec (*.flac *.fla)";
+	static const char *exts[] =
+	{
+		"fla", "flac", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Free Lossless Audio Codec", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

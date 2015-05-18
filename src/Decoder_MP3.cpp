@@ -153,8 +153,22 @@ bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
-QStringList MP3Decoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *MP3Decoder::supportedTypes(void)
 {
-	return QStringList() << "MPEG Audio Layer III (*.mp3 *.mpa)" << "MPEG Audio Layer II (*.mp2 *.mpa)" << "MPEG Audio Layer I ( *.mp1 *.mpa)";
-}
+	static const char *exts[][3] =
+	{
+		{ "mp3", "mpa", NULL },
+		{ "mp2", "mpa", NULL },
+		{ "mp1", "mpa", NULL }
+	};
 
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "MPEG Audio Layer III", exts[0] },
+		{ "MPEG Audio Layer II",  exts[1] },
+		{ "MPEG Audio Layer I",   exts[2] },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
+}

@@ -134,7 +134,18 @@ bool AvisynthDecoder::isFormatSupported(const QString &containerType, const QStr
 	return false;
 }
 
-QStringList AvisynthDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *AvisynthDecoder::supportedTypes(void)
 {
-	return QStringList() << "Avisynth Script (*.avs)";
+	static const char *exts[] =
+	{
+		"avs", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Avisynth Script", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

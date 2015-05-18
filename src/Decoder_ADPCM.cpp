@@ -143,7 +143,22 @@ bool ADPCMDecoder::isFormatSupported(const QString &containerType, const QString
 	return false;
 }
 
-QStringList ADPCMDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *ADPCMDecoder::supportedTypes(void)
 {
-	return QStringList() << "Microsoft ADPCM (*.wav)" << "Apple/SGI AIFF (*.aif *.aiff)" << "Sun/NeXT Au (*.au *.snd)";
+	static const char *exts[][3] =
+	{
+		{ "wav",         NULL },
+		{ "aif", "aiff", NULL },
+		{ "au" , "snd",  NULL }
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Microsoft ADPCM", exts[0] },
+		{ "Apple/SGI AIFF",  exts[1] },
+		{ "Sun/NeXT Au",     exts[2] },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

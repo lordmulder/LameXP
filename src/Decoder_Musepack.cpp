@@ -138,7 +138,18 @@ bool MusepackDecoder::isFormatSupported(const QString &containerType, const QStr
 	return false;
 }
 
-QStringList MusepackDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *MusepackDecoder::supportedTypes(void)
 {
-	return QStringList() << "Musepack (*.mpc *.mpp *.mp+)";
+	static const char *exts[] =
+	{
+		"mpc", "mpp", "mp+", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Musepack", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

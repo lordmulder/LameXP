@@ -146,8 +146,18 @@ bool OpusDecoder::isFormatSupported(const QString &containerType, const QString 
 	return false;
 }
 
-QStringList OpusDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *OpusDecoder::supportedTypes(void)
 {
-	return QStringList() << "Opus Audio Codec (*.opus *.ogg)";
-}
+	static const char *exts[] =
+	{
+		"opus", "ogg", NULL
+	};
 
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Opus Audio Codec", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
+}

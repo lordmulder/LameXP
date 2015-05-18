@@ -128,7 +128,18 @@ bool ShortenDecoder::isFormatSupported(const QString &containerType, const QStri
 	return false;
 }
 
-QStringList ShortenDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *ShortenDecoder::supportedTypes(void)
 {
-	return QStringList() << "Shorten (*.shn)";
+	static const char *exts[] =
+	{
+		"shn", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Shorten", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

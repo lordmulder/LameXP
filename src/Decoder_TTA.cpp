@@ -133,7 +133,18 @@ bool TTADecoder::isFormatSupported(const QString &containerType, const QString &
 	return false;
 }
 
-QStringList TTADecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *TTADecoder::supportedTypes(void)
 {
-	return QStringList() << "The True Audio (*.tta)";
+	static const char *exts[] =
+	{
+		"tta", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "The True Audio", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

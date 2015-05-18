@@ -130,7 +130,18 @@ bool SpeexDecoder::isFormatSupported(const QString &containerType, const QString
 	return false;
 }
 
-QStringList SpeexDecoder::supportedTypes(void)
+const AbstractDecoder::supportedType_t *SpeexDecoder::supportedTypes(void)
 {
-	return QStringList() << "Speex (*.spx *.ogg)";
+	static const char *exts[] =
+	{
+		"spx", "ogg", NULL
+	};
+
+	static const supportedType_t s_supportedTypes[] =
+	{
+		{ "Speex", exts },
+		{ NULL, NULL }
+	};
+
+	return s_supportedTypes;
 }

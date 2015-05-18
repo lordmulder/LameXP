@@ -2373,20 +2373,8 @@ void MainWindow::openFolderActionActivated(void)
 				return;
 			}
 
-			QRegExp regExp("\\((.+)\\)", Qt::CaseInsensitive);
-			const QStringList supportedTypes = DecoderRegistry::getSupportedTypes();
-			QStringList filterItems("*.*");
-			for(QStringList::ConstIterator iter = supportedTypes.constBegin(); iter != supportedTypes.constEnd(); iter++)
-			{
-				if(regExp.lastIndexIn(*iter) >= 0)
-				{
-					const QStringList extensions = regExp.cap(1).split(' ', QString::SkipEmptyParts);
-					for(QStringList::ConstIterator iter2 = extensions.constBegin(); iter2 != extensions.constEnd(); iter2++)
-					{
-						if(!filterItems.contains((*iter2), Qt::CaseInsensitive)) filterItems << (*iter2);
-					}
-				}
-			}
+			QStringList filterItems = DecoderRegistry::getSupportedExts();
+			filterItems.prepend("*.*");
 
 			bool okay;
 			QString filterStr = QInputDialog::getItem(this, tr("Filter Files"), tr("Select filename filter:"), filterItems, 0, false, &okay).trimmed();
@@ -2395,10 +2383,10 @@ void MainWindow::openFolderActionActivated(void)
 				return;
 			}
 
-			QRegExp regExp2("\\*\\.([A-Za-z0-9]+)", Qt::CaseInsensitive);
-			if(regExp2.lastIndexIn(filterStr) >= 0)
+			QRegExp regExp("\\*\\.([A-Za-z0-9]+)", Qt::CaseInsensitive);
+			if(regExp.lastIndexIn(filterStr) >= 0)
 			{
-				filterStr = regExp2.cap(1).trimmed();
+				filterStr = regExp.cap(1).trimmed();
 			}
 			else
 			{
