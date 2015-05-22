@@ -719,17 +719,17 @@
 <context>
     <name>DecoderRegistry</name>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="163"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="146"/>
         <source>All supported types</source>
         <translation>Все поддерживаемые типы</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="161"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="176"/>
         <source>Playlists</source>
         <translation>Плэйлисты</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="162"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="177"/>
         <source>All files</source>
         <translation>Все файлы</translation>
     </message>

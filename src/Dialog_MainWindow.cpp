@@ -89,9 +89,9 @@
 
 #define INIT_BANNER() do \
 { \
-	if(m_banner == NULL) \
+	if(m_banner.isNull()) \
 	{ \
-		m_banner = new WorkingBanner(this); \
+		m_banner.reset(new WorkingBanner(this)); \
 	} \
 } \
 while(0)
@@ -225,6 +225,15 @@ while(0)
 } \
 while(0)
 
+class FileListBlocker
+{
+public:
+	FileListBlocker(FileListModel *const fileList) : m_fileList(fileList) { m_fileList->setBlockUpdates(true);  }
+	~FileListBlocker(void)                                                { m_fileList->setBlockUpdates(false); }
+private:
+	FileListModel *const m_fileList;
+};
+
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
@@ -244,8 +253,6 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	m_fileListModel(fileListModel),
 	m_metaData(metaInfo),
 	m_settings(settingsModel),
-	m_fileSystemModel(NULL),
-	m_banner(NULL),
 	m_accepted(false),
 	m_firstTimeShown(true),
 	m_outputFolderViewCentering(false),
@@ -275,13 +282,13 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 
 	//Setup corner widget
 	QLabel *cornerWidget = new QLabel(ui->menubar);
-	m_evenFilterCornerWidget = new CustomEventFilter;
+	m_evenFilterCornerWidget.reset(new CustomEventFilter);
 	cornerWidget->setText("N/A");
 	cornerWidget->setFixedHeight(ui->menubar->height());
 	cornerWidget->setCursor(QCursor(Qt::PointingHandCursor));
 	cornerWidget->hide();
-	cornerWidget->installEventFilter(m_evenFilterCornerWidget);
-	connect(m_evenFilterCornerWidget, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(cornerWidgetEventOccurred(QWidget*, QEvent*)));
+	cornerWidget->installEventFilter(m_evenFilterCornerWidget.data());
+	connect(m_evenFilterCornerWidget.data(), SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(cornerWidgetEventOccurred(QWidget*, QEvent*)));
 	ui->menubar->setCornerWidget(cornerWidget);
 
 	//--------------------------------
@@ -298,12 +305,12 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	SET_FONT_BOLD(m_dropNoteLabel, true);
 	SET_TEXT_COLOR(m_dropNoteLabel, Qt::darkGray);
 	m_sourceFilesContextMenu = new QMenu();
-	m_showDetailsContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
-	m_previewContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/sound.png"), "N/A");
-	m_findFileContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_go.png"), "N/A");
+	m_showDetailsContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/zoom.png"),         "N/A");
+	m_previewContextAction     = m_sourceFilesContextMenu->addAction(QIcon(":/icons/sound.png"),        "N/A");
+	m_findFileContextAction    = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_go.png"),    "N/A");
 	m_sourceFilesContextMenu->addSeparator();
-	m_exportCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/table_save.png"), "N/A");
-	m_importCsvContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_table.png"), "N/A");
+	m_exportCsvContextAction   = m_sourceFilesContextMenu->addAction(QIcon(":/icons/table_save.png"),   "N/A");
+	m_importCsvContextAction   = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_table.png"), "N/A");
 	SET_FONT_BOLD(m_showDetailsContextAction, true);
 
 	connect(ui->buttonAddFiles,                      SIGNAL(clicked()),                          this, SLOT(addFilesButtonClicked()));
@@ -334,44 +341,44 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->outputFolderView->setContextMenuPolicy(Qt::CustomContextMenu);
 	ui->outputFolderView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
-	m_evenFilterOutputFolderMouse = new CustomEventFilter;
-	ui->outputFoldersGoUpLabel->installEventFilter(m_evenFilterOutputFolderMouse);
-	ui->outputFoldersEditorLabel->installEventFilter(m_evenFilterOutputFolderMouse);
-	ui->outputFoldersFovoritesLabel->installEventFilter(m_evenFilterOutputFolderMouse);
-	ui->outputFolderLabel->installEventFilter(m_evenFilterOutputFolderMouse);
+	m_evenFilterOutputFolderMouse.reset(new CustomEventFilter);
+	ui->outputFoldersGoUpLabel     ->installEventFilter(m_evenFilterOutputFolderMouse.data());
+	ui->outputFoldersEditorLabel   ->installEventFilter(m_evenFilterOutputFolderMouse.data());
+	ui->outputFoldersFovoritesLabel->installEventFilter(m_evenFilterOutputFolderMouse.data());
+	ui->outputFolderLabel          ->installEventFilter(m_evenFilterOutputFolderMouse.data());
 
-	m_evenFilterOutputFolderView = new CustomEventFilter;
-	ui->outputFolderView->installEventFilter(m_evenFilterOutputFolderView);
+	m_evenFilterOutputFolderView.reset(new CustomEventFilter);
+	ui->outputFolderView->installEventFilter(m_evenFilterOutputFolderView.data());
 
 	SET_CHECKBOX_STATE(ui->saveToSourceFolderCheckBox, m_settings->outputToSourceDir());
 	ui->prependRelativePathCheckBox->setChecked(m_settings->prependRelativeSourcePath());
 	
-	connect(ui->outputFolderView, SIGNAL(clicked(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	connect(ui->outputFolderView, SIGNAL(activated(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	connect(ui->outputFolderView, SIGNAL(pressed(QModelIndex)), this, SLOT(outputFolderViewClicked(QModelIndex)));
-	connect(ui->outputFolderView, SIGNAL(entered(QModelIndex)), this, SLOT(outputFolderViewMoved(QModelIndex)));
-	connect(ui->outputFolderView, SIGNAL(expanded(QModelIndex)), this, SLOT(outputFolderItemExpanded(QModelIndex)));
-	connect(ui->buttonMakeFolder, SIGNAL(clicked()), this, SLOT(makeFolderButtonClicked()));
-	connect(ui->buttonGotoHome, SIGNAL(clicked()), SLOT(gotoHomeFolderButtonClicked()));
-	connect(ui->buttonGotoDesktop, SIGNAL(clicked()), this, SLOT(gotoDesktopButtonClicked()));
-	connect(ui->buttonGotoMusic, SIGNAL(clicked()), this, SLOT(gotoMusicFolderButtonClicked()));
-	connect(ui->saveToSourceFolderCheckBox, SIGNAL(clicked()), this, SLOT(saveToSourceFolderChanged()));
-	connect(ui->prependRelativePathCheckBox, SIGNAL(clicked()), this, SLOT(prependRelativePathChanged()));
-	connect(ui->outputFolderEdit, SIGNAL(editingFinished()), this, SLOT(outputFolderEditFinished()));
-	connect(m_evenFilterOutputFolderMouse, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderMouseEventOccurred(QWidget*, QEvent*)));
-	connect(m_evenFilterOutputFolderView, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderViewEventOccurred(QWidget*, QEvent*)));
+	connect(ui->outputFolderView,                 SIGNAL(clicked(QModelIndex)),             this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(ui->outputFolderView,                 SIGNAL(activated(QModelIndex)),           this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(ui->outputFolderView,                 SIGNAL(pressed(QModelIndex)),             this, SLOT(outputFolderViewClicked(QModelIndex)));
+	connect(ui->outputFolderView,                 SIGNAL(entered(QModelIndex)),             this, SLOT(outputFolderViewMoved(QModelIndex)));
+	connect(ui->outputFolderView,                 SIGNAL(expanded(QModelIndex)),            this, SLOT(outputFolderItemExpanded(QModelIndex)));
+	connect(ui->buttonMakeFolder,                 SIGNAL(clicked()),                        this, SLOT(makeFolderButtonClicked()));
+	connect(ui->buttonGotoHome,                   SIGNAL(clicked()),                        this, SLOT(gotoHomeFolderButtonClicked()));
+	connect(ui->buttonGotoDesktop,                SIGNAL(clicked()),                        this, SLOT(gotoDesktopButtonClicked()));
+	connect(ui->buttonGotoMusic,                  SIGNAL(clicked()),                        this, SLOT(gotoMusicFolderButtonClicked()));
+	connect(ui->saveToSourceFolderCheckBox,       SIGNAL(clicked()),                        this, SLOT(saveToSourceFolderChanged()));
+	connect(ui->prependRelativePathCheckBox,      SIGNAL(clicked()),                        this, SLOT(prependRelativePathChanged()));
+	connect(ui->outputFolderEdit,                 SIGNAL(editingFinished()),                this, SLOT(outputFolderEditFinished()));
+	connect(m_evenFilterOutputFolderMouse.data(), SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderMouseEventOccurred(QWidget*, QEvent*)));
+	connect(m_evenFilterOutputFolderView.data(),  SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderViewEventOccurred(QWidget*, QEvent*)));
 
 	if(m_outputFolderContextMenu = new QMenu())
 	{
-		m_showFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"), "N/A");
-		m_goUpFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/folder_up.png"), "N/A");
+		m_showFolderContextAction    = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"),          "N/A");
+		m_goUpFolderContextAction    = m_outputFolderContextMenu->addAction(QIcon(":/icons/folder_up.png"),     "N/A");
 		m_outputFolderContextMenu->addSeparator();
 		m_refreshFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/arrow_refresh.png"), "N/A");
 		m_outputFolderContextMenu->setDefaultAction(m_showFolderContextAction);
-		connect(ui->outputFolderView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
-		connect(m_showFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(showFolderContextActionTriggered()));
-		connect(m_refreshFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(refreshFolderContextActionTriggered()));
-		connect(m_goUpFolderContextAction, SIGNAL(triggered(bool)), this, SLOT(goUpFolderContextActionTriggered()));
+		connect(ui->outputFolderView,         SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
+		connect(m_showFolderContextAction,    SIGNAL(triggered(bool)),                    this, SLOT(showFolderContextActionTriggered()));
+		connect(m_refreshFolderContextAction, SIGNAL(triggered(bool)),                    this, SLOT(refreshFolderContextActionTriggered()));
+		connect(m_goUpFolderContextAction,    SIGNAL(triggered(bool)),                    this, SLOT(goUpFolderContextActionTriggered()));
 	}
 
 	if(m_outputFolderFavoritesMenu = new QMenu())
@@ -389,7 +396,6 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 		m_outputFolderNoteBox->setFrameShape(QFrame::StyledPanel);
 		SET_FONT_BOLD(m_outputFolderNoteBox, true);
 		m_outputFolderNoteBox->hide();
-
 	}
 
 	outputFolderViewClicked(QModelIndex());
@@ -399,42 +405,42 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	// Setup "Meta Data" tab
 	//--------------------------------
 
-	m_metaInfoModel = new MetaInfoModel(m_metaData);
+	m_metaInfoModel.reset(new MetaInfoModel(m_metaData));
 	m_metaInfoModel->clearData();
 	m_metaInfoModel->setData(m_metaInfoModel->index(4, 1), m_settings->metaInfoPosition());
-	ui->metaDataView->setModel(m_metaInfoModel);
+	ui->metaDataView->setModel(m_metaInfoModel.data());
 	ui->metaDataView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	ui->metaDataView->verticalHeader()->hide();
 	ui->metaDataView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	SET_CHECKBOX_STATE(ui->writeMetaDataCheckBox, m_settings->writeMetaTags());
 	ui->generatePlaylistCheckBox->setChecked(m_settings->createPlaylist());
-	connect(ui->buttonEditMeta, SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
-	connect(ui->buttonClearMeta, SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
-	connect(ui->writeMetaDataCheckBox, SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
+	connect(ui->buttonEditMeta,           SIGNAL(clicked()), this, SLOT(editMetaButtonClicked()));
+	connect(ui->buttonClearMeta,          SIGNAL(clicked()), this, SLOT(clearMetaButtonClicked()));
+	connect(ui->writeMetaDataCheckBox,    SIGNAL(clicked()), this, SLOT(metaTagsEnabledChanged()));
 	connect(ui->generatePlaylistCheckBox, SIGNAL(clicked()), this, SLOT(playlistEnabledChanged()));
 
 	//--------------------------------
 	//Setup "Compression" tab
 	//--------------------------------
 
-	m_encoderButtonGroup = new QButtonGroup(this);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderMP3, SettingsModel::MP3Encoder);
+	m_encoderButtonGroup.reset(new QButtonGroup(this));
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderMP3,    SettingsModel::MP3Encoder);
 	m_encoderButtonGroup->addButton(ui->radioButtonEncoderVorbis, SettingsModel::VorbisEncoder);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAAC, SettingsModel::AACEncoder);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAC3, SettingsModel::AC3Encoder);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderFLAC, SettingsModel::FLACEncoder);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAPE, SettingsModel::MACEncoder);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderOpus, SettingsModel::OpusEncoder);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderDCA, SettingsModel::DCAEncoder);
-	m_encoderButtonGroup->addButton(ui->radioButtonEncoderPCM, SettingsModel::PCMEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAAC,    SettingsModel::AACEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAC3,    SettingsModel::AC3Encoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderFLAC,   SettingsModel::FLACEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderAPE,    SettingsModel::MACEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderOpus,   SettingsModel::OpusEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderDCA,    SettingsModel::DCAEncoder);
+	m_encoderButtonGroup->addButton(ui->radioButtonEncoderPCM,    SettingsModel::PCMEncoder);
 
 	const int aacEncoder = EncoderRegistry::getAacEncoder();
 	ui->radioButtonEncoderAAC->setEnabled(aacEncoder > SettingsModel::AAC_ENCODER_NONE);
 
-	m_modeButtonGroup = new QButtonGroup(this);
-	m_modeButtonGroup->addButton(ui->radioButtonModeQuality, SettingsModel::VBRMode);
+	m_modeButtonGroup.reset(new QButtonGroup(this));
+	m_modeButtonGroup->addButton(ui->radioButtonModeQuality,        SettingsModel::VBRMode);
 	m_modeButtonGroup->addButton(ui->radioButtonModeAverageBitrate, SettingsModel::ABRMode);
-	m_modeButtonGroup->addButton(ui->radioButtonConstBitrate, SettingsModel::CBRMode);
+	m_modeButtonGroup->addButton(ui->radioButtonConstBitrate,       SettingsModel::CBRMode);
 
 	ui->radioButtonEncoderMP3->setChecked(true);
 	foreach(QAbstractButton *currentButton, m_encoderButtonGroup->buttons())
@@ -446,14 +452,14 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 		}
 	}
 
-	m_evenFilterCompressionTab = new CustomEventFilter();
-	ui->labelCompressionHelp->installEventFilter(m_evenFilterCompressionTab);
-	ui->labelResetEncoders ->installEventFilter(m_evenFilterCompressionTab);
+	m_evenFilterCompressionTab.reset(new CustomEventFilter());
+	ui->labelCompressionHelp->installEventFilter(m_evenFilterCompressionTab.data());
+	ui->labelResetEncoders  ->installEventFilter(m_evenFilterCompressionTab.data());
 
-	connect(m_encoderButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateEncoder(int)));
-	connect(m_modeButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updateRCMode(int)));
-	connect(m_evenFilterCompressionTab, SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(compressionTabEventOccurred(QWidget*, QEvent*)));
-	connect(ui->sliderBitrate, SIGNAL(valueChanged(int)), this, SLOT(updateBitrate(int)));
+	connect(m_encoderButtonGroup.data(),       SIGNAL(buttonClicked(int)),               this, SLOT(updateEncoder(int)));
+	connect(m_modeButtonGroup.data(),          SIGNAL(buttonClicked(int)),               this, SLOT(updateRCMode(int)));
+	connect(m_evenFilterCompressionTab.data(), SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(compressionTabEventOccurred(QWidget*, QEvent*)));
+	connect(ui->sliderBitrate,                 SIGNAL(valueChanged(int)),                this, SLOT(updateBitrate(int)));
 
 	updateEncoder(m_encoderButtonGroup->checkedId());
 
@@ -506,15 +512,15 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->lineEditRenameRegExp_Search ->setText(m_settings->renameFiles_regExpSearch ());
 	ui->lineEditRenameRegExp_Replace->setText(m_settings->renameFiles_regExpReplace());
 	
-	m_evenFilterCustumParamsHelp = new CustomEventFilter();
-	ui->helpCustomParamLAME->installEventFilter(m_evenFilterCustumParamsHelp);
-	ui->helpCustomParamOggEnc->installEventFilter(m_evenFilterCustumParamsHelp);
-	ui->helpCustomParamNeroAAC->installEventFilter(m_evenFilterCustumParamsHelp);
-	ui->helpCustomParamFLAC->installEventFilter(m_evenFilterCustumParamsHelp);
-	ui->helpCustomParamAften->installEventFilter(m_evenFilterCustumParamsHelp);
-	ui->helpCustomParamOpus->installEventFilter(m_evenFilterCustumParamsHelp);
+	m_evenFilterCustumParamsHelp.reset(new CustomEventFilter());
+	ui->helpCustomParamLAME   ->installEventFilter(m_evenFilterCustumParamsHelp.data());
+	ui->helpCustomParamOggEnc ->installEventFilter(m_evenFilterCustumParamsHelp.data());
+	ui->helpCustomParamNeroAAC->installEventFilter(m_evenFilterCustumParamsHelp.data());
+	ui->helpCustomParamFLAC   ->installEventFilter(m_evenFilterCustumParamsHelp.data());
+	ui->helpCustomParamAften  ->installEventFilter(m_evenFilterCustumParamsHelp.data());
+	ui->helpCustomParamOpus   ->installEventFilter(m_evenFilterCustumParamsHelp.data());
 	
-	m_overwriteButtonGroup = new QButtonGroup(this);
+	m_overwriteButtonGroup.reset(new QButtonGroup(this));
 	m_overwriteButtonGroup->addButton(ui->radioButtonOverwriteModeKeepBoth, SettingsModel::Overwrite_KeepBoth);
 	m_overwriteButtonGroup->addButton(ui->radioButtonOverwriteModeSkipFile, SettingsModel::Overwrite_SkipFile);
 	m_overwriteButtonGroup->addButton(ui->radioButtonOverwriteModeReplaces, SettingsModel::Overwrite_Replaces);
@@ -581,8 +587,8 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->buttonRename_FileEx,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
 	connect(ui->buttonFileExts_Add,                 SIGNAL(clicked()),                        this, SLOT(fileExtAddButtonClicked()));
 	connect(ui->buttonFileExts_Remove,              SIGNAL(clicked()),                        this, SLOT(fileExtRemoveButtonClicked()));
-	connect(m_overwriteButtonGroup,                 SIGNAL(buttonClicked(int)),               this, SLOT(overwriteModeChanged(int)));
-	connect(m_evenFilterCustumParamsHelp,           SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
+	connect(m_overwriteButtonGroup.data(),          SIGNAL(buttonClicked(int)),               this, SLOT(overwriteModeChanged(int)));
+	connect(m_evenFilterCustumParamsHelp.data(),    SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 	connect(fileExtModel,                           SIGNAL(modelReset()),                     this, SLOT(fileExtModelChanged()));
 
 	//--------------------------------
@@ -607,7 +613,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->actionOpenFolderRecursively, SIGNAL(triggered()), this, SLOT(openFolderActionActivated()));
 
 	//Activate view menu actions
-	m_tabActionGroup = new QActionGroup(this);
+	m_tabActionGroup.reset(new QActionGroup(this));
 	m_tabActionGroup->addAction(ui->actionSourceFiles);
 	m_tabActionGroup->addAction(ui->actionOutputDirectory);
 	m_tabActionGroup->addAction(ui->actionCompression);
@@ -619,10 +625,10 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->actionCompression->setData(3);
 	ui->actionAdvancedOptions->setData(4);
 	ui->actionSourceFiles->setChecked(true);
-	connect(m_tabActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabActionActivated(QAction*)));
+	connect(m_tabActionGroup.data(), SIGNAL(triggered(QAction*)), this, SLOT(tabActionActivated(QAction*)));
 
 	//Activate style menu actions
-	m_styleActionGroup = new QActionGroup(this);
+	m_styleActionGroup .reset(new QActionGroup(this));
 	m_styleActionGroup->addAction(ui->actionStylePlastique);
 	m_styleActionGroup->addAction(ui->actionStyleCleanlooks);
 	m_styleActionGroup->addAction(ui->actionStyleWindowsVista);
@@ -636,11 +642,11 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->actionStylePlastique->setChecked(true);
 	ui->actionStyleWindowsXP->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_XP && MUtils::GUI::themes_enabled());
 	ui->actionStyleWindowsVista->setEnabled((QSysInfo::windowsVersion() & QSysInfo::WV_NT_based) >= QSysInfo::WV_VISTA && MUtils::GUI::themes_enabled());
-	connect(m_styleActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
+	connect(m_styleActionGroup.data(), SIGNAL(triggered(QAction*)), this, SLOT(styleActionActivated(QAction*)));
 	styleActionActivated(NULL);
 
 	//Populate the language menu
-	m_languageActionGroup = new QActionGroup(this);
+	m_languageActionGroup.reset(new QActionGroup(this));
 	QStringList translations;
 	if(MUtils::Translation::enumerate(translations) > 0)
 	{
@@ -657,8 +663,8 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 		}
 	}
 	ui->menuLanguage->insertSeparator(ui->actionLoadTranslationFromFile);
-	connect(ui->actionLoadTranslationFromFile, SIGNAL(triggered(bool)), this, SLOT(languageFromFileActionActivated(bool)));
-	connect(m_languageActionGroup, SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
+	connect(ui->actionLoadTranslationFromFile, SIGNAL(triggered(bool)),     this, SLOT(languageFromFileActionActivated(bool)));
+	connect(m_languageActionGroup.data(),      SIGNAL(triggered(QAction*)), this, SLOT(languageActionActivated(QAction*)));
 	ui->actionLoadTranslationFromFile->setChecked(false);
 
 	//Activate tools menu actions
@@ -713,17 +719,17 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 
 	//Create DropBox widget
 	m_dropBox = new DropBox(this, m_fileListModel, m_settings);
-	connect(m_fileListModel, SIGNAL(modelReset()), m_dropBox, SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(modelReset()),                      m_dropBox, SLOT(modelChanged()));
 	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), m_dropBox, SLOT(modelChanged()));
-	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), m_dropBox, SLOT(modelChanged()));
-	connect(m_fileListModel, SIGNAL(rowAppended()), m_dropBox, SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)),  m_dropBox, SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(rowAppended()),                     m_dropBox, SLOT(modelChanged()));
 
 	//Create message handler thread
 	m_messageHandler = new MessageHandlerThread(ipcChannel);
-	connect(m_messageHandler, SIGNAL(otherInstanceDetected()), this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
-	connect(m_messageHandler, SIGNAL(fileReceived(QString)), this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
+	connect(m_messageHandler, SIGNAL(otherInstanceDetected()),       this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
+	connect(m_messageHandler, SIGNAL(fileReceived(QString)),         this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
 	connect(m_messageHandler, SIGNAL(folderReceived(QString, bool)), this, SLOT(addFolderDelayed(QString, bool)), Qt::QueuedConnection);
-	connect(m_messageHandler, SIGNAL(killSignalReceived()), this, SLOT(close()), Qt::QueuedConnection);
+	connect(m_messageHandler, SIGNAL(killSignalReceived()),          this, SLOT(close()), Qt::QueuedConnection);
 	m_messageHandler->start();
 
 	//Init delayed file handling
@@ -763,33 +769,19 @@ MainWindow::~MainWindow(void)
 	}
 
 	//Unset models
-	SET_MODEL(ui->sourceFileView, NULL);
+	SET_MODEL(ui->sourceFileView,   NULL);
 	SET_MODEL(ui->outputFolderView, NULL);
-	SET_MODEL(ui->metaDataView, NULL);
+	SET_MODEL(ui->metaDataView,     NULL);
 
 	//Free memory
-	MUTILS_DELETE(m_tabActionGroup);
-	MUTILS_DELETE(m_styleActionGroup);
-	MUTILS_DELETE(m_languageActionGroup);
-	MUTILS_DELETE(m_banner);
-	MUTILS_DELETE(m_fileSystemModel);
 	MUTILS_DELETE(m_messageHandler);
 	MUTILS_DELETE(m_droppedFileList);
 	MUTILS_DELETE(m_delayedFileList);
 	MUTILS_DELETE(m_delayedFileTimer);
-	MUTILS_DELETE(m_metaInfoModel);
-	MUTILS_DELETE(m_encoderButtonGroup);
-	MUTILS_DELETE(m_modeButtonGroup);
-	MUTILS_DELETE(m_overwriteButtonGroup);
 	MUTILS_DELETE(m_sourceFilesContextMenu);
 	MUTILS_DELETE(m_outputFolderFavoritesMenu);
 	MUTILS_DELETE(m_outputFolderContextMenu);
 	MUTILS_DELETE(m_dropBox);
-	MUTILS_DELETE(m_evenFilterCornerWidget);
-	MUTILS_DELETE(m_evenFilterCustumParamsHelp);
-	MUTILS_DELETE(m_evenFilterOutputFolderMouse);
-	MUTILS_DELETE(m_evenFilterOutputFolderView);
-	MUTILS_DELETE(m_evenFilterCompressionTab);
 
 	//Un-initialize the dialog
 	MUTILS_DELETE(ui);
@@ -813,26 +805,20 @@ void MainWindow::addFiles(const QStringList &files)
 	tabPageChanged(ui->tabWidget->currentIndex(), true);
 
 	INIT_BANNER();
-	FileAnalyzer *analyzer = new FileAnalyzer(files);
+	QScopedPointer<FileAnalyzer> analyzer(new FileAnalyzer(files));
 
-	connect(analyzer, SIGNAL(fileSelected(QString)), m_banner, SLOT(setText(QString)), Qt::QueuedConnection);
-	connect(analyzer, SIGNAL(progressValChanged(unsigned int)), m_banner, SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
-	connect(analyzer, SIGNAL(progressMaxChanged(unsigned int)), m_banner, SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
-	connect(analyzer, SIGNAL(fileAnalyzed(AudioFileModel)), m_fileListModel, SLOT(addFile(AudioFileModel)), Qt::QueuedConnection);
-	connect(m_banner, SIGNAL(userAbort()), analyzer, SLOT(abortProcess()), Qt::DirectConnection);
+	connect(analyzer.data(), SIGNAL(fileSelected(QString)),            m_banner.data(), SLOT(setText(QString)),             Qt::QueuedConnection);
+	connect(analyzer.data(), SIGNAL(progressValChanged(unsigned int)), m_banner.data(), SLOT(setProgressVal(unsigned int)), Qt::QueuedConnection);
+	connect(analyzer.data(), SIGNAL(progressMaxChanged(unsigned int)), m_banner.data(), SLOT(setProgressMax(unsigned int)), Qt::QueuedConnection);
+	connect(analyzer.data(), SIGNAL(fileAnalyzed(AudioFileModel)),     m_fileListModel, SLOT(addFile(AudioFileModel)),      Qt::QueuedConnection);
+	connect(m_banner.data(), SIGNAL(userAbort()),                      analyzer.data(), SLOT(abortProcess()),               Qt::DirectConnection);
 
-	try
+	if(!analyzer.isNull())
 	{
-		m_fileListModel->setBlockUpdates(true);
-		QTime startTime = QTime::currentTime();
-		m_banner->show(tr("Adding file(s), please wait..."), analyzer);
-	}
-	catch(...)
-	{
-		/* ignore any exceptions that may occur */
+		FileListBlocker fileListBlocker(m_fileListModel);
+		m_banner->show(tr("Adding file(s), please wait..."), analyzer.data());
 	}
 
-	m_fileListModel->setBlockUpdates(false);
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 	ui->sourceFileView->update();
 	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -856,7 +842,6 @@ void MainWindow::addFiles(const QStringList &files)
 		QMessageBox::warning(this, tr("Files Rejected"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because the file format could not be recognized!", "", analyzer->filesRejected())), NOBR(tr("This usually means the file is damaged or the file format is not supported."))));
 	}
 
-	MUTILS_DELETE(analyzer);
 	m_banner->close();
 }
 
@@ -1286,7 +1271,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
  */
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-	if(obj == m_fileSystemModel)
+	if(obj == m_fileSystemModel.data())
 	{
 		if(QApplication::overrideCursor() == NULL)
 		{
@@ -2117,18 +2102,22 @@ void MainWindow::importCueSheetActionTriggered(bool checked)
 			if(!selectedCueFile.isEmpty())
 			{
 				m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
-				CueImportDialog *cueImporter  = new CueImportDialog(this, m_fileListModel, selectedCueFile, m_settings);
+				FileListBlocker fileListBlocker(m_fileListModel);
+				QScopedPointer<CueImportDialog> cueImporter(new CueImportDialog(this, m_fileListModel, selectedCueFile, m_settings));
 				result = cueImporter->exec();
-				MUTILS_DELETE(cueImporter);
 			}
 
-			if(result == QDialog::Accepted)
+			if(result != QDialog::Rejected)
 			{
 				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 				ui->sourceFileView->update();
 				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 				ui->sourceFileView->scrollToBottom();
 				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+			}
+			else
+			{
+				qWarning("Whoops! (RESULT: %d)", result);
 			}
 
 			if(result != (-1)) break;
@@ -3205,17 +3194,17 @@ void MainWindow::initOutputFolderModel(void)
 		if(m_fileSystemModel)
 		{
 			SET_MODEL(ui->outputFolderView, NULL);
-			MUTILS_DELETE(m_fileSystemModel);
 			ui->outputFolderView->repaint();
 		}
 
-		if(m_fileSystemModel = new QFileSystemModelEx())
+		m_fileSystemModel.reset(new QFileSystemModelEx());
+		if(!m_fileSystemModel.isNull())
 		{
 			m_fileSystemModel->installEventFilter(this);
-			connect(m_fileSystemModel, SIGNAL(directoryLoaded(QString)), this, SLOT(outputFolderDirectoryLoaded(QString)));
-			connect(m_fileSystemModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(outputFolderRowsInserted(QModelIndex,int,int)));
+			connect(m_fileSystemModel.data(), SIGNAL(directoryLoaded(QString)),          this, SLOT(outputFolderDirectoryLoaded(QString)));
+			connect(m_fileSystemModel.data(), SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(outputFolderRowsInserted(QModelIndex,int,int)));
 
-			SET_MODEL(ui->outputFolderView, m_fileSystemModel);
+			SET_MODEL(ui->outputFolderView, m_fileSystemModel.data());
 			ui->outputFolderView->header()->setStretchLastSection(true);
 			ui->outputFolderView->header()->hideSection(1);
 			ui->outputFolderView->header()->hideSection(2);

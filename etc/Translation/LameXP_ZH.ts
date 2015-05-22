@@ -708,17 +708,17 @@
 <context>
     <name>DecoderRegistry</name>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="163"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="146"/>
         <source>All supported types</source>
         <translation>所有支持的类型</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="162"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="177"/>
         <source>All files</source>
         <translation>所有文件</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="161"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="176"/>
         <source>Playlists</source>
         <translation>播放列表</translation>
     </message>

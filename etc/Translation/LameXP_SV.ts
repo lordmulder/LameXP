@@ -712,17 +712,17 @@
 <context>
     <name>DecoderRegistry</name>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="163"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="146"/>
         <source>All supported types</source>
         <translation>Alla typer som stöds</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="161"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="176"/>
         <source>Playlists</source>
         <translation>Spelningslistor</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="162"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="177"/>
         <source>All files</source>
         <translation>Alla filer</translation>
     </message>

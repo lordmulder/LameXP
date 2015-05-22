@@ -711,17 +711,17 @@
 <context>
     <name>DecoderRegistry</name>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="163"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="146"/>
         <source>All supported types</source>
         <translation>Alle unterstützten Dateitypen</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="162"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="177"/>
         <source>All files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="../../src/Registry_Decoder.cpp" line="161"/>
+        <location filename="../../src/Registry_Decoder.cpp" line="176"/>
         <source>Playlists</source>
         <translation>Wiedergabelisten</translation>
     </message>
@@ -1509,12 +1509,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2380"/>
         <source>Filter Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateinamen Filtern</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2380"/>
         <source>Select filename filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateinamen-Filter auswählen:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="3024"/>

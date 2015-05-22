@@ -217,22 +217,31 @@ private:
 	uint m_outputFolderViewInitCounter;
 	bool m_outputFolderViewCentering;
 
-	WorkingBanner *m_banner;
+	FileListModel           *const m_fileListModel;
+	AudioFileModel_MetaInfo *const m_metaData;
+	SettingsModel           *const m_settings;
+
+	QScopedPointer<WorkingBanner>      m_banner;
+	QScopedPointer<MetaInfoModel>      m_metaInfoModel;
+	QScopedPointer<QFileSystemModelEx> m_fileSystemModel;
+	
 	QList<QUrl> *m_droppedFileList;
 	QStringList *m_delayedFileList;
 	QTimer *m_delayedFileTimer;
 	DropBox *m_dropBox;
 	QLabel *m_dropNoteLabel;
-	FileListModel *m_fileListModel;
-	QFileSystemModelEx *m_fileSystemModel;
 	MessageHandlerThread *m_messageHandler;
-	AudioFileModel_MetaInfo *const m_metaData;
-	MetaInfoModel *m_metaInfoModel;
 	QMenu *m_outputFolderContextMenu;
-	SettingsModel *m_settings;
 	QMenu *m_sourceFilesContextMenu;
 	QMenu *m_outputFolderFavoritesMenu;
 	QLabel *m_outputFolderNoteBox;
+
+	QScopedPointer<QActionGroup> m_languageActionGroup;
+	QScopedPointer<QActionGroup> m_styleActionGroup;
+	QScopedPointer<QActionGroup> m_tabActionGroup;
+	QScopedPointer<QButtonGroup> m_encoderButtonGroup;
+	QScopedPointer<QButtonGroup> m_modeButtonGroup;
+	QScopedPointer<QButtonGroup> m_overwriteButtonGroup;
 
 	QAction *m_findFileContextAction;
 	QAction *m_previewContextAction;
@@ -243,16 +252,10 @@ private:
 	QAction *m_addFavoriteFolderAction;
 	QAction *m_exportCsvContextAction;
 	QAction *m_importCsvContextAction;
-	QActionGroup *m_languageActionGroup;
-	QActionGroup *m_styleActionGroup;
-	QActionGroup *m_tabActionGroup;
-	QButtonGroup *m_encoderButtonGroup;
-	QButtonGroup *m_modeButtonGroup;
-	QButtonGroup *m_overwriteButtonGroup;
 
-	CustomEventFilter *m_evenFilterCornerWidget;
-	CustomEventFilter *m_evenFilterCustumParamsHelp;
-	CustomEventFilter *m_evenFilterOutputFolderMouse;
-	CustomEventFilter *m_evenFilterOutputFolderView;
-	CustomEventFilter *m_evenFilterCompressionTab;
+	QScopedPointer<CustomEventFilter> m_evenFilterCornerWidget;
+	QScopedPointer<CustomEventFilter> m_evenFilterCustumParamsHelp;
+	QScopedPointer<CustomEventFilter> m_evenFilterOutputFolderMouse;
+	QScopedPointer<CustomEventFilter> m_evenFilterOutputFolderView;
+	QScopedPointer<CustomEventFilter> m_evenFilterCompressionTab;
 };

@@ -119,6 +119,16 @@ const QStringList &DecoderRegistry::getSupportedExts(void)
 		}
 	}
 
+	const char *const *const playlistPtr = PlaylistImporter::getSupportedExtensions();
+	for(size_t i = 0; playlistPtr[i]; i++)
+	{
+		const QString ext = QString().sprintf("*.%s", playlistPtr[i]);
+		if(!m_supportedExts->contains(ext, Qt::CaseInsensitive))
+		{
+			(*m_supportedExts) << ext;
+		}
+	}
+
 	m_supportedExts->sort();
 	return (*m_supportedExts);
 }
@@ -133,6 +143,7 @@ const QStringList &DecoderRegistry::getSupportedTypes(void)
 	}
 
 	m_supportedTypes.reset(new QStringList());
+	(*m_supportedTypes) << QString("%1 (%2)").arg(tr("All supported types"), getSupportedExts().join(" "));
 
 	const typeList_t &types = getAvailableDecoderTypes();
 	for(QList<const AbstractDecoder::supportedType_t*>::ConstIterator iter = types.constBegin(); iter != types.constEnd(); iter++)
@@ -151,16 +162,19 @@ const QStringList &DecoderRegistry::getSupportedTypes(void)
 		}
 	}
 
-	QStringList playlistExts;
 	const char *const *const playlistPtr = PlaylistImporter::getSupportedExtensions();
+	QStringList playListExts;
 	for(size_t i = 0; playlistPtr[i]; i++)
 	{
-		playlistExts << QString().sprintf("*.%s", playlistPtr[i]);
+		const QString ext = QString().sprintf("*.%s", playlistPtr[i]);
+		if(!playListExts.contains(ext, Qt::CaseInsensitive))
+		{
+			playListExts << ext;
+		}
 	}
 
-	(*m_supportedTypes) << QString("%1 (%2)").arg(tr("Playlists"), playlistExts.join(" "));
+	(*m_supportedTypes) << QString("%1 (%2)").arg(tr("Playlists"), playListExts.join(" "));
 	(*m_supportedTypes) << QString("%1 (*.*)").arg(tr("All files"));
-	m_supportedTypes->prepend(QString("%1 (%2 %3)").arg(tr("All supported types"), getSupportedExts().join(" "), playlistExts.join(" ")));
 
 	return (*m_supportedTypes);
 }
