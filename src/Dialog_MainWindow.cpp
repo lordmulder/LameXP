@@ -82,42 +82,24 @@
 #include <QScrollBar>
 
 ////////////////////////////////////////////////////////////
-// Helper macros
+// Constants
 ////////////////////////////////////////////////////////////
 
-#define BANNER_VISIBLE ((m_banner != NULL) && m_banner->isVisible())
+static const unsigned int IDM_ABOUTBOX = 0xEFF0;
+static const char *g_hydrogen_audio_url = "http://wiki.hydrogenaud.io/index.php?title=Main_Page";
+static const char *g_documents_base_url = "http://lamexp.sourceforge.net/doc";
+
+////////////////////////////////////////////////////////////
+// Helper Macros
+////////////////////////////////////////////////////////////
+
+#define BANNER_VISIBLE ((!m_banner.isNull()) && m_banner->isVisible())
 
 #define INIT_BANNER() do \
 { \
 	if(m_banner.isNull()) \
 	{ \
 		m_banner.reset(new WorkingBanner(this)); \
-	} \
-} \
-while(0)
-
-#define SHOW_BANNER(TXT) do \
-{ \
-	INIT_BANNER(); \
-	m_banner->show((TXT)); \
-} \
-while(0)
-
-#define SHOW_BANNER_ARG(TXT, ARG) do \
-{ \
-	INIT_BANNER(); \
-	m_banner->show((TXT), (ARG)); \
-} \
-while(0)
-
-
-#define SHOW_BANNER_CONDITIONALLY(FLAG, TEST, TXT) do \
-{ \
-	if((!(FLAG)) && ((TEST))) \
-	{ \
-		INIT_BANNER(); \
-		m_banner->show((TXT)); \
-		FLAG = true; \
 	} \
 } \
 while(0)
@@ -129,84 +111,6 @@ while(0)
 		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN); \
 		return; \
 	} \
-} \
-while(0)
-
-#define SET_TEXT_COLOR(WIDGET, COLOR) do \
-{ \
-	QPalette _palette = WIDGET->palette(); \
-	_palette.setColor(QPalette::WindowText, (COLOR)); \
-	_palette.setColor(QPalette::Text, (COLOR)); \
-	WIDGET->setPalette(_palette); \
-} \
-while(0)
-
-#define SET_FONT_BOLD(WIDGET,BOLD) do \
-{ \
-	QFont _font = WIDGET->font(); \
-	_font.setBold(BOLD); \
-	WIDGET->setFont(_font); \
-} \
-while(0)
-
-#define TEMP_HIDE_DROPBOX(CMD) do \
-{ \
-	bool _dropBoxVisible = m_dropBox->isVisible(); \
-	if(_dropBoxVisible) m_dropBox->hide(); \
-	do { CMD } while(0); \
-	if(_dropBoxVisible) m_dropBox->show(); \
-} \
-while(0)
-
-#define SET_MODEL(VIEW, MODEL) do \
-{ \
-	QItemSelectionModel *_tmp = (VIEW)->selectionModel(); \
-	(VIEW)->setModel(MODEL); \
-	MUTILS_DELETE(_tmp); \
-} \
-while(0)
-
-#define SET_CHECKBOX_STATE(CHCKBX, STATE) do \
-{ \
-	const bool isDisabled = (!(CHCKBX)->isEnabled()); \
-	if(isDisabled) \
-	{ \
-		(CHCKBX)->setEnabled(true); \
-	} \
-	if((CHCKBX)->isChecked() != (STATE)) \
-	{ \
-		(CHCKBX)->click(); \
-	} \
-	if((CHCKBX)->isChecked() != (STATE)) \
-	{ \
-		qWarning("Warning: Failed to set checkbox " #CHCKBX " state!"); \
-	} \
-	if(isDisabled) \
-	{ \
-		(CHCKBX)->setEnabled(false); \
-	} \
-} \
-while(0)
-
-#define TRIM_STRING_RIGHT(STR) do \
-{ \
-	while((STR.length() > 0) && STR[STR.length()-1].isSpace()) STR.chop(1); \
-} \
-while(0)
-
-#define MAKE_TRANSPARENT(WIDGET, FLAG) do \
-{ \
-	QPalette _p = (WIDGET)->palette(); \
-	_p.setColor(QPalette::Background, Qt::transparent); \
-	(WIDGET)->setPalette(FLAG ? _p : QPalette()); \
-} \
-while(0)
-
-#define WITH_BLOCKED_SIGNALS(WIDGET, CMD, ...) do \
-{ \
-	const bool _flag = (WIDGET)->blockSignals(true); \
-	(WIDGET)->CMD(__VA_ARGS__); \
-	if(!(_flag)) { (WIDGET)->blockSignals(false); } \
 } \
 while(0)
 
@@ -225,22 +129,111 @@ while(0)
 } \
 while(0)
 
-class FileListBlocker
-{
-public:
-	FileListBlocker(FileListModel *const fileList) : m_fileList(fileList) { m_fileList->setBlockUpdates(true);  }
-	~FileListBlocker(void)                                                { m_fileList->setBlockUpdates(false); }
-private:
-	FileListModel *const m_fileList;
-};
-
 #define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
 #define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
 #define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
 
-static const unsigned int IDM_ABOUTBOX = 0xEFF0;
-static const char *g_hydrogen_audio_url = "http://wiki.hydrogenaud.io/index.php?title=Main_Page";
-static const char *g_documents_base_url = "http://lamexp.sourceforge.net/doc";
+////////////////////////////////////////////////////////////
+// Static Functions
+////////////////////////////////////////////////////////////
+
+static inline void SET_TEXT_COLOR(QWidget *const widget, const QColor &color)
+{
+	QPalette _palette = widget->palette();
+	_palette.setColor(QPalette::WindowText, (color));
+	_palette.setColor(QPalette::Text, (color));
+	widget->setPalette(_palette);
+}
+
+static inline void SET_FONT_BOLD(QWidget *const widget, const bool &bold)
+{ 
+	QFont _font = widget->font();
+	_font.setBold(bold);
+	widget->setFont(_font);
+}
+
+static inline void SET_FONT_BOLD(QAction *const widget, const bool &bold)
+{ 
+	QFont _font = widget->font();
+	_font.setBold(bold);
+	widget->setFont(_font);
+}
+
+static inline void SET_MODEL(QAbstractItemView *const view, QAbstractItemModel *const model)
+{
+	QItemSelectionModel *_tmp = view->selectionModel();
+	view->setModel(model);
+	MUTILS_DELETE(_tmp);
+}
+
+static inline void SET_CHECKBOX_STATE(QCheckBox *const chckbx, const bool &state)
+{
+	const bool isDisabled = (!chckbx->isEnabled());
+	if(isDisabled)
+	{
+		chckbx->setEnabled(true);
+	}
+	if(chckbx->isChecked() != state)
+	{
+		chckbx->click();
+	}
+	if(chckbx->isChecked() != state)
+	{
+		qWarning("Warning: Failed to set checkbox %p state!", chckbx);
+	}
+	if(isDisabled)
+	{
+		chckbx->setEnabled(false);
+	}
+}
+
+static inline void TRIM_STRING_RIGHT(QString &str)
+{
+	while((str.length() > 0) && str[str.length()-1].isSpace())
+	{
+		str.chop(1);
+	}
+}
+
+static inline void MAKE_TRANSPARENT(QWidget *const widget, const bool &flag)
+{
+	QPalette _p = widget->palette(); \
+	_p.setColor(QPalette::Background, Qt::transparent);
+	widget->setPalette(flag ? _p : QPalette());
+}
+
+////////////////////////////////////////////////////////////
+// Helper Classes
+////////////////////////////////////////////////////////////
+
+class WidgetHideHelper
+{
+public:
+	WidgetHideHelper(QWidget *const widget) : m_widget(widget), m_visible(widget && widget->isVisible()) { if(m_widget && m_visible) m_widget->hide(); }
+	~WidgetHideHelper(void)                                                                              { if(m_widget && m_visible) m_widget->show(); }
+private:
+	QWidget *const m_widget;
+	const bool m_visible;
+};
+
+class SignalBlockHelper
+{
+public:
+	SignalBlockHelper(QObject *const object) : m_object(object), m_flag(object && object->blockSignals(true)) {}
+	~SignalBlockHelper(void) { if(m_object && (!m_flag)) m_object->blockSignals(false); }
+private:
+	QObject *const m_object;
+	const bool m_flag;
+};
+
+class FileListBlockHelper
+{
+public:
+	FileListBlockHelper(FileListModel *const fileList) : m_fileList(fileList) { if(m_fileList) m_fileList->setBlockUpdates(true);  }
+	~FileListBlockHelper(void)                                                { if(m_fileList) m_fileList->setBlockUpdates(false); }
+private:
+	FileListModel *const m_fileList;
+};
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -300,11 +293,11 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	ui->sourceFileView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	ui->sourceFileView->setContextMenuPolicy(Qt::CustomContextMenu);
 	ui->sourceFileView->viewport()->installEventFilter(this);
-	m_dropNoteLabel = new QLabel(ui->sourceFileView);
+	m_dropNoteLabel.reset(new QLabel(ui->sourceFileView));
 	m_dropNoteLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-	SET_FONT_BOLD(m_dropNoteLabel, true);
-	SET_TEXT_COLOR(m_dropNoteLabel, Qt::darkGray);
-	m_sourceFilesContextMenu = new QMenu();
+	SET_FONT_BOLD(m_dropNoteLabel.data(), true);
+	SET_TEXT_COLOR(m_dropNoteLabel.data(), Qt::darkGray);
+	m_sourceFilesContextMenu.reset(new QMenu());
 	m_showDetailsContextAction = m_sourceFilesContextMenu->addAction(QIcon(":/icons/zoom.png"),         "N/A");
 	m_previewContextAction     = m_sourceFilesContextMenu->addAction(QIcon(":/icons/sound.png"),        "N/A");
 	m_findFileContextAction    = m_sourceFilesContextMenu->addAction(QIcon(":/icons/folder_go.png"),    "N/A");
@@ -368,35 +361,29 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(m_evenFilterOutputFolderMouse.data(), SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderMouseEventOccurred(QWidget*, QEvent*)));
 	connect(m_evenFilterOutputFolderView.data(),  SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(outputFolderViewEventOccurred(QWidget*, QEvent*)));
 
-	if(m_outputFolderContextMenu = new QMenu())
-	{
-		m_showFolderContextAction    = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"),          "N/A");
-		m_goUpFolderContextAction    = m_outputFolderContextMenu->addAction(QIcon(":/icons/folder_up.png"),     "N/A");
-		m_outputFolderContextMenu->addSeparator();
-		m_refreshFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/arrow_refresh.png"), "N/A");
-		m_outputFolderContextMenu->setDefaultAction(m_showFolderContextAction);
-		connect(ui->outputFolderView,         SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
-		connect(m_showFolderContextAction,    SIGNAL(triggered(bool)),                    this, SLOT(showFolderContextActionTriggered()));
-		connect(m_refreshFolderContextAction, SIGNAL(triggered(bool)),                    this, SLOT(refreshFolderContextActionTriggered()));
-		connect(m_goUpFolderContextAction,    SIGNAL(triggered(bool)),                    this, SLOT(goUpFolderContextActionTriggered()));
-	}
+	m_outputFolderContextMenu.reset(new QMenu());
+	m_showFolderContextAction    = m_outputFolderContextMenu->addAction(QIcon(":/icons/zoom.png"),          "N/A");
+	m_goUpFolderContextAction    = m_outputFolderContextMenu->addAction(QIcon(":/icons/folder_up.png"),     "N/A");
+	m_outputFolderContextMenu->addSeparator();
+	m_refreshFolderContextAction = m_outputFolderContextMenu->addAction(QIcon(":/icons/arrow_refresh.png"), "N/A");
+	m_outputFolderContextMenu->setDefaultAction(m_showFolderContextAction);
+	connect(ui->outputFolderView,         SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(outputFolderContextMenu(QPoint)));
+	connect(m_showFolderContextAction,    SIGNAL(triggered(bool)),                    this, SLOT(showFolderContextActionTriggered()));
+	connect(m_refreshFolderContextAction, SIGNAL(triggered(bool)),                    this, SLOT(refreshFolderContextActionTriggered()));
+	connect(m_goUpFolderContextAction,    SIGNAL(triggered(bool)),                    this, SLOT(goUpFolderContextActionTriggered()));
 
-	if(m_outputFolderFavoritesMenu = new QMenu())
-	{
-		m_addFavoriteFolderAction = m_outputFolderFavoritesMenu->addAction(QIcon(":/icons/add.png"), "N/A");
-		m_outputFolderFavoritesMenu->insertSeparator(m_addFavoriteFolderAction);
-		connect(m_addFavoriteFolderAction, SIGNAL(triggered(bool)), this, SLOT(addFavoriteFolderActionTriggered()));
-	}
+	m_outputFolderFavoritesMenu.reset(new QMenu());
+	m_addFavoriteFolderAction = m_outputFolderFavoritesMenu->addAction(QIcon(":/icons/add.png"), "N/A");
+	m_outputFolderFavoritesMenu->insertSeparator(m_addFavoriteFolderAction);
+	connect(m_addFavoriteFolderAction, SIGNAL(triggered(bool)), this, SLOT(addFavoriteFolderActionTriggered()));
 
 	ui->outputFolderEdit->setVisible(false);
-	if(m_outputFolderNoteBox = new QLabel(ui->outputFolderView))
-	{
-		m_outputFolderNoteBox->setAutoFillBackground(true);
-		m_outputFolderNoteBox->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-		m_outputFolderNoteBox->setFrameShape(QFrame::StyledPanel);
-		SET_FONT_BOLD(m_outputFolderNoteBox, true);
-		m_outputFolderNoteBox->hide();
-	}
+	m_outputFolderNoteBox.reset(new QLabel(ui->outputFolderView));
+	m_outputFolderNoteBox->setAutoFillBackground(true);
+	m_outputFolderNoteBox->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+	m_outputFolderNoteBox->setFrameShape(QFrame::StyledPanel);
+	SET_FONT_BOLD(m_outputFolderNoteBox.data(), true);
+	m_outputFolderNoteBox->hide();
 
 	outputFolderViewClicked(QModelIndex());
 	refreshFavorites();
@@ -718,26 +705,26 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	setMinimumSize(thisRect.width(), thisRect.height());
 
 	//Create DropBox widget
-	m_dropBox = new DropBox(this, m_fileListModel, m_settings);
-	connect(m_fileListModel, SIGNAL(modelReset()),                      m_dropBox, SLOT(modelChanged()));
-	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), m_dropBox, SLOT(modelChanged()));
-	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)),  m_dropBox, SLOT(modelChanged()));
-	connect(m_fileListModel, SIGNAL(rowAppended()),                     m_dropBox, SLOT(modelChanged()));
+	m_dropBox.reset(new DropBox(this, m_fileListModel, m_settings));
+	connect(m_fileListModel, SIGNAL(modelReset()),                      m_dropBox.data(), SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(rowsInserted(QModelIndex,int,int)), m_dropBox.data(), SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(rowsRemoved(QModelIndex,int,int)),  m_dropBox.data(), SLOT(modelChanged()));
+	connect(m_fileListModel, SIGNAL(rowAppended()),                     m_dropBox.data(), SLOT(modelChanged()));
 
 	//Create message handler thread
-	m_messageHandler = new MessageHandlerThread(ipcChannel);
-	connect(m_messageHandler, SIGNAL(otherInstanceDetected()),       this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
-	connect(m_messageHandler, SIGNAL(fileReceived(QString)),         this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
-	connect(m_messageHandler, SIGNAL(folderReceived(QString, bool)), this, SLOT(addFolderDelayed(QString, bool)), Qt::QueuedConnection);
-	connect(m_messageHandler, SIGNAL(killSignalReceived()),          this, SLOT(close()), Qt::QueuedConnection);
+	m_messageHandler.reset(new MessageHandlerThread(ipcChannel));
+	connect(m_messageHandler.data(), SIGNAL(otherInstanceDetected()),       this, SLOT(notifyOtherInstance()), Qt::QueuedConnection);
+	connect(m_messageHandler.data(), SIGNAL(fileReceived(QString)),         this, SLOT(addFileDelayed(QString)), Qt::QueuedConnection);
+	connect(m_messageHandler.data(), SIGNAL(folderReceived(QString, bool)), this, SLOT(addFolderDelayed(QString, bool)), Qt::QueuedConnection);
+	connect(m_messageHandler.data(), SIGNAL(killSignalReceived()),          this, SLOT(close()), Qt::QueuedConnection);
 	m_messageHandler->start();
 
 	//Init delayed file handling
-	m_delayedFileList = new QStringList();
-	m_delayedFileTimer = new QTimer();
+	m_delayedFileList .reset(new QStringList());
+	m_delayedFileTimer.reset(new QTimer());
 	m_delayedFileTimer->setSingleShot(true);
 	m_delayedFileTimer->setInterval(5000);
-	connect(m_delayedFileTimer, SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
+	connect(m_delayedFileTimer.data(), SIGNAL(timeout()), this, SLOT(handleDelayedFiles()));
 
 	//Load translation
 	initializeTranslation();
@@ -747,7 +734,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	changeEvent(&languageChangeEvent);
 
 	//Enable Drag & Drop
-	m_droppedFileList = new QList<QUrl>();
+	m_droppedFileList.reset(new QList<QUrl>());
 	this->setAcceptDrops(true);
 }
 
@@ -773,16 +760,6 @@ MainWindow::~MainWindow(void)
 	SET_MODEL(ui->outputFolderView, NULL);
 	SET_MODEL(ui->metaDataView,     NULL);
 
-	//Free memory
-	MUTILS_DELETE(m_messageHandler);
-	MUTILS_DELETE(m_droppedFileList);
-	MUTILS_DELETE(m_delayedFileList);
-	MUTILS_DELETE(m_delayedFileTimer);
-	MUTILS_DELETE(m_sourceFilesContextMenu);
-	MUTILS_DELETE(m_outputFolderFavoritesMenu);
-	MUTILS_DELETE(m_outputFolderContextMenu);
-	MUTILS_DELETE(m_dropBox);
-
 	//Un-initialize the dialog
 	MUTILS_DELETE(ui);
 }
@@ -801,8 +778,12 @@ void MainWindow::addFiles(const QStringList &files)
 		return;
 	}
 
-	WITH_BLOCKED_SIGNALS(ui->tabWidget, setCurrentIndex, 0);
-	tabPageChanged(ui->tabWidget->currentIndex(), true);
+	if(ui->tabWidget->currentIndex() != 0)
+	{
+		SignalBlockHelper signalBlockHelper(ui->tabWidget);
+		ui->tabWidget->setCurrentIndex(0);
+		tabPageChanged(ui->tabWidget->currentIndex(), true);
+	}
 
 	INIT_BANNER();
 	QScopedPointer<FileAnalyzer> analyzer(new FileAnalyzer(files));
@@ -815,7 +796,7 @@ void MainWindow::addFiles(const QStringList &files)
 
 	if(!analyzer.isNull())
 	{
-		FileListBlocker fileListBlocker(m_fileListModel);
+		FileListBlockHelper fileListBlocker(m_fileListModel);
 		m_banner->show(tr("Adding file(s), please wait..."), analyzer.data());
 	}
 
@@ -854,7 +835,7 @@ void MainWindow::addFolder(const QString &path, bool recursive, bool delayed, QS
 	folderInfoList << QFileInfo(path);
 	QStringList fileList;
 	
-	SHOW_BANNER(tr("Scanning folder(s) for files, please wait..."));
+	showBanner(tr("Scanning folder(s) for files, please wait..."));
 	
 	QApplication::processEvents();
 	MUtils::OS::check_key_state_esc();
@@ -1046,6 +1027,46 @@ void MainWindow::openDocumentLink(QAction *const action)
 	QDesktopServices::openUrl(url);
 }
 
+/*
+ * Show banner popup dialog
+ */
+void MainWindow::showBanner(const QString &text)
+{
+	INIT_BANNER();
+	m_banner->show(text);
+}
+
+/*
+ * Show banner popup dialog
+ */
+void MainWindow::showBanner(const QString &text, QThread *const thread)
+{
+	INIT_BANNER();
+	m_banner->show(text, thread);
+}
+
+/*
+ * Show banner popup dialog
+ */
+void MainWindow::showBanner(const QString &text, QEventLoop *const eventLoop)
+{
+	INIT_BANNER();
+	m_banner->show(text, eventLoop);
+}
+
+/*
+ * Show banner popup dialog
+ */
+void MainWindow::showBanner(const QString &text, bool &flag, const bool &test)
+{
+	if((!flag) && (test))
+	{
+		INIT_BANNER();
+		m_banner->show(text);
+		flag = true;
+	}
+}
+
 ////////////////////////////////////////////////////////////
 // EVENTS
 ////////////////////////////////////////////////////////////
@@ -1061,7 +1082,8 @@ void MainWindow::showEvent(QShowEvent *event)
 
 	if(!event->spontaneous())
 	{
-		WITH_BLOCKED_SIGNALS(ui->tabWidget, setCurrentIndex, 0);
+		SignalBlockHelper signalBlockHelper(ui->tabWidget);
+		ui->tabWidget->setCurrentIndex(0);
 		tabPageChanged(ui->tabWidget->currentIndex(), true);
 	}
 
@@ -1435,7 +1457,7 @@ void MainWindow::windowShown(void)
 		default:
 			QEventLoop loop; QTimer::singleShot(7000, &loop, SLOT(quit()));
 			MUtils::Sound::play_sound("waiting", true);
-			SHOW_BANNER_ARG(tr("Skipping update check this time, please be patient..."), &loop);
+			showBanner(tr("Skipping update check this time, please be patient..."), &loop);
 			break;
 		}
 	}
@@ -1710,13 +1732,9 @@ void MainWindow::encodeButtonClicked(void)
 void MainWindow::aboutButtonClicked(void)
 {
 	ABORT_IF_BUSY;
-
-	TEMP_HIDE_DROPBOX
-	(
-		AboutDialog *aboutBox = new AboutDialog(m_settings, this);
-		aboutBox->exec();
-		MUTILS_DELETE(aboutBox);
-	);
+	WidgetHideHelper hiderHelper(m_dropBox.data());
+	QScopedPointer<AboutDialog> aboutBox(new AboutDialog(m_settings, this));
+	aboutBox->exec();
 }
 
 /*
@@ -2075,54 +2093,47 @@ void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
 void MainWindow::importCueSheetActionTriggered(bool checked)
 {
 	ABORT_IF_BUSY;
-	
-	TEMP_HIDE_DROPBOX
-	(
-		while(true)
+	WidgetHideHelper hiderHelper(m_dropBox.data());
+
+	while(true)
+	{
+		int result = 0;
+		QString selectedCueFile;
+
+		if(MUtils::GUI::themes_enabled())
 		{
-			int result = 0;
-			QString selectedCueFile;
-
-			if(MUtils::GUI::themes_enabled())
-			{
-				selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), m_settings->mostRecentInputPath(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
-			}
-			else
-			{
-				QFileDialog dialog(this, tr("Open Cue Sheet"));
-				dialog.setFileMode(QFileDialog::ExistingFile);
-				dialog.setNameFilter(QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
-				dialog.setDirectory(m_settings->mostRecentInputPath());
-				if(dialog.exec())
-				{
-					selectedCueFile = dialog.selectedFiles().first();
-				}
-			}
-
-			if(!selectedCueFile.isEmpty())
-			{
-				m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
-				FileListBlocker fileListBlocker(m_fileListModel);
-				QScopedPointer<CueImportDialog> cueImporter(new CueImportDialog(this, m_fileListModel, selectedCueFile, m_settings));
-				result = cueImporter->exec();
-			}
-
-			if(result != QDialog::Rejected)
-			{
-				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-				ui->sourceFileView->update();
-				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-				ui->sourceFileView->scrollToBottom();
-				qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-			}
-			else
-			{
-				qWarning("Whoops! (RESULT: %d)", result);
-			}
-
-			if(result != (-1)) break;
+			selectedCueFile = QFileDialog::getOpenFileName(this, tr("Open Cue Sheet"), m_settings->mostRecentInputPath(), QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
 		}
-	);
+		else
+		{
+			QFileDialog dialog(this, tr("Open Cue Sheet"));
+			dialog.setFileMode(QFileDialog::ExistingFile);
+			dialog.setNameFilter(QString("%1 (*.cue)").arg(tr("Cue Sheet File")));
+			dialog.setDirectory(m_settings->mostRecentInputPath());
+			if(dialog.exec())
+			{
+				selectedCueFile = dialog.selectedFiles().first();
+			}
+		}
+
+		if(!selectedCueFile.isEmpty())
+		{
+			m_settings->mostRecentInputPath(QFileInfo(selectedCueFile).canonicalPath());
+			FileListBlockHelper fileListBlocker(m_fileListModel);
+			QScopedPointer<CueImportDialog> cueImporter(new CueImportDialog(this, m_fileListModel, selectedCueFile, m_settings));
+			result = cueImporter->exec();
+		}
+
+		if(result != (-1))
+		{
+			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+			ui->sourceFileView->update();
+			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+			ui->sourceFileView->scrollToBottom();
+			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+			break;
+		}
+	}
 }
 
 /*
@@ -2135,10 +2146,10 @@ void MainWindow::showDropBoxWidgetActionTriggered(bool checked)
 	if(!m_dropBox->isVisible())
 	{
 		m_dropBox->show();
-		QTimer::singleShot(2500, m_dropBox, SLOT(showToolTip()));
+		QTimer::singleShot(2500, m_dropBox.data(), SLOT(showToolTip()));
 	}
 	
-	MUtils::GUI::blink_window(m_dropBox);
+	MUtils::GUI::blink_window(m_dropBox.data());
 }
 
 /*
@@ -2274,14 +2285,9 @@ void MainWindow::documentActionActivated(void)
 void MainWindow::checkUpdatesActionActivated(void)
 {
 	ABORT_IF_BUSY;
-	bool bFlag = false;
-
-	TEMP_HIDE_DROPBOX
-	(
-		bFlag = checkForUpdates();
-	);
+	WidgetHideHelper hiderHelper(m_dropBox.data());
 	
-	if(bFlag)
+	if(checkForUpdates())
 	{
 		QApplication::quit();
 	}
@@ -2297,37 +2303,35 @@ void MainWindow::checkUpdatesActionActivated(void)
 void MainWindow::addFilesButtonClicked(void)
 {
 	ABORT_IF_BUSY;
+	WidgetHideHelper hiderHelper(m_dropBox.data());
 
-	TEMP_HIDE_DROPBOX
-	(
-		if(MUtils::GUI::themes_enabled())
+	if(MUtils::GUI::themes_enabled())
+	{
+		QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
+		QStringList selectedFiles = QFileDialog::getOpenFileNames(this, tr("Add file(s)"), m_settings->mostRecentInputPath(), fileTypeFilters.join(";;"));
+		if(!selectedFiles.isEmpty())
 		{
-			QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
-			QStringList selectedFiles = QFileDialog::getOpenFileNames(this, tr("Add file(s)"), m_settings->mostRecentInputPath(), fileTypeFilters.join(";;"));
+			m_settings->mostRecentInputPath(QFileInfo(selectedFiles.first()).canonicalPath());
+			addFiles(selectedFiles);
+		}
+	}
+	else
+	{
+		QFileDialog dialog(this, tr("Add file(s)"));
+		QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
+		dialog.setFileMode(QFileDialog::ExistingFiles);
+		dialog.setNameFilter(fileTypeFilters.join(";;"));
+		dialog.setDirectory(m_settings->mostRecentInputPath());
+		if(dialog.exec())
+		{
+			QStringList selectedFiles = dialog.selectedFiles();
 			if(!selectedFiles.isEmpty())
 			{
 				m_settings->mostRecentInputPath(QFileInfo(selectedFiles.first()).canonicalPath());
 				addFiles(selectedFiles);
 			}
 		}
-		else
-		{
-			QFileDialog dialog(this, tr("Add file(s)"));
-			QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
-			dialog.setFileMode(QFileDialog::ExistingFiles);
-			dialog.setNameFilter(fileTypeFilters.join(";;"));
-			dialog.setDirectory(m_settings->mostRecentInputPath());
-			if(dialog.exec())
-			{
-				QStringList selectedFiles = dialog.selectedFiles();
-				if(!selectedFiles.isEmpty())
-				{
-					m_settings->mostRecentInputPath(QFileInfo(selectedFiles.first()).canonicalPath());
-					addFiles(selectedFiles);
-				}
-			}
-		}
-	);
+	}
 }
 
 /*
@@ -2340,51 +2344,49 @@ void MainWindow::openFolderActionActivated(void)
 	
 	if(QAction *action = dynamic_cast<QAction*>(QObject::sender()))
 	{
-		TEMP_HIDE_DROPBOX
-		(
-			if(MUtils::GUI::themes_enabled())
+		WidgetHideHelper hiderHelper(m_dropBox.data());
+		if(MUtils::GUI::themes_enabled())
+		{
+			selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add Folder"), m_settings->mostRecentInputPath());
+		}
+		else
+		{
+			QFileDialog dialog(this, tr("Add Folder"));
+			dialog.setFileMode(QFileDialog::DirectoryOnly);
+			dialog.setDirectory(m_settings->mostRecentInputPath());
+			if(dialog.exec())
 			{
-				selectedFolder = QFileDialog::getExistingDirectory(this, tr("Add Folder"), m_settings->mostRecentInputPath());
+				selectedFolder = dialog.selectedFiles().first();
 			}
-			else
-			{
-				QFileDialog dialog(this, tr("Add Folder"));
-				dialog.setFileMode(QFileDialog::DirectoryOnly);
-				dialog.setDirectory(m_settings->mostRecentInputPath());
-				if(dialog.exec())
-				{
-					selectedFolder = dialog.selectedFiles().first();
-				}
-			}
+		}
 
-			if(selectedFolder.isEmpty())
-			{
-				return;
-			}
+		if(selectedFolder.isEmpty())
+		{
+			return;
+		}
 
-			QStringList filterItems = DecoderRegistry::getSupportedExts();
-			filterItems.prepend("*.*");
+		QStringList filterItems = DecoderRegistry::getSupportedExts();
+		filterItems.prepend("*.*");
 
-			bool okay;
-			QString filterStr = QInputDialog::getItem(this, tr("Filter Files"), tr("Select filename filter:"), filterItems, 0, false, &okay).trimmed();
-			if(!okay)
-			{
-				return;
-			}
+		bool okay;
+		QString filterStr = QInputDialog::getItem(this, tr("Filter Files"), tr("Select filename filter:"), filterItems, 0, false, &okay).trimmed();
+		if(!okay)
+		{
+			return;
+		}
 
-			QRegExp regExp("\\*\\.([A-Za-z0-9]+)", Qt::CaseInsensitive);
-			if(regExp.lastIndexIn(filterStr) >= 0)
-			{
-				filterStr = regExp.cap(1).trimmed();
-			}
-			else
-			{
-				filterStr.clear();
-			}
+		QRegExp regExp("\\*\\.([A-Za-z0-9]+)", Qt::CaseInsensitive);
+		if(regExp.lastIndexIn(filterStr) >= 0)
+		{
+			filterStr = regExp.cap(1).trimmed();
+		}
+		else
+		{
+			filterStr.clear();
+		}
 
-			m_settings->mostRecentInputPath(QDir(selectedFolder).canonicalPath());
-			addFolder(selectedFolder, action->data().toBool(), false, filterStr);
-		);
+		m_settings->mostRecentInputPath(QDir(selectedFolder).canonicalPath());
+		addFolder(selectedFolder, action->data().toBool(), false, filterStr);
 	}
 }
 
@@ -2460,10 +2462,8 @@ void MainWindow::showDetailsButtonClicked(void)
 		}
 
 		AudioFileModel &file = (*m_fileListModel)[index];
-		TEMP_HIDE_DROPBOX
-		(
-			iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
-		);
+		WidgetHideHelper hiderHelper(m_dropBox.data());
+		iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
 		
 		//Copy all info to Meta Info tab
 		if(iResult == INT_MAX)
@@ -2567,7 +2567,7 @@ void MainWindow::handleDroppedFiles(void)
 	const QString bannerText = tr("Loading dropped files or folders, please wait...");
 	bool bUseBanner = false;
 
-	SHOW_BANNER_CONDITIONALLY(bUseBanner, (m_droppedFileList->count() >= MIN_COUNT), bannerText);
+	showBanner(bannerText, bUseBanner, (m_droppedFileList->count() >= MIN_COUNT));
 
 	QStringList droppedFiles;
 	while(!m_droppedFileList->isEmpty())
@@ -2593,7 +2593,7 @@ void MainWindow::handleDroppedFiles(void)
 			QFileInfoList list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
 			if(list.count() > 0)
 			{
-				SHOW_BANNER_CONDITIONALLY(bUseBanner, (list.count() >= MIN_COUNT), bannerText);
+				showBanner(bannerText, bUseBanner, (list.count() >= MIN_COUNT));
 				for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
 				{
 					droppedFiles << (*iter).canonicalFilePath();
@@ -2602,7 +2602,7 @@ void MainWindow::handleDroppedFiles(void)
 			else
 			{
 				list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-				SHOW_BANNER_CONDITIONALLY(bUseBanner, (list.count() >= MIN_COUNT), bannerText);
+				showBanner(bannerText, bUseBanner, (list.count() >= MIN_COUNT));
 				for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
 				{
 					qDebug("Descending to Folder: %s", MUTILS_UTF8((*iter).canonicalFilePath()));
@@ -2641,8 +2641,12 @@ void MainWindow::handleDelayedFiles(void)
 		return;
 	}
 	
-	WITH_BLOCKED_SIGNALS(ui->tabWidget, setCurrentIndex, 0);
-	tabPageChanged(ui->tabWidget->currentIndex(), true);
+	if(ui->tabWidget->currentIndex() != 0)
+	{
+		SignalBlockHelper signalBlockHelper(ui->tabWidget);
+		ui->tabWidget->setCurrentIndex(0);
+		tabPageChanged(ui->tabWidget->currentIndex(), true);
+	}
 	
 	QStringList selectedFiles;
 	while(!m_delayedFileList->isEmpty())
@@ -2663,49 +2667,48 @@ void MainWindow::handleDelayedFiles(void)
  */
 void MainWindow::exportCsvContextActionTriggered(void)
 {
-	TEMP_HIDE_DROPBOX
-	(
-		QString selectedCsvFile;
-	
-		if(MUtils::GUI::themes_enabled())
-		{
-			selectedCsvFile = QFileDialog::getSaveFileName(this, tr("Save CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
-		}
-		else
-		{
-			QFileDialog dialog(this, tr("Save CSV file"));
-			dialog.setFileMode(QFileDialog::AnyFile);
-			dialog.setAcceptMode(QFileDialog::AcceptSave);
-			dialog.setNameFilter(QString("%1 (*.csv)").arg(tr("CSV File")));
-			dialog.setDirectory(m_settings->mostRecentInputPath());
-			if(dialog.exec())
-			{
-				selectedCsvFile = dialog.selectedFiles().first();
-			}
-		}
+	ABORT_IF_BUSY;
+	WidgetHideHelper hiderHelper(m_dropBox.data());
 
-		if(!selectedCsvFile.isEmpty())
+	QString selectedCsvFile;
+	if(MUtils::GUI::themes_enabled())
+	{
+		selectedCsvFile = QFileDialog::getSaveFileName(this, tr("Save CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
+	}
+	else
+	{
+		QFileDialog dialog(this, tr("Save CSV file"));
+		dialog.setFileMode(QFileDialog::AnyFile);
+		dialog.setAcceptMode(QFileDialog::AcceptSave);
+		dialog.setNameFilter(QString("%1 (*.csv)").arg(tr("CSV File")));
+		dialog.setDirectory(m_settings->mostRecentInputPath());
+		if(dialog.exec())
 		{
-			m_settings->mostRecentInputPath(QFileInfo(selectedCsvFile).canonicalPath());
-			switch(m_fileListModel->exportToCsv(selectedCsvFile))
-			{
-			case FileListModel::CsvError_NoTags:
-				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, there are no meta tags that can be exported!")));
-				break;
-			case FileListModel::CsvError_FileOpen:
-				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to open CSV file for writing!")));
-				break;
-			case FileListModel::CsvError_FileWrite:
-				QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to write to the CSV file!")));
-				break;
-			case FileListModel::CsvError_OK:
-				QMessageBox::information(this, tr("CSV Export"), NOBR(tr("The CSV files was created successfully!")));
-				break;
-			default:
-				qWarning("exportToCsv: Unknown return code!");
-			}
+			selectedCsvFile = dialog.selectedFiles().first();
 		}
-	);
+	}
+
+	if(!selectedCsvFile.isEmpty())
+	{
+		m_settings->mostRecentInputPath(QFileInfo(selectedCsvFile).canonicalPath());
+		switch(m_fileListModel->exportToCsv(selectedCsvFile))
+		{
+		case FileListModel::CsvError_NoTags:
+			QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, there are no meta tags that can be exported!")));
+			break;
+		case FileListModel::CsvError_FileOpen:
+			QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to open CSV file for writing!")));
+			break;
+		case FileListModel::CsvError_FileWrite:
+			QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to write to the CSV file!")));
+			break;
+		case FileListModel::CsvError_OK:
+			QMessageBox::information(this, tr("CSV Export"), NOBR(tr("The CSV files was created successfully!")));
+			break;
+		default:
+			qWarning("exportToCsv: Unknown return code!");
+		}
+	}
 }
 
 
@@ -2714,54 +2717,53 @@ void MainWindow::exportCsvContextActionTriggered(void)
  */
 void MainWindow::importCsvContextActionTriggered(void)
 {
-	TEMP_HIDE_DROPBOX
-	(
-		QString selectedCsvFile;
-	
-		if(MUtils::GUI::themes_enabled())
-		{
-			selectedCsvFile = QFileDialog::getOpenFileName(this, tr("Open CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
-		}
-		else
-		{
-			QFileDialog dialog(this, tr("Open CSV file"));
-			dialog.setFileMode(QFileDialog::ExistingFile);
-			dialog.setNameFilter(QString("%1 (*.csv)").arg(tr("CSV File")));
-			dialog.setDirectory(m_settings->mostRecentInputPath());
-			if(dialog.exec())
-			{
-				selectedCsvFile = dialog.selectedFiles().first();
-			}
-		}
+	ABORT_IF_BUSY;
+	WidgetHideHelper hiderHelper(m_dropBox.data());
 
-		if(!selectedCsvFile.isEmpty())
+	QString selectedCsvFile;
+	if(MUtils::GUI::themes_enabled())
+	{
+		selectedCsvFile = QFileDialog::getOpenFileName(this, tr("Open CSV file"), m_settings->mostRecentInputPath(), QString("%1 (*.csv)").arg(tr("CSV File")));
+	}
+	else
+	{
+		QFileDialog dialog(this, tr("Open CSV file"));
+		dialog.setFileMode(QFileDialog::ExistingFile);
+		dialog.setNameFilter(QString("%1 (*.csv)").arg(tr("CSV File")));
+		dialog.setDirectory(m_settings->mostRecentInputPath());
+		if(dialog.exec())
 		{
-			m_settings->mostRecentInputPath(QFileInfo(selectedCsvFile).canonicalPath());
-			switch(m_fileListModel->importFromCsv(this, selectedCsvFile))
-			{
-			case FileListModel::CsvError_FileOpen:
-				QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to open CSV file for reading!")));
-				break;
-			case FileListModel::CsvError_FileRead:
-				QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to read from the CSV file!")));
-				break;
-			case FileListModel::CsvError_NoTags:
-				QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, the CSV file does not contain any known fields!")));
-				break;
-			case FileListModel::CsvError_Incomplete:
-				QMessageBox::warning(this, tr("CSV Import"), NOBR(tr("CSV file is incomplete. Not all files were updated!")));
-				break;
-			case FileListModel::CsvError_OK:
-				QMessageBox::information(this, tr("CSV Import"), NOBR(tr("The CSV files was imported successfully!")));
-				break;
-			case FileListModel::CsvError_Aborted:
-				/* User aborted, ignore! */
-				break;
-			default:
-				qWarning("exportToCsv: Unknown return code!");
-			}
+			selectedCsvFile = dialog.selectedFiles().first();
 		}
-	);
+	}
+
+	if(!selectedCsvFile.isEmpty())
+	{
+		m_settings->mostRecentInputPath(QFileInfo(selectedCsvFile).canonicalPath());
+		switch(m_fileListModel->importFromCsv(this, selectedCsvFile))
+		{
+		case FileListModel::CsvError_FileOpen:
+			QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to open CSV file for reading!")));
+			break;
+		case FileListModel::CsvError_FileRead:
+			QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to read from the CSV file!")));
+			break;
+		case FileListModel::CsvError_NoTags:
+			QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, the CSV file does not contain any known fields!")));
+			break;
+		case FileListModel::CsvError_Incomplete:
+			QMessageBox::warning(this, tr("CSV Import"), NOBR(tr("CSV file is incomplete. Not all files were updated!")));
+			break;
+		case FileListModel::CsvError_OK:
+			QMessageBox::information(this, tr("CSV Import"), NOBR(tr("The CSV files was imported successfully!")));
+			break;
+		case FileListModel::CsvError_Aborted:
+			/* User aborted, ignore! */
+			break;
+		default:
+			qWarning("exportToCsv: Unknown return code!");
+		}
+	}
 }
 
 /*
@@ -3233,7 +3235,7 @@ void MainWindow::initOutputFolderModel_doAsync(void)
 	}
 	else
 	{
-		QTimer::singleShot(125, m_outputFolderNoteBox, SLOT(hide()));
+		QTimer::singleShot(125, m_outputFolderNoteBox.data(), SLOT(hide()));
 		ui->outputFolderView->setFocus();
 	}
 }
@@ -3524,15 +3526,17 @@ void MainWindow::updateRCMode(int id)
 	//Update slider min/max values
 	if(valueCount > 0)
 	{
-		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setEnabled, true);
-		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMinimum, 0);
-		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMaximum, valueCount-1);
+		SignalBlockHelper signalBlockHelper(ui->sliderBitrate);
+		ui->sliderBitrate->setEnabled(true);
+		ui->sliderBitrate->setMinimum(0);
+		ui->sliderBitrate->setMaximum(valueCount-1);
 	}
 	else
 	{
-		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setEnabled, false);
-		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMinimum, 0);
-		WITH_BLOCKED_SIGNALS(ui->sliderBitrate, setMaximum, 2);
+		SignalBlockHelper signalBlockHelper(ui->sliderBitrate);
+		ui->sliderBitrate->setEnabled(false);
+		ui->sliderBitrate->setMinimum(0);
+		ui->sliderBitrate->setMaximum(2);
 	}
 
 	//Now update bitrate/quality value!
@@ -4304,9 +4308,9 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 		MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
 	}
 
-	LogViewDialog *dialog = new LogViewDialog(this);
-	TEMP_HIDE_DROPBOX( dialog->exec(output); );
-	MUTILS_DELETE(dialog);
+	WidgetHideHelper hiderHelper(m_dropBox.data());
+	QScopedPointer<LogViewDialog> dialog(new LogViewDialog(this));
+	dialog->exec(output);
 }
 
 void MainWindow::overwriteModeChanged(int id)

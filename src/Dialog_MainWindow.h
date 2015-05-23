@@ -40,6 +40,7 @@ class QLabel;
 class QMenu;
 class QUrl;
 class QModelIndex;
+class QEventLoop;
 class SettingsModel;
 class WorkingBanner;
 class lamexp_icon_t;
@@ -212,6 +213,11 @@ private:
 	void refreshFavorites(void);
 	void openDocumentLink(QAction *const action);
 	
+	void showBanner(const QString &text);
+	void showBanner(const QString &text, QThread *const thread);
+	void showBanner(const QString &text, QEventLoop *const eventLoop);
+	void showBanner(const QString &text, bool &flag, const bool &test);
+
 	bool m_accepted;
 	bool m_firstTimeShown;
 	uint m_outputFolderViewInitCounter;
@@ -225,16 +231,18 @@ private:
 	QScopedPointer<MetaInfoModel>      m_metaInfoModel;
 	QScopedPointer<QFileSystemModelEx> m_fileSystemModel;
 	
-	QList<QUrl> *m_droppedFileList;
-	QStringList *m_delayedFileList;
-	QTimer *m_delayedFileTimer;
-	DropBox *m_dropBox;
-	QLabel *m_dropNoteLabel;
-	MessageHandlerThread *m_messageHandler;
-	QMenu *m_outputFolderContextMenu;
-	QMenu *m_sourceFilesContextMenu;
-	QMenu *m_outputFolderFavoritesMenu;
-	QLabel *m_outputFolderNoteBox;
+	QScopedPointer<QList<QUrl>> m_droppedFileList;
+	QScopedPointer<QStringList> m_delayedFileList;
+	QScopedPointer<QTimer>      m_delayedFileTimer;
+	QScopedPointer<DropBox>     m_dropBox;
+	QScopedPointer<QLabel>      m_dropNoteLabel;
+
+	QScopedPointer<MessageHandlerThread> m_messageHandler;
+	QScopedPointer<QLabel>               m_outputFolderNoteBox;
+
+	QScopedPointer<QMenu> m_outputFolderContextMenu;
+	QScopedPointer<QMenu> m_sourceFilesContextMenu;
+	QScopedPointer<QMenu> m_outputFolderFavoritesMenu;
 
 	QScopedPointer<QActionGroup> m_languageActionGroup;
 	QScopedPointer<QActionGroup> m_styleActionGroup;
