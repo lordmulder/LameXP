@@ -1069,6 +1069,7 @@ void MainWindow::moveSelectedFiles(const bool &up)
 				const QModelIndex item = m_fileListModel->index(firstIndex + i, 0);
 				selection->select(QItemSelection(item, item), QItemSelectionModel::Select | QItemSelectionModel::Rows);
 			}
+			ui->sourceFileView->scrollTo(m_fileListModel->index((up ? firstIndex : firstIndex + selectionCount - 1), 0), QAbstractItemView::PositionAtCenter);
 			return;
 		}
 	}
@@ -2443,23 +2444,28 @@ void MainWindow::openFolderActionActivated(void)
  */
 void MainWindow::removeFileButtonClicked(void)
 {
-	const QModelIndex current = ui->sourceFileView->currentIndex();
-	if(current.isValid())
+	const QItemSelectionModel *const selection = ui->sourceFileView->selectionModel();
+	if(selection && selection->hasSelection())
 	{
-		const QItemSelectionModel *const selection = ui->sourceFileView->selectionModel();
-		if(selection && selection->hasSelection())
+		int firstRow = -1;
+		const QModelIndexList selectedRows = INVERT_LIST(selection->selectedRows());
+		if(!selectedRows.isEmpty())
 		{
-			const QModelIndexList selectedRows = INVERT_LIST(selection->selectedRows());
 			FileListBlockHelper fileListBlocker(m_fileListModel);
+			firstRow = selectedRows.last().row();
 			for(QModelIndexList::ConstIterator iter = selectedRows.constBegin(); iter != selectedRows.constEnd(); iter++)
 			{
-				m_fileListModel->removeFile(*iter);
+				if(!m_fileListModel->removeFile(*iter))
+				{
+					break;
+				}
 			}
 		}
 		if(m_fileListModel->rowCount() > 0)
 		{
-			ui->sourceFileView->selectRow((current.row() < m_fileListModel->rowCount()) ? current.row() : (m_fileListModel->rowCount() - 1));
-			ui->sourceFileView->scrollTo(ui->sourceFileView->currentIndex());
+			const QModelIndex position = m_fileListModel->index(((firstRow >= 0) && (firstRow < m_fileListModel->rowCount())) ? firstRow : (m_fileListModel->rowCount() - 1), 0);
+			ui->sourceFileView->selectRow(position.row());
+			ui->sourceFileView->scrollTo(position, QAbstractItemView::PositionAtCenter);
 		}
 	}
 	else
@@ -2473,7 +2479,14 @@ void MainWindow::removeFileButtonClicked(void)
  */
 void MainWindow::clearFilesButtonClicked(void)
 {
-	m_fileListModel->clearFiles();
+	if(m_fileListModel->rowCount() > 0)
+	{
+		m_fileListModel->clearFiles();
+	}
+	else
+	{
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
+	}
 }
 
 /*
@@ -2535,6 +2548,10 @@ void MainWindow::showDetailsButtonClicked(void)
 
 			break; /*close dilalog now*/
 		}
+	}
+	else
+	{
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 	}
 
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);

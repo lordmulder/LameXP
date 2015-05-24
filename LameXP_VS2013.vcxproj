@@ -101,9 +101,13 @@
       <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Message>Copy VLD DLL%27s</Message>
-      <Command>copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(TargetDir)"
-copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(TargetDir)"</Command>
+      <Message>Copy DLL's</Message>
+      <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(OutDir)"
+</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -175,10 +179,11 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Message>
-      </Message>
-      <Command>
-      </Command>
+      <Message>Copy DLL's</Message>
+      <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
