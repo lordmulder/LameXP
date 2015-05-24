@@ -55,7 +55,7 @@
             <item>
              <widget class="QTableView" name="sourceFileView">
               <property name="selectionMode">
-               <enum>QAbstractItemView::SingleSelection</enum>
+               <enum>QAbstractItemView::ContiguousSelection</enum>
               </property>
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectRows</enum>
@@ -1509,8 +1509,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>613</width>
-               <height>1849</height>
+               <width>602</width>
+               <height>1840</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">

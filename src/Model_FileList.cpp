@@ -171,18 +171,16 @@ void FileListModel::addFile(const AudioFileModel &file)
 
 bool FileListModel::removeFile(const QModelIndex &index)
 {
-	if(index.row() >= 0 && index.row() < m_fileList.count())
+	const int row = index.row();
+	if(row >= 0 && row < m_fileList.count())
 	{
 		beginResetModel();
-		m_fileStore.remove(m_fileList.at(index.row()));
-		m_fileList.removeAt(index.row());
+		m_fileStore.remove(m_fileList.at(row));
+		m_fileList.removeAt(row);
 		endResetModel();
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 void FileListModel::clearFiles(void)

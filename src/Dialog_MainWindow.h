@@ -212,7 +212,8 @@ private:
 	void initializeTranslation(void);
 	void refreshFavorites(void);
 	void openDocumentLink(QAction *const action);
-	
+	void moveSelectedFiles(const bool &up);
+
 	void showBanner(const QString &text);
 	void showBanner(const QString &text, QThread *const thread);
 	void showBanner(const QString &text, QEventLoop *const eventLoop);

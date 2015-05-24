@@ -9,6 +9,7 @@
 * Added detection of the *64-Bit* version of QAAC encoder, requires 64-Bit Apple Application Support
 * Added enhanced file renaming option: Default file extensions can now be overwritten
 * Added enhanced file renaming option: Files can now be renamed via the [regular expression](http://www.regular-expressions.info/quickstart.html) engine
+* Added capability to select *multiple* files on "Source Files" tab
 * Updated MediaInfo to v0.7.73 (2015-04-09), compiled with ICL 15.0 and MSVC 12.0
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Updated GnuPG to v1.4.19 (2015-02-27), compiled with GCC 4.9.2

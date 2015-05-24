@@ -202,6 +202,17 @@ static inline void MAKE_TRANSPARENT(QWidget *const widget, const bool &flag)
 	widget->setPalette(flag ? _p : QPalette());
 }
 
+template <typename T>
+static QList<T>& INVERT_LIST(QList<T> &list)
+{
+	if(!list.isEmpty())
+	{
+		const int limit = list.size() / 2, maxIdx = list.size() - 1;
+		for(int k = 0; k < limit; k++) list.swap(k, maxIdx - k);
+	}
+	return list;
+}
+
 ////////////////////////////////////////////////////////////
 // Helper Classes
 ////////////////////////////////////////////////////////////
@@ -1025,6 +1036,43 @@ void MainWindow::openDocumentLink(QAction *const action)
 	qWarning("Document '%s' not found -> redirecting to the website!", MUTILS_UTF8(document.fileName()));
 	const QUrl url(QString("%1/%2").arg(QString::fromLatin1(g_documents_base_url), document.fileName()));
 	QDesktopServices::openUrl(url);
+}
+
+/*
+ * Move selected files up/down
+ */
+void MainWindow::moveSelectedFiles(const bool &up)
+{
+	QItemSelectionModel *const selection = ui->sourceFileView->selectionModel();
+	if(selection && selection->hasSelection())
+	{
+		const QModelIndexList selectedRows = up ? selection->selectedRows() : INVERT_LIST(selection->selectedRows());
+		if((up && (selectedRows.first().row() > 0)) || ((!up) && (selectedRows.first().row() < m_fileListModel->rowCount() - 1)))
+		{
+			const int delta = up ? (-1) : 1;
+			const int firstIndex = (up ? selectedRows.first() : selectedRows.last()).row() + delta;
+			const int selectionCount = selectedRows.count();
+			if(abs(delta) > 0)
+			{
+				FileListBlockHelper fileListBlocker(m_fileListModel);
+				for(QModelIndexList::ConstIterator iter = selectedRows.constBegin(); iter != selectedRows.constEnd(); iter++)
+				{
+					if(!m_fileListModel->moveFile((*iter), delta))
+					{
+						break;
+					}
+				}
+			}
+			selection->clearSelection();
+			for(int i = 0; i < selectionCount; i++)
+			{
+				const QModelIndex item = m_fileListModel->index(firstIndex + i, 0);
+				selection->select(QItemSelection(item, item), QItemSelectionModel::Select | QItemSelectionModel::Rows);
+			}
+			return;
+		}
+	}
+	MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 }
 
 /*
@@ -2305,7 +2353,7 @@ void MainWindow::addFilesButtonClicked(void)
 	ABORT_IF_BUSY;
 	WidgetHideHelper hiderHelper(m_dropBox.data());
 
-	if(MUtils::GUI::themes_enabled())
+	if(MUtils::GUI::themes_enabled() && (!MUTILS_DEBUG))
 	{
 		QStringList fileTypeFilters = DecoderRegistry::getSupportedTypes();
 		QStringList selectedFiles = QFileDialog::getOpenFileNames(this, tr("Add file(s)"), m_settings->mostRecentInputPath(), fileTypeFilters.join(";;"));
@@ -2395,11 +2443,28 @@ void MainWindow::openFolderActionActivated(void)
  */
 void MainWindow::removeFileButtonClicked(void)
 {
-	if(ui->sourceFileView->currentIndex().isValid())
+	const QModelIndex current = ui->sourceFileView->currentIndex();
+	if(current.isValid())
 	{
-		int iRow = ui->sourceFileView->currentIndex().row();
-		m_fileListModel->removeFile(ui->sourceFileView->currentIndex());
-		ui->sourceFileView->selectRow(iRow < m_fileListModel->rowCount() ? iRow : m_fileListModel->rowCount()-1);
+		const QItemSelectionModel *const selection = ui->sourceFileView->selectionModel();
+		if(selection && selection->hasSelection())
+		{
+			const QModelIndexList selectedRows = INVERT_LIST(selection->selectedRows());
+			FileListBlockHelper fileListBlocker(m_fileListModel);
+			for(QModelIndexList::ConstIterator iter = selectedRows.constBegin(); iter != selectedRows.constEnd(); iter++)
+			{
+				m_fileListModel->removeFile(*iter);
+			}
+		}
+		if(m_fileListModel->rowCount() > 0)
+		{
+			ui->sourceFileView->selectRow((current.row() < m_fileListModel->rowCount()) ? current.row() : (m_fileListModel->rowCount() - 1));
+			ui->sourceFileView->scrollTo(ui->sourceFileView->currentIndex());
+		}
+	}
+	else
+	{
+		MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 	}
 }
 
@@ -2416,12 +2481,7 @@ void MainWindow::clearFilesButtonClicked(void)
  */
 void MainWindow::fileUpButtonClicked(void)
 {
-	if(ui->sourceFileView->currentIndex().isValid())
-	{
-		int iRow = ui->sourceFileView->currentIndex().row() - 1;
-		m_fileListModel->moveFile(ui->sourceFileView->currentIndex(), -1);
-		ui->sourceFileView->selectRow(iRow >= 0 ? iRow : 0);
-	}
+	moveSelectedFiles(true);
 }
 
 /*
@@ -2429,12 +2489,7 @@ void MainWindow::fileUpButtonClicked(void)
  */
 void MainWindow::fileDownButtonClicked(void)
 {
-	if(ui->sourceFileView->currentIndex().isValid())
-	{
-		int iRow = ui->sourceFileView->currentIndex().row() + 1;
-		m_fileListModel->moveFile(ui->sourceFileView->currentIndex(), 1);
-		ui->sourceFileView->selectRow(iRow < m_fileListModel->rowCount() ? iRow : m_fileListModel->rowCount()-1);
-	}
+	moveSelectedFiles(false);
 }
 
 /*
@@ -2445,38 +2500,43 @@ void MainWindow::showDetailsButtonClicked(void)
 	ABORT_IF_BUSY;
 
 	int iResult = 0;
-	MetaInfoDialog *metaInfoDialog = new MetaInfoDialog(this);
 	QModelIndex index = ui->sourceFileView->currentIndex();
-
-	while(index.isValid())
+	
+	if(index.isValid())
 	{
-		if(iResult > 0)
+		ui->sourceFileView->selectRow(index.row());
+		QScopedPointer<MetaInfoDialog> metaInfoDialog(new MetaInfoDialog(this));
+		forever
 		{
-			index = m_fileListModel->index(index.row() + 1, index.column()); 
-			ui->sourceFileView->selectRow(index.row());
-		}
-		if(iResult < 0)
-		{
-			index = m_fileListModel->index(index.row() - 1, index.column()); 
-			ui->sourceFileView->selectRow(index.row());
-		}
-
-		AudioFileModel &file = (*m_fileListModel)[index];
-		WidgetHideHelper hiderHelper(m_dropBox.data());
-		iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
+			AudioFileModel &file = (*m_fileListModel)[index];
+			WidgetHideHelper hiderHelper(m_dropBox.data());
+			iResult = metaInfoDialog->exec(file, index.row() > 0, index.row() < m_fileListModel->rowCount() - 1);
 		
-		//Copy all info to Meta Info tab
-		if(iResult == INT_MAX)
-		{
-			m_metaInfoModel->assignInfoFrom(file);
-			ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabMetaData));
-			break;
-		}
+			//Copy all info to Meta Info tab
+			if(iResult == INT_MAX)
+			{
+				m_metaInfoModel->assignInfoFrom(file);
+				ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabMetaData));
+				break;
+			}
 
-		if(!iResult) break;
+			if(iResult > 0)
+			{
+				index = m_fileListModel->index(index.row() + 1, index.column()); 
+				ui->sourceFileView->selectRow(index.row());
+				continue;
+			}
+			else if(iResult < 0)
+			{
+				index = m_fileListModel->index(index.row() - 1, index.column()); 
+				ui->sourceFileView->selectRow(index.row());
+				continue;
+			}		
+
+			break; /*close dilalog now*/
+		}
 	}
 
-	MUTILS_DELETE(metaInfoDialog);
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	sourceFilesScrollbarMoved(0);
 }
