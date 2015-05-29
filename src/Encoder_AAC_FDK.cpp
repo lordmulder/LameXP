@@ -69,7 +69,7 @@ class FDKAACEncoderInfo : public AbstractEncoderInfo
 		switch(mode)
 		{
 		case SettingsModel::VBRMode:
-			return 4;
+			return 5;
 			break;
 		case SettingsModel::CBRMode:
 			return 52;
