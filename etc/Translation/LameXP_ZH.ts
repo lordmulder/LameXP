@@ -2339,12 +2339,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2421"/>
         <source>Filter Files</source>
-        <translation type="unfinished"></translation>
+        <translation>筛选文件</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2421"/>
         <source>Select filename filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>选择文件名筛选规则：</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2753"/>
