@@ -118,6 +118,7 @@ SetCompressorDictSize 64
 ReserveFile "${NSISDIR}\Plugins\Aero.dll"
 ReserveFile "${NSISDIR}\Plugins\LangDLL.dll"
 ReserveFile "${NSISDIR}\Plugins\LockedList.dll"
+ReserveFile "${NSISDIR}\Plugins\LockedList64.dll"
 ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
 ReserveFile "${NSISDIR}\Plugins\nsExec.dll"
 ReserveFile "${NSISDIR}\Plugins\StartMenu.dll"
@@ -188,31 +189,62 @@ VIAddVersionKey "Website" "${MyWebSite}"
 
 
 ;--------------------------------
-;MUI2 Pages
+;MUI2 Pages (Installer)
 ;--------------------------------
 
-;Installer
+;Welcome
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE CheckForPreRelease
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_TITLE_3LINES
 !insertmacro MUI_PAGE_WELCOME
+
+;License
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
 !insertmacro MUI_PAGE_LICENSE "license.rtf"
+
+;Directory
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 !insertmacro MUI_PAGE_DIRECTORY
+
+;Startmenu
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
+
+;LockedList
 Page Custom LockedListShow
+
+;Install Files
 !insertmacro MUI_PAGE_INSTFILES
+
+;Finish
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
 !insertmacro MUI_PAGE_FINISH
 
-;Uninstaller
+
+;--------------------------------
+;MUI2 Pages (Uninstaller)
+;--------------------------------
+
+;Welcome
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_TITLE_3LINES
 !define MUI_PAGE_CUSTOMFUNCTION_PRE un.CheckForcedUninstall
 !insertmacro MUI_UNPAGE_WELCOME
+
+;Confirm
 !define MUI_PAGE_CUSTOMFUNCTION_PRE un.CheckForcedUninstall
 !insertmacro MUI_UNPAGE_CONFIRM
+
+;LockedList
 UninstPage Custom un.LockedListShow
+
+;Uninstall
 !insertmacro MUI_UNPAGE_INSTFILES
+
+;Finish
+!define MUI_PAGE_CUSTOMFUNCTION_PRE un.CheckForcedUninstall
 !insertmacro MUI_UNPAGE_FINISH
 
 
@@ -326,8 +358,8 @@ Function .onInit
 
 	; --------
 
-	${StdUtils.GetParameter} $R0 "Update" "?"
-	${If} "$R0" == "?"
+	${StdUtils.GetParameter} $R0 "Update" "?#@"
+	${If} "$R0" == "?#@"
 		!insertmacro MUI_LANGDLL_DISPLAY
 	${EndIf}
 
@@ -552,12 +584,15 @@ SectionEnd
 
 Section "-Finished"
 	!insertmacro PrintProgress "$(MUI_TEXT_FINISH_TITLE)."
-
+	
 !ifdef LAMEXP_IS_PRERELEASE
 	${If} ${FileExists} "$INSTDIR\PRE_RELEASE_INFO.txt"
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\PRE_RELEASE_INFO.txt" "open" ""
 	${EndIf}
 !endif
+
+	${StdUtils.GetParameter} $R0 "Update" "?#@"
+	${IfNotThen} "$R0" == "?#@" ${|} SetAutoClose true ${|}
 SectionEnd
 
 
@@ -655,15 +690,17 @@ SectionEnd
 ;Check For Update Mode
 ;--------------------------------
 
+Function SkipIfUpdate
+	${StdUtils.GetParameter} $R0 "Update" "?#@"
+	${IfNotThen} "$R0" == "?#@" ${|} Abort ${|}
+FunctionEnd
+
 Function CheckForUpdate
-	${StdUtils.GetParameter} $R0 "Update" "?"
-	${IfNotThen} "$R0" == "?" ${|} Goto EnableUpdateMode ${|}
-
-	${IfThen} "$INSTDIR" == "" ${|} Return ${|}
-	${IfThen} "$INSTDIR" == "$EXEDIR" ${|} Return ${|}
-	${IfNotThen} ${FileExists} "$INSTDIR\LameXP.exe" ${|} Return ${|}
-
-	EnableUpdateMode:
+	${If} "$INSTDIR" == ""
+	${OrIf} "$INSTDIR" == "$EXEDIR"
+	${OrIfNot} ${FileExists} "$INSTDIR\LameXP.exe"
+		Return
+	${EndIf}
 
 	FindWindow $R0 "#32770" "" $HWNDPARENT
 	GetDlgItem $R1 $R0 1019
@@ -675,8 +712,8 @@ Function CheckForUpdate
 FunctionEnd
 
 Function un.CheckForcedUninstall
-	${StdUtils.GetParameter} $R0 "Force" "?"
-	${IfNotThen} "$R0" == "?" ${|} Abort ${|}
+	${StdUtils.GetParameter} $R0 "Force" "?#@"
+	${IfNotThen} "$R0" == "?#@" ${|} Abort ${|}
 FunctionEnd
 
 
@@ -686,8 +723,8 @@ FunctionEnd
 
 Function CheckForPreRelease
 	!ifdef LAMEXP_IS_PRERELEASE
-		${StdUtils.GetParameter} $R0 "Update" "?"
-		StrCmp $R0 "?" 0 SkipPrereleaseWarning
+		${StdUtils.GetParameter} $R0 "Update" "?#@"
+		StrCmp $R0 "?#@" 0 SkipPrereleaseWarning
 		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
 		Quit
 		SkipPrereleaseWarning:
@@ -699,22 +736,29 @@ FunctionEnd
 ;Locked List
 ;--------------------------------
 
-Function LockedListShow
+!macro _LockedListShow uinst
 	!insertmacro MUI_HEADER_TEXT "$(LAMEXP_LANG_LOCKEDLIST_HEADER)" "$(LAMEXP_LANG_LOCKEDLIST_TEXT)"
+	InitPluginsDir
+	 ${If} ${RunningX64}
+		File /oname=$PLUGINSDIR\LockedList64.dll `${NSISDIR}\Plugins\LockedList64.dll`
+	${EndIf}
 	!insertmacro GetExecutableName $R0
+	LockedList::AddFolder "$INSTDIR"
 	LockedList::AddModule "\$R0"
 	LockedList::AddModule "\Uninstall.exe"
-	LockedList::AddModule "\Au_.exe"
+	!if ${uinst} < 1
+		LockedList::AddModule "\Au_.exe"
+	!endif
 	LockedList::Dialog /autonext /heading "$(LAMEXP_LANG_LOCKEDLIST_HEADING)" /noprograms "$(LAMEXP_LANG_LOCKEDLIST_NOPROG)" /searching  "$(LAMEXP_LANG_LOCKEDLIST_SEARCH)" /colheadings "$(LAMEXP_LANG_LOCKEDLIST_COLHDR1)" "$(LAMEXP_LANG_LOCKEDLIST_COLHDR2)"
 	Pop $R0
+!macroend
+
+Function LockedListShow
+	!insertmacro _LockedListShow 0
 FunctionEnd
 
 Function un.LockedListShow
-	!insertmacro MUI_HEADER_TEXT "$(LAMEXP_LANG_LOCKEDLIST_HEADER)" "$(LAMEXP_LANG_LOCKEDLIST_TEXT)"
-	LockedList::AddModule "\LameXP.exe"
-	LockedList::AddModule "\Uninstall.exe"
-	LockedList::Dialog /autonext /heading "$(LAMEXP_LANG_LOCKEDLIST_HEADING)" /noprograms "$(LAMEXP_LANG_LOCKEDLIST_NOPROG)" /searching  "$(LAMEXP_LANG_LOCKEDLIST_SEARCH)" /colheadings "$(LAMEXP_LANG_LOCKEDLIST_COLHDR1)" "$(LAMEXP_LANG_LOCKEDLIST_COLHDR2)"
-	Pop $R0
+	!insertmacro _LockedListShow 1
 FunctionEnd
 
 
@@ -732,4 +776,12 @@ FunctionEnd
 Function ShowReadmeFunction
 	!insertmacro DisableNextButton $R0
 	${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\Manual.html" "open" ""
+FunctionEnd
+
+Function .onInstSuccess
+	${StdUtils.GetParameter} $R0 "Update" "?#@"
+	${IfNot} "$R0" == "?#@"
+		!insertmacro GetExecutableName $R0
+		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\$R0" "open" "--first-run"
+	${EndIf}
 FunctionEnd

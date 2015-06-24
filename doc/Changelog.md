@@ -4,6 +4,7 @@
 
 ## LameXP v4.12 [xxxx-xx-xx] ## {-}
 
+* Updated Qt runtime libraries to v4.8.7 Final (2015-05-25), compiled with MSVC 12.0
 * Added Hungarian translation, contributed by Zityi's Translator Team <zityisoft@gmail.com>
 * Added optional support for the *libfdk-aac* encoder, using the [fdkaac](https://github.com/nu774/fdkaac) front-end by nu774
 * Added detection of the *64-Bit* version of QAAC encoder, requires 64-Bit Apple Application Support
