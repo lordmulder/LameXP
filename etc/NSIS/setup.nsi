@@ -193,23 +193,23 @@ VIAddVersionKey "Website" "${MyWebSite}"
 ;--------------------------------
 
 ;Welcome
-!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUnattended
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE CheckForPreRelease
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_TITLE_3LINES
 !insertmacro MUI_PAGE_WELCOME
 
 ;License
-!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUnattended
 !insertmacro MUI_PAGE_LICENSE "license.rtf"
 
 ;Directory
-!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUnattended
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW CheckForUpdate
 !insertmacro MUI_PAGE_DIRECTORY
 
 ;Startmenu
-!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUnattended
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
 
 ;LockedList
@@ -219,7 +219,7 @@ Page Custom LockedListShow
 !insertmacro MUI_PAGE_INSTFILES
 
 ;Finish
-!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUpdate
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfUnattended
 !insertmacro MUI_PAGE_FINISH
 
 
@@ -305,6 +305,32 @@ UninstPage Custom un.LockedListShow
 
 
 ;--------------------------------
+;LogicLib Support
+;--------------------------------
+
+!macro _UnattendedMode _a _b _t _f
+  !insertmacro _LOGICLIB_TEMP
+  ${StdUtils.GetParameter} $_LOGICLIB_TEMP "Update" "?#@!"
+  StrCmp "$_LOGICLIB_TEMP" "?#@!" `${_f}` `${_t}`
+!macroend
+!define UnattendedMode `"" UnattendedMode ""`
+
+!macro _ForcedMode _a _b _t _f
+  !insertmacro _LOGICLIB_TEMP
+  ${StdUtils.GetParameter} $_LOGICLIB_TEMP "Force" "?#@!"
+  StrCmp "$_LOGICLIB_TEMP" "?#@!" `${_f}` `${_t}`
+!macroend
+!define ForcedMode `"" ForcedMode ""`
+
+!macro _ValidFileName _a _b _t _f
+  !insertmacro _LOGICLIB_TEMP
+  ${StdUtils.ValidFileName} $_LOGICLIB_TEMP `${_b}`
+  StrCmp "$_LOGICLIB_TEMP" "ok" `${_t}` `${_f}`
+!macroend
+!define ValidFileName `"" ValidFileName`
+
+
+;--------------------------------
 ;Installer initialization
 ;--------------------------------
 
@@ -358,8 +384,7 @@ Function .onInit
 
 	; --------
 
-	${StdUtils.GetParameter} $R0 "Update" "?#@"
-	${If} "$R0" == "?#@"
+	${IfNot} ${UnattendedMode}
 		!insertmacro MUI_LANGDLL_DISPLAY
 	${EndIf}
 
@@ -389,8 +414,7 @@ Function un.onInit
 		Quit
 	${EndIf}
 
-	${StdUtils.GetParameter} $R0 "Force" "?"
-	${If} "$R0" == "?"
+	${IfNot} ${ForcedMode}
 		!insertmacro MUI_LANGDLL_DISPLAY
 	${EndIf}
 	
@@ -461,11 +485,19 @@ FunctionEnd
 !macro GetExecutableName OutVar
 	${StdUtils.GetParameter} ${OutVar} "Update" ""
 	${StdUtils.TrimStr} ${OutVar}
-	${IfThen} "${OutVar}" == "" ${|} StrCpy ${OutVar} "LameXP.exe" ${|}
+	${If} "${OutVar}" == ""
+	${OrIfNot} ${ValidFileName} "${OutVar}"
+		StrCpy ${OutVar} "LameXP.exe"
+	${EndIf}
 !macroend
 
 !macro DisableNextButton TmpVar
 	GetDlgItem ${TmpVar} $HWNDPARENT 1
+	EnableWindow ${TmpVar} 0
+!macroend
+
+!macro DisableBackButton TmpVar
+	GetDlgItem ${TmpVar} $HWNDPARENT 3
 	EnableWindow ${TmpVar} 0
 !macroend
 
@@ -591,8 +623,7 @@ Section "-Finished"
 	${EndIf}
 !endif
 
-	${StdUtils.GetParameter} $R0 "Update" "?#@"
-	${IfNotThen} "$R0" == "?#@" ${|} SetAutoClose true ${|}
+	${IfThen} ${UnattendedMode} ${|} SetAutoClose true ${|}
 SectionEnd
 
 
@@ -690,9 +721,8 @@ SectionEnd
 ;Check For Update Mode
 ;--------------------------------
 
-Function SkipIfUpdate
-	${StdUtils.GetParameter} $R0 "Update" "?#@"
-	${IfNotThen} "$R0" == "?#@" ${|} Abort ${|}
+Function SkipIfUnattended
+	${IfThen} ${UnattendedMode} ${|} Abort ${|}
 FunctionEnd
 
 Function CheckForUpdate
@@ -712,8 +742,7 @@ Function CheckForUpdate
 FunctionEnd
 
 Function un.CheckForcedUninstall
-	${StdUtils.GetParameter} $R0 "Force" "?#@"
-	${IfNotThen} "$R0" == "?#@" ${|} Abort ${|}
+	${IfThen} ${ForcedMode} ${|} Abort ${|}
 FunctionEnd
 
 
@@ -723,11 +752,10 @@ FunctionEnd
 
 Function CheckForPreRelease
 	!ifdef LAMEXP_IS_PRERELEASE
-		${StdUtils.GetParameter} $R0 "Update" "?#@"
-		StrCmp $R0 "?#@" 0 SkipPrereleaseWarning
-		MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
-		Quit
-		SkipPrereleaseWarning:
+		${IfNot} ${UnattendedMode}
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL "$(LAMEXP_LANG_PRERELEASE_WARNING)" /SD IDOK IDOK +2
+			Quit
+		${EndIf}
 	!endif
 FunctionEnd
 
@@ -738,17 +766,23 @@ FunctionEnd
 
 !macro _LockedListShow uinst
 	!insertmacro MUI_HEADER_TEXT "$(LAMEXP_LANG_LOCKEDLIST_HEADER)" "$(LAMEXP_LANG_LOCKEDLIST_TEXT)"
-	InitPluginsDir
-	 ${If} ${RunningX64}
+	${If} ${UnattendedMode}
+		!insertmacro DisableBackButton $R0
+	${EndIf}
+	${If} ${RunningX64}
+		InitPluginsDir
 		File /oname=$PLUGINSDIR\LockedList64.dll `${NSISDIR}\Plugins\LockedList64.dll`
 	${EndIf}
 	!insertmacro GetExecutableName $R0
-	LockedList::AddFolder "$INSTDIR"
 	LockedList::AddModule "\$R0"
+	${If} "$R0" != "LameXP.exe"
+		LockedList::AddModule "\LameXP.exe"
+	${EndIf}
 	LockedList::AddModule "\Uninstall.exe"
 	!if ${uinst} < 1
 		LockedList::AddModule "\Au_.exe"
 	!endif
+	LockedList::AddFolder "$INSTDIR"
 	LockedList::Dialog /autonext /heading "$(LAMEXP_LANG_LOCKEDLIST_HEADING)" /noprograms "$(LAMEXP_LANG_LOCKEDLIST_NOPROG)" /searching  "$(LAMEXP_LANG_LOCKEDLIST_SEARCH)" /colheadings "$(LAMEXP_LANG_LOCKEDLIST_COLHDR1)" "$(LAMEXP_LANG_LOCKEDLIST_COLHDR2)"
 	Pop $R0
 !macroend
@@ -779,8 +813,7 @@ Function ShowReadmeFunction
 FunctionEnd
 
 Function .onInstSuccess
-	${StdUtils.GetParameter} $R0 "Update" "?#@"
-	${IfNot} "$R0" == "?#@"
+	${If} ${UnattendedMode}
 		!insertmacro GetExecutableName $R0
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\$R0" "open" "--first-run"
 	${EndIf}

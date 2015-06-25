@@ -84,7 +84,7 @@ for /L %%n in (1, 1, 99) do (
 for %%i in (exe,sfx,zip,txt) do (
 	del "%OUT_FILE%.%%i" 2> NUL
 	if exist "%OUT_FILE%.%%i" (
-		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to delete existing output file^^!\n"
+		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to delete existing output file^!\n"
 		pause && exit
 	)
 )
@@ -173,7 +173,15 @@ pushd "%TMP_PATH%"
 popd
 
 "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
+if %ERRORLEVEL% NEQ 0 (
+	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	pause && exit
+)
 "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
+if %ERRORLEVEL% NEQ 0 (
+	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	pause && exit
+)
 
 attrib -R "%TMP_PATH%\*.txt"
 attrib -R "%TMP_PATH%\*.html"
@@ -182,7 +190,7 @@ rd /S /Q "%TMP_PATH%"
 
 for %%i in (zip,exe) do (
 	if not exist "%OUT_FILE%.zip" (
-		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to create release packages^^!\n"
+		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to create release packages^!\n"
 		pause && exit
 	)
 )
