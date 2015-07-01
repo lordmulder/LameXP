@@ -305,27 +305,27 @@ UninstPage Custom un.LockedListShow
 
 
 ;--------------------------------
-;LogicLib Support
+;LogicLib Extensions
 ;--------------------------------
 
 !macro _UnattendedMode _a _b _t _f
-  !insertmacro _LOGICLIB_TEMP
-  ${StdUtils.GetParameter} $_LOGICLIB_TEMP "Update" "?#@!"
-  StrCmp "$_LOGICLIB_TEMP" "?#@!" `${_f}` `${_t}`
+	!insertmacro _LOGICLIB_TEMP
+	${StdUtils.TestParameter} $_LOGICLIB_TEMP "Update"
+	StrCmp "$_LOGICLIB_TEMP" "true" `${_t}` `${_f}`
 !macroend
 !define UnattendedMode `"" UnattendedMode ""`
 
 !macro _ForcedMode _a _b _t _f
-  !insertmacro _LOGICLIB_TEMP
-  ${StdUtils.GetParameter} $_LOGICLIB_TEMP "Force" "?#@!"
-  StrCmp "$_LOGICLIB_TEMP" "?#@!" `${_f}` `${_t}`
+	!insertmacro _LOGICLIB_TEMP
+	${StdUtils.TestParameter} $_LOGICLIB_TEMP "Force"
+	StrCmp "$_LOGICLIB_TEMP" "true" `${_t}` `${_f}`
 !macroend
 !define ForcedMode `"" ForcedMode ""`
 
 !macro _ValidFileName _a _b _t _f
-  !insertmacro _LOGICLIB_TEMP
-  ${StdUtils.ValidFileName} $_LOGICLIB_TEMP `${_b}`
-  StrCmp "$_LOGICLIB_TEMP" "ok" `${_t}` `${_f}`
+	!insertmacro _LOGICLIB_TEMP
+	${StdUtils.ValidFileName} $_LOGICLIB_TEMP `${_b}`
+	StrCmp "$_LOGICLIB_TEMP" "ok" `${_t}` `${_f}`
 !macroend
 !define ValidFileName `"" ValidFileName`
 
