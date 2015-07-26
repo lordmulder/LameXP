@@ -99,19 +99,20 @@ void ShellIntegration::install(bool async)
 	const QString lamexpShellAction(g_lamexpShellAction);
 
 	//Register the LameXP file type
-	const bool ok1 = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1")                    .arg(lamexpFileType),                    QString(), lamexpFileInfo);
-	const bool ok2 = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell")             .arg(lamexpFileType),                    QString(), lamexpShellAction);
-	const bool ok3 = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2")         .arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellText);
-	const bool ok4 = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellCommand);
-	if(!(ok1 && ok2 && ok3 && ok4))
+	bool ok[4] = {false, false, false, false};
+	ok[0] = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1")                    .arg(lamexpFileType),                    QString(), lamexpFileInfo);
+	ok[1] = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell")             .arg(lamexpFileType),                    QString(), lamexpShellAction);
+	ok[2] = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2")         .arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellText);
+	ok[3] = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellCommand);
+	if(!(ok[0] && ok[1] && ok[2] && ok[3]))
 	{
-		qWarning("Failed to create LameXP file type!");
+		qWarning("Failed to register the LameXP file type!");
 		return;
 	}
 
 	//Detect supported file types
 	QStringList types;
-	detectTypes(lamexpFileType, lamexpShellAction, types);
+	initializeTypes(lamexpFileType, lamexpShellAction, types);
 
 	//Add LameXP shell action to all supported file types
 	for(QStringList::ConstIterator iter = types.constBegin(); iter != types.constEnd(); iter++)
@@ -186,37 +187,24 @@ void ShellIntegration::remove(bool async)
 // Private Functions
 ////////////////////////////////////////////////////////////
 
-void ShellIntegration::detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes)
+void ShellIntegration::initializeTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes)
 {
 	nativeTypes.clear();
-	const QStringList supportedTypes = DecoderRegistry::getSupportedTypes();
 	const QString progId = "Progid";
 
-	QRegExp regExp1("\\((.+)\\)");
-	QRegExp regExp2("(\\.\\w+)");
-
-	//Find all supported file extensions
-	QStringList extensions;
-	for(QStringList::ConstIterator iter = supportedTypes.constBegin(); iter != supportedTypes.constEnd(); iter++)
-	{
-		if(regExp1.lastIndexIn(*iter) > 0)
-		{
-			int lastIndex = 0;
-			while((lastIndex = regExp2.indexIn(regExp1.cap(1), lastIndex) + 1) >= 1)
-			{
-				if(!extensions.contains(regExp2.cap(1), Qt::CaseInsensitive))
-				{
-					extensions.append(regExp2.cap(1));
-				}
-			}
-		}
-	}
-
 	//Map supported extensions to native types
-	for(QStringList::ConstIterator iter = extensions.constBegin(); iter != extensions.constEnd(); iter++)
+	const QStringList &supportedExts = DecoderRegistry::getSupportedExts();
+	for(QStringList::ConstIterator iter = supportedExts.constBegin(); iter != supportedExts.constEnd(); iter++)
 	{
+		const QString currentExt = (*iter).mid(1).trimmed(); /*remove leading asterisk*/
+		if(currentExt.isEmpty() || (!currentExt.startsWith('.')))
+		{
+			qWarning("Invalid file extension '%s' encountered -> skipping!", currentExt);
+			continue;
+		}
+
 		QString currentType;
-		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_classes, (*iter), QString(), currentType))
+		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_classes, currentExt, QString(), currentType))
 		{
 			currentType = QDir::toNativeSeparators(currentType);
 			if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
@@ -226,10 +214,10 @@ void ShellIntegration::detectTypes(const QString &lamexpFileType, const QString 
 		}
 		else
 		{
-			MUtils::Registry::reg_value_write(MUtils::Registry::root_user, (*iter), QString(), lamexpFileType);
+			MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1").arg(currentExt), QString(), lamexpFileType);
 		}
 
-		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_user, QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(*iter), progId, currentType))
+		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_user, QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(currentExt), progId, currentType))
 		{
 			currentType = QDir::toNativeSeparators(currentType);
 			if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
@@ -239,7 +227,7 @@ void ShellIntegration::detectTypes(const QString &lamexpFileType, const QString 
 		}
 
 		QStringList progids;
-		if(MUtils::Registry::reg_enum_values(MUtils::Registry::root_user, QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\OpenWithProgids").arg(*iter), progids))
+		if(MUtils::Registry::reg_enum_values(MUtils::Registry::root_user, QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\OpenWithProgids").arg(currentExt), progids))
 		{
 			for(QStringList::ConstIterator iter2 = progids.constBegin(); iter2 != progids.constEnd(); iter2++)
 			{

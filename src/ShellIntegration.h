@@ -39,7 +39,7 @@ public:
 private:
 	ShellIntegration(void);
 
-	static void detectTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes);
+	static void initializeTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes);
 	static QMutex m_mutex;
 	static volatile int m_state;
 };
