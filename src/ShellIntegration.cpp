@@ -203,26 +203,36 @@ void ShellIntegration::initializeTypes(const QString &lamexpFileType, const QStr
 			continue;
 		}
 
+		bool hasExistingType = false;
 		QString currentType;
-		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_classes, currentExt, QString(), currentType))
+		if(MUtils::Registry::reg_key_exists(MUtils::Registry::root_classes, currentExt))
 		{
-			currentType = QDir::toNativeSeparators(currentType);
-			if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
+			if(MUtils::Registry::reg_value_read(MUtils::Registry::root_classes, currentExt, QString(), currentType))
 			{
-				nativeTypes.append(currentType);
+				currentType = QDir::toNativeSeparators(currentType);
+				if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
+				{
+					nativeTypes.append(currentType);
+					hasExistingType = true;
+				}
 			}
 		}
-		else
+		if(!hasExistingType)
 		{
+			currentType = lamexpFileType;
 			MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1").arg(currentExt), QString(), lamexpFileType);
 		}
 
-		if(MUtils::Registry::reg_value_read(MUtils::Registry::root_user, QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(currentExt), progId, currentType))
+		const QString userChoiceKey = QString("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\%1\\UserChoice").arg(currentExt);
+		if(MUtils::Registry::reg_key_exists(MUtils::Registry::root_user, userChoiceKey))
 		{
-			currentType = QDir::toNativeSeparators(currentType);
-			if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
+			if(MUtils::Registry::reg_value_read(MUtils::Registry::root_user, userChoiceKey, progId, currentType))
 			{
-				nativeTypes.append(currentType);
+				currentType = QDir::toNativeSeparators(currentType);
+				if((currentType.compare(lamexpFileType, Qt::CaseInsensitive) != 0) && (!nativeTypes.contains(currentType, Qt::CaseInsensitive)))
+				{
+					nativeTypes.append(currentType);
+				}
 			}
 		}
 
