@@ -94,7 +94,7 @@
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\lib;$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\lib;$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -103,8 +103,8 @@
     <PostBuildEvent>
       <Message>Copy DLL's</Message>
       <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\bin\Qt*.dll" "$(OutDir)"
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Debug\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
 copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(OutDir)"
 copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(OutDir)"
 </Command>
@@ -174,15 +174,15 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       </MapFileName>
       <CreateHotPatchableImage>
       </CreateHotPatchableImage>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\lib;$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\lib;$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
       <Message>Copy DLL's</Message>
       <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\bin\Qt*.dll" "$(OutDir)"
-copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
 </Command>
     </PostBuildEvent>
     <ResourceCompile>
@@ -235,7 +235,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Shared\plugins\imageforma
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCore.lib;QtGui.lib;QtSvg.lib;qsvg.lib;qico.lib;qtga.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;Version.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Static\lib;$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2013\Static\plugins\imageformats;$(SolutionDir)\..\Prerequisites\EncodePointer\lib;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Static\lib;$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Static\plugins\imageformats;$(SolutionDir)\..\Prerequisites\EncodePointer\lib;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AssemblyDebug>
