@@ -161,6 +161,21 @@ void ShellIntegration::remove(bool async)
 	//Remove shell action from all file types
 	for(QStringList::ConstIterator iter = fileTypes.constBegin(); iter != fileTypes.constEnd(); iter++)
 	{
+		//Remove LameXP-specific types altogether
+		if(iter->startsWith('.'))
+		{
+			QString currentFileType;
+			if(MUtils::Registry::reg_value_read(MUtils::Registry::root_user, QString("Software\\Classes\\%1").arg(*iter), QString(), currentFileType))
+			{
+				if(currentFileType.compare(lamexpFileType, Qt::CaseInsensitive) == 0)
+				{
+					MUtils::Registry::reg_key_delete(MUtils::Registry::root_user, QString("Software\\Classes\\%1").arg(*iter));
+					continue;
+				}
+			}
+		}
+
+		//Remove shell action for non-LameXP types
 		MUtils::Registry::reg_key_delete(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2").arg((*iter), lamexpShellAction));
 
 		//Remove from sub-tree too
