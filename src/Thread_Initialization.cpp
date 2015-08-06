@@ -411,7 +411,7 @@ double InitializationThread::doInit(const size_t threadCount)
 			
 		if(cpuType & cpuSupport)
 		{
-			pool->start(new ExtractorTask(resource.data(), appDir, toolName, toolHash, version, versInfo));
+			pool->start(new ExtractorTask(resource.take(), appDir, toolName, toolHash, version, versInfo));
 			continue;
 		}
 	}
