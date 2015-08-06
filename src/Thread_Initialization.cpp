@@ -402,21 +402,18 @@ double InitializationThread::doInit(const size_t threadCount)
 			return -1.0;
 		}
 			
-		QResource *resource = new QResource(QString(":/tools/%1").arg(toolName));
+		QScopedPointer<QResource> resource(new QResource(QString(":/tools/%1").arg(toolName)));
 		if(!(resource->isValid() && resource->data()))
 		{
-			MUTILS_DELETE(resource);
 			qFatal("The resource for \"%s\" could not be found!", MUTILS_UTF8(toolName));
 			return -1.0;
 		}
 			
 		if(cpuType & cpuSupport)
 		{
-			pool->start(new ExtractorTask(resource, appDir, toolName, toolHash, version, versInfo));
+			pool->start(new ExtractorTask(resource.data(), appDir, toolName, toolHash, version, versInfo));
 			continue;
 		}
-
-		MUTILS_DELETE(resource);
 	}
 
 	//Sanity Check
@@ -535,10 +532,10 @@ void InitializationThread::initTranslations(void)
 		if(QFileInfo(langFile).isFile() && (langIdExp.indexIn(*iter) >= 0))
 		{
 			langId = langIdExp.cap(1).toLower();
-			QResource langRes = QResource(langResTemplate.arg(*iter));
-			if(langRes.isValid() && langRes.size() > 0)
+			QScopedPointer<QResource> langRes(new QResource(langResTemplate.arg(*iter)));
+			if(langRes->isValid() && langRes->size() > 0)
 			{
-				QByteArray data = QByteArray::fromRawData(reinterpret_cast<const char*>(langRes.data()), langRes.size());
+				QByteArray data = QByteArray::fromRawData(reinterpret_cast<const char*>(langRes->data()), langRes->size());
 				QTextStream stream(&data, QIODevice::ReadOnly);
 				stream.setAutoDetectUnicode(false); stream.setCodec("UTF-8");
 
