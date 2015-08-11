@@ -514,9 +514,9 @@ Section "-PreInit"
 	SetOutPath "$INSTDIR"
 SectionEnd
 
-Section "!Install Files"
-	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_INSTFILES)"
-
+Section "!Clean Up Old Cruft"
+	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_CLEANUP)"
+	
 	Delete "$INSTDIR\Changelog.htm"
 	Delete "$INSTDIR\Changelog.html"
 	Delete "$INSTDIR\Contributors.txt"
@@ -535,13 +535,23 @@ Section "!Install Files"
 	Delete "$INSTDIR\Settings.cfg"
 	Delete "$INSTDIR\Translate.html"
 	Delete "$INSTDIR\Uninstall.exe"
+	Delete "$INSTDIR\Qt*.dll"
+	Delete "$INSTDIR\msvcr*.dll"
+	Delete "$INSTDIR\msvcp*.dll"
+	Delete "$INSTDIR\concrt*.dll"
+	Delete "$INSTDIR\vcruntime*.dll"
+	Delete "$INSTDIR\vccorlib*.dll"
+	
 	RMDir /r "$INSTDIR\img"
 	RMDir /r "$INSTDIR\imageformats"
 	RMDir /r "$INSTDIR\redist"
+SectionEnd
 
-	!insertmacro GetExecutableName $R0
-
+Section "!Install Files"
+	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_INSTFILES)"
+	
 	DeleteOldBinary:
+	!insertmacro GetExecutableName $R0
 	ClearErrors
 	Delete "$INSTDIR\$R0"
 	

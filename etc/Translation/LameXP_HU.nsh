@@ -1,6 +1,6 @@
 ﻿; ///////////////////////////////////////////////////////////////////////////////
 ; // LameXP - Audio Encoder Front-End
-; // Copyright (C) 2004-2011 LoRd_MuldeR <MuldeR2@GMX.de>
+; // Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
 ; //
 ; // This program is free software; you can redistribute it and/or modify
 ; // it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
 
+LangString LAMEXP_LANG_STATUS_CLEANUP      ${LANG_HUNGARIAN} "Cleaning up, please wait..."
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_HUNGARIAN} "Futó példány bezárása, kis türelmet..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_HUNGARIAN} "Programfájlok telepítése, kis türelmet..."
 LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_HUNGARIAN} "Installing runtime libraries, please wait..."
