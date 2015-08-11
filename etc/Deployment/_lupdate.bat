@@ -10,7 +10,6 @@ setlocal ENABLEDELAYEDEXPANSION
 :: ---------------------------------------------------------------------------
 
 call "%~dp0\_paths.bat"
-call "%PATH_MSCDIR%\VC\bin\vcvars32.bat" x86
 
 if exist "%PATH_QTMSVC%\bin\qtenv2.bat" (
 	call "%PATH_QTMSVC%\bin\qtenv2.bat"

@@ -21,6 +21,7 @@
 
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_UKRAINIAN} "Закриття запущеної копії, будь ласка, зачекайте..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_UKRAINIAN} "Встановлення програмних файлів, будь ласка, зачекайте..."
+LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_UKRAINIAN} "Installing runtime libraries, please wait..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_UKRAINIAN} "Створення додатку видалення, будь ласка, зачекайте..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_UKRAINIAN} "Створення посилань, будь ласка, зачекайте..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_UKRAINIAN} "Оновлення реєстру, будь ласка, зачекайте..."

@@ -18,6 +18,7 @@ set "PATH_MSCDIR="
 set "PATH_QTMSVC="
 set "PATH_GNUPG1="
 set "PATH_PANDOC="
+set "PATH_VCTOOL="
 set "PATH_VCPROJ="
 
 :: ------------------------------------------
@@ -45,6 +46,7 @@ for /f "tokens=2,*" %%s in (%BUILDENV_TXT%) do (
 	if "%%s"=="PATH_QTMSVC" set "PATH_QTMSVC=%%~t"
 	if "%%s"=="PATH_GNUPG1" set "PATH_GNUPG1=%%~t"
 	if "%%s"=="PATH_PANDOC" set "PATH_PANDOC=%%~t"
+	if "%%s"=="PATH_VCTOOL" set "PATH_VCTOOL=%%~t"
 	if "%%s"=="PATH_VCPROJ" set "PATH_VCPROJ=%%~t"
 )
 
@@ -61,6 +63,7 @@ set "BUILDENV_TXT="
 "%~dp0\..\Utilities\CEcho.exe" yellow "PATH_QTMSVC = \"%PATH_QTMSVC:\=\\%\""
 "%~dp0\..\Utilities\CEcho.exe" yellow "PATH_GNUPG1 = \"%PATH_GNUPG1:\=\\%\""
 "%~dp0\..\Utilities\CEcho.exe" yellow "PATH_PANDOC = \"%PATH_PANDOC:\=\\%\""
+"%~dp0\..\Utilities\CEcho.exe" yellow "PATH_VCTOOL = \"%PATH_VCTOOL:\=\\%\""
 "%~dp0\..\Utilities\CEcho.exe" yellow "PATH_VCPROJ = \"%PATH_VCPROJ:\=\\%\""
 "%~dp0\..\Utilities\CEcho.exe" yellow "=========== END PATHS ===========\n"
 
@@ -77,6 +80,7 @@ call:validate_path PATH_QTMSVC "%PATH_QTMSVC%\bin\moc.exe"
 call:validate_path PATH_QTMSVC "%PATH_QTMSVC%\bin\rcc.exe"
 call:validate_path PATH_GNUPG1 "%PATH_GNUPG1%\gpg.exe"
 call:validate_path PATH_PANDOC "%PATH_PANDOC%\pandoc.exe"
+call:validate_path PATH_VCTOOL "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%PATH_VCTOOL%.CRT\msvcp%PATH_VCTOOL%.dll"
 call:validate_path PATH_VCPROJ "%~dp0\..\..\%PATH_VCPROJ%"
 
 :: ------------------------------------------

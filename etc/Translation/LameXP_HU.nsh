@@ -21,6 +21,7 @@
 
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_HUNGARIAN} "Futó példány bezárása, kis türelmet..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_HUNGARIAN} "Programfájlok telepítése, kis türelmet..."
+LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_HUNGARIAN} "Installing runtime libraries, please wait..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_HUNGARIAN} "Eltávolító létrehozása, kis türelmet..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_HUNGARIAN} "Parancsikonok létrehozása, kis türelmet..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_HUNGARIAN} "Rendszerleíró frissítése, kis türelmet..."

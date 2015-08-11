@@ -52,6 +52,9 @@
 !ifndef LAMEXP_UPX_PATH
   !error "LAMEXP_UPX_PATH is not defined !!!"
 !endif
+!ifndef LAMEXP_REDIST
+  !error "LAMEXP_REDIST is not defined !!!"
+!endif
 
 ;UUID
 !define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
@@ -533,6 +536,8 @@ Section "!Install Files"
 	Delete "$INSTDIR\Translate.html"
 	Delete "$INSTDIR\Uninstall.exe"
 	RMDir /r "$INSTDIR\img"
+	RMDir /r "$INSTDIR\imageformats"
+	RMDir /r "$INSTDIR\redist"
 
 	!insertmacro GetExecutableName $R0
 
@@ -546,13 +551,22 @@ Section "!Install Files"
 	${EndIf}
 	
 	File /a `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
-
+	File /nonfatal /a /r `${LAMEXP_SOURCE_PATH}\*.dll`
+	
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.txt`
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.html`
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.png`
 SectionEnd
 
-Section "-Write Uinstaller"
+!if ${LAMEXP_REDIST} != 0
+	Section "-Install VCRedist"
+		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_VCREDIST)"
+		File /a `/oname=$PLUGINSDIR\vcredist_x86.exe` `${LAMEXP_SOURCE_PATH}\redist\vcredist_x86.exe`
+		ExecWait '"$PLUGINSDIR\vcredist_x86.exe" /install /passive /norestart'
+	SectionEnd
+!endif
+
+Section "-Write Uninstaller"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_MAKEUNINST)"
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd

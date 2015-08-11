@@ -100,23 +100,20 @@ for %%i in (exe,sfx,zip,txt) do (
 rd /S /Q "%TMP_PATH%" 2> NUL
 mkdir "%TMP_PATH%"
 
-for %%i in (exe,dll) do (
-	copy "%BIN_PATH%\*.%%i" "%TMP_PATH%"
-)
-
+copy "%BIN_PATH%\LameXP.exe" "%TMP_PATH%"
 if "%LAMEXP_REDIST%"=="1" (
+	copy "%BIN_PATH%\MUtils32-?.dll" "%TMP_PATH%"
 	mkdir "%TMP_PATH%\imageformats"
 	for %%i in (Core,Gui,Network,Xml,Svg) do (
-		copy "%QTDIR%\bin\Qt%%i4.dll" "%TMP_PATH%"
+		copy "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\bin\Qt%%i4.dll" "%TMP_PATH%"
 	)
 	for %%i in (gif,ico,jpeg,mng,svg,tga,tiff) do (
-		copy "%QTDIR%\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
+		copy "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
 	)
-	for %%i in (100,110,120) do (
-		if exist "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\*.dll" (
-			copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\msvcr%%i.dll" "%TMP_PATH%"
-			copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%%i.CRT\msvcp%%i.dll" "%TMP_PATH%"
-		)
+	copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%PATH_VCTOOL%.CRT\*.dll" "%TMP_PATH%"
+	if exist "%PATH_MSCDIR%\VC\redist\1033\vcredist_x86.exe" (
+		mkdir "%TMP_PATH%\redist"
+		copy "%PATH_MSCDIR%\VC\redist\1033\vcredist_x86.exe" "%TMP_PATH%\redist"
 	)
 )
 
@@ -172,12 +169,12 @@ pushd "%TMP_PATH%"
 "%~dp0\..\Utilities\Zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
 popd
 
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_REDIST=%LAMEXP_REDIST%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
 )
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_REDIST=%LAMEXP_REDIST%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
 	pause && exit

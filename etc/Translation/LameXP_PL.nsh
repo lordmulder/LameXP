@@ -21,6 +21,7 @@
 
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_POLISH} "Zamykanie uruchomionych procesów, prosze czekać..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_POLISH} "Kopiowanie plików programu, prosze czekać..."
+LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_POLISH} "Installing runtime libraries, please wait..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_POLISH} "Tworzenie pliku wykonującego deinstalację, prosze czekać..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_POLISH} "Tworzenie skrótów do programu, prosze czekać..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_POLISH} "Zapisywanie do rejestru, prosze czekać..."

@@ -21,6 +21,7 @@
 
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_GERMAN} "Schließe laufende Instanz, bitte warten..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_GERMAN} "Installiere Programm-Dateien, bitte warten..."
+LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_GERMAN} "Installiere Laufzeitbibliotheken, bitte warten..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_GERMAN} "Erzeuge Uninstaller, bitte warten..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_GERMAN} "Erzeuge Verknüpfungen, bitte warten..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_GERMAN} "Registrierung wird aktualisiert, bitte warten..."

@@ -21,6 +21,7 @@
 
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_ENGLISH} "Closing running instance, please wait..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_ENGLISH} "Installing program files, please wait..."
+LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_ENGLISH} "Installing runtime libraries, please wait..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_ENGLISH} "Creating the uninstaller, please wait..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_ENGLISH} "Creating shortcuts, please wait..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_ENGLISH} "Updating the registry, please wait..."
