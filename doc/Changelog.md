@@ -12,12 +12,16 @@
 * Added enhanced file renaming option: Default file extensions can now be overwritten
 * Added enhanced file renaming option: Files can now be renamed via the [regular expression](http://www.regular-expressions.info/quickstart.html) engine
 * Added capability to select *multiple* files on "Source Files" tab
+* Updated Vorbis encoder to OggEnc v2.87 (2015-08-03), using libvorbis v1.3.5 and aoTuV b6.03_2015
 * Updated MediaInfo to v0.7.74 (2015-05-25), compiled with ICL 15.0 and MSVC 12.0
-* Updated mpg123 decoder to v1.22.2 (2015-05-24), compiled with GCC 5.1.0
+* Updated mpg123 decoder to v1.22.4 (2015-08-12), compiled with GCC 5.1.0
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Updated GnuPG to v1.4.19 (2015-02-27), compiled with GCC 4.9.2
 * Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
 * Fixed function to restore the default Temp folder, if custom Temp folder doesn't exist anymore
+* Some installer improvements have been implemented (especially in "update" mode)
+* Full support for Windows 10 RTM (Build #10240)
+
 
 ## LameXP v4.11 [2015-04-05] ## {-}
 
