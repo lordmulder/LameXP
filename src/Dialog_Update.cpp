@@ -396,7 +396,8 @@ void UpdateDialog::applyUpdate(void)
 		args << QString("/Location=%1").arg(updateInfo->getDownloadAddress());
 		args << QString("/Filename=%1").arg(updateInfo->getDownloadFilename());
 		args << QString("/TicketID=%1").arg(updateInfo->getDownloadFilecode());
-		args << QString("/ToFolder=%1").arg(QDir::toNativeSeparators(QDir(QApplication::applicationDirPath()).canonicalPath())); 
+		args << QString("/CheckSum=%1").arg(updateInfo->getDownloadChecksum());
+		args << QString("/ToFolder=%1").arg(QDir::toNativeSeparators(QDir(QApplication::applicationDirPath()).canonicalPath()));
 		args << QString("/ToExFile=%1.exe").arg(QFileInfo(QFileInfo(QApplication::applicationFilePath()).canonicalFilePath()).completeBaseName());
 		args << QString("/AppTitle=LameXP (Build #%1)").arg(QString::number(updateInfo->getBuildNo()));
 
