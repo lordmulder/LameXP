@@ -176,13 +176,15 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 	args << QString("--bitrate") << QString::number(qBound(8, (m_configBitrate + 1) * 8, 256));
 
-	if(!metaInfo.title().isEmpty()) args << "--title" << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty()) args << "--artist" << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty()) args << "--album" << cleanTag(metaInfo.album());
-	if(!metaInfo.genre().isEmpty()) args << "--genre" << cleanTag(metaInfo.genre());
-	if(metaInfo.year()) args << "--date" << QString::number(metaInfo.year());
-	if(metaInfo.position()) args << "--comment" << QString("tracknumber=%1").arg(QString::number(metaInfo.position()));
+	if(!metaInfo.title().isEmpty())   args << "--title"   << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << "--artist"  << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << "--album"   << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << "--genre"   << cleanTag(metaInfo.genre());
+	if(metaInfo.year())               args << "--date"    << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << "--comment" << QString("tracknumber=%1").arg(QString::number(metaInfo.position()));
 	if(!metaInfo.comment().isEmpty()) args << "--comment" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
+	if(!metaInfo.cover().isEmpty())   args << "--picture" << QDir::toNativeSeparators(metaInfo.cover());
+
 	
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 

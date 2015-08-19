@@ -3509,12 +3509,12 @@
         <translation type="unfinished">업데이트를 내려받고 있습니다. 잠시만 기다려주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="425"/>
+        <location filename="../../src/Dialog_Update.cpp" line="426"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">업데이트 설치 준비. 프로그램이 종료됩니다...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="433"/>
+        <location filename="../../src/Dialog_Update.cpp" line="434"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">업데이트 실패. 다시 시도하거나 업데이트를 수동으로 내려받으시기 바랍니다!</translation>
     </message>

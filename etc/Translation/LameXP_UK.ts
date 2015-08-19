@@ -3557,12 +3557,12 @@
         <translation>Йде завантаження оновлення, будь ласка, зачекайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="425"/>
+        <location filename="../../src/Dialog_Update.cpp" line="426"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Оновлення готове до встановлення. Буде здйснено закриття додатку...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="433"/>
+        <location filename="../../src/Dialog_Update.cpp" line="434"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Збій оновлення. Будь ласка, спробуйте ще раз або завантажте оновлення самостійно!</translation>
     </message>

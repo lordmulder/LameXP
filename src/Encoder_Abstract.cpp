@@ -82,8 +82,12 @@ const bool AbstractEncoder::needsTimingInfo(void)
 //Does this text contain Non-ASCII characters?
 bool AbstractEncoder::isUnicode(const QString &original)
 {
-	QString asLatin1 = QString::fromLatin1(original.toLatin1().constData());
-	return (wcscmp(MUTILS_WCHR(original), MUTILS_WCHR(asLatin1)) != 0);
+	if(!original.isEmpty())
+	{
+		QString asLatin1 = QString::fromLatin1(original.toLatin1().constData());
+		return (wcscmp(MUTILS_WCHR(original), MUTILS_WCHR(asLatin1)) != 0);
+	}
+	return false;
 }
 
 //Remove "problematic" characters from tag

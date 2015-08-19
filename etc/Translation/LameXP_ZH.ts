@@ -3509,12 +3509,12 @@
         <translation>正在下载更新,请耐心等待...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="425"/>
+        <location filename="../../src/Dialog_Update.cpp" line="426"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>更新已准备好安装。应用程序将退出...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="433"/>
+        <location filename="../../src/Dialog_Update.cpp" line="434"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>更新失败。请再试一次或手动下载 !</translation>
     </message>

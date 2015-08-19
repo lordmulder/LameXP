@@ -3565,12 +3565,12 @@
         <translation>Uppdatering laddas ner, vänta...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="425"/>
+        <location filename="../../src/Dialog_Update.cpp" line="426"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Uppdatering klar att installeras. Programmet kommer att avslutas...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="433"/>
+        <location filename="../../src/Dialog_Update.cpp" line="434"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Uppdateringen misslyckades. Försök igen, eller ladda ner manuellt!</translation>
     </message>

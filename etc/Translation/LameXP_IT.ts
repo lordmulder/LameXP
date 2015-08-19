@@ -3528,12 +3528,12 @@
         <translation type="unfinished">Aggiornamento in scaricamento, per favore sii paziente...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="425"/>
+        <location filename="../../src/Dialog_Update.cpp" line="426"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation type="unfinished">Aggiornamento pronto per l&apos;installazione. L&apos;Applicazione si chiuderà...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="433"/>
+        <location filename="../../src/Dialog_Update.cpp" line="434"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation type="unfinished">Aggiornamento Fallito. Per favore prova ancora o aggiorna manualmente!</translation>
     </message>

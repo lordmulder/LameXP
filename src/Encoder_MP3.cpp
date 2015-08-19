@@ -201,22 +201,22 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 	bool bUseUCS2 = false;
 
-	if(!metaInfo.title().isEmpty() && isUnicode(metaInfo.title())) bUseUCS2 = true;
-	if(!metaInfo.artist().isEmpty() && isUnicode(metaInfo.artist())) bUseUCS2 = true;
-	if(!metaInfo.album().isEmpty() && isUnicode(metaInfo.album())) bUseUCS2 = true;
-	if(!metaInfo.genre().isEmpty() && isUnicode(metaInfo.genre())) bUseUCS2 = true;
-	if(!metaInfo.comment().isEmpty() && isUnicode(metaInfo.comment())) bUseUCS2 = true;
+	if(isUnicode(metaInfo.title()))   bUseUCS2 = true;
+	if(isUnicode(metaInfo.artist()))  bUseUCS2 = true;
+	if(isUnicode(metaInfo.album()))   bUseUCS2 = true;
+	if(isUnicode(metaInfo.genre()))   bUseUCS2 = true;
+	if(isUnicode(metaInfo.comment())) bUseUCS2 = true;
 
 	if(bUseUCS2) args << "--id3v2-ucs2"; //Must specify this BEFORE "--tt" and friends!
 
-	if(!metaInfo.title().isEmpty()) args << "--tt" << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty()) args << "--ta" << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty()) args << "--tl" <<cleanTag( metaInfo.album());
-	if(!metaInfo.genre().isEmpty()) args << "--tg" << cleanTag(metaInfo.genre());
+	if(!metaInfo.title().isEmpty())   args << "--tt" << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << "--ta" << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << "--tl" << cleanTag( metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << "--tg" << cleanTag(metaInfo.genre());
 	if(!metaInfo.comment().isEmpty()) args << "--tc" << cleanTag(metaInfo.comment());
-	if(metaInfo.year()) args << "--ty" << QString::number(metaInfo.year());
-	if(metaInfo.position()) args << "--tn" << QString::number(metaInfo.position());
-	if(!metaInfo.cover().isEmpty()) args << "--ti" << QDir::toNativeSeparators(metaInfo.cover());
+	if(metaInfo.year())               args << "--ty" << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << "--tn" << QString::number(metaInfo.position());
+	if(!metaInfo.cover().isEmpty())   args << "--ti" << QDir::toNativeSeparators(metaInfo.cover());
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
