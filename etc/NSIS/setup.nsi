@@ -128,7 +128,6 @@ ReserveFile "${NSISDIR}\Plugins\StartMenu.dll"
 ReserveFile "${NSISDIR}\Plugins\StdUtils.dll"
 ReserveFile "${NSISDIR}\Plugins\System.dll"
 ReserveFile "${NSISDIR}\Plugins\UserInfo.dll"
-ReserveFile "checkproc.exe"
 
 
 ;--------------------------------
@@ -338,6 +337,10 @@ UninstPage Custom un.LockedListShow
 ;--------------------------------
 
 Function .onInit
+	InitPluginsDir
+
+	; --------
+
 	System::Call 'kernel32::CreateMutexA(i 0, i 0, t "{2B3D1EBF-B3B6-4E93-92B9-6853029A7162}") i .r1 ?e'
 	Pop $0
 	${If} $0 <> 0
@@ -400,13 +403,6 @@ Function .onInit
 		SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
 		Quit
 	${EndIf}
-	
-	; --------
-
-	InitPluginsDir
-	File "/oname=$PLUGINSDIR\checkproc.exe" "checkproc.exe"
-	nsExec::Exec /TIMEOUT=5000 '"$PLUGINSDIR\checkproc.exe" Softonic Brothersoft Afreecodec'
-	Pop $0
 FunctionEnd
 
 Function un.onInit
@@ -504,6 +500,36 @@ FunctionEnd
 	EnableWindow ${TmpVar} 0
 !macroend
 
+!macro CleanUpFiles options
+	Delete ${options} "$INSTDIR\Changelog.htm"
+	Delete ${options} "$INSTDIR\Changelog.html"
+	Delete ${options} "$INSTDIR\Contributors.txt"
+	Delete ${options} "$INSTDIR\Copying.txt"
+	Delete ${options} "$INSTDIR\FAQ.html"
+	Delete ${options} "$INSTDIR\Howto.html"
+	Delete ${options} "$INSTDIR\LameEnc.sys"
+	Delete ${options} "$INSTDIR\LameXP.exe"
+	Delete ${options} "$INSTDIR\LameXP.exe.sig"
+	Delete ${options} "$INSTDIR\LameXP-Portable.exe"
+	Delete ${options} "$INSTDIR\License.txt"
+	Delete ${options} "$INSTDIR\Manual.html"
+	Delete ${options} "$INSTDIR\Readme.htm"
+	Delete ${options} "$INSTDIR\ReadMe.txt"
+	Delete ${options} "$INSTDIR\PRE_RELEASE_INFO.txt"
+	Delete ${options} "$INSTDIR\Settings.cfg"
+	Delete ${options} "$INSTDIR\Translate.html"
+	Delete ${options} "$INSTDIR\Uninstall.exe"
+	Delete ${options} "$INSTDIR\Qt*.dll"
+	Delete ${options} "$INSTDIR\msvcr*.dll"
+	Delete ${options} "$INSTDIR\msvcp*.dll"
+	Delete ${options} "$INSTDIR\concrt*.dll"
+	Delete ${options} "$INSTDIR\vcruntime*.dll"
+	Delete ${options} "$INSTDIR\vccorlib*.dll"
+	
+	RMDir /r ${options} "$INSTDIR\img"
+	RMDir /r ${options} "$INSTDIR\imageformats"
+	RMDir /r ${options} "$INSTDIR\redist"
+!macroend
 
 ;--------------------------------
 ;Install Files
@@ -516,35 +542,7 @@ SectionEnd
 
 Section "!Clean Up Old Cruft"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_CLEANUP)"
-	
-	Delete "$INSTDIR\Changelog.htm"
-	Delete "$INSTDIR\Changelog.html"
-	Delete "$INSTDIR\Contributors.txt"
-	Delete "$INSTDIR\Copying.txt"
-	Delete "$INSTDIR\FAQ.html"
-	Delete "$INSTDIR\Howto.html"
-	Delete "$INSTDIR\LameEnc.sys"
-	Delete "$INSTDIR\LameXP.exe"
-	Delete "$INSTDIR\LameXP.exe.sig"
-	Delete "$INSTDIR\LameXP-Portable.exe"
-	Delete "$INSTDIR\License.txt"
-	Delete "$INSTDIR\Manual.html"
-	Delete "$INSTDIR\Readme.htm"
-	Delete "$INSTDIR\ReadMe.txt"
-	Delete "$INSTDIR\PRE_RELEASE_INFO.txt"
-	Delete "$INSTDIR\Settings.cfg"
-	Delete "$INSTDIR\Translate.html"
-	Delete "$INSTDIR\Uninstall.exe"
-	Delete "$INSTDIR\Qt*.dll"
-	Delete "$INSTDIR\msvcr*.dll"
-	Delete "$INSTDIR\msvcp*.dll"
-	Delete "$INSTDIR\concrt*.dll"
-	Delete "$INSTDIR\vcruntime*.dll"
-	Delete "$INSTDIR\vccorlib*.dll"
-	
-	RMDir /r "$INSTDIR\img"
-	RMDir /r "$INSTDIR\imageformats"
-	RMDir /r "$INSTDIR\redist"
+	!insertmacro CleanUpFiles ""
 SectionEnd
 
 Section "!Install Files"
@@ -695,31 +693,10 @@ Section "Uninstall"
 	ReadRegStr $R0 HKLM "${MyRegPath}" "ExecutableName"
 	${IfThen} "$R0" == "" ${|} StrCpy $R0 "LameXP.exe" ${|}
 
-	Delete /REBOOTOK "$INSTDIR\LameXP.exe"
 	Delete /REBOOTOK "$INSTDIR\$R0"
-	Delete /REBOOTOK "$INSTDIR\LameXP-Portable.exe"
-	Delete /REBOOTOK "$INSTDIR\LameXP.exe.sig"
-	Delete /REBOOTOK "$INSTDIR\LameXP*"
-	
-	Delete /REBOOTOK "$INSTDIR\Changelog.htm"
-	Delete /REBOOTOK "$INSTDIR\Changelog.html"
-	Delete /REBOOTOK "$INSTDIR\Contributors.txt"
-	Delete /REBOOTOK "$INSTDIR\Copying.txt"
-	Delete /REBOOTOK "$INSTDIR\FAQ.html"
-	Delete /REBOOTOK "$INSTDIR\Howto.html"
-	Delete /REBOOTOK "$INSTDIR\LameEnc.sys"
-	Delete /REBOOTOK "$INSTDIR\License.txt"
-	Delete /REBOOTOK "$INSTDIR\Manual.html"
-	Delete /REBOOTOK "$INSTDIR\Readme.htm"
-	Delete /REBOOTOK "$INSTDIR\ReadMe.txt"
-	Delete /REBOOTOK "$INSTDIR\PRE_RELEASE_INFO.txt"
-	Delete /REBOOTOK "$INSTDIR\Settings.cfg"
-	Delete /REBOOTOK "$INSTDIR\Translate.html"
-	Delete /REBOOTOK "$INSTDIR\Uninstall.exe"
-
-	RMDir /r "$INSTDIR\img"
+	!insertmacro CleanUpFiles /REBOOTOK
 	RMDir "$INSTDIR"
-
+	
 	; --------------
 	; Registry
 	; --------------

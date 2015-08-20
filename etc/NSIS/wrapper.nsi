@@ -74,7 +74,7 @@ OutFile "${LAMEXP_OUTPUT_FILE}"
 BrandingText "${LAMEXP_DATE} / Build #${LAMEXP_BUILD}"
 Icon "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
 ChangeUI all "${NSISDIR}\Contrib\UIs\sdbarker_tiny.exe"
-ShowInstDetails show
+ShowInstDetails nevershow
 AutoCloseWindow true
 InstallDir ""
 
@@ -136,6 +136,12 @@ Section "-LaunchTheInstaller"
 	
 	InitPluginsDir
 	SetOutPath "$PLUGINSDIR"
+	
+	${StdUtils.TestParameter} $R0 "Update"
+	${If} "$R0" == "true"
+		SetFileAttributes "$EXEPATH" FILE_ATTRIBUTE_NORMAL
+		SelfDel::del /RMDIR
+	${EndIf}
 	
 	SetOverwrite on
 	File "/oname=${InstallerFileName}" "${LAMEXP_SOURCE_FILE}"
@@ -204,6 +210,7 @@ Section "-LaunchTheInstaller"
 	SetDetailsPrint listonly
 
 	SetErrorLevel 1
+	SetOutPath "$TEMP"
 	Abort "Aborted."
 
 	; --------
@@ -212,4 +219,5 @@ Section "-LaunchTheInstaller"
 
 	Delete /REBOOTOK "${InstallerFileName}"
 	SetErrorLevel 0
+	SetOutPath "$TEMP"
 SectionEnd
