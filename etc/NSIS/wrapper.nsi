@@ -103,6 +103,7 @@ SubCaption 4 " "
 
 ReserveFile "${NSISDIR}\Plugins\System.dll"
 ReserveFile "${NSISDIR}\Plugins\StdUtils.dll"
+ReserveFile "${NSISDIR}\Plugins\SelfDel.dll"
 
 
 ;--------------------------------
