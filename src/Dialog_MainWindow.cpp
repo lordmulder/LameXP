@@ -129,9 +129,17 @@ while(0)
 } \
 while(0)
 
-#define LINK(URL) QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;"))
-#define FSLINK(PATH) QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;"))
-#define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
+#define LINK(URL) \
+	(QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(URL).replace("-", "&minus;")))
+
+#define LINK_EX(URL, NAME) \
+	(QString("<a href=\"%1\">%2</a>").arg(URL).arg(QString(NAME).replace("-", "&minus;")))
+
+#define FSLINK(PATH) \
+	(QString("<a href=\"file:///%1\">%2</a>").arg(PATH).arg(QString(PATH).replace("-", "&minus;")))
+
+#define CENTER_CURRENT_OUTPUT_FOLDER_DELAYED() \
+	QTimer::singleShot(125, this, SLOT(centerOutputFolderModel()))
 
 ////////////////////////////////////////////////////////////
 // Static Functions
@@ -1477,7 +1485,7 @@ void MainWindow::windowShown(void)
 	{
 		QString message;
 		message += NOBR(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP.")).append("<br>");
-		message += NOBR(tr("Please refer to the %1 document for details and solutions!")).arg("<a href=\"http://lamexp.sourceforge.net/doc/FAQ.html#df406578\">F.A.Q.</a>").append("<br>");
+		message += NOBR(tr("Please refer to the %1 document for details and solutions!")).arg(LINK_EX(QString("%1/Manual.html#performance-issues").arg(g_documents_base_url), tr("Manual"))).append("<br>");
 		if(QMessageBox::warning(this, tr("Slow Startup"), message, tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->antivirNotificationsEnabled(false);
@@ -1861,7 +1869,7 @@ void MainWindow::tabPageChanged(int idx, const bool silent)
 		}
 		else
 		{
-			CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+			CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 		}
 	}
 
@@ -2908,7 +2916,7 @@ void MainWindow::gotoDesktopButtonClicked(void)
 	{
 		ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(desktopPath));
 		outputFolderViewClicked(ui->outputFolderView->currentIndex());
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 	}
 	else
 	{
@@ -2933,7 +2941,7 @@ void MainWindow::gotoHomeFolderButtonClicked(void)
 	{
 		ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(homePath));
 		outputFolderViewClicked(ui->outputFolderView->currentIndex());
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 	}
 	else
 	{
@@ -2958,7 +2966,7 @@ void MainWindow::gotoMusicFolderButtonClicked(void)
 	{
 		ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(musicPath));
 		outputFolderViewClicked(ui->outputFolderView->currentIndex());
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 	}
 	else
 	{
@@ -2986,7 +2994,7 @@ void MainWindow::gotoFavoriteFolder(void)
 		{
 			ui->outputFolderView->setCurrentIndex(m_fileSystemModel->index(path.canonicalPath()));
 			outputFolderViewClicked(ui->outputFolderView->currentIndex());
-			CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+			CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 		}
 		else
 		{
@@ -3084,7 +3092,7 @@ void MainWindow::makeFolderButtonClicked(void)
 					QModelIndex newIndex = m_fileSystemModel->index(createdDir.canonicalPath());
 					ui->outputFolderView->setCurrentIndex(newIndex);
 					outputFolderViewClicked(newIndex);
-					CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+					CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 				}
 			}
 			else
@@ -3170,7 +3178,7 @@ void MainWindow::goUpFolderContextActionTriggered(void)
 		{
 			MUtils::Sound::beep(MUtils::Sound::BEEP_WRN);
 		}
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 	}
 }
 
@@ -3256,7 +3264,7 @@ void MainWindow::outputFolderEditFinished(void)
 	ui->outputFolderView->setEnabled(true);
 
 	if(!ok) MUtils::Sound::beep(MUtils::Sound::BEEP_ERR);
-	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+	CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 }
 
 /*
@@ -3295,7 +3303,7 @@ void MainWindow::initOutputFolderModel(void)
 			outputFolderViewClicked(ui->outputFolderView->currentIndex());
 		}
 
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 		QTimer::singleShot(125, this, SLOT(initOutputFolderModel_doAsync()));
 	}
 }
@@ -3350,7 +3358,7 @@ void MainWindow::outputFolderDirectoryLoaded(const QString &path)
 {
 	if(m_outputFolderViewCentering)
 	{
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 	}
 }
 
@@ -3361,7 +3369,7 @@ void MainWindow::outputFolderRowsInserted(const QModelIndex &parent, int start, 
 {
 	if(m_outputFolderViewCentering)
 	{
-		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED;
+		CENTER_CURRENT_OUTPUT_FOLDER_DELAYED();
 	}
 }
 

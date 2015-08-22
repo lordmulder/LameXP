@@ -16,14 +16,13 @@ In addition to that, LameXP provides full support for *meta information*, includ
 
 **Tier #1:** LameXP is currently being developed on the following platforms:
 
-* Microsoft Windows 8.1, 32-Bit and 64-Bit editions
+* Microsoft Windows 10, 32-Bit and 64-Bit editions
 * Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions
 * Microsoft Windows XP with Service Pack 3 **(see remarks)**
 
-
 **Tier #2:** The following platforms should work too, but aren't tested extensively:
 
-* Microsoft Windows 10, 32-Bit and 64-Bit editions
+* Microsoft Windows 8.1, 32-Bit and 64-Bit editions
 * Microsoft Windows 8.0, 32-Bit and 64-Bit editions
 * Microsoft Windows Vista with Service Pack 2, 32-Bit and 64-Bit editions
 * Microsoft Windows XP x64 Edition with Service Pack 2
@@ -142,7 +141,11 @@ At this point, it should be clear that implementing *workarounds* for defective 
 
 During the *startup procedure*, the LameXP software has to perform a number of *file-system* operations. This can take a few moments. However, the startup procedure should **never** take longer than *approximately* 5 seconds. Even on our test system &ndash; Windows 7 running on an *ancient* Intel Core2 processor with 4 GB of RAM &ndash; the startup procedure takes only about 1.5 seconds. And that is with the "real-time protection" of Microsoft Security Essentials (MSE) enabled! If we disable the MSE "real-time protection" feature, the startup procedure takes less than 0.5 seconds. *Unfortunately*, it has been brought to our attention, that some other anti-virus products may *slow down* the startup procedure significantly! Startup delays of up to 20 seconds have been reported by users, which corresponds to a slow down factor of **40&#xd7;** &ndash; caused by the anti-virus software!
 
-Consequently, if you think that LameXP is starting up "slow" on your machine, we recommend to *temporarily* **disable** or **uninstall** your current anti-virus software. If your anti-virus software has a so-called "real-time protection" or "guard" feature, please be sure to *deactivate* that feature too! As soon as the anti-virus software has been *neutralized* and **no** longer affects legitimate applications, please try launching the LameXP software again. If it turns out that the startup procedure of LameXP has become significantly *faster* when the anti-virus software is **not** interfering, then you know one thing for sure: It is the *anti-virus software* that was causing the slow down! Please recognize that *we* can **not** fix this kind of problems. Instead, since the problem is actually a *defect* of the anti-virus software, please report the problem to the developer of the *anti-virus software*!
+Consequently, if you think that LameXP is starting up "slow" on your machine, we recommend to **temporarily** *disable* or *uninstall* your current anti-virus software. If your anti-virus software has a so-called "real-time protection" or "guard" feature, please be sure to *deactivate* that feature too! As soon as the anti-virus software has been *neutralized* and **no** longer affects legitimate applications, please try launching the LameXP software again. If it turns out that the startup procedure of LameXP has become significantly *faster* when the anti-virus software is **not** interfering, then you know one thing for sure: It is the *anti-virus software* that was causing the slow down! Please recognize that *we* can **not** fix this kind of problems. Instead, since the problem is actually a *defect* of the anti-virus software, please report the problem to the developer of the *anti-virus software*!
+
+Another way of detecting performance issues caused by sloppy anti-virus software is monitoring the CPU usage in Task Manager (or [*Process Explorer*](https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx)) while LameXP is starting up. Please make sure that you are **not** looking at the "overall" CPU usage, but at the CPU usage caused by the *individual* processes, and that "show processes from all users" is *enabled*. Then you will probably notice that `LameXP.exe` is sitting "idle", more or less, while some *service process* belonging to the anti-virus software is "hogging" the CPU. A typical example looks like this:
+
+![Figure](img/lamexp/av_gone_mad.png)
 
 For reporting *performance issues*, please refer to anti-virus developer's web-site. Also, when reporting *performance issues*, please be self-confident: As a paying customer, you can demand that *performance issues* get fixed in a timely manner. Otherwise, get your money back!
 
