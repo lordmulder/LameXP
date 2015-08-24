@@ -85,7 +85,7 @@ UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 	m_binaryUpdater(lamexp_tools_lookup("wupdate.exe")),
 	m_binaryWGet(lamexp_tools_lookup("wget.exe")),
 	m_binaryGnuPG(lamexp_tools_lookup("gpgv.exe")),
-	m_binaryKeys(lamexp_tools_lookup("gpgv.gpg"))
+	m_binaryKeys(lamexp_tools_lookup("keyring.gpg"))
 {
 	if(m_binaryUpdater.isEmpty())
 	{
