@@ -1497,7 +1497,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1488"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструкція користувача</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
