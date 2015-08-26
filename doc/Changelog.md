@@ -13,7 +13,7 @@
 * Added enhanced file renaming option: Files can now be renamed via the [regular expression](http://www.regular-expressions.info/quickstart.html) engine
 * Added capability to select *multiple* files on "Source Files" tab
 * Updated Vorbis encoder to OggEnc v2.87 (2015-08-03), using libvorbis v1.3.5 and aoTuV b6.03_2015
-* Updated MediaInfo to v0.7.74 (2015-05-25), compiled with ICL 15.0 and MSVC 12.0
+* Updated MediaInfo to v0.7.76 (2015-08-06), compiled with ICL 15.0 and MSVC 12.0
 * Updated mpg123 decoder to v1.22.4 (2015-08-12), compiled with GCC 5.1.0
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Updated GnuPG to v1.4.19 (2015-02-27), compiled with GCC 4.9.2
