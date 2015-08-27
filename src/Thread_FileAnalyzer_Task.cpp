@@ -26,6 +26,7 @@
 #include "Global.h"
 #include "LockedFile.h"
 #include "Model_AudioFile.h"
+#include "MimeTypes.h"
 
 //MUtils
 #include <MUtils/Global.h>
@@ -178,8 +179,8 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 	readTest.close();
 
 	bool skipNext = false;
-	unsigned int id_val[2] = {UINT_MAX, UINT_MAX};
-	cover_t coverType = coverNone;
+	QPair<quint32, quint32> id_val(UINT_MAX, UINT_MAX);
+	quint32 coverType = UINT_MAX;
 	QByteArray coverData;
 
 	QStringList params;
@@ -236,7 +237,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 					QString val = line.mid(index+1).trimmed();
 					if(!key.isEmpty())
 					{
-						updateInfo(audioFile, &skipNext, id_val, &coverType, &coverData, key, val);
+						updateInfo(audioFile, skipNext, id_val, coverType, coverData, key, val);
 					}
 				}
 			}
@@ -271,7 +272,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 		process.waitForFinished(-1);
 	}
 
-	if((coverType != coverNone) && (!coverData.isEmpty()))
+	if((coverType != UINT_MAX) && (!coverData.isEmpty()))
 	{
 		retrieveCover(audioFile, coverType, coverData);
 	}
@@ -284,7 +285,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 	return audioFile;
 }
 
-void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned int *id_val, cover_t *coverType, QByteArray *coverData, const QString &key, const QString &value)
+void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool &skipNext, QPair<quint32, quint32> &id_val, quint32 &coverType, QByteArray &coverData, const QString &key, const QString &value)
 {
 	//qWarning("'%s' -> '%s'", MUTILS_UTF8(key), MUTILS_UTF8(value));
 	
@@ -293,7 +294,7 @@ void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned
 	{
 		if(value.isEmpty())
 		{
-			*skipNext = false;
+			skipNext = false;
 		}
 		else
 		{
@@ -302,15 +303,15 @@ void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned
 			unsigned int id = value.toUInt(&ok);
 			if(ok)
 			{
-				if(IS_KEY("Gen_ID")) { id_val[0] = qMin(id_val[0], id); *skipNext = (id > id_val[0]); }
-				if(IS_KEY("Aud_ID")) { id_val[1] = qMin(id_val[1], id); *skipNext = (id > id_val[1]); }
+				if(IS_KEY("Gen_ID")) { id_val.first  = qMin(id_val.first,  id); skipNext = (id > id_val.first);  }
+				if(IS_KEY("Aud_ID")) { id_val.second = qMin(id_val.second, id); skipNext = (id > id_val.second); }
 			}
 			else
 			{
-				*skipNext = true;
+				skipNext = true;
 			}
 		}
-		if(*skipNext)
+		if(skipNext)
 		{
 			qWarning("Skipping info for non-primary stream!");
 		}
@@ -318,7 +319,7 @@ void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned
 	}
 
 	/*Skip or empty?*/
-	if((*skipNext) || value.isEmpty())
+	if((skipNext) || value.isEmpty())
 	{
 		return;
 	}
@@ -326,7 +327,7 @@ void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned
 	/*Playlist file?*/
 	if(IS_KEY("Aud_Source"))
 	{
-		*skipNext = true;
+		skipNext = true;
 		audioFile.techInfo().setContainerType(QString());
 		audioFile.techInfo().setAudioType(QString());
 		qWarning("Skipping info for playlist file!");
@@ -382,22 +383,27 @@ void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool *skipNext, unsigned
 		}
 		else if(IS_KEY("Gen_Cover") || IS_KEY("Gen_Cover_Type"))
 		{
-			if(*coverType == coverNone)
+			if(coverType == UINT_MAX)
 			{
-				*coverType = coverJpeg;
+				coverType = 0;
 			}
 		}
 		else if(IS_KEY("Gen_Cover_Mime"))
 		{
 			QString temp = FIRST_TOK(value);
-			if(!temp.compare("image/jpeg", Qt::CaseInsensitive)) *coverType = coverJpeg;
-			else if(!temp.compare("image/png", Qt::CaseInsensitive)) *coverType = coverPng;
-			else if(!temp.compare("image/gif", Qt::CaseInsensitive)) *coverType = coverGif;
+			for (quint32 i = 0; MIME_TYPES[i].type; i++)
+			{
+				if (temp.compare(QString::fromLatin1(MIME_TYPES[i].type), Qt::CaseInsensitive) == 0)
+				{
+					coverType = i;
+					break;
+				}
+			}
 		}
 		else if(IS_KEY("Gen_Cover_Data"))
 		{
-			if(!coverData->isEmpty()) coverData->clear();
-			coverData->append(QByteArray::fromBase64(FIRST_TOK(value).toLatin1()));
+			if(!coverData.isEmpty()) coverData.clear();
+			coverData.append(QByteArray::fromBase64(FIRST_TOK(value).toLatin1()));
 		}
 		else
 		{
@@ -483,27 +489,14 @@ bool AnalyzeTask::checkFile_CDDA(QFile &file)
 	return ((i >= 0) && (j >= 0) && (k >= 0) && (k > j) && (j > i));
 }
 
-void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, cover_t coverType, const QByteArray &coverData)
+void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, const quint32 coverType, const QByteArray &coverData)
 {
-	qDebug("Retrieving cover!");
-	QString extension;
-
-	switch(coverType)
-	{
-	case coverPng:
-		extension = QString::fromLatin1("png");
-		break;
-	case coverGif:
-		extension = QString::fromLatin1("gif");
-		break;
-	default:
-		extension = QString::fromLatin1("jpg");
-		break;
-	}
+	qDebug("Retrieving cover! (MIME_TYPES_MAX=%u)", MIME_TYPES_MAX);
 	
-	if(!(QImage::fromData(coverData, extension.toUpper().toLatin1().constData()).isNull()))
+	static const QString ext = QString::fromLatin1(MIME_TYPES[qBound(0U, coverType, MIME_TYPES_MAX)].ext[0]);
+	if(!(QImage::fromData(coverData, ext.toUpper().toLatin1().constData()).isNull()))
 	{
-		QFile coverFile(QString("%1/%2.%3").arg(MUtils::temp_folder(), MUtils::rand_str(), extension));
+		QFile coverFile(QString("%1/%2.%3").arg(MUtils::temp_folder(), MUtils::rand_str(), ext));
 		if(coverFile.open(QIODevice::WriteOnly))
 		{
 			coverFile.write(coverData);

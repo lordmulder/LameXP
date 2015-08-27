@@ -439,6 +439,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="src\MimeTypes.h" />
     <ClInclude Include="tmp\LameXP\UIC_AboutDialog.h" />
     <ClInclude Include="tmp\LameXP\UIC_CueSheetImport.h" />
     <ClInclude Include="tmp\LameXP\UIC_DropBox.h" />

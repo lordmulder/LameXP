@@ -552,6 +552,9 @@
     <ClInclude Include="src\IPCCommands.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="src\MimeTypes.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\DropBox.ui">

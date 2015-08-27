@@ -22,9 +22,15 @@
 
 #include "Encoder_Opus.h"
 
+//MUtils
+#include <MUtils/Global.h>
+
+//Internal
 #include "Global.h"
 #include "Model_Settings.h"
+#include "MimeTypes.h"
 
+//Qt
 #include <QProcess>
 #include <QDir>
 #include <QUUid>
@@ -183,9 +189,8 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	if(metaInfo.year())               args << "--date"    << QString::number(metaInfo.year());
 	if(metaInfo.position())           args << "--comment" << QString("tracknumber=%1").arg(QString::number(metaInfo.position()));
 	if(!metaInfo.comment().isEmpty()) args << "--comment" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
-	if(!metaInfo.cover().isEmpty())   args << "--picture" << QDir::toNativeSeparators(metaInfo.cover());
+	if(!metaInfo.cover().isEmpty())   args << "--picture" << makeCoverParam(metaInfo.cover());
 
-	
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
 	args << QDir::toNativeSeparators(sourceFile);
@@ -257,6 +262,29 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	}
 	
 	return true;
+}
+
+QString OpusEncoder::detectMimeType(const QString &coverFile)
+{
+	const QString suffix = QFileInfo(coverFile).suffix();
+	for (size_t i = 0; MIME_TYPES[i].type; i++)
+	{
+		for (size_t k = 0; MIME_TYPES[i].ext[k]; k++)
+		{
+			if (suffix.compare(QString::fromLatin1(MIME_TYPES[i].ext[k]), Qt::CaseInsensitive) == 0)
+			{
+				return QString::fromLatin1(MIME_TYPES[i].type);
+			}
+		}
+	}
+
+	qWarning("Unknown MIME type for extension '%s' -> using default!", MUTILS_UTF8(coverFile));
+	return QString::fromLatin1(MIME_TYPES[0].type);
+}
+
+QString OpusEncoder::makeCoverParam(const QString &coverFile)
+{
+	return QString("3|%1|||%2").arg(detectMimeType(coverFile), QDir::toNativeSeparators(coverFile));
 }
 
 void OpusEncoder::setOptimizeFor(int optimizeFor)

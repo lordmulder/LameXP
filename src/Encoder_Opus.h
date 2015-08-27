@@ -55,4 +55,7 @@ private:
 	int m_configOptimizeFor;
 	int m_configEncodeComplexity;
 	int m_configFrameSize;
+
+	static inline QString detectMimeType(const QString &coverFile);
+	static inline QString makeCoverParam(const QString &coverFile);
 };
