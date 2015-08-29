@@ -17,6 +17,7 @@
 * Updated mpg123 decoder to v1.22.4 (2015-08-12), compiled with GCC 5.1.0
 * Updated ALAC decoder to refalac v1.47 (2015-02-15), based on reference implementation by Apple
 * Updated Monkey's Audio binary to v4.16 (2015-03-24), compiled with ICL 15.0 and MSVC 12.0
+* Updated WavPack decoder to v4.75.0 (2015-05-25), compiled with ICL 15.0 and MSVC 12.0
 * Updated GnuPG to v1.4.19 (2015-02-27), compiled with GCC 4.9.2
 * Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
 * Fixed function to restore the default Temp folder, if custom Temp folder doesn't exist anymore
