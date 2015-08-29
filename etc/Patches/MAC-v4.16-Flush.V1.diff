@@ -1,0 +1,17 @@
+ Source/Console/Console.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Source/Console/Console.cpp b/Source/Console/Console.cpp
+index 145d4af..a4a8256 100644
+--- a/Source/Console/Console.cpp
++++ b/Source/Console/Console.cpp
+@@ -64,6 +64,9 @@ void CALLBACK ProgressCallback(int nPercentageDone)
+ 	// output the progress
+ 	_ftprintf(stderr, _T("Progress: %.1f%% (%.1f seconds remaining, %.1f seconds total)          \r"), 
+ 		dProgress * 100, dRemaining, dElapsed);
++
++	//Don't forget to flush!
++	fflush(stderr);
+ }
+ 
+ /***************************************************************************************

@@ -3,7 +3,8 @@
   <qresource>
     <file>tools/avs2wav.exe</file>
     <file>tools/faad.exe</file>
-    <file>tools/mac.exe</file>
+    <file>tools/mac.i386.exe</file>
+    <file>tools/mac.sse2.exe</file>
     <file>tools/mpcdec.exe</file>
     <file>tools/mpg123.exe</file>
     <file>tools/oggdec.exe</file>
