@@ -21,11 +21,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "LockedFile.h"
+
+//Internal
 #include "Global.h"
+#include "FileHash.h"
 
 //MUtils
 #include <MUtils/OSSupport.h>
-#include <MUtils/Hash_Keccak.h>
 #include <MUtils/Exception.h>
 
 //Qt
@@ -35,6 +37,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 
+//CRT
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
@@ -67,63 +70,19 @@ static void CLOSE_HANDLE(HANDLE &h)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-static const char *g_blnk = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef";
-static const char *g_seed = "c375d83b4388329408dfcbb4d9a065b6e06d28272f25ef299c70b506e26600af79fd2f866ae24602daf38f25c9d4b7e1";
-static const char *g_salt = "ee9f7bdabc170763d2200a7e3030045aafe380011aefc1730e547e9244c62308aac42a976feeca224ba553de0c4bb883";
-
-QByteArray LockedFile::fileHash(QFile &file)
+static __forceinline void doWriteOutput(QFile &outFile, const QResource *const resource)
 {
-	QByteArray hash = QByteArray::fromHex(g_blnk);
-
-	if(file.isOpen() && file.reset())
-	{
-		MUtils::Hash::Keccak keccak;
-
-		const QByteArray data = file.readAll();
-		const QByteArray seed = QByteArray::fromHex(g_seed);
-		const QByteArray salt = QByteArray::fromHex(g_salt);
-	
-		if(keccak.init(MUtils::Hash::Keccak::hb384))
-		{
-			bool ok = true;
-			ok = ok && keccak.addData(seed);
-			ok = ok && keccak.addData(data);
-			ok = ok && keccak.addData(salt);
-			if(ok)
-			{
-				const QByteArray digest = keccak.finalize();
-				if(!digest.isEmpty()) hash = digest.toHex();
-			}
-		}
-	}
-
-	return hash;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-LockedFile::LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash, const bool bOwnsFile)
-:
-	m_bOwnsFile(bOwnsFile),
-	m_filePath(QFileInfo(outPath).absoluteFilePath())
-{
-	m_fileDescriptor = -1;
-	HANDLE fileHandle = NULL;
-		
-	//Make sure the resource is valid
-	if(!(resource->isValid() && resource->data()))
-	{
-		MUTILS_THROW_FMT("The resource at %p is invalid!", resource);
-	}
-
-	QFile outFile(m_filePath);
-	
-	//Open output file
 	for(int i = 0; i < 64; i++)
 	{
-		if(outFile.open(QIODevice::WriteOnly)) break;
-		if(!i) qWarning("Failed to open file on first attemp, retrying...");
-		Sleep(100);
+		if(outFile.open(QIODevice::WriteOnly))
+		{
+			break;
+		}
+		if(i == 0)
+		{
+			qWarning("Failed to open file on first attemp, retrying...");
+		}
+		Sleep(25);
 	}
 	
 	//Write data to file
@@ -142,40 +101,68 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 
 	//Close file after it has been written
 	outFile.close();
+}
 
-	//Now lock the file!
+static __forceinline void doValidateFileExists(const QString &filePath)
+{
+	QFileInfo existingFileInfo(filePath);
+	existingFileInfo.setCaching(false);
+	
+	//Make sure the file exists, before we try to lock it
+	if((!existingFileInfo.exists()) || (!existingFileInfo.isFile()) || filePath.isEmpty())
+	{
+		MUTILS_THROW_FMT("File '%s' does not exist!", MUTILS_UTF8(filePath));
+	}
+}
+
+static __forceinline void doLockFile(HANDLE &fileHandle, const QString &filePath, QFile *const outFile)
+{
 	for(int i = 0; i < 64; i++)
 	{
-		fileHandle = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if(VALID_HANDLE(fileHandle)) break;
-		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
-		Sleep(100);
+		fileHandle = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+		if(VALID_HANDLE(fileHandle))
+		{
+			break;
+		}
+		if(i == 0)
+		{
+			qWarning("Failed to lock file on first attemp, retrying...");
+		}
+		Sleep(25);
 	}
 	
 	//Locked successfully?
 	if(!VALID_HANDLE(fileHandle))
 	{
-		QFile::remove(QFileInfo(outFile).canonicalFilePath());
-		MUTILS_THROW_FMT("File '%s' could not be locked!", MUTILS_UTF8(QFileInfo(m_filePath).fileName()));
+		if(outFile)
+		{
+			QFile::remove(QFileInfo(*outFile).canonicalFilePath());
+		}
+		MUTILS_THROW_FMT("File '%s' could not be locked!", MUTILS_UTF8(QFileInfo(filePath).fileName()));
 	}
+}
 
-	//Get file descriptor
-	m_fileDescriptor = _open_osfhandle(reinterpret_cast<intptr_t>(fileHandle), _O_RDONLY | _O_BINARY);
-	if(m_fileDescriptor < 0)
+static __forceinline void doInitFileDescriptor(const HANDLE &fileHandle, int &fileDescriptor)
+{
+	fileDescriptor = _open_osfhandle(reinterpret_cast<intptr_t>(fileHandle), _O_RDONLY | _O_BINARY);
+	if(fileDescriptor < 0)
 	{
 		MUTILS_THROW_FMT("Failed to obtain C Runtime file descriptor!");
 	}
+}
 
+static __forceinline void doValidateHash(HANDLE &fileHandle, const int &fileDescriptor, const QByteArray &expectedHash, const QString &filePath)
+{
 	QFile checkFile;
 
 	//Now re-open the file for reading
 	if(g_useFileDescrForQFile)
 	{
-		checkFile.open(m_fileDescriptor, QIODevice::ReadOnly);
+		checkFile.open(fileDescriptor, QIODevice::ReadOnly);
 	}
 	else
 	{
-		checkFile.setFileName(m_filePath);
+		checkFile.setFileName(filePath);
 		for(int i = 0; i < 64; i++)
 		{
 			if(checkFile.open(QIODevice::ReadOnly)) break;
@@ -187,12 +174,12 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	//Opened successfully
 	if(!checkFile.isOpen())
 	{
-		QFile::remove(m_filePath);
-		MUTILS_THROW_FMT("File '%s' could not be read!", MUTILS_UTF8(QFileInfo(m_filePath).fileName()));
+		QFile::remove(filePath);
+		MUTILS_THROW_FMT("File '%s' could not be read!", MUTILS_UTF8(QFileInfo(filePath).fileName()));
 	}
 
 	//Verify file contents
-	const QByteArray hash = fileHash(checkFile);
+	const QByteArray hash = FileHash::computeHash(checkFile);
 	checkFile.close();
 
 	//Compare hashes
@@ -200,9 +187,60 @@ LockedFile::LockedFile(QResource *const resource, const QString &outPath, const 
 	{
 		qWarning("\nFile checksum error:\n A = %s\n B = %s\n", expectedHash.constData(), hash.constData());
 		CLOSE_HANDLE(fileHandle);
-		QFile::remove(m_filePath);
-		MUTILS_THROW_FMT("File '%s' is corruputed, take care!", MUTILS_UTF8(QFileInfo(m_filePath).fileName()));
+		QFile::remove(filePath);
+		MUTILS_THROW_FMT("File '%s' is corruputed, take care!", MUTILS_UTF8(QFileInfo(filePath).fileName()));
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+LockedFile::LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash, const bool bOwnsFile)
+:
+	m_bOwnsFile(bOwnsFile),
+	m_filePath(QFileInfo(outPath).absoluteFilePath())
+{
+	m_fileDescriptor = -1;
+	HANDLE fileHandle = NULL;
+		
+	//Make sure the resource is valid
+	if(!(resource->isValid() && resource->data()))
+	{
+		MUTILS_THROW_FMT("The resource at %p is invalid!", resource);
+	}
+
+	//Write data to output file
+	QFile outFile(m_filePath);
+	doWriteOutput(outFile, resource);
+
+	//Now lock the file!
+	doLockFile(fileHandle, m_filePath, &outFile);
+
+	//Get file descriptor
+	doInitFileDescriptor(fileHandle, m_fileDescriptor);
+
+	//Validate file hash
+	doValidateHash(fileHandle, m_fileDescriptor, expectedHash, m_filePath);
+}
+
+LockedFile::LockedFile(const QString &filePath, const QByteArray &expectedHash, const bool bOwnsFile)
+:
+	m_bOwnsFile(bOwnsFile),
+	m_filePath(QFileInfo(filePath).absoluteFilePath())
+{
+	m_fileDescriptor = -1;
+	HANDLE fileHandle = NULL;
+	
+	//Make sure the file exists, before we try to lock it
+	doValidateFileExists(m_filePath);
+
+	//Now lock the file!
+	doLockFile(fileHandle, m_filePath, NULL);
+
+	//Get file descriptor
+	doInitFileDescriptor(fileHandle, m_fileDescriptor);
+
+	//Validate file hash
+	doValidateHash(fileHandle, m_fileDescriptor, expectedHash, m_filePath);
 }
 
 LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
@@ -212,37 +250,15 @@ LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 {
 	m_fileDescriptor = -1;
 	HANDLE fileHandle = NULL;
-
-	QFileInfo existingFileInfo(filePath);
-	existingFileInfo.setCaching(false);
 	
 	//Make sure the file exists, before we try to lock it
-	if((!existingFileInfo.exists()) || (!existingFileInfo.isFile()) || m_filePath.isEmpty())
-	{
-		MUTILS_THROW_FMT("File '%s' does not exist!", MUTILS_UTF8(filePath));
-	}
-	
-	//Now lock the file
-	for(int i = 0; i < 64; i++)
-	{
-		fileHandle = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(m_filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if(VALID_HANDLE(fileHandle)) break;
-		if(!i) qWarning("Failed to lock file on first attemp, retrying...");
-		Sleep(100);
-	}
+	doValidateFileExists(m_filePath);
 
-	//Locked successfully?
-	if(!VALID_HANDLE(fileHandle))
-	{
-		MUTILS_THROW_FMT("File '%s' could not be locked!", MUTILS_UTF8(QFileInfo(m_filePath).fileName()));
-	}
+	//Now lock the file!
+	doLockFile(fileHandle, m_filePath, NULL);
 
 	//Get file descriptor
-	m_fileDescriptor = _open_osfhandle(reinterpret_cast<intptr_t>(fileHandle), _O_RDONLY | _O_BINARY);
-	if(m_fileDescriptor < 0)
-	{
-		MUTILS_THROW_FMT("Failed to obtain C Runtime file descriptor!");
-	}
+	doInitFileDescriptor(fileHandle, m_fileDescriptor);
 }
 
 LockedFile::~LockedFile(void)
@@ -268,12 +284,4 @@ LockedFile::~LockedFile(void)
 const QString &LockedFile::filePath()
 {
 	return m_filePath;
-}
-
-void LockedFile::selfTest()
-{
-	if(!MUtils::Hash::Keccak::selfTest())
-	{
-		MUTILS_THROW("QKeccakHash self-test has failed!");
-	}
 }

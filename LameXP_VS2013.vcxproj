@@ -314,6 +314,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
     <ClCompile Include="src\Encoder_Opus.cpp" />
     <ClCompile Include="src\Encoder_Vorbis.cpp" />
     <ClCompile Include="src\Encoder_Wave.cpp" />
+    <ClCompile Include="src\FileHash.cpp" />
     <ClCompile Include="src\Filter_Abstract.cpp" />
     <ClCompile Include="src\Filter_Downmix.cpp" />
     <ClCompile Include="src\Filter_Normalize.cpp" />
@@ -427,6 +428,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="src\FileHash.h" />
     <ClInclude Include="src\IPCCommands.h" />
     <CustomBuild Include="src\Model_FileExts.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>

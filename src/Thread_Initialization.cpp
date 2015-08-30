@@ -26,6 +26,7 @@
 #define LAMEXP_INC_TOOLS 1
 #include "Tools.h"
 #include "LockedFile.h"
+#include "FileHash.h"
 #include "Tool_Abstract.h"
 
 //MUtils
@@ -48,6 +49,9 @@
 #include <QQueue>
 #include <QElapsedTimer>
 #include <QVector>
+
+/* enable custom tools? */
+static const bool ENABLE_CUSTOM_TOOLS = true;
 
 /* helper macros */
 #define PRINT_CPU_TYPE(X) case X: qDebug("Selected CPU is: " #X)
@@ -208,28 +212,58 @@ public:
 protected:
 	void taskMain(void)
 	{
-		LockedFile *lockedFile = NULL;
+		QScopedPointer<LockedFile> lockedFile;
 		unsigned int version = m_toolVersion;
 
-		QFileInfo toolFileInfo(m_toolName);
-		const QString toolShortName = QString("%1.%2").arg(toolFileInfo.baseName().toLower(), toolFileInfo.suffix().toLower());
+		const QFileInfo toolFileInfo(m_toolName);
+		const QString   toolShrtName = QString("%1.%2").arg(toolFileInfo.baseName().toLower(), toolFileInfo.suffix().toLower());
 
-		QFileInfo customTool(QString("%1/tools/%2/%3").arg(m_appDir.canonicalPath(), QString::number(lamexp_version_build()), toolShortName));
-		if(customTool.exists() && customTool.isFile())
+		//Try to load a "custom" tool first
+		if(ENABLE_CUSTOM_TOOLS)
 		{
-			qDebug("Setting up file: %s <- %s", toolShortName.toLatin1().constData(), m_appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
-			lockedFile = new LockedFile(customTool.canonicalFilePath()); version = UINT_MAX; s_bCustom = true;
-		}
-		else
-		{
-			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), toolShortName.toLatin1().constData());
-			lockedFile = new LockedFile(m_toolResource.data(), QString("%1/lxp_%2").arg(MUtils::temp_folder(), toolShortName), m_toolHash);
+			const QFileInfo customTool(QString("%1/tools/%2/%3").arg(m_appDir.canonicalPath(), QString::number(lamexp_version_build()), toolShrtName));
+			if(customTool.exists() && customTool.isFile())
+			{
+				qDebug("Setting up file: %s <- %s", toolShrtName.toLatin1().constData(), m_appDir.relativeFilePath(customTool.canonicalFilePath()).toLatin1().constData());
+				try
+				{
+					lockedFile.reset(new LockedFile(customTool.canonicalFilePath()));
+					version = UINT_MAX; s_bCustom = true;
+				}
+				catch(std::runtime_error&)
+				{
+					lockedFile.reset();
+				}
+			}
 		}
 
-		if(lockedFile)
+		//Try to load the tool from the "cache" next
+		if(lockedFile.isNull())
 		{
-			lamexp_tools_register(toolShortName, lockedFile, version, m_toolTag);
+			const QFileInfo chachedTool(QString("%1/cache/%2").arg(m_appDir.canonicalPath(), toolFileInfo.fileName()));
+			if(chachedTool.exists() && chachedTool.isFile())
+			{
+				qDebug("Validating file: %s <- %s", toolShrtName.toLatin1().constData(), m_appDir.relativeFilePath(chachedTool.canonicalFilePath()).toLatin1().constData());
+				try
+				{
+					lockedFile.reset(new LockedFile(chachedTool.canonicalFilePath(), m_toolHash));
+				}
+				catch(std::runtime_error&)
+				{
+					lockedFile.reset();
+				}
+			}
 		}
+
+		//If still not initialized, extract tool now!
+		if(lockedFile.isNull())
+		{
+			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), toolShrtName.toLatin1().constData());
+			lockedFile.reset(new LockedFile(m_toolResource.data(), QString("%1/lxp_%2").arg(MUtils::temp_folder(), toolShrtName), m_toolHash));
+		}
+
+		//Register tool
+		lamexp_tools_register(toolShrtName, lockedFile.take(), version, m_toolTag);
 	}
 
 private:
@@ -379,7 +413,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, cores2threads(m_cpuFeatures.count), EXPECTED_TOOL_COUNT));
 	/* qWarning("Using %u threads for extraction.", pool->maxThreadCount()); */
 
-	LockedFile::selfTest();
+	FileHash::selfTest();
 	ExtractorTask::clearFlags();
 
 	//Start the timer
@@ -697,7 +731,7 @@ void InitializationThread::selfTest(void)
 {
 	const unsigned int cpu[4] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE};
 
-	LockedFile::selfTest();
+	FileHash::selfTest();
 
 	for(size_t k = 0; k < 4; k++)
 	{
@@ -730,7 +764,7 @@ void InitializationThread::selfTest(void)
 						qFatal("The resource for \"%s\" could not be opened!", MUTILS_UTF8(toolName));
 						break;
 					}
-					QByteArray hash = LockedFile::fileHash(resource);
+					QByteArray hash = FileHash::computeHash(resource);
 					if(hash.isNull() || _stricmp(hash.constData(), expectedHash.constData()))
 					{
 						qFatal("Hash check for tool \"%s\" has failed!", MUTILS_UTF8(toolName));

@@ -421,6 +421,9 @@
     <ClCompile Include="tmp\LameXP\MOC_Model_FileExts.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
+    <ClCompile Include="src\FileHash.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -553,6 +556,9 @@
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="src\MimeTypes.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileHash.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>

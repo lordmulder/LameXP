@@ -94,6 +94,11 @@ void lamexp_tools_register(const QString &toolName, LockedFile *const file, cons
 {
 	QWriteLocker writeLock(&g_lamexp_tools_lock);
 	
+	if(!file)
+	{
+		MUTILS_THROW("lamexp_register_tool: Tool file must not be NULL!");
+	}
+
 	if(g_lamexp_tools_data.isNull())
 	{
 		g_lamexp_tools_data.reset(new tool_hash_t());

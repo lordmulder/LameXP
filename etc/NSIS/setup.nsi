@@ -526,6 +526,7 @@ FunctionEnd
 	Delete ${options} "$INSTDIR\vcruntime*.dll"
 	Delete ${options} "$INSTDIR\vccorlib*.dll"
 	
+	RMDir /r ${options} "$INSTDIR\cache"
 	RMDir /r ${options} "$INSTDIR\img"
 	RMDir /r ${options} "$INSTDIR\imageformats"
 	RMDir /r ${options} "$INSTDIR\redist"

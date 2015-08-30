@@ -22,23 +22,16 @@
 
 #pragma once
 
-#include <QString>
+#include <QFile>
+#include <QByteArray>
 
-class QResource;
-class QFile;
-
-class LockedFile
+class FileHash
 {
 public:
-	LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash = QByteArray(), const bool bOwnsFile = true);
-	LockedFile(const QString &filePath, const QByteArray &expectedHash, const bool bOwnsFile = false);
-	LockedFile(const QString &filePath, const bool bOwnsFile = false);
-	~LockedFile(void);
-
-	const QString &filePath();
-
+	static QByteArray computeHash(QFile &file);
+	static void selfTest(void);
 private:
-	const bool m_bOwnsFile;
-	const QString m_filePath;
-	int m_fileDescriptor;
+	FileHash()  {}
+	~FileHash() {};
 };
+

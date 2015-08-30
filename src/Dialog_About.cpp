@@ -815,7 +815,7 @@ void AboutDialog::initSoftwareTab(void)
 		tr("dcaenc"),
 		"dcaenc.exe", "????-??-??",
 		tr("Copyright (c) 2008-2011 Alexander E. Patrakov. Distributed under the LGPL."),
-		"http://gitorious.org/dtsenc/dtsenc/trees/master"
+		"https://gitlab.com/patrakov/dcaenc"
 	);
 	moreAboutText += makeToolText
 	(
