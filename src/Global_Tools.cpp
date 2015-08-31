@@ -74,6 +74,7 @@ static const quint32 g_max_uint32 = UINT32_MAX;
 static void lamexp_tools_clean_up(void)
 {
 	QWriteLocker writeLock(&g_lamexp_tools_lock);
+	qWarning("------------ lamexp_tools_clean_up ------------");
 
 	if(!g_lamexp_tools_data.isNull())
 	{

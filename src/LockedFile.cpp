@@ -192,6 +192,19 @@ static __forceinline void doValidateHash(HANDLE &fileHandle, const int &fileDesc
 	}
 }
 
+static __forceinline bool doRemoveFile(const QString &filePath)
+{
+	for(int i = 0; i < 32; i++)
+	{
+		if(MUtils::remove_file(filePath))
+		{
+			return true;
+		}
+		MUtils::OS::sleep_ms(1);
+	}
+	return false;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 LockedFile::LockedFile(QResource *const resource, const QString &outPath, const QByteArray &expectedHash, const bool bOwnsFile)
@@ -263,6 +276,8 @@ LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 
 LockedFile::~LockedFile(void)
 {
+	qWarning("------------ LockedFile::~LockedFile ------------");
+
 	if(m_fileDescriptor >= 0)
 	{
 		_close(m_fileDescriptor);
@@ -270,14 +285,7 @@ LockedFile::~LockedFile(void)
 	}
 	if(m_bOwnsFile)
 	{
-		if(QFileInfo(m_filePath).exists())
-		{
-			for(int i = 0; i < 64; i++)
-			{
-				if(QFile::remove(m_filePath)) break;
-				MUtils::OS::sleep_ms(1);
-			}
-		}
+		doRemoveFile(m_filePath);
 	}
 }
 

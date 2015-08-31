@@ -181,6 +181,7 @@ public:
 	ExtractorTask(QResource *const toolResource, const QDir &appDir, const QString &toolName, const QByteArray &toolHash, const unsigned int toolVersion, const QString &toolTag)
 	:
 		m_appDir(appDir),
+		m_tempPath(MUtils::temp_folder()),
 		m_toolName(toolName),
 		m_toolHash(toolHash),
 		m_toolVersion(toolVersion),
@@ -259,7 +260,7 @@ protected:
 		if(lockedFile.isNull())
 		{
 			qDebug("Extracting file: %s -> %s", m_toolName.toLatin1().constData(), toolShrtName.toLatin1().constData());
-			lockedFile.reset(new LockedFile(m_toolResource.data(), QString("%1/lxp_%2").arg(MUtils::temp_folder(), toolShrtName), m_toolHash));
+			lockedFile.reset(new LockedFile(m_toolResource.data(), QString("%1/lxp_%2").arg(m_tempPath, toolShrtName), m_toolHash));
 		}
 
 		//Register tool
@@ -267,14 +268,14 @@ protected:
 	}
 
 private:
+	static volatile bool      s_bCustom;
 	QScopedPointer<QResource> m_toolResource;
-	const QDir m_appDir;
-	const QString m_toolName;
-	const QByteArray m_toolHash;
-	const unsigned int m_toolVersion;
-	const QString m_toolTag;
-
-	static volatile bool s_bCustom;
+	const QDir                m_appDir;
+	const QString             m_tempPath;
+	const QString             m_toolName;
+	const QByteArray          m_toolHash;
+	const unsigned int        m_toolVersion;
+	const QString             m_toolTag;
 };
 
 volatile bool ExtractorTask::s_bCustom = false;

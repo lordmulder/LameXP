@@ -525,30 +525,10 @@ QString ProcessThread::applyRegularExpression(const QString &fileName)
 
 QString ProcessThread::generateTempFileName(void)
 {
-	bool bOkay = false;
-	QString tempFileName;
-	
-	for(int i = 0; i < 4096; i++)
+	const QString tempFileName = MUtils::make_temp_file(m_tempDirectory, "wav", true);
+	if(tempFileName.isEmpty())
 	{
-		tempFileName = QString("%1/%2.wav").arg(m_tempDirectory, MUtils::rand_str());
-		if(m_tempFiles.contains(tempFileName, Qt::CaseInsensitive) || QFileInfo(tempFileName).exists())
-		{
-			continue;
-		}
-
-		QFile file(tempFileName);
-		if(file.open(QFile::ReadWrite))
-		{
-			file.close();
-			bOkay = true;
-			break;
-		}
-	}
-
-	if(!bOkay)
-	{
-		qWarning("Failed to generate unique temp file name!");
-		return QString("%1/~whoops.wav").arg(m_tempDirectory);
+		return QString("%1/~whoops%2.wav").arg(m_tempDirectory, QString::number(MUtils::next_rand32()));
 	}
 
 	m_tempFiles << tempFileName;
