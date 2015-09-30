@@ -276,8 +276,6 @@ LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 
 LockedFile::~LockedFile(void)
 {
-	qWarning("------------ LockedFile::~LockedFile ------------");
-
 	if(m_fileDescriptor >= 0)
 	{
 		_close(m_fileDescriptor);
