@@ -81,6 +81,16 @@
 
 
 ;--------------------------------
+;Manifest
+;--------------------------------
+
+!packhdr "$%TEMP%\~exehead.tmp" `"..\Utilities\ResHacker.exe" -addoverwrite "$%TEMP%\~exehead.tmp", "$%TEMP%\~exehead.tmp", "setup.manifest", 24,1,1033`
+
+!delfile "..\Utilities\ResHacker.log"
+!delfile "..\Utilities\ResHacker.ini"
+
+
+;--------------------------------
 ;Includes
 ;--------------------------------
 
@@ -111,7 +121,7 @@ InstallDirRegKey HKLM "${MyRegPath}" "InstallLocation"
 SetCompressor /SOLID LZMA
 SetCompressorDictSize 64
 
-!packhdr "$%TEMP%\exehead.tmp" '"${LAMEXP_UPX_PATH}\upx.exe" --brute "$%TEMP%\exehead.tmp"'
+#!packhdr "$%TEMP%\exehead.tmp" '"${LAMEXP_UPX_PATH}\upx.exe" --brute "$%TEMP%\exehead.tmp"'
 
 
 ;--------------------------------

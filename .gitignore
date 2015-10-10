@@ -27,3 +27,5 @@
 /etc/Prerequisites/keccak/obj
 /etc/Prerequisites/_old_
 /res/tools/_old_
+/etc/Utilities/*.ini
+/etc/Utilities/*.log
