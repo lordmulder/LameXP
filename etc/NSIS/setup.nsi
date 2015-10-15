@@ -84,10 +84,8 @@
 ;Manifest
 ;--------------------------------
 
-!packhdr "$%TEMP%\~exehead.tmp" `"..\Utilities\ResHacker.exe" -addoverwrite "$%TEMP%\~exehead.tmp", "$%TEMP%\~exehead.tmp", "setup.manifest", 24,1,1033`
-
-!delfile "..\Utilities\ResHacker.log"
-!delfile "..\Utilities\ResHacker.ini"
+!tempfile PACKHDRTEMP
+!packhdr "${PACKHDRTEMP}" '"..\Utilities\MT.exe" -manifest "setup.manifest" -outputresource:"${PACKHDRTEMP};1"'
 
 
 ;--------------------------------
