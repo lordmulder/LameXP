@@ -390,12 +390,12 @@
     <message>
         <location filename="../../src/Model_AudioFile.cpp" line="352"/>
         <source>Constant</source>
-        <translation type="unfinished">Stały</translation>
+        <translation type="unfinished">Stała</translation>
     </message>
     <message>
         <location filename="../../src/Model_AudioFile.cpp" line="355"/>
         <source>Variable</source>
-        <translation type="unfinished">Zmienny</translation>
+        <translation type="unfinished">Zmienna</translation>
     </message>
     <message>
         <location filename="../../src/Model_AudioFile.cpp" line="364"/>
@@ -418,7 +418,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="120"/>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation type="unfinished">Ładowanie pliku Cue Sheet, prosze być cierpliwy...</translation>
+        <translation type="unfinished">Ładowanie pliku Cue Sheet, proszę być cierpliwy...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="125"/>
@@ -493,7 +493,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="222"/>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation type="unfinished">Wybrany plik Cue Sheet zawiera niespójne informacje. Prosze zachować ostrożność!</translation>
+        <translation type="unfinished">Wybrany plik Cue Sheet zawiera niespójne informacje. Proszę zachować ostrożność!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="244"/>
@@ -550,7 +550,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
         <source>Analyzing file(s), please wait...</source>
-        <translation type="unfinished">Analizowanie pliku/ów, prosze czekać...</translation>
+        <translation type="unfinished">Analizowanie pliku/ów, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
@@ -577,7 +577,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
         <source>Splitting file(s), please wait...</source>
-        <translation type="unfinished">Dzielenie pliku/ów, prosze czekać...</translation>
+        <translation type="unfinished">Dzielenie pliku/ów, proszę czekać...</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
@@ -765,22 +765,22 @@
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="140"/>
         <source>File Extension</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rozszerzenie pliku</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
         <source>Replace With</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zamień na</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="189"/>
         <source>Select file extensions to overwrite:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wybierz rozszerzenia plików do zamiany:</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="208"/>
         <source>Enter the new file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wpisz nowe rozszerzenie pliku:</translation>
     </message>
 </context>
 <context>
@@ -1056,12 +1056,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1802"/>
         <source>Warning: Audio quality will be very poor. Please do &lt;u&gt;not&lt;/u&gt; complain about audio quality!</source>
-        <translation type="unfinished">Ostrzeżnie: Jakość dźwięku będzie bardzo niska. Prosze &lt;b&gt;nie&lt;b&gt; kierować skarg do autora programu!</translation>
+        <translation type="unfinished">Ostrzeżnie: Jakość dźwięku będzie bardzo niska. Proszę &lt;b&gt;nie&lt;b&gt; kierować skarg do autora programu!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1829"/>
         <source>Warning: Processing speed will be very slow. Please do &lt;u&gt;not&lt;/u&gt; complain about processing speed!</source>
-        <translation type="unfinished">Ostrzeżenie: Kompresja może potrwać bardzo długo. Prosze &lt;b&gt;nie&lt;b&gt; kierować skarg do autora programu!</translation>
+        <translation type="unfinished">Ostrzeżenie: Kompresja może potrwać bardzo długo. Proszę &lt;b&gt;nie&lt;b&gt; kierować skarg do autora programu!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1871"/>
@@ -1472,7 +1472,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3562"/>
         <source> Rename Output Files </source>
-        <translation type="unfinished"> Zmiana nazwy plików wyjściowych </translation>
+        <translation type="unfinished"> Zmiana nazwy plików wyjściowych</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3626"/>
@@ -1502,57 +1502,57 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3776"/>
         <source>Replacement:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zamienne wyrażenia:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3789"/>
         <source>Search Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Matryca zamiany:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3818"/>
         <source>&lt;a href=&quot;regexp&quot;&gt;Regular Expression Info&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;a href=&quot;regexp&quot;&gt;Co to są wyrażenia regularne?&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3844"/>
         <source>Replace all Matching Elements</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zastąp wszystkie pasujące zwroty</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3894"/>
         <source>Enter the desired search pattern (regular expression) here!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wpisz tutaj wzór zamiany (wyrażenia regularne)!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3941"/>
         <source>Enter replacement text here! It may contain backreferences.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wpisz tutaj zamienny tekst! Może on zawierać odwołania wsteczne.</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dodaj nadpisywanie</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usuń nadpisywanie</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
         <source>Rename Files </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zmień nazwy plików</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wyrażenia regularne</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
         <source>File Extensions </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rozszerzenia plików</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4109"/>
@@ -1825,7 +1825,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="819"/>
         <source>Adding file(s), please wait...</source>
-        <translation type="unfinished">Dodawanie plików, prosze czekać...</translation>
+        <translation type="unfinished">Dodawanie plików, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="830"/>
@@ -1861,7 +1861,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="838"/>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation type="unfinished">Prosze użyć przewodnika  Cue Sheet w LameXP w celu importowania tych plików.</translation>
+        <translation type="unfinished">Proszę użyć przewodnika  Cue Sheet w LameXP w celu importowania tych plików.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="842"/>
@@ -1876,7 +1876,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="857"/>
         <source>Scanning folder(s) for files, please wait...</source>
-        <translation type="unfinished">Skanowanie folderu/ów, prosze czekać...</translation>
+        <translation type="unfinished">Skanowanie folderu/ów, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1205"/>
@@ -1947,7 +1947,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1488"/>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation type="unfinished">Prosze sprawdzić dokument %1 w celu dalszych szcegółów i rozwiązań!</translation>
+        <translation type="unfinished">Proszę sprawdzić dokument %1 w celu dalszych szcegółów i rozwiązań!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1489"/>
@@ -2034,7 +2034,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1567"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
-        <translation type="unfinished">Prosze skopiować &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;, oraz &apos;neroAacTag.exe&apos; do folderu LameXP!</translation>
+        <translation type="unfinished">Proszę skopiować &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;, oraz &apos;neroAacTag.exe&apos; do folderu LameXP!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1568"/>
@@ -2168,7 +2168,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1204"/>
         <source>Initializing directory outline, please be patient...</source>
-        <translation type="unfinished">Ładowanie zestawu folderów, prosze czekać...</translation>
+        <translation type="unfinished">Ładowanie zestawu folderów, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1214"/>
@@ -2193,12 +2193,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1488"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Instrukcja obsługi</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1517"/>
         <source>Skipping update check this time, please be patient...</source>
-        <translation type="unfinished">Pomijanie sprawdzania aktualizacji, prosze czekać...</translation>
+        <translation type="unfinished">Pomijanie sprawdzania aktualizacji, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1742"/>
@@ -2223,7 +2223,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
         <source>Please choose a different directory!</source>
-        <translation type="unfinished">Prosze wybrać inną lokalizację!</translation>
+        <translation type="unfinished">Proszę wybrać inną lokalizację!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2014"/>
@@ -2270,7 +2270,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2052"/>
         <source>Please remember to check for updates at regular intervals!</source>
-        <translation type="unfinished">Prosze pamiętać  o okresowym sprawdzaniu aktualizacji!</translation>
+        <translation type="unfinished">Proszę pamiętać  o okresowym sprawdzaniu aktualizacji!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2062"/>
@@ -2440,17 +2440,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2429"/>
         <source>Filter Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtruj pliki</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2429"/>
         <source>Select filename filter:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wybierz filtr plików:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2652"/>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation type="unfinished">Ładowanie upuszczonych plików lub folderów, prosze czekać...</translation>
+        <translation type="unfinished">Ładowanie upuszczonych plików lub folderów, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2761"/>
@@ -2658,7 +2658,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4272"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
-        <translation type="unfinished">Nie można zapisać do wybranej lokalizacji. Prosze wybierz inną lokalizację!</translation>
+        <translation type="unfinished">Nie można zapisać do wybranego folderu. Proszę wybrać inny folder!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4405"/>
@@ -3133,7 +3133,7 @@
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="268"/>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Inicjowanie, prosze czekać...</translation>
+        <translation type="unfinished">Inicjowanie, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="337"/>
@@ -3216,12 +3216,12 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="284"/>
         <source>Your files are being encoded, please be patient...</source>
-        <translation type="unfinished">Twoje pliki są właśnie kompresowane, prosze być cierpliwy...</translation>
+        <translation type="unfinished">Twoje pliki są właśnie kompresowane, proszę być cierpliwy...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="490"/>
         <source>Encoding files, please wait...</source>
-        <translation type="unfinished">Kompresowanie plików, prosze czekać...</translation>
+        <translation type="unfinished">Kompresowanie plików, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="534"/>
@@ -3237,15 +3237,15 @@
         <location filename="../../src/Dialog_Processing.cpp" line="663"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation type="unfinished">
-            <numerusform>Kompresowanie: %n plik z %1 został do tej pory zakończony, prosze czekać...</numerusform>
-            <numerusform>Kompresowanie: %n pliki z %1 zostały do tej pory zakończone, prosze czekać...</numerusform>
-            <numerusform>Kompresowanie: %n plików z %1 zostało do tej pory zakończonych, prosze czekać...</numerusform>
+            <numerusform>Kompresowanie: %n plik z %1 został do tej pory zakończony, proszę czekać...</numerusform>
+            <numerusform>Kompresowanie: %n pliki z %1 zostały do tej pory zakończone, proszę czekać...</numerusform>
+            <numerusform>Kompresowanie: %n plików z %1 zostało do tej pory zakończonych, proszę czekać...</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="685"/>
         <source>Creating the playlist file, please wait...</source>
-        <translation type="unfinished">Tworzenie pliku playlisty, prosze czekać...</translation>
+        <translation type="unfinished">Tworzenie pliku playlisty, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="695"/>
@@ -3437,12 +3437,12 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="14"/>
         <source>LameXP Update Manager</source>
-        <translation type="unfinished">Menadżer aktualizacji LameXP</translation>
+        <translation type="unfinished">Menedżer aktualizacji LameXP</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="164"/>
         <source>Please wait...</source>
-        <translation type="unfinished">Prosze czekać...</translation>
+        <translation type="unfinished">Proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="349"/>
@@ -3498,7 +3498,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="279"/>
         <source>Testing your internet connection, please wait...</source>
-        <translation type="unfinished">Testowanie połączenia internetowego, prosze czekać...</translation>
+        <translation type="unfinished">Testowanie połączenia internetowego, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="300"/>
@@ -3519,7 +3519,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="282"/>
         <source>Checking for new updates online, please wait...</source>
-        <translation type="unfinished">Sprawdzanie aktualizacji online, prosze czekać...</translation>
+        <translation type="unfinished">Sprawdzanie aktualizacji online, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="310"/>
@@ -3529,7 +3529,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
-        <translation type="unfinished">Serwer aktualizacji wydaje się nie odpowiadać w tej chwili. Prosze spróbować później.</translation>
+        <translation type="unfinished">Serwer aktualizacji wydaje się nie odpowiadać w tej chwili. Proszę spróbować później.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="349"/>
@@ -3554,7 +3554,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="276"/>
         <source>Initializing, please wait...</source>
-        <translation type="unfinished">Inicjowanie, prosze czekać...</translation>
+        <translation type="unfinished">Inicjowanie, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="286"/>
@@ -3584,7 +3584,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="378"/>
         <source>Update is being downloaded, please be patient...</source>
-        <translation type="unfinished">Pobieranie aktualizacji w toku, prosze czekać...</translation>
+        <translation type="unfinished">Pobieranie aktualizacji w toku, proszę czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="426"/>
@@ -3594,7 +3594,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="434"/>
         <source>Update failed. Please try again or download manually!</source>
-        <translation type="unfinished">Aktualizacja zakończona niepowodzeniem. Prosze spróbować ponownie lub zainstalować ręcznie!</translation>
+        <translation type="unfinished">Aktualizacja zakończona niepowodzeniem. Proszę spróbować ponownie lub zainstalować ręcznie!</translation>
     </message>
 </context>
 </TS>
