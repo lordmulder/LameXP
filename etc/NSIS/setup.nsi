@@ -549,7 +549,7 @@ Section "-PreInit"
 	SetOutPath "$INSTDIR"
 SectionEnd
 
-Section "!Clean Up Old Cruft"
+Section "-Clean Up Old Cruft"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_CLEANUP)"
 	!insertmacro CleanUpFiles ""
 SectionEnd
