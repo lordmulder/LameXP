@@ -179,7 +179,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		args << "--cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
 		break;
 	case SettingsModel::ABRMode:
-		args << "--abr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
+		args << "--cvbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
 		break;
 	case SettingsModel::VBRMode:
 		args << "--tvbr" << QString::number(g_qaacVBRQualityLUT[qBound(0, m_configBitrate , 14)]);

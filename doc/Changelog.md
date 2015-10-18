@@ -21,6 +21,8 @@
 * Updated GnuPG to v1.4.19 (2015-02-27), compiled with GCC 4.9.2
 * Fixed potential deadlock in Cue Sheet import dialog when "Browse..." button is clicked
 * Fixed function to restore the default Temp folder, if custom Temp folder doesn't exist anymore
+* Fixed parsing of command-line parameters, regression in MUtilities library (LameXP v4.12 RC-1)
+* QAAC encoder is now using `--cvbr` instead of `--abr` when "ABR" mode is selected
 * Enable the embedding of cover artwork for Opus encoder (opusenc), using the ``--picture`` option
 * Some installer improvements have been implemented (especially in "update" mode)
 * Full support for Windows 10 RTM (Build #10240)
