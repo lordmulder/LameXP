@@ -701,11 +701,12 @@ Section "Uninstall"
 
 	ReadRegStr $R0 HKLM "${MyRegPath}" "ExecutableName"
 	${IfThen} "$R0" == "" ${|} StrCpy $R0 "LameXP.exe" ${|}
+	ExecWait '"$INSTDIR\$R0" --uninstall'
 
 	Delete /REBOOTOK "$INSTDIR\$R0"
 	!insertmacro CleanUpFiles /REBOOTOK
 	RMDir "$INSTDIR"
-	
+
 	; --------------
 	; Registry
 	; --------------

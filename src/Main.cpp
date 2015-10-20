@@ -31,6 +31,7 @@
 #include "Model_FileList.h"
 #include "Model_AudioFile.h"
 #include "Encoder_Abstract.h"
+#include "ShellIntegration.h"
 
 //MUitls
 #include <MUtils/Global.h>
@@ -196,6 +197,14 @@ static int lamexp_main(int &argc, char **argv)
 		qDebug(" ");
 	}
 
+	//Uninstall?
+	if(arguments.contains("uninstall"))
+	{
+		qWarning("Un-install: Removing LameXP shell integration...");
+		ShellIntegration::remove(false);
+		return EXIT_SUCCESS;
+	}
+
 	//Detect CPU capabilities
 	const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect();
 	qDebug("   CPU vendor id  :  %s (Intel=%s)", cpuFeatures.vendor, MUTILS_BOOL2STR(cpuFeatures.intel));
@@ -234,12 +243,9 @@ static int lamexp_main(int &argc, char **argv)
 	}
 
 	//Kill application?
-	for(int i = 0; i < argc; i++)
+	if(arguments.contains("kill") || arguments.contains("force-kill"))
 	{
-		if(arguments.contains("kill") || arguments.contains("force-kill"))
-		{
-			return EXIT_SUCCESS;
-		}
+		return EXIT_SUCCESS;
 	}
 	
 	//Self-test
