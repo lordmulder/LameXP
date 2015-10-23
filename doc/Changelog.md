@@ -2,10 +2,11 @@
 
 # LameXP v4.xx History #
 
-## LameXP v4.12 [xxxx-xx-xx] ## {-}
+## LameXP v4.12 [2015-10-23] ## {-}
 
 * Upgraded build environment to Microsoft Visual Studio 2013 with Update-5
 * Updated Qt runtime libraries to v4.8.7 Final (2015-05-25), compiled with MSVC 12.0
+* Added support for building LameXP and MUtilities with Visual Studio 2015
 * Added Hungarian translation, contributed by Zityi's Translator Team <<zityisoft@gmail.com>>
 * Added optional support for the *libfdk-aac* encoder, using the [fdkaac](https://github.com/nu774/fdkaac) front-end by nu774
 * Added detection of the *64-Bit* version of QAAC encoder, requires 64-Bit Apple Application Support
@@ -26,6 +27,7 @@
 * Enable the embedding of cover artwork for Opus encoder (opusenc), using the ``--picture`` option
 * Some installer improvements have been implemented (especially in "update" mode)
 * Full support for Windows 10 RTM (Build #10240)
+* Updated language files (big thank-you to all contributors !!!)
 
 
 ## LameXP v4.11 [2015-04-05] ## {-}
