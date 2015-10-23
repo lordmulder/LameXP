@@ -94,16 +94,20 @@
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>QtCored4.lib;QtGuid4.lib;Winmm.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\lib;$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;$(SolutionDir)\etc\Prerequisites\keccak\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <EntryPointSymbol>lamexp_entry_point</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Message>Copy VLD DLL%27s</Message>
-      <Command>copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(TargetDir)"
-copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(TargetDir)"</Command>
+      <Message>Copy DLL's</Message>
+      <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Debug\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest" "$(OutDir)"
+</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -170,15 +174,16 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
       </MapFileName>
       <CreateHotPatchableImage>
       </CreateHotPatchableImage>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\lib;$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\imageformats;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Message>
-      </Message>
-      <Command>
-      </Command>
+      <Message>Copy DLL's</Message>
+      <Command>mkdir "$(OutDir)\imageformats" 2&gt; NUL
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\bin\Qt*.dll" "$(OutDir)"
+copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\imageformats\*.dll" "$(OutDir)\imageformats"
+</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>_CONFIG_NAME=$(ConfigurationName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -228,9 +233,9 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     </ClCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>QtCore.lib;QtGui.lib;QtSvg.lib;qtmain.lib;qsvg.lib;qico.lib;qtga.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QtCore.lib;QtGui.lib;QtSvg.lib;qsvg.lib;qico.lib;qtga.lib;Winmm.lib;imm32.lib;ws2_32.lib;Shlwapi.lib;Sensapi.lib;PowrProf.lib;psapi.lib;Version.lib;EncodePointer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2012\Static\lib;$(SolutionDir)\..\Prerequisites\Qt4\MSVC-2012\Static\plugins\imageformats;$(SolutionDir)\..\Prerequisites\EncodePointer\lib;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Static\lib;$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Static\plugins\imageformats;$(SolutionDir)\..\Prerequisites\EncodePointer\lib;$(SolutionDir)\..\Prerequisites\VisualLeakDetector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AssemblyDebug>
@@ -297,6 +302,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="src\Dialog_Update.cpp" />
     <ClCompile Include="src\Dialog_WorkingBanner.cpp" />
     <ClCompile Include="src\Encoder_AAC.cpp" />
+    <ClCompile Include="src\Encoder_AAC_FDK.cpp" />
     <ClCompile Include="src\Encoder_AAC_FHG.cpp" />
     <ClCompile Include="src\Encoder_AAC_QAAC.cpp" />
     <ClCompile Include="src\Encoder_Abstract.cpp" />
@@ -308,6 +314,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="src\Encoder_Opus.cpp" />
     <ClCompile Include="src\Encoder_Vorbis.cpp" />
     <ClCompile Include="src\Encoder_Wave.cpp" />
+    <ClCompile Include="src\FileHash.cpp" />
     <ClCompile Include="src\Filter_Abstract.cpp" />
     <ClCompile Include="src\Filter_Downmix.cpp" />
     <ClCompile Include="src\Filter_Normalize.cpp" />
@@ -323,6 +330,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="src\Model_Artwork.cpp" />
     <ClCompile Include="src\Model_AudioFile.cpp" />
     <ClCompile Include="src\Model_CueSheet.cpp" />
+    <ClCompile Include="src\Model_FileExts.cpp" />
     <ClCompile Include="src\Model_FileList.cpp" />
     <ClCompile Include="src\Model_FileSystem.cpp" />
     <ClCompile Include="src\Model_MetaInfo.cpp" />
@@ -357,6 +365,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="tmp\LameXP\MOC_Dialog_Update.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Dialog_WorkingBanner.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC.cpp" />
+    <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_FDK.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_FHG.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_AAC_QAAC.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Encoder_Abstract.cpp" />
@@ -371,6 +380,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
     <ClCompile Include="tmp\LameXP\MOC_Filter_Abstract.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Model_AudioFile.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Model_CueSheet.cpp" />
+    <ClCompile Include="tmp\LameXP\MOC_Model_FileExts.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Model_FileList.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Model_MetaInfo.cpp" />
     <ClCompile Include="tmp\LameXP\MOC_Model_Progress.cpp" />
@@ -407,7 +417,31 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h" />
+    <CustomBuild Include="src\Encoder_AAC_FDK.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="src\FileHash.h" />
     <ClInclude Include="src\IPCCommands.h" />
+    <CustomBuild Include="src\Model_FileExts.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC "$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\MOC_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="src\MimeTypes.h" />
     <ClInclude Include="tmp\LameXP\UIC_AboutDialog.h" />
     <ClInclude Include="tmp\LameXP\UIC_CueSheetImport.h" />
     <ClInclude Include="tmp\LameXP\UIC_DropBox.h" />
