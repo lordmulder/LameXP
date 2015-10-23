@@ -111,7 +111,6 @@ g_lamexp_specialThanks[] =
 	{ "GitHub",                "http://github.com/"            },
 	{ "SourceForge",           "http://sourceforge.net/"       },
 	{ "Qt Developer Network",  "http://qt-project.org/"        },
-	{ "BerliOS Developer",     "http://developer.berlios.de/"  },
 	{ "CodePlex",              "http://www.codeplex.com/"      },
 	{ "Marius Hudea",          "http://savedonthe.net/"        },
 	{ "Codecs.com",            "http://www.codecs.com/"        },
@@ -129,9 +128,8 @@ g_lamexp_mirrors[] =
 	{ "GitHub.com",      "https://github.com/lordmulder/LameXP"              },
 	{ "SourceForge.net", "http://sourceforge.net/p/lamexp/code/"             },
 	{ "Bitbucket.org",   "https://bitbucket.org/lord_mulder/lamexp"          },
-	{ "Gitorious.org",   "https://gitorious.org/lamexp"                      },
+	{ "GitLab.com"   ,   "https://gitlab.com/lamexp/lamexp"                  },
 	{ "Codeplex.com",    "https://lamexp.codeplex.com/SourceControl/latest"  },
-	{ "Berlios.de",      "http://git.berlios.de/cgi-bin/gitweb.cgi?p=lamexp" },
 	{ "Assembla.com",    "https://www.assembla.com/spaces/lamexp/"           },
 	{ NULL, NULL }
 };
