@@ -528,6 +528,7 @@ FunctionEnd
 	Delete ${options} "$INSTDIR\Translate.html"
 	Delete ${options} "$INSTDIR\Uninstall.exe"
 	Delete ${options} "$INSTDIR\Qt*.dll"
+	Delete ${options} "$INSTDIR\MUtils*.dll"
 	Delete ${options} "$INSTDIR\msvcr*.dll"
 	Delete ${options} "$INSTDIR\msvcp*.dll"
 	Delete ${options} "$INSTDIR\concrt*.dll"
