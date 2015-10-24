@@ -349,56 +349,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="285"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="341"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="308"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="364"/>
         <source>Profile</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="302"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="325"/>
         <source>Channels</source>
         <translation>聲道</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="307"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
         <source>Samplerate</source>
         <translation>采樣率</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="314"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="318"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="337"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="341"/>
         <source>Bitdepth</source>
         <translation>位深度</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="336"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="359"/>
         <source>Type</source>
         <translation>類型</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="345"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="368"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="352"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="355"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="358"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="375"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="378"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="381"/>
         <source>Bitrate</source>
         <translation>比特率</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="352"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="375"/>
         <source>Constant</source>
         <translation>不變</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="355"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="378"/>
         <source>Variable</source>
         <translation>可變</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="364"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="387"/>
         <source>Encoder</source>
         <translation>編碼器</translation>
     </message>

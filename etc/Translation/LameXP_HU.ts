@@ -349,56 +349,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="285"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="341"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="308"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="364"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="302"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="325"/>
         <source>Channels</source>
         <translation>Csatornák</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="307"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
         <source>Samplerate</source>
         <translation>Mintavételi arány</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="314"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="318"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="337"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="341"/>
         <source>Bitdepth</source>
         <translation>Bitmélység</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="336"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="359"/>
         <source>Type</source>
         <translation>Típus</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="345"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="368"/>
         <source>Version</source>
         <translation>Verzió</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="352"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="355"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="358"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="375"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="378"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="381"/>
         <source>Bitrate</source>
         <translation>Bitarány</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="352"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="375"/>
         <source>Constant</source>
         <translation>Állandó</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="355"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="378"/>
         <source>Variable</source>
         <translation>Változó</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="364"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="387"/>
         <source>Encoder</source>
         <translation>Kódoló modul</translation>
     </message>

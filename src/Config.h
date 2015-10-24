@@ -32,10 +32,10 @@
 
 #define VER_LAMEXP_MAJOR					4
 #define VER_LAMEXP_MINOR_HI					1
-#define VER_LAMEXP_MINOR_LO					2
-#define VER_LAMEXP_TYPE						Final
+#define VER_LAMEXP_MINOR_LO					3
+#define VER_LAMEXP_TYPE						Alpha
 #define VER_LAMEXP_PATCH					1
-#define VER_LAMEXP_BUILD					1818
+#define VER_LAMEXP_BUILD					1820
 #define VER_LAMEXP_CONFG					1818
 
 ///////////////////////////////////////////////////////////////////////////////

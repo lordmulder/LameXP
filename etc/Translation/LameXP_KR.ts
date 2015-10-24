@@ -349,56 +349,56 @@
 <context>
     <name>AudioFileModel</name>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="285"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="341"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="308"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="364"/>
         <source>Profile</source>
         <translation type="unfinished">프로필</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="302"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="325"/>
         <source>Channels</source>
         <translation type="unfinished">채널</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="307"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="330"/>
         <source>Samplerate</source>
         <translation type="unfinished">샘플링 속도</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="314"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="318"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="337"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="341"/>
         <source>Bitdepth</source>
         <translation type="unfinished">비트 심도</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="336"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="359"/>
         <source>Type</source>
         <translation type="unfinished">형식</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="345"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="368"/>
         <source>Version</source>
         <translation type="unfinished">버전</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="352"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="355"/>
-        <location filename="../../src/Model_AudioFile.cpp" line="358"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="375"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="378"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="381"/>
         <source>Bitrate</source>
         <translation type="unfinished">비트레이트</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="352"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="375"/>
         <source>Constant</source>
         <translation type="unfinished">상수</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="355"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="378"/>
         <source>Variable</source>
         <translation type="unfinished">변수</translation>
     </message>
     <message>
-        <location filename="../../src/Model_AudioFile.cpp" line="364"/>
+        <location filename="../../src/Model_AudioFile.cpp" line="387"/>
         <source>Encoder</source>
         <translation type="unfinished">인코더</translation>
     </message>
