@@ -155,6 +155,29 @@ void AudioFileModel_MetaInfo::print(void) const
 	PRINT_U(m_position);
 }
 
+bool  AudioFileModel_MetaInfo::empty(const bool &ignoreArtwork) const
+{
+	bool isEmpty = true;
+
+	if(!m_titel.isEmpty())   isEmpty = false;
+	if(!m_artist.isEmpty())  isEmpty = false;
+	if(!m_album.isEmpty())   isEmpty = false;
+	if(!m_genre.isEmpty())   isEmpty = false;
+	if(!m_comment.isEmpty()) isEmpty = false;
+	if(m_year)               isEmpty = false;
+	if(m_position)           isEmpty = false;
+
+	if(!ignoreArtwork)
+	{
+		if(!m_cover.isEmpty())
+		{
+			isEmpty = false;
+		}
+	}
+
+	return isEmpty;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Audio File - Technical Info
 ///////////////////////////////////////////////////////////////////////////////

@@ -285,19 +285,24 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return false;
 	}
 
+	if(metaInfo.empty(false))
+	{
+		return true;
+	}
+
 	emit messageLogged("\n-------------------------------\n");
 	
 	args.clear();
 	args << QDir::toNativeSeparators(outputFile);
 
-	if(!metaInfo.title().isEmpty()) args << QString("-meta:title=%1").arg(cleanTag(metaInfo.title()));
-	if(!metaInfo.artist().isEmpty()) args << QString("-meta:artist=%1").arg(cleanTag(metaInfo.artist()));
-	if(!metaInfo.album().isEmpty()) args << QString("-meta:album=%1").arg(cleanTag(metaInfo.album()));
-	if(!metaInfo.genre().isEmpty()) args << QString("-meta:genre=%1").arg(cleanTag(metaInfo.genre()));
+	if(!metaInfo.title().isEmpty())   args << QString("-meta:title=%1").arg(cleanTag(metaInfo.title()));
+	if(!metaInfo.artist().isEmpty())  args << QString("-meta:artist=%1").arg(cleanTag(metaInfo.artist()));
+	if(!metaInfo.album().isEmpty())   args << QString("-meta:album=%1").arg(cleanTag(metaInfo.album()));
+	if(!metaInfo.genre().isEmpty())   args << QString("-meta:genre=%1").arg(cleanTag(metaInfo.genre()));
 	if(!metaInfo.comment().isEmpty()) args << QString("-meta:comment=%1").arg(cleanTag(metaInfo.comment()));
-	if(metaInfo.year()) args << QString("-meta:year=%1").arg(QString::number(metaInfo.year()));
-	if(metaInfo.position()) args << QString("-meta:track=%1").arg(QString::number(metaInfo.position()));
-	if(!metaInfo.cover().isEmpty()) args << QString("-add-cover:%1:%2").arg("front", metaInfo.cover());
+	if(metaInfo.year())               args << QString("-meta:year=%1").arg(QString::number(metaInfo.year()));
+	if(metaInfo.position())           args << QString("-meta:track=%1").arg(QString::number(metaInfo.position()));
+	if(!metaInfo.cover().isEmpty())   args << QString("-add-cover:%1:%2").arg("front", metaInfo.cover());
 	
 	if(!startProcess(process, m_binary_tag, args))
 	{

@@ -2,6 +2,11 @@
 
 # LameXP v4.xx History #
 
+## LameXP v4.13 [xxxx-xx-xx] ## {-}
+
+* Upgraded build environment to Microsoft Visual Studio 2015
+* Fixed creation of Monkey's Audio (APE) files, when **no** meta data is being embedded
+
 ## LameXP v4.12 [2015-10-23] ## {-}
 
 * Upgraded build environment to Microsoft Visual Studio 2013 with Update-5

@@ -216,18 +216,23 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return false;
 	}
 
+	if(metaInfo.empty(true))
+	{
+		return true;
+	}
+
 	emit messageLogged("\n-------------------------------\n");
 	
 	args.clear();
 	args << "APE2" << QDir::toNativeSeparators(outputFile);
 
-	if(!metaInfo.title().isEmpty()) args << QString("Title=%1").arg(cleanTag(metaInfo.title()));
-	if(!metaInfo.artist().isEmpty()) args << QString("Artist=%1").arg(cleanTag(metaInfo.artist()));
-	if(!metaInfo.album().isEmpty()) args << QString("Album=%1").arg(cleanTag(metaInfo.album()));
-	if(!metaInfo.genre().isEmpty()) args << QString("Genre=%1").arg(cleanTag(metaInfo.genre()));
+	if(!metaInfo.title().isEmpty())   args << QString("Title=%1").arg(cleanTag(metaInfo.title()));
+	if(!metaInfo.artist().isEmpty())  args << QString("Artist=%1").arg(cleanTag(metaInfo.artist()));
+	if(!metaInfo.album().isEmpty())   args << QString("Album=%1").arg(cleanTag(metaInfo.album()));
+	if(!metaInfo.genre().isEmpty())   args << QString("Genre=%1").arg(cleanTag(metaInfo.genre()));
 	if(!metaInfo.comment().isEmpty()) args << QString("Comment=%1").arg(cleanTag(metaInfo.comment()));
-	if(metaInfo.year()) args << QString("Year=%1").arg(QString::number(metaInfo.year()));
-	if(metaInfo.position()) args << QString("Track=%1").arg(QString::number(metaInfo.position()));
+	if(metaInfo.year())               args << QString("Year=%1").arg(QString::number(metaInfo.year()));
+	if(metaInfo.position())           args << QString("Track=%1").arg(QString::number(metaInfo.position()));
 	
 	//if(!metaInfo.cover().isEmpty()) args << QString("-add-cover:%1:%2").arg("front", metaInfo.cover());
 	
