@@ -336,24 +336,41 @@ SettingsModel::SettingsModel(void)
 	//Create settings
 	QSettings *configFile = new QSettings(configPath, QSettings::IniFormat);
 	const QString groupKey = QString().sprintf("LameXP_%u%02u%05u", lamexp_version_major(), lamexp_version_minor(), lamexp_version_confg());
-	QStringList childGroups =configFile->childGroups();
+	const QStringList childGroups = configFile->childGroups();
 
 	//Clean-up settings
-	while(!childGroups.isEmpty())
+	if (!childGroups.empty())
 	{
-		QString current = childGroups.takeFirst();
+		static const int MAX_GROUPS = 3;
 		QRegExp filter("^LameXP_(\\d+)(\\d\\d)(\\d\\d\\d\\d\\d)$");
-		if(filter.indexIn(current) >= 0)
+		QStringList obsoleteGroups;
+		for (QStringList::ConstIterator iter = childGroups.constBegin(); iter != childGroups.constEnd(); iter++)
 		{
-			bool ok = false;
-			unsigned int temp = filter.cap(3).toUInt(&ok) + 10;
-			if(ok && (temp >= lamexp_version_confg()))
+			if (filter.indexIn(*iter) >= 0)
 			{
-				continue;
+				quint32 temp[3] = { 0, 0, 0 };
+				if (MUtils::regexp_parse_uint32(filter, temp, 3))
+				{
+					if ((temp[0] < lamexp_version_major()) || ((temp[0] == lamexp_version_major()) && ((temp[1] < lamexp_version_minor()) || ((temp[1] == lamexp_version_minor()) && (temp[2] < lamexp_version_confg())))))
+					{
+						obsoleteGroups.append(*iter);
+					}
+				}
 			}
 		}
-		qWarning("Deleting obsolete group from config: %s", MUTILS_UTF8(current));
-		REMOVE_GROUP(configFile, current);
+		if (obsoleteGroups.count() > MAX_GROUPS)
+		{
+			qSort(obsoleteGroups);
+			for (int i = 0; i < MAX_GROUPS; i++)
+			{
+				obsoleteGroups.removeLast();
+			}
+			for (QStringList::ConstIterator iter = obsoleteGroups.constBegin(); iter != obsoleteGroups.constEnd(); iter++)
+			{
+				qWarning("Deleting obsolete group from config: %s", MUTILS_UTF8(*iter));
+				REMOVE_GROUP(configFile, (*iter));
+			}
+		}
 	}
 
 	//Setup settings
