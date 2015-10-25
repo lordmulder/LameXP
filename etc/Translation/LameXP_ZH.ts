@@ -2975,107 +2975,107 @@
         <translation>未找到!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="250"/>
         <source>The format of this file is NOT supported:</source>
         <translation>此文件的格式不受支持:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="250"/>
         <source>Container Format:</source>
         <translation>容器格式:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="250"/>
         <source>Audio Format:</source>
         <translation>音频格式:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="250"/>
+        <location filename="../../src/Thread_Process.cpp" line="251"/>
         <source>Unsupported!</source>
         <translation>不支持!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="338"/>
+        <location filename="../../src/Thread_Process.cpp" line="351"/>
         <source>Done.</source>
         <translation>完成。</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="338"/>
+        <location filename="../../src/Thread_Process.cpp" line="351"/>
         <source>Aborted!</source>
         <translation>中止!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="338"/>
+        <location filename="../../src/Thread_Process.cpp" line="351"/>
         <source>Failed!</source>
         <translation>失败!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="368"/>
         <source>Encoding</source>
         <translation>编码</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="361"/>
+        <location filename="../../src/Thread_Process.cpp" line="374"/>
         <source>Filtering</source>
         <translation>过滤</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="364"/>
+        <location filename="../../src/Thread_Process.cpp" line="377"/>
         <source>Decoding</source>
         <translation>解码</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="386"/>
+        <location filename="../../src/Thread_Process.cpp" line="399"/>
         <source>The source audio file could not be found:</source>
         <translation>找不到源音频文件:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="394"/>
+        <location filename="../../src/Thread_Process.cpp" line="407"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>无法打开源音频文件进行读取:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="422"/>
+        <location filename="../../src/Thread_Process.cpp" line="435"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>目标输出目录不存在且无法创建:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="431"/>
+        <location filename="../../src/Thread_Process.cpp" line="444"/>
         <source>The target output directory is NOT writable:</source>
         <translation>目标输出目录不可写:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="498"/>
+        <location filename="../../src/Thread_Process.cpp" line="511"/>
         <source>Unknown File Name</source>
         <translation>未知文件名称</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="500"/>
+        <location filename="../../src/Thread_Process.cpp" line="513"/>
         <source>Unknown Title</source>
         <translation>未知标题</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="501"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown Artist</source>
         <translation>未知艺术家</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="502"/>
+        <location filename="../../src/Thread_Process.cpp" line="515"/>
         <source>Unknown Album</source>
         <translation>未知专辑</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="504"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Comment</source>
         <translation>未知注释</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="371"/>
         <source>Analyzing</source>
         <translation>分析</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="240"/>
+        <location filename="../../src/Thread_Process.cpp" line="241"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>警告: 解码文件大小超过4GB, 可能会出现问题!</translation>
@@ -3086,22 +3086,22 @@
         <translation>跳过。</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="450"/>
+        <location filename="../../src/Thread_Process.cpp" line="463"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>目标输出文件已经存在, 将跳过此文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="451"/>
+        <location filename="../../src/Thread_Process.cpp" line="464"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>如果你不希望跳过已存在的文件, 请更改覆盖模式!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="458"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>目标输出文件已经存在, 将删除现有的文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="485"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>无法删除现有目标文件, 将保存为另一个文件名!</translation>
     </message>

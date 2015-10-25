@@ -2992,107 +2992,107 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Non trouvé!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="250"/>
         <source>The format of this file is NOT supported:</source>
         <translation>Le format de ce fichier N&apos;EST PAS supporté:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="250"/>
         <source>Container Format:</source>
         <translation>Format du conteneur:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="250"/>
         <source>Audio Format:</source>
         <translation>Format audio:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="250"/>
+        <location filename="../../src/Thread_Process.cpp" line="251"/>
         <source>Unsupported!</source>
         <translation>Non supporté!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="338"/>
+        <location filename="../../src/Thread_Process.cpp" line="351"/>
         <source>Done.</source>
         <translation>Fait.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="338"/>
+        <location filename="../../src/Thread_Process.cpp" line="351"/>
         <source>Aborted!</source>
         <translation>Abandonné!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="338"/>
+        <location filename="../../src/Thread_Process.cpp" line="351"/>
         <source>Failed!</source>
         <translation>Échec!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="368"/>
         <source>Encoding</source>
         <translation>Encodage</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="361"/>
+        <location filename="../../src/Thread_Process.cpp" line="374"/>
         <source>Filtering</source>
         <translation>Filtrage</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="364"/>
+        <location filename="../../src/Thread_Process.cpp" line="377"/>
         <source>Decoding</source>
         <translation>Décodage</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="386"/>
+        <location filename="../../src/Thread_Process.cpp" line="399"/>
         <source>The source audio file could not be found:</source>
         <translation>Le fichier audio source n&apos;a pas pu être trouvé:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="394"/>
+        <location filename="../../src/Thread_Process.cpp" line="407"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Le fichier audio source n&apos;a pas pu être ouvert pour la lecture:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="422"/>
+        <location filename="../../src/Thread_Process.cpp" line="435"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Le répertoire de sortie cible n&apos;existe pas et ne peut PAS être créé:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="431"/>
+        <location filename="../../src/Thread_Process.cpp" line="444"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Le répertoire de sortie cible n&apos;est pas accessible en écriture:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="498"/>
+        <location filename="../../src/Thread_Process.cpp" line="511"/>
         <source>Unknown File Name</source>
         <translation>Nom de fichier inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="500"/>
+        <location filename="../../src/Thread_Process.cpp" line="513"/>
         <source>Unknown Title</source>
         <translation>Titre inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="501"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown Artist</source>
         <translation>Artiste inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="502"/>
+        <location filename="../../src/Thread_Process.cpp" line="515"/>
         <source>Unknown Album</source>
         <translation>Album inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="504"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Comment</source>
         <translation>Commentaire inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="371"/>
         <source>Analyzing</source>
         <translation>Analyse</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="240"/>
+        <location filename="../../src/Thread_Process.cpp" line="241"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>AVERTISSEMENT : La taille du fichier décodé dépasse 4Go, des problèmes peuvent survenir!
@@ -3104,22 +3104,22 @@ Ouvrir le dossier récursivement...</translation>
         <translation>Ignorée.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="450"/>
+        <location filename="../../src/Thread_Process.cpp" line="463"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Le fichier de sortie existe déjà, vous allez ignorer ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="451"/>
+        <location filename="../../src/Thread_Process.cpp" line="464"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Si vous ne voulez pas ignorer les fichiers existants, veuillez changer le mode de remplacement !</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="458"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Le fichier de sortie existe déjà, vous allez supprimer ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="485"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Impossible de supprimer le fichier existant, voulez-vous l&apos;enregistrer sous un autre nom !</translation>
     </message>

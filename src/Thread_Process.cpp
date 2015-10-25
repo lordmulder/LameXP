@@ -210,9 +210,10 @@ void ProcessThread::processFile()
 
 	QString sourceFile = m_audioFile.filePath();
 
-	//------------------
-	//Decode source file
-	//------------------
+	//-----------------------------------------------------
+	// Decode source file
+	//-----------------------------------------------------
+
 	const AudioFileModel_TechInfo &formatInfo = m_audioFile.techInfo();
 	if(!m_filters.isEmpty() || !m_encoder->isFormatSupported(formatInfo.containerType(), formatInfo.containerProfile(), formatInfo.audioType(), formatInfo.audioProfile(), formatInfo.audioVersion()))
 	{
@@ -253,9 +254,10 @@ void ProcessThread::processFile()
 		}
 	}
 
-	//------------------------------------
-	//Update audio properties after decode
-	//------------------------------------
+	//-----------------------------------------------------
+	// Update audio properties after decode
+	//-----------------------------------------------------
+
 	if(bSuccess && !m_aborted && IS_WAVE(m_audioFile.techInfo()))
 	{
 		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount() || m_encoder->needsTimingInfo() || !m_filters.isEmpty())
@@ -282,9 +284,10 @@ void ProcessThread::processFile()
 		}
 	}
 
-	//-----------------------
-	//Apply all audio filters
-	//-----------------------
+	//-----------------------------------------------------
+	// Apply all audio filters
+	//-----------------------------------------------------
+
 	if(bSuccess)
 	{
 		while(!m_filters.isEmpty() && !m_aborted)
@@ -306,9 +309,10 @@ void ProcessThread::processFile()
 		}
 	}
 
-	//-----------------
-	//Encode audio file
-	//-----------------
+	//-----------------------------------------------------
+	// Encode audio file
+	//-----------------------------------------------------
+
 	if(bSuccess && !m_aborted)
 	{
 		m_currentStep = EncodingStep;
@@ -319,7 +323,7 @@ void ProcessThread::processFile()
 	if((!bSuccess) || m_aborted)
 	{
 		QFileInfo fileInfo(m_outFileName);
-		if(fileInfo.exists() && (fileInfo.size() < 512))
+		if(fileInfo.exists() && (fileInfo.size() < 1024))
 		{
 			QFile::remove(m_outFileName);
 		}
@@ -328,11 +332,20 @@ void ProcessThread::processFile()
 	//Make sure output file exists
 	if(bSuccess && (!m_aborted))
 	{
-		QFileInfo fileInfo(m_outFileName);
-		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() > 0);
+		const QFileInfo fileInfo(m_outFileName);
+		bSuccess = fileInfo.exists() && fileInfo.isFile() && (fileInfo.size() >= 1024);
 	}
 
-	MUtils::OS::sleep_ms(25);
+	//-----------------------------------------------------
+	// Finalize
+	//-----------------------------------------------------
+
+	if (bSuccess && (!m_aborted))
+	{
+		updateFileTime(m_audioFile.filePath(), m_outFileName);
+	}
+
+	MUtils::OS::sleep_ms(12);
 
 	//Report result
 	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
@@ -665,6 +678,27 @@ void ProcessThread::insertDownmixFilter(void)
 			m_filters.append(new DownmixFilter());
 		}
 	}
+}
+
+bool ProcessThread::updateFileTime(const QString &originalFile, const QString &modifiedFile)
+{
+	bool success = false;
+
+	QFileInfo originalFileInfo(originalFile);
+	const QDateTime timeCreated = originalFileInfo.created(), timeLastMod = originalFileInfo.lastModified();
+	if (timeCreated.isValid() && timeLastMod.isValid())
+	{
+		if (!MUtils::OS::set_file_time(modifiedFile, timeCreated, timeLastMod))
+		{
+			qWarning("Failed to update creation/modified time of output file: \"%s\"", MUTILS_UTF8(modifiedFile));
+		}
+	}
+	else
+	{
+		qWarning("Failed to read creation/modified time of source file: \"%s\"", MUTILS_UTF8(originalFile));
+	}
+
+	return success;
 }
 
 ////////////////////////////////////////////////////////////

@@ -93,6 +93,7 @@ private:
 	QString generateTempFileName(void);
 	void insertDownmixFilter(void);
 	void insertDownsampleFilter(void);
+	bool updateFileTime(const QString &originalFile, const QString &modifiedFile);
 
 	volatile bool m_aborted;
 	volatile int m_initialized;
