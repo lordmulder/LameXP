@@ -52,9 +52,6 @@
 !ifndef LAMEXP_UPX_PATH
   !error "LAMEXP_UPX_PATH is not defined !!!"
 !endif
-!ifndef LAMEXP_REDIST
-  !error "LAMEXP_REDIST is not defined !!!"
-!endif
 
 ;UUID
 !define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
@@ -576,13 +573,11 @@ Section "!Install Files"
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.png`
 SectionEnd
 
-!if ${LAMEXP_REDIST} != 0
-	Section "-Install VCRedist"
-		!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_VCREDIST)"
-		File /a `/oname=$PLUGINSDIR\vcredist_x86.exe` `${LAMEXP_SOURCE_PATH}\redist\vcredist_x86.exe`
-		ExecWait '"$PLUGINSDIR\vcredist_x86.exe" /install /passive /norestart'
-	SectionEnd
-!endif
+# Section "-Install VCRedist"
+# 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_VCREDIST)"
+# 	File /a `/oname=$PLUGINSDIR\vcredist_x86.exe` `${LAMEXP_SOURCE_PATH}\redist\vcredist_x86.exe`
+# 	ExecWait '"$PLUGINSDIR\vcredist_x86.exe" /install /passive /norestart'
+# SectionEnd
 
 Section "-Write Uninstaller"
 	!insertmacro PrintProgress "$(LAMEXP_LANG_STATUS_MAKEUNINST)"

@@ -111,15 +111,16 @@ if "%LAMEXP_REDIST%"=="1" (
 		copy "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
 	)
 	copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%PATH_VCTOOL%.CRT\*.dll" "%TMP_PATH%"
-	if exist "%PATH_MSCDIR%\VC\redist\1033\vcredist_x86.exe" (
-		mkdir "%TMP_PATH%\redist"
-		copy "%PATH_MSCDIR%\VC\redist\1033\vcredist_x86.exe" "%TMP_PATH%\redist"
+	if %PATH_VCTOOL% GEQ 140 (
+		copy "%PATH_WINSDK%\\Redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
 	)
 )
 
-for %%e in (exe,dll) do (
-	for %%f in (%TMP_PATH%\*.%%e) do (
-		"%PATH_UPXBIN%\upx.exe" --best "%%f"
+for %%e in (LameXP,Qt,MUtils) do (
+	for %%x in (exe,dll) do (
+		for %%f in (%TMP_PATH%\%%e*.%%x) do (
+			"%PATH_UPXBIN%\upx.exe" --best "%%f"
+		)
 	)
 )
 
@@ -169,12 +170,12 @@ pushd "%TMP_PATH%"
 "%~dp0\..\Utilities\Zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
 popd
 
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_REDIST=%LAMEXP_REDIST%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%"     "%~dp0\..\NSIS\setup.nsi"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
 )
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_REDIST=%LAMEXP_REDIST%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
