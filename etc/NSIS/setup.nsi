@@ -531,6 +531,8 @@ FunctionEnd
 	Delete ${options} "$INSTDIR\concrt*.dll"
 	Delete ${options} "$INSTDIR\vcruntime*.dll"
 	Delete ${options} "$INSTDIR\vccorlib*.dll"
+	Delete ${options} "$INSTDIR\api-ms-*.dll"
+	Delete ${options} "$INSTDIR\ucrtbase.dll"
 	
 	RMDir /r ${options} "$INSTDIR\cache"
 	RMDir /r ${options} "$INSTDIR\img"
@@ -643,7 +645,7 @@ SectionEnd
 
 Section "-Finished"
 	!insertmacro PrintProgress "$(MUI_TEXT_FINISH_TITLE)."
-	
+
 !ifdef LAMEXP_IS_PRERELEASE
 	${If} ${FileExists} "$INSTDIR\PRE_RELEASE_INFO.txt"
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\PRE_RELEASE_INFO.txt" "open" ""
@@ -821,6 +823,7 @@ FunctionEnd
 
 Function .onInstSuccess
 	${If} ${UnattendedMode}
+		Sleep 1500
 		!insertmacro GetExecutableName $R0
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\$R0" "open" "--first-run"
 	${EndIf}
