@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU" sourcelanguage="en">
+<TS version="2.1" language="ru_RU" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1949,7 +1949,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="5054"/>
         <source>Translator&apos;s Guide</source>
-        <translation>Руководство перевдчика</translation>
+        <translation>Руководство переводчика</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5063"/>
