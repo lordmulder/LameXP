@@ -1217,32 +1217,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3776"/>
         <source>Replacement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Замена:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3789"/>
         <source>Search Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон поиска:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3818"/>
         <source>&lt;a href=&quot;regexp&quot;&gt;Regular Expression Info&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;regexp&quot;&gt;Информация о регулярных выражениях&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3844"/>
         <source>Replace all Matching Elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить все подходящие элементы</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3894"/>
         <source>Enter the desired search pattern (regular expression) here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите желаемый шаблон поиска (регулярное выражение) здесь!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3941"/>
         <source>Enter replacement text here! It may contain backreferences.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите текст замены здесь! Он может содержать обратные ссылки.</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
@@ -1257,12 +1257,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
         <source>Rename Files </source>
-        <translation type="unfinished"></translation>
+        <translation>Переименование файлов</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation type="unfinished"></translation>
+        <translation>Регулярные выражения</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
