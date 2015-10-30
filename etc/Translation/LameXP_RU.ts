@@ -770,22 +770,22 @@
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="140"/>
         <source>File Extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширение файла</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
         <source>Replace With</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="189"/>
         <source>Select file extensions to overwrite:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите файловое расширение для перезаписи:</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="208"/>
         <source>Enter the new file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите новое файловое расширение:</translation>
     </message>
 </context>
 <context>
@@ -1247,12 +1247,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить перезапись</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить перезапись</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
@@ -1267,7 +1267,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
         <source>File Extensions </source>
-        <translation type="unfinished"></translation>
+        <translation>Расширения файлов</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4524"/>
@@ -1532,7 +1532,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1488"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Руководство</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
@@ -2358,12 +2358,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2429"/>
         <source>Filter Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтровать файлы</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2429"/>
         <source>Select filename filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите фильтр по имени файла:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2761"/>
