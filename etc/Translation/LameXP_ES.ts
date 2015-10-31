@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES" sourcelanguage="en">
+<TS version="2.1" language="es_ES" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -763,22 +763,22 @@
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="140"/>
         <source>File Extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensión de archivo</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
         <source>Replace With</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazar con</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="189"/>
         <source>Select file extensions to overwrite:</source>
-        <translation type="unfinished"></translation>
+        <translation>Elija una extesión para sobrescribir:</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="208"/>
         <source>Enter the new file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca una extensión nueva:</translation>
     </message>
 </context>
 <context>
@@ -1019,57 +1019,57 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3776"/>
         <source>Replacement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sustitución:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3789"/>
         <source>Search Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Patrón de búsqueda:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3818"/>
         <source>&lt;a href=&quot;regexp&quot;&gt;Regular Expression Info&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;regexp&quot;&gt;Información sobre las expresiones regulares&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3844"/>
         <source>Replace all Matching Elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazar todos los elementos coincidentes</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3894"/>
         <source>Enter the desired search pattern (regular expression) here!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Introduzca el patrón de búsqueda (expresión regular) aquí!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3941"/>
         <source>Enter replacement text here! It may contain backreferences.</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Introduzca el texto de sustitución aquí! Puede contener retrorreferencias.</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar regla</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar regla</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
         <source>Rename Files </source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrar archivos</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation type="unfinished"></translation>
+        <translation>Expresiones regulares</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
         <source>File Extensions </source>
-        <translation type="unfinished"></translation>
+        <translation>Extensiones de archivos</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4590"/>
@@ -1298,7 +1298,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1488"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>el manual de usario</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1501"/>
@@ -2144,7 +2144,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1488"/>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation>¡Por favor, consulte el documento%1 para ver detalles y soluciones!</translation>
+        <translation>¡Por favor, consulte %1 para ver detalles y soluciones!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1489"/>
@@ -2348,12 +2348,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2429"/>
         <source>Filter Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrar archivos</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2429"/>
         <source>Select filename filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Elija un filtro por nombre de archivo:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2761"/>
