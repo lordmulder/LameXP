@@ -652,11 +652,7 @@ Section "-Finished"
 	${EndIf}
 !endif
 
-	${If} ${UnattendedMode}
-		Sleep 1500
-		SetAutoClose true
-		HideWindow
-	${EndIf}
+	${IfThen} ${UnattendedMode} ${|} SetAutoClose true ${|}
 SectionEnd
 
 
