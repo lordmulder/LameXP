@@ -652,7 +652,11 @@ Section "-Finished"
 	${EndIf}
 !endif
 
-	${IfThen} ${UnattendedMode} ${|} SetAutoClose true ${|}
+	${If} ${UnattendedMode}
+		Sleep 1500
+		SetAutoClose true
+		HideWindow
+	${EndIf}
 SectionEnd
 
 
@@ -823,7 +827,6 @@ FunctionEnd
 
 Function .onInstSuccess
 	${If} ${UnattendedMode}
-		Sleep 1500
 		!insertmacro GetExecutableName $R0
 		${StdUtils.ExecShellAsUser} $R1 "$INSTDIR\$R0" "open" "--first-run"
 	${EndIf}

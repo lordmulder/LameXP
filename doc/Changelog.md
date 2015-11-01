@@ -6,6 +6,7 @@
 
 * Upgraded build environment to Microsoft Visual Studio 2015
 * Updated Vorbis encoder to OggEnc v2.88 (2015-09-10), using libvorbis v1.3.5 and aoTuV b6.03_2015
+* Updated MediaInfo to v0.7.78 (2015-10-02), compiled with ICL 15.0 and MSVC 12.0
 * Fixed resampling bug with Vorbis encoder, regression in OggEnc v2.87
 * Fixed creation of Monkey's Audio (APE) files, when **no** meta data is being embedded
 
