@@ -19,10 +19,10 @@
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
 
-LangString LAMEXP_LANG_STATUS_CLEANUP      ${LANG_SPANISH} "Cleaning up, please wait..."
+LangString LAMEXP_LANG_STATUS_CLEANUP      ${LANG_SPANISH} "Limpiando, espere por favor..."
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_SPANISH} "Cerrando instancias en ejecución, espere por favor..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_SPANISH} "Instalando archivos de programa, espere por favor..."
-LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_SPANISH} "Installing runtime libraries, please wait..."
+LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_SPANISH} "Instalando bibliotecas de ejecución, espere por favor..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_SPANISH} "Creando desinstalador, espere por favor..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_SPANISH} "Creando accesos directos, espere por favor..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_SPANISH} "Actualizando el registro, espere por favor..."

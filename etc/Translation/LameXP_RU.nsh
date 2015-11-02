@@ -19,10 +19,10 @@
 ; // http://www.gnu.org/licenses/gpl-2.0.txt
 ; ///////////////////////////////////////////////////////////////////////////////
 
-LangString LAMEXP_LANG_STATUS_CLEANUP      ${LANG_RUSSIAN} "Cleaning up, please wait..."
+LangString LAMEXP_LANG_STATUS_CLEANUP      ${LANG_RUSSIAN} "Производится очистка; пожалуйста, подождите..."
 LangString LAMEXP_LANG_STATUS_CLOSING      ${LANG_RUSSIAN} "Закрываю работающие копии программы; пожалуйста, подождите..."
 LangString LAMEXP_LANG_STATUS_INSTFILES    ${LANG_RUSSIAN} "Устанавливаю файлы программы; пожалуйста, подождите..."
-LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_RUSSIAN} "Installing runtime libraries, please wait..."
+LangString LAMEXP_LANG_STATUS_VCREDIST     ${LANG_RUSSIAN} "Установка библиотек исполнения; пожалуйста, подождите..."
 LangString LAMEXP_LANG_STATUS_MAKEUNINST   ${LANG_RUSSIAN} "Создаю деинсталлятор; пожалуйста, подождите..."
 LangString LAMEXP_LANG_STATUS_SHORTCUTS    ${LANG_RUSSIAN} "Создаю ярлыки; пожалуйста, подождите..."
 LangString LAMEXP_LANG_STATUS_REGISTRY     ${LANG_RUSSIAN} "Обновляю реестр; пожалуйста, подождите..."
