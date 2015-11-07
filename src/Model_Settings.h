@@ -171,6 +171,7 @@ public:
 	LAMEXP_MAKE_OPTION_B(forceStereoDownmix)
 	LAMEXP_MAKE_OPTION_B(hibernateComputer)
 	LAMEXP_MAKE_OPTION_I(interfaceStyle)
+	LAMEXP_MAKE_OPTION_B(keepOriginalDataTime)
 	LAMEXP_MAKE_OPTION_I(lameAlgoQuality)
 	LAMEXP_MAKE_OPTION_I(lameChannelMode)
 	LAMEXP_MAKE_OPTION_I(licenseAccepted)

@@ -620,6 +620,10 @@ void ProcessingDialog::startNextJob(void)
 	{
 		thread->setOverwriteMode((m_settings->overwriteMode() == SettingsModel::Overwrite_SkipFile), (m_settings->overwriteMode() == SettingsModel::Overwrite_Replaces));
 	}
+	if (m_settings->keepOriginalDataTime())
+	{
+		thread->setKeepDateTime(m_settings->keepOriginalDataTime());
+	}
 
 	m_allJobs.append(thread->getId());
 	

@@ -504,6 +504,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	SET_CHECKBOX_STATE(ui->checkBoxRename_RegExp,              m_settings->renameFiles_regExpEnabled());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmix());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResample());
+	SET_CHECKBOX_STATE(ui->checkBoxKeepOriginalDateTime,       m_settings->keepOriginalDataTime());
 
 	ui->checkBoxNeroAAC2PassMode->setEnabled(aacEncoder == SettingsModel::AAC_ENCODER_NERO);
 	
@@ -593,6 +594,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	connect(ui->buttonRename_FileEx,                SIGNAL(clicked(bool)),                    this, SLOT(renameButtonClicked(bool)));
 	connect(ui->buttonFileExts_Add,                 SIGNAL(clicked()),                        this, SLOT(fileExtAddButtonClicked()));
 	connect(ui->buttonFileExts_Remove,              SIGNAL(clicked()),                        this, SLOT(fileExtRemoveButtonClicked()));
+	connect(ui->checkBoxKeepOriginalDateTime,       SIGNAL(clicked(bool)),                    this, SLOT(keepOriginalDateTimeChanged(bool)));
 	connect(m_overwriteButtonGroup.data(),          SIGNAL(buttonClicked(int)),               this, SLOT(overwriteModeChanged(int)));
 	connect(m_evenFilterCustumParamsHelp.data(),    SIGNAL(eventOccurred(QWidget*, QEvent*)), this, SLOT(customParamsHelpRequested(QWidget*, QEvent*)));
 	connect(fileExtModel,                           SIGNAL(modelReset()),                     this, SLOT(fileExtModelChanged()));
@@ -4398,6 +4400,10 @@ void MainWindow::showCustomParamsHelpScreen(const QString &toolName, const QStri
 	dialog->exec(output);
 }
 
+/*
+* File overwrite mode has changed
+*/
+
 void MainWindow::overwriteModeChanged(int id)
 {
 	if((id == SettingsModel::Overwrite_Replaces) && (m_settings->overwriteMode() != SettingsModel::Overwrite_Replaces))
@@ -4411,6 +4417,14 @@ void MainWindow::overwriteModeChanged(int id)
 	}
 
 	m_settings->overwriteMode(id);
+}
+
+/*
+* Keep original date/time opertion changed
+*/
+void MainWindow::keepOriginalDateTimeChanged(bool checked)
+{
+	m_settings->keepOriginalDataTime(checked);
 }
 
 /*
@@ -4448,7 +4462,8 @@ void MainWindow::resetAdvancedOptionsButtonClicked(void)
 	SET_CHECKBOX_STATE(ui->checkBoxRename_RegExp,              m_settings->renameFiles_regExpEnabledDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxForceStereoDownmix,         m_settings->forceStereoDownmixDefault());
 	SET_CHECKBOX_STATE(ui->checkBoxOpusDisableResample,        m_settings->opusDisableResampleDefault());
-	
+	SET_CHECKBOX_STATE(ui->checkBoxKeepOriginalDateTime,       m_settings->keepOriginalDataTimeDefault());
+
 	ui->lineEditCustomParamLAME     ->setText(m_settings->customParametersLAMEDefault());
 	ui->lineEditCustomParamOggEnc   ->setText(m_settings->customParametersOggEncDefault());
 	ui->lineEditCustomParamNeroAAC  ->setText(m_settings->customParametersAacEncDefault());

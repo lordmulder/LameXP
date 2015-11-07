@@ -253,6 +253,7 @@ LAMEXP_MAKE_ID(favoriteOutputFolders,        "OutputDirectory/Favorites");
 LAMEXP_MAKE_ID(forceStereoDownmix,           "AdvancedOptions/StereoDownmix/Force");
 LAMEXP_MAKE_ID(hibernateComputer,            "AdvancedOptions/HibernateComputerOnShutdown");
 LAMEXP_MAKE_ID(interfaceStyle,               "InterfaceStyle");
+LAMEXP_MAKE_ID(keepOriginalDataTime,         "AdvancedOptions/FileOperations/KeepOriginalDataTime");
 LAMEXP_MAKE_ID(lameAlgoQuality,              "AdvancedOptions/LAME/AlgorithmQuality");
 LAMEXP_MAKE_ID(lameChannelMode,              "AdvancedOptions/LAME/ChannelMode");
 LAMEXP_MAKE_ID(licenseAccepted,              "LicenseAccepted");
@@ -272,7 +273,7 @@ LAMEXP_MAKE_ID(opusFramesize,                "AdvancedOptions/Opus/FrameSize");
 LAMEXP_MAKE_ID(opusOptimizeFor,              "AdvancedOptions/Opus/OptimizeForSignalType");
 LAMEXP_MAKE_ID(outputDir,                    "OutputDirectory/SelectedPath");
 LAMEXP_MAKE_ID(outputToSourceDir,            "OutputDirectory/OutputToSourceFolder");
-LAMEXP_MAKE_ID(overwriteMode,                "AdvancedOptions/OverwriteMode");
+LAMEXP_MAKE_ID(overwriteMode,                "AdvancedOptions/FileOperations/OverwriteMode");
 LAMEXP_MAKE_ID(prependRelativeSourcePath,    "OutputDirectory/PrependRelativeSourcePath");
 LAMEXP_MAKE_ID(renameFiles_regExpEnabled,    "AdvancedOptions/RenameOutputFiles/RegExp/Enabled");
 LAMEXP_MAKE_ID(renameFiles_regExpSearch,     "AdvancedOptions/RenameOutputFiles/RegExp/SearchPattern");
@@ -652,6 +653,7 @@ LAMEXP_MAKE_OPTION_S(favoriteOutputFolders, QString())
 LAMEXP_MAKE_OPTION_B(forceStereoDownmix, false)
 LAMEXP_MAKE_OPTION_B(hibernateComputer, false)
 LAMEXP_MAKE_OPTION_I(interfaceStyle, 0)
+LAMEXP_MAKE_OPTION_B(keepOriginalDataTime, false)
 LAMEXP_MAKE_OPTION_I(lameAlgoQuality, 2)
 LAMEXP_MAKE_OPTION_I(lameChannelMode, 0)
 LAMEXP_MAKE_OPTION_I(licenseAccepted, 0)

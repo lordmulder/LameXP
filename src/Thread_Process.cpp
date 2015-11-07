@@ -72,6 +72,7 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_prependRelativeSourcePath(prependRelativeSourcePath),
 	m_renamePattern("<BaseName>"),
 	m_overwriteMode(OverwriteMode_KeepBoth),
+	m_keepDateTime(false),
 	m_initialized(-1),
 	m_aborted(false),
 	m_propDetect(new WaveProperties())
@@ -340,7 +341,7 @@ void ProcessThread::processFile()
 	// Finalize
 	//-----------------------------------------------------
 
-	if (bSuccess && (!m_aborted))
+	if (bSuccess && (!m_aborted) && m_keepDateTime)
 	{
 		updateFileTime(m_audioFile.filePath(), m_outFileName);
 	}
@@ -748,6 +749,11 @@ void ProcessThread::setOverwriteMode(const bool &bSkipExistingFile, const bool &
 		if(bSkipExistingFile) m_overwriteMode = OverwriteMode_SkipExisting;
 		if(bReplacesExisting) m_overwriteMode = OverwriteMode_Overwrite;
 	}
+}
+
+void ProcessThread::setKeepDateTime(const bool &keepDateTime)
+{
+	m_keepDateTime = keepDateTime;
 }
 
 ////////////////////////////////////////////////////////////

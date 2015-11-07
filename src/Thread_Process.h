@@ -50,6 +50,7 @@ public:
 	void setRenameRegExp(const QString &search, const QString &replace);
 	void setRenameFileExt(const QString &fileExtension);
 	void setOverwriteMode(const bool &bSkipExistingFile, const bool &bReplacesExisting = false);
+	void setKeepDateTime(const bool &keepDateTime);
 	void addFilter(AbstractFilter *filter);
 
 public slots:
@@ -112,6 +113,7 @@ private:
 	QString m_renameRegExp_Replace;
 	QString m_renameFileExt;
 	int m_overwriteMode;
+	bool m_keepDateTime;
 	WaveProperties *m_propDetect;
 	QString m_outFileName;
 };

@@ -125,6 +125,7 @@ private slots:
 	void importCsvContextActionTriggered(void);
 	void initOutputFolderModel(void);
 	void initOutputFolderModel_doAsync(void);
+	void keepOriginalDateTimeChanged(bool checked);
 	void languageActionActivated(QAction *action);
 	void languageFromFileActionActivated(bool checked);
 	void makeFolderButtonClicked(void);
