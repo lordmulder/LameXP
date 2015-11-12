@@ -1070,12 +1070,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation type="unfinished"></translation>
+        <translation>文件处理</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
         <source>Apply the &quot;creation&quot; and &quot;last modified&quot; date/time of the original file to the converted file</source>
-        <translation type="unfinished"></translation>
+        <translation>对转换后的文件应用原文件的“创建时间”及“修改时间”</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4613"/>
