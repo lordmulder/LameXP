@@ -11,8 +11,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="610"/>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translatorcomment>Scegliere fra richiesta e offerta (the offer) -  rispondere o accettare</translatorcomment>
-        <translation>Nota: LameXP è un software gratuito. &lt;b&gt;Non&lt;/b&gt; pagare per avere o usare LameXP! Se qualche sito web di terze parti chiede di essere pagato per farti scaricare LameXP, &lt;b&gt;non&lt;/b&gt; dovresti accettare l&apos;offerta!!!</translation>
+        <translation>Nota: LameXP è un software gratuito. &lt;b&gt;Non&lt;/b&gt; pagare nulla per avere o per usare LameXP! Se qualche sito web di terze parti chiede di essere pagato per farti scaricare LameXP, &lt;b&gt;non&lt;/b&gt; accettare l&apos;offerta!!!</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="20"/>
@@ -37,14 +36,13 @@
     <message>
         <location filename="../../gui/AboutDialog.ui" line="138"/>
         <source>Contributors</source>
-        <translatorcomment>Alternativa: Hanno contribuito</translatorcomment>
         <translation>Collaboratori</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="535"/>
         <source>Discard</source>
-        <translatorcomment>Annulla - Abbandona (la finestra).Esci</translatorcomment>
-        <translation>Esci</translation>
+        <translatorcomment>Annulla - Abbandona (la finestra).Esci---Chiudi</translatorcomment>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="624"/>
@@ -103,7 +101,7 @@
         <location filename="../../src/Dialog_About.cpp" line="711"/>
         <source>Open and patent-free lossless audio compression technology.</source>
         <translatorcomment> libera e non vincolata da brevetti.</translatorcomment>
-        <translation>Tecnologia di compressione audio lossless aperta e non vincolata da brevetti.</translation>
+        <translation>Tecnologia di compressione audio lossless aperta e libera da brevetti.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="919"/>
@@ -131,7 +129,7 @@
         <location filename="../../src/Dialog_About.cpp" line="863"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translatorcomment>utilizzati</translatorcomment>
-        <translation>Il copyright di LameXP nel suo complesso appartiene LoRd_MuldeR. Il copyright di software di terze parti usati in LameXP appartiene ai singoli autori.</translation>
+        <translation>Il copyright di LameXP nel suo complesso appartiene a LoRd_MuldeR. Il copyright del software di terze parti usati in LameXP appartiene ai singoli autori.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="563"/>
@@ -169,7 +167,8 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="765"/>
         <source>Monkey&apos;s Audio - Lossless Audio Compressor</source>
-        <translation>Monkey&apos;s Audio - Lossless Audio Compressor</translation>
+        <translatorcomment>Compressore Audio Lossless</translatorcomment>
+        <translation>Monkey&apos;s Audio - Compressore Audio Lossless</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="786"/>
@@ -179,7 +178,8 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="821"/>
         <source>MediaInfo - Media File Analysis Tool</source>
-        <translation>MediaInfo - Media File Analysis Tool</translation>
+        <translatorcomment>MediaInfo - Media File Analysis Tool-------MediaInfo - Strumento di Analisi Files MultiMediali</translatorcomment>
+        <translation>MediaInfo - Strumento di Analisi Files MultiMediali</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="828"/>
@@ -199,12 +199,13 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="758"/>
         <source>Musepack - Living Audio Compression</source>
-        <translation>Nero AAC Reference MPEG-4 Encoder</translation>
+        <translation>Musepack - Living Audio Compression</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="772"/>
         <source>Shorten - Lossless Audio Compressor</source>
-        <translation>Shorten - Lossless Audio Compressor</translation>
+        <translatorcomment>Compressore Audio Lossless</translatorcomment>
+        <translation>Shorten - Compressore Audio Lossless</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="779"/>
@@ -225,13 +226,13 @@
         <location filename="../../src/Dialog_About.cpp" line="578"/>
         <location filename="../../src/Dialog_About.cpp" line="590"/>
         <source>Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.</source>
-        <translatorcomment>scadrà a %1.-il %1.</translatorcomment>
-        <translation>Nota: Questa versione dimostrativa (pre-release) di LameXP scadrà il %1. Restano.ancora %2 giorni.</translation>
+        <translation>Nota: Questa versione dimostrativa (pre-rilascio) di LameXP scadrà il %1. Restano ancora %2 giorni.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="702"/>
         <source>Aften - A/52 audio encoder</source>
-        <translation>Aften - A/52 audio encoder</translation>
+        <translatorcomment>Aften - A/52 audio encoder---------Encoder audio A/52</translatorcomment>
+        <translation>Aften - Encoder audio A/52</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="802"/>
@@ -286,6 +287,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="716"/>
         <source>Opus Audio Codec</source>
+        <translatorcomment>Codec Audio Opus</translatorcomment>
         <translation>Opus Audio Codec</translation>
     </message>
     <message>
@@ -339,22 +341,23 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="744"/>
         <source>Valdec from AC3Filter Tools - AC3/DTS Decoder</source>
-        <translation>Valdec from AC3Filter Tools - AC3/DTS Decoder</translation>
+        <translatorcomment>Valdec from AC3Filter Tools - AC3/DTS Decoder---------Valdec da AC3Filter Tools - Decoder AC3/DTS</translatorcomment>
+        <translation>Valdec da AC3Filter Tools - Decoder AC3/DTS</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="654"/>
         <source>Official Mirrors:</source>
-        <translation>Mirrors Ufficiali:</translation>
+        <translation>Mirror Ufficiali:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="687"/>
         <source>OggEnc - Vorbis Encoder</source>
-        <translation>OggEnc - Vorbis Encoder</translation>
+        <translation>OggEnc - Encoder Vorbis</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="737"/>
         <source>OggDec - Vorbis Decoder</source>
-        <translation>OggEnc - Vorbis Encoder</translation>
+        <translation>OggDec - Decoder Vorbis</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="739"/>
@@ -434,7 +437,8 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="120"/>
         <source>Loading Cue Sheet file, please be patient...</source>
-        <translation>E&apos;in corso lo scaricamento dell&apos;aggiornamento, sei pregato di pazientare...</translation>
+        <translatorcomment>Caricamento del file Cue Sheet, sei pregato di pazientare...Caricamento del file Cue Sheet, attendere, prego...</translatorcomment>
+        <translation>Caricamento del file Cue Sheet, attendere, prego...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="208"/>
@@ -445,7 +449,8 @@
         <location filename="../../src/Dialog_CueImport.cpp" line="125"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="226"/>
         <source>Failed to load the Cue Sheet file:</source>
-        <translation>Impossibile caricare il file Cue Sheet:</translation>
+        <translatorcomment>Il caricamento del file Cue Sheet è fallito:--------Impossibile caricare il file Cue Sheet:</translatorcomment>
+        <translation>Il caricamento del file Cue Sheet è fallito:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="126"/>
@@ -454,7 +459,8 @@
         <location filename="../../src/Dialog_CueImport.cpp" line="442"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>Cue Sheet Error</source>
-        <translation>Cue Sheet Errore</translation>
+        <translatorcomment>Cue Sheet</translatorcomment>
+        <translation>Errore Cue Sheet</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="125"/>
@@ -469,13 +475,12 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="216"/>
         <source>The provided file does not look like a valid Cue Sheet disc image file!</source>
-        <translation>Il file fornito non sembra un Cue Sheet file di immagine disco valido!</translation>
+        <translation>Il file fornito non sembra un  valido Cue Sheet di immagine disco!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="219"/>
         <source>Could not find any supported audio track in the Cue Sheet image!</source>
-        <translatorcomment>Impossibile trovare una qualsiasi traccia audio supportata nel file immagine Cue!</translatorcomment>
-        <translation>Non è stata trovata nessuna traccia audio supportata nel file immagine Cue!</translation>
+        <translation>Nel file immagine Cue non è stata trovata nessuna traccia audio supportata!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="219"/>
@@ -485,14 +490,15 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="222"/>
         <source>The selected Cue Sheet file contains inconsistent information. Take care!</source>
-        <translation>Il file Cue Sheet selezionato contiene informazioni contraddittorie. Stai attento!</translation>
+        <translatorcomment>OLD: Il file Cue Sheet selezionato contiene informazioni incoerenti. Fai attenzione!---NEW: Attenzione: il file Cue Sheet selezionato contiene informazioni incoerenti.</translatorcomment>
+        <translation>Attenzione: il file Cue Sheet selezionato contiene informazioni incoerenti.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="266"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="270"/>
         <source>Choose Output Directory</source>
-        <translatorcomment>Scegli la directory di salvataggio-------------Scegli il Percorso di Uscita</translatorcomment>
-        <translation>Scegli la Directory di Salvataggio</translation>
+        <translatorcomment>Scegli la directory di salvataggio-------------Scegli il Percorso di Uscita---------Scegliere la Directory di Salvataggio</translatorcomment>
+        <translation>Scegliere la Cartella di Salvataggio</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
@@ -503,7 +509,8 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="303"/>
         <source>Error: The selected output directory is not writable!</source>
-        <translation>Errore: La directory di salvataggio selezionata non è accessibile in scrittura!</translation>
+        <translatorcomment>Errore:La cartella selezionata non è scrivibile</translatorcomment>
+        <translation>Errore: Impossibile scrivere nella cartella selezionata</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
@@ -513,24 +520,25 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>There are less than %1 GB of free diskspace available in the selected output directory.</source>
-        <translation>Ci sono meno di%1 GB di spazio libero su disco disponibile nella directory di salvataggio selezionata.</translation>
+        <translatorcomment>Lo spazio libero su disco disponibile nella directory di salvataggio selezionata è inferiore a %1 GB.</translatorcomment>
+        <translation>Lo spazio libero disponibile nella cartella selezionata è inferiore a %1 GB.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="317"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the import!</source>
-        <translatorcomment>E &apos;altamente consigliato liberare più spazio su disco prima di procedere con l&apos;importazione!</translatorcomment>
-        <translation>E&apos; fortemente raccomandato liberare più spazio su disco prima di procedere con l&apos;importazione!</translation>
+        <translatorcomment>OLD---E&apos; fortemente raccomandato liberare più spazio su disco prima di procedere con l&apos;importazione!-------E&apos; consigliato liberare più spazio su disco prima di procedere.</translatorcomment>
+        <translation>E&apos; consigliato liberare più spazio su disco prima di procedere.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="405"/>
         <source>Analyzing file(s), please wait...</source>
-        <translation>Analizzando i file, attendere prego...</translation>
+        <translation>Analisi in corso, attendere, prego...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="437"/>
         <source>Splitting file(s), please wait...</source>
         <translatorcomment>Dividendo i file, attendere prego...</translatorcomment>
-        <translation>E&apos; in corso la divisione del file/dei files, attendere prego...</translation>
+        <translation>Divisione file in corso, attendere, prego...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="296"/>
@@ -540,7 +548,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="446"/>
         <source>An unexpected error has occured while splitting the Cue Sheet!</source>
-        <translation>Si è verificato un errore imprevisto durante la divisione del Cue Sheet!</translation>
+        <translation>Si è verificato un errore imprevisto durante la divisione del Cue Sheet.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="451"/>
@@ -550,19 +558,20 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Analysis Failed</source>
-        <translation>Analisi non riuscita</translation>
+        <translation>Analisi Fallita</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Warning: The format of some of the input files could not be determined!</source>
         <translatorcomment>Attenzione: Il formato di alcuni dei file di input non poteva essere determinato!</translatorcomment>
-        <translation>Attenzione: Il formato di alcuni files importati non può essere determinato!</translation>
+        <translation>Attenzione: Il formato di alcuni file importati non può essere determinato.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <location filename="../../src/Dialog_CueImport.cpp" line="410"/>
         <source>Continue Anyway</source>
-        <translation>Tuttavia Continua</translation>
+        <translatorcomment>Continua Comunque</translatorcomment>
+        <translation>Continua Comunque</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
@@ -579,7 +588,7 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="161"/>
         <source>Select ANSI Codepage for Cue Sheet file:</source>
-        <translation>Seleziona Codifica ANSI per il file Cue Sheet:</translation>
+        <translation>Selezionare Codifica ANSI per il file Cue Sheet:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="162"/>
@@ -589,7 +598,8 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="163"/>
         <source>Cancel</source>
-        <translation>Cancella</translation>
+        <translatorcomment>Annulla</translatorcomment>
+        <translation>Annulla</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="244"/>
@@ -633,7 +643,8 @@
     <message>
         <location filename="../../src/Dialog_CueImport.cpp" line="369"/>
         <source>Warning: Some of the required input files could not be found!</source>
-        <translation>Attenzione: Alcuni files di input richiesti non sono stati trovati!</translation>
+        <translatorcomment>Attenzione: Alcuni file di origine necessari non sono stati trovati!</translatorcomment>
+        <translation>Attenzione: Alcuni file richiesti non sono stati trovati.</translation>
     </message>
 </context>
 <context>
@@ -647,7 +658,8 @@
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="570"/>
         <source> Output Directory </source>
-        <translation> Directory di Salvataggio </translation>
+        <translatorcomment>old---- Directory di Salvataggio -----</translatorcomment>
+        <translation> Cartella di Salvataggio </translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="594"/>
@@ -668,12 +680,12 @@
         <location filename="../../gui/CueSheetImport.ui" line="543"/>
         <source>Missing Source File (Tracks will be skipped!)</source>
         <translatorcomment>File Sorgente Mancante (Alcune tracce verranno saltate!)</translatorcomment>
-        <translation>File Sorgente Mancante (Alcune tracce saranno saltate!)</translation>
+        <translation>File Sorgente Mancante (Alcune tracce verranno saltate.)</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="631"/>
         <source>Load a different Cue Sheet</source>
-        <translation>Caricare un Cue Sheet diverso</translation>
+        <translation>Carica un Cue Sheet diverso</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="189"/>
@@ -691,7 +703,7 @@
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="207"/>
         <source>No.</source>
-        <translation>N.</translation>
+        <translation>N°</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="210"/>
@@ -706,7 +718,7 @@
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="242"/>
         <source>File %1</source>
-        <translation>File%1</translation>
+        <translation>File %1</translation>
     </message>
     <message>
         <location filename="../../src/Model_CueSheet.cpp" line="258"/>
@@ -741,12 +753,12 @@
     <message>
         <location filename="../../src/Registry_Decoder.cpp" line="177"/>
         <source>All files</source>
-        <translation>Tutti i files</translation>
+        <translation>Tutti i file</translation>
     </message>
     <message>
         <location filename="../../src/Registry_Decoder.cpp" line="176"/>
         <source>Playlists</source>
-        <translation>Playlists</translation>
+        <translation>Playlist</translation>
     </message>
 </context>
 <context>
@@ -754,7 +766,7 @@
     <message>
         <location filename="../../src/Thread_DiskObserver.cpp" line="92"/>
         <source>Low diskspace on drive &apos;%1&apos; detected (only %2 MB are free), problems can occur!</source>
-        <translation>Rilevato spazio disco insufficiente sull&apos;unità %1 (solo %2 MB sono liberi), possono presentarsi problemi!</translation>
+        <translation>Rilevato spazio disco insufficiente sull&apos;unità %1 (solo %2 MB sono liberi), possono presentarsi problemi.</translation>
     </message>
 </context>
 <context>
@@ -762,7 +774,7 @@
     <message>
         <location filename="../../gui/DropBox.ui" line="14"/>
         <source>LameXP - DropBox</source>
-        <translation>LameXP - DropBox</translation>
+        <translation>DropBox - LameXP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="134"/>
@@ -772,12 +784,12 @@
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="134"/>
         <source>You can add files to LameXP via Drag&amp;amp;Drop here!</source>
-        <translation>Puoi aggiungere files a LameXP facendo Drag&amp;amp;Drop qui!</translation>
+        <translation>Puoi aggiungere file a LameXP facendo Drag&amp;amp;Drop qui.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_DropBox.cpp" line="134"/>
         <source>(Right-click to close the DropBox)</source>
-        <translation>(Clicca con il tasto sinistro per chiudere la DropBox)</translation>
+        <translation>(Clic con il tasto destro per chiudere la DropBox)</translation>
     </message>
 </context>
 <context>
@@ -796,11 +808,12 @@
         <location filename="../../src/Model_FileExts.cpp" line="189"/>
         <source>Select file extensions to overwrite:</source>
         <translatorcomment>Seleziona le estensioni dei files da sovrascrivere:----------------------Seleziona le estensioni file da sovrascrivere:</translatorcomment>
-        <translation>Seleziona le estensioni dei files da sovrascrivere:</translation>
+        <translation>Seleziona le estensioni file da sovrascrivere:</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="208"/>
         <source>Enter the new file extension:</source>
+        <translatorcomment>old-----Digita la nuova estensione file:</translatorcomment>
         <translation>Digita la nuova estensione file:</translation>
     </message>
 </context>
@@ -835,7 +848,7 @@
     <message>
         <location filename="../../src/Model_FileList.cpp" line="356"/>
         <source>Cancel</source>
-        <translation>Cancella</translation>
+        <translation>Annulla</translation>
     </message>
 </context>
 <context>
@@ -848,7 +861,7 @@
     <message>
         <location filename="../../gui/LogViewDialog.ui" line="308"/>
         <source>Discard</source>
-        <translation>Annulla</translation>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <location filename="../../gui/LogViewDialog.ui" line="331"/>
@@ -882,12 +895,12 @@
         <location filename="../../gui/MainWindow.ui" line="50"/>
         <location filename="../../gui/MainWindow.ui" line="4844"/>
         <source>Source Files</source>
-        <translation>Files Sorgente</translation>
+        <translation>File Sorgente</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="94"/>
         <source>Add File(s)</source>
-        <translation>Aggiungi File(s)</translation>
+        <translation>Aggiungi File</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="117"/>
@@ -909,7 +922,7 @@
         <location filename="../../gui/MainWindow.ui" line="274"/>
         <location filename="../../gui/MainWindow.ui" line="4852"/>
         <source>Output Directory</source>
-        <translation>Directory di Destinazione</translation>
+        <translation>Cartella di Salvataggio</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="445"/>
@@ -935,7 +948,7 @@
         <location filename="../../gui/MainWindow.ui" line="567"/>
         <source>Save output files to the same location where the input file is located</source>
         <translatorcomment>Salva i file creati nella stessa posizione in cui si trovano i file sorgente------------Salva i nuovi files nella stessa posizione in cui si trovano i files di origine-----Salva i nuovi files nella stessa posizione in cui si trovano i files originali</translatorcomment>
-        <translation>Salva i nuovi files nella stessa posizione in cui si trovano i files di origine</translation>
+        <translation>Salva i nuovi file nello stesso percorso in cui si trovano i file di origine</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="590"/>
@@ -951,7 +964,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="620"/>
         <source> Meta Information </source>
-        <translation>Meta Informazioni</translation>
+        <translation> Meta Informazioni </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="654"/>
@@ -961,7 +974,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="671"/>
         <source>Note: Meta information you enter here will &lt;u&gt;supersede&lt;/u&gt; data from the source!</source>
-        <translation>Nota: le Meta informazioni che inserisci qui &lt;u&gt;sostituiranno&lt;/u&gt; i dati del file sorgente!</translation>
+        <translation>Nota: le Meta informazioni che inserisci qui &lt;u&gt;sostituiranno&lt;/u&gt; i dati del file sorgente.</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="706"/>
@@ -993,7 +1006,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="804"/>
         <source> Encoder / Format </source>
-        <translation>Encoder / Formato</translation>
+        <translation> Encoder / Formato </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="911"/>
@@ -1003,7 +1016,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1028"/>
         <source> Rate Control Method </source>
-        <translation>Metodo di Controllo del Bitrate</translation>
+        <translation> Metodo di Controllo del Bitrate </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1052"/>
@@ -1023,7 +1036,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1132"/>
         <source> Quality / Bitrate </source>
-        <translation>Qualità / Bitrate</translation>
+        <translation> Qualità / Bitrate </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1171"/>
@@ -1186,7 +1199,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4924"/>
         <source>Clear All</source>
-        <translation>Cancella Tutto</translation>
+        <translation>Annulla Tutto</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4935"/>
@@ -1248,7 +1261,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1207"/>
         <source>You can drop in audio files here!</source>
-        <translation>Puo trascinare i files audio qui!</translation>
+        <translation>Puoi trascinare i files audio qui!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1213"/>
@@ -1517,13 +1530,13 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1554"/>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
-        <translation>Puoi scaricare l&apos;ultima versione dell&apos;encoder AAC Nero dal sito web di Nero a:</translation>
+        <translation>Puoi scaricare l&apos;ultima versione dell&apos;encoder Nero AAC dal sito web di Nero a:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1568"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
         <translatorcomment>L&apos;encoder AAC Nero non può essere trovato-----------L&apos;encoder AAC Nero non è stato trovato</translatorcomment>
-        <translation>&apos;encoder AAC Nero non è stato trovato. Il supporto alla codifica AAC verrà disabilitato.</translation>
+        <translation>L&apos;encoder Nero AAC non è stato trovato. Il supporto alla codifica AAC verrà disabilitato.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1569"/>
@@ -1538,7 +1551,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1572"/>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
-        <translation>Puoi scaricare l&apos;encoder AAC Nero gratuitamente dal sito web ufficiale di Nero a:</translation>
+        <translation>Puoi scaricare l&apos;encoder Nero AAC gratuitamente dal sito web ufficiale di Nero a:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1773"/>
@@ -1613,8 +1626,8 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1476"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translatorcomment>Questa versione dimostrativa (pre-releaseTest) di LameXP è scaduta il %1.</translatorcomment>
-        <translation>Questa versione dimostrativa (pre-release) di LameXP è scaduta il %1.</translation>
+        <translatorcomment>Questa versione dimostrativa (pre-rilascio) di LameXP è scaduta il %1.</translatorcomment>
+        <translation>Questa versione dimostrativa (pre-rilascio) di LameXP è scaduta il %1.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4504"/>
@@ -1630,7 +1643,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2286"/>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation>Sì</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2052"/>
@@ -1656,7 +1669,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2018"/>
         <source>Translation Files</source>
-        <translation>File di traduzione</translation>
+        <translation>Files di traduzione</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1553"/>
@@ -1691,7 +1704,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1528"/>
         <source> Bitrate Management (LAME and OggEnc2) </source>
-        <translation> Gestione Bitrate (LAME e OggEnc2) </translation>
+        <translation>Gestione Bitrate (LAME e OggEnc2) </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1568"/>
@@ -1711,7 +1724,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1871"/>
         <source>Channel Mode / Sampling Rate</source>
-        <translation> Modalità Canale / Frequenza di Campionamento</translation>
+        <translation>Modalità Canale / Frequenza di Campionamento</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1883"/>
@@ -1793,7 +1806,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2149"/>
         <source>Select AAC Profile:</source>
-        <translation>Selezionare Profilo AAC:</translation>
+        <translation>Seleziona Profilo AAC:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2168"/>
@@ -1835,8 +1848,8 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
         <source>Reset Advanced Options </source>
-        <translatorcomment>Ripristina le Opzioni Avanzate </translatorcomment>
-        <translation>Resetta le Opzioni Avanzate </translation>
+        <translatorcomment>Ripristina le Opzioni Avanzate Predefinite</translatorcomment>
+        <translation>Ripristina Opzioni Avanzate  Predefinite </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5042"/>
@@ -1873,17 +1886,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2286"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
-        <translation>Vuoi veramente disabilitare l&apos;integrazione della shell LameXP?</translation>
+        <translation>Vuoi veramente disabilitare l&apos;integrazione nella shell di LameXP?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2289"/>
         <source>The LameXP shell integration has been disabled.</source>
-        <translation>L&apos;integrazione della shell LameXP è stato disattivato.</translation>
+        <translation>L&apos;integrazione nella shell di LameXP è stata disattivata.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2300"/>
         <source>The LameXP shell integration has been re-enabled.</source>
-        <translation>L&apos;integrazione della shell LameXP è stato riattivato.</translation>
+        <translation>L&apos;integrazione nella shell di LameXP è stata riattivata.</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2668"/>
@@ -1904,12 +1917,13 @@
         <location filename="../../gui/MainWindow.ui" line="2846"/>
         <source>Warning: Custom parameters won&apos;t be checked at all. Use them at your own risk !!!</source>
         <translatorcomment>controllati completamente         controllati affatto</translatorcomment>
-        <translation>Attenzione: I parametri personalizzati non saranno controllati affatto. Usateli a vostro rischio e pericolo !!!</translation>
+        <translation>Attenzione: I parametri personalizzati non saranno controllati affatto. Usateli a vostro stesso rischio !!!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3007"/>
         <source> Multi-Threading </source>
-        <translation> Multi-Threading </translation>
+        <translatorcomment> Istanze parallele </translatorcomment>
+        <translation> Istanze Parallele </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3104"/>
@@ -1947,7 +1961,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1714"/>
         <source>Not Found</source>
-        <translation>Non Trovato</translation>
+        <translation>Non Trovata</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1714"/>
@@ -2005,7 +2019,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2409"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2413"/>
         <source>Add Folder</source>
-        <translation>Aggiungi cartella</translation>
+        <translation>Aggiungi Cartella</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5103"/>
@@ -2023,12 +2037,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2223"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
-        <translation>Vuoi davvero che LameXP controlli gli aggiornamenti Beta (pre-release)?</translation>
+        <translation>Vuoi davvero che LameXP controlli gli aggiornamenti Beta (pre-rilascio)?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2225"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
-        <translation>D&apos;ora in poi LameXP controllerà gli aggiornamenti Beta (pre-release).</translation>
+        <translation>D&apos;ora in poi LameXP controllerà gli aggiornamenti Beta (pre-rilascio).</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2225"/>
@@ -2047,7 +2061,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2238"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
-        <translation>D&apos;ora in poi LameXP &lt;i&gt;non&lt;/i&gt; controllerà gli aggiornamenti Beta (pre-release).</translation>
+        <translation>D&apos;ora in poi LameXP &lt;i&gt;non&lt;/i&gt; controllerà gli aggiornamenti Beta (pre-rilascio).</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2736"/>
@@ -2176,13 +2190,13 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2164"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2168"/>
         <source>Open Cue Sheet</source>
-        <translation>Aprire Cue Sheet</translation>
+        <translation>Apri Cue Sheet</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2164"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2170"/>
         <source>Cue Sheet File</source>
-        <translation>Cue Sheet file</translation>
+        <translation>File Cue Sheet</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="836"/>
@@ -2197,17 +2211,18 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="840"/>
         <source>Please use LameXP&apos;s Cue Sheet wizard for importing Cue Sheet files.</source>
-        <translation>Si prega di utilizzare Cue Sheet wizard di LameXP per l&apos;importazione di file Cue Sheet.</translation>
+        <translatorcomment>wizard - procedura guidata</translatorcomment>
+        <translation>Prego, usa il Cue Sheet Wizard di LameXP per importare files Cue Sheet.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1489"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
-        <translation>Sembra che un software antivirus fasullo sta rallentando l&apos;avvio di LameXP.</translation>
+        <translation>Sembra che un software antivirus fasullo stia rallentando l&apos;avvio di LameXP.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1490"/>
         <source>Please refer to the %1 document for details and solutions!</source>
-        <translation>Si prega di fare riferimento al documento %1 per dettagli e soluzioni!</translation>
+        <translation>Sei pregato di fare riferimento al documento %1 per dettagli e soluzioni!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1491"/>
@@ -2229,7 +2244,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2130"/>
         <source>Do you really want to disable the slow startup notifications?</source>
-        <translation>Sei sicuro di voler disattivare le notifiche di avvio lento?</translation>
+        <translation>Vuoi veramente disattivare le notifiche di avvio lento?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2132"/>
@@ -2249,7 +2264,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3665"/>
         <source>Rename Output Files</source>
-        <translation> Rinomina Files di Destinazione</translation>
+        <translation>Rinomina Files di Destinazione</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4175"/>
@@ -2259,7 +2274,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4176"/>
         <source>Track title</source>
-        <translation>Titolo del brano</translation>
+        <translation>Titolo della traccia</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4177"/>
@@ -2274,7 +2289,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4179"/>
         <source>Year with (at least) four digits</source>
-        <translation>Anno di (almeno) quattro cifre</translation>
+        <translation>Anno con (almeno) quattro cifre</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4180"/>
@@ -2285,7 +2300,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="4185"/>
         <source>Rename Macros</source>
         <translatorcomment>Macros di Rinomina ?????</translatorcomment>
-        <translation>Rinomina Macros</translation>
+        <translation>Macros di Rinomina</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2684"/>
@@ -2341,7 +2356,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2105"/>
         <source>AAC Encoder-Options</source>
-        <translation> Opzioni Encoder AAC </translation>
+        <translation>Opzioni-Encoder AAC</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2750"/>
@@ -2366,7 +2381,8 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="5128"/>
         <source>Hibernate Computer On Shutdown</source>
-        <translation>Ibernazione del Computer allo Spegnimento</translation>
+        <translatorcomment>Chiusura</translatorcomment>
+        <translation>Ibernazione del Computer alla Chiusura</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
@@ -2378,17 +2394,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2260"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
-        <translation>Vuoi davvero che il computer sia ibernato allo spegnimento?</translation>
+        <translation>Vuoi davvero che il computer sia ibernato alla chiusura?</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2262"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
-        <translation>D&apos;ora in poi LameXP ibernerà il computer allo spegnimento.</translation>
+        <translation>D&apos;ora in poi LameXP ibernerà il computer alla chiusura.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2272"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
-        <translation>D&apos;ora in poi LameXP &lt;i&gt;non&lt;/i&gt; ibernerà il computer allo spegnimento.</translation>
+        <translation>D&apos;ora in poi LameXP &lt;i&gt;non&lt;/i&gt; ibernerà il computer alla chiusura.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1556"/>
@@ -2398,6 +2414,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1519"/>
         <source>Skipping update check this time, please be patient...</source>
+        <translatorcomment>Stavolta </translatorcomment>
         <translation>Questa volta il controllo degli aggiornamenti verrà saltato, sii paziente prego...</translation>
     </message>
     <message>
@@ -2430,22 +2447,22 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2793"/>
         <source>CSV Export</source>
-        <translation>Esportazione File CSV </translation>
+        <translation>Esportazione CSV</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
-        <translation>Spiacenti, non ci sono meta tags da esportate!</translation>
+        <translation>Sono spiacente, non ci sono meta tags da esportate!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2787"/>
         <source>Sorry, failed to open CSV file for writing!</source>
-        <translation>Siamo spiacenti, non è riuscito ad aprire il file CSV per la scrittura!</translation>
+        <translation>Sono spiacente, l&apos;apertura del file CSV è fallita!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
         <source>Sorry, failed to write to the CSV file!</source>
-        <translation>Siamo spiacenti, non è riuscito a scrivere sul file CSV!</translation>
+        <translation>Sono spiacente, la scrittura sul file CSV è fallita!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2793"/>
@@ -2461,12 +2478,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2833"/>
         <source>Sorry, failed to open CSV file for reading!</source>
-        <translation>Siamo spiacenti, non è riuscito ad aprire il file CSV per la lettura!</translation>
+        <translation>Sono spiacente, l&apos;apertura del file CSV è fallita!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2836"/>
         <source>Sorry, failed to read from the CSV file!</source>
-        <translation>Siamo spiacenti, non è riuscito a leggere dal file CSV!</translation>
+        <translation>Sono spiacente, la lettura dal file CSV è fallita!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2839"/>
@@ -2476,12 +2493,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2842"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
-        <translation>File CSV è incompleto. Non tutti i file sono stati aggiornati!</translation>
+        <translation>Il file CSV è incompleto. Non tutti i files sono stati aggiornati!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2845"/>
         <source>The CSV files was imported successfully!</source>
-        <translation>I files CSV sono stati importato con successo!</translation>
+        <translation>I files CSV sono stati importati con successo!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2833"/>
@@ -2571,7 +2588,7 @@
         <location filename="../../gui/MainWindow.ui" line="1461"/>
         <source>Show Help</source>
         <translatorcomment>Visualizza Aiuto------------Mostra Guida------Visualizza Guida</translatorcomment>
-        <translation>Visualizza la Guida</translation>
+        <translation>Visualizza Aiuto</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4350"/>
@@ -2643,7 +2660,7 @@
         <source>%n file(s) have been rejected, because they are dummy CDDA files!</source>
         <translation>
             <numerusform>%n file è stato respinto, in quanto si tratta di file CDDA fittizio!</numerusform>
-            <numerusform>%n file sono stati respinti, in quanto si tratta di files CDDA fittizi!</numerusform>
+            <numerusform>%n files sono stati respinti, in quanto si tratta di files CDDA fittizi!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -2698,7 +2715,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2654"/>
         <source>Loading dropped files or folders, please wait...</source>
-        <translation>Caricamento di files o cartelle trascinate, attendere prego...</translation>
+        <translation>Caricamento di files o cartelle trascinate, attendi, prego...</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="931"/>
@@ -2714,7 +2731,7 @@
         <location filename="../../gui/MainWindow.ui" line="5155"/>
         <source>Hydrogenaudio Knowledgebase</source>
         <translatorcomment>Base di conoscenza</translatorcomment>
-        <translation>Hydrogenaudio - Base di conoscenza</translation>
+        <translation>Base di conoscenza - Hydrogenaudio</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="5059"/>
@@ -3066,7 +3083,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="352"/>
         <source>Aborted!</source>
-        <translation>Annullato!</translation>
+        <translation>Processo Annullato!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="352"/>
@@ -3186,7 +3203,7 @@
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="679"/>
         <source>Abort</source>
-        <translation>Annulla</translation>
+        <translation>Annulla Tutto</translation>
     </message>
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="702"/>
@@ -3201,7 +3218,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="284"/>
         <source>Your files are being encoded, please be patient...</source>
-        <translation>I tuoi files sono in corso di codifica, per favore sii paziente...</translation>
+        <translation>I tuoi file sono in corso di codifica, attendi, prego...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="215"/>
@@ -3217,12 +3234,12 @@
         <location filename="../../src/Dialog_Processing.cpp" line="656"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translatorcomment>Attendi la conclusione del lavoro in corso...</translatorcomment>
-        <translation>Annullato! In attesa della conclusione dei lavori in corso...</translation>
+        <translation>Annullato Tutto! Attendi la conclusione dei lavori in corso...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="700"/>
         <source>LameXP - Aborted</source>
-        <translation>Annullato - LameXP</translation>
+        <translation>Annullato Tutto - LameXP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="700"/>
@@ -3283,7 +3300,7 @@
     <message>
         <location filename="../../gui/ProcessingDialog.ui" line="337"/>
         <source>Shutdown the computer as soon as all files have been converted</source>
-        <translation>Il computer sarà spento non appena tutti i files saranno stati convertiti</translation>
+        <translation>Il computer sarà spento non appena tutti i file saranno stati convertiti</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="1101"/>
@@ -3358,8 +3375,8 @@
         <location filename="../../src/Dialog_Processing.cpp" line="699"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
-            <numerusform>Il processo è stato interrotto dall&apos;utente dopo %n file!</numerusform>
-            <numerusform>Il processo è stato interrotto dall&apos;utente dopo %n files!</numerusform>
+            <numerusform>Il processo è stato annullato dall&apos;utente dopo %n file.</numerusform>
+            <numerusform>Il processo è stato annullato dall&apos;utente dopo %n file.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -3408,8 +3425,8 @@
         <location filename="../../src/Dialog_Processing.cpp" line="720"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
-            <numerusform>Errore: %1 di %n file fallito (%2). Doppio clic su elementi falliti per informazioni dettagliate!</numerusform>
-            <numerusform>Errore: %1 su %n files falliti (%2). Doppio clic su elementi falliti per informazioni dettagliate!</numerusform>
+            <numerusform>Errore: %1 di %n file fallito (%2). Doppio clic su elementi falliti per informazioni dettagliate.</numerusform>
+            <numerusform>Errore: %1 su %n file falliti (%2). Doppio clic su elementi falliti per informazioni dettagliate.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -3417,23 +3434,23 @@
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n file saltato</numerusform>
-            <numerusform>%n files saltati</numerusform>
+            <numerusform>%n file saltati</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="724"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
-            <numerusform>Errore: %1 su %n file fallito. Doppio clic su elementi falliti per informazioni dettagliate!</numerusform>
-            <numerusform>Errore: %1 su %n files falliti. Doppio clic su elementi falliti per informazioni dettagliate!</numerusform>
+            <numerusform>Errore: %1 su %n file fallito. Doppio clic su elementi falliti per informazioni dettagliate.</numerusform>
+            <numerusform>Errore: %1 su %n file falliti. Doppio clic su elementi falliti per informazioni dettagliate.</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/Dialog_Processing.cpp" line="738"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
-            <numerusform>Tutti i files completati con successo. Saltato %n file.</numerusform>
-            <numerusform>Tutti i files completati con successo. Saltati %n files.</numerusform>
+            <numerusform>Tutti i file completati con successo. Saltato %n file.</numerusform>
+            <numerusform>Tutti i file completati con successo. Saltati %n file.</numerusform>
         </translation>
     </message>
 </context>
@@ -3577,7 +3594,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
-        <translation>Questo di solito indica che attualmente stai usando una versione pre-release di LameXP.</translation>
+        <translation>Questo di solito indica che attualmente stai usando una versione pre-rilascio di LameXP.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="163"/>

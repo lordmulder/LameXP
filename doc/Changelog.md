@@ -10,6 +10,8 @@
 * Updated MediaInfo to v0.7.78 (2015-10-02), compiled with ICL 15.0 and MSVC 12.0
 * Fixed resampling bug with Vorbis encoder, regression in OggEnc v2.87
 * Fixed creation of Monkey's Audio (APE) files, when **no** meta data is being embedded
+* Updated language files (big thank-you to all contributors !!!)
+
 
 ## LameXP v4.12 [2015-10-23] ## {-}
 
