@@ -1248,12 +1248,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation type="unfinished"></translation>
+        <translation>Операції з файлами</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
         <source>Apply the &quot;creation&quot; and &quot;last modified&quot; date/time of the original file to the converted file</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосувати час створення\останньої зміни оригінального файла до файла, що конвертується</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
