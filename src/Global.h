@@ -45,7 +45,7 @@ class LockedFile;
  */
 void           lamexp_tools_register(const QString &toolName, LockedFile *const file, const quint32 &version, const QString &tag = QString());
 bool           lamexp_tools_check   (const QString &toolName);
-const QString& lamexp_tools_lookup  (const QString &toolName);
+const QString  lamexp_tools_lookup  (const QString &toolName);
 const quint32& lamexp_tools_version (const QString &toolName, QString *const tagOut = NULL);
 
 /*

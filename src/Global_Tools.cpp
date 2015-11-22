@@ -133,7 +133,7 @@ bool lamexp_tools_check(const QString &toolName)
 /*
  * Lookup tool path
  */
-const QString &lamexp_tools_lookup(const QString &toolName)
+const QString lamexp_tools_lookup(const QString &toolName)
 {
 	QReadLocker readLock(&g_lamexp_tools_lock);
 

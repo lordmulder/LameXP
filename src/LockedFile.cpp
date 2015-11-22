@@ -117,23 +117,52 @@ static __forceinline void doValidateFileExists(const QString &filePath)
 
 static __forceinline void doLockFile(HANDLE &fileHandle, const QString &filePath, QFile *const outFile)
 {
+	bool success = false;
+	fileHandle = INVALID_HANDLE_VALUE;
+
+	//Try to open the file!
 	for(int i = 0; i < 64; i++)
 	{
-		fileHandle = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
-		if(VALID_HANDLE(fileHandle))
+		const HANDLE hTemp = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
+		if(VALID_HANDLE(hTemp))
 		{
-			break;
+			fileHandle = hTemp;
+			break; /*file opened successfully*/
 		}
 		if(i == 0)
 		{
-			qWarning("Failed to lock file on first attemp, retrying...");
+			qWarning("Failed to open file on first attemp, retrying...");
 		}
-		Sleep(25);
+		Sleep(1);
 	}
 	
-	//Locked successfully?
-	if(!VALID_HANDLE(fileHandle))
+	//Now try to actually lock the file!
+	if (VALID_HANDLE(fileHandle))
 	{
+		for (int i = 0; i < 64; i++)
+		{
+			LARGE_INTEGER fileSize;
+			if (GetFileSizeEx(fileHandle, &fileSize))
+			{
+				OVERLAPPED overlapped = { 0U, 0U, 0U, 0U, 0U };
+				if (LockFileEx(fileHandle, LOCKFILE_FAIL_IMMEDIATELY, 0, fileSize.LowPart, fileSize.HighPart, &overlapped))
+				{
+					success = true;
+					break; /*file locked successfully*/
+				}
+				Sleep(1);
+			}
+			if (i == 0)
+			{
+				qWarning("Failed to lock file on first attemp, retrying...");
+			}
+		}
+	}
+
+	//Locked successfully?
+	if(!success)
+	{
+		CLOSE_HANDLE(fileHandle);
 		if(outFile)
 		{
 			QFile::remove(QFileInfo(*outFile).canonicalFilePath());
@@ -172,7 +201,7 @@ static __forceinline void doValidateHash(HANDLE &fileHandle, const int &fileDesc
 	}
 
 	//Opened successfully
-	if(!checkFile.isOpen())
+	if((!checkFile.isOpen()) || checkFile.peek(1).isEmpty())
 	{
 		QFile::remove(filePath);
 		MUTILS_THROW_FMT("File '%s' could not be read!", MUTILS_UTF8(QFileInfo(filePath).fileName()));
@@ -287,7 +316,16 @@ LockedFile::~LockedFile(void)
 	}
 }
 
-const QString &LockedFile::filePath()
+const QString LockedFile::filePath(void)
 {
+	if (m_fileDescriptor >= 0)
+	{
+		const QString path = MUtils::OS::get_file_path(m_fileDescriptor);
+		if (!path.isEmpty())
+		{
+			return path;
+		}
+		MUTILS_THROW_FMT("Failed to determine file path!");
+	}
 	return m_filePath;
 }

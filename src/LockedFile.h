@@ -35,7 +35,7 @@ public:
 	LockedFile(const QString &filePath, const bool bOwnsFile = false);
 	~LockedFile(void);
 
-	const QString &filePath();
+	const QString filePath(void);
 
 private:
 	const bool m_bOwnsFile;

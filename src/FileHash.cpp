@@ -32,26 +32,27 @@ static const char *g_salt = "ee9f7bdabc170763d2200a7e3030045aafe380011aefc1730e5
 
 QByteArray FileHash::computeHash(QFile &file)
 {
-	QByteArray hash = QByteArray::fromHex(g_blnk);
+	QByteArray hash = QByteArray::fromHex(g_blnk).toHex();
 
 	if(file.isOpen() && file.reset())
 	{
 		MUtils::Hash::Keccak keccak;
-
 		const QByteArray data = file.readAll();
-		const QByteArray seed = QByteArray::fromHex(g_seed);
-		const QByteArray salt = QByteArray::fromHex(g_salt);
-	
-		if(keccak.init(MUtils::Hash::Keccak::hb384))
+		if (data.size() >= 16)
 		{
-			bool ok = true;
-			ok = ok && keccak.addData(seed);
-			ok = ok && keccak.addData(data);
-			ok = ok && keccak.addData(salt);
-			if(ok)
+			const QByteArray seed = QByteArray::fromHex(g_seed);
+			const QByteArray salt = QByteArray::fromHex(g_salt);
+			if (keccak.init(MUtils::Hash::Keccak::hb384))
 			{
-				const QByteArray digest = keccak.finalize();
-				if(!digest.isEmpty()) hash = digest.toHex();
+				bool ok = true;
+				ok = ok && keccak.addData(seed);
+				ok = ok && keccak.addData(data);
+				ok = ok && keccak.addData(salt);
+				if (ok)
+				{
+					const QByteArray digest = keccak.finalize();
+					if (!digest.isEmpty()) hash = digest.toHex();
+				}
 			}
 		}
 	}
