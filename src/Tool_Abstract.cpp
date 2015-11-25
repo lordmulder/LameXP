@@ -34,7 +34,6 @@
 #include <QProcess>
 #include <QMutex>
 #include <QMutexLocker>
-#include <QLibrary>
 #include <QProcessEnvironment>
 #include <QDir>
 #include <QElapsedTimer>

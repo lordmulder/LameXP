@@ -33,7 +33,6 @@
 #include <QApplication>
 #include <QFileIconProvider>
 #include <QDesktopServices>
-#include <QLibrary>
 
 //Windows includes
 #define NOMINMAX
