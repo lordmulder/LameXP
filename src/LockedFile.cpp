@@ -59,13 +59,33 @@
 
 #define VALID_HANDLE(H) (((H) != NULL) && ((H) != INVALID_HANDLE_VALUE))
 
+static bool PROTECT_HANDLE(const HANDLE &h, const bool &lock)
+{
+	if (SetHandleInformation(h, HANDLE_FLAG_PROTECT_FROM_CLOSE, (lock ? HANDLE_FLAG_PROTECT_FROM_CLOSE : 0U)))
+	{
+		return true;
+	}
+	return false;
+}
+
 static void CLOSE_HANDLE(HANDLE &h)
 {
 	if(VALID_HANDLE(h))
 	{
+		PROTECT_HANDLE(h, false);
 		CloseHandle(h);
-		h = NULL;
 	}
+	h = NULL;
+}
+
+static void CLOSE_FILE(int &fd)
+{
+	if (fd >= 0)
+	{
+		PROTECT_HANDLE((HANDLE)_get_osfhandle(fd), false);
+		_close(fd);
+	}
+	fd = -1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -126,7 +146,7 @@ static __forceinline void doLockFile(HANDLE &fileHandle, const QString &filePath
 		const HANDLE hTemp = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
 		if(VALID_HANDLE(hTemp))
 		{
-			fileHandle = hTemp;
+			PROTECT_HANDLE(fileHandle = hTemp, true);
 			break; /*file opened successfully*/
 		}
 		if(i == 0)
@@ -305,11 +325,7 @@ LockedFile::LockedFile(const QString &filePath, const bool bOwnsFile)
 
 LockedFile::~LockedFile(void)
 {
-	if(m_fileDescriptor >= 0)
-	{
-		_close(m_fileDescriptor);
-		m_fileDescriptor = -1;
-	}
+	CLOSE_FILE(m_fileDescriptor);
 	if(m_bOwnsFile)
 	{
 		doRemoveFile(m_filePath);
@@ -320,12 +336,10 @@ const QString LockedFile::filePath(void)
 {
 	if (m_fileDescriptor >= 0)
 	{
-		const QString path = MUtils::OS::get_file_path(m_fileDescriptor);
-		if (!path.isEmpty())
+		if (GetFileType((HANDLE)_get_osfhandle(m_fileDescriptor)) == FILE_TYPE_UNKNOWN)
 		{
-			return path;
+			MUTILS_THROW_FMT("Failed to validate file handle!");
 		}
-		MUTILS_THROW_FMT("Failed to determine file path!");
 	}
 	return m_filePath;
 }
