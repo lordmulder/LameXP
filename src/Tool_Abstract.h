@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2016 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ public:
 	AbstractTool(void);
 	~AbstractTool(void);
 	
-	bool startProcess(QProcess &process, const QString &program, const QStringList &args);
+	bool startProcess(QProcess &process, const QString &program, const QStringList &args, const QString &workingDir = QString());
 	static QString commandline2string(const QString &program, const QStringList &arguments);
 
 signals:

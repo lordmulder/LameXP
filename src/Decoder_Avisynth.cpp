@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2016 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -53,12 +53,10 @@ bool AvisynthDecoder::decode(const QString &sourceFile, const QString &outputFil
 	QProcess process;
 	QStringList args;
 
-	process.setWorkingDirectory(QFileInfo(outputFile).absolutePath());
-
 	args << QDir::toNativeSeparators(sourceFile);
 	args << QDir::toNativeSeparators(outputFile);
 
-	if(!startProcess(process, m_binary, args))
+	if(!startProcess(process, m_binary, args, QFileInfo(outputFile).absolutePath()))
 	{
 		return false;
 	}

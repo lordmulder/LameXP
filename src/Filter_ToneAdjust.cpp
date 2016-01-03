@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2016 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,8 +56,6 @@ bool ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFil
 	QProcess process;
 	QStringList args;
 
-	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
-
 	args << "-V3" << "-S";
 	args << "--guard" << "--temp" << ".";
 	args << QDir::toNativeSeparators(sourceFile);
@@ -72,7 +70,7 @@ bool ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFil
 		args << "treble" << QString().sprintf("%s%.2f", ((m_treble < 0) ? "-" : "+"), static_cast<double>(abs(m_treble)) / 100.0);
 	}
 
-	if(!startProcess(process, m_binary, args))
+	if(!startProcess(process, m_binary, args, QFileInfo(outputFile).canonicalPath()))
 	{
 		return false;
 	}

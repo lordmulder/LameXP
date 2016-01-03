@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2016 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -148,8 +148,6 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	QProcess process;
 	QStringList args;
 
-	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
-
 	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 	env.insert("PATH", QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), MUtils::temp_folder())));
 	process.setProcessEnvironment(env);
@@ -193,7 +191,7 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	args << "-o" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
-	if(!startProcess(process, m_binary, args))
+	if(!startProcess(process, m_binary, args, QFileInfo(outputFile).canonicalPath()))
 	{
 		return false;
 	}
