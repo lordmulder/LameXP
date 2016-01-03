@@ -101,7 +101,7 @@ It has to be noticed that LameXP uses a number of *third-party* applications and
 LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement), released under the terms of the [*GNU General Public License* (GPL), version 2](http://www.gnu.org/licenses/gpl-2.0.html). The licenses for most software and other practical works are designed to take away your freedom to share and change the works. In contrast, the GPL is designed to guarantee your freedom to share and change all versions of the software. In other words, the GPL ensures that free software will remain free for all of its users. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the *GNU General Public License* for more details!
 
 	LameXP - Audio Encoder Front-End
-	Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
+	Copyright (C) 2004-2016 LoRd_MuldeR <MuldeR2@GMX.de>
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -606,11 +606,11 @@ The source code of the **MUtilities** library is managed using the [*Git*](http:
 
 LameXP is currently being developed and built using the following development tools and libraries:
 
-* [Visual Studio 2013 Update-4](http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx), running on Windows 7 with Service Pack 1
+* [Visual Studio 2015 Update-1](https://www.visualstudio.com/), running on Windows 7 with Service Pack 1
 
-* [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows (our *pre-compiled* Qt libraries for Visual Studio 2013 can be found [**here**](http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/))
+* [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows (our *pre-compiled* Qt libraries for Visual Studio 2015 can be found [**here**](http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/))
 
-* Windows Platform SDK v7.1A, included with Visual Studio 2013 or Visual Studio 2012
+* Windows Platform SDK v7.1A, included with Visual Studio 2015 or Visual Studio 2013
 
 * The minimum supported *build* platform is Windows 7 (x86 and x64)
 
@@ -635,7 +635,7 @@ In order to create LameXP release packages, using the included deployment script
 
 In order to create a "fully static" build of LameXP, i.e. a build that does *not* depend on any "external" DLL files (except for the obligatory operating system DLL's that you cannot get around), you'll need to compile Qt as "static" libraries. The official Qt web-site *does* provide pre-compiled Qt libraries. However, they only provide DLL versions, they do *not* provide "static" libraries. Consequently, you need to build the required "static" Qt libraries yourself. The following simple instructions should make it easy to build Qt from the sources and as "static" libraries:
 
- 1. Make sure *Visual Studio 2013* with Update-4 (or later) is installed
+ 1. Make sure *Visual Studio 2015* with Update-1 (or later) is installed
 
  2. Make sure *Strawberry Perl *for Windows and *Python 2.7* are installed
 
@@ -661,8 +661,6 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
  9. Change the current directory to the *Qt Sources* path (e.g. ``C:\QtSources\4.8.x``)
  
 10. Run ``configure.exe -release -static -ltcg -qt-zlib -qt-libpng -qt-libjpeg -qt-libtiff -qt-libmng``
-
-    + Hint: For Visual Studio 2013 you currently need to add ``-platform win32-msvc2012`` too
 
 11. Now the makefiles should have been generated, so simply enter ``nmake /B`` and be patient - voilà!
 
