@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2016 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -102,7 +102,7 @@ AbstractTool::~AbstractTool(void)
 /*
  * Initialize and launch process object
  */
-bool AbstractTool::startProcess(QProcess &process, const QString &program, const QStringList &args)
+bool AbstractTool::startProcess(QProcess &process, const QString &program, const QStringList &args, const QString &workingDir)
 {
 	QMutexLocker lock(&s_startProcessMutex);
 	
@@ -119,7 +119,7 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 	}
 
 	emit messageLogged(commandline2string(program, args) + "\n");
-	MUtils::init_process(process, QFileInfo(program).absolutePath());
+	MUtils::init_process(process, workingDir.isEmpty() ? QFileInfo(program).absolutePath() : workingDir);
 
 	process.start(program, args);
 	

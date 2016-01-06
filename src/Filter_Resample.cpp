@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LameXP - Audio Encoder Front-End
-// Copyright (C) 2004-2015 LoRd_MuldeR <MuldeR2@GMX.de>
+// Copyright (C) 2004-2016 LoRd_MuldeR <MuldeR2@GMX.de>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -73,8 +73,6 @@ bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile,
 		return true;
 	}
 
-	process.setWorkingDirectory(QFileInfo(outputFile).canonicalPath());
-
 	args << "-V3" << "-S";
 	args << "--guard" << "--temp" << ".";
 	args << QDir::toNativeSeparators(sourceFile);
@@ -99,7 +97,7 @@ bool ResampleFilter::apply(const QString &sourceFile, const QString &outputFile,
 		args << "dither" << "-s";					//if you're mastering to 16-bit, you also need to add 'dither' (and in most cases noise-shaping) after the rate
 	}
 
-	if(!startProcess(process, m_binary, args))
+	if(!startProcess(process, m_binary, args, QFileInfo(outputFile).canonicalPath()))
 	{
 		return false;
 	}

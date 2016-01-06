@@ -2,9 +2,13 @@
 
 # LameXP v4.xx History #
 
-## LameXP v4.13 [xxxx-xx-xx] ## {-}
+## LameXP v4.13 [2016-??-??] ## {-}
 
-* Upgraded build environment to Microsoft Visual Studio 2015
+* Fixed the location of temporary intermediate files for SoX-based audio effects
+
+## LameXP v4.13 [2015-12-12] ## {-}
+
+* Upgraded build environment to Microsoft Visual Studio 2015 with Update-1
 * Apply the original file's "creation" and "last modified" date/time to the output file (optional)
 * Updated Vorbis encoder to OggEnc v2.88 (2015-09-10), using libvorbis v1.3.5 and aoTuV b6.03_2015
 * Updated MediaInfo to v0.7.78 (2015-10-02), compiled with ICL 15.0 and MSVC 12.0

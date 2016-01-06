@@ -185,7 +185,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'&lt;MuldeR2@GMX.de&gt;'+'<
 <h2 id="license-terms"><span class="header-section-number">2.2</span> License Terms</h2>
 <p>LameXP is <a href="http://en.wikipedia.org/wiki/Free_software_movement"><em>free software</em></a>, released under the terms of the <a href="http://www.gnu.org/licenses/gpl-2.0.html"><em>GNU General Public License</em> (GPL), version 2</a>. The licenses for most software and other practical works are designed to take away your freedom to share and change the works. In contrast, the GPL is designed to guarantee your freedom to share and change all versions of the software. In other words, the GPL ensures that free software will remain free for all of its users. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the <em>GNU General Public License</em> for more details!</p>
 <pre><code>LameXP - Audio Encoder Front-End
-Copyright (C) 2004-2015 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;
+Copyright (C) 2004-2016 LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -451,9 +451,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <h2 id="build-prerequisites"><span class="header-section-number">8.2</span> Build Prerequisites</h2>
 <p>LameXP is currently being developed and built using the following development tools and libraries:</p>
 <ul>
-<li><p><a href="http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2013 Update-4</a>, running on Windows 7 with Service Pack 1</p></li>
-<li><p><a href="http://download.qt.io/archive/qt/4.8/">Qt libraries 4.8.7</a> for Windows (our <em>pre-compiled</em> Qt libraries for Visual Studio 2013 can be found <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/"><strong>here</strong></a>)</p></li>
-<li><p>Windows Platform SDK v7.1A, included with Visual Studio 2013 or Visual Studio 2012</p></li>
+<li><p><a href="https://www.visualstudio.com/">Visual Studio 2015 Update-1</a>, running on Windows 7 with Service Pack 1</p></li>
+<li><p><a href="http://download.qt.io/archive/qt/4.8/">Qt libraries 4.8.7</a> for Windows (our <em>pre-compiled</em> Qt libraries for Visual Studio 2015 can be found <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/"><strong>here</strong></a>)</p></li>
+<li><p>Windows Platform SDK v7.1A, included with Visual Studio 2015 or Visual Studio 2013</p></li>
 <li><p>The minimum supported <em>build</em> platform is Windows 7 (x86 and x64)</p></li>
 </ul>
 <p>In order to create LameXP release packages, using the included deployment scripts, you need the following additional tools:</p>
@@ -473,7 +473,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <h2 id="qt-as-static-libraries"><span class="header-section-number">8.3</span> Qt as Static Libraries</h2>
 <p>In order to create a &quot;fully static&quot; build of LameXP, i.e. a build that does <em>not</em> depend on any &quot;external&quot; DLL files (except for the obligatory operating system DLL's that you cannot get around), you'll need to compile Qt as &quot;static&quot; libraries. The official Qt web-site <em>does</em> provide pre-compiled Qt libraries. However, they only provide DLL versions, they do <em>not</em> provide &quot;static&quot; libraries. Consequently, you need to build the required &quot;static&quot; Qt libraries yourself. The following simple instructions should make it easy to build Qt from the sources and as &quot;static&quot; libraries:</p>
 <ol>
-<li><p>Make sure <em>Visual Studio 2013</em> with Update-4 (or later) is installed</p></li>
+<li><p>Make sure <em>Visual Studio 2015</em> with Update-1 (or later) is installed</p></li>
 <li><p>Make sure <em>Strawberry Perl </em>for Windows and <em>Python 2.7</em> are installed</p></li>
 <li><p>Download and extract the <em>Qt 4.8.x</em> source code package (e.g. to <code>C:\QtSources\4.8.x</code>)</p></li>
 <li><p>Edit the file <code>mkspecs\win32-msvc2010\qmake.conf</code> from your Qt Sources directory as follows:</p>
@@ -494,10 +494,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p>Add <em>Python 2.7</em> to your PATH (e.g. <code>set PATH=C:\python27;%PATH%</code>)</p></li>
 <li><p>Run <code>vcvarsall.bat x86</code> form your Visual C++ install directory - within the same console!</p></li>
 <li><p>Change the current directory to the <em>Qt Sources</em> path (e.g. <code>C:\QtSources\4.8.x</code>)</p></li>
-<li><p>Run <code>configure.exe -release -static -ltcg -qt-zlib -qt-libpng -qt-libjpeg -qt-libtiff -qt-libmng</code></p>
-<ul>
-<li>Hint: For Visual Studio 2013 you currently need to add <code>-platform win32-msvc2012</code> too</li>
-</ul></li>
+<li><p>Run <code>configure.exe -release -static -ltcg -qt-zlib -qt-libpng -qt-libjpeg -qt-libtiff -qt-libmng</code></p></li>
 <li><p>Now the makefiles should have been generated, so simply enter <code>nmake /B</code> and be patient - voilà!</p></li>
 <li><p>The build process is going to take good amount of time. Once it is done, make sure you got all needed libs:</p>
 <ul>
