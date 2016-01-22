@@ -618,17 +618,18 @@ In order to create LameXP release packages, using the included deployment script
 
 * [7-Zip](http://www.7-zip.org/) &ndash; file archiver with a high compression ratio
 
-* [NSIS](http://nsis.sourceforge.net/) &ndash; Nullsoft Scriptable Install System ([*Unicode version*](http://www.scratchpaper.com/) recommended!)
+* [NSIS](http://nsis.sourceforge.net/) &ndash; Nullsoft Scriptable Install System ([*Unicode version*](https://github.com/jimpark/unsis/releases) recommended!)
     + [StdUtils](http://nsis.sourceforge.net/StdUtils_plug-in) plug-in
     + [LockedList](http://nsis.sourceforge.net/LockedList_plug-in) plug-in
     + [Inetc](http://nsis.sourceforge.net/Inetc_plug-in) plug-in
     + [Aero](http://forums.winamp.com/showthread.php?t=329990) plug-in
-    
+    + [SelfDel](http://nsis.sourceforge.net/SelfDel_plug-in) plug-in
+
 * [UPX](http://upx.sourceforge.net/) &ndash; the Ultimate Packer for eXecutables
 
 * [Pandoc](http://johnmacfarlane.net/pandoc/) &ndash; the Universal Document Converter
 
-* [GnuPG](ftp://ftp.gnupg.org/gcrypt/binary/) &ndash; the GNU Privacy Guard v1.4.x 
+* [GnuPG](https://www.gpg4win.de/) &ndash; the GNU Privacy Guard (Gpg4win)
 
 
 ## Qt as Static Libraries ##

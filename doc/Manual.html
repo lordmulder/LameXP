@@ -8,7 +8,7 @@
   <title>LameXP Audio-Encoder Front-End – Manual</title>
   <style type="text/css">code{white-space: pre;}</style>
   <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
   <style type="text/css">
   <!--
@@ -34,9 +34,9 @@
 <h2 class="author">Created by LoRd_MuldeR &lt;<script type="text/javascript">
 <!--
 h='&#x67;&#x6d;&#120;';a='&#64;';n='&#x6d;&#x75;&#108;&#100;&#x65;&#114;&#50;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
 // -->
-</script><noscript>&#x6d;&#x75;&#108;&#100;&#x65;&#114;&#50;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#120;</noscript>&gt; – check <a href="http://muldersoft.com/">http://muldersoft.com/</a> for news and updates!</h2>
+</script><noscript>&#x6d;&#x75;&#108;&#100;&#x65;&#114;&#50;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#120;</noscript>&gt; – check <a href="http://muldersoft.com/" class="uri">http://muldersoft.com/</a> for news and updates!</h2>
 </header>
 <nav id="TOC">
 <ul>
@@ -111,75 +111,75 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <h2 id="platform-support"><span class="header-section-number">1.1</span> Platform Support</h2>
 <p><strong>Tier #1:</strong> LameXP is currently being developed on the following platforms:</p>
 <ul>
-<li>Microsoft Windows 10, 32-Bit and 64-Bit editions<br /></li>
-<li>Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions<br /></li>
+<li>Microsoft Windows 10, 32-Bit and 64-Bit editions</li>
+<li>Microsoft Windows 7 with Service Pack 1, 32-Bit and 64-Bit editions</li>
 <li>Microsoft Windows XP with Service Pack 3 <strong>(see remarks)</strong></li>
 </ul>
 <p><strong>Tier #2:</strong> The following platforms should work too, but aren't tested extensively:</p>
 <ul>
-<li>Microsoft Windows 8.1, 32-Bit and 64-Bit editions<br /></li>
-<li>Microsoft Windows 8.0, 32-Bit and 64-Bit editions<br /></li>
-<li>Microsoft Windows Vista with Service Pack 2, 32-Bit and 64-Bit editions<br /></li>
-<li>Microsoft Windows XP x64 Edition with Service Pack 2<br /></li>
-<li>Microsoft Windows Server 2008 with Service Pack 2<br /></li>
-<li>Microsoft Windows Server 2008 R2 with Service Pack 1<br /></li>
+<li>Microsoft Windows 8.1, 32-Bit and 64-Bit editions</li>
+<li>Microsoft Windows 8.0, 32-Bit and 64-Bit editions</li>
+<li>Microsoft Windows Vista with Service Pack 2, 32-Bit and 64-Bit editions</li>
+<li>Microsoft Windows XP x64 Edition with Service Pack 2</li>
+<li>Microsoft Windows Server 2008 with Service Pack 2</li>
+<li>Microsoft Windows Server 2008 R2 with Service Pack 1</li>
 <li>GNU/Linux (e.g. Ubuntu 12.04), using Wine v1.4+</li>
 </ul>
 <p>The following <em>legacy</em> platforms are <strong>not</strong> actively supported any longer:</p>
 <ul>
-<li>Microsoft Windows 2000<br /></li>
-<li>Microsoft Windows NT 4.0<br /></li>
-<li>Microsoft Windows Millennium Edition<br /></li>
-<li>Microsoft Windows 98<br /></li>
+<li>Microsoft Windows 2000</li>
+<li>Microsoft Windows NT 4.0</li>
+<li>Microsoft Windows Millennium Edition</li>
+<li>Microsoft Windows 98</li>
 <li>Microsoft Windows 95</li>
 </ul>
 <p><em>Remarks:</em> Windows XP has reached &quot;end of life&quot; on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP. Thus <strong>no</strong> updates or bugfixes are made available to regular Windows XP users since that date, <strong>not</strong> even security fixes! Thus, all the security vulnerabilities that have been discovered <em>after</em> the deadline – and all the security vulnerabilities that are going to be discovered in the future – will <em>persists</em> forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we <em>highly</em> recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.</p>
 <h2 id="output-formats-encoders"><span class="header-section-number">1.2</span> Output Formats (Encoders)</h2>
 <p>Currently the following output formats (audio encoders) are supported by LameXP:</p>
 <ul>
-<li><a href="http://www.vorbis.com/">Ogg Vorbis</a> by <a href="http://www.xiph.org/">Xiph.org</a>, using the OggEnc2/libvorbis encoder with <a href="http://www.xiph.org/">aoTuV</a> [built-in]<br /></li>
-<li><a href="http://www.opus-codec.org/">Opus Interactive Audio Codec</a> by Xiph.org and Mozilla, using the <a href="http://git.xiph.org/?p=opus-tools.git;a=summary">Opus-Tools</a> [built-in]<br /></li>
-<li><a href="http://en.wikipedia.org/wiki/MP3">MPEG Audio-Layer III (MP3)</a>, using the <a href="http://lame.sourceforge.net/">LAME</a> encoder [built-in]<br /></li>
-<li><a href="http://en.wikipedia.org/wiki/Advanced_Audio_Coding">Advanced Audio Coding (AAC)</a>, using <a href="http://www.nero.com/deu/company/about-nero/nero-aac-codec.php">Nero AAC</a> or <a href="https://sites.google.com/site/qaacpage/">QAAC</a> encoder [<em>separate download</em>]<br /></li>
-<li><a href="https://xiph.org/flac/">Free Lossless Audio Codec (FLAC)</a> [built-in]<br /></li>
-<li><a href="http://www.atsc.org/cms/index.php/standards/standards/48-atsc-a52-standard">ATSC A/52 (aka &quot;AC-3&quot;)</a>, using the <a href="http://aften.sourceforge.net/">Aften</a> encoder [built-in]<br /></li>
-<li><a href="http://www.monkeysaudio.com/">Monkey's Audio (APE)</a>, lossless audio compression [built-in]<br /></li>
-<li>DCA, using the <a href="https://gitorious.org/dtsenc/dtsenc">DCA Enc</a> encoder software (still experimental) [built-in]<br /></li>
+<li><a href="http://www.vorbis.com/">Ogg Vorbis</a> by <a href="http://www.xiph.org/">Xiph.org</a>, using the OggEnc2/libvorbis encoder with <a href="http://www.xiph.org/">aoTuV</a> [built-in]</li>
+<li><a href="http://www.opus-codec.org/">Opus Interactive Audio Codec</a> by Xiph.org and Mozilla, using the <a href="http://git.xiph.org/?p=opus-tools.git;a=summary">Opus-Tools</a> [built-in]</li>
+<li><a href="http://en.wikipedia.org/wiki/MP3">MPEG Audio-Layer III (MP3)</a>, using the <a href="http://lame.sourceforge.net/">LAME</a> encoder [built-in]</li>
+<li><a href="http://en.wikipedia.org/wiki/Advanced_Audio_Coding">Advanced Audio Coding (AAC)</a>, using <a href="http://www.nero.com/deu/company/about-nero/nero-aac-codec.php">Nero AAC</a> or <a href="https://sites.google.com/site/qaacpage/">QAAC</a> encoder [<em>separate download</em>]</li>
+<li><a href="https://xiph.org/flac/">Free Lossless Audio Codec (FLAC)</a> [built-in]</li>
+<li><a href="http://www.atsc.org/cms/index.php/standards/standards/48-atsc-a52-standard">ATSC A/52 (aka &quot;AC-3&quot;)</a>, using the <a href="http://aften.sourceforge.net/">Aften</a> encoder [built-in]</li>
+<li><a href="http://www.monkeysaudio.com/">Monkey's Audio (APE)</a>, lossless audio compression [built-in]</li>
+<li>DCA, using the <a href="https://gitorious.org/dtsenc/dtsenc">DCA Enc</a> encoder software (still experimental) [built-in]</li>
 <li>Uncompressed PCM / Waveform Audio File (WAV/RIFF)</li>
 </ul>
 <h2 id="input-formats-decoders"><span class="header-section-number">1.3</span> Input Formats (Decoders)</h2>
 <p>Currently the following input formats (audio decoders) are supported by LameXP:</p>
 <ul>
-<li>AC-3 (ATSC A/52), using Valib decoder [built-in]<br /></li>
-<li>Advanced Audio Coding (AAC), using FAAD decoder [built-in]<br /></li>
-<li>Apple Lossless (ALAC) [built-in]<br /></li>
-<li>Apple/SGI AIFF [built-in]<br /></li>
-<li>Avisynth, audio only [requires Avisynth 2.5.x to be installed]<br /></li>
-<li>Digital Theater System, using Valib decoder [built-in]<br /></li>
-<li>Free Lossless Audio Codec (FLAC) [built-in]<br /></li>
-<li>Microsoft ADPCM [built-in]<br /></li>
-<li>Monkey's Audio (APE) [built-in]<br /></li>
-<li>MPEG Audio-Layer I (MP1), using mpg123 decoder [built-in]<br /></li>
-<li>MPEG Audio-Layer II (MP2), using mpg123 decoder [built-in]<br /></li>
-<li>MPEG Audio-Layer III (MP3), using mpg123 decoder [built-in]<br /></li>
-<li>Musepack [built-in]<br /></li>
-<li>Opus Audio Codec [built-in]<br /></li>
-<li>Shorten [built-in]<br /></li>
-<li>Speex [built-in]<br /></li>
-<li>Sun/NeXT Au [built-in]<br /></li>
-<li>The True Audio (TTA) [built-in]<br /></li>
-<li>Uncompressed PCM / Waveform Audio File (WAV/RIFF) [built-in]<br /></li>
-<li>WavPack Hybrid Lossless Audio [built-in]<br /></li>
+<li>AC-3 (ATSC A/52), using Valib decoder [built-in]</li>
+<li>Advanced Audio Coding (AAC), using FAAD decoder [built-in]</li>
+<li>Apple Lossless (ALAC) [built-in]</li>
+<li>Apple/SGI AIFF [built-in]</li>
+<li>Avisynth, audio only [requires Avisynth 2.5.x to be installed]</li>
+<li>Digital Theater System, using Valib decoder [built-in]</li>
+<li>Free Lossless Audio Codec (FLAC) [built-in]</li>
+<li>Microsoft ADPCM [built-in]</li>
+<li>Monkey's Audio (APE) [built-in]</li>
+<li>MPEG Audio-Layer I (MP1), using mpg123 decoder [built-in]</li>
+<li>MPEG Audio-Layer II (MP2), using mpg123 decoder [built-in]</li>
+<li>MPEG Audio-Layer III (MP3), using mpg123 decoder [built-in]</li>
+<li>Musepack [built-in]</li>
+<li>Opus Audio Codec [built-in]</li>
+<li>Shorten [built-in]</li>
+<li>Speex [built-in]</li>
+<li>Sun/NeXT Au [built-in]</li>
+<li>The True Audio (TTA) [built-in]</li>
+<li>Uncompressed PCM / Waveform Audio File (WAV/RIFF) [built-in]</li>
+<li>WavPack Hybrid Lossless Audio [built-in]</li>
 <li>Windows Media Audio (WMA), using wma2wav [built-in]</li>
 </ul>
 <h1 id="leagl-information"><span class="header-section-number">2</span> Leagl Information</h1>
 <p>The LameXP software was developed, from the scratch, by LoRd_MuldeR <script type="text/javascript">
 <!--
-h='&#x47;&#x4d;&#88;&#46;&#100;&#x65;&#62;';a='&#64;';n='&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'&lt;MuldeR2@GMX.de&gt;'+'<\/'+'a'+'>');
+h='&#x47;&#x4d;&#88;&#46;&#100;&#x65;&#x25;&#x33;&#x45;';a='&#64;';n='&#x25;&#x33;&#x43;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;&#64;&#x47;&#x4d;&#88;&#46;&#100;&#x65;&#62;'+'<\/'+'a'+'>');
 // -->
-</script><noscript>&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;&#64;&#x47;&#x4d;&#88;&#46;&#100;&#x65;&#62;&#32;&#40;&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;&#32;&#x61;&#116;&#32;&#x47;&#x4d;&#88;&#32;&#100;&#x6f;&#116;&#32;&#100;&#x65;&#62;&#x29;</noscript>. Consequently, all copyrights on the LameXP software exclusively belong to LoRd_MuldeR. The right to use, modify and redistribute the LameXP software <em>according to the license terms</em> is granted to everybody. Please see below for license details! If you want to use the LameXP software in a way that is <em>not</em> covered by the license terms, e.g. if you want to include the LameXP software (or parts of it) in a <em>proprietary</em> software, written permission by LoRd_MuldeR is required.</p>
-<p>More OpenSource projects by LoRd_MuldeR can be found at <a href="http://muldersoft.com/">http://muldersoft.com/</a> and <a href="https://github.com/lordmulder">https://github.com/lordmulder</a>. Please do <strong>not</strong> send e-mail to LoRd_MuldeR directly, if the problem or suggestion can be discussed on the support forums or on the issue tracker!</p>
+</script><noscript>&#60;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;&#64;&#x47;&#x4d;&#88;&#46;&#100;&#x65;&#62;&#32;&#40;&#x25;&#x33;&#x43;&#x4d;&#x75;&#108;&#100;&#x65;&#82;&#50;&#32;&#x61;&#116;&#32;&#x47;&#x4d;&#88;&#32;&#100;&#x6f;&#116;&#32;&#100;&#x65;&#x25;&#x33;&#x45;&#x29;</noscript>. Consequently, all copyrights on the LameXP software exclusively belong to LoRd_MuldeR. The right to use, modify and redistribute the LameXP software <em>according to the license terms</em> is granted to everybody. Please see below for license details! If you want to use the LameXP software in a way that is <em>not</em> covered by the license terms, e.g. if you want to include the LameXP software (or parts of it) in a <em>proprietary</em> software, written permission by LoRd_MuldeR is required.</p>
+<p>More OpenSource projects by LoRd_MuldeR can be found at <a href="http://muldersoft.com/" class="uri">http://muldersoft.com/</a> and <a href="https://github.com/lordmulder" class="uri">https://github.com/lordmulder</a>. Please do <strong>not</strong> send e-mail to LoRd_MuldeR directly, if the problem or suggestion can be discussed on the support forums or on the issue tracker!</p>
 <h2 id="third-party-software"><span class="header-section-number">2.1</span> Third-party Software</h2>
 <p>It has to be noticed that LameXP uses a number of <em>third-party</em> applications and libraries. The copyright on these third-party tools belongs to the individual authors. <em>All</em> third-party tools that are included in the official distribution packages of LameXP are distributed in accordance with the respective software license. For legal reasons, some of the third-party tools can <em>not</em> be redistributed along with LameXP and therefore need to be obtained separately. For more details on the third-party tools that are used by the LameXP software, please refer to the &quot;Third-party software&quot; tab in the &quot;About&quot; dialogue. Moreover, various people have contributed translations to the LameXP project. These translation are redistributed with permission of the respective contributor. For more information about our contributors, please refer to the &quot;Contributors&quot; tab in the &quot;About&quot; dialogue.</p>
 <h2 id="license-terms"><span class="header-section-number">2.2</span> License Terms</h2>
@@ -265,9 +265,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <h3 id="nero-digital-aac-encoder"><span class="header-section-number">4.3.1</span> Nero Digital AAC Encoder</h3>
 <p>First of all, you need to download the Nero AAC encoder from the official Nero Digital web-site. The download is free of charge:</p>
 <ul>
-<li><a href="http://www.nero.com/eng/company/about-nero/nero-aac-codec.php">http://www.nero.com/eng/company/about-nero/nero-aac-codec.php</a><br /></li>
-<li><a href="http://www.videohelp.com/software/Nero-AAC-Codec">http://www.videohelp.com/software/Nero-AAC-Codec</a><br /></li>
-<li><a href="http://www.free-codecs.com/download/Nero_AAC_Codec.htm">http://www.free-codecs.com/download/Nero_AAC_Codec.htm</a></li>
+<li><a href="http://www.nero.com/eng/company/about-nero/nero-aac-codec.php" class="uri">http://www.nero.com/eng/company/about-nero/nero-aac-codec.php</a></li>
+<li><a href="http://www.videohelp.com/software/Nero-AAC-Codec" class="uri">http://www.videohelp.com/software/Nero-AAC-Codec</a></li>
+<li><a href="http://www.free-codecs.com/download/Nero_AAC_Codec.htm" class="uri">http://www.free-codecs.com/download/Nero_AAC_Codec.htm</a></li>
 </ul>
 <p>Simply scroll down, click the &quot;I agree&quot; button, and enter <code>user@example.com</code> when asked for an e-mail address. Finally, click the &quot;Download&quot; button, which initates the download of the required <code>NeroAACCodec-1.5.1.zip</code> file.</p>
 <p><em>Note:</em> Although the ZIP file is called <code>NeroAACCodec-1.5.1.zip</code>, it actually contains version <strong>1.5.4.0</strong> of the Nero AAC encoder software. Please check the included <code>changelog.txt</code> to verify this!</p>
@@ -283,8 +283,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <h4 id="install-qaac-encoder" class="unnumbered">Install QAAC Encoder</h4>
 <p>First of all, you need to download the <a href="https://github.com/nu774/qaac">QAAC</a> application, which provides a CLI font-end to the Apple/QuickTime AAC encoder. QAAC is provided as an <em>Add-in</em> for LameXP and is available from the following locations:</p>
 <ul>
-<li><a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/">http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/</a><br /></li>
-<li><a href="http://muldersoft.com/misc/lamexp/add-ins/qaac/">http://muldersoft.com/misc/lamexp/add-ins/qaac/</a></li>
+<li><a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/" class="uri">http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/</a></li>
+<li><a href="http://muldersoft.com/misc/lamexp/add-ins/qaac/" class="uri">http://muldersoft.com/misc/lamexp/add-ins/qaac/</a></li>
 </ul>
 <p>Now open the downloaded ZIP file, e.g. <code>LameXP.qaac-addin.yyyy-mm-dd.zip</code>, with your favourite file archive software (we recommend using <a href="http://www.7-zip.org/">7-Zip</a> or <a href="http://www.rarlab.com/download.htm">WinRAR</a>) to find the required QAAC program files.</p>
 <p><em>Note:</em> The LameXP software generally expects the <strong>latest</strong> version of the QAAC add-in; and the QAAC add-in is designed to work with the <strong>latest</strong> version of the LameXP software. Make sure your files are up-to-date!</p>
@@ -296,8 +296,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p>Next, the actual Apple/QuickTime AAC encoder libraries, which are part of the so-called &quot;Apple Application Support&quot; package, need to be installed on your computer. QAAC can <em>not</em> work without these libraries!</p>
 <p>The required &quot;Apple Application Support&quot; package is included, for example, in the official setup packages of <em>QuickTime</em> or <em>iTunes</em> for Windows, which can be obtained from the Apple web-site free of charge:</p>
 <ul>
-<li><a href="https://www.apple.com/quicktime/download/">https://www.apple.com/quicktime/download/</a><br /></li>
-<li><a href="https://www.apple.com/itunes/download/">https://www.apple.com/itunes/download/</a></li>
+<li><a href="https://www.apple.com/quicktime/download/" class="uri">https://www.apple.com/quicktime/download/</a></li>
+<li><a href="https://www.apple.com/itunes/download/" class="uri">https://www.apple.com/itunes/download/</a></li>
 </ul>
 <p>Since you usually do <strong>not</strong> want to <em>install</em> the complete QuickTime (or iTunes) software on your computer, please only <em>download</em> the QuickTime (or iTunes) setup package, but do <strong>not</strong> actually <em>run</em> the installer!</p>
 <p>Instead, open the QuickTimer setup program, i.e. <code>QuickTimeInstaller.exe</code>, with your favourite file archive software (we recommend using <a href="http://www.7-zip.org/">7-Zip</a> or <a href="http://www.rarlab.com/download.htm">WinRAR</a>) and <em>extract</em> the required <code>AppleApplicationSupport.msi</code> package.</p>
@@ -353,53 +353,71 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <h2 id="add-files-andor-folders"><span class="header-section-number">6.1</span> Add Files and/or Folders</h2>
 <p>Command-line options for adding files and/or folders:</p>
 <ul>
-<li><p><code>--add=filename</code><br /> Adds the file specified by <em>filename</em> to the source files list. The <em>filename</em> should be a <a href="http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths">fully-qualified</a> path. If you wish to add multiple files at once, you can simply include this option multiple times.</p></li>
-<li><p><code>--add-folder=directory</code><br /> Adds <em>all</em> supported files from the directory specified by <em>directory</em> to the source files list. The <em>directory</em> should be a <a href="http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths">fully-qualified</a> path. Sub-directories are <strong>not</strong> considered.</p></li>
-<li><p><code>--add-recursiver=directory</code><br /> This option works just like the &quot;add-folder&quot; option, except that it works recursively, i.e. it <em>does</em> take into account sub-directories. Use this option with care, since a whole lot of files may be added.</p></li>
+<li><p><code>--add=filename</code><br />
+Adds the file specified by <em>filename</em> to the source files list. The <em>filename</em> should be a <a href="http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths">fully-qualified</a> path. If you wish to add multiple files at once, you can simply include this option multiple times.</p></li>
+<li><p><code>--add-folder=directory</code><br />
+Adds <em>all</em> supported files from the directory specified by <em>directory</em> to the source files list. The <em>directory</em> should be a <a href="http://en.wikipedia.org/wiki/Fully_qualified_name#Filenames_and_paths">fully-qualified</a> path. Sub-directories are <strong>not</strong> considered.</p></li>
+<li><p><code>--add-recursiver=directory</code><br />
+This option works just like the &quot;add-folder&quot; option, except that it works recursively, i.e. it <em>does</em> take into account sub-directories. Use this option with care, since a whole lot of files may be added.</p></li>
 </ul>
 <h3 id="examples"><span class="header-section-number">6.1.1</span> Examples</h3>
 <p>Here are some <em>examples</em> on how to use the above command-line options correctly:</p>
 <ul>
-<li><p>Add one file:<br /> <code>LameXP.exe &quot;--add=C:\Some Folder\Some File.mp3&quot;</code></p></li>
-<li><p>Add multiple files at once:<br /> <code>LameXP.exe &quot;--add=C:\Some Folder\File #1.mp3&quot; &quot;--add=C:\Some Folder\File #2.mp3&quot; &quot;--add=C:\Some Folder\File #3.mp3&quot;</code></p></li>
-<li><p>Add a whole directory:<br /> <code>LameXP.exe &quot;--add-folder=C:\Some Folder&quot;</code></p></li>
+<li><p>Add one file:<br />
+<code>LameXP.exe &quot;--add=C:\Some Folder\Some File.mp3&quot;</code></p></li>
+<li><p>Add multiple files at once:<br />
+<code>LameXP.exe &quot;--add=C:\Some Folder\File #1.mp3&quot; &quot;--add=C:\Some Folder\File #2.mp3&quot; &quot;--add=C:\Some Folder\File #3.mp3&quot;</code></p></li>
+<li><p>Add a whole directory:<br />
+<code>LameXP.exe &quot;--add-folder=C:\Some Folder&quot;</code></p></li>
 </ul>
 <h2 id="gui-adjustment-options"><span class="header-section-number">6.2</span> GUI Adjustment Options</h2>
 <p>Command-line options for adjusting the graphical user-interface:</p>
 <ul>
-<li><p><code>--huge-font</code><br /> Set the font scaling factor to 150%. Use this if you want <em>much</em> larger fonts.</p></li>
-<li><p><code>--big-font</code><br /> Set the font scaling factor to 125%. Use this if you want <em>somewhat</em> larger fonts.</p></li>
-<li><p><code>--small-font</code><br /> Set the font scaling factor to 87.5%. Use this if you want <em>somewhat</em> smaller fonts.</p></li>
-<li><p><code>--tiny-font</code><br /> Set the font scaling factor to 75%. Use this if you want <em>much</em> smaller fonts.</p></li>
+<li><p><code>--huge-font</code><br />
+Set the font scaling factor to 150%. Use this if you want <em>much</em> larger fonts.</p></li>
+<li><p><code>--big-font</code><br />
+Set the font scaling factor to 125%. Use this if you want <em>somewhat</em> larger fonts.</p></li>
+<li><p><code>--small-font</code><br />
+Set the font scaling factor to 87.5%. Use this if you want <em>somewhat</em> smaller fonts.</p></li>
+<li><p><code>--tiny-font</code><br />
+Set the font scaling factor to 75%. Use this if you want <em>much</em> smaller fonts.</p></li>
 </ul>
 <h2 id="options-for-debugging"><span class="header-section-number">6.3</span> Options for Debugging</h2>
 <p>Command-line options that are intended for testing and debugging:</p>
 <ul>
-<li><p><code>--console</code><br /> Enable the LameXP debug console. Use this option with &quot;release&quot; builds of LameXP, where the console is hidden by default.</p></li>
-<li><p><code>--no-console</code><br /> The opposite of the &quot;console&quot; option: Disable the LameXP debug console. Use this option with &quot;pre-release&quot; (beta) builds of LameXP, where the console is visible by default.</p></li>
-<li><p><code>--force-cpu-no-64bit</code><br /> Treat the CPU as if it did <strong>not</strong> support <a href="http://en.wikipedia.org/wiki/X86-64">64-Bit (x64)</a> applications, even when it actually does so.</p></li>
-<li><p><code>--force-cpu-no-sse</code><br /> Treat the CPU as if it did <strong>not</strong> support any <a href="http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions">SSE</a> extensions (SSE, SSE2, SSE3, SSSE3, SSSE4, etc), even when it actually does so.</p></li>
-<li><p><code>--force-cpu-no-intel</code><br /> Treat the CPU as if it was a <em>non</em>-Intel processor, even when the vendor tag indicates an Intel processor.</p></li>
-<li><p><code>--ignore-compat-mode</code><br /> Do <strong>not</strong> check whether the application is running with &quot;compatibility mode&quot; enabled. It's still <em>not</em> recommended to run with compatibility mode enabled!</p></li>
+<li><p><code>--console</code><br />
+Enable the LameXP debug console. Use this option with &quot;release&quot; builds of LameXP, where the console is hidden by default.</p></li>
+<li><p><code>--no-console</code><br />
+The opposite of the &quot;console&quot; option: Disable the LameXP debug console. Use this option with &quot;pre-release&quot; (beta) builds of LameXP, where the console is visible by default.</p></li>
+<li><p><code>--force-cpu-no-64bit</code><br />
+Treat the CPU as if it did <strong>not</strong> support <a href="http://en.wikipedia.org/wiki/X86-64">64-Bit (x64)</a> applications, even when it actually does so.</p></li>
+<li><p><code>--force-cpu-no-sse</code><br />
+Treat the CPU as if it did <strong>not</strong> support any <a href="http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions">SSE</a> extensions (SSE, SSE2, SSE3, SSSE3, SSSE4, etc), even when it actually does so.</p></li>
+<li><p><code>--force-cpu-no-intel</code><br />
+Treat the CPU as if it was a <em>non</em>-Intel processor, even when the vendor tag indicates an Intel processor.</p></li>
+<li><p><code>--ignore-compat-mode</code><br />
+Do <strong>not</strong> check whether the application is running with &quot;compatibility mode&quot; enabled. It's still <em>not</em> recommended to run with compatibility mode enabled!</p></li>
 </ul>
 <h2 id="miscellaneous-options"><span class="header-section-number">6.4</span> Miscellaneous Options</h2>
 <p>Miscellaneous command-line options that may come in handy in certain situations:</p>
 <ul>
-<li><p><code>--kill</code><br /> Exit all running instances of LameXP.</p></li>
-<li><p><code>--force-kill</code><br /> Exit all running instances of LameXP as quickly as possible, even if that incurs data loss. Use with extreme care!</p></li>
+<li><p><code>--kill</code><br />
+Exit all running instances of LameXP.</p></li>
+<li><p><code>--force-kill</code><br />
+Exit all running instances of LameXP as quickly as possible, even if that incurs data loss. Use with extreme care!</p></li>
 </ul>
 <h1 id="help-support"><span class="header-section-number">7</span> Help &amp; Support</h1>
 <p>Before you report any problems that you may have encountered with the LameXP software, please make sure that the problem can be <em>reproduced</em> with the <strong>latest</strong> release version of LameXP!</p>
 <h2 id="download-mirrors"><span class="header-section-number">7.1</span> Download Mirrors</h2>
 <p>The latest <em>official</em> release of the LameXP software can be obtained from one of the following <em>official</em> download mirrors:</p>
 <ul>
-<li><a href="https://github.com/lordmulder/LameXP/releases/latest">https://github.com/lordmulder/LameXP/releases/latest</a><br /></li>
-<li><a href="http://sourceforge.net/projects/lamexp/files/">http://sourceforge.net/projects/lamexp/files/</a><br /></li>
-<li><a href="https://lamexp.codeplex.com/releases/">https://lamexp.codeplex.com/releases/</a><br /></li>
-<li><a href="https://bitbucket.org/lord_mulder/lamexp/downloads">https://bitbucket.org/lord_mulder/lamexp/downloads</a><br /></li>
-<li><a href="https://www.assembla.com/spaces/lamexp/documents">https://www.assembla.com/spaces/lamexp/documents</a><br /></li>
-<li><a href="http://www.free-codecs.com/lamexp_download.htm">http://www.free-codecs.com/lamexp_download.htm</a><br /></li>
-<li><a href="http://www.videohelp.com/tools/LameXP">http://www.videohelp.com/tools/LameXP</a></li>
+<li><a href="https://github.com/lordmulder/LameXP/releases/latest" class="uri">https://github.com/lordmulder/LameXP/releases/latest</a></li>
+<li><a href="http://sourceforge.net/projects/lamexp/files/" class="uri">http://sourceforge.net/projects/lamexp/files/</a></li>
+<li><a href="https://lamexp.codeplex.com/releases/" class="uri">https://lamexp.codeplex.com/releases/</a></li>
+<li><a href="https://bitbucket.org/lord_mulder/lamexp/downloads" class="uri">https://bitbucket.org/lord_mulder/lamexp/downloads</a></li>
+<li><a href="https://www.assembla.com/spaces/lamexp/documents" class="uri">https://www.assembla.com/spaces/lamexp/documents</a></li>
+<li><a href="http://www.free-codecs.com/lamexp_download.htm" class="uri">http://www.free-codecs.com/lamexp_download.htm</a></li>
+<li><a href="http://www.videohelp.com/tools/LameXP" class="uri">http://www.videohelp.com/tools/LameXP</a></li>
 </ul>
 <p>It is <em>highly recommended</em> to download LameXP <em>only</em> from one of the official mirrors listed above. We are <strong>not</strong> responsible for the integrity and trustworthiness of LameXP downloads you may have received from other locations!</p>
 <h2 id="diagnostic-output"><span class="header-section-number">7.2</span> Diagnostic Output</h2>
@@ -414,14 +432,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <h2 id="bugtracker"><span class="header-section-number">7.3</span> Bugtracker</h2>
 <p>The recommended way to submit <em>bug reports</em> or <em>feature requests</em> to the LameXP developers is using the <em>issue tracking system</em> at our GitHub project site:</p>
 <ul>
-<li><a href="https://github.com/lordmulder/LameXP/issues">https://github.com/lordmulder/LameXP/issues</a></li>
+<li><a href="https://github.com/lordmulder/LameXP/issues" class="uri">https://github.com/lordmulder/LameXP/issues</a></li>
 </ul>
 <p><em>Note:</em> In order to use the issue tracking system, you need to log in with your GitHub account. Creating a GitHub account is easy and completely free of charge, simply click <a href="https://github.com/join">here</a>!</p>
 <h2 id="support-forum"><span class="header-section-number">7.4</span> Support Forum</h2>
 <p>If you want to discuss the development of the LameXP software, help other users or receive help from other users, please use the LameXP thread at <em>Doom9's</em> Forum:</p>
 <ul>
-<li><a href="http://forum.doom9.org/showthread.php?t=157726">http://forum.doom9.org/showthread.php?t=157726</a> – English<br /></li>
-<li><a href="http://forum.gleitz.info/showthread.php?t=37956">http://forum.gleitz.info/showthread.php?t=37956</a> – German</li>
+<li><a href="http://forum.doom9.org/showthread.php?t=157726" class="uri">http://forum.doom9.org/showthread.php?t=157726</a> – English</li>
+<li><a href="http://forum.gleitz.info/showthread.php?t=37956" class="uri">http://forum.gleitz.info/showthread.php?t=37956</a> – German</li>
 </ul>
 <p><em>Note:</em> Due to the massive amount of spam attacks, Doom9 has established strict anti-spam measures. Therefore, it takes a few days until your account will be approved.</p>
 <h1 id="developer-center"><span class="header-section-number">8</span> Developer Center</h1>
@@ -459,16 +477,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <p>In order to create LameXP release packages, using the included deployment scripts, you need the following additional tools:</p>
 <ul>
 <li><p><a href="http://www.7-zip.org/">7-Zip</a> – file archiver with a high compression ratio</p></li>
-<li><p><a href="http://nsis.sourceforge.net/">NSIS</a> – Nullsoft Scriptable Install System (<a href="http://www.scratchpaper.com/"><em>Unicode version</em></a> recommended!)</p>
+<li><a href="http://nsis.sourceforge.net/">NSIS</a> – Nullsoft Scriptable Install System (<a href="https://github.com/jimpark/unsis/releases"><em>Unicode version</em></a> recommended!)
 <ul>
-<li><a href="http://nsis.sourceforge.net/StdUtils_plug-in">StdUtils</a> plug-in<br /></li>
-<li><a href="http://nsis.sourceforge.net/LockedList_plug-in">LockedList</a> plug-in<br /></li>
-<li><a href="http://nsis.sourceforge.net/Inetc_plug-in">Inetc</a> plug-in<br /></li>
+<li><a href="http://nsis.sourceforge.net/StdUtils_plug-in">StdUtils</a> plug-in</li>
+<li><a href="http://nsis.sourceforge.net/LockedList_plug-in">LockedList</a> plug-in</li>
+<li><a href="http://nsis.sourceforge.net/Inetc_plug-in">Inetc</a> plug-in</li>
 <li><a href="http://forums.winamp.com/showthread.php?t=329990">Aero</a> plug-in</li>
+<li><a href="http://nsis.sourceforge.net/SelfDel_plug-in">SelfDel</a> plug-in</li>
 </ul></li>
 <li><p><a href="http://upx.sourceforge.net/">UPX</a> – the Ultimate Packer for eXecutables</p></li>
 <li><p><a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> – the Universal Document Converter</p></li>
-<li><p><a href="ftp://ftp.gnupg.org/gcrypt/binary/">GnuPG</a> – the GNU Privacy Guard v1.4.x</p></li>
+<li><p><a href="https://www.gpg4win.de/">GnuPG</a> – the GNU Privacy Guard (Gpg4win)</p></li>
 </ul>
 <h2 id="qt-as-static-libraries"><span class="header-section-number">8.3</span> Qt as Static Libraries</h2>
 <p>In order to create a &quot;fully static&quot; build of LameXP, i.e. a build that does <em>not</em> depend on any &quot;external&quot; DLL files (except for the obligatory operating system DLL's that you cannot get around), you'll need to compile Qt as &quot;static&quot; libraries. The official Qt web-site <em>does</em> provide pre-compiled Qt libraries. However, they only provide DLL versions, they do <em>not</em> provide &quot;static&quot; libraries. Consequently, you need to build the required &quot;static&quot; Qt libraries yourself. The following simple instructions should make it easy to build Qt from the sources and as &quot;static&quot; libraries:</p>
@@ -478,14 +497,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p>Download and extract the <em>Qt 4.8.x</em> source code package (e.g. to <code>C:\QtSources\4.8.x</code>)</p></li>
 <li><p>Edit the file <code>mkspecs\win32-msvc2010\qmake.conf</code> from your Qt Sources directory as follows:</p>
 <ul>
-<li><p>Edit #1:</p>
+<li>Edit #1:
 <ul>
-<li>⇐ <code>QMAKE_CFLAGS_RELEASE = -O2 -MD</code><br /></li>
-<li>⇒ <code>QMAKE_CFLAGS_RELEASE = -O2 -MT &lt;more optimization flags here&gt;</code><br /></li>
+<li>⇐ <code>QMAKE_CFLAGS_RELEASE = -O2 -MD</code></li>
+<li>⇒ <code>QMAKE_CFLAGS_RELEASE = -O2 -MT &lt;more optimization flags here&gt;</code></li>
 </ul></li>
-<li><p>Edit #2:</p>
+<li>Edit #2:
 <ul>
-<li>⇐ <code>QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi</code><br /></li>
+<li>⇐ <code>QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi</code></li>
 <li>⇒ <code>QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi &lt;more optimization flags here&gt;</code></li>
 </ul></li>
 </ul></li>
@@ -498,13 +517,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.<
 <li><p>Now the makefiles should have been generated, so simply enter <code>nmake /B</code> and be patient - voilà!</p></li>
 <li><p>The build process is going to take good amount of time. Once it is done, make sure you got all needed libs:</p>
 <ul>
-<li><code>lib\qtmain.lib</code><br /></li>
-<li><code>lib\QtCore.lib</code><br /></li>
-<li><code>lib\QtGui.lib</code><br /></li>
-<li><code>lib\QtSvg.lib</code><br /></li>
-<li><code>lib\QtXml.lib</code><br /></li>
-<li><code>plugins\imageformats\qico.lib</code><br /></li>
-<li><code>plugins\imageformats\qsvg.lib</code><br /></li>
+<li><code>lib\qtmain.lib</code></li>
+<li><code>lib\QtCore.lib</code></li>
+<li><code>lib\QtGui.lib</code></li>
+<li><code>lib\QtSvg.lib</code></li>
+<li><code>lib\QtXml.lib</code></li>
+<li><code>plugins\imageformats\qico.lib</code></li>
+<li><code>plugins\imageformats\qsvg.lib</code></li>
 <li><code>plugins\imageformats\qtga.lib</code></li>
 </ul></li>
 <li><p>Put all the static *.lib files into the <code>Prerequisites\qt4_static\lib</code> directory</p></li>
@@ -571,6 +590,8 @@ sE7XdEZn+w==
 <h2 id="q-why-does-lamexp-connect-to-random-web-servers"><span class="header-section-number">9.6</span> Q: Why does LameXP connect to (random) web-servers?</h2>
 <p><strong>A:</strong> LameXP does <strong>not</strong> connect to any web-server, except for the &quot;automatic updates&quot; feature. Of course, in order to check for new updates, LameXP <em>unavoidably</em> has to communicate with our update servers. However, in <strong>no</strong> event LameXP will search for updates <em>without</em> your consent. Also, LameXP will <strong>not</strong> send any personal information to the update server. Instead of <em>uploading</em> your information, e.g. your current program version, to the web-server, LameXP will <em>download</em> the update information from the update server and compare it to your installed version locally. Furthermore, all information and program files downloaded from the update servers are protected by PGP (GnuPG) signatures, in order to assure the authenticity and integrity of these files. Files with missing/invalid signature are going to be <em>rejected</em>, so (spoofing) attacks are prevented.</p>
 <p><em>Note:</em> Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does <strong>not</strong> suffice here. In case that the update server does <strong>not</strong> respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connection is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of &quot;known&quot; hosts, taken mostly from <a href="http://www.alexa.com/topsites">Alexa's Top 500</a> list. In order to validate the Internet connection, LameXP will pick a <em>random</em> host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of &quot;known&quot; hosts have been reached successfully.</p>
-<p> <br /> <br /><strong>EOF</strong></p>
+<p> <br />
+ <br />
+<strong>EOF</strong></p>
 </body>
 </html>
