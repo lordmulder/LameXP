@@ -205,7 +205,7 @@ attrib +R "%OUT_FILE%.exe"
 "%~dp0\..\Utilities\CEcho.exe" cyan "Signing output file..."
 "%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
 
-"%PATH_GNUPG1%\gpg.exe" --detach-sign "%OUT_FILE%.exe"
+"%PATH_GPGWIN%\gpg.exe" --detach-sign "%OUT_FILE%.exe"
 attrib +R "%OUT_FILE%.exe.sig"
 
 :: ---------------------------------------------------------------------------

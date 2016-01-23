@@ -606,9 +606,11 @@ The source code of the **MUtilities** library is managed using the [*Git*](http:
 
 LameXP is currently being developed and built using the following development tools and libraries:
 
-* [Visual Studio 2015 Update-1](https://www.visualstudio.com/), running on Windows 7 with Service Pack 1
+* [Visual Studio 2015 Update-1](https://www.visualstudio.com/), running on Windows 10 x64 (v1511)
 
 * [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows (our *pre-compiled* Qt libraries for Visual Studio 2015 can be found [**here**](http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/))
+
+* [Visual Leak Detector](https://vld.codeplex.com/), open-source memory leak detection system for Visual C++
 
 * Windows Platform SDK v7.1A, included with Visual Studio 2015 or Visual Studio 2013
 
@@ -632,6 +634,31 @@ In order to create LameXP release packages, using the included deployment script
 * [GnuPG](https://www.gpg4win.de/) &ndash; the GNU Privacy Guard (Gpg4win)
 
 
+## Directory Layout
+
+In order to build LameXP using the provided project/solution files or the provided deployment script, please make sure you have the following directory layout, where `<sources_root>` is a new/empty directory:
+
+* `<sources_root>\LameXP_Qt` &ndash; the *LameXP* "main" project
+* `<sources_root>\Prerequisites` &ndash; prerequisites to build LameXP
+* `<sources_root>\MUtilities` &ndash; the *MUtilities* library
+
+The *Qt* libraries need to be located at the following location, where the `<toolset_version>` identifies your compiler version (e.g. `v140_xp` for VS2015) and the `<build_type>` identifies the build configuration (`Shared`, `Static` or `Debug`):
+
+* `<sources_root>\Prerequisites\Qt4\<toolset_version>\<build_type>`
+
+
+## Environment variables
+
+In order to build LameXP using the provided project/solution files or the provided deployment script, make sure the following environment variables are configured on your system:
+
+* `QTDIR` &ndash; points to your Qt installation directory, such that `%QTDIR%\bin\moc.exe` and friends exist
+
+
+## Using the deployment script
+
+In order to create LameXP release packages, using the included deployment scripts, **copy** the *configuration* template file `buildenv.template.txt`, located at `<sources_root>\LameXP_Qt\etc\Deployment`, to the file `buildenv.txt` in the *same* directory. Now edit *your* `buildenv.txt` and adjust all the path variables as needed. All paths must be set up correctly, otherwise the build process is going to fail! Once everything has been set up, you can run `release.bat` or `release_static.bat` in order to create a new release package.
+
+
 ## Qt as Static Libraries ##
 
 In order to create a "fully static" build of LameXP, i.e. a build that does *not* depend on any "external" DLL files (except for the obligatory operating system DLL's that you cannot get around), you'll need to compile Qt as "static" libraries. The official Qt web-site *does* provide pre-compiled Qt libraries. However, they only provide DLL versions, they do *not* provide "static" libraries. Consequently, you need to build the required "static" Qt libraries yourself. The following simple instructions should make it easy to build Qt from the sources and as "static" libraries:
@@ -642,7 +669,7 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
 
  3. Download and extract the *Qt 4.8.x* source code package (e.g. to ``C:\QtSources\4.8.x``)
 
- 4. Edit the file ``mkspecs\win32-msvc2010\qmake.conf`` from your Qt Sources directory as follows:
+ 4. Edit the *qmake* configuration file (e.g. ``mkspecs\win32-msvc2015\qmake.conf``) from your Qt Sources directory as follows:
 
     * Edit #1:
         + &lArr; ``QMAKE_CFLAGS_RELEASE = -O2 -MD``
@@ -676,9 +703,9 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
     + ``plugins\imageformats\qsvg.lib``
     + ``plugins\imageformats\qtga.lib``
 
-13. Put all the static *.lib files into the ``Prerequisites\qt4_static\lib`` directory
+13. Put all the static *.lib files into the `<sources_root>\Prerequisites\Qt4\<toolset_version>\Static\lib` directory
 
-14. ImageFormat plugins go to ``Prerequisites\qt4_static\plugins\imageformats``
+14. ImageFormat plugins go to `<sources_root>\Prerequisites\Qt4\<toolset_version>\plugins\imageformats`
 
 15. Congratulations, you should now be prepared to build the ``Release_Static`` configuration of LameXP &#x1f60a;
 

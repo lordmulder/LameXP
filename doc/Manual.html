@@ -91,7 +91,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li><a href="#developer-center"><span class="toc-section-number">8</span> Developer Center</a><ul>
 <li><a href="#source-code-access"><span class="toc-section-number">8.1</span> Source Code Access</a></li>
 <li><a href="#build-prerequisites"><span class="toc-section-number">8.2</span> Build Prerequisites</a></li>
-<li><a href="#qt-as-static-libraries"><span class="toc-section-number">8.3</span> Qt as Static Libraries</a></li>
+<li><a href="#directory-layout"><span class="toc-section-number">8.3</span> Directory Layout</a></li>
+<li><a href="#environment-variables"><span class="toc-section-number">8.4</span> Environment variables</a></li>
+<li><a href="#using-the-deployment-script"><span class="toc-section-number">8.5</span> Using the deployment script</a></li>
+<li><a href="#qt-as-static-libraries"><span class="toc-section-number">8.6</span> Qt as Static Libraries</a></li>
 </ul></li>
 <li><a href="#f.a.q.-frequently-asked-questions"><span class="toc-section-number">9</span> F.A.Q. (Frequently Asked Questions)</a><ul>
 <li><a href="#q-do-i-have-to-pay-for-using-or-obtaining-lamexp"><span class="toc-section-number">9.1</span> Q: Do I have to pay for using or obtaining LameXP?</a></li>
@@ -469,8 +472,9 @@ Exit all running instances of LameXP as quickly as possible, even if that incurs
 <h2 id="build-prerequisites"><span class="header-section-number">8.2</span> Build Prerequisites</h2>
 <p>LameXP is currently being developed and built using the following development tools and libraries:</p>
 <ul>
-<li><p><a href="https://www.visualstudio.com/">Visual Studio 2015 Update-1</a>, running on Windows 7 with Service Pack 1</p></li>
+<li><p><a href="https://www.visualstudio.com/">Visual Studio 2015 Update-1</a>, running on Windows 10 x64 (v1511)</p></li>
 <li><p><a href="http://download.qt.io/archive/qt/4.8/">Qt libraries 4.8.7</a> for Windows (our <em>pre-compiled</em> Qt libraries for Visual Studio 2015 can be found <a href="http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/"><strong>here</strong></a>)</p></li>
+<li><p><a href="https://vld.codeplex.com/">Visual Leak Detector</a>, open-source memory leak detection system for Visual C++</p></li>
 <li><p>Windows Platform SDK v7.1A, included with Visual Studio 2015 or Visual Studio 2013</p></li>
 <li><p>The minimum supported <em>build</em> platform is Windows 7 (x86 and x64)</p></li>
 </ul>
@@ -489,13 +493,31 @@ Exit all running instances of LameXP as quickly as possible, even if that incurs
 <li><p><a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> – the Universal Document Converter</p></li>
 <li><p><a href="https://www.gpg4win.de/">GnuPG</a> – the GNU Privacy Guard (Gpg4win)</p></li>
 </ul>
-<h2 id="qt-as-static-libraries"><span class="header-section-number">8.3</span> Qt as Static Libraries</h2>
+<h2 id="directory-layout"><span class="header-section-number">8.3</span> Directory Layout</h2>
+<p>In order to build LameXP using the provided project/solution files or the provided deployment script, please make sure you have the following directory layout, where <code>&lt;sources_root&gt;</code> is a new/empty directory:</p>
+<ul>
+<li><code>&lt;sources_root&gt;\LameXP_Qt</code> – the <em>LameXP</em> &quot;main&quot; project</li>
+<li><code>&lt;sources_root&gt;\Prerequisites</code> – prerequisites to build LameXP</li>
+<li><code>&lt;sources_root&gt;\MUtilities</code> – the <em>MUtilities</em> library</li>
+</ul>
+<p>The <em>Qt</em> libraries need to be located at the following location, where the <code>&lt;toolset_version&gt;</code> identifies your compiler version (e.g. <code>v140_xp</code> for VS2015) and the <code>&lt;build_type&gt;</code> identifies the build configuration (<code>Shared</code>, <code>Static</code> or <code>Debug</code>):</p>
+<ul>
+<li><code>&lt;sources_root&gt;\Prerequisites\Qt4\&lt;toolset_version&gt;\&lt;build_type&gt;</code></li>
+</ul>
+<h2 id="environment-variables"><span class="header-section-number">8.4</span> Environment variables</h2>
+<p>In order to build LameXP using the provided project/solution files or the provided deployment script, make sure the following environment variables are configured on your system:</p>
+<ul>
+<li><code>QTDIR</code> – points to your Qt installation directory, such that <code>%QTDIR%\bin\moc.exe</code> and friends exist</li>
+</ul>
+<h2 id="using-the-deployment-script"><span class="header-section-number">8.5</span> Using the deployment script</h2>
+<p>In order to create LameXP release packages, using the included deployment scripts, <strong>copy</strong> the <em>configuration</em> template file <code>buildenv.template.txt</code>, located at <code>&lt;sources_root&gt;\LameXP_Qt\etc\Deployment</code>, to the file <code>buildenv.txt</code> in the <em>same</em> directory. Now edit <em>your</em> <code>buildenv.txt</code> and adjust all the path variables as needed. All paths must be set up correctly, otherwise the build process is going to fail! Once everything has been set up, you can run <code>release.bat</code> or <code>release_static.bat</code> in order to create a new release package.</p>
+<h2 id="qt-as-static-libraries"><span class="header-section-number">8.6</span> Qt as Static Libraries</h2>
 <p>In order to create a &quot;fully static&quot; build of LameXP, i.e. a build that does <em>not</em> depend on any &quot;external&quot; DLL files (except for the obligatory operating system DLL's that you cannot get around), you'll need to compile Qt as &quot;static&quot; libraries. The official Qt web-site <em>does</em> provide pre-compiled Qt libraries. However, they only provide DLL versions, they do <em>not</em> provide &quot;static&quot; libraries. Consequently, you need to build the required &quot;static&quot; Qt libraries yourself. The following simple instructions should make it easy to build Qt from the sources and as &quot;static&quot; libraries:</p>
 <ol>
 <li><p>Make sure <em>Visual Studio 2015</em> with Update-1 (or later) is installed</p></li>
 <li><p>Make sure <em>Strawberry Perl </em>for Windows and <em>Python 2.7</em> are installed</p></li>
 <li><p>Download and extract the <em>Qt 4.8.x</em> source code package (e.g. to <code>C:\QtSources\4.8.x</code>)</p></li>
-<li><p>Edit the file <code>mkspecs\win32-msvc2010\qmake.conf</code> from your Qt Sources directory as follows:</p>
+<li><p>Edit the <em>qmake</em> configuration file (e.g. <code>mkspecs\win32-msvc2015\qmake.conf</code>) from your Qt Sources directory as follows:</p>
 <ul>
 <li>Edit #1:
 <ul>
@@ -526,8 +548,8 @@ Exit all running instances of LameXP as quickly as possible, even if that incurs
 <li><code>plugins\imageformats\qsvg.lib</code></li>
 <li><code>plugins\imageformats\qtga.lib</code></li>
 </ul></li>
-<li><p>Put all the static *.lib files into the <code>Prerequisites\qt4_static\lib</code> directory</p></li>
-<li><p>ImageFormat plugins go to <code>Prerequisites\qt4_static\plugins\imageformats</code></p></li>
+<li><p>Put all the static *.lib files into the <code>&lt;sources_root&gt;\Prerequisites\Qt4\&lt;toolset_version&gt;\Static\lib</code> directory</p></li>
+<li><p>ImageFormat plugins go to <code>&lt;sources_root&gt;\Prerequisites\Qt4\&lt;toolset_version&gt;\plugins\imageformats</code></p></li>
 <li><p>Congratulations, you should now be prepared to build the <code>Release_Static</code> configuration of LameXP 😊</p></li>
 </ol>
 <p><em>Note:</em> Static libraries only work with the exactly same compiler (version) they were built with!</p>
