@@ -3,7 +3,7 @@
 #define PATH_MSCDIR "C:\Program Files (x86)\Microsoft Visual Studio 14.0"
 #define PATH_WINSDK "C:\Program Files (x86)\Windows Kits\10"
 #define PATH_QTMSVC "C:\QtSDK\Desktop\Qt\4.8.7"
-#define PATH_GNUPG1 "C:\Program Files\GNU\GnuPG"
+#define PATH_GPGWIN "C:\Program Files\GNU\GnuPG\pub"
 #define PATH_PANDOC "C:\Program Files\Pandoc"
 #define PATH_VCTOOL "140"
 #define PATH_VCPROJ "LameXP_VS2015.sln"
