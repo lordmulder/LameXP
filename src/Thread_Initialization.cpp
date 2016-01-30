@@ -300,10 +300,10 @@ public:
 protected:
 	void taskMain(void)
 	{
-		initAacEncImpl(m_encoder_info->toolName, m_encoder_info->fileNames, m_encoder_info->toolMinVersion, m_encoder_info->verDigits, m_encoder_info->verShift, m_encoder_info->verStr, MAKE_REGEXP(m_encoder_info->regExpVer), MAKE_REGEXP(m_encoder_info->regExpSig));
+		initAacEncImpl(m_encoder_info->toolName, m_encoder_info->fileNames, m_encoder_info->checkArgs ? (QStringList() << QString::fromLatin1(m_encoder_info->checkArgs)) : QStringList(), m_encoder_info->toolMinVersion, m_encoder_info->verDigits, m_encoder_info->verShift, m_encoder_info->verStr, MAKE_REGEXP(m_encoder_info->regExpVer), MAKE_REGEXP(m_encoder_info->regExpSig));
 	}
 
-	static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp());
+	static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp());
 
 private:
 	const aac_encoder_t *const m_encoder_info;
@@ -608,7 +608,7 @@ void InitializationThread::initTranslations(void)
 // AAC Encoder Detection
 ////////////////////////////////////////////////////////////
 
-void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *const fileNames[], const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig)
+void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig)
 {
 	static const size_t MAX_FILES = 8;
 	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
@@ -653,8 +653,7 @@ void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *cons
 
 	QProcess process;
 	MUtils::init_process(process, fileInfo.first().absolutePath());
-
-	process.start(fileInfo.first().canonicalFilePath(), QStringList() << "-help");
+	process.start(fileInfo.first().canonicalFilePath(), checkArgs);
 
 	if(!process.waitForStarted())
 	{

@@ -3163,58 +3163,58 @@
         <translation>Codificando archivos, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="656"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="663"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>¡Cancelado! Esperando a que finalicen las tareas que se están ejecutando...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="689"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="696"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Creando el archivo de lista de reproducción, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="700"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="707"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Cancelado</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="700"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="707"/>
         <source>Process was aborted by the user.</source>
         <translation>El proceso ha sido cancelado por el usuario.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="726"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Error</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="726"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
         <source>At least one file has failed!</source>
         <translation>¡Se ha producido al menos un error!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="742"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="744"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="751"/>
         <source>All files completed successfully.</source>
         <translation>Todos los archivos han sido codificados correctamente.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="744"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="751"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Finalizado</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1037"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
         <source>Playlist creation failed</source>
         <translation>Error al crear la lista de reproducción</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1037"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
         <source>The playlist file could not be created:</source>
         <translation>No ha podido crearse la lista de reproducción:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="706"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>¡El proceso fue cancelado prematuramente por el usuario!</translation>
     </message>
@@ -3234,13 +3234,13 @@
         <translation>Apagar el ordenador cuando todos los archivos hayan sido convertidos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1101"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1108"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Aviso: El ordenador de apagará en %1 segundos...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1105"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1106"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1112"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1113"/>
         <source>Cancel Shutdown</source>
         <translation>Cancelar apagado</translation>
     </message>
@@ -3263,7 +3263,7 @@
         <translation>Espcaio libre en disco (Carpeta temporal)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="716"/>
         <source>Process finished after %1.</source>
         <translation>Finalizado en %1.</translation>
     </message>
@@ -3298,12 +3298,12 @@
         <translation>Mostrar todos los archivos</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="938"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="945"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Ninguno de los archivos concuerda con las reglas de filtrado</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="706"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>¡El proceso fue abortado por el usuario tras %n archivo!</numerusform>
@@ -3311,7 +3311,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1157"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1164"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n hora</numerusform>
@@ -3319,8 +3319,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1158"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1162"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1165"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1169"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n minuto</numerusform>
@@ -3328,8 +3328,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1163"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1167"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1170"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1174"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n segundo</numerusform>
@@ -3337,7 +3337,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1168"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1175"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n milisegundo</numerusform>
@@ -3345,7 +3345,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="667"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="674"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Codificando: %n de %1 archivo completado, espere por favor...</numerusform>
@@ -3353,7 +3353,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="720"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="727"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 de %n archivo fallido (%2). ¡Haga doble clic en el archivo para obtener información más detallada!</numerusform>
@@ -3361,7 +3361,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="720"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="727"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n archivo omitido</numerusform>
@@ -3369,7 +3369,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="724"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Error: %1 de %n archivo fallido. ¡Haga doble clic en el archivo para obtener información más detallada!</numerusform>
@@ -3377,7 +3377,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="738"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="745"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Todos los archivos han sido procesados. Se ha omitido %n archivo.</numerusform>

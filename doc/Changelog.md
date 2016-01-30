@@ -6,6 +6,7 @@
 
 * Fixed the location of temporary intermediate files for SoX-based audio effects
 * Updated MediaInfo to v0.7.82 (2016-01-27), compiled with ICL 15.0 and MSVC 12.0
+* Enabled the "built-in" resampler for QAAC encoder
 
 ## LameXP v4.13 [2015-12-12] ## {-}
 

@@ -44,6 +44,8 @@ static int index2bitrate(const int index)
 
 static const int g_qaacVBRQualityLUT[16] = {0 ,9, 18, 27, 36, 45, 54, 63, 73, 82, 91, 100, 109, 118, 127, INT_MAX};
 
+static const int RESAMPLING_QUALITY = 127;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -194,7 +196,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 	if (m_configSamplingRate > 0)
 	{
-		args << "-native-resampler" << "bats,127";
+		args << QString("--native-resampler=bats,%0").arg(QString::number(RESAMPLING_QUALITY));
 		args << "--rate" << QString::number(m_configSamplingRate);
 	}
 

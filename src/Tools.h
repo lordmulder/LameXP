@@ -104,8 +104,9 @@ g_lamexp_tools[] =
 
 typedef struct
 {
-	char *const       toolName;
+	const char *const toolName;
 	const char *const fileNames[8];
+	const char *const checkArgs;
 	const quint32     toolMinVersion;
 	const quint32     verDigits;
 	const quint32     verShift;
@@ -117,10 +118,11 @@ aac_encoder_t;
 
 static const aac_encoder_t g_lamexp_aacenc[] =
 {
-	{ "NeroAAC",   { "neroAacEnc.exe", "neroAacDec.exe", "neroAacTag.exe",                                NULL }, lamexp_toolver_neroaac(),   4,        10, "v?.?.?.?",   "Package\\s+version:\\s+(\\d)\\.(\\d)\\.(\\d)\\.(\\d)", "Nero\\s+AAC\\s+Encoder" },
-	{ "FhgAacEnc", { "fhgaacenc.exe", "enc_fhgaac.dll", "nsutil.dll", "libmp4v2.dll", "libsndfile-1.dll", NULL }, lamexp_toolver_fhgaacenc(), 1, 100000000, "????-??-??", "fhgaacenc version (\\d+) by tmkk",                                         NULL },
-	{ "FdkAacEnc", { "fdkaac.exe",                                                                        NULL }, lamexp_toolver_fdkaacenc(), 3,        10, "v?.?.?",     "fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)",                                          NULL },
-	{ "QAAC",      { "qaac.exe", "libsoxr.dll", "libsoxconvolver.dll",                                    NULL }, lamexp_toolver_qaacenc(),   2,       100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
-	{ "QAACx64",   { "qaac64.exe", "libsoxr64.dll", "libsoxconvolver64.dll",                              NULL }, lamexp_toolver_qaacenc(),   2,       100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
-	{ NULL, { NULL }, 0, 0, 0, NULL, NULL, NULL }
+	{ "NeroAAC",   { "neroAacEnc.exe", "neroAacDec.exe", "neroAacTag.exe",                                NULL }, "-help",   lamexp_toolver_neroaac(),   4,        10, "v?.?.?.?",   "Package\\s+version:\\s+(\\d)\\.(\\d)\\.(\\d)\\.(\\d)", "Nero\\s+AAC\\s+Encoder" },
+	{ "FhgAacEnc", { "fhgaacenc.exe", "enc_fhgaac.dll", "nsutil.dll", "libmp4v2.dll", "libsndfile-1.dll", NULL }, NULL,      lamexp_toolver_fhgaacenc(), 1, 100000000, "????-??-??", "fhgaacenc version (\\d+) by tmkk",                                         NULL },
+	{ "FdkAacEnc", { "fdkaac.exe",                                                                        NULL }, "--help",  lamexp_toolver_fdkaacenc(), 3,        10, "v?.?.?",     "fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)",                                          NULL },
+	{ "QAAC",      { "qaac.exe", "libsoxr.dll", "libsoxconvolver.dll",                                    NULL }, "--check", lamexp_toolver_qaacenc(),   2,       100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
+	{ "QAACx64",   { "qaac64.exe", "libsoxr64.dll", "libsoxconvolver64.dll",                              NULL }, "--check", lamexp_toolver_qaacenc(),   2,       100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
+	{ NULL, { NULL }, NULL, 0, 0, 0, NULL, NULL, NULL }
 };
+
