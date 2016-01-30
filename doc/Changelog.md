@@ -5,6 +5,7 @@
 ## LameXP v4.13 [2016-??-??] ## {-}
 
 * Fixed the location of temporary intermediate files for SoX-based audio effects
+* Updated MediaInfo to v0.7.82 (2016-01-27), compiled with ICL 15.0 and MSVC 12.0
 
 ## LameXP v4.13 [2015-12-12] ## {-}
 
