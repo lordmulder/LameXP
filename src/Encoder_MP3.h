@@ -41,7 +41,6 @@ public:
 	//Advanced options
 	virtual void setAlgoQuality(int value);
 	virtual void setBitrateLimits(int minimumBitrate, int maximumBitrate);
-	virtual void setSamplingRate(int value);
 	virtual void setChannelMode(int value);
 
 	//Encoder info
@@ -53,7 +52,6 @@ private:
 	int m_algorithmQuality;
 	int m_configBitrateMaximum;
 	int m_configBitrateMinimum;
-	int m_configSamplingRate;
 	int m_configChannelMode;
 
 	int clipBitrate(int bitrate);

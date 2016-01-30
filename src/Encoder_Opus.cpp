@@ -110,6 +110,11 @@ class OpusEncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "opus";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return false;
+	}
 }
 static const g_opusEncoderInfo;
 

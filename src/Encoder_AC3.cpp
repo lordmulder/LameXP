@@ -113,6 +113,11 @@ class AC3EncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "ac3";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return false;
+	}
 }
 static const g_aftenEncoderInfo;
 

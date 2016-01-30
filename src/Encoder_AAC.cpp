@@ -114,6 +114,11 @@ class AACEncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "mp4";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return false;
+	}
 }
 static const g_aacEncoderInfo;
 

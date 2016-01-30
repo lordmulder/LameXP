@@ -125,6 +125,11 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "mp4";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return true;
+	}
 }
 static const g_qaacEncoderInfo;
 
@@ -185,6 +190,12 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
 		break;
+	}
+
+	if (m_configSamplingRate > 0)
+	{
+		args << "-native-resampler" << "bats,127";
+		args << "--rate" << QString::number(m_configSamplingRate);
 	}
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);

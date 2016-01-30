@@ -34,7 +34,7 @@ class EncoderRegistry : public QObject
 	Q_OBJECT
 
 public:
-	static AbstractEncoder *createInstance(const int encoderId, const SettingsModel *settings, bool *nativeResampling);
+	static AbstractEncoder *createInstance(const int encoderId, const SettingsModel *settings);
 	static const AbstractEncoderInfo *getEncoderInfo(const int encoderId);
 	
 	static void saveEncoderMode(SettingsModel *settings, const int encoderId, const int rcMode);

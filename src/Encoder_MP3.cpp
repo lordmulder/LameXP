@@ -114,6 +114,11 @@ class MP3EncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "mp3";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return true;
+	}
 }
 static const g_mp3EncoderInfo;
 
@@ -332,11 +337,6 @@ void MP3Encoder::setBitrateLimits(int minimumBitrate, int maximumBitrate)
 {
 	m_configBitrateMinimum = minimumBitrate;
 	m_configBitrateMaximum = maximumBitrate;
-}
-
-void MP3Encoder::setSamplingRate(int value)
-{
-	m_configSamplingRate = value;
 }
 
 void MP3Encoder::setChannelMode(int value)
