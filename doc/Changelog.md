@@ -2,7 +2,7 @@
 
 # LameXP v4.xx History #
 
-## LameXP v4.13 [2016-??-??] ## {-}
+## LameXP v4.14 [2016-??-??] ## {-}
 
 * Fixed the location of temporary intermediate files for SoX-based audio effects
 * Enabled the "built-in" resampler for QAAC encoder
