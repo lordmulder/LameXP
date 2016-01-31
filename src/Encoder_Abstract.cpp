@@ -40,6 +40,7 @@ AbstractEncoder::~AbstractEncoder(void)
 {
 }
 
+
 /*
  * Setters
  */
@@ -51,6 +52,7 @@ void AbstractEncoder::setRCMode(const int &mode)
 		MUTILS_THROW("This RC mode is not supported by the encoder!");
 	}
 	m_configRCMode = qMax(0, mode);
+	m_configBitrate = qBound(0, m_configBitrate, toEncoderInfo()->valueCount(m_configRCMode) - 1);
 }
 
 void AbstractEncoder::setBitrate(const int &bitrate)
