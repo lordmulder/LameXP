@@ -86,6 +86,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 				{
 					QAACEncoder *const aacEncoder = new QAACEncoder();
 					aacEncoder->setProfile(settings->aacEncProfile());
+					aacEncoder->setAlgoQuality(settings->lameAlgoQuality());
 					encoder = aacEncoder;
 				}
 				break;

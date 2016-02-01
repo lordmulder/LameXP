@@ -150,6 +150,7 @@ QAACEncoder::QAACEncoder(void)
 	}
 
 	m_configProfile = 0;
+	m_algorithmQuality = 2;
 }
 
 QAACEncoder::~QAACEncoder(void)
@@ -194,6 +195,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		break;
 	}
 
+	args << "--quality" << QString::number(qBound(0, m_algorithmQuality, 2));
 	if (m_configSamplingRate > 0)
 	{
 		args << QString("--native-resampler=bats,%0").arg(QString::number(RESAMPLING_QUALITY));
@@ -299,6 +301,11 @@ bool QAACEncoder::isFormatSupported(const QString &containerType, const QString 
 void QAACEncoder::setProfile(int profile)
 {
 	m_configProfile = profile;
+}
+
+void QAACEncoder::setAlgoQuality(int value)
+{
+	m_algorithmQuality = qBound(0, value, 2);
 }
 
 const AbstractEncoderInfo *QAACEncoder::getEncoderInfo(void)
