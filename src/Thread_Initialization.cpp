@@ -695,7 +695,7 @@ void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *cons
 					toolVersion = 0;
 					for(quint32 i = 0; i < verDigits; i++)
 					{
-						toolVersion = (toolVersion * verShift) + qBound(0U, tmp[i], (verShift - 1));
+						toolVersion = (verShift > 0) ? ((toolVersion * verShift) + qBound(0U, tmp[i], (verShift - 1))) : tmp[i];
 					}
 				}
 			}

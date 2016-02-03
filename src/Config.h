@@ -34,8 +34,8 @@
 #define VER_LAMEXP_MINOR_HI					1
 #define VER_LAMEXP_MINOR_LO					4
 #define VER_LAMEXP_TYPE						Alpha
-#define VER_LAMEXP_PATCH					2
-#define VER_LAMEXP_BUILD					1862
+#define VER_LAMEXP_PATCH					3
+#define VER_LAMEXP_BUILD					1864
 #define VER_LAMEXP_CONFG					1818
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #define VER_LAMEXP_TOOL_NEROAAC				1540
-#define VER_LAMEXP_TOOL_FHGAACENC			20120806
+#define VER_LAMEXP_TOOL_FHGAACENC			20151024
 #define VER_LAMEXP_TOOL_FDKAACENC			62
 #define VER_LAMEXP_TOOL_QAAC				258
 
