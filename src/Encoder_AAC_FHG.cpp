@@ -184,7 +184,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		break;
 	}
 
-	args << "--dll" << m_binary_dll;
+	//args << "--dll" << m_binary_dll;
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
