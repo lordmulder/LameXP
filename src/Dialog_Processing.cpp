@@ -569,10 +569,9 @@ void ProcessingDialog::startNextJob(void)
 	m_runningThreads++;
 
 	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
-	bool nativeResampling = false;
 
 	//Create encoder instance
-	AbstractEncoder *encoder = EncoderRegistry::createInstance(m_settings->compressionEncoder(), m_settings, &nativeResampling);
+	AbstractEncoder *encoder = EncoderRegistry::createInstance(m_settings->compressionEncoder(), m_settings);
 
 	//Create processing thread
 	ProcessThread *thread = new ProcessThread
@@ -589,11 +588,19 @@ void ProcessingDialog::startNextJob(void)
 	{
 		thread->addFilter(new DownmixFilter());
 	}
-	if((m_settings->samplingRate() > 0) && !nativeResampling)
+	if(m_settings->samplingRate() > 0)
 	{
-		if(SettingsModel::samplingRates[m_settings->samplingRate()] != currentFile.techInfo().audioSamplerate() || currentFile.techInfo().audioSamplerate() == 0)
+		const int targetRate = SettingsModel::samplingRates[qBound(1, m_settings->samplingRate(), 6)];
+		if((targetRate != currentFile.techInfo().audioSamplerate()) || (currentFile.techInfo().audioSamplerate() == 0))
 		{
-			thread->addFilter(new ResampleFilter(SettingsModel::samplingRates[m_settings->samplingRate()]));
+			if (encoder->toEncoderInfo()->isResamplingSupported())
+			{
+				encoder->setSamplingRate(targetRate);
+			}
+			else
+			{
+				thread->addFilter(new ResampleFilter(targetRate));
+			}
 		}
 	}
 	if((m_settings->toneAdjustBass() != 0) || (m_settings->toneAdjustTreble() != 0))

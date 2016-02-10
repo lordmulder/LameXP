@@ -111,6 +111,11 @@ class VorbisEncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "ogg";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return true;
+	}
 }
 static const g_vorbisEncoderInfo;
 
@@ -273,11 +278,6 @@ void VorbisEncoder::setBitrateLimits(int minimumBitrate, int maximumBitrate)
 {
 	m_configBitrateMinimum = minimumBitrate;
 	m_configBitrateMaximum = maximumBitrate;
-}
-
-void VorbisEncoder::setSamplingRate(int value)
-{
-	m_configSamplingRate = value;
 }
 
 const AbstractEncoderInfo *VorbisEncoder::getEncoderInfo(void)

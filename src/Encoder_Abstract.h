@@ -49,6 +49,7 @@ public:
 	value_type_t;
 
 	virtual bool isModeSupported(int mode)   const = 0;	//Returns whether the encoder does support the current RC mode
+	virtual bool isResamplingSupported(void) const = 0;	//Returns whether the encoder has "native" resampling support
 	virtual int valueCount(int mode)         const = 0;	//The number of bitrate/quality values for current RC mode
 	virtual int valueAt(int mode, int index) const = 0;	//The bitrate/quality value at 'index' for the current RC mode
 	virtual int valueType(int mode)          const = 0;	//The display type of the values for the current RC mode
@@ -73,8 +74,9 @@ public:
 	virtual const bool needsTimingInfo(void);
 
 	//Common setter methods
-	virtual void setBitrate(int bitrate);
-	virtual void setRCMode(int mode);
+	virtual void setBitrate(const int &bitrate);
+	virtual void setRCMode(const int &mode);
+	virtual void setSamplingRate(const int &value);
 	virtual void setCustomParams(const QString &customParams);
 
 	//Encoder info
@@ -88,6 +90,7 @@ public:
 protected:
 	int m_configBitrate;			//Bitrate *or* VBR-quality-level
 	int m_configRCMode;				//Rate-control mode
+	int m_configSamplingRate;		//Target sampling rate
 	QString m_configCustomParams;	//Custom parameters, if any
 
 	//Helper functions

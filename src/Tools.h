@@ -72,8 +72,8 @@ g_lamexp_tools[] =
 	{"9511e7ef2ad10de05386eedf7f14d637edab894a53dacd2f8f15c6f8ed582f12c25fb5bf88438e62c46b8eb92e7634b2", CPU_TYPE_ALL_SSE, "lame.sse2.exe", 3995, "Final"},
 	{"51af33a33bd9bde6ca6e9c612346b9c138584de59a92bc14a680729066fd849fd83fe668f79e2a06ffe117f39993d10a", CPU_TYPE_ALL_GEN, "mac.i386.exe", 416, ""},
 	{"117e60cf4445cec0a777d2636091a13c50be5c6ed28afaa75ab09ab4576942f1a8584b36d3abac9db7595dfb0d90207e", CPU_TYPE_ALL_SSE, "mac.sse2.exe", 416, ""},
-	{"775be143ae5446fae09c606804e6c41a3dc1ca7efbd2fbf1dec51c7bdce818598dd141e4203e7f2adb57c5f18411cf68", CPU_TYPE_X86_ALL, "mediainfo.i386.exe", 778, ""},
-	{"b38feb2df106252528542e31e5fc32c87059fac816d2800e86e7294d090395189d0a8450d39240b02fb9a6b1419903ab", CPU_TYPE_X64_ALL, "mediainfo.x64.exe",  778, ""},
+	{"2651dcd3c85b76bf1bbe5520e0e76b9d8db7459a1eb7fc1d49dc32c22dcf99957bcba8961b70c194ea3d4346d8c4118f", CPU_TYPE_X86_ALL, "mediainfo.i386.exe", 782, ""},
+	{"ee5990856760c5bd73332ddb88a126861f03ffa8070e4e84812a3f63da3387582641c61e692d9b3f432ac1c101e8704f", CPU_TYPE_X64_ALL, "mediainfo.x64.exe",  782, ""},
 	{"7e6346a057634ff07b2e1f427035324f7f02100cc996425990f87f71d767fce4c7b101588c7d944ba49cb2d7e51c9bdb", CPU_TYPE_ALL_ALL, "mpcdec.exe", 475, ""},
 	{"02f3e52fca662c97fc15ee5d5c6ded2966d716ec5e5ab958accd4761eb864cc7c62ace97198b876a78cf75ab11c555b2", CPU_TYPE_ALL_ALL, "mpg123.exe", 1224, ""},
 	{"f1f2ea5c9e5539620b706e7af68e543bf7a731afb06ccce3815ab34dad64d697e4d6ffcd187a396619b8b52efe7edf88", CPU_TYPE_ALL_ALL, "oggdec.exe", 1101, ""},
@@ -84,7 +84,8 @@ g_lamexp_tools[] =
 	{"e3fc96044491bd96734dc25c8fdcb1760ee86a8fd47ad74481999ae18593d0647f0d4a45f058950b9def0903e8a30fc3", CPU_TYPE_ALL_SSE, "opusdec.sse2.exe", 20150326, "v1.1"},
 	{"ae777a525a4670df1deca0483c5087f129d8131eaf946b2cd72fa96ab65db7fb600766448d28caf2102d97b3fa26e6bc", CPU_TYPE_ALL_GEN, "opusenc.i386.exe", 20150326, "v1.1"},
 	{"8eadcdfe01a6ff2d88b6cfdf203c6eae6f858bd17b894644fa1d78d293235d8dc21b0102b8ca3d48f718251b3f2e9e5a", CPU_TYPE_ALL_SSE, "opusenc.sse2.exe", 20150326, "v1.1"},
-	{"256882a5b7af7f23fe9ca6b63d9ec00482e54ee6f621581de385dac7a115046758151c45a97828936f7e967434b9bc19", CPU_TYPE_ALL_ALL, "refalac.exe", 147, ""},
+	{"bd4c8cd7d32869f8ed332b51349147c9b987a7e552aadfd15a312e5956efc9cc0c8ee9ed8283240b049c8f5c8fc3ad9b", CPU_TYPE_X86_ALL, "refalac.i386.exe", 158, ""},
+	{"5821414021725248f19e71969348d04a561d81668114cabe5259e9cd65867337a8176e0f41a3cf7d2f88693e5df8850b", CPU_TYPE_X64_ALL, "refalac.x64.exe",  158, ""},
 	{"d041b60de6c5c6e77cbad84440db57bbeb021af59dd0f7bebd3ede047d9e2ddc2a0c14179472687ba91063743d23e337", CPU_TYPE_ALL_ALL, "shorten.exe", 361, ""},
 	{"6e3f86cc464d84b0039139c9688e3097d0f42b794a5db10954d24fe77929585a0d0dba16cb677cc1b390392c39cdefad", CPU_TYPE_ALL_ALL, "sox.exe", 1442, ""},
 	{"5a4261e1b41a59d1a5bc92e1d2766422a67454d77e06ea29af392811b7b4704e0f3e494ab9cb6375ce9e39257867c5ed", CPU_TYPE_ALL_ALL, "speexdec.exe", 12, ""},
@@ -104,8 +105,9 @@ g_lamexp_tools[] =
 
 typedef struct
 {
-	char *const       toolName;
+	const char *const toolName;
 	const char *const fileNames[8];
+	const char *const checkArgs;
 	const quint32     toolMinVersion;
 	const quint32     verDigits;
 	const quint32     verShift;
@@ -117,10 +119,10 @@ aac_encoder_t;
 
 static const aac_encoder_t g_lamexp_aacenc[] =
 {
-	{ "NeroAAC",   { "neroAacEnc.exe", "neroAacDec.exe", "neroAacTag.exe",                                NULL }, lamexp_toolver_neroaac(),   4,        10, "v?.?.?.?",   "Package\\s+version:\\s+(\\d)\\.(\\d)\\.(\\d)\\.(\\d)", "Nero\\s+AAC\\s+Encoder" },
-	{ "FhgAacEnc", { "fhgaacenc.exe", "enc_fhgaac.dll", "nsutil.dll", "libmp4v2.dll", "libsndfile-1.dll", NULL }, lamexp_toolver_fhgaacenc(), 1, 100000000, "????-??-??", "fhgaacenc version (\\d+) by tmkk",                                         NULL },
-	{ "FdkAacEnc", { "fdkaac.exe",                                                                        NULL }, lamexp_toolver_fdkaacenc(), 3,        10, "v?.?.?",     "fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)",                                          NULL },
-	{ "QAAC",      { "qaac.exe", "libsoxr.dll", "libsoxconvolver.dll",                                    NULL }, lamexp_toolver_qaacenc(),   2,       100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
-	{ "QAACx64",   { "qaac64.exe", "libsoxr64.dll", "libsoxconvolver64.dll",                              NULL }, lamexp_toolver_qaacenc(),   2,       100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
-	{ NULL, { NULL }, 0, 0, 0, NULL, NULL, NULL }
+	{ "NeroAAC",   { "neroAacEnc.exe", "neroAacDec.exe", "neroAacTag.exe",             NULL }, "-help",   lamexp_toolver_neroaac(),   4,  10, "v?.?.?.?",   "Package\\s+version:\\s+(\\d)\\.(\\d)\\.(\\d)\\.(\\d)", "Nero\\s+AAC\\s+Encoder" },
+	{ "FhgAacEnc", { "fhgaacenc.exe",  "enc_fhgaac.dll", "nsutil.dll", "libmp4v2.dll", NULL }, NULL,      lamexp_toolver_fhgaacenc(), 2,   0, "????-??-??", "fhgaacenc version (\\d+) by tmkk. Modified by Case (\\d+).",               NULL },
+	{ "FdkAacEnc", { "fdkaac.exe",                                                     NULL }, "--help",  lamexp_toolver_fdkaacenc(), 3,  10, "v?.?.?",     "fdkaac\\s+(\\d)\\.(\\d)\\.(\\d)",                                          NULL },
+	{ "QAAC",      { "qaac.exe",       "libsoxr.dll",   "libsoxconvolver.dll",         NULL }, "--check", lamexp_toolver_qaacenc(),   2, 100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
+	{ "QAACx64",   { "qaac64.exe",     "libsoxr64.dll", "libsoxconvolver64.dll",       NULL }, "--check", lamexp_toolver_qaacenc(),   2, 100, "v?.??",      "qaac (\\d)\\.(\\d+)",                                                      NULL },
+	{ NULL, { NULL }, NULL, 0, 0, 0, NULL, NULL, NULL }
 };

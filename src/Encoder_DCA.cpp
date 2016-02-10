@@ -115,6 +115,11 @@ class DCAEncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "dts";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return false;
+	}
 }
 static const g_dcaEncoderInfo;
 

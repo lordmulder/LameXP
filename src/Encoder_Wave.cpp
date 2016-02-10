@@ -111,6 +111,11 @@ public:
 		static const char* s_extension = "wav";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return false;
+	}
 }
 static const g_waveEncoderInfo;
 

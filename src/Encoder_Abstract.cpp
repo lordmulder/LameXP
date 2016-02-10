@@ -33,19 +33,51 @@ AbstractEncoder::AbstractEncoder(void)
 	m_configBitrate = 0;
 	m_configRCMode = 0;
 	m_configCustomParams.clear();
+	m_configSamplingRate = 0;
 }
 
 AbstractEncoder::~AbstractEncoder(void)
 {
 }
 
+
 /*
  * Setters
  */
 
-void AbstractEncoder::setBitrate(int bitrate) { m_configBitrate = qMax(0, bitrate); }
-void AbstractEncoder::setRCMode(int mode) { m_configRCMode = qMax(0, mode); }
-void AbstractEncoder::setCustomParams(const QString &customParams) { m_configCustomParams = customParams.trimmed(); }
+void AbstractEncoder::setRCMode(const int &mode)
+{
+	if (!toEncoderInfo()->isModeSupported(qMax(0, mode)))
+	{
+		MUTILS_THROW("This RC mode is not supported by the encoder!");
+	}
+	m_configRCMode = qMax(0, mode);
+	m_configBitrate = qBound(0, m_configBitrate, toEncoderInfo()->valueCount(m_configRCMode) - 1);
+}
+
+void AbstractEncoder::setBitrate(const int &bitrate)
+{
+	if (qMax(0, bitrate) >= toEncoderInfo()->valueCount(m_configRCMode))
+	{
+		MUTILS_THROW("The specified bitrate/quality is out of range!");
+	}
+	m_configBitrate = qMax(0, bitrate);
+}
+
+void AbstractEncoder::setCustomParams(const QString &customParams)
+{
+	m_configCustomParams = customParams.trimmed();
+}
+
+void AbstractEncoder::setSamplingRate(const int &value)
+{
+	if (!toEncoderInfo()->isResamplingSupported())
+	{
+		MUTILS_THROW("This encoder does *not* support native resampling!");
+	}
+	m_configSamplingRate = qBound(0, value, 48000);
+};
+
 
 /*
  * Default implementation
@@ -74,6 +106,7 @@ const bool AbstractEncoder::needsTimingInfo(void)
 {
 	return false;
 }
+
 
 /*
  * Helper functions

@@ -39,6 +39,7 @@ public:
 	
 	//Advanced options
 	virtual void setProfile(int profile);
+	virtual void setAlgoQuality(int value);
 
 	//Encoder info
 	virtual const AbstractEncoderInfo *toEncoderInfo(void) const { return getEncoderInfo(); }
@@ -48,4 +49,5 @@ private:
 	const QString m_binary_qaac32;
 	const QString m_binary_qaac64;
 	int m_configProfile;
+	int m_algorithmQuality;
 };

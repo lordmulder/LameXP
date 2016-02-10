@@ -44,6 +44,8 @@ static int index2bitrate(const int index)
 
 static const int g_qaacVBRQualityLUT[16] = {0 ,9, 18, 27, 36, 45, 54, 63, 73, 82, 91, 100, 109, 118, 127, INT_MAX};
 
+static const int RESAMPLING_QUALITY = 127;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -125,6 +127,11 @@ class QAACEncoderInfo : public AbstractEncoderInfo
 		static const char* s_extension = "mp4";
 		return s_extension;
 	}
+
+	virtual bool isResamplingSupported(void) const
+	{
+		return true;
+	}
 }
 static const g_qaacEncoderInfo;
 
@@ -143,6 +150,7 @@ QAACEncoder::QAACEncoder(void)
 	}
 
 	m_configProfile = 0;
+	m_algorithmQuality = 2;
 }
 
 QAACEncoder::~QAACEncoder(void)
@@ -185,6 +193,13 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
 		break;
+	}
+
+	args << "--quality" << QString::number(qBound(0, m_algorithmQuality, 2));
+	if (m_configSamplingRate > 0)
+	{
+		args << QString("--native-resampler=bats,%0").arg(QString::number(RESAMPLING_QUALITY));
+		args << "--rate" << QString::number(m_configSamplingRate);
 	}
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
@@ -286,6 +301,11 @@ bool QAACEncoder::isFormatSupported(const QString &containerType, const QString 
 void QAACEncoder::setProfile(int profile)
 {
 	m_configProfile = profile;
+}
+
+void QAACEncoder::setAlgoQuality(int value)
+{
+	m_algorithmQuality = qBound(0, value, 2);
 }
 
 const AbstractEncoderInfo *QAACEncoder::getEncoderInfo(void)

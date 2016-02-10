@@ -45,11 +45,10 @@
 // Create encoder instance
 ////////////////////////////////////////////////////////////
 
-AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const SettingsModel *settings, bool *nativeResampling)
+AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const SettingsModel *settings)
 {
 	int rcMode = -1;
 	AbstractEncoder *encoder =  NULL;
-	*nativeResampling = false;
 
 	//Create new encoder instance and apply encoder-specific settings
 	switch(encoderId)
@@ -57,16 +56,11 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	/*-------- MP3Encoder /*--------*/
 	case SettingsModel::MP3Encoder:
 		{
-			MP3Encoder *mp3Encoder = new MP3Encoder();
+			MP3Encoder *const mp3Encoder = new MP3Encoder();
 			mp3Encoder->setAlgoQuality(settings->lameAlgoQuality());
 			if(settings->bitrateManagementEnabled())
 			{
 				mp3Encoder->setBitrateLimits(settings->bitrateManagementMinRate(), settings->bitrateManagementMaxRate());
-			}
-			if(settings->samplingRate() > 0)
-			{
-				mp3Encoder->setSamplingRate(SettingsModel::samplingRates[settings->samplingRate()]);
-				*nativeResampling = true;
 			}
 			mp3Encoder->setChannelMode(settings->lameChannelMode());
 			encoder = mp3Encoder;
@@ -75,15 +69,10 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	/*-------- VorbisEncoder /*--------*/
 	case SettingsModel::VorbisEncoder:
 		{
-			VorbisEncoder *vorbisEncoder = new VorbisEncoder();
+			VorbisEncoder *const vorbisEncoder = new VorbisEncoder();
 			if(settings->bitrateManagementEnabled())
 			{
 				vorbisEncoder->setBitrateLimits(settings->bitrateManagementMinRate(), settings->bitrateManagementMaxRate());
-			}
-			if(settings->samplingRate() > 0)
-			{
-				vorbisEncoder->setSamplingRate(SettingsModel::samplingRates[settings->samplingRate()]);
-				*nativeResampling = true;
 			}
 			encoder = vorbisEncoder;
 		}
@@ -95,28 +84,29 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 			{
 			case SettingsModel::AAC_ENCODER_QAAC:
 				{
-					QAACEncoder *aacEncoder = new QAACEncoder();
+					QAACEncoder *const aacEncoder = new QAACEncoder();
 					aacEncoder->setProfile(settings->aacEncProfile());
+					aacEncoder->setAlgoQuality(settings->lameAlgoQuality());
 					encoder = aacEncoder;
 				}
 				break;
 			case SettingsModel::AAC_ENCODER_FHG:
 				{
-					FHGAACEncoder *aacEncoder = new FHGAACEncoder();
+					FHGAACEncoder *const aacEncoder = new FHGAACEncoder();
 					aacEncoder->setProfile(settings->aacEncProfile());
 					encoder = aacEncoder;
 				}
 				break;
 			case SettingsModel::AAC_ENCODER_FDK:
 				{
-					FDKAACEncoder *aacEncoder = new FDKAACEncoder();
+					FDKAACEncoder *const aacEncoder = new FDKAACEncoder();
 					aacEncoder->setProfile(settings->aacEncProfile());
 					encoder = aacEncoder;
 				}
 				break;
 			case SettingsModel::AAC_ENCODER_NERO:
 				{
-					AACEncoder *aacEncoder = new AACEncoder();
+					AACEncoder *const aacEncoder = new AACEncoder();
 					aacEncoder->setEnable2Pass(settings->neroAACEnable2Pass());
 					aacEncoder->setProfile(settings->aacEncProfile());
 					encoder = aacEncoder;
@@ -131,7 +121,7 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	/*-------- AC3Encoder /*--------*/
 	case SettingsModel::AC3Encoder:
 		{
-			AC3Encoder *ac3Encoder = new AC3Encoder();
+			AC3Encoder *const ac3Encoder = new AC3Encoder();
 			ac3Encoder->setAudioCodingMode(settings->aftenAudioCodingMode());
 			ac3Encoder->setDynamicRangeCompression(settings->aftenDynamicRangeCompression());
 			ac3Encoder->setExponentSearchSize(settings->aftenExponentSearchSize());
@@ -142,14 +132,14 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	/*-------- FLACEncoder /*--------*/
 	case SettingsModel::FLACEncoder:
 		{
-			FLACEncoder *flacEncoder = new FLACEncoder();
+			FLACEncoder *const flacEncoder = new FLACEncoder();
 			encoder = flacEncoder;
 		}
 		break;
 	/*-------- OpusEncoder --------*/
 	case SettingsModel::OpusEncoder:
 		{
-			OpusEncoder *opusEncoder = new OpusEncoder();
+			OpusEncoder *const opusEncoder = new OpusEncoder();
 			opusEncoder->setOptimizeFor(settings->opusOptimizeFor());
 			opusEncoder->setEncodeComplexity(settings->opusComplexity());
 			opusEncoder->setFrameSize(settings->opusFramesize());
@@ -159,21 +149,21 @@ AbstractEncoder *EncoderRegistry::createInstance(const int encoderId, const Sett
 	/*-------- DCAEncoder --------*/
 	case SettingsModel::DCAEncoder:
 		{
-			DCAEncoder *dcaEncoder = new DCAEncoder();
+			DCAEncoder *const dcaEncoder = new DCAEncoder();
 			encoder = dcaEncoder;
 		}
 		break;
 	/*-------- MACEncoder --------*/
 	case SettingsModel::MACEncoder:
 		{
-			MACEncoder *macEncoder = new MACEncoder();
+			MACEncoder *const macEncoder = new MACEncoder();
 			encoder = macEncoder;
 		}
 		break;
 	/*-------- PCMEncoder --------*/
 	case SettingsModel::PCMEncoder:
 		{
-			WaveEncoder *waveEncoder = new WaveEncoder();
+			WaveEncoder *const waveEncoder = new WaveEncoder();
 			encoder = waveEncoder;
 		}
 		break;
