@@ -10,7 +10,6 @@
     <file>tools/oggdec.exe</file>
     <file>tools/opusdec.i386.exe</file>
     <file>tools/opusdec.sse2.exe</file>
-    <file>tools/refalac.i386.exe</file>
-    <file>tools/refalac.x64.exe</file>
+    <file>tools/opusdec.avx.exe</file>
   </qresource>
 </RCC>
