@@ -6,7 +6,7 @@
 
 * Fixed the location of temporary intermediate files for SoX-based audio effects
 * Enabled the "built-in" resampler for QAAC encoder
-* The "Algorithm Quality" slider now also effects the QAAC encoder
+* The "Algorithm Quality" slider now also affects the QAAC encoder
 * Added "AVX" (Advanced Vector Extensions) to CPU feature detection code
 * Updated Opus encoder/decoder libraries to v1.1.2 and Opus-Tools to v0.1.9 (2016-01-12)
 * Updated LAME encoder to v3.100 Alpha-2 (2016-01-29), compiled with ICL 15.0 and MSVC 12.0
