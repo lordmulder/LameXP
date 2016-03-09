@@ -424,6 +424,9 @@
     <ClCompile Include="src\FileHash.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_C.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -778,6 +781,9 @@
     </CustomBuild>
     <CustomBuild Include="src\Model_FileExts.h">
       <Filter>Header Files\Models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools_Decd_C.qrc">
+      <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

@@ -353,7 +353,14 @@ double InitializationThread::doInit(const size_t threadCount)
 	unsigned int cpuSupport = 0;
 	if((m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE) && (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2) && m_cpuFeatures.intel)
 	{
-		cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_SSE : CPU_TYPE_X86_SSE;
+		if (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX)
+		{
+			cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_AVX : CPU_TYPE_X86_AVX;
+		}
+		else
+		{
+			cpuSupport = m_cpuFeatures.x64 ? CPU_TYPE_X64_SSE : CPU_TYPE_X86_SSE;
+		}
 	}
 	else
 	{
@@ -375,8 +382,10 @@ double InitializationThread::doInit(const size_t threadCount)
 	{
 		PRINT_CPU_TYPE(CPU_TYPE_X86_GEN); break;
 		PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
+		PRINT_CPU_TYPE(CPU_TYPE_X86_AVX); break;
 		PRINT_CPU_TYPE(CPU_TYPE_X64_GEN); break;
 		PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
+		PRINT_CPU_TYPE(CPU_TYPE_X64_AVX); break;
 		default: MUTILS_THROW("CPU support undefined!");
 	}
 
@@ -729,20 +738,23 @@ void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *cons
 
 void InitializationThread::selfTest(void)
 {
-	const unsigned int cpu[4] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE};
+	const unsigned int cpu[7] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X86_AVX, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE, CPU_TYPE_X64_AVX, 0 };
 
 	FileHash::selfTest();
 
-	for(size_t k = 0; k < 4; k++)
+	for(size_t k = 0; cpu[k]; k++)
 	{
 		qDebug("[TEST]");
 		switch(cpu[k])
 		{
 			PRINT_CPU_TYPE(CPU_TYPE_X86_GEN); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X86_SSE); break;
+			PRINT_CPU_TYPE(CPU_TYPE_X86_AVX); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X64_GEN); break;
 			PRINT_CPU_TYPE(CPU_TYPE_X64_SSE); break;
-			default: MUTILS_THROW("CPU support undefined!");
+			PRINT_CPU_TYPE(CPU_TYPE_X64_AVX); break;
+		default:
+			MUTILS_THROW("CPU support undefined!");
 		}
 		unsigned int n = 0;
 		for(int i = 0; true; i++)
@@ -780,7 +792,7 @@ void InitializationThread::selfTest(void)
 		}
 		if(n != EXPECTED_TOOL_COUNT)
 		{
-			qFatal("Tool count mismatch for CPU type %u !!!", cpu[k]);
+			qFatal("Tool count mismatch for CPU type %u. Should be %u, but got %u !!!", cpu[k], EXPECTED_TOOL_COUNT, n);
 		}
 		qDebug("Done.\n");
 	}

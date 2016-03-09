@@ -4,7 +4,9 @@
     <file>tools/aften.i386.exe</file>
     <file>tools/aften.sse2.exe</file>
     <file>tools/aften.x64.exe</file>
-    <file>tools/lame.i386.exe</file>
-    <file>tools/lame.sse2.exe</file>
+    <file>tools/lame.x64-avx.exe</file>
+    <file>tools/lame.x64-sse2.exe</file>
+    <file>tools/lame.x86-i386.exe</file>
+    <file>tools/lame.x86-sse2.exe</file>
   </qresource>
 </RCC>

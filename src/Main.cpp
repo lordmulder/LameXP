@@ -210,7 +210,7 @@ static int lamexp_main(int &argc, char **argv)
 	qDebug("   CPU vendor id  :  %s (Intel=%s)", cpuFeatures.vendor, MUTILS_BOOL2STR(cpuFeatures.intel));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
 	qDebug("   CPU signature  :  Family=%d Model=%d Stepping=%d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
-	qDebug("CPU capabilities  :  MMX=%s SSE=%s SSE2=%s SSE3=%s SSSE3=%s SSE4=%s SSE4.2=%s x64=%s", MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_MMX), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE4), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE42), MUTILS_BOOL2STR(cpuFeatures.x64));
+	qDebug("CPU capabilities  :  SSE=%s SSE2=%s SSE3=%s SSSE3=%s SSE4=%s SSE4.2=%s AVX=%s x64=%s", MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE4), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE42), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX), MUTILS_BOOL2STR(cpuFeatures.x64));
 	qDebug(" Number of CPU's  :  %d\n", cpuFeatures.count);
 
 	//Initialize Qt
