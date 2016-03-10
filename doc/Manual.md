@@ -84,7 +84,7 @@ Currently the following input formats (audio decoders) are supported by LameXP:
 
 
 
-# Leagl Information #
+# Legal Information #
 
 The LameXP software was developed, from the scratch, by LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Consequently, all copyrights on the LameXP software exclusively belong to LoRd_MuldeR. The right to use, modify and redistribute the LameXP software *according to the license terms* is granted to everybody. Please see below for license details! If you want to use the LameXP software in a way that is *not* covered by the license terms, e.g. if you want to include the LameXP software (or parts of it) in a *proprietary* software, written permission by LoRd_MuldeR is required.
 
@@ -391,7 +391,7 @@ Once you have decided for an audio format, you need to choose a *rate-control* m
 
 ![Figure](img/lamexp/tutorial_3b.png)
 
-Last but not least, you need to choose the desired target *bitrate* or *quality-level*. Put simply, this controls the  "quality vs. file size" trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode. 
+Last but not least, you need to choose the desired target *bitrate* or *quality-level*. Put simply, this controls the  "quality vs. file size" trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode.
 
 *Note:* If you are uncertain which bitrate or quality-level to choose, bare in mind that a higher bitrate (or a better quality level) results in better audio quality, but also produces larger files &ndash; and vice versa. "Level 2" or "192 kbps" is a typical choice for MP3.
 
@@ -533,7 +533,7 @@ If you want to report any problems that you have encountered with the LameXP sof
 
 * You can launch the LameXP application with the additional [command-line](http://en.wikipedia.org/wiki/Command-line_interface) parameter ``--console`` in order to enable the LameXP *debug console*, which provides many information on what is going on "behind the scenes".
 
-* If the debug console is **not** enabled, you may still use the [*DebugView*](http://technet.microsoft.com/en-us/sysinternals/bb896647.aspx) utility, by Mark Russinovich, in order to show and/or capture LameXP's diagnostic output. 
+* If the debug console is **not** enabled, you may still use the [*DebugView*](http://technet.microsoft.com/en-us/sysinternals/bb896647.aspx) utility, by Mark Russinovich, in order to show and/or capture LameXP's diagnostic output.
 
 * In any case, the [environment variable](http://en.wikipedia.org/wiki/Environment_variable) ``MUTILS_LOGFILE`` may be used to specify a *log file* that will be created by LameXP. The information saved to the log file are the same as those available from the debug console.
 
@@ -677,17 +677,17 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
     * Edit #2:
         + &lArr; ``QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi``
         + &rArr; ``QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi <more optimization flags here>``
-    
+
  5. Open a new command window (``cmd.exe``) &ndash; use this very same console for all upcoming steps!
- 
+
  6. Add *Strawberry Perl* to your PATH (e.g. ``set PATH=C:\strawberry\perl\bin;%PATH%``)
- 
+
  7. Add *Python 2.7* to your PATH (e.g. ``set PATH=C:\python27;%PATH%``)
- 
+
  8. Run ``vcvarsall.bat x86`` form your Visual C++ install directory - within the same console!
- 
+
  9. Change the current directory to the *Qt Sources* path (e.g. ``C:\QtSources\4.8.x``)
- 
+
 10. Run ``configure.exe -release -static -ltcg -qt-zlib -qt-libpng -qt-libjpeg -qt-libtiff -qt-libmng``
 
 11. Now the makefiles should have been generated, so simply enter ``nmake /B`` and be patient - voilà!
@@ -751,7 +751,7 @@ If you want to verify the LameXP signatures yourself, then you may do so by usin
 
 	-----BEGIN PGP PUBLIC KEY BLOCK-----
 	Version: GnuPG v2.0.21 (MingW32)
-	
+
 	mQGiBEp0LDgRBACbZhtVHbb4tWlJCCxQ3eH9TQ3zUYrI2UHN94Yk8MJGEO1Fxigg
 	smUAeGRmHKpH24VCB/MaHef83fd3bu2yHSf8xgWe90hZR1pLLfmtxqN1SZu/YlJx
 	y4LOcxEwSc3P09cDL112fEFKs36d7OPYR6DXk75hWRwsnd0snJEnDHMVKwCgqCsn
@@ -799,6 +799,6 @@ If you want to verify the LameXP signatures yourself, then you may do so by usin
 *Note:* Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does **not** suffice here. In case that the update server does **not** respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connection is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of "known" hosts, taken mostly from [Alexa's Top 500](http://www.alexa.com/topsites) list. In order to validate the Internet connection, LameXP will pick a *random* host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of "known" hosts have been reached successfully.
 
 
-&nbsp;  
-&nbsp;  
+&nbsp;
+&nbsp;
 **EOF**
