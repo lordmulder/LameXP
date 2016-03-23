@@ -6,7 +6,7 @@
 
 * Fixed the location of temporary intermediate files for SoX-based audio effects
 * Enabled the "built-in" resampler for QAAC encoder
-* The "Algorithm Quality" slider now also effects the QAAC encoder
+* The "Algorithm Quality" slider now also affects the QAAC encoder
 * Added "AVX" (Advanced Vector Extensions) to CPU feature detection code
 * Updated Opus encoder/decoder libraries to v1.1.2 and Opus-Tools to v0.1.9 (2016-01-12)
 * Updated LAME encoder to v3.100 Alpha-2 (2016-01-29), compiled with ICL 15.0 and MSVC 12.0
@@ -74,7 +74,7 @@
 * Fixed a severe performance bottleneck, especially with a large number of parallel instances
 * Fixed a very rare problem that, occasionally, prevented the TEMP folder from being removed
 * The limit for the maximum number of parallel instances has been increased to 32
-* Experimental support for Windows 10 Technical Preview 
+* Experimental support for Windows 10 Technical Preview
 * Updated language files (big thank-you to all contributors !!!)
 
 
@@ -89,7 +89,7 @@
 * Fixed "overwrite existing file" mode to NOT delete the input file
 * Some more tweaks to the LAME algorithm quality selector
 * Added command-line options to adjust the LameXP font size (see [Manual](Manual.html#gui-adjustment-options) for details)
-* Various bugfixes and code improvements 
+* Various bugfixes and code improvements
 
 
 ## LameXP v4.09 [2014-01-26] ## {-}
@@ -112,7 +112,7 @@
 * Updated the QAAC add-in for LameXP to QAAC v2.33 (2014-01-14), compiled with MSVC 12.0
 * Updated language files (big thank-you to all contributors !!!)
 * Fixed a resource (file descriptor) leak in "static" builds, didn't cause much harm though
-* Various bugfixes and code improvements 
+* Various bugfixes and code improvements
 
 
 ## LameXP v4.08 [2013-09-04] ## {-}
@@ -130,7 +130,7 @@
 * Fixed a superfluous "beep" sound that appeared on application startup
 * Fixed the Ogg Vorbis quality modes "-1" and "-2" (those were clipped to "0" before)
 * Fixed a bug that could cause the output directory to be reset mistakenly
-* Implemented "natural order" string comparison/sorting, using strnatcmp() by Martin Pool 
+* Implemented "natural order" string comparison/sorting, using strnatcmp() by Martin Pool
 
 
 ## LameXP v4.07 [2013-04-28] ## {-}
@@ -167,7 +167,7 @@
 * Fixed a bug with the "Store temporary files in your system's default TEMP director" checkbox
 * Fixed a buffer overflow in FAAD2 decoder which could cause crashes with very long file names
 * Fixed a regression in Qt v4.8.3 that broke Drag&Drop support ([details #1](https://bugreports.qt-project.org/browse/QTBUG-27265)) ([details #2](https://codereview.qt-project.org/35297))
-* Reworked the "About..." dialog – now using a custom dialog instead of message boxes 
+* Reworked the "About..." dialog – now using a custom dialog instead of message boxes
 
 
 ## LameXP v4.05 [2012-09-03] ## {-}
@@ -184,7 +184,7 @@
 * Implemented multi-threading in initialization code for faster application startup
 * Fixed a potential crash (stack overflow) when adding a huge number of files
 * Fixed a problem with Cue Sheet import and files that contain trailing dots in their name
-* Workaround for a bug (feature?) of Qt's command-line parser that screwed up some arguments 
+* Workaround for a bug (feature?) of Qt's command-line parser that screwed up some arguments
 
 
 ## LameXP v4.04 [2012-04-26] ## {-}
@@ -211,7 +211,7 @@
 * Workaround for a bug that causes MediaInfo to not detect the duration of Wave files (64-Bit only)
 * Prevent LameXP from blocking a system shutdown (encoding process is aborted, if necessary)
 * Improved internal handling of MediaInfo output, including extraction of cover art
-* Fixed a very rare "live-lock" situation in early initialization code 
+* Fixed a very rare "live-lock" situation in early initialization code
 
 
 ## LameXP v4.03 [2011-11-12] ## {-}
@@ -239,7 +239,7 @@
 * Enabled "Aero Glass" theme in installer and web-update program (Vista and Windows 7 only)
 * Restored Windows 2000 support with Visual Studio 2010 builds (this is experimental!)
 * The "Open File(s)" and "Open Folder" dialogs will now remember the most recent directory
-* Miscellaneous bugfixes 
+* Miscellaneous bugfixes
 
 
 ## LameXP v4.02 [2011-06-14] ## {-}
@@ -262,7 +262,7 @@
 * Fixed placement of the Dropbox when the Taskbar is located on the top or on the left side
 * Improved playlist generation: Generate M3U (Latin-1) or M3U8 (UTF-8) playlist file as required
 * Only show the most recent 50 items in the "processing" window (for better performance)
-* Miscellaneous bugfixes 
+* Miscellaneous bugfixes
 
 
 ## LameXP v4.01 [2011-04-04] ## {-}
@@ -282,7 +282,7 @@
 * Fixed a problem with the LAME encoder that could cause glitches in the encoded file (VBR mode only)
 * Fixed a problem with the LAME encoder that could cause very slow encoding speed
 * Fixed a bug that caused AAC encoding to fail in CBR mode (the "-2pass" parameter was set wrongly)
-* A warning message will be emitted, if diskspace drops below a critical limit while processing 
+* A warning message will be emitted, if diskspace drops below a critical limit while processing
 
 
 ## LameXP v4.00 [2011-02-21] ## {-}
@@ -308,7 +308,7 @@
 * Updated language files (big thank-you to all contributors !!!)
 * Removed TAK support for now, as their CloseSource(!) tools don't support Unicode file names yet
 * Removed Volumax tool, as we are using SoX for normalization from now on
-* Countless minor fixes and improvements (hopefully not too many regressions ^^) 
+* Countless minor fixes and improvements (hopefully not too many regressions ^^)
 
 
 
@@ -319,7 +319,7 @@
 * Updated MediaInfo to v0.7.34 (2010-07-09), compiled with ICL 11.1.065
 * Updated mpg123 decoder to v1.12.3 (2010-07-11), compiled with GCC 4.6.0
 * Updated language files (big thank-you to all contributors !!!)
-* Fixed decoding of certain invalid WavPack files 
+* Fixed decoding of certain invalid WavPack files
 
 
 ## LameXP v3.18 [2010-05-08] ## {-}
@@ -330,7 +330,7 @@
 * Updated MediaInfo to v0.7.32 (2010-05-02), compiled with ICL 11.1.065
 * Updated mpg123 decoder to v1.12.1 (2010-03-31), compiled with GCC 4.4.4
 * Updated Ogg Vorbis decoder to v1.9.7 (2010-03-29), compiled with MSVC 9.0
-* Updated language files (big thank-you to all contributors !!!) 
+* Updated language files (big thank-you to all contributors !!!)
 
 
 ## LameXP v3.17 [2010-02-21] ## {-}
@@ -340,7 +340,7 @@
 * Updated MediaInfo to v0.7.28 (2010-02-19), compiled with ICL 11.1.054
 * Fixed "No Disk" error message box that could appear under certain circumstances
 * Fixed "...is not responding" error message box that could appear during startup
-* Various minor fixes and improvements 
+* Various minor fixes and improvements
 
 
 ## LameXP v3.16 [2010-01-26] ## {-}
@@ -349,7 +349,7 @@
 * Disable DPI warning on Vista and later, as they handle DPI != 96 much better than WinXP
 * Updated WavPack decoder to v4.60.1 (2009-11-29)
 * Updated MediaInfo to v0.7.27 (2010-01-04), compiled with ICL 11.1.054
-* Updated GnuPG to v1.4.10b (2009-09-03), compiled with GCC 4.2.1 
+* Updated GnuPG to v1.4.10b (2009-09-03), compiled with GCC 4.2.1
 
 
 ## LameXP v3.15 [2009-12-24] ## {-}
@@ -357,7 +357,7 @@
 * Added support for Nero AAC encoder v1.5.1.0 (2009-12-17)
 * Updated mpg123 decoder to v1.10.0 (2009-12-05)
 * Updated MediaInfo to v0.7.26 (2009-12-18), compiled with ICL 11.1.051
-* Updated AC3Filter Tools to v0.31b (2009-10-01), compiled with ICL 11.1.051 
+* Updated AC3Filter Tools to v0.31b (2009-10-01), compiled with ICL 11.1.051
 
 
 ## LameXP v3.14 [2009-12-01] ## {-}
@@ -369,7 +369,7 @@
 * Updated AC3Filter Tools to v0.31b (2009-10-01), compiled with ICL 11.1.046
 * Updated language files (big thank-you to all contributors !!!)
 * Updated JEDI-VCL from v3.38 to v3.39 (2009-11-05)
-* Various minor fixes and improvements 
+* Various minor fixes and improvements
 
 
 ## LameXP v3.13 [2009-10-21] ## {-}
@@ -383,7 +383,7 @@
 * Updated language files (big thank-you to all contributors !!!)
 * Updated the Splash screen and modified the sound that plays on very first launch
 * Updated JEDI-VCL from v3.34 to v3.38 (2009-08-27)
-* Updated GnuPG to v1.4.10 (2009-09-02) 
+* Updated GnuPG to v1.4.10 (2009-09-02)
 
 
 ## LameXP v3.12 [2009-09-19] ## {-}
@@ -400,7 +400,7 @@
 * Updated Speex decoder to v1.2 RC-1 (2009-07-04)
 * Updated AC3Filter Tools to v0.3b (2009-09-19)
 * Updated Auto-Update tool, from now on only signed updates will be accepted (using GnuPG)
-* Fixed a number of minor glitches 
+* Fixed a number of minor glitches
 
 
 ## LameXP v3.11 [2009-06-22] ## {-}
@@ -411,7 +411,7 @@
 * Updated FLAC decoder, now using the ICL 9.1 build of FLAC v1.2.1b
 * Updated MediaInfo to v0.7.17 (statically linked)
 * Updated the "Normalization" filter to v0.41 (2009-06-16)
-* Fixed a few minor issues in meta tag processing 
+* Fixed a few minor issues in meta tag processing
 
 
 ## LameXP v3.10 [2009-06-11] ## {-}
@@ -426,7 +426,7 @@
 * Updated Monkey's Audio decoder to v4.06 (2009-03-17)
 * Updated the "Normalization" filter to allow multiple instances running in parallel
 * Updated Auto-Update tool
-* Fixed a few minor issues and refactored the code 
+* Fixed a few minor issues and refactored the code
 
 
 ## LameXP v3.09 [2009-06-01] ## {-}
@@ -435,14 +435,14 @@
 * Updated mpg123 decoder to v1.7.3 (2009-04-27)
 * Updated FAAD decoder to v2.7 (2009-05-13)
 * Updated MediaInfo to v0.7.16.0 (2009-05-20)
-* Fixed detection of the WMA decoder under certain circumstances (e.g. Windows 7) 
+* Fixed detection of the WMA decoder under certain circumstances (e.g. Windows 7)
 
 
 ## LameXP v3.08 [2009-03-05] ## {-}
 
 * Updated Ogg Vorbis encoder to v2.85, libvorbis v1.2.1 RC2, aoTuV b5.7 (2009-03-04)
 * Updated mpg123 decoder to v1.6.4 (2009-01-10)
-* Updated MediaInfo to v0.7.11.0 (2009-02-13) 
+* Updated MediaInfo to v0.7.11.0 (2009-02-13)
 
 
 ## LameXP v3.07 [2008-12-24] ## {-}
@@ -451,7 +451,7 @@
 * Updated Ogg Vorbis encoder to v2.85, libvorbis v1.2.1 RC2, aoTuV b5.61 (2008-12-24)
 * Updated mpg123 decoder to v1.6.3 (2008-12-20)
 * Updated MediaInfo to v0.7.8.0 (2008-12-10)
-* Updated language files (big thank-you to all contributors !!!) 
+* Updated language files (big thank-you to all contributors !!!)
 
 
 ## LameXP v3.06 [2008-10-26] ## {-}
@@ -463,7 +463,7 @@
 * Updated AC3 Filter Tools to v0.2a (2008-06-30)
 * Updated language files (big thank-you to all contributors !!!)
 * Fixed and improved "Normalization" filter
-* Fixed a few minor bugs 
+* Fixed a few minor bugs
 
 
 ## LameXP v3.05 [2008-10-11] ## {-}
@@ -474,7 +474,7 @@
 * Added Dropbox for improved Drag&Drop support
 * Updated language files (big thank-you to all contributors !!!)
 * Updated LAME encoder to v3.98.2 Final (2008-09-24)
-* Updated MediaInfo to v0.7.7.6 (2008-09-12) 
+* Updated MediaInfo to v0.7.7.6 (2008-09-12)
 
 
 ## LameXP v3.04 [2008-09-26] ## {-}
@@ -489,7 +489,7 @@
 * Added code to minimize the LameXP window into the taskbar notification area
 * Added balloon tooltip to inform the user about "hidden" options
 * Updated Ogg Vorbis encoder to v2.85, libvorbis v1.2.1 RC2, aoTuV b5.6 (2008-09-05)
-* Improved code to handle child processes and capture the console output 
+* Improved code to handle child processes and capture the console output
 
 
 ## LameXP v3.03 [2008-08-12] ## {-}
@@ -497,13 +497,13 @@
 * Added generic support for pre-processing filters
 * Added "Normalization" filter, based on Volumax by John33
 * Improved code to add/remove context menus in Window Explorer
-* Improved code to handle multiple instances of LameXP 
+* Improved code to handle multiple instances of LameXP
 
 
 ## LameXP v3.02 [2008-08-06] ## {-}
 
 * Added support for new input format: MPEG Audio Layer-2 (mp2)
-* Added option to choose a custom TEMP folder 
+* Added option to choose a custom TEMP folder
 
 ## LameXP v3.01 [2008-08-01] ## {-}
 
@@ -511,7 +511,7 @@
 * Added warning message for bitrates that violate the current bitrate restriction
 * Fixed bitrate restrictions for LAME encoder (strictly enforce bitrate restrictions using "-F" parameter)
 * Fixed file associations code (set file associations only for the current user)
-* Updated load/save configuration code (store settings in an INI file instead of the registry) 
+* Updated load/save configuration code (store settings in an INI file instead of the registry)
 
 
 ## LameXP v3.00 [2008-07-04] ## {-}
@@ -524,7 +524,7 @@
 * Added commandline support: LameXP.exe -add <File 1> [<File 2> ... <File N>]
 * Added Auto-Update utility to periodically check for new updates
 * Updated LAME encoder to v3.98 Final (2008-07-04)
-* Updated Ogg Vorbis encoder to v2.85, aoTuV Beta-5.5 (2008-03-31) 
+* Updated Ogg Vorbis encoder to v2.85, aoTuV Beta-5.5 (2008-03-31)
 
 
 
@@ -535,7 +535,7 @@
 * Updated LAME encoder to v3.98 to Beta-5 (2007-08-13)
 * Updated Ogg Vorbis encoder to v2.84 aoTuV Beta-5 (2007-08-17)
 * Fixed a bug with 'title' meta tags
-* Fixed a few typos 
+* Fixed a few typos
 
 
 ## LameXP v2.00 [2007-02-19] ## {-}
@@ -545,7 +545,7 @@
 * Improved progress display (parsing encoder progress from console output now)
 * Improved ID3-Tag support (now supports "title" and "track" fields)
 * Added feature to automatically generate playlists (.m3u)
-* Many bug-fixes and GUI improvements 
+* Many bug-fixes and GUI improvements
 
 
 
@@ -557,6 +557,6 @@
 
 
 
-&nbsp;  
-&nbsp;  
+&nbsp;
+&nbsp;
 **EOF**
