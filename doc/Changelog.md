@@ -4,6 +4,7 @@
 
 ## LameXP v4.14 [2016-??-??] ## {-}
 
+* Upgraded build environment to Microsoft Visual Studio 2015 with Update-2
 * Fixed the location of temporary intermediate files for SoX-based audio effects
 * Enabled the "built-in" resampler for QAAC encoder
 * The "Algorithm Quality" slider now also affects the QAAC encoder
