@@ -40,4 +40,8 @@ public:
 	//Encoder info
 	virtual const AbstractEncoderInfo *toEncoderInfo(void) const { return getEncoderInfo(); }
 	static const AbstractEncoderInfo *getEncoderInfo(void);
+
+private:
+	static bool progressCallback(const double &progress, void *const userData);
+	void updateProgress(const double &progress);
 };

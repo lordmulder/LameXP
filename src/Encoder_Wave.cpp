@@ -22,18 +22,18 @@
 
 #include "Encoder_Wave.h"
 
+#include <MUtils/Global.h>
+#include <MUtils/OSSupport.h>
+
 #include "Global.h"
 #include "Model_Settings.h"
 
-#include <QDir>
-
-//Windows includes
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <Shellapi.h>
-
-#define FIX_SEPARATORS(STR) for(int i = 0; STR[i]; i++) { if(STR[i] == L'/') STR[i] = L'\\'; }
+typedef struct _callback_t
+{
+	WaveEncoder   *pInstance;
+	volatile bool *abortFlag;
+}
+callback_t;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
@@ -134,52 +134,42 @@ WaveEncoder::~WaveEncoder(void)
 
 bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
 {
-	SHFILEOPSTRUCTW fileOperation;
-	memset(&fileOperation, 0, sizeof(SHFILEOPSTRUCTW));
-	fileOperation.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI | FOF_FILESONLY;
+	emit messageLogged(QString("Copy file \"%1\" to \"%2\"\n").arg(sourceFile, outputFile));
 
-	emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
-	fileOperation.wFunc = FO_COPY;
+	callback_t callbackData;
+	callbackData.abortFlag = abortFlag;
+	callbackData.pInstance = this;
 
-	/*
-	if(lamexp_temp_folder().compare(QFileInfo(sourceFile).canonicalPath(), Qt::CaseInsensitive) == 0)
+	emit statusUpdated(0);
+	const bool success = MUtils::OS::copy_file(sourceFile, outputFile, true, progressCallback, &callbackData);
+	emit statusUpdated(100);
+
+	if (success)
 	{
-		//If the source is in the TEMP folder take shortcut and move the file
-		emit messageLogged(QString("Moving file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
-		fileOperation.wFunc = FO_MOVE;
+		emit messageLogged(QLatin1String("File copied successfully."));
 	}
 	else
 	{
-		//...otherwise we actually copy the file in order to keep the source
-		emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(sourceFile, outputFile));
-		fileOperation.wFunc = FO_COPY;
+		emit messageLogged((*abortFlag) ? QLatin1String("Operation cancelled by user!")  : QLatin1String("Error: Failed to copy file!"));
 	}
-	*/
-	
-	size_t srcLen = wcslen(reinterpret_cast<const wchar_t*>(sourceFile.utf16())) + 3;
-	wchar_t *srcBuffer = new wchar_t[srcLen];
-	memset(srcBuffer, 0, srcLen * sizeof(wchar_t));
-	wcsncpy_s(srcBuffer, srcLen, reinterpret_cast<const wchar_t*>(sourceFile.utf16()), _TRUNCATE);
-	FIX_SEPARATORS (srcBuffer);
-	fileOperation.pFrom = srcBuffer;
 
-	size_t outLen = wcslen(reinterpret_cast<const wchar_t*>(outputFile.utf16())) + 3;
-	wchar_t *outBuffer = new wchar_t[outLen];
-	memset(outBuffer, 0, outLen * sizeof(wchar_t));
-	wcsncpy_s(outBuffer, outLen, reinterpret_cast<const wchar_t*>(outputFile.utf16()), _TRUNCATE);
-	FIX_SEPARATORS (outBuffer);
-	fileOperation.pTo = outBuffer;
+	return success;
+}
 
-	emit statusUpdated(0);
-	int result = SHFileOperation(&fileOperation);
-	emit statusUpdated(100);
+bool WaveEncoder::progressCallback(const double &progress, void *const userData)
+{
+	const callback_t *const ptr = reinterpret_cast<callback_t*>(userData);
+	if (*(ptr->abortFlag))
+	{
+		return false; /*user aborted*/
+	}
+	ptr->pInstance->updateProgress(progress);
+	return true;
+}
 
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", result));
-
-	delete [] srcBuffer;
-	delete [] outBuffer;
-
-	return (result == 0 && fileOperation.fAnyOperationsAborted == false);
+void WaveEncoder::updateProgress(const double &progress)
+{
+	emit statusUpdated(qRound(progress * 100.0));
 }
 
 bool WaveEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

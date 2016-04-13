@@ -3231,7 +3231,7 @@
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="534"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
-        <translation type="unfinished">Wielowątkowosć włączona: Równolegle wykonywanych jest %1 kodowań!</translation>
+        <translation type="unfinished">Wielowątkowość włączona: Równolegle wykonywanych jest %1 kodowań!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Processing.cpp" line="663"/>

@@ -57,7 +57,8 @@ void AbstractEncoder::setRCMode(const int &mode)
 
 void AbstractEncoder::setBitrate(const int &bitrate)
 {
-	if (qMax(0, bitrate) >= toEncoderInfo()->valueCount(m_configRCMode))
+	const int valueCount = toEncoderInfo()->valueCount(m_configRCMode);
+	if ((valueCount > 0) && (qMax(0, bitrate) >= valueCount))
 	{
 		MUTILS_THROW("The specified bitrate/quality is out of range!");
 	}
