@@ -128,11 +128,10 @@ static const g_aacEncoderInfo;
 
 AACEncoder::AACEncoder(void)
 :
-	m_binary_enc(lamexp_tools_lookup("neroAacEnc.exe")),
-	m_binary_tag(lamexp_tools_lookup("neroAacTag.exe")),
-	m_binary_sox(lamexp_tools_lookup("sox.exe"))
+	m_binary_enc(lamexp_tools_lookup(L1S("neroAacEnc.exe"))),
+	m_binary_tag(lamexp_tools_lookup(L1S("neroAacTag.exe")))
 {
-	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty() || m_binary_sox.isEmpty())
+	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty())
 	{
 		MUTILS_THROW("Error initializing AAC encoder. Tool 'neroAacEnc.exe' is not registred!");
 	}
@@ -154,13 +153,13 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString().sprintf("%.2f", double(qBound(0, m_configBitrate * 5, 100)) / 100.0);
+		args << L1S("-q") << QString().sprintf("%.2f", double(qBound(0, m_configBitrate * 5, 100)) / 100.0);
 		break;
 	case SettingsModel::ABRMode:
-		args << "-br" << QString::number(qBound(8, index2bitrate(m_configBitrate), 400) * 1000);
+		args << L1S("-br") << QString::number(qBound(8, index2bitrate(m_configBitrate), 400) * 1000);
 		break;
 	case SettingsModel::CBRMode:
-		args << "-cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 400) * 1000);
+		args << L1S("-cbr") << QString::number(qBound(8, index2bitrate(m_configBitrate), 400) * 1000);
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
@@ -169,26 +168,26 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 	if(m_configEnable2Pass && (m_configRCMode == SettingsModel::ABRMode))
 	{
-		args << "-2pass";
+		args << L1S("-2pass");
 	}
 	
 	switch(m_configProfile)
 	{
 	case 1:
-		args << "-lc"; //Forces use of LC AAC profile
+		args << L1S("-lc"); //Forces use of LC AAC profile
 		break;
 	case 2:
-		args << "-he"; //Forces use of HE AAC profile
+		args << L1S("-he"); //Forces use of HE AAC profile
 		break;
 	case 3:
-		args << "-hev2"; //Forces use of HEv2 AAC profile
+		args << L1S("-hev2"); //Forces use of HEv2 AAC profile
 		break;
 	}
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
-	args << "-if" << QDir::toNativeSeparators(sourceFile);
-	args << "-of" << QDir::toNativeSeparators(outputFile);
+	args << L1S("-if") << QDir::toNativeSeparators(sourceFile);
+	args << L1S("-of") << QDir::toNativeSeparators(outputFile);
 
 	if(!startProcess(process, m_binary_enc, args))
 	{
@@ -200,9 +199,9 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	int prevProgress = -1;
 
 
-	QRegExp regExp("Processed\\s+(\\d+)\\s+seconds");
-	QRegExp regExp_pass1("First\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds");
-	QRegExp regExp_pass2("Second\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds");
+	QRegExp regExp(L1S("Processed\\s+(\\d+)\\s+seconds"));
+	QRegExp regExp_pass1(L1S("First\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds"));
+	QRegExp regExp_pass2(L1S("Second\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -210,7 +209,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -218,7 +217,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			qWarning("NeroAacEnc process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -295,7 +294,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return true;
 	}
 
-	emit messageLogged("\n-------------------------------\n");
+	emit messageLogged(L1S("\n-------------------------------\n"));
 	
 	args.clear();
 	args << QDir::toNativeSeparators(outputFile);
@@ -322,7 +321,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -330,7 +329,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			qWarning("NeroAacTag process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -364,9 +363,9 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 bool AACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

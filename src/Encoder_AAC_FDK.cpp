@@ -134,7 +134,7 @@ static const g_fdkAacEncoderInfo;
 
 FDKAACEncoder::FDKAACEncoder(void)
 :
-	m_binary(lamexp_tools_lookup("fdkaac.exe"))
+	m_binary(lamexp_tools_lookup(L1S("fdkaac.exe")))
 {
 	if(m_binary.isEmpty())
 	{
@@ -154,29 +154,29 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	QStringList args;
 
 	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	env.insert("PATH", QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), MUtils::temp_folder())));
+	env.insert(L1S("PATH"), QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), MUtils::temp_folder())));
 	process.setProcessEnvironment(env);
 
 	switch(m_configProfile)
 	{
 	case 1:
-		args << "-p" << "2";
+		args << L1S("-p") << QString::number(2);
 		break;
 	case 2:
-		args << "-p" << "5";
+		args << L1S("-p") << QString::number(5);
 		break;
 	case 3:
-		args << "-p" << "29";
+		args << L1S("-p") << QString::number(29);
 		break;
 	}
 
 	switch(m_configRCMode)
 	{
 	case SettingsModel::CBRMode:
-		args << "-b" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
+		args << L1S("-b") << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
 		break;
 	case SettingsModel::VBRMode:
-		args << "-m" << QString::number(qBound(1, m_configBitrate + 1 , 5));
+		args << L1S("-m") << QString::number(qBound(1, m_configBitrate + 1 , 5));
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
@@ -185,15 +185,15 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
-	if(!metaInfo.title().isEmpty())   args << "--title"   << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty())  args << "--artist"  << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty())   args << "--album"   << cleanTag(metaInfo.album());
-	if(!metaInfo.genre().isEmpty())   args << "--genre"   << cleanTag(metaInfo.genre());
-	if(!metaInfo.comment().isEmpty()) args << "--comment" << cleanTag( metaInfo.comment());
-	if(metaInfo.year())               args << "--date"    << QString::number(metaInfo.year());
-	if(metaInfo.position())           args << "--track"   << QString::number(metaInfo.position());
+	if(!metaInfo.title().isEmpty())   args << L1S("--title")   << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << L1S("--artist")  << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << L1S("--album")   << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << L1S("--genre")   << cleanTag(metaInfo.genre());
+	if(!metaInfo.comment().isEmpty()) args << L1S("--comment") << cleanTag( metaInfo.comment());
+	if(metaInfo.year())               args << L1S("--date")    << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << L1S("--track")   << QString::number(metaInfo.position());
 
-	args << "-o" << QDir::toNativeSeparators(outputFile);
+	args << L1S("-o") << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args, QFileInfo(outputFile).canonicalPath()))
@@ -205,7 +205,7 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\[(\\d+)%\\]\\s+(\\d+):(\\d+)");
+	QRegExp regExp(L1S("\\[(\\d+)%\\]\\s+(\\d+):(\\d+)"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -213,7 +213,7 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -221,7 +221,7 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		{
 			process.kill();
 			qWarning("FDKAAC process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -266,9 +266,9 @@ bool FDKAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 
 bool FDKAACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

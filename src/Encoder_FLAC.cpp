@@ -123,7 +123,7 @@ static const g_flacEncoderInfo;
 
 FLACEncoder::FLACEncoder(void)
 :
-	m_binary(lamexp_tools_lookup("flac.exe"))
+	m_binary(lamexp_tools_lookup(L1S("flac.exe")))
 {
 	if(m_binary.isEmpty())
 	{
@@ -141,22 +141,22 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	QStringList args;
 
 	args << QString("-%1").arg(QString::number(qBound(0, m_configBitrate, 8)));
-	args << "--channel-map=none";
+	args << L1S("--channel-map=none");
 
-	if(!metaInfo.title().isEmpty()) args << "-T" << QString("title=%1").arg(cleanTag(metaInfo.title()));
-	if(!metaInfo.artist().isEmpty()) args << "-T" << QString("artist=%1").arg(cleanTag(metaInfo.artist()));
-	if(!metaInfo.album().isEmpty()) args << "-T" << QString("album=%1").arg(cleanTag(metaInfo.album()));
-	if(!metaInfo.genre().isEmpty()) args << "-T" << QString("genre=%1").arg(cleanTag(metaInfo.genre()));
-	if(!metaInfo.comment().isEmpty()) args << "-T" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
-	if(metaInfo.year()) args << "-T" << QString("date=%1").arg(QString::number(metaInfo.year()));
-	if(metaInfo.position()) args << "-T" << QString("track=%1").arg(QString::number(metaInfo.position()));
-	if(!metaInfo.cover().isEmpty()) args << QString("--picture=%1").arg(metaInfo.cover());
+	if(!metaInfo.title().isEmpty())   args << L1S("-T") << QString("title=%1").arg(cleanTag(metaInfo.title()));
+	if(!metaInfo.artist().isEmpty())  args << L1S("-T") << QString("artist=%1").arg(cleanTag(metaInfo.artist()));
+	if(!metaInfo.album().isEmpty())   args << L1S("-T") << QString("album=%1").arg(cleanTag(metaInfo.album()));
+	if(!metaInfo.genre().isEmpty())   args << L1S("-T") << QString("genre=%1").arg(cleanTag(metaInfo.genre()));
+	if(!metaInfo.comment().isEmpty()) args << L1S("-T") << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
+	if(metaInfo.year())               args << L1S("-T") << QString("date=%1").arg(QString::number(metaInfo.year()));
+	if(metaInfo.position())           args << L1S("-T") << QString("track=%1").arg(QString::number(metaInfo.position()));
+	if(!metaInfo.cover().isEmpty())   args << QString("--picture=%1").arg(metaInfo.cover());
 
 	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
-	args << "-f" << "-o" << QDir::toNativeSeparators(outputFile);
+	args << L1S("-f") << L1S("-o") << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args))
@@ -168,7 +168,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\b(\\d+)% complete");
+	QRegExp regExp(L1S("\\b(\\d+)% complete"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -176,7 +176,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -184,7 +184,7 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		{
 			process.kill();
 			qWarning("FLAC process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -229,9 +229,9 @@ bool FLACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 bool FLACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

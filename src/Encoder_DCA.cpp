@@ -129,7 +129,7 @@ static const g_dcaEncoderInfo;
 
 DCAEncoder::DCAEncoder(void)
 :
-	m_binary(lamexp_tools_lookup("dcaenc.exe"))
+	m_binary(lamexp_tools_lookup(L1S("dcaenc.exe")))
 {
 	if(m_binary.isEmpty())
 	{
@@ -146,9 +146,9 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	QProcess process;
 	QStringList args;
 
-	args << "-i" << QDir::toNativeSeparators(sourceFile);
-	args << "-o" << QDir::toNativeSeparators(outputFile);
-	args << "-b" << QString::number(qBound(32, index2bitrate(m_configBitrate), 4096));
+	args << L1S("-i") << QDir::toNativeSeparators(sourceFile);
+	args << L1S("-o") << QDir::toNativeSeparators(outputFile);
+	args << L1S("-b") << QString::number(qBound(32, index2bitrate(m_configBitrate), 4096));
 
 	if(!startProcess(process, m_binary, args))
 	{
@@ -159,7 +159,7 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\[(\\d+)\\.(\\d+)%\\]");
+	QRegExp regExp(L1S("\\[(\\d+)\\.(\\d+)%\\]"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -167,7 +167,7 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -175,7 +175,7 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			qWarning("DCAENC process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -220,9 +220,9 @@ bool DCAEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 bool DCAEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

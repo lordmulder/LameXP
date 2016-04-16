@@ -124,7 +124,7 @@ static const g_opusEncoderInfo;
 
 OpusEncoder::OpusEncoder(void)
 :
-	m_binary(lamexp_tools_lookup("opusenc.exe"))
+	m_binary(lamexp_tools_lookup(L1S("opusenc.exe")))
 {
 	if(m_binary.isEmpty())
 	{
@@ -148,13 +148,13 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "--vbr";
+		args << L1S("--vbr");
 		break;
 	case SettingsModel::ABRMode:
-		args << "--cvbr";
+		args << L1S("--cvbr");
 		break;
 	case SettingsModel::CBRMode:
-		args << "--hard-cbr";
+		args << L1S("--hard-cbr");
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
@@ -166,35 +166,35 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	switch(m_configFrameSize)
 	{
 	case 0:
-		args << "--framesize" << "2.5";
+		args << L1S("--framesize") << L1S("2.5");
 		break;
 	case 1:
-		args << "--framesize" << "5";
+		args << L1S("--framesize") << L1S("5");
 		break;
 	case 2:
-		args << "--framesize" << "10";
+		args << L1S("--framesize") << L1S("10");
 		break;
 	case 3:
-		args << "--framesize" << "20";
+		args << L1S("--framesize") << L1S("20");
 		break;
 	case 4:
-		args << "--framesize" << "40";
+		args << L1S("--framesize") << L1S("40");
 		break;
 	case 5:
-		args << "--framesize" << "60";
+		args << L1S("--framesize") << L1S("60");
 		break;
 	}
 
-	args << QString("--bitrate") << QString::number(qBound(8, (m_configBitrate + 1) * 8, 256));
+	args << L1S("--bitrate") << QString::number(qBound(8, (m_configBitrate + 1) * 8, 256));
 
-	if(!metaInfo.title().isEmpty())   args << "--title"   << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty())  args << "--artist"  << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty())   args << "--album"   << cleanTag(metaInfo.album());
-	if(!metaInfo.genre().isEmpty())   args << "--genre"   << cleanTag(metaInfo.genre());
-	if(metaInfo.year())               args << "--date"    << QString::number(metaInfo.year());
-	if(metaInfo.position())           args << "--comment" << QString("tracknumber=%1").arg(QString::number(metaInfo.position()));
-	if(!metaInfo.comment().isEmpty()) args << "--comment" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
-	if(!metaInfo.cover().isEmpty())   args << "--picture" << makeCoverParam(metaInfo.cover());
+	if(!metaInfo.title().isEmpty())   args << L1S("--title")   << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << L1S("--artist")  << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << L1S("--album")   << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << L1S("--genre")   << cleanTag(metaInfo.genre());
+	if(metaInfo.year())               args << L1S("--date")    << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << L1S("--comment") << QString("tracknumber=%1").arg(QString::number(metaInfo.position()));
+	if(!metaInfo.comment().isEmpty()) args << L1S("--comment") << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
+	if(!metaInfo.cover().isEmpty())   args << L1S("--picture") << makeCoverParam(metaInfo.cover());
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
@@ -210,7 +210,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\((\\d+)%\\)");
+	QRegExp regExp(L1S("\\((\\d+)%\\)"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -218,7 +218,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -226,7 +226,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		{
 			process.kill();
 			qWarning("Opus process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -309,9 +309,9 @@ void OpusEncoder::setFrameSize(int frameSize)
 
 bool OpusEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

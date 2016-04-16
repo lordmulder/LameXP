@@ -128,7 +128,7 @@ static const g_mp3EncoderInfo;
 
 MP3Encoder::MP3Encoder(void)
 :
-	m_binary(lamexp_tools_lookup("lame.exe"))
+	m_binary(lamexp_tools_lookup(L1S("lame.exe")))
 {
 	if(m_binary.isEmpty())
 	{
@@ -151,20 +151,20 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	QProcess process;
 	QStringList args;
 
-	args << "--nohist";
-	args << "-q" << QString::number(g_lameAgorithmQualityLUT[m_algorithmQuality]);
+	args << L1S("--nohist");
+	args << L1S("-q") << QString::number(g_lameAgorithmQualityLUT[m_algorithmQuality]);
 		
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-V" << QString::number(g_lameVBRQualityLUT[qBound(0, m_configBitrate, 9)]);
+		args << L1S("-V") << QString::number(g_lameVBRQualityLUT[qBound(0, m_configBitrate, 9)]);
 		break;
 	case SettingsModel::ABRMode:
-		args << "--abr" << QString::number(g_mp3BitrateLUT[qBound(0, m_configBitrate, 13)]);
+		args << L1S("--abr") << QString::number(g_mp3BitrateLUT[qBound(0, m_configBitrate, 13)]);
 		break;
 	case SettingsModel::CBRMode:
-		args << "--cbr";
-		args << "-b" << QString::number(g_mp3BitrateLUT[qBound(0, m_configBitrate, 13)]);
+		args << L1S("--cbr");
+		args << L1S("-b") << QString::number(g_mp3BitrateLUT[qBound(0, m_configBitrate, 13)]);
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
@@ -175,32 +175,32 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	{
 		if(m_configRCMode != SettingsModel::CBRMode)
 		{
-			args << "-b" << QString::number(clipBitrate(m_configBitrateMinimum));
-			args << "-B" << QString::number(clipBitrate(m_configBitrateMaximum));
+			args << L1S("-b") << QString::number(clipBitrate(m_configBitrateMinimum));
+			args << L1S("-B") << QString::number(clipBitrate(m_configBitrateMaximum));
 		}
 	}
 
 	if(m_configSamplingRate > 0)
 	{
-		args << "--resample" << QString::number(m_configSamplingRate);
+		args << L1S("--resample") << QString::number(m_configSamplingRate);
 	}
 
 	switch(m_configChannelMode)
 	{
 	case 1:
-		args << "-m" << "j";
+		args << L1S("-m") << L1S("j");
 		break;
 	case 2:
-		args << "-m" << "f";
+		args << L1S("-m") << L1S("f");
 		break;
 	case 3:
-		args << "-m" << "s";
+		args << L1S("-m") << L1S("s");
 		break;
 	case 4:
-		args << "-m" << "d";
+		args << L1S("-m") << L1S("d");
 		break;
 	case 5:
-		args << "-m" << "m";
+		args << L1S("-m") << L1S("m");
 		break;
 	}
 
@@ -212,16 +212,16 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	if(isUnicode(metaInfo.genre()))   bUseUCS2 = true;
 	if(isUnicode(metaInfo.comment())) bUseUCS2 = true;
 
-	if(bUseUCS2) args << "--id3v2-ucs2"; //Must specify this BEFORE "--tt" and friends!
+	if (bUseUCS2) args << L1S("--id3v2-ucs2"); //Must specify this BEFORE "--tt" and friends!
 
-	if(!metaInfo.title().isEmpty())   args << "--tt" << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty())  args << "--ta" << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty())   args << "--tl" << cleanTag( metaInfo.album());
-	if(!metaInfo.genre().isEmpty())   args << "--tg" << cleanTag(metaInfo.genre());
-	if(!metaInfo.comment().isEmpty()) args << "--tc" << cleanTag(metaInfo.comment());
-	if(metaInfo.year())               args << "--ty" << QString::number(metaInfo.year());
-	if(metaInfo.position())           args << "--tn" << QString::number(metaInfo.position());
-	if(!metaInfo.cover().isEmpty())   args << "--ti" << QDir::toNativeSeparators(metaInfo.cover());
+	if(!metaInfo.title().isEmpty())   args << L1S("--tt") << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << L1S("--ta") << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << L1S("--tl") << cleanTag( metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << L1S("--tg") << cleanTag(metaInfo.genre());
+	if(!metaInfo.comment().isEmpty()) args << L1S("--tc") << cleanTag(metaInfo.comment());
+	if(metaInfo.year())               args << L1S("--ty") << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << L1S("--tn") << QString::number(metaInfo.position());
+	if(!metaInfo.cover().isEmpty())   args << L1S("--ti") << QDir::toNativeSeparators(metaInfo.cover());
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
@@ -237,7 +237,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\(.*(\\d+)%\\)\\|");
+	QRegExp regExp(L1S("\\(.*(\\d+)%\\)\\|"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -245,7 +245,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -253,7 +253,7 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			qWarning("LAME process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -298,20 +298,20 @@ bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
 	}
-	else if(containerType.compare("MPEG Audio", Qt::CaseInsensitive) == 0)
+	else if(containerType.compare(L1S("MPEG Audio"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("MPEG Audio", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("MPEG Audio"), Qt::CaseInsensitive) == 0)
 		{
-			if(formatProfile.compare("Layer 3", Qt::CaseInsensitive) == 0 || formatProfile.compare("Layer 2", Qt::CaseInsensitive) == 0)
+			if(formatProfile.compare(L1S("Layer 3"), Qt::CaseInsensitive) == 0 || formatProfile.compare(L1S("Layer 2"), Qt::CaseInsensitive) == 0)
 			{
-				if(formatVersion.compare("Version 1", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0)
+				if(formatVersion.compare(L1S("Version 1"), Qt::CaseInsensitive) == 0 || formatVersion.compare(L1S("Version 2"), Qt::CaseInsensitive) == 0)
 				{
 					return true;
 				}

@@ -131,8 +131,8 @@ static const g_fhgAacEncoderInfo;
 
 FHGAACEncoder::FHGAACEncoder(void)
 :
-	m_binary_enc(lamexp_tools_lookup("fhgaacenc.exe")),
-	m_binary_dll(lamexp_tools_lookup("enc_fhgaac.dll"))
+	m_binary_enc(lamexp_tools_lookup(L1S("fhgaacenc.exe"))),
+	m_binary_dll(lamexp_tools_lookup(L1S("enc_fhgaac.dll")))
 {
 	if(m_binary_enc.isEmpty() || m_binary_dll.isEmpty())
 	{
@@ -158,15 +158,15 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		switch(m_configProfile)
 		{
 		case 1:
-			args << "--profile" << "lc"; //Forces use of LC AAC profile
+			args << L1S("--profile") << L1S("lc"); //Forces use of LC AAC profile
 			break;
 		case 2:
 			maxBitrate = 128;
-			args << "--profile" << "he"; //Forces use of HE AAC profile
+			args << L1S("--profile") << L1S("he"); //Forces use of HE AAC profile
 			break;
 		case 3:
 			maxBitrate = 56;
-			args << "--profile" << "hev2"; //Forces use of HEv2 AAC profile
+			args << L1S("--profile") << L1S("hev2"); //Forces use of HEv2 AAC profile
 			break;
 		}
 	}
@@ -174,10 +174,10 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	switch(m_configRCMode)
 	{
 	case SettingsModel::CBRMode:
-		args << "--cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), maxBitrate));
+		args << L1S("--cbr") << QString::number(qBound(8, index2bitrate(m_configBitrate), maxBitrate));
 		break;
 	case SettingsModel::VBRMode:
-		args << "--vbr" << QString::number(qBound(1, m_configBitrate + 1, 6));
+		args << L1S("--vbr") << QString::number(qBound(1, m_configBitrate + 1, 6));
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
@@ -200,7 +200,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("Progress:\\s*(\\d+)%");
+	QRegExp regExp(L1S("Progress:\\s*(\\d+)%"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -208,7 +208,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -216,7 +216,7 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		{
 			process.kill();
 			qWarning("FhgAacEnc process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -261,9 +261,9 @@ bool FHGAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 
 bool FHGAACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

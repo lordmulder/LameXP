@@ -123,8 +123,8 @@ static const g_macEncoderInfo;
 
 MACEncoder::MACEncoder(void)
 :
-	m_binary_enc(lamexp_tools_lookup("mac.exe")),
-	m_binary_tag(lamexp_tools_lookup("tag.exe"))
+	m_binary_enc(lamexp_tools_lookup(L1S("mac.exe"))),
+	m_binary_tag(lamexp_tools_lookup(L1S("tag.exe")))
 {
 	if(m_binary_enc.isEmpty() || m_binary_tag.isEmpty())
 	{
@@ -165,7 +165,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("Progress: (\\d+).(\\d+)%");
+	QRegExp regExp(L1S("Progress: (\\d+).(\\d+)%"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -173,7 +173,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -181,7 +181,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			qWarning("MAC process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -226,10 +226,10 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return true;
 	}
 
-	emit messageLogged("\n-------------------------------\n");
+	emit messageLogged(L1S("\n-------------------------------\n"));
 	
 	args.clear();
-	args << "APE2" << QDir::toNativeSeparators(outputFile);
+	args << L1S("APE2") << QDir::toNativeSeparators(outputFile);
 
 	if(!metaInfo.title().isEmpty())   args << QString("Title=%1").arg(cleanTag(metaInfo.title()));
 	if(!metaInfo.artist().isEmpty())  args << QString("Artist=%1").arg(cleanTag(metaInfo.artist()));
@@ -254,7 +254,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -262,7 +262,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			qWarning("Tag process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -296,9 +296,9 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 bool MACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
