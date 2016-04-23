@@ -76,6 +76,7 @@
         <location filename="../../src/Dialog_About.cpp" line="837"/>
         <location filename="../../src/Dialog_About.cpp" line="844"/>
         <location filename="../../src/Dialog_About.cpp" line="851"/>
+        <location filename="../../src/Dialog_About.cpp" line="858"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Distribuido bajo los términos de la Licencia Pública General Menor GNU.</translation>
     </message>
@@ -100,7 +101,12 @@
         <translation>Tecnología de codificación de audio sin pérdidas, abierta y libre de patentes.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="919"/>
+        <location filename="../../src/Dialog_About.cpp" line="849"/>
+        <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="926"/>
         <source>n/a</source>
         <translation>n/d</translation>
     </message>
@@ -120,7 +126,7 @@
         <translation>Distribuido bajo los términos de la Licencia Pública General GNU.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="863"/>
+        <location filename="../../src/Dialog_About.cpp" line="870"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP tiene copyright de LoRd_MuldeR. El copyright del software de terceros usado en LameXP pertenece a sus autores individuales.</translation>
     </message>
@@ -282,12 +288,12 @@
         <translation>Codec de audio versátil, completamente abierto y libre de derechos de autor.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="856"/>
+        <location filename="../../src/Dialog_About.cpp" line="863"/>
         <source>Silk Icons - Over 700  icons in PNG format</source>
         <translation>Silk Icons - Más de 700 iconos en formato PNG</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="858"/>
+        <location filename="../../src/Dialog_About.cpp" line="865"/>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
         <translation>Por Mark James, liberado bajo licencia Creative Commons.</translation>
     </message>
@@ -307,7 +313,7 @@
         <translation>Agradecimientos a:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="849"/>
+        <location filename="../../src/Dialog_About.cpp" line="856"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - The Ultimate Packer for eXecutables</translation>
     </message>
@@ -3462,124 +3468,124 @@
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="162"/>
-        <location filename="../../src/Dialog_Update.cpp" line="350"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="351"/>
         <source>Build</source>
         <translation>Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="164"/>
         <source>Unknown</source>
         <translation>Desconocida</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="279"/>
+        <location filename="../../src/Dialog_Update.cpp" line="280"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>Comprobando su conexión de internet, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="305"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Network connectivity test has failed!</source>
         <translation>¡La prueba de conexión a internet ha fallado!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="282"/>
+        <location filename="../../src/Dialog_Update.cpp" line="283"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>Comprobando en busca de nuevas actualizaciones, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="310"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>Failed to fetch update information from server!</source>
         <translation>¡No se ha podido obtener información de actualización desde el servidor!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="311"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>Disculpe, puede que el servidor este sobrecargado en estos momentos. Por favor, inténtelo más tarde.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="349"/>
+        <location filename="../../src/Dialog_Update.cpp" line="350"/>
         <source>More information available at:</source>
         <translation>Más información disponible en:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="285"/>
+        <location filename="../../src/Dialog_Update.cpp" line="286"/>
         <source>A new version of LameXP is available!</source>
         <translation>¡Hay una nueva versión de LameXP disponible!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="286"/>
+        <location filename="../../src/Dialog_Update.cpp" line="287"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>Recomendamos a todos los usuarios instalar esta actualización cuanto antes.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="290"/>
+        <location filename="../../src/Dialog_Update.cpp" line="291"/>
         <source>No new updates available at this time.</source>
         <translation>No se ha encontrado ninguna actualización.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="291"/>
+        <location filename="../../src/Dialog_Update.cpp" line="292"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>LameXP está actualizado. ¡Por favor, compruebe regularmente las actualizaciones!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="295"/>
+        <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>Su versión parece ser más reciente que la última versión publicada.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="296"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>Esto generalmente indica que está usando una versión pre-lanzamiento de LameXP.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="378"/>
+        <location filename="../../src/Dialog_Update.cpp" line="379"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>Descargando actualización, espere por favor...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="426"/>
+        <location filename="../../src/Dialog_Update.cpp" line="427"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>Actualización lista para instalar. La aplicación se cerrará...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="434"/>
+        <location filename="../../src/Dialog_Update.cpp" line="435"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>Actualización fallida. ¡Por favor, vuelva a intentarlo o descárguelo manualmente!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="300"/>
+        <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>¡No está conectado a Internet!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="301"/>
-        <location filename="../../src/Dialog_Update.cpp" line="306"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>Por favor, asegurese de que tiene conexión a internet y vuelva a intentarlo.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="276"/>
+        <location filename="../../src/Dialog_Update.cpp" line="277"/>
         <source>Initializing, please wait...</source>
         <translation>La inicialización, por favor espere ...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="244"/>
+        <location filename="../../src/Dialog_Update.cpp" line="245"/>
         <source>Discard</source>
         <translation>descartar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="244"/>
+        <location filename="../../src/Dialog_Update.cpp" line="245"/>
         <source>Ignore</source>
         <translation>Ignorar</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="242"/>
+        <location filename="../../src/Dialog_Update.cpp" line="243"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>Lo sentimos , pero sólo los usuarios del grupo &quot;Administradores&quot; se pueden instalar las actualizaciones.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="243"/>
+        <location filename="../../src/Dialog_Update.cpp" line="244"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>Por favor, iniciar la aplicación desde una cuenta de administrador y vuelva a intentarlo!</translation>
     </message>

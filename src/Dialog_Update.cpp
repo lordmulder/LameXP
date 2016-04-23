@@ -84,10 +84,11 @@ UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 	m_updaterProcess(NULL),
 	m_binaryUpdater(lamexp_tools_lookup("wupdate.exe")),
 	m_binaryWGet(lamexp_tools_lookup("wget.exe")),
+	m_binaryNC(lamexp_tools_lookup("nc.exe")),
 	m_binaryGnuPG(lamexp_tools_lookup("gpgv.exe")),
 	m_binaryKeys(lamexp_tools_lookup("keyring.gpg"))
 {
-	if(m_binaryUpdater.isEmpty())
+	if(m_binaryUpdater.isEmpty() || m_binaryWGet.isEmpty() || m_binaryNC.isEmpty() || m_binaryGnuPG.isEmpty() || m_binaryKeys.isEmpty())
 	{
 		MUTILS_THROW("Tools not initialized correctly!");
 	}
@@ -150,7 +151,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 	{
 		if(m_thread.isNull())
 		{
-			m_thread.reset(new MUtils::UpdateChecker(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates));
+			m_thread.reset(new MUtils::UpdateChecker(m_binaryWGet, m_binaryNC, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates));
 			connect(m_thread.data(), SIGNAL(statusChanged(int)), this, SLOT(threadStatusChanged(int)));
 			connect(m_thread.data(), SIGNAL(progressChanged(int)), this, SLOT(threadProgressChanged(int)));
 			connect(m_thread.data(), SIGNAL(messageLogged(QString)), this, SLOT(threadMessageLogged(QString)));
@@ -458,7 +459,7 @@ void UpdateDialog::testKnownHosts(void)
 {
 	ui->statusLabel->setText("Testing all known hosts, this may take a few minutes...");
 	
-	if(MUtils::UpdateChecker *testThread = new MUtils::UpdateChecker(m_binaryWGet, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates, true))
+	if(MUtils::UpdateChecker *testThread = new MUtils::UpdateChecker(m_binaryWGet, m_binaryNC, m_binaryGnuPG, m_binaryKeys, QLatin1String("LameXP"), lamexp_version_build(), m_betaUpdates, true))
 	{
 		QEventLoop loop;
 		m_logFile->clear();

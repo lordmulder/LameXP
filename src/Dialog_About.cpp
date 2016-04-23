@@ -846,6 +846,13 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
+		tr("Netcat for NT - TCP/IP Swiss Army Knife"),
+		"nc.exe", "v?.??",
+		tr("Released under the terms of the GNU Lesser General Public License."),
+		"https://eternallybored.org/misc/netcat/"
+	);
+	moreAboutText += makeToolText
+	(
 		tr("UPX - The Ultimate Packer for eXecutables"),
 		QString(), "v3.09",
 		tr("Released under the terms of the GNU Lesser General Public License."),

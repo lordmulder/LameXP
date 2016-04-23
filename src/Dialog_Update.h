@@ -78,6 +78,7 @@ private:
 	const SettingsModel *const m_settings;
 
 	const QString m_binaryWGet;
+	const QString m_binaryNC;
 	const QString m_binaryGnuPG;
 	const QString m_binaryKeys;
 	const QString m_binaryUpdater;
