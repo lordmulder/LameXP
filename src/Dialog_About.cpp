@@ -111,7 +111,7 @@ g_lamexp_specialThanks[] =
 	{ "RareWares",             "http://www.rarewares.org/"     },
 	{ "GitHub",                "http://github.com/"            },
 	{ "SourceForge",           "http://sourceforge.net/"       },
-	{ "Qt Developer Network",  "http://qt-project.org/"        },
+	{ "Qt Developer Network",  "https://www.qt.io/developers/" },
 	{ "CodePlex",              "http://www.codeplex.com/"      },
 	{ "Marius Hudea",          "http://savedonthe.net/"        },
 	{ "Codecs.com",            "http://www.codecs.com/"        },
