@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU" sourcelanguage="en">
+<TS version="2.1" language="ru_RU" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -205,7 +205,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="849"/>
         <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation type="unfinished"></translation>
+        <translation>Netcat для NT - швейцарский армейский нож для TCP/IP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="870"/>
