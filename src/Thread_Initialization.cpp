@@ -60,7 +60,7 @@ static const bool ENABLE_CUSTOM_TOOLS = true;
 /* constants */
 static const double g_allowedExtractDelay = 12.0;
 static const size_t BUFF_SIZE = 512;
-static const size_t EXPECTED_TOOL_COUNT = 28;
+static const size_t EXPECTED_TOOL_COUNT = 29;
 
 /* number of CPU cores -> number of threads */
 static unsigned int cores2threads(const unsigned int cores)

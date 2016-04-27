@@ -6,6 +6,7 @@
 
 * Upgraded build environment to Microsoft Visual Studio 2015 with Update-2
 * Fixed the location of temporary intermediate files for SoX-based audio effects
+* Fixed embedding of meta tags with OggEnc2 when reading directly from OGG/FLAC input file
 * Enabled the "built-in" resampler for QAAC encoder
 * The "Algorithm Quality" slider now also affects the QAAC encoder
 * Added "AVX" (Advanced Vector Extensions) to CPU feature detection code
@@ -15,7 +16,7 @@
 * Updated QAAC add-in to the to QAAC v2.58 (2016-01-05)
 * Updated FhgAacEnc add-in to "Case" edition (2015-10-24)
 * Updated ALAC decoder to refalac v1.58 (2016-01-05)
-
+* Improved auto-update function (faster Internet connectivity check)
 
 ## LameXP v4.13 [2015-12-12] ## {-}
 

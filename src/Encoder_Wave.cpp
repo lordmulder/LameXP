@@ -146,11 +146,11 @@ bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 	if (success)
 	{
-		emit messageLogged(QLatin1String("File copied successfully."));
+		emit messageLogged(L1S("File copied successfully."));
 	}
 	else
 	{
-		emit messageLogged((*abortFlag) ? QLatin1String("Operation cancelled by user!")  : QLatin1String("Error: Failed to copy file!"));
+		emit messageLogged((*abortFlag) ? L1S("Operation cancelled by user!")  : L1S("Error: Failed to copy file!"));
 	}
 
 	return success;
@@ -174,9 +174,9 @@ void WaveEncoder::updateProgress(const double &progress)
 
 bool WaveEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

@@ -76,6 +76,7 @@
         <location filename="../../src/Dialog_About.cpp" line="837"/>
         <location filename="../../src/Dialog_About.cpp" line="844"/>
         <location filename="../../src/Dialog_About.cpp" line="851"/>
+        <location filename="../../src/Dialog_About.cpp" line="858"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>在GNU宽通用公共许可证的条款下发布。</translation>
     </message>
@@ -100,7 +101,12 @@
         <translation>开放和无专利的无损音频压缩技术。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="919"/>
+        <location filename="../../src/Dialog_About.cpp" line="849"/>
+        <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="926"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
@@ -236,7 +242,7 @@
         <translation>avs2wav - Avisynth到WAV音频转换器</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="863"/>
+        <location filename="../../src/Dialog_About.cpp" line="870"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP的版权作为一个整体属于LoRd_MuldeR。在 LameXP 中使用的第三方软件著作权属于原作者。</translation>
     </message>
@@ -281,12 +287,12 @@
         <translation>完全开放的，免版税的，高度灵活的音频编解码器。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="856"/>
+        <location filename="../../src/Dialog_About.cpp" line="863"/>
         <source>Silk Icons - Over 700  icons in PNG format</source>
         <translation>Silk图标 - 超过700个PNG格式的图标</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="858"/>
+        <location filename="../../src/Dialog_About.cpp" line="865"/>
         <source>By Mark James, released under the Creative Commons &apos;by&apos; License.</source>
         <translation>Mark James在知识共享授权下发布。</translation>
     </message>
@@ -306,7 +312,7 @@
         <translation>特别感谢:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="849"/>
+        <location filename="../../src/Dialog_About.cpp" line="856"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - 终极可执行程序文件压缩器</translation>
     </message>
@@ -3443,124 +3449,124 @@
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="162"/>
-        <location filename="../../src/Dialog_Update.cpp" line="350"/>
+        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="351"/>
         <source>Build</source>
         <translation>Build</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="163"/>
+        <location filename="../../src/Dialog_Update.cpp" line="164"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="279"/>
+        <location filename="../../src/Dialog_Update.cpp" line="280"/>
         <source>Testing your internet connection, please wait...</source>
         <translation>测试您的 Internet 连接,请稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="305"/>
+        <location filename="../../src/Dialog_Update.cpp" line="306"/>
         <source>Network connectivity test has failed!</source>
         <translation>网络连接测试失败 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="282"/>
+        <location filename="../../src/Dialog_Update.cpp" line="283"/>
         <source>Checking for new updates online, please wait...</source>
         <translation>在线检查新的版本,请稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="310"/>
+        <location filename="../../src/Dialog_Update.cpp" line="311"/>
         <source>Failed to fetch update information from server!</source>
         <translation>无法从服务器获取更新信息!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="311"/>
+        <location filename="../../src/Dialog_Update.cpp" line="312"/>
         <source>Sorry, the update server might be busy at this time. Plase try again later.</source>
         <translation>抱歉,更新服务器可能正忙。请稍后再试。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="349"/>
+        <location filename="../../src/Dialog_Update.cpp" line="350"/>
         <source>More information available at:</source>
         <translation>更多详细信息:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="285"/>
+        <location filename="../../src/Dialog_Update.cpp" line="286"/>
         <source>A new version of LameXP is available!</source>
         <translation>发现一个可用的新版本 LameXP !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="286"/>
+        <location filename="../../src/Dialog_Update.cpp" line="287"/>
         <source>We highly recommend all users to install this update as soon as possible.</source>
         <translation>我们强烈建议所有的用户尽快安装此更新。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="290"/>
+        <location filename="../../src/Dialog_Update.cpp" line="291"/>
         <source>No new updates available at this time.</source>
         <translation>没有发现新的可用更新。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="291"/>
+        <location filename="../../src/Dialog_Update.cpp" line="292"/>
         <source>Your version of LameXP is still up-to-date. Please check for updates regularly!</source>
         <translation>您的 LameXP 版本仍然是最新的。请定期检查更新!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="295"/>
+        <location filename="../../src/Dialog_Update.cpp" line="296"/>
         <source>Your version appears to be newer than the latest release.</source>
         <translation>您的版本似乎比最新的版本新。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="296"/>
+        <location filename="../../src/Dialog_Update.cpp" line="297"/>
         <source>This usually indicates your are currently using a pre-release version of LameXP.</source>
         <translation>这通常表示您当前正在使用 LameXP 预发布版。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="378"/>
+        <location filename="../../src/Dialog_Update.cpp" line="379"/>
         <source>Update is being downloaded, please be patient...</source>
         <translation>正在下载更新,请耐心等待...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="426"/>
+        <location filename="../../src/Dialog_Update.cpp" line="427"/>
         <source>Update ready to install. Applicaion will quit...</source>
         <translation>更新已准备好安装。应用程序将退出...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="434"/>
+        <location filename="../../src/Dialog_Update.cpp" line="435"/>
         <source>Update failed. Please try again or download manually!</source>
         <translation>更新失败。请再试一次或手动下载 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="300"/>
+        <location filename="../../src/Dialog_Update.cpp" line="301"/>
         <source>It appears that the computer currently is offline!</source>
         <translation>似乎目前的计算机处于脱机状态!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="301"/>
-        <location filename="../../src/Dialog_Update.cpp" line="306"/>
+        <location filename="../../src/Dialog_Update.cpp" line="302"/>
+        <location filename="../../src/Dialog_Update.cpp" line="307"/>
         <source>Please make sure your computer is connected to the internet and try again.</source>
         <translation>请确保您的计算机连接到 Internet,然后重试。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="276"/>
+        <location filename="../../src/Dialog_Update.cpp" line="277"/>
         <source>Initializing, please wait...</source>
         <translation>正在初始化,请稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="244"/>
+        <location filename="../../src/Dialog_Update.cpp" line="245"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="244"/>
+        <location filename="../../src/Dialog_Update.cpp" line="245"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="242"/>
+        <location filename="../../src/Dialog_Update.cpp" line="243"/>
         <source>Sorry, but only users in the &quot;Administrators&quot; group can install updates.</source>
         <translation>抱歉，只有管理员组的用户能够安装更新。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Update.cpp" line="243"/>
+        <location filename="../../src/Dialog_Update.cpp" line="244"/>
         <source>Please start application from an administrator account and try again!</source>
         <translation>请以管理员身份运行程序并重试！</translation>
     </message>

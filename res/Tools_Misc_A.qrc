@@ -4,6 +4,8 @@
     <file>tools/elevator.exe</file>
     <file>tools/gpgv.exe</file>
     <file>tools/keyring.gpg</file>
+    <file>tools/nc.i386.exe</file>
+    <file>tools/nc.x64.exe</file>
     <file>tools/sox.exe</file>
     <file>tools/tag.exe</file>
     <file>tools/wget.exe</file>

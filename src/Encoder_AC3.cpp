@@ -127,7 +127,7 @@ static const g_aftenEncoderInfo;
 
 AC3Encoder::AC3Encoder(void)
 :
-	m_binary(lamexp_tools_lookup("aften.exe"))
+	m_binary(lamexp_tools_lookup(L1S("aften.exe")))
 {
 	if(m_binary.isEmpty())
 	{
@@ -152,10 +152,10 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString::number(qBound(0, m_configBitrate * 16, 1023));
+		args << L1S("-q") << QString::number(qBound(0, m_configBitrate * 16, 1023));
 		break;
 	case SettingsModel::CBRMode:
-		args << "-b" << QString::number(g_ac3BitratesLUT[qBound(0, m_configBitrate, 18)]);
+		args << L1S("-b") << QString::number(g_ac3BitratesLUT[qBound(0, m_configBitrate, 18)]);
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
@@ -164,19 +164,19 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 	if(m_configAudioCodingMode >= 1)
 	{
-		args << "-acmod" << QString::number(m_configAudioCodingMode - 1);
+		args << L1S("-acmod") << QString::number(m_configAudioCodingMode - 1);
 	}
 	if(m_configDynamicRangeCompression != 5)
 	{
-		args << "-dynrng" << QString::number(m_configDynamicRangeCompression);
+		args << L1S("-dynrng") << QString::number(m_configDynamicRangeCompression);
 	}
 	if(m_configExponentSearchSize != 8)
 	{
-		args << "-exps" << QString::number(m_configExponentSearchSize);
+		args << L1S("-exps") << QString::number(m_configExponentSearchSize);
 	}
 	if(m_configFastBitAllocation)
 	{
-		args << "-fba" << QString::number(1);
+		args << L1S("-fba") << QString::number(1);
 	}
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
@@ -193,7 +193,7 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("progress:(\\s+)(\\d+)%(\\s+)\\|");
+	QRegExp regExp(L1S("progress:(\\s+)(\\d+)%(\\s+)\\|"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -201,7 +201,7 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -209,7 +209,7 @@ bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		{
 			process.kill();
 			qWarning("Aften process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -286,9 +286,9 @@ const unsigned int *AC3Encoder::supportedSamplerates(void)
 
 bool AC3Encoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

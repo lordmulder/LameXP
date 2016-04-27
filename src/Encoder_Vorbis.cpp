@@ -125,7 +125,7 @@ static const g_vorbisEncoderInfo;
 
 VorbisEncoder::VorbisEncoder(void)
 :
-	m_binary(lamexp_tools_lookup("oggenc2.exe"))
+	m_binary(lamexp_tools_lookup(L1S("oggenc2.exe")))
 {
 	if(m_binary.isEmpty())
 	{
@@ -150,10 +150,10 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	switch(m_configRCMode)
 	{
 	case SettingsModel::VBRMode:
-		args << "-q" << QString::number(qBound(-2, m_configBitrate - 2, 10));
+		args << L1S("-q") << QString::number(qBound(-2, m_configBitrate - 2, 10));
 		break;
 	case SettingsModel::ABRMode:
-		args << "-b" << QString::number(qBound(32, (m_configBitrate + 4) * 8, 500));
+		args << L1S("-b") << QString::number(qBound(32, (m_configBitrate + 4) * 8, 500));
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
@@ -162,28 +162,33 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 
 	if((m_configBitrateMaximum > 0) && (m_configBitrateMinimum > 0) && (m_configBitrateMinimum <= m_configBitrateMaximum))
 	{
-		args << "--min-bitrate" << QString::number(qBound(32, m_configBitrateMinimum, 500));
-		args << "--max-bitrate" << QString::number(qBound(32, m_configBitrateMaximum, 500));
+		args << L1S("--min-bitrate") << QString::number(qBound(32, m_configBitrateMinimum, 500));
+		args << L1S("--max-bitrate") << QString::number(qBound(32, m_configBitrateMaximum, 500));
 	}
 
 	if(m_configSamplingRate > 0)
 	{
-		args << "--resample" << QString::number(m_configSamplingRate) << "--converter" << QString::number(0);
+		args << L1S("--resample") << QString::number(m_configSamplingRate) << L1S("--converter") << QString::number(0);
 	}
 
-	if(!metaInfo.title().isEmpty()) args << "-t" << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty()) args << "-a" << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty()) args << "-l" << cleanTag(metaInfo.album());
-	if(!metaInfo.genre().isEmpty()) args << "-G" << cleanTag(metaInfo.genre());
-	if(!metaInfo.comment().isEmpty()) args << "-c" << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
-	if(metaInfo.year()) args << "-d" << QString::number(metaInfo.year());
-	if(metaInfo.position()) args << "-N" << QString::number(metaInfo.position());
+	if (!metaInfo.empty(false))
+	{
+		args << L1S("--discard-comments");
+	}
+
+	if(!metaInfo.title().isEmpty())   args << L1S("-t") << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << L1S("-a") << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << L1S("-l") << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << L1S("-G") << cleanTag(metaInfo.genre());
+	if(!metaInfo.comment().isEmpty()) args << L1S("-c") << QString("comment=%1").arg(cleanTag(metaInfo.comment()));
+	if(metaInfo.year())               args << L1S("-d") << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << L1S("-N") << QString::number(metaInfo.position());
 	
 	//args << "--tv" << QString().sprintf("Encoder=LameXP v%d.%02d.%04d [%s]", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build(), lamexp_version_release());
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
-	args << "-o" << QDir::toNativeSeparators(outputFile);
+	args << L1S("-o") << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, m_binary, args))
@@ -195,7 +200,7 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\[.*(\\d+)[.,](\\d+)%\\]");
+	QRegExp regExp(L1S("\\[.*(\\d+)[.,](\\d+)%\\]"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -203,7 +208,7 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -211,7 +216,7 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 		{
 			process.kill();
 			qWarning("OggEnc process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -256,16 +261,16 @@ bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaI
 
 bool VorbisEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
 	}
-	else if(containerType.compare("FLAC", Qt::CaseInsensitive) == 0)
+	else if(containerType.compare(L1S("FLAC"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("FLAC", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("FLAC"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}

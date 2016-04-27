@@ -141,8 +141,8 @@ static const g_qaacEncoderInfo;
 
 QAACEncoder::QAACEncoder(void)
 :
-	m_binary_qaac32(lamexp_tools_lookup("qaac.exe")),
-	m_binary_qaac64(lamexp_tools_lookup("qaac64.exe"))
+	m_binary_qaac32(lamexp_tools_lookup(L1S("qaac.exe"))),
+	m_binary_qaac64(lamexp_tools_lookup(L1S("qaac64.exe")))
 {
 	if(m_binary_qaac32.isEmpty() && m_binary_qaac64.isEmpty())
 	{
@@ -165,7 +165,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	QStringList args;
 
 	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	env.insert("PATH", QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), MUtils::temp_folder())));
+	env.insert(L1S("PATH"), QDir::toNativeSeparators(QString("%1;%1/QTfiles;%2").arg(QDir(QCoreApplication::applicationDirPath()).canonicalPath(), MUtils::temp_folder())));
 	process.setProcessEnvironment(env);
 
 	if(m_configRCMode != SettingsModel::VBRMode)
@@ -174,7 +174,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		{
 		case 2:
 		case 3:
-			args << "--he"; //Forces use of HE AAC profile (there is no explicit HEv2 switch for QAAC)
+			args << L1S("--he"); //Forces use of HE AAC profile (there is no explicit HEv2 switch for QAAC)
 			break;
 		}
 	}
@@ -182,39 +182,39 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	switch(m_configRCMode)
 	{
 	case SettingsModel::CBRMode:
-		args << "--cbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
+		args << L1S("--cbr") << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
 		break;
 	case SettingsModel::ABRMode:
-		args << "--cvbr" << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
+		args << L1S("--cvbr") << QString::number(qBound(8, index2bitrate(m_configBitrate), 576));
 		break;
 	case SettingsModel::VBRMode:
-		args << "--tvbr" << QString::number(g_qaacVBRQualityLUT[qBound(0, m_configBitrate , 14)]);
+		args << L1S("--tvbr") << QString::number(g_qaacVBRQualityLUT[qBound(0, m_configBitrate , 14)]);
 		break;
 	default:
 		MUTILS_THROW("Bad rate-control mode!");
 		break;
 	}
 
-	args << "--quality" << QString::number(qBound(0, m_algorithmQuality, 2));
+	args << L1S("--quality") << QString::number(qBound(0, m_algorithmQuality, 2));
 	if (m_configSamplingRate > 0)
 	{
 		args << QString("--native-resampler=bats,%0").arg(QString::number(RESAMPLING_QUALITY));
-		args << "--rate" << QString::number(m_configSamplingRate);
+		args << L1S("--rate") << QString::number(m_configSamplingRate);
 	}
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
 
-	if(!metaInfo.title().isEmpty())   args << "--title"   << cleanTag(metaInfo.title());
-	if(!metaInfo.artist().isEmpty())  args << "--artist"  << cleanTag(metaInfo.artist());
-	if(!metaInfo.album().isEmpty())   args << "--album"   << cleanTag(metaInfo.album());
-	if(!metaInfo.genre().isEmpty())   args << "--genre"   << cleanTag(metaInfo.genre());
-	if(!metaInfo.comment().isEmpty()) args << "--comment" << cleanTag( metaInfo.comment());
-	if(metaInfo.year())               args << "--date"    << QString::number(metaInfo.year());
-	if(metaInfo.position())           args << "--track"   << QString::number(metaInfo.position());
-	if(!metaInfo.cover().isEmpty())   args << "--artwork" << metaInfo.cover();
+	if(!metaInfo.title().isEmpty())   args << L1S("--title")   << cleanTag(metaInfo.title());
+	if(!metaInfo.artist().isEmpty())  args << L1S("--artist")  << cleanTag(metaInfo.artist());
+	if(!metaInfo.album().isEmpty())   args << L1S("--album")   << cleanTag(metaInfo.album());
+	if(!metaInfo.genre().isEmpty())   args << L1S("--genre")   << cleanTag(metaInfo.genre());
+	if(!metaInfo.comment().isEmpty()) args << L1S("--comment") << cleanTag( metaInfo.comment());
+	if(metaInfo.year())               args << L1S("--date")    << QString::number(metaInfo.year());
+	if(metaInfo.position())           args << L1S("--track")   << QString::number(metaInfo.position());
+	if(!metaInfo.cover().isEmpty())   args << L1S("--artwork") << metaInfo.cover();
 
-	args << "-d" << ".";
-	args << "-o" << QDir::toNativeSeparators(outputFile);
+	args << L1S("-d") << L1S(".");
+	args << L1S("-o") << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
 	if(!startProcess(process, qaac_bin, args, QFileInfo(outputFile).canonicalPath()))
@@ -226,7 +226,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\[(\\d+)\\.(\\d)%\\]");
+	QRegExp regExp(L1S("\\[(\\d+)\\.(\\d)%\\]"));
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -234,7 +234,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		{
 			process.kill();
 			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
+			emit messageLogged(L1S("\nABORTED BY USER !!!"));
 			break;
 		}
 		process.waitForReadyRead(m_processTimeoutInterval);
@@ -242,7 +242,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 		{
 			process.kill();
 			qWarning("QAAC process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
 			bTimeout = true;
 			break;
 		}
@@ -287,9 +287,9 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 bool QAACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	if(containerType.compare(L1S("Wave"), Qt::CaseInsensitive) == 0)
 	{
-		if(formatType.compare("PCM", Qt::CaseInsensitive) == 0)
+		if(formatType.compare(L1S("PCM"), Qt::CaseInsensitive) == 0)
 		{
 			return true;
 		}
