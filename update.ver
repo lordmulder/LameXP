@@ -1,13 +1,13 @@
 [!Update]
-TimestampCreated=2016-04-29
+TimestampCreated=2016-05-04
 
 [MPlayer for Windows]
-BuildNo=133
+BuildNo=134
 DownloadSite=http://forum.doom9.org/showthread.php?t=138725
 DownloadAddress=http://muldersoft.sourceforge.net/update/
-DownloadFilename=MPUI.2016-02-27.exe
-DownloadFilecode=b58fefd2f75a13bbd241813e39cc04bee38bada8
-DownloadChecksum=BF6A1FC7DBD8B4588477D25A1553E09641664437B6417F0A31E40B4496CB6595A3203A1A155284972448C6B57DDEC48D
+DownloadFilename=MPUI.2016-05-04.exe
+DownloadFilecode=5fc100015e7a0f640f3c4c8d85252fc4fc2150d7
+DownloadChecksum=1ACD0999CEC98CCE864EADE54AF5466B395B0F7F417B6ED65F2F022840A484BE9B4E40F690142797ED313ADDFE5ACE35
 
 [LameXP]
 BuildNo=1852
