@@ -103,7 +103,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="849"/>
         <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation type="unfinished"></translation>
+        <translation>Netcat for NT - TCP/IP瑞士军刀</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="926"/>
