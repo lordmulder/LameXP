@@ -15,6 +15,7 @@
 * Updated MediaInfo to v0.7.85 (2016-04-29), compiled with ICL 15.0 and MSVC 12.0
 * Updated QAAC add-in to the to QAAC v2.58 (2016-01-05)
 * Updated FhgAacEnc add-in to "Case" edition (2015-10-24)
+* Updated mpg123 decoder to v1.23.4 (2016-05-11), compiled with GCC 5.3.0
 * Updated ALAC decoder to refalac v1.58 (2016-01-05)
 * Improved auto-update function (faster Internet connectivity check)
 

@@ -26,6 +26,7 @@
 #include "Global.h"
 
 //MUtils
+#include <MUtils/Global.h>
 #include <MUtils/Exception.h>
 
 //Qt
@@ -64,7 +65,7 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\s+Time:\\s+(\\d+):(\\d+)\\.(\\d+)\\s+\\[(\\d+):(\\d+)\\.(\\d+)\\],");
+	QRegExp regExp("\\b\\d+\\+\\d+\\s+(\\d+):(\\d+)\\.(\\d+)\\+(\\d+):(\\d+)\\.(\\d+)\\b");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -90,22 +91,19 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, vo
 			QString text = QString::fromUtf8(line.constData()).simplified();
 			if(regExp.lastIndexIn(text) >= 0)
 			{
-				int values[6];
-				for(int i = 0; i < 6; i++)
+				quint32 values[6];
+				if (MUtils::regexp_parse_uint32(regExp, values, 6))
 				{
-					bool ok = false;
-					int temp = regExp.cap(i+1).toInt(&ok);
-					values[i] = (ok ? temp : 0);
-				}
-				int timeDone = (60 * values[0]) + values[1];
-				int timeLeft = (60 * values[3]) + values[4];
-				if(timeDone > 0 || timeLeft > 0)
-				{
-					int newProgress = qRound((static_cast<double>(timeDone) / static_cast<double>(timeDone + timeLeft)) * 100.0);
-					if(newProgress > prevProgress)
+					const double timeDone = (60.0 * double(values[0])) + double(values[1]) + (double(values[2]) / 100.0);
+					const double timeLeft = (60.0 * double(values[3])) + double(values[4]) + (double(values[5]) / 100.0);
+					if ((timeDone >= 0.005) || (timeLeft >= 0.005))
 					{
-						emit statusUpdated(newProgress);
-						prevProgress = qMin(newProgress + 2, 99);
+						const int newProgress = qRound((static_cast<double>(timeDone) / static_cast<double>(timeDone + timeLeft)) * 100.0);
+						if (newProgress > prevProgress)
+						{
+							emit statusUpdated(newProgress);
+							prevProgress = qMin(newProgress + 2, 99);
+						}
 					}
 				}
 			}
