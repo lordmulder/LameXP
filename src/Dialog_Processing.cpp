@@ -98,7 +98,11 @@ while(0)
 #define SET_PROGRESS_TEXT(TXT) do \
 { \
 	ui->label_progress->setText(TXT); \
-	m_systemTray->setToolTip(QString().sprintf("LameXP v%d.%02d\n%ls", lamexp_version_major(), lamexp_version_minor(), QString(TXT).utf16())); \
+	if(!m_systemTray.isNull()) \
+	{ \
+		if(!m_systemTray->isVisible()) m_systemTray->setVisible(true); \
+		m_systemTray->setToolTip(QString().sprintf("LameXP v%d.%02d\n%ls", lamexp_version_major(), lamexp_version_minor(), QString(TXT).utf16())); \
+	} \
 } \
 while(0)
 
@@ -370,8 +374,6 @@ void ProcessingDialog::showEvent(QShowEvent *event)
 		MUtils::GUI::enable_close_button(this, false);
 		ui->button_closeDialog->setEnabled(false);
 		ui->button_AbortProcess->setEnabled(false);
-		m_progressIndicator->start();
-		m_systemTray->setVisible(true);
 		
 		MUtils::OS::change_process_priority(1);
 		
@@ -480,9 +482,9 @@ void ProcessingDialog::initEncoding(void)
 	m_succeededJobs.clear();
 	m_failedJobs.clear();
 	m_skippedJobs.clear();
-	m_userAborted = false;
-	m_forcedAbort = false;
+	m_userAborted = m_forcedAbort = false;
 	m_playList.clear();
+	m_progressIndicator->start();
 
 	DecoderRegistry::configureDecoders(m_settings);
 

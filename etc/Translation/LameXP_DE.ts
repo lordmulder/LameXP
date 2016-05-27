@@ -3149,88 +3149,88 @@
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="284"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Encoding Files</source>
         <translation>Kodiere Dateien</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="284"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="288"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>Ihre Dateien werden kodiert, bitte warten...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="215"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="219"/>
         <source>Show details for selected job</source>
         <translation>Zeige Details für den ausgewählten Job</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="490"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="492"/>
         <source>Encoding files, please wait...</source>
         <translation>Dateien werden kodiert, bitte warten...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="663"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="665"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Abbruch! Laufende Jobs werden beendet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="696"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Erzeuge Wiedergabeliste, bitte warten...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="707"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Abgebrochen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="707"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="709"/>
         <source>Process was aborted by the user.</source>
         <translation>Der Vorgang wurde vom Benutzer abgebrochen.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Fehler</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
         <source>At least one file has failed!</source>
         <translation>Mindestens eine Datei ist fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
         <location filename="../../src/Dialog_Processing.cpp" line="751"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="753"/>
         <source>All files completed successfully.</source>
         <translation>Alle Dateien wurden erfolgreich umgewandelt.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="751"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="753"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Fertig</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1046"/>
         <source>Playlist creation failed</source>
         <translation>Wiedergabeliste konnte nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1046"/>
         <source>The playlist file could not be created:</source>
         <translation>Die Wiedergabeliste konnte nicht erstellt werden:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="706"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Der Vorgang wurde vom Benutzer abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="534"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="536"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>Multithreading aktiviert: Führe %1 Instanzen parallel aus!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="216"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
         <source>Browse Output File Location</source>
         <translation>Ausgabedatei suchen</translation>
     </message>
@@ -3240,13 +3240,13 @@
         <translation>Computer herunterfahren sobald alle Dateien fertiggestellt sind</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1108"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1110"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Achtung: Computer wird in %1 Sekunden heruntergefahren...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1112"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1113"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1114"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1115"/>
         <source>Cancel Shutdown</source>
         <translation>Herunterfahren abbrechen</translation>
     </message>
@@ -3269,47 +3269,47 @@
         <translation>Freier Festplattenspeicher (Temp Ordner)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="716"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="718"/>
         <source>Process finished after %1.</source>
         <translation>Vorgang abgeschlossen nach %1.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Filter Log Items</source>
         <translation>Logeinträge filtern</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
         <source>Show Running Only</source>
         <translation>Nur laufende anzeigen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
         <source>Show Succeeded Only</source>
         <translation>Nur erfolgreiche anzeigen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
         <source>Show Failed Only</source>
         <translation>Nur fehlgeschlagene anzeigen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="227"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="231"/>
         <source>Show Skipped Only</source>
         <translation>Nur übersprungene anzeigen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="232"/>
         <source>Show All Items</source>
         <translation>Alle Einträge anzeigen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="945"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="947"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Keiner der Einträge entspricht den aktuellen Filterregeln</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="706"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>Der Vorgang wurde vom Benutzter nach %n Track abgebrochen!</numerusform>
@@ -3317,7 +3317,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1164"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1166"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n Stunde</numerusform>
@@ -3325,8 +3325,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1165"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1169"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1167"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1171"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n Minute</numerusform>
@@ -3334,8 +3334,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1170"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1174"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1172"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1176"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n Sekunde</numerusform>
@@ -3343,7 +3343,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1175"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1177"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n Millisekunde</numerusform>
@@ -3351,7 +3351,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="674"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="676"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Kodiere: %n Datei von %1 abgeschlossen. Bitte warten...</numerusform>
@@ -3359,7 +3359,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="727"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Fehler: %1 von %n Datei fehlgeschlagen (%2). Doppelklicken um Details anzuzeigen!</numerusform>
@@ -3367,7 +3367,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="727"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="729"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n Datei übersprungen</numerusform>
@@ -3375,7 +3375,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Fehler: %1 von %n Datei fehlgeschlagen. Doppelklicken um detaillierte Informationen anzuzeigen!</numerusform>
@@ -3383,7 +3383,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="745"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="747"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Alle Dateien wurden erfolgreich umgewandelt. %n Datei wurde übersprungen.</numerusform>

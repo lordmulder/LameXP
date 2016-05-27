@@ -127,7 +127,7 @@ static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, 
 
 	//Create models
 	QScopedPointer<FileListModel>           fileListModel(new FileListModel()          );
-	QScopedPointer<AudioFileModel_MetaInfo> metaInfo     (new AudioFileModel_MetaInfo());
+	QScopedPointer<AudioFileModel_MetaInfo> metaInfoModel(new AudioFileModel_MetaInfo());
 	QScopedPointer<SettingsModel>           settingsModel(new SettingsModel()          );
 
 	//Show splash screen
@@ -137,7 +137,7 @@ static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, 
 	settingsModel->validate();
 
 	//Create main window
-	QScopedPointer<MainWindow> poMainWindow(new MainWindow(ipcChannel, fileListModel.data(), metaInfo.data(), settingsModel.data()));
+	QScopedPointer<MainWindow> poMainWindow(new MainWindow(ipcChannel, fileListModel.data(), metaInfoModel.data(), settingsModel.data()));
 
 	//Main application loop
 	while(bAccepted && (iShutdown <= SHUTDOWN_FLAG_NONE))
@@ -153,7 +153,7 @@ static int lamexp_main_loop(const MUtils::CPUFetaures::cpu_info_t &cpuFeatures, 
 		//Show processing dialog
 		if(bAccepted && (fileListModel->rowCount() > 0))
 		{
-			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel.data(), metaInfo.data(), settingsModel.data());
+			ProcessingDialog *processingDialog = new ProcessingDialog(fileListModel.data(), metaInfoModel.data(), settingsModel.data());
 			processingDialog->exec();
 			iShutdown = processingDialog->getShutdownFlag();
 			MUTILS_DELETE(processingDialog);
