@@ -1,11 +1,11 @@
 [!Update]
-TimestampCreated=2016-05-22
+TimestampCreated=2016-06-27
 
 [LameXP]
-BuildNo=1888
-BuildDate=2016-05-22
+BuildNo=1894
+BuildDate=2016-06-27
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.sourceforge.net/update/
-DownloadFilename=LameXP-BETA.2016-05-22.Release-Static.Build-1888.exe
-DownloadFilecode=6d8996ef946dfcfa0373421e052b93b64c3f0bfc
-DownloadChecksum=4BEB022515121D1B43D753DD41F21D4159AF835E240E98BF68BB132BA8A416C82395299E11CA28DB70577A87B7549405
+DownloadFilename=LameXP-BETA.2016-06-27.Release-Static.Build-1894.exe
+DownloadFilecode=5ad3f96d9a0bd54af6c9535feb27c6957dca5c87
+DownloadChecksum=A25A00BFDB3FA6B2AB51D63B2E672A1906636A8CDE5CBA7E0AB4948B01AF0E1D9AD5ED59878468ED2B2DF1A559FADDDC
