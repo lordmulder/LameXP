@@ -451,12 +451,11 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Apply rename pattern
-	const QString fileName = MUtils::clean_file_name(applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo())));
+	const QString fileName = applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo()));
 
 	//Generate full output path
-	
 	const QString fileExt = m_renameFileExt.isEmpty() ?  QString::fromUtf8(m_encoder->toEncoderInfo()->extension()) : m_renameFileExt;
-	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, fileExt);
+	outFileName = MUtils::clean_file_path(QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, fileExt));
 
 	//Skip file, if target file exists (optional!)
 	if((m_overwriteMode == OverwriteMode_SkipExisting) && QFileInfo(outFileName).exists())
@@ -492,7 +491,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	//Generate final name
 	while(QFileInfo(outFileName).exists() && (n < (INT_MAX/2)))
 	{
-		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), fileName, QString::number(++n), fileExt);
+		outFileName = MUtils::clean_file_path(QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), fileName, QString::number(++n), fileExt));
 	}
 
 	//Create placeholder
