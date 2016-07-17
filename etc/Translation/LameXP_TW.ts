@@ -3056,27 +3056,27 @@
         <translation>目標輸出目錄不是可寫:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="512"/>
+        <location filename="../../src/Thread_Process.cpp" line="511"/>
         <source>Unknown File Name</source>
         <translation>未知文件名稱</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="514"/>
+        <location filename="../../src/Thread_Process.cpp" line="513"/>
         <source>Unknown Title</source>
         <translation>未知標題</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="515"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown Artist</source>
         <translation>未知藝術家</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="516"/>
+        <location filename="../../src/Thread_Process.cpp" line="515"/>
         <source>Unknown Album</source>
         <translation>未知專輯</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Comment</source>
         <translation>未知評論</translation>
     </message>
@@ -3097,22 +3097,22 @@
         <translation>跳過.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="464"/>
+        <location filename="../../src/Thread_Process.cpp" line="463"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>目標輸出文件已經存在, 將跳過此文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="465"/>
+        <location filename="../../src/Thread_Process.cpp" line="464"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>如果你不希望被跳過已存在的文件, 請更改覆蓋模式!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>目標輸出文件已經存在, 要刪除現有的文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="486"/>
+        <location filename="../../src/Thread_Process.cpp" line="485"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>無法刪除現有目標文件, 將保存到另一個文件名!</translation>
     </message>

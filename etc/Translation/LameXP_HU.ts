@@ -3072,47 +3072,47 @@
         <translation>A cél kimeneti könyvtár NEM írható:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="512"/>
+        <location filename="../../src/Thread_Process.cpp" line="511"/>
         <source>Unknown File Name</source>
         <translation>Ismeretlen fájlnév</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="514"/>
+        <location filename="../../src/Thread_Process.cpp" line="513"/>
         <source>Unknown Title</source>
         <translation>Ismeretlen cím</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="515"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown Artist</source>
         <translation>Ismeretlen előadó</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="516"/>
+        <location filename="../../src/Thread_Process.cpp" line="515"/>
         <source>Unknown Album</source>
         <translation>Ismeretlen album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Comment</source>
         <translation>Ismeretlen hozzászólás</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="464"/>
+        <location filename="../../src/Thread_Process.cpp" line="463"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>A cél kimeneti fájl már létezik, ez a fájl ki lesz hagyva:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="465"/>
+        <location filename="../../src/Thread_Process.cpp" line="464"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Ha nem szeretné a meglévő fájlokat kihagyni, kérjük, változtassa meg a felülírási módot!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>A cél kimeneti fájl már létezik, a meglévő fájl törlésre kerül:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="486"/>
+        <location filename="../../src/Thread_Process.cpp" line="485"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Nem sikerült törölni a meglévő cél fájlt. Az állomány másik fájlnéven lesz elmentve!</translation>
     </message>

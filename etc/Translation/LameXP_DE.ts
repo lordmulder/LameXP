@@ -3065,27 +3065,27 @@
         <translation>In das Zielverzeichnis kann nicht geschrieben werden:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="512"/>
+        <location filename="../../src/Thread_Process.cpp" line="511"/>
         <source>Unknown File Name</source>
         <translation>Unbekannter Dateiname</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="514"/>
+        <location filename="../../src/Thread_Process.cpp" line="513"/>
         <source>Unknown Title</source>
         <translation>Unbekannter Titel</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="515"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown Artist</source>
         <translation>Unbekannter Künstler</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="516"/>
+        <location filename="../../src/Thread_Process.cpp" line="515"/>
         <source>Unknown Album</source>
         <translation>Unbekanntes Album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Comment</source>
         <translation>Unbekannter Kommentar</translation>
     </message>
@@ -3106,22 +3106,22 @@
         <translation>Übersprungen.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="464"/>
+        <location filename="../../src/Thread_Process.cpp" line="463"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Zieldatei existiert bereits, die Datei wird übersprungen:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="465"/>
+        <location filename="../../src/Thread_Process.cpp" line="464"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Wenn existierende Dateien nicht übersprungen werden sollen, ändern Sie bitte den Überschreiben-Modus!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Zieldatei existiert bereits, die Datei wird gelöscht und überschrieben:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="486"/>
+        <location filename="../../src/Thread_Process.cpp" line="485"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Die existierende Datei konnte nicht gelöscht werden, ein anderer Dateiname wird gewählt!</translation>
     </message>
