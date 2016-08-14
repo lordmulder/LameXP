@@ -82,6 +82,7 @@ g_lamexp_translators[] =
 	{"",   L"",           L"Bodo Thevissen",      "Bodo@thevissen.de"        },
 	{"es", L"Español",    L"Rub3nCT",             "Rub3nCT@gmail.com"        },
 	{"fr", L"Française",  L"Dodich Informatique", "Dodich@live.fr"           },
+	{"",   L"Française",  L"Sami Ghoul-Duclos",   "samgd14@live.ca"          },
 	{"hu", L"Magyarul",   L"ZityiSoft Team",      "zityisoft@gmail.com"      },
 	{"it", L"Italiano",   L"Roberto",             "Gulliver_69@libero.it"    },
 	{"",   L"",           L"Gianluca Papi",       "johnnyb.goode68@gmail.com"},
