@@ -17,6 +17,7 @@
 * Updated FhgAacEnc add-in to "Case" edition (2015-10-24)
 * Updated mpg123 decoder to v1.23.4 (2016-05-11), compiled with GCC 5.3.0
 * Updated ALAC decoder to refalac v1.58 (2016-01-05)
+* Updated GnuPG to v1.4.21 (2016-08-17), compiled with GCC 6.1.0
 * Improved auto-update function (faster Internet connectivity check)
 
 ## LameXP v4.13 [2015-12-12] ## {-}
