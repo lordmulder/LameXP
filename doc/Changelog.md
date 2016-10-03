@@ -13,12 +13,12 @@
 * Updated Opus encoder/decoder libraries to v1.1.3 and Opus-Tools to v0.1.9 (2016-09-11)
 * Updated LAME encoder to v3.100 Alpha-2 (2016-01-29), compiled with ICL 15.0 and MSVC 12.0
 * Updated MediaInfo to v0.7.88 (2016-08-31), compiled with ICL 15.0 and MSVC 12.0
-* Updated QAAC add-in to the to QAAC v2.58 (2016-01-05)
-* Updated FhgAacEnc add-in to "Case" edition (2015-10-24)
 * Updated mpg123 decoder to v1.23.4 (2016-05-11), compiled with GCC 5.3.0
 * Updated ALAC decoder to refalac v1.61 (2016-10-02)
 * Updated WavPack decoder to v4.80.0 (2016-03-28), compiled with ICL 15.0 and MSVC 12.0
 * Updated GnuPG to v1.4.21 (2016-08-17), compiled with GCC 6.1.0
+* Updated QAAC add-in to the to QAAC v2.61 (2016-10-02)
+* Updated FhgAacEnc add-in to "Case" edition (2015-10-24)
 * Improved auto-update function (faster Internet connectivity check)
 
 ## LameXP v4.13 [2015-12-12] ## {-}
