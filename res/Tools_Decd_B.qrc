@@ -6,6 +6,7 @@
     <file>tools/tta.exe</file>
     <file>tools/valdec.exe</file>
     <file>tools/wma2wav.exe</file>
-    <file>tools/wvunpack.exe</file>
+    <file>tools/wvunpack.i386.exe</file>
+    <file>tools/wvunpack.x64.exe</file>
   </qresource>
 </RCC>
