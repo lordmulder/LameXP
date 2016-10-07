@@ -71,10 +71,12 @@ call "%~dp0\_version.bat"
 :: ---------------------------------------------------------------------------
 
 mkdir "%~dp0\..\..\out" 2> NUL
-set "OUT_FILE=%~dp0\..\..\out\%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%"
+set "OUT_NAME=%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%"
+set "OUT_FILE=%~dp0\..\..\out\!OUT_NAME!"
 for /L %%n in (1, 1, 99) do (
-	if exist "!OUT_FILE!.exe" set "OUT_FILE=%~dp0\..\..\out\%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
-	if exist "!OUT_FILE!.zip" set "OUT_FILE=%~dp0\..\..\out\%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	if exist "!OUT_FILE!.exe" set "OUT_NAME=%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	if exist "!OUT_FILE!.zip" set "OUT_NAME=%VER_LAMEXP_BASENAME%.%ISO_DATE%.%LAMEXP_CONFIG:_=-%.Build-%VER_LAMEXP_BUILD%.Update-%%n"
+	set "OUT_FILE=%~dp0\..\..\out\!OUT_NAME!"
 )
 
 :: ---------------------------------------------------------------------------
@@ -151,7 +153,7 @@ attrib +R "%TMP_PATH%\*.exe"
 attrib +R "%TMP_PATH%\*.dll"
 
 :: ---------------------------------------------------------------------------
-:: CREATE PACKAGES
+:: BUILD INSTALLER
 :: ---------------------------------------------------------------------------
 
 "%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
@@ -170,16 +172,54 @@ pushd "%TMP_PATH%"
 "%~dp0\..\Utilities\Zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
 popd
 
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%"     "%~dp0\..\NSIS\setup.nsi"
+"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
 )
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
+
+REM "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
+rem if %ERRORLEVEL% NEQ 0 (
+REM     "%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+REM     pause && exit
+REM )
+
+:: ---------------------------------------------------------------------------
+:: CREATE WRAPPER
+:: ---------------------------------------------------------------------------
+
+set "WRAPPER_CONF=%TMP%\~%RANDOM%-%RANDOM%.cf"
+set "WRAPPER_PACK=%TMP%\~%RANDOM%-%RANDOM%.7z"
+
+echo ;^^!@Install@^^!UTF-8^^!>                            "%WRAPPER_CONF%"
+echo Title="LameXP Setup">>                               "%WRAPPER_CONF%"
+echo ExecuteFile="LameXP-Setup-r%VER_LAMEXP_BUILD%.exe">> "%WRAPPER_CONF%"
+echo ;^^!@InstallEnd@^^!>>                                "%WRAPPER_CONF%"
+
+"%~dp0\..\Utilities\7za.exe" a -t7z "%WRAPPER_PACK%" "%OUT_FILE%.sfx"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
 )
+
+"%~dp0\..\Utilities\7za.exe" rn "%WRAPPER_PACK%" "%OUT_NAME%.sfx" "LameXP-Setup-r%VER_LAMEXP_BUILD%.exe"
+if %ERRORLEVEL% NEQ 0 (
+	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	pause && exit
+)
+
+copy /b "%~dp0\..\Utilities\7zSD.sfx" + "%WRAPPER_CONF%" + "%WRAPPER_PACK%" "%OUT_FILE%.exe"
+if %ERRORLEVEL% NEQ 0 (
+	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	pause && exit
+)
+
+:: ---------------------------------------------------------------------------
+:: CLEAN UP
+:: ---------------------------------------------------------------------------
+
+del "%WRAPPER_CONF%"
+del "%WRAPPER_PACK%"
 
 attrib -R "%TMP_PATH%\*.txt"
 attrib -R "%TMP_PATH%\*.html"
@@ -187,7 +227,7 @@ attrib -R "%TMP_PATH%\*.exe"
 rd /S /Q "%TMP_PATH%"
 
 for %%i in (zip,exe) do (
-	if not exist "%OUT_FILE%.zip" (
+	if not exist "%OUT_FILE%.%%i" (
 		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to create release packages^!\n"
 		pause && exit
 	)
