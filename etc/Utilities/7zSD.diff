@@ -1,30 +1,23 @@
- CPP/7zip/Bundles/SFXSetup/Compat.xml       | 12 +++++++
- CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp     | 52 ++++++++++++++++++++++++------
- CPP/7zip/Bundles/SFXSetup/resource.rc      |  4 +--
- CPP/7zip/UI/Explorer/MyMessages.cpp        |  4 +--
+ CPP/7zip/Bundles/SFXSetup/Compat.xml       |  1 +
+ CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp     | 52 +++++++++++++++++++-----
+ CPP/7zip/Bundles/SFXSetup/resource.rc      |  4 +-
+ CPP/7zip/UI/Explorer/MyMessages.cpp        |  4 +-
  CPP/7zip/UI/Explorer/MyMessages.h          |  2 +-
  CPP/7zip/UI/FileManager/FormatUtils.cpp    |  2 +-
- CPP/7zip/UI/FileManager/ProgressDialog.cpp |  4 +--
- 7 files changed, 63 insertions(+), 17 deletions(-)
+ CPP/7zip/UI/FileManager/ProgressDialog.cpp |  4 +-
+ CPP/Common/MyWindows.h                     |  1 +
+ CPP/Windows/FileDir.cpp                    | 63 ++++++++++++++++++++++++++----
+ CPP/Windows/FileDir.h                      |  1 +
+ 10 files changed, 110 insertions(+), 24 deletions(-)
 
 diff --git a/CPP/7zip/Bundles/SFXSetup/Compat.xml b/CPP/7zip/Bundles/SFXSetup/Compat.xml
 new file mode 100644
-index 0000000..632a8fa
+index 0000000..76fecef
 --- /dev/null
 +++ b/CPP/7zip/Bundles/SFXSetup/Compat.xml
-@@ -0,0 +1,12 @@
-+<?xml version="1.0" encoding="utf-8"?>
-+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
-+    <application>
-+      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"/>
-+      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>
-+      <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/>
-+      <supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>
-+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/>
-+    </application>
-+  </compatibility>
-+</assembly>
+@@ -0,0 +1 @@
++<?xml version="1.0" encoding="utf-8"?><assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0"><compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1"><application><supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"/><supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/><supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/><supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/><supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/></application></compatibility></assembly>
+\ No newline at end of file
 diff --git a/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp b/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp
 index aef2e19..7f856f1 100644
 --- a/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp
@@ -212,3 +205,122 @@ index 65201a9..4d23499 100644
        _inCancelMessageBox = false;
        Sync.SetPaused(paused);
        if (res == IDCANCEL || res == IDNO)
+diff --git a/CPP/Common/MyWindows.h b/CPP/Common/MyWindows.h
+index 139a4e8..c40767f 100644
+--- a/CPP/Common/MyWindows.h
++++ b/CPP/Common/MyWindows.h
+@@ -6,6 +6,7 @@
+ #ifdef _WIN32
+ 
+ #include <windows.h>
++#include <shlobj.h>
+ 
+ #ifdef UNDER_CE
+   #undef VARIANT_TRUE
+diff --git a/CPP/Windows/FileDir.cpp b/CPP/Windows/FileDir.cpp
+index da71b71..f21400b 100644
+--- a/CPP/Windows/FileDir.cpp
++++ b/CPP/Windows/FileDir.cpp
+@@ -14,6 +14,8 @@
+ extern bool g_IsNT;
+ #endif
+ 
++static CFSTR kTempDirName = FTEXT("TEMP");
++
+ using namespace NWindows;
+ using namespace NFile;
+ using namespace NName;
+@@ -67,6 +69,36 @@ bool GetSystemDir(FString &path)
+   }
+   return (needLength > 0 && needLength <= MAX_PATH);
+ }
++
++bool GetAppDataDir(FString &path)
++{
++  HRESULT hResult;
++  static const int FolderId[] = { CSIDL_LOCAL_APPDATA, CSIDL_APPDATA, CSIDL_PROFILE, NULL };
++  for(size_t i = 0; i < 3; ++i)
++  {
++    #ifndef _UNICODE
++    if (!g_IsNT)
++    {
++      TCHAR s[MAX_PATH + 2];
++      s[0] = 0;
++      hResult = ::SHGetFolderPath(NULL, FolderId[i] | CSIDL_FLAG_CREATE, NULL, 0, s);
++      path = fas2fs(s);
++    }
++    else
++    #endif
++    {
++      WCHAR s[MAX_PATH + 2];
++      s[0] = 0;
++      hResult = ::SHGetFolderPathW(NULL, FolderId[i] | CSIDL_FLAG_CREATE, NULL, 0, s);
++      path = us2fs(s);
++    }
++    if(hResult == S_OK)
++    {
++      return true; /*success*/
++    }
++  }
++  return false;
++}
+ #endif
+ 
+ bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime)
+@@ -566,7 +598,7 @@ bool MyGetTempPath(FString &path)
+   {
+     WCHAR s[MAX_PATH + 2];
+     s[0] = 0;
+-    needLength = ::GetTempPathW(MAX_PATH + 1, s);;
++    needLength = ::GetTempPathW(MAX_PATH + 1, s);
+     path = us2fs(s);
+   }
+   return (needLength > 0 && needLength <= MAX_PATH);
+@@ -671,12 +703,29 @@ bool CTempDir::Create(CFSTR prefix)
+   if (!Remove())
+     return false;
+   FString tempPath;
+-  if (!MyGetTempPath(tempPath))
+-    return false;
+-  if (!CreateTempFile(tempPath + prefix, true, _path, NULL))
+-    return false;
+-  _mustBeDeleted = true;
+-  return true;
++  if (MyGetTempPath(tempPath))
++  {
++    if (CreateTempFile(tempPath + prefix, true, _path, NULL))
++    {
++      _mustBeDeleted = true;
++      return true;
++    }
++  }
++  if (GetAppDataDir(tempPath))
++  {
++    tempPath.Add_PathSepar();
++    tempPath += kTempDirName;
++    if(CreateComplexDir(tempPath))
++    {
++      tempPath.Add_PathSepar();
++      if (CreateTempFile(tempPath + prefix, true, _path, NULL))
++      {
++        _mustBeDeleted = true;
++        return true;
++      }
++    }
++  }
++  return false;
+ }
+ 
+ bool CTempDir::Remove()
+diff --git a/CPP/Windows/FileDir.h b/CPP/Windows/FileDir.h
+index b13d1cc..1d87bbf 100644
+--- a/CPP/Windows/FileDir.h
++++ b/CPP/Windows/FileDir.h
+@@ -13,6 +13,7 @@ namespace NDir {
+ 
+ bool GetWindowsDir(FString &path);
+ bool GetSystemDir(FString &path);
++bool GetAppDataDir(FString &path);
+ 
+ bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime);
+ bool SetFileAttrib(CFSTR path, DWORD attrib);
