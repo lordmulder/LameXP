@@ -178,37 +178,7 @@ if %ERRORLEVEL% NEQ 0 (
 	pause && exit
 )
 
-REM "%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.exe" "/DLAMEXP_SOURCE_FILE=%OUT_FILE%.sfx" "%~dp0\..\NSIS\wrapper.nsi"
-rem if %ERRORLEVEL% NEQ 0 (
-REM     "%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
-REM     pause && exit
-REM )
-
-:: ---------------------------------------------------------------------------
-:: CREATE WRAPPER
-:: ---------------------------------------------------------------------------
-
-set "WRAPPER_CONF=%TMP%\~%RANDOM%-%RANDOM%.cf"
-set "WRAPPER_PACK=%TMP%\~%RANDOM%-%RANDOM%.7z"
-
-echo ;^^!@Install@^^!UTF-8^^!>                            "%WRAPPER_CONF%"
-echo Title="LameXP Setup">>                               "%WRAPPER_CONF%"
-echo ExecuteFile="LameXP-Setup-r%VER_LAMEXP_BUILD%.exe">> "%WRAPPER_CONF%"
-echo ;^^!@InstallEnd@^^!>>                                "%WRAPPER_CONF%"
-
-"%~dp0\..\Utilities\7za.exe" a -t7z "%WRAPPER_PACK%" "%OUT_FILE%.sfx"
-if %ERRORLEVEL% NEQ 0 (
-	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
-	pause && exit
-)
-
-"%~dp0\..\Utilities\7za.exe" rn "%WRAPPER_PACK%" "%OUT_NAME%.sfx" "LameXP-Setup-r%VER_LAMEXP_BUILD%.exe"
-if %ERRORLEVEL% NEQ 0 (
-	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
-	pause && exit
-)
-
-copy /b "%~dp0\..\Utilities\7zSD.sfx" + "%WRAPPER_CONF%" + "%WRAPPER_PACK%" "%OUT_FILE%.exe"
+call "%~dp0\..\Utilities\7zSD.cmd" "%OUT_FILE%.sfx" "%OUT_FILE%.exe" "LameXP Setup" "LameXP-Setup-r%VER_LAMEXP_BUILD%"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
@@ -217,9 +187,6 @@ if %ERRORLEVEL% NEQ 0 (
 :: ---------------------------------------------------------------------------
 :: CLEAN UP
 :: ---------------------------------------------------------------------------
-
-del "%WRAPPER_CONF%"
-del "%WRAPPER_PACK%"
 
 attrib -R "%TMP_PATH%\*.txt"
 attrib -R "%TMP_PATH%\*.html"

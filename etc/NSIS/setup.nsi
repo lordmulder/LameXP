@@ -619,7 +619,7 @@ Section "-Create Shortcuts"
 		!insertmacro CreateWebLink "$SMPROGRAMS\$StartMenuFolder\Hydrogenaudio Forums.url"     "http://www.hydrogenaudio.org/"
 
 		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk"
-			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ISV_PinToTaskbar}
+			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ShellVerb.PinToTaskbar}
 			DetailPrint 'Pin: "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" -> $R1'
 		${EndIf}
 	!insertmacro MUI_STARTMENU_WRITE_END
@@ -672,7 +672,7 @@ Section "Uninstall"
 	${IfNot} "$StartMenuFolder" == ""
 		SetShellVarContext current
 		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk"
-			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ISV_UnpinFromTaskbar}
+			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ShellVerb.UnpinFromTaskbar}
 			DetailPrint 'Unpin: "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" -> $R1'
 		${EndIf}
 		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\*.*"
@@ -683,7 +683,7 @@ Section "Uninstall"
 		
 		SetShellVarContext all
 		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk"
-			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ISV_UnpinFromTaskbar}
+			${StdUtils.InvokeShellVerb} $R1 "$SMPROGRAMS\$StartMenuFolder" "LameXP.lnk" ${StdUtils.Const.ShellVerb.UnpinFromTaskbar}
 			DetailPrint 'Unpin: "$SMPROGRAMS\$StartMenuFolder\LameXP.lnk" -> $R1'
 		${EndIf}
 		${If} ${FileExists} "$SMPROGRAMS\$StartMenuFolder\*.*"
