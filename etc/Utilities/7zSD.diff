@@ -1,14 +1,14 @@
  CPP/7zip/Bundles/SFXSetup/Compat.xml       |  1 +
- CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp     | 52 +++++++++++++++++++-----
+ CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp     | 51 +++++++++++++++++----
  CPP/7zip/Bundles/SFXSetup/resource.rc      |  4 +-
  CPP/7zip/UI/Explorer/MyMessages.cpp        |  4 +-
  CPP/7zip/UI/Explorer/MyMessages.h          |  2 +-
  CPP/7zip/UI/FileManager/FormatUtils.cpp    |  2 +-
  CPP/7zip/UI/FileManager/ProgressDialog.cpp |  4 +-
  CPP/Common/MyWindows.h                     |  1 +
- CPP/Windows/FileDir.cpp                    | 63 ++++++++++++++++++++++++++----
+ CPP/Windows/FileDir.cpp                    | 73 ++++++++++++++++++++++++++----
  CPP/Windows/FileDir.h                      |  1 +
- 10 files changed, 110 insertions(+), 24 deletions(-)
+ 10 files changed, 117 insertions(+), 26 deletions(-)
 
 diff --git a/CPP/7zip/Bundles/SFXSetup/Compat.xml b/CPP/7zip/Bundles/SFXSetup/Compat.xml
 new file mode 100644
@@ -19,28 +19,27 @@ index 0000000..76fecef
 +<?xml version="1.0" encoding="utf-8"?><assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0"><compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1"><application><supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"/><supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/><supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/><supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/><supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/></application></compatibility></assembly>
 \ No newline at end of file
 diff --git a/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp b/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp
-index aef2e19..7f856f1 100644
+index aef2e19..53608cf 100644
 --- a/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp
 +++ b/CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp
-@@ -37,6 +37,27 @@ static CFSTR kTempDirPrefix = FTEXT("7zS");
+@@ -37,6 +37,26 @@ static CFSTR kTempDirPrefix = FTEXT("7zS");
  
  #define _SHELL_EXECUTE
  
 +static HWND GetCurrentHwnd(void)
 +{
 +  HWND result = ::GetActiveWindow();
-+  if(!result)
++  if(!(result && IsWindowVisible(result)))
 +  {
 +    for (int i = 0; i < 256; ++i)
 +    {
-+      if(i > 0)
++      ::Sleep(1); /*some delay*/
++      if(const HWND hwnd = ::GetForegroundWindow())
 +      {
-+        ::Sleep(1); /*some delay*/
-+      }
-+      result = ::GetForegroundWindow();
-+      if(result)
-+      {
-+        break; /*done*/
++        if(IsWindowVisible(result = hwnd))
++        {
++          break; /*success*/
++        }
 +      }
 +    }
 +  }
@@ -50,7 +49,7 @@ index aef2e19..7f856f1 100644
  static bool ReadDataString(CFSTR fileName, LPCSTR startID,
      LPCSTR endID, AString &stringResult)
  {
-@@ -145,7 +166,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
+@@ -145,7 +165,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
  
    UString archiveName, switches;
    #ifdef _SHELL_EXECUTE
@@ -59,7 +58,7 @@ index aef2e19..7f856f1 100644
    #endif
    NCommandLineParser::SplitCommandLine(GetCommandLineW(), archiveName, switches);
  
-@@ -191,7 +212,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
+@@ -191,7 +211,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
        dirPrefix = pairs[index].String;
      if (!installPrompt.IsEmpty() && !assumeYes)
      {
@@ -68,7 +67,7 @@ index aef2e19..7f856f1 100644
            MB_ICONQUESTION) != IDYES)
          return 0;
      }
-@@ -200,6 +221,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
+@@ -200,6 +220,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
      #ifdef _SHELL_EXECUTE
      executeFile = GetTextConfigValue(pairs, L"ExecuteFile");
      executeParameters = GetTextConfigValue(pairs, L"ExecuteParameters");
@@ -76,7 +75,7 @@ index aef2e19..7f856f1 100644
      #endif
    }
  
-@@ -243,7 +265,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
+@@ -243,7 +264,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
          {
            if (errorMessage.IsEmpty())
              errorMessage = NError::MyFormatMessage(result);
@@ -85,7 +84,7 @@ index aef2e19..7f856f1 100644
          }
        }
        return 1;
-@@ -287,13 +309,25 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
+@@ -287,13 +308,25 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
      execInfo.lpDirectory = NULL;
      execInfo.nShow = SW_SHOWNORMAL;
      execInfo.hProcess = 0;
@@ -218,7 +217,7 @@ index 139a4e8..c40767f 100644
  #ifdef UNDER_CE
    #undef VARIANT_TRUE
 diff --git a/CPP/Windows/FileDir.cpp b/CPP/Windows/FileDir.cpp
-index da71b71..f21400b 100644
+index da71b71..36d89fc 100644
 --- a/CPP/Windows/FileDir.cpp
 +++ b/CPP/Windows/FileDir.cpp
 @@ -14,6 +14,8 @@
@@ -276,42 +275,66 @@ index da71b71..f21400b 100644
      path = us2fs(s);
    }
    return (needLength > 0 && needLength <= MAX_PATH);
-@@ -671,12 +703,29 @@ bool CTempDir::Create(CFSTR prefix)
-   if (!Remove())
-     return false;
-   FString tempPath;
--  if (!MyGetTempPath(tempPath))
--    return false;
--  if (!CreateTempFile(tempPath + prefix, true, _path, NULL))
--    return false;
--  _mustBeDeleted = true;
--  return true;
+@@ -625,6 +657,35 @@ static bool CreateTempFile(CFSTR prefix, bool addRandom, FString &path, NIO::COu
+   return false;
+ }
+ 
++static bool CreateTempFileSafely(CFSTR prefix, bool addRandom, FString &path, NIO::COutFile *outFile)
++{
++  FString tempPath;
 +  if (MyGetTempPath(tempPath))
 +  {
-+    if (CreateTempFile(tempPath + prefix, true, _path, NULL))
++    if (CreateTempFile(tempPath + prefix, addRandom, path, outFile))
 +    {
-+      _mustBeDeleted = true;
 +      return true;
 +    }
 +  }
-+  if (GetAppDataDir(tempPath))
++  for(Byte retry = 0; retry < 2; ++retry)
 +  {
-+    tempPath.Add_PathSepar();
-+    tempPath += kTempDirName;
-+    if(CreateComplexDir(tempPath))
++    if (retry ? GetWindowsDir(tempPath) : GetAppDataDir(tempPath))
 +    {
 +      tempPath.Add_PathSepar();
-+      if (CreateTempFile(tempPath + prefix, true, _path, NULL))
++      tempPath += kTempDirName;
++      if(CreateComplexDir(tempPath))
 +      {
-+        _mustBeDeleted = true;
-+        return true;
++        tempPath.Add_PathSepar();
++        if (CreateTempFile(tempPath + prefix, addRandom, path, outFile))
++        {
++          return true;
++        }
 +      }
 +    }
 +  }
 +  return false;
- }
- 
- bool CTempDir::Remove()
++}
++
+ bool CTempFile::Create(CFSTR prefix, NIO::COutFile *outFile)
+ {
+   if (!Remove())
+@@ -639,10 +700,7 @@ bool CTempFile::CreateRandomInTempFolder(CFSTR namePrefix, NIO::COutFile *outFil
+ {
+   if (!Remove())
+     return false;
+-  FString tempPath;
+-  if (!MyGetTempPath(tempPath))
+-    return false;
+-  if (!CreateTempFile(tempPath + namePrefix, true, _path, outFile))
++  if (!CreateTempFileSafely(namePrefix, true, _path, outFile))
+     return false;
+   _mustBeDeleted = true;
+   return true;
+@@ -670,10 +728,7 @@ bool CTempDir::Create(CFSTR prefix)
+ {
+   if (!Remove())
+     return false;
+-  FString tempPath;
+-  if (!MyGetTempPath(tempPath))
+-    return false;
+-  if (!CreateTempFile(tempPath + prefix, true, _path, NULL))
++  if (!CreateTempFileSafely(prefix, true, _path, NULL))
+     return false;
+   _mustBeDeleted = true;
+   return true;
 diff --git a/CPP/Windows/FileDir.h b/CPP/Windows/FileDir.h
 index b13d1cc..1d87bbf 100644
 --- a/CPP/Windows/FileDir.h
