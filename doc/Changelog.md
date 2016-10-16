@@ -10,8 +10,9 @@
 * Enabled the "built-in" resampler for QAAC encoder
 * The "Algorithm Quality" slider now also affects the QAAC encoder
 * Added "AVX" (Advanced Vector Extensions) to CPU feature detection code
-* Updated Opus encoder/decoder libraries to v1.1.3 and Opus-Tools to v0.1.9 (2016-09-11)
+* Updated Opus encoder/decoder libraries to v1.1.3 and Opus-Tools to v0.1.9 (2016-10-16)
 * Updated LAME encoder to v3.100 Alpha-2 (2016-01-29), compiled with ICL 15.0 and MSVC 12.0
+* Updated FLAC encoder/decoder to v1.3.1 (2016-10-04), compiled with ICL 17.0 and MSVC 12.0
 * Updated MediaInfo to v0.7.88 (2016-08-31), compiled with ICL 15.0 and MSVC 12.0
 * Updated mpg123 decoder to v1.23.4 (2016-05-11), compiled with GCC 5.3.0
 * Updated ALAC decoder to refalac v1.61 (2016-10-02)
