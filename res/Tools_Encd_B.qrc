@@ -2,7 +2,9 @@
 <RCC version="1.0">
   <qresource>
     <file>tools/dcaenc.exe</file>
-    <file>tools/flac.i386.exe</file>
-    <file>tools/flac.x64.exe</file>
+    <file>tools/flac.x86-i386.exe</file>
+    <file>tools/flac.x86-sse2.exe</file>
+    <file>tools/flac.x64-sse2.exe</file>
+    <file>tools/flac.x64-avx.exe</file>
   </qresource>
 </RCC>
