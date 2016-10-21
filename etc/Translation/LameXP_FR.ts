@@ -11,7 +11,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="611"/>
         <source>Note: LameXP is free software. Do &lt;b&gt;not&lt;/b&gt; pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should &lt;b&gt;not&lt;/b&gt; respond to the offer !!!</source>
-        <translation>Remarque : LameXP est un logiciel gratuit. Ne payez &lt;b&gt;pas&lt;/b&gt; pour l&apos;obtenir ou l&apos;utiliser ! Si un site web tente de vous faire payer pour son téléchargement, ne répondez &lt;b&gt;pas&lt;/b&gt; à l&apos;offre  !!!</translation>
+        <translation>Remarque : LameXP est un logiciel gratuit. Ne payez &lt;b&gt;pas&lt;/b&gt; pour l&apos;obtenir ou l&apos;utiliser ! Si un site web tente de vous faire payer pour son téléchargement, n&apos;acceptez surtout &lt;b&gt;pas&lt;/b&gt; !!!</translation>
     </message>
     <message>
         <location filename="../../gui/AboutDialog.ui" line="20"/>
@@ -920,7 +920,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="567"/>
         <source>Save output files to the same location where the input file is located</source>
-        <translation>Enregistrer les fichiers au même emplacement que les fichiers sources</translation>
+        <translation>Enregistrer les fichiers au même emplacement que les fichiers source</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="590"/>
@@ -1034,12 +1034,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3789"/>
         <source>Search Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher :</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3818"/>
         <source>&lt;a href=&quot;regexp&quot;&gt;Regular Expression Info&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;regexp&quot;&gt;Informations sur le rechercher et remplacer (anglais)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3844"/>
@@ -1049,22 +1049,22 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3894"/>
         <source>Enter the desired search pattern (regular expression) here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez les suites de recherche (regular expresions) ici!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3941"/>
         <source>Enter replacement text here! It may contain backreferences.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrer le texte de remplacement ici!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un remplacement d&apos;extension</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Retirer un remplacement d&apos;extension</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
@@ -1074,7 +1074,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher et remplacer</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
@@ -1084,7 +1084,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers existants</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
@@ -2274,7 +2274,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3726"/>
         <source>Rename Pattern:</source>
-        <translation>Renommer le modèle :</translation>
+        <translation>Renommer selon :</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3739"/>
@@ -2688,7 +2688,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2430"/>
         <source>Enable Dynamic Normalization</source>
-        <translation>Enable Dynamic normalisation</translation>
+        <translation>Activer la normalisation audio dynamique</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2437"/>
@@ -2698,7 +2698,7 @@ Sélection automatique (par défaut)</translation>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2469"/>
         <source>Enable channel-coupling, i.e. amplify all channels of a multi-channel file by the same amount</source>
-        <translation>Activer le canal de couplage, ce est à dire d&apos;amplifier tous les canaux d&apos;un fichier multi-canal du même montant</translation>
+        <translation>Activer le couplage de canaux, c&apos;est à dire d&apos;amplifier tous les canaux d&apos;un fichier multi-canal du même volume</translation>
     </message>
 </context>
 <context>
