@@ -324,7 +324,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="850"/>
         <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation type="unfinished"></translation>
+        <translation>NT netcat - TCP/IP svájci bicska</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="857"/>
@@ -633,7 +633,7 @@
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="241"/>
         <source>Album:</source>
-        <translation></translation>
+        <translation>Album:</translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="415"/>
@@ -765,22 +765,22 @@
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="140"/>
         <source>File Extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájlkiterjesztés</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="142"/>
         <source>Replace With</source>
-        <translation type="unfinished"></translation>
+        <translation>Csere erre:</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="189"/>
         <source>Select file extensions to overwrite:</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon fájlkiterjesztéseket a felülíráshoz:</translation>
     </message>
     <message>
         <location filename="../../src/Model_FileExts.cpp" line="208"/>
         <source>Enter the new file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adja meg az új fájlkiterjesztést:</translation>
     </message>
 </context>
 <context>
@@ -1172,32 +1172,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1945"/>
         <source>16.000</source>
-        <translation></translation>
+        <translation>16.000</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1950"/>
         <source>22.050</source>
-        <translation></translation>
+        <translation>22.050</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1955"/>
         <source>24.000</source>
-        <translation></translation>
+        <translation>24.000</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1960"/>
         <source>32.000</source>
-        <translation></translation>
+        <translation>32.000</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1965"/>
         <source>44.100</source>
-        <translation></translation>
+        <translation>44.100</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1970"/>
         <source>48.000</source>
-        <translation></translation>
+        <translation>48.000</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2071"/>
@@ -1302,22 +1302,22 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2736"/>
         <source>Lame MP3:</source>
-        <translation></translation>
+        <translation>Lame MP3:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2743"/>
         <source>OggEnc2:</source>
-        <translation></translation>
+        <translation>OggEnc2:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2750"/>
         <source>MPEG-4 AAC:</source>
-        <translation></translation>
+        <translation>MPEG-4 AAC:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2757"/>
         <source>FLAC:</source>
-        <translation></translation>
+        <translation>FLAC:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2846"/>
@@ -1327,12 +1327,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2889"/>
         <source>Aften A/52:</source>
-        <translation></translation>
+        <translation>Aften A/52:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2961"/>
         <source>OpusEnc:</source>
-        <translation></translation>
+        <translation>OpusEnc:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3007"/>
@@ -1377,22 +1377,22 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3313"/>
         <source>Film Light</source>
-        <translation></translation>
+        <translation>Film Light</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3318"/>
         <source>Film Standard</source>
-        <translation></translation>
+        <translation>Hagyományos film</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3323"/>
         <source>Music Light</source>
-        <translation></translation>
+        <translation>Könnyűzene</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3328"/>
         <source>Music Standard</source>
-        <translation></translation>
+        <translation>Hagyományos zene</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3333"/>
@@ -1502,57 +1502,57 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3776"/>
         <source>Replacement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Csere:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3789"/>
         <source>Search Pattern:</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresési minta:</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3818"/>
         <source>&lt;a href=&quot;regexp&quot;&gt;Regular Expression Info&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;regexp&quot;&gt;Reguláris kifejezés információk&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3844"/>
         <source>Replace all Matching Elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Összes egyező elem cseréje</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3894"/>
         <source>Enter the desired search pattern (regular expression) here!</source>
-        <translation type="unfinished"></translation>
+        <translation>Adja meg a kívánt keresési mintát (reguláris kifejezés) itt!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3941"/>
         <source>Enter replacement text here! It may contain backreferences.</source>
-        <translation type="unfinished"></translation>
+        <translation>Adja meg a helyettesítő szöveget itt! Ez tartalmazhat visszahivatkozásokat.</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Felülírás hozzáadása </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation type="unfinished"></translation>
+        <translation>Felülírás eltávolítása </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
         <source>Rename Files </source>
-        <translation type="unfinished"></translation>
+        <translation>Fájlok átnevezése </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation type="unfinished"></translation>
+        <translation>Reguláris kifejezések </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
         <source>File Extensions </source>
-        <translation type="unfinished"></translation>
+        <translation>Fájlkiterjesztések </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4109"/>
@@ -1577,7 +1577,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation type="unfinished"></translation>
+        <translation> Fájlműveletek </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4350"/>
@@ -1602,7 +1602,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
         <source>Apply the &quot;creation&quot; and &quot;last modified&quot; date/time of the original file to the converted file</source>
-        <translation type="unfinished"></translation>
+        <translation>Használja az eredeti fájl &quot;létrehozási&quot; és &quot;utolsó módosítási&quot; dátumát/idejét a konvertált fájloknál</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
@@ -2014,7 +2014,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1490"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Kézikönyv</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1491"/>
@@ -2436,12 +2436,12 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2431"/>
         <source>Filter Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájlok szűrése</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2431"/>
         <source>Select filename filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon fájlnév szűrőt</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2654"/>
