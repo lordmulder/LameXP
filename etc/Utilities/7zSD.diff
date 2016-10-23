@@ -1,14 +1,14 @@
  CPP/7zip/Bundles/SFXSetup/Compat.xml       |  1 +
- CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp     | 51 +++++++++++++++++----
+ CPP/7zip/Bundles/SFXSetup/SfxSetup.cpp     | 51 +++++++++++++---
  CPP/7zip/Bundles/SFXSetup/resource.rc      |  4 +-
  CPP/7zip/UI/Explorer/MyMessages.cpp        |  4 +-
  CPP/7zip/UI/Explorer/MyMessages.h          |  2 +-
  CPP/7zip/UI/FileManager/FormatUtils.cpp    |  2 +-
  CPP/7zip/UI/FileManager/ProgressDialog.cpp |  4 +-
  CPP/Common/MyWindows.h                     |  1 +
- CPP/Windows/FileDir.cpp                    | 73 ++++++++++++++++++++++++++----
+ CPP/Windows/FileDir.cpp                    | 97 ++++++++++++++++++++++++++----
  CPP/Windows/FileDir.h                      |  1 +
- 10 files changed, 117 insertions(+), 26 deletions(-)
+ 10 files changed, 137 insertions(+), 30 deletions(-)
 
 diff --git a/CPP/7zip/Bundles/SFXSetup/Compat.xml b/CPP/7zip/Bundles/SFXSetup/Compat.xml
 new file mode 100644
@@ -217,7 +217,7 @@ index 139a4e8..c40767f 100644
  #ifdef UNDER_CE
    #undef VARIANT_TRUE
 diff --git a/CPP/Windows/FileDir.cpp b/CPP/Windows/FileDir.cpp
-index da71b71..36d89fc 100644
+index da71b71..dae9f93 100644
 --- a/CPP/Windows/FileDir.cpp
 +++ b/CPP/Windows/FileDir.cpp
 @@ -14,6 +14,8 @@
@@ -323,7 +323,26 @@ index da71b71..36d89fc 100644
      return false;
    _mustBeDeleted = true;
    return true;
-@@ -670,10 +728,7 @@ bool CTempDir::Create(CFSTR prefix)
+@@ -652,8 +710,16 @@ bool CTempFile::Remove()
+ {
+   if (!_mustBeDeleted)
+     return true;
+-  _mustBeDeleted = !DeleteFileAlways(_path);
+-  return !_mustBeDeleted;
++  for(UInt32 i = 0; i < 256; ++i)
++  {
++    if(DeleteFileAlways(_path))
++    {
++      _mustBeDeleted = false;
++      return true;
++    }
++    ::Sleep(1);
++  }
++  return false;
+ }
+ 
+ bool CTempFile::MoveTo(CFSTR name, bool deleteDestBefore)
+@@ -670,10 +736,7 @@ bool CTempDir::Create(CFSTR prefix)
  {
    if (!Remove())
      return false;
@@ -335,6 +354,25 @@ index da71b71..36d89fc 100644
      return false;
    _mustBeDeleted = true;
    return true;
+@@ -683,8 +746,16 @@ bool CTempDir::Remove()
+ {
+   if (!_mustBeDeleted)
+     return true;
+-  _mustBeDeleted = !RemoveDirWithSubItems(_path);
+-  return !_mustBeDeleted;
++  for(UInt32 i = 0; i < 256; ++i)
++  {
++    if(RemoveDirWithSubItems(_path))
++    {
++      _mustBeDeleted = false;
++      return true;
++    }
++    ::Sleep(1);
++  }
++  return false;
+ }
+ 
+ }}}
 diff --git a/CPP/Windows/FileDir.h b/CPP/Windows/FileDir.h
 index b13d1cc..1d87bbf 100644
 --- a/CPP/Windows/FileDir.h
