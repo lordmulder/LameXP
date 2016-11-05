@@ -324,7 +324,7 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="850"/>
         <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Netcat dla systemu NT - kompletne narzędzie obsługujące TCP/IP</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="857"/>
@@ -1203,7 +1203,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Działania na plikach</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="365"/>
@@ -1609,7 +1609,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
         <source>Apply the &quot;creation&quot; and &quot;last modified&quot; date/time of the original file to the converted file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Skopiuj datę &quot;utworzenia&quot; i &quot;ostatniej modyfikacji&quot; z oryginalnego pliku do pliku wynikowego</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
