@@ -13,7 +13,7 @@
 * Updated Opus encoder/decoder libraries to v1.2-alpha and Opus-Tools to v0.1.9 (2016-11-02)
 * Updated LAME encoder to v3.100 Alpha-2 (2016-01-29), compiled with ICL 15.0 and MSVC 12.0
 * Updated FLAC encoder/decoder to v1.3.1 (2016-10-04), compiled with ICL 17.0 and MSVC 12.0
-* Updated MediaInfo to v0.7.88 (2016-08-31), compiled with ICL 15.0 and MSVC 12.0
+* Updated MediaInfo to v0.7.90 (2016-10-31), compiled with ICL 17.0 and MSVC 12.0
 * Updated mpg123 decoder to v1.23.8 (2016-09-27), compiled with GCC 6.2.0
 * Updated ALAC decoder to refalac v1.61 (2016-10-02)
 * Updated WavPack decoder to v4.80.0 (2016-03-28), compiled with ICL 15.0 and MSVC 12.0
