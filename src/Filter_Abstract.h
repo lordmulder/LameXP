@@ -34,7 +34,15 @@ public:
 	AbstractFilter(void);
 	~AbstractFilter(void);
 
+	//Result
+	enum FilterResult
+	{
+		FILTER_SUCCESS = 0,
+		FILTER_SKIPPED = 1,
+		FILTER_FAILURE = 2
+	};
+
 	//Internal decoder API
-	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag) = 0;
+	virtual FilterResult apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag) = 0;
 };
 

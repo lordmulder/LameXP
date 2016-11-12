@@ -3030,82 +3030,82 @@
         <translation>Неподдерживается!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="358"/>
         <source>Done.</source>
         <translation>Готово.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="358"/>
         <source>Aborted!</source>
         <translation>Прервано!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="358"/>
         <source>Failed!</source>
         <translation>Ошибка!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="372"/>
+        <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>Encoding</source>
         <translation>Кодирование</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="381"/>
         <source>Filtering</source>
         <translation>Фильтрация</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="384"/>
         <source>Decoding</source>
         <translation>Декодирование</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="403"/>
+        <location filename="../../src/Thread_Process.cpp" line="406"/>
         <source>The source audio file could not be found:</source>
         <translation>Исходный аудио файл не найден:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="411"/>
+        <location filename="../../src/Thread_Process.cpp" line="414"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Исходный аудио файл не может быть открыт:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="439"/>
+        <location filename="../../src/Thread_Process.cpp" line="442"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Папка для выходных файлов не существует и не может быть создана:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="448"/>
+        <location filename="../../src/Thread_Process.cpp" line="451"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Папка для выходных файлов недоступна для записи:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="514"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown File Name</source>
         <translation>Неизвестное имя файла</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="516"/>
+        <location filename="../../src/Thread_Process.cpp" line="519"/>
         <source>Unknown Title</source>
         <translation>Неизвестное Название</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="517"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
         <source>Unknown Artist</source>
         <translation>Неизвестный Артист</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="521"/>
         <source>Unknown Album</source>
         <translation>Неизвестный Альбом</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <location filename="../../src/Thread_Process.cpp" line="523"/>
         <source>Unknown Comment</source>
         <translation>Неизвестный Комментарий</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="378"/>
         <source>Analyzing</source>
         <translation>Анализ</translation>
     </message>
@@ -3121,22 +3121,22 @@
         <translation>Пропущен.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="466"/>
+        <location filename="../../src/Thread_Process.cpp" line="469"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Файл уже существует, будет пропущен:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="467"/>
+        <location filename="../../src/Thread_Process.cpp" line="470"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Если Вы не хотите пропускать уже существующие файлы, пожалуйста, измените режим перезаписи!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="474"/>
+        <location filename="../../src/Thread_Process.cpp" line="477"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Файл уже существует, будет удалён:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="488"/>
+        <location filename="../../src/Thread_Process.cpp" line="491"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Ошибка удаления существующего файла, будет сохранение с другим именем!</translation>
     </message>

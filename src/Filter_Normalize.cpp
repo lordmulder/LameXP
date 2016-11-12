@@ -57,7 +57,7 @@ NormalizeFilter::~NormalizeFilter(void)
 {
 }
 
-bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
+AbstractFilter::FilterResult NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -86,7 +86,7 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 
 	if(!startProcess(process, m_binary, args, QFileInfo(outputFile).canonicalPath()))
 	{
-		return false;
+		return AbstractFilter::FILTER_FAILURE;
 	}
 
 	bool bTimeout = false;
@@ -141,8 +141,8 @@ bool NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile
 
 	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
 	{
-		return false;
+		return AbstractFilter::FILTER_FAILURE;
 	}
 	
-	return true;
+	return AbstractFilter::FILTER_SUCCESS;
 }

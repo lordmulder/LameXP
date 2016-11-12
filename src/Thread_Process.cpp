@@ -292,25 +292,28 @@ void ProcessThread::processFile()
 	// Apply all audio filters
 	//-----------------------------------------------------
 
-	if(bSuccess)
+	while(bSuccess && (!m_filters.isEmpty()) && (!m_aborted))
 	{
-		while(!m_filters.isEmpty() && !m_aborted)
+		QString tempFile = generateTempFileName();
+		AbstractFilter *poFilter = m_filters.takeFirst();
+		m_currentStep = FilteringStep;
+
+		connect(poFilter, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
+		connect(poFilter, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
+
+		const AbstractFilter::FilterResult filterResult = poFilter->apply(sourceFile, tempFile, &m_audioFile.techInfo(), &m_aborted);
+		switch (filterResult)
 		{
-			QString tempFile = generateTempFileName();
-			AbstractFilter *poFilter = m_filters.takeFirst();
-			m_currentStep = FilteringStep;
-
-			connect(poFilter, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
-			connect(poFilter, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
-
-			if(poFilter->apply(sourceFile, tempFile, &m_audioFile.techInfo(), &m_aborted))
-			{
-				sourceFile = tempFile;
-			}
-
-			handleMessage("\n-------------------------------\n");
-			delete poFilter;
+		case AbstractFilter::FILTER_SUCCESS:
+			sourceFile = tempFile;
+			break;
+		case AbstractFilter::FILTER_FAILURE:
+			bSuccess = false;
+			break;
 		}
+
+		handleMessage("\n-------------------------------\n");
+		delete poFilter;
 	}
 
 	//-----------------------------------------------------

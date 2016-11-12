@@ -49,7 +49,7 @@ DownmixFilter::~DownmixFilter(void)
 {
 }
 
-bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
+AbstractFilter::FilterResult DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
 {
 	unsigned int channels = formatInfo->audioChannels(); //detectChannels(sourceFile, abortFlag);
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
@@ -58,7 +58,7 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 	{
 		messageLogged("Skipping downmix!");
 		qDebug("Dowmmix not required/possible for Mono or Stereo input, skipping!");
-		return true;
+		return AbstractFilter::FILTER_SKIPPED;
 	}
 
 	QProcess process;
@@ -100,7 +100,7 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 
 	if(!startProcess(process, m_binary, args, QFileInfo(outputFile).canonicalPath()))
 	{
-		return false;
+		return AbstractFilter::FILTER_FAILURE;
 	}
 
 	bool bTimeout = false;
@@ -155,9 +155,9 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 
 	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
 	{
-		return false;
+		return AbstractFilter::FILTER_FAILURE;
 	}
 	
 	formatInfo->setAudioChannels(2);
-	return true;
+	return AbstractFilter::FILTER_SUCCESS;
 }
