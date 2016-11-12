@@ -7,6 +7,7 @@
 * Upgraded build environment to Microsoft Visual Studio 2015 with Update-2
 * Fixed the location of temporary intermediate files for SoX-based audio effects
 * Fixed embedding of meta tags with OggEnc2 when reading directly from OGG/FLAC input file
+* Fixed encoding of *non*-Stereo sources with NeroAAC, when "HE-AAC *v2* (SBR+PS)" is selected
 * Enabled the "built-in" resampler for QAAC encoder
 * The "Algorithm Quality" slider now also affects the QAAC encoder
 * Added "AVX" (Advanced Vector Extensions) to CPU feature detection code

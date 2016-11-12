@@ -180,7 +180,15 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		args << L1S("-he"); //Forces use of HE AAC profile
 		break;
 	case 3:
-		args << L1S("-hev2"); //Forces use of HEv2 AAC profile
+		if ((channels == 0) || (channels == 2))
+		{
+			args << L1S("-hev2"); //Forces use of HEv2 AAC profile
+		}
+		else
+		{
+			emit messageLogged("WARNING: Cannot use HE-AAC v2 (SBR+PS) with Non-Stereo input --> reverting to HE-AAC (SBR)");
+			args << L1S("-he"); //Forces use of HE AAC profile
+		}
 		break;
 	}
 
