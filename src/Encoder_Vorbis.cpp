@@ -141,7 +141,7 @@ VorbisEncoder::~VorbisEncoder(void)
 {
 }
 
-bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
+bool VorbisEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;

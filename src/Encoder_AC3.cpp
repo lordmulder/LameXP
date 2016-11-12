@@ -144,7 +144,7 @@ AC3Encoder::~AC3Encoder(void)
 {
 }
 
-bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
+bool AC3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;

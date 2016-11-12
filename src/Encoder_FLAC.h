@@ -34,7 +34,7 @@ public:
 	FLACEncoder(void);
 	~FLACEncoder(void);
 
-	virtual bool encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag);
+	virtual bool encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag);
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	virtual const unsigned int *supportedChannelCount(void);
 	virtual const unsigned int *supportedBitdepths(void);

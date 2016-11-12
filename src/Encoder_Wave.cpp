@@ -132,7 +132,7 @@ WaveEncoder::~WaveEncoder(void)
 {
 }
 
-bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
+bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
 {
 	emit messageLogged(QString("Copy file \"%1\" to \"%2\"\n").arg(sourceFile, outputFile));
 

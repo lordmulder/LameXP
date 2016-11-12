@@ -157,7 +157,7 @@ QAACEncoder::~QAACEncoder(void)
 {
 }
 
-bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
+bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
 {
 	const QString qaac_bin = m_binary_qaac64.isEmpty() ? m_binary_qaac32 : m_binary_qaac64;
 

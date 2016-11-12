@@ -146,7 +146,7 @@ MP3Encoder::~MP3Encoder(void)
 {
 }
 
-bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag)
+bool MP3Encoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
 {
 	QProcess process;
 	QStringList args;

@@ -317,7 +317,7 @@ void ProcessThread::processFile()
 	if(bSuccess && !m_aborted)
 	{
 		m_currentStep = EncodingStep;
-		bSuccess = m_encoder->encode(sourceFile, m_audioFile.metaInfo(), m_audioFile.techInfo().duration(), m_outFileName, &m_aborted);
+		bSuccess = m_encoder->encode(sourceFile, m_audioFile.metaInfo(), m_audioFile.techInfo().duration(), m_audioFile.techInfo().audioChannels(), m_outFileName, &m_aborted);
 	}
 
 	//Clean-up

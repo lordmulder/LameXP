@@ -66,7 +66,7 @@ public:
 	virtual ~AbstractEncoder(void);
 
 	//Internal encoder API
-	virtual bool encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const QString &outputFile, volatile bool *abortFlag) = 0;
+	virtual bool encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag) = 0;
 	virtual bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion) = 0;
 	virtual const unsigned int *supportedSamplerates(void);
 	virtual const unsigned int *supportedChannelCount(void);
