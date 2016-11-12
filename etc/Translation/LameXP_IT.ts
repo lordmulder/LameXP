@@ -3082,83 +3082,83 @@
         <translation>Non Supportato!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="352"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Done.</source>
         <translation>Fatto.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="352"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Aborted!</source>
         <translation>Processo Annullato!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="352"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Failed!</source>
         <translation>Fallito!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="369"/>
+        <location filename="../../src/Thread_Process.cpp" line="372"/>
         <source>Encoding</source>
         <translation>Codifica in corso</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="378"/>
         <source>Filtering</source>
         <translation>Filtraggio in corso</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="381"/>
         <source>Decoding</source>
         <translation>Decodifica in corso</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="400"/>
+        <location filename="../../src/Thread_Process.cpp" line="403"/>
         <source>The source audio file could not be found:</source>
         <translation>Il file audio sorgente non può essere trovato:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="408"/>
+        <location filename="../../src/Thread_Process.cpp" line="411"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Il file audio sorgente non può essere aperto per la lettura:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="436"/>
+        <location filename="../../src/Thread_Process.cpp" line="439"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>La cartella di destinazione assegnata non esiste e NON può essere creata:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="445"/>
+        <location filename="../../src/Thread_Process.cpp" line="448"/>
         <source>The target output directory is NOT writable:</source>
         <translatorcomment>La directory di destinazione assegnata è di SOLA LETTURA:</translatorcomment>
         <translation>La directory di destinazione assegnata NON è scrivibile:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="511"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown File Name</source>
         <translation>Nome File Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="513"/>
+        <location filename="../../src/Thread_Process.cpp" line="516"/>
         <source>Unknown Title</source>
         <translation>Titolo Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="514"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Artist</source>
         <translation>Artista Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="515"/>
+        <location filename="../../src/Thread_Process.cpp" line="518"/>
         <source>Unknown Album</source>
         <translation>Album Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="517"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
         <source>Unknown Comment</source>
         <translation>Commento Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="372"/>
+        <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>Analyzing</source>
         <translation>Analisi in corso</translation>
     </message>
@@ -3174,22 +3174,22 @@
         <translation>Saltato.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="463"/>
+        <location filename="../../src/Thread_Process.cpp" line="466"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Il file di destinazione esiste già, questo file verrà saltato:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="464"/>
+        <location filename="../../src/Thread_Process.cpp" line="467"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Se non vuoi saltare i file esistenti, cambia la modalità di sovrascrittura!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="474"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Il file di destinazione esiste già, il file esistente verrà eliminato:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="485"/>
+        <location filename="../../src/Thread_Process.cpp" line="488"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Impossibile eliminare il file di destinazione esistente, il file verrà salvato con un altro nome!</translation>
     </message>

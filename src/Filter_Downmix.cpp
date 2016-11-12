@@ -49,15 +49,15 @@ DownmixFilter::~DownmixFilter(void)
 {
 }
 
-bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *formatInfo, volatile bool *abortFlag)
+bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
 {
 	unsigned int channels = formatInfo->audioChannels(); //detectChannels(sourceFile, abortFlag);
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
 
-	if(channels == 2)
+	if((channels != 0) && (channels <= 2))
 	{
 		messageLogged("Skipping downmix!");
-		qDebug("Dowmmix not required for Stereo input, skipping!");
+		qDebug("Dowmmix not required/possible for Mono or Stereo input, skipping!");
 		return true;
 	}
 
@@ -71,8 +71,6 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 
 	switch(channels)
 	{
-	case 2: //Unknown
-		qWarning("Downmixer: Nothing to do!");
 	case 3: //3.0 (L/R/C)
 		args << "remix" << "1v0.66,3v0.34" << "2v0.66,3v0.34";
 		break;
@@ -96,7 +94,7 @@ bool DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, 
 		break;
 	default: //Unknown
 		qWarning("Downmixer: Unknown channel configuration!");
-		args << "channels" << "2";
+		args << "channels" << QString::number(2);
 		break;
 	}
 

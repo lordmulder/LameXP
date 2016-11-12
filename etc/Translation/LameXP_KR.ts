@@ -3006,82 +3006,82 @@
         <translation type="unfinished">지원하지 않습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="352"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Done.</source>
         <translation type="unfinished">완료.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="352"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Aborted!</source>
         <translation type="unfinished">취소됨!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="352"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Failed!</source>
         <translation type="unfinished">실패됨!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="369"/>
+        <location filename="../../src/Thread_Process.cpp" line="372"/>
         <source>Encoding</source>
         <translation type="unfinished">인코딩</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="378"/>
         <source>Filtering</source>
         <translation type="unfinished">필터링</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="381"/>
         <source>Decoding</source>
         <translation type="unfinished">디코딩</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="400"/>
+        <location filename="../../src/Thread_Process.cpp" line="403"/>
         <source>The source audio file could not be found:</source>
         <translation type="unfinished">원본 오디오 파일을 찾을 수 없음:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="408"/>
+        <location filename="../../src/Thread_Process.cpp" line="411"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation type="unfinished">원본 오디오 파일을 열 수 없음:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="436"/>
+        <location filename="../../src/Thread_Process.cpp" line="439"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation type="unfinished">대상 출력 디렉터리가 존재하지 않으며, 만들 수 없습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="445"/>
+        <location filename="../../src/Thread_Process.cpp" line="448"/>
         <source>The target output directory is NOT writable:</source>
         <translation type="unfinished">대상 출력 디렉터리에 쓰기 불가:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="511"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Unknown File Name</source>
         <translation type="unfinished">알수 없는 파일명</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="513"/>
+        <location filename="../../src/Thread_Process.cpp" line="516"/>
         <source>Unknown Title</source>
         <translation type="unfinished">알수 없는 제목</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="514"/>
+        <location filename="../../src/Thread_Process.cpp" line="517"/>
         <source>Unknown Artist</source>
         <translation type="unfinished">알수 없는 가수</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="515"/>
+        <location filename="../../src/Thread_Process.cpp" line="518"/>
         <source>Unknown Album</source>
         <translation type="unfinished">알수 없는 앨범</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="517"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
         <source>Unknown Comment</source>
         <translation type="unfinished">알수 없는 설명</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="372"/>
+        <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>Analyzing</source>
         <translation type="unfinished">검토 중</translation>
     </message>
@@ -3097,22 +3097,22 @@
         <translation type="unfinished">건너뜀.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="463"/>
+        <location filename="../../src/Thread_Process.cpp" line="466"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation type="unfinished">대상 출력 파일이 이미 존재합니다. 건너뛰기할 파일:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="464"/>
+        <location filename="../../src/Thread_Process.cpp" line="467"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation type="unfinished">기존 파일을 건너뛰기하지 않으려면, 덮어쓰기 방식을 변경하시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="474"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation type="unfinished">대상 출력 파일이 이미 존재합니다. 건너뛰기할 파일:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="485"/>
+        <location filename="../../src/Thread_Process.cpp" line="488"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation type="unfinished">기존 대상 파일 삭제 실패. 다른 파일명으로 저장됩니다!</translation>
     </message>

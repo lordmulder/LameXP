@@ -35,6 +35,6 @@ public:
 	~AbstractFilter(void);
 
 	//Internal decoder API
-	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *formatInfo, volatile bool *abortFlag) = 0;
+	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag) = 0;
 };
 

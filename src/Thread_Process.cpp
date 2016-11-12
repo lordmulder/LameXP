@@ -271,15 +271,18 @@ void ProcessThread::processFile()
 				handleMessage("\n-------------------------------\n");
 
 				//Do we need to take care if Stereo downmix?
-				if(m_encoder->supportedChannelCount())
+				const unsigned int *const supportedChannelCount = m_encoder->supportedChannelCount();
+				if(supportedChannelCount && supportedChannelCount[0])
 				{
-					insertDownmixFilter();
+					insertDownmixFilter(supportedChannelCount);
 				}
 
 				//Do we need to take care of downsampling the input?
-				if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths())
+				const unsigned int *const supportedSamplerates = m_encoder->supportedSamplerates();
+				const unsigned int *const supportedBitdepths = m_encoder->supportedBitdepths();
+				if((supportedSamplerates && supportedSamplerates[0]) || (supportedBitdepths && supportedBitdepths[0]))
 				{
-					insertDownsampleFilter();
+					insertDownsampleFilter(supportedSamplerates, supportedBitdepths);
 				}
 			}
 		}
@@ -548,65 +551,44 @@ QString ProcessThread::generateTempFileName(void)
 	return tempFileName;
 }
 
-void ProcessThread::insertDownsampleFilter(void)
+bool ProcessThread::insertDownsampleFilter(const unsigned int *const supportedSamplerates, const unsigned int *const supportedBitdepths)
 {
-	int targetSampleRate = 0;
-	int targetBitDepth = 0;
+	int targetSampleRate = 0, targetBitDepth = 0;
 	
 	/* Adjust sample rate */
-	if(m_encoder->supportedSamplerates() && m_audioFile.techInfo().audioSamplerate())
+	if(supportedSamplerates && m_audioFile.techInfo().audioSamplerate())
 	{
-		bool applyDownsampling = true;
-	
-		//Check if downsampling filter is already in the chain
-		for(int i = 0; i < m_filters.count(); i++)
+		const unsigned int inputRate = m_audioFile.techInfo().audioSamplerate();
+		unsigned int currentDiff = UINT_MAX, minimumDiff = UINT_MAX, bestRate = UINT_MAX;
+
+		//Find the most suitable supported sampling rate
+		for(int i = 0; supportedSamplerates[i]; i++)
 		{
-			if(dynamic_cast<ResampleFilter*>(m_filters.at(i)))
+			currentDiff = DIFF(inputRate, supportedSamplerates[i]);
+			if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestRate < supportedSamplerates[i])))
 			{
-				qWarning("Encoder requires downsampling, but user has already set resamling filter!");
-				handleMessage("WARNING: Encoder may need resampling, but already using resample filter. Encoding *may* fail!\n");
-				applyDownsampling = false;
+				bestRate = supportedSamplerates[i];
+				minimumDiff = currentDiff;
+				if(!(minimumDiff > 0)) break;
 			}
 		}
 		
-		//Now determine the target sample rate, if required
-		if(applyDownsampling)
+		if(bestRate != inputRate)
 		{
-			const unsigned int *supportedRates = m_encoder->supportedSamplerates();
-			const unsigned int inputRate = m_audioFile.techInfo().audioSamplerate();
-			unsigned int currentDiff = UINT_MAX, minimumDiff = UINT_MAX, bestRate = UINT_MAX;
-
-			//Find the most suitable supported sampling rate
-			for(int i = 0; supportedRates[i]; i++)
-			{
-				currentDiff = DIFF(inputRate, supportedRates[i]);
-				if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestRate < supportedRates[i])))
-				{
-					bestRate = supportedRates[i];
-					minimumDiff = currentDiff;
-					if(!(minimumDiff > 0)) break;
-				}
-			}
-		
-			if(bestRate != inputRate)
-			{
-				targetSampleRate = (bestRate != UINT_MAX) ? bestRate : supportedRates[0];
-			}
+			targetSampleRate = (bestRate != UINT_MAX) ? bestRate : supportedSamplerates[0];
 		}
 	}
 
 	/* Adjust bit depth (word size) */
-	if(m_encoder->supportedBitdepths() && m_audioFile.techInfo().audioBitdepth())
+	if(supportedBitdepths && m_audioFile.techInfo().audioBitdepth())
 	{
 		const unsigned int inputBPS = m_audioFile.techInfo().audioBitdepth();
-		const unsigned int *supportedBPS = m_encoder->supportedBitdepths();
-
 		bool bAdjustBitdepth = true;
 
 		//Is the input bit depth supported exactly? (including IEEE Float)
-		for(int i = 0; supportedBPS[i]; i++)
+		for(int i = 0; supportedBitdepths[i]; i++)
 		{
-			if(supportedBPS[i] == inputBPS) bAdjustBitdepth = false;
+			if(supportedBitdepths[i] == inputBPS) bAdjustBitdepth = false;
 		}
 		
 		if(bAdjustBitdepth)
@@ -615,14 +597,14 @@ void ProcessThread::insertDownsampleFilter(void)
 			const unsigned int originalBPS = (inputBPS == AudioFileModel::BITDEPTH_IEEE_FLOAT32) ? 32 : inputBPS;
 
 			//Find the most suitable supported bit depth
-			for(int i = 0; supportedBPS[i]; i++)
+			for(int i = 0; supportedBitdepths[i]; i++)
 			{
-				if(supportedBPS[i] == AudioFileModel::BITDEPTH_IEEE_FLOAT32) continue;
+				if(supportedBitdepths[i] == AudioFileModel::BITDEPTH_IEEE_FLOAT32) continue;
 				
-				currentDiff = DIFF(originalBPS, supportedBPS[i]);
-				if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestBPS < supportedBPS[i])))
+				currentDiff = DIFF(originalBPS, supportedBitdepths[i]);
+				if((currentDiff < minimumDiff) || ((currentDiff == minimumDiff) && (bestBPS < supportedBitdepths[i])))
 				{
-					bestBPS = supportedBPS[i];
+					bestBPS = supportedBitdepths[i];
 					minimumDiff = currentDiff;
 					if(!(minimumDiff > 0)) break;
 				}
@@ -630,7 +612,21 @@ void ProcessThread::insertDownsampleFilter(void)
 
 			if(bestBPS != originalBPS)
 			{
-				targetBitDepth = (bestBPS != UINT_MAX) ? bestBPS : supportedBPS[0];
+				targetBitDepth = (bestBPS != UINT_MAX) ? bestBPS : supportedBitdepths[0];
+			}
+		}
+	}
+
+	//Check if downsampling filter is already in the chain
+	if (targetSampleRate || targetBitDepth)
+	{
+		for (int i = 0; i < m_filters.count(); i++)
+		{
+			if (dynamic_cast<ResampleFilter*>(m_filters.at(i)))
+			{
+				qWarning("Encoder requires downsampling, but user has already set resamling filter!");
+				handleMessage("WARNING: Encoder may need resampling, but already using resample filter. Encoding *may* fail!\n");
+				targetSampleRate = targetBitDepth = 0;
 			}
 		}
 	}
@@ -639,45 +635,54 @@ void ProcessThread::insertDownsampleFilter(void)
 	if(targetSampleRate || targetBitDepth)
 	{
 		m_filters.append(new ResampleFilter(targetSampleRate, targetBitDepth));
+		return true;
 	}
+
+	return false; /*did not insert the resample filter */
 }
 
-void ProcessThread::insertDownmixFilter(void)
+bool ProcessThread::insertDownmixFilter(const unsigned int *const supportedChannels)
 {
-	bool applyDownmixing = true;
-		
-	//Check if downmixing filter is already in the chain
-	for(int i = 0; i < m_filters.count(); i++)
-	{
-		if(dynamic_cast<DownmixFilter*>(m_filters.at(i)))
-		{
-			qWarning("Encoder requires Stereo downmix, but user has already forced downmix!");
-			handleMessage("WARNING: Encoder may need downmixning, but already using downmixning filter. Encoding *may* fail!\n");
-			applyDownmixing = false;
-		}
-	}
+	//Determine number of channels in source
+	const unsigned int channels = m_audioFile.techInfo().audioChannels();
+	bool requiresDownmix = (channels > 0);
 
-	//Now add the downmixing filter, if needed
-	if(applyDownmixing)
+	//Check whether encoder requires downmixing
+	if(requiresDownmix)
 	{
-		bool requiresDownmix = true;
-		const unsigned int *supportedChannels = m_encoder->supportedChannelCount();
-		unsigned int channels = m_audioFile.techInfo().audioChannels();
-
-		for(int i = 0; supportedChannels[i]; i++)
+		for (int i = 0; supportedChannels[i]; i++)
 		{
-			if(supportedChannels[i] == channels)
+			if (supportedChannels[i] == channels)
 			{
 				requiresDownmix = false;
 				break;
 			}
 		}
+	}
 
-		if(requiresDownmix)
+	//Check if downmixing filter is already in the chain
+	if (requiresDownmix)
+	{
+		for (int i = 0; i < m_filters.count(); i++)
 		{
-			m_filters.append(new DownmixFilter());
+			if (dynamic_cast<DownmixFilter*>(m_filters.at(i)))
+			{
+				qWarning("Encoder requires Stereo downmix, but user has already forced downmix!");
+				handleMessage("WARNING: Encoder may need downmixning, but already using downmixning filter. Encoding *may* fail!\n");
+				requiresDownmix = false;
+				break;
+			}
 		}
 	}
+
+	//Now add the downmixing filter, if needed
+	if(requiresDownmix)
+	{
+		m_filters.append(new DownmixFilter());
+		return true;
+	}
+
+	return false; /*did not insert the downmix filter*/
 }
 
 bool ProcessThread::updateFileTime(const QString &originalFile, const QString &modifiedFile)

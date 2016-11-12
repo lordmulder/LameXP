@@ -30,7 +30,7 @@ public:
 	NormalizeFilter(const int &peakVolume = -50, const bool &dnyAudNorm = false, const bool &channelsCoupled = true, const int &filterSize = 31);
 	~NormalizeFilter(void);
 
-	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *formatInfo, volatile bool *abortFlag);
+	virtual bool apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag);
 
 private:
 	const QString m_binary;

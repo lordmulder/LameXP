@@ -92,8 +92,8 @@ private:
 	QString applyRenamePattern(const QString &baseName, const AudioFileModel_MetaInfo &metaInfo);
 	QString applyRegularExpression(const QString &fileName);
 	QString generateTempFileName(void);
-	void insertDownmixFilter(void);
-	void insertDownsampleFilter(void);
+	bool insertDownmixFilter(const unsigned int *const supportedChannels);
+	bool insertDownsampleFilter(const unsigned int *const supportedSamplerates, const unsigned int *const supportedBitdepths);
 	bool updateFileTime(const QString &originalFile, const QString &modifiedFile);
 
 	volatile bool m_aborted;
