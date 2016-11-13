@@ -35,6 +35,8 @@
 #include <QProcess>
 #include <QRegExp>
 
+#define IS_VALID(X) (((X) != 0U) && ((X) != UINT_MAX))
+
 DownmixFilter::DownmixFilter(void)
 :
 	m_binary(lamexp_tools_lookup("sox.exe"))
@@ -51,10 +53,10 @@ DownmixFilter::~DownmixFilter(void)
 
 AbstractFilter::FilterResult DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
 {
-	unsigned int channels = formatInfo->audioChannels(); //detectChannels(sourceFile, abortFlag);
+	unsigned int channels = formatInfo->audioChannels();
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
 
-	if((channels != 0) && (channels <= 2))
+	if(IS_VALID(channels) && (channels <= 2))
 	{
 		messageLogged("Skipping downmix!");
 		qDebug("Dowmmix not required/possible for Mono or Stereo input, skipping!");

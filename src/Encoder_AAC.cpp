@@ -33,6 +33,8 @@ static int index2bitrate(const int index)
 	return (index < 32) ? ((index + 1) * 8) : ((index - 15) * 16);
 }
 
+#define IS_VALID(X) (((X) != 0U) && ((X) != UINT_MAX))
+
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -171,8 +173,18 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		args << L1S("-2pass");
 	}
 	
-	switch(m_configProfile)
+	int selectedProfile = m_configProfile;
+	if ((selectedProfile == 3) && IS_VALID(channels) && (channels != 2))
 	{
+		emit messageLogged("WARNING: Cannot use HE-AAC v2 (SBR+PS) with Mono input --> reverting to HE-AAC (SBR)");
+		selectedProfile = 2;
+	}
+
+	switch(selectedProfile)
+	{
+	case 0:
+		//Do *not* overwrite profile -> let the encoder decide!
+		break;
 	case 1:
 		args << L1S("-lc"); //Forces use of LC AAC profile
 		break;
@@ -180,16 +192,10 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		args << L1S("-he"); //Forces use of HE AAC profile
 		break;
 	case 3:
-		if ((channels == 0) || (channels == 2))
-		{
-			args << L1S("-hev2"); //Forces use of HEv2 AAC profile
-		}
-		else
-		{
-			emit messageLogged("WARNING: Cannot use HE-AAC v2 (SBR+PS) with Non-Stereo input --> reverting to HE-AAC (SBR)");
-			args << L1S("-he"); //Forces use of HE AAC profile
-		}
+		args << L1S("-hev2"); //Forces use of HEv2 AAC profile
 		break;
+	default:
+		MUTILS_THROW("Bad AAC Profile specified!");
 	}
 
 	if(!m_configCustomParams.isEmpty()) args << m_configCustomParams.split(" ", QString::SkipEmptyParts);
@@ -384,7 +390,7 @@ bool AACEncoder::isFormatSupported(const QString &containerType, const QString &
 
 void AACEncoder::setProfile(int profile)
 {
-	m_configProfile = profile;
+	m_configProfile = qBound(0, profile, 3);
 }
 
 void AACEncoder::setEnable2Pass(bool enabled)
