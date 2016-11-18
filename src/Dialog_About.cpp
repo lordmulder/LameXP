@@ -65,7 +65,7 @@
 
 //Constants
 const char *AboutDialog::neroAacUrl = "http://www.videohelp.com/software/Nero-AAC-Codec"; //"http://www.nero.com/eng/company/about-nero/nero-aac-codec.php"
-const char *AboutDialog::disqueUrl =  "http://muldersoft.com/?player_url=38X-MXOB014";
+const char *AboutDialog::disqueUrl =  "http://muldersoft.com/?player_url=n4bply6Ibqw"; //38X-MXOB014
 
 //Contributors
 static const struct 
@@ -197,6 +197,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		m_disque->setStyleSheet("background:transparent;");
 		m_disque->setAttribute(Qt::WA_TranslucentBackground);
 		m_disque->setPixmap(disque);
+		m_disque->setCursor(QCursor(Qt::PointingHandCursor));
 		m_disque->installEventFilter(this);
 
 		connect(QApplication::desktop(), SIGNAL(workAreaResized(int)), this, SLOT(geometryUpdated()));
@@ -269,7 +270,7 @@ int AboutDialog::exec()
 		}
 		else
 		{
-			MUtils::Sound::play_sound("uuaarrgh", true);
+			MUtils::Sound::play_sound("ghost", true);
 		}
 	}
 	
@@ -517,10 +518,11 @@ bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 {
 	if((obj == m_disque) && (event->type() == QEvent::MouseButtonPress))
 	{
-		QPixmap cartoon(":/images/Cartoon.png");
-		for(int i = 0; i < 4; i++)
+		MUtils::Sound::play_sound("chicken", true);
+		if (!m_cartoon[0])
 		{
-			if(!m_cartoon[i])
+			QPixmap cartoon(":/images/Cartoon.png");
+			for(int i = 0; i < 4; i++)
 			{
 				m_cartoon[i] = new QPixmap(cartoon.transformed(QMatrix().rotate(static_cast<double>(i*90) + 45.0), Qt::SmoothTransformation));
 				m_rotateNext = true;
@@ -861,10 +863,17 @@ void AboutDialog::initSoftwareTab(void)
 	);
 	moreAboutText += makeToolText
 	(
-		tr("Silk Icons - Over 700  icons in PNG format"),
+		tr("Silk Icons - Over 700 icons in PNG format"),
 		QString(), "v1.3",
-		tr("By Mark James, released under the Creative Commons 'by' License."),
+		tr("By Mark James, released under the Creative Commons 'BY' License."),
 		"http://www.famfamfam.com/lab/icons/silk/"
+	);
+	moreAboutText += makeToolText
+	(
+		tr("Angry Chicken and Ghost Scream sound"),
+		QString(), "v1.0",
+		tr("By Alexander, released under the Creative Commons 'BY' License."),
+		"http://www.orangefreesounds.com/"
 	);
 	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><br><i>%1</i><br>").arg
 	(
