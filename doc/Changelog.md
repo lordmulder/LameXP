@@ -2,7 +2,7 @@
 
 # LameXP v4.xx History #
 
-## LameXP v4.14 [2016-??-??] ## {-}
+## LameXP v4.14 [2016-11-19] ## {-}
 
 * Upgraded build environment to Microsoft Visual Studio 2015 with Update-2
 * Fixed the location of temporary intermediate files for SoX-based audio effects
