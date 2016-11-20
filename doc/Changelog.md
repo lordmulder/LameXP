@@ -4,7 +4,7 @@
 
 ## LameXP v4.14 [2016-11-19] ## {-}
 
-* Upgraded build environment to Microsoft Visual Studio 2015 with Update-2
+* Upgraded build environment to Microsoft Visual Studio 2015 with Update-3
 * Fixed the location of temporary intermediate files for SoX-based audio effects
 * Fixed embedding of meta tags with OggEnc2 when reading directly from OGG/FLAC input file
 * Fixed encoding of *non*-Stereo sources with NeroAAC, when "HE-AAC *v2* (SBR+PS)" is selected
@@ -23,6 +23,7 @@
 * Updated QAAC add-in to the to QAAC v2.61 (2016-10-02)
 * Updated FhgAacEnc add-in to "Case" edition (2015-10-24)
 * Improved auto-update function (faster Internet connectivity check)
+* Updated language files (big thank-you to all contributors !!!)
 
 ## LameXP v4.13 [2015-12-12] ## {-}
 
