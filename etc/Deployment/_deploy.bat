@@ -184,6 +184,14 @@ if %ERRORLEVEL% NEQ 0 (
 	pause && exit
 )
 
+set "VER_FILEVER=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%.%VER_LAMEXP_MINOR_LO%.%VER_LAMEXP_PATCH%"
+set "VER_PRODUCT=LameXP - Audio Encoder Front-End"
+"%~dp0\..\Utilities\VerPatch.exe" "%OUT_FILE%.exe" "%VER_FILEVER%" /pv "%VER_FILEVER%" /fn /s desc "%VER_PRODUCT%" /s product "%VER_PRODUCT%" /s title "LameXP Installer SFX" /s copyright "Copyright (C) LoRd_MuldeR" /s company "Free Software Foundation"
+if %ERRORLEVEL% NEQ 0 (
+	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	pause && exit
+)
+
 :: ---------------------------------------------------------------------------
 :: CLEAN UP
 :: ---------------------------------------------------------------------------
