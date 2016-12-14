@@ -639,6 +639,7 @@ Section "-Update Registry"
 	WriteRegStr HKLM "${MyRegPath}" "URLInfoAbout" "${MyWebSite}"
 	WriteRegStr HKLM "${MyRegPath}" "URLUpdateInfo" "${MyWebSite}"
 	
+	DeleteRegKey HKCU "${AppPaths}\LameXP.exe"
 	WriteRegStr HKLM "${AppPaths}\LameXP.exe" "" "$INSTDIR\$R0"
 	WriteRegStr HKLM "${AppPaths}\LameXP.exe" "Path" "$INSTDIR"
 SectionEnd
