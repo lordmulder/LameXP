@@ -445,7 +445,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 	
 	//Make sure that the output dir is writable
-	QFile writeTest(QString("%1/.%2").arg(targetDir.canonicalPath(), MUtils::rand_str()));
+	QFile writeTest(QString("%1/.%2").arg(targetDir.canonicalPath(), MUtils::next_rand_str()));
 	if(!writeTest.open(QIODevice::ReadWrite))
 	{
 		handleMessage(QString("%1\n%2").arg(tr("The target output directory is NOT writable:"), QDir::toNativeSeparators(targetDir.absolutePath())));
@@ -547,7 +547,7 @@ QString ProcessThread::generateTempFileName(void)
 	const QString tempFileName = MUtils::make_temp_file(m_tempDirectory, "wav", true);
 	if(tempFileName.isEmpty())
 	{
-		return QString("%1/~whoops%2.wav").arg(m_tempDirectory, QString::number(MUtils::next_rand32()));
+		return QString("%1/~whoops%2.wav").arg(m_tempDirectory, QString::number(MUtils::next_rand_u32()));
 	}
 
 	m_tempFiles << tempFileName;

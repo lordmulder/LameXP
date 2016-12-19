@@ -184,8 +184,6 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	//Show about dialog for the first time?
 	if(!firstStart)
 	{
-		MUtils::seed_rand();
-
 		ui->acceptButton->hide();
 		ui->declineButton->hide();
 		ui->aboutQtButton->show();
@@ -204,10 +202,10 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		geometryUpdated();
 
 		m_discOpacity = 0.01;
-		m_disquePos.setX(static_cast<int>(MUtils::next_rand32() % static_cast<unsigned int>(m_disqueBound.right()  - disque.width()  - m_disqueBound.left())) + m_disqueBound.left());
-		m_disquePos.setY(static_cast<int>(MUtils::next_rand32() % static_cast<unsigned int>(m_disqueBound.bottom() - disque.height() - m_disqueBound.top()))  + m_disqueBound.top());
-		m_disqueFlags[0] = (MUtils::next_rand32() > (UINT_MAX/2));
-		m_disqueFlags[1] = (MUtils::next_rand32() > (UINT_MAX/2));
+		m_disquePos.setX(static_cast<int>(MUtils::next_rand_u32() % static_cast<unsigned int>(m_disqueBound.right()  - disque.width()  - m_disqueBound.left())) + m_disqueBound.left());
+		m_disquePos.setY(static_cast<int>(MUtils::next_rand_u32() % static_cast<unsigned int>(m_disqueBound.bottom() - disque.height() - m_disqueBound.top()))  + m_disqueBound.top());
+		m_disqueFlags[0] = (MUtils::next_rand_u32() > (UINT_MAX/2));
+		m_disqueFlags[1] = (MUtils::next_rand_u32() > (UINT_MAX/2));
 		m_disque->move(m_disquePos);
 		m_disque->setWindowOpacity(m_discOpacity);
 		m_disque->show();

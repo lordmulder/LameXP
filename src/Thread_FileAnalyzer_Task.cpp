@@ -496,7 +496,7 @@ void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, const quint32 coverTy
 	static const QString ext = QString::fromLatin1(MIME_TYPES[qBound(0U, coverType, MIME_TYPES_MAX)].ext[0]);
 	if(!(QImage::fromData(coverData, ext.toUpper().toLatin1().constData()).isNull()))
 	{
-		QFile coverFile(QString("%1/%2.%3").arg(MUtils::temp_folder(), MUtils::rand_str(), ext));
+		QFile coverFile(QString("%1/%2.%3").arg(MUtils::temp_folder(), MUtils::next_rand_str(), ext));
 		if(coverFile.open(QIODevice::WriteOnly))
 		{
 			coverFile.write(coverData);

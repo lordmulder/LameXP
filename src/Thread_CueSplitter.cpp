@@ -127,7 +127,7 @@ void CueSplitter::run()
 				emit fileSelected(m_activeFile);
 				emit progressValChanged(i+1);
 				
-				QString tempFile = QString("%1/~%2.wav").arg(m_outputDir, MUtils::rand_str());
+				QString tempFile = QString("%1/~%2.wav").arg(m_outputDir, MUtils::next_rand_str());
 				connect(decoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 				
 				if(decoder->decode(inputFileList.at(i), tempFile, &m_abortFlag))

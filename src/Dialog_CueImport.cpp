@@ -297,7 +297,7 @@ void CueImportDialog::importButtonClicked(void)
 		return;
 	}
 
-	QFile writeTest(QString("%1/~%2.txt").arg(m_outputDir, MUtils::rand_str()));
+	QFile writeTest(QString("%1/~%2.txt").arg(m_outputDir, MUtils::next_rand_str()));
 	if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 	{
 		QMessageBox::warning(this, tr("LameXP"), QString("<nobr>%2</nobr>").arg(tr("Error: The selected output directory is not writable!")));

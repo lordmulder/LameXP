@@ -320,7 +320,7 @@ bool FileAnalyzer::createTemplate(void)
 		return true;
 	}
 	
-	QString templatePath = QString("%1/%2.txt").arg(MUtils::temp_folder(), MUtils::rand_str());
+	QString templatePath = QString("%1/%2.txt").arg(MUtils::temp_folder(), MUtils::next_rand_str());
 
 	QFile templateFile(templatePath);
 	if(!templateFile.open(QIODevice::WriteOnly))

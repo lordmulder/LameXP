@@ -1767,7 +1767,7 @@ void MainWindow::encodeButtonClicked(void)
 
 	if(!m_settings->outputToSourceDir())
 	{
-		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), MUtils::rand_str()));
+		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), MUtils::next_rand_str()));
 		if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 		{
 			QMessageBox::warning(this, tr("LameXP"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("Cannot write to the selected output directory."), m_settings->outputDir(), tr("Please choose a different directory!")));
@@ -3924,7 +3924,7 @@ void MainWindow::normalizationFilterSizeFinished(void)
 	const int value = ui->spinBoxNormalizationFilterSize->value();
 	if((value % 2) != 1)
 	{
-		bool rnd = MUtils::parity(MUtils::next_rand32());
+		bool rnd = MUtils::parity(MUtils::next_rand_u32());
 		ui->spinBoxNormalizationFilterSize->setValue(rnd ? value+1 : value-1);
 	}
 }
@@ -4263,7 +4263,7 @@ void MainWindow::browseCustomTempFolderButtonClicked(void)
 
 	if(!newTempFolder.isEmpty())
 	{
-		QFile writeTest(QString("%1/~%2.tmp").arg(newTempFolder, MUtils::rand_str()));
+		QFile writeTest(QString("%1/~%2.tmp").arg(newTempFolder, MUtils::next_rand_str()));
 		if(writeTest.open(QIODevice::ReadWrite))
 		{
 			writeTest.remove();
