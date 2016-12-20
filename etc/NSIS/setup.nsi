@@ -49,9 +49,6 @@
 !ifndef LAMEXP_SOURCE_PATH
   !error "LAMEXP_SOURCE_PATH is not defined !!!"
 !endif
-!ifndef LAMEXP_UPX_PATH
-  !error "LAMEXP_UPX_PATH is not defined !!!"
-!endif
 
 ;UUID
 !define MyRegPath "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FBD7A67D-D700-4043-B54F-DD106D00F308}"
