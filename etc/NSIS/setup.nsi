@@ -82,7 +82,7 @@
 ;--------------------------------
 
 !tempfile PACKHDRTEMP
-!packhdr "${PACKHDRTEMP}" '"..\Utilities\MT.exe" -manifest "setup.manifest" -outputresource:"${PACKHDRTEMP};1"'
+!packhdr "${PACKHDRTEMP}" '"..\..\..\Prerequisites\MSVC\redist\bin\mt.exe" -manifest "setup.manifest" -outputresource:"${PACKHDRTEMP};1" && "..\..\..\Prerequisites\UPX\upx.exe" --brute "${PACKHDRTEMP}"'
 
 
 ;--------------------------------
@@ -115,8 +115,6 @@ InstallDirRegKey HKLM "${MyRegPath}" "InstallLocation"
 
 SetCompressor /SOLID LZMA
 SetCompressorDictSize 64
-
-#!packhdr "$%TEMP%\exehead.tmp" '"${LAMEXP_UPX_PATH}\upx.exe" --brute "$%TEMP%\exehead.tmp"'
 
 
 ;--------------------------------
