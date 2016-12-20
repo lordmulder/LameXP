@@ -1,3 +1,3 @@
 @echo off
 set "LAMEXP_CONFIG=Debug"
-call "%~dp0\_deploy.bat"
+call "%~dp0\make.bat"

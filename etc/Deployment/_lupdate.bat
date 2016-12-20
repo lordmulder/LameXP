@@ -1,9 +1,9 @@
 @echo off
 setlocal ENABLEDELAYEDEXPANSION
 
-"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
-"%~dp0\..\Utilities\CEcho.exe" cyan "Updating translation files..."
-"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "\n==========================================================================="
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "Updating translation files..."
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
 
 :: ---------------------------------------------------------------------------
 :: SETUP PATHS
@@ -45,7 +45,7 @@ for %%f in ("%~dp0\..\Translation\*.ts") do (
 	copy %%f %%f.bak
 	lupdate.exe "@%LST_FILE%" -no-obsolete -locations absolute -ts %%f
 	if not "!ERRORLEVEL!"=="0" (
-		"%~dp0\..\Utilities\CEcho.exe" red "\nSomething went wrong^^!\n"
+		"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nSomething went wrong^^!\n"
 		pause && exit
 	)
 )
@@ -60,7 +60,7 @@ del "%LST_FILE%"
 for %%f in ("%~dp0\..\Translation\LameXP_??.ts") do (
 	lrelease.exe %%f -qm "%~dp0\..\..\res\localization\%%~nf.qm"
 	if not "!ERRORLEVEL!"=="0" (
-		"%~dp0\..\Utilities\CEcho.exe" red "\nSomething went wrong^^!\n"
+		"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nSomething went wrong^^!\n"
 		pause && exit
 	)
 )

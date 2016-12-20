@@ -39,7 +39,7 @@ if "%VER_LAMEXP_PATCH%"==""    goto:version_failure
 goto:version_success
 
 :version_failure
-"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to set up build date!\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to set up build date!\n"
 pause && exit
 
 :: ---------------------------------------------------------------------------
@@ -57,4 +57,4 @@ if "%VER_LAMEXP_TYPE%" == "RC"    set "VER_LAMEXP_BASENAME=LameXP-RC%VER_LAMEXP_
 :: OUTPUT RESULT
 :: ---------------------------------------------------------------------------
 
-"%~dp0\..\Utilities\CEcho.exe" yellow "\nLameXP Version: %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%, Build #%VER_LAMEXP_BUILD% (%VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH%)\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" yellow "\nLameXP Version: %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%, Build #%VER_LAMEXP_BUILD% (%VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH%)\n"

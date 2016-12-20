@@ -69,7 +69,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PreBuildEvent>
-      <Command>"$(ProjectDir)\etc\Utilities\AutoInc.exe" "VER_LAMEXP_BUILD" "$(ProjectDir)\src\Config.h"</Command>
+      <Command>"$(ProjectDir)\..\Prerequisites\AutoInc\auto_inc.exe" "VER_LAMEXP_BUILD" "$(ProjectDir)\src\Config.h"</Command>
     </PreBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -120,7 +120,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\VisualLeakDetector\bin\Win32\*.manifest
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PreBuildEvent>
-      <Command>"$(ProjectDir)\etc\Utilities\AutoInc.exe" "VER_LAMEXP_BUILD" "$(ProjectDir)\src\Config.h"</Command>
+      <Command>"$(ProjectDir)\..\Prerequisites\AutoInc\auto_inc.exe" "VER_LAMEXP_BUILD" "$(ProjectDir)\src\Config.h"</Command>
     </PreBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -196,7 +196,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
     <PreBuildEvent>
-      <Command>"$(ProjectDir)\etc\Utilities\AutoInc.exe" "VER_LAMEXP_BUILD" "$(ProjectDir)\src\Config.h"</Command>
+      <Command>"$(ProjectDir)\..\Prerequisites\AutoInc\auto_inc.exe" "VER_LAMEXP_BUILD" "$(ProjectDir)\src\Config.h"</Command>
     </PreBuildEvent>
     <CustomBuildStep>
       <Command>

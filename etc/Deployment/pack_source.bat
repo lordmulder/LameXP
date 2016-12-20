@@ -1,6 +1,5 @@
 @echo off
 set "GIT_PATH=c:\Program Files\Git"
-set "ZIP_PATH=c:\Program Files\7-Zip"
 set "PATH=%GIT_PATH%;%GIT_PATH%\mingw64\bin;%GIT_PATH%\usr\bin;%PATH%"
 set "OUT_PATH=%TEMP%\~%RANDOM%%RANDOM%.tmp"
 
@@ -14,21 +13,12 @@ call::git_export "%~dp0\..\..\..\MUtilities" MUtilities
 
 copy "..\..\*.txt" "%OUT_PATH%"
 
-for %%i in (EncodePointer,VisualLeakDetector) do (
-	mkdir "%OUT_PATH%\Prerequisites\%%i"
-	xcopy /S /Y "%~dp0\..\..\..\Prerequisites\%%i" "%OUT_PATH%\Prerequisites\%%i"
-)
-
-for %%k in (v100,v120_xp,v140_xp) do (
-	for %%i in (Static,Shared,Debug) do (
-		mkdir "%OUT_PATH%\Prerequisites\Qt4\%%k\%%i"
-		echo Please put the Qt library files here! > "%OUT_PATH%\Prerequisites\Qt4\%%k\%%i\README.txt"
-	)
-)
+mkdir "%OUT_PATH%\Prerequisites"
+echo Please extract the Prerequisites files here! > "%OUT_PATH%\Prerequisites\README_1ST.txt"
 
 pushd "%OUT_PATH%"
 tar -cvf ./sources.tar *
-"%ZIP_PATH%\7z.exe" a -txz "%~dp0\..\..\out\~sources.tar.xz" "sources.tar"
+"%~dp0\..\..\..\Prerequisites\SevenZip\7za.exe" a -txz "%~dp0\..\..\out\~sources.tar.xz" "sources.tar"
 popd
 
 pushd "%~dp0"

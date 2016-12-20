@@ -37,9 +37,9 @@ if "%LAMEXP_SKIP_BUILD%"=="YES" (
 :: CLEAN UP
 :: ---------------------------------------------------------------------------
 
-"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
-"%~dp0\..\Utilities\CEcho.exe" cyan "Cleaning up..."
-"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "\n==========================================================================="
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "Cleaning up..."
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
 
 for %%i in (bin,obj,tmp,ipch) do (
 	del /Q /S /F "%~dp0\..\..\%%i\*.*"
@@ -86,7 +86,7 @@ for /L %%n in (1, 1, 99) do (
 for %%i in (exe,sfx,zip,txt) do (
 	del "%OUT_FILE%.%%i" 2> NUL
 	if exist "%OUT_FILE%.%%i" (
-		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to delete existing output file^!\n"
+		"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to delete existing output file^!\n"
 		pause && exit
 	)
 )
@@ -95,9 +95,9 @@ for %%i in (exe,sfx,zip,txt) do (
 :: COPY BINARY FILES AND REDIST
 :: ---------------------------------------------------------------------------
 
-"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
-"%~dp0\..\Utilities\CEcho.exe" cyan "Copying binary files..."
-"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "\n==========================================================================="
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "Copying binary files..."
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
 
 rd /S /Q "%TMP_PATH%" 2> NUL
 mkdir "%TMP_PATH%"
@@ -156,39 +156,39 @@ attrib +R "%TMP_PATH%\*.dll"
 :: BUILD INSTALLER
 :: ---------------------------------------------------------------------------
 
-"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
-"%~dp0\..\Utilities\CEcho.exe" cyan "Creating release packages..."
-"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "\n==========================================================================="
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "Creating release packages..."
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
 
-"%~dp0\..\Utilities\Echo.exe" LameXP - Audio Encoder Front-End > "%OUT_FILE%.txt"
-"%~dp0\..\Utilities\Echo.exe" v%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH% (Build #%VER_LAMEXP_BUILD%)\n >> "%OUT_FILE%.txt"
-"%~dp0\..\Utilities\Echo.exe" Built on %ISO_DATE% at %TIME%\n\n >> "%OUT_FILE%.txt"
-"%~dp0\..\Utilities\Echo.exe" ---------------------------\nREADME.TXT\n--------------------------- >> "%OUT_FILE%.txt"
-"%~dp0\..\Utilities\Cat.exe" "%~dp0\..\..\ReadMe.txt" >> "%OUT_FILE%.txt"
-"%~dp0\..\Utilities\Echo.exe" \n\n---------------------------\nLICENSE.TXT\n---------------------------\n >> "%OUT_FILE%.txt"
-"%~dp0\..\Utilities\Cat.exe" "%~dp0\..\..\License.txt" >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " LameXP - Audio Encoder Front-End > "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " v%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH% (Build #%VER_LAMEXP_BUILD%)\n >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " Built on %ISO_DATE% at %TIME%\n\n >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " ---------------------------\nREADME.TXT\n--------------------------- >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe"  "%~dp0\..\..\ReadMe.txt" >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" "\n\n---------------------------\nLICENSE.TXT\n---------------------------\n >> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe"  "%~dp0\..\..\License.txt" >> "%OUT_FILE%.txt"
 
 pushd "%TMP_PATH%"
-"%~dp0\..\Utilities\Zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
 popd
 
-"%PATH_MKNSIS%\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
+"%~dp0\..\..\..\Prerequisites\NSIS\makensis.exe" "/DLAMEXP_UPX_PATH=%PATH_UPXBIN%" "/DLAMEXP_DATE=%ISO_DATE%" "/DLAMEXP_VERSION=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%" "/DLAMEXP_BUILD=%VER_LAMEXP_BUILD%" "/DLAMEXP_INSTTYPE=%VER_LAMEXP_TYPE%" "/DLAMEXP_PATCH=%VER_LAMEXP_PATCH%" "/DLAMEXP_OUTPUT_FILE=%OUT_FILE%.sfx" "/DLAMEXP_SOURCE_PATH=%TMP_PATH%" "%~dp0\..\NSIS\setup.nsi"
 if %ERRORLEVEL% NEQ 0 (
-	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
 )
 
-call "%~dp0\..\Utilities\7zSD.cmd" "%OUT_FILE%.sfx" "%OUT_FILE%.exe" "LameXP Setup" "LameXP-Setup-r%VER_LAMEXP_BUILD%"
+call "%~dp0\..\..\..\Prerequisites\SevenZip\7zSD.cmd" "%OUT_FILE%.sfx" "%OUT_FILE%.exe" "LameXP Setup" "LameXP-Setup-r%VER_LAMEXP_BUILD%"
 if %ERRORLEVEL% NEQ 0 (
-	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
 )
 
 set "VER_FILEVER=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%.%VER_LAMEXP_MINOR_LO%.%VER_LAMEXP_PATCH%"
 set "VER_PRODUCT=LameXP - Audio Encoder Front-End"
-"%~dp0\..\Utilities\VerPatch.exe" "%OUT_FILE%.exe" "%VER_FILEVER%" /pv "%VER_FILEVER%" /fn /s desc "%VER_PRODUCT%" /s product "%VER_PRODUCT%" /s title "LameXP Installer SFX" /s copyright "Copyright (C) LoRd_MuldeR" /s company "Free Software Foundation"
+"%~dp0\..\..\..\Prerequisites\VerPatch\verpatch.exe" "%OUT_FILE%.exe" "%VER_FILEVER%" /pv "%VER_FILEVER%" /fn /s desc "%VER_PRODUCT%" /s product "%VER_PRODUCT%" /s title "LameXP Installer SFX" /s copyright "Copyright (C) LoRd_MuldeR" /s company "Free Software Foundation"
 if %ERRORLEVEL% NEQ 0 (
-	"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to build installer^!\n"
+	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
 )
 
@@ -203,7 +203,7 @@ rd /S /Q "%TMP_PATH%"
 
 for %%i in (zip,exe) do (
 	if not exist "%OUT_FILE%.%%i" (
-		"%~dp0\..\Utilities\CEcho.exe" red "\nFailed to create release packages^!\n"
+		"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to create release packages^!\n"
 		pause && exit
 	)
 )
@@ -216,19 +216,19 @@ attrib +R "%OUT_FILE%.exe"
 :: SIGN OUTPUT FILE
 :: ---------------------------------------------------------------------------
 
-"%~dp0\..\Utilities\CEcho.exe" cyan "\n==========================================================================="
-"%~dp0\..\Utilities\CEcho.exe" cyan "Signing output file..."
-"%~dp0\..\Utilities\CEcho.exe" cyan "===========================================================================\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "\n==========================================================================="
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "Signing output file..."
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
 
-"%PATH_GPGWIN%\gpg.exe" --detach-sign "%OUT_FILE%.exe"
+"%~dp0\..\..\..\Prerequisites\GnuPG\gpg.exe" --detach-sign "%OUT_FILE%.exe"
 attrib +R "%OUT_FILE%.exe.sig"
 
 :: ---------------------------------------------------------------------------
 :: COMPLETED
 :: ---------------------------------------------------------------------------
 
-"%~dp0\..\Utilities\CEcho.exe" green "\n==========================================================================="
-"%~dp0\..\Utilities\CEcho.exe" green "Completed successfully :-)"
-"%~dp0\..\Utilities\CEcho.exe" green "===========================================================================\n"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" green "\n==========================================================================="
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" green "Completed successfully :-)"
+"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" green "===========================================================================\n"
 
 pause
