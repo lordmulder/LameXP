@@ -12,8 +12,6 @@ call::git_export "%~dp0..\.."                LameXP_Qt
 call::git_export "%~dp0\..\..\..\MUtilities" MUtilities
 
 copy "..\..\*.txt" "%OUT_PATH%"
-
-mkdir "%OUT_PATH%\Prerequisites"
 echo Please extract the Prerequisites files here! > "%OUT_PATH%\Prerequisites\README_1ST.txt"
 
 pushd "%OUT_PATH%"
@@ -21,7 +19,7 @@ tar -cvf ./sources.tar *
 "%~dp0\..\..\..\Prerequisites\SevenZip\7za.exe" a -txz "%~dp0\..\..\out\~sources.tar.xz" "sources.tar"
 popd
 
-pushd "%~dp0"
+cd /d "%~dp0"
 rmdir /S /Q "%OUT_PATH%"
 
 pause
