@@ -2,6 +2,10 @@
 
 # LameXP v4.xx History #
 
+## LameXP v4.15 [2016-??-??] ## {-}
+* Updated MediaInfo to v0.7.91 (2016-11-30), compiled with ICL 17.0 and MSVC 12.0
+* Fixed included MediaInfo binary not working on processor *without* SSE2 support
+
 ## LameXP v4.14 [2016-11-19] ## {-}
 
 * Upgraded build environment to Microsoft Visual Studio 2015 with Update-3

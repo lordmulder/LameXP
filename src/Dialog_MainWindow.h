@@ -43,7 +43,6 @@ class QModelIndex;
 class QEventLoop;
 class SettingsModel;
 class WorkingBanner;
-class lamexp_icon_t;
 
 //UIC forward declartion
 namespace Ui

@@ -121,7 +121,7 @@ if "%LAMEXP_REDIST%"=="1" (
 for %%e in (LameXP,Qt,MUtils) do (
 	for %%x in (exe,dll) do (
 		for %%f in (%TMP_PATH%\%%e*.%%x) do (
-			"%PATH_UPXBIN%\upx.exe" --best "%%f"
+			"%~dp0\..\..\..\Prerequisites\UPX\upx.exe" --best "%%f"
 		)
 	)
 )
