@@ -102,7 +102,7 @@ ShowUninstDetails show
 Name "LameXP v${LAMEXP_VERSION} ${LAMEXP_INSTTYPE}-${LAMEXP_PATCH} [Build #${LAMEXP_BUILD}]"
 OutFile "${LAMEXP_OUTPUT_FILE}"
 BrandingText "Date created: ${LAMEXP_DATE} [Build #${LAMEXP_BUILD}]"
-InstallDir "$PROGRAMFILES\MuldeR\LameXP v${LAMEXP_VERSION}"
+InstallDir "$PROGRAMFILES\MuldeR\LameXP"
 InstallDirRegKey HKLM "${MyRegPath}" "InstallLocation"
 
 
