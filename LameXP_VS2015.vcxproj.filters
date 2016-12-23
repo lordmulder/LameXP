@@ -881,167 +881,167 @@
     <CustomBuild Include="src\Model_FileExts.h">
       <Filter>Header Files\Models</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools.wvunpack-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.aften-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.aften-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.aften-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.avs2wav.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.dcaenc.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.elevator.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.faad.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x64-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x86-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.gpgv.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.keyring.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x64-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x86-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mediaInfo-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mediainfo-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mediainfo-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpcdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpg123-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpg123-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpg123-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.nc-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.nc-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggenc2-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggenc2-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggenc2-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.refalac-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.refalac-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.shorten.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.sox.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.speexdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.tag.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.tta.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.valdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.vorbiscomment.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wget.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wma2wav.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wupdate.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wvunpack-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
-    </None>
-    <None Include="res\Tools.aften-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.aften-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.aften-x64.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.avs2wav.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.dcaenc.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.elevator.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.faad.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.flac-x64-avx.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.flac-x64-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.flac-x86-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.flac-x86-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.gpgv.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.lame-x64-avx.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.lame-x64-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.lame-x86-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.lame-x86-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mac-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mac-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mediaInfo-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mediainfo-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mediainfo-x64.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mpcdec.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mpg123-avx.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mpg123-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.mpg123-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.nc-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.nc-x64.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.oggdec.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.oggenc2-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.oggenc2-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.oggenc2-x64.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.opusdec-avx.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.opusdec-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.opusdec-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.opusenc-avx.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.opusenc-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.opusenc-sse2.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.refalac-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.refalac-x64.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.shorten.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.sox.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.speexdec.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.tag.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.tta.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.valdec.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.vorbiscomment.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.wget.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.wma2wav.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.wupdate.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.wvunpack-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.wvunpack-x64.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.keyring.qrc">
-      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

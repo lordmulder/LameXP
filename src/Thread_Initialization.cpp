@@ -351,7 +351,8 @@ double InitializationThread::doInit(const size_t threadCount)
 
 	//CPU type selection
 	unsigned int cpuSupport = 0;
-	if((m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE) && (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2) && m_cpuFeatures.intel)
+	const bool haveSSE2 = (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE) && (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2);
+	if(haveSSE2 && (m_cpuFeatures.vendor & MUtils::CPUFetaures::VENDOR_INTEL))
 	{
 		if (m_cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX)
 		{
