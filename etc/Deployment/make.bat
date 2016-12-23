@@ -114,7 +114,7 @@ if "%LAMEXP_REDIST%"=="1" (
 	)
 	copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%PATH_VCTOOL%.CRT\*.dll" "%TMP_PATH%"
 	if %PATH_VCTOOL% GEQ 140 (
-		copy "%PATH_WINSDK%\Redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
+		copy "%~dp0\..\..\..\Prerequisites\MSVC\redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
 	)
 )
 
