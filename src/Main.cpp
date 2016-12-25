@@ -209,9 +209,10 @@ static int lamexp_main(int &argc, char **argv)
 	const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect();
 	qDebug("   CPU vendor id  :  %s (Intel=%s)", cpuFeatures.idstr, MUTILS_BOOL2STR(cpuFeatures.vendor & MUtils::CPUFetaures::VENDOR_INTEL));
 	qDebug("CPU brand string  :  %s", cpuFeatures.brand);
-	qDebug("   CPU signature  :  Family=%d Model=%d Stepping=%d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
-	qDebug("CPU capabilities  :  CMOV=%s MMX=%s SSE=%s SSE2=%s SSE3=%s SSSE3=%s", MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_CMOV), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_MMX), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSSE3));
-	qDebug("CPU capabilities  :  SSE4.1=%s SSE4.2=%s AVX=%s EM64T/AMD64=%s", MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE4), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE42), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX), MUTILS_BOOL2STR(cpuFeatures.x64));
+	qDebug("   CPU signature  :  Family=%d, Model=%d, Stepping=%d", cpuFeatures.family, cpuFeatures.model, cpuFeatures.stepping);
+	qDebug("CPU architecture  :  %s", cpuFeatures.x64 ? "x64 (64-Bit)" : "x86 (32-Bit)");
+	qDebug("CPU capabilities  :  CMOV=%s, MMX=%s, SSE=%s, SSE2=%s, SSE3=%s, SSSE3=%s", MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_CMOV), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_MMX), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE2), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSSE3));
+	qDebug("CPU capabilities  :  SSE4.1=%s, SSE4.2=%s, AVX=%s, AVX2=%s, FMA3=%s, LZCNT=%s", MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE41), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_SSE42), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_AVX2), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_FMA3), MUTILS_BOOL2STR(cpuFeatures.features & MUtils::CPUFetaures::FLAG_LZCNT));
 	qDebug(" Number of CPU's  :  %d\n", cpuFeatures.count);
 
 	//Initialize Qt

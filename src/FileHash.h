@@ -25,13 +25,7 @@
 #include <QFile>
 #include <QByteArray>
 
-class FileHash
+namespace FileHash
 {
-public:
-	static QByteArray computeHash(QFile &file);
-	static void selfTest(void);
-private:
-	FileHash()  {}
-	~FileHash() {};
-};
-
+	QByteArray computeHash(QFile &file);
+}

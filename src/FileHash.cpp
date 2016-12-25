@@ -23,7 +23,7 @@
 #include "FileHash.h"
 
 //MUtils
-#include <MUtils/Hash_Keccak.h>
+#include <MUtils/Hash.h>
 #include <MUtils/Exception.h>
 
 static const char *g_blnk = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef";
@@ -32,38 +32,28 @@ static const char *g_salt = "ee9f7bdabc170763d2200a7e3030045aafe380011aefc1730e5
 
 QByteArray FileHash::computeHash(QFile &file)
 {
-	QByteArray hash = QByteArray::fromHex(g_blnk).toHex();
+	QByteArray result;
 
 	if(file.isOpen() && file.reset())
 	{
-		MUtils::Hash::Keccak keccak;
+		QScopedPointer<MUtils::Hash::Hash> hash(MUtils::Hash::create(MUtils::Hash::HASH_KECCAK_384));
 		const QByteArray data = file.readAll();
 		if (data.size() >= 16)
 		{
 			const QByteArray seed = QByteArray::fromHex(g_seed);
 			const QByteArray salt = QByteArray::fromHex(g_salt);
-			if (keccak.init(MUtils::Hash::Keccak::hb384))
+
+			bool okay[3];
+			okay[0] = hash->update(seed);
+			okay[1] = hash->update(data);
+			okay[2] = hash->update(salt);
+
+			if (okay[0] && okay[1] && okay[2])
 			{
-				bool ok = true;
-				ok = ok && keccak.addData(seed);
-				ok = ok && keccak.addData(data);
-				ok = ok && keccak.addData(salt);
-				if (ok)
-				{
-					const QByteArray digest = keccak.finalize();
-					if (!digest.isEmpty()) hash = digest.toHex();
-				}
+				result = hash->digest(true);
 			}
 		}
 	}
 
-	return hash;
-}
-
-void FileHash::selfTest(void)
-{
-	if(!MUtils::Hash::Keccak::selfTest())
-	{
-		MUTILS_THROW("QKeccakHash self-test has failed!");
-	}
+	return result.isEmpty() ? QByteArray::fromHex(g_blnk).toHex() : result;
 }

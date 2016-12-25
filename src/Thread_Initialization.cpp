@@ -422,9 +422,6 @@ double InitializationThread::doInit(const size_t threadCount)
 
 	QScopedPointer<QThreadPool> pool(new QThreadPool());
 	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, cores2threads(m_cpuFeatures.count), EXPECTED_TOOL_COUNT));
-	/* qWarning("Using %u threads for extraction.", pool->maxThreadCount()); */
-
-	FileHash::selfTest();
 	ExtractorTask::clearFlags();
 
 	//Start the timer
@@ -740,8 +737,6 @@ void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *cons
 void InitializationThread::selfTest(void)
 {
 	const unsigned int cpu[7] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X86_AVX, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE, CPU_TYPE_X64_AVX, 0 };
-
-	FileHash::selfTest();
 
 	for(size_t k = 0; cpu[k]; k++)
 	{
