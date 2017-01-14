@@ -516,7 +516,7 @@ The latest *official* release of the LameXP software can be obtained from one of
 * <https://github.com/lordmulder/LameXP/releases/latest>
 * <http://sourceforge.net/projects/lamexp/files/>
 * <https://lamexp.codeplex.com/releases/>
-* <https://bitbucket.org/lord_mulder/lamexp/downloads>
+* <https://bitbucket.org/muldersoft/lamexp/downloads>
 * <https://www.assembla.com/spaces/lamexp/documents>
 * <http://www.free-codecs.com/lamexp_download.htm>
 * <http://www.videohelp.com/tools/LameXP>
@@ -574,7 +574,7 @@ The source code of the **LameXP** software is managed using the [*Git*](http://g
 
 * ``git clone https://git01.codeplex.com/lamexp LameXP`` ([Browse](https://lamexp.codeplex.com/SourceControl/latest))
 
-* ``git clone https://bitbucket.org/lord_mulder/lamexp.git LameXP`` ([Browse](https://bitbucket.org/lord_mulder/lamexp/src))
+* ``git clone https://bitbucket.org/muldersoft/lamexp.git LameXP`` ([Browse](https://bitbucket.org/muldersoft/lamexp/src))
 
 * ``git clone git://git.assembla.com/lamexp.git LameXP`` ([Browse](https://www.assembla.com/code/lamexp/git/nodes))
 
@@ -590,7 +590,7 @@ The source code of the **MUtilities** library is managed using the [*Git*](http:
 
 * ``git clone https://git01.codeplex.com/mutilities MUtilities`` ([Browse](https://mutilities.codeplex.com/SourceControl/latest))
 
-* ``git clone https://bitbucket.org/lord_mulder/mutilities.git MUtilities`` ([Browse](https://bitbucket.org/lord_mulder/mutilities/src))
+* ``git clone https://bitbucket.org/muldersoft/mutilities.git MUtilities`` ([Browse](https://bitbucket.org/muldersoft/mutilities/src))
 
 * ``git clone git://git.assembla.com/mutilities.git MUtilities`` ([Browse](https://www.assembla.com/code/mutilities/git/nodes))
 
