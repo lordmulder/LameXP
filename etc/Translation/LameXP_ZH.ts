@@ -108,22 +108,22 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="864"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - 超过700种PNG图标</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="866"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>作者Mark James， 在Creative Commons &apos;BY&apos;许可证下发布。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="871"/>
         <source>Angry Chicken and Ghost Scream sound</source>
-        <translation type="unfinished"></translation>
+        <translation>愤怒的小鸡和鬼魂尖叫音效</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="873"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>By Alexander, 在Creative Commons &apos;BY&apos;许可证下发布。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="934"/>
