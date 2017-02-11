@@ -208,22 +208,22 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="864"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - Більш ніж 700 іконок у форматі PNG</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="866"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Випущено Mark James під ліцензією Creative Commons &apos;BY&apos; License.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="871"/>
         <source>Angry Chicken and Ghost Scream sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Звук Angry Chicken and Ghost Scream</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="873"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Випущено Alexander під ліцензією Creative Commons &apos;BY&apos; License.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="878"/>
