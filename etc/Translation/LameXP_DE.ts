@@ -103,27 +103,27 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="850"/>
         <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation type="unfinished"></translation>
+        <translation>Netcat for NT - TCP/IP Schweizer Taschenmesser</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="864"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk Icons - Über 700 Icons im PNG-Format</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="866"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Von Mark James, veröffentlicht unter der Creative Commons &apos;BY&apos; Lizenz.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="871"/>
         <source>Angry Chicken and Ghost Scream sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Angry Chicken und Ghost Scream Sound</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="873"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Von Alexander, veröffentlicht unter der Creative Commons &apos;BY&apos; Lizenz.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="934"/>
@@ -889,7 +889,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="140"/>
         <source>Clear</source>
-        <translation>Löschen</translation>
+        <translation>Leeren</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="242"/>
@@ -1175,7 +1175,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4924"/>
         <source>Clear All</source>
-        <translation>Alle löschen</translation>
+        <translation>Alle entfernen</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4935"/>
