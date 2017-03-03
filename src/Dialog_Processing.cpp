@@ -170,7 +170,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *const fileListModel, const Aud
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
-	
+	setMinimumSize(this->size());
+
 	//Update the window icon
 	MUtils::GUI::set_window_icon(this, lamexp_app_icon(), true);
 
@@ -184,11 +185,8 @@ ProcessingDialog::ProcessingDialog(FileListModel *const fileListModel, const Aud
 	//Register meta type
 	qRegisterMetaType<QUuid>("QUuid");
 
-	//Center window in screen
-	QRect desktopRect = QApplication::desktop()->screenGeometry();
-	QRect thisRect = this->geometry();
-	move((desktopRect.width() - thisRect.width()) / 2, (desktopRect.height() - thisRect.height()) / 2);
-	setMinimumSize(thisRect.width(), thisRect.height());
+	//Adjust size to DPI settings and re-center
+	MUtils::GUI::scale_widget(this);
 
 	//Enable buttons
 	connect(ui->button_AbortProcess, SIGNAL(clicked()), this, SLOT(abortEncoding()));

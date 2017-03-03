@@ -154,8 +154,11 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
 	setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
-	resize(this->minimumSize());
-	
+	setMinimumSize(this->size());
+
+	//Adjust size to DPI settings and re-center
+	MUtils::GUI::scale_widget(this);
+
 	//Disable "X" button
 	if(firstStart)
 	{

@@ -273,6 +273,7 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
 	setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
+	setMinimumSize(this->size());
 
 	//Create window icon
 	MUtils::GUI::set_window_icon(this, lamexp_app_icon(), true);
@@ -719,12 +720,9 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	// Prepare to show window
 	//--------------------------------
 
-	//Center window in screen
-	QRect desktopRect = QApplication::desktop()->screenGeometry();
-	QRect thisRect = this->geometry();
-	move((desktopRect.width() - thisRect.width()) / 2, (desktopRect.height() - thisRect.height()) / 2);
-	setMinimumSize(thisRect.width(), thisRect.height());
-
+	//Adjust size to DPI settings and re-center
+	MUtils::GUI::scale_widget(this);
+	
 	//Create DropBox widget
 	m_dropBox.reset(new DropBox(this, m_fileListModel, m_settings));
 	connect(m_fileListModel, SIGNAL(modelReset()),                      m_dropBox.data(), SLOT(modelChanged()));
