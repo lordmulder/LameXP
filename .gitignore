@@ -16,7 +16,6 @@
 /out
 /tmp
 .vs/
-/doc/img
 /etc/Addins
 /etc/Deployment/_postproc.bat
 /etc/Deployment/buildenv.txt
