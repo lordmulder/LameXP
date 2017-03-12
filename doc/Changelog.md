@@ -2,9 +2,11 @@
 
 # LameXP v4.xx History #
 
-## LameXP v4.15 [2016-??-??] ## {-}
-* Updated MediaInfo to v0.7.91 (2016-11-30), compiled with ICL 17.0 and MSVC 12.0
+## LameXP v4.15 [2017-??-??] ## {-}
+* Fixed a bug in auto-rename feature, that caused problem when meta-tag contains path separator
 * Fixed included MediaInfo binary not working on processor *without* SSE2 support
+* Some improvements for "high DPI" screens: Adjust initial window size according to DPI setting
+* Updated MediaInfo to v0.7.91 (2016-11-30), compiled with ICL 17.0 and MSVC 12.0
 
 ## LameXP v4.14 [2016-11-19] ## {-}
 

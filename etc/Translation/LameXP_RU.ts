@@ -3080,37 +3080,37 @@
         <translation>Исходный аудио файл не может быть открыт:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="442"/>
+        <location filename="../../src/Thread_Process.cpp" line="447"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Папка для выходных файлов не существует и не может быть создана:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="451"/>
+        <location filename="../../src/Thread_Process.cpp" line="456"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Папка для выходных файлов недоступна для записи:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="517"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown File Name</source>
         <translation>Неизвестное имя файла</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="519"/>
+        <location filename="../../src/Thread_Process.cpp" line="524"/>
         <source>Unknown Title</source>
         <translation>Неизвестное Название</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <location filename="../../src/Thread_Process.cpp" line="525"/>
         <source>Unknown Artist</source>
         <translation>Неизвестный Артист</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="526"/>
         <source>Unknown Album</source>
         <translation>Неизвестный Альбом</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="523"/>
+        <location filename="../../src/Thread_Process.cpp" line="528"/>
         <source>Unknown Comment</source>
         <translation>Неизвестный Комментарий</translation>
     </message>
@@ -3131,22 +3131,22 @@
         <translation>Пропущен.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="469"/>
+        <location filename="../../src/Thread_Process.cpp" line="474"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Файл уже существует, будет пропущен:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="470"/>
+        <location filename="../../src/Thread_Process.cpp" line="475"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Если Вы не хотите пропускать уже существующие файлы, пожалуйста, измените режим перезаписи!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="477"/>
+        <location filename="../../src/Thread_Process.cpp" line="482"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Файл уже существует, будет удалён:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="491"/>
+        <location filename="../../src/Thread_Process.cpp" line="496"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Ошибка удаления существующего файла, будет сохранение с другим именем!</translation>
     </message>

@@ -90,7 +90,7 @@ private:
 	void processFile();
 	int generateOutFileName(QString &outFileName);
 	QString applyRenamePattern(const QString &baseName, const AudioFileModel_MetaInfo &metaInfo);
-	QString applyRegularExpression(const QString &fileName);
+	QString applyRegularExpression(const QString &baseName);
 	QString generateTempFileName(void);
 	bool insertDownmixFilter(const unsigned int *const supportedChannels);
 	bool insertDownsampleFilter(const unsigned int *const supportedSamplerates, const unsigned int *const supportedBitdepths);
