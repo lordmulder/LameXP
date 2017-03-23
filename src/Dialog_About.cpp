@@ -129,7 +129,7 @@ g_lamexp_mirrors[] =
 {
 	{ "GitHub.com",      "https://github.com/lordmulder/LameXP"              },
 	{ "SourceForge.net", "http://sourceforge.net/p/lamexp/code/"             },
-	{ "Bitbucket.org",   "https://bitbucket.org/lord_mulder/lamexp"          },
+	{ "Bitbucket.org",   "https://bitbucket.org/muldersoft/lamexp"           },
 	{ "GitLab.com"   ,   "https://gitlab.com/lamexp/lamexp"                  },
 	{ "Codeplex.com",    "https://lamexp.codeplex.com/SourceControl/latest"  },
 	{ "Assembla.com",    "https://www.assembla.com/spaces/lamexp/"           },
