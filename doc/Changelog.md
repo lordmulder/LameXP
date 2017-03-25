@@ -1,4 +1,7 @@
-% LameXP Audio-Encoder Front-End &ndash; Changelog
+% ![](img/lamexp/banner.png)  
+LameXP Audio-Encoder Front-End &ndash; Changelog
+% by LoRd_MuldeR &lt;<mulder2@gmx>&gt; | <http://muldersoft.com/>
+
 
 # LameXP v4.xx History #
 

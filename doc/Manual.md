@@ -1,13 +1,15 @@
-% LameXP Audio-Encoder Front-End &ndash; Manual
-% Created by LoRd_MuldeR &lt;<mulder2@gmx>&gt; &ndash; check <http://muldersoft.com/> for news and updates!
+% ![](img/lamexp/banner.png)  
+LameXP Audio-Encoder Front-End &ndash; Manual
+% by LoRd_MuldeR &lt;<mulder2@gmx>&gt; | <http://muldersoft.com/>
+
 
 # Introduction #
 
-LameXP is a graphical user-interface (front-end) for various of audio encoders: It allows you to convert your audio files from one audio format to another one in the most simple way. Despite its name, LameXP is **not** only a front-end for the LAME MP3 encoder, but supports a wide range of *output formats*, including MP3, Ogg Vorbis, Opus, AAC/MP4, FLAC, AC-3 and Wave Audio. The number of supported *input formats* is even bigger! Furthermore LameXP **not** only runs on Windows XP, but also on Windows 7, 8 and 10 as well as many other operating systems.
+***LameXP*** is a graphical user-interface (GUI front-end) for various of audio encoders and decoders: It allows you to convert your audio files from one audio format to another one in the most simple way. Despite its name, LameXP is **not** only a front-end for the LAME MP3 encoder, but supports a wide range of *output formats*, including MP3, Ogg Vorbis, Opus, AAC/MP4, FLAC, AC-3 and Wave Audio. The number of supported *input formats* is even bigger! Furthermore LameXP **not** only runs on Windows XP, but also on Windows 7, 8 and 10 as well as other operating systems. 32-Bit *and* 64-Bit systems are supported.
 
-![LameXP](http://lamexp.sourceforge.net/lamexp.png)
+![](http://lamexp.sourceforge.net/lamexp.png)
 
-Since all the encoders and decoders that are used by the LameXP software are already *built-in* (with one exception), you do **not** need to install any additional software, such as "Codecs", "Filters" or "Plug-ins", on your computer. Everything works "out of the box". You can even use LameXP as a "portable" application, i.e. you can run LameXP directly off your USB stick. Moreover, LameXP was designed for *batch processing*. This means that you can convert a huge number of audio files, e.g. a complete album or even your entire music collection, in just a single step. At the same time, LameXP is able to process several audio files *concurrently*, so it can take full advantage of modern *multi-core* processors! However, LameXP is **not** only optimized for speed, it also provides excellent sound quality by using the most sophisticated audio encoders currently available.
+Since all the encoders and decoders that are used by the LameXP software are already *built-in* (with one exception), you do **not** need to install any additional software, such as "Codecs", "Filters" or "Plug-ins", on your computer. Everything works "out of the box". You can even use LameXP as a "portable" application, i.e. you can run LameXP directly off your USB stick. Moreover, LameXP was designed for *batch processing*. This means that you can convert a huge number of audio files, e.g. a complete album or even your entire music collection, in just a single step. At the same time, LameXP is able to process several audio files *concurrently*, so it can take full advantage of modern *multi-core* processors! However, LameXP is **not** only optimized for speed, it also provides excellent sound quality by using the most sophisticated audio encoders available.
 
 In addition to that, LameXP provides full support for *meta information*, including cover artwork. So when converting your audio files with LameXP, any existing meta information will be retained &ndash; to the highest possible extent. Of course, there also is an easy-to-use *meta-tag editor* for adding new meta information or managing the existing meta information. On top of it all, LameXP provides full *Unicode support*, for meta information as well as file names, thus problems with "intentional" character sets are avoided. Likewise, thanks to our *translators*, the user-interface of the LameXP software is available in many different languages, including English, German, Spanish and Chinese. Last but not least, LameXP supports a number of post-processing filters, including sample rate conversion, normalization (gain adjustment), tone adjustment as well as down-mixing.
 
@@ -38,7 +40,7 @@ The following *legacy* platforms are **not** actively supported any longer:
 * Microsoft Windows 98
 * Microsoft Windows 95
 
-*Remarks:* Windows XP has reached "end of life" on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP. Thus **no** updates or bugfixes are made available to regular Windows XP users since that date, **not** even security fixes! Thus, all the security vulnerabilities that have been discovered *after* the deadline &ndash; and all the security vulnerabilities that are going to be discovered in the future &ndash; will *persists* forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we *highly* recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a contemporary system.
+*Remarks:* Windows XP has reached "end of life" on April 8th, 2014. This means that Microsoft has stopped all support for Windows XP. Thus **no** updates or bugfixes are made available to regular Windows XP users since that date, **not** even security fixes! Thus, all the security vulnerabilities that have been discovered *after* the deadline &ndash; and all the security vulnerabilities that are going to be discovered in the future &ndash; will *persists* forever! Consequently, using Windows XP has become a severe security risk, and the situation is only going to get worse. While LameXP will continue to support Windows XP (note that Service Pack 3 is required!) for the foreseeable future, we *highly* recommend everybody to update to a less antiquated system now. Windows XP support will be discontinued in a future version, when most users have migrated to a modern system.
 
 
 ## Output Formats (Encoders) ##
@@ -86,19 +88,19 @@ Currently the following input formats (audio decoders) are supported by LameXP:
 
 # Legal Information #
 
-The LameXP software was developed, from the scratch, by LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Consequently, all copyrights on the LameXP software exclusively belong to LoRd_MuldeR. The right to use, modify and redistribute the LameXP software *according to the license terms* is granted to everybody. Please see below for license details! If you want to use the LameXP software in a way that is *not* covered by the license terms, e.g. if you want to include the LameXP software (or parts of it) in a *proprietary* software, written permission by LoRd_MuldeR is required.
+The LameXP software was developed, from the scratch, by LoRd_MuldeR &lt;MuldeR2@GMX.de&gt;. Consequently, all copyrights on LameXP belong to LoRd_MuldeR. The right to use, modify and redistribute the LameXP software *according to the terms of the GPL (GNU General Public License)* is hereby granted to everybody. Please see below for license details! Be aware though that, if you want to use the LameXP software in a way that is ***not*** covered by the GPL, e.g. if you want to include the LameXP software (or parts of it) in a *proprietary* software, then an explicit written permission by LoRd_MuldeR is required!
 
-More OpenSource projects by LoRd_MuldeR can be found at <http://muldersoft.com/> and <https://github.com/lordmulder>. Please do **not** send e-mail to LoRd_MuldeR directly, if the problem or suggestion can be discussed on the support forums or on the issue tracker!
+More OpenSource projects by LoRd_MuldeR can be found at <http://muldersoft.com/> and <https://github.com/lordmulder>. Please do **not** send us e-mail directly, if the problem or suggestion can be discussed on the support forums or on the issue tracker!
 
 
 ## Third-party Software ##
 
-It has to be noticed that LameXP uses a number of *third-party* applications and libraries. The copyright on these third-party tools belongs to the individual authors. *All* third-party tools that are included in the official distribution packages of LameXP are distributed in accordance with the respective software license. For legal reasons, some of the third-party tools can *not* be redistributed along with LameXP and therefore need to be obtained separately. For more details on the third-party tools that are used by the LameXP software, please refer to the "Third-party software" tab in the "About" dialogue. Moreover, various people have contributed translations to the LameXP project. These translation are redistributed with permission of the respective contributor. For more information about our contributors, please refer to the "Contributors" tab in the "About" dialogue.
+Note that LameXP uses a number of *third-party* applications and libraries. The copyright on these third-party tools belongs to the individual authors. *All* third-party tools that are included in the official distribution packages of LameXP are distributed in full accordance with the respective software license. For legal reasons, some of the third-party tools can ***not*** be redistributed along with LameXP and therefore need to be obtained separately. For more details on the third-party tools that are used by the LameXP software, please refer to the "Third-party software" tab in the "About" dialogue. Moreover, various people have contributed translations to the LameXP project. These translation are redistributed with permission of the respective contributor. For more information about our contributors, please refer to the "Contributors" tab in the "About" dialogue.
 
 
 ## License Terms ##
 
-LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement), released under the terms of the [*GNU General Public License* (GPL), version 2](http://www.gnu.org/licenses/gpl-2.0.html). The licenses for most software and other practical works are designed to take away your freedom to share and change the works. In contrast, the GPL is designed to guarantee your freedom to share and change all versions of the software. In other words, the GPL ensures that free software will remain free for all of its users. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the *GNU General Public License* for more details!
+LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement), released under the terms of the [*GNU General Public License* (GPL), version 2](http://www.gnu.org/licenses/gpl-2.0.html). The licenses for most software and other practical works are designed to take away your freedom to share and change those works. In contrast, the GPL is designed to *guarantee* your freedom to share and change all versions of the software. In other words, the GPL ensures that free software is going to remain free for all of its users until doomsday. LameXP adds some additional terms in order to keep your computer safe from unwanted software. See the *GNU General Public License* for more details!
 
 	LameXP - Audio Encoder Front-End
 	Copyright (C) 2004-2017 LoRd_MuldeR <MuldeR2@GMX.de>
@@ -123,18 +125,18 @@ LameXP is [*free software*](http://en.wikipedia.org/wiki/Free_software_movement)
 
 # Anti-Virus Notes #
 
-Occasionally, it may happen that your anti-virus software *mistakenly* detects [malware](http://en.wikipedia.org/wiki/Malware) (virus, trojan horse, worm, etc.) while you are trying to run the LameXP application or the LameXP setup program. This is called a [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) and the file actually is **not** malware. Instead, this is an error (bug) in your particular anti-virus software! In case that you encounter this kind problem, we highly recommend using [VirusTotal.com](http://www.virustotal.com/), [Virscan.org](http://www.virscan.org/) or a similar web-service to check the file in question with *multiple* anti-virus engines. Unless the vast majority of the anti-virus engines detect malware, it can be assumed that the file is really harmless. However, please take care with *heuristic* scan results, such as "suspicious", "generic" or "packed". Those results are **not** confirmed malware detections &ndash; they are highly speculative and (almost certainly) can be ignored safely!
+Occasionally, it may happen that your anti-virus software *mistakenly* detects [malware](http://en.wikipedia.org/wiki/Malware) (virus, trojan horse, worm, etc.) while you are trying to run the LameXP application or the LameXP setup program. This is called a [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) and the file actually is **not** malware. Instead, this is an error (bug) in your particular anti-virus software! In case that you encounter this kind problem, we highly recommend using [VirusTotal.com](http://www.virustotal.com/), [Virscan.org](http://www.virscan.org/) or a similar web-service to check the file in question with *multiple* anti-virus engines. Unless the vast majority of the anti-virus engines detect malware, it can be assumed that the file is really harmless. However, please take care with *heuristic* scan results, such as "suspicious", "generic" or "packed". Those results are **not** malware detections &ndash; they are highly speculative and (almost certainly) can be ignored safely!
 
 Defective anti-virus software is an ongoing annoyance! For example, anti-virus programs tend to suspect installers (or uninstallers) created with [NSIS](http://nsis.sourceforge.net/) &ndash; which includes the LameXP setup program. But, of course, installers created with NSIS are perfectly legitimate. Thus, if your anti-virus program complains about the LameXP setup program, please ignore the *nonsensical* warning! Furthermore, it seems that some anti-virus programs accuse *all* "packed" executables of being malware. Nonetheless, using so-called "executable packers", e.g. [UPX](http://upx.sourceforge.net/), is perfectly legitimate. Executable packers are commonly used by legitimate software, including numerous OpenSource projects &ndash; and so does LameXP. Thus, if your anti-virus program complains about the LameXP program file, because it has been "packed" by UPX, please ignore the *nonsensical* warning!
 
-Last but not least: Always keep in mind that LameXP is *free software*, i.e. the *source codes* of LameXP are freely available to everybody! Thus, in case that you do *not* trust the provided *binaries* of LameXP, you may scrutinize the LameXP *source codes* and then build your own binaries&hellip;
+Last but not least: Always keep in mind that LameXP is *free software*, which means that the *source codes* of LameXP are freely available. Everybody can easily see that there is ***no*** malware of any kind included in the LameXP source code! If you do *not* trust the provided *binaries* of LameXP, you may build your own binary directly from the LameXP source codes&hellip;
 
 
 ## Reporting False Positives ##
 
 An important fact to consider is, that, for the developer of a legitimate application, it is *impossible* to know **why** a specific anti-virus software may be *misinterpreting* his or her application as malware. That is because anti-virus programs generally are *proprietary* (ClosedSource) software &ndash; anti-virus companies don *not* publish their source codes or reveal their algorithms. Moreover, a zillion of *different* anti-virus programs exist nowadays. For these reasons, the application developer can *not* know what is going on "behind the scenes" in a particular anti-virus software. Consequently, any assumptions on the reasons that are causing the [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) would be nothing but pure speculation! Even worse, anti-virus software is updated frequently, so the reasons why the anti-virus software is *misinterpreting* the application as malware may change constantly!
 
-At this point, it should be clear that implementing *workarounds* for defective anti-virus software is **not** a viable option for application developers. Instead, since the [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) is an error (bug) in the particular *anti-virus software*, it can be fixed *only* by the developer of the anti-virus software. Therefore, it is important that *you*, the (paying) customer of the anti-virus company, contact the support team of the anti-virus company and report the problem to them! Most anti-virus companies provide ways to report *false positives* in a standardized way, e.g. by means of a [webform](http://en.wikipedia.org/wiki/Form_%28HTML%29). However, it is *not* possible to list them all here. So please refer to the anti-virus developer's web-site. Also, when reporting *false positives*, please be self-confident: As a paying customer, you can demand that *false positives* get fixed in a timely manner. Otherwise, get your money back!
+At this point, it should be clear that implementing *workarounds* for defective anti-virus software is **not** a viable option for application developers. Instead, since the [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) is an error (bug) in the particular *anti-virus software*, it can be fixed *only* by the developer of the anti-virus software. Therefore, it is important that *you*, the (paying) customer of the anti-virus company, contact the support team of the anti-virus company and report the problem to them! Most anti-virus companies provide ways to report *false positives* in a standardized way, e.g. by means of a [webform](http://en.wikipedia.org/wiki/Form_%28HTML%29). However, it is *not* possible to list them all here. So please refer to the anti-virus developer's web-site. Also, when reporting *false positives*, please be self-confident! As a *paying customer*, you can demand that *false positives* are fixed promptly. Otherwise, get your money back!
 
 
 ## Performance Issues ##
@@ -143,24 +145,24 @@ During the *startup procedure*, the LameXP software has to perform a number of *
 
 Consequently, if you think that LameXP is starting up "slow" on your machine, we recommend to **temporarily** *disable* or *uninstall* your current anti-virus software. If your anti-virus software has a so-called "real-time protection" or "guard" feature, please be sure to *deactivate* that feature too! As soon as the anti-virus software has been *neutralized* and **no** longer affects legitimate applications, please try launching the LameXP software again. If it turns out that the startup procedure of LameXP has become significantly *faster* when the anti-virus software is **not** interfering, then you know one thing for sure: It is the *anti-virus software* that was causing the slow down! Please recognize that *we* can **not** fix this kind of problems. Instead, since the problem is actually a *defect* of the anti-virus software, please report the problem to the developer of the *anti-virus software*!
 
-Another way of detecting performance issues caused by sloppy anti-virus software is monitoring the CPU usage in Task Manager (or [*Process Explorer*](https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx)) while LameXP is starting up. Please make sure that you are **not** looking at the "overall" CPU usage, but at the CPU usage caused by the *individual* processes, and that "show processes from all users" is *enabled*. Then you will probably notice that `LameXP.exe` is sitting "idle", more or less, while some *service process* belonging to the anti-virus software is "hogging" the CPU. A typical example looks like this:
+Another way of detecting performance issues that are caused by sloppy anti-virus software is monitoring the CPU usage in Task Manager (or [*Process Explorer*](https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx)) while LameXP is starting up. Please make sure that you are **not** looking at the "overall" CPU usage, but at the CPU usage caused by the *individual* processes, and that "show processes from all users" is *enabled*. Then you will probably notice that `LameXP.exe` is sitting "idle", more or less, while some *service process* belonging to the anti-virus software is "hogging" the CPU. The anti-virus software is hindering LameXP startup! A typical example looks like this:
 
-![Figure](img/lamexp/av_gone_mad.png)
+![](img/lamexp/av_gone_mad.png)
 
-For reporting *performance issues*, please refer to anti-virus developer's web-site. Also, when reporting *performance issues*, please be self-confident: As a paying customer, you can demand that *performance issues* get fixed in a timely manner. Otherwise, get your money back!
+Please report *performance issues* to the anti-virus software's developer. Also, when reporting *performance issues*, please be self-confident! As a *paying customer*, you can demand that such *bugs* are fixed promptly. Otherwise, get your money back!
 
 
 ## Anti-Virus Conclusions ##
 
 The **code of conduct** regarding problems and annoyances related to so-called "anti-virus" software:
 
-* If your anti-virus software raises an "alarm" or "warning" while trying to launch the LameXP software or the LameXP setup program, please don't panic and take this with a grain of salt!
+* If your anti-virus software raises an "alarm" or "warning" while trying to launch the LameXP software or the LameXP setup program, please do **not** panic! In most cases, it is just the anti-virus software that went insane.
 
-* Unless the alleged "malware infection" has been confirmed by **multiple** [*different*](http://www.virustotal.com/) anti-virus engines, this almost certainly is a [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives) and thus can be ignored safely &#x1f60a;
+* Unless the alleged "malware infection" has been confirmed by **multiple** [*different*](http://www.virustotal.com/) anti-virus engines, this (almost) certainly is a [**false positive**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives), i.e. **not** an "infection" at all. Therefore, it can be ignored safely &#x1f60a;
 
-* In the extremely rare case that you actually have a *confirmed* malware infection, please try re-downloading the LameXP software from one of the **official** mirrors first, *before* you send us any reports!
+* In the extremely unlikely case that you actually have a *confirmed* malware infection, please try re-downloading the LameXP software from one of the **official** mirrors first, *before* you send us any "malware" reports!
 
-* If you encounter any [**false positives**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives), please report these problems to the developer of the *defective* anti-virus software. *We* are **not** responsible for this problem and thus *we* can **not** fix it!
+* If you encounter any [**false positives**](http://en.wikipedia.org/wiki/Antivirus_software#Problems_caused_by_false_positives), please report these problems to the developer of the *defective* anti-virus software. *We* are **not** responsible for this problem (it is a bug in the anti-virus software) and thus *we* can **not** fix it!
 
 
 
@@ -182,36 +184,36 @@ Shortly after launching the setup program, an [UAC](http://en.wikipedia.org/wiki
 
 *Note:* If you wonder why Windows suggests that the LameXP setup program originates from an "unknown publisher", despite the fact that it was downloaded from the official web-site, then please the explanation [here](http://lamexp.sourceforge.net/doc/Manual.html#q-why-are-the-lamexp-binaries-not-digitally-signed)!
 
-![Figure](img/lamexp/setup_1a.png)
+![](img/lamexp/setup_1a.png)
 
 Now simply follow the instructions of the setup wizard, which will guide you through the installation process&hellip;
 
 *Note:* Please do **not** change the "Destionation Folder", unless you know exactly what you are doing. The "Destionation Folder" cannot be changed, when *upgrading* an existing LameXP installation.
 
-![Figure](img/lamexp/setup_1b.png)
+![](img/lamexp/setup_1b.png)
 
 Congratulation, LameXP has been installed successfully on your computer!
 
 *Note:* If you keep the "Run LameXP &hellip;" option enabled and click on the "Finish" button, the LameXP software will be launched immediately.
 
-![Figure](img/lamexp/setup_1c.png)
+![](img/lamexp/setup_1c.png)
 
 
 ### ZIP Package ###
 
 If you decided for the **ZIP package**, you need to open the downloaded ZIP file, e.g. ``LameXP.yyyy-mm-dd.Release-Static.Build-xxxx.zip``, in your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)).
 
-![Figure](img/lamexp/setup_2a.png)
+![](img/lamexp/setup_2a.png)
 
 This step may be slightly different, depending on what file archive software (e.g. 7-Zip or WinRAR) you are using. Select **all** files in the LameXP ZIP archive and *extract* them to a new/empty directory of your choice.
 
 *Note:* It is very important that you have write-access to the chosen destination directory. So make sure that you choose a directory where the required access rights are granted!
 
-![Figure](img/lamexp/setup_2b.png)
+![](img/lamexp/setup_2b.png)
 
 Congratulation, LameXP has been installed successfully on your computer! Now double-click on the ``LameXP.exe`` program file in order to launch the application!
 
-![Figure](img/lamexp/setup_2c.png)
+![](img/lamexp/setup_2c.png)
 
 
 ## Portable Mode ##
@@ -227,7 +229,7 @@ If you fully understand what the consequences of the "portable mode" are and sti
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
-![Figure](img/lamexp/setup_3a.png)
+![](img/lamexp/setup_3a.png)
 
 
 #### Portable Mode Warning #### {-}
@@ -264,17 +266,17 @@ First of all, you need to download the Nero AAC encoder from the official Nero D
 
 *Note:*  Although the ZIP file is sometimes called ``NeroAACCodec-1.5.1.zip``, it may actually contains version **1.5.4.0** of the Nero AAC encoder software. Check the included ``changelog.txt`` to verify this!
 
-![Figure](img/lamexp/setup_4a.png)
+![](img/lamexp/setup_4a.png)
 
 Now open the downloaded ZIP file with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and navigate to the "win32" sub-directory.
 
-![Figure](img/lamexp/setup_4b.png)
+![](img/lamexp/setup_4b.png)
 
 Finally, *extract* all the three files ``neroAacDec.exe``, ``neroAacEnc.exe`` and ``neroAacTag.exe`` into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
-![Figure](img/lamexp/setup_4c.png)
+![](img/lamexp/setup_4c.png)
 
 Once the required Nero AAC files have been put into the proper place, simply *restart* LameXP in order to enable the AAC encoding support!
 
@@ -295,13 +297,13 @@ Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, wit
 
 *Note:* The LameXP software generally expects the **latest** version of the QAAC add-in; and the QAAC add-in is designed to work with the **latest** version of the LameXP software. Make sure your files are up-to-date!
 
-![Figure](img/lamexp/setup_5a.png)
+![](img/lamexp/setup_5a.png)
 
 Please *extract* all the three files, the program ``qaac.exe`` plus its companion DLLs ``libsoxr.dll`` and ``libsoxconvolver.dll``, into the LameXP installation directory. That is the directory where your LameXP executable file, i.e. the ``LameXP.exe``, is located.
 
 *Note:* By default, the LameXP installation directory is either ``C:\Program Files (x86)\MuldeR\LameXP`` or ``C:\Program Files\MuldeR\LameXP``. However, this can be changed by the user during the setup process.
 
-![Figure](img/lamexp/setup_5b.png)
+![](img/lamexp/setup_5b.png)
 
 
 #### Install Apple AAC Encoder Libraries #### {-}
@@ -317,13 +319,13 @@ Since you usually do **not** want to *install* the complete QuickTime (or iTunes
 
 Instead, open the QuickTimer setup program, i.e. ``QuickTimeInstaller.exe``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) and *extract* the required ``AppleApplicationSupport.msi`` package.
 
-![Figure](img/lamexp/setup_5c.png)
+![](img/lamexp/setup_5c.png)
 
 After the "Apple Application Support" setup package has been extracted, you can launch it by double-clicking on the ``AppleApplicationSupport.msi`` file. Then simply follow the installer's instructions!
 
 *Note:* If you do **not** want to install the "Apple Application Support" software at all, there is an *alternative* method, that will extract only the required DLL files from the MSI package. See [*here*](https://forum.doom9.org/showpost.php?p=1718529&postcount=1221) for details&hellip;
 
-![Figure](img/lamexp/setup_5d.png)
+![](img/lamexp/setup_5d.png)
 
 Once the QAAC encoder as well as the Apple AAC encoder libraries ("Apple Application Support") have been installed properly, simply *restart* LameXP in order to enable the AAC encoding support!
 
@@ -340,19 +342,19 @@ This tutorial will teach you, step by step, how to convert your audio files usin
 
 First of all, you need to add all **source files** that you want to convert. So switch to the "Source Files" tab, just in case that tab is not active already, and then click the "Add File(s)" button.
 
-![Figure](img/lamexp/tutorial_1a.png)
+![](img/lamexp/tutorial_1a.png)
 
 This will bring up a standard file selection dialogue. Now simply select the files that you want to add and click the "Open" button. You can repeat this step multiple times, e.g. to add files from different directories.
 
-![Figure](img/lamexp/tutorial_1b.png)
+![](img/lamexp/tutorial_1b.png)
 
 All files you have added, so far, will show up in the list. You can click the "Remove" button to remove a single file from the list or "Clear" to remove them all. You can also click the "Show details" button to show details about the selected file.
 
-![Figure](img/lamexp/tutorial_1c.png)
+![](img/lamexp/tutorial_1c.png)
 
 If you want to add an *entire* directory, you can select "Open Folder" from the "File" menu, which will bring up a directory selection dialogue. "Open Folder Recursively" works in a similar way, but also includes *all* sub-directories.
 
-![Figure](img/lamexp/tutorial_1d.png)
+![](img/lamexp/tutorial_1d.png)
 
 *Did you know?* Files can also be added via [Drag &amp; Drop](http://en.wikipedia.org/wiki/Drag_and_drop). Just grab the files that you want to add in your Explorer window and drop them onto the LameXP main window (or onto the LameXP "dropbox" widget).
 
@@ -363,15 +365,15 @@ Next, you need to choose the **output directory**, i.e. the directory where the 
 
 *Note:* There are several quick navigation buttons below, which will allow you to jump quickly to your personal "Home" folder, "Desktop" folder and "Music" folder, respectively.
 
-![Figure](img/lamexp/tutorial_2a.png)
+![](img/lamexp/tutorial_2a.png)
 
 Sometimes you may wish to store the converted files in a *new* (sub-)folder. In this case, simply click the "Make New Folder" button, enter the desired folder name and hit the "OK" button.
 
-![Figure](img/lamexp/tutorial_2b.png)
+![](img/lamexp/tutorial_2b.png)
 
 The new folder is going to be created inside the current directory and will be selected automatically. You can repeat this step multiple times in order to created nested sub-folders.
 
-![Figure](img/lamexp/tutorial_2c.png)
+![](img/lamexp/tutorial_2c.png)
 
 *Did you know?* If you enable the "Save output files in the same directory where the input file is located" option, each output file will be saved to the same location where the corresponding source file resides.
 
@@ -382,19 +384,19 @@ Finally, you need to choose your **compression settings**. First, and most impor
 
 *Note:* If you are uncertain which audio format to choose, then [this article](http://lifehacker.com/5927052/whats-the-difference-between-all-these-audio-formats-and-which-one-should-i-use) by Lifehacker is a good starting point. Also see the [comparison of audio coding formats](http://en.wikipedia.org/wiki/Comparison_of_audio_coding_formats) on Wikipedia. If still uncertain, just go with good old MP3 &#x1f609;
 
-![Figure](img/lamexp/tutorial_3a.png)
+![](img/lamexp/tutorial_3a.png)
 
 Once you have decided for an audio format, you need to choose a *rate-control* mode next. The available rate-control modes include VBR (quality-base variable bitrate), ABR (average bitrate) and CBR (constant bitrate). Not all modes are available for all audio formats.
 
 *Note:* If you are uncertain which rate-control mode to chose, the guideline is that VBR mode should be preferred over ABR mode whenever possible. And CBR mode generally should be avoided. See also Wikipedia's article on [variable bitrate](http://en.wikipedia.org/wiki/Variable_bitrate) encoding.
 
-![Figure](img/lamexp/tutorial_3b.png)
+![](img/lamexp/tutorial_3b.png)
 
 Last but not least, you need to choose the desired target *bitrate* or *quality-level*. Put simply, this controls the  "quality vs. file size" trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode.
 
 *Note:* If you are uncertain which bitrate or quality-level to choose, bare in mind that a higher bitrate (or a better quality level) results in better audio quality, but also produces larger files &ndash; and vice versa. "Level 2" or "192 kbps" is a typical choice for MP3.
 
-![Figure](img/lamexp/tutorial_3c.png)
+![](img/lamexp/tutorial_3c.png)
 
 *Did you know?* You can click on the "Reset" link at any time in order to reset all available settings for all available encoders to their factory defaults.
 
@@ -403,17 +405,17 @@ Last but not least, you need to choose the desired target *bitrate* or *quality-
 
 When everything has been set up properly, the time has come to actually start the encoding process. So simply click the "Encode Now" button in order to get going!
 
-![Figure](img/lamexp/tutorial_4a.png)
+![](img/lamexp/tutorial_4a.png)
 
 This will bring up the "Processing" dialogue. LameXP will now convert all your audio files on the list. Depending on the number of audio files and depending on the performance of your system, this may take several minutes, so please be patient &#x1f609;
 
 *Note:* In order to leverage the power "multi-core" processors and thus massively speed-up the encoding process, LameXP will run multiple encoding jobs in parallel &ndash; provided that your system has multiple processor cores and that there are enough encoding jobs left in the queue.
 
-![Figure](img/lamexp/tutorial_4b.png)
+![](img/lamexp/tutorial_4b.png)
 
 The "Processing" dialogue is going to turn *green*, as soon as all encoding jobs have finished successfully. If anything went wrong, e.g. if one of the encoding jobs failed for some reason, it will turn *red* instead.
 
-![Figure](img/lamexp/tutorial_4c.png)
+![](img/lamexp/tutorial_4c.png)
 
 *Did you know?* You can double-click on a completed (or failed) job in the list, in order to bring up a dialogue with all details about the specific job. This is especially useful, if something went wrong.
 
