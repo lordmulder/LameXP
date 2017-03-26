@@ -11,6 +11,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Some improvements for "high DPI" screens: Adjust initial window size according to DPI setting
 * Updated Opus encoder/decoder libraries to v1.2-alpha2 (2017-03-03) and Opus-Tools to v0.1.10 (2017-02-22)
 * Updated MediaInfo to v0.7.93 (2017-02-28), compiled with ICL 17.0 and MSVC 12.0
+* Updated FAAD decoder to v2.7 from CVS in order to include latest libFAAD fixes (2016-11-11)
 
 ## LameXP v4.14 [2016-11-19] ## {-}
 
