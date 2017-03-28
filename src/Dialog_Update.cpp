@@ -173,6 +173,7 @@ void UpdateDialog::showEvent(QShowEvent *event)
 		ui->hintLabel->hide();
 		ui->hintIcon->hide();
 		ui->frameAnimation->hide();
+		ui->cancelLabel->hide();
 	
 		ui->progressBar->setMaximum(m_thread->getMaximumProgress());
 		ui->progressBar->setValue(0);
@@ -199,7 +200,16 @@ void UpdateDialog::closeEvent(QCloseEvent *event)
 
 void UpdateDialog::keyPressEvent(QKeyEvent *e)
 {
-	if(e->key() == Qt::Key_F11)
+	if (e->key() == Qt::Key_Escape)
+	{
+		if (!m_thread.isNull() && m_thread->isRunning())
+		{
+			ui->cancelLabel->hide();
+			ui->statusLabel->setText(tr("Stopping update check, please wait..."));
+			m_thread->cancel();
+		}
+	}
+	else if(e->key() == Qt::Key_F11)
 	{
 		if(ui->closeButton->isEnabled()) logButtonClicked();
 	}
@@ -260,6 +270,7 @@ void UpdateDialog::checkForUpdates(void)
 	if(ui->infoLabel->isVisible()) ui->infoLabel->hide();
 	if(ui->hintLabel->isVisible()) ui->hintLabel->hide();
 	if(ui->hintIcon->isVisible()) ui->hintIcon->hide();
+	ui->cancelLabel->show();
 	ui->frameAnimation->show();
 
 	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -312,6 +323,11 @@ void UpdateDialog::threadStatusChanged(const int status)
 		SHOW_HINT(tr("Sorry, the update server might be busy at this time. Plase try again later."), ":/icons/server_error.png");
 		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
 		break;
+	case MUtils::UpdateChecker::UpdateStatus_CancelledByUser:
+		ui->statusLabel->setText(tr("Update check has been cancelled!"));
+		SHOW_HINT(tr("The update check has been cancelled by the user. Please try again later."), ":/icons/server_error.png");
+		UPDATE_TASKBAR(MUtils::Taskbar7::TASKBAR_STATE_NORMAL, ":/icons/exclamation.png");
+		break;
 	default:
 		qWarning("Unknown status %d !!!", int(status));
 	}
@@ -332,6 +348,7 @@ void UpdateDialog::threadFinished(void)
 	const bool bSuccess = m_thread->getSuccess();
 	
 	ui->closeButton->setEnabled(true);
+	ui->cancelLabel->hide();
 	if(ui->frameAnimation->isVisible()) ui->frameAnimation->hide();
 	ui->progressBar->setValue(ui->progressBar->maximum());
 
