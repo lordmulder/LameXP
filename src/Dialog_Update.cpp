@@ -84,7 +84,7 @@ UpdateDialog::UpdateDialog(const SettingsModel *const settings, QWidget *parent)
 	m_updaterProcess(NULL),
 	m_binaryUpdater(lamexp_tools_lookup("wupdate.exe")),
 	m_binaryWGet(lamexp_tools_lookup("wget.exe")),
-	m_binaryNC(lamexp_tools_lookup("nc.exe")),
+	m_binaryNC(lamexp_tools_lookup("netc.exe")),
 	m_binaryGnuPG(lamexp_tools_lookup("gpgv.exe")),
 	m_binaryKeys(lamexp_tools_lookup("keyring.gpg"))
 {

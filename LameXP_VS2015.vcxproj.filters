@@ -472,12 +472,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.nc-i386.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.nc-x64.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -554,6 +548,9 @@
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.faad-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.netc.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -962,12 +959,6 @@
     <CustomBuild Include="res\Tools.mpg123-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.nc-i386.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.nc-x64.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.oggdec.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1037,16 +1028,19 @@
     <CustomBuild Include="res\Tools.wvunpack-i386.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools.faad-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.faad-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
     </None>
-    <None Include="res\Tools.faad-i386.qrc">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="res\Tools.faad-sse2.qrc">
+    <None Include="res\Tools.netcat.qrc">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>
