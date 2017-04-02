@@ -12,6 +12,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated Opus encoder/decoder libraries to v1.2-alpha2 (2017-03-03) and Opus-Tools to v0.1.10 (2017-02-22)
 * Updated MediaInfo to v0.7.93 (2017-02-28), compiled with ICL 17.0 and MSVC 12.0
 * Updated FAAD decoder to v2.7 from CVS in order to include latest libFAAD fixes (2016-11-11)
+* Some tweaks to the auto-update function in order to speed-up the update check in most situations
 
 ## LameXP v4.14 [2016-11-19] ## {-}
 
