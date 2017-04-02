@@ -229,27 +229,6 @@
     <ClCompile Include="src\Encoder_MAC.cpp">
       <Filter>Source Files\Encoders</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Misc_C.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Misc_B.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Misc_A.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_D.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_C.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_B.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Encd_A.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Sounds.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -403,12 +382,6 @@
     <ClCompile Include="tmp\LameXP\MOC_CustomEventFilter.cpp">
       <Filter>Generated Files\MOC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_A.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_B.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="src\Encoder_AAC_FDK.cpp">
       <Filter>Source Files\Encoders</Filter>
     </ClCompile>
@@ -424,7 +397,160 @@
     <ClCompile Include="src\FileHash.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools_Decd_C.cpp">
+    <ClCompile Include="tmp\LameXP\QRC_Tools.aften-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.aften-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.aften-x64.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.avs2wav.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.dcaenc.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.elevator.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x86-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x86-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.gpgv.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.keyring.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x64-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x64-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x86-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x86-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mediaInfo-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mediainfo-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mediainfo-x64.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mpcdec.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-x64.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-x64.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.shorten.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.sox.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.speexdec.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.tag.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.tta.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.valdec.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.vorbiscomment.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wget.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wma2wav.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wupdate.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x64.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.faad-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.faad-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.netc.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -743,38 +869,11 @@
     <CustomBuild Include="src\Registry_Encoder.h">
       <Filter>Header Files\Misc</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools_Encd_A.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Misc_A.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Encd_B.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Misc_B.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Encd_C.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Encd_D.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Misc_C.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Sounds.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="src\Encoder_MAC.h">
       <Filter>Header Files\Encoders</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Decd_A.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools_Decd_B.qrc">
-      <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="src\Encoder_AAC_FDK.h">
       <Filter>Header Files\Encoders</Filter>
@@ -782,7 +881,157 @@
     <CustomBuild Include="src\Model_FileExts.h">
       <Filter>Header Files\Models</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools_Decd_C.qrc">
+    <CustomBuild Include="res\Tools.wvunpack-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.aften-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.aften-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.aften-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.avs2wav.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.dcaenc.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.elevator.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x64-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x86-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.flac-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.gpgv.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.keyring.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x64-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x86-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.lame-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mediaInfo-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mediainfo-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mediainfo-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpcdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpg123-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpg123-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mpg123-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggenc2-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggenc2-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggenc2-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusdec-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.opusenc-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.refalac-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.refalac-x64.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.shorten.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.sox.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.speexdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.tag.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.tta.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.valdec.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.vorbiscomment.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wget.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wma2wav.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wupdate.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wvunpack-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.faad-i386.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.faad-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -790,6 +1039,9 @@
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
+    </None>
+    <None Include="res\Tools.netcat.qrc">
+      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
