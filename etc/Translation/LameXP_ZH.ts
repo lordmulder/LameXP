@@ -76,7 +76,6 @@
         <location filename="../../src/Dialog_About.cpp" line="841"/>
         <location filename="../../src/Dialog_About.cpp" line="848"/>
         <location filename="../../src/Dialog_About.cpp" line="855"/>
-        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>在GNU宽通用公共许可证的条款下发布。</translation>
     </message>
@@ -101,32 +100,27 @@
         <translation>开放和无专利的无损音频压缩技术。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="853"/>
-        <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation>Netcat for NT - TCP/IP瑞士军刀</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="860"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation>Silk Icons - 超过700种PNG图标</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="869"/>
+        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>作者Mark James， 在Creative Commons &apos;BY&apos;许可证下发布。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="867"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation>愤怒的小鸡和鬼魂尖叫音效</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="876"/>
+        <location filename="../../src/Dialog_About.cpp" line="869"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>By Alexander, 在Creative Commons &apos;BY&apos;许可证下发布。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="937"/>
+        <location filename="../../src/Dialog_About.cpp" line="930"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
@@ -262,7 +256,7 @@
         <translation>avs2wav - Avisynth到WAV音频转换器</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="881"/>
+        <location filename="../../src/Dialog_About.cpp" line="874"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP的版权作为一个整体属于LoRd_MuldeR。在 LameXP 中使用的第三方软件著作权属于原作者。</translation>
     </message>
@@ -322,7 +316,7 @@
         <translation>特别感谢:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
+        <location filename="../../src/Dialog_About.cpp" line="853"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - 终极可执行程序文件压缩器</translation>
     </message>
@@ -3451,7 +3445,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation type="unfinished"></translation>
+        <translation>按Esc键取消检查更新……</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
@@ -3512,7 +3506,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在终止更新检查，请稍候……</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="298"/>
@@ -3542,12 +3536,12 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
-        <translation type="unfinished"></translation>
+        <translation>更新检查已取消！</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户取消了更新检查。请稍候再试。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="396"/>

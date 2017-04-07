@@ -76,7 +76,6 @@
         <location filename="../../src/Dialog_About.cpp" line="841"/>
         <location filename="../../src/Dialog_About.cpp" line="848"/>
         <location filename="../../src/Dialog_About.cpp" line="855"/>
-        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Veröffentlicht unter den Bestimmungen der GNU Lesser General Public License.</translation>
     </message>
@@ -101,32 +100,27 @@
         <translation>Offene und patentfreie Technlogie zur verlustfreien Audiokompression.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="853"/>
-        <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation>Netcat for NT - TCP/IP Schweizer Taschenmesser</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="860"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation>Silk Icons - Über 700 Icons im PNG-Format</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="869"/>
+        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Von Mark James, veröffentlicht unter der Creative Commons &apos;BY&apos; Lizenz.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="867"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation>Angry Chicken und Ghost Scream Sound</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="876"/>
+        <location filename="../../src/Dialog_About.cpp" line="869"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation>Von Alexander, veröffentlicht unter der Creative Commons &apos;BY&apos; Lizenz.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="937"/>
+        <location filename="../../src/Dialog_About.cpp" line="930"/>
         <source>n/a</source>
         <translation>n/v</translation>
     </message>
@@ -146,7 +140,7 @@
         <translation>Veröffentlicht unter den Bestimmungen der GNU General Public License.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="881"/>
+        <location filename="../../src/Dialog_About.cpp" line="874"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>Das Urheberrecht an LameXP als Gesamtwerk liegt bei LoRd_MuldeR. Das Urheberrecht an der eingesetzten Drittsoftware liegt bei den jeweiligen Autoren.</translation>
     </message>
@@ -322,7 +316,7 @@
         <translation>Besonderen Dank an:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
+        <location filename="../../src/Dialog_About.cpp" line="853"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation></translation>
     </message>

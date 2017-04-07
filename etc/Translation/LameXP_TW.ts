@@ -76,7 +76,6 @@
         <location filename="../../src/Dialog_About.cpp" line="841"/>
         <location filename="../../src/Dialog_About.cpp" line="848"/>
         <location filename="../../src/Dialog_About.cpp" line="855"/>
-        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>GNU 較小的通用公共許可的條款下發布.</translation>
     </message>
@@ -101,32 +100,27 @@
         <translation>打開和專利自由無損音頻壓縮技術.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="853"/>
-        <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="860"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="869"/>
+        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="867"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="876"/>
+        <location filename="../../src/Dialog_About.cpp" line="869"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="937"/>
+        <location filename="../../src/Dialog_About.cpp" line="930"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
@@ -262,7 +256,7 @@
         <translation>avs2wav - Avisynth到WAV音頻轉換器</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="881"/>
+        <location filename="../../src/Dialog_About.cpp" line="874"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>LameXP是作為一個整體版權由 LoRd_MuldeR 保護.在 LameXP 中使用的第三方軟件作著權屬于第三方.</translation>
     </message>
@@ -322,7 +316,7 @@
         <translation>特別感謝:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
+        <location filename="../../src/Dialog_About.cpp" line="853"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - 終極可執行程序文件壓縮器</translation>
     </message>

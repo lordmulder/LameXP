@@ -132,7 +132,6 @@
         <location filename="../../src/Dialog_About.cpp" line="841"/>
         <location filename="../../src/Dialog_About.cpp" line="848"/>
         <location filename="../../src/Dialog_About.cpp" line="855"/>
-        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>Released under the terms of the GNU Lesser General Public License.</source>
         <translation>Kiadva a GNU Kevésbé általános közreadási szerződés feltételei alapján</translation>
     </message>
@@ -323,41 +322,36 @@
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="853"/>
-        <source>Netcat for NT - TCP/IP Swiss Army Knife</source>
-        <translation>NT netcat - TCP/IP svájci bicska</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="860"/>
         <source>UPX - The Ultimate Packer for eXecutables</source>
         <translation>UPX - Végrehajtható állomány tömörítő</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="867"/>
+        <location filename="../../src/Dialog_About.cpp" line="860"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="869"/>
+        <location filename="../../src/Dialog_About.cpp" line="862"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="874"/>
+        <location filename="../../src/Dialog_About.cpp" line="867"/>
         <source>Angry Chicken and Ghost Scream sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="876"/>
+        <location filename="../../src/Dialog_About.cpp" line="869"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="881"/>
+        <location filename="../../src/Dialog_About.cpp" line="874"/>
         <source>The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.</source>
         <translation>A LameXP szerzői joga teljes egészében LoRd_MuldeR-hez tartozik. A LameXP-ben használt 3. féltől szármató szoftverek szerzői jogai az egyes szerzőkhöz tartoznak.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="937"/>
+        <location filename="../../src/Dialog_About.cpp" line="930"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
