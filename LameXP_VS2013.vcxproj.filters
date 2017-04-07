@@ -550,7 +550,7 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.faad-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.netc.cpp">
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mcat.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1034,14 +1034,14 @@
     <CustomBuild Include="res\Tools.faad-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools.mcat.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
-    </None>
-    <None Include="res\Tools.netcat.qrc">
-      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
