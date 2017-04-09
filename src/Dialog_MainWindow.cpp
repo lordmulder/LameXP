@@ -3012,7 +3012,7 @@ void MainWindow::makeFolderButtonClicked(void)
 {
 	ABORT_IF_BUSY;
 
-	if(!m_fileSystemModel)
+	if(m_fileSystemModel.isNull())
 	{
 		qWarning("File system model not initialized yet!");
 		return;
@@ -3031,7 +3031,7 @@ void MainWindow::makeFolderButtonClicked(void)
 	}
 	else if(!m_metaData->album().isEmpty())
 	{
-		suggestedName =m_metaData->album();
+		suggestedName = m_metaData->album();
 	}
 	else
 	{
@@ -3059,7 +3059,7 @@ void MainWindow::makeFolderButtonClicked(void)
 		}
 	}
 	
-	suggestedName = MUtils::clean_file_name(suggestedName);
+	suggestedName = MUtils::clean_file_name(suggestedName, true);
 
 	while(true)
 	{
@@ -3068,7 +3068,7 @@ void MainWindow::makeFolderButtonClicked(void)
 
 		if(bApplied)
 		{
-			folderName = MUtils::clean_file_path(folderName.simplified());
+			folderName = MUtils::clean_file_path(folderName.simplified(), true);
 
 			if(folderName.isEmpty())
 			{
@@ -4039,7 +4039,7 @@ void MainWindow::renameOutputPatternChanged(const QString &text, const bool &sil
 	pattern.replace("<Year>", "2001", Qt::CaseInsensitive);
 	pattern.replace("<Comment>", "Encoded by LameXP", Qt::CaseInsensitive);
 
-	const QString patternClean = MUtils::clean_file_name(pattern);
+	const QString patternClean = MUtils::clean_file_name(pattern, false);
 
 	if(pattern.compare(patternClean))
 	{
@@ -4131,7 +4131,7 @@ void  MainWindow::renameRegExpReplaceChanged(const QString &text, const bool &si
 		}
 	}
 
-	if(replacement.compare(MUtils::clean_file_name(replacement)))
+	if(replacement.compare(MUtils::clean_file_name(replacement, false)))
 	{
 		if(ui->lineEditRenameRegExp_Replace->palette().color(QPalette::Text) != Qt::red)
 		{

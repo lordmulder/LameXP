@@ -8,6 +8,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 ## LameXP v4.15 [2017-??-??] ## {-}
 * Fixed a bug in auto-rename feature, that caused problems when a meta-tag contained path separators
 * Fixed included MediaInfo binary not working on processor *without* SSE2 support
+* Improved file name generation from meta-tags containing characters that are forbidden in file names
 * Some improvements for "high DPI" screens: Adjust initial window size according to DPI setting
 * Updated Opus encoder/decoder libraries to v1.2-alpha2 (2017-03-03) and Opus-Tools to v0.1.10 (2017-02-22)
 * Updated MediaInfo to v0.7.93 (2017-02-28), compiled with ICL 17.0 and MSVC 12.0

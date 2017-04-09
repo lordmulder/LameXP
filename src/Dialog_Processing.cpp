@@ -985,7 +985,7 @@ void ProcessingDialog::writePlayList(void)
 	}
 
 	//Clean playlist name
-	playListName = MUtils::clean_file_name(playListName);
+	playListName = MUtils::clean_file_name(playListName, true);
 
 	//Create list of audio files
 	for(int i = 0; i < m_allJobs.count(); i++)

@@ -420,7 +420,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	const QString baseName = sourceFile.completeBaseName();
-	QDir targetDir(MUtils::clean_file_path(m_outputDirectory.isEmpty() ? sourceFile.canonicalPath() : m_outputDirectory));
+	QDir targetDir(MUtils::clean_file_path(m_outputDirectory.isEmpty() ? sourceFile.canonicalPath() : m_outputDirectory, false));
 
 	//Prepend relative source file path?
 	if(m_prependRelativeSourcePath && !m_outputDirectory.isEmpty())
@@ -434,7 +434,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 				if (!sourceDir.cdUp()) break;
 			}
 			const QString postfix = QFileInfo(sourceDir.relativeFilePath(sourceFile.canonicalFilePath())).path();
-			targetDir.setPath(MUtils::clean_file_path(QString("%1/%2").arg(targetDir.absolutePath(), postfix)));
+			targetDir.setPath(MUtils::clean_file_path(QString("%1/%2").arg(targetDir.absolutePath(), postfix), false));
 		}
 	}
 	
@@ -462,7 +462,7 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Apply rename pattern
-	const QString fileName = MUtils::clean_file_name(applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo())));
+	const QString fileName = MUtils::clean_file_name(applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo())), true);
 
 	//Generate full output path
 	const QString fileExt = m_renameFileExt.isEmpty() ? QString::fromUtf8(m_encoder->toEncoderInfo()->extension()) : m_renameFileExt;
@@ -742,7 +742,7 @@ void ProcessThread::setRenameRegExp(const QString &search, const QString &replac
 
 void ProcessThread::setRenameFileExt(const QString &fileExtension)
 {
-	m_renameFileExt = MUtils::clean_file_name(fileExtension).simplified();
+	m_renameFileExt = MUtils::clean_file_name(fileExtension, false).simplified();
 	while(m_renameFileExt.startsWith('.'))
 	{
 		m_renameFileExt = m_renameFileExt.mid(1).trimmed();
