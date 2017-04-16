@@ -511,9 +511,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.shorten.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.sox.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.speexdec.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -551,6 +548,15 @@
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.mcat.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.sox-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.sox-i386.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.sox-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -998,9 +1004,6 @@
     <CustomBuild Include="res\Tools.shorten.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.sox.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.speexdec.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1042,6 +1045,15 @@
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
+    </None>
+    <None Include="res\Tools.sox-avx.qrc">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\Tools.sox-i386.qrc">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\Tools.sox-sse2.qrc">
+      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
