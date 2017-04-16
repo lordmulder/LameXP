@@ -48,6 +48,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
+//Const
+static const quint32 MAX_LOCK_DELAY = 16384U;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 // WARNING: Passing file descriptors into Qt does NOT work with dynamically linked CRT!
@@ -58,6 +61,11 @@
 #endif
 
 #define VALID_HANDLE(H) (((H) != NULL) && ((H) != INVALID_HANDLE_VALUE))
+
+static __forceinline quint32 NEXT_DELAY(const quint32 delay)
+{
+	return (delay > 0U) ? (delay * 2U) : 1U;
+}
 
 static bool PROTECT_HANDLE(const HANDLE &h, const bool &lock)
 {
@@ -92,17 +100,20 @@ static void CLOSE_FILE(int &fd)
 
 static __forceinline void doWriteOutput(QFile &outFile, const QResource *const resource)
 {
-	for(int i = 0; i < 64; i++)
+	for (quint32 delay = 0U; delay <= MAX_LOCK_DELAY; delay = NEXT_DELAY(delay))
 	{
+		if (delay > 0U)
+		{
+			if (delay <= 1U)
+			{
+				qWarning("Failed to open file on first attempt, retrying...");
+			}
+			MUtils::OS::sleep_ms(delay);
+		}
 		if(outFile.open(QIODevice::WriteOnly))
 		{
-			break;
+			break; /*file opened successfully*/
 		}
-		if(i == 0)
-		{
-			qWarning("Failed to open file on first attemp, retrying...");
-		}
-		Sleep(25);
 	}
 	
 	//Write data to file
@@ -141,27 +152,38 @@ static __forceinline void doLockFile(HANDLE &fileHandle, const QString &filePath
 	fileHandle = INVALID_HANDLE_VALUE;
 
 	//Try to open the file!
-	for(int i = 0; i < 64; i++)
+	for(quint32 delay = 0U; delay <= MAX_LOCK_DELAY; delay = NEXT_DELAY(delay))
 	{
+		if (delay > 0U)
+		{
+			if (delay <= 1U)
+			{
+				qWarning("Failed to open file on first attempt, retrying...");
+			}
+			MUtils::OS::sleep_ms(delay);
+		}
 		const HANDLE hTemp = CreateFileW(MUTILS_WCHR(QDir::toNativeSeparators(filePath)), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, NULL, NULL);
 		if(VALID_HANDLE(hTemp))
 		{
 			PROTECT_HANDLE(fileHandle = hTemp, true);
 			break; /*file opened successfully*/
 		}
-		if(i == 0)
-		{
-			qWarning("Failed to open file on first attemp, retrying...");
-		}
-		Sleep(1);
 	}
 	
 	//Now try to actually lock the file!
 	if (VALID_HANDLE(fileHandle))
 	{
-		for (int i = 0; i < 64; i++)
+		for (quint32 delay = 0U; delay <= MAX_LOCK_DELAY; delay = NEXT_DELAY(delay))
 		{
 			LARGE_INTEGER fileSize;
+			if (delay > 0U)
+			{
+				if (delay <= 1U)
+				{
+					qWarning("Failed to lock file on first attempt, retrying...");
+				}
+				MUtils::OS::sleep_ms(delay);
+			}
 			if (GetFileSizeEx(fileHandle, &fileSize))
 			{
 				OVERLAPPED overlapped = { 0U, 0U, 0U, 0U, 0U };
@@ -170,11 +192,6 @@ static __forceinline void doLockFile(HANDLE &fileHandle, const QString &filePath
 					success = true;
 					break; /*file locked successfully*/
 				}
-				Sleep(1);
-			}
-			if (i == 0)
-			{
-				qWarning("Failed to lock file on first attemp, retrying...");
 			}
 		}
 	}
@@ -212,11 +229,20 @@ static __forceinline void doValidateHash(HANDLE &fileHandle, const int &fileDesc
 	else
 	{
 		checkFile.setFileName(filePath);
-		for(int i = 0; i < 64; i++)
+		for (quint32 delay = 0U; delay <= MAX_LOCK_DELAY; delay = NEXT_DELAY(delay))
 		{
-			if(checkFile.open(QIODevice::ReadOnly)) break;
-			if(!i) qWarning("Failed to re-open file on first attemp, retrying...");
-			Sleep(100);
+			if (delay > 0U)
+			{
+				if (delay <= 1U)
+				{
+					qWarning("Failed to open file on first attempt, retrying...");
+				}
+				MUtils::OS::sleep_ms(delay);
+			}
+			if (checkFile.open(QIODevice::ReadOnly))
+			{
+				break; /*file locked successfully*/
+			}
 		}
 	}
 
@@ -243,13 +269,20 @@ static __forceinline void doValidateHash(HANDLE &fileHandle, const int &fileDesc
 
 static __forceinline bool doRemoveFile(const QString &filePath)
 {
-	for(int i = 0; i < 32; i++)
+	for (quint32 delay = 0U; delay <= MAX_LOCK_DELAY / 4; delay = NEXT_DELAY(delay))
 	{
+		if (delay > 0U)
+		{
+			if (delay <= 1U)
+			{
+				qWarning("Failed to delete file on first attempt, retrying...");
+			}
+			MUtils::OS::sleep_ms(delay);
+		}
 		if(MUtils::remove_file(filePath))
 		{
-			return true;
+			return true; /*file removed successfully*/
 		}
-		MUtils::OS::sleep_ms(1);
 	}
 	return false;
 }
