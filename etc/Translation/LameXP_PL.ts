@@ -2997,143 +2997,143 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="119"/>
+        <location filename="../../src/Thread_Process.cpp" line="117"/>
         <source>Starting...</source>
         <translation type="unfinished">Rozpoczynanie...</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="157"/>
+        <location filename="../../src/Thread_Process.cpp" line="154"/>
         <source>Skipped.</source>
         <translation type="unfinished">Pominięto.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="162"/>
+        <location filename="../../src/Thread_Process.cpp" line="159"/>
         <source>Not found!</source>
         <translation type="unfinished">Nie znaleziono!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="242"/>
+        <location filename="../../src/Thread_Process.cpp" line="239"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation type="unfinished">UWAGA: Plik po zdekodowaniu przekracza 4 GB, mogą wystąpić problemy!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="251"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>The format of this file is NOT supported:</source>
         <translation type="unfinished">Format tego pliku NIE jest obsługiwany:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="251"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Container Format:</source>
         <translation type="unfinished">Format kontenera:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="251"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Audio Format:</source>
         <translation type="unfinished">Format dźwięku:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="252"/>
+        <location filename="../../src/Thread_Process.cpp" line="249"/>
         <source>Unsupported!</source>
         <translation type="unfinished">Nieobsługiwany!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Done.</source>
         <translation type="unfinished">Zrobione.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Aborted!</source>
         <translation type="unfinished">Przerwano!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Failed!</source>
         <translation type="unfinished">Niepowodzenie!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="372"/>
         <source>Encoding</source>
         <translation type="unfinished">Kompresowanie</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>Analyzing</source>
         <translation type="unfinished">Analizowanie</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="378"/>
         <source>Filtering</source>
         <translation type="unfinished">Filtrowanie</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="384"/>
+        <location filename="../../src/Thread_Process.cpp" line="381"/>
         <source>Decoding</source>
         <translation type="unfinished">Dekodowanie</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="406"/>
+        <location filename="../../src/Thread_Process.cpp" line="403"/>
         <source>The source audio file could not be found:</source>
         <translation type="unfinished">Źródłowy plik dźwiękowy nie został odnaleziony:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="414"/>
+        <location filename="../../src/Thread_Process.cpp" line="411"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation type="unfinished">Źródłowy plik dźwiękowy nie mógł zostać otworzony:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="447"/>
+        <location filename="../../src/Thread_Process.cpp" line="444"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation type="unfinished">Lokalizacja docelowa nie istnieje lu NIE mogła zostać utworzona:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="456"/>
+        <location filename="../../src/Thread_Process.cpp" line="453"/>
         <source>The target output directory is NOT writable:</source>
         <translation type="unfinished">Nie można zapisać do lokalizacji docelowej:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="519"/>
         <source>Unknown File Name</source>
         <translation type="unfinished">Nieznana nazwa pliku</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="524"/>
+        <location filename="../../src/Thread_Process.cpp" line="521"/>
         <source>Unknown Title</source>
         <translation type="unfinished">Nieznany Tytuł</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="525"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown Artist</source>
         <translation type="unfinished">Nieznany Artysta</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="526"/>
+        <location filename="../../src/Thread_Process.cpp" line="523"/>
         <source>Unknown Album</source>
         <translation type="unfinished">Nieznany Album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="528"/>
+        <location filename="../../src/Thread_Process.cpp" line="525"/>
         <source>Unknown Comment</source>
         <translation type="unfinished">Nieznany Komentarz</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="474"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation type="unfinished">Plik wynikowy już istnieje, zostanie pominięty plik:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="475"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation type="unfinished">Jeśli nie chcesz aby istniejące pliki były pomijane, zmień tryb nadpisywania!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="482"/>
+        <location filename="../../src/Thread_Process.cpp" line="479"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation type="unfinished">Plik wynikowy już istnieje, zostanie usunięty plik:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="496"/>
+        <location filename="../../src/Thread_Process.cpp" line="493"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation type="unfinished">Usuwanie istniejącego pliku zakończone niepowodzeniem, nowy plik zostanie zapisany pod inną nazwą!</translation>
     </message>

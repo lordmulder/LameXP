@@ -2980,143 +2980,143 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="119"/>
+        <location filename="../../src/Thread_Process.cpp" line="117"/>
         <source>Starting...</source>
         <translation>Indítás...</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="157"/>
+        <location filename="../../src/Thread_Process.cpp" line="154"/>
         <source>Skipped.</source>
         <translation>Kihagyva.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="162"/>
+        <location filename="../../src/Thread_Process.cpp" line="159"/>
         <source>Not found!</source>
         <translation>Nem található!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="242"/>
+        <location filename="../../src/Thread_Process.cpp" line="239"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>FIGYELEM: A dekódolt fájl mérete meghaladja a 4 GB-ot. Ez problémákat okozhat!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="251"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>The format of this file is NOT supported:</source>
         <translation>A fájl formátuma NEM támogatott:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="251"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Container Format:</source>
         <translation>Tárolási formátum:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="251"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Audio Format:</source>
         <translation>Hangformátum:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="252"/>
+        <location filename="../../src/Thread_Process.cpp" line="249"/>
         <source>Unsupported!</source>
         <translation>Nem támogatott!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Aborted!</source>
         <translation>Megszakítva!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Done.</source>
         <translation>Kész.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="358"/>
+        <location filename="../../src/Thread_Process.cpp" line="355"/>
         <source>Failed!</source>
         <translation>Sikertelen!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="372"/>
         <source>Encoding</source>
         <translation>Kódolás</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>Analyzing</source>
         <translation>Elemzés</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="378"/>
         <source>Filtering</source>
         <translation>Szűrés</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="384"/>
+        <location filename="../../src/Thread_Process.cpp" line="381"/>
         <source>Decoding</source>
         <translation>Dekódolás</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="406"/>
+        <location filename="../../src/Thread_Process.cpp" line="403"/>
         <source>The source audio file could not be found:</source>
         <translation>A forrás hangfájl nem található:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="414"/>
+        <location filename="../../src/Thread_Process.cpp" line="411"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>A forrás hangfájl nem nyitható meg olvasásra:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="447"/>
+        <location filename="../../src/Thread_Process.cpp" line="444"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>A cél kimeneti könyvtár nem létezik, és NEM hozható létre:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="456"/>
+        <location filename="../../src/Thread_Process.cpp" line="453"/>
         <source>The target output directory is NOT writable:</source>
         <translation>A cél kimeneti könyvtár NEM írható:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="519"/>
         <source>Unknown File Name</source>
         <translation>Ismeretlen fájlnév</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="524"/>
+        <location filename="../../src/Thread_Process.cpp" line="521"/>
         <source>Unknown Title</source>
         <translation>Ismeretlen cím</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="525"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown Artist</source>
         <translation>Ismeretlen előadó</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="526"/>
+        <location filename="../../src/Thread_Process.cpp" line="523"/>
         <source>Unknown Album</source>
         <translation>Ismeretlen album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="528"/>
+        <location filename="../../src/Thread_Process.cpp" line="525"/>
         <source>Unknown Comment</source>
         <translation>Ismeretlen hozzászólás</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="474"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>A cél kimeneti fájl már létezik, ez a fájl ki lesz hagyva:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="475"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Ha nem szeretné a meglévő fájlokat kihagyni, kérjük, változtassa meg a felülírási módot!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="482"/>
+        <location filename="../../src/Thread_Process.cpp" line="479"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>A cél kimeneti fájl már létezik, a meglévő fájl törlésre kerül:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="496"/>
+        <location filename="../../src/Thread_Process.cpp" line="493"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Nem sikerült törölni a meglévő cél fájlt. Az állomány másik fájlnéven lesz elmentve!</translation>
     </message>

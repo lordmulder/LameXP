@@ -352,7 +352,7 @@ Function .onInit
 	
 	# Running on Windows NT family?
 	${IfNot} ${IsNT}
-		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does *not* support Windows 9x or Windows ME!"
+		MessageBox MB_TOPMOST|MB_ICONSTOP "Sorry, this application does *not* support Windows 9x/ME!"
 		ExecShell "open" "http://windows.microsoft.com/"
 		Quit
 	${EndIf}
@@ -368,23 +368,31 @@ Function .onInit
 	${If} ${IsWinXP}
 		${IfNot} ${RunningX64} # Windows XP 32-Bit, requires Service Pack 3
 		${AndIf} ${AtMostServicePack} 2
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP with Service Pack 3 installed!"
-			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 3 for Windows XP now?" IDYES`
-				ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=24"
-			${Else}
-				ExecShell "open" "http://windowsupdate.microsoft.com/"
-			${EndIf}
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Service Pack 3 for Windows XP.$\nPlease install the required Service Pack and retry!"
 			Quit
 		${EndIf}
 		${If} ${RunningX64} # Windows XP 64-Bit, requires Service Pack 2
 		${AndIf} ${AtMostServicePack} 1
-			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Windows XP x64 Edition with Service Pack 2 installed!"
-			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONQUESTION|MB_YESNO "Do you want to download Service Pack 2 for Windows XP x64 Edition now?" IDYES`
-				ExecShell "open" "http://www.microsoft.com/en-us/download/details.aspx?id=17791"
-			${Else}
-				ExecShell "open" "http://windowsupdate.microsoft.com/"
-			${EndIf}
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Service Pack 2 for Windows XP x64.$\nPlease install the required Service Pack and retry!"
 			Quit
+		${EndIf}
+		${IfNot} ${UnattendedMode}
+			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears you are still running Windows XP, which reached $\"end of life$\" in April 2014. This means you are running an outdated operating system that is no longer receiving any updates. By now, there are many known security vulnerabilities which are never going to be fixed! We highly recommend updating to a contemporary operating system." IDCANCEL`
+				Quit
+			${EndIf}
+		${EndIf}
+	${EndIf}
+
+	# Running on Windows Vista?
+	${If} ${IsWinVista}
+		${If} ${AtMostServicePack} 1
+			MessageBox MB_TOPMOST|MB_ICONEXCLAMATION "This application requires Service Pack 2 for Windows Vista.$\nPlease install the required Service Pack and retry!"
+			Quit
+		${EndIf}
+		${IfNot} ${UnattendedMode}
+			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears you are still running Windows Vista, which reached $\"end of life$\" in April 2017. This means you are running an outdated operating system that is no longer receiving any updates. By now, there are many known security vulnerabilities which are never going to be fixed! We highly recommend updating to a contemporary operating system." IDCANCEL`
+				Quit
+			${EndIf}
 		${EndIf}
 	${EndIf}
 
