@@ -140,7 +140,7 @@ OpusEncoder::~OpusEncoder(void)
 {
 }
 
-bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
+bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -214,7 +214,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if (checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

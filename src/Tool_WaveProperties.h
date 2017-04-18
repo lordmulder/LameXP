@@ -33,7 +33,7 @@ public:
 	WaveProperties(void);
 	~WaveProperties(void);
 
-	bool detect(const QString &sourceFile, AudioFileModel_TechInfo *info, volatile bool *abortFlag);
+	bool detect(const QString &sourceFile, AudioFileModel_TechInfo *info, QAtomicInt &abortFlag);
 
 private:
 	const QString m_binary;

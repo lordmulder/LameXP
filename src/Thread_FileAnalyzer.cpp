@@ -56,6 +56,9 @@ static inline void SAFE_APPEND_STRING(QStringList &list, const QString &str)
 	}
 }
 
+//Utils
+#define IS_ABORTED (!(!m_bAborted))
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -68,9 +71,6 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 	m_templateFile(NULL),
 	m_pool(NULL)
 {
-	m_bSuccess = false;
-	m_bAborted = false;
-
 	m_filesAccepted = 0;
 	m_filesRejected = 0;
 	m_filesDenied = 0;
@@ -144,7 +144,7 @@ const char *FileAnalyzer::g_tags_aud[] =
 
 void FileAnalyzer::run()
 {
-	m_bSuccess = false;
+	m_bSuccess.fetchAndStoreOrdered(0);
 
 	m_tasksCounterNext = 0;
 	m_tasksCounterDone = 0;
@@ -207,7 +207,7 @@ void FileAnalyzer::run()
 	m_pool->waitForDone();
 
 	//Was opertaion aborted?
-	if(m_bAborted)
+	if(IS_ABORTED)
 	{
 		qWarning("Operation cancelled by user!");
 		return;
@@ -228,8 +228,7 @@ void FileAnalyzer::run()
 	}
 
 	qDebug("All files added.\n");
-	m_bSuccess = true;
-
+	m_bSuccess.fetchAndStoreOrdered(1);
 	QThread::msleep(333);
 }
 
@@ -239,7 +238,7 @@ void FileAnalyzer::run()
 
 bool FileAnalyzer::analyzeNextFile(void)
 {
-	if(!(m_inputFiles.isEmpty() || m_bAborted))
+	if(!(m_inputFiles.isEmpty() || IS_ABORTED))
 	{
 		const unsigned int taskId = m_tasksCounterNext++;
 		const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());
@@ -250,7 +249,7 @@ bool FileAnalyzer::analyzeNextFile(void)
 			m_timer->restart();
 		}
 	
-		AnalyzeTask *task = new AnalyzeTask(taskId, currentFile, m_templateFile->filePath(), &m_bAborted);
+		AnalyzeTask *task = new AnalyzeTask(taskId, currentFile, m_templateFile->filePath(), m_bAborted);
 		connect(task, SIGNAL(fileAnalyzed(const unsigned int, const int, AudioFileModel)), this, SLOT(taskFileAnalyzed(unsigned int, const int, AudioFileModel)), Qt::QueuedConnection);
 		connect(task, SIGNAL(taskCompleted(const unsigned int)), this, SLOT(taskThreadFinish(const unsigned int)), Qt::QueuedConnection);
 		m_runningTaskIds.insert(taskId); m_pool->start(task);

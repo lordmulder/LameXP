@@ -32,7 +32,7 @@ public:
 	DownmixFilter(void);
 	~DownmixFilter(void);
 
-	virtual FilterResult apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag);
+	virtual FilterResult apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, QAtomicInt &abortFlag);
 
 private:
 	const QString m_binary;

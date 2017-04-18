@@ -61,7 +61,7 @@ private slots:
 	void handleUpdate(int progress);
 
 public slots:
-	void abortProcess(void) { m_abortFlag = true; }
+	void abortProcess(void) { m_abortFlag.ref(); }
 
 private:
 	void splitFile(const QString &output, const int trackNo, const QString &file, const double offset, const double length, const AudioFileModel_MetaInfo &metaInfo, const int baseProgress);
@@ -79,7 +79,7 @@ private:
 	bool m_bAborted;
 	bool m_bSuccess;
 	
-	volatile bool m_abortFlag;
+	QAtomicInt m_abortFlag;
 
 	CueSheetModel *m_model;
 	QMap<QString,AudioFileModel> m_inputFilesInfo;

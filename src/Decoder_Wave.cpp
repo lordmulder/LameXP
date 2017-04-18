@@ -31,12 +31,12 @@
 #include <QDir>
 
 //Type
-typedef struct _ProgressData
+typedef struct _callback_t
 {
-	WaveDecoder   *const instance;
-	volatile bool *const abrtFlag;
+	WaveDecoder *const pInstance;
+	QAtomicInt  *const abortFlag;
 }
-ProgressData;
+callback_t;
 
 WaveDecoder::WaveDecoder(void)
 {
@@ -46,12 +46,12 @@ WaveDecoder::~WaveDecoder(void)
 {
 }
 
-bool WaveDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool WaveDecoder::decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	emit messageLogged(QString("Copy file \"%1\" to \"%2\"").arg(QDir::toNativeSeparators(sourceFile), QDir::toNativeSeparators(outputFile)));
 	emit statusUpdated(0);
 
-	ProgressData progressData = { this, abortFlag };
+	callback_t progressData = { this, &abortFlag };
 	const bool okay = MUtils::OS::copy_file(sourceFile, outputFile, true, progressHandler, &progressData);
 	
 	emit statusUpdated(100);
@@ -68,13 +68,12 @@ bool WaveDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 	return okay;
 }
 
-bool WaveDecoder::progressHandler(const double &progress, void *const data)
+bool WaveDecoder::progressHandler(const double &progress, void *const userData)
 {
-	if(data)
+	if(const callback_t *const ptr = reinterpret_cast<callback_t*>(userData))
 	{
-		//qWarning("Copy progress: %.2f", progress);
-		reinterpret_cast<ProgressData*>(data)->instance->updateProgress(progress);
-		return (!(*reinterpret_cast<ProgressData*>(data)->abrtFlag));
+		ptr->pInstance->updateProgress(progress);
+		return ptr->abortFlag->operator!();
 	}
 	return true;
 }

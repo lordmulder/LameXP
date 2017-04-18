@@ -49,7 +49,7 @@ public:
 	FileAnalyzer(const QStringList &inputFiles);
 	~FileAnalyzer(void);
 	void run();
-	bool getSuccess(void) { return (!isRunning()) && (!m_bAborted) && m_bSuccess; }
+	bool getSuccess(void) { return (!isRunning()) && (!m_bAborted) && (!(!m_bSuccess)); }
 
 	unsigned int filesAccepted(void);
 	unsigned int filesRejected(void);
@@ -64,7 +64,7 @@ signals:
 	void progressMaxChanged(unsigned int);
 
 public slots:
-	void abortProcess(void) { m_bAborted = true; exit(-1); }
+	void abortProcess(void) { m_bAborted.ref(); exit(-1); }
 
 private slots:
 	void initializeTasks(void);
@@ -99,6 +99,6 @@ private:
 	static const char *g_tags_gen[];
 	static const char *g_tags_aud[];
 
-	volatile bool m_bAborted;
-	volatile bool m_bSuccess;
+	QAtomicInt m_bAborted;
+	QAtomicInt m_bSuccess;
 };

@@ -47,7 +47,7 @@ VorbisDecoder::~VorbisDecoder(void)
 {
 }
 
-bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -68,7 +68,7 @@ bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile,
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

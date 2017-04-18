@@ -51,7 +51,7 @@ DownmixFilter::~DownmixFilter(void)
 {
 }
 
-AbstractFilter::FilterResult DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
+AbstractFilter::FilterResult DownmixFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, QAtomicInt &abortFlag)
 {
 	unsigned int channels = formatInfo->audioChannels();
 	emit messageLogged(QString().sprintf("--> Number of channels is: %d\n", channels));
@@ -112,7 +112,7 @@ AbstractFilter::FilterResult DownmixFilter::apply(const QString &sourceFile, con
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

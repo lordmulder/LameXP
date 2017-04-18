@@ -54,12 +54,13 @@
 #define IS_KEY(KEY) (key.compare(KEY, Qt::CaseInsensitive) == 0)
 #define IS_SEC(SEC) (key.startsWith((SEC "_"), Qt::CaseInsensitive))
 #define FIRST_TOK(STR) (STR.split(" ", QString::SkipEmptyParts).first())
+#define IS_ABORTED (!(!m_abortFlag))
 
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
-AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, const QString &templateFile, volatile bool *abortFlag)
+AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, const QString &templateFile, QAtomicInt &abortFlag)
 :
 	m_taskId(taskId),
 	m_inputFile(inputFile),
@@ -109,7 +110,7 @@ void AnalyzeTask::run_ex(void)
 	
 	AudioFileModel file = analyzeFile(currentFile, &fileType);
 
-	if(*m_abortFlag)
+	if(IS_ABORTED)
 	{
 		qWarning("Operation cancelled by user!");
 		return;
@@ -203,7 +204,7 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*m_abortFlag)
+		if(IS_ABORTED)
 		{
 			process.kill();
 			qWarning("Process was aborted on user request!");
@@ -530,7 +531,7 @@ bool AnalyzeTask::analyzeAvisynthFile(const QString &filePath, AudioFileModel &i
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*m_abortFlag)
+		if(IS_ABORTED)
 		{
 			process.kill();
 			qWarning("Process was aborted on user request!");

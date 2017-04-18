@@ -51,7 +51,7 @@ ToneAdjustFilter::~ToneAdjustFilter(void)
 {
 }
 
-AbstractFilter::FilterResult ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
+AbstractFilter::FilterResult ToneAdjustFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -82,7 +82,7 @@ AbstractFilter::FilterResult ToneAdjustFilter::apply(const QString &sourceFile, 
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

@@ -56,6 +56,7 @@
 
 #define DIFF(X,Y) ((X > Y) ? (X-Y) : (Y-X))
 #define IS_WAVE(X) ((X.containerType().compare("Wave", Qt::CaseInsensitive) == 0) && (X.audioType().compare("PCM", Qt::CaseInsensitive) == 0))
+#define IS_ABORTED (!(!m_aborted))
 #define STRDEF(STR,DEF) ((!STR.isEmpty()) ? STR : DEF)
 
 ////////////////////////////////////////////////////////////
@@ -74,7 +75,6 @@ ProcessThread::ProcessThread(const AudioFileModel &audioFile, const QString &out
 	m_overwriteMode(OverwriteMode_KeepBoth),
 	m_keepDateTime(false),
 	m_initialized(-1),
-	m_aborted(false),
 	m_propDetect(new WaveProperties())
 {
 	connect(m_encoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
@@ -110,10 +110,8 @@ ProcessThread::~ProcessThread(void)
 
 bool ProcessThread::init(void)
 {
-	if(m_initialized < 0)
+	if(m_initialized.testAndSetOrdered((-1), 0))
 	{
-		m_initialized = 0;
-
 		//Initialize job status
 		qDebug("Process thread %s has started.", m_jobId.toString().toLatin1().constData());
 		emit processStateInitialized(m_jobId, QFileInfo(m_audioFile.filePath()).fileName(), tr("Starting..."), ProgressModel::JobRunning);
@@ -132,16 +130,15 @@ bool ProcessThread::init(void)
 bool ProcessThread::start(QThreadPool *const pool)
 {
 	//Make sure object was initialized correctly
-	if(m_initialized < 0)
+	if (m_initialized < 0)
 	{
 		MUTILS_THROW("Object not initialized yet!");
 	}
 
-	if(m_initialized < 1)
+	if (m_initialized.testAndSetOrdered(0, 1))
 	{
-		m_initialized = 1;
-
 		m_outFileName.clear();
+		m_aborted.fetchAndStoreOrdered(0);
 		bool bSuccess = false;
 
 		//Generate output file name
@@ -228,7 +225,7 @@ void ProcessThread::processFile()
 			connect(decoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 			connect(decoder, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
-			bSuccess = decoder->decode(sourceFile, tempFile, &m_aborted);
+			bSuccess = decoder->decode(sourceFile, tempFile, m_aborted);
 			MUTILS_DELETE(decoder);
 
 			if(bSuccess)
@@ -259,12 +256,12 @@ void ProcessThread::processFile()
 	// Update audio properties after decode
 	//-----------------------------------------------------
 
-	if(bSuccess && !m_aborted && IS_WAVE(m_audioFile.techInfo()))
+	if(bSuccess && (!m_aborted) && IS_WAVE(m_audioFile.techInfo()))
 	{
 		if(m_encoder->supportedSamplerates() || m_encoder->supportedBitdepths() || m_encoder->supportedChannelCount() || m_encoder->needsTimingInfo() || !m_filters.isEmpty())
 		{
 			m_currentStep = AnalyzeStep;
-			bSuccess = m_propDetect->detect(sourceFile, &m_audioFile.techInfo(), &m_aborted);
+			bSuccess = m_propDetect->detect(sourceFile, &m_audioFile.techInfo(), m_aborted);
 
 			if(bSuccess)
 			{
@@ -301,7 +298,7 @@ void ProcessThread::processFile()
 		connect(poFilter, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 		connect(poFilter, SIGNAL(messageLogged(QString)), this, SLOT(handleMessage(QString)), Qt::DirectConnection);
 
-		const AbstractFilter::FilterResult filterResult = poFilter->apply(sourceFile, tempFile, &m_audioFile.techInfo(), &m_aborted);
+		const AbstractFilter::FilterResult filterResult = poFilter->apply(sourceFile, tempFile, &m_audioFile.techInfo(), m_aborted);
 		switch (filterResult)
 		{
 		case AbstractFilter::FILTER_SUCCESS:
@@ -320,14 +317,14 @@ void ProcessThread::processFile()
 	// Encode audio file
 	//-----------------------------------------------------
 
-	if(bSuccess && !m_aborted)
+	if(bSuccess && (!m_aborted))
 	{
 		m_currentStep = EncodingStep;
-		bSuccess = m_encoder->encode(sourceFile, m_audioFile.metaInfo(), m_audioFile.techInfo().duration(), m_audioFile.techInfo().audioChannels(), m_outFileName, &m_aborted);
+		bSuccess = m_encoder->encode(sourceFile, m_audioFile.metaInfo(), m_audioFile.techInfo().duration(), m_audioFile.techInfo().audioChannels(), m_outFileName, m_aborted);
 	}
 
 	//Clean-up
-	if((!bSuccess) || m_aborted)
+	if((!bSuccess) || IS_ABORTED)
 	{
 		QFileInfo fileInfo(m_outFileName);
 		if(fileInfo.exists() && (fileInfo.size() < 1024))
@@ -355,7 +352,7 @@ void ProcessThread::processFile()
 	MUtils::OS::sleep_ms(12);
 
 	//Report result
-	emit processStateChanged(m_jobId, (m_aborted ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && !m_aborted) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
+	emit processStateChanged(m_jobId, (IS_ABORTED ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && (!m_aborted)) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
 	emit processStateFinished(m_jobId, m_outFileName, (bSuccess ? 1 : 0));
 
 	qDebug("Process thread is done.");

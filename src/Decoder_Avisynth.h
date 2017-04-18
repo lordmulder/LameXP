@@ -30,7 +30,7 @@ public:
 	AvisynthDecoder(void);
 	~AvisynthDecoder(void);
 
-	virtual bool decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag);
+	virtual bool decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag);
 	static bool isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion);
 	static const supportedType_t *supportedTypes(void);
 

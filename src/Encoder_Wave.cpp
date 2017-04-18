@@ -30,8 +30,8 @@
 
 typedef struct _callback_t
 {
-	WaveEncoder   *pInstance;
-	volatile bool *abortFlag;
+	WaveEncoder *const pInstance;
+	QAtomicInt  *const abortFlag;
 }
 callback_t;
 
@@ -132,13 +132,11 @@ WaveEncoder::~WaveEncoder(void)
 {
 }
 
-bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
+bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	emit messageLogged(QString("Copy file \"%1\" to \"%2\"\n").arg(sourceFile, outputFile));
 
-	callback_t callbackData;
-	callbackData.abortFlag = abortFlag;
-	callbackData.pInstance = this;
+	callback_t callbackData = { this, &abortFlag };
 
 	emit statusUpdated(0);
 	const bool success = MUtils::OS::copy_file(sourceFile, outputFile, true, progressCallback, &callbackData);
@@ -150,7 +148,7 @@ bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	}
 	else
 	{
-		emit messageLogged((*abortFlag) ? L1S("Operation cancelled by user!")  : L1S("Error: Failed to copy file!"));
+		emit messageLogged(checkFlag(abortFlag) ? L1S("Operation cancelled by user!")  : L1S("Error: Failed to copy file!"));
 	}
 
 	return success;
@@ -158,12 +156,11 @@ bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 
 bool WaveEncoder::progressCallback(const double &progress, void *const userData)
 {
-	const callback_t *const ptr = reinterpret_cast<callback_t*>(userData);
-	if (*(ptr->abortFlag))
+	if (const callback_t *const ptr = reinterpret_cast<callback_t*>(userData))
 	{
-		return false; /*user aborted*/
+		ptr->pInstance->updateProgress(progress);
+		return ptr->abortFlag->operator!();
 	}
-	ptr->pInstance->updateProgress(progress);
 	return true;
 }
 

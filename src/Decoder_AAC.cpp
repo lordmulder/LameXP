@@ -47,7 +47,7 @@ AACDecoder::~AACDecoder(void)
 {
 }
 
-bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -67,7 +67,7 @@ bool AACDecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

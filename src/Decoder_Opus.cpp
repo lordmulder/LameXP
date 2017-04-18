@@ -50,7 +50,7 @@ OpusDecoder::~OpusDecoder(void)
 {
 }
 
-bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -76,7 +76,7 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

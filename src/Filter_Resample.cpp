@@ -61,7 +61,7 @@ ResampleFilter::~ResampleFilter(void)
 {
 }
 
-AbstractFilter::FilterResult ResampleFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
+AbstractFilter::FilterResult ResampleFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -109,7 +109,7 @@ AbstractFilter::FilterResult ResampleFilter::apply(const QString &sourceFile, co
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

@@ -50,6 +50,11 @@ signals:
 
 protected:
 	static const int m_processTimeoutInterval = 600000;
+	
+	static __forceinline bool checkFlag(QAtomicInt &flag)
+	{
+		return (!(!flag));
+	}
 
 private:
 	static QScopedPointer<MUtils::JobObject> s_jobObjectInstance;

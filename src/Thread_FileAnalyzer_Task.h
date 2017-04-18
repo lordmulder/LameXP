@@ -45,7 +45,7 @@ class AnalyzeTask: public QObject, public QRunnable
 	Q_OBJECT
 
 public:
-	AnalyzeTask(const int taskId, const QString &inputFile, const QString &templateFile, volatile bool *abortFlag);
+	AnalyzeTask(const int taskId, const QString &inputFile, const QString &templateFile, QAtomicInt &abortFlag);
 	~AnalyzeTask(void);
 	
 	enum fileType_t
@@ -81,5 +81,5 @@ private:
 	const QString m_templateFile;
 	const QString m_inputFile;
 	
-	volatile bool *m_abortFlag;
+	QAtomicInt &m_abortFlag;
 };

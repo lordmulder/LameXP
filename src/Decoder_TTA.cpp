@@ -48,7 +48,7 @@ TTADecoder::~TTADecoder(void)
 {
 }
 
-bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -69,7 +69,7 @@ bool TTADecoder::decode(const QString &sourceFile, const QString &outputFile, vo
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

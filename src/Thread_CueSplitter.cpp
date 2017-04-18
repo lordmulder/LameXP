@@ -47,6 +47,9 @@
 #include <float.h>
 #include <limits>
 
+//Utils
+#define IS_ABORTED (!(!m_abortFlag))
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -95,7 +98,6 @@ void CueSplitter::run()
 {
 	m_bSuccess = false;
 	m_bAborted = false;
-	m_abortFlag = false;
 	m_nTracksSuccess = 0;
 	m_nTracksSkipped = 0;
 	m_decompressedFiles.clear();
@@ -130,7 +132,7 @@ void CueSplitter::run()
 				QString tempFile = QString("%1/~%2.wav").arg(m_outputDir, MUtils::next_rand_str());
 				connect(decoder, SIGNAL(statusUpdated(int)), this, SLOT(handleUpdate(int)), Qt::DirectConnection);
 				
-				if(decoder->decode(inputFileList.at(i), tempFile, &m_abortFlag))
+				if(decoder->decode(inputFileList.at(i), tempFile, m_abortFlag))
 				{
 					m_decompressedFiles.insert(inputFileList.at(i), tempFile);
 					m_tempFiles.append(tempFile);
@@ -154,7 +156,7 @@ void CueSplitter::run()
 			m_decompressedFiles.insert(inputFileList.at(i), inputFileList.at(i));
 		}
 
-		if(m_abortFlag)
+		if(IS_ABORTED)
 		{
 			m_bAborted = true;
 			qWarning("The user has requested to abort the process!");
@@ -219,7 +221,7 @@ void CueSplitter::run()
 			splitFile(outputFile, trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, nTracksComplete);
 			emit progressValChanged(nTracksComplete += 10);
 
-			if(m_abortFlag)
+			if(IS_ABORTED)
 			{
 				m_bAborted = true;
 				qWarning("The user has requested to abort the process!");
@@ -320,7 +322,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(m_abortFlag)
+		if(IS_ABORTED)
 		{
 			process.kill();
 			qWarning("Process was aborted on user request!");

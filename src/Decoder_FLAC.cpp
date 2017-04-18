@@ -47,7 +47,7 @@ FLACDecoder::~FLACDecoder(void)
 {
 }
 
-bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -68,7 +68,7 @@ bool FLACDecoder::decode(const QString &sourceFile, const QString &outputFile, v
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

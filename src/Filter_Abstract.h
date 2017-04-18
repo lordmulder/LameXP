@@ -43,6 +43,6 @@ public:
 	};
 
 	//Internal decoder API
-	virtual FilterResult apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag) = 0;
+	virtual FilterResult apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, QAtomicInt &abortFlag) = 0;
 };
 

@@ -146,7 +146,7 @@ AACEncoder::~AACEncoder(void)
 {
 }
 
-bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, volatile bool *abortFlag)
+bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo &metaInfo, const unsigned int duration, const unsigned int channels, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -219,7 +219,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;
@@ -331,7 +331,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

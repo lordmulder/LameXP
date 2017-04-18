@@ -48,7 +48,7 @@ AvisynthDecoder::~AvisynthDecoder(void)
 {
 }
 
-bool AvisynthDecoder::decode(const QString &sourceFile, const QString &outputFile, volatile bool *abortFlag)
+bool AvisynthDecoder::decode(const QString &sourceFile, const QString &outputFile, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -68,7 +68,7 @@ bool AvisynthDecoder::decode(const QString &sourceFile, const QString &outputFil
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

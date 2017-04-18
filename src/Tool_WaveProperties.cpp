@@ -47,7 +47,7 @@ WaveProperties::~WaveProperties(void)
 {
 }
 
-bool WaveProperties::detect(const QString &sourceFile, AudioFileModel_TechInfo *info, volatile bool *abortFlag)
+bool WaveProperties::detect(const QString &sourceFile, AudioFileModel_TechInfo *info, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -72,7 +72,7 @@ bool WaveProperties::detect(const QString &sourceFile, AudioFileModel_TechInfo *
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

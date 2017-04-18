@@ -57,7 +57,7 @@ NormalizeFilter::~NormalizeFilter(void)
 {
 }
 
-AbstractFilter::FilterResult NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, volatile bool *abortFlag)
+AbstractFilter::FilterResult NormalizeFilter::apply(const QString &sourceFile, const QString &outputFile, AudioFileModel_TechInfo *const formatInfo, QAtomicInt &abortFlag)
 {
 	QProcess process;
 	QStringList args;
@@ -96,7 +96,7 @@ AbstractFilter::FilterResult NormalizeFilter::apply(const QString &sourceFile, c
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(*abortFlag)
+		if(checkFlag(abortFlag))
 		{
 			process.kill();
 			bAborted = true;

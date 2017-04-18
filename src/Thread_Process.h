@@ -54,7 +54,7 @@ public:
 	void addFilter(AbstractFilter *filter);
 
 public slots:
-	void abort(void) { m_aborted = true; }
+	void abort(void) { m_aborted.ref(); }
 
 private slots:
 	void handleUpdate(int progress);
@@ -96,8 +96,8 @@ private:
 	bool insertDownsampleFilter(const unsigned int *const supportedSamplerates, const unsigned int *const supportedBitdepths);
 	bool updateFileTime(const QString &originalFile, const QString &modifiedFile);
 
-	volatile bool m_aborted;
-	volatile int m_initialized;
+	QAtomicInt m_aborted;
+	QAtomicInt m_initialized;
 
 	const QUuid m_jobId;
 	AudioFileModel m_audioFile;
