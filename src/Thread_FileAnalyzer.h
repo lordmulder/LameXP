@@ -22,7 +22,7 @@
 
 #pragma once
 
-//#include "Model_AudioFile.h"
+#include <MUtils/Global.h>
 
 #include <QThread>
 #include <QStringList>
@@ -49,7 +49,7 @@ public:
 	FileAnalyzer(const QStringList &inputFiles);
 	~FileAnalyzer(void);
 	void run();
-	bool getSuccess(void) { return (!isRunning()) && (!m_bAborted) && (!(!m_bSuccess)); }
+	bool getSuccess(void) { return (!isRunning()) && (!m_bAborted) && MUTILS_BOOLIFY(m_bSuccess); }
 
 	unsigned int filesAccepted(void);
 	unsigned int filesRejected(void);

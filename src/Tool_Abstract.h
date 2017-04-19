@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <MUtils\Global.h>
 #include <QObject>
 
 class QMutex;
@@ -53,7 +54,7 @@ protected:
 	
 	static __forceinline bool checkFlag(QAtomicInt &flag)
 	{
-		return (!(!flag));
+		return MUTILS_BOOLIFY(flag);
 	}
 
 private:

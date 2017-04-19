@@ -2980,143 +2980,143 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="117"/>
+        <location filename="../../src/Thread_Process.cpp" line="116"/>
         <source>Starting...</source>
         <translation type="unfinished">시작 중...</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="159"/>
+        <location filename="../../src/Thread_Process.cpp" line="158"/>
         <source>Not found!</source>
         <translation type="unfinished">찾을 수 없음!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>The format of this file is NOT supported:</source>
         <translation type="unfinished">이 파일은 지원되지 않는 파일 형식입니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Container Format:</source>
         <translation type="unfinished">컨테이너 형식:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Audio Format:</source>
         <translation type="unfinished">오디오 형식:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Unsupported!</source>
         <translation type="unfinished">지원하지 않습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Done.</source>
         <translation type="unfinished">완료.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Aborted!</source>
         <translation type="unfinished">취소됨!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Failed!</source>
         <translation type="unfinished">실패됨!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="372"/>
+        <location filename="../../src/Thread_Process.cpp" line="371"/>
         <source>Encoding</source>
         <translation type="unfinished">인코딩</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="377"/>
         <source>Filtering</source>
         <translation type="unfinished">필터링</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="380"/>
         <source>Decoding</source>
         <translation type="unfinished">디코딩</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="403"/>
+        <location filename="../../src/Thread_Process.cpp" line="402"/>
         <source>The source audio file could not be found:</source>
         <translation type="unfinished">원본 오디오 파일을 찾을 수 없음:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="411"/>
+        <location filename="../../src/Thread_Process.cpp" line="410"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation type="unfinished">원본 오디오 파일을 열 수 없음:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="444"/>
+        <location filename="../../src/Thread_Process.cpp" line="443"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation type="unfinished">대상 출력 디렉터리가 존재하지 않으며, 만들 수 없습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="453"/>
+        <location filename="../../src/Thread_Process.cpp" line="452"/>
         <source>The target output directory is NOT writable:</source>
         <translation type="unfinished">대상 출력 디렉터리에 쓰기 불가:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="519"/>
+        <location filename="../../src/Thread_Process.cpp" line="518"/>
         <source>Unknown File Name</source>
         <translation type="unfinished">알수 없는 파일명</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
         <source>Unknown Title</source>
         <translation type="unfinished">알수 없는 제목</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="521"/>
         <source>Unknown Artist</source>
         <translation type="unfinished">알수 없는 가수</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="523"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown Album</source>
         <translation type="unfinished">알수 없는 앨범</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="525"/>
+        <location filename="../../src/Thread_Process.cpp" line="524"/>
         <source>Unknown Comment</source>
         <translation type="unfinished">알수 없는 설명</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="374"/>
         <source>Analyzing</source>
         <translation type="unfinished">검토 중</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="239"/>
+        <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation type="unfinished">알림: 디코드 파일 크기가 4GB 초과, 문제가 발생할 수 있습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="154"/>
+        <location filename="../../src/Thread_Process.cpp" line="153"/>
         <source>Skipped.</source>
         <translation type="unfinished">건너뜀.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="470"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation type="unfinished">대상 출력 파일이 이미 존재합니다. 건너뛰기할 파일:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation type="unfinished">기존 파일을 건너뛰기하지 않으려면, 덮어쓰기 방식을 변경하시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="479"/>
+        <location filename="../../src/Thread_Process.cpp" line="478"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation type="unfinished">대상 출력 파일이 이미 존재합니다. 건너뛰기할 파일:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="493"/>
+        <location filename="../../src/Thread_Process.cpp" line="492"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation type="unfinished">기존 대상 파일 삭제 실패. 다른 파일명으로 저장됩니다!</translation>
     </message>
@@ -3392,12 +3392,12 @@
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="96"/>
+        <location filename="../../src/ShellIntegration.cpp" line="91"/>
         <source>Audio File supported by LameXP</source>
         <translation type="unfinished">LameXP에서 지원되는 오디오 파일</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="97"/>
+        <location filename="../../src/ShellIntegration.cpp" line="92"/>
         <source>Convert this file with LameXP v%1</source>
         <translation type="unfinished">이 파일을 LameXP v%1(으)로 변환</translation>
     </message>

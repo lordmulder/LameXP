@@ -56,7 +56,6 @@
 
 #define DIFF(X,Y) ((X > Y) ? (X-Y) : (Y-X))
 #define IS_WAVE(X) ((X.containerType().compare("Wave", Qt::CaseInsensitive) == 0) && (X.audioType().compare("PCM", Qt::CaseInsensitive) == 0))
-#define IS_ABORTED (!(!m_aborted))
 #define STRDEF(STR,DEF) ((!STR.isEmpty()) ? STR : DEF)
 
 ////////////////////////////////////////////////////////////
@@ -324,7 +323,7 @@ void ProcessThread::processFile()
 	}
 
 	//Clean-up
-	if((!bSuccess) || IS_ABORTED)
+	if((!bSuccess) || MUTILS_BOOLIFY(m_aborted))
 	{
 		QFileInfo fileInfo(m_outFileName);
 		if(fileInfo.exists() && (fileInfo.size() < 1024))
@@ -352,7 +351,7 @@ void ProcessThread::processFile()
 	MUtils::OS::sleep_ms(12);
 
 	//Report result
-	emit processStateChanged(m_jobId, (IS_ABORTED ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && (!m_aborted)) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
+	emit processStateChanged(m_jobId, (MUTILS_BOOLIFY(m_aborted) ? tr("Aborted!") : (bSuccess ? tr("Done.") : tr("Failed!"))), ((bSuccess && (!m_aborted)) ? ProgressModel::JobComplete : ProgressModel::JobFailed));
 	emit processStateFinished(m_jobId, m_outFileName, (bSuccess ? 1 : 0));
 
 	qDebug("Process thread is done.");

@@ -72,8 +72,8 @@ private:
 	unsigned int m_status;
 	unsigned int m_fadeValue;
 
-	volatile bool m_canClose;
-	volatile bool m_taskBarFlag;
+	QAtomicInt m_canClose;
+	QAtomicInt m_taskBarFlag;
 
 private slots:
 	void updateHandler(void);

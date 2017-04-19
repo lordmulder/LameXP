@@ -104,23 +104,19 @@ public:
 	{
 	}
 
-	static void clearFlags(QMutexLocker &lock = QMutexLocker(&s_mutex))
+	static void clearFlags(void)
 	{
-		s_bExcept = false;
+		s_exception.fetchAndStoreOrdered(0);
 		s_errMsg[0] = char(0);
 	}
 
 	static bool getExcept(void)
 	{
-		bool ret;
-		QMutexLocker lock(&s_mutex);
-		ret = s_bExcept;
-		return ret;
+		return MUTILS_BOOLIFY(s_exception);
 	}
 
 	static bool getErrMsg(char *buffer, const size_t buffSize)
 	{
-		QMutexLocker lock(&s_mutex);
 		if(s_errMsg[0])
 		{
 			strncpy_s(buffer, BUFF_SIZE, s_errMsg, _TRUNCATE);
@@ -140,36 +136,28 @@ protected:
 		}
 		catch(const std::exception &e)
 		{
-			QMutexLocker lock(&s_mutex);
-			if(!s_bExcept)
+			if(!s_exception.fetchAndAddOrdered(1))
 			{
-				s_bExcept = true;
 				strncpy_s(s_errMsg, BUFF_SIZE, e.what(), _TRUNCATE);
 			}
-			lock.unlock();
 			qWarning("OptionalInitTask exception error:\n%s\n\n", e.what());
 		}
 		catch(...)
 		{
-			QMutexLocker lock(&s_mutex);
-			if(!s_bExcept)
+			if (!s_exception.fetchAndAddOrdered(1))
 			{
-				s_bExcept = true;
 				strncpy_s(s_errMsg, BUFF_SIZE, "Unknown exception error!", _TRUNCATE);
 			}
-			lock.unlock();
 			qWarning("OptionalInitTask encountered an unknown exception!");
 		}
 	}
 
-	static volatile bool s_bExcept;
-	static QMutex s_mutex;
+	static QAtomicInt s_exception;
 	static char s_errMsg[BUFF_SIZE];
 };
 
-QMutex BaseTask::s_mutex;
 char BaseTask::s_errMsg[BUFF_SIZE] = {'\0'};
-volatile bool BaseTask::s_bExcept = false;
+QAtomicInt BaseTask::s_exception(0);
 
 ////////////////////////////////////////////////////////////
 // ExtractorTask class
@@ -197,17 +185,13 @@ public:
 
 	static bool getCustom(void)
 	{
-		bool ret;
-		QMutexLocker lock(&s_mutex);
-		ret = s_bCustom;
-		return ret;
+		return MUTILS_BOOLIFY(s_custom);
 	}
 
 	static void clearFlags(void)
 	{
-		QMutexLocker lock(&s_mutex);
-		s_bCustom = false;
-		BaseTask::clearFlags(lock);
+		BaseTask::clearFlags();
+		s_custom.fetchAndStoreOrdered(0);
 	}
 
 protected:
@@ -229,7 +213,7 @@ protected:
 				try
 				{
 					lockedFile.reset(new LockedFile(customTool.canonicalFilePath()));
-					version = UINT_MAX; s_bCustom = true;
+					version = UINT_MAX; s_custom.ref();
 				}
 				catch(std::runtime_error&)
 				{
@@ -268,7 +252,7 @@ protected:
 	}
 
 private:
-	static volatile bool      s_bCustom;
+	static QAtomicInt         s_custom;
 	QScopedPointer<QResource> m_toolResource;
 	const QDir                m_appDir;
 	const QString             m_tempPath;
@@ -278,7 +262,7 @@ private:
 	const QString             m_toolTag;
 };
 
-volatile bool ExtractorTask::s_bCustom = false;
+QAtomicInt ExtractorTask::s_custom = false;
 
 ////////////////////////////////////////////////////////////
 // InitAacEncTask class

@@ -47,7 +47,6 @@ MessageHandlerThread::MessageHandlerThread(MUtils::IPCChannel *const ipcChannel)
 :
 	m_ipcChannel(ipcChannel)
 {
-	m_aborted = false;
 }
 
 MessageHandlerThread::~MessageHandlerThread(void)
@@ -56,7 +55,6 @@ MessageHandlerThread::~MessageHandlerThread(void)
 
 void MessageHandlerThread::run()
 {
-	m_aborted = false;
 	setTerminationEnabled(true);
 	QStringList params;
 	quint32 command = 0, flags = 0;
@@ -109,7 +107,7 @@ void MessageHandlerThread::stop(void)
 {
 	if(!m_aborted)
 	{
-		m_aborted = true;
+		m_aborted.ref();
 		m_ipcChannel->send(0, 0, QStringList());
 	}
 }

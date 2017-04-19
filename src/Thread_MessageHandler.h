@@ -43,7 +43,7 @@ protected:
 	MUtils::IPCChannel *const m_ipcChannel;
 
 private:
-	volatile bool m_aborted;
+	QAtomicInt m_aborted;
 
 signals:
 	void otherInstanceDetected(void);

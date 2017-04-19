@@ -56,9 +56,6 @@ static inline void SAFE_APPEND_STRING(QStringList &list, const QString &str)
 	}
 }
 
-//Utils
-#define IS_ABORTED (!(!m_bAborted))
-
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -207,7 +204,7 @@ void FileAnalyzer::run()
 	m_pool->waitForDone();
 
 	//Was opertaion aborted?
-	if(IS_ABORTED)
+	if(MUTILS_BOOLIFY(m_bAborted))
 	{
 		qWarning("Operation cancelled by user!");
 		return;
@@ -238,7 +235,7 @@ void FileAnalyzer::run()
 
 bool FileAnalyzer::analyzeNextFile(void)
 {
-	if(!(m_inputFiles.isEmpty() || IS_ABORTED))
+	if(!(m_inputFiles.isEmpty() || MUTILS_BOOLIFY(m_bAborted)))
 	{
 		const unsigned int taskId = m_tasksCounterNext++;
 		const QString currentFile = QDir::fromNativeSeparators(m_inputFiles.takeFirst());

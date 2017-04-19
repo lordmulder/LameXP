@@ -2997,143 +2997,143 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="117"/>
+        <location filename="../../src/Thread_Process.cpp" line="116"/>
         <source>Starting...</source>
         <translation>Починається обробка...</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="159"/>
+        <location filename="../../src/Thread_Process.cpp" line="158"/>
         <source>Not found!</source>
         <translation>Не знайдено!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>The format of this file is NOT supported:</source>
         <translation>Формат даного файла НЕ підтримуєтья:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Container Format:</source>
         <translation>Формат контейнера:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Audio Format:</source>
         <translation>Формат аудіо:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Unsupported!</source>
         <translation>Не підтримується!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Done.</source>
         <translation>Виконано.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Aborted!</source>
         <translation>Перервано!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Failed!</source>
         <translation>Збій!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="372"/>
+        <location filename="../../src/Thread_Process.cpp" line="371"/>
         <source>Encoding</source>
         <translation>Кодування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="377"/>
         <source>Filtering</source>
         <translation>Фільтрування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="380"/>
         <source>Decoding</source>
         <translation>Декодування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="403"/>
+        <location filename="../../src/Thread_Process.cpp" line="402"/>
         <source>The source audio file could not be found:</source>
         <translation>Неможливо знайти вхідний файл аудіо:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="411"/>
+        <location filename="../../src/Thread_Process.cpp" line="410"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Неможливо відкрити для читання вхідний файл аудіо:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="444"/>
+        <location filename="../../src/Thread_Process.cpp" line="443"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Вихідної теки не існує і її неможливо створити:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="453"/>
+        <location filename="../../src/Thread_Process.cpp" line="452"/>
         <source>The target output directory is NOT writable:</source>
         <translation>До вихідної теки неможливо проводити запис:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="519"/>
+        <location filename="../../src/Thread_Process.cpp" line="518"/>
         <source>Unknown File Name</source>
         <translation>Невідома назва файла</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
         <source>Unknown Title</source>
         <translation>Невідомий заголовок</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="521"/>
         <source>Unknown Artist</source>
         <translation>Невідомий виконавець</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="523"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown Album</source>
         <translation>Невідомий альбом</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="525"/>
+        <location filename="../../src/Thread_Process.cpp" line="524"/>
         <source>Unknown Comment</source>
         <translation>Невідомий коментар</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="374"/>
         <source>Analyzing</source>
         <translation>Аналізування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="239"/>
+        <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>ПОПЕРЕДЖЕННЯ: Розмір декодованного файла перевищує 4 ГБ, можуть виникнути проблеми!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="154"/>
+        <location filename="../../src/Thread_Process.cpp" line="153"/>
         <source>Skipped.</source>
         <translation>Пропущено.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="470"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Вихідний цільовий файл вже існує, спроба пропустити цей файл:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Якщо ви не хочете, щоб існуючі файли були пропущені, будь ласка, змініть режим перезапису!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="479"/>
+        <location filename="../../src/Thread_Process.cpp" line="478"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Вихідний цільовий файл вже існує, спроба видалити існуючий файл:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="493"/>
+        <location filename="../../src/Thread_Process.cpp" line="492"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Неможливо видалити існуючий файл, збереження буде проведено до файла з іншою назвою!</translation>
     </message>
@@ -3429,12 +3429,12 @@
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="96"/>
+        <location filename="../../src/ShellIntegration.cpp" line="91"/>
         <source>Audio File supported by LameXP</source>
         <translation>Аудіофайл, що підтримується LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="97"/>
+        <location filename="../../src/ShellIntegration.cpp" line="92"/>
         <source>Convert this file with LameXP v%1</source>
         <translation>Конвертувати файл за допомогою LameXP v%1</translation>
     </message>

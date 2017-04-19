@@ -34,12 +34,11 @@ class ShellIntegration : public QObject
 
 public:
 	static void install(bool async = true);
-	static void remove(bool async = true);
+	static void remove (bool async = true);
 
 private:
 	ShellIntegration(void);
 
 	static void initializeTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes);
-	static QMutex m_mutex;
-	static volatile int m_state;
+	static QAtomicInt m_state;
 };

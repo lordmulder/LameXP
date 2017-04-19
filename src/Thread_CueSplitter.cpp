@@ -47,9 +47,6 @@
 #include <float.h>
 #include <limits>
 
-//Utils
-#define IS_ABORTED (!(!m_abortFlag))
-
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
@@ -156,7 +153,7 @@ void CueSplitter::run()
 			m_decompressedFiles.insert(inputFileList.at(i), inputFileList.at(i));
 		}
 
-		if(IS_ABORTED)
+		if(MUTILS_BOOLIFY(m_abortFlag))
 		{
 			m_bAborted = true;
 			qWarning("The user has requested to abort the process!");
@@ -221,7 +218,7 @@ void CueSplitter::run()
 			splitFile(outputFile, trackNo, trackFile, trackOffset, trackLength, trackMetaInfo, nTracksComplete);
 			emit progressValChanged(nTracksComplete += 10);
 
-			if(IS_ABORTED)
+			if(MUTILS_BOOLIFY(m_abortFlag))
 			{
 				m_bAborted = true;
 				qWarning("The user has requested to abort the process!");
@@ -322,7 +319,7 @@ void CueSplitter::splitFile(const QString &output, const int trackNo, const QStr
 
 	while(process.state() != QProcess::NotRunning)
 	{
-		if(IS_ABORTED)
+		if(MUTILS_BOOLIFY(m_abortFlag))
 		{
 			process.kill();
 			qWarning("Process was aborted on user request!");

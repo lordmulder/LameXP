@@ -46,16 +46,13 @@
 static const char *g_lamexpShellAction = "ConvertWithLameXP";
 static const char *g_lamexpFileType    = "LameXP.SupportedAudioFile";
 
-//Mutex
-QMutex ShellIntegration::m_mutex;
-
 //State values
 static const int STATE_ENABLED =  1;
 static const int STATE_UNKNOWN =  0;
 static const int STATE_DISABLD = -1;
 
 //State
-volatile int ShellIntegration::m_state = STATE_UNKNOWN;
+QAtomicInt ShellIntegration::m_state(STATE_UNKNOWN);
 
 //Macros
 #define REG_WRITE_STRING(KEY, STR) RegSetValueEx(key, NULL, NULL, REG_SZ, reinterpret_cast<const BYTE*>(STR.utf16()), (STR.size() + 1) * sizeof(wchar_t))
@@ -81,12 +78,10 @@ void ShellIntegration::install(bool async)
 		QFuture<void>(QtConcurrent::run(install, false));
 		return;
 	}
-	
-	//Serialize
-	QMutexLocker lock(&m_mutex);
-	
+		
 	//Checking
-	if(m_state == STATE_ENABLED)
+	const int originalState = m_state.fetchAndStoreOrdered(STATE_ENABLED);
+	if(originalState == STATE_ENABLED)
 	{
 		return; /*already enabled, don't enable again!*/
 	}
@@ -106,6 +101,7 @@ void ShellIntegration::install(bool async)
 	ok[3] = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellCommand);
 	if(!(ok[0] && ok[1] && ok[2] && ok[3]))
 	{
+		m_state.fetchAndStoreOrdered(originalState);
 		qWarning("Failed to register the LameXP file type!");
 		return;
 	}
@@ -123,7 +119,6 @@ void ShellIntegration::install(bool async)
 	
 	//Shell notification
 	MUtils::OS::shell_change_notification();
-	m_state = STATE_ENABLED;
 }
 
 void ShellIntegration::remove(bool async)
@@ -134,12 +129,10 @@ void ShellIntegration::remove(bool async)
 		QFuture<void>(QtConcurrent::run(remove, false));
 		return;
 	}
-
-	//Serialize
-	QMutexLocker lock(&m_mutex);
 	
 	//Checking
-	if(m_state == STATE_DISABLD)
+	const int originalState = m_state.fetchAndStoreOrdered(STATE_DISABLD);
+	if(originalState == STATE_DISABLD)
 	{
 		return; /*already enabled, don't enable again!*/
 	}
@@ -154,6 +147,7 @@ void ShellIntegration::remove(bool async)
 	//Find all registered file types
 	if(!MUtils::Registry::reg_enum_subkeys(MUtils::Registry::root_user, "Software\\Classes", fileTypes))
 	{
+		m_state.fetchAndStoreOrdered(originalState);
 		qWarning("Failed to enumerate file types!");
 		return;
 	}
@@ -195,7 +189,6 @@ void ShellIntegration::remove(bool async)
 
 	//Shell notification
 	MUtils::OS::shell_change_notification();
-	m_state = STATE_DISABLD;
 }
 
 ////////////////////////////////////////////////////////////

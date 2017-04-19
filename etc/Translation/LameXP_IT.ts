@@ -3055,144 +3055,144 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="117"/>
+        <location filename="../../src/Thread_Process.cpp" line="116"/>
         <source>Starting...</source>
         <translation>Avvio in corso...</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="159"/>
+        <location filename="../../src/Thread_Process.cpp" line="158"/>
         <source>Not found!</source>
         <translation>Non trovato!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>The format of this file is NOT supported:</source>
         <translation>Il formato di questo file NON è supportato:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Container Format:</source>
         <translation>Formato Contenitore:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Audio Format:</source>
         <translation>Formato Audio:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Unsupported!</source>
         <translation>Non Supportato!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Done.</source>
         <translation>Fatto.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Aborted!</source>
         <translation>Processo Annullato!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Failed!</source>
         <translation>Fallito!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="372"/>
+        <location filename="../../src/Thread_Process.cpp" line="371"/>
         <source>Encoding</source>
         <translation>Codifica in corso</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="377"/>
         <source>Filtering</source>
         <translation>Filtraggio in corso</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="380"/>
         <source>Decoding</source>
         <translation>Decodifica in corso</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="403"/>
+        <location filename="../../src/Thread_Process.cpp" line="402"/>
         <source>The source audio file could not be found:</source>
         <translation>Il file audio sorgente non può essere trovato:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="411"/>
+        <location filename="../../src/Thread_Process.cpp" line="410"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Il file audio sorgente non può essere aperto per la lettura:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="444"/>
+        <location filename="../../src/Thread_Process.cpp" line="443"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>La cartella di destinazione assegnata non esiste e NON può essere creata:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="453"/>
+        <location filename="../../src/Thread_Process.cpp" line="452"/>
         <source>The target output directory is NOT writable:</source>
         <translatorcomment>La directory di destinazione assegnata è di SOLA LETTURA:</translatorcomment>
         <translation>La directory di destinazione assegnata NON è scrivibile:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="519"/>
+        <location filename="../../src/Thread_Process.cpp" line="518"/>
         <source>Unknown File Name</source>
         <translation>Nome File Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
         <source>Unknown Title</source>
         <translation>Titolo Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="521"/>
         <source>Unknown Artist</source>
         <translation>Artista Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="523"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown Album</source>
         <translation>Album Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="525"/>
+        <location filename="../../src/Thread_Process.cpp" line="524"/>
         <source>Unknown Comment</source>
         <translation>Commento Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="374"/>
         <source>Analyzing</source>
         <translation>Analisi in corso</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="239"/>
+        <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>ATTENZIONE: Il file decodificato eccede i 4 GB, potrebbero verificarsi problemi!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="154"/>
+        <location filename="../../src/Thread_Process.cpp" line="153"/>
         <source>Skipped.</source>
         <translation>Saltato.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="470"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Il file di destinazione esiste già, questo file verrà saltato:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Se non vuoi saltare i file esistenti, cambia la modalità di sovrascrittura!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="479"/>
+        <location filename="../../src/Thread_Process.cpp" line="478"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Il file di destinazione esiste già, il file esistente verrà eliminato:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="493"/>
+        <location filename="../../src/Thread_Process.cpp" line="492"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Impossibile eliminare il file di destinazione esistente, il file verrà salvato con un altro nome!</translation>
     </message>
@@ -3479,12 +3479,12 @@
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="96"/>
+        <location filename="../../src/ShellIntegration.cpp" line="91"/>
         <source>Audio File supported by LameXP</source>
         <translation>File Audio supportato da LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="97"/>
+        <location filename="../../src/ShellIntegration.cpp" line="92"/>
         <source>Convert this file with LameXP v%1</source>
         <translation>Converti il file con LameXP v%1</translation>
     </message>

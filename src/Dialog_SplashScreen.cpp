@@ -45,12 +45,10 @@
 //Setup taskbar indicator
 #define SET_TASKBAR_STATE(WIDGET,FLAG) do \
 { \
-	if((WIDGET)->m_taskBarFlag != (FLAG)) \
+	const int _oldFlag = (WIDGET)->m_taskBarFlag.fetchAndStoreOrdered((FLAG) ? 1 : 0); \
+	if(_oldFlag != ((FLAG) ? 1 : 0)) \
 	{ \
-		if((WIDGET)->m_taskbar->setTaskbarState((FLAG) ? MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE : MUtils::Taskbar7::TASKBAR_STATE_NONE)) \
-		{ \
-			(WIDGET)->m_taskBarFlag = (FLAG); \
-		} \
+		(WIDGET)->m_taskbar->setTaskbarState((FLAG) ? MUtils::Taskbar7::TASKBAR_STATE_INTERMEDIATE : MUtils::Taskbar7::TASKBAR_STATE_NONE); \
 	} \
 } \
 while(0)
@@ -96,10 +94,8 @@ SplashScreen::SplashScreen(QWidget *parent)
 	m_working->start();
 
 	//Init status
-	m_canClose = false;
 	m_status = STATUS_FADE_IN;
 	m_fadeValue = 0;
-	m_taskBarFlag = false;
 }
 
 ////////////////////////////////////////////////////////////
@@ -165,7 +161,7 @@ void SplashScreen::showSplash(QThread *thread)
 	QApplication::restoreOverrideCursor();
 
 	//Hide splash
-	splashScreen->m_canClose = true;
+	splashScreen->m_canClose.ref();
 	splashScreen->close();
 }
 

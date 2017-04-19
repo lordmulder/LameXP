@@ -2980,143 +2980,143 @@
 <context>
     <name>ProcessThread</name>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="117"/>
+        <location filename="../../src/Thread_Process.cpp" line="116"/>
         <source>Starting...</source>
         <translation>正在啟動...</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="159"/>
+        <location filename="../../src/Thread_Process.cpp" line="158"/>
         <source>Not found!</source>
         <translation>找不到!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>The format of this file is NOT supported:</source>
         <translation>此文件的格式不受支持:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Container Format:</source>
         <translation>容器格式:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="247"/>
         <source>Audio Format:</source>
         <translation>音頻格式:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="249"/>
+        <location filename="../../src/Thread_Process.cpp" line="248"/>
         <source>Unsupported!</source>
         <translation>不受支持!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Done.</source>
         <translation>完成.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Aborted!</source>
         <translation>中止!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="355"/>
+        <location filename="../../src/Thread_Process.cpp" line="354"/>
         <source>Failed!</source>
         <translation>失敗!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="372"/>
+        <location filename="../../src/Thread_Process.cpp" line="371"/>
         <source>Encoding</source>
         <translation>編碼</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="378"/>
+        <location filename="../../src/Thread_Process.cpp" line="377"/>
         <source>Filtering</source>
         <translation>過濾</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="381"/>
+        <location filename="../../src/Thread_Process.cpp" line="380"/>
         <source>Decoding</source>
         <translation>解碼</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="403"/>
+        <location filename="../../src/Thread_Process.cpp" line="402"/>
         <source>The source audio file could not be found:</source>
         <translation>找不到源音頻文件:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="411"/>
+        <location filename="../../src/Thread_Process.cpp" line="410"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>無法打開源音頻文件進行讀取:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="444"/>
+        <location filename="../../src/Thread_Process.cpp" line="443"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>目標輸出目錄不存在,無法創建:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="453"/>
+        <location filename="../../src/Thread_Process.cpp" line="452"/>
         <source>The target output directory is NOT writable:</source>
         <translation>目標輸出目錄不是可寫:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="519"/>
+        <location filename="../../src/Thread_Process.cpp" line="518"/>
         <source>Unknown File Name</source>
         <translation>未知文件名稱</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
         <source>Unknown Title</source>
         <translation>未知標題</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="521"/>
         <source>Unknown Artist</source>
         <translation>未知藝術家</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="523"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown Album</source>
         <translation>未知專輯</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="525"/>
+        <location filename="../../src/Thread_Process.cpp" line="524"/>
         <source>Unknown Comment</source>
         <translation>未知評論</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="375"/>
+        <location filename="../../src/Thread_Process.cpp" line="374"/>
         <source>Analyzing</source>
         <translation>分析</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="239"/>
+        <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>警告: 解碼文件大小超過4GB, 可能會出現問題!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="154"/>
+        <location filename="../../src/Thread_Process.cpp" line="153"/>
         <source>Skipped.</source>
         <translation>跳過.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="470"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>目標輸出文件已經存在, 將跳過此文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="471"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>如果你不希望被跳過已存在的文件, 請更改覆蓋模式!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="479"/>
+        <location filename="../../src/Thread_Process.cpp" line="478"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>目標輸出文件已經存在, 要刪除現有的文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="493"/>
+        <location filename="../../src/Thread_Process.cpp" line="492"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>無法刪除現有目標文件, 將保存到另一個文件名!</translation>
     </message>
@@ -3392,12 +3392,12 @@
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="96"/>
+        <location filename="../../src/ShellIntegration.cpp" line="91"/>
         <source>Audio File supported by LameXP</source>
         <translation>LameXP支持的音頻文件</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="97"/>
+        <location filename="../../src/ShellIntegration.cpp" line="92"/>
         <source>Convert this file with LameXP v%1</source>
         <translation>轉換此文件與LameXP v%1</translation>
     </message>
