@@ -40,5 +40,6 @@ private:
 	ShellIntegration(void);
 
 	static void initializeTypes(const QString &lamexpFileType, const QString &lamexpShellAction, QStringList &nativeTypes);
+	static QMutex m_mutex;
 	static QAtomicInt m_state;
 };

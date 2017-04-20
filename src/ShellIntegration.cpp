@@ -79,9 +79,11 @@ void ShellIntegration::install(bool async)
 		return;
 	}
 		
+	//Serialize
+	QMutexLocker lock(&m_mutex);
+
 	//Checking
-	const int originalState = m_state.fetchAndStoreOrdered(STATE_ENABLED);
-	if(originalState == STATE_ENABLED)
+	if(m_state.fetchAndStoreOrdered(STATE_ENABLED) == STATE_ENABLED)
 	{
 		return; /*already enabled, don't enable again!*/
 	}
@@ -101,7 +103,7 @@ void ShellIntegration::install(bool async)
 	ok[3] = MUtils::Registry::reg_value_write(MUtils::Registry::root_user, QString("Software\\Classes\\%1\\shell\\%2\\command").arg(lamexpFileType, lamexpShellAction), QString(), lamexpShellCommand);
 	if(!(ok[0] && ok[1] && ok[2] && ok[3]))
 	{
-		m_state.fetchAndStoreOrdered(originalState);
+		m_state.fetchAndStoreOrdered(STATE_UNKNOWN);
 		qWarning("Failed to register the LameXP file type!");
 		return;
 	}
@@ -130,11 +132,13 @@ void ShellIntegration::remove(bool async)
 		return;
 	}
 	
+	//Serialize
+	QMutexLocker lock(&m_mutex);
+
 	//Checking
-	const int originalState = m_state.fetchAndStoreOrdered(STATE_DISABLD);
-	if(originalState == STATE_DISABLD)
+	if(m_state.fetchAndStoreOrdered(STATE_DISABLD) == STATE_DISABLD)
 	{
-		return; /*already enabled, don't enable again!*/
+		return; /*already disabled, don't disable again!*/
 	}
 
 	//Init some consts
@@ -147,7 +151,7 @@ void ShellIntegration::remove(bool async)
 	//Find all registered file types
 	if(!MUtils::Registry::reg_enum_subkeys(MUtils::Registry::root_user, "Software\\Classes", fileTypes))
 	{
-		m_state.fetchAndStoreOrdered(originalState);
+		m_state.fetchAndStoreOrdered(STATE_UNKNOWN);
 		qWarning("Failed to enumerate file types!");
 		return;
 	}
