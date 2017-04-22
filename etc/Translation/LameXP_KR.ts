@@ -3392,12 +3392,12 @@
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="91"/>
+        <location filename="../../src/ShellIntegration.cpp" line="94"/>
         <source>Audio File supported by LameXP</source>
         <translation type="unfinished">LameXP에서 지원되는 오디오 파일</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="92"/>
+        <location filename="../../src/ShellIntegration.cpp" line="95"/>
         <source>Convert this file with LameXP v%1</source>
         <translation type="unfinished">이 파일을 LameXP v%1(으)로 변환</translation>
     </message>

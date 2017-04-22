@@ -3420,12 +3420,12 @@ Sélection automatique (par défaut)</translation>
 <context>
     <name>ShellIntegration</name>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="91"/>
+        <location filename="../../src/ShellIntegration.cpp" line="94"/>
         <source>Audio File supported by LameXP</source>
         <translation>Fichier audio pris en charge par LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/ShellIntegration.cpp" line="92"/>
+        <location filename="../../src/ShellIntegration.cpp" line="95"/>
         <source>Convert this file with LameXP v%1</source>
         <translation>Convertir ce fichier avec LameXP v%1</translation>
     </message>
