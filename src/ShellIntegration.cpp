@@ -53,6 +53,7 @@ static const int STATE_DISABLD = -1;
 
 //State
 QAtomicInt ShellIntegration::m_state(STATE_UNKNOWN);
+QMutex ShellIntegration::m_mutex;
 
 //Macros
 #define REG_WRITE_STRING(KEY, STR) RegSetValueEx(key, NULL, NULL, REG_SZ, reinterpret_cast<const BYTE*>(STR.utf16()), (STR.size() + 1) * sizeof(wchar_t))
