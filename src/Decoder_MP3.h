@@ -36,4 +36,6 @@ public:
 
 private:
 	const QString m_binary;
+	static QScopedPointer<QRegExp> m_regxLayer, m_regxVersion;
+	static QMutex m_regexMutex;
 };

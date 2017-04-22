@@ -33,6 +33,11 @@
 #include <QDir>
 #include <QProcess>
 #include <QRegExp>
+#include <QMutexLocker>
+
+//Static
+QScopedPointer<QRegExp> MP3Decoder::m_regxLayer, MP3Decoder::m_regxVersion;
+QMutex MP3Decoder::m_regexMutex;
 
 MP3Decoder::MP3Decoder(void)
 :
@@ -134,16 +139,20 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 
 bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	if(containerType.compare("MPEG Audio", Qt::CaseInsensitive) == 0 || containerType.compare("Wave", Qt::CaseInsensitive) == 0)
+	const QLatin1String mpegAudio("MPEG Audio"), waveAudio("Wave");
+	if(containerType.compare(mpegAudio, Qt::CaseInsensitive) == 0) || (containerType.compare(waveAudio, Qt::CaseInsensitive) == 0))
 	{
-		if(formatType.compare("MPEG Audio", Qt::CaseInsensitive) == 0)
+		if((formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
 		{
-			if(formatProfile.compare("Layer 3", Qt::CaseInsensitive) == 0 || formatProfile.compare("Layer 2", Qt::CaseInsensitive) == 0)
+			QMutexLocker lock(&m_regexMutex);
+			if (m_regxLayer.isNull() || m_regxVersion.isNull())
 			{
-				if(formatVersion.compare("Version 1", Qt::CaseInsensitive) == 0 || formatVersion.compare("Version 2", Qt::CaseInsensitive) == 0)
-				{
-					return true;
-				}
+				m_regxLayer.reset(new QRegExp("\\bLayer\\s+(1|2|3)\\b", Qt::CaseInsensitive));
+				m_regxVersion.reset(new QRegExp("\\bVersion\\s+(1|2|2\\.5)\\b", Qt::CaseInsensitive));
+			}
+			if (m_regxLayer->indexIn(formatProfile) >= 0)
+			{
+				return (m_regxVersion->indexIn(formatVersion) >= 0);
 			}
 		}
 	}
