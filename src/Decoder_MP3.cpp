@@ -140,9 +140,9 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
 	const QLatin1String mpegAudio("MPEG Audio"), waveAudio("Wave");
-	if(containerType.compare(mpegAudio, Qt::CaseInsensitive) == 0) || (containerType.compare(waveAudio, Qt::CaseInsensitive) == 0))
+	if((containerType.compare(mpegAudio, Qt::CaseInsensitive) == 0) || (containerType.compare(waveAudio, Qt::CaseInsensitive) == 0))
 	{
-		if((formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
+		if(formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
 		{
 			QMutexLocker lock(&m_regexMutex);
 			if (m_regxLayer.isNull() || m_regxVersion.isNull())
