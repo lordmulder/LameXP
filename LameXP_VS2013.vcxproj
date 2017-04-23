@@ -405,49 +405,49 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
     <ClCompile Include="tmp\LameXP\QRC_Images.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Localization.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Sounds.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.aften-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.aften-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.aften-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.aften-x64.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.avs2wav.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.dcaenc.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.elevator.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.faad-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.faad-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.faad-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-avx.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-sse2.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x86-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x86-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x86-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.gpgv.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.keyring.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x64-avx.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x64-sse2.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x86-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x86-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x86-sse2.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.mac-sse2.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.mediaInfo-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mediaInfo-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.mediainfo-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.mediainfo-x64.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.mpcdec.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-avx.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.mcat.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-x64.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-avx.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.opusdec-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-avx.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.opusenc-sse2.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-x64.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.shorten.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.sox-avx.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.sox-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.sox-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.sox-sse2.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.speexdec.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.tag.cpp" />
@@ -457,7 +457,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
     <ClCompile Include="tmp\LameXP\QRC_Tools.wget.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.wma2wav.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.wupdate.cpp" />
-    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-i386.cpp" />
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-i686.cpp" />
     <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x64.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -1211,7 +1211,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.aften-i386.qrc">
+    <CustomBuild Include="res\Tools.aften-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1307,7 +1307,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.flac-x86-i386.qrc">
+    <CustomBuild Include="res\Tools.flac-x86-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1367,7 +1367,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.lame-x86-i386.qrc">
+    <CustomBuild Include="res\Tools.lame-x86-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1391,7 +1391,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.mac-i386.qrc">
+    <CustomBuild Include="res\Tools.mac-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1415,7 +1415,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.mediaInfo-i386.qrc">
+    <CustomBuild Include="res\Tools.mediaInfo-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1475,7 +1475,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.mpg123-i386.qrc">
+    <CustomBuild Include="res\Tools.mpg123-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1511,7 +1511,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.oggenc2-i386.qrc">
+    <CustomBuild Include="res\Tools.oggenc2-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1559,7 +1559,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.opusdec-i386.qrc">
+    <CustomBuild Include="res\Tools.opusdec-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1595,7 +1595,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.opusenc-i386.qrc">
+    <CustomBuild Include="res\Tools.opusenc-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1619,7 +1619,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.refalac-i386.qrc">
+    <CustomBuild Include="res\Tools.refalac-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1751,7 +1751,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.wvunpack-i386.qrc">
+    <CustomBuild Include="res\Tools.wvunpack-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp"</Message>
@@ -1787,7 +1787,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.faad-i386.qrc">
+    <CustomBuild Include="res\Tools.faad-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
@@ -1835,7 +1835,7 @@ copy /Y "$(SolutionDir)\..\Prerequisites\Qt4\$(PlatformToolset)\Shared\plugins\i
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.sox-i386.qrc">
+    <CustomBuild Include="res\Tools.sox-i686.qrc">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">"$(QTDIR)\bin\rcc.exe" -o "$(SolutionDir)tmp\$(ProjectName)\QRC_%(Filename).cpp" -no-compress -name "%(Filename)" "%(FullPath)"</Command>
