@@ -559,6 +559,9 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.sox-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -1047,6 +1050,9 @@
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.sox-i686.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-avx.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>

@@ -60,7 +60,6 @@ static const bool ENABLE_CUSTOM_TOOLS = true;
 /* constants */
 static const double g_allowedExtractDelay = 12.0;
 static const size_t BUFF_SIZE = 512;
-static const size_t EXPECTED_TOOL_COUNT = 29;
 
 /* number of CPU cores -> number of threads */
 static unsigned int cores2threads(const unsigned int cores)
@@ -405,7 +404,7 @@ double InitializationThread::doInit(const size_t threadCount)
 	QDir appDir = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 
 	QScopedPointer<QThreadPool> pool(new QThreadPool());
-	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, cores2threads(m_cpuFeatures.count), EXPECTED_TOOL_COUNT));
+	pool->setMaxThreadCount((threadCount > 0) ? threadCount : qBound(2U, cores2threads(m_cpuFeatures.count), 16U));
 	ExtractorTask::clearFlags();
 
 	//Start the timer
@@ -722,6 +721,7 @@ void InitializationThread::selfTest(void)
 {
 	const unsigned int cpu[7] = {CPU_TYPE_X86_GEN, CPU_TYPE_X86_SSE, CPU_TYPE_X86_AVX, CPU_TYPE_X64_GEN, CPU_TYPE_X64_SSE, CPU_TYPE_X64_AVX, 0 };
 
+	unsigned int expectedCount = UINT_MAX;
 	for(size_t k = 0; cpu[k]; k++)
 	{
 		qDebug("[TEST]");
@@ -770,9 +770,16 @@ void InitializationThread::selfTest(void)
 				qFatal("Inconsistent checksum data detected. Take care!");
 			}
 		}
-		if(n != EXPECTED_TOOL_COUNT)
+		if (expectedCount != UINT_MAX)
 		{
-			qFatal("Tool count mismatch for CPU type %u. Should be %u, but got %u !!!", cpu[k], EXPECTED_TOOL_COUNT, n);
+			if (n != expectedCount)
+			{
+				qFatal("Tool count mismatch for CPU type %u. Should be %u, but got %u !!!", cpu[k], expectedCount, n);
+			}
+		}
+		else
+		{
+			expectedCount = n; /*remember count*/
 		}
 		qDebug("Done.\n");
 	}
