@@ -12,7 +12,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Improved file name generation from meta-tags containing characters that are forbidden in file names
 * Some improvements for "high DPI" screens: Adjust initial window size according to DPI setting
 * Updated Opus encoder/decoder libraries to v1.2-alpha2 (2017-03-03) and Opus-Tools to v0.1.10 (2017-02-22)
-* Updated MediaInfo to v0.7.94+ (2017-04-21), compiled with ICL 17.0 and MSVC 12.0
+* Updated MediaInfo to v0.7.95 (2017-05-04), compiled with ICL 17.0 and MSVC 12.0
 * Updated SoX to v14.4.2 (2015-02-22) with Dynamic Audio Normalizer v2.10 (2017-04-14) effect included
 * Updated mpg123 decoder to v1.24.0 (2017-03-02), compiled with GCC 6.3.0
 * Updated FAAD decoder to v2.7 from CVS in order to include latest libFAAD fixes (2016-11-11)
