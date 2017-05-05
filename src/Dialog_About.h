@@ -66,20 +66,20 @@ protected:
 private:
 	Ui::AboutDialog *ui; //for Qt UIC
 
-	bool m_firstShow;
-	SettingsModel *m_settings;
-	QMap<QWidget*,bool> *m_initFlags;
+	const bool m_firstStart;
+	SettingsModel *const m_settings;
+	QScopedPointer<QMap<QWidget*,bool>> m_initFlags;
 	int m_lastTab;
 	
-	QLabel *m_disque;
-	QTimer * m_disqueTimer;
+	QScopedPointer<QLabel> m_disque;
+	QScopedPointer<QTimer> m_disqueTimer;
 	bool m_disqueFlags[2];
 	QPoint m_disquePos;
 	QRect m_disqueBound;
 	double m_discOpacity;
-	QPixmap *m_cartoon[4];
 	bool m_rotateNext;
 	QScopedPointer<QElapsedTimer> m_disqueDelay;
+	QScopedPointer<QPixmap> m_cartoon[4];
 
 	void initInformationTab(void);
 	void initContributorsTab(void);

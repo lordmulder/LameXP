@@ -149,7 +149,8 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	m_disque(NULL),
 	m_disqueTimer(NULL),
 	m_rotateNext(false),
-	m_lastTab(0)
+	m_lastTab(0),
+	m_firstStart(firstStart)
 {
 	//Init the dialog, from the .ui file
 	ui->setupUi(this);
@@ -163,12 +164,6 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	if(firstStart)
 	{
 		MUtils::GUI::enable_close_button(this, false);
-	}
-
-	//Init images
-	for(int i = 0; i < 4; i++)
-	{
-		m_cartoon[i] = NULL;
 	}
 
 	//Init tab widget
@@ -193,7 +188,7 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		ui->closeButton->show();
 
 		QPixmap disque(":/images/Disque.png");
-		m_disque = new QLabel(this, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+		m_disque.reset(new QLabel(this, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint));
 		m_disque->resize(disque.size());
 		m_disque->setStyleSheet("background:transparent;");
 		m_disque->setAttribute(Qt::WA_TranslucentBackground);
@@ -211,12 +206,10 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 		m_disqueFlags[1] = (MUtils::next_rand_u32() > (UINT_MAX/2));
 		m_disque->move(m_disquePos);
 		m_disque->setWindowOpacity(m_discOpacity);
-		m_disque->show();
 
-		m_disqueTimer = new QTimer;
-		connect(m_disqueTimer, SIGNAL(timeout()), this, SLOT(moveDisque()));
-		m_disqueTimer->start(10);
+		m_disqueTimer.reset(new QTimer());
 
+		connect(m_disqueTimer.data(), SIGNAL(timeout()), this, SLOT(moveDisque()));
 		connect(ui->aboutQtButton, SIGNAL(clicked()), this, SLOT(showAboutQt()));
 	}
 	else
@@ -230,8 +223,6 @@ AboutDialog::AboutDialog(SettingsModel *settings, QWidget *parent, bool firstSta
 	//Activate "show license" button
 	ui->showLicenseButton->show();
 	connect(ui->showLicenseButton, SIGNAL(clicked()), this, SLOT(gotoLicenseTab()));
-
-	m_firstShow = firstStart;
 }
 
 AboutDialog::~AboutDialog(void)
@@ -239,18 +230,11 @@ AboutDialog::~AboutDialog(void)
 	if(m_disque)
 	{
 		m_disque->close();
-		MUTILS_DELETE(m_disque);
 	}
 	if(m_disqueTimer)
 	{
 		m_disqueTimer->stop();
-		MUTILS_DELETE(m_disqueTimer);
 	}
-	for(int i = 0; i < 4; i++)
-	{
-		MUTILS_DELETE(m_cartoon[i]);
-	}
-	MUTILS_DELETE(m_initFlags);
 	MUTILS_DELETE(ui);
 }
 
@@ -262,7 +246,7 @@ int AboutDialog::exec()
 {
 	if(m_settings->soundsEnabled())
 	{
-		if(m_firstShow)
+		if(m_firstStart)
 		{
 			if(!MUtils::Sound::play_sound_file("imageres.dll", 5080, true))
 			{
@@ -419,11 +403,7 @@ void AboutDialog::moveDisque(void)
 		
 		if(m_rotateNext)
 		{
-			QPixmap *cartoon = NULL;
-			if(m_disqueFlags[0] == true && m_disqueFlags[1] != true) cartoon = m_cartoon[0];
-			if(m_disqueFlags[0] == true && m_disqueFlags[1] == true) cartoon = m_cartoon[1];
-			if(m_disqueFlags[0] != true && m_disqueFlags[1] == true) cartoon = m_cartoon[2];
-			if(m_disqueFlags[0] != true && m_disqueFlags[1] != true) cartoon = m_cartoon[3];
+			const QPixmap *const cartoon = m_cartoon[m_disqueFlags[0] ? (m_disqueFlags[1] ? 1 : 0): (m_disqueFlags[1] ? 2 : 3)].data();
 			if(cartoon)
 			{
 				m_disque->setPixmap(*cartoon);
@@ -499,7 +479,7 @@ void AboutDialog::showEvent(QShowEvent *e)
 	ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->infoTab));
 	tabChanged(m_lastTab = ui->tabWidget->currentIndex(), true);
 	
-	if(m_firstShow)
+	if(m_firstStart)
 	{
 		ui->acceptButton->setEnabled(false);
 		ui->declineButton->setEnabled(false);
@@ -507,17 +487,26 @@ void AboutDialog::showEvent(QShowEvent *e)
 		setCursor(QCursor(Qt::WaitCursor));
 	}
 
+	if (!(m_disque.isNull() || m_disqueTimer.isNull()))
+	{
+		m_disque->show();
+		m_disqueTimer->start(10);
+	}
+
 	QTimer::singleShot(0, this, SLOT(adjustSize()));
 }
 
 void AboutDialog::closeEvent(QCloseEvent *e)
 {
-	if(m_firstShow) e->ignore();
+	if (m_firstStart)
+	{
+		e->ignore();
+	}
 }
 
 bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 {
-	if((obj == m_disque) && (event->type() == QEvent::MouseButtonPress))
+	if((!m_disque.isNull()) && (obj == m_disque.data()) && (event->type() == QEvent::MouseButtonPress))
 	{
 		MUtils::Sound::play_sound("chicken", true);
 		if (!m_cartoon[0])
@@ -525,7 +514,7 @@ bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 			QPixmap cartoon(":/images/Cartoon.png");
 			for(int i = 0; i < 4; i++)
 			{
-				m_cartoon[i] = new QPixmap(cartoon.transformed(QMatrix().rotate(static_cast<double>(i*90) + 45.0), Qt::SmoothTransformation));
+				m_cartoon[i].reset(new QPixmap(cartoon.transformed(QMatrix().rotate(static_cast<double>(i*90) + 45.0), Qt::SmoothTransformation)));
 				m_rotateNext = true;
 			}
 		}
