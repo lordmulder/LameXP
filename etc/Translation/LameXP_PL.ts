@@ -328,22 +328,22 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="849"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Silk Icons - Ponad 700 ikonek w formacie PNG</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="851"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autorem programu jest Mark James, wydano na na licencji Creative Commons &quot;BY&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="856"/>
         <source>Angry Chicken and Ghost Scream sound</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dźwięk Angry Chicken i Ghost Scream</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="858"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autorem programu jest Alexander, wydano na licencji Creative Commons &quot;BY&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="863"/>
@@ -3482,7 +3482,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Naciśnij przycisk &quot;Esc&quot; aby anulować sprawdzanie aktualizacji...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
@@ -3564,7 +3564,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zatrzymywanie sprawdzania aktualizacji, prosze czekać...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="255"/>
@@ -3609,12 +3609,12 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sprawdzanie aktualizacji zostało zatrzymane!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sprawdzanie aktualizacji zostało zatrzymane przez użytkownika. Prosze spróbować później.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="396"/>
