@@ -328,22 +328,22 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="849"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>Silk ikonok - Több mint 700 ikon PNG formátumban</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="851"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mark James által közzétéve a Creative Commons &apos;BY&apos; licenc alatt.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="856"/>
         <source>Angry Chicken and Ghost Scream sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Angry Chicken és Ghost Scream hang</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="858"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alexander által közzétéve a Creative Commons &apos;BY&apos; licenc alatt.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="863"/>
@@ -3445,7 +3445,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyomja meg az Esc gombot a frissítés ellenőrzésének megszakításához...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
@@ -3527,7 +3527,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Frissítés ellenőrzésének leállítása, kis türelmet...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="255"/>
@@ -3572,12 +3572,12 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
-        <translation type="unfinished"></translation>
+        <translation>A frissítés ellenőrzése meg lett szakítva!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>A frissítést a felhasználó megszakította. Kérjük, próbálkozzon később.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="396"/>
