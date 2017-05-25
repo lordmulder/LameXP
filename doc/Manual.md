@@ -392,7 +392,7 @@ Once you have decided for an audio format, you need to choose a *rate-control* m
 
 - VBR (quality-base variable bitrate) mode adapts the bitrate to the contents of the file. Each segment of the file receives as many bits as are required to hit the target quality level. This means that "complex" segments of the file will end up with a higher bitrate than more "simple" segments. The bits will be used where they are actually needed. However, because the bitrate varies strongly depending on the contents of the file, the resulting file size is completely unpredictable!
 
-- ABR (average bitrate) mode can be understood as a "middle course" between VBR and CBR mode. Similar to VBR mode, ABR mode adapts the bitrate to the contents of the file. But, at the same time, similar to CBR mode, ABR mode limites the bitrate variation in order to hit the specified target *average* bitrate, i.e. the resulting file size *is* predictable.
+- ABR (average bitrate) mode can be understood as a "middle course" between VBR and CBR mode. Similar to VBR mode, ABR mode adapts the bitrate to the contents of the file. But, at the same time, similar to CBR mode, ABR mode limits the bitrate variation in order to hit the specified target *average* bitrate, i.e. the resulting file size *is* predictable.
 
 *Note:* If you are uncertain which rate-control mode to chose, the rule of thumb is that VBR mode should be preferred over ABR mode when possible. And CBR mode should be avoided. See also Wikipedia's article on [variable bitrate](http://en.wikipedia.org/wiki/Variable_bitrate) encoding.
 
