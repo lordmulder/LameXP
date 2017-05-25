@@ -257,7 +257,7 @@ LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple i
 
 ### Nero Digital AAC Encoder ###
 
-First of all, you need to download the Nero AAC encoder from the official Nero Digital web-site. The download is free of charge:
+First of all, you need to download the Nero AAC encoder from the official Nero Digital web-site or one of the mirrors:
 
 * <http://www.videohelp.com/software/Nero-AAC-Codec>
 * <http://www.free-codecs.com/download/Nero_AAC_Codec.htm>
@@ -380,25 +380,31 @@ The new folder is going to be created inside the current directory and will be s
 
 ## Compression Settings ##
 
-Finally, you need to choose your **compression settings**. First, and most important, you must decide for an output *audio format (encoder)*. Depending on your needs and preferences, you can choose between [MP3](http://en.wikipedia.org/wiki/MP3), [Ogg/Vorbis](http://en.wikipedia.org/wiki/Vorbis), [Opus](http://en.wikipedia.org/wiki/Opus_%28audio_format%29), [AAC/MP4](http://en.wikipedia.org/wiki/Advanced_Audio_Coding), [FLAC](https://xiph.org/flac/) and others.
+Finally, you need to choose your **compression settings**. Most important, you must decide for an output *format (encoder)*. Depending on your needs and preferences, you can choose between [MP3](http://en.wikipedia.org/wiki/MP3), [Ogg/Vorbis](http://en.wikipedia.org/wiki/Vorbis), [Opus](http://en.wikipedia.org/wiki/Opus_%28audio_format%29), [AAC/MP4](http://en.wikipedia.org/wiki/Advanced_Audio_Coding), [FLAC](https://xiph.org/flac/) and others.
 
 *Note:* If you are uncertain which audio format to choose, then [this article](http://lifehacker.com/5927052/whats-the-difference-between-all-these-audio-formats-and-which-one-should-i-use) by Lifehacker is a good starting point. Also see the [comparison of audio coding formats](http://en.wikipedia.org/wiki/Comparison_of_audio_coding_formats) on Wikipedia. If still uncertain, just go with good old MP3 &#x1f609;
 
 ![](img/lamexp/tutorial_3a.png)
 
-Once you have decided for an audio format, you need to choose a *rate-control* mode next. The available rate-control modes include VBR (quality-base variable bitrate), ABR (average bitrate) and CBR (constant bitrate). Not all modes are available for all audio formats.
+Once you have decided for an audio format, you need to choose a *rate-control* mode next. This controls how the bits are allocated for the compressed audio files. The available rate-control modes are *CBR*, *VBR* and *ABR*:
 
-*Note:* If you are uncertain which rate-control mode to chose, the guideline is that VBR mode should be preferred over ABR mode whenever possible. And CBR mode generally should be avoided. See also Wikipedia's article on [variable bitrate](http://en.wikipedia.org/wiki/Variable_bitrate) encoding.
+- CBR (constant bitrate) uses a *fixed* bitrate, i.e. each segment of the file receives the exactly same amount of bits, regardless of its contents. This comes at the advantage that the resulting file size is perfectly predictable. However, because the bitrate can *not* be adapted to the contents of the file at all, this generally is the *least* favorable mode!
+
+- VBR (quality-base variable bitrate) mode adapts the bitrate to the contents of the file. Each segment of the file receives as many bits as are required to hit the target quality level. This means that "complex" segments of the file will end up with a higher bitrate than more "simple" segments. The bits will be used where they are actually needed. However, because the bitrate varies strongly depending on the contents of the file, the resulting file size is completely unpredictable!
+
+- ABR (average bitrate) mode can be understood as a "middle course" between VBR and CBR mode. Similar to VBR mode, ABR mode adapts the bitrate to the contents of the file. But, at the same time, similar to CBR mode, ABR mode limites the bitrate variation in order to hit the specified target *average* bitrate, i.e. the resulting file size *is* predictable.
+
+*Note:* If you are uncertain which rate-control mode to chose, the rule of thumb is that VBR mode should be preferred over ABR mode when possible. And CBR mode should be avoided. See also Wikipedia's article on [variable bitrate](http://en.wikipedia.org/wiki/Variable_bitrate) encoding.
 
 ![](img/lamexp/tutorial_3b.png)
 
-Last but not least, you need to choose the desired target *bitrate* or *quality-level*. Put simply, this controls the  "quality vs. file size" trade-off. You choose a target quality-level in case of VBR mode, and you choose a target (average) bitrate in case of ABR or CBR mode.
+Last but not least, you need to choose the desired target *bitrate* (kbps) or the desired *quality-level*. Put simply, this controls the "quality vs. file size" trade-off. You choose a target quality-level in case of VBR mode. And you choose a target (average) bitrate in case of ABR or CBR mode. A *higher* target bitrate or a *higher* target quality level results in improved audio quality, but also comes at the cost of larger files. Conversely, a *lower* target bitrate or a *lower* target quality level results in smaller files, but also comes at the cost of reduced audio quality. The "optimal" setting highly depends on your personal preferences.
 
-*Note:* If you are uncertain which bitrate or quality-level to choose, bare in mind that a higher bitrate (or a better quality level) results in better audio quality, but also produces larger files &ndash; and vice versa. "Level 2" or "192 kbps" is a typical choice for MP3.
+*Note:* If you are uncertain which bitrate or quality-level to choose, "Level 2" (VBR) or "192 kbps" (ABR) is a common choice for MP3. If the size of the resulting file is *not* a primary concern, you can go with "Level 0" (VBR) or "320 kbps" (ABR) right away.
 
 ![](img/lamexp/tutorial_3c.png)
 
-*Did you know?* You can click on the "Reset" link at any time in order to reset all available settings for all available encoders to their factory defaults.
+*Did you know?* You can click the "Reset" link in order to reset *all* compression settings for *all* encoders to their factory defaults.
 
 
 ## File Processing ##
@@ -817,7 +823,23 @@ PGP, on the other hand, is based on the "web of trust" concept. This means that 
 
 LameXP *can* be used to convert audio files that have been extracted from an Audio CD, but it currently can **not** extract ("rip") the audio tracks from the Audio CD directly. Consequently you will have to extract the audio tracks first, before you can convert them with LameXP. We recommend using the [*Exact Audio Copy*](http://www.exactaudiocopy.de/) software for that purpose. When ripping tracks from an Audio CD, always save the tracks as *uncompressed* Wave files (or as lossless FLAC files) in order to avoid quality loss!
 
-*Warning:* The Windows Explorer will show CDA files (such as `Track01.cda`) on an Audio CD. These are just *dummy* files! Actually an Audio CD does **not** contain a file system. Thus there are **no** files either. There only are *audio tracks* on an Audio CD. These audio tracks *can* be extracted as files (e.g. Wave Audio files), by using a proper ripping software. Then the extracted files can be converted. At the same time, any attempt to copy or convert the dummy `*.cda` is **not** going to work!
+*Warning:* The Windows Explorer will show CDA files (such as `Track01.cda`) on an Audio CD. These are just *dummy* files! Actually an Audio CD does **not** contain a file system. Thus there are **no** files either. There only are *audio tracks* on an Audio CD. These audio tracks *can* be extracted as files (e.g. Wave Audio files), by using a proper ripping software. Then the extracted files can be converted. At the same time, any attempt to convert the dummy `*.cda` files is **not** going to work!
+
+
+## Q: Is there a way to use *custom* binaries with LameXP?
+
+LameXP is a GUI front-end that uses a number third-party tools. All of these tools are already "built-in", with only a few exceptions. Therefore it is **not** normally required to provide separate binaries &ndash; LameXP uses the built-in binaries by default. If,&nbsp;however, you wish to use a *custom* (user-provided) binary, rather than the built-in binary, then this is still possible!
+
+In order to replace a "built-in" binary, simply put the user-provided binary to the following location:
+
+	<install_folder>\tools\<build_number>\<tool_name>.exe
+
+If, for example, you want to replace the binary `foobar.exe` and the current build number is **42**, then you'd use this path:
+
+	C:\Path to your LameXP install folder\tools\42\foobar.exe
+
+***Warning:*** LameXP has been carefully optimized to work properly with the *built-in* tool versions. Also, some of the built-in binaries even contain "unofficial" patches to make them work correctly with LameXP. If you replace any of these tools with a *custom* (user-provided) version, there is absolutely **no** guarantee that *your* tool version will work correctly with LameXP!
+
 
 
 &nbsp;
