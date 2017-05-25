@@ -716,80 +716,93 @@ In order to create a "fully static" build of LameXP, i.e. a build that does *not
 
 # F.A.Q. (Frequently Asked Questions) #
 
-This section tries to answer some of the most frequently asked questions. So if you have a question, please have a look at this section, before you send the question to us &#x1f609;
+This section tries to answer some of the most frequently asked questions. So if you have a question, please carefully read this section, before you send the question to us via email or before you open a new support ticket &#x1f609;
 
 
 ## Q: Do I have to pay for using or obtaining LameXP? ##
 
-**A:** Nope. LameXP is [free software](http://en.wikipedia.org/wiki/Free_software). You may use it free of charge and for any purpose, including commercial purposes, according to the terms of the [*GNU General Public License*](GNU General Public License). The developers of LameXP will **never** ask you to pay for using the LameXP software. Also, several *free* download mirrors are provided. However, it was brought to our attention, that there are some *third-party* web-sites which offer *payed* downloads of LameXP, or provide LameXP downloads that have been infected with Adware &ndash; we do **not** cooperate with any of these web-sites! Therefore, please do **not** pay money for using or obtaining the LameXP software; the developers of LameXP will **not** benefit from this money. If anybody tries to make you pay money for for using or obtaining the LameXP software, this is *fraud* and you should **not** respond to this kind of offer!
+**A:** Nope. LameXP is [free software](http://en.wikipedia.org/wiki/Free_software). You may use it ***free of charge*** and for any purpose, including commercial purposes, according to the terms of the [*GNU General Public License*](GNU General Public License). The developers of LameXP will **never** ask you to pay for using the LameXP software. Also, several ***free*** download mirrors are provided. However, it was brought to our attention, that there are some *third-party* web-sites which offer *payed* downloads of LameXP, or provide LameXP downloads that have been infected with Adware &ndash; we do **not** cooperate with any of these web-sites! Therefore, please do **not** pay money for using or obtaining the LameXP software; the developers of LameXP will **not** benefit from this money at all. If anybody tries to make you pay money for using and/or for obtaining the LameXP software, you should **not** respond to this dubious offer!
 
 
 ## Q: Can I redistribute the LameXP software? ##
 
-**A:** Yes. LameXP is [free software](http://en.wikipedia.org/wiki/Free_software). You may modify and/or redistribute it freely, according to the terms of the [*GNU General Public License*](GNU General Public License). However, be aware that it is *strictly forbidden* to bundle the LameXP program files and/or the LameXP installation program with any kind of Adware, Spyware or PUP (potentially unwanted program). Usually, *no* additional permission will be needed. If, however, you wish to redistribute the LameXP software in a way that does **not** *comply* with the license terms, a written permission by the author of the LameXP software is required!
+**A:** Yes. LameXP is [free software](http://en.wikipedia.org/wiki/Free_software). You may modify and/or redistribute it freely, according to the terms of the [*GNU General Public License*](GNU General Public License). However, be aware that it is *strictly forbidden* to bundle the LameXP program files and/or the LameXP installation program with any kind of Adware, Spyware or PUP (potentially unwanted program). Usually, **no** additional permission is needed to redistribute LameXP. If, however, you wish to redistribute the LameXP software in a way that does **not** *comply* with the license terms, *then* a written permission from the author (copyright holder) is absolutely necessary!
 
 
 ## Q: How can I donate to the authors of LameXP? ##
 
-**A:** LameXP is a *non-profit* project. The authors of the LameXP software do **not** accept any donations, in terms of money. If you wish to support the LameXP project, then you may do so by contributing translations, by improving the LameXP program code or by providing web-servers.
+**A:** LameXP is a *non-profit* project. The authors of the LameXP software currently do **not** accept any donations, in terms of money. If you wish to support the LameXP project, then you may do so by contributing translations, by improving the LameXP program code or by providing web-servers. Please feel free to contact us at any time, if you want to help!
 
 
 ## Q: Why is this software called *LameXP*? ##
 
-**A:** Originally, the LameXP software was created as a very simple [GUI front-end](http://en.wikipedia.org/wiki/Graphical_user_interface) to the [*LAME*](http://lame.sourceforge.net/) MP3 command-line encoder. The original version of this software, released some time in 2004, did **not** support any encoders except for LAME, it did **not** support any input formats except for Wave Audio, it did **not** support any audio filters, it did **not** support multi-threading, it did **not** support Unicode file names and it did **not** handle meta information. Because the software was a front-end to LAME, because it was running on the Microsoft Windows operating system and because, back at that time, *Windows XP* was the most popular Windows version (by far), I decided to call the software "LAME front-end for Windows XP" &ndash; or, in short, *LameXP*. Note the most creative name, I have to admit. Anyway, more and more features have been added to the LameXP software over the years. Also, the software has been re-written from the scratch at least two times. Nonetheless, the original name of the software has been retained. This is partly because people have become used to that name, and partly because I simply haven't been able to come up with a better name&hellip;
+**A:** Originally, the LameXP software was created as a very simple [GUI front-end](http://en.wikipedia.org/wiki/Graphical_user_interface) to the [*LAME*](http://lame.sourceforge.net/) MP3 command-line encoder. The original version of this software, released some time in 2004, did **not** support any encoders except for LAME, it did **not** support any input formats except for Wave Audio, it did **not** support any audio filters, it did **not** support multi-threading, it did **not** support Unicode file names and it did **not** handle meta information. Because the software was a front-end to LAME, and because, back at that time, *Windows XP* was the most popular Windows version (by far), we decided to call the software "LAME front-end for Windows XP" &ndash; or, in short, *LameXP*. Anyway, more and more features have been added to the LameXP software over the years. Also, the software has been re-written from the scratch two times. Nonetheless, the original name of the software has remained. Now, a whole lot of people know the software by *this* name, so it is unlikely to ever change.
 
 
 ## Q: Why are the LameXP binaries *not* digitally signed? ##
 
-**A:** They *are*! The official LameXP binaries are digitally signed by [*PGP*](http://de.wikipedia.org/wiki/Pretty_Good_Privacy) signatures, created using the [GnuPG](http://de.wikipedia.org/wiki/GNU_Privacy_Guard) software. However, the LameXP binaries are *not* signed in a way that the Microsoft Windows operating system recognizes. Please note that Microsoft Windows does **not** currently recognize PGP (GnuPG) signatures. For this reason, Microsoft Windows may show a warning when trying to launch or install the LameXP software. Microsoft Windows will also complain that the LameXP program files originate from an "unknown publisher", despite they *are* signed.
+**A:** They *are* signed! The official LameXP binaries are digitally signed by [*PGP*](http://de.wikipedia.org/wiki/Pretty_Good_Privacy) signatures, created using the [GnuPG](http://de.wikipedia.org/wiki/GNU_Privacy_Guard) software. However, the LameXP binaries are *not* signed in a way that the Microsoft Windows operating system recognizes. Please note that Microsoft Windows does **not** currently recognize PGP (GnuPG) signatures. For this reason, Microsoft Windows may show a warning message when trying to launch or install the LameXP software. Microsoft Windows will also complain that the LameXP program files originate from an "unknown publisher", as it can't understand the PGP signature.
 
-So why are the LameXP binaries not signed in the way Microsoft Windows recognizes? This is because Microsoft Windows uses a *hierarchical* trust model: Windows trusts into a number of *Certificate Authorities* (CA), which are built into the operating system. These CA's can issue signing certificates, e.g., to software companies. The software company can then use its signing certificate to sign their binaries. Finally, Windows will verify the signature by using the corresponding signing certificate. And the signing certificate is verified using the *built-in* CA certificate. However, this system is *flawed*: First of all, CA's do *not* create signing certificates for free. Also these certificates  are only valid for a limited period of time. LameXP is a *non-profit* project and therefore we can *not* afford buying new certificates in regular intervals. Secondly, and even more important, the whole system depends on the *trustworthiness of the CA's*. But, as we all (should) know by now, these CA's can be forced to create "bogus" certificates, e.g. by intelligence services or other governmental organizations. Please also see [**this**](http://blog.fefe.de/?ts=b25933c5) blog post by "fefe" for an in-depth explanation.
+So why are the LameXP binaries not signed in the way Microsoft Windows recognizes? This is because Microsoft Windows uses a *hierarchical* trust model: Windows trusts into a number of *Certificate Authorities* (CA), which are built into the operating system. These CA's can issue signing certificates, e.g., to software companies. The software company can then use its signing certificate to sign their binaries. Finally, Windows will verify the signature by using the corresponding signing certificate. And the signing certificate is verified using the *built-in* CA certificate. However, there are problems: First of all, CA's do *not* issue software signing certificates for free. Also these certificates are only valid for a limited period of time. LameXP is a *non-profit* project and therefore we can *not* afford buying new certificates in regular intervals! Secondly, and even more important, the whole system depends on the *trustworthiness* of a few root CA's. But, as we all (should) know by now, the CA's *can* be forced to create "bogus" certificates, e.g. on the request of intelligence services or other governmental organizations.
 
-If you want to verify the LameXP signatures yourself, then you may do so by using the [Gpg4win](http://www.gpg4win.de/) software package, an easy-to-use distribution of the *GnuPG* software for Microsoft Windows. Of course you will also require the *public* key of the LameXP developers. The *finperprint* of the official  GnuPG signing key is ``3265784425BF2B394F67CE07106A413D6CF3FA22`` and the corresponding public key block is provided in the following. If you are *not* familiar with the GnuPG software yet, please have a look at the [Gpg4win compendium](http://www.gpg4win.de/documentation.html) or the [GnuPG manual](https://www.gnupg.org/documentation/manuals.html).
+PGP, on the other hand, is based on the "web of trust" concept. This means that all participants sign each others' keys &ndash; after the keys have been verified. There are **no** "almighty" authorities! If you want to verify the LameXP signatures yourself, then you may do so by using the [Gpg4win](http://www.gpg4win.de/) software package, an easy-to-use distribution of the *GnuPG* software for Microsoft Windows. Of course you will also require the *public* key of the LameXP developers! The *finperprint* of our PGP signing key is **`DFAD4340D83D4020435D78BB2B5913365F57E03F`** and the corresponding public key block is provided in the following. If you are *not* familiar with the GnuPG software yet, please have a look at the [Gpg4win compendium](http://www.gpg4win.de/documentation.html) or the [GnuPG manual](https://www.gnupg.org/documentation/manuals.html).
 
 
-**LameXP public PGP (GnuPG) key:**
+**LoRd_MuldeR's PGP public key:**
 
+	User-ID: LoRd_MuldeR (muldersoft.com) <mulder2@gmx.de>
+	Validity: from 2015-08-23 14:02 through 2025-08-20 14:02
+	Certificate type: 4,096-bit RSA
+	
 	-----BEGIN PGP PUBLIC KEY BLOCK-----
-	Version: GnuPG v2.0.21 (MingW32)
-
-	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
-	sE7XdEZn+w==
-	=WDwE
+	mQINBFXZtmgBEADZVW8CgoSjGvjwKVWWfZ+I/MsyD1y495hp7or+XW+OW/wWI7Qb
+	THas0OTgbvhh59L2PFPBq0ZhWvPqZ5aaTfz6R/dM/H2jaeoGykKfAAPCZRudkrjv
+	GLhao+aYo9lBSINAvjoNBWFfzXTzPsbsjbeHYrTPQZb4IVjHrBzvmOFBGnN4n5V+
+	gXacFThP2ug3QI8XAc3Mu/smmI3adPysLwGL7dVrl+U4i1UKkDWeYuBuWgFDZek3
+	8CcryR31i91HXj64H/n6Vbu/L9XfWSF3Ehd2QWMT0UiqQmqnmOTMNilLmdpmJYaI
+	IvQZTcKDb+4eCvnydKrq+qTxplfBvo8tDXVfX2fmvBUuLYIQ23yBcM16rgyq9WKa
+	EESYoz723QgiwsO87AFbktPzBv1FcL7lsEkR3swAkTIFBF4BLTZLPFlrxTTRvP/O
+	CxBu335VkN/MdLMRSmHE+OFmO1NBVfoLDVmIVNtbSoiuHO51SEwcMP3FPNbujNpL
+	+HxkxQd9r9iTq6wGiekMb//D8RbzoD4Te2meeAKHQT+X5QuD6rctRmj6G/6OFGRD
+	IocmUYC+ggh26rCkDClchYpbEDc2WSd5fyW3WiatAmDXCgdSszsHBi6BFULmD/fv
+	C6wxDT5g4kZZgw4lReOWaGezIeSn+TxCOdLpDtbR48/ZoHOYTXv29c7m+wARAQAB
+	tC1Mb1JkX011bGRlUiAobXVsZGVyc29mdC5jb20pIDxtdWxkZXIyQGdteC5kZT6J
+	Aj4EEwECACgFAlXZtmgCGwMFCRLMAwAGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheA
+	AAoJECtZEzZfV+A/GNEP/iy444ggNg2ghuzPpt3x2MNqdMLVfuzYiuPTFW7F3dj5
+	5Ltkl0DyqjmrqytwrIpBpBJCB12l7Dbu6QGelM0/PIrj//Ztess+lOMBqGe2K/yI
+	XxYEIMEANhTXcupQRsvsPBjlUwA0XUQwgc3dJ0wmUMegUH2r2a9LPF3QIZX/g4hG
+	91BAI0uXBZWFkBSzg8Momv6sIg6X4gDxgxpSPr+3d+f+fLuWgK64kkNJuZ+Ag1+q
+	zEEZTZgRKOWjXhSI7Ry27wXj5c0s+6REHaCEzo6ZT+rfSc4mA/Sg2nGb0+jwviW0
+	/mUO5RSVGIKHbJz97rTeqsV2t0nknXkU8A3rbIHa6N0SvvSf6dGlGyrm3cV2Z21x
+	yYfnAKnyTlrzLF95DeMiA/G+qVeMwYXIJ61WfvMUAxH0T9nOYVDuX/XY3M6nltG6
+	kXVQcY9QcX41dgeJ50fK2VTFLLhpZXSXTJJpGOdUYnjnYT1M8mUpKJ4X5svznp4H
+	0Mbf7Bf0rtc+r+PkLOQPwsEt4Vl7pt1lh+VOL8jDoZ8PeZh+nzN1yqNFduscEaNm
+	uSJ0gQfn//ZDOdXc7QAUNMgSr3tok+PlgACvD02CVcmwugbXJo9ez5wA7w6Beolj
+	W37KL8vM/KCSQhMWR4CjyLH2V7L5GAc52zAvBlzLL27ae7gClXyHSlZYp1+No6TY
+	uQINBFXZtmgBEADH8qOUF4ubKgrZ+mJoCtEJBbX7b4qHZ8kfD6f1EPQKN34M7Al8
+	E8YRsP1CN0X5jWke8nTK9dlNbFmCYTV7mVCFkxj0Ph5lD4enp478GJKbuv8IWw0+
+	yF5SzYW23scDnszv7HKJOQhTqXOY1ON+JbGD7KeLFTguBb0DgGQEK8g7yWjm6hVO
+	YVrFs4a1d4DYXQPofUCYcJBprMVWp8npf8ckl6nK/1MiadIIvjdmWoBVltOY7fRq
+	aVHviuvkdWG4u/U9savKuFlyeAn68Qj54q5Riko1cwOpdbwgfb/aI/RDR/XXsaFv
+	NM3VESdMTTP2ct9fDwA/+KZq9KwjeV3j+tx63ihHc79L5GxEKC+G8l2aIvwAyZwu
+	NsUPWgKcT2fn9dEKD/JaFw27BoUJoFxxBIpzCq35RvDi1Pv2ONS38OlqxhlZhSr1
+	odqA8IkSdzM2cUS+Lk8KuL2GUGSF1hnX2M7kuZHvB9x1PvyPsj35n+OxsSvKCs7C
+	nGtSUs4DXWLQVu6cTohZFAEgbkvTvwmJ41KkbtLiv1st4rAJVT+O2UY7wvpYMLRR
+	f2lc8+4xD6y7C7fqnEp75u+jxtbNaZU9MZdnPBjbw80hWKADgpRRHvGRhporNta8
+	4Mx7SaIO71PHuaB+j7O+CO+Ahce/mq5iJt8YjlGuKJqPMeDysUT4ol9OpwARAQAB
+	iQIlBBgBAgAPBQJV2bZoAhsMBQkSzAMAAAoJECtZEzZfV+A/OAAP/39kMq6MYfJB
+	lYE9Uuxh6AnxKYfW6N6Rm67NemnVU7dLfED/FBxuINgB+gYDOvgtfJZAJaacgk42
+	DMNaq/YVaBASF5Sgj92de9HZzRocCAkCNDvbB3S4NKsDiwxQGsMTn7iT2FqnvyJ7
+	8ud60waNZV7cfGOKUQjxo0KNUK8P3KRumENas1uw6kd0aZxcHumSRppXFu+typTy
+	RMoTqW8djzlkmamwhw5QLsNu2KCivzVf15j/6mdLo8RoSxfLwmTHHYuHN91dq1l7
+	Y9NByCeDunr8HLtcgaB1c4cO2F6w0Z31YNUJvEC7pVP/EDAR8J2yzajg4d0P7kZi
+	30o4GjG/JkgpLZ/nhyuY5l2otII6AY4etitecsNcnKJtryXVbQ/39qns30c6HnzA
+	4qrxXkQ8res2AkFROpf53G8pud5aKm3CDv0J33RuAIvv65g1icQjhkEZ3NKvI7QQ
+	1igIf3SM8Ck8DPDTqAT+CnhA2HCJpAhyF1bj6lBf0y/SYTGHGhcFDvNrNqKXPpij
+	1aHbcNxns5mfEncIImiZGgBI5FoVnz2y+TMJbfS1cKOwkZC+eMooReV3Tq1SdMIk
+	sKt50hQMIf2m6hwIBoni4+v4h5Tr1wgNpQl1gtmJ7AWztRsmNSUxZiI46mE5HRjG
+	n5YQ4Q9n4ecj1YCAuyjMrPDF1rOrp8ND
+	=Vpei
 	-----END PGP PUBLIC KEY BLOCK-----
 
 
@@ -797,7 +810,14 @@ If you want to verify the LameXP signatures yourself, then you may do so by usin
 
 **A:** LameXP does **not** connect to any web-server, except for the "automatic updates" feature. Of course, in order to check for new updates, LameXP *unavoidably* has to communicate with our update servers. However, in **no** event LameXP will search for updates *without* your consent. Also, LameXP will **not** send any personal information to the update server. Instead of *uploading* your information, e.g. your current program version, to the web-server, LameXP will *download* the update information from the update server and compare it to your installed version locally. Furthermore, all information and program files downloaded from the update servers are protected by PGP (GnuPG) signatures, in order to assure the authenticity and integrity of these files. Files with missing/invalid signature are going to be *rejected*, so (spoofing) attacks are prevented.
 
-*Note:* Before LameXP actually tries to download information from our update servers, it will check your internet connection first. Only checking whether the update server is reachable does **not** suffice here. In case that the update server does **not** respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connection is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of "known" hosts, taken mostly from [Alexa's Top 500](http://www.alexa.com/topsites) list. In order to validate the Internet connection, LameXP will pick a *random* host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of "known" hosts have been reached successfully.
+*Note:* Before LameXP actually tries to download information from our update servers, it will check your Internet connection. Only checking whether the update server itself is reachable does **not** suffice here. In case that the update server does **not** respond, this could mean that our servers are currently experiencing problems, but it could also mean that your Internet connection is failing. In order to distinguish these cases, LameXP will validate the Internet connection prior to connecting to the update server. For this purpose, LameXP contains a rather long list of "known" hosts, taken mostly from [Alexa's Top 500](http://www.alexa.com/topsites) list. In order to validate the Internet connection, LameXP will pick a *random* host from the list and check whether that host can be reached. This process will be repeated, until a certain minimum number of "known" hosts have been reached.
+
+
+## Q: Can LameXP convert tracks from an Audio CD?
+
+LameXP *can* be used to convert audio files that have been extracted from an Audio CD, but it currently can **not** extract ("rip") the audio tracks from the Audio CD directly. Consequently you will have to extract the audio tracks first, before you can convert them with LameXP. We recommend using the [*Exact Audio Copy*](http://www.exactaudiocopy.de/) software for that purpose. When ripping tracks from an Audio CD, always save the tracks as *uncompressed* Wave files (or as lossless FLAC files) in order to avoid quality loss!
+
+*Warning:* The Windows Explorer will show CDA files (such as `Track01.cda`) on an Audio CD. These are just *dummy* files! Actually an Audio CD does **not** contain a file system. Thus there are **no** files either. There only are *audio tracks* on an Audio CD. These audio tracks *can* be extracted as files (e.g. Wave Audio files), by using a proper ripping software. Then the extracted files can be converted. At the same time, any attempt to copy or convert the dummy `*.cda` is **not** going to work!
 
 
 &nbsp;
