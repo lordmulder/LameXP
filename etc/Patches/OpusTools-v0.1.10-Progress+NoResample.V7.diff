@@ -1,12 +1,11 @@
  src/opusdec.c        | 24 +++++++++++++++++++++---
  src/opusenc.c        | 18 ++++++++----------
- win32/config.h       | 10 +++++++++-
+ win32/config.h       | 16 +++++++++++++++-
  win32/genversion.bat |  1 +
- win32/version.h      | 12 +++++++++++-
- 5 files changed, 50 insertions(+), 15 deletions(-)
+ 4 files changed, 45 insertions(+), 14 deletions(-)
 
 diff --git a/src/opusdec.c b/src/opusdec.c
-index d085f04..92027fe 100644
+index 7e51f7a..cced424 100644
 --- a/src/opusdec.c
 +++ b/src/opusdec.c
 @@ -53,6 +53,7 @@
@@ -85,7 +84,7 @@ index d085f04..92027fe 100644
                       last_spin++;
                       last_coded_seconds=coded_seconds;
 diff --git a/src/opusenc.c b/src/opusenc.c
-index 5f89d8a..52a080c 100644
+index 129dcdb..43b7273 100644
 --- a/src/opusenc.c
 +++ b/src/opusenc.c
 @@ -41,6 +41,7 @@
@@ -96,7 +95,7 @@ index 5f89d8a..52a080c 100644
  
  #ifdef _MSC_VER
  #define snprintf _snprintf
-@@ -1031,6 +1032,7 @@ int main(int argc, char **argv)
+@@ -1032,6 +1033,7 @@ int main(int argc, char **argv)
          double estbitrate;
          double coded_seconds=nb_encoded/(double)coding_rate;
          double wall_time=(stop_time-start_time)+1e-6;
@@ -104,7 +103,7 @@ index 5f89d8a..52a080c 100644
          char sbuf[55];
          static const char spinner[]="|/-\\";
          if(!with_hard_cbr){
-@@ -1038,20 +1040,16 @@ int main(int argc, char **argv)
+@@ -1039,20 +1041,16 @@ int main(int argc, char **argv)
            estbitrate=(total_bytes*8.0/coded_seconds)*tweight+
                        bitrate*(1.-tweight);
          }else estbitrate=nbBytes*8*((double)coding_rate/frame_size);
@@ -132,10 +131,10 @@ index 5f89d8a..52a080c 100644
          fprintf(stderr,"%s",sbuf);
          fflush(stderr);
 diff --git a/win32/config.h b/win32/config.h
-index 5a1e250..1090a9f 100644
+index 76d34b6..d8f0fa7 100644
 --- a/win32/config.h
 +++ b/win32/config.h
-@@ -10,7 +10,15 @@
+@@ -10,7 +10,21 @@
  #define USE_ALLOCA            1
  #define FLOATING_POINT        1
  #define SPX_RESAMPLE_EXPORT
@@ -145,37 +144,26 @@ index 5a1e250..1090a9f 100644
 +#if defined(_M_X64) || (defined(_M_IX86_FP) && (_M_IX86_FP >= 1))
 +#define __SSE__               1
 +#endif
-+
 +#if defined(_M_X64) || (defined(_M_IX86_FP) && (_M_IX86_FP >= 2))
 +#define __SSE2__              1
 +#endif
++
++#ifdef __SSE__
++#pragma message( "SSE code is enabled!" )
++#endif
++#ifdef __SSE2__
++#pragma message( "SSE2 code is enabled!" )
++#endif
  
- #define RANDOM_PREFIX foo
+ #define RANDOM_PREFIX opustools
  
 diff --git a/win32/genversion.bat b/win32/genversion.bat
-index 44ba29c..e94e8ea 100644
+index 1def746..64b0a5e 100644
 --- a/win32/genversion.bat
 +++ b/win32/genversion.bat
 @@ -1,4 +1,5 @@
  @echo off
 +goto:eof
  
- for /f %%v in ('git describe --tags --match "v*" --always') do set version=%%v
+ setlocal enableextensions enabledelayedexpansion
  
-diff --git a/win32/version.h b/win32/version.h
-index 3c8a521..c05f50f 100644
---- a/win32/version.h
-+++ b/win32/version.h
-@@ -1 +1,11 @@
--#define PACKAGE_VERSION "v0.1.9-dev"
-+#define __PACKAGE_VERSION "v0.1.9-git"
-+
-+#if defined(__AVX__) && __AVX__
-+#define PACKAGE_VERSION __PACKAGE_VERSION " AVX1 [" __DATE__ "]"
-+#else
-+#if defined(__SSE__) && __SSE__
-+#define PACKAGE_VERSION __PACKAGE_VERSION " SSE2 [" __DATE__ "]"
-+#else
-+#define PACKAGE_VERSION __PACKAGE_VERSION " IA32 [" __DATE__ "]"
-+#endif
-+#endif
