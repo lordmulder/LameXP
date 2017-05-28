@@ -1594,7 +1594,7 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1474"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
-        <translation>Diese Demo (Test) Version von LameXP ist am %1. abgelaufen.</translation>
+        <translation>Diese Demo (Test) Version von LameXP ist am %1 abgelaufen.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="4502"/>
