@@ -754,12 +754,14 @@ So why are the LameXP binaries not signed in the way Microsoft Windows recognize
 PGP, on the other hand, is based on the "web of trust" concept. This means that all participants sign each others' keys &ndash; after the keys have been verified. There are **no** "almighty" authorities! If you want to verify the LameXP signatures yourself, then you may do so by using the [Gpg4win](http://www.gpg4win.de/) software package, an easy-to-use distribution of the *GnuPG* software for Microsoft Windows. Of course you will also require the *public* key of the LameXP developers! The *finperprint* of our PGP signing key is **`DFAD4340D83D4020435D78BB2B5913365F57E03F`** and the corresponding public key block is provided in the following. If you are *not* familiar with the GnuPG software yet, please have a look at the [Gpg4win compendium](http://www.gpg4win.de/documentation.html) or the [GnuPG manual](https://www.gnupg.org/documentation/manuals.html).
 
 
-**LoRd_MuldeR's PGP public key:**
+**MuldeR's signature key:**
 
-	User-ID: LoRd_MuldeR (muldersoft.com) <mulder2@gmx.de>
-	Validity: from 2015-08-23 14:02 through 2025-08-20 14:02
-	Certificate type: 4,096-bit RSA
-	
+	pub   rsa4096 2015-08-23 [expires: 2025-08-20]
+	      DFAD 4340 D83D 4020 435D 78BB 2B59 1336 5F57 E03F
+	uid   LoRd_MuldeR (muldersoft.com)
+
+**PGP key block containing the required key:**
+
 	-----BEGIN PGP PUBLIC KEY BLOCK-----
 	mQINBFXZtmgBEADZVW8CgoSjGvjwKVWWfZ+I/MsyD1y495hp7or+XW+OW/wWI7Qb
 	THas0OTgbvhh59L2PFPBq0ZhWvPqZ5aaTfz6R/dM/H2jaeoGykKfAAPCZRudkrjv
