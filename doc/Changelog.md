@@ -5,7 +5,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 
 # LameXP v4.xx History #
 
-## LameXP v4.15 [2017-??-??] ## {-}
+## LameXP v4.15 [2017-05-31] ## {-}
 
 * Fixed a bug in auto-rename feature, that caused problems when a meta-tag contained path separators
 * Fixed included MediaInfo binary not working on processor *without* SSE2 support
