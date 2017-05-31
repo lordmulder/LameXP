@@ -1,11 +1,11 @@
 [!Update]
-TimestampCreated=2017-05-28
+TimestampCreated=2017-05-31
 
 [LameXP]
-BuildNo=2001
-BuildDate=2017-05-14
+BuildNo=2002
+BuildDate=2017-05-31
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.sourceforge.net/update/
-DownloadFilename=LameXP-RC2.2017-05-28.Release-Static.Build-2001.exe
-DownloadFilecode=53a010ec598f42a3cfefc34e1e40aa1325437b36
-DownloadChecksum=3087EF31BD04249738839EA5FC5063E96E1B7CFC65D74EF049472626E0A8148892806FFCF135DC828BC359DA4E7BBBE5
+DownloadFilename=LameXP.2017-05-31.Release-Static.Build-2002.exe
+DownloadFilecode=8f956fea27a0eb2fd896140380da6f6f0fbce41d
+DownloadChecksum=0BA93F81E800F6D756CA858027119CD2F012FB1FF913CB099E70D063C25FC33A1A71BB1DEF141520748AD50F9C3D58D0
