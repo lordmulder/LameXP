@@ -35,6 +35,7 @@
 #include <QDate>
 #include <QFileInfo>
 #include <QReadWriteLock>
+#include <QRegExp>
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARS
@@ -165,10 +166,9 @@ bool lamexp_version_portable(void)
 		}
 		else
 		{
-			const QString baseName = QFileInfo(QApplication::applicationFilePath()).completeBaseName();
-			const int idx1 = baseName.indexOf("lamexp", 0, Qt::CaseInsensitive);
-			const int idx2 = baseName.lastIndexOf("portable", -1, Qt::CaseInsensitive);
-			g_lamexp_portable = ((idx1 >= 0) && (idx2 >= 0) && (idx1 < idx2)) ? (1) : (0);
+			const QRegExp regex_portable("[_\\-]p", Qt::CaseInsensitive);
+			const QString baseName = QFileInfo(QApplication::applicationFilePath()).baseName();
+			g_lamexp_portable = qBound(0, baseName.indexOf(regex_portable), 1);
 		}
 	}
 	
