@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA" sourcelanguage="en">
+<TS version="2.1" language="uk_UA" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -3482,7 +3482,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть кнопку Esc для відміни перевірки оновлень...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
@@ -3543,7 +3543,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинка перевірки оновлень, будь ласка, зачекайте...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="298"/>
@@ -3584,12 +3584,12 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірка оновлень була відмінена!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірка оновлень була відмінена користувачем. Будь ласка, спробуйте ще раз пізніше.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="396"/>
