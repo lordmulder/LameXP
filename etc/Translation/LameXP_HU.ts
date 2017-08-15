@@ -3066,57 +3066,62 @@
         <translation>A forrás hangfájl nem nyitható meg olvasásra:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="443"/>
+        <location filename="../../src/Thread_Process.cpp" line="442"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>A cél kimeneti könyvtár nem létezik, és NEM hozható létre:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="452"/>
+        <location filename="../../src/Thread_Process.cpp" line="451"/>
         <source>The target output directory is NOT writable:</source>
         <translation>A cél kimeneti könyvtár NEM írható:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <source>Failed to generate non-existing target file name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Thread_Process.cpp" line="528"/>
         <source>Unknown File Name</source>
         <translation>Ismeretlen fájlnév</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <location filename="../../src/Thread_Process.cpp" line="530"/>
         <source>Unknown Title</source>
         <translation>Ismeretlen cím</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="531"/>
         <source>Unknown Artist</source>
         <translation>Ismeretlen előadó</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="532"/>
         <source>Unknown Album</source>
         <translation>Ismeretlen album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="524"/>
+        <location filename="../../src/Thread_Process.cpp" line="534"/>
         <source>Unknown Comment</source>
         <translation>Ismeretlen hozzászólás</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="470"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>A cél kimeneti fájl már létezik, ez a fájl ki lesz hagyva:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="473"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Ha nem szeretné a meglévő fájlokat kihagyni, kérjük, változtassa meg a felülírási módot!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="478"/>
+        <location filename="../../src/Thread_Process.cpp" line="480"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>A cél kimeneti fájl már létezik, a meglévő fájl törlésre kerül:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="492"/>
+        <location filename="../../src/Thread_Process.cpp" line="496"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Nem sikerült törölni a meglévő cél fájlt. Az állomány másik fájlnéven lesz elmentve!</translation>
     </message>

@@ -3076,57 +3076,62 @@
         <translation>Källfilen kan inte öppnas för läsning:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="443"/>
+        <location filename="../../src/Thread_Process.cpp" line="442"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Målmappen finns inte och kan inte skapas:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="452"/>
+        <location filename="../../src/Thread_Process.cpp" line="451"/>
         <source>The target output directory is NOT writable:</source>
         <translation>Målmappen är INTE skrivbar:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <source>Failed to generate non-existing target file name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Thread_Process.cpp" line="528"/>
         <source>Unknown File Name</source>
         <translation>Okänt filnamn</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <location filename="../../src/Thread_Process.cpp" line="530"/>
         <source>Unknown Title</source>
         <translation>Okänd titel</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="531"/>
         <source>Unknown Artist</source>
         <translation>Okänd artist</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="532"/>
         <source>Unknown Album</source>
         <translation>Okänt album</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="524"/>
+        <location filename="../../src/Thread_Process.cpp" line="534"/>
         <source>Unknown Comment</source>
         <translation>Okänd kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="470"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Målfilen finns redan! Den här filen hoppas över:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="473"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Om du inte vill att befintliga filer hoppas över, måste du ändra överskrivningsläge!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="478"/>
+        <location filename="../../src/Thread_Process.cpp" line="480"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Målfilen finns redan! Befintlig fil kommer att tas bort:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="492"/>
+        <location filename="../../src/Thread_Process.cpp" line="496"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Kunde inte ta bort befintlig målfil. Sparar med annat filnamn!</translation>
     </message>

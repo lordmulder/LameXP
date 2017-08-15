@@ -3050,37 +3050,42 @@
         <translation>无法打开源音频文件进行读取:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="443"/>
+        <location filename="../../src/Thread_Process.cpp" line="442"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>目标输出目录不存在且无法创建:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="452"/>
+        <location filename="../../src/Thread_Process.cpp" line="451"/>
         <source>The target output directory is NOT writable:</source>
         <translation>目标输出目录不可写:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <source>Failed to generate non-existing target file name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Thread_Process.cpp" line="528"/>
         <source>Unknown File Name</source>
         <translation>未知文件名称</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <location filename="../../src/Thread_Process.cpp" line="530"/>
         <source>Unknown Title</source>
         <translation>未知标题</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="531"/>
         <source>Unknown Artist</source>
         <translation>未知艺术家</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="532"/>
         <source>Unknown Album</source>
         <translation>未知专辑</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="524"/>
+        <location filename="../../src/Thread_Process.cpp" line="534"/>
         <source>Unknown Comment</source>
         <translation>未知注释</translation>
     </message>
@@ -3101,22 +3106,22 @@
         <translation>跳过。</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="470"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>目标输出文件已经存在, 将跳过此文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="473"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>如果你不希望跳过已存在的文件, 请更改覆盖模式!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="478"/>
+        <location filename="../../src/Thread_Process.cpp" line="480"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>目标输出文件已经存在, 将删除现有的文件: </translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="492"/>
+        <location filename="../../src/Thread_Process.cpp" line="496"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>无法删除现有目标文件, 将保存为另一个文件名!</translation>
     </message>

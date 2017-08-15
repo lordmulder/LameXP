@@ -415,7 +415,6 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 		readTest.close();
 	}
 
-	const QString baseName = sourceFile.completeBaseName();
 	QDir targetDir(MUtils::clean_file_path(m_outputDirectory.isEmpty() ? sourceFile.canonicalPath() : m_outputDirectory, false));
 
 	//Prepend relative source file path?
@@ -457,12 +456,15 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 		writeTest.remove();
 	}
 
-	//Apply rename pattern
-	const QString fileName = MUtils::clean_file_name(applyRegularExpression(applyRenamePattern(baseName, m_audioFile.metaInfo())), true);
+	//File extension
+	const QString fileExt = m_renameFileExt.isEmpty() ? QString::fromUtf8(m_encoder->toEncoderInfo()->extension()) : m_renameFileExt;
+
+	//Generate file name
+	const QString fileName = MUtils::clean_file_name(QString("%1.%2").arg(applyRegularExpression(applyRenamePattern(sourceFile.completeBaseName(), m_audioFile.metaInfo())), fileExt), true);
+	qWarning("fileName: \"%s\"", MUTILS_UTF8(fileName));
 
 	//Generate full output path
-	const QString fileExt = m_renameFileExt.isEmpty() ? QString::fromUtf8(m_encoder->toEncoderInfo()->extension()) : m_renameFileExt;
-	outFileName = QString("%1/%2.%3").arg(targetDir.canonicalPath(), fileName, fileExt);
+	outFileName = QString("%1/%2").arg(targetDir.canonicalPath(), fileName);
 
 	//Skip file, if target file exists (optional!)
 	if((m_overwriteMode == OverwriteMode_SkipExisting) && QFileInfo(outFileName).exists())
@@ -476,39 +478,47 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	if((m_overwriteMode == OverwriteMode_Overwrite) && QFileInfo(outFileName).exists() && QFileInfo(outFileName).isFile())
 	{
 		handleMessage(QString("%1\n%2\n").arg(tr("Target output file already exists, going to delete existing file:"), QDir::toNativeSeparators(outFileName)));
+		bool removed = false;
 		if(sourceFile.canonicalFilePath().compare(QFileInfo(outFileName).absoluteFilePath(), Qt::CaseInsensitive) != 0)
 		{
 			for(int i = 0; i < 16; i++)
 			{
 				if(QFile::remove(outFileName))
 				{
+					removed = true;
 					break;
 				}
 				MUtils::OS::sleep_ms(1);
 			}
 		}
-		if(QFileInfo(outFileName).exists())
+		if(!removed)
 		{
 			handleMessage(QString("%1\n").arg(tr("Failed to delete existing target file, will save to another file name!")));
 		}
 	}
 
-	int n = 1;
-
 	//Generate final name
-	while(QFileInfo(outFileName).exists() && (n < (INT_MAX/2)))
+	for (int n = 2; n <= 99999; ++n)
 	{
-		outFileName = QString("%1/%2 (%3).%4").arg(targetDir.canonicalPath(), fileName, QString::number(++n), fileExt);
+		//Check file existence
+		QFileInfo outFileInfo(outFileName);
+		if (outFileInfo.exists())
+		{
+			outFileName = QString("%1/%2 (%3).%4").arg(outFileInfo.canonicalPath(), outFileInfo.completeBaseName(), QString::number(n), outFileInfo.suffix());
+			continue;
+		}
+
+		//Create placeholder
+		QFile placeholder(outFileName);
+		if (placeholder.open(QIODevice::WriteOnly))
+		{
+			placeholder.close();
+			return 1;
+		}
 	}
 
-	//Create placeholder
-	QFile placeholder(outFileName);
-	if(placeholder.open(QIODevice::WriteOnly))
-	{
-		placeholder.close();
-	}
-
-	return 1;
+	handleMessage(QString("%1\n").arg(tr("Failed to generate non-existing target file name!")));
+	return 0;
 }
 
 QString ProcessThread::applyRenamePattern(const QString &baseName, const AudioFileModel_MetaInfo &metaInfo)

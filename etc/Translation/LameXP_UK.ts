@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="uk_UA" sourcelanguage="en">
+<TS version="2.0" language="uk_UA" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -3067,37 +3067,42 @@
         <translation>Неможливо відкрити для читання вхідний файл аудіо:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="443"/>
+        <location filename="../../src/Thread_Process.cpp" line="442"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Вихідної теки не існує і її неможливо створити:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="452"/>
+        <location filename="../../src/Thread_Process.cpp" line="451"/>
         <source>The target output directory is NOT writable:</source>
         <translation>До вихідної теки неможливо проводити запис:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="518"/>
+        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <source>Failed to generate non-existing target file name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Thread_Process.cpp" line="528"/>
         <source>Unknown File Name</source>
         <translation>Невідома назва файла</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="520"/>
+        <location filename="../../src/Thread_Process.cpp" line="530"/>
         <source>Unknown Title</source>
         <translation>Невідомий заголовок</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="521"/>
+        <location filename="../../src/Thread_Process.cpp" line="531"/>
         <source>Unknown Artist</source>
         <translation>Невідомий виконавець</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="522"/>
+        <location filename="../../src/Thread_Process.cpp" line="532"/>
         <source>Unknown Album</source>
         <translation>Невідомий альбом</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="524"/>
+        <location filename="../../src/Thread_Process.cpp" line="534"/>
         <source>Unknown Comment</source>
         <translation>Невідомий коментар</translation>
     </message>
@@ -3118,22 +3123,22 @@
         <translation>Пропущено.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="470"/>
+        <location filename="../../src/Thread_Process.cpp" line="472"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Вихідний цільовий файл вже існує, спроба пропустити цей файл:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="473"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Якщо ви не хочете, щоб існуючі файли були пропущені, будь ласка, змініть режим перезапису!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="478"/>
+        <location filename="../../src/Thread_Process.cpp" line="480"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Вихідний цільовий файл вже існує, спроба видалити існуючий файл:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="492"/>
+        <location filename="../../src/Thread_Process.cpp" line="496"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Неможливо видалити існуючий файл, збереження буде проведено до файла з іншою назвою!</translation>
     </message>
