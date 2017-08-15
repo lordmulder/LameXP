@@ -59,12 +59,10 @@ set "BUILDENV_TXT="
 :: Validate Paths
 :: ------------------------------------------
 
-call:validate_path PATH_MSCDIR "%PATH_MSCDIR%\VC\vcvarsall.bat"
-call:validate_path PATH_MSCDIR "%PATH_MSCDIR%\VC\bin\cl.exe"
+call:validate_path PATH_MSCDIR "%PATH_MSCDIR%\vcvarsall.bat"
 call:validate_path PATH_QTMSVC "%PATH_QTMSVC%\bin\uic.exe"
 call:validate_path PATH_QTMSVC "%PATH_QTMSVC%\bin\moc.exe"
 call:validate_path PATH_QTMSVC "%PATH_QTMSVC%\bin\rcc.exe"
-call:validate_path PATH_VCTOOL "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%PATH_VCTOOL%.CRT\msvcp%PATH_VCTOOL%.dll"
 call:validate_path PATH_VCPROJ "%~dp0\..\..\%PATH_VCPROJ%"
 
 :: ------------------------------------------

@@ -112,7 +112,7 @@ if "%LAMEXP_REDIST%"=="1" (
 	for %%i in (gif,ico,jpeg,mng,svg,tga,tiff) do (
 		copy "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
 	)
-	copy "%PATH_MSCDIR%\VC\redist\x86\Microsoft.VC%PATH_VCTOOL%.CRT\*.dll" "%TMP_PATH%"
+	copy "%~dp0\..\..\..\Prerequisites\MSVC\redist\vc\v%PATH_VCTOOL%_xp\x86\*.dll" "%TMP_PATH%"
 	if %PATH_VCTOOL% GEQ 140 (
 		copy "%~dp0\..\..\..\Prerequisites\MSVC\redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
 	)
