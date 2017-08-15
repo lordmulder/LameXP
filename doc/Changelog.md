@@ -6,7 +6,8 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 # LameXP v4.xx History #
 
 ## LameXP v4.16 [UNRELEASED] ## {-}
-* Updated Opus encoder/decoder libraries to v1.2-RC1 (2017-06-06) and Opus-Tools to v0.1.10 (2017-05-25)
+* Upgraded build environment to Microsoft Visual Studio 2017 with Update-2
+* Updated Opus encoder/decoder libraries to v1.2.1 (2017-07-26) and Opus-Tools to v0.1.10 (2017-05-25)
 
 ## LameXP v4.15 [2017-05-31] ## {-}
 
