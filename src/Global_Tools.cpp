@@ -33,6 +33,8 @@
 #include <QStringList>
 #include <QFileInfo>
 #include <QPair>
+#include <QResource>
+#include <QDir>
 
 //MUtils
 #include <MUtils/Global.h>
@@ -59,6 +61,10 @@ static const QString g_null_string;
 
 //UINT_MAX
 static const quint32 g_max_uint32 = UINT32_MAX;
+
+
+//Resource file lock
+static QScopedPointer<LockedFile> g_lamexp_rcc_lock;
 
 //Helper Macro
 #define MAKE_ENTRY(LOCK_FILE,VER,TAG) \
@@ -175,4 +181,35 @@ const quint32 &lamexp_tools_version(const QString &toolName, QString *const tagO
 		tagOut->clear();
 	}
 	return g_max_uint32;
+}
+
+/*
+* Initialize external resources (RCC file)
+*/
+void lamexp_initialize_resources(void)
+{
+	//Load the external RCC file
+#ifndef QT_NODLL
+	if (g_lamexp_rcc_lock.isNull())
+	{
+		const QFileInfo appPath(QCoreApplication::applicationFilePath());
+		const QString rccPath = QString("%1/%2.rcc").arg(appPath.canonicalPath(), appPath.completeBaseName());
+		try
+		{
+			qDebug("Using resource file:\n%s\n", MUTILS_UTF8(rccPath));
+			g_lamexp_rcc_lock.reset(new LockedFile(rccPath));
+			QResource::registerResource(g_lamexp_rcc_lock->filePath());
+		}
+		catch (std::runtime_error&)
+		{
+			qFatal("Failed to load the resource file:\n%s\n", MUTILS_UTF8(QDir::toNativeSeparators(rccPath)));
+		}
+	}
+#endif //!QT_NODLL
+
+	//Make sure resources are accessible!
+	if (!QResource(":/images/Logo.png").isValid())
+	{
+		qFatal("Qt resource system initialization has failed!");
+	}
 }

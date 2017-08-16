@@ -1061,6 +1061,9 @@
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
     </None>
+    <None Include="res\_ALL.qrc">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

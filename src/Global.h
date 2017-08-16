@@ -63,7 +63,6 @@ unsigned int lamexp_toolver_neroaac  (void);
 unsigned int lamexp_toolver_fhgaacenc(void);
 unsigned int lamexp_toolver_fdkaacenc(void);
 unsigned int lamexp_toolver_qaacenc  (void);
-unsigned int lamexp_toolver_coreaudio(void);
 
 /*
  * URL getters
@@ -72,6 +71,11 @@ const char *lamexp_website_url(void);
 const char *lamexp_mulders_url(void);
 const char *lamexp_support_url(void);
 const char *lamexp_tracker_url(void);
+
+/*
+* Resources
+*/
+void lamexp_initialize_resources(void);
 
 /*
  * Misc Functions

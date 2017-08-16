@@ -226,6 +226,9 @@ static int lamexp_main(int &argc, char **argv)
 	application->setWindowIcon(lamexp_app_icon());
 	application->setApplicationVersion(QString().sprintf("%d.%02d.%04d", lamexp_version_major(), lamexp_version_minor(), lamexp_version_build())); 
 
+	//Initialize resources
+	lamexp_initialize_resources();
+
 	//Check for expiration
 	if(lamexp_version_demo())
 	{
