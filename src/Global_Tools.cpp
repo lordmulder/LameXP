@@ -208,8 +208,13 @@ void lamexp_initialize_resources(void)
 #endif //!QT_NODLL
 
 	//Make sure resources are accessible!
-	if (!QResource(":/images/Logo.png").isValid())
+	static const char *const RESOURCES[] = { ":/images/Logo.png", ":/tools/lame.x86-i686.exe", NULL };
+	for (size_t i = 0U; RESOURCES[i]; ++i)
 	{
-		qFatal("Qt resource system initialization has failed!");
+		QResource resourceCheck(QString::fromLatin1(RESOURCES[i]));
+		if ((!resourceCheck.isValid()) || (resourceCheck.size() <= 0))
+		{
+			qFatal("Qt resource system initialization has failed:\nResource \"%s\" not found!", RESOURCES[i]);
+		}
 	}
 }

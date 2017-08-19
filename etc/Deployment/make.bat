@@ -102,19 +102,21 @@ for %%i in (exe,sfx,zip,txt) do (
 rd /S /Q "%TMP_PATH%" 2> NUL
 mkdir "%TMP_PATH%"
 
-copy "%BIN_PATH%\LameXP.exe" "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%BIN_PATH%\LameXP.exe" "%TMP_PATH%"
+
 if "%LAMEXP_REDIST%"=="1" (
-	copy "%BIN_PATH%\MUtils32-?.dll" "%TMP_PATH%"
+	call "%~dp0\_copy.bat" "%BIN_PATH%\LameXP.rcc" "%TMP_PATH%"
+	call "%~dp0\_copy.bat" "%BIN_PATH%\MUtils32-?.dll" "%TMP_PATH%"
 	mkdir "%TMP_PATH%\imageformats"
 	for %%i in (Core,Gui,Network,Xml,Svg) do (
-		copy "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\bin\Qt%%i4.dll" "%TMP_PATH%"
+		call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\bin\Qt%%i4.dll" "%TMP_PATH%"
 	)
 	for %%i in (gif,ico,jpeg,mng,svg,tga,tiff) do (
-		copy "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
+		call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\Qt4\v%PATH_VCTOOL%_xp\Shared\plugins\imageformats\q%%i4.dll" "%TMP_PATH%\imageformats"
 	)
-	copy "%~dp0\..\..\..\Prerequisites\MSVC\redist\vc\v%PATH_VCTOOL%_xp\x86\*.dll" "%TMP_PATH%"
+	call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\MSVC\redist\vc\v%PATH_VCTOOL%_xp\x86\*.dll" "%TMP_PATH%"
 	if %PATH_VCTOOL% GEQ 140 (
-		copy "%~dp0\..\..\..\Prerequisites\MSVC\redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
+		call "%~dp0\_copy.bat" "%~dp0\..\..\..\Prerequisites\MSVC\redist\ucrt\DLLs\x86\*.dll" "%TMP_PATH%"
 	)
 )
 
@@ -126,20 +128,19 @@ for %%e in (LameXP,Qt,MUtils) do (
 	)
 )
 
-copy "%~dp0\..\..\ReadMe.txt"           "%TMP_PATH%"
-copy "%~dp0\..\..\License.txt"          "%TMP_PATH%"
-copy "%~dp0\..\..\Copying.txt"          "%TMP_PATH%"
-copy "%~dp0\..\..\doc\Changelog.html"   "%TMP_PATH%"
-copy "%~dp0\..\..\doc\Translate.html"   "%TMP_PATH%"
-copy "%~dp0\..\..\doc\Manual.html"      "%TMP_PATH%"
-copy "%~dp0\..\..\doc\FAQ.html"         "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%~dp0\..\..\ReadMe.txt"           "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%~dp0\..\..\License.txt"          "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%~dp0\..\..\Copying.txt"          "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%~dp0\..\..\doc\Changelog.html"   "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%~dp0\..\..\doc\Translate.html"   "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%~dp0\..\..\doc\Manual.html"      "%TMP_PATH%"
 
 mkdir "%TMP_PATH%\img\lamexp"
-copy "%~dp0\..\..\doc\img\lamexp\*.png" "%TMP_PATH%\img\lamexp"
+call "%~dp0\_copy.bat" "%~dp0\..\..\doc\img\lamexp\*.png" "%TMP_PATH%\img\lamexp"
 
 if not "%VER_LAMEXP_TYPE%" == "Final" (
 	if not "%VER_LAMEXP_TYPE%" == "Hotfix" (
-		copy "%~dp0\..\..\doc\PRE_RELEASE_INFO.txt" "%TMP_PATH%"
+		call "%~dp0\_copy.bat" "%~dp0\..\..\doc\PRE_RELEASE_INFO.txt" "%TMP_PATH%"
 	)
 )
 
