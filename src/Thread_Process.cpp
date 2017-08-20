@@ -461,7 +461,6 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 
 	//Generate file name
 	const QString fileName = MUtils::clean_file_name(QString("%1.%2").arg(applyRegularExpression(applyRenamePattern(sourceFile.completeBaseName(), m_audioFile.metaInfo())), fileExt), true);
-	qWarning("fileName: \"%s\"", MUTILS_UTF8(fileName));
 
 	//Generate full output path
 	outFileName = QString("%1/%2").arg(targetDir.canonicalPath(), fileName);
