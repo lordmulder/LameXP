@@ -1,5 +1,5 @@
 [!Update]
-TimestampCreated=2017-07-15
+TimestampCreated=2017-10-04
 
 [MPlayer for Windows]
 BuildNo=135
@@ -19,10 +19,10 @@ DownloadFilecode=8f956fea27a0eb2fd896140380da6f6f0fbce41d
 DownloadChecksum=0BA93F81E800F6D756CA858027119CD2F012FB1FF913CB099E70D063C25FC33A1A71BB1DEF141520748AD50F9C3D58D0
 
 [Simple x264 Launcher]
-BuildNo=1116
-BuildDate=2017-07-15
+BuildNo=1118
+BuildDate=2017-10-04
 DownloadSite=http://forum.doom9.org/showthread.php?t=144140
 DownloadAddress=http://muldersoft.sourceforge.net/update/
-DownloadFilename=x264_launcher.2017-07-15.exe
-DownloadFilecode=8d45e07c9e230528a43ac1789771efd1620557c7
-DownloadChecksum=159DF9919A44E9C6F48D50D628A879BF97B62181819475AD2A814A54AACAB7C805286B64015EB431221C2A9B0ACE5079
+DownloadFilename=x264_launcher.2017-10-04.exe
+DownloadFilecode=e29595b06dd07a4c1d89dddabdff29a9d5b21c60
+DownloadChecksum=753B55876A7B5FF2424AF481C6AAF79A0F77FAD3A17284FC95D753D4ACEE3E87BCFD4B88D6303B56A64D2B63A44A99E7
