@@ -147,9 +147,9 @@ private:
 ////////////////////////////////////////////////////////////
 
 #define LAMEXP_MAKE_OPTION_I(OPT,DEF) \
-int SettingsModel::OPT(void) const { return m_configCache->loadValue(g_settingsId_##OPT, (DEF)).toInt(); } \
-void SettingsModel::OPT(int value) { m_configCache->storeValue(g_settingsId_##OPT, value); } \
-int SettingsModel::OPT##Default(void) { return (DEF); }
+qint32 SettingsModel::OPT(void) const { return m_configCache->loadValue(g_settingsId_##OPT, (DEF)).toInt(); } \
+void SettingsModel::OPT(const qint32 &value) { m_configCache->storeValue(g_settingsId_##OPT, value); } \
+qint32 SettingsModel::OPT##Default(void) { return (DEF); }
 
 #define LAMEXP_MAKE_OPTION_S(OPT,DEF) \
 QString SettingsModel::OPT(void) const { return m_configCache->loadValue(g_settingsId_##OPT, (DEF)).toString().trimmed(); } \
@@ -162,9 +162,9 @@ void SettingsModel::OPT(bool value) { m_configCache->storeValue(g_settingsId_##O
 bool SettingsModel::OPT##Default(void) { return (DEF); }
 
 #define LAMEXP_MAKE_OPTION_U(OPT,DEF) \
-unsigned int SettingsModel::OPT(void) const { return m_configCache->loadValue(g_settingsId_##OPT, (DEF)).toUInt(); } \
-void SettingsModel::OPT(unsigned int value) { m_configCache->storeValue(g_settingsId_##OPT, value); } \
-unsigned int SettingsModel::OPT##Default(void) { return (DEF); }
+quint32 SettingsModel::OPT(void) const { return m_configCache->loadValue(g_settingsId_##OPT, (DEF)).toUInt(); } \
+void SettingsModel::OPT(const quint32 &value) { m_configCache->storeValue(g_settingsId_##OPT, value); } \
+quint32 SettingsModel::OPT##Default(void) { return (DEF); }
 
 #define LAMEXP_MAKE_ID(DEC,STR) static const char *g_settingsId_##DEC = STR
 

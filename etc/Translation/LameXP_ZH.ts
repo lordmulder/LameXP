@@ -1236,7 +1236,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="830"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4272"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4281"/>
         <source>Access Denied</source>
         <translation>拒绝访问</translation>
     </message>
@@ -1509,12 +1509,12 @@
         <translation>驱动器是只读的或没有足够的访问权限!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4502"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4511"/>
         <source>Already Running</source>
         <translation>已运行</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4502"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4511"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP 已在运行,请使用当前运行的实例!</translation>
     </message>
@@ -1918,7 +1918,7 @@
         <translation>还原默认设置</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4272"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4281"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>无法写入所选目录。请选择另一个目录!</translation>
     </message>
@@ -2554,22 +2554,22 @@
         <translation>如果目标文件已存在:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4409"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4418"/>
         <source>Overwrite Mode</source>
         <translation>覆盖模式</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4409"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4418"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>警告: 这种模式可能会覆盖现有的文件且无法恢复!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4409"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4418"/>
         <source>Continue</source>
         <translation>继续</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4409"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4418"/>
         <source>Revert</source>
         <translation>后退</translation>
     </message>
@@ -2617,7 +2617,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4228"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4238"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n 个实例</numerusform>
@@ -3149,63 +3149,63 @@
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="217"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="213"/>
         <source>Show details for selected job</source>
         <translation>显示选定的项目的详细信息</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="286"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
         <source>Encoding Files</source>
         <translation>编码文件</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="286"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="282"/>
         <source>Your files are being encoded, please be patient...</source>
         <translation>正在编码您的文件,请耐心等待...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="490"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="486"/>
         <source>Encoding files, please wait...</source>
         <translation>正在编码文件,请稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="663"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="649"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>中止! 正在等待运行项目终止...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="696"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="682"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>创建播放列表文件,请稍候...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="707"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="693"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - 中止</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="707"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="693"/>
         <source>Process was aborted by the user.</source>
         <translation>进程被用户中止。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
         <source>LameXP - Error</source>
         <translation>LameXP - 错误</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="733"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
         <source>At least one file has failed!</source>
         <translation>至少一个文件失败 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="749"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="751"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
         <source>All files completed successfully.</source>
         <translation>已成功完成所有文件。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="751"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
         <source>LameXP - Done</source>
         <translation>LameXP - 完成</translation>
     </message>
@@ -3220,17 +3220,17 @@
         <translation>无法创建播放列表文件:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="706"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="692"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>用户提前中止了进程!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="534"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="523"/>
         <source>Multi-threading enabled: Running %1 instances in parallel!</source>
         <translation>多线程启用: 以并行方式运行 %1 个实例 !</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="218"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="214"/>
         <source>Browse Output File Location</source>
         <translation>浏览输出文件的位置</translation>
     </message>
@@ -3269,112 +3269,112 @@
         <translation>可用磁盘空间(Temp文件夹)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="716"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="702"/>
         <source>Process finished after %1.</source>
         <translation>过程执行了 %1。</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="220"/>
         <source>Filter Log Items</source>
         <translation>筛选日志项目</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="222"/>
         <source>Show Running Only</source>
         <translation>仅显示运行</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="227"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="223"/>
         <source>Show Succeeded Only</source>
         <translation>仅显示成功</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="228"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="224"/>
         <source>Show Failed Only</source>
         <translation>仅显示失败</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="229"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="225"/>
         <source>Show Skipped Only</source>
         <translation>仅显示跳过</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="230"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="226"/>
         <source>Show All Items</source>
         <translation>显示所有项目</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="945"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="931"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>所有项目都不匹配当前的筛选规则</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="706"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="692"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>用户在第 %n 个文件时中止进程!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1164"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1208"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n 小时</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1165"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1169"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1209"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1213"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1170"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1174"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1214"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1218"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1175"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1219"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n 毫秒</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="674"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="660"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>编码: %1 个文件迄今已完成 %n 个文件 , 请稍候...</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="727"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>错误: %n 个文件中 %1 个失败 (%2). 双击查看失败项目的详细信息!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="727"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>跳过 %n 个文件</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="717"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>错误:  %n 个文件中 %1 个失败。 双击失败的项目的详细信息!</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="745"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>所有文件已成功完成。 跳过 %n 个文件。</numerusform>

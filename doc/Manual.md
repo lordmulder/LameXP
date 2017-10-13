@@ -823,14 +823,22 @@ PGP, on the other hand, is based on the "web of trust" concept. This means that 
 
 ## Q: Can LameXP convert tracks from an Audio CD?
 
-LameXP *can* be used to convert audio files that have been extracted from an Audio CD, but it currently can **not** extract ("rip") the audio tracks from the Audio CD directly. Consequently you will have to extract the audio tracks first, before you can convert them with LameXP. We recommend using the [*Exact Audio Copy*](http://www.exactaudiocopy.de/) software for that purpose. When ripping tracks from an Audio CD, always save the tracks as *uncompressed* Wave files (or as lossless FLAC files) in order to avoid quality loss!
+**A:** LameXP *can* be used to convert audio files that have been extracted from an Audio CD, but it currently can **not** extract ("rip") the audio tracks from the Audio CD directly. Consequently you will have to extract the audio tracks first, before you can convert them with LameXP. We recommend using the [*Exact Audio Copy*](http://www.exactaudiocopy.de/) software for that purpose. When ripping tracks from an Audio CD, always save the tracks as *uncompressed* Wave files (or as lossless FLAC files) in order to avoid quality loss!
 
 *Warning:* The Windows Explorer will show CDA files (such as `Track01.cda`) on an Audio CD. These are just *dummy* files! Actually an Audio CD does **not** contain a file system. Thus there are **no** files either. There only are *audio tracks* on an Audio CD. These audio tracks *can* be extracted as files (e.g. Wave Audio files), by using a proper ripping software. Then the extracted files can be converted. At the same time, any attempt to convert the dummy `*.cda` files is **not** going to work!
+
+## Q: Why does LameXP run (only) N instances in parallel?
+
+**A:** LameXP can massively speed-up the encoding process by taking advantage of *multi-core* computers. This is achieved by running *multiple* encoder (or decoder) instances in parallel. Since most audio encoders are single-threaded and therefore can **not** utilize more than a single CPU core, LameXP will launch one encoder instance per (logical) CPU core, *by default*. This requires that there are (at least) as many audio files in the queue as there are CPU cores. Or, in other words, the number of encoder instances that can be run in parallel at any given moment is limited by the number of audio files left in the queue.
+
+Furthermore, it is important to note that all encoder/decoder instances running in parallel will also need to read their input data from the disk and write back their output data to the disk. Therefore, running *too many* instances in parallel can easily result in a phenomenon called "disk thrashing" and actually slow down the overall encoding speed considerably! This is the reason why LameXP does **not** use a simple "1:1" mapping between the number of available CPU cores and the (maximum) number of instances to run in parallel. Instead, fewer instances will be created as the number of CPU cores grows. The [*exact curve*](https://i.imgur.com/6XYwr03.png) used to compute the "optimal" number of instances from the number of available CPU cores has been determined experimentally.
+
+*Note:* In any case, the (maximum) number of parallel instances can be overwritten manually from the "Advanced Options" tab, even though this is **not** usually recommended. Also note that LameXP will now automatically detect solid-state drives (SSD) and similar drives. When such a drive was detected, LameXP will revert to a simple "1:1" mapping between the number of CPU cores and the (maximum) number of parallel instances &ndash; because "disk thrashing" is **not** normally a problem with such drives.
 
 
 ## Q: Is there a way to use *custom* binaries with LameXP?
 
-LameXP is a GUI front-end that uses a number third-party tools. All of these tools are already "built-in", with only a few exceptions. Therefore it is **not** normally required to provide separate binaries &ndash; LameXP uses the built-in binaries by default. If,&nbsp;however, you wish to use a *custom* (user-provided) binary, rather than the built-in binary, then this is still possible!
+**A:** LameXP is a GUI front-end that uses a number third-party tools. All of these tools are already "built-in", with only a few exceptions. Therefore it is **not** normally required to provide separate binaries &ndash; LameXP uses the built-in binaries by default. If,&nbsp;however, you wish to use a *custom* (user-provided) binary, rather than the built-in binary, then this is still possible!
 
 In order to replace a "built-in" binary, simply put the user-provided binary to the following location:
 

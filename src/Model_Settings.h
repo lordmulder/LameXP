@@ -31,9 +31,9 @@ class SettingsCache;
 ///////////////////////////////////////////////////////////////////////////////
 
 #define LAMEXP_MAKE_OPTION_I(OPT) \
-int OPT(void) const; \
-void OPT(int value); \
-int OPT##Default(void);
+qint32 OPT(void) const; \
+void OPT(const qint32 &value); \
+qint32 OPT##Default(void);
 
 #define LAMEXP_MAKE_OPTION_S(OPT) \
 QString OPT(void) const; \
@@ -46,9 +46,9 @@ void OPT(bool value); \
 bool OPT##Default(void);
 
 #define LAMEXP_MAKE_OPTION_U(OPT) \
-unsigned int OPT(void) const; \
-void OPT(unsigned int value); \
-unsigned int OPT##Default(void);
+quint32 OPT(void) const; \
+void OPT(const quint32 &value); \
+quint32 OPT##Default(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 

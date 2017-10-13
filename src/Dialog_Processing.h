@@ -109,15 +109,16 @@ protected:
 private:
 	Ui::ProcessingDialog *ui; //for Qt UIC
 
+	QThreadPool *createThreadPool(void);
 	AudioFileModel updateMetaInfo(AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);
-	QString time2text(const qint64 &msec) const;
 	
 	QScopedPointer<QThreadPool> m_threadPool;
 	QList<AudioFileModel> m_pendingJobs;
 	const SettingsModel *const m_settings;
 	const AudioFileModel_MetaInfo *const m_metaInfo;
+	const QString m_tempFolder;
 	QScopedPointer<QMovie> m_progressIndicator;
 	QScopedPointer<ProgressModel> m_progressModel;
 	QMap<QUuid,QString> m_playList;
@@ -145,4 +146,8 @@ private:
 	QScopedPointer<QColor> m_defaultColor;
 	QScopedPointer<FileExtsModel> m_fileExts;
 	QScopedPointer<MUtils::Taskbar7> m_taskbar;
+
+	static bool isFastSeekingDevice(const QString &path);
+	static quint32 cores2instances(const quint32 &cores);
+	static QString time2text(const qint64 &msec);
 };

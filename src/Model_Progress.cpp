@@ -24,7 +24,7 @@
 
 #include <QUuid>
 
-#define MAX_DISPLAY_ITEMS 48
+#define MAX_DISPLAY_ITEMS 64
 
 ProgressModel::ProgressModel(void)
 :

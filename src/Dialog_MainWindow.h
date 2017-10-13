@@ -78,7 +78,7 @@ private slots:
 	void aftenDRCModeChanged(int value);
 	void aftenFastAllocationChanged(bool checked);
 	void aftenSearchSizeChanged(int value);
-	void autoDetectInstancesChanged(bool checked);
+	void autoDetectInstancesChanged(const bool checked);
 	void bitrateManagementEnabledChanged(bool checked);
 	void bitrateManagementMaxChanged(int value);
 	void bitrateManagementMinChanged(int value);
@@ -185,7 +185,7 @@ private slots:
 	void updateBitrate(int value);
 	void updateEncoder(int id = 0);
 	void updateLameAlgoQuality(int value);
-	void updateMaximumInstances(int value);
+	void updateMaximumInstances(const int value);
 	void updateRCMode(int id);
 	void useCustomTempFolderChanged(bool checked);
 	void visitHomepageActionActivated(void);

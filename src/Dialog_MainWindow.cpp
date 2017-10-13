@@ -4223,18 +4223,27 @@ void MainWindow::forceStereoDownmixEnabledChanged(bool checked)
 /*
  * Maximum number of instances changed
  */
-void MainWindow::updateMaximumInstances(int value)
+void MainWindow::updateMaximumInstances(const int value)
 {
-	ui->labelMaxInstances->setText(tr("%n Instance(s)", "", value));
-	m_settings->maximumInstances(ui->checkBoxAutoDetectInstances->isChecked() ? NULL : value);
+	quint32 instances = qBound(1U, static_cast<quint32>(value), 32U);
+	if (instances > 16U)
+	{
+		instances += instances - 16U;
+		if (instances > 32U)
+		{
+			instances += instances - 32U;
+		}
+	}
+	m_settings->maximumInstances(ui->checkBoxAutoDetectInstances->isChecked() ? 0U : instances);
+	ui->labelMaxInstances->setText(tr("%n Instance(s)", "", instances));
 }
 
 /*
  * Auto-detect number of instances
  */
-void MainWindow::autoDetectInstancesChanged(bool checked)
+void MainWindow::autoDetectInstancesChanged(const bool checked)
 {
-	m_settings->maximumInstances(checked ? NULL : ui->sliderMaxInstances->value());
+	m_settings->maximumInstances(checked ? 0U : ui->sliderMaxInstances->value());
 }
 
 /*

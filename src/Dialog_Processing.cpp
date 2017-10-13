@@ -77,13 +77,8 @@
 #include <float.h>
 #include <stdint.h>
 
-////////////////////////////////////////////////////////////
-
 //Maximum number of parallel instances
-#define MAX_INSTANCES 32U
-
-//Function to calculate the number of instances
-static int cores2instances(int cores);
+#define MAX_INSTANCES 64U
 
 ////////////////////////////////////////////////////////////
 
@@ -165,6 +160,7 @@ ProcessingDialog::ProcessingDialog(FileListModel *const fileListModel, const Aud
 	m_progressViewFilter(-1),
 	m_initThreads(0),
 	m_defaultColor(new QColor()),
+	m_tempFolder(settings->customTempPathEnabled() ? settings->customTempPath() : MUtils::temp_folder()),
 	m_firstShow(true)
 {
 	//Init the dialog, from the .ui file
@@ -501,7 +497,7 @@ void ProcessingDialog::initEncoding(void)
 
 	if(!m_diskObserver)
 	{
-		m_diskObserver.reset(new DiskObserverThread(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder()));
+		m_diskObserver.reset(new DiskObserverThread(m_tempFolder));
 		connect(m_diskObserver.data(), SIGNAL(messageLogged(QString,int)), m_progressModel.data(), SLOT(addSystemMessage(QString,int)), Qt::QueuedConnection);
 		connect(m_diskObserver.data(), SIGNAL(freeSpaceChanged(quint64)), this, SLOT(diskUsageHasChanged(quint64)), Qt::QueuedConnection);
 		m_diskObserver->start();
@@ -521,21 +517,11 @@ void ProcessingDialog::initEncoding(void)
 
 	if(m_threadPool.isNull())
 	{
-		unsigned int maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
-		if(maximumInstances < 1)
+		m_threadPool.reset(createThreadPool());
+		if (m_threadPool->maxThreadCount() > 1)
 		{
-			const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect();
-			maximumInstances = cores2instances(qBound(1U, cpuFeatures.count, 64U));
+			m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(m_threadPool->maxThreadCount())));
 		}
-
-		maximumInstances = qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count()));
-		if(maximumInstances > 1)
-		{
-			m_progressModel->addSystemMessage(tr("Multi-threading enabled: Running %1 instances in parallel!").arg(QString::number(maximumInstances)));
-		}
-
-		m_threadPool.reset(new QThreadPool());
-		m_threadPool->setMaxThreadCount(maximumInstances);
 	}
 
 	m_initThreads = m_threadPool->maxThreadCount();
@@ -578,7 +564,7 @@ void ProcessingDialog::startNextJob(void)
 	(
 		currentFile,
 		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
-		(m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder()),
+		m_tempFolder,
 		encoder,
 		m_settings->prependRelativeSourcePath() && (!m_settings->outputToSourceDir())
 	);
@@ -960,6 +946,20 @@ void ProcessingDialog::progressViewFilterChanged(void)
 // Private Functions
 ////////////////////////////////////////////////////////////
 
+QThreadPool *ProcessingDialog::createThreadPool(void)
+{
+	quint32 maximumInstances = qBound(0U, m_settings->maximumInstances(), MAX_INSTANCES);
+	if (maximumInstances < 1U)
+	{
+		const MUtils::CPUFetaures::cpu_info_t cpuFeatures = MUtils::CPUFetaures::detect();
+		const quint32 nProcessors = qBound(1U, cpuFeatures.count, MAX_INSTANCES);
+		maximumInstances = isFastSeekingDevice(m_tempFolder) ? nProcessors : cores2instances(nProcessors);
+	}
+	QThreadPool *const threadPool = new QThreadPool();
+	threadPool->setMaxThreadCount(qBound(1U, maximumInstances, static_cast<unsigned int>(m_pendingJobs.count())));
+	return threadPool;
+}
+
 void ProcessingDialog::writePlayList(void)
 {
 	if(m_succeededJobs.count() <= 0 || m_allJobs.count() <= 0)
@@ -1152,37 +1152,21 @@ bool ProcessingDialog::shutdownComputer(void)
 	return true;
 }
 
-QString ProcessingDialog::time2text(const qint64 &msec) const
-{
-	const qint64 MILLISECONDS_PER_DAY = 86399999;	//24x60x60x1000 - 1
-	const QTime time = QTime().addMSecs(qMin(msec, MILLISECONDS_PER_DAY));
-
-	QString a, b;
-
-	if(time.hour() > 0)
-	{
-		a = tr("%n hour(s)",   "", time.hour());
-		b = tr("%n minute(s)", "", time.minute());
-	}
-	else if(time.minute() > 0)
-	{
-		a = tr("%n minute(s)", "", time.minute());
-		b = tr("%n second(s)", "", time.second());
-	}
-	else
-	{
-		a = tr("%n second(s)",      "", time.second());
-		b = tr("%n millisecond(s)", "", time.msec());
-	}
-
-	return QString("%1, %2").arg(a, b);
-}
-
 ////////////////////////////////////////////////////////////
 // HELPER FUNCTIONS
 ////////////////////////////////////////////////////////////
 
-static int cores2instances(int cores)
+bool ProcessingDialog::isFastSeekingDevice(const QString &path)
+{
+	bool haveFastSeeking;
+	if (MUtils::OS::get_drive_type(path, &haveFastSeeking) != MUtils::OS::DRIVE_TYPE_ERR)
+	{
+		return haveFastSeeking;
+	}
+	return false;
+}
+
+quint32 ProcessingDialog::cores2instances(const quint32 &cores)
 {
 	//This function is a "cubic spline" with sampling points at:
 	//(1,1); (2,2); (4,4); (8,6); (16,8); (32,11); (64,16)
@@ -1209,5 +1193,31 @@ static int cores2instances(int cores)
 		}
 	}
 
-	return qRound(y);
+	return static_cast<quint32>(qRound(y));
+}
+
+QString ProcessingDialog::time2text(const qint64 &msec)
+{
+	const qint64 MILLISECONDS_PER_DAY = 86399999;	//24x60x60x1000 - 1
+	const QTime time = QTime().addMSecs(qMin(msec, MILLISECONDS_PER_DAY));
+
+	QString a, b;
+
+	if (time.hour() > 0)
+	{
+		a = tr("%n hour(s)", "", time.hour());
+		b = tr("%n minute(s)", "", time.minute());
+	}
+	else if (time.minute() > 0)
+	{
+		a = tr("%n minute(s)", "", time.minute());
+		b = tr("%n second(s)", "", time.second());
+	}
+	else
+	{
+		a = tr("%n second(s)", "", time.second());
+		b = tr("%n millisecond(s)", "", time.msec());
+	}
+
+	return QString("%1, %2").arg(a, b);
 }
