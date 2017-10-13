@@ -221,6 +221,32 @@ static QList<T>& INVERT_LIST(QList<T> &list)
 	return list;
 }
 
+static quint32 encodeInstances(quint32 instances)
+{
+	if (instances > 16U)
+	{
+		instances -= (instances - 16U) / 2U;
+		if (instances > 24U)
+		{
+			instances -= (instances - 24U) / 2U;
+		}
+	}
+	return instances;
+}
+
+static quint32 decodeInstances(quint32 instances)
+{
+	if (instances > 16U)
+	{
+		instances += instances - 16U;
+		if (instances > 32U)
+		{
+			instances += instances - 32U;
+		}
+	}
+	return instances;
+}
+
 ////////////////////////////////////////////////////////////
 // Helper Classes
 ////////////////////////////////////////////////////////////
@@ -475,7 +501,10 @@ MainWindow::MainWindow(MUtils::IPCChannel *const ipcChannel, FileListModel *cons
 	//--------------------------------
 
 	ui->sliderLameAlgoQuality->setValue(m_settings->lameAlgoQuality());
-	if(m_settings->maximumInstances() > 0) ui->sliderMaxInstances->setValue(m_settings->maximumInstances());
+	if (m_settings->maximumInstances() > 0U)
+	{
+		ui->sliderMaxInstances->setValue(static_cast<int>(encodeInstances(m_settings->maximumInstances())));
+	}
 
 	ui->spinBoxBitrateManagementMin   ->setValue(m_settings->bitrateManagementMinRate());
 	ui->spinBoxBitrateManagementMax   ->setValue(m_settings->bitrateManagementMaxRate());
@@ -4225,17 +4254,9 @@ void MainWindow::forceStereoDownmixEnabledChanged(bool checked)
  */
 void MainWindow::updateMaximumInstances(const int value)
 {
-	quint32 instances = qBound(1U, static_cast<quint32>(value), 32U);
-	if (instances > 16U)
-	{
-		instances += instances - 16U;
-		if (instances > 32U)
-		{
-			instances += instances - 32U;
-		}
-	}
+	const quint32 instances = decodeInstances(qBound(1U, static_cast<quint32>(value), 32U));
 	m_settings->maximumInstances(ui->checkBoxAutoDetectInstances->isChecked() ? 0U : instances);
-	ui->labelMaxInstances->setText(tr("%n Instance(s)", "", instances));
+	ui->labelMaxInstances->setText(tr("%n Instance(s)", "", static_cast<int>(instances)));
 }
 
 /*
@@ -4243,7 +4264,7 @@ void MainWindow::updateMaximumInstances(const int value)
  */
 void MainWindow::autoDetectInstancesChanged(const bool checked)
 {
-	m_settings->maximumInstances(checked ? 0U : ui->sliderMaxInstances->value());
+	m_settings->maximumInstances(checked ? 0U : decodeInstances(qBound(1U, static_cast<quint32>(ui->sliderMaxInstances->value()), 32U)));
 }
 
 /*
