@@ -7,6 +7,8 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 
 ## LameXP v4.16 [UNRELEASED] ## {-}
 * Upgraded build environment to Microsoft Visual Studio 2017 with Update-4
+* Updated LAME encoder to v3.100 Final (2017-10-13), compiled with ICL 18.0 and MSVC 14.1
+* Updated mpg123 decoder to v1.25.7 (2017-09-25), compiled with GCC 7.2.0
 * Updated Opus encoder/decoder libraries to v1.2.1 (2017-07-26) and Opus-Tools to v0.1.10 (2017-05-25)
 * Updated MediaInfo to v0.7.98 (2017-08-08), compiled with ICL 17.0 and MSVC 12.0
 * Updated GnuPG to v1.4.22 (2017-07-19), compiled with GCC 7.2.0
