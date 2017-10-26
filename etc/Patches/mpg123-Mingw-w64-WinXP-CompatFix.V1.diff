@@ -1,0 +1,16 @@
+ src/playlist.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/playlist.c b/src/playlist.c
+index b5108b2..8abfa98 100644
+--- a/src/playlist.c
++++ b/src/playlist.c
+@@ -266,7 +266,7 @@ void free_playlist(void)
+ /* the constructor... */
+ static void init_playlist(void)
+ {
+-	SRAND(time(NULL));
++	SRAND((unsigned int)_time64(NULL));
+ 	pl.file = NULL;
+ 	pl.entry = 0;
+ 	pl.playcount = 0;
