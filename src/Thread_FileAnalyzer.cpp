@@ -64,9 +64,7 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 :
 	m_tasksCounterNext(0),
 	m_tasksCounterDone(0),
-	m_inputFiles(inputFiles),
-	m_templateFile(NULL),
-	m_pool(NULL)
+	m_inputFiles(inputFiles)
 {
 	m_filesAccepted = 0;
 	m_filesRejected = 0;
@@ -75,65 +73,19 @@ FileAnalyzer::FileAnalyzer(const QStringList &inputFiles)
 	m_filesCueSheet = 0;
 
 	moveToThread(this); /*makes sure queued slots are executed in the proper thread context*/
-
-	m_timer = new QElapsedTimer;
+	m_timer.reset(new QElapsedTimer());
 }
 
 FileAnalyzer::~FileAnalyzer(void)
 {
-	if(m_pool)
+	if(!m_pool.isNull())
 	{
 		if(!m_pool->waitForDone(2500))
 		{
 			qWarning("There are still running tasks in the thread pool!");
 		}
 	}
-
-	MUTILS_DELETE(m_templateFile);
-	MUTILS_DELETE(m_pool);
-	MUTILS_DELETE(m_timer);
 }
-
-////////////////////////////////////////////////////////////
-// Static data
-////////////////////////////////////////////////////////////
-
-const char *FileAnalyzer::g_tags_gen[] =
-{
-	"ID",
-	"Format",
-	"Format_Profile",
-	"Format_Version",
-	"Duration",
-	"Title", "Track",
-	"Track/Position",
-	"Artist", "Performer",
-	"Album",
-	"Genre",
-	"Released_Date", "Recorded_Date",
-	"Comment",
-	"Cover",
-	"Cover_Type",
-	"Cover_Mime",
-	"Cover_Data",
-	NULL
-};
-
-const char *FileAnalyzer::g_tags_aud[] =
-{
-	"ID",
-	"Source",
-	"Format",
-	"Format_Profile",
-	"Format_Version",
-	"Channel(s)",
-	"SamplingRate",
-	"BitDepth",
-	"BitRate",
-	"BitRate_Mode",
-	"Encoded_Library",
-	NULL
-};
 
 ////////////////////////////////////////////////////////////
 // Thread Main
@@ -159,16 +111,6 @@ void FileAnalyzer::run()
 
 	m_timer->invalidate();
 
-	//Create MediaInfo template file
-	if(!m_templateFile)
-	{
-		if(!createTemplate())
-		{
-			qWarning("Failed to create template file!");
-			return;
-		}
-	}
-
 	//Sort files
 	MUtils::natural_string_sort(m_inputFiles, true);
 
@@ -186,8 +128,13 @@ void FileAnalyzer::run()
 	emit progressMaxChanged(nFiles);
 	emit progressValChanged(0);
 
-	//Create thread pool
-	if(!m_pool) m_pool = new QThreadPool();
+	//Create the thread pool
+	if (m_pool.isNull())
+	{
+		m_pool.reset(new QThreadPool());
+	}
+
+	//Update thread count
 	const int idealThreadCount = QThread::idealThreadCount();
 	if(idealThreadCount > 0)
 	{
@@ -246,7 +193,7 @@ bool FileAnalyzer::analyzeNextFile(void)
 			m_timer->restart();
 		}
 	
-		AnalyzeTask *task = new AnalyzeTask(taskId, currentFile, m_templateFile->filePath(), m_bAborted);
+		AnalyzeTask *task = new AnalyzeTask(taskId, currentFile, m_bAborted);
 		connect(task, SIGNAL(fileAnalyzed(const unsigned int, const int, AudioFileModel)), this, SLOT(taskFileAnalyzed(unsigned int, const int, AudioFileModel)), Qt::QueuedConnection);
 		connect(task, SIGNAL(taskCompleted(const unsigned int)), this, SLOT(taskThreadFinish(const unsigned int)), Qt::QueuedConnection);
 		m_runningTaskIds.insert(taskId); m_pool->start(task);
@@ -306,63 +253,6 @@ void FileAnalyzer::handlePlaylistFiles(void)
 			qWarning("Encountered an unexpected variant type!");
 		}
 	}
-}
-
-bool FileAnalyzer::createTemplate(void)
-{
-	if(m_templateFile)
-	{
-		qWarning("Template file already exists!");
-		return true;
-	}
-	
-	QString templatePath = QString("%1/%2.txt").arg(MUtils::temp_folder(), MUtils::next_rand_str());
-
-	QFile templateFile(templatePath);
-	if(!templateFile.open(QIODevice::WriteOnly))
-	{
-		return false;
-	}
-
-	templateFile.write("General;");
-	for(size_t i = 0; g_tags_gen[i]; i++)
-	{
-		templateFile.write(QString("Gen_%1=%%1%\\n").arg(g_tags_gen[i]).toLatin1().constData());
-	}
-	templateFile.write("\\n\r\n");
-
-	templateFile.write("Audio;");
-	for(size_t i = 0; g_tags_aud[i]; i++)
-	{
-		templateFile.write(QString("Aud_%1=%%1%\\n").arg(g_tags_aud[i]).toLatin1().constData());
-	}
-	templateFile.write("\\n\r\n");
-
-	bool success = (templateFile.error() == QFile::NoError);
-	templateFile.close();
-	
-	if(!success)
-	{
-		QFile::remove(templatePath);
-		return false;
-	}
-
-	try
-	{
-		m_templateFile = new LockedFile(templatePath, true);
-	}
-	catch(const std::exception &error)
-	{
-		qWarning("Failed to lock template file:\n%s\n", error.what());
-		return false;
-	}
-	catch(...)
-	{
-		qWarning("Failed to lock template file!");
-		return false;
-	}
-
-	return true;
 }
 
 ////////////////////////////////////////////////////////////

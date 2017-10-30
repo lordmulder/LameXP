@@ -74,10 +74,9 @@ private slots:
 private:
 	bool analyzeNextFile(void);
 	void handlePlaylistFiles(void);
-	bool createTemplate(void);
 
-	QThreadPool *m_pool;
-	QElapsedTimer *m_timer;
+	QScopedPointer<QThreadPool> m_pool;
+	QScopedPointer<QElapsedTimer> m_timer;
 
 	unsigned int m_tasksCounterNext;
 	unsigned int m_tasksCounterDone;
@@ -90,7 +89,6 @@ private:
 	unsigned int m_filesCueSheet;
 
 	QStringList m_inputFiles;
-	LockedFile *m_templateFile;
 
 	QSet<unsigned int> m_completedTaskIds;
 	QSet<unsigned int> m_runningTaskIds;

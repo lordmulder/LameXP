@@ -45,7 +45,7 @@ class AnalyzeTask: public QObject, public QRunnable
 	Q_OBJECT
 
 public:
-	AnalyzeTask(const int taskId, const QString &inputFile, const QString &templateFile, QAtomicInt &abortFlag);
+	AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt &abortFlag);
 	~AnalyzeTask(void);
 	
 	enum fileType_t
@@ -66,10 +66,11 @@ protected:
 	void run_ex(void);
 
 private:
-	const AudioFileModel analyzeFile(const QString &filePath, int *type);
-	void updateInfo(AudioFileModel &audioFile, bool &skipNext, QPair<quint32, quint32> &id_val, quint32 &coverType, QByteArray &coverData, const QString &key, const QString &value);
+	const AudioFileModel& analyzeFile(const QString &filePath, AudioFileModel &audioFile, int *const type);
+	const AudioFileModel& analyzeMediaFile(const QString &filePath, AudioFileModel &audioFile);
+	const AudioFileModel& parseMediaInfo(const QByteArray &data, AudioFileModel &audioFile);
+	//void updateInfo(AudioFileModel &audioFile, bool &skipNext, QPair<quint32, quint32> &id_val, quint32 &coverType, QByteArray &coverData, const QString &key, const QString &value);
 	unsigned int parseYear(const QString &str);
-	unsigned int parseDuration(const QString &str);
 	bool checkFile_CDDA(QFile &file);
 	void retrieveCover(AudioFileModel &audioFile, const quint32 coverType, const QByteArray &coverData);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
@@ -78,7 +79,6 @@ private:
 
 	const QString m_mediaInfoBin;
 	const QString m_avs2wavBin;
-	const QString m_templateFile;
 	const QString m_inputFile;
 	
 	QAtomicInt &m_abortFlag;

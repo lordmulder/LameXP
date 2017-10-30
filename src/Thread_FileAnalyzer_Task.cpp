@@ -44,7 +44,9 @@
 #include <QReadLocker>
 #include <QWriteLocker>
 #include <QThread>
-
+#include <QXmlSimpleReader>
+#include <QXmlInputSource>
+#include <QStack>
 
 //CRT
 #include <math.h>
@@ -55,15 +57,71 @@
 #define IS_SEC(SEC) (key.startsWith((SEC "_"), Qt::CaseInsensitive))
 #define FIRST_TOK(STR) (STR.split(" ", QString::SkipEmptyParts).first())
 
+#define STR_EQ(A,B) ((A).compare((B), Qt::CaseInsensitive) == 0)
+
+////////////////////////////////////////////////////////////
+// XML Content Handler
+////////////////////////////////////////////////////////////
+
+class AnalyzeTask_XmlHandler : public QXmlDefaultHandler
+{
+public:
+	AnalyzeTask_XmlHandler(AudioFileModel &audioFile) :
+		m_audioFile(audioFile), m_trackType(trackType_non), m_trackIdx(0), m_properties(initializeProperties()) {}
+
+protected:
+	virtual bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts);
+	virtual bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName);
+	virtual bool characters(const QString& ch);
+
+private:
+	typedef enum
+	{
+		trackType_non = 0,
+		trackType_gen = 1,
+		trackType_aud = 2,
+	}
+	trackType_t;
+
+	typedef enum
+	{
+		propertyId_gen_format,
+		propertyId_gen_format_profile,
+		propertyId_gen_duration,
+		propertyId_aud_format,
+		propertyId_aud_format_version,
+		propertyId_aud_format_profile,
+		propertyId_aud_channel_s_,
+		propertyId_aud_samplingrate
+	}
+	propertyId_t;
+
+	const QMap<QPair<trackType_t, QString>, propertyId_t> &m_properties;
+
+	QStack<QString> m_stack;
+	AudioFileModel &m_audioFile;
+	trackType_t m_trackType;
+	quint32 m_trackIdx;
+	QPair<trackType_t, QString> m_currentProperty;
+
+	static QReadWriteLock s_propertiesMutex;
+	static QScopedPointer<const QMap<QPair<trackType_t, QString>, propertyId_t>> s_propertiesMap;
+
+	bool updatePropertry(const QPair<trackType_t, QString> &id, const QString &value);
+
+	static const QMap<QPair<trackType_t, QString>, propertyId_t> &initializeProperties();
+	static bool parseUnsigned(const QString &str, quint32 &value);
+	static quint32 decodeTime(quint32 &value);
+};
+
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
-AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, const QString &templateFile, QAtomicInt &abortFlag)
+AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt &abortFlag)
 :
 	m_taskId(taskId),
 	m_inputFile(inputFile),
-	m_templateFile(templateFile),
 	m_mediaInfoBin(lamexp_tools_lookup("mediainfo.exe")),
 	m_avs2wavBin(lamexp_tools_lookup("avs2wav.exe")),
 	m_abortFlag(abortFlag)
@@ -107,7 +165,8 @@ void AnalyzeTask::run_ex(void)
 	QString currentFile = QDir::fromNativeSeparators(m_inputFile);
 	qDebug("Analyzing: %s", MUTILS_UTF8(currentFile));
 	
-	AudioFileModel file = analyzeFile(currentFile, &fileType);
+	AudioFileModel fileInfo(currentFile);
+	analyzeFile(currentFile, fileInfo, &fileType);
 
 	if(MUTILS_BOOLIFY(m_abortFlag))
 	{
@@ -124,7 +183,7 @@ void AnalyzeTask::run_ex(void)
 		qWarning("Dummy CDDA file detected, skipping!");
 		break;
 	default:
-		if(file.metaInfo().title().isEmpty() || file.techInfo().containerType().isEmpty() || file.techInfo().audioType().isEmpty())
+		if(fileInfo.metaInfo().title().isEmpty() || fileInfo.techInfo().containerType().isEmpty() || fileInfo.techInfo().audioType().isEmpty())
 		{
 			fileType = fileTypeUnknown;
 			if(!QFileInfo(currentFile).suffix().compare("cue", Qt::CaseInsensitive))
@@ -135,63 +194,72 @@ void AnalyzeTask::run_ex(void)
 			else if(!QFileInfo(currentFile).suffix().compare("avs", Qt::CaseInsensitive))
 			{
 				qDebug("Found a potential Avisynth script, investigating...");
-				if(analyzeAvisynthFile(currentFile, file))
+				if(analyzeAvisynthFile(currentFile, fileInfo))
 				{
 					fileType = fileTypeNormal;
 				}
 				else
 				{
-					qDebug("Rejected Avisynth file: %s", MUTILS_UTF8(file.filePath()));
+					qDebug("Rejected Avisynth file: %s", MUTILS_UTF8(fileInfo.filePath()));
 				}
 			}
 			else
 			{
-				qDebug("Rejected file of unknown type: %s", MUTILS_UTF8(file.filePath()));
+				qDebug("Rejected file of unknown type: %s", MUTILS_UTF8(fileInfo.filePath()));
 			}
 		}
 		break;
 	}
 
 	//Emit the file now!
-	emit fileAnalyzed(m_taskId, fileType, file);
+	emit fileAnalyzed(m_taskId, fileType, fileInfo);
 }
 
 ////////////////////////////////////////////////////////////
 // Privtae Functions
 ////////////////////////////////////////////////////////////
 
-const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type)
+const AudioFileModel& AnalyzeTask::analyzeFile(const QString &filePath, AudioFileModel &audioFile, int *const type)
 {
 	*type = fileTypeNormal;
-	AudioFileModel audioFile(filePath);
-
 	QFile readTest(filePath);
-	if(!readTest.open(QIODevice::ReadOnly))
+
+	if (!readTest.open(QIODevice::ReadOnly))
 	{
 		*type = fileTypeDenied;
 		return audioFile;
 	}
-	if(checkFile_CDDA(readTest))
+
+	if (checkFile_CDDA(readTest))
 	{
 		*type = fileTypeCDDA;
 		return audioFile;
 	}
-	readTest.close();
 
-	bool skipNext = false;
+	readTest.close();
+	return analyzeMediaFile(filePath, audioFile);
+}
+
+const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, AudioFileModel &audioFile)
+{
+	//bool skipNext = false;
 	QPair<quint32, quint32> id_val(UINT_MAX, UINT_MAX);
 	quint32 coverType = UINT_MAX;
 	QByteArray coverData;
 
 	QStringList params;
-	params << QString("--Inform=file://%1").arg(QDir::toNativeSeparators(m_templateFile));
+	params << QString("--Language=raw");
+	params << QString("-f");
+	params << QString("--Output=XML");
 	params << QDir::toNativeSeparators(filePath);
-	
+
 	QProcess process;
 	MUtils::init_process(process, QFileInfo(m_mediaInfoBin).absolutePath());
-
 	process.start(m_mediaInfoBin, params);
-		
+
+	QByteArray data;
+	data.reserve(16384);
+
 	if(!process.waitForStarted())
 	{
 		qWarning("MediaInfo process failed to create!");
@@ -214,37 +282,43 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 		{
 			if(process.state() == QProcess::Running)
 			{
-				qWarning("MediaInfo time out. Killing process and skipping file!");
+				qWarning("MediaInfo time out. Killing the process now!");
 				process.kill();
 				process.waitForFinished(-1);
-				return audioFile;
+				break;
 			}
 		}
 
-		QByteArray data;
-
-		while(process.canReadLine())
+		forever
 		{
-			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
-			if(!line.isEmpty())
-			{
-				//qDebug("Line:%s", MUTILS_UTF8(line));
-				
-				int index = line.indexOf('=');
-				if(index > 0)
-				{
-					QString key = line.left(index).trimmed();
-					QString val = line.mid(index+1).trimmed();
-					if(!key.isEmpty())
-					{
-						updateInfo(audioFile, skipNext, id_val, coverType, coverData, key, val);
-					}
-				}
+			const QByteArray dataNext = process.readAll();
+			if (dataNext.isEmpty()) {
+				break; /*no more input data*/
 			}
+			data += dataNext;
 		}
 	}
 
-	if(audioFile.metaInfo().title().isEmpty())
+	process.waitForFinished();
+	if (process.state() != QProcess::NotRunning)
+	{
+		process.kill();
+		process.waitForFinished(-1);
+	}
+
+	while (!process.atEnd())
+	{
+		const QByteArray dataNext = process.readAll();
+		if (dataNext.isEmpty()) {
+			break; /*no more input data*/
+		}
+		data += dataNext;
+	}
+	
+	//qDebug("!!!--START-->>>\n%s\n<<<--END--!!!", data.constData());
+	return parseMediaInfo(data, audioFile);
+
+	/* if(audioFile.metaInfo().title().isEmpty())
 	{
 		QString baseName = QFileInfo(filePath).fileName();
 		int index = baseName.lastIndexOf(".");
@@ -264,13 +338,6 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 
 		audioFile.metaInfo().setTitle(baseName);
 	}
-	
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
 
 	if((coverType != UINT_MAX) && (!coverData.isEmpty()))
 	{
@@ -282,199 +349,47 @@ const AudioFileModel AnalyzeTask::analyzeFile(const QString &filePath, int *type
 		if(audioFile.techInfo().audioBitdepth() == 32) audioFile.techInfo().setAudioBitdepth(AudioFileModel::BITDEPTH_IEEE_FLOAT32);
 	}
 
-	return audioFile;
+	return audioFile;*/
 }
 
-void AnalyzeTask::updateInfo(AudioFileModel &audioFile, bool &skipNext, QPair<quint32, quint32> &id_val, quint32 &coverType, QByteArray &coverData, const QString &key, const QString &value)
+const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioFileModel &audioFile)
 {
-	//qWarning("'%s' -> '%s'", MUTILS_UTF8(key), MUTILS_UTF8(value));
-	
-	/*New Stream*/
-	if(IS_KEY("Gen_ID") || IS_KEY("Aud_ID"))
+	QXmlInputSource xmlSource;
+	xmlSource.setData(data);
+
+	QScopedPointer<QXmlDefaultHandler> xmlHandler(new AnalyzeTask_XmlHandler(audioFile));
+
+	QXmlSimpleReader xmlReader;
+	xmlReader.setContentHandler(xmlHandler.data());
+	xmlReader.setErrorHandler(xmlHandler.data());
+
+	if (xmlReader.parse(xmlSource))
 	{
-		if(value.isEmpty())
-		{
-			skipNext = false;
-		}
-		else
-		{
-			//We ignore all ID's, except for the lowest one!
-			bool ok = false;
-			unsigned int id = value.toUInt(&ok);
-			if(ok)
-			{
-				if(IS_KEY("Gen_ID")) { id_val.first  = qMin(id_val.first,  id); skipNext = (id > id_val.first);  }
-				if(IS_KEY("Aud_ID")) { id_val.second = qMin(id_val.second, id); skipNext = (id > id_val.second); }
-			}
-			else
-			{
-				skipNext = true;
-			}
-		}
-		if(skipNext)
-		{
-			qWarning("Skipping info for non-primary stream!");
-		}
-		return;
+		while (xmlReader.parseContinue()) {/*continue*/}
 	}
 
-	/*Skip or empty?*/
-	if((skipNext) || value.isEmpty())
+	if(audioFile.metaInfo().title().isEmpty())
 	{
-		return;
+		QString baseName = QFileInfo(audioFile.filePath()).fileName();
+		int index;
+		if((index = baseName.lastIndexOf("."))>= 0)
+		{
+			baseName = baseName.left(index);
+		}
+		baseName = baseName.replace("_", " ").simplified();
+		if((index = baseName.lastIndexOf(" - ")) >= 0)
+		{
+			baseName = baseName.mid(index + 3).trimmed();
+		}
+		audioFile.metaInfo().setTitle(baseName);
 	}
 
-	/*Playlist file?*/
-	if(IS_KEY("Aud_Source"))
+	if ((audioFile.techInfo().audioType().compare("PCM", Qt::CaseInsensitive) == 0) && (audioFile.techInfo().audioProfile().compare("Float", Qt::CaseInsensitive) == 0))
 	{
-		skipNext = true;
-		audioFile.techInfo().setContainerType(QString());
-		audioFile.techInfo().setAudioType(QString());
-		qWarning("Skipping info for playlist file!");
-		return;
+		if (audioFile.techInfo().audioBitdepth() == 32) audioFile.techInfo().setAudioBitdepth(AudioFileModel::BITDEPTH_IEEE_FLOAT32);
 	}
 
-	/*General Section*/
-	if(IS_SEC("Gen"))
-	{
-		if(IS_KEY("Gen_Format"))
-		{
-			audioFile.techInfo().setContainerType(value);
-		}
-		else if(IS_KEY("Gen_Format_Profile"))
-		{
-			audioFile.techInfo().setContainerProfile(value);
-		}
-		else if(IS_KEY("Gen_Title") || IS_KEY("Gen_Track"))
-		{
-			audioFile.metaInfo().setTitle(value);
-		}
-		else if(IS_KEY("Gen_Duration"))
-		{
-			unsigned int tmp = parseDuration(value);
-			if(tmp > 0) audioFile.techInfo().setDuration(tmp);
-		}
-		else if(IS_KEY("Gen_Artist") || IS_KEY("Gen_Performer"))
-		{
-			audioFile.metaInfo().setArtist(value);
-		}
-		else if(IS_KEY("Gen_Album"))
-		{
-			audioFile.metaInfo().setAlbum(value);
-		}
-		else if(IS_KEY("Gen_Genre"))
-		{
-			audioFile.metaInfo().setGenre(value);
-		}
-		else if(IS_KEY("Gen_Released_Date") || IS_KEY("Gen_Recorded_Date"))
-		{
-			unsigned int tmp = parseYear(value);
-			if(tmp > 0) audioFile.metaInfo().setYear(tmp);
-		}
-		else if(IS_KEY("Gen_Comment"))
-		{
-			audioFile.metaInfo().setComment(value);
-		}
-		else if(IS_KEY("Gen_Track/Position"))
-		{
-			bool ok = false;
-			unsigned int tmp = value.toUInt(&ok);
-			if(ok) audioFile.metaInfo().setPosition(tmp);
-		}
-		else if(IS_KEY("Gen_Cover") || IS_KEY("Gen_Cover_Type"))
-		{
-			if(coverType == UINT_MAX)
-			{
-				coverType = 0;
-			}
-		}
-		else if(IS_KEY("Gen_Cover_Mime"))
-		{
-			QString temp = FIRST_TOK(value);
-			for (quint32 i = 0; MIME_TYPES[i].type; i++)
-			{
-				if (temp.compare(QString::fromLatin1(MIME_TYPES[i].type), Qt::CaseInsensitive) == 0)
-				{
-					coverType = i;
-					break;
-				}
-			}
-		}
-		else if(IS_KEY("Gen_Cover_Data"))
-		{
-			if(!coverData.isEmpty()) coverData.clear();
-			coverData.append(QByteArray::fromBase64(FIRST_TOK(value).toLatin1()));
-		}
-		else
-		{
-			qWarning("Unknown key '%s' with value '%s' found!", MUTILS_UTF8(key), MUTILS_UTF8(value));
-		}
-		return;
-	}
-
-	/*Audio Section*/
-	if(IS_SEC("Aud"))
-	{
-
-		if(IS_KEY("Aud_Format"))
-		{
-			audioFile.techInfo().setAudioType(value);
-		}
-		else if(IS_KEY("Aud_Format_Profile"))
-		{
-			audioFile.techInfo().setAudioProfile(value);
-		}
-		else if(IS_KEY("Aud_Format_Version"))
-		{
-			audioFile.techInfo().setAudioVersion(value);
-		}
-		else if(IS_KEY("Aud_Channel(s)"))
-		{
-			bool ok = false;
-			unsigned int tmp = value.toUInt(&ok);
-			if(ok) audioFile.techInfo().setAudioChannels(tmp);
-		}
-		else if(IS_KEY("Aud_SamplingRate"))
-		{
-			bool ok = false;
-			unsigned int tmp = value.toUInt(&ok);
-			if(ok) audioFile.techInfo().setAudioSamplerate(tmp);
-		}
-		else if(IS_KEY("Aud_BitDepth"))
-		{
-			bool ok = false;
-			unsigned int tmp = value.toUInt(&ok);
-			if(ok) audioFile.techInfo().setAudioBitdepth(tmp);
-		}
-		else if(IS_KEY("Aud_Duration"))
-		{
-			unsigned int tmp = parseDuration(value);
-			if(tmp > 0) audioFile.techInfo().setDuration(tmp);
-		}
-		else if(IS_KEY("Aud_BitRate"))
-		{
-			bool ok = false;
-			unsigned int tmp = value.toUInt(&ok);
-			if(ok) audioFile.techInfo().setAudioBitrate(tmp/1000);
-		}
-		else if(IS_KEY("Aud_BitRate_Mode"))
-		{
-			if(!value.compare("CBR", Qt::CaseInsensitive)) audioFile.techInfo().setAudioBitrateMode(AudioFileModel::BitrateModeConstant);
-			if(!value.compare("VBR", Qt::CaseInsensitive)) audioFile.techInfo().setAudioBitrateMode(AudioFileModel::BitrateModeVariable);
-		}
-		else if(IS_KEY("Aud_Encoded_Library"))
-		{
-			audioFile.techInfo().setAudioEncodeLib(value);
-		}
-		else
-		{
-			qWarning("Unknown key '%s' with value '%s' found!", MUTILS_UTF8(key), MUTILS_UTF8(value));
-		}
-		return;
-	}
-
-	/*Section not recognized*/
-	qWarning("Unknown section: %s", MUTILS_UTF8(key));
+	return audioFile;
 }
 
 bool AnalyzeTask::checkFile_CDDA(QFile &file)
@@ -656,13 +571,174 @@ unsigned int AnalyzeTask::parseYear(const QString &str)
 	}
 }
 
-unsigned int AnalyzeTask::parseDuration(const QString &str)
+// ---------------------------------------------------------
+// XML Content Handler Implementation
+// ---------------------------------------------------------
+
+#define DEFINE_PROPTERY_MAPPING(TYPE, NAME) do \
+{ \
+	builder->insert(qMakePair(trackType_##TYPE, QString::fromLatin1(#NAME)), propertyId_##TYPE##_##NAME); \
+} \
+while(0)
+
+#define SET_OPTIONAL(TYPE, IF_CMD, THEN_CMD) do \
+{ \
+	TYPE _tmp;\
+	if((IF_CMD)) { THEN_CMD; } \
+} \
+while(0)
+
+QReadWriteLock AnalyzeTask_XmlHandler::s_propertiesMutex;
+QScopedPointer<const QMap<QPair<AnalyzeTask_XmlHandler::trackType_t, QString>, AnalyzeTask_XmlHandler::propertyId_t>> AnalyzeTask_XmlHandler::s_propertiesMap;
+
+const QMap<QPair<AnalyzeTask_XmlHandler::trackType_t, QString>, AnalyzeTask_XmlHandler::propertyId_t> &AnalyzeTask_XmlHandler::initializeProperties(void)
 {
-	bool ok = false;
-	unsigned int value = str.toUInt(&ok);
-	return ok ? (value/1000) : 0;
+	QReadLocker rdLocker(&s_propertiesMutex);
+	if (!s_propertiesMap.isNull())
+	{
+		return *s_propertiesMap.data();
+	}
+
+	rdLocker.unlock();
+	QWriteLocker wrLocker(&s_propertiesMutex);
+
+	if (s_propertiesMap.isNull())
+	{
+		qWarning("!!! --- SETTING UP MAP --- !!!");
+		QMap<QPair<trackType_t, QString>, propertyId_t> *const builder = new QMap<QPair<trackType_t, QString>, propertyId_t>();
+		DEFINE_PROPTERY_MAPPING(gen, format);
+		DEFINE_PROPTERY_MAPPING(gen, format_profile);
+		DEFINE_PROPTERY_MAPPING(gen, duration);
+		DEFINE_PROPTERY_MAPPING(aud, format);
+		DEFINE_PROPTERY_MAPPING(aud, format_version);
+		DEFINE_PROPTERY_MAPPING(aud, format_profile);
+		DEFINE_PROPTERY_MAPPING(aud, channel_s_);
+		DEFINE_PROPTERY_MAPPING(aud, samplingrate);
+		s_propertiesMap.reset(builder);
+	}
+
+	return *s_propertiesMap.data();
 }
 
+bool AnalyzeTask_XmlHandler::startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts)
+{
+	m_stack.push(qName);
+	switch (m_stack.size())
+	{
+	case 1:
+		if (!STR_EQ(qName, "mediaInfo"))
+		{
+			qWarning("Invalid XML structure was detected! (1)");
+			return false;
+		}
+		return true;
+	case 2:
+		if (!STR_EQ(qName, "file"))
+		{
+			qWarning("Invalid XML structure was detected! (2)");
+			return false;
+		}
+		return true;
+	case 3:
+		if (!STR_EQ(qName, "track"))
+		{
+			qWarning("Invalid XML structure was detected! (3)");
+			return false;
+		}
+		else
+		{
+			const QString value = atts.value("type").trimmed();
+			if (STR_EQ(value, "general"))
+			{
+				m_trackType = trackType_gen;
+			}
+			else if (STR_EQ(value, "audio"))
+			{
+				if (m_trackIdx++)
+				{
+					qWarning("Skipping non-primary audio track!");
+					m_trackType = trackType_non;
+				}
+				else
+				{
+					m_trackType = trackType_aud;
+				}
+			}
+			else /*e.g. video*/
+			{
+				qWarning("Skipping a non-audio track!");
+				m_trackType = trackType_non;
+			}
+			return true;
+		}
+	case 4:
+		switch (m_trackType)
+		{
+		case trackType_gen:
+			m_currentProperty = qMakePair(trackType_gen, qName.simplified().toLower());
+			return true;
+		case trackType_aud:
+			m_currentProperty = qMakePair(trackType_aud, qName.simplified().toLower());
+			return true;
+		default:
+			m_currentProperty = qMakePair(trackType_non, qName.simplified().toLower());
+			return true;
+		}
+	default:
+		return false;
+	}
+}
+
+bool AnalyzeTask_XmlHandler::endElement(const QString &namespaceURI, const QString &localName, const QString &qName)
+{
+	m_stack.pop();
+	return true;
+}
+
+bool AnalyzeTask_XmlHandler::characters(const QString& ch)
+{
+	if ((m_stack.size() == 4) && m_currentProperty.first)
+	{
+		const QString value = ch.simplified();
+		if (!value.isEmpty())
+		{
+			qDebug("Property: %u::%s --> \"%s\"", m_currentProperty.first, MUTILS_UTF8(m_currentProperty.second), MUTILS_UTF8(value));
+			if (!updatePropertry(m_currentProperty, value))
+			{
+				qWarning("Ignored property: %u::%s!", m_currentProperty.first, MUTILS_UTF8(m_currentProperty.second));
+			}
+		}
+	}
+	return true;
+}
+
+bool AnalyzeTask_XmlHandler::updatePropertry(const QPair<trackType_t, QString> &id, const QString &value)
+{
+	switch (m_properties.value(id, propertyId_t(-1)))
+	{
+		case propertyId_gen_format:         m_audioFile.techInfo().setContainerType(value);                                                          return true;
+		case propertyId_gen_format_profile: m_audioFile.techInfo().setContainerProfile(value);                                                       return true;
+		case propertyId_gen_duration:       SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), m_audioFile.techInfo().setDuration(decodeTime(_tmp))); return true;
+		case propertyId_aud_format:         m_audioFile.techInfo().setAudioType(value);                                                              return true;
+		case propertyId_aud_format_version: m_audioFile.techInfo().setAudioVersion(value);                                                           return true;
+		case propertyId_aud_format_profile: m_audioFile.techInfo().setAudioProfile(value);                                                           return true;
+		case propertyId_aud_channel_s_:     SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), m_audioFile.techInfo().setAudioChannels(_tmp));        return true;
+		case propertyId_aud_samplingrate:   SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), m_audioFile.techInfo().setAudioSamplerate(_tmp));      return true;
+		default: return false;
+	}
+}
+
+bool AnalyzeTask_XmlHandler::parseUnsigned(const QString &str, quint32 &value)
+{
+	bool okay = false;
+	value = str.toUInt(&okay);
+	return okay;
+}
+
+quint32 AnalyzeTask_XmlHandler::decodeTime(quint32 &value)
+{
+	return (value + 500U) / 1000U;
+}
 
 ////////////////////////////////////////////////////////////
 // Public Functions

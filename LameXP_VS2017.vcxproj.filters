@@ -1055,14 +1055,14 @@
     <CustomBuild Include="res\Tools.mac-avx.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\_ALL.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
-    </None>
-    <None Include="res\_ALL.qrc">
-      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
