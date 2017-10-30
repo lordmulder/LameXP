@@ -66,8 +66,8 @@
 class AnalyzeTask_XmlHandler : public QXmlDefaultHandler
 {
 public:
-	AnalyzeTask_XmlHandler(AudioFileModel &audioFile) :
-		m_audioFile(audioFile), m_trackType(trackType_non), m_trackIdx(0), m_properties(initializeProperties()) {}
+	AnalyzeTask_XmlHandler(AudioFileModel &audioFile, const quint32 &version) :
+		m_audioFile(audioFile), m_version(version), m_trackType(trackType_non), m_trackIdx(0), m_properties(initializeProperties()) {}
 
 protected:
 	virtual bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts);
@@ -96,18 +96,19 @@ private:
 	}
 	propertyId_t;
 
+	const quint32 m_version;
 	const QMap<QPair<trackType_t, QString>, propertyId_t> &m_properties;
 
 	QStack<QString> m_stack;
 	AudioFileModel &m_audioFile;
 	trackType_t m_trackType;
 	quint32 m_trackIdx;
-	QPair<trackType_t, QString> m_currentProperty;
+	propertyId_t m_currentProperty;
 
 	static QReadWriteLock s_propertiesMutex;
 	static QScopedPointer<const QMap<QPair<trackType_t, QString>, propertyId_t>> s_propertiesMap;
 
-	bool updatePropertry(const QPair<trackType_t, QString> &id, const QString &value);
+	bool updatePropertry(const propertyId_t &idx, const QString &value);
 
 	static const QMap<QPair<trackType_t, QString>, propertyId_t> &initializeProperties();
 	static bool parseUnsigned(const QString &str, quint32 &value);
@@ -123,6 +124,7 @@ AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt 
 	m_taskId(taskId),
 	m_inputFile(inputFile),
 	m_mediaInfoBin(lamexp_tools_lookup("mediainfo.exe")),
+	m_mediaInfoVer(lamexp_tools_version("mediainfo.exe")),
 	m_avs2wavBin(lamexp_tools_lookup("avs2wav.exe")),
 	m_abortFlag(abortFlag)
 {
@@ -357,7 +359,7 @@ const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioF
 	QXmlInputSource xmlSource;
 	xmlSource.setData(data);
 
-	QScopedPointer<QXmlDefaultHandler> xmlHandler(new AnalyzeTask_XmlHandler(audioFile));
+	QScopedPointer<QXmlDefaultHandler> xmlHandler(new AnalyzeTask_XmlHandler(audioFile, m_mediaInfoVer));
 
 	QXmlSimpleReader xmlReader;
 	xmlReader.setContentHandler(xmlHandler.data());
@@ -604,7 +606,6 @@ const QMap<QPair<AnalyzeTask_XmlHandler::trackType_t, QString>, AnalyzeTask_XmlH
 
 	if (s_propertiesMap.isNull())
 	{
-		qWarning("!!! --- SETTING UP MAP --- !!!");
 		QMap<QPair<trackType_t, QString>, propertyId_t> *const builder = new QMap<QPair<trackType_t, QString>, propertyId_t>();
 		DEFINE_PROPTERY_MAPPING(gen, format);
 		DEFINE_PROPTERY_MAPPING(gen, format_profile);
@@ -629,6 +630,11 @@ bool AnalyzeTask_XmlHandler::startElement(const QString &namespaceURI, const QSt
 		if (!STR_EQ(qName, "mediaInfo"))
 		{
 			qWarning("Invalid XML structure was detected! (1)");
+			return false;
+		}
+		if (!STR_EQ(atts.value("version"), QString().sprintf("0.%u.%02u", m_version / 100U, m_version % 100)))
+		{
+			qWarning("Invalid version property was detected!");
 			return false;
 		}
 		return true;
@@ -675,17 +681,17 @@ bool AnalyzeTask_XmlHandler::startElement(const QString &namespaceURI, const QSt
 		switch (m_trackType)
 		{
 		case trackType_gen:
-			m_currentProperty = qMakePair(trackType_gen, qName.simplified().toLower());
+			m_currentProperty = m_properties.value(qMakePair(trackType_gen, qName.simplified().toLower()), propertyId_t(-1));
 			return true;
 		case trackType_aud:
-			m_currentProperty = qMakePair(trackType_aud, qName.simplified().toLower());
+			m_currentProperty = m_properties.value(qMakePair(trackType_aud, qName.simplified().toLower()), propertyId_t(-1));
 			return true;
 		default:
-			m_currentProperty = qMakePair(trackType_non, qName.simplified().toLower());
+			m_currentProperty = propertyId_t(-1);
 			return true;
 		}
 	default:
-		return false;
+		return true;
 	}
 }
 
@@ -697,24 +703,20 @@ bool AnalyzeTask_XmlHandler::endElement(const QString &namespaceURI, const QStri
 
 bool AnalyzeTask_XmlHandler::characters(const QString& ch)
 {
-	if ((m_stack.size() == 4) && m_currentProperty.first)
+	if ((m_currentProperty != propertyId_t(-1)) && (m_stack.size() == 4))
 	{
 		const QString value = ch.simplified();
 		if (!value.isEmpty())
 		{
-			qDebug("Property: %u::%s --> \"%s\"", m_currentProperty.first, MUTILS_UTF8(m_currentProperty.second), MUTILS_UTF8(value));
-			if (!updatePropertry(m_currentProperty, value))
-			{
-				qWarning("Ignored property: %u::%s!", m_currentProperty.first, MUTILS_UTF8(m_currentProperty.second));
-			}
+			updatePropertry(m_currentProperty, value);
 		}
 	}
 	return true;
 }
 
-bool AnalyzeTask_XmlHandler::updatePropertry(const QPair<trackType_t, QString> &id, const QString &value)
+bool AnalyzeTask_XmlHandler::updatePropertry(const propertyId_t &idx, const QString &value)
 {
-	switch (m_properties.value(id, propertyId_t(-1)))
+	switch (idx)
 	{
 		case propertyId_gen_format:         m_audioFile.techInfo().setContainerType(value);                                                          return true;
 		case propertyId_gen_format_profile: m_audioFile.techInfo().setContainerProfile(value);                                                       return true;
@@ -724,7 +726,7 @@ bool AnalyzeTask_XmlHandler::updatePropertry(const QPair<trackType_t, QString> &
 		case propertyId_aud_format_profile: m_audioFile.techInfo().setAudioProfile(value);                                                           return true;
 		case propertyId_aud_channel_s_:     SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), m_audioFile.techInfo().setAudioChannels(_tmp));        return true;
 		case propertyId_aud_samplingrate:   SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), m_audioFile.techInfo().setAudioSamplerate(_tmp));      return true;
-		default: return false;
+		default: MUTILS_THROW_FMT("Invalid property ID: %d", idx);
 	}
 }
 

@@ -78,6 +78,7 @@ private:
 	const unsigned int m_taskId;
 
 	const QString m_mediaInfoBin;
+	const quint32 m_mediaInfoVer;
 	const QString m_avs2wavBin;
 	const QString m_inputFile;
 	
