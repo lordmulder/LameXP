@@ -11,6 +11,11 @@ setlocal EnableDelayedExpansion
 
 call "%~dp0\_paths.bat"
 
+if not exist "%JAVA_HOME%\bin\java.exe" (
+	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nJava Runtime not found. Please check your JAVA_HOME environment variable^!\n"
+	pause && exit
+)
+
 :: ------------------------------------------
 :: Create Documents
 :: ------------------------------------------
