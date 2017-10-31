@@ -34,7 +34,7 @@ class AudioFileModel;
 class QFile;
 class QDir;
 class QFileInfo;
-class LockedFile;
+class QXmlStreamReader;
 
 ////////////////////////////////////////////////////////////
 // Splash Thread
@@ -48,14 +48,23 @@ public:
 	AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt &abortFlag);
 	~AnalyzeTask(void);
 	
-	enum fileType_t
+	typedef enum
 	{
 		fileTypeNormal   = 0,
 		fileTypeCDDA     = 1,
 		fileTypeDenied   = 2,
 		fileTypeCueSheet = 3,
 		fileTypeUnknown  = 4
-	};
+	}
+	fileType_t;
+
+	typedef enum
+	{
+		trackType_non = 0,
+		trackType_gen = 1,
+		trackType_aud = 2,
+	}
+	MI_trackType_t;
 
 signals:
 	void fileAnalyzed(const unsigned int taskId, const int fileType, const AudioFileModel &file);
@@ -69,14 +78,15 @@ private:
 	const AudioFileModel& analyzeFile(const QString &filePath, AudioFileModel &audioFile, int *const type);
 	const AudioFileModel& analyzeMediaFile(const QString &filePath, AudioFileModel &audioFile);
 	const AudioFileModel& parseMediaInfo(const QByteArray &data, AudioFileModel &audioFile);
-	//void updateInfo(AudioFileModel &audioFile, bool &skipNext, QPair<quint32, quint32> &id_val, quint32 &coverType, QByteArray &coverData, const QString &key, const QString &value);
-	unsigned int parseYear(const QString &str);
+	void parseTrackInfo(QXmlStreamReader &xmlStream, const MI_trackType_t trackType, AudioFileModel &audioFile);
 	bool checkFile_CDDA(QFile &file);
 	void retrieveCover(AudioFileModel &audioFile, const quint32 coverType, const QByteArray &coverData);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
 
-	const unsigned int m_taskId;
+	static quint32 parseYear(const QString &str);
+	static bool findNextElement(const QString &name, QXmlStreamReader &xmlStream);
 
+	const unsigned int m_taskId;
 	const QString m_mediaInfoBin;
 	const quint32 m_mediaInfoVer;
 	const QString m_avs2wavBin;

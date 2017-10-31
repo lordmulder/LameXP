@@ -46,6 +46,7 @@
 #include <QThread>
 #include <QXmlSimpleReader>
 #include <QXmlInputSource>
+#include <QXmlStreamReader>
 #include <QStack>
 
 //CRT
@@ -57,7 +58,33 @@
 #define IS_SEC(SEC) (key.startsWith((SEC "_"), Qt::CaseInsensitive))
 #define FIRST_TOK(STR) (STR.split(" ", QString::SkipEmptyParts).first())
 
-#define STR_EQ(A,B) ((A).compare((B), Qt::CaseInsensitive) == 0)
+#define STRICMP(A,B) ((A).compare((B), Qt::CaseInsensitive) == 0)
+
+#define ADD_PROPTERY_MAPPING(TYPE, NAME) do \
+{ \
+	builder->insert(qMakePair(trackType_##TYPE, QString::fromLatin1(#NAME)), propertyId_##TYPE##_##NAME); \
+} \
+while(0)
+
+////////////////////////////////////////////////////////////
+// Static Data
+////////////////////////////////////////////////////////////
+
+typedef enum
+{
+	propertyId_gen_format,
+	propertyId_gen_format_profile,
+	propertyId_gen_duration,
+	propertyId_aud_format,
+	propertyId_aud_format_version,
+	propertyId_aud_format_profile,
+	propertyId_aud_channel_s_,
+	propertyId_aud_samplingrate
+}
+MI_propertyId_t;
+
+static QReadWriteLock g_properties_lock;
+static QScopedPointer<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, MI_propertyId_t>> g_properties_data;
 
 ////////////////////////////////////////////////////////////
 // XML Content Handler
@@ -131,6 +158,26 @@ AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt 
 	if(m_mediaInfoBin.isEmpty() || m_avs2wavBin.isEmpty())
 	{
 		qFatal("Invalid path to MediaInfo binary. Tool not initialized properly.");
+	}
+
+	QReadLocker rdLocker(&g_properties_lock);
+	if (g_properties_data.isNull())
+	{
+		rdLocker.unlock();
+		QWriteLocker wrLocker(&g_properties_lock);
+		if (g_properties_data.isNull())
+		{
+			QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> *const builder = new QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t>();
+			ADD_PROPTERY_MAPPING(gen, format);
+			ADD_PROPTERY_MAPPING(gen, format_profile);
+			ADD_PROPTERY_MAPPING(gen, duration);
+			ADD_PROPTERY_MAPPING(aud, format);
+			ADD_PROPTERY_MAPPING(aud, format_version);
+			ADD_PROPTERY_MAPPING(aud, format_profile);
+			ADD_PROPTERY_MAPPING(aud, channel_s_);
+			ADD_PROPTERY_MAPPING(aud, samplingrate);
+			g_properties_data.reset(builder);
+		}
 	}
 }
 
@@ -317,7 +364,7 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 		data += dataNext;
 	}
 	
-	//qDebug("!!!--START-->>>\n%s\n<<<--END--!!!", data.constData());
+	qDebug("!!!--START-->>>\n%s\n<<<--END--!!!", data.constData());
 	return parseMediaInfo(data, audioFile);
 
 	/* if(audioFile.metaInfo().title().isEmpty())
@@ -356,42 +403,104 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 
 const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioFileModel &audioFile)
 {
-	QXmlInputSource xmlSource;
-	xmlSource.setData(data);
+	QMap<QString, MI_trackType_t> trackTypes;
+	trackTypes.insert("general", trackType_gen);
+	trackTypes.insert("audio", trackType_aud);
 
-	QScopedPointer<QXmlDefaultHandler> xmlHandler(new AnalyzeTask_XmlHandler(audioFile, m_mediaInfoVer));
+	QXmlStreamReader xmlStream(data);
+	bool firstFile = true;
+	QSet<MI_trackType_t> tracksFound;
 
-	QXmlSimpleReader xmlReader;
-	xmlReader.setContentHandler(xmlHandler.data());
-	xmlReader.setErrorHandler(xmlHandler.data());
-
-	if (xmlReader.parse(xmlSource))
+	if (findNextElement(QLatin1String("MediaInfo"), xmlStream))
 	{
-		while (xmlReader.parseContinue()) {/*continue*/}
+		const QStringRef version = xmlStream.attributes().value(QLatin1String("version"));
+		if (version.isEmpty() || (!STRICMP(version, QString().sprintf("0.%u.%02u", m_mediaInfoVer / 100U, m_mediaInfoVer % 100))))
+		{
+			qWarning("Invalid version property \"%s\" was detected!", MUTILS_UTF8(version));
+			return audioFile;
+		}
+		while (findNextElement(QLatin1String("File"), xmlStream))
+		{
+			if (firstFile)
+			{
+				firstFile = false;
+				while (findNextElement(QLatin1String("Track"), xmlStream))
+				{
+					const QString typeAttr = xmlStream.attributes().value(QLatin1String("type")).toString().simplified().toLower();
+					const MI_trackType_t trackType = trackTypes.value(typeAttr, MI_trackType_t(-1));
+					if (trackType != MI_trackType_t(-1))
+					{
+						if (!tracksFound.contains(trackType))
+						{
+							tracksFound << trackType;
+							parseTrackInfo(xmlStream, trackType, audioFile);
+						}
+						else
+						{
+							qWarning("Skipping non-primary '%s' track!", MUTILS_UTF8(typeAttr));
+							xmlStream.skipCurrentElement();
+						}
+					}
+				}
+			}
+			else
+			{
+				qWarning("Skipping non-primary file!");
+				xmlStream.skipCurrentElement();
+			}
+		}
 	}
 
-	if(audioFile.metaInfo().title().isEmpty())
+	if (!(audioFile.techInfo().containerType().isEmpty() || audioFile.techInfo().audioType().isEmpty()))
 	{
-		QString baseName = QFileInfo(audioFile.filePath()).fileName();
-		int index;
-		if((index = baseName.lastIndexOf("."))>= 0)
+		if (audioFile.metaInfo().title().isEmpty())
 		{
-			baseName = baseName.left(index);
+			QString baseName = QFileInfo(audioFile.filePath()).fileName();
+			int index;
+			if ((index = baseName.lastIndexOf(".")) >= 0)
+			{
+				baseName = baseName.left(index);
+			}
+			baseName = baseName.replace("_", " ").simplified();
+			if ((index = baseName.lastIndexOf(" - ")) >= 0)
+			{
+				baseName = baseName.mid(index + 3).trimmed();
+			}
+			audioFile.metaInfo().setTitle(baseName);
 		}
-		baseName = baseName.replace("_", " ").simplified();
-		if((index = baseName.lastIndexOf(" - ")) >= 0)
+		if ((audioFile.techInfo().audioType().compare("PCM", Qt::CaseInsensitive) == 0) && (audioFile.techInfo().audioProfile().compare("Float", Qt::CaseInsensitive) == 0))
 		{
-			baseName = baseName.mid(index + 3).trimmed();
+			if (audioFile.techInfo().audioBitdepth() == 32) audioFile.techInfo().setAudioBitdepth(AudioFileModel::BITDEPTH_IEEE_FLOAT32);
 		}
-		audioFile.metaInfo().setTitle(baseName);
 	}
-
-	if ((audioFile.techInfo().audioType().compare("PCM", Qt::CaseInsensitive) == 0) && (audioFile.techInfo().audioProfile().compare("Float", Qt::CaseInsensitive) == 0))
+	else
 	{
-		if (audioFile.techInfo().audioBitdepth() == 32) audioFile.techInfo().setAudioBitdepth(AudioFileModel::BITDEPTH_IEEE_FLOAT32);
+		qWarning("Audio file format could *not* be recognized!");
 	}
 
 	return audioFile;
+}
+
+void AnalyzeTask::parseTrackInfo(QXmlStreamReader &xmlStream, const MI_trackType_t trackType, AudioFileModel &audioFile)
+{
+	while (xmlStream.readNextStartElement())
+	{
+		qWarning("%d::%s", trackType, MUTILS_UTF8(xmlStream.name()));
+		const MI_propertyId_t idx = g_properties_data->value(qMakePair(trackType, xmlStream.name().toString().simplified().toLower()), MI_propertyId_t(-1));
+		if (idx != MI_propertyId_t(-1))
+		{
+			const QString value = xmlStream.readElementText(QXmlStreamReader::SkipChildElements).simplified();
+			if (!value.isEmpty())
+			{
+				qWarning("--> %d: \"%s\"", idx, MUTILS_UTF8(value));
+			}
+		}
+		else
+		{
+			xmlStream.skipCurrentElement();
+		}
+	}
+
 }
 
 bool AnalyzeTask::checkFile_CDDA(QFile &file)
@@ -544,12 +653,16 @@ bool AnalyzeTask::analyzeAvisynthFile(const QString &filePath, AudioFileModel &i
 	}
 }
 
-unsigned int AnalyzeTask::parseYear(const QString &str)
+// ---------------------------------------------------------
+// Utility Functions
+// ---------------------------------------------------------
+
+quint32 AnalyzeTask::parseYear(const QString &str)
 {
-	if(str.startsWith("UTC", Qt::CaseInsensitive))
+	if (str.startsWith("UTC", Qt::CaseInsensitive))
 	{
 		QDate date = QDate::fromString(str.mid(3).trimmed().left(10), "yyyy-MM-dd");
-		if(date.isValid())
+		if (date.isValid())
 		{
 			return date.year();
 		}
@@ -562,7 +675,7 @@ unsigned int AnalyzeTask::parseYear(const QString &str)
 	{
 		bool ok = false;
 		int year = str.toInt(&ok);
-		if(ok && year > 0)
+		if (ok && year > 0)
 		{
 			return year;
 		}
@@ -571,6 +684,19 @@ unsigned int AnalyzeTask::parseYear(const QString &str)
 			return 0;
 		}
 	}
+}
+
+bool AnalyzeTask::findNextElement(const QString &name, QXmlStreamReader &xmlStream)
+{
+	while (xmlStream.readNextStartElement())
+	{
+		if (STRICMP(xmlStream.name(), name))
+		{
+			return true;
+		}
+		xmlStream.skipCurrentElement();
+	}
+	return false;
 }
 
 // ---------------------------------------------------------
@@ -627,26 +753,26 @@ bool AnalyzeTask_XmlHandler::startElement(const QString &namespaceURI, const QSt
 	switch (m_stack.size())
 	{
 	case 1:
-		if (!STR_EQ(qName, "mediaInfo"))
+		if (!STRICMP(qName, "mediaInfo"))
 		{
 			qWarning("Invalid XML structure was detected! (1)");
 			return false;
 		}
-		if (!STR_EQ(atts.value("version"), QString().sprintf("0.%u.%02u", m_version / 100U, m_version % 100)))
+		if (!STRICMP(atts.value("version"), QString().sprintf("0.%u.%02u", m_version / 100U, m_version % 100)))
 		{
 			qWarning("Invalid version property was detected!");
 			return false;
 		}
 		return true;
 	case 2:
-		if (!STR_EQ(qName, "file"))
+		if (!STRICMP(qName, "file"))
 		{
 			qWarning("Invalid XML structure was detected! (2)");
 			return false;
 		}
 		return true;
 	case 3:
-		if (!STR_EQ(qName, "track"))
+		if (!STRICMP(qName, "track"))
 		{
 			qWarning("Invalid XML structure was detected! (3)");
 			return false;
@@ -654,11 +780,11 @@ bool AnalyzeTask_XmlHandler::startElement(const QString &namespaceURI, const QSt
 		else
 		{
 			const QString value = atts.value("type").trimmed();
-			if (STR_EQ(value, "general"))
+			if (STRICMP(value, "general"))
 			{
 				m_trackType = trackType_gen;
 			}
-			else if (STR_EQ(value, "audio"))
+			else if (STRICMP(value, "audio"))
 			{
 				if (m_trackIdx++)
 				{
