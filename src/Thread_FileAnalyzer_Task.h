@@ -32,9 +32,8 @@
 
 class AudioFileModel;
 class QFile;
-class QDir;
-class QFileInfo;
 class QXmlStreamReader;
+class QXmlStreamAttributes;
 
 ////////////////////////////////////////////////////////////
 // Splash Thread
@@ -58,13 +57,38 @@ public:
 	}
 	fileType_t;
 
+protected:
 	typedef enum
 	{
 		trackType_non = 0,
 		trackType_gen = 1,
-		trackType_aud = 2,
+		trackType_aud = 2
 	}
 	MI_trackType_t;
+
+	typedef enum
+	{
+		propertyId_container,
+		propertyId_container_profile,
+		propertyId_duration,
+		propertyId_title,
+		propertyId_artist,
+		propertyId_album,
+		propertyId_genre,
+		propertyId_released_date,
+		propertyId_track_position,
+		propertyId_comment,
+		propertyId_format,
+		propertyId_format_version,
+		propertyId_format_profile,
+		propertyId_channel_s_,
+		propertyId_samplingrate,
+		propertyId_bitdepth,
+		propertyId_bitrate,
+		propertyId_bitrate_mode,
+		propertyId_encoded_library
+	}
+	MI_propertyId_t;
 
 signals:
 	void fileAnalyzed(const unsigned int taskId, const int fileType, const AudioFileModel &file);
@@ -78,19 +102,34 @@ private:
 	const AudioFileModel& analyzeFile(const QString &filePath, AudioFileModel &audioFile, int *const type);
 	const AudioFileModel& analyzeMediaFile(const QString &filePath, AudioFileModel &audioFile);
 	const AudioFileModel& parseMediaInfo(const QByteArray &data, AudioFileModel &audioFile);
+	void parseFileInfo(QXmlStreamReader &xmlStream, AudioFileModel &audioFile);
 	void parseTrackInfo(QXmlStreamReader &xmlStream, const MI_trackType_t trackType, AudioFileModel &audioFile);
+	void parseProperty(const QString &value, const MI_propertyId_t propertyIdx, AudioFileModel &audioFile);
 	bool checkFile_CDDA(QFile &file);
-	void retrieveCover(AudioFileModel &audioFile, const quint32 coverType, const QByteArray &coverData);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
 
-	static quint32 parseYear(const QString &str);
+	static const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, MI_propertyId_t> &initPropertiesIdx(void);
+	static const QMap<QString, MI_trackType_t> &initTrackTypes(void);
+	static QString decodeStr(const QString &str, const QString &encoding);
+	static bool parseUnsigned(const QString &str, quint32 &value);
+	static bool parseDuration(const QString &str, quint32 &value);
+	static bool parseYear(const QString &st, quint32 &valuer);
+	static bool parseRCMode(const QString &str, quint32 &value);
+	static QString cleanAsciiStr(const QString &str);
 	static bool findNextElement(const QString &name, QXmlStreamReader &xmlStream);
+	static QString findAttribute(const QString &name, const QXmlStreamAttributes &xmlAttributes);
 
 	const unsigned int m_taskId;
 	const QString m_mediaInfoBin;
 	const quint32 m_mediaInfoVer;
 	const QString m_avs2wavBin;
 	const QString m_inputFile;
-	
+	const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> &m_propertiesIdx;
+	const QMap<QString, MI_trackType_t> &m_trackTypes;
+
 	QAtomicInt &m_abortFlag;
+
+	static QReadWriteLock s_lock;
+	static QScopedPointer<const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t>> s_pPropertiesIdx;
+	static QScopedPointer<const QMap<QString, MI_trackType_t>> s_pTrackTypes;
 };
