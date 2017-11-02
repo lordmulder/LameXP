@@ -1,11 +1,11 @@
 [!Update]
-TimestampCreated=2017-10-26
+TimestampCreated=2017-11-02
 
 [LameXP]
-BuildNo=2028
-BuildDate=2017-10-26
+BuildNo=2048
+BuildDate=2017-11-02
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
 DownloadAddress=http://muldersoft.sourceforge.net/update/
-DownloadFilename=LameXP-ALPHA.2017-10-26.Release-Static.Build-2028.exe
-DownloadFilecode=b221eeb35548bd2acdf7377c78ee42d4eb80b818
-DownloadChecksum=83378EF86C0D26F01F50C7ED09F44E11B6D316C1DF6C9DE6D861BCF098B50DF706BA95D4877BFE8E9C345B1BEE242C50
+DownloadFilename=LameXP-ALPHA.2017-11-02.Release-Static.Build-2048.exe
+DownloadFilecode=f62aaf9491ac1f6b8fb0fa8b7e3b70665fdd6908
+DownloadChecksum=C17F4E9F0DAEDC7777E6AA4B972FC5618D244797B09411AD152B3A09AEE7E25968E14E12F72AB1927B465762E612CC3
