@@ -86,7 +86,9 @@ protected:
 		propertyId_bitdepth,
 		propertyId_bitrate,
 		propertyId_bitrate_mode,
-		propertyId_encoded_library
+		propertyId_encoded_library,
+		propertyId_cover_mime,
+		propertyId_cover_data
 	}
 	MI_propertyId_t;
 
@@ -104,12 +106,16 @@ private:
 	const AudioFileModel& parseMediaInfo(const QByteArray &data, AudioFileModel &audioFile);
 	void parseFileInfo(QXmlStreamReader &xmlStream, AudioFileModel &audioFile);
 	void parseTrackInfo(QXmlStreamReader &xmlStream, const MI_trackType_t trackType, AudioFileModel &audioFile);
-	void parseProperty(const QString &value, const MI_propertyId_t propertyIdx, AudioFileModel &audioFile);
+	void parseProperty(const QString &value, const MI_propertyId_t propertyIdx, AudioFileModel &audioFile, QString &coverMimeType);
+	void retrieveCover(AudioFileModel &audioFile, const QString &coverType, const QString &coverData);
 	bool checkFile_CDDA(QFile &file);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
 
-	static const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, MI_propertyId_t> &initPropertiesIdx(void);
+	static const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> &initMediaInfoIdx(void);
+	static const QMap<QString, MI_propertyId_t> &initAvisynthIdx(void);
+	static const QMap<QString, QString> &initMimeTypes(void);
 	static const QMap<QString, MI_trackType_t> &initTrackTypes(void);
+
 	static QString decodeStr(const QString &str, const QString &encoding);
 	static bool parseUnsigned(const QString &str, quint32 &value);
 	static bool parseDuration(const QString &str, quint32 &value);
@@ -119,17 +125,22 @@ private:
 	static bool findNextElement(const QString &name, QXmlStreamReader &xmlStream);
 	static QString findAttribute(const QString &name, const QXmlStreamAttributes &xmlAttributes);
 
+	const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> &m_mediaInfoIdx;
+	const QMap<QString, MI_propertyId_t> &m_avisynthIdx;
+	const QMap<QString, QString> &m_mimeTypes;
+	const QMap<QString, MI_trackType_t> &m_trackTypes;
+
 	const unsigned int m_taskId;
 	const QString m_mediaInfoBin;
 	const quint32 m_mediaInfoVer;
 	const QString m_avs2wavBin;
 	const QString m_inputFile;
-	const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> &m_propertiesIdx;
-	const QMap<QString, MI_trackType_t> &m_trackTypes;
 
 	QAtomicInt &m_abortFlag;
 
 	static QReadWriteLock s_lock;
-	static QScopedPointer<const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t>> s_pPropertiesIdx;
+	static QScopedPointer<const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t>> s_pMediaInfoIdx;
+	static QScopedPointer<const QMap<QString, MI_propertyId_t>> s_pAvisynthIdx;
+	static QScopedPointer<const QMap<QString, QString>> s_pMimeTypes;
 	static QScopedPointer<const QMap<QString, MI_trackType_t>> s_pTrackTypes;
 };

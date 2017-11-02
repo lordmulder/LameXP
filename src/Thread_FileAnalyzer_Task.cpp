@@ -54,9 +54,6 @@
 #include <time.h>
 #include <assert.h>
 
-//Debug
-#undef DUMP_MI_OUTPUT
-
 ////////////////////////////////////////////////////////////
 // Helper Macros
 ////////////////////////////////////////////////////////////
@@ -95,7 +92,9 @@ AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt 
 	m_mediaInfoVer(lamexp_tools_version("mediainfo.exe")),
 	m_avs2wavBin(lamexp_tools_lookup("avs2wav.exe")),
 	m_abortFlag(abortFlag),
-	m_propertiesIdx(initPropertiesIdx()),
+	m_mediaInfoIdx(initMediaInfoIdx()),
+	m_avisynthIdx(initAvisynthIdx()),
+	m_mimeTypes(initMimeTypes()),
 	m_trackTypes(initTrackTypes())
 {
 	if(m_mediaInfoBin.isEmpty() || m_avs2wavBin.isEmpty())
@@ -114,17 +113,19 @@ AnalyzeTask::~AnalyzeTask(void)
 ////////////////////////////////////////////////////////////
 
 QReadWriteLock AnalyzeTask::s_lock;
-QScopedPointer<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>> AnalyzeTask::s_pPropertiesIdx;
+QScopedPointer<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>> AnalyzeTask::s_pMediaInfoIdx;
+QScopedPointer<const QMap<QString, AnalyzeTask::MI_propertyId_t>> AnalyzeTask::s_pAvisynthIdx;
+QScopedPointer<const QMap<QString, QString>> AnalyzeTask::s_pMimeTypes;
 QScopedPointer<const QMap<QString, AnalyzeTask::MI_trackType_t>> AnalyzeTask::s_pTrackTypes;
 
-const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> &AnalyzeTask::initPropertiesIdx(void)
+const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> &AnalyzeTask::initMediaInfoIdx(void)
 {
 	QReadLocker rdLocker(&s_lock);
-	if (s_pPropertiesIdx.isNull())
+	if (s_pMediaInfoIdx.isNull())
 	{
 		rdLocker.unlock();
 		QWriteLocker wrLocker(&s_lock);
-		if (s_pPropertiesIdx.isNull())
+		if (s_pMediaInfoIdx.isNull())
 		{
 			QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> *const builder = new QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t>();
 			ADD_PROPTERY_MAPPING_2(gen, format, container);
@@ -150,14 +151,37 @@ const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_property
 			ADD_PROPTERY_MAPPING_1(aud, bitrate);
 			ADD_PROPTERY_MAPPING_1(aud, bitrate_mode);
 			ADD_PROPTERY_MAPPING_1(aud, encoded_library);
-			s_pPropertiesIdx.reset(builder);
+			ADD_PROPTERY_MAPPING_2(gen, cover_mime, cover_mime);
+			ADD_PROPTERY_MAPPING_2(gen, cover_data, cover_data);
+			s_pMediaInfoIdx.reset(builder);
 		}
 		wrLocker.unlock();
 		rdLocker.relock();
 	}
-	return (*s_pPropertiesIdx);
+	return (*s_pMediaInfoIdx);
 }
 
+const QMap<QString, AnalyzeTask::MI_propertyId_t> &AnalyzeTask::initAvisynthIdx(void)
+{
+	QReadLocker rdLocker(&s_lock);
+	if (s_pAvisynthIdx.isNull())
+	{
+		rdLocker.unlock();
+		QWriteLocker wrLocker(&s_lock);
+		if (s_pAvisynthIdx.isNull())
+		{
+			QMap<QString, MI_propertyId_t> *const builder = new QMap<QString, MI_propertyId_t>();
+			builder->insert(QLatin1String("totalseconds"),  propertyId_duration);
+			builder->insert(QLatin1String("samplespersec"), propertyId_samplingrate);
+			builder->insert(QLatin1String("channels"),      propertyId_channel_s_);
+			builder->insert(QLatin1String("bitspersample"), propertyId_bitdepth);
+			s_pAvisynthIdx.reset(builder);
+		}
+		wrLocker.unlock();
+		rdLocker.relock();
+	}
+	return (*s_pAvisynthIdx);
+}
 const QMap<QString, AnalyzeTask::MI_trackType_t> &AnalyzeTask::initTrackTypes(void)
 {
 	QReadLocker rdLocker(&s_lock);
@@ -167,7 +191,7 @@ const QMap<QString, AnalyzeTask::MI_trackType_t> &AnalyzeTask::initTrackTypes(vo
 		QWriteLocker wrLocker(&s_lock);
 		if (s_pTrackTypes.isNull())
 		{
-			QMap<QString, AnalyzeTask::MI_trackType_t> *const builder = new QMap<QString, AnalyzeTask::MI_trackType_t>();
+			QMap<QString, MI_trackType_t> *const builder = new QMap<QString, MI_trackType_t>();
 			builder->insert("general", trackType_gen);
 			builder->insert("audio",   trackType_aud);
 			s_pTrackTypes.reset(builder);
@@ -176,6 +200,28 @@ const QMap<QString, AnalyzeTask::MI_trackType_t> &AnalyzeTask::initTrackTypes(vo
 		rdLocker.relock();
 	}
 	return (*s_pTrackTypes);
+}
+
+const QMap<QString, QString> &AnalyzeTask::initMimeTypes(void)
+{
+	QReadLocker rdLocker(&s_lock);
+	if (s_pMimeTypes.isNull())
+	{
+		rdLocker.unlock();
+		QWriteLocker wrLocker(&s_lock);
+		if (s_pMimeTypes.isNull())
+		{
+			QMap<QString, QString> *const builder = new QMap<QString, QString>();
+			for (size_t i = 0U; MIME_TYPES[i].type; ++i)
+			{
+				builder->insert(QString::fromLatin1(MIME_TYPES[i].type), QString::fromLatin1(MIME_TYPES[i].ext[0]));
+			}
+			s_pMimeTypes.reset(builder);
+		}
+		wrLocker.unlock();
+		rdLocker.relock();
+	}
+	return (*s_pMimeTypes);
 }
 
 ////////////////////////////////////////////////////////////
@@ -356,9 +402,9 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 		data += dataNext;
 	}
 	
-#if defined(DUMP_MI_OUTPUT)
-	qDebug("!!!--START-->>>\n%s\n<<<--END--!!!", data.constData());
-#endif //DUMP_MI_OUTPUT
+#if MUTILS_DEBUG
+	qDebug("!!!--MEDIA_INFO-->>>\n%s\n<<<--MEDIA_INFO--!!!", data.constData());
+#endif //MUTILS_DEBUG
 
 	return parseMediaInfo(data, audioFile);
 }
@@ -423,9 +469,8 @@ const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioF
 
 void AnalyzeTask::parseFileInfo(QXmlStreamReader &xmlStream, AudioFileModel &audioFile)
 {
-	MI_trackType_t trackType;
 	QSet<MI_trackType_t> tracksProcessed;
-
+	MI_trackType_t trackType;
 	while (findNextElement(QLatin1String("Track"), xmlStream))
 	{
 		const QString typeString = findAttribute(QLatin1String("Type"), xmlStream.attributes());
@@ -452,17 +497,17 @@ void AnalyzeTask::parseFileInfo(QXmlStreamReader &xmlStream, AudioFileModel &aud
 
 void AnalyzeTask::parseTrackInfo(QXmlStreamReader &xmlStream, const MI_trackType_t trackType, AudioFileModel &audioFile)
 {
+	QString coverMimeType;
 	while (xmlStream.readNextStartElement())
 	{
-		qDebug("%d::%s", trackType, MUTILS_UTF8(xmlStream.name()));
-		const MI_propertyId_t idx = s_pPropertiesIdx->value(qMakePair(trackType, xmlStream.name().toString().simplified().toLower()), MI_propertyId_t(-1));
+		const MI_propertyId_t idx = m_mediaInfoIdx.value(qMakePair(trackType, xmlStream.name().toString().simplified().toLower()), MI_propertyId_t(-1));
 		if (idx != MI_propertyId_t(-1))
 		{
 			const QString encoding = findAttribute(QLatin1String("dt"), xmlStream.attributes());
 			const QString value = xmlStream.readElementText(QXmlStreamReader::SkipChildElements).simplified();
 			if (!value.isEmpty())
 			{
-				parseProperty(encoding.isEmpty() ? value : decodeStr(value, encoding), idx, audioFile);
+				parseProperty(encoding.isEmpty() ? value : decodeStr(value, encoding), idx, audioFile, coverMimeType);
 			}
 		}
 		else
@@ -472,9 +517,11 @@ void AnalyzeTask::parseTrackInfo(QXmlStreamReader &xmlStream, const MI_trackType
 	}
 }
 
-void AnalyzeTask::parseProperty(const QString &value, const MI_propertyId_t propertyIdx, AudioFileModel &audioFile)
+void AnalyzeTask::parseProperty(const QString &value, const MI_propertyId_t propertyIdx, AudioFileModel &audioFile, QString &coverMimeType)
 {
-	qWarning("--> %d: \"%s\"", propertyIdx, MUTILS_UTF8(value));
+#if MUTILS_DEBUG
+	qDebug("Property #%d = \"%s\"", propertyIdx, MUTILS_UTF8(value.left(24)));
+#endif
 	switch (propertyIdx)
 	{
 		case propertyId_container:         audioFile.techInfo().setContainerType(value);                                                     return;
@@ -496,6 +543,8 @@ void AnalyzeTask::parseProperty(const QString &value, const MI_propertyId_t prop
 		case propertyId_bitrate:           SET_OPTIONAL(quint32, parseDuration(value, _tmp), audioFile.techInfo().setAudioBitrate(_tmp));    return;
 		case propertyId_bitrate_mode:      SET_OPTIONAL(quint32, parseRCMode(value, _tmp), audioFile.techInfo().setAudioBitrateMode(_tmp));  return;
 		case propertyId_encoded_library:   audioFile.techInfo().setAudioEncodeLib(cleanAsciiStr(value));                                     return;
+		case propertyId_cover_mime:        coverMimeType = value;                                                                            return;
+		case propertyId_cover_data:        retrieveCover(audioFile, coverMimeType, value);                                                   return;
 		default: MUTILS_THROW_FMT("Invalid property ID: %d", propertyIdx);
 	}
 }
@@ -512,28 +561,27 @@ bool AnalyzeTask::checkFile_CDDA(QFile &file)
 	return ((i >= 0) && (j >= 0) && (k >= 0) && (k > j) && (j > i));
 }
 
-/*
-void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, const quint32 coverType, const QByteArray &coverData)
+void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, const QString &coverType, const QString &coverData)
 {
-	qDebug("Retrieving cover! (MIME_TYPES_MAX=%u)", MIME_TYPES_MAX);
-	
-	static const QString ext = QString::fromLatin1(MIME_TYPES[qBound(0U, coverType, MIME_TYPES_MAX)].ext[0]);
-	if(!(QImage::fromData(coverData, ext.toUpper().toLatin1().constData()).isNull()))
+	static const QByteArray content = QByteArray::fromBase64(coverData.toLatin1());
+	static const QString type = m_mimeTypes.value(coverType.toLower());
+	qDebug("Retrieving cover! (mime=\"%s\", type=\"%s\", len=%d)", MUTILS_L1STR(coverType), MUTILS_L1STR(type), content.size());
+	if(!QImage::fromData(content, type.isEmpty() ? NULL : MUTILS_L1STR(type.toUpper())).isNull())
 	{
-		QFile coverFile(QString("%1/%2.%3").arg(MUtils::temp_folder(), MUtils::next_rand_str(), ext));
+		QFile coverFile(QString("%1/%2.%3").arg(MUtils::temp_folder(), MUtils::next_rand_str(), type.isEmpty() ? QLatin1String("jpg") : type));
 		if(coverFile.open(QIODevice::WriteOnly))
 		{
-			coverFile.write(coverData);
+			coverFile.write(content);
 			coverFile.close();
 			audioFile.metaInfo().setCover(coverFile.fileName(), true);
 		}
 	}
 	else
 	{
-		qWarning("Image data seems to be invalid :-(");
+		qWarning("Image data seems to be invalid! [Header:%s]", content.left(32).toHex().constData());
 	}
 }
-*/
+
 
 bool AnalyzeTask::analyzeAvisynthFile(const QString &filePath, AudioFileModel &info)
 {
@@ -573,44 +621,27 @@ bool AnalyzeTask::analyzeAvisynthFile(const QString &filePath, AudioFileModel &i
 			}
 		}
 
-		QByteArray data;
-
 		while(process.canReadLine())
 		{
-			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
+			const QString line = QString::fromUtf8(process.readLine().constData()).simplified();
 			if(!line.isEmpty())
 			{
-				int index = line.indexOf(':');
-				if(index > 0)
+				if(bInfoHeaderFound)
 				{
-					QString key = line.left(index).trimmed();
-					QString val = line.mid(index+1).trimmed();
-
-					if(bInfoHeaderFound && !key.isEmpty() && !val.isEmpty())
+					const qint32 index = line.indexOf(':');
+					if (index > 0)
 					{
-						if(key.compare("TotalSeconds", Qt::CaseInsensitive) == 0)
+						const QString key = line.left(index).trimmed();
+						const QString val = line.mid(index + 1).trimmed();
+						if (!(key.isEmpty() || val.isEmpty()))
 						{
-							bool ok = false;
-							unsigned int duration = val.toUInt(&ok);
-							if(ok) info.techInfo().setDuration(duration);
-						}
-						if(key.compare("SamplesPerSec", Qt::CaseInsensitive) == 0)
-						{
-							bool ok = false;
-							unsigned int samplerate = val.toUInt(&ok);
-							if(ok) info.techInfo().setAudioSamplerate (samplerate);
-						}
-						if(key.compare("Channels", Qt::CaseInsensitive) == 0)
-						{
-							bool ok = false;
-							unsigned int channels = val.toUInt(&ok);
-							if(ok) info.techInfo().setAudioChannels(channels);
-						}
-						if(key.compare("BitsPerSample", Qt::CaseInsensitive) == 0)
-						{
-							bool ok = false;
-							unsigned int bitdepth = val.toUInt(&ok);
-							if(ok) info.techInfo().setAudioBitdepth(bitdepth);
+							switch (m_avisynthIdx.value(key.toLower(), MI_propertyId_t(-1)))
+							{
+								case propertyId_duration:     SET_OPTIONAL(quint32, parseUnsigned(val, _tmp), info.techInfo().setDuration(_tmp));        break;
+								case propertyId_samplingrate: SET_OPTIONAL(quint32, parseUnsigned(val, _tmp), info.techInfo().setAudioSamplerate(_tmp)); break;
+								case propertyId_channel_s_:   SET_OPTIONAL(quint32, parseUnsigned(val, _tmp), info.techInfo().setAudioChannels(_tmp));   break;
+								case propertyId_bitdepth:     SET_OPTIONAL(quint32, parseUnsigned(val, _tmp), info.techInfo().setAudioBitdepth(_tmp));   break;
+							}
 						}
 					}
 				}
