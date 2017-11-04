@@ -57,7 +57,6 @@ public:
 	}
 	fileType_t;
 
-protected:
 	typedef enum
 	{
 		trackType_non = 0,
@@ -111,11 +110,6 @@ private:
 	bool checkFile_CDDA(QFile &file);
 	bool analyzeAvisynthFile(const QString &filePath, AudioFileModel &info);
 
-	static const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> &initMediaInfoIdx(void);
-	static const QMap<QString, MI_propertyId_t> &initAvisynthIdx(void);
-	static const QMap<QString, QString> &initMimeTypes(void);
-	static const QMap<QString, MI_trackType_t> &initTrackTypes(void);
-
 	static QString decodeStr(const QString &str, const QString &encoding);
 	static bool parseUnsigned(const QString &str, quint32 &value);
 	static bool parseDuration(const QString &str, quint32 &value);
@@ -124,6 +118,7 @@ private:
 	static QString cleanAsciiStr(const QString &str);
 	static bool findNextElement(const QString &name, QXmlStreamReader &xmlStream);
 	static QString findAttribute(const QString &name, const QXmlStreamAttributes &xmlAttributes);
+	static bool checkVersionStr(const QString &str, const quint32 expectedMajor, const quint32 expectedMinor);
 
 	const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> &m_mediaInfoIdx;
 	const QMap<QString, MI_propertyId_t> &m_avisynthIdx;
@@ -137,10 +132,4 @@ private:
 	const QString m_inputFile;
 
 	QAtomicInt &m_abortFlag;
-
-	static QReadWriteLock s_lock;
-	static QScopedPointer<const QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t>> s_pMediaInfoIdx;
-	static QScopedPointer<const QMap<QString, MI_propertyId_t>> s_pAvisynthIdx;
-	static QScopedPointer<const QMap<QString, QString>> s_pMimeTypes;
-	static QScopedPointer<const QMap<QString, MI_trackType_t>> s_pTrackTypes;
 };

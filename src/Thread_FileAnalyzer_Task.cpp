@@ -31,6 +31,7 @@
 //MUtils
 #include <MUtils/Global.h>
 #include <MUtils/OSSupport.h>
+#include <MUtils/Lazy.h>
 #include <MUtils/Exception.h>
 
 //Qt
@@ -66,7 +67,7 @@ while(0)
 
 #define ADD_PROPTERY_MAPPING_2(TYPE, MI_NAME, LX_NAME) do \
 { \
-	builder->insert(qMakePair(trackType_##TYPE, QString::fromLatin1(#MI_NAME)), propertyId_##LX_NAME); \
+	builder->insert(qMakePair(AnalyzeTask::trackType_##TYPE, QString::fromLatin1(#MI_NAME)), AnalyzeTask::propertyId_##LX_NAME); \
 } \
 while(0)
 
@@ -81,6 +82,85 @@ while(0)
 #define STRICMP(A,B) ((A).compare((B), Qt::CaseInsensitive) == 0)
 
 ////////////////////////////////////////////////////////////
+// Static initialization
+////////////////////////////////////////////////////////////
+
+class AnalyzeTask_StaticInit_MediaInfoIdx : public MUtils::Lazy<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>>
+{
+	virtual QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> *create()
+	{
+		QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> *const builder = new QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>();
+		ADD_PROPTERY_MAPPING_2(gen, format, container);
+		ADD_PROPTERY_MAPPING_2(gen, format_profile, container_profile);
+		ADD_PROPTERY_MAPPING_1(gen, duration);
+		ADD_PROPTERY_MAPPING_1(gen, title);
+		ADD_PROPTERY_MAPPING_2(gen, track, title);
+		ADD_PROPTERY_MAPPING_1(gen, artist);
+		ADD_PROPTERY_MAPPING_2(gen, performer, artist);
+		ADD_PROPTERY_MAPPING_1(gen, album);
+		ADD_PROPTERY_MAPPING_1(gen, genre);
+		ADD_PROPTERY_MAPPING_1(gen, released_date);
+		ADD_PROPTERY_MAPPING_2(gen, recorded_date, released_date);
+		ADD_PROPTERY_MAPPING_1(gen, track_position);
+		ADD_PROPTERY_MAPPING_1(gen, comment);
+		ADD_PROPTERY_MAPPING_1(aud, format);
+		ADD_PROPTERY_MAPPING_1(aud, format_version);
+		ADD_PROPTERY_MAPPING_1(aud, format_profile);
+		ADD_PROPTERY_MAPPING_1(aud, duration);
+		ADD_PROPTERY_MAPPING_1(aud, channel_s_);
+		ADD_PROPTERY_MAPPING_1(aud, samplingrate);
+		ADD_PROPTERY_MAPPING_1(aud, bitdepth);
+		ADD_PROPTERY_MAPPING_1(aud, bitrate);
+		ADD_PROPTERY_MAPPING_1(aud, bitrate_mode);
+		ADD_PROPTERY_MAPPING_1(aud, encoded_library);
+		ADD_PROPTERY_MAPPING_2(gen, cover_mime, cover_mime);
+		ADD_PROPTERY_MAPPING_2(gen, cover_data, cover_data);
+		return builder;
+	}
+}
+s_mediaInfoIdx;
+
+class AnalyzeTask_StaticInit_AvisynthIdx : public MUtils::Lazy<const QMap<QString, AnalyzeTask::MI_propertyId_t>>
+{
+	virtual QMap<QString, AnalyzeTask::MI_propertyId_t> *create()
+	{
+		QMap<QString, AnalyzeTask::MI_propertyId_t> *const builder = new QMap<QString, AnalyzeTask::MI_propertyId_t>();
+		builder->insert(QLatin1String("totalseconds"), AnalyzeTask::propertyId_duration);
+		builder->insert(QLatin1String("samplespersec"), AnalyzeTask::propertyId_samplingrate);
+		builder->insert(QLatin1String("channels"), AnalyzeTask::propertyId_channel_s_);
+		builder->insert(QLatin1String("bitspersample"), AnalyzeTask::propertyId_bitdepth);
+		return builder;
+	}
+}
+s_avisynthIdx;
+
+class AnalyzeTask_StaticInit_MimiTypes : public MUtils::Lazy<const QMap<QString, QString>>
+{
+	virtual QMap<QString, QString> *create()
+	{
+		QMap<QString, QString> *const builder = new QMap<QString, QString>();
+		for (size_t i = 0U; MIME_TYPES[i].type; ++i)
+		{
+			builder->insert(QString::fromLatin1(MIME_TYPES[i].type), QString::fromLatin1(MIME_TYPES[i].ext[0]));
+		}
+		return builder;
+	}
+}
+s_mimeTypes;
+
+class AnalyzeTask_StaticInit_TrackTypes : public MUtils::Lazy<const QMap<QString, AnalyzeTask::MI_trackType_t>>
+{
+	virtual QMap<QString, AnalyzeTask::MI_trackType_t> *create()
+	{
+		QMap<QString, AnalyzeTask::MI_trackType_t> *const builder = new QMap<QString, AnalyzeTask::MI_trackType_t>();
+		builder->insert("general", AnalyzeTask::trackType_gen);
+		builder->insert("audio", AnalyzeTask::trackType_aud);
+		return builder;
+	}
+}
+s_trackTypes;
+
+////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
 
@@ -92,10 +172,10 @@ AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt 
 	m_mediaInfoVer(lamexp_tools_version("mediainfo.exe")),
 	m_avs2wavBin(lamexp_tools_lookup("avs2wav.exe")),
 	m_abortFlag(abortFlag),
-	m_mediaInfoIdx(initMediaInfoIdx()),
-	m_avisynthIdx(initAvisynthIdx()),
-	m_mimeTypes(initMimeTypes()),
-	m_trackTypes(initTrackTypes())
+	m_mediaInfoIdx(*s_mediaInfoIdx),
+	m_avisynthIdx(*s_avisynthIdx),
+	m_mimeTypes(*s_mimeTypes),
+	m_trackTypes(*s_trackTypes)
 {
 	if(m_mediaInfoBin.isEmpty() || m_avs2wavBin.isEmpty())
 	{
@@ -106,122 +186,6 @@ AnalyzeTask::AnalyzeTask(const int taskId, const QString &inputFile, QAtomicInt 
 AnalyzeTask::~AnalyzeTask(void)
 {
 	emit taskCompleted(m_taskId);
-}
-
-////////////////////////////////////////////////////////////
-// Static initialization
-////////////////////////////////////////////////////////////
-
-QReadWriteLock AnalyzeTask::s_lock;
-QScopedPointer<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>> AnalyzeTask::s_pMediaInfoIdx;
-QScopedPointer<const QMap<QString, AnalyzeTask::MI_propertyId_t>> AnalyzeTask::s_pAvisynthIdx;
-QScopedPointer<const QMap<QString, QString>> AnalyzeTask::s_pMimeTypes;
-QScopedPointer<const QMap<QString, AnalyzeTask::MI_trackType_t>> AnalyzeTask::s_pTrackTypes;
-
-const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> &AnalyzeTask::initMediaInfoIdx(void)
-{
-	QReadLocker rdLocker(&s_lock);
-	if (s_pMediaInfoIdx.isNull())
-	{
-		rdLocker.unlock();
-		QWriteLocker wrLocker(&s_lock);
-		if (s_pMediaInfoIdx.isNull())
-		{
-			QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t> *const builder = new QMap<QPair<MI_trackType_t, QString>, MI_propertyId_t>();
-			ADD_PROPTERY_MAPPING_2(gen, format, container);
-			ADD_PROPTERY_MAPPING_2(gen, format_profile, container_profile);
-			ADD_PROPTERY_MAPPING_1(gen, duration);
-			ADD_PROPTERY_MAPPING_1(gen, title);
-			ADD_PROPTERY_MAPPING_2(gen, track, title);
-			ADD_PROPTERY_MAPPING_1(gen, artist);
-			ADD_PROPTERY_MAPPING_2(gen, performer, artist);
-			ADD_PROPTERY_MAPPING_1(gen, album);
-			ADD_PROPTERY_MAPPING_1(gen, genre);
-			ADD_PROPTERY_MAPPING_1(gen, released_date);
-			ADD_PROPTERY_MAPPING_2(gen, recorded_date, released_date);
-			ADD_PROPTERY_MAPPING_1(gen, track_position);
-			ADD_PROPTERY_MAPPING_1(gen, comment);
-			ADD_PROPTERY_MAPPING_1(aud, format);
-			ADD_PROPTERY_MAPPING_1(aud, format_version);
-			ADD_PROPTERY_MAPPING_1(aud, format_profile);
-			ADD_PROPTERY_MAPPING_1(aud, duration);
-			ADD_PROPTERY_MAPPING_1(aud, channel_s_);
-			ADD_PROPTERY_MAPPING_1(aud, samplingrate);
-			ADD_PROPTERY_MAPPING_1(aud, bitdepth);
-			ADD_PROPTERY_MAPPING_1(aud, bitrate);
-			ADD_PROPTERY_MAPPING_1(aud, bitrate_mode);
-			ADD_PROPTERY_MAPPING_1(aud, encoded_library);
-			ADD_PROPTERY_MAPPING_2(gen, cover_mime, cover_mime);
-			ADD_PROPTERY_MAPPING_2(gen, cover_data, cover_data);
-			s_pMediaInfoIdx.reset(builder);
-		}
-		wrLocker.unlock();
-		rdLocker.relock();
-	}
-	return (*s_pMediaInfoIdx);
-}
-
-const QMap<QString, AnalyzeTask::MI_propertyId_t> &AnalyzeTask::initAvisynthIdx(void)
-{
-	QReadLocker rdLocker(&s_lock);
-	if (s_pAvisynthIdx.isNull())
-	{
-		rdLocker.unlock();
-		QWriteLocker wrLocker(&s_lock);
-		if (s_pAvisynthIdx.isNull())
-		{
-			QMap<QString, MI_propertyId_t> *const builder = new QMap<QString, MI_propertyId_t>();
-			builder->insert(QLatin1String("totalseconds"),  propertyId_duration);
-			builder->insert(QLatin1String("samplespersec"), propertyId_samplingrate);
-			builder->insert(QLatin1String("channels"),      propertyId_channel_s_);
-			builder->insert(QLatin1String("bitspersample"), propertyId_bitdepth);
-			s_pAvisynthIdx.reset(builder);
-		}
-		wrLocker.unlock();
-		rdLocker.relock();
-	}
-	return (*s_pAvisynthIdx);
-}
-const QMap<QString, AnalyzeTask::MI_trackType_t> &AnalyzeTask::initTrackTypes(void)
-{
-	QReadLocker rdLocker(&s_lock);
-	if (s_pTrackTypes.isNull())
-	{
-		rdLocker.unlock();
-		QWriteLocker wrLocker(&s_lock);
-		if (s_pTrackTypes.isNull())
-		{
-			QMap<QString, MI_trackType_t> *const builder = new QMap<QString, MI_trackType_t>();
-			builder->insert("general", trackType_gen);
-			builder->insert("audio",   trackType_aud);
-			s_pTrackTypes.reset(builder);
-		}
-		wrLocker.unlock();
-		rdLocker.relock();
-	}
-	return (*s_pTrackTypes);
-}
-
-const QMap<QString, QString> &AnalyzeTask::initMimeTypes(void)
-{
-	QReadLocker rdLocker(&s_lock);
-	if (s_pMimeTypes.isNull())
-	{
-		rdLocker.unlock();
-		QWriteLocker wrLocker(&s_lock);
-		if (s_pMimeTypes.isNull())
-		{
-			QMap<QString, QString> *const builder = new QMap<QString, QString>();
-			for (size_t i = 0U; MIME_TYPES[i].type; ++i)
-			{
-				builder->insert(QString::fromLatin1(MIME_TYPES[i].type), QString::fromLatin1(MIME_TYPES[i].ext[0]));
-			}
-			s_pMimeTypes.reset(builder);
-		}
-		wrLocker.unlock();
-		rdLocker.relock();
-	}
-	return (*s_pMimeTypes);
 }
 
 ////////////////////////////////////////////////////////////
@@ -412,27 +376,43 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioFileModel &audioFile)
 {
 	QXmlStreamReader xmlStream(data);
-	bool firstFile = true;
+	bool firstMediaFile = true;
 
 	if (findNextElement(QLatin1String("MediaInfo"), xmlStream))
 	{
-		const QString version = findAttribute(QLatin1String("Version"),  xmlStream.attributes());
-		if (version.isEmpty() || (!STRICMP(version, QString().sprintf("0.%u.%02u", m_mediaInfoVer / 100U, m_mediaInfoVer % 100))))
+		const QString versionXml = findAttribute(QLatin1String("Version"),  xmlStream.attributes());
+		if (versionXml.isEmpty() || (!checkVersionStr(versionXml, 2U, 0U)))
 		{
-			qWarning("Invalid version property \"%s\" was detected!", MUTILS_UTF8(version));
+			qWarning("Invalid file format version property: \"%s\"", MUTILS_UTF8(versionXml));
 			return audioFile;
 		}
-		while (findNextElement(QLatin1String("File"), xmlStream))
+		if (findNextElement(QLatin1String("CreatingLibrary"), xmlStream))
 		{
-			if (firstFile)
+			const QString versionLib = findAttribute(QLatin1String("Version"), xmlStream.attributes());
+			const QString identifier = xmlStream.readElementText(QXmlStreamReader::SkipChildElements).simplified();
+			if (!STRICMP(identifier, QLatin1String("MediaInfoLib")))
 			{
-				firstFile = false;
-				parseFileInfo(xmlStream, audioFile);
+				qWarning("Invalid library identiofier property: \"%s\"", MUTILS_UTF8(identifier));
+				return audioFile;
 			}
-			else
+			if (versionLib.isEmpty() || (!checkVersionStr(versionLib, m_mediaInfoVer / 100U, m_mediaInfoVer % 100U)))
 			{
-				qWarning("Skipping non-primary file!");
-				xmlStream.skipCurrentElement();
+				qWarning("Invalid library version property: \"%s\"", MUTILS_UTF8(versionLib));
+				return audioFile;
+			}
+			while (findNextElement(QLatin1String("Media"), xmlStream))
+			{
+				qWarning("Found a media!");
+				if (firstMediaFile || audioFile.techInfo().containerType().isEmpty() || audioFile.techInfo().audioType().isEmpty())
+				{
+					firstMediaFile = false;
+					parseFileInfo(xmlStream, audioFile);
+				}
+				else
+				{
+					qWarning("Skipping non-primary file!");
+					xmlStream.skipCurrentElement();
+				}
 			}
 		}
 	}
@@ -473,6 +453,7 @@ void AnalyzeTask::parseFileInfo(QXmlStreamReader &xmlStream, AudioFileModel &aud
 	MI_trackType_t trackType;
 	while (findNextElement(QLatin1String("Track"), xmlStream))
 	{
+		qWarning("Found a track!");
 		const QString typeString = findAttribute(QLatin1String("Type"), xmlStream.attributes());
 		if ((trackType = m_trackTypes.value(typeString.toLower(), MI_trackType_t(-1))) != MI_trackType_t(-1))
 		{
@@ -783,6 +764,23 @@ QString AnalyzeTask::findAttribute(const QString &name, const QXmlStreamAttribut
 		}
 	}
 	return QString();
+}
+
+bool AnalyzeTask::checkVersionStr(const QString &str, const quint32 expectedMajor, const quint32 expectedMinor)
+{
+	QRegExp version("^(\\d+)\\.(\\d+)($|\\.)");
+	if (version.indexIn(str) >= 0)
+	{
+		quint32 actual[2];
+		if (MUtils::regexp_parse_uint32(version, actual, 2))
+		{
+			if ((actual[0] == expectedMajor) && (actual[1] >= expectedMinor))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 ////////////////////////////////////////////////////////////
