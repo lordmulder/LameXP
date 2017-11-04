@@ -71,7 +71,6 @@ while(0)
 } \
 while(0)
 
-
 #define SET_OPTIONAL(TYPE, IF_CMD, THEN_CMD) do \
 { \
 	TYPE _tmp;\
@@ -79,86 +78,71 @@ while(0)
 } \
 while(0)
 
+#define DIV_RND(A,B) (((A) + ((B) / 2U)) / (B))
 #define STRICMP(A,B) ((A).compare((B), Qt::CaseInsensitive) == 0)
 
 ////////////////////////////////////////////////////////////
 // Static initialization
 ////////////////////////////////////////////////////////////
 
-class AnalyzeTask_StaticInit_MediaInfoIdx : public MUtils::Lazy<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>>
+static MUtils::Lazy<const QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>> s_mediaInfoIdx([]
 {
-	virtual QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> *create()
-	{
-		QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> *const builder = new QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>();
-		ADD_PROPTERY_MAPPING_2(gen, format, container);
-		ADD_PROPTERY_MAPPING_2(gen, format_profile, container_profile);
-		ADD_PROPTERY_MAPPING_1(gen, duration);
-		ADD_PROPTERY_MAPPING_1(gen, title);
-		ADD_PROPTERY_MAPPING_2(gen, track, title);
-		ADD_PROPTERY_MAPPING_1(gen, artist);
-		ADD_PROPTERY_MAPPING_2(gen, performer, artist);
-		ADD_PROPTERY_MAPPING_1(gen, album);
-		ADD_PROPTERY_MAPPING_1(gen, genre);
-		ADD_PROPTERY_MAPPING_1(gen, released_date);
-		ADD_PROPTERY_MAPPING_2(gen, recorded_date, released_date);
-		ADD_PROPTERY_MAPPING_1(gen, track_position);
-		ADD_PROPTERY_MAPPING_1(gen, comment);
-		ADD_PROPTERY_MAPPING_1(aud, format);
-		ADD_PROPTERY_MAPPING_1(aud, format_version);
-		ADD_PROPTERY_MAPPING_1(aud, format_profile);
-		ADD_PROPTERY_MAPPING_1(aud, duration);
-		ADD_PROPTERY_MAPPING_1(aud, channel_s_);
-		ADD_PROPTERY_MAPPING_1(aud, samplingrate);
-		ADD_PROPTERY_MAPPING_1(aud, bitdepth);
-		ADD_PROPTERY_MAPPING_1(aud, bitrate);
-		ADD_PROPTERY_MAPPING_1(aud, bitrate_mode);
-		ADD_PROPTERY_MAPPING_1(aud, encoded_library);
-		ADD_PROPTERY_MAPPING_2(gen, cover_mime, cover_mime);
-		ADD_PROPTERY_MAPPING_2(gen, cover_data, cover_data);
-		return builder;
-	}
-}
-s_mediaInfoIdx;
+	QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t> *const builder = new QMap<QPair<AnalyzeTask::MI_trackType_t, QString>, AnalyzeTask::MI_propertyId_t>();
+	ADD_PROPTERY_MAPPING_2(gen, format, container);
+	ADD_PROPTERY_MAPPING_2(gen, format_profile, container_profile);
+	ADD_PROPTERY_MAPPING_1(gen, duration);
+	ADD_PROPTERY_MAPPING_1(gen, title);
+	ADD_PROPTERY_MAPPING_2(gen, track, title);
+	ADD_PROPTERY_MAPPING_1(gen, artist);
+	ADD_PROPTERY_MAPPING_2(gen, performer, artist);
+	ADD_PROPTERY_MAPPING_1(gen, album);
+	ADD_PROPTERY_MAPPING_1(gen, genre);
+	ADD_PROPTERY_MAPPING_1(gen, released_date);
+	ADD_PROPTERY_MAPPING_2(gen, recorded_date, released_date);
+	ADD_PROPTERY_MAPPING_1(gen, track_position);
+	ADD_PROPTERY_MAPPING_1(gen, comment);
+	ADD_PROPTERY_MAPPING_1(aud, format);
+	ADD_PROPTERY_MAPPING_1(aud, format_version);
+	ADD_PROPTERY_MAPPING_1(aud, format_profile);
+	ADD_PROPTERY_MAPPING_1(aud, duration);
+	ADD_PROPTERY_MAPPING_1(aud, channel_s_);
+	ADD_PROPTERY_MAPPING_1(aud, samplingrate);
+	ADD_PROPTERY_MAPPING_1(aud, bitdepth);
+	ADD_PROPTERY_MAPPING_1(aud, bitrate);
+	ADD_PROPTERY_MAPPING_1(aud, bitrate_mode);
+	ADD_PROPTERY_MAPPING_1(aud, encoded_library);
+	ADD_PROPTERY_MAPPING_2(gen, cover_mime, cover_mime);
+	ADD_PROPTERY_MAPPING_2(gen, cover_data, cover_data);
+	return builder;
+});
 
-class AnalyzeTask_StaticInit_AvisynthIdx : public MUtils::Lazy<const QMap<QString, AnalyzeTask::MI_propertyId_t>>
+static MUtils::Lazy<const QMap<QString, AnalyzeTask::MI_propertyId_t>> s_avisynthIdx([]
 {
-	virtual QMap<QString, AnalyzeTask::MI_propertyId_t> *create()
-	{
-		QMap<QString, AnalyzeTask::MI_propertyId_t> *const builder = new QMap<QString, AnalyzeTask::MI_propertyId_t>();
-		builder->insert(QLatin1String("totalseconds"), AnalyzeTask::propertyId_duration);
-		builder->insert(QLatin1String("samplespersec"), AnalyzeTask::propertyId_samplingrate);
-		builder->insert(QLatin1String("channels"), AnalyzeTask::propertyId_channel_s_);
-		builder->insert(QLatin1String("bitspersample"), AnalyzeTask::propertyId_bitdepth);
-		return builder;
-	}
-}
-s_avisynthIdx;
+	QMap<QString, AnalyzeTask::MI_propertyId_t> *const builder = new QMap<QString, AnalyzeTask::MI_propertyId_t>();
+	builder->insert(QLatin1String("totalseconds"),  AnalyzeTask::propertyId_duration);
+	builder->insert(QLatin1String("samplespersec"), AnalyzeTask::propertyId_samplingrate);
+	builder->insert(QLatin1String("channels"),      AnalyzeTask::propertyId_channel_s_);
+	builder->insert(QLatin1String("bitspersample"), AnalyzeTask::propertyId_bitdepth);
+	return builder;
+});
 
-class AnalyzeTask_StaticInit_MimiTypes : public MUtils::Lazy<const QMap<QString, QString>>
+static MUtils::Lazy<const QMap<QString, QString>> s_mimeTypes([]
 {
-	virtual QMap<QString, QString> *create()
+	QMap<QString, QString> *const builder = new QMap<QString, QString>();
+	for (size_t i = 0U; MIME_TYPES[i].type; ++i)
 	{
-		QMap<QString, QString> *const builder = new QMap<QString, QString>();
-		for (size_t i = 0U; MIME_TYPES[i].type; ++i)
-		{
-			builder->insert(QString::fromLatin1(MIME_TYPES[i].type), QString::fromLatin1(MIME_TYPES[i].ext[0]));
-		}
-		return builder;
+		builder->insert(QString::fromLatin1(MIME_TYPES[i].type), QString::fromLatin1(MIME_TYPES[i].ext[0]));
 	}
-}
-s_mimeTypes;
+	return builder;
+});
 
-class AnalyzeTask_StaticInit_TrackTypes : public MUtils::Lazy<const QMap<QString, AnalyzeTask::MI_trackType_t>>
+static MUtils::Lazy<const QMap<QString, AnalyzeTask::MI_trackType_t>> s_trackTypes([]
 {
-	virtual QMap<QString, AnalyzeTask::MI_trackType_t> *create()
-	{
-		QMap<QString, AnalyzeTask::MI_trackType_t> *const builder = new QMap<QString, AnalyzeTask::MI_trackType_t>();
-		builder->insert("general", AnalyzeTask::trackType_gen);
-		builder->insert("audio", AnalyzeTask::trackType_aud);
-		return builder;
-	}
-}
-s_trackTypes;
+	QMap<QString, AnalyzeTask::MI_trackType_t> *const builder = new QMap<QString, AnalyzeTask::MI_trackType_t>();
+	builder->insert("general", AnalyzeTask::trackType_gen);
+	builder->insert("audio",   AnalyzeTask::trackType_aud);
+	return builder;
+});
 
 ////////////////////////////////////////////////////////////
 // Constructor
@@ -402,7 +386,6 @@ const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioF
 			}
 			while (findNextElement(QLatin1String("Media"), xmlStream))
 			{
-				qWarning("Found a media!");
 				if (firstMediaFile || audioFile.techInfo().containerType().isEmpty() || audioFile.techInfo().audioType().isEmpty())
 				{
 					firstMediaFile = false;
@@ -453,7 +436,6 @@ void AnalyzeTask::parseFileInfo(QXmlStreamReader &xmlStream, AudioFileModel &aud
 	MI_trackType_t trackType;
 	while (findNextElement(QLatin1String("Track"), xmlStream))
 	{
-		qWarning("Found a track!");
 		const QString typeString = findAttribute(QLatin1String("Type"), xmlStream.attributes());
 		if ((trackType = m_trackTypes.value(typeString.toLower(), MI_trackType_t(-1))) != MI_trackType_t(-1))
 		{
@@ -505,27 +487,27 @@ void AnalyzeTask::parseProperty(const QString &value, const MI_propertyId_t prop
 #endif
 	switch (propertyIdx)
 	{
-		case propertyId_container:         audioFile.techInfo().setContainerType(value);                                                     return;
-		case propertyId_container_profile: audioFile.techInfo().setContainerProfile(value);                                                  return;
-		case propertyId_duration:          SET_OPTIONAL(quint32, parseDuration(value, _tmp), audioFile.techInfo().setDuration(_tmp));        return;
-		case propertyId_title:             audioFile.metaInfo().setTitle(value);                                                             return;
-		case propertyId_artist:            audioFile.metaInfo().setArtist(value);                                                            return;
-		case propertyId_album:             audioFile.metaInfo().setAlbum(value);                                                             return;
-		case propertyId_genre:             audioFile.metaInfo().setGenre(value);                                                             return;
-		case propertyId_released_date:     SET_OPTIONAL(quint32, parseYear(value, _tmp), audioFile.metaInfo().setYear(_tmp));                return;
-		case propertyId_track_position:    SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.metaInfo().setPosition(_tmp));        return;
-		case propertyId_comment:           audioFile.metaInfo().setComment(value);                                                           return;
-		case propertyId_format:            audioFile.techInfo().setAudioType(value);                                                         return;
-		case propertyId_format_version:    audioFile.techInfo().setAudioVersion(value);                                                      return;
-		case propertyId_format_profile:    audioFile.techInfo().setAudioProfile(value);                                                      return;
-		case propertyId_channel_s_:        SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.techInfo().setAudioChannels(_tmp));   return;
-		case propertyId_samplingrate:      SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.techInfo().setAudioSamplerate(_tmp)); return;
-		case propertyId_bitdepth:          SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.techInfo().setAudioBitdepth(_tmp));   return;
-		case propertyId_bitrate:           SET_OPTIONAL(quint32, parseDuration(value, _tmp), audioFile.techInfo().setAudioBitrate(_tmp));    return;
-		case propertyId_bitrate_mode:      SET_OPTIONAL(quint32, parseRCMode(value, _tmp), audioFile.techInfo().setAudioBitrateMode(_tmp));  return;
-		case propertyId_encoded_library:   audioFile.techInfo().setAudioEncodeLib(cleanAsciiStr(value));                                     return;
-		case propertyId_cover_mime:        coverMimeType = value;                                                                            return;
-		case propertyId_cover_data:        retrieveCover(audioFile, coverMimeType, value);                                                   return;
+		case propertyId_container:         audioFile.techInfo().setContainerType(value);                                                                  return;
+		case propertyId_container_profile: audioFile.techInfo().setContainerProfile(value);                                                               return;
+		case propertyId_duration:          SET_OPTIONAL(double, parseFloat(value, _tmp), audioFile.techInfo().setDuration(qRound(_tmp)));                 return;
+		case propertyId_title:             audioFile.metaInfo().setTitle(value);                                                                          return;
+		case propertyId_artist:            audioFile.metaInfo().setArtist(value);                                                                         return;
+		case propertyId_album:             audioFile.metaInfo().setAlbum(value);                                                                          return;
+		case propertyId_genre:             audioFile.metaInfo().setGenre(value);                                                                          return;
+		case propertyId_released_date:     SET_OPTIONAL(quint32, parseYear(value, _tmp), audioFile.metaInfo().setYear(_tmp));                             return;
+		case propertyId_track_position:    SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.metaInfo().setPosition(_tmp));                     return;
+		case propertyId_comment:           audioFile.metaInfo().setComment(value);                                                                        return;
+		case propertyId_format:            audioFile.techInfo().setAudioType(value);                                                                      return;
+		case propertyId_format_version:    audioFile.techInfo().setAudioVersion(value);                                                                   return;
+		case propertyId_format_profile:    audioFile.techInfo().setAudioProfile(value);                                                                   return;
+		case propertyId_channel_s_:        SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.techInfo().setAudioChannels(_tmp));                return;
+		case propertyId_samplingrate:      SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.techInfo().setAudioSamplerate(_tmp));              return;
+		case propertyId_bitdepth:          SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.techInfo().setAudioBitdepth(_tmp));                return;
+		case propertyId_bitrate:           SET_OPTIONAL(quint32, parseUnsigned(value, _tmp), audioFile.techInfo().setAudioBitrate(DIV_RND(_tmp, 1000U))); return;
+		case propertyId_bitrate_mode:      SET_OPTIONAL(quint32, parseRCMode(value, _tmp), audioFile.techInfo().setAudioBitrateMode(_tmp));               return;
+		case propertyId_encoded_library:   audioFile.techInfo().setAudioEncodeLib(cleanAsciiStr(value));                                                  return;
+		case propertyId_cover_mime:        coverMimeType = value;                                                                                         return;
+		case propertyId_cover_data:        retrieveCover(audioFile, coverMimeType, value);                                                                return;
 		default: MUTILS_THROW_FMT("Invalid property ID: %d", propertyIdx);
 	}
 }
@@ -684,14 +666,11 @@ bool AnalyzeTask::parseUnsigned(const QString &str, quint32 &value)
 	value = str.toUInt(&okay);
 	return okay;
 }
-bool AnalyzeTask::parseDuration(const QString &str, quint32 &value)
+bool AnalyzeTask::parseFloat(const QString &str, double &value)
 {
-	if (parseUnsigned(str, value))
-	{
-		value = (value + 500U) / 1000U;
-		return true;
-	}
-	return false;
+	bool okay = false;
+	value = QLocale::c().toDouble(str, &okay);
+	return okay;
 }
 
 bool AnalyzeTask::parseYear(const QString &str, quint32 &value)

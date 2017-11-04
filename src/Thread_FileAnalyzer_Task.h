@@ -112,7 +112,7 @@ private:
 
 	static QString decodeStr(const QString &str, const QString &encoding);
 	static bool parseUnsigned(const QString &str, quint32 &value);
-	static bool parseDuration(const QString &str, quint32 &value);
+	static bool parseFloat(const QString &str, double &value);
 	static bool parseYear(const QString &st, quint32 &valuer);
 	static bool parseRCMode(const QString &str, quint32 &value);
 	static QString cleanAsciiStr(const QString &str);
