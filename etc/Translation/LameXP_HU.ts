@@ -1837,7 +1837,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4289"/>
         <source>Access Denied</source>
         <translation>Hozzáférés megtagadva</translation>
     </message>
@@ -2030,7 +2030,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1601"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1681"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2252"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
         <source>Discard</source>
         <translation>Elvetés</translation>
     </message>
@@ -2453,238 +2453,238 @@
         <translation>A rádobott fájlok vagy mappák betöltése, kis türelmet...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2794"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2777"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2781"/>
         <source>Save CSV file</source>
         <translation>CSV fájl mentése</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2797"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2846"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2777"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2827"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2833"/>
         <source>CSV File</source>
         <translation>CSV fájl</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2811"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2814"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
         <source>CSV Export</source>
         <translation>CSV exportálása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2811"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation>Sajnáljuk, de jelenleg nincs importálható meta-címke!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2814"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation>Sajnáljuk, de nem sikerült megnyitni írásra a CSV-fájlt!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation>Sajnáljuk, de nem sikerült írni a CSV-fájlba!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
         <source>The CSV files was created successfully!</source>
         <translation>A CSV-fájlok létrehozása sikeresen megtörtént!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2844"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2827"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2831"/>
         <source>Open CSV file</source>
         <translation>CSV fájl megnyitása</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2860"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2863"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2847"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
         <source>CSV Import</source>
         <translation>CSV importálás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2860"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2847"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation>Sajnáljuk, de nem sikerült megnyitni a CSV fájlt olvasásra!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2863"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation>Sajnáljuk, de nem sikerült olvasni a CSV-fájlból!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation>Sajnáljuk, de a CSV-fájl nem tartalmaz ismert mezőket!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation>A CSV-fájl hiányos. Nem minden fájl lett frissítve!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
         <source>The CSV files was imported successfully!</source>
         <translation>A CSV-fájlok importálása sikeresen megtörtént!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3051"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3038"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3083"/>
         <source>New Folder</source>
         <translation>Új könyvtár</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3083"/>
         <source>Enter the name of the new folder:</source>
         <translation>Adja meg az új mappa nevét:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
         <source>Failed to create folder</source>
         <translation>Nem sikerült létrehozni a mappát</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
         <source>The new folder could not be created:</source>
         <translation>Az új mappa nem hozható létre:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation>A meghajtó írásvédett, vagy nem rendelkezik megfelelő hozzáférési jogokkal!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3606"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3593"/>
         <source>Current Encoder: %1</source>
         <translation>Aktuális kódoló: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3710"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3713"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3697"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3700"/>
         <source>Quality Level %1</source>
         <translation>Minőségi szint: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3703"/>
         <source>Compression %1</source>
         <translation>Tömörítés: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3719"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3706"/>
         <source>Uncompressed</source>
         <translation>Tömörítetlen</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3762"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3749"/>
         <source>Best Quality (Slow)</source>
         <translation>Legjobb minőség (Lassú)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3765"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3752"/>
         <source>High Quality (Recommended)</source>
         <translation>Kiváló minőség (ajánlott)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3768"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3755"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>Elfogadható minőség (Gyors)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3771"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3758"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Gyenge minőség (Nagyon gyors)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4201"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4188"/>
         <source>File name without extension</source>
         <translation>Fájlnév kiterjesztés nélkül</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4189"/>
         <source>Track number with leading zero</source>
         <translation>Szám sorszáma kezdő nullával</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4203"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4190"/>
         <source>Track title</source>
         <translation>Szám címe</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4204"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4191"/>
         <source>Artist name</source>
         <translation>Előadó neve</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4205"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4192"/>
         <source>Album name</source>
         <translation>Album neve</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4206"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4193"/>
         <source>Year with (at least) four digits</source>
         <translation>Év (legalább) négy számjeggyel</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4207"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4209"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
         <source>Characters forbidden in file names:</source>
         <translation>Tiltott karakterek a fájlnevekben:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
         <source>Rename Macros</source>
         <translation>Makrók átnevezése</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4259"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4246"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n példány</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4289"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Nem lehet írni a kiválasztott könyvtárba. Kérjük válasszon egy másik könyvtárat!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Overwrite Mode</source>
         <translation>Felülírási mód</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Figyelem: Ez a mód felülírja a már létező fájlokat, amelyeket azt követően nem tud visszaállítani!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Continue</source>
         <translation>Folytatás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Revert</source>
         <translation>Visszaállítás</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4532"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4519"/>
         <source>Already Running</source>
         <translation>Már fut</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4532"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4519"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>A LameXP már fut. Kérjük, használja a futó példányt!</translation>
     </message>

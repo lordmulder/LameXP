@@ -2689,38 +2689,25 @@ void MainWindow::handleDroppedFiles(void)
 		QFileInfo file(m_droppedFileList->takeFirst().toLocalFile());
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
-		if(!file.exists())
+		if(file.exists())
 		{
-			continue;
-		}
-
-		if(file.isFile())
-		{
-			qDebug("Dropped File: %s", MUTILS_UTF8(file.canonicalFilePath()));
-			droppedFiles << file.canonicalFilePath();
-			continue;
-		}
-
-		if(file.isDir())
-		{
-			qDebug("Dropped Folder: %s", MUTILS_UTF8(file.canonicalFilePath()));
-			QFileInfoList list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-			if(list.count() > 0)
+			if(file.isFile())
 			{
-				showBanner(bannerText, bUseBanner, (list.count() >= MIN_COUNT));
-				for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
-				{
-					droppedFiles << (*iter).canonicalFilePath();
-				}
+				qDebug("Dropped File: %s", MUTILS_UTF8(file.canonicalFilePath()));
+				droppedFiles << file.canonicalFilePath();
+				continue;
 			}
-			else
+			else if(file.isDir())
 			{
-				list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-				showBanner(bannerText, bUseBanner, (list.count() >= MIN_COUNT));
-				for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
+				qDebug("Dropped Folder: %s", MUTILS_UTF8(file.canonicalFilePath()));
+				QFileInfoList list = QDir(file.canonicalFilePath()).entryInfoList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+				if(list.count() > 0)
 				{
-					qDebug("Descending to Folder: %s", MUTILS_UTF8((*iter).canonicalFilePath()));
-					m_droppedFileList->prepend(QUrl::fromLocalFile((*iter).canonicalFilePath()));
+					showBanner(bannerText, bUseBanner, (list.count() >= MIN_COUNT));
+					for(QFileInfoList::ConstIterator iter = list.constBegin(); iter != list.constEnd(); iter++)
+					{
+						droppedFiles << (*iter).canonicalFilePath();
+					}
 				}
 			}
 		}

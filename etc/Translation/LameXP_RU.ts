@@ -1458,7 +1458,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4289"/>
         <source>Access Denied</source>
         <translation>Доступ запрещён</translation>
     </message>
@@ -1722,64 +1722,64 @@
         <translation>Файлы локализаций</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3051"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3038"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3083"/>
         <source>New Folder</source>
         <translation>Новая папка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3083"/>
         <source>Enter the name of the new folder:</source>
         <translation>Введите имя новой папки:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
         <source>Failed to create folder</source>
         <translation>Не могу создать папку</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
         <source>The new folder could not be created:</source>
         <translation>Не могу создать новую папку:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3129"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation>Диск только для чтения или недостаточно прав для записи!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4532"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4519"/>
         <source>Already Running</source>
         <translation>Уже запущено</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4532"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4519"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation>LameXP уже запущена, пожалуйста, используйте запущенную копию программы!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3710"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3713"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3697"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3700"/>
         <source>Quality Level %1</source>
         <translation>Уровень качества %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3716"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3703"/>
         <source>Compression %1</source>
         <translation>Сжатие %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3719"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3706"/>
         <source>Uncompressed</source>
         <translation>Несжатый</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3765"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3752"/>
         <source>High Quality (Recommended)</source>
         <translation>Высокое качество (рекомендуется)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3771"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3758"/>
         <source>Poor Quality (Very Fast)</source>
         <translation>Плохое качество (Очень быстро)</translation>
     </message>
@@ -1947,7 +1947,7 @@
         <translation>Добавить папку</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4302"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4289"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation>Папка недоступна для записи. Пожалуйста, выберите другую папку!</translation>
     </message>
@@ -2008,7 +2008,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1601"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1681"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2252"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
         <source>Discard</source>
         <translation>Отменить</translation>
     </message>
@@ -2219,37 +2219,37 @@
         <translation>Переименовывать файлы</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4202"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4189"/>
         <source>Track number with leading zero</source>
         <translation>Номер трэка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4203"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4190"/>
         <source>Track title</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4204"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4191"/>
         <source>Artist name</source>
         <translation>Исполнитель</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4205"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4192"/>
         <source>Album name</source>
         <translation>Альбом</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4206"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4193"/>
         <source>Year with (at least) four digits</source>
         <translation>Год (4 цифры)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4207"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4212"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
         <source>Rename Macros</source>
         <translation>Список переменных</translation>
     </message>
@@ -2274,7 +2274,7 @@
         <translation>&lt;a href=&quot;reset&quot;&gt;Сброс&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;Переменные&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4201"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4188"/>
         <source>File name without extension</source>
         <translation>Файл без расширения</translation>
     </message>
@@ -2289,7 +2289,7 @@
         <translation>Пример:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4209"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
         <source>Characters forbidden in file names:</source>
         <translation>Недопустимые символы:</translation>
     </message>
@@ -2386,84 +2386,84 @@
         <translation>Выберите фильтр по имени файла:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2794"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2777"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2781"/>
         <source>Save CSV file</source>
         <translation>Сохранить файл CSV</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2790"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2797"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2846"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2777"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2827"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2833"/>
         <source>CSV File</source>
         <translation>CSV файл</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2811"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2814"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
         <source>CSV Export</source>
         <translation>CSV Экспорт</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2811"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation>Meta-теги, которые могут быть экспортированы, отсутствуют!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2814"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation>Ошибка открытия файла CSV для записи!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2817"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation>Ошибка записи файла CSV!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2820"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
         <source>The CSV files was created successfully!</source>
         <translation>Файл CSV был успешно создан!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2840"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2844"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2827"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2831"/>
         <source>Open CSV file</source>
         <translation>Открыть файл CSV</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2860"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2847"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation>Ошибка открытия файла CSV для чтения!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2863"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation>Ошибка при чтении файла CSV!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation>Файл CSV не содержит ни одного известного поля!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation>Файл CSV не полный. Обновлены не все файлы!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
         <source>The CSV files was imported successfully!</source>
         <translation>Файлы CSV успешно импортированы!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2860"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2863"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2866"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2869"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2872"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2847"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
         <source>CSV Import</source>
         <translation>Импорт CSV</translation>
     </message>
@@ -2568,22 +2568,22 @@
         <translation>Если файл уже существует:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Overwrite Mode</source>
         <translation>Ркжим перезаписи</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation>Предупреждение: В этом режиме безвозвратно будут перезаписываться уже существующие файлы, если таковые есть!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Continue</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4439"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
         <source>Revert</source>
         <translation>Отмена</translation>
     </message>
@@ -2639,7 +2639,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4259"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4246"/>
         <source>%n Instance(s)</source>
         <translation>
             <numerusform>%n поток</numerusform>
@@ -2648,12 +2648,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3762"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3749"/>
         <source>Best Quality (Slow)</source>
         <translation>Наилучшее качество (Медленно)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3768"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3755"/>
         <source>Acceptable Quality (Fast)</source>
         <translation>Приемлемое качество (Быстро)</translation>
     </message>
@@ -2668,7 +2668,7 @@
         <translation>OpenSource проекты MuldeR&apos;а</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3606"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3593"/>
         <source>Current Encoder: %1</source>
         <translation>Текущий кодер: %1</translation>
     </message>
