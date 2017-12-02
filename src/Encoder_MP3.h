@@ -54,5 +54,8 @@ private:
 	int m_configBitrateMinimum;
 	int m_configChannelMode;
 
+	static QMutex m_regexMutex;
+	static QScopedPointer<QRegExp> m_regxLayer, m_regxVersion;
+
 	int clipBitrate(int bitrate);
 };

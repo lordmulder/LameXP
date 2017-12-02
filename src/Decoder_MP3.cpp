@@ -139,19 +139,22 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 
 bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
 {
-	const QLatin1String mpegAudio("MPEG Audio"), waveAudio("Wave");
+	static const QLatin1String mpegAudio("MPEG Audio"), waveAudio("Wave");
 	if((containerType.compare(mpegAudio, Qt::CaseInsensitive) == 0) || (containerType.compare(waveAudio, Qt::CaseInsensitive) == 0))
 	{
 		if(formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
 		{
 			QMutexLocker lock(&m_regexMutex);
-			if (m_regxLayer.isNull() || m_regxVersion.isNull())
+			if (m_regxLayer.isNull())
 			{
-				m_regxLayer.reset(new QRegExp("\\bLayer\\s+(1|2|3)\\b", Qt::CaseInsensitive));
-				m_regxVersion.reset(new QRegExp("\\bVersion\\s+(1|2|2\\.5)\\b", Qt::CaseInsensitive));
+				m_regxLayer.reset(new QRegExp(L1S("\\bLayer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
 			}
 			if (m_regxLayer->indexIn(formatProfile) >= 0)
 			{
+				if (m_regxVersion.isNull())
+				{
+					m_regxVersion.reset(new QRegExp(L1S("\\b(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
+				}
 				return (m_regxVersion->indexIn(formatVersion) >= 0);
 			}
 		}

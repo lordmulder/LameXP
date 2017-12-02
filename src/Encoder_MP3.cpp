@@ -33,6 +33,10 @@ static const int g_lameAgorithmQualityLUT[5] = {7, 5, 2, 0, INT_MAX};
 static const int g_mp3BitrateLUT[15] = {32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1};
 static const int g_lameVBRQualityLUT[11] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, INT_MAX};
 
+//Static
+QScopedPointer<QRegExp> MP3Encoder::m_regxLayer, MP3Encoder::m_regxVersion;
+QMutex MP3Encoder::m_regexMutex;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder Info
 ///////////////////////////////////////////////////////////////////////////////
@@ -305,16 +309,28 @@ bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &
 			return true;
 		}
 	}
-	else if(containerType.compare(L1S("MPEG Audio"), Qt::CaseInsensitive) == 0)
+
+	static const QLatin1String mpegAudio("MPEG Audio"), waveAudio("Wave"), pcmFormat("PCM");
+	if ((containerType.compare(mpegAudio, Qt::CaseInsensitive) == 0) || (containerType.compare(waveAudio, Qt::CaseInsensitive) == 0))
 	{
-		if(formatType.compare(L1S("MPEG Audio"), Qt::CaseInsensitive) == 0)
+		if (formatType.compare(pcmFormat, Qt::CaseInsensitive) == 0)
 		{
-			if(formatProfile.compare(L1S("Layer 3"), Qt::CaseInsensitive) == 0 || formatProfile.compare(L1S("Layer 2"), Qt::CaseInsensitive) == 0)
+			return true;
+		}
+		else if (formatType.compare(mpegAudio, Qt::CaseInsensitive) == 0)
+		{
+			QMutexLocker lock(&m_regexMutex);
+			if (m_regxLayer.isNull())
 			{
-				if(formatVersion.compare(L1S("Version 1"), Qt::CaseInsensitive) == 0 || formatVersion.compare(L1S("Version 2"), Qt::CaseInsensitive) == 0)
+				m_regxLayer.reset(new QRegExp(L1S("\\bLayer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
+			}
+			if (m_regxLayer->indexIn(formatProfile) >= 0)
+			{
+				if (m_regxVersion.isNull())
 				{
-					return true;
+					m_regxVersion.reset(new QRegExp(L1S("\\b(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
 				}
+				return (m_regxVersion->indexIn(formatVersion) >= 0);
 			}
 		}
 	}
