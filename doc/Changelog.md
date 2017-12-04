@@ -6,14 +6,14 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 # LameXP v4.xx History #
 
 ## LameXP v4.16 [UNRELEASED] ## {-}
-* Upgraded build environment to Microsoft Visual Studio 2017 with Update-4
+* Upgraded build environment to Microsoft Visual Studio 2017 with Update-5
 * Updated LAME encoder to v3.100 Final (2017-10-13), compiled with ICL 18.0 and MSVC 14.1
-* Updated mpg123 decoder to v1.25.7 (2017-09-25), compiled with GCC 7.2.0
-* Updated Opus encoder/decoder libraries to v1.2.1 (2017-07-26) and Opus-Tools to v0.1.10 (2017-05-25)
+* Updated mpg123 decoder to v1.25.8 (2017-12-02), compiled with GCC 7.2.0
+* Updated Opus encoder/decoder libraries to v1.2.1-35 (2017-11-16) and Opus-Tools to v0.1.10-9 (2017-05-25)
 * Updated MediaInfo to v17.10 (2017-11-02), compiled with ICL 18.0 and MSVC 14.1
 * Updated GnuPG to v1.4.22 (2017-07-19), compiled with GCC 7.2.0
 * Complete re-write of MediaInfo parsing code, now using XML-based MediaInfo output
-* Improved auto-detection of max. parallel instances on computers with SSD (or similar) drive
+* Improved auto-detection of max. parallel instances on computers with "fast" (i.e. SSD or similar) drive
 * Some improvements to output file name generation code
 
 ## LameXP v4.15 [2017-05-31] ## {-}
