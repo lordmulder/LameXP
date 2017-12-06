@@ -1452,45 +1452,60 @@ void MainWindow::windowShown(void)
 
 	//First run?
 	const bool firstRun = arguments.contains("first-run");
+	if (firstRun)
+	{
+		m_settings->licenseAccepted(0);
+		m_settings->autoUpdateCheckBeta(false);
+		m_settings->syncNow();
+	}
 
 	//Check license
-	if((m_settings->licenseAccepted() <= 0) || firstRun)
+	if (m_settings->licenseAccepted() <= 0)
 	{
-		int iAccepted = m_settings->licenseAccepted();
-
-		if((iAccepted == 0) || firstRun)
+		if (m_settings->licenseAccepted() == 0)
 		{
-			AboutDialog *about = new AboutDialog(m_settings, this, true);
-			iAccepted = about->exec();
-			if(iAccepted <= 0) iAccepted = -2;
-			MUTILS_DELETE(about);
-		}
-
-		if(iAccepted <= 0)
-		{
-			m_settings->licenseAccepted(++iAccepted);
-			m_settings->syncNow();
-			QApplication::processEvents();
-			MUtils::Sound::play_sound("whammy", false);
-			QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
-			QFileInfo uninstallerInfo = QFileInfo(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()));
-			if(uninstallerInfo.exists())
+			QScopedPointer<AboutDialog> about(new AboutDialog(m_settings, this, true));
+			if (about->exec() > 0)
 			{
-				QString uninstallerDir = uninstallerInfo.canonicalPath();
-				QString uninstallerPath = uninstallerInfo.canonicalFilePath();
-				for(int i = 0; i < 3; i++)
+				m_settings->licenseAccepted(1);
+				m_settings->syncNow();
+				MUtils::Sound::play_sound("woohoo", false);
+				if (lamexp_version_demo())
 				{
-					if(MUtils::OS::shell_open(this, QDir::toNativeSeparators(uninstallerPath), "/Force", QDir::toNativeSeparators(uninstallerDir))) break;
+					showAnnounceBox();
 				}
 			}
-			QApplication::quit();
-			return;
+			else
+			{
+				m_settings->licenseAccepted(-1);
+				m_settings->syncNow();
+			}
 		}
-		
-		MUtils::Sound::play_sound("woohoo", false);
-		m_settings->licenseAccepted(1);
-		m_settings->syncNow();
-		if(lamexp_version_demo()) showAnnounceBox();
+		else
+		{
+			m_settings->licenseAccepted(0);
+			m_settings->syncNow();
+		}
+	}
+
+	//License declined?
+	if(m_settings->licenseAccepted() <= 0)
+	{
+		QApplication::processEvents();
+		MUtils::Sound::play_sound("whammy", false);
+		QMessageBox::critical(this, tr("License Declined"), tr("You have declined the license. Consequently the application will exit now!"), tr("Goodbye!"));
+		QFileInfo uninstallerInfo = QFileInfo(QString("%1/Uninstall.exe").arg(QApplication::applicationDirPath()));
+		if(uninstallerInfo.exists())
+		{
+			QString uninstallerDir = uninstallerInfo.canonicalPath();
+			QString uninstallerPath = uninstallerInfo.canonicalFilePath();
+			for(int i = 0; i < 3; i++)
+			{
+				if(MUtils::OS::shell_open(this, QDir::toNativeSeparators(uninstallerPath), "/Force", QDir::toNativeSeparators(uninstallerDir))) break;
+			}
+		}
+		QApplication::quit();
+		return;
 	}
 	
 	//Check for expiration
