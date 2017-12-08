@@ -497,13 +497,13 @@ int ProcessThread::generateOutFileName(QString &outFileName)
 	}
 
 	//Generate final name
-	for (int n = 2; n <= 99999; ++n)
+	const QFileInfo origFileName(outFileName);
+	for (int n = 2; n <= 65534; ++n)
 	{
 		//Check file existence
-		QFileInfo outFileInfo(outFileName);
-		if (outFileInfo.exists())
+		if (QFileInfo(outFileName).exists())
 		{
-			outFileName = QString("%1/%2 (%3).%4").arg(outFileInfo.canonicalPath(), outFileInfo.completeBaseName(), QString::number(n), outFileInfo.suffix());
+			outFileName = origFileName.absoluteDir().filePath(QString("%1 (%2).%3").arg(origFileName.completeBaseName(), QString::number(n), origFileName.suffix()));
 			continue;
 		}
 
