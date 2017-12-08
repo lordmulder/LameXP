@@ -1387,9 +1387,9 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4906"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1237"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1503"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1530"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
         <source>Check for Updates</source>
         <translation type="unfinished">업데이트 확인</translation>
     </message>
@@ -1430,13 +1430,13 @@
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4975"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2079"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2094"/>
         <source>Disable Update Reminder</source>
         <translation type="unfinished">업데이트 알림 비활성화</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4983"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2105"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2120"/>
         <source>Disable Sound Effects</source>
         <translation type="unfinished">소리 효과 비활성화</translation>
     </message>
@@ -1497,7 +1497,7 @@
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="859"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4289"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4304"/>
         <source>Access Denied</source>
         <translation type="unfinished">접근 거부</translation>
     </message>
@@ -1532,12 +1532,12 @@
         <translation type="unfinished">폴더에서 파일 검색 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
         <source>Cancel</source>
         <translation type="unfinished">취소</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
         <source>Postpone</source>
         <translation type="unfinished">나중에</translation>
     </message>
@@ -1562,404 +1562,404 @@
         <translation type="unfinished">선택 폴더 찾아보기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1475"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
         <source>License Declined</source>
         <translation type="unfinished">라이센스 거절</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1475"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
         <source>You have declined the license. Consequently the application will exit now!</source>
         <translation type="unfinished">귀하는 라이센스를 거절했습니다. 따라서 지금 프로그램이 종료됩니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1475"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1496"/>
         <source>Goodbye!</source>
         <translation type="unfinished">안녕히!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1503"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
         <source>LameXP - Expired</source>
         <translation type="unfinished">LameXP - 만료</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1503"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
         <source>This demo (pre-release) version of LameXP has expired at %1.</source>
         <translation type="unfinished">LameXP의 이 데모 (예비 출시) 버전은 %1 일자에 만료됩니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1503"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
         <source>LameXP is free software and release versions won&apos;t expire.</source>
         <translation type="unfinished">LameXP는 무료 소프트웨어이며 출시 버전은 기한 만료되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1503"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1530"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Exit Program</source>
         <translation type="unfinished"> 끝내기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1517"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1532"/>
         <source>Manual</source>
         <translation type="unfinished">수동</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1530"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Urgent Update</source>
         <translation type="unfinished">긴급 업데이트</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1530"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Your version of LameXP is more than a year old. Time for an update!</source>
         <translation type="unfinished">사용자의 LameXP 버전이 일년 이상 지난 버전입니다. 업데이트 필요!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2081"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2106"/>
         <source>Update Reminder</source>
         <translation type="unfinished">업데이트 알림</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
         <source>Your last update check was more than 14 days ago. Check for updates now?</source>
         <translation type="unfinished">마지막 업데이트 확인을 14일 전에 했습니다. 지금 업데이트를 확인하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1558"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1573"/>
         <source>Your did not check for LameXP updates yet. Check for updates now?</source>
         <translation type="unfinished">아직 LameXP 업데이트 확인을 하지 않았습니다. 지금 업데이트를 확인하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1579"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1594"/>
         <source>LameXP detected that your version of the Nero AAC encoder is outdated!</source>
         <translation type="unfinished">LameXP가 Nero AAC encoder의 버전이 구버전임을 탐지했습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1580"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
         <source>The current version available is %1 (or later), but you still have version %2 installed.</source>
         <translation type="unfinished">사용 가능한 현재 버전은 %1 (또는 상위)이지만 설치된 버전은 아직도 %2 버전입니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1580"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
         <source>n/a</source>
         <translation type="unfinished">없음</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1581"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1596"/>
         <source>You can download the latest version of the Nero AAC encoder from the Nero website at:</source>
         <translation type="unfinished">Mero 웹사이트에서 Nero AAC encoder 최신 버전을 내려받을 수 있습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1584"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1599"/>
         <source>AAC Encoder Outdated</source>
         <translation type="unfinished">AAC Encoder 구버전</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1610"/>
         <source>The Nero AAC encoder could not be found. AAC encoding support will be disabled.</source>
         <translation type="unfinished">Nero AAC encoder를 찾을 수 없습니다. AAC 인코딩 지원이 비활성화됩니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1596"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1611"/>
         <source>Please put &apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos; and &apos;neroAacTag.exe&apos; into the LameXP directory!</source>
         <translation type="unfinished">&apos;neroAacEnc.exe&apos;, &apos;neroAacDec.exe&apos;와 &apos;neroAacTag.exe&apos; 파일들을 LameXP 디렉터리로 넣어주십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1597"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1612"/>
         <source>Your LameXP directory is located here:</source>
         <translation type="unfinished">LameXP 디렉터리 위치:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1599"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1614"/>
         <source>You can download the Nero AAC encoder for free from the official Nero website at:</source>
         <translation type="unfinished">Nero 공식 웹사이트에서 Nero AAC encoder를 내려받을 수 있습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1601"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1616"/>
         <source>AAC Support Disabled</source>
         <translation type="unfinished">AAC 지원 비활성화</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1733"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1790"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1800"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1748"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1805"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1815"/>
         <source>LameXP</source>
         <translation type="unfinished">LameXP</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1733"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1748"/>
         <source>You must add at least one file to the list before proceeding!</source>
         <translation type="unfinished">인코딩 전에 적어도 하나 이상의 파일을 추가해야 합니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
         <source>Not Found</source>
         <translation type="unfinished">찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
         <source>Your currently selected TEMP folder does not exist anymore:</source>
         <translation type="unfinished">현재 선택한 TEMP 폴더가 더 이상 존재하지 않습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1741"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1756"/>
         <source>Restore Default</source>
         <translation type="unfinished">기본 복원</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1763"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1778"/>
         <source>Low Diskspace Warning</source>
         <translation type="unfinished">디스크 공간 부족 알림</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1773"/>
         <source>There are less than %1 GB of free diskspace available on your system&apos;s TEMP folder.</source>
         <translation type="unfinished">시스템의 TEMP 폴더의 사용 가능한 여유 디스크 공간이 %1 GB보다 적습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1759"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1774"/>
         <source>It is highly recommend to free up more diskspace before proceeding with the encode!</source>
         <translation type="unfinished">인코딩 처리를 하기 전에 먼저 디스크의 여유 공간을 확보하시길 권장드립니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1760"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1775"/>
         <source>Your TEMP folder is located at:</source>
         <translation type="unfinished">사용자 TEMP 폴더 위치:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1763"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1778"/>
         <source>Abort Encoding Process</source>
         <translation type="unfinished">인코딩 처리 취소</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1763"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1778"/>
         <source>Clean Disk Now</source>
         <translation type="unfinished">지금 디스크 청소</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1530"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1763"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1778"/>
         <source>Ignore</source>
         <translation type="unfinished">무시</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1786"/>
         <source>Low Diskspace</source>
         <translation type="unfinished">디스크 공간 부족</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1771"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1786"/>
         <source>You are proceeding with low diskspace. Problems might occur!</source>
         <translation type="unfinished">디스크 여유 공간이 조금 남았습니다. 문제가 발생할 수 있습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1790"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1805"/>
         <source>Sorry, an unsupported encoder has been chosen!</source>
         <translation type="unfinished">죄송하지만 지원되지 않는 인코더를 선택하였습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1800"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1815"/>
         <source>Cannot write to the selected output directory.</source>
         <translation type="unfinished">선택한 출력 디렉터리에 작성할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1800"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1815"/>
         <source>Please choose a different directory!</source>
         <translation type="unfinished">다른 디렉터리를 선택하십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2397"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2406"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2412"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2421"/>
         <source>Add file(s)</source>
         <translation type="unfinished">파일 추가</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2436"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2440"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2451"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2455"/>
         <source>Add Folder</source>
         <translation type="unfinished">폴더 추가</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2043"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2058"/>
         <source>Load Translation</source>
         <translation type="unfinished">번역 파일 불러오기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2045"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2060"/>
         <source>Translation Files</source>
         <translation type="unfinished">번역 파일</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3038"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3083"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3053"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3098"/>
         <source>New Folder</source>
         <translation type="unfinished">새 폴더</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3083"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3098"/>
         <source>Enter the name of the new folder:</source>
         <translation type="unfinished">새 폴더 이름을 입력하십시오:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3131"/>
         <source>Failed to create folder</source>
         <translation type="unfinished">폴더 생성이 실패되었습니다</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3131"/>
         <source>The new folder could not be created:</source>
         <translation type="unfinished">새 폴더를 생성할 수 없음:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3116"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3131"/>
         <source>Drive is read-only or insufficient access rights!</source>
         <translation type="unfinished">드라이버가 읽기-전용이거나 접근 권한이 없습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4519"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4534"/>
         <source>Already Running</source>
         <translation type="unfinished">이미 실행 중</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4519"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4534"/>
         <source>LameXP is already running, please use the running instance!</source>
         <translation type="unfinished">LameXP가 이미 실행 중입니다. 실행 중인 인스턴스를 사용하십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3697"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3700"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3712"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3715"/>
         <source>Quality Level %1</source>
         <translation type="unfinished">품질 수준 %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3703"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3718"/>
         <source>Compression %1</source>
         <translation type="unfinished">압축 %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3706"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3721"/>
         <source>Uncompressed</source>
         <translation type="unfinished">비압축</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3752"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3767"/>
         <source>High Quality (Recommended)</source>
         <translation type="unfinished">높은 품질 (권장)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3758"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3773"/>
         <source>Poor Quality (Very Fast)</source>
         <translation type="unfinished">최저 품질 (매우 빠름)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4289"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4304"/>
         <source>Cannot write to the selected directory. Please choose another directory!</source>
         <translation type="unfinished">선택한 디렉터리에 작성할 수 없습니다. 다른 디렉터리를 선택하여 주십시오!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2079"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2094"/>
         <source>Do you really want to disable the update reminder?</source>
         <translation type="unfinished">정말로 업데이트 알림을 비활성화하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2079"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2105"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2131"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2157"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2250"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2287"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2094"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2120"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2146"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2172"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2265"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2302"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
         <source>Yes</source>
         <translation type="unfinished">예</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2079"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2105"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2131"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2157"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2250"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2287"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2094"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2120"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2146"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2172"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2265"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2302"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
         <source>No</source>
         <translation type="unfinished">아니오</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2081"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
         <source>The update reminder has been disabled.</source>
         <translation type="unfinished">업데이트 알림이 비활성화 되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2081"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2096"/>
         <source>Please remember to check for updates at regular intervals!</source>
         <translation type="unfinished">주기적으로 업데이트를 확인하시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2091"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2106"/>
         <source>The update reminder has been re-enabled.</source>
         <translation type="unfinished">업데이트 알림이 재활성화 되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2105"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2120"/>
         <source>Do you really want to disable all sound effects?</source>
         <translation type="unfinished">정말로 모든 소리 효과를 비활성화하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2107"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2132"/>
         <source>Sound Effects</source>
         <translation type="unfinished">사운드 효과</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2107"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2122"/>
         <source>All sound effects have been disabled.</source>
         <translation type="unfinished">모든 소리 효과가 비활성화 되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2117"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2132"/>
         <source>The sound effects have been re-enabled.</source>
         <translation type="unfinished">소리 효과가 재활성화 되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2131"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2133"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2146"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2158"/>
         <source>Nero AAC Notifications</source>
         <translation type="unfinished">Nero AAC 알림</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2131"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2146"/>
         <source>Do you really want to disable all Nero AAC Encoder notifications?</source>
         <translation type="unfinished">정말로 모든 Nero AAC Encoder 알림을 비활성화하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2133"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2148"/>
         <source>All Nero AAC Encoder notifications have been disabled.</source>
         <translation type="unfinished">모든 Nero AAC Encoder 알림이 비활성화 되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2143"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2158"/>
         <source>The Nero AAC Encoder notifications have been re-enabled.</source>
         <translation type="unfinished">Nero AAC Encoder 알림이 재활성화 되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2313"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2316"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2327"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2331"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2342"/>
         <source>Shell Integration</source>
         <translation type="unfinished">쉘 통합</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2313"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2328"/>
         <source>Do you really want to disable the LameXP shell integration?</source>
         <translation type="unfinished">정말로 LameXP 쉘 통합을 비활성화하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2316"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2331"/>
         <source>The LameXP shell integration has been disabled.</source>
         <translation type="unfinished">LameXP 쉘 통합이 비활성화 되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2327"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2342"/>
         <source>The LameXP shell integration has been re-enabled.</source>
         <translation type="unfinished">LameXP 쉘 통합이 재활성화 되었습니다.</translation>
     </message>
@@ -1969,38 +1969,38 @@
         <translation type="unfinished">베타 업데이트 확인</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2250"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2252"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2265"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2280"/>
         <source>Beta Updates</source>
         <translation type="unfinished">베타 업데이트</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2250"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2265"/>
         <source>Do you really want LameXP to check for Beta (pre-release) updates?</source>
         <translation type="unfinished">LameXP 베타 버전(pre-release)의 업데이트를 확인하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2252"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
         <source>LameXP will check for Beta (pre-release) updates from now on.</source>
         <translation type="unfinished">지금부터 LameXP가 베타 버전(pre-release)의 업데이트를 확인합니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2252"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
         <source>Check Now</source>
         <translation type="unfinished">지금 확인</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1601"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1681"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2252"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1533"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1616"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1696"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2267"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4214"/>
         <source>Discard</source>
         <translation type="unfinished">닫기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2265"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2280"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; check for Beta (pre-release) updates from now on.</source>
         <translation type="unfinished">지금부터 LameXP가 베타 버전(pre-release) 업데이트를 &lt;i&gt;확인하지 않습니다&lt;/i&gt;.</translation>
     </message>
@@ -2115,8 +2115,8 @@
         <translation type="unfinished">지수 검색 크기:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1601"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1533"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1616"/>
         <source>Don&apos;t Show Again</source>
         <translation type="unfinished">다시 표시 안함</translation>
     </message>
@@ -2126,14 +2126,14 @@
         <translation type="unfinished">큐 시트 가져오기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2191"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2195"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2206"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2210"/>
         <source>Open Cue Sheet</source>
         <translation type="unfinished">큐 시트 열기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2191"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2197"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2206"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2212"/>
         <source>Cue Sheet File</source>
         <translation type="unfinished">큐 시트 파일</translation>
     </message>
@@ -2153,17 +2153,17 @@
         <translation type="unfinished">큐 시트 파일을 가져오려면 LameXP의 큐 시트 마법사를 사용하십시오.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1516"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1531"/>
         <source>It seems that a bogus anti-virus software is slowing down the startup of LameXP.</source>
         <translation type="unfinished">가짜 안티-바이러스 소프트웨억 LameXP의 시작을 지연시키고 있는 것 같습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1517"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1532"/>
         <source>Please refer to the %1 document for details and solutions!</source>
         <translation type="unfinished">자세한 내용과 솔루션은 %1 문서를 참조하시기 바랍니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1533"/>
         <source>Slow Startup</source>
         <translation type="unfinished">느린 시작</translation>
     </message>
@@ -2173,24 +2173,24 @@
         <translation type="unfinished">느린 시작 알림 비활성화</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2157"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2159"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2172"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2184"/>
         <source>Slow Startup Notifications</source>
         <translation>느린 시작 알림</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2157"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2172"/>
         <source>Do you really want to disable the slow startup notifications?</source>
         <translation>느린 시작 알림을 비활성화하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2159"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2174"/>
         <source>The slow startup notifications have been disabled.</source>
         <translation>느린 시작 알림이 비활성화되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2169"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2184"/>
         <source>The slow startup notifications have been re-enabled.</source>
         <translation>느린 시작 알림이 재활성화되었습니다.</translation>
     </message>
@@ -2205,37 +2205,37 @@
         <translation>출력 파일 이름 변경</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4189"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4204"/>
         <source>Track number with leading zero</source>
         <translation>트랙 번호 01, 02, 03...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4190"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4205"/>
         <source>Track title</source>
         <translation>트랙 제목</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4191"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4206"/>
         <source>Artist name</source>
         <translation>가수 이름</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4192"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4207"/>
         <source>Album name</source>
         <translation>앨범 이름</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4193"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4208"/>
         <source>Year with (at least) four digits</source>
         <translation>출판 연도(적어도 4자리)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4194"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4209"/>
         <source>Comment</source>
         <translation>설명</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4199"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4214"/>
         <source>Rename Macros</source>
         <translation type="unfinished">이름 바꾸기 매크로</translation>
     </message>
@@ -2260,7 +2260,7 @@
         <translation>&lt;a href=&quot;reset&quot;&gt;재설정&lt;/a&gt; &amp;nbsp; &lt;a href=&quot;#&quot;&gt;매크로 목록 표시&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4188"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4203"/>
         <source>File name without extension</source>
         <translation>확장자 없는 파일명</translation>
     </message>
@@ -2275,7 +2275,7 @@
         <translation>파일명 예제:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4196"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4211"/>
         <source>Characters forbidden in file names:</source>
         <translation>파일명에 금지된 문자:</translation>
     </message>
@@ -2320,34 +2320,34 @@
         <translation type="unfinished">종료시 컴퓨터 절전 모드</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2287"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2289"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2302"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2314"/>
         <source>Hibernate Computer</source>
         <translation type="unfinished">컴퓨터 최대 절전 모드</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2287"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2302"/>
         <source>Do you really want the computer to be hibernated on shutdown?</source>
         <translation type="unfinished">종료시 컴퓨터를 최대 절전 모드로 전환하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2289"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2304"/>
         <source>LameXP will hibernate the computer on shutdown from now on.</source>
         <translation type="unfinished">LameXP가 지금부터 컴퓨터를 최대 절전 모드로 전환합니다.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2299"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2314"/>
         <source>LameXP will &lt;i&gt;not&lt;/i&gt; hibernate the computer on shutdown from now on.</source>
         <translation type="unfinished">LameXP가 지금부터 컴퓨터를 최대 절전 모드로 &lt;i&gt;전환하지 않습니다&lt;/i&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1583"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1598"/>
         <source>(Hint: Please ignore the name of the downloaded ZIP file and check the included &apos;changelog.txt&apos; instead!)</source>
         <translation type="unfinished">(도움말: 내려받은 ZIP 파일의 이름을 무시하고 대신에 &apos;changelog.txt&apos;가 포함되었는지 확인해주십시오!)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="1546"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="1561"/>
         <source>Skipping update check this time, please be patient...</source>
         <translation type="unfinished">이 번에 업데이트 확인 건너뛰는 중, 잠시만 기다려 주십시오...</translation>
     </message>
@@ -2362,94 +2362,94 @@
         <translation type="unfinished">CSV 파일로부터 메타 태그 가져오기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2458"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2473"/>
         <source>Filter Files</source>
         <translation type="unfinished">파일 필터링</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2458"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2473"/>
         <source>Select filename filter:</source>
         <translation type="unfinished">파일명 필터링 선택:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2777"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2781"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2792"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2796"/>
         <source>Save CSV file</source>
         <translation type="unfinished">CSV 파일 저장</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2777"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2784"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2827"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2833"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2792"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2799"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2842"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2848"/>
         <source>CSV File</source>
         <translation type="unfinished">CSV 파일</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2813"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2816"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
         <source>CSV Export</source>
         <translation type="unfinished">CSV 내보내기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2798"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2813"/>
         <source>Sorry, there are no meta tags that can be exported!</source>
         <translation type="unfinished">내보낼 수 있는 메타 태그가 없습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2801"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2816"/>
         <source>Sorry, failed to open CSV file for writing!</source>
         <translation type="unfinished">작성을 위한 CSV 파일 열기가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2804"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2819"/>
         <source>Sorry, failed to write to the CSV file!</source>
         <translation type="unfinished">CSV 파일로 쓰기가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2807"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2822"/>
         <source>The CSV files was created successfully!</source>
         <translation type="unfinished">CSV 파일이 성공적으로 생성되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2827"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2831"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2842"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2846"/>
         <source>Open CSV file</source>
         <translation type="unfinished">CSV 파일 열기</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2847"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2862"/>
         <source>Sorry, failed to open CSV file for reading!</source>
         <translation type="unfinished">읽기 위한 CSV 파일 열기가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2865"/>
         <source>Sorry, failed to read from the CSV file!</source>
         <translation type="unfinished">CSV 파일로부터 읽기가 실패되었습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2868"/>
         <source>Sorry, the CSV file does not contain any known fields!</source>
         <translation type="unfinished">CSV 파일이 어떤 알려진 필드를 포함하고 있지 않습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
         <source>CSV file is incomplete. Not all files were updated!</source>
         <translation type="unfinished">CSV 파일이 불완전합니다. 모든 파일이 업데이트되지 않았습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
         <source>The CSV files was imported successfully!</source>
         <translation type="unfinished">CSV 파일을 성공적으로 가져왔습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2847"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2850"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2853"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2856"/>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2859"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2862"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2865"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2868"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2871"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2874"/>
         <source>CSV Import</source>
         <translation type="unfinished">CSV 가져오기</translation>
     </message>
@@ -2554,22 +2554,22 @@
         <translation type="unfinished">대상 파일이 이미 존재하면:</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4441"/>
         <source>Overwrite Mode</source>
         <translation type="unfinished">대체 방식</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4441"/>
         <source>Warning: This mode may overwrite existing files with no way to revert!</source>
         <translation type="unfinished">경고: 이 방식은 기존 파일이 되돌릴 수 없는 방법으로 대체될 수 있습니다!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4441"/>
         <source>Continue</source>
         <translation type="unfinished">계속</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4426"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4441"/>
         <source>Revert</source>
         <translation type="unfinished">되돌리기</translation>
     </message>
@@ -2617,19 +2617,19 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_MainWindow.cpp" line="4246"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="4261"/>
         <source>%n Instance(s)</source>
         <translation type="unfinished">
             <numerusform>%n 인스턴스</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3749"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3764"/>
         <source>Best Quality (Slow)</source>
         <translation type="unfinished">최상 품질 (느림)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3755"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3770"/>
         <source>Acceptable Quality (Fast)</source>
         <translation type="unfinished">허용 가능 품질 (빠름)</translation>
     </message>
@@ -2644,12 +2644,12 @@
         <translation type="unfinished">MuldeR&apos;s 오픈소스 프로젝트</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="3593"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="3608"/>
         <source>Current Encoder: %1</source>
         <translation type="unfinished">현재 인코더: %1</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_MainWindow.cpp" line="2681"/>
+        <location filename="../../src/Dialog_MainWindow.cpp" line="2696"/>
         <source>Loading dropped files or folders, please wait...</source>
         <translation type="unfinished">파일 또는 폴더 불러오는 중, 잠시만 기다려 주십시오...</translation>
     </message>
