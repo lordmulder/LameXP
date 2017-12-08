@@ -322,13 +322,13 @@ bool MP3Encoder::isFormatSupported(const QString &containerType, const QString &
 			QMutexLocker lock(&m_regexMutex);
 			if (m_regxLayer.isNull())
 			{
-				m_regxLayer.reset(new QRegExp(L1S("\\bLayer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
+				m_regxLayer.reset(new QRegExp(L1S("^Layer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
 			}
 			if (m_regxLayer->indexIn(formatProfile) >= 0)
 			{
 				if (m_regxVersion.isNull())
 				{
-					m_regxVersion.reset(new QRegExp(L1S("\\b(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
+					m_regxVersion.reset(new QRegExp(L1S("^(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
 				}
 				return (m_regxVersion->indexIn(formatVersion) >= 0);
 			}

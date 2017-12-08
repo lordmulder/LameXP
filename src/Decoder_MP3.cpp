@@ -70,7 +70,8 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	bool bAborted = false;
 	int prevProgress = -1;
 
-	QRegExp regExp("\\b\\d+\\+\\d+\\s+(\\d+):(\\d+)\\.(\\d+)\\+(\\d+):(\\d+)\\.(\\d+)\\b");
+	//QRegExp regExp("\\b\\d+\\+\\d+\\s+(\\d+):(\\d+)\\.(\\d+)\\+(\\d+):(\\d+)\\.(\\d+)\\b");
+	QRegExp regExp("[_=>]\\s+(\\d+)\\+(\\d+)\\s+");
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -96,14 +97,13 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 			QString text = QString::fromUtf8(line.constData()).simplified();
 			if(regExp.lastIndexIn(text) >= 0)
 			{
-				quint32 values[6];
-				if (MUtils::regexp_parse_uint32(regExp, values, 6))
+				quint32 values[2];
+				if (MUtils::regexp_parse_uint32(regExp, values, 2))
 				{
-					const double timeDone = (60.0 * double(values[0])) + double(values[1]) + (double(values[2]) / 100.0);
-					const double timeLeft = (60.0 * double(values[3])) + double(values[4]) + (double(values[5]) / 100.0);
-					if ((timeDone >= 0.005) || (timeLeft >= 0.005))
+					const quint32 total = values[0] + values[1];
+					if ((total >= 512U) && (values[0] >= 256U))
 					{
-						const int newProgress = qRound((static_cast<double>(timeDone) / static_cast<double>(timeDone + timeLeft)) * 100.0);
+						const int newProgress = qRound((static_cast<double>(values[0]) / static_cast<double>(total)) * 100.0);
 						if (newProgress > prevProgress)
 						{
 							emit statusUpdated(newProgress);
@@ -147,13 +147,13 @@ bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &
 			QMutexLocker lock(&m_regexMutex);
 			if (m_regxLayer.isNull())
 			{
-				m_regxLayer.reset(new QRegExp(L1S("\\bLayer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
+				m_regxLayer.reset(new QRegExp(L1S("^Layer\\s+(1|2|3)\\b"), Qt::CaseInsensitive));
 			}
 			if (m_regxLayer->indexIn(formatProfile) >= 0)
 			{
 				if (m_regxVersion.isNull())
 				{
-					m_regxVersion.reset(new QRegExp(L1S("\\b(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
+					m_regxVersion.reset(new QRegExp(L1S("^(Version\\s+)?(1|2|2\\.5)\\b"), Qt::CaseInsensitive));
 				}
 				return (m_regxVersion->indexIn(formatVersion) >= 0);
 			}
