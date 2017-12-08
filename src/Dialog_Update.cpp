@@ -486,11 +486,29 @@ void UpdateDialog::testKnownHosts(void)
 		connect(testThread, SIGNAL(terminated()), &loop, SLOT(quit()));
 
 		testThread->start();
+
+		ui->progressBar->setMaximum(0);
+		ui->progressBar->setMinimum(0);
+
+		bool status[4];
+		status[0] = ui->closeButton  ->isEnabled(); ui->closeButton  ->setEnabled(false);
+		status[1] = ui->installButton->isEnabled(); ui->installButton->setEnabled(false);
+		status[2] = ui->retryButton  ->isEnabled(); ui->retryButton  ->setEnabled(false);
+		status[3] = ui->logButton    ->isEnabled(); ui->logButton    ->setEnabled(false);
+
 		while(testThread->isRunning())
 		{
-			QTimer::singleShot(5000, &loop, SLOT(quit()));
+			QTimer::singleShot(8000, &loop, SLOT(quit()));
 			loop.exec(QEventLoop::ExcludeUserInputEvents);
 		}
+
+		ui->progressBar->setMaximum(m_thread.isNull() ? 100 : m_thread->getMaximumProgress());
+		ui->progressBar->setValue(ui->progressBar->maximum());
+
+		ui->closeButton  ->setEnabled(status[0]);
+		ui->installButton->setEnabled(status[1]);
+		ui->retryButton  ->setEnabled(status[2]);
+		ui->logButton    ->setEnabled(status[3]);
 
 		MUTILS_DELETE(testThread);
 		logButtonClicked();
