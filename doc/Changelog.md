@@ -10,6 +10,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated LAME encoder to v3.100 Final (2017-10-13), compiled with ICL 18.0 and MSVC 14.1
 * Updated mpg123 decoder to v1.25.8 (2017-12-02), compiled with GCC 7.2.0
 * Updated Opus encoder/decoder libraries to v1.2.1-35 (2017-11-16) and Opus-Tools to v0.1.10-9 (2017-05-25)
+* Updated Monkey's Audio binary to v4.33 (2017-12-01), compiled with ICL 18.0 and MSVC 15.5
 * Updated MediaInfo to v17.10 (2017-11-02), compiled with ICL 18.0 and MSVC 14.1
 * Updated GnuPG to v1.4.22 (2017-07-19), compiled with GCC 7.2.0
 * Complete re-write of MediaInfo parsing code, now using XML-based MediaInfo output

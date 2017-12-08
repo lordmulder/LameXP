@@ -229,9 +229,10 @@
     <file>tools/lame.x64-sse2.exe</file>
     <file>tools/lame.x86-i686.exe</file>
     <file>tools/lame.x86-sse2.exe</file>
-    <file>tools/mac.avx.exe</file>
-    <file>tools/mac.i686.exe</file>
-    <file>tools/mac.sse2.exe</file>
+    <file>tools/mac.x64-avx.exe</file>
+    <file>tools/mac.x64-sse2.exe</file>
+    <file>tools/mac.x86-i686.exe</file>
+    <file>tools/mac.x86-sse2.exe</file>
     <file>tools/mcat.exe</file>
     <file>tools/mediainfo.i686.exe</file>
     <file>tools/mediainfo.sse2.exe</file>
