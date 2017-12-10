@@ -43,7 +43,7 @@ MP3Decoder::MP3Decoder(void)
 :
 	m_binary(lamexp_tools_lookup("mpg123.exe"))
 {
-	if(m_binary.isEmpty())
+	if (m_binary.isEmpty())
 	{
 		MUTILS_THROW("Error initializing MPG123 decoder. Tool 'mpg123.exe' is not registred!");
 	}
@@ -61,80 +61,38 @@ bool MP3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	args << "-v" << "--utf8" << "-w" << QDir::toNativeSeparators(outputFile);
 	args << QDir::toNativeSeparators(sourceFile);
 
-	if(!startProcess(process, m_binary, args))
+	if (!startProcess(process, m_binary, args))
 	{
 		return false;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
 	int prevProgress = -1;
-
-	//QRegExp regExp("\\b\\d+\\+\\d+\\s+(\\d+):(\\d+)\\.(\\d+)\\+(\\d+):(\\d+)\\.(\\d+)\\b");
 	QRegExp regExp("[_=>]\\s+(\\d+)\\+(\\d+)\\s+");
 
-	while(process.state() != QProcess::NotRunning)
+	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
-		if(checkFlag(abortFlag))
+		if (regExp.lastIndexIn(text) >= 0)
 		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("mpg123 process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
+			quint32 values[2];
+			if (MUtils::regexp_parse_uint32(regExp, values, 2))
 			{
-				quint32 values[2];
-				if (MUtils::regexp_parse_uint32(regExp, values, 2))
+				const quint32 total = values[0] + values[1];
+				if ((total >= 512U) && (values[0] >= 256U))
 				{
-					const quint32 total = values[0] + values[1];
-					if ((total >= 512U) && (values[0] >= 256U))
+					const int newProgress = qRound((static_cast<double>(values[0]) / static_cast<double>(total)) * 100.0);
+					if (newProgress > prevProgress)
 					{
-						const int newProgress = qRound((static_cast<double>(values[0]) / static_cast<double>(total)) * 100.0);
-						if (newProgress > prevProgress)
-						{
-							emit statusUpdated(newProgress);
-							prevProgress = qMin(newProgress + 2, 99);
-						}
+						emit statusUpdated(newProgress);
+						prevProgress = qMin(newProgress + 2, 99);
 					}
 				}
 			}
-			else if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
+			return true;
 		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
-	{
 		return false;
-	}
-	
-	return true;
+	});
+
+	return (result == RESULT_SUCCESS);
 }
 
 bool MP3Decoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

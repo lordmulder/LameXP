@@ -61,60 +61,18 @@ bool SpeexDecoder::decode(const QString &sourceFile, const QString &outputFile, 
 		return false;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
-
 	QRegExp regExp("Working\\.\\.\\. (.)");
 
-	while(process.state() != QProcess::NotRunning)
+	const result_t result = awaitProcess(process, abortFlag, [this, &regExp](const QString &text)
 	{
-		if(checkFlag(abortFlag))
+		if (regExp.lastIndexIn(text) >= 0)
 		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
+			return true;
 		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("SpeexDec process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
-			{
-				/* qDebug("Status: %s", regExp.cap(1).toLatin1().constData()); */
-			}
-			else if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
-		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
-	{
 		return false;
-	}
+	});
 	
-	return true;
+	return (result == RESULT_SUCCESS);
 }
 
 bool SpeexDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

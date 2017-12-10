@@ -62,75 +62,29 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 		return false;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
 	int prevProgress = -1;
-
-	//The ALAC Decoder doesn't actually send any status updates :-[
-	//emit statusUpdated(20 + (QUuid::createUuid().data1 % 60));
 	QRegExp regExp("\\[(\\d+)\\.(\\d)%\\]");
 
-	while(process.state() != QProcess::NotRunning)
+	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
-		if(checkFlag(abortFlag))
+		if (regExp.lastIndexIn(text) >= 0)
 		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("ALAC process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
+			qint32 intVal[2];
+			if (MUtils::regexp_parse_int32(regExp, intVal, 2))
 			{
-				bool ok[2] = {false, false};
-				int intVal[2] = {0, 0};
-				intVal[0] = regExp.cap(1).toInt(&ok[0]);
-				intVal[1] = regExp.cap(2).toInt(&ok[1]);
-				if(ok[0] && ok[1])
+				const int newProgress = qRound(static_cast<double>(intVal[0]) + (static_cast<double>(intVal[1]) / 10.0));
+				if (newProgress > prevProgress)
 				{
-					int progress = qRound(static_cast<double>(intVal[0]) + (static_cast<double>(intVal[1]) / 10.0));
-					if(progress > prevProgress)
-					{
-						emit statusUpdated(progress);
-						prevProgress = qMin(progress + 2, 99);
-					}
+					emit statusUpdated(newProgress);
+					prevProgress = qMin(newProgress + 2, 99);
 				}
 			}
-			else if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
+			return true;
 		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
-	{
 		return false;
-	}
-	
-	return true;
+	});
+
+	return (result == RESULT_SUCCESS);
 }
 
 bool ALACDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

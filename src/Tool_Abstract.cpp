@@ -157,6 +157,84 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 }
 
 /*
+* Wait for process to terminate while processing its output
+*/
+AbstractTool::result_t AbstractTool::awaitProcess(QProcess &process, QAtomicInt &abortFlag, std::function<bool(const QString &text)> &&handler, int *const exitCode)
+{
+	bool bTimeout = false;
+	bool bAborted = false;
+
+	QString lastText;
+
+	while (process.state() != QProcess::NotRunning)
+	{
+		if (checkFlag(abortFlag))
+		{
+			process.kill();
+			bAborted = true;
+			emit messageLogged("\nABORTED BY USER !!!");
+			break;
+		}
+
+		process.waitForReadyRead(m_processTimeoutInterval);
+		if (!process.bytesAvailable() && process.state() == QProcess::Running)
+		{
+			process.kill();
+			qWarning("Tool process timed out <-- killing!");
+			emit messageLogged("\nPROCESS TIMEOUT !!!");
+			bTimeout = true;
+			break;
+		}
+
+		while (process.bytesAvailable() > 0)
+		{
+			QByteArray line = process.readLine();
+			if (line.size() > 0)
+			{
+				static const char REPALCE_CHARS[3] = { '\r', '\b', '\t' };
+				for (size_t i = 0; i < MUTILS_ARR2LEN(REPALCE_CHARS); ++i)
+				{
+					line.replace(REPALCE_CHARS[i], char(0x20));
+				}
+				const QString text = QString::fromUtf8(line.constData()).simplified();
+				if (!text.isEmpty())
+				{
+					if (!handler(text))
+					{
+						if (text.compare(lastText, Qt::CaseInsensitive) != 0)
+						{
+							emit messageLogged(lastText = text);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	process.waitForFinished();
+	if (process.state() != QProcess::NotRunning)
+	{
+		process.kill();
+		process.waitForFinished(-1);
+	}
+
+	if (exitCode)
+	{
+		*exitCode = process.exitCode();
+	}
+
+	emit statusUpdated(100);
+	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
+
+	if (bAborted || bTimeout || (process.exitCode() != EXIT_SUCCESS))
+	{
+		return bAborted ? RESULT_ABORTED : (bTimeout ? RESULT_TIMEOUT : RESULT_FAILURE);
+	}
+
+	return RESULT_SUCCESS;
+}
+
+/*
  * Convert program arguments to single string
  */
 QString AbstractTool::commandline2string(const QString &program, const QStringList &arguments)

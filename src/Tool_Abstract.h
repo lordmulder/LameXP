@@ -24,6 +24,7 @@
 
 #include <MUtils\Global.h>
 #include <QObject>
+#include <functional>
 
 class QMutex;
 class QProcess;
@@ -42,20 +43,31 @@ public:
 	AbstractTool(void);
 	~AbstractTool(void);
 	
-	bool startProcess(QProcess &process, const QString &program, const QStringList &args, const QString &workingDir = QString());
-	static QString commandline2string(const QString &program, const QStringList &arguments);
-
 signals:
 	void statusUpdated(int progress);
 	void messageLogged(const QString &line);
 
 protected:
 	static const int m_processTimeoutInterval = 600000;
-	
+
+	typedef enum
+	{
+		RESULT_ABORTED = -2,
+		RESULT_TIMEOUT = -1,
+		RESULT_FAILURE =  0,
+		RESULT_SUCCESS =  1
+	}
+	result_t;
+		
 	static __forceinline bool checkFlag(QAtomicInt &flag)
 	{
 		return MUTILS_BOOLIFY(flag);
 	}
+
+	static QString commandline2string(const QString &program, const QStringList &arguments);
+
+	bool startProcess(QProcess &process, const QString &program, const QStringList &args, const QString &workingDir = QString());
+	result_t awaitProcess(QProcess &process, QAtomicInt &abortFlag, std::function<bool(const QString &text)> &&handler, int *const exitCode = NULL);
 
 private:
 	static QScopedPointer<MUtils::JobObject> s_jobObjectInstance;

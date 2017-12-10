@@ -53,69 +53,37 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	QStringList args;
 
 	args << QDir::toNativeSeparators(sourceFile);
-	args << "-i" << "-w" << QDir::toNativeSeparators(outputFile);
+	args << "-w" << QDir::toNativeSeparators(outputFile);
 
 	if(!startProcess(process, m_binary, args))
 	{
 		return false;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
+	int prevProgress = -1;
+	QRegExp regExp("\\b\\s*(\\d+)\\.(\\d+)?%(\\s+)Frames", Qt::CaseInsensitive);
 
-	QRegExp regExp("\\b(\\s*)(\\d+)\\.(\\d+)%(\\s+)Frames");
-
-	while(process.state() != QProcess::NotRunning)
+	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
-		if(checkFlag(abortFlag))
+		if (regExp.lastIndexIn(text) >= 0)
 		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("Valdec process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
+			qWarning("Found! [\"%s\"]", MUTILS_UTF8(regExp.cap(1)));
+			qint32 newProgress;
+			if (MUtils::regexp_parse_int32(regExp, newProgress))
 			{
-				bool ok = false;
-				int progress = regExp.cap(2).toInt(&ok);
-				if(ok) emit statusUpdated(progress);
+				qWarning("newProgress: %d", newProgress);
+				if (newProgress > prevProgress)
+				{
+					emit statusUpdated(newProgress);
+					prevProgress = qMin(newProgress + 2, 99);
+				}
 			}
-			else if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
+			return true;
 		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
-	{
 		return false;
-	}
-	
-	return true;
+	});
+
+	return (result == RESULT_SUCCESS);
 }
 
 bool AC3Decoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
