@@ -210,7 +210,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 
 	int prevProgress = -1;
 	QRegExp regExp_sp(L1S("\\bprocessed\\s+(\\d+)\\s+seconds"), Qt::CaseInsensitive);
-	QRegExp regExp_mp(L1S("(\\w+)\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds"), Qt::CaseInsensitive);
+	QRegExp regExp_mp(L1S("\\b(\\w+)\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds"), Qt::CaseInsensitive);
 
 	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &duration, &regExp_sp, &regExp_mp](const QString &text)
 	{
@@ -220,11 +220,11 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 			if ((duration > 0) && MUtils::regexp_parse_int32(regExp_mp, timeElapsed, 2))
 			{
 				const bool second_pass = (regExp_mp.cap(1).compare(L1S("second"), Qt::CaseInsensitive) == 0);
-				int newProgress = qRound((second_pass ? 50.0 : 0.0) + ((static_cast<double>(timeElapsed) / static_cast<double>(duration)) * 50.0));
+				const int newProgress = qRound((second_pass ? 50.0 : 0.0) + ((static_cast<double>(timeElapsed) / static_cast<double>(duration)) * 50.0));
 				if (newProgress > prevProgress)
 				{
 					emit statusUpdated(newProgress);
-					prevProgress = qMin(newProgress + 2, 99);
+					prevProgress = (newProgress < 99) ? (newProgress + 1) : newProgress;
 				}
 			}
 			return true;
@@ -234,11 +234,11 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 			int timeElapsed;
 			if ((duration > 0) && MUtils::regexp_parse_int32(regExp_sp, timeElapsed))
 			{
-				int newProgress = qRound((static_cast<double>(timeElapsed) / static_cast<double>(duration)) * 100.0);
+				const int newProgress = qRound((static_cast<double>(timeElapsed) / static_cast<double>(duration)) * 100.0);
 				if (newProgress > prevProgress)
 				{
 					emit statusUpdated(newProgress);
-					prevProgress = qMin(newProgress + 2, 99);
+					prevProgress = (newProgress < 99) ? (newProgress + 1) : newProgress;
 				}
 			}
 			return true;

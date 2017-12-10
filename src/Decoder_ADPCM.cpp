@@ -75,7 +75,7 @@ bool ADPCMDecoder::decode(const QString &sourceFile, const QString &outputFile, 
 				if (newProgress > prevProgress)
 				{
 					emit statusUpdated(newProgress);
-					prevProgress = qMin(newProgress + 2, 99);
+					prevProgress = (newProgress < 99) ? (newProgress + 1) : newProgress;
 				}
 			}
 			return true;

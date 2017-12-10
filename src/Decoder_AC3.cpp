@@ -67,15 +67,13 @@ bool AC3Decoder::decode(const QString &sourceFile, const QString &outputFile, QA
 	{
 		if (regExp.lastIndexIn(text) >= 0)
 		{
-			qWarning("Found! [\"%s\"]", MUTILS_UTF8(regExp.cap(1)));
 			qint32 newProgress;
 			if (MUtils::regexp_parse_int32(regExp, newProgress))
 			{
-				qWarning("newProgress: %d", newProgress);
 				if (newProgress > prevProgress)
 				{
 					emit statusUpdated(newProgress);
-					prevProgress = qMin(newProgress + 2, 99);
+					prevProgress = (newProgress < 99) ? (newProgress + 1) : newProgress;
 				}
 			}
 			return true;

@@ -62,57 +62,10 @@ bool ShortenDecoder::decode(const QString &sourceFile, const QString &outputFile
 		return false;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
-
 	//The Shorten Decoder doesn't actually send any status updates :-[
 	emit statusUpdated(20 + (QUuid::createUuid().data1 % 80));
 
-	while(process.state() != QProcess::NotRunning)
-	{
-		if(checkFlag(abortFlag))
-		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("Shorten process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
-		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
-	{
-		return false;
-	}
-	
-	return true;
+	return (awaitProcess(process, abortFlag) == RESULT_SUCCESS);
 }
 
 bool ShortenDecoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)
