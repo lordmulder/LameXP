@@ -105,57 +105,28 @@ AbstractFilter::FilterResult DownmixFilter::apply(const QString &sourceFile, con
 		return AbstractFilter::FILTER_FAILURE;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
-
+	int prevProgress = -1;
 	QRegExp regExp("In:(\\d+)(\\.\\d+)*%");
 
-	while(process.state() != QProcess::NotRunning)
+	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
-		if(checkFlag(abortFlag))
+		if (regExp.lastIndexIn(text) >= 0)
 		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged("\nABORTED BY USER !!!");
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("SoX process timed out <-- killing!");
-			emit messageLogged("\nPROCESS TIMEOUT !!!");
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
+			qint32 newProgress;
+			if (MUtils::regexp_parse_int32(regExp, newProgress))
 			{
-				bool ok = false;
-				int progress = regExp.cap(1).toInt(&ok);
-				if(ok) emit statusUpdated(progress);
+				if (newProgress > prevProgress)
+				{
+					emit statusUpdated(newProgress);
+					prevProgress = (newProgress < 99) ? (newProgress + 1) : newProgress;
+				}
 			}
-			else if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
+			return true;
 		}
-	}
+		return false;
+	});
 
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS || QFileInfo(outputFile).size() == 0)
+	if (result != RESULT_SUCCESS)
 	{
 		return AbstractFilter::FILTER_FAILURE;
 	}
