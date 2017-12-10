@@ -1,0 +1,49 @@
+mpg123 Windows XP compatibility (with MinGW-w64)
+================================================
+
+The problem:
+------------
+
+When built with MinGW-w64, mpg123.exe won't run on Windows XP, because it imports "_time32" from "MSVCRT.DLL"
+
+...a function which simply did **not** exist in "MSVCRT.DLL" on Windows XP or Windows XP x64-Edition!
+
+
+The workaround:
+---------------
+
+In order to fix this problem, it is **extremely** important to add the following compiler option to your CFLAGS:
+
+-D__MINGW_USE_VC2005_COMPAT=1
+
+This will make your mpg123.exe link against "_time64", which **is** available in "MSVCRT.DLL" on Windows XP.
+
+(If you think this "fix" makes no sense at all, then please read the next two sections)
+
+
+Remarks:
+--------
+
+MinGW-w64 links 'time()' from <time.h> against "_time32", **UNLESS** "__MINGW_USE_VC2005_COMPAT" is defined!
+
+Note the "UNLESS" in the above sentence - where you certainly would have expected an "IF AND ONLY IF".
+
+So, confusingly, the "__MINGW_USE_VC2005_COMPAT" define does the **exact opposite** of what its name indicates.
+
+Also it makes **no** sense at all that this MUST be defined **explicitly** to make binaries work on Windows XP.
+
+But I am **not** a MinGW-w64 developer, so please don't shoot the messenger ;-)
+
+
+Technical Details:
+------------------
+
+With **ancient** compilers, such as VC2005, the "time_t" type still used to be a 32-Bit type.
+
+With those ancient compilers, "time()" would link against "_time". There was **no** "_time32" or "_time64" yet!
+
+But: With any **contemporary** compiler, the "time_t" type is 64-Bit; and "time()" links against "_time64".
+
+The MSVCRT export "_time32" is a rather new invention; it is simply an alias for the old 32-Bit "_time" export.
+
+On Windows XP (including x64-Edition) **only** "_time64" (64-Bit) and the legacy "_time" (32-Bit) existed!

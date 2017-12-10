@@ -1,0 +1,23 @@
+ src/common.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/common.c b/src/common.c
+index cb0c092..bc1b440 100644
+--- a/src/common.c
++++ b/src/common.c
+@@ -429,6 +429,7 @@ void print_stat(mpg123_handle *fr, long offset, out123_handle *ao, int draw_bar)
+ 			else
+ #endif
+ 			fprintf(stderr, "\r%s", line);
++			fflush(stderr);
+ 		}
+ 	}
+ 	/* Check for changed tags here too? */
+@@ -437,6 +438,7 @@ void print_stat(mpg123_handle *fr, long offset, out123_handle *ao, int draw_bar)
+ 		if(line) /* Clear the inverse video. */
+ 			fprintf(stderr, "\r%s", line);
+ 		fprintf(stderr, "\nICY-META: %s\n", icy);
++		fflush(stderr);
+ 	}
+ 	if(line && line != linebuf)
+ 		free(line);
