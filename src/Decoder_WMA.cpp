@@ -70,7 +70,7 @@ bool WMADecoder::decode(const QString &sourceFile, const QString &outputFile, QA
 		if (regExp.lastIndexIn(text) >= 0)
 		{
 			qint32 newProgress;
-			if (MUtils::regexp_parse_int32(regExp, newProgress, 2U))
+			if (MUtils::regexp_parse_int32(regExp, newProgress))
 			{
 				if (newProgress > prevProgress)
 				{

@@ -161,62 +161,28 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return false;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
 	int prevProgress = -1;
-
 	QRegExp regExp(L1S("Progress: (\\d+).(\\d+)%"));
 
-	while(process.state() != QProcess::NotRunning)
+	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
-		if (checkFlag(abortFlag))
+		if (regExp.lastIndexIn(text) >= 0)
 		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged(L1S("\nABORTED BY USER !!!"));
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("MAC process timed out <-- killing!");
-			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp.lastIndexIn(text) >= 0)
+			qint32 newProgress;
+			if (MUtils::regexp_parse_int32(regExp, newProgress))
 			{
-				bool ok = false;
-				int progress = regExp.cap(1).toInt(&ok);
-				if(ok && (progress > prevProgress))
+				if (newProgress > prevProgress)
 				{
-					emit statusUpdated(progress);
-					prevProgress = qMin(progress + 2, 99);
+					emit statusUpdated(newProgress);
+					prevProgress = qMin(newProgress + 2, 99);
 				}
 			}
-			else if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
+			return true;
 		}
-	}
+		return false;
+	});
 
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
+	if(result != RESULT_SUCCESS)
 	{
 		return false;
 	}
@@ -246,52 +212,7 @@ bool MACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return false;
 	}
 
-	bTimeout = false;
-
-	while(process.state() != QProcess::NotRunning)
-	{
-		if(checkFlag(abortFlag))
-		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged(L1S("\nABORTED BY USER !!!"));
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("Tag process timed out <-- killing!");
-			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
-		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-		
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
-	{
-		return false;
-	}
-
-	return true;
+	return (awaitProcess(process, abortFlag) == RESULT_SUCCESS);
 }
 
 bool MACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

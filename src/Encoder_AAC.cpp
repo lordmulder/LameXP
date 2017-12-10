@@ -208,97 +208,45 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return false;
 	}
 
-	bool bTimeout = false;
-	bool bAborted = false;
 	int prevProgress = -1;
+	QRegExp regExp_sp(L1S("\\bprocessed\\s+(\\d+)\\s+seconds"), Qt::CaseInsensitive);
+	QRegExp regExp_mp(L1S("(\\w+)\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds"), Qt::CaseInsensitive);
 
-
-	QRegExp regExp(L1S("Processed\\s+(\\d+)\\s+seconds"));
-	QRegExp regExp_pass1(L1S("First\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds"));
-	QRegExp regExp_pass2(L1S("Second\\s+pass:\\s+processed\\s+(\\d+)\\s+seconds"));
-
-	while(process.state() != QProcess::NotRunning)
+	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &duration, &regExp_sp, &regExp_mp](const QString &text)
 	{
-		if(checkFlag(abortFlag))
+		if (regExp_mp.lastIndexIn(text) >= 0)
 		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged(L1S("\nABORTED BY USER !!!"));
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("NeroAacEnc process timed out <-- killing!");
-			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(regExp_pass1.lastIndexIn(text) >= 0)
+			int timeElapsed;
+			if ((duration > 0) && MUtils::regexp_parse_int32(regExp_mp, timeElapsed, 2))
 			{
-				bool ok = false;
-				int progress = regExp_pass1.cap(1).toInt(&ok);
-				if(ok && (duration > 0))
+				const bool second_pass = (regExp_mp.cap(1).compare(L1S("second"), Qt::CaseInsensitive) == 0);
+				int newProgress = qRound((second_pass ? 50.0 : 0.0) + ((static_cast<double>(timeElapsed) / static_cast<double>(duration)) * 50.0));
+				if (newProgress > prevProgress)
 				{
-					int newProgress = qRound((static_cast<double>(progress) / static_cast<double>(duration)) * 50.0);
-					if(newProgress > prevProgress)
-					{
-						emit statusUpdated(newProgress);
-						prevProgress = qMin(newProgress + 2, 99);
-					}
+					emit statusUpdated(newProgress);
+					prevProgress = qMin(newProgress + 2, 99);
 				}
 			}
-			else if(regExp_pass2.lastIndexIn(text) >= 0)
-			{
-				bool ok = false;
-				int progress = regExp_pass2.cap(1).toInt(&ok);
-				if(ok && (duration > 0))
-				{
-					int newProgress = qRound((static_cast<double>(progress) / static_cast<double>(duration)) * 50.0) + 50;
-					if(newProgress > prevProgress)
-					{
-						emit statusUpdated(newProgress);
-						prevProgress = qMin(newProgress + 2, 99);
-					}
-				}
-			}
-			else if(regExp.lastIndexIn(text) >= 0)
-			{
-				bool ok = false;
-				int progress = regExp.cap(1).toInt(&ok);
-				if(ok && (duration > 0))
-				{
-					int newProgress = qRound((static_cast<double>(progress) / static_cast<double>(duration)) * 100.0);
-					if(newProgress > prevProgress)
-					{
-						emit statusUpdated(newProgress);
-						prevProgress = qMin(newProgress + 2, 99);
-					}
-				}
-			}
-			else if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
+			return true;
 		}
-	}
+		if (regExp_sp.lastIndexIn(text) >= 0)
+		{
+			int timeElapsed;
+			if ((duration > 0) && MUtils::regexp_parse_int32(regExp_sp, timeElapsed))
+			{
+				int newProgress = qRound((static_cast<double>(timeElapsed) / static_cast<double>(duration)) * 100.0);
+				if (newProgress > prevProgress)
+				{
+					emit statusUpdated(newProgress);
+					prevProgress = qMin(newProgress + 2, 99);
+				}
+			}
+			return true;
+		}
+		return false;
+	});
 
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-	
-	emit statusUpdated(100);
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
+	if(result != RESULT_SUCCESS)
 	{
 		return false;
 	}
@@ -327,52 +275,7 @@ bool AACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInfo
 		return false;
 	}
 
-	bTimeout = false;
-
-	while(process.state() != QProcess::NotRunning)
-	{
-		if(checkFlag(abortFlag))
-		{
-			process.kill();
-			bAborted = true;
-			emit messageLogged(L1S("\nABORTED BY USER !!!"));
-			break;
-		}
-		process.waitForReadyRead(m_processTimeoutInterval);
-		if(!process.bytesAvailable() && process.state() == QProcess::Running)
-		{
-			process.kill();
-			qWarning("NeroAacTag process timed out <-- killing!");
-			emit messageLogged(L1S("\nPROCESS TIMEOUT !!!"));
-			bTimeout = true;
-			break;
-		}
-		while(process.bytesAvailable() > 0)
-		{
-			QByteArray line = process.readLine();
-			QString text = QString::fromUtf8(line.constData()).simplified();
-			if(!text.isEmpty())
-			{
-				emit messageLogged(text);
-			}
-		}
-	}
-
-	process.waitForFinished();
-	if(process.state() != QProcess::NotRunning)
-	{
-		process.kill();
-		process.waitForFinished(-1);
-	}
-		
-	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
-
-	if(bTimeout || bAborted || process.exitCode() != EXIT_SUCCESS)
-	{
-		return false;
-	}
-
-	return true;
+	return (awaitProcess(process, abortFlag) == RESULT_SUCCESS);
 }
 
 bool AACEncoder::isFormatSupported(const QString &containerType, const QString &containerProfile, const QString &formatType, const QString &formatProfile, const QString &formatVersion)

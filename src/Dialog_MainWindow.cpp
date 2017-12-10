@@ -1594,7 +1594,7 @@ void MainWindow::windowShown(void)
 				messageText += NOBR(tr("LameXP detected that your version of the Nero AAC encoder is outdated!")).append("<br>");
 				messageText += NOBR(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tools_version("neroAacEnc.exe"), tr("n/a")))).append("<br><br>");
 				messageText += NOBR(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:")).append("<br>");
-				messageText += "<nobr><tt>" + LINK(AboutDialog::neroAacUrl) + "</tt></nobr><br><br>";
+				messageText += QString("<nobr><tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt></nobr><br><br>");
 				messageText += NOBR(tr("(Hint: Please ignore the name of the downloaded ZIP file and check the included 'changelog.txt' instead!)")).append("<br>");
 				QMessageBox::information(this, tr("AAC Encoder Outdated"), messageText);
 			}
@@ -1609,10 +1609,10 @@ void MainWindow::windowShown(void)
 			QString messageText;
 			messageText += NOBR(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.")).append("<br>");
 			messageText += NOBR(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!")).append("<br><br>");
-			messageText += NOBR(tr("Your LameXP directory is located here:")).append("<br>");
+			messageText += QString("<b>").append(NOBR(tr("Your LameXP install directory is located here:"))).append("</b><br>");
 			messageText += QString("<nobr><tt>%1</tt></nobr><br><br>").arg(FSLINK(QDir::toNativeSeparators(appPath)));
-			messageText += NOBR(tr("You can download the Nero AAC encoder for free from the official Nero website at:")).append("<br>");
-			messageText += "<nobr><tt>" + LINK(AboutDialog::neroAacUrl) + "</tt></nobr><br>";
+			messageText += QString("<b>").append(NOBR(tr("You can download the Nero AAC encoder for free from this website:"))).append("</b><br>");
+			messageText += QString("<nobr><tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt></nobr><br>");
 			if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
 			{
 				m_settings->neroAacNotificationsEnabled(false);

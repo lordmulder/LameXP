@@ -159,6 +159,14 @@ bool AbstractTool::startProcess(QProcess &process, const QString &program, const
 /*
 * Wait for process to terminate while processing its output
 */
+AbstractTool::result_t AbstractTool::awaitProcess(QProcess &process, QAtomicInt &abortFlag, int *const exitCode)
+{
+	return awaitProcess(process, abortFlag, [](const QString &text) { return false; }, exitCode);
+}
+
+/*
+* Wait for process to terminate while processing its output
+*/
 AbstractTool::result_t AbstractTool::awaitProcess(QProcess &process, QAtomicInt &abortFlag, std::function<bool(const QString &text)> &&handler, int *const exitCode)
 {
 	bool bTimeout = false;
@@ -223,8 +231,8 @@ AbstractTool::result_t AbstractTool::awaitProcess(QProcess &process, QAtomicInt 
 		*exitCode = process.exitCode();
 	}
 
-	emit statusUpdated(100);
 	emit messageLogged(QString().sprintf("\nExited with code: 0x%04X", process.exitCode()));
+	if (!(bAborted || bTimeout)) emit statusUpdated(100);
 
 	if (bAborted || bTimeout || (process.exitCode() != EXIT_SUCCESS))
 	{

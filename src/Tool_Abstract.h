@@ -67,6 +67,7 @@ protected:
 	static QString commandline2string(const QString &program, const QStringList &arguments);
 
 	bool startProcess(QProcess &process, const QString &program, const QStringList &args, const QString &workingDir = QString());
+	result_t awaitProcess(QProcess &process, QAtomicInt &abortFlag, int *const exitCode = NULL);
 	result_t awaitProcess(QProcess &process, QAtomicInt &abortFlag, std::function<bool(const QString &text)> &&handler, int *const exitCode = NULL);
 
 private:
