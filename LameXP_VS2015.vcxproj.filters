@@ -445,12 +445,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.lame-x86-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-i686.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-sse2.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.mediaInfo-i686.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -535,12 +529,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.wupdate.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-i686.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x64.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.faad-i686.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -559,7 +547,28 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.sox-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-avx.cpp">
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x86-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-x64-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-x64-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-x86-i686.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.mac-x86-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x64-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x64-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x86-i686.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -890,9 +899,6 @@
     <CustomBuild Include="src\Model_FileExts.h">
       <Filter>Header Files\Models</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.wvunpack-x64.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.aften-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -939,12 +945,6 @@
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.lame-x86-sse2.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.mac-i686.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\Tools.mac-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.mediaInfo-i686.qrc">
@@ -1031,9 +1031,6 @@
     <CustomBuild Include="res\Tools.wupdate.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.wvunpack-i686.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.faad-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1052,7 +1049,31 @@
     <CustomBuild Include="res\Tools.sox-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.mac-avx.qrc">
+    <CustomBuild Include="res\Tools.wvunpack-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-x64-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-x86-i686.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mac-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wvunpack-x64-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wvunpack-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.wvunpack-x86-i686.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\_ALL.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>

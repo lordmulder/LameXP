@@ -49,7 +49,7 @@
 // Tool versions (minimum expected versions!)
 ///////////////////////////////////////////////////////////////////////////////
 
-#define VER_LAMEXP_TOOL_NEROAAC				1541
+#define VER_LAMEXP_TOOL_NEROAAC				1540
 #define VER_LAMEXP_TOOL_FHGAACENC			20151024
 #define VER_LAMEXP_TOOL_FDKAACENC			62
 #define VER_LAMEXP_TOOL_QAAC				258
