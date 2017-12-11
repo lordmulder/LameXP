@@ -59,9 +59,14 @@ protected:
 	}
 	result_t;
 		
-	static __forceinline bool checkFlag(QAtomicInt &flag)
+	static __forceinline bool CHECK_FLAG(QAtomicInt &flag)
 	{
 		return MUTILS_BOOLIFY(flag);
+	}
+
+	static __forceinline int NEXT_PROGRESS(const int &progress)
+	{
+		return (progress < 99) ? qMax(0, progress + 1) : qMin(100, progress);
 	}
 
 	static QString commandline2string(const QString &program, const QStringList &arguments);

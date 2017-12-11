@@ -176,7 +176,7 @@ AbstractTool::result_t AbstractTool::awaitProcess(QProcess &process, QAtomicInt 
 
 	while (process.state() != QProcess::NotRunning)
 	{
-		if (checkFlag(abortFlag))
+		if (CHECK_FLAG(abortFlag))
 		{
 			process.kill();
 			bAborted = true;
@@ -199,11 +199,7 @@ AbstractTool::result_t AbstractTool::awaitProcess(QProcess &process, QAtomicInt 
 			QByteArray line = process.readLine();
 			if (line.size() > 0)
 			{
-				static const char REPALCE_CHARS[3] = { '\r', '\b', '\t' };
-				for (size_t i = 0; i < MUTILS_ARR2LEN(REPALCE_CHARS); ++i)
-				{
-					line.replace(REPALCE_CHARS[i], char(0x20));
-				}
+				line.replace('\r', char(0x20)).replace('\b', char(0x20)).replace('\t', char(0x20));
 				const QString text = QString::fromUtf8(line.constData()).simplified();
 				if (!text.isEmpty())
 				{

@@ -148,7 +148,7 @@ bool WaveEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	}
 	else
 	{
-		emit messageLogged(checkFlag(abortFlag) ? L1S("Operation cancelled by user!")  : L1S("Error: Failed to copy file!"));
+		emit messageLogged(CHECK_FLAG(abortFlag) ? L1S("Operation cancelled by user!")  : L1S("Error: Failed to copy file!"));
 	}
 
 	return success;

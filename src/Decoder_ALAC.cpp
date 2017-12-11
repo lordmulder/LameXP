@@ -76,7 +76,7 @@ bool ALACDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 				if (newProgress > prevProgress)
 				{
 					emit statusUpdated(newProgress);
-					prevProgress = (newProgress < 99) ? (newProgress + 1) : newProgress;
+					prevProgress = NEXT_PROGRESS(newProgress);
 				}
 			}
 			return true;

@@ -235,7 +235,7 @@ bool QAACEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 				if (newProgress > prevProgress)
 				{
 					emit statusUpdated(newProgress);
-					prevProgress = (newProgress < 99) ? (newProgress + 1) : newProgress;
+					prevProgress = NEXT_PROGRESS(newProgress);
 				}
 			}
 			return true;
