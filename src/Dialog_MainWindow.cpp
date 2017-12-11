@@ -1583,41 +1583,22 @@ void MainWindow::windowShown(void)
 	}
 
 	//Check for AAC support
-	const int aacEncoder = EncoderRegistry::getAacEncoder();
-	if(aacEncoder == SettingsModel::AAC_ENCODER_NERO)
+	if(m_settings->neroAacNotificationsEnabled() && (EncoderRegistry::getAacEncoder() <= SettingsModel::AAC_ENCODER_NONE))
 	{
-		if(m_settings->neroAacNotificationsEnabled())
+		QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
+		if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
+		QString messageText;
+		messageText += NOBR(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.")).append("<br>");
+		messageText += NOBR(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!")).append("<br><br>");
+		messageText += QString("<b>").append(NOBR(tr("Your LameXP install directory is located here:"))).append("</b><br>");
+		messageText += QString("<nobr><tt>%1</tt></nobr><br><br>").arg(FSLINK(QDir::toNativeSeparators(appPath)));
+		messageText += QString("<b>").append(NOBR(tr("You can download the Nero AAC encoder for free from this website:"))).append("</b><br>");
+		messageText += QString("<nobr><tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt></nobr><br><br>");
+		messageText += QString("<i>").append(NOBR(tr("Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!").arg(lamexp_version2string("v?.?.?.?", lamexp_toolver_neroaac(), "n/a")))).append("</i><br>");
+		if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
 		{
-			if(lamexp_tools_version("neroAacEnc.exe") < lamexp_toolver_neroaac())
-			{
-				QString messageText;
-				messageText += NOBR(tr("LameXP detected that your version of the Nero AAC encoder is outdated!")).append("<br>");
-				messageText += NOBR(tr("The current version available is %1 (or later), but you still have version %2 installed.").arg(lamexp_version2string("?.?.?.?", lamexp_toolver_neroaac(), tr("n/a")), lamexp_version2string("?.?.?.?", lamexp_tools_version("neroAacEnc.exe"), tr("n/a")))).append("<br><br>");
-				messageText += NOBR(tr("You can download the latest version of the Nero AAC encoder from the Nero website at:")).append("<br>");
-				messageText += QString("<nobr><tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt></nobr><br><br>");
-				messageText += NOBR(tr("(Hint: Please ignore the name of the downloaded ZIP file and check the included 'changelog.txt' instead!)")).append("<br>");
-				QMessageBox::information(this, tr("AAC Encoder Outdated"), messageText);
-			}
-		}
-	}
-	else
-	{
-		if(m_settings->neroAacNotificationsEnabled() && (aacEncoder <= SettingsModel::AAC_ENCODER_NONE))
-		{
-			QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
-			if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
-			QString messageText;
-			messageText += NOBR(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.")).append("<br>");
-			messageText += NOBR(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!")).append("<br><br>");
-			messageText += QString("<b>").append(NOBR(tr("Your LameXP install directory is located here:"))).append("</b><br>");
-			messageText += QString("<nobr><tt>%1</tt></nobr><br><br>").arg(FSLINK(QDir::toNativeSeparators(appPath)));
-			messageText += QString("<b>").append(NOBR(tr("You can download the Nero AAC encoder for free from this website:"))).append("</b><br>");
-			messageText += QString("<nobr><tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt></nobr><br>");
-			if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
-			{
-				m_settings->neroAacNotificationsEnabled(false);
-				ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
-			}
+			m_settings->neroAacNotificationsEnabled(false);
+			ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
 		}
 	}
 
@@ -2277,8 +2258,8 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Beta Updates"), NOBR(tr("LameXP will <i>not</i> check for Beta (pre-release) updates from now on.")));
-			m_settings->autoUpdateCheckBeta(false);
+		QMessageBox::information(this, tr("Beta Updates"), NOBR(tr("LameXP will <i>not</i> check for Beta (pre-release) updates from now on.")));
+		m_settings->autoUpdateCheckBeta(false);
 	}
 
 	ui->actionCheckForBetaUpdates->setChecked(m_settings->autoUpdateCheckBeta());
