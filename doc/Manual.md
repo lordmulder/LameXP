@@ -257,7 +257,7 @@ LameXP can use the **Nero Digital** AAC encoder as well as the **QAAC** (Apple i
 
 ### Nero Digital AAC Encoder ###
 
-First of all, you need to download the Nero AAC encoder from the official Nero Digital web-site or one of the mirrors:
+First of all, you need to download the <a href="https://web.archive.org/web/20160310025758/http://www.nero.com:80/enu/company/about-nero/nero-aac-codec.php"><b>Nero AAC encoder</b></a> from one of the following mirror sites:
 
 * <http://www.videohelp.com/software/Nero-AAC-Codec>
 * <http://www.free-codecs.com/download/Nero_AAC_Codec.htm>
