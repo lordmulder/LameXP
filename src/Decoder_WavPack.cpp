@@ -62,14 +62,14 @@ bool WavPackDecoder::decode(const QString &sourceFile, const QString &outputFile
 	}
 
 	int prevProgress = -1;
-	QRegExp regExp("(\\s|\b)(\\d+)%\\s+done");
+	QRegExp regExp("\\b(\\d+)%\\s+done");
 
 	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
 		if (regExp.lastIndexIn(text) >= 0)
 		{
 			qint32 newProgress;
-			if (MUtils::regexp_parse_int32(regExp, newProgress, 2U))
+			if (MUtils::regexp_parse_int32(regExp, newProgress))
 			{
 				if (newProgress > prevProgress)
 				{

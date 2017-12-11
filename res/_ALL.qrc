@@ -265,7 +265,9 @@
     <file>tools/wget.exe</file>
     <file>tools/wma2wav.exe</file>
     <file>tools/wupdate.exe</file>
-    <file>tools/wvunpack.i686.exe</file>
-    <file>tools/wvunpack.x64.exe</file>
+    <file>tools/wvunpack.x64-avx.exe</file>
+    <file>tools/wvunpack.x64-sse2.exe</file>
+    <file>tools/wvunpack.x86-i686.exe</file>
+    <file>tools/wvunpack.x86-sse2.exe</file>
   </qresource>
 </RCC>

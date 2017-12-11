@@ -890,9 +890,6 @@
     <CustomBuild Include="src\Model_FileExts.h">
       <Filter>Header Files\Models</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.wvunpack-x64.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.aften-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1031,9 +1028,6 @@
     <CustomBuild Include="res\Tools.wupdate.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.wvunpack-i686.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.faad-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1063,6 +1057,18 @@
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
+    </None>
+    <None Include="res\Tools.wvunpack-x64-sse2.qrc">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\Tools.wvunpack-x86-i686.qrc">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\Tools.wvunpack-x86-sse2.qrc">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\Tools.wvunpack-x64-avx.qrc">
+      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

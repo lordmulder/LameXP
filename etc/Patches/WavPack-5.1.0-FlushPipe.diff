@@ -1,0 +1,647 @@
+ cli/utils.c    | 34 +++++++++++++++++++++++++---------
+ cli/wavpack.c  | 58 +++++++++++++++++++++++++++++++++++++---------------------
+ cli/wvgain.c   | 34 +++++++++++++++++++++++++---------
+ cli/wvtag.c    | 30 +++++++++++++++++++++++-------
+ cli/wvunpack.c | 46 +++++++++++++++++++++++++++++++---------------
+ 5 files changed, 141 insertions(+), 61 deletions(-)
+
+diff --git a/cli/utils.c b/cli/utils.c
+index d59bad0..8840032 100644
+--- a/cli/utils.c
++++ b/cli/utils.c
+@@ -38,6 +38,22 @@
+ #define remove(f) unlink_utf8(f)
+ #endif
+ 
++#ifdef _MSC_VER
++static __inline void flush_pipe(FILE *const stream)
++{
++	struct _stat stat;
++	if (!_fstat(_fileno(stream), &stat))
++	{
++		if ((stat.st_mode & _S_IFMT) == _S_IFIFO)
++		{
++			fflush(stream); /*flush iff it is a pipe*/
++		}
++	}
++}
++#else
++#define flush_pipe(X) ((void)0)
++#endif
++
+ #ifdef _WIN32
+ 
+ int copy_timestamp (const char *src_filename, const char *dst_filename)
+@@ -325,38 +341,38 @@ char yna (void)
+         else if (key == '\r' || key == '\n') {
+             if (choice) {
+                 fprintf (stderr, "\r\n");
+-                fflush (stderr);
++                flush_pipe (stderr);
+                 break;
+             }
+             else {
+                 fprintf (stderr, "%c", 7);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+         }
+         else if (key == 'Y' || key == 'y') {
+ #ifdef _WIN32
+             fprintf (stderr, "%c\b", key);
+-            fflush (stderr);
++            flush_pipe (stderr);
+ #endif
+             choice = 'y';
+         }
+         else if (key == 'N' || key == 'n') {
+ #ifdef _WIN32
+             fprintf (stderr, "%c\b", key);
+-            fflush (stderr);
++            flush_pipe (stderr);
+ #endif
+             choice = 'n';
+         }
+         else if (key == 'A' || key == 'a') {
+ #ifdef _WIN32
+             fprintf (stderr, "%c\b", key);
+-            fflush (stderr);
++            flush_pipe (stderr);
+ #endif
+             choice = 'a';
+         }
+         else {
+             fprintf (stderr, "%c", 7);
+-            fflush (stderr);
++            flush_pipe (stderr);
+         }
+     }
+ 
+@@ -557,7 +573,7 @@ void finish_line (void)
+     else
+         fprintf (stderr, "                                \n");
+ 
+-    fflush (stderr);
++    flush_pipe (stderr);
+ }
+ #else
+ //////////////////////////////////////////////////////////////////////////////
+@@ -568,7 +584,7 @@ void finish_line (void)
+ void finish_line (void)
+ {
+     fprintf (stderr, "                                \n");
+-    fflush (stderr);
++    flush_pipe (stderr);
+ }
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -763,7 +779,7 @@ void DoSetConsoleTitle (char *text)
+ void DoSetConsoleTitle (char *text)
+ {
+     fprintf (stderr, "\033]0;%s\007", text);
+-    fflush (stderr);
++    flush_pipe (stderr);
+ }
+ 
+ #endif
+diff --git a/cli/wavpack.c b/cli/wavpack.c
+index 4d46aba..f33086f 100644
+--- a/cli/wavpack.c
++++ b/cli/wavpack.c
+@@ -61,6 +61,22 @@
+ #define stricmp strcasecmp
+ #endif
+ 
++#ifdef _MSC_VER
++static __inline void flush_pipe(FILE *const stream)
++{
++	struct _stat stat;
++	if (!_fstat(_fileno(stream), &stat))
++	{
++		if ((stat.st_mode & _S_IFMT) == _S_IFIFO)
++		{
++			fflush(stream); /*flush iff it is a pipe*/
++		}
++	}
++}
++#else
++#define flush_pipe(X) ((void)0)
++#endif
++
+ ///////////////////////////// local variable storage //////////////////////////
+ 
+ static const char *sign_on = "\n"
+@@ -882,11 +898,11 @@ int main (int argc, char **argv)
+ 
+     if (strcmp (WavpackGetLibraryVersionString (), PACKAGE_VERSION)) {
+         fprintf (stderr, version_warning, WavpackGetLibraryVersionString (), PACKAGE_VERSION);
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+     else if (!quiet_mode && !error_count) {
+         fprintf (stderr, sign_on, VERSION_OS, WavpackGetLibraryVersionString ());
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+ 
+     // Loop through any tag specification strings and check for file access, convert text
+@@ -1004,7 +1020,7 @@ int main (int argc, char **argv)
+ 
+     if (error_count) {
+         fprintf (stderr, "\ntype 'wavpack' for short help or 'wavpack --help' for full help\n");
+-        fflush (stderr);
++        flush_pipe (stderr);
+         return 1;
+     }
+ 
+@@ -1261,7 +1277,7 @@ int main (int argc, char **argv)
+ 
+             if (num_files > 1 && !quiet_mode) {
+                 fprintf (stderr, "\n%s:\n", matches [file_index]);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+ 
+             if (filespec_ext (matches [file_index]) && !stricmp (filespec_ext (matches [file_index]), ".wv"))
+@@ -1295,11 +1311,11 @@ int main (int argc, char **argv)
+         if (num_files > 1) {
+             if (error_count) {
+                 fprintf (stderr, "\n **** warning: errors occurred in %d of %d files! ****\n", error_count, num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+             else if (!quiet_mode) {
+                 fprintf (stderr, "\n **** %d files successfully processed ****\n", num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+         }
+ 
+@@ -1350,7 +1366,7 @@ int main(int argc, char **argv)
+ 
+     if (pause_mode) {
+         fprintf (stderr, "\nPress any key to continue . . . ");
+-        fflush (stderr);
++        flush_pipe (stderr);
+         while (!_kbhit ());
+         _getch ();
+         fprintf (stderr, "\n");
+@@ -1604,7 +1620,7 @@ static int pack_file (char *infilename, char *outfilename, char *out2filename, c
+ 
+             if (!overwrite_all) {
+                 fprintf (stderr, "overwrite %s (yes/no/all)? ", FN_FIT (outfilename));
+-                fflush (stderr);
++                flush_pipe (stderr);
+ 
+                 if (set_console_title)
+                     DoSetConsoleTitle ("overwrite?");
+@@ -1629,7 +1645,7 @@ static int pack_file (char *infilename, char *outfilename, char *out2filename, c
+ 
+         if (res == 1) {
+             fprintf (stderr, "overwrite %s (yes/no/all)? ", FN_FIT (out2filename));
+-            fflush (stderr);
++            flush_pipe (stderr);
+ 
+             if (set_console_title)
+                 DoSetConsoleTitle ("overwrite?");
+@@ -1740,7 +1756,7 @@ static int pack_file (char *infilename, char *outfilename, char *out2filename, c
+         else
+             fprintf (stderr, "creating %s,", FN_FIT (outfilename));
+ 
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+ 
+     // for now, raw 1-bit PCM is only DSDIFF format
+@@ -2364,7 +2380,7 @@ static int pack_audio (WavpackContext *wpc, FILE *infile, int qmode, unsigned ch
+ #else
+             fprintf (stderr, "\n");
+ #endif
+-            fflush (stderr);
++            flush_pipe (stderr);
+             free (sample_buffer);
+             free (input_buffer);
+             return WAVPACK_SOFT_ERROR;
+@@ -2380,7 +2396,7 @@ static int pack_audio (WavpackContext *wpc, FILE *infile, int qmode, unsigned ch
+                 if (!quiet_mode) {
+                     fprintf (stderr, "%s%3d%% done...",
+                         nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+         }
+     }
+@@ -2522,7 +2538,7 @@ static int pack_dsd_audio (WavpackContext *wpc, FILE *infile, int qmode, unsigne
+ #else
+             fprintf (stderr, "\n");
+ #endif
+-            fflush (stderr);
++            flush_pipe (stderr);
+             free (sample_buffer);
+             free (input_buffer);
+             return WAVPACK_SOFT_ERROR;
+@@ -2538,7 +2554,7 @@ static int pack_dsd_audio (WavpackContext *wpc, FILE *infile, int qmode, unsigne
+                 if (!quiet_mode) {
+                     fprintf (stderr, "%s%3d%% done...",
+                         nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+         }
+     }
+@@ -2637,7 +2653,7 @@ static int repack_file (char *infilename, char *outfilename, char *out2filename,
+             else
+                 fprintf (stderr, "overwrite %s with lossy transcode (yes/no/all)? ", FN_FIT (outfilename));
+ 
+-            fflush (stderr);
++            flush_pipe (stderr);
+ 
+             if (set_console_title)
+                 DoSetConsoleTitle ("overwrite?");
+@@ -2657,7 +2673,7 @@ static int repack_file (char *infilename, char *outfilename, char *out2filename,
+     if (out2filename && !overwrite_all && (wvc_file.file = fopen (out2filename, "rb")) != NULL) {
+         DoCloseHandle (wvc_file.file);
+         fprintf (stderr, "overwrite %s (yes/no/all)? ", FN_FIT (out2filename));
+-        fflush (stderr);
++        flush_pipe (stderr);
+ 
+         if (set_console_title)
+             DoSetConsoleTitle ("overwrite?");
+@@ -2759,7 +2775,7 @@ static int repack_file (char *infilename, char *outfilename, char *out2filename,
+         else
+             fprintf (stderr, "creating %s,", FN_FIT (outfilename));
+ 
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+ 
+     WavpackSetFileInformation (outfile, WavpackGetFileExtension (infile), WavpackGetFileFormat (infile));
+@@ -3324,7 +3340,7 @@ static int repack_audio (WavpackContext *outfile, WavpackContext *infile, unsign
+ #else
+             fprintf (stderr, "\n");
+ #endif
+-            fflush (stderr);
++            flush_pipe (stderr);
+             free (sample_buffer);
+             return WAVPACK_SOFT_ERROR;
+         }
+@@ -3339,7 +3355,7 @@ static int repack_audio (WavpackContext *outfile, WavpackContext *infile, unsign
+                 if (!quiet_mode) {
+                     fprintf (stderr, "%s%3d%% done...",
+                         nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+         }
+     }
+@@ -3525,7 +3541,7 @@ static int verify_audio (char *infilename, unsigned char *md5_digest_source)
+ #else
+             fprintf (stderr, "\n");
+ #endif
+-            fflush (stderr);
++            flush_pipe (stderr);
+             result = WAVPACK_SOFT_ERROR;
+             break;
+         }
+@@ -3539,7 +3555,7 @@ static int verify_audio (char *infilename, unsigned char *md5_digest_source)
+                 if (!quiet_mode) {
+                     fprintf (stderr, "%s%3d%% done...",
+                         "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+         }
+     }
+diff --git a/cli/wvgain.c b/cli/wvgain.c
+index 4e789ea..2603824 100644
+--- a/cli/wvgain.c
++++ b/cli/wvgain.c
+@@ -57,6 +57,22 @@
+ #define fopen(f,m) fopen_utf8(f,m)
+ #endif
+ 
++#ifdef _MSC_VER
++static __inline void flush_pipe(FILE *const stream)
++{
++	struct _stat stat;
++	if (!_fstat(_fileno(stream), &stat))
++	{
++		if ((stat.st_mode & _S_IFMT) == _S_IFIFO)
++		{
++			fflush(stream); /*flush iff it is a pipe*/
++		}
++	}
++}
++#else
++#define flush_pipe(X) ((void)0)
++#endif
++
+ ///////////////////////////// local variable storage //////////////////////////
+ 
+ static const char *sign_on = "\n"
+@@ -258,11 +274,11 @@ int main(int argc, char **argv)
+ 
+     if (strcmp (WavpackGetLibraryVersionString (), PACKAGE_VERSION)) {
+         fprintf (stderr, version_warning, WavpackGetLibraryVersionString (), PACKAGE_VERSION);
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+     else if (!quiet_mode && !error_count) {
+         fprintf (stderr, sign_on, VERSION_OS, WavpackGetLibraryVersionString ());
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+ 
+     if (!num_files) {
+@@ -407,7 +423,7 @@ int main(int argc, char **argv)
+ 
+             if (num_files > 1 && !quiet_mode) {
+                 fprintf (stderr, "\n%s:\n", matches [file_index]);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+ 
+             if (new_mode) {
+@@ -496,7 +512,7 @@ int main(int argc, char **argv)
+ 
+                 if (num_files > 1 && !quiet_mode) {
+                     fprintf (stderr, "\n%s:\n", matches [file_index]);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+ 
+                 if (show_mode)
+@@ -517,11 +533,11 @@ int main(int argc, char **argv)
+         if (num_files > 1) {
+             if (error_count) {
+                 fprintf (stderr, "\n **** warning: errors occurred in %d of %d files! ****\n", error_count, num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+             else if (!quiet_mode) {
+                 fprintf (stderr, "\n **** %d files successfully processed ****\n", num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+         }
+ 
+@@ -624,7 +640,7 @@ static int analyze_file (char *infilename, uint32_t *histogram, float *peak)
+     if (!quiet_mode) {
+         fprintf (stderr, "analyzing %s%s,", *infilename == '-' ? "stdin" :
+             FN_FIT (infilename), wvc_mode ? " (+.wvc)" : "");
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+ 
+     sample_rate = WavpackGetSampleRate (wpc);
+@@ -711,7 +727,7 @@ static int analyze_file (char *infilename, uint32_t *histogram, float *peak)
+ #else
+             fprintf (stderr, "\n");
+ #endif
+-            fflush (stderr);
++            flush_pipe (stderr);
+             result = WAVPACK_HARD_ERROR;
+             break;
+         }
+@@ -727,7 +743,7 @@ static int analyze_file (char *infilename, uint32_t *histogram, float *peak)
+                 if (!quiet_mode) {
+                     fprintf (stderr, "%s%3d%% done...",
+                         nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+         }
+     }
+diff --git a/cli/wvtag.c b/cli/wvtag.c
+index 6e6512a..33f3526 100644
+--- a/cli/wvtag.c
++++ b/cli/wvtag.c
+@@ -60,6 +60,22 @@
+ #define stricmp strcasecmp
+ #endif
+ 
++#ifdef _MSC_VER
++static __inline void flush_pipe(FILE *const stream)
++{
++	struct _stat stat;
++	if (!_fstat(_fileno(stream), &stat))
++	{
++		if ((stat.st_mode & _S_IFMT) == _S_IFIFO)
++		{
++			fflush(stream); /*flush iff it is a pipe*/
++		}
++	}
++}
++#else
++#define flush_pipe(X) ((void)0)
++#endif
++
+ ///////////////////////////// local variable storage //////////////////////////
+ 
+ static const char *sign_on = "\n"
+@@ -408,11 +424,11 @@ int main (int argc, char **argv)
+ 
+     if (strcmp (WavpackGetLibraryVersionString (), PACKAGE_VERSION)) {
+         fprintf (stderr, version_warning, WavpackGetLibraryVersionString (), PACKAGE_VERSION);
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+     else if (!quiet_mode && !error_count) {
+         fprintf (stderr, sign_on, VERSION_OS, WavpackGetLibraryVersionString ());
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+ 
+     // Loop through any tag specification strings and check for file access, convert text
+@@ -653,7 +669,7 @@ int main (int argc, char **argv)
+ 
+             if (num_files > 1 && !quiet_mode) {
+                 fprintf (stderr, "\n%s:\n", matches [file_index]);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+ 
+             result = process_file (matches [file_index]);
+@@ -672,11 +688,11 @@ int main (int argc, char **argv)
+         if (num_files > 1) {
+             if (error_count) {
+                 fprintf (stderr, "\n **** warning: errors occurred in %d of %d files! ****\n", error_count, num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+             else if (!quiet_mode) {
+                 fprintf (stderr, "\n **** %d files successfully processed ****\n", num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+         }
+ 
+@@ -721,7 +737,7 @@ int main(int argc, char **argv)
+ 
+     if (pause_mode) {
+         fprintf (stderr, "\nPress any key to continue . . . ");
+-        fflush (stderr);
++        flush_pipe (stderr);
+         while (!_kbhit ());
+         _getch ();
+         fprintf (stderr, "\n");
+@@ -995,7 +1011,7 @@ static int do_tag_extractions (WavpackContext *wpc, char *outfilename)
+             if (!overwrite_all && (outfile = fopen (full_filename, "r")) != NULL) {
+                 DoCloseHandle (outfile);
+                 fprintf (stderr, "overwrite %s (yes/no/all)? ", FN_FIT (full_filename));
+-                fflush (stderr);
++                flush_pipe (stderr);
+ 
+                 switch (yna ()) {
+ 
+diff --git a/cli/wvunpack.c b/cli/wvunpack.c
+index 2db1cb3..c0a3c87 100644
+--- a/cli/wvunpack.c
++++ b/cli/wvunpack.c
+@@ -58,6 +58,22 @@
+ #define strdup(x) _strdup(x)
+ #endif
+ 
++#ifdef _MSC_VER
++static __inline void flush_pipe(FILE *const stream)
++{
++	struct _stat stat;
++	if (!_fstat(_fileno(stream), &stat))
++	{
++		if ((stat.st_mode & _S_IFMT) == _S_IFIFO)
++		{
++			fflush(stream); /*flush iff it is a pipe*/
++		}
++	}
++}
++#else
++#define flush_pipe(X) ((void)0)
++#endif
++
+ ///////////////////////////// local variable storage //////////////////////////
+ 
+ static const char *sign_on = "\n"
+@@ -549,11 +565,11 @@ int main(int argc, char **argv)
+ 
+     if (strcmp (WavpackGetLibraryVersionString (), PACKAGE_VERSION)) {
+         fprintf (stderr, version_warning, WavpackGetLibraryVersionString (), PACKAGE_VERSION);
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+     else if (!quiet_mode && !error_count) {
+         fprintf (stderr, sign_on, VERSION_OS, WavpackGetLibraryVersionString ());
+-        fflush (stderr);
++        flush_pipe (stderr);
+     }
+ 
+     if (!num_files) {
+@@ -763,7 +779,7 @@ int main(int argc, char **argv)
+ 
+             if (num_files > 1 && !quiet_mode) {
+                 fprintf (stderr, "\n%s:\n", matches [file_index]);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+ 
+             result = unpack_file (matches [file_index], verify_only ? NULL : outfilename, add_extension);
+@@ -789,11 +805,11 @@ int main(int argc, char **argv)
+         if (num_files > 1) {
+             if (error_count) {
+                 fprintf (stderr, "\n **** warning: errors occurred in %d of %d files! ****\n", error_count, num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+             else if (!quiet_mode) {
+                 fprintf (stderr, "\n **** %d files successfully processed ****\n", num_files);
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+         }
+ 
+@@ -844,7 +860,7 @@ int main(int argc, char **argv)
+ 
+     if (pause_mode) {
+         fprintf (stderr, "\nPress any key to continue . . . ");
+-        fflush (stderr);
++        flush_pipe (stderr);
+         while (!_kbhit ());
+         _getch ();
+         fprintf (stderr, "\n");
+@@ -931,7 +947,7 @@ static FILE *open_output_file (char *filename, char **tempfilename)
+ 
+             if (!overwrite_all) {
+                 fprintf (stderr, "overwrite %s (yes/no/all)? ", FN_FIT (filename));
+-                fflush (stderr);
++                flush_pipe (stderr);
+ 
+                 if (set_console_title)
+                     DoSetConsoleTitle ("overwrite?");
+@@ -1235,12 +1251,12 @@ static int unpack_file (char *infilename, char *outfilename, int add_extension)
+             if (!quiet_mode) {
+                 fprintf (stderr, "unpacking %s%s to stdout,", *infilename == '-' ?
+                     "stdin" : FN_FIT (infilename), wvc_mode ? " (+.wvc)" : "");
+-                fflush (stderr);
++                flush_pipe (stderr);
+             }
+         }
+         else if (!quiet_mode) {
+             fprintf (stderr, "restoring %s,", FN_FIT (outfilename));
+-            fflush (stderr);
++            flush_pipe (stderr);
+         }
+     }
+     else {      // in verify only mode we don't worry about headers
+@@ -1249,7 +1265,7 @@ static int unpack_file (char *infilename, char *outfilename, int add_extension)
+         if (!quiet_mode) {
+             fprintf (stderr, "verifying %s%s,", *infilename == '-' ? "stdin" :
+                 FN_FIT (infilename), wvc_mode ? " (+.wvc)" : "");
+-            fflush (stderr);
++            flush_pipe (stderr);
+         }
+     }
+ 
+@@ -1607,7 +1623,7 @@ static int unpack_audio (WavpackContext *wpc, FILE *outfile, int qmode, unsigned
+ #else
+             fprintf (stderr, "\n");
+ #endif
+-            fflush (stderr);
++            flush_pipe (stderr);
+             DoTruncateFile (outfile);
+             result = WAVPACK_SOFT_ERROR;
+             break;
+@@ -1624,7 +1640,7 @@ static int unpack_audio (WavpackContext *wpc, FILE *outfile, int qmode, unsigned
+                 if (!quiet_mode) {
+                     fprintf (stderr, "%s%3d%% done...",
+                         nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+         }
+     }
+@@ -1762,7 +1778,7 @@ static int unpack_dsd_audio (WavpackContext *wpc, FILE *outfile, int qmode, unsi
+ #else
+             fprintf (stderr, "\n");
+ #endif
+-            fflush (stderr);
++            flush_pipe (stderr);
+             DoTruncateFile (outfile);
+             result = WAVPACK_SOFT_ERROR;
+             break;
+@@ -1779,7 +1795,7 @@ static int unpack_dsd_audio (WavpackContext *wpc, FILE *outfile, int qmode, unsi
+                 if (!quiet_mode) {
+                     fprintf (stderr, "%s%3d%% done...",
+                         nobs ? " " : "\b\b\b\b\b\b\b\b\b\b\b\b", (int) progress);
+-                    fflush (stderr);
++                    flush_pipe (stderr);
+                 }
+         }
+     }
+@@ -1883,7 +1899,7 @@ static int do_tag_extractions (WavpackContext *wpc, char *outfilename)
+             if (!overwrite_all && (outfile = fopen (full_filename, "r")) != NULL) {
+                 DoCloseHandle (outfile);
+                 fprintf (stderr, "overwrite %s (yes/no/all)? ", FN_FIT (full_filename));
+-                fflush (stderr);
++                flush_pipe (stderr);
+ 
+                 if (set_console_title)
+                     DoSetConsoleTitle ("overwrite?");
