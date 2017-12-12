@@ -103,6 +103,7 @@ rd /S /Q "%TMP_PATH%" 2> NUL
 mkdir "%TMP_PATH%"
 
 call "%~dp0\_copy.bat" "%BIN_PATH%\LameXP.exe" "%TMP_PATH%"
+call "%~dp0\_copy.bat" "%~dp0\..\..\etc\Manifest\VisualElements.xml" "%TMP_PATH%\LameXP.VisualElementsManifest.xml"
 
 if "%LAMEXP_REDIST%"=="1" (
 	call "%~dp0\_copy.bat" "%BIN_PATH%\LameXP.rcc" "%TMP_PATH%"
@@ -152,6 +153,7 @@ attrib +R "%TMP_PATH%\*.txt"
 attrib +R "%TMP_PATH%\*.html"
 attrib +R "%TMP_PATH%\*.exe"
 attrib +R "%TMP_PATH%\*.dll"
+attrib +R "%TMP_PATH%\*.xml"
 
 :: ---------------------------------------------------------------------------
 :: BUILD INSTALLER

@@ -536,6 +536,7 @@ FunctionEnd
 	Delete ${options} "$INSTDIR\vccorlib*.dll"
 	Delete ${options} "$INSTDIR\api-ms-*.dll"
 	Delete ${options} "$INSTDIR\ucrtbase.dll"
+	Delete ${options} "$INSTDIR\*.VisualElementsManifest.xml"
 	
 	RMDir /r ${options} "$INSTDIR\cache"
 	RMDir /r ${options} "$INSTDIR\img"
@@ -572,6 +573,9 @@ Section "!Install Files"
 	
 	File /a `/oname=$R0` `${LAMEXP_SOURCE_PATH}\LameXP.exe`
 	File /nonfatal /a /r `${LAMEXP_SOURCE_PATH}\*.dll`
+	
+	${StdUtils.GetFileNamePart} $R1 "$R0"
+	File /a `/oname=$R1.VisualElementsManifest.xml` `${LAMEXP_SOURCE_PATH}\LameXP.VisualElementsManifest.xml`
 	
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.txt`
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.html`

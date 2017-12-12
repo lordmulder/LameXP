@@ -17,6 +17,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Complete re-write of MediaInfo parsing code, now using XML-based MediaInfo output
 * Improved auto-detection of max. parallel instances on computers with "fast" (i.e. SSD or similar) drive
 * Some improvements to output file name generation code
+* Added "Visual Elements" manifest for Windows 8+ "Start" screen tile
 
 ## LameXP v4.15 [2017-05-31] ## {-}
 
