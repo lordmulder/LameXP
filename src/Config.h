@@ -35,7 +35,7 @@
 #define VER_LAMEXP_MINOR_LO					6
 #define VER_LAMEXP_TYPE						Beta
 #define VER_LAMEXP_PATCH					2
-#define VER_LAMEXP_BUILD					2075
+#define VER_LAMEXP_BUILD					2077
 #define VER_LAMEXP_CONFG					2002
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@
 #define VER_LAMEXP_TOOL_NEROAAC				1540
 #define VER_LAMEXP_TOOL_FHGAACENC			20151024
 #define VER_LAMEXP_TOOL_FDKAACENC			62
-#define VER_LAMEXP_TOOL_QAAC				258
+#define VER_LAMEXP_TOOL_QAAC				264
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper macros (aka: having fun with the C pre-processor)
