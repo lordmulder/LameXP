@@ -88,6 +88,17 @@ static unsigned int cores2threads(const unsigned int cores)
 	return qRound(abs(y));
 }
 
+/* create regular expression list*/
+static QList<QRegExp> createRegExpList(const char *const *const regExpList)
+{
+	QList<QRegExp> result;
+	for (size_t i = 0; regExpList[i]; ++i)
+	{
+		result << MAKE_REGEXP(regExpList[i]);
+	}
+	return result;
+}
+
 ////////////////////////////////////////////////////////////
 // BaseTask class
 ////////////////////////////////////////////////////////////
@@ -283,10 +294,22 @@ public:
 protected:
 	void taskMain(void)
 	{
-		initAacEncImpl(m_encoder_info->toolName, m_encoder_info->fileNames, m_encoder_info->checkArgs ? (QStringList() << QString::fromLatin1(m_encoder_info->checkArgs)) : QStringList(), m_encoder_info->toolMinVersion, m_encoder_info->verDigits, m_encoder_info->verShift, m_encoder_info->verStr, MAKE_REGEXP(m_encoder_info->regExpVer), MAKE_REGEXP(m_encoder_info->regExpSig));
+		initAacEncImpl
+		(
+			m_encoder_info->toolName,
+			m_encoder_info->fileNames,
+			m_encoder_info->checkArgs ? (QStringList() << QString::fromLatin1(m_encoder_info->checkArgs)) : QStringList(),
+			m_encoder_info->toolMinVersion,
+			m_encoder_info->verDigits,
+			m_encoder_info->verShift,
+			m_encoder_info->verStr,
+			MAKE_REGEXP(m_encoder_info->regExpVer),
+			MAKE_REGEXP(m_encoder_info->regExpSig),
+			m_encoder_info->regExpLib[0] ? createRegExpList(m_encoder_info->regExpLib) : QList<QRegExp>()
+		);
 	}
 
-	static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp());
+	static void initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig = QRegExp(), const QList<QRegExp> &regExpLib = QList<QRegExp>());
 
 private:
 	const aac_encoder_t *const m_encoder_info;
@@ -598,7 +621,7 @@ void InitializationThread::initTranslations(void)
 // AAC Encoder Detection
 ////////////////////////////////////////////////////////////
 
-void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig)
+void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *const fileNames[], const QStringList &checkArgs, const quint32 &toolMinVersion, const quint32 &verDigits, const quint32 &verShift, const char *const verStr, QRegExp &regExpVer, QRegExp &regExpSig, const QList<QRegExp> &regExpLib)
 {
 	static const size_t MAX_FILES = 8;
 	const QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
@@ -654,8 +677,9 @@ void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *cons
 		return;
 	}
 
-	quint32 toolVersion = 0;
+	quint32 toolVersion = quint32(-1);
 	bool sigFound = regExpSig.isEmpty() ? true : false;
+	QVector<bool> extraLib(regExpLib.count(), false);
 
 	while(process.state() != QProcess::NotRunning)
 	{
@@ -671,39 +695,55 @@ void InitAacEncTask::initAacEncImpl(const char *const toolName, const char *cons
 		}
 		while(process.canReadLine())
 		{
-			QString line = QString::fromUtf8(process.readLine().constData()).simplified();
-			if((!sigFound) && regExpSig.lastIndexIn(line) >= 0)
+			const QString line = QString::fromUtf8(process.readLine().constData()).simplified();
+			if (!sigFound)
 			{
-				sigFound = true;
-				continue;
+				sigFound = (regExpSig.lastIndexIn(line) >= 0);
 			}
-			if(sigFound && (regExpVer.lastIndexIn(line) >= 0))
+			if (sigFound)
 			{
-				quint32 tmp[8];
-				if(MUtils::regexp_parse_uint32(regExpVer, tmp, qMin(verDigits, 8U)))
+				if (regExpVer.lastIndexIn(line) >= 0)
 				{
-					toolVersion = 0;
-					for(quint32 i = 0; i < verDigits; i++)
+					quint32 tmp[8];
+					if (MUtils::regexp_parse_uint32(regExpVer, tmp, qMin(verDigits, 8U)))
 					{
-						toolVersion = (verShift > 0) ? ((toolVersion * verShift) + qBound(0U, tmp[i], (verShift - 1))) : tmp[i];
+						toolVersion = 0;
+						for (quint32 i = 0; i < verDigits; i++)
+						{
+							toolVersion = (verShift > 0) ? ((toolVersion * verShift) + qBound(0U, tmp[i], (verShift - 1))) : tmp[i];
+						}
 					}
+				}
+				for (int i = 0; i < regExpLib.count(); ++i)
+				{
+					extraLib[i] = extraLib[i] || (regExpLib[i].lastIndexIn(line) >= 0);
 				}
 			}
 		}
 	}
 
-	if(toolVersion <= 0)
+	if((toolVersion == 0) || (toolVersion == quint32(-1)))
 	{
 		qWarning("%s version could not be determined -> Encoding support will be disabled!", toolName);
 		return;
 	}
-	else if(toolVersion < toolMinVersion)
+
+	if(toolVersion < toolMinVersion)
 	{
 		qWarning("%s version is too much outdated (%s) -> Encoding support will be disabled!", toolName, MUTILS_UTF8(lamexp_version2string(verStr, toolVersion,    "N/A")));
 		qWarning("Minimum required %s version currently is: %s\n",                             toolName, MUTILS_UTF8(lamexp_version2string(verStr, toolMinVersion, "N/A")));
 		return;
 	}
 
+	for (int i = 0; i < extraLib.count(); ++i)
+	{
+		if (!extraLib[i])
+		{
+			qWarning("%s lacks companion library (%s) -> Encoding support will be disabled!\n", toolName, MUTILS_UTF8(regExpLib[i].pattern()));
+			return;
+		}
+	}
+	
 	qDebug("Enabled %s encoder %s.\n", toolName, MUTILS_UTF8(lamexp_version2string(verStr, toolVersion, "N/A")));
 
 	size_t index = 0;

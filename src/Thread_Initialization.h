@@ -55,11 +55,6 @@ private:
 	void delay(void);
 	void initTranslations(void);
 	
-	static void initAacEnc_Nero(void);
-	static void initAacEnc_FHG(void);
-	static void initAacEnc_FDK(void);
-	static void initAacEnc_QAAC(void);
-
 	bool m_bSuccess;
 	MUtils::CPUFetaures::cpu_info_t m_cpuFeatures;
 	bool m_slowIndicator;
