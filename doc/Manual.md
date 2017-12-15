@@ -292,6 +292,7 @@ First of all, you need to download the [QAAC](https://github.com/nu774/qaac) app
 
 * <http://sourceforge.net/projects/lamexp/files/Miscellaneous/Add-ins/qaac/>
 * <http://muldersoft.com/misc/lamexp/add-ins/qaac/>
+* <http://www.mediafire.com/folder/hmdfud5buajuh/qaac>
 
 Now open the downloaded ZIP file, e.g. ``LameXP.qaac-addin.yyyy-mm-dd.zip``, with your favourite file archive software (we recommend using [7-Zip](http://www.7-zip.org/) or [WinRAR](http://www.rarlab.com/download.htm)) to find the required QAAC program files.
 
@@ -523,13 +524,17 @@ The latest *official* release of the LameXP software can be obtained from one of
 
 * <https://github.com/lordmulder/LameXP/releases/latest>
 * <http://sourceforge.net/projects/lamexp/files/>
-* <https://lamexp.codeplex.com/releases/>
 * <https://bitbucket.org/muldersoft/lamexp/downloads>
 * <https://www.assembla.com/spaces/lamexp/documents>
+* <http://www.mediafire.com/folder/nbkdinut804o2/LameXP>
+
+The following web-sites, which are *not* affiliated with the developer of LameXP, provide additional download mirrors:
+
 * <http://www.free-codecs.com/lamexp_download.htm>
 * <http://www.videohelp.com/tools/LameXP>
+* <http://www.majorgeeks.com/files/details/lamexp.html>
 
-It is *highly recommended* to download LameXP *only* from one of the official mirrors listed above. We are **not** responsible for the integrity and trustworthiness of LameXP downloads you may have received from other locations!
+It is *highly recommended* to download LameXP *only* from one of the mirrors listed above. We are **not** responsible for the integrity and trustworthiness of LameXP downloads you may have received from other locations!
 
 
 ## Diagnostic Output ##
@@ -580,8 +585,6 @@ The source code of the **LameXP** software is managed using the [*Git*](http://g
 
 * ``git clone https://github.com/lordmulder/LameXP.git LameXP`` ([Browse](https://github.com/lordmulder/LameXP))
 
-* ``git clone https://git01.codeplex.com/lamexp LameXP`` ([Browse](https://lamexp.codeplex.com/SourceControl/latest))
-
 * ``git clone https://bitbucket.org/muldersoft/lamexp.git LameXP`` ([Browse](https://bitbucket.org/muldersoft/lamexp/src))
 
 * ``git clone git://git.assembla.com/lamexp.git LameXP`` ([Browse](https://www.assembla.com/code/lamexp/git/nodes))
@@ -595,8 +598,6 @@ The source code of the **MUtilities** library is managed using the [*Git*](http:
 * ``git clone git://git.code.sf.net/p/mutilities/code MUtilities`` ([Browse](http://sourceforge.net/p/mutilities/code/))
 
 * ``git clone https://github.com/lordmulder/MUtilities.git MUtilities`` ([Browse](https://github.com/lordmulder/MUtilities))
-
-* ``git clone https://git01.codeplex.com/mutilities MUtilities`` ([Browse](https://mutilities.codeplex.com/SourceControl/latest))
 
 * ``git clone https://bitbucket.org/muldersoft/mutilities.git MUtilities`` ([Browse](https://bitbucket.org/muldersoft/mutilities/src))
 
@@ -615,7 +616,7 @@ LameXP is currently being developed and built using the following development to
 
 * [Visual Studio 2015 Update-1](https://www.visualstudio.com/), running on Windows 10 x64 (v1511)
 
-* [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows (our *pre-compiled* Qt libraries for Visual Studio 2015 can be found [**here**](http://sourceforge.net/projects/lamexp/files/Miscellaneous/Qt%20Libraries/))
+* [Qt libraries 4.8.7](http://download.qt.io/archive/qt/4.8/) for Windows (our *pre-compiled* Qt libraries for Visual Studio can be found [**here**](https://sourceforge.net/projects/lamexp/files/Miscellaneous/Prerequisites/)
 
 * [Visual Leak Detector](https://vld.codeplex.com/), open-source memory leak detection system for Visual C++
 
