@@ -571,6 +571,9 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.wvunpack-x86-i686.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -1081,6 +1084,9 @@
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
+    </None>
+    <None Include="res\Tools.refalac-sse2.qrc">
+      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -252,6 +252,7 @@
     <file>tools/opusenc.i686.exe</file>
     <file>tools/opusenc.sse2.exe</file>
     <file>tools/refalac.i686.exe</file>
+    <file>tools/refalac.sse2.exe</file>
     <file>tools/refalac.x64.exe</file>
     <file>tools/shorten.exe</file>
     <file>tools/sox.avx.exe</file>
