@@ -574,6 +574,9 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.refalac-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.faad-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Config.h">
@@ -1079,13 +1082,14 @@
     <CustomBuild Include="res\_ALL.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools.refalac-sse2.qrc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
     </None>
-    <None Include="res\Tools.refalac-sse2.qrc">
+    <None Include="res\Tools.faad-avx.qrc">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>

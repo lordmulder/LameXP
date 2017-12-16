@@ -721,9 +721,9 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("FAAD - OpenSource MPEG-4 and MPEG-2 AAC Decoder"),
-		"faad.exe", "v?.?",
+		"faad.exe", "v?.?.?",
 		tr("Released under the terms of the GNU General Public License."),
-		"http://www.audiocoding.com/"
+		"https://sourceforge.net/projects/faac/"	//"http://www.audiocoding.com/"
 	);
 	moreAboutText += makeToolText
 	(

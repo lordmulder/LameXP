@@ -1,0 +1,408 @@
+ frontend/audio.c           |   7 +-
+ frontend/main.c            |  34 ++++++---
+ frontend/mp4read.c         |   7 +-
+ frontend/unicode_support.c | 172 +++++++++++++++++++++++++++++++++++++++++++++
+ frontend/unicode_support.h |  50 +++++++++++++
+ 5 files changed, 258 insertions(+), 12 deletions(-)
+
+diff --git a/frontend/audio.c b/frontend/audio.c
+index 9ab7a2a..0d94c18 100644
+--- a/frontend/audio.c
++++ b/frontend/audio.c
+@@ -38,6 +38,9 @@
+ #include <neaacdec.h>
+ #include <stdint.h>
+ 
++#ifdef _WIN32
++#include "unicode_support.h"
++#endif
+ #include "audio.h"
+ 
+ 
+@@ -74,13 +77,13 @@ audio_file *open_audio_file(char *infile, int samplerate, int channels,
+     if(infile[0] == '-')
+     {
+ #ifdef _WIN32
+-        setmode(fileno(stdout), O_BINARY);
++        _setmode(_fileno(stdout), O_BINARY);
+ #endif
+         aufile->sndfile = stdout;
+         aufile->toStdio = 1;
+     } else {
+         aufile->toStdio = 0;
+-        aufile->sndfile = fopen(infile, "wb");
++        aufile->sndfile = faad_fopen(infile, "wb");
+     }
+ 
+     if (aufile->sndfile == NULL)
+diff --git a/frontend/main.c b/frontend/main.c
+index deaa039..d433253 100644
+--- a/frontend/main.c
++++ b/frontend/main.c
+@@ -35,9 +35,11 @@
+ #ifdef _WIN32
+ #define WIN32_LEAN_AND_MEAN
+ #include <windows.h>
++#include <io.h>
+ #ifndef __MINGW32__
+ #define off_t __int64
+ #endif
++#include "unicode_support.h"
+ #else
+ #include <time.h>
+ #endif
+@@ -479,7 +481,7 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+ 
+     if (adts_out)
+     {
+-        adtsFile = fopen(adts_fn, "wb");
++        adtsFile = faad_fopen(adts_fn, "wb");
+         if (adtsFile == NULL)
+         {
+             faad_fprintf(stderr, "Error opening file: %s\n", adts_fn);
+@@ -491,12 +493,12 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
+     {
+ 	b.infile = stdin;
+ #ifdef _WIN32
+-        setmode(fileno(stdin), O_BINARY);
++        _setmode(_fileno(stdin), O_BINARY);
+ #endif
+ 
+     } else
+     {
+-    	b.infile = fopen(aacfile, "rb");
++    	b.infile = faad_fopen(aacfile, "rb");
+     	if (b.infile == NULL)
+     	{
+     	    /* unable to open file */
+@@ -833,7 +835,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+ 
+     if (adts_out)
+     {
+-        adtsFile = fopen(adts_fn, "wb");
++        adtsFile = faad_fopen(adts_fn, "wb");
+         if (adtsFile == NULL)
+         {
+             faad_fprintf(stderr, "Error opening file: %s\n", adts_fn);
+@@ -953,7 +955,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+                         outputFormat, fileType, aacChannelConfig2wavexChannelMask(&frameInfo));
+                 } else {
+ #ifdef _WIN32
+-                    setmode(fileno(stdout), O_BINARY);
++                    _setmode(_fileno(stdout), O_BINARY);
+ #endif
+                     aufile = open_audio_file("-", frameInfo.samplerate, frameInfo.channels,
+                         outputFormat, fileType, aacChannelConfig2wavexChannelMask(&frameInfo));
+@@ -1007,7 +1009,7 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
+     return frameInfo.error;
+ }
+ 
+-int main(int argc, char *argv[])
++static int faad_main(int argc, char *argv[])
+ {
+     int result;
+     int infoOnly = 0;
+@@ -1265,13 +1267,13 @@ int main(int argc, char *argv[])
+ 	readFromStdin = 1;
+ 	hMP4File  = stdin;
+ #ifdef _WIN32
+-        setmode(fileno(stdin), O_BINARY);
++        _setmode(_fileno(stdin), O_BINARY);
+ #endif
+ 
+     } else {
+ 
+     	mp4file = 0;
+-    	hMP4File = fopen(aacFileName, "rb");
++    	hMP4File = faad_fopen(aacFileName, "rb");
+     	if (!hMP4File)
+     	{
+     	    faad_fprintf(stderr, "Error opening file: %s\n", aacFileName);
+@@ -1338,3 +1340,19 @@ int main(int argc, char *argv[])
+ 
+     return 0;
+ }
++
++int main(int argc, char *argv[])
++{
++#ifdef _WIN32
++	int argc_utf8, exit_code;
++	char **argv_utf8;
++	init_console_utf8(stderr);
++	init_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++	exit_code = faad_main(argc_utf8, argv_utf8);
++	free_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++	uninit_console_utf8();
++	return exit_code;
++#else
++	return faad_main(argc, argv);
++#endif
++}
+\ No newline at end of file
+diff --git a/frontend/mp4read.c b/frontend/mp4read.c
+index c8ca530..be8d591 100644
+--- a/frontend/mp4read.c
++++ b/frontend/mp4read.c
+@@ -24,6 +24,9 @@
+ #include <time.h>
+ #include <limits.h>
+ 
++#ifdef _WIN32
++#include "unicode_support.h"
++#endif
+ #include "mp4read.h"
+ 
+ enum ATOM_TYPE
+@@ -939,7 +942,7 @@ int mp4read_seek(int framenum)
+ 
+ static void mp4info(void)
+ {
+-    fprintf(stderr, "Modification Time:\t\%s", mp4time(mp4config.mtime));
++    fprintf(stderr, "Modification Time:\t\t%s", mp4time(mp4config.mtime));
+     fprintf(stderr, "Samplerate:\t\t%d\n", mp4config.samplerate);
+     fprintf(stderr, "Total samples:\t\t%d\n", mp4config.samples);
+     fprintf(stderr, "Total channels:\t\t%d\n", mp4config.channels);
+@@ -970,7 +973,7 @@ int mp4read_open(char *name)
+ 
+     mp4read_close();
+ 
+-    g_fin = fopen(name, "rb");
++    g_fin = faad_fopen(name, "rb");
+     if (!g_fin)
+         return ERR_FAIL;
+ 
+diff --git a/frontend/unicode_support.c b/frontend/unicode_support.c
+new file mode 100644
+index 0000000..96ea5a4
+--- /dev/null
++++ b/frontend/unicode_support.c
+@@ -0,0 +1,172 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.c
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#if defined WIN32 || defined _WIN32 || defined WIN64 || defined _WIN64
++
++#include "unicode_support.h"
++
++#include <windows.h>
++#include <io.h>
++
++static UINT g_old_output_cp = ((UINT)-1);
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++char *utf16_to_ansi(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_ACP, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_ACP, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	if(Buffer)
++	{
++		Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = (char**) malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	if(NULL == *argv)
++	{
++		fprintf(stderr, "\nFATAL: Malloc failed\n\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++		if(NULL == (*argv)[i])
++		{
++			fprintf(stderr, "\nFATAL: utf16_to_utf8 failed\n\n");
++			exit(-1);
++		}
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
++
++void init_console_utf8(FILE *const stream)
++{
++	if (_isatty(_fileno(stream)))
++	{
++		g_old_output_cp = GetConsoleOutputCP();
++		SetConsoleOutputCP(CP_UTF8);
++	}
++}
++
++void uninit_console_utf8(void)
++{
++	if(g_old_output_cp != ((UINT)-1))
++	{
++		SetConsoleOutputCP(g_old_output_cp);
++	}
++}
++
++#endif
+\ No newline at end of file
+diff --git a/frontend/unicode_support.h b/frontend/unicode_support.h
+new file mode 100644
+index 0000000..eb21877
+--- /dev/null
++++ b/frontend/unicode_support.h
+@@ -0,0 +1,50 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.h
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <stdio.h>
++
++char *utf16_to_utf8(const wchar_t *input);
++char *utf16_to_ansi(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++void init_console_utf8(FILE *const stream);
++void uninit_console_utf8(void);
++
++#ifdef _WIN32
++#define faad_fopen(X,Y) fopen_utf8((X),(Y))
++#else
++#define faad_fopen(X,Y) fopen((X),(Y))
++#endif
++
++#endif //UNICODE_SUPPORT_H_INCLUDED
