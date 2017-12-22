@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA" sourcelanguage="en">
+<TS version="2.1" language="uk_UA" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -649,7 +649,7 @@
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="570"/>
         <source> Output Directory </source>
-        <translation>Вихідна тека</translation>
+        <translation> Вихідна тека </translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="594"/>
@@ -939,7 +939,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="620"/>
         <source> Meta Information </source>
-        <translation>Метадані</translation>
+        <translation> Метадані </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="654"/>
@@ -960,7 +960,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="732"/>
         <source> Options </source>
-        <translation>Налаштування</translation>
+        <translation> Налаштування </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="746"/>
@@ -991,7 +991,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1028"/>
         <source> Rate Control Method </source>
-        <translation>Режим контролю бітрейту</translation>
+        <translation> Режим контролю бітрейту </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1052"/>
@@ -1052,7 +1052,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1673"/>
         <source> LAME Algorithm Quality </source>
-        <translation>Якість алгоритму стиснення LAME</translation>
+        <translation> Якість алгоритму стиснення LAME </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1713"/>
@@ -1173,7 +1173,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2258"/>
         <source> Volume Normalization </source>
-        <translation>Нормалізація гучності</translation>
+        <translation> Нормалізація гучності </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2266"/>
@@ -1188,7 +1188,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2490"/>
         <source> Tone Adjustment </source>
-        <translation>Регулювання тону</translation>
+        <translation> Регулювання тону </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2588"/>
@@ -1233,32 +1233,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation>Додати заміну</translation>
+        <translation>Додати заміну </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation>Видалити заміну</translation>
+        <translation>Видалити заміну </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
         <source>Rename Files </source>
-        <translation>Перейменування файлів</translation>
+        <translation>Перейменування файлів </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation>Регулярні вирази</translation>
+        <translation>Регулярні вирази </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
         <source>File Extensions </source>
-        <translation>Типи файлів</translation>
+        <translation>Типи файлів </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation>Операції з файлами</translation>
+        <translation> Операції з файлами </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
@@ -1268,12 +1268,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
         <source>Reset Advanced Options </source>
-        <translation>Скинути розширені налаштування</translation>
+        <translation>Скинути розширені налаштування </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4613"/>
         <source> Encode Now!</source>
-        <translation>Почати кодування!</translation>
+        <translation> Почати кодування!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4655"/>
@@ -1284,7 +1284,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4691"/>
         <source> Exit Program</source>
-        <translation>Вийти з програми</translation>
+        <translation> Вийти з програми</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4723"/>
@@ -1720,17 +1720,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1593"/>
         <source>Your LameXP install directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш LameXP встановлено в теку:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете безкоштовно завантажити кодер Nero AAC з веб-сайту:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1597"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
-        <translation type="unfinished"></translation>
+        <translation>Примітка: для підтримки кодування в AAC необхідний кодер Nero AAC версії %1 або новішої!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2075"/>
@@ -1837,7 +1837,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2668"/>
         <source> Custom Encoder Parameters </source>
-        <translation>Користувацькі параметри кодування </translation>
+        <translation> Користувацькі параметри кодування </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2743"/>
@@ -1857,7 +1857,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3007"/>
         <source> Multi-Threading </source>
-        <translation>Багатопотоковість</translation>
+        <translation> Багатопотоковість </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3104"/>
@@ -1877,7 +1877,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3171"/>
         <source> Temp Directory </source>
-        <translation>Тека тимчасових файлів</translation>
+        <translation> Тека тимчасових файлів </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3186"/>
@@ -1963,7 +1963,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3301"/>
         <source> Aften A/52 Options </source>
-        <translation>Налаштування Aften A/52 </translation>
+        <translation> Налаштування Aften A/52 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3313"/>
@@ -2184,7 +2184,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3562"/>
         <source> Rename Output Files </source>
-        <translation>Перейменовування вихідних файлів</translation>
+        <translation> Перейменовування вихідних файлів </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3665"/>
@@ -2493,7 +2493,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4109"/>
         <source> Opus Encoder Options </source>
-        <translation>Налаштування кодера Opus</translation>
+        <translation> Налаштування кодера Opus </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4149"/>
@@ -3090,7 +3090,8 @@
         <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation>ПОПЕРЕДЖЕННЯ: Розмір декодованного файла перевищує 4 ГБ, можуть виникнути проблеми!</translation>
+        <translation>ПОПЕРЕДЖЕННЯ: Розмір декодованного файла перевищує 4 ГБ, можуть виникнути проблеми!
+</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="153"/>
