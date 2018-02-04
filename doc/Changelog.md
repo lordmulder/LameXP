@@ -9,7 +9,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Upgraded build environment to Microsoft Visual Studio 2017 with Update-5
 * Updated LAME encoder to v3.100 Final (2017-10-13), compiled with ICL 18.0 and MSVC 14.1
 * Updated mpg123 decoder to v1.25.8 (2017-12-02), compiled with GCC 7.2.0
-* Updated Opus encoder/decoder libraries to v1.2.1-35 (2017-11-16) and Opus-Tools to v0.1.10-9 (2017-05-25)
+* Updated Opus encoder/decoder libraries to v1.3-beta-2 (2018-01-26) and Opus-Tools to v0.1.10-12 (2018-01-02)
 * Updated Monkey's Audio binary to v4.33 (2017-12-01), compiled with ICL 18.0 and MSVC 15.5
 * Updated FAAD decoder to v2.8.6 (2017-10-10), compiled with ICL 18.0 and MSVC 15.5
 * Updated ALAC decoder to refalac v1.64 (2017-05-19), compiled with ICL 18.0 and MSVC 15.5
