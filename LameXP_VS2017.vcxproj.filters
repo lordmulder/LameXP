@@ -412,9 +412,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.dcaenc.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.elevator.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.flac-x64-avx.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -920,9 +917,6 @@
     <CustomBuild Include="res\Tools.dcaenc.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.elevator.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.flac-x64-avx.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1082,15 +1076,15 @@
     <CustomBuild Include="res\_ALL.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.refalac-sse2.qrc" />
+    <CustomBuild Include="res\Tools.faad-avx.qrc" />
+    <CustomBuild Include="res\Tools.refalac-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\MainIcon.ico">
       <Filter>Miscellaneous</Filter>
-    </None>
-    <None Include="res\Tools.faad-avx.qrc">
-      <Filter>Resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
