@@ -947,9 +947,6 @@
     <CustomBuild Include="res\Tools.lame-x86-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.mediaInfo-i686.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.mediainfo-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1080,6 +1077,9 @@
       <Filter>Resources</Filter>
     </CustomBuild>
     <CustomBuild Include="res\Tools.faad-avx.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.mediainfo-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
