@@ -181,6 +181,12 @@ if %ERRORLEVEL% NEQ 0 (
 	pause && exit
 )
 
+"%~dp0\..\..\..\Prerequisites\NSIS\peheader.exe" "%OUT_FILE%.sfx"
+if %ERRORLEVEL% NEQ 0 (
+	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
+	pause && exit
+)
+
 call "%~dp0\..\..\..\Prerequisites\SevenZip\7zSD.cmd" "%OUT_FILE%.sfx" "%OUT_FILE%.exe" "LameXP Setup" "LameXP-Setup-r%VER_LAMEXP_BUILD%"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
@@ -190,6 +196,12 @@ if %ERRORLEVEL% NEQ 0 (
 set "VER_FILEVER=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%.%VER_LAMEXP_MINOR_LO%.%VER_LAMEXP_PATCH%"
 set "VER_PRODUCT=LameXP - Audio Encoder Front-End"
 "%~dp0\..\..\..\Prerequisites\VerPatch\verpatch.exe" "%OUT_FILE%.exe" "%VER_FILEVER%" /pv "%VER_FILEVER%" /fn /s desc "%VER_PRODUCT%" /s product "%VER_PRODUCT%" /s title "LameXP Installer SFX" /s copyright "Copyright (C) LoRd_MuldeR" /s company "Free Software Foundation"
+if %ERRORLEVEL% NEQ 0 (
+	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
+	pause && exit
+)
+
+"%~dp0\..\..\..\Prerequisites\NSIS\peheader.exe" "%OUT_FILE%.exe"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
 	pause && exit
