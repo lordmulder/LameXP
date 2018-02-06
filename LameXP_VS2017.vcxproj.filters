@@ -1076,8 +1076,10 @@
     <CustomBuild Include="res\_ALL.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.faad-avx.qrc" />
     <CustomBuild Include="res\Tools.refalac-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.faad-avx.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
