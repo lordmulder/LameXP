@@ -207,7 +207,7 @@ bool OpusEncoder::encode(const QString &sourceFile, const AudioFileModel_MetaInf
 	}
 
 	int prevProgress = -1;
-	QRegExp regExp(L1S("\\((\\d+)%\\)"));
+	QRegExp regExp(L1S("\\[.\\]\\s+(\\d+)%"));
 
 	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{

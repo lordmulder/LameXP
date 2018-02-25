@@ -69,7 +69,7 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 	}
 
 	int prevProgress = -1;
-	QRegExp regExp("\\((\\d+)%\\)");
+	QRegExp regExp("\\((\\d+)\\.(\\d+)%\\)");
 
 	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
