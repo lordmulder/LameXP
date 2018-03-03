@@ -1,19 +1,19 @@
 [!Update]
-TimestampCreated=2018-02-27
+TimestampCreated=2018-03-03
 
 [MPlayer for Windows]
-BuildNo=135
+BuildNo=136
 DownloadSite=http://forum.doom9.org/showthread.php?t=138725
-DownloadAddress=http://muldersoft.sourceforge.net/update/
-DownloadFilename=MPUI.2016-12-11.exe
-DownloadFilecode=bd690f2957da23572225e5faeb928aa923bbfdbd
-DownloadChecksum=6CA6175962A59A7D39A2930510691D68182B5244CC2E34FAD57420C705E24B40A3A7AD6B615810B59F245B9FB85B9FCA
+DownloadAddress=http://muldersoft.com/update/
+DownloadFilename=MPUI.2018-03-03.exe
+DownloadFilecode=8f4ecad45f616e4abdd17fcd4218487f88fa71af
+DownloadChecksum=E1288CE93E2BABE87C68C9799492EDB9ADC5001F65E608A44E223760B159A282573FF5429D29663BE05E28B82F0A7446
 
 [LameXP]
 BuildNo=2002
 BuildDate=2017-05-31
 DownloadSite=http://forum.doom9.org/showthread.php?t=157726
-DownloadAddress=http://muldersoft.sourceforge.net/update/
+DownloadAddress=http://muldersoft.com/update/
 DownloadFilename=LameXP.2017-05-31.Release-Static.Build-2002.exe
 DownloadFilecode=8f956fea27a0eb2fd896140380da6f6f0fbce41d
 DownloadChecksum=0BA93F81E800F6D756CA858027119CD2F012FB1FF913CB099E70D063C25FC33A1A71BB1DEF141520748AD50F9C3D58D0
@@ -22,7 +22,7 @@ DownloadChecksum=0BA93F81E800F6D756CA858027119CD2F012FB1FF913CB099E70D063C25FC33
 BuildNo=1124
 BuildDate=2018-02-27
 DownloadSite=http://forum.doom9.org/showthread.php?t=144140
-DownloadAddress=http://muldersoft.sourceforge.net/update/
+DownloadAddress=http://muldersoft.com/update/
 DownloadFilename=x264_launcher.2018-02-27.exe
 DownloadFilecode=e162686866b33584b55edb65885723c754a96f3b
 DownloadChecksum=8A5E9778C922C3E0911447918975D99AB1CF2790EDAF693FDA5194334EF5DB9DA86DEE4BADC7A1AFF6BDEBDF1F2C30BB
