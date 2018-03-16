@@ -714,7 +714,7 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("mpg123 - Fast Console MPEG Audio Player/Decoder"),
-		"mpg123.exe", "v?.??.?",
+		"mpg123.exe", "v?.??.??",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://www.mpg123.de/"
 	);
