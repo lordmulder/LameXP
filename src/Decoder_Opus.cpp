@@ -34,6 +34,8 @@
 #include <QRegExp>
 #include <QUuid>
 
+static const quint32 OPUS_DEFAULT_SAMPLING_RATE = 48000;
+
 bool OpusDecoder::m_disableResampling = false;
 
 OpusDecoder::OpusDecoder(void)
@@ -57,7 +59,7 @@ bool OpusDecoder::decode(const QString &sourceFile, const QString &outputFile, Q
 
 	if(m_disableResampling)
 	{
-		args << "--no-resample";
+		args << "--rate" << QString().number(OPUS_DEFAULT_SAMPLING_RATE); /*force 48.000 Hz*/
 	}
 
 	args << QDir::toNativeSeparators(sourceFile);
