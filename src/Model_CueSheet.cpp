@@ -826,16 +826,10 @@ double CueSheetModel::parseTimeIndex(const QString &index)
 	
 	if(rxTimeIndex.indexIn(index) >= 0)
 	{
-		int min, sec, frm;
-		bool minOK, secOK, frmOK;
-
-		min = rxTimeIndex.cap(1).toInt(&minOK);
-		sec = rxTimeIndex.cap(2).toInt(&secOK);
-		frm = rxTimeIndex.cap(3).toInt(&frmOK);
-
-		if(minOK && secOK && frmOK)
+		int time[3];
+		if(MUtils::regexp_parse_int32(rxTimeIndex, time, 3))
 		{
-			return static_cast<double>(60 * min) + static_cast<double>(sec) + (static_cast<double>(frm) / 75.0);
+			return static_cast<double>(60 * time[0]) + static_cast<double>(time[1]) + (static_cast<double>(time[2]) / 75.0);
 		}
 	}
 
@@ -845,19 +839,17 @@ double CueSheetModel::parseTimeIndex(const QString &index)
 
 QString CueSheetModel::indexToString(const double index) const
 {
-	if(!_finite(index) || (index < 0.0) || (index > 86400.0))
+	if((!_finite(index)) || (index < 0.0) || (index > 86400.0))
 	{
 		return QString("??:??.???");
 	}
 	
-	QTime time = QTime().addMSecs(static_cast<int>(floor(0.5 + (index * 1000.0))));
+	const int minutes = static_cast<int>(index / 60.0);
+	if(minutes < 100)
+	{
+		const MUtils::fp_parts_t seconds = MUtils::break_fp(fmod(index, 60.0));
+		return QString().sprintf("%02d:%02d.%03d", minutes, static_cast<int>(seconds.intpart), static_cast<int>(seconds.fractpart * 1000.0));
+	}
 
-	if(time.minute() < 100)
-	{
-		return time.toString("mm:ss.zzz");
-	}
-	else
-	{
-		return QString("99:99.999");
-	}
+	return QString("99:99.999");
 }
