@@ -848,7 +848,7 @@ QString CueSheetModel::indexToString(const double index) const
 	if(minutes < 100)
 	{
 		const MUtils::fp_parts_t seconds = MUtils::break_fp(fmod(index, 60.0));
-		return QString().sprintf("%02d:%02d.%03d", minutes, static_cast<int>(seconds.intpart), static_cast<int>(seconds.fractpart * 1000.0));
+		return QString().sprintf("%02d:%02d.%03d", minutes, static_cast<int>(seconds.parts[0]), static_cast<int>(seconds.parts[1] * 1000.0));
 	}
 
 	return QString("99:99.999");
