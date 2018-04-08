@@ -202,22 +202,22 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="849"/>
         <source>Silk Icons - Over 700 icons in PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Silk 아이콘 - PNG 형식의 700 이상의 아이콘</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="851"/>
         <source>By Mark James, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">By Mark James, 크리에이티브 커먼즈 &apos;BY&apos; 라이선스에 의해 공개됨.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="856"/>
         <source>Angry Chicken and Ghost Scream sound</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">성난 닭과 귀신 울음 소리</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="858"/>
         <source>By Alexander, released under the Creative Commons &apos;BY&apos; License.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">By Alexander, 크리에이티브 커먼즈 &apos;BY&apos; 라이선스에 의해 공개됨.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="863"/>
@@ -632,7 +632,7 @@
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="570"/>
         <source> Output Directory </source>
-        <translation type="unfinished">출력 디렉터리</translation>
+        <translation type="unfinished"> 출력 디렉터리 </translation>
     </message>
     <message>
         <location filename="../../gui/CueSheetImport.ui" line="594"/>
@@ -896,12 +896,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="445"/>
         <source>Goto Home Folder</source>
-        <translation type="unfinished">홈 폴더로 </translation>
+        <translation type="unfinished">홈 폴더로</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="468"/>
         <source>Goto Music Folder</source>
-        <translation type="unfinished">뮤직 폴더로 </translation>
+        <translation>뮤직 폴더로 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="491"/>
@@ -932,7 +932,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="620"/>
         <source> Meta Information </source>
-        <translation type="unfinished">메타 정보</translation>
+        <translation> 메타 정보</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="654"/>
@@ -953,7 +953,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="732"/>
         <source> Options </source>
-        <translation type="unfinished">옵션</translation>
+        <translation> 옵션</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="746"/>
@@ -1045,7 +1045,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="1673"/>
         <source> LAME Algorithm Quality </source>
-        <translation type="unfinished"> LAME 알고리듬 품질</translation>
+        <translation type="unfinished"> LAME 알고리즘 품질 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="1713"/>
@@ -1166,7 +1166,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2258"/>
         <source> Volume Normalization </source>
-        <translation type="unfinished">볼륨 평준화</translation>
+        <translation type="unfinished"> 볼륨 평준화 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2266"/>
@@ -1181,7 +1181,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="2490"/>
         <source> Tone Adjustment </source>
-        <translation type="unfinished">톤 조정</translation>
+        <translation type="unfinished"> 톤 조정 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="2588"/>
@@ -1236,7 +1236,7 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3171"/>
         <source> Temp Directory </source>
-        <translation type="unfinished">임시 디렉터리</translation>
+        <translation type="unfinished"> 임시 디렉터리 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="3186"/>
@@ -1281,32 +1281,32 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="3992"/>
         <source>Add Overwrite </source>
-        <translation type="unfinished">덮어쓰기 추가</translation>
+        <translation type="unfinished">덮어쓰기 추가 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4003"/>
         <source>Remove Overwrite </source>
-        <translation type="unfinished">덮어쓰기 제거</translation>
+        <translation type="unfinished">덮어쓰기 제거 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4040"/>
         <source>Rename Files </source>
-        <translation type="unfinished">파일 이름 변경</translation>
+        <translation type="unfinished">파일 이름 변경 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4057"/>
         <source>Regular Expressions </source>
-        <translation type="unfinished">정규식</translation>
+        <translation type="unfinished">정규식 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4071"/>
         <source>File Extensions </source>
-        <translation type="unfinished">파일 확장자</translation>
+        <translation type="unfinished">파일 확장자 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4329"/>
         <source> File Operations </source>
-        <translation type="unfinished">파일 작업</translation>
+        <translation type="unfinished"> 파일 작업 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4487"/>
@@ -1316,12 +1316,12 @@
     <message>
         <location filename="../../gui/MainWindow.ui" line="4547"/>
         <source>Reset Advanced Options </source>
-        <translation type="unfinished">고급 옵션 재설정</translation>
+        <translation type="unfinished">고급 옵션 재설정 </translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4613"/>
         <source> Encode Now!</source>
-        <translation type="unfinished">인코딩 시작!</translation>
+        <translation type="unfinished"> 인코딩 시작!</translation>
     </message>
     <message>
         <location filename="../../gui/MainWindow.ui" line="4655"/>
@@ -1595,7 +1595,7 @@
         <location filename="../../src/Dialog_MainWindow.cpp" line="1518"/>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1545"/>
         <source>Exit Program</source>
-        <translation type="unfinished"> 끝내기</translation>
+        <translation type="unfinished">끝내기</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1532"/>
@@ -1829,17 +1829,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1593"/>
         <source>Your LameXP install directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LameXP 설치 디렉터리는 여기에 있습니다:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">이 웹사이트에서 무료로 Nero AAC 인코더를 내려받을 수 있습니다:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1597"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Note: AAC 인코딩 지원을 사용하려면 Nero AAC 인코더 버전 %1 또는 상위 버전이 필요합니다!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2075"/>
@@ -3037,7 +3037,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="519"/>
         <source>Failed to generate non-existing target file name!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">존재하지 않는 대상 파일 이름을 생성하지 못했습니다!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="527"/>
@@ -3073,7 +3073,8 @@
         <location filename="../../src/Thread_Process.cpp" line="238"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
-        <translation type="unfinished">알림: 디코드 파일 크기가 4GB 초과, 문제가 발생할 수 있습니다!</translation>
+        <translation type="unfinished">경고: 디코드 파일 크기가 4GB 초과, 문제가 발생할 수 있습니다!
+</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="153"/>
@@ -3387,7 +3388,7 @@
     <message>
         <location filename="../../gui/SplashScreen.ui" line="108"/>
         <source>LameXP is launching...</source>
-        <translation type="unfinished">LameXP 실행 중...</translation>
+        <translation type="unfinished">LameXP 시작 중...</translation>
     </message>
 </context>
 <context>
@@ -3425,7 +3426,7 @@
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="573"/>
         <source>Press Esc button to cancel update check...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">업데이트 확인을 취소하려면 Esc 버튼을 누르십시오...</translation>
     </message>
     <message>
         <location filename="../../gui/UpdateDialog.ui" line="602"/>
@@ -3486,7 +3487,7 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="208"/>
         <source>Stopping update check, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">업데이트 확인 중지 중, 잠시 기다려 주십시오...</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="298"/>
@@ -3516,12 +3517,12 @@
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="327"/>
         <source>Update check has been cancelled!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">업데이트 확인이 취소되었습니다!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="328"/>
         <source>The update check has been cancelled by the user. Please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">업데이트 확인이 취소되었습니다. 나중에 다시 시도하시기 바랍니다.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_Update.cpp" line="396"/>
