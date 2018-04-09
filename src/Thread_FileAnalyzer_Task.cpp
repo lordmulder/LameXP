@@ -526,8 +526,8 @@ bool AnalyzeTask::checkFile_CDDA(QFile &file)
 
 void AnalyzeTask::retrieveCover(AudioFileModel &audioFile, const QString &coverType, const QString &coverData)
 {
-	static const QByteArray content = QByteArray::fromBase64(coverData.toLatin1());
-	static const QString type = m_mimeTypes.value(coverType.toLower());
+	const QByteArray content = QByteArray::fromBase64(coverData.toLatin1());
+	const QString type = m_mimeTypes.value(coverType.toLower());
 	qDebug("Retrieving cover! (mime=\"%s\", type=\"%s\", len=%d)", MUTILS_L1STR(coverType), MUTILS_L1STR(type), content.size());
 	if(!QImage::fromData(content, type.isEmpty() ? NULL : MUTILS_L1STR(type.toUpper())).isNull())
 	{
