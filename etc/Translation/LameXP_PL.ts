@@ -2178,17 +2178,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1593"/>
         <source>Your LameXP install directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Folder instalacyjny LameXP znajduje sie tutaj:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Możesz za darmo pobrać koder Nero AAC z tej strony:</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1597"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uwaga: Do kompresji AAC wymagana jest wersja %1 kodera Nero AAC lub nowsza!</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1767"/>
@@ -3070,7 +3070,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="519"/>
         <source>Failed to generate non-existing target file name!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można utworzyć pliku bez nazwy!</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="527"/>
