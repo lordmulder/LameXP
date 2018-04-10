@@ -2324,17 +2324,17 @@
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1593"/>
         <source>Your LameXP install directory is located here:</source>
-        <translation type="unfinished"></translation>
+        <translation>您的LameXP安装路径如下：</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1595"/>
         <source>You can download the Nero AAC encoder for free from this website:</source>
-        <translation type="unfinished"></translation>
+        <translation>您可以免费从以下网址下载Nero AAC解码器：</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="1597"/>
         <source>Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!</source>
-        <translation type="unfinished"></translation>
+        <translation>注意：需要%1或更新版本的Nero AAC解码器来实现AAC解码！</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_MainWindow.cpp" line="2454"/>
@@ -3037,7 +3037,7 @@
     <message>
         <location filename="../../src/Thread_Process.cpp" line="519"/>
         <source>Failed to generate non-existing target file name!</source>
-        <translation type="unfinished"></translation>
+        <translation>无法为不存在的目标文件命名！</translation>
     </message>
     <message>
         <location filename="../../src/Thread_Process.cpp" line="527"/>
