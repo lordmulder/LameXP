@@ -531,18 +531,26 @@ bool AboutDialog::eventFilter(QObject *obj, QEvent *event)
 void AboutDialog::initInformationTab(void)
 {
 	const QDate versionDate = MUtils::Version::app_build_date();
+	const QTime versionTime = MUtils::Version::app_build_time();
 
-	const QString versionStr = QString().sprintf
+	const QString versionStr = QString("Version %1 %2, Build %3 [%4] [%5]").arg
 	(
-		"Version %d.%02d %s, Build %d [%s], %s %s, Qt v%s",
-		lamexp_version_major(),
-		lamexp_version_minor(),
-		lamexp_version_release(),
-		lamexp_version_build(),
-		versionDate.toString(Qt::ISODate).toLatin1().constData(),
-		MUtils::Version::compiler_version(),
-		MUtils::Version::compiler_arch(),
-		qVersion()
+		QString().sprintf("%u.%02u", lamexp_version_major(), lamexp_version_minor()),
+		QString::fromLatin1(lamexp_version_release()),
+		QString::number(lamexp_version_build()),
+		versionDate.toString(Qt::ISODate),
+		versionTime.toString(Qt::ISODate)
+	);
+
+	const QString platformStr = QString("%1 [%2], MUtilities %3 [%4] [%5], Qt Framework v%6 [%7]").arg
+	(
+		QString::fromLatin1(MUtils::Version::compiler_version()),
+		QString::fromLatin1(MUtils::Version::compiler_arch()),
+		QString().sprintf("%u.%02u", MUtils::Version::lib_version_major(), MUtils::Version::lib_version_minor()),
+		MUtils::Version::lib_build_date().toString(Qt::ISODate).toLatin1().constData(),
+		MUtils::Version::lib_build_time().toString(Qt::ISODate).toLatin1().constData(),
+		QString::fromLatin1(qVersion()),
+		QString::fromLatin1(QT_PACKAGEDATE_STR)
 	);
 
 	const QString copyrightStr = QString().sprintf
@@ -555,7 +563,8 @@ void AboutDialog::initInformationTab(void)
 
 	aboutText += QString("<h2>%1</h2>").arg(NOBR(tr("LameXP - Audio Encoder Front-end")));
 	aboutText += QString("<b>%1</b><br>").arg(NOBR(copyrightStr));
-	aboutText += QString("<b>%1</b><br><br>").arg(NOBR(versionStr));
+	aboutText += QString("<b>%1</b><br>").arg(NOBR(versionStr));
+	aboutText += QString("<b>%1</b><br><br>").arg(NOBR(platformStr));
 	aboutText += QString("%1<br>").arg(NOBR(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url()))));
 
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
@@ -812,7 +821,7 @@ void AboutDialog::initSoftwareTab(void)
 	moreAboutText += makeToolText
 	(
 		tr("MediaInfo - Media File Analysis Tool"),
-		"mediainfo.exe", "v?.?.??",
+		"mediainfo.exe", "v??.??.?",
 		tr("Released under the terms of the GNU Lesser General Public License."),
 		"http://mediainfo.sourceforge.net/"
 	);
