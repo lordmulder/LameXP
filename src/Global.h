@@ -88,4 +88,4 @@ const QString lamexp_version2string(const QString &pattern, unsigned int version
 ///////////////////////////////////////////////////////////////////////////////
 
 #define L1S(STR) (QLatin1String((STR)))
-#define NOBR(STR) (QString("<nobr>%1</nobr>").arg((STR)).replace("-", "&minus;"))
+#define NOBR(STR) (QString("<nobr>%1</nobr>").arg((STR)).replace(L1S("-"), L1S("&#8209;")))
