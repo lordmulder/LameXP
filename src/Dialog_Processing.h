@@ -110,7 +110,7 @@ private:
 	Ui::ProcessingDialog *ui; //for Qt UIC
 
 	QThreadPool *createThreadPool(void);
-	AudioFileModel updateMetaInfo(AudioFileModel &audioFile);
+	void updateMetaInfo(AudioFileModel &audioFile);
 	void writePlayList(void);
 	bool shutdownComputer(void);
 	

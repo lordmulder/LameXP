@@ -554,20 +554,22 @@ void ProcessingDialog::startNextJob(void)
 	m_currentFile++;
 	m_runningThreads++;
 
-	AudioFileModel currentFile = updateMetaInfo(m_pendingJobs.takeFirst());
+	//Fetch next file
+	AudioFileModel currentFile = m_pendingJobs.takeFirst();
+	updateMetaInfo(currentFile);
 
 	//Create encoder instance
 	AbstractEncoder *encoder = EncoderRegistry::createInstance(m_settings->compressionEncoder(), m_settings);
 
 	//Create processing thread
-	ProcessThread *thread = new ProcessThread
+	QScopedPointer<ProcessThread> thread(new ProcessThread
 	(
 		currentFile,
 		(m_settings->outputToSourceDir() ? QFileInfo(currentFile.filePath()).absolutePath() : m_settings->outputDir()),
 		m_tempFolder,
 		encoder,
 		m_settings->prependRelativeSourcePath() && (!m_settings->outputToSourceDir())
-	);
+	));
 
 	//Add audio filters
 	if(m_settings->forceStereoDownmix())
@@ -618,15 +620,16 @@ void ProcessingDialog::startNextJob(void)
 		thread->setKeepDateTime(m_settings->keepOriginalDataTime());
 	}
 
+	//Save job UUID
 	m_allJobs.append(thread->getId());
 	
 	//Connect thread signals
-	connect(thread, SIGNAL(processFinished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel.data(), SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel.data(), SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
-	connect(thread, SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel.data(), SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
-	connect(this, SIGNAL(abortRunningTasks()), thread, SLOT(abort()), Qt::DirectConnection);
+	connect(thread.data(), SIGNAL(processFinished()), this, SLOT(doneEncoding()), Qt::QueuedConnection);
+	connect(thread.data(), SIGNAL(processStateInitialized(QUuid,QString,QString,int)), m_progressModel.data(), SLOT(addJob(QUuid,QString,QString,int)), Qt::QueuedConnection);
+	connect(thread.data(), SIGNAL(processStateChanged(QUuid,QString,int)), m_progressModel.data(), SLOT(updateJob(QUuid,QString,int)), Qt::QueuedConnection);
+	connect(thread.data(), SIGNAL(processStateFinished(QUuid,QString,int)), this, SLOT(processFinished(QUuid,QString,int)), Qt::QueuedConnection);
+	connect(thread.data(), SIGNAL(processMessageLogged(QUuid,QString)), m_progressModel.data(), SLOT(appendToLog(QUuid,QString)), Qt::QueuedConnection);
+	connect(this, SIGNAL(abortRunningTasks()), thread.data(), SLOT(abort()), Qt::DirectConnection);
 
 	//Initialize thread object
 	if(!thread->init())
@@ -637,8 +640,11 @@ void ProcessingDialog::startNextJob(void)
 	//Give it a go!
 	if(!thread->start(m_threadPool.data()))
 	{
-		qWarning("Job failed to start or file was skipped!");
+		qWarning("Job failed to start or the file was skipped!");
+		return;
 	}
+
+	thread.take(); //will be auto-deleted by QThreadPool!
 }
 
 void ProcessingDialog::abortEncoding(bool force)
@@ -1045,12 +1051,12 @@ void ProcessingDialog::writePlayList(void)
 	}
 }
 
-AudioFileModel ProcessingDialog::updateMetaInfo(AudioFileModel &audioFile)
+void ProcessingDialog::updateMetaInfo(AudioFileModel &audioFile)
 {
 	if(!m_settings->writeMetaTags())
 	{
 		audioFile.metaInfo().reset();
-		return audioFile;
+		return;
 	}
 	
 	audioFile.metaInfo().update(*m_metaInfo, true);
@@ -1059,8 +1065,6 @@ AudioFileModel ProcessingDialog::updateMetaInfo(AudioFileModel &audioFile)
 	{
 		audioFile.metaInfo().setPosition(m_currentFile);
 	}
-
-	return audioFile;
 }
 
 void ProcessingDialog::systemTrayActivated(QSystemTrayIcon::ActivationReason reason)
