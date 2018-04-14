@@ -561,41 +561,41 @@ void AboutDialog::initInformationTab(void)
 
 	QString aboutText;
 
-	aboutText += QString("<h2>%1</h2>").arg(NOBR(tr("LameXP - Audio Encoder Front-end")));
-	aboutText += QString("<b>%1</b><br>").arg(NOBR(copyrightStr));
-	aboutText += QString("<b>%1</b><br>").arg(NOBR(versionStr));
-	aboutText += QString("<b>%1</b><br><br>").arg(NOBR(platformStr));
-	aboutText += QString("%1<br>").arg(NOBR(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url()))));
+	aboutText += QString("<h2>%1</h2>").arg(tr("LameXP - Audio Encoder Front-end"));
+	aboutText += QString("<b>%1</b><br>").arg(copyrightStr);
+	aboutText += QString("<b>%1</b><br>").arg(versionStr);
+	aboutText += QString("<b>%1</b><br><br>").arg(platformStr);
+	aboutText += QString("%1<br>").arg(tr("Please visit %1 for news and updates!").arg(LINK(lamexp_website_url())));
 
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 	const QDate currentDate = MUtils::OS::current_date();
 	if(MUTILS_DEBUG)
 	{
 		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0);
-		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
+		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
 	}
 	else if(lamexp_version_demo())
 	{
 		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0);
-		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
+		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
 	}
 #else
 	const QDate currentDate = lamexp_current_date_safe();
 	if(LAMEXP_DEBUG)
 	{
 		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0i64);
-		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
+		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(QString("!!! --- DEBUG BUILD --- Expires at: %1 &middot; Days left: %2 --- DEBUG BUILD --- !!!").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
 	}
 	else if(lamexp_version_demo())
 	{
 		int daysLeft = qMax(currentDate.daysTo(lamexp_version_expires()), 0i64);
-		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(NOBR(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft))));
+		aboutText += QString("<hr><font color=\"crimson\">%1</font>").arg(tr("Note: This demo (pre-release) version of LameXP will expire at %1. Still %2 days left.").arg(lamexp_version_expires().toString(Qt::ISODate), QString::number(daysLeft)));
 	}
 #endif
 
 	aboutText += "<hr><br>";
 	
-	aboutText += "<nobr><tt>This program is free software; you can redistribute it and/or modify<br>";
+	aboutText += "<tt>This program is free software; you can redistribute it and/or modify<br>";
 	aboutText += "it under the terms of the GNU General Public License as published by<br>";
 	aboutText += "the Free Software Foundation; either version 2 of the License, or<br>";
 	aboutText += "(at your option) any later version, but always including the *additional*<br>";
@@ -606,13 +606,13 @@ void AboutDialog::initInformationTab(void)
 	aboutText += "GNU General Public License for more details.<br><br>";
 	aboutText += "You should have received a copy of the GNU General Public License<br>";
 	aboutText += "along with this program; if not, write to the Free Software<br>";
-	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110&minus;1301, USA.</tt></nobr><br>";
+	aboutText += "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110&minus;1301, USA.</tt><br>";
 	aboutText += "<hr><table style=\"margin-top:4px\"><tr>";
 	aboutText += "<td valign=\"middle\"><img src=\":/icons/error_big.png\"</td><td>&nbsp;</td>";
-	aboutText += QString("<td><font color=\"darkred\">%1</font></td>").arg(tr("Note: LameXP is free software. Do <b>not</b> pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should <b>not</b> respond to the offer !!!"));
+	aboutText += QString("<td style='white-space:normal'><font color=\"darkred\">%1</font></td>").arg(tr("Note: LameXP is free software. Do <b>not</b> pay money to obtain or use LameXP! If some third-party website tries to make you pay for downloading LameXP, you should <b>not</b> respond to the offer !!!"));
 	aboutText += "</tr></table>";
 
-	ui->infoLabel->setText(aboutText);
+	ui->infoLabel->setText(NOBREAK(aboutText));
 	ui->infoIcon->setPixmap(lamexp_app_icon().pixmap(QSize(72,72)));
 	connect(ui->infoLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
@@ -623,7 +623,7 @@ void AboutDialog::initContributorsTab(void)
 	const QString extraVSpace("<font style=\"font-size:7px\"><br>&nbsp;</font>");
 	
 	QString contributorsAboutText;
-	contributorsAboutText += QString("<h3>%1</h3>").arg(NOBR(tr("The following people have contributed to LameXP:")));
+	contributorsAboutText += QString("<h3>%1</h3>").arg(tr("The following people have contributed to LameXP:"));
 	contributorsAboutText += "<table style=\"margin-top:12px;white-space:nowrap\">";
 	
 	contributorsAboutText += QString("<tr><td colspan=\"7\"><b>%1</b>%2</td></tr>").arg(tr("Programmers:"), extraVSpace);
@@ -663,9 +663,9 @@ void AboutDialog::initContributorsTab(void)
 	}
 
 	contributorsAboutText += "</table><br><br><br>";
-	contributorsAboutText += QString("<i>%1</i><br>").arg(NOBR(tr("If you are willing to contribute a LameXP translation, feel free to contact us!")));
+	contributorsAboutText += QString("<i>%1</i><br>").arg(tr("If you are willing to contribute a LameXP translation, feel free to contact us!"));
 
-	ui->contributorsLabel->setText(contributorsAboutText);
+	ui->contributorsLabel->setText(NOBREAK(contributorsAboutText));
 	ui->contributorsIcon->setPixmap(QIcon(":/images/Logo_Contributors.png").pixmap(QSize(72,84)));
 	connect(ui->contributorsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
@@ -675,7 +675,7 @@ void AboutDialog::initSoftwareTab(void)
 	QString moreAboutText;
 
 	moreAboutText += QString("<h3>%1</h3>").arg(tr("The following third-party software is used in LameXP:"));
-	moreAboutText += "<div style=\"margin-left:-25px;white-space:nowrap\"><table><tr><td><ul>"; //;font-size:7pt
+	moreAboutText += "<ul style='margin-left:-25px'>"; //;font-size:7pt
 	
 	moreAboutText += makeToolText
 	(
@@ -801,14 +801,14 @@ void AboutDialog::initSoftwareTab(void)
 	(
 		tr("wma2wav - Dump WMA files to Wave Audio"),
 		"wma2wav.exe", "????-??-??",
-		tr("Copyright (c) 2011 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved."),
+		tr("Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved."),
 		"http://forum.doom9.org/showthread.php?t=140273"
 	);
 	moreAboutText += makeToolText
 	(
 		tr("avs2wav - Avisynth to Wave Audio converter"),
 		"avs2wav.exe", "v?.?",
-		tr("By Jory Stone <jcsston@toughguy.net> and LoRd_MuldeR <mulder2@gmx.de>."),
+		tr("By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;."),
 		"http://forum.doom9.org/showthread.php?t=70882"
 	);
 	moreAboutText += makeToolText
@@ -867,12 +867,12 @@ void AboutDialog::initSoftwareTab(void)
 		tr("By Alexander, released under the Creative Commons 'BY' License."),
 		"http://www.orangefreesounds.com/"
 	);
-	moreAboutText += QString("</ul></td><td>&nbsp;</td></tr></table></div><br><i>%1</i><br>").arg
+	moreAboutText += QString("</ul><br><i>%1</i><br>").arg
 	(
 		tr("The copyright of LameXP as a whole belongs to LoRd_MuldeR. The copyright of third-party software used in LameXP belongs to the individual authors.")
 	);
 
-	ui->softwareLabel->setText(moreAboutText);
+	ui->softwareLabel->setText(NOBREAK(moreAboutText));
 	ui->softwareIcon->setPixmap(QIcon(":/images/Logo_Software.png").pixmap(QSize(72,65)));
 	connect(ui->softwareLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
@@ -917,7 +917,6 @@ void AboutDialog::initLicenseTab(void)
 	connect(ui->licenseLabel, SIGNAL(linkActivated(QString)), this, SLOT(openURL(QString)));
 }
 
-
 QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBin, const QString &toolVerFmt, const QString &toolLicense, const QString &toolWebsite, const QString &extraInfo)
 {
 	QString toolText, toolTag, verStr(toolVerFmt);
@@ -928,10 +927,10 @@ QString AboutDialog::makeToolText(const QString &toolName, const QString &toolBi
 		verStr = lamexp_version2string(toolVerFmt, version, tr("n/a"), toolTag);
 	}
 
-	toolText += QString("<li>%1<br>").arg(NOBR(QString("<b>%1 (%2)</b>").arg(toolName, verStr)));
-	toolText += QString("%1<br>").arg(NOBR(toolLicense));
-	if(!extraInfo.isEmpty()) toolText += QString("<i>%1</i><br>").arg(NOBR(extraInfo));
-	toolText += QString("<nobr>%1</nobr>").arg(LINK(toolWebsite));
+	toolText += QString("<li>%1<br>").arg(QString("<b>%1 (%2)</b>").arg(toolName, verStr));
+	toolText += QString("%1<br>").arg(toolLicense);
+	if(!extraInfo.isEmpty()) toolText += QString("<i>%1</i><br>").arg(extraInfo);
+	toolText += LINK(toolWebsite);
 	toolText += QString("<font style=\"font-size:9px\"><br>&nbsp;</font>");
 
 	return toolText;

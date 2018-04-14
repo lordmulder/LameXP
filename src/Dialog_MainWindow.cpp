@@ -856,19 +856,19 @@ void MainWindow::addFiles(const QStringList &files)
 
 	if(analyzer->filesDenied())
 	{
-		QMessageBox::warning(this, tr("Access Denied"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because read access was not granted!", "", analyzer->filesDenied())), NOBR(tr("This usually means the file is locked by another process."))));
+		QMessageBox::warning(this, tr("Access Denied"), NOBREAK(QString("%1<br>%2").arg(tr("%n file(s) have been rejected, because read access was not granted!", "", analyzer->filesDenied()), tr("This usually means the file is locked by another process."))));
 	}
 	if(analyzer->filesDummyCDDA())
 	{
-		QMessageBox::warning(this, tr("CDDA Files"), QString("%1<br><br>%2<br>%3").arg(NOBR(tr("%n file(s) have been rejected, because they are dummy CDDA files!", "", analyzer->filesDummyCDDA())), NOBR(tr("Sorry, LameXP cannot extract audio tracks from an Audio-CD at present.")), NOBR(tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>"))));
+		QMessageBox::warning(this, tr("CDDA Files"), NOBREAK(QString("%1<br><br>%2<br>%3").arg(tr("%n file(s) have been rejected, because they are dummy CDDA files!", "", analyzer->filesDummyCDDA()), tr("Sorry, LameXP cannot extract audio tracks from an Audio-CD at present."), tr("We recommend using %1 for that purpose.").arg("<a href=\"http://www.exactaudiocopy.de/\">Exact Audio Copy</a>"))));
 	}
 	if(analyzer->filesCueSheet())
 	{
-		QMessageBox::warning(this, tr("Cue Sheet"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because they appear to be Cue Sheet images!", "",analyzer->filesCueSheet())), NOBR(tr("Please use LameXP's Cue Sheet wizard for importing Cue Sheet files."))));
+		QMessageBox::warning(this, tr("Cue Sheet"), NOBREAK(QString("%1<br>%2").arg(tr("%n file(s) have been rejected, because they appear to be Cue Sheet images!", "",analyzer->filesCueSheet()), tr("Please use LameXP's Cue Sheet wizard for importing Cue Sheet files."))));
 	}
 	if(analyzer->filesRejected())
 	{
-		QMessageBox::warning(this, tr("Files Rejected"), QString("%1<br>%2").arg(NOBR(tr("%n file(s) have been rejected, because the file format could not be recognized!", "", analyzer->filesRejected())), NOBR(tr("This usually means the file is damaged or the file format is not supported."))));
+		QMessageBox::warning(this, tr("Files Rejected"), NOBREAK(QString("%1<br>%2").arg(tr("%n file(s) have been rejected, because the file format could not be recognized!", "", analyzer->filesRejected()), tr("This usually means the file is damaged or the file format is not supported."))));
 	}
 
 	m_banner->close();
@@ -1515,7 +1515,7 @@ void MainWindow::windowShown(void)
 		{
 			qWarning("Binary has expired !!!");
 			MUtils::Sound::play_sound("whammy", false);
-			if(QMessageBox::warning(this, tr("LameXP - Expired"), QString("%1<br>%2").arg(NOBR(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate))), NOBR(tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
+			if(QMessageBox::warning(this, tr("LameXP - Expired"), NOBREAK(QString("%1<br>%2").arg(tr("This demo (pre-release) version of LameXP has expired at %1.").arg(lamexp_version_expires().toString(Qt::ISODate)), tr("LameXP is free software and release versions won't expire."))), tr("Check for Updates"), tr("Exit Program")) == 0)
 			{
 				checkForUpdates();
 			}
@@ -1528,9 +1528,9 @@ void MainWindow::windowShown(void)
 	if(m_settings->slowStartup() && m_settings->antivirNotificationsEnabled())
 	{
 		QString message;
-		message += NOBR(tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP.")).append("<br>");
-		message += NOBR(tr("Please refer to the %1 document for details and solutions!")).arg(LINK_EX(QString("%1/Manual.html#performance-issues").arg(g_documents_base_url), tr("Manual"))).append("<br>");
-		if(QMessageBox::warning(this, tr("Slow Startup"), message, tr("Discard"), tr("Don't Show Again")) == 1)
+		message += tr("It seems that a bogus anti-virus software is slowing down the startup of LameXP.").append("<br>");
+		message += tr("Please refer to the %1 document for details and solutions!").arg(LINK_EX(QString("%1/Manual.html#performance-issues").arg(g_documents_base_url), tr("Manual"))).append("<br>");
+		if(QMessageBox::warning(this, tr("Slow Startup"), NOBREAK(message), tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->antivirNotificationsEnabled(false);
 			ui->actionDisableSlowStartupNotifications->setChecked(!m_settings->antivirNotificationsEnabled());
@@ -1542,7 +1542,7 @@ void MainWindow::windowShown(void)
 	{
 		qWarning("Binary is more than a year old, time to update!");
 		SHOW_CORNER_WIDGET(true);
-		int ret = QMessageBox::warning(this, tr("Urgent Update"), NOBR(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program"), tr("Ignore"));
+		int ret = QMessageBox::warning(this, tr("Urgent Update"), NOBREAK(tr("Your version of LameXP is more than a year old. Time for an update!")), tr("Check for Updates"), tr("Exit Program"), tr("Ignore"));
 		switch(ret)
 		{
 		case 0:
@@ -1570,7 +1570,7 @@ void MainWindow::windowShown(void)
 			SHOW_CORNER_WIDGET(true);
 			if(m_settings->autoUpdateEnabled())
 			{
-				if(QMessageBox::information(this, tr("Update Reminder"), NOBR(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
+				if(QMessageBox::information(this, tr("Update Reminder"), NOBREAK(lastUpdateCheck.isValid() ? tr("Your last update check was more than 14 days ago. Check for updates now?") : tr("Your did not check for LameXP updates yet. Check for updates now?")), tr("Check for Updates"), tr("Postpone")) == 0)
 				{
 					if(checkForUpdates())
 					{
@@ -1588,14 +1588,14 @@ void MainWindow::windowShown(void)
 		QString appPath = QDir(QCoreApplication::applicationDirPath()).canonicalPath();
 		if(appPath.isEmpty()) appPath = QCoreApplication::applicationDirPath();
 		QString messageText;
-		messageText += NOBR(tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.")).append("<br>");
-		messageText += NOBR(tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!")).append("<br><br>");
-		messageText += QString("<b>").append(NOBR(tr("Your LameXP install directory is located here:"))).append("</b><br>");
-		messageText += QString("<nobr><tt>%1</tt></nobr><br><br>").arg(FSLINK(QDir::toNativeSeparators(appPath)));
-		messageText += QString("<b>").append(NOBR(tr("You can download the Nero AAC encoder for free from this website:"))).append("</b><br>");
-		messageText += QString("<nobr><tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt></nobr><br><br>");
-		messageText += QString("<i>").append(NOBR(tr("Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!").arg(lamexp_version2string("v?.?.?.?", lamexp_toolver_neroaac(), "n/a")))).append("</i><br>");
-		if(QMessageBox::information(this, tr("AAC Support Disabled"), messageText, tr("Discard"), tr("Don't Show Again")) == 1)
+		messageText += tr("The Nero AAC encoder could not be found. AAC encoding support will be disabled.").append("<br>");
+		messageText += tr("Please put 'neroAacEnc.exe', 'neroAacDec.exe' and 'neroAacTag.exe' into the LameXP directory!").append("<br><br>");
+		messageText += QString("<b>").append(tr("Your LameXP install directory is located here:")).append("</b><br>");
+		messageText += QString("<tt>%1</tt><br><br>").arg(FSLINK(QDir::toNativeSeparators(appPath)));
+		messageText += QString("<b>").append(tr("You can download the Nero AAC encoder for free from this website:")).append("</b><br>");
+		messageText += QString("<tt>").append(LINK(AboutDialog::neroAacUrl)).append("</tt><br><br>");
+		messageText += QString("<i>").append(tr("Note: Nero AAC encoder version %1 or newer is required to enable AAC encoding support!").arg(lamexp_version2string("v?.?.?.?", lamexp_toolver_neroaac(), "n/a"))).append("</i><br>");
+		if(QMessageBox::information(this, tr("AAC Support Disabled"), NOBREAK(messageText), tr("Discard"), tr("Don't Show Again")) == 1)
 		{
 			m_settings->neroAacNotificationsEnabled(false);
 			ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
@@ -1658,14 +1658,14 @@ void MainWindow::showAnnounceBox(void)
 {
 	const unsigned int timeout = 8U;
 
-	const QString announceText = QString("%1<br><br>%2<br><nobr><tt>%3</tt></nobr><br>").arg
+	const QString announceText = QString("%1<br><br>%2<br><tt>%3</tt><br>").arg
 	(
-		NOBR("We are still looking for LameXP translators!"),
-		NOBR("If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:"),
+		"We are still looking for LameXP translators!",
+		"If you are willing to translate LameXP to your language or to complete an existing translation, please refer to:",
 		LINK("http://lamexp.sourceforge.net/doc/Translate.html")
 	);
 
-	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", announceText, QMessageBox::NoButton, this);
+	QMessageBox *announceBox = new QMessageBox(QMessageBox::Warning, "We want you!", NOBREAK(announceText), QMessageBox::NoButton, this);
 	announceBox->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 	announceBox->setIconPixmap(QIcon(":/images/Announcement.png").pixmap(64,79));
 	
@@ -1726,7 +1726,7 @@ void MainWindow::encodeButtonClicked(void)
 
 	if(m_fileListModel->rowCount() < 1)
 	{
-		QMessageBox::warning(this, tr("LameXP"), NOBR(tr("You must add at least one file to the list before proceeding!")));
+		QMessageBox::warning(this, tr("LameXP"), NOBREAK(tr("You must add at least one file to the list before proceeding!")));
 		ui->tabWidget->setCurrentIndex(0);
 		return;
 	}
@@ -1734,7 +1734,7 @@ void MainWindow::encodeButtonClicked(void)
 	QString tempFolder = m_settings->customTempPathEnabled() ? m_settings->customTempPath() : MUtils::temp_folder();
 	if(!QFileInfo(tempFolder).exists() || !QFileInfo(tempFolder).isDir())
 	{
-		if(QMessageBox::warning(this, tr("Not Found"), QString("%1<br><tt>%2</tt>").arg(NOBR(tr("Your currently selected TEMP folder does not exist anymore:")), NOBR(QDir::toNativeSeparators(tempFolder))), tr("Restore Default"), tr("Cancel")) == 0)
+		if(QMessageBox::warning(this, tr("Not Found"), NOBREAK(QString("%1<br><tt>%2</tt>").arg(tr("Your currently selected TEMP folder does not exist anymore:"), QDir::toNativeSeparators(tempFolder))), tr("Restore Default"), tr("Cancel")) == 0)
 		{
 			SET_CHECKBOX_STATE(ui->checkBoxUseSystemTempFolder, (!m_settings->customTempPathEnabledDefault()));
 		}
@@ -1751,12 +1751,12 @@ void MainWindow::encodeButtonClicked(void)
 			PLAY_SOUND_OPTIONAL("whammy", false);
 			QString lowDiskspaceMsg = QString("%1<br>%2<br><br>%3<br>%4<br>").arg
 			(
-				NOBR(tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier))),
-				NOBR(tr("It is highly recommend to free up more diskspace before proceeding with the encode!")),
-				NOBR(tr("Your TEMP folder is located at:")),
-				QString("<nobr><tt>%1</tt></nobr>").arg(FSLINK(tempFolderParts.join("\\")))
+				tr("There are less than %1 GB of free diskspace available on your system's TEMP folder.").arg(QString::number(minimumFreeDiskspaceMultiplier)),
+				tr("It is highly recommend to free up more diskspace before proceeding with the encode!"),
+				tr("Your TEMP folder is located at:"),
+				QString("<tt>%1</tt>").arg(FSLINK(tempFolderParts.join("\\")))
 			);
-			switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), lowDiskspaceMsg, tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
+			switch(QMessageBox::warning(this, tr("Low Diskspace Warning"), NOBREAK(lowDiskspaceMsg), tr("Abort Encoding Process"), tr("Clean Disk Now"), tr("Ignore")))
 			{
 			case 1:
 				QProcess::startDetached(QString("%1/cleanmgr.exe").arg(MUtils::OS::known_folder(MUtils::OS::FOLDER_SYSTEMFOLDER)), QStringList() << "/D" << tempFolderParts.first());
@@ -1764,7 +1764,7 @@ void MainWindow::encodeButtonClicked(void)
 				return;
 				break;
 			default:
-				QMessageBox::warning(this, tr("Low Diskspace"), NOBR(tr("You are proceeding with low diskspace. Problems might occur!")));
+				QMessageBox::warning(this, tr("Low Diskspace"), NOBREAK(tr("You are proceeding with low diskspace. Problems might occur!")));
 				break;
 			}
 		}
@@ -1793,7 +1793,7 @@ void MainWindow::encodeButtonClicked(void)
 		QFile writeTest(QString("%1/~%2.txt").arg(m_settings->outputDir(), MUtils::next_rand_str()));
 		if(!(writeTest.open(QIODevice::ReadWrite) && (writeTest.write(writeTestBuffer) == strlen(writeTestBuffer))))
 		{
-			QMessageBox::warning(this, tr("LameXP"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("Cannot write to the selected output directory."), m_settings->outputDir(), tr("Please choose a different directory!")));
+			QMessageBox::warning(this, tr("LameXP"), NOBREAK(QString("%1<br>%2<br><br>%3").arg(tr("Cannot write to the selected output directory."), m_settings->outputDir(), tr("Please choose a different directory!"))));
 			ui->tabWidget->setCurrentIndex(1);
 			return;
 		}
@@ -2072,9 +2072,9 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Disable Update Reminder"), NOBR(tr("Do you really want to disable the update reminder?")), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Disable Update Reminder"), NOBREAK(tr("Do you really want to disable the update reminder?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Update Reminder"), QString("%1<br>%2").arg(NOBR(tr("The update reminder has been disabled.")), NOBR(tr("Please remember to check for updates at regular intervals!"))));
+			QMessageBox::information(this, tr("Update Reminder"), NOBREAK(QString("%1<br>%2").arg(tr("The update reminder has been disabled."), tr("Please remember to check for updates at regular intervals!"))));
 			m_settings->autoUpdateEnabled(false);
 		}
 		else
@@ -2084,7 +2084,7 @@ void MainWindow::disableUpdateReminderActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Update Reminder"), NOBR(tr("The update reminder has been re-enabled.")));
+			QMessageBox::information(this, tr("Update Reminder"), NOBREAK(tr("The update reminder has been re-enabled.")));
 			m_settings->autoUpdateEnabled(true);
 	}
 
@@ -2098,9 +2098,9 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Disable Sound Effects"), NOBR(tr("Do you really want to disable all sound effects?")), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Disable Sound Effects"), NOBREAK(tr("Do you really want to disable all sound effects?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Sound Effects"), NOBR(tr("All sound effects have been disabled.")));
+			QMessageBox::information(this, tr("Sound Effects"), NOBREAK(tr("All sound effects have been disabled.")));
 			m_settings->soundsEnabled(false);
 		}
 		else
@@ -2110,7 +2110,7 @@ void MainWindow::disableSoundsActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Sound Effects"), NOBR(tr("The sound effects have been re-enabled.")));
+			QMessageBox::information(this, tr("Sound Effects"), NOBREAK(tr("The sound effects have been re-enabled.")));
 			m_settings->soundsEnabled(true);
 	}
 
@@ -2124,9 +2124,9 @@ void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Nero AAC Notifications"), NOBR(tr("Do you really want to disable all Nero AAC Encoder notifications?")), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Nero AAC Notifications"), NOBREAK(tr("Do you really want to disable all Nero AAC Encoder notifications?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Nero AAC Notifications"), NOBR(tr("All Nero AAC Encoder notifications have been disabled.")));
+			QMessageBox::information(this, tr("Nero AAC Notifications"), NOBREAK(tr("All Nero AAC Encoder notifications have been disabled.")));
 			m_settings->neroAacNotificationsEnabled(false);
 		}
 		else
@@ -2136,8 +2136,8 @@ void MainWindow::disableNeroAacNotificationsActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Nero AAC Notifications"), NOBR(tr("The Nero AAC Encoder notifications have been re-enabled.")));
-			m_settings->neroAacNotificationsEnabled(true);
+		QMessageBox::information(this, tr("Nero AAC Notifications"), NOBREAK(tr("The Nero AAC Encoder notifications have been re-enabled.")));
+		m_settings->neroAacNotificationsEnabled(true);
 	}
 
 	ui->actionDisableNeroAacNotifications->setChecked(!m_settings->neroAacNotificationsEnabled());
@@ -2150,9 +2150,9 @@ void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Slow Startup Notifications"), NOBR(tr("Do you really want to disable the slow startup notifications?")), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Slow Startup Notifications"), NOBREAK(tr("Do you really want to disable the slow startup notifications?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Slow Startup Notifications"), NOBR(tr("The slow startup notifications have been disabled.")));
+			QMessageBox::information(this, tr("Slow Startup Notifications"), NOBREAK(tr("The slow startup notifications have been disabled.")));
 			m_settings->antivirNotificationsEnabled(false);
 		}
 		else
@@ -2162,7 +2162,7 @@ void MainWindow::disableSlowStartupNotificationsActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Slow Startup Notifications"), NOBR(tr("The slow startup notifications have been re-enabled.")));
+			QMessageBox::information(this, tr("Slow Startup Notifications"), NOBREAK(tr("The slow startup notifications have been re-enabled.")));
 			m_settings->antivirNotificationsEnabled(true);
 	}
 
@@ -2243,9 +2243,9 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 	
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Beta Updates"), NOBR(tr("Do you really want LameXP to check for Beta (pre-release) updates?")), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Beta Updates"), NOBREAK(tr("Do you really want LameXP to check for Beta (pre-release) updates?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			if(0 == QMessageBox::information(this, tr("Beta Updates"), NOBR(tr("LameXP will check for Beta (pre-release) updates from now on.")), tr("Check Now"), tr("Discard")))
+			if(0 == QMessageBox::information(this, tr("Beta Updates"), NOBREAK(tr("LameXP will check for Beta (pre-release) updates from now on.")), tr("Check Now"), tr("Discard")))
 			{
 				checkUpdatesNow = true;
 			}
@@ -2258,7 +2258,7 @@ void MainWindow::checkForBetaUpdatesActionTriggered(bool checked)
 	}
 	else
 	{
-		QMessageBox::information(this, tr("Beta Updates"), NOBR(tr("LameXP will <i>not</i> check for Beta (pre-release) updates from now on.")));
+		QMessageBox::information(this, tr("Beta Updates"), NOBREAK(tr("LameXP will <i>not</i> check for Beta (pre-release) updates from now on.")));
 		m_settings->autoUpdateCheckBeta(false);
 	}
 
@@ -2280,9 +2280,9 @@ void MainWindow::hibernateComputerActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Hibernate Computer"), NOBR(tr("Do you really want the computer to be hibernated on shutdown?")), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Hibernate Computer"), NOBREAK(tr("Do you really want the computer to be hibernated on shutdown?")), tr("Yes"), tr("No"), QString(), 1))
 		{
-			QMessageBox::information(this, tr("Hibernate Computer"), NOBR(tr("LameXP will hibernate the computer on shutdown from now on.")));
+			QMessageBox::information(this, tr("Hibernate Computer"), NOBREAK(tr("LameXP will hibernate the computer on shutdown from now on.")));
 			m_settings->hibernateComputer(true);
 		}
 		else
@@ -2292,7 +2292,7 @@ void MainWindow::hibernateComputerActionTriggered(bool checked)
 	}
 	else
 	{
-			QMessageBox::information(this, tr("Hibernate Computer"), NOBR(tr("LameXP will <i>not</i> hibernate the computer on shutdown from now on.")));
+			QMessageBox::information(this, tr("Hibernate Computer"), NOBREAK(tr("LameXP will <i>not</i> hibernate the computer on shutdown from now on.")));
 			m_settings->hibernateComputer(false);
 	}
 
@@ -2306,10 +2306,10 @@ void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 {
 	if(checked)
 	{
-		if(0 == QMessageBox::question(this, tr("Shell Integration"), NOBR(tr("Do you really want to disable the LameXP shell integration?")), tr("Yes"), tr("No"), QString(), 1))
+		if(0 == QMessageBox::question(this, tr("Shell Integration"), NOBREAK(tr("Do you really want to disable the LameXP shell integration?")), tr("Yes"), tr("No"), QString(), 1))
 		{
 			ShellIntegration::remove();
-			QMessageBox::information(this, tr("Shell Integration"), NOBR(tr("The LameXP shell integration has been disabled.")));
+			QMessageBox::information(this, tr("Shell Integration"), NOBREAK(tr("The LameXP shell integration has been disabled.")));
 			m_settings->shellIntegrationEnabled(false);
 		}
 		else
@@ -2320,7 +2320,7 @@ void MainWindow::disableShellIntegrationActionTriggered(bool checked)
 	else
 	{
 			ShellIntegration::install();
-			QMessageBox::information(this, tr("Shell Integration"), NOBR(tr("The LameXP shell integration has been re-enabled.")));
+			QMessageBox::information(this, tr("Shell Integration"), NOBREAK(tr("The LameXP shell integration has been re-enabled.")));
 			m_settings->shellIntegrationEnabled(true);
 	}
 
@@ -2791,16 +2791,16 @@ void MainWindow::exportCsvContextActionTriggered(void)
 		switch(m_fileListModel->exportToCsv(selectedCsvFile))
 		{
 		case FileListModel::CsvError_NoTags:
-			QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, there are no meta tags that can be exported!")));
+			QMessageBox::critical(this, tr("CSV Export"), NOBREAK(tr("Sorry, there are no meta tags that can be exported!")));
 			break;
 		case FileListModel::CsvError_FileOpen:
-			QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to open CSV file for writing!")));
+			QMessageBox::critical(this, tr("CSV Export"), NOBREAK(tr("Sorry, failed to open CSV file for writing!")));
 			break;
 		case FileListModel::CsvError_FileWrite:
-			QMessageBox::critical(this, tr("CSV Export"), NOBR(tr("Sorry, failed to write to the CSV file!")));
+			QMessageBox::critical(this, tr("CSV Export"), NOBREAK(tr("Sorry, failed to write to the CSV file!")));
 			break;
 		case FileListModel::CsvError_OK:
-			QMessageBox::information(this, tr("CSV Export"), NOBR(tr("The CSV files was created successfully!")));
+			QMessageBox::information(this, tr("CSV Export"), NOBREAK(tr("The CSV files was created successfully!")));
 			break;
 		default:
 			qWarning("exportToCsv: Unknown return code!");
@@ -2840,19 +2840,19 @@ void MainWindow::importCsvContextActionTriggered(void)
 		switch(m_fileListModel->importFromCsv(this, selectedCsvFile))
 		{
 		case FileListModel::CsvError_FileOpen:
-			QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to open CSV file for reading!")));
+			QMessageBox::critical(this, tr("CSV Import"), NOBREAK(tr("Sorry, failed to open CSV file for reading!")));
 			break;
 		case FileListModel::CsvError_FileRead:
-			QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, failed to read from the CSV file!")));
+			QMessageBox::critical(this, tr("CSV Import"), NOBREAK(tr("Sorry, failed to read from the CSV file!")));
 			break;
 		case FileListModel::CsvError_NoTags:
-			QMessageBox::critical(this, tr("CSV Import"), NOBR(tr("Sorry, the CSV file does not contain any known fields!")));
+			QMessageBox::critical(this, tr("CSV Import"), NOBREAK(tr("Sorry, the CSV file does not contain any known fields!")));
 			break;
 		case FileListModel::CsvError_Incomplete:
-			QMessageBox::warning(this, tr("CSV Import"), NOBR(tr("CSV file is incomplete. Not all files were updated!")));
+			QMessageBox::warning(this, tr("CSV Import"), NOBREAK(tr("CSV file is incomplete. Not all files were updated!")));
 			break;
 		case FileListModel::CsvError_OK:
-			QMessageBox::information(this, tr("CSV Import"), NOBR(tr("The CSV files was imported successfully!")));
+			QMessageBox::information(this, tr("CSV Import"), NOBREAK(tr("The CSV files was imported successfully!")));
 			break;
 		case FileListModel::CsvError_Aborted:
 			/* User aborted, ignore! */
@@ -3109,7 +3109,7 @@ void MainWindow::makeFolderButtonClicked(void)
 			}
 			else
 			{
-				QMessageBox::warning(this, tr("Failed to create folder"), QString("%1<br><nobr>%2</nobr><br><br>%3").arg(tr("The new folder could not be created:"), basePath.absoluteFilePath(newFolder), tr("Drive is read-only or insufficient access rights!")));
+				QMessageBox::warning(this, tr("Failed to create folder"), NOBREAK(QString("%1<br>%2<br><br>%3").arg(tr("The new folder could not be created:"), basePath.absoluteFilePath(newFolder), tr("Drive is read-only or insufficient access rights!"))));
 			}
 		}
 		break;
