@@ -14,7 +14,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated FAAD decoder to v2.8.6 (2017-10-10), compiled with ICL 18.0 and MSVC 15.5
 * Updated ALAC decoder to refalac v1.64 (2017-05-19), compiled with ICL 18.0 and MSVC 15.5
 * Updated WavPack decoder to v5.1.0 (2017-01-20), compiled with ICL 18.0 and MSVC 15.5
-* Updated MediaInfo to v17.12 (2017-12-21), compiled with ICL 18.0 and MSVC 14.1
+* Updated MediaInfo to v18.03.1 (2010-03-26), compiled with ICL 18.2 and MSVC 15.6
 * Updated GnuPG to v1.4.22 (2017-07-19), compiled with GCC 7.2.0
 * Updated QAAC add-in (separate download) to QAAC v2.64 (2017-07-19), compiled with ICL 18.0 and MSVC 15.5
 * Complete re-write of MediaInfo parsing code, now using XML-based MediaInfo output
