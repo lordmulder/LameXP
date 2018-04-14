@@ -379,7 +379,8 @@ const AudioFileModel& AnalyzeTask::parseMediaInfo(const QByteArray &data, AudioF
 				qWarning("Invalid library identiofier property: \"%s\"", MUTILS_UTF8(identifier));
 				return audioFile;
 			}
-			if (versionLib.isEmpty() || (!checkVersionStr(versionLib, m_mediaInfoVer / 100U, m_mediaInfoVer % 100U)))
+			const quint32 mediaInfoVer = (m_mediaInfoVer > 9999U) ? m_mediaInfoVer / 10U : m_mediaInfoVer;
+			if (versionLib.isEmpty() || (!checkVersionStr(versionLib, mediaInfoVer / 100U, mediaInfoVer % 100U)))
 			{
 				qWarning("Invalid library version property: \"%s\"", MUTILS_UTF8(versionLib));
 				return audioFile;
