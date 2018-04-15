@@ -180,6 +180,16 @@
         <translation>The True Audio - Lossless Audio Codec</translation>
     </message>
     <message>
+        <location filename="../../src/Dialog_About.cpp" line="804"/>
+        <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/Dialog_About.cpp" line="811"/>
+        <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/Dialog_About.cpp" line="823"/>
         <source>MediaInfo - Media File Analysis Tool</source>
         <translation>MediaInfo - Media File Analysis Tool</translation>
@@ -225,7 +235,7 @@
         <translation>Всі права на LameXP належать LoRd_MuldeR. Права на стороннє ПЗ, що використовується в LameXP, належать авторам цього ПЗ.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_About.cpp" line="928"/>
+        <location filename="../../src/Dialog_About.cpp" line="927"/>
         <source>n/a</source>
         <translation>не доступно</translation>
     </message>
@@ -240,16 +250,6 @@
         <source>Aften - A/52 audio encoder</source>
         <translatorcomment>Aften - A/52 audio encoder</translatorcomment>
         <translation>Aften - A/52 audio encoder</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="804"/>
-        <source>Copyright (c) 2011 LoRd_MuldeR &lt;mulder2@gmx.de&gt;. Some rights reserved.</source>
-        <translation>Всі права належать 2011 LoRd_MuldeR&lt;mulder2@gmx.de&gt;. Деякі права захищені.</translation>
-    </message>
-    <message>
-        <location filename="../../src/Dialog_About.cpp" line="811"/>
-        <source>By Jory Stone &lt;jcsston@toughguy.net&gt; and LoRd_MuldeR &lt;mulder2@gmx.de&gt;.</source>
-        <translation>За участі Jory Stone &lt;jcsston@toughguy.net&gt; і LoRd_MuldeR&lt;mulder2@gmx.de&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="802"/>
@@ -2982,112 +2982,112 @@
         <translation>Не знайдено!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="247"/>
+        <location filename="../../src/Thread_Process.cpp" line="242"/>
         <source>The format of this file is NOT supported:</source>
         <translation>Формат даного файла НЕ підтримуєтья:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="247"/>
+        <location filename="../../src/Thread_Process.cpp" line="242"/>
         <source>Container Format:</source>
         <translation>Формат контейнера:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="247"/>
+        <location filename="../../src/Thread_Process.cpp" line="242"/>
         <source>Audio Format:</source>
         <translation>Формат аудіо:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="248"/>
+        <location filename="../../src/Thread_Process.cpp" line="243"/>
         <source>Unsupported!</source>
         <translation>Не підтримується!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="354"/>
+        <location filename="../../src/Thread_Process.cpp" line="349"/>
         <source>Done.</source>
         <translation>Виконано.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="354"/>
+        <location filename="../../src/Thread_Process.cpp" line="349"/>
         <source>Aborted!</source>
         <translation>Перервано!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="354"/>
+        <location filename="../../src/Thread_Process.cpp" line="349"/>
         <source>Failed!</source>
         <translation>Збій!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="371"/>
+        <location filename="../../src/Thread_Process.cpp" line="366"/>
         <source>Encoding</source>
         <translation>Кодування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="377"/>
+        <location filename="../../src/Thread_Process.cpp" line="372"/>
         <source>Filtering</source>
         <translation>Фільтрування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="380"/>
+        <location filename="../../src/Thread_Process.cpp" line="375"/>
         <source>Decoding</source>
         <translation>Декодування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="402"/>
+        <location filename="../../src/Thread_Process.cpp" line="397"/>
         <source>The source audio file could not be found:</source>
         <translation>Неможливо знайти вхідний файл аудіо:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="410"/>
+        <location filename="../../src/Thread_Process.cpp" line="405"/>
         <source>The source audio file could not be opened for reading:</source>
         <translation>Неможливо відкрити для читання вхідний файл аудіо:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="442"/>
+        <location filename="../../src/Thread_Process.cpp" line="437"/>
         <source>The target output directory doesn&apos;t exist and could NOT be created:</source>
         <translation>Вихідної теки не існує і її неможливо створити:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="451"/>
+        <location filename="../../src/Thread_Process.cpp" line="446"/>
         <source>The target output directory is NOT writable:</source>
         <translation>До вихідної теки неможливо проводити запис:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="519"/>
+        <location filename="../../src/Thread_Process.cpp" line="514"/>
         <source>Failed to generate non-existing target file name!</source>
         <translation>Неможливо згенерувати назву неіснуючого вихідного файла!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="527"/>
+        <location filename="../../src/Thread_Process.cpp" line="522"/>
         <source>Unknown File Name</source>
         <translation>Невідома назва файла</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="529"/>
+        <location filename="../../src/Thread_Process.cpp" line="524"/>
         <source>Unknown Title</source>
         <translation>Невідомий заголовок</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="530"/>
+        <location filename="../../src/Thread_Process.cpp" line="525"/>
         <source>Unknown Artist</source>
         <translation>Невідомий виконавець</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="531"/>
+        <location filename="../../src/Thread_Process.cpp" line="526"/>
         <source>Unknown Album</source>
         <translation>Невідомий альбом</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="533"/>
+        <location filename="../../src/Thread_Process.cpp" line="528"/>
         <source>Unknown Comment</source>
         <translation>Невідомий коментар</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="374"/>
+        <location filename="../../src/Thread_Process.cpp" line="369"/>
         <source>Analyzing</source>
         <translation>Аналізування</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="238"/>
+        <location filename="../../src/Thread_Process.cpp" line="233"/>
         <source>WARNING: Decoded file size exceeds 4 GB, problems might occur!
 </source>
         <translation>ПОПЕРЕДЖЕННЯ: Розмір декодованного файла перевищує 4 ГБ, можуть виникнути проблеми!
@@ -3099,22 +3099,22 @@
         <translation>Пропущено.</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="471"/>
+        <location filename="../../src/Thread_Process.cpp" line="466"/>
         <source>Target output file already exists, going to skip this file:</source>
         <translation>Вихідний цільовий файл вже існує, спроба пропустити цей файл:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="472"/>
+        <location filename="../../src/Thread_Process.cpp" line="467"/>
         <source>If you don&apos;t want existing files to be skipped, please change the overwrite mode!</source>
         <translation>Якщо ви не хочете, щоб існуючі файли були пропущені, будь ласка, змініть режим перезапису!</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="479"/>
+        <location filename="../../src/Thread_Process.cpp" line="474"/>
         <source>Target output file already exists, going to delete existing file:</source>
         <translation>Вихідний цільовий файл вже існує, спроба видалити існуючий файл:</translation>
     </message>
     <message>
-        <location filename="../../src/Thread_Process.cpp" line="495"/>
+        <location filename="../../src/Thread_Process.cpp" line="490"/>
         <source>Failed to delete existing target file, will save to another file name!</source>
         <translation>Неможливо видалити існуючий файл, збереження буде проведено до файла з іншою назвою!</translation>
     </message>
@@ -3167,58 +3167,58 @@
         <translation>Багатопотоковість увімкнено: Паралельно запущено %1 копій!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="649"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="655"/>
         <source>Aborted! Waiting for running jobs to terminate...</source>
         <translation>Перервано! Чекаємо на завершення запущених завдань...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="682"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="688"/>
         <source>Creating the playlist file, please wait...</source>
         <translation>Йде створення списку відтворення, будь ласка, зачекайте...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="692"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
         <source>Process was aborted prematurely by the user!</source>
         <translation>Процес було перервано користувачем завчасно!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="693"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
         <source>LameXP - Aborted</source>
         <translation>LameXP - Перервано</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="693"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="699"/>
         <source>Process was aborted by the user.</source>
         <translation>Процес було перервано користувачем.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>LameXP - Error</source>
         <translation>LameXP - Помилка</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="725"/>
         <source>At least one file has failed!</source>
         <translation>Стався збій при обробці щонайменше одного файла!</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
         <source>LameXP - Done</source>
         <translation>LameXP - Виконано</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="735"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="741"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="743"/>
         <source>All files completed successfully.</source>
         <translation>Обробка усіх файлів успішно завершена.</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1050"/>
         <source>Playlist creation failed</source>
         <translation>Збій створення списка відтворення</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1044"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1050"/>
         <source>The playlist file could not be created:</source>
         <translation>Неможливо створити файл списка відтворення:</translation>
     </message>
@@ -3233,13 +3233,13 @@
         <translation>Вимкнути комп&apos;ютер після завершення конвертації усіх файлів</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1108"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1112"/>
         <source>Warning: Computer will shutdown in %1 seconds...</source>
         <translation>Попередження: Комп&apos;ютер буде вимкнено через %1 секунд...</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="1112"/>
-        <location filename="../../src/Dialog_Processing.cpp" line="1113"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1116"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1117"/>
         <source>Cancel Shutdown</source>
         <translation>Відмінити Вимкнення</translation>
     </message>
@@ -3262,7 +3262,7 @@
         <translation>Вільне місце на диску (тека тимчасових файлів)</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="702"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="708"/>
         <source>Process finished after %1.</source>
         <translation>Процес тривав %1.</translation>
     </message>
@@ -3297,12 +3297,12 @@
         <translation>Відображати всі записи</translation>
     </message>
     <message>
-        <location filename="../../src/Dialog_Processing.cpp" line="931"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="937"/>
         <source>None of the items matches the current filtering rules</source>
         <translation>Жодного запису не підпадає під поточні правила фільтрування</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="692"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="698"/>
         <source>Process was aborted by the user after %n file(s)!</source>
         <translation>
             <numerusform>Процес було перервано користувачем після %n файлу!</numerusform>
@@ -3311,7 +3311,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1208"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1212"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n годину</numerusform>
@@ -3320,8 +3320,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1209"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1213"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1217"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n хвилину</numerusform>
@@ -3330,8 +3330,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1214"/>
         <location filename="../../src/Dialog_Processing.cpp" line="1218"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1222"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n секунду</numerusform>
@@ -3340,7 +3340,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="1219"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="1223"/>
         <source>%n millisecond(s)</source>
         <translation>
             <numerusform>%n мілісекунду</numerusform>
@@ -3349,7 +3349,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="660"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="666"/>
         <source>Encoding: %n file(s) of %1 completed so far, please wait...</source>
         <translation>
             <numerusform>Кодування: %n файл з %1 поки що оброблено, будь ласка, зачекайте...</numerusform>
@@ -3358,7 +3358,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
         <source>Error: %1 of %n file(s) failed (%2). Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Помилка: збій обробки %1 з %n файлів (%2). Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
@@ -3367,7 +3367,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="713"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="719"/>
         <source>%n file(s) skipped</source>
         <translation>
             <numerusform>%n файл пропущено</numerusform>
@@ -3376,7 +3376,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="717"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="723"/>
         <source>Error: %1 of %n file(s) failed. Double-click failed items for detailed information!</source>
         <translation>
             <numerusform>Помилка: збій обробки %1 з %n файлів. Для детальної інформації необхідно зробити подвійний клік на потрібних елементах!</numerusform>
@@ -3385,7 +3385,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/Dialog_Processing.cpp" line="731"/>
+        <location filename="../../src/Dialog_Processing.cpp" line="737"/>
         <source>All files completed successfully. Skipped %n file(s).</source>
         <translation>
             <numerusform>Всі файли оброблено успішно. Пропущено %n файл.</numerusform>
