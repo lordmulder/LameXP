@@ -283,9 +283,7 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 	QByteArray coverData;
 
 	QStringList params;
-	params << QString("--Language=raw");
-	params << QString("-f");
-	params << QString("--Output=XML");
+	params << L1S("--Language=raw") << L1S("--Output=XML") << L1S("--Full") << L1S("--Cover_Data=base64");
 	params << QDir::toNativeSeparators(filePath);
 
 	QProcess process;
@@ -330,7 +328,7 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 			if (dataNext.isEmpty()) {
 				break; /*no more input data*/
 			}
-			data += dataNext;
+			data += dataNext.trimmed();
 		}
 	}
 
@@ -347,11 +345,11 @@ const AudioFileModel& AnalyzeTask::analyzeMediaFile(const QString &filePath, Aud
 		if (dataNext.isEmpty()) {
 			break; /*no more input data*/
 		}
-		data += dataNext;
+		data += dataNext.trimmed();
 	}
-	
+
 #if MUTILS_DEBUG
-	qDebug("!!!--MEDIA_INFO-->>>\n%s\n<<<--MEDIA_INFO--!!!", data.constData());
+	qDebug("-----BEGIN MEDIAINFO-----\n%s\n-----END MEDIAINFO-----", data.constData());
 #endif //MUTILS_DEBUG
 
 	return parseMediaInfo(data, audioFile);
