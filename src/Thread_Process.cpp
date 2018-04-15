@@ -160,11 +160,6 @@ bool ProcessThread::start(QThreadPool *const pool)
 			break;
 		}
 
-		if(!bSuccess)
-		{
-			emit processFinished();
-		}
-
 		return bSuccess;
 	}
 
