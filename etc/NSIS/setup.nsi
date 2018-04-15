@@ -377,7 +377,7 @@ Function .onInit
 			Quit
 		${EndIf}
 		${IfNot} ${UnattendedMode}
-			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears that you are still running Windows XP, which reached $\"end of life$\" in April 2014 and therefore will not receive any updates and fixes anymore - not even for critical security vulnerabilities! We highly recommend updating to a contemporary operating system." IDCANCEL`
+			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears that you are still running Windows XP, which reached $\"end of life$\" in April 2014 and therefore will not receive any updates or bug fixes anymore - not even for critical security vulnerabilities! We highly recommend updating to a contemporary operating system.$\n$\nClick 'OK' to proceed with the installation, or click 'Cancel' to abort." IDCANCEL`
 				Quit
 			${EndIf}
 		${EndIf}
@@ -390,7 +390,7 @@ Function .onInit
 			Quit
 		${EndIf}
 		${IfNot} ${UnattendedMode}
-			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears that you are still running Windows Vista, which reached $\"end of life$\" in April 2017 and therefore will not receive any updates and fixes anymore - not even for critical security vulnerabilities! We highly recommend updating to a contemporary operating system." IDCANCEL`
+			${If} ${Cmd} `MessageBox MB_TOPMOST|MB_ICONEXCLAMATION|MB_OKCANCEL|MB_DEFBUTTON2 "It appears that you are still running Windows Vista, which reached $\"end of life$\" in April 2017 and therefore will not receive any updates or bug fixes anymore - not even for critical security vulnerabilities! We highly recommend updating to a contemporary operating system.$\n$\nClick 'OK' to proceed with the installation, or click 'Cancel' to abort." IDCANCEL`
 				Quit
 			${EndIf}
 		${EndIf}
