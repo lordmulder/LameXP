@@ -165,7 +165,7 @@ attrib +R "%TMP_PATH%\*.xml"
 :: ---------------------------------------------------------------------------
 
 echo LameXP - Audio Encoder Front-End> "%OUT_FILE%.txt"
-echo Release: %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH%, Build #%VER_LAMEXP_BUILD% [%ISO_DATE%] [%ISO_TIME%]>> "%OUT_FILE%.txt"
+echo Version %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH%, Build #%VER_LAMEXP_BUILD% [%ISO_DATE%] [%ISO_TIME%]>> "%OUT_FILE%.txt"
 echo Git-%GIT_REV_NAME%-r%GIT_REV_NMBR%-%GIT_REV_HASH% [%GIT_REV_DATE%] [%GIT_REV_TIME%]>> "%OUT_FILE%.txt"
 echo.>> "%OUT_FILE%.txt"
 
