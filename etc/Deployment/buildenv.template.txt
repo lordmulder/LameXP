@@ -1,4 +1,5 @@
 #define PATH_MSCDIR "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build"
 #define PATH_QTMSVC "C:\QtSDK\Desktop\Qt\4.8.7"
+#define PATH_GITWIN "C:\Program Files\Git"
 #define PATH_VCTOOL "141"
 #define PATH_VCPROJ "LameXP_VS2017.sln"

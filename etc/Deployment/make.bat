@@ -65,6 +65,7 @@ call "%~dp0\_build.bat" "%~dp0\..\..\%PATH_VCPROJ%" "%LAMEXP_PLATFORM%" "%LAMEXP
 :: ---------------------------------------------------------------------------
 
 call "%~dp0\_version.bat"
+call "%~dp0\_revision.bat"
 
 :: ---------------------------------------------------------------------------
 :: GENERATE OUTPUT FILE NAME
@@ -149,11 +150,38 @@ if exist "%~dp0\_postproc.bat" (
 	call "%~dp0\_postproc.bat" "%TMP_PATH%"
 )
 
+echo Release: %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO%.%VER_LAMEXP_BUILD%> "%TMP_PATH%\LameXP.tag"
+echo Git-%GIT_REV_NAME%-r%GIT_REV_NMBR%-%GIT_REV_HASH% [%GIT_REV_DATE%] [%GIT_REV_TIME%]>>      "%TMP_PATH%\LameXP.tag"
+
 attrib +R "%TMP_PATH%\*.txt"
 attrib +R "%TMP_PATH%\*.html"
 attrib +R "%TMP_PATH%\*.exe"
 attrib +R "%TMP_PATH%\*.dll"
+attrib +R "%TMP_PATH%\*.tag"
 attrib +R "%TMP_PATH%\*.xml"
+
+:: ---------------------------------------------------------------------------
+:: CREATE TAG
+:: ---------------------------------------------------------------------------
+
+echo LameXP - Audio Encoder Front-End> "%OUT_FILE%.txt"
+echo Release: %VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH%, Build #%VER_LAMEXP_BUILD% [%ISO_DATE%] [%ISO_TIME%]>> "%OUT_FILE%.txt"
+echo Git-%GIT_REV_NAME%-r%GIT_REV_NMBR%-%GIT_REV_HASH% [%GIT_REV_DATE%] [%GIT_REV_TIME%]>> "%OUT_FILE%.txt"
+echo.>> "%OUT_FILE%.txt"
+
+echo ------------------------------------------------------------------------------>> "%OUT_FILE%.txt"
+echo README.TXT>> "%OUT_FILE%.txt"
+echo ------------------------------------------------------------------------------>> "%OUT_FILE%.txt"
+echo.>> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe" "%~dp0\..\..\ReadMe.txt" >> "%OUT_FILE%.txt"
+echo.>> "%OUT_FILE%.txt"
+
+echo ------------------------------------------------------------------------------>> "%OUT_FILE%.txt"
+echo LICENSE.TXT>> "%OUT_FILE%.txt"
+echo ------------------------------------------------------------------------------>> "%OUT_FILE%.txt"
+echo.>> "%OUT_FILE%.txt"
+"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe" "%~dp0\..\..\License.txt" >> "%OUT_FILE%.txt"
+echo.>> "%OUT_FILE%.txt"
 
 :: ---------------------------------------------------------------------------
 :: BUILD INSTALLER
@@ -162,14 +190,6 @@ attrib +R "%TMP_PATH%\*.xml"
 "%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "\n==========================================================================="
 "%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "Creating release packages..."
 "%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" cyan "===========================================================================\n"
-
-"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " LameXP - Audio Encoder Front-End > "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " v%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%%VER_LAMEXP_MINOR_LO% %VER_LAMEXP_TYPE%-%VER_LAMEXP_PATCH% (Build #%VER_LAMEXP_BUILD%)\n >> "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " Built on %ISO_DATE% at %TIME%\n\n >> "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" " ---------------------------\nREADME.TXT\n--------------------------- >> "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe"  "%~dp0\..\..\ReadMe.txt" >> "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\echo.exe" "\n\n---------------------------\nLICENSE.TXT\n---------------------------\n >> "%OUT_FILE%.txt"
-"%~dp0\..\..\..\Prerequisites\GnuWin32\cat.exe"  "%~dp0\..\..\License.txt" >> "%OUT_FILE%.txt"
 
 pushd "%TMP_PATH%"
 "%~dp0\..\..\..\Prerequisites\GnuWin32\zip.exe" -r -9 -z "%OUT_FILE%.zip" "*.*" < "%OUT_FILE%.txt"
@@ -195,7 +215,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 set "VER_FILEVER=%VER_LAMEXP_MAJOR%.%VER_LAMEXP_MINOR_HI%.%VER_LAMEXP_MINOR_LO%.%VER_LAMEXP_PATCH%"
 set "VER_PRODUCT=LameXP - Audio Encoder Front-End"
-"%~dp0\..\..\..\Prerequisites\VerPatch\verpatch.exe" "%OUT_FILE%.exe" "%VER_FILEVER%" /pv "%VER_FILEVER%" /fn /s desc "%VER_PRODUCT%" /s product "%VER_PRODUCT%" /s title "LameXP Installer SFX" /s copyright "Copyright (C) LoRd_MuldeR" /s company "Free Software Foundation"
+"%~dp0\..\..\..\Prerequisites\VerPatch\verpatch.exe" "%OUT_FILE%.exe" "%VER_FILEVER%" /pv "%VER_FILEVER%" /fn /s desc "%VER_PRODUCT%" /s product "%VER_PRODUCT%" /s title "LameXP Installer SFX" /s copyright "Copyright (C) LoRd_MuldeR" /s company "Free Software Foundation" /sc "Git-%GIT_REV_NAME%-r%GIT_REV_NMBR%-%GIT_REV_HASH% [%GIT_REV_DATE%] [%GIT_REV_TIME%]"
 if %ERRORLEVEL% NEQ 0 (
 	"%~dp0\..\..\..\Prerequisites\CEcho\cecho.exe" red "\nFailed to build installer^!\n"
 	pause && exit

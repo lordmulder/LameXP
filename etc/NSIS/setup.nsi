@@ -576,6 +576,7 @@ Section "!Install Files"
 	
 	${StdUtils.GetFileNamePart} $R1 "$R0"
 	File /a `/oname=$R1.VisualElementsManifest.xml` `${LAMEXP_SOURCE_PATH}\LameXP.VisualElementsManifest.xml`
+	File /a `/oname=$R1.tag` `${LAMEXP_SOURCE_PATH}\LameXP.tag`
 	
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.txt`
 	File /a /r `${LAMEXP_SOURCE_PATH}\*.html`
