@@ -61,15 +61,16 @@ bool VorbisDecoder::decode(const QString &sourceFile, const QString &outputFile,
 	}
 
 	int prevProgress = -1;
-	QRegExp regExp("\\s+(\\d+)% decoded.");
+	QRegExp regExp("\\b(\\d+)\\.(\\d)%\\s+decoded.");
 
 	const result_t result = awaitProcess(process, abortFlag, [this, &prevProgress, &regExp](const QString &text)
 	{
 		if (regExp.lastIndexIn(text) >= 0)
 		{
-			qint32 newProgress;
-			if (MUtils::regexp_parse_int32(regExp, newProgress))
+			qint32 values[2];
+			if (MUtils::regexp_parse_int32(regExp, values, 2))
 			{
+				const qint32 newProgress = (values[1] >= 5) ? (values[0] + 1) : values[0];
 				if (newProgress > prevProgress)
 				{
 					emit statusUpdated(newProgress);

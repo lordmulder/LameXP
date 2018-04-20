@@ -1,0 +1,766 @@
+ audio.c           |   3 +-
+ oggdec.c          | 312 ++++++++++++++++++++++++++++++------------------------
+ unicode_support.c | 197 ++++++++++++++++++++++++++++++++++
+ unicode_support.h |  49 +++++++++
+ wave_out.h        |   2 +-
+ 5 files changed, 422 insertions(+), 141 deletions(-)
+
+diff --git a/audio.c b/audio.c
+index 88d6b21..e3a303c 100644
+--- a/audio.c
++++ b/audio.c
+@@ -31,6 +31,7 @@
+ #include <math.h>
+ #include "audio.h"
+ 
++#include "unicode_support.h"
+ 
+ audio_file *open_output_audio_file(char *infile, int samplerate, int channels,
+                             int outputFormat, int fileType, unsigned int knownlength)
+@@ -76,7 +77,7 @@ audio_file *open_output_audio_file(char *infile, int samplerate, int channels,
+ 		aufile->sndfile = stdout;
+ 	}
+ 	else
+-		aufile->sndfile = fopen(infile, "wb");
++		aufile->sndfile = fopen_utf8(infile, "wb");
+ 
+ 	if (aufile->sndfile == NULL){
+ 		if (aufile)
+diff --git a/oggdec.c b/oggdec.c
+index f73095e..2064370 100644
+--- a/oggdec.c
++++ b/oggdec.c
+@@ -54,6 +54,8 @@
+ 
+ #define ROUND64(x)   ( doubletmp = (x) + Dither.Add + (ogg_int64_t)0x001FFFFD80000000L, *(ogg_int64_t*)(&doubletmp) - (ogg_int64_t)0x433FFFFD80000000L )
+ 
++#include "unicode_support.h"
++
+ typedef struct file_list
+ {
+ 	char *file_name;
+@@ -64,8 +66,8 @@ typedef struct file_list
+ static void usage(void);
+ void file_error(const char *message, const char *filename);
+ void free_file_list(FILE_LIST *list, int free_names);
+-char **glob(char *files[], int *count, int shuffle);
+-void free_glob(char *file_names[]);
++//char **glob(char *files[], int *count, int shuffle);
++//void free_glob(char *file_names[]);
+ static int tag_compare(const char *s1, const char *s2, int n);
+ double get_scale(const char *filename, int album, int title);
+ 
+@@ -91,7 +93,7 @@ struct option long_options[] = {
+  * for the error in GetLastError(), in that order, as printf arguments for 
+  * the message body.
+  */
+-void file_error(const char *message, const char *filename)
++static void file_error(const char *message, const char *filename)
+ {
+ 	LPVOID error;
+     
+@@ -107,7 +109,7 @@ void file_error(const char *message, const char *filename)
+ /* Free a FILE_LIST list. If free_names is true, free the name 
+  * in each list entry as well.
+  */
+-void free_file_list(FILE_LIST *list, int free_names)
++static void free_file_list(FILE_LIST *list, int free_names)
+ {
+ 	FILE_LIST *next;
+     
+@@ -125,7 +127,6 @@ void free_file_list(FILE_LIST *list, int free_names)
+ 	}
+ }
+ 
+-
+ /* Expand any wildcards in the files array (with count entries). The 
+  * returned array is null terminated, and count is set to the number 
+  * of entries, excluding the null. If NULL is returned, an error has 
+@@ -133,123 +134,124 @@ void free_file_list(FILE_LIST *list, int free_names)
+  *
+  * Call free_glob to free the memory allocated by this function.
+  */
+-char **glob(char *files[], int *count, int shuffle)
+-{
+-	FILE_LIST         *first = NULL,
+-	                  *current,
+-	                  *previous = NULL;
+-	WIN32_FIND_DATA   find_data;
+-	HANDLE            *find_handle;
+-	char              **file_names,
+-	                  *tmp;
+-	int               file_count = 0,
+-	                  path_length = 0,
+-	                  i,
+-	                  j;
+-    
+-	for (i = 0; i < *count; ++i)
+-	{
+-		for (j = 0; j < strlen(files[i]); j++)
+-		{
+-			if (files[i][j] == '\\')
+-			{
+-				path_length = j + 1;
+-			}
+-		}
+-        
+-		find_handle = FindFirstFile(files[i], &find_data);
+-        
+-		if (INVALID_HANDLE_VALUE == find_handle)
+-		{
+-			file_error(" Could not find '%s': %s", files[i]);
+-			files[i] = NULL;
+-			continue;
+-		}
+-        
+-		do
+-		{
+-			current = (struct file_list *) calloc(1, sizeof(struct file_list));
+-			current->file_name = calloc(path_length + strlen(find_data.cFileName) + 1, 1);
+-            
+-			if (path_length)
+-			{
+-				strncpy(current->file_name, files[i], path_length);
+-				strcat(current->file_name, find_data.cFileName);
+-			}
+-			else
+-			{
+-				strcpy(current->file_name, find_data.cFileName);
+-			}
+-            
+-			if (previous != NULL)
+-			{
+-				previous->next_file = current;
+-			}
+-            
+-			if (first == NULL)
+-			{
+-				first = current;
+-			}
+-            
+-			previous = current;
+-			file_count++;
+-		} while (FindNextFile(find_handle, &find_data));
+-        
+-		if (GetLastError() != ERROR_NO_MORE_FILES)
+-		{
+-			file_error(" Couldn't get more files for '%s': %s\n", files[i]);
+-			free_file_list(first, 1);
+-			files[i] = NULL;
+-		}
+-        
+-		/* Can return error, but do we need to bother? */
+-		FindClose(find_handle);
+-	}
+-    
+-	file_names = (char **) calloc(file_count + 1, sizeof(char *));
+-    
+-	for (i = 0, current = first; current; current = current->next_file, i++)
+-	{
+-		file_names[i] = current->file_name;
+-	}
+-    
+-	/* set up playlist */
+-
+-	if (shuffle)
+-	{
+-		srand(time(0));
+-		/* initial shuffle */
+-		for (i = 0; i < file_count; ++i)
+-		{
+-			j = rand() % file_count;
+-
+-			tmp = file_names[i];
+-			file_names[i] = file_names[j];
+-			file_names[j] = tmp;
+-		}
+-	}
+-	free_file_list(first, 0);
+-	*count = file_count;
+-	return file_names;
+-}
+-
+-
+-/* Free memory allocated by glob. */
+-void free_glob(char *file_names[])
+-{
+-	char **current;
+-	int i = 0;
+-
+-	for (current = file_names; *current; current++)
+-	{
+-		free(*current);
+-	}
+-    
+-	free(file_names);
+-}
++//static char **glob(char *files[], int *count, int shuffle)
++//{
++//	FILE_LIST         *first = NULL,
++//	                  *current,
++//	                  *previous = NULL;
++//	WIN32_FIND_DATAW  find_data;
++//	HANDLE            *find_handle;
++//	char              **file_names,
++//	                  *tmp;
++//	int               file_count = 0,
++//	                  path_length = 0,
++//	                  i,
++//	                  j;
++//    
++//	for (i = 0; i < *count; ++i)
++//	{
++//		for (j = 0; j < strlen(files[i]); j++)
++//		{
++//			if (files[i][j] == '\\')
++//			{
++//				path_length = j + 1;
++//			}
++//		}
++//        
++//		find_handle = FindFirstFileUTF8(files[i], &find_data);
++//        
++//		if (INVALID_HANDLE_VALUE == find_handle)
++//		{
++//			file_error(" Could not find '%s': %s", files[i]);
++//			files[i] = NULL;
++//			continue;
++//		}
++//        
++//		do
++//		{
++//			current = (struct file_list *) calloc(1, sizeof(struct file_list));
++//			current->file_name = calloc(path_length + strlen(find_data.cFileName) + 1, 1);
++//            
++//			if (path_length)
++//			{
++//				strncpy(current->file_name, files[i], path_length);
++//				strcat(current->file_name, find_data.cFileName);
++//			}
++//			else
++//			{
++//				strcpy(current->file_name, find_data.cFileName);
++//			}
++//            
++//			if (previous != NULL)
++//			{
++//				previous->next_file = current;
++//			}
++//            
++//			if (first == NULL)
++//			{
++//				first = current;
++//			}
++//            
++//			previous = current;
++//			file_count++;
++//		}
++//		while (FindNextFile(find_handle, &find_data));
++//        
++//		if (GetLastError() != ERROR_NO_MORE_FILES)
++//		{
++//			file_error(" Couldn't get more files for '%s': %s\n", files[i]);
++//			free_file_list(first, 1);
++//			files[i] = NULL;
++//		}
++//        
++//		/* Can return error, but do we need to bother? */
++//		FindClose(find_handle);
++//	}
++//    
++//	file_names = (char **) calloc(file_count + 1, sizeof(char *));
++//    
++//	for (i = 0, current = first; current; current = current->next_file, i++)
++//	{
++//		file_names[i] = current->file_name;
++//	}
++//    
++//	/* set up playlist */
++//
++//	if (shuffle)
++//	{
++//		srand(time(0));
++//		/* initial shuffle */
++//		for (i = 0; i < file_count; ++i)
++//		{
++//			j = rand() % file_count;
++//
++//			tmp = file_names[i];
++//			file_names[i] = file_names[j];
++//			file_names[j] = tmp;
++//		}
++//	}
++//	free_file_list(first, 0);
++//	*count = file_count;
++//	return file_names;
++//}
++//
++//
++///* Free memory allocated by glob. */
++//static void free_glob(char *file_names[])
++//{
++//	char **current;
++//	int i = 0;
++//
++//	for (current = file_names; *current; current++)
++//	{
++//		free(*current);
++//	}
++//    
++//	free(file_names);
++//}
+ 
+ /* Dither output */
+-ogg_int64_t dither_output(int dithering, int shapingtype, long i, double Sum, int k)
++static ogg_int64_t dither_output(int dithering, int shapingtype, long i, double Sum, int k)
+ {
+ 	double Sum2;
+ 	ogg_int64_t val;
+@@ -280,7 +282,7 @@ ogg_int64_t dither_output(int dithering, int shapingtype, long i, double Sum, in
+ 
+ /* This downmixes multi-channel vorbis to stereo
+  */
+-void downmix_2_stereo(int channels, float **pcm, long samples)
++static void downmix_2_stereo(int channels, float **pcm, long samples)
+ {
+ 	/* Channels are in vorbis order NOT WAVEFORMATEXTENSIBLE */
+ 
+@@ -349,7 +351,7 @@ static int tag_compare(const char *s1, const char *s2, int n)
+  * the tags are found, it returns the scale value calculated from the
+  * tag, otherwise, it returns a scale value of 1.0.
+  */
+-double get_scale(const char *filename, int album, int title)
++static double get_scale(const char *filename, int album, int title)
+ {
+ 	vcedit_state    *state = NULL;
+ 	vorbis_comment  *vc;
+@@ -373,7 +375,7 @@ double get_scale(const char *filename, int album, int title)
+ 		goto exit;
+ 	}
+ 
+-	file = fopen(filename, "rb");
++	file = fopen_utf8(filename, "rb");
+ 
+ 	if (file == NULL)
+ 	{
+@@ -517,7 +519,7 @@ exit:
+ 
+ static void usage(void)
+ {
+-	fprintf(stderr, " "VERSION_STRING"\n");
++	fprintf(stderr, " "VERSION_STRING"\n", vorbis_version_string());
+ 	fprintf(stderr, " Copyright (c) 2002-2014 John Edwards\n\n");
+ 	fprintf(stderr, " Usage: oggdec [options] input.ogg [...]\n\n");
+ 	fprintf(stderr, " OPTIONS\n");
+@@ -557,7 +559,7 @@ static void usage(void)
+ }
+ 
+ 
+-int main(int argc, char** argv)
++static int oggdec_main(int argc, char** argv)
+ {
+ 	OggVorbis_File     vf;
+ 	int                current_section;
+@@ -743,7 +745,7 @@ int main(int argc, char** argv)
+ 
+ 	if(optind >= argc)
+ 	{
+-		fprintf(stderr, "ERROR: No input files specified, exiting.\n");
++		fprintf(stderr, "ERROR: No input files specified, exiting.\n\n");
+ 		usage();
+ 		exit(1);
+ 	}
+@@ -753,10 +755,10 @@ int main(int argc, char** argv)
+ 		file_count = argc - optind;
+ 	}
+ 
+-	file_names = glob(file_names, &file_count, shuffle);
++	//file_names = glob(file_names, &file_count, shuffle);
+ 
+ 	if(out_file && file_count > 1) {
+-		fprintf(stderr,"ERROR: Named output file only valid for single input file.\n");
++		fprintf(stderr,"ERROR: Named output file only valid for single input file.\n\n");
+ 		usage();
+ 		exit(1);
+ 	}
+@@ -769,8 +771,7 @@ int main(int argc, char** argv)
+ 		audio_file    *wav_out;
+ 
+ 		void          *sample_buffer;
+-		char          *fileName,
+-		              percents[64];
++		char          *fileName;
+ 		int           eof = 0,
+ 		              infile = 1,
+ 		              outfile = 1,
+@@ -783,6 +784,7 @@ int main(int argc, char** argv)
+ 		double        samples_done = 0,
+ 		              file_size;
+ 		ogg_int64_t   length;
++		clock_t       last_update = -1L;
+ 
+ 		if (file_names[i][0] == '\0')
+ 		{
+@@ -793,7 +795,7 @@ int main(int argc, char** argv)
+ 		 * ReplayGain tags, which tags are being used. 
+ 		 */
+ 		if(!send_to_stdout)
+-			fprintf(stderr, "\n\n"VERSION_STRING"\n");
++			fprintf(stderr, "\n\n"VERSION_STRING"\n", vorbis_version_string());
+ 
+ 		if(!send_to_stdout && (audiophile || radio))
+ 		{
+@@ -807,7 +809,7 @@ int main(int argc, char** argv)
+ 		else
+ 			scale = 1.0;
+ 
+-		if((ov_input = fopen(file_names[i], "rb")) == NULL)
++		if((ov_input = fopen_utf8(file_names[i], "rb")) == NULL)
+ 		{
+ 			fprintf(stderr, "\n ERROR: cannot open %s\n", file_names[i]);
+ 			continue;
+@@ -840,7 +842,7 @@ int main(int argc, char** argv)
+ 			{
+ 				if ( Set_WIN_Params (INVALID_FILEDESC, vi->rate, SAMPLE_SIZE, channels, play_priority) < 0 )
+ 				{
+-					fprintf (stderr, "\n"VERSION_STRING": Can't access %s\n", "WAVE OUT");
++					fprintf (stderr, "\n"VERSION_STRING": Can't access %s\n", vorbis_version_string(), "WAVE OUT");
+ 					ov_clear(&vf);
+ 					continue;
+ 				}
+@@ -924,15 +926,26 @@ int main(int argc, char** argv)
+ 					samples_done += ret;
+ 					if(play_files)
+ 					{
+-						length_secs = samples_done / vi->rate;	// time played in secs.
+-						length_mins = length_secs / 60;
+-						length_secs -= length_mins * 60;
+-						fprintf(stderr," Played %d:%02d mins.\r", length_mins, length_secs);
++						const clock_t current_time = clock();
++						if ((current_time < 0) || (last_update < 0) || (current_time > last_update))
++						{
++							length_secs = samples_done / vi->rate;	// time played in secs.
++							length_mins = length_secs / 60;
++							length_secs -= length_mins * 60;
++							fprintf(stderr, "\r Played %d:%02d mins.", length_mins, length_secs);
++							fflush(stderr);
++							last_update = current_time + (CLOCKS_PER_SEC / 8L);
++						}
+ 					}
+ 					else if(!quiet)
+ 					{
+-						sprintf(percents, "%4.0lf%% decoded.", (samples_done/file_size)*100);
+-						fprintf(stderr, " %s\r", percents);
++						const clock_t current_time = clock();
++						if ((current_time < 0) || (last_update < 0) || (current_time > last_update))
++						{
++							fprintf(stderr, "\r %5.1lf%% decoded.", (samples_done / file_size) * 100.0);
++							fflush(stderr);
++							last_update = current_time + (CLOCKS_PER_SEC / 8L);
++						}
+ 					}
+ 
+ 					if (ret == 0) 
+@@ -1012,6 +1025,11 @@ int main(int argc, char** argv)
+ 				}
+ 			}
+ 			/* Finished with this file, so cleanup. */
++			if ((!play_files) && (!quiet))
++			{
++				fprintf(stderr, "\r %5.1lf%% decoded.", 100.0);
++				fflush(stderr);
++			}
+ 			if(play_files)
+ 				WIN_Audio_close();
+ 			else
+@@ -1025,4 +1043,20 @@ int main(int argc, char** argv)
+ 	return(0);
+ }
+ 
++int main(int argc, char **argv)
++{
++	int argc_utf8, exit_code;
++	char **argv_utf8;
++
++	init_console_utf8();
++	init_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++
++	exit_code = oggdec_main(argc_utf8, argv_utf8);
++
++	free_commandline_arguments_utf8(&argc_utf8, &argv_utf8);
++	uninit_console_utf8();
++
++	return exit_code;
++}
++
+ /* **************************************** end of oggdec.c ******************************************* */
+diff --git a/unicode_support.c b/unicode_support.c
+new file mode 100644
+index 0000000..cf8a1e1
+--- /dev/null
++++ b/unicode_support.c
+@@ -0,0 +1,197 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.c
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#if defined WIN32 || defined _WIN32
++
++# include "unicode_support.h"
++
++# include <windows.h>
++# include <io.h>
++
++static UINT g_old_output_cp = ((UINT)-1);
++
++char *utf16_to_utf8(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_UTF8, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++char *utf16_to_ansi(const wchar_t *input)
++{
++	char *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = WideCharToMultiByte(CP_ACP, 0, input, -1, NULL, 0, NULL, NULL);
++	Buffer = (char*) malloc(sizeof(char) * BuffSize);
++	if(Buffer)
++	{
++		Result = WideCharToMultiByte(CP_ACP, 0, input, -1, Buffer, BuffSize, NULL, NULL);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++wchar_t *utf8_to_utf16(const char *input)
++{
++	wchar_t *Buffer;
++	int BuffSize = 0, Result = 0;
++
++	BuffSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, NULL, 0);
++	Buffer = (wchar_t*) malloc(sizeof(wchar_t) * BuffSize);
++	if(Buffer)
++	{
++		Result = MultiByteToWideChar(CP_UTF8, 0, input, -1, Buffer, BuffSize);
++	}
++
++	return ((Result > 0) && (Result <= BuffSize)) ? Buffer : NULL;
++}
++
++void init_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i, nArgs;
++	LPWSTR *szArglist;
++
++	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++
++	if(NULL == szArglist)
++	{
++		fprintf(stderr, "\nFATAL: CommandLineToArgvW failed\n\n");
++		exit(-1);
++	}
++
++	*argv = (char**) malloc(sizeof(char*) * nArgs);
++	*argc = nArgs;
++
++	if(NULL == *argv)
++	{
++		fprintf(stderr, "\nFATAL: Malloc failed\n\n");
++		exit(-1);
++	}
++	
++	for(i = 0; i < nArgs; i++)
++	{
++		(*argv)[i] = utf16_to_utf8(szArglist[i]);
++		if(NULL == (*argv)[i])
++		{
++			fprintf(stderr, "\nFATAL: utf16_to_utf8 failed\n\n");
++			exit(-1);
++		}
++	}
++
++	LocalFree(szArglist);
++}
++
++void free_commandline_arguments_utf8(int *argc, char ***argv)
++{
++	int i = 0;
++	
++	if(*argv != NULL)
++	{
++		for(i = 0; i < *argc; i++)
++		{
++			if((*argv)[i] != NULL)
++			{
++				free((*argv)[i]);
++				(*argv)[i] = NULL;
++			}
++		}
++		free(*argv);
++		*argv = NULL;
++	}
++}
++
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8)
++{
++	FILE *ret = NULL;
++	wchar_t *filename_utf16 = utf8_to_utf16(filename_utf8);
++	wchar_t *mode_utf16 = utf8_to_utf16(mode_utf8);
++	
++	if(filename_utf16 && mode_utf16)
++	{
++		ret = _wfopen(filename_utf16, mode_utf16);
++	}
++
++	if(filename_utf16) free(filename_utf16);
++	if(mode_utf16) free(mode_utf16);
++
++	return ret;
++}
++
++int stat_utf8(const char *path_utf8, struct _stat *buf)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wstat(path_utf16, buf);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
++
++int unlink_utf8(const char *path_utf8)
++{
++	int ret = -1;
++	
++	wchar_t *path_utf16 = utf8_to_utf16(path_utf8);
++	if(path_utf16)
++	{
++		ret = _wunlink(path_utf16);
++		free(path_utf16);
++	}
++	
++	return ret;
++}
++
++void init_console_utf8(void)
++{
++	g_old_output_cp = GetConsoleOutputCP();
++	SetConsoleOutputCP(CP_UTF8);
++}
++
++void uninit_console_utf8(void)
++{
++	if(g_old_output_cp != ((UINT)-1))
++	{
++		SetConsoleOutputCP(g_old_output_cp);
++	}
++}
++
++#endif
+diff --git a/unicode_support.h b/unicode_support.h
+new file mode 100644
+index 0000000..40c2e33
+--- /dev/null
++++ b/unicode_support.h
+@@ -0,0 +1,49 @@
++/* Copyright (c) 2004-2012 LoRd_MuldeR <mulder2@gmx.de>
++   File: unicode_support.h
++
++   This file was originally part of a patch included with LameXP,
++   released under the same license as the original audio tools.
++
++   Redistribution and use in source and binary forms, with or without
++   modification, are permitted provided that the following conditions
++   are met:
++
++   - Redistributions of source code must retain the above copyright
++   notice, this list of conditions and the following disclaimer.
++
++   - Redistributions in binary form must reproduce the above copyright
++   notice, this list of conditions and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++
++   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
++   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++*/
++#ifndef UNICODE_SUPPORT_H_INCLUDED
++#define UNICODE_SUPPORT_H_INCLUDED
++
++#include <stdio.h>
++#include <sys/stat.h>
++
++#define WIN_UNICODE 1
++
++char *utf16_to_utf8(const wchar_t *input);
++char *utf16_to_ansi(const wchar_t *input);
++wchar_t *utf8_to_utf16(const char *input);
++void init_commandline_arguments_utf8(int *argc, char ***argv);
++void free_commandline_arguments_utf8(int *argc, char ***argv);
++FILE *fopen_utf8(const char *filename_utf8, const char *mode_utf8);
++int stat_utf8(const char *path_utf8, struct _stat *buf);
++int unlink_utf8(const char *path_utf8);
++void init_console_utf8(void);
++void uninit_console_utf8(void);
++
++#endif
+diff --git a/wave_out.h b/wave_out.h
+index 608f2e5..4ecdcdc 100644
+--- a/wave_out.h
++++ b/wave_out.h
+@@ -1,6 +1,6 @@
+ //    WAVE_OUT.H - Necessary stuff for WIN_AUDIO
+ 
+-#define VERSION_STRING "OggDec v1.10.1 (libVorbis 1.3.4) Compiled on: " __DATE__ ""
++#define VERSION_STRING "OggDec v1.10.1 (%s), Compiled on: " __DATE__ ""
+ 
+ #include <stdio.h>
+ #include <windows.h>

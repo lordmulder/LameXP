@@ -12,6 +12,7 @@ LameXP Audio-Encoder Front-End &ndash; Changelog
 * Updated Opus encoder/decoder libraries to v1.3-beta-31 (2018-03-27) and Opus-Tools to v0.1.10-51 (2018-03-04)
 * Updated Monkey's Audio binary to v4.33 (2017-12-01), compiled with ICL 18.0 and MSVC 15.5
 * Updated FAAD decoder to v2.8.6 (2017-10-10), compiled with ICL 18.0 and MSVC 15.5
+* Updated Vorbis decoder to OggDec v1.10.1+ (2015-03-19), using libVorbis v1.3.6 (2018-03-16)
 * Updated ALAC decoder to refalac v1.64 (2017-05-19), compiled with ICL 18.0 and MSVC 15.5
 * Updated WavPack decoder to v5.1.0 (2017-01-20), compiled with ICL 18.0 and MSVC 15.5
 * Updated MediaInfo to v18.03.1+ (2018-04-19), compiled with ICL 18.2 and MSVC 15.6
