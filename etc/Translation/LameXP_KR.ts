@@ -182,12 +182,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="804"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">저작권 (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="811"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; 및 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="823"/>
