@@ -102,12 +102,12 @@
     <message>
         <location filename="../../src/Dialog_About.cpp" line="804"/>
         <source>Copyright (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;. Some rights reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>版权所有 (c) 2011 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;。部分权利保留。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="811"/>
         <source>By Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; and LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>作者 Jory Stone &amp;lt;jcsston@toughguy.net&amp;gt; 和 LoRd_MuldeR &amp;lt;mulder2@gmx.de&amp;gt;。</translation>
     </message>
     <message>
         <location filename="../../src/Dialog_About.cpp" line="858"/>
