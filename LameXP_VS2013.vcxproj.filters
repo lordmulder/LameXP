@@ -463,9 +463,6 @@
     <ClCompile Include="tmp\LameXP\QRC_Tools.mpg123-sse2.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
-    <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec.cpp">
-      <Filter>Generated Files\QRC</Filter>
-    </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.oggenc2-i686.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
@@ -572,6 +569,15 @@
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
     <ClCompile Include="tmp\LameXP\QRC_Tools.faad-avx.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec-i686.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec-sse2.cpp">
+      <Filter>Generated Files\QRC</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\LameXP\QRC_Tools.oggdec-avx.cpp">
       <Filter>Generated Files\QRC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -965,9 +971,6 @@
     <CustomBuild Include="res\Tools.mpg123-sse2.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\Tools.oggdec.qrc">
-      <Filter>Resources</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\Tools.oggenc2-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -1082,6 +1085,11 @@
     <CustomBuild Include="res\Tools.mediainfo-i686.qrc">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="res\Tools.oggdec-sse2.qrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Tools.oggdec-avx.qrc" />
+    <CustomBuild Include="res\Tools.oggdec-i686.qrc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
